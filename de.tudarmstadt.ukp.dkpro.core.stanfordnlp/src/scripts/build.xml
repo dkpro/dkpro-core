@@ -1,0 +1,136 @@
+<project basedir="../.." default="separate-jars">
+	<target name="separate-jars">
+		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
+		<antcall target="download-core"/>
+		
+    	<install-model-file file="englishPCFG.ser.gz" md5="f750879ba4db2f2f6345fd3637e628da"
+    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.0.2"/>		
+
+    	<install-model-file file="muc.distsim.crf.ser.gz" md5="ec59f2b539859dc15a3d7dae40561a69"
+    		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="1.0.2"/>		
+
+    	<install-model-file file="conll.distsim.crf.ser.gz" md5="e02dc51f196236eaee5a2ecdcd308162"
+    		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="1.0.2"/>		
+
+		<install-model-file file="all.3class.distsim.crf.ser.gz" md5="d7f5b7ab4ad3ed2e14c9227c8c426185"
+    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.0.2"/>		
+
+		<antcall target="jar-notice"/>
+	</target>
+
+	<target name="download-core">
+		<mkdir dir="${outputDir}"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-v1.0.2.tgz" dest="${outputDir}/core-nlp.tar.gz"/>
+    	<gunzip src="${outputDir}/core-nlp.tar.gz"/>
+    	<delete file="${outputDir}/core-nlp.tar.gz"/>
+    	<untar src="${outputDir}/core-nlp.tar" dest="${outputDir}">
+    		<patternset>
+    			<include name="**/stanford-corenlp-models*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+	    		<firstmatchmapper>
+					<globmapper from="*" to="stanford-corenlp-models.jar"/>
+				</firstmatchmapper>
+    		</chainedmapper>
+    	</untar>
+    	<delete file="${outputDir}/core-nlp.tar"/>
+	</target>
+	
+	<target name="jar-notice">
+		<echo>================================</echo>
+		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
+		<echo>================================</echo>
+		<echo> </echo>
+		<echo>YOU MAY NOT REDISTRIBUTE THESE JARS WITHOUT THE EXPLICIT PERMISSION</echo>
+		<echo> </echo>
+		<echo>from their respective original creators.</echo>
+		<echo> </echo>
+		<echo>For Maven users:</echo>
+		<echo> </echo>
+		<echo>If you choose to upload these JARs to a PRIVATE repository or install them in</echo>
+		<echo>your local repository, use the following groupId and artifactId scheme:</echo>
+		<echo> </echo>
+		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-&lt;tool&gt;-&lt;lang&gt;-&lt;variant&gt;</echo>
+		<echo>    version: &lt;use the timestamp encoded in the JAR file name&gt;</echo>
+		<echo> </echo>
+		<echo> Example:</echo>
+		<echo> </echo>
+		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg</echo>
+		<echo>    version: 2010111500</echo>
+		<echo> </echo>
+		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
+		<echo>to enable additional test cases when building the DKPro Stanford NLP Integration.</echo>
+		<echo> </echo>
+		<echo>AGAIN REMEMBER THAT YOU MAY NOT REDISTRIBUTE THESE JARS - Thanks.</echo>
+	</target>
+	
+	<macrodef name="install-model-file">
+		<attribute name="file"/>
+		<attribute name="extension"/>
+		<attribute name="variant"/>
+		<attribute name="tool"/>
+		<attribute name="language"/>
+		<attribute name="version"/>
+		<attribute name="md5"/>
+		<attribute name="prop.verify.md5" default="verify.md5.@{tool}.@{language}.@{variant}"/>
+		<sequential>
+			<fail unless="outputDir">No output directory set.</fail>
+	    	<mkdir dir="${outputDir}/lib"/>
+			<unzip src="${outputDir}/stanford-corenlp-models.jar" dest="${outputDir}/lib/">
+	    		<patternset>
+	    			<include name="**/@{file}"/>		
+				</patternset>
+	    		<chainedmapper>
+		    		<mapper type="flatten"/>
+		    		<firstmatchmapper>
+						<globmapper from="*" to="@{tool}-@{language}-@{variant}.@{extension}"/>
+					</firstmatchmapper>
+	    		</chainedmapper>
+	    	</unzip>
+			
+			<generate-model-properties tool="@{tool}" language="@{language}" variant="@{variant}"
+				extension="@{extension}"/>
+			
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<condition property="checksum.mismatch">
+				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
+			</condition>
+			<fail if="checksum.mismatch">MD5 checksum mismatch for @{tool}-@{language}-@{variant}.@{extension}. Please verify the checksum and if necessary update this script.</fail>
+
+			<jar destfile="target/stanfordnlp-models-@{tool}-@{language}-@{variant}-@{version}.jar" compress="true">
+				<fileset dir="target/stanfordnlp-resources">
+					<include name="**/lib/@{tool}-@{language}-@{variant}*"/>
+				</fileset>
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="generate-model-properties">
+		<attribute name="tool"/>
+		<attribute name="language"/>
+		<attribute name="extension"/>
+		<attribute name="variant"/>
+		<attribute name="prop.checksum.md5" default="checksum.md5.@{tool}-@{language}-@{variant}"/>
+		<attribute name="prop.checksum.sha1" default="checksum.sha1.@{tool}-@{language}-@{variant}"/>
+		<sequential>
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{prop.checksum.md5}"
+				algorithm="MD5"/>
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{prop.checksum.sha1}"
+				algorithm="SHA"/>
+			<propertyfile file="${outputDir}/lib/@{tool}-@{language}-@{variant}.properties"
+				comment="Stanford NLP tools model description">
+				<entry  key="downloaded" type="date" value="now"/>
+				<entry  key="tool" value="@{tool}"/>
+				<entry  key="language" value="@{language}"/>
+				<entry  key="variant" value="@{variant}"/>
+				<entry  key="md5" value="${@{prop.checksum.md5}}"/>
+				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
+			</propertyfile>
+			<echo>Installed @{tool} model file for @{language} in variant @{variant}</echo>
+		</sequential>
+	</macrodef>
+
+</project>
