@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>DocumentMetaData</name>
+  <description>Meta data about a document.</description>
+  <version>1.0</version>
+  <vendor/>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData</name>
+      <description/>
+      <supertypeName>uima.tcas.DocumentAnnotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>documentTitle</name>
+          <description>The human readable title of the document.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>documentId</name>
+          <description>The id of the document.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>documentUri</name>
+          <description>The URI of the document.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>collectionId</name>
+          <description>The ID of the whole document collection.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>documentBaseUri</name>
+          <description>Base URI of the document.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>isLastSegment</name>
+          <description>CAS de-multipliers need to know whether a CAS is the last multiplied segment.
+Thus CAS multipliers should set this field to true for the last CAS they produce.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
