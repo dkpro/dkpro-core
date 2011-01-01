@@ -260,7 +260,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.ngrams</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.posfilter</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
