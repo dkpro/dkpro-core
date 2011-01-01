@@ -36,6 +36,11 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
     </typeDescription>
     <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
