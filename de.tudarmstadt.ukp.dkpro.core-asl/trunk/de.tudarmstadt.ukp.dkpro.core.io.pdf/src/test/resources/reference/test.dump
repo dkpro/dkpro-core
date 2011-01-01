@@ -1,0 +1,50 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentAnnotation
+   sofa: _InitialView
+   begin: 0
+   end: 109
+   language: "x-unspecified"
+
+CAS-Text:
+This is a test.
+Dies ist ein Test.
+
+Überschrift
+
+Word with Umlauts (äöü) may require the substitution table.
+
+[This is a test.
+Dies ist ein Test.
+]
+Paragraph
+   sofa: _InitialView
+   begin: 0
+   end: 35
+[]
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 0
+   language: <null>
+   documentTitle: "test.pdf"
+   documentId: "test.pdf"
+   isLastSegment: false
+[Überschrift
+]
+Heading
+   sofa: _InitialView
+   begin: 36
+   end: 48
+[Word with Umlauts (äöü) may require the substitution table.]
+Paragraph
+   sofa: _InitialView
+   begin: 49
+   end: 108
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================
+
+
