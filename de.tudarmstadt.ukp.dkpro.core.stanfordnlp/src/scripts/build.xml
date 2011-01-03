@@ -58,8 +58,8 @@
 		<echo> Example:</echo>
 		<echo> </echo>
 		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg</echo>
-		<echo>    version: 2010111500</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-lexparser-en-pcfg</echo>
+		<echo>    version: 1.0.2</echo>
 		<echo> </echo>
 		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
 		<echo>to enable additional test cases when building the DKPro Stanford NLP Integration.</echo>
@@ -100,7 +100,7 @@
 			</condition>
 			<fail if="checksum.mismatch">MD5 checksum mismatch for @{tool}-@{language}-@{variant}.@{extension}. Please verify the checksum and if necessary update this script.</fail>
 
-			<jar destfile="target/stanfordnlp-models-@{tool}-@{language}-@{variant}-@{version}.jar" compress="true">
+			<jar destfile="target/stanfordnlp-model-@{tool}-@{language}-@{variant}-@{version}.jar" compress="true">
 				<fileset dir="target/stanfordnlp-resources">
 					<include name="**/lib/@{tool}-@{language}-@{variant}*"/>
 				</fileset>
