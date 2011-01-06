@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,8 @@
  * limitations under the License.
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.snowball;
+
+import static org.apache.commons.lang.StringUtils.isBlank;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -95,9 +97,6 @@ public class SnowballStemmer
 		throws org.apache.uima.resource.ResourceInitializationException
 	{
 		super.initialize(aContext);
-		if (!StringUtils.isBlank(language)) {
-			language = languages.get(language);
-		}
 	}
 
 	@Override
@@ -157,12 +156,12 @@ public class SnowballStemmer
 	{
 		// Try language set on analysis engine
 		String lang = language;
-		if (lang == null) {
+		if (isBlank(lang)) {
 			lang = aCas.getDocumentLanguage();
 		}
 
 		// Try language set in CAS.
-		if (lang == null) {
+		if (isBlank(lang)) {
 			throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "no_language_error", null);
 		}
 
@@ -170,6 +169,10 @@ public class SnowballStemmer
 
 		if (!lang.equals(snowballProgramLanguage)) {
 			try {
+				String langPart = languages.get(lang);
+				if (langPart == null) {
+					throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "unsupported_language_error", new Object[] { lang });
+				}
 				String snowballStemmerClass = SNOWBALL_PACKAGE + languages.get(lang) + "Stemmer";
 				@SuppressWarnings("unchecked")
 				Class<SnowballProgram> stemClass = (Class<SnowballProgram>) Class
