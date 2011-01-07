@@ -32,4 +32,28 @@
 	<modules>
 		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp</module>
 	</modules>
+	<profiles>
+		<profile>
+			<id>build-apidocs</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<inherited>false</inherited>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+								<configuration>
+									<notimestamp>true</notimestamp>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
