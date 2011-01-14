@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
-import static de.tudarmstadt.ukp.dkpro.core.io.common.FileSetCollectionReaderBase.INCLUDE_PREFIX;
-import static de.tudarmstadt.ukp.dkpro.core.io.common.FileSetCollectionReaderBase.PARAM_PATH;
-import static de.tudarmstadt.ukp.dkpro.core.io.common.FileSetCollectionReaderBase.PARAM_PATTERNS;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.INCLUDE_PREFIX;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATH;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;

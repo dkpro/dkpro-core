@@ -35,7 +35,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import de.tudarmstadt.ukp.dkpro.core.io.common.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 
 public class XmlReaderText
 	extends ResourceCollectionReaderBase

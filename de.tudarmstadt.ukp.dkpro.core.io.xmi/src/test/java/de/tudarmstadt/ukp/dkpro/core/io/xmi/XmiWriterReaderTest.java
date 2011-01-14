@@ -35,7 +35,7 @@ import org.junit.rules.TemporaryFolder;
 import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.factory.CollectionReaderFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.io.common.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
 public class XmiWriterReaderTest

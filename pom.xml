@@ -54,8 +54,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl
-				</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
 				<version>1.1.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -388,6 +387,25 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<notimestamp>true</notimestamp>
+					<!-- Exclude UIMA types -->
+					<excludePackageNames>*.type</excludePackageNames>
+					<groups>
+						<group>
+							<title>APIs</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
+						</group>
+						<group>
+							<title>Analysis Components</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.bananasplit:de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger</packages>
+						</group>
+						<group>
+							<title>I/O Components</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
+						</group>
+					</groups>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -419,9 +437,6 @@
 								<goals>
 									<goal>aggregate</goal>
 								</goals>
-								<configuration>
-									<notimestamp>true</notimestamp>
-								</configuration>
 							</execution>
 						</executions>
 					</plugin>

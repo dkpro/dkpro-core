@@ -26,8 +26,8 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.io.common.ResourceCollectionReaderBase;
 
 public class TextReaderTest
 {

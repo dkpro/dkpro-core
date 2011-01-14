@@ -32,10 +32,10 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
-import de.tudarmstadt.ukp.dkpro.core.io.common.FileSetCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.pdf.convert.Pdf2CasConverter;
 
 /**
