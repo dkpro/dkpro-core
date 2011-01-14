@@ -21,7 +21,7 @@ import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static de.tudarmstadt.ukp.dkpro.core.io.common.ResourceCollectionReaderBase.*;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.*;
 
 import java.io.File;
 

@@ -29,7 +29,7 @@ import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.collection.CollectionException;
 import org.xml.sax.SAXException;
 
-import de.tudarmstadt.ukp.dkpro.core.io.common.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 
 public class XmiReader
 	extends ResourceCollectionReaderBase

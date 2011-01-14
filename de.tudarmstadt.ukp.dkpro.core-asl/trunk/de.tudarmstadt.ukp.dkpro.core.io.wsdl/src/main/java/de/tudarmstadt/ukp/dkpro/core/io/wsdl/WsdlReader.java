@@ -53,10 +53,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
-import de.tudarmstadt.ukp.dkpro.core.io.common.ResourceCollectionReaderBase;
 
 /**
  * The WSDL Reader processes all .wsdl files in the supplied input directory. For each service

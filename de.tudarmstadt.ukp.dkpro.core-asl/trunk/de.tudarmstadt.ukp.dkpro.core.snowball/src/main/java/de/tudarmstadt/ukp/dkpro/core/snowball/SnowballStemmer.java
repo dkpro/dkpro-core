@@ -44,15 +44,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Stemmer which can be configured by a {@link FeaturePath}.
+ * UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconfigured by a
+ * {@link FeaturePath}.
  *
+ * @see <a href="http://snowball.tartarus.org/">Snowball stemmer homepage</a>
  * @see FeaturePathAnnotatorBase
  * @author Benjamin Herbert
  * @author Richard Eckart de Castilho
- *
- *         TODO: contains duplicate code copied from {@link StemAnnotatorSnowball}. Also see bug 501
- *
- *
+ * @since 1.1.0
  */
 public class SnowballStemmer
 	extends FeaturePathAnnotatorBase
@@ -171,7 +170,8 @@ public class SnowballStemmer
 			try {
 				String langPart = languages.get(lang);
 				if (langPart == null) {
-					throw new AnalysisEngineProcessException(MESSAGE_DIGEST, "unsupported_language_error", new Object[] { lang });
+					throw new AnalysisEngineProcessException(MESSAGE_DIGEST,
+							"unsupported_language_error", new Object[] { lang });
 				}
 				String snowballStemmerClass = SNOWBALL_PACKAGE + languages.get(lang) + "Stemmer";
 				@SuppressWarnings("unchecked")
