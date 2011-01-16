@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA I/O support for PDF files (read-only).
+ * Support for PDF files (read-only).
  *
  * @since 1.1.0
  */

@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA integration of the <a href="http://jazzy.sourceforge.net/">Jazzy</a> spell checker.
+ * Spelling correction based on <a href="http://jazzy.sourceforge.net/">Jazzy</a>.
  *
  * @since 1.1.0
  */

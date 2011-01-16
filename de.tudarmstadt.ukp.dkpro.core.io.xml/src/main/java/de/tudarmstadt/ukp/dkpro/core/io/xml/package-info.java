@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA I/O support for XML files (read-only).
+ * Support for XML files (read-only).
  *
  * @since 1.1.0
  */

@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA I/O support for <a href="http://mmax2.net">MMAX2</a> files (read-only).
+ * Support for <a href="http://mmax2.net">MMAX2</a> files (read-only).
  *
  * @since 1.1.0
  */

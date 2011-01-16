@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA integration of the <a href="http://snowball.tartarus.org/">Snowball</a> stemmer package.
+ * Stemmer based on the <a href="http://snowball.tartarus.org/">Snowball</a> stemmer package.
  *
  * @since 1.1.0
  */

@@ -34,6 +34,10 @@ import java.util.Map;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
 
+/**
+ * @author Richard Eckart de Castilho
+ * @since 1.1.0
+ */
 public class ResourceUtils
 {
 	private static Map<URL, File> urlFileCache;

@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,7 +34,7 @@ import de.danielnaber.languagetool.rules.RuleMatch;
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
 
 /**
- * Detect grammatical errors in text using LanguageTool a rule based grammar checker
+ * Detect grammatical errors in text using LanguageTool a rule based grammar checker.
  *
  * @author Zhi Shen
  */
@@ -50,9 +50,6 @@ public class LanguageToolChecker
 	private boolean languageOverride = false;
 	private JLanguageTool langTool;
 
-	/**
-	 * @see org.apache.uima.analysis_component.JCasAnnotator_ImplBase#initialize(org.apache.uima.UimaContext)
-	 */
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -69,18 +66,11 @@ public class LanguageToolChecker
 			langTool = new JLanguageTool(language);
 			langTool.activateDefaultPatternRules();
 		}
-		catch (IOException e) {
-			e.printStackTrace();
-			throw new ResourceInitializationException(e);
-		}
 		catch (Exception e) {
-			e.printStackTrace();
+			throw new ResourceInitializationException(e);
 		}
 	}
 
-	/**
-	 * @see org.apache.uima.analysis_component.JCasAnnotator_ImplBase#process(org.apache.uima.jcas.JCas)
-	 */
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException

@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA component for excluding stop words from further processing.
+ * Remove stop words to exclude them from further processing.
  *
  * @since 1.1.0
  */

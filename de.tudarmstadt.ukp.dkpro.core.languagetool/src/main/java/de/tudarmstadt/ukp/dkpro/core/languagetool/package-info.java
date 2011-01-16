@@ -17,8 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA integration of the <a href="http://www.languagetool.org/">LanguageTool</a> style and grammar
- * checker.
+ * Grammar and style checker based on <a href="http://www.languagetool.org/">LanguageTool</a>.
  *
  * @since 1.1.0
  */

@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -45,14 +45,20 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
-public
-class XmlWriterInline
-extends JCasConsumer_ImplBase
+/**
+ * @author Richard Eckart de Castilho
+ * @since 1.1.0
+ */
+public class XmlWriterInline
+	extends JCasConsumer_ImplBase
 {
 	public static final String PARAM_OUTPUTDIR = "OutputDirectory";
 	@ConfigurationParameter(name=PARAM_OUTPUTDIR, mandatory=true)
 	private File outputDirectory;
 
+	/**
+	 * XSLT stylesheet to apply.
+	 */
 	public static final String PARAM_XSLT = "Xslt";
 	@ConfigurationParameter(name=PARAM_XSLT, mandatory=false)
 	private String xslt;

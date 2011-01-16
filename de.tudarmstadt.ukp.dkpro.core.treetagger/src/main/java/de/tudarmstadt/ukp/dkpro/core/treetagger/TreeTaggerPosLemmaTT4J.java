@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,19 +39,19 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public
-class TreeTaggerPosLemmaTT4J
-extends TreeTaggerTT4JBase<AnnotationFS>
+/**
+ * @author Richard Eckart de Castilho
+ */
+public class TreeTaggerPosLemmaTT4J
+	extends TreeTaggerTT4JBase<AnnotationFS>
 {
 	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
 	@Override
-	public
-	void process(
-			final CAS aCas)
-	throws AnalysisEngineProcessException
+	public void process(final CAS aCas)
+		throws AnalysisEngineProcessException
 	{
 		getContext().getLogger().log(Level.FINE, "Running TreeTagger annotator");
 		try {
@@ -151,8 +151,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	}
 
 	@Override
-	protected
-	ModelResolver getModelResolver()
+	protected ModelResolver getModelResolver()
 	{
 		return new PosModelResolver();
 	}
@@ -174,6 +173,9 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		}
 	}
 
+	/**
+	 * @author Richard Eckart de Castilho
+	 */
 	public static class PosModelResolver
 		extends DKProModelResolver
 	{
@@ -184,13 +186,14 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		}
 	}
 
+	/**
+	 * @author Richard Eckart de Castilho
+	 */
 	public static class DKProTokenAdapter
 		implements TokenAdapter<AnnotationFS>
 	{
 		@Override
-		public
-		String getText(
-				AnnotationFS aObject)
+		public String getText(AnnotationFS aObject)
 		{
 			synchronized (aObject.getCAS()) {
 				return aObject.getCoveredText();

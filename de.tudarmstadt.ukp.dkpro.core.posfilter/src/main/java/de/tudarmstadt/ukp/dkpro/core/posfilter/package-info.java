@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA component to remove annotations on words with particular part of speech tags to exclude them
+ * Remove annotations on words with particular part of speech tags to exclude them
  * from further processing.
  *
  * @since 1.1.0

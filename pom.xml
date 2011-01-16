@@ -393,16 +393,16 @@
 					<excludePackageNames>*.type</excludePackageNames>
 					<groups>
 						<group>
-							<title>APIs</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
-						</group>
-						<group>
 							<title>Analysis Components</title>
 							<packages>de.tudarmstadt.ukp.dkpro.core.bananasplit:de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger</packages>
 						</group>
 						<group>
 							<title>I/O Components</title>
 							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
+						</group>
+						<group>
+							<title>APIs</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
 						</group>
 					</groups>
 				</configuration>
@@ -423,25 +423,4 @@
 			</extension>
 		</extensions>
 	</build>
-	<profiles>
-		<profile>
-			<id>build-apidocs</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<inherited>false</inherited>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>aggregate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

@@ -62,6 +62,8 @@ import org.apache.uima.jcas.cas.Sofa;
  * FeatureStructures. The CasCopier will remember previously copied
  * FeatureStructures, so if you later copy another FS that has a reference to a
  * previously copied FS, it will not duplicate the multiply-referenced FS.
+ *
+ * @see org.apache.uima.util.CasCopier
  */
 public class CasCopier
 {
@@ -166,7 +168,7 @@ public class CasCopier
 					FeatureStructure copyOfFs = copyFs(fs);
 					// check for annotations with null Sofa reference - this can
 					// happen if the annotations were created with the Low Level
-					// CAS API. If the Sofa reference isn't set, attempting to 
+					// CAS API. If the Sofa reference isn't set, attempting to
 					// add the FS to the indexes will fail.
 					if (fs instanceof AnnotationFS) {
 						FeatureStructure sofa = ((AnnotationFS) copyOfFs)
@@ -257,7 +259,7 @@ public class CasCopier
 		}
 		// We need to use the LowLevel CAS interface to create the FS, because
 		// the usual CAS.createFS() call doesn't allow us to create subtypes of
-		// AnnotationBase from a base CAS. In any case we don't need the Sofa 
+		// AnnotationBase from a base CAS. In any case we don't need the Sofa
 		// reference to be automatically set because we'll set it manually when
 		// in the copyFeatures method.
 		int typeCode = mLowLevelDestCas.ll_getTypeSystem().ll_getCodeForType(

@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -34,22 +34,26 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
-public
-class ApplyChangesAnnotator
-extends JCasAnnotator_ImplBase
+/**
+ * Applies changes annotated using a {@link SofaChangeAnnotation}.
+ *
+ * @author Richard Eckart de Castilho
+ * @since 1.1.0
+ * @see Backmapper
+ */
+public class ApplyChangesAnnotator
+	extends JCasAnnotator_ImplBase
 {
-	static private final String OP_INSERT  = "insert";
+	static private final String OP_INSERT = "insert";
 	static private final String OP_REPLACE = "replace";
-	static private final String OP_DELETE  = "delete";
+	static private final String OP_DELETE = "delete";
 
 	protected String sourceSofaId = "source";
 	protected String targetSofaId = "target";
 
 	@Override
-	public
-	void process(
-			JCas aJCas)
-	throws AnalysisEngineProcessException
+	public void process(JCas aJCas)
+		throws AnalysisEngineProcessException
 	{
 		try {
 			JCas sourceView = aJCas.getView(sourceSofaId);
@@ -62,28 +66,24 @@ extends JCasAnnotator_ImplBase
 		}
 	}
 
-	protected
-	void applyChanges(
-			JCas aSourceView,
-			JCas aTargetView)
+	protected void applyChanges(JCas aSourceView, JCas aTargetView)
 	{
 		FSIndex idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
-		getContext().getLogger().log(INFO, "Found "+idx.size()+" changes");
-
+		getContext().getLogger().log(INFO, "Found " + idx.size() + " changes");
 
 		// Apply all the changes
 		AlignedString as = new AlignedString(aSourceView.getDocumentText());
 
 		// Collect all those edits that are going to be executed.
 		//
-		//         |     A     |				C1   C2    R
-		// BBBBBB                               +    -     -
-		//    BBBBBBBBBB                        +    +     +
-		//       BBBBBBBBBBBBBBBBB              +    +     +
-		//            BBBBBBB                   -    +     -
-		//               BBBBBBBBBBBBB          -    +     -
-		//                         BBBBBBBB     -    +     -
+		// | A | C1 C2 R
+		// BBBBBB + - -
+		// BBBBBBBBBB + + +
+		// BBBBBBBBBBBBBBBBB + + +
+		// BBBBBBB - + -
+		// BBBBBBBBBBBBB - + -
+		// BBBBBBBB - + -
 		//
 		if (idx.size() > 0) {
 			List<SofaChangeAnnotation> edits = new ArrayList<SofaChangeAnnotation>();
@@ -100,15 +100,10 @@ extends JCasAnnotator_ImplBase
 				it.moveToNext();
 				while (it.isValid()) {
 					SofaChangeAnnotation b = (SofaChangeAnnotation) it.get();
-					if (
-							(
-								(top.getBegin() <= b.getBegin()) &&   // C1
-								(top.getEnd() > b.getBegin())         // C2
-							) || (
-								(top.getBegin() == b.getBegin()) &&
-								(top.getEnd() == b.getEnd())
+					if (((top.getBegin() <= b.getBegin()) && // C1
+							(top.getEnd() > b.getBegin()) // C2
 							)
-					) {
+							|| ((top.getBegin() == b.getBegin()) && (top.getEnd() == b.getEnd()))) {
 						// Found annotation covering current annotation. Skipping
 						// current annotation.
 					}
@@ -127,18 +122,18 @@ extends JCasAnnotator_ImplBase
 			Collections.reverse(edits);
 			for (SofaChangeAnnotation a : edits) {
 				if (OP_INSERT.equals(a.getOperation())) {
-	//				getContext().getLogger().log(INFO,
-	//						"Performing insert: "+a.getBegin()+"-"+a.getEnd());
+					// getContext().getLogger().log(INFO,
+					// "Performing insert: "+a.getBegin()+"-"+a.getEnd());
 					as.insert(a.getBegin(), a.getValue());
 				}
 				if (OP_DELETE.equals(a.getOperation())) {
-	//				getContext().getLogger().log(INFO,
-	//						"Performing delete: "+a.getBegin()+"-"+a.getEnd());
+					// getContext().getLogger().log(INFO,
+					// "Performing delete: "+a.getBegin()+"-"+a.getEnd());
 					as.delete(a.getBegin(), a.getEnd());
 				}
 				if (OP_REPLACE.equals(a.getOperation())) {
-	//				getContext().getLogger().log(INFO,
-	//						"Performing replace: "+a.getBegin()+"-"+a.getEnd());
+					// getContext().getLogger().log(INFO,
+					// "Performing replace: "+a.getBegin()+"-"+a.getEnd());
 					as.replace(a.getBegin(), a.getEnd(), a.getValue());
 				}
 			}
@@ -152,10 +147,7 @@ extends JCasAnnotator_ImplBase
 
 		// Optionally we may want to remember the AlignedString for the
 		// Backmapper.
-		AlignmentStorage.getInstance().put(
-				aSourceView.getCasImpl().getBaseCAS(),
-				aSourceView.getViewName(),
-				aTargetView.getViewName(),
-				as);
+		AlignmentStorage.getInstance().put(aSourceView.getCasImpl().getBaseCAS(),
+				aSourceView.getViewName(), aTargetView.getViewName(), as);
 	}
 }

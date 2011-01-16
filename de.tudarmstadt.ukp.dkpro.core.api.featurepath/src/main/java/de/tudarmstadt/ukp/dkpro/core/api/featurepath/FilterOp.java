@@ -22,42 +22,44 @@ package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
 
 /**
  * Filter operators
- * TODO: bug 17
  */
-public enum FilterOp {
+public enum FilterOp
+{
+	// TODO bug 17
 
-   NULL, NOT_NULL, EQUALS, NOT_EQUALS, LESS, LESS_EQ, GREATER, GREATER_EQ;
+	NULL, NOT_NULL, EQUALS, NOT_EQUALS, LESS, LESS_EQ, GREATER, GREATER_EQ;
 
-   @Override
-public String toString() {
-      switch (this) {
-      case NULL: {
-         return "null";
-      }
-      case NOT_NULL: {
-         return "!null";
-      }
-      case EQUALS: {
-         return "=";
-      }
-      case NOT_EQUALS: {
-         return "!=";
-      }
-      case LESS: {
-         return "<";
-      }
-      case LESS_EQ: {
-         return "<=";
-      }
-      case GREATER: {
-         return "<";
-      }
-      case GREATER_EQ: {
-         return "<=";
-      }
-      default: {
-         return "";
-      }
-      }
-   }
+	@Override
+	public String toString()
+	{
+		switch (this) {
+		case NULL: {
+			return "null";
+		}
+		case NOT_NULL: {
+			return "!null";
+		}
+		case EQUALS: {
+			return "=";
+		}
+		case NOT_EQUALS: {
+			return "!=";
+		}
+		case LESS: {
+			return "<";
+		}
+		case LESS_EQ: {
+			return "<=";
+		}
+		case GREATER: {
+			return "<";
+		}
+		case GREATER_EQ: {
+			return "<=";
+		}
+		default: {
+			return "";
+		}
+		}
+	}
 }
