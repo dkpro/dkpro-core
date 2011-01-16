@@ -29,15 +29,15 @@ import org.uimafit.factory.JCasBuilder;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import static org.junit.Assert.*;
 
-public class CompoundSplitterTest
+public class JWordSplitterTest
 {
 	private static AnalysisEngine ae;
 
 	@BeforeClass
 	public static void setup() throws Exception
 	{
-		ae = createPrimitive(CompoundSplitter.class, createTypeSystemDescription(),
-				CompoundSplitter.PARAM_DELETE_COVER, false);
+		ae = createPrimitive(JWordSplitter.class, createTypeSystemDescription(),
+				JWordSplitter.PARAM_DELETE_COVER, false);
 	}
 
 	@Test

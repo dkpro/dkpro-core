@@ -15,11 +15,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.jwordsplitter;
+package de.tudarmstadt.ukp.dkpro.core.bananasplit;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.CasUtil.iterate;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -33,13 +37,18 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.abelssoft.wordtools.jWordSplitter.AbstractWordSplitter;
-import de.abelssoft.wordtools.jWordSplitter.impl.GermanWordSplitter;
+import de.drni.bananasplit.BananaSplit;
+import de.drni.bananasplit.xmldict.XmlDictionary;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public class CompoundSplitter
+public class BananaSplitter
 	extends CasAnnotator_ImplBase
 {
+	public static final String PARAM_DICT_PATH = "DictionaryPath";
+	@ConfigurationParameter(name = PARAM_DICT_PATH, mandatory = true)
+	private String dictPath;
+
 	public static final String PARAM_DELETE_COVER = "DeleteCover";
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
@@ -48,7 +57,7 @@ public class CompoundSplitter
 	@ConfigurationParameter(name = PARAM_TOKEN_TYPE, mandatory = false)
 	private String tokenType;
 
-	private AbstractWordSplitter splitter;
+	private BananaSplit bananaSplitter;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -60,11 +69,18 @@ public class CompoundSplitter
 			tokenType = Token.class.getName();
 		}
 
+		InputStream is = null;
 		try {
-			splitter = new GermanWordSplitter(false);
+			URL url = ResourceUtils.resolveLocation(dictPath, this, context);
+			context.getLogger().log(INFO, "Loading XML dictionary from " + url);
+			is = url.openStream();
+			bananaSplitter = new BananaSplit(new XmlDictionary(is, true));
 		}
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
+		}
+		finally {
+			closeQuietly(is);
 		}
 	}
 
@@ -91,26 +107,39 @@ public class CompoundSplitter
 
 	private void split(CAS aCas, AnnotationFS aAnnotation, String aText,
 			Collection<FeatureStructure> aToAdd, Collection<FeatureStructure> aToRemove)
+		throws AnalysisEngineProcessException
 	{
-		Collection<String> splits = splitter.splitWord(aText);
-
-		// We can currently only deal with splits into two parts
-		if (splits.size() != 2) {
-			return;
+		int resultValue;
+		try {
+			resultValue = bananaSplitter.splitCompound(aText);
+		}
+		catch (Exception e) {
+			throw new AnalysisEngineProcessException(e);
 		}
 
-		String[] split = splits.toArray(new String[splits.size()]);
-
-		// Cannot deal with cases where the split does not really cover the text
-		if ((split[0].length() + split[1].length()) != aText.length()) {
+		if (resultValue != 0) {
+			// returns -1 if the compound cannot be split, 0 in case if success and 1 if the
+			// compound is found as a whole word
 			return;
 		}
 
 		Type type = aCas.getTypeSystem().getType(tokenType);
-		aToAdd.add(aCas.createAnnotation(type, aAnnotation.getBegin(),
-				aAnnotation.getBegin() + split[0].length()));
-		aToAdd.add(aCas.createAnnotation(type, aAnnotation.getBegin() + split[0].length(),
-				aAnnotation.getEnd()));
+
+		String leftAtom = bananaSplitter.getCompound().getLeftAtom();
+		int leftStart = aText.indexOf(leftAtom);
+		int leftEnd = leftStart + leftAtom.length();
+		if (leftStart != -1) {
+			aToAdd.add(aCas.createAnnotation(type, aAnnotation.getBegin() + leftStart,
+					aAnnotation.getBegin() + leftEnd));
+		}
+
+		String rightAtom = bananaSplitter.getCompound().getRightAtom();
+		int rightStart = aText.indexOf(rightAtom, leftEnd);
+		int rightEnd = rightStart + rightAtom.length();
+		if (rightStart != -1) {
+			aToAdd.add(aCas.createAnnotation(type, aAnnotation.getBegin() + rightStart,
+					aAnnotation.getBegin() + rightEnd));
+		}
 
 		if (deleteCover) {
 			aToRemove.add(aAnnotation);

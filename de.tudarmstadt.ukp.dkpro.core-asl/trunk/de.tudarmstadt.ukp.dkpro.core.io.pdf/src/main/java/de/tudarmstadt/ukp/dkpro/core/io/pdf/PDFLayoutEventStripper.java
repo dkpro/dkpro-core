@@ -25,7 +25,7 @@
  * Furthermore the modified code is re-licensed under the Apache License,
  * Version 2.0 as stated above.
  *****************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.pdf.convert;
+package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
 import java.io.IOException;
 import java.util.ArrayList;
