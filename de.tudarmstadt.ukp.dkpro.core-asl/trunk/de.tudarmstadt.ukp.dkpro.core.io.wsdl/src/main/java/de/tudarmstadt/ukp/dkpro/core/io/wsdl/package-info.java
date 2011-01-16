@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA I/O support for WSDL web-service descriptions (read-only).
+ * Support for WSDL web-service descriptions (read-only).
  *
  * @since 1.1.0
  */

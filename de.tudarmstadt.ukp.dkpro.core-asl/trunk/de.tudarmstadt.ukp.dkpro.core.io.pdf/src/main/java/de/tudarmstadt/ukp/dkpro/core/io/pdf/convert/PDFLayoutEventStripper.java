@@ -62,11 +62,17 @@ import org.pdfbox.util.TextPosition;
 public abstract class PDFLayoutEventStripper
 	extends PDFStreamEngine
 {
+	/**
+	 * @author Richard Eckart de Castilho
+	 */
 	public static enum Values
 	{
 		LEFT, RIGHT, TOP, BOTTOM, LINESPACING, LINEHEIGHT
 	}
 
+	/**
+	 * @author Richard Eckart de Castilho
+	 */
 	public static enum Style
 	{
 		PAGE, PARAGRAPH, HEADING

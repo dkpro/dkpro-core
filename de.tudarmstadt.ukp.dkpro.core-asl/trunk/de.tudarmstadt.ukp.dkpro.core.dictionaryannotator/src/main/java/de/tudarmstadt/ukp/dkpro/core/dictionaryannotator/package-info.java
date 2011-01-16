@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA component using a dictionary to annotate words and multi-words.
+ * Annotate words and multi-words using a dictionary.
  *
  * @since 1.1.0
  */

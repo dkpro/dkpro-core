@@ -17,8 +17,8 @@
  ******************************************************************************/
 
 /**
- * UIMA integration of the <a href="https://sourceforge.net/projects/jwordsplitter/">
- * jWordSplitter</a> library for compound word splitting.
+ * Compound splitter based on <a href="https://sourceforge.net/projects/jwordsplitter/">
+ * jWordSplitter</a> library.
  *
  * @since 1.1.0
  */

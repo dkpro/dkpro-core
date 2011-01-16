@@ -17,8 +17,8 @@
  ******************************************************************************/
 
 /**
- * UIMA integration of the <a href="http://textcat.sourceforge.net/">Java Text Categorizing Library
- * </a> (JTCL) for language guessing.
+ * Language guessed basedon the <a href="http://textcat.sourceforge.net/">Java Text Categorizing
+ * Library </a> (JTCL).
  *
  * @since 1.1.0
  */

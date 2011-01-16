@@ -17,8 +17,8 @@
  ******************************************************************************/
 
 /**
- * UIMA integration of the <a href="http://niels.drni.de/s9y/pages/bananasplit.html">
- * Banana Split</a> library for compound word splitting.
+ * Compound splitter based on <a href="http://niels.drni.de/s9y/pages/bananasplit.html">
+ * Banana Split</a>.
  *
  * @since 1.1.0
  */

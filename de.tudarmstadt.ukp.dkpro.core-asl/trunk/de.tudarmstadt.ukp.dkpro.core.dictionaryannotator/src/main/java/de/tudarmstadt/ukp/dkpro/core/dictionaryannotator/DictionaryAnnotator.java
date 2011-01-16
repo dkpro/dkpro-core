@@ -43,17 +43,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Takes a plain text file with phrases as input and annotates
  * the phrases in the CAS file. The annotation type defaults to
- * <code>de.tudarmstadt.dkpro.core.type.NGram</code>, but can be changed.
+ * {@link NGram}, but can be changed.
  *
  * The format of the phrase file is one phrase per line, tokens are
  * separated by space:
  *
- * <code>
+ * <pre>
  * this is a phrase
  * another phrase
- * </code>
+ * </pre>
  *
- * @author hoffart
+ * @author Johannes Hoffart
  *
  */
 public class DictionaryAnnotator

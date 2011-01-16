@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA I/O support for plain text files.
+ * Support for plain text files.
  *
  * @since 1.1.0
  */

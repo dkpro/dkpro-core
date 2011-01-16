@@ -130,18 +130,10 @@ Remove all of the specified types from the CAS if their covered text is in the s
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordRemover.html#DOC_VIEW">DOC_VIEW</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordRemover.html#PARAM_PATHS">PARAM_PATHS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feature paths for annotations that should be matched/removed.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -159,14 +151,6 @@ Remove all of the specified types from the CAS if their covered text is in the s
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anything annotated with this type will be removed even if it does not match any word in the
  lists.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordRemover.html#TOPIC_VIEW">TOPIC_VIEW</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -260,26 +244,6 @@ Remove all of the specified types from the CAS if their covered text is in the s
 </TR>
 </TABLE>
 
-<A NAME="TOPIC_VIEW"><!-- --></A><H3>
-TOPIC_VIEW</H3>
-<PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>TOPIC_VIEW</B></PRE>
-<DL>
-<DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover.TOPIC_VIEW">Constant Field Values</A></DL>
-</DL>
-<HR>
-
-<A NAME="DOC_VIEW"><!-- --></A><H3>
-DOC_VIEW</H3>
-<PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>DOC_VIEW</B></PRE>
-<DL>
-<DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover.DOC_VIEW">Constant Field Values</A></DL>
-</DL>
-<HR>
-
 <A NAME="PARAM_STOP_WORD_LIST_FILE_NAMES"><!-- --></A><H3>
 PARAM_STOP_WORD_LIST_FILE_NAMES</H3>
 <PRE>
@@ -300,6 +264,15 @@ PARAM_PATHS</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PATHS</B></PRE>
 <DL>
+<DD>Feature paths for annotations that should be matched/removed. The default is
+
+ <pre>
+ StopWord.class.getName()
+ Token.class.getName()
+ Stem.class.getName()+"/value"
+ Lemma.class.getName()+"/value"
+ </pre>
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordRemover.PARAM_PATHS">Constant Field Values</A></DL>
 </DL>

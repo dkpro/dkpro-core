@@ -54,8 +54,8 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
-&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/UgdSpellingCorrector.html" title="class in de.tudarmstadt.ukp.dkpro.core.norvig"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingAlgorithm.html" title="class in de.tudarmstadt.ukp.dkpro.core.norvig"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="NorvigSpellingCorrector.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -75,9 +75,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -92,26 +92,50 @@ de.tudarmstadt.ukp.dkpro.core.norvig</FONT>
 Class NorvigSpellingCorrector</H2>
 <PRE>
 <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.norvig.NorvigSpellingCorrector</B>
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.AnalysisComponent_ImplBase
+      <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.Annotator_ImplBase
+          <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.JCasAnnotator_ImplBase
+              <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.norvig.NorvigSpellingCorrector</B>
 </PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>org.apache.uima.analysis_component.AnalysisComponent</DD>
+</DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>NorvigSpellingCorrector</B><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public class <B>NorvigSpellingCorrector</B><DT>extends org.apache.uima.analysis_component.JCasAnnotator_ImplBase</DL>
 </PRE>
 
 <P>
-Spelling corrector based on Norvig's algorithm.
+Creates <CODE>SofaChangeAnnotation</CODE>s containing corrections for previously identified spelling
+ errors.
 <P>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
-  <DD><a href="eckartde@tk.informatik.tu-darmstadt.de">Richard Eckart de Castilho</a></DD>
-<DT><B>See Also:</B><DD><CODE>http://norvig.com/spell-correct.html</CODE></DL>
+  <DD>Richard Eckart de Castilho, Delphine Bernhard</DD>
+</DL>
 <HR>
 
 <P>
+<!-- =========== FIELD SUMMARY =========== -->
 
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#PARAM_MODEL_FILE">PARAM_MODEL_FILE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -138,41 +162,8 @@ Spelling corrector based on Norvig's algorithm.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#consider(java.lang.String)">consider</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;candidate)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consider the given candidate.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#correct(java.lang.String)">correct</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aWord)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try to find a correction for the given word.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#edits(java.lang.String)">edits</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;word)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a list for all possible variants of the given word containing an
- insertion, deletion, replacement or transposition.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#getBestCandidate(java.lang.String)">getBestCandidate</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;word)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try to find a correction for the given word.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#isNumber(java.lang.String)">isNumber</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aWord)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#initialize(org.apache.uima.UimaContext)">initialize</A></B>(org.apache.uima.UimaContext&nbsp;context)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -180,35 +171,37 @@ Spelling corrector based on Norvig's algorithm.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#reset()">reset</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#process(org.apache.uima.jcas.JCas)">process</A></B>(org.apache.uima.jcas.JCas&nbsp;jcas)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#resetScore()">resetScore</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.JCasAnnotator_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.uima.analysis_component.JCasAnnotator_ImplBase</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#train(java.io.Reader)">train</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A>&nbsp;aReader)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read words from the given reader and count their occurrences.</TD>
+<TD><CODE>getRequiredCasInterface, process</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.Annotator_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.uima.analysis_component.Annotator_ImplBase</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#train(java.net.URL, java.lang.String)">train</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;aUrl,
-      <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aEncoding)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read words from the given URL and count their occurrences.</TD>
+<TD><CODE>getCasInstancesRequired, hasNext, next</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.AnalysisComponent_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.uima.analysis_component.AnalysisComponent_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>batchProcessComplete, collectionProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
@@ -222,6 +215,25 @@ Spelling corrector based on Norvig's algorithm.
 </TABLE>
 &nbsp;
 <P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PARAM_MODEL_FILE"><!-- --></A><H3>
+PARAM_MODEL_FILE</H3>
+<PRE>
+public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_MODEL_FILE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.norvig.NorvigSpellingCorrector.PARAM_MODEL_FILE">Constant Field Values</A></DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -250,129 +262,36 @@ public <B>NorvigSpellingCorrector</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="resetScore()"><!-- --></A><H3>
-resetScore</H3>
+<A NAME="initialize(org.apache.uima.UimaContext)"><!-- --></A><H3>
+initialize</H3>
 <PRE>
-protected void <B>resetScore</B>()</PRE>
+public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;context)
+                throws org.apache.uima.resource.ResourceInitializationException</PRE>
 <DL>
 <DD><DL>
-</DL>
+<DT><B>Specified by:</B><DD><CODE>initialize</CODE> in interface <CODE>org.apache.uima.analysis_component.AnalysisComponent</CODE><DT><B>Overrides:</B><DD><CODE>initialize</CODE> in class <CODE>org.apache.uima.analysis_component.AnalysisComponent_ImplBase</CODE></DL>
 </DD>
-</DL>
-<HR>
-
-<A NAME="reset()"><!-- --></A><H3>
-reset</H3>
-<PRE>
-public void <B>reset</B>()</PRE>
-<DL>
 <DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
 
-<A NAME="train(java.io.Reader)"><!-- --></A><H3>
-train</H3>
-<PRE>
-public void <B>train</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A>&nbsp;aReader)
-           throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Read words from the given reader and count their occurrences.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aReader</CODE> - the reader.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the words cannot be read.</DL>
+<DD><CODE>org.apache.uima.resource.ResourceInitializationException</CODE></DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="train(java.net.URL, java.lang.String)"><!-- --></A><H3>
-train</H3>
+<A NAME="process(org.apache.uima.jcas.JCas)"><!-- --></A><H3>
+process</H3>
 <PRE>
-public void <B>train</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;aUrl,
-                  <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aEncoding)
-           throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;jcas)
+             throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</PRE>
 <DL>
-<DD>Read words from the given URL and count their occurrences.
-<P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aReader</CODE> - the reader.<DD><CODE>aEncoding</CODE> - the encoding.
+<DT><B>Specified by:</B><DD><CODE>process</CODE> in class <CODE>org.apache.uima.analysis_component.JCasAnnotator_ImplBase</CODE></DL>
+</DD>
+<DD><DL>
+
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the words cannot be read.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="edits(java.lang.String)"><!-- --></A><H3>
-edits</H3>
-<PRE>
-protected <A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>edits</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;word)</PRE>
-<DL>
-<DD>Get a list for all possible variants of the given word containing an
- insertion, deletion, replacement or transposition.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>word</CODE> - the word.
-<DT><B>Returns:</B><DD>the list of variants.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="correct(java.lang.String)"><!-- --></A><H3>
-correct</H3>
-<PRE>
-public <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>correct</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aWord)</PRE>
-<DL>
-<DD>Try to find a correction for the given word. The word may contain up to
- two edits. If no better alternative is found, the word is returned
- verbatim. For performance reasons corrections are cached.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>word</CODE> - the word to correct (has to be lower-case)
-<DT><B>Returns:</B><DD>the possible correction.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="isNumber(java.lang.String)"><!-- --></A><H3>
-isNumber</H3>
-<PRE>
-protected boolean <B>isNumber</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aWord)</PRE>
-<DL>
-<DD><DL>
-</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getBestCandidate(java.lang.String)"><!-- --></A><H3>
-getBestCandidate</H3>
-<PRE>
-protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getBestCandidate</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;word)</PRE>
-<DL>
-<DD>Try to find a correction for the given word. The word may contain up to
- two edits. If no better alternative is found, the word is returned
- verbatim.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>word</CODE> - the word to correct (has to be lower-case)
-<DT><B>Returns:</B><DD>the possible correction.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="consider(java.lang.String)"><!-- --></A><H3>
-consider</H3>
-<PRE>
-protected void <B>consider</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;candidate)</PRE>
-<DL>
-<DD>Consider the given candidate. If it is better than a previously found
- candidate, then remember it, otherwise forget it.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>candidate</CODE> - the candidate to consider.</DL>
+<DD><CODE>org.apache.uima.analysis_engine.AnalysisEngineProcessException</CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -406,8 +325,8 @@ protected void <B>consider</B>(<A HREF="http://java.sun.com/javase/6/docs/api/ja
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;PREV CLASS&nbsp;
-&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/UgdSpellingCorrector.html" title="class in de.tudarmstadt.ukp.dkpro.core.norvig"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingAlgorithm.html" title="class in de.tudarmstadt.ukp.dkpro.core.norvig"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="NorvigSpellingCorrector.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -427,9 +346,9 @@ protected void <B>consider</B>(<A HREF="http://java.sun.com/javase/6/docs/api/ja
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

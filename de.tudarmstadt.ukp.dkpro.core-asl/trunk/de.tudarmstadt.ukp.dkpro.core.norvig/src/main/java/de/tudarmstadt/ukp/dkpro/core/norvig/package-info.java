@@ -17,8 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA component implementing <a href="http://norvig.com/spell-correct.html">Norvig's algorithm</a>
- * for spelling correction.
+ * Spelling correction based on <a href="http://norvig.com/spell-correct.html">Norvig's algorithm</a>.
  *
  * @since 1.1.0
  */

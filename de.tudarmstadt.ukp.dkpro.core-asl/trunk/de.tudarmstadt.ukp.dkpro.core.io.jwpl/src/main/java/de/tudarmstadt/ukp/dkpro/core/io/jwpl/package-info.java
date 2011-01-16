@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA I/O support for the <a href="http://www.wikipedia.org/">Wikipedia</a> files using
+ * Support for the <a href="http://www.wikipedia.org/">Wikipedia</a> files using
  * <a href="http://code.google.com/p/jwpl/">JWPL</a> (read-only).
  *
  * @since 1.1.0

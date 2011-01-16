@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -63,9 +63,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * element, it creates a semi-structured textual description. This description is assigned to the
  * CAS as the CAS text, while its structural properties are represented as annotations. Annotations
  * are added as Field annotations, with the following possible values for the Name property:
- * ServiceName, ServiceDocumentation, Operation, OperationDocumentation, InputParameter,
- * InputParameterDocumentation, InputParameterName, InputParameterType, OutputParameter,
- * OutputParameterDocumentation, OutputParameterName, OutputParameterType
+ * <ul>
+ * 	 <li>ServiceName</li>
+ *   <li>ServiceDocumentation</li>
+ *   <li>Operation</li>
+ *   <li>OperationDocumentation</li>
+ *   <li>InputParameter</li>
+ *   <li>InputParameterDocumentation</li>
+ *   <li>InputParameterName</li>
+ *   <li>InputParameterType</li>
+ *   <li>OutputParameter</li>
+ *   <li>OutputParameterDocumentation</li>
+ *   <li>OutputParameterName</li>
+ *   <li>OutputParameterType</li>
+ * </ul>
+ *
+ *
+ * @author Richard Eckart de Castilho
  */
 public class WsdlReader
 	extends ResourceCollectionReaderBase

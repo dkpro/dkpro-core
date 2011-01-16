@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -49,9 +49,13 @@ import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 
-public abstract
-class TreeTaggerTT4JBase<T>
-extends CasAnnotator_ImplBase
+/**
+ * @author Richard Eckart de Castilho
+ *
+ * @param <T>
+ */
+public abstract class TreeTaggerTT4JBase<T>
+	extends CasAnnotator_ImplBase
 {
     public static final String RESOURCE_TREETAGGER = "TreeTagger";
 	protected TreeTaggerWrapper<T> treetagger;
@@ -97,11 +101,11 @@ extends CasAnnotator_ImplBase
 		return performanceMode;
 	}
 
-	protected abstract
-	TokenAdapter<T> getAdapter() throws ResourceInitializationException;
+	protected abstract TokenAdapter<T> getAdapter()
+		throws ResourceInitializationException;
 
-	protected abstract
-	ModelResolver getModelResolver() throws ResourceInitializationException;
+	protected abstract ModelResolver getModelResolver()
+		throws ResourceInitializationException;
 
 	/**
 	 * Get the UIMA type name for the given tag in the given language.
@@ -135,8 +139,7 @@ extends CasAnnotator_ImplBase
     }
 
 	@Override
-	public
-	void destroy()
+	public void destroy()
 	{
 		if (treetagger != null) {
 			getContext().getLogger().log(Level.INFO, "Destroying TreeTagger process");
@@ -145,21 +148,20 @@ extends CasAnnotator_ImplBase
 	}
 
 	@Override
-	protected
-	void finalize()
-	throws Throwable
+	protected void finalize()
+		throws Throwable
 	{
 		destroy();
 		super.finalize();
 	}
 
-	protected
-	class DKProExecutableResolver
-	extends DefaultExecutableResolver
+	/**
+	 * @author Richard Eckart de Castilho
+	 */
+	protected class DKProExecutableResolver
+		extends DefaultExecutableResolver
 	{
-		public
-		File searchInFilesystem(
-				final Set<String> aSearchedIn)
+		public File searchInFilesystem(final Set<String> aSearchedIn)
 		{
 			String platformId = treetagger.getPlatformDetector().getPlatformId();
 			String exeSuffix  = treetagger.getPlatformDetector().getExecutableSuffix();
@@ -187,9 +189,7 @@ extends CasAnnotator_ImplBase
 			return null;
 		}
 
-		public
-		File searchInResources(
-				final Set<String> aSearchedIn)
+		public File searchInResources(final Set<String> aSearchedIn)
 		{
 			try {
 				if (getContext().getResourceURL(RESOURCE_TREETAGGER) != null) {
@@ -213,9 +213,7 @@ extends CasAnnotator_ImplBase
 			}
 		}
 
-		public
-		File searchInClasspath(
-				final Set<String> aSearchedIn)
+		public File searchInClasspath(final Set<String> aSearchedIn)
 		{
 			try {
 				String platformId = treetagger.getPlatformDetector().getPlatformId();
@@ -236,9 +234,8 @@ extends CasAnnotator_ImplBase
 		}
 
 		@Override
-		public
-		String getExecutable()
-		throws IOException
+		public String getExecutable()
+			throws IOException
 		{
 			Set<String> searchedIn = new HashSet<String>();
 
@@ -279,7 +276,7 @@ extends CasAnnotator_ImplBase
 	/**
 	 * A model resolver that knows how models map to language codes in DKPro.
 	 *
-	 * @author <a href="eckartde@tk.informatik.tu-darmstadt.de">Richard Eckart de Castilho</a>
+	 * @author Richard Eckart de Castilho
 	 */
 	protected abstract static class DKProModelResolver
 		extends DefaultModelResolver
@@ -287,10 +284,7 @@ extends CasAnnotator_ImplBase
 		protected abstract
 		String getType();
 
-		public
-		File searchInFilesystem(
-				final String aLocation,
-				final Set<String> aSearchedIn)
+		public File searchInFilesystem(final String aLocation, final Set<String> aSearchedIn)
 		{
 			File _file = new File(aLocation);
 
@@ -312,10 +306,8 @@ extends CasAnnotator_ImplBase
 		}
 
 		@Override
-		public
-		DKProModel getModel(
-				String aModelName)
-		throws IOException
+		public DKProModel getModel(String aModelName)
+			throws IOException
 		{
 			File modelFile;
 			String modelEncoding;
@@ -385,8 +377,7 @@ extends CasAnnotator_ImplBase
 			return new DKProModel(aModelName, modelFile, modelEncoding, mapping);
 		}
 
-		private
-		Map<String, String> loadProperties(URL aUrl)
+		private Map<String, String> loadProperties(URL aUrl)
 		{
 			InputStream is = null;
 			try {
@@ -408,7 +399,11 @@ extends CasAnnotator_ImplBase
 		}
 	}
 
-	public static class DKProModel extends DefaultModel
+	/**
+	 * @author Richard Eckart de Castilho
+	 */
+	public static class DKProModel
+		extends DefaultModel
 	{
 		private Map<String, String> mapping;
 

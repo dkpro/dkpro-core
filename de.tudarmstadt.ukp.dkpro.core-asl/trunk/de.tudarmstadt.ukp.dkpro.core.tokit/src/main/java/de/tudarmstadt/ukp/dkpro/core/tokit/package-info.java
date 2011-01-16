@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * UIMA components for tokenization and segmentation.
+ * Collection of tokenization and segmentation components.
  *
  * @since 1.1.0
  */
