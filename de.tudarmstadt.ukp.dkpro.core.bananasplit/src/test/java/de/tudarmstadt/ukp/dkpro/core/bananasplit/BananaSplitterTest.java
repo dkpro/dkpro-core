@@ -29,16 +29,16 @@ import org.uimafit.factory.JCasBuilder;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import static org.junit.Assert.*;
 
-public class CompoundSplitterTest
+public class BananaSplitterTest
 {
 	private static AnalysisEngine ae;
 
 	@BeforeClass
 	public static void setup() throws Exception
 	{
-		ae = createPrimitive(CompoundSplitter.class, createTypeSystemDescription(),
-				CompoundSplitter.PARAM_DELETE_COVER, false,
-				CompoundSplitter.PARAM_DICT_PATH, "classpath:/dict.xml");
+		ae = createPrimitive(BananaSplitter.class, createTypeSystemDescription(),
+				BananaSplitter.PARAM_DELETE_COVER, false,
+				BananaSplitter.PARAM_DICT_PATH, "classpath:/dict.xml");
 	}
 
 	@Test

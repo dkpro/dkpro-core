@@ -27,7 +27,6 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramIterable;
 
 public class NGramAnnotator
 	extends JCasAnnotator_ImplBase

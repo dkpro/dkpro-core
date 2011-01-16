@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
-import de.tudarmstadt.ukp.dkpro.core.io.pdf.convert.Pdf2CasConverter;
 
 /**
  * Collection reader for PDF files.
