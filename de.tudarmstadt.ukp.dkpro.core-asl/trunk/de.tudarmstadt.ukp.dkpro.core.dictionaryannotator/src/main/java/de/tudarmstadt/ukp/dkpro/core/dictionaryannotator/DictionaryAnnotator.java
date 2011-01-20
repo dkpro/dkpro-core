@@ -17,6 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator;
 
+import static org.uimafit.util.JCasUtil.select;
+import static org.uimafit.util.JCasUtil.selectCovered;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -26,16 +29,12 @@ import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
-import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
-
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -62,7 +61,9 @@ public class DictionaryAnnotator
 	public static final String PARAM_PHRASE_FILE = "PhraseFile";
 	public static final String PARAM_ANNOTATION_TYPE = "AnnotationType";
 
-	/** The file must contain one phrase per line - phrases will be split at " " */
+	/**
+	 * The file must contain one phrase per line - phrases will be split at " "
+	 */
 	@ConfigurationParameter(name = PARAM_PHRASE_FILE, mandatory = true, defaultValue = "phrases.txt")
 	private String phraseFile;
 
@@ -108,22 +109,12 @@ public class DictionaryAnnotator
 	{
 		Type type = jcas.getTypeSystem().getType(annotationType);
 
-		AnnotationIndex sentenceIndex = jcas.getAnnotationIndex(Sentence.type);
-		FSIterator sentenceIterator = sentenceIndex.iterator();
+		for (Sentence currSentence : select(jcas, Sentence.class)) {
+			ArrayList<Token> tokens = new ArrayList<Token>(selectCovered(Token.class, currSentence));
 
-		while (sentenceIterator.hasNext()) {
-			Sentence currSentence = (Sentence) sentenceIterator.next();
-
-			ArrayList<Token> tokensInSentence = new ArrayList<Token>();
-
-			for (Token currToken : JCasUtil.selectCovered(jcas,
-					Token.class, currSentence)) {
-				tokensInSentence.add(currToken);
-			}
-
-			for (int i = 0; i < tokensInSentence.size(); i++) {
-				List<Token> tokensToSentenceEnd = tokensInSentence.subList(i, tokensInSentence.size()-1);
-				String[] sentenceToEnd = new String[tokensInSentence.size()];
+			for (int i = 0; i < tokens.size(); i++) {
+				List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size()-1);
+				String[] sentenceToEnd = new String[tokens.size()];
 
 				for (int j=0;j<tokensToSentenceEnd.size();j++) {
 					sentenceToEnd[j] = tokensToSentenceEnd.get(j).getCoveredText();
@@ -132,10 +123,11 @@ public class DictionaryAnnotator
 				String[] longestMatch = phrases.getLongestMatch(sentenceToEnd);
 
 				if (longestMatch != null) {
-					Token beginToken = tokensInSentence.get(i);
-					Token endToken = tokensInSentence.get(i + longestMatch.length - 1);
+					Token beginToken = tokens.get(i);
+					Token endToken = tokens.get(i + longestMatch.length - 1);
 
-					AnnotationFS newFound = jcas.getCas().createAnnotation(type, beginToken.getBegin(), endToken.getEnd());
+					AnnotationFS newFound = jcas.getCas().createAnnotation(type,
+							beginToken.getBegin(), endToken.getEnd());
 					jcas.getCas().addFsToIndexes(newFound);
 				}
 			}
