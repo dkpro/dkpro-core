@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu Dec 09 22:13:11 CET 2010
+ * Updated by JCasGen Sun Jan 16 22:06:06 CET 2011
  * @generated */
 public class Token_Type extends Annotation_Type {
   /** @generated */
@@ -42,20 +42,20 @@ public class Token_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
  
   /** @generated */
-  final Feature casFeat_Parent;
+  final Feature casFeat_parent;
   /** @generated */
-  final int     casFeatCode_Parent;
+  final int     casFeatCode_parent;
   /** @generated */ 
   public int getParent(int addr) {
-        if (featOkTst && casFeat_Parent == null)
-      jcas.throwFeatMissing("Parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_Parent);
+        if (featOkTst && casFeat_parent == null)
+      jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_parent);
   }
   /** @generated */    
   public void setParent(int addr, int v) {
-        if (featOkTst && casFeat_Parent == null)
-      jcas.throwFeatMissing("Parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    ll_cas.ll_setRefValue(addr, casFeatCode_Parent, v);}
+        if (featOkTst && casFeat_parent == null)
+      jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    ll_cas.ll_setRefValue(addr, casFeatCode_parent, v);}
     
   
  
@@ -122,8 +122,8 @@ public class Token_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_Parent = jcas.getRequiredFeatureDE(casType, "Parent", "uima.tcas.Annotation", featOkTst);
-    casFeatCode_Parent  = (null == casFeat_Parent) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Parent).getCode();
+    casFeat_parent = jcas.getRequiredFeatureDE(casType, "parent", "uima.tcas.Annotation", featOkTst);
+    casFeatCode_parent  = (null == casFeat_parent) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_parent).getCode();
 
  
     casFeat_lemma = jcas.getRequiredFeatureDE(casType, "lemma", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma", featOkTst);
