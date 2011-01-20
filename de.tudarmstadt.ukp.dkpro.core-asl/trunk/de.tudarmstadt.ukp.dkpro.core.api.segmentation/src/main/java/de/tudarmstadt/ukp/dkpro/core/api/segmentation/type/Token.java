@@ -12,7 +12,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 
 /** 
- * Updated by JCasGen Thu Dec 09 22:13:11 CET 2010
+ * Updated by JCasGen Sun Jan 16 22:06:06 CET 2011
  * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
 public class Token extends Annotation {
@@ -66,16 +66,16 @@ public class Token extends Annotation {
   /** getter for Parent - gets The parent of this token.
    * @generated */
   public Annotation getParent() {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_Parent == null)
-      jcasType.jcas.throwFeatMissing("Parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type)jcasType).casFeatCode_Parent)));}
+    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_parent == null)
+      jcasType.jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type)jcasType).casFeatCode_parent)));}
     
   /** setter for Parent - sets The parent of this token. 
    * @generated */
   public void setParent(Annotation v) {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_Parent == null)
-      jcasType.jcas.throwFeatMissing("Parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type)jcasType).casFeatCode_Parent, jcasType.ll_cas.ll_getFSRef(v));}    
+    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_parent == null)
+      jcasType.jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type)jcasType).casFeatCode_parent, jcasType.ll_cas.ll_getFSRef(v));}    
    
     
   //*--------------*
