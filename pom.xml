@@ -42,7 +42,7 @@
 						</group>
 						<group>
 							<title>Analysis Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.stanfordnlp</packages>
+							<packages>de.tudarmstadt.ukp.dkpro.core.stanfordnlp*</packages>
 						</group>
 						<group>
 							<title>I/O Components</title>
