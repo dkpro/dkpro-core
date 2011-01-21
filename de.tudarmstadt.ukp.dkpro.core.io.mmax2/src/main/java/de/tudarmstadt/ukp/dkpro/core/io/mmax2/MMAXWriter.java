@@ -49,6 +49,21 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+
+/**
+ * Writes the CAS into a MMAX2 project.
+ * The MMAX2 project can then be used to annotate the annotations further.
+ * 
+ * All the settings (which annotations should be included,
+ * how they should be treated in the MMAX2 project, etc.)
+ * are to be made in the the MMAX2 project that is then
+ * filled with the data from the CAS.
+ * This requires some knowledge of MMAX2. 
+ * 
+ * @author zesch
+ *
+ */
+// TODO add parameter for path to MMAX project, as this needs to be adapted to the task anyway
 public class MMAXWriter {
 	private final Log log = LogFactory.getLog(getClass());
 
@@ -66,7 +81,7 @@ public class MMAXWriter {
     // The path to the source mmax project template
     private static final String SOURCE_PATH_STRING = "resource/mmax/";
 
-    private File basedataPath;
+    private final File basedataPath;
 //    private File customizationPath;
 //    private File markablePath;
 //    private File schemePath;
@@ -75,10 +90,10 @@ public class MMAXWriter {
     private Basedata basedata;
 
     // The path to the mmax project
-    private File projectPath;
+    private final File projectPath;
 
     // the common_paths.xml file
-    private File commonPathsFile;
+    private final File commonPathsFile;
 
     private MMAX2Discourse discourse;
 
