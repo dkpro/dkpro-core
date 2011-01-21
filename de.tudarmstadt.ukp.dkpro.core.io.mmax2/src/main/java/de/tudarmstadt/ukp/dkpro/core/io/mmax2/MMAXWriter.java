@@ -56,9 +56,9 @@ import org.xml.sax.SAXException;
  * 
  * All the settings (which annotations should be included,
  * how they should be treated in the MMAX2 project, etc.)
- * are to be made in the the MMAX2 project that is then
+ * are to be made in the empty (but fully configured) MMAX2 project that is then
  * filled with the data from the CAS.
- * This requires some knowledge of MMAX2. 
+ * This requires some knowledge of MMAX2.
  * 
  * @author zesch
  *
