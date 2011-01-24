@@ -24,6 +24,15 @@
 	<packaging>pom</packaging>
 	<name>DKPro Core ASL</name>
 	<description></description> <!-- The description tag must be present for antrun to work!! -->
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>ukp-oss</id>
+			<url>http://130.83.163.69/artifactory/repo/</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
