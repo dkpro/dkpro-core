@@ -1,0 +1,381 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+CasCopier (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="CasCopier (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CasCopier.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/Backmapper.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CasCopier.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+de.tudarmstadt.ukp.dkpro.core.castransformation</FONT>
+<BR>
+Class CasCopier</H2>
+<PRE>
+<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.castransformation.CasCopier</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>CasCopier</B><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+</PRE>
+
+<P>
+Utility class for doing deep copies of FeatureStructures from one CAS to
+ another. To handle cases where the source CAS has multiple references to the
+ same FS, you can create one instance of CasCopier and use it to copy multiple
+ FeatureStructures. The CasCopier will remember previously copied
+ FeatureStructures, so if you later copy another FS that has a reference to a
+ previously copied FS, it will not duplicate the multiply-referenced FS.
+<P>
+
+<P>
+<DL>
+<DT><B>See Also:</B><DD><CODE>CasCopier</CODE></DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html#CasCopier(org.apache.uima.cas.CAS, org.apache.uima.cas.CAS)">CasCopier</A></B>(org.apache.uima.cas.CAS&nbsp;aSrcCas,
+          org.apache.uima.cas.CAS&nbsp;aDestCas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new CasCopier that can be used to copy FeatureStructures from
+ one CAS to another.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html#alreadyCopied(org.apache.uima.cas.FeatureStructure)">alreadyCopied</A></B>(org.apache.uima.cas.FeatureStructure&nbsp;aFS)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether the given FS has already been copied using this
+ CasCopier.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html#copyCas(org.apache.uima.cas.CAS, org.apache.uima.cas.CAS, boolean)">copyCas</A></B>(org.apache.uima.cas.CAS&nbsp;aSrcCas,
+        org.apache.uima.cas.CAS&nbsp;aDestCas,
+        boolean&nbsp;aCopySofa)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does a complete deep copy of one CAS into another CAS.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html#copyCasView(org.apache.uima.cas.CAS, java.lang.String, boolean)">copyCasView</A></B>(org.apache.uima.cas.CAS&nbsp;aSrcCasView,
+            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;targetName,
+            boolean&nbsp;aCopySofa)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does a deep copy of the contents of one CAS View into another CAS.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.apache.uima.cas.FeatureStructure</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html#copyFs(org.apache.uima.cas.FeatureStructure)">copyFs</A></B>(org.apache.uima.cas.FeatureStructure&nbsp;aFS)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copies an FS from the source CAS to the destination CAS.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html#isCopied(org.apache.uima.cas.FeatureStructure)">isCopied</A></B>(org.apache.uima.cas.FeatureStructure&nbsp;fs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check if the given FS was included in the copy.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="CasCopier(org.apache.uima.cas.CAS, org.apache.uima.cas.CAS)"><!-- --></A><H3>
+CasCopier</H3>
+<PRE>
+public <B>CasCopier</B>(org.apache.uima.cas.CAS&nbsp;aSrcCas,
+                 org.apache.uima.cas.CAS&nbsp;aDestCas)</PRE>
+<DL>
+<DD>Creates a new CasCopier that can be used to copy FeatureStructures from
+ one CAS to another. Note that if you are merging data from multiple
+ CASes, you must create a new CasCopier for each source CAS.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>aSrcCas</CODE> - the CAS to copy from.<DD><CODE>aDestCas</CODE> - the CAS to copy into.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="copyCas(org.apache.uima.cas.CAS, org.apache.uima.cas.CAS, boolean)"><!-- --></A><H3>
+copyCas</H3>
+<PRE>
+public static void <B>copyCas</B>(org.apache.uima.cas.CAS&nbsp;aSrcCas,
+                           org.apache.uima.cas.CAS&nbsp;aDestCas,
+                           boolean&nbsp;aCopySofa)</PRE>
+<DL>
+<DD>Does a complete deep copy of one CAS into another CAS. The contents of
+ each view in the source CAS will be copied to the same-named view in the
+ destination CAS. If the view does not already exist it will be created.
+ All FeatureStructures that are indexed in a view in the source CAS will
+ become indexed in the same-named view in the destination CAS.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aSrcCas</CODE> - the CAS to copy from<DD><CODE>aDestCas</CODE> - the CAS to copy to<DD><CODE>aCopySofa</CODE> - if true, the sofa data and mimeType of each view will be
+                        copied. If false they will not.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyCasView(org.apache.uima.cas.CAS, java.lang.String, boolean)"><!-- --></A><H3>
+copyCasView</H3>
+<PRE>
+public void <B>copyCasView</B>(org.apache.uima.cas.CAS&nbsp;aSrcCasView,
+                        <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;targetName,
+                        boolean&nbsp;aCopySofa)</PRE>
+<DL>
+<DD>Does a deep copy of the contents of one CAS View into another CAS. If a
+ view with the same name as <code>aSrcCasView</code> exists in the
+ destination CAS, then it will be the target of the copy. Otherwise, a new
+ view will be created with that name and will become the target of the
+ copy. All FeatureStructures that are indexed in the source CAS view will
+ become indexed in the target view.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aSrcCasView</CODE> - the CAS to copy from<DD><CODE>aCopySofa</CODE> - if true, the sofa data and mimeType will be copied. If
+                        false they will not.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="copyFs(org.apache.uima.cas.FeatureStructure)"><!-- --></A><H3>
+copyFs</H3>
+<PRE>
+public org.apache.uima.cas.FeatureStructure <B>copyFs</B>(org.apache.uima.cas.FeatureStructure&nbsp;aFS)</PRE>
+<DL>
+<DD>Copies an FS from the source CAS to the destination CAS. Also copies any
+ referenced FS, except that previously copied FS will not be copied again.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aFS</CODE> - the FS to copy. Must be contained within the source CAS.
+<DT><B>Returns:</B><DD>the copy of <code>aFS</code> in the target CAS.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="alreadyCopied(org.apache.uima.cas.FeatureStructure)"><!-- --></A><H3>
+alreadyCopied</H3>
+<PRE>
+public boolean <B>alreadyCopied</B>(org.apache.uima.cas.FeatureStructure&nbsp;aFS)</PRE>
+<DL>
+<DD>Returns whether the given FS has already been copied using this
+ CasCopier.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aFS</CODE> - 
+<DT><B>Returns:</B><DD></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isCopied(org.apache.uima.cas.FeatureStructure)"><!-- --></A><H3>
+isCopied</H3>
+<PRE>
+public boolean <B>isCopied</B>(org.apache.uima.cas.FeatureStructure&nbsp;fs)</PRE>
+<DL>
+<DD>Check if the given FS was included in the copy.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CasCopier.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/Backmapper.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/castransformation/CasCopier.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CasCopier.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2011. All Rights Reserved.
+</BODY>
+</HTML>
