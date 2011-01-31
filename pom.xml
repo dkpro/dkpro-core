@@ -283,8 +283,6 @@
 			<id>ukp-oss</id>
 			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
 		</repository>
-		<site>
-		</site>
 	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -300,8 +298,6 @@
 		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
 		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
 	</scm>
-	<organization>
-	</organization>
 	<build>
 		<pluginManagement>
 			<plugins>
