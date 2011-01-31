@@ -23,14 +23,14 @@
 	<version>1.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>DKPro Core ASL</name>
-	<description></description> <!-- The description tag must be present for antrun to work!! -->
+	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<repositories>
 		<repository>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 			<id>ukp-oss</id>
-			<url>http://130.83.163.69/artifactory/repo/</url>
+			<url>http://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/repo/</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -278,10 +278,30 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples</module>
 	</modules>
+	<distributionManagement>
+		<repository>
+			<id>ukp-oss</id>
+			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+		</repository>
+		<site>
+		</site>
+	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.target>1.6</java.target>
 	</properties>
+	<url>http://code.google.com/p/dkpro-core-asl/</url>
+	<issueManagement>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
+	</issueManagement>
+	<scm>
+		<connection>http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
+		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
+	</scm>
+	<organization>
+	</organization>
 	<build>
 		<pluginManagement>
 			<plugins>
