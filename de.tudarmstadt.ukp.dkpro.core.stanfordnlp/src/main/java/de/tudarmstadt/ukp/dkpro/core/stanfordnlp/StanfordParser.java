@@ -62,13 +62,18 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_MODEL, mandatory = true)
 	private String classifierFileName;
 
+	/**
+	 * Sets whether to create or not to create dependency annotations. <br/>
+	 * Default: {@code true}
+	 */
 	public static final String PARAM_CREATE_DEPENDENCY_TAGS = "createDependencyTags";
 	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_TAGS, mandatory = true, defaultValue = "true")
 	private boolean createDependencyTags;
 
 	/**
 	 * Sets whether to create or not to create constituent tags. This is
-	 * required for POS-tagging and lemmatization. Default: true
+	 * required for POS-tagging and lemmatization.<br/>
+	 * Default: {@code true}
 	 */
 	public static final String PARAM_CREATE_CONSTITUENT_TAGS = "createConstituentTags";
 	@ConfigurationParameter(name = PARAM_CREATE_CONSTITUENT_TAGS, mandatory = true, defaultValue = "true")
@@ -78,21 +83,40 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, mandatory = true, defaultValue = "true")
 	private boolean createDependencyAnnotationOnToken;
 
+	/**
+	 * Defines the TreebankLanguagePack that the parser should use.<br/>
+	 * The right setting depends on the model you are using. It usually does not have to be changed.<br/>
+	 * Default: {@code edu.stanford.nlp.trees.PennTreebankLanguagePack}
+	 */
 	public static final String PARAM_LANGUAGE_PACK = "TreebankLanguagePack";
 	@ConfigurationParameter(name = PARAM_LANGUAGE_PACK, mandatory = true, defaultValue = "edu.stanford.nlp.trees.PennTreebankLanguagePack")
 	private String tlpName;
 
+	/**
+	 * If this paramter is set to true, each sentence is annotated with a
+	 * PennTree-Annotation, containing the whole parse tree in Prenn Treebank
+	 * style format.<br/>
+	 * Default: {@code false}
+	 */
 	public static final String PARAM_CREATE_PENN_TREE_STRING = "createPennTreeString";
 	@ConfigurationParameter(name = PARAM_CREATE_PENN_TREE_STRING, mandatory = true, defaultValue = "false")
 	private boolean createPennTreeString;
 
+	/**
+	 * This parameter can be used to override the standard behavior which
+	 * uses the <i>Sentence</i> annotation as the basic unit for parsing.<br/>
+	 * If the parameter is set with the name of an annotation type <i>x</i>, the parser
+	 * will no longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.<br/>
+	 * Default: {@code null}
+	 */
 	public static final String PARAM_ANNOTATIONTYPE_TO_PARSE = "annotationTypeToParse";
 	@ConfigurationParameter(name = PARAM_ANNOTATIONTYPE_TO_PARSE, mandatory = false)
 	private String annotationTypeToParse;
 
 	/**
 	 * Sets whether to create or not to create POS tags. The creation of
-	 * constituent tags must be turned on for this to work. Default: true
+	 * constituent tags must be turned on for this to work.<br/>
+	 * Default: {@code true}
 	 */
 	public static final String PARAM_CREATE_POS_TAGS = "createPosTags";
 	@ConfigurationParameter(name = PARAM_CREATE_POS_TAGS, mandatory = true, defaultValue = "true")
