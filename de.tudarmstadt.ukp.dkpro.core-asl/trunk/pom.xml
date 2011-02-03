@@ -15,7 +15,8 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
@@ -23,6 +24,7 @@
 	<packaging>pom</packaging>
 	<name>DKPro Core ASL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
+	<url>http://code.google.com/p/dkpro-core-asl/</url>
 	<repositories>
 		<repository>
 			<snapshots>
@@ -32,6 +34,25 @@
 			<url>http://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/repo/</url>
 		</repository>
 	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>ukp-oss</id>
+			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+		</repository>
+	</distributionManagement>
+	<issueManagement>
+		<system>Google Code</system>
+		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
+	</issueManagement>
+	<scm>
+		<connection>http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
+		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
+	</scm>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.target>1.6</java.target>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -277,26 +298,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples</module>
 	</modules>
-	<distributionManagement>
-		<repository>
-			<id>ukp-oss</id>
-			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
-		</repository>
-	</distributionManagement>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.target>1.6</java.target>
-	</properties>
-	<url>http://code.google.com/p/dkpro-core-asl/</url>
-	<issueManagement>
-		<system>Google Code</system>
-		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
-	</issueManagement>
-	<scm>
-		<connection>http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
-		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
-	</scm>
 	<build>
 		<pluginManagement>
 			<plugins>
