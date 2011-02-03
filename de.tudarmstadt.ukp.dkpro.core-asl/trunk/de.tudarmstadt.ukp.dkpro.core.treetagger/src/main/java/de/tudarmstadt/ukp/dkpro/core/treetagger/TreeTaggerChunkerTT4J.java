@@ -220,7 +220,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	/**
 	 * @author Richard Eckart de Castilho
 	 */
-	public static class ChunkerModelResolver
+	public class ChunkerModelResolver
 		extends DKProModelResolver
 	{
 		@Override
