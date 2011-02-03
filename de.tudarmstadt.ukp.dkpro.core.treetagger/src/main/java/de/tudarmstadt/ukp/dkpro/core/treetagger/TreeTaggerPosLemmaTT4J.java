@@ -176,7 +176,7 @@ public class TreeTaggerPosLemmaTT4J
 	/**
 	 * @author Richard Eckart de Castilho
 	 */
-	public static class PosModelResolver
+	public class PosModelResolver
 		extends DKProModelResolver
 	{
 		@Override

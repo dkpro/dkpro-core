@@ -68,6 +68,22 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name=PARAM_PERFORMANCE_MODE, mandatory=true, defaultValue="false")
 	private boolean performanceMode;
 
+    public static final String PARAM_EXECUTABLE_PATH = "ExecutablePath";
+	@ConfigurationParameter(name=PARAM_EXECUTABLE_PATH, mandatory=false)
+	private File executablePath;
+
+    public static final String PARAM_MODEL_PATH = "ModelPath";
+	@ConfigurationParameter(name=PARAM_MODEL_PATH, mandatory=false)
+	private File modelPath;
+
+    public static final String PARAM_MODEL_ENCODING = "ModelEncoding";
+	@ConfigurationParameter(name=PARAM_MODEL_ENCODING, mandatory=false)
+	private String modelEncoding;
+
+    public static final String PARAM_TAG_MAPPING_PATH = "TagMappingPath";
+	@ConfigurationParameter(name=PARAM_TAG_MAPPING_PATH, mandatory=false)
+	private File tagMappingPath;
+
 	private Set<String> missingTags;
 
 	@Override
@@ -77,6 +93,15 @@ public abstract class TreeTaggerTT4JBase<T>
 		super.initialize(aContext);
 
 		try {
+			if (modelPath != null && modelEncoding == null) {
+				throw new IllegalArgumentException("When specifying a model file, the model " +
+						"encoding has to be specified as well.");
+			}
+			if (modelPath != null && tagMappingPath == null) {
+				throw new IllegalArgumentException("When specifying a model, the tag mapping " +
+						"properties file has to be specified as well.");
+			}
+
 			missingTags = new HashSet<String>();
 
 			treetagger = new TreeTaggerWrapper<T>();
@@ -239,12 +264,19 @@ public abstract class TreeTaggerTT4JBase<T>
 		{
 			Set<String> searchedIn = new HashSet<String>();
 
-			File exeFile = searchInFilesystem(searchedIn);
-			if (exeFile == null) {
-				exeFile = searchInResources(searchedIn);
+			File exeFile;
+			if (executablePath != null) {
+				exeFile = executablePath;
+				searchedIn.add(executablePath.getAbsolutePath());
 			}
-			if (exeFile == null) {
-				exeFile = searchInClasspath(searchedIn);
+			else {
+				exeFile = searchInFilesystem(searchedIn);
+				if (exeFile == null) {
+					exeFile = searchInResources(searchedIn);
+				}
+				if (exeFile == null) {
+					exeFile = searchInClasspath(searchedIn);
+				}
 			}
 			if (exeFile == null) {
 				throw new IOException("Unable to locate tree-tagger binary in the following locations " +
@@ -264,7 +296,7 @@ public abstract class TreeTaggerTT4JBase<T>
 			}
 
 			if (!exeFile.canExecute()) {
-				throw new IOException("TreeTagger executable at ["+exeFile+"] could not be made executable.");
+				throw new IOException("TreeTagger executable at ["+exeFile+"] not executable.");
 			}
 
 			getContext().getLogger().log(Level.INFO,
@@ -278,7 +310,7 @@ public abstract class TreeTaggerTT4JBase<T>
 	 *
 	 * @author Richard Eckart de Castilho
 	 */
-	protected abstract static class DKProModelResolver
+	protected abstract class DKProModelResolver
 		extends DefaultModelResolver
 	{
 		protected abstract
@@ -309,8 +341,13 @@ public abstract class TreeTaggerTT4JBase<T>
 		public DKProModel getModel(String aModelName)
 			throws IOException
 		{
+			if (modelPath != null) {
+				Map<String, String> mapping = loadProperties(tagMappingPath.toURI().toURL());
+				return new DKProModel(aModelName, modelPath, modelEncoding, mapping);
+			}
+
 			File modelFile;
-			String modelEncoding;
+			String modelEnc;
 			Map<String, String> mapping = null;
 			Map<String, String> properties = null;
 			Set<String> searchedIn = new HashSet<String>();
@@ -373,8 +410,8 @@ public abstract class TreeTaggerTT4JBase<T>
 						"point to the TreeTagger installation directory.");
 			}
 
-			modelEncoding = properties.get("encoding");
-			return new DKProModel(aModelName, modelFile, modelEncoding, mapping);
+			modelEnc = properties.get("encoding");
+			return new DKProModel(aModelName, modelFile, modelEnc, mapping);
 		}
 
 		private Map<String, String> loadProperties(URL aUrl)
