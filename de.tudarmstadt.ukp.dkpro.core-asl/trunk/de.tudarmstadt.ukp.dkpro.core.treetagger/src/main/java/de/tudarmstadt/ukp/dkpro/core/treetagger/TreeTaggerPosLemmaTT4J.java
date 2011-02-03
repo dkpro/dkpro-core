@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.uimafit.util.CasUtil.iterate;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -153,7 +154,7 @@ public class TreeTaggerPosLemmaTT4J
 	@Override
 	protected ModelResolver getModelResolver()
 	{
-		return new PosModelResolver();
+		return new PosModelResolver(modelPath, modelEncoding, tagMappingPath);
 	}
 
 	@Override
@@ -176,9 +177,14 @@ public class TreeTaggerPosLemmaTT4J
 	/**
 	 * @author Richard Eckart de Castilho
 	 */
-	public class PosModelResolver
+	public static class PosModelResolver
 		extends DKProModelResolver
 	{
+		public PosModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
+		{
+			super(aModelPath, aModelEncoding, aMappingPath);
+		}
+
 		@Override
 		protected String getType()
 		{

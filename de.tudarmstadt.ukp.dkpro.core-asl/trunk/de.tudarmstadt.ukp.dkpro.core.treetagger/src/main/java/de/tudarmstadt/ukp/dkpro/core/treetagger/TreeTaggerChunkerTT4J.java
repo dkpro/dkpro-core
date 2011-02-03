@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.uimafit.util.CasUtil.iterate;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -214,15 +215,20 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	protected
 	ModelResolver getModelResolver()
 	{
-		return new ChunkerModelResolver();
+		return new ChunkerModelResolver(modelPath, modelEncoding, tagMappingPath);
 	}
 
 	/**
 	 * @author Richard Eckart de Castilho
 	 */
-	public class ChunkerModelResolver
+	public static class ChunkerModelResolver
 		extends DKProModelResolver
 	{
+		public ChunkerModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
+		{
+			super(aModelPath, aModelEncoding, aMappingPath);
+		}
+
 		@Override
 		protected String getType()
 		{

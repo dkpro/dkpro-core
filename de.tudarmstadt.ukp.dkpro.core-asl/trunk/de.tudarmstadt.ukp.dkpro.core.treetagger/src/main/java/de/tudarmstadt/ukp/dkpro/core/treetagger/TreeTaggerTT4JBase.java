@@ -74,15 +74,15 @@ public abstract class TreeTaggerTT4JBase<T>
 
     public static final String PARAM_MODEL_PATH = "ModelPath";
 	@ConfigurationParameter(name=PARAM_MODEL_PATH, mandatory=false)
-	private File modelPath;
+	protected File modelPath;
 
     public static final String PARAM_MODEL_ENCODING = "ModelEncoding";
 	@ConfigurationParameter(name=PARAM_MODEL_ENCODING, mandatory=false)
-	private String modelEncoding;
+	protected String modelEncoding;
 
     public static final String PARAM_TAG_MAPPING_PATH = "TagMappingPath";
 	@ConfigurationParameter(name=PARAM_TAG_MAPPING_PATH, mandatory=false)
-	private File tagMappingPath;
+	protected File tagMappingPath;
 
 	private Set<String> missingTags;
 
@@ -310,11 +310,22 @@ public abstract class TreeTaggerTT4JBase<T>
 	 *
 	 * @author Richard Eckart de Castilho
 	 */
-	protected abstract class DKProModelResolver
+	protected static abstract class DKProModelResolver
 		extends DefaultModelResolver
 	{
+		private File overrideModelPath;
+		private String overrideModelEncoding;
+		private File overrideMappingPath;
+
 		protected abstract
 		String getType();
+
+		public DKProModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
+		{
+			overrideModelPath = aModelPath;
+			overrideModelEncoding = aModelEncoding;
+			overrideMappingPath = aMappingPath;
+		}
 
 		public File searchInFilesystem(final String aLocation, final Set<String> aSearchedIn)
 		{
@@ -341,9 +352,9 @@ public abstract class TreeTaggerTT4JBase<T>
 		public DKProModel getModel(String aModelName)
 			throws IOException
 		{
-			if (modelPath != null) {
-				Map<String, String> mapping = loadProperties(tagMappingPath.toURI().toURL());
-				return new DKProModel(aModelName, modelPath, modelEncoding, mapping);
+			if (overrideModelPath != null) {
+				Map<String, String> mapping = loadProperties(overrideMappingPath.toURI().toURL());
+				return new DKProModel(aModelName, overrideModelPath, overrideModelEncoding, mapping);
 			}
 
 			File modelFile;
