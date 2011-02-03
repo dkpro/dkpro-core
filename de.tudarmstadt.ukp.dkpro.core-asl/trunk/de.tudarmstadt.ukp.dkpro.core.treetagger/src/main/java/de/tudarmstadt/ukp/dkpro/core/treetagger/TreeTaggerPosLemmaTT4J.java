@@ -180,6 +180,11 @@ public class TreeTaggerPosLemmaTT4J
 	public static class PosModelResolver
 		extends DKProModelResolver
 	{
+		public PosModelResolver()
+		{
+			super(null, null, null);
+		}
+
 		public PosModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
 		{
 			super(aModelPath, aModelEncoding, aMappingPath);
