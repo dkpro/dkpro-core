@@ -56,12 +56,30 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class SnowballStemmer
 	extends FeaturePathAnnotatorBase
 {
-	public static final String MESSAGE_DIGEST = "de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer_Messages";
-	private final static String SNOWBALL_PACKAGE = "org.tartarus.snowball.ext.";
+	private static final String MESSAGE_DIGEST = SnowballStemmer.class.getName()+"_Messages";
+	private static final String SNOWBALL_PACKAGE = "org.tartarus.snowball.ext.";
 
+	/**
+	 * Override the language set in the {@link CAS}.
+	 */
 	public static final String PARAM_LANGUAGE = "Language";
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
+
+	/**
+	 * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
+	 * are lower-cased before being passed to the stemmer. Examples:
+	 *
+	 * <table border="1" cellspacing="0">
+	 * <tr><th></th><th>false (default)</th><th>true</th></tr>
+	 * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
+	 * <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
+	 * <tr><td>educational</td><td>educ</td><td>educ</td></tr>
+	 * </table>
+	 */
+	public static final String PARAM_LOWER_CASE = "LowerCase";
+	@ConfigurationParameter(name = PARAM_LOWER_CASE, mandatory = false, defaultValue="false")
+	protected boolean lowerCase;
 
 	public static final Map<String, String> languages = new HashMap<String, String>();
 	static {
@@ -89,13 +107,6 @@ public class SnowballStemmer
 	protected Set<String> getDefaultPaths()
 	{
 		return Collections.singleton(Token.class.getName());
-	}
-
-	@Override
-	public void initialize(org.apache.uima.UimaContext aContext)
-		throws org.apache.uima.resource.ResourceInitializationException
-	{
-		super.initialize(aContext);
 	}
 
 	@Override
@@ -203,6 +214,11 @@ public class SnowballStemmer
 		// Check for blank text, it makes no sense to add a stem then (and raised an exception)
 		String value = fp.getValue(fs);
 		if (!StringUtils.isBlank(value)) {
+			if (lowerCase) {
+				// Fixme - should use locale/language defined in CAS.
+				value = value.toLowerCase(Locale.US);
+			}
+
 			Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
 			SnowballProgram programm = getSnowballProgram(jcas);
 			programm.setCurrent(value);
