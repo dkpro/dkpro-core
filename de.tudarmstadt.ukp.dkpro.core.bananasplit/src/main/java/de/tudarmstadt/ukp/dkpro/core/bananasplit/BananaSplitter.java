@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,6 +42,15 @@ import de.drni.bananasplit.xmldict.XmlDictionary;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
+/**
+ * Compound splitter based on <a href="http://niels.drni.de/s9y/pages/bananasplit.html"> Banana
+ * Split</a>. The component requires a lemma list (see below).
+ *
+ * @since 1.1.0
+ * @see <a href="http://niels.drni.de/s9y/pages/bananasplit.html">Banana Split homepage</a>
+ * @see <a href="http://niels.drni.de/n3files/bananasplit/igerman98_all.xml.bz2">German lemma list
+ *      in XML format based on ispell word list.</a>
+ */
 public class BananaSplitter
 	extends CasAnnotator_ImplBase
 {
