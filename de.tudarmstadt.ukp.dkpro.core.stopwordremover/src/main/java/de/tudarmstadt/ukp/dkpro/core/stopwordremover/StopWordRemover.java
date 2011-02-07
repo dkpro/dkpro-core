@@ -50,7 +50,6 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -83,7 +82,6 @@ public class StopWordRemover
 	 * <pre>
 	 * StopWord.class.getName()
 	 * Token.class.getName()
-	 * Stem.class.getName()+"/value"
 	 * Lemma.class.getName()+"/value"
 	 * </pre>
 	 */
@@ -113,7 +111,6 @@ public class StopWordRemover
 			paths = new HashSet<String>();
 			paths.add(StopWord.class.getName());
 			paths.add(Token.class.getName());
-			paths.add(Stem.class.getName()+"/value");
 			paths.add(Lemma.class.getName()+"/value");
 		}
 
@@ -210,8 +207,7 @@ public class StopWordRemover
 			if (segments.length > 1) {
 				fp.initialize(segments[1]);
 			}
-			else
-			{
+			else {
 				fp.initialize("");
 			}
 
