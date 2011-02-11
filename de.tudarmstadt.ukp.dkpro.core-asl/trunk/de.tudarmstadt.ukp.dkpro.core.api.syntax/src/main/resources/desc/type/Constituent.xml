@@ -26,6 +26,11 @@
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
           <elementType>uima.tcas.Annotation</elementType>
         </featureDescription>
+        <featureDescription>
+          <name>syntacticFunction</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>

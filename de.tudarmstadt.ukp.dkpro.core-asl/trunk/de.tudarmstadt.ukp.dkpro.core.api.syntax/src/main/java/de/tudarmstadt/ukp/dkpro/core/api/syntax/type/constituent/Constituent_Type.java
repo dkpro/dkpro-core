@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Nov 22 18:16:12 CET 2010
+ * Updated by JCasGen Fri Feb 11 14:39:28 CET 2011
  * @generated */
 public class Constituent_Type extends Annotation_Type {
   /** @generated */
@@ -100,7 +100,7 @@ public class Constituent_Type extends Annotation_Type {
     if (lowLevelTypeChecks)
       return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i);
-	return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i);
+  return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i);
   }
    
   /** @generated */ 
@@ -113,6 +113,24 @@ public class Constituent_Type extends Annotation_Type {
     ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i, v);
   }
  
+ 
+  /** @generated */
+  final Feature casFeat_syntacticFunction;
+  /** @generated */
+  final int     casFeatCode_syntacticFunction;
+  /** @generated */ 
+  public String getSyntacticFunction(int addr) {
+        if (featOkTst && casFeat_syntacticFunction == null)
+      jcas.throwFeatMissing("syntacticFunction", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_syntacticFunction);
+  }
+  /** @generated */    
+  public void setSyntacticFunction(int addr, String v) {
+        if (featOkTst && casFeat_syntacticFunction == null)
+      jcas.throwFeatMissing("syntacticFunction", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    ll_cas.ll_setStringValue(addr, casFeatCode_syntacticFunction, v);}
+    
+  
 
 
 
@@ -133,6 +151,10 @@ public class Constituent_Type extends Annotation_Type {
  
     casFeat_Children = jcas.getRequiredFeatureDE(casType, "Children", "uima.cas.FSArray", featOkTst);
     casFeatCode_Children  = (null == casFeat_Children) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Children).getCode();
+
+ 
+    casFeat_syntacticFunction = jcas.getRequiredFeatureDE(casType, "syntacticFunction", "uima.cas.String", featOkTst);
+    casFeatCode_syntacticFunction  = (null == casFeat_syntacticFunction) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_syntacticFunction).getCode();
 
   }
 }
