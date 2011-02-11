@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MMAXWriter (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+MMAXWriter (DKPro Core ASL 1.1.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ MMAXWriter (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MMAXWriter (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="MMAXWriter (DKPro Core ASL 1.1.0 API)";
     }
 }
 </SCRIPT>
@@ -100,6 +100,21 @@ Class MMAXWriter</H2>
 </PRE>
 
 <P>
+Writes the CAS into a MMAX2 project.
+ The MMAX2 project can then be used to annotate the annotations further.
+ 
+ All the settings (which annotations should be included,
+ how they should be treated in the MMAX2 project, etc.)
+ are to be made in the empty (but fully configured) MMAX2 project that is then
+ filled with the data from the CAS.
+ This requires some knowledge of MMAX2.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>zesch</DD>
+</DL>
 <HR>
 
 <P>

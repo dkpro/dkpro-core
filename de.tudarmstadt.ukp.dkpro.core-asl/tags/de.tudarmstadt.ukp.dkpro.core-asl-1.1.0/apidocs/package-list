@@ -5,6 +5,7 @@ de.tudarmstadt.ukp.dkpro.core.api.segmentation
 de.tudarmstadt.ukp.dkpro.core.bananasplit
 de.tudarmstadt.ukp.dkpro.core.castransformation
 de.tudarmstadt.ukp.dkpro.core.dictionaryannotator
+de.tudarmstadt.ukp.dkpro.core.examples.example1
 de.tudarmstadt.ukp.dkpro.core.io.jwpl
 de.tudarmstadt.ukp.dkpro.core.io.mmax2
 de.tudarmstadt.ukp.dkpro.core.io.pdf
