@@ -12,7 +12,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Nov 22 18:16:12 CET 2010
+ * Updated by JCasGen Fri Feb 11 14:39:28 CET 2011
  * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.syntax/src/main/resources/desc/type/Constituent.xml
  * @generated */
 public class Constituent extends Annotation {
@@ -128,6 +128,24 @@ public class Constituent extends Annotation {
       jcasType.jcas.throwFeatMissing("Children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
     jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Constituent_Type)jcasType).casFeatCode_Children), i);
     jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Constituent_Type)jcasType).casFeatCode_Children), i, jcasType.ll_cas.ll_getFSRef(v));}
+   
+    
+  //*--------------*
+  //* Feature: syntacticFunction
+
+  /** getter for syntacticFunction - gets 
+   * @generated */
+  public String getSyntacticFunction() {
+    if (Constituent_Type.featOkTst && ((Constituent_Type)jcasType).casFeat_syntacticFunction == null)
+      jcasType.jcas.throwFeatMissing("syntacticFunction", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Constituent_Type)jcasType).casFeatCode_syntacticFunction);}
+    
+  /** setter for syntacticFunction - sets  
+   * @generated */
+  public void setSyntacticFunction(String v) {
+    if (Constituent_Type.featOkTst && ((Constituent_Type)jcasType).casFeat_syntacticFunction == null)
+      jcasType.jcas.throwFeatMissing("syntacticFunction", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Constituent_Type)jcasType).casFeatCode_syntacticFunction, v);}    
   }
 
     
