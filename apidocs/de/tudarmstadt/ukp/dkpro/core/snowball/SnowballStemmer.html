@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SnowballStemmer (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+SnowballStemmer (DKPro Core ASL 1.1.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ SnowballStemmer (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SnowballStemmer (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="SnowballStemmer (DKPro Core ASL 1.1.0 API)";
     }
 }
 </SCRIPT>
@@ -108,8 +108,10 @@ Class SnowballStemmer</H2>
 </PRE>
 
 <P>
-UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconfigured by a
- <CODE>FeaturePath</CODE>.
+<p>UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconfigured by a
+ <CODE>FeaturePath</CODE>.</p>
+ <p>If you use this component in a pipeline which uses stop word removal, make sure that it
+ runs after the stop word removal step, so only words that are no stop words are stemmed.</p>
 <P>
 
 <P>
@@ -149,8 +151,8 @@ UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconf
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#MESSAGE_DIGEST">MESSAGE_DIGEST</A></B></CODE>
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#lowerCase">lowerCase</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -161,7 +163,15 @@ UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconf
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#PARAM_LANGUAGE">PARAM_LANGUAGE</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Override the language set in the <CODE>CAS</CODE>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#PARAM_LOWER_CASE">PARAM_LOWER_CASE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Per default the stemmer runs in case-sensitive mode.</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase"><!-- --></A>
@@ -214,14 +224,6 @@ UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconf
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#initialize(org.apache.uima.UimaContext)">initialize</A></B>(org.apache.uima.UimaContext&nbsp;aContext)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
@@ -229,7 +231,7 @@ UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconf
 <TH ALIGN="left"><B>Methods inherited from class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#initializeFeaturePathInfoFrom(de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo, java.lang.String[])">initializeFeaturePathInfoFrom</A>, <A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#process(org.apache.uima.jcas.JCas)">process</A></CODE></TD>
+<TD><CODE><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#initialize(org.apache.uima.UimaContext)">initialize</A>, <A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#initializeFeaturePathInfoFrom(de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo, java.lang.String[])">initializeFeaturePathInfoFrom</A>, <A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#process(org.apache.uima.jcas.JCas)">process</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.JCasAnnotator_ImplBase"><!-- --></A>
@@ -281,21 +283,13 @@ UIMA wrapper for the Snowball stemmer. Annotation types to be stemmed can beconf
 </TR>
 </TABLE>
 
-<A NAME="MESSAGE_DIGEST"><!-- --></A><H3>
-MESSAGE_DIGEST</H3>
-<PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>MESSAGE_DIGEST</B></PRE>
-<DL>
-<DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer.MESSAGE_DIGEST">Constant Field Values</A></DL>
-</DL>
-<HR>
-
 <A NAME="PARAM_LANGUAGE"><!-- --></A><H3>
 PARAM_LANGUAGE</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_LANGUAGE</B></PRE>
 <DL>
+<DD>Override the language set in the <CODE>CAS</CODE>.
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer.PARAM_LANGUAGE">Constant Field Values</A></DL>
 </DL>
@@ -305,6 +299,36 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 language</H3>
 <PRE>
 protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>language</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_LOWER_CASE"><!-- --></A><H3>
+PARAM_LOWER_CASE</H3>
+<PRE>
+public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_LOWER_CASE</B></PRE>
+<DL>
+<DD>Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
+ are lower-cased before being passed to the stemmer. Examples:
+
+ <table border="1" cellspacing="0">
+ <tr><th></th><th>false (default)</th><th>true</th></tr>
+ <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
+ <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
+ <tr><td>educational</td><td>educ</td><td>educ</td></tr>
+ </table>
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer.PARAM_LOWER_CASE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="lowerCase"><!-- --></A><H3>
+lowerCase</H3>
+<PRE>
+protected boolean <B>lowerCase</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -357,23 +381,6 @@ protected <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-e
 </DD>
 <DD><DL>
 </DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="initialize(org.apache.uima.UimaContext)"><!-- --></A><H3>
-initialize</H3>
-<PRE>
-public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;aContext)
-                throws org.apache.uima.resource.ResourceInitializationException</PRE>
-<DL>
-<DD><DL>
-<DT><B>Specified by:</B><DD><CODE>initialize</CODE> in interface <CODE>org.apache.uima.analysis_component.AnalysisComponent</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#initialize(org.apache.uima.UimaContext)">initialize</A></CODE> in class <CODE><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</A></CODE></DL>
-</DD>
-<DD><DL>
-
-<DT><B>Throws:</B>
-<DD><CODE>org.apache.uima.resource.ResourceInitializationException</CODE></DL>
 </DD>
 </DL>
 <HR>

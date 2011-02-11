@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PatternBasedTokenSegmenter (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+PatternBasedTokenSegmenter (DKPro Core ASL 1.1.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ PatternBasedTokenSegmenter (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PatternBasedTokenSegmenter (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="PatternBasedTokenSegmenter (DKPro Core ASL 1.1.0 API)";
     }
 }
 </SCRIPT>
@@ -55,7 +55,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/tokit/ParagraphSplitter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/tokit/PatternBasedTokenSegmenter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="PatternBasedTokenSegmenter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -107,8 +107,10 @@ Class PatternBasedTokenSegmenter</H2>
 </PRE>
 
 <P>
-Split up existing tokens again at particular split-chars. The split-characters are not added
- as Tokens.
+Split up existing tokens again at particular split-chars.
+ The prefix states whether the split chars should be added as separate <CODE>Tokens</CODE>.
+ If the <CODE>INCLUDE_PREFIX</CODE> precedes the split pattern, the pattern is included.
+ Consequently, patterns following the <CODE>EXCLUDE_PREFIX</CODE>, will not be added as a Token.
 <P>
 
 <P>
@@ -381,7 +383,7 @@ public void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas)
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/tokit/ParagraphSplitter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/tokit/PatternBasedTokenSegmenter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="PatternBasedTokenSegmenter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
