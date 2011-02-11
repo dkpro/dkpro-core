@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
+Index (DKPro Core GPL 1.1.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Index (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)";
+        parent.document.title="Index (DKPro Core GPL 1.1.0 API)";
     }
 }
 </SCRIPT>
@@ -228,7 +228,8 @@ Method in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmst
 <DL>
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_ANNOTATIONTYPE_TO_PARSE"><B>PARAM_ANNOTATIONTYPE_TO_PARSE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
-<DD>&nbsp;
+<DD>This parameter can be used to override the standard behavior which
+ uses the <i>Sentence</i> annotation as the basic unit for parsing.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_CONSTITUENT_TAGS"><B>PARAM_CREATE_CONSTITUENT_TAGS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
 <DD>Sets whether to create or not to create constituent tags.
@@ -237,13 +238,15 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_DEPENDENCY_TAGS"><B>PARAM_CREATE_DEPENDENCY_TAGS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
-<DD>&nbsp;
+<DD>Sets whether to create or not to create dependency annotations.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_LEMMAS"><B>PARAM_CREATE_LEMMAS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
 <DD>Sets whether to create or not to create Lemma tags.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_PENN_TREE_STRING"><B>PARAM_CREATE_PENN_TREE_STRING</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
-<DD>&nbsp;
+<DD>If this paramter is set to true, each sentence is annotated with a
+ PennTree-Annotation, containing the whole parse tree in Prenn Treebank
+ style format.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_POS_TAGS"><B>PARAM_CREATE_POS_TAGS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
 <DD>Sets whether to create or not to create POS tags.
@@ -252,7 +255,7 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_LANGUAGE_PACK"><B>PARAM_LANGUAGE_PACK</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser</A>
-<DD>&nbsp;
+<DD>Defines the TreebankLanguagePack that the parser should use.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html#PARAM_MODEL"><B>PARAM_MODEL</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.stanfordnlp.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordNamedEntityRecognizer</A>
 <DD>Defines the NER classifier model to use.

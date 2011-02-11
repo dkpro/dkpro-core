@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StanfordParser (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
+StanfordParser (DKPro Core GPL 1.1.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ StanfordParser (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordParser (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)";
+        parent.document.title="StanfordParser (DKPro Core GPL 1.1.0 API)";
     }
 }
 </SCRIPT>
@@ -128,7 +128,8 @@ Class StanfordParser</H2>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_ANNOTATIONTYPE_TO_PARSE">PARAM_ANNOTATIONTYPE_TO_PARSE</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This parameter can be used to override the standard behavior which
+ uses the <i>Sentence</i> annotation as the basic unit for parsing.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -152,7 +153,7 @@ Class StanfordParser</H2>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_DEPENDENCY_TAGS">PARAM_CREATE_DEPENDENCY_TAGS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether to create or not to create dependency annotations.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -168,7 +169,9 @@ Class StanfordParser</H2>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_PENN_TREE_STRING">PARAM_CREATE_PENN_TREE_STRING</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If this paramter is set to true, each sentence is annotated with a
+ PennTree-Annotation, containing the whole parse tree in Prenn Treebank
+ style format.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -184,7 +187,7 @@ Class StanfordParser</H2>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_LANGUAGE_PACK">PARAM_LANGUAGE_PACK</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defines the TreebankLanguagePack that the parser should use.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -317,6 +320,9 @@ PARAM_CREATE_DEPENDENCY_TAGS</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_CREATE_DEPENDENCY_TAGS</B></PRE>
 <DL>
+<DD>Sets whether to create or not to create dependency annotations. <br/>
+ Default: <code>true</code>
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS">Constant Field Values</A></DL>
 </DL>
@@ -328,7 +334,8 @@ PARAM_CREATE_CONSTITUENT_TAGS</H3>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_CREATE_CONSTITUENT_TAGS</B></PRE>
 <DL>
 <DD>Sets whether to create or not to create constituent tags. This is
- required for POS-tagging and lemmatization. Default: true
+ required for POS-tagging and lemmatization.<br/>
+ Default: <code>true</code>
 <P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS">Constant Field Values</A></DL>
@@ -350,6 +357,10 @@ PARAM_LANGUAGE_PACK</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_LANGUAGE_PACK</B></PRE>
 <DL>
+<DD>Defines the TreebankLanguagePack that the parser should use.<br/>
+ The right setting depends on the model you are using. It usually does not have to be changed.<br/>
+ Default: <code>edu.stanford.nlp.trees.PennTreebankLanguagePack</code>
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_LANGUAGE_PACK">Constant Field Values</A></DL>
 </DL>
@@ -360,6 +371,11 @@ PARAM_CREATE_PENN_TREE_STRING</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_CREATE_PENN_TREE_STRING</B></PRE>
 <DL>
+<DD>If this paramter is set to true, each sentence is annotated with a
+ PennTree-Annotation, containing the whole parse tree in Prenn Treebank
+ style format.<br/>
+ Default: <code>false</code>
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CREATE_PENN_TREE_STRING">Constant Field Values</A></DL>
 </DL>
@@ -370,6 +386,12 @@ PARAM_ANNOTATIONTYPE_TO_PARSE</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_ANNOTATIONTYPE_TO_PARSE</B></PRE>
 <DL>
+<DD>This parameter can be used to override the standard behavior which
+ uses the <i>Sentence</i> annotation as the basic unit for parsing.<br/>
+ If the parameter is set with the name of an annotation type <i>x</i>, the parser
+ will no longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.<br/>
+ Default: <code>null</code>
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_ANNOTATIONTYPE_TO_PARSE">Constant Field Values</A></DL>
 </DL>
@@ -381,7 +403,8 @@ PARAM_CREATE_POS_TAGS</H3>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_CREATE_POS_TAGS</B></PRE>
 <DL>
 <DD>Sets whether to create or not to create POS tags. The creation of
- constituent tags must be turned on for this to work. Default: true
+ constituent tags must be turned on for this to work.<br/>
+ Default: <code>true</code>
 <P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CREATE_POS_TAGS">Constant Field Values</A></DL>
