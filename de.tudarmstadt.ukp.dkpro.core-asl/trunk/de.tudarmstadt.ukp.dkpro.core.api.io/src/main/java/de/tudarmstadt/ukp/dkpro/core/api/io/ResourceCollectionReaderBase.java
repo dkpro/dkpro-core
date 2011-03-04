@@ -53,7 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 /**
  * Base class for collection readers that plan to access resources on the file system or in the
  * classpath or basically anywhere where Spring can resolve them. ANT-style patterns are supported
- * to include or exclude particular resources.
+ * to include or exclude particular resources. 
  * <p>
  * Example of a hypothetic <code>FooReader</code> that should read only files ending in
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
@@ -64,6 +64,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  *     FileSetCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]foodata&#47;**&#47;*.foo" });
  * </pre>
  *
+ * @see <a href="http://ant.apache.org/manual/dirtasks.html#patterns">Documentation of <b>ant</b> patterns</a>
+ * 
  * @author Richard Eckart de Castilho
  * @since 1.0.6
  */
@@ -83,7 +85,7 @@ public abstract class ResourceCollectionReaderBase
 
 	/**
 	 * Name of optional configuration parameter that contains the language of
-	 * the documents in the input directory. If specified this information will
+	 * the documents in the input directory. If specified, this information will
 	 * be added to the CAS.
 	 */
 	public static final String PARAM_LANGUAGE = "Language";
