@@ -46,6 +46,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
+ * Writes an approximation of the content of a textual CAS as an inline XML file. Optionally applies
+ * an XSLT stylesheet.
+ * <p>
+ * Note this component inherits the restrictions from {@link CasToInlineXml}:
+ *
+ * <ul>
+ * <li>Features whose values are FeatureStructures are not represented.</li>
+ * <li>Feature values which are strings longer than 64 characters are truncated.</li>
+ * <li>Feature values which are arrays of primitives are represented by strings that look like [
+ * xxx, xxx ]</li>
+ * <li>The Subject of analysis is presumed to be a text string.</li>
+ * <li>Some characters in the document's Subject-of-analysis are replaced by blanks, because the
+ * characters aren't valid in xml documents.</li>
+ * <li>It doesn't work for annotations which are overlapping, because these cannot be properly
+ * represented as properly - nested XML.</li>
+ * </ul>
+ *
  * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
