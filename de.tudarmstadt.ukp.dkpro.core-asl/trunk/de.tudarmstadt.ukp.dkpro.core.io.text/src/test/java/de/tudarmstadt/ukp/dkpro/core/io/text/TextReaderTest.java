@@ -23,6 +23,7 @@ import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemD
 
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
 
@@ -54,4 +55,28 @@ public class TextReaderTest
 					|| "This is a second test.".equals(jcas.getDocumentText()));
 		}
 	}
+	
+	@Ignore
+	@Test
+    public void fileSystemReaderTest2()
+        throws Exception
+    {
+        CollectionReader reader = createCollectionReader(TextReader.class,
+                createTypeSystemDescription(),
+                ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
+
+        for (JCas jcas : new JCasIterable(reader)) {
+            DocumentMetaData md = DocumentMetaData.get(jcas);
+            System.out.println(md.getDocumentUri());
+
+            assertTrue(
+                    !"file:src/test/resources/texts/test1.txt".equals(md.getDocumentUri())
+                    || "This is a test.".equals(jcas.getDocumentText()));
+
+            assertTrue(
+                    !"file:src/test/resources/texts/test2.txt".equals(md.getDocumentUri())
+                    || "This is a second test.".equals(jcas.getDocumentText()));
+        }
+    }
 }
