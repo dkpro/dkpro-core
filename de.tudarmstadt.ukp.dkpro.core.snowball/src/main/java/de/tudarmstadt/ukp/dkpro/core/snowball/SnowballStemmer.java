@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.reflect.MethodUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.FSIterator;
@@ -224,7 +225,18 @@ public class SnowballStemmer
 			Stem stemAnnot = new Stem(jcas, fs.getBegin(), fs.getEnd());
 			SnowballProgram programm = getSnowballProgram(jcas);
 			programm.setCurrent(value);
-			programm.stem();
+
+			try {
+				// The patched snowball from Lucene has this as a method on SnowballProgram
+				// but if we have some other snowball also in the classpath, Java might
+				// choose to use the other. So to be safe, we use a reflection here.
+				// -- REC, 2011-04-17
+				MethodUtils.invokeMethod(programm, "stem", null);
+			}
+			catch (Exception e) {
+				throw new AnalysisEngineProcessException(e);
+			}
+
 			stemAnnot.setValue(programm.getCurrent());
 			stemAnnot.addToIndexes(jcas);
 
