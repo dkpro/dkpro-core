@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
+import static org.apache.commons.io.FileUtils.forceMkdir;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.File;
@@ -39,10 +40,29 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 public class XmiWriter
 	extends JCasConsumer_ImplBase
 {
+	/**
+	 * The folder to write the generated XMI files to.
+	 */
 	public static final String PARAM_PATH = "Path";
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=true)
 	private File path;
 
+	/**
+	 * Location to write the type system to. If this is not set, a file called typesystem.xml will
+	 * be written to the XMI output path. If this is set, it is expected to be a file relative
+	 * to the current work directory or an absolute file.
+	 * <br>
+	 * If this parameter is set, the {@link #PARAM_COMPRESS} parameter has no effect on the
+	 * type system. Instead, if the file name ends in ".gz", the file will be compressed,
+	 * otherwise not.
+	 */
+	public static final String PARAM_TYPE_SYSTEM_FILE = "TypeSystemFile";
+	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
+	private File typeSystemFile;
+
+    /**
+     * Enabled/disable gzip compression. If this is set, all files will have the ".gz" ending.
+     */
     public static final String PARAM_COMPRESS = "Compress";
     @ConfigurationParameter(name=PARAM_COMPRESS, mandatory=true, defaultValue="false")
     private boolean compress;
@@ -77,6 +97,7 @@ public class XmiWriter
 			File docOut;
 			File typeOut;
 
+			// Set names accoring to whether compression is used or not
 			if (compress) {
 				docOut = new File(path, relativeDocumentPath+".xmi.gz").getAbsoluteFile();
 				typeOut = new File(path, "typesystem.xml.gz").getAbsoluteFile();
@@ -86,14 +107,29 @@ public class XmiWriter
 				typeOut = new File(path, "typesystem.xml").getAbsoluteFile();
 			}
 
-			docOut.getParentFile().mkdirs();
-			typeOut.getParentFile().mkdirs();
 
+			// Create parent folders for XMI file and set up stream
+			if (docOut.getParentFile() != null) {
+				forceMkdir(docOut.getParentFile());
+			}
 			docOS = new FileOutputStream(docOut);
-			typeOS = new FileOutputStream(typeOut);
-
 			if (compress) {
 				docOS = new GZIPOutputStream(docOS);
+			}
+
+			// Set up writing the type system
+			if (typeSystemFile != null) {
+				if (typeSystemFile.getParentFile() != null) {
+					forceMkdir(typeSystemFile.getParentFile());
+				}
+				typeOut = typeSystemFile;
+				typeOS = new FileOutputStream(typeSystemFile);
+			}
+			else {
+				typeOut.getParentFile().mkdirs();
+				typeOS = new FileOutputStream(typeOut);
+			}
+			if (typeOut.getName().toLowerCase().endsWith(".gz")) {
 				typeOS = new GZIPOutputStream(typeOS);
 			}
 
