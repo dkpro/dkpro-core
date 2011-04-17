@@ -12,6 +12,7 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.uimafit.util.CasUtil.getType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +25,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -98,21 +100,20 @@ public class StanfordNamedEntityRecognizer
 			// create the necessary objects and methods
 			String neTypeName = NEPACKAGE + neType;
 
-			Type type = null;
+			Type type;
 			try {
-				type = aJCas.getTypeSystem().getType(neTypeName);
-
-				NamedEntity neAnno = (NamedEntity) aJCas.getCas()
-						.createAnnotation(type, begin, end);
-
-				neAnno.setValue(documentText.substring(begin, end));
-				neAnno.addToIndexes();
+				type = getType(aJCas.getCas(), neTypeName);
 			}
-			catch (Exception e) {
-				throw new AnalysisEngineProcessException(new IllegalStateException(
-						"Unknown entity type [" + neType + "]"));
+			catch (IllegalArgumentException e) {
+				getContext().getLogger().log(Level.INFO, "Unknown type: "+neType);
+				continue;
 			}
 
+			NamedEntity neAnno = (NamedEntity) aJCas.getCas()
+					.createAnnotation(type, begin, end);
+
+			neAnno.setValue(documentText.substring(begin, end));
+			neAnno.addToIndexes();
 		}
 	}
 
