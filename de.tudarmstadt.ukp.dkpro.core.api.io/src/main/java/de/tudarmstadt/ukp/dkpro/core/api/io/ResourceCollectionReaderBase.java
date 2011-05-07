@@ -299,6 +299,10 @@ public abstract class ResourceCollectionReaderBase
 		}
 	}
 
+	/**
+	 * Initialize the {@DocumentMetaData}. This must be called before setting the
+	 * document text, otherwise the end feature of this annotation will not be set correctly.
+	 */
 	protected void initCas(CAS aCas, Resource aResource)
 	{
 		try {
