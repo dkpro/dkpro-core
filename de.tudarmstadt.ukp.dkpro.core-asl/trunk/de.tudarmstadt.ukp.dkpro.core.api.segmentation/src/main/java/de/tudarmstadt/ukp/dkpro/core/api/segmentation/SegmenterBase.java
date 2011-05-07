@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation;
 
 import static org.apache.uima.util.Level.WARNING;
+import static org.uimafit.util.CasUtil.getType;
+import static org.uimafit.util.CasUtil.select;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -27,8 +29,8 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.FSIterator;
-import org.apache.uima.cas.text.AnnotationIndex;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasAnnotator_ImplBase;
@@ -117,18 +119,14 @@ extends JCasAnnotator_ImplBase
 				throw new AnalysisEngineProcessException(new IllegalStateException(
 				"Strict zoning cannot use multiple zone types"));
 			} else {
-				AnnotationIndex zoneIndex = jcas.getAnnotationIndex(
-						jcas.getTypeSystem().getType(zones[0]));
-				FSIterator zoneIterator = zoneIndex.iterator();
 				AtomicInteger begin = new AtomicInteger();
 				AtomicInteger end = new AtomicInteger();
-				while (zoneIterator.hasNext()) {
-					Annotation zone = (Annotation) zoneIterator.next();
+				CAS cas = jcas.getCas();
+				for (AnnotationFS zone : select(cas, getType(cas, zones[0]))) {
 					begin.set(zone.getBegin());
 					end.set(zone.getEnd());
 					limit(text, begin, end, true);
-					process(jcas, text.substring(begin.get(), end.get()), begin
-							.get());
+					process(jcas, text.substring(begin.get(), end.get()), begin.get());
 				}
 			}
 		}
@@ -144,13 +142,10 @@ extends JCasAnnotator_ImplBase
 				// Iterate over all the zone indices and create sentences respecting
 				// the zone boundaries. If the zoneTypes overlap... well... bad luck!
 				for (String zoneName : zones) {
-					AnnotationIndex zoneIndex = jcas.getAnnotationIndex(
-							jcas.getTypeSystem().getType(zoneName));
 					AtomicInteger begin = new AtomicInteger();
 					AtomicInteger end = new AtomicInteger();
-					FSIterator zoneIterator = zoneIndex.iterator();
-					while (zoneIterator.hasNext()) {
-						Annotation zone = (Annotation) zoneIterator.next();
+					CAS cas = jcas.getCas();
+					for (AnnotationFS zone : select(cas, getType(cas, zoneName))) {
 						begin.set(zone.getBegin());
 						end.set(zone.getEnd());
 						limit(text, begin, end, false);
@@ -207,10 +202,10 @@ extends JCasAnnotator_ImplBase
 	protected Annotation createSentence(final JCas aJCas, final int aBegin,
 			final int aEnd)
 	{
-		Sentence seg = new Sentence(aJCas, aBegin, aEnd);
-
-		trim(seg);
-		if (!isEmpty(seg) && isCreateSentences()) {
+		int[] span = new int[] { aBegin, aEnd };
+		trim(aJCas.getDocumentText(), span);
+		if (!isEmpty(span[0], span[1]) && isCreateSentences()) {
+			Sentence seg = new Sentence(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
 			sentenceCount++;
 			tokenCount = 0;
@@ -234,10 +229,10 @@ extends JCasAnnotator_ImplBase
 	protected Annotation createToken(final JCas aJCas, final int aBegin,
 			final int aEnd, final int aIndex)
 	{
-		Annotation seg = new Token(aJCas, aBegin, aEnd);
-
-		trim(seg);
-		if (!isEmpty(seg) && isCreateTokens()) {
+		int[] span = new int[] { aBegin, aEnd };
+		trim(aJCas.getDocumentText(), span);
+		if (!isEmpty(span[0], span[1]) && isCreateTokens()) {
+			Annotation seg = new Token(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
 			return seg;
 		}
@@ -256,12 +251,12 @@ extends JCasAnnotator_ImplBase
 	 * @return True if the length of the trimmed annotation is > 0
 	 * @throws IOException
 	 */
-	public void trim(Annotation a)
+	public void trim(String aText, int[] aSpan)
 	{
-		int begin = a.getBegin();
-		int end = a.getEnd()-1;
+		int begin = aSpan[0];
+		int end = aSpan[1]-1;
 
-		String data = a.getCAS().getDocumentText();
+		String data = aText;
 		while (
 				(begin < (data.length()-1))
 				&& trimChar(data.charAt(begin))
@@ -277,13 +272,13 @@ extends JCasAnnotator_ImplBase
 
 		end++;
 
-		a.setBegin(begin);
-		a.setEnd(end);
+		aSpan[0] = begin;
+		aSpan[1] = end;
 	}
 
-	public boolean isEmpty(Annotation a)
+	public boolean isEmpty(int aBegin, int aEnd)
 	{
-		return a.getBegin() > a.getEnd();
+		return aBegin > aEnd;
 	}
 
 	public boolean trimChar(final char aChar)
