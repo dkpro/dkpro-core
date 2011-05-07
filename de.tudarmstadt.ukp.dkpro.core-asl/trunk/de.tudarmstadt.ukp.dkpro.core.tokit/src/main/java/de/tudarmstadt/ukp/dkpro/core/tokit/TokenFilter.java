@@ -18,7 +18,7 @@
 
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,11 +38,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TokenFilter
 	extends JCasAnnotator_ImplBase
 {
-    
-	/** 
+
+	/**
 	 * Certain components e.g. TreeTagger cannot handle very long tokens.
 	 * Thus, we filter any tokens longer than MAX_TOKEN_LENGTH.
-	 * 
+	 *
 	 * Any value less than 1 will not remove any tokens, but leave the tokens untouched.
 	 */
 	public static final String PARAM_MAX_TOKEN_LENGTH = "MaxTokenLengthFilterLongTokens";
@@ -56,9 +56,9 @@ public class TokenFilter
 	    if (maxTokenLength < 1) {
 	        return;
 	    }
-	    
+
 		Collection<Token> toRemove = new ArrayList<Token>();
-		for (Token t : iterate(aJCas, Token.class)) {
+		for (Token t : select(aJCas, Token.class)) {
 			if (t.getCoveredText().length() > maxTokenLength) {
 			    toRemove.add(t);
 			}
