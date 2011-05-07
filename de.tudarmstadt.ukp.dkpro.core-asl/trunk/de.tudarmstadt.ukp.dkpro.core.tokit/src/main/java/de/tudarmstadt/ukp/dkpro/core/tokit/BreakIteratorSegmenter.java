@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -51,9 +51,16 @@ extends SegmenterBase
 		int cur = bi.next();
 		while (cur != BreakIterator.DONE) {
 			cur += zoneBegin;
-			Annotation segment = createSentence(aJCas, last, cur);
-			if (segment != null) {
-				processSentence(aJCas, segment.getCoveredText(), segment.getBegin());
+			if (isCreateSentences()) {
+				Annotation segment = createSentence(aJCas, last, cur);
+				if (segment != null) {
+					processSentence(aJCas, segment.getCoveredText(), segment.getBegin());
+				}
+			}
+			else {
+				int[] span = new int[] { last, cur };
+				trim(aJCas.getDocumentText(), span);
+				processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]), span[0]);
 			}
 			last = cur;
 			cur = bi.next();
