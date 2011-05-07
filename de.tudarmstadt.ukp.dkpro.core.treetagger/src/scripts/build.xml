@@ -40,17 +40,20 @@
 				<include name="**/bin/**/*"/>
 			</fileset>
 		</jar>
-		<model-lang-jar language="en"/>
-		<model-lang-jar language="de"/>
-		<model-lang-jar language="nl"/>
 		<model-lang-jar language="bg"/>
+		<model-lang-jar language="de"/>
+		<model-lang-jar language="en"/>
+		<model-lang-jar language="es"/>
+		<model-lang-jar language="et"/>
+		<model-lang-jar language="fr"/>
 		<model-lang-jar language="gr"/>
+		<model-lang-jar language="gz"/>
 		<model-lang-jar language="it"/>
+		<model-lang-jar language="la"/>
+		<model-lang-jar language="nl"/>
+		<model-lang-jar language="pt"/>
 		<model-lang-jar language="ru"/>
 		<model-lang-jar language="sw"/>
-		<model-lang-jar language="es"/>
-		<model-lang-jar language="pt"/>
-		<model-lang-jar language="gz"/>
 		<model-lang-jar language="zh"/>
 		<antcall target="jar-notice"/>
 	</target>
@@ -164,7 +167,7 @@
 			platform="windows-x86_64" file="tree-tagger.exe" md5="72a5489fe197b0173ea476e2224a6ad6"/>
 	</target>
 	
-	<target name="install-all-models" depends="en, de, nl, bg, fr, gr, it, ru, sw, es, pt, gz, zh"/>
+	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, it, ru, sw, es, pt, gz, zh"/>
 	
 	<target name="en">
 		<property name="version.en" value="2010111500"/>
@@ -187,23 +190,23 @@
 	</target>
 
 	<target name="de">
-		<property name="version.de" value="2010111500"/>
+		<property name="version.de" value="2011042900"/>
 		
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-3.2.bin.gz"
     		type="tagger" endianness="big-endian" language="de" encoding="ISO-8859-1"
-    		md5="2d25051d9dabc362fad555f6e9c42d7b"/>
+    		md5="6618dd26e4974193ae50fbed0888666a"/>
 
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="de" encoding="ISO-8859-1"
-    		md5="bac5b3873e6488ffc2abae67345baba9"/>
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-linux-3.2-utf8.bin.gz"
+    		type="tagger" endianness="little-endian" language="de" encoding="UTF-8"
+    		md5="acbfeaafdcfcc07cbb1e9c396757934c"/>
 
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-3.1.bin.gz"
     		type="chunker" endianness="big-endian" language="de" encoding="ISO-8859-1"
     		md5="2a07ffa062165557ea99f4fcdf4303a9"/>
 
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-linux-3.1.bin.gz"
-    		type="chunker" endianness="little-endian" language="de" encoding="ISO-8859-1"
-    		md5="3434dffd4681607ab467af062d7c7a94"/>
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-linux-3.2-utf8.bin.gz"
+    		type="chunker" endianness="little-endian" language="de" encoding="UTF-8"
+    		md5="56ea6ac618bc21d28929a85a6964ff65"/>
 	</target>
 	
 	<target name="nl">
@@ -247,11 +250,11 @@
 	</target>
 	
 	<target name="gr">
-		<property name="version.gr" value="2010111500"/>
+		<property name="version.gr" value="2011042900"/>
 		
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/greek-par-linux-3.2.bin.gz"
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/greek-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="gr" encoding="ISO-8859-7" 
-    		md5="c8f86c16a638bcae19dd78937f4aa6f1"/>
+    		md5="a66e844856586fc77893f735c765acba"/>
 	</target>
 	
 	<target name="it">
@@ -282,6 +285,22 @@
     		md5="0df5f70b0cc81a3b437a46a9e0a3d71b"/>
 	</target>
 
+	<target name="et">
+		<property name="version.et" value="2011012400"/>
+		
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/estonian-par-linux-3.2.bin.gz"
+    		type="tagger" endianness="little-endian" language="et" encoding="UTF-8"
+    		md5="4a98b412e36afefbc204fca9e561f5cb"/>
+	</target>
+
+	<target name="la">
+		<property name="version.la" value="2011050700"/>
+		
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/latin-par-linux-3.2.bin.gz"
+    		type="tagger" endianness="little-endian" language="la" encoding="ISO-8859-1"
+    		md5="f959f8633ef842f069f0331ad19dc8b4"/>
+	</target>
+	
 	<target name="es">
 		<property name="version.es" value="2010111500"/>
 		
@@ -338,6 +357,7 @@
 		<attribute name="file"/>
 		<attribute name="md5"/>
 		<attribute name="prop.verify.md5" default="verify.md5.@{language}.@{type}.@{endianness}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{language}.@{type}.@{endianness}"/>
 		<sequential>
 			<fail unless="outputDir">No output directory set.</fail>
 	    	<get src="@{url}" dest="${outputDir}/lib/temp-model-archive.tar.gz"/>
@@ -362,10 +382,16 @@
 			-->
 			
 			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{prop.verify.md5.actual}"/>
 			<condition property="checksum.mismatch">
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
-			<fail if="checksum.mismatch">MD5 checksum mismatch for @{language}-@{type}-@{endianness}.par. Please verify the checksum and if necessary update this script.</fail>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for [@{language}-@{type}-@{endianness}.par]. 
+Please verify the checksum and if necessary update this script. 
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
 			
 			<generate-model-properties url="@{url}" type="@{type}" endianness="@{endianness}"
 				language="@{language}" encoding="@{encoding}"/>
@@ -380,6 +406,7 @@
 		<attribute name="encoding"/>
 		<attribute name="md5"/>
 		<attribute name="prop.verify.md5" default="verify.md5.@{language}.@{type}.@{endianness}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{language}.@{type}.@{endianness}"/>
 		<sequential>
 			<fail unless="outputDir">No output directory set.</fail>
 	    	<mkdir dir="${outputDir}/lib"/>
@@ -401,10 +428,16 @@
 			-->
 			
 			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{prop.verify.md5.actual}"/>
 			<condition property="checksum.mismatch">
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
-			<fail if="checksum.mismatch">MD5 checksum mismatch for @{language}-@{type}-@{endianness}.par. Please verify the checksum and if necessary update this script.</fail>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for [@{language}-@{type}-@{endianness}.par]. 
+Please verify the checksum and if necessary update this script. 
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
 			
 			<generate-model-properties url="@{url}" type="@{type}" endianness="@{endianness}" 
 				language="@{language}" encoding="@{encoding}"/>
@@ -449,9 +482,10 @@
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
 			<fail if="checksum.mismatch">
-MD5 checksum mismatch for @{platform}/@{file}. 
+MD5 checksum mismatch for [@{platform}/@{file}]. 
 Please verify the checksum and if necessary update this script. 
-Expected @{md5} but actual was ${@{prop.verify.md5.actual}}.
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
 			</fail>
 			
 			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
@@ -465,6 +499,7 @@ Expected @{md5} but actual was ${@{prop.verify.md5.actual}}.
 		<attribute name="file"/>
 		<attribute name="md5"/>
 		<attribute name="prop.verify.md5" default="verify.md5.@{platform}.@{file}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{platform}.@{file}"/>
 		<sequential>
 			<fail unless="outputDir">No output directory set.</fail>
 	    	<mkdir dir="${outputDir}/bin/@{platform}"/>
@@ -489,10 +524,16 @@ Expected @{md5} but actual was ${@{prop.verify.md5.actual}}.
 			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip"/>
 			
 			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
 			<condition property="checksum.mismatch">
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
-			<fail if="checksum.mismatch">MD5 checksum mismatch for @{platform}/@{file}. Please verify the checksum and if necessary update this script.</fail>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for [@{platform}/@{file}]. 
+Please verify the checksum and if necessary update this script. 
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
 
 			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
 			<echo>Installed executable for @{platform} systems</echo>
