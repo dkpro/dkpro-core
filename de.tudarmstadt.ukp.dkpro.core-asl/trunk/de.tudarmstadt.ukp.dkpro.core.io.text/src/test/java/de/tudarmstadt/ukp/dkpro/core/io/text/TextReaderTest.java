@@ -17,14 +17,22 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import static org.uimafit.util.JCasUtil.select;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.DocumentAnnotation;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
+import org.uimafit.component.xwriter.XWriter;
 import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -42,9 +50,14 @@ public class TextReaderTest
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
+        AnalysisEngine writer = createPrimitive(XWriter.class,
+        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
+
 		for (JCas jcas : new JCasIterable(reader)) {
 			DocumentMetaData md = DocumentMetaData.get(jcas);
 			System.out.println(md.getDocumentUri());
+
+            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
 
 			assertTrue(
 					!"file:src/test/resources/texts/test1.txt".equals(md.getDocumentUri()) || (
@@ -55,9 +68,10 @@ public class TextReaderTest
 					!"file:src/test/resources/texts/test2.txt".equals(md.getDocumentUri())
 					|| "This is a second test.".equals(jcas.getDocumentText()));
 
+            writer.process(jcas);
 		}
 	}
-	
+
 	@Ignore
 	@Test
     public void fileSystemReaderTest2()
@@ -68,9 +82,14 @@ public class TextReaderTest
                 ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
+        AnalysisEngine writer = createPrimitive(XWriter.class,
+        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
+
         for (JCas jcas : new JCasIterable(reader)) {
             DocumentMetaData md = DocumentMetaData.get(jcas);
             System.out.println(md.getDocumentUri());
+
+            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
 
             assertTrue(
                     !"file:src/test/resources/texts/test1.txt".equals(md.getDocumentUri())
@@ -79,6 +98,10 @@ public class TextReaderTest
             assertTrue(
                     !"file:src/test/resources/texts/test2.txt".equals(md.getDocumentUri())
                     || "This is a second test.".equals(jcas.getDocumentText()));
+
+            writer.process(jcas);
         }
     }
+
+	@Rule public TestName name = new TestName();
 }
