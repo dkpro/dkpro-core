@@ -84,6 +84,11 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name=PARAM_TAG_MAPPING_PATH, mandatory=false)
 	protected File tagMappingPath;
 
+	public static final String PARAM_INTERN_STRINGS = "InternStrings";
+	@ConfigurationParameter(name=PARAM_INTERN_STRINGS, mandatory=false, defaultValue="true")
+	private boolean internStrings;
+
+
 	private Set<String> missingTags;
 
 	@Override
@@ -124,6 +129,11 @@ public abstract class TreeTaggerTT4JBase<T>
 	protected boolean isPerformanceMode()
 	{
 		return performanceMode;
+	}
+
+	public boolean isInternStrings()
+	{
+		return internStrings;
 	}
 
 	protected abstract TokenAdapter<T> getAdapter()

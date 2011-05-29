@@ -106,18 +106,21 @@ public class TreeTaggerPosLemmaTT4J
 						String aLemma)
 				{
 					synchronized (aCas) {
+
 						// Add the Part of Speech
 						Type posTag = getTagType((DKProModel) treetagger.getModel(), aPos, ts);
 						AnnotationFS posAnno = aCas.createAnnotation(
 								posTag, aToken.getBegin(), aToken.getEnd());
-						posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"), aPos);
+						posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
+								isInternStrings() ? aPos.intern() : aPos);
 						pos[count.get()] = posAnno;
 
 						// Add the lemma
 						AnnotationFS lemmaAnno = aCas.createAnnotation(
 								lemmaTag, aToken.getBegin(), aToken.getEnd());
 						if (aLemma != null) {
-							lemmaAnno.setStringValue(lemmaValue, aLemma);
+							lemmaAnno.setStringValue(lemmaValue,
+									isInternStrings() ? aLemma.intern() : aLemma);
 						}
 						else {
 							lemmaAnno.setStringValue(lemmaValue, aToken.getCoveredText());
