@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,20 +17,25 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
+import static org.apache.commons.lang.StringUtils.repeat;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.cas.FSIndex;
-import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Assume;
+import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.uimafit.testing.factory.TokenBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -40,85 +45,95 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public
 class TreeTaggerPosLemmaTT4JTest
 {
+	@Before
+	public void initTrace()
 	{
-		System.setProperty(TreeTaggerWrapper.class.getName()+".TRACE", "true");
+		TreeTaggerWrapper.TRACE = true;
 	}
 
-    @Test
-    public
-    void treeTaggerAnnotatorEnglishTest()
-    throws Exception
-    {
-        runEnglishTest();
-        runEnglishTest2();
+	@Test
+	public void treeTaggerAnnotatorEnglishTest()
+		throws Exception
+	{
+        runTest("en", "This is a test .",
+				new String[] { "this", "be",  "a",   "test", "."    },
+				new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
+				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+
+        runTest("en", "A neural net .",
+        		new String[] { "a",   "neural", "net", "."    },
+        		new String[] { "DT",  "JJ",     "NN",  "SENT" },
+        		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+
+        runTest("en", "John is purchasing oranges .",
+        		new String[] { "John", "be",  "purchase", "orange", "."    },
+        		new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
+        		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
 
-    @Test
-    public
-    void treeTaggerAnnotatorGermanTest()
-    throws Exception
+	@Test
+	public void treeTaggerAnnotatorGermanTest()
+		throws Exception
     {
-        runGermanTest();
+        runTest("de", "Das ist ein Test .",
+        		new String[] { "d",   "sein",  "ein", "Test", "."    },
+        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
 
-    private
-    void runEnglishTest()
-    throws Exception
+	@Test
+	@Ignore("Platform specific")
+	public void testOddCharacters()
+		throws Exception
     {
-        runTest(
-        		"This is a test .",
-        		new String[] { "this", "be",  "a",   "test", "."    },
-        		new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
-        		new String[] { "ART",  "V",   "ART", "NN",   "PUNC" },
-        		"en");
+        runTest("en", "² § ¶ § °",
+        		new String[] { "²",  "§",   "¶",  "§",   "°"   },
+        		new String[] { "NN", "SYM", "NN", "SYM", "SYM" },
+        		new String[] { "NN", "O",   "NN", "O",   "O"   });
     }
 
-    /**
-     * Generate a very large document and test it.
-     */
-    @Test
-    @Ignore("This test requires at least 1 GB memory. Start Java with -Xmx1024m")
-    public
-    void hugeDocumentTest()
-    throws Exception
-    {
-        String testString = "This is a test . ";
-        int reps = 5000000 / testString.length();
-    	StringBuilder sb = new StringBuilder();
-    	for (int i = 0; i < reps; i++) {
-    		sb.append(testString);
-    	}
+	/**
+	 * Generate a very large document and test it.
+	 */
+	@Test
+	public void hugeDocumentTest()
+		throws Exception
+	{
+		// Start Java with -Xmx512m
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > (500000000));
 
-        JCas jcas = runTest(sb.toString(), null, null, null, "en");
+		// Disable trace as this significantly slows down the test
+		TreeTaggerWrapper.TRACE = false;
 
-        FSIndex posIndex = jcas.getAnnotationIndex(POS.type);
-        assertEquals(reps * 5, posIndex.size());
+		String text = "This is a test .";
+		int reps = 4000000 / text.length();
+        String testString = repeat(text, " ", reps);
+
+        JCas jcas = runTest("en", testString, null, null, null);
+    	List<POS> actualTags = new ArrayList<POS>(select(jcas, POS.class));
+        assertEquals(reps * 5, actualTags.size());
 
         // test POS annotations
-		String[] tags = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
-		String[] tagClasses = new String[] { "ART",  "V",   "ART", "NN",   "PUNC" };
+		String[] expectedTags = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
+		String[] expectedTagClasses = new String[] { "ART",  "V",   "ART", "NN",   "PUNC" };
 
-        FSIterator posIter = posIndex.iterator();
-        int i = 0;
-        while (posIter.hasNext()) {
-            POS posAnnotation = (POS) posIter.next();
-            assertEquals("In position "+i, tagClasses[i%5], posAnnotation.getType().getShortName());
-            assertEquals("In position "+i, tags[i%5], posAnnotation.getPosValue());
-            i++;
-        }
+		for (int i = 0; i < actualTags.size(); i++) {
+            POS posAnnotation = actualTags.get(i);
+            assertEquals("In position "+i, expectedTagClasses[i%5], posAnnotation.getType().getShortName());
+            assertEquals("In position "+i, expectedTags[i%5], posAnnotation.getPosValue());
+		}
 
-        System.out.println("Successfully tagged document of size: "+sb.length());
+        System.out.println("Successfully tagged document with " + testString.length() +
+        		" characters");
     }
 
-    /**
-     * Test using the same AnalysisEngine multiple times.
-     */
-    @Test
-//    @Ignore("This test fails with the non-TT4J annotator")
-    public
-    void multiDocumentTest()
-    throws Exception
-    {
+	/**
+	 * Test using the same AnalysisEngine multiple times.
+	 */
+	@Test
+	public void multiDocumentTest()
+		throws Exception
+	{
     	checkModelsAndBinary("en");
 
 		String testDocument = "This is a test .";
@@ -126,8 +141,7 @@ class TreeTaggerPosLemmaTT4JTest
 		String[] tags       = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
 		String[] tagClasses = new String[] { "ART",  "V",   "ART", "NN",   "PUNC" };
 
-        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class,
-        		createTypeSystemDescription());
+        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
 
 		try {
 			for (int n = 0; n < 100; n++) {
@@ -139,27 +153,12 @@ class TreeTaggerPosLemmaTT4JTest
 
 		        // test POS annotations
 		        if (tagClasses != null && tags != null) {
-			        FSIndex posIndex = aJCas.getAnnotationIndex(POS.type);
-			        FSIterator posIter = posIndex.iterator();
-			        int i = 0;
-			        while (posIter.hasNext()) {
-			            POS posAnnotation = (POS) posIter.next();
-			            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
-			            assertEquals("In position "+i, tags[i], posAnnotation.getPosValue());
-			            i++;
-			        }
+		        	checkTags(tagClasses, tags, select(aJCas, POS.class));
 		        }
 
 		        // test Lemma annotations
 		        if (lemmas != null) {
-			        FSIndex lemmaIndex = aJCas.getAnnotationIndex(Lemma.type);
-			        FSIterator lemmaIter = lemmaIndex.iterator();
-			        int j = 0;
-			        while (lemmaIter.hasNext()) {
-			            Lemma lemmaAnnotation = (Lemma) lemmaIter.next();
-			            assertEquals("In position "+j, lemmas[j], lemmaAnnotation.getValue());
-			            j++;
-			        }
+		        	checkLemma(lemmas,  select(aJCas, Lemma.class));
 		        }
 			}
 		}
@@ -174,77 +173,32 @@ class TreeTaggerPosLemmaTT4JTest
     @Test
     @Ignore("This test takes a very long time. Only include it if you need to "+
     		"test the stability of the annotator")
-    public
-    void loadTest()
-    throws Exception
-    {
-    	for (int i = 0; i < 100; i++) {
-    		System.out.println("Load test iteration "+i);
-    		hugeDocumentTest();
-    	}
-    }
+	public void loadTest()
+		throws Exception
+	{
+		for (int i = 0; i < 100; i++) {
+			System.out.println("Load test iteration " + i);
+			hugeDocumentTest();
+		}
+	}
 
-    @Test
-    @Ignore("Platform specific")
-    public
-    void testOddCharacters()
-    throws Exception
-    {
-        runTest(
-        		"² § ¶ § °",
-        		new String[] { "²",  "§",   "¶",  "§",   "°"   },
-        		new String[] { "NN", "SYM", "NN", "SYM", "SYM" },
-        		new String[] { "NN", "O",   "NN", "O",   "O"   },
-        		"en");
-    }
-
-    private
-    void runEnglishTest2()
-    throws Exception
-    {
-        runTest(
-        		"A neural net .",
-        		new String[] { "a",   "neural", "net", "."    },
-        		new String[] { "DT",  "JJ",     "NN",  "SENT" },
-        		new String[] { "ART", "ADJ",    "NN",  "PUNC" },
-        		"en");
-    }
-
-    private
-    void runGermanTest()
-    throws Exception
-    {
-        runTest(
-        		"Das ist ein Test .",
-        		new String[] { "d",   "sein",  "ein", "Test", "."    },
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" },
-        		"de");
-    }
-
-    private
-    void checkModelsAndBinary(String lang)
-    {
+	private void checkModelsAndBinary(String lang)
+	{
 		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/" + lang + "-tagger-little-endian.par") != null);
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/" + lang
+						+ "-tagger-little-endian.par") != null);
 
 		Assume.assumeTrue(getClass().getResource(
 				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
-    }
+	}
 
-    private
-    JCas runTest(
-    		String testDocument,
-    		String[] lemmas,
-    		String[] tags,
-    		String[] tagClasses,
-    		String language)
-    throws Exception
-    {
-    	checkModelsAndBinary(language);
+	private JCas runTest(String language, String testDocument, String[] lemmas, String[] tags,
+			String[] tagClasses)
+		throws Exception
+	{
+		checkModelsAndBinary(language);
 
-        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class,
-        		createTypeSystemDescription());
+        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
 
         JCas aJCas = engine.newJCas();
         aJCas.setDocumentLanguage(language);
@@ -256,28 +210,35 @@ class TreeTaggerPosLemmaTT4JTest
 
         // test POS annotations
         if (tagClasses != null && tags != null) {
-	        int i = 0;
-	        for (POS posAnnotation : iterate(aJCas, POS.class)) {
-	            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
-	            assertEquals("In position "+i, tags[i], posAnnotation.getPosValue());
-	            i++;
-	        }
+        	checkTags(tagClasses, tags, select(aJCas, POS.class));
         }
 
         // test Lemma annotations
         if (lemmas != null) {
-	        FSIndex lemmaIndex = aJCas.getAnnotationIndex(Lemma.type);
-	        FSIterator lemmaIter = lemmaIndex.iterator();
-	        int j = 0;
-	        while (lemmaIter.hasNext()) {
-	            Lemma lemmaAnnotation = (Lemma) lemmaIter.next();
-	            assertEquals("In position "+j, lemmas[j], lemmaAnnotation.getValue());
-	            j++;
-	        }
+        	checkLemma(lemmas,  select(aJCas, Lemma.class));
         }
 
         return aJCas;
     }
+
+	private void checkTags(String[] tagClasses, String[] tags, Collection<POS> actual)
+	{
+        int i = 0;
+        for (POS posAnnotation : actual) {
+            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
+            assertEquals("In position "+i, tags[i], posAnnotation.getPosValue());
+            i++;
+        }
+	}
+
+	private void checkLemma(String[] expected, Collection<Lemma> actual)
+	{
+        int i = 0;
+        for (Lemma lemmaAnnotation : actual) {
+            assertEquals("In position "+i, expected[i], lemmaAnnotation.getValue());
+            i++;
+        }
+	}
 
     /**
      * Runs a small pipeline on a text containing quite odd characters such as
@@ -364,4 +325,13 @@ class TreeTaggerPosLemmaTT4JTest
 //				sentenceSplitter,
 //				tt);
 //    }
+
+	@Rule
+	public TestName name = new TestName();
+
+	@Before
+	public void printSeparator()
+	{
+		System.out.println("\n=== " + name.getMethodName() + " =====================");
+	}
 }

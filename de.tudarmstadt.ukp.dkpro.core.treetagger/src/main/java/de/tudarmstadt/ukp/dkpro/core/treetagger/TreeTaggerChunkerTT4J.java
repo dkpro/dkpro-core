@@ -167,7 +167,8 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 						AnnotationFS chunk = aCas.createAnnotation(chunkType, start, end);
 						Feature feat = chunkType.getFeatureByBaseName("chunkValue");
 						if (feat != null) {
-							chunk.setStringValue(feat, openChunk);
+							chunk.setStringValue(feat, isInternStrings() ? openChunk.intern() :
+								openChunk);
 						}
 						aCas.addFsToIndexes(chunk);
 
