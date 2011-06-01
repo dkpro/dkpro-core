@@ -109,26 +109,27 @@ public class TreeTaggerPosLemmaTT4J
 
 						// Add the Part of Speech
 						Type posTag = getTagType((DKProModel) treetagger.getModel(), aPos, ts);
-						AnnotationFS posAnno = aCas.createAnnotation(
-								posTag, aToken.getBegin(), aToken.getEnd());
-						posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
-								isInternStrings() ? aPos.intern() : aPos);
-						pos[count.get()] = posAnno;
+						if (aPos != null) {
+							AnnotationFS posAnno = aCas.createAnnotation(
+									posTag, aToken.getBegin(), aToken.getEnd());
+							posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
+									isInternStrings() ? aPos.intern() : aPos);
+							pos[count.get()] = posAnno;
+							aToken.setFeatureValue(featPos, posAnno);
+						}
 
 						// Add the lemma
-						AnnotationFS lemmaAnno = aCas.createAnnotation(
-								lemmaTag, aToken.getBegin(), aToken.getEnd());
 						if (aLemma != null) {
+							AnnotationFS lemmaAnno = aCas.createAnnotation(
+									lemmaTag, aToken.getBegin(), aToken.getEnd());
 							lemmaAnno.setStringValue(lemmaValue,
 									isInternStrings() ? aLemma.intern() : aLemma);
+							lemma[count.get()] = lemmaAnno;
+							aToken.setFeatureValue(featLemma, lemmaAnno);
 						}
-						else {
-							lemmaAnno.setStringValue(lemmaValue, aToken.getCoveredText());
-						}
-						lemma[count.get()] = lemmaAnno;
-
-						aToken.setFeatureValue(featPos, posAnno);
-						aToken.setFeatureValue(featLemma, lemmaAnno);
+//						else {
+//							lemmaAnno.setStringValue(lemmaValue, aToken.getCoveredText());
+//						}
 
 						count.getAndIncrement();
 					}
