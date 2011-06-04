@@ -35,6 +35,7 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -138,8 +139,11 @@ public class TreeTaggerPosLemmaTT4J
 
 			treetagger.process(tokens);
 
-			getContext().getLogger().log(Level.FINE, treetagger.getStatus());
-			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " pos segments");
+			Logger log = getContext().getLogger();
+			if (log.isLoggable(Level.FINE)) {
+				log.log(Level.FINE, treetagger.getStatus());
+				log.log(Level.FINE, "Parsed " + count.get() + " pos segments");
+			}
 
 			// Add the annotations to the indexes
 			for (int i = 0; i < count.get(); i++) {
