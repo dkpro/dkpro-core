@@ -27,6 +27,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.annolab.tt4j.TreeTaggerWrapper;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -36,6 +37,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+import org.uimafit.factory.JCasBuilder;
 import org.uimafit.testing.factory.TokenBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -239,6 +241,47 @@ class TreeTaggerPosLemmaTT4JTest
             i++;
         }
 	}
+
+	/**
+	 * Test using the same AnalysisEngine multiple times.
+	 */
+	@Test
+	public void longTokenTest()
+		throws Exception
+	{
+		TreeTaggerWrapper.TRACE = true;
+
+    	checkModelsAndBinary("en");
+
+        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        JCas jcas = engine.newJCas();
+
+		try {
+			for (int n = 99990; n < 100000; n ++) {
+				System.out.println(n);
+		        jcas.setDocumentLanguage("en");
+		        JCasBuilder builder = new JCasBuilder(jcas);
+		        builder.add("Start", Token.class);
+		        builder.add("with", Token.class);
+		        builder.add("good", Token.class);
+		        builder.add("tokens", Token.class);
+		        builder.add(".", Token.class);
+		        builder.add(StringUtils.repeat("b", n), Token.class);
+		        builder.add("End", Token.class);
+		        builder.add("with", Token.class);
+		        builder.add("some", Token.class);
+		        builder.add("good", Token.class);
+		        builder.add("tokens", Token.class);
+		        builder.add(".", Token.class);
+		        builder.close();
+		        engine.process(jcas);
+		        jcas.reset();
+			}
+		}
+		finally {
+			engine.destroy();
+		}
+    }
 
     /**
      * Runs a small pipeline on a text containing quite odd characters such as
