@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.uimafit.util.CasUtil.iterate;
+import static org.uimafit.util.CasUtil.*;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,6 +51,35 @@ public class TreeTaggerPosLemmaTT4J
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
+	public static final String PARAM_POS_ENABLED = "PosEnabled";
+	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=true, defaultValue="true")
+	private boolean posEnabled;
+
+	public static final String PARAM_LEMMA_ENABLED = "LemmaEnabled";
+	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=true, defaultValue="true")
+	private boolean lemmaEnabled;
+
+	private Type tokenType;
+	private Type lemmaTag;
+	private Type tokenTag;
+	private Feature lemmaValue;
+	private Feature featLemma;
+	private Feature featPos;
+
+	@Override
+	public void typeSystemInit(TypeSystem aTypeSystem)
+		throws AnalysisEngineProcessException
+	{
+		super.typeSystemInit(aTypeSystem);
+
+		tokenType = aTypeSystem.getType(Token.class.getName());
+		lemmaTag = aTypeSystem.getType(Lemma.class.getName());
+		tokenTag = aTypeSystem.getType(Token.class.getName());
+		lemmaValue = lemmaTag.getFeatureByBaseName("value");
+		featLemma = tokenTag.getFeatureByBaseName("lemma");
+		featPos = tokenTag.getFeatureByBaseName("pos");
+	}
+
 	@Override
 	public void process(final CAS aCas)
 		throws AnalysisEngineProcessException
@@ -80,15 +109,8 @@ public class TreeTaggerPosLemmaTT4J
 	            		"Exiting."));
 	        }
 
-			final TypeSystem ts = aCas.getTypeSystem();
-			final Type tokenType = ts.getType(Token.class.getName());
-			final Type lemmaTag = ts.getType(Lemma.class.getName());
-			final Type tokenTag = ts.getType(Token.class.getName());
-			final Feature lemmaValue = lemmaTag.getFeatureByBaseName("value");
-			final Feature featLemma = tokenTag.getFeatureByBaseName("lemma");
-			final Feature featPos = tokenTag.getFeatureByBaseName("pos");
 			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
-			for (AnnotationFS fs : iterate(aCas, tokenType)) {
+			for (AnnotationFS fs : select(aCas, tokenType)) {
 				tokens.add(fs);
 			}
 			final AnnotationFS pos[] = new AnnotationFS[tokens.size()];
@@ -100,17 +122,13 @@ public class TreeTaggerPosLemmaTT4J
         	treetagger.setModel(language);
 			treetagger.setHandler(new TokenHandler<AnnotationFS>() {
 				@Override
-				public
-				void token(
-						AnnotationFS aToken,
-						String aPos,
-						String aLemma)
+				public void token(AnnotationFS aToken, String aPos, String aLemma)
 				{
 					synchronized (aCas) {
-
+						TypeSystem ts = aCas.getTypeSystem();
 						// Add the Part of Speech
-						Type posTag = getTagType((DKProModel) treetagger.getModel(), aPos, ts);
-						if (aPos != null) {
+						if (posEnabled && aPos != null) {
+							Type posTag = getTagType((DKProModel) treetagger.getModel(), aPos, ts);
 							AnnotationFS posAnno = aCas.createAnnotation(
 									posTag, aToken.getBegin(), aToken.getEnd());
 							posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
@@ -120,7 +138,7 @@ public class TreeTaggerPosLemmaTT4J
 						}
 
 						// Add the lemma
-						if (aLemma != null) {
+						if (lemmaEnabled && aLemma != null) {
 							AnnotationFS lemmaAnno = aCas.createAnnotation(
 									lemmaTag, aToken.getBegin(), aToken.getEnd());
 							lemmaAnno.setStringValue(lemmaValue,
@@ -128,9 +146,6 @@ public class TreeTaggerPosLemmaTT4J
 							lemma[count.get()] = lemmaAnno;
 							aToken.setFeatureValue(featLemma, lemmaAnno);
 						}
-//						else {
-//							lemmaAnno.setStringValue(lemmaValue, aToken.getCoveredText());
-//						}
 
 						count.getAndIncrement();
 					}
