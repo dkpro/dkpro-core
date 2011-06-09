@@ -52,11 +52,11 @@ public class TreeTaggerPosLemmaTT4J
 	private String typeAdapterClass;
 
 	public static final String PARAM_POS_ENABLED = "PosEnabled";
-	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=true, defaultValue="true")
+	@ConfigurationParameter(name=PARAM_POS_ENABLED, mandatory=true, defaultValue="true")
 	private boolean posEnabled;
 
 	public static final String PARAM_LEMMA_ENABLED = "LemmaEnabled";
-	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=true, defaultValue="true")
+	@ConfigurationParameter(name=PARAM_POS_ENABLED, mandatory=true, defaultValue="true")
 	private boolean lemmaEnabled;
 
 	private Type tokenType;
