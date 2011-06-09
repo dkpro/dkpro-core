@@ -56,7 +56,7 @@ public class TreeTaggerPosLemmaTT4J
 	private boolean posEnabled;
 
 	public static final String PARAM_LEMMA_ENABLED = "LemmaEnabled";
-	@ConfigurationParameter(name=PARAM_POS_ENABLED, mandatory=true, defaultValue="true")
+	@ConfigurationParameter(name=PARAM_LEMMA_ENABLED, mandatory=true, defaultValue="true")
 	private boolean lemmaEnabled;
 
 	private Type tokenType;
