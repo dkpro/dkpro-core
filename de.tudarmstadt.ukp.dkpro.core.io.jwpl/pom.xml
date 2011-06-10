@@ -36,17 +36,25 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-			<artifactId>de.tudarmstadt.ukp.wikipedia.api</artifactId>
-			<version>0.5.0-beta-1</version>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
+			<artifactId>de.tudarmstadt.ukp.wikipedia.api</artifactId>
+			<version>0.7.0-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
+			<artifactId>de.tudarmstadt.ukp.wikipedia.revisionmachine</artifactId>
+			<version>0.6.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<build>
