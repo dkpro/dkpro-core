@@ -79,6 +79,8 @@
 						<exclude>README</exclude>
 						<exclude>src/main/resources/**/*</exclude>
 						<exclude>src/test/resources/**/*</exclude>
+						<!-- generated JCas wrappers -->
+						<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/io/jwpl/type/**/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
