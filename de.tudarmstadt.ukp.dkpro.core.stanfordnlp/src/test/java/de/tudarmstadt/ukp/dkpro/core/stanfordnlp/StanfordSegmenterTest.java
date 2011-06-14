@@ -11,11 +11,9 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;

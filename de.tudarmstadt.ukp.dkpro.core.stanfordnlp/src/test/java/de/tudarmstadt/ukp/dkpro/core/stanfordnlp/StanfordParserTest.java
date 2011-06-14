@@ -26,7 +26,6 @@ import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Assume;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.util.JCasUtil;
 
@@ -59,7 +58,6 @@ public class StanfordParserTest
 	// TODO Maybe test link to parents (not tested by syntax tree recreation)
 
 	@Test
-	@Ignore("German Test currently not working.")
 	public void testGermanConstituents()
 		throws Exception
 	{
@@ -70,15 +68,14 @@ public class StanfordParserTest
 		// TODO gold constituents have to be changed to SPAN instead of token
 		// offset
 		HashSet<String> constituentGold = new HashSet<String>();
-		constituentGold.add("NUR 1,15");
-		constituentGold.add("ROOT 1,15");
-		constituentGold.add("S 1,14");
-		constituentGold.add("NP 3,14");
-		constituentGold.add("NP 9,13");
-		constituentGold.add("AP 4,5");
-		constituentGold.add("S 8,14");
-		constituentGold.add("CNP 11,13");
-		constituentGold.add("AP 9,10");
+		constituentGold.add("ROOT 0,112");
+		constituentGold.add("S 0,112");
+		constituentGold.add("NP 13,44");
+		constituentGold.add("NP 17,44");
+		constituentGold.add("S 46,110");
+		constituentGold.add("NP 54,99");
+		constituentGold.add("AP 54,69");
+		constituentGold.add("CNP 70,99");
 
 		// assertTrue("Constituents count mismatch", constituentIndex.size() ==
 		// constituentsGold.size());
@@ -451,7 +448,8 @@ public class StanfordParserTest
 		// setup German
 		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
 				StanfordParser.PARAM_MODEL,
-				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-de-factored.ser.gz",
+//				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/germanFactored.ser.gz",
+				"src/main/resources/germanFactored.ser.gz",
 				StanfordParser.PARAM_LANGUAGE_PACK, PennTreebankLanguagePack.class.getName(),
 				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
 				StanfordParser.PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, true,
