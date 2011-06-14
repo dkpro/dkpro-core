@@ -46,7 +46,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public static final String REVISION_2 = "Revision2";  
 
     /**
-     * Restrict added diffs to cases where the length of the revisions does not differ more than this value (counted in characters).
+     * Restrict revision pairs to cases where the length of the revisions does not differ more than this value (counted in characters).
      * */
     public static final String PARAM_MAX_CHANGE = "MaxChange";
     @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory=true, defaultValue="3")
