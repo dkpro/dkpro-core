@@ -31,6 +31,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
+import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 
 /**
@@ -83,32 +84,16 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             Revision revision1 = getRevision(savedTimestamp);
             Revision revision2 = getRevision(currentTimestamp);
 
-            String text1 = revision1.getRevisionText();
-            String text2 = revision2.getRevisionText();
-
+            String text1 = getText(revision1);
+            String text2 = getText(revision2);
+            
             if (Math.abs(text1.length() - text2.length()) < maxChange) {
-                if (outputPlainText) {
-                    text1 = StringEscapeUtils.unescapeHtml(text1);
-                    text2 = StringEscapeUtils.unescapeHtml(text2);
-
-                    text1 = parser.parse(text1).getText();
-                    text2 = parser.parse(text2).getText();
-//                    text1 = WikiUtils.mediaWikiMarkup2PlainText(text1);
-//                    text2 = WikiUtils.mediaWikiMarkup2PlainText(text2);
-
-                    // replace multiple white space with single white space
-                    text1 = WikiUtils.cleanText(text1);
-                    text2 = WikiUtils.cleanText(text2);
-                }
-                
-                revView1.setDocumentText(text1);
-                revView2.setDocumentText(text2);
+                text1 = "";
+                text2 = "";
             }
-            // FIXME optimization to not consider large changes - should be solved better
-            else {
-                revView1.setDocumentText("");
-                revView2.setDocumentText("");
-            }
+            
+            revView1.setDocumentText(text1);
+            revView2.setDocumentText(text2);
 
             addDocumentMetaData(revView1, currentArticle.getPageId(), revision1.getRevisionID());
             addDocumentMetaData(revView2, currentArticle.getPageId(), revision2.getRevisionID());
@@ -130,6 +115,30 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
         }
     }
 
+    private String getText(Revision rev) {
+        String text = rev.getRevisionText();
+
+        if (outputPlainText) {
+            text = StringEscapeUtils.unescapeHtml(text);
+
+            ParsedPage pp = parser.parse(text);
+            
+            if (pp == null) {
+                return "";
+            }
+            
+            text = pp.getText();
+            
+//            text = WikiUtils.mediaWikiMarkup2PlainText(text);
+
+            // replace multiple white space with single white space
+            text = WikiUtils.cleanText(text);
+        }
+        
+        return text;
+
+    }
+    
     private Revision getRevision(Timestamp timestamp) throws CollectionException {
         Revision revision;
 
