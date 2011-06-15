@@ -312,6 +312,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.frequency</module>
 	</modules>
 	<build>
 		<pluginManagement>
