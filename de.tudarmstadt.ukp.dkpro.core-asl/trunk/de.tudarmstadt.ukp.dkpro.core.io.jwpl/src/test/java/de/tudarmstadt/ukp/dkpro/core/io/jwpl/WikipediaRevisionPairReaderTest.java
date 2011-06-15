@@ -25,6 +25,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 
 public class WikipediaRevisionPairReaderTest
@@ -47,8 +48,18 @@ public class WikipediaRevisionPairReaderTest
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
 			assertNotNull(jcas);
-			i++;
-			if (i > 1000) {
+            
+			JCas view1 = jcas.getView(WikipediaRevisionPairReader.REVISION_1);
+            JCas view2 = jcas.getView(WikipediaRevisionPairReader.REVISION_2);
+            
+            DocumentMetaData md1 = DocumentMetaData.get(view1);
+            DocumentMetaData md2 = DocumentMetaData.get(view2);
+            
+            System.out.println(md1);
+            System.out.println(md2);
+
+            i++;
+			if (i > 10) {
 			    break;
 			}
 		}
