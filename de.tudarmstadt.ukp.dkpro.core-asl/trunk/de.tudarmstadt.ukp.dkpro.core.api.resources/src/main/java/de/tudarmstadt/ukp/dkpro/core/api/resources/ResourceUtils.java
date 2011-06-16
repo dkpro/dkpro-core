@@ -80,7 +80,7 @@ public class ResourceUtils
 			String name = new File(aUrl.getPath()).getName();
 			int suffixSep = name.indexOf(".");
 			if (suffixSep != -1) {
-				suffix = name.substring(suffixSep + 1);
+				suffix = name.substring(suffixSep);
 				name = name.substring(0, suffixSep);
 			}
 
