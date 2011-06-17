@@ -25,6 +25,7 @@
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
+	<name>DKPro Core ASL - Frequency Providers API (ASL)</name>
 	<version>1.2.0-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
