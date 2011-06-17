@@ -25,6 +25,12 @@ import org.uimafit.component.Resource_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.teaching.frequency.FrequencyCountProvider;
 
+/**
+ * External resource wrapper for the Web1T frequency count provider.
+ * 
+ * @author zesch
+ *
+ */
 public final class Web1TFrequencyCountProvider
 	extends Resource_ImplBase
 	implements FrequencyCountProvider
