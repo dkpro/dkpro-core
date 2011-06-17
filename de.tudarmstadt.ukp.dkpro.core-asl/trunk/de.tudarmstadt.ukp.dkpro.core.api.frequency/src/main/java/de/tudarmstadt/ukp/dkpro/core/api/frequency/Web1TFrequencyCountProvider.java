@@ -37,7 +37,8 @@ public final class Web1TFrequencyCountProvider
 {
 	private FrequencyCountProvider provider;
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
 		throws ResourceInitializationException
 	{
