@@ -79,9 +79,9 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_CREATE_CONSTITUENT_TAGS, mandatory = true, defaultValue = "true")
 	private boolean createConstituentTags;
 
-	public static final String PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN = "createDependencyAnnotationOnToken";
-	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, mandatory = true, defaultValue = "true")
-	private boolean createDependencyAnnotationOnToken;
+//	public static final String PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN = "createDependencyAnnotationOnToken";
+//	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, mandatory = true, defaultValue = "true")
+//	private boolean createDependencyAnnotationOnToken;
 
 	/**
 	 * Defines the TreebankLanguagePack that the parser should use.<br/>
@@ -154,40 +154,34 @@ public class StanfordParser
 	// (correct default behavior for each CAS)
 	private Boolean createLemmas;
 
+	private boolean warnedAboutDependencies = false;
+
 	@Override
 	public void initialize(UimaContext context)
 		throws ResourceInitializationException
 	{
 		super.initialize(context);
 
-		if (!createConstituentTags && !createDependencyTags
-				&& !createPennTreeString) {
-			getContext().getLogger().log(
-					WARNING,
-					"Invalid parameter "
-							+ "configuration... will create dependency tags.");
+		if (!createConstituentTags && !createDependencyTags && !createPennTreeString) {
+			getContext().getLogger().log( WARNING, "Invalid parameter configuration... will create" +
+					"dependency tags.");
 			createDependencyTags = true;
 		}
 
-		if (createDependencyAnnotationOnToken) {
-			createDependencyTags = true;
-		}
+//		if (createDependencyAnnotationOnToken) {
+//			createDependencyTags = true;
+//		}
 
 		//Check if we want to create Lemmas or POS tags while Consituent tags
 		//are disabled. In this case, we have to switch on constituent tagging
 		if (!createConstituentTags && ((createLemmas!=null&&createLemmas) || createPosTags)) {
-			getContext()
-					.getLogger()
-					.log(
-							WARNING,
-							"Invalid parameter "
-									+ "configuration. Constituent tag creation is required for POS tagging "
-									+ "and Lemmatization. Will create constituent tags.");
-
+			getContext().getLogger().log(WARNING, "Invalid parameter configuration. Constituent " +
+					"tag creation is required for POS tagging and Lemmatization. Will create " +
+					"constituent tags.");
 			createConstituentTags = true;
 		}
 
-
+		warnedAboutDependencies = false;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -282,26 +276,22 @@ public class StanfordParser
 			// Get parsetree
 			Tree parseTree;
 			try {
-				getContext().getLogger()
-						.log(FINE, tokenizedSentence.toString());
+				getContext().getLogger().log(FINE, tokenizedSentence.toString());
 				LexicalizedParser parser = getParser();
 				parser.parse(tokenizedSentence);
 				parseTree = parser.getBestParse();
 			}
 			catch (Exception e) {
-				getContext().getLogger().log(WARNING, "lexicalizedParser: ", e);
-				continue;
+				throw new AnalysisEngineProcessException(e);
 			}
 
 			// Create new StanfordAnnotator object
 			StanfordAnnotator sfAnnotator = null;
 			try {
-				sfAnnotator = new StanfordAnnotator(new TreeWithTokens(
-						parseTree, tokens));
+				sfAnnotator = new StanfordAnnotator(new TreeWithTokens(parseTree, tokens));
 			}
 			catch (CASException e) {
-				getContext().getLogger().log(WARNING,
-						"Could not create StanfordAnnotator object: ", e);
+				throw new AnalysisEngineProcessException(e);
 			}
 
 			if (createPennTreeString) {
@@ -309,27 +299,44 @@ public class StanfordParser
 						currAnnotationToParse.getEnd());
 			}
 
-			if (createDependencyTags) {
-				GrammaticalStructure gs = gsf
-						.newGrammaticalStructure(parseTree);
-				for (TypedDependency currTypedDep : gs.typedDependencies()) {
-
-					int govIndex = currTypedDep.gov().index();
-					int depIndex = currTypedDep.dep().index();
-					Token govToken = tokens.get(govIndex - 1);
-					Token depToken = tokens.get(depIndex - 1);
-
-					sfAnnotator.createDependencyAnnotation(currAnnotationToParse.getBegin(),
-							currAnnotationToParse.getEnd(), currTypedDep.reln(), govToken,
-							depToken);
-				}
-			}
+			doCreateDependencyTags(sfAnnotator, currAnnotationToParse, parseTree, tokens);
 
 			if (createConstituentTags) {
 				// create constituent annotations from parse tree
-				sfAnnotator.createConstituentAnnotationFromTree(createPosTags,
-						createLemmas);
+				sfAnnotator.createConstituentAnnotationFromTree(createPosTags, createLemmas);
 			}
+		}
+	}
+
+	protected void doCreateDependencyTags(StanfordAnnotator sfAnnotator,
+			Annotation currAnnotationToParse, Tree parseTree, List<Token> tokens)
+	{
+		if (!createDependencyTags) {
+			return;
+		}
+
+		GrammaticalStructure gs;
+		try {
+			gs = gsf.newGrammaticalStructure(parseTree);
+		}
+		catch (Exception e) {
+			if (!warnedAboutDependencies) {
+				getContext().getLogger().log(WARNING, "Current model does not seem to support " +
+						"dependencies.");
+				warnedAboutDependencies = true;
+			}
+			return;
+		}
+
+		for (TypedDependency currTypedDep : gs.typedDependencies()) {
+			int govIndex = currTypedDep.gov().index();
+			int depIndex = currTypedDep.dep().index();
+			Token govToken = tokens.get(govIndex - 1);
+			Token depToken = tokens.get(depIndex - 1);
+
+			sfAnnotator.createDependencyAnnotation(currAnnotationToParse.getBegin(),
+					currAnnotationToParse.getEnd(), currTypedDep.reln(), govToken,
+					depToken);
 		}
 	}
 

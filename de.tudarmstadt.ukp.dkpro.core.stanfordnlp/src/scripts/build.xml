@@ -1,29 +1,55 @@
 <project basedir="../.." default="separate-jars">
 	<target name="separate-jars">
 		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
-		<antcall target="download-core"/>
+		<!--antcall target="download-core"/-->
+		<!--antcall target="download-parser"/-->
 		
-    	<install-model-file file="englishPCFG.ser.gz" md5="f750879ba4db2f2f6345fd3637e628da"
-    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.0.2"/>		
+    	<install-model-file file="target/download/core/muc.distsim.crf.ser.gz" md5="947710871ee62cbe94e8b21f2c934581"
+    		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="1.1.0"/>		
 
-    	<install-model-file file="muc.distsim.crf.ser.gz" md5="ec59f2b539859dc15a3d7dae40561a69"
-    		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="1.0.2"/>		
+    	<install-model-file file="target/download/core/conll.distsim.crf.ser.gz" md5="bac8f4552bb6875f53a28d2803034fc5"
+    		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="1.1.0"/>		
 
-    	<install-model-file file="conll.distsim.crf.ser.gz" md5="e02dc51f196236eaee5a2ecdcd308162"
-    		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="1.0.2"/>		
+		<install-model-file file="target/download/core/all.3class.distsim.crf.ser.gz" md5="163502a20d89b686767281dc001cc55f"
+    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.1.0"/>		
 
-		<install-model-file file="all.3class.distsim.crf.ser.gz" md5="d7f5b7ab4ad3ed2e14c9227c8c426185"
-    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.0.2"/>		
+		<!-- This should be the same as the model file rolled out with the parser package
+    	<install-model-file file="target/download/core/englishPCFG.ser.gz" md5="cb662b2f737846558c3e2bc9d54b0641"
+    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.1.0"/>		
+    	-->
+
+    	<install-model-file file="target/download/parser/englishPCFG.ser.gz" md5="e38a2ba7132885ce7831d7b041dfe53b"
+    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.6.8"/>		
+
+    	<install-model-file file="target/download/parser/englishFactored.ser.gz" md5="caeb3dde2182aca910371a1b20001996"
+    		tool="lexparser" language="en" variant="factored" extension="ser.gz" version="1.6.8"/>		
+		
+    	<install-model-file file="target/download/parser/germanPCFG.ser.gz" md5="297fc99f598d540a458a28a34b609dfa"
+    		tool="lexparser" language="de" variant="pcfg" extension="ser.gz" version="1.6.8"/>		
+
+    	<install-model-file file="target/download/parser/germanFactored.ser.gz" md5="20a892c9dca77384ff94de30da7f17ec"
+    		tool="lexparser" language="de" variant="factored" extension="ser.gz" version="1.6.8"/>		
+
+    	<install-model-file file="target/download/parser/chinesePCFG.ser.gz" md5="2708afbe2a747b3960b06e725446dab4"
+    		tool="lexparser" language="zh" variant="pcfg" extension="ser.gz" version="1.6.8"/>		
+
+    	<install-model-file file="target/download/parser/chineseFactored.ser.gz" md5="ade577a42684c3c1f2a8de3b52bfd392"
+    		tool="lexparser" language="zh" variant="factored" extension="ser.gz" version="1.6.8"/>		
+
+    	<install-model-file file="target/download/parser/arabicFactored.ser.gz" md5="3c50969716fe411c4109e7c5999d7be7"
+    		tool="lexparser" language="ar" variant="factored" extension="ser.gz" version="1.6.8"/>		
+		
+    	<install-model-file file="target/download/parser/frenchFactored.ser.gz" md5="1de6d989344f5abe076956473832dbdf"
+    		tool="lexparser" language="fr" variant="factored" extension="ser.gz" version="1.6.8"/>		
 
 		<antcall target="jar-notice"/>
 	</target>
 
 	<target name="download-core">
-		<mkdir dir="${outputDir}"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-v1.0.2.tgz" dest="${outputDir}/core-nlp.tar.gz"/>
-    	<gunzip src="${outputDir}/core-nlp.tar.gz"/>
-    	<delete file="${outputDir}/core-nlp.tar.gz"/>
-    	<untar src="${outputDir}/core-nlp.tar" dest="${outputDir}">
+		<mkdir dir="target/download/core"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-v1.1.0.tgz" dest="target/download/core/core-nlp.tar.gz" skipexisting="true"/>
+    	<gunzip src="target/download/core/core-nlp.tar.gz"/>
+    	<untar src="target/download/core/core-nlp.tar" dest="target/download/core">
     		<patternset>
     			<include name="**/stanford-corenlp-models*"/>		
 			</patternset>
@@ -34,9 +60,35 @@
 				</firstmatchmapper>
     		</chainedmapper>
     	</untar>
-    	<delete file="${outputDir}/core-nlp.tar"/>
+		<unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
+    		<patternset>
+    			<include name="**/*.ser.gz"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+    	<delete file="target/download/core/stanford-corenlp-models.jar"/>
+    	<!--delete file="target/download/core/core-nlp.tar.gz"/-->
+    	<!--delete file="target/download/core/core-nlp.tar"/-->
 	</target>
-	
+
+	<target name="download-parser">
+		<mkdir dir="target/download/parser"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-parser-2011-06-27.tgz" dest="target/download/parser/parser.tar.gz" skipexisting="true"/>
+    	<gunzip src="target/download/parser/parser.tar.gz"/>
+    	<untar src="target/download/parser/parser.tar" dest="target/download/parser">
+    		<patternset>
+    			<include name="**/grammar/**/*.ser.gz"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+    	</untar>
+    	<!--delete file="target/download/parser/parser.tar.gz"/-->
+    	<!--delete file="target/download/parser/parser.tar"/-->
+	</target>
+
 	<target name="jar-notice">
 		<echo>================================</echo>
 		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
@@ -76,35 +128,38 @@
 		<attribute name="version"/>
 		<attribute name="md5"/>
 		<attribute name="prop.verify.md5" default="verify.md5.@{tool}.@{language}.@{variant}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{tool}.@{language}.@{variant}"/>
 		<sequential>
 			<fail unless="outputDir">No output directory set.</fail>
 	    	<mkdir dir="${outputDir}/lib"/>
-			<unzip src="${outputDir}/stanford-corenlp-models.jar" dest="${outputDir}/lib/">
-	    		<patternset>
-	    			<include name="**/@{file}"/>		
-				</patternset>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-		    		<firstmatchmapper>
-						<globmapper from="*" to="@{tool}-@{language}-@{variant}.@{extension}"/>
-					</firstmatchmapper>
-	    		</chainedmapper>
-	    	</unzip>
+			<copy file="@{file}" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}"/>
 			
 			<generate-model-properties tool="@{tool}" language="@{language}" variant="@{variant}"
 				extension="@{extension}"/>
+			<clean-pom/>
+			<generate-pom version="@{version}" groupId="de.tudarmstadt.ukp.dkpro.core" 
+				artifactId="de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-@{tool}-@{language}-@{variant}"/>
 			
 			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{prop.verify.md5.actual}"/>
 			<condition property="checksum.mismatch">
 				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
 			</condition>
-			<fail if="checksum.mismatch">MD5 checksum mismatch for @{tool}-@{language}-@{variant}.@{extension}. Please verify the checksum and if necessary update this script.</fail>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for @{tool}-@{language}-@{variant}.@{extension}.
+Please verify the checksum and if necessary update this script.
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
 
 			<jar destfile="target/stanfordnlp-model-@{tool}-@{language}-@{variant}-@{version}.jar" compress="true">
 				<fileset dir="target/stanfordnlp-resources">
+					<include name="META-INF/**/*"/>
 					<include name="**/lib/@{tool}-@{language}-@{variant}*"/>
 				</fileset>
 			</jar>
+			
+			<clean-pom/>
 		</sequential>
 	</macrodef>
 
@@ -130,6 +185,36 @@
 				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
 			</propertyfile>
 			<echo>Installed @{tool} model file for @{language} in variant @{variant}</echo>
+		</sequential>
+	</macrodef>
+
+	<target name="test">
+		<generate-pom groupId="muahah" artifactId="lala" version="huaua"/>
+	</target>
+	
+	<macrodef name="generate-pom">
+		<attribute name="groupId"/>
+		<attribute name="artifactId"/>
+		<attribute name="version"/>
+		<sequential>
+			<mkdir dir="target/stanfordnlp-resources/META-INF/maven/@{groupId}/@{artifactId}"/>
+			<echo file="target/stanfordnlp-resources/META-INF/maven/@{groupId}/@{artifactId}/pom.xml"><![CDATA[<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>@{groupId}</groupId>
+	<artifactId>@{artifactId}</artifactId>
+	<version>@{version}</version>
+</project>
+]]></echo>
+			<echo file="target/stanfordnlp-resources/META-INF/maven/@{groupId}/@{artifactId}/pom.properties"><![CDATA[version=@{version}
+groupId=@{groupId}
+artifactId=@{artifactId}
+]]></echo>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="clean-pom">
+		<sequential>
+			<delete dir="target/stanfordnlp-resources/META-INF"/>
 		</sequential>
 	</macrodef>
 

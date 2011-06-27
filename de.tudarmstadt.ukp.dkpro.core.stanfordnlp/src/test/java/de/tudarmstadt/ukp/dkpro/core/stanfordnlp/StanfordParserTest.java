@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.util.HashSet;
 import java.util.List;
@@ -70,29 +70,22 @@ public class StanfordParserTest
 		HashSet<String> constituentGold = new HashSet<String>();
 		constituentGold.add("ROOT 0,112");
 		constituentGold.add("S 0,112");
-		constituentGold.add("NP 13,44");
-		constituentGold.add("NP 17,44");
+		constituentGold.add("NP 13,110");
+		constituentGold.add("AP 17,35");
 		constituentGold.add("S 46,110");
-		constituentGold.add("NP 54,99");
-		constituentGold.add("AP 54,69");
+		constituentGold.add("NP 64,99");
 		constituentGold.add("CNP 70,99");
 
 		// assertTrue("Constituents count mismatch", constituentIndex.size() ==
 		// constituentsGold.size());
 		boolean okCons = true;
 		System.out.println("Checking constituents...");
-		for (Constituent currConst : iterate(germanCas,
-				Constituent.class)) {
+		for (Constituent currConst : select(germanCas, Constituent.class)) {
 			String constType = currConst.getConstituentType();
 
-			// get covered tokens without using subiterators - subiterators did
-			// not work all the time
-			List<Token> coveredTokens = JCasUtil.selectCovered(
-					germanCas, Token.class, currConst);
-			Token firstToken = coveredTokens.get(0); // get first token
-			Token lastToken = coveredTokens.get(coveredTokens.size() - 1); // get
-																			// last
-																			// token
+			List<Token> coveredTokens = JCasUtil.selectCovered(germanCas, Token.class, currConst);
+			Token firstToken = coveredTokens.get(0);
+			Token lastToken = coveredTokens.get(coveredTokens.size() - 1);
 
 			int firstTokenOffset = firstToken.getBegin();
 			int lastTokenOffset = lastToken.getEnd();
@@ -137,18 +130,17 @@ public class StanfordParserTest
 		constituentsGold.add("SBAR 45,109");
 		constituentsGold.add("WHNP 45,50");
 		constituentsGold.add("VP 51,109");
-		constituentsGold.add("PP 60,109");
-		constituentsGold.add("NP 63,109");
-		constituentsGold.add("NP 63,97");
 		constituentsGold.add("S 51,109");
-		constituentsGold.add("ADJP 98,109");
+		constituentsGold.add("PP 60,97");
+		constituentsGold.add("NP 63,97");
+		constituentsGold.add("PP 98,109");
+		constituentsGold.add("ADJP 101,109");
 
 		// assertTrue("Constituents count mismatch", constituentIndex.size() ==
 		// constituentsGold.size());
 		boolean okCons = true;
 		System.out.println("Checking constituents...");
-		for (Constituent currConst : iterate(englishCas,
-				Constituent.class)) {
+		for (Constituent currConst : select(englishCas, Constituent.class)) {
 			String constType = currConst.getConstituentType();
 
 			// get covered tokens without using subiterators - subiterators did
@@ -192,21 +184,21 @@ public class StanfordParserTest
 		}
 
 		Set<String> dependenciesGold = new HashSet<String>();
-		dependenciesGold.add("CC 68,80,81,84");
-		dependenciesGold.add("PREP 51,59,60,62");
+		dependenciesGold.add("ADVMOD 15,26,10,14");
 		dependenciesGold.add("RCMOD 35,43,51,59");
 		dependenciesGold.add("DET 35,43,8,9");
 		dependenciesGold.add("POBJ 60,62,68,80");
-		dependenciesGold.add("ADVMOD 15,26,10,14");
-		dependenciesGold.add("ADVMOD 101,109,98,100");
-		dependenciesGold.add("AMOD 35,43,15,26");
-		dependenciesGold.add("AMOD 68,80,101,109");
-		dependenciesGold.add("AMOD 68,80,63,67");
-		dependenciesGold.add("CONJ 68,80,85,97");
-		dependenciesGold.add("NN 35,43,27,34");
+		dependenciesGold.add("POBJ 98,100,101,109");
 		dependenciesGold.add("DOBJ 3,7,35,43");
+		dependenciesGold.add("AMOD 35,43,15,26");
+		dependenciesGold.add("AMOD 68,80,63,67");
 		dependenciesGold.add("NSUBJ 3,7,0,2");
 		dependenciesGold.add("NSUBJ 51,59,45,50");
+		dependenciesGold.add("PREP 51,59,60,62");
+		dependenciesGold.add("PREP 51,59,98,100");
+		dependenciesGold.add("CC 68,80,81,84");
+		dependenciesGold.add("NN 35,43,27,34");
+		dependenciesGold.add("CONJ 68,80,85,97");
 
 		boolean okDep = true;
 		if (dependenciesGold != null) {
@@ -221,8 +213,7 @@ public class StanfordParserTest
 					.println("# gold dependencies " + dependenciesGold.size());
 			System.out
 					.println("# found dependencies " + dependencyIndex.size());
-			for (Dependency currDep : iterate(englishCas,
-					Dependency.class)) {
+			for (Dependency currDep : select(englishCas, Dependency.class)) {
 				String depType = currDep.getDependencyType().toUpperCase();
 				int governorBegin = currDep.getGovernor().getBegin();
 				int governorEnd = currDep.getGovernor().getEnd();
@@ -272,7 +263,7 @@ public class StanfordParserTest
 		posGold.add("NNS 68,80");
 		posGold.add("CC 81,84");
 		posGold.add("NNS 85,97");
-		posGold.add("RB 98,100");
+		posGold.add("IN 98,100");
 		posGold.add("JJ 101,109");
 		posGold.add(". 109,110");
 
@@ -284,7 +275,7 @@ public class StanfordParserTest
 			System.out.println("Checking POS tags...");
 			System.out.println("# gold POS tags " + posGold.size());
 			System.out.println("# found pos tags " + posIndex.size());
-			for (POS curPos : iterate(englishCas, POS.class)) {
+			for (POS curPos : select(englishCas, POS.class)) {
 				String posType = curPos.getPosValue();
 				int posBegin = curPos.getBegin();
 				int posEnd = curPos.getEnd();
@@ -341,7 +332,7 @@ public class StanfordParserTest
 			System.out.println("Checking Lemma tags...");
 			System.out.println("# gold lemma tags " + lemmaGold.size());
 			System.out.println("# found lemma tags " + posIndex.size());
-			for (Lemma curLemma : iterate(englishCas, Lemma.class)) {
+			for (Lemma curLemma : select(englishCas, Lemma.class)) {
 				String lemma = curLemma.getValue();
 				int lemmaBegin = curLemma.getBegin();
 				int lemmaEnd = curLemma.getEnd();
@@ -384,12 +375,12 @@ public class StanfordParserTest
 
 		// As we only have one input sentence, each loop only runs once!
 
-		for (PennTree curPenn : iterate(englishCas, PennTree.class)) {
+		for (PennTree curPenn : select(englishCas, PennTree.class)) {
 			// get original penn representation of syntax tree
 			pennOriginal = curPenn.getPennTree();
 		}
 
-		for (ROOT curRoot : iterate(englishCas, ROOT.class)) {
+		for (ROOT curRoot : select(englishCas, ROOT.class)) {
 			// recreate syntax tree
 			Tree recreation = TreeUtils.createStanfordTree(curRoot);
 
@@ -421,7 +412,6 @@ public class StanfordParserTest
 				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-en-pcfg.ser.gz",
 				StanfordParser.PARAM_LANGUAGE_PACK, PennTreebankLanguagePack.class.getName(),
 				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
-				StanfordParser.PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, true,
 				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
 				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
 				StanfordParser.PARAM_CREATE_POS_TAGS, true);
@@ -448,11 +438,9 @@ public class StanfordParserTest
 		// setup German
 		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
 				StanfordParser.PARAM_MODEL,
-//				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/germanFactored.ser.gz",
-				"src/main/resources/germanFactored.ser.gz",
+				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-de-pcfg.ser.gz",
 				StanfordParser.PARAM_LANGUAGE_PACK, PennTreebankLanguagePack.class.getName(),
 				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
-				StanfordParser.PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, true,
 				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
