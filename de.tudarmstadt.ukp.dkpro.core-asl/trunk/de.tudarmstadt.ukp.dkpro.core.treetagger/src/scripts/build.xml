@@ -15,7 +15,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<project basedir="../.." default="install">
+<project basedir="../.." default="separate-jars">
 	<target name="jar">
 		<property name="outputDir" value="target/treetagger-resources/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
 		<antcall target="install-all"/>
@@ -35,11 +35,17 @@
 	</target>
 
 	<target name="separate-jars-internal" depends="install-all">
+		<clean-pom/>
+		<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin" version="${version.bin}"/>
 		<jar destfile="target/treetagger-bin-${version.bin}.jar" compress="true">
 			<fileset dir="target/treetagger-resources">
+				<include name="META-INF/**/*"/>
 				<include name="**/bin/**/*"/>
 			</fileset>
 		</jar>
+		<clean-pom/>
+		
 		<model-lang-jar language="bg"/>
 		<model-lang-jar language="de"/>
 		<model-lang-jar language="en"/>
@@ -340,11 +346,17 @@
 	<macrodef name="model-lang-jar">
 		<attribute name="language"/>
 		<sequential>
+			<clean-pom/>
+			<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
+				artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-models-@{language}" 
+				version="${version.@{language}}"/>
 			<jar destfile="target/treetagger-models-@{language}-${version.@{language}}.jar" compress="true">
 				<fileset dir="target/treetagger-resources">
+					<include name="META-INF/**/*"/>
 					<include name="**/lib/@{language}-*"/>
 				</fileset>
 			</jar>
+			<clean-pom/>
 		</sequential>
 	</macrodef>
 	
@@ -590,4 +602,29 @@ Actual  : ${@{prop.verify.md5.actual}}
 		</sequential>
 	</macrodef>
 
+	<macrodef name="generate-pom">
+		<attribute name="groupId"/>
+		<attribute name="artifactId"/>
+		<attribute name="version"/>
+		<sequential>
+			<mkdir dir="target/treetagger-resources/META-INF/maven/@{groupId}/@{artifactId}"/>
+			<echo file="target/treetagger-resources/META-INF/maven/@{groupId}/@{artifactId}/pom.xml"><![CDATA[<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>@{groupId}</groupId>
+	<artifactId>@{artifactId}</artifactId>
+	<version>@{version}</version>
+</project>
+]]></echo>
+			<echo file="target/treetagger-resources/META-INF/maven/@{groupId}/@{artifactId}/pom.properties"><![CDATA[version=@{version}
+groupId=@{groupId}
+artifactId=@{artifactId}
+]]></echo>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="clean-pom">
+		<sequential>
+			<delete dir="target/treetagger-resources/META-INF"/>
+		</sequential>
+	</macrodef>
 </project>
