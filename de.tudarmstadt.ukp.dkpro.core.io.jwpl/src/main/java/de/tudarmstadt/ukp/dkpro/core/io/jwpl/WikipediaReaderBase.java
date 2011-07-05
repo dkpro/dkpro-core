@@ -70,7 +70,7 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory=true)
     private Language language;
 
-    /** The language of the Wikipedia that should be connected to. */
+    /** Whether the reader outputs plain text or wiki markup. */
     public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
     @ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory=true, defaultValue="true")
     protected boolean outputPlainText;
