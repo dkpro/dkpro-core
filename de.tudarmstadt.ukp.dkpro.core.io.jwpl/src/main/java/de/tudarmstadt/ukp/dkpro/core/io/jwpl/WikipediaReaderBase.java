@@ -114,7 +114,7 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
             this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages() - md.getNumberOfRedirectPages();
 
 //          pageIter = wiki.getArticles().iterator();
-            pageIter = new PageIterator(wiki, false, pageBuffer);
+            pageIter = new PageIterator(wiki, true, pageBuffer);
 
             currentArticleIndex = 0;
 
