@@ -51,6 +51,6 @@ public class WikipediaArticleReaderTest
 			i++;
 		}
 
-		assertEquals(30, i);
+		assertEquals(28, i);
 	}
 }
