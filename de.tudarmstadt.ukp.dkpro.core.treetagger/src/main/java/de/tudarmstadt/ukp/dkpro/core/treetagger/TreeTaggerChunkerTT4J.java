@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.uimafit.util.CasUtil.iterate;
+import static org.uimafit.util.CasUtil.select;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			final CAS aCas)
 	throws AnalysisEngineProcessException
 	{
-		getContext().getLogger().log(Level.INFO, "Running TreeTagger annotator");
+		getContext().getLogger().log(Level.FINE, "Running TreeTagger annotator");
 		try {
 			final String language;
 
@@ -181,7 +181,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 
 			Type tokenType = aCas.getTypeSystem().getType(posBaseType);
 			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
-			for (AnnotationFS fs : iterate(aCas, tokenType)) {
+			for (AnnotationFS fs : select(aCas, tokenType)) {
 				tokens.add(fs);
 			}
 
@@ -189,7 +189,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			// Commit the final chunk
 			handler.token(null, null, null);
 
-			getContext().getLogger().log(Level.INFO, "Parsed " + count.get() + " chunks");
+			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " chunks");
 		} catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
