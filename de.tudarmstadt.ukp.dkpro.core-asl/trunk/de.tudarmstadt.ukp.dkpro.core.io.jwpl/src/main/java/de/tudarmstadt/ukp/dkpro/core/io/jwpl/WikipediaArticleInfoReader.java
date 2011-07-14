@@ -29,25 +29,26 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo;
 import de.tudarmstadt.ukp.wikipedia.api.MetaData;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
+import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionAPIConfiguration;
+import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
- * Reads all article page ids and titles.
- *
- * The resulting CAS will only contain MetaData with<br>
- * <ul><li>DocumentTitle=Article Title</li><li>CollectionId=Article Id</li></ul>
+ * Reads all general article infos without retrieving the whole Page objects
  *
  * @author ferschke
  *
  */
-public class WikipediaArticleIDReader extends WikipediaReaderBase
+public class WikipediaArticleInfoReader extends WikipediaReaderBase
 {
     protected long currentArticleIndex;
     protected long nrOfArticles;
 
     protected Iterator<Integer> idIter;
+    protected RevisionApi revApi;
 
     @Override
     public void initialize(UimaContext context)
@@ -57,6 +58,15 @@ public class WikipediaArticleIDReader extends WikipediaReaderBase
         MetaData md = wiki.getMetaData();
 	    this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages() - md.getNumberOfRedirectPages();
 	    this.currentArticleIndex = 0;
+
+		RevisionAPIConfiguration revConfig = new RevisionAPIConfiguration(dbconfig);
+
+		try {
+			revApi = new RevisionApi(revConfig);
+		}
+		catch (WikiApiException e) {
+			throw new ResourceInitializationException(e);
+		}
 
 	    idIter = wiki.getPageIds().iterator();
     }
@@ -81,6 +91,11 @@ public class WikipediaArticleIDReader extends WikipediaReaderBase
         try
         {
 			addDocumentMetaData(aJCas, id);
+
+			ArticleInfo info = new ArticleInfo(aJCas);
+			info.setAuthors(revApi.getNumberOfUniqueContributors(id));
+			//add more info here...
+			info.addToIndexes();
 		}
 		catch (WikiTitleParsingException e) {
 	        getUimaContext().getLogger().log(Level.SEVERE, e.getMessage());
