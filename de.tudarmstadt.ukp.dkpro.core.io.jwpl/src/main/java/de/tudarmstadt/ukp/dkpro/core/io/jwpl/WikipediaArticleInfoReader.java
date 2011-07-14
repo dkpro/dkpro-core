@@ -100,7 +100,7 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
 		}
 		catch (WikiApiException e) {
 	        //could e.g. happen if no revision is available for this page
-			getUimaContext().getLogger().log(Level.SEVERE, e.getMessage());
+			getUimaContext().getLogger().log(Level.WARNING, e.getMessage());
 		}
 	}
 
