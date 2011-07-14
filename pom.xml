@@ -65,6 +65,7 @@
 	<modules>
 		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.frequency-gpl</module>
 	</modules>
 	<build>
 		<plugins>
