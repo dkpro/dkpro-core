@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Contains basic information about the article.
- * Updated by JCasGen Thu Jul 14 19:05:55 CEST 2011
+ * Updated by JCasGen Thu Jul 14 22:18:52 CEST 2011
  * @generated */
 public class ArticleInfo_Type extends Annotation_Type {
   /** @generated */
@@ -76,6 +76,42 @@ public class ArticleInfo_Type extends Annotation_Type {
     ll_cas.ll_setIntValue(addr, casFeatCode_Revisions, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_FirstAppearance;
+  /** @generated */
+  final int     casFeatCode_FirstAppearance;
+  /** @generated */ 
+  public long getFirstAppearance(int addr) {
+        if (featOkTst && casFeat_FirstAppearance == null)
+      jcas.throwFeatMissing("FirstAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    return ll_cas.ll_getLongValue(addr, casFeatCode_FirstAppearance);
+  }
+  /** @generated */    
+  public void setFirstAppearance(int addr, long v) {
+        if (featOkTst && casFeat_FirstAppearance == null)
+      jcas.throwFeatMissing("FirstAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    ll_cas.ll_setLongValue(addr, casFeatCode_FirstAppearance, v);}
+    
+  
+ 
+  /** @generated */
+  final Feature casFeat_LastAppearance;
+  /** @generated */
+  final int     casFeatCode_LastAppearance;
+  /** @generated */ 
+  public long getLastAppearance(int addr) {
+        if (featOkTst && casFeat_LastAppearance == null)
+      jcas.throwFeatMissing("LastAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    return ll_cas.ll_getLongValue(addr, casFeatCode_LastAppearance);
+  }
+  /** @generated */    
+  public void setLastAppearance(int addr, long v) {
+        if (featOkTst && casFeat_LastAppearance == null)
+      jcas.throwFeatMissing("LastAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    ll_cas.ll_setLongValue(addr, casFeatCode_LastAppearance, v);}
+    
+  
 
 
 
@@ -92,6 +128,14 @@ public class ArticleInfo_Type extends Annotation_Type {
  
     casFeat_Revisions = jcas.getRequiredFeatureDE(casType, "Revisions", "uima.cas.Integer", featOkTst);
     casFeatCode_Revisions  = (null == casFeat_Revisions) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Revisions).getCode();
+
+ 
+    casFeat_FirstAppearance = jcas.getRequiredFeatureDE(casType, "FirstAppearance", "uima.cas.Long", featOkTst);
+    casFeatCode_FirstAppearance  = (null == casFeat_FirstAppearance) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_FirstAppearance).getCode();
+
+ 
+    casFeat_LastAppearance = jcas.getRequiredFeatureDE(casType, "LastAppearance", "uima.cas.Long", featOkTst);
+    casFeatCode_LastAppearance  = (null == casFeat_LastAppearance) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_LastAppearance).getCode();
 
   }
 }

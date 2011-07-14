@@ -20,6 +20,16 @@
           <description>Number of revisions of this article.</description>
           <rangeTypeName>uima.cas.Integer</rangeTypeName>
         </featureDescription>
+        <featureDescription>
+          <name>FirstAppearance</name>
+          <description>The Timestamp of the first appearance of this article.</description>
+          <rangeTypeName>uima.cas.Long</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>LastAppearance</name>
+          <description>The Timestamp of the last appearance of this article.</description>
+          <rangeTypeName>uima.cas.Long</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
   </types>
