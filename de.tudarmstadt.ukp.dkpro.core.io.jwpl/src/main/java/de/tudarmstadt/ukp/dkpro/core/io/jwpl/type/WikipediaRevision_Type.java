@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Represents a revision in Wikipedia.
- * Updated by JCasGen Fri Jun 10 18:26:23 CEST 2011
+ * Updated by JCasGen Thu Jul 14 14:01:04 CEST 2011
  * @generated */
 public class WikipediaRevision_Type extends Annotation_Type {
   /** @generated */
@@ -78,20 +78,20 @@ public class WikipediaRevision_Type extends Annotation_Type {
   
  
   /** @generated */
-  final Feature casFeat_userId;
+  final Feature casFeat_contributorId;
   /** @generated */
-  final int     casFeatCode_userId;
+  final int     casFeatCode_contributorId;
   /** @generated */ 
-  public int getUserId(int addr) {
-        if (featOkTst && casFeat_userId == null)
-      jcas.throwFeatMissing("userId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    return ll_cas.ll_getIntValue(addr, casFeatCode_userId);
+  public String getContributorId(int addr) {
+        if (featOkTst && casFeat_contributorId == null)
+      jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_contributorId);
   }
   /** @generated */    
-  public void setUserId(int addr, int v) {
-        if (featOkTst && casFeat_userId == null)
-      jcas.throwFeatMissing("userId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    ll_cas.ll_setIntValue(addr, casFeatCode_userId, v);}
+  public void setContributorId(int addr, String v) {
+        if (featOkTst && casFeat_contributorId == null)
+      jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    ll_cas.ll_setStringValue(addr, casFeatCode_contributorId, v);}
     
   
  
@@ -130,8 +130,8 @@ public class WikipediaRevision_Type extends Annotation_Type {
     casFeatCode_pageId  = (null == casFeat_pageId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_pageId).getCode();
 
  
-    casFeat_userId = jcas.getRequiredFeatureDE(casType, "userId", "uima.cas.Integer", featOkTst);
-    casFeatCode_userId  = (null == casFeat_userId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_userId).getCode();
+    casFeat_contributorId = jcas.getRequiredFeatureDE(casType, "contributorId", "uima.cas.String", featOkTst);
+    casFeatCode_contributorId  = (null == casFeat_contributorId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_contributorId).getCode();
 
  
     casFeat_comment = jcas.getRequiredFeatureDE(casType, "comment", "uima.cas.String", featOkTst);

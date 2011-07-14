@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Represents a revision in Wikipedia.
- * Updated by JCasGen Fri Jun 10 18:26:23 CEST 2011
- * XML source: /home/zesch/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.jwpl/src/main/resources/desc/type/WikipediaRevision.xml
+ * Updated by JCasGen Thu Jul 14 14:01:04 CEST 2011
+ * XML source: /home/oferschke/workspaces/workspace/de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/resources/desc/type/WikipediaRevision.xml
  * @generated */
 public class WikipediaRevision extends Annotation {
   /** @generated
@@ -96,21 +96,21 @@ public class WikipediaRevision extends Annotation {
    
     
   //*--------------*
-  //* Feature: userId
+  //* Feature: contributorId
 
-  /** getter for userId - gets The id of the user who edited this revision.
+  /** getter for contributorId - gets The id of the user/contributor who edited this revision.
    * @generated */
-  public int getUserId() {
-    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_userId == null)
-      jcasType.jcas.throwFeatMissing("userId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    return jcasType.ll_cas.ll_getIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_userId);}
+  public String getContributorId() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
+      jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId);}
     
-  /** setter for userId - sets The id of the user who edited this revision. 
+  /** setter for contributorId - sets The id of the user/contributor who edited this revision. 
    * @generated */
-  public void setUserId(int v) {
-    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_userId == null)
-      jcasType.jcas.throwFeatMissing("userId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    jcasType.ll_cas.ll_setIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_userId, v);}    
+  public void setContributorId(String v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
+      jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId, v);}    
    
     
   //*--------------*
