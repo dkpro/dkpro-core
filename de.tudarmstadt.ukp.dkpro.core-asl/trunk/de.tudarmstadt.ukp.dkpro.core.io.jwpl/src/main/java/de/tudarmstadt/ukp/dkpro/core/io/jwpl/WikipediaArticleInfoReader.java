@@ -32,7 +32,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo;
 import de.tudarmstadt.ukp.wikipedia.api.MetaData;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionAPIConfiguration;
 import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
@@ -94,14 +93,14 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
 
 			ArticleInfo info = new ArticleInfo(aJCas);
 			info.setAuthors(revApi.getNumberOfUniqueContributors(id));
-			//add more info here...
+			info.setRevisions(revApi.getNumberOfRevisions(id));
+			info.setFirstAppearance(revApi.getFirstDateOfAppearance(id).getTime());
+			info.setLastAppearance(revApi.getLastDateOfAppearance(id).getTime());
 			info.addToIndexes();
 		}
-		catch (WikiTitleParsingException e) {
-	        getUimaContext().getLogger().log(Level.SEVERE, e.getMessage());
-		}
 		catch (WikiApiException e) {
-	        getUimaContext().getLogger().log(Level.SEVERE, e.getMessage());
+	        //could e.g. happen if no revision is available for this page
+			getUimaContext().getLogger().log(Level.SEVERE, e.getMessage());
 		}
 	}
 
@@ -118,7 +117,7 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
         };
     }
 
-    private void addDocumentMetaData(JCas jcas, int id) throws WikiTitleParsingException, WikiApiException {
+    private void addDocumentMetaData(JCas jcas, int id) throws WikiApiException {
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(wiki.getTitle(id).toString());
 

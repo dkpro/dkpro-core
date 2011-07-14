@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Contains basic information about the article.
- * Updated by JCasGen Thu Jul 14 19:05:55 CEST 2011
+ * Updated by JCasGen Thu Jul 14 22:18:52 CEST 2011
  * XML source: E:/eclipse/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.jwpl/src/main/resources/desc/type/WikipediaArticleInfo.xml
  * @generated */
 public class ArticleInfo extends Annotation {
@@ -93,6 +93,42 @@ public class ArticleInfo extends Annotation {
     if (ArticleInfo_Type.featOkTst && ((ArticleInfo_Type)jcasType).casFeat_Revisions == null)
       jcasType.jcas.throwFeatMissing("Revisions", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
     jcasType.ll_cas.ll_setIntValue(addr, ((ArticleInfo_Type)jcasType).casFeatCode_Revisions, v);}    
+   
+    
+  //*--------------*
+  //* Feature: FirstAppearance
+
+  /** getter for FirstAppearance - gets The Timestamp of the first appearance of this article.
+   * @generated */
+  public long getFirstAppearance() {
+    if (ArticleInfo_Type.featOkTst && ((ArticleInfo_Type)jcasType).casFeat_FirstAppearance == null)
+      jcasType.jcas.throwFeatMissing("FirstAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    return jcasType.ll_cas.ll_getLongValue(addr, ((ArticleInfo_Type)jcasType).casFeatCode_FirstAppearance);}
+    
+  /** setter for FirstAppearance - sets The Timestamp of the first appearance of this article. 
+   * @generated */
+  public void setFirstAppearance(long v) {
+    if (ArticleInfo_Type.featOkTst && ((ArticleInfo_Type)jcasType).casFeat_FirstAppearance == null)
+      jcasType.jcas.throwFeatMissing("FirstAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    jcasType.ll_cas.ll_setLongValue(addr, ((ArticleInfo_Type)jcasType).casFeatCode_FirstAppearance, v);}    
+   
+    
+  //*--------------*
+  //* Feature: LastAppearance
+
+  /** getter for LastAppearance - gets The Timestamp of the last appearance of this article.
+   * @generated */
+  public long getLastAppearance() {
+    if (ArticleInfo_Type.featOkTst && ((ArticleInfo_Type)jcasType).casFeat_LastAppearance == null)
+      jcasType.jcas.throwFeatMissing("LastAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    return jcasType.ll_cas.ll_getLongValue(addr, ((ArticleInfo_Type)jcasType).casFeatCode_LastAppearance);}
+    
+  /** setter for LastAppearance - sets The Timestamp of the last appearance of this article. 
+   * @generated */
+  public void setLastAppearance(long v) {
+    if (ArticleInfo_Type.featOkTst && ((ArticleInfo_Type)jcasType).casFeat_LastAppearance == null)
+      jcasType.jcas.throwFeatMissing("LastAppearance", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo");
+    jcasType.ll_cas.ll_setLongValue(addr, ((ArticleInfo_Type)jcasType).casFeatCode_LastAppearance, v);}    
   }
 
     
