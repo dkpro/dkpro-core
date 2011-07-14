@@ -17,25 +17,16 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
-import java.util.Iterator;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
-import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.wikipedia.api.DatabaseConfiguration;
-import de.tudarmstadt.ukp.wikipedia.api.MetaData;
-import de.tudarmstadt.ukp.wikipedia.api.Page;
-import de.tudarmstadt.ukp.wikipedia.api.PageIterator;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 import de.tudarmstadt.ukp.wikipedia.api.Wikipedia;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiInitializationException;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
-import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
 
 /**
  * Abstract base class for all Wikipedia readers.
@@ -71,26 +62,9 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory=true)
     private Language language;
 
-    /** Whether the reader outputs plain text or wiki markup. */
-    public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
-    @ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory=true, defaultValue="true")
-    protected boolean outputPlainText;
-
-    /** The page buffer size (#pages) of the page iterator. */
-    public static final String PARAM_PAGE_BUFFER = "PageBuffer";
-    @ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory=true, defaultValue="1000")
-    private int pageBuffer;
-
     protected DatabaseConfiguration dbconfig;
 
     protected Wikipedia wiki;
-
-    protected long currentArticleIndex;
-    protected long nrOfArticles;
-
-    protected Iterator<Page> pageIter;
-
-    protected MediaWikiParser parser;
 
 
     @Override
@@ -109,33 +83,12 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
 
         try {
             this.wiki = new Wikipedia(dbconfig);
-
-            MetaData md = wiki.getMetaData();
-            this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages() - md.getNumberOfRedirectPages();
-
-//          pageIter = wiki.getArticles().iterator();
-            pageIter = new PageIterator(wiki, true, pageBuffer);
-
-            currentArticleIndex = 0;
-
-            MediaWikiParserFactory pf = new MediaWikiParserFactory();
-            pf.setTemplateParserClass( FlushTemplates.class );
-
-            parser = pf.createParser();
         }
         catch (WikiInitializationException e) {
             throw new ResourceInitializationException(e);
         }
     }
 
-    public Progress[] getProgress()
-    {
-        return new Progress[] {
-                new ProgressImpl(
-                        new Long(currentArticleIndex).intValue(),
-                        new Long(nrOfArticles).intValue(),
-                        Progress.ENTITIES
-                )
-        };
-    }
+    public abstract Progress[] getProgress();
+
 }
