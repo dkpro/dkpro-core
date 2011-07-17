@@ -101,6 +101,31 @@
 	</build>
 	<profiles>
 		<profile>
+			<id>rat-check</id>
+			<activation>
+				<file>
+					<exists>src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.rat</groupId>
+						<artifactId>apache-rat-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<!-- 
+								   Exclude all - We inherit from the ASL parent POM but we have
+								   only GPL code in this part.
+								-->
+								<exclude>**/*</exclude> 
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>		
+		<profile>
 			<id>build-apidocs</id>
 			<build>
 				<plugins>
