@@ -420,6 +420,11 @@
 					<artifactId>cobertura-maven-plugin</artifactId>
 					<version>2.4</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.rat</groupId>
+					<artifactId>apache-rat-plugin</artifactId>
+					<version>0.7</version>
+				</plugin>			
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -483,6 +488,44 @@
 		</extensions>
 	</build>
 	<profiles>
+		<profile>
+			<id>rat-check</id>
+			<activation>
+				<file>
+					<exists>src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.rat</groupId>
+						<artifactId>apache-rat-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>default</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<excludes>
+								<!-- release generated artifact -->
+								<exclude>release.properties</exclude> 
+								<exclude>CHANGES</exclude>
+								<exclude>NOTICE</exclude>
+								<exclude>README</exclude>
+								<exclude>src/main/resources/**/*</exclude>
+								<exclude>src/test/resources/**/*</exclude>
+								<!-- generated JCas wrappers -->
+								<exclude>src/main/java/**/type/**/*</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>cobertura-aggregate</id>
 			<build>

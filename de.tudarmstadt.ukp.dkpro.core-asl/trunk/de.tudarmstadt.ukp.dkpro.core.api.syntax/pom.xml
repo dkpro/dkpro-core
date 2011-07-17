@@ -36,33 +36,4 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
 		</dependency>
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>rat-maven-plugin</artifactId>
-				<version>1.0-alpha-3</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<excludes>
-						<exclude>release.properties</exclude> <!-- release generated artifact -->
-						<exclude>CHANGES</exclude>
-						<exclude>NOTICE</exclude>
-						<exclude>README</exclude>
-						<exclude>src/main/resources/**/*</exclude>
-						<exclude>src/test/resources/**/*</exclude>
-						<!-- generated JCas wrappers -->
-						<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/api/syntax/type/**/*</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
