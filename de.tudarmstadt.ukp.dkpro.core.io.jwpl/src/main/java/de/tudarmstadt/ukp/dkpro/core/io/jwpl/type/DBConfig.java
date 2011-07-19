@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Database configuration for the connection to the database where the CAS data was retrieved.
- * Updated by JCasGen Tue Jul 19 10:46:33 CEST 2011
+ * Updated by JCasGen Tue Jul 19 10:59:42 CEST 2011
  * XML source: /home/oferschke/workspaces/workspace/de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/resources/desc/type/DatabaseConfiguration.xml
  * @generated */
 public class DBConfig extends Annotation {
@@ -129,6 +129,24 @@ public class DBConfig extends Annotation {
     if (DBConfig_Type.featOkTst && ((DBConfig_Type)jcasType).casFeat_Password == null)
       jcasType.jcas.throwFeatMissing("Password", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig");
     jcasType.ll_cas.ll_setStringValue(addr, ((DBConfig_Type)jcasType).casFeatCode_Password, v);}    
+   
+    
+  //*--------------*
+  //* Feature: Language
+
+  /** getter for Language - gets Wikipedia Language Versions
+   * @generated */
+  public String getLanguage() {
+    if (DBConfig_Type.featOkTst && ((DBConfig_Type)jcasType).casFeat_Language == null)
+      jcasType.jcas.throwFeatMissing("Language", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((DBConfig_Type)jcasType).casFeatCode_Language);}
+    
+  /** setter for Language - sets Wikipedia Language Versions 
+   * @generated */
+  public void setLanguage(String v) {
+    if (DBConfig_Type.featOkTst && ((DBConfig_Type)jcasType).casFeat_Language == null)
+      jcasType.jcas.throwFeatMissing("Language", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig");
+    jcasType.ll_cas.ll_setStringValue(addr, ((DBConfig_Type)jcasType).casFeatCode_Language, v);}    
   }
 
     
