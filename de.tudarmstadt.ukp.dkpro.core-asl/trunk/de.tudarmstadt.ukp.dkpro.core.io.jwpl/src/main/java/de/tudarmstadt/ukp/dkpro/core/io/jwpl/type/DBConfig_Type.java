@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Database configuration for the connection to the database where the CAS data was retrieved.
- * Updated by JCasGen Tue Jul 19 10:46:33 CEST 2011
+ * Updated by JCasGen Tue Jul 19 10:59:42 CEST 2011
  * @generated */
 public class DBConfig_Type extends Annotation_Type {
   /** @generated */
@@ -112,6 +112,24 @@ public class DBConfig_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_Password, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_Language;
+  /** @generated */
+  final int     casFeatCode_Language;
+  /** @generated */ 
+  public String getLanguage(int addr) {
+        if (featOkTst && casFeat_Language == null)
+      jcas.throwFeatMissing("Language", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_Language);
+  }
+  /** @generated */    
+  public void setLanguage(int addr, String v) {
+        if (featOkTst && casFeat_Language == null)
+      jcas.throwFeatMissing("Language", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig");
+    ll_cas.ll_setStringValue(addr, casFeatCode_Language, v);}
+    
+  
 
 
 
@@ -136,6 +154,10 @@ public class DBConfig_Type extends Annotation_Type {
  
     casFeat_Password = jcas.getRequiredFeatureDE(casType, "Password", "uima.cas.String", featOkTst);
     casFeatCode_Password  = (null == casFeat_Password) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Password).getCode();
+
+ 
+    casFeat_Language = jcas.getRequiredFeatureDE(casType, "Language", "uima.cas.String", featOkTst);
+    casFeatCode_Language  = (null == casFeat_Language) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Language).getCode();
 
   }
 }

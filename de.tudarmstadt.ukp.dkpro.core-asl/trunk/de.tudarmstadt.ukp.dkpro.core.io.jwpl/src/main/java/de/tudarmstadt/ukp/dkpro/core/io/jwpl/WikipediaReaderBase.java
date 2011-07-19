@@ -109,6 +109,7 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
         	dbconfiganno.setPassword(password);
         	dbconfiganno.setDB(db);
         	dbconfiganno.setUser(user);
+        	dbconfiganno.setLanguage(language.toString());
         	dbconfiganno.addToIndexes();
     	}
     }
