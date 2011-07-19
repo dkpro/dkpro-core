@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -36,15 +36,15 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 
 /**
  * Reads pairs of adjacent revisions of all articles.
- * 
+ *
  * @author zesch
  *
  */
 public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 {
 
-    public static final String REVISION_1 = "Revision1";  
-    public static final String REVISION_2 = "Revision2";  
+    public static final String REVISION_1 = "Revision1";
+    public static final String REVISION_2 = "Revision2";
 
     /**
      * Restrict revision pairs to cases where the length of the revisions does not differ more than this value (counted in characters).
@@ -52,9 +52,9 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public static final String PARAM_MAX_CHANGE = "MaxChange";
     @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory=true, defaultValue="3")
     private int maxChange;
-    
+
     private Timestamp savedTimestamp;
-    
+
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
@@ -62,20 +62,21 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
         super.initialize(context);
         savedTimestamp = null;
     }
-    
+
     @Override
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {
+    	super.getNext(jcas);
 
         Timestamp currentTimestamp = timestampIter.next();
 
         if (currentTimestamp == null) {
             throw new CollectionException(new Throwable ("Current timestamp is null. Upps ... should not happen."));
         }
-        
+
         this.getLogger().log(Level.FINE, currentArticle.getPageId() + "-" + currentTimestamp);
-        
+
         try {
 
             JCas revView1 = jcas.createView(REVISION_1);
@@ -86,12 +87,12 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 
             String text1 = getText(revision1);
             String text2 = getText(revision2);
-            
+
             if (Math.abs(text1.length() - text2.length()) < maxChange) {
                 text1 = "";
                 text2 = "";
             }
-            
+
             revView1.setDocumentText(text1);
             revView2.setDocumentText(text2);
 
@@ -100,9 +101,9 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 
             addRevisionAnnotation(revView1, revision1);
             addRevisionAnnotation(revView2, revision2);
-            
+
             savedTimestamp = currentTimestamp;
-            
+
             if (!timestampIter.hasNext()) {
                 savedTimestamp = null;
             }
@@ -122,23 +123,23 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             text = StringEscapeUtils.unescapeHtml(text);
 
             ParsedPage pp = parser.parse(text);
-            
+
             if (pp == null) {
                 return "";
             }
-            
+
             text = pp.getText();
-            
+
 //            text = WikiUtils.mediaWikiMarkup2PlainText(text);
 
             // replace multiple white space with single white space
             text = WikiUtils.cleanText(text);
         }
-        
+
         return text;
 
     }
-    
+
     private Revision getRevision(Timestamp timestamp) throws CollectionException {
         Revision revision;
 

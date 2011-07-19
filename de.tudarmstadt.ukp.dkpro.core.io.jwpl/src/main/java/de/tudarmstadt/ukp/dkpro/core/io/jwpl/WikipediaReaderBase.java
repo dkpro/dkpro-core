@@ -17,12 +17,17 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
+import java.io.IOException;
+
 import org.apache.uima.UimaContext;
+import org.apache.uima.collection.CollectionException;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig;
 import de.tudarmstadt.ukp.wikipedia.api.DatabaseConfiguration;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 import de.tudarmstadt.ukp.wikipedia.api.Wikipedia;
@@ -62,6 +67,12 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory=true)
     private Language language;
 
+    /** Sets whether the database configuration should be stored in the CAS,
+     *  so that annotators down the pipeline can access additional data. */
+    public static final String PARAM_CREATE_DATABASE_CONFIG_ANNOTATION = "CreateDBAnno";
+    @ConfigurationParameter(name = PARAM_CREATE_DATABASE_CONFIG_ANNOTATION, mandatory=true, defaultValue="false")
+    private boolean createDbAnno;
+
     protected DatabaseConfiguration dbconfig;
 
     protected Wikipedia wiki;
@@ -87,6 +98,19 @@ public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase
         catch (WikiInitializationException e) {
             throw new ResourceInitializationException(e);
         }
+    }
+
+    @Override
+	public void getNext(JCas jcas) throws IOException, CollectionException
+	{
+    	if(createDbAnno){
+        	DBConfig dbconfiganno = new DBConfig(jcas);
+        	dbconfiganno.setHost(host);
+        	dbconfiganno.setPassword(password);
+        	dbconfiganno.setDB(db);
+        	dbconfiganno.setUser(user);
+        	dbconfiganno.addToIndexes();
+    	}
     }
 
     public abstract Progress[] getProgress();

@@ -83,6 +83,7 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
 	public void getNext(JCas aJCas)
 		throws IOException, CollectionException
 	{
+    	super.getNext(aJCas);
 
 		int id = idIter.next();
         currentArticleIndex++;
