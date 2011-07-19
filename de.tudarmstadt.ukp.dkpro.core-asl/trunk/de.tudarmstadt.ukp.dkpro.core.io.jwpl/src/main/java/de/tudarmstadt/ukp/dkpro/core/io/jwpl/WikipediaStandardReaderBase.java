@@ -94,7 +94,9 @@ public abstract class WikipediaStandardReaderBase extends WikipediaReaderBase
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {
-        Page page = pageIter.next();
+    	super.getNext(jcas);
+
+    	Page page = pageIter.next();
 
         try {
             getUimaContext().getLogger().log(Level.FINE, "title: " + page.getTitle());

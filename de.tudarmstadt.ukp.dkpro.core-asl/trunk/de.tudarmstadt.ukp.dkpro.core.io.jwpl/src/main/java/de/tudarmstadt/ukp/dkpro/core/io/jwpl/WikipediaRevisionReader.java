@@ -41,6 +41,8 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {
+    	super.getNext(jcas);
+
         // if hasNext() is true, a next timestamp should be available
         Timestamp timestamp = timestampIter.next();
 
