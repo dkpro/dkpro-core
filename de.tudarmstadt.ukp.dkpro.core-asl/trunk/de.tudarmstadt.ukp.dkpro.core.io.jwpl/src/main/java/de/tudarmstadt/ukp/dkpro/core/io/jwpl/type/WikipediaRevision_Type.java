@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Represents a revision in Wikipedia.
- * Updated by JCasGen Thu Jul 14 14:01:04 CEST 2011
+ * Updated by JCasGen Thu Jul 21 14:38:20 CEST 2011
  * @generated */
 public class WikipediaRevision_Type extends Annotation_Type {
   /** @generated */
@@ -78,6 +78,24 @@ public class WikipediaRevision_Type extends Annotation_Type {
   
  
   /** @generated */
+  final Feature casFeat_contributorName;
+  /** @generated */
+  final int     casFeatCode_contributorName;
+  /** @generated */ 
+  public String getContributorName(int addr) {
+        if (featOkTst && casFeat_contributorName == null)
+      jcas.throwFeatMissing("contributorName", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_contributorName);
+  }
+  /** @generated */    
+  public void setContributorName(int addr, String v) {
+        if (featOkTst && casFeat_contributorName == null)
+      jcas.throwFeatMissing("contributorName", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    ll_cas.ll_setStringValue(addr, casFeatCode_contributorName, v);}
+    
+  
+ 
+  /** @generated */
   final Feature casFeat_contributorId;
   /** @generated */
   final int     casFeatCode_contributorId;
@@ -94,7 +112,9 @@ public class WikipediaRevision_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_contributorId, v);}
     
   
- 
+
+
+
   /** @generated */
   final Feature casFeat_comment;
   /** @generated */
@@ -112,9 +132,7 @@ public class WikipediaRevision_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_comment, v);}
     
   
-
-
-
+ 
   /** initialize variables to correspond with Cas Type and Features
 	* @generated */
   public WikipediaRevision_Type(JCas jcas, Type casType) {
@@ -130,12 +148,16 @@ public class WikipediaRevision_Type extends Annotation_Type {
     casFeatCode_pageId  = (null == casFeat_pageId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_pageId).getCode();
 
  
-    casFeat_contributorId = jcas.getRequiredFeatureDE(casType, "contributorId", "uima.cas.String", featOkTst);
-    casFeatCode_contributorId  = (null == casFeat_contributorId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_contributorId).getCode();
+    casFeat_contributorName = jcas.getRequiredFeatureDE(casType, "contributorName", "uima.cas.String", featOkTst);
+    casFeatCode_contributorName  = (null == casFeat_contributorName) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_contributorName).getCode();
 
  
     casFeat_comment = jcas.getRequiredFeatureDE(casType, "comment", "uima.cas.String", featOkTst);
     casFeatCode_comment  = (null == casFeat_comment) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_comment).getCode();
+
+ 
+    casFeat_contributorId = jcas.getRequiredFeatureDE(casType, "contributorId", "uima.cas.String", featOkTst);
+    casFeatCode_contributorId  = (null == casFeat_contributorId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_contributorId).getCode();
 
   }
 }

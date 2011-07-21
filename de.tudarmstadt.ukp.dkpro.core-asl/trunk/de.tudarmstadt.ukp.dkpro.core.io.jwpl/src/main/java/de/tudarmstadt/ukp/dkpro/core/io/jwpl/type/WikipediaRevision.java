@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Represents a revision in Wikipedia.
- * Updated by JCasGen Thu Jul 14 14:01:04 CEST 2011
+ * Updated by JCasGen Thu Jul 21 14:38:20 CEST 2011
  * XML source: /home/oferschke/workspaces/workspace/de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/resources/desc/type/WikipediaRevision.xml
  * @generated */
 public class WikipediaRevision extends Annotation {
@@ -96,6 +96,24 @@ public class WikipediaRevision extends Annotation {
    
     
   //*--------------*
+  //* Feature: contributorName
+
+  /** getter for contributorName - gets The username of the user/contributor who edited this revision.
+   * @generated */
+  public String getContributorName() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorName == null)
+      jcasType.jcas.throwFeatMissing("contributorName", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorName);}
+    
+  /** setter for contributorName - sets The username of the user/contributor who edited this revision. 
+   * @generated */
+  public void setContributorName(String v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorName == null)
+      jcasType.jcas.throwFeatMissing("contributorName", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorName, v);}    
+   
+    
+  //*--------------*
   //* Feature: contributorId
 
   /** getter for contributorId - gets The id of the user/contributor who edited this revision.
@@ -111,9 +129,7 @@ public class WikipediaRevision extends Annotation {
     if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
       jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
     jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId, v);}    
-   
-    
-  //*--------------*
+    //*--------------*
   //* Feature: comment
 
   /** getter for comment - gets The comment that the editor entered for this revision.
@@ -129,6 +145,8 @@ public class WikipediaRevision extends Annotation {
     if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_comment == null)
       jcasType.jcas.throwFeatMissing("comment", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
     jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_comment, v);}    
-  }
+   
+    
+}
 
     
