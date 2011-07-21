@@ -155,7 +155,8 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             revision = new Revision(0);
             revision.setArticleID(currentArticle.getPageId());
             revision.setComment("");
-            revision.setContributorID("");
+            revision.setContributorName("");
+            revision.setContributorId("");
             revision.setRevisionID(0);
             revision.setRevisionText("");
             revision.setTimeStamp(timestamp);
