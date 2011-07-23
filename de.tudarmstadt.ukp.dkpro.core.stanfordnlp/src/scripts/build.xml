@@ -1,9 +1,45 @@
 <project basedir="../.." default="separate-jars">
-	<target name="separate-jars">
-		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
-		<!--antcall target="download-core"/-->
-		<!--antcall target="download-parser"/-->
+	<target name="separate-jars" depends="separate-jars-parser, separate-jars-postagger, separate-jars-ner"/>
 		
+	<target name="separate-jars-postagger">
+		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
+		<antcall target="download-postagger"/>
+		
+    	<install-model-file file="target/download/postagger/arabic-accurate.tagger" md5="730f09c873334d7ea1dc319aeac8b827"
+    		tool="postagger" language="ar" variant="accurate" extension="tagger" version="3.0.3"/>		
+    	<install-model-file file="target/download/postagger/arabic-fast.tagger" md5="cc88707a0f57a2a303b40428d96a5853"
+    		tool="postagger" language="ar" variant="fast" extension="tagger" version="3.0.3"/>		
+		
+    	<install-model-file file="target/download/postagger/chinese.tagger" md5="77b63c53d00e92ac669d8daf5418e652"
+    		tool="postagger" language="zh" variant="default" extension="tagger" version="3.0.3"/>	
+		
+    	<install-model-file file="target/download/postagger/german-accurate.tagger" md5="e82ac97aed58af9d2fe54e428433145a"
+    		tool="postagger" language="de" variant="accurate" extension="tagger" version="3.0.3"/>		
+    	<install-model-file file="target/download/postagger/german-fast.tagger" md5="8494b5e56c1545cca77bf7faf7b9967c"
+    		tool="postagger" language="de" variant="fast" extension="tagger" version="3.0.3"/>		
+
+    	<install-model-file file="target/download/postagger/bidirectional-distsim-wsj-0-18.tagger" md5="e230dffde190709c5c1bc0ed9a12ac3b"
+    		tool="postagger" language="en" variant="bidirectional-distsim-wsj-0-18" extension="tagger" version="3.0.3"/>		
+    	<install-model-file file="target/download/postagger/left3words-distsim-wsj-0-18.tagger" md5="2d8ae6a806a1a880ce49ec07d60740e9"
+    		tool="postagger" language="en" variant="left3words-distsim-wsj-0-18" extension="tagger" version="3.0.3"/>		
+    	<install-model-file file="target/download/postagger/left3words-wsj-0-18.tagger" md5="5d9319fd95b18dacb2551529878313eb"
+    		tool="postagger" language="en" variant="left3words-wsj-0-18" extension="tagger" version="3.0.3"/>		
+
+		<!--
+		<antcall target="download-core"/>
+    	<install-model-file file="target/download/core/bidirectional-distsim-wsj-0-18.tagger" md5="e230dffde190709c5c1bc0ed9a12ac3b"
+    		tool="postagger" language="en" variant="bidirectional-distsim-wsj-0-18" extension="tagger" version="1.1.0"/>		
+    	<install-model-file file="target/download/core/left3words-distsim-wsj-0-18.tagger" md5="2d8ae6a806a1a880ce49ec07d60740e9"
+    		tool="postagger" language="en" variant="left3words-distsim-wsj-0-18.tagger" extension="tagger" version="1.1.0"/>		
+    	-->
+		
+		<antcall target="jar-notice"/>
+	</target>
+
+	<target name="separate-jars-ner">
+		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
+		<antcall target="download-core"/>
+
     	<install-model-file file="target/download/core/muc.distsim.crf.ser.gz" md5="947710871ee62cbe94e8b21f2c934581"
     		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="1.1.0"/>		
 
@@ -12,12 +48,14 @@
 
 		<install-model-file file="target/download/core/all.3class.distsim.crf.ser.gz" md5="163502a20d89b686767281dc001cc55f"
     		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.1.0"/>		
-
-		<!-- This should be the same as the model file rolled out with the parser package
-    	<install-model-file file="target/download/core/englishPCFG.ser.gz" md5="cb662b2f737846558c3e2bc9d54b0641"
-    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.1.0"/>		
-    	-->
-
+		
+		<antcall target="jar-notice"/>
+	</target>
+			
+	<target name="separate-jars-parser">
+		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
+		<antcall target="download-parser"/>
+		
     	<install-model-file file="target/download/parser/englishPCFG.ser.gz" md5="e38a2ba7132885ce7831d7b041dfe53b"
     		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.6.8"/>		
 
@@ -42,6 +80,11 @@
     	<install-model-file file="target/download/parser/frenchFactored.ser.gz" md5="1de6d989344f5abe076956473832dbdf"
     		tool="lexparser" language="fr" variant="factored" extension="ser.gz" version="1.6.8"/>		
 
+		<!-- This should be the same as the model file rolled out with the parser package
+		<antcall target="download-core"/>
+    	<install-model-file file="target/download/core/englishPCFG.ser.gz" md5="cb662b2f737846558c3e2bc9d54b0641"
+    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.1.0"/>		
+    	-->
 		<antcall target="jar-notice"/>
 	</target>
 
@@ -63,6 +106,7 @@
 		<unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
     		<patternset>
     			<include name="**/*.ser.gz"/>		
+    			<include name="**/*.tagger*"/>		
 			</patternset>
     		<chainedmapper>
 	    		<mapper type="flatten"/>
@@ -70,7 +114,7 @@
 		</unzip>
     	<delete file="target/download/core/stanford-corenlp-models.jar"/>
     	<!--delete file="target/download/core/core-nlp.tar.gz"/-->
-    	<!--delete file="target/download/core/core-nlp.tar"/-->
+    	<delete file="target/download/core/core-nlp.tar"/>
 	</target>
 
 	<target name="download-parser">
@@ -86,7 +130,23 @@
     		</chainedmapper>
     	</untar>
     	<!--delete file="target/download/parser/parser.tar.gz"/-->
-    	<!--delete file="target/download/parser/parser.tar"/-->
+    	<delete file="target/download/parser/parser.tar"/>
+	</target>
+
+	<target name="download-postagger">
+		<mkdir dir="target/download/postagger"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-2011-06-19.tgz" dest="target/download/postagger/postagger.tar.gz" skipexisting="true"/>
+	   	<gunzip src="target/download/postagger/postagger.tar.gz"/>
+    	<untar src="target/download/postagger/postagger.tar" dest="target/download/postagger">
+    		<patternset>
+    			<include name="**/models//*.tagger*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+    	</untar>
+    	<!--delete file="target/download/parser/postagger.tar.gz"/-->
+    	<delete file="target/download/parser/postagger.tar"/>
 	</target>
 
 	<target name="jar-notice">
@@ -133,6 +193,7 @@
 			<fail unless="outputDir">No output directory set.</fail>
 	    	<mkdir dir="${outputDir}/lib"/>
 			<copy file="@{file}" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}"/>
+			<copy file="@{file}.props" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}.props" failonerror="false"/>
 			
 			<generate-model-properties tool="@{tool}" language="@{language}" variant="@{variant}"
 				extension="@{extension}"/>
