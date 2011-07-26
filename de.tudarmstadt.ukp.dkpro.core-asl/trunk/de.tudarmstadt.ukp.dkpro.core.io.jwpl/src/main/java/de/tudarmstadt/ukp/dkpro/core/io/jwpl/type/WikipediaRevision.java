@@ -11,7 +11,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** Represents a revision in Wikipedia.
- * Updated by JCasGen Thu Jul 21 14:38:20 CEST 2011
+ * Updated by JCasGen Tue Jul 26 16:03:49 CEST 2011
  * XML source: /home/oferschke/workspaces/workspace/de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/resources/desc/type/WikipediaRevision.xml
  * @generated */
 public class WikipediaRevision extends Annotation {
@@ -118,18 +118,18 @@ public class WikipediaRevision extends Annotation {
 
   /** getter for contributorId - gets The id of the user/contributor who edited this revision.
    * @generated */
-  public String getContributorId() {
+  public int getContributorId() {
     if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
       jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId);}
+    return jcasType.ll_cas.ll_getIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId);}
     
-  /** setter for contributorId - sets The id of the user/contributor who edited this revision. 
+  /** setter for contributorId - sets The userId of the user/contributor who created this revision 
    * @generated */
-  public void setContributorId(String v) {
+  public void setContributorId(int v) {
     if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
       jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId, v);}    
-    //*--------------*
+    jcasType.ll_cas.ll_setIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId, v);}    
+      //*--------------*
   //* Feature: comment
 
   /** getter for comment - gets The comment that the editor entered for this revision.
