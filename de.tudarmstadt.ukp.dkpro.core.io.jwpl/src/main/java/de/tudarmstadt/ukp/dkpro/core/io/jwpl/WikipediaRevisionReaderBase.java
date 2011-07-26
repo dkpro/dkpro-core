@@ -170,7 +170,10 @@ public abstract class WikipediaRevisionReaderBase extends WikipediaReaderBase
         revAnno.setRevisionId(revision.getRevisionID());
         revAnno.setPageId(revision.getArticleID());
         revAnno.setContributorName(revision.getContributorName());
-        revAnno.setContributorId(revision.getContributorId());
+        Integer contribId = revision.getContributorId();
+        if(contribId!=null){
+            revAnno.setContributorId(revision.getContributorId());
+        }
         revAnno.setComment(revision.getComment());
         revAnno.addToIndexes();
     }
