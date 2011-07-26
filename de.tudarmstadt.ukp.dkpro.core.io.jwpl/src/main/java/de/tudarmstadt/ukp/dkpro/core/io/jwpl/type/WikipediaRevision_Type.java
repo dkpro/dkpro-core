@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Represents a revision in Wikipedia.
- * Updated by JCasGen Thu Jul 21 14:38:20 CEST 2011
+ * Updated by JCasGen Tue Jul 26 16:03:50 CEST 2011
  * @generated */
 public class WikipediaRevision_Type extends Annotation_Type {
   /** @generated */
@@ -100,16 +100,16 @@ public class WikipediaRevision_Type extends Annotation_Type {
   /** @generated */
   final int     casFeatCode_contributorId;
   /** @generated */ 
-  public String getContributorId(int addr) {
+  public int getContributorId(int addr) {
         if (featOkTst && casFeat_contributorId == null)
       jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_contributorId);
+    return ll_cas.ll_getIntValue(addr, casFeatCode_contributorId);
   }
   /** @generated */    
-  public void setContributorId(int addr, String v) {
+  public void setContributorId(int addr, int v) {
         if (featOkTst && casFeat_contributorId == null)
       jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    ll_cas.ll_setStringValue(addr, casFeatCode_contributorId, v);}
+    ll_cas.ll_setIntValue(addr, casFeatCode_contributorId, v);}
     
   
 
@@ -156,7 +156,7 @@ public class WikipediaRevision_Type extends Annotation_Type {
     casFeatCode_comment  = (null == casFeat_comment) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_comment).getCode();
 
  
-    casFeat_contributorId = jcas.getRequiredFeatureDE(casType, "contributorId", "uima.cas.String", featOkTst);
+    casFeat_contributorId = jcas.getRequiredFeatureDE(casType, "contributorId", "uima.cas.Integer", featOkTst);
     casFeatCode_contributorId  = (null == casFeat_contributorId) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_contributorId).getCode();
 
   }
