@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +56,15 @@ public class SpellChecker
 	@ConfigurationParameter(name = PARAM_DICT_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String dictEncoding;
 
-	private SpellDictionary dict;
+    /**
+     * Determines the maximum edit distance (as an int value) that a suggestion for a spelling error may have.
+     * E.g. if set to one suggestions are limited to words within edit distance 1 to the original word.   
+     */
+    public static final String PARAM_SCORE_THRESHOLD = "ScoreThreshold";
+    @ConfigurationParameter(name = PARAM_SCORE_THRESHOLD, mandatory = true, defaultValue = "1")
+    private int scoreThreshold;
+
+    private SpellDictionary dict;
 
 	@Override
 	public void initialize(final UimaContext context)
@@ -82,19 +90,28 @@ public class SpellChecker
 	public void process(final JCas cas)
 		throws AnalysisEngineProcessException
 	{
-		for (Token t : iterate(cas, Token.class)) {
+		for (Token t : select(cas, Token.class)) {
 			String tokenText = t.getCoveredText();
 			if (tokenText.matches("[\\.\\?\\!]")) {
 				continue;
 			}
 			if (!dict.isCorrect(tokenText)) {
 				SpellingAnomaly anomaly = new SpellingAnomaly(cas, t.getBegin(), t.getEnd());
-				@SuppressWarnings("unchecked")
-				List<Word> suggestions = dict.getSuggestions(tokenText, 1);
-				if (suggestions.size() > 0) {
-					anomaly.setSuggestion(suggestions.get(0).getWord());
+				
+				// only try to correct single character tokens if they are letters
+				if (tokenText.length() == 1 && !Character.isLetter(tokenText.charAt(0))) {
+				    continue;
 				}
-				anomaly.addToIndexes();
+				
+				@SuppressWarnings("unchecked")
+				List<Word> suggestions = dict.getSuggestions(tokenText, scoreThreshold);
+				if (suggestions.size() > 0) {
+				    String suggestion = suggestions.get(0).getWord();
+				    if (suggestion != null) {
+	                    anomaly.setSuggestion(suggestion);
+	                    anomaly.addToIndexes();
+				    }
+				}
 			}
 		}
 	}
