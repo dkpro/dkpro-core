@@ -121,7 +121,8 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
     private void addDocumentMetaData(JCas jcas, int id) throws WikiApiException {
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(wiki.getTitle(id).toString());
-
         metaData.setCollectionId(new Integer(id).toString());
+        metaData.setLanguage(dbconfig.getLanguage().toString());
+
     }
 }
