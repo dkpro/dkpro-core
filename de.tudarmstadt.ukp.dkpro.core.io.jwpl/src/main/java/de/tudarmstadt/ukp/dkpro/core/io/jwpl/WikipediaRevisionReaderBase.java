@@ -183,5 +183,7 @@ public abstract class WikipediaRevisionReaderBase extends WikipediaReaderBase
         metaData.setDocumentTitle(currentArticle.getTitle().getWikiStyleTitle());
         metaData.setCollectionId(new Integer(pageId).toString());
         metaData.setDocumentId(new Integer(revisionId).toString());
+        metaData.setLanguage(dbconfig.getLanguage().toString());
+
     }
 }
