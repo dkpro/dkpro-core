@@ -17,13 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.teaching.frequency.FrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.teaching.frequency.Web1TProvider;
 
 /**
  * External resource wrapper for the Web1T frequency count provider.
@@ -32,12 +37,43 @@ import de.tudarmstadt.ukp.dkpro.teaching.frequency.FrequencyCountProvider;
  *
  */
 public final class Web1TFrequencyCountProvider
-	extends Resource_ImplBase
+	extends FrequencyCountProviderBase
 	implements FrequencyCountProvider
 {
-	private FrequencyCountProvider provider;
 
-	@SuppressWarnings("unchecked")
+    public static final String PARAM_LANGUAGE_CODE = "LanguageCode";
+    @ConfigurationParameter(name = PARAM_LANGUAGE_CODE, mandatory = true, defaultValue = "en")
+    protected String language;
+    
+    public static final String PARAM_MIN_NGRAM_LEVEL = "MinLevel";
+    @ConfigurationParameter(name = PARAM_MIN_NGRAM_LEVEL, mandatory = true, defaultValue = "1")
+    protected int minLevel;
+    
+    public static final String PARAM_MAX_NGRAM_LEVEL = "MaxLevel";
+    @ConfigurationParameter(name = PARAM_MAX_NGRAM_LEVEL, mandatory = true, defaultValue = "5")
+    protected int maxLevel;
+    
+    public static final String PARAM_INDEX_FILE_1 = "IndexFile1";
+    @ConfigurationParameter(name=PARAM_INDEX_FILE_1, mandatory=false)
+    private String indexFile1;
+    
+    public static final String PARAM_INDEX_FILE_2 = "IndexFile2";
+    @ConfigurationParameter(name=PARAM_INDEX_FILE_2, mandatory=false)
+    private String indexFile2;
+
+    public static final String PARAM_INDEX_FILE_3 = "IndexFile3";
+    @ConfigurationParameter(name=PARAM_INDEX_FILE_3, mandatory=false)
+    private String indexFile3;
+
+    public static final String PARAM_INDEX_FILE_4 = "IndexFile4";
+    @ConfigurationParameter(name=PARAM_INDEX_FILE_4, mandatory=false)
+    private String indexFile4;
+
+    public static final String PARAM_INDEX_FILE_5 = "IndexFile5";
+    @ConfigurationParameter(name=PARAM_INDEX_FILE_5, mandatory=false)
+    private String indexFile5;
+
+    @SuppressWarnings("unchecked")
     @Override
 	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
 		throws ResourceInitializationException
@@ -46,22 +82,37 @@ public final class Web1TFrequencyCountProvider
 			return false;
 		}
 
-		provider = new Web1TFrequencyCountProvider();
+		List<String> indexFiles = new ArrayList<String>();
+        if (indexFile1 != null) {
+            indexFiles.add(indexFile1);
+        }
+        if (indexFile2 != null) {
+            indexFiles.add(indexFile2);
+        }
+        if (indexFile3 != null) {
+            indexFiles.add(indexFile3);
+        }
+        if (indexFile4 != null) {
+            indexFiles.add(indexFile4);
+        }
+        if (indexFile5 != null) {
+            indexFiles.add(indexFile5);
+        }
+
+		
+        try {
+            if (indexFiles.size() > 0) {
+    		        provider = new Web1TProvider(indexFiles.toArray(new String[indexFiles.size()]));
+    		}
+    		else {
+    		    // if no index files have been provided, try to initialize using the language parameter 
+    	            provider = new Web1TProvider(new Locale(language), minLevel, maxLevel);
+    	    }
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
 
 		return true;
-	}
-
-	@Override
-	public long getFrequency(String phrase)
-		throws Exception
-	{
-		return provider.getFrequency(phrase);
-	}
-
-	@Override
-	public double getNormalizedFrequency(String phrase)
-		throws Exception
-	{
-		return provider.getNormalizedFrequency(phrase);
 	}
 }

@@ -33,11 +33,6 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.teaching</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.teaching.frequency</artifactId>
-			<version>0.3.0</version>
-		</dependency>
-		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 		</dependency>
@@ -45,5 +40,39 @@
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.teaching</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.teaching.frequency</artifactId>
+			<version>0.4.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>rat-maven-plugin</artifactId>
+				<version>1.0-alpha-3</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludes>
+						<exclude>release.properties</exclude> <!-- release generated artifact -->
+						<exclude>CHANGES</exclude>
+						<exclude>NOTICE</exclude>
+						<exclude>README</exclude>
+						<exclude>src/main/resources/**/*</exclude>
+						<exclude>src/test/resources/**/*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
