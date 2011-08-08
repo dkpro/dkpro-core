@@ -31,12 +31,14 @@ import org.junit.Test;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
+import de.tudarmstadt.ukp.dkpro.teaching.frequency.FrequencyCountProvider;
+
 public class Web1tFrequencyCountProviderTest
 {
     public static class Annotator extends JCasAnnotator_ImplBase {
             final static String MODEL_KEY = "FrequencyProvider";
             @ExternalResource(key = MODEL_KEY)
-            private FrequencyCountProviderBase model;
+            private FrequencyCountProvider model;
 
             @Override
             public void process(JCas aJCas)
