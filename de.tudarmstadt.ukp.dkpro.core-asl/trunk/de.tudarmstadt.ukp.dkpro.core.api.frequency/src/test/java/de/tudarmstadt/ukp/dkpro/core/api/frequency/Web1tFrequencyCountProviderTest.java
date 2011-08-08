@@ -36,7 +36,7 @@ public class Web1tFrequencyCountProviderTest
     public static class Annotator extends JCasAnnotator_ImplBase {
             final static String MODEL_KEY = "FrequencyProvider";
             @ExternalResource(key = MODEL_KEY)
-            private Web1TFrequencyCountProvider model;
+            private FrequencyCountProviderBase model;
 
             @Override
             public void process(JCas aJCas)
@@ -57,7 +57,30 @@ public class Web1tFrequencyCountProviderTest
             bindResource(
                     aaed,
                     Annotator.MODEL_KEY,
-                    Web1TFrequencyCountProvider.class
+                    Web1TFrequencyCountProvider.class,
+                    Web1TFrequencyCountProvider.PARAM_LANGUAGE_CODE, "en"
+            );
+
+            // Check the external resource was injected
+            AnalysisEngine ae = createAggregate(aaed);
+            ae.process(ae.newJCas());
+    }
+
+    @Ignore
+    @Test
+    public void configureAggregatedExample2() throws Exception {
+            AnalysisEngineDescription aed1 = createPrimitiveDescription(Annotator.class);
+            AnalysisEngineDescription aed2 = createPrimitiveDescription(Annotator.class);
+
+            // Bind external resource to the aggregate
+            AnalysisEngineDescription aaed = createAggregateDescription(aed1, aed2);
+            bindResource(
+                    aaed,
+                    Annotator.MODEL_KEY,
+                    Web1TFrequencyCountProvider.class,
+                    Web1TFrequencyCountProvider.PARAM_LANGUAGE_CODE, "en",
+                    Web1TFrequencyCountProvider.PARAM_INDEX_FILE_1, "src/test/resources/web1t/index-1gms",
+                    Web1TFrequencyCountProvider.PARAM_INDEX_FILE_2, "src/test/resources/web1t/index-2gms"
             );
 
             // Check the external resource was injected
