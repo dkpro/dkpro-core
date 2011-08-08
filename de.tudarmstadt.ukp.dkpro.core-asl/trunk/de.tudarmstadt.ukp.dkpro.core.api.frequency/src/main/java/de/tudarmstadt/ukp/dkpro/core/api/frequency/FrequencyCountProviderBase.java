@@ -48,4 +48,11 @@ public abstract class FrequencyCountProviderBase
     {
         return provider.getLogProbability(phrase);
     }
+    
+    @Override
+    public long getNrOfTokens()
+        throws Exception
+    {
+        return provider.getNrOfTokens();
+    }    
 }
