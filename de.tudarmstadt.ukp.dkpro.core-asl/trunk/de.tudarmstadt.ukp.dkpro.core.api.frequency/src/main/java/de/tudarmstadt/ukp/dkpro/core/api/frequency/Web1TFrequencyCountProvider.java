@@ -47,11 +47,11 @@ public final class Web1TFrequencyCountProvider
     
     public static final String PARAM_MIN_NGRAM_LEVEL = "MinLevel";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_LEVEL, mandatory = true, defaultValue = "1")
-    protected int minLevel;
+    protected String minLevel;
     
     public static final String PARAM_MAX_NGRAM_LEVEL = "MaxLevel";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LEVEL, mandatory = true, defaultValue = "5")
-    protected int maxLevel;
+    protected String maxLevel;
     
     public static final String PARAM_INDEX_FILE_1 = "IndexFile1";
     @ConfigurationParameter(name=PARAM_INDEX_FILE_1, mandatory=false)
@@ -106,7 +106,9 @@ public final class Web1TFrequencyCountProvider
     		}
     		else {
     		    // if no index files have been provided, try to initialize using the language parameter 
-    	            provider = new Web1TProvider(new Locale(language), minLevel, maxLevel);
+    		    int min = new Integer(minLevel);
+                int max = new Integer(maxLevel);
+    		    provider = new Web1TProvider(new Locale(language), min, max);
     	    }
         }
         catch (IOException e) {
