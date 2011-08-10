@@ -22,12 +22,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
 
+import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sun Nov 21 13:25:15 CET 2010
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.anomaly/src/main/resources/desc/type/Anomalies.xml
+ * Updated by JCasGen Tue Aug 09 17:57:32 CEST 2011
+ * XML source: /home/zesch/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.anomaly/src/main/resources/desc/type/Anomalies.xml
  * @generated */
 public class Anomaly extends Annotation {
   /** @generated
@@ -93,21 +94,37 @@ public class Anomaly extends Annotation {
    
     
   //*--------------*
-  //* Feature: suggestion
+  //* Feature: suggestions
 
-  /** getter for suggestion - gets 
+  /** getter for suggestions - gets An array of the suggested actions to be taken for this anomaly.
    * @generated */
-  public String getSuggestion() {
-    if (Anomaly_Type.featOkTst && ((Anomaly_Type)jcasType).casFeat_suggestion == null)
-      jcasType.jcas.throwFeatMissing("suggestion", "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestion);}
+  public FSArray getSuggestions() {
+    if (Anomaly_Type.featOkTst && ((Anomaly_Type)jcasType).casFeat_suggestions == null)
+      jcasType.jcas.throwFeatMissing("suggestions", "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly");
+    return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestions)));}
     
-  /** setter for suggestion - sets  
+  /** setter for suggestions - sets An array of the suggested actions to be taken for this anomaly. 
    * @generated */
-  public void setSuggestion(String v) {
-    if (Anomaly_Type.featOkTst && ((Anomaly_Type)jcasType).casFeat_suggestion == null)
-      jcasType.jcas.throwFeatMissing("suggestion", "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestion, v);}    
+  public void setSuggestions(FSArray v) {
+    if (Anomaly_Type.featOkTst && ((Anomaly_Type)jcasType).casFeat_suggestions == null)
+      jcasType.jcas.throwFeatMissing("suggestions", "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestions, jcasType.ll_cas.ll_getFSRef(v));}    
+    
+  /** indexed getter for suggestions - gets an indexed value - An array of the suggested actions to be taken for this anomaly.
+   * @generated */
+  public SuggestedAction getSuggestions(int i) {
+    if (Anomaly_Type.featOkTst && ((Anomaly_Type)jcasType).casFeat_suggestions == null)
+      jcasType.jcas.throwFeatMissing("suggestions", "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly");
+    jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestions), i);
+    return (SuggestedAction)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestions), i)));}
+
+  /** indexed setter for suggestions - sets an indexed value - An array of the suggested actions to be taken for this anomaly.
+   * @generated */
+  public void setSuggestions(int i, SuggestedAction v) { 
+    if (Anomaly_Type.featOkTst && ((Anomaly_Type)jcasType).casFeat_suggestions == null)
+      jcasType.jcas.throwFeatMissing("suggestions", "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly");
+    jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestions), i);
+    jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Anomaly_Type)jcasType).casFeatCode_suggestions), i, jcasType.ll_cas.ll_getFSRef(v));}
    
     
   //*--------------*
