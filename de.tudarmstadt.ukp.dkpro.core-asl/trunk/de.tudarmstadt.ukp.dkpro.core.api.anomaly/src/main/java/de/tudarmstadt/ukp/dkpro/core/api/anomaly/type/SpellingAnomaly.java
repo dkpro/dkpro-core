@@ -25,8 +25,8 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 /** 
- * Updated by JCasGen Sun Nov 21 13:25:15 CET 2010
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.anomaly/src/main/resources/desc/type/Anomalies.xml
+ * Updated by JCasGen Tue Aug 09 17:57:32 CEST 2011
+ * XML source: /home/zesch/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.anomaly/src/main/resources/desc/type/Anomalies.xml
  * @generated */
 public class SpellingAnomaly extends Anomaly {
   /** @generated

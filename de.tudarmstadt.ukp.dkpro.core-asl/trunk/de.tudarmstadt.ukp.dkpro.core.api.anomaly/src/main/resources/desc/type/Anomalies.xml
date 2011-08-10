@@ -4,6 +4,9 @@
   <description/>
   <version>1.0</version>
   <vendor/>
+  <imports>
+    <import name="desc.type.SuggestedAction"/>
+  </imports>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly</name>
@@ -21,9 +24,10 @@
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
         <featureDescription>
-          <name>suggestion</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
+          <name>suggestions</name>
+          <description>An array of the suggested actions to be taken for this anomaly.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction</elementType>
         </featureDescription>
         <featureDescription>
           <name>category</name>

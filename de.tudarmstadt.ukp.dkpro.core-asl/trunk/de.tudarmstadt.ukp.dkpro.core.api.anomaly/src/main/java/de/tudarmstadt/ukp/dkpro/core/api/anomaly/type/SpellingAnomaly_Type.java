@@ -27,7 +27,7 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 
 /** 
- * Updated by JCasGen Sun Nov 21 13:25:15 CET 2010
+ * Updated by JCasGen Tue Aug 09 17:57:32 CEST 2011
  * @generated */
 public class SpellingAnomaly_Type extends Anomaly_Type {
   /** @generated */
