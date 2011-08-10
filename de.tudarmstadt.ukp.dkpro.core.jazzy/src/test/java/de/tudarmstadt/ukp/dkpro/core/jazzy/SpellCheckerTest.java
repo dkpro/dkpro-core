@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.jazzy;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +65,9 @@ public class SpellCheckerTest
 		engine.process(aJCas);
 
 		int i = 0;
-		for (SpellingAnomaly errorAnnotation : iterate(aJCas, SpellingAnomaly.class)) {
+		for (SpellingAnomaly errorAnnotation : select(aJCas, SpellingAnomaly.class)) {
 			System.out.println(errorAnnotation.getCoveredText() + " - "
-					+ errorAnnotation.getSuggestion());
+					+ errorAnnotation.getSuggestions(0).getReplacement());
 			assertEquals(errors.get(i), errorAnnotation.getCoveredText());
 			i++;
 		}

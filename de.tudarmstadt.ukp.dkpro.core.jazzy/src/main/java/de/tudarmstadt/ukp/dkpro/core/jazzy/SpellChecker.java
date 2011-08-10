@@ -25,11 +25,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
@@ -39,6 +42,7 @@ import com.swabunga.spell.engine.SpellDictionaryHashMap;
 import com.swabunga.spell.engine.Word;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
+import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -87,16 +91,16 @@ public class SpellChecker
 	}
 
 	@Override
-	public void process(final JCas cas)
+	public void process(final JCas jcas)
 		throws AnalysisEngineProcessException
 	{
-		for (Token t : select(cas, Token.class)) {
+		for (Token t : select(jcas, Token.class)) {
 			String tokenText = t.getCoveredText();
 			if (tokenText.matches("[\\.\\?\\!]")) {
 				continue;
 			}
 			if (!dict.isCorrect(tokenText)) {
-				SpellingAnomaly anomaly = new SpellingAnomaly(cas, t.getBegin(), t.getEnd());
+				SpellingAnomaly anomaly = new SpellingAnomaly(jcas, t.getBegin(), t.getEnd());
 				
 				// only try to correct single character tokens if they are letters
 				if (tokenText.length() == 1 && !Character.isLetter(tokenText.charAt(0))) {
@@ -105,14 +109,96 @@ public class SpellChecker
 				
 				@SuppressWarnings("unchecked")
 				List<Word> suggestions = dict.getSuggestions(tokenText, scoreThreshold);
-				if (suggestions.size() > 0) {
-				    String suggestion = suggestions.get(0).getWord();
-				    if (suggestion != null) {
-	                    anomaly.setSuggestion(suggestion);
-	                    anomaly.addToIndexes();
+				
+				SuggestionCostTuples tuples = new SuggestionCostTuples();
+				for (Word suggestion : suggestions) {
+				    String suggestionString = suggestion.getWord();
+				    int cost = suggestion.getCost();
+				    
+				    if (suggestionString != null) {
+	                    tuples.addTuple(suggestionString, cost);
 				    }
+				}
+				
+				if (tuples.size() > 0) {
+    				FSArray actions = new FSArray(jcas, tuples.size());
+    				int i=0;
+    				for (SuggestionCostTuple tuple : tuples) {
+                        SuggestedAction action = new SuggestedAction(jcas);
+                        action.setReplacement(tuple.getSuggestion());
+                        action.setCertainty(tuple.getNormalizedCost(tuples.getMaxCost()));
+                        
+                        actions.set(i, action);
+                        i++;
+    				}
+    			    anomaly.setSuggestions(actions);
+                    anomaly.addToIndexes();
 				}
 			}
 		}
 	}
+
+    class SuggestionCostTuples implements Iterable<SuggestionCostTuple> {
+	    private final List<SuggestionCostTuple> tuples;
+	    private int maxCost;
+	    
+	    public SuggestionCostTuples()
+        {
+	        tuples = new ArrayList<SuggestionCostTuple>();
+	        maxCost = 0;
+        }
+	    
+	    public void addTuple(String suggestion, int cost) {
+	        tuples.add(new SuggestionCostTuple(suggestion, cost));
+	        
+	        if (cost > maxCost) {
+	            maxCost = cost;
+	        }
+	    }
+	    
+	    public int getMaxCost() {
+	        return maxCost;
+	    }
+
+	    public int size() {
+	        return tuples.size();
+	    }
+	    
+        @Override
+        public Iterator<SuggestionCostTuple> iterator()
+        {
+            return tuples.iterator();
+        }
+	}
+
+    class SuggestionCostTuple {
+        private final String suggestion;
+        private final Integer cost;
+        
+        public SuggestionCostTuple(String suggestion, Integer cost)
+        {
+            this.suggestion = suggestion;
+            this.cost = cost;
+        }
+
+        public String getSuggestion()
+        {
+            return suggestion;
+        }
+
+        public Integer getCost()
+        {
+            return cost;
+        }
+
+        public float getNormalizedCost(int maxCost)
+        {
+            if (maxCost > 0) {
+                return (float) cost / maxCost;
+            }
+            else {
+                return 0f;
+            }
+        }
+    }
 }
