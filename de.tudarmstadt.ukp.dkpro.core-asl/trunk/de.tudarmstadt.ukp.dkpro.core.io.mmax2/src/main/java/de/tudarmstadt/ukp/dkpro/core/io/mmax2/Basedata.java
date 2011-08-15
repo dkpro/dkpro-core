@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,16 +40,15 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class Basedata
-{
-	private Map<Integer, String> ids = new HashMap<Integer, String>();
+public class Basedata {
 
-	private List<String[]> words = new ArrayList<String[]>();
+	private final Map<Integer, String> ids = new HashMap<Integer, String>();
+
+	private final List<String[]> words = new ArrayList<String[]>();
 
 	private int id = 0;
 
-	public void append(String term, int startOffset)
-	{
+	public void append(String term, int startOffset) {
 		String[] word = new String[2];
 		word[0] = "word_" + id;
 		word[1] = term;
@@ -58,60 +57,56 @@ public class Basedata
 		id++;
 	}
 
-	public String getId(int offset)
-	{
+	public String getId(int offset) {
 		return ids.get(offset);
 	}
 
-	public String[] getWord(int offset)
-	{
+	public String[] getWord(int offset) {
 		return words.get(offset);
 	}
 
-	public void save(File file)
-		throws MMAXWriterException
-	{
+	public void save(File file) throws MMAXWriterException {
 
-		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document doc = builder.newDocument();
-			Element list = doc.createElement("words");
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    		DocumentBuilder builder = factory.newDocumentBuilder();
+    		Document doc = builder.newDocument();
+    		Element list = doc.createElement("words");
 
-			for (String[] word : words) {
-				Element cur = doc.createElement("word");
-				cur.setAttribute("id", word[0]);
-				cur.appendChild(doc.createTextNode(word[1]));
-				list.appendChild(cur);
-			}
-			doc.appendChild(list);
+    		for (String[] word : words) {
+    			Element cur = doc.createElement("word");
+    			cur.setAttribute("id", word[0]);
+    			cur.appendChild(doc.createTextNode(word[1]));
+    			list.appendChild(cur);
+    		}
+    		doc.appendChild(list);
 
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new FileOutputStream(file));
-			Transformer trans = TransformerFactory.newInstance().newTransformer();
-			trans.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "words.dtd");
-			trans.transform(source, result);
-		}
-		catch (ParserConfigurationException e) {
-			throw new MMAXWriterException(e);
-		}
-		catch (FileNotFoundException e) {
-			throw new MMAXWriterException(e);
-		}
-		catch (TransformerConfigurationException e) {
-			throw new MMAXWriterException(e);
-		}
-		catch (TransformerFactoryConfigurationError e) {
-			throw new MMAXWriterException(e);
-		}
-		catch (TransformerException e) {
-			throw new MMAXWriterException(e);
-		}
+    		DOMSource source = new DOMSource(doc);
+    		StreamResult result = new StreamResult(new FileOutputStream(file));
+    		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+     	    transformer.setOutputProperty(OutputKeys.VERSION, "1.0");
+     	    transformer.setOutputProperty(OutputKeys.DOCTYPE_SYSTEM, "words.dtd");
+     	    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+     	    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+     	    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+     	    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+
+     	   transformer.transform(source, result);
+        } catch (ParserConfigurationException e) {
+            throw new MMAXWriterException(e);
+        } catch (FileNotFoundException e) {
+            throw new MMAXWriterException(e);
+        } catch (TransformerConfigurationException e) {
+            throw new MMAXWriterException(e);
+        } catch (TransformerFactoryConfigurationError e) {
+            throw new MMAXWriterException(e);
+        } catch (TransformerException e) {
+            throw new MMAXWriterException(e);
+        }
 	}
 
-	public void save(String filename)
-		throws MMAXWriterException
-	{
+	public void save(String filename) throws MMAXWriterException {
 		save(new File(filename));
 	}
 }
