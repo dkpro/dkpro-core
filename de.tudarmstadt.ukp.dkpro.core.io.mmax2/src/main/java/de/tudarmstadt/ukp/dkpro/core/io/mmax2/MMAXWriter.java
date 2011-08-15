@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -53,14 +53,15 @@ import org.xml.sax.SAXException;
 /**
  * Writes the CAS into a MMAX2 project.
  * The MMAX2 project can then be used to annotate the annotations further.
- * 
+ *
  * All the settings (which annotations should be included,
  * how they should be treated in the MMAX2 project, etc.)
  * are to be made in the empty (but fully configured) MMAX2 project that is then
  * filled with the data from the CAS.
  * This requires some knowledge of MMAX2.
- * 
+ *
  * @author zesch
+ * @author ferschke
  *
  */
 // TODO add parameter for path to MMAX project, as this needs to be adapted to the task anyway
@@ -82,10 +83,10 @@ public class MMAXWriter {
     private static final String SOURCE_PATH_STRING = "resource/mmax/";
 
     private final File basedataPath;
-//    private File customizationPath;
-//    private File markablePath;
-//    private File schemePath;
-//    private File stylePath;
+    private final File customizationPath;
+    private final File markablePath;
+    private final File schemePath;
+    private final File stylePath;
 
     private Basedata basedata;
 
@@ -113,12 +114,28 @@ public class MMAXWriter {
         }
 
         basedataPath      = new File(projectPath.getPath(), BASEDATA_PATH);
-//        customizationPath = new File(projectPath.getPath(), CUSTOMIZATION_PATH);
-//        schemePath        = new File(projectPath.getPath(), SCHEME_PATH);
-//        stylePath         = new File(projectPath.getPath(), STYLE_PATH);
-//        markablePath      = new File(projectPath.getPath(), MARKABLE_PATH);
+        customizationPath = new File(projectPath.getPath(), CUSTOMIZATION_PATH);
+        schemePath        = new File(projectPath.getPath(), SCHEME_PATH);
+        stylePath         = new File(projectPath.getPath(), STYLE_PATH);
+        markablePath      = new File(projectPath.getPath(), MARKABLE_PATH);
+    }
 
-
+    public void clearFiles(){
+    	for(File f : basedataPath.listFiles()){
+    		if(!f.getName().endsWith(".dtd")) {
+				f.delete();
+			}
+    	}
+    	for(File f : projectPath.listFiles()){
+    		if(f.getName().endsWith(".mmax")) {
+				f.delete();
+			}
+    	}
+    	for(File f : markablePath.listFiles()){
+    		if(!f.getName().endsWith(".dtd")) {
+				f.delete();
+			}
+    	}
     }
 
     public void clearBasedata() {
@@ -196,12 +213,13 @@ public class MMAXWriter {
         return new Markable(node, id, null, null, level);
     }
 
-    public void addMarkable(String levelName, String[] ids, HashMap attributes) throws MMAXWriterException {
+    public Markable addMarkable(String levelName, String[] ids, HashMap attributes) throws MMAXWriterException {
         MarkableLevel level = getMarkableLevel(levelName);
         if (level == null) {
             throw new MMAXWriterException("Could not get level: " + levelName);
         }
-        level.addMarkable(ids, attributes);
+        Markable markable = level.addMarkable(ids, attributes);
+        return markable;
     }
 
     public MarkablePointer addMarkablePointer(Markable m1, Markable m2) {
