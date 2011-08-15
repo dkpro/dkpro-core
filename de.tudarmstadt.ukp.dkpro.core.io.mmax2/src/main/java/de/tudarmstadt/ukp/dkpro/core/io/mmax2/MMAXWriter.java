@@ -82,19 +82,19 @@ public class MMAXWriter {
     // The path to the source mmax project template
     private static final String SOURCE_PATH_STRING = "resource/mmax/";
 
-    private final File basedataPath;
-    private final File customizationPath;
-    private final File markablePath;
-    private final File schemePath;
-    private final File stylePath;
+    private File basedataPath;
+    private File customizationPath;
+    private File markablePath;
+    private File schemePath;
+    private File stylePath;
 
     private Basedata basedata;
 
     // The path to the mmax project
-    private final File projectPath;
+    private File projectPath;
 
     // the common_paths.xml file
-    private final File commonPathsFile;
+    private File commonPathsFile;
 
     private MMAX2Discourse discourse;
 
