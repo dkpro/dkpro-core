@@ -123,18 +123,34 @@ public class MMAXWriter {
     public void clearFiles(){
     	for(File f : basedataPath.listFiles()){
     		if(!f.getName().endsWith(".dtd")) {
+    			log.info("Deleting: "+f.getPath().toString());
 				f.delete();
 			}
     	}
     	for(File f : projectPath.listFiles()){
     		if(f.getName().endsWith(".mmax")) {
+    			log.info("Deleting: "+f.getPath().toString());
 				f.delete();
 			}
     	}
     	for(File f : markablePath.listFiles()){
     		if(!f.getName().endsWith(".dtd")) {
-				f.delete();
+    			log.info("Deleting: "+f.getPath().toString());
+    			f.delete();
 			}
+    	}
+    	for(File f : projectPath.listFiles()){
+    		if(f.isDirectory()&&!
+    				(f.getName().equals(basedataPath.getName())
+    						||f.getName().equals(customizationPath.getName())
+    						||f.getName().equals(schemePath.getName())
+    						||f.getName().equals(stylePath.getName())
+    						||f.getName().equals(markablePath.getName())
+    				)
+    			){
+				log.info("Deleting:"+f.getPath().toString());
+    			deleteDir(f);
+    		}
     	}
     }
 
@@ -163,18 +179,20 @@ public class MMAXWriter {
         elem.appendChild(doc.createTextNode(mmaxFilename + ".xml"));
         toplevel.appendChild(elem);
 
+        File mmaxFile = new File(projectPath, mmaxFilename + ".mmax");
         doc.appendChild(toplevel);
-        saveXML(doc, new File(projectPath, mmaxFilename + ".mmax"), null, null);
+        saveXML(doc, mmaxFile, null, null);
 
         // load the current discourse
         log.info("Loading discourse");
-        loadDiscourse(projectPath + File.separator + mmaxFilename + ".mmax");
+        loadDiscourse(mmaxFile.getPath());
 
         return basedataFile.getName();
     }
 
     private void loadDiscourse(String infile) {
-        discourse = MMAX2Discourse.buildDiscourse(infile, commonPathsFile.getAbsolutePath());
+        System.out.println(infile);
+    	discourse = MMAX2Discourse.buildDiscourse(infile, commonPathsFile.getPath());
     }
 
     public void registerMarkableLevel(String levelname, String schemeFilename, String customizationFilename) throws MMAXWriterException {
@@ -310,4 +328,16 @@ public class MMAXWriter {
             }
         }
     }
+
+    private static boolean deleteDir(File dir) {
+	     if (dir.isDirectory()) {
+	         for (File element : dir.listFiles()) {
+	             boolean success = deleteDir(element);
+	             if (!success) {
+	                 return false;
+	             }
+	         }
+	     }
+	     return dir.delete();
+	 }
 }
