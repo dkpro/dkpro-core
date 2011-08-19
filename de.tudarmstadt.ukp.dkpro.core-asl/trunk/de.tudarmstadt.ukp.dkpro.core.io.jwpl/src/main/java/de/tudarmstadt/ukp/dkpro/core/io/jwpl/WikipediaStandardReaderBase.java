@@ -17,8 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
@@ -41,112 +47,230 @@ import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
 
 /**
- * Abstract base class for standard Wikipedia readers reading single articles instead of revision pairs.
+ * Abstract base class for standard Wikipedia readers reading single articles
+ * instead of revision pairs.
+ *
  * @author zesch
+ * @author Oliver Ferschke
  *
  */
-public abstract class WikipediaStandardReaderBase extends WikipediaReaderBase
+public abstract class WikipediaStandardReaderBase
+	extends WikipediaReaderBase
 {
 
-    /** Whether the reader outputs plain text or wiki markup. */
-    public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
-    @ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory=true, defaultValue="true")
-    protected boolean outputPlainText;
+	/** Whether the reader outputs plain text or wiki markup. */
+	public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
+	@ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
+	protected boolean outputPlainText;
 
-    /** The page buffer size (#pages) of the page iterator. */
-    public static final String PARAM_PAGE_BUFFER = "PageBuffer";
-    @ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory=true, defaultValue="1000")
-    protected int pageBuffer;
+	/** The page buffer size (#pages) of the page iterator. */
+	public static final String PARAM_PAGE_BUFFER = "PageBuffer";
+	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
+	protected int pageBuffer;
 
-    protected long currentArticleIndex;
-    protected long nrOfArticles;
+	/**
+	 * Defines the path to a line-separated list of page ids of the pages that
+	 * should be retrieved. (Optional)
+	 */
+	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIds";
+	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
+	protected String pageIdFile;
 
-    protected Iterator<Page> pageIter;
+	/**
+	 * Defines the path to a line-separated list of page titles of the pages
+	 * that should be retrieved. (Optional)
+	 */
+	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageNames";
+	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
+	protected String pageNameFile;
 
-    protected MediaWikiParser parser;
+	/**
+	 * A list of pages that is used to store the pages when using the
+	 * {@code PARAM_PATH_TO_PAGE_ID_LIST} and/or
+	 * {@code PARAM_PATH_TO_PAGE_TITLE_LIST}
+	 */
+	private Set<Page> pageSet;
+	private Set<String> pageIds;
+	private Set<String> pageTitles;
 
-    @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
-    {
-        super.initialize(context);
+	protected long currentArticleIndex;
+	protected long nrOfArticles;
 
-        MetaData md = wiki.getMetaData();
-	    this.nrOfArticles = md.getNumberOfPages() - md.getNumberOfDisambiguationPages() - md.getNumberOfRedirectPages();
+	protected Iterator<Page> pageIter;
 
-	    pageIter = new PageIterator(wiki, true, pageBuffer);
+	protected MediaWikiParser parser;
 
-	    currentArticleIndex = 0;
+	@Override
+	public void initialize(UimaContext context)
+		throws ResourceInitializationException
+	{
+		super.initialize(context);
 
-	    MediaWikiParserFactory pf = new MediaWikiParserFactory();
-	    pf.setTemplateParserClass( FlushTemplates.class );
+		try {
+			if (pageIdFile != null) {
+				pageIds = loadFile(pageIdFile);
+			}
+			if (pageNameFile != null) {
+				pageTitles = loadFile(pageNameFile);
+			}
+		}
+		catch (IOException e) {
+			throw new ResourceInitializationException(e);
+		}
 
-	    parser = pf.createParser();
-    }
+		//Use one of the lists or iterate over all articles?
+		if(pageIds!=null||pageTitles!=null)
+		{
+			try{
+				pageSet = new HashSet<Page>();
 
-    public boolean hasNext()
-        throws IOException, CollectionException
-    {
-        return pageIter.hasNext();
-    }
+				//load pages
+				if(pageIds!=null){
+					for(String id:pageIds){
+						if(id!=null&&!id.isEmpty()){
+							pageSet.add(wiki.getPage(Integer.parseInt(id)));
+						}
+					}
+				}
+				if(pageTitles!=null){
+					for(String title:pageTitles){
+						if(title!=null&&!title.isEmpty()){
+							pageSet.add(wiki.getPage(title));
+						}
+					}
+				}
 
-    @Override
-    public void getNext(JCas jcas)
-        throws IOException, CollectionException
-    {
-    	super.getNext(jcas);
+				this.nrOfArticles = pageSet.size();
+				pageIter = pageSet.iterator();
+			}catch(WikiApiException e){
+				throw new ResourceInitializationException(e);
+			}
+		}
+		else //use iterator over all pages in the db
+		{
+			MetaData md = wiki.getMetaData();
+			this.nrOfArticles = md.getNumberOfPages()
+					- md.getNumberOfDisambiguationPages()
+					- md.getNumberOfRedirectPages();
 
-    	Page page = pageIter.next();
+			pageIter = new PageIterator(wiki, true, pageBuffer);
+		}
 
-        try {
-            getUimaContext().getLogger().log(Level.FINE, "title: " + page.getTitle());
+		currentArticleIndex = 0;
 
-            addDocumentMetaData(jcas, page);
+		MediaWikiParserFactory pf = new MediaWikiParserFactory();
+		pf.setTemplateParserClass(FlushTemplates.class);
 
-            if (!isValidPage(page)) {
-                jcas.setDocumentText("");
-                return;
-            }
+		parser = pf.createParser();
+	}
 
-            if (outputPlainText) {
-                jcas.setDocumentText( WikiUtils.cleanText(getPlainDocumentText(page)) );
-            }
-            else {
-                jcas.setDocumentText( getDocumentText(page) );
-            }
+	public boolean hasNext()
+		throws IOException, CollectionException
+	{
+		return pageIter.hasNext();
+	}
 
-        }
-        catch (WikiApiException e) {
-            throw new CollectionException(e);
-        }
+	@Override
+	public void getNext(JCas jcas)
+		throws IOException, CollectionException
+	{
+		super.getNext(jcas);
 
-        currentArticleIndex++;
-    }
+		Page page = pageIter.next();
 
-    protected abstract boolean isValidPage(Page page) throws WikiTitleParsingException;
+		try {
+			getUimaContext().getLogger().log(Level.FINE,
+					"title: " + page.getTitle());
 
-    @Override
+			addDocumentMetaData(jcas, page);
+
+			if (!isValidPage(page)) {
+				jcas.setDocumentText("");
+				return;
+			}
+
+			if (outputPlainText) {
+				jcas.setDocumentText(WikiUtils
+						.cleanText(getPlainDocumentText(page)));
+			}
+			else {
+				jcas.setDocumentText(getDocumentText(page));
+			}
+
+		}
+		catch (WikiApiException e) {
+			throw new CollectionException(e);
+		}
+
+		currentArticleIndex++;
+	}
+
+	protected abstract boolean isValidPage(Page page)
+		throws WikiTitleParsingException;
+
+	@Override
 	public Progress[] getProgress()
-    {
-        return new Progress[] {
-                new ProgressImpl(
-                        new Long(currentArticleIndex).intValue(),
-                        new Long(nrOfArticles).intValue(),
-                        Progress.ENTITIES
-                )
-        };
-    }
+	{
+		return new Progress[] { new ProgressImpl(
+				new Long(currentArticleIndex).intValue(),
+				new Long(nrOfArticles).intValue(), Progress.ENTITIES) };
+	}
 
-    protected String getDocumentText(Page page) {
-        return page.getText();
-    }
+	protected String getDocumentText(Page page)
+	{
+		return page.getText();
+	}
 
-    protected abstract String getPlainDocumentText(Page page);
+	protected abstract String getPlainDocumentText(Page page);
 
-    private void addDocumentMetaData(JCas jcas, Page page) throws WikiTitleParsingException {
-        DocumentMetaData metaData = DocumentMetaData.create(jcas);
-        metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
-        metaData.setCollectionId(new Integer(page.getPageId()).toString());
-        metaData.setLanguage(dbconfig.getLanguage().toString());
-    }
+	private void addDocumentMetaData(JCas jcas, Page page)
+		throws WikiTitleParsingException
+	{
+		DocumentMetaData metaData = DocumentMetaData.create(jcas);
+		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
+		metaData.setCollectionId(new Integer(page.getPageId()).toString());
+		metaData.setLanguage(dbconfig.getLanguage().toString());
+	}
+
+	/**
+	 * Loads a text file line-by-line into a Set of Strings.
+	 *
+	 * @param fileName
+	 *            path to the file
+	 * @return a Set containing the individual lines of the text file
+	 * @throws IOException
+	 *             if any error occurs while reading the file
+	 */
+	private Set<String> loadFile(String fileName)
+		throws IOException
+	{
+		Set<String> container = new HashSet<String>();
+
+		FileInputStream fstream=null;
+		DataInputStream in=null;
+		BufferedReader br=null;
+		try{
+			fstream = new FileInputStream(fileName);
+			in = new DataInputStream(fstream);
+			br = new BufferedReader(new InputStreamReader(in));
+
+			String strLine;
+			while ((strLine = br.readLine()) != null) {
+				container.add(strLine);
+			}
+		}finally{
+			if(br!=null){
+				br.close();
+			}
+			if(in!=null){
+				in.close();
+			}
+			if(fstream!=null){
+				fstream.close();
+			}
+		}
+
+		return container;
+	}
+
 }
