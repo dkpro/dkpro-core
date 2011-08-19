@@ -69,16 +69,16 @@ public abstract class WikipediaStandardReaderBase
 	protected int pageBuffer;
 
 	/**
-	 * Defines the path to a line-separated list of page ids of the pages that
-	 * should be retrieved. (Optional)
+	 * Defines the path to a file containing a line-separated list of
+	 * page ids of the pages that should be retrieved. (Optional)
 	 */
 	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIds";
 	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
 	protected String pageIdFile;
 
 	/**
-	 * Defines the path to a line-separated list of page titles of the pages
-	 * that should be retrieved. (Optional)
+	 * Defines the path to a file containing a line-separated list of
+	 * page titles of the pages that should be retrieved. (Optional)
 	 */
 	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageNames";
 	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
