@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>SofaChangeAnnotation</name>
+  <description>Encodes an edit operation that can be interpreted by the ApplyChangesAnnotator.</description>
+  <version/>
+  <vendor>Ubiquitous Knowledge Processing Lab, Technische Universität Darmstadt</vendor>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation</name>
+      <description>Describes a change to the Sofa.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>value</name>
+          <description>In case of an "insert" or "replace" operation, this feature indicates the value to be inserted or replaced.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>operation</name>
+          <description>Operation to perform: "insert", "replace", "delete"</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>reason</name>
+          <description>The reason for the change.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
