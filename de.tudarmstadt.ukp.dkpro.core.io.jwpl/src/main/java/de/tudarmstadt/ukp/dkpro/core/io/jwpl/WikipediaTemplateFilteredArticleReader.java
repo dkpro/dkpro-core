@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -74,12 +73,12 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	/** Whether the reader outputs plain text or wiki markup. */
 	public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
 	@ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
-	protected boolean outputPlainText;
+	private boolean outputPlainText;
 
 	/** Whether the reader should read also include talk pages. */
 	public static final String PARAM_INCLUDE_DISCUSSION_PAGES = "IncludeDiscussions";
 	@ConfigurationParameter(name = PARAM_INCLUDE_DISCUSSION_PAGES, mandatory = true, defaultValue = "true")
-	protected boolean inludeDiscussions;
+	private boolean inludeDiscussions;
 
 	/**
 	 * Defines templates that the articles MUST contain.<br/>
@@ -89,7 +88,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 */
 	public static final String PARAM_TEMPLATE_WHITELIST = "TemplateWhitelist";
 	@ConfigurationParameter(name = PARAM_TEMPLATE_WHITELIST, mandatory = false)
-	protected String[] templateWhitelist;
+	private String[] templateWhitelist;
 
 	/**
 	 * Defines templates that the articles MUST NOT contain.<br/>
@@ -99,7 +98,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 */
 	public static final String PARAM_TEMPLATE_BLACKLIST = "TemplateBlacklist";
 	@ConfigurationParameter(name = PARAM_TEMPLATE_BLACKLIST, mandatory = false)
-	protected String[] templateBlacklist;
+	private String[] templateBlacklist;
 
 	/**
 	 * Defines whether to match the templates exactly or whether to match all
@@ -109,22 +108,21 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 */
 	public static final String PARAM_EXACT_TEMPLATE_MATCHING = "ExactTemplateMatching";
 	@ConfigurationParameter(name = PARAM_EXACT_TEMPLATE_MATCHING, mandatory = true, defaultValue="true")
-	protected boolean exactTemplateMatching;
-
-	private List<Page> bufferedPages;
-	private List<Integer> ids;
+	private boolean exactTemplateMatching;
 
 	/** The page buffer size (#pages) of the page iterator. */
 	public static final String PARAM_PAGE_BUFFER = "PageBuffer";
 	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
-	protected int pageBuffer;
+	private int pageBuffer;
 
-	protected long currentArticleIndex;
-	protected long nrOfArticles;
 
-	protected Iterator<Page> pageIter;
+	private List<Page> bufferedPages;
+	private List<Integer> pageIds;
 
-	protected MediaWikiParser parser;
+	private long currentArticleIndex;
+	private long nrOfArticles;
+
+	private MediaWikiParser parser;
 
 
 	@Override
@@ -133,62 +131,69 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	{
 		super.initialize(context);
 
-		if(templateBlacklist==null&&templateWhitelist==null){
+		if (templateBlacklist == null && templateWhitelist == null) {
 			throw new ResourceInitializationException();
 		}
 
-			try{
-				bufferedPages = new LinkedList<Page>();
-				ids=new LinkedList<Integer>();
+		try {
+			bufferedPages = new LinkedList<Page>();
+			pageIds = new LinkedList<Integer>();
 
-				WikipediaTemplateInfo tplInfo = new WikipediaTemplateInfo(wiki);
-				Iterable<Integer> pageIds=null;
+			WikipediaTemplateInfo tplInfo = new WikipediaTemplateInfo(wiki);
+			Iterable<Integer> filteredIds = null;
 
-				//WHITELIST FILTER
-				Set<Integer> wlSet=null;
-				if(templateWhitelist!=null){
-					wlSet=new HashSet<Integer>();
-					if(exactTemplateMatching){
-						pageIds = tplInfo.getPageIdsContainingTemplateNames(Arrays.asList(templateWhitelist));
-					}else{
-						pageIds = tplInfo.getPageIdsContainingTemplateFragments(Arrays.asList(templateWhitelist));
-					}
-					for(Integer id:pageIds){
-						wlSet.add(id);
-					}
+			// WHITELIST FILTER
+			Set<Integer> wlSet = null;
+			if (templateWhitelist != null) {
+				wlSet = new HashSet<Integer>();
+				if (exactTemplateMatching) {
+					filteredIds = tplInfo.getPageIdsContainingTemplateNames(
+							Arrays.asList(templateWhitelist));
 				}
-
-				//BLACKLIST FILTER
-				Set<Integer> blSet=null;
-				if(templateBlacklist!=null){
-					blSet=new HashSet<Integer>();
-					if(exactTemplateMatching){
-						pageIds = tplInfo.getPageIdsNotContainingTemplateNames(Arrays.asList(templateBlacklist));
-					}else{
-						pageIds = tplInfo.getPageIdsNotContainingTemplateFragments(Arrays.asList(templateBlacklist));
-					}
-					for(Integer id:pageIds){
-						blSet.add(id);
-					}
+				else {
+					filteredIds = tplInfo.getPageIdsContainingTemplateFragments(
+							Arrays.asList(templateWhitelist));
 				}
-
-				//GET FINAL LIST IDS
-				if(blSet!=null&&wlSet!=null){
-					ids.addAll(blSet);
-					ids.retainAll(wlSet);
+				for (Integer id : filteredIds) {
+					wlSet.add(id);
 				}
-				else if(blSet==null&&wlSet!=null){
-					ids.addAll(wlSet);
-				}
-				else if(blSet!=null&&wlSet==null){
-					ids.addAll(blSet);
-				}
-
-				this.nrOfArticles = ids.size();
-
-			}catch(Exception e){
-				throw new ResourceInitializationException(e);
 			}
+
+			// BLACKLIST FILTER
+			Set<Integer> blSet = null;
+			if (templateBlacklist != null) {
+				blSet = new HashSet<Integer>();
+				if (exactTemplateMatching) {
+					filteredIds = tplInfo.getPageIdsNotContainingTemplateNames(
+									Arrays.asList(templateBlacklist));
+				}
+				else {
+					filteredIds = tplInfo.getPageIdsNotContainingTemplateFragments(
+							Arrays.asList(templateBlacklist));
+				}
+				for (Integer id : filteredIds) {
+					blSet.add(id);
+				}
+			}
+
+			// GET FINAL ID LIST
+			if (blSet != null && wlSet != null) {
+				pageIds.addAll(blSet);
+				pageIds.retainAll(wlSet); //intersection of whitelist/blacklist
+			}
+			else if (blSet == null && wlSet != null) {
+				pageIds.addAll(wlSet);
+			}
+			else if (blSet != null && wlSet == null) {
+				pageIds.addAll(blSet);
+			}
+
+			this.nrOfArticles = pageIds.size();
+
+		}
+		catch (Exception e) {
+			throw new ResourceInitializationException(e);
+		}
 
 		currentArticleIndex = 0;
 
@@ -199,6 +204,13 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	}
 
 	@Override
+	public boolean hasNext()
+		throws IOException, CollectionException
+	{
+		return !pageIds.isEmpty()||!bufferedPages.isEmpty();
+	}
+
+	@Override
 	public void getNext(JCas jcas)
 		throws IOException, CollectionException
 	{
@@ -206,18 +218,16 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		Page page = null;
 		try {
+			//fill buffer if empty
 			if(bufferedPages.isEmpty()) {
-				int remainingIds=ids.size();
-				//fill buffer
-				for(int i=0;i<(remainingIds<pageBuffer?remainingIds:pageBuffer);i++){
-					bufferedPages.add(wiki.getPage(ids.remove(0)));
+				for (int i = 0; i < (pageIds.size() < pageBuffer ? pageIds.size() : pageBuffer); i++) {
+					bufferedPages.add(wiki.getPage(pageIds.remove(0)));
 				}
 			}
 			//get next page from buffer
 			page = bufferedPages.remove(0);
 
-			getUimaContext().getLogger().log(Level.FINE,
-					"title: " + page.getTitle());
+			getUimaContext().getLogger().log(Level.FINE, "title: " + page.getTitle());
 
 			addDocumentMetaData(jcas, page);
 
@@ -242,7 +252,34 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		currentArticleIndex++;
 	}
 
-    protected String getPlainDocumentText(Page page)
+	/**
+	 * Only accept article pages and (if includeDiscussions=true) talk pages
+	 *
+	 * @param page the page that should be checked for validity
+	 * @return true, if page is valid. false, else
+	 * @throws WikiTitleParsingException
+	 */
+	private boolean isValidPage(Page page)
+		throws WikiTitleParsingException
+	{
+		return !page.isDisambiguation() && !page.isRedirect()
+				&& (inludeDiscussions || (!inludeDiscussions && !page.isDiscussion()));
+	}
+
+	@Override
+	public Progress[] getProgress()
+	{
+		return new Progress[] { new ProgressImpl(
+				new Long(currentArticleIndex).intValue(),
+				new Long(nrOfArticles).intValue(), Progress.ENTITIES) };
+	}
+
+	private String getDocumentText(Page page)
+	{
+		return page.getText();
+	}
+
+	private String getPlainDocumentText(Page page)
     {
         String text = "";
         ParsedPage pp = parser.parse(page.getText());
@@ -260,25 +297,6 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
         return text;
     }
 
-    protected boolean isValidPage(Page page) throws WikiTitleParsingException
-    {
-		return !page.isDisambiguation() && !page.isRedirect()
-				&& (inludeDiscussions || (!inludeDiscussions && !page.isDiscussion()));
-    }
-
-	@Override
-	public Progress[] getProgress()
-	{
-		return new Progress[] { new ProgressImpl(
-				new Long(currentArticleIndex).intValue(),
-				new Long(nrOfArticles).intValue(), Progress.ENTITIES) };
-	}
-
-	protected String getDocumentText(Page page)
-	{
-		return page.getText();
-	}
-
 	private void addDocumentMetaData(JCas jcas, Page page)
 		throws WikiTitleParsingException
 	{
@@ -286,11 +304,5 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
 		metaData.setCollectionId(new Integer(page.getPageId()).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
-	}
-
-	public boolean hasNext()
-		throws IOException, CollectionException
-	{
-		return !ids.isEmpty()||!bufferedPages.isEmpty();
 	}
 }
