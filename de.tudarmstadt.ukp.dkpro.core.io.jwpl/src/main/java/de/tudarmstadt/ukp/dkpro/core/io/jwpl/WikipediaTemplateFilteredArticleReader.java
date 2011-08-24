@@ -24,11 +24,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
@@ -116,6 +117,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private int pageBuffer;
 
 
+	private final Log logger = LogFactory.getLog(getClass());
+
 	private List<Page> bufferedPages;
 	private List<Integer> pageIds;
 
@@ -157,6 +160,10 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				for (Integer id : filteredIds) {
 					wlSet.add(id);
 				}
+				logger.info("The whitelist contains "+templateWhitelist.length+" templates");
+				logger.info(wlSet.size()+" articles are whitelisted");
+			}else{
+				logger.info("No whitelist active");
 			}
 
 			// BLACKLIST FILTER
@@ -174,6 +181,10 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				for (Integer id : filteredIds) {
 					blSet.add(id);
 				}
+				logger.info("The blacklist contains "+templateBlacklist.length+" templates");
+				logger.info(blSet.size()+" articles are not blacklisted");
+			}else{
+				logger.info("No blacklist active");
 			}
 
 			// GET FINAL ID LIST
@@ -189,6 +200,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			}
 
 			this.nrOfArticles = pageIds.size();
+
+			logger.info("Reading "+nrOfArticles+" pages");
 
 		}
 		catch (Exception e) {
@@ -220,6 +233,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		try {
 			//fill buffer if empty
 			if(bufferedPages.isEmpty()) {
+				logger.debug("Filling buffer");
 				for (int i = 0; i < (pageIds.size() < pageBuffer ? pageIds.size() : pageBuffer); i++) {
 					bufferedPages.add(wiki.getPage(pageIds.remove(0)));
 				}
@@ -227,7 +241,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			//get next page from buffer
 			page = bufferedPages.remove(0);
 
-			getUimaContext().getLogger().log(Level.FINE, "title: " + page.getTitle());
+			logger.debug("Processing article: " + page.getTitle());
 
 			addDocumentMetaData(jcas, page);
 
