@@ -184,14 +184,13 @@ public class MMAXWriter {
         saveXML(doc, mmaxFile, null, null);
 
         // load the current discourse
-        log.info("Loading discourse");
         loadDiscourse(mmaxFile.getPath());
 
         return basedataFile.getName();
     }
 
     private void loadDiscourse(String infile) {
-        System.out.println(infile);
+    	log.info("Loading discourse from: "+infile);
     	discourse = MMAX2Discourse.buildDiscourse(infile, commonPathsFile.getPath());
     }
 
