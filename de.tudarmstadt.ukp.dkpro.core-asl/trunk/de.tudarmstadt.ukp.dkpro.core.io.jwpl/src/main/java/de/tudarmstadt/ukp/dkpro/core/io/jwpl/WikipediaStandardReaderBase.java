@@ -72,7 +72,7 @@ public abstract class WikipediaStandardReaderBase
 	 * Defines the path to a file containing a line-separated list of
 	 * page ids of the pages that should be retrieved. (Optional)
 	 */
-	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIds";
+	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIdsFromFile";
 	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
 	protected String pageIdFile;
 
@@ -80,7 +80,7 @@ public abstract class WikipediaStandardReaderBase
 	 * Defines the path to a file containing a line-separated list of
 	 * page titles of the pages that should be retrieved. (Optional)
 	 */
-	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageNames";
+	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageTitleFromFile";
 	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
 	protected String pageNameFile;
 
@@ -88,7 +88,7 @@ public abstract class WikipediaStandardReaderBase
 	 * Defines an array of
 	 * page ids of the pages that should be retrieved. (Optional)
 	 */
-	public static final String PARAM_PAGE_ID_LIST = "PageIds";
+	public static final String PARAM_PAGE_ID_LIST = "PageIdFromArray";
 	@ConfigurationParameter(name = PARAM_PAGE_ID_LIST, mandatory = false)
 	protected String[] pageIdParamArray;
 
@@ -96,7 +96,7 @@ public abstract class WikipediaStandardReaderBase
 	 * Defines an array of  page titles of the pages that should be retrieved.
 	 * (Optional)
 	 */
-	public static final String PARAM_PAGE_TITLE_LIST = "PageNames";
+	public static final String PARAM_PAGE_TITLE_LIST = "PageTitlesFromArray";
 	@ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
 	protected String[] pageNameParamArray;
 
@@ -106,8 +106,8 @@ public abstract class WikipediaStandardReaderBase
 	 * {@code PARAM_PATH_TO_PAGE_TITLE_LIST}
 	 */
 	private Set<Page> pageSet;
-	private Set<String> pageIds;
-	private Set<String> pageTitles;
+	private Set<String> pageIds = new HashSet<String>();
+	private Set<String> pageTitles = new HashSet<String>();
 
 	protected long currentArticleIndex;
 	protected long nrOfArticles;
