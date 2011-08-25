@@ -171,32 +171,61 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			Set<Integer> blSet = null;
 			if (templateBlacklist != null && templateBlacklist.length > 0) {
 				blSet = new HashSet<Integer>();
-				if (exactTemplateMatching) {
-					filteredIds = tplInfo.getPageIdsNotContainingTemplateNames(
-									Arrays.asList(templateBlacklist));
+
+				if(wlSet!=null){
+					//if the whitelist is active, we can just treat the blacklist
+					//as another whitelist and remove all items from the whitelist
+					//that are also in the blacklist.
+					//This way, we don't have to perform the expensive
+					//getPageIdsNotContainingTemplateNames operation here
+					if (exactTemplateMatching) {
+						filteredIds = tplInfo.getPageIdsContainingTemplateNames(
+										Arrays.asList(templateBlacklist));
+					}
+					else {
+						filteredIds = tplInfo.getPageIdsContainingTemplateFragments(
+								Arrays.asList(templateBlacklist));
+					}
+					for (Integer id : filteredIds) {
+						blSet.add(id);
+					}
+					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.length+" templates");
+					logger.log(Level.INFO, blSet.size()+" articles are blacklisted");
+				}else{
+					//if the whitelist is not active, we have to treat the
+					//the blacklist like a real blacklist and call the
+					//rather expensive getPageIdsNotContainingTemplateNames()
+					if (exactTemplateMatching) {
+						filteredIds = tplInfo.getPageIdsNotContainingTemplateNames(
+										Arrays.asList(templateBlacklist));
+					}
+					else {
+						filteredIds = tplInfo.getPageIdsNotContainingTemplateFragments(
+								Arrays.asList(templateBlacklist));
+					}
+					for (Integer id : filteredIds) {
+						blSet.add(id);
+					}
+					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.length+" templates");
+					logger.log(Level.INFO, blSet.size()+" articles are NOT blacklisted");
 				}
-				else {
-					filteredIds = tplInfo.getPageIdsNotContainingTemplateFragments(
-							Arrays.asList(templateBlacklist));
-				}
-				for (Integer id : filteredIds) {
-					blSet.add(id);
-				}
-				logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.length+" templates");
-				logger.log(Level.INFO, blSet.size()+" articles are not blacklisted");
 			}else{
 				logger.log(Level.INFO, "No blacklist active");
 			}
 
 			// GET FINAL ID LIST
 			if (blSet != null && wlSet != null) {
-				pageIds.addAll(blSet);
-				pageIds.retainAll(wlSet); //intersection of whitelist/blacklist
+				//here, blSet contains pages CONTAINING the blacklisted tpls
+				//-> get whitelisted pages and remove all blacklisted pages
+				pageIds.addAll(wlSet);
+				pageIds.removeAll(blSet);
+
 			}
 			else if (blSet == null && wlSet != null) {
 				pageIds.addAll(wlSet);
 			}
 			else if (blSet != null && wlSet == null) {
+				//here, blSet contains pages NOT containing the blacklisted tpls
 				pageIds.addAll(blSet);
 			}
 
