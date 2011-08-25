@@ -148,7 +148,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 			// WHITELIST FILTER
 			Set<Integer> wlSet = null;
-			if (templateWhitelist != null) {
+			if (templateWhitelist != null && templateWhitelist.length > 0) {
 				wlSet = new HashSet<Integer>();
 				if (exactTemplateMatching) {
 					filteredIds = tplInfo.getPageIdsContainingTemplateNames(
@@ -169,7 +169,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 			// BLACKLIST FILTER
 			Set<Integer> blSet = null;
-			if (templateBlacklist != null) {
+			if (templateBlacklist != null && templateBlacklist.length > 0) {
 				blSet = new HashSet<Integer>();
 				if (exactTemplateMatching) {
 					filteredIds = tplInfo.getPageIdsNotContainingTemplateNames(
