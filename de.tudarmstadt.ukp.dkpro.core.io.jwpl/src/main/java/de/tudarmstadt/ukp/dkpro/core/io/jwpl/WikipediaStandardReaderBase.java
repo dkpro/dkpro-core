@@ -85,6 +85,22 @@ public abstract class WikipediaStandardReaderBase
 	protected String pageNameFile;
 
 	/**
+	 * Defines an array of
+	 * page ids of the pages that should be retrieved. (Optional)
+	 */
+	public static final String PARAM_PAGE_ID_LIST = "PageIds";
+	@ConfigurationParameter(name = PARAM_PAGE_ID_LIST, mandatory = false)
+	protected String[] pageIdParamArray;
+
+	/**
+	 * Defines an array of  page titles of the pages that should be retrieved.
+	 * (Optional)
+	 */
+	public static final String PARAM_PAGE_TITLE_LIST = "PageNames";
+	@ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
+	protected String[] pageNameParamArray;
+
+	/**
 	 * A list of pages that is used to store the pages when using the
 	 * {@code PARAM_PATH_TO_PAGE_ID_LIST} and/or
 	 * {@code PARAM_PATH_TO_PAGE_TITLE_LIST}
@@ -113,8 +129,18 @@ public abstract class WikipediaStandardReaderBase
 			if (pageNameFile != null) {
 				pageTitles = loadFile(pageNameFile);
 			}
+			if (pageIdParamArray != null && pageIdParamArray.length > 0) {
+				for(String id: pageIdParamArray){
+					pageIds.add(id);
+				}
+			}
+			if (pageNameParamArray != null && pageNameParamArray.length > 0) {
+				for(String id: pageNameParamArray){
+					pageTitles.add(id);
+				}
+			}
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			throw new ResourceInitializationException(e);
 		}
 
