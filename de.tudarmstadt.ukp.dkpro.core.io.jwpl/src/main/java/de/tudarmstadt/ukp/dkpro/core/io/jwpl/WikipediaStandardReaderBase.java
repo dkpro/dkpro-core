@@ -145,7 +145,7 @@ public abstract class WikipediaStandardReaderBase
 		}
 
 		//Use one of the lists or iterate over all articles?
-		if(pageIds!=null||pageTitles!=null)
+		if(!pageIds.isEmpty()||!pageTitles.isEmpty())
 		{
 			try{
 				pageSet = new HashSet<Page>();
