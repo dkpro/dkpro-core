@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.eml.mmax2</groupId>
 			<artifactId>org.eml.mmax2</artifactId>
-			<version>1.13.003-UKP-2-SNAPSHOT</version>
+			<version>1.13.003-UKP-1</version>
 		</dependency>
 		<dependency>
 			<groupId>jung</groupId>
