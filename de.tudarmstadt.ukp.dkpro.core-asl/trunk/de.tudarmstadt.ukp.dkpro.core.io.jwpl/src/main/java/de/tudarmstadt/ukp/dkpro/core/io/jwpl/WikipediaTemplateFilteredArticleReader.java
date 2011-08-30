@@ -347,6 +347,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		DocumentMetaData metaData = DocumentMetaData.create(jcas);
 		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
 		metaData.setCollectionId(new Integer(page.getPageId()).toString());
+		metaData.setDocumentId(new Integer(page.getPageId()).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
 	}
 }
