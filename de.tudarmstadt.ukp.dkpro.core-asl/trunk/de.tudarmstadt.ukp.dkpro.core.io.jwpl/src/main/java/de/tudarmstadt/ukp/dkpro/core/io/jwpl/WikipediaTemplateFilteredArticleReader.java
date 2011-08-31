@@ -427,7 +427,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			}
 		}
 
-		wlIds.addAll(doubleFilteredArticles);
+		wlIds.removeAll(doubleFilteredArticles);
 		return wlIds;
 	}
 
