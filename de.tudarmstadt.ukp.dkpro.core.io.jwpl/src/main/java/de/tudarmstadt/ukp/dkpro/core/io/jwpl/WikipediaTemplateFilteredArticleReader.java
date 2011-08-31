@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -89,11 +90,23 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 *  <br/>
 	 *  This check is rather expensive and could take a long time.<br/>
 	 *  This is option is not active if only a whitelist is used.<br/>
-	 *  Default Value: true
+	 *  Default Value: false
 	 */
-	public static final String PARAM_DOUBLE_CHECK_ASSOCIATED_ARTICLES = "DoubleCheckWhitelistedArticles";
-	@ConfigurationParameter(name = PARAM_DOUBLE_CHECK_ASSOCIATED_ARTICLES, mandatory = true, defaultValue = "true")
+	public static final String PARAM_DOUBLE_CHECK_ASSOCIATED_PAGES = "DoubleCheckAssociatedPages";
+	@ConfigurationParameter(name = PARAM_DOUBLE_CHECK_ASSOCIATED_PAGES, mandatory = true, defaultValue = "false")
 	private boolean doubleCheckWhitelistedArticles;
+
+	/**
+	 * Optional parameter that allows to define the max number of articles
+	 * that should be delivered by the reader.<br/>
+	 * This avoids unnecessary filtering if only a small number of articles is
+	 * needed.
+	 *
+	 */
+	public static final String PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ = "LimitNUmberOfArticlesToRead";
+	@ConfigurationParameter(name = PARAM_TEMPLATE_WHITELIST, mandatory = false)
+	private Integer articleLimit;
+
 
 	/**
 	 * Defines templates that the articles MUST contain.<br/>
@@ -246,7 +259,20 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				//so, first remove blacklisted pages from the whitelist
 				wlSet.removeAll(blSet);
 
-				//now add remaining pages to the pageId list
+				if(articleLimit!=null){
+					//limit number of articles, if necessary
+					Set<Integer> tempWlSet = new HashSet<Integer>();
+					tempWlSet.addAll(wlSet);
+					wlSet.clear();
+					Iterator<Integer> ids = tempWlSet.iterator();
+					for(int i=0;i<articleLimit;i++){
+						if(ids.hasNext()){
+							wlSet.add(ids.next());
+						}
+					}
+				}
+
+				//now double filter, if necessary
 				if(doubleCheckWhitelistedArticles){
 					logger.log(Level.INFO, "Double checking "+wlSet.size()+" articles");
 
@@ -258,9 +284,34 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				}
 			}
 			else if (blSet == null && wlSet != null) {
+
+				if(articleLimit!=null){
+					//limit number of articles, if necessary
+					Set<Integer> tempWlSet = new HashSet<Integer>();
+					tempWlSet.addAll(wlSet);
+					wlSet.clear();
+					Iterator<Integer> ids = tempWlSet.iterator();
+					for(int i=0;i<articleLimit;i++){
+						if(ids.hasNext()){
+							wlSet.add(ids.next());
+						}
+					}
+				}
 				pageIds.addAll(wlSet);
 			}
 			else if (blSet != null && wlSet == null) {
+				if(articleLimit!=null){
+					//limit number of articles, if necessary
+					Set<Integer> tempBlSet = new HashSet<Integer>();
+					tempBlSet.addAll(blSet);
+					blSet.clear();
+					Iterator<Integer> ids = tempBlSet.iterator();
+					for(int i=0;i<articleLimit;i++){
+						if(ids.hasNext()){
+							blSet.add(ids.next());
+						}
+					}
+				}
 				//here, blSet contains pages NOT containing the blacklisted tpls
 				//now add remaining pages to the pageId list
 				if(doubleCheckWhitelistedArticles){
