@@ -263,7 +263,26 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			}
 			else if (blSet != null && wlSet == null) {
 				//here, blSet contains pages NOT containing the blacklisted tpls
-				pageIds.addAll(blSet);
+				//now add remaining pages to the pageId list
+				if(doubleCheckWhitelistedArticles){
+					logger.log(Level.INFO, "Double checking "+blSet.size()+" articles");
+
+					//if doublecheck-param is set, double check the articles
+					//that are not blacklisted against the blacklist
+					Set<Integer> blacklistedArticles=new HashSet<Integer>();
+					if (exactTemplateMatching) {
+						blacklistedArticles.addAll(tplInfo.getPageIdsNotContainingTemplateNames(
+								templateBlacklist));
+					}
+					else {
+						blacklistedArticles.addAll(tplInfo.getPageIdsNotContainingTemplateFragments(
+								templateBlacklist));
+					}
+					pageIds.addAll(doubleCheckWhitelistedArticles(blSet, blacklistedArticles));
+				}else{
+					pageIds.addAll(blSet);
+				}
+
 			}
 
 			this.nrOfArticles = pageIds.size();
