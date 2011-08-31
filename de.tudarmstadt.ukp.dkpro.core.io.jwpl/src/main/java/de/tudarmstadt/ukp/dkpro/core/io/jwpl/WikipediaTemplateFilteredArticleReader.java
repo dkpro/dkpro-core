@@ -83,17 +83,16 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private boolean inludeDiscussions;
 
 	/**
-	 *  This option causes every whitelisted page to be double checked if it is
-	 *  a discussion and whether the associated article should be rejected.<br/>
-	 *  This avoids including articles via a whitelisted discussion page even
-	 *  if the associated article is blacklisted.<br/>
+	 *  If this option is set, discussion pages are rejected that are
+	 *  associated with a blacklisted article. Analogously, articles are
+	 *  rejected that are associated with a blacklisted discussion page.<br/>
 	 *  <br/>
-	 *  This check is rather expensive and could take a long time if many
-	 *  articles are whitelisted.<br/>
+	 *  This check is rather expensive and could take a long time.<br/>
+	 *  This is option is not active if only a whitelist is used.<br/>
 	 *  Default Value: true
 	 */
-	public static final String PARAM_DOUBLE_CHECK_WHITELISTED_ARTICLES = "DoubleCheckWhitelistedArticles";
-	@ConfigurationParameter(name = PARAM_DOUBLE_CHECK_WHITELISTED_ARTICLES, mandatory = true, defaultValue = "true")
+	public static final String PARAM_DOUBLE_CHECK_ASSOCIATED_ARTICLES = "DoubleCheckWhitelistedArticles";
+	@ConfigurationParameter(name = PARAM_DOUBLE_CHECK_ASSOCIATED_ARTICLES, mandatory = true, defaultValue = "true")
 	private boolean doubleCheckWhitelistedArticles;
 
 	/**
@@ -417,10 +416,18 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		for(Integer id: wlIds){
 			try{
 				Page curPage = wiki.getPage(id);
+
+				//check associated discussion or article
 				if(curPage.isDiscussion()){
 					Page curArticle = wiki.getArticleForDiscussionPage(curPage);
 					if(blIds.contains(curArticle.getPageId())){
-						//remove the discussion page (not the article)
+						//remove curPage
+						doubleFilteredArticles.add(curPage.getPageId());
+					}
+				}else{
+					Page curDiscussion = wiki.getDiscussionPage(curPage);
+					if(blIds.contains(curDiscussion.getPageId())){
+						//remove curPage
 						doubleFilteredArticles.add(curPage.getPageId());
 					}
 				}
