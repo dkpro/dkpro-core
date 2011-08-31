@@ -104,7 +104,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 *
 	 */
 	public static final String PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ = "LimitNUmberOfArticlesToRead";
-	@ConfigurationParameter(name = PARAM_TEMPLATE_WHITELIST, mandatory = false)
+	@ConfigurationParameter(name = PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ, mandatory = false)
 	private Integer articleLimit;
 
 
