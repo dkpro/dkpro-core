@@ -143,6 +143,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private long nrOfArticles;
 
 	private MediaWikiParser parser;
+	private WikipediaTemplateInfo tplInfo;
 
 
 	@Override
@@ -160,8 +161,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		try {
 			bufferedPages = new LinkedList<Page>();
 			pageIds = new LinkedList<Integer>();
+			tplInfo = new WikipediaTemplateInfo(wiki);
 
-			WikipediaTemplateInfo tplInfo = new WikipediaTemplateInfo(wiki);
 			Iterable<Integer> filteredIds = null;
 
 			// WHITELIST FILTER
@@ -250,9 +251,9 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				if(doubleCheckWhitelistedArticles){
 					logger.log(Level.INFO, "Double checking "+wlSet.size()+" articles");
 
-					//if doublecheck-param is set, double check whitelisted articles
-					//before adding them
-					pageIds.addAll(doubleCheckWhitelistedArticles(tplInfo, wlSet));
+					//if doublecheck-param is set, double check whitelisted
+					//articles against the blacklist before adding them
+					pageIds.addAll(doubleCheckWhitelistedArticles(wlSet, blSet));
 				}else{
 					pageIds.addAll(wlSet);
 				}
@@ -379,13 +380,13 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 	/**
 	 * Double checks a list of page ids and checks for each id that belongs
-	 * to a discussion page the corresponding article for blacklist criteria<br/>
+	 * to a discussion page the corresponding article if it is blacklisted<br/>
 	 * <br/>
-	 * This is an expensive operation!
+	 * This is an rather expensive operation!
 	 *
-	 * @return a list of article ids of articles that are rejected because their discussion pages are rejected
+	 * @return a the list of articles after double checking
 	 */
-	private Set<Integer> doubleCheckWhitelistedArticles(WikipediaTemplateInfo tplInfo, Set<Integer> wlIds) throws WikiApiException{
+	private Set<Integer> doubleCheckWhitelistedArticles(Set<Integer> wlIds, Set<Integer> blIds) throws WikiApiException{
 
 		if(wlIds.size()>20000){
 			logger.log(Level.INFO, "You want to double check "+wlIds.size()+" articles in the whitelist. This can take a very long time.");
@@ -393,33 +394,15 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		Set<Integer> doubleFilteredArticles = new HashSet<Integer>();
 
-
 		//do the additional filtering
 		for(Integer id: wlIds){
 			try{
 				Page curPage = wiki.getPage(id);
 				if(curPage.isDiscussion()){
 					Page curArticle = wiki.getArticleForDiscussionPage(curPage);
-					List<String> templates = tplInfo.getTemplateNamesFromPage(curArticle);
-					boolean found = false;
-					for(String tpl:templates){
-						if (found) {
-							break;
-						}
-						if(exactTemplateMatching){
-							if(templateBlacklist.contains(tpl)){
-								doubleFilteredArticles.add(curArticle.getPageId());
-								found=true;
-							}
-						}else{
-							for(String blTpl:templateBlacklist){
-								if(tpl.startsWith(blTpl)){
-									doubleFilteredArticles.add(curArticle.getPageId());
-									found=true;
-									break;
-								}
-							}
-						}
+					if(blIds.contains(curArticle.getPageId())){
+						//remove the discussion page (not the article)
+						doubleFilteredArticles.add(curPage.getPageId());
 					}
 				}
 			}catch(WikiPageNotFoundException e){
