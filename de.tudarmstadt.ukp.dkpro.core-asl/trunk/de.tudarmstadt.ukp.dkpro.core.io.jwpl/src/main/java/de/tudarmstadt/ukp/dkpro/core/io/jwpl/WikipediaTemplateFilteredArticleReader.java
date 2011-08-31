@@ -39,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.WikipediaTemplateInfo;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
+import de.tudarmstadt.ukp.wikipedia.api.exception.WikiPageNotFoundException;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
@@ -82,6 +83,20 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private boolean inludeDiscussions;
 
 	/**
+	 *  This option causes every whitelisted page to be double checked if it is
+	 *  a discussion and whether the associated article should be rejected.<br/>
+	 *  This avoids including articles via a whitelisted discussion page even
+	 *  if the associated article is blacklisted.<br/>
+	 *  <br/>
+	 *  This check is rather expensive and could take a long time if many
+	 *  articles are whitelisted.<br/>
+	 *  Default Value: true
+	 */
+	public static final String PARAM_DOUBLE_CHECK_WHITELISTED_ARTICLES = "DoubleCheckWhitelistedArticles";
+	@ConfigurationParameter(name = PARAM_DOUBLE_CHECK_WHITELISTED_ARTICLES, mandatory = true, defaultValue = "true")
+	private boolean doubleCheckWhitelistedArticles;
+
+	/**
 	 * Defines templates that the articles MUST contain.<br/>
 	 * If you also define a blacklist, the intersection of both sets is used.
 	 * (= pages that DO contain templates from the whitelist, but DO NOT contain
@@ -89,7 +104,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 */
 	public static final String PARAM_TEMPLATE_WHITELIST = "TemplateWhitelist";
 	@ConfigurationParameter(name = PARAM_TEMPLATE_WHITELIST, mandatory = false)
-	private String[] templateWhitelist;
+	private String[] templateWhitelistArray;
 
 	/**
 	 * Defines templates that the articles MUST NOT contain.<br/>
@@ -99,7 +114,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 */
 	public static final String PARAM_TEMPLATE_BLACKLIST = "TemplateBlacklist";
 	@ConfigurationParameter(name = PARAM_TEMPLATE_BLACKLIST, mandatory = false)
-	private String[] templateBlacklist;
+	private String[] templateBlacklistArray;
 
 	/**
 	 * Defines whether to match the templates exactly or whether to match all
@@ -121,6 +136,9 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private List<Page> bufferedPages;
 	private List<Integer> pageIds;
 
+	List<String> templateBlacklist;
+	List<String> templateWhitelist;
+
 	private long currentArticleIndex;
 	private long nrOfArticles;
 
@@ -135,7 +153,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		logger=getUimaContext().getLogger();
 
-		if (templateBlacklist == null && templateWhitelist == null) {
+		if (templateBlacklistArray == null && templateWhitelistArray == null) {
 			throw new ResourceInitializationException();
 		}
 
@@ -148,20 +166,25 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 			// WHITELIST FILTER
 			Set<Integer> wlSet = null;
-			if (templateWhitelist != null && templateWhitelist.length > 0) {
+			if (templateWhitelistArray != null && templateWhitelistArray.length > 0) {
+
+				//convert array to list
+				templateWhitelist = Arrays.asList(templateWhitelistArray);
 				wlSet = new HashSet<Integer>();
+
 				if (exactTemplateMatching) {
 					filteredIds = tplInfo.getPageIdsContainingTemplateNames(
-							Arrays.asList(templateWhitelist));
+							templateWhitelist);
 				}
 				else {
 					filteredIds = tplInfo.getPageIdsContainingTemplateFragments(
-							Arrays.asList(templateWhitelist));
+							templateWhitelist);
 				}
+
 				for (Integer id : filteredIds) {
 					wlSet.add(id);
 				}
-				logger.log(Level.INFO, "The whitelist contains "+templateWhitelist.length+" templates");
+				logger.log(Level.INFO, "The whitelist contains "+templateWhitelist.size()+" templates");
 				logger.log(Level.INFO, wlSet.size()+" articles are whitelisted");
 			}else{
 				logger.log(Level.INFO, "No whitelist active");
@@ -169,7 +192,10 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 			// BLACKLIST FILTER
 			Set<Integer> blSet = null;
-			if (templateBlacklist != null && templateBlacklist.length > 0) {
+			if (templateBlacklistArray != null && templateBlacklistArray.length > 0) {
+
+				//convert array to list
+				templateBlacklist =Arrays.asList(templateBlacklistArray);
 				blSet = new HashSet<Integer>();
 
 				if(wlSet!=null){
@@ -180,16 +206,16 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 					//getPageIdsNotContainingTemplateNames operation here
 					if (exactTemplateMatching) {
 						filteredIds = tplInfo.getPageIdsContainingTemplateNames(
-										Arrays.asList(templateBlacklist));
+										templateBlacklist);
 					}
 					else {
 						filteredIds = tplInfo.getPageIdsContainingTemplateFragments(
-								Arrays.asList(templateBlacklist));
+								templateBlacklist);
 					}
 					for (Integer id : filteredIds) {
 						blSet.add(id);
 					}
-					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.length+" templates");
+					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.size()+" templates");
 					logger.log(Level.INFO, blSet.size()+" articles are blacklisted");
 				}else{
 					//if the whitelist is not active, we have to treat the
@@ -197,16 +223,16 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 					//rather expensive getPageIdsNotContainingTemplateNames()
 					if (exactTemplateMatching) {
 						filteredIds = tplInfo.getPageIdsNotContainingTemplateNames(
-										Arrays.asList(templateBlacklist));
+								templateBlacklist);
 					}
 					else {
 						filteredIds = tplInfo.getPageIdsNotContainingTemplateFragments(
-								Arrays.asList(templateBlacklist));
+								templateBlacklist);
 					}
 					for (Integer id : filteredIds) {
 						blSet.add(id);
 					}
-					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.length+" templates");
+					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.size()+" templates");
 					logger.log(Level.INFO, blSet.size()+" articles are NOT blacklisted");
 				}
 			}else{
@@ -216,10 +242,20 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			// GET FINAL ID LIST
 			if (blSet != null && wlSet != null) {
 				//here, blSet contains pages CONTAINING the blacklisted tpls
-				//-> get whitelisted pages and remove all blacklisted pages
-				pageIds.addAll(wlSet);
-				pageIds.removeAll(blSet);
 
+				//so, first remove blacklisted pages from the whitelist
+				wlSet.removeAll(blSet);
+
+				//now add remaining pages to the pageId list
+				if(doubleCheckWhitelistedArticles){
+					logger.log(Level.INFO, "Double checking "+wlSet.size()+" articles");
+
+					//if doublecheck-param is set, double check whitelisted articles
+					//before adding them
+					pageIds.addAll(doubleCheckWhitelistedArticles(tplInfo, wlSet));
+				}else{
+					pageIds.addAll(wlSet);
+				}
 			}
 			else if (blSet == null && wlSet != null) {
 				pageIds.addAll(wlSet);
@@ -340,6 +376,60 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
         }
         return text;
     }
+
+	/**
+	 * Double checks a list of page ids and checks for each id that belongs
+	 * to a discussion page the corresponding article for blacklist criteria<br/>
+	 * <br/>
+	 * This is an expensive operation!
+	 *
+	 * @return a list of article ids of articles that are rejected because their discussion pages are rejected
+	 */
+	private Set<Integer> doubleCheckWhitelistedArticles(WikipediaTemplateInfo tplInfo, Set<Integer> wlIds) throws WikiApiException{
+
+		if(wlIds.size()>20000){
+			logger.log(Level.INFO, "You want to double check "+wlIds.size()+" articles in the whitelist. This can take a very long time.");
+		}
+
+		Set<Integer> doubleFilteredArticles = new HashSet<Integer>();
+
+
+		//do the additional filtering
+		for(Integer id: wlIds){
+			try{
+				Page curPage = wiki.getPage(id);
+				if(curPage.isDiscussion()){
+					Page curArticle = wiki.getArticleForDiscussionPage(curPage);
+					List<String> templates = tplInfo.getTemplateNamesFromPage(curArticle);
+					boolean found = false;
+					for(String tpl:templates){
+						if (found) {
+							break;
+						}
+						if(exactTemplateMatching){
+							if(templateBlacklist.contains(tpl)){
+								doubleFilteredArticles.add(curArticle.getPageId());
+								found=true;
+							}
+						}else{
+							for(String blTpl:templateBlacklist){
+								if(tpl.startsWith(blTpl)){
+									doubleFilteredArticles.add(curArticle.getPageId());
+									found=true;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}catch(WikiPageNotFoundException e){
+				//just go on with the next id
+			}
+		}
+
+		wlIds.addAll(doubleFilteredArticles);
+		return wlIds;
+	}
 
 	private void addDocumentMetaData(JCas jcas, Page page)
 		throws WikiTitleParsingException
