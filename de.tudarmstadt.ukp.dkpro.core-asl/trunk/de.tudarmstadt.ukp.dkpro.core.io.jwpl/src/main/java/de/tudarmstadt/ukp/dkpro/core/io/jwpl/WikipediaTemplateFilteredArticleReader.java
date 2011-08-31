@@ -166,6 +166,10 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		logger=getUimaContext().getLogger();
 
+		if(articleLimit!=null){
+			logger.log(Level.INFO, "Article limit is set to "+articleLimit+" The reader won't deliver all pages that meet the requirements. Remove PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ if that is not what you want.");
+		}
+
 		if (templateBlacklistArray == null && templateWhitelistArray == null) {
 			throw new ResourceInitializationException();
 		}
@@ -459,6 +463,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		if(wlIds.size()>20000){
 			logger.log(Level.INFO, "You want to double check "+wlIds.size()+" articles in the whitelist. This can take a very long time.");
+			logger.log(Level.INFO, "If you do not need ALL pages that meet the specified requiredments, you might speed things up by setting PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ.");
 		}
 
 		Set<Integer> doubleFilteredArticles = new HashSet<Integer>();
