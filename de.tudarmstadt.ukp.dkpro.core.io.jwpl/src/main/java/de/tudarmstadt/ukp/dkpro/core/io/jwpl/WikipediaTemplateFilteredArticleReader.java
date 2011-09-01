@@ -282,7 +282,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 					//if doublecheck-param is set, double check whitelisted
 					//articles against the blacklist before adding them
-					pageIds.addAll(doubleCheckWhitelistedArticles(wlSet, blSet));
+					pageIds.addAll(doubleCheckAssociatedArticles(wlSet, blSet));
 				}else{
 					pageIds.addAll(wlSet);
 				}
@@ -332,7 +332,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 						blacklistedArticles.addAll(tplInfo.getPageIdsNotContainingTemplateFragments(
 								templateBlacklist));
 					}
-					pageIds.addAll(doubleCheckWhitelistedArticles(blSet, blacklistedArticles));
+					pageIds.addAll(doubleCheckAssociatedArticles(blSet, blacklistedArticles));
 				}else{
 					pageIds.addAll(blSet);
 				}
@@ -452,24 +452,29 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
     }
 
 	/**
-	 * Double checks a list of page ids and checks for each id that belongs
-	 * to a discussion page the corresponding article if it is blacklisted<br/>
+	 * Double checks a list of page ids and checks for each id that belongs to a
+	 * discussion page the corresponding article if it is blacklisted<br/>
 	 * <br/>
 	 * This is an rather expensive operation!
 	 *
+	 * @param idsToDoubleCheck
+	 *            the set of ids that should be double checked
+	 * @param blIds
+	 *            a set with ids of blacklisted articles
 	 * @return a the list of articles after double checking
 	 */
-	private Set<Integer> doubleCheckWhitelistedArticles(Set<Integer> wlIds, Set<Integer> blIds) throws WikiApiException{
+	private Set<Integer> doubleCheckAssociatedArticles(Set<Integer> idsToDoubleCheck, Set<Integer> blIds) throws WikiApiException{
 
-		if(wlIds.size()>20000){
-			logger.log(Level.INFO, "You want to double check "+wlIds.size()+" articles in the whitelist. This can take a very long time.");
+		if(idsToDoubleCheck.size()>20000){
+			logger.log(Level.INFO, "You want to double check "+idsToDoubleCheck.size()+" articles in the whitelist. This can take a very long time.");
 			logger.log(Level.INFO, "If you do not need ALL pages that meet the specified requiredments, you might speed things up by setting PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ.");
 		}
 
 		Set<Integer> doubleFilteredArticles = new HashSet<Integer>();
 
 		//do the additional filtering
-		for(Integer id: wlIds){
+		//TODO currently, this is done using the page objects. this makes it slow. if speed is an issue, this should be switched to queries using ids only.
+		for(Integer id: idsToDoubleCheck){
 			try{
 				Page curPage = wiki.getPage(id);
 
@@ -492,8 +497,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			}
 		}
 
-		wlIds.removeAll(doubleFilteredArticles);
-		return wlIds;
+		idsToDoubleCheck.removeAll(doubleFilteredArticles);
+		return idsToDoubleCheck;
 	}
 
 	private void addDocumentMetaData(JCas jcas, Page page)
