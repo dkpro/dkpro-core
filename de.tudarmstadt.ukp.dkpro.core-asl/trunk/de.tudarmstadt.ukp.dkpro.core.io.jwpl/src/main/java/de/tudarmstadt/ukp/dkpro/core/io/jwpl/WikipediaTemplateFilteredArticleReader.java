@@ -38,6 +38,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
 import de.tudarmstadt.ukp.wikipedia.api.Page;
+import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.WikipediaTemplateInfo;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiPageNotFoundException;
@@ -466,30 +467,42 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private Set<Integer> doubleCheckAssociatedArticles(Set<Integer> idsToDoubleCheck, Set<Integer> blIds) throws WikiApiException{
 
 		if(idsToDoubleCheck.size()>20000){
-			logger.log(Level.INFO, "You want to double check "+idsToDoubleCheck.size()+" articles in the whitelist. This can take a very long time.");
-			logger.log(Level.INFO, "If you do not need ALL pages that meet the specified requiredments, you might speed things up by setting PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ.");
+			logger.log(Level.INFO, "You want to double check "+idsToDoubleCheck.size()+" articles in the whitelist. This can take a very long time."+System.getProperty("line.separator")+
+					"If you do not need ALL pages that meet the specified requirements, you might speed things up by setting PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ.");
 		}
 
 		Set<Integer> doubleFilteredArticles = new HashSet<Integer>();
 
 		//do the additional filtering
-		//TODO currently, this is done using the page objects. this makes it slow. if speed is an issue, this should be switched to queries using ids only.
 		for(Integer id: idsToDoubleCheck){
 			try{
-				Page curPage = wiki.getPage(id);
+				String curPageTitle = wiki.getTitle(id).getWikiStyleTitle();
 
 				//check associated discussion or article
-				if(curPage.isDiscussion()){
-					Page curArticle = wiki.getArticleForDiscussionPage(curPage);
-					if(blIds.contains(curArticle.getPageId())){
-						//remove curPage
-						doubleFilteredArticles.add(curPage.getPageId());
+				if(curPageTitle.startsWith(WikiConstants.DISCUSSION_PREFIX)){
+					curPageTitle = curPageTitle.replaceAll(WikiConstants.DISCUSSION_PREFIX, "");
+
+		    		if(curPageTitle.contains("/")){
+		        		//If we have a discussion archive
+		        		//TODO This does not support articles that contain slashes-
+		        		//However, the rest of the API cannot cope with that as well, so this should not be any extra trouble
+		    			curPageTitle = curPageTitle.split("/")[0];
+		    		}
+
+					List<Integer> curArticleIds = wiki.getPageIds(curPageTitle);
+					for(int curArtId:curArticleIds){
+						if(blIds.contains(curArtId)){
+							//select id of current page for removal
+							doubleFilteredArticles.add(id);
+						}
 					}
 				}else{
-					Page curDiscussion = wiki.getDiscussionPage(curPage);
-					if(blIds.contains(curDiscussion.getPageId())){
-						//remove curPage
-						doubleFilteredArticles.add(curPage.getPageId());
+					List<Integer> curDiscussionIds = wiki.getPageIds(WikiConstants.DISCUSSION_PREFIX+curPageTitle);
+					for(int curDiscId:curDiscussionIds){
+						if(blIds.contains(curDiscId)){
+							//select id of current page for removal
+							doubleFilteredArticles.add(id);
+						}
 					}
 				}
 			}catch(WikiPageNotFoundException e){
