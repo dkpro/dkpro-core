@@ -484,9 +484,11 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		    		if(curPageTitle.contains("/")){
 		        		//If we have a discussion archive
-		        		//TODO This does not support articles that contain slashes-
-		        		//However, the rest of the API cannot cope with that as well, so this should not be any extra trouble
-		    			curPageTitle = curPageTitle.split("/")[0];
+		    			String[] parts = curPageTitle.split("/");
+		    			if(parts!=null&&parts.length>0&&parts[0].length()>0){
+		    				curPageTitle = parts[0];
+		    			}
+
 		    		}
 
 					List<Integer> curArticleIds = wiki.getPageIds(curPageTitle);
