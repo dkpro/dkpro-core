@@ -24,6 +24,8 @@ import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.uimafit.util.JCasUtil.select;
 
+import java.net.URI;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
@@ -73,6 +75,38 @@ public class TextReaderTest
 	}
 
 	@Ignore
+	@Test
+	public void fileSystemReaderTest3()
+		throws Exception
+	{
+		CollectionReader reader = createCollectionReader(TextReader.class,
+				createTypeSystemDescription(),
+				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/name with space",
+				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
+
+        AnalysisEngine writer = createPrimitive(XWriter.class,
+        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
+
+		for (JCas jcas : new JCasIterable(reader)) {
+			DocumentMetaData md = DocumentMetaData.get(jcas);
+			System.out.println(new URI(md.getDocumentUri()).toString());
+
+            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
+
+			assertTrue(
+					!"file:src/test/resources/name with space/test1.txt".equals(md.getDocumentUri()) || (
+							"This is a test.".equals(jcas.getDocumentText()) &&
+							15 == md.getEnd()));
+
+			assertTrue(
+					!"file:src/test/resources/name with space/test2.txt".equals(md.getDocumentUri())
+					|| "This is a second test.".equals(jcas.getDocumentText()));
+
+            writer.process(jcas);
+		}
+	}
+
 	@Test
     public void fileSystemReaderTest2()
         throws Exception

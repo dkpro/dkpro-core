@@ -53,7 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 /**
  * Base class for collection readers that plan to access resources on the file system or in the
  * classpath or basically anywhere where Spring can resolve them. ANT-style patterns are supported
- * to include or exclude particular resources. 
+ * to include or exclude particular resources.
  * <p>
  * Example of a hypothetic <code>FooReader</code> that should read only files ending in
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
@@ -65,7 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * </pre>
  *
  * @see <a href="http://ant.apache.org/manual/dirtasks.html#patterns">Documentation of <b>ant</b> patterns</a>
- * 
+ *
  * @author Richard Eckart de Castilho
  * @since 1.0.6
  */
@@ -309,10 +309,10 @@ public abstract class ResourceCollectionReaderBase
 			// Set the document metadata
 			DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
 			docMetaData.setDocumentTitle(new File(aResource.getPath()).getName());
-			docMetaData.setDocumentUri(aResource.getLocation().toString());
+			docMetaData.setDocumentUri(aResource.getResolvedUri().toString());
 			docMetaData.setDocumentId(aResource.getPath());
 			if (aResource.getBase() != null) {
-				docMetaData.setDocumentBaseUri(aResource.getBase());
+				docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
 				docMetaData.setCollectionId(aResource.getBase());
 			}
 			docMetaData.addToIndexes();
@@ -338,14 +338,14 @@ public abstract class ResourceCollectionReaderBase
 		private String path;
 		private org.springframework.core.io.Resource resource;
 
-		public Resource(String aLocation, String aBase, URI aResolvedUri, String aResolvedBase,
+		public Resource(String aLocation, String aBase, URI aResolvedUri, String aResolvedBaseUri,
 				String aPath, org.springframework.core.io.Resource aResource)
 		{
 			super();
 			location = aLocation;
 			base = aBase;
 			resolvedUri = aResolvedUri;
-			resolvedBase = aResolvedBase;
+			resolvedBase = aResolvedBaseUri;
 			path = aPath;
 			resource = aResource;
 		}
