@@ -84,6 +84,17 @@ public abstract class ResourceCollectionReaderBase
 	private String[] patterns;
 
 	/**
+	 * Use the default excludes.
+	 */
+	public static final String PARAM_USE_DEFAULT_EXCLUDES = "UseDefaultExcludes";
+	@ConfigurationParameter(name=PARAM_USE_DEFAULT_EXCLUDES, mandatory=true, defaultValue="true")
+	private boolean useDefaultExcludes;
+
+	public static final String PARAM_INCLUDE_HIDDEN = "IncludeHidden";
+	@ConfigurationParameter(name=PARAM_INCLUDE_HIDDEN, mandatory=true, defaultValue="false")
+	private boolean includeHidden;
+
+	/**
 	 * Name of optional configuration parameter that contains the language of
 	 * the documents in the input directory. If specified, this information will
 	 * be added to the CAS.
@@ -117,6 +128,38 @@ public abstract class ResourceCollectionReaderBase
 						"Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
 								+ "."));
 			}
+		}
+
+		// These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
+		if (useDefaultExcludes) {
+			excludes.add("**/*~");
+			excludes.add("**/#*#");
+			excludes.add("**/.#*");
+			excludes.add("**/%*%");
+			excludes.add("**/._*");
+			excludes.add("**/CVS");
+			excludes.add("**/CVS/**");
+			excludes.add("**/.cvsignore");
+			excludes.add("**/SCCS");
+			excludes.add("**/SCCS/**");
+			excludes.add("**/vssver.scc");
+			excludes.add("**/.svn");
+			excludes.add("**/.svn/**");
+			excludes.add("**/.DS_Store");
+			excludes.add("**/.git");
+			excludes.add("**/.git/**");
+			excludes.add("**/.gitattributes");
+			excludes.add("**/.gitignore");
+			excludes.add("**/.gitmodules");
+			excludes.add("**/.hg");
+			excludes.add("**/.hg/**");
+			excludes.add("**/.hgignore");
+			excludes.add("**/.hgsub");
+			excludes.add("**/.hgsubstate");
+			excludes.add("**/.hgtags");
+			excludes.add("**/.bzr");
+			excludes.add("**/.bzr/**");
+			excludes.add("**/.bzrignore");
 		}
 
 		try {
@@ -218,7 +261,10 @@ public abstract class ResourceCollectionReaderBase
 		org.springframework.core.io.Resource[] rBases = resolver.getResources(base);
 		Set<String> rsBases = new HashSet<String>();
 		for (org.springframework.core.io.Resource rBase : rBases) {
-			rsBases.add(getUri(rBase).toString());
+			URI uri = getUri(rBase, false);
+			if (uri != null) {
+				rsBases.add(uri.toString());
+			}
 		}
 
 		// Now we process the include patterns one after the other
@@ -226,7 +272,11 @@ public abstract class ResourceCollectionReaderBase
 			// We resolve the resources for each base+include combination.
 			org.springframework.core.io.Resource[] resourceList = resolver.getResources(base+include);
 			nextResource: for (org.springframework.core.io.Resource resource : resourceList) {
-				String sResource = getUri(resource).toString();
+				URI uResource = getUri(resource, true);
+				if (uResource == null) {
+					continue;
+				}
+				String sResource = uResource.toString();
 
 				// Determine the resolved base for this location
 				String matchBase = null;
@@ -288,11 +338,31 @@ public abstract class ResourceCollectionReaderBase
 		return result;
 	}
 
-	private URI getUri(org.springframework.core.io.Resource aResource)
+	/**
+	 * Get the URI of the given resource.
+	 *
+	 * @param aResource a resource
+	 * @param aFileOrDir if true try to return only files, if false try to return only dirs
+	 * @return the URI of the resource
+	 */
+	private URI getUri(org.springframework.core.io.Resource aResource, boolean aFileOrDir)
 		throws IOException
 	{
 		try {
-			return aResource.getFile().toURI();
+			File file = aResource.getFile();
+
+			// Exclude hidden files/dirs if requested
+			if (file.isHidden() && !includeHidden) {
+				return null;
+			}
+
+			// Return only dirs or files...
+			if ((aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
+				return aResource.getFile().toURI();
+			}
+			else {
+				return null;
+			}
 		}
 		catch (IOException e) {
 			return aResource.getURI();
@@ -313,7 +383,7 @@ public abstract class ResourceCollectionReaderBase
 			docMetaData.setDocumentId(aResource.getPath());
 			if (aResource.getBase() != null) {
 				docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
-				docMetaData.setCollectionId(aResource.getBase());
+				docMetaData.setCollectionId(aResource.getResolvedBase());
 			}
 			docMetaData.addToIndexes();
 
