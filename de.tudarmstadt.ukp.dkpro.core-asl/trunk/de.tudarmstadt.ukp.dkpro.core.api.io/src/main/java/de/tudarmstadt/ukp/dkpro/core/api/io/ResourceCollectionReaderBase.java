@@ -49,6 +49,7 @@ import org.uimafit.component.CasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * Base class for collection readers that plan to access resources on the file system or in the
@@ -75,7 +76,7 @@ public abstract class ResourceCollectionReaderBase
 	public static final String INCLUDE_PREFIX = "[+]";
 	public static final String EXCLUDE_PREFIX = "[-]";
 
-	public static final String PARAM_PATH = "Path";
+	public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
 	private String path;
 
@@ -99,7 +100,7 @@ public abstract class ResourceCollectionReaderBase
 	 * the documents in the input directory. If specified, this information will
 	 * be added to the CAS.
 	 */
-	public static final String PARAM_LANGUAGE = "Language";
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
 	private String language;
 
@@ -375,15 +376,25 @@ public abstract class ResourceCollectionReaderBase
 	 */
 	protected void initCas(CAS aCas, Resource aResource)
 	{
+		initCas(aCas, aResource, null);
+	}
+
+	/**
+	 * Initialize the {@DocumentMetaData}. This must be called before setting the
+	 * document text, otherwise the end feature of this annotation will not be set correctly.
+	 */
+	protected void initCas(CAS aCas, Resource aResource, String aQualifier)
+	{
+		String qualifier = aQualifier != null ? "#"+aQualifier : "";
 		try {
 			// Set the document metadata
 			DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
 			docMetaData.setDocumentTitle(new File(aResource.getPath()).getName());
-			docMetaData.setDocumentUri(aResource.getResolvedUri().toString());
-			docMetaData.setDocumentId(aResource.getPath());
+			docMetaData.setDocumentUri(aResource.getResolvedUri().toString()+qualifier);
+			docMetaData.setDocumentId(aResource.getPath()+qualifier);
 			if (aResource.getBase() != null) {
 				docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
-				docMetaData.setCollectionId(aResource.getResolvedBase());
+				docMetaData.setCollectionId(aResource.getResolvedBase()+qualifier);
 			}
 			docMetaData.addToIndexes();
 

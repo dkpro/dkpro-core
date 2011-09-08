@@ -27,6 +27,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 
@@ -40,7 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 public class NorvigSpellingCorrector
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_MODEL_FILE = "ModelFile";
+	public static final String PARAM_MODEL_FILE = ComponentParameters.PARAM_MODEL_LOCATION;
 
 	private NorvigSpellingAlgorithm spellingCorrector;
 

@@ -32,6 +32,7 @@ import de.danielnaber.languagetool.JLanguageTool;
 import de.danielnaber.languagetool.Language;
 import de.danielnaber.languagetool.rules.RuleMatch;
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * Detect grammatical errors in text using LanguageTool a rule based grammar checker.
@@ -42,7 +43,7 @@ public class LanguageToolChecker
 	extends JCasAnnotator_ImplBase
 {
 
-	public static final String PARAM_LANGUAGE_CODE = "LanguageCode";
+	public static final String PARAM_LANGUAGE_CODE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE_CODE, mandatory = true, defaultValue = "en")
 	private String languageCode;
 	private Language language;

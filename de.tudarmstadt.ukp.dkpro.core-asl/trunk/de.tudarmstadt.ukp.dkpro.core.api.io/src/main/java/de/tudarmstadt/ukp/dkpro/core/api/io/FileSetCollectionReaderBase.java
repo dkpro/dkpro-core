@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -39,6 +39,7 @@ import org.uimafit.component.CasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * Base class for file system collection readers. Uses an Ant FileSet to conveniently walk the
@@ -61,7 +62,7 @@ public abstract class FileSetCollectionReaderBase
 	public static final String INCLUDE_PREFIX = "[+]";
 	public static final String EXCLUDE_PREFIX = "[-]";
 
-	public static final String PARAM_PATH = "Path";
+	public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
 	private File path;
 
@@ -69,7 +70,7 @@ public abstract class FileSetCollectionReaderBase
 	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
 	private String[] patterns;
 
-	public static final String PARAM_LANGUAGE = "Language";
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE)
 	private String language;
 

@@ -43,18 +43,19 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import com.ctc.wstx.stax.WstxInputFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
 
 public class XmlReader extends CasCollectionReader_ImplBase {
 
-	public static final String PARAM_INPUT_DIRECTORY = "InputDirectory";
+	public static final String PARAM_INPUT_DIRECTORY = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name=PARAM_INPUT_DIRECTORY, mandatory=true)
 	private String inputDirectory;
 
 	/**
 	 *  optional, language of the documents (if set, will be set in each CAS)
 	 */
-	public static final String PARAM_LANGUAGE = "Language";
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
 	private String language;
 
