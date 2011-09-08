@@ -33,6 +33,7 @@ import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * @author Richard Eckart de Castilho
@@ -43,7 +44,7 @@ public class XmiWriter
 	/**
 	 * The folder to write the generated XMI files to.
 	 */
-	public static final String PARAM_PATH = "Path";
+	public static final String PARAM_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=true)
 	private File path;
 

@@ -49,6 +49,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -72,7 +73,7 @@ public class StopWordRemover
 	 * Using no prefix or the prefix "[*]" causes the list to be used for every document.
 	 * Example: "[de]classpath:/stopwords/en_articles.txt"
 	 */
-	public static final String PARAM_STOP_WORD_LIST_FILE_NAMES = "StopWordListFileNames";
+	public static final String PARAM_STOP_WORD_LIST_FILE_NAMES = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_STOP_WORD_LIST_FILE_NAMES, mandatory = true)
 	private Set<String> swFileNames;
 

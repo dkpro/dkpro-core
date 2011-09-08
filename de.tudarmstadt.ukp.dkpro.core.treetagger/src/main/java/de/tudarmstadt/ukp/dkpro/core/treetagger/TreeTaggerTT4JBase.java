@@ -48,6 +48,8 @@ import org.apache.uima.util.Level;
 import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+
 
 /**
  * @author Richard Eckart de Castilho
@@ -60,7 +62,7 @@ public abstract class TreeTaggerTT4JBase<T>
     public static final String RESOURCE_TREETAGGER = "TreeTagger";
 	protected TreeTaggerWrapper<T> treetagger;
 
-    public static final String PARAM_LANGUAGE_CODE = "LanguageCode";
+    public static final String PARAM_LANGUAGE_CODE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE_CODE, mandatory=false)
 	protected String languageCode;
 
@@ -72,11 +74,11 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name=PARAM_EXECUTABLE_PATH, mandatory=false)
 	private File executablePath;
 
-    public static final String PARAM_MODEL_PATH = "ModelPath";
+    public static final String PARAM_MODEL_PATH = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name=PARAM_MODEL_PATH, mandatory=false)
 	protected File modelPath;
 
-    public static final String PARAM_MODEL_ENCODING = "ModelEncoding";
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
 	@ConfigurationParameter(name=PARAM_MODEL_ENCODING, mandatory=false)
 	protected String modelEncoding;
 

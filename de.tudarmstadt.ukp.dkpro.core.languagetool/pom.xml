@@ -33,21 +33,22 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>de.danielnaber</groupId>
 			<artifactId>languagetool-with-resources</artifactId>
 			<version>1.1</version>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>morfologik</groupId>
 			<artifactId>morfologik-stemming-nodict</artifactId>
 			<version>1.4.0</version>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>net.sourceforge.segment</groupId>
@@ -56,7 +57,8 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

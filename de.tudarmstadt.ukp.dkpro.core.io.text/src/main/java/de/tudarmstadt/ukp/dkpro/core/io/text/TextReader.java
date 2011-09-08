@@ -31,6 +31,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import com.ibm.icu.text.CharsetDetector;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * UIMA collection reader for plain text files.
@@ -44,7 +45,7 @@ public class TextReader
 	 * Name of configuration parameter that contains the character encoding used by the input files.
 	 * If not specified, the default system encoding will be used.
 	 */
-	public static final String PARAM_ENCODING = "Encoding";
+	public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
