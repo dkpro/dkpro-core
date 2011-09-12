@@ -300,11 +300,15 @@
 	</target>
 
 	<target name="la">
-		<property name="version.la" value="2011050700"/>
+		<property name="version.la" value="2011091200"/>
 		
+		<!-- FILE: latin-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-05-07 | 2011-09-12 | f959f8633ef842f069f0331ad19dc8b4
+		  - 2011-09-12 | now        | bde1f6a63b2c5a658ba25a8eb90832a8
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/latin-par-linux-3.2.bin.gz"
     		type="tagger" endianness="little-endian" language="la" encoding="ISO-8859-1"
-    		md5="f959f8633ef842f069f0331ad19dc8b4"/>
+    		md5="bde1f6a63b2c5a658ba25a8eb90832a8"/>
 	</target>
 	
 	<target name="es">
