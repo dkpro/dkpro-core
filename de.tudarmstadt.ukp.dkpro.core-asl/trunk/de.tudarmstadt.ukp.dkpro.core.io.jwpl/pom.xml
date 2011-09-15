@@ -44,19 +44,14 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
 			<artifactId>de.tudarmstadt.ukp.wikipedia.api</artifactId>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
 			<artifactId>de.tudarmstadt.ukp.wikipedia.revisionmachine</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
 			<artifactId>de.tudarmstadt.ukp.wikipedia.util</artifactId>
-			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
