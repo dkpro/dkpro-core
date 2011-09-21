@@ -39,6 +39,7 @@
 	<target name="separate-jars-ner">
 		<property name="outputDir" value="target/stanfordnlp-resources/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
 		<antcall target="download-core"/>
+		<antcall target="download-german-ner"/>
 
     	<install-model-file file="target/download/core/muc.distsim.crf.ser.gz" md5="947710871ee62cbe94e8b21f2c934581"
     		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="1.1.0"/>		
@@ -47,8 +48,13 @@
     		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="1.1.0"/>		
 
 		<install-model-file file="target/download/core/all.3class.distsim.crf.ser.gz" md5="163502a20d89b686767281dc001cc55f"
-    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.1.0"/>		
+    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.1.0"/>	
+
+		<install-model-file file="target/download/german-ner/hgc_175m_600.crf.ser.gz" md5="39861454dc9e3b2eb391dd5b7139bc1b"
+    		tool="ner" language="de" variant="hgc_175m_600.crf" extension="ser.gz" version="20110920"/>		
 		
+		<install-model-file file="target/download/german-ner/dewac_175m_600.crf.ser.gz" md5="4722078875ddd5658f37e496f4b54b1d"
+    		tool="ner" language="de" variant="dewac_175m_600.crf" extension="ser.gz" version="20110920"/>	
 		<antcall target="jar-notice"/>
 	</target>
 			
@@ -88,6 +94,18 @@
 		<antcall target="jar-notice"/>
 	</target>
 
+	<target name="download-german-ner">
+		<mkdir dir="target/download/german-ner"/>
+		<get src="http://nlp.stanford.edu/software/ner.german.tgz" dest="target/download/german-ner/ner.german.tar.gz" skipexisting="true"/>
+    	<gunzip src="target/download/german-ner/ner.german.tar.gz"/>
+    	<untar src="target/download/german-ner/ner.german.tar" dest="target/download/german-ner">
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+    	</untar>
+    	<delete file="target/download/german-ner/ner.german.tar"/>
+	</target>
+	
 	<target name="download-core">
 		<mkdir dir="target/download/core"/>
     	<get src="http://nlp.stanford.edu/software/stanford-corenlp-v1.1.0.tgz" dest="target/download/core/core-nlp.tar.gz" skipexisting="true"/>

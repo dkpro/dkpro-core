@@ -72,6 +72,8 @@ public class StanfordNamedEntityRecognizer
 		if (this.classifier == null) {
 			try {
 				this.classifier = getClassifierInstance(this.classifierFile);
+				getContext().getLogger().log(Level.INFO, "Types: "+classifier.classIndex);
+
 			}
 			catch (IOException e) {
 				throw new ResourceInitializationException(e);
@@ -151,6 +153,23 @@ public class StanfordNamedEntityRecognizer
 	 */
 	private static String normalizeString(String s)
 	{
+		if ("I-PER".equals(s) || "B-PER".equals(s)) {
+			// This is for the German models
+			return "Person";
+		}
+		if ("I-LOC".equals(s) || "B-LOC".equals(s)) {
+			// This is for the German models
+			return "Location";
+		}
+		if ("I-ORG".equals(s) || "B-ORG".equals(s)) {
+			// This is for the German models
+			return "Organization";
+		}
+		if ("I-MISC".equals(s) || "B-MISC".equals(s)) {
+			// This is for the German models
+			return "Miscellaneous";
+		}
+
 		s = s.toLowerCase();
 
 		if (s.contains("_")) {

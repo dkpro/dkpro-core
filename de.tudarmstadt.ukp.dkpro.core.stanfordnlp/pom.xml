@@ -75,7 +75,21 @@
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-dewac_175m_600.crf</artifactId>
+					<version>20110920</version>
+					<scope>test</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-postagger-de-fast</artifactId>
+					<version>3.0.3</version>
+					<scope>test</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-postagger-en-bidirectional-distsim-wsj-0-18</artifactId>
 					<version>3.0.3</version>
 					<scope>test</scope>
 					<optional>true</optional>

@@ -22,7 +22,6 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.util.JCasUtil;
 
@@ -52,17 +51,23 @@ public class StanfordNamedEntityRecognizerTest
 		assertFalse(iter.hasNext());
 	}
 
-	@Ignore("German model does currently not work with our NER-component")
 	@Test
 	public void testGerman()
 		throws Exception
 	{
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
 		/*
 		 * Note: The FaruquiPado-classifiers need at least 2 GiG of Heap Space
 		 */
 		Iterator<NamedEntity> iter = runNER(
 				"Markus arbeitet seit 10 Jahren bei SAP in Deutschland.",
-				"resource/Classifiers/FaruquiPado/hgc_GERMAN_175M.ser.gz");
+				"/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-de-dewac_175m_600.crf.ser.gz");
+
+		assertNE(iter.next(), Person.class, 0, 6);
+		assertNE(iter.next(), Organization.class, 35, 38);
+		assertNE(iter.next(), Location.class, 42, 53);
+		assertFalse(iter.hasNext());
 	}
 
 	/**
@@ -83,7 +88,7 @@ public class StanfordNamedEntityRecognizerTest
 			Class<? extends NamedEntity> expected, int begin, int end)
 		throws Exception
 	{
-		assertTrue("must be a " + expected.getName(), actual.getClass()
+		assertTrue("must be a " + expected.getName() + " but was " + actual.getClass().getName(), actual.getClass()
 				.getCanonicalName().equals(expected.getCanonicalName()));
 		assertEquals("begin index must be " + begin, begin, actual.getBegin());
 		assertEquals("end index must be " + end, end, actual.getEnd());
