@@ -8,4 +8,16 @@
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-gpl</artifactId>
   <version>1.3.0-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</artifactId>
+  		<version>1.3.0-SNAPSHOT</version>
+  		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.uimafit</groupId>
+  		<artifactId>uimafit</artifactId>
+  	</dependency>
+  </dependencies>
 </project>
