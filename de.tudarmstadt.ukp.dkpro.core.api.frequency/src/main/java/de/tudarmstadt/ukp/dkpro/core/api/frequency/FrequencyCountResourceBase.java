@@ -19,9 +19,9 @@ package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import org.uimafit.component.Resource_ImplBase;
 
-import de.tudarmstadt.ukp.dkpro.teaching.frequency.FrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.FrequencyCountProvider;
 
-public abstract class FrequencyCountProviderBase
+public abstract class FrequencyCountResourceBase
     extends Resource_ImplBase
     implements FrequencyCountProvider
 {
@@ -55,4 +55,12 @@ public abstract class FrequencyCountProviderBase
     {
         return provider.getNrOfTokens();
     }    
+
+    @Override
+    public long getNrOfNgrams(int n)
+        throws Exception
+    {
+        return provider.getNrOfNgrams(n);
+    }    
+
 }

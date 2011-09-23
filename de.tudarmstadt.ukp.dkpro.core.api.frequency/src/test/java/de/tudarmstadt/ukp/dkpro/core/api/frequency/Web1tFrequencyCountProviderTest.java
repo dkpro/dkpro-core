@@ -26,12 +26,11 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
-import de.tudarmstadt.ukp.dkpro.teaching.frequency.FrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.FrequencyCountProvider;
 
 public class Web1tFrequencyCountProviderTest
 {
@@ -48,7 +47,6 @@ public class Web1tFrequencyCountProviderTest
             }
     }
 
-    @Ignore
     @Test
     public void configureAggregatedExample() throws Exception {
             AnalysisEngineDescription aed1 = createPrimitiveDescription(Annotator.class);
@@ -59,30 +57,10 @@ public class Web1tFrequencyCountProviderTest
             bindResource(
                     aaed,
                     Annotator.MODEL_KEY,
-                    Web1TFrequencyCountProvider.class,
-                    Web1TFrequencyCountProvider.PARAM_LANGUAGE_CODE, "en"
-            );
-
-            // Check the external resource was injected
-            AnalysisEngine ae = createAggregate(aaed);
-            ae.process(ae.newJCas());
-    }
-
-    @Ignore
-    @Test
-    public void configureAggregatedExample2() throws Exception {
-            AnalysisEngineDescription aed1 = createPrimitiveDescription(Annotator.class);
-            AnalysisEngineDescription aed2 = createPrimitiveDescription(Annotator.class);
-
-            // Bind external resource to the aggregate
-            AnalysisEngineDescription aaed = createAggregateDescription(aed1, aed2);
-            bindResource(
-                    aaed,
-                    Annotator.MODEL_KEY,
-                    Web1TFrequencyCountProvider.class,
-                    Web1TFrequencyCountProvider.PARAM_LANGUAGE_CODE, "en",
-                    Web1TFrequencyCountProvider.PARAM_INDEX_FILE_1, "src/test/resources/web1t/index-1gms",
-                    Web1TFrequencyCountProvider.PARAM_INDEX_FILE_2, "src/test/resources/web1t/index-2gms"
+                    Web1TFrequencyCountResource.class,
+                    Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/web1t/",
+                    Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+                    Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"
             );
 
             // Check the external resource was injected
