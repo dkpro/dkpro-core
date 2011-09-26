@@ -2,6 +2,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency;
 
 import java.util.Arrays;
 
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import edu.berkeley.nlp.lm.NgramLanguageModel;
 import edu.berkeley.nlp.lm.io.LmReaders;
 
