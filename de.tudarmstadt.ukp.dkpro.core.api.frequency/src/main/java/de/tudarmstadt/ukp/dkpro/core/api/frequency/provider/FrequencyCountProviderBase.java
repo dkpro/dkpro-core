@@ -15,52 +15,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.api.frequency;
+package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
 
-import org.uimafit.component.Resource_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-
-public abstract class FrequencyCountResourceBase
-    extends Resource_ImplBase
+public abstract class FrequencyCountProviderBase
     implements FrequencyCountProvider
 {
-
-    protected FrequencyCountProvider provider;
-    
-    @Override
-    public long getFrequency(String phrase)
-        throws Exception
-    {
-        return provider.getFrequency(phrase);
-    }
 
     @Override
     public double getProbability(String phrase)
         throws Exception
     {
-        return provider.getProbability(phrase);
+        long n = getNrOfNgrams(FrequencyUtils.getPhraseLength(phrase));
+        
+        if (n == 0) {
+            return 0;
+        }
+        else {
+            return (double) getFrequency(phrase) / n;
+        }
     }
-
+    
     @Override
     public double getLogProbability(String phrase)
         throws Exception
     {
-        return provider.getLogProbability(phrase);
+        return Math.log(getProbability(phrase));
     }
     
-    @Override
-    public long getNrOfTokens()
-        throws Exception
-    {
-        return provider.getNrOfTokens();
-    }    
-
-    @Override
-    public long getNrOfNgrams(int n)
-        throws Exception
-    {
-        return provider.getNrOfNgrams(n);
-    }    
-
+    public double getLogLikelihood(int termFrequency, int sizeOfCorpus, String term) throws Exception {
+        return FrequencyUtils.loglikelihood(
+                termFrequency,
+                sizeOfCorpus,
+                getFrequency(term),
+                getNrOfTokens()
+        );
+    }
 }

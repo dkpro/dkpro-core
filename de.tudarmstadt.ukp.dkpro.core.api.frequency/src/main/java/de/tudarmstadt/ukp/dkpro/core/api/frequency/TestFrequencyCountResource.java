@@ -22,8 +22,8 @@ import java.util.Map;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 
-import de.tudarmstadt.ukp.dkpro.core.frequency.FrequencyCountProvider;
-import de.tudarmstadt.ukp.dkpro.core.frequency.TestFrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.TestFrequencyCountProvider;
 
 /**
  * External resource wrapper for a test frequency count provider to be used in unit test.
