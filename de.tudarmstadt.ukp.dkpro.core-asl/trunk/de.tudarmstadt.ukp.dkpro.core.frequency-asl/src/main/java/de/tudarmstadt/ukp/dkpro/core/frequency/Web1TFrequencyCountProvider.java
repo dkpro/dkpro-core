@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright 2011
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency;
 
 import java.io.File;
@@ -8,7 +25,8 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 
-import de.tudarmstadt.ukp.dkpro.core.frequency.util.FrequencyUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.frequency.web1t.jweb1t.FileMap;
 import de.tudarmstadt.ukp.dkpro.core.frequency.web1t.jweb1t.FileSearch;
 
@@ -226,6 +244,7 @@ public class Web1TFrequencyCountProvider
         return 1024908267229l;
     }
  
+    @Override
     public double getLogLikelihood(int termFrequency, int sizeOfCorpus, String term) throws Exception {
         return FrequencyUtils.loglikelihood(
                 termFrequency,
