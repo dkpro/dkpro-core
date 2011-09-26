@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import de.tudarmstadt.ukp.dkpro.core.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.frequency.web1t.jweb1t.FileMap;
-import de.tudarmstadt.ukp.dkpro.core.frequency.web1t.jweb1t.UKPFileSearch;
+import de.tudarmstadt.ukp.dkpro.core.frequency.web1t.jweb1t.FileSearch;
 
 /**
  * Alternative implementation of jweb1t FullSearcher
@@ -178,7 +178,7 @@ public class Web1TFrequencyCountProvider
         for (int i = 0; i < file.length; i++) {
             logger.debug(i + ":" + file[i]);
 
-            UKPFileSearch fs = new UKPFileSearch(new File(file[i]));
+            FileSearch fs = new FileSearch(new File(file[i]));
 
             long f = fs.getFreq(sb.toString());
 
