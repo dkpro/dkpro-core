@@ -18,7 +18,6 @@
 
 /**
  * Wrappers for external resources providing frequency counts for phrases.
- * Contains e.g. a resource that allows to bind the Google Web1T n-gram resource to an annotator. 
  *
  * @since 1.2.0
  */
