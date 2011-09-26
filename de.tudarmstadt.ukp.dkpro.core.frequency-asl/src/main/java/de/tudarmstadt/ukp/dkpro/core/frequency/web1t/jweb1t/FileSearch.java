@@ -1,5 +1,9 @@
 /*
- * Copyright 2007 FBK-irst http://www.itc.it/)
+ * This class is based on FileSearch.java in
+ * the jWeb1T library by FBK-irst http://www.itc.it/
+ * The read(long m) method has been changed to be UTF-8 conform.
+ *
+ * Original licence information:
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +17,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package de.tudarmstadt.ukp.dkpro.core.frequency.web1t.jweb1t;
 
 import java.io.File;
@@ -21,7 +24,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 /**
  * TO DO
@@ -30,27 +32,20 @@ import org.apache.log4j.PropertyConfigurator;
  * @version %I%, %G%
  * @since		1.0
  */
-class FileSearch implements Search
+public class FileSearch implements Search
 {
 	/**
 	 * Define a static logger variable so that it references the
 	 * Logger instance named <code>FileSearch</code>.
 	 */
-	static Logger logger = Logger.getLogger(FileSearch.class.getName()); 
-	
-	//
+	static Logger logger = Logger.getLogger(FileSearch.class.getName());
+
 	private final RandomAccessFile raf;
-	
-	//
-	private final File file;
-	
-	//
+
 	public FileSearch(File file) throws IOException
 	{
-		this.file = file;
-		//logger.info(f.getName());
 		raf = new RandomAccessFile(file, "r");
-		
+
 	} // end constructor
 
 	//
@@ -58,8 +53,9 @@ class FileSearch implements Search
 	{
 		raf.close();
 	} // end close
-	
+
 	//
+	@Override
 	public long getFreq(String t) throws IOException
 	{
 		//logger.info("searching '" + t + "' in " + file.getName());
@@ -67,7 +63,7 @@ class FileSearch implements Search
 		long m = raf.length();
 		long e = raf.length();
 		int loop = 0;
-		while (e > (s + 1)) 
+		while (e > (s + 1))
 		{
 			++loop;
 			//logger.info("loop: " + loop);
@@ -81,6 +77,7 @@ class FileSearch implements Search
 			}
 
 			int c = t.compareTo(n.s);
+
 			if (c == 0)
 			{
 				//logger.debug(t + " == " + n.s + " (" + c + ")");
@@ -97,134 +94,76 @@ class FileSearch implements Search
 				//logger.debug(t + " < " + n.s + " (" + c + ")");
 				e = m;
 			}
-			
+
 		} // end while
-		
+
 		//logger.info("loops: " + loop);
 		return 0;
  	} // end getFreq
-	
+
 	//
 	public NGram read(long m) throws IOException
 	{
-		NGram n = null;
 		long s = m - 50;
-		if (s < 0)
+		if (s < 0) {
 			s = 0;
+		}
 		long e = m + 50;
-		if (e > raf.length())
+		if (e > raf.length()) {
 			e = raf.length();
-		
+		}
+
 		int len = (int) (e - s);
 		int nm = (int) (m - s);
-		
+
 		//logger.debug("nm = " + nm);
 		//logger.debug("len = " + len);
-		
+
 		raf.seek(s);
 		byte[] array = new byte[len];
-		int l = raf.read(array);
-		char ch = 0;
+
+		raf.read(array);
+
 		int i = nm;
-		while ((i >= 0) && ((ch = (char) array[i]) != '\n'))
+
+		//Go back to the beginning of the line
+		while ((i >= 0) && ((char) array[i]) != '\n')
 		{
-			//logger.debug("before: " + i + " : " + (char) array[i] + " : " + array[i]);
 			i--;
 		}
-		
+
+		//remember line start position
 		int ns = i + 1;
-		
+
 		i = nm + 1;
-		while ((i < array.length) && ((ch = (char) array[i]) != '\n'))
+
+		//go to end of line
+		while ((i < array.length) && ((char) array[i]) != '\n')
 		{
-			//logger.debug("after: " + i + " : " + (char) array[i] + " : " + array[i]);
 			i++;
 		}
-		
+
+		//remember line end position
 		int ne = i;
-					
-		StringBuffer sb = new StringBuffer();
+
+		//copy the bytes for the current line to a new byte[]
+		byte[] curLine = new byte[ne-ns];
+		int index = 0;
 		for (int j=ns;j<ne;j++)
 		{
-			sb.append((char) array[j]);
-			//logger.debug(j + " : " + (char) array[j] + " : " + array[j]);
+			curLine[index++]=array[j];
 		}
-		
-		if (sb.length() == 0)
+
+		//convert the curLine-byte[] to UTF-8 String
+		String lineAsString = new String(curLine, "UTF-8");
+
+		if (lineAsString.length() == 0) {
 			return null;
-		
-		return new NGram(sb.toString());
-	} // end put
-	
-	//
-	public static void main(String args[]) throws Exception
-	{
-		String logConfig = System.getProperty("log-config");
-		if (logConfig == null)
-			logConfig = "log-config.txt";
-		
-		PropertyConfigurator.configure(logConfig);
-		
-		if (args.length < 2)
-		{
-			logger.info("java de.tudarmstadt.ukp.parzonka.bbi.web1t.FileSearch [n-gram-file|n-gram-dir] n-gram+");
-			System.exit(-1);
 		}
-		
-		File path = new File(args[0]);
-		
-		if (path.isFile())
-		{
-			FileSearch h = new FileSearch(path);
-			for (int i=1;i<args.length;i++)
-			{
-				long f = h.getFreq(args[i]);
-				logger.info("f(" + args[i] + ") = " + f);			
-			} // end for i
-			h.close();
-			
-		}
-		else
-		{
-			FolderScanner fs = new FolderScanner(path);
-			fs.setFilter(new IndexFilter());
-			
-			long size = 0;
-			int count = 0;
-			while (fs.hasNext())
-			{	
-				Object[] files = fs.next();
-				//System.out.println((count++) + " : " + files.length);
-				for (int j=0;j<files.length;j++)
-				{
-					//long begin = System.currentTimeMillis();
-					File file = (File) files[j];
-					boolean found = false;
-					FileSearch h = new FileSearch(file);
-					for (int i=1;i<args.length;i++)
-					{
-						long f = h.getFreq(args[i]);
-						if (f != 0)
-						{
-							logger.info(file + ".f(" + args[i] + ") = " + f);
-							
-							found = true;
-							System.exit(0);
-						}
-							
-					}			
-					h.close();
-					
-					//long end = System.currentTimeMillis();
-					//System.out.println(files[i] + " read in " + (end - begin) + " ms");
-					
-				} // end for i
-				
-				logger.info("size done " + size + " byte");
-			} // end while
-			
-			
-		}
-	} // end main
-	
-} // end class FileSearch
+
+		return new NGram(lineAsString);
+
+	}
+
+
+}
