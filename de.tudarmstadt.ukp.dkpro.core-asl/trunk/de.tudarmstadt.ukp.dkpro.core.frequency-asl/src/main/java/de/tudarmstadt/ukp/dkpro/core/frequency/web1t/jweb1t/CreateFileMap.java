@@ -71,6 +71,8 @@ public class CreateFileMap
 					long begin = System.currentTimeMillis();
 					File f = (File) files[i];
 					
+					System.out.println(f.getAbsolutePath());
+					
 					read(f);
 					
 					long end = System.currentTimeMillis();
