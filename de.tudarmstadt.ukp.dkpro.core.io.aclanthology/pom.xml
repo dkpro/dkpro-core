@@ -24,6 +24,7 @@
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology</artifactId>
+  <name>DKPro Core ASL - IO - ACL Anthology (ASL)</name>
   <version>1.3.0-SNAPSHOT</version>
   <dependencies>
   	<dependency>
