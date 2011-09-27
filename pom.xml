@@ -456,7 +456,12 @@
 					<groupId>org.apache.rat</groupId>
 					<artifactId>apache-rat-plugin</artifactId>
 					<version>0.7</version>
-				</plugin>			
+				</plugin>					
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.6</version>
+				</plugin>					
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -483,6 +488,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
+				<inherited>false</inherited>
 				<configuration>
 					<notimestamp>true</notimestamp>
 					<!-- Exclude UIMA types -->
@@ -565,7 +571,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.6</version>
 						<inherited>false</inherited>
 						<dependencies>
 							<dependency>
