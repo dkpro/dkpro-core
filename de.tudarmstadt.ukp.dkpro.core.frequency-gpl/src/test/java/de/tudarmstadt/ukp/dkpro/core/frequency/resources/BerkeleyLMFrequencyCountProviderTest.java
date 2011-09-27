@@ -51,7 +51,7 @@ public class BerkeleyLMFrequencyCountProviderTest
                     aaed,
                     Annotator.MODEL_KEY,
                     BerkeleyLMFrequencyCountProvider.class,
-                    BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/berkeleylm/test.ser"
+                    BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"
             );
 
             // Check the external resource was injected
