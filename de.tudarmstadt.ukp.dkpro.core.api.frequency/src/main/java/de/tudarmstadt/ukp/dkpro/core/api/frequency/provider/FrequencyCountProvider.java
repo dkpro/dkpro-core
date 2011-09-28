@@ -64,4 +64,9 @@ public interface FrequencyCountProvider
      * Returns the number of ngrams of a given size in the corpus.
      */
     public long getNrOfNgrams(int n) throws Exception;
+
+    /**
+     * Returns the number of distinct ngrams of a given size in the corpus.
+     */
+    public long getNrOfDistinctNgrams(int n) throws Exception;
 }

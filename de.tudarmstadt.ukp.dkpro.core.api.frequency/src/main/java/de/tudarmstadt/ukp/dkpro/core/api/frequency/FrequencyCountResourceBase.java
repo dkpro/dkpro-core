@@ -61,6 +61,12 @@ public abstract class FrequencyCountResourceBase
         throws Exception
     {
         return provider.getNrOfNgrams(n);
-    }    
-
+    }
+    
+    @Override
+    public long getNrOfDistinctNgrams(int n)
+        throws Exception
+    {
+        return provider.getNrOfDistinctNgrams(n);
+    }
 }
