@@ -59,4 +59,11 @@ public class BerkeleyLMProvider
     {
         throw new Exception("Not implemented yet.");
     }
+
+    @Override
+    public long getNrOfDistinctNgrams(int n)
+        throws Exception
+    {
+        throw new Exception("Not implemented yet.");
+    }
 }
