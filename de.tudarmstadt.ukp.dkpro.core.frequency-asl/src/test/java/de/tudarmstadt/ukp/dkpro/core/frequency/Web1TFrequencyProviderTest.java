@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.frequency;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.junit.Test;
 
@@ -28,21 +27,18 @@ public class Web1TFrequencyProviderTest
 {
 
     @Test
-    public void web1tTest_indexFiles() throws IOException
+    public void web1tTest_indexFiles() throws Exception
     {
         Web1TFrequencyCountProvider web1t = new Web1TFrequencyCountProvider(
                 "src/test/resources/web1t/index-1gms",
                 "src/test/resources/web1t/index-2gms"
         );
 
-        assertEquals(2147436244l, web1t.getFrequency("!"));
-        assertEquals(528,         web1t.getFrequency("Nilmeier"));
-        assertEquals(106,         web1t.getFrequency("influx takes"));
-        assertEquals(69,          web1t.getFrequency("frist will"));
+        test(web1t);
     }
 
     @Test
-    public void web1tTest_path() throws IOException
+    public void web1tTest_path() throws Exception
     {
         Web1TFrequencyCountProvider web1t = new Web1TFrequencyCountProvider(
                 new File("src/test/resources/web1t/"),
@@ -50,10 +46,19 @@ public class Web1TFrequencyProviderTest
                 2
         );
 
+        test(web1t);
+    }
+
+    private void test(Web1TFrequencyCountProvider web1t) throws Exception {
         assertEquals(2147436244l, web1t.getFrequency("!"));
         assertEquals(528,         web1t.getFrequency("Nilmeier"));
         assertEquals(106,         web1t.getFrequency("influx takes"));
         assertEquals(69,          web1t.getFrequency("frist will"));
-    }
+        
+        assertEquals(13893397919l, web1t.getNrOfNgrams(1));
+        assertEquals(6042, web1t.getNrOfNgrams(2));
+        assertEquals(11, web1t.getNrOfDistinctNgrams(1));
+        assertEquals(21, web1t.getNrOfDistinctNgrams(2));
 
+    }
 }

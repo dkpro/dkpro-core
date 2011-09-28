@@ -57,41 +57,20 @@ public class Web1TFrequencyCountProvider
         return searcher.getFrequency(phrase);
     }
 
-    // FIXME fixed numbers are only correct for English Google Web1T
-    // as this can also be used with other data files now it needs to be changed
-    /*
-     * <p>
-     * Number of tokens: 1,024,908,267,229 <br>
-     * Number of sentences: 95,119,665,584 <br>
-     * Number of unigrams: 13,588,391 <br>
-     * Number of bigrams: 314,843,401 <br>
-     * Number of trigrams: 977,069,902 <br>
-     * Number of fourgrams: 1,313,818,354 <br>
-     * Number of fivegrams: 1,176,470,663
-     * 
-     */
     @Override
     public long getNrOfNgrams(int n) {
-        switch (n) {
-            case 1:
-                return 13588391;
-            case 2:
-                return 314843401;
-            case 3:
-                return 977069902;
-            case 4:
-                return 1313818354;
-            case 5:
-                return 1176470663;
-            default:
-                return 0;
-        }
+        return searcher.getNrOfNgrams(n);
     }
     
-    // FIXME fixed number is only correct for English Google Web1T
-    // as this can also be used with other data files now it needs to be changed
     public long getNrOfTokens() {
-        return 1024908267229l;
+        return searcher.getNrOfNgrams(1);
+    }
+    
+    @Override
+    public long getNrOfDistinctNgrams(int n)
+        throws Exception
+    {
+        return searcher.getNrOfDistinctNgrams(n);
     }
  
     @Override
