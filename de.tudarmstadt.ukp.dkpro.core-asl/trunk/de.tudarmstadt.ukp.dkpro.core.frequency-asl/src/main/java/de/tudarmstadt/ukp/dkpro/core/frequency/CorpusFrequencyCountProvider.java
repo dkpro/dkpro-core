@@ -96,4 +96,12 @@ public class CorpusFrequencyCountProvider
         // FIXME implement this 
         throw new Exception("Not implemented yet.");
     }
+
+    @Override
+    public long getNrOfDistinctNgrams(int n)
+        throws Exception
+    {
+        // FIXME implement this 
+        throw new Exception("Not implemented yet.");
+    }
 }
