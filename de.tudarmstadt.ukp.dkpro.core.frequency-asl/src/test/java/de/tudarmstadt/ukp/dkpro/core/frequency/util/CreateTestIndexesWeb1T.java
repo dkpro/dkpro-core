@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.util;
 
-import de.tudarmstadt.ukp.dkpro.core.frequency.web1t.JWeb1TIndexer;
+import com.googlecode.jweb1t.JWeb1TIndexer;
 
 public class CreateTestIndexesWeb1T
 {
