@@ -46,6 +46,13 @@ public class TestFrequencyCountProvider
     }
     
     @Override
+    public long getNrOfDistinctNgrams(int n)
+        throws Exception
+    {
+        return 10 * n;
+    }
+    
+    @Override
     public long getNrOfTokens() {
         return 100;
     }
