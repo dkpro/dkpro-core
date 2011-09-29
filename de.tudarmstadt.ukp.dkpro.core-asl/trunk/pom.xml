@@ -355,6 +355,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus</module>
 	</modules>
 	<build>
 		<pluginManagement>
