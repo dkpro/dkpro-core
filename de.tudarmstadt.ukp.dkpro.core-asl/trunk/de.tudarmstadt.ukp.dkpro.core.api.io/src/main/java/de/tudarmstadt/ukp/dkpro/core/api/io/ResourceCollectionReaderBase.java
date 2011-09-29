@@ -102,7 +102,7 @@ public abstract class ResourceCollectionReaderBase
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
-	private String language;
+	protected String language;
 
 	private int completed;
 	private Collection<Resource> resources;
@@ -412,12 +412,12 @@ public abstract class ResourceCollectionReaderBase
 	 */
 	public static class Resource
 	{
-		private String location;
-		private String base;
-		private URI resolvedUri;
-		private String resolvedBase;
-		private String path;
-		private org.springframework.core.io.Resource resource;
+		private final String location;
+		private final String base;
+		private final URI resolvedUri;
+		private final String resolvedBase;
+		private final String path;
+		private final org.springframework.core.io.Resource resource;
 
 		public Resource(String aLocation, String aBase, URI aResolvedUri, String aResolvedBaseUri,
 				String aPath, org.springframework.core.io.Resource aResource)
