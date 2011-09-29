@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
+ * Technische Universit√§t Darmstadt
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang.StringUtils.startsWith;
-import static org.apache.commons.lang.StringUtils.substringBeforeLast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,15 +48,15 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 
 /**
- * This CollectionReader reads a file which is formatted in the NEGRA export
- * format. The texts and add. information like constituent structure is
- * reproduced in CASes, one CAS per text (article) .
+ * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
+ * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
  *
  * @author Erik-Lân Do Dinh
  * @author Richard Eckart de Castilho
@@ -66,15 +65,15 @@ public class NegraExportReader
 	extends JCasCollectionReader_ImplBase
 {
 
-	public static final String PARAM_INPUT_FILE = "InputFile";
+	public static final String PARAM_INPUT_FILE = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name = PARAM_INPUT_FILE, mandatory = true)
 	private File inputFile;
 
-	public static final String PARAM_LANGUAGE = "Language";
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
 	private String language;
 
-	public static final String PARAM_ENCODING = "Encoding";
+	public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
@@ -84,6 +83,8 @@ public class NegraExportReader
 
 	private static final int LINE_ARGUMENT_COUNT = 5;
 
+	private static final int DOCUMENT_ID = 0;
+	private static final int DOCUMENT_URI = 1;
 	private static final int SENTENCE_ID = 1;
 	private static final int TEXT_ID = 4;
 	private static final int TOKEN_TEXT = 0;
@@ -107,12 +108,15 @@ public class NegraExportReader
 	private int documentsTotal;
 	private String line;
 	private BufferedReader br;
+	private Map<Integer, String> documentUris;
 
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
+		documentsTotal = 0;
+		documentUris = new HashMap<Integer, String>();
 
 		try {
 			// Detect if the file is compressed
@@ -128,19 +132,33 @@ public class NegraExportReader
 
 			// initialize reader
 			br = new BufferedReader(new InputStreamReader(is, encoding));
-			// advance until first Begin Of Sentence is found, or quit
-			// processing if EOF
+			// advance until first Begin Of Sentence is found, or quit processing if EOF
 			line = "";
-			String lastLine = null;
+
+			// skip meta, read until #BOT ORIGIN
+			while (!startsWith(line, BEGIN_OF_T + " " + SECT_ORIGIN)) {
+				line = br.readLine();
+				if (line == null) {
+					return;
+				}
+			}
+			line = br.readLine();
+			// read until #EOT ORIGIN, save entries
+			while (!startsWith(line, END_OF_T + " " + SECT_ORIGIN)) {
+				if (line == null) {
+					return;
+				}
+				String[] parts = line.split("\t+");
+				documentUris.put(Integer.parseInt(parts[DOCUMENT_ID]), parts[DOCUMENT_URI]);
+				documentsTotal++;
+				line = br.readLine();
+			}
+			// skip until sentences begin
 			while (!startsWith(line, BEGIN_OF_SENTENCE)) {
 				line = br.readLine();
 				if (line == null) {
 					return;
 				}
-				if (startsWith(line, END_OF_T+" "+SECT_ORIGIN)) {
-					documentsTotal = Integer.parseInt(lastLine.split("\\p{Space}")[0])+1;
-				}
-				lastLine = line;
 			}
 			String[] parts = splitLine(line, " ");
 			currTextId = Integer.parseInt(parts[TEXT_ID]);
@@ -168,8 +186,7 @@ public class NegraExportReader
 		while (startsWith(line, BEGIN_OF_SENTENCE)) {
 
 			// handle sentence start:
-			// #BOS sentence-id author-id timestamp text-id (%% comment
-			// (optional))
+			// #BOS sentence-id author-id timestamp text-id (%% comment (optional))
 			parts = splitLine(line, " ");
 
 			// if a new text-id is encountered, stop this jcas creation
@@ -179,8 +196,7 @@ public class NegraExportReader
 			}
 			sentenceCount++;
 
-			// add new vroot and reset constituents and relations for a new
-			// sentence
+			// add new vroot and reset constituents and relations for a new sentence
 			root = new ROOT(jcas);
 			constituents = new HashMap<Integer, Constituent>();
 			relations = new LinkedHashMap<Constituent, List<Annotation>>();
@@ -199,8 +215,7 @@ public class NegraExportReader
 				if (parent == null) {
 					parent = new Constituent(jcas);
 					parent.setBegin(Integer.MAX_VALUE);
-					constituents
-							.put(Integer.parseInt(parts[PARENT_ID]), parent);
+					constituents.put(Integer.parseInt(parts[PARENT_ID]), parent);
 				}
 				// update begin/end markers of parent
 				if (startPosition < parent.getBegin()) {
@@ -230,12 +245,10 @@ public class NegraExportReader
 				// substring(1) to get rid of leading #
 				parts = splitLine(line.substring(1), "\t+");
 				// get/create constituent, set type, function
-				constituent = constituents.get(Integer
-						.parseInt(parts[CONSTITUENT_ID]));
+				constituent = constituents.get(Integer.parseInt(parts[CONSTITUENT_ID]));
 				if (constituent == null) {
 					constituent = new Constituent(jcas);
-					constituents.put(Integer.parseInt(parts[CONSTITUENT_ID]),
-							constituent);
+					constituents.put(Integer.parseInt(parts[CONSTITUENT_ID]), constituent);
 				}
 				constituent.setConstituentType(parts[CONSTITUENT_TYPE]);
 				constituent.setSyntacticFunction(parts[SYNTACTIC_FUNCTION]);
@@ -296,8 +309,8 @@ public class NegraExportReader
 		closeQuietly(br);
 	}
 
-	private void addChild(Map<Constituent, List<Annotation>> relations,
-			Constituent parent, Annotation child)
+	private void addChild(Map<Constituent, List<Annotation>> relations, Constituent parent,
+			Annotation child)
 	{
 		List<Annotation> children = relations.get(parent);
 		if (children == null) {
@@ -307,8 +320,7 @@ public class NegraExportReader
 		children.add(child);
 	}
 
-	private void setChildren(JCas jcas,
-			Map<Constituent, List<Annotation>> relations)
+	private void setChildren(JCas jcas, Map<Constituent, List<Annotation>> relations)
 	{
 		for (Entry<Constituent, List<Annotation>> entry : relations.entrySet()) {
 			Constituent parent = entry.getKey();
@@ -324,12 +336,11 @@ public class NegraExportReader
 
 	private void setDocumentInformation(JCas jcas, String text)
 	{
-		String filename = substringBeforeLast(inputFile.getName(), ".");
 		jcas.setDocumentLanguage(language);
 		jcas.setDocumentText(text);
 		DocumentMetaData meta = DocumentMetaData.create(jcas);
-		meta.setDocumentUri(inputFile.toURI().toString());
-		meta.setDocumentId(filename + "-" + currTextId);
+		meta.setDocumentUri(documentUris.get(currTextId));
+		meta.setDocumentId(String.valueOf(currTextId));
 	}
 
 	private int countSentences()
