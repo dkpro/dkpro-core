@@ -18,7 +18,7 @@
 
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,7 +51,7 @@ public class TokenTrimmer
 		throws AnalysisEngineProcessException
 	{
 		Collection<Token> toRemove = new ArrayList<Token>();
-		for (Token t : iterate(aJCas, Token.class)) {
+		for (Token t : select(aJCas, Token.class)) {
 			String text = t.getCoveredText();
 			for (String prefix : prefixes) {
 				if (text.startsWith(prefix)) {
