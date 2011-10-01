@@ -72,7 +72,7 @@ public abstract class WikipediaStandardReaderBase
 	 * Defines the path to a file containing a line-separated list of
 	 * page ids of the pages that should be retrieved. (Optional)
 	 */
-	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIds";
+	public static final String PARAM_PATH_TO_PAGE_ID_LIST = "PageIdsFromFile";
 	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_ID_LIST, mandatory = false)
 	protected String pageIdFile;
 
@@ -80,9 +80,25 @@ public abstract class WikipediaStandardReaderBase
 	 * Defines the path to a file containing a line-separated list of
 	 * page titles of the pages that should be retrieved. (Optional)
 	 */
-	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageNames";
+	public static final String PARAM_PATH_TO_PAGE_TITLE_LIST = "PageTitleFromFile";
 	@ConfigurationParameter(name = PARAM_PATH_TO_PAGE_TITLE_LIST, mandatory = false)
 	protected String pageNameFile;
+
+	/**
+	 * Defines an array of
+	 * page ids of the pages that should be retrieved. (Optional)
+	 */
+	public static final String PARAM_PAGE_ID_LIST = "PageIdFromArray";
+	@ConfigurationParameter(name = PARAM_PAGE_ID_LIST, mandatory = false)
+	protected String[] pageIdParamArray;
+
+	/**
+	 * Defines an array of  page titles of the pages that should be retrieved.
+	 * (Optional)
+	 */
+	public static final String PARAM_PAGE_TITLE_LIST = "PageTitlesFromArray";
+	@ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
+	protected String[] pageNameParamArray;
 
 	/**
 	 * A list of pages that is used to store the pages when using the
@@ -90,8 +106,8 @@ public abstract class WikipediaStandardReaderBase
 	 * {@code PARAM_PATH_TO_PAGE_TITLE_LIST}
 	 */
 	private Set<Page> pageSet;
-	private Set<String> pageIds;
-	private Set<String> pageTitles;
+	private Set<String> pageIds = new HashSet<String>();
+	private Set<String> pageTitles = new HashSet<String>();
 
 	protected long currentArticleIndex;
 	protected long nrOfArticles;
@@ -113,13 +129,23 @@ public abstract class WikipediaStandardReaderBase
 			if (pageNameFile != null) {
 				pageTitles = loadFile(pageNameFile);
 			}
+			if (pageIdParamArray != null && pageIdParamArray.length > 0) {
+				for(String id: pageIdParamArray){
+					pageIds.add(id);
+				}
+			}
+			if (pageNameParamArray != null && pageNameParamArray.length > 0) {
+				for(String id: pageNameParamArray){
+					pageTitles.add(id);
+				}
+			}
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			throw new ResourceInitializationException(e);
 		}
 
 		//Use one of the lists or iterate over all articles?
-		if(pageIds!=null||pageTitles!=null)
+		if(!pageIds.isEmpty()||!pageTitles.isEmpty())
 		{
 			try{
 				pageSet = new HashSet<Page>();
@@ -229,6 +255,7 @@ public abstract class WikipediaStandardReaderBase
 		DocumentMetaData metaData = DocumentMetaData.create(jcas);
 		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
 		metaData.setCollectionId(new Integer(page.getPageId()).toString());
+		metaData.setDocumentId(new Integer(page.getPageId()).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
 	}
 
