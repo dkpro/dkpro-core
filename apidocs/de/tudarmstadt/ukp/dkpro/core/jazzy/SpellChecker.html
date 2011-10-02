@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SpellChecker (DKPro Core ASL 1.1.0 API)
+SpellChecker (DKPro Core ASL 1.2.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ SpellChecker (DKPro Core ASL 1.1.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SpellChecker (DKPro Core ASL 1.1.0 API)";
+        parent.document.title="SpellChecker (DKPro Core ASL 1.2.0 API)";
     }
 }
 </SCRIPT>
@@ -138,6 +138,14 @@ This annotator uses Jazzy for the decision whether a word is spelled correctly o
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/jazzy/SpellChecker.html#PARAM_SCORE_THRESHOLD">PARAM_SCORE_THRESHOLD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Determines the maximum edit distance (as an int value) that a suggestion for a spelling error may have.</TD>
+</TR>
 </TABLE>
 &nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -175,7 +183,7 @@ This annotator uses Jazzy for the decision whether a word is spelled correctly o
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/jazzy/SpellChecker.html#process(org.apache.uima.jcas.JCas)">process</A></B>(org.apache.uima.jcas.JCas&nbsp;cas)</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/jazzy/SpellChecker.html#process(org.apache.uima.jcas.JCas)">process</A></B>(org.apache.uima.jcas.JCas&nbsp;jcas)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -248,6 +256,19 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.jazzy.SpellChecker.PARAM_DICT_ENCODING">Constant Field Values</A></DL>
 </DL>
+<HR>
+
+<A NAME="PARAM_SCORE_THRESHOLD"><!-- --></A><H3>
+PARAM_SCORE_THRESHOLD</H3>
+<PRE>
+public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_SCORE_THRESHOLD</B></PRE>
+<DL>
+<DD>Determines the maximum edit distance (as an int value) that a suggestion for a spelling error may have.
+ E.g. if set to one suggestions are limited to words within edit distance 1 to the original word.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.jazzy.SpellChecker.PARAM_SCORE_THRESHOLD">Constant Field Values</A></DL>
+</DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
@@ -296,7 +317,7 @@ public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;context)
 <A NAME="process(org.apache.uima.jcas.JCas)"><!-- --></A><H3>
 process</H3>
 <PRE>
-public void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;cas)
+public void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;jcas)
              throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</PRE>
 <DL>
 <DD><DL>

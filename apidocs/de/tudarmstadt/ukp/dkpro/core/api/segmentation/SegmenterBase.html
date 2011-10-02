@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-SegmenterBase (DKPro Core ASL 1.1.0 API)
+SegmenterBase (DKPro Core ASL 1.2.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ SegmenterBase (DKPro Core ASL 1.1.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SegmenterBase (DKPro Core ASL 1.1.0 API)";
+        parent.document.title="SegmenterBase (DKPro Core ASL 1.2.0 API)";
     }
 }
 </SCRIPT>
@@ -258,7 +258,8 @@ Class SegmenterBase</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#isEmpty(org.apache.uima.jcas.tcas.Annotation)">isEmpty</A></B>(org.apache.uima.jcas.tcas.Annotation&nbsp;a)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#isEmpty(int, int)">isEmpty</A></B>(int&nbsp;aBegin,
+        int&nbsp;aEnd)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -304,7 +305,8 @@ Class SegmenterBase</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#trim(org.apache.uima.jcas.tcas.Annotation)">trim</A></B>(org.apache.uima.jcas.tcas.Annotation&nbsp;a)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#trim(java.lang.String, int[])">trim</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aText,
+     int[]&nbsp;aSpan)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove trailing or leading whitespace from the annotation.</TD>
@@ -598,10 +600,11 @@ protected abstract void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
 </DL>
 <HR>
 
-<A NAME="trim(org.apache.uima.jcas.tcas.Annotation)"><!-- --></A><H3>
+<A NAME="trim(java.lang.String, int[])"><!-- --></A><H3>
 trim</H3>
 <PRE>
-public void <B>trim</B>(org.apache.uima.jcas.tcas.Annotation&nbsp;a)</PRE>
+public void <B>trim</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aText,
+                 int[]&nbsp;aSpan)</PRE>
 <DL>
 <DD>Remove trailing or leading whitespace from the annotation.
 <P>
@@ -613,10 +616,11 @@ public void <B>trim</B>(org.apache.uima.jcas.tcas.Annotation&nbsp;a)</PRE>
 </DL>
 <HR>
 
-<A NAME="isEmpty(org.apache.uima.jcas.tcas.Annotation)"><!-- --></A><H3>
+<A NAME="isEmpty(int, int)"><!-- --></A><H3>
 isEmpty</H3>
 <PRE>
-public boolean <B>isEmpty</B>(org.apache.uima.jcas.tcas.Annotation&nbsp;a)</PRE>
+public boolean <B>isEmpty</B>(int&nbsp;aBegin,
+                       int&nbsp;aEnd)</PRE>
 <DL>
 <DD><DL>
 </DL>
