@@ -14,8 +14,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
+ ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
@@ -40,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * This Consumer outputs the content of all CASes into the IMS workbench format.
  *
  * @author Erik-Lân Do Dinh
+ *
  */
 public class ImsCwbWriter
 	extends JCasAnnotator_ImplBase
@@ -52,30 +52,8 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
-	public static final String PARAM_WRITE_POS = "WritePOS";
-	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
-	private boolean writePOS;
-
-	public static final String PARAM_WRITE_LEMMAS = "WriteLemmas";
-	@ConfigurationParameter(name = PARAM_WRITE_LEMMAS, mandatory = true, defaultValue = "true")
-	private boolean writeLemmas;
-
-	public static final String PARAM_WRITE_DOCUMENT_TAG = "WriteDocumentTag";
-	@ConfigurationParameter(name = PARAM_WRITE_DOCUMENT_TAG, mandatory = true, defaultValue = "false")
-	private boolean writeDocumentTag;
-
-	public static final String PARAM_WRITE_OFFSETS = "WriteOffsets";
-	@ConfigurationParameter(name = PARAM_WRITE_OFFSETS, mandatory = true, defaultValue = "false")
-	private boolean writeOffsets;
-
-	public static final String PARAM_CQPWEB_COMPATIBILITY = "CqpwebCompatibility";
-	@ConfigurationParameter(name = PARAM_CQPWEB_COMPATIBILITY, mandatory = true, defaultValue = "false")
-	private boolean cqpwebCompatibility;
-
 	private static final String LS = IOUtils.LINE_SEPARATOR;
-	private static final String TAB = "\t";
 	private BufferedWriter bw;
-	private int currentId;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -90,8 +68,6 @@ public class ImsCwbWriter
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
 		}
-
-		currentId = 0;
 	}
 
 	@Override
@@ -99,85 +75,44 @@ public class ImsCwbWriter
 		throws AnalysisEngineProcessException
 	{
 		String documentId = DocumentMetaData.get(jcas).getDocumentId();
-		String documentUri = DocumentMetaData.get(jcas).getDocumentUri();
-
-		// CQPweb demands an id consisting of only letters, numbers and underscore
-		if (cqpwebCompatibility) {
-			// if the documentTag is written as well keep the id, else use the uri instead
-			if (writeDocumentTag) {
-				if (documentId == null || documentId.length() == 0) {
-					documentId = new Integer(currentId).toString();
-				}
-				documentId = documentId.replaceAll("[^\\d\\w_]", "_");
-			}
-			else {
-				if (documentUri == null || documentUri.length() == 0) {
-					documentUri = new Integer(currentId).toString();
-				}
-				documentId = documentUri.replaceAll("[^\\d\\w_]", "_");
-			}
-		}
 
 		try {
-			bw.write("<text id=\"" + documentId + "\">");
-			bw.write(LS);
-			if (writeDocumentTag) {
-				bw.write("<document uri=\"" + documentUri + "\">");
-				bw.write(LS);
-			}
+			bw.write("<document uri=\"" + documentId + "\">" + LS);
 			for (Sentence sentence : select(jcas, Sentence.class)) {
-				bw.write("<s>");
-				bw.write(LS);
+				bw.write("<s>" + LS);
 				for (Token token : selectCovered(jcas, Token.class, sentence)) {
 					// write token
 					bw.write(token.getCoveredText());
+					bw.write("\t");
 
 					// write pos tag
-					if (writePOS) {
-						bw.write(TAB);
-						if (token.getPos() != null) {
-							bw.write(token.getPos().getPosValue());
-						}
-						else {
-							bw.write("-");
-						}
+					if (token.getPos() != null) {
+						bw.write(token.getPos().getPosValue());
 					}
+					else {
+						bw.write("-");
+					}
+					bw.write("\t");
 
 					// write lemma
-					if (writeLemmas) {
-						bw.write(TAB);
-						if (token.getLemma() != null) {
-							bw.write(token.getLemma().getValue());
-						}
-						else {
-							bw.write("-");
-						}
+					if (token.getLemma() != null) {
+						bw.write(token.getLemma().getValue());
 					}
+					else {
+						bw.write("-");
+					}
+					bw.write("\t");
 
-					// write doc-id
-					bw.write(TAB);
+					// write doc-id, begin, end
 					bw.write(documentId);
-
-					// write offsets
-					if (writeOffsets) {
-						bw.write(TAB);
-						bw.write(String.valueOf(token.getBegin()));
-						bw.write(TAB);
-						bw.write(String.valueOf(token.getEnd()));
-					}
-					bw.write(LS);
+					bw.write("\t");
+					bw.write(String.valueOf(token.getBegin()));
+					bw.write("\t");
+					bw.write(token.getEnd() + LS);
 				}
-				bw.write("</s>");
-				bw.write(LS);
+				bw.write("</s>" + LS);
 			}
-			if (writeDocumentTag) {
-				bw.write("</document>");
-				bw.write(LS);
-			}
-			bw.write("</text>");
-			bw.write(LS);
-
-			currentId++;
+			bw.write("</document>" + LS);
 		}
 		catch (IOException e) {
 			throw new AnalysisEngineProcessException(e);

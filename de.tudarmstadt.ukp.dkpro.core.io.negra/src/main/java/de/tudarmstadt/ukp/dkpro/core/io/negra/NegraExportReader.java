@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universit√§t Darmstadt
+ * Technische Universität Darmstadt
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang.StringUtils.startsWith;
+import static org.apache.commons.lang.StringUtils.substringBeforeLast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,7 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
@@ -49,16 +49,15 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 
 /**
- * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
- * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
+ * This CollectionReader reads a file which is formatted in the NEGRA export
+ * format. The texts and add. information like constituent structure is
+ * reproduced in CASes, one CAS per text (article) .
  *
  * @author Erik-Lân Do Dinh
  * @author Richard Eckart de Castilho
@@ -67,15 +66,15 @@ public class NegraExportReader
 	extends JCasCollectionReader_ImplBase
 {
 
-	public static final String PARAM_INPUT_FILE = ComponentParameters.PARAM_SOURCE_LOCATION;
+	public static final String PARAM_INPUT_FILE = "InputFile";
 	@ConfigurationParameter(name = PARAM_INPUT_FILE, mandatory = true)
 	private File inputFile;
 
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	public static final String PARAM_LANGUAGE = "Language";
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
 	private String language;
 
-	public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+	public static final String PARAM_ENCODING = "Encoding";
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
@@ -83,64 +82,37 @@ public class NegraExportReader
 	@ConfigurationParameter(name = PARAM_POS_ENABLED, mandatory = true, defaultValue = "true")
 	private boolean posEnabled;
 
-	public static final String PARAM_LEMMA_ENABLED = "LemmaEnabled";
-	@ConfigurationParameter(name = PARAM_LEMMA_ENABLED, mandatory = true, defaultValue = "true")
-	private boolean lemmaEnabled;
-
 	private static final int LINE_ARGUMENT_COUNT = 5;
 
-	// Fields for a token in a sentence
-	private int TOKEN_TEXT = 0;
-	private int TOKEN_LEMMA = -1;
-	private int TOKEN_POS_TAG = 1;
-	private int TOKEN_MORPH = 2;
-	private int TOKEN_EDGE = 3;
-	private int TOKEN_PARENT_ID = 4;
-	private int TOKEN_SECEDGE = 5;
-	private int TOKEN_COMMENT = 6;
-
-	// Fields for a constituent in a sentence
+	private static final int SENTENCE_ID = 1;
+	private static final int TEXT_ID = 4;
+	private static final int TOKEN_TEXT = 0;
+	private static final int POS_TAG = 1;
+	private static final int FUNCTION = 3;
+	private static final int PARENT_ID = 4;
 	private static final int CONSTITUENT_ID = 0;
 	private static final int CONSTITUENT_TYPE = 1;
-	private static final int CONSTITUENT_FUNCTION = 3;
+	private static final int SYNTACTIC_FUNCTION = 3;
 
-	// #FORMAT fields
-	private static final int FORMAT_FIELD_NUM = 1;
-
-	// #BOT fields
-	private static final int BOT_FIELD_NAME = 1;
-
-	// #BOS fields
-	private static final int BOS_FIELD_NUM = 1;
-	private static final int BOS_FIELD_EDITOR_ID = 2;
-	private static final int BOS_FIELD_DATE = 3;
-	private static final int BOS_FIELD_ORIGIN_ID = 4;
-
-	// ORIGIN table fields
-	private static final int DOCUMENT_ID = 0;
-	private static final int DOCUMENT_URI = 1;
-
-	private static final String FORMAT = "#FORMAT";
 	private static final String BEGIN_OF_SENTENCE = "#BOS";
 	private static final String END_OF_SENTENCE = "#EOS";
-	private static final String BEGIN_OF_TABLE = "#BOT";
-	private static final String END_OF_TABLE = "#EOT";
-	private static final String TABLE_ORIGIN = "ORIGIN";
+	private static final String BEGIN_OF_T = "#BOT";
+	private static final String END_OF_T = "#EOT";
+	private static final String SECT_ORIGIN = "ORIGIN";
 
-	private int format;
+	private int currTextId;
+	private int sentencesTotal;
 	private int sentenceCount;
 	private int documentCount;
 	private int documentsTotal;
+	private String line;
 	private BufferedReader br;
-	private Map<String, String> documentUris;
 
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-		documentsTotal = 0;
-		documentUris = new HashMap<String, String>();
 
 		try {
 			// Detect if the file is compressed
@@ -154,10 +126,25 @@ public class NegraExportReader
 				is = new CBZip2InputStream(is);
 			}
 
+			// initialize reader
 			br = new BufferedReader(new InputStreamReader(is, encoding));
-
-			readHeaders();
-
+			// advance until first Begin Of Sentence is found, or quit
+			// processing if EOF
+			line = "";
+			String lastLine = null;
+			while (!startsWith(line, BEGIN_OF_SENTENCE)) {
+				line = br.readLine();
+				if (line == null) {
+					return;
+				}
+				if (startsWith(line, END_OF_T+" "+SECT_ORIGIN)) {
+					documentsTotal = Integer.parseInt(lastLine.split("\\p{Space}")[0])+1;
+				}
+				lastLine = line;
+			}
+			String[] parts = splitLine(line, " ");
+			currTextId = Integer.parseInt(parts[TEXT_ID]);
+			sentencesTotal = countSentences();
 			sentenceCount = 0;
 			documentCount = 0;
 		}
@@ -167,30 +154,125 @@ public class NegraExportReader
 	}
 
 	@Override
-	public void getNext(JCas aJCas)
+	public void getNext(JCas jcas)
 		throws IOException
 	{
 		StringBuilder text = new StringBuilder();
+		Map<Integer, Constituent> constituents;
+		Map<Constituent, List<Annotation>> relations;
+		Constituent constituent, parent;
+		ROOT root;
+		String[] parts;
+		int startPosition, endPosition = -1, nextTextId = currTextId;
 
-		String originId = readOriginId(true);
-		String lastOriginId = originId;
-		while (originId != null) {
-			if (!originId.equals(lastOriginId)) {
-				// if a new origin ID is encountered, stop this jcas creation
+		while (startsWith(line, BEGIN_OF_SENTENCE)) {
+
+			// handle sentence start:
+			// #BOS sentence-id author-id timestamp text-id (%% comment
+			// (optional))
+			parts = splitLine(line, " ");
+
+			// if a new text-id is encountered, stop this jcas creation
+			if (Integer.parseInt(parts[TEXT_ID]) != currTextId) {
+				nextTextId = Integer.parseInt(parts[TEXT_ID]);
 				break;
 			}
+			sentenceCount++;
 
-			// otherwise consume the line
-			readOriginId(false);
+			// add new vroot and reset constituents and relations for a new
+			// sentence
+			root = new ROOT(jcas);
+			constituents = new HashMap<Integer, Constituent>();
+			relations = new LinkedHashMap<Constituent, List<Annotation>>();
+			root.setBegin(Integer.MAX_VALUE);
+			root.setConstituentType("ROOT");
+			constituents.put(0, root);
 
-			// read the next sentence
-			readSentence(aJCas, text);
+			// handle tokens
+			for (line = br.readLine(); startsNotWith(line, "#"); line = br.readLine()) {
+				parts = splitLine(line, "\t+");
+				text.append(parts[TOKEN_TEXT] + " ");
+				startPosition = endPosition + 1;
+				endPosition = startPosition + parts[TOKEN_TEXT].length();
+				// get/create parent
+				parent = constituents.get(Integer.parseInt(parts[PARENT_ID]));
+				if (parent == null) {
+					parent = new Constituent(jcas);
+					parent.setBegin(Integer.MAX_VALUE);
+					constituents
+							.put(Integer.parseInt(parts[PARENT_ID]), parent);
+				}
+				// update begin/end markers of parent
+				if (startPosition < parent.getBegin()) {
+					parent.setBegin(startPosition);
+				}
+				if (endPosition > parent.getEnd()) {
+					parent.setEnd(endPosition);
+				}
+				// create token, insert into constituent hierarchy, add to
+				// indexes
+				Token token = new Token(jcas, startPosition, endPosition);
+				token.setParent(parent);
+				addChild(relations, parent, token);
+				token.addToIndexes(jcas);
 
-			lastOriginId = originId;
-			originId = readOriginId(true);
+				// create pos
+				if (posEnabled) {
+					POS pos = new POS(jcas, startPosition, endPosition);
+					pos.setPosValue(parts[POS_TAG]);
+					pos.addToIndexes();
+					token.setPos(pos);
+				}
+			}
+
+			// handle constituent relations
+			for (; startsNotWith(line, END_OF_SENTENCE); line = br.readLine()) {
+				// substring(1) to get rid of leading #
+				parts = splitLine(line.substring(1), "\t+");
+				// get/create constituent, set type, function
+				constituent = constituents.get(Integer
+						.parseInt(parts[CONSTITUENT_ID]));
+				if (constituent == null) {
+					constituent = new Constituent(jcas);
+					constituents.put(Integer.parseInt(parts[CONSTITUENT_ID]),
+							constituent);
+				}
+				constituent.setConstituentType(parts[CONSTITUENT_TYPE]);
+				constituent.setSyntacticFunction(parts[SYNTACTIC_FUNCTION]);
+				// get/create parent
+				parent = constituents.get(Integer.parseInt(parts[PARENT_ID]));
+				if (parent == null) {
+					parent = new Constituent(jcas);
+					parent.setBegin(Integer.MAX_VALUE);
+					constituents.put(Integer.parseInt(parts[PARENT_ID]), parent);
+				}
+				// update begin/end markers of parent
+				if (constituent.getBegin() < parent.getBegin()) {
+					parent.setBegin(constituent.getBegin());
+				}
+				if (constituent.getEnd() > parent.getEnd()) {
+					parent.setEnd(constituent.getEnd());
+				}
+				// set parent, add child
+				constituent.setParent(parent);
+				addChild(relations, parent, constituent);
+			}
+
+			// set all children at the end of the sentence
+			setChildren(jcas, relations);
+
+			// set sentence annotation
+			Sentence sentence = new Sentence(jcas, root.getBegin(), root.getEnd());
+			sentence.addToIndexes(jcas);
+
+			// add constituents at the end of the sentence
+			for (Constituent c : constituents.values()) {
+				c.addToIndexes(jcas);
+			}
+			line = br.readLine();
 		}
-		setDocumentInformation(aJCas, lastOriginId, text.toString());
-
+		setDocumentInformation(jcas, text.toString());
+		currTextId = nextTextId;
 		documentCount++;
 	}
 
@@ -198,7 +280,7 @@ public class NegraExportReader
 	public boolean hasNext()
 		throws IOException, CollectionException
 	{
-		return readOriginId(true) != null;
+		return startsWith(line, BEGIN_OF_SENTENCE);
 	}
 
 	@Override
@@ -214,255 +296,8 @@ public class NegraExportReader
 		closeQuietly(br);
 	}
 
-	/**
-	 * Read the originId from the #BOS line that is expected to follow.
-	 *
-	 * @param aPeek if true, stream will not advance
-	 * @return the next origin id or null if there is none
-	 */
-	private String readOriginId(boolean aPeek) throws IOException
-	{
-		if (aPeek) {
-			br.mark(16000);
-		}
-		String line = br.readLine();
-		while (line != null) {
-			if (!line.startsWith("%%")) {
-				String[] parts = line.split("\\s+");
-				if (aPeek) {
-					br.reset();
-				}
-				String nextOriginId = parts[BOS_FIELD_ORIGIN_ID];
-
-//				System.out.printf("Next origin id [%s] (peek: %b)%n", nextOriginId, aPeek);
-
-				return nextOriginId;
-			}
-			line = br.readLine();
-		}
-		return null;
-	}
-
-	private void readHeaders() throws IOException
-	{
-		br.mark(16000);
-		String line = br.readLine();
-		while (line != null) {
-			if (!line.startsWith("%%")) {
-				if (readHeaderLine(line.split("\\s+"))) {
-					br.reset();
-					return;
-				}
-			}
-			br.mark(16000);
-			line = br.readLine();
-		}
-		throw new IOException("Unexpected end of file");
-	}
-
-	/**
-	 * @return true if all header data has been parsed.
-	 */
-	private boolean readHeaderLine(String[] aLine) throws IOException
-	{
-//		System.out.printf("Parsing line [%s]%n", StringUtils.join(aLine, "\t"));
-
-		if (FORMAT.equals(aLine[0])) {
-			readFormat(aLine);
-			return false;
-		}
-		else if (BEGIN_OF_TABLE.equals(aLine[0])) {
-			readTable(aLine);
-			return false;
-		}
-		else if (BEGIN_OF_SENTENCE.equals(aLine[0])) {
-			return true;
-		}
-		else {
-			throw new IOException("Illegal file format: ["+StringUtils.join(aLine, "\t")+"]");
-		}
-	}
-
-	private void readFormat(String[] aLine) throws IOException
-	{
-		format = Integer.valueOf(aLine[FORMAT_FIELD_NUM]);
-		switch (format) {
-		case 3:
-			TOKEN_TEXT = 0;
-			TOKEN_LEMMA = -1;
-			TOKEN_POS_TAG = 1;
-			TOKEN_MORPH = 2;
-			TOKEN_EDGE = 3;
-			TOKEN_PARENT_ID = 4;
-			TOKEN_SECEDGE = 5;
-			TOKEN_COMMENT = 6;
-			break;
-		case 4:
-			TOKEN_TEXT = 0;
-			TOKEN_LEMMA = 1;
-			TOKEN_POS_TAG = 2;
-			TOKEN_MORPH = 3;
-			TOKEN_EDGE = 4;
-			TOKEN_PARENT_ID = 5;
-			TOKEN_SECEDGE = 6;
-			TOKEN_COMMENT = 7;
-			break;
-		default:
-			throw new IOException("Format version ["+format+"] not supported");
-		}
-//		System.out.printf("Reading format [%d]%n", format);
-	}
-
-	private void readTable(String[] aLine) throws IOException
-	{
-		String tableName = aLine[BOT_FIELD_NAME];
-
-//		System.out.printf("Reading table [%s]%n", tableName);
-
-		if (TABLE_ORIGIN.equals(tableName)) {
-			readOriginTable();
-		}
-		else {
-			skipTable();
-		}
-	}
-
-	private void readOriginTable() throws IOException
-	{
-		String line = br.readLine();
-		while (!startsWith(line, END_OF_TABLE)) {
-			if (line == null) {
-				throw new IOException("Unexpected end of file");
-			}
-			String[] parts = line.split("\t+");
-			documentUris.put(parts[DOCUMENT_ID], parts[DOCUMENT_URI]);
-			documentsTotal++;
-			line = br.readLine();
-		}
-//		System.out.printf("Documents [%d]%n", documentsTotal);
-	}
-
-	private void readSentence(JCas aJCas, StringBuilder aText) throws IOException
-	{
-		sentenceCount++;
-
-		// Initialize root node
-		ROOT root = new ROOT(aJCas);
-		root.setBegin(Integer.MAX_VALUE);
-		root.setConstituentType("ROOT");
-
-		// Initialize consituents
-		Map<String, Constituent> constituents = new HashMap<String, Constituent>();
-		constituents.put("0", root);
-
-		// Initialize dependency relations
-		Map<Constituent, List<Annotation>> relations = new LinkedHashMap<Constituent, List<Annotation>>();
-
-		// handle tokens
-		int startPosition, endPosition = -1;
-		String line;
-		for (line = br.readLine(); startsNotWith(line, "#"); line = br.readLine()) {
-			String[] parts = splitLine(line, "\t+");
-			aText.append(parts[TOKEN_TEXT] + " ");
-			startPosition = endPosition + 1;
-			endPosition = startPosition + parts[TOKEN_TEXT].length();
-
-			// create token
-			Token token = new Token(aJCas, startPosition, endPosition);
-			token.addToIndexes(aJCas);
-
-			// get/create parent
-			Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
-			if (parent == null) {
-				parent = new Constituent(aJCas);
-				parent.setBegin(Integer.MAX_VALUE);
-				constituents.put(parts[TOKEN_PARENT_ID], parent);
-			}
-			// update begin/end markers of parent
-			if (startPosition < parent.getBegin()) {
-				parent.setBegin(startPosition);
-			}
-			if (endPosition > parent.getEnd()) {
-				parent.setEnd(endPosition);
-			}
-			token.setParent(parent);
-			addChild(relations, parent, token);
-
-			// create pos
-			if (posEnabled && (TOKEN_POS_TAG >= 0)) {
-				POS pos = new POS(aJCas, startPosition, endPosition);
-				pos.setPosValue(parts[TOKEN_POS_TAG]);
-				pos.addToIndexes();
-				token.setPos(pos);
-			}
-
-			// create lemma
-			if (lemmaEnabled && (TOKEN_LEMMA >= 0)) {
-				Lemma lemma = new Lemma(aJCas, startPosition, endPosition);
-				lemma.setValue(parts[TOKEN_LEMMA]);
-				lemma.addToIndexes();
-				token.setLemma(lemma);
-			}
-		}
-
-		// handle constituent relations
-		Constituent constituent;
-		for (; startsNotWith(line, END_OF_SENTENCE); line = br.readLine()) {
-			// substring(1) to get rid of leading #
-			String[] parts = splitLine(line.substring(1), "\t+");
-			// get/create constituent, set type, function
-			constituent = constituents.get(parts[CONSTITUENT_ID]);
-			if (constituent == null) {
-				constituent = new Constituent(aJCas);
-				constituents.put(parts[CONSTITUENT_ID], constituent);
-			}
-			constituent.setConstituentType(parts[CONSTITUENT_TYPE]);
-			constituent.setSyntacticFunction(parts[CONSTITUENT_FUNCTION]);
-			// get/create parent
-			Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
-			if (parent == null) {
-				parent = new Constituent(aJCas);
-				parent.setBegin(Integer.MAX_VALUE);
-				constituents.put(parts[TOKEN_PARENT_ID], parent);
-			}
-			// update begin/end markers of parent
-			if (constituent.getBegin() < parent.getBegin()) {
-				parent.setBegin(constituent.getBegin());
-			}
-			if (constituent.getEnd() > parent.getEnd()) {
-				parent.setEnd(constituent.getEnd());
-			}
-			// set parent, add child
-			constituent.setParent(parent);
-			addChild(relations, parent, constituent);
-		}
-
-		// set all children at the end of the sentence
-		setChildren(aJCas, relations);
-
-		// set sentence annotation
-		Sentence sentence = new Sentence(aJCas, root.getBegin(), root.getEnd());
-		sentence.addToIndexes(aJCas);
-
-		// add constituents at the end of the sentence
-		for (Constituent c : constituents.values()) {
-			c.addToIndexes(aJCas);
-		}
-	}
-
-	private void skipTable() throws IOException
-	{
-		String line = br.readLine();
-		while (!startsWith(line, END_OF_TABLE)) {
-			if (line == null) {
-				throw new IOException("Unexpected end of file");
-			}
-			line = br.readLine();
-		}
-	}
-
-	private void addChild(Map<Constituent, List<Annotation>> relations, Constituent parent,
-			Annotation child)
+	private void addChild(Map<Constituent, List<Annotation>> relations,
+			Constituent parent, Annotation child)
 	{
 		List<Annotation> children = relations.get(parent);
 		if (children == null) {
@@ -472,7 +307,8 @@ public class NegraExportReader
 		children.add(child);
 	}
 
-	private void setChildren(JCas jcas, Map<Constituent, List<Annotation>> relations)
+	private void setChildren(JCas jcas,
+			Map<Constituent, List<Annotation>> relations)
 	{
 		for (Entry<Constituent, List<Annotation>> entry : relations.entrySet()) {
 			Constituent parent = entry.getKey();
@@ -486,13 +322,20 @@ public class NegraExportReader
 		}
 	}
 
-	private void setDocumentInformation(JCas jcas, String aTextId, String aText)
+	private void setDocumentInformation(JCas jcas, String text)
 	{
-		DocumentMetaData meta = DocumentMetaData.create(jcas);
-		meta.setDocumentUri(documentUris.get(aTextId));
-		meta.setDocumentId(aTextId);
+		String filename = substringBeforeLast(inputFile.getName(), ".");
 		jcas.setDocumentLanguage(language);
-		jcas.setDocumentText(aText);
+		jcas.setDocumentText(text);
+		DocumentMetaData meta = DocumentMetaData.create(jcas);
+		meta.setDocumentUri(inputFile.toURI().toString());
+		meta.setDocumentId(filename + "-" + currTextId);
+	}
+
+	private int countSentences()
+	{
+		// TODO efficiently read last line, get sentence number
+		return 0;
 	}
 
 	private String[] splitLine(String str, String delimiter)
@@ -501,7 +344,7 @@ public class NegraExportReader
 		String[] parts = str.split(delimiter);
 		if (parts.length < LINE_ARGUMENT_COUNT) {
 			throw new IOException("Illegal file format: expected [" + LINE_ARGUMENT_COUNT
-					+ "] fields, but found [" + parts.length + "] in ["+str+"]");
+					+ "] fields, but found [" + parts.length + "]");
 		}
 		return parts;
 	}

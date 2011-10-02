@@ -43,7 +43,6 @@ import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
@@ -70,7 +69,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 public class XmlWriterInline
 	extends JCasConsumer_ImplBase
 {
-	public static final String PARAM_OUTPUTDIR = ComponentParameters.PARAM_TARGET_LOCATION;
+	public static final String PARAM_OUTPUTDIR = "OutputDirectory";
 	@ConfigurationParameter(name=PARAM_OUTPUTDIR, mandatory=true)
 	private File outputDirectory;
 

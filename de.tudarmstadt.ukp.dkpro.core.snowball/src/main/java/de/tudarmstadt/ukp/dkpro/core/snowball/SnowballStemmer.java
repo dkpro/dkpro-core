@@ -41,7 +41,6 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -66,7 +65,7 @@ public class SnowballStemmer
 	/**
 	 * Override the language set in the {@link CAS}.
 	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	public static final String PARAM_LANGUAGE = "Language";
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 

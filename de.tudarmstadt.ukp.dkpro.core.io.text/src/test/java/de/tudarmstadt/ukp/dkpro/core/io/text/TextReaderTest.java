@@ -24,13 +24,11 @@ import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.uimafit.util.JCasUtil.select;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -42,10 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class TextReaderTest
 {
-	private static final String FILE1 = "test1.txt";
-	private static final String FILE2 = "test2.txt";
-	private static final List<String> FILES = Arrays.asList(FILE1, FILE2);
-
 	@Test
 	public void fileSystemReaderTest()
 		throws Exception
@@ -61,59 +55,24 @@ public class TextReaderTest
 
 		for (JCas jcas : new JCasIterable(reader)) {
 			DocumentMetaData md = DocumentMetaData.get(jcas);
-            dumpMetaData(md);
+			System.out.println(md.getDocumentUri());
 
             assertEquals(1, select(jcas, DocumentAnnotation.class).size());
 
-            assertTrue(FILES.contains(md.getDocumentId()));
-
 			assertTrue(
-					!FILE1.equals(md.getDocumentId()) || (
+					!"file:src/test/resources/texts/test1.txt".equals(md.getDocumentUri()) || (
 							"This is a test.".equals(jcas.getDocumentText()) &&
 							15 == md.getEnd()));
 
 			assertTrue(
-					!FILE2.equals(md.getDocumentId())
+					!"file:src/test/resources/texts/test2.txt".equals(md.getDocumentUri())
 					|| "This is a second test.".equals(jcas.getDocumentText()));
 
             writer.process(jcas);
 		}
 	}
 
-	@Test
-	public void fileSystemReaderTest3()
-		throws Exception
-	{
-		CollectionReader reader = createCollectionReader(TextReader.class,
-				createTypeSystemDescription(),
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/name with space",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
-
-        AnalysisEngine writer = createPrimitive(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
-		for (JCas jcas : new JCasIterable(reader)) {
-			DocumentMetaData md = DocumentMetaData.get(jcas);
-            dumpMetaData(md);
-
-            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
-
-            assertTrue(FILES.contains(md.getDocumentId()));
-
-			assertTrue(
-					!FILE1.equals(md.getDocumentId()) || (
-							"This is a test.".equals(jcas.getDocumentText()) &&
-							15 == md.getEnd()));
-
-			assertTrue(
-					!FILE2.equals(md.getDocumentId())
-					|| "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
-		}
-	}
-
+	@Ignore
 	@Test
     public void fileSystemReaderTest2()
         throws Exception
@@ -128,63 +87,21 @@ public class TextReaderTest
 
         for (JCas jcas : new JCasIterable(reader)) {
             DocumentMetaData md = DocumentMetaData.get(jcas);
-            dumpMetaData(md);
+            System.out.println(md.getDocumentUri());
 
             assertEquals(1, select(jcas, DocumentAnnotation.class).size());
 
-            assertTrue(FILES.contains(md.getDocumentId()));
-
             assertTrue(
-                    !FILE1.equals(md.getDocumentId())
+                    !"file:src/test/resources/texts/test1.txt".equals(md.getDocumentUri())
                     || "This is a test.".equals(jcas.getDocumentText()));
 
             assertTrue(
-                    !FILE2.equals(md.getDocumentId())
+                    !"file:src/test/resources/texts/test2.txt".equals(md.getDocumentUri())
                     || "This is a second test.".equals(jcas.getDocumentText()));
 
             writer.process(jcas);
         }
     }
-
-	@Test
-    public void fileSystemReaderTest4()
-        throws Exception
-    {
-        CollectionReader reader = createCollectionReader(TextReader.class,
-                createTypeSystemDescription(),
-                ResourceCollectionReaderBase.PARAM_PATH, "classpath:texts",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
-
-        AnalysisEngine writer = createPrimitive(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
-        for (JCas jcas : new JCasIterable(reader)) {
-            DocumentMetaData md = DocumentMetaData.get(jcas);
-            dumpMetaData(md);
-
-            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
-
-            assertTrue(FILES.contains(md.getDocumentId()));
-
-            assertTrue(
-                    !FILE1.equals(md.getDocumentId())
-                    || "This is a test.".equals(jcas.getDocumentText()));
-
-            assertTrue(
-                    !FILE2.equals(md.getDocumentId())
-                    || "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
-        }
-    }
-
-	private void dumpMetaData(final DocumentMetaData aMetaData)
-	{
-        System.out.println("Collection ID: "+aMetaData.getCollectionId());
-        System.out.println("ID           : "+aMetaData.getDocumentId());
-        System.out.println("Base URI     : "+aMetaData.getDocumentBaseUri());
-        System.out.println("URI          : "+aMetaData.getDocumentUri());
-	}
 
 	@Rule public TestName name = new TestName();
 }

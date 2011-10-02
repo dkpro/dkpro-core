@@ -20,10 +20,12 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.3.0-SNAPSHOT</version>
+		<version>1.2.0</version>
 	</parent>
+	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</artifactId>
 	<name>DKPro Core ASL - IO - Wikipedia (LGPL)</name>
+	<version>1.2.0</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -44,25 +46,15 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
 			<artifactId>de.tudarmstadt.ukp.wikipedia.api</artifactId>
+			<version>0.7.2</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
 			<artifactId>de.tudarmstadt.ukp.wikipedia.revisionmachine</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-			<artifactId>de.tudarmstadt.ukp.wikipedia.util</artifactId>
+			<version>0.7.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
-				<artifactId>de.tudarmstadt.ukp.wikipedia</artifactId>
-				<version>0.8.0-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

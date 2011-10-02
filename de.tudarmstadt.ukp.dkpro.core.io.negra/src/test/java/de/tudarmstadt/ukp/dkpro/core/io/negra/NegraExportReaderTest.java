@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.commons.lang.StringUtils.substringBeforeLast;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
@@ -38,7 +39,6 @@ import org.apache.uima.util.CasCreationUtils;
 import org.junit.Test;
 import org.uimafit.component.xwriter.CASDumpWriter;
 import org.uimafit.factory.TypeSystemDescriptionFactory;
-import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -58,20 +58,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
  */
 public class NegraExportReaderTest
 {
+	private JCas jcas;
+	private static final String inputFile = "src/test/resources/corpus-sample.export";
+	private static final File referenceDump = new File("target/reference.txt");
+	private static final File testDump = new File("target/test.txt");
+
 	@Test
 	public void negraTest()
 		throws Exception
 	{
-		File inputFile = new File("src/test/resources/sentence.export");
-		File testDump = new File("target/test.txt");
-		File referenceDump = new File("target/reference.txt");
-
 		// create reference output
-		createReferenceDump(inputFile, referenceDump);
+		createReferenceDump();
 
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, inputFile.getPath(),
+				NegraExportReader.PARAM_INPUT_FILE, inputFile,
 				NegraExportReader.PARAM_LANGUAGE, "de");
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(
@@ -87,107 +88,109 @@ public class NegraExportReaderTest
 		assertEquals(reference, test);
 	}
 
-	private void createReferenceDump(File aInputFile, File aOutputFile)
+	private void createReferenceDump()
 		throws UIMAException
 	{
 		// create an empty jcas and fill it with the correct annotations
-		JCas jcas = CasCreationUtils.createCas(
+		jcas = CasCreationUtils.createCas(
 				TypeSystemDescriptionFactory.createTypeSystemDescription(),
 				null, null).getJCas();
 
 		String text = "Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen . ";
-		DocumentMetaData meta = DocumentMetaData.create(jcas);
-		meta.setDocumentUri(aInputFile.toURI().toString());
-		meta.setDocumentId("1");
+		String filename = substringBeforeLast((new File(inputFile)).getName(),
+				".");
 		jcas.setDocumentLanguage("de");
 		jcas.setDocumentText(text);
+		DocumentMetaData meta = DocumentMetaData.create(jcas);
+		meta.setDocumentUri(inputFile);
+		meta.setDocumentId(filename + "-" + "1");
 
 		// create sentence
 		createAnnotation(jcas, 0, 91, Sentence.class);
 
 		// create tokens with pos
-		Token Sie = createToken(jcas, 0, 3, "PPER");
-		Token gehen = createToken(jcas, 4, 9, "VVFIN");
-		Token gewagte = createToken(jcas, 10, 17, "ADJA");
-		Token Verbindungen = createToken(jcas, 18, 30, "NN");
-		Token und = createToken(jcas, 31, 34, "KON");
-		Token Risiken = createToken(jcas, 35, 42, "NN");
-		Token ein = createToken(jcas, 43, 46, "PTKVZ");
-		Token komma = createToken(jcas, 47, 48, "$,");
-		Token versuchen = createToken(jcas, 49, 58, "VVFIN");
-		Token ihre = createToken(jcas, 59, 63, "PPOSAT");
-		Token Moeglichkeiten = createToken(jcas, 64, 77, "NN");
-		Token auszureizen = createToken(jcas, 78, 89, "VVIZU");
-		Token punkt = createToken(jcas, 90, 91, "$.");
+		Token Sie = createToken(0, 3, "PPER");
+		Token gehen = createToken(4, 9, "VVFIN");
+		Token gewagte = createToken(10, 17, "ADJA");
+		Token Verbindungen = createToken(18, 30, "NN");
+		Token und = createToken(31, 34, "KON");
+		Token Risiken = createToken(35, 42, "NN");
+		Token ein = createToken(43, 46, "PTKVZ");
+		Token komma = createToken(47, 48, "$,");
+		Token versuchen = createToken(49, 58, "VVFIN");
+		Token ihre = createToken(59, 63, "PPOSAT");
+		Token Moeglichkeiten = createToken(64, 77, "NN");
+		Token auszureizen = createToken(78, 89, "VVIZU");
+		Token punkt = createToken(90, 91, "$.");
 
 		// create constituents
 		ROOT c000 = createAnnotation(jcas, 0, 91, ROOT.class);
 		c000.setConstituentType("ROOT");
-		Constituent c500 = createConstituent(jcas, 10, 30, "NP", "CJ");
-		Constituent c501 = createConstituent(jcas, 59, 77, "NP", "OA");
-		Constituent c502 = createConstituent(jcas, 10, 42, "CNP", "OA");
-		Constituent c503 = createConstituent(jcas, 59, 89, "VP", "OC");
-		Constituent c504 = createConstituent(jcas, 0, 46, "S", "CJ");
-		Constituent c505 = createConstituent(jcas, 49, 89, "S", "CJ");
-		Constituent c506 = createConstituent(jcas, 0, 89, "CS", "--");
+		Constituent c500 = createConstituent(10, 30, "NP", "CJ");
+		Constituent c501 = createConstituent(59, 77, "NP", "OA");
+		Constituent c502 = createConstituent(10, 42, "CNP", "OA");
+		Constituent c503 = createConstituent(59, 89, "VP", "OC");
+		Constituent c504 = createConstituent(0, 46, "S", "CJ");
+		Constituent c505 = createConstituent(49, 89, "S", "CJ");
+		Constituent c506 = createConstituent(0, 89, "CS", "--");
 
 		// append tokens to constituents
-		adopt(jcas, c504, Sie);
-		adopt(jcas, c504, gehen);
-		adopt(jcas, c500, gewagte);
-		adopt(jcas, c500, Verbindungen);
-		adopt(jcas, c502, und);
-		adopt(jcas, c502, Risiken);
-		adopt(jcas, c504, ein);
-		adopt(jcas, c000, komma);
-		adopt(jcas, c505, versuchen);
-		adopt(jcas, c501, ihre);
-		adopt(jcas, c501, Moeglichkeiten);
-		adopt(jcas, c503, auszureizen);
-		adopt(jcas, c000, punkt);
+		adopt(c504, Sie);
+		adopt(c504, gehen);
+		adopt(c500, gewagte);
+		adopt(c500, Verbindungen);
+		adopt(c502, und);
+		adopt(c502, Risiken);
+		adopt(c504, ein);
+		adopt(c000, komma);
+		adopt(c505, versuchen);
+		adopt(c501, ihre);
+		adopt(c501, Moeglichkeiten);
+		adopt(c503, auszureizen);
+		adopt(c000, punkt);
 
 		// append constituents to other constituents
-		adopt(jcas, c502, c500);
-		adopt(jcas, c503, c501);
-		adopt(jcas, c504, c502);
-		adopt(jcas, c505, c503);
-		adopt(jcas, c506, c504);
-		adopt(jcas, c506, c505);
-		adopt(jcas, c000, c506);
+		adopt(c502, c500);
+		adopt(c503, c501);
+		adopt(c504, c502);
+		adopt(c505, c503);
+		adopt(c506, c504);
+		adopt(c506, c505);
+		adopt(c000, c506);
 
 		AnalysisEngine writer = createPrimitive(CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, aOutputFile.getPath());
+				CASDumpWriter.PARAM_OUTPUT_FILE, referenceDump.getPath());
 		writer.process(jcas);
 	}
 
-	private Token createToken(JCas aJCas, int begin, int end, String tag)
+	private Token createToken(int begin, int end, String tag)
 		throws UIMAException
 	{
-		Token token = createAnnotation(aJCas, begin, end, Token.class);
-		POS pos = createAnnotation(aJCas, begin, end, POS.class);
+		Token token = createAnnotation(jcas, begin, end, Token.class);
+		POS pos = createAnnotation(jcas, begin, end, POS.class);
 		pos.setPosValue(tag);
 		token.setPos(pos);
 		return token;
 	}
 
-	private Constituent createConstituent(JCas aJCas, int begin, int end, String type,
+	private Constituent createConstituent(int begin, int end, String type,
 			String func)
 		throws UIMAException
 	{
-		Constituent constituent = createAnnotation(aJCas, begin, end,
+		Constituent constituent = createAnnotation(jcas, begin, end,
 				Constituent.class);
 		constituent.setConstituentType(type);
 		constituent.setSyntacticFunction(func);
 		return constituent;
 	}
 
-	private void adopt(JCas aJCas, Constituent parent, Annotation child)
+	private void adopt(Constituent parent, Annotation child)
 	{
 		FSArray c = parent.getChildren();
 		if (c == null) {
-			c = new FSArray(aJCas, 0);
+			c = new FSArray(jcas, 0);
 		}
-		FSArray d = new FSArray(aJCas, c.size() + 1);
+		FSArray d = new FSArray(jcas, c.size() + 1);
 		for (int i = 0; i < c.size(); i++) {
 			d.set(i, c.get(i));
 		}
@@ -198,22 +201,6 @@ public class NegraExportReaderTest
 		}
 		else if (child.getClass() == Constituent.class) {
 			((Constituent) child).setParent(parent);
-		}
-	}
-
-	@Test
-	public void negraTigerTest()
-		throws Exception
-	{
-		// create NegraExportReader output
-		CollectionReader ner = createCollectionReader(NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/tiger-sample.export",
-				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "ISO-8859-15"
-		);
-
-		for (JCas jcas : new JCasIterable(ner)) {
-		    System.out.println(jcas.getDocumentText());
 		}
 	}
 }

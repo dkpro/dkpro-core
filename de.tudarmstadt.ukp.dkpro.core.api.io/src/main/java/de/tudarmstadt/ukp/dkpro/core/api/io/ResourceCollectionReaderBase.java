@@ -49,12 +49,11 @@ import org.uimafit.component.CasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * Base class for collection readers that plan to access resources on the file system or in the
  * classpath or basically anywhere where Spring can resolve them. ANT-style patterns are supported
- * to include or exclude particular resources.
+ * to include or exclude particular resources. 
  * <p>
  * Example of a hypothetic <code>FooReader</code> that should read only files ending in
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
@@ -66,7 +65,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * </pre>
  *
  * @see <a href="http://ant.apache.org/manual/dirtasks.html#patterns">Documentation of <b>ant</b> patterns</a>
- *
+ * 
  * @author Richard Eckart de Castilho
  * @since 1.0.6
  */
@@ -76,7 +75,7 @@ public abstract class ResourceCollectionReaderBase
 	public static final String INCLUDE_PREFIX = "[+]";
 	public static final String EXCLUDE_PREFIX = "[-]";
 
-	public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
+	public static final String PARAM_PATH = "Path";
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
 	private String path;
 
@@ -85,24 +84,13 @@ public abstract class ResourceCollectionReaderBase
 	private String[] patterns;
 
 	/**
-	 * Use the default excludes.
-	 */
-	public static final String PARAM_USE_DEFAULT_EXCLUDES = "UseDefaultExcludes";
-	@ConfigurationParameter(name=PARAM_USE_DEFAULT_EXCLUDES, mandatory=true, defaultValue="true")
-	private boolean useDefaultExcludes;
-
-	public static final String PARAM_INCLUDE_HIDDEN = "IncludeHidden";
-	@ConfigurationParameter(name=PARAM_INCLUDE_HIDDEN, mandatory=true, defaultValue="false")
-	private boolean includeHidden;
-
-	/**
 	 * Name of optional configuration parameter that contains the language of
 	 * the documents in the input directory. If specified, this information will
 	 * be added to the CAS.
 	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	public static final String PARAM_LANGUAGE = "Language";
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
-	protected String language;
+	private String language;
 
 	private int completed;
 	private Collection<Resource> resources;
@@ -129,38 +117,6 @@ public abstract class ResourceCollectionReaderBase
 						"Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
 								+ "."));
 			}
-		}
-
-		// These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
-		if (useDefaultExcludes) {
-			excludes.add("**/*~");
-			excludes.add("**/#*#");
-			excludes.add("**/.#*");
-			excludes.add("**/%*%");
-			excludes.add("**/._*");
-			excludes.add("**/CVS");
-			excludes.add("**/CVS/**");
-			excludes.add("**/.cvsignore");
-			excludes.add("**/SCCS");
-			excludes.add("**/SCCS/**");
-			excludes.add("**/vssver.scc");
-			excludes.add("**/.svn");
-			excludes.add("**/.svn/**");
-			excludes.add("**/.DS_Store");
-			excludes.add("**/.git");
-			excludes.add("**/.git/**");
-			excludes.add("**/.gitattributes");
-			excludes.add("**/.gitignore");
-			excludes.add("**/.gitmodules");
-			excludes.add("**/.hg");
-			excludes.add("**/.hg/**");
-			excludes.add("**/.hgignore");
-			excludes.add("**/.hgsub");
-			excludes.add("**/.hgsubstate");
-			excludes.add("**/.hgtags");
-			excludes.add("**/.bzr");
-			excludes.add("**/.bzr/**");
-			excludes.add("**/.bzrignore");
 		}
 
 		try {
@@ -262,10 +218,7 @@ public abstract class ResourceCollectionReaderBase
 		org.springframework.core.io.Resource[] rBases = resolver.getResources(base);
 		Set<String> rsBases = new HashSet<String>();
 		for (org.springframework.core.io.Resource rBase : rBases) {
-			URI uri = getUri(rBase, false);
-			if (uri != null) {
-				rsBases.add(uri.toString());
-			}
+			rsBases.add(getUri(rBase).toString());
 		}
 
 		// Now we process the include patterns one after the other
@@ -273,11 +226,7 @@ public abstract class ResourceCollectionReaderBase
 			// We resolve the resources for each base+include combination.
 			org.springframework.core.io.Resource[] resourceList = resolver.getResources(base+include);
 			nextResource: for (org.springframework.core.io.Resource resource : resourceList) {
-				URI uResource = getUri(resource, true);
-				if (uResource == null) {
-					continue;
-				}
-				String sResource = uResource.toString();
+				String sResource = getUri(resource).toString();
 
 				// Determine the resolved base for this location
 				String matchBase = null;
@@ -339,31 +288,11 @@ public abstract class ResourceCollectionReaderBase
 		return result;
 	}
 
-	/**
-	 * Get the URI of the given resource.
-	 *
-	 * @param aResource a resource
-	 * @param aFileOrDir if true try to return only files, if false try to return only dirs
-	 * @return the URI of the resource
-	 */
-	private URI getUri(org.springframework.core.io.Resource aResource, boolean aFileOrDir)
+	private URI getUri(org.springframework.core.io.Resource aResource)
 		throws IOException
 	{
 		try {
-			File file = aResource.getFile();
-
-			// Exclude hidden files/dirs if requested
-			if (file.isHidden() && !includeHidden) {
-				return null;
-			}
-
-			// Return only dirs or files...
-			if ((aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
-				return aResource.getFile().toURI();
-			}
-			else {
-				return null;
-			}
+			return aResource.getFile().toURI();
 		}
 		catch (IOException e) {
 			return aResource.getURI();
@@ -376,25 +305,15 @@ public abstract class ResourceCollectionReaderBase
 	 */
 	protected void initCas(CAS aCas, Resource aResource)
 	{
-		initCas(aCas, aResource, null);
-	}
-
-	/**
-	 * Initialize the {@DocumentMetaData}. This must be called before setting the
-	 * document text, otherwise the end feature of this annotation will not be set correctly.
-	 */
-	protected void initCas(CAS aCas, Resource aResource, String aQualifier)
-	{
-		String qualifier = aQualifier != null ? "#"+aQualifier : "";
 		try {
 			// Set the document metadata
 			DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
 			docMetaData.setDocumentTitle(new File(aResource.getPath()).getName());
-			docMetaData.setDocumentUri(aResource.getResolvedUri().toString()+qualifier);
-			docMetaData.setDocumentId(aResource.getPath()+qualifier);
+			docMetaData.setDocumentUri(aResource.getLocation().toString());
+			docMetaData.setDocumentId(aResource.getPath());
 			if (aResource.getBase() != null) {
-				docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
-				docMetaData.setCollectionId(aResource.getResolvedBase()+qualifier);
+				docMetaData.setDocumentBaseUri(aResource.getBase());
+				docMetaData.setCollectionId(aResource.getBase());
 			}
 			docMetaData.addToIndexes();
 
@@ -412,21 +331,21 @@ public abstract class ResourceCollectionReaderBase
 	 */
 	public static class Resource
 	{
-		private final String location;
-		private final String base;
-		private final URI resolvedUri;
-		private final String resolvedBase;
-		private final String path;
-		private final org.springframework.core.io.Resource resource;
+		private String location;
+		private String base;
+		private URI resolvedUri;
+		private String resolvedBase;
+		private String path;
+		private org.springframework.core.io.Resource resource;
 
-		public Resource(String aLocation, String aBase, URI aResolvedUri, String aResolvedBaseUri,
+		public Resource(String aLocation, String aBase, URI aResolvedUri, String aResolvedBase,
 				String aPath, org.springframework.core.io.Resource aResource)
 		{
 			super();
 			location = aLocation;
 			base = aBase;
 			resolvedUri = aResolvedUri;
-			resolvedBase = aResolvedBaseUri;
+			resolvedBase = aResolvedBase;
 			path = aPath;
 			resource = aResource;
 		}

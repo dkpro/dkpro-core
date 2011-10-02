@@ -20,20 +20,16 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.3.0-SNAPSHOT</version>
+		<version>1.2.0</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
 	<name>DKPro Core ASL - IO - XMI</name>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<dependencies>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

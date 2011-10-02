@@ -20,15 +20,17 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.3.0-SNAPSHOT</version>
+		<version>1.2.0</version>
 	</parent>
+	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.mmax2-asl</artifactId>
 	<name>DKPro Core ASL - IO - MMAX2 (ASL)</name>
+	<version>1.2.0</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.eml.mmax2</groupId>
 			<artifactId>org.eml.mmax2</artifactId>
-			<version>1.13.003-UKP-1</version>
+			<version>20090525-r13</version>
 		</dependency>
 		<dependency>
 			<groupId>jung</groupId>
@@ -50,6 +52,9 @@
 		<dependency>
 			<groupId>xalan</groupId>
 			<artifactId>xalan</artifactId>
+			<version>2.7.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>

@@ -31,7 +31,6 @@ import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
  * UIMA CAS consumer writing the CAS document text as plain text file.
@@ -41,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 public class TextWriter
 	extends JCasConsumer_ImplBase
 {
-	public static final String PARAM_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
+	public static final String PARAM_PATH = "Path";
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=true)
 	private File path;
 

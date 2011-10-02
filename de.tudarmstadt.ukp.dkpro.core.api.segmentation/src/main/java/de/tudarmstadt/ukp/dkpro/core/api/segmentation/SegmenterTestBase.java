@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation;
 
 import static java.util.Arrays.asList;
-import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +28,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import static org.uimafit.util.JCasUtil.*;
 
 public abstract
 class SegmenterTestBase
@@ -139,12 +139,12 @@ class SegmenterTestBase
 
 		// Extract results
 		List<String> tokens = new ArrayList<String>();
-		for (Token t : select(jcas, Token.class)) {
+		for (Token t : iterate(jcas, Token.class)) {
         	tokens.add(t.getCoveredText());
         }
 
 		List<String> sentences = new ArrayList<String>();
-		for (Sentence t : select(jcas, Sentence.class)) {
+		for (Sentence t : iterate(jcas, Sentence.class)) {
 			sentences.add(t.getCoveredText());
         }
 

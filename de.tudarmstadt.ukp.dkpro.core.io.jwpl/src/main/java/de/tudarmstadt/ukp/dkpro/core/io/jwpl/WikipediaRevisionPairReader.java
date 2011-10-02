@@ -47,17 +47,10 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public static final String REVISION_2 = "Revision2";
 
     /**
-     * Restrict revision pairs to cases where the length of the revisions differ more than this value (counted in characters).
-     * */
-    public static final String PARAM_MIN_CHANGE = "MinChange";
-    @ConfigurationParameter(name = PARAM_MIN_CHANGE, mandatory=true, defaultValue="0")
-    private int minChange;
-
-    /**
      * Restrict revision pairs to cases where the length of the revisions does not differ more than this value (counted in characters).
      * */
     public static final String PARAM_MAX_CHANGE = "MaxChange";
-    @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory=true, defaultValue="10000")
+    @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory=true, defaultValue="3")
     private int maxChange;
 
     private Timestamp savedTimestamp;
@@ -95,8 +88,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             String text1 = getText(revision1);
             String text2 = getText(revision2);
 
-            int difference = Math.abs(text1.length() - text2.length()); 
-            if (difference < minChange || difference > maxChange) {
+            if (Math.abs(text1.length() - text2.length()) < maxChange) {
                 text1 = "";
                 text2 = "";
             }

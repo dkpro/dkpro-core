@@ -20,20 +20,16 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.3.0-SNAPSHOT</version>
+		<version>1.2.0</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
 	<name>DKPro Core ASL - Part-of-Speech API</name>
-	<version>1.3.0-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimaj-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
 		</dependency>
 	</dependencies>
 </project>
