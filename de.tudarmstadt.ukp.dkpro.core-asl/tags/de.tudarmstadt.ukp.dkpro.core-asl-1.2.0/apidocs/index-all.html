@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Index (DKPro Core ASL 1.1.0 API)
+Index (DKPro Core ASL 1.2.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Index (DKPro Core ASL 1.1.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Index (DKPro Core ASL 1.1.0 API)";
+        parent.document.title="Index (DKPro Core ASL 1.2.0 API)";
     }
 }
 </SCRIPT>
@@ -87,6 +87,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tud
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/PhraseTreeElement.html#addChild(java.lang.String)"><B>addChild(String)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.<A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/PhraseTreeElement.html" title="class in de.tudarmstadt.ukp.dkpro.core.dictionaryannotator">PhraseTreeElement</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#addDocumentMetaData(org.apache.uima.jcas.JCas, int, int)"><B>addDocumentMetaData(JCas, int, int)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#addMarkable(org.w3c.dom.Node, java.lang.String, org.eml.MMAX2.annotation.markables.MarkableLevel)"><B>addMarkable(Node, String, MarkableLevel)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriter</A>
 <DD>&nbsp;
@@ -101,6 +104,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.<A HREF="./de/
 <DD>Add a phrase, each array entry is a phrase token
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html#addProject(java.lang.String, de.tudarmstadt.ukp.dkpro.core.io.mmax2.Basedata, edu.uci.ics.jung.graph.Graph, java.lang.String)"><B>addProject(String, Basedata, Graph, String)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">ProjectWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#addRevisionAnnotation(org.apache.uima.jcas.JCas, de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision)"><B>addRevisionAnnotation(JCas, Revision)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#addStopWordListFile(java.lang.String)"><B>addStopWordListFile(String)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.stopwordremover.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html" title="class in de.tudarmstadt.ukp.dkpro.core.stopwordremover">StopWordSet</A>
@@ -176,23 +182,32 @@ Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/u
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#charactersByArticle"><B>charactersByArticle</B></A> - 
 Variable in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A>
 <DD>The charactersByArticle is used to extract text by article divisions.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/WikiUtils.html#cleanText(java.lang.String)"><B>cleanText(String)</B></A> - 
+Static method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/WikiUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl.util">WikiUtils</A>
+<DD>Clean a string from left-over WikiMarkup (most parsers do not work 100% correct).
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#clearBasedata()"><B>clearBasedata()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriter</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#close()"><B>close()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#close()"><B>close()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#clearFiles()"><B>clearFiles()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriter</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html#close()"><B>close()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MmaxAnnotationReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#close()"><B>close()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html#close()"><B>close()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html#close()"><B>close()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#collectionProcessComplete()"><B>collectionProcessComplete()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#collectionProcessComplete()"><B>collectionProcessComplete()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.imscwb.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb">ImsCwbWriter</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/Condition.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath"><B>Condition</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.featurepath</A><DD>A Condition has a filter operator and a condition value.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/Condition.html#Condition(de.tudarmstadt.ukp.dkpro.core.api.featurepath.FilterOp, java.lang.String)"><B>Condition(FilterOp, String)</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/Condition.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">Condition</A>
@@ -239,6 +254,18 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tud
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#createXML()"><B>createXML()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriter</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentArticle"><B>currentArticle</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#currentArticleIndex"><B>currentArticleIndex</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentArticleIndex"><B>currentArticleIndex</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#currentArticleIndex"><B>currentArticleIndex</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#CUSTOMIZATION_PATH"><B>CUSTOMIZATION_PATH</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriter</A>
 <DD>&nbsp;
@@ -247,10 +274,13 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tu
 <A NAME="_D_"><!-- --></A><H2>
 <B>D</B></H2>
 <DL>
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.featurepath</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.featurepath<DD>Support for querying the CAS using feature paths.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.io</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.io<DD>API for I/O components.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.resources</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.resources<DD>API for accessing resources.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.segmentation</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.segmentation<DD>API for tokenization and segmentation.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/bananasplit/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.bananasplit</B></A> - package de.tudarmstadt.ukp.dkpro.core.bananasplit<DD>Compound splitter based on <a href="http://niels.drni.de/s9y/pages/bananasplit.html">
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#dbconfig"><B>dbconfig</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.featurepath</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.featurepath<DD>Support for querying the CAS using feature paths.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.frequency</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.frequency<DD>Wrappers for external resources providing frequency counts for phrases.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.io</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.io<DD>API for I/O components.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.resources</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.resources<DD>API for accessing resources.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.api.segmentation</B></A> - package de.tudarmstadt.ukp.dkpro.core.api.segmentation<DD>API for tokenization and segmentation.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/bananasplit/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.bananasplit</B></A> - package de.tudarmstadt.ukp.dkpro.core.bananasplit<DD>Compound splitter based on <a href="http://niels.drni.de/s9y/pages/bananasplit.html">
  Banana Split</a>.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/castransformation/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.castransformation</B></A> - package de.tudarmstadt.ukp.dkpro.core.castransformation<DD>Components for working with texts that require corrected or otherwise changed in order to be
- analyzed further.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator</B></A> - package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator<DD>Annotate words and multi-words using a dictionary.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/examples/example1/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.examples.example1</B></A> - package de.tudarmstadt.ukp.dkpro.core.examples.example1<DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.jwpl</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.jwpl<DD>Support for the <a href="http://www.wikipedia.org/">Wikipedia</a> files using
- <a href="http://code.google.com/p/jwpl/">JWPL</a> (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.mmax2</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.mmax2<DD>Support for <a href="http://mmax2.net">MMAX2</a> files (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.pdf</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.pdf<DD>Support for PDF files (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.text</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.text<DD>Support for plain text files.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.wsdl</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.wsdl<DD>Support for WSDL web-service descriptions (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.xmi</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.xmi<DD>Support for (de)serializing the CAS to/from XMI files.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.xml</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.xml<DD>Support for XML files (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/jazzy/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.jazzy</B></A> - package de.tudarmstadt.ukp.dkpro.core.jazzy<DD>Spelling correction based on <a href="http://jazzy.sourceforge.net/">Jazzy</a>.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/jwordsplitter/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.jwordsplitter</B></A> - package de.tudarmstadt.ukp.dkpro.core.jwordsplitter<DD>Compound splitter based on <a href="https://sourceforge.net/projects/jwordsplitter/">
+ analyzed further.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator</B></A> - package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator<DD>Annotate words and multi-words using a dictionary.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/examples/example1/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.examples.example1</B></A> - package de.tudarmstadt.ukp.dkpro.core.examples.example1<DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.annis</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.annis<DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.imscwb</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.imscwb<DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.jwpl</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.jwpl<DD>Support for the <a href="http://www.wikipedia.org/">Wikipedia</a> files using
+ <a href="http://code.google.com/p/jwpl/">JWPL</a> (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.jwpl.util</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.jwpl.util<DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.mmax2</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.mmax2<DD>Support for <a href="http://mmax2.net">MMAX2</a> files (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.negra</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.negra<DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.pdf</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.pdf<DD>Support for PDF files (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.text</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.text<DD>Support for plain text files.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.wsdl</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.wsdl<DD>Support for WSDL web-service descriptions (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.xmi</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.xmi<DD>Support for (de)serializing the CAS to/from XMI files.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.io.xml</B></A> - package de.tudarmstadt.ukp.dkpro.core.io.xml<DD>Support for XML files (read-only).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/jazzy/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.jazzy</B></A> - package de.tudarmstadt.ukp.dkpro.core.jazzy<DD>Spelling correction based on <a href="http://jazzy.sourceforge.net/">Jazzy</a>.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/jwordsplitter/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.jwordsplitter</B></A> - package de.tudarmstadt.ukp.dkpro.core.jwordsplitter<DD>Compound splitter based on <a href="https://sourceforge.net/projects/jwordsplitter/">
  jWordSplitter</a> library.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/languagetool/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.languagetool</B></A> - package de.tudarmstadt.ukp.dkpro.core.languagetool<DD>Grammar and style checker based on <a href="http://www.languagetool.org/">LanguageTool</a>.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/ngrams/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.ngrams</B></A> - package de.tudarmstadt.ukp.dkpro.core.ngrams<DD>N-gram annotator.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/norvig/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.norvig</B></A> - package de.tudarmstadt.ukp.dkpro.core.norvig<DD>Spelling correction based on <a href="http://norvig.com/spell-correct.html">Norvig's algorithm</a>.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.posfilter</B></A> - package de.tudarmstadt.ukp.dkpro.core.posfilter<DD>Remove annotations on words with particular part of speech tags to exclude them
  from further processing.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.snowball</B></A> - package de.tudarmstadt.ukp.dkpro.core.snowball<DD>Stemmer based on the <a href="http://snowball.tartarus.org/">Snowball</a> stemmer package.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stopwordremover/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.stopwordremover</B></A> - package de.tudarmstadt.ukp.dkpro.core.stopwordremover<DD>Remove stop words to exclude them from further processing.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/textcat/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.textcat</B></A> - package de.tudarmstadt.ukp.dkpro.core.textcat<DD>Language guessed basedon the <a href="http://textcat.sourceforge.net/">Java Text Categorizing
  Library </a> (JTCL).<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.tokit</B></A> - package de.tudarmstadt.ukp.dkpro.core.tokit<DD>Collection of tokenization and segmentation components.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/package-summary.html"><B>de.tudarmstadt.ukp.dkpro.core.treetagger</B></A> - package de.tudarmstadt.ukp.dkpro.core.treetagger<DD>Integration of the <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/DecisionTreeTagger.html">
@@ -318,9 +348,6 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tuda
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/PatternBasedTokenSegmenter.html#EXCLUDE_PREFIX"><B>EXCLUDE_PREFIX</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/PatternBasedTokenSegmenter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">PatternBasedTokenSegmenter</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>ExtendedWikipediaReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>A collection reader that reads all Wikipedia articles as plain text.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#ExtendedWikipediaReader()"><B>ExtendedWikipediaReader()</B></A> - 
-Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
 <DD>&nbsp;
 </DL>
 <HR>
@@ -416,6 +443,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmsta
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#fp"><B>fp</B></A> - 
 Variable in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency"><B>FrequencyCountProviderBase</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.frequency</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html#FrequencyCountProviderBase()"><B>FrequencyCountProviderBase()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountProviderBase</A>
+<DD>&nbsp;
 </DL>
 <HR>
 <A NAME="_G_"><!-- --></A><H2>
@@ -478,6 +508,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tuda
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#getDefaultPaths()"><B>getDefaultPaths()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.snowball.<A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.snowball">SnowballStemmer</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#getDocumentText(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>getDocumentText(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getEndPage()"><B>getEndPage()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A>
 <DD>This will get the last page that will be extracted.
@@ -489,6 +522,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tuda
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getFileSetIterator()"><B>getFileSetIterator()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html#getFrequency(java.lang.String)"><B>getFrequency(String)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountProviderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#getHeadingType()"><B>getHeadingType()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">Pdf2CasConverter</A>
@@ -520,6 +556,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/u
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.Handler.html#getLogger()"><B>getLogger()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.Handler.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderText.Handler</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html#getLogProbability(java.lang.String)"><B>getLogProbability(String)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountProviderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/PhraseTree.html#getLongestMatch(java.lang.String[])"><B>getLongestMatch(String[])</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.<A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/PhraseTree.html" title="class in de.tudarmstadt.ukp.dkpro.core.dictionaryannotator">PhraseTree</A>
 <DD>Returns the longest matching phrase in the tree, beginning with the first array entry in
@@ -539,14 +578,26 @@ Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmsta
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#getModelResolver()"><B>getModelResolver()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#getNext(org.apache.uima.cas.CAS)"><B>getNext(CAS)</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#getNext(org.apache.uima.jcas.JCas)"><B>getNext(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#getNext(org.apache.uima.cas.CAS)"><B>getNext(CAS)</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#getNext(org.apache.uima.jcas.JCas)"><B>getNext(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html#getNext(org.apache.uima.jcas.JCas)"><B>getNext(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionPairReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReader.html#getNext(org.apache.uima.jcas.JCas)"><B>getNext(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#getNext(org.apache.uima.jcas.JCas)"><B>getNext(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html#getNext(org.apache.uima.cas.CAS)"><B>getNext(CAS)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MmaxAnnotationReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#getNext(org.apache.uima.jcas.JCas)"><B>getNext(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#getNext(org.apache.uima.cas.CAS)"><B>getNext(CAS)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfReader</A>
@@ -566,6 +617,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/u
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.html#getNext(org.apache.uima.cas.CAS)"><B>getNext(CAS)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderText</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html#getNrOfTokens()"><B>getNrOfTokens()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountProviderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/Condition.html#getOperator(java.lang.String)"><B>getOperator(String)</B></A> - 
 Static method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/Condition.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">Condition</A>
 <DD>Returns the FilterOperator for the given String operator.
@@ -575,20 +629,41 @@ Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/u
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html#getPath()"><B>getPath()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html#getPlainDocumentText(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>getPlainDocumentText(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html#getPlainDocumentText(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>getPlainDocumentText(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaDiscussionReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#getPlainDocumentText(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>getPlainDocumentText(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html#getProbability(java.lang.String)"><B>getProbability(String)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountProviderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getProgress()"><B>getProgress()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getProgress()"><B>getProgress()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#getProgress()"><B>getProgress()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#getProgress()"><B>getProgress()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#getProgress()"><B>getProgress()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#getProgress()"><B>getProgress()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#getProgress()"><B>getProgress()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#getProgress()"><B>getProgress()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html#getProgress()"><B>getProgress()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MmaxAnnotationReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#getProgress()"><B>getProgress()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html#getProgress()"><B>getProgress()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlReader</A>
@@ -628,6 +703,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmsta
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.DKProTokenAdapter.html#getText(org.apache.uima.cas.text.AnnotationFS)"><B>getText(AnnotationFS)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.DKProTokenAdapter.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerPosLemmaTT4J.DKProTokenAdapter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#getTimestampIter(int)"><B>getTimestampIter(int)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerChunkerTT4J.ChunkerModelResolver.html#getType()"><B>getType()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerChunkerTT4J.ChunkerModelResolver.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerChunkerTT4J.ChunkerModelResolver</A>
@@ -682,14 +760,20 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/u
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#hasNext()"><B>hasNext()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#hasNext()"><B>hasNext()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#hasNext()"><B>hasNext()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#hasNext()"><B>hasNext()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#hasNext()"><B>hasNext()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#hasNext()"><B>hasNext()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html#hasNext()"><B>hasNext()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MmaxAnnotationReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#hasNext()"><B>hasNext()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html#hasNext()"><B>hasNext()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlReader</A>
@@ -702,8 +786,14 @@ Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/u
 <A NAME="_I_"><!-- --></A><H2>
 <B>I</B></H2>
 <DL>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#idIter"><B>idIter</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html#ignorableWhitespace(char[], int, int)"><B>ignorableWhitespace(char[], int, int)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderText.TextExtractor</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb"><B>ImsCwbWriter</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.imscwb</A><DD>This Consumer outputs the content of all CASes into the IMS workbench format.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ImsCwbWriter()"><B>ImsCwbWriter()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.imscwb.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb">ImsCwbWriter</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#INCLUDE_PREFIX"><B>INCLUDE_PREFIX</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A>
@@ -719,13 +809,16 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/u
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource)"><B>initCas(CAS, ResourceCollectionReaderBase.Resource)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A>
-<DD>&nbsp;
+<DD>Initialize the .
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html#initialize(java.lang.String)"><B>initialize(String)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathInfo</A>
 <DD>Initialize the object's featurePath for the given type.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#initialize(org.apache.uima.resource.ResourceSpecifier, java.util.Map)"><B>initialize(ResourceSpecifier, Map)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A>
 <DD>&nbsp;
@@ -741,17 +834,41 @@ Method in class de.tudarmstadt.ukp.dkpro.core.castransformation.<A HREF="./de/tu
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/DictionaryAnnotator.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.<A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/DictionaryAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.dictionaryannotator">DictionaryAnnotator</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#initialize()"><B>initialize()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#initialize()"><B>initialize()</B></A> - 
-Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.imscwb.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb">ImsCwbWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionPairReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html#initialize()"><B>initialize()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MmaxAnnotationReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html#initialize()"><B>initialize()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">ProjectWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#initialize(org.apache.uima.UimaContext)"><B>initialize(UimaContext)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfReader</A>
@@ -801,11 +918,14 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tud
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#isCreateTokens()"><B>isCreateTokens()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#isEmpty(org.apache.uima.jcas.tcas.Annotation)"><B>isEmpty(Annotation)</B></A> - 
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#isEmpty(int, int)"><B>isEmpty(int, int)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/PhraseTreeElement.html#isEndElement()"><B>isEndElement()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.<A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/PhraseTreeElement.html" title="class in de.tudarmstadt.ukp.dkpro.core.dictionaryannotator">PhraseTreeElement</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#isInternStrings()"><B>isInternStrings()</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingAlgorithm.html#isNumber(java.lang.String)"><B>isNumber(String)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.norvig.<A HREF="./de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingAlgorithm.html" title="class in de.tudarmstadt.ukp.dkpro.core.norvig">NorvigSpellingAlgorithm</A>
@@ -815,6 +935,15 @@ Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmsta
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#isStrictZoning()"><B>isStrictZoning()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html#isValidPage(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>isValidPage(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html#isValidPage(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>isValidPage(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaDiscussionReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#isValidPage(de.tudarmstadt.ukp.wikipedia.api.Page)"><B>isValidPage(Page)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/ngrams/NGramIterable.html#iterator()"><B>iterator()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.ngrams.<A HREF="./de/tudarmstadt/ukp/dkpro/core/ngrams/NGramIterable.html" title="class in de.tudarmstadt.ukp.dkpro.core.ngrams">NGramIterable</A>
@@ -833,6 +962,9 @@ Constructor for class de.tudarmstadt.ukp.dkpro.core.jwordsplitter.<A HREF="./de/
 <A NAME="_L_"><!-- --></A><H2>
 <B>L</B></H2>
 <DL>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#language"><B>language</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#language"><B>language</B></A> - 
 Variable in class de.tudarmstadt.ukp.dkpro.core.snowball.<A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.snowball">SnowballStemmer</A>
 <DD>&nbsp;
@@ -861,9 +993,6 @@ Method in class de.tudarmstadt.ukp.dkpro.core.stopwordremover.<A HREF="./de/tuda
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#load(java.io.Reader)"><B>load(Reader)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.stopwordremover.<A HREF="./de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html" title="class in de.tudarmstadt.ukp.dkpro.core.stopwordremover">StopWordSet</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#logger"><B>logger</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#lowerCase"><B>lowerCase</B></A> - 
 Variable in class de.tudarmstadt.ukp.dkpro.core.snowball.<A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.snowball">SnowballStemmer</A>
 <DD>&nbsp;
@@ -881,68 +1010,11 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tu
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html#match(org.apache.uima.cas.text.AnnotationFS, de.tudarmstadt.ukp.dkpro.core.api.featurepath.Condition)"><B>match(AnnotationFS, Condition)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathInfo</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MAX_CATEGORIES"><B>MAX_CATEGORIES</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#maxLevel"><B>maxLevel</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MAX_CATEGORIES"><B>MAX_CATEGORIES</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MAX_INLINKS"><B>MAX_INLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MAX_INLINKS"><B>MAX_INLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MAX_OUTLINKS"><B>MAX_OUTLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MAX_OUTLINKS"><B>MAX_OUTLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MAX_REDIRECTS"><B>MAX_REDIRECTS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MAX_REDIRECTS"><B>MAX_REDIRECTS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MAX_TOKENS"><B>MAX_TOKENS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MAX_TOKENS"><B>MAX_TOKENS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#mCurrentIndex"><B>mCurrentIndex</B></A> - 
-Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MIN_CATEGORIES"><B>MIN_CATEGORIES</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MIN_CATEGORIES"><B>MIN_CATEGORIES</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MIN_INLINKS"><B>MIN_INLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MIN_INLINKS"><B>MIN_INLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MIN_OUTLINKS"><B>MIN_OUTLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MIN_OUTLINKS"><B>MIN_OUTLINKS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MIN_REDIRECTS"><B>MIN_REDIRECTS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MIN_REDIRECTS"><B>MIN_REDIRECTS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#MIN_TOKENS"><B>MIN_TOKENS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#MIN_TOKENS"><B>MIN_TOKENS</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#minLevel"><B>minLevel</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2"><B>MmaxAnnotationReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.mmax2</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html#MmaxAnnotationReader()"><B>MmaxAnnotationReader()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MmaxAnnotationReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MmaxAnnotationReader</A>
@@ -976,6 +1048,10 @@ Variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarms
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/examples/example1/NameAnnotationPipeline.html" title="class in de.tudarmstadt.ukp.dkpro.core.examples.example1"><B>NameAnnotationPipeline</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/examples/example1/package-summary.html">de.tudarmstadt.ukp.dkpro.core.examples.example1</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/examples/example1/NameAnnotationPipeline.html#NameAnnotationPipeline()"><B>NameAnnotationPipeline()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.examples.example1.<A HREF="./de/tudarmstadt/ukp/dkpro/core/examples/example1/NameAnnotationPipeline.html" title="class in de.tudarmstadt.ukp.dkpro.core.examples.example1">NameAnnotationPipeline</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra"><B>NegraExportReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.negra</A><DD>This CollectionReader reads a file which is formatted in the NEGRA export
+ format.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#NegraExportReader()"><B>NegraExportReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.html#newSaxHandler()"><B>newSaxHandler()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderText</A>
 <DD>&nbsp;
@@ -998,33 +1074,54 @@ Constructor for class de.tudarmstadt.ukp.dkpro.core.norvig.<A HREF="./de/tudarms
  errors.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html#NorvigSpellingCorrector()"><B>NorvigSpellingCorrector()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.norvig.<A HREF="./de/tudarmstadt/ukp/dkpro/core/norvig/NorvigSpellingCorrector.html" title="class in de.tudarmstadt.ukp.dkpro.core.norvig">NorvigSpellingCorrector</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#nrOfArticles"><B>nrOfArticles</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#nrOfArticles"><B>nrOfArticles</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#nrOfArticles"><B>nrOfArticles</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
 </DL>
 <HR>
 <A NAME="_O_"><!-- --></A><H2>
 <B>O</B></H2>
 <DL>
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#ONLY_ARTICLES"><B>ONLY_ARTICLES</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#outputPlainText"><B>outputPlainText</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#ONLY_ARTICLES"><B>ONLY_ARTICLES</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#outputPlainText"><B>outputPlainText</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#ONLY_DISAMBIGUATION"><B>ONLY_DISAMBIGUATION</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#ONLY_DISAMBIGUATION"><B>ONLY_DISAMBIGUATION</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#ONLY_FIRST_PARAGRAPH"><B>ONLY_FIRST_PARAGRAPH</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>If set to true, only the first paragraph instead of the whole article is used.
 </DL>
 <HR>
 <A NAME="_P_"><!-- --></A><H2>
 <B>P</B></H2>
 <DL>
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#pageIterator"><B>pageIterator</B></A> - 
-Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#pageBuffer"><B>pageBuffer</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#pageBuffer"><B>pageBuffer</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#pageIdFile"><B>pageIdFile</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#pageIdParamArray"><B>pageIdParamArray</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#pageIter"><B>pageIter</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#pageIter"><B>pageIter</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#pageNameFile"><B>pageNameFile</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#pageNameParamArray"><B>pageNameParamArray</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/ParagraphSplitter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>ParagraphSplitter</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/package-summary.html">de.tudarmstadt.ukp.dkpro.core.tokit</A><DD>This class creates paragraph annotations for the given input document.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/ParagraphSplitter.html#ParagraphSplitter()"><B>ParagraphSplitter()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/ParagraphSplitter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">ParagraphSplitter</A>
@@ -1056,9 +1153,6 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tuda
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/castransformation/Backmapper.html#PARAM_CHAIN"><B>PARAM_CHAIN</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.castransformation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/castransformation/Backmapper.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation">Backmapper</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_CLEAN_WITH_REGEX"><B>PARAM_CLEAN_WITH_REGEX</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>If set to true, remove some html leftovers using a reg-ex.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html#PARAM_COLLECTION_ID"><B>PARAM_COLLECTION_ID</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReader</A>
 <DD>&nbsp;
@@ -1067,21 +1161,22 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.io.text.<A HREF="./de/tud
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_COMPRESS"><B>PARAM_COMPRESS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xmi.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xmi">XmiWriter</A>
-<DD>&nbsp;
+<DD>Enabled/disable gzip compression.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html#PARAM_CONJ"><B>PARAM_CONJ</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.posfilter.<A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.posfilter">PosFilter</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#PARAM_CREATE_DATABASE_CONFIG_ANNOTATION"><B>PARAM_CREATE_DATABASE_CONFIG_ANNOTATION</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>Sets whether the database configuration should be stored in the CAS,
+  so that annotators down the pipeline can access additional data.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#PARAM_CREATE_SENTENCES"><B>PARAM_CREATE_SENTENCES</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#PARAM_CREATE_TOKENS"><B>PARAM_CREATE_TOKENS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_DB"><B>PARAM_DB</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>The name of the database.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#PARAM_DB"><B>PARAM_DB</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#PARAM_DB"><B>PARAM_DB</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
 <DD>The name of the database.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/bananasplit/BananaSplitter.html#PARAM_DELETE_COVER"><B>PARAM_DELETE_COVER</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.bananasplit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/bananasplit/BananaSplitter.html" title="class in de.tudarmstadt.ukp.dkpro.core.bananasplit">BananaSplitter</A>
@@ -1107,6 +1202,12 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.jazzy.<A HREF="./de/tudar
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html#PARAM_DOC_ID_TAG"><B>PARAM_DOC_ID_TAG</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReader</A>
 <DD>tag which contains the docId
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_ENCODING"><B>PARAM_ENCODING</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.imscwb.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb">ImsCwbWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#PARAM_ENCODING"><B>PARAM_ENCODING</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextReader.html#PARAM_ENCODING"><B>PARAM_ENCODING</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.text.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text">TextReader</A>
 <DD>Name of configuration parameter that contains the character encoding used by the input files.
@@ -1131,18 +1232,36 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_HEADING_TYPE"><B>PARAM_HEADING_TYPE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfReader</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_HOST"><B>PARAM_HOST</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>The host server.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#PARAM_HOST"><B>PARAM_HOST</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#PARAM_HOST"><B>PARAM_HOST</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
 <DD>The host server.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html#PARAM_INCLUDE_TAG"><B>PARAM_INCLUDE_TAG</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReader</A>
 <DD>optional, tags those should be worked on (if empty, then all tags
  except those ExcludeTags will be worked on)
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_INDEX_FILE_1"><B>PARAM_INDEX_FILE_1</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_INDEX_FILE_2"><B>PARAM_INDEX_FILE_2</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_INDEX_FILE_3"><B>PARAM_INDEX_FILE_3</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_INDEX_FILE_4"><B>PARAM_INDEX_FILE_4</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_INDEX_FILE_5"><B>PARAM_INDEX_FILE_5</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html#PARAM_INPUT_DIRECTORY"><B>PARAM_INPUT_DIRECTORY</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#PARAM_INPUT_FILE"><B>PARAM_INPUT_FILE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_INTERN_STRINGS"><B>PARAM_INTERN_STRINGS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A>
@@ -1151,23 +1270,29 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tuda
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A>
 <DD>Name of optional configuration parameter that contains the language of
  the documents in the input directory.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
 <DD>The language of the Wikipedia that should be connected to.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
-<DD>The language of the Wikipedia that should be connected to.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReader</A>
 <DD>optional, language of the documents (if set, will be set in each CAS)
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#PARAM_LANGUAGE"><B>PARAM_LANGUAGE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.snowball.<A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.snowball">SnowballStemmer</A>
 <DD>Override the language set in the <CODE>CAS</CODE>.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_LANGUAGE_CODE"><B>PARAM_LANGUAGE_CODE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/languagetool/LanguageToolChecker.html#PARAM_LANGUAGE_CODE"><B>PARAM_LANGUAGE_CODE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.languagetool.<A HREF="./de/tudarmstadt/ukp/dkpro/core/languagetool/LanguageToolChecker.html" title="class in de.tudarmstadt.ukp.dkpro.core.languagetool">LanguageToolChecker</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_LANGUAGE_CODE"><B>PARAM_LANGUAGE_CODE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html#PARAM_LEMMA_ENABLED"><B>PARAM_LEMMA_ENABLED</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerPosLemmaTT4J</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#PARAM_LOCALE"><B>PARAM_LOCALE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
@@ -1175,6 +1300,48 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF=
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html#PARAM_LOWER_CASE"><B>PARAM_LOWER_CASE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.snowball.<A HREF="./de/tudarmstadt/ukp/dkpro/core/snowball/SnowballStemmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.snowball">SnowballStemmer</A>
 <DD>Per default the stemmer runs in case-sensitive mode.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MAX_CATEGORIES"><B>PARAM_MAX_CATEGORIES</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html#PARAM_MAX_CHANGE"><B>PARAM_MAX_CHANGE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionPairReader</A>
+<DD>Restrict revision pairs to cases where the length of the revisions does not differ more than this value (counted in characters).
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MAX_INLINKS"><B>PARAM_MAX_INLINKS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_MAX_NGRAM_LEVEL"><B>PARAM_MAX_NGRAM_LEVEL</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MAX_OUTLINKS"><B>PARAM_MAX_OUTLINKS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MAX_REDIRECTS"><B>PARAM_MAX_REDIRECTS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html#PARAM_MAX_TOKEN_LENGTH"><B>PARAM_MAX_TOKEN_LENGTH</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">TokenFilter</A>
+<DD>Certain components e.g.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MAX_TOKENS"><B>PARAM_MAX_TOKENS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MIN_CATEGORIES"><B>PARAM_MIN_CATEGORIES</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MIN_INLINKS"><B>PARAM_MIN_INLINKS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#PARAM_MIN_NGRAM_LEVEL"><B>PARAM_MIN_NGRAM_LEVEL</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MIN_OUTLINKS"><B>PARAM_MIN_OUTLINKS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MIN_REDIRECTS"><B>PARAM_MIN_REDIRECTS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_MIN_TOKENS"><B>PARAM_MIN_TOKENS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_MODEL_ENCODING"><B>PARAM_MODEL_ENCODING</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase</A>
 <DD>&nbsp;
@@ -1193,23 +1360,42 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.posfilter.<A HREF="./de/t
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html#PARAM_O"><B>PARAM_O</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.posfilter.<A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.posfilter">PosFilter</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_ONLY_FIRST_PARAGRAPH"><B>PARAM_ONLY_FIRST_PARAGRAPH</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html#PARAM_ONLY_FIRST_PARAGRAPH"><B>PARAM_ONLY_FIRST_PARAGRAPH</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleReader</A>
 <DD>If set to true, only the first paragraph instead of the whole article is used.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html#PARAM_OPERATION_AS_DOCID"><B>PARAM_OPERATION_AS_DOCID</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlReader</A>
 <DD>if set to true, creates one CAS per operation and not per service
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_OUTPUT_FILE"><B>PARAM_OUTPUT_FILE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.imscwb.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb">ImsCwbWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_OUTPUT_PLAIN_TEXT"><B>PARAM_OUTPUT_PLAIN_TEXT</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>Whether the reader outputs plain text or wiki markup.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#PARAM_OUTPUT_PLAIN_TEXT"><B>PARAM_OUTPUT_PLAIN_TEXT</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>Whether the reader outputs plain text or wiki markup.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html#PARAM_OUTPUTDIR"><B>PARAM_OUTPUTDIR</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlWriterInline</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_PAGE_BUFFER"><B>PARAM_PAGE_BUFFER</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>The page buffer size (#pages) of the page iterator.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#PARAM_PAGE_BUFFER"><B>PARAM_PAGE_BUFFER</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>The page buffer size (#pages) of the page iterator.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#PARAM_PAGE_ID_LIST"><B>PARAM_PAGE_ID_LIST</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>Defines an array of
+ page ids of the pages that should be retrieved.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#PARAM_PAGE_TITLE_LIST"><B>PARAM_PAGE_TITLE_LIST</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>Defines an array of  page titles of the pages that should be retrieved.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_PARAGRAPH_TYPE"><B>PARAM_PARAGRAPH_TYPE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfReader</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_PASSWORD"><B>PARAM_PASSWORD</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>The password of the database account.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#PARAM_PASSWORD"><B>PARAM_PASSWORD</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#PARAM_PASSWORD"><B>PARAM_PASSWORD</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
 <DD>The password of the database account.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATH"><B>PARAM_PATH</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A>
@@ -1217,12 +1403,23 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tuda
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_PATH"><B>PARAM_PATH</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#PARAM_PATH"><B>PARAM_PATH</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html#PARAM_PATH"><B>PARAM_PATH</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.text.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text">TextWriter</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_PATH"><B>PARAM_PATH</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xmi.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xmi">XmiWriter</A>
-<DD>&nbsp;
+<DD>The folder to write the generated XMI files to.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#PARAM_PATH_TO_PAGE_ID_LIST"><B>PARAM_PATH_TO_PAGE_ID_LIST</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>Defines the path to a file containing a line-separated list of
+ page ids of the pages that should be retrieved.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#PARAM_PATH_TO_PAGE_TITLE_LIST"><B>PARAM_PATH_TO_PAGE_TITLE_LIST</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>Defines the path to a file containing a line-separated list of
+ page titles of the pages that should be retrieved.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#PARAM_PATHS"><B>PARAM_PATHS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</A>
 <DD>Specify a path that is used for annotation.
@@ -1251,6 +1448,12 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tud
 Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerChunkerTT4J.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerChunkerTT4J</A>
 <DD>This component requires a type system in which all Part-of-Speech tag can be reached in-order
  by iterating over a particular type.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html#PARAM_POS_ENABLED"><B>PARAM_POS_ENABLED</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.negra.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/negra/NegraExportReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.negra">NegraExportReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html#PARAM_POS_ENABLED"><B>PARAM_POS_ENABLED</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerPosLemmaTT4J</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html#PARAM_PP"><B>PARAM_PP</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.posfilter.<A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.posfilter">PosFilter</A>
 <DD>&nbsp;
@@ -1266,6 +1469,9 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.posfilter.<A HREF="./de/t
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html#PARAM_RESOLVE_ARRAYS"><B>PARAM_RESOLVE_ARRAYS</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlReader</A>
 <DD>If set array content types are resolved
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/jazzy/SpellChecker.html#PARAM_SCORE_THRESHOLD"><B>PARAM_SCORE_THRESHOLD</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.jazzy.<A HREF="./de/tudarmstadt/ukp/dkpro/core/jazzy/SpellChecker.html" title="class in de.tudarmstadt.ukp.dkpro.core.jazzy">SpellChecker</A>
+<DD>Determines the maximum edit distance (as an int value) that a suggestion for a spelling error may have.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html#PARAM_SOAP_FILTER"><B>PARAM_SOAP_FILTER</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlReader</A>
 <DD>only portNames with soap support will be processed (if set to true)
@@ -1301,6 +1507,9 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudar
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_TAG_MAPPING_PATH"><B>PARAM_TAG_MAPPING_PATH</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#PARAM_TITLE_PATTERN"><B>PARAM_TITLE_PATTERN</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/bananasplit/BananaSplitter.html#PARAM_TOKEN_TYPE"><B>PARAM_TOKEN_TYPE</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.bananasplit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/bananasplit/BananaSplitter.html" title="class in de.tudarmstadt.ukp.dkpro.core.bananasplit">BananaSplitter</A>
 <DD>&nbsp;
@@ -1313,21 +1522,27 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html#PARAM_TYPE_ADAPTER"><B>PARAM_TYPE_ADAPTER</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerPosLemmaTT4J</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_USER"><B>PARAM_USER</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>The username of the database account.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#PARAM_USER"><B>PARAM_USER</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_TYPE_SYSTEM_FILE"><B>PARAM_TYPE_SYSTEM_FILE</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xmi.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xmi">XmiWriter</A>
+<DD>Location to write the type system to.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#PARAM_USER"><B>PARAM_USER</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
 <DD>The username of the database account.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html#PARAM_V"><B>PARAM_V</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.posfilter.<A HREF="./de/tudarmstadt/ukp/dkpro/core/posfilter/PosFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.posfilter">PosFilter</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_WRITE_PARAGRAPH_INFORMATION"><B>PARAM_WRITE_PARAGRAPH_INFORMATION</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>If set to true, create Field annotations for paragraphs.
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#PARAM_WRITE_SECTION_INFORMATION"><B>PARAM_WRITE_SECTION_INFORMATION</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>If set to true, create Field annotations for sections.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#PARAM_WRITE_CONSTITUENTS"><B>PARAM_WRITE_CONSTITUENTS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#PARAM_WRITE_DEPENDENCIES"><B>PARAM_WRITE_DEPENDENCIES</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#PARAM_WRITE_LEMMA"><B>PARAM_WRITE_LEMMA</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#PARAM_WRITE_POS"><B>PARAM_WRITE_POS</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html#PARAM_XSLT"><B>PARAM_XSLT</B></A> - 
 Static variable in class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlWriterInline</A>
 <DD>XSLT stylesheet to apply.
@@ -1336,6 +1551,12 @@ Static variable in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF=
 <DD>A list of type names used for zoning.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlTypeModel.html#parse(java.lang.String, javax.wsdl.Definition, boolean)"><B>parse(String, Definition, boolean)</B></A> - 
 Static method in class de.tudarmstadt.ukp.dkpro.core.io.wsdl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/wsdl/WsdlTypeModel.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.wsdl">WsdlTypeModel</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#parser"><B>parser</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#parser"><B>parser</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#paths"><B>paths</B></A> - 
 Variable in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</A>
@@ -1393,6 +1614,12 @@ Method in class de.tudarmstadt.ukp.dkpro.core.castransformation.<A HREF="./de/tu
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/DictionaryAnnotator.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.<A HREF="./de/tudarmstadt/ukp/dkpro/core/dictionaryannotator/DictionaryAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.dictionaryannotator">DictionaryAnnotator</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.io.imscwb.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb">ImsCwbWriter</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.text.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text">TextWriter</A>
 <DD>&nbsp;
@@ -1438,6 +1665,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/uk
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/PatternBasedTokenSegmenter.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/PatternBasedTokenSegmenter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">PatternBasedTokenSegmenter</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">TokenFilter</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html#process(org.apache.uima.jcas.JCas)"><B>process(JCas)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">TokenTrimmer</A>
 <DD>&nbsp;
@@ -1471,6 +1701,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/u
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2"><B>ProjectWriter</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.mmax2</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html#ProjectWriter(java.lang.String)"><B>ProjectWriter(String)</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/ProjectWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">ProjectWriter</A>
 <DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html#provider"><B>provider</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountProviderBase</A>
+<DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/castransformation/AlignmentStorage.html#put(org.apache.uima.cas.CAS, java.lang.String, java.lang.String, org.annolab.core.util.AlignedString)"><B>put(CAS, String, String, AlignedString)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.castransformation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/castransformation/AlignmentStorage.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation">AlignmentStorage</A>
 <DD>&nbsp;
@@ -1482,11 +1715,8 @@ Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/u
 <A NAME="_Q_"><!-- --></A><H2>
 <B>Q</B></H2>
 <DL>
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#queryInitialized"><B>queryInitialized</B></A> - 
-Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
-<DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#queryInitialized"><B>queryInitialized</B></A> - 
-Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#queryInitialized"><B>queryInitialized</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
 <DD>&nbsp;
 </DL>
 <HR>
@@ -1495,6 +1725,9 @@ Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstad
 <DL>
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#registerMarkableLevel(java.lang.String, java.lang.String, java.lang.String)"><B>registerMarkableLevel(String, String, String)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.mmax2.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriter</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis"><B>RelAnnisWriter</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.annis</A><DD>This Consumer outputs the content of all CASes into the relAnnis file format.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html#RelAnnisWriter()"><B>RelAnnisWriter()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.annis.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/annis/RelAnnisWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.annis">RelAnnisWriter</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathFactory.FeaturePathIterator.html#remove()"><B>remove()</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathFactory.FeaturePathIterator.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathFactory.FeaturePathIterator</A>
@@ -1520,6 +1753,18 @@ Constructor for class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="./de/tudarms
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><B>ResourceUtils</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#ResourceUtils()"><B>ResourceUtils()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.api.resources.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">ResourceUtils</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#revApi"><B>revApi</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html#REVISION_1"><B>REVISION_1</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionPairReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html#REVISION_2"><B>REVISION_2</B></A> - 
+Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionPairReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revisionEncoder"><B>revisionEncoder</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
 <DD>&nbsp;
 </DL>
 <HR>
@@ -1697,11 +1942,11 @@ Constructor for class de.tudarmstadt.ukp.dkpro.core.io.text.<A HREF="./de/tudarm
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text"><B>TextWriter</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.text</A><DD>UIMA CAS consumer writing the CAS document text as plain text file.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html#TextWriter()"><B>TextWriter()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.io.text.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text">TextWriter</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html#TITLE_PATTERN"><B>TITLE_PATTERN</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/ExtendedWikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">ExtendedWikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#timestampIter"><B>timestampIter</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#TITLE_PATTERN"><B>TITLE_PATTERN</B></A> - 
-Static variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>TokenFilter</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/package-summary.html">de.tudarmstadt.ukp.dkpro.core.tokit</A><DD>Filters tokens that do not conform to certain conditions.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html#TokenFilter()"><B>TokenFilter()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenFilter.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">TokenFilter</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit"><B>TokenTrimmer</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/package-summary.html">de.tudarmstadt.ukp.dkpro.core.tokit</A><DD>Remove prefixes and suffixes from tokens.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html#TokenTrimmer()"><B>TokenTrimmer()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.tokit.<A HREF="./de/tudarmstadt/ukp/dkpro/core/tokit/TokenTrimmer.html" title="class in de.tudarmstadt.ukp.dkpro.core.tokit">TokenTrimmer</A>
@@ -1757,7 +2002,7 @@ Constructor for class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tud
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.DKProModelResolver.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger"><B>TreeTaggerTT4JBase.DKProModelResolver</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/package-summary.html">de.tudarmstadt.ukp.dkpro.core.treetagger</A><DD>A model resolver that knows how models map to language codes in DKPro.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.DKProModelResolver.html#TreeTaggerTT4JBase.DKProModelResolver(java.io.File, java.lang.String, java.io.File)"><B>TreeTaggerTT4JBase.DKProModelResolver(File, String, File)</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.DKProModelResolver.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase.DKProModelResolver</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#trim(org.apache.uima.jcas.tcas.Annotation)"><B>trim(Annotation)</B></A> - 
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#trim(java.lang.String, int[])"><B>trim(String, int[])</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.segmentation">SegmenterBase</A>
 <DD>Remove trailing or leading whitespace from the annotation.
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/segmentation/SegmenterBase.html#trimChar(char)"><B>trimChar(char)</B></A> - 
@@ -1766,6 +2011,9 @@ Method in class de.tudarmstadt.ukp.dkpro.core.api.segmentation.<A HREF="./de/tud
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html#typeSystemInit(org.apache.uima.cas.Type)"><B>typeSystemInit(Type)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.api.featurepath.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathInfo</A>
 <DD>checks the feature path for the given type and checks if it can be valid.
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html#typeSystemInit(org.apache.uima.cas.TypeSystem)"><B>typeSystemInit(TypeSystem)</B></A> - 
+Method in class de.tudarmstadt.ukp.dkpro.core.treetagger.<A HREF="./de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerPosLemmaTT4J.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerPosLemmaTT4J</A>
+<DD>&nbsp;
 </DL>
 <HR>
 <A NAME="_U_"><!-- --></A><H2>
@@ -1812,8 +2060,42 @@ the order they are declared.
 <A NAME="_W_"><!-- --></A><H2>
 <B>W</B></H2>
 <DL>
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>A collection reader that reads all Wikipedia articles as plain text.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html#WikipediaReader()"><B>WikipediaReader()</B></A> - 
-Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReader</A>
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency"><B>Web1TFrequencyCountProvider</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.frequency</A><DD>External resource wrapper for the Web1T frequency count provider.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html#Web1TFrequencyCountProvider()"><B>Web1TFrequencyCountProvider()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.api.frequency.<A HREF="./de/tudarmstadt/ukp/dkpro/core/api/frequency/Web1TFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">Web1TFrequencyCountProvider</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#wiki"><B>wiki</B></A> - 
+Variable in class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaArticleInfoReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Reads all general article infos without retrieving the whole Page objects<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html#WikipediaArticleInfoReader()"><B>WikipediaArticleInfoReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleInfoReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleInfoReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaArticleReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Reads all article pages.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html#WikipediaArticleReader()"><B>WikipediaArticleReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaArticleReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaArticleReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaDiscussionReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Reads all discussion pages.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html#WikipediaDiscussionReader()"><B>WikipediaDiscussionReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaDiscussionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaDiscussionReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaQueryReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Reads all article pages that match a query created by the numerous parameters of this class.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html#WikipediaQueryReader()"><B>WikipediaQueryReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaQueryReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaQueryReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaReaderBase</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Abstract base class for all Wikipedia readers.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html#WikipediaReaderBase()"><B>WikipediaReaderBase()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaRevisionPairReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Reads pairs of adjacent revisions of all articles.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html#WikipediaRevisionPairReader()"><B>WikipediaRevisionPairReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionPairReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionPairReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaRevisionReader</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Reads all revisions of all articles.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReader.html#WikipediaRevisionReader()"><B>WikipediaRevisionReader()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReader</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaRevisionReaderBase</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Abstract base class for all readers based on revisions.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#WikipediaRevisionReaderBase()"><B>WikipediaRevisionReaderBase()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl"><B>WikipediaStandardReaderBase</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl</A><DD>Abstract base class for standard Wikipedia readers reading single articles
+ instead of revision pairs.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html#WikipediaStandardReaderBase()"><B>WikipediaStandardReaderBase()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaStandardReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaStandardReaderBase</A>
+<DD>&nbsp;
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/WikiUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl.util"><B>WikiUtils</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.jwpl.util</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/WikiUtils.html#WikiUtils()"><B>WikiUtils()</B></A> - 
+Constructor for class de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/jwpl/util/WikiUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl.util">WikiUtils</A>
 <DD>&nbsp;
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#writeCharacters(org.pdfbox.util.TextPosition)"><B>writeCharacters(TextPosition)</B></A> - 
 Method in class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">Pdf2CasConverter</A>
@@ -1856,7 +2138,7 @@ Constructor for class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarms
 <DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>XmlReaderText.TextExtractor</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.xml</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html#XmlReaderText.TextExtractor()"><B>XmlReaderText.TextExtractor()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderText.TextExtractor</A>
 <DD>&nbsp;
-<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>XmlWriterInline</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.xml</A><DD>&nbsp;<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html#XmlWriterInline()"><B>XmlWriterInline()</B></A> - 
+<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>XmlWriterInline</B></A> - Class in <A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.xml</A><DD>Writes an approximation of the content of a textual CAS as an inline XML file.<DT><A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html#XmlWriterInline()"><B>XmlWriterInline()</B></A> - 
 Constructor for class de.tudarmstadt.ukp.dkpro.core.io.xml.<A HREF="./de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlWriterInline</A>
 <DD>&nbsp;
 </DL>

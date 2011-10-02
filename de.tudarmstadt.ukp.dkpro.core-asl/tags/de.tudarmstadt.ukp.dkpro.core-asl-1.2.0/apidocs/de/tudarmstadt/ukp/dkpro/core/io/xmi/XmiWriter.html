@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-XmiWriter (DKPro Core ASL 1.1.0 API)
+XmiWriter (DKPro Core ASL 1.2.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ XmiWriter (DKPro Core ASL 1.1.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="XmiWriter (DKPro Core ASL 1.1.0 API)";
+        parent.document.title="XmiWriter (DKPro Core ASL 1.2.0 API)";
     }
 }
 </SCRIPT>
@@ -128,7 +128,7 @@ Class XmiWriter</H2>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_COMPRESS">PARAM_COMPRESS</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enabled/disable gzip compression.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -136,7 +136,15 @@ Class XmiWriter</H2>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_PATH">PARAM_PATH</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The folder to write the generated XMI files to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_TYPE_SYSTEM_FILE">PARAM_TYPE_SYSTEM_FILE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Location to write the type system to.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -236,8 +244,28 @@ PARAM_PATH</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PATH</B></PRE>
 <DL>
+<DD>The folder to write the generated XMI files to.
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter.PARAM_PATH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_TYPE_SYSTEM_FILE"><!-- --></A><H3>
+PARAM_TYPE_SYSTEM_FILE</H3>
+<PRE>
+public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_TYPE_SYSTEM_FILE</B></PRE>
+<DL>
+<DD>Location to write the type system to. If this is not set, a file called typesystem.xml will
+ be written to the XMI output path. If this is set, it is expected to be a file relative
+ to the current work directory or an absolute file.
+ <br>
+ If this parameter is set, the <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html#PARAM_COMPRESS"><CODE>PARAM_COMPRESS</CODE></A> parameter has no effect on the
+ type system. Instead, if the file name ends in ".gz", the file will be compressed,
+ otherwise not.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter.PARAM_TYPE_SYSTEM_FILE">Constant Field Values</A></DL>
 </DL>
 <HR>
 
@@ -246,6 +274,8 @@ PARAM_COMPRESS</H3>
 <PRE>
 public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_COMPRESS</B></PRE>
 <DL>
+<DD>Enabled/disable gzip compression. If this is set, all files will have the ".gz" ending.
+<P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter.PARAM_COMPRESS">Constant Field Values</A></DL>
 </DL>

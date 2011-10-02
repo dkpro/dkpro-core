@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-MMAXWriter (DKPro Core ASL 1.1.0 API)
+MMAXWriter (DKPro Core ASL 1.2.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ MMAXWriter (DKPro Core ASL 1.1.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="MMAXWriter (DKPro Core ASL 1.1.0 API)";
+        parent.document.title="MMAXWriter (DKPro Core ASL 1.2.0 API)";
     }
 }
 </SCRIPT>
@@ -102,7 +102,7 @@ Class MMAXWriter</H2>
 <P>
 Writes the CAS into a MMAX2 project.
  The MMAX2 project can then be used to annotate the annotations further.
- 
+
  All the settings (which annotations should be included,
  how they should be treated in the MMAX2 project, etc.)
  are to be made in the empty (but fully configured) MMAX2 project that is then
@@ -113,7 +113,7 @@ Writes the CAS into a MMAX2 project.
 <P>
 <DL>
 <DT><B>Author:</B></DT>
-  <DD>zesch</DD>
+  <DD>zesch, ferschke</DD>
 </DL>
 <HR>
 
@@ -221,7 +221,7 @@ Writes the CAS into a MMAX2 project.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
+<CODE>&nbsp;org.eml.MMAX2.annotation.markables.Markable</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#addMarkable(java.lang.String, java.lang.String[], java.util.HashMap)">addMarkable</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;levelName,
             <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;ids,
             <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashMap.html?is-external=true" title="class or interface in java.util">HashMap</A>&nbsp;attributes)</CODE>
@@ -251,6 +251,14 @@ Writes the CAS into a MMAX2 project.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#clearBasedata()">clearBasedata</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriter.html#clearFiles()">clearFiles</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -401,6 +409,17 @@ public <B>MMAXWriter</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/
 </TR>
 </TABLE>
 
+<A NAME="clearFiles()"><!-- --></A><H3>
+clearFiles</H3>
+<PRE>
+public void <B>clearFiles</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="clearBasedata()"><!-- --></A><H3>
 clearBasedata</H3>
 <PRE>
@@ -481,10 +500,10 @@ public org.eml.MMAX2.annotation.markables.Markable <B>addMarkable</B>(<A HREF="h
 <A NAME="addMarkable(java.lang.String, java.lang.String[], java.util.HashMap)"><!-- --></A><H3>
 addMarkable</H3>
 <PRE>
-public void <B>addMarkable</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;levelName,
-                        <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;ids,
-                        <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashMap.html?is-external=true" title="class or interface in java.util">HashMap</A>&nbsp;attributes)
-                 throws <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriterException.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriterException</A></PRE>
+public org.eml.MMAX2.annotation.markables.Markable <B>addMarkable</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;levelName,
+                                                               <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;ids,
+                                                               <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashMap.html?is-external=true" title="class or interface in java.util">HashMap</A>&nbsp;attributes)
+                                                        throws <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/mmax2/MMAXWriterException.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.mmax2">MMAXWriterException</A></PRE>
 <DL>
 <DD><DL>
 
