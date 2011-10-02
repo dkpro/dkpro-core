@@ -216,4 +216,20 @@ public class NegraExportReaderTest
 		    System.out.println(jcas.getDocumentText());
 		}
 	}
+
+	@Test
+	public void tuebaTest()
+		throws Exception
+	{
+		// create NegraExportReader output
+		CollectionReader ner = createCollectionReader(NegraExportReader.class,
+				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/tueba-sample.export",
+				NegraExportReader.PARAM_LANGUAGE, "de",
+				NegraExportReader.PARAM_ENCODING, "UTF-8"
+		);
+
+		for (JCas jcas : new JCasIterable(ner)) {
+		    System.out.println(jcas.getDocumentText());
+		}
+	}
 }
