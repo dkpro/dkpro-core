@@ -1,0 +1,512 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+StanfordAnnotator (DKPro Core GPL 1.1.0 API)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="StanfordAnnotator (DKPro Core GPL 1.1.0 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StanfordAnnotator.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordParserPosMapping.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StanfordAnnotator.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util</FONT>
+<BR>
+Class StanfordAnnotator</H2>
+<PRE>
+<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>StanfordAnnotator</B><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+</PRE>
+
+<P>
+A StanfordAnnotator-object creates most of the annotations for the
+ StanfordParser component.<br/>
+ The code has been moved away from the Parser component because it is also
+ used by other components (e.g. Transformations)
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Oliver Ferschke</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#StanfordAnnotator(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)">StanfordAnnotator</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;tokenTree)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotation(int, int, java.lang.String)">createConstituentAnnotation</A></B>(int&nbsp;begin,
+                            int&nbsp;end,
+                            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;constituentType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new Constituent annotation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotationFromTree(boolean, boolean)">createConstituentAnnotationFromTree</A></B>(boolean&nbsp;createPosTags,
+                                    boolean&nbsp;createLemmas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates linked constituent annotations, POS annotations and
+ lemma-annotations.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createDependencyAnnotation(int, int, edu.stanford.nlp.trees.GrammaticalRelation, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token)">createDependencyAnnotation</A></B>(int&nbsp;begin,
+                           int&nbsp;end,
+                           edu.stanford.nlp.trees.GrammaticalRelation&nbsp;aGramRel,
+                           de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;governor,
+                           de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;dependent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes dependency annotations to the JCas</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createPennTreeAnnotation(int, int)">createPennTreeAnnotation</A></B>(int&nbsp;begin,
+                         int&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates annotation with Penn Treebank style representations of the syntax
+ tree</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createPOSAnnotation(int, int, java.lang.String)">createPOSAnnotation</A></B>(int&nbsp;begin,
+                    int&nbsp;end,
+                    <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;posType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new Constituent annotation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createTagAnnotation(int, int, java.lang.String)">createTagAnnotation</A></B>(int&nbsp;begin,
+                    int&nbsp;end,
+                    <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a tag-annotation over a constituent</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.apache.uima.jcas.JCas</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#getaJCas()">getaJCas</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#getTokenTree()">getTokenTree</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#recoverAnnotationsFromNodes()">recoverAnnotationsFromNodes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Recovers annotations from a Stanford Tree-Object, which have been saved
+ within the CoreLabel of the tree.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setaJCas(org.apache.uima.jcas.JCas)">setaJCas</A></B>(org.apache.uima.jcas.JCas&nbsp;aAJCas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setTokenTree(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)">setTokenTree</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;aTokenTree)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="StanfordAnnotator(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)"><!-- --></A><H3>
+StanfordAnnotator</H3>
+<PRE>
+public <B>StanfordAnnotator</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;tokenTree)
+                  throws org.apache.uima.cas.CASException</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>tokens</CODE> - the documentText of the CAS as <code>Token</code> annotations
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.uima.cas.CASException</CODE></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getTokenTree()"><!-- --></A><H3>
+getTokenTree</H3>
+<PRE>
+public <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A> <B>getTokenTree</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTokenTree(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)"><!-- --></A><H3>
+setTokenTree</H3>
+<PRE>
+public void <B>setTokenTree</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;aTokenTree)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getaJCas()"><!-- --></A><H3>
+getaJCas</H3>
+<PRE>
+public org.apache.uima.jcas.JCas <B>getaJCas</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setaJCas(org.apache.uima.jcas.JCas)"><!-- --></A><H3>
+setaJCas</H3>
+<PRE>
+public void <B>setaJCas</B>(org.apache.uima.jcas.JCas&nbsp;aAJCas)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createConstituentAnnotationFromTree(boolean, boolean)"><!-- --></A><H3>
+createConstituentAnnotationFromTree</H3>
+<PRE>
+public void <B>createConstituentAnnotationFromTree</B>(boolean&nbsp;createPosTags,
+                                                boolean&nbsp;createLemmas)</PRE>
+<DL>
+<DD>Creates linked constituent annotations, POS annotations and
+ lemma-annotations.<br/>
+ Note: The annotations are directly written to the indexes of the CAS.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the JCas for which to create annotations<DD><CODE>node</CODE> - the source tree (with CoreMap nodes)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTagAnnotation(int, int, java.lang.String)"><!-- --></A><H3>
+createTagAnnotation</H3>
+<PRE>
+public void <B>createTagAnnotation</B>(int&nbsp;begin,
+                                int&nbsp;end,
+                                <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tag)</PRE>
+<DL>
+<DD>Creates a tag-annotation over a constituent
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>tag</CODE> - the tag value</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createConstituentAnnotation(int, int, java.lang.String)"><!-- --></A><H3>
+createConstituentAnnotation</H3>
+<PRE>
+public de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent <B>createConstituentAnnotation</B>(int&nbsp;begin,
+                                                                                                         int&nbsp;end,
+                                                                                                         <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;constituentType)</PRE>
+<DL>
+<DD>Creates a new Constituent annotation. Links to parent- and
+ child-annotations are not yet created here.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>constituentType</CODE> - the constituent type
+<DT><B>Returns:</B><DD>the annotation</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPOSAnnotation(int, int, java.lang.String)"><!-- --></A><H3>
+createPOSAnnotation</H3>
+<PRE>
+public de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS <B>createPOSAnnotation</B>(int&nbsp;begin,
+                                                                                   int&nbsp;end,
+                                                                                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;posType)</PRE>
+<DL>
+<DD>Creates a new Constituent annotation. Links to parent- and
+ child-annotations are not yet crated here.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>posType</CODE> - the constituent type
+<DT><B>Returns:</B><DD>the annotation</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createDependencyAnnotation(int, int, edu.stanford.nlp.trees.GrammaticalRelation, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token)"><!-- --></A><H3>
+createDependencyAnnotation</H3>
+<PRE>
+public void <B>createDependencyAnnotation</B>(int&nbsp;begin,
+                                       int&nbsp;end,
+                                       edu.stanford.nlp.trees.GrammaticalRelation&nbsp;aGramRel,
+                                       de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;governor,
+                                       de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;dependent)</PRE>
+<DL>
+<DD>Writes dependency annotations to the JCas
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>aGramRel</CODE> - the dependency-type<DD><CODE>governor</CODE> - the governing-word<DD><CODE>dependent</CODE> - the dependent-word</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPennTreeAnnotation(int, int)"><!-- --></A><H3>
+createPennTreeAnnotation</H3>
+<PRE>
+public void <B>createPennTreeAnnotation</B>(int&nbsp;begin,
+                                     int&nbsp;end)</PRE>
+<DL>
+<DD>Creates annotation with Penn Treebank style representations of the syntax
+ tree
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - <DD><CODE>begin</CODE> - <DD><CODE>end</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="recoverAnnotationsFromNodes()"><!-- --></A><H3>
+recoverAnnotationsFromNodes</H3>
+<PRE>
+public void <B>recoverAnnotationsFromNodes</B>()</PRE>
+<DL>
+<DD>Recovers annotations from a Stanford Tree-Object, which have been saved
+ within the CoreLabel of the tree.<br/>
+
+ Note:<br/>
+ Copying has to be done in batch, because we need to have
+ ALL annotations that should be recovered together when copying them.
+ The reason is that some annotations reference each other, which can
+ cause problem if a referenced annotation has not yet been recovered.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StanfordAnnotator.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordParserPosMapping.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StanfordAnnotator.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2011. All Rights Reserved.
+</BODY>
+</HTML>
