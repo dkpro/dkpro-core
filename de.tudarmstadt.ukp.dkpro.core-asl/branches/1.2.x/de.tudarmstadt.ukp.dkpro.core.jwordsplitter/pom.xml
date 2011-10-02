@@ -20,12 +20,12 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.2.0-SNAPSHOT</version>
+		<version>1.2.0</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</artifactId>
 	<name>DKPro Core ASL - JWordSplitter (ASL)</name>
-	<version>1.2.0-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<description>http://www.danielnaber.de/jwordsplitter/</description>
 	<dependencies>
 		<dependency>
