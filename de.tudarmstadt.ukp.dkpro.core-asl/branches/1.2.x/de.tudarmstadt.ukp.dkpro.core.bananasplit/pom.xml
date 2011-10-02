@@ -20,12 +20,12 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.2.0</version>
+		<version>1.2.1-SNAPSHOT</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</artifactId>
 	<name>DKPro Core ASL - BananaSplit (ASL)</name>
-	<version>1.2.0</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<description>UIMA integration for Niels Ott's BananaSplit (http://niels.drni.de/s9y/pages/bananasplit.html).</description>
 	<dependencies>
 		<dependency>

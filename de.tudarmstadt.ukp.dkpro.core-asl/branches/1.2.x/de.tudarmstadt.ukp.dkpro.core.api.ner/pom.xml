@@ -20,12 +20,12 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.2.0</version>
+		<version>1.2.1-SNAPSHOT</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
 	<name>DKPro Core ASL - Named Entity Recognition API</name>
-	<version>1.2.0</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
