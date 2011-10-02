@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StanfordParser (DKPro Core GPL 1.1.0 API)
+StanfordParser (DKPro Core GPL 1.2.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ StanfordParser (DKPro Core GPL 1.1.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordParser (DKPro Core GPL 1.1.0 API)";
+        parent.document.title="StanfordParser (DKPro Core GPL 1.2.0 API)";
     }
 }
 </SCRIPT>
@@ -55,7 +55,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="StanfordParser.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -142,14 +142,6 @@ Class StanfordParser</H2>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN">PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CREATE_DEPENDENCY_TAGS">PARAM_CREATE_DEPENDENCY_TAGS</A></B></CODE>
 
 <BR>
@@ -222,6 +214,17 @@ Class StanfordParser</H2>
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#doCreateDependencyTags(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, org.apache.uima.jcas.tcas.Annotation, edu.stanford.nlp.trees.Tree, java.util.List)">doCreateDependencyTags</A></B>(<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</A>&nbsp;sfAnnotator,
+                       org.apache.uima.jcas.tcas.Annotation&nbsp;currAnnotationToParse,
+                       edu.stanford.nlp.trees.Tree&nbsp;parseTree,
+                       <A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&gt;&nbsp;tokens)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -339,16 +342,6 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 <P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS">Constant Field Values</A></DL>
-</DL>
-<HR>
-
-<A NAME="PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN"><!-- --></A><H3>
-PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN</H3>
-<PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN</B></PRE>
-<DL>
-<DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN">Constant Field Values</A></DL>
 </DL>
 <HR>
 
@@ -516,6 +509,20 @@ public void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas)
 </DL>
 <HR>
 
+<A NAME="doCreateDependencyTags(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, org.apache.uima.jcas.tcas.Annotation, edu.stanford.nlp.trees.Tree, java.util.List)"><!-- --></A><H3>
+doCreateDependencyTags</H3>
+<PRE>
+protected void <B>doCreateDependencyTags</B>(<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</A>&nbsp;sfAnnotator,
+                                      org.apache.uima.jcas.tcas.Annotation&nbsp;currAnnotationToParse,
+                                      edu.stanford.nlp.trees.Tree&nbsp;parseTree,
+                                      <A HREF="http://java.sun.com/javase/6/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</A>&lt;de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&gt;&nbsp;tokens)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getPennTokenText(de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token)"><!-- --></A><H3>
 getPennTokenText</H3>
 <PRE>
@@ -557,7 +564,7 @@ protected edu.stanford.nlp.ling.Word <B>getPennTokenText</B>(de.tudarmstadt.ukp.
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>NEXT CLASS</B></A></FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="StanfordParser.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
