@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.teaching</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.teaching.frequency</artifactId>
-			<version>0.3.0</version>
+			<version>0.4.0</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
