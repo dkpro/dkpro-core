@@ -334,7 +334,7 @@ public class NegraExportReader
 			if (line == null) {
 				throw new IOException("Unexpected end of file");
 			}
-			String[] parts = line.split("\t+");
+			String[] parts = line.split("\\s+");
 			documentUris.put(parts[DOCUMENT_ID], parts[DOCUMENT_URI]);
 			documentsTotal++;
 			line = br.readLine();
