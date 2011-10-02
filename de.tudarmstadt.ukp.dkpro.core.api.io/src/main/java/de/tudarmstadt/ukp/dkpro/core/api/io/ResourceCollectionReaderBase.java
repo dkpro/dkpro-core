@@ -102,9 +102,9 @@ public abstract class ResourceCollectionReaderBase
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
-	protected String language;
+	private String language;
 
-	private int completed;
+    private int completed;
 	private Collection<Resource> resources;
 	private Iterator<Resource> resourceIterator;
 
@@ -406,6 +406,10 @@ public abstract class ResourceCollectionReaderBase
 			throw new RuntimeException(e);
 		}
 	}
+	
+    public String getLanguage() {
+        return language;
+    }
 
 	/**
 	 * @author Richard Eckart de Castilho

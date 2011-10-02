@@ -211,7 +211,7 @@ public class ImsCwbReader extends ResourceCollectionReaderBase
             docMetaData.addToIndexes();
 
             // Set the document language
-            aCas.setDocumentLanguage(language);
+            aCas.setDocumentLanguage(getLanguage());
         }
         catch (CASException e) {
             // This should not happen.
