@@ -20,12 +20,12 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.2.0</version>
+		<version>1.2.1-SNAPSHOT</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
 	<name>DKPro Core ASL - IO - IMS Corpus Workbench</name>
-	<version>1.2.0</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
