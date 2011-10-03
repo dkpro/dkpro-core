@@ -24,6 +24,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -44,11 +45,12 @@ import de.tudarmstadt.ukp.dkpro.teaching.core.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.teaching.core.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.teaching.ngram.NGramIterable;
 
-public class Web1FormatWriter
+public class Web1TFormatWriter
     extends JCasAnnotator_ImplBase
 {
     
-    // FIXME should add sentence beginning and sentence end markers too
+    public static final String SENTENCE_START = "<S>";
+    public static final String SENTENCE_END = "</S>";
     
     private static final String LF = "\n";
     private static final String TAB = "\t";
@@ -86,7 +88,17 @@ public class Web1FormatWriter
 
         for (Sentence s : JCasUtil.select(jcas, Sentence.class)) {
             List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, s);
-            List<String> tokenStrings = JCasUtil.toText(tokens);
+            
+            // add sentence begin marker
+            List<String> tokenStrings = new ArrayList<String>();
+            tokenStrings.add(SENTENCE_START);
+            
+            // add all token strings
+            tokenStrings.addAll(JCasUtil.toText(tokens));
+            
+            // add sentence end marker
+            tokenStrings.add(SENTENCE_END);
+            
             for (int ngramLength=minNgramLength; ngramLength<=maxNgramLength; ngramLength++) {
                 cfd.addSamples(
                         ngramLength,
@@ -95,7 +107,7 @@ public class Web1FormatWriter
             }
         }
         
-        // write the FDs to the corresponding files
+        // write the frequency distributions to the corresponding n-gram files
         for (int level : cfd.getConditions()) {
             if (!ngramWriters.containsKey(level)) {
                 throw new AnalysisEngineProcessException(new IOException("No writer for ngram level " + level + " initialized."));
@@ -123,6 +135,9 @@ public class Web1FormatWriter
     {
         super.collectionProcessComplete();
         
+        closeWriters(ngramWriters.values());
+        
+        // read the file with the counts per file and create the final aggregated counts
         for (int level=minNgramLength; level<=maxNgramLength; level++) {
             FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
             try {
@@ -136,8 +151,12 @@ public class Web1FormatWriter
                     String count = parts[1];
                     fd.addSample(ngram, new Integer(count));
                 }
-        
-                File outputFile = new File(inputFile.getAbsolutePath() + "_aggregated.txt");
+                reader.close();
+                
+                File outputPath = new File(inputFile.getParentFile(), level + "gms/");
+                outputPath.mkdir();
+                File outputFile = new File(outputPath, level + ".txt");
+                
                 BufferedWriter writer  = new BufferedWriter(new FileWriter(outputFile));
                 
                 List<String> keyList = new ArrayList<String>(fd.getKeys());
@@ -150,6 +169,11 @@ public class Web1FormatWriter
                 }
                 writer.flush();
                 writer.close();
+                
+                // cleanup
+                if (!inputFile.delete()) {
+                    throw new IOException("Could not clean up.");
+                }
             }
             catch (IOException e) {
                 throw new AnalysisEngineProcessException(e);
@@ -175,5 +199,17 @@ public class Web1FormatWriter
             }
         }
         return writers;
+    }
+    
+    private void closeWriters(Collection<BufferedWriter> writers)
+        throws AnalysisEngineProcessException
+    {
+        try {
+            for (BufferedWriter writer : writers) {
+                writer.close();
+            }
+        } catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
     }
 }
