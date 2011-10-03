@@ -20,9 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -39,6 +40,7 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.JCasUtil;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.teaching.core.ConditionalFrequencyDistribution;
@@ -55,10 +57,14 @@ public class Web1TFormatWriter
     private static final String LF = "\n";
     private static final String TAB = "\t";
 
-    public static final String PARAM_OUTPUT_PATH = "OutputPath";
+    public static final String PARAM_OUTPUT_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_OUTPUT_PATH, mandatory=true)
     private File outputPath;
     
+    public static final String PARAM_OUTPUT_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_OUTPUT_ENCODING, mandatory=true, defaultValue="UTF-8")
+    private String outputEncoding;
+
     public static final String PARAM_MIN_NGRAM_LENGTH = "MinNgramLength";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_LENGTH, mandatory=true, defaultValue="1")
     private int minNgramLength;
@@ -157,7 +163,8 @@ public class Web1TFormatWriter
                 outputPath.mkdir();
                 File outputFile = new File(outputPath, level + ".txt");
                 
-                BufferedWriter writer  = new BufferedWriter(new FileWriter(outputFile));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream(outputFile), outputEncoding));
                 
                 List<String> keyList = new ArrayList<String>(fd.getKeys());
                 Collections.sort(keyList);
@@ -192,7 +199,8 @@ public class Web1TFormatWriter
                 }
                 FileUtils.touch(outputFile);
 
-                writers.put(level, new BufferedWriter(new FileWriter(outputFile)));
+                writers.put(level, new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream(outputFile), outputEncoding)));
             }
             catch (IOException e) {
                 throw new ResourceInitializationException(e);
