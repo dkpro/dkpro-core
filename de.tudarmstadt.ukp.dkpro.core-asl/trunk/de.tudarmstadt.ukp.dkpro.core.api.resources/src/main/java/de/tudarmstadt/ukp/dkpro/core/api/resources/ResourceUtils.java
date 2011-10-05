@@ -30,7 +30,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.GZIPInputStream;
 
+import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
 
@@ -112,6 +114,30 @@ public class ResourceUtils
 		return file;
 	}
 
+	
+	/**
+	 * @param is An {@link InputStream}.
+	 * @param filename The filename this stream was created from. 
+	 * @return A resolved {@link InputStream}
+	 * @throws IOException
+	 *             if something went wrong during resolving the input stream
+	 */
+	public static InputStream resolveCompressedInputStream(InputStream is, String filename) throws IOException {
+        String nameLC = filename.toLowerCase();
+	    InputStream resolvedIS;
+	    if (nameLC.endsWith(".gz")) {
+            resolvedIS = new GZIPInputStream(is);
+        }
+        else if (nameLC.endsWith(".bzip2") || nameLC.endsWith(".bz2")) {
+            is.read(new byte[2]); // Read the stream markers "BZ"
+            resolvedIS = new CBZip2InputStream(is);
+        }
+        else {
+            resolvedIS = is;
+        }
+	    
+	    return resolvedIS;
+	}
 
 	/**
 	 * Resolve a location (which can be many things) to an URL. If the location starts with

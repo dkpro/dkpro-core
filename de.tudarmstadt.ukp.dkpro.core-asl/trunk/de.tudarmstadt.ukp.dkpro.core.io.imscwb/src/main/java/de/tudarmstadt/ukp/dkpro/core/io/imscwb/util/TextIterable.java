@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.imscwb.util;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Iterator;
@@ -29,6 +30,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class TextIterable
     implements Iterable<CorpusText>, Iterator<CorpusText>
@@ -164,8 +166,13 @@ public class TextIterable
         BufferedReader r = null;
         if (!fileQueue.isEmpty()) {
             currentResource = fileQueue.poll();
-            r = new BufferedReader(
-                    new InputStreamReader(currentResource.getInputStream(), encoding));
+            
+            InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(
+                    currentResource.getInputStream(),
+                    currentResource.getPath()
+            );
+                
+            r = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
         }
         return r;
     }

@@ -32,10 +32,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
@@ -50,6 +48,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -144,17 +143,12 @@ public class NegraExportReader
 
 		try {
 			// Detect if the file is compressed
-			InputStream is = new FileInputStream(inputFile);
-			String filenameLC = inputFile.getName().toLowerCase();
-			if (filenameLC.endsWith(".gz")) {
-				is = new GZIPInputStream(is);
-			}
-			else if (filenameLC.endsWith(".bzip2") || filenameLC.endsWith(".bz2")) {
-				is.read(new byte[2]); // Read the stream markers "BZ"
-				is = new CBZip2InputStream(is);
-			}
+		    InputStream fileStream = new FileInputStream(inputFile); 
+			
+		    InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(
+			        fileStream, inputFile.getName());
 
-			br = new BufferedReader(new InputStreamReader(is, encoding));
+			br = new BufferedReader(new InputStreamReader(resolvedStream, encoding));
 
 			readHeaders();
 
