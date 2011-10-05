@@ -49,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 public class ImsCwbReader extends ResourceCollectionReaderBase
 {
     public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name=PARAM_ENCODING, mandatory=true, defaultValue="ISO-8859-15")
+    @ConfigurationParameter(name=PARAM_ENCODING, mandatory=true, defaultValue="UTF-8")
     private String encoding;
 
     public static final String PARAM_TAGGER_TAGSET = "TaggerTagset";
