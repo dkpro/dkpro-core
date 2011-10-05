@@ -45,6 +45,7 @@ public class ImsCwbReaderTest
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
                 ImsCwbReader.PARAM_TAGGER_TAGSET, "src/test/resources/stts.map",
+                ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" }
         );
@@ -80,6 +81,7 @@ public class ImsCwbReaderTest
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
                 ImsCwbReader.PARAM_TAGGER_TAGSET, "src/test/resources/stts.map",
+                ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" },
                 ImsCwbReader.PARAM_WRITE_TOKENS, false,
@@ -110,6 +112,7 @@ public class ImsCwbReaderTest
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, "src/test/resources/wacky",
                 ImsCwbReader.PARAM_TAGGER_TAGSET, "src/test/resources/stts.map",
+                ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ImsCwbReader.PARAM_WRITE_TOKENS, false,
                 ImsCwbReader.PARAM_WRITE_LEMMAS, true,
                 ImsCwbReader.PARAM_WRITE_POS, false,
