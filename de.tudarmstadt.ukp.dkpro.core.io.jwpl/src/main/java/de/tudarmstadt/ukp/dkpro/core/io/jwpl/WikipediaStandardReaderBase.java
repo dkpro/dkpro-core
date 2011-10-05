@@ -113,6 +113,8 @@ public abstract class WikipediaStandardReaderBase
 	protected long nrOfArticles;
 
 	protected Iterator<Page> pageIter;
+	
+	protected Page page;
 
 	protected MediaWikiParser parser;
 
@@ -202,7 +204,7 @@ public abstract class WikipediaStandardReaderBase
 	{
 		super.getNext(jcas);
 
-		Page page = pageIter.next();
+		page = pageIter.next();
 
 		try {
 			getUimaContext().getLogger().log(Level.FINE,
