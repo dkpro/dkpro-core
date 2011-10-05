@@ -19,10 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.zip.GZIPInputStream;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.impl.XmiCasDeserializer;
@@ -30,6 +28,7 @@ import org.apache.uima.collection.CollectionException;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
  * @author Richard Eckart de Castilho
@@ -46,11 +45,11 @@ public class XmiReader
 
 		InputStream is = null;
 		try {
-			is = new BufferedInputStream(res.getInputStream());
-			if (res.getPath().toLowerCase().endsWith(".gz")) {
-				is = new GZIPInputStream(is);
-			}
-			XmiCasDeserializer.deserialize(is, aCAS);
+		    InputStream resolvedIS = ResourceUtils.resolveCompressedInputStream(
+		            res.getInputStream(),
+		            res.getPath()
+		    );
+			XmiCasDeserializer.deserialize(resolvedIS, aCAS);
 		}
 		catch (SAXException e) {
 			throw new IOException(e);
