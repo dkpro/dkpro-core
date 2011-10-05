@@ -114,7 +114,7 @@ public abstract class WikipediaStandardReaderBase
 
 	protected Iterator<Page> pageIter;
 	
-	protected Page page;
+	private Page page;
 
 	protected MediaWikiParser parser;
 
@@ -301,5 +301,10 @@ public abstract class WikipediaStandardReaderBase
 
 		return container;
 	}
+
+	public Page getPage() {
+		return page;
+	}
+
 
 }
