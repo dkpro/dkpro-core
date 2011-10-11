@@ -22,6 +22,7 @@
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<version>1.3.0-SNAPSHOT</version>
 	</parent>
+	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</artifactId>
 	<name>DKPro Core ASL - IO - Wikipedia (LGPL)</name>
 	<dependencies>
