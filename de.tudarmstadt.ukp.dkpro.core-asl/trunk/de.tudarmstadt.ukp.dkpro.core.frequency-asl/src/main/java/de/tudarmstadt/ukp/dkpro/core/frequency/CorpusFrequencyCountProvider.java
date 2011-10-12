@@ -18,8 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.frequency;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
-import de.tudarmstadt.ukp.dkpro.teaching.core.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.teaching.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.teaching.corpus.Corpus;
 import de.tudarmstadt.ukp.dkpro.teaching.ngram.NGramIterable;
