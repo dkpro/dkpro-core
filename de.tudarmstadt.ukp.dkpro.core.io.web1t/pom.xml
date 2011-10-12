@@ -38,11 +38,6 @@
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.teaching</groupId>
-  		<artifactId>de.tudarmstadt.ukp.dkpro.teaching.core</artifactId>
-  		<version>0.5.0-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>de.tudarmstadt.ukp.dkpro.teaching</groupId>
   		<artifactId>de.tudarmstadt.ukp.dkpro.teaching.ngram</artifactId>
   		<version>0.5.0-SNAPSHOT</version>
   	</dependency>
@@ -55,6 +50,10 @@
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
   	</dependency>
   </dependencies>
 </project>
