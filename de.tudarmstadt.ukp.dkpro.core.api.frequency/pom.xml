@@ -32,6 +32,11 @@
 			<groupId>org.uimafit</groupId>
 			<artifactId>uimafit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>pcj</groupId>
+			<artifactId>pcj</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
