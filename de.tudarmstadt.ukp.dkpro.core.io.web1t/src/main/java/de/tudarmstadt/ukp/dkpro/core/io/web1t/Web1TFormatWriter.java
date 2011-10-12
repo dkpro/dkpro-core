@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.teaching.ngram.NGramIterable;
+import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
 public class Web1TFormatWriter
     extends JCasAnnotator_ImplBase
@@ -108,7 +108,7 @@ public class Web1TFormatWriter
             for (int ngramLength=minNgramLength; ngramLength<=maxNgramLength; ngramLength++) {
                 cfd.addSamples(
                         ngramLength,
-                        new NGramIterable(tokenStrings, ngramLength, ngramLength)
+                        new NGramStringIterable(tokenStrings, ngramLength, ngramLength)
                 );
             }
         }
