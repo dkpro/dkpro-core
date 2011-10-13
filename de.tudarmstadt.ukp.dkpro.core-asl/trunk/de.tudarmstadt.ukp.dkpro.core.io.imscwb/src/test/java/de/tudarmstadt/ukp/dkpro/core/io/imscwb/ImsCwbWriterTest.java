@@ -16,13 +16,17 @@
  * limitations under the License.
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
+import java.io.File;
+
 import org.junit.Test;
 import org.uimafit.component.xwriter.CASDumpWriter;
 
+import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.CollectionReaderFactory.*;
 import static org.uimafit.factory.AnalysisEngineFactory.*;
 import static org.uimafit.pipeline.SimplePipeline.*;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 
@@ -61,6 +65,12 @@ public class ImsCwbWriterTest
 				CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
 
-		runPipeline(ner, tag, tw);
+		runPipeline(ner, tag, tw, cdw);
+
+		String reference = FileUtils.readFileToString(
+				new File("src/test/resources/reference/corpus-sample.ims.xml"), "UTF-8");
+		String actual = FileUtils.readFileToString(
+				new File(outputFile), "UTF-8");
+		assertEquals(reference, actual);
 	}
 }

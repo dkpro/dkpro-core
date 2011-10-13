@@ -44,6 +44,7 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.factory.JCasBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -143,8 +144,8 @@ public class NegraExportReader
 
 		try {
 			// Detect if the file is compressed
-		    InputStream fileStream = new FileInputStream(inputFile); 
-			
+		    InputStream fileStream = new FileInputStream(inputFile);
+
 		    InputStream resolvedStream = ResourceUtils.resolveCompressedInputStream(
 			        fileStream, inputFile.getName());
 
@@ -164,9 +165,17 @@ public class NegraExportReader
 	public void getNext(JCas aJCas)
 		throws IOException
 	{
-		StringBuilder text = new StringBuilder();
+		JCasBuilder casBuilder = new JCasBuilder(aJCas);
 
 		String originId = readOriginId(true);
+
+		// Set meta data
+		DocumentMetaData meta = DocumentMetaData.create(aJCas);
+		meta.setDocumentUri(documentUris.get(originId));
+		meta.setDocumentId(originId);
+		aJCas.setDocumentLanguage(language);
+
+		// Fill CAS
 		String lastOriginId = originId;
 		while (originId != null) {
 			if (!originId.equals(lastOriginId)) {
@@ -178,12 +187,13 @@ public class NegraExportReader
 			readOriginId(false);
 
 			// read the next sentence
-			readSentence(aJCas, text);
+			readSentence(aJCas, casBuilder);
 
 			lastOriginId = originId;
 			originId = readOriginId(true);
 		}
-		setDocumentInformation(aJCas, lastOriginId, text.toString());
+
+		casBuilder.close();
 
 		documentCount++;
 	}
@@ -336,7 +346,7 @@ public class NegraExportReader
 //		System.out.printf("Documents [%d]%n", documentsTotal);
 	}
 
-	private void readSentence(JCas aJCas, StringBuilder aText) throws IOException
+	private void readSentence(JCas aJCas, JCasBuilder aBuilder) throws IOException
 	{
 		sentenceCount++;
 
@@ -352,18 +362,14 @@ public class NegraExportReader
 		// Initialize dependency relations
 		Map<Constituent, List<Annotation>> relations = new LinkedHashMap<Constituent, List<Annotation>>();
 
+
 		// handle tokens
-		int startPosition, endPosition = -1;
 		String line;
 		for (line = br.readLine(); startsNotWith(line, "#"); line = br.readLine()) {
 			String[] parts = splitLine(line, "\t+");
-			aText.append(parts[TOKEN_TEXT] + " ");
-			startPosition = endPosition + 1;
-			endPosition = startPosition + parts[TOKEN_TEXT].length();
-
 			// create token
-			Token token = new Token(aJCas, startPosition, endPosition);
-			token.addToIndexes(aJCas);
+			Token token = aBuilder.add(parts[TOKEN_TEXT], Token.class);
+			aBuilder.add(" ");
 
 			// get/create parent
 			Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
@@ -373,18 +379,18 @@ public class NegraExportReader
 				constituents.put(parts[TOKEN_PARENT_ID], parent);
 			}
 			// update begin/end markers of parent
-			if (startPosition < parent.getBegin()) {
-				parent.setBegin(startPosition);
+			if (token.getBegin() < parent.getBegin()) {
+				parent.setBegin(token.getBegin());
 			}
-			if (endPosition > parent.getEnd()) {
-				parent.setEnd(endPosition);
+			if (token.getEnd() > parent.getEnd()) {
+				parent.setEnd(token.getEnd());
 			}
 			token.setParent(parent);
 			addChild(relations, parent, token);
 
 			// create pos
 			if (posEnabled && (TOKEN_POS_TAG >= 0)) {
-				POS pos = new POS(aJCas, startPosition, endPosition);
+				POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
 				pos.setPosValue(parts[TOKEN_POS_TAG]);
 				pos.addToIndexes();
 				token.setPos(pos);
@@ -392,7 +398,7 @@ public class NegraExportReader
 
 			// create lemma
 			if (lemmaEnabled && (TOKEN_LEMMA >= 0)) {
-				Lemma lemma = new Lemma(aJCas, startPosition, endPosition);
+				Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
 				lemma.setValue(parts[TOKEN_LEMMA]);
 				lemma.addToIndexes();
 				token.setLemma(lemma);
@@ -478,15 +484,6 @@ public class NegraExportReader
 			}
 			parent.setChildren(fsa);
 		}
-	}
-
-	private void setDocumentInformation(JCas jcas, String aTextId, String aText)
-	{
-		DocumentMetaData meta = DocumentMetaData.create(jcas);
-		meta.setDocumentUri(documentUris.get(aTextId));
-		meta.setDocumentId(aTextId);
-		jcas.setDocumentLanguage(language);
-		jcas.setDocumentText(aText);
 	}
 
 	private String[] splitLine(String str, String delimiter)
