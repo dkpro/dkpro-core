@@ -1,0 +1,41 @@
+<text id="0">
+<s>
+Seine	PPOSAT	sein	0
+Position	NN	Position	0
+bei	APPR	bei	0
+der	ART	d	0
+Prüfgesellschaft	NN	Prüfgesellschaft	0
+mußte	VMFIN	müssen	0
+er	PPER	er	0
+damals	ADV	damals	0
+niederlegen	VVINF	niederlegen	0
+,	$,	,	0
+den	ART	d	0
+AWO-Posten	NN	AWO-Posten	0
+nicht	PTKNEG	nicht	0
+.	$.	.	0
+</s>
+<s>
+K.	NE	K.	0
+W.	NE	W.	0
+</s>
+</text>
+<text id="1">
+<s>
+SPD	NE	SPD	1
+/	$(	/	1
+CDU	NE	CDU	1
+/	$(	/	1
+AfB	NN	AfB	1
+für	APPR	für	1
+Daewoo-Millionen	NN	Daewoo-Millionen	1
+</s>
+<s>
+Aber	KON	aber	1
+Bremerhavens	NE	Bremerhaven	1
+AfB	NE	AfB	1
+fordert	VVFIN	fordern	1
+jetzt	ADV	jetzt	1
+Untersuchungsausschuß	NN	Untersuchungsausschuß	1
+</s>
+</text>
