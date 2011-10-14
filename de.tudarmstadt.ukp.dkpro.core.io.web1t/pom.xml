@@ -54,5 +54,33 @@
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
   	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
+  		<version>2010111900</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-models-en</artifactId>
+  		<version>2010111500</version>
+  		<type>jar</type>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</artifactId>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
+  		<version>1.3.0-SNAPSHOT</version>
+  		<scope>test</scope>
+  	</dependency>
   </dependencies>
 </project>
