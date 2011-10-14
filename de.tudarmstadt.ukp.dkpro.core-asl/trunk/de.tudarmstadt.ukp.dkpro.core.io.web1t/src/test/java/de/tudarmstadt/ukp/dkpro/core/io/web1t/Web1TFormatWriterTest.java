@@ -17,44 +17,137 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
+import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+
+import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.junit.Test;
+import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.pipeline.SimplePipeline;
 
+import com.googlecode.jweb1t.JWeb1TIndexer;
+
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class Web1TFormatWriterTest {
 
+    static {
+        org.apache.log4j.BasicConfigurator.configure();
+    }
+
+    private final String INDEX_FOLDER = "target/Index/";
+    private final int MIN_NGRAM = 1;
+    private final int MAX_NGRAM = 3;
+
     @Test
-    public void web1TFormatTest() throws Exception {     
+    public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath() throws Exception {
+
+        Web1TFrequencyCountProvider web1tProvider = prepareWeb1TFormatTest(
+                new String[] {
+                        Token.class.getName() + "/pos/PosValue",
+                        Token.class.getName() + "/lemma/value" 
+                }
+        );
+
+        assertEquals(1, web1tProvider.getFrequency("TO")); // "to"
+        assertEquals(1, web1tProvider.getFrequency("NNS")); // "sentences"
+        assertEquals(1, web1tProvider.getFrequency("EX")); // "there"
+
+        assertEquals(1, web1tProvider.getFrequency("write"));
+        assertEquals(0, web1tProvider.getFrequency("written"));
+
+    }
+
+    @Test
+    public void web1TFormatTestWithMultiSlashedTypesAsFeaturePath() throws Exception {
+
+        Web1TFrequencyCountProvider web1tProvider = prepareWeb1TFormatTest(
+                new String[] {
+                        Token.class.getName() + "/lemma/value" 
+                }
+        );
+
+        assertEquals(1, web1tProvider.getFrequency("write"));
+        assertEquals(0, web1tProvider.getFrequency("written"));
+        assertEquals(4, web1tProvider.getFrequency("sentence"));
+
+    }
+
+    @Test
+    public void web1TFormatTest_() throws Exception {
+
+        Web1TFrequencyCountProvider web1tProvider = prepareWeb1TFormatTest(
+                new String[] { Token.class.getName() }
+        );
+
+        assertEquals(4, web1tProvider.getFrequency("."));
+        assertEquals(1, web1tProvider.getFrequency(","));
+        assertEquals(3, web1tProvider.getFrequency("sentence"));
+        assertEquals(1, web1tProvider.getFrequency("written"));
+
+    }
+
+    private Web1TFrequencyCountProvider prepareWeb1TFormatTest(String[] inputTypes)
+        throws Exception
+    {
+        deleteIndexFolder();
+        writeWeb1TFormat(inputTypes);
+        createIndex();
+
+        Web1TFrequencyCountProvider web1tProvider = new Web1TFrequencyCountProvider(
+                new File(INDEX_FOLDER),
+                MIN_NGRAM,
+                MAX_NGRAM
+        );
+
+        return web1tProvider;
+    }
+
+    private void createIndex() throws Exception {
+        JWeb1TIndexer indexCreator = new JWeb1TIndexer(INDEX_FOLDER, MAX_NGRAM);
+        indexCreator.create();
+
+    }
+
+    private void writeWeb1TFormat(String[] inputPath)
+        throws Exception
+    {
         CollectionReader reader = createCollectionReader(
                 TextReader.class,
                 ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                        ResourceCollectionReaderBase.INCLUDE_PREFIX + "**/*.txt" }
+                ResourceCollectionReaderBase.PARAM_PATTERNS, 
+                    new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX + "**/*.txt" }
         );
- 
-        AnalysisEngineDescription segmenter = createPrimitiveDescription(
-                BreakIteratorSegmenter.class
+
+        AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
+
+        AnalysisEngineDescription treeTagger = AnalysisEngineFactory.createPrimitiveDescription(
+                TreeTaggerPosLemmaTT4J.class,
+                TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en"
         );
- 
+
         AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
                 Web1TFormatWriter.class,
-                Web1TFormatWriter.PARAM_OUTPUT_PATH, "target/",
-                Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, 1,
-                Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, 3
+                Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER,
+                Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,
+                Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
+                Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM
         );
-        
-        SimplePipeline.runPipeline(
-                reader,
-                segmenter,
-                ngramWriter
-        );
+
+        SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
+    }
+
+    private void deleteIndexFolder() {
+        File file = new File(INDEX_FOLDER);
+        file.delete();
     }
 }
