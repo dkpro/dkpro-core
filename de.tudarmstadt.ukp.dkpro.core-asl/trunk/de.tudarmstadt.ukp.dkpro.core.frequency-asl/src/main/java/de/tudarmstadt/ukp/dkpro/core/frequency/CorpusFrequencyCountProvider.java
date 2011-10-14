@@ -20,9 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.frequency;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
-import de.tudarmstadt.ukp.dkpro.teaching.core.Sentence;
-import de.tudarmstadt.ukp.dkpro.teaching.corpus.Corpus;
-import de.tudarmstadt.ukp.dkpro.teaching.ngram.NGramIterable;
+import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
 
 public class CorpusFrequencyCountProvider
     extends FrequencyCountProviderBase
@@ -41,7 +41,7 @@ public class CorpusFrequencyCountProvider
             for (Sentence s : corpus.getSentences()) {
                 cfd.addSamples(
                         i,
-                        new NGramIterable(s.getTokens(), i, i)
+                        new NGramStringIterable(s.getTokens(), i, i)
                 );
             }
         }

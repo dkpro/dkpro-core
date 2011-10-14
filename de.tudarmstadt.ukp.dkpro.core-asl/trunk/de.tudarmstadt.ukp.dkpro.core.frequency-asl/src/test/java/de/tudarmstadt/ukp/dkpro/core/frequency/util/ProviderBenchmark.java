@@ -20,9 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.util;
 import org.apache.commons.lang.time.StopWatch;
 
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFrequencyCountProvider;
-import de.tudarmstadt.ukp.dkpro.teaching.core.Sentence;
-import de.tudarmstadt.ukp.dkpro.teaching.core.Text;
-import de.tudarmstadt.ukp.dkpro.teaching.corpus.BrownCorpus;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownCorpus;
 
 public class ProviderBenchmark
 {
