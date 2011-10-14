@@ -356,6 +356,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.toolbox</module>
 	</modules>
 	<build>
 		<pluginManagement>
@@ -769,6 +770,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.snowball/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.stopwordremover/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textcat/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.toolbox/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.treetagger/src/main/java" includes="**/*.java" />
 								</cobertura-report>
 							</target>
