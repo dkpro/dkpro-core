@@ -32,8 +32,8 @@ public class WackyCorpus {
     
     // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
     private static Map<WackyLanguageEdition,String> language2TagsetMap = new HashMap<WackyLanguageEdition, String>() {{
-       put(WackyLanguageEdition.DEWAC, "src/main/resources/tagsets/stts.map"); 
-       put(WackyLanguageEdition.UKWAC, "src/main/resources/tagsets/en-tagger.map"); 
+       put(WackyLanguageEdition.DEWAC, "classpath:tagset/stts.map"); 
+       put(WackyLanguageEdition.UKWAC, "classpath:tagset/en-tagger.map"); 
     }};
 
     private static final String WORKSPACE = "wacky";
