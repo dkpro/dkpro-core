@@ -619,6 +619,9 @@
 								<configuration>
 									<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 									<targetJdk>${java.target}</targetJdk>
+									<excludes>
+										<exclude>**/type/**/*.java</exclude>
+									</excludes>
 								</configuration>
 							</execution>
 						</executions>
