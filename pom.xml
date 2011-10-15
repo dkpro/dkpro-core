@@ -112,15 +112,20 @@
 					<plugin>
 						<groupId>org.apache.rat</groupId>
 						<artifactId>apache-rat-plugin</artifactId>
-						<configuration>
-							<excludes>
-								<!-- 
-								   Exclude all - We inherit from the ASL parent POM but we have
-								   only GPL code in this part.
-								-->
-								<exclude>**/*</exclude> 
-							</excludes>
-						</configuration>
+						<executions>
+							<execution>
+								<id>default</id>
+								<configuration>
+									<excludes>
+										<!-- 
+										   Exclude all - We inherit from the ASL parent POM but we have
+										   only GPL code in this part.
+										-->
+										<exclude>**/*</exclude> 
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>						
 					</plugin>
 				</plugins>
 			</build>
