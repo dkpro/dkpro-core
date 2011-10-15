@@ -58,8 +58,8 @@ public class ImsCwbWriterTest
 
 		AnalysisEngineDescription tw = createPrimitiveDescription(
 				ImsCwbWriter.class,
-				ImsCwbWriter.PARAM_OUTPUT_FILE, outputFile,
-				ImsCwbWriter.PARAM_ENCODING, "UTF-8");
+				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
+				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(
 				CASDumpWriter.class,
