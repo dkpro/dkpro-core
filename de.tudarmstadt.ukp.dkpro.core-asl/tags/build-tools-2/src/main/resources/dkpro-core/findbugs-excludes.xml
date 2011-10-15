@@ -1,0 +1,6 @@
+<FindBugsFilter>
+  <Match>
+    <Package name="~.*\.type" />
+    <Package name="~.*\.type\..*" />
+  </Match>
+</FindBugsFilter>
