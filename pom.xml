@@ -545,7 +545,7 @@
 			<extension>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>build-tools</artifactId>
-				<version>1</version>
+				<version>2</version>
 			</extension>
 		</extensions>
 	</build>
