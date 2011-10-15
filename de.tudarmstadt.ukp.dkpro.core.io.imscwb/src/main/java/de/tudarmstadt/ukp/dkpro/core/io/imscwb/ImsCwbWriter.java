@@ -33,6 +33,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -44,12 +45,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class ImsCwbWriter
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_OUTPUT_FILE = "OutputFile";
-	@ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = true)
+	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
+	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private File outputFile;
 
-	public static final String PARAM_ENCODING = "Encoding";
-	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+	public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+	@ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
 	public static final String PARAM_WRITE_POS = "WritePOS";
@@ -72,7 +73,7 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_CQPWEB_COMPATIBILITY, mandatory = true, defaultValue = "false")
 	private boolean cqpwebCompatibility;
 
-	private static final String LS = IOUtils.LINE_SEPARATOR;
+	private static final String LS = "\n";
 	private static final String TAB = "\t";
 	private BufferedWriter bw;
 	private int currentId;

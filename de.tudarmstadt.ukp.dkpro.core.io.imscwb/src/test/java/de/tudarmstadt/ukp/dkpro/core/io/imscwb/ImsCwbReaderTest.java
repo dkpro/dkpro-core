@@ -44,13 +44,13 @@ public class ImsCwbReaderTest
         CollectionReader reader = createCollectionReader(
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
-                ImsCwbReader.PARAM_TAGGER_TAGSET, "src/test/resources/stts.map",
+                ImsCwbReader.PARAM_TAGGER_TAGSET, "classpath:stts.map",
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" }
         );
 
-        String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenführer wurde von September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai 2000 von Stefan Börzel übernommen . ";
+        String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai 2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
         
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
