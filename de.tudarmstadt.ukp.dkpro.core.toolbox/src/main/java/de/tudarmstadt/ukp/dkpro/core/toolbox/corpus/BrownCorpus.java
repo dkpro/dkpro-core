@@ -246,7 +246,7 @@ public class BrownCorpus extends XMLCorpus {
                 if (sentenceElement instanceof Element) {
                     List<String> tokens = new ArrayList<String>();
                     for (Object tokenElement : tokenXP.selectNodes( sentenceElement )) {
-                        if (sentenceElement instanceof Element) {
+                        if (tokenElement instanceof Element) {
                             tokens.add( ((Element) tokenElement).getText() );
                         }
                     }

@@ -30,8 +30,10 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.jaxen.JaxenException;
 import org.jaxen.SimpleNamespaceContext;
 import org.jaxen.XPath;
 import org.jaxen.dom4j.Dom4jXPath;
@@ -179,7 +181,11 @@ public class BrownCorpusReader extends ResourceCollectionReaderBase
                 }
             }
         }
-        catch (Exception e) {
+        catch (IOException e) {
+            throw new CollectionException(e);
+        } catch (JaxenException e) {
+            throw new CollectionException(e);
+        } catch (DocumentException e) {
             throw new CollectionException(e);
         }
         
