@@ -19,8 +19,11 @@ public class WackyCorpusTest
         assertEquals(WackyLanguageEdition.DEWAC.name(), corpus.getName());
         assertEquals("de", corpus.getLanguage());
         
+        int i=0;
         while (corpus.hasNextText()) {
-            System.out.println(corpus.getNextText());
+            corpus.getNextText();
+            i++;
         }
+        assertEquals(4, i);
     }
 }
