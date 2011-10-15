@@ -7,6 +7,7 @@
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox</artifactId>
+  <name>DKPro Core ASL - Toolbox</name>
   <version>1.3.0-SNAPSHOT</version>
   <dependencies>
   	<dependency>
