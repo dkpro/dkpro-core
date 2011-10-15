@@ -644,6 +644,9 @@
 								</goals>
 								<configuration>
 									<linkXRef>false</linkXRef>
+									<excludes>
+										<exclude>**/type/**/*.java</exclude>
+									</excludes>
 								</configuration>
 							</execution>
 						</executions>
