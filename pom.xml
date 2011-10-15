@@ -542,6 +542,11 @@
 				<artifactId>wagon-webdav</artifactId>
 				<version>1.0-beta-2</version>
 			</extension>
+			<extension>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>build-tools</artifactId>
+				<version>1</version>
+			</extension>
 		</extensions>
 	</build>
 	<profiles>
@@ -681,6 +686,7 @@
 								<configuration>
 									<findbugsXmlOutput>true</findbugsXmlOutput>
 									<xmlOutput>true</xmlOutput>
+									<excludeFilterFile>dkpro-core/findbugs-excludes.xml</excludeFilterFile>
 								</configuration>
 							</execution>
 						</executions>
