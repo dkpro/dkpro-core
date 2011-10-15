@@ -85,32 +85,35 @@ public class TazSentenceIterable implements Iterable<Sentence> {
             BufferedReader br = new BufferedReader(new InputStreamReader(gzip, charset));
             
             String line;
+            boolean insideSentence = false;
+            Sentence currentSentence = null;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
                 if (line.startsWith("-------- Text:")) {
                     // start of new text - resume here if queue has been emptied again
-//                    break;
+                    break;
                 }
-//                if (line.equals("<s>")) {
-//                    insideSentence = true;
-//                    currentSentence = new Sentence();
-//                    continue;
-//                }
-//                
-//                if (line.equals("</s>")) {
-//                    insideSentence = false;
-//                    sentences.add(currentSentence);
-//                }
-//                
-//                if (insideSentence && currentSentence != null) {
-//                    String[] parts = line.split("\t");
-//                    if (parts.length != 3) {
-//                        throw new IOException("Ill-formed line: " + line);
-//                    }
-//                    currentSentence.addToken(parts[0]);
-//                    currentSentence.addLemma(parts[2]);
-//                }
+                if (line.equals("<s>")) {
+                    insideSentence = true;
+                    currentSentence = new Sentence();
+                    continue;
+                }
+                
+                if (line.equals("</s>")) {
+                    insideSentence = false;
+                    sentences.add(currentSentence);
+                }
+                
+                if (insideSentence && currentSentence != null) {
+                    String[] parts = line.split("\t");
+                    if (parts.length != 3) {
+                        throw new IOException("Ill-formed line: " + line);
+                    }
+                    currentSentence.addToken(parts[0]);
+                    currentSentence.addLemma(parts[2]);
+                }
             }
+            br.close();
         }
     }
 }
