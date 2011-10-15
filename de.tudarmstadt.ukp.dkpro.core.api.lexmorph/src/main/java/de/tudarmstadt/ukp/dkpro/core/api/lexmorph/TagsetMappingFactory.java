@@ -19,10 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.api.lexmorph;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +28,8 @@ import java.util.Properties;
 
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
+
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class TagsetMappingFactory
 {
@@ -66,9 +66,11 @@ public class TagsetMappingFactory
 		return loadProperties(TagsetMappingFactory.class.getResource("tagset/"+aLanguage+"-"+aTool+".map"));
 	}
 
-    public static final Map<String, String> getMapping(String tagsetFilename) throws MalformedURLException
+    public static final Map<String, String> getMapping(String tagsetFilename) throws IOException
     {
-        return loadProperties(new File(tagsetFilename).toURI().toURL());
+        return loadProperties(
+                ResourceUtils.resolveLocation(tagsetFilename, null, null)
+        );
     }
 
     private static Map<String, String> loadProperties(URL aUrl)
