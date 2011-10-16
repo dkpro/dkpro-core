@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 import static org.uimafit.util.CasUtil.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,6 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
+import org.annolab.tt4j.TreeTaggerException;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
@@ -169,7 +171,11 @@ public class TreeTaggerPosLemmaTT4J
 					aCas.addFsToIndexes(lemma[i]);
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch (TreeTaggerException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+		catch (IOException e) {
 			throw new AnalysisEngineProcessException(e);
 		}
 	}
