@@ -1132,7 +1132,7 @@ public abstract class PDFLayoutEventStripper
 		}
 	}
 
-	static class Block
+	class Block
 		extends BasicBlock
 	{
 		float linespacing;
