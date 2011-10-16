@@ -42,10 +42,10 @@ import org.apache.uima.resource.ResourceAccessException;
  */
 public class ResourceUtils
 {
-	private static Map<URL, File> urlFileCache;
+	private static Map<String, File> urlFileCache;
 
 	static {
-		urlFileCache = new HashMap<URL, File>();
+		urlFileCache = new HashMap<String, File>();
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class ResourceUtils
 		// Lets see if we already have a file for this URL in our cache. Maybe
 		// the file has been deleted meanwhile, so we also check if the file
 		// actually still exists on disk.
-		File file = urlFileCache.get(aUrl);
+		File file = urlFileCache.get(aUrl.toString());
 		if (!aCache || (file == null) || !file.exists()) {
 			// Create a temporary file and try to preserve the file extension
 			String suffix = ".temp";
@@ -107,35 +107,40 @@ public class ResourceUtils
 
 			// Remember the file
 			if (aCache) {
-				urlFileCache.put(aUrl, file);
+				urlFileCache.put(aUrl.toString(), file);
 			}
 		}
 
 		return file;
 	}
 
-	
+
 	/**
 	 * @param is An {@link InputStream}.
-	 * @param filename The filename this stream was created from. 
+	 * @param filename The filename this stream was created from.
 	 * @return A resolved {@link InputStream}
 	 * @throws IOException
 	 *             if something went wrong during resolving the input stream
 	 */
-	public static InputStream resolveCompressedInputStream(InputStream is, String filename) throws IOException {
+	public static InputStream resolveCompressedInputStream(InputStream is, String filename)
+		throws IOException
+	{
         String nameLC = filename.toLowerCase();
 	    InputStream resolvedIS;
 	    if (nameLC.endsWith(".gz")) {
             resolvedIS = new GZIPInputStream(is);
         }
         else if (nameLC.endsWith(".bzip2") || nameLC.endsWith(".bz2")) {
-            is.read(new byte[2]); // Read the stream markers "BZ"
+            int read = is.read(new byte[2]); // Read the stream markers "BZ"
+            if (read != 2) {
+            	throw new IOException("Unable to read BZ marker from stream");
+            }
             resolvedIS = new CBZip2InputStream(is);
         }
         else {
             resolvedIS = is;
         }
-	    
+
 	    return resolvedIS;
 	}
 
@@ -216,5 +221,4 @@ public class ResourceUtils
 		// Otherwise bail out
 		throw new FileNotFoundException("No file found at [" + aLocation + "]");
 	}
-
 }
