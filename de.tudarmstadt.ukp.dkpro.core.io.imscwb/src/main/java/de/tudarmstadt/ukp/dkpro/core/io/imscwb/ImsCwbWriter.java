@@ -107,13 +107,13 @@ public class ImsCwbWriter
 			// if the documentTag is written as well keep the id, else use the uri instead
 			if (writeDocumentTag) {
 				if (documentId == null || documentId.length() == 0) {
-					documentId = new Integer(currentId).toString();
+					documentId = Integer.toString(currentId);
 				}
 				documentId = documentId.replaceAll("[^\\d\\w_]", "_");
 			}
 			else {
 				if (documentUri == null || documentUri.length() == 0) {
-					documentUri = new Integer(currentId).toString();
+					documentUri = Integer.toString(currentId);
 				}
 				documentId = documentUri.replaceAll("[^\\d\\w_]", "_");
 			}
