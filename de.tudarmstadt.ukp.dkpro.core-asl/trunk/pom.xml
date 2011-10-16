@@ -57,49 +57,21 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>serializer</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.uimafit</groupId>
-				<artifactId>uimafit</artifactId>
-				<version>1.2.0</version>
-			</dependency>
-			<dependency>
-				<groupId>xerces</groupId>
-				<artifactId>xercesImpl</artifactId>
-				<version>2.9.1</version>
-			</dependency>
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>xalan</artifactId>
-				<version>2.7.1</version>
-			</dependency>
-			<dependency>
-				<groupId>com.ibm.icu</groupId>
-				<artifactId>icu4j</artifactId>
-				<version>4.0.1</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>2.0</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.5</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-core</artifactId>
-				<version>3.0.5.RELEASE</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.ant</groupId>
-				<artifactId>ant</artifactId>
-				<version>1.8.1</version>
-			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
@@ -310,6 +282,76 @@
 				<artifactId>uimaj-document-annotation</artifactId>
 				<version>2.3.1</version>
 			</dependency>
+			<dependency>
+				<groupId>org.uimafit</groupId>
+				<artifactId>uimafit</artifactId>
+				<version>1.2.0</version>
+			</dependency>
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>2.9.1</version>
+			</dependency>
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>xalan</artifactId>
+				<version>2.7.1</version>
+			</dependency>
+			<dependency>
+				<groupId>xalan</groupId>
+				<artifactId>serializer</artifactId>
+				<version>2.7.1</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>3.0.5.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>1.8.1</version>
+			</dependency>
+			<dependency>
+				<groupId>trove</groupId>
+				<artifactId>trove</artifactId>
+				<version>2.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.1</version>
+				<exclusions>
+					<exclusion>
+						<groupId>jdom</groupId>
+						<artifactId>jdom</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xom</groupId>
+						<artifactId>xom</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<modules>
@@ -425,6 +467,17 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>javancss-maven-plugin</artifactId>
 					<version>2.0</version>
+					<dependencies>
+						<!--  
+							Per default depends on a jaxen version with draws in a jdom version
+							that has a broken pom and does pass Artifactory's consistency checks
+						 -->
+						<dependency>
+							<groupId>jaxen</groupId>
+							<artifactId>jaxen</artifactId>
+							<version>1.1.1</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -656,17 +709,6 @@
 								</configuration>
 							</execution>
 						</executions>
-						<dependencies>
-							<!--  
-								Per default depends on a jaxen version with draws in a jdom version
-								that has a broken pom and does pass Artifactory's consistency checks
-							 -->
-							<dependency>
-								<groupId>jaxen</groupId>
-								<artifactId>jaxen</artifactId>
-								<version>1.1.1</version>
-							</dependency>
-						</dependencies>
 					</plugin>
 				</plugins>
 			</build>
