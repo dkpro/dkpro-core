@@ -918,7 +918,7 @@ public abstract class PDFLayoutEventStripper
 		this.shouldSeparateByBeads = aShouldSeparateByBeads;
 	}
 
-	class LineBlock
+	static class LineBlock
 	{
 		final List<Line> lines;
 		final float linespacing;
@@ -954,7 +954,7 @@ public abstract class PDFLayoutEventStripper
 		}
 	}
 
-	class Prediction
+	static class Prediction
 	{
 		float lineheight;
 		float linespacing;
@@ -963,7 +963,7 @@ public abstract class PDFLayoutEventStripper
 		float quality;
 	}
 
-	class Line
+	static class Line
 		extends BasicBlock
 	{
 		final int start;
@@ -1049,7 +1049,7 @@ public abstract class PDFLayoutEventStripper
 		}
 	}
 
-	class BasicBlock
+	static class BasicBlock
 	{
 		float left;
 		float top;
@@ -1132,7 +1132,7 @@ public abstract class PDFLayoutEventStripper
 		}
 	}
 
-	class Block
+	static class Block
 		extends BasicBlock
 	{
 		float linespacing;
