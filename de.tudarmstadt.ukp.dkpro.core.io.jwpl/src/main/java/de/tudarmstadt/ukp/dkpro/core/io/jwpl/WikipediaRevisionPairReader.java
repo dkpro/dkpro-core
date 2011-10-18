@@ -60,7 +60,14 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory=true, defaultValue="10000")
     private int maxChange;
 
+    /** The number of revision pairs that should be skipped in the beginning. */
+    public static final String PARAM_SKIP_FIRST_N_PAIRS= "SkipFirstNPairs";
+    @ConfigurationParameter(name = PARAM_SKIP_FIRST_N_PAIRS, mandatory=false)
+    protected int skipFirstNPairs;
+    
     private Timestamp savedTimestamp;
+    
+    private int nrOfRevisionsProcessed;
 
     @Override
     public void initialize(UimaContext context)
@@ -68,6 +75,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     {
         super.initialize(context);
         savedTimestamp = null;
+        nrOfRevisionsProcessed = 0;
     }
 
     @Override
@@ -89,16 +97,31 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             JCas revView1 = jcas.createView(REVISION_1);
             JCas revView2 = jcas.createView(REVISION_2);
 
-            Revision revision1 = getRevision(savedTimestamp);
-            Revision revision2 = getRevision(currentTimestamp);
+            Revision revision1;
+            Revision revision2;
+            String text1 = "";
+            String text2 = "";
 
-            String text1 = getText(revision1);
-            String text2 = getText(revision2);
+            if (nrOfRevisionsProcessed < skipFirstNPairs) {
+                if (nrOfRevisionsProcessed % 1000 == 0) {
+                    this.getLogger().log(Level.INFO, "Skipping " + nrOfRevisionsProcessed + "th revision.");
+                }
+                // create fake revisions
+                revision1 = getRevision(null);
+                revision2 = getRevision(null);
+            }
+            else {
+                revision1 = getRevision(savedTimestamp);
+                revision2 = getRevision(currentTimestamp);
 
-            int difference = Math.abs(text1.length() - text2.length()); 
-            if (difference < minChange || difference > maxChange) {
-                text1 = "";
-                text2 = "";
+                text1 = getText(revision1);
+                text2 = getText(revision2);
+
+                int difference = Math.abs(text1.length() - text2.length()); 
+                if (difference < minChange || difference > maxChange) {
+                    text1 = "";
+                    text2 = "";
+                }
             }
 
             revView1.setDocumentText(text1);
@@ -115,6 +138,8 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             if (!timestampIter.hasNext()) {
                 savedTimestamp = null;
             }
+            
+            nrOfRevisionsProcessed++;
         }
         catch (WikiApiException e) {
             throw new CollectionException(e);
