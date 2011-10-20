@@ -51,7 +51,7 @@ public class Web1TFrequencyCountProvider
     }
     
     @Override
-    public long getFrequency(String phrase)
+    protected long getFrequencyFromProvider(String phrase)
         throws IOException
     {
         return searcher.getFrequency(phrase);
