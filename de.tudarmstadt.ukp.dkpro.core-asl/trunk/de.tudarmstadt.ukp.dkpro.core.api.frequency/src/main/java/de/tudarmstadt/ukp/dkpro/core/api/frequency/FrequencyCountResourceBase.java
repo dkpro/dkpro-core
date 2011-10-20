@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import org.uimafit.component.Resource_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
@@ -25,6 +26,10 @@ public abstract class FrequencyCountResourceBase
     extends Resource_ImplBase
     implements FrequencyCountProvider
 {
+    
+    public static final String PARAM_SCALE_DOWN_FACTOR = "ScaleDownFactor";
+    @ConfigurationParameter(name = PARAM_SCALE_DOWN_FACTOR, mandatory = true, defaultValue = "1")
+    protected int scaleDownFactor;
 
     protected FrequencyCountProvider provider;
     

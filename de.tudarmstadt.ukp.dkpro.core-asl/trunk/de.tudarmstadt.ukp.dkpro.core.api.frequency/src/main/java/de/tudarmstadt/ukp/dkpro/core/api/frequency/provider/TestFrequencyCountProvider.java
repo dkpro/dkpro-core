@@ -27,9 +27,8 @@ public class TestFrequencyCountProvider
     extends FrequencyCountProviderBase
 {
 
-    
     @Override
-    public long getFrequency(String phrase)
+    protected long getFrequencyFromProvider(String phrase)
         throws IOException
     {
         return new Double(Math.floor(
