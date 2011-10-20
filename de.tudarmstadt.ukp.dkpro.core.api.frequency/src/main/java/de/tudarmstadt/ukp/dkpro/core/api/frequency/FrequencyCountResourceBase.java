@@ -32,7 +32,7 @@ public abstract class FrequencyCountResourceBase
     protected String scaleDownFactor;
 
     protected FrequencyCountProvider provider;
-    
+
     @Override
     public long getFrequency(String phrase)
         throws Exception

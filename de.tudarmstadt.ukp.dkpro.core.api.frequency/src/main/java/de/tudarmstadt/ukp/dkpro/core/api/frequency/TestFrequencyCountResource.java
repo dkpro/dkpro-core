@@ -23,6 +23,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.TestFrequencyCountProvider;
 
 /**
@@ -46,6 +47,7 @@ public final class TestFrequencyCountResource
 		}
 
   		provider = new TestFrequencyCountProvider();
+        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
 
 		return true;
 	}
