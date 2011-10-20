@@ -30,7 +30,6 @@ import org.junit.Test;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ExternalResource;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.TestFrequencyCountResource;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
 public class TestFrequencyCountResourceTest
@@ -47,6 +46,7 @@ public class TestFrequencyCountResourceTest
         {
             try {
                 System.out.println(provider.getNrOfDistinctNgrams(1));
+                System.out.println(provider.getFrequency("aa"));
             }
             catch (Exception e) {
                 throw new AnalysisEngineProcessException(e);
@@ -63,7 +63,8 @@ public class TestFrequencyCountResourceTest
         bindResource(
                 aaed,
                 Annotator.FREQUENCY_COUNT_RESOURCE,
-                TestFrequencyCountResource.class
+                TestFrequencyCountResource.class,
+                TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"
         );
 
         // Check the external resource was injected
