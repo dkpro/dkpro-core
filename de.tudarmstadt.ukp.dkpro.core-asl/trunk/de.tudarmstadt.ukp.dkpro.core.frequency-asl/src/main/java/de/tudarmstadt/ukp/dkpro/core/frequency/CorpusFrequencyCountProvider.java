@@ -48,7 +48,7 @@ public class CorpusFrequencyCountProvider
     }
     
     @Override
-    public long getFrequency(String phrase) throws Exception {
+    protected long getFrequencyFromProvider(String phrase) throws Exception {
         int phraseLength = FrequencyUtils.getPhraseLength(phrase);
         
         if (cfd.hasCondition(phraseLength)) {
