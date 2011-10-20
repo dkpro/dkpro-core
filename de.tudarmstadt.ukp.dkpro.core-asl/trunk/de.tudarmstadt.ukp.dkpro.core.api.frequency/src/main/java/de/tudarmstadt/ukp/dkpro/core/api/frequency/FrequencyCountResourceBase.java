@@ -29,7 +29,7 @@ public abstract class FrequencyCountResourceBase
     
     public static final String PARAM_SCALE_DOWN_FACTOR = "ScaleDownFactor";
     @ConfigurationParameter(name = PARAM_SCALE_DOWN_FACTOR, mandatory = true, defaultValue = "1")
-    protected int scaleDownFactor;
+    protected String scaleDownFactor;
 
     protected FrequencyCountProvider provider;
     
