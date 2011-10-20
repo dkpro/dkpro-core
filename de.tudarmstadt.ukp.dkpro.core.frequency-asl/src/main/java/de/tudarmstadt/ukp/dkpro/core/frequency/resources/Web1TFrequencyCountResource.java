@@ -27,6 +27,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFrequencyCountProvider;
 
 /**
@@ -69,6 +70,9 @@ public final class Web1TFrequencyCountResource
     		        new Integer(minLevel),
     		        new Integer(maxLevel)
     		);
+    		
+    		// FIXME should not be necessary to call that here - other implementations might forget to call it
+            ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
