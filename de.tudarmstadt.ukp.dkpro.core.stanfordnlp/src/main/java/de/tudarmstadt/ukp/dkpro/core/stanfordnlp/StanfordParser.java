@@ -331,12 +331,16 @@ public class StanfordParser
 		for (TypedDependency currTypedDep : gs.typedDependencies()) {
 			int govIndex = currTypedDep.gov().index();
 			int depIndex = currTypedDep.dep().index();
-			Token govToken = tokens.get(govIndex - 1);
-			Token depToken = tokens.get(depIndex - 1);
+			if (govIndex != 0) {
+				// Stanford CoreNLP produces a depencency relation between a verb and ROOT-0 which
+				// is not token at all!
+				Token govToken = tokens.get(govIndex - 1);
+				Token depToken = tokens.get(depIndex - 1);
 
-			sfAnnotator.createDependencyAnnotation(currAnnotationToParse.getBegin(),
-					currAnnotationToParse.getEnd(), currTypedDep.reln(), govToken,
-					depToken);
+				sfAnnotator.createDependencyAnnotation(currAnnotationToParse.getBegin(),
+						currAnnotationToParse.getEnd(), currTypedDep.reln(), govToken,
+						depToken);
+			}
 		}
 	}
 

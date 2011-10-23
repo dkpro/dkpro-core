@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ling.TaggedWord;
-import edu.stanford.nlp.tagger.maxent.CustomTaggerConfig;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 /**
@@ -52,7 +51,7 @@ public class StanfordPosTagger
 
 		try {
 			String url = resolveLocation(modelPath, this, getContext()).toString();
-			tagger = new MaxentTagger(url, new CustomTaggerConfig("-model", url), false);
+			tagger = new MaxentTagger(url/*, new CustomTaggerConfig("-model", url), false*/);
 		}
 		catch (ClassNotFoundException e) {
 			throw new ResourceInitializationException(e);

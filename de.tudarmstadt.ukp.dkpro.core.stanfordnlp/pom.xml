@@ -24,9 +24,9 @@
 		</dependency>
 		<dependency>
 			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>corenlp</artifactId>
-			<version>1.0.4.20110605-UKP</version>
-		</dependency>
+  			<artifactId>stanford-corenlp</artifactId>
+  			<version>1.2.0</version>
+  		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
