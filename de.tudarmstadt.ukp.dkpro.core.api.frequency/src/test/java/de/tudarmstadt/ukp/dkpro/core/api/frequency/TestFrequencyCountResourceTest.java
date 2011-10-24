@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.bindResource;
 
@@ -56,19 +55,18 @@ public class TestFrequencyCountResourceTest
     
     @Test
     public void configureAggregatedExample() throws Exception {
-        AnalysisEngineDescription aed1 = createPrimitiveDescription(Annotator.class);
+        AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class);
     
         // Bind external resource to the aggregate
-        AnalysisEngineDescription aaed = createAggregateDescription(aed1);
         bindResource(
-                aaed,
+                desc,
                 Annotator.FREQUENCY_COUNT_RESOURCE,
                 TestFrequencyCountResource.class,
                 TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"
         );
 
         // Check the external resource was injected
-        AnalysisEngine ae = createAggregate(aaed);
+        AnalysisEngine ae = createAggregate(desc);
         ae.process(ae.newJCas());
     }
 }
