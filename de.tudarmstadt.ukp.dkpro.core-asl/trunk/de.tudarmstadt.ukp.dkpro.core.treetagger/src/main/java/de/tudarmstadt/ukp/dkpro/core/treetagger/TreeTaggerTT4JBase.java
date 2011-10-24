@@ -21,7 +21,6 @@ import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.getUrlAs
 import static java.io.File.separator;
 import static org.annolab.tt4j.Util.getSearchPaths;
 import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +47,7 @@ import org.apache.uima.util.Level;
 import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 
@@ -415,12 +415,14 @@ public abstract class TreeTaggerTT4JBase<T>
 								+ "] at [" + propertiesLoc + "]");
 					}
 					URL mappingUrl = getClass().getResource(mappingLoc);
-					if (mappingUrl == null) {
-						throw new IOException("There is no properties file for " + "model ["
-								+ aModelName + "] at [" + mappingLoc + "]");
+					if (mappingUrl != null) {
+						mapping = loadProperties(mappingUrl);
+					}
+					else {
+						mapping = new HashMap<String, String>();
+						mapping.put("*", O.class.getName());
 					}
 
-					mapping = loadProperties(mappingUrl);
 					properties = loadProperties(propertiesUrl);
 					modelFile = getUrlAsFile(modelUrl, true);
 				}
