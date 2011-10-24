@@ -17,8 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.bindResource;
 
@@ -49,13 +48,10 @@ public class Web1tFrequencyCountProviderTest
 
     @Test
     public void configureAggregatedExample() throws Exception {
-            AnalysisEngineDescription aed1 = createPrimitiveDescription(Annotator.class);
-            AnalysisEngineDescription aed2 = createPrimitiveDescription(Annotator.class);
+            AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class);
 
-            // Bind external resource to the aggregate
-            AnalysisEngineDescription aaed = createAggregateDescription(aed1, aed2);
             bindResource(
-                    aaed,
+                    desc,
                     Annotator.MODEL_KEY,
                     Web1TFrequencyCountResource.class,
                     Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/web1t/",
@@ -64,7 +60,7 @@ public class Web1tFrequencyCountProviderTest
             );
 
             // Check the external resource was injected
-            AnalysisEngine ae = createAggregate(aaed);
+            AnalysisEngine ae = createPrimitive(desc);
             ae.process(ae.newJCas());
     }
 }
