@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.ExternalResourceFactory.bindResource;
 
@@ -66,7 +66,7 @@ public class TestFrequencyCountResourceTest
         );
 
         // Check the external resource was injected
-        AnalysisEngine ae = createAggregate(desc);
+        AnalysisEngine ae = createPrimitive(desc);
         ae.process(ae.newJCas());
     }
 }
