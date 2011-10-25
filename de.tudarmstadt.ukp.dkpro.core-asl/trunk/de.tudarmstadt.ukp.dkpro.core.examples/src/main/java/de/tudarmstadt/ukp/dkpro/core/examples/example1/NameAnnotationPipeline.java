@@ -18,11 +18,11 @@
 package de.tudarmstadt.ukp.dkpro.core.examples.example1;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.CollectionReaderFactory.createDescription;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.uimafit.component.xwriter.CASDumpWriter;
 import org.uimafit.pipeline.SimplePipeline;
 
@@ -36,18 +36,22 @@ public class NameAnnotationPipeline
 	public static void main(String[] args)
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(TextReader.class,
+		CollectionReaderDescription reader = createDescription(
+				TextReader.class,
 				TextReader.PARAM_PATH, "src/test/resources/text",
 				TextReader.PARAM_PATTERNS, new String[] { INCLUDE_PREFIX + "*.txt" },
 				TextReader.PARAM_LANGUAGE, "en");
 
-		AnalysisEngine tokenizer = createPrimitive(BreakIteratorSegmenter.class);
+		AnalysisEngineDescription tokenizer = createPrimitiveDescription(
+				BreakIteratorSegmenter.class);
 
-		AnalysisEngine nameFinder = createPrimitive(DictionaryAnnotator.class,
+		AnalysisEngineDescription nameFinder = createPrimitiveDescription(
+				DictionaryAnnotator.class,
 				DictionaryAnnotator.PARAM_PHRASE_FILE, "src/test/resources/dictionaries/names.txt",
 				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, Name.class.getName());
 
-		AnalysisEngine writer = createPrimitive(CASDumpWriter.class,
+		AnalysisEngineDescription writer = createPrimitiveDescription(
+				CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
 
 		SimplePipeline.runPipeline(reader, tokenizer, nameFinder, writer);
