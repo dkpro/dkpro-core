@@ -350,20 +350,20 @@ public class CasCopier
 						// new annotation (which should already be present in the
 						// destinationFS)
 						if(!foundexisting){
-							AnnotationIndex annoIndex = aDestFS.getCAS()
+							AnnotationIndex<AnnotationFS> annoIndex = aDestFS.getCAS()
 								.getAnnotationIndex(refFS.getType());
-							FSIterator<Annotation> it = annoIndex.iterator();
+							FSIterator<AnnotationFS> it = annoIndex.iterator();
 							while (it.hasNext()) {
-								Annotation fs = it.next();
+								AnnotationFS fs = it.next();
 								//TODO Caution: the following check cannot identify
 								// 	reference targets if their span has changed
 								//  during transformation, eg. due to some
 								//  TSurgeon-operation
 								// 	We cannot compare annotation-ids here, because
 								// 	the we are dealing with different instances
-								if (fs.getBegin() == ((Annotation) refFS).getBegin()
-										&& fs.getEnd() == ((Annotation) refFS).getEnd()
-										&& fs.getView().getViewName().equals(((Annotation) refFS).getView().getViewName())) {
+								if (fs.getBegin() == ((AnnotationFS) refFS).getBegin()
+										&& fs.getEnd() == ((AnnotationFS) refFS).getEnd()
+										&& fs.getView().getViewName().equals(((AnnotationFS) refFS).getView().getViewName())) {
 									aDestFS.setFeatureValue(destFeat, fs);
 									foundexisting = true;
 								}

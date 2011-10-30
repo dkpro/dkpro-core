@@ -184,7 +184,6 @@ public class StanfordParser
 		warnedAboutDependencies = false;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected LexicalizedParser getParser()
 		throws IOException
 	{
@@ -194,8 +193,7 @@ public class StanfordParser
 			lexicalizedParser.setOptionFlags("-maxLength", String.valueOf(160));
 
 			try {
-				TreebankLanguagePack tlp = (TreebankLanguagePack) ((Class) Class
-						.forName(tlpName)).newInstance();
+				TreebankLanguagePack tlp = (TreebankLanguagePack) Class.forName(tlpName).newInstance();
 				gsf = tlp.grammaticalStructureFactory();
 			}
 			catch (ClassNotFoundException e) {

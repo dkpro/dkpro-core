@@ -32,6 +32,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.Triple;
 
 /**
@@ -45,7 +46,7 @@ import edu.stanford.nlp.util.Triple;
 public class StanfordNamedEntityRecognizer
 	extends JCasAnnotator_ImplBase
 {
-	private AbstractSequenceClassifier classifier;
+	private AbstractSequenceClassifier<? extends CoreMap> classifier;
 
 	/**
 	 * Defines the NER classifier model to use. Model files are not distributed as part of DKPro
@@ -119,7 +120,7 @@ public class StanfordNamedEntityRecognizer
 		}
 	}
 
-	private AbstractSequenceClassifier getClassifierInstance(String aClassifierFile)
+	private <T extends CoreMap> AbstractSequenceClassifier<T> getClassifierInstance(String aClassifierFile)
 		throws IOException
 	{
 		this.classifierFile = aClassifierFile;
@@ -129,11 +130,13 @@ public class StanfordNamedEntityRecognizer
 					getContext());
 			is = url.openStream();
 			if (url.toString().endsWith(".gz")) {
-				// it's faster to do the buffering _outside_ the gzipping as
-				// here
+				// it's faster to do the buffering _outside_ the gzipping as here
 				is = new GZIPInputStream(is);
 			}
-			return CRFClassifier.getClassifier(is);
+			
+			@SuppressWarnings("unchecked")
+			AbstractSequenceClassifier<T> classifier = CRFClassifier.getClassifier(is);
+			return classifier;
 		}
 		catch (ClassNotFoundException e) {
 			throw new IOException(e);

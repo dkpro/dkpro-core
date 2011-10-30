@@ -21,6 +21,7 @@ import edu.stanford.nlp.ling.CoreAnnotation;
  * @author Oliver Ferschke
  *
  */
+@SuppressWarnings("rawtypes")
 public class UIMAAnnotations
 	implements CoreAnnotation<Collection>
 {
@@ -29,6 +30,4 @@ public class UIMAAnnotations
 	{
 		return Collection.class;
 	}
-
-
 }

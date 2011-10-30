@@ -24,19 +24,18 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLMProvider;
  * External resource wrapper for the Berkeley LM frequency count provider.
  * 
  * @author zesch
- *
+ * 
  */
 public final class BerkeleyLMFrequencyCountProvider
 	extends FrequencyCountResourceBase
 	implements FrequencyCountProvider
 {
 
-    public static final String PARAM_BINARY = "BinaryFile";
-    @ConfigurationParameter(name = PARAM_BINARY, mandatory = true)
-    protected String file;
-    
-    @SuppressWarnings("unchecked")
-    @Override
+	public static final String PARAM_BINARY = "BinaryFile";
+	@ConfigurationParameter(name = PARAM_BINARY, mandatory = true)
+	protected String file;
+
+	@Override
 	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
 		throws ResourceInitializationException
 	{
@@ -45,11 +44,11 @@ public final class BerkeleyLMFrequencyCountProvider
 		}
 
 		try {
-            provider = new BerkeleyLMProvider(file);
-        }
-        catch (Exception e) {
-            throw new ResourceInitializationException(e);
-        }
+			provider = new BerkeleyLMProvider(file);
+		}
+		catch (Exception e) {
+			throw new ResourceInitializationException(e);
+		}
 
 		return true;
 	}

@@ -12,6 +12,7 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static java.lang.Character.isWhitespace;
 import static java.lang.Math.min;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -21,15 +22,13 @@ import java.util.Map;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-
-import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
+import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.process.PTBTokenizer;
@@ -130,7 +129,7 @@ extends SegmenterBase
 
 		// Prepare the tokens for processing by WordToSentenceProcessor
 		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
-		for (Token token : JCasUtil.iterate(aJCas, Token.class)) {
+		for (Token token : select(aJCas, Token.class)) {
 			CoreLabel l = new CoreLabel();
 			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
 			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
@@ -186,7 +185,6 @@ extends SegmenterBase
 //		}
     }
 
-	@SuppressWarnings("unchecked")
 	private
     Tokenizer getTokenizer(
     		final String aLanguage,
