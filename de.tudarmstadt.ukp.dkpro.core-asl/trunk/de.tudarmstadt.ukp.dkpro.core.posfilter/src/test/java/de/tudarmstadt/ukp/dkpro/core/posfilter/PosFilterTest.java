@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.posfilter;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.util.JCasUtil.*;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -27,7 +28,6 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Test;
 import org.uimafit.factory.AnalysisEngineFactory;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -62,7 +62,7 @@ public class PosFilterTest
 		engine.process(aJCas);
 
 		int i = 0;
-		for (Token token : JCasUtil.iterate(aJCas, Token.class)) {
+		for (Token token : select(aJCas, Token.class)) {
 			System.out.println(token.getCoveredText());
 			i++;
 		}
@@ -94,12 +94,12 @@ public class PosFilterTest
 
 		engine.process(aJCas);
 
-		for (POS p : JCasUtil.iterate(aJCas, POS.class)) {
+		for (POS p : select(aJCas, POS.class)) {
 			System.out.println(p);
 		}
 
 		int i = 0;
-		for (Token token : JCasUtil.iterate(aJCas, Token.class)) {
+		for (Token token : select(aJCas, Token.class)) {
 			System.out.println(token.getCoveredText());
 			i++;
 		}

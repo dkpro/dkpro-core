@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.norvig;
 
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 
 import org.apache.uima.UimaContext;
@@ -65,7 +65,7 @@ public class NorvigSpellingCorrector
 	public void process(JCas jcas)
 		throws AnalysisEngineProcessException
 	{
-		for (Token t : iterate(jcas, Token.class)) {
+		for (Token t : select(jcas, Token.class)) {
 			String token = t.getCoveredText();
 
 			// If there is no spelling error in this token, then we do not

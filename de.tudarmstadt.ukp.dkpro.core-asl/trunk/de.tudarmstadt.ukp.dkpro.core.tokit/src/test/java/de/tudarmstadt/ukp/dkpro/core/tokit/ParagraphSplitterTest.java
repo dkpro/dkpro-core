@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.tokit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -51,7 +51,7 @@ public class ParagraphSplitterTest
 		ae.process(jcas);
 
 		int i = 0;
-		for (Paragraph paragraph : iterate(jcas, Paragraph.class)) {
+		for (Paragraph paragraph : select(jcas, Paragraph.class)) {
 			if (i == 0) {
 				assertEquals("paragraph1", paragraph.getCoveredText());
 			}
@@ -86,7 +86,7 @@ public class ParagraphSplitterTest
 		ae.process(jcas);
 
 		int i = 0;
-		for (Paragraph paragraph : iterate(jcas, Paragraph.class)) {
+		for (Paragraph paragraph : select(jcas, Paragraph.class)) {
 			if (i == 0) {
 				assertEquals("paragraph1", paragraph.getCoveredText());
 			}

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.bananasplit;
 
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
@@ -74,7 +74,7 @@ public class BananaSplitterTest
 		ae.process(cb.getJCas());
 
 		int i = 0;
-		for (Token splitToken : iterate(cb.getJCas(), Token.class)) {
+		for (Token splitToken : select(cb.getJCas(), Token.class)) {
 			System.out.print("["+splitToken.getCoveredText()+"] ");
 			assertTrue(i != 0 || splitToken.getCoveredText().equals(aWord));
 			assertTrue(i != 1 || splitToken.getCoveredText().equals(aPart1));

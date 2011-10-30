@@ -132,10 +132,10 @@ extends JCasAnnotator_ImplBase
 					"No mapping found from ["+from+"] to ["+to+"] on ["+baseCas.hashCode()+"]"));
 		}
 
-		FSIndex idx = targetView.getAnnotationIndex();
-		FSIterator it = idx.iterator();
+		FSIndex<Annotation> idx = targetView.getAnnotationIndex();
+		FSIterator<Annotation> it = idx.iterator();
 		TypeSystem typeSystem = targetView.getTypeSystem();
-		Type annotationType = typeSystem.getType("uima.tcas.Annotation");
+		Type annotationType = typeSystem.getType(CAS.TYPE_NAME_ANNOTATION);
 		while (it.isValid()) {
 			FeatureStructure fs = it.get();
 
@@ -154,8 +154,7 @@ extends JCasAnnotator_ImplBase
 
 			// Now we update the offsets
 			Annotation a = (Annotation) fs;
-			Interval resolved = as.resolve(
-					new ImmutableInterval(a.getBegin(), a.getEnd()));
+			Interval resolved = as.resolve(new ImmutableInterval(a.getBegin(), a.getEnd()));
 			a.setBegin(resolved.getStart());
 			a.setEnd(resolved.getEnd());
 			it.moveToNext();

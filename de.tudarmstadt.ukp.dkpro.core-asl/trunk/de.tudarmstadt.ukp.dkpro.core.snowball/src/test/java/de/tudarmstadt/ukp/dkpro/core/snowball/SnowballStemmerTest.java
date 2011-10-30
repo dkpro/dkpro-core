@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.snowball;
 
 import static org.junit.Assert.assertTrue;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -48,7 +48,7 @@ public class SnowballStemmerTest
 		engine.process(jcas);
 
 		int i = 0;
-		for (Stem s : iterate(jcas, Stem.class)) {
+		for (Stem s : select(jcas, Stem.class)) {
 			assertTrue(i != 0 || "Automobil".equals(s.getValue()));
 			assertTrue(i != 1 || "Fenst".equals(s.getValue()));
 			i ++;
@@ -74,7 +74,7 @@ public class SnowballStemmerTest
 		engine.process(jcas);
 
 		int i = 0;
-		for (Stem s : iterate(jcas, Stem.class)) {
+		for (Stem s : select(jcas, Stem.class)) {
 			assertTrue(i != 0 || "comput".equals(s.getValue()));
 			assertTrue(i != 1 || "Comput".equals(s.getValue()));
 			assertTrue(i != 2 || "deliber".equals(s.getValue()));
@@ -82,7 +82,7 @@ public class SnowballStemmerTest
 		}
 
 		i = 0;
-		for (Token t : iterate(jcas, Token.class)) {
+		for (Token t : select(jcas, Token.class)) {
 			assertTrue(i != 0 || "comput".equals(t.getStem().getValue()));
 			assertTrue(i != 1 || "Comput".equals(t.getStem().getValue()));
 			assertTrue(i != 2 || "deliber".equals(t.getStem().getValue()));
@@ -110,7 +110,7 @@ public class SnowballStemmerTest
 		engine.process(jcas);
 
 		int i = 0;
-		for (Token t : iterate(jcas, Token.class)) {
+		for (Token t : select(jcas, Token.class)) {
 			String stem = t.getStem().getValue();
 			assertTrue(stem, i != 0 || "educ".equals(stem));
 			assertTrue(stem, i != 1 || "educ".equals(stem));
@@ -139,7 +139,7 @@ public class SnowballStemmerTest
 		engine.process(jcas);
 
 		int i = 0;
-		for (Token t : iterate(jcas, Token.class)) {
+		for (Token t : select(jcas, Token.class)) {
 			String stem = t.getStem().getValue();
 			assertTrue(stem, i != 0 || "EDUCATIONAL".equals(stem));
 			assertTrue(stem, i != 1 || "Educat".equals(stem));

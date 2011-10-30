@@ -55,7 +55,6 @@ public final class Web1TFrequencyCountResource
     @ConfigurationParameter(name=PARAM_INDEX_PATH, mandatory=false)
     private String indexPath;
     
-    @SuppressWarnings("unchecked")
     @Override
 	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
 		throws ResourceInitializationException

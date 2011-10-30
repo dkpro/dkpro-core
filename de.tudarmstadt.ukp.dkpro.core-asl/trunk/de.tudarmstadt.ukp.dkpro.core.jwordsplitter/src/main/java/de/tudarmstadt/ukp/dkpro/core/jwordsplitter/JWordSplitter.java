@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.jwordsplitter;
 
-import static org.uimafit.util.CasUtil.iterate;
+import static org.uimafit.util.CasUtil.select;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class JWordSplitter
 		Collection<FeatureStructure> toRemove = new ArrayList<FeatureStructure>();
 
 		Type type = aCas.getTypeSystem().getType(tokenType);
-		for (AnnotationFS token : iterate(aCas, type)) {
+		for (AnnotationFS token : select(aCas, type)) {
 			split(aCas, token, token.getCoveredText(), toAdd, toRemove);
 		}
 

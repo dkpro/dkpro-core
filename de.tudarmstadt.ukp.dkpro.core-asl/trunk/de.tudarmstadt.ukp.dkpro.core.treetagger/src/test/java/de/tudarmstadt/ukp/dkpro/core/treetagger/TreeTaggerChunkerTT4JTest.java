@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -120,7 +120,7 @@ class TreeTaggerChunkerTT4JTest
         // test Chunk annotations
         if (tagClasses != null && tags != null) {
 	        int i = 0;
-	        for (Chunk posAnnotation : iterate(aJCas, Chunk.class)) {
+	        for (Chunk posAnnotation : select(aJCas, Chunk.class)) {
 	        	System.out.println(posAnnotation.getChunkValue()+": ["+posAnnotation.getCoveredText()+"]");
 	            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
 	            assertEquals("In position "+i, tags[i], posAnnotation.getChunkValue());

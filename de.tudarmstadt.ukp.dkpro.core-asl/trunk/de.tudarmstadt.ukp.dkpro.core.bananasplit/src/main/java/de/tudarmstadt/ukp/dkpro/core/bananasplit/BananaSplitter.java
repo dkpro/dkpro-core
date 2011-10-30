@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.bananasplit;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.CasUtil.iterate;
+import static org.uimafit.util.CasUtil.select;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -101,7 +101,7 @@ public class BananaSplitter
 		Collection<FeatureStructure> toRemove = new ArrayList<FeatureStructure>();
 
 		Type type = aCas.getTypeSystem().getType(tokenType);
-		for (AnnotationFS token : iterate(aCas, type)) {
+		for (AnnotationFS token : select(aCas, type)) {
 			split(aCas, token, token.getCoveredText(), toAdd, toRemove);
 		}
 
