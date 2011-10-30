@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +48,7 @@ public class CamelCaseTokenSegmenter
 		List<Token> toAdd = new ArrayList<Token>();
 		List<Token> toRemove = new ArrayList<Token>();
 
-		for (Token t : iterate(aJCas, Token.class)) {
+		for (Token t : select(aJCas, Token.class)) {
 			if ((t.getEnd() - t.getBegin()) < 2) {
 				continue;
 			}

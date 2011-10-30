@@ -30,6 +30,7 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
@@ -68,7 +69,7 @@ public class ApplyChangesAnnotator
 
 	protected void applyChanges(JCas aSourceView, JCas aTargetView)
 	{
-		FSIndex idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
+		FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
 		getContext().getLogger().log(INFO, "Found " + idx.size() + " changes");
 
@@ -93,7 +94,7 @@ public class ApplyChangesAnnotator
 				// We will make use of this fact here to skip change annotations that
 				// are covered by others. The earliest longest change wins - this means
 				// the one with the smallest begin offset and the largest end offset.
-				FSIterator it = idx.iterator();
+				FSIterator<Annotation> it = idx.iterator();
 
 				SofaChangeAnnotation top = (SofaChangeAnnotation) it.get();
 				edits.add(top);

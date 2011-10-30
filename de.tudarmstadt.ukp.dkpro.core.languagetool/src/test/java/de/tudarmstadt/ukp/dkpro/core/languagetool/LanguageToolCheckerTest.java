@@ -19,8 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.uimafit.util.JCasUtil.iterate;
+import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -40,7 +39,6 @@ public class LanguageToolCheckerTest
 		String testDocument = "A sentence with a error in the Hitchhiker's Guide tot he Galaxy .";
 
 		AnalysisEngine engine = createPrimitive(LanguageToolChecker.class,
-				createTypeSystemDescription(),
 				LanguageToolChecker.PARAM_LANGUAGE_CODE, "en");
 		JCas aJCas = engine.newJCas();
 
@@ -51,7 +49,7 @@ public class LanguageToolCheckerTest
 
 		// copy input match type annotations to an array
 		int count = 0;
-		for (GrammarAnomaly ga : iterate(aJCas, GrammarAnomaly.class)) {
+		for (GrammarAnomaly ga : select(aJCas, GrammarAnomaly.class)) {
 			System.out.println("Error " + (count + 1) + " (" + ga.getBegin() + ", " + ga.getEnd()
 					+ "):" + ga.getDescription());
 			count++;

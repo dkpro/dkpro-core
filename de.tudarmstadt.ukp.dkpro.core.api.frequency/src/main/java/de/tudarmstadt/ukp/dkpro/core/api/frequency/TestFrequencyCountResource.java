@@ -37,8 +37,7 @@ public final class TestFrequencyCountResource
 	implements FrequencyCountProvider
 {
 
-    @SuppressWarnings("unchecked")
-    @Override
+	@Override
 	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
 		throws ResourceInitializationException
 	{

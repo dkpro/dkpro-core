@@ -40,10 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class Web1TFormatWriterTest {
 
-    static {
-        org.apache.log4j.BasicConfigurator.configure();
-    }
-
     private final String INDEX_FOLDER = "target/Index/";
     private final int MIN_NGRAM = 1;
     private final int MAX_NGRAM = 3;

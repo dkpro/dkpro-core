@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.stopwordremover;
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 import static org.apache.uima.util.Level.FINE;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.CasUtil.iterate;
+import static org.uimafit.util.CasUtil.select;
 import static org.uimafit.util.JCasUtil.getView;
 
 import java.io.IOException;
@@ -276,7 +276,7 @@ public class StopWordRemover
 				throw new IllegalStateException("Type [" + typeName + "] not found in type system");
 			}
 
-			for (AnnotationFS fs : iterate(aJCas.getCas(), t)) {
+			for (AnnotationFS fs : select(aJCas.getCas(), t)) {
 				candidateList.add(fs);
 			}
 		}
