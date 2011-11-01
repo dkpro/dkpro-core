@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>org.annolab.tt4j</groupId>
 			<artifactId>org.annolab.tt4j</artifactId>
-			<version>1.0.15</version>
+			<version>1.0.16</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -69,6 +69,13 @@
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-models-en</artifactId>
+					<version>2010111500</version>
+					<scope>test</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-models-zh</artifactId>
 					<version>2010111500</version>
 					<scope>test</scope>
 					<optional>true</optional>

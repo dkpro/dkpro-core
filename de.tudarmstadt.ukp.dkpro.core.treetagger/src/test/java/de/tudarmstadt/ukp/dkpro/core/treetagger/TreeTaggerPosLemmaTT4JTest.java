@@ -83,6 +83,17 @@ class TreeTaggerPosLemmaTT4JTest
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
 
+    @Test
+    public
+    void treeTaggerAnnotatorChineseTest()
+    	throws Exception
+    {
+        runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 .",
+        		new String[] { "_",  "_", "_",  "_", "风轮", "_", "_", "_", "_",  "_" },
+        		new String[] { "ng", "n", "d",  "v", "n",   "f", "u", "n", "nl", "w" },
+        		new String[] { "O",  "O", "O",  "O", "O",   "O", "O", "O", "O",  "O" } );
+    }
+
 	@Test
 	@Ignore("Platform specific")
 	public void testOddCharacters()
