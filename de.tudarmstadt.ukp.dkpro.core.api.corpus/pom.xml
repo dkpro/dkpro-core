@@ -23,6 +23,6 @@
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<version>1.3.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.corpus</artifactId>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.corpus-asl</artifactId>
 	<name>DKPro Core ASL - Corpus API</name>
 </project>
