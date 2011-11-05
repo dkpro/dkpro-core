@@ -53,7 +53,7 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
