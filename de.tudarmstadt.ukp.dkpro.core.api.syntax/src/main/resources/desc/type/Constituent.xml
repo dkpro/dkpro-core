@@ -11,17 +11,17 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>ConstituentType</name>
+          <name>constituentType</name>
           <description/>
           <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
         <featureDescription>
-          <name>Parent</name>
+          <name>parent</name>
           <description>The parent constituent</description>
           <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
         </featureDescription>
         <featureDescription>
-          <name>Children</name>
+          <name>children</name>
           <description/>
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
           <elementType>uima.tcas.Annotation</elementType>
