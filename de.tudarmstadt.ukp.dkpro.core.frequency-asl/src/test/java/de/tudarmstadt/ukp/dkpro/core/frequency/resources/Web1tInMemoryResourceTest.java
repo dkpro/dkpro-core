@@ -31,7 +31,7 @@ import org.uimafit.descriptor.ExternalResource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
-public class Web1tFrequencyCountProviderTest
+public class Web1tInMemoryResourceTest
 {
     public static class Annotator extends JCasAnnotator_ImplBase {
             final static String MODEL_KEY = "FrequencyProvider";
@@ -53,10 +53,9 @@ public class Web1tFrequencyCountProviderTest
             bindResource(
                     desc,
                     Annotator.MODEL_KEY,
-                    Web1TFrequencyCountResource.class,
-                    Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/web1t/",
-                    Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-                    Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"
+                    Web1TInMemoryFrequencyCountResource.class,
+                    Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION, "src/test/resources/web1t/",
+                    Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"
             );
 
             // Check the external resource was injected

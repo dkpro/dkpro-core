@@ -19,7 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.util;
 
 import org.apache.commons.lang.time.StopWatch;
 
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownCorpus;
@@ -28,7 +29,7 @@ public class ProviderBenchmark
 {
     public static void main(String[] args) throws Exception
     {
-        Web1TFrequencyCountProvider web1t = new Web1TFrequencyCountProvider(args);
+        Web1TProviderBase web1t = new Web1TFileAccessProvider(args);
         BrownCorpus brown = new BrownCorpus();
 
         StopWatch watch = new StopWatch();

@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,32 +26,29 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TInMemoryProvider;
 
 /**
- * External resource wrapper for the Web1T frequency count provider.
+ * External resource wrapper for the Web1T in memory frequency count provider.
  * 
  * @author zesch
  *
  */
-public final class Web1TFrequencyCountResource
-    extends FrequencyCountResourceBase
+public final class Web1TInMemoryFrequencyCountResource
+	extends FrequencyCountResourceBase
 {
-
+    
     // Attention! Can only have String parameters in external resources.
-    
-    public static final String PARAM_MIN_NGRAM_LEVEL = "MinLevel";
-    @ConfigurationParameter(name = PARAM_MIN_NGRAM_LEVEL, mandatory = true, defaultValue = "1")
-    protected String minLevel;
-    
     public static final String PARAM_MAX_NGRAM_LEVEL = "MaxLevel";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LEVEL, mandatory = true, defaultValue = "5")
     protected String maxLevel;
     
-    public static final String PARAM_INDEX_PATH = "IndexPath";
-    @ConfigurationParameter(name = PARAM_INDEX_PATH, mandatory = true)
-    private String indexPath;
-    
+    public static final String PARAM_MODEL_LOCATION= ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
+    protected String modelLocation;
+
+    @SuppressWarnings("unchecked")
     @Override
 	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
 		throws ResourceInitializationException
@@ -62,10 +58,9 @@ public final class Web1TFrequencyCountResource
 		}
 
         try {
-    		provider = new Web1TFileAccessProvider(
-    		        new File(indexPath),
-    		        new Integer(minLevel),
-    		        new Integer(maxLevel)
+    		provider = new Web1TInMemoryProvider(
+    		        modelLocation,
+    		        Integer.parseInt(maxLevel)
     		);
     		
     		// FIXME should not be necessary to call that here - other implementations might forget to call it
