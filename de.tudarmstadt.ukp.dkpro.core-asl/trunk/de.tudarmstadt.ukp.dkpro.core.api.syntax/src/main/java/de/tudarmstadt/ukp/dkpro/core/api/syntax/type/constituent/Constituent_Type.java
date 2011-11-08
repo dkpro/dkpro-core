@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Fri Feb 11 14:39:28 CET 2011
+ * Updated by JCasGen Tue Nov 08 14:39:15 CET 2011
  * @generated */
 public class Constituent_Type extends Annotation_Type {
   /** @generated */
@@ -42,75 +42,75 @@ public class Constituent_Type extends Annotation_Type {
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
  
   /** @generated */
-  final Feature casFeat_ConstituentType;
+  final Feature casFeat_constituentType;
   /** @generated */
-  final int     casFeatCode_ConstituentType;
+  final int     casFeatCode_constituentType;
   /** @generated */ 
   public String getConstituentType(int addr) {
-        if (featOkTst && casFeat_ConstituentType == null)
-      jcas.throwFeatMissing("ConstituentType", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_ConstituentType);
+        if (featOkTst && casFeat_constituentType == null)
+      jcas.throwFeatMissing("constituentType", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_constituentType);
   }
   /** @generated */    
   public void setConstituentType(int addr, String v) {
-        if (featOkTst && casFeat_ConstituentType == null)
-      jcas.throwFeatMissing("ConstituentType", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-    ll_cas.ll_setStringValue(addr, casFeatCode_ConstituentType, v);}
+        if (featOkTst && casFeat_constituentType == null)
+      jcas.throwFeatMissing("constituentType", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    ll_cas.ll_setStringValue(addr, casFeatCode_constituentType, v);}
     
   
  
   /** @generated */
-  final Feature casFeat_Parent;
+  final Feature casFeat_parent;
   /** @generated */
-  final int     casFeatCode_Parent;
+  final int     casFeatCode_parent;
   /** @generated */ 
   public int getParent(int addr) {
-        if (featOkTst && casFeat_Parent == null)
-      jcas.throwFeatMissing("Parent", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_Parent);
+        if (featOkTst && casFeat_parent == null)
+      jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_parent);
   }
   /** @generated */    
   public void setParent(int addr, int v) {
-        if (featOkTst && casFeat_Parent == null)
-      jcas.throwFeatMissing("Parent", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-    ll_cas.ll_setRefValue(addr, casFeatCode_Parent, v);}
+        if (featOkTst && casFeat_parent == null)
+      jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    ll_cas.ll_setRefValue(addr, casFeatCode_parent, v);}
     
   
  
   /** @generated */
-  final Feature casFeat_Children;
+  final Feature casFeat_children;
   /** @generated */
-  final int     casFeatCode_Children;
+  final int     casFeatCode_children;
   /** @generated */ 
   public int getChildren(int addr) {
-        if (featOkTst && casFeat_Children == null)
-      jcas.throwFeatMissing("Children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_Children);
+        if (featOkTst && casFeat_children == null)
+      jcas.throwFeatMissing("children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    return ll_cas.ll_getRefValue(addr, casFeatCode_children);
   }
   /** @generated */    
   public void setChildren(int addr, int v) {
-        if (featOkTst && casFeat_Children == null)
-      jcas.throwFeatMissing("Children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-    ll_cas.ll_setRefValue(addr, casFeatCode_Children, v);}
+        if (featOkTst && casFeat_children == null)
+      jcas.throwFeatMissing("children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+    ll_cas.ll_setRefValue(addr, casFeatCode_children, v);}
     
    /** @generated */
   public int getChildren(int addr, int i) {
-        if (featOkTst && casFeat_Children == null)
-      jcas.throwFeatMissing("Children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+        if (featOkTst && casFeat_children == null)
+      jcas.throwFeatMissing("children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
     if (lowLevelTypeChecks)
-      return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i, true);
-    jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i);
-  return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i);
+      return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_children), i, true);
+    jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_children), i);
+  return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_children), i);
   }
    
   /** @generated */ 
   public void setChildren(int addr, int i, int v) {
-        if (featOkTst && casFeat_Children == null)
-      jcas.throwFeatMissing("Children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
+        if (featOkTst && casFeat_children == null)
+      jcas.throwFeatMissing("children", "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
     if (lowLevelTypeChecks)
-      ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i, v, true);
-    jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i);
-    ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_Children), i, v);
+      ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_children), i, v, true);
+    jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_children), i);
+    ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_children), i, v);
   }
  
  
@@ -141,16 +141,16 @@ public class Constituent_Type extends Annotation_Type {
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
  
-    casFeat_ConstituentType = jcas.getRequiredFeatureDE(casType, "ConstituentType", "uima.cas.String", featOkTst);
-    casFeatCode_ConstituentType  = (null == casFeat_ConstituentType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_ConstituentType).getCode();
+    casFeat_constituentType = jcas.getRequiredFeatureDE(casType, "constituentType", "uima.cas.String", featOkTst);
+    casFeatCode_constituentType  = (null == casFeat_constituentType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_constituentType).getCode();
 
  
-    casFeat_Parent = jcas.getRequiredFeatureDE(casType, "Parent", "uima.tcas.Annotation", featOkTst);
-    casFeatCode_Parent  = (null == casFeat_Parent) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Parent).getCode();
+    casFeat_parent = jcas.getRequiredFeatureDE(casType, "parent", "uima.tcas.Annotation", featOkTst);
+    casFeatCode_parent  = (null == casFeat_parent) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_parent).getCode();
 
  
-    casFeat_Children = jcas.getRequiredFeatureDE(casType, "Children", "uima.cas.FSArray", featOkTst);
-    casFeatCode_Children  = (null == casFeat_Children) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_Children).getCode();
+    casFeat_children = jcas.getRequiredFeatureDE(casType, "children", "uima.cas.FSArray", featOkTst);
+    casFeatCode_children  = (null == casFeat_children) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_children).getCode();
 
  
     casFeat_syntacticFunction = jcas.getRequiredFeatureDE(casType, "syntacticFunction", "uima.cas.String", featOkTst);
