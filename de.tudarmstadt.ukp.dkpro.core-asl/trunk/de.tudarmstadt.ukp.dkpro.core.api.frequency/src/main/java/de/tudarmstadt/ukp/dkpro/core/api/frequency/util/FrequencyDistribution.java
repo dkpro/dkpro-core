@@ -89,7 +89,7 @@ public class FrequencyDistribution<T> {
 	    return this.freqDist.keySet();
 	}
 	
-	public void addSample(T o, int number) {
+	public void addSample(T o, long number) {
 		this.n = this.n + number;
 		if (freqDist.containsKey(o)) {
 			freqDist.put(o, freqDist.get(o) + number);
