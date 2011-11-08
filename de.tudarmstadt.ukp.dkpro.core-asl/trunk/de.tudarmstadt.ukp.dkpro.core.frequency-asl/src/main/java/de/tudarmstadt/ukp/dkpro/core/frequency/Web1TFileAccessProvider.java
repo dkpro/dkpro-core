@@ -22,16 +22,12 @@ import java.io.IOException;
 
 import com.googlecode.jweb1t.JWeb1TSearcher;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 
-public class Web1TFrequencyCountProvider
-    extends FrequencyCountProviderBase
+public class Web1TFileAccessProvider
+    extends Web1TProviderBase
 {
 
-    JWeb1TSearcher searcher;
-    
-    public Web1TFrequencyCountProvider(String ... indexFiles)
+    public Web1TFileAccessProvider(String ... indexFiles)
         throws IOException
     {
         searcher = new JWeb1TSearcher(indexFiles);
@@ -44,42 +40,9 @@ public class Web1TFrequencyCountProvider
      * @param maxN The maximum ngram length.
      * @throws IOException
      */
-    public Web1TFrequencyCountProvider(File indexPath, int minN, int maxN)
+    public Web1TFileAccessProvider(File indexPath, int minN, int maxN)
         throws IOException
     {
         searcher = new JWeb1TSearcher(indexPath, minN, maxN);
-    }
-    
-    @Override
-    protected long getFrequencyFromProvider(String phrase)
-        throws IOException
-    {
-        return searcher.getFrequency(phrase);
-    }
-
-    @Override
-    public long getNrOfNgrams(int n) {
-        return searcher.getNrOfNgrams(n);
-    }
-    
-    public long getNrOfTokens() {
-        return searcher.getNrOfNgrams(1);
-    }
-    
-    @Override
-    public long getNrOfDistinctNgrams(int n)
-        throws Exception
-    {
-        return searcher.getNrOfDistinctNgrams(n);
-    }
- 
-    @Override
-    public double getLogLikelihood(int termFrequency, int sizeOfCorpus, String term) throws Exception {
-        return FrequencyUtils.loglikelihood(
-                termFrequency,
-                sizeOfCorpus,
-                getFrequency(term),
-                getNrOfTokens()
-        );
-    }
+    }    
 }

@@ -33,7 +33,8 @@ import com.googlecode.jweb1t.JWeb1TIndexer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFrequencyCountProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
@@ -47,7 +48,7 @@ public class Web1TFormatWriterTest {
     @Test
     public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath() throws Exception {
 
-        Web1TFrequencyCountProvider web1tProvider = prepareWeb1TFormatTest(
+        Web1TProviderBase web1tProvider = prepareWeb1TFormatTest(
                 new String[] {
                         Token.class.getName() + "/pos/PosValue",
                         Token.class.getName() + "/lemma/value" 
@@ -66,7 +67,7 @@ public class Web1TFormatWriterTest {
     @Test
     public void web1TFormatTestWithMultiSlashedTypesAsFeaturePath() throws Exception {
 
-        Web1TFrequencyCountProvider web1tProvider = prepareWeb1TFormatTest(
+        Web1TProviderBase web1tProvider = prepareWeb1TFormatTest(
                 new String[] {
                         Token.class.getName() + "/lemma/value" 
                 }
@@ -81,7 +82,7 @@ public class Web1TFormatWriterTest {
     @Test
     public void web1TFormatTest_() throws Exception {
 
-        Web1TFrequencyCountProvider web1tProvider = prepareWeb1TFormatTest(
+        Web1TProviderBase web1tProvider = prepareWeb1TFormatTest(
                 new String[] { Token.class.getName() }
         );
 
@@ -92,14 +93,14 @@ public class Web1TFormatWriterTest {
 
     }
 
-    private Web1TFrequencyCountProvider prepareWeb1TFormatTest(String[] inputTypes)
+    private Web1TProviderBase prepareWeb1TFormatTest(String[] inputTypes)
         throws Exception
     {
         deleteIndexFolder();
         writeWeb1TFormat(inputTypes);
         createIndex();
 
-        Web1TFrequencyCountProvider web1tProvider = new Web1TFrequencyCountProvider(
+        Web1TProviderBase web1tProvider = new Web1TFileAccessProvider(
                 new File(INDEX_FOLDER),
                 MIN_NGRAM,
                 MAX_NGRAM

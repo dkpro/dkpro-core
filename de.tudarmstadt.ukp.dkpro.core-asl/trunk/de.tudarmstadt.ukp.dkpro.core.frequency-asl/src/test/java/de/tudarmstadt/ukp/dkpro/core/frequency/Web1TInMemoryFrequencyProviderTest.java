@@ -19,37 +19,19 @@ package de.tudarmstadt.ukp.dkpro.core.frequency;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-
 import org.junit.Test;
 
-public class Web1TFrequencyProviderTest
+public class Web1TInMemoryFrequencyProviderTest
 {
 
     @Test
-    public void web1tTest_indexFiles() throws Exception
+    public void web1tTestInMemoryTest() throws Exception
     {
-        Web1TProviderBase web1t = new Web1TFileAccessProvider(
-                "src/test/resources/web1t/index-1gms",
-                "src/test/resources/web1t/index-2gms"
-        );
-
-        test(web1t);
-    }
-
-    @Test
-    public void web1tTest_path() throws Exception
-    {
-        Web1TProviderBase web1t = new Web1TFileAccessProvider(
-                new File("src/test/resources/web1t/"),
-                1,
+        Web1TProviderBase web1t = new Web1TInMemoryProvider(
+                "src/test/resources/web1t/",
                 2
         );
 
-        test(web1t);
-    }
-
-    private void test(Web1TProviderBase web1t) throws Exception {
         assertEquals(2147436244l, web1t.getFrequency("!"));
         assertEquals(528,         web1t.getFrequency("Nilmeier"));
         assertEquals(106,         web1t.getFrequency("influx takes"));
@@ -59,6 +41,5 @@ public class Web1TFrequencyProviderTest
         assertEquals(6042, web1t.getNrOfNgrams(2));
         assertEquals(11, web1t.getNrOfDistinctNgrams(1));
         assertEquals(21, web1t.getNrOfDistinctNgrams(2));
-
     }
 }
