@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
-import gnu.trove.TObjectIntHashMap;
+import gnu.trove.map.hash.TObjectLongHashMap;
 
 /**
  * Inspired by nltk.probability.FreqDist
@@ -26,19 +26,19 @@ import gnu.trove.TObjectIntHashMap;
  */
 public class TroveFrequencyDistribution<T> {
     
-	private TObjectIntHashMap<T> freqDist;
+	private TObjectLongHashMap<T> freqDist;
 	
 	private long n;
 	
 	public TroveFrequencyDistribution() {
-		freqDist = new TObjectIntHashMap<T>();
+		freqDist = new TObjectLongHashMap<T>();
 		n = 0;
 	}
 	
 	public TroveFrequencyDistribution(Iterable<T> iterable) {
 		this();
 		for (T o : iterable) {
-			addObject(o);
+			addSample(o, 1);
 		}
 	}
 	
@@ -47,12 +47,12 @@ public class TroveFrequencyDistribution<T> {
 	}
 	
 	public void inc(T o) {
-		addObject(o);
+		addSample(o, 1);
 	}
 	
 	public void incAll(Iterable<T> iterable ) {
 		for (T o : iterable) {
-			addObject(o);
+			addSample(o, 1);
 		}	
 	}
 	
@@ -83,16 +83,16 @@ public class TroveFrequencyDistribution<T> {
 	    return freqDist.keys();
 	}
 	
-	private void addObject(T o) {
-		this.n++;
-		if (freqDist.containsKey(o)) {
-			freqDist.put(o, freqDist.get(o) + 1);
-		}
-		else {
-			freqDist.put(o, 1);
-		}
-	}
-	
+    public void addSample(T o, long number) {
+        this.n = this.n + number;
+        if (freqDist.containsKey(o)) {
+            freqDist.put(o, freqDist.get(o) + number);
+        }
+        else {
+            freqDist.put(o, number);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     @Override
     public String toString()
@@ -101,7 +101,7 @@ public class TroveFrequencyDistribution<T> {
         for (Object o : getKeys()) {
             sb.append((T) o.toString());
             sb.append(" - ");
-            sb.append(freqDist.get((T) o));
+            sb.append(freqDist.get(o));
             sb.append(System.getProperty("line.separator"));
         }
 
