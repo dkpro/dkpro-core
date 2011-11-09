@@ -38,9 +38,7 @@
 		<dependency>
 			<groupId>net.sf.trove4j</groupId>
 			<artifactId>trove4j</artifactId>
-			<version>3.0.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>2.0.2</version>
 		</dependency>
 	</dependencies>
 </project>
