@@ -280,8 +280,7 @@ public class StanfordAnnotator
 
 		Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(
 				type, begin, end);
-		constAnno.setStringValue(type.getFeatureByBaseName("ConstituentType"),
-				constituentType);
+		constAnno.setConstituentType(constituentType);
 		return constAnno;
 	}
 
@@ -311,8 +310,7 @@ public class StanfordAnnotator
 		POS constAnno = (POS) aJCas.getCas().createAnnotation(type, begin, end);
 
 		// save original (unmapped) postype in feature
-		constAnno
-				.setStringValue(type.getFeatureByBaseName("PosValue"), posType);
+		constAnno.setPosValue(posType);
 		return constAnno;
 	}
 
