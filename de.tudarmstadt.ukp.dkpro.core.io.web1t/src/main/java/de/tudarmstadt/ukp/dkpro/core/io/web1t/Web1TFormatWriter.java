@@ -250,7 +250,9 @@ public class Web1TFormatWriter
                 reader.close();
 
                 File outputPath = new File(inputFile.getParentFile(), level + "gms/");
-                outputPath.mkdir();
+                if (!outputPath.mkdir()) {
+                    throw new IOException("Could not create output directory: " + outputPath.getAbsolutePath());
+                }
                 File outputFile = new File(outputPath, level + ".txt");
 
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
@@ -261,7 +263,7 @@ public class Web1TFormatWriter
                 for (String key : keyList) {
                     writer.write(key);
                     writer.write(TAB);
-                    writer.write(new Long(fd.getCount(key)).toString());
+                    writer.write(Long.valueOf(fd.getCount(key)).toString());
                     writer.write(LF);
                 }
                 writer.flush();
@@ -287,7 +289,9 @@ public class Web1TFormatWriter
                 File outputFile = new File(outputPath, level + ".txt");
 
                 if (outputFile.exists()) {
-                    outputFile.delete();
+                    if (!outputFile.delete()) {
+                        throw new IOException("Could not delete already existing output file.");
+                    }
                 }
                 FileUtils.touch(outputFile);
 
