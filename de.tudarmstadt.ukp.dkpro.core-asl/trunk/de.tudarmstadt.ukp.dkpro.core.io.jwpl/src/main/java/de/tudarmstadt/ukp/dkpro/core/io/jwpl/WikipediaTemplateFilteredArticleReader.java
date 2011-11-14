@@ -425,8 +425,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	public Progress[] getProgress()
 	{
 		return new Progress[] { new ProgressImpl(
-				new Long(currentArticleIndex).intValue(),
-				new Long(nrOfArticles).intValue(), Progress.ENTITIES) };
+				Long.valueOf(currentArticleIndex).intValue(),
+				Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
 	}
 
 	private String getDocumentText(Page page)
@@ -521,8 +521,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	{
 		DocumentMetaData metaData = DocumentMetaData.create(jcas);
 		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
-		metaData.setCollectionId(new Integer(page.getPageId()).toString());
-		metaData.setDocumentId(new Integer(page.getPageId()).toString());
+		metaData.setCollectionId(Integer.valueOf(page.getPageId()).toString());
+		metaData.setDocumentId(Integer.valueOf(page.getPageId()).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
 	}
 }

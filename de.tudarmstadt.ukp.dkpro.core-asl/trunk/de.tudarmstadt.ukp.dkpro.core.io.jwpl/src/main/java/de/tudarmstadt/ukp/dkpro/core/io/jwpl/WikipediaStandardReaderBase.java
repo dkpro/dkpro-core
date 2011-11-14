@@ -153,11 +153,9 @@ public abstract class WikipediaStandardReaderBase
 				pageSet = new HashSet<Page>();
 
 				//load pages
-				if(pageIds!=null){
-					for(String id:pageIds){
-						if(id!=null&&!id.isEmpty()){
-							pageSet.add(wiki.getPage(Integer.parseInt(id)));
-						}
+				for(String id:pageIds){
+					if(id!=null&&!id.isEmpty()){
+						pageSet.add(wiki.getPage(Integer.parseInt(id)));
 					}
 				}
 				if(pageTitles!=null){
@@ -240,8 +238,8 @@ public abstract class WikipediaStandardReaderBase
 	public Progress[] getProgress()
 	{
 		return new Progress[] { new ProgressImpl(
-				new Long(currentArticleIndex).intValue(),
-				new Long(nrOfArticles).intValue(), Progress.ENTITIES) };
+				Long.valueOf(currentArticleIndex).intValue(),
+				Long.valueOf(nrOfArticles).intValue(), Progress.ENTITIES) };
 	}
 
 	protected String getDocumentText(Page page)
@@ -256,8 +254,8 @@ public abstract class WikipediaStandardReaderBase
 	{
 		DocumentMetaData metaData = DocumentMetaData.create(jcas);
 		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
-		metaData.setCollectionId(new Integer(page.getPageId()).toString());
-		metaData.setDocumentId(new Integer(page.getPageId()).toString());
+		metaData.setCollectionId(Integer.valueOf(page.getPageId()).toString());
+		metaData.setDocumentId(Integer.valueOf(page.getPageId()).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
 	}
 
