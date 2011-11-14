@@ -111,8 +111,8 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
     {
         return new Progress[] {
                 new ProgressImpl(
-                        new Long(currentArticleIndex).intValue(),
-                        new Long(nrOfArticles).intValue(),
+                        Long.valueOf(currentArticleIndex).intValue(),
+                        Long.valueOf(nrOfArticles).intValue(),
                         Progress.ENTITIES
                 )
         };
@@ -121,7 +121,7 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
     private void addDocumentMetaData(JCas jcas, int id) throws WikiApiException {
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(wiki.getTitle(id).toString());
-        metaData.setCollectionId(new Integer(id).toString());
+        metaData.setCollectionId(Integer.valueOf(id).toString());
         metaData.setLanguage(dbconfig.getLanguage().toString());
 
     }
