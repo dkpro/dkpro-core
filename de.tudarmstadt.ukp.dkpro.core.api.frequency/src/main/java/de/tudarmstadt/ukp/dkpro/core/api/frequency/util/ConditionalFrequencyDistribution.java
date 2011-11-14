@@ -41,8 +41,8 @@ public class ConditionalFrequencyDistribution<C,V> {
 	
 	public ConditionalFrequencyDistribution(Map<C,Iterable<V>> samples) {
 		this();
-		for (C t : samples.keySet()) {
-		    addSamples(t, samples.get(t));
+		for (Map.Entry<C, Iterable<V>> entry : samples.entrySet()) {
+		    addSamples(entry.getKey(), entry.getValue());
 		}
 	}
 	
