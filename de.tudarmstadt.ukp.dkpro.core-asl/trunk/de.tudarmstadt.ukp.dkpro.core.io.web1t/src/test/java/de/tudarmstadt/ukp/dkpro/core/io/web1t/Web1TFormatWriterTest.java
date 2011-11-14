@@ -22,9 +22,11 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.junit.Before;
 import org.junit.Test;
 import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.pipeline.SimplePipeline;
@@ -41,10 +43,15 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class Web1TFormatWriterTest {
 
-    private final String INDEX_FOLDER = "target/Index/";
+    private File INDEX_FOLDER;
     private final int MIN_NGRAM = 1;
     private final int MAX_NGRAM = 3;
 
+    @Before
+    public void init() throws IOException {
+        INDEX_FOLDER = File.createTempFile("index", ".tmp");
+    }
+    
     @Test
     public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath() throws Exception {
 
@@ -101,7 +108,7 @@ public class Web1TFormatWriterTest {
         createIndex();
 
         Web1TProviderBase web1tProvider = new Web1TFileAccessProvider(
-                new File(INDEX_FOLDER),
+                INDEX_FOLDER,
                 MIN_NGRAM,
                 MAX_NGRAM
         );
@@ -110,7 +117,7 @@ public class Web1TFormatWriterTest {
     }
 
     private void createIndex() throws Exception {
-        JWeb1TIndexer indexCreator = new JWeb1TIndexer(INDEX_FOLDER, MAX_NGRAM);
+        JWeb1TIndexer indexCreator = new JWeb1TIndexer(INDEX_FOLDER.getAbsolutePath(), MAX_NGRAM);
         indexCreator.create();
 
     }
@@ -134,7 +141,7 @@ public class Web1TFormatWriterTest {
 
         AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
                 Web1TFormatWriter.class,
-                Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER,
+                Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
                 Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,
                 Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
                 Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM
@@ -144,7 +151,6 @@ public class Web1TFormatWriterTest {
     }
 
     private void deleteIndexFolder() {
-        File file = new File(INDEX_FOLDER);
-        file.delete();
+        INDEX_FOLDER.delete();
     }
 }
