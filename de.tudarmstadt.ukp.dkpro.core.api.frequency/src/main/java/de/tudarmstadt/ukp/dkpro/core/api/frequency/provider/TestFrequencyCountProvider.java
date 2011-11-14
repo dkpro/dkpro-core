@@ -34,25 +34,25 @@ public class TestFrequencyCountProvider
         return new Double(Math.floor(
                             Math.pow(
                                     10.0,
-                                    new Integer(phrase.length()).doubleValue())
+                                    Integer.valueOf(phrase.length()).doubleValue())
                             )
                          ).longValue();
     }
 
     @Override
     public long getNrOfNgrams(int n) {
-        return 100 * n;
+        return 100l * n;
     }
     
     @Override
     public long getNrOfDistinctNgrams(int n)
         throws Exception
     {
-        return 10 * n;
+        return 10l * n;
     }
     
     @Override
     public long getNrOfTokens() {
-        return 100;
+        return 100l;
     }
 }
