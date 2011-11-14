@@ -96,14 +96,14 @@ public abstract class WikipediaRevisionReaderBase extends WikipediaReaderBase
 
 	    parser = pf.createParser();
 
-        if (pageIter.hasNext()) {
-            currentArticle = pageIter.next();
-        }
-        else {
-            new IOException("No articles in database.");
-        }
-
         try {
+            if (pageIter.hasNext()) {
+                currentArticle = pageIter.next();
+            }
+            else {
+                throw new IOException("No articles in database.");
+            }
+
             this.revisionEncoder = new RevisionApi(dbconfig);
 
             this.timestampIter = getTimestampIter(currentArticle.getPageId());
@@ -147,8 +147,8 @@ public abstract class WikipediaRevisionReaderBase extends WikipediaReaderBase
     {
         return new Progress[] {
                 new ProgressImpl(
-                        new Long(currentArticleIndex).intValue(),
-                        new Long(nrOfArticles).intValue(),
+                        Long.valueOf(currentArticleIndex).intValue(),
+                        Long.valueOf(nrOfArticles).intValue(),
                         Progress.ENTITIES
                 )
         };
@@ -181,8 +181,8 @@ public abstract class WikipediaRevisionReaderBase extends WikipediaReaderBase
     protected void addDocumentMetaData(JCas jcas, int pageId, int revisionId) throws WikiTitleParsingException {
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(currentArticle.getTitle().getWikiStyleTitle());
-        metaData.setCollectionId(new Integer(pageId).toString());
-        metaData.setDocumentId(new Integer(revisionId).toString());
+        metaData.setCollectionId(Integer.valueOf(pageId).toString());
+        metaData.setDocumentId(Integer.valueOf(revisionId).toString());
         metaData.setLanguage(dbconfig.getLanguage().toString());
 
     }
