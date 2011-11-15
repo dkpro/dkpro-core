@@ -250,9 +250,7 @@ public class Web1TFormatWriter
                 reader.close();
 
                 File outputPath = new File(inputFile.getParentFile(), level + "gms/");
-                if (!outputPath.mkdir()) {
-                    throw new IOException("Could not create output directory: " + outputPath.getAbsolutePath());
-                }
+                FileUtils.forceMkdir(outputPath);
                 File outputFile = new File(outputPath, level + ".txt");
 
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
