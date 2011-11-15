@@ -21,13 +21,11 @@ import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.pipeline.SimplePipeline;
 
@@ -43,15 +41,12 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class Web1TFormatWriterTest {
 
-    private File INDEX_FOLDER;
     private final int MIN_NGRAM = 1;
     private final int MAX_NGRAM = 3;
 
-    @Before
-    public void init() throws IOException {
-        INDEX_FOLDER = File.createTempFile("index", ".tmp");
-    }
-    
+    @Rule
+    public TemporaryFolder workspace = new TemporaryFolder();
+
     @Test
     public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath() throws Exception {
 
@@ -103,12 +98,11 @@ public class Web1TFormatWriterTest {
     private Web1TProviderBase prepareWeb1TFormatTest(String[] inputTypes)
         throws Exception
     {
-        deleteIndexFolder();
         writeWeb1TFormat(inputTypes);
         createIndex();
 
         Web1TProviderBase web1tProvider = new Web1TFileAccessProvider(
-                INDEX_FOLDER,
+                workspace.getRoot(),
                 MIN_NGRAM,
                 MAX_NGRAM
         );
@@ -117,7 +111,7 @@ public class Web1TFormatWriterTest {
     }
 
     private void createIndex() throws Exception {
-        JWeb1TIndexer indexCreator = new JWeb1TIndexer(INDEX_FOLDER.getAbsolutePath(), MAX_NGRAM);
+        JWeb1TIndexer indexCreator = new JWeb1TIndexer(workspace.getRoot().getAbsolutePath(), MAX_NGRAM);
         indexCreator.create();
 
     }
@@ -141,16 +135,12 @@ public class Web1TFormatWriterTest {
 
         AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
                 Web1TFormatWriter.class,
-                Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
+                Web1TFormatWriter.PARAM_TARGET_LOCATION, workspace.getRoot().getAbsolutePath(),
                 Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,
                 Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
                 Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM
         );
 
         SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
-    }
-
-    private void deleteIndexFolder() {
-        INDEX_FOLDER.delete();
     }
 }
