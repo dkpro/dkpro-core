@@ -12,6 +12,8 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
 import java.util.Collection;
 
+import org.apache.uima.jcas.tcas.Annotation;
+
 import edu.stanford.nlp.ling.CoreAnnotation;
 
 /**
@@ -23,11 +25,12 @@ import edu.stanford.nlp.ling.CoreAnnotation;
  */
 @SuppressWarnings("rawtypes")
 public class UIMAAnnotations
-	implements CoreAnnotation<Collection>
+	implements CoreAnnotation<Collection<Annotation>>
 {
+	@SuppressWarnings("unchecked")
 	@Override
-	public Class<Collection> getType()
+	public Class<Collection<Annotation>> getType()
 	{
-		return Collection.class;
+		return (Class<Collection<Annotation>>) (Class) Collection.class;
 	}
 }
