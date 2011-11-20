@@ -195,11 +195,6 @@ public class StanfordAnnotator
 			POS pos = createPOSAnnotation(span.getSource(), span.getTarget(),
 					nodeLabelValue);
 
-			// only add POS to index if we want POS-tagging
-			if (createPosTags) {
-				aJCas.addFsToIndexes(pos);
-			}
-
 			// in any case: get the token that is covered by the POS
 			// TODO how about multi word prepositions etc. (e.g. "such as")
 			List<Token> coveredToken = JCasUtil.selectCovered(aJCas,
@@ -207,6 +202,12 @@ public class StanfordAnnotator
 			// the POS should only cover one token
 			assert coveredToken.size() == 1;
 			nodeFS = coveredToken.get(0);
+
+			// only add POS to index if we want POS-tagging
+			if (createPosTags) {
+				aJCas.addFsToIndexes(pos);
+				((Token) nodeFS).setPos(pos);
+			}
 
 			// Lemmatization
 			if (createLemmas) {

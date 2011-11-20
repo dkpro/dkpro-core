@@ -52,8 +52,10 @@ public class StanfordParserTest
 	static JCas englishCas = null;
 	static JCas germanCas = null;
 
-	static final String documentEnglish = "We need a very complicated example sentence, which contains as many constituents and dependencies as possible.";
-	static final String documentGerman = "Wir brauchen ein sehr kompliziertes Beispiel, welches möglichst viele Konstituenten und Dependenzen beinhaltet .";
+	static final String documentEnglish = "We need a very complicated example sentence, which " +
+			"contains as many constituents and dependencies as possible.";
+	static final String documentGerman = "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
+			"möglichst viele Konstituenten und Dependenzen beinhaltet .";
 
 	// TODO Maybe test link to parents (not tested by syntax tree recreation)
 

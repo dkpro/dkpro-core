@@ -65,10 +65,15 @@ public class TreeUtils
 	 * @throws CASException
 	 */
 	public static Tree createStanfordTree(Annotation root)
-		throws CASException
 	{
 		TreeFactory tFact = new LabeledScoredTreeFactory(CoreLabel.factory());
-		JCas aJCas = root.getCAS().getJCas();
+		JCas aJCas;
+		try {
+			aJCas = root.getCAS().getJCas();
+		}
+		catch (CASException e) {
+			throw new IllegalStateException("Unable to get JCas from JCas wrapper");
+		}
 
 		// define the new (root) node
 		Tree rootNode;
