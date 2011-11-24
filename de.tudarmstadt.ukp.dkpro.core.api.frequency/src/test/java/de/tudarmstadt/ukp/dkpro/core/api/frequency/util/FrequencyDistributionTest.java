@@ -44,4 +44,28 @@ public class FrequencyDistributionTest
         assertEquals(1, fd.getCount("This"));
         assertEquals(2, fd.getCount("test"));
     }
+
+    @Test
+    public void cfdTest_specialToken() {
+        
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.inc(", ");
+        fd.inc(". ");
+        fd.inc(".");
+        fd.inc(",");
+        fd.inc("\t");
+        
+        System.out.println(fd);
+        
+        assertEquals(5, fd.getN());
+        assertEquals(5, fd.getB());
+        
+        assertEquals(0, fd.getCount("humpelgrumpf"));
+        assertEquals(1, fd.getCount(", "));
+        assertEquals(1, fd.getCount(","));
+        assertEquals(1, fd.getCount(". "));
+        assertEquals(1, fd.getCount("."));
+        assertEquals(1, fd.getCount("\t"));
+    }
+
 }
