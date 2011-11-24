@@ -54,11 +54,12 @@ public class FrequencyDistributionTest
         fd.inc(".");
         fd.inc(",");
         fd.inc("\t");
+        fd.inc(",\t");
         
         System.out.println(fd);
         
-        assertEquals(5, fd.getN());
-        assertEquals(5, fd.getB());
+        assertEquals(6, fd.getN());
+        assertEquals(6, fd.getB());
         
         assertEquals(0, fd.getCount("humpelgrumpf"));
         assertEquals(1, fd.getCount(", "));
@@ -66,6 +67,7 @@ public class FrequencyDistributionTest
         assertEquals(1, fd.getCount(". "));
         assertEquals(1, fd.getCount("."));
         assertEquals(1, fd.getCount("\t"));
+        assertEquals(1, fd.getCount(",\t"));
     }
 
 }
