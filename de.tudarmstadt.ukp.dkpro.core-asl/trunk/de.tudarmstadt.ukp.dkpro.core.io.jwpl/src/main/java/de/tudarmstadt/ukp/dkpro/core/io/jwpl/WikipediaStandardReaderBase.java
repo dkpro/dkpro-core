@@ -204,10 +204,14 @@ public abstract class WikipediaStandardReaderBase
 
 		page = pageIter.next();
 
+        try {
+            getUimaContext().getLogger().log(Level.FINE,
+                    "title: " + page.getTitle());
+        }
+        catch (WikiTitleParsingException e1) {
+        }
+        
 		try {
-			getUimaContext().getLogger().log(Level.FINE,
-					"title: " + page.getTitle());
-
 			addDocumentMetaData(jcas, page);
 
 			if (!isValidPage(page)) {
