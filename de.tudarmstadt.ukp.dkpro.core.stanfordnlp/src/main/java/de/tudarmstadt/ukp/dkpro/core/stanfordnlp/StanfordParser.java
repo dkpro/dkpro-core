@@ -265,8 +265,7 @@ public class StanfordParser
 			/*
 			 * Split sentence to tokens for annotating indexes
 			 */
-			for (Token token : JCasUtil.subiterate(aJCas, Token.class, currAnnotationToParse,
-					false, true)) {
+			for (Token token : JCasUtil.selectCovered(Token.class, currAnnotationToParse)) {
 				tokenizedSentence.add(getPennTokenText(token));
 				tokens.add(token);
 			}
