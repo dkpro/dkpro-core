@@ -203,16 +203,13 @@ public abstract class WikipediaStandardReaderBase
 		super.getNext(jcas);
 
 		page = pageIter.next();
+        currentArticleIndex++;
 
-        try {
+		try {
             getUimaContext().getLogger().log(Level.FINE,
                     "title: " + page.getTitle());
-        }
-        catch (WikiTitleParsingException e1) {
-        }
-        
-		try {
-			addDocumentMetaData(jcas, page);
+
+            addDocumentMetaData(jcas, page);
 
 			if (!isValidPage(page)) {
 				jcas.setDocumentText("");
@@ -228,11 +225,10 @@ public abstract class WikipediaStandardReaderBase
 			}
 
 		}
-		catch (WikiApiException e) {
-			throw new CollectionException(e);
-		}
-
-		currentArticleIndex++;
+        catch (WikiTitleParsingException e1) {
+            jcas.setDocumentText("");
+            return;
+        }
 	}
 
 	protected abstract boolean isValidPage(Page page)
