@@ -15,45 +15,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.toolbox.core;
+package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
 import java.net.MalformedURLException;
+import java.util.Queue;
 
-import de.tudarmstadt.ukp.dkpro.core.toolbox.core.util.TagUtil;
+import org.apache.uima.jcas.JCas;
+import org.uimafit.pipeline.JCasIterable;
+import org.uimafit.util.JCasUtil;
 
-public class Tag
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+
+public class TokenIterable 
+    extends CorpusIterableBase<String>
 {
 
-    private String tag;
-    private String simplifiedTag;
-
-    public Tag(String tag, String language) throws MalformedURLException
+    public TokenIterable(JCasIterable jcasIterable, String language)
     {
-        super();
-        this.tag = tag;
-        this.simplifiedTag = TagUtil.getSimplifiedTag(tag, language);
-    }
-    
-    public String getTag()
-    {
-        return tag;
-    }
-    public void setTag(String tag)
-    {
-        this.tag = tag;
-    }
-    public String getSimplifiedTag()
-    {
-        return simplifiedTag;
-    }
-    public void setSimplifiedTag(String simplifiedTag)
-    {
-        this.simplifiedTag = simplifiedTag;
+        super(jcasIterable, language);
     }
 
     @Override
-    public String toString()
+    protected void fillQueue(JCasIterable jcasIterable, Queue<String> items)
+        throws MalformedURLException
     {
-        return this.tag + "/" + this.simplifiedTag; 
+        if (jcasIterable.hasNext()) {
+            JCas jcas = jcasIterable.next();
+            items.addAll(JCasUtil.toText(JCasUtil.select(jcas, Token.class)));
+        }
     }
 }

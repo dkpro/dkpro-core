@@ -21,13 +21,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.WackyCorpus.WackyLanguageEdition;
 
 public class WackyCorpusTest
 {
+    
     @Test
-    public void wackyCorpusTest() throws Exception {
-        
+    public void tigerTest() throws Exception {
         WackyCorpus corpus = new WackyCorpus(
                 "src/test/resources/test_corpora/wacky/",
                 WackyLanguageEdition.DEWAC
@@ -36,11 +40,39 @@ public class WackyCorpusTest
         assertEquals(WackyLanguageEdition.DEWAC.name(), corpus.getName());
         assertEquals("de", corpus.getLanguage());
         
-        int i=0;
-        while (corpus.hasNextText()) {
-            corpus.getNextText();
-            i++;
+        int nrOfTexts = 0;
+        for (Text text : corpus.getTexts()) {
+            System.out.println(text);
+            nrOfTexts++;
         }
-        assertEquals(4, i);
+        assertEquals(4, nrOfTexts);
+        
+        int nrOfSentences = 0;
+        for (Sentence sentence : corpus.getSentences()) {
+            System.out.println(sentence);
+            nrOfSentences++;
+        }
+        assertEquals(818, nrOfSentences);
+
+        int nrOfTokens = 0;
+        for (String token : corpus.getTokens()) {
+            System.out.println(token);
+            nrOfTokens++;
+        }
+        assertEquals(12946, nrOfTokens);
+
+        int nrOfTags = 0;
+        for (Tag tag : corpus.getTags()) {
+            System.out.println(tag);
+            nrOfTags++;
+        }
+        assertEquals(12946, nrOfTags);
+
+        int nrOfTaggedTokens = 0;
+        for (TaggedToken tt : corpus.getTaggedTokens()) {
+            System.out.println(tt);
+            nrOfTaggedTokens++;
+        }
+        assertEquals(12946, nrOfTaggedTokens);
     }
 }
