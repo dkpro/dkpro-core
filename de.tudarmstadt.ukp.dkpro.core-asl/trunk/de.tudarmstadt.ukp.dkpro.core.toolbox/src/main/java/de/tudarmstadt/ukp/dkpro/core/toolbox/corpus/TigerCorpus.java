@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.collection.CollectionReader;
-import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
@@ -32,12 +31,14 @@ import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
  * @author zesch
  *
  */
-public class TigerCorpus {
-
-    private static final String LANGUAGE = "de";
-    private static final String NAME = "Tiger";
+public class TigerCorpus extends CorpusBase 
     
-    private JCasIterable jcasIterable;
+{
+
+    static final String LANGUAGE = "de";
+    static final String NAME = "Tiger";
+    
+    CollectionReader reader;
 
     public TigerCorpus() throws Exception
     {
@@ -53,40 +54,27 @@ public class TigerCorpus {
     }
 
     private void initialize(String tigerFile) throws Exception {
-        CollectionReader reader = createCollectionReader(
+        reader = createCollectionReader(
                 NegraExportReader.class,
                 NegraExportReader.PARAM_INPUT_FILE, tigerFile,
                 NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
                 NegraExportReader.PARAM_LANGUAGE, LANGUAGE
         );
+    }
 
-        jcasIterable = new JCasIterable(reader);
-    }
-    
-    public JCasIterable getJCasIterable() {
-        return jcasIterable;
-    }
-    
-    public boolean hasNextText() {
-        return jcasIterable.hasNext();
-    }
-    
-    public String getNextText()
-        throws Exception
+    @Override
+    protected CollectionReader getReader()
     {
-        if (jcasIterable.hasNext()) {
-            return jcasIterable.next().getDocumentText();
-        }
-        else {
-            return null;
-        }
+        return reader;
     }
 
+    @Override
     public String getLanguage()
     {
         return LANGUAGE;
     }
 
+    @Override
     public String getName()
     {
         return NAME;

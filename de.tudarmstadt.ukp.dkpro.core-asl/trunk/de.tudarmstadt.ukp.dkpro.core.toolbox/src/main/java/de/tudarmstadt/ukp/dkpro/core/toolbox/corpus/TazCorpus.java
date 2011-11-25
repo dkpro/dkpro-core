@@ -25,7 +25,7 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.util.TazSentenceIterable;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util.TazSentenceIterable;
 
 // FIXME does not work at the moment
 /**

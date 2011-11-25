@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.uima.collection.CollectionReader;
-import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
@@ -40,7 +39,9 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
  * 
  */
 @SuppressWarnings("serial")
-public class WackyCorpus {
+public class WackyCorpus 
+    extends CorpusBase
+{
     
     public enum WackyLanguageEdition {
         DEWAC,
@@ -55,8 +56,8 @@ public class WackyCorpus {
 
     private static final String WORKSPACE = "wacky";
     
-    private JCasIterable jcasIterable;
     private WackyLanguageEdition language;
+    private CollectionReader reader;
     
     public WackyCorpus(WackyLanguageEdition languageEdition) throws Exception
     {
@@ -71,7 +72,7 @@ public class WackyCorpus {
     }
 
     private void initialize(String wackyPath, WackyLanguageEdition languageEdition) throws Exception {
-        CollectionReader reader = createCollectionReader(
+        reader = createCollectionReader(
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, wackyPath,
                 ImsCwbReader.PARAM_LANGUAGE, languageEdition.name(),
@@ -82,29 +83,10 @@ public class WackyCorpus {
                 }
         );
 
-        jcasIterable = new JCasIterable(reader);
         language = languageEdition;
     }
     
-    public JCasIterable getJCasIterable() {
-        return jcasIterable;
-    }
-    
-    public boolean hasNextText() {
-        return jcasIterable.hasNext();
-    }
-    
-    public String getNextText()
-        throws Exception
-    {
-        if (jcasIterable.hasNext()) {
-            return jcasIterable.next().getDocumentText();
-        }
-        else {
-            return null;
-        }
-    }
-
+    @Override
     public String getLanguage()
     {
         switch(this.language) {
@@ -115,8 +97,15 @@ public class WackyCorpus {
         }
     }
 
+    @Override
     public String getName()
     {
         return this.language.toString();
+    }
+
+    @Override
+    protected CollectionReader getReader()
+    {
+        return reader;
     }
 }
