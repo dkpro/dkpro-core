@@ -30,4 +30,5 @@
 			<artifactId>uimaj-core</artifactId>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - Coreference API</name>
 </project>
