@@ -104,8 +104,6 @@ public class RelAnnisWriter
 			f.mkdirs();
 		}
 
-		String filePath;
-
 		textId = 0;
 		documentId = 1; // 0 is CORPUS
 		nodeId = 0;
@@ -115,7 +113,7 @@ public class RelAnnisWriter
 
 		// open streams for all files
 		for (String fileId : FILE_IDS) {
-			filePath = path + fileId + ".tab";
+			File filePath = new File(path, fileId + ".tab");
 			try {
 				PrintWriter pw = new PrintWriter(new OutputStreamWriter(
 						new FileOutputStream(filePath), "UTF-8"));
@@ -400,7 +398,7 @@ public class RelAnnisWriter
 			text.append(token.getCoveredText() + " ");
 		}
 		try {
-			DocumentMetaData d = DocumentMetaData.create(jcas);
+			DocumentMetaData d = DocumentMetaData.get(jcas);
 			documentId = d.getDocumentId();
 		}
 		catch (IllegalArgumentException e) {
