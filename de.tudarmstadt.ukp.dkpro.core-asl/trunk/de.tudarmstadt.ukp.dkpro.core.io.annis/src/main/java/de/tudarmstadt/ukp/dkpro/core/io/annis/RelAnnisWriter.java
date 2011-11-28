@@ -66,19 +66,19 @@ public class RelAnnisWriter
 	private String path;
 
 	public static final String PARAM_WRITE_POS = "WritePos";
-	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true)
+	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue="true")
 	private boolean writePos;
 
 	public static final String PARAM_WRITE_LEMMA = "WriteLemma";
-	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true)
+	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue="true")
 	private boolean writeLemma;
 
 	public static final String PARAM_WRITE_CONSTITUENTS = "WriteConstituents";
-	@ConfigurationParameter(name = PARAM_WRITE_CONSTITUENTS, mandatory = true)
+	@ConfigurationParameter(name = PARAM_WRITE_CONSTITUENTS, mandatory = true, defaultValue="true")
 	private boolean writeConstituents;
 
 	public static final String PARAM_WRITE_DEPENDENCIES = "WriteDependencies";
-	@ConfigurationParameter(name = PARAM_WRITE_DEPENDENCIES, mandatory = true)
+	@ConfigurationParameter(name = PARAM_WRITE_DEPENDENCIES, mandatory = true, defaultValue="true")
 	private boolean writeDependencies;
 
 	private int textId;
@@ -231,23 +231,23 @@ public class RelAnnisWriter
 		rank++;
 
 		if (currAnno.getClass() == Token.class) {
+			Token t = (Token) currAnno;
 
 			// get the token position; a more efficient method possible?
-			Annotation dummy = new Annotation(jcas, 0, currAnno.getBegin());
+			Annotation dummy = new Annotation(jcas, 0, t.getBegin());
 			int pos = JCasUtil.selectCovered(jcas, Token.class, dummy).size();
 
 			// store node token
 			writeToFile("node", currNodeId, textId, documentId, "token_merged",
-					"tok_" + currNodeId, currAnno.getBegin(),
-					currAnno.getEnd(), pos, "true", currAnno.getCoveredText());
+					"tok_" + currNodeId, t.getBegin(), t.getEnd(), pos, "true", t.getCoveredText());
 			// store node_annotation (token)
-			if (writePos) {
+			if (writePos && (t.getPos() != null)) {
 				writeToFile("node_annotation", currNodeId, "token_merged",
-						"pos", ((Token) currAnno).getPos());
+						"pos", t.getPos().getPosValue());
 			}
-			if (writeLemma) {
+			if (writeLemma && (t.getLemma() != null)) {
 				writeToFile("node_annotation", currNodeId, "token_merged",
-						"lemma", ((Token) currAnno).getLemma());
+						"lemma", t.getLemma().getValue());
 			}
 			// store token with corresponding nodeId in hashmap for dependency
 			// output
