@@ -17,51 +17,51 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
+import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.testing.factory.TokenBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class TreeTaggerLemmatizer
 {
 
-    private final AnalysisEngine tagger;
+    private final AnalysisEngineDescription tagger;
     
-    public TreeTaggerLemmatizer() throws Exception {
+    public TreeTaggerLemmatizer()
+        throws Exception
+    {
         
-        tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
-
+        tagger = createAggregateDescription(
+                createPrimitiveDescription(BreakIteratorSegmenter.class),
+                createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
+        );
     }
     
-    public Collection<String> lemmatize(String text, String language) {
+    public Collection<String> lemmatize(String text, String language)
+        throws Exception
+    {
         List<String> lemmas = new ArrayList<String>();
 
-        try {
-            JCas jcas = tagger.newJCas();
-            jcas.setDocumentLanguage(language);
+        AnalysisEngine engine = createPrimitive(tagger);
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(language);
+        jcas.setDocumentText(text);
+        engine.process(jcas);
 
-            TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
-            tb.buildTokens(jcas, text);
-            tagger.process(jcas);
-
-            for (Lemma l : select(jcas, Lemma.class)) {
-                lemmas.add(l.getValue());
-            }
-        }
-        catch (UIMAException e) {
-            e.printStackTrace();
+        for (Lemma l : select(jcas, Lemma.class)) {
+            lemmas.add(l.getValue());
         }
 
         return lemmas;
