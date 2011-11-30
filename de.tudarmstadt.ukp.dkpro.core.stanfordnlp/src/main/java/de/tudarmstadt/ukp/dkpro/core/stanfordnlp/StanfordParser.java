@@ -275,13 +275,17 @@ public class StanfordParser
 			try {
 				getContext().getLogger().log(FINE, tokenizedSentence.toString());
 				LexicalizedParser parser = getParser();
-				parser.parse(tokenizedSentence);
-				parseTree = parser.getBestParse();
+				if (tokenizedSentence.size() <= 160){
+					parser.parse(tokenizedSentence);
+					parseTree = parser.getBestParse();
+				}else{
+					continue;
+				}
+				
 			}
 			catch (Exception e) {
 				throw new AnalysisEngineProcessException(e);
 			}
-
 			// Create new StanfordAnnotator object
 			StanfordAnnotator sfAnnotator = null;
 			try {
