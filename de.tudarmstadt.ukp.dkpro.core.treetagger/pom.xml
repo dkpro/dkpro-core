@@ -59,6 +59,12 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.experiments.sy.externalresource</groupId>
+			<artifactId>de.tudarmstadt.ukp.experiments.sy.externalresource</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
