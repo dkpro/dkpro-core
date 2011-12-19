@@ -19,12 +19,10 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.uimafit.util.CasUtil.select;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
 import org.apache.uima.UimaContext;
@@ -38,95 +36,91 @@ import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.experiments.sy.externalresource.DKProModel;
 
 /**
  * @author Richard Eckart de Castilho
  */
-public
-class TreeTaggerChunkerTT4J
-extends TreeTaggerTT4JBase<AnnotationFS>
+public class TreeTaggerChunkerTT4J
+	extends TreeTaggerTT4JBase<AnnotationFS>
 {
 	/**
-	 * This component requires a type system in which all Part-of-Speech tag can be reached in-order
-	 * by iterating over a particular type. The name of the type can be set here.
+	 * This component requires a type system in which all Part-of-Speech tag can
+	 * be reached in-order by iterating over a particular type. The name of the
+	 * type can be set here.
 	 */
 	public static final String PARAM_POS_BASE_TYPE = "PartOfSpeechBaseType";
-	@ConfigurationParameter(name=PARAM_POS_BASE_TYPE, mandatory=false)
+	@ConfigurationParameter(name = PARAM_POS_BASE_TYPE, mandatory = false)
 	private String posBaseType;
 
 	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
-	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
+	@ConfigurationParameter(name = PARAM_TYPE_ADAPTER, mandatory = false)
 	private String typeAdapterClass;
 
-    @Override
-    public
-    void initialize(
-    		UimaContext context)
-    throws ResourceInitializationException
-    {
-    	super.initialize(context);
+	@Override
+	public void initialize(UimaContext context)
+		throws ResourceInitializationException
+	{
+		super.initialize(context);
 
-    	if (posBaseType == null) {
-    		posBaseType = POS.class.getName();
-    	}
+		if (posBaseType == null) {
+			posBaseType = POS.class.getName();
+		}
 
-    	treetagger.setEpsilon(0.00000001);
-    	treetagger.setHyphenHeuristics(true);
-    }
-
-    @Override
-    public void destroy()
-    {
-    	typeAdapterClass = null;
-    	posBaseType = null;
-    	super.destroy();
-    }
+		treetagger.setEpsilon(0.00000001);
+		treetagger.setHyphenHeuristics(true);
+	}
 
 	@Override
-	public
-	void process(
-			final CAS aCas)
-	throws AnalysisEngineProcessException
+	public void destroy()
 	{
-		getContext().getLogger().log(Level.FINE, "Running TreeTagger annotator");
+		typeAdapterClass = null;
+		posBaseType = null;
+		super.destroy();
+	}
+
+	@Override
+	public void process(final CAS aCas)
+		throws AnalysisEngineProcessException
+	{
+		getContext().getLogger()
+				.log(Level.FINE, "Running TreeTagger annotator");
 		try {
 			final String language;
 
-	        // If language override is not active && the document language is
+			// If language override is not active && the document language is
 			// "x-unspecified" which means that is has not been set at all
-			// then we should throw an exception, as we do not know what language to
+			// then we should throw an exception, as we do not know what
+			// language to
 			// use. Using a default language in this case, could lead to very
 			// confusing results for the user that are hard to track down.
-	        if (languageCode != null) {
-	        	language = languageCode;
-	        }
-	        else if (
-	        		aCas.getDocumentLanguage() != null &&
-	        		!aCas.getDocumentLanguage().equals("x-unspecified")
-	        ) {
-	        	language = aCas.getDocumentLanguage();
-	        }
-	        else {
-	            throw new AnalysisEngineProcessException(new Throwable(
-	            		"Neither the LanguageCode parameter nor the document " +
-	            		"language is set. Do not know what language to use. " +
-	            		"Exiting."));
-	        }
+			if (languageCode != null) {
+				language = languageCode;
+			}
+			else if (aCas.getDocumentLanguage() != null
+					&& !aCas.getDocumentLanguage().equals("x-unspecified")) {
+				language = aCas.getDocumentLanguage();
+			}
+			else {
+				throw new AnalysisEngineProcessException(
+						new Throwable(
+								"Neither the LanguageCode parameter nor the document "
+										+ "language is set. Do not know what language to use. "
+										+ "Exiting."));
+			}
 
 			// Set the handler creating new UIMA annotations from the analyzed
 			// tokens
 			final AtomicInteger count = new AtomicInteger(0);
-        	treetagger.setModel(language);
-        	final TokenHandler<AnnotationFS> handler = new TokenHandler<AnnotationFS>() {
+			treetagger.setModel(language);
+			final TokenHandler<AnnotationFS> handler = new TokenHandler<AnnotationFS>()
+			{
 				private String openChunk;
 				private int start;
 				private int end;
 
 				@Override
-				public
-				void token(
-						AnnotationFS aPOS,
-						String aChunk,
+				public void token(AnnotationFS aPOS, String aChunk,
 						String aDummy)
 				{
 					synchronized (aCas) {
@@ -138,9 +132,10 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 
 						String fields1[] = aChunk.split("/");
 						String fields2[] = fields1[1].split("-");
-						//String tag = fields1[0];
+						// String tag = fields1[0];
 						String flag = fields2.length == 2 ? fields2[0] : "NONE";
-						String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
+						String chunk = fields2.length == 2 ? fields2[1]
+								: fields2[0];
 
 						// Start of a new hunk
 						if (!chunk.equals(openChunk) || "B".equals(flag)) {
@@ -158,17 +153,20 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 					}
 				}
 
-				private
-				void chunkComplete()
+				private void chunkComplete()
 				{
 					if (openChunk != null) {
-						Type chunkType = getTagType((DKProModel) treetagger.getModel(), openChunk,
+						Type chunkType = getTagType(
+								(DKProModel) treetagger.getModel(), openChunk,
 								aCas.getTypeSystem());
-						AnnotationFS chunk = aCas.createAnnotation(chunkType, start, end);
-						Feature feat = chunkType.getFeatureByBaseName("chunkValue");
+						AnnotationFS chunk = aCas.createAnnotation(chunkType,
+								start, end);
+						Feature feat = chunkType
+								.getFeatureByBaseName("chunkValue");
 						if (feat != null) {
-							chunk.setStringValue(feat, isInternStrings() ? openChunk.intern() :
-								openChunk);
+							chunk.setStringValue(feat,
+									isInternStrings() ? openChunk.intern()
+											: openChunk);
 						}
 						aCas.addFsToIndexes(chunk);
 
@@ -189,8 +187,10 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			// Commit the final chunk
 			handler.token(null, null, null);
 
-			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " chunks");
-		} catch (Exception e) {
+			getContext().getLogger().log(Level.FINE,
+					"Parsed " + count.get() + " chunks");
+		}
+		catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
 	}
@@ -201,11 +201,12 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		throws ResourceInitializationException
 	{
 		try {
-	    	if (typeAdapterClass == null) {
-	    		typeAdapterClass = DKProPOSTokenAdapter.class.getName();
-	    	}
+			if (typeAdapterClass == null) {
+				typeAdapterClass = DKProPOSTokenAdapter.class.getName();
+			}
 
-			return (TokenAdapter<AnnotationFS>) Class.forName(typeAdapterClass).newInstance();
+			return (TokenAdapter<AnnotationFS>) Class.forName(typeAdapterClass)
+					.newInstance();
 		}
 		catch (Exception e) {
 			throw new ResourceInitializationException(e);
@@ -213,28 +214,9 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	}
 
 	@Override
-	protected
-	ModelResolver getModelResolver()
+	protected String getType()
 	{
-		return new ChunkerModelResolver(modelPath, modelEncoding, tagMappingPath);
-	}
-
-	/**
-	 * @author Richard Eckart de Castilho
-	 */
-	public static class ChunkerModelResolver
-		extends DKProModelResolver
-	{
-		public ChunkerModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
-		{
-			super(aModelPath, aModelEncoding, aMappingPath);
-		}
-
-		@Override
-		protected String getType()
-		{
-			return "chunker";
-		}
+		return "chunker";
 	}
 
 	/**
@@ -244,14 +226,14 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		implements TokenAdapter<AnnotationFS>
 	{
 		@Override
-		public
-		String getText(
-				AnnotationFS aObject)
+		public String getText(AnnotationFS aObject)
 		{
 			synchronized (aObject.getCAS()) {
-				Type t = aObject.getCAS().getTypeSystem().getType(POS.class.getName());
-				String pos = aObject.getFeatureValueAsString(t.getFeatureByBaseName("PosValue"));
-				return aObject.getCoveredText()+"-"+pos;
+				Type t = aObject.getCAS().getTypeSystem()
+						.getType(POS.class.getName());
+				String pos = aObject.getFeatureValueAsString(t
+						.getFeatureByBaseName("PosValue"));
+				return aObject.getCoveredText() + "-" + pos;
 			}
 		}
 	}
