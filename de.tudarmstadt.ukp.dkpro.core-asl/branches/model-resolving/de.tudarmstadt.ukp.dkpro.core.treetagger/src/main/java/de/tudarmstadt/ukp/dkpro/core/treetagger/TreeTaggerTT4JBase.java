@@ -114,7 +114,7 @@ public abstract class TreeTaggerTT4JBase<T>
 			resourceResolver
 					.setModelLookupPatterns("classpath:/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/${language}-${type}-${endianness}.par");
 			resourceResolver
-					.setMapLookupPatterns("src/main/resources/de/tudarmstadt/ukp/dkpro/core/treetagger/map/${language}-${type}.map");
+					.setMappingLookupPatterns("src/main/resources/de/tudarmstadt/ukp/dkpro/core/treetagger/map/${language}-${type}.map");
 			resourceResolver.setType(getType());
 			resourceResolver.setDefaultMapping(O.class.getCanonicalName());
 
