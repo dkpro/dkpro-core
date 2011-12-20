@@ -45,6 +45,7 @@ import org.uimafit.factory.ExternalResourceFactory;
 import org.uimafit.factory.JCasBuilder;
 import org.uimafit.testing.factory.TokenBuilder;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
