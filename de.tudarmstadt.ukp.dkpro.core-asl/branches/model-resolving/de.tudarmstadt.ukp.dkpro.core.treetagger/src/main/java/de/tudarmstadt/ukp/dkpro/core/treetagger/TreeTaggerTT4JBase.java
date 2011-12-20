@@ -40,6 +40,7 @@ import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.ExternalResource;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.experiments.sy.externalresource.AutoResourceResolver;
 import de.tudarmstadt.ukp.experiments.sy.externalresource.DKProModel;
@@ -109,11 +110,13 @@ public abstract class TreeTaggerTT4JBase<T>
 
 			missingTags = new HashSet<String>();
 
+			// Configure Auto Resource Resolver
 			resourceResolver
 					.setModelLookupPatterns("classpath:/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/${language}-${type}-${endianness}.par");
 			resourceResolver
 					.setMapLookupPatterns("src/main/resources/de/tudarmstadt/ukp/dkpro/core/treetagger/map/${language}-${type}.map");
-			resourceResolver.getPatternResolver().setType(getType());
+			resourceResolver.setType(getType());
+			resourceResolver.setDefaultMapping(O.class.getCanonicalName());
 
 			treetagger = new TreeTaggerWrapper<T>();
 
