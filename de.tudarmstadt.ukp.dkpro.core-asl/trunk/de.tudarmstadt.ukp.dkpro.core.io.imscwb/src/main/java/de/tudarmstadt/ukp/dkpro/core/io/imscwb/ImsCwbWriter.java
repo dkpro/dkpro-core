@@ -94,7 +94,7 @@ public class ImsCwbWriter
 	private boolean writeDocumentTag;
 
 	public static final String PARAM_WRITE_TEXT_TAG = "WriteTextTag";
-	@ConfigurationParameter(name = PARAM_WRITE_TEXT_TAG, mandatory = true, defaultValue = "false")
+	@ConfigurationParameter(name = PARAM_WRITE_TEXT_TAG, mandatory = true, defaultValue = "true")
 	private boolean writeTextTag;
 
 	public static final String PARAM_WRITE_OFFSETS = "WriteOffsets";
