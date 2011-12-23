@@ -38,7 +38,7 @@ public class WikipediaRevisionPairReaderTest
 	{
 		CollectionReader reader = createCollectionReader(
 		        WikipediaRevisionPairReader.class,
-				WikipediaReaderBase.PARAM_HOST,     "bender.tk.informatik.tu-darmstadt.de",
+				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
