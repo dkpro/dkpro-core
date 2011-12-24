@@ -40,6 +40,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
@@ -300,6 +301,7 @@ public class NegraExportReader
 			TOKEN_PARENT_ID = 4;
 			TOKEN_SECEDGE = 5;
 			TOKEN_COMMENT = 6;
+			getLogger().log(Level.INFO, "Corpus format 3 detected - no lemmas");
 			break;
 		case 4:
 			TOKEN_TEXT = 0;
@@ -310,6 +312,7 @@ public class NegraExportReader
 			TOKEN_PARENT_ID = 5;
 			TOKEN_SECEDGE = 6;
 			TOKEN_COMMENT = 7;
+			getLogger().log(Level.INFO, "Corpus format 4 detected");
 			break;
 		default:
 			throw new IOException("Format version ["+format+"] not supported");
