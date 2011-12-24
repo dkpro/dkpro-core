@@ -29,7 +29,9 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -50,25 +52,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * This Consumer outputs the content of all CASes into the IMS workbench format.
  * 
  * This writer procudes a text file which needs to be converted to the binary IMS CWB index files
- * using the command line tools that come with the CWB. The following commands illustrate this 
- * process, but depending on the configuration of the writer they may need to be adapted:
+ * using the command line tools that come with the CWB. 
  * 
- * -x XML-aware (replace XML entities and ignore <!.. and <?..)
- * -s skip empty lines in input data (recommended)
- * -B strip leading/trailing blanks from (input lines & token annotations)
- * -d &lt;dir&gt; directory for data files created by ./cwb-encode
- * -f &lt;file&gt; read input from <file> [default: stdin]
- * -R &lt;rf&gt;   create registry entry (named &lt;rf&gt;) listing all encoded attributes
- * -P &lt;att&gt;  declare additional p-attribute &lt;att&gt;
+ * It is possible to set the parameter {@link #PARAM_CQP_HOME} to directly create output in the
+ * native binary CQP format via the original CWB command line tools.
  * 
- * $ cwb-encode -x -s -B -d cwbdata -f example.vrt -R cwbreg/example -P pos -P lemma -P s -P e
- * $ cwb-makeall -r cwbreg -V EXAMPLE
- *
  * @author Erik-Lân Do Dinh
+ * @author Richard Eckart de Castilho
  */
 public class ImsCwbWriter
 	extends JCasAnnotator_ImplBase
 {
+	public static final String E_SENTENCE = "sentence";
+	public static final String E_TEXT = "text";
+	public static final String E_DOCUMENT = "document";
+	public static final String ATTR_BEGIN = "begin";
+	public static final String ATTR_END = "end";
+	public static final String ATTR_POS = "pos";
+	public static final String ATTR_LEMMA = "lemma";
+	public static final String ATTR_URI = "uri";
+	
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private File outputFile;
@@ -121,9 +124,6 @@ public class ImsCwbWriter
 	private Process childProcess;
 	private File registryDirectory;
 	private String corpusName = "corpus";
-	
-	private String textTag = "text";
-	private String sentenceTag = "sentence";
 	
 	@Override
 	public void initialize(UimaContext context)
@@ -187,7 +187,7 @@ public class ImsCwbWriter
 			for (Sentence sentence : select(jcas, Sentence.class)) {
 				attendChildProceess();
 				bw.write("<");
-				bw.write(sentenceTag);
+				bw.write(E_SENTENCE);
 				bw.write(">");
 				bw.write(LS);
 				for (Token token : selectCovered(jcas, Token.class, sentence)) {
@@ -232,7 +232,7 @@ public class ImsCwbWriter
 					bw.write(LS);
 				}
 				bw.write("</");
-				bw.write(sentenceTag);
+				bw.write(E_SENTENCE);
 				bw.write(">");
 				bw.write(LS);
 			}
@@ -263,34 +263,42 @@ public class ImsCwbWriter
 			List<String> cmd = new ArrayList<String>();
 			cmd.add(new File(cqpHome, "cwb-encode").getAbsolutePath());
 
+			cmd.add("-c");
+			cmd.add(getCwbCharset(encoding));
+			// -x XML-aware (replace XML entities and ignore <!.. and <?..)
 			cmd.add("-x");
+			// -s skip empty lines in input data (recommended)
 			cmd.add("-s");
+			// -B strip leading/trailing blanks from (input lines & token annotations)
 			cmd.add("-B");
+			// -d <dir> directory for data files created by ./cwb-encode
 			cmd.add("-d");
 			cmd.add(dataDirectory.getPath());
+			// -R <rf>   create registry entry (named <rf>) listing all encoded attributes
 			cmd.add("-R");
 			cmd.add(new File(registryDirectory, corpusName).getPath());
 			
+			 * -P <att>  declare additional p-attribute <att>
 			if (writePOS) {
 				cmd.add("-P");
-				cmd.add("pos");
+				cmd.add(ATTR_POS);
 			}
 
 			if (writeLemma) {
 				cmd.add("-P");
-				cmd.add("lemma");
+				cmd.add(ATTR_LEMMA);
 			}
 
 			if (writeDocId) {
 				cmd.add("-P");
-				cmd.add("uri");
+				cmd.add(ATTR_URI);
 			}
 
 			if (writeOffsets) {
 				cmd.add("-P");
-				cmd.add("begin");
+				cmd.add(ATTR_BEGIN);
 				cmd.add("-P");
-				cmd.add("end");
+				cmd.add(ATTR_END);
 			}
 			
 			if (writeDocumentTag) {
@@ -300,12 +308,12 @@ public class ImsCwbWriter
 
 			if (writeTextTag) {
 				cmd.add("-S");
-				cmd.add(textTag+":0+id");
+				cmd.add(E_TEXT+":0+id");
 			}
 
 			{
 				cmd.add("-S");
-				cmd.add(sentenceTag+":0");
+				cmd.add(E_SENTENCE+":0");
 			}
 
 			getContext().getLogger().log(Level.INFO, "Spawning cwb-encode: " + join(cmd, " "));
@@ -378,5 +386,20 @@ public class ImsCwbWriter
 				childProcess = null;
 			}
 		}
+	}
+	
+	private static Map<String, String> CHARSET_MAPPING = new HashMap<String, String>();
+	static {
+		CHARSET_MAPPING.put("ISO-8859-1", "latin1");
+		CHARSET_MAPPING.put("UTF-8", "utf8");
+	}
+	
+	private static String getCwbCharset(String aEncoding)
+	{
+		String enc = CHARSET_MAPPING.get(aEncoding);
+		if (enc == null) {
+			throw new IllegalArgumentException("Encoding ["+enc+"] not supported by CWB.");
+		}
+		return enc;
 	}
 }
