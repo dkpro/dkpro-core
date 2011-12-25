@@ -278,7 +278,7 @@ public class ImsCwbWriter
 			cmd.add("-R");
 			cmd.add(new File(registryDirectory, corpusName).getPath());
 			
-			 * -P <att>  declare additional p-attribute <att>
+			// -P <att>  declare additional p-attribute <att>
 			if (writePOS) {
 				cmd.add("-P");
 				cmd.add(ATTR_POS);
