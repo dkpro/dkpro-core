@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
  */
 public class ImsCwbWriterTest
 {
-	private static final String outputFile = "target/corpus-sample.ims.xml";
+	private static final String outputFile = "target/corpus-sample.ims";
 
 	@Test
 	public void test1()
@@ -72,5 +72,28 @@ public class ImsCwbWriterTest
 		String actual = FileUtils.readFileToString(
 				new File(outputFile), "UTF-8");
 		assertEquals(reference, actual);
+	}
+
+	@Test
+	public void test2()
+		throws Exception
+	{
+		CollectionReader ner = createCollectionReader(
+				NegraExportReader.class,
+				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/corpus-sample.export",
+				NegraExportReader.PARAM_LANGUAGE, "de",
+				NegraExportReader.PARAM_ENCODING, "UTF-8");
+
+		AnalysisEngineDescription tag = createPrimitiveDescription(
+				TreeTaggerPosLemmaTT4J.class,
+				TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "de");
+
+		AnalysisEngineDescription tw = createPrimitiveDescription(
+				ImsCwbWriter.class,
+				ImsCwbWriter.PARAM_TARGET_LOCATION, "target/cqbformat",
+				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
+				ImsCwbWriter.PARAM_CQP_HOME, "/Users/bluefire/bin/cwb-2.2.b99");
+
+		runPipeline(ner, tag, tw);
 	}
 }
