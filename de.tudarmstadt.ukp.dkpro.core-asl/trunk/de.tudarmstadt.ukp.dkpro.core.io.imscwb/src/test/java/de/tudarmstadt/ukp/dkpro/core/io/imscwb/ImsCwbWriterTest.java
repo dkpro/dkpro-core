@@ -68,7 +68,7 @@ public class ImsCwbWriterTest
 		runPipeline(ner, tag, tw, cdw);
 
 		String reference = FileUtils.readFileToString(
-				new File("src/test/resources/reference/corpus-sample.ims.xml"), "UTF-8");
+				new File("src/test/resources/reference/corpus-sample.ims"), "UTF-8");
 		String actual = FileUtils.readFileToString(
 				new File(outputFile), "UTF-8");
 		assertEquals(reference, actual);
