@@ -41,6 +41,7 @@ import de.tudarmstadt.ukp.wikipedia.api.MetaData;
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.PageIterator;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
+import de.tudarmstadt.ukp.wikipedia.api.exception.WikiPageNotFoundException;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
@@ -101,6 +102,14 @@ public abstract class WikipediaStandardReaderBase
 	protected String[] pageNameParamArray;
 
 	/**
+	 * Ignores missing pages when loading from a id/title list or file
+	 * (Optional)
+	 */
+	public static final String PARAM_IGNORE_MISSING_PAGES = "IgnoreMissingPages";
+	@ConfigurationParameter(name = PARAM_IGNORE_MISSING_PAGES, mandatory = true, defaultValue="false")
+	protected boolean ignoreMissingPages;
+
+	/**
 	 * A list of pages that is used to store the pages when using the
 	 * {@code PARAM_PATH_TO_PAGE_ID_LIST} and/or
 	 * {@code PARAM_PATH_TO_PAGE_TITLE_LIST}
@@ -113,7 +122,7 @@ public abstract class WikipediaStandardReaderBase
 	protected long nrOfArticles;
 
 	protected Iterator<Page> pageIter;
-	
+
 	private Page page;
 
 	protected MediaWikiParser parser;
@@ -155,13 +164,25 @@ public abstract class WikipediaStandardReaderBase
 				//load pages
 				for(String id:pageIds){
 					if(id!=null&&!id.isEmpty()){
-						pageSet.add(wiki.getPage(Integer.parseInt(id)));
+						try{
+							pageSet.add(wiki.getPage(Integer.parseInt(id)));
+						}catch(WikiPageNotFoundException e){
+							if(!ignoreMissingPages){
+								throw new WikiPageNotFoundException(e);
+							}
+						}
 					}
 				}
 				if(pageTitles!=null){
 					for(String title:pageTitles){
 						if(title!=null&&!title.isEmpty()){
-							pageSet.add(wiki.getPage(title));
+							try{
+								pageSet.add(wiki.getPage(title));
+							}catch(WikiPageNotFoundException e){
+								if(!ignoreMissingPages){
+									throw new WikiPageNotFoundException(e);
+								}
+							}
 						}
 					}
 				}
