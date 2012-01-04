@@ -26,7 +26,6 @@ import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
-
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
 import org.uimafit.util.CasUtil;
 
@@ -255,7 +254,7 @@ public class DocumentMetaData
 		}
 		catch (IllegalArgumentException e) {
 			DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
-			docMetaData.addToIndexes();
+			initDocumentMetaData(docMetaData);
 			return docMetaData;
 		}
 	}
@@ -280,9 +279,28 @@ public class DocumentMetaData
 		}
 		catch (IllegalArgumentException e) {
 			DocumentMetaData docMetaData = new DocumentMetaData(aJcas);
-			docMetaData.addToIndexes();
+			initDocumentMetaData(docMetaData);
 			return docMetaData;
 		}
+	}
+	
+	private static DocumentMetaData initDocumentMetaData(DocumentMetaData aMetaData)
+	{
+		// If there is already a DocumentAnnotation copy it's information and delete it
+		DocumentAnnotation da = getDocumentAnnotation(aMetaData.getView());
+		if (da != null) {
+			aMetaData.setLanguage(da.getLanguage());
+			aMetaData.setBegin(da.getBegin());
+			aMetaData.setEnd(da.getEnd());
+			da.removeFromIndexes();
+		}
+		else if (aMetaData.getView().getDocumentText() != null) {
+			aMetaData.setBegin(0);
+			aMetaData.setEnd(aMetaData.getView().getDocumentText().length());
+		}
+		
+		aMetaData.addToIndexes();
+		return aMetaData;
 	}
 
 	/**
@@ -334,6 +352,30 @@ public class DocumentMetaData
 		return result;
 	}
 
+	/**
+	 * Get the {@link DocumentAnnotation} from the CAS if it already exists.
+	 *
+	 * @author Richard Eckart de Castilho
+	 */
+	private static DocumentAnnotation getDocumentAnnotation(final CAS aCas)
+	{
+		FSIterator<FeatureStructure> iterator = aCas.getIndexRepository().getAllIndexedFS(
+				CasUtil.getType(aCas, DocumentAnnotation.class));
+
+		if (!iterator.hasNext()) {
+			return null;
+		}
+
+		DocumentAnnotation result = (DocumentAnnotation) iterator.next();
+
+		if (iterator.hasNext()) {
+			throw new IllegalArgumentException(new Throwable("CAS contains more than one "
+					+ DocumentAnnotation.class.getName()));
+		}
+
+		return result;
+	}
+	
 	/**
 	 * Get the {@link DocumentMetaData} from the CAS.
 	 *
