@@ -55,4 +55,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - IO - British National Corpus</name>
 </project>
