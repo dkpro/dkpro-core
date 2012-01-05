@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.ExternalResourceFactory.bindResource;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -34,33 +34,29 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 public class Web1tResourceTest
 {
     public static class Annotator extends JCasAnnotator_ImplBase {
-            final static String MODEL_KEY = "FrequencyProvider";
-            @ExternalResource(key = MODEL_KEY)
-            private FrequencyCountProvider model;
+        final static String MODEL_KEY = "FrequencyProvider";
+        @ExternalResource(key = MODEL_KEY)
+        private FrequencyCountProvider model;
 
-            @Override
-            public void process(JCas aJCas)
-                throws AnalysisEngineProcessException
-            {
-                System.out.println(model.getClass().getName());
-            }
+        @Override
+        public void process(JCas aJCas)
+            throws AnalysisEngineProcessException
+        {
+            System.out.println(model.getClass().getName());
+        }
     }
 
     @Test
     public void configureAggregatedExample() throws Exception {
-            AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class);
-
-            bindResource(
-                    desc,
-                    Annotator.MODEL_KEY,
-                    Web1TFrequencyCountResource.class,
-                    Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/web1t/",
-                    Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-                    Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"
-            );
-
-            // Check the external resource was injected
-            AnalysisEngine ae = createPrimitive(desc);
-            ae.process(ae.newJCas());
+        AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class,
+        		Annotator.MODEL_KEY, createExternalResourceDescription(
+        				Web1TFrequencyCountResource.class,
+                        Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/web1t/",
+                        Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));
+        
+        // Check the external resource was injected
+        AnalysisEngine ae = createPrimitive(desc);
+        ae.process(ae.newJCas());
     }
 }
