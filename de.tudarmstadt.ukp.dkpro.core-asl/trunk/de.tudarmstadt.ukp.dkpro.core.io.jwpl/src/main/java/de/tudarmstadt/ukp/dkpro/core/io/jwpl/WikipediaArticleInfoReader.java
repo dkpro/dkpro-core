@@ -24,7 +24,6 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 
@@ -101,7 +100,7 @@ public class WikipediaArticleInfoReader extends WikipediaReaderBase
 		}
 		catch (WikiApiException e) {
 	        //could e.g. happen if no revision is available for this page
-			getUimaContext().getLogger().log(Level.WARNING, e.getMessage());
+			getLogger().warn("Unable to fetch next article", e);
 		}
 	}
 

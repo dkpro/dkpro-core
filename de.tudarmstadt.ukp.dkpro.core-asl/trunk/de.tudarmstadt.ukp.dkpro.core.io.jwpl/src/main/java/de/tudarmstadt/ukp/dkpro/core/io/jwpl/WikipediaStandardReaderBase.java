@@ -30,7 +30,6 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
@@ -215,6 +214,7 @@ public abstract class WikipediaStandardReaderBase
 		parser = pf.createParser();
 	}
 
+	@Override
 	public boolean hasNext()
 		throws IOException, CollectionException
 	{
@@ -231,8 +231,7 @@ public abstract class WikipediaStandardReaderBase
         currentArticleIndex++;
 
 		try {
-            getUimaContext().getLogger().log(Level.FINE,
-                    "title: " + page.getTitle());
+            getLogger().trace("title: " + page.getTitle());
 
             addDocumentMetaData(jcas, page);
 

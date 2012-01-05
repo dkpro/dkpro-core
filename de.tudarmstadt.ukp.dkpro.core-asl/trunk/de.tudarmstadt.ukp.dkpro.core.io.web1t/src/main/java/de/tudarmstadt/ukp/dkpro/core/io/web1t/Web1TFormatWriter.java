@@ -41,7 +41,6 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.CasUtil;
@@ -240,7 +239,7 @@ public class Web1TFormatWriter
                 while ((inputLine = reader.readLine()) != null) {
                     String[] parts = inputLine.split(TAB);
                     if (parts.length != 2) {
-                        getContext().getLogger().log(Level.WARNING, "Wrong file format in line: " + inputLine);
+                        getLogger().warn("Wrong file format in line: " + inputLine);
                         continue;
                     }
                     String ngram = parts[0];

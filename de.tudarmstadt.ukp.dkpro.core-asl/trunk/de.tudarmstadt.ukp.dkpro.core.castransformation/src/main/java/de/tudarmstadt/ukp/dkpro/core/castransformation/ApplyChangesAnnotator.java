@@ -17,20 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import static org.apache.uima.util.Level.INFO;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.annolab.core.util.AlignedString;
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.uimafit.component.JCasAnnotator_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
@@ -71,7 +69,7 @@ public class ApplyChangesAnnotator
 	{
 		FSIndex<Annotation> idx = aSourceView.getAnnotationIndex(SofaChangeAnnotation.type);
 
-		getContext().getLogger().log(INFO, "Found " + idx.size() + " changes");
+		getLogger().info("Found " + idx.size() + " changes");
 
 		// Apply all the changes
 		AlignedString as = new AlignedString(aSourceView.getDocumentText());

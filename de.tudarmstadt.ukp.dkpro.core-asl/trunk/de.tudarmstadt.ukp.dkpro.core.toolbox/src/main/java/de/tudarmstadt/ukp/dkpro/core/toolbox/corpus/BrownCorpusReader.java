@@ -138,7 +138,7 @@ public class BrownCorpusReader extends ResourceCollectionReaderBase
                             // Add the Part of Speech
                             if (writePOS) {
                                 Type posType = TagsetMappingFactory.getTagType(
-                                        TagsetMappingFactory.getMapping("tagger", LANG_CODE),
+                                        TagsetMappingFactory.getMapping("tagger", LANG_CODE, null),
                                         posString,
                                         typeSystem);
                                 AnnotationFS posAnno = aCAS.createAnnotation(
