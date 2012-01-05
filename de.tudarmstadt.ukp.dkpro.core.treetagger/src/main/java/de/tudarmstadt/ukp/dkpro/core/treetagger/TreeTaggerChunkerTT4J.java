@@ -60,9 +60,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	private String typeAdapterClass;
 
     @Override
-    public
-    void initialize(
-    		UimaContext context)
+	public void initialize(UimaContext context)
     throws ResourceInitializationException
     {
     	super.initialize(context);
@@ -84,9 +82,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
     }
 
 	@Override
-	public
-	void process(
-			final CAS aCas)
+	public void process(final CAS aCas)
 	throws AnalysisEngineProcessException
 	{
 		getLogger().debug("Running TreeTagger chunker");
@@ -118,16 +114,14 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			// tokens
 			final AtomicInteger count = new AtomicInteger(0);
         	treetagger.setModel(language);
-        	final TokenHandler<AnnotationFS> handler = new TokenHandler<AnnotationFS>() {
+			final TokenHandler<AnnotationFS> handler = new TokenHandler<AnnotationFS>()
+			{
 				private String openChunk;
 				private int start;
 				private int end;
 
 				@Override
-				public
-				void token(
-						AnnotationFS aPOS,
-						String aChunk,
+				public void token(AnnotationFS aPOS, String aChunk,
 						String aDummy)
 				{
 					synchronized (aCas) {
@@ -159,8 +153,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 					}
 				}
 
-				private
-				void chunkComplete()
+				private void chunkComplete()
 				{
 					if (openChunk != null) {
 						Type chunkType = TagsetMappingFactory.getTagType(
@@ -246,9 +239,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		implements TokenAdapter<AnnotationFS>
 	{
 		@Override
-		public
-		String getText(
-				AnnotationFS aObject)
+		public String getText(AnnotationFS aObject)
 		{
 			synchronized (aObject.getCAS()) {
 				Type t = aObject.getCAS().getTypeSystem().getType(POS.class.getName());
