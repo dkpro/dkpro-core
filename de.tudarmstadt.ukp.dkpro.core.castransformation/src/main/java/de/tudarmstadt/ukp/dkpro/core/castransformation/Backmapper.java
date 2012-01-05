@@ -18,8 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.util.Level.INFO;
-
 import java.util.LinkedList;
 
 import org.annolab.core.util.AlignedString;
@@ -27,7 +25,6 @@ import org.annolab.core.util.ImmutableInterval;
 import org.annolab.core.util.Interval;
 import org.apache.uima.UIMAException;
 import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -39,6 +36,7 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.component.JCasAnnotator_ImplBase;
 
 /**
  * After processing a file with the {@code ApplyChangesAnnotator} this annotator
@@ -85,8 +83,8 @@ extends JCasAnnotator_ImplBase
 
 			// Now we can copy the complete CAS while mapping back the offsets.
 			// We first use the CAS copier and then update the offsets.
-			getContext().getLogger().log(INFO, "Copying annotations from [" +
-					sofaChain.getFirst()+"] to ["+sofaChain.getLast()+"]");
+			getLogger().info("Copying annotations from [" + sofaChain.getFirst() + "] to ["
+							+ sofaChain.getLast() + "]");
 			cc.copyCasView(aJCas.getCas().getView(sofaChain.getFirst()), sofaChain.getLast(), false);
 
 			// Get the final target view

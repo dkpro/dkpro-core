@@ -29,8 +29,6 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
-import org.apache.uima.util.Logger;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
@@ -144,8 +142,6 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
 	private int pageBuffer;
 
-	private Logger logger=null;
-
 	private List<Page> bufferedPages;
 	private List<Integer> pageIds;
 
@@ -165,10 +161,10 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	{
 		super.initialize(context);
 
-		logger=getUimaContext().getLogger();
-
 		if(articleLimit!=null){
-			logger.log(Level.INFO, "Article limit is set to "+articleLimit+" The reader won't deliver all pages that meet the requirements. Remove PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ if that is not what you want.");
+			getLogger().info("Article limit is set to " + articleLimit + " The reader won't " +
+					"deliver all pages that meet the requirements. Remove " +
+					"PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ if that is not what you want.");
 		}
 
 		if (templateBlacklistArray == null && templateWhitelistArray == null) {
@@ -202,10 +198,10 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				for (Integer id : filteredIds) {
 					wlSet.add(id);
 				}
-				logger.log(Level.INFO, "The whitelist contains "+templateWhitelist.size()+" templates");
-				logger.log(Level.INFO, wlSet.size()+" articles are whitelisted");
+				getLogger().info("The whitelist contains "+templateWhitelist.size()+" templates");
+				getLogger().info(wlSet.size()+" articles are whitelisted");
 			}else{
-				logger.log(Level.INFO, "No whitelist active");
+				getLogger().info("No whitelist active");
 			}
 
 			// BLACKLIST FILTER
@@ -233,8 +229,8 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 					for (Integer id : filteredIds) {
 						blSet.add(id);
 					}
-					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.size()+" templates");
-					logger.log(Level.INFO, blSet.size()+" articles are blacklisted");
+					getLogger().info("The blacklist contains "+templateBlacklist.size()+" templates");
+					getLogger().info(blSet.size()+" articles are blacklisted");
 				}else{
 					//if the whitelist is not active, we have to treat the
 					//the blacklist like a real blacklist and call the
@@ -250,11 +246,11 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 					for (Integer id : filteredIds) {
 						blSet.add(id);
 					}
-					logger.log(Level.INFO, "The blacklist contains "+templateBlacklist.size()+" templates");
-					logger.log(Level.INFO, blSet.size()+" articles are NOT blacklisted");
+					getLogger().info("The blacklist contains "+templateBlacklist.size()+" templates");
+					getLogger().info(blSet.size()+" articles are NOT blacklisted");
 				}
 			}else{
-				logger.log(Level.INFO, "No blacklist active");
+				getLogger().info("No blacklist active");
 			}
 
 			// GET FINAL ID LIST
@@ -279,7 +275,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 				//now double filter, if necessary
 				if(doubleCheckWhitelistedArticles){
-					logger.log(Level.INFO, "Double checking "+wlSet.size()+" articles");
+					getLogger().info("Double checking "+wlSet.size()+" articles");
 
 					//if doublecheck-param is set, double check whitelisted
 					//articles against the blacklist before adding them
@@ -320,7 +316,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 				//here, blSet contains pages NOT containing the blacklisted tpls
 				//now add remaining pages to the pageId list
 				if(doubleCheckWhitelistedArticles){
-					logger.log(Level.INFO, "Double checking "+blSet.size()+" articles");
+					getLogger().info("Double checking "+blSet.size()+" articles");
 
 					//if doublecheck-param is set, double check the articles
 					//that are not blacklisted against the blacklist
@@ -342,7 +338,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 			this.nrOfArticles = pageIds.size();
 
-			logger.log(Level.INFO, "Reading "+nrOfArticles+" pages");
+			getLogger().info("Reading "+nrOfArticles+" pages");
 
 		}
 		catch (Exception e) {
@@ -374,7 +370,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		try {
 			//fill buffer if empty
 			if(bufferedPages.isEmpty()) {
-				logger.log(Level.FINER, "Filling buffer");
+				getLogger().trace("Filling buffer");
 				for (int i = 0; i < (pageIds.size() < pageBuffer ? pageIds.size() : pageBuffer); i++) {
 					bufferedPages.add(wiki.getPage(pageIds.remove(0)));
 				}
@@ -382,7 +378,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 			//get next page from buffer
 			page = bufferedPages.remove(0);
 
-			logger.log(Level.FINEST, "Processing article: " + page.getTitle());
+			getLogger().trace("Processing article: " + page.getTitle());
 
 			addDocumentMetaData(jcas, page);
 
@@ -467,7 +463,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	private Set<Integer> doubleCheckAssociatedArticles(Set<Integer> idsToDoubleCheck, Set<Integer> blIds) throws WikiApiException{
 
 		if(idsToDoubleCheck.size()>20000){
-			logger.log(Level.INFO, "You want to double check "+idsToDoubleCheck.size()+" articles in the whitelist. This can take a very long time."+System.getProperty("line.separator")+
+			getLogger().info("You want to double check "+idsToDoubleCheck.size()+" articles in the whitelist. This can take a very long time."+System.getProperty("line.separator")+
 					"If you do not need ALL pages that meet the specified requirements, you might speed things up by setting PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ.");
 		}
 

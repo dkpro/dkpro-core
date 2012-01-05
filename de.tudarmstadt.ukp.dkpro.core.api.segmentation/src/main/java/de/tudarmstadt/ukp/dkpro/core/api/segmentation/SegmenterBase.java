@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation;
 
-import static org.apache.uima.util.Level.WARNING;
 import static org.uimafit.util.CasUtil.getType;
 import static org.uimafit.util.CasUtil.select;
 
@@ -189,10 +188,8 @@ extends JCasAnnotator_ImplBase
 		end = end > maxEnd ? maxEnd : end;
 
 		if (begin != aBegin.get() || end != aEnd.get()) {
-			getContext().getLogger().log(
-					WARNING,
-					"Adjusted " + "out-of-bounds zone [" + aBegin.get() + "-"
-							+ aEnd.get() + "] to [" + begin + "-" + end + "]");
+			getLogger().warn("Adjusted " + "out-of-bounds zone [" + aBegin.get() + "-" + aEnd.get()
+							+ "] to [" + begin + "-" + end + "]");
 		}
 
 		aBegin.set(begin);

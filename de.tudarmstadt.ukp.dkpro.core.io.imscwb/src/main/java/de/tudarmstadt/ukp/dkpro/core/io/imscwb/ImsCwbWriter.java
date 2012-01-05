@@ -39,7 +39,6 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -316,7 +315,7 @@ public class ImsCwbWriter
 				cmd.add(E_SENTENCE+":0");
 			}
 
-			getContext().getLogger().log(Level.INFO, "Spawning cwb-encode: " + join(cmd, " "));
+			getLogger().info("Spawning cwb-encode: " + join(cmd, " "));
 			
 			final ProcessBuilder pb = new ProcessBuilder();
 			pb.command(cmd);
@@ -337,17 +336,17 @@ public class ImsCwbWriter
 				if (stdout.available() > 0) {
 					byte[] data = new byte[stdout.available()];
 					stdout.read(data);
-					getContext().getLogger().log(Level.INFO, new String(data, "UTF-8"));
+					getLogger().info(new String(data, "UTF-8"));
 				}
 				InputStream stderr = childProcess.getErrorStream();
 				if (stderr.available() > 0) {
 					byte[] data = new byte[stderr.available()];
 					stderr.read(data);
-					getContext().getLogger().log(Level.SEVERE, new String(data, "UTF-8"));
+					getLogger().error(new String(data, "UTF-8"));
 				}
 			}
 			catch (IOException e) {
-				getContext().getLogger().log(Level.SEVERE, "Unable to communicate with child process");
+				getLogger().error("Unable to communicate with child process");
 			}
 		}
 	}
@@ -371,7 +370,7 @@ public class ImsCwbWriter
 				String[] args = new String[] { new File(cqpHome, "cwb-makeall").getAbsolutePath(), 
 						"-r", registryDirectory.getPath(), "-V", corpusName.toUpperCase() };
 				ProcessBuilder pb = new ProcessBuilder(args);
-				getContext().getLogger().log(Level.INFO, "Spawning cwb-makeall: "+join(args, " "));
+				getLogger().info("Spawning cwb-makeall: " + join(args, " "));
 				childProcess = pb.start();
 				childProcess.waitFor();
 			}

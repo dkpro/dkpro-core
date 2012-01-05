@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.bananasplit;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.CasUtil.select;
 
 import java.io.IOException;
@@ -81,7 +80,7 @@ public class BananaSplitter
 		InputStream is = null;
 		try {
 			URL url = ResourceUtils.resolveLocation(dictPath, this, context);
-			context.getLogger().log(INFO, "Loading XML dictionary from " + url);
+			getLogger().info("Loading XML dictionary from " + url);
 			is = url.openStream();
 			bananaSplitter = new BananaSplit(new XmlDictionary(is, true));
 		}

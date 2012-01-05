@@ -17,8 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import static org.apache.uima.util.Level.INFO;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -125,8 +123,7 @@ public abstract class FileSetCollectionReaderBase
 		// Get the iterator that will be used to actually traverse the FileSet.
 		fileSetIterator = new FileResourceIterator(null, path, directoryScanner.getIncludedFiles());
 
-		getUimaContext().getLogger().log(INFO,
-				"Found [" + getIncludedFilesCount() + "] files to be read");
+		getLogger().info("Found [" + getIncludedFilesCount() + "] files to be read");
 	}
 
 	protected int getIncludedFilesCount() {
