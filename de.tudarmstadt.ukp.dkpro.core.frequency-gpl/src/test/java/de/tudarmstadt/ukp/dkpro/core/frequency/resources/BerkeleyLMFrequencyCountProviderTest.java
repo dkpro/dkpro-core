@@ -12,7 +12,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.ExternalResourceFactory.bindResource;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -27,31 +27,27 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 public class BerkeleyLMFrequencyCountProviderTest
 {
     public static class Annotator extends JCasAnnotator_ImplBase {
-            final static String MODEL_KEY = "FrequencyProvider";
-            @ExternalResource(key = MODEL_KEY)
-            private FrequencyCountResourceBase model;
+        final static String MODEL_KEY = "FrequencyProvider";
+        @ExternalResource(key = MODEL_KEY)
+        private FrequencyCountResourceBase model;
 
-            @Override
-            public void process(JCas aJCas)
-                throws AnalysisEngineProcessException
-            {
-                System.out.println(model.getClass().getName());
-            }
+        @Override
+        public void process(JCas aJCas)
+            throws AnalysisEngineProcessException
+        {
+            System.out.println(model.getClass().getName());
+        }
     }
 
     @Test
     public void configureAggregatedExample() throws Exception {
-            AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class);
-
-            bindResource(
-                    desc,
-                    Annotator.MODEL_KEY,
-                    BerkeleyLMFrequencyCountProvider.class,
-                    BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"
-            );
-
-            // Check the external resource was injected
-            AnalysisEngine ae = createPrimitive(desc);
-            ae.process(ae.newJCas());
+        AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class,
+        		Annotator.MODEL_KEY, createExternalResourceDescription(
+        				BerkeleyLMFrequencyCountProvider.class,
+                        BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
+        
+        // Check the external resource was injected
+        AnalysisEngine ae = createPrimitive(desc);
+        ae.process(ae.newJCas());
     }
 }
