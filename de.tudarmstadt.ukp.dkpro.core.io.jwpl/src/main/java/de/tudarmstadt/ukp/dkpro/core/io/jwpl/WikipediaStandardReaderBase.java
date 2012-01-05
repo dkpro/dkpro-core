@@ -167,7 +167,7 @@ public abstract class WikipediaStandardReaderBase
 							pageSet.add(wiki.getPage(Integer.parseInt(id)));
 						}catch(WikiPageNotFoundException e){
 							if(ignoreMissingPages){
-								getUimaContext().getLogger().log(Level.WARNING,"Missing article with id "+id);
+								getLogger().warn("Missing article with id "+id);
 							}else{
 								throw new WikiPageNotFoundException(e);
 							}
@@ -181,7 +181,7 @@ public abstract class WikipediaStandardReaderBase
 								pageSet.add(wiki.getPage(title));
 							}catch(WikiPageNotFoundException e){
 								if(ignoreMissingPages){
-									getUimaContext().getLogger().log(Level.WARNING,"Missing article with title \""+title+"\"");
+									getLogger().warn("Missing article with title \""+title+"\"");
 								}else{
 									throw new WikiPageNotFoundException(e);
 								}
