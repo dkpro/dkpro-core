@@ -38,4 +38,5 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - BerkeleyLM Frequency Provider</name>
 </project>
