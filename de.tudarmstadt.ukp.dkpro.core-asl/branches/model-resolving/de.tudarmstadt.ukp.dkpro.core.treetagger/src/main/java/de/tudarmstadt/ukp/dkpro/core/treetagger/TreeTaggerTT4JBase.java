@@ -88,7 +88,8 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name = PARAM_INTERN_STRINGS, mandatory = false, defaultValue = "true")
 	private boolean internStrings;
 
-	private Set<String> missingTags;
+//
+//	private Set<String> missingTags;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -108,7 +109,7 @@ public abstract class TreeTaggerTT4JBase<T>
 								+ "properties file has to be specified as well.");
 			}
 
-			missingTags = new HashSet<String>();
+//			missingTags = new HashSet<String>();
 
 			// Configure Auto Resource Resolver
 			resourceResolver
@@ -151,47 +152,42 @@ public abstract class TreeTaggerTT4JBase<T>
 	protected abstract String getType()
 		throws ResourceInitializationException;
 
-	/**
-	 * Get the UIMA type name for the given tag in the given language.
-	 * 
-	 * @param aModel
-	 *            a model
-	 * @param aTag
-	 *            a tag.
-	 * @return UIMA type name
-	 */
-	protected Type getTagType(DKProModel aModel, String aTag, TypeSystem aTS)
-	{
-		Map<String, String> mapping = aModel.getMapping();
-
-		String type = mapping.get(aTag);
-		if (type == null) {
-			missingTags.add(aTag);
-			// getContext().getLogger().log(Level.WARNING,
-			// "Mapping does not contain tag: " + aTag);
-			type = mapping.get("*");
-		}
-		if (type == null) {
-			throw new IllegalStateException("No fallback (*) mapping defined!");
-		}
-
-		Type uimaType = aTS.getType(type);
-
-		if (uimaType == null) {
-			throw new IllegalStateException("Type [" + type
-					+ "] mapped to tag [" + aTag
-					+ "] is not defined in type system");
-		}
-
-		return uimaType;
-	}
-
+//	/**
+//	 * Get the UIMA type name for the given tag in the given language.
+//	 *
+//	 * @param aModel a model
+//	 * @param aTag a tag.
+//	 * @return UIMA type name
+//	 */
+//	protected Type getTagType(DKProModel aModel, String aTag, TypeSystem aTS)
+//	{
+//        Map<String, String> mapping = aModel.getMapping();
+//
+//        String type = mapping.get(aTag);
+//        if (type == null) {
+//        	missingTags.add(aTag);
+//        	//getContext().getLogger().log(Level.WARNING, "Mapping does not contain tag: " + aTag);
+//        	type = mapping.get("*");
+//        }
+//        if (type == null) {
+//        	throw new IllegalStateException("No fallback (*) mapping defined!");
+//        }
+//
+//        Type uimaType = aTS.getType(type);
+//
+//        if (uimaType == null) {
+//			throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
+//					+ "] is not defined in type system");
+//        }
+//
+//        return uimaType;
+//    }
+//
 	@Override
 	public void destroy()
 	{
 		if (treetagger != null) {
-			getContext().getLogger().log(Level.INFO,
-					"Destroying TreeTagger process");
+			getLogger().info("Cleaning up TreeTagger process");
 			treetagger.destroy();
 		}
 	}
@@ -212,10 +208,8 @@ public abstract class TreeTaggerTT4JBase<T>
 	{
 		public File searchInFilesystem(final Set<String> aSearchedIn)
 		{
-			String platformId = treetagger.getPlatformDetector()
-					.getPlatformId();
-			String exeSuffix = treetagger.getPlatformDetector()
-					.getExecutableSuffix();
+			String platformId = treetagger.getPlatformDetector().getPlatformId();
+			String exeSuffix  = treetagger.getPlatformDetector().getExecutableSuffix();
 
 			for (final String p : getSearchPaths(_additionalPaths, "bin")) {
 				if (p == null) {
@@ -245,8 +239,7 @@ public abstract class TreeTaggerTT4JBase<T>
 		{
 			try {
 				if (getContext().getResourceURL(RESOURCE_TREETAGGER) != null) {
-					// If we cannot find it in the classpath, try using the
-					// specified
+					// If we cannot find it in the classpath, try using the specified
 					// resource
 					String platformId = treetagger.getPlatformDetector()
 							.getPlatformId();
@@ -317,35 +310,27 @@ public abstract class TreeTaggerTT4JBase<T>
 				}
 			}
 			if (exeFile == null) {
-				throw new IOException(
-						"Unable to locate tree-tagger binary in the following locations "
-								+ searchedIn
-								+ ". Make sure the environment variable 'TREETAGGER_HOME' or "
-								+ "'TAGDIR' or the system property 'treetagger.home' point to the TreeTagger "
-								+ "installation directory.");
+				throw new IOException("Unable to locate tree-tagger binary in the following locations " +
+						searchedIn + ". Make sure the environment variable 'TREETAGGER_HOME' or " +
+						"'TAGDIR' or the system property 'treetagger.home' point to the TreeTagger " +
+						"installation directory.");
 			}
 
 			exeFile.setExecutable(true);
 
 			if (!exeFile.isFile()) {
-				throw new IOException("TreeTagger executable at [" + exeFile
-						+ "] is not a file.");
+				throw new IOException("TreeTagger executable at ["+exeFile+"] is not a file.");
 			}
 
 			if (!exeFile.canRead()) {
-				throw new IOException("TreeTagger executable at [" + exeFile
-						+ "] is not readable.");
+				throw new IOException("TreeTagger executable at ["+exeFile+"] is not readable.");
 			}
 
 			if (!exeFile.canExecute()) {
-				throw new IOException("TreeTagger executable at [" + exeFile
-						+ "] not executable.");
+				throw new IOException("TreeTagger executable at ["+exeFile+"] not executable.");
 			}
 
-			getContext().getLogger().log(
-					Level.INFO,
-					"TreeTagger executable location: "
-							+ exeFile.getAbsoluteFile());
+			getLogger().info("TreeTagger executable location: " + exeFile.getAbsoluteFile());
 			return exeFile.getAbsolutePath();
 		}
 	}

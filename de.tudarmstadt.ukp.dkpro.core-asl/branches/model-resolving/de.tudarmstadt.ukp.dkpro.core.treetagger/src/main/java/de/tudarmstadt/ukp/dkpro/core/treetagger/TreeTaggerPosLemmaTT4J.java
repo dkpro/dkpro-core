@@ -38,6 +38,7 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.experiments.sy.externalresource.DKProModel;
@@ -85,8 +86,7 @@ public class TreeTaggerPosLemmaTT4J
 	public void process(final CAS aCas)
 		throws AnalysisEngineProcessException
 	{
-		getContext().getLogger()
-				.log(Level.FINE, "Running TreeTagger annotator");
+		getLogger().debug("Running TreeTagger POS tagger and lemmatizer");
 		try {
 			final String language;
 
@@ -104,11 +104,10 @@ public class TreeTaggerPosLemmaTT4J
 				language = aCas.getDocumentLanguage();
 			}
 			else {
-				throw new AnalysisEngineProcessException(
-						new Throwable(
-								"Neither the LanguageCode parameter nor the document "
-										+ "language is set. Do not know what language to use. "
-										+ "Exiting."));
+	            throw new AnalysisEngineProcessException(new Throwable(
+	            		"Neither the LanguageCode parameter nor the document " +
+	            		"language is set. Do not know what language to use. " +
+	            		"Exiting."));
 			}
 
 			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
@@ -125,16 +124,14 @@ public class TreeTaggerPosLemmaTT4J
 			treetagger.setHandler(new TokenHandler<AnnotationFS>()
 			{
 				@Override
-				public void token(AnnotationFS aToken, String aPos,
-						String aLemma)
+				public void token(AnnotationFS aToken, String aPos, String aLemma)
 				{
 					synchronized (aCas) {
 						TypeSystem ts = aCas.getTypeSystem();
 						// Add the Part of Speech
 						if (posEnabled && aPos != null) {
-							Type posTag = getTagType(
-									(DKProModel) treetagger.getModel(), aPos,
-									ts);
+							Type posTag = TagsetMappingFactory.getTagType(
+									((DKProModel) treetagger.getModel()).getMapping(), aPos, ts);
 							AnnotationFS posAnno = aCas.createAnnotation(
 									posTag, aToken.getBegin(), aToken.getEnd());
 							posAnno.setStringValue(
@@ -147,11 +144,9 @@ public class TreeTaggerPosLemmaTT4J
 						// Add the lemma
 						if (lemmaEnabled && aLemma != null) {
 							AnnotationFS lemmaAnno = aCas.createAnnotation(
-									lemmaTag, aToken.getBegin(),
-									aToken.getEnd());
+									lemmaTag, aToken.getBegin(), aToken.getEnd());
 							lemmaAnno.setStringValue(lemmaValue,
-									isInternStrings() ? aLemma.intern()
-											: aLemma);
+									isInternStrings() ? aLemma.intern() : aLemma);
 							lemma[count.get()] = lemmaAnno;
 							aToken.setFeatureValue(featLemma, lemmaAnno);
 						}
