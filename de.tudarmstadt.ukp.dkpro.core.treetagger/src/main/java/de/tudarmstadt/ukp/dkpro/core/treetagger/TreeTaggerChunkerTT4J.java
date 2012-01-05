@@ -35,6 +35,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.experiments.sy.externalresource.DKProModel;
 
@@ -83,8 +84,7 @@ public class TreeTaggerChunkerTT4J
 	public void process(final CAS aCas)
 		throws AnalysisEngineProcessException
 	{
-		getContext().getLogger()
-				.log(Level.FINE, "Running TreeTagger annotator");
+		getLogger().debug("Running TreeTagger chunker");
 		try {
 			final String language;
 
@@ -102,11 +102,10 @@ public class TreeTaggerChunkerTT4J
 				language = aCas.getDocumentLanguage();
 			}
 			else {
-				throw new AnalysisEngineProcessException(
-						new Throwable(
-								"Neither the LanguageCode parameter nor the document "
-										+ "language is set. Do not know what language to use. "
-										+ "Exiting."));
+	            throw new AnalysisEngineProcessException(new Throwable(
+	            		"Neither the LanguageCode parameter nor the document " +
+	            		"language is set. Do not know what language to use. " +
+	            		"Exiting."));
 			}
 
 			// Set the handler creating new UIMA annotations from the analyzed
@@ -134,8 +133,7 @@ public class TreeTaggerChunkerTT4J
 						String fields2[] = fields1[1].split("-");
 						// String tag = fields1[0];
 						String flag = fields2.length == 2 ? fields2[0] : "NONE";
-						String chunk = fields2.length == 2 ? fields2[1]
-								: fields2[0];
+						String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
 
 						// Start of a new hunk
 						if (!chunk.equals(openChunk) || "B".equals(flag)) {
@@ -156,17 +154,14 @@ public class TreeTaggerChunkerTT4J
 				private void chunkComplete()
 				{
 					if (openChunk != null) {
-						Type chunkType = getTagType(
-								(DKProModel) treetagger.getModel(), openChunk,
+						Type chunkType = TagsetMappingFactory.getTagType(
+								((DKProModel) treetagger.getModel()).getMapping(), openChunk,
 								aCas.getTypeSystem());
-						AnnotationFS chunk = aCas.createAnnotation(chunkType,
-								start, end);
-						Feature feat = chunkType
-								.getFeatureByBaseName("chunkValue");
+						AnnotationFS chunk = aCas.createAnnotation(chunkType, start, end);
+						Feature feat = chunkType.getFeatureByBaseName("chunkValue");
 						if (feat != null) {
-							chunk.setStringValue(feat,
-									isInternStrings() ? openChunk.intern()
-											: openChunk);
+							chunk.setStringValue(feat, isInternStrings() ? openChunk.intern()
+									: openChunk);
 						}
 						aCas.addFsToIndexes(chunk);
 
@@ -187,9 +182,8 @@ public class TreeTaggerChunkerTT4J
 			// Commit the final chunk
 			handler.token(null, null, null);
 
-			getContext().getLogger().log(Level.FINE,
-					"Parsed " + count.get() + " chunks");
-		}
+			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " chunks");
+		} 
 		catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
@@ -205,8 +199,7 @@ public class TreeTaggerChunkerTT4J
 				typeAdapterClass = DKProPOSTokenAdapter.class.getName();
 			}
 
-			return (TokenAdapter<AnnotationFS>) Class.forName(typeAdapterClass)
-					.newInstance();
+			return (TokenAdapter<AnnotationFS>) Class.forName(typeAdapterClass).newInstance();
 		}
 		catch (Exception e) {
 			throw new ResourceInitializationException(e);
@@ -229,10 +222,8 @@ public class TreeTaggerChunkerTT4J
 		public String getText(AnnotationFS aObject)
 		{
 			synchronized (aObject.getCAS()) {
-				Type t = aObject.getCAS().getTypeSystem()
-						.getType(POS.class.getName());
-				String pos = aObject.getFeatureValueAsString(t
-						.getFeatureByBaseName("PosValue"));
+				Type t = aObject.getCAS().getTypeSystem().getType(POS.class.getName());
+				String pos = aObject.getFeatureValueAsString(t.getFeatureByBaseName("PosValue"));
 				return aObject.getCoveredText() + "-" + pos;
 			}
 		}
