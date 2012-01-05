@@ -40,6 +40,7 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -86,7 +87,7 @@ public class TreeTaggerPosLemmaTT4J
 	public void process(final CAS aCas)
 		throws AnalysisEngineProcessException
 	{
-		getContext().getLogger().log(Level.FINE, "Running TreeTagger annotator");
+		getLogger().debug("Running TreeTagger POS tagger and lemmatizer");
 		try {
 			final String language;
 
@@ -130,7 +131,8 @@ public class TreeTaggerPosLemmaTT4J
 						TypeSystem ts = aCas.getTypeSystem();
 						// Add the Part of Speech
 						if (posEnabled && aPos != null) {
-							Type posTag = getTagType((DKProModel) treetagger.getModel(), aPos, ts);
+							Type posTag = TagsetMappingFactory.getTagType(
+									((DKProModel) treetagger.getModel()).getMapping(), aPos, ts);
 							AnnotationFS posAnno = aCas.createAnnotation(
 									posTag, aToken.getBegin(), aToken.getEnd());
 							posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),

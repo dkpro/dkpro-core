@@ -17,9 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory.getMapping;
-import static de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory.getTagType;
-
+import static de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +124,7 @@ public class ImsCwbReader
                 int len = token.length();
 
                 if (writePOS) {
-                    Type posType = getTagType(getMapping(taggerTagset), pos, typeSystem);
+                    Type posType = getTagType(getMapping("tagger", taggerTagset, null), pos, typeSystem);
                     AnnotationFS posAnno = aCAS.createAnnotation(
                                 posType, offset, offset + len);
                     posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), pos);

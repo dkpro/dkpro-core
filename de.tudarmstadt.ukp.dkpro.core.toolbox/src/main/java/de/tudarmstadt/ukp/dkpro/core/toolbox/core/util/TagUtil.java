@@ -28,7 +28,7 @@ public class TagUtil
     public static String getSimplifiedTag(String tag, String language)
         throws MalformedURLException
     {
-        Map<String,String> mapping = TagsetMappingFactory.getMapping("tagger", language);
+        Map<String,String> mapping = TagsetMappingFactory.getMapping("tagger", language, null);
         
         if (mapping.containsKey(tag)) {
             return getShortName(mapping.get(tag)); 
