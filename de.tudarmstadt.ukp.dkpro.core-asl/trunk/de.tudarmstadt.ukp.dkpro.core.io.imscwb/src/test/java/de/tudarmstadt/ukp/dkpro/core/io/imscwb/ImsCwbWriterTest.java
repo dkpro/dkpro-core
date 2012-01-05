@@ -16,19 +16,19 @@
  * limitations under the License.
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
+import static org.junit.Assert.assertEquals;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.uimafit.pipeline.SimplePipeline.runPipeline;
+
 import java.io.File;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReader;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.component.xwriter.CASDumpWriter;
-
-import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.CollectionReaderFactory.*;
-import static org.uimafit.factory.AnalysisEngineFactory.*;
-import static org.uimafit.pipeline.SimplePipeline.*;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
@@ -74,6 +74,7 @@ public class ImsCwbWriterTest
 		assertEquals(reference, actual);
 	}
 
+	@Ignore("This test cannot work (yet) because we do not ship the cwb-encode and cwb-makeall binaries")
 	@Test
 	public void test2()
 		throws Exception
