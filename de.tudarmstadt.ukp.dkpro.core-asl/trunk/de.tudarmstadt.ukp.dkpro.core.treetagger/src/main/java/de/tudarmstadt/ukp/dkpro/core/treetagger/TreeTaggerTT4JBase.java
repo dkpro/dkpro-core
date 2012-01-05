@@ -20,15 +20,12 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.getUrlAsFile;
 import static java.io.File.separator;
 import static org.annolab.tt4j.Util.getSearchPaths;
-import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import org.annolab.tt4j.DefaultExecutableResolver;
@@ -40,13 +37,11 @@ import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.UimaContext;
-import org.apache.uima.cas.Type;
-import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
@@ -90,8 +85,8 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name=PARAM_INTERN_STRINGS, mandatory=false, defaultValue="true")
 	private boolean internStrings;
 
-
-	private Set<String> missingTags;
+//
+//	private Set<String> missingTags;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -109,7 +104,7 @@ public abstract class TreeTaggerTT4JBase<T>
 						"properties file has to be specified as well.");
 			}
 
-			missingTags = new HashSet<String>();
+//			missingTags = new HashSet<String>();
 
 			treetagger = new TreeTaggerWrapper<T>();
 
@@ -144,42 +139,42 @@ public abstract class TreeTaggerTT4JBase<T>
 	protected abstract ModelResolver getModelResolver()
 		throws ResourceInitializationException;
 
-	/**
-	 * Get the UIMA type name for the given tag in the given language.
-	 *
-	 * @param aModel a model
-	 * @param aTag a tag.
-	 * @return UIMA type name
-	 */
-	protected Type getTagType(DKProModel aModel, String aTag, TypeSystem aTS)
-	{
-        Map<String, String> mapping = aModel.getMapping();
-
-        String type = mapping.get(aTag);
-        if (type == null) {
-        	missingTags.add(aTag);
-        	//getContext().getLogger().log(Level.WARNING, "Mapping does not contain tag: " + aTag);
-        	type = mapping.get("*");
-        }
-        if (type == null) {
-        	throw new IllegalStateException("No fallback (*) mapping defined!");
-        }
-
-        Type uimaType = aTS.getType(type);
-
-        if (uimaType == null) {
-			throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
-					+ "] is not defined in type system");
-        }
-
-        return uimaType;
-    }
-
+//	/**
+//	 * Get the UIMA type name for the given tag in the given language.
+//	 *
+//	 * @param aModel a model
+//	 * @param aTag a tag.
+//	 * @return UIMA type name
+//	 */
+//	protected Type getTagType(DKProModel aModel, String aTag, TypeSystem aTS)
+//	{
+//        Map<String, String> mapping = aModel.getMapping();
+//
+//        String type = mapping.get(aTag);
+//        if (type == null) {
+//        	missingTags.add(aTag);
+//        	//getContext().getLogger().log(Level.WARNING, "Mapping does not contain tag: " + aTag);
+//        	type = mapping.get("*");
+//        }
+//        if (type == null) {
+//        	throw new IllegalStateException("No fallback (*) mapping defined!");
+//        }
+//
+//        Type uimaType = aTS.getType(type);
+//
+//        if (uimaType == null) {
+//			throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
+//					+ "] is not defined in type system");
+//        }
+//
+//        return uimaType;
+//    }
+//
 	@Override
 	public void destroy()
 	{
 		if (treetagger != null) {
-			getContext().getLogger().log(Level.INFO, "Destroying TreeTagger process");
+			getLogger().info("Cleaning up TreeTagger process");
 			treetagger.destroy();
 		}
 	}
@@ -311,8 +306,7 @@ public abstract class TreeTaggerTT4JBase<T>
 				throw new IOException("TreeTagger executable at ["+exeFile+"] not executable.");
 			}
 
-			getContext().getLogger().log(Level.INFO,
-					"TreeTagger executable location: " + exeFile.getAbsoluteFile());
+			getLogger().info("TreeTagger executable location: " + exeFile.getAbsoluteFile());
 			return exeFile.getAbsolutePath();
 		}
 	}
@@ -365,7 +359,8 @@ public abstract class TreeTaggerTT4JBase<T>
 			throws IOException
 		{
 			if (overrideModelPath != null) {
-				Map<String, String> mapping = loadProperties(overrideMappingPath.toURI().toURL());
+				Map<String, String> mapping = TagsetMappingFactory.loadProperties(
+						overrideMappingPath.toURI().toURL());
 				return new DKProModel(aModelName, overrideModelPath, overrideModelEncoding, mapping);
 			}
 
@@ -395,14 +390,14 @@ public abstract class TreeTaggerTT4JBase<T>
 							+ aModelName + "] at [" + propertiesFile + "]");
 				}
 
-				mapping = loadProperties(mappingFile.toURI().toURL());
-				properties = loadProperties(propertiesFile.toURI().toURL());
+				mapping = TagsetMappingFactory.loadProperties(mappingFile.toURI().toURL());
+				properties = TagsetMappingFactory.loadProperties(propertiesFile.toURI().toURL());
 			}
 
 			// Try classpath
 			if (modelFile == null) {
 				String base = "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/";
-				String mappingLoc = "/de/tudarmstadt/ukp/dkpro/core/treetagger/map/"+baseMapFile;
+//				String mappingLoc = "/de/tudarmstadt/ukp/dkpro/core/treetagger/map/"+baseMapFile;
 				String propertiesLoc = base+baseFile+".properties";
 				String modelLoc = base+baseFile+".par";
 				searchedIn.add("classpath:"+modelLoc);
@@ -414,18 +409,12 @@ public abstract class TreeTaggerTT4JBase<T>
 						throw new IOException("There is no tag mapping for " + "model [" + aModelName
 								+ "] at [" + propertiesLoc + "]");
 					}
-					URL mappingUrl = getClass().getResource(mappingLoc);
-					if (mappingUrl != null) {
-						mapping = loadProperties(mappingUrl);
-					}
-					else {
-						mapping = new HashMap<String, String>();
-						mapping.put("*", O.class.getName());
-					}
-
-					properties = loadProperties(propertiesUrl);
+					
+					properties = TagsetMappingFactory.loadProperties(propertiesUrl);
 					modelFile = getUrlAsFile(modelUrl, true);
 				}
+				
+				mapping = TagsetMappingFactory.getMapping(getType(), aModelName, O.class.getName());
 			}
 
 			if (modelFile == null || properties == null || mapping == null) {
@@ -439,26 +428,26 @@ public abstract class TreeTaggerTT4JBase<T>
 			return new DKProModel(aModelName, modelFile, modelEnc, mapping);
 		}
 
-		private Map<String, String> loadProperties(URL aUrl)
-		{
-			InputStream is = null;
-			try {
-				is = aUrl.openStream();
-				Properties mappingProperties = new Properties();
-				mappingProperties.load(is);
-				Map<String, String> mapping = new HashMap<String, String>();
-				for (String key : mappingProperties.stringPropertyNames()) {
-					mapping.put(key.trim(), mappingProperties.getProperty(key).trim());
-				}
-				return mapping;
-			}
-			catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-			finally {
-				closeQuietly(is);
-			}
-		}
+//		private Map<String, String> loadProperties(URL aUrl)
+//		{
+//			InputStream is = null;
+//			try {
+//				is = aUrl.openStream();
+//				Properties mappingProperties = new Properties();
+//				mappingProperties.load(is);
+//				Map<String, String> mapping = new HashMap<String, String>();
+//				for (String key : mappingProperties.stringPropertyNames()) {
+//					mapping.put(key.trim(), mappingProperties.getProperty(key).trim());
+//				}
+//				return mapping;
+//			}
+//			catch (IOException e) {
+//				throw new RuntimeException(e);
+//			}
+//			finally {
+//				closeQuietly(is);
+//			}
+//		}
 	}
 
 	/**

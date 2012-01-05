@@ -61,9 +61,19 @@ public class TagsetMappingFactory
         return uimaType;
     }
 
-	public static final Map<String, String> getMapping(String aTool, String aLanguage)
+	public static final Map<String, String> getMapping(String aTool, String aModelName, String aDefaultTag)
 	{
-		return loadProperties(TagsetMappingFactory.class.getResource("tagset/"+aLanguage+"-"+aTool+".map"));
+		URL mappingUrl = TagsetMappingFactory.class.getResource("tagset/"+aModelName+"-"+aTool+".map");
+		if (mappingUrl != null) {
+			return loadProperties(mappingUrl);
+		}
+		else {
+			Map<String, String> mapping = new HashMap<String, String>();
+			if (aDefaultTag != null) {
+				mapping.put("*", aDefaultTag);
+			}
+			return mapping;
+		}
 	}
 
     public static final Map<String, String> getMapping(String tagsetFilename) throws IOException
@@ -73,7 +83,7 @@ public class TagsetMappingFactory
         );
     }
 
-    private static Map<String, String> loadProperties(URL aUrl)
+    public static Map<String, String> loadProperties(URL aUrl)
 	{
 		InputStream is = null;
 		try {

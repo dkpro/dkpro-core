@@ -37,6 +37,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 /**
@@ -88,7 +89,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			final CAS aCas)
 	throws AnalysisEngineProcessException
 	{
-		getContext().getLogger().log(Level.FINE, "Running TreeTagger annotator");
+		getLogger().debug("Running TreeTagger chunker");
 		try {
 			final String language;
 
@@ -162,8 +163,9 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 				void chunkComplete()
 				{
 					if (openChunk != null) {
-						Type chunkType = getTagType((DKProModel) treetagger.getModel(), openChunk,
-								aCas.getTypeSystem());
+						Type chunkType = TagsetMappingFactory.getTagType(
+								((DKProModel) treetagger.getModel()).getMapping(),
+								openChunk, aCas.getTypeSystem());
 						AnnotationFS chunk = aCas.createAnnotation(chunkType, start, end);
 						Feature feat = chunkType.getFeatureByBaseName("chunkValue");
 						if (feat != null) {

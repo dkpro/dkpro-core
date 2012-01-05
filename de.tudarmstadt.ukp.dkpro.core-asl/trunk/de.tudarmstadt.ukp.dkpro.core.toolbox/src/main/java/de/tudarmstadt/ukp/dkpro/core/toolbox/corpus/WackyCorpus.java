@@ -19,9 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.uima.collection.CollectionReader;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -44,19 +41,33 @@ public class WackyCorpus
 {
     
     public enum WackyLanguageEdition {
-        DEWAC,
-        UKWAC
+        // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
+        DEWAC("de", "de-stts"),
+        UKWAC("en", "en");
+        
+        private String language;
+        private String tagSet;
+        
+        private WackyLanguageEdition(String aLanguage, String aTagSet)
+		{
+        	language = aLanguage;
+        	tagSet = aTagSet;
+		}
+        
+        public String getTagSet()
+		{
+			return tagSet;
+		}
+        
+        public String getLanguage()
+		{
+			return language;
+		}
     }
     
-    // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
-    private static Map<WackyLanguageEdition,String> language2TagsetMap = new HashMap<WackyLanguageEdition, String>() {{
-       put(WackyLanguageEdition.DEWAC, "classpath:tagset/stts.map"); 
-       put(WackyLanguageEdition.UKWAC, "classpath:tagset/en-tagger.map"); 
-    }};
-
     private static final String WORKSPACE = "wacky";
     
-    private WackyLanguageEdition language;
+    private WackyLanguageEdition edition;
     private CollectionReader reader;
     
     public WackyCorpus(WackyLanguageEdition languageEdition) throws Exception
@@ -77,30 +88,25 @@ public class WackyCorpus
                 ImsCwbReader.PARAM_PATH, wackyPath,
                 ImsCwbReader.PARAM_LANGUAGE, languageEdition.name(),
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
-                ImsCwbReader.PARAM_TAGGER_TAGSET, language2TagsetMap.get(languageEdition),
+                ImsCwbReader.PARAM_TAGGER_TAGSET, languageEdition.getTagSet(),
                 ImsCwbReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt.gz" 
                 }
         );
 
-        language = languageEdition;
+        edition = languageEdition;
     }
     
     @Override
     public String getLanguage()
     {
-        switch(this.language) {
-            case DEWAC:
-                return "de";
-            default:
-                return "en";
-        }
+    	return edition.getLanguage();
     }
 
     @Override
     public String getName()
     {
-        return this.language.toString();
+        return this.edition.toString();
     }
 
     @Override
