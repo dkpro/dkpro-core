@@ -35,13 +35,13 @@
 				<enabled>false</enabled>
 			</snapshots>
 			<id>ukp-oss</id>
-			<url>http://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/repo/</url>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/repo/</url>
 		</repository>
 	</repositories>
 	<distributionManagement>
 		<repository>
 			<id>ukp-oss</id>
-			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
+			<url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
 		</repository>
 	</distributionManagement>
 	<issueManagement>
@@ -325,7 +325,7 @@
 			<dependency>
 				<groupId>org.uimafit</groupId>
 				<artifactId>uimafit</artifactId>
-				<version>1.2.0</version>
+				<version>1.3.0-rc1</version>
 			</dependency>
 			<dependency>
 				<groupId>xerces</groupId>
