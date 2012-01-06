@@ -53,4 +53,97 @@ public class WikipediaArticleReaderTest
 
 		assertEquals(28, i);
 	}
+
+	@Test
+	public void wikipediaArticleIdReaderTest()
+		throws Exception
+	{
+		CollectionReader reader = createCollectionReader(
+		        WikipediaArticleReader.class,
+		        WikipediaArticleReader.PARAM_PAGE_ID_LIST, new String[]{"1041","103","107"},
+				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+				WikipediaReaderBase.PARAM_USER,     "student",
+				WikipediaReaderBase.PARAM_PASSWORD, "student",
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
+		);
+
+		int i = 0;
+		for (JCas jcas : new JCasIterable(reader)) {
+			assertNotNull(jcas);
+			i++;
+		}
+
+		assertEquals(3, i);
+	}
+
+	@Test
+	public void wikipediaArticleTitleReaderTest()
+		throws Exception
+	{
+		CollectionReader reader = createCollectionReader(
+		        WikipediaArticleReader.class,
+		        WikipediaArticleReader.PARAM_PAGE_TITLE_LIST, new String[]{"TK1","TK3"},
+				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+				WikipediaReaderBase.PARAM_USER,     "student",
+				WikipediaReaderBase.PARAM_PASSWORD, "student",
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
+		);
+
+		int i = 0;
+		for (JCas jcas : new JCasIterable(reader)) {
+			assertNotNull(jcas);
+			i++;
+		}
+
+		assertEquals(2, i);
+	}
+
+	@Test
+	public void wikipediaArticleIdFileReaderTest()
+		throws Exception
+	{
+		CollectionReader reader = createCollectionReader(
+		        WikipediaArticleReader.class,
+		        WikipediaArticleReader.PARAM_PATH_TO_PAGE_ID_LIST, "src/test/resources/idList",
+				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+				WikipediaReaderBase.PARAM_USER,     "student",
+				WikipediaReaderBase.PARAM_PASSWORD, "student",
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
+		);
+
+		int i = 0;
+		for (JCas jcas : new JCasIterable(reader)) {
+			assertNotNull(jcas);
+			i++;
+		}
+
+		assertEquals(3, i);
+	}
+
+	@Test
+	public void wikipediaArticleTitleFileReaderTest()
+		throws Exception
+	{
+		CollectionReader reader = createCollectionReader(
+		        WikipediaArticleReader.class,
+		        WikipediaArticleReader.PARAM_PATH_TO_PAGE_TITLE_LIST, "src/test/resources/titleList",
+				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+				WikipediaReaderBase.PARAM_USER,     "student",
+				WikipediaReaderBase.PARAM_PASSWORD, "student",
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
+		);
+
+		int i = 0;
+		for (JCas jcas : new JCasIterable(reader)) {
+			assertNotNull(jcas);
+			i++;
+		}
+
+		assertEquals(2, i);
+	}
+
 }
