@@ -98,14 +98,6 @@ public abstract class WikipediaStandardReaderBase
 	@ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
 	protected String[] pageNameParamArray;
 
-	/**
-	 * Ignores missing pages when loading from a id/title list or file
-	 * (Optional)
-	 */
-	public static final String PARAM_IGNORE_MISSING_PAGES = "IgnoreMissingPages";
-	@ConfigurationParameter(name = PARAM_IGNORE_MISSING_PAGES, mandatory = true, defaultValue="false")
-	protected boolean ignoreMissingPages;
-
 	private Set<String> pageIds = new HashSet<String>();
 	private Set<String> pageTitles = new HashSet<String>();
 
