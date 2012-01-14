@@ -50,7 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * This Consumer outputs the content of all CASes into the IMS workbench format.
  * 
- * This writer procudes a text file which needs to be converted to the binary IMS CWB index files
+ * This writer produces a text file which needs to be converted to the binary IMS CWB index files
  * using the command line tools that come with the CWB. 
  * 
  * It is possible to set the parameter {@link #PARAM_CQP_HOME} to directly create output in the
@@ -69,6 +69,7 @@ public class ImsCwbWriter
 	public static final String ATTR_END = "end";
 	public static final String ATTR_POS = "pos";
 	public static final String ATTR_LEMMA = "lemma";
+	public static final String ATTR_ID = "id";
 	public static final String ATTR_URI = "uri";
 	
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
@@ -176,72 +177,47 @@ public class ImsCwbWriter
 
 		try {
 			if (writeTextTag) {
-				bw.write("<text id=\"" + documentId + "\">");
-				bw.write(LS);
+				startElement(E_TEXT, ATTR_ID, documentId);
 			}
 			if (writeDocumentTag) {
-				bw.write("<document uri=\"" + documentUri + "\">");
-				bw.write(LS);
+				startElement(E_DOCUMENT, ATTR_URI, documentUri);
 			}
 			for (Sentence sentence : select(jcas, Sentence.class)) {
 				attendChildProceess();
-				bw.write("<");
-				bw.write(E_SENTENCE);
-				bw.write(">");
-				bw.write(LS);
+				startElement(E_SENTENCE);
 				for (Token token : selectCovered(jcas, Token.class, sentence)) {
 					// write token
-					bw.write(token.getCoveredText());
+					bw.write(escapeXml(token.getCoveredText()));
 
 					// write pos tag
 					if (writePOS) {
-						bw.write(TAB);
-						if (token.getPos() != null) {
-							bw.write(token.getPos().getPosValue());
-						}
-						else {
-							bw.write("-");
-						}
+						field(token.getPos() != null ? token.getPos().getPosValue() : "-");
 					}
 
 					// write lemma
 					if (writeLemma) {
-						bw.write(TAB);
-						if (token.getLemma() != null) {
-							bw.write(token.getLemma().getValue());
-						}
-						else {
-							bw.write("-");
-						}
+						field(token.getLemma() != null ? token.getLemma().getValue() : "-");
 					}
 
 					// write doc-id
 					if (writeDocId) {
-						bw.write(TAB);
-						bw.write(documentId);
+						field(documentId);
 					}
 
 					// write offsets
 					if (writeOffsets) {
-						bw.write(TAB);
-						bw.write(String.valueOf(token.getBegin()));
-						bw.write(TAB);
-						bw.write(String.valueOf(token.getEnd()));
+						field(String.valueOf(token.getBegin()));
+						field(String.valueOf(token.getEnd()));
 					}
 					bw.write(LS);
 				}
-				bw.write("</");
-				bw.write(E_SENTENCE);
-				bw.write(">");
-				bw.write(LS);
+				endElement(E_SENTENCE);
 			}
 			if (writeDocumentTag) {
-				bw.write("</document>");
-				bw.write(LS);
+				endElement(E_DOCUMENT);
 			}
 			if (writeTextTag) {
-				bw.write("</text>");
-				bw.write(LS);
+				endElement(E_TEXT);
 			}
 
 			currentId++;
@@ -249,6 +225,38 @@ public class ImsCwbWriter
 		catch (IOException e) {
 			throw new AnalysisEngineProcessException(e);
 		}
+	}
+	
+	private void startElement(String aElement, String... aAttributes) throws IOException
+	{
+		bw.write('<');
+		bw.write(aElement);
+		if (aAttributes != null && aAttributes.length > 0) {
+			bw.write(" ");
+			for (int i = 0; i < aAttributes.length; i += 2) {
+				bw.write(aAttributes[i]);
+				bw.write("=\"");
+				bw.write(escapeXml(aAttributes[i+1]));
+				bw.write('"');
+			}
+		}
+		bw.write('>');
+		bw.write(LS);
+	}
+	
+	private void endElement(String aElement) throws IOException
+	{
+		bw.write("</");
+		bw.write(aElement);
+		bw.write('>');
+		bw.write(LS);
+		
+	}
+	
+	private void field(String aValue) throws IOException
+	{
+		bw.write(TAB);
+		bw.write(escapeXml(aValue));
 	}
 	
 	private Writer getWriter() throws IOException
@@ -302,12 +310,12 @@ public class ImsCwbWriter
 			
 			if (writeDocumentTag) {
 				cmd.add("-S");
-				cmd.add("document:0+uri");
+				cmd.add(E_DOCUMENT+":0+"+ATTR_URI);
 			}
 
 			if (writeTextTag) {
 				cmd.add("-S");
-				cmd.add(E_TEXT+":0+id");
+				cmd.add(E_TEXT+":0+"+ATTR_ID);
 			}
 
 			{
@@ -400,5 +408,11 @@ public class ImsCwbWriter
 			throw new IllegalArgumentException("Encoding ["+enc+"] not supported by CWB.");
 		}
 		return enc;
+	}
+	
+	private static String escapeXml(String aString)
+	{
+		return aString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+				.replaceAll("\"", "&quot;").replaceAll("'", "&qpos;");
 	}
 }
