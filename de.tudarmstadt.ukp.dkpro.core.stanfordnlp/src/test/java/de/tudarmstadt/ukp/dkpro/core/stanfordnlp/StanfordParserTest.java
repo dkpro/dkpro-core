@@ -10,12 +10,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.junit.Assert.assertTrue;
+import static java.util.Arrays.asList;
+import static org.junit.Assert.*;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,8 +31,6 @@ import org.junit.Assume;
 import org.junit.Test;
 import org.uimafit.util.JCasUtil;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -67,8 +67,7 @@ public class StanfordParserTest
 			setupGerman();
 		}
 
-		// TODO gold constituents have to be changed to SPAN instead of token
-		// offset
+		// TODO gold constituents have to be changed to SPAN instead of token offset
 		HashSet<String> constituentGold = new HashSet<String>();
 		constituentGold.add("ROOT 0,112");
 		constituentGold.add("S 0,112");
@@ -93,12 +92,9 @@ public class StanfordParserTest
 			int lastTokenOffset = lastToken.getEnd();
 			String toFind = constType.toUpperCase() + " " + firstTokenOffset
 					+ "," + lastTokenOffset;
-			System.out.println("CONST: "
-					+ toFind
-					+ " ["
-					+ germanCas.getDocumentText().substring(
-							firstToken.getBegin(), lastToken.getEnd()) + "] - "
-					+ constituentGold.contains(toFind));
+			System.out.println("CONST: " + toFind + " ["
+					+ germanCas.getDocumentText().substring(firstToken.getBegin(),
+							lastToken.getEnd()) + "] - " + constituentGold.contains(toFind));
 			okCons &= constituentGold.contains(toFind);
 			constituentGold.remove(toFind);
 		}
@@ -242,120 +238,77 @@ public class StanfordParserTest
 	}
 
 	@Test
-	public void testEnglishPos()
+	public void testEnglishPosLemma()
 		throws Exception
 	{
 		if (englishCas == null) {
 			setupEnglish();
 		}
+		
+		List<String> refOffset = asList("0-2", "3-7", "8-9", "10-14", "15-26", "27-34", "35-43", 
+				"43-44", "45-50", "51-59", "60-62", "63-67", "68-80", "81-84", "85-97", "98-100",
+				"101-109", "109-110");
+		
+		List<String> refLemma = asList("we", "need", "a", "very", "complicate", "example", 
+				"sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+				"dependency", "as", "possible", ".");
 
-		Set<String> posGold = new HashSet<String>();
-		posGold.add("PRP 0,2");
-		posGold.add("VBP 3,7");
-		posGold.add("DT 8,9");
-		posGold.add("RB 10,14");
-		posGold.add("VBN 15,26");
-		posGold.add("NN 27,34");
-		posGold.add("NN 35,43");
-		posGold.add(", 43,44");
-		posGold.add("WDT 45,50");
-		posGold.add("VBZ 51,59");
-		posGold.add("IN 60,62");
-		posGold.add("JJ 63,67");
-		posGold.add("NNS 68,80");
-		posGold.add("CC 81,84");
-		posGold.add("NNS 85,97");
-		posGold.add("IN 98,100");
-		posGold.add("JJ 101,109");
-		posGold.add(". 109,110");
+		List<String> refPos = asList("PRP", "VBP", "DT", "RB", "VBN", "NN", 
+				"NN", ",", "WDT", "VBZ", "IN", "JJ", "NNS", "CC",
+				"NNS", "IN", "JJ", ".");
 
-		boolean okPos = true;
-		if (posGold != null) {
-			FSIndex<Annotation> posIndex = englishCas
-					.getAnnotationIndex(POS.type);
-
-			System.out.println("Checking POS tags...");
-			System.out.println("# gold POS tags " + posGold.size());
-			System.out.println("# found pos tags " + posIndex.size());
-			for (POS curPos : select(englishCas, POS.class)) {
-				String posType = curPos.getPosValue();
-				int posBegin = curPos.getBegin();
-				int posEnd = curPos.getEnd();
-
-				String toFind = posType + " " + posBegin + "," + posEnd;
-				System.out.println("POS: " + toFind + " - "
-						+ posGold.contains(toFind));
-				okPos &= posGold.contains(toFind);
-				posGold.remove(toFind);
-			}
-
-			if (posGold.size() > 0) {
-				okPos = false;
-			}
-
+		List<String> actualLemma = new ArrayList<String>();
+		List<String> actualPos = new ArrayList<String>();
+		List<String> actualOffset = new ArrayList<String>();
+		for (Token t : select(englishCas, Token.class)) {
+			actualLemma.add(t.getLemma().getValue());
+			actualPos.add(t.getPos().getPosValue());
+			actualOffset.add(t.getBegin()+"-"+t.getEnd());
+			
+			// Make sure lemma and pos have same offsets as token
+			assertEquals(t.getBegin(), t.getLemma().getBegin());
+			assertEquals(t.getEnd(), t.getLemma().getEnd());
+			assertEquals(t.getBegin(), t.getPos().getBegin());
+			assertEquals(t.getEnd(), t.getPos().getEnd());
 		}
-		assertTrue(
-				"POS tags did not match the gold standard. Gold POS tags that were not found: "
-						+ posGold, okPos);
+		
+		assertEquals(refLemma, actualLemma);
+		assertEquals(refPos, actualPos);
+		assertEquals(refOffset, actualOffset);
 	}
-
+	
+	/**
+	 * Test POS and offsets for German. Lemmas are not supported for German.
+	 */
 	@Test
-	public void testEnglishLemmatizer()
+	public void testGermanPosLemma()
 		throws Exception
 	{
-		if (englishCas == null) {
-			setupEnglish();
+		if (germanCas == null) {
+			setupGerman();
 		}
+		
+		List<String> refOffset = asList("0-3", "4-12", "13-16", "17-21", "22-35", "36-44", "44-45",
+				"46-53", "54-63", "64-69", "70-83", "84-87", "88-99", "100-110", "111-112");
+		
+		List<String> refPos = asList("PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS",
+				"ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$.");
 
-		Set<String> lemmaGold = new HashSet<String>();
-		lemmaGold.add("we 0,2");
-		lemmaGold.add("need 3,7");
-		lemmaGold.add("a 8,9");
-		lemmaGold.add("very 10,14");
-		lemmaGold.add("complicate 15,26");
-		lemmaGold.add("example 27,34");
-		lemmaGold.add("sentence 35,43");
-		lemmaGold.add(", 43,44");
-		lemmaGold.add("which 45,50");
-		lemmaGold.add("contain 51,59");
-		lemmaGold.add("as 60,62");
-		lemmaGold.add("many 63,67");
-		lemmaGold.add("constituent 68,80");
-		lemmaGold.add("and 81,84");
-		lemmaGold.add("dependency 85,97");
-		lemmaGold.add("as 98,100");
-		lemmaGold.add("possible 101,109");
-		lemmaGold.add(". 109,110");
-		boolean okLemma = true;
-		if (lemmaGold != null) {
-			FSIndex<Annotation> posIndex = englishCas
-					.getAnnotationIndex(POS.type);
-
-			System.out.println("Checking Lemma tags...");
-			System.out.println("# gold lemma tags " + lemmaGold.size());
-			System.out.println("# found lemma tags " + posIndex.size());
-			for (Lemma curLemma : select(englishCas, Lemma.class)) {
-				String lemma = curLemma.getValue();
-				int lemmaBegin = curLemma.getBegin();
-				int lemmaEnd = curLemma.getEnd();
-
-				String toFind = lemma + " " + lemmaBegin + "," + lemmaEnd;
-				System.out.println("Lemma: " + toFind + " - "
-						+ lemmaGold.contains(toFind));
-				okLemma &= lemmaGold.contains(toFind);
-				lemmaGold.remove(toFind);
-			}
-
-			if (lemmaGold.size() > 0) {
-				okLemma = false;
-			}
-
+		List<String> actualPos = new ArrayList<String>();
+		List<String> actualOffset = new ArrayList<String>();
+		for (Token t : select(germanCas, Token.class)) {
+			actualPos.add(t.getPos().getPosValue());
+			actualOffset.add(t.getBegin()+"-"+t.getEnd());
+			
+			// Make sure pos have same offsets as token
+			assertEquals(t.getBegin(), t.getPos().getBegin());
+			assertEquals(t.getEnd(), t.getPos().getEnd());
 		}
-		assertTrue(
-				"Lemmas did not match the gold standard. Gold lemmas that were not found: "
-						+ lemmaGold, okLemma);
+		
+		assertEquals(refPos, actualPos);
+		assertEquals(refOffset, actualOffset);
 	}
-
+	
 	/**
 	 * This tests whether a complete syntax tree can be recreated from the
 	 * annotations without any loss. Consequently, all links to children should
@@ -435,6 +388,8 @@ public class StanfordParserTest
 	private void setupGerman()
 		throws Exception
 	{
+		checkModel("classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-de-pcfg.ser.gz");
+
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(StanfordSegmenter.class);
 
 		// setup German

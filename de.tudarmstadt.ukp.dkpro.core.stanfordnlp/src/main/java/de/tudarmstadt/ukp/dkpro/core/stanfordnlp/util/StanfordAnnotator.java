@@ -48,11 +48,10 @@ import edu.stanford.nlp.util.IntPair;
  * used by other components (e.g. Transformations)
  *
  * @author Oliver Ferschke
- *
+ * @author Richard Eckart de Castilho
  */
 public class StanfordAnnotator
 {
-
 	private static final String CONPACKAGE = Constituent.class.getPackage().getName()+".";
 	private static final String POSPACKAGE = POS.class.getPackage().getName()+".";
 	private static final String DEPPACKAGE = Dependency.class.getPackage().getName()+".";
@@ -77,26 +76,26 @@ public class StanfordAnnotator
 
 	public JCas getaJCas()
 	{
-		return aJCas;
+		return jCas;
 	}
 
 	public void setaJCas(JCas aAJCas)
 	{
-		aJCas = aAJCas;
+		jCas = aAJCas;
 	}
 
-	private JCas aJCas = null;
+	private JCas jCas = null;
 
 	/**
 	 * @param tokens
 	 *            the documentText of the CAS as <code>Token</code> annotations
 	 * @throws CASException
 	 */
-	public StanfordAnnotator(TreeWithTokens tokenTree)
+	public StanfordAnnotator(TreeWithTokens aTokenTree)
 		throws CASException
 	{
-		setTokenTree(tokenTree);
-		setaJCas(tokenTree.getTokens().get(0).getCAS().getJCas());
+		setTokenTree(aTokenTree);
+		setaJCas(aTokenTree.getTokens().get(0).getCAS().getJCas());
 	}
 
 	/**
@@ -104,71 +103,62 @@ public class StanfordAnnotator
 	 * lemma-annotations.<br/>
 	 * Note: The annotations are directly written to the indexes of the CAS.
 	 *
-	 * @param aJCas
+	 * @param jCas
 	 *            the JCas for which to create annotations
 	 * @param node
 	 *            the source tree (with CoreMap nodes)
 	 */
-	public void createConstituentAnnotationFromTree(boolean createPosTags,
-			boolean createLemmas)
+	public void createConstituentAnnotationFromTree(boolean aCreatePos, boolean aCreateLemma)
 	{
-		createConstituentAnnotationFromTree(tokenTree.getTree(), null,
-				createPosTags, createLemmas);
+		createConstituentAnnotationFromTree(tokenTree.getTree(), null, aCreatePos, aCreateLemma);
 	}
 
 	/**
 	 * Creates linked constituent annotations + POS annotations
 	 *
-	 * @param aJCas
+	 * @param jCas
 	 *            the JCas for which to create annotations
-	 * @param node
+	 * @param aNode
 	 *            the source tree
-	 * @param parentFS
-	 * @param createPosTags
+	 * @param aParentFS
+	 * @param aCreatePos
 	 *            sets whether to create or not to create POS tags
-	 * @param createLemmas
+	 * @param aCreateLemmas
 	 *            sets whether to create or not to create Lemmas
 	 * @return the child-structure (needed for recursive call only)
 	 */
-	private Annotation createConstituentAnnotationFromTree(Tree node,
-			Annotation parentFS, boolean createPosTags, boolean createLemmas)
+	private Annotation createConstituentAnnotationFromTree(Tree aNode, Annotation aParentFS,
+			boolean aCreatePos, boolean aCreateLemmas)
 	{
-
-		// New FeatureStructure for current node
-		Annotation nodeFS = null;
-
 		// calculate span for the current subtree
-		IntPair span = tokenTree.getSpan(node);
+		IntPair span = tokenTree.getSpan(aNode);
 
 		// Check if the node has been marked by a TSurgeon operation.
 		// If so, add a tag-annotation on the constituent
-		String nodeLabelValue = node.value();
+		String nodeLabelValue = aNode.value();
 		String tag = "";
-		if (nodeLabelValue.contains(TAG_SEPARATOR)
-				&& !nodeLabelValue.equals(TAG_SEPARATOR)) {
+		if (nodeLabelValue.contains(TAG_SEPARATOR) && !nodeLabelValue.equals(TAG_SEPARATOR)) {
 			int separatorIndex = nodeLabelValue.indexOf(TAG_SEPARATOR);
 			tag = nodeLabelValue.substring(0, separatorIndex);
-			nodeLabelValue = nodeLabelValue.substring(separatorIndex + 1,
-					nodeLabelValue.length());
+			nodeLabelValue = nodeLabelValue.substring(separatorIndex + 1, nodeLabelValue.length());
 			createTagAnnotation(span.getSource(), span.getTarget(), tag);
 		}
 
 		// Check if node is a constituent node on sentence or phrase-level
-		if (node.isPhrasal()) {
+		if (aNode.isPhrasal()) {
 
 			// add annotation to annotation tree
-			nodeFS = createConstituentAnnotation(span.getSource(), span
-					.getTarget(), nodeLabelValue);
+			Constituent constituent = createConstituentAnnotation(span.getSource(), span.getTarget(), nodeLabelValue);
 			// link to parent
-			if (parentFS != null) {
-				((Constituent) nodeFS).setParent(parentFS);
+			if (aParentFS != null) {
+				constituent.setParent(aParentFS);
 			}
 
 			// Do we have any children?
 			List<Annotation> childAnnotations = new ArrayList<Annotation>();
-			for (Tree child : node.getChildrenAsList()) {
-				Annotation childAnnotation = createConstituentAnnotationFromTree(
-						child, nodeFS, createPosTags, createLemmas);
+			for (Tree child : aNode.getChildrenAsList()) {
+				Annotation childAnnotation = createConstituentAnnotationFromTree(child, constituent,
+						aCreatePos, aCreateLemmas);
 				if (childAnnotation != null) {
 					childAnnotations.add(childAnnotation);
 				}
@@ -176,112 +166,114 @@ public class StanfordAnnotator
 
 			// Now that we know how many children we have, link annotation of
 			// current node with its children
-			FSArray children = new FSArray(aJCas, childAnnotations.size());
+			FSArray children = new FSArray(jCas, childAnnotations.size());
 			int curChildNum = 0;
 			for (FeatureStructure child : childAnnotations) {
 				children.set(curChildNum, child);
 				curChildNum++;
 			}
-			((Constituent) nodeFS).setChildren(children);
+			constituent.setChildren(children);
 
 			// write annotation for current node to index
-			aJCas.addFsToIndexes(nodeFS);
+			jCas.addFsToIndexes(constituent);
+			
+			return constituent;
 		}
 		// If the node is a word-level constituent node (== POS):
 		// create parent link on token and (if not turned off) create POS tag
-		else if (node.isPreTerminal()) {
+		else if (aNode.isPreTerminal()) {
 
 			// create POS-annotation (annotation over the token)
-			POS pos = createPOSAnnotation(span.getSource(), span.getTarget(),
-					nodeLabelValue);
+			POS pos = createPOSAnnotation(span.getSource(), span.getTarget(), nodeLabelValue);
 
 			// in any case: get the token that is covered by the POS
 			// TODO how about multi word prepositions etc. (e.g. "such as")
-			List<Token> coveredToken = JCasUtil.selectCovered(aJCas,
-					Token.class, pos);
+			List<Token> coveredTokens = JCasUtil.selectCovered(jCas, Token.class, pos);
 			// the POS should only cover one token
-			assert coveredToken.size() == 1;
-			nodeFS = coveredToken.get(0);
+			assert coveredTokens.size() == 1;
+			Token token = coveredTokens.get(0);
 
 			// only add POS to index if we want POS-tagging
-			if (createPosTags) {
-				aJCas.addFsToIndexes(pos);
-				((Token) nodeFS).setPos(pos);
+			if (aCreatePos) {
+				jCas.addFsToIndexes(pos);
+				token.setPos(pos);
 			}
 
 			// Lemmatization
-			if (createLemmas) {
+			if (aCreateLemmas) {
 				WordLemmaTag wlTag = Morphology.lemmatizeStatic(new WordTag(
-						nodeFS.getCoveredText(), pos.getPosValue()));
-				Lemma lemma = new Lemma(aJCas, span.getSource(), span
-						.getTarget());
+						token.getCoveredText(), pos.getPosValue()));
+				Lemma lemma = new Lemma(jCas, span.getSource(), span.getTarget());
 				lemma.setValue(wlTag.lemma());
-				aJCas.addFsToIndexes(lemma);
+				token.setLemma(lemma);
+				jCas.addFsToIndexes(lemma);
 			}
 
 			// link token to its parent constituent
-			if (parentFS != null) {
-				((Token) nodeFS).setParent(parentFS);
+			if (aParentFS != null) {
+				((Token) token).setParent(aParentFS);
 			}
+			
+			return token;
 		}
-		return nodeFS;
+		else {
+			throw new IllegalArgumentException("Node must be either phrasal nor pre-terminal");
+		}
 	}
 
 	/**
 	 * Creates a tag-annotation over a constituent
 	 *
-	 * @param aJCas
+	 * @param jCas
 	 *            the CAS
-	 * @param begin
+	 * @param aBegin
 	 *            start-index of the constituent span
-	 * @param end
+	 * @param aEnd
 	 *            end-index of the constituent span
-	 * @param tag
+	 * @param aTag
 	 *            the tag value
 	 * @return the annotation
 	 */
-	public void createTagAnnotation(int begin, int end, String tag)
+	public void createTagAnnotation(int aBegin, int aEnd, String aTag)
 	{
-		Tag newTag = new Tag(aJCas, begin, end);
-		newTag.setValue(tag);
-		aJCas.addFsToIndexes(newTag);
+		Tag newTag = new Tag(jCas, aBegin, aEnd);
+		newTag.setValue(aTag);
+		jCas.addFsToIndexes(newTag);
 	}
 
 	/**
 	 * Creates a new Constituent annotation. Links to parent- and
 	 * child-annotations are not yet created here.
 	 *
-	 * @param aJCas
+	 * @param jCas
 	 *            the CAS
-	 * @param begin
+	 * @param aBegin
 	 *            start-index of the constituent span
-	 * @param end
+	 * @param aEnd
 	 *            end-index of the constituent span
-	 * @param constituentType
+	 * @param aConstituentType
 	 *            the constituent type
 	 * @return the annotation
 	 */
-	public Constituent createConstituentAnnotation(int begin, int end,
-			String constituentType)
+	public Constituent createConstituentAnnotation(int aBegin, int aEnd, String aConstituentType)
 	{
 		// Workaround for Win32 Systems
-		if (constituentType.equalsIgnoreCase("PRN")) {
-			constituentType = "PRN0";
+		if (aConstituentType.equalsIgnoreCase("PRN")) {
+			aConstituentType = "PRN0";
 		}
 
 		// create the necessary objects and methods
-		String constituentTypeName = CONPACKAGE + constituentType;
+		String constituentTypeName = CONPACKAGE + aConstituentType;
 
-		Type type = aJCas.getTypeSystem().getType(constituentTypeName);
+		Type type = jCas.getTypeSystem().getType(constituentTypeName);
 
 		//if type is unknown, map to X-type
-		if(type==null){
-			type = aJCas.getTypeSystem().getType(CONPACKAGE+"X");
+		if (type==null){
+			type = jCas.getTypeSystem().getType(CONPACKAGE+"X");
 		}
 
-		Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(
-				type, begin, end);
-		constAnno.setConstituentType(constituentType);
+		Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(type, aBegin, aEnd);
+		constAnno.setConstituentType(aConstituentType);
 		return constAnno;
 	}
 
@@ -289,50 +281,50 @@ public class StanfordAnnotator
 	 * Creates a new Constituent annotation. Links to parent- and
 	 * child-annotations are not yet crated here.
 	 *
-	 * @param aJCas
+	 * @param jCas
 	 *            the CAS
-	 * @param begin
+	 * @param aBegin
 	 *            start-index of the constituent span
-	 * @param end
+	 * @param aEnd
 	 *            end-index of the constituent span
-	 * @param posType
+	 * @param aPosType
 	 *            the constituent type
 	 * @return the annotation
 	 */
-	public POS createPOSAnnotation(int begin, int end, String posType)
+	public POS createPOSAnnotation(int aBegin, int aEnd, String aPosType)
 	{
 		// get mapping for DKPro-Typesystem
-		String mappedPos = StanfordParserPosMapping.getTagClass(aJCas
-				.getDocumentLanguage(), posType);
+		String mappedPos = StanfordParserPosMapping.getTagClass(jCas.getDocumentLanguage(),
+				aPosType);
 		String constituentTypeName = POSPACKAGE + mappedPos;
 
 		// create instance of the desired type
-		Type type = aJCas.getTypeSystem().getType(constituentTypeName);
-		POS constAnno = (POS) aJCas.getCas().createAnnotation(type, begin, end);
+		Type type = jCas.getTypeSystem().getType(constituentTypeName);
+		POS constAnno = (POS) jCas.getCas().createAnnotation(type, aBegin, aEnd);
 
 		// save original (unmapped) postype in feature
-		constAnno.setPosValue(posType);
+		constAnno.setPosValue(aPosType);
 		return constAnno;
 	}
 
 	/**
 	 * Writes dependency annotations to the JCas
 	 *
-	 * @param aJCas
+	 * @param jCas
 	 *            the CAS
-	 * @param begin
+	 * @param aBegin
 	 *            start-index of the constituent span
-	 * @param end
+	 * @param aEnd
 	 *            end-index of the constituent span
 	 * @param aGramRel
 	 *            the dependency-type
-	 * @param governor
+	 * @param aGovernor
 	 *            the governing-word
-	 * @param dependent
+	 * @param aDependent
 	 *            the dependent-word
 	 */
-	public void createDependencyAnnotation(int begin, int end,
-			GrammaticalRelation aGramRel, Token governor, Token dependent)
+	public void createDependencyAnnotation(int aBegin, int aEnd,
+			GrammaticalRelation aGramRel, Token aGovernor, Token aDependent)
 	{
 		String dependencyType = aGramRel.getShortName();
 
@@ -343,31 +335,28 @@ public class StanfordAnnotator
 		// create the necessary objects and methods
 		String dependencyTypeName = DEPPACKAGE + dependencyType.toUpperCase();
 
-		Type type = aJCas.getTypeSystem().getType(dependencyTypeName);
-		AnnotationFS anno = aJCas.getCas().createAnnotation(type, begin, end);
-		anno.setStringValue(type.getFeatureByBaseName("DependencyType"),
-				dependencyType);
-		anno.setFeatureValue(type.getFeatureByBaseName("Governor"), governor);
-		anno.setFeatureValue(type.getFeatureByBaseName("Dependent"), dependent);
+		Type type = jCas.getTypeSystem().getType(dependencyTypeName);
+		AnnotationFS anno = jCas.getCas().createAnnotation(type, aBegin, aEnd);
+		anno.setStringValue(type.getFeatureByBaseName("DependencyType"), dependencyType);
+		anno.setFeatureValue(type.getFeatureByBaseName("Governor"), aGovernor);
+		anno.setFeatureValue(type.getFeatureByBaseName("Dependent"), aDependent);
 
-		aJCas.addFsToIndexes(anno);
-
+		jCas.addFsToIndexes(anno);
 	}
 
 	/**
 	 * Creates annotation with Penn Treebank style representations of the syntax
 	 * tree
 	 *
-	 * @param aJCas
-	 * @param begin
-	 * @param end
+	 * @param aBegin
+	 * @param aEnd
 	 */
-	public void createPennTreeAnnotation(int begin, int end)
+	public void createPennTreeAnnotation(int aBegin, int aEnd)
 	{
 		Tree t = tokenTree.getTree();
 
 		// write Penn Treebank-style string to cas
-		PennTree pTree = new PennTree(aJCas, begin, end);
+		PennTree pTree = new PennTree(jCas, aBegin, aEnd);
 
 		// create tree with simple labels and get penn string from it
 		t = t.deepCopy(t.treeFactory(), StringLabel.factory());
@@ -423,7 +412,6 @@ public class StanfordAnnotator
 					curAnno.setBegin(span.getSource());
 					curAnno.setEnd(span.getTarget());
 
-
 					//add anno to batch-copy list
 					annoList.add(curAnno);
 
@@ -433,23 +421,20 @@ public class StanfordAnnotator
 
 		} // endwhile iterate over subtrees
 
-
 		/*
 		 * Now that we have gathered all annotations from the tree,
 		 * batch-copy them to the new CAS
 		 */
 
 		// create CasRecoverer (=adapted version of the CasCopier)
-		CasCopier copier = new CasCopier(srcCAS, aJCas.getCas());
+		CasCopier copier = new CasCopier(srcCAS, jCas.getCas());
 
 		// now batch-copy the annos
 		List<Annotation> copiedAnnos = copier.batchCopyAnnotations(annoList);
 
 		//add copied annos to indexes
-		for(Annotation cAnno: copiedAnnos){
-			aJCas.addFsToIndexes(cAnno);
+		for (Annotation cAnno: copiedAnnos){
+			jCas.addFsToIndexes(cAnno);
 		}
-
 	}
-
 }
