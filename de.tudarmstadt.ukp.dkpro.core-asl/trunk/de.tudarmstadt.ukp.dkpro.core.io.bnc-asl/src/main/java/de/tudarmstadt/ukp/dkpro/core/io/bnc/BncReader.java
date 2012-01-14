@@ -67,6 +67,11 @@ public class BncReader
 	 * contains the full title of a work of any kind.
 	 */
 	private static final String TAG_TITLE = "title";
+	
+	/**
+	 * the root tag
+	 */
+	private static final String TAG_BNC_DOC = "bncDoc";
 
 	private static final String ATTR_C5 = "c5";
 
@@ -81,6 +86,7 @@ public class BncReader
 	public static class BncHandler
 		extends TextExtractor
 	{
+		private String documentId = null;
 		private boolean captureText = false;
 		private int sentenceStart = -1;
 		private int tokenStart = -1;
@@ -93,7 +99,10 @@ public class BncReader
 				Attributes aAttributes)
 			throws SAXException
 		{
-			if (TAG_TITLE.equals(aName)) {
+			if (TAG_BNC_DOC.equals(aName)) {
+				documentId = aAttributes.getValue("xml:id");
+			}
+			else if (TAG_TITLE.equals(aName)) {
 				captureText = true;
 			}
 			else if (TAG_STEXT.equals(aName) || TAG_WTEXT.equals(aName)) {
@@ -115,6 +124,7 @@ public class BncReader
 		{
 			if (TAG_TITLE.equals(aName)) {
 				DocumentMetaData.get(getJCas()).setDocumentTitle(getBuffer().toString().trim());
+				DocumentMetaData.get(getJCas()).setDocumentId(documentId);
 				getBuffer().setLength(0);
 				captureText = false;
 			}
