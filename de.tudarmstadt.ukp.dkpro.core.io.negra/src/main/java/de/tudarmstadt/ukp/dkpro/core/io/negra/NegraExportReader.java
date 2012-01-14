@@ -133,7 +133,7 @@ public class NegraExportReader
 	private int documentCount;
 	private int documentsTotal;
 	private BufferedReader br;
-	private Map<String, String> documentUris;
+	private Map<String, String> documentIds;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -141,7 +141,7 @@ public class NegraExportReader
 	{
 		super.initialize(aContext);
 		documentsTotal = 0;
-		documentUris = new HashMap<String, String>();
+		documentIds = new HashMap<String, String>();
 
 		try {
 			// Detect if the file is compressed
@@ -169,11 +169,17 @@ public class NegraExportReader
 		JCasBuilder casBuilder = new JCasBuilder(aJCas);
 
 		String originId = readOriginId(true);
+		
+		// Fetch the document ID. If there is none, use the origin ID as document ID
+		String documentId = documentIds.get(originId);
+		if (documentId == null) {
+			documentId = originId;
+		}
 
 		// Set meta data
 		DocumentMetaData meta = DocumentMetaData.create(aJCas);
-		meta.setDocumentUri(documentUris.get(originId));
-		meta.setDocumentId(originId);
+		meta.setDocumentUri(inputFile.toURI()+"#"+documentId);
+		meta.setDocumentId(documentId);
 		aJCas.setDocumentLanguage(language);
 
 		// Fill CAS
@@ -342,7 +348,7 @@ public class NegraExportReader
 				throw new IOException("Unexpected end of file");
 			}
 			String[] parts = line.split("\\s+");
-			documentUris.put(parts[DOCUMENT_ID], parts[DOCUMENT_URI]);
+			documentIds.put(parts[DOCUMENT_ID], parts[DOCUMENT_URI]);
 			documentsTotal++;
 			line = br.readLine();
 		}

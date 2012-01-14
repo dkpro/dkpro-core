@@ -74,9 +74,8 @@ public class NegraExportReaderTest
 				NegraExportReader.PARAM_INPUT_FILE, inputFile.getPath(),
 				NegraExportReader.PARAM_LANGUAGE, "de");
 
-		AnalysisEngineDescription cdw = createPrimitiveDescription(
-				CASDumpWriter.class, CASDumpWriter.PARAM_OUTPUT_FILE,
-				testDump.getPath());
+		AnalysisEngineDescription cdw = createPrimitiveDescription(CASDumpWriter.class,
+				CASDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
 
 		runPipeline(ner, cdw);
 
@@ -97,7 +96,7 @@ public class NegraExportReaderTest
 
 		String text = "Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen . ";
 		DocumentMetaData meta = DocumentMetaData.create(jcas);
-		meta.setDocumentUri(aInputFile.toURI().toString());
+		meta.setDocumentUri(aInputFile.toURI().toString()+"#1");
 		meta.setDocumentId("1");
 		jcas.setDocumentLanguage("de");
 		jcas.setDocumentText(text);
