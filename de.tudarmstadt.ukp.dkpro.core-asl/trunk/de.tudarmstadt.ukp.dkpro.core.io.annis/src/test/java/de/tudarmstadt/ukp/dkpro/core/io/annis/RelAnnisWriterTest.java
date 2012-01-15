@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.annis;
 
-import static org.apache.commons.io.FileUtils.contentEquals;
-import static org.junit.Assert.assertTrue;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createDescription;
 
@@ -56,7 +56,9 @@ public class RelAnnisWriterTest
 		// Check if the output matches the reference output
 		for (File f : workspace.getRoot().listFiles()) {
 			System.out.print("Checking ["+f.getName()+"]... ");
-			assertTrue(contentEquals(f, new File("src/test/resources/tueba/reference", f.getName())));
+			assertEquals(
+					readFileToString(new File("src/test/resources/tueba/reference", f.getName()), "UTF-8"), 
+					readFileToString(f, "UTF-8"));
 			System.out.println("ok.");
 		}
 	}
