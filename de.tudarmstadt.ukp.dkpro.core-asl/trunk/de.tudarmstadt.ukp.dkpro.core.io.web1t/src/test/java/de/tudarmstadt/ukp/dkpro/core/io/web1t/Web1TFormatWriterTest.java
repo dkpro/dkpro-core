@@ -21,8 +21,14 @@ import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -34,113 +40,151 @@ import com.googlecode.jweb1t.JWeb1TIndexer;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class Web1TFormatWriterTest {
 
-    private final int MIN_NGRAM = 1;
-    private final int MAX_NGRAM = 3;
-
     @Rule
-    public TemporaryFolder workspace = new TemporaryFolder();
+    public TemporaryFolder folder = new TemporaryFolder();
 
-    @Test
-    public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath() throws Exception {
+    private File INDEX_FOLDER;
 
-        Web1TProviderBase web1tProvider = prepareWeb1TFormatTest(
-                new String[] {
-                        Token.class.getName() + "/pos/PosValue",
-                        Token.class.getName() + "/lemma/value" 
-                }
-        );
-
-        assertEquals(1, web1tProvider.getFrequency("TO")); // "to"
-        assertEquals(1, web1tProvider.getFrequency("NNS")); // "sentences"
-        assertEquals(1, web1tProvider.getFrequency("EX")); // "there"
-
-        assertEquals(1, web1tProvider.getFrequency("write"));
-        assertEquals(0, web1tProvider.getFrequency("written"));
-
+    @Before
+    public void setup() throws IOException {
+        INDEX_FOLDER = folder.newFolder("test/Index/");
     }
 
-    @Test
-    public void web1TFormatTestWithMultiSlashedTypesAsFeaturePath() throws Exception {
+	private final int MIN_NGRAM = 1;
+	private final int MAX_NGRAM = 3;
 
-        Web1TProviderBase web1tProvider = prepareWeb1TFormatTest(
-                new String[] {
-                        Token.class.getName() + "/lemma/value" 
-                }
-        );
+	@Test
+	public void web1TFormatTestWithTwoMultiSlashedTypesAsFeaturePath()
+			throws Exception {
 
-        assertEquals(1, web1tProvider.getFrequency("write"));
-        assertEquals(0, web1tProvider.getFrequency("written"));
-        assertEquals(4, web1tProvider.getFrequency("sentence"));
+		Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(new String[] {
+				Token.class.getName() + "/pos/PosValue",
+				Token.class.getName() + "/lemma/value" });
 
-    }
+		assertEquals(1, web1tProvider.getFrequency("TO")); // "to"
+		assertEquals(1, web1tProvider.getFrequency("NNS")); // "sentences"
+		assertEquals(1, web1tProvider.getFrequency("EX")); // "there"
 
-    @Test
-    public void web1TFormatTest_() throws Exception {
+		assertEquals(1, web1tProvider.getFrequency("write"));
+		assertEquals(0, web1tProvider.getFrequency("written"));
 
-        Web1TProviderBase web1tProvider = prepareWeb1TFormatTest(
-                new String[] { Token.class.getName() }
-        );
+	}
 
-        assertEquals(4, web1tProvider.getFrequency("."));
-        assertEquals(1, web1tProvider.getFrequency(","));
-        assertEquals(3, web1tProvider.getFrequency("sentence"));
-        assertEquals(1, web1tProvider.getFrequency("written"));
+	@Test
+	public void web1TFormatTestWithMultiSlashedTypesAsFeaturePath()
+			throws Exception {
 
-    }
+		Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(new String[] { Token.class
+				.getName() + "/lemma/value" });
 
-    private Web1TProviderBase prepareWeb1TFormatTest(String[] inputTypes)
-        throws Exception
-    {
-        writeWeb1TFormat(inputTypes);
-        createIndex();
+		assertEquals(1, web1tProvider.getFrequency("write"));
+		assertEquals(0, web1tProvider.getFrequency("written"));
+		assertEquals(4, web1tProvider.getFrequency("sentence"));
 
-        Web1TProviderBase web1tProvider = new Web1TFileAccessProvider(
-                workspace.getRoot(),
-                MIN_NGRAM,
-                MAX_NGRAM
-        );
+	}
 
-        return web1tProvider;
-    }
+	@Test
+	public void web1TFormatTest_randomFrequencies() throws Exception {
 
-    private void createIndex() throws Exception {
-        JWeb1TIndexer indexCreator = new JWeb1TIndexer(workspace.getRoot().getAbsolutePath(), MAX_NGRAM);
-        indexCreator.create();
+		Web1TFileAccessProvider web1tProvider = prepareWeb1TFormatTest(new String[] { Token.class
+				.getName() });
 
-    }
+		assertEquals(4, web1tProvider.getFrequency("."));
+		assertEquals(1, web1tProvider.getFrequency(","));
+		assertEquals(3, web1tProvider.getFrequency("sentence"));
+		assertEquals(1, web1tProvider.getFrequency("written"));
 
-    private void writeWeb1TFormat(String[] inputPath)
-        throws Exception
-    {
-        CollectionReader reader = createCollectionReader(
-                TextReader.class,
-                ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, 
-                    new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX + "**/*.txt" }
-        );
+	}
 
-        AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
+	@Test(expected=ResourceInitializationException.class)
+	public void web1TFormatTest_exceptionForInvalidMinFrequency1()
+			throws Exception {
+		deleteIndexFolder();
+		writeWeb1TFormat(new String[] { Token.class.getName() }, -1);
+		
+	}
+	
+	@Test(expected=ResourceInitializationException.class)
+	public void web1TFormatTest_exceptionForInvalidMinFrequency2()
+			throws Exception {
+		deleteIndexFolder();
+		writeWeb1TFormat(new String[] { Token.class.getName() }, 0);
+		
+	}
 
-        AnalysisEngineDescription treeTagger = AnalysisEngineFactory.createPrimitiveDescription(
-                TreeTaggerPosLemmaTT4J.class,
-                TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en"
-        );
+	private void writeWeb1TFormat(String[] strings, int minFreq)
+			throws UIMAException, IOException {
+		CollectionReader reader = createCollectionReader(TextReader.class,
+				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
+				ResourceCollectionReaderBase.PARAM_PATTERNS,
+				new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX
+						+ "**/*.txt" });
 
-        AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
-                Web1TFormatWriter.class,
-                Web1TFormatWriter.PARAM_TARGET_LOCATION, workspace.getRoot().getAbsolutePath(),
-                Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,
-                Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
-                Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM
-        );
+		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
 
-        SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
-    }
+		AnalysisEngineDescription treeTagger = AnalysisEngineFactory
+				.createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
+						TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en");
+
+		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
+				Web1TFormatWriter.class,
+				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
+				Web1TFormatWriter.PARAM_INPUT_TYPES, strings,
+				Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
+				Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM,
+				Web1TFormatWriter.PARAM_MIN_FREQUENCY, minFreq);
+
+		SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
+	}
+
+	private Web1TFileAccessProvider prepareWeb1TFormatTest(
+			String[] inputTypes) throws Exception {
+		deleteIndexFolder();
+		writeWeb1TFormat(inputTypes);
+		createIndex();
+
+		Web1TFileAccessProvider web1tProvider = new Web1TFileAccessProvider(
+				INDEX_FOLDER, MIN_NGRAM, MAX_NGRAM);
+
+		return web1tProvider;
+	}
+
+	private void createIndex() throws Exception {
+		JWeb1TIndexer indexCreator = new JWeb1TIndexer(INDEX_FOLDER.getAbsolutePath(), MAX_NGRAM);
+		indexCreator.create();
+
+	}
+
+	private void writeWeb1TFormat(String[] inputPath) throws Exception {
+		CollectionReader reader = createCollectionReader(TextReader.class,
+				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
+				ResourceCollectionReaderBase.PARAM_PATTERNS,
+				new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX
+						+ "**/*.txt" });
+
+		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
+
+		AnalysisEngineDescription treeTagger = AnalysisEngineFactory
+				.createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
+						TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en");
+
+		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
+				Web1TFormatWriter.class,
+				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
+				Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,
+				Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
+				Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM);
+
+		SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
+	}
+
+	private void deleteIndexFolder() {
+		INDEX_FOLDER.delete();
+	}
 }
