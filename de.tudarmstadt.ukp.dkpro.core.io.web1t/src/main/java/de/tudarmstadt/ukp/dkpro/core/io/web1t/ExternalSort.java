@@ -1,4 +1,4 @@
-package com.google.code.externalsorting;
+package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
