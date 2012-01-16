@@ -413,6 +413,6 @@ public class ImsCwbWriter
 	private static String escapeXml(String aString)
 	{
 		return aString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-				.replaceAll("\"", "&quot;").replaceAll("'", "&qpos;");
+				.replaceAll("\"", "&quot;").replaceAll("'", "&apos;");
 	}
 }
