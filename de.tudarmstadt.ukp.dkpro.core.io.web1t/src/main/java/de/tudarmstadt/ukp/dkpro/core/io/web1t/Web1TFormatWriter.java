@@ -20,14 +20,17 @@ package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -54,264 +57,481 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
 public class Web1TFormatWriter
-    extends JCasAnnotator_ImplBase
+	extends JCasAnnotator_ImplBase
 {
 
-    public static final String SENTENCE_START = "<S>";
-    public static final String SENTENCE_END = "</S>";
+	public static final String SENTENCE_START = "<S>";
+	public static final String SENTENCE_END = "</S>";
 
-    private static final String LF = "\n";
-    private static final String TAB = "\t";
+	private static final String LF = "\n";
+	private static final String TAB = "\t";
 
-    public static final String PARAM_INPUT_TYPES = "inputTypes";
-    @ConfigurationParameter(name = PARAM_INPUT_TYPES, mandatory = true)
-    private Set<String> inputPaths;
+	public static final String PARAM_INPUT_TYPES = "inputTypes";
+	@ConfigurationParameter(name = PARAM_INPUT_TYPES, mandatory = true)
+	private Set<String> inputPaths;
 
-    public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
-    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
-    private File outputPath;
+	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
+	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
+	private File outputPath;
 
-    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
-    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
-    private String outputEncoding;
+	public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+	@ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
+	private String outputEncoding;
 
-    public static final String PARAM_MIN_NGRAM_LENGTH = "MinNgramLength";
-    @ConfigurationParameter(name = PARAM_MIN_NGRAM_LENGTH, mandatory = true, defaultValue = "1")
-    private int minNgramLength;
+	public static final String PARAM_MIN_NGRAM_LENGTH = "MinNgramLength";
+	@ConfigurationParameter(name = PARAM_MIN_NGRAM_LENGTH, mandatory = true, defaultValue = "1")
+	private int minNgramLength;
 
-    public static final String PARAM_MAX_NGRAM_LENGTH = "MaxNgramLength";
-    @ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = true, defaultValue = "3")
-    private int maxNgramLength;
+	public static final String PARAM_MAX_NGRAM_LENGTH = "MaxNgramLength";
+	@ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = true, defaultValue = "3")
+	private int maxNgramLength;
 
-    private Map<Integer, BufferedWriter> ngramWriters;
+	/**
+	 * Specifies the minimum frequency a NGram must have to be written to the
+	 * final index. The specified value is interpreted as inclusive value, the
+	 * default is 1. Thus, all NGrams with a frequency of at least 1 or higher
+	 * will be written.
+	 */
+	public static final String PARAM_MIN_FREQUENCY = "minFreq";
+	@ConfigurationParameter(name = PARAM_MIN_FREQUENCY, mandatory = false, defaultValue = "1")
+	private int minFreq;
 
-    @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
-    {
-        super.initialize(context);
+	/**
+	 * The input file(s) is/are split into smaller files for quick access. An
+	 * own file is created if the first two starting letters (or the starting
+	 * letter if the word has a length of 1 character) account for at least x%
+	 * of all starting letters in the input file(s). The default value for
+	 * splitting a file is 1.0%. Every word that has starting characters which
+	 * does not suffice the threshold is written with other words that also did
+	 * not meet the threshold into an own file for miscellaneous words. A high
+	 * threshold will lead to only a few, but large files and a most likely very
+	 * large misc. file. A low threshold results in many small files.
+	 */
+	public static final String PARAM_SPLIT_TRESHOLD = "splitFileTreshold";
+	@ConfigurationParameter(name = PARAM_SPLIT_TRESHOLD, mandatory = false, defaultValue = "1.0")
+	String splitThresholdString;
 
-        ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
-    }
+	double splitThreshold;
 
-    @Override
-    public void process(JCas jcas)
-        throws AnalysisEngineProcessException
-    {
+	private Map<Integer, BufferedWriter> ngramWriters;
+	private Map<Integer, FrequencyDistribution<String>> letterFDs;
 
-        ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
+	@Override
+	public void initialize(UimaContext context)
+		throws ResourceInitializationException
+	{
+		super.initialize(context);
 
-        CAS cas = jcas.getCas();
-        Type sentenceType = cas.getTypeSystem().getType(Sentence.class.getName());
+		ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
+		letterFDs = initializeLetterFDs(minNgramLength, maxNgramLength);
 
-        for (AnnotationFS annotation : CasUtil.select(cas, sentenceType)) {
+		if (minFreq < 1) {
+			throw new ResourceInitializationException(
+					new IllegalArgumentException(
+							"Parameter MIN_FREQUENCY is invalid (must be >= 1)"));
+		}
 
-            for (String path : inputPaths) {
+		splitThreshold = Double.parseDouble(splitThresholdString);
+		if (splitThreshold <= 0 || splitThreshold >= 100) {
+			throw new ResourceInitializationException(
+					new IllegalArgumentException(
+							"Threshold has to be greater 0 and lower 100"));
+		}
 
-                String[] segments = path.split("/", 2);
-                String typeName = segments[0];
-                
-                Type type = getInputType(cas, typeName);
+	}
 
-                List<AnnotationFS> tokens = CasUtil.selectCovered(cas, type, annotation);
+	/**
+	 * The input files for each ngram level is read, splitted according to the
+	 * frequency of the words starting letter in the files and the split files
+	 * are individually sorted and consolidated.
+	 */
+	@Override
+	public void collectionProcessComplete()
+		throws AnalysisEngineProcessException
+	{
+		super.collectionProcessComplete();
 
-                List<String> tokenStrings = createStringList(tokens, segments);
+		closeWriters(ngramWriters.values());
 
-                for (int ngramLength = minNgramLength; ngramLength <= maxNgramLength; ngramLength++) {
-                    cfd.addSamples(
-                            ngramLength,
-                            new NGramStringIterable(tokenStrings, ngramLength, ngramLength)
-                    );
-                }
-            }
-        }
+		Comparator<String> comparator = new Comparator<String>()
+		{
+			public int compare(String r1, String r2)
+			{
+				return r1.compareTo(r2);
+			}
+		};
 
-        writeFrequencyDistributionsToNGramFiles(cfd);
+		// read the file with the counts per file and create the final
+		// aggregated counts
+		for (int level = minNgramLength; level <= maxNgramLength; level++) {
 
-    }
+			try {
+				Integer nextFreeFileNumber = processInputFileForLevel(level,
+						comparator);
 
-    /**
-     * Write the frequency distributions to the corresponding n-gram files.
-     * @param cfd
-     * @throws AnalysisEngineProcessException
-     */
-    private void writeFrequencyDistributionsToNGramFiles(ConditionalFrequencyDistribution<Integer, String> cfd)
-        throws AnalysisEngineProcessException
-    {
-        for (int level : cfd.getConditions()) {
+				processCreatedMiscFileAgain(level, comparator,
+						nextFreeFileNumber);
 
-            if (!ngramWriters.containsKey(level)) {
-                throw new AnalysisEngineProcessException(new IOException("No writer for ngram level " + level
-                        + " initialized."));
-            }
+			}
+			catch (FileNotFoundException e) {
+				throw new AnalysisEngineProcessException(e);
+			}
+			catch (IOException e) {
+				throw new AnalysisEngineProcessException(e);
+			}
 
-            writeNGramFile(cfd, level);
+		}
+	}
 
-        }
-    }
+	private int processInputFileForLevel(int level,
+			Comparator<String> comparator)
+		throws IOException
+	{
 
-    private void writeNGramFile(ConditionalFrequencyDistribution<Integer, String> cfd, int level)
-        throws AnalysisEngineProcessException
-    {
-        try {
-            BufferedWriter writer = ngramWriters.get(level);
-            for (String key : cfd.getFrequencyDistribution(level).getKeys()) {
-                writer.write(key);
-                writer.write(TAB);
-                writer.write(Long.toString(cfd.getCount(level, key)));
-                writer.write(LF);
-            }
-            writer.flush();
-        }
-        catch (IOException e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-    }
+		org.apache.uima.util.Logger logger = getContext().getLogger();
 
-    private List<String> createStringList(List<AnnotationFS> tokens, String[] segments)
-        throws AnalysisEngineProcessException
-    {
+		File unsortedInputFile = new File(outputPath, level + ".txt");
 
-        List<String> tokenStrings = new ArrayList<String>();
-        tokenStrings.add(SENTENCE_START);
+		File outputFolder = getOutputFolder(level);
+		outputFolder.mkdir();
 
-        FeaturePathInfo fp = new FeaturePathInfo();
-        initializeFeaturePathInfoFrom(fp, segments);
+		FrequencyDistribution<String> letterFD = letterFDs.get(level);
 
-        for (AnnotationFS annotation : tokens) {
-            String value = fp.getValue(annotation);
-            if (!StringUtils.isBlank(value)) {
-                tokenStrings.add(value);
-            }
-        }
+		Web1TFileSplitter splitter = new Web1TFileSplitter(unsortedInputFile,
+				outputFolder, outputEncoding, letterFD, splitThreshold, 0,
+				logger);
 
-        tokenStrings.add(SENTENCE_END);
+		splitter.split();
+		LinkedList<File> splitFiles = splitter.getFiles();
 
-        return tokenStrings;
-    }
+		Web1TFileSorter sorter = new Web1TFileSorter(splitFiles, comparator,
+				logger);
+		sorter.sort();
+		splitter.cleanUp(); // Remove files from previous step
 
-    private Type getInputType(CAS cas, String typeName)
-    {
-        Type type = cas.getTypeSystem().getType(typeName);
-        if (type == null) {
-            throw new IllegalStateException("Type [" + typeName + "] not found in type system");
-        }
+		LinkedList<File> sortedFiles = sorter.getSortedFiles();
 
-        return type;
-    }
+		Web1TFileConsolidator consolidator = new Web1TFileConsolidator(
+				sortedFiles, comparator, outputEncoding, minFreq, logger);
 
-    private void initializeFeaturePathInfoFrom(FeaturePathInfo aFp, String[] featurePathString)
-        throws AnalysisEngineProcessException
+		consolidator.consolidate();
+		sorter.cleanUp(); // Remove files from previous step
 
-    {
-        try {
-            if (featurePathString.length > 1) {
+		LinkedList<File> consolidatedFiles = consolidator
+				.getConsolidatedFiles();
 
-                aFp.initialize(featurePathString[1]);
+		// rename consolidated files -> final index files
+		for (File file : consolidatedFiles) {
+			String name = Web1TUtil.cutOffUnderscoredSuffixFromFileName(file);
+			file.renameTo(new File(name));
+		}
 
-            }
-            else {
-                aFp.initialize("");
-            }
-        }
-        catch (FeaturePathException e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-    }
+		consolidator.cleanUp();
 
-    @Override
-    public void collectionProcessComplete()
-        throws AnalysisEngineProcessException
-    {
-        super.collectionProcessComplete();
+		unsortedInputFile.delete();
 
-        closeWriters(ngramWriters.values());
+		return splitter.getNextUnusedFileNumber();
+	}
 
-        // read the file with the counts per file and create the final
-        // aggregated counts
-        for (int level = minNgramLength; level <= maxNgramLength; level++) {
-            FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
-            try {
-                File inputFile = new File(outputPath, level + ".txt");
+	@Override
+	public void process(JCas jcas)
+		throws AnalysisEngineProcessException
+	{
 
-                BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-                String inputLine;
-                while ((inputLine = reader.readLine()) != null) {
-                    String[] parts = inputLine.split(TAB);
-                    if (parts.length != 2) {
-                        getLogger().warn("Wrong file format in line: " + inputLine);
-                        continue;
-                    }
-                    String ngram = parts[0];
-                    String count = parts[1];
-                    fd.addSample(ngram, new Integer(count));
-                }
-                reader.close();
+		ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
 
-                File outputPath = new File(inputFile.getParentFile(), level + "gms/");
-                FileUtils.forceMkdir(outputPath);
-                File outputFile = new File(outputPath, level + ".txt");
+		CAS cas = jcas.getCas();
+		Type sentenceType = cas.getTypeSystem().getType(
+				Sentence.class.getName());
 
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
-                        outputEncoding));
+		for (AnnotationFS annotation : CasUtil.select(cas, sentenceType)) {
 
-                List<String> keyList = new ArrayList<String>(fd.getKeys());
-                Collections.sort(keyList);
-                for (String key : keyList) {
-                    writer.write(key);
-                    writer.write(TAB);
-                    writer.write(Long.valueOf(fd.getCount(key)).toString());
-                    writer.write(LF);
-                }
-                writer.flush();
-                writer.close();
+			for (String path : inputPaths) {
 
-                // cleanup
-                if (!inputFile.delete()) {
-                    throw new IOException("Could not clean up.");
-                }
-            }
-            catch (IOException e) {
-                throw new AnalysisEngineProcessException(e);
-            }
-        }
-    }
+				String[] segments = path.split("/", 2);
+				String typeName = segments[0];
 
-    private Map<Integer, BufferedWriter> initializeWriters(int min, int max)
-        throws ResourceInitializationException
-    {
-        Map<Integer, BufferedWriter> writers = new HashMap<Integer, BufferedWriter>();
-        for (int level = min; level <= max; level++) {
-            try {
-                File outputFile = new File(outputPath, level + ".txt");
+				Type type = getInputType(cas, typeName);
 
-                if (outputFile.exists()) {
-                    if (!outputFile.delete()) {
-                        throw new IOException("Could not delete already existing output file.");
-                    }
-                }
-                FileUtils.touch(outputFile);
+				List<AnnotationFS> tokens = CasUtil.selectCovered(cas, type,
+						annotation);
 
-                writers.put(level, new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
-                        outputEncoding)));
-            }
-            catch (IOException e) {
-                throw new ResourceInitializationException(e);
-            }
-        }
-        return writers;
-    }
+				List<String> tokenStrings = createStringList(tokens, segments);
 
-    private void closeWriters(Collection<BufferedWriter> writers)
-        throws AnalysisEngineProcessException
-    {
-        try {
-            for (BufferedWriter writer : writers) {
-                writer.close();
-            }
-        }
-        catch (IOException e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-    }
+				for (int ngramLength = minNgramLength; ngramLength <= maxNgramLength; ngramLength++) {
+					cfd.addSamples(ngramLength, new NGramStringIterable(
+							tokenStrings, ngramLength, ngramLength));
+				}
+			}
+		}
+
+		writeFrequencyDistributionsToNGramFiles(cfd);
+
+	}
+
+	/**
+	 * Write the frequency distributions to the corresponding n-gram files.
+	 * 
+	 * @param cfd
+	 * @throws AnalysisEngineProcessException
+	 */
+	private void writeFrequencyDistributionsToNGramFiles(
+			ConditionalFrequencyDistribution<Integer, String> cfd)
+		throws AnalysisEngineProcessException
+	{
+		for (int level : cfd.getConditions()) {
+
+			if (!ngramWriters.containsKey(level)) {
+				throw new AnalysisEngineProcessException(new IOException(
+						"No writer for ngram level " + level + " initialized."));
+			}
+
+			writeNGramFile(cfd, level);
+
+		}
+	}
+
+	private void writeNGramFile(
+			ConditionalFrequencyDistribution<Integer, String> cfd, int level)
+		throws AnalysisEngineProcessException
+	{
+		FrequencyDistribution<String> letterFD = letterFDs.get(level);
+		try {
+			BufferedWriter writer = ngramWriters.get(level);
+			for (String key : cfd.getFrequencyDistribution(level).getKeys()) {
+
+				// add starting letter to frequency distribution
+				if (key.length() > 1) {
+					String subsKey = key.substring(0, 2);
+					String subsKeyLowered = subsKey.toLowerCase();
+					letterFD.addSample(subsKeyLowered, 1);
+				}
+				else {
+					String subsKey = key.substring(0, 1);
+					String subsKeyLowered = subsKey.toLowerCase();
+					letterFD.addSample(subsKeyLowered, 1);
+				}
+
+				writer.write(key);
+				writer.write(TAB);
+				writer.write(Long.toString(cfd.getCount(level, key)));
+				writer.write(LF);
+			}
+			writer.flush();
+		}
+		catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+
+	}
+
+	private List<String> createStringList(List<AnnotationFS> tokens,
+			String[] segments)
+		throws AnalysisEngineProcessException
+	{
+
+		List<String> tokenStrings = new ArrayList<String>();
+		tokenStrings.add(SENTENCE_START);
+
+		FeaturePathInfo fp = new FeaturePathInfo();
+		initializeFeaturePathInfoFrom(fp, segments);
+
+		for (AnnotationFS annotation : tokens) {
+			String value = fp.getValue(annotation);
+			if (!StringUtils.isBlank(value)) {
+				tokenStrings.add(value);
+			}
+		}
+
+		tokenStrings.add(SENTENCE_END);
+
+		return tokenStrings;
+	}
+
+	private Type getInputType(CAS cas, String typeName)
+	{
+		Type type = cas.getTypeSystem().getType(typeName);
+		if (type == null) {
+			throw new IllegalStateException("Type [" + typeName
+					+ "] not found in type system");
+		}
+
+		return type;
+	}
+
+	private void initializeFeaturePathInfoFrom(FeaturePathInfo aFp,
+			String[] featurePathString)
+		throws AnalysisEngineProcessException
+
+	{
+		try {
+			if (featurePathString.length > 1) {
+				aFp.initialize(featurePathString[1]);
+			}
+			else {
+				aFp.initialize("");
+			}
+		}
+		catch (FeaturePathException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+	}
+
+	/**
+	 * The default file for words which do not account for
+	 * <code>thresholdSplit</code> percent may have grown large. In order to
+	 * prevent an real large misc. file we split again.
+	 * 
+	 * @throws IOException
+	 */
+	private void processCreatedMiscFileAgain(int level,
+			Comparator<String> comparator, int nextFileNumber)
+		throws IOException
+	{
+
+		org.apache.uima.util.Logger logger = getContext().getLogger();
+
+		File folder = getOutputFolder(level);
+		File misc = new File(folder, "99999999");
+
+		if (!misc.exists())
+			return;
+
+		FrequencyDistribution<String> letterFD = createFreqDistForMiscFile(misc);
+
+		double oldThreshold = splitThreshold;
+		// Make sure that the misc file is split into little pieces
+		splitThreshold /= 10;
+
+		Web1TFileSplitter splitter = new Web1TFileSplitter(misc, folder,
+				"UTF-8", letterFD, splitThreshold, nextFileNumber, logger);
+		splitter.split();
+		LinkedList<File> splittedFiles = splitter.getFiles();
+
+		Web1TFileSorter sorter = new Web1TFileSorter(splittedFiles, comparator,
+				logger);
+		sorter.sort();
+		LinkedList<File> sortedFiles = splitter.getFiles();
+
+		splitThreshold = oldThreshold;
+		misc.delete();
+
+		Web1TFileConsolidator consolidator = new Web1TFileConsolidator(
+				sortedFiles, comparator, outputEncoding, minFreq, logger);
+		consolidator.consolidate();
+
+		LinkedList<File> consolidatedFiles = consolidator
+				.getConsolidatedFiles();
+
+		// rename consolidated files -> final index files
+		for (File file : consolidatedFiles) {
+			String name = Web1TUtil.cutOffUnderscoredSuffixFromFileName(file);
+			file.renameTo(new File(name));
+		}
+
+		splitter.cleanUp();
+		sorter.cleanUp();
+		consolidator.cleanUp();
+	}
+
+	/**
+	 * Creates a new frequency distribution over the starting letters in the
+	 * misc file as preparation for splitting
+	 * 
+	 * @param misc
+	 * @return
+	 * @throws IOException
+	 */
+	private FrequencyDistribution<String> createFreqDistForMiscFile(File misc)
+		throws IOException
+	{
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				new FileInputStream(misc), outputEncoding));
+
+		FrequencyDistribution<String> letterFD = new FrequencyDistribution<String>();
+
+		String readLine = null;
+		while ((readLine = reader.readLine()) != null) {
+			int indexOfTab = readLine.indexOf(TAB);
+			String key = getStartingLetters(readLine, indexOfTab);
+			letterFD.addSample(key, 1);
+		}
+		reader.close();
+		return letterFD;
+	}
+
+	// private void writeToLog(String desc, String entry) {
+	// getContext().getLogger().log(Level.WARNING, desc + entry);
+	// }
+
+	private File getOutputFolder(int level)
+	{
+
+		return new File(outputPath + "/" + level + "gms");
+	}
+
+	private String getStartingLetters(String readLine, int indexOfTab)
+	{
+		String line = readLine.substring(0, indexOfTab);
+
+		String key = null;
+		if (line.length() > 1) {
+			key = readLine.substring(0, 2);
+		}
+		else {
+			key = readLine.substring(0, 1);
+		}
+		key = key.toLowerCase();
+		return key;
+	}
+
+	private Map<Integer, FrequencyDistribution<String>> initializeLetterFDs(
+			int min, int max)
+	{
+
+		Map<Integer, FrequencyDistribution<String>> fdistMap = new HashMap<Integer, FrequencyDistribution<String>>();
+
+		for (int i = min; i <= max; i++) {
+			FrequencyDistribution<String> fdist = new FrequencyDistribution<String>();
+			fdistMap.put(i, fdist);
+		}
+
+		return fdistMap;
+	}
+
+	private Map<Integer, BufferedWriter> initializeWriters(int min, int max)
+		throws ResourceInitializationException
+	{
+		Map<Integer, BufferedWriter> writers = new HashMap<Integer, BufferedWriter>();
+		for (int level = min; level <= max; level++) {
+			try {
+				File outputFile = new File(outputPath, level + ".txt");
+
+				if (outputFile.exists()) {
+					outputFile.delete();
+				}
+				FileUtils.touch(outputFile);
+
+				writers.put(level, new BufferedWriter(new OutputStreamWriter(
+						new FileOutputStream(outputFile), outputEncoding)));
+			}
+			catch (IOException e) {
+				throw new ResourceInitializationException(e);
+			}
+		}
+		return writers;
+	}
+
+	private void closeWriters(Collection<BufferedWriter> writers)
+		throws AnalysisEngineProcessException
+	{
+		try {
+			for (BufferedWriter writer : writers) {
+				writer.close();
+			}
+		}
+		catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+	}
 }
