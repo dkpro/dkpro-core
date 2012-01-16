@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.apache.uima.util.Logger;
 
-import com.google.code.externalsorting.ExternalSort;
 
 public class Web1TFileSorter
 {
