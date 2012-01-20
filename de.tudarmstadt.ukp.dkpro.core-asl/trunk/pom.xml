@@ -445,7 +445,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.brown-tei</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tei</module>
 	</modules>
 	<build>
 		<plugins>
