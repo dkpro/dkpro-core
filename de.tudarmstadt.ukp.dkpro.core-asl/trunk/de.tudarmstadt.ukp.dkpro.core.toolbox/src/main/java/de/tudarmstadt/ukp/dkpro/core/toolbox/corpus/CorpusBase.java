@@ -34,7 +34,6 @@ public abstract class CorpusBase
     implements Corpus
 {
 
-
     public abstract String getLanguage();
 
     public abstract String getName();

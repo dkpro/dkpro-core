@@ -17,12 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.collection.CollectionReader;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
-import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
+import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
 
 
 /**
@@ -31,7 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
  * @author zesch
  *
  */
-public class TigerCorpus
+public class BrownTEICorpus
     extends CorpusBase
 {
 
@@ -40,25 +41,24 @@ public class TigerCorpus
     
     CollectionReader reader;
 
-    public TigerCorpus() throws Exception
+    public BrownTEICorpus() throws Exception
     {
-        String tigerFile = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
-        "/tiger_export/tiger_release_dec05.export";
+        String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
+        "/brown_tei/";
         
-        initialize(tigerFile);
+        initialize(brownPath);
     }
 
-    public TigerCorpus(String tigerFile) throws Exception
+    public BrownTEICorpus(String brownPath) throws Exception
     {
-        initialize(tigerFile);
+        initialize(brownPath);
     }
 
-    private void initialize(String tigerFile) throws Exception {
+    private void initialize(String brownPath) throws Exception {
         reader = createCollectionReader(
-                NegraExportReader.class,
-                NegraExportReader.PARAM_INPUT_FILE, tigerFile,
-                NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
-                NegraExportReader.PARAM_LANGUAGE, LANGUAGE
+                TEIReader.class,
+                TEIReader.PARAM_PATH, brownPath,
+                TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}
         );
     }
 
