@@ -9,6 +9,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.pipeline.SimplePipeline;
 
+import com.googlecode.jweb1t.JWeb1TIndexer;
+
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -49,5 +51,9 @@ public class PipelineExample
                 segmenter,
                 ngramWriter
         );
+        
+        JWeb1TIndexer indexCreator = new JWeb1TIndexer("target/web1t/", 3);
+        indexCreator.create();
+
     }
 }
