@@ -21,14 +21,15 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownCorpus;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownTEICorpus;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
 
 public class CorpusUsage
 {
 
     public static void main(String[] args) throws Exception
     {
-        BrownCorpus brownCorpus = new BrownCorpus();
+        Corpus brownCorpus = new BrownTEICorpus();
         
         for (Text t : brownCorpus.getTexts()) {
             System.out.println(t);
