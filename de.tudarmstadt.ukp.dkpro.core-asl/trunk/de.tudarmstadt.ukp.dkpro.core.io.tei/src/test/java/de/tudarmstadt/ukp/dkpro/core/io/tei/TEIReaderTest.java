@@ -41,7 +41,7 @@ public class TEIReaderTest
 
         CollectionReader reader = createCollectionReader(
                 TEIReader.class,
-                TEIReader.PARAM_PATH, "src/test/resources/brown_tei/",
+                TEIReader.PARAM_PATH, "classpath:/brown_tei/",
                 TEIReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
                 }
@@ -71,7 +71,7 @@ public class TEIReaderTest
         
         CollectionReader reader = createCollectionReader(
                 TEIReader.class,
-                TEIReader.PARAM_PATH, "src/test/resources/brown_tei/",
+                TEIReader.PARAM_PATH, "classpath:/brown_tei/",
                 TEIReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
                 },
@@ -98,7 +98,7 @@ public class TEIReaderTest
         
         CollectionReader reader = createCollectionReader(
                 TEIReader.class,
-                TEIReader.PARAM_PATH, "src/test/resources/brown_tei/",
+                TEIReader.PARAM_PATH, "classpath:/brown_tei/",
                 TEIReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
                 },
@@ -126,7 +126,7 @@ public class TEIReaderTest
         
         CollectionReader reader = createCollectionReader(
                 TEIReader.class,
-                TEIReader.PARAM_PATH, "src/test/resources/brown_tei/",
+                TEIReader.PARAM_PATH, "classpath:/brown_tei/",
                 TEIReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
                 },
