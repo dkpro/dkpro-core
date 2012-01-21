@@ -50,7 +50,6 @@ public class TextReader
 	
 	/**
 	 * Name of configuration parameter that contains the character encoding used by the input files.
-	 * If not specified, the default system encoding will be used.
 	 */
 	public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
