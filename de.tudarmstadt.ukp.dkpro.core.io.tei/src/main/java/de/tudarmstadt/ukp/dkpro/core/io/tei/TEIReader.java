@@ -17,14 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory.getTagType;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.Type;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -52,8 +52,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TEIReader
 	extends JCasResourceCollectionReader_ImplBase
 {
-	private static final String LANG_CODE = "en";
-
 	public static final String PARAM_WRITE_TOKENS = "WriteTokens";
 	@ConfigurationParameter(name = PARAM_WRITE_TOKENS, mandatory = true, defaultValue = "true")
 	private boolean writeTokens;
@@ -84,19 +82,22 @@ public class TEIReader
 	{
 		Resource res = nextFile();
 		initCas(aJCas, res);
-		aJCas.setDocumentLanguage(LANG_CODE);
 
-		StringBuilder sb = new StringBuilder();
-
-		List<AnnotationFS> tokenAnnotations = new ArrayList<AnnotationFS>();
-		List<AnnotationFS> posAnnotations = new ArrayList<AnnotationFS>();
-		List<AnnotationFS> sentenceAnnotations = new ArrayList<AnnotationFS>();
-
+		Element root;
 		try {
 			SAXReader reader = new SAXReader();
 			Document document = reader.read(new BufferedInputStream(res.getInputStream()));
-			Element root = document.getRootElement();
+			root = document.getRootElement();
+		}
+		catch (DocumentException e) {
+			throw new CollectionException(e);
+		}
+		catch (IOException e) {
+			throw new CollectionException(e);
+		}
 
+		StringBuilder sb = new StringBuilder();
+		try {
 			SimpleNamespaceContext nsContext = new SimpleNamespaceContext();
 			nsContext.addNamespace("tei", "http://www.tei-c.org/ns/1.0");
 
@@ -108,6 +109,9 @@ public class TEIReader
 			sentenceXP.setNamespaceContext(nsContext);
 			tokenXP.setNamespaceContext(nsContext);
 
+			Map<String, String> mapping = TagsetMappingFactory.getMapping("tagger",
+					aJCas.getDocumentLanguage(), null);
+			
 			for (Object sentenceElement : sentenceXP.selectNodes(root)) {
 				if (sentenceElement instanceof Element) {
 					int sentenceBegin = sb.length();
@@ -123,20 +127,18 @@ public class TEIReader
 							POS posAnno = null;
 							if (writePOS) {
 								String posString = node.attributeValue("type");
-								Type posType = TagsetMappingFactory.getTagType(
-										TagsetMappingFactory.getMapping("tagger", LANG_CODE, null),
-										posString, aJCas.getTypeSystem());
+								Type posType = getTagType(mapping, posString, aJCas.getTypeSystem());
 								posAnno = (POS) aJCas.getCas().createAnnotation(posType,
 										tokenBegin, sb.length());
 								posAnno.setPosValue(posString);
-								posAnnotations.add(posAnno);
+								posAnno.addToIndexes();
 							}
 
 							// Add token annotation
 							if (writeTokens) {
 								Token tokenAnno = new Token(aJCas, tokenBegin, sb.length());
 								tokenAnno.setPos(posAnno);
-								tokenAnnotations.add(tokenAnno);
+								tokenAnno.addToIndexes();
 							}
 
 							sb.append(" ");
@@ -144,33 +146,15 @@ public class TEIReader
 					}
 
 					if (writeSentences) {
-						Sentence sentenceAnno = new Sentence(aJCas, sentenceBegin, sb.length());
-						sentenceAnnotations.add(sentenceAnno);
+						new Sentence(aJCas, sentenceBegin, sb.length()).addToIndexes();
 					}
 				}
 			}
 		}
-		catch (IOException e) {
-			throw new CollectionException(e);
-		}
 		catch (JaxenException e) {
-			throw new CollectionException(e);
-		}
-		catch (DocumentException e) {
 			throw new CollectionException(e);
 		}
 
 		aJCas.setDocumentText(sb.toString());
-
-		// finally add the annotations to the CAS
-		for (AnnotationFS t : tokenAnnotations) {
-			aJCas.addFsToIndexes(t);
-		}
-		for (AnnotationFS p : posAnnotations) {
-			aJCas.addFsToIndexes(p);
-		}
-		for (AnnotationFS s : sentenceAnnotations) {
-			aJCas.addFsToIndexes(s);
-		}
 	}
 }
