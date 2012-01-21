@@ -42,6 +42,13 @@ public class TextReader
 	extends ResourceCollectionReaderBase
 {
 	/**
+	 * Automatically detect encoding.
+	 * 
+	 * @see CharsetDetector
+	 */
+	public static final String ENCODING_AUTO = "auto";
+	
+	/**
 	 * Name of configuration parameter that contains the character encoding used by the input files.
 	 * If not specified, the default system encoding will be used.
 	 */
@@ -59,7 +66,7 @@ public class TextReader
 		InputStream is = null;
 		try {
 			is = new BufferedInputStream(res.getInputStream());
-			if ("auto".equals(encoding.toLowerCase())) {
+			if (ENCODING_AUTO.equals(encoding)) {
 				CharsetDetector detector = new CharsetDetector();
 				aCAS.setDocumentText(IOUtils.toString(detector.getReader(is, null)));
 			}
