@@ -36,8 +36,8 @@ public class BrownTEICorpus
     extends CorpusBase
 {
 
-    static final String LANGUAGE = "de";
-    static final String NAME = "Tiger";
+    static final String LANGUAGE = "en";
+    static final String NAME = "Brown";
     
     CollectionReader reader;
 
@@ -57,6 +57,7 @@ public class BrownTEICorpus
     private void initialize(String brownPath) throws Exception {
         reader = createCollectionReader(
                 TEIReader.class,
+                TEIReader.PARAM_LANGUAGE, LANGUAGE,
                 TEIReader.PARAM_PATH, brownPath,
                 TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}
         );
