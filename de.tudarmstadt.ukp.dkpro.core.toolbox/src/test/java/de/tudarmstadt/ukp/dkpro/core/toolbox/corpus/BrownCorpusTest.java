@@ -75,10 +75,8 @@ public class BrownCorpusTest
     public void brownTest_DKPRO_HOME() throws Exception {
         CorpusBase corpus = new BrownTEICorpus();
         
-        int i=0;
         for (Text text : corpus.getTexts()) {
             System.out.println(text);
-            i++;
         }
     }
 }
