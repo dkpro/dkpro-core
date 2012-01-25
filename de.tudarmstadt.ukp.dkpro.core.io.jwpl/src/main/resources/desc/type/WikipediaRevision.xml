@@ -35,6 +35,11 @@
           <description>The userId of the user/contributor who created this revision</description>
           <rangeTypeName>uima.cas.Integer</rangeTypeName>
         </featureDescription>
+        <featureDescription>
+          <name>timestamp</name>
+          <description>The timestamp of the revision, given in milliseconds since the standard base time (January 1, 1970, 00:00:00 GMT)</description>
+          <rangeTypeName>uima.cas.Long</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
   </types>
