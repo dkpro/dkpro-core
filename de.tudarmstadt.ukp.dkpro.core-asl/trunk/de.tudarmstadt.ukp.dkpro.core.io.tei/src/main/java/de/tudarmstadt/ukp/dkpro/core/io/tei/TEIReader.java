@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Reads the Brown corpus. Writes token, POS, and sentence annotations if configured accordingly.
+ * Reads corpora in TEI format (e.g. the Brown TEI corpus). Writes token, POS, and sentence annotations if configured accordingly.
  * 
  * @author zesch
  */
