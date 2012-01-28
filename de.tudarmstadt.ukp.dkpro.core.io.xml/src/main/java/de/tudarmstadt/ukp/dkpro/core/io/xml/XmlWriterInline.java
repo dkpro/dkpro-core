@@ -20,10 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.io.xml;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.OutputStream;
 import java.net.URL;
 
 import javax.xml.transform.Transformer;
@@ -38,12 +36,9 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasToInlineXml;
-import org.apache.uima.util.Level;
-import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 /**
@@ -68,12 +63,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  * @since 1.1.0
  */
 public class XmlWriterInline
-	extends JCasConsumer_ImplBase
+	extends JCasFileWriter_ImplBase
 {
-	public static final String PARAM_OUTPUTDIR = ComponentParameters.PARAM_TARGET_LOCATION;
-	@ConfigurationParameter(name=PARAM_OUTPUTDIR, mandatory=true)
-	private File outputDirectory;
-
 	/**
 	 * XSLT stylesheet to apply.
 	 */
@@ -82,7 +73,6 @@ public class XmlWriterInline
 	private String xslt;
 
 	private CasToInlineXml cas2xml;
-	private int docCount;
 	private Transformer transformer;
 
 	@Override
@@ -90,11 +80,6 @@ public class XmlWriterInline
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-		docCount = 0;
-
-		if (!outputDirectory.exists()) {
-			outputDirectory.mkdirs();
-		}
 
 		if (xslt != null) {
 			TransformerFactory tf = TransformerFactory.newInstance();
@@ -111,38 +96,20 @@ public class XmlWriterInline
 
 	@Override
 	public
-	void process(final JCas jcas) throws AnalysisEngineProcessException
+	void process(final JCas aJCas) throws AnalysisEngineProcessException
 	{
-		// retrieve the filename of the input file from the CAS
-		DocumentMetaData meta = DocumentMetaData.get(jcas);
-		File outFile = null;
-		if (meta != null) {
-			try {
-				File inFile = new File(new URL(meta.getDocumentUri()).getPath());
-				outFile = new File(outputDirectory, inFile.getName());
-			}
-			catch (final MalformedURLException e1) {
-				// invalid URL, use default processing below
-			}
-		}
-
-		if (outFile == null) {
-			outFile = new File(outputDirectory, "doc" + docCount++);
-		}
-
-		getContext().getLogger().log(Level.INFO, "Output File: " + outFile);
-
-		FileOutputStream outStream = null;
+		OutputStream docOS = null;
 		try {
-			final String xmlAnnotations = cas2xml.generateXML(jcas.getCas());
-			outStream = new FileOutputStream(outFile);
+			docOS = getOutputStream(aJCas, ".xml");
+			
+			final String xmlAnnotations = cas2xml.generateXML(aJCas.getCas());
 			if (transformer != null) {
 				transformer.transform(
 						new StreamSource(new ByteArrayInputStream(xmlAnnotations.getBytes("UTF-8"))),
-						new StreamResult(outStream));
+						new StreamResult(docOS));
 			}
 			else {
-				outStream.write(xmlAnnotations.getBytes("UTF-8"));
+				docOS.write(xmlAnnotations.getBytes("UTF-8"));
 			}
 		}
 		catch (final CASException e) {
@@ -155,7 +122,7 @@ public class XmlWriterInline
 			throw new AnalysisEngineProcessException(e);
 		}
 		finally {
-			closeQuietly(outStream);
+			closeQuietly(docOS);
 		}
 	}
 }
