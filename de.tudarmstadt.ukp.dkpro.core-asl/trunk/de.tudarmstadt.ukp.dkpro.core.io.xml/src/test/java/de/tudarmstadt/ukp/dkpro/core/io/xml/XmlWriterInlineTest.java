@@ -42,23 +42,24 @@ public class XmlWriterInlineTest
 		String testDocument = "This is a test.";
 
 		AnalysisEngine consumer = createPrimitive(XmlWriterInline.class,
-				XmlWriterInline.PARAM_OUTPUTDIR, workspace.getRoot().getPath());
+				XmlWriterInline.PARAM_PATH, workspace.getRoot().getPath(),
+				XmlWriterInline.PARAM_STRIP_EXTENSION, true);
 
 		JCas jcas = consumer.newJCas();
 		jcas.setDocumentText(testDocument);
 
-		DocumentMetaData meta = new DocumentMetaData(jcas);
+		DocumentMetaData meta = DocumentMetaData.create(jcas);
 		meta.setDocumentId("testId");
 		meta.setDocumentTitle("title");
-		meta.setDocumentUri(new File(workspace.getRoot(), "test").toURI().toString());
-		meta.addToIndexes();
+		meta.setDocumentBaseUri(workspace.getRoot().toURI().toString());
+		meta.setDocumentUri(new File(workspace.getRoot(), "test.txt").toURI().toString());
 
 		JCas view = jcas.createView("plainTextDocument");
 		view.setDocumentText(testDocument);
 
 		consumer.process(jcas);
 
-		File writtenFile = new File(workspace.getRoot(), "test");
+		File writtenFile = new File(workspace.getRoot(), "test.xml");
 		if (!writtenFile.exists()) {
 			fail("File not correctly written.");
 		}
