@@ -27,6 +27,9 @@ public abstract class FrequencyCountResourceBase
     implements FrequencyCountProvider
 {
     
+    /**
+     * Scales down the frequencies by the given factor.
+     */
     public static final String PARAM_SCALE_DOWN_FACTOR = "ScaleDownFactor";
     @ConfigurationParameter(name = PARAM_SCALE_DOWN_FACTOR, mandatory = true, defaultValue = "1")
     protected String scaleDownFactor;
