@@ -40,7 +40,7 @@ public class BncReader
 	/**
 	 * (character) contains a significant punctuation mark as identified by the CLAWS tagger.
 	 */
-	private static final String TAG_CHARACTER = "w";
+	private static final String TAG_CHARACTER = "c";
 	
 	/**
 	 * (word) represents a grammatical (not necessarily orthographic) word.
@@ -141,16 +141,20 @@ public class BncReader
 					Token token = new Token(getJCas(), tokenStart, getBuffer().length());
 					trim(token);
 					
-					POS pos = new POS(getJCas(), token.getBegin(), token.getEnd());
-					pos.setPosValue(c5Tag);
-					pos.addToIndexes();
+					if (c5Tag != null) {
+						POS pos = new POS(getJCas(), token.getBegin(), token.getEnd());
+						pos.setPosValue(c5Tag);
+						pos.addToIndexes();
+						token.setPos(pos);
+					}
 					
-					Lemma lemma = new Lemma(getJCas(), token.getBegin(), token.getEnd());
-					lemma.setValue(headword);
-					lemma.addToIndexes();
+					if (headword != null) {
+						Lemma lemma = new Lemma(getJCas(), token.getBegin(), token.getEnd());
+						lemma.setValue(headword);
+						lemma.addToIndexes();
+						token.setLemma(lemma);
+					}
 					
-					token.setPos(pos);
-					token.setLemma(lemma);
 					token.addToIndexes();
 				}
 				
