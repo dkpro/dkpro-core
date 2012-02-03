@@ -102,12 +102,6 @@ public class TwitterPosTaggerTest
     {
         int i = 0;
         for (POS posAnnotation : actual) {
-            System.out.println(posAnnotation.getClass().getName());
-            System.out.println(posAnnotation.getCoveredText());
-            System.out.println(tags[i]);
-            System.out.println(posAnnotation.getPosValue());
-            System.out.println(tagClasses[i]);
-            System.out.println(posAnnotation.getType().getShortName());
             assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
             assertEquals("In position "+i, tags[i],       posAnnotation.getPosValue());
             i++;
