@@ -127,6 +127,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             revView1.setDocumentText(text1);
             revView2.setDocumentText(text2);
 
+            addDocumentMetaData(jcas,     currentArticle.getPageId(), revision1.getRevisionID());
             addDocumentMetaData(revView1, currentArticle.getPageId(), revision1.getRevisionID());
             addDocumentMetaData(revView2, currentArticle.getPageId(), revision2.getRevisionID());
 
