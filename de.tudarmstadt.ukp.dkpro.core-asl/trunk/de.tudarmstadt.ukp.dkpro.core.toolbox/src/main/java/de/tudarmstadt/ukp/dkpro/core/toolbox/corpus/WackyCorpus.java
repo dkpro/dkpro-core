@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
  * @author zesch
  * 
  */
-@SuppressWarnings("serial")
 public class WackyCorpus 
     extends CorpusBase
 {
