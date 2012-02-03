@@ -22,7 +22,50 @@
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <version>1.3.0-SNAPSHOT</version>
   </parent>
-  <groupId>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</artifactId>
-  <version>1.3.0-SNAPSHOT</version>
+  <name>DKPro Core ASL - Twitter Tokenizer and Tagger</name>
+  <dependencies>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.uimafit</groupId>
+  		<artifactId>uimafit</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+  	</dependency>
+  	  	<dependency>
+  		<groupId>org.apache.commons</groupId>
+  		<artifactId>commons-math</artifactId>
+  		<version>2.2</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>commons-codec</groupId>
+  		<artifactId>commons-codec</artifactId>
+  		<version>1.6</version>
+  	</dependency>  	
+  	<dependency>
+  		<groupId>org.scala-lang</groupId>
+  		<artifactId>scala-library</artifactId>
+  		<version>2.9.0-1</version>
+  	</dependency>
+  	<dependency>
+    	<groupId>edu.cmu.cs.lti.ark.tweetnlp</groupId>
+    	<artifactId>edu.cmu.cs.lti.ark.tweetnlp.ark-tweet-nlp</artifactId>
+    	<version>0.1.0</version>
+	</dependency>
+	<dependency>
+    	<groupId>jargs.gnu</groupId>
+    	<artifactId>jargs.gnu.jargs</artifactId>
+    	<version>1.0</version>
+	</dependency>
+	<dependency>
+    	<groupId>edu.berkeley.nlp</groupId>
+    	<artifactId>edu.berkeley.nlp</artifactId>
+    	<version>0.1</version>
+	</dependency>
+  </dependencies>
 </project>
