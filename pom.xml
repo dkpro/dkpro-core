@@ -446,7 +446,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tei</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktweet</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
 	</modules>
 	<build>
