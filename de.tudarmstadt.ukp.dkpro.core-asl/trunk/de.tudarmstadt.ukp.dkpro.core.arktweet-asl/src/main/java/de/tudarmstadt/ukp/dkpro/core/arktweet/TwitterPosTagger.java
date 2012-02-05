@@ -17,21 +17,29 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.arktweet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.CasAnnotator_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import edu.cmu.cs.lti.ark.tweetnlp.TweetTaggerInstance;
+import edu.cmu.cs.lti.ark.ssl.pos.POSFeatureTemplates;
+import edu.cmu.cs.lti.ark.ssl.pos.POSModel;
+import edu.cmu.cs.lti.ark.ssl.pos.SemiSupervisedPOSTagger;
+import edu.cmu.cs.lti.ark.ssl.util.BasicFileIO;
 import edu.cmu.cs.lti.ark.tweetnlp.Twokenize;
+import fig.basic.Pair;
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
@@ -50,8 +58,61 @@ public class TwitterPosTagger
     
     private Type tokenType;
     private Feature featPos;
+
+    private SemiSupervisedPOSTaggerUKP tweetTagger;
+    private POSModel model;
     
-    private final TweetTaggerInstance tweetTagger = TweetTaggerInstance.getInstance();
+    @Override
+    public void initialize(UimaContext context)
+            throws ResourceInitializationException
+    {
+        super.initialize(context);
+
+        List<String> argList = new ArrayList<String>();
+        argList.add("--trainOrTest");
+        argList.add("test");
+        argList.add("--useGlobalForLabeledData");
+        argList.add("--useStandardMultinomialMStep");
+        argList.add("--useStandardFeatures");
+        argList.add("--regularizationWeight");
+        argList.add("0.707");
+        argList.add("--regularizationBias");
+        argList.add("0.0");
+        argList.add("--initialWeightsLower");
+        argList.add("-0.01");
+        argList.add("--initialWeightsUpper");
+        argList.add("0.01");
+        argList.add("--iters");
+        argList.add("1000");
+        argList.add("--printRate");
+        argList.add("100");
+        argList.add("--execPoolDir");
+        argList.add("/tmp");
+        argList.add("--modelFile");
+        argList.add("src/main/resources/tweetpos.model");
+        argList.add("--embeddingsFile");
+        argList.add("src/main/resources/embeddings.txt");
+        argList.add("--namesFile");
+        argList.add("src/main/resources/names");
+        argList.add("--useDistSim");
+        argList.add("--useNames");
+        argList.add("--numLabeledSentences");
+        argList.add("100000");
+        argList.add("--maxSentenceLength");
+        argList.add("200");
+        String[] args = new String[argList.size()];
+        argList.toArray(args);
+        
+        POSOptionsUKP options = new POSOptionsUKP(args);
+        options.parseArgs(args); 
+        
+        tweetTagger = new SemiSupervisedPOSTaggerUKP(options);
+        model = (POSModel) BasicFileIO.readSerializedObject("src/main/resources/tweetpos.model");
+        tweetTagger.initializeDataStructures();
+
+        POSFeatureTemplates.log.setLevel(Level.WARNING);
+        SemiSupervisedPOSTagger.log.setLevel(Level.WARNING);
+    }
 
     @Override
     public void typeSystemInit(TypeSystem aTypeSystem)
@@ -69,7 +130,7 @@ public class TwitterPosTagger
         String text = cas.getDocumentText();
 
         List<String> tokens = Twokenize.tokenizeForTagger_J(text);
-        List<String> tags   = tweetTagger.getTagsForOneSentence(tokens);
+        List<String> tags   = getTagsForOneSentence(tokens);
 
         Map<String,String> tagMapping = TagsetMappingFactory.getMapping(
                 "arktweet",
@@ -103,5 +164,22 @@ public class TwitterPosTagger
             
             offset = end;
         }
+    }
+    
+    private List<String> getTagsForOneSentence(List<String> words) {
+        List<String> dTags = new ArrayList<String>();
+        for (int i=0; i<words.size(); i++) {
+            dTags.add("N");
+        }
+
+        List<Pair<List<String>, List<String>>> col = new ArrayList<Pair<List<String>, List<String>>>();
+        col.add(new Pair<List<String>, List<String>>(words, dTags));
+        List<List<String>> col1 = tweetTagger.testCRF(col, model);
+        
+        if (col1.size() != 1) {
+            throw new RuntimeException("Problem with the returned size of the collection. Should be 1.");
+        }
+        List<String> tags = col1.get(0);
+        return tags;
     }
 }
