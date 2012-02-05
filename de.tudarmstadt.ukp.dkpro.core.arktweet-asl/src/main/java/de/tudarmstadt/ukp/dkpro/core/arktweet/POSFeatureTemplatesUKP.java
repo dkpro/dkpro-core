@@ -23,12 +23,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.codec.language.Metaphone;
 
-import edu.berkeley.nlp.util.StringUtils;
 import fig.basic.Pair;
 
 /**
@@ -654,8 +652,8 @@ public class POSFeatureTemplatesUKP {
         getInterpolationFeatures(int numLanguages) {
         POSFeatureTemplatesUKP templates = new POSFeatureTemplatesUKP();
         InterpolationFeatureTemplate interFeature = templates.new InterpolationIndicatorFeature();
-        log.info("Interpolation features:");
-        log.info(interFeature.getName());
+        log.fine("Interpolation features:");
+        log.fine(interFeature.getName());
         return interFeature;        
     }
     
@@ -668,9 +666,9 @@ public class POSFeatureTemplatesUKP {
         if (useBiasFeature) {
             transFeatures.add(templates.new BiasIndicatorFeature());
         }
-        log.info("Trans features:");
+        log.fine("Trans features:");
         for (TransFeatureTemplate feat : transFeatures) {
-            log.info(feat.getName());
+            log.fine(feat.getName());
         }
         return transFeatures;
     }
@@ -727,9 +725,9 @@ public class POSFeatureTemplatesUKP {
 //          emitFeatures.add(templates.new VariousLexicalAspectsIndicatorFeature(uTd, wi, td, tM, noahsFeatures));
             
         }
-        log.info("Emit features:");
+        log.fine("Emit features:");
         for (EmitFeatureTemplate feat : emitFeatures) {
-            log.info(feat.getName());
+            log.fine(feat.getName());
         }
         return emitFeatures;
     }   
