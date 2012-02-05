@@ -152,8 +152,6 @@ public class TwitterPosTagger
 
             Type posType = TagsetMappingFactory.getTagType(tagMapping, tag, ts);
             
-            System.out.println(token + "-" + tag + "-" + posType.getName());
-            
             AnnotationFS posAnno = cas.createAnnotation(posType, start, end);
             posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), tag);
             cas.addFsToIndexes(posAnno);
