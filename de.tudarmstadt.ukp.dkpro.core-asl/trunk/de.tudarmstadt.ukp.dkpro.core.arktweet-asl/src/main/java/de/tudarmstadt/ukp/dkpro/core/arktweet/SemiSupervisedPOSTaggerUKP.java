@@ -219,7 +219,7 @@ public class SemiSupervisedPOSTaggerUKP {
 		}
 		dir.mkdir();
 		execPoolDir = dir.getAbsolutePath();
-		log.info("Execution directory: " + execPoolDir);
+		log.fine("Execution directory: " + execPoolDir);
 	}	
 
 	public boolean deleteDir(File dir) { 
@@ -1889,13 +1889,13 @@ public class SemiSupervisedPOSTaggerUKP {
 					noahsFeatures,
 					distSimTable,
 					namesArray);	
-		log.info("Caching features...");
-		log.info("Caching transition features...");
+		log.fine("Caching features...");
+		log.fine("Caching transition features...");
 		activeCRFTransFeatures = 
 			getActiveCRFTransFeatures(transFeatures, 
 					indexToWord.size(), 
 					numLabels);
-		log.info("Caching emission features...");
+		log.fine("Caching emission features...");
 		activeCRFEmitFeatures = 
 			getActiveCRFEmitFeatures(emitFeatures, 
 					indexToWord.size(), 
