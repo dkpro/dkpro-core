@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>com.googlecode.jweb1t</groupId>
 			<artifactId>com.googlecode.jweb1t</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
