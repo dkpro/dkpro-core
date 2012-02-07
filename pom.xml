@@ -405,6 +405,7 @@
 	<modules>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.anomaly</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.coref</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.featurepath</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.io</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.lexmorph</module>
@@ -419,11 +420,13 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.frequency</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.annis</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jwpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.mmax2</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.negra</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tei</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.text</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.wsdl</module>
@@ -446,11 +449,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.examples</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.tei</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
 	</modules>
 	<build>
 		<plugins>
