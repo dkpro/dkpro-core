@@ -16,49 +16,39 @@
 		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/arabic-accurate.tagger" md5="730f09c873334d7ea1dc319aeac8b827"
-    		tool="postagger" language="ar" variant="accurate" extension="tagger" version="3.1.0"/>		
+    		tool="postagger" language="ar" variant="accurate" extension="tagger" version="${postagger.version}"/>		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/arabic-fast.tagger" md5="cc88707a0f57a2a303b40428d96a5853"
-    		tool="postagger" language="ar" variant="fast" extension="tagger" version="3.1.0"/>		
+    		tool="postagger" language="ar" variant="fast" extension="tagger" version="${postagger.version}"/>		
 		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/chinese.tagger" md5="77b63c53d00e92ac669d8daf5418e652"
-    		tool="postagger" language="zh" variant="default" extension="tagger" version="3.1.0"/>	
+    		tool="postagger" language="zh" variant="default" extension="tagger" version="${postagger.version}"/>	
 		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/german-dewac.tagger" md5="9b131f68fec38e168211f565db6d2bf5"
-    		tool="postagger" language="de" variant="dewac" extension="tagger" version="3.1.0"/>		
+    		tool="postagger" language="de" variant="dewac" extension="tagger" version="${postagger.version}"/>		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/german-hgc.tagger" md5="f83e545f0ded54937c88c3ba62b6f0c0"
-    		tool="postagger" language="de" variant="hgc" extension="tagger" version="3.1.0"/>		
+    		tool="postagger" language="de" variant="hgc" extension="tagger" version="${postagger.version}"/>		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
     		file="target/download/postagger/german-fast.tagger" md5="8494b5e56c1545cca77bf7faf7b9967c"
-    		tool="postagger" language="de" variant="fast" extension="tagger" version="3.1.0"/>		
+    		tool="postagger" language="de" variant="fast" extension="tagger" version="${postagger.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/english-bidirectional-distsim.tagger" md5="9505d180a60de4a4abb72c95f794f1a2"
-    		tool="postagger" language="en" variant="english-bidirectional-distsim" extension="tagger" version="3.1.0"/>		
+    		tool="postagger" language="en" variant="bidirectional-distsim" extension="tagger" version="${postagger.version}"/>		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/postagger/english-left3words-distsim.tagger" md5="ea935d509091eefe881bb845379b1f5b"
-    		tool="postagger" language="en" variant="english-left3words-distsim" extension="tagger" version="3.1.0"/>	
+    		tool="postagger" language="en" variant="left3words-distsim" extension="tagger" version="${postagger.version}"/>	
 		
 		<antcall target="download-core"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/wsj-0-18-bidirectional-distsim.tagger" md5="ad465a43281c196c8aadee1adaab9251"
-    		tool="postagger" language="en" variant="wsj-0-18-bidirectional-distsim" extension="tagger" version="2.0.0"/>		
+    		tool="postagger" language="en" variant="bidirectional-distsim-wsj-0-18" extension="tagger" version="${core.version}"/>		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/wsj-0-18-left3words-distsim.tagger" md5="7c4f532935a2de5c1548efb142b1c268"
-    		tool="postagger" language="en" variant="wsj-0-18-left3words-distsim" extension="tagger" version="2.0.0"/>		
-
-		<!--
-		<antcall target="download-core"/>
-    	<install-model-file file="target/download/core/bidirectional-distsim-wsj-0-18.tagger" md5="e230dffde190709c5c1bc0ed9a12ac3b"
-    		tool="postagger" language="en" variant="bidirectional-distsim-wsj-0-18" extension="tagger" version="1.1.0"/>		
-    	<install-model-file file="target/download/core/left3words-distsim-wsj-0-18.tagger" md5="2d8ae6a806a1a880ce49ec07d60740e9"
-    		tool="postagger" language="en" variant="left3words-distsim-wsj-0-18.tagger" extension="tagger" version="1.1.0"/>		
-    	-->
-		
-		<!-- antcall target="jar-notice"/ -->
+    		tool="postagger" language="en" variant="left3words-distsim-wsj-0-18" extension="tagger" version="${core.version}"/>		
 	</target>
 
 	<target name="separate-jars-ner">
@@ -68,15 +58,15 @@
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/muc.distsim.crf.ser.gz" md5="947710871ee62cbe94e8b21f2c934581"
-    		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="1.3.0"/>		
+    		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="${core.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/conll.distsim.crf.ser.gz" md5="bac8f4552bb6875f53a28d2803034fc5"
-    		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="1.3.0"/>		
+    		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="${core.version}"/>		
 
 		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
 			file="target/download/core/all.3class.distsim.crf.ser.gz" md5="163502a20d89b686767281dc001cc55f"
-    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="1.3.0"/>	
+    		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="${core.version}"/>	
 
 		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
 			file="target/download/german-ner/hgc_175m_600.crf.ser.gz" md5="39861454dc9e3b2eb391dd5b7139bc1b"
@@ -85,7 +75,6 @@
 		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
 			file="target/download/german-ner/dewac_175m_600.crf.ser.gz" md5="4722078875ddd5658f37e496f4b54b1d"
     		tool="ner" language="de" variant="dewac_175m_600.crf" extension="ser.gz" version="20110920"/>	
-		<!-- antcall target="jar-notice"/ -->
 	</target>
 			
 	<target name="separate-jars-parser">
@@ -94,42 +83,35 @@
 		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/englishPCFG.ser.gz" md5="1d203d00e6c2611053c837013681a8f9"
-    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="${parser.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/englishFactored.ser.gz" md5="3bc5a0843208447989904cbc77a4eed9"
-    		tool="lexparser" language="en" variant="factored" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="en" variant="factored" extension="ser.gz" version="${parser.version}"/>		
 		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/germanPCFG.ser.gz" md5="33f915f9c46a2d02a46fd55dbc23b64e"
-    		tool="lexparser" language="de" variant="pcfg" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="de" variant="pcfg" extension="ser.gz" version="${parser.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/germanFactored.ser.gz" md5="ac4cc5cc3b1e9a28fe46b2afad0c47d3"
-    		tool="lexparser" language="de" variant="factored" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="de" variant="factored" extension="ser.gz" version="${parser.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/chinesePCFG.ser.gz" md5="362033349729ce25e5691c58c6e83e92"
-    		tool="lexparser" language="zh" variant="pcfg" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="zh" variant="pcfg" extension="ser.gz" version="${parser.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/chineseFactored.ser.gz" md5="d1d0fee57e1f69412052db6075ad6ab6"
-    		tool="lexparser" language="zh" variant="factored" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="zh" variant="factored" extension="ser.gz" version="${parser.version}"/>		
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/arabicFactored.ser.gz" md5="c0f6b49dbd68cb1e5466bbc6583bde95"
-    		tool="lexparser" language="ar" variant="factored" extension="ser.gz" version="2.0.0"/>		
+    		tool="lexparser" language="ar" variant="factored" extension="ser.gz" version="${parser.version}"/>		
 		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/frenchFactored.ser.gz" md5="dea5c0b9e4f7d47ac30af0921497334d"
-    		tool="lexparser" language="fr" variant="factored" extension="ser.gz" version="2.0.0"/>		
-
-		<!-- This should be the same as the model file rolled out with the parser package
-		<antcall target="download-core"/>
-    	<install-model-file file="target/download/core/englishPCFG.ser.gz" md5="cb662b2f737846558c3e2bc9d54b0641"
-    		tool="lexparser" language="en" variant="pcfg" extension="ser.gz" version="1.1.0"/>		
-    	-->
-		<!-- antcall target="jar-notice"/ -->
+    		tool="lexparser" language="fr" variant="factored" extension="ser.gz" version="${parser.version}"/>		
 	</target>
 
 	<target name="download-german-ner">
@@ -145,6 +127,7 @@
 	</target>
 	
 	<target name="download-core">
+		<property name="core.version" value="20120108"/>
 		<mkdir dir="target/download/core"/>
     	<get src="http://nlp.stanford.edu/software/stanford-corenlp-2012-01-08.tgz" dest="target/download/core/core-nlp.tar.gz" skipexisting="true"/>
     	<gunzip src="target/download/core/core-nlp.tar.gz"/>
@@ -174,6 +157,7 @@
 	</target>
 
 	<target name="download-parser">
+		<property name="parser.version" value="20120203"/>
 		<mkdir dir="target/download/parser"/>
     	<get src="http://nlp.stanford.edu/software/stanford-parser-2012-02-03.tgz" dest="target/download/parser/parser.tar.gz" skipexisting="true"/>
     	<gunzip src="target/download/parser/parser.tar.gz"/>
@@ -190,6 +174,7 @@
 	</target>
 
 	<target name="download-postagger">
+		<property name="postagger.version" value="20120106"/>
 		<mkdir dir="target/download/postagger"/>
     	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-2012-01-06.tgz" dest="target/download/postagger/postagger.tar.gz" skipexisting="true"/>
 	   	<gunzip src="target/download/postagger/postagger.tar.gz"/>
@@ -205,36 +190,6 @@
     	<delete file="target/download/parser/postagger.tar"/>
 	</target>
 
-	<target name="jar-notice">
-		<echo>================================</echo>
-		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
-		<echo>================================</echo>
-		<echo> </echo>
-		<echo>YOU MAY NOT REDISTRIBUTE THESE JARS WITHOUT THE EXPLICIT PERMISSION</echo>
-		<echo> </echo>
-		<echo>from their respective original creators.</echo>
-		<echo> </echo>
-		<echo>For Maven users:</echo>
-		<echo> </echo>
-		<echo>If you choose to upload these JARs to a PRIVATE repository or install them in</echo>
-		<echo>your local repository, use the following groupId and artifactId scheme:</echo>
-		<echo> </echo>
-		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-&lt;tool&gt;-&lt;lang&gt;-&lt;variant&gt;</echo>
-		<echo>    version: &lt;use the timestamp encoded in the JAR file name&gt;</echo>
-		<echo> </echo>
-		<echo> Example:</echo>
-		<echo> </echo>
-		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-lexparser-en-pcfg</echo>
-		<echo>    version: 1.0.2</echo>
-		<echo> </echo>
-		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
-		<echo>to enable additional test cases when building the DKPro Stanford NLP Integration.</echo>
-		<echo> </echo>
-		<echo>AGAIN REMEMBER THAT YOU MAY NOT REDISTRIBUTE THESE JARS - Thanks.</echo>
-	</target>
-	
 	<macrodef name="install-model-file">
 		<attribute name="file"/>
 		<attribute name="groupId"/>
