@@ -16,15 +16,17 @@
    limitations under the License.
 -->
 <project basedir="../.." default="separate-jars">
-	<target name="jar">
-		<property name="outputDir" value="target/treetagger-resources/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
-		<antcall target="install-all"/>
-		<jar basedir="target/treetagger-resources" destfile="target/treetagger-resources.jar" compress="true"/>
-		<antcall target="jar-notice"/>
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.1.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
 	</target>
-
+	
 	<target name="separate-jars">
-		<property name="outputDir" value="target/treetagger-resources/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
+		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
 		<!-- 
 		 - antcall runs the target in a new project. For the "version.XX" properties to be
 		 - visible to the model-lang-jar macro, we have to run the "install-all" target and the
@@ -39,11 +41,16 @@
 		<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin" version="${version.bin}"/>
 		<jar destfile="target/treetagger-bin-${version.bin}.jar" compress="true">
-			<fileset dir="target/treetagger-resources">
+			<fileset dir="target/model-staging">
 				<include name="META-INF/**/*"/>
 				<include name="**/bin/**/*"/>
 			</fileset>
 		</jar>
+		
+		<install-artifact file="target/treetagger-bin-${version.bin}.jar"
+			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin"
+			version="${version.bin}"/>
+		
 		<clean-pom/>
 		
 		<model-lang-jar language="bg"/>
@@ -52,7 +59,7 @@
 		<model-lang-jar language="es"/>
 		<model-lang-jar language="et"/>
 		<model-lang-jar language="fr"/>
-		<model-lang-jar language="gr"/>
+		<!-- model-lang-jar language="gr"/ -->
 		<model-lang-jar language="gz"/>
 		<model-lang-jar language="it"/>
 		<model-lang-jar language="la"/>
@@ -64,6 +71,13 @@
 		<antcall target="jar-notice"/>
 	</target>
 	
+	<target name="jar">
+		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
+		<antcall target="install-all"/>
+		<jar basedir="target/model-staging" destfile="target/model-staging.jar" compress="true"/>
+		<antcall target="jar-notice"/>
+	</target>
+
 	<target name="jar-notice">
 		<echo>================================</echo>
 		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
@@ -126,7 +140,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="2010111900"/>
+		<property name="version.bin" value="2012020600"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -146,24 +160,30 @@
 			platform="osx-x86_64" file="tree-tagger" md5="076c8002337b89a9a8581aae81d5d481"/>
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-MacOSX-3.2-intel.tar.gz"
 			platform="osx-x86_32" file="tree-tagger" md5="076c8002337b89a9a8581aae81d5d481"/>
+		
 		<!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | now        | 63560dcb3a5932bc5ae0e9aab8f48e42
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-MacOSX-3.2.tar.gz"
 			platform="osx-ppc" file="tree-tagger" md5="63560dcb3a5932bc5ae0e9aab8f48e42"/>
+		
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
-		  - 2010-11-19 | now        | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
+		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
+		  - 2012-02-06 | now        | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="3f1d752b0f8c5ad2667346caafaaa5e7"/>
+			platform="linux-x86_64" file="tree-tagger" md5="6599b70197be926a26a4966e34f1cad5"/>
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_32" file="tree-tagger" md5="3f1d752b0f8c5ad2667346caafaaa5e7"/>
+			platform="linux-x86_32" file="tree-tagger" md5="6599b70197be926a26a4966e34f1cad5"/>
+		
 		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-11-19 | now        | 4a58ee2a4177cc4e9bfaead8cec6430d
+		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
+		  - 2012-02-06 | now        | bcebb9b9745e2ac12c5226a032b8bfb4 (ELF 32-bit MSB executable, SPARC, version 1 (SYSV), dynamically linked (uses shared libs), stripped)
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-3.2.tar.gz"
-			platform="solaris-sparc" file="tree-tagger" md5="4a58ee2a4177cc4e9bfaead8cec6430d"/>
+			platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
+			
 		<!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | now        | 72a5489fe197b0173ea476e2224a6ad6
 		  -->
@@ -256,11 +276,14 @@
 	</target>
 	
 	<target name="gr">
+		<!--
+		  - REC 2012-02-09 - greek model is no longer available
 		<property name="version.gr" value="2011042900"/>
 		
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/greek-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="gr" encoding="ISO-8859-7" 
     		md5="a66e844856586fc77893f735c765acba"/>
+		-->
 	</target>
 	
 	<target name="it">
@@ -355,11 +378,16 @@
 				artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-models-@{language}" 
 				version="${version.@{language}}"/>
 			<jar destfile="target/treetagger-models-@{language}-${version.@{language}}.jar" compress="true">
-				<fileset dir="target/treetagger-resources">
+				<fileset dir="target/model-staging">
 					<include name="META-INF/**/*"/>
 					<include name="**/lib/@{language}-*"/>
 				</fileset>
 			</jar>
+			
+			<install-artifact file="target/treetagger-models-@{language}-${version.@{language}}.jar"
+				groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-models-@{language}"
+				version="${version.@{language}}"/>
+			
 			<clean-pom/>
 		</sequential>
 	</macrodef>
@@ -391,11 +419,6 @@
 	    		</chainedmapper>
 	    	</untar>
 	    	<delete file="${outputDir}/lib/temp-model-archive.tar"/>
-			<!--
-			<copy file="src/scripts/@{language}-@{type}.map" 
-				  tofile="${outputDir}/lib/@{language}-@{type}-@{endianness}.map"
-				  failonerror="false"/>
-			-->
 			
 			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
 			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{prop.verify.md5.actual}"/>
@@ -437,11 +460,6 @@ Actual  : ${@{prop.verify.md5.actual}}
 					</firstmatchmapper>
 	    		</chainedmapper>
 	    	</copy>
-			<!--
-			<copy file="src/scripts/@{language}-@{type}.map" 
-				  tofile="${outputDir}/lib/@{language}-@{type}-@{endianness}.map"
-				  failonerror="false"/>
-			-->
 			
 			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
 			<checksum file="${outputDir}/lib/@{language}-@{type}-@{endianness}.par" property="@{prop.verify.md5.actual}"/>
@@ -603,32 +621,6 @@ Actual  : ${@{prop.verify.md5.actual}}
 				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
 			</propertyfile>
 			<echo>Installed @{type} model file for @{language} on @{endianness} systems</echo>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="generate-pom">
-		<attribute name="groupId"/>
-		<attribute name="artifactId"/>
-		<attribute name="version"/>
-		<sequential>
-			<mkdir dir="target/treetagger-resources/META-INF/maven/@{groupId}/@{artifactId}"/>
-			<echo file="target/treetagger-resources/META-INF/maven/@{groupId}/@{artifactId}/pom.xml"><![CDATA[<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>@{groupId}</groupId>
-	<artifactId>@{artifactId}</artifactId>
-	<version>@{version}</version>
-</project>
-]]></echo>
-			<echo file="target/treetagger-resources/META-INF/maven/@{groupId}/@{artifactId}/pom.properties"><![CDATA[version=@{version}
-groupId=@{groupId}
-artifactId=@{artifactId}
-]]></echo>
-		</sequential>
-	</macrodef>
-	
-	<macrodef name="clean-pom">
-		<sequential>
-			<delete dir="target/treetagger-resources/META-INF"/>
 		</sequential>
 	</macrodef>
 </project>
