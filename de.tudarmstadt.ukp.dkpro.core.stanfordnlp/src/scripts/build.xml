@@ -3,6 +3,13 @@
 		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.1.0/ant-macros.xml"/>
 	</import>
 	
+	<property name="postagger.version" value="20120106"/>
+	<property name="postagger.date" value="2012-01-06"/>
+	<property name="core.version" value="20120108"/>
+	<property name="core.date" value="2012-01-08"/>
+	<property name="parser.version" value="20120203"/>
+	<property name="parser.date" value="2012-02-03"/>
+	
 	<target name="local-maven">
 		<property name="install-artifact-enable" value="true"/>
 		<antcall target="separate-jars"/>
@@ -127,9 +134,8 @@
 	</target>
 	
 	<target name="download-core">
-		<property name="core.version" value="20120108"/>
 		<mkdir dir="target/download/core"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-2012-01-08.tgz" dest="target/download/core/core-nlp.tar.gz" skipexisting="true"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-${core.date}.tgz" dest="target/download/core/core-nlp.tar.gz" skipexisting="true"/>
     	<gunzip src="target/download/core/core-nlp.tar.gz"/>
     	<untar src="target/download/core/core-nlp.tar" dest="target/download/core">
     		<patternset>
@@ -157,9 +163,8 @@
 	</target>
 
 	<target name="download-parser">
-		<property name="parser.version" value="20120203"/>
 		<mkdir dir="target/download/parser"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-parser-2012-02-03.tgz" dest="target/download/parser/parser.tar.gz" skipexisting="true"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-parser-${parser.date}.tgz" dest="target/download/parser/parser.tar.gz" skipexisting="true"/>
     	<gunzip src="target/download/parser/parser.tar.gz"/>
     	<untar src="target/download/parser/parser.tar" dest="target/download/parser">
     		<patternset>
@@ -174,9 +179,8 @@
 	</target>
 
 	<target name="download-postagger">
-		<property name="postagger.version" value="20120106"/>
 		<mkdir dir="target/download/postagger"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-2012-01-06.tgz" dest="target/download/postagger/postagger.tar.gz" skipexisting="true"/>
+    	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-${postagger.date}.tgz" dest="target/download/postagger/postagger.tar.gz" skipexisting="true"/>
 	   	<gunzip src="target/download/postagger/postagger.tar.gz"/>
     	<untar src="target/download/postagger/postagger.tar" dest="target/download/postagger">
     		<patternset>
