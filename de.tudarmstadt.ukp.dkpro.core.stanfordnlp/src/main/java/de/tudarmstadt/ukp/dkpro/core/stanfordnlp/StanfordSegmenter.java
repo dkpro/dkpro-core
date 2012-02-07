@@ -19,12 +19,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import edu.stanford.nlp.international.arabic.process.ArabicTokenizer;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -34,7 +36,6 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.Tokenizer;
 import edu.stanford.nlp.process.WordToSentenceProcessor;
-import edu.stanford.nlp.trees.international.arabic.ArabicTokenizer;
 
 /**
  * @author Richard Eckart de Castilho
@@ -251,7 +252,7 @@ extends SegmenterBase
     	Tokenizer<?> create(
     			final String s)
     	{
-    		return new ArabicTokenizer(new StringReader(s), false);
+    		return ArabicTokenizer.newArabicTokenizer(new StringReader(s), new Properties());
     	}
     }
 

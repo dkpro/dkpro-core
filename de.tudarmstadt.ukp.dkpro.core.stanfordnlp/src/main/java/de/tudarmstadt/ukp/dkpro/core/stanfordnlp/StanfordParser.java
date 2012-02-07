@@ -190,7 +190,7 @@ public class StanfordParser
 		if (lexicalizedParser == null) {
 			URL url = resolveLocation(classifierFileName, this, getContext());
 			lexicalizedParser = new LexicalizedParser(getParserDataFromSerializedFile(url));
-			lexicalizedParser.setOptionFlags("-maxLength", String.valueOf(160));
+			//lexicalizedParser.setOptionFlags("-maxLength", String.valueOf(160));
 
 			try {
 				TreebankLanguagePack tlp = (TreebankLanguagePack) Class.forName(tlpName).newInstance();
@@ -276,8 +276,7 @@ public class StanfordParser
 				getContext().getLogger().log(FINE, tokenizedSentence.toString());
 				LexicalizedParser parser = getParser();
 				if (tokenizedSentence.size() <= 160){
-					parser.parse(tokenizedSentence);
-					parseTree = parser.getBestParse();
+					parseTree = parser.parseTree(tokenizedSentence);
 				}else{
 					continue;
 				}
