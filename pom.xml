@@ -88,6 +88,10 @@
 							<title>I/O Components</title>
 							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
 						</group>
+						<group>
+							<title>Resources</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.frequency*</packages>
+						</group>
 					</groups>
 				</configuration>
 			</plugin>

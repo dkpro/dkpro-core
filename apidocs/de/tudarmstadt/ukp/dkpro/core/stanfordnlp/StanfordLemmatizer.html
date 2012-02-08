@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StanfordSegmenter (DKPro Core GPL 1.3.0-SNAPSHOT API)
+StanfordLemmatizer (DKPro Core GPL 1.3.0-SNAPSHOT API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ StanfordSegmenter (DKPro Core GPL 1.3.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordSegmenter (DKPro Core GPL 1.3.0-SNAPSHOT API)";
+        parent.document.title="StanfordLemmatizer (DKPro Core GPL 1.3.0-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -39,7 +39,7 @@ function windowTitle()
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StanfordSegmenter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StanfordLemmatizer.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
@@ -54,11 +54,11 @@ function windowTitle()
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordCoreferenceResolver.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
-&nbsp;<A HREF="StanfordSegmenter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+  <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordLemmatizer.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StanfordLemmatizer.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;<SCRIPT type="text/javascript">
   <!--
   if(window==top) {
@@ -75,9 +75,9 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_top"></A>
@@ -89,59 +89,32 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 de.tudarmstadt.ukp.dkpro.core.stanfordnlp</FONT>
 <BR>
-Class StanfordSegmenter</H2>
+Class StanfordLemmatizer</H2>
 <PRE>
 <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.AnalysisComponent_ImplBase
       <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.Annotator_ImplBase
           <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.JCasAnnotator_ImplBase
               <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.uimafit.component.JCasAnnotator_ImplBase
-                  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase
-                      <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter</B>
+                  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordLemmatizer</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>org.apache.uima.analysis_component.AnalysisComponent</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>StanfordSegmenter</B><DT>extends de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase</DL>
+<DT><PRE>public class <B>StanfordLemmatizer</B><DT>extends org.uimafit.component.JCasAnnotator_ImplBase</DL>
 </PRE>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
-  <DD>Richard Eckart de Castilho, Oliver Ferschke</DD>
+  <DD>Richard Eckart de Castilho</DD>
 </DL>
 <HR>
 
 <P>
-<!-- =========== FIELD SUMMARY =========== -->
 
-<A NAME="field_summary"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Field Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html#PARAM_FALLBACK">PARAM_FALLBACK</A></B></CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Fields inherited from class de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase</B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>PARAM_CREATE_SENTENCES, PARAM_CREATE_TOKENS, PARAM_LOCALE, PARAM_STRICT_ZONING, PARAM_ZONE_FEATURES</CODE></TD>
-</TR>
-</TABLE>
-&nbsp;
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 
 <A NAME="constructor_summary"><!-- --></A>
@@ -151,7 +124,7 @@ Class StanfordSegmenter</H2>
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html#StanfordSegmenter()">StanfordSegmenter</A></B>()</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordLemmatizer.html#StanfordLemmatizer()">StanfordLemmatizer</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -168,22 +141,19 @@ Class StanfordSegmenter</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html#process(org.apache.uima.jcas.JCas, java.lang.String, int)">process</A></B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
-        <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aText,
-        int&nbsp;aZoneBegin)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordLemmatizer.html#initialize(org.apache.uima.UimaContext)">initialize</A></B>(org.apache.uima.UimaContext&nbsp;aContext)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase</B></TH>
-</TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>createSentence, createToken, createToken, getLocale, getZoneTypes, isCreateSentences, isCreateTokens, isEmpty, isStrictZoning, limit, process, trim, trimChar</CODE></TD>
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordLemmatizer.html#process(org.apache.uima.jcas.JCas)">process</A></B>(org.apache.uima.jcas.JCas&nbsp;aJCas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.uimafit.component.JCasAnnotator_ImplBase"><!-- --></A>
@@ -192,7 +162,7 @@ Class StanfordSegmenter</H2>
 <TH ALIGN="left"><B>Methods inherited from class org.uimafit.component.JCasAnnotator_ImplBase</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>getLogger, initialize</CODE></TD>
+<TD><CODE>getLogger</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.JCasAnnotator_ImplBase"><!-- --></A>
@@ -234,25 +204,6 @@ Class StanfordSegmenter</H2>
 &nbsp;
 <P>
 
-<!-- ============ FIELD DETAIL =========== -->
-
-<A NAME="field_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Field Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="PARAM_FALLBACK"><!-- --></A><H3>
-PARAM_FALLBACK</H3>
-<PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_FALLBACK</B></PRE>
-<DL>
-<DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter.PARAM_FALLBACK">Constant Field Values</A></DL>
-</DL>
-
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 
 <A NAME="constructor_detail"><!-- --></A>
@@ -263,10 +214,10 @@ public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/l
 </TR>
 </TABLE>
 
-<A NAME="StanfordSegmenter()"><!-- --></A><H3>
-StanfordSegmenter</H3>
+<A NAME="StanfordLemmatizer()"><!-- --></A><H3>
+StanfordLemmatizer</H3>
 <PRE>
-public <B>StanfordSegmenter</B>()</PRE>
+public <B>StanfordLemmatizer</B>()</PRE>
 <DL>
 </DL>
 
@@ -280,16 +231,31 @@ public <B>StanfordSegmenter</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="process(org.apache.uima.jcas.JCas, java.lang.String, int)"><!-- --></A><H3>
-process</H3>
+<A NAME="initialize(org.apache.uima.UimaContext)"><!-- --></A><H3>
+initialize</H3>
 <PRE>
-protected void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
-                       <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aText,
-                       int&nbsp;aZoneBegin)
-                throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</PRE>
+public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;aContext)
+                throws org.apache.uima.resource.ResourceInitializationException</PRE>
 <DL>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE>process</CODE> in class <CODE>de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase</CODE></DL>
+<DT><B>Specified by:</B><DD><CODE>initialize</CODE> in interface <CODE>org.apache.uima.analysis_component.AnalysisComponent</CODE><DT><B>Overrides:</B><DD><CODE>initialize</CODE> in class <CODE>org.uimafit.component.JCasAnnotator_ImplBase</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.uima.resource.ResourceInitializationException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="process(org.apache.uima.jcas.JCas)"><!-- --></A><H3>
+process</H3>
+<PRE>
+public void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas)
+             throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>process</CODE> in class <CODE>org.apache.uima.analysis_component.JCasAnnotator_ImplBase</CODE></DL>
 </DD>
 <DD><DL>
 
@@ -313,7 +279,7 @@ protected void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StanfordSegmenter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StanfordLemmatizer.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
   <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
@@ -328,11 +294,11 @@ protected void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
 
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordCoreferenceResolver.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordSegmenter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
-&nbsp;<A HREF="StanfordSegmenter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+  <A HREF="../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordLemmatizer.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StanfordLemmatizer.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
 &nbsp;<SCRIPT type="text/javascript">
   <!--
   if(window==top) {
@@ -349,9 +315,9 @@ protected void <B>process</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
 </TABLE>
 <A NAME="skip-navbar_bottom"></A>

@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StanfordAnnotator (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
+StanfordAnnotator (DKPro Core GPL 1.3.0-SNAPSHOT API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ StanfordAnnotator (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordAnnotator (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)";
+        parent.document.title="StanfordAnnotator (DKPro Core GPL 1.3.0-SNAPSHOT API)";
     }
 }
 </SCRIPT>
@@ -91,12 +91,12 @@ de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util</FONT>
 <BR>
 Class StanfordAnnotator</H2>
 <PRE>
-<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator</B>
 </PRE>
 <HR>
 <DL>
-<DT><PRE>public class <B>StanfordAnnotator</B><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public class <B>StanfordAnnotator</B><DT>extends <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
 </PRE>
 
 <P>
@@ -109,7 +109,7 @@ A StanfordAnnotator-object creates most of the annotations for the
 <P>
 <DL>
 <DT><B>Author:</B></DT>
-  <DD>Oliver Ferschke</DD>
+  <DD>Oliver Ferschke, Richard Eckart de Castilho</DD>
 </DL>
 <HR>
 
@@ -124,7 +124,7 @@ A StanfordAnnotator-object creates most of the annotations for the
 <B>Constructor Summary</B></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#StanfordAnnotator(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)">StanfordAnnotator</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;tokenTree)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#StanfordAnnotator(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)">StanfordAnnotator</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;aTokenTree)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -142,9 +142,9 @@ A StanfordAnnotator-object creates most of the annotations for the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotation(int, int, java.lang.String)">createConstituentAnnotation</A></B>(int&nbsp;begin,
-                            int&nbsp;end,
-                            <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;constituentType)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotation(int, int, java.lang.String)">createConstituentAnnotation</A></B>(int&nbsp;aBegin,
+                            int&nbsp;aEnd,
+                            <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aConstituentType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new Constituent annotation.</TD>
@@ -152,8 +152,8 @@ A StanfordAnnotator-object creates most of the annotations for the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotationFromTree(boolean, boolean)">createConstituentAnnotationFromTree</A></B>(boolean&nbsp;createPosTags,
-                                    boolean&nbsp;createLemmas)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotationFromTree(boolean, boolean)">createConstituentAnnotationFromTree</A></B>(boolean&nbsp;aCreatePos,
+                                    boolean&nbsp;aCreateLemma)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates linked constituent annotations, POS annotations and
@@ -162,11 +162,11 @@ A StanfordAnnotator-object creates most of the annotations for the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createDependencyAnnotation(int, int, edu.stanford.nlp.trees.GrammaticalRelation, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token)">createDependencyAnnotation</A></B>(int&nbsp;begin,
-                           int&nbsp;end,
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createDependencyAnnotation(int, int, edu.stanford.nlp.trees.GrammaticalRelation, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token)">createDependencyAnnotation</A></B>(int&nbsp;aBegin,
+                           int&nbsp;aEnd,
                            edu.stanford.nlp.trees.GrammaticalRelation&nbsp;aGramRel,
-                           de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;governor,
-                           de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;dependent)</CODE>
+                           de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;aGovernor,
+                           de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;aDependent)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes dependency annotations to the JCas</TD>
@@ -174,8 +174,8 @@ A StanfordAnnotator-object creates most of the annotations for the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createPennTreeAnnotation(int, int)">createPennTreeAnnotation</A></B>(int&nbsp;begin,
-                         int&nbsp;end)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createPennTreeAnnotation(int, int)">createPennTreeAnnotation</A></B>(int&nbsp;aBegin,
+                         int&nbsp;aEnd)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates annotation with Penn Treebank style representations of the syntax
@@ -184,9 +184,9 @@ A StanfordAnnotator-object creates most of the annotations for the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createPOSAnnotation(int, int, java.lang.String)">createPOSAnnotation</A></B>(int&nbsp;begin,
-                    int&nbsp;end,
-                    <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;posType)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createPOSAnnotation(int, int, java.lang.String)">createPOSAnnotation</A></B>(int&nbsp;aBegin,
+                    int&nbsp;aEnd,
+                    <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aPosType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new Constituent annotation.</TD>
@@ -194,9 +194,9 @@ A StanfordAnnotator-object creates most of the annotations for the
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createTagAnnotation(int, int, java.lang.String)">createTagAnnotation</A></B>(int&nbsp;begin,
-                    int&nbsp;end,
-                    <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tag)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createTagAnnotation(int, int, java.lang.String)">createTagAnnotation</A></B>(int&nbsp;aBegin,
+                    int&nbsp;aEnd,
+                    <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aTag)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a tag-annotation over a constituent</TD>
@@ -246,10 +246,10 @@ A StanfordAnnotator-object creates most of the annotations for the
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -268,7 +268,7 @@ A StanfordAnnotator-object creates most of the annotations for the
 <A NAME="StanfordAnnotator(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)"><!-- --></A><H3>
 StanfordAnnotator</H3>
 <PRE>
-public <B>StanfordAnnotator</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;tokenTree)
+public <B>StanfordAnnotator</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</A>&nbsp;aTokenTree)
                   throws org.apache.uima.cas.CASException</PRE>
 <DL>
 <DL>
@@ -334,15 +334,15 @@ public void <B>setaJCas</B>(org.apache.uima.jcas.JCas&nbsp;aAJCas)</PRE>
 <A NAME="createConstituentAnnotationFromTree(boolean, boolean)"><!-- --></A><H3>
 createConstituentAnnotationFromTree</H3>
 <PRE>
-public void <B>createConstituentAnnotationFromTree</B>(boolean&nbsp;createPosTags,
-                                                boolean&nbsp;createLemmas)</PRE>
+public void <B>createConstituentAnnotationFromTree</B>(boolean&nbsp;aCreatePos,
+                                                boolean&nbsp;aCreateLemma)</PRE>
 <DL>
 <DD>Creates linked constituent annotations, POS annotations and
  lemma-annotations.<br/>
  Note: The annotations are directly written to the indexes of the CAS.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the JCas for which to create annotations<DD><CODE>node</CODE> - the source tree (with CoreMap nodes)</DL>
+<DT><B>Parameters:</B><DD><CODE>jCas</CODE> - the JCas for which to create annotations<DD><CODE>node</CODE> - the source tree (with CoreMap nodes)</DL>
 </DD>
 </DL>
 <HR>
@@ -350,14 +350,14 @@ public void <B>createConstituentAnnotationFromTree</B>(boolean&nbsp;createPosTag
 <A NAME="createTagAnnotation(int, int, java.lang.String)"><!-- --></A><H3>
 createTagAnnotation</H3>
 <PRE>
-public void <B>createTagAnnotation</B>(int&nbsp;begin,
-                                int&nbsp;end,
-                                <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;tag)</PRE>
+public void <B>createTagAnnotation</B>(int&nbsp;aBegin,
+                                int&nbsp;aEnd,
+                                <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aTag)</PRE>
 <DL>
 <DD>Creates a tag-annotation over a constituent
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>tag</CODE> - the tag value</DL>
+<DT><B>Parameters:</B><DD><CODE>jCas</CODE> - the CAS<DD><CODE>aBegin</CODE> - start-index of the constituent span<DD><CODE>aEnd</CODE> - end-index of the constituent span<DD><CODE>aTag</CODE> - the tag value</DL>
 </DD>
 </DL>
 <HR>
@@ -365,15 +365,15 @@ public void <B>createTagAnnotation</B>(int&nbsp;begin,
 <A NAME="createConstituentAnnotation(int, int, java.lang.String)"><!-- --></A><H3>
 createConstituentAnnotation</H3>
 <PRE>
-public de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent <B>createConstituentAnnotation</B>(int&nbsp;begin,
-                                                                                                         int&nbsp;end,
-                                                                                                         <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;constituentType)</PRE>
+public de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent <B>createConstituentAnnotation</B>(int&nbsp;aBegin,
+                                                                                                         int&nbsp;aEnd,
+                                                                                                         <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aConstituentType)</PRE>
 <DL>
 <DD>Creates a new Constituent annotation. Links to parent- and
  child-annotations are not yet created here.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>constituentType</CODE> - the constituent type
+<DT><B>Parameters:</B><DD><CODE>jCas</CODE> - the CAS<DD><CODE>aBegin</CODE> - start-index of the constituent span<DD><CODE>aEnd</CODE> - end-index of the constituent span<DD><CODE>aConstituentType</CODE> - the constituent type
 <DT><B>Returns:</B><DD>the annotation</DL>
 </DD>
 </DL>
@@ -382,15 +382,15 @@ public de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent <B>
 <A NAME="createPOSAnnotation(int, int, java.lang.String)"><!-- --></A><H3>
 createPOSAnnotation</H3>
 <PRE>
-public de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS <B>createPOSAnnotation</B>(int&nbsp;begin,
-                                                                                   int&nbsp;end,
-                                                                                   <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;posType)</PRE>
+public de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS <B>createPOSAnnotation</B>(int&nbsp;aBegin,
+                                                                                   int&nbsp;aEnd,
+                                                                                   <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aPosType)</PRE>
 <DL>
 <DD>Creates a new Constituent annotation. Links to parent- and
  child-annotations are not yet crated here.
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>posType</CODE> - the constituent type
+<DT><B>Parameters:</B><DD><CODE>jCas</CODE> - the CAS<DD><CODE>aBegin</CODE> - start-index of the constituent span<DD><CODE>aEnd</CODE> - end-index of the constituent span<DD><CODE>aPosType</CODE> - the constituent type
 <DT><B>Returns:</B><DD>the annotation</DL>
 </DD>
 </DL>
@@ -399,16 +399,16 @@ public de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS <B>createPOSAnnot
 <A NAME="createDependencyAnnotation(int, int, edu.stanford.nlp.trees.GrammaticalRelation, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token)"><!-- --></A><H3>
 createDependencyAnnotation</H3>
 <PRE>
-public void <B>createDependencyAnnotation</B>(int&nbsp;begin,
-                                       int&nbsp;end,
+public void <B>createDependencyAnnotation</B>(int&nbsp;aBegin,
+                                       int&nbsp;aEnd,
                                        edu.stanford.nlp.trees.GrammaticalRelation&nbsp;aGramRel,
-                                       de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;governor,
-                                       de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;dependent)</PRE>
+                                       de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;aGovernor,
+                                       de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;aDependent)</PRE>
 <DL>
 <DD>Writes dependency annotations to the JCas
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - the CAS<DD><CODE>begin</CODE> - start-index of the constituent span<DD><CODE>end</CODE> - end-index of the constituent span<DD><CODE>aGramRel</CODE> - the dependency-type<DD><CODE>governor</CODE> - the governing-word<DD><CODE>dependent</CODE> - the dependent-word</DL>
+<DT><B>Parameters:</B><DD><CODE>jCas</CODE> - the CAS<DD><CODE>aBegin</CODE> - start-index of the constituent span<DD><CODE>aEnd</CODE> - end-index of the constituent span<DD><CODE>aGramRel</CODE> - the dependency-type<DD><CODE>aGovernor</CODE> - the governing-word<DD><CODE>aDependent</CODE> - the dependent-word</DL>
 </DD>
 </DL>
 <HR>
@@ -416,14 +416,14 @@ public void <B>createDependencyAnnotation</B>(int&nbsp;begin,
 <A NAME="createPennTreeAnnotation(int, int)"><!-- --></A><H3>
 createPennTreeAnnotation</H3>
 <PRE>
-public void <B>createPennTreeAnnotation</B>(int&nbsp;begin,
-                                     int&nbsp;end)</PRE>
+public void <B>createPennTreeAnnotation</B>(int&nbsp;aBegin,
+                                     int&nbsp;aEnd)</PRE>
 <DL>
 <DD>Creates annotation with Penn Treebank style representations of the syntax
  tree
 <P>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aJCas</CODE> - <DD><CODE>begin</CODE> - <DD><CODE>end</CODE> - </DL>
+<DT><B>Parameters:</B><DD><CODE>aBegin</CODE> - <DD><CODE>aEnd</CODE> - </DL>
 </DD>
 </DL>
 <HR>
@@ -507,6 +507,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2011. All Rights Reserved.
+Copyright &#169; 2012. All Rights Reserved.
 </BODY>
 </HTML>
