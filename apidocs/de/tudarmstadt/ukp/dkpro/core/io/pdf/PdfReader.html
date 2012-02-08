@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PdfReader (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+PdfReader (DKPro Core ASL 1.3.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ PdfReader (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PdfReader (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="PdfReader (DKPro Core ASL 1.3.0 API)";
     }
 }
 </SCRIPT>
@@ -91,7 +91,7 @@ de.tudarmstadt.ukp.dkpro.core.io.pdf</FONT>
 <BR>
 Class PdfReader</H2>
 <PRE>
-<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.Resource_ImplBase
       <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.ConfigurableResource_ImplBase
           <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.collection.CollectionReader_ImplBase
@@ -129,7 +129,7 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#BUILT_IN">BUILT_IN</A></B></CODE>
 
 <BR>
@@ -137,7 +137,7 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_HEADING_TYPE">PARAM_HEADING_TYPE</A></B></CODE>
 
 <BR>
@@ -145,7 +145,7 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_PARAGRAPH_TYPE">PARAM_PARAGRAPH_TYPE</A></B></CODE>
 
 <BR>
@@ -153,7 +153,7 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_SUBSTITUTION_TABLE">PARAM_SUBSTITUTION_TABLE</A></B></CODE>
 
 <BR>
@@ -175,7 +175,7 @@ Collection reader for PDF files.
 <TH ALIGN="left"><B>Fields inherited from interface org.apache.uima.resource.Resource</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>PARAM_AGGREGATE_SOFA_MAPPINGS, PARAM_CONFIG_PARAM_SETTINGS, PARAM_PERFORMANCE_TUNING_SETTINGS, PARAM_RESOURCE_MANAGER, PARAM_UIMA_CONTEXT</CODE></TD>
+<TD><CODE>PARAM_AGGREGATE_SOFA_MAPPINGS, PARAM_CONFIG_MANAGER, PARAM_CONFIG_PARAM_SETTINGS, PARAM_PERFORMANCE_TUNING_SETTINGS, PARAM_RESOURCE_MANAGER, PARAM_UIMA_CONTEXT</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -235,7 +235,7 @@ Collection reader for PDF files.
 <TH ALIGN="left"><B>Methods inherited from class org.uimafit.component.CasCollectionReader_ImplBase</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>close, initialize</CODE></TD>
+<TD><CODE>close, getLogger, initialize</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.collection.CollectionReader_ImplBase"><!-- --></A>
@@ -262,16 +262,16 @@ Collection reader for PDF files.
 <TH ALIGN="left"><B>Methods inherited from class org.apache.uima.resource.Resource_ImplBase</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>getCasManager, getLogger, getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger, setMetaData</CODE></TD>
+<TD><CODE>getCasManager, getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger, setMetaData</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource"><!-- --></A>
@@ -289,7 +289,7 @@ Collection reader for PDF files.
 <TH ALIGN="left"><B>Methods inherited from interface org.apache.uima.resource.Resource</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>getLogger, getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger</CODE></TD>
+<TD><CODE>getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -308,7 +308,7 @@ Collection reader for PDF files.
 <A NAME="BUILT_IN"><!-- --></A><H3>
 BUILT_IN</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>BUILT_IN</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>BUILT_IN</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.BUILT_IN">Constant Field Values</A></DL>
@@ -318,7 +318,7 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 <A NAME="PARAM_SUBSTITUTION_TABLE"><!-- --></A><H3>
 PARAM_SUBSTITUTION_TABLE</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_SUBSTITUTION_TABLE</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_SUBSTITUTION_TABLE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_SUBSTITUTION_TABLE">Constant Field Values</A></DL>
@@ -328,7 +328,7 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 <A NAME="PARAM_HEADING_TYPE"><!-- --></A><H3>
 PARAM_HEADING_TYPE</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_HEADING_TYPE</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_HEADING_TYPE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_HEADING_TYPE">Constant Field Values</A></DL>
@@ -338,7 +338,7 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 <A NAME="PARAM_PARAGRAPH_TYPE"><!-- --></A><H3>
 PARAM_PARAGRAPH_TYPE</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PARAGRAPH_TYPE</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PARAGRAPH_TYPE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_PARAGRAPH_TYPE">Constant Field Values</A></DL>
@@ -392,13 +392,13 @@ public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;aContext)
 getNext</H3>
 <PRE>
 public void <B>getNext</B>(org.apache.uima.cas.CAS&nbsp;aCAS)
-             throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+             throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                     org.apache.uima.collection.CollectionException</PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE>org.apache.uima.collection.CollectionException</CODE></DL>
 </DD>
 </DL>
@@ -463,6 +463,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2011. All Rights Reserved.
+Copyright &#169; 2012. All Rights Reserved.
 </BODY>
 </HTML>

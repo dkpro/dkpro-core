@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ApplyChangesAnnotator (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+ApplyChangesAnnotator (DKPro Core ASL 1.3.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ ApplyChangesAnnotator (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ApplyChangesAnnotator (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="ApplyChangesAnnotator (DKPro Core ASL 1.3.0 API)";
     }
 }
 </SCRIPT>
@@ -91,18 +91,19 @@ de.tudarmstadt.ukp.dkpro.core.castransformation</FONT>
 <BR>
 Class ApplyChangesAnnotator</H2>
 <PRE>
-<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.AnalysisComponent_ImplBase
       <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.Annotator_ImplBase
           <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.JCasAnnotator_ImplBase
-              <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator</B>
+              <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.uimafit.component.JCasAnnotator_ImplBase
+                  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator</B>
 </PRE>
 <DL>
 <DT><B>All Implemented Interfaces:</B> <DD>org.apache.uima.analysis_component.AnalysisComponent</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ApplyChangesAnnotator</B><DT>extends org.apache.uima.analysis_component.JCasAnnotator_ImplBase</DL>
+<DT><PRE>public class <B>ApplyChangesAnnotator</B><DT>extends org.uimafit.component.JCasAnnotator_ImplBase</DL>
 </PRE>
 
 <P>
@@ -129,7 +130,7 @@ Applies changes annotated using a <CODE>SofaChangeAnnotation</CODE>.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/ApplyChangesAnnotator.html#sourceSofaId">sourceSofaId</A></B></CODE>
 
 <BR>
@@ -137,7 +138,7 @@ Applies changes annotated using a <CODE>SofaChangeAnnotation</CODE>.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/ApplyChangesAnnotator.html#targetSofaId">targetSofaId</A></B></CODE>
 
 <BR>
@@ -187,6 +188,15 @@ Applies changes annotated using a <CODE>SofaChangeAnnotation</CODE>.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.uimafit.component.JCasAnnotator_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.uimafit.component.JCasAnnotator_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>getLogger, initialize</CODE></TD>
+</TR>
+</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.JCasAnnotator_ImplBase"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
@@ -211,16 +221,16 @@ Applies changes annotated using a <CODE>SofaChangeAnnotation</CODE>.
 <TH ALIGN="left"><B>Methods inherited from class org.apache.uima.analysis_component.AnalysisComponent_ImplBase</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>batchProcessComplete, collectionProcessComplete, destroy, getContext, getResultSpecification, initialize, reconfigure, setResultSpecification</CODE></TD>
+<TD><CODE>batchProcessComplete, collectionProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -239,7 +249,7 @@ Applies changes annotated using a <CODE>SofaChangeAnnotation</CODE>.
 <A NAME="sourceSofaId"><!-- --></A><H3>
 sourceSofaId</H3>
 <PRE>
-protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>sourceSofaId</B></PRE>
+protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>sourceSofaId</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -249,7 +259,7 @@ protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?i
 <A NAME="targetSofaId"><!-- --></A><H3>
 targetSofaId</H3>
 <PRE>
-protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>targetSofaId</B></PRE>
+protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>targetSofaId</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -370,6 +380,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2011. All Rights Reserved.
+Copyright &#169; 2012. All Rights Reserved.
 </BODY>
 </HTML>

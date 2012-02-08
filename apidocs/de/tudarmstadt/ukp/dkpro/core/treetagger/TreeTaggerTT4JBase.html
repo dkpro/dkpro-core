@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-TreeTaggerTT4JBase (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+TreeTaggerTT4JBase (DKPro Core ASL 1.3.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ TreeTaggerTT4JBase (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TreeTaggerTT4JBase (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="TreeTaggerTT4JBase (DKPro Core ASL 1.3.0 API)";
     }
 }
 </SCRIPT>
@@ -91,7 +91,7 @@ de.tudarmstadt.ukp.dkpro.core.treetagger</FONT>
 <BR>
 Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 <PRE>
-<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.AnalysisComponent_ImplBase
       <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.Annotator_ImplBase
           <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.CasAnnotator_ImplBase
@@ -162,7 +162,7 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#languageCode">languageCode</A></B></CODE>
 
 <BR>
@@ -170,7 +170,39 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#modelEncoding">modelEncoding</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#modelPath">modelPath</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_EXECUTABLE_PATH">PARAM_EXECUTABLE_PATH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_INTERN_STRINGS">PARAM_INTERN_STRINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_LANGUAGE_CODE">PARAM_LANGUAGE_CODE</A></B></CODE>
 
 <BR>
@@ -178,7 +210,23 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_MODEL_ENCODING">PARAM_MODEL_ENCODING</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_MODEL_PATH">PARAM_MODEL_PATH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_PERFORMANCE_MODE">PARAM_PERFORMANCE_MODE</A></B></CODE>
 
 <BR>
@@ -186,8 +234,24 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#PARAM_TAG_MAPPING_PATH">PARAM_TAG_MAPPING_PATH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#RESOURCE_TREETAGGER">RESOURCE_TREETAGGER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#tagMappingPath">tagMappingPath</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -260,18 +324,16 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;org.apache.uima.cas.Type</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#getTagType(de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.DKProModel, java.lang.String, org.apache.uima.cas.TypeSystem)">getTagType</A></B>(<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.DKProModel.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase.DKProModel</A>&nbsp;aModel,
-           <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aTag,
-           org.apache.uima.cas.TypeSystem&nbsp;aTS)</CODE>
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#initialize(org.apache.uima.UimaContext)">initialize</A></B>(org.apache.uima.UimaContext&nbsp;aContext)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the UIMA type name for the given tag in the given language.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#initialize(org.apache.uima.UimaContext)">initialize</A></B>(org.apache.uima.UimaContext&nbsp;aContext)</CODE>
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.html#isInternStrings()">isInternStrings</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -283,6 +345,15 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.uimafit.component.CasAnnotator_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.uimafit.component.CasAnnotator_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>getLogger</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.analysis_component.CasAnnotator_ImplBase"><!-- --></A>
@@ -315,10 +386,10 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -337,7 +408,7 @@ Class TreeTaggerTT4JBase&lt;T&gt;</H2>
 <A NAME="RESOURCE_TREETAGGER"><!-- --></A><H3>
 RESOURCE_TREETAGGER</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>RESOURCE_TREETAGGER</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>RESOURCE_TREETAGGER</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.RESOURCE_TREETAGGER">Constant Field Values</A></DL>
@@ -357,7 +428,7 @@ protected org.annolab.tt4j.TreeTaggerWrapper&lt;<A HREF="../../../../../../de/tu
 <A NAME="PARAM_LANGUAGE_CODE"><!-- --></A><H3>
 PARAM_LANGUAGE_CODE</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_LANGUAGE_CODE</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_LANGUAGE_CODE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE">Constant Field Values</A></DL>
@@ -367,7 +438,7 @@ public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Str
 <A NAME="languageCode"><!-- --></A><H3>
 languageCode</H3>
 <PRE>
-protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>languageCode</B></PRE>
+protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>languageCode</B></PRE>
 <DL>
 <DL>
 </DL>
@@ -377,10 +448,90 @@ protected <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?i
 <A NAME="PARAM_PERFORMANCE_MODE"><!-- --></A><H3>
 PARAM_PERFORMANCE_MODE</H3>
 <PRE>
-public static final <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PERFORMANCE_MODE</B></PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PERFORMANCE_MODE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_PERFORMANCE_MODE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_EXECUTABLE_PATH"><!-- --></A><H3>
+PARAM_EXECUTABLE_PATH</H3>
+<PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_EXECUTABLE_PATH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_EXECUTABLE_PATH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_MODEL_PATH"><!-- --></A><H3>
+PARAM_MODEL_PATH</H3>
+<PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_MODEL_PATH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_MODEL_PATH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="modelPath"><!-- --></A><H3>
+modelPath</H3>
+<PRE>
+protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>modelPath</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_MODEL_ENCODING"><!-- --></A><H3>
+PARAM_MODEL_ENCODING</H3>
+<PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_MODEL_ENCODING</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_MODEL_ENCODING">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="modelEncoding"><!-- --></A><H3>
+modelEncoding</H3>
+<PRE>
+protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>modelEncoding</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_TAG_MAPPING_PATH"><!-- --></A><H3>
+PARAM_TAG_MAPPING_PATH</H3>
+<PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_TAG_MAPPING_PATH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_TAG_MAPPING_PATH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="tagMappingPath"><!-- --></A><H3>
+tagMappingPath</H3>
+<PRE>
+protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>tagMappingPath</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_INTERN_STRINGS"><!-- --></A><H3>
+PARAM_INTERN_STRINGS</H3>
+<PRE>
+public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_INTERN_STRINGS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.PARAM_INTERN_STRINGS">Constant Field Values</A></DL>
 </DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
@@ -438,6 +589,17 @@ protected boolean <B>isPerformanceMode</B>()</PRE>
 </DL>
 <HR>
 
+<A NAME="isInternStrings()"><!-- --></A><H3>
+isInternStrings</H3>
+<PRE>
+public boolean <B>isInternStrings</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
 <A NAME="getAdapter()"><!-- --></A><H3>
 getAdapter</H3>
 <PRE>
@@ -466,22 +628,6 @@ protected abstract org.annolab.tt4j.ModelResolver <B>getModelResolver</B>()
 </DL>
 <HR>
 
-<A NAME="getTagType(de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.DKProModel, java.lang.String, org.apache.uima.cas.TypeSystem)"><!-- --></A><H3>
-getTagType</H3>
-<PRE>
-protected org.apache.uima.cas.Type <B>getTagType</B>(<A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/TreeTaggerTT4JBase.DKProModel.html" title="class in de.tudarmstadt.ukp.dkpro.core.treetagger">TreeTaggerTT4JBase.DKProModel</A>&nbsp;aModel,
-                                              <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aTag,
-                                              org.apache.uima.cas.TypeSystem&nbsp;aTS)</PRE>
-<DL>
-<DD>Get the UIMA type name for the given tag in the given language.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aModel</CODE> - a model<DD><CODE>aTag</CODE> - a tag.
-<DT><B>Returns:</B><DD>UIMA type name</DL>
-</DD>
-</DL>
-<HR>
-
 <A NAME="destroy()"><!-- --></A><H3>
 destroy</H3>
 <PRE>
@@ -500,15 +646,15 @@ public void <B>destroy</B>()</PRE>
 finalize</H3>
 <PRE>
 protected void <B>finalize</B>()
-                 throws <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></PRE>
+                 throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A></CODE> in class <CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A></CODE> in class <CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
 </DD>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></CODE></DL>
+<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Throwable.html?is-external=true" title="class or interface in java.lang">Throwable</A></CODE></DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -572,6 +718,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2011. All Rights Reserved.
+Copyright &#169; 2012. All Rights Reserved.
 </BODY>
 </HTML>
