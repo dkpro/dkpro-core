@@ -15,7 +15,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.4.0-SNAPSHOT</version>
+		<version>1.3.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
 	<name>DKPro Core GPL - Stanford NPL Tools</name>
@@ -28,16 +28,10 @@
 			<groupId>org.uimafit</groupId>
 			<artifactId>uimafit</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-  			<artifactId>stanford-corenlp</artifactId>
-  			<version>1.3.0</version>
-  		</dependency>
 		<dependency> 
 			<groupId>edu.stanford.nlp</groupId>
   			<artifactId>stanford-corenlp</artifactId>
   			<version>1.3.0</version>
-  			<classifier>models</classifier>
   		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -79,6 +73,13 @@
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-lexparser-de-pcfg</artifactId>
 					<version>20120203</version>
+					<scope>test</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-dcoref-en</artifactId>
+					<version>20120108</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>

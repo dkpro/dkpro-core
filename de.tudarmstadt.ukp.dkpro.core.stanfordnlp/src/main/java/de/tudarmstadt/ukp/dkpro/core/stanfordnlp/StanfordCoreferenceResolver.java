@@ -87,6 +87,22 @@ public class StanfordCoreferenceResolver
 		props.setProperty(Constants.REPLICATECONLL_PROP, "false");
 		props.setProperty(Constants.CONLL_SCORER, Constants.conllMentionEvalScript);
 
+		props.setProperty(Constants.DEMONYM_PROP, DEFAULT_DCOREF_DEMONYM);
+        props.setProperty(Constants.ANIMATE_PROP, DEFAULT_DCOREF_ANIMATE);
+        props.setProperty(Constants.INANIMATE_PROP, DEFAULT_DCOREF_INANIMATE);
+        props.setProperty(Constants.MALE_PROP, DEFAULT_DCOREF_MALE);
+        props.setProperty(Constants.NEUTRAL_PROP, DEFAULT_DCOREF_NEUTRAL);
+        props.setProperty(Constants.FEMALE_PROP, DEFAULT_DCOREF_FEMALE);
+        props.setProperty(Constants.PLURAL_PROP, DEFAULT_DCOREF_PLURAL);
+        props.setProperty(Constants.SINGULAR_PROP, DEFAULT_DCOREF_SINGULAR);
+        props.setProperty(Constants.STATES_PROP, DEFAULT_DCOREF_STATES);
+        props.setProperty(Constants.GENDER_NUMBER_PROP, DEFAULT_DCOREF_GENDER_NUMBER);
+        props.setProperty(Constants.COUNTRIES_PROP, DEFAULT_DCOREF_COUNTRIES);
+        props.setProperty(Constants.STATES_PROVINCES_PROP, DEFAULT_DCOREF_STATES_AND_PROVINCES);
+        props.setProperty(Constants.EXTRA_GENDER_PROP, DEFAULT_DCOREF_EXTRA_GENDER);
+        props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
+        props.setProperty(Constants.REPLICATECONLL_PROP, "false");
+		
 		try {
 			corefSystem = new SieveCoreferenceSystem(props);
 			mentionExtractor = new MentionExtractor(corefSystem.dictionaries(),
@@ -200,4 +216,21 @@ public class StanfordCoreferenceResolver
 		implements Key<CoreMap, Token>
 	{
 	};
+	
+	public static final String BASE = "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/dcoref-en/";
+	
+	public static final String DEFAULT_DCOREF_ANIMATE = BASE + "animate.unigrams.txt";
+	public static final String DEFAULT_DCOREF_DEMONYM = BASE + "demonyms.txt";
+	public static final String DEFAULT_DCOREF_FEMALE = BASE + "female.unigrams.txt";
+	public static final String DEFAULT_DCOREF_INANIMATE = BASE + "inanimate.unigrams.txt";
+	public static final String DEFAULT_DCOREF_MALE = BASE + "male.unigrams.txt";
+	public static final String DEFAULT_DCOREF_NEUTRAL = BASE + "neutral.unigrams.txt";
+	public static final String DEFAULT_DCOREF_PLURAL = BASE + "plural.unigrams.txt";
+	public static final String DEFAULT_DCOREF_SINGULAR = BASE + "singular.unigrams.txt";
+	public static final String DEFAULT_DCOREF_STATES = BASE + "state-abbreviations.txt";
+
+	public static final String DEFAULT_DCOREF_COUNTRIES = BASE + "countries";
+	public static final String DEFAULT_DCOREF_STATES_AND_PROVINCES = BASE + "statesandprovinces";
+	public static final String DEFAULT_DCOREF_GENDER_NUMBER = BASE + "gender.data.gz";
+	public static final String DEFAULT_DCOREF_EXTRA_GENDER = BASE + "namegender.combine.txt";
 }
