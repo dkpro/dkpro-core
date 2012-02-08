@@ -18,7 +18,7 @@
 
 /**
  * Support for <a href="http://cwb.sourceforge.net/">IMS Corpus Workbench</a> tab-separated format
- * also used by <a href="http://wacky.sslmit.unibo.it/doku.php?id=start">WaCky</a>.
+ * also used by WaCky.
  *
  * @since 1.2.0
  */

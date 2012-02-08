@@ -471,6 +471,10 @@
 							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
 						</group>
 						<group>
+							<title>Resources</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.frequency*</packages>
+						</group>
+						<group>
 							<title>APIs</title>
 							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
 						</group>
