@@ -121,6 +121,35 @@
     		tool="lexparser" language="fr" variant="factored" extension="ser.gz" version="${parser.version}"/>		
 	</target>
 
+	<target name="separate-jars-dcoref">
+		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
+
+		<mkdir dir="${outputDir}/lib"/>
+
+		<clean-pom/>
+		<generate-pom version="${core.version}" groupId="de.tudarmstadt.ukp.dkpro.core" 
+			artifactId="de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-dcoref-en"/>
+		
+		<copy todir="${outputDir}/lib">
+			<fileset dir="target/download/core/">
+				<include name="dcoref-en/**/*"/>
+			</fileset>
+		</copy>
+		
+		<jar destfile="target/de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-dcoref-en-${core.version}.jar" compress="true">
+			<fileset dir="target/model-staging">
+				<include name="META-INF/**/*"/>
+				<include name="**/lib/dcoref-en/*"/>
+			</fileset>
+		</jar>
+		
+		<install-artifact file="target/de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-dcoref-en-${core.version}.jar"
+			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-dcoref-en"
+			version="${core.version}"/>
+		
+		<clean-pom/>
+	</target>
+
 	<target name="download-german-ner">
 		<mkdir dir="target/download/german-ner"/>
 		<get src="http://nlp.stanford.edu/software/ner.german.tgz" dest="target/download/german-ner/ner.german.tar.gz" skipexisting="true"/>
@@ -152,6 +181,14 @@
     		<patternset>
     			<include name="**/*.ser.gz"/>		
     			<include name="**/*.tagger*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+		<unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core/dcoref-en">
+    		<patternset>
+    			<include name="**/dcoref/*"/>		
 			</patternset>
     		<chainedmapper>
 	    		<mapper type="flatten"/>
