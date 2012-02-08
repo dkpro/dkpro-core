@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-StopWordSet (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
+StopWordSet (DKPro Core ASL 1.3.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ StopWordSet (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StopWordSet (DKPro Core ASL - Parent 1.1.0-SNAPSHOT API)";
+        parent.document.title="StopWordSet (DKPro Core ASL 1.3.0 API)";
     }
 }
 </SCRIPT>
@@ -91,28 +91,23 @@ de.tudarmstadt.ukp.dkpro.core.stopwordremover</FONT>
 <BR>
 Class StopWordSet</H2>
 <PRE>
-<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true" title="class or interface in java.util">java.util.AbstractCollection</A>&lt;E&gt;
-      <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractSet.html?is-external=true" title="class or interface in java.util">java.util.AbstractSet</A>&lt;E&gt;
-          <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true" title="class or interface in java.util">java.util.HashSet</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;
-              <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordSet</B>
+<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordSet</B>
 </PRE>
 <DL>
-<DT><B>All Implemented Interfaces:</B> <DD><A HREF="http://java.sun.com/javase/6/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Cloneable.html?is-external=true" title="class or interface in java.lang">Cloneable</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;, org.apache.uima.resource.SharedResourceObject</DD>
+<DT><B>All Implemented Interfaces:</B> <DD>org.apache.uima.resource.SharedResourceObject</DD>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>StopWordSet</B><DT>extends <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true" title="class or interface in java.util">HashSet</A>&lt;<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;<DT>implements org.apache.uima.resource.SharedResourceObject</DL>
+<DT><PRE>public class <B>StopWordSet</B><DT>extends <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A><DT>implements org.apache.uima.resource.SharedResourceObject</DL>
 </PRE>
 
 <P>
-Used for storing stop words in a HashSet. Can be used as resource object in
- UIMA. Terms in stopword files are converted to lowercase.
+Used for storing stop words in a HashSet. Can be used as resource object in UIMA. Terms in stop
+ word files are converted to lower case.
 <P>
 
 <P>
-<DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../serialized-form.html#de.tudarmstadt.ukp.dkpro.core.stopwordremover.StopWordSet">Serialized Form</A></DL>
 <HR>
 
 <P>
@@ -132,7 +127,7 @@ Used for storing stop words in a HashSet. Can be used as resource object in
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#StopWordSet(java.lang.String[])">StopWordSet</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;fileNames)</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#StopWordSet(java.lang.String[])">StopWordSet</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;fileNames)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -150,10 +145,18 @@ Used for storing stop words in a HashSet. Can be used as resource object in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#addStopWordListFile(java.lang.String)">addStopWordListFile</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileName)</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#addStopWordListFile(java.lang.String)">addStopWordListFile</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileName)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loads a text file (UTF-8 encoding!)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#contains(java.lang.String)">contains</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aWord)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -166,7 +169,7 @@ Used for storing stop words in a HashSet. Can be used as resource object in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#load(java.io.InputStream)">load</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#load(java.io.InputStream)">load</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -174,55 +177,19 @@ Used for storing stop words in a HashSet. Can be used as resource object in
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#load(java.io.Reader)">load</A></B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A>&nbsp;aReader)</CODE>
+<TD><CODE><B><A HREF="../../../../../../de/tudarmstadt/ukp/dkpro/core/stopwordremover/StopWordSet.html#load(java.io.Reader)">load</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A>&nbsp;aReader)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.util.HashSet"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.util.<A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true" title="class or interface in java.util">HashSet</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#add(E)" title="class or interface in java.util">add</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#clear()" title="class or interface in java.util">clear</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#clone()" title="class or interface in java.util">clone</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#contains(java.lang.Object)" title="class or interface in java.util">contains</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#isEmpty()" title="class or interface in java.util">isEmpty</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#iterator()" title="class or interface in java.util">iterator</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#remove(java.lang.Object)" title="class or interface in java.util">remove</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/HashSet.html?is-external=true#size()" title="class or interface in java.util">size</A></CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractSet"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.util.<A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractSet.html?is-external=true" title="class or interface in java.util">AbstractSet</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractSet.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.util">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractSet.html?is-external=true#hashCode()" title="class or interface in java.util">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractSet.html?is-external=true#removeAll(java.util.Collection)" title="class or interface in java.util">removeAll</A></CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.util.AbstractCollection"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.util.<A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true" title="class or interface in java.util">AbstractCollection</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true#addAll(java.util.Collection)" title="class or interface in java.util">addAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true#containsAll(java.util.Collection)" title="class or interface in java.util">containsAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true#retainAll(java.util.Collection)" title="class or interface in java.util">retainAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true#toArray()" title="class or interface in java.util">toArray</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true#toArray(T[])" title="class or interface in java.util">toArray</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/AbstractCollection.html?is-external=true#toString()" title="class or interface in java.util">toString</A></CODE></TD>
-</TR>
-</TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.util.Set"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from interface java.util.<A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#addAll(java.util.Collection)" title="class or interface in java.util">addAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#containsAll(java.util.Collection)" title="class or interface in java.util">containsAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.util">equals</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#hashCode()" title="class or interface in java.util">hashCode</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#removeAll(java.util.Collection)" title="class or interface in java.util">removeAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#retainAll(java.util.Collection)" title="class or interface in java.util">retainAll</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#toArray()" title="class or interface in java.util">toArray</A>, <A HREF="http://java.sun.com/javase/6/docs/api/java/util/Set.html?is-external=true#toArray(T[])" title="class or interface in java.util">toArray</A></CODE></TD>
+<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -249,13 +216,13 @@ public <B>StopWordSet</B>()</PRE>
 <A NAME="StopWordSet(java.lang.String[])"><!-- --></A><H3>
 StopWordSet</H3>
 <PRE>
-public <B>StopWordSet</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;fileNames)
-            throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public <B>StopWordSet</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>[]&nbsp;fileNames)
+            throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DL>
-<DT><B>Parameters:</B><DD><CODE>fileNames</CODE> - 
+
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -271,8 +238,8 @@ public <B>StopWordSet</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/la
 <A NAME="addStopWordListFile(java.lang.String)"><!-- --></A><H3>
 addStopWordListFile</H3>
 <PRE>
-public void <B>addStopWordListFile</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileName)
-                         throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public void <B>addStopWordListFile</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;fileName)
+                         throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD>Loads a text file (UTF-8 encoding!) containing stop words. Only first
  word in each line will be taken into account. Everything after "|" will
@@ -282,9 +249,9 @@ public void <B>addStopWordListFile</B>(<A HREF="http://java.sun.com/javase/6/doc
 </DL>
 </DD>
 <DD><DL>
-<DT><B>Parameters:</B><DD><CODE>fileName</CODE> - 
+
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -309,8 +276,8 @@ public void <B>load</B>(org.apache.uima.resource.DataResource&nbsp;dataRes)
 <A NAME="load(java.io.InputStream)"><!-- --></A><H3>
 load</H3>
 <PRE>
-public void <B>load</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)
-          throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public void <B>load</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)
+          throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -318,7 +285,7 @@ public void <B>load</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/I
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -326,8 +293,8 @@ public void <B>load</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/I
 <A NAME="load(java.io.Reader)"><!-- --></A><H3>
 load</H3>
 <PRE>
-public void <B>load</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A>&nbsp;aReader)
-          throws <A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+public void <B>load</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/Reader.html?is-external=true" title="class or interface in java.io">Reader</A>&nbsp;aReader)
+          throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -335,7 +302,21 @@ public void <B>load</B>(<A HREF="http://java.sun.com/javase/6/docs/api/java/io/R
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://java.sun.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="contains(java.lang.String)"><!-- --></A><H3>
+contains</H3>
+<PRE>
+public boolean <B>contains</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aWord)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
 </DD>
 </DL>
 <!-- ========= END OF CLASS DATA ========= -->
@@ -399,6 +380,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2011. All Rights Reserved.
+Copyright &#169; 2012. All Rights Reserved.
 </BODY>
 </HTML>
