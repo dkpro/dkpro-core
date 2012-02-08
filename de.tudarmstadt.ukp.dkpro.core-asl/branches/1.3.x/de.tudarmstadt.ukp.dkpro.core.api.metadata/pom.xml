@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.3.0-SNAPSHOT</version>
+		<version>1.3.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
 	<name>DKPro Core ASL - Metadata API</name>
