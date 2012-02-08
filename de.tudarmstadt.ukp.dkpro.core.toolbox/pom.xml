@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.4.0-SNAPSHOT</version>
+		<version>1.3.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</artifactId>
 	<name>DKPro Core ASL - Toolbox</name>
@@ -79,8 +79,8 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei</artifactId>
-			<version>1.3.0-SNAPSHOT</version>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
+			<version>1.3.0</version>
 		</dependency>
 	</dependencies>
 	<profiles>
