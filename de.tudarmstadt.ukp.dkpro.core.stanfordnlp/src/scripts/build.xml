@@ -15,7 +15,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars" depends="separate-jars-parser, separate-jars-postagger, separate-jars-ner"/>
+	<target name="separate-jars" depends="separate-jars-parser, separate-jars-postagger, separate-jars-ner, separate-jars-dcoref"/>
 		
 	<target name="separate-jars-postagger">
 		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
