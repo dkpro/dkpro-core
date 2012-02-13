@@ -216,15 +216,19 @@
 	</target>
 
 	<target name="de">
-		<property name="version.de" value="2011042900"/>
+		<property name="version.de" value="2012021300"/>
 		
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-3.2.bin.gz"
     		type="tagger" endianness="big-endian" language="de" encoding="ISO-8859-1"
     		md5="6618dd26e4974193ae50fbed0888666a"/>
 
+		<!-- FILE: german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
+		  - 2012-02-13 | now        | 45afdcdabfffc69995523748cd42bf81
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="de" encoding="UTF-8"
-    		md5="acbfeaafdcfcc07cbb1e9c396757934c"/>
+    		md5="45afdcdabfffc69995523748cd42bf81"/>
 
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-3.1.bin.gz"
     		type="chunker" endianness="big-endian" language="de" encoding="ISO-8859-1"
