@@ -60,6 +60,13 @@ public class TwitterPosTaggerTest
                 new String[] { "!",    ",",    "V",   "P",  "D",   "A",    "N",   "A",     "N",       "P",  "$",    "R",   "V",      "D",   "N",       "&",    "$",    "R",   "V",     "N",   "N",   "P",  "N",    ",",    "V",     "O",  "^",   ",",    "#"     },
                 new String[] { "INT",  "PUNC", "V",   "PP", "ART", "ADJ",  "NN",  "ADJ",   "NN",      "PP", "CARD", "ADV", "V",      "ART", "NN",      "CONJ", "CARD", "ADV", "V",     "NN",  "NN",  "PP", "NN",   "PUNC", "V",     "PR", "NP",  "PUNC", "HASH"  }
         );
+    
+        runTest("en",
+                "Different smiley styles :) :-) (^_^) ^o #smiley",
+                new String[] { "Different", "smiley",  "styles", ":)", ":-)", "(^_^)", "^o", "#smiley"},
+                new String[] { "A",         "A",       "N",      "E",  "E",   "E",     "E",   "#"},
+                new String[] { "ADJ",       "ADJ",     "NN",     "EMO","EMO", "EMO",   "EMO", "HASH"}
+        );
     }
 
     private JCas runTest(
