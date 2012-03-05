@@ -26,6 +26,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 public abstract class Web1TProviderBase
     extends FrequencyCountProviderBase
 {
+    public static final String BOS = "<S>";
+    public static final String EOS = "</S>";
 
     protected Searcher searcher;
 
