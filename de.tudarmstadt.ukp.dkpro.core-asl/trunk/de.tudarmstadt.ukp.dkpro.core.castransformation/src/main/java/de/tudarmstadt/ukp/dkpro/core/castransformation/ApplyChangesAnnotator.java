@@ -43,9 +43,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 public class ApplyChangesAnnotator
 	extends JCasAnnotator_ImplBase
 {
-	static private final String OP_INSERT = "insert";
-	static private final String OP_REPLACE = "replace";
-	static private final String OP_DELETE = "delete";
+	public static final String OP_INSERT = "insert";
+	public static final String OP_REPLACE = "replace";
+	public static final String OP_DELETE = "delete";
 
 	protected String sourceSofaId = "source";
 	protected String targetSofaId = "target";
