@@ -62,6 +62,70 @@ class AlignedStringTest
 		assertEquals(sb.toString(), bottom.get());
 		assertEquals(sb.toString(), top.get());
 	}
+	
+	@Test
+	public
+	void testInsert2()
+	{
+		//            0123456789012345678901234567890
+		baseString = "This is a hyphen- ated sentence";
+		bottom = new AlignedString(baseString);
+		top = new AlignedString(bottom);
+
+		System.out.println("Delete word fragment");
+		final String fragment = top.get(18,22);
+		top.delete(18,22);
+		System.out.println("Top    : "+top.get()+" - "+top.dataSegmentsToString());
+		System.out.println("Bottom : "+bottom.get()+" - "+bottom.dataSegmentsToString());
+
+		System.out.println("Insert word fragment to complete word");
+		top.insert(16, fragment);
+		System.out.println("Top    : "+top.get()+" - "+top.dataSegmentsToString());
+		System.out.println("Bottom : "+bottom.get()+" - "+bottom.dataSegmentsToString());
+
+		System.out.println("Delete hyphen");
+		top.delete(16+fragment.length(), 18+fragment.length());
+		System.out.println("Top    : "+top.get()+" - "+top.dataSegmentsToString());
+		System.out.println("Bottom : "+bottom.get()+" - "+bottom.dataSegmentsToString());
+
+		ImmutableInterval uli = new ImmutableInterval(0, 18);
+		ImmutableInterval adi = top.inverseResolve(uli);
+		System.out.println("ADI    : "+top.get(adi.getStart(), adi.getEnd()));
+		System.out.println("ULI    : "+bottom.get(uli.getStart(), uli.getEnd()));
+
+		assertEquals("This is a hyphenated", top.get(adi.getStart(), adi.getEnd()));
+
+		uli = new ImmutableInterval(18, 31);
+		adi = top.inverseResolve(uli);
+		System.out.println("ADI    : "+top.get(adi.getStart(), adi.getEnd()));
+		System.out.println("ULI    : "+bottom.get(uli.getStart(), uli.getEnd()));
+
+		assertEquals(" sentence", top.get(adi.getStart(), adi.getEnd()));
+	}
+
+	/**
+	 * This is how you would expect to do hypenation removal, but it's wrong - use method used in
+	 * testInsert2. This here will not work, because AlignedString will try to interpolate the
+	 * start position of the uli interval (18) within the replaced interval (16-22).
+	 */
+	@Test @Ignore("Wrong method to do hypenation removal")
+	public
+	void testInsert3()
+	{
+		//	          0123456789012345678901234567890
+		baseString = "This is a hyphen- ated sentence";
+		bottom = new AlignedString(baseString);
+		top = new AlignedString(bottom);
+
+		top.replace(16, 22, "ated");
+
+		ImmutableInterval uli = new ImmutableInterval(18, 31);
+		Interval adi = top.inverseResolve(uli);
+		System.out.println("ADI    : "+top.get(adi.getStart(), adi.getEnd()));
+		System.out.println("ULI    : "+bottom.get(uli.getStart(), uli.getEnd()));
+
+		assertEquals(" sentence", top.get(adi.getStart(), adi.getEnd()));
+	}
 
 	@Test
 	public
@@ -171,7 +235,6 @@ class AlignedStringTest
 		ImmutableInterval ri = new ImmutableInterval(1, 5);
 		Interval i = top.resolve(ri);
 
-
 		assertEquals(47, i.getStart());
 		assertEquals(65, i.getEnd());
 
@@ -247,7 +310,7 @@ class AlignedStringTest
 		assertEquals(i2.getEnd(), i2.getEnd());
 	}
 
-    @Ignore // FIXME http://code.google.com/p/dkpro-core-asl/issues/detail?id=50 
+//    @Ignore // FIXME http://code.google.com/p/dkpro-core-asl/issues/detail?id=50 
     @Test
     public
     void testReplace3()
@@ -271,6 +334,45 @@ class AlignedStringTest
 
         assertEquals(topRef.toString(), top.get());
     }
+
+    @Test
+    public
+    void testReplace5()
+    {
+		baseString = "";
+		bottom = new AlignedString(baseString);
+		top = new AlignedString(bottom);
+
+        top.replace(0, 0, "Hello!");
+
+        final StringBuilder topRef = new StringBuilder(baseString);
+        topRef.replace(0, 0, "Hello!");
+
+        assertEquals(topRef.toString(), top.get());
+    }
+
+	@Test
+	public
+	void testReplace6()
+	{
+		StringBuilder bottomRef = new StringBuilder(baseString);
+		StringBuilder topRef = new StringBuilder(bottomRef);
+
+		top.delete(2, 5);
+		topRef.delete(2, 5);
+
+		assertEquals(bottomRef.toString(), bottom.get());
+		assertEquals(topRef.toString(), top.get());
+
+		top.insert(2, "was ");
+		topRef.insert(2, "was ");
+
+		assertEquals(bottomRef.toString(), bottom.get());
+		assertEquals(topRef.toString(), top.get());
+
+		System.out.println("Resolved: "+top.resolve(new ImmutableInterval(2, 5)));
+		System.out.println("Inv resolved: "+top.inverseResolve(new ImmutableInterval(2, 5)));
+	}
 
     @Test
 	public
@@ -359,86 +461,4 @@ class AlignedStringTest
 		assertEquals("455YYY5", top.get(adi.getStart(), adi.getEnd()));
 		assertEquals("4XXXX555", bottom.get(uli.getStart(), uli.getEnd()));
 	}
-
-//	@Test
-//	public
-//	void testReplace()
-//	{
-//		StringBuilder bottomRef = new StringBuilder(baseString);
-//		StringBuilder topRef = new StringBuilder(bottomRef);
-//
-//		top.delete(2, 5);
-//		topRef.delete(2, 5);
-//
-//		assertEquals(bottomRef.toString(), bottom.get());
-//		assertEquals(topRef.toString(), top.get());
-//
-//		top.insert(2, "was ");
-//		topRef.insert(2, "was ");
-//
-//		assertEquals(bottomRef.toString(), bottom.get());
-//		assertEquals(topRef.toString(), top.get());
-//
-//		System.out.println("Resolved: "+top.resolve(new ImmutableInterval(2, 5)));
-//		System.out.println("Inv resolved: "+top.inverseResolve(new ImmutableInterval(2, 5)));
-//	}
-
-	@Test
-	public
-	void testInsert2()
-	{
-		//            0123456789012345678901234567890
-		baseString = "This is a hyphen- ated sentence";
-		bottom = new AlignedString(baseString);
-		top = new AlignedString(bottom);
-
-		System.out.println("Delete word fragment");
-		final String fragment = top.get(18,22);
-		top.delete(18,22);
-		System.out.println("Top    : "+top.get()+" - "+top.dataSegmentsToString());
-		System.out.println("Bottom : "+bottom.get()+" - "+bottom.dataSegmentsToString());
-
-		System.out.println("Insert word fragment to complete word");
-		top.insert(16, fragment);
-		System.out.println("Top    : "+top.get()+" - "+top.dataSegmentsToString());
-		System.out.println("Bottom : "+bottom.get()+" - "+bottom.dataSegmentsToString());
-
-		System.out.println("Delete hyphen");
-		top.delete(16+fragment.length(), 18+fragment.length());
-		System.out.println("Top    : "+top.get()+" - "+top.dataSegmentsToString());
-		System.out.println("Bottom : "+bottom.get()+" - "+bottom.dataSegmentsToString());
-
-		ImmutableInterval uli = new ImmutableInterval(0, 18);
-		ImmutableInterval adi = top.inverseResolve(uli);
-		System.out.println("ADI    : "+top.get(adi.getStart(), adi.getEnd()));
-		System.out.println("ULI    : "+bottom.get(uli.getStart(), uli.getEnd()));
-
-		assertEquals("This is a hyphenated", top.get(adi.getStart(), adi.getEnd()));
-
-		uli = new ImmutableInterval(18, 31);
-		adi = top.inverseResolve(uli);
-		System.out.println("ADI    : "+top.get(adi.getStart(), adi.getEnd()));
-		System.out.println("ULI    : "+bottom.get(uli.getStart(), uli.getEnd()));
-
-		assertEquals(" sentence", top.get(adi.getStart(), adi.getEnd()));
-	}
-
-//	@Test
-//	public
-//	void testInsert3()
-//	{
-////		            0123456789012345678901234567890
-//		baseString = "This is a hyphen- ated sentence";
-//		bottom = new AlignedString(baseString);
-//		top = new AlignedString(bottom);
-//
-//		top.replace(16, 22, "ated");
-//
-//		ImmutableInterval uli = new ImmutableInterval(18, 31);
-//		Interval adi = top.inverseResolve(uli);
-//		System.out.println("ADI    : "+top.get(adi.getStart(), adi.getEnd()));
-//		System.out.println("ULI    : "+bottom.get(uli.getStart(), uli.getEnd()));
-//
-//		assertEquals(" sentence", top.get(adi.getStart(), adi.getEnd()));
-//	}
 }
