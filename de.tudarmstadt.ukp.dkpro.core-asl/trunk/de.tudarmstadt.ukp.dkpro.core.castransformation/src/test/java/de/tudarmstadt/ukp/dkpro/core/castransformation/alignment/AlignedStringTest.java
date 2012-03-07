@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public
@@ -219,7 +220,7 @@ class AlignedStringTest
 		assertEquals(topRef.toString(), top.get());
 	}
 
-	@Test
+    @Test
 	public
 	void testReplace2()
 	{
@@ -246,7 +247,32 @@ class AlignedStringTest
 		assertEquals(i2.getEnd(), i2.getEnd());
 	}
 
-	@Test
+    @Ignore // FIXME http://code.google.com/p/dkpro-core-asl/issues/detail?id=50 
+    @Test
+    public
+    void testReplace3()
+    {
+        top.replace(0, 1, "i");
+
+        final StringBuilder topRef = new StringBuilder(baseString);
+        topRef.replace(0, 1, "i");
+
+        assertEquals(topRef.toString(), top.get());
+    }
+
+    @Test
+    public
+    void testReplace4()
+    {
+        top.replace(11, 12, "!");
+
+        final StringBuilder topRef = new StringBuilder(baseString);
+        topRef.replace(11, 12, "!");
+
+        assertEquals(topRef.toString(), top.get());
+    }
+
+    @Test
 	public
 	void testDirty()
 	{
