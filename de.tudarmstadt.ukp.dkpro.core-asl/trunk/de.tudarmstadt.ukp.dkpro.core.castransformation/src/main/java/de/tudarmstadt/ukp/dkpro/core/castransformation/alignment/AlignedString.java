@@ -401,7 +401,7 @@ implements Iterable<AlignedString.DataSegment>
 	}
 
 	public
-	DataSegment getFirst()
+	AbstractDataSegment getFirst()
 	{
 		if (_first._next != _last) {
 			return _first._next;
@@ -411,7 +411,7 @@ implements Iterable<AlignedString.DataSegment>
 	}
 
 	public
-	DataSegment getLast()
+	AbstractDataSegment getLast()
 	{
 		if (_last._prev != _first) {
 			return _last._prev;
@@ -491,12 +491,21 @@ implements Iterable<AlignedString.DataSegment>
 		}
 
 		// Split up segment.
-		final AbstractDataSegment prefix = getSegmentAt(pos);
-		final AbstractDataSegment suffix = prefix.split(pos);
+		final AbstractDataSegment prefix;
+		final AbstractDataSegment suffix;
 
+		if (pos == 0) {
+			// When inserting at position 0, it's clear where to insert / no splitting
+			prefix = _first;
+			suffix = _first._next;
+		}
+		else {
+			prefix = getSegmentAt(pos);
+			suffix = prefix.split(pos);
+		}
+		
 		// Insert segment
-		final BaseSegment seg = new BaseSegment(
-				prefix, suffix, s);
+		final BaseSegment seg = new BaseSegment(prefix, suffix, s);
 		prefix._next = seg;
 		suffix._prev = seg;
 
@@ -564,12 +573,17 @@ implements Iterable<AlignedString.DataSegment>
 			final int end,
 			final String d)
 	{
+		if (start == end) {
+			insert(start, d);
+			return;
+		}
+		
 //		if (_log.isDebugEnabled()) {
 //			_log.debug("pre delete("+start+","+end+") - ["+get(start, end)+"] - "+dataSegmentsToString());
 //		}
 
 		final AbstractDataSegment segAtStart = getSegmentAt(start);
-		final AbstractDataSegment segAtEnd   = getSegmentAt(end-1, true);
+		final AbstractDataSegment segAtEnd   = getSegmentAt(end-1, end > 1);
 
 		AbstractDataSegment prefix;
 		AbstractDataSegment suffix;
