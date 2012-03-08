@@ -12,3 +12,13 @@ licensed to the Apache Software Foundation under the
 "Software Grant License Agreement", informally known as the 
 "IBM UIMA License Agreement".
 Copyright (c) 2003, 2006 IBM Corporation.
+
+
+
+Files in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment:
+
+Classes for tracking changes in a String. These have been originally developed as part of
+AnnoLab within the DFG-Projekt "Linguistische Profile interdisziplinärer Register" (LingPro)
+(10.2006 - 09.2009). Originally these had been licensed under the Lesser GNU Public License. 
+For the purpose of being used in DKPro and being developed further, they have been re-licensed 
+under the Apache Software License 2.0 by the orignal author Richard Eckart de Castilho.
