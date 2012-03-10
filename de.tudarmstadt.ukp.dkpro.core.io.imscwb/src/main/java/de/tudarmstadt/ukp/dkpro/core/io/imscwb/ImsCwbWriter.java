@@ -17,6 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
+import static org.apache.commons.io.FileUtils.deleteQuietly;
+import static org.apache.commons.io.FileUtils.forceMkdir;
+import static org.apache.commons.io.FileUtils.listFiles;
+import static org.apache.commons.io.FilenameUtils.removeExtension;
 import static org.apache.commons.lang.StringUtils.join;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
@@ -33,7 +37,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -116,12 +119,21 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_CQP_HOME, mandatory = false)
 	private File cqpHome;
 
+	/**
+	 * Set this parameter to compres the token streams and the indexes using cwb-huffcode and
+	 * cwb-compress-rdx.
+	 */
+	public static final String PARAM_CQP_COMPRESS = "CqpCompress";
+	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="true")
+	private boolean cqpCompress;
+
 	private static final String LS = "\n";
 	private static final String TAB = "\t";
 	private Writer bw;
 	private int currentId;
 
 	private Process childProcess;
+	private File dataDirectory;
 	private File registryDirectory;
 	private String corpusName = "corpus";
 	
@@ -134,7 +146,7 @@ public class ImsCwbWriter
 		try {
 			File parentFile = outputFile.getParentFile();
 			if (parentFile != null) {
-				FileUtils.forceMkdir(parentFile);
+				forceMkdir(parentFile);
 			}
 		}
 		catch (IOException e) {
@@ -262,10 +274,10 @@ public class ImsCwbWriter
 	private Writer getWriter() throws IOException
 	{
 		if (cqpHome != null) {
-			File dataDirectory = new File(outputFile, "data");
+			dataDirectory = new File(outputFile, "data");
 			registryDirectory = new File(outputFile, "registry");
-			FileUtils.forceMkdir(dataDirectory);
-			FileUtils.forceMkdir(registryDirectory);
+			forceMkdir(dataDirectory);
+			forceMkdir(registryDirectory);
 			
 			List<String> cmd = new ArrayList<String>();
 			cmd.add(new File(cqpHome, "cwb-encode").getAbsolutePath());
@@ -373,12 +385,45 @@ public class ImsCwbWriter
 			catch (InterruptedException e) {
 				throw new AnalysisEngineProcessException(e);
 			}
-			
+		
+			runCwbCommand("cwb-makeall", "-r", registryDirectory.getPath(), "-V",
+					corpusName.toUpperCase());
+
+			if (cqpCompress) {
+				// Compress the token sequence of a positional attribute. Creates .huf, .hcd,
+				// and .huf.syn files, which replace the corresponding .corpus files. After
+				// running this tool successfully, the .corpus files can be deleted.
+				runCwbCommand("cwb-huffcode", "-r", registryDirectory.getPath(), "-A",
+						corpusName.toUpperCase());
+				for (File f : listFiles(dataDirectory, new String[] { "huf" }, false)) {
+					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus"));
+				}
+				
+				// Compress the index of a positional attribute. Creates .crc and .crx files
+				// which replace the corresponding .corpus.rev and .corpus.rdx files. After
+				// running this tool successfully, the latter files can be deleted.
+				runCwbCommand("cwb-compress-rdx", "-r", registryDirectory.getPath(), "-A",
+						corpusName.toUpperCase());
+				for (File f : listFiles(dataDirectory, new String[] { "crc" }, false)) {
+					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus.rev"));
+					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus.rdx"));
+				}
+			}
+		}
+	}
+	
+	private void runCwbCommand(String aCommand, String... aArguments)
+			throws AnalysisEngineProcessException
+		{
 			try {
-				String[] args = new String[] { new File(cqpHome, "cwb-makeall").getAbsolutePath(), 
-						"-r", registryDirectory.getPath(), "-V", corpusName.toUpperCase() };
+				List<String> args = new ArrayList<String>(aArguments.length + 1);
+				args.add(new File(cqpHome, aCommand).getAbsolutePath());
+				for (String arg : aArguments) {
+					args.add(arg);
+				}
+				
 				ProcessBuilder pb = new ProcessBuilder(args);
-				getLogger().info("Spawning cwb-makeall: " + join(args, " "));
+				getLogger().info("Spawning " + aCommand + ": " + join(args, " "));
 				childProcess = pb.start();
 				childProcess.waitFor();
 			}
@@ -393,8 +438,7 @@ public class ImsCwbWriter
 				childProcess = null;
 			}
 		}
-	}
-	
+
 	private static Map<String, String> CHARSET_MAPPING = new HashMap<String, String>();
 	static {
 		CHARSET_MAPPING.put("ISO-8859-1", "latin1");
