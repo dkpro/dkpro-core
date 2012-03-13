@@ -57,7 +57,7 @@ public class GateLemmatizer extends JCasAnnotator_ImplBase {
 				ruleFileURL = ResourceUtils.resolveLocation(ruleFile, this, context);
 			}
 			else {
-				ruleFileURL = ResourceUtils.resolveLocation("src/main/resources/rules/en.rul", this, context);
+				ruleFileURL = ResourceUtils.resolveLocation("classpath:/rules/en.rul", this, context);
 			}
 						
 			gateLemmatizerInterpretObject = new Interpret();

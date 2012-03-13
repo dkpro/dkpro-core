@@ -66,7 +66,7 @@ public class GateLemmatizerTest {
         
         int i=0;
         for (Lemma l : JCasUtil.select(jcas, Lemma.class)) {
-        	assertEquals(expectedLemmas[i], l);
+        	assertEquals(expectedLemmas[i], l.getValue());
         	i++;
         }
 	}
