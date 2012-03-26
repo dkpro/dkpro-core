@@ -46,6 +46,7 @@ public class PdfReader
 	extends FileSetCollectionReaderBase
 {
 	public static final String BUILT_IN = "<built-in>";
+	private static final String NOT_RESTRICTED = "-1";
 
 	public static final String PARAM_SUBSTITUTION_TABLE = "SubstitutionTable";
 	@ConfigurationParameter(name=PARAM_SUBSTITUTION_TABLE, mandatory=false, defaultValue=BUILT_IN)
@@ -58,6 +59,14 @@ public class PdfReader
 	public static final String PARAM_PARAGRAPH_TYPE = "ParagraphType";
 	@ConfigurationParameter(name=PARAM_PARAGRAPH_TYPE, mandatory=false, defaultValue=BUILT_IN)
 	private String paragraphType;
+	
+    public static final String PARAM_START_PAGE = "StartPage";
+    @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
+    private int startPage;
+
+    public static final String PARAM_END_PAGE = "EndPage";
+    @ConfigurationParameter(name = PARAM_END_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
+    private int endPage;
 
 	private Trie<String> substitutionTable;
 
@@ -113,6 +122,12 @@ public class PdfReader
 			converter.setSubstitutionTable(substitutionTable);
 			converter.setHeadingType(headingType);
 			converter.setParagraphType(paragraphType);
+            if (startPage != Integer.parseInt(NOT_RESTRICTED)) {
+                converter.setStartPage(startPage);
+            }
+            if (endPage != Integer.parseInt(NOT_RESTRICTED)) {
+                converter.setEndPage(endPage);
+            }
 			converter.writeText(aCAS, is);
 		}
 		finally {
