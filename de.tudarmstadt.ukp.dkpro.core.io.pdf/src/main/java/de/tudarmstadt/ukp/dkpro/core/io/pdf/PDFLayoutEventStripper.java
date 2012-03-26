@@ -35,28 +35,30 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Vector;
 
-import org.pdfbox.cos.COSStream;
-import org.pdfbox.exceptions.CryptographyException;
-import org.pdfbox.exceptions.InvalidPasswordException;
-import org.pdfbox.pdmodel.PDDocument;
-import org.pdfbox.pdmodel.PDPage;
-import org.pdfbox.pdmodel.common.PDRectangle;
-import org.pdfbox.pdmodel.common.PDStream;
-import org.pdfbox.pdmodel.interactive.pagenavigation.PDThreadBead;
-import org.pdfbox.util.PDFStreamEngine;
-import org.pdfbox.util.PDFTextStripper;
-import org.pdfbox.util.ResourceLoader;
-import org.pdfbox.util.TextPosition;
+import org.apache.pdfbox.cos.COSStream;
+import org.apache.pdfbox.exceptions.CryptographyException;
+import org.apache.pdfbox.exceptions.InvalidPasswordException;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.common.PDStream;
+import org.apache.pdfbox.pdmodel.interactive.pagenavigation.PDThreadBead;
+import org.apache.pdfbox.util.PDFStreamEngine;
+import org.apache.pdfbox.util.PDFTextStripper;
+import org.apache.pdfbox.util.ResourceLoader;
+import org.apache.pdfbox.util.TextPosition;
 
 /**
- * This class will take a PDF document and strip out all of the text and ignore the formatting and
- * such. Please note; it is up to clients of this class to verify that a specific user has the
- * correct permissions to extract text from the PDF document.
+ * This class will take a PDF document and strip out all of the text and ignore
+ * the formatting and such. Please note; it is up to clients of this class to
+ * verify that a specific user has the correct permissions to extract text from
+ * the PDF document.
  * <p>
- * This class is based on the {@link PDFTextStripper} class and was substantially modified and
- * enhanced for basic paragraph and heading detection. Unfortunately it was not possible to
- * add these enhancements through sub-classing, thus the code was copied and adapted.
- *
+ * This class is based on the {@link PDFTextStripper} class and was
+ * substantially modified and enhanced for basic paragraph and heading
+ * detection. Unfortunately it was not possible to add these enhancements
+ * through sub-classing, thus the code was copied and adapted.
+ * 
  * @author Richard Eckart de Castilho
  */
 public abstract class PDFLayoutEventStripper
@@ -89,41 +91,45 @@ public abstract class PDFLayoutEventStripper
 
 	private List<PDThreadBead> pageArticles = null;
 	/**
-	 * The charactersByArticle is used to extract text by article divisions. For example a PDF that
-	 * has two columns like a newspaper, we want to extract the first column and then the second
-	 * column. In this example the PDF would have 2 beads(or articles), one for each column. The
-	 * size of the charactersByArticle would be 5, because not all text on the screen will fall into
-	 * one of the articles. The five divisions are shown below
-	 *
-	 * Text before first article first article text text between first article and second article
-	 * second article text text after second article
-	 *
-	 * Most PDFs won't have any beads, so charactersByArticle will contain a single entry.
+	 * The charactersByArticle is used to extract text by article divisions. For
+	 * example a PDF that has two columns like a newspaper, we want to extract
+	 * the first column and then the second column. In this example the PDF
+	 * would have 2 beads(or articles), one for each column. The size of the
+	 * charactersByArticle would be 5, because not all text on the screen will
+	 * fall into one of the articles. The five divisions are shown below
+	 * 
+	 * Text before first article first article text text between first article
+	 * and second article second article text text after second article
+	 * 
+	 * Most PDFs won't have any beads, so charactersByArticle will contain a
+	 * single entry.
 	 */
 	protected Vector<List<TextPosition>> charactersByArticle = new Vector<List<TextPosition>>();
 
 	private final Map<String, List<TextPosition>> characterListMapping = new HashMap<String, List<TextPosition>>();
 
 	/**
-	 * Instantiate a new PDFTextStripper object. This object will load properties from
-	 * Resources/PDFTextStripper.properties.
-	 *
+	 * Instantiate a new PDFTextStripper object. This object will load
+	 * properties from Resources/PDFTextStripper.properties.
+	 * 
 	 * @throws IOException
 	 *             If there is an error loading the properties.
 	 */
 	public PDFLayoutEventStripper()
 		throws IOException
 	{
-		super(ResourceLoader.loadProperties("Resources/PDFTextStripper.properties"));
+		super(ResourceLoader.loadProperties(
+				"org/apache/pdfbox/resources/PDFTextStripper.properties", true));
 	}
 
 	/**
-	 * Instantiate a new PDFTextStripper object. Loading all of the operator mappings from the
-	 * properties object that is passed in.
-	 *
+	 * Instantiate a new PDFTextStripper object. Loading all of the operator
+	 * mappings from the properties object that is passed in.
+	 * 
 	 * @param props
-	 *            The properties containing the mapping of operators to PDFOperator classes.
-	 *
+	 *            The properties containing the mapping of operators to
+	 *            PDFOperator classes.
+	 * 
 	 * @throws IOException
 	 *             If there is an error reading the properties.
 	 */
@@ -134,11 +140,12 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * This will take a PDDocument and write the text of that document to the print writer.
-	 *
+	 * This will take a PDDocument and write the text of that document to the
+	 * print writer.
+	 * 
 	 * @param doc
 	 *            The document to get the data from.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If the doc is in an invalid state.
 	 */
@@ -175,10 +182,10 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * This will process all of the pages and the text that is in them.
-	 *
+	 * 
 	 * @param pages
 	 *            The pages object in the document.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If there is an error parsing the text.
 	 */
@@ -199,12 +206,12 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * This will process the contents of a page.
-	 *
+	 * 
 	 * @param page
 	 *            The page to process.
 	 * @param content
 	 *            The contents of the page.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If there is an error processing the page.
 	 */
@@ -212,7 +219,8 @@ public abstract class PDFLayoutEventStripper
 		throws IOException
 	{
 		if ((currentPageNo >= startPage) && (currentPageNo <= endPage)) {
-			startPage(startPage, Math.min(maxPage, endPage), currentPageNo, page);
+			startPage(startPage, Math.min(maxPage, endPage), currentPageNo,
+					page);
 			pageArticles = page.getThreadBeads();
 			int numberOfArticleSections = 1 + pageArticles.size() * 2;
 			if (!shouldSeparateByBeads) {
@@ -246,7 +254,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * This method tries do detect headings and paragraphs and line boundaries.
-	 *
+	 * 
 	 * @param textList
 	 * @throws IOException
 	 */
@@ -275,7 +283,8 @@ public abstract class PDFLayoutEventStripper
 			if (currentLine == null) {
 				currentLine = new Line(textList, cur);
 
-				// Get the style for the line (base on style for current element)
+				// Get the style for the line (base on style for current
+				// element)
 				prevStyle = currentStyle;
 				currentStyle = getStyle(textList.get(cur));
 
@@ -289,7 +298,8 @@ public abstract class PDFLayoutEventStripper
 						endRegion(prevStyle);
 					}
 					startRegion(currentStyle);
-					pred = predictGeneralStructure(textList, cur, prediction_depth);
+					pred = predictGeneralStructure(textList, cur,
+							prediction_depth);
 				}
 			}
 
@@ -301,12 +311,16 @@ public abstract class PDFLayoutEventStripper
 				currentLine = null;
 
 				// Check if we left the region
-				final boolean columnSwitch = isColumnSwitch(textList.get(cur), block);
-				final boolean leftIndented = isLeftIndented(textList.get(cur), pred);
-				final boolean leftOutdented = isLeftOutdented(textList.get(cur), pred);
+				final boolean columnSwitch = isColumnSwitch(textList.get(cur),
+						block);
+				final boolean leftIndented = isLeftIndented(textList.get(cur),
+						pred);
+				final boolean leftOutdented = isLeftOutdented(
+						textList.get(cur), pred);
 				// boolean fontSwitch = (fontSize[cur] != fontSize[cur-1]);
-				final boolean vAdjacent = isVerticallyAdjacent(textList.get(cur).getY(), textList
-						.get(cur - 1).getY(), block.linespacing);
+				final boolean vAdjacent = isVerticallyAdjacent(textList
+						.get(cur).getY(), textList.get(cur - 1).getY(),
+						block.linespacing);
 
 				if (!columnSwitch && !leftIndented && !leftOutdented &&
 				/* !fontSwitch && */vAdjacent) {
@@ -319,16 +333,18 @@ public abstract class PDFLayoutEventStripper
 					block.reset(cur);
 
 					if ((pred == null) || !vAdjacent) {
-						pred = predictGeneralStructure(textList, cur, prediction_depth);
+						pred = predictGeneralStructure(textList, cur,
+								prediction_depth);
 					}
 					else if (vAdjacent) {
-						// If the block is directly adjacent, we may be better of
+						// If the block is directly adjacent, we may be better
+						// of
 						// with the old prediction... let's see if we can get a
 						// comparatively good new one.
-						final Prediction new_pred = predictGeneralStructure(textList, cur,
-								prediction_depth);
-						final boolean badPred = isSignifiantlyWorse(new_pred.quality, pred.quality,
-								0.4);
+						final Prediction new_pred = predictGeneralStructure(
+								textList, cur, prediction_depth);
+						final boolean badPred = isSignifiantlyWorse(
+								new_pred.quality, pred.quality, 0.4);
 						if (!badPred) {
 							pred = new_pred;
 						}
@@ -342,7 +358,8 @@ public abstract class PDFLayoutEventStripper
 
 			// Let's check if the block is adjacent or needs a space
 			// if (!isRightAdjacent(textList, cur, cur-1, cur-2)) {
-			if ((cur > 0) && !isNextChar(textList.get(cur), textList.get(cur - 1))) {
+			if ((cur > 0)
+					&& !isNextChar(textList.get(cur), textList.get(cur - 1))) {
 				processWordSeparator();
 			}
 
@@ -361,13 +378,14 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * This will show add a character to the list of characters to be printed to the text file.
-	 *
+	 * This will show add a character to the list of characters to be printed to
+	 * the text file.
+	 * 
 	 * @param text
 	 *            The description of the character to display.
 	 */
 	@Override
-	protected void showCharacter(final TextPosition text)
+	protected void processTextPosition(final TextPosition text)
 	{
 		boolean showCharacter = true;
 		if (suppressDuplicateOverlappingText) {
@@ -375,35 +393,46 @@ public abstract class PDFLayoutEventStripper
 			final String textCharacter = text.getCharacter();
 			final float textX = text.getX();
 			final float textY = text.getY();
-			List<TextPosition> sameTextCharacters = characterListMapping.get(textCharacter);
+			List<TextPosition> sameTextCharacters = characterListMapping
+					.get(textCharacter);
 			if (sameTextCharacters == null) {
 				sameTextCharacters = new ArrayList<TextPosition>();
 				characterListMapping.put(textCharacter, sameTextCharacters);
 			}
 
-			// RDD - Here we compute the value that represents the end of the rendered
-			// text. This value is used to determine whether subsequent text rendered
+			// RDD - Here we compute the value that represents the end of the
+			// rendered
+			// text. This value is used to determine whether subsequent text
+			// rendered
 			// on the same line overwrites the current text.
 			//
-			// We subtract any positive padding to handle cases where extreme amounts
-			// of padding are applied, then backed off (not sure why this is done, but there
-			// are cases where the padding is on the order of 10x the character width, and
-			// the TJ just backs up to compensate after each character). Also, we subtract
-			// an amount to allow for kerning (a percentage of the width of the last
+			// We subtract any positive padding to handle cases where extreme
+			// amounts
+			// of padding are applied, then backed off (not sure why this is
+			// done, but there
+			// are cases where the padding is on the order of 10x the character
+			// width, and
+			// the TJ just backs up to compensate after each character). Also,
+			// we subtract
+			// an amount to allow for kerning (a percentage of the width of the
+			// last
 			// character).
 			//
 			boolean suppressCharacter = false;
 			final float tolerance = (text.getWidth() / textCharacter.length()) / 3.0f;
-			for (int i = 0; i < sameTextCharacters.size() && textCharacter != null; i++) {
+			for (int i = 0; i < sameTextCharacters.size()
+					&& textCharacter != null; i++) {
 				final TextPosition character = sameTextCharacters.get(i);
 				final String charCharacter = character.getCharacter();
 				final float charX = character.getX();
 				final float charY = character.getY();
 				// only want to suppress
 
-				if (charCharacter != null &&
-				// charCharacter.equals( textCharacter ) &&
-						within(charX, textX, tolerance) && within(charY, textY, tolerance)) {
+				if (charCharacter != null
+						&&
+						// charCharacter.equals( textCharacter ) &&
+						within(charX, textX, tolerance)
+						&& within(charY, textY, tolerance)) {
 					suppressCharacter = true;
 				}
 			}
@@ -424,14 +453,16 @@ public abstract class PDFLayoutEventStripper
 			final float x = text.getX();
 			final float y = text.getY();
 			if (shouldSeparateByBeads) {
-				for (int i = 0; i < pageArticles.size() && foundArticleDivisionIndex == -1; i++) {
+				for (int i = 0; i < pageArticles.size()
+						&& foundArticleDivisionIndex == -1; i++) {
 					final PDThreadBead bead = pageArticles.get(i);
 					if (bead != null) {
 						final PDRectangle rect = bead.getRectangle();
 						if (rect.contains(x, y)) {
 							foundArticleDivisionIndex = i * 2 + 1;
 						}
-						else if ((x < rect.getLowerLeftX() || y < rect.getUpperRightY())
+						else if ((x < rect.getLowerLeftX() || y < rect
+								.getUpperRightY())
 								&& notFoundButFirstLeftAndAboveArticleDivisionIndex == -1) {
 							notFoundButFirstLeftAndAboveArticleDivisionIndex = i * 2;
 						}
@@ -468,14 +499,16 @@ public abstract class PDFLayoutEventStripper
 			else {
 				articleDivisionIndex = charactersByArticle.size() - 1;
 			}
-			final List<TextPosition> textList = charactersByArticle.get(articleDivisionIndex);
+			final List<TextPosition> textList = charactersByArticle
+					.get(articleDivisionIndex);
 			textList.add(text);
 		}
 	}
 
 	/**
-	 * This will determine of two floating point numbers are within a specified variance.
-	 *
+	 * This will determine of two floating point numbers are within a specified
+	 * variance.
+	 * 
 	 * @param first
 	 *            The first number to compare to.
 	 * @param second
@@ -483,7 +516,8 @@ public abstract class PDFLayoutEventStripper
 	 * @param variance
 	 *            The allowed variance.
 	 */
-	private static boolean within(final float first, final float second, final float variance)
+	private static boolean within(final float first, final float second,
+			final float variance)
 	{
 		return second > first - variance && second < first + variance;
 	}
@@ -509,18 +543,20 @@ public abstract class PDFLayoutEventStripper
 		return wordSpacing;
 	}
 
-	private static boolean validPosition(final List<TextPosition> textList, final int pos)
+	private static boolean validPosition(final List<TextPosition> textList,
+			final int pos)
 	{
 		return (pos >= 0) && (pos < textList.size());
 	}
 
 	/**
-	 * Detects whether text in two positions is on the same line. This method is a bit fuzzy so we
-	 * also get potential superscripts and subscripts.
-	 *
+	 * Detects whether text in two positions is on the same line. This method is
+	 * a bit fuzzy so we also get potential superscripts and subscripts.
+	 * 
 	 * @author Richard Eckart
 	 */
-	private static boolean isSameLine(final TextPosition cur, final TextPosition prev)
+	private static boolean isSameLine(final TextPosition cur,
+			final TextPosition prev)
 	{
 		if (cur.getY() == prev.getY()) {
 			return true;
@@ -543,16 +579,16 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * Tests if two objects are vertically adjacent or if they are so far away from each other that
-	 * they have to be considered different blocks.
-	 *
+	 * Tests if two objects are vertically adjacent or if they are so far away
+	 * from each other that they have to be considered different blocks.
+	 * 
 	 * @param cur_top
 	 * @param prev_top
 	 * @param spacing
 	 * @return
 	 */
-	private static boolean isVerticallyAdjacent(final float cur_top, final float prev_top,
-			final float spacing)
+	private static boolean isVerticallyAdjacent(final float cur_top,
+			final float prev_top, final float spacing)
 	{
 		/* set vertical error margin */
 		final float verterr = (float) (spacing * 1.27);
@@ -563,30 +599,33 @@ public abstract class PDFLayoutEventStripper
 		return aboveThreshold && belowprev;
 	}
 
-	private static boolean isLeftIndented(final TextPosition cur, final Prediction pred)
+	private static boolean isLeftIndented(final TextPosition cur,
+			final Prediction pred)
 	{
 		return cur.getX() > (pred.left + (pred.linespacing * 0.2));
 	}
 
-	private static boolean isLeftOutdented(final TextPosition cur, final Prediction pred)
+	private static boolean isLeftOutdented(final TextPosition cur,
+			final Prediction pred)
 	{
 		return cur.getX() < (pred.left - (pred.linespacing * 0.2));
 	}
 
 	/**
 	 * Check if the current fragment is in a new column.
-	 *
+	 * 
 	 * @param cur
 	 * @param block
 	 * @return
 	 */
-	private static boolean isColumnSwitch(final TextPosition cur, final Block block)
+	private static boolean isColumnSwitch(final TextPosition cur,
+			final Block block)
 	{
 		return (cur.getY() < block.top); // && (f_x1[cur] > block.right);
 	}
 
-	private static boolean isSignifiantlyWorse(final double qnew, final double qold,
-			final double limit)
+	private static boolean isSignifiantlyWorse(final double qnew,
+			final double qold, final double limit)
 	{
 		final double deviation = Math.abs(((qnew - qold) / (qnew + qold)));
 		final boolean result = (deviation > limit) && (qnew < qold);
@@ -597,15 +636,17 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * Determine wether we need to insert a word separator between the two positions or not.
-	 *
+	 * Determine wether we need to insert a word separator between the two
+	 * positions or not.
+	 * 
 	 * Adapted from PDFBox PDFTextStripper.flushText()
-	 *
+	 * 
 	 * @param cur
 	 * @param prev
 	 * @return
 	 */
-	private static boolean isNextChar(final TextPosition cur, final TextPosition prev)
+	private static boolean isNextChar(final TextPosition cur,
+			final TextPosition prev)
 	{
 		float lastWordSpacing = getWordSpacing(prev);
 		final float wordSpacing = getWordSpacing(cur);
@@ -620,7 +661,8 @@ public abstract class PDFLayoutEventStripper
 			startOfNextWordX = endOfLastTextX + (wordSpacing * 0.50f);
 		}
 		else {
-			startOfNextWordX = endOfLastTextX + (((wordSpacing + lastWordSpacing) / 2f) * 0.50f);
+			startOfNextWordX = endOfLastTextX
+					+ (((wordSpacing + lastWordSpacing) / 2f) * 0.50f);
 		}
 
 		lastWordSpacing = wordSpacing;
@@ -629,9 +671,13 @@ public abstract class PDFLayoutEventStripper
 		// System.out.print("{O:"+(startOfNextWordX - cur.getX())+"}");
 		// }
 
-		if (startOfNextWordX != -1 && startOfNextWordX < cur.getX() && prev != null &&
-		// only bother adding a space if the last character was not a space
-				prev.getCharacter() != null && !prev.getCharacter().endsWith(" ")) {
+		if (startOfNextWordX != -1 && startOfNextWordX < cur.getX()
+				&& prev != null
+				&&
+				// only bother adding a space if the last character was not a
+				// space
+				prev.getCharacter() != null
+				&& !prev.getCharacter().endsWith(" ")) {
 			return false;
 		}
 		else {
@@ -639,8 +685,8 @@ public abstract class PDFLayoutEventStripper
 		}
 	}
 
-	private List<Line> collectLines(final List<TextPosition> textList, final int blk_start,
-			final int depth)
+	private List<Line> collectLines(final List<TextPosition> textList,
+			final int blk_start, final int depth)
 	{
 		final ArrayList<Line> lines = new ArrayList<Line>(depth);
 		Line l = new Line(textList, blk_start);
@@ -658,14 +704,16 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * Return a block with the probable linespacing, lineheight and left and right borders.
-	 *
+	 * Return a block with the probable linespacing, lineheight and left and
+	 * right borders.
+	 * 
 	 * @param blk_start
 	 * @param depth
 	 * @return
 	 */
-	private Prediction predictGeneralStructure(final List<TextPosition> textList,
-			final int blk_start, final int depth)
+	private Prediction predictGeneralStructure(
+			final List<TextPosition> textList, final int blk_start,
+			final int depth)
 	{
 		// Try to fetch the next lines up to depth
 		final List<Line> lines = collectLines(textList, blk_start, depth);
@@ -681,7 +729,8 @@ public abstract class PDFLayoutEventStripper
 		lines2.add(l);
 		for (int i = 1; i < lines.size(); i++) {
 			// Bail out if we have too much distance
-			if (!isVerticallyAdjacent(lines.get(i).top, lines.get(i - 1).top, lb.linespacing)) {
+			if (!isVerticallyAdjacent(lines.get(i).top, lines.get(i - 1).top,
+					lb.linespacing)) {
 				break;
 			}
 			lines2.add(lines.get(i));
@@ -723,9 +772,9 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * This method is available for subclasses of this class. It will be called before processing of
-	 * the document start.
-	 *
+	 * This method is available for subclasses of this class. It will be called
+	 * before processing of the document start.
+	 * 
 	 * @param pdf
 	 *            The PDF document that is being processed.
 	 * @throws IOException
@@ -735,9 +784,9 @@ public abstract class PDFLayoutEventStripper
 		throws IOException;
 
 	/**
-	 * This method is available for subclasses of this class. It will be called after processing of
-	 * the document finishes.
-	 *
+	 * This method is available for subclasses of this class. It will be called
+	 * after processing of the document finishes.
+	 * 
 	 * @param pdf
 	 *            The PDF document that is being processed.
 	 * @throws IOException
@@ -748,7 +797,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * Start a new region.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If there is any error writing to the stream.
 	 */
@@ -757,7 +806,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * End a region.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If there is any error writing to the stream.
 	 */
@@ -766,26 +815,28 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * Start a new page.
-	 *
+	 * 
 	 * @param page
 	 *            The page we are about to process.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If there is any error writing to the stream.
 	 */
-	protected abstract void startPage(int firstPage, int lastPage, int currentPage, PDPage page)
+	protected abstract void startPage(int firstPage, int lastPage,
+			int currentPage, PDPage page)
 		throws IOException;
 
 	/**
 	 * End a page.
-	 *
+	 * 
 	 * @param page
 	 *            The page we are about to process.
-	 *
+	 * 
 	 * @throws IOException
 	 *             If there is any error writing to the stream.
 	 */
-	protected abstract void endPage(int firstPage, int lastPage, int currentPage, PDPage page)
+	protected abstract void endPage(int firstPage, int lastPage,
+			int currentPage, PDPage page)
 		throws IOException;
 
 	protected abstract void processLineSeparator()
@@ -796,7 +847,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * Write the string to the output stream.
-	 *
+	 * 
 	 * @param text
 	 *            The text to write to the stream.
 	 * @throws IOException
@@ -806,10 +857,11 @@ public abstract class PDFLayoutEventStripper
 		throws IOException;
 
 	/**
-	 * This is the page that the text extraction will start on. The pages start at page 1. For
-	 * example in a 5 page PDF document, if the start page is 1 then all pages will be extracted. If
-	 * the start page is 4 then pages 4 and 5 will be extracted. The default value is 1.
-	 *
+	 * This is the page that the text extraction will start on. The pages start
+	 * at page 1. For example in a 5 page PDF document, if the start page is 1
+	 * then all pages will be extracted. If the start page is 4 then pages 4 and
+	 * 5 will be extracted. The default value is 1.
+	 * 
 	 * @return Value of property startPage.
 	 */
 	public int getStartPage()
@@ -819,7 +871,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * This will set the first page to be extracted by this class.
-	 *
+	 * 
 	 * @param startPageValue
 	 *            New value of property startPage.
 	 */
@@ -829,11 +881,12 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * This will get the last page that will be extracted. This is inclusive, for example if a 5
-	 * page PDF an endPage value of 5 would extract the entire document, an end page of 2 would
-	 * extract pages 1 and 2. This defaults to Integer.MAX_VALUE such that all pages of the pdf will
-	 * be extracted.
-	 *
+	 * This will get the last page that will be extracted. This is inclusive,
+	 * for example if a 5 page PDF an endPage value of 5 would extract the
+	 * entire document, an end page of 2 would extract pages 1 and 2. This
+	 * defaults to Integer.MAX_VALUE such that all pages of the pdf will be
+	 * extracted.
+	 * 
 	 * @return Value of property endPage.
 	 */
 	public int getEndPage()
@@ -843,7 +896,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * This will set the last page to be extracted by this class.
-	 *
+	 * 
 	 * @param endPageValue
 	 *            New value of property endPage.
 	 */
@@ -862,7 +915,7 @@ public abstract class PDFLayoutEventStripper
 
 	/**
 	 * Get the current page number that is being processed.
-	 *
+	 * 
 	 * @return A 1 based number representing the current page.
 	 */
 	protected int getCurrentPageNo()
@@ -871,10 +924,10 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * Character strings are grouped by articles. It is quite common that there will only be a
-	 * single article. This returns a List that contains List objects, the inner lists will contain
-	 * TextPosition objects.
-	 *
+	 * Character strings are grouped by articles. It is quite common that there
+	 * will only be a single article. This returns a List that contains List
+	 * objects, the inner lists will contain TextPosition objects.
+	 * 
 	 * @return A double List of TextPositions for all text strings on the page.
 	 */
 	protected List<List<TextPosition>> getCharactersByArticle()
@@ -883,22 +936,24 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * By default the text stripper will attempt to remove text that overlapps each other. Word
-	 * paints the same character several times in order to make it look bold. By setting this to
-	 * false all text will be extracted, which means that certain sections will be duplicated, but
-	 * better performance will be noticed.
-	 *
+	 * By default the text stripper will attempt to remove text that overlapps
+	 * each other. Word paints the same character several times in order to make
+	 * it look bold. By setting this to false all text will be extracted, which
+	 * means that certain sections will be duplicated, but better performance
+	 * will be noticed.
+	 * 
 	 * @param suppressDuplicateOverlappingTextValue
 	 *            The suppressDuplicateOverlappingText to set.
 	 */
-	public void setSuppressDuplicateOverlappingText(boolean suppressDuplicateOverlappingTextValue)
+	public void setSuppressDuplicateOverlappingText(
+			boolean suppressDuplicateOverlappingTextValue)
 	{
 		this.suppressDuplicateOverlappingText = suppressDuplicateOverlappingTextValue;
 	}
 
 	/**
 	 * This will tell if the text stripper should separate by beads.
-	 *
+	 * 
 	 * @return If the text will be grouped by beads.
 	 */
 	public boolean shouldSeparateByBeads()
@@ -907,9 +962,9 @@ public abstract class PDFLayoutEventStripper
 	}
 
 	/**
-	 * Set if the text stripper should group the text output by a list of beads. The default value
-	 * is true!
-	 *
+	 * Set if the text stripper should group the text output by a list of beads.
+	 * The default value is true!
+	 * 
 	 * @param aShouldSeparateByBeads
 	 *            The new grouping of beads.
 	 */
@@ -1015,9 +1070,9 @@ public abstract class PDFLayoutEventStripper
 		}
 
 		/**
-		 * Return true if the text position is within the line height boundaries. Left and right
-		 * boundaries are not checked.
-		 *
+		 * Return true if the text position is within the line height
+		 * boundaries. Left and right boundaries are not checked.
+		 * 
 		 * @param pos
 		 * @return
 		 */
