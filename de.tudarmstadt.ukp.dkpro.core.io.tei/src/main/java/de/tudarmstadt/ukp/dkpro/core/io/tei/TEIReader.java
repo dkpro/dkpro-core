@@ -109,8 +109,8 @@ public class TEIReader
 			sentenceXP.setNamespaceContext(nsContext);
 			tokenXP.setNamespaceContext(nsContext);
 
-			Map<String, String> mapping = TagsetMappingFactory.getMapping("tagger",
-					aJCas.getDocumentLanguage(), null);
+			Map<String, String> mapping = TagsetMappingFactory.getMapping(
+					TagsetMappingFactory.TAGGER, aJCas.getDocumentLanguage(), null);
 			
 			for (Object sentenceElement : sentenceXP.selectNodes(root)) {
 				if (sentenceElement instanceof Element) {

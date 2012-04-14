@@ -139,37 +139,6 @@ public abstract class TreeTaggerTT4JBase<T>
 	protected abstract ModelResolver getModelResolver()
 		throws ResourceInitializationException;
 
-//	/**
-//	 * Get the UIMA type name for the given tag in the given language.
-//	 *
-//	 * @param aModel a model
-//	 * @param aTag a tag.
-//	 * @return UIMA type name
-//	 */
-//	protected Type getTagType(DKProModel aModel, String aTag, TypeSystem aTS)
-//	{
-//        Map<String, String> mapping = aModel.getMapping();
-//
-//        String type = mapping.get(aTag);
-//        if (type == null) {
-//        	missingTags.add(aTag);
-//        	//getContext().getLogger().log(Level.WARNING, "Mapping does not contain tag: " + aTag);
-//        	type = mapping.get("*");
-//        }
-//        if (type == null) {
-//        	throw new IllegalStateException("No fallback (*) mapping defined!");
-//        }
-//
-//        Type uimaType = aTS.getType(type);
-//
-//        if (uimaType == null) {
-//			throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
-//					+ "] is not defined in type system");
-//        }
-//
-//        return uimaType;
-//    }
-//
 	@Override
 	public void destroy()
 	{
@@ -427,27 +396,6 @@ public abstract class TreeTaggerTT4JBase<T>
 			modelEnc = properties.get("encoding");
 			return new DKProModel(aModelName, modelFile, modelEnc, mapping);
 		}
-
-//		private Map<String, String> loadProperties(URL aUrl)
-//		{
-//			InputStream is = null;
-//			try {
-//				is = aUrl.openStream();
-//				Properties mappingProperties = new Properties();
-//				mappingProperties.load(is);
-//				Map<String, String> mapping = new HashMap<String, String>();
-//				for (String key : mappingProperties.stringPropertyNames()) {
-//					mapping.put(key.trim(), mappingProperties.getProperty(key).trim());
-//				}
-//				return mapping;
-//			}
-//			catch (IOException e) {
-//				throw new RuntimeException(e);
-//			}
-//			finally {
-//				closeQuietly(is);
-//			}
-//		}
 	}
 
 	/**

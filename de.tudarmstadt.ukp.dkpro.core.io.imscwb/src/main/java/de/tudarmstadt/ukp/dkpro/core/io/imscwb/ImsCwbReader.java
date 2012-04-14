@@ -21,6 +21,7 @@ import static de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
@@ -114,6 +115,8 @@ public class ImsCwbReader
 
         StringBuilder sb = new StringBuilder();
         int offset = 0;
+        
+        Map<String, String> mapping = getMapping("tagger", taggerTagset, null);
 
         for (CorpusSentence sentence : text.getSentences()) {
             int savedOffset = offset;
@@ -124,7 +127,7 @@ public class ImsCwbReader
                 int len = token.length();
 
                 if (writePOS) {
-                    Type posType = getTagType(getMapping("tagger", taggerTagset, null), pos, typeSystem);
+                    Type posType = getTagType(mapping, pos, typeSystem);
                     AnnotationFS posAnno = aCAS.createAnnotation(
                                 posType, offset, offset + len);
                     posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), pos);
