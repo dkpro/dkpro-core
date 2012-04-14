@@ -1,7 +1,7 @@
-NC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC
-VC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC
-PC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PC
-ADVC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.ADVC
-PRT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PRT
-0=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 *=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
+0=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
+ADVC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.ADVC
+NC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC
+PC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PC
+PRT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PRT
+VC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC

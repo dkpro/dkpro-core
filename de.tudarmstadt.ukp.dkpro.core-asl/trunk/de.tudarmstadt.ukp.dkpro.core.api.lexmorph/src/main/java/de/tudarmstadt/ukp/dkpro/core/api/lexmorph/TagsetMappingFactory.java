@@ -33,6 +33,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class TagsetMappingFactory
 {
+	public static final String TAGGER = "tagger";
+	public static final String CHUNKER = "chunker";
 
 	/**
 	 * Get the UIMA type name for the given tag in the given language.
