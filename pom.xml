@@ -56,7 +56,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-gpl</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</artifactId>
 				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
