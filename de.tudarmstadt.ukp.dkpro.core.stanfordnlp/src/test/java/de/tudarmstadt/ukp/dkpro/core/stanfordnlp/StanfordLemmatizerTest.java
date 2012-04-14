@@ -16,7 +16,9 @@ import static org.uimafit.util.JCasUtil.select;
 
 import java.net.URL;
 import java.util.Collection;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Test;
@@ -36,7 +38,22 @@ public class StanfordLemmatizerTest
 
 	}
 
-	private JCas runTest(String aLanguage, String aVariant, String testDocument, String[] tags, String[] lemmas)
+	/**
+	 * There seems to be a bug in the lemmatizer code causing an NPE when a token ends in a dash.
+	 * Should this bug go away some day, this test will fail. When somebody uses the
+	 * {@link StanfordLemmatizer}, a workaround is usually enabled, which we explicitly disable in
+	 * this test case ({@link StanfordLemmatizer#PARAM_DASH_BUG_WORKAROUND});
+	 */
+	@Test(expected=AnalysisEngineProcessException.class)
+	public void testEnglishEndingWithDash() throws Exception
+	{
+        runTest("en", "bidirectional-distsim-wsj-0-18", "b-",
+        		null,
+        		new String[] { "b-" });
+	}
+
+	private JCas runTest(String aLanguage, String aVariant, String testDocument, String[] tags,
+			String[] lemmas)
 		throws Exception
 	{
 		checkModelsAndBinary(aLanguage, aVariant);
@@ -46,8 +63,8 @@ public class StanfordLemmatizerTest
 				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-" + aLanguage
 						+ "-" + aVariant + ".tagger");
 
-
-		AnalysisEngine lemmatizer = createPrimitive(StanfordLemmatizer.class);
+		AnalysisEngine lemmatizer = createPrimitive(StanfordLemmatizer.class,
+				StanfordLemmatizer.PARAM_DASH_BUG_WORKAROUND, false);
 
         JCas aJCas = posTagger.newJCas();
         aJCas.setDocumentLanguage(aLanguage);

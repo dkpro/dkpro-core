@@ -17,6 +17,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -30,6 +31,15 @@ import edu.stanford.nlp.process.Morphology;
 public class StanfordLemmatizer
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Tokens ending with a dash cannot be lemmatized due to a bug in the Stanford code. When this
+	 * option is enabled, the lemma of tokens ending in a dash will be set to the token. Per default
+	 * this is enabled.
+	 */
+	public static final String PARAM_DASH_BUG_WORKAROUND = "enableDashBugWorkaround";
+	@ConfigurationParameter(name=PARAM_DASH_BUG_WORKAROUND, defaultValue="true", mandatory=true)
+	private boolean enableDashBugWorkaround;
+	
 	private Morphology morphology;
 
 	@Override
@@ -48,13 +58,19 @@ public class StanfordLemmatizer
 		for (Token t : select(aJCas, Token.class)) {
 			// Only verbs are lemmatized, the other words are simply stemmed. This corresponds
 			// roughly to what is happening in MorphaAnnotator.
+			String token = t.getCoveredText();
 			String lemma;
-			if (t.getPos() instanceof V) {
-				lemma = morphology.lemmatize(new WordTag(
-						t.getCoveredText(), t.getPos().getPosValue())).lemma();
+			if (enableDashBugWorkaround && token.endsWith("-")) {
+				lemma = token;
 			}
 			else {
-				lemma = morphology.stem(t.getCoveredText());
+				if (t.getPos() instanceof V) {
+					lemma = morphology.lemmatize(new WordTag(token, t.getPos().getPosValue()))
+							.lemma();
+				}
+				else {
+					lemma = morphology.stem(token);
+				}
 			}
 			Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
 			l.setValue(lemma);
