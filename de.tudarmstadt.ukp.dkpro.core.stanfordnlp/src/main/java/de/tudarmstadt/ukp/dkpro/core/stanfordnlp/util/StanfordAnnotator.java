@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -25,6 +26,8 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.JCasUtil;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -53,7 +56,6 @@ import edu.stanford.nlp.util.IntPair;
 public class StanfordAnnotator
 {
 	private static final String CONPACKAGE = Constituent.class.getPackage().getName()+".";
-	private static final String POSPACKAGE = POS.class.getPackage().getName()+".";
 	private static final String DEPPACKAGE = Dependency.class.getPackage().getName()+".";
 
 	/**
@@ -63,6 +65,8 @@ public class StanfordAnnotator
 	private static final String TAG_SEPARATOR = "#";
 
 	private TreeWithTokens tokenTree = null;
+	private JCas jCas = null;
+	private Map<String, String> mapping = null;
 
 	public TreeWithTokens getTokenTree()
 	{
@@ -74,17 +78,17 @@ public class StanfordAnnotator
 		tokenTree = aTokenTree;
 	}
 
-	public JCas getaJCas()
-	{
+	public JCas getJCas()
+	{		
 		return jCas;
 	}
 
-	public void setaJCas(JCas aAJCas)
+	public void setJCas(JCas aJCas)
 	{
-		jCas = aAJCas;
+		jCas = aJCas;
+		mapping = TagsetMappingFactory.getMapping(TagsetMappingFactory.TAGGER,
+				jCas.getDocumentLanguage(), O.class.getName());
 	}
-
-	private JCas jCas = null;
 
 	/**
 	 * @param tokens
@@ -95,18 +99,12 @@ public class StanfordAnnotator
 		throws CASException
 	{
 		setTokenTree(aTokenTree);
-		setaJCas(aTokenTree.getTokens().get(0).getCAS().getJCas());
+		setJCas(aTokenTree.getTokens().get(0).getCAS().getJCas());
 	}
 
 	/**
-	 * Creates linked constituent annotations, POS annotations and
-	 * lemma-annotations.<br/>
+	 * Creates linked constituent annotations, POS annotations and lemma-annotations.<br/>
 	 * Note: The annotations are directly written to the indexes of the CAS.
-	 *
-	 * @param jCas
-	 *            the JCas for which to create annotations
-	 * @param node
-	 *            the source tree (with CoreMap nodes)
 	 */
 	public void createConstituentAnnotationFromTree(boolean aCreatePos, boolean aCreateLemma)
 	{
@@ -116,8 +114,6 @@ public class StanfordAnnotator
 	/**
 	 * Creates linked constituent annotations + POS annotations
 	 *
-	 * @param jCas
-	 *            the JCas for which to create annotations
 	 * @param aNode
 	 *            the source tree
 	 * @param aParentFS
@@ -294,12 +290,9 @@ public class StanfordAnnotator
 	public POS createPOSAnnotation(int aBegin, int aEnd, String aPosType)
 	{
 		// get mapping for DKPro-Typesystem
-		String mappedPos = StanfordParserPosMapping.getTagClass(jCas.getDocumentLanguage(),
-				aPosType);
-		String constituentTypeName = POSPACKAGE + mappedPos;
-
+		Type type = TagsetMappingFactory.getTagType(mapping, aPosType, jCas.getTypeSystem());
+		
 		// create instance of the desired type
-		Type type = jCas.getTypeSystem().getType(constituentTypeName);
 		POS constAnno = (POS) jCas.getCas().createAnnotation(type, aBegin, aEnd);
 
 		// save original (unmapped) postype in feature
