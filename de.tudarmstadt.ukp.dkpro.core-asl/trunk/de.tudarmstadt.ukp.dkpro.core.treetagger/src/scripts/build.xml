@@ -216,7 +216,7 @@
 	</target>
 
 	<target name="de">
-		<property name="version.de" value="2012021300"/>
+		<property name="version.de" value="2012041700"/>
 		
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-3.2.bin.gz"
     		type="tagger" endianness="big-endian" language="de" encoding="ISO-8859-1"
@@ -224,11 +224,12 @@
 
 		<!-- FILE: german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
-		  - 2012-02-13 | now        | 45afdcdabfffc69995523748cd42bf81
+		  - 2012-02-13 | 2012-04-17 | 45afdcdabfffc69995523748cd42bf81
+		  - 2012-04-17 | now        | 3a18444accf080f54c5ebf655fedc781
 		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="de" encoding="UTF-8"
-    		md5="45afdcdabfffc69995523748cd42bf81"/>
+    		md5="3a18444accf080f54c5ebf655fedc781"/>
 
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-3.1.bin.gz"
     		type="chunker" endianness="big-endian" language="de" encoding="ISO-8859-1"
@@ -379,17 +380,17 @@
 		<sequential>
 			<clean-pom/>
 			<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
-				artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-models-@{language}" 
+				artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-model-@{language}" 
 				version="${version.@{language}}"/>
-			<jar destfile="target/treetagger-models-@{language}-${version.@{language}}.jar" compress="true">
+			<jar destfile="target/treetagger-model-@{language}-${version.@{language}}.jar" compress="true">
 				<fileset dir="target/model-staging">
 					<include name="META-INF/**/*"/>
 					<include name="**/lib/@{language}-*"/>
 				</fileset>
 			</jar>
 			
-			<install-artifact file="target/treetagger-models-@{language}-${version.@{language}}.jar"
-				groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-models-@{language}"
+			<install-artifact file="target/treetagger-model-@{language}-${version.@{language}}.jar"
+				groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-model-@{language}"
 				version="${version.@{language}}"/>
 			
 			<clean-pom/>
