@@ -1,7 +1,15 @@
+# German TreeTagger Chunk Tags
+#
+# The German chunker was trained on the Negra corpus and uses the following labels.
+#
+# Source: ftp://ftp.ims.uni-stuttgart.de/pub/corpora/chunker-tagset-german.txt
 *=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 0=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 ADVC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.ADVC
+# NC for noun chunks
 NC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC
+# PC for prepositional phrase chunks (NC + preposition/postposition)
 PC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PC
 PRT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.PRT
+# VC verb chunk
 VC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.VC

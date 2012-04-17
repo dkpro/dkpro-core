@@ -1,0 +1,39 @@
+# MElt Tagger Tagset
+#
+# Follows Benoit Crabbé and Marie Candito. 2008
+#
+# Benoit Crabbé and Marie Candito. 2008. Expériences d’analyse syntaxique statistique du français.
+# In Proc. of TALN’08, pages 45–54, Senlis, France.
+# http://hal.inria.fr/docs/00/52/57/69/PDF/crabbecandi-taln2008-final.pdf
+#
+# Source: http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README
+# 
+# ADJ 	   adjective
+# ADJWH	   interrogative adjective
+# ADV	   adverb
+# ADVWH	   interrogative adverb
+# CC	   coordination conjunction
+# CLO	   object clitic pronoun
+# CLR	   reflexive clitic pronoun
+# CLS	   subject clitic pronoun
+# CS	   subordination conjunction
+# DET	   determiner
+# DETWH	   interrogative determiner
+# ET	   foreign word
+# I	       interjection
+# NC	   common noun
+# NPP	   proper noun
+# P	       preposition
+# P+D	   preposition+determiner amalgam
+# P+PRO	   prepositon+pronoun amalgam
+# PONCT	   punctuation mark
+# PREF	   prefix
+# PRO	   full pronoun
+# PROREL   relative pronoun
+# PROWH	   interrogative pronoun
+# V	       indicative or conditional verb form
+# VIMP	   imperative verb form
+# VINF	   infinitive verb form
+# VPP	   past participle
+# VPR	   present participle
+# VS	   subjunctive verb form
