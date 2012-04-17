@@ -24,32 +24,41 @@ import java.io.OutputStream;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 
 /**
  * UIMA CAS consumer writing the CAS document text as plain text file.
- *
+ * 
  * @author Richard Eckart de Castilho
  */
 public class TextWriter
-extends JCasFileWriter_ImplBase
+    extends JCasFileWriter_ImplBase
 {
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		OutputStream docOS = null;
-		try {
-			docOS = getOutputStream(aJCas, ".txt");
-			
-			IOUtils.write(aJCas.getDocumentText(), docOS);
-		}
-		catch (Exception e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		finally {
-			closeQuietly(docOS);
-		}
-	}
+    /**
+     * Specify the suffix of output files. Default value <code>.txt</code>. If the suffix is not
+     * needed, provide an empty string as value.
+     */
+    public static final String PARAM_FILENAME_SUFFIX = "FilenameSuffix";
+    @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".txt")
+    private String filenameSuffix;
+
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        OutputStream docOS = null;
+        try {
+            docOS = getOutputStream(aJCas, filenameSuffix);
+
+            IOUtils.write(aJCas.getDocumentText(), docOS);
+        }
+        catch (Exception e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            closeQuietly(docOS);
+        }
+    }
 }
