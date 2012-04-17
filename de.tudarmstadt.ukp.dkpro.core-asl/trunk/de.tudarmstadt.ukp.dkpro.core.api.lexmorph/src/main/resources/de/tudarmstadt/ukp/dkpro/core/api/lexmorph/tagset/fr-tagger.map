@@ -1,32 +1,72 @@
+# French TreeTagger Part-of-Speech Tags
+#
+# Achim Stein, April 2003
+#
+# Source: http://www.ims.uni-stuttgart.de/~schmid/french-tagset.html
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# ABR	abreviation
+ABR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# ADJ	adjective
 ADJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# ADV	adverb
 ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# DET:ART	article
 DET\:ART=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# DET:POS	possessive pronoun (ma, ta, ...)
 DET\:POS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# INT	interjection
 INT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# KON	conjunction
 KON=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# NAM	proper name
 NAM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# NOM	noun
 NOM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# NUM	numeral
 NUM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# PRO	pronoun
 PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PRO:DEM	demonstrative pronoun
 PRO\:DEM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PRO:IND	indefinite pronoun
 PRO\:IND=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PRO:PER	personal pronoun
 PRO\:PER=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PRO:POS	possessive pronoun (mien, tien, ...)
 PRO\:POS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PRO:REL	relative pronoun
 PRO\:REL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PRP	preposition
 PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# PRP:det	preposition plus article (au,du,aux,des)
 PRP\:det=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# PUN	punctuation
 PUN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# PUN:cit	punctuation citation
 PUN\:cit=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# SENT	sentence tag
 SENT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# SYM	symbol
+SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# VER:cond	verb conditional
 VER\:cond=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:futu	verb futur
 VER\:futu=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:impe	verb imperative
 VER\:impe=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:impf	verb imperfect
 VER\:impf=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:infi	verb infinitive
 VER\:infi=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:pper	verb past participle
 VER\:pper=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:ppre	verb present participle
 VER\:ppre=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:pres	verb present
 VER\:pres=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:simp	verb simple past
 VER\:simp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:subi	verb subjunctive imperfect
 VER\:subi=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VER:subp	verb subjunctive present
 VER\:subp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V

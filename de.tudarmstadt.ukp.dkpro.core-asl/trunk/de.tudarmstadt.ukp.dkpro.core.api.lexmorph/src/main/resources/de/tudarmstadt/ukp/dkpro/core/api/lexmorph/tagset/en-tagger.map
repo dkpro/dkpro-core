@@ -1,5 +1,8 @@
 # Penn Treebank Tagset
-# http://www.ims.uni-stuttgart.de/projekte/CorpusWorkbench/CQP-HTMLDemo/PennTreebankTS.html
+#
+# This is the version used by TreeTagger which contains tags not present in the original tagset.
+# 
+# Source: http://www.ims.uni-stuttgart.de/projekte/CorpusWorkbench/CQP-HTMLDemo/PennTreebankTS.html
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 ,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 -=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
