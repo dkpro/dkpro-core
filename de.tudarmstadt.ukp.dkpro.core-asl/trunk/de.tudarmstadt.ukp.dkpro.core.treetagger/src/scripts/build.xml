@@ -97,13 +97,13 @@
 		<echo>your local repository, use the following groupId and artifactId scheme:</echo>
 		<echo> </echo>
 		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-(bin|models-&lt;lang&gt;)</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-(bin|model-&lt;lang&gt;)</echo>
 		<echo>    version: &lt;use the timestamp encoded in the JAR file name&gt;</echo>
 		<echo> </echo>
 		<echo> Example:</echo>
 		<echo> </echo>
 		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-models-en</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</echo>
 		<echo>    version: 2010111500</echo>
 		<echo> </echo>
 		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
@@ -140,7 +140,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="2012020600"/>
+		<property name="version.bin" value="2012041800"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -170,12 +170,13 @@
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
 		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
-		  - 2012-02-06 | now        | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
+		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
+		  - 2012-04-18 | now        | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="6599b70197be926a26a4966e34f1cad5"/>
+			platform="linux-x86_64" file="tree-tagger" md5="45bfecd9daac30a4c05c40d03ed1f6f9"/>
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_32" file="tree-tagger" md5="6599b70197be926a26a4966e34f1cad5"/>
+			platform="linux-x86_32" file="tree-tagger" md5="45bfecd9daac30a4c05c40d03ed1f6f9"/>
 		
 		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
