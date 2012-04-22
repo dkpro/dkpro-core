@@ -28,9 +28,9 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.util.CasCreationUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 
@@ -53,6 +53,19 @@ public class ResourceCollectionReaderBaseTest
 	{
 		CollectionReader reader = createCollectionReader(DummyReader.class, createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "jar:file:src/test/resources/testfiles.zip!",
+				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+					"[+]**/FileSetCollectionReaderBase.class",
+					"[-]**/ResourceCollectionReaderBase.class"});
+
+		searchForResourceCollectionReaderBase(reader);
+	}
+
+	@Ignore("This does not work because the underlying Spring component does not do remote.")
+	@Test
+	public void testRemoteZip() throws Exception
+	{
+		CollectionReader reader = createCollectionReader(DummyReader.class, createTypeSystemDescription(),
+				ResourceCollectionReaderBase.PARAM_PATH, "jar:http://search.maven.org/remotecontent?filepath=org/annolab/tt4j/org.annolab.tt4j/1.0.16/org.annolab.tt4j-1.0.16.jar!",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
 					"[-]**/ResourceCollectionReaderBase.class"});
