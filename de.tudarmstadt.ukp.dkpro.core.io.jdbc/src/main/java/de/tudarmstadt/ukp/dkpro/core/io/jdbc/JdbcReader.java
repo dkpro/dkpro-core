@@ -39,15 +39,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
- * well as fields of the DocumentMetadata annotation.
+ * well as fields of the {@link DocumentMetadata} annotation.
  * <p>
  * The field names are available as constants and begin with <code>CAS_</code>. Please specify the
  * mapping of the columns and the field names in the query. For example,
  * <p>
- * <code>SELECT text AS JdbcReader.CAS_TEXT, title AS JdbcReader.CAS_METADATA_TITLE FROM test_table</code>
+ * <code>SELECT text AS cas_text, title AS cas_metadata_title FROM test_table</code>
  * <p>
- * will create a CAS for each record, write the content of "text" column into CAS DocumentText and
- * that of "title" column into the DocumentTitle field of the DocumentMetadata annotation.
+ * will create a CAS for each record, write the content of "text" column into CAS documen text and
+ * that of "title" column into the document title field of the {@link DocumentMetadata} annotation.
  * 
  * @author Shuo Yang
  * 
