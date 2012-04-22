@@ -40,7 +40,7 @@ public class TextWriter
      * Specify the suffix of output files. Default value <code>.txt</code>. If the suffix is not
      * needed, provide an empty string as value.
      */
-    public static final String PARAM_FILENAME_SUFFIX = "FilenameSuffix";
+    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
     @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".txt")
     private String filenameSuffix;
 
