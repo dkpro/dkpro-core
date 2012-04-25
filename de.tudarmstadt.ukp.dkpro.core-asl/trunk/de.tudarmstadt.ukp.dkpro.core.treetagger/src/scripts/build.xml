@@ -93,8 +93,11 @@
 		<echo> </echo>
 		<echo>For Maven users:</echo>
 		<echo> </echo>
+		<echo>Use the build target "local-maven" (ant local-maven) to automatically install</echo>
+		<echo>the jars into your local Maven repository at ~/.m2/repository.</echo>
+		<echo> </echo>
 		<echo>If you choose to upload these JARs to a PRIVATE repository or install them in</echo>
-		<echo>your local repository, use the following groupId and artifactId scheme:</echo>
+		<echo>your local repository manually, use the following groupId and artifactId scheme:</echo>
 		<echo> </echo>
 		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
 		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-(bin|model-&lt;lang&gt;)</echo>
