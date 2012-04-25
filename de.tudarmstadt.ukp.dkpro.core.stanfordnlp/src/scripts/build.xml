@@ -15,7 +15,9 @@
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars" depends="separate-jars-parser, separate-jars-postagger, separate-jars-ner, separate-jars-dcoref"/>
+	<target name="separate-jars" depends="separate-jars-parser, separate-jars-postagger, separate-jars-ner, separate-jars-dcoref">
+		<antcall target="jar-notice"/>
+	</target>
 		
 	<target name="separate-jars-postagger">
 		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
@@ -231,6 +233,38 @@
     	<delete file="target/download/parser/postagger.tar"/>
 	</target>
 
+	<target name="jar-notice">
+		<echo>================================</echo>
+		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
+		<echo>================================</echo>
+		<echo> </echo>
+		<echo>YOU MAY NOT REDISTRIBUTE THESE JARS WITHOUT THE EXPLICIT PERMISSION</echo>
+		<echo> </echo>
+		<echo>from their respective original creators.</echo>
+		<echo> </echo>
+		<echo>For Maven users:</echo>
+		<echo> </echo>
+		<echo>Use the build target "local-maven" (ant local-maven) to automatically install</echo>
+		<echo>the jars into your local Maven repository at ~/.m2/repository.</echo>
+		<echo> </echo>
+		<echo>If you choose to upload these JARs to a PRIVATE repository or install them in</echo>
+		<echo>your local repository manually, use the following groupId and artifactId scheme:</echo>
+		<echo> </echo>
+		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-&lt;tool&gt;-&lt;lang&gt;-&lt;variant&gt;</echo>
+		<echo>    version: &lt;use the timestamp encoded in the JAR file name&gt;</echo>
+		<echo> </echo>
+		<echo> Example:</echo>
+		<echo> </echo>
+		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
+		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-lexparser-en-pcfg</echo>
+		<echo>    version: 1.0.2</echo>
+		<echo> </echo>
+		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
+		<echo>to enable additional test cases when building the DKPro Stanford NLP Integration.</echo>
+		<echo> </echo>
+		<echo>AGAIN REMEMBER THAT YOU MAY NOT REDISTRIBUTE THESE JARS - Thanks.</echo>
+	</target>
 	<macrodef name="install-model-file">
 		<attribute name="file"/>
 		<attribute name="groupId"/>
