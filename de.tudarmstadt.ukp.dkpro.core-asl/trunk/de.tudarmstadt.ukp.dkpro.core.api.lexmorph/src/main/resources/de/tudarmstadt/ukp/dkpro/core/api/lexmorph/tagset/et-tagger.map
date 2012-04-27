@@ -1,3 +1,6 @@
+# Estonian POS tagset
+#
+# Source: http://www.cl.ut.ee/korpused/morfliides/seletus
 S.com.?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 S.com.sg.nom=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 S.com.sg.gen=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
