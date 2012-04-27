@@ -580,3 +580,4 @@ Z.Osq=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 Z.Csq=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 Z.Sla=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 T=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
