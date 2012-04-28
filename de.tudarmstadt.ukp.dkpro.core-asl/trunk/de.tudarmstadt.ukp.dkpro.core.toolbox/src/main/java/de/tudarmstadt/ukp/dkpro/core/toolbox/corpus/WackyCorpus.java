@@ -41,7 +41,7 @@ public class WackyCorpus
     
     public enum WackyLanguageEdition {
         // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
-        DEWAC("de", "de-stts"),
+        DEWAC("de", "de"),
         UKWAC("en", "en");
         
         private String language;

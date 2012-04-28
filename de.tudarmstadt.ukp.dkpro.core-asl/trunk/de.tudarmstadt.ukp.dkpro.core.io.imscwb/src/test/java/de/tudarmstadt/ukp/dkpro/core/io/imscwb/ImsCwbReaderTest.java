@@ -44,7 +44,7 @@ public class ImsCwbReaderTest
         CollectionReader reader = createCollectionReader(
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
-                ImsCwbReader.PARAM_TAGGER_TAGSET, "de-stts",
+                ImsCwbReader.PARAM_TAGGER_TAGSET, "de",
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" }
