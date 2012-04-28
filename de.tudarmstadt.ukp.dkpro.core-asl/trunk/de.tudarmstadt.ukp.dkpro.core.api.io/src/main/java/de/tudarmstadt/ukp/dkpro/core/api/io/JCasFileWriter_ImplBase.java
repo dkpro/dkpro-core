@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
@@ -49,23 +51,30 @@ public abstract class JCasFileWriter_ImplBase
     /**
      * Enabled/disable gzip compression. If this is set, all files will have the ".gz" ending.
      */
-    public static final String PARAM_COMPRESS = "Compress";
+    public static final String PARAM_COMPRESS = "compress";
     @ConfigurationParameter(name=PARAM_COMPRESS, mandatory=true, defaultValue="false")
     private boolean compress;
     
     /**
      * Remove the original extension.
      */
-    public static final String PARAM_STRIP_EXTENSION = "StripExtension";
+    public static final String PARAM_STRIP_EXTENSION = "stripExtension";
     @ConfigurationParameter(name=PARAM_STRIP_EXTENSION, mandatory=true, defaultValue="false")
     private boolean stripExtension;
 
     /**
      * Use the document ID as file name even if a relative path information is present.
      */
-    public static final String PARAM_USE_DOCUMENT_ID = "UseDocumentId";
+    public static final String PARAM_USE_DOCUMENT_ID = "useDocumentId";
     @ConfigurationParameter(name=PARAM_USE_DOCUMENT_ID, mandatory=true, defaultValue="false")
     private boolean useDocumentId;
+
+    /**
+     * Use the document ID as file name even if a relative path information is present.
+     */
+    public static final String PARAM_ESCAPE_DOCUMENT_ID = "escapeDocumentId";
+    @ConfigurationParameter(name=PARAM_ESCAPE_DOCUMENT_ID, mandatory=true, defaultValue="true")
+    private boolean escapeDocumentId;
 
     protected boolean isCompress()
 	{
@@ -138,7 +147,20 @@ public abstract class JCasFileWriter_ImplBase
 			if (meta.getDocumentId() == null) {
 				throw new IllegalStateException("Neither base URI/document URI nor document ID set");
 			}
+			
 			relativeDocumentPath = meta.getDocumentId();
+			
+			if (escapeDocumentId) {
+				try {
+					relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
+				}
+				catch (UnsupportedEncodingException e) {
+					// UTF-8 must be supported on all Java platforms per specification. This should
+					// not happen.
+					throw new IllegalStateException(e);
+				}
+			}
+			
 			return relativeDocumentPath;
 		}
 	}
