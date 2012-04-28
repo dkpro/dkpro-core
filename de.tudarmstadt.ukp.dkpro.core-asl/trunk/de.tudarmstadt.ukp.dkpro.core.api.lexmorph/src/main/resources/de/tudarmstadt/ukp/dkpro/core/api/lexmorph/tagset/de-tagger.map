@@ -43,7 +43,7 @@ NE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
 # NN	normales Nomen	Tisch, Herr, [das] Reisen
 NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 # PAV	Pronominaladverb	dafür, dabei, deswegen, trotzdem
-PAV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PAV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 # PDAT	attribuierendes Demonstrativpronomen	jener [Mensch]
 PDAT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 # PDS	substituierendes Demonstrativpronomen	dieser, jener
