@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
+import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
@@ -27,7 +27,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -36,17 +35,17 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class TreeTaggerLemmatizer
 {
-
-    private final AnalysisEngineDescription tagger;
+    private final AnalysisEngine tagger;
+    private final JCas jcas;
     
     public TreeTaggerLemmatizer()
         throws Exception
     {
-        
-        tagger = createAggregateDescription(
+        tagger = createAggregate(createAggregateDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
-        );
+                createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)));
+        
+        jcas = tagger.newJCas();
     }
     
     public Collection<String> lemmatize(String text, String language)
@@ -54,11 +53,10 @@ public class TreeTaggerLemmatizer
     {
         List<String> lemmas = new ArrayList<String>();
 
-        AnalysisEngine engine = createPrimitive(tagger);
-        JCas jcas = engine.newJCas();
+        jcas.reset();
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(text);
-        engine.process(jcas);
+        tagger.process(jcas);
 
         for (Lemma l : select(jcas, Lemma.class)) {
             lemmas.add(l.getValue());
