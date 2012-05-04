@@ -143,7 +143,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="2012041800"/>
+		<property name="version.bin" value="2012042500"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -157,12 +157,13 @@
 		  - and supposedly the same version of the package (e.g. 3.2).
 		  -->
 		<!-- FILE: tree-tagger-MacOSX-3.2-intel.tar.gz - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-19 | now        | 076c8002337b89a9a8581aae81d5d481
+		  - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
+		  - 2012-04-25 | now        | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob 
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-MacOSX-3.2-intel.tar.gz"
-			platform="osx-x86_64" file="tree-tagger" md5="076c8002337b89a9a8581aae81d5d481"/>
+			platform="osx-x86_64" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-MacOSX-3.2-intel.tar.gz"
-			platform="osx-x86_32" file="tree-tagger" md5="076c8002337b89a9a8581aae81d5d481"/>
+			platform="osx-x86_32" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
 		
 		<!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-19 | now        | 63560dcb3a5932bc5ae0e9aab8f48e42
@@ -173,8 +174,8 @@
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
 		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
-		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
-		  - 2012-04-18 | now        | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
+		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
+		  - 2012-04-18 | now        | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
 			platform="linux-x86_64" file="tree-tagger" md5="45bfecd9daac30a4c05c40d03ed1f6f9"/>
@@ -189,12 +190,13 @@
 			platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
 			
 		<!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-19 | now        | 72a5489fe197b0173ea476e2224a6ad6
+		  - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
+		  - 2012-04-25 | now        | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob 
 		  -->
 		<install-executable-file-zip url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-windows-3.2.zip"
-			platform="windows-x86_32" file="tree-tagger.exe" md5="72a5489fe197b0173ea476e2224a6ad6"/>
+			platform="windows-x86_32" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
 		<install-executable-file-zip url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-windows-3.2.zip"
-			platform="windows-x86_64" file="tree-tagger.exe" md5="72a5489fe197b0173ea476e2224a6ad6"/>
+			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
 	</target>
 	
 	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, it, ru, sw, es, pt, gz, zh"/>
