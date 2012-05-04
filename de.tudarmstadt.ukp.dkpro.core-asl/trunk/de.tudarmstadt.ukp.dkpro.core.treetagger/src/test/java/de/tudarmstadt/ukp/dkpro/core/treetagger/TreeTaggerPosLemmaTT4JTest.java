@@ -95,14 +95,14 @@ class TreeTaggerPosLemmaTT4JTest
     }
 
 	@Test
-	@Ignore("Platform specific")
+//	@Ignore("Platform specific")
 	public void testOddCharacters()
 		throws Exception
     {
         runTest("en", "² § ¶ § °",
-        		new String[] { "²",  "§",   "¶",  "§",   "°"   },
-        		new String[] { "NN", "SYM", "NN", "SYM", "SYM" },
-        		new String[] { "NN", "O",   "NN", "O",   "O"   });
+        		new String[] { "²",  "§",    "¶",  "§",    "°"   },
+        		new String[] { "NN", "SYM",  "NN", "SYM",  "SYM" },
+        		new String[] { "NN", "PUNC", "NN", "PUNC", "PUNC"   });
     }
 
 	/**
