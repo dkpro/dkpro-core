@@ -297,6 +297,11 @@
 				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+				<version>1.4.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.10</version>
@@ -437,6 +442,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tei</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -451,7 +457,7 @@
 					<groups>
 						<group>
 							<title>Analysis Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.bananasplit:de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger</packages>
+							<packages>de.tudarmstadt.ukp.dkpro.core.bananasplit:de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger:de.tudarmstadt.ukp.dkpro.core.opennlp</packages>
 						</group>
 						<group>
 							<title>I/O Components</title>

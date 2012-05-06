@@ -1,0 +1,155 @@
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.1.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="separate-jars" depends="separate-jars-parser"/>
+		
+	<target name="separate-jars-parser">
+		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/opennlp"/>
+
+		<mkdir dir="target/download/tagger"/>
+		
+    	<get src="http://opennlp.sourceforge.net/models-1.5/da-pos-maxent.bin" dest="target/download/tagger/da-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/da-pos-maxent.bin" md5="5194e5c81bde38b7df95a1550e3f4998"
+    		tool="tagger" language="da" variant="maxent" extension="bin" version="1.5"/>		
+		
+    	<get src="http://opennlp.sourceforge.net/models-1.5/da-pos-perceptron.bin" dest="target/download/tagger/da-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/da-pos-perceptron.bin" md5="595322af76e464a647b745b463847008"
+    		tool="tagger" language="da" variant="perceptron" extension="bin" version="1.5"/>		
+		
+    	<get src="http://opennlp.sourceforge.net/models-1.5/de-pos-maxent.bin" dest="target/download/tagger/de-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/de-pos-maxent.bin" md5="c55c14eeb598885170678293745aea15"
+    		tool="tagger" language="de" variant="maxent" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/de-pos-perceptron.bin" dest="target/download/tagger/de-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/de-pos-perceptron.bin" md5="568ca555cbe29b5e0e6ba24cc7da573a"
+    		tool="tagger" language="de" variant="perceptron" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" dest="target/download/tagger/en-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/en-pos-maxent.bin" md5="db2cd70395b9e2e4c6b9957015a10607"
+    		tool="tagger" language="en" variant="maxent" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/en-pos-perceptron.bin" dest="target/download/tagger/en-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/en-pos-perceptron.bin" md5="d25e11a2da118803aefa131b00c590bf"
+    		tool="tagger" language="en" variant="perceptron" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/nl-pos-maxent.bin" dest="target/download/tagger/nl-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/nl-pos-maxent.bin" md5="4f61da5d7bef54ff98d3605fcafa5a70"
+    		tool="tagger" language="nl" variant="maxent" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/nl-pos-perceptron.bin" dest="target/download/tagger/nl-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/nl-pos-perceptron.bin" md5="d81d2e3745ad194fa2e40e9264175f4f"
+    		tool="tagger" language="nl" variant="perceptron" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/pt-pos-maxent.bin" dest="target/download/tagger/pt-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/pt-pos-maxent.bin" md5="517c428be748b79ec2d0ad084f5329b1"
+    		tool="tagger" language="pt" variant="maxent" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/pt-pos-perceptron.bin" dest="target/download/tagger/pt-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/pt-pos-perceptron.bin" md5="d53490bda3717523e16250fc7328ff86"
+    		tool="tagger" language="pt" variant="perceptron" extension="bin" version="1.5"/>		
+
+    	<get src="http://opennlp.sourceforge.net/models-1.5/se-pos-maxent.bin" dest="target/download/tagger/se-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/se-pos-maxent.bin" md5="8cd96306df690f24ced060f0071e506e"
+    		tool="tagger" language="se" variant="maxent" extension="bin" version="1.5"/>		
+		
+    	<get src="http://opennlp.sourceforge.net/models-1.5/se-pos-perceptron.bin" dest="target/download/tagger/se-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/se-pos-perceptron.bin" md5="d38f7eccf72033e3c8b1703396db72ec"
+    		tool="tagger" language="se" variant="perceptron" extension="bin" version="1.5"/>		
+	</target>
+
+	<macrodef name="install-model-file">
+		<attribute name="file"/>
+		<attribute name="groupId"/>
+		<attribute name="artifactIdBase"/>
+		<attribute name="extension"/>
+		<attribute name="variant"/>
+		<attribute name="tool"/>
+		<attribute name="language"/>
+		<attribute name="version"/>
+		<attribute name="md5"/>
+		<attribute name="comment" default=""/>
+		<attribute name="prop.verify.md5" default="verify.md5.@{tool}.@{language}.@{variant}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{tool}.@{language}.@{variant}"/>
+		<sequential>
+			<fail unless="outputDir">No output directory set.</fail>
+	    	<mkdir dir="${outputDir}/lib"/>
+			<copy file="@{file}" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}"/>
+			<copy file="@{file}.props" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}.props" failonerror="false"/>
+			
+			<generate-model-properties tool="@{tool}" language="@{language}" variant="@{variant}"
+				extension="@{extension}"/>
+			<clean-pom/>
+			<generate-pom version="@{version}" groupId="@{groupId}" 
+				artifactId="@{artifactIdBase}-model-@{tool}-@{language}-@{variant}"/>
+			
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{prop.verify.md5.actual}"/>
+			<condition property="checksum.mismatch">
+				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
+			</condition>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for @{tool}-@{language}-@{variant}.@{extension}.
+Please verify the checksum and if necessary update this script.
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
+
+			<jar destfile="target/@{artifactIdBase}-model-@{tool}-@{language}-@{variant}-@{version}.jar" compress="true">
+				<fileset dir="target/model-staging">
+					<include name="META-INF/**/*"/>
+					<include name="**/lib/@{tool}-@{language}-@{variant}*"/>
+				</fileset>
+			</jar>
+			
+			<install-artifact file="target/@{artifactIdBase}-model-@{tool}-@{language}-@{variant}-@{version}.jar"
+				groupId="@{groupId}" artifactId="@{artifactIdBase}-model-@{tool}-@{language}-@{variant}" version="@{version}"/>
+			
+			<clean-pom/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="generate-model-properties">
+		<attribute name="tool"/>
+		<attribute name="language"/>
+		<attribute name="extension"/>
+		<attribute name="variant"/>
+		<attribute name="comment" default=""/>
+		<attribute name="prop.checksum.md5" default="checksum.md5.@{tool}-@{language}-@{variant}"/>
+		<attribute name="prop.checksum.sha1" default="checksum.sha1.@{tool}-@{language}-@{variant}"/>
+		<sequential>
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" 
+				property="@{prop.checksum.md5}" algorithm="MD5"/>
+			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" 
+				property="@{prop.checksum.sha1}" algorithm="SHA"/>
+			<propertyfile file="${outputDir}/lib/@{tool}-@{language}-@{variant}.properties"
+				comment="@{comment}">
+				<entry  key="downloaded" type="date" value="now"/>
+				<entry  key="tool" value="@{tool}"/>
+				<entry  key="language" value="@{language}"/>
+				<entry  key="variant" value="@{variant}"/>
+				<entry  key="md5" value="${@{prop.checksum.md5}}"/>
+				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
+			</propertyfile>
+			<echo>Installed @{tool} model file for @{language} in variant @{variant}</echo>
+		</sequential>
+	</macrodef>
+</project>
