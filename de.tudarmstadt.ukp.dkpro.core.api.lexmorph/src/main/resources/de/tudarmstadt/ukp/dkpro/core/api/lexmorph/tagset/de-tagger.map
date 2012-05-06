@@ -1,6 +1,10 @@
 # STTS Tag Table (1995/1999)
 #
 # Source: http://www.ims.uni-stuttgart.de/projekte/corplex/TagSets/stts-table.html
+#
+# 2012-05-06 - Added PROAV which replaces PAV in the Tiger 1 corpus. 
+               http://www.uni-potsdam.de/u/germanistik/ls_dgs/tiger1-intro.pdf
+#
 # $(	sonstige Satzzeichen; satzintern	- [,]()
 $(=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # $,	Komma	,
@@ -44,6 +48,8 @@ NE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
 NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 # PAV	Pronominaladverb	dafür, dabei, deswegen, trotzdem
 PAV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# PROAV	Pronominaladverb	dafür, dabei, deswegen, trotzdem (Tiger)
+PROAV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 # PDAT	attribuierendes Demonstrativpronomen	jener [Mensch]
 PDAT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 # PDS	substituierendes Demonstrativpronomen	dieser, jener
