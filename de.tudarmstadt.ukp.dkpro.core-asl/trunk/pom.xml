@@ -30,11 +30,14 @@
 	<url>http://code.google.com/p/dkpro-core-asl/</url>
 	<repositories>
 		<repository>
+			<id>ukp-oss</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<id>ukp-oss</id>
-			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/repo/</url>
 		</repository>
 	</repositories>
 	<distributionManagement>
