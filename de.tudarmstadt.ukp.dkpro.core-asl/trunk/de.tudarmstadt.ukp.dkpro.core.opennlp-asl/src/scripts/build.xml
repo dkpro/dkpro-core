@@ -1,6 +1,6 @@
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.1.0/ant-macros.xml"/>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.2.0/ant-macros.xml"/>
 	</import>
 	
 	<target name="local-maven">
@@ -75,81 +75,4 @@
     		file="target/download/tagger/se-pos-perceptron.bin" md5="d38f7eccf72033e3c8b1703396db72ec"
     		tool="tagger" language="se" variant="perceptron" extension="bin" version="1.5"/>		
 	</target>
-
-	<macrodef name="install-model-file">
-		<attribute name="file"/>
-		<attribute name="groupId"/>
-		<attribute name="artifactIdBase"/>
-		<attribute name="extension"/>
-		<attribute name="variant"/>
-		<attribute name="tool"/>
-		<attribute name="language"/>
-		<attribute name="version"/>
-		<attribute name="md5"/>
-		<attribute name="comment" default=""/>
-		<attribute name="prop.verify.md5" default="verify.md5.@{tool}.@{language}.@{variant}"/>
-		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{tool}.@{language}.@{variant}"/>
-		<sequential>
-			<fail unless="outputDir">No output directory set.</fail>
-	    	<mkdir dir="${outputDir}/lib"/>
-			<copy file="@{file}" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}"/>
-			<copy file="@{file}.props" tofile="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}.props" failonerror="false"/>
-			
-			<generate-model-properties tool="@{tool}" language="@{language}" variant="@{variant}"
-				extension="@{extension}"/>
-			<clean-pom/>
-			<generate-pom version="@{version}" groupId="@{groupId}" 
-				artifactId="@{artifactIdBase}-model-@{tool}-@{language}-@{variant}"/>
-			
-			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
-			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" property="@{prop.verify.md5.actual}"/>
-			<condition property="checksum.mismatch">
-				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
-			</condition>
-			<fail if="checksum.mismatch">
-MD5 checksum mismatch for @{tool}-@{language}-@{variant}.@{extension}.
-Please verify the checksum and if necessary update this script.
-Expected: @{md5}
-Actual  : ${@{prop.verify.md5.actual}}
-			</fail>
-
-			<jar destfile="target/@{artifactIdBase}-model-@{tool}-@{language}-@{variant}-@{version}.jar" compress="true">
-				<fileset dir="target/model-staging">
-					<include name="META-INF/**/*"/>
-					<include name="**/lib/@{tool}-@{language}-@{variant}*"/>
-				</fileset>
-			</jar>
-			
-			<install-artifact file="target/@{artifactIdBase}-model-@{tool}-@{language}-@{variant}-@{version}.jar"
-				groupId="@{groupId}" artifactId="@{artifactIdBase}-model-@{tool}-@{language}-@{variant}" version="@{version}"/>
-			
-			<clean-pom/>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="generate-model-properties">
-		<attribute name="tool"/>
-		<attribute name="language"/>
-		<attribute name="extension"/>
-		<attribute name="variant"/>
-		<attribute name="comment" default=""/>
-		<attribute name="prop.checksum.md5" default="checksum.md5.@{tool}-@{language}-@{variant}"/>
-		<attribute name="prop.checksum.sha1" default="checksum.sha1.@{tool}-@{language}-@{variant}"/>
-		<sequential>
-			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" 
-				property="@{prop.checksum.md5}" algorithm="MD5"/>
-			<checksum file="${outputDir}/lib/@{tool}-@{language}-@{variant}.@{extension}" 
-				property="@{prop.checksum.sha1}" algorithm="SHA"/>
-			<propertyfile file="${outputDir}/lib/@{tool}-@{language}-@{variant}.properties"
-				comment="@{comment}">
-				<entry  key="downloaded" type="date" value="now"/>
-				<entry  key="tool" value="@{tool}"/>
-				<entry  key="language" value="@{language}"/>
-				<entry  key="variant" value="@{variant}"/>
-				<entry  key="md5" value="${@{prop.checksum.md5}}"/>
-				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
-			</propertyfile>
-			<echo>Installed @{tool} model file for @{language} in variant @{variant}</echo>
-		</sequential>
-	</macrodef>
 </project>
