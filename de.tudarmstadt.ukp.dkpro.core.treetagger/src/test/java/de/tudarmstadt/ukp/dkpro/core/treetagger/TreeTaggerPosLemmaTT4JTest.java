@@ -242,6 +242,7 @@ class TreeTaggerPosLemmaTT4JTest
             assertEquals("In position "+i, tags[i], posAnnotation.getPosValue());
             i++;
         }
+        assertEquals(tags.length, i);
 	}
 
 	private void checkLemma(String[] expected, Collection<Lemma> actual)
@@ -251,6 +252,7 @@ class TreeTaggerPosLemmaTT4JTest
             assertEquals("In position "+i, expected[i], lemmaAnnotation.getValue());
             i++;
         }
+        assertEquals(expected.length, i);
 	}
 
 	/**

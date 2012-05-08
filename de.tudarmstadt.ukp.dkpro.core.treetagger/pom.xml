@@ -94,7 +94,7 @@
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
-					<version>2012042500</version>
+					<version>2010111900</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
