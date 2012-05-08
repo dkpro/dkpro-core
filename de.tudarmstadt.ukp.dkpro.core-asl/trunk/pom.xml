@@ -390,6 +390,11 @@
 				<artifactId>dom4j</artifactId>
 				<version>1.6.1</version>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>3.1.0.RELEASE</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<modules>
