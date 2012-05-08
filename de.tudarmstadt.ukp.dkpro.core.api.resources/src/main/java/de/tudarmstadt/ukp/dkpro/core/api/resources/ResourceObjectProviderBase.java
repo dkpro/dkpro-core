@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
@@ -41,6 +42,9 @@ public abstract class ResourceObjectProviderBase<M>
 	
 	private Properties overrides = new Properties();
 	private Properties defaults = new Properties();
+	private Properties defaultVariants = null;
+	
+	private String defaultVariantsLocation;
 	
 	public void setOverride(String aKey, String aValue)
 	{
@@ -82,6 +86,27 @@ public abstract class ResourceObjectProviderBase<M>
 		defaults.remove(aKey);
 	}
 	
+	public void setDefaultVariantsLocation(String aLocation)
+	{
+		defaultVariantsLocation = aLocation;
+	}
+	
+	/**
+	 * Sets language-dependent default variants.
+	 * 
+	 * @param aDefaultVariants
+	 */
+	public void setDefaultVariants(Properties aDefaultVariants)
+	{
+		if (aDefaultVariants.size() == 0) {
+			defaultVariants = null;
+		}
+		else {
+			defaultVariants = new Properties();
+			defaultVariants.putAll(aDefaultVariants);
+		}
+	}
+	
 	public void configure()
 	{
 		try {
@@ -112,10 +137,18 @@ public abstract class ResourceObjectProviderBase<M>
 		return resource;
 	}
 
-	protected Properties getAggregatedProperties()
+	protected Properties getAggregatedProperties() throws IOException
 	{
 		Properties props = new Properties(defaults);
 		props.putAll(getProperties());
+		
+		if (defaultVariants == null && defaultVariantsLocation != null) {
+			setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
+		}
+		
+		if (defaultVariants != null && defaultVariants.containsKey(props.get(LANGUAGE))) {
+			props.setProperty(VARIANT, defaultVariants.getProperty(props.getProperty(LANGUAGE)));
+		}
 		
 		Properties over = new Properties(props);
 		over.putAll(overrides);
