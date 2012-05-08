@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
- * Currently only Maxent models are supported.
  * 
  * @author Richard Eckart de Castilho
  */

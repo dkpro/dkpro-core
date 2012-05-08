@@ -62,12 +62,27 @@ public class OpenNlpPosTaggerTest
         runTest("de", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
-    }
+
+        runTest("de", "maxent", "Das ist ein Test .",
+        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+
+        runTest("de", "perceptron", "Das ist ein Test .",
+        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+}
 
 	private JCas runTest(String language, String testDocument, String[] tags, String[] tagClasses)
+			throws Exception
+	{
+		return runTest(language, null, testDocument, tags, tagClasses);
+	}
+
+	private JCas runTest(String language, String variant, String testDocument, String[] tags, String[] tagClasses)
 		throws Exception
 	{
-        AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class);
+        AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class,
+        		OpenNlpPosTagger.PARAM_VARIANT, variant);
 
         JCas aJCas = engine.newJCas();
         aJCas.setDocumentLanguage(language);

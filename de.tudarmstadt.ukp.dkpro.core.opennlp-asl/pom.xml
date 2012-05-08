@@ -65,6 +65,13 @@
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</artifactId>
+					<version>1.5</version>
+					<scope>test</scope>
+					<optional>true</optional>
+				</dependency>
+				<dependency>
+					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
 					<version>1.5</version>
 					<scope>test</scope>
