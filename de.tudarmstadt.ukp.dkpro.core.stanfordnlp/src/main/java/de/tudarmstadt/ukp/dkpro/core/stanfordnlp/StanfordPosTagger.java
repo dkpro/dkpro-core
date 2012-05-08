@@ -10,22 +10,26 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
-
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ling.TaggedWord;
@@ -37,11 +41,28 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordPosTagger
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_MODEL_PATH = "ModelPath";
-	@ConfigurationParameter(name=PARAM_MODEL_PATH, mandatory=true)
-	private String modelPath;
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	protected String language;
 
-	private MaxentTagger tagger;
+	public static final String PARAM_VARIANT = "variant";
+	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+	protected String variant;
+
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
+
+	public static final String PARAM_MAPPING_LOCATION = "mappingLocation";
+	@ConfigurationParameter(name = PARAM_MAPPING_LOCATION, mandatory = false)
+	protected String mappingLocation;
+
+	public static final String PARAM_INTERN_STRINGS = "InternStrings";
+	@ConfigurationParameter(name = PARAM_INTERN_STRINGS, mandatory = false, defaultValue = "true")
+	private boolean internStrings;
+
+	private CasConfigurableProviderBase<MaxentTagger> modelProvider;
+	private MappingProvider mappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -49,36 +70,70 @@ public class StanfordPosTagger
 	{
 		super.initialize(aContext);
 
-		try {
-			String url = resolveLocation(modelPath, this, getContext()).toString();
-			tagger = new MaxentTagger(url/*, new CustomTaggerConfig("-model", url), false*/);
-		}
-		catch (ClassNotFoundException e) {
-			throw new ResourceInitializationException(e);
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
+		mappingProvider = new MappingProvider();
+		mappingProvider.setDefaultVariantsLocation(
+				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-default-variants.map");
+		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-tagger.map");
+		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+		
+		modelProvider = new CasConfigurableProviderBase<MaxentTagger>() {
+			{
+				setDefaultVariantsLocation(
+						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-default-variants.map");
+				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
+						"postagger-${language}-${variant}.tagger");
+				setDefault(VARIANT, "maxent");
+				
+				setOverride(LOCATION, modelLocation);
+				setOverride(LANGUAGE, language);
+				setOverride(VARIANT, variant);
+			}
+			
+			@Override
+			protected MaxentTagger produceResource(URL aUrl) throws IOException
+			{
+				try {
+					return new MaxentTagger(aUrl.toString());
+				}
+				catch (ClassNotFoundException e) {
+					throw new IOException(e);
+				}
+			}
+		};
 	}
 
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
-		for (Sentence s : select(aJCas, Sentence.class)) {
-			List<Token> tokens = selectCovered(Token.class, s);
+		CAS cas = aJCas.getCas();
+
+		modelProvider.configure(cas);
+		mappingProvider.configure(cas);
+				
+		for (Sentence sentence : select(aJCas, Sentence.class)) {
+			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+
 			List<TaggedWord> words = new ArrayList<TaggedWord>(tokens.size());
 			for (Token t : tokens) {
 				words.add(new TaggedWord(t.getCoveredText()));
 			}
-			words = tagger.tagSentence(words);
-			for (int i = 0; i < tokens.size(); i++) {
-				Token t = tokens.get(i);
+			words = modelProvider.getResource().tagSentence(words);
+
+			int i = 0;
+			for (Token t : tokens) {
 				TaggedWord tt = words.get(i);
-				POS pos = new POS(aJCas, t.getBegin(), t.getEnd());
-				pos.setPosValue(tt.tag());
-				t.setPos(pos);
-				pos.addToIndexes();
+				Type posTag = mappingProvider.getTagType(tt.tag());
+				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
+				posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
+						internStrings ? tt.tag().intern() : tt.tag());
+				posAnno.addToIndexes();
+				t.setPos((POS) posAnno);
+				i++;
 			}
 		}
 	}

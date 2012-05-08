@@ -59,9 +59,7 @@ public class StanfordLemmatizerTest
 		checkModelsAndBinary(aLanguage, aVariant);
 
 		AnalysisEngine posTagger = createPrimitive(StanfordPosTagger.class,
-				StanfordPosTagger.PARAM_MODEL_PATH,
-				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-" + aLanguage
-						+ "-" + aVariant + ".tagger");
+				StanfordPosTagger.PARAM_VARIANT, aVariant);
 
 		AnalysisEngine lemmatizer = createPrimitive(StanfordLemmatizer.class,
 				StanfordLemmatizer.PARAM_DASH_BUG_WORKAROUND, false);

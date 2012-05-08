@@ -55,9 +55,7 @@ public class StanfordCoreferenceResolverTest
 						StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
 						StanfordParser.PARAM_CREATE_POS_TAGS, true),
 				createPrimitiveDescription(
-						StanfordNamedEntityRecognizer.class,
-						StanfordNamedEntityRecognizer.PARAM_MODEL, 
-						"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-en-all.3class.distsim.crf.ser.gz"),
+						StanfordNamedEntityRecognizer.class),
 				createPrimitiveDescription(StanfordCoreferenceResolver.class)));
 
 		// Set up a simple example

@@ -41,9 +41,7 @@ public class StanfordNamedEntityRecognizerTest
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-		Iterator<NamedEntity> iter = runNER(
-				"SAP where John works is in Germany.",
-				"/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-en-all.3class.distsim.crf.ser.gz");
+		Iterator<NamedEntity> iter = runNER("SAP where John works is in Germany.", "en");
 
 		assertNE(iter.next(), Organization.class, 0, 3);
 		assertNE(iter.next(), Person.class, 10, 14);
@@ -61,8 +59,7 @@ public class StanfordNamedEntityRecognizerTest
 		 * Note: The FaruquiPado-classifiers need at least 2 GiG of Heap Space
 		 */
 		Iterator<NamedEntity> iter = runNER(
-				"Markus arbeitet seit 10 Jahren bei SAP in Deutschland.",
-				"/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-de-dewac_175m_600.crf.ser.gz");
+				"Markus arbeitet seit 10 Jahren bei SAP in Deutschland.", "de");
 
 		assertNE(iter.next(), Person.class, 0, 6);
 		assertNE(iter.next(), Organization.class, 35, 38);
@@ -104,27 +101,19 @@ public class StanfordNamedEntityRecognizerTest
 	 * @return an iterator over all created NamedEntity-annotations
 	 * @throws Exception
 	 */
-	private Iterator<NamedEntity> runNER(String testDocument, String classifier)
+	private Iterator<NamedEntity> runNER(String testDocument, String language)
 		throws Exception
 	{
-		checkModel(classifier);
-
 		AnalysisEngineDescription desc = createPrimitiveDescription(
-				StanfordNamedEntityRecognizer.class,
-				StanfordNamedEntityRecognizer.PARAM_MODEL, "classpath:"+classifier);
+				StanfordNamedEntityRecognizer.class);
 
 		AnalysisEngine ae = UIMAFramework.produceAnalysisEngine(desc);
 		JCas testCas = ae.newJCas();
+		testCas.setDocumentLanguage(language);
 		testCas.setDocumentText(testDocument);
 		ae.process(testCas);
 
 		// Return iterator for the named entities
 		return JCasUtil.iterator(testCas, NamedEntity.class);
 	}
-
-    private
-    void checkModel(String aModel)
-    {
-		Assume.assumeTrue(getClass().getResource(aModel) != null);
-    }
 }
