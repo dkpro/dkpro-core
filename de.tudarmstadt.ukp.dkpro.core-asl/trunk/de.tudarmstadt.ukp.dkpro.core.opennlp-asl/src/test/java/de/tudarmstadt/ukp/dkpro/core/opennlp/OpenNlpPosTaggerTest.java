@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public class PosTaggerTest
+public class OpenNlpPosTaggerTest
 {
 	@Test
 	public void testEnglish()
@@ -67,8 +67,7 @@ public class PosTaggerTest
 	private JCas runTest(String language, String testDocument, String[] tags, String[] tagClasses)
 		throws Exception
 	{
-        AnalysisEngine engine = createPrimitive(PosTagger.class,
-        		PosTagger.PARAM_LANGUAGE, language);
+        AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class);
 
         JCas aJCas = engine.newJCas();
         aJCas.setDocumentLanguage(language);
