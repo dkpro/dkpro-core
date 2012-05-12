@@ -202,7 +202,7 @@ public class JdbcReader
                 getLogger().warn("Error getting value for column " + columnName + ". ", e);
             }
         }
-        return "";
+        return null;
     }
 
     @Override
