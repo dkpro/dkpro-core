@@ -53,6 +53,6 @@ public abstract class JCasFileSetCollectionReader_ImplBase
 	
 	protected void initCas(JCas aJCas, FileResource aResource)
 	{
-		super.initCas(aJCas.getCas(), aResource);
+		super.initCas(aJCas.getCas(), aResource, null);
 	}
 }

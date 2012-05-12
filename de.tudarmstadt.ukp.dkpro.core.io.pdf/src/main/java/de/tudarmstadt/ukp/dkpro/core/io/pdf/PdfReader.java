@@ -112,7 +112,7 @@ public class PdfReader
         throws IOException, CollectionException
     {
         FileResource resource = nextFile();
-        initCas(aCAS, resource);
+        initCas(aCAS, resource, null);
 
         InputStream is = null;
         try {

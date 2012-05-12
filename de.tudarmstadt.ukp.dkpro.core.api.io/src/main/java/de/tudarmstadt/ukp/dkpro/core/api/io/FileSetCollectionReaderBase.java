@@ -159,23 +159,28 @@ public abstract class FileSetCollectionReaderBase
 		return fileSetIterator.hasNext();
 	}
 
-	protected void initCas(CAS aCas, FileResource aFile)
+	/**
+	 * Initialize the {@DocumentMetaData}. This must be called before setting the
+	 * document text, otherwise the end feature of this annotation will not be set correctly.
+	 */
+	protected void initCas(CAS aCas, FileResource aFile, String aQualifier)
 	{
+		String qualifier = aQualifier != null ? "#"+aQualifier : "";
 		try {
-			// Set the document language
-			aCas.setDocumentLanguage(language);
-
 			// Set the document metadata
-			DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
+			DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
 			File file = aFile.getFile();
 			docMetaData.setDocumentTitle(file.getName());
-			docMetaData.setDocumentUri(file.toURI().toString());
-			docMetaData.setDocumentId(aFile.getName());
+			docMetaData.setDocumentUri(file.toURI().toString()+qualifier);
+			docMetaData.setDocumentId(aFile.getName()+qualifier);
 			if (aFile.getBaseDir() != null) {
 			    docMetaData.setDocumentBaseUri(path.toURI().toString());
-				docMetaData.setCollectionId(aFile.getBaseDir().getPath());
+				docMetaData.setCollectionId(aFile.getBaseDir().getPath()+qualifier);
 			}
 			docMetaData.addToIndexes();
+
+			// Set the document language
+			aCas.setDocumentLanguage(language);
 		}
 		catch (CASException e) {
 			// This should not happen.

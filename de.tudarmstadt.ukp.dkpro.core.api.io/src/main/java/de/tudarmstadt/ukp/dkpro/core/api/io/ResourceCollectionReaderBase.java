@@ -382,7 +382,7 @@ public abstract class ResourceCollectionReaderBase
 		String qualifier = aQualifier != null ? "#"+aQualifier : "";
 		try {
 			// Set the document metadata
-			DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
+			DocumentMetaData docMetaData = DocumentMetaData.create(aCas);
 			docMetaData.setDocumentTitle(new File(aResource.getPath()).getName());
 			docMetaData.setDocumentUri(aResource.getResolvedUri().toString()+qualifier);
 			docMetaData.setDocumentId(aResource.getPath()+qualifier);
