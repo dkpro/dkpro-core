@@ -262,7 +262,7 @@ public class XmlReaderXPath
 		throws IOException
 	{
 		// Initialize CAS with document meta data
-		initCas(cas, currentFileResource);
+		initCas(cas, currentFileResource, null);
 
 		if (!StringUtils.isWhitespace(language)) {
 			cas.setDocumentLanguage(language);
