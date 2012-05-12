@@ -388,7 +388,7 @@ public abstract class ResourceCollectionReaderBase
 			docMetaData.setDocumentId(aResource.getPath()+qualifier);
 			if (aResource.getBase() != null) {
 				docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
-				docMetaData.setCollectionId(aResource.getResolvedBase()+qualifier);
+				docMetaData.setCollectionId(aResource.getResolvedBase());
 			}
 			docMetaData.addToIndexes();
 
