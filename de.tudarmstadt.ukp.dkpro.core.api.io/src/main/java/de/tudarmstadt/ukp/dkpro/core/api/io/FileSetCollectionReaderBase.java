@@ -177,7 +177,6 @@ public abstract class FileSetCollectionReaderBase
 			    docMetaData.setDocumentBaseUri(path.toURI().toString());
 				docMetaData.setCollectionId(aFile.getBaseDir().getPath());
 			}
-			docMetaData.addToIndexes();
 
 			// Set the document language
 			aCas.setDocumentLanguage(language);
