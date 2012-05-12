@@ -25,14 +25,13 @@ import java.net.URL;
 
 import org.annolab.core.util.SubstitutionTrieParser;
 import org.annolab.core.util.Trie;
-import org.apache.tools.ant.types.resources.FileResource;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
@@ -43,7 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
  * @author Richard Eckart de Castilho
  */
 public class PdfReader
-    extends FileSetCollectionReaderBase
+    extends ResourceCollectionReaderBase
 {
     public static final String BUILT_IN = "<built-in>";
     private static final String NOT_RESTRICTED = "-1";
@@ -111,7 +110,7 @@ public class PdfReader
     public void getNext(CAS aCAS)
         throws IOException, CollectionException
     {
-        FileResource resource = nextFile();
+        Resource resource = nextFile();
         initCas(aCAS, resource, null);
 
         InputStream is = null;
