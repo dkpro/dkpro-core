@@ -390,7 +390,6 @@ public abstract class ResourceCollectionReaderBase
 				docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
 				docMetaData.setCollectionId(aResource.getResolvedBase());
 			}
-			docMetaData.addToIndexes();
 
 			// Set the document language
 			aCas.setDocumentLanguage(language);
