@@ -2,11 +2,14 @@
 
 -------- View _InitialView begin ----------------------------------
 
-DocumentAnnotation
+DocumentMetaData
    sofa: _InitialView
    begin: 0
    end: 109
    language: "x-unspecified"
+   documentTitle: "test.pdf"
+   documentId: "test.pdf"
+   isLastSegment: false
 
 CAS-Text:
 This is a test.
@@ -23,15 +26,6 @@ Paragraph
    sofa: _InitialView
    begin: 0
    end: 35
-[]
-DocumentMetaData
-   sofa: _InitialView
-   begin: 0
-   end: 0
-   language: <null>
-   documentTitle: "test.pdf"
-   documentId: "test.pdf"
-   isLastSegment: false
 [Überschrift
 ]
 Heading
@@ -46,5 +40,3 @@ Paragraph
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
