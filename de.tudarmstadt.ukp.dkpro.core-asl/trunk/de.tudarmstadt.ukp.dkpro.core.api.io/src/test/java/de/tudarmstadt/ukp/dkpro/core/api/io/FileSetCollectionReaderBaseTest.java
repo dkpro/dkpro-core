@@ -70,7 +70,7 @@ public class FileSetCollectionReaderBaseTest
             throws IOException, CollectionException
         {
             FileResource res = nextFile();
-            initCas(aCAS, res);
+            initCas(aCAS, res, null);
         }
 
     }
