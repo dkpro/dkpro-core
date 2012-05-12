@@ -175,7 +175,7 @@ public abstract class FileSetCollectionReaderBase
 			docMetaData.setDocumentId(aFile.getName()+qualifier);
 			if (aFile.getBaseDir() != null) {
 			    docMetaData.setDocumentBaseUri(path.toURI().toString());
-				docMetaData.setCollectionId(aFile.getBaseDir().getPath()+qualifier);
+				docMetaData.setCollectionId(aFile.getBaseDir().getPath());
 			}
 			docMetaData.addToIndexes();
 
