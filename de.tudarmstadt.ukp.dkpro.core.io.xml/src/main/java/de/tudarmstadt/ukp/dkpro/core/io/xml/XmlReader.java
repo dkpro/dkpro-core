@@ -355,7 +355,6 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 		docMetaData.setDocumentId(docId);
 		docMetaData.setDocumentUri(docUri+"#"+docId);
 		docMetaData.setCollectionId(collectionId);
-		docMetaData.addToIndexes();
 
 //		System.out.println("Fetched document: "+docUri+"#"+docId);
 	}
