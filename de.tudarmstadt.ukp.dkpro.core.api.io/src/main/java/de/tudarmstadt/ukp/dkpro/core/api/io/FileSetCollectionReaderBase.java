@@ -138,14 +138,18 @@ public abstract class FileSetCollectionReaderBase
 
 	protected FileResource nextFile()
 	{
-		return fileSetIterator.next();
+		try {
+			return fileSetIterator.next();
+		}
+		finally {
+			completed++;
+		}
 	}
 
 	@Override
 	public Progress[] getProgress()
 	{
-		return new Progress[] { new ProgressImpl(completed,
-				getIncludedFilesCount(), "file") };
+		return new Progress[] { new ProgressImpl(completed, getIncludedFilesCount(), "file") };
 	}
 
 	@Override
