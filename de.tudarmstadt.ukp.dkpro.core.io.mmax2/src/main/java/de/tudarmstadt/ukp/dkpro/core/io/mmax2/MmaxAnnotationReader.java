@@ -145,6 +145,7 @@ public class MmaxAnnotationReader
 		}
 	}
 
+	@Override
 	public void getNext(CAS aCAS)
 		throws IOException, CollectionException
 	{
@@ -189,7 +190,7 @@ public class MmaxAnnotationReader
 
 		jcas.setDocumentText(textFileContent);
 
-		DocumentMetaData docMetaData = new DocumentMetaData(jcas);
+		DocumentMetaData docMetaData = DocumentMetaData.create(jcas);
 		docMetaData.setDocumentId(mmaxFile.getName());
 		docMetaData.setDocumentUri(mmaxFile.toURI().toString());
 		// docMetaData.setDocumentTitle(mmaxFileName);
@@ -345,17 +346,20 @@ public class MmaxAnnotationReader
 
 	}
 
+	@Override
 	public void close()
 		throws IOException
 	{
 
 	}
 
+	@Override
 	public Progress[] getProgress()
 	{
 		return new Progress[] { new ProgressImpl(mCurrentIndex, mmaxFiles.size(), Progress.ENTITIES) };
 	}
 
+	@Override
 	public boolean hasNext()
 		throws IOException, CollectionException
 	{

@@ -202,7 +202,7 @@ public class ImsCwbReader
     {
         try {
             // Set the document metadata
-            DocumentMetaData docMetaData = new DocumentMetaData(aCas.getJCas());
+            DocumentMetaData docMetaData = DocumentMetaData.create(aCas.getJCas());
             docMetaData.setDocumentTitle(title);
             docMetaData.setDocumentUri(aResource.getResolvedUri().toString());
             docMetaData.setDocumentId(aResource.getPath());

@@ -351,7 +351,7 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 		}
 
 		String docUri = xmlFiles.get(currentParsedFile).toURI().toString();
-		DocumentMetaData docMetaData = new DocumentMetaData(jcas);
+		DocumentMetaData docMetaData = DocumentMetaData.create(jcas);
 		docMetaData.setDocumentId(docId);
 		docMetaData.setDocumentUri(docUri+"#"+docId);
 		docMetaData.setCollectionId(collectionId);
