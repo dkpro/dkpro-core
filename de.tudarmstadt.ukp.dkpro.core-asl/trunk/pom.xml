@@ -278,6 +278,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+				<version>1.4.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.textcat-asl</artifactId>
 				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
@@ -448,6 +453,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tei</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
 	</modules>
 	<build>
 		<plugins>
