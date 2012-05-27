@@ -17,18 +17,25 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 
 public abstract class CasConfigurableProviderBase<M> extends ResourceObjectProviderBase<M>
 {
 	private String language;
 	
-	public void configure(CAS aCas)
+	public void configure(CAS aCas) throws AnalysisEngineProcessException
 	{
-		language = aCas.getDocumentLanguage();
-		super.configure();
+		try {
+			language = aCas.getDocumentLanguage();
+			super.configure();
+		}
+		catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
 	}
 
 	@Override
