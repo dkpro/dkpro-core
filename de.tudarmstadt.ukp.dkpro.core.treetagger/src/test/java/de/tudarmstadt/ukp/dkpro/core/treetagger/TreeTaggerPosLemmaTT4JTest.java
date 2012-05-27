@@ -23,14 +23,12 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -38,11 +36,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.uimafit.factory.JCasBuilder;
-import org.uimafit.testing.factory.TokenBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public
 class TreeTaggerPosLemmaTT4JTest
@@ -158,21 +157,10 @@ class TreeTaggerPosLemmaTT4JTest
 
 		try {
 			for (int n = 0; n < 100; n++) {
-		        JCas aJCas = engine.newJCas();
-		        aJCas.setDocumentLanguage("en");
-		        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
-		        tb.buildTokens(aJCas, testDocument);
-		        engine.process(aJCas);
-
-		        // test POS annotations
-		        if (tagClasses != null && tags != null) {
-		        	checkTags(tagClasses, tags, select(aJCas, POS.class));
-		        }
-
-		        // test Lemma annotations
-		        if (lemmas != null) {
-		        	checkLemma(lemmas,  select(aJCas, Lemma.class));
-		        }
+		        JCas aJCas = TestRunner.runTest(engine, "en", testDocument);
+		        
+		        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
+		        AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
 			}
 		}
 		finally {
@@ -210,50 +198,16 @@ class TreeTaggerPosLemmaTT4JTest
 		throws Exception
 	{
 		checkModelsAndBinary(language);
-
+		
         AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
 
-        JCas aJCas = engine.newJCas();
-        aJCas.setDocumentLanguage(language);
-
-        TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class, Annotation.class);
-        tb.buildTokens(aJCas, testDocument);
-
-        engine.process(aJCas);
-
-        // test POS annotations
-        if (tagClasses != null && tags != null) {
-        	checkTags(tagClasses, tags, select(aJCas, POS.class));
-        }
-
-        // test Lemma annotations
-        if (lemmas != null) {
-        	checkLemma(lemmas,  select(aJCas, Lemma.class));
-        }
+        JCas aJCas = TestRunner.runTest(engine, language, testDocument);
+        
+        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
+        AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
 
         return aJCas;
     }
-
-	private void checkTags(String[] tagClasses, String[] tags, Collection<POS> actual)
-	{
-        int i = 0;
-        for (POS posAnnotation : actual) {
-            assertEquals("In position "+i, tagClasses[i], posAnnotation.getType().getShortName());
-            assertEquals("In position "+i, tags[i], posAnnotation.getPosValue());
-            i++;
-        }
-        assertEquals(tags.length, i);
-	}
-
-	private void checkLemma(String[] expected, Collection<Lemma> actual)
-	{
-        int i = 0;
-        for (Lemma lemmaAnnotation : actual) {
-            assertEquals("In position "+i, expected[i], lemmaAnnotation.getValue());
-            i++;
-        }
-        assertEquals(expected.length, i);
-	}
 
 	/**
 	 * Test using the same AnalysisEngine multiple times.
