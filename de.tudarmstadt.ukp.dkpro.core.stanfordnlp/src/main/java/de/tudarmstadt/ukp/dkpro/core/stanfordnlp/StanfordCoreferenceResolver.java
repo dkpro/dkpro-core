@@ -172,8 +172,14 @@ public class StanfordCoreferenceResolver
 				corefSystem.dictionaries());
 
 		// add the relevant info to mentions and order them for coref
-		Document doc = mentionExtractor.arrange(document, sentenceTokens, trees, allUnprocessedMentions);
-		Map<Integer, CorefChain> result = corefSystem.coref(doc);
+		Map<Integer, CorefChain> result;
+		try {
+			Document doc = mentionExtractor.arrange(document, sentenceTokens, trees, allUnprocessedMentions);
+			result = corefSystem.coref(doc);
+		}
+		catch (Exception e) {
+			throw new AnalysisEngineProcessException(e);
+		}
 		
 		for (CorefChain chain : result.values()) {
 			CoreferenceLink last = null;
@@ -217,7 +223,7 @@ public class StanfordCoreferenceResolver
 	{
 	};
 	
-	public static final String BASE = "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/dcoref-en/";
+	public static final String BASE = "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/coref-en/";
 	
 	public static final String DEFAULT_DCOREF_ANIMATE = BASE + "animate.unigrams.txt";
 	public static final String DEFAULT_DCOREF_DEMONYM = BASE + "demonyms.txt";

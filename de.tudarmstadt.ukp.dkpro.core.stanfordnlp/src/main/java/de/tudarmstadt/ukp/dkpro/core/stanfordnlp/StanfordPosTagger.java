@@ -72,7 +72,7 @@ public class StanfordPosTagger
 
 		mappingProvider = new MappingProvider();
 		mappingProvider.setDefaultVariantsLocation(
-				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-default-variants.map");
+				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
 		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
 				"core/api/lexmorph/tagset/${language}-tagger.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
@@ -83,10 +83,9 @@ public class StanfordPosTagger
 		modelProvider = new CasConfigurableProviderBase<MaxentTagger>() {
 			{
 				setDefaultVariantsLocation(
-						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-default-variants.map");
+						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"postagger-${language}-${variant}.tagger");
-				setDefault(VARIANT, "maxent");
+						"tagger-${language}-${variant}.tagger");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);

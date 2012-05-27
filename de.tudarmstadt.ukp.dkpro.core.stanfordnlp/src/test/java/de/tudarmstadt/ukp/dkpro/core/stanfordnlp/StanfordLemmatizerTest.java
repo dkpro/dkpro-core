@@ -14,13 +14,11 @@ import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.util.JCasUtil.select;
 
-import java.net.URL;
 import java.util.Collection;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.junit.Assume;
 import org.junit.Test;
 import org.uimafit.testing.factory.TokenBuilder;
 
@@ -56,8 +54,6 @@ public class StanfordLemmatizerTest
 			String[] lemmas)
 		throws Exception
 	{
-		checkModelsAndBinary(aLanguage, aVariant);
-
 		AnalysisEngine posTagger = createPrimitive(StanfordPosTagger.class,
 				StanfordPosTagger.PARAM_VARIANT, aVariant);
 
@@ -91,13 +87,5 @@ public class StanfordLemmatizerTest
             assertEquals("In position "+i, lemmas[i], token.getLemma().getValue());
             i++;
         }
-	}
-
-	private void checkModelsAndBinary(String aLanguage, String aVariant)
-	{
-		String loc = "/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/postagger-" + aLanguage + "-"
-				+ aVariant + ".tagger";
-		URL url = getClass().getResource(loc);
-		Assume.assumeTrue(url != null);
 	}
 }

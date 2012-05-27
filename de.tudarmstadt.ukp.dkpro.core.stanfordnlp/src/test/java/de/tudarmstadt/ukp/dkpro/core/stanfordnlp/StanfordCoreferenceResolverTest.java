@@ -24,11 +24,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Assume;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
-import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 
 /**
  * @author Richard Eckart de Castilho
@@ -39,17 +37,10 @@ public class StanfordCoreferenceResolverTest
 	public void test()
 		throws Exception
 	{ 
-		// Make sure the test only runs when the models are present
-		checkModel("/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-en-pcfg.ser.gz");
-		checkModel("/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-en-all.3class.distsim.crf.ser.gz");
-		
 		// Coreference resolution requires the parser and the NER to run before
 		AnalysisEngine aggregate = createAggregate(createAggregateDescription(
 				createPrimitiveDescription(StanfordSegmenter.class),
 				createPrimitiveDescription(StanfordParser.class,
-						StanfordParser.PARAM_MODEL,
-						"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-en-pcfg.ser.gz",
-						StanfordParser.PARAM_LANGUAGE_PACK, PennTreebankLanguagePack.class.getName(),
 						StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
 						StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
 						StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
@@ -75,9 +66,4 @@ public class StanfordCoreferenceResolverTest
 		assertEquals(asList("John", "He"), toText(chains.get(0).links()));
 		assertEquals(asList("a car", "it"), toText(chains.get(1).links()));
 	}
-	
-    void checkModel(String aModel)
-    {
-		Assume.assumeTrue(getClass().getResource(aModel) != null);
-    }
 }

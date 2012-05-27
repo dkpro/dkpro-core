@@ -10,35 +10,31 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.*;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
+import static org.junit.Assert.assertTrue;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
-import org.uimafit.util.JCasUtil;
+import org.junit.rules.TestName;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import edu.stanford.nlp.ling.StringLabel;
-import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
 
 /**
@@ -48,267 +44,232 @@ import edu.stanford.nlp.trees.Tree;
  */
 public class StanfordParserTest
 {
-
-	static JCas englishCas = null;
-	static JCas germanCas = null;
-
 	static final String documentEnglish = "We need a very complicated example sentence, which " +
 			"contains as many constituents and dependencies as possible.";
-	static final String documentGerman = "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
-			"möglichst viele Konstituenten und Dependenzen beinhaltet .";
-
+	
 	// TODO Maybe test link to parents (not tested by syntax tree recreation)
 
 	@Test
-	public void testGermanConstituents()
+	public void testGermanPcfg()
 		throws Exception
 	{
-		if (germanCas == null) {
-			setupGerman();
-		}
+		JCas jcas = runTest("de", "pcfg", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
+				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
-		// TODO gold constituents have to be changed to SPAN instead of token offset
-		HashSet<String> constituentGold = new HashSet<String>();
-		constituentGold.add("ROOT 0,112");
-		constituentGold.add("S 0,112");
-		constituentGold.add("NP 13,110");
-		constituentGold.add("AP 17,35");
-		constituentGold.add("S 46,110");
-		constituentGold.add("NP 64,99");
-		constituentGold.add("CNP 70,99");
+		String[] constituentMapped = new String[] { "ROOT 0,111", "S 0,111", "S 46,110",
+				"X 13,110", "X 17,35", "X 64,99", "X 70,99" };
 
-		// assertTrue("Constituents count mismatch", constituentIndex.size() ==
-		// constituentsGold.size());
-		boolean okCons = true;
-		System.out.println("Checking constituents...");
-		for (Constituent currConst : select(germanCas, Constituent.class)) {
-			String constType = currConst.getConstituentType();
+		String[] constituentOriginal = new String[] { "AP 17,35", "CNP 70,99", "NP-OA 13,110",
+				"NP-SB 64,99", "ROOT 0,111", "S 0,111", "S 46,110" };
 
-			List<Token> coveredTokens = JCasUtil.selectCovered(germanCas, Token.class, currConst);
-			Token firstToken = coveredTokens.get(0);
-			Token lastToken = coveredTokens.get(coveredTokens.size() - 1);
+		String[] lemmas = new String[] { /** No lemmatization for German */ };
 
-			int firstTokenOffset = firstToken.getBegin();
-			int lastTokenOffset = lastToken.getEnd();
-			String toFind = constType.toUpperCase() + " " + firstTokenOffset
-					+ "," + lastTokenOffset;
-			System.out.println("CONST: " + toFind + " ["
-					+ germanCas.getDocumentText().substring(firstToken.getBegin(),
-							lastToken.getEnd()) + "] - " + constituentGold.contains(toFind));
-			okCons &= constituentGold.contains(toFind);
-			constituentGold.remove(toFind);
-		}
+		String[] posOriginal = new String[] { "PPER-SB", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
+				"PRELS-SB", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-		if (constituentGold.size() > 0) {
-			okCons = false;
-		}
+		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
+				"ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
 
-		assertTrue(
-				"Constituents did not match the gold standard. Gold constituents that were not found: "
-						+ constituentGold, okCons);
+		String[] dependencies = new String[] { /** No dependencies for German */ };
 
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 
 	@Test
-	public void testEnglishConstituents()
+	public void testGermanFactored()
 		throws Exception
 	{
-		if (englishCas == null) {
-			setupEnglish();
-		}
+		JCas jcas = runTest("de", "factored", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
+				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
-		Set<String> constituentsGold = new HashSet<String>();
-		constituentsGold.add("ROOT 0,110");
-		constituentsGold.add("S 0,110");
-		constituentsGold.add("NP 0,2");
-		constituentsGold.add("VP 3,109");
-		constituentsGold.add("NP 8,109");
-		constituentsGold.add("NP 8,43");
-		constituentsGold.add("ADJP 10,26");
-		constituentsGold.add("SBAR 45,109");
-		constituentsGold.add("WHNP 45,50");
-		constituentsGold.add("VP 51,109");
-		constituentsGold.add("S 51,109");
-		constituentsGold.add("PP 60,97");
-		constituentsGold.add("NP 63,97");
-		constituentsGold.add("PP 98,109");
-		constituentsGold.add("ADJP 101,109");
+		String[] constituentMapped = new String[] { "ROOT 0,111", "S 0,111", "S 46,110",
+				"X 13,110", "X 17,35", "X 54,69", "X 54,99", "X 70,99" };
 
-		// assertTrue("Constituents count mismatch", constituentIndex.size() ==
-		// constituentsGold.size());
-		boolean okCons = true;
-		System.out.println("Checking constituents...");
-		for (Constituent currConst : select(englishCas, Constituent.class)) {
-			String constType = currConst.getConstituentType();
+		String[] constituentOriginal = new String[] { "AP 17,35", "AP 54,69", "CNP 70,99",
+				"NP-DA 54,99", "NP-OA 13,110", "ROOT 0,111", "S 0,111", "S 46,110" };
 
-			// get covered tokens without using subiterators - subiterators did
-			// not work all the time
-			List<Token> coveredTokens = JCasUtil.selectCovered(
-					englishCas, Token.class, currConst);
-			Token firstToken = coveredTokens.get(0); // get first token
-			Token lastToken = coveredTokens.get(coveredTokens.size() - 1); // get
-																			// last
-																			// token
+		String[] lemmas = new String[] { /** No lemmatization for German */ };
 
-			int firstTokenOffset = firstToken.getBegin();
-			int lastTokenOffset = lastToken.getEnd();
-			String toFind = constType.toUpperCase() + " " + firstTokenOffset
-					+ "," + lastTokenOffset;
-			System.out.println("CONST: "
-					+ toFind
-					+ " ["
-					+ englishCas.getDocumentText().substring(
-							firstToken.getBegin(), lastToken.getEnd()) + "] - "
-					+ constituentsGold.contains(toFind));
-			okCons &= constituentsGold.contains(toFind);
-			constituentsGold.remove(toFind);
-		}
+		String[] posOriginal = new String[] { "PPER-SB", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
+				"PRELS-SB", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-		if (constituentsGold.size() > 0) {
-			okCons = false;
-		}
+		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
+				"ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
 
-		assertTrue(
-				"Constituents did not match the gold standard. Gold constituents that were not found: "
-						+ constituentsGold, okCons);
-	}
-
-	@Test
-	public void testEnglishDependencies()
-		throws Exception
-	{
-		if (englishCas == null) {
-			setupEnglish();
-		}
-
-		Set<String> dependenciesGold = new HashSet<String>();
-		dependenciesGold.add("ADVMOD 15,26,10,14");
-		dependenciesGold.add("RCMOD 35,43,51,59");
-		dependenciesGold.add("DET 35,43,8,9");
-		dependenciesGold.add("POBJ 60,62,68,80");
-		dependenciesGold.add("POBJ 98,100,101,109");
-		dependenciesGold.add("DOBJ 3,7,35,43");
-		dependenciesGold.add("AMOD 35,43,15,26");
-		dependenciesGold.add("AMOD 68,80,63,67");
-		dependenciesGold.add("NSUBJ 3,7,0,2");
-		dependenciesGold.add("NSUBJ 51,59,45,50");
-		dependenciesGold.add("PREP 51,59,60,62");
-		dependenciesGold.add("PREP 51,59,98,100");
-		dependenciesGold.add("CC 68,80,81,84");
-		dependenciesGold.add("NN 35,43,27,34");
-		dependenciesGold.add("CONJ 68,80,85,97");
-
-		boolean okDep = true;
-		if (dependenciesGold != null) {
-			FSIndex<Annotation> dependencyIndex = englishCas
-					.getAnnotationIndex(Dependency.type);
-			// assertTrue("Dependency count mismatch", dependencyIndex.size() ==
-			// dependenciesGold.size());
-
-			// Just to see what has been parsed.
-			System.out.println("Checking dependencies...");
-			System.out
-					.println("# gold dependencies " + dependenciesGold.size());
-			System.out
-					.println("# found dependencies " + dependencyIndex.size());
-			for (Dependency currDep : select(englishCas, Dependency.class)) {
-				String depType = currDep.getDependencyType().toUpperCase();
-				int governorBegin = currDep.getGovernor().getBegin();
-				int governorEnd = currDep.getGovernor().getEnd();
-				int dependentBegin = currDep.getDependent().getBegin();
-				int dependentEnd = currDep.getDependent().getEnd();
-
-				String toFind = depType + " " + governorBegin + ","
-						+ governorEnd + "," + dependentBegin + ","
-						+ dependentEnd;
-				System.out.println("DEP: " + toFind + " - "
-						+ dependenciesGold.contains(toFind));
-				okDep &= dependenciesGold.contains(toFind);
-				dependenciesGold.remove(toFind);
-			}
-
-			if (dependenciesGold.size() > 0) {
-				okDep = false;
-			}
-
-		}
-		assertTrue(
-				"Dependencies did not match the gold standard. Gold dependencies that were not found: "
-						+ dependenciesGold, okDep);
-	}
-
-	@Test
-	public void testEnglishPosLemma()
-		throws Exception
-	{
-		if (englishCas == null) {
-			setupEnglish();
-		}
+		String[] dependencies = new String[] { /** No dependencies for German */ };
 		
-		List<String> refOffset = asList("0-2", "3-7", "8-9", "10-14", "15-26", "27-34", "35-43", 
-				"43-44", "45-50", "51-59", "60-62", "63-67", "68-80", "81-84", "85-97", "98-100",
-				"101-109", "109-110");
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+	}
+
+	@Test
+	public void testEnglishPcfg()
+		throws Exception
+	{
+		JCas jcas = runTest("en", "pcfg", documentEnglish);
 		
-		List<String> refLemma = asList("we", "need", "a", "very", "complicate", "example", 
+		String[] constituentMapped = new String[] { "ROOT 0,110", "S 0,110", "NP 0,2", "VP 3,109", 
+				"NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50", "VP 51,109", 
+				"S 51,109", "PP 60,97", "NP 63,97", "PP 98,109", "ADJP 101,109" };
+
+		String[] constituentOriginal = new String[] { "ROOT 0,110", "S 0,110", "NP 0,2", "VP 3,109", 
+				"NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50", "VP 51,109", 
+				"S 51,109", "PP 60,97", "NP 63,97", "PP 98,109", "ADJP 101,109" };
+
+		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "RCMOD 35,43,51,59", 
+				"DET 35,43,8,9", "POBJ 60,62,68,80", "POBJ 98,100,101,109", "DOBJ 3,7,35,43", 
+				"AMOD 35,43,15,26", "AMOD 68,80,63,67", "NSUBJ 3,7,0,2", "NSUBJ 51,59,45,50",
+				"PREP 51,59,60,62", "PREP 51,59,98,100", "CC 68,80,81,84", "NN 35,43,27,34",
+				"CONJ 68,80,85,97" };
+
+		String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example", 
 				"sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-				"dependency", "as", "possible", ".");
+				"dependency", "as", "possible", "." };
 
-		List<String> refPos = asList("PRP", "VBP", "DT", "RB", "VBN", "NN", 
+		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
+				"ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+		String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", 
 				"NN", ",", "WDT", "VBZ", "IN", "JJ", "NNS", "CC",
-				"NNS", "IN", "JJ", ".");
-
-		List<String> actualLemma = new ArrayList<String>();
-		List<String> actualPos = new ArrayList<String>();
-		List<String> actualOffset = new ArrayList<String>();
-		for (Token t : select(englishCas, Token.class)) {
-			actualLemma.add(t.getLemma().getValue());
-			actualPos.add(t.getPos().getPosValue());
-			actualOffset.add(t.getBegin()+"-"+t.getEnd());
-			
-			// Make sure lemma and pos have same offsets as token
-			assertEquals(t.getBegin(), t.getLemma().getBegin());
-			assertEquals(t.getEnd(), t.getLemma().getEnd());
-			assertEquals(t.getBegin(), t.getPos().getBegin());
-			assertEquals(t.getEnd(), t.getPos().getEnd());
-		}
+				"NNS", "IN", "JJ", "." };
 		
-		assertEquals(refLemma, actualLemma);
-		assertEquals(refPos, actualPos);
-		assertEquals(refOffset, actualOffset);
+		AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
-	/**
-	 * Test POS and offsets for German. Lemmas are not supported for German.
-	 */
 	@Test
-	public void testGermanPosLemma()
+	public void testEnglishFactored()
 		throws Exception
 	{
-		if (germanCas == null) {
-			setupGerman();
-		}
+		JCas jcas = runTest("en", "factored", documentEnglish);
 		
-		List<String> refOffset = asList("0-3", "4-12", "13-16", "17-21", "22-35", "36-44", "44-45",
-				"46-53", "54-63", "64-69", "70-83", "84-87", "88-99", "100-110", "111-112");
-		
-		List<String> refPos = asList("PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS",
-				"ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$.");
+		String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
+				"NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
+				"S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
-		List<String> actualPos = new ArrayList<String>();
-		List<String> actualOffset = new ArrayList<String>();
-		for (Token t : select(germanCas, Token.class)) {
-			actualPos.add(t.getPos().getPosValue());
-			actualOffset.add(t.getBegin()+"-"+t.getEnd());
-			
-			// Make sure pos have same offsets as token
-			assertEquals(t.getBegin(), t.getPos().getBegin());
-			assertEquals(t.getEnd(), t.getPos().getEnd());
-		}
+		String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
+				"NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
+				"S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+
+		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "ADVMOD 63,67,60,62",
+				"AMOD 35,43,15,26", "AMOD 68,80,63,67", "CC 68,80,81,84", "CONJ 68,80,85,97",
+				"DET 35,43,8,9", "DOBJ 3,7,35,43", "DOBJ 51,59,68,80", "NN 35,43,27,34",
+				"NSUBJ 3,7,0,2", "NSUBJ 51,59,45,50", "POBJ 98,100,101,109", "PREP 51,59,98,100",
+				"RCMOD 35,43,51,59" };
+
+		String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example", 
+				"sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+				"dependency", "as", "possible", "." };
+
+		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
+				"ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+		String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
+				"WDT", "VBZ", "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
 		
-		assertEquals(refPos, actualPos);
-		assertEquals(refOffset, actualOffset);
+		AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
+	@Test
+	public void testFrenchFactored()
+		throws Exception
+	{
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+		
+		JCas jcas = runTest("fr", "factored", "Nous avons besoin d'une phrase par exemple très " +
+				"compliqué, qui contient des constituants que de nombreuses dépendances et que " +
+				"possible.");
+		
+		String[] constituentMapped = new String[] { "NP 11,17", "NP 18,42", "NP 59,62", "NP 72,88",
+				"NP 93,118", "ROOT 0,135", "X 0,10", "X 0,135", "X 119,134", "X 122,134",
+				"X 126,134", "X 18,57", "X 31,42", "X 43,57", "X 59,88", "X 63,71", "X 89,134" };
+
+		String[] constituentOriginal = new String[] { "AP 126,134", "COORD 119,134", "MWADV 31,42",
+				"NP 11,17", "NP 18,42", "NP 59,62", "NP 72,88", "NP 93,118", "ROOT 0,135",
+				"SENT 0,135", "Srel 18,57", "Srel 59,88", "Ssub 122,134", "Ssub 89,134", "VN 0,10",
+				"VN 43,57", "VN 63,71" };
+
+		String[] dependencies = new String[] { /** No dependencies for French */ };
+
+		String[] lemmas = new String[] { /** No lemmatization for French */ };
+
+		String[] posMapped = new String[] { "O", "O", "O", "O", "O", "O", "O", "ADV", "O", "O",
+				"PR", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" };
+
+		String[] posOriginal = new String[] { "CL", "V", "N", "D", "N", "P", "N", "ADV", "V",
+				"PUNC", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "PUNC" };
+		
+		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+	}
+	
+	@Ignore("This requires two classes from the parser package that do currently not ship with " +
+			"CoreNLP (ChineseUnknownWordModel ). Even if we just add it to DKPro Core and test, " +
+			"we get no proper results. Somebody needs to investigate this. Maybe a tokenizer " +
+			"issue?")
+	@Test
+	public void testChineseFactored()
+		throws Exception
+	{
+		JCas jcas = runTest("zh", "factored", "我们需要一个非常复杂的句子，例如其中包含许多成分和尽可能的依赖。");
+		
+		String[] constituentMapped = new String[] {  };
+
+		String[] constituentOriginal = new String[] {  };
+
+		String[] dependencies = new String[] {  };
+
+		String[] lemmas = new String[] {  };
+
+		String[] posMapped = new String[] {  };
+
+		String[] posOriginal = new String[] {  };
+		
+		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+	}
+	
+	@Ignore("This requires two classes from the parser package that do currently not ship with " +
+			"CoreNLP (ArabicUnknownWordModel and ArabicUnknownWordSignatures). Even if we " +
+			"just add them to DKPro Core and test, we get no proper results. Somebody needs to " +
+			"investigate this. Maybe a tokenizer issue?")
+	@Test
+	public void testArabicFactored()
+		throws Exception
+	{
+		JCas jcas = runTest("ar", "factored", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن.");
+		
+		String[] constituentMapped = new String[] {  };
+
+		String[] constituentOriginal = new String[] {  };
+
+		String[] dependencies = new String[] {  };
+
+		String[] lemmas = new String[] {  };
+
+		String[] posMapped = new String[] {  };
+
+		String[] posOriginal = new String[] {  };
+		
+		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+	}
 	/**
 	 * This tests whether a complete syntax tree can be recreated from the
 	 * annotations without any loss. Consequently, all links to children should
@@ -318,24 +279,22 @@ public class StanfordParserTest
 	 * @throws Exception
 	 */
 	@Test
-	public void testEnglishSytaxTreeReconstruction()
+	public void testEnglishSyntaxTreeReconstruction()
 		throws Exception
 	{
-		if (englishCas == null) {
-			setupEnglish();
-		}
+		JCas jcas = runTest("en", "factored", documentEnglish);
 
 		String pennOriginal = "";
 		String pennFromRecreatedTree = "";
 
 		// As we only have one input sentence, each loop only runs once!
 
-		for (PennTree curPenn : select(englishCas, PennTree.class)) {
+		for (PennTree curPenn : select(jcas, PennTree.class)) {
 			// get original penn representation of syntax tree
 			pennOriginal = curPenn.getPennTree();
 		}
 
-		for (ROOT curRoot : select(englishCas, ROOT.class)) {
+		for (ROOT curRoot : select(jcas, ROOT.class)) {
 			// recreate syntax tree
 			Tree recreation = TreeUtils.createStanfordTree(curRoot);
 
@@ -354,65 +313,37 @@ public class StanfordParserTest
 	 * Setup CAS to test parser for the English language (is only called once if
 	 * an English test is run)
 	 */
-	private void setupEnglish()
+	private JCas runTest(String aLanguage, String aVariant, String aText)
 		throws Exception
 	{
-		checkModel("/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-en-pcfg.ser.gz");
-
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(StanfordSegmenter.class);
 
 		// setup English
 		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
-				StanfordParser.PARAM_MODEL,
-				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-en-pcfg.ser.gz",
-				StanfordParser.PARAM_LANGUAGE_PACK, PennTreebankLanguagePack.class.getName(),
+				StanfordParser.PARAM_VARIANT, aVariant,
+				StanfordParser.PARAM_PRINT_TAGSET, true,
 				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
 				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
 				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
 				StanfordParser.PARAM_CREATE_POS_TAGS, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
-
-		AnalysisEngine engine = createAggregate(aggregate);
-		englishCas = engine.newJCas();
-		englishCas.setDocumentText(documentEnglish);
-		englishCas.setDocumentLanguage("en");
-
-		engine.process(englishCas);
+		
+		AnalysisEngine engine = createPrimitive(aggregate);
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage(aLanguage);
+		jcas.setDocumentText(aText);
+		engine.process(jcas);
+		
+		return jcas;
 	}
+	
+	@Rule
+	public TestName name = new TestName();
 
-	/**
-	 * Setup CAS to test parser for the German language (is only called once if
-	 * a German test is run)
-	 */
-	private void setupGerman()
-		throws Exception
+	@Before
+	public void printSeparator()
 	{
-		checkModel("classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-de-pcfg.ser.gz");
-
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(StanfordSegmenter.class);
-
-		// setup German
-		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
-				StanfordParser.PARAM_MODEL,
-				"classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/lexparser-de-pcfg.ser.gz",
-				StanfordParser.PARAM_LANGUAGE_PACK, PennTreebankLanguagePack.class.getName(),
-				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
-				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true);
-
-		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
-
-		AnalysisEngine engine = createAggregate(aggregate);
-		germanCas = engine.newJCas();
-		germanCas.setDocumentText(documentGerman);
-		germanCas.setDocumentLanguage("de");
-
-		engine.process(germanCas);
+		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
-
-    private
-    void checkModel(String aModel)
-    {
-		Assume.assumeTrue(getClass().getResource(aModel) != null);
-    }
 }

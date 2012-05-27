@@ -10,9 +10,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.FINE;
+import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.util.Level.WARNING;
 
 import java.io.BufferedInputStream;
@@ -37,17 +37,21 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.JCasUtil;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
+import edu.stanford.nlp.ling.CyclicCoreLabel;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
-import edu.stanford.nlp.parser.lexparser.ParserData;
+import edu.stanford.nlp.parser.lexparser.LexicalizedParserQuery;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.Tree;
-import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 
 /**
@@ -58,9 +62,25 @@ import edu.stanford.nlp.trees.TypedDependency;
 public class StanfordParser
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_MODEL = "Model";
-	@ConfigurationParameter(name = PARAM_MODEL, mandatory = true)
-	private String classifierFileName;
+	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+	protected boolean printTagSet;
+
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	protected String language;
+
+	public static final String PARAM_VARIANT = "variant";
+	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+	protected String variant;
+
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
+
+	public static final String PARAM_MAPPING_LOCATION = "mappingLocation";
+	@ConfigurationParameter(name = PARAM_MAPPING_LOCATION, mandatory = false)
+	protected String mappingLocation;
 
 	/**
 	 * Sets whether to create or not to create dependency annotations. <br/>
@@ -78,19 +98,6 @@ public class StanfordParser
 	public static final String PARAM_CREATE_CONSTITUENT_TAGS = "createConstituentTags";
 	@ConfigurationParameter(name = PARAM_CREATE_CONSTITUENT_TAGS, mandatory = true, defaultValue = "true")
 	private boolean createConstituentTags;
-
-//	public static final String PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN = "createDependencyAnnotationOnToken";
-//	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_ANNOTATION_ON_TOKEN, mandatory = true, defaultValue = "true")
-//	private boolean createDependencyAnnotationOnToken;
-
-	/**
-	 * Defines the TreebankLanguagePack that the parser should use.<br/>
-	 * The right setting depends on the model you are using. It usually does not have to be changed.<br/>
-	 * Default: {@code edu.stanford.nlp.trees.PennTreebankLanguagePack}
-	 */
-	public static final String PARAM_LANGUAGE_PACK = "TreebankLanguagePack";
-	@ConfigurationParameter(name = PARAM_LANGUAGE_PACK, mandatory = true, defaultValue = "edu.stanford.nlp.trees.PennTreebankLanguagePack")
-	private String tlpName;
 
 	/**
 	 * If this paramter is set to true, each sentence is annotated with a
@@ -146,7 +153,6 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_CREATE_LEMMAS, mandatory = false)
 	private Boolean paramCreateLemmas;
 
-	private LexicalizedParser lexicalizedParser;
 	private GrammaticalStructureFactory gsf;
 
 	// distinction between createLemmas & paramCreateLemmas necessary
@@ -154,7 +160,8 @@ public class StanfordParser
 	// (correct default behavior for each CAS)
 	private Boolean createLemmas;
 
-	private boolean warnedAboutDependencies = false;
+	private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
+	private MappingProvider posMappingProvider;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -168,10 +175,6 @@ public class StanfordParser
 			createDependencyTags = true;
 		}
 
-//		if (createDependencyAnnotationOnToken) {
-//			createDependencyTags = true;
-//		}
-
 		//Check if we want to create Lemmas or POS tags while Consituent tags
 		//are disabled. In this case, we have to switch on constituent tagging
 		if (!createConstituentTags && ((createLemmas!=null&&createLemmas) || createPosTags)) {
@@ -181,32 +184,81 @@ public class StanfordParser
 			createConstituentTags = true;
 		}
 
-		warnedAboutDependencies = false;
-	}
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-tagger.map");
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 
-	protected LexicalizedParser getParser()
-		throws IOException
-	{
-		if (lexicalizedParser == null) {
-			URL url = resolveLocation(classifierFileName, this, getContext());
-			lexicalizedParser = new LexicalizedParser(getParserDataFromSerializedFile(url));
-			//lexicalizedParser.setOptionFlags("-maxLength", String.valueOf(160));
+		modelProvider = new CasConfigurableProviderBase<LexicalizedParser>() {
+			{
+				setDefault(VERSION, "20120522");
+				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+				setDefault(ARTIFACT_ID,
+						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-${language}-${variant}");
+				
+				setDefaultVariantsLocation(
+						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-default-variants.map");
+				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
+						"parser-${language}-${variant}.ser.gz");
+				
+				setOverride(LOCATION, modelLocation);
+				setOverride(LANGUAGE, language);
+				setOverride(VARIANT, variant);
+			}
+			
+			@Override
+			protected LexicalizedParser produceResource(URL aUrl) throws IOException
+			{
+				getContext().getLogger().log(Level.INFO,
+						"Loading parser from serialized file " + aUrl + " ...");
+				ObjectInputStream in;
+				InputStream is = null;
+				try {
+					is = aUrl.openStream();
 
-			try {
-				TreebankLanguagePack tlp = (TreebankLanguagePack) Class.forName(tlpName).newInstance();
-				gsf = tlp.grammaticalStructureFactory();
+					if (aUrl.toString().endsWith(".gz")) {
+						// it's faster to do the buffering _outside_ the gzipping as
+						// here
+						in = new ObjectInputStream(new BufferedInputStream(
+								new GZIPInputStream(is)));
+					}
+					else {
+						in = new ObjectInputStream(new BufferedInputStream(is));
+					}
+					LexicalizedParser pd = (LexicalizedParser) in.readObject();
+					try {
+						gsf = pd.getTLPParams().treebankLanguagePack().grammaticalStructureFactory();
+					}
+					catch (UnsupportedOperationException e) {
+						getContext().getLogger().log(WARNING, "Current model does not seem to support " +
+								"dependencies.");
+						gsf = null;
+					}
+
+					if (printTagSet) {
+						StringBuilder sb = new StringBuilder();
+						sb.append("Model contains [").append(pd.tagIndex.size()).append("] tags: ");
+						
+						for (String tag : pd.tagIndex) {
+							sb.append(tag);
+							sb.append(" ");
+						}
+						getContext().getLogger().log(INFO, sb.toString());
+					}
+
+					in.close();
+					return pd;
+				}
+				catch (ClassNotFoundException e) {
+					throw new IOException(e);
+				}
+				finally {
+					closeQuietly(is);
+				}
 			}
-			catch (ClassNotFoundException e) {
-				throw new IOException(e);
-			}
-			catch (InstantiationException e) {
-				throw new IOException(e);
-			}
-			catch (IllegalAccessException e) {
-				throw new IOException(e);
-			}
-		}
-		return lexicalizedParser;
+		};
 	}
 
 	/**
@@ -221,6 +273,9 @@ public class StanfordParser
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
+		modelProvider.configure(aJCas.getCas());
+		posMappingProvider.configure(aJCas.getCas());
+		
 		/*
 		 * In order to work with mixed language document collections, default
 		 * behavior of lemmatization has to be set anew for each CAS.
@@ -274,10 +329,13 @@ public class StanfordParser
 			Tree parseTree;
 			try {
 				getContext().getLogger().log(FINE, tokenizedSentence.toString());
-				LexicalizedParser parser = getParser();
-				if (tokenizedSentence.size() <= 160){
-					parseTree = parser.parseTree(tokenizedSentence);
-				}else{
+				LexicalizedParser parser = modelProvider.getResource();
+				if (tokenizedSentence.size() <= 160) {
+					LexicalizedParserQuery query = parser.parserQuery();
+					query.parse(tokenizedSentence);
+					parseTree = query.getBestParse();
+				} 
+				else{
 					continue;
 				}
 				
@@ -289,6 +347,7 @@ public class StanfordParser
 			StanfordAnnotator sfAnnotator = null;
 			try {
 				sfAnnotator = new StanfordAnnotator(new TreeWithTokens(parseTree, tokens));
+				sfAnnotator.setPosMappingProvider(posMappingProvider);
 			}
 			catch (CASException e) {
 				throw new AnalysisEngineProcessException(e);
@@ -311,22 +370,11 @@ public class StanfordParser
 	protected void doCreateDependencyTags(StanfordAnnotator sfAnnotator,
 			Annotation currAnnotationToParse, Tree parseTree, List<Token> tokens)
 	{
-		if (!createDependencyTags) {
+		if (!createDependencyTags || gsf == null) {
 			return;
 		}
 
-		GrammaticalStructure gs;
-		try {
-			gs = gsf.newGrammaticalStructure(parseTree);
-		}
-		catch (Exception e) {
-			if (!warnedAboutDependencies) {
-				getContext().getLogger().log(WARNING, "Current model does not seem to support " +
-						"dependencies.");
-				warnedAboutDependencies = true;
-			}
-			return;
-		}
+		GrammaticalStructure gs = gsf.newGrammaticalStructure(parseTree);
 
 		for (TypedDependency currTypedDep : gs.typedDependencies()) {
 			int govIndex = currTypedDep.gov().index();
@@ -354,46 +402,12 @@ public class StanfordParser
 			tokenString = "-RRB-";
 		}
 
+		CyclicCoreLabel label = new CyclicCoreLabel();
+		label.setWord(tokenString);
+		label.setValue(tokenString);
+		label.setBeginPosition(aToken.getBegin());
+		label.setEndPosition(aToken.getEnd());
+
 		return new Word(tokenString, aToken.getBegin(), aToken.getEnd());
 	}
-
-	/**
-	 * Load the parser from the given location within the classpath.
-	 *
-	 * @param aUrl
-	 *            URL of the parser file.
-	 */
-	private ParserData getParserDataFromSerializedFile(URL aUrl)
-		throws IOException
-	{
-		getContext().getLogger().log(Level.INFO,
-				"Loading parser from serialized file " + aUrl + " ...");
-		ObjectInputStream in;
-		InputStream is = null;
-		try {
-			is = aUrl.openStream();
-
-			if (aUrl.toString().endsWith(".gz")) {
-				// it's faster to do the buffering _outside_ the gzipping as
-				// here
-				in = new ObjectInputStream(new BufferedInputStream(
-						new GZIPInputStream(is)));
-			}
-			else {
-				in = new ObjectInputStream(new BufferedInputStream(is));
-			}
-			ParserData pd = (ParserData) in.readObject();
-			// Numberer.setNumberers(pd.numbs); // will happen later in
-			// makeParsers()
-			in.close();
-			return pd;
-		}
-		catch (ClassNotFoundException e) {
-			throw new IOException(e);
-		}
-		finally {
-			closeQuietly(is);
-		}
-	}
-
 }

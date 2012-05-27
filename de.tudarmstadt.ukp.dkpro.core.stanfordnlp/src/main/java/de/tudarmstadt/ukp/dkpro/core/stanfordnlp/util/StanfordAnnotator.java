@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FeatureStructure;
@@ -26,9 +24,8 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.JCasUtil;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -66,7 +63,7 @@ public class StanfordAnnotator
 
 	private TreeWithTokens tokenTree = null;
 	private JCas jCas = null;
-	private Map<String, String> mapping = null;
+	private MappingProvider posMappingProvider;
 
 	public TreeWithTokens getTokenTree()
 	{
@@ -86,10 +83,13 @@ public class StanfordAnnotator
 	public void setJCas(JCas aJCas)
 	{
 		jCas = aJCas;
-		mapping = TagsetMappingFactory.getMapping(TagsetMappingFactory.TAGGER,
-				jCas.getDocumentLanguage(), O.class.getName());
 	}
-
+	
+	public void setPosMappingProvider(MappingProvider aPosMappingProvider)
+	{
+		posMappingProvider = aPosMappingProvider;
+	}
+	
 	/**
 	 * @param tokens
 	 *            the documentText of the CAS as <code>Token</code> annotations
@@ -178,7 +178,6 @@ public class StanfordAnnotator
 		// If the node is a word-level constituent node (== POS):
 		// create parent link on token and (if not turned off) create POS tag
 		else if (aNode.isPreTerminal()) {
-
 			// create POS-annotation (annotation over the token)
 			POS pos = createPOSAnnotation(span.getSource(), span.getTarget(), nodeLabelValue);
 
@@ -290,14 +289,15 @@ public class StanfordAnnotator
 	public POS createPOSAnnotation(int aBegin, int aEnd, String aPosType)
 	{
 		// get mapping for DKPro-Typesystem
-		Type type = TagsetMappingFactory.getTagType(mapping, aPosType, jCas.getTypeSystem());
+		Type type = posMappingProvider.getTagType(aPosType);
 		
 		// create instance of the desired type
-		POS constAnno = (POS) jCas.getCas().createAnnotation(type, aBegin, aEnd);
+		POS anno = (POS) jCas.getCas().createAnnotation(type, aBegin, aEnd);
 
 		// save original (unmapped) postype in feature
-		constAnno.setPosValue(aPosType);
-		return constAnno;
+		anno.setPosValue(aPosType);
+		
+		return anno;
 	}
 
 	/**
