@@ -10,20 +10,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
-import java.util.Collection;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.testing.factory.TokenBuilder;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class StanfordLemmatizerTest
 {
@@ -50,42 +48,20 @@ public class StanfordLemmatizerTest
         		new String[] { "b-" });
 	}
 
-	private JCas runTest(String aLanguage, String aVariant, String testDocument, String[] tags,
+	private void runTest(String aLanguage, String aVariant, String testDocument, String[] tags,
 			String[] lemmas)
 		throws Exception
 	{
-		AnalysisEngine posTagger = createPrimitive(StanfordPosTagger.class,
+		AnalysisEngineDescription posTagger = createPrimitiveDescription(StanfordPosTagger.class,
 				StanfordPosTagger.PARAM_VARIANT, aVariant);
 
-		AnalysisEngine lemmatizer = createPrimitive(StanfordLemmatizer.class,
+		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(StanfordLemmatizer.class,
 				StanfordLemmatizer.PARAM_DASH_BUG_WORKAROUND, false);
 
-        JCas aJCas = posTagger.newJCas();
-        aJCas.setDocumentLanguage(aLanguage);
-
-        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-        tb.buildTokens(aJCas, testDocument);
-
-        posTagger.process(aJCas);
-        lemmatizer.process(aJCas);
-
-        // test POS annotations
-        if (tags != null && lemmas != null) {
-        	checkTags(tags, lemmas, select(aJCas, Token.class));
-        }
-
-        return aJCas;
+		JCas aJCas = TestRunner.runTest(createAggregateDescription(posTagger, lemmatizer),
+				aLanguage, testDocument);
+		
+		AssertAnnotations.assertPOS(null, tags, select(aJCas, POS.class));
+		AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
     }
-
-	private void checkTags(String[] tags, String[] lemmas, Collection<Token> actual)
-	{
-		assertEquals("Number of tags " + actual.size(), lemmas.length,
-				actual.size());
-		int i = 0;
-        for (Token token : actual) {
-            assertEquals("In position "+i, tags[i], token.getPos().getPosValue());
-            assertEquals("In position "+i, lemmas[i], token.getLemma().getValue());
-            i++;
-        }
-	}
 }
