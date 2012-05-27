@@ -17,12 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.util.JCasUtil.select;
-
-import java.util.Collection;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -30,11 +26,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.uimafit.testing.factory.TokenBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpPosTaggerTest
 {
@@ -42,15 +37,15 @@ public class OpenNlpPosTaggerTest
 	public void testEnglish()
 		throws Exception
 	{
-        runTest("en", "This is a test . \n",
+        runTest("en", null, "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
 
-        runTest("en", "A neural net . \n",
+        runTest("en", null, "A neural net . \n",
         		new String[] { "DT",  "JJ",     "NN",  "." },
         		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
 
-        runTest("en", "John is purchasing oranges . \n",
+        runTest("en", null, "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
@@ -59,7 +54,7 @@ public class OpenNlpPosTaggerTest
 	public void testGerman()
 		throws Exception
     {
-        runTest("de", "Das ist ein Test .",
+        runTest("de", null, "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
 
@@ -70,57 +65,19 @@ public class OpenNlpPosTaggerTest
         runTest("de", "perceptron", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
-}
-
-	private JCas runTest(String language, String testDocument, String[] tags, String[] tagClasses)
-			throws Exception
-	{
-		return runTest(language, null, testDocument, tags, tagClasses);
-	}
-
-	private JCas runTest(String language, String variant, String testDocument, String[] tags, String[] tagClasses)
-		throws Exception
-	{
-        AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class,
-        		OpenNlpPosTagger.PARAM_VARIANT, variant);
-
-        JCas aJCas = engine.newJCas();
-        aJCas.setDocumentLanguage(language);
-
-        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
-        tb.buildTokens(aJCas, testDocument);
-
-        engine.process(aJCas);
-
-        // test POS annotations
-        if (tagClasses != null && tags != null) {
-        	checkTags(tagClasses, tags, select(aJCas, POS.class));
-        }
-
-        return aJCas;
     }
 
-	private void checkTags(String[] expectedClasses, String[] expectedTags, Collection<POS> actual)
+	private void runTest(String language, String variant, String testDocument, String[] tags,
+			String[] tagClasses)
+		throws Exception
 	{
-		String[] actualTags = new String[actual.size()];
-		String[] actualClasses = new String[actual.size()];
-		
-        int i = 0;
-        for (POS posAnnotation : actual) {
-        	actualTags[i] = posAnnotation.getPosValue();
-        	actualClasses[i] = posAnnotation.getType().getShortName();
-            i++;
-        }
-        
-        System.out.printf("Tags    - Expected: %s%n", asList(expectedTags));
-        System.out.printf("Tags    - Actual  : %s%n", asList(actualTags));
-        System.out.printf("Classes - Expected: %s%n", asList(expectedClasses));
-        System.out.printf("Classes - Actual  : %s%n", asList(actualClasses));
-        
-        assertEquals(asList(expectedTags), asList(actualTags));
-        assertEquals(asList(expectedClasses), asList(actualClasses));
-	}
+		AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class,
+				OpenNlpPosTagger.PARAM_VARIANT, variant);
 
+		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+		
+		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
+	}
 
 	@Rule
 	public TestName name = new TestName();

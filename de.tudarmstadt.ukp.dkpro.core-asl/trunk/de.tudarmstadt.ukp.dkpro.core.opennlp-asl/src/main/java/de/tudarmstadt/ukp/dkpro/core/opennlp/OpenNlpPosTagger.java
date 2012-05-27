@@ -93,6 +93,11 @@ public class OpenNlpPosTagger
 		
 		modelProvider = new CasConfigurableProviderBase<POSTagger>() {
 			{
+				setDefault(VERSION, "1.5");
+				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+				setDefault(ARTIFACT_ID,
+						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-${language}-${variant}");
+				
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
 						"tagger-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
