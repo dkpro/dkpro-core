@@ -50,34 +50,29 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<profiles>
-		<profile>
-			<id>use-proprietary-resources</id>
-			<dependencies>
-				<dependency>
-					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
-					<version>1.5</version>
-					<scope>test</scope>
-					<optional>true</optional>
-				</dependency>
-				<dependency>
-					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</artifactId>
-					<version>1.5</version>
-					<scope>test</scope>
-					<optional>true</optional>
-				</dependency>
-				<dependency>
-					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
-					<version>1.5</version>
-					<scope>test</scope>
-					<optional>true</optional>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
 </project>
