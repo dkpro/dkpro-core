@@ -19,12 +19,15 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
@@ -50,9 +53,15 @@ import org.springframework.util.PropertyPlaceholderHelper;
  */
 public abstract class ResourceObjectProviderBase<M>
 {
+	private final Log log = LogFactory.getLog(getClass());
+	
 	public static final String LANGUAGE = "language";
 	public static final String VARIANT  = "variant";
 	public static final String LOCATION = "location";
+	
+	public static final String GROUP_ID = "groupId";
+	public static final String ARTIFACT_ID = "artifactId";
+	public static final String VERSION  = "version";
 
 	private String resourceUrl;
 	private M resource;
@@ -116,6 +125,7 @@ public abstract class ResourceObjectProviderBase<M>
 	public void setDefaultVariants(Properties aDefaultVariants)
 	{
 		if (aDefaultVariants.size() == 0) {
+			log.warn("setDefaultVariants called with zero-sized variants map.");
 			defaultVariants = null;
 		}
 		else {
@@ -124,28 +134,38 @@ public abstract class ResourceObjectProviderBase<M>
 		}
 	}
 	
-	public void configure()
+	public void configure() throws IOException
 	{
+		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+		Properties props = getAggregatedProperties();
+		
+		String modelLocation = pph.replacePlaceholders(props.getProperty(LOCATION), props);
+		
 		try {
-			PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
-			Properties props = getAggregatedProperties();
-			String modelLocation = pph.replacePlaceholders(props.getProperty(LOCATION), props);
+			resourceUrl = null;
+			resource = null;
 
-			try {
-				URL url = resolveLocation(modelLocation, this, null);
-				if (!StringUtils.equals(resourceUrl, url.toString())) {
-					resourceUrl = url.toString();
-					System.out.println("Producing resource from " + url);
-					resource = produceResource(url);
-				}
-			}
-			catch (FileNotFoundException e) {
-				resourceUrl = null;
-				resource = null;
+			URL url = resolveLocation(modelLocation, this, null);
+			if (!StringUtils.equals(resourceUrl, url.toString())) {
+				log.info("Producing resource from " + url);
+				resource = produceResource(url);
+				resourceUrl = url.toString();
 			}
 		}
 		catch (IOException e) {
-			throw new IllegalStateException("Error loading model", e);
+			StringBuilder sb = new StringBuilder();
+
+			Set<String> names = props.stringPropertyNames();
+			if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID) && names.contains(VERSION)) {
+				String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
+				String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
+				String modelVersion = pph.replacePlaceholders(props.getProperty(VERSION), props);
+				sb.append(" Please make sure that ").append(modelArtifact).append(" version ")
+						.append(modelVersion).append(" is on the classpath.");
+			}
+			
+			throw new IOException("Unable to load resource [" + modelLocation + "]: "
+					+ ExceptionUtils.getRootCauseMessage(e) + sb.toString());
 		}
 	}
 

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
@@ -31,22 +32,31 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 public class MappingProvider extends CasConfigurableProviderBase<Map<String, String>>
 {
+	// private final Log log = LogFactory.getLog(getClass());
+
 	public static final String BASE_TYPE = "baseType";
 
 	private TypeSystem typeSystem;
+	private boolean notFound = false;
 	
 	@Override
 	public void configure(CAS aCas)
 	{
 		typeSystem = aCas.getTypeSystem();
 
-		super.configure(aCas);
+		try {
+			notFound = false;
+			super.configure(aCas);
+		}
+		catch (AnalysisEngineProcessException e) {
+			notFound = true;
+		}
 	}
 
 	public Type getTagType(String aTag)
 	{
 		String type;
-		if (getResource() == null) {
+		if (notFound) {
 			type = getDefault(BASE_TYPE);
 		}
 		else {
