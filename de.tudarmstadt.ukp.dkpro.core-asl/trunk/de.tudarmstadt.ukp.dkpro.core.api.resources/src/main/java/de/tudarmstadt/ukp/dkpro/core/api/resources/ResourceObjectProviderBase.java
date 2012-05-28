@@ -46,6 +46,11 @@ import org.springframework.util.PropertyPlaceholderHelper;
  * <p>
  * The {@link #LOCATION} may contain variables referring to any of the other settings, e.g.
  * <code>"${language}"</code>.
+ * <p>
+ * It is possible a different default variant needs to be used depending on the language. This
+ * can be configured by placing a properties file in the classpath and setting its location using
+ * {@link #setDefaultVariantsLocation(String)} or by using {@link #setDefaultVariants(Properties)}.
+ * The key in the properties is the language and the value is used a default variant.
  * 
  * @author Richard Eckart de Castilho
  *
@@ -55,12 +60,41 @@ public abstract class ResourceObjectProviderBase<M>
 {
 	private final Log log = LogFactory.getLog(getClass());
 	
+	/**
+	 * The language.
+	 */
 	public static final String LANGUAGE = "language";
+	
+	/**
+	 * The variant. (optional)
+	 */
 	public static final String VARIANT  = "variant";
+	
+	
+	/**
+	 * The location from which the resource should be read. Variables in the location are resolved
+	 * when {@link #configure()} is called.
+	 * 
+	 * @see ResourceUtils#resolveLocation(String, Object, org.apache.uima.UimaContext)
+	 */
 	public static final String LOCATION = "location";
 	
+	/**
+	 * The group ID of the Maven artifact containing a resource. Variables in the location are
+	 * resolved when {@link #configure()} is called. (optional)
+	 */
 	public static final String GROUP_ID = "groupId";
+	
+	/**
+	 * The artifact ID of the Maven artifact containing a resource. Variables in the location are
+	 * resolved when {@link #configure()} is called. (optional)
+	 */
 	public static final String ARTIFACT_ID = "artifactId";
+	
+	/**
+	 * The version of the Maven artifact containing a resource. Variables in the location are
+	 * resolved when {@link #configure()} is called. (optional)
+	 */
 	public static final String VERSION  = "version";
 
 	private String resourceUrl;
@@ -112,15 +146,26 @@ public abstract class ResourceObjectProviderBase<M>
 		defaults.remove(aKey);
 	}
 	
+	/**
+	 * Set the location in the classpath from where to load the language-dependent default variants
+	 * properties file. The key in the properties is the language and the value is used a default
+	 * variant.
+	 * 
+	 * @param aLocation
+	 *            a location in the form "some/package/name/tool-default-variants.properties". This
+	 *            is always a classpath location. This location may not contain variables.
+	 */
 	public void setDefaultVariantsLocation(String aLocation)
 	{
 		defaultVariantsLocation = aLocation;
 	}
 	
 	/**
-	 * Sets language-dependent default variants.
+	 * Sets language-dependent default variants. The key in the properties is the language and the
+	 * value is used a default variant.
 	 * 
 	 * @param aDefaultVariants
+	 *            the default variant per language
 	 */
 	public void setDefaultVariants(Properties aDefaultVariants)
 	{
@@ -134,6 +179,16 @@ public abstract class ResourceObjectProviderBase<M>
 		}
 	}
 	
+	/**
+	 * Configure a resource using the current configuration. The resource can be fetched then using
+	 * {@link #getResource()}.
+	 * <p>
+	 * Call this method after all configurations have been made. A already configured resource
+	 * will only be recreated if the URL from which the resource is generated has changed due to
+	 * configuration changes.
+	 * 
+	 * @throws IOException if the resource cannot be created.
+	 */
 	public void configure() throws IOException
 	{
 		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
@@ -169,11 +224,25 @@ public abstract class ResourceObjectProviderBase<M>
 		}
 	}
 
+	/**
+	 * Get the currently configured resources. Before this can be used, {@link #configure()} needs
+	 * to be called once or whenever the configuration changes. Mind that sub-classes may provide
+	 * alternative configuration methods that may need to be used instead of {@link #configure()}.
+	 * 
+	 * @return the currently configured resources.
+	 */
 	public M getResource()
 	{
 		return resource;
 	}
 
+	/**
+	 * Builds the aggregated configuration from defaults and overrides.
+	 * 
+	 * @return the aggregated effective configuration.
+	 * @throws IOException
+	 *             if the language-dependent default variants location is set but cannot be read.
+	 */
 	protected Properties getAggregatedProperties() throws IOException
 	{
 		Properties props = new Properties(defaults);
