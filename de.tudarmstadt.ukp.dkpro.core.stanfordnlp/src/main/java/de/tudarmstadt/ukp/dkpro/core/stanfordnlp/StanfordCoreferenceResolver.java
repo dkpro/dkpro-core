@@ -43,8 +43,11 @@ import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.pipeline.ParserAnnotatorUtils;
+import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
+import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.TypesafeMap.Key;
 
@@ -147,8 +150,23 @@ public class StanfordCoreferenceResolver
 			}
 			sentenceTokens.add(tokens);
 			
+			// SemanticHeadFinder (nonTerminalInfo) does not know about PRN0, so we have to replace
+			// it with PRN to avoid NPEs.
+			TreeFactory tFact = new LabeledScoredTreeFactory(CoreLabel.factory()) {
+				@Override
+				public Tree newTreeNode(String aParent, List<Tree> aChildren)
+				{
+					String parent = aParent;
+					if ("PRN0".equals(parent)) {
+						parent = "PRN";
+					}
+					Tree node = super.newTreeNode(parent, aChildren);
+					return node;
+				}
+			};
+			
 			// deep copy of the tree. These are modified inside coref!
-			Tree treeCopy = TreeUtils.createStanfordTree(root).treeSkeletonCopy();
+			Tree treeCopy = TreeUtils.createStanfordTree(root, tFact).treeSkeletonCopy();
 			trees.add(treeCopy);
 
 			// Build the sentence
@@ -157,6 +175,10 @@ public class StanfordCoreferenceResolver
 			sentence.set(TokensAnnotation.class, tokens);
 			sentence.set(RootKey.class, root);
 			sentences.add(sentence);
+			
+			// We currently do not copy over dependencies from the CAS. This is supposed to fill
+			// in the dependencies so we do not get NPEs.
+			ParserAnnotatorUtils.fillInParseAnnotations(false, sentence, treeCopy);
 			
 			// merge the new CoreLabels with the tree leaves
 			MentionExtractor.mergeLabels(treeCopy, tokens);

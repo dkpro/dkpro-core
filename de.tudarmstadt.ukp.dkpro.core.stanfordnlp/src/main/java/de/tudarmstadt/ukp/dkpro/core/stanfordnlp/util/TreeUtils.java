@@ -50,7 +50,6 @@ import edu.stanford.nlp.util.IntPair;
  */
 public class TreeUtils
 {
-
 	/**
 	 * Recursively creates an edu.stanford.nlp.trees.Tree from a ROOT annotation It also saves the
 	 * whitespaces before and after a token as <code>CoreAnnotation.BeforeAnnotation</code> and
@@ -66,7 +65,11 @@ public class TreeUtils
 	 */
 	public static Tree createStanfordTree(Annotation root)
 	{
-		TreeFactory tFact = new LabeledScoredTreeFactory(CoreLabel.factory());
+		return createStanfordTree(root, new LabeledScoredTreeFactory(CoreLabel.factory()));
+	}
+
+	public static Tree createStanfordTree(Annotation root, TreeFactory tFact)
+	{
 		JCas aJCas;
 		try {
 			aJCas = root.getCAS().getJCas();
@@ -87,7 +90,7 @@ public class TreeUtils
 			// get childNodes from child annotations
 			FSArray children = node.getChildren();
 			for (int i = 0; i < children.size(); i++) {
-				childNodes.add(createStanfordTree(node.getChildren(i)));
+				childNodes.add(createStanfordTree(node.getChildren(i), tFact));
 			}
 
 			// now create the node with its children
