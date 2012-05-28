@@ -69,6 +69,10 @@ public class AssertAnnotations
 
 	public static void assertLemma(String[] aExpected, Collection<Lemma> aActual)
 	{
+		if (aExpected == null) {
+			return;
+		}
+		
 		String[] actual = new String[aActual.size()];
 
 		int i = 0;
