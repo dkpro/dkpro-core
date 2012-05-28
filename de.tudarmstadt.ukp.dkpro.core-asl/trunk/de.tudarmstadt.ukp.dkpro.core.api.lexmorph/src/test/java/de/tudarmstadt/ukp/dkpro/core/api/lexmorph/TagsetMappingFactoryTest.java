@@ -30,6 +30,6 @@ public class TagsetMappingFactoryTest
 	public void test()
 	{
 		Map<String, String> mapping = TagsetMappingFactory.getMapping("tagger", "de", null);
-		assertEquals(57, mapping.size());
+		assertEquals(108, mapping.size());
 	}
 }
