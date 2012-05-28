@@ -80,74 +80,196 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-pcfg</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-factored</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-factored</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-factored</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-dewac_175m_600.crf</artifactId>
-			<version>20110920</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim-wsj-0-18</artifactId>
-			<version>20120522</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-dewac_175m_600.crf</artifactId>
+				<version>20110920</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-hgc_175m_600.crf</artifactId>
+				<version>20110920</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.4class.distsim.crf</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-conll.distsim.crf</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.distsim.crf</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.distsim.crf</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-factored</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-factored</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-pcfg</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-factored</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-pcfg</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-fast</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-accurate</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-dewac</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-hgc</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim-wsj-0-18</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim-wsj-0-18</artifactId>
+				<version>20120522</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-zh-default</artifactId>
+				<version>20120522</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
