@@ -47,9 +47,9 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
  * Abstract base class for all readers based on revisions.
- * 
+ *
  * @author zesch
- * 
+ *
  */
 public abstract class WikipediaRevisionReaderBase
 	extends WikipediaReaderBase
@@ -93,6 +93,7 @@ public abstract class WikipediaRevisionReaderBase
 
 		currentArticleIndex = 0;
 
+	    //TODO Use SWEBLE
 		MediaWikiParserFactory pf = new MediaWikiParserFactory();
 		pf.setTemplateParserClass(FlushTemplates.class);
 

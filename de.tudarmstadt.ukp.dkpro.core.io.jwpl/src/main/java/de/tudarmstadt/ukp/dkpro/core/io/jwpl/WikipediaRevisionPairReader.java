@@ -64,9 +64,9 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public static final String PARAM_SKIP_FIRST_N_PAIRS= "SkipFirstNPairs";
     @ConfigurationParameter(name = PARAM_SKIP_FIRST_N_PAIRS, mandatory=false)
     protected int skipFirstNPairs;
-    
+
     private Timestamp savedTimestamp;
-    
+
     private int nrOfRevisionsProcessed;
 
     @Override
@@ -117,7 +117,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
                 text1 = getText(revision1);
                 text2 = getText(revision2);
 
-                int difference = Math.abs(text1.length() - text2.length()); 
+                int difference = Math.abs(text1.length() - text2.length());
                 if (difference < minChange || difference > maxChange) {
                     text1 = "";
                     text2 = "";
@@ -139,7 +139,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             if (!timestampIter.hasNext()) {
                 savedTimestamp = null;
             }
-            
+
             nrOfRevisionsProcessed++;
         }
         catch (WikiApiException e) {
@@ -150,6 +150,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
         }
     }
 
+    //TODO Use SWEBLE
     private String getText(Revision rev) {
         String text = rev.getRevisionText();
 

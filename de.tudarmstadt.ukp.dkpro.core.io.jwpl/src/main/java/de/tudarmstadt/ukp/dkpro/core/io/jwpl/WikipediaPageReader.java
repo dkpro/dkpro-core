@@ -61,6 +61,7 @@ public class WikipediaPageReader extends WikipediaStandardReaderBase
     }
 
 
+    //TODO Use SWEBLE
     @Override
     protected String getPlainDocumentText(Page page)
     {
