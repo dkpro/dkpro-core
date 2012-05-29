@@ -347,6 +347,7 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 
 		currentArticleIndex = 0;
 
+	    //TODO Use SWEBLE
 		MediaWikiParserFactory pf = new MediaWikiParserFactory();
 		pf.setTemplateParserClass(FlushTemplates.class);
 
