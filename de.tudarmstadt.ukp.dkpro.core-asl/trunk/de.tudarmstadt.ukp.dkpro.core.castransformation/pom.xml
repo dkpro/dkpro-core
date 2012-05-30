@@ -35,11 +35,6 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.annolab</groupId>
-			<artifactId>org.annolab.core.util</artifactId>
-			<version>0.5.2</version>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
 		</dependency>

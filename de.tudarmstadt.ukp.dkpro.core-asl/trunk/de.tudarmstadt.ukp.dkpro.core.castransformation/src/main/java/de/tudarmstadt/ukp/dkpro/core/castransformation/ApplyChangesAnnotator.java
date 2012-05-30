@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.annolab.core.util.AlignedString;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIndex;
@@ -32,6 +31,7 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 
 /**
  * Applies changes annotated using a {@link SofaChangeAnnotation}.
