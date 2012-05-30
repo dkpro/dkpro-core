@@ -21,8 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import org.annolab.core.util.AlignedString;
 import org.apache.uima.cas.CAS;
+
+import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 
 /**
  * Use to smuggle the alignment state from the {@link ApplyChangesAnnotator} to the
