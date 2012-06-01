@@ -27,11 +27,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
@@ -68,8 +70,13 @@ public class ResourceUtils
 		throws IOException
 	{
 		// If the URL already points to a file, there is not really much to do.
-		if ("file".equals(aUrl.getProtocol())) {
-			return new File(aUrl.getPath());
+		if ("file".equalsIgnoreCase(aUrl.getProtocol())) {
+			try {
+				return new File(aUrl.toURI());
+			}
+			catch (URISyntaxException e) {
+				throw new IOException(e);
+			}
 		}
 
 		// Lets see if we already have a file for this URL in our cache. Maybe
@@ -78,17 +85,15 @@ public class ResourceUtils
 		File file = urlFileCache.get(aUrl.toString());
 		if (!aCache || (file == null) || !file.exists()) {
 			// Create a temporary file and try to preserve the file extension
-			String suffix = ".temp";
-			String name = new File(aUrl.getPath()).getName();
-			int suffixSep = name.indexOf(".");
-			if (suffixSep != -1) {
-				suffix = name.substring(suffixSep);
-				name = name.substring(0, suffixSep);
+			String suffix = FilenameUtils.getExtension(aUrl.getPath());
+			if (suffix.length() == 0) {
+				suffix = "temp";
 			}
+			String name = FilenameUtils.getBaseName(aUrl.getPath());
 
 			// Get a temporary file which will be deleted when the JVM shuts
 			// down.
-			file = File.createTempFile(name, suffix);
+			file = File.createTempFile(name, "."+suffix);
 			file.deleteOnExit();
 
 			// Now copy the file from the URL to the file.
