@@ -31,12 +31,17 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 /**
  * @author Richard Eckart de Castilho
@@ -45,19 +50,85 @@ import org.apache.uima.resource.ResourceAccessException;
 public class ResourceUtils
 {
 	private static Map<String, File> urlFileCache;
+	private static Map<String, File> classpathFolderCache;
 
 	static {
 		urlFileCache = new HashMap<String, File>();
+		classpathFolderCache = new HashMap<String, File>();
+		
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run()
+			{
+				if (classpathFolderCache != null) {
+					synchronized (classpathFolderCache) {
+						for (Entry<String, File> e : classpathFolderCache.entrySet()) {
+							if (e.getValue().isDirectory()) {
+								FileUtils.deleteQuietly(e.getValue());
+							}
+						}
+					}
+				}
+			}
+		});
 	}
 
 	/**
-	 * Make the given URL available as a file. A temporary file is created and
-	 * deleted upon a regular shutdown of the JVM. If the parameter {@code
-	 * aCache} is {@code true}, the temporary file is remembered in a cache and
-	 * if a file is requested for the same URL at a later time, the same file is
-	 * returned again. If the previously created file has been deleted
-	 * meanwhile, it is recreated from the URL.
-	 *
+	 * Make a given classpath location available as a folder. A temporary folder is created and
+	 * deleted upon a regular shutdown of the JVM.
+	 * 
+	 * @param aClasspathLocation
+	 *            a classpath location as used by
+	 *            {@link PathMatchingResourcePatternResolver#getResources(String)}
+	 * @param aCache
+	 *            use the cache or not.
+	 * @return
+	 * @see {@link PathMatchingResourcePatternResolver}
+	 */
+	public static File getClasspathAsFolder(String aClasspathLocation, boolean aCache)
+		throws IOException
+	{
+		synchronized (classpathFolderCache) {
+			File folder = classpathFolderCache.get(aClasspathLocation);
+
+	        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+	        Resource[] resources = resolver.getResources(aClasspathLocation);
+
+			if (!aCache || (folder == null) || !folder.exists()) {
+				folder = File.createTempFile("dkpro-package", "");
+				folder.delete();
+				FileUtils.forceMkdir(folder);
+				
+		        for (Resource resource : resources) {
+		        	InputStream is = null;
+		        	OutputStream os = null;
+		        	try {
+		        		is = resource.getInputStream();
+		        		os = new FileOutputStream(new File(folder, resource.getFilename()));
+		        		IOUtils.copyLarge(is, os);
+		        	}
+		        	finally {
+		        		IOUtils.closeQuietly(is);
+		        		IOUtils.closeQuietly(os);
+		        	}
+		        }
+		        
+		        if (aCache) {
+		        	classpathFolderCache.put(aClasspathLocation, folder);
+		        }
+			}
+			
+	        return folder;
+		}
+	}
+
+	/**
+	 * Make the given URL available as a file. A temporary file is created and deleted upon a
+	 * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
+	 * file is remembered in a cache and if a file is requested for the same URL at a later time,
+	 * the same file is returned again. If the previously created file has been deleted meanwhile,
+	 * it is recreated from the URL.
+	 * 
 	 * @param aUrl
 	 *            the URL.
 	 * @param aCache
@@ -66,11 +137,34 @@ public class ResourceUtils
 	 * @throws IOException
 	 *             if the URL cannot be accessed to (re)create the file.
 	 */
-	public static synchronized File getUrlAsFile(URL aUrl, boolean aCache)
+	public static File getUrlAsFile(URL aUrl, boolean aCache)
+		throws IOException
+	{
+		return getUrlAsFile(aUrl, aCache, false);
+	}
+
+	/**
+	 * Make the given URL available as a file. A temporary file is created and deleted upon a
+	 * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
+	 * file is remembered in a cache and if a file is requested for the same URL at a later time,
+	 * the same file is returned again. If the previously created file has been deleted meanwhile,
+	 * it is recreated from the URL.
+	 * 
+	 * @param aUrl
+	 *            the URL.
+	 * @param aCache
+	 *            use the cache or not.
+	 * @param aForceTemp
+	 *            always create a temporary file, even if the URL is already a file.
+	 * @return a file created from the given URL.
+	 * @throws IOException
+	 *             if the URL cannot be accessed to (re)create the file.
+	 */
+	public static synchronized File getUrlAsFile(URL aUrl, boolean aCache, boolean aForceTemp)
 		throws IOException
 	{
 		// If the URL already points to a file, there is not really much to do.
-		if ("file".equalsIgnoreCase(aUrl.getProtocol())) {
+		if (!aForceTemp && "file".equalsIgnoreCase(aUrl.getProtocol())) {
 			try {
 				return new File(aUrl.toURI());
 			}
@@ -79,44 +173,46 @@ public class ResourceUtils
 			}
 		}
 
-		// Lets see if we already have a file for this URL in our cache. Maybe
-		// the file has been deleted meanwhile, so we also check if the file
-		// actually still exists on disk.
-		File file = urlFileCache.get(aUrl.toString());
-		if (!aCache || (file == null) || !file.exists()) {
-			// Create a temporary file and try to preserve the file extension
-			String suffix = FilenameUtils.getExtension(aUrl.getPath());
-			if (suffix.length() == 0) {
-				suffix = "temp";
-			}
-			String name = FilenameUtils.getBaseName(aUrl.getPath());
+		synchronized (urlFileCache) {
+			// Lets see if we already have a file for this URL in our cache. Maybe
+			// the file has been deleted meanwhile, so we also check if the file
+			// actually still exists on disk.
+			File file = urlFileCache.get(aUrl.toString());
+			if (!aCache || (file == null) || !file.exists()) {
+				// Create a temporary file and try to preserve the file extension
+				String suffix = FilenameUtils.getExtension(aUrl.getPath());
+				if (suffix.length() == 0) {
+					suffix = "temp";
+				}
+				String name = FilenameUtils.getBaseName(aUrl.getPath());
 
-			// Get a temporary file which will be deleted when the JVM shuts
-			// down.
-			file = File.createTempFile(name, "."+suffix);
-			file.deleteOnExit();
+				// Get a temporary file which will be deleted when the JVM shuts
+				// down.
+				file = File.createTempFile(name, "."+suffix);
+				file.deleteOnExit();
 
-			// Now copy the file from the URL to the file.
+				// Now copy the file from the URL to the file.
 
-			InputStream is = null;
-			OutputStream os = null;
-			try {
-				is = aUrl.openStream();
-				os = new FileOutputStream(file);
-				copy(is, os);
-			}
-			finally {
-				closeQuietly(is);
-				closeQuietly(os);
+				InputStream is = null;
+				OutputStream os = null;
+				try {
+					is = aUrl.openStream();
+					os = new FileOutputStream(file);
+					copy(is, os);
+				}
+				finally {
+					closeQuietly(is);
+					closeQuietly(os);
+				}
+
+				// Remember the file
+				if (aCache) {
+					urlFileCache.put(aUrl.toString(), file);
+				}
 			}
 
-			// Remember the file
-			if (aCache) {
-				urlFileCache.put(aUrl.toString(), file);
-			}
+			return file;			
 		}
-
-		return file;
 	}
 
 
