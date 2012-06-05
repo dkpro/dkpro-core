@@ -67,6 +67,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 public class NegraExportReader
 	extends JCasCollectionReader_ImplBase
 {
+	public static enum DocumentUnit {
+		ORIGIN_ID,
+		ORIGIN_NAME,
+		SENTENCE_ID
+	}
 
 	public static final String PARAM_INPUT_FILE = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name = PARAM_INPUT_FILE, mandatory = true)
@@ -80,13 +85,30 @@ public class NegraExportReader
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
-	public static final String PARAM_POS_ENABLED = "PosEnabled";
+	public static final String PARAM_POS_ENABLED = "posEnabled";
 	@ConfigurationParameter(name = PARAM_POS_ENABLED, mandatory = true, defaultValue = "true")
 	private boolean posEnabled;
 
-	public static final String PARAM_LEMMA_ENABLED = "LemmaEnabled";
+	public static final String PARAM_LEMMA_ENABLED = "lemmaEnabled";
 	@ConfigurationParameter(name = PARAM_LEMMA_ENABLED, mandatory = true, defaultValue = "true")
 	private boolean lemmaEnabled;
+
+	/**
+	 * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
+	 * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+	 */
+	public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
+	@ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
+	private boolean generateNewIds;
+
+	/**
+	 * What indicates if a new CAS should be started. E.g., if set to
+	 * {@link DocumentUnit#ORIGIN_NAME ORIGIN_NAME}, a new CAS is generated whenever the origin name of the
+	 * current sentence differs from the origin name of the last sentence. (Default: ORIGIN_ID)
+	 */
+	public static final String PARAM_DOCUMENT_UNIT = "documentUnit";
+	@ConfigurationParameter(name = PARAM_DOCUMENT_UNIT, mandatory = true, defaultValue = "ORIGIN_ID")
+	private DocumentUnit documentUnit;
 
 	private static final int LINE_ARGUMENT_COUNT = 5;
 
@@ -118,8 +140,8 @@ public class NegraExportReader
 	private static final int BOS_FIELD_ORIGIN_ID = 4;
 
 	// ORIGIN table fields
-	private static final int DOCUMENT_ID = 0;
-	private static final int DOCUMENT_URI = 1;
+	private static final int ORIGIN_ID = 0;
+	private static final int ORIGIN_NAME = 1;
 
 	private static final String FORMAT = "#FORMAT";
 	private static final String BEGIN_OF_SENTENCE = "#BOS";
@@ -133,7 +155,7 @@ public class NegraExportReader
 	private int documentCount;
 	private int documentsTotal;
 	private BufferedReader br;
-	private Map<String, String> documentIds;
+	private Map<String, String> idxOriginName;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -141,7 +163,7 @@ public class NegraExportReader
 	{
 		super.initialize(aContext);
 		documentsTotal = 0;
-		documentIds = new HashMap<String, String>();
+		idxOriginName = new HashMap<String, String>();
 
 		try {
 			// Detect if the file is compressed
@@ -169,11 +191,15 @@ public class NegraExportReader
 		JCasBuilder casBuilder = new JCasBuilder(aJCas);
 
 		String originId = readOriginId(true);
+		String sentenceId = readSentenceHeader(BOS_FIELD_NUM, true);
+		String casId = originId2casId(originId, sentenceId);
 		
-		// Fetch the document ID. If there is none, use the origin ID as document ID
-		String documentId = documentIds.get(originId);
-		if (documentId == null) {
-			documentId = originId;
+		String documentId;
+		if (generateNewIds) {
+			documentId = String.valueOf(documentCount);
+		}
+		else {
+			documentId = casId;
 		}
 
 		// Set meta data
@@ -183,9 +209,9 @@ public class NegraExportReader
 		aJCas.setDocumentLanguage(language);
 
 		// Fill CAS
-		String lastOriginId = originId;
-		while (originId != null) {
-			if (!originId.equals(lastOriginId)) {
+		String lastCasId = casId;
+		while (casId != null) {
+			if (!casId.equals(lastCasId)) {
 				// if a new origin ID is encountered, stop this jcas creation
 				break;
 			}
@@ -196,13 +222,34 @@ public class NegraExportReader
 			// read the next sentence
 			readSentence(aJCas, casBuilder);
 
-			lastOriginId = originId;
 			originId = readOriginId(true);
+			sentenceId = readSentenceHeader(BOS_FIELD_NUM, true);
+			
+			lastCasId = casId;
+			casId = originId2casId(originId, sentenceId);
 		}
 
 		casBuilder.close();
 
 		documentCount++;
+	}
+	
+	private String originId2casId(String aOriginId, String aSentenceId)
+	{
+		switch (documentUnit) {
+		case SENTENCE_ID:
+			return aSentenceId;
+		case ORIGIN_ID:
+			return aOriginId;
+		case ORIGIN_NAME:
+			String originName = idxOriginName.get(aOriginId);
+			if (originName != null) {
+				return originName;
+			}
+			return aOriginId;
+		default:
+			throw new IllegalStateException("Unknown document unit ["+documentUnit+"]");
+		}
 	}
 
 	@Override
@@ -233,6 +280,17 @@ public class NegraExportReader
 	 */
 	private String readOriginId(boolean aPeek) throws IOException
 	{
+		return readSentenceHeader(BOS_FIELD_ORIGIN_ID, aPeek);
+	}
+
+	/**
+	 * Read the originId from the #BOS line that is expected to follow.
+	 *
+	 * @param aPeek if true, stream will not advance
+	 * @return the next origin id or null if there is none
+	 */
+	private String readSentenceHeader(int aField, boolean aPeek) throws IOException
+	{
 		if (aPeek) {
 			br.mark(16000);
 		}
@@ -243,11 +301,7 @@ public class NegraExportReader
 				if (aPeek) {
 					br.reset();
 				}
-				String nextOriginId = parts[BOS_FIELD_ORIGIN_ID];
-
-//				System.out.printf("Next origin id [%s] (peek: %b)%n", nextOriginId, aPeek);
-
-				return nextOriginId;
+				return parts[aField];
 			}
 			line = br.readLine();
 		}
@@ -348,7 +402,7 @@ public class NegraExportReader
 				throw new IOException("Unexpected end of file");
 			}
 			String[] parts = line.split("\\s+");
-			documentIds.put(parts[DOCUMENT_ID], parts[DOCUMENT_URI]);
+			idxOriginName.put(parts[ORIGIN_ID], parts[ORIGIN_NAME]);
 			documentsTotal++;
 			line = br.readLine();
 		}
