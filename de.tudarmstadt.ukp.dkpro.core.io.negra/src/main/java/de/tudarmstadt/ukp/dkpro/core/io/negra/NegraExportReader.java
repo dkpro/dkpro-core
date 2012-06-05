@@ -104,10 +104,10 @@ public class NegraExportReader
 	/**
 	 * What indicates if a new CAS should be started. E.g., if set to
 	 * {@link DocumentUnit#ORIGIN_NAME ORIGIN_NAME}, a new CAS is generated whenever the origin name of the
-	 * current sentence differs from the origin name of the last sentence. (Default: ORIGIN_ID)
+	 * current sentence differs from the origin name of the last sentence. (Default: ORIGIN_NAME)
 	 */
 	public static final String PARAM_DOCUMENT_UNIT = "documentUnit";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_UNIT, mandatory = true, defaultValue = "ORIGIN_ID")
+	@ConfigurationParameter(name = PARAM_DOCUMENT_UNIT, mandatory = true, defaultValue = "ORIGIN_NAME")
 	private DocumentUnit documentUnit;
 
 	private static final int LINE_ARGUMENT_COUNT = 5;
