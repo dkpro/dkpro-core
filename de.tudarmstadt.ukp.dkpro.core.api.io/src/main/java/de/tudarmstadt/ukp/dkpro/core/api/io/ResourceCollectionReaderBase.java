@@ -163,21 +163,15 @@ public abstract class ResourceCollectionReaderBase
 			if (path == null) {
 				ListIterator<String> i = includes.listIterator();
 				while (i.hasNext()) {
-					String p = i.next();
-					if (!p.contains(":")) {
-						i.set("file:"+p);
-					}
+					i.set(locationToUrl(i.next()));
 				}
 				i = excludes.listIterator();
 				while (i.hasNext()) {
-					String p = i.next();
-					if (!p.contains(":")) {
-						i.set("file:"+p);
-					}
+					i.set(locationToUrl(i.next()));
 				}
 			}
 			else if (!path.contains(":")) {
-				path = "file:"+path;
+				path = locationToUrl(path);
 			}
 
 			resources = scan(path, includes, excludes);
@@ -190,6 +184,36 @@ public abstract class ResourceCollectionReaderBase
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
 		}
+	}
+	
+	
+	/**
+	 * Make sure the given location is an URL. E.g. adds "file:" if necessary.
+	 * 
+	 * @param aLocation the location.
+	 * @return an URL.
+	 */
+	private String locationToUrl(String aLocation)
+	{
+		if (isUnmarkedFileLocation(aLocation)) {
+			return "file:"+aLocation;
+		}
+		else {
+			return aLocation;
+		}
+	}
+	
+	/**
+	 * Checks if a location refers to a local file but does not start with "file:"
+	 * 
+	 * @param aLocation the location.
+	 * @return if "file:" needs to be added to make the location explicit.
+	 */
+	private boolean isUnmarkedFileLocation(String aLocation)
+	{
+		// On Windows systems, an absolute path contains a colon at offset 1. If the offset is
+		// 2 or greater, the colon likely is a scheme separator, not a drive letter separator.
+		return aLocation.indexOf(':') < 2;
 	}
 
 	protected Collection<Resource> getResources()
