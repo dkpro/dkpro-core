@@ -32,22 +32,19 @@ import java.util.Set;
  * want to know how frequently the word "of" appears after the word "because", then
  * {@link ConditionalFrequencyDistribution} can be used as follows:
  * 
- * <p>
- * <blockquote>
- * 
- * <pre>
- * {
- *     &#064;code
- *     ConditionalFrequencyDistribution&lt;String, String&gt; cfd = new ConditionalFrequencyDistribution&lt;String, String&gt;();
- * 
- *     cfd.addSample(&quot;because&quot;, &quot;in&quot;);
- *     cfd.addSample(&quot;because&quot;, &quot;of&quot;);
- *     cfd.addSample(&quot;despite&quot;, &quot;in&quot;);
- *     cfd.addSample(&quot;because&quot;, &quot;of&quot;);
- * 
- *     System.out.println(cfd.getCount(&quot;despite&quot;, &quot;of&quot;));
+ * <p><blockquote><pre>
+ * {@code
+ * ConditionalFrequencyDistribution<String, String> cfd =
+ *     new ConditionalFrequencyDistribution<String, String>();
+ *
+ * cfd.addSample("because", "in");
+ * cfd.addSample("because", "of");
+ * cfd.addSample("despite", "in");
+ * cfd.addSample("because", "of");
+ *
+ * System.out.println(cfd.getCount("despite", "of"));
  * }
- * </pre>
+ * </pre></blockquote>
  * 
  * </blockquote> The last call to {@link ConditionalFrequencyDistribution#getCount} will yield 2,
  * because given the <code>condition</code> that the first word in a two-word sequence is "because",

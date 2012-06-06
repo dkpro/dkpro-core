@@ -29,21 +29,18 @@ import bak.pcj.map.ObjectKeyLongOpenHashMap;
  * <p>
  * Suppose we want to record the number of occurrences of each word in a sentence, then this class
  * can be used as follows:
- * <p>
- * <blockquote>
  * 
- * <pre>
- * {
- *     &#064;code
- *     FrequencyDistribution&lt;String&gt; fd = new FrequencyDistribution&lt;String&gt;();
- *     for (String word : &quot;foo bar baz foo&quot;.split(&quot; &quot;)) {
- *         fd.inc(word);
- *     }
- *     System.out.println(fd.getCount(&quot;foo&quot;));
+ * <p><blockquote><pre>
+ * {@code
+ * FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+ * for (String word : "foo bar baz foo".split(" ")) {
+ *     fd.inc(word);
  * }
- * </pre>
+ * System.out.println(fd.getCount("foo"));
+ * }
+ * </pre></blockquote>
  * 
- * </blockquote> The last call to {@link FrequencyDistribution#getCount} will yield 2, because the
+ * The last call to {@link FrequencyDistribution#getCount} will yield 2, because the
  * word "foo" has appeared twice in the given sequence of words.
  * 
  * <p>
