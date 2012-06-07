@@ -87,6 +87,23 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
