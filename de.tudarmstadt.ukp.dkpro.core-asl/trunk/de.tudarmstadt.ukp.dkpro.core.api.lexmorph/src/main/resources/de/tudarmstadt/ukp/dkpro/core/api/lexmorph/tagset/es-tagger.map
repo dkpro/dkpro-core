@@ -76,3 +76,4 @@
 # VSfin	Verb ser. Finite
 # VSger	Verb ser. Gerund
 # VSinf	Verb ser. Infinitive
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS

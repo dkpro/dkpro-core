@@ -39,3 +39,4 @@
 # VER:pres	verb present
 # VER:refl:infi	verb reflexive infinitive
 # VER:remo	verb simple past
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
