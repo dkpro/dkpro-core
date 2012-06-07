@@ -67,12 +67,22 @@ public class OpenNlpPosTaggerTest
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
 
+	@Test
+	public void testSpanish()
+		throws Exception
+    {
+        runTest("es", "maxent", "Esta es una prueba .",
+        		new String[] { "PD", "VSI", "DI", "NC", "Fp"    },
+        		new String[] { "POS", "POS", "POS", "POS", "POS" });
+    }
+
 	private void runTest(String language, String variant, String testDocument, String[] tags,
 			String[] tagClasses)
 		throws Exception
 	{
 		AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class,
-				OpenNlpPosTagger.PARAM_VARIANT, variant);
+				OpenNlpPosTagger.PARAM_VARIANT, variant,
+				OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
 		

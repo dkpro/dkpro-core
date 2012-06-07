@@ -32,64 +32,104 @@
 
 		<mkdir dir="target/download/tagger"/>
 		
+		<!-- Models from http://opennlp.sourceforge.net/models-1.5 -->
+		
     	<get src="http://opennlp.sourceforge.net/models-1.5/da-pos-maxent.bin" dest="target/download/tagger/da-pos-maxent.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/da-pos-maxent.bin" md5="5194e5c81bde38b7df95a1550e3f4998"
-    		tool="tagger" language="da" variant="maxent" extension="bin" version="1.5"/>		
+    		tool="tagger" language="da" variant="maxent" extension="bin" version="1.5"/>
+		<deltree dir="target/model-staging"/>
 		
     	<get src="http://opennlp.sourceforge.net/models-1.5/da-pos-perceptron.bin" dest="target/download/tagger/da-pos-perceptron.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/da-pos-perceptron.bin" md5="595322af76e464a647b745b463847008"
     		tool="tagger" language="da" variant="perceptron" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 		
     	<get src="http://opennlp.sourceforge.net/models-1.5/de-pos-maxent.bin" dest="target/download/tagger/de-pos-maxent.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/de-pos-maxent.bin" md5="c55c14eeb598885170678293745aea15"
     		tool="tagger" language="de" variant="maxent" extension="bin" version="1.5"/>		
+    			<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/de-pos-perceptron.bin" dest="target/download/tagger/de-pos-perceptron.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/de-pos-perceptron.bin" md5="568ca555cbe29b5e0e6ba24cc7da573a"
     		tool="tagger" language="de" variant="perceptron" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin" dest="target/download/tagger/en-pos-maxent.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/en-pos-maxent.bin" md5="db2cd70395b9e2e4c6b9957015a10607"
     		tool="tagger" language="en" variant="maxent" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/en-pos-perceptron.bin" dest="target/download/tagger/en-pos-perceptron.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/en-pos-perceptron.bin" md5="d25e11a2da118803aefa131b00c590bf"
     		tool="tagger" language="en" variant="perceptron" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/nl-pos-maxent.bin" dest="target/download/tagger/nl-pos-maxent.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/nl-pos-maxent.bin" md5="4f61da5d7bef54ff98d3605fcafa5a70"
     		tool="tagger" language="nl" variant="maxent" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/nl-pos-perceptron.bin" dest="target/download/tagger/nl-pos-perceptron.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/nl-pos-perceptron.bin" md5="d81d2e3745ad194fa2e40e9264175f4f"
     		tool="tagger" language="nl" variant="perceptron" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/pt-pos-maxent.bin" dest="target/download/tagger/pt-pos-maxent.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/pt-pos-maxent.bin" md5="517c428be748b79ec2d0ad084f5329b1"
     		tool="tagger" language="pt" variant="maxent" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/pt-pos-perceptron.bin" dest="target/download/tagger/pt-pos-perceptron.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/pt-pos-perceptron.bin" md5="d53490bda3717523e16250fc7328ff86"
     		tool="tagger" language="pt" variant="perceptron" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 
     	<get src="http://opennlp.sourceforge.net/models-1.5/se-pos-maxent.bin" dest="target/download/tagger/se-pos-maxent.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/se-pos-maxent.bin" md5="8cd96306df690f24ced060f0071e506e"
     		tool="tagger" language="se" variant="maxent" extension="bin" version="1.5"/>		
+		<deltree dir="target/model-staging"/>
 		
     	<get src="http://opennlp.sourceforge.net/models-1.5/se-pos-perceptron.bin" dest="target/download/tagger/se-pos-perceptron.bin" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
     		file="target/download/tagger/se-pos-perceptron.bin" md5="d38f7eccf72033e3c8b1703396db72ec"
     		tool="tagger" language="se" variant="perceptron" extension="bin" version="1.5"/>		
-	</target>
+		<deltree dir="target/model-staging"/>
+
+		<!-- Models from https://github.com/utcompling/OpenNLP-Models -->
+		
+    	<get src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-es.bin" dest="target/download/tagger/es-pos-maxent.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/es-pos-maxent.bin" md5="39ecc4c56e037b3dde859cb6d90b4b6a"
+    		tool="tagger" language="es" variant="maxent" extension="bin" version="1.5"/>	
+		<deltree dir="target/model-staging"/>
+
+    	<get src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-universal.bin" dest="target/download/tagger/es-pos-maxent-universal.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/es-pos-maxent-universal.bin" md5="967160032df49afc160d471bc41c7daa"
+    		tool="tagger" language="es" variant="maxent-universal" extension="bin" version="1.5"/>	
+		<deltree dir="target/model-staging"/>
+
+    	<get src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-es.bin" dest="target/download/tagger/es-pos-perceptron.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/es-pos-perceptron.bin" md5="5930da28536eed424fd0e478b1b52143"
+    		tool="tagger" language="es" variant="perceptron" extension="bin" version="1.5"/>	
+		<deltree dir="target/model-staging"/>
+
+    	<get src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-universal.bin" dest="target/download/tagger/es-pos-perceptron-universal.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/tagger/es-pos-perceptron-universal.bin" md5="b4ac9cc413f455649e78db8f0f0c67fa"
+    		tool="tagger" language="es" variant="perceptron-universal" extension="bin" version="1.5"/>	
+		<deltree dir="target/model-staging"/>
+</target>
 </project>

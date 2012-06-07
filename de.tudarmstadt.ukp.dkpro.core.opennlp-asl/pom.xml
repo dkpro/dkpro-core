@@ -74,5 +74,11 @@
 			<version>1.5</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-maxent</artifactId>
+			<version>1.5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>
