@@ -29,8 +29,13 @@ import java.util.Properties;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
+/**
+ * @deprecated migrate to {@link MappingProvider} instead.
+ */
+@Deprecated
 public class TagsetMappingFactory
 {
 	public static final String TAGGER = "tagger";
