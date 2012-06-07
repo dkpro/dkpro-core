@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
+import static org.uimafit.util.JCasUtil.toText;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,11 +31,27 @@ import org.apache.commons.lang.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 public class AssertAnnotations
 {
+	public static void assertToken(String[] aExpected, Collection<Token> aActual)
+	{
+		if (aExpected == null) {
+			return;
+		}
+		
+		List<String> expected = asList(aExpected);
+		List<String> actual = toText(aActual);
+		
+		System.out.printf("%-20s - Expected: %s%n", "Tokens", asCopyableString(expected));
+		System.out.printf("%-20s - Actual  : %s%n", "Tokens", asCopyableString(actual));
+
+		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+	}
+	
 	public static void assertPOS(String[] aExpectedMapped, String[] aExpectedOriginal,
 			Collection<POS> actual)
 	{
@@ -72,19 +89,18 @@ public class AssertAnnotations
 		if (aExpected == null) {
 			return;
 		}
-		
-		String[] actual = new String[aActual.size()];
 
-		int i = 0;
+		List<String> expected = asList(aExpected);
+		List<String> actual = new ArrayList<String>();
+
 		for (Lemma a : aActual) {
-			actual[i] = a.getValue();
-			i++;
+			actual.add(a.getValue());
 		}
 
-		System.out.printf("%-20s - Expected: %s%n", "Lemmas", asList(aExpected));
-		System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asList(actual));
+		System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
+		System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
 
-		assertEquals(asList(aExpected), asList(actual));
+		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
 	}
 
 	public static void assertConstituents(String[] aExpectedMapped, String[] aExpectedOriginal,
