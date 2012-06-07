@@ -70,7 +70,13 @@ class TreeTaggerPosLemmaTT4JTest
         		new String[] { "John", "be",  "purchase", "orange", "."    },
         		new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
-    }
+
+        // TT4J per default runs TreeTagger with the -sgml option, so XML tags are not tagged
+        runTest("en", "My homepage is <url> http://null.dummy </url> .",
+        		new String[] { "my", "homepage", "be", "http://null.dummy", "." },
+        		new String[] { "PP$", "NN", "VBZ", "JJ", "SENT" },
+        		new String[] { "PR", "NN", "V", "ADJ", "PUNC" });
+	}
 
 	@Test
 	public void treeTaggerAnnotatorGermanTest()
