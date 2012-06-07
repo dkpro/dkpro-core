@@ -37,3 +37,4 @@
 # VPP	   past participle
 # VPR	   present participle
 # VS	   subjunctive verb form
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
