@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 import static org.uimafit.util.JCasUtil.toText;
@@ -25,6 +26,8 @@ import static org.uimafit.util.JCasUtil.toText;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import opennlp.tools.postag.POSModel;
@@ -42,8 +45,8 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -74,6 +77,10 @@ public class OpenNlpPosTagger
 	public static final String PARAM_INTERN_STRINGS = "InternStrings";
 	@ConfigurationParameter(name = PARAM_INTERN_STRINGS, mandatory = false, defaultValue = "true")
 	private boolean internStrings;
+
+	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+	protected boolean printTagSet;
 
 	private CasConfigurableProviderBase<POSTagger> modelProvider;
 	private MappingProvider mappingProvider;
@@ -114,6 +121,24 @@ public class OpenNlpPosTagger
 				try {
 					is = aUrl.openStream();
 					POSModel model = new POSModel(is);
+
+					if (printTagSet) {
+						List<String> tags = new ArrayList<String>();
+						for (int i = 0; i < model.getPosModel().getNumOutcomes(); i++) {
+							tags.add(model.getPosModel().getOutcome(i));
+						}
+						Collections.sort(tags);
+						
+						StringBuilder sb = new StringBuilder();
+						sb.append("Model contains [").append(tags.size()).append("] tags: ");
+						
+						for (String tag : tags) {
+							sb.append(tag);
+							sb.append(" ");
+						}
+						getContext().getLogger().log(INFO, sb.toString());
+					}
+
 					return new POSTaggerME(model);
 				}
 				finally {
