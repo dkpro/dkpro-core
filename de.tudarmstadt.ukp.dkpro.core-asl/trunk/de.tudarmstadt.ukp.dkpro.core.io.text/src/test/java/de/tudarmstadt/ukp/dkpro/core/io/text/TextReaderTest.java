@@ -24,6 +24,7 @@ import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader
 import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.uimafit.util.JCasUtil.select;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,6 +81,40 @@ public class TextReaderTest
 		}
 	}
 
+	@Test
+	public void fileSystemReaderAbsolutePathTest()
+		throws Exception
+	{
+		CollectionReader reader = createCollectionReader(TextReader.class,
+				createTypeSystemDescription(),
+				ResourceCollectionReaderBase.PARAM_PATH, new File("src/test/resources/texts").getAbsolutePath(),
+				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
+
+        AnalysisEngine writer = createPrimitive(XWriter.class,
+        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
+
+		for (JCas jcas : new JCasIterable(reader)) {
+			DocumentMetaData md = DocumentMetaData.get(jcas);
+            dumpMetaData(md);
+
+            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
+
+            assertTrue(FILES.contains(md.getDocumentId()));
+
+			assertTrue(
+					!FILE1.equals(md.getDocumentId()) || (
+							"This is a test.".equals(jcas.getDocumentText()) &&
+							15 == md.getEnd()));
+
+			assertTrue(
+					!FILE2.equals(md.getDocumentId())
+					|| "This is a second test.".equals(jcas.getDocumentText()));
+
+            writer.process(jcas);
+		}
+	}
+	
 	@Test
 	public void fileSystemReaderTest3()
 		throws Exception
