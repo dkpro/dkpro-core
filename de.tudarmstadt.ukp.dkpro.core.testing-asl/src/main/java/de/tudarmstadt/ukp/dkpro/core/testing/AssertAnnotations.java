@@ -31,6 +31,7 @@ import org.apache.commons.lang.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -48,6 +49,21 @@ public class AssertAnnotations
 		
 		System.out.printf("%-20s - Expected: %s%n", "Tokens", asCopyableString(expected));
 		System.out.printf("%-20s - Actual  : %s%n", "Tokens", asCopyableString(actual));
+
+		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+	}
+	
+	public static void assertSentence(String[] aExpected, Collection<Sentence> aActual)
+	{
+		if (aExpected == null) {
+			return;
+		}
+		
+		List<String> expected = asList(aExpected);
+		List<String> actual = toText(aActual);
+		
+		System.out.printf("%-20s - Expected: %s%n", "Sentences", asCopyableString(expected));
+		System.out.printf("%-20s - Actual  : %s%n", "Sentences", asCopyableString(actual));
 
 		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
 	}
