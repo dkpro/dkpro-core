@@ -10,59 +10,21 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterTestBase;
+import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public
 class StanfordSegmenterTest
-extends SegmenterTestBase
 {
-	@Override
-	public AnalysisEngine getAnalysisEngine(boolean tokens, boolean sentences)
-		throws ResourceInitializationException
-	{
-		return createPrimitive(StanfordSegmenter.class,
-				SegmenterBase.PARAM_CREATE_TOKENS, tokens,
-				SegmenterBase.PARAM_CREATE_SENTENCES, sentences);
-	}
-
-	@Override
-	protected boolean accept(String aId)
-	{
-		return !aId.startsWith("zh") && !aId.startsWith("ar")  && !"en.9".equals(aId);
-	}
-
 	@Test
-	public void testGerman()
-		throws Exception
+	public void run() throws Throwable
 	{
-		test(testDe);
-	}
-
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
-		test(testEn);
-	}
-
-	@Test
-	public void testArabic()
-		throws Exception
-	{
-		test(testAr);
-	}
-
-	@Test
-	public void testChinese()
-		throws Exception
-	{
-		test(testZh);
+		AnalysisEngineDescription aed = createPrimitiveDescription(StanfordSegmenter.class);
+		
+		SegmenterHarness.run(aed, "en.9", "ar.1", "zh.1", "zh.2");
 	}
 }
