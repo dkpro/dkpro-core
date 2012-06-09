@@ -28,9 +28,9 @@
 	<description>http://www.danielnaber.de/jwordsplitter/</description>
 	<dependencies>
 		<dependency>
-			<groupId>de.abelssoft.jwordsplitter</groupId>
-			<artifactId>de.abelssoft.jwordsplitter</artifactId>
-			<version>3.1</version>
+			<groupId>de.abelssoft</groupId>
+			<artifactId>jwordsplitter</artifactId>
+			<version>3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.uimafit</groupId>
