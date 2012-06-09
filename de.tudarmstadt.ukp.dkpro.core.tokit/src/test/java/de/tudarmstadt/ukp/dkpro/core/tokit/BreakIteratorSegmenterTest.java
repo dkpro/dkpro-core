@@ -17,63 +17,22 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.resource.ResourceInitializationException;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterTestBase;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public
 class BreakIteratorSegmenterTest
-extends SegmenterTestBase
 {
-	@Override
-	public AnalysisEngine getAnalysisEngine(boolean tokens, boolean sentences)
-		throws ResourceInitializationException
-	{
-		return createPrimitive(BreakIteratorSegmenter.class,
-				SegmenterBase.PARAM_CREATE_TOKENS, tokens,
-				SegmenterBase.PARAM_CREATE_SENTENCES, sentences,
-				BreakIteratorSegmenter.PARAM_SPLIT_AT_APOSTROPHE, true);
-	}
-
-	@Override
-	protected boolean accept(String aId)
-	{
-		return !"de.1".equals(aId) && !"en.1".equals(aId)
-				&& !"en.2".equals(aId) && !"en.6".equals(aId) && !"en.9".equals(aId)
-				&& !"en.7".equals(aId) && !aId.startsWith("zh")
-				&& !aId.startsWith("ar");
-	}
-
 	@Test
-	public void testGerman()
-		throws Exception
+	public void run() throws Throwable
 	{
-		test(testDe);
-	}
-
-	@Test
-	public void testEnglish()
-		throws Exception
-	{
-		test(testEn);
-	}
-
-	@Test
-	public void testArabic()
-		throws Exception
-	{
-		test(testAr);
-	}
-
-	@Test
-	public void testChinese()
-		throws Exception
-	{
-		test(testZh);
+		AnalysisEngineDescription aed = createPrimitiveDescription(BreakIteratorSegmenter.class);
+		
+		SegmenterHarness.run(aed, "de.1", "en.1", "en.2", "en.3", "en.6", "en.7", "en.9", "ar.1",
+				"zh.1", "zh.2");
 	}
 }
