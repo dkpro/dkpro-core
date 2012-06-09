@@ -60,6 +60,21 @@
 			<version>1.4.1</version>
 		</dependency>
 		<dependency>
+			<groupId>de.abelssoft</groupId>
+			<artifactId>jwordsplitter</artifactId>
+			<version>3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.com.cjf</groupId>
+			<artifactId>cjftransform</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ictclas4j</groupId>
+			<artifactId>ictclas4j</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
 		</dependency>
@@ -77,11 +92,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.abelssoft</groupId>
-			<artifactId>jwordsplitter</artifactId>
-			<version>3.3</version>
 		</dependency>
 	</dependencies>
 </project>
