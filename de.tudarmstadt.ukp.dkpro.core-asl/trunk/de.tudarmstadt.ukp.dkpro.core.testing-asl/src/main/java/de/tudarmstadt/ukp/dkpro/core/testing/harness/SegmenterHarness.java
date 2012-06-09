@@ -27,6 +27,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assert;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -78,7 +79,7 @@ public final class SegmenterHarness
 			new String[] { ",", ",", "," },
 			new String[] { ", , ," }),
 		new TestData("en.9", "en", "How to tokenize smileys? This is a good example. >^,,^< :0 3:[",
-			new String[] { "How", "to", "tokenize", "smileys?", "This", "is", "a", "good", "example.", ">^,,^<", ":0", "3:[" },
+			new String[] { "How", "to", "tokenize", "smileys", "?", "This", "is", "a", "good", "example.", ">^,,^<", ":0", "3:[" },
 			new String[] { "How to tokenize smileys?", "This is a good example.", ">^,,^< :0 3:[" }),
 
 	// Sombody who can read arabic, please check this
@@ -128,14 +129,18 @@ public final class SegmenterHarness
 				jCas.setDocumentLanguage(td.language);
 				jCas.setDocumentText(td.text);
 				
+				boolean failed = false;
+				
 				try {
 					ae.process(jCas);
 					
 					AssertAnnotations.assertSentence(td.sentences, select(jCas, Sentence.class));
 					AssertAnnotations.assertToken(td.tokens, select(jCas, Token.class));
+
 					results.add(String.format("%s OK", td.id));
 				}
 				catch (Throwable e) {
+					failed = true;
 					if (!ArrayUtils.contains(aIgnoreIds, td.id)) {
 						results.add(String.format("%s FAIL", td.id));
 						throw e;
@@ -143,6 +148,11 @@ public final class SegmenterHarness
 					else {
 						results.add(String.format("%s FAIL - Known, ignored", td.id));
 					}
+				}
+				
+				if (!failed && ArrayUtils.contains(aIgnoreIds, td.id)) {
+					results.add(String.format("%s FAIL", td.id));
+					Assert.fail(td.id + " passed but was expected to fail");
 				}
 			}
 		}
