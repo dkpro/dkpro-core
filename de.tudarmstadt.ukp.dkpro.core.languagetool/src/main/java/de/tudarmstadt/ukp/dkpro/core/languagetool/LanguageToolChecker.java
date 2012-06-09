@@ -28,9 +28,9 @@ import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.danielnaber.languagetool.JLanguageTool;
-import de.danielnaber.languagetool.Language;
-import de.danielnaber.languagetool.rules.RuleMatch;
+import org.languagetool.JLanguageTool;
+import org.languagetool.Language;
+import org.languagetool.rules.RuleMatch;
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
