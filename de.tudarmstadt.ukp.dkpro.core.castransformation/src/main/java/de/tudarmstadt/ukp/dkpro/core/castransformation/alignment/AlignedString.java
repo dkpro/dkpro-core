@@ -44,7 +44,8 @@ implements Iterable<AlignedString.DataSegment>
 	protected final AnchorSegment _first;
 	protected final AnchorSegment _last;
 
-	private boolean _dirty = true;
+	private boolean _stringDirty = true;
+	private boolean _startDirty = true;
 	private String _content = null;
 
 	{
@@ -100,9 +101,15 @@ implements Iterable<AlignedString.DataSegment>
 	public
 	void fireChange()
 	{
-		_dirty = true;
+		if (!_startDirty) {
+			System.out.println("startDirty true");
+		}
+		
+		_stringDirty = true;
+		_startDirty = true;
 		for (final AlignedString a : _changeListeners) {
-			a._dirty = true;
+			a._stringDirty = true;
+			a._startDirty = true;
 		}
 	}
 
@@ -471,16 +478,36 @@ implements Iterable<AlignedString.DataSegment>
 	public
 	String get()
 	{
-		if (_dirty) {
+		if (_stringDirty) {
 			// FIXME: inefficient!
 			final StringBuilder sb = new StringBuilder();
 			for (final DataSegment s : this) {
 				sb.append(s.get());
 			}
 			_content = sb.toString();
-			_dirty = false;
+			_stringDirty = false;
 		}
 		return _content;
+	}
+	
+	public
+	void updateCaches() {
+		if (_underlying != null) {
+			_underlying.updateCaches();
+		}
+		
+		get();
+		if (_startDirty) {
+			int length = 0;
+			AbstractDataSegment seg = _first;
+			while (seg != null) {
+				seg._cachedStart = length;
+				length += seg.length();
+				seg = seg._next;
+			}
+			_startDirty = false;
+			System.out.println("startDirty false");
+		}
 	}
 
 	/**
@@ -853,6 +880,7 @@ implements Iterable<AlignedString.DataSegment>
 	{
 		protected AbstractDataSegment _prev;
 		protected AbstractDataSegment _next;
+		protected int _cachedStart = -1;
 
 		public
 		AbstractDataSegment(
@@ -899,14 +927,19 @@ implements Iterable<AlignedString.DataSegment>
 		public
 		int getStart()
 		{
-			int pos = 0;
-			AbstractDataSegment seg = this._prev;
-			while (seg != null) {
-				pos += seg.length();
-				seg = seg._prev;
+			if (_startDirty || _cachedStart == -1) {
+				int pos = 0;
+				AbstractDataSegment seg = this._prev;
+				while (seg != null) {
+					pos += seg.length();
+					seg = seg._prev;
+				}
+	
+				return pos;
 			}
-
-			return pos;
+			else {
+				return _cachedStart;
+			}
 		}
 
 		@Override
