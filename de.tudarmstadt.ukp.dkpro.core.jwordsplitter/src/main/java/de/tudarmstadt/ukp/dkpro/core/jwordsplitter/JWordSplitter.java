@@ -33,8 +33,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.abelssoft.wordtools.jWordSplitter.AbstractWordSplitter;
-import de.abelssoft.wordtools.jWordSplitter.impl.GermanWordSplitter;
+import de.abelssoft.wordtools.jwordsplitter.AbstractWordSplitter;
+import de.abelssoft.wordtools.jwordsplitter.impl.GermanWordSplitter;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
