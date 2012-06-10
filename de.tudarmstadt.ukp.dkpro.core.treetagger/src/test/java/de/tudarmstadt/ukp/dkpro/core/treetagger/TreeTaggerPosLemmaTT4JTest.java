@@ -36,6 +36,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.uimafit.factory.JCasBuilder;
+import org.uimafit.testing.util.HideOutput;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -49,7 +50,7 @@ class TreeTaggerPosLemmaTT4JTest
 	@Before
 	public void initTrace()
 	{
-		TreeTaggerWrapper.TRACE = true;
+		// TreeTaggerWrapper.TRACE = true;
 	}
 
 	@Test
@@ -118,7 +119,11 @@ class TreeTaggerPosLemmaTT4JTest
 		throws Exception
 	{
 		// Start Java with -Xmx512m
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > (500000000));
+		boolean run = Runtime.getRuntime().maxMemory() > (500000000);
+		if (!run) {
+			System.out.println("Test requires more heap than available, skipping");
+		}
+		Assume.assumeTrue(run);
 
 		// Disable trace as this significantly slows down the test
 		TreeTaggerWrapper.TRACE = false;
@@ -161,7 +166,9 @@ class TreeTaggerPosLemmaTT4JTest
 
         AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
 
+        HideOutput hideOut = new HideOutput();
 		try {
+			
 			for (int n = 0; n < 100; n++) {
 		        JCas aJCas = TestRunner.runTest(engine, "en", testDocument);
 		        
@@ -171,6 +178,7 @@ class TreeTaggerPosLemmaTT4JTest
 		}
 		finally {
 			engine.destroy();
+			hideOut.restoreOutput();
 		}
     }
 
@@ -222,8 +230,6 @@ class TreeTaggerPosLemmaTT4JTest
 	public void longTokenTest()
 		throws Exception
 	{
-		TreeTaggerWrapper.TRACE = true;
-
     	checkModelsAndBinary("en");
 
         AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);

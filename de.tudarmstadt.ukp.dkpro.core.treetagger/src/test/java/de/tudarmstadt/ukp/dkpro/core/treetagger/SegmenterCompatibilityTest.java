@@ -25,7 +25,6 @@ import static org.uimafit.util.JCasUtil.select;
 
 import java.util.Collection;
 
-import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -41,7 +40,7 @@ class SegmenterCompatibilityTest
 	@Before
 	public void initTrace()
 	{
-		TreeTaggerWrapper.TRACE = true;
+		// TreeTaggerWrapper.TRACE = true;
 	}
 
 	@Test
