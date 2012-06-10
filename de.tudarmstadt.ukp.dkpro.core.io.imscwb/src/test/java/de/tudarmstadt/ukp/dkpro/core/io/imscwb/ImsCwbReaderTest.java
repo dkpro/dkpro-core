@@ -54,7 +54,7 @@ public class ImsCwbReaderTest
         
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
-            System.out.println(jcas.getDocumentText());
+            // System.out.println(jcas.getDocumentText());
             if (i == 0) {
                 assertEquals(11406, JCasUtil.select(jcas, Token.class).size());
                 assertEquals(11406, JCasUtil.select(jcas, Lemma.class).size());
