@@ -170,7 +170,7 @@ public abstract class ResourceCollectionReaderBase
 					i.set(locationToUrl(i.next()));
 				}
 			}
-			else if (!path.contains(":")) {
+			else {
 				path = locationToUrl(path);
 			}
 
