@@ -31,7 +31,7 @@ public class TazCorpusTest
         TazCorpus corpus = new TazCorpus();
         for (Sentence s : corpus.getSentences()) {
             for (int i=0; i<s.getTokens().size(); i++) {
-                System.out.print(s.getTokens().get(i));
+                // System.out.print(s.getTokens().get(i));
             }
         }
     }

@@ -42,35 +42,35 @@ public class WackyCorpusTest
         
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
-            System.out.println(text);
+            // System.out.println(text);
             nrOfTexts++;
         }
         assertEquals(4, nrOfTexts);
         
         int nrOfSentences = 0;
         for (Sentence sentence : corpus.getSentences()) {
-            System.out.println(sentence);
+        	// System.out.println(sentence);
             nrOfSentences++;
         }
         assertEquals(818, nrOfSentences);
 
         int nrOfTokens = 0;
         for (String token : corpus.getTokens()) {
-            System.out.println(token);
+        	// System.out.println(token);
             nrOfTokens++;
         }
         assertEquals(12946, nrOfTokens);
 
         int nrOfTags = 0;
         for (Tag tag : corpus.getTags()) {
-            System.out.println(tag);
+        	// System.out.println(tag);
             nrOfTags++;
         }
         assertEquals(12946, nrOfTags);
 
         int nrOfTaggedTokens = 0;
         for (TaggedToken tt : corpus.getTaggedTokens()) {
-            System.out.println(tt);
+        	// System.out.println(tt);
             nrOfTaggedTokens++;
         }
         assertEquals(12946, nrOfTaggedTokens);

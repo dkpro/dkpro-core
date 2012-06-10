@@ -29,42 +29,41 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
 
 public class TigerCorpusTest
 {
-
     @Test
     public void tigerTest() throws Exception {
         Corpus corpus = new TigerCorpus("src/test/resources/test_corpora/tiger/tiger.txt");
         
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
-            System.out.println(text);
+            // System.out.println(text);
             nrOfTexts++;
         }
         assertEquals(1, nrOfTexts);
         
         int nrOfSentences = 0;
         for (Sentence sentence : corpus.getSentences()) {
-            System.out.println(sentence);
+            // System.out.println(sentence);
             nrOfSentences++;
         }
         assertEquals(20, nrOfSentences);
 
         int nrOfTokens = 0;
         for (String token : corpus.getTokens()) {
-            System.out.println(token);
+            // System.out.println(token);
             nrOfTokens++;
         }
         assertEquals(392, nrOfTokens);
 
         int nrOfTags = 0;
         for (Tag tag : corpus.getTags()) {
-            System.out.println(tag);
+            // System.out.println(tag);
             nrOfTags++;
         }
         assertEquals(392, nrOfTags);
 
         int nrOfTaggedTokens = 0;
         for (TaggedToken tt : corpus.getTaggedTokens()) {
-            System.out.println(tt);
+            // System.out.println(tt);
             nrOfTaggedTokens++;
         }
         assertEquals(392, nrOfTaggedTokens);
