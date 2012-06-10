@@ -55,8 +55,8 @@ public class WikipediaRevisionPairReaderTest
             DocumentMetaData md1 = DocumentMetaData.get(view1);
             DocumentMetaData md2 = DocumentMetaData.get(view2);
             
-            System.out.println(md1);
-            System.out.println(md2);
+//            System.out.println(md1);
+//            System.out.println(md2);
 
             i++;
 			if (i > 10) {
