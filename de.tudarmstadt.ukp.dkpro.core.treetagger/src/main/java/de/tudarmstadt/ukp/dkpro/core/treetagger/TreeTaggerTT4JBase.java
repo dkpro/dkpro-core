@@ -393,7 +393,7 @@ public abstract class TreeTaggerTT4JBase<T>
 						"point to the TreeTagger installation directory.");
 			}
 
-			modelEnc = properties.get("encoding");
+			modelEnc = (overrideModelEncoding != null) ? overrideModelEncoding : properties.get("encoding");
 			return new DKProModel(aModelName, modelFile, modelEnc, mapping);
 		}
 	}

@@ -84,9 +84,24 @@ class TreeTaggerPosLemmaTT4JTest
 		throws Exception
     {
         runTest("de", "Das ist ein Test .",
-        		new String[] { "d",   "sein",  "ein", "Test", "."    },
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+        		new String[] { "die", "sein",  "eine", "Test", "."   },
+        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
+
+	@Test
+	public void treeTaggerAnnotatorSloveneTest()
+		throws Exception
+    {
+        runTest("sl", "To je test .",
+        		new String[] { "ta",          "biti",      "test",  "." },
+        		new String[] { "zk-sei----s", "gvpste--n", "somei", "SENT" },
+        		new String[] { "O",           "O",         "O",     "O" });
+
+        runTest("sl", "Gremo na Češko za kosilo .",
+        		new String[] { "iti",             "na",   "Češko", "za",   "kosilo", "." },
+        		new String[] { "gppspm--n-----d", "dpet", "slmei", "dpet", "soset",  "SENT" },
+        		new String[] { "O",               "O",    "O",     "O",    "O",      "O" });
     }
 
     @Test
@@ -217,8 +232,8 @@ class TreeTaggerPosLemmaTT4JTest
 
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
         
-        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
         AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
+        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
 
         return aJCas;
     }
