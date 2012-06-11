@@ -14,9 +14,11 @@
 # c           conjunction
 # cg         conjunction morpheme
 # d           adverb
+d=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 # dg         adverb morpheme
 # e           interjection
 # ew        sentential punctuation
+ew=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # f            directional locality
 # fg          locality morpheme
 # g           morpheme
@@ -28,6 +30,7 @@
 # m         numeral
 # mg       numeric morpheme
 # n           common noun
+n=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 # ng         noun morpheme
 # nr          personal name
 # ns         place name
@@ -46,6 +49,7 @@
 # tg          time word morpheme
 # u           auxiliary
 # v           verb
+v=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 # vd         verb as adverbial
 # vg         verb morpheme
 # vn         verb with nominal function
