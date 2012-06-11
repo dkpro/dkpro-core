@@ -109,10 +109,24 @@ class TreeTaggerPosLemmaTT4JTest
     void treeTaggerAnnotatorChineseTest()
     	throws Exception
     {
-        runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 .",
-        		new String[] { "_",  "_", "_",  "_", "风轮", "_", "_", "_", "_",  "_" },
-        		new String[] { "ng", "n", "d",  "v", "n",   "f", "u", "n", "nl", "w" },
-        		new String[] { "O",  "O", "O",  "O", "O",   "O", "O", "O", "O",  "O" } );
+    	// The rudder often in the wake of the wind round the back of the area.
+        runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
+        		new String[] { "_",  "_",  "_",   "_", "风轮", "_", "_", "_",  "_",  "_"    },
+        		new String[] { "ng", "n",  "d",   "v", "n",   "f", "u", "n",  "nl", "ew"   },
+        		new String[] { "O",  "NN", "ADV", "V", "NN",  "O", "O", "NN", "O",  "PUNC" } );
+
+        // The service sector has become an important engine of Guangdong's economic transformation
+        // and upgrading.
+        runTest("zh", "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
+        		new String[] { "_",  "_", "_",  "_",  "_", "_", "_", "_", "_",  "_"     },
+        		new String[] { "n",  "v", "ns", "n",  "v", "v", "u", "a", "n",  "ew"    },
+        		new String[] { "NN", "V", "O",  "NN", "V", "V", "O", "O", "NN", "PUNC"  } );
+
+        // How far is China from the world brand?
+        runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
+        		new String[] { "_",  "_", "_",  "_",  "_",  "_", "多远", "_"  },
+        		new String[] { "ns", "v", "n",  "n",  "n",  "v", "n",   "ew" },
+        		new String[] { "O",  "V", "NN", "NN", "NN", "V", "NN",  "PUNC" } );
     }
 
 	@Test
