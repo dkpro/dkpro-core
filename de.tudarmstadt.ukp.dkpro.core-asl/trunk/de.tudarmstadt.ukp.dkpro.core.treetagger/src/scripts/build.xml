@@ -66,8 +66,10 @@
 		<model-lang-jar language="nl"/>
 		<model-lang-jar language="pt"/>
 		<model-lang-jar language="ru"/>
+		<model-lang-jar language="sl"/>
 		<model-lang-jar language="sw"/>
 		<model-lang-jar language="zh"/>
+		
 		<antcall target="jar-notice"/>
 	</target>
 	
@@ -199,23 +201,47 @@
 			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
 	</target>
 	
-	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, it, ru, sw, es, pt, gz, zh"/>
+	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, it, ru, sw, es, pt, gz, zh, sl"/>
 	
+	<!--
+	- Little Endian - x86 (Linux, Windows, Mac-Intel)
+	- Big Endian    - PowerPC (Sparc-Solaris, Mac-PowerPC)
+	-
+	- A word on versioning:
+	-
+	- The models should use the date of the latest model in the bundle as version and append a two
+	- digit disambiguator in case two JARs must be released at the same day. The date of the files
+	- can usually be seen on the FTP server. Some models still use the date they were first added
+	- to this file as version. For these, that scheme should be maintained until the version on the
+	- FTP server is newer than the date added.
+	-->
 	<target name="en">
-		<property name="version.en" value="2010111500"/>
+		<property name="version.en" value="2011110900"/>
 		
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-par-3.1.bin.gz"
+		<!-- FILE: english-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-10-31 | now        | 6037a03deda962b8938b7b243d0c902d
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-par-3.2.bin.gz"
     		type="tagger" endianness="big-endian" language="en" encoding="ISO-8859-1" 
-    		md5="62e728fa4978e84d50cf37d13422fbcb"/>
-    	
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-par-linux-3.1.bin.gz"
-    		type="tagger" endianness="little-endian" language="en" encoding="ISO-8859-1"
-    		md5="ac23d8e12a83eb1c043c7b584e9ba17f"/>
+    		md5="6037a03deda962b8938b7b243d0c902d"/>
 
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-chunker-par-3.1.bin.gz"
+		<!-- FILE: english-chunker-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-08-24 | now        | e751e720200feff98c611819f95e0f5e
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-chunker-par-3.2.bin.gz"
     		type="chunker" endianness="big-endian" language="en" encoding="ISO-8859-1"
-    		md5="c80affa5a7f379ac2f0a6446e8745d5e"/>
+    		md5="e751e720200feff98c611819f95e0f5e"/>
 
+		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-11-09 | now        | c64968dfed3f74d17b63987ff7421151
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-par-linux-3.2.bin.gz"
+    		type="tagger" endianness="little-endian" language="en" encoding="ISO-8859-1"
+    		md5="c64968dfed3f74d17b63987ff7421151"/>
+
+		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-08-24 | now        | 981df5901588a016ade69108d4421531
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/english-chunker-par-linux-3.2.bin.gz"
     		type="chunker" endianness="little-endian" language="en" encoding="ISO-8859-1"
     		md5="981df5901588a016ade69108d4421531"/>
@@ -224,63 +250,93 @@
 	<target name="de">
 		<property name="version.de" value="2012041700"/>
 		
+		<!-- FILE: german-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-02-09 | now        | 6618dd26e4974193ae50fbed0888666a
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-3.2.bin.gz"
     		type="tagger" endianness="big-endian" language="de" encoding="ISO-8859-1"
     		md5="6618dd26e4974193ae50fbed0888666a"/>
 
+		<!-- FILE: german-chunker-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | now        | 2a07ffa062165557ea99f4fcdf4303a9
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-3.1.bin.gz"
+    		type="chunker" endianness="big-endian" language="de" encoding="ISO-8859-1"
+    		md5="2a07ffa062165557ea99f4fcdf4303a9"/>
+		
 		<!-- FILE: german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
-		  - 2012-02-13 | 2012-04-17 | 45afdcdabfffc69995523748cd42bf81
-		  - 2012-04-17 | now        | 3a18444accf080f54c5ebf655fedc781
+		  - 2012-02-13 | 2012-03-15 | 45afdcdabfffc69995523748cd42bf81
+		  - 2012-03-15 | now        | 3a18444accf080f54c5ebf655fedc781
 		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="de" encoding="UTF-8"
     		md5="3a18444accf080f54c5ebf655fedc781"/>
 
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-3.1.bin.gz"
-    		type="chunker" endianness="big-endian" language="de" encoding="ISO-8859-1"
-    		md5="2a07ffa062165557ea99f4fcdf4303a9"/>
-
+		<!-- FILE: german-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-04-29 | now        | 56ea6ac618bc21d28929a85a6964ff65
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-chunker-par-linux-3.2-utf8.bin.gz"
     		type="chunker" endianness="little-endian" language="de" encoding="UTF-8"
     		md5="56ea6ac618bc21d28929a85a6964ff65"/>
 	</target>
 	
 	<target name="nl">
-		<property name="version.nl" value="2010111500"/>
+		<property name="version.nl" value="2012061100"/>
 		
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-par-3.1.bin.gz"
+		<!-- FILE: dutch2-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | now        | 44bc760c29fb202d2ca5fe5f8acd1dd3
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch2-par-3.1.bin.gz"
     		type="tagger" endianness="big-endian" language="nl" encoding="ISO-8859-1"
-    		md5="0fed5cd154759632ff8181ec588a67e3"/>
+    		md5="44bc760c29fb202d2ca5fe5f8acd1dd3"/>
 
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-par-linux-3.1.bin.gz"
+		<!-- FILE: dutch2-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | now        | 22dd271035795747768ead15b2931c75
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch2-par-linux-3.1.bin.gz"
     		type="tagger" endianness="little-endian" language="nl" encoding="ISO-8859-1"
-    		md5="7d533ea8e8b768f87d9c684e47a59872"/>
+    		md5="22dd271035795747768ead15b2931c75"/>
 	</target>
 	
 	<target name="bg">
 		<property name="version.bg" value="2010111500"/>
 		
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/bulgarian-par-3.1.bin.gz "
+		<!-- FILE: bulgarian-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2006-02-17 | now        | 6a29dc14daf2256eacf036a52add4b9e
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/bulgarian-par-3.1.bin.gz"
     		type="tagger" endianness="big-endian" language="bg" encoding="UTF-8"
     		md5="6a29dc14daf2256eacf036a52add4b9e"/>
     	
+		<!-- FILE: bulgarian-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2006-02-17 | now        | bd3661679ffe9630f6bd61c59cea391b
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/bulgarian-par-linux-3.1.bin.gz"
     		type="tagger" endianness="little-endian" language="bg" encoding="UTF-8"
     		md5="bd3661679ffe9630f6bd61c59cea391b"/>
 	</target>
-	
+
 	<target name="fr">
 		<property name="version.fr" value="2010111500"/>
 		
+		<!-- FILE: french-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-01-11 | now        | e6f2f1ffb6c29e3a08bc11f140c5b9dc
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/french-par-3.2.bin.gz"
     		type="tagger" endianness="big-endian" language="fr" encoding="ISO-8859-1"
     		md5="e6f2f1ffb6c29e3a08bc11f140c5b9dc"/>
     	
+		<!-- FILE: french-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-01-11 | now        | 41d978f247b23d6fee733da32a55a775
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/french-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="fr" encoding="UTF-8"
     		md5="41d978f247b23d6fee733da32a55a775"/>
 
+		<!-- FILE: french-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-11 | now        | 975e3e306198c9f61f14428621ed87ba
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/french-chunker-par-linux-3.2-utf8.bin.gz"
     		type="chunker" endianness="little-endian" language="fr" encoding="UTF-8"
     		md5="975e3e306198c9f61f14428621ed87ba"/>
@@ -300,10 +356,16 @@
 	<target name="it">
 		<property name="version.it" value="2010111500"/>
 		
+		<!-- FILE: italian-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | now        | e7809f33e72a0e620ec4247ae8ad5a80
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-par-3.1.bin.gz"
     		type="tagger" endianness="big-endian" language="it" encoding="ISO-8859-1"
     		md5="e7809f33e72a0e620ec4247ae8ad5a80"/>
     	
+		<!-- FILE: italian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-06-22 | now        | 79c03b4cc14c89d58aa1f97a133d01d7
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/italian-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="it" encoding="UTF-8"
     		md5="79c03b4cc14c89d58aa1f97a133d01d7"/>
@@ -312,6 +374,9 @@
 	<target name="ru">
 		<property name="version.ru" value="2010111500"/>
 		
+		<!-- FILE: russian-small.par.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-15 | now        | 244717e6226f1982a56b6e928cbb3c98
+		  -->
     	<install-model-file url="http://corpus.leeds.ac.uk/mocky/russian-small.par.gz"
     		type="tagger" endianness="little-endian" language="ru" encoding="UTF-8"
     		md5="244717e6226f1982a56b6e928cbb3c98"/>
@@ -320,6 +385,9 @@
 	<target name="sw">
 		<property name="version.sw" value="2010111500"/>
 		
+		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-03-17 | now        | 0df5f70b0cc81a3b437a46a9e0a3d71b
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/swahili-par-linux-3.2.bin.gz"
     		type="tagger" endianness="little-endian" language="sw" encoding="ISO-8859-1"
     		md5="0df5f70b0cc81a3b437a46a9e0a3d71b"/>
@@ -328,6 +396,9 @@
 	<target name="et">
 		<property name="version.et" value="2011012400"/>
 		
+		<!-- FILE: estonian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/estonian-par-linux-3.2.bin.gz"
     		type="tagger" endianness="little-endian" language="et" encoding="UTF-8"
     		md5="4a98b412e36afefbc204fca9e561f5cb"/>
@@ -337,8 +408,8 @@
 		<property name="version.la" value="2011091200"/>
 		
 		<!-- FILE: latin-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-05-07 | 2011-09-12 | f959f8633ef842f069f0331ad19dc8b4
-		  - 2011-09-12 | now        | bde1f6a63b2c5a658ba25a8eb90832a8
+		  - 2011-05-07 | 2011-08-19 | f959f8633ef842f069f0331ad19dc8b4
+		  - 2011-08-19 | now        | bde1f6a63b2c5a658ba25a8eb90832a8
 		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/latin-par-linux-3.2.bin.gz"
     		type="tagger" endianness="little-endian" language="la" encoding="ISO-8859-1"
@@ -346,20 +417,29 @@
 	</target>
 	
 	<target name="es">
-		<property name="version.es" value="2010111500"/>
+		<property name="version.es" value="2011110700"/>
 		
+		<!-- FILE: spanish-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | now        | 5ccc79322b7954bfc82923e6123cac04
+		  -->
     	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-par-3.1.bin.gz"
     		type="tagger" endianness="big-endian" language="es" encoding="ISO-8859-1"
     		md5="5ccc79322b7954bfc82923e6123cac04"/>
 
-    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-par-linux-3.1.bin.gz"
-    		type="tagger" endianness="little-endian" language="es" encoding="ISO-8859-1"
-    		md5="33bec41afdbfe57ac19ffd2e15ae8b06"/>
+		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-11-07 | now        | 9770d507bd3cfb30385e1c2d4ce46f89
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-par-linux-3.2-utf8.bin.gz"
+    		type="tagger" endianness="little-endian" language="es" encoding="UTF-8"
+    		md5="9770d507bd3cfb30385e1c2d4ce46f89"/>
 	</target>
 
 	<target name="pt">
 		<property name="version.pt" value="2010111500"/>
 		
+		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
+		  -->
     	<install-model-file-tar url="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
     		type="tagger" endianness="little-endian" language="pt" encoding="UTF-8" file="pt.par"
     		md5="cf9855b4e215fa7a393700aa135830b0"/>
@@ -368,14 +448,31 @@
 	<target name="gz">
 		<property name="version.gz" value="2010111500"/>
 		
+		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
+		  -->
     	<install-model-file-tar url="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
     		type="tagger" endianness="little-endian" language="gz" encoding="UTF-8" file="gz.par"
     		md5="bd54f16fd3f9147616841d97ba55331d"/>
+	</target>
+	
+	<target name="sl">
+		<property name="version.sl" value="2010070300"/>
+		
+		<!-- FILE: slovenian.par.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-07-03 | now        | d6b230483364be5ec0a3054a1b78df2d
+		  -->
+    	<install-model-file url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/slovenian.par.gz"
+    		type="tagger" endianness="little-endian" language="sl" encoding="UTF-8"
+    		md5="d6b230483364be5ec0a3054a1b78df2d"/>
 	</target>
 
 	<target name="zh">
 		<property name="version.zh" value="2010111500"/>
 		
+		<!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-15 | now        | 7392059e61b5555ab984918e3dea9464
+		  -->
     	<install-model-file-tar url="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz"
     		type="tagger" endianness="little-endian" language="zh" encoding="UTF-8" file="zh.par"
     		md5="7392059e61b5555ab984918e3dea9464"/>
