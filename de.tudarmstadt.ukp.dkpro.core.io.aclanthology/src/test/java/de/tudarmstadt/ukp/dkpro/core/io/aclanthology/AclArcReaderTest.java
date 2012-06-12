@@ -50,9 +50,9 @@ public class AclArcReaderTest
             System.out.println(md.getDocumentUri());
 
             if (i < 2) {
-                System.out.println(jcas.getDocumentText());
-                System.out.println();
-                System.out.println();
+//                System.out.println(jcas.getDocumentText());
+//                System.out.println();
+//                System.out.println();
             }
 
             i++;
