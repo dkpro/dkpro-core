@@ -224,6 +224,12 @@ public abstract class ResourceObjectProviderBase<M>
 				resourceMetaData = new Properties();
 				
 				try {
+					if (modelLocation.toLowerCase().endsWith(".gz")) {
+						modelLocation = modelLocation.substring(0, modelLocation.length() - 3);
+					}
+					if (modelLocation.toLowerCase().endsWith(".bz2")) {
+						modelLocation = modelLocation.substring(0, modelLocation.length() - 4);
+					}
 					String modelMetaDataLocation = FilenameUtils.removeExtension(modelLocation)+".properties";
 					URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
 					resourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(modelMetaDataUrl));
