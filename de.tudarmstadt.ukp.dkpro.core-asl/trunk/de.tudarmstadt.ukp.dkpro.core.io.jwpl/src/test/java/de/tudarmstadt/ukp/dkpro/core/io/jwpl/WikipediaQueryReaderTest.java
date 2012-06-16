@@ -42,10 +42,8 @@ public class WikipediaQueryReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString(),
-                WikipediaQueryReader.PARAM_TITLE_PATTERN, "UK%"
-
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test,
+                WikipediaQueryReader.PARAM_TITLE_PATTERN, "UK%");
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {

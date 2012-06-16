@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
 public class BrownTEICorpus
     extends CorpusBase
 {
-
     static final String LANGUAGE = "en";
     static final String NAME = "Brown";
     

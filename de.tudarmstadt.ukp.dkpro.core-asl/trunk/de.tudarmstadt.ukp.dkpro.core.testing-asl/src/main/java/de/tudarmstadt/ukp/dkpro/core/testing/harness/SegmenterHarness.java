@@ -83,6 +83,7 @@ public final class SegmenterHarness
 			new String[] { "How to tokenize smileys?", "This is a good example.", ">^,,^< :0 3:[" }),
 
 	// Sombody who can read arabic, please check this
+    	// Covering the following sub-Saharan countries with vast areas very
 		new TestData("ar.1", "ar", "تغطي الصحراء الكبرى الدول التالية بمساحات شاسعة جدا",
 			new String[] { "تغطي", "الصحراء", "الكبرى", "الدول", "التالية",
 					"مساحات", "شاسعة", "جدا" },
