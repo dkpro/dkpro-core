@@ -76,7 +76,7 @@ public class OpenNlpSegmenter
 
 		sentenceModelProvider = new CasConfigurableProviderBase<SentenceDetectorME>() {
 			{
-				setDefault(VERSION, "1.5");
+				setDefault(VERSION, "20120616.0");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");

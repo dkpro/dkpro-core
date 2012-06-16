@@ -59,49 +59,49 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-de-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-de-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-en-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-maxent</artifactId>
-			<version>1.5</version>
+			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
