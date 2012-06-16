@@ -91,16 +91,9 @@ public class OpenNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-tagger.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		
 		modelProvider = new CasConfigurableProviderBase<POSTagger>() {
 			{
-				setDefault(VERSION, "1.5");
+				setDefault(VERSION, "20120616.0");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-${language}-${variant}");
@@ -146,6 +139,16 @@ public class OpenNlpPosTagger
 				}
 			}
 		};
+		
+		mappingProvider = new MappingProvider();
+		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		mappingProvider.setDefault("tagger.tagset", "default");
+		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		mappingProvider.addImport("tagger.tagset", modelProvider);
+		
 	}
 
 	@Override
