@@ -1,0 +1,39 @@
+# Penn Chinese Treebank tagset used by Stanford PosTagger
+#
+# Source: http://www.ldc.upenn.edu/Catalog/docs/LDC2007T36/ctb-posguide.pdf
+# .$$.
+# AD
+# AS
+# BA
+# CC
+# CD
+# CS
+# DEC
+# DEG
+# DER
+# DEV
+# DT
+# ETC
+# FW
+# IJ
+# JJ
+# LB
+# LC
+# M
+# MSP
+# NN
+# NR
+# NT
+# OD
+# ON
+# P
+# PN
+# PU
+# SB
+# SP
+# VA
+# VC
+# VE
+# VV
+# X
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
