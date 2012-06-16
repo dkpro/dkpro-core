@@ -18,16 +18,21 @@
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
-
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
@@ -97,6 +102,7 @@ public abstract class ResourceObjectProviderBase<M>
 	 */
 	public static final String VERSION  = "version";
 
+	private Properties resourceMetaData;
 	private String resourceUrl;
 	private M resource;
 	
@@ -105,7 +111,9 @@ public abstract class ResourceObjectProviderBase<M>
 	private Properties defaultVariants = null;
 	
 	private String defaultVariantsLocation;
-	
+
+	private Map<String, ResourceObjectProviderBase<?>> imports = new HashMap<String, ResourceObjectProviderBase<?>>();
+
 	public void setOverride(String aKey, String aValue)
 	{
 		if (aValue == null) {
@@ -144,6 +152,16 @@ public abstract class ResourceObjectProviderBase<M>
 	public void removeDefault(String aKey)
 	{
 		defaults.remove(aKey);
+	}
+	
+	public void addImport(String aString, ResourceObjectProviderBase<?> aSource) 
+	{
+		imports.put(aString, aSource);
+	}
+	
+	public void removeImport(String aString)
+	{
+		imports.remove(aString);
 	}
 	
 	/**
@@ -202,6 +220,18 @@ public abstract class ResourceObjectProviderBase<M>
 
 			URL url = resolveLocation(modelLocation, this, null);
 			if (!StringUtils.equals(resourceUrl, url.toString())) {
+				// Load resource meta data if present
+				resourceMetaData = new Properties();
+				
+				try {
+					String modelMetaDataLocation = FilenameUtils.removeExtension(modelLocation)+".properties";
+					URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
+					resourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(modelMetaDataUrl));
+				}
+				catch (FileNotFoundException e) {
+					// If no metadata was found, just leave the properties empty.
+				}
+				
 				log.info("Producing resource from " + url);
 				resource = produceResource(url);
 				resourceUrl = url.toString();
@@ -245,24 +275,37 @@ public abstract class ResourceObjectProviderBase<M>
 	 */
 	protected Properties getAggregatedProperties() throws IOException
 	{
-		Properties props = new Properties(defaults);
-		props.putAll(getProperties());
+		Properties defaultValues = new Properties(defaults);
+		defaultValues.putAll(getProperties());
 		
 		if (defaultVariants == null && defaultVariantsLocation != null) {
 			setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
 		}
 		
-		if (defaultVariants != null && defaultVariants.containsKey(props.get(LANGUAGE))) {
-			props.setProperty(VARIANT, defaultVariants.getProperty(props.getProperty(LANGUAGE)));
+		if (defaultVariants != null && defaultVariants.containsKey(defaultValues.get(LANGUAGE))) {
+			defaultValues.setProperty(VARIANT, defaultVariants.getProperty(defaultValues.getProperty(LANGUAGE)));
 		}
 		
-		Properties over = new Properties(props);
-		over.putAll(overrides);
+		Properties importedValues = new Properties(defaultValues);
+		for (Entry<String, ResourceObjectProviderBase<?>> e : imports.entrySet()) {
+			String value = e.getValue().getResourceMetaData().getProperty(e.getKey());
+			if (value != null) {
+				importedValues.setProperty(e.getKey(), value);
+			}
+		}
 		
-		return over;
+		Properties overriddenValues = new Properties(importedValues);
+		overriddenValues.putAll(overrides);
+		
+		return overriddenValues;
 	}
 
 	protected abstract Properties getProperties();
 
 	protected abstract M produceResource(URL aUrl) throws IOException;
+	
+	public Properties getResourceMetaData()
+	{
+		return resourceMetaData;
+	}
 }

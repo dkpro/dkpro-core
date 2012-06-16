@@ -19,6 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 import org.apache.uima.cas.CAS;
@@ -46,4 +48,42 @@ public class MappingProviderTest
 		Map<String, String> deMap = mappingProvider.getResource();
 		assertEquals("de", deMap.get("value"));
 	}
+	
+	@Test
+	public void testTagsetChange() throws Exception
+	{
+		CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
+		{
+			{
+				setDefault(LOCATION, "src/test/resources/${language}.model");
+			}
+			
+			@Override
+			protected String produceResource(URL aUrl)
+				throws IOException
+			{
+				return aUrl.toString();
+			}
+		};
+		
+		MappingProvider mappingProvider = new MappingProvider();
+		mappingProvider.setDefault(MappingProvider.LOCATION, "src/test/resources/${language}-${tagset}.map");
+		mappingProvider.addImport("tagset", modelProvider);
+		
+		CAS cas = CasCreationUtils.createCas(new TypeSystemDescription_impl(), null, null);
+		
+		cas.setDocumentLanguage("en");
+		modelProvider.configure(cas);
+		mappingProvider.configure(cas);
+		Map<String, String> enMap = mappingProvider.getResource();
+		assertEquals("en", enMap.get("value"));
+		assertEquals("mytags1", enMap.get("tagset"));
+		
+		cas.setDocumentLanguage("de");
+		modelProvider.configure(cas);
+		mappingProvider.configure(cas);
+		Map<String, String> deMap = mappingProvider.getResource();
+		assertEquals("de", deMap.get("value"));
+		assertEquals("mytags2", deMap.get("tagset"));
+	}	
 }
