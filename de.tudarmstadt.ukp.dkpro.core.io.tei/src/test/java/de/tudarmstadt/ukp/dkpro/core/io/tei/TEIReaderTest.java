@@ -32,7 +32,6 @@ import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
 import org.uimafit.util.JCasUtil;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -50,9 +49,7 @@ public class TEIReaderTest
                 TEIReader.PARAM_OMIT_IGNORABLE_WHITESPACE, true,
                 TEIReader.PARAM_LANGUAGE, "de",
                 TEIReader.PARAM_PATH, "classpath:/digibib",
-                TEIReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
-                });
+                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
         
         AnalysisEngine writer = createPrimitive(TextWriter.class, 
         		TextWriter.PARAM_USE_DOCUMENT_ID, true,
@@ -99,9 +96,7 @@ public class TEIReaderTest
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei/",
-                TEIReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
-                });
+                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         String firstSentence = "The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced `` no evidence '' that any irregularities took place . ";
 
@@ -133,9 +128,7 @@ public class TEIReaderTest
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
-        		TEIReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
-                },
+        		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TEIReader.PARAM_WRITE_SENTENCES, false);
 
         int i = 0;
@@ -164,9 +157,7 @@ public class TEIReaderTest
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
-        		TEIReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
-                },
+        		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TEIReader.PARAM_WRITE_TOKENS, false,
                 TEIReader.PARAM_WRITE_POS, false
         );
@@ -197,9 +188,7 @@ public class TEIReaderTest
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
-        		TEIReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
-                },
+        		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TEIReader.PARAM_WRITE_POS, true,
                 TEIReader.PARAM_WRITE_TOKENS, false);
 

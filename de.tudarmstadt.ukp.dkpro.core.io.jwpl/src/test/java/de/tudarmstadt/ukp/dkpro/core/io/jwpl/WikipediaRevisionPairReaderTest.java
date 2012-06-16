@@ -42,8 +42,7 @@ public class WikipediaRevisionPairReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {

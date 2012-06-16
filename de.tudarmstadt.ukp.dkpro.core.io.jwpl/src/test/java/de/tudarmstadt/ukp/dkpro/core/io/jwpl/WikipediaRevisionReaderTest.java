@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 
 public class WikipediaRevisionReaderTest
 {
-
     // FIXME currently there is no test database to test revisions
     @Test
 	public void wikipediaRevisionReaderTest()
@@ -41,8 +40,7 @@ public class WikipediaRevisionReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language.simple_english);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {

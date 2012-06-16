@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.INCLUDE_PREFIX;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATH;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.commons.io.FileUtils.readFileToString;
@@ -50,10 +49,10 @@ public class PdfReaderTest
 
 		CollectionReader reader = createCollectionReader(PdfReader.class,
 				PARAM_PATH, "src/test/resources/data",
-				PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"**/*.pdf"  });
+				PARAM_PATTERNS, new String[] { "[+]**/*.pdf"  });
 
 		AnalysisEngine writer = createPrimitive(CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, outputFile.getPath());
+				CASDumpWriter.PARAM_OUTPUT_FILE, outputFile);
 
 		SimplePipeline.runPipeline(reader, writer);
 

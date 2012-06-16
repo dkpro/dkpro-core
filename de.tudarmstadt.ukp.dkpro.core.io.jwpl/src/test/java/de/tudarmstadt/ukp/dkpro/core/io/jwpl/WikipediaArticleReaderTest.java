@@ -42,8 +42,7 @@ public class WikipediaArticleReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -65,8 +64,7 @@ public class WikipediaArticleReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -88,8 +86,7 @@ public class WikipediaArticleReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -111,8 +108,7 @@ public class WikipediaArticleReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -134,8 +130,7 @@ public class WikipediaArticleReaderTest
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
 				WikipediaReaderBase.PARAM_USER,     "student",
 				WikipediaReaderBase.PARAM_PASSWORD, "student",
-				WikipediaReaderBase.PARAM_LANGUAGE, Language._test.toString()
-		);
+				WikipediaReaderBase.PARAM_LANGUAGE, Language._test);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
