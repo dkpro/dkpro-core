@@ -20,8 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.aclanthology;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
-import java.io.File;
-
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
@@ -38,11 +36,8 @@ public class AclArcReaderTest
     {
         CollectionReader reader = createCollectionReader(
                 AclAnthologyReader.class,
-                ResourceCollectionReaderBase.PARAM_PATH,
-                        new File("src/test/resources/acl/").getAbsolutePath(),
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                        new String[] {ResourceCollectionReaderBase.INCLUDE_PREFIX + "**/*.txt" }
-        );
+                ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/acl/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" } );
 
         int i=0;
         for (JCas jcas : new JCasIterable(reader)) {
