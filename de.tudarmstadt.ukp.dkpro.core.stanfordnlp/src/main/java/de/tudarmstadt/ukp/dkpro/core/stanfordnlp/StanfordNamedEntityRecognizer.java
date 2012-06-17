@@ -11,20 +11,23 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -53,6 +56,10 @@ import edu.stanford.nlp.util.Triple;
 public class StanfordNamedEntityRecognizer
 	extends JCasAnnotator_ImplBase
 {
+	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+	protected boolean printTagSet;
+
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
@@ -78,16 +85,6 @@ public class StanfordNamedEntityRecognizer
 	{
 		super.initialize(aContext);
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefaultVariantsLocation(
-				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/stanfordnlp/lib/ner-${language}-${variant}.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.setOverride(MappingProvider.VARIANT, variant);
-		
 		modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>>() {
 			{
 				setDefault(VERSION, "20120108");
@@ -120,7 +117,19 @@ public class StanfordNamedEntityRecognizer
 					@SuppressWarnings("unchecked")
 					AbstractSequenceClassifier<? extends CoreMap> classifier = CRFClassifier.getClassifier(is);
 					
-					getContext().getLogger().log(Level.INFO, "Types: "+classifier.classIndex);
+					if (printTagSet) {
+						StringBuilder sb = new StringBuilder();
+						sb.append("Model contains [").append(classifier.classIndex.size()).append("] tags: ");
+						
+						List<String> tags = new ArrayList<String>();
+						for (String t : classifier.classIndex) {
+							tags.add(t);
+						}
+						
+						Collections.sort(tags);
+						sb.append(StringUtils.join(tags, " "));
+						getContext().getLogger().log(INFO, sb.toString());
+					}										
 					
 					return classifier;
 				}
@@ -132,6 +141,16 @@ public class StanfordNamedEntityRecognizer
 				}
 			}
 		};
+		
+		mappingProvider = new MappingProvider();
+		mappingProvider.setDefaultVariantsLocation(
+				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
+		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/stanfordnlp/lib/ner-${language}-${variant}.map");
+		mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
+		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		mappingProvider.setOverride(MappingProvider.VARIANT, variant);
 	}
 
 	@Override

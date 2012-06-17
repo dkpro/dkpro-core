@@ -21,9 +21,11 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
@@ -184,16 +186,9 @@ public class StanfordParser
 			createConstituentTags = true;
 		}
 
-		posMappingProvider = new MappingProvider();
-		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-tagger.map");
-		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-
 		modelProvider = new CasConfigurableProviderBase<LexicalizedParser>() {
 			{
-				setDefault(VERSION, "20120522");
+				setDefault(VERSION, "20120522.0");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-${language}-${variant}");
@@ -238,14 +233,14 @@ public class StanfordParser
 					}
 
 					if (printTagSet) {
-						StringBuilder sb = new StringBuilder();
-						sb.append("Model contains [").append(pd.tagIndex.size()).append("] tags: ");
-						
+						List<String> tags = new ArrayList<String>();
 						for (String tag : pd.tagIndex) {
-							sb.append(tag);
-							sb.append(" ");
-						}
-						getContext().getLogger().log(INFO, sb.toString());
+							tags.add(tag);
+						}					
+						Collections.sort(tags);
+
+						getContext().getLogger().log(INFO, "Model contains [" + tags.size() + 
+								"] tags: "+StringUtils.join(tags, " "));
 					}
 
 					in.close();
@@ -259,6 +254,15 @@ public class StanfordParser
 				}
 			}
 		};
+		
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		posMappingProvider.addImport("tagger.tagset", modelProvider);
 	}
 
 	/**

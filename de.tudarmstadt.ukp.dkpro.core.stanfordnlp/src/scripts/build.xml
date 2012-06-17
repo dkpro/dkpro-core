@@ -1,134 +1,232 @@
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.2.0/ant-macros.xml"/>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
 	</import>
 	
-	<property name="tagger.version" value="20120522"/>
+	<property name="tagger.version" value="20120522.0"/>
 	<property name="tagger.date" value="2012-05-22"/>
-	<property name="core.version" value="20120522"/>
+	<property name="core.version" value="20120522.0"/>
 	<property name="core.date" value="2012-05-22"/>
-	<property name="parser.version" value="20120522"/>
+	<property name="parser.version" value="20120522.0"/>
 	<property name="parser.date" value="2012-05-22"/>
-	
+
+	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
+
 	<target name="local-maven">
 		<property name="install-artifact-enable" value="true"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars" depends="separate-jars-parser, separate-jars-tagger, separate-jars-ner, separate-jars-coref">
+	<target name="separate-jars" depends="de, en, ar, zh, fr, separate-jars-coref">
 		<antcall target="jar-notice"/>
 	</target>
-		
-	<target name="separate-jars-tagger">
-		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
-		<antcall target="download-tagger"/>
-		
+	
+	<target name="ar" depends="download-tagger,download-parser">
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/tagger/arabic-accurate.tagger" md5="730f09c873334d7ea1dc319aeac8b827"
-    		tool="tagger" language="ar" variant="accurate" extension="tagger" version="${tagger.version}"/>		
+    		tool="tagger" language="ar" variant="accurate" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+			
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/tagger/arabic-fast.tagger" md5="cc88707a0f57a2a303b40428d96a5853"
-    		tool="tagger" language="ar" variant="fast" extension="tagger" version="${tagger.version}"/>		
-		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/tagger/chinese.tagger" md5="b24484906f448c248bcbf7fc676ef523"
-    		tool="tagger" language="zh" variant="default" extension="tagger" version="${tagger.version}"/>	
-		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/tagger/german-dewac.tagger" md5="9b131f68fec38e168211f565db6d2bf5"
-    		tool="tagger" language="de" variant="dewac" extension="tagger" version="${tagger.version}"/>		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/tagger/german-hgc.tagger" md5="f83e545f0ded54937c88c3ba62b6f0c0"
-    		tool="tagger" language="de" variant="hgc" extension="tagger" version="${tagger.version}"/>		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-    		file="target/download/tagger/german-fast.tagger" md5="8494b5e56c1545cca77bf7faf7b9967c"
-    		tool="tagger" language="de" variant="fast" extension="tagger" version="${tagger.version}"/>		
+    		tool="tagger" language="ar" variant="fast" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
 
+		<!--
+		  - Does currently not work with CoreNLP because some classes are missing. If added,
+		  - tagset information should be added here as well.
+		  -
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/tagger/english-bidirectional-distsim.tagger" md5="ba0b97a7604a63e4a7f3da9e5a3b6897"
-    		tool="tagger" language="en" variant="bidirectional-distsim" extension="tagger" version="${tagger.version}"/>		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/tagger/english-left3words-distsim.tagger" md5="4518df668bcd871bb3c4bd795842b4ad"
-    		tool="tagger" language="en" variant="left3words-distsim" extension="tagger" version="${tagger.version}"/>	
-		
-		<antcall target="download-core"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/core/wsj-0-18-bidirectional-distsim.tagger" md5="ad465a43281c196c8aadee1adaab9251"
-    		tool="tagger" language="en" variant="bidirectional-distsim-wsj-0-18" extension="tagger" version="${core.version}"/>		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/core/wsj-0-18-left3words-distsim.tagger" md5="7c4f532935a2de5c1548efb142b1c268"
-    		tool="tagger" language="en" variant="left3words-distsim-wsj-0-18" extension="tagger" version="${core.version}"/>		
+    		file="target/download/parser/arabicFactored.ser.gz" md5="d3196072515f39dbd2c690c928e2653f"
+    		tool="parser" language="ar" variant="factored" extension="ser.gz" version="${parser.version}"/>		
+		<delete dir="target/model-staging"/>
+		-->
 	</target>
 
-	<target name="separate-jars-ner">
-		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
-		<antcall target="download-core"/>
-		<antcall target="download-german-ner"/>
+	<target name="de" depends="download-tagger, download-german-ner,download-parser">
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/tagger/german-dewac.tagger" md5="9b131f68fec38e168211f565db6d2bf5"
+    		tool="tagger" language="de" variant="dewac" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
 
+		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/tagger/german-hgc.tagger" md5="f83e545f0ded54937c88c3ba62b6f0c0"
+    		tool="tagger" language="de" variant="hgc" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
+    		file="target/download/tagger/german-fast.tagger" md5="8494b5e56c1545cca77bf7faf7b9967c"
+    		tool="tagger" language="de" variant="fast" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+		
+		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
+			file="target/download/german-ner/hgc_175m_600.crf.ser.gz" md5="39861454dc9e3b2eb391dd5b7139bc1b"
+    		tool="ner" language="de" variant="hgc_175m_600.crf" extension="ser.gz" version="20110920.0"/>		
+		<delete dir="target/model-staging"/>
+		
+		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
+			file="target/download/german-ner/dewac_175m_600.crf.ser.gz" md5="4722078875ddd5658f37e496f4b54b1d"
+    		tool="ner" language="de" variant="dewac_175m_600.crf" extension="ser.gz" version="20110920.0"/>	
+		<delete dir="target/model-staging"/>
+		
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/parser/germanPCFG.ser.gz" md5="4e39a38f077810a5ac1cfafed48e7088"
+    		tool="parser" language="de" variant="pcfg" extension="ser.gz" version="${parser.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/parser/germanFactored.ser.gz" md5="385069fb84d5e692bff9435e109f82ad"
+    		tool="parser" language="de" variant="factored" extension="ser.gz" version="${parser.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+	
+	<target name="en" depends="download-core, download-tagger,download-parser">
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/tagger/english-bidirectional-distsim.tagger" md5="ba0b97a7604a63e4a7f3da9e5a3b6897"
+    		tool="tagger" language="en" variant="bidirectional-distsim" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/tagger/english-left3words-distsim.tagger" md5="4518df668bcd871bb3c4bd795842b4ad"
+    		tool="tagger" language="en" variant="left3words-distsim" extension="tagger" version="${tagger.version}">	
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+		
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/core/wsj-0-18-bidirectional-distsim.tagger" md5="ad465a43281c196c8aadee1adaab9251"
+    		tool="tagger" language="en" variant="bidirectional-distsim-wsj-0-18" extension="tagger" version="${core.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		file="target/download/core/wsj-0-18-left3words-distsim.tagger" md5="7c4f532935a2de5c1548efb142b1c268"
+    		tool="tagger" language="en" variant="left3words-distsim-wsj-0-18" extension="tagger" version="${core.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		
+		<delete dir="target/model-staging"/>
+		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/english.muc.distsim.crf.ser.gz" md5="947710871ee62cbe94e8b21f2c934581"
     		tool="ner" language="en" variant="muc.distsim.crf" extension="ser.gz" version="${core.version}"/>		
+		<delete dir="target/model-staging"/>
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/english.muc.7class.distsim.crf.ser.gz" md5="53f724e815f9ac4f782b1c96506a2319"
     		tool="ner" language="en" variant="muc.7class.distsim.crf" extension="ser.gz" version="${core.version}"/>		
+		<delete dir="target/model-staging"/>
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/core/english.conll.distsim.crf.ser.gz" md5="bac8f4552bb6875f53a28d2803034fc5"
     		tool="ner" language="en" variant="conll.distsim.crf" extension="ser.gz" version="${core.version}"/>		
+		<delete dir="target/model-staging"/>
 
 		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
 			file="target/download/core/english.conll.4class.distsim.crf.ser.gz" md5="2ddc5439816fc9f8e8a5382035fc4785"
     		tool="ner" language="en" variant="all.4class.distsim.crf" extension="ser.gz" version="${core.version}"/>	
+		<delete dir="target/model-staging"/>
 
 		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
 			file="target/download/core/english.all.3class.distsim.crf.ser.gz" md5="a80a32baf6b2315f42194128b004c4b0"
     		tool="ner" language="en" variant="all.3class.distsim.crf" extension="ser.gz" version="${core.version}"/>	
+		<delete dir="target/model-staging"/>
 
-		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-			file="target/download/german-ner/hgc_175m_600.crf.ser.gz" md5="39861454dc9e3b2eb391dd5b7139bc1b"
-    		tool="ner" language="de" variant="hgc_175m_600.crf" extension="ser.gz" version="20110920"/>		
-		
-		<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-			file="target/download/german-ner/dewac_175m_600.crf.ser.gz" md5="4722078875ddd5658f37e496f4b54b1d"
-    		tool="ner" language="de" variant="dewac_175m_600.crf" extension="ser.gz" version="20110920"/>	
-	</target>
-			
-	<target name="separate-jars-parser">
-		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/stanfordnlp"/>
-		<antcall target="download-parser"/>
-		
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/englishPCFG.ser.gz" md5="dafeb9be3b7fdce9a60416499d1fe302"
-    		tool="parser" language="en" variant="pcfg" extension="ser.gz" version="${parser.version}"/>		
+    		tool="parser" language="en" variant="pcfg" extension="ser.gz" version="${parser.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>		
+		<delete dir="target/model-staging"/>
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/englishFactored.ser.gz" md5="38254870857636bf3e5e965ca5f14c9e"
-    		tool="parser" language="en" variant="factored" extension="ser.gz" version="${parser.version}"/>		
-		
+    		tool="parser" language="en" variant="factored" extension="ser.gz" version="${parser.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>	
+		<delete dir="target/model-staging"/>
+	</target>
+	
+	<target name="fr" depends="download-parser">
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/parser/germanPCFG.ser.gz" md5="4e39a38f077810a5ac1cfafed48e7088"
-    		tool="parser" language="de" variant="pcfg" extension="ser.gz" version="${parser.version}"/>		
+    		file="target/download/parser/frenchFactored.ser.gz" md5="56d1ee7ffdbce3f69ab8c6279ccdf1dc"
+    		tool="parser" language="fr" variant="factored" extension="ser.gz" version="${parser.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ftb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
 
+	<target name="zh" depends="download-tagger,download-parser">
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/parser/germanFactored.ser.gz" md5="385069fb84d5e692bff9435e109f82ad"
-    		tool="parser" language="de" variant="factored" extension="ser.gz" version="${parser.version}"/>		
+    		file="target/download/tagger/chinese.tagger" md5="b24484906f448c248bcbf7fc676ef523"
+    		tool="tagger" language="zh" variant="default" extension="tagger" version="${tagger.version}">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
 
+		<!--
+		  - Does currently not work with CoreNLP because some classes are missing. If added,
+		  - tagset information should be added here as well.
+		  -
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/chinesePCFG.ser.gz" md5="e17b4ab2a3e58665e19c47220c6f3294"
-    		tool="parser" language="zh" variant="pcfg" extension="ser.gz" version="${parser.version}"/>		
+    		tool="parser" language="zh" variant="pcfg" extension="ser.gz" version="${parser.version}">		
+		</install-model-file>		
+		<delete dir="target/model-staging"/>
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/chineseFactored.ser.gz" md5="4a732a689d6828067c52363690f76dd4"
-    		tool="parser" language="zh" variant="factored" extension="ser.gz" version="${parser.version}"/>		
-
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/parser/arabicFactored.ser.gz" md5="d3196072515f39dbd2c690c928e2653f"
-    		tool="parser" language="ar" variant="factored" extension="ser.gz" version="${parser.version}"/>		
-		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		file="target/download/parser/frenchFactored.ser.gz" md5="56d1ee7ffdbce3f69ab8c6279ccdf1dc"
-    		tool="parser" language="fr" variant="factored" extension="ser.gz" version="${parser.version}"/>		
+    		tool="parser" language="zh" variant="factored" extension="ser.gz" version="${parser.version}">		
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+		-->
 	</target>
 
 	<target name="separate-jars-coref">

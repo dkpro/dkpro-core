@@ -105,7 +105,8 @@ public class StanfordNamedEntityRecognizerTest
 		throws Exception
 	{
 		AnalysisEngineDescription desc = createPrimitiveDescription(
-				StanfordNamedEntityRecognizer.class);
+				StanfordNamedEntityRecognizer.class,
+				StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
 
 		AnalysisEngine ae = UIMAFramework.produceAnalysisEngine(desc);
 		JCas testCas = ae.newJCas();

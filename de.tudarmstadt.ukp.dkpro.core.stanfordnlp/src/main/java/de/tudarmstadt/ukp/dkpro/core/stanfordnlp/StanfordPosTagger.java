@@ -10,13 +10,17 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -28,8 +32,8 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ling.TaggedWord;
@@ -41,6 +45,10 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordPosTagger
 	extends JCasAnnotator_ImplBase
 {
+	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+	protected boolean printTagSet;
+
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
@@ -70,16 +78,6 @@ public class StanfordPosTagger
 	{
 		super.initialize(aContext);
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefaultVariantsLocation(
-				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-tagger.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.setOverride(MappingProvider.VARIANT, variant);
-		
 		modelProvider = new CasConfigurableProviderBase<MaxentTagger>() {
 			{
 				setDefaultVariantsLocation(
@@ -96,13 +94,39 @@ public class StanfordPosTagger
 			protected MaxentTagger produceResource(URL aUrl) throws IOException
 			{
 				try {
-					return new MaxentTagger(aUrl.toString());
+					MaxentTagger tagger = new MaxentTagger(aUrl.toString());
+					
+					if (printTagSet) {
+						StringBuilder sb = new StringBuilder();
+						sb.append("Model contains [").append(tagger.getTags().getSize()).append("] tags: ");
+						
+						List<String> tags = new ArrayList<String>();
+						for (int i = 0; i < tagger.getTags().getSize(); i ++) {
+							tags.add(tagger.getTags().getTag(i));
+						}
+						Collections.sort(tags);
+						sb.append(StringUtils.join(tags, " "));
+						getContext().getLogger().log(INFO, sb.toString());
+					}					
+					
+					return tagger;
 				}
 				catch (ClassNotFoundException e) {
 					throw new IOException(e);
 				}
 			}
 		};
+		
+		mappingProvider = new MappingProvider();
+		mappingProvider.setDefaultVariantsLocation(
+				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
+		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		mappingProvider.setDefault("tagger.tagset", "default");
+		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		mappingProvider.addImport("tagger.tagset", modelProvider);
 	}
 
 	@Override

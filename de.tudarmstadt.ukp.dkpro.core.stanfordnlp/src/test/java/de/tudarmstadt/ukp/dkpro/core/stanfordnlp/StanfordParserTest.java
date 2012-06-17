@@ -203,8 +203,9 @@ public class StanfordParserTest
 
 		String[] lemmas = new String[] { /** No lemmatization for French */ };
 
-		String[] posMapped = new String[] { "O", "O", "O", "O", "O", "O", "O", "ADV", "O", "O",
-				"PR", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O" };
+		String[] posMapped = new String[] { "PR", "V", "N", "ART", "N", "PP", "N", "ADV", "V",
+				"PUNC", "PR", "V", "ART", "N", "CONJ", "ART", "ADJ", "N", "CONJ", "CONJ", "ADJ",
+				"PUNC" };
 
 		String[] posOriginal = new String[] { "CL", "V", "N", "D", "N", "P", "N", "ADV", "V",
 				"PUNC", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "PUNC" };
