@@ -473,7 +473,9 @@
 					<groups>
 						<group>
 							<title>Analysis Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.bananasplit:de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger:de.tudarmstadt.ukp.dkpro.core.opennlp</packages>
+							<packages>
+								de.tudarmstadt.ukp.dkpro.core.bananasplit:
+								de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger:de.tudarmstadt.ukp.dkpro.core.opennlp</packages>
 						</group>
 						<group>
 							<title>I/O Components</title>
@@ -484,6 +486,13 @@
 							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
 						</group>
 					</groups>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>-Xmx1g</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
