@@ -214,10 +214,8 @@ public abstract class ResourceObjectProviderBase<M>
 		
 		String modelLocation = pph.replacePlaceholders(props.getProperty(LOCATION), props);
 		
+		boolean success = false;
 		try {
-			resourceUrl = null;
-			resource = null;
-
 			URL url = resolveLocation(modelLocation, this, null);
 			if (!StringUtils.equals(resourceUrl, url.toString())) {
 				// Load resource meta data if present
@@ -242,6 +240,7 @@ public abstract class ResourceObjectProviderBase<M>
 				resource = produceResource(url);
 				resourceUrl = url.toString();
 			}
+			success = true;
 		}
 		catch (IOException e) {
 			StringBuilder sb = new StringBuilder();
@@ -257,6 +256,12 @@ public abstract class ResourceObjectProviderBase<M>
 			
 			throw new IOException("Unable to load resource [" + modelLocation + "]: "
 					+ ExceptionUtils.getRootCauseMessage(e) + sb.toString());
+		}
+		finally {
+			if (!success) {
+				resourceUrl = null;
+				resource = null;
+			}
 		}
 	}
 
