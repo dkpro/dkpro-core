@@ -71,6 +71,7 @@ public class ImsCwbWriter
 	public static final String ATTR_BEGIN = "begin";
 	public static final String ATTR_END = "end";
 	public static final String ATTR_POS = "pos";
+	public static final String ATTR_CPOS = "cpos";
 	public static final String ATTR_LEMMA = "lemma";
 	public static final String ATTR_ID = "id";
 	public static final String ATTR_URI = "uri";
@@ -83,31 +84,35 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
-	public static final String PARAM_WRITE_DOC_ID = "WriteDocId";
+	public static final String PARAM_WRITE_DOC_ID = "writeDocId";
 	@ConfigurationParameter(name = PARAM_WRITE_DOC_ID, mandatory = true, defaultValue = "false")
 	private boolean writeDocId;
 	
-	public static final String PARAM_WRITE_POS = "WritePOS";
+	public static final String PARAM_WRITE_POS = "writePOS";
 	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
 	private boolean writePOS;
 
-	public static final String PARAM_WRITE_LEMMA = "WriteLemma";
+	public static final String PARAM_WRITE_CPOS = "writeCPOS";
+	@ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
+	private boolean writeCPOS;
+
+	public static final String PARAM_WRITE_LEMMA = "writeLemma";
 	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
 	private boolean writeLemma;
 
-	public static final String PARAM_WRITE_DOCUMENT_TAG = "WriteDocumentTag";
+	public static final String PARAM_WRITE_DOCUMENT_TAG = "writeDocumentTag";
 	@ConfigurationParameter(name = PARAM_WRITE_DOCUMENT_TAG, mandatory = true, defaultValue = "false")
 	private boolean writeDocumentTag;
 
-	public static final String PARAM_WRITE_TEXT_TAG = "WriteTextTag";
+	public static final String PARAM_WRITE_TEXT_TAG = "writeTextTag";
 	@ConfigurationParameter(name = PARAM_WRITE_TEXT_TAG, mandatory = true, defaultValue = "true")
 	private boolean writeTextTag;
 
-	public static final String PARAM_WRITE_OFFSETS = "WriteOffsets";
+	public static final String PARAM_WRITE_OFFSETS = "writeOffsets";
 	@ConfigurationParameter(name = PARAM_WRITE_OFFSETS, mandatory = true, defaultValue = "false")
 	private boolean writeOffsets;
 
-	public static final String PARAM_CQPWEB_COMPATIBILITY = "CqpwebCompatibility";
+	public static final String PARAM_CQPWEB_COMPATIBILITY = "cqpwebCompatibility";
 	@ConfigurationParameter(name = PARAM_CQPWEB_COMPATIBILITY, mandatory = true, defaultValue = "false")
 	private boolean cqpwebCompatibility;
 
@@ -115,7 +120,7 @@ public class ImsCwbWriter
 	 * Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if
 	 * you want the write to directly encode into the CQP binary format.
 	 */
-	public static final String PARAM_CQP_HOME = "CqpHome";
+	public static final String PARAM_CQP_HOME = "cqpHome";
 	@ConfigurationParameter(name = PARAM_CQP_HOME, mandatory = false)
 	private File cqpHome;
 
@@ -123,7 +128,7 @@ public class ImsCwbWriter
 	 * Set this parameter to compres the token streams and the indexes using cwb-huffcode and
 	 * cwb-compress-rdx.
 	 */
-	public static final String PARAM_CQP_COMPRESS = "CqpCompress";
+	public static final String PARAM_CQP_COMPRESS = "cqpCompress";
 	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="true")
 	private boolean cqpCompress;
 
@@ -206,6 +211,10 @@ public class ImsCwbWriter
 						field(token.getPos() != null ? token.getPos().getPosValue() : "-");
 					}
 
+					// write coarse grained pos tag
+					if (writeCPOS) {
+						field(token.getPos() != null ? token.getPos().getType().getShortName() : "-");
+					}
 					// write lemma
 					if (writeLemma) {
 						field(token.getLemma() != null ? token.getLemma().getValue() : "-");

@@ -1,41 +1,41 @@
 <text id="T990507.2">
 <sentence>
-Seine	PPOSAT	sein
-Position	NN	Position
-bei	APPR	bei
-der	ART	d
-Prüfgesellschaft	NN	Prüfgesellschaft
-mußte	VMFIN	müssen
-er	PPER	er
-damals	ADV	damals
-niederlegen	VVINF	niederlegen
-,	$,	,
-den	ART	d
-AWO-Posten	NN	AWO-Posten
-nicht	PTKNEG	nicht
-.	$.	.
+Seine	PPOSAT	PR	-
+Position	NN	NN	-
+bei	APPR	PP	-
+der	ART	ART	-
+Prüfgesellschaft	NN	NN	-
+mußte	VVFIN	V	-
+er	PPER	PR	-
+damals	ADV	ADV	-
+niederlegen	VVPP	V	-
+,	$,	PUNC	-
+den	ART	ART	-
+AWO-Posten	NN	NN	-
+nicht	PTKNEG	O	-
+.	$.	PUNC	-
 </sentence>
 <sentence>
-K.	NE	K.
-W.	NE	W.
+K.	NE	NP	-
+W.	NE	NP	-
 </sentence>
 </text>
 <text id="T990507.3">
 <sentence>
-SPD	NE	SPD
-/	$(	/
-CDU	NE	CDU
-/	$(	/
-AfB	NN	AfB
-für	APPR	für
-Daewoo-Millionen	NN	Daewoo-Millionen
+SPD	NE	NP	-
+/	$(	PUNC	-
+CDU	NE	NP	-
+/	$(	PUNC	-
+AfB	NE	NP	-
+für	$(	PUNC	-
+Daewoo-Millionen	NN	NN	-
 </sentence>
 <sentence>
-Aber	KON	aber
-Bremerhavens	NE	Bremerhaven
-AfB	NE	AfB
-fordert	VVFIN	fordern
-jetzt	ADV	jetzt
-Untersuchungsausschuß	NN	Untersuchungsausschuß
+Aber	KON	CONJ	-
+Bremerhavens	NE	NP	-
+AfB	NE	NP	-
+fordert	VVFIN	V	-
+jetzt	ADV	ADV	-
+Untersuchungsausschuß	NN	NN	-
 </sentence>
 </text>

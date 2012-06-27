@@ -30,8 +30,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.component.xwriter.CASDumpWriter;
 
+import de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 /**
  *
@@ -53,8 +54,7 @@ public class ImsCwbWriterTest
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription tag = createPrimitiveDescription(
-				TreeTaggerPosLemmaTT4J.class,
-				TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "de");
+				OpenNlpPosTagger.class);
 
 		AnalysisEngineDescription tw = createPrimitiveDescription(
 				ImsCwbWriter.class,
@@ -74,6 +74,34 @@ public class ImsCwbWriterTest
 		assertEquals(reference, actual);
 	}
 
+	@Test
+	public void test1a()
+		throws Exception
+	{
+		CollectionReader ner = createCollectionReader(
+				BncReader.class,
+				BncReader.PARAM_PATH, "src/test/resources",
+				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
+				BncReader.PARAM_LANGUAGE, "en");
+
+		AnalysisEngineDescription tw = createPrimitiveDescription(
+				ImsCwbWriter.class,
+				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
+				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
+
+		AnalysisEngineDescription cdw = createPrimitiveDescription(
+				CASDumpWriter.class,
+				CASDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
+
+		runPipeline(ner, tw, cdw);
+
+		String reference = FileUtils.readFileToString(
+				new File("src/test/resources/reference/bnc-sample.ims"), "UTF-8");
+		String actual = FileUtils.readFileToString(
+				new File(outputFile), "UTF-8");
+		assertEquals(reference, actual);
+	}
+
 	@Ignore("This test cannot work (yet) because we do not ship the cwb-encode and cwb-makeall binaries")
 	@Test
 	public void test2()
@@ -86,8 +114,7 @@ public class ImsCwbWriterTest
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription tag = createPrimitiveDescription(
-				TreeTaggerPosLemmaTT4J.class,
-				TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "de");
+				OpenNlpPosTagger.class);
 
 		AnalysisEngineDescription tw = createPrimitiveDescription(
 				ImsCwbWriter.class,
