@@ -26,12 +26,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 /**
  *
  * @author Erik-Lân Do Dinh
- *
  */
 @Ignore("This is to convert the actual corpus!")
 public class TuebadzToImsCwbPipeline
@@ -50,8 +49,7 @@ public class TuebadzToImsCwbPipeline
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-1");
 
 		AnalysisEngineDescription tag = createPrimitiveDescription(
-				TreeTaggerPosLemmaTT4J.class,
-				TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "de");
+				OpenNlpPosTagger.class);
 
 		AnalysisEngineDescription tw = createPrimitiveDescription(
 				ImsCwbWriter.class,
