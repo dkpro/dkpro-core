@@ -35,6 +35,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
@@ -50,6 +51,7 @@ import org.uimafit.factory.JCasBuilder;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -92,6 +94,14 @@ public class NegraExportReader
 	public static final String PARAM_LEMMA_ENABLED = "lemmaEnabled";
 	@ConfigurationParameter(name = PARAM_LEMMA_ENABLED, mandatory = true, defaultValue = "true")
 	private boolean lemmaEnabled;
+
+	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String mappingPosLocation;
+
+	public static final String PARAM_POS_TAGSET = "posTagset";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posTagset;
 
 	/**
 	 * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
@@ -156,6 +166,7 @@ public class NegraExportReader
 	private int documentsTotal;
 	private BufferedReader br;
 	private Map<String, String> idxOriginName;
+	private MappingProvider posMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -182,6 +193,15 @@ public class NegraExportReader
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
 		}
+		
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		posMappingProvider.setOverride("tagger.tagset", posTagset);
 	}
 
 	@Override
@@ -207,6 +227,9 @@ public class NegraExportReader
 		meta.setDocumentUri(inputFile.toURI()+"#"+documentId);
 		meta.setDocumentId(documentId);
 		aJCas.setDocumentLanguage(language);
+
+		// Configure mapping only now, because now the language is set in the CAS
+		posMappingProvider.configure(aJCas.getCas());
 
 		// Fill CAS
 		String lastCasId = casId;
@@ -453,7 +476,8 @@ public class NegraExportReader
 
 			// create pos
 			if (posEnabled && (TOKEN_POS_TAG >= 0)) {
-				POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+				Type posTag = posMappingProvider.getTagType(parts[TOKEN_POS_TAG]);
+				POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
 				pos.setPosValue(parts[TOKEN_POS_TAG]);
 				pos.addToIndexes();
 				token.setPos(pos);
