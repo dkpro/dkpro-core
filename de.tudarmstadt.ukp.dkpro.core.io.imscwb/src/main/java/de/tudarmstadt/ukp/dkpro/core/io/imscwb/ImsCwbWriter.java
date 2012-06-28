@@ -215,6 +215,7 @@ public class ImsCwbWriter
 					if (writeCPOS) {
 						field(token.getPos() != null ? token.getPos().getType().getShortName() : "-");
 					}
+					
 					// write lemma
 					if (writeLemma) {
 						field(token.getLemma() != null ? token.getLemma().getValue() : "-");
@@ -310,6 +311,11 @@ public class ImsCwbWriter
 			if (writePOS) {
 				cmd.add("-P");
 				cmd.add(ATTR_POS);
+			}
+			
+			if (writeCPOS) {
+				cmd.add("-P");
+				cmd.add(ATTR_CPOS);
 			}
 
 			if (writeLemma) {
