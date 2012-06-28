@@ -17,12 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -36,8 +33,10 @@ import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -52,9 +51,13 @@ public class ImsCwbReader
     @ConfigurationParameter(name=PARAM_ENCODING, mandatory=true, defaultValue="UTF-8")
     private String encoding;
 
-    public static final String PARAM_TAGGER_TAGSET = "TaggerTagset";
-    @ConfigurationParameter(name=PARAM_TAGGER_TAGSET, mandatory=false)
-    private String taggerTagset;
+	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String mappingPosLocation;
+
+	public static final String PARAM_POS_TAGSET = "posTagset";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posTagset;
 
     public static final String PARAM_WRITE_TOKENS = "WriteTokens";
     @ConfigurationParameter(name = PARAM_WRITE_TOKENS, mandatory = true, defaultValue = "true")
@@ -80,12 +83,23 @@ public class ImsCwbReader
 
     private int completed;
 
+	private MappingProvider posMappingProvider;
+
     @Override
     public void initialize(UimaContext aContext)
     	throws ResourceInitializationException
     {
     	super.initialize(aContext);
     	wackyIterator = new TextIterable(getResources(), encoding);
+    	
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+		posMappingProvider.setOverride("tagger.tagset", posTagset);
     }
 
     @Override
@@ -102,6 +116,7 @@ public class ImsCwbReader
 		Resource res = wackyIterator.getCurrentResource();
         CorpusText text = wackyIterator.next();
 		initCas(aCAS, res, text.getDocumentTitle());
+		posMappingProvider.configure(aCAS);
 
         List<AnnotationFS> tokenAnnotations    = new ArrayList<AnnotationFS>();
         List<AnnotationFS> lemmaAnnotations    = new ArrayList<AnnotationFS>();
@@ -116,8 +131,6 @@ public class ImsCwbReader
         StringBuilder sb = new StringBuilder();
         int offset = 0;
         
-        Map<String, String> mapping = getMapping("tagger", taggerTagset, null);
-
         for (CorpusSentence sentence : text.getSentences()) {
             int savedOffset = offset;
             for (int i=0; i<sentence.getTokens().size(); i++) {
@@ -127,9 +140,8 @@ public class ImsCwbReader
                 int len = token.length();
 
                 if (writePOS) {
-                    Type posType = getTagType(mapping, pos, typeSystem);
-                    AnnotationFS posAnno = aCAS.createAnnotation(
-                                posType, offset, offset + len);
+    				Type posType = posMappingProvider.getTagType(pos);
+    				AnnotationFS posAnno = aCAS.createAnnotation(posType, offset, offset + len);
                     posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), pos);
                     posAnnotations.add(posAnno);
                 }

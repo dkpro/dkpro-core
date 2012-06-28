@@ -74,6 +74,8 @@ public class ImsCwbWriterTest
 		assertEquals(reference, actual);
 	}
 
+	@Ignore("FX8 is a file from the BNC. While available online for download, we currently do "
+			+ "ship it due to licensing issues.")
 	@Test
 	public void test1a()
 		throws Exception
