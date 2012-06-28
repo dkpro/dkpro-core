@@ -32,7 +32,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.pipeline.SimplePipeline;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
@@ -121,16 +120,13 @@ public class Web1TFormatWriterTest {
 	private void writeWeb1TFormat(String[] strings, int minFreq)
 			throws UIMAException, IOException {
 		CollectionReader reader = createCollectionReader(TextReader.class,
+				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
-				ResourceCollectionReaderBase.PARAM_PATTERNS,
-				new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX
-						+ "**/*.txt" });
+				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription treeTagger = AnalysisEngineFactory
-				.createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
-						TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en");
+		AnalysisEngineDescription treeTagger = createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class);
 
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,
@@ -158,21 +154,17 @@ public class Web1TFormatWriterTest {
 	private void createIndex() throws Exception {
 		JWeb1TIndexer indexCreator = new JWeb1TIndexer(INDEX_FOLDER.getAbsolutePath(), MAX_NGRAM);
 		indexCreator.create();
-
 	}
 
 	private void writeWeb1TFormat(String[] inputPath) throws Exception {
 		CollectionReader reader = createCollectionReader(TextReader.class,
+				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
-				ResourceCollectionReaderBase.PARAM_PATTERNS,
-				new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX
-						+ "**/*.txt" });
+				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription treeTagger = AnalysisEngineFactory
-				.createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
-						TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en");
+		AnalysisEngineDescription treeTagger = createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class);
 
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,

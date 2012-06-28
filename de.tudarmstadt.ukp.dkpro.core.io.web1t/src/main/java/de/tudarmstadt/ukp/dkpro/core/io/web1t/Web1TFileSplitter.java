@@ -31,7 +31,6 @@ import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import org.apache.uima.util.Logger;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
@@ -67,11 +66,8 @@ public class Web1TFileSplitter
 	public void split()
 		throws IOException
 	{
-
 		createMappingsAndFileList();
-
 		distributeInputFileToSplitFiles();
-
 	}
 
 	public LinkedList<File> getFiles()
@@ -94,8 +90,7 @@ public class Web1TFileSplitter
 			int indexOfTab = readLine.indexOf(TAB);
 
 			if (indexOfTab == -1) {
-				Web1TUtil
-						.writeToLog(logger, "No tab found in line: ", readLine);
+				Web1TUtil.writeToLog(logger, "No tab found in line: ", readLine);
 				continue;
 			}
 
@@ -147,8 +142,7 @@ public class Web1TFileSplitter
 			File file = fileMap.get(key);
 			if (fileHandleToBufferdWriterMap.get(file) == null) {
 				fileHandleToBufferdWriterMap.put(file, new BufferedWriter(
-						new OutputStreamWriter(new FileOutputStream(file),
-								fileEncoding)));
+						new OutputStreamWriter(new FileOutputStream(file), fileEncoding)));
 			}
 
 		}
@@ -162,8 +156,7 @@ public class Web1TFileSplitter
 		HashMap<String, File> fileMap = new HashMap<String, File>();
 
 		for (String key : letterToFileNameMap.keySet()) {
-			fileMap.put(key,
-					new File(outputFolder + "/" + letterToFileNameMap.get(key)
+			fileMap.put(key, new File(outputFolder + "/" + letterToFileNameMap.get(key)
 							+ "_unsorted"));
 		}
 		return fileMap;
@@ -187,9 +180,8 @@ public class Web1TFileSplitter
 			Long total = letterFD.getN();
 
 			double percentage = (double) freq / total * 100;
-			if (percentage >= threshold) {
-				String filename = new Formatter().format("%08d", fileNumber++)
-						.toString();
+			if ((threshold > 0.0) && (percentage >= threshold)) {
+				String filename = new Formatter().format("%08d", fileNumber++).toString();
 				letterToFileNameMap.put(key, filename);
 			}
 			else {
@@ -205,7 +197,6 @@ public class Web1TFileSplitter
 			HashMap<File, BufferedWriter> fileHandleToBufferdWriterMap)
 		throws UnsupportedEncodingException, FileNotFoundException
 	{
-
 		HashMap<String, BufferedWriter> nameToWriterMap = new HashMap<String, BufferedWriter>();
 		for (String key : fileMap.keySet()) {
 			File file = fileMap.get(key);
@@ -214,11 +205,9 @@ public class Web1TFileSplitter
 		}
 
 		return nameToWriterMap;
-
 	}
 
-	private LinkedList<File> generateListOfUniqueFiles(
-			HashMap<String, File> fileMap)
+	private LinkedList<File> generateListOfUniqueFiles(HashMap<String, File> fileMap)
 	{
 		// Generate unique Filelist
 		HashMap<String, String> uniqeFiles = new HashMap<String, String>();
@@ -238,12 +227,9 @@ public class Web1TFileSplitter
 
 	public void cleanUp()
 	{
-
 		for (File file : splittedFiles) {
 			file.delete();
 		}
 		splittedFiles = new LinkedList<File>();
-
 	}
-
 }

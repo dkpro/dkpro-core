@@ -41,8 +41,7 @@ public class Web1TSorterTest
 	public void testSorter()
 		throws IOException
 	{
-		Web1TFileSorter sorter = new Web1TFileSorter(filesToSort, comparator,
-				null);
+		Web1TFileSorter sorter = new Web1TFileSorter(filesToSort, comparator, null);
 		sorter.sort();
 		LinkedList<File> sortedFiles = sorter.getSortedFiles();
 		
@@ -79,8 +78,8 @@ public class Web1TSorterTest
 	private String[] getLines(File file)
 		throws IOException
 	{
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(file), "UTF-8"));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file),
+				"UTF-8"));
 
 		LinkedList<String> lines = new LinkedList<String>();
 
@@ -104,6 +103,7 @@ public class Web1TSorterTest
 	{
 		comparator = new Comparator<String>()
 		{
+			@Override
 			public int compare(String r1, String r2)
 			{
 				return r1.compareTo(r2);
@@ -115,10 +115,8 @@ public class Web1TSorterTest
 	{
 		filesToSort = new LinkedList<File>();
 
-		File file_1 = new File(
-				"src/test/resources/Web1TSorter/00000000_unsorted");
-		File file_2 = new File(
-				"src/test/resources/Web1TSorter/00000001_unsorted");
+		File file_1 = new File("src/test/resources/Web1TSorter/00000000_unsorted");
+		File file_2 = new File("src/test/resources/Web1TSorter/00000001_unsorted");
 
 		filesToSort.add(file_1);
 		filesToSort.add(file_2);

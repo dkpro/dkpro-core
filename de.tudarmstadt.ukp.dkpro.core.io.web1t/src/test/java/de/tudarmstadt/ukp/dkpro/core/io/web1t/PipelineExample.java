@@ -28,7 +28,6 @@ import org.uimafit.pipeline.SimplePipeline;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
@@ -45,9 +44,7 @@ public class PipelineExample
         CollectionReader reader = createCollectionReader(
                 TEIReader.class,
                 TEIReader.PARAM_PATH, corpusPath,
-                TEIReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.xml"
-                }
+                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
         );
 
         AnalysisEngineDescription segmenter = createPrimitiveDescription(

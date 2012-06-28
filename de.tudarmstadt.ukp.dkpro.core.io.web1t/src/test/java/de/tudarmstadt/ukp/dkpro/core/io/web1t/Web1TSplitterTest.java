@@ -46,8 +46,8 @@ public class Web1TSplitterTest
 	public void testSplitter()
 		throws IOException
 	{
-		Web1TFileSplitter splitter = new Web1TFileSplitter(input, output,
-				"UTF-8", fdist, 0.1, 0, null);
+		Web1TFileSplitter splitter = new Web1TFileSplitter(input, output, "UTF-8", fdist, 0.1, 0,
+				null);
 		splitter.split();
 		List<File> splits = splitter.getFiles();
 
@@ -69,8 +69,8 @@ public class Web1TSplitterTest
 		int words = 0;
 		for (File file : splits) {
 
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file), "UTF-8"));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
+					file), "UTF-8"));
 
 			while (reader.readLine() != null) {
 				words++;
