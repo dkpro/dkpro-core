@@ -41,8 +41,8 @@ public class WackyCorpus
     
     public enum WackyLanguageEdition {
         // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
-        DEWAC("de", "de"),
-        UKWAC("en", "en");
+        DEWAC("de", "stts"),
+        UKWAC("en", "ptb");
         
         private String language;
         private String tagSet;
@@ -87,7 +87,7 @@ public class WackyCorpus
                 ImsCwbReader.PARAM_PATH, wackyPath,
                 ImsCwbReader.PARAM_LANGUAGE, languageEdition.name(),
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
-                ImsCwbReader.PARAM_TAGGER_TAGSET, languageEdition.getTagSet(),
+                ImsCwbReader.PARAM_POS_TAGSET, languageEdition.getTagSet(),
                 ImsCwbReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt.gz" 
                 }
