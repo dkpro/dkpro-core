@@ -170,8 +170,7 @@ public class OpenNlpPosTagger
 			for (Token t : tokens) {
 				Type posTag = mappingProvider.getTagType(tags[i]);
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-				posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
-						internStrings ? tags[i].intern() : tags[i]);
+				posAnno.setPosValue(internStrings ? tags[i].intern() : tags[i]);
 				posAnno.addToIndexes();
 				t.setPos((POS) posAnno);
 				i++;
