@@ -54,7 +54,6 @@ public class XmiWriterReaderTest
 	{
 		CollectionReader textReader = CollectionReaderFactory.createCollectionReader(
 				TextReader.class,
-				createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
@@ -63,7 +62,6 @@ public class XmiWriterReaderTest
 
 		AnalysisEngine xmiWriter = AnalysisEngineFactory.createPrimitive(
 				XmiWriter.class,
-				createTypeSystemDescription(),
 				XmiWriter.PARAM_PATH, testFolder.getRoot().getPath());
 
 		runPipeline(textReader, xmiWriter);
@@ -75,7 +73,6 @@ public class XmiWriterReaderTest
 	{
 		CollectionReader xmiReader = CollectionReaderFactory.createCollectionReader(
 				XmiReader.class,
-				createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.xmi"
