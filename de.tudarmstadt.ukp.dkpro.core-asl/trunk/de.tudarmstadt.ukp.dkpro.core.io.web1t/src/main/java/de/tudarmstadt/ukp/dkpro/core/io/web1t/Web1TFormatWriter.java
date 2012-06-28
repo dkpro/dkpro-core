@@ -48,6 +48,8 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.CasUtil;
 
+import com.googlecode.jweb1t.JWeb1TIndexer;
+
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
@@ -85,6 +87,17 @@ public class Web1TFormatWriter
 	public static final String PARAM_MAX_NGRAM_LENGTH = "MaxNgramLength";
 	@ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = true, defaultValue = "3")
 	private int maxNgramLength;
+	
+	public static final String PARAM_LOWERCASE = "lowercase";
+	@ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+	private boolean lowercase;
+
+	/**
+	 * Create the indexes that jWeb1T needs to operate. (default: true)
+	 */
+	public static final String PARAM_CREATE_INDEXES = "createIndexes";
+	@ConfigurationParameter(name = PARAM_CREATE_INDEXES, mandatory = true, defaultValue = "true")
+	private boolean createIndexes;
 
 	/**
 	 * Specifies the minimum frequency a NGram must have to be written to the
@@ -105,13 +118,12 @@ public class Web1TFormatWriter
 	 * does not suffice the threshold is written with other words that also did
 	 * not meet the threshold into an own file for miscellaneous words. A high
 	 * threshold will lead to only a few, but large files and a most likely very
-	 * large misc. file. A low threshold results in many small files.
+	 * large misc. file. A low threshold results in many small files. Use a zero or a negative
+	 * value to write everything to one file.
 	 */
 	public static final String PARAM_SPLIT_TRESHOLD = "splitFileTreshold";
 	@ConfigurationParameter(name = PARAM_SPLIT_TRESHOLD, mandatory = false, defaultValue = "1.0")
-	String splitThresholdString;
-
-	double splitThreshold;
+	private float splitThreshold;
 
 	private Map<Integer, BufferedWriter> ngramWriters;
 	private Map<Integer, FrequencyDistribution<String>> letterFDs;
@@ -131,13 +143,10 @@ public class Web1TFormatWriter
 							"Parameter MIN_FREQUENCY is invalid (must be >= 1)"));
 		}
 
-		splitThreshold = Double.parseDouble(splitThresholdString);
-		if (splitThreshold <= 0 || splitThreshold >= 100) {
-			throw new ResourceInitializationException(
-					new IllegalArgumentException(
-							"Threshold has to be greater 0 and lower 100"));
+		if (splitThreshold >= 100) {
+			throw new ResourceInitializationException(new IllegalArgumentException(
+					"Threshold has to be lower 100"));
 		}
-
 	}
 
 	/**
@@ -155,6 +164,7 @@ public class Web1TFormatWriter
 
 		Comparator<String> comparator = new Comparator<String>()
 		{
+			@Override
 			public int compare(String r1, String r2)
 			{
 				return r1.compareTo(r2);
@@ -164,7 +174,6 @@ public class Web1TFormatWriter
 		// read the file with the counts per file and create the final
 		// aggregated counts
 		for (int level = minNgramLength; level <= maxNgramLength; level++) {
-
 			try {
 				Integer nextFreeFileNumber = processInputFileForLevel(level,
 						comparator);
@@ -179,7 +188,16 @@ public class Web1TFormatWriter
 			catch (IOException e) {
 				throw new AnalysisEngineProcessException(e);
 			}
+		}
 
+		if (createIndexes) {
+			try {
+				JWeb1TIndexer indexer = new JWeb1TIndexer(outputPath.getAbsolutePath(), maxNgramLength);
+				indexer.create();
+			}
+			catch (IOException e) {
+				throw new AnalysisEngineProcessException(e);
+			}
 		}
 	}
 
@@ -197,9 +215,8 @@ public class Web1TFormatWriter
 
 		FrequencyDistribution<String> letterFD = letterFDs.get(level);
 
-		Web1TFileSplitter splitter = new Web1TFileSplitter(unsortedInputFile,
-				outputFolder, outputEncoding, letterFD, splitThreshold, 0,
-				logger);
+		Web1TFileSplitter splitter = new Web1TFileSplitter(unsortedInputFile, outputFolder,
+				outputEncoding, letterFD, splitThreshold, 0, logger);
 
 		splitter.split();
 		LinkedList<File> splitFiles = splitter.getFiles();
@@ -253,14 +270,13 @@ public class Web1TFormatWriter
 
 				Type type = getInputType(cas, typeName);
 
-				List<AnnotationFS> tokens = CasUtil.selectCovered(cas, type,
-						annotation);
+				List<AnnotationFS> tokens = CasUtil.selectCovered(cas, type, annotation);
 
 				List<String> tokenStrings = createStringList(tokens, segments);
 
 				for (int ngramLength = minNgramLength; ngramLength <= maxNgramLength; ngramLength++) {
-					cfd.addSamples(ngramLength, new NGramStringIterable(
-							tokenStrings, ngramLength, ngramLength));
+					cfd.addSamples(ngramLength, new NGramStringIterable(tokenStrings, ngramLength,
+							ngramLength));
 				}
 			}
 		}
@@ -339,6 +355,9 @@ public class Web1TFormatWriter
 		for (AnnotationFS annotation : tokens) {
 			String value = fp.getValue(annotation);
 			if (!StringUtils.isBlank(value)) {
+				if (lowercase) {
+					value = value.toLowerCase();
+				}
 				tokenStrings.add(value);
 			}
 		}
@@ -399,7 +418,7 @@ public class Web1TFormatWriter
 
 		FrequencyDistribution<String> letterFD = createFreqDistForMiscFile(misc);
 
-		double oldThreshold = splitThreshold;
+		float oldThreshold = splitThreshold;
 		// Make sure that the misc file is split into little pieces
 		splitThreshold /= 10;
 
@@ -408,8 +427,7 @@ public class Web1TFormatWriter
 		splitter.split();
 		LinkedList<File> splittedFiles = splitter.getFiles();
 
-		Web1TFileSorter sorter = new Web1TFileSorter(splittedFiles, comparator,
-				logger);
+		Web1TFileSorter sorter = new Web1TFileSorter(splittedFiles, comparator, logger);
 		sorter.sort();
 		LinkedList<File> sortedFiles = splitter.getFiles();
 
