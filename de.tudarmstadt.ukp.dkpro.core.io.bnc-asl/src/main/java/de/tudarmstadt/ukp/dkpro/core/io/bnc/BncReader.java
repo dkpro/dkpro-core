@@ -17,17 +17,24 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
+import static org.apache.commons.lang.StringUtils.isNotBlank;
+
+import org.apache.uima.UimaContext;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.descriptor.ConfigurationParameter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderText;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 /**
  * Reader for the British National Corpus (XML version).
@@ -77,13 +84,46 @@ public class BncReader
 
 	private static final String ATTR_HEADWORD = "hw";
 
+	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String mappingPosLocation;
+
+	public static final String PARAM_POS_TAGSET = "posTagset";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posTagset;
+
+	private MappingProvider posMappingProvider;
+
+	@Override
+	public void initialize(UimaContext aContext)
+		throws ResourceInitializationException
+	{
+		super.initialize(aContext);
+		
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "c5");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+		posMappingProvider.setOverride("tagger.tagset", posTagset);
+	}
+	
+	@Override
+	protected void initCas(CAS aCas, Resource aResource, String aQualifier)
+	{
+		super.initCas(aCas, aResource, aQualifier);
+		posMappingProvider.configure(aCas);
+	}
+	
 	@Override
 	protected Handler newSaxHandler()
 	{
 		return new BncHandler();
 	}
 
-	public static class BncHandler
+	public class BncHandler
 		extends TextExtractor
 	{
 		private String documentId = null;
@@ -142,7 +182,9 @@ public class BncReader
 					trim(token);
 					
 					if (c5Tag != null) {
-						POS pos = new POS(getJCas(), token.getBegin(), token.getEnd());
+						Type posTag = posMappingProvider.getTagType(c5Tag);
+						POS pos = (POS) getJCas().getCas().createAnnotation(posTag, 
+								token.getBegin(), token.getEnd());
 						pos.setPosValue(c5Tag);
 						pos.addToIndexes();
 						token.setPos(pos);
