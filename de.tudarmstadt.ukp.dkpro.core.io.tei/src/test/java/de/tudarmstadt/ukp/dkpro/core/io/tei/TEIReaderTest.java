@@ -19,23 +19,31 @@ package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.uimafit.factory.CollectionReaderFactory.createDescription;
 
+import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
+import org.uimafit.pipeline.SimplePipeline;
 import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
 
 public class TEIReaderTest
@@ -119,6 +127,29 @@ public class TEIReaderTest
         assertEquals(3, i);
     }
 
+    @Test
+    public void brownReaderTest2()
+        throws Exception
+    {
+    	File reference = new File("src/test/resources/brown_ims.txt");
+    	File output = new File("target/test-output/brown_ims.txt");
+    	
+        CollectionReaderDescription reader = createDescription(
+                TEIReader.class,
+                TEIReader.PARAM_LANGUAGE, "en",
+                TEIReader.PARAM_PATH, "classpath:/brown_tei/",
+                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
+        
+        AnalysisEngineDescription writer = createPrimitiveDescription(ImsCwbWriter.class,
+        		ImsCwbWriter.PARAM_TARGET_LOCATION, output);
+
+        SimplePipeline.runPipeline(reader, writer);
+        
+        assertEquals(
+        		FileUtils.readFileToString(reference, "UTF-8"), 
+        		FileUtils.readFileToString(output, "UTF-8"));
+    }
+    
     @Test
     public void brownReaderTest_noSentences()
         throws Exception

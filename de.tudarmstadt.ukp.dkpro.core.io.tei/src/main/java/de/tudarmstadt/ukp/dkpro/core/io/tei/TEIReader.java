@@ -30,6 +30,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
+import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -52,6 +53,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -102,6 +104,14 @@ public class TEIReader
 	@ConfigurationParameter(name = PARAM_OMIT_IGNORABLE_WHITESPACE, mandatory = true, defaultValue = "false")
 	private boolean omitIgnorableWhitespace;
 
+	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String mappingPosLocation;
+
+	public static final String PARAM_POS_TAGSET = "posTagset";
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posTagset;
+
 	/**
 	 * (character) contains a significant punctuation mark as identified by the CLAWS tagger.
 	 */
@@ -142,7 +152,9 @@ public class TEIReader
 	private Element currentTeiElement;
 	private Resource currentResource;
 	private int currentTeiElementNumber;
-	
+
+	private MappingProvider posMappingProvider;
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -167,6 +179,15 @@ public class TEIReader
 		catch (IOException e) {
 			new ResourceInitializationException(e);
 		}
+
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+		posMappingProvider.setOverride("tagger.tagset", posTagset);
 	}
 	
 	private void nextTeiElement() throws CollectionException, IOException
@@ -238,6 +259,9 @@ public class TEIReader
 		if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
 			aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
 		}
+
+		// Configure mapping only now, because now the language is set in the CAS
+		posMappingProvider.configure(aCAS);
 
 		InputStream is = null;
 
@@ -390,7 +414,9 @@ public class TEIReader
 					trim(token);
 					
 					if (posTag != null && writePOS) {
-						POS pos = new POS(getJCas(), token.getBegin(), token.getEnd());
+						Type posTagType = posMappingProvider.getTagType(posTag);
+						POS pos = (POS) getJCas().getCas().createAnnotation(posTagType, 
+								token.getBegin(), token.getEnd());
 						pos.setPosValue(posTag);
 						pos.addToIndexes();
 						token.setPos(pos);
