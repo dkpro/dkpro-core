@@ -18,7 +18,6 @@
 
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.util.ArrayList;
@@ -26,10 +25,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.jxpath.JXPathContext;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -60,7 +62,11 @@ public class TokenMerger
 	 */
 	public static final String PARAM_ANNOTATION_TYPE = "annotationType";
 	@ConfigurationParameter(name=PARAM_ANNOTATION_TYPE, mandatory=true)
-	private Class<? extends Annotation> annotationType;
+	private String annotationType;
+	
+	public static final String PARAM_CONSTRAINT = "constraint";
+	@ConfigurationParameter(name=PARAM_CONSTRAINT, mandatory=false)
+	private String constraint;
 
 	/**
 	 * Configure what should happen to the lemma of the merged tokens. It is possible to JOIN 
@@ -125,78 +131,90 @@ public class TokenMerger
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
+		CAS cas = aJCas.getCas();
+		
 		if (posValue != null) {
-			mappingProvider.configure(aJCas.getCas());
+			mappingProvider.configure(cas);
 		}
 		
 		Collection<Annotation> toRemove = new ArrayList<Annotation>();
-		for (Annotation cover : select(aJCas, annotationType)) {
+		for (AnnotationFS cover : CasUtil.select(cas, CasUtil.getAnnotationType(cas, annotationType))) {
 			List<Token> covered = selectCovered(Token.class, cover);
-			if (covered.size() >= 2) {
-				Iterator<Token> i = covered.iterator();
+			if (covered.size() < 2) {
+				continue;
+			}
+
+			if (constraint != null) {
+				JXPathContext ctx = JXPathContext.newContext(cover);
+				boolean match = ctx.iterate(constraint).hasNext();
+				if (!match) {
+					continue;
+				}
+			}
+			
+			Iterator<Token> i = covered.iterator();
+			
+			// Extend first token
+			Token token = i.next();
+			token.setEnd(covered.get(covered.size() - 1).getEnd());
+			
+			// Optionally update the POS value
+			if (posValue != null) {
+				updatePos(token, toRemove);
+			}
+			
+			// Record lemma - may be needed for join later
+			List<String> lemmata = new ArrayList<String>();
+			if (token.getLemma() != null) {
+				lemmata.add(token.getLemma().getValue());
+			}
+			
+			// Mark the rest for deletion - record lemmata if desired for later join
+			while (i.hasNext()) {
+				Token t = i.next();
 				
-				// Extend first token
-				Token token = i.next();
-				token.setEnd(covered.get(covered.size() - 1).getEnd());
-				
-				// Optionally update the POS value
-				if (posValue != null) {
-					updatePos(token, toRemove);
+				Lemma lemma = t.getLemma();
+				if (lemma != null) {
+					lemmata.add(lemma.getValue());
+					toRemove.add(lemma);
 				}
 				
-				// Record lemma - may be needed for join later
-				List<String> lemmata = new ArrayList<String>();
-				if (token.getLemma() != null) {
-					lemmata.add(token.getLemma().getValue());
+				POS pos = t.getPos();
+				if (pos != null) {
+					toRemove.add(pos);
 				}
 				
-				// Mark the rest for deletion - record lemmata if desired for later join
-				while (i.hasNext()) {
-					Token t = i.next();
-					
-					Lemma lemma = t.getLemma();
-					if (lemma != null) {
-						lemmata.add(lemma.getValue());
-						toRemove.add(lemma);
+				toRemove.add(t);
+			}
+			
+			// Join lemmata if desired
+			if (lemmaMode == LemmaMode.JOIN) {
+				Lemma lemma = token.getLemma();
+				if (!lemmata.isEmpty()) {
+					if (lemma == null) {
+						lemma = new Lemma(aJCas);
 					}
-					
-					POS pos = t.getPos();
-					if (pos != null) {
-						toRemove.add(pos);
-					}
-					
-					toRemove.add(t);
+					lemma.setValue(StringUtils.join(lemmata, " "));
 				}
-				
-				// Join lemmata if desired
-				if (lemmaMode == LemmaMode.JOIN) {
-					Lemma lemma = token.getLemma();
-					if (!lemmata.isEmpty()) {
-						if (lemma == null) {
-							lemma = new Lemma(aJCas);
-						}
-						lemma.setValue(StringUtils.join(lemmata, " "));
-					}
-					// Remove if there was nothing to join... I don't really ever expect to get here
-					else if (lemma != null) {
-						token.setLemma(null);
-						toRemove.add(lemma);
-					}
+				// Remove if there was nothing to join... I don't really ever expect to get here
+				else if (lemma != null) {
+					token.setLemma(null);
+					toRemove.add(lemma);
 				}
-				// Remove the lemma - if desired
-				else if (lemmaMode == LemmaMode.REMOVE) {
-					Lemma lemma = token.getLemma();
-					if (lemma != null) {
-						token.setLemma(null);
-						toRemove.add(lemma);
-					}
+			}
+			// Remove the lemma - if desired
+			else if (lemmaMode == LemmaMode.REMOVE) {
+				Lemma lemma = token.getLemma();
+				if (lemma != null) {
+					token.setLemma(null);
+					toRemove.add(lemma);
 				}
-				
-				// Update offsets for lemma
-				if (token.getLemma() != null) {
-					token.getLemma().setBegin(token.getBegin());
-					token.getLemma().setEnd(token.getEnd());
-				}
+			}
+			
+			// Update offsets for lemma
+			if (token.getLemma() != null) {
+				token.getLemma().setBegin(token.getBegin());
+				token.getLemma().setEnd(token.getEnd());
 			}
 		}
 		
