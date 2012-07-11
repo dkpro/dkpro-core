@@ -23,14 +23,36 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.toText;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import org.apache.commons.jxpath.ClassFunctions;
+import org.apache.commons.jxpath.DynamicPropertyHandler;
+import org.apache.commons.jxpath.ExpressionContext;
+import org.apache.commons.jxpath.JXPathContext;
+import org.apache.commons.jxpath.JXPathIntrospector;
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.CASException;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Test;
-import org.uimafit.testing.factory.TokenBuilder;
-
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import org.uimafit.factory.JCasBuilder;
+import org.uimafit.factory.JCasFactory;
+import org.uimafit.util.CasUtil;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.tokit.TokenMerger.LemmaMode;
 
 public class TokenMergerTest
 {
@@ -39,19 +61,184 @@ public class TokenMergerTest
 		throws Exception
 	{
 		AnalysisEngine filter = createPrimitive(TokenMerger.class,
-				TokenMerger.PARAM_ANNOTATION_TYPE, Sentence.class);
+				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class);
 
-		String content = "I love New York .";
-		JCas jcas = filter.newJCas();
+		JCas jcas = initCas();
+		filter.process(jcas);
 
-		TokenBuilder<Token, Annotation> tb = new TokenBuilder<Token, Annotation>(Token.class,
-				Annotation.class);
-		tb.buildTokens(jcas, content);
+		assertEquals(asList("I", "love", "New York", "."), pick(select(jcas, Token.class), "cas:text()"));
+	}
 
-		new Sentence(jcas, 7, 16).addToIndexes();
+	@Test
+	public void testWithConstraintMatch()
+		throws Exception
+	{
+		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+				TokenMerger.PARAM_CONSTRAINT, ".[value = 'LOCATION']");
 
+		JCas jcas = initCas();
 		filter.process(jcas);
 
 		assertEquals(asList("I", "love", "New York", "."), toText(select(jcas, Token.class)));
 	}
+
+	@Test
+	public void testWithConstraintNoMatch()
+		throws Exception
+	{
+		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+				TokenMerger.PARAM_CONSTRAINT, ".[value = 'PERSON']");
+
+		JCas jcas = initCas();
+		filter.process(jcas);
+
+		assertEquals(asList("I", "love", "New", "York", "."), toText(select(jcas, Token.class)));
+	}
+
+	@Test
+	public void testSimpleMergeLemmaJoin()
+		throws Exception
+	{
+		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+				TokenMerger.PARAM_LEMMA_MODE, LemmaMode.JOIN);
+
+		JCas jcas = initCas();
+		filter.process(jcas);
+
+		assertEquals(asList("I", "love", "new york", "."), pick(select(jcas, Token.class), "./lemma/value"));
+	}
+	
+	private JCas initCas() throws UIMAException
+	{
+		JCas jcas = JCasFactory.createJCas();
+		
+		JCasBuilder builder = new JCasBuilder(jcas);
+		setLemmaPos(builder.add("I", Token.class), PR.class, "PR", "I");
+		builder.add(" ");
+		setLemmaPos(builder.add("love", Token.class), V.class, "V", "love");
+		builder.add(" ");
+		int m = setLemmaPos(builder.add("New", Token.class), N.class, "N", "new").getBegin();
+		builder.add(" ");
+		setLemmaPos(builder.add("York", Token.class), N.class, "N", "york");
+		NamedEntity city = builder.add(m, NamedEntity.class);
+		city.setValue("LOCATION");
+		setLemmaPos(builder.add(".", Token.class), PUNC.class, "PUNT", ".");
+		builder.close();
+		
+		return builder.getJCas();
+	}
+	
+	private Token setLemmaPos(Token aToken, Class<? extends POS> aPosType, String aPosValue,
+			String aLemma)
+		throws CASException
+	{
+		CAS cas = aToken.getCAS();
+		
+		POS pos = (POS) cas.createAnnotation(CasUtil.getType(cas, aPosType), aToken.getBegin(), 
+				aToken.getEnd());
+		pos.setPosValue(aPosValue);
+		aToken.setPos(pos);
+		
+		Lemma lemma = new Lemma(aToken.getCAS().getJCas(), aToken.getBegin(), aToken.getEnd());
+		lemma.setValue(aLemma);
+		aToken.setLemma(lemma);
+		
+		return aToken;
+	}
+	
+	// =============================================================================================
+	// == JXPath helper methods
+	// =============================================================================================
+	
+	{
+		JXPathIntrospector.registerDynamicClass(FeatureStructure.class, FeatureStructureHandler.class);
+	}
+	
+	public static class FeatureStructureHandler implements DynamicPropertyHandler
+	{
+		@Override
+		public String[] getPropertyNames(Object aObject)
+		{
+			FeatureStructure fs = (FeatureStructure) aObject;
+			Type t = fs.getType();
+			List<Feature> features = t.getFeatures();
+			String[] featureNames = new String[features.size()];
+			
+			int i = 0;
+			for (Feature f : features) {
+				featureNames[i] = f.getShortName();
+				i++;
+			}
+			return featureNames;
+		}
+
+		@Override
+		public Object getProperty(Object aObject, String aPropertyName)
+		{
+			FeatureStructure fs = (FeatureStructure) aObject;
+			Feature f = fs.getType().getFeatureByBaseName(aPropertyName);
+			if (CAS.TYPE_NAME_BOOLEAN.equals(f.getRange().getName())) {
+				return fs.getBooleanValue(f);
+			}
+			else if (CAS.TYPE_NAME_BYTE.equals(f.getRange().getName())) {
+				return fs.getByteValue(f);
+			}
+			else if (CAS.TYPE_NAME_DOUBLE.equals(f.getRange().getName())) {
+				return fs.getDoubleValue(f);
+			}
+			else if (CAS.TYPE_NAME_FLOAT.equals(f.getRange().getName())) {
+				return fs.getFloatValue(f);
+			}
+			else if (CAS.TYPE_NAME_INTEGER.equals(f.getRange().getName())) {
+				return fs.getIntValue(f);
+			}
+			else if (CAS.TYPE_NAME_LONG.equals(f.getRange().getName())) {
+				return fs.getLongValue(f);
+			}
+			else if (CAS.TYPE_NAME_SHORT.equals(f.getRange().getName())) {
+				return fs.getShortValue(f);
+			}
+			else if (CAS.TYPE_NAME_STRING.equals(f.getRange().getName())) {
+				return fs.getStringValue(f);
+			}
+			else {
+				return fs.getFeatureValue(f);
+			}
+		}
+
+		@Override
+		public void setProperty(Object aObject, String aPropertyName, Object aValue)
+		{
+			throw new UnsupportedOperationException();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Object> pick(Collection<?> aContext, String aPath)
+	{
+		List<Object> result = new ArrayList<Object>();
+		for (Object a : aContext) {
+			JXPathContext ctx = JXPathContext.newContext(a);
+			ctx.setFunctions(new ClassFunctions(JXPathCasFunctions.class, "cas"));
+			result.addAll(ctx.selectNodes(aPath));
+		}
+		return result;
+	}
+	
+	public static class JXPathCasFunctions
+	{
+		public static String text(ExpressionContext aCtx)
+		{
+			Object value = aCtx.getContextNodePointer().getValue();
+			if (value instanceof AnnotationFS) {
+				return ((AnnotationFS) value).getCoveredText();
+			}
+			else {
+				return String.valueOf(value);
+			}
+		}
+	}	
 }
