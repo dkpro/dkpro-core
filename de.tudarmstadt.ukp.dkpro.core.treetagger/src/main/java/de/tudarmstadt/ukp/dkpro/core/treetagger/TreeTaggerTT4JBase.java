@@ -42,7 +42,6 @@ import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 
@@ -77,10 +76,6 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name=PARAM_MODEL_ENCODING, mandatory=false)
 	protected String modelEncoding;
 
-    public static final String PARAM_TAG_MAPPING_PATH = "TagMappingPath";
-	@ConfigurationParameter(name=PARAM_TAG_MAPPING_PATH, mandatory=false)
-	protected File tagMappingPath;
-
 	public static final String PARAM_INTERN_STRINGS = "InternStrings";
 	@ConfigurationParameter(name=PARAM_INTERN_STRINGS, mandatory=false, defaultValue="true")
 	private boolean internStrings;
@@ -98,10 +93,6 @@ public abstract class TreeTaggerTT4JBase<T>
 			if (modelPath != null && modelEncoding == null) {
 				throw new IllegalArgumentException("When specifying a model file, the model " +
 						"encoding has to be specified as well.");
-			}
-			if (modelPath != null && tagMappingPath == null) {
-				throw new IllegalArgumentException("When specifying a model, the tag mapping " +
-						"properties file has to be specified as well.");
 			}
 
 //			missingTags = new HashSet<String>();
@@ -290,16 +281,14 @@ public abstract class TreeTaggerTT4JBase<T>
 	{
 		private File overrideModelPath;
 		private String overrideModelEncoding;
-		private File overrideMappingPath;
 
 		protected abstract
 		String getType();
 
-		public DKProModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
+		public DKProModelResolver(File aModelPath, String aModelEncoding)
 		{
 			overrideModelPath = aModelPath;
 			overrideModelEncoding = aModelEncoding;
-			overrideMappingPath = aMappingPath;
 		}
 
 		public File searchInFilesystem(final String aLocation, final Set<String> aSearchedIn)
@@ -328,45 +317,33 @@ public abstract class TreeTaggerTT4JBase<T>
 			throws IOException
 		{
 			if (overrideModelPath != null) {
-				Map<String, String> mapping = TagsetMappingFactory.loadProperties(
-						overrideMappingPath.toURI().toURL());
-				return new DKProModel(aModelName, overrideModelPath, overrideModelEncoding, mapping);
+				return new DKProModel(aModelName, overrideModelPath, overrideModelEncoding);
 			}
 
 			File modelFile;
 			String modelEnc;
-			Map<String, String> mapping = null;
 			Map<String, String> properties = null;
 			Set<String> searchedIn = new HashSet<String>();
 			String byteOrder = getPlatformDetector().getByteOrder();
 			String baseFile = aModelName+"-"+getType()+"-"+byteOrder;
-			String baseMapFile = aModelName+"-"+getType()+".map";
 
 			// Try file system
 			modelFile = searchInFilesystem(baseFile + ".par", searchedIn);
 			if (modelFile != null) {
 				String baseName = FilenameUtils.removeExtension(modelFile.getPath());
-				File mappingFile = new File(modelFile.getAbsoluteFile().getParentFile(), baseMapFile);
 				File propertiesFile = new File(baseName + ".properties");
-
-				if (!mappingFile.exists()) {
-					throw new IOException("There is no tag mapping for " + "model [" + aModelName
-							+ "] at [" + mappingFile + "]");
-				}
 
 				if (!propertiesFile.exists()) {
 					throw new IOException("There is no properties file for " + "model ["
 							+ aModelName + "] at [" + propertiesFile + "]");
 				}
 
-				mapping = TagsetMappingFactory.loadProperties(mappingFile.toURI().toURL());
 				properties = TagsetMappingFactory.loadProperties(propertiesFile.toURI().toURL());
 			}
 
 			// Try classpath
 			if (modelFile == null) {
 				String base = "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/";
-//				String mappingLoc = "/de/tudarmstadt/ukp/dkpro/core/treetagger/map/"+baseMapFile;
 				String propertiesLoc = base+baseFile+".properties";
 				String modelLoc = base+baseFile+".par";
 				searchedIn.add("classpath:"+modelLoc);
@@ -382,11 +359,9 @@ public abstract class TreeTaggerTT4JBase<T>
 					properties = TagsetMappingFactory.loadProperties(propertiesUrl);
 					modelFile = getUrlAsFile(modelUrl, true);
 				}
-				
-				mapping = TagsetMappingFactory.getMapping(getType(), aModelName, O.class.getName());
 			}
 
-			if (modelFile == null || properties == null || mapping == null) {
+			if (modelFile == null || properties == null) {
 				throw new IOException("Unable to locate model ["+aModelName+"] in the following " +
 						"locations "+searchedIn+".  Make sure the environment variable " +
 						"'TREETAGGER_HOME' or 'TAGDIR' or the system property 'treetagger.home' " +
@@ -394,7 +369,7 @@ public abstract class TreeTaggerTT4JBase<T>
 			}
 
 			modelEnc = (overrideModelEncoding != null) ? overrideModelEncoding : properties.get("encoding");
-			return new DKProModel(aModelName, modelFile, modelEnc, mapping);
+			return new DKProModel(aModelName, modelFile, modelEnc);
 		}
 	}
 
@@ -404,23 +379,14 @@ public abstract class TreeTaggerTT4JBase<T>
 	public static class DKProModel
 		extends DefaultModel
 	{
-		private Map<String, String> mapping;
-
-		public DKProModel(String aName, File aFile, String aEncoding, Map<String, String> aMapping)
+		public DKProModel(String aName, File aFile, String aEncoding)
 		{
 			super(aName, aFile, aEncoding);
-			mapping = aMapping;
 		}
 
-		public DKProModel(Model aModel, Map<String, String> aMapping)
+		public DKProModel(Model aModel)
 		{
 			super(aModel.getName(), aModel.getFile(), aModel.getEncoding());
-			mapping = aMapping;
-		}
-
-		public Map<String, String> getMapping()
-		{
-			return mapping;
 		}
 	}
 }

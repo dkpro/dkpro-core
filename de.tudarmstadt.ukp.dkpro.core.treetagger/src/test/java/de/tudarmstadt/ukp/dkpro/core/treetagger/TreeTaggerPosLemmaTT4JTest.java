@@ -75,8 +75,8 @@ class TreeTaggerPosLemmaTT4JTest
         // TT4J per default runs TreeTagger with the -sgml option, so XML tags are not tagged
         runTest("en", "My homepage is <url> http://null.dummy </url> .",
         		new String[] { "my", "homepage", "be", "http://null.dummy", "." },
-        		new String[] { "PP$", "NN", "VBZ", "JJ", "SENT" },
-        		new String[] { "PR", "NN", "V", "ADJ", "PUNC" });
+        		new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
+        		new String[] { "PR",  "NN", "V",   "ADJ", "PUNC" });
 	}
 
 	@Test
@@ -96,12 +96,12 @@ class TreeTaggerPosLemmaTT4JTest
         runTest("sl", "To je test .",
         		new String[] { "ta",          "biti",      "test",  "." },
         		new String[] { "zk-sei----s", "gvpste--n", "somei", "SENT" },
-        		new String[] { "O",           "O",         "O",     "O" });
+        		new String[] { "POS",         "POS",       "POS",   "POS" });
 
         runTest("sl", "Gremo na Češko za kosilo .",
         		new String[] { "iti",             "na",   "Češko", "za",   "kosilo", "." },
         		new String[] { "gppspm--n-----d", "dpet", "slmei", "dpet", "soset",  "SENT" },
-        		new String[] { "O",               "O",    "O",     "O",    "O",      "O" });
+        		new String[] { "POS",             "POS",  "POS",   "POS",  "POS",    "POS" });
     }
 
     @Test
