@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.uimafit.util.CasUtil.*;
+import static org.uimafit.util.CasUtil.select;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +29,7 @@ import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerException;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
@@ -40,7 +41,8 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -50,6 +52,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TreeTaggerPosLemmaTT4J
 	extends TreeTaggerTT4JBase<AnnotationFS>
 {
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = "taggerMappingLocation";
+	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
+	protected String taggerMappingLocation;
+	
 	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
@@ -63,30 +69,48 @@ public class TreeTaggerPosLemmaTT4J
 	private boolean lemmaEnabled;
 
 	private Type tokenType;
-	private Type lemmaTag;
-	private Type tokenTag;
+	private Type lemmaType;
 	private Feature lemmaValue;
 	private Feature featLemma;
 	private Feature featPos;
+	
+	private MappingProvider taggerMappingProvider;
 
+	@Override
+	public void initialize(UimaContext aContext)
+		throws ResourceInitializationException
+	{
+		super.initialize(aContext);
+		
+		taggerMappingProvider = new MappingProvider();
+		taggerMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+		taggerMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		taggerMappingProvider.setDefault("tagger.tagset", "default");
+		taggerMappingProvider.setOverride(MappingProvider.LOCATION, taggerMappingLocation);
+		taggerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
+//		posMappingProvider.addImport("tagger.tagset", modelProvider);
+	}
+	
 	@Override
 	public void typeSystemInit(TypeSystem aTypeSystem)
 		throws AnalysisEngineProcessException
 	{
 		super.typeSystemInit(aTypeSystem);
-
+		
 		tokenType = aTypeSystem.getType(Token.class.getName());
-		lemmaTag = aTypeSystem.getType(Lemma.class.getName());
-		tokenTag = aTypeSystem.getType(Token.class.getName());
-		lemmaValue = lemmaTag.getFeatureByBaseName("value");
-		featLemma = tokenTag.getFeatureByBaseName("lemma");
-		featPos = tokenTag.getFeatureByBaseName("pos");
+		lemmaType = aTypeSystem.getType(Lemma.class.getName());
+		lemmaValue = lemmaType.getFeatureByBaseName("value");
+		featLemma = tokenType.getFeatureByBaseName("lemma");
+		featPos = tokenType.getFeatureByBaseName("pos");
 	}
 
 	@Override
 	public void process(final CAS aCas)
 		throws AnalysisEngineProcessException
 	{
+		taggerMappingProvider.configure(aCas);
+		
 		getLogger().debug("Running TreeTagger POS tagger and lemmatizer");
 		try {
 			final String language;
@@ -131,11 +155,10 @@ public class TreeTaggerPosLemmaTT4J
 						TypeSystem ts = aCas.getTypeSystem();
 						// Add the Part of Speech
 						if (posEnabled && aPos != null) {
-							Type posTag = TagsetMappingFactory.getTagType(
-									((DKProModel) treetagger.getModel()).getMapping(), aPos, ts);
+							Type posType = taggerMappingProvider.getTagType(aPos);
 							AnnotationFS posAnno = aCas.createAnnotation(
-									posTag, aToken.getBegin(), aToken.getEnd());
-							posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
+									posType, aToken.getBegin(), aToken.getEnd());
+							posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"),
 									isInternStrings() ? aPos.intern() : aPos);
 							pos[count.get()] = posAnno;
 							aToken.setFeatureValue(featPos, posAnno);
@@ -144,7 +167,7 @@ public class TreeTaggerPosLemmaTT4J
 						// Add the lemma
 						if (lemmaEnabled && aLemma != null) {
 							AnnotationFS lemmaAnno = aCas.createAnnotation(
-									lemmaTag, aToken.getBegin(), aToken.getEnd());
+									lemmaType, aToken.getBegin(), aToken.getEnd());
 							lemmaAnno.setStringValue(lemmaValue,
 									isInternStrings() ? aLemma.intern() : aLemma);
 							lemma[count.get()] = lemmaAnno;
@@ -185,7 +208,7 @@ public class TreeTaggerPosLemmaTT4J
 	@Override
 	protected ModelResolver getModelResolver()
 	{
-		return new PosModelResolver(modelPath, modelEncoding, tagMappingPath);
+		return new PosModelResolver(modelPath, modelEncoding);
 	}
 
 	@Override
@@ -213,12 +236,12 @@ public class TreeTaggerPosLemmaTT4J
 	{
 		public PosModelResolver()
 		{
-			super(null, null, null);
+			super(null, null);
 		}
 
-		public PosModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
+		public PosModelResolver(File aModelPath, String aModelEncoding)
 		{
-			super(aModelPath, aModelEncoding, aMappingPath);
+			super(aModelPath, aModelEncoding);
 		}
 
 		@Override

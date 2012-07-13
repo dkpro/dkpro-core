@@ -32,13 +32,15 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 /**
  * @author Richard Eckart de Castilho
@@ -47,17 +49,19 @@ public
 class TreeTaggerChunkerTT4J
 extends TreeTaggerTT4JBase<AnnotationFS>
 {
-	/**
-	 * This component requires a type system in which all Part-of-Speech tag can be reached in-order
-	 * by iterating over a particular type. The name of the type can be set here.
-	 */
-	public static final String PARAM_POS_BASE_TYPE = "PartOfSpeechBaseType";
-	@ConfigurationParameter(name=PARAM_POS_BASE_TYPE, mandatory=false)
-	private String posBaseType;
-
+	public static final String PARAM_CHUNKER_MAPPING_LOCATION = "chunkerMappingLocation";
+	@ConfigurationParameter(name = PARAM_CHUNKER_MAPPING_LOCATION, mandatory = false)
+	protected String chunkerMappingLocation;
+	
 	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
+
+	private MappingProvider chunkerMappingProvider;
+
+	private Type posType;
+	private Type chunkType;
+	private Feature chunkValue;
 
     @Override
 	public void initialize(UimaContext context)
@@ -65,19 +69,34 @@ extends TreeTaggerTT4JBase<AnnotationFS>
     {
     	super.initialize(context);
 
-    	if (posBaseType == null) {
-    		posBaseType = POS.class.getName();
-    	}
-
     	treetagger.setEpsilon(0.00000001);
     	treetagger.setHyphenHeuristics(true);
+    	
+		chunkerMappingProvider = new MappingProvider();
+		chunkerMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+				"core/api/lexmorph/tagset/${language}-${chunker.tagset}-chunker.map");
+		chunkerMappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
+		chunkerMappingProvider.setDefault("chunker.tagset", "default");
+		chunkerMappingProvider.setOverride(MappingProvider.LOCATION, chunkerMappingLocation);
+		chunkerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
+//		posMappingProvider.addImport("tagger.tagset", modelProvider);
     }
 
+	@Override
+	public void typeSystemInit(TypeSystem aTypeSystem)
+		throws AnalysisEngineProcessException
+	{
+		super.typeSystemInit(aTypeSystem);
+		
+		posType = aTypeSystem.getType(POS.class.getName());
+		chunkType = aTypeSystem.getType(Chunk.class.getName());
+		chunkValue = chunkType.getFeatureByBaseName("chunkValue");
+	}
+    
     @Override
     public void destroy()
     {
     	typeAdapterClass = null;
-    	posBaseType = null;
     	super.destroy();
     }
 
@@ -85,6 +104,8 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	public void process(final CAS aCas)
 	throws AnalysisEngineProcessException
 	{
+		chunkerMappingProvider.configure(aCas);
+		
 		getLogger().debug("Running TreeTagger chunker");
 		try {
 			final String language;
@@ -156,15 +177,10 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 				private void chunkComplete()
 				{
 					if (openChunk != null) {
-						Type chunkType = TagsetMappingFactory.getTagType(
-								((DKProModel) treetagger.getModel()).getMapping(),
-								openChunk, aCas.getTypeSystem());
+						Type chunkType = chunkerMappingProvider.getTagType(openChunk);
 						AnnotationFS chunk = aCas.createAnnotation(chunkType, start, end);
-						Feature feat = chunkType.getFeatureByBaseName("chunkValue");
-						if (feat != null) {
-							chunk.setStringValue(feat, isInternStrings() ? openChunk.intern() :
-								openChunk);
-						}
+						chunk.setStringValue(chunkValue, isInternStrings() ? openChunk.intern() :
+							openChunk);
 						aCas.addFsToIndexes(chunk);
 
 						count.getAndIncrement();
@@ -174,9 +190,8 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			};
 			treetagger.setHandler(handler);
 
-			Type tokenType = aCas.getTypeSystem().getType(posBaseType);
 			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
-			for (AnnotationFS fs : select(aCas, tokenType)) {
+			for (AnnotationFS fs : select(aCas, posType)) {
 				tokens.add(fs);
 			}
 
@@ -185,7 +200,8 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			handler.token(null, null, null);
 
 			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " chunks");
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
 	}
@@ -211,7 +227,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	protected
 	ModelResolver getModelResolver()
 	{
-		return new ChunkerModelResolver(modelPath, modelEncoding, tagMappingPath);
+		return new ChunkerModelResolver(modelPath, modelEncoding);
 	}
 
 	/**
@@ -220,9 +236,9 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	public static class ChunkerModelResolver
 		extends DKProModelResolver
 	{
-		public ChunkerModelResolver(File aModelPath, String aModelEncoding, File aMappingPath)
+		public ChunkerModelResolver(File aModelPath, String aModelEncoding)
 		{
-			super(aModelPath, aModelEncoding, aMappingPath);
+			super(aModelPath, aModelEncoding);
 		}
 
 		@Override
