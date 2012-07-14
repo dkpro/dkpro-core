@@ -62,6 +62,7 @@ import org.springframework.util.PropertyPlaceholderHelper;
  * @param <M> the kind of resource produced
  */
 public abstract class ResourceObjectProviderBase<M>
+	implements HasResourceMetadata
 {
 	private final Log log = LogFactory.getLog(getClass());
 	
@@ -112,7 +113,7 @@ public abstract class ResourceObjectProviderBase<M>
 	
 	private String defaultVariantsLocation;
 
-	private Map<String, ResourceObjectProviderBase<?>> imports = new HashMap<String, ResourceObjectProviderBase<?>>();
+	private Map<String, HasResourceMetadata> imports = new HashMap<String, HasResourceMetadata>();
 
 	public void setOverride(String aKey, String aValue)
 	{
@@ -154,7 +155,7 @@ public abstract class ResourceObjectProviderBase<M>
 		defaults.remove(aKey);
 	}
 	
-	public void addImport(String aString, ResourceObjectProviderBase<?> aSource) 
+	public void addImport(String aString, HasResourceMetadata aSource) 
 	{
 		imports.put(aString, aSource);
 	}
@@ -298,7 +299,7 @@ public abstract class ResourceObjectProviderBase<M>
 		}
 		
 		Properties importedValues = new Properties(defaultValues);
-		for (Entry<String, ResourceObjectProviderBase<?>> e : imports.entrySet()) {
+		for (Entry<String, HasResourceMetadata> e : imports.entrySet()) {
 			String value = e.getValue().getResourceMetaData().getProperty(e.getKey());
 			if (value != null) {
 				importedValues.setProperty(e.getKey(), value);
@@ -315,6 +316,7 @@ public abstract class ResourceObjectProviderBase<M>
 
 	protected abstract M produceResource(URL aUrl) throws IOException;
 	
+	@Override
 	public Properties getResourceMetaData()
 	{
 		return resourceMetaData;
