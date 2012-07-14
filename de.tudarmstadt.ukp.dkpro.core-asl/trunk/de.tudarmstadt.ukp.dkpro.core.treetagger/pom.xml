@@ -89,6 +89,7 @@
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
+				<!--  Slovene model currently not in Artifactory because we do not know tagset yet
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-sl</artifactId>
@@ -96,6 +97,7 @@
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
+				-->
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-zh</artifactId>
