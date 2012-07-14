@@ -93,7 +93,7 @@ class TreeTaggerChunkerTT4JTest
     void checkModelsAndBinary(String lang)
     {
 		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/" + lang + "-tagger-little-endian.par") != null);
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-" + lang + "-little-endian.par") != null);
 
 		Assume.assumeTrue(getClass().getResource(
 				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
@@ -106,7 +106,8 @@ class TreeTaggerChunkerTT4JTest
     	checkModelsAndBinary(language);
 
 		AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
-        AnalysisEngine chunker = createPrimitive(TreeTaggerChunkerTT4J.class);
+        AnalysisEngine chunker = createPrimitive(TreeTaggerChunkerTT4J.class,
+        		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null).getJCas();
         aJCas.setDocumentLanguage(language);

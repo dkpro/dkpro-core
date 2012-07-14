@@ -89,7 +89,7 @@ public class TreeTaggerPosLemmaTT4J
 		taggerMappingProvider.setDefault("tagger.tagset", "default");
 		taggerMappingProvider.setOverride(MappingProvider.LOCATION, taggerMappingLocation);
 		taggerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
-//		posMappingProvider.addImport("tagger.tagset", modelProvider);
+		taggerMappingProvider.addImport("tagger.tagset", treetagger);
 	}
 	
 	@Override
@@ -109,8 +109,6 @@ public class TreeTaggerPosLemmaTT4J
 	public void process(final CAS aCas)
 		throws AnalysisEngineProcessException
 	{
-		taggerMappingProvider.configure(aCas);
-		
 		getLogger().debug("Running TreeTagger POS tagger and lemmatizer");
 		try {
 			final String language;
@@ -179,6 +177,9 @@ public class TreeTaggerPosLemmaTT4J
 				}
 			});
 
+			// Must be done after configuring the TreeTagger since we import from it
+			taggerMappingProvider.configure(aCas);
+
 			treetagger.process(tokens);
 
 			Logger log = getContext().getLogger();
@@ -231,7 +232,7 @@ public class TreeTaggerPosLemmaTT4J
 	/**
 	 * @author Richard Eckart de Castilho
 	 */
-	public static class PosModelResolver
+	private class PosModelResolver
 		extends DKProModelResolver
 	{
 		public PosModelResolver()

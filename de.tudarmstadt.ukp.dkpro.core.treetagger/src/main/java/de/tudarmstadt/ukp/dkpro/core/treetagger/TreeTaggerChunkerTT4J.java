@@ -104,8 +104,6 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	public void process(final CAS aCas)
 	throws AnalysisEngineProcessException
 	{
-		chunkerMappingProvider.configure(aCas);
-		
 		getLogger().debug("Running TreeTagger chunker");
 		try {
 			final String language;
@@ -190,6 +188,9 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			};
 			treetagger.setHandler(handler);
 
+			// Must be done after configuring the TreeTagger since we import from it
+			chunkerMappingProvider.configure(aCas);
+
 			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
 			for (AnnotationFS fs : select(aCas, posType)) {
 				tokens.add(fs);
@@ -233,7 +234,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	/**
 	 * @author Richard Eckart de Castilho
 	 */
-	public static class ChunkerModelResolver
+	private class ChunkerModelResolver
 		extends DKProModelResolver
 	{
 		public ChunkerModelResolver(File aModelPath, String aModelEncoding)
