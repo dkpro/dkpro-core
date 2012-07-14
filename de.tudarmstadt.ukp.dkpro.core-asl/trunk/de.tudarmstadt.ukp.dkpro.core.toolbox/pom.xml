@@ -111,21 +111,21 @@
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
-					<version>2010111900</version>
+					<version>20120425.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-models-en</artifactId>
-					<version>2010111500</version>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</artifactId>
+					<version>20111109.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-models-de</artifactId>
-					<version>2011042900</version>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-de</artifactId>
+					<version>20120417.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
