@@ -25,6 +25,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
@@ -32,10 +33,12 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
+import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.CasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import static java.util.Arrays.asList;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
@@ -59,10 +62,14 @@ public class JdbcReader
     public static final String CAS_METADATA_TITLE = "cas_metadata_title";
     public static final String CAS_METADATA_LANGUAGE = "cas_metadata_language";
 
-    public static final String CAS_METADATA_ID = "cas_metadata_id";
+    public static final String CAS_METADATA_DOCUMENT_ID = "cas_metadata_document_id";
     public static final String CAS_METADATA_COLLECTION_ID = "cas_metadata_collection_id";
     public static final String CAS_METADATA_DOCUMENT_URI = "cas_metadata_document_uri";
     public static final String CAS_METADATA_DOCUMENT_BASE_URI = "cas_metadata_document_base_uri";
+    
+    private static final Set<String> CAS_COLUMNS = new HashSet<String>(asList(
+    		CAS_TEXT, CAS_METADATA_TITLE, CAS_METADATA_LANGUAGE, CAS_METADATA_DOCUMENT_ID,
+    		CAS_METADATA_COLLECTION_ID, CAS_METADATA_DOCUMENT_URI, CAS_METADATA_DOCUMENT_BASE_URI));
 
     /**
      * Optional for uimaFIT, mandatory for UIMA,. Specify the class name of the JDBC driver.
@@ -114,7 +121,9 @@ public class JdbcReader
 
     private Connection sqlConnection;
     private ResultSet resultSet;
-    private HashSet<String> columnNames;
+    private int resultSetSize;
+    private int completed;
+    private Set<String> columnNames;
 
     @Override
     public void initialize(UimaContext context)
@@ -152,12 +161,20 @@ public class JdbcReader
         try {
             Statement statement = sqlConnection.createStatement();
             resultSet = statement.executeQuery(query);
+            resultSet.last();
+            resultSetSize = resultSet.getRow();
+            resultSet.beforeFirst();
+            completed = 0;
 
             // Store available column names
             columnNames = new HashSet<String>();
             ResultSetMetaData meta = resultSet.getMetaData();
             for (int i = 1; i < meta.getColumnCount() + 1; i++) {
-                columnNames.add(meta.getColumnLabel(i));
+            	String columnName = meta.getColumnLabel(i);
+                columnNames.add(columnName);
+                if (!CAS_COLUMNS.contains(columnName)) {
+                    getLogger().warn("Unknown column [" + columnName + "].");
+                }
             }
         }
         catch (SQLException e) {
@@ -178,18 +195,17 @@ public class JdbcReader
         catch (CASException e) {
             throw new CollectionException(e);
         }
-        catch (IllegalStateException e) {
-            throw new CollectionException(e);
-        }
 
         cas.setDocumentText(getStringQuietly(CAS_TEXT));
         metadata.setDocumentTitle(getStringQuietly(CAS_METADATA_TITLE));
         metadata.setLanguage(getStringQuietly(CAS_METADATA_LANGUAGE));
 
-        metadata.setDocumentId(getStringQuietly(CAS_METADATA_ID));
+        metadata.setDocumentId(getStringQuietly(CAS_METADATA_DOCUMENT_ID));
         metadata.setCollectionId(getStringQuietly(CAS_METADATA_COLLECTION_ID));
         metadata.setDocumentUri(getStringQuietly(CAS_METADATA_DOCUMENT_URI));
         metadata.setDocumentBaseUri(getStringQuietly(CAS_METADATA_DOCUMENT_BASE_URI));
+        
+        completed++;
     }
 
     private String getStringQuietly(String columnName)
@@ -199,7 +215,7 @@ public class JdbcReader
                 return resultSet.getString(columnName);
             }
             catch (SQLException e) {
-                getLogger().warn("Error getting value for column " + columnName + ". ", e);
+                getLogger().warn("Error getting value for column [" + columnName + "].", e);
             }
         }
         return null;
@@ -210,7 +226,7 @@ public class JdbcReader
     {
         // REC: It should be possible to determine the current row and the total size of the result
         // set and use this here to return progress information.
-        return null;
+        return new Progress[] { new ProgressImpl( completed, resultSetSize, "row" ) };
     }
 
     @Override
