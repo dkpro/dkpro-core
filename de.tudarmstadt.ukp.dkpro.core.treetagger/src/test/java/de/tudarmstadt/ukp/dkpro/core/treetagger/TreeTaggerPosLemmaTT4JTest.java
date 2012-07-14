@@ -90,6 +90,7 @@ class TreeTaggerPosLemmaTT4JTest
     }
 
 	@Test
+	@Ignore("Slovene model currently not in Artifactory because we do not know tagset yet")
 	public void treeTaggerAnnotatorSloveneTest()
 		throws Exception
     {
