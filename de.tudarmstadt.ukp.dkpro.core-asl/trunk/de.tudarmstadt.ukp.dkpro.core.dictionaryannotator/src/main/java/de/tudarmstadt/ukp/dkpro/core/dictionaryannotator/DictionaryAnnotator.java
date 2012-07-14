@@ -29,6 +29,7 @@ import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
@@ -58,17 +59,24 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class DictionaryAnnotator
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_PHRASE_FILE = "PhraseFile";
-	public static final String PARAM_ANNOTATION_TYPE = "AnnotationType";
-
 	/**
 	 * The file must contain one phrase per line - phrases will be split at " "
 	 */
+	public static final String PARAM_PHRASE_FILE = "phraseFile";
 	@ConfigurationParameter(name = PARAM_PHRASE_FILE, mandatory = true, defaultValue = "phrases.txt")
 	private String phraseFile;
 
+	public static final String PARAM_ANNOTATION_TYPE = "annotationType";
 	@ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = false)
 	private String annotationType;
+
+	public static final String PARAM_VALUE_FEATURE = "valueFeature";
+	@ConfigurationParameter(name = PARAM_VALUE_FEATURE, mandatory = false, defaultValue="value")
+	private String valueFeature;
+
+	public static final String PARAM_VALUE = "value";
+	@ConfigurationParameter(name = PARAM_VALUE, mandatory = false)
+	private String value;
 
 	private PhraseTree phrases;
 
@@ -108,6 +116,10 @@ public class DictionaryAnnotator
 		throws AnalysisEngineProcessException
 	{
 		Type type = jcas.getTypeSystem().getType(annotationType);
+		Feature f = null;
+		if ((valueFeature != null) && (value != null)) {
+			f = type.getFeatureByBaseName(valueFeature);
+		}
 
 		for (Sentence currSentence : select(jcas, Sentence.class)) {
 			ArrayList<Token> tokens = new ArrayList<Token>(selectCovered(Token.class, currSentence));
@@ -128,6 +140,11 @@ public class DictionaryAnnotator
 
 					AnnotationFS newFound = jcas.getCas().createAnnotation(type,
 							beginToken.getBegin(), endToken.getEnd());
+					
+					if (f != null) {
+						newFound.setFeatureValueFromString(f, value);
+					}
+					
 					jcas.getCas().addFsToIndexes(newFound);
 				}
 			}
