@@ -253,6 +253,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-asl</artifactId>
+				<version>1.4.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
 				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
@@ -459,6 +464,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -473,17 +479,27 @@
 					<groups>
 						<group>
 							<title>Analysis Components</title>
-							<packages>
-								de.tudarmstadt.ukp.dkpro.core.bananasplit:
-								de.tudarmstadt.ukp.dkpro.core.castransformation:de.tudarmstadt.ukp.dkpro.core.dictionaryannotator:de.tudarmstadt.ukp.dkpro.core.jazzy:de.tudarmstadt.ukp.dkpro.core.jwordsplitter:de.tudarmstadt.ukp.dkpro.core.languagetool:de.tudarmstadt.ukp.dkpro.core.ngrams*:de.tudarmstadt.ukp.dkpro.core.norvig:de.tudarmstadt.ukp.dkpro.core.posfilter:de.tudarmstadt.ukp.dkpro.core.snowball:de.tudarmstadt.ukp.dkpro.core.stopwordremover:de.tudarmstadt.ukp.dkpro.core.textcat:de.tudarmstadt.ukp.dkpro.core.tokit:de.tudarmstadt.ukp.dkpro.core.treetagger:de.tudarmstadt.ukp.dkpro.core.opennlp</packages>
+							<packages>de.tudarmstadt.ukp.dkpro.core*</packages>
+						</group>
+						<group>
+							<title>APIs</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
 						</group>
 						<group>
 							<title>I/O Components</title>
 							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
 						</group>
 						<group>
-							<title>APIs</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
+							<title>Toolbox</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.toolbox*</packages>
+						</group>
+						<group>
+							<title>Testing</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.testing*</packages>
+						</group>
+						<group>
+							<title>Examples</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.examples*</packages>
 						</group>
 					</groups>
 				</configuration>
