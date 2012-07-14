@@ -20,29 +20,36 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.getUrlAsFile;
 import static java.io.File.separator;
 import static org.annolab.tt4j.Util.getSearchPaths;
+import static org.apache.uima.util.Level.INFO;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.annolab.tt4j.DefaultExecutableResolver;
 import org.annolab.tt4j.DefaultModel;
 import org.annolab.tt4j.DefaultModelResolver;
-import org.annolab.tt4j.Model;
 import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
+import org.annolab.tt4j.TreeTaggerModelUtil;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.uimafit.component.CasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata;
 
 
 /**
@@ -54,8 +61,12 @@ public abstract class TreeTaggerTT4JBase<T>
 	extends CasAnnotator_ImplBase
 {
     public static final String RESOURCE_TREETAGGER = "TreeTagger";
-	protected TreeTaggerWrapper<T> treetagger;
+	protected DKProTreeTaggerWrapper<T> treetagger;
 
+	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+	protected boolean printTagSet;
+	
     public static final String PARAM_LANGUAGE_CODE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE_CODE, mandatory=false)
 	protected String languageCode;
@@ -97,7 +108,7 @@ public abstract class TreeTaggerTT4JBase<T>
 
 //			missingTags = new HashSet<String>();
 
-			treetagger = new TreeTaggerWrapper<T>();
+			treetagger = new DKProTreeTaggerWrapper<T>();
 
 			// Set the adapter extracting the text from the UIMA token
 			treetagger.setAdapter(getAdapter());
@@ -276,7 +287,7 @@ public abstract class TreeTaggerTT4JBase<T>
 	 *
 	 * @author Richard Eckart de Castilho
 	 */
-	protected static abstract class DKProModelResolver
+	protected abstract class DKProModelResolver
 		extends DefaultModelResolver
 	{
 		private File overrideModelPath;
@@ -317,15 +328,17 @@ public abstract class TreeTaggerTT4JBase<T>
 			throws IOException
 		{
 			if (overrideModelPath != null) {
-				return new DKProModel(aModelName, overrideModelPath, overrideModelEncoding);
+				DKProModel model = new DKProModel(aModelName, overrideModelPath, overrideModelEncoding, null);
+				printTagset(model);
+				return model;
 			}
 
 			File modelFile;
 			String modelEnc;
-			Map<String, String> properties = null;
+			Properties properties = null;
 			Set<String> searchedIn = new HashSet<String>();
 			String byteOrder = getPlatformDetector().getByteOrder();
-			String baseFile = aModelName+"-"+getType()+"-"+byteOrder;
+			String baseFile = getType()+"-"+aModelName+"-"+byteOrder;
 
 			// Try file system
 			modelFile = searchInFilesystem(baseFile + ".par", searchedIn);
@@ -338,7 +351,7 @@ public abstract class TreeTaggerTT4JBase<T>
 							+ aModelName + "] at [" + propertiesFile + "]");
 				}
 
-				properties = TagsetMappingFactory.loadProperties(propertiesFile.toURI().toURL());
+				properties = PropertiesLoaderUtils.loadProperties(new FileSystemResource(propertiesFile));
 			}
 
 			// Try classpath
@@ -352,11 +365,11 @@ public abstract class TreeTaggerTT4JBase<T>
 				if (modelUrl != null) {
 					URL propertiesUrl = getClass().getResource(propertiesLoc);
 					if (propertiesUrl == null) {
-						throw new IOException("There is no tag mapping for " + "model [" + aModelName
+						throw new IOException("There is no properties file for model [" + aModelName
 								+ "] at [" + propertiesLoc + "]");
 					}
 					
-					properties = TagsetMappingFactory.loadProperties(propertiesUrl);
+					properties = PropertiesLoaderUtils.loadProperties(new UrlResource(propertiesUrl));
 					modelFile = getUrlAsFile(modelUrl, true);
 				}
 			}
@@ -368,8 +381,22 @@ public abstract class TreeTaggerTT4JBase<T>
 						"point to the TreeTagger installation directory.");
 			}
 
-			modelEnc = (overrideModelEncoding != null) ? overrideModelEncoding : properties.get("encoding");
-			return new DKProModel(aModelName, modelFile, modelEnc);
+			modelEnc = (overrideModelEncoding != null) ? overrideModelEncoding : properties.getProperty("encoding");
+			DKProModel model = new DKProModel(aModelName, modelFile, modelEnc, properties);
+			printTagset(model);
+			return model;
+		}
+		
+		private void printTagset(DKProModel aModel) throws IOException
+		{
+			if (printTagSet) {
+				List<String> tags = TreeTaggerModelUtil.getTagset(aModel.getFile(), aModel.getEncoding());
+				
+				Collections.sort(tags);
+
+				getContext().getLogger().log(INFO, "Model contains [" + tags.size() + 
+						"] tags: "+StringUtils.join(tags, " "));
+			}
 		}
 	}
 
@@ -379,14 +406,23 @@ public abstract class TreeTaggerTT4JBase<T>
 	public static class DKProModel
 		extends DefaultModel
 	{
-		public DKProModel(String aName, File aFile, String aEncoding)
+		private Properties properties;
+		
+		public DKProModel(String aName, File aFile, String aEncoding, Properties aProperties)
 		{
 			super(aName, aFile, aEncoding);
+			properties = aProperties;
 		}
-
-		public DKProModel(Model aModel)
+	}
+	
+	public static class DKProTreeTaggerWrapper<T>
+		extends TreeTaggerWrapper<T>
+		implements HasResourceMetadata
+	{
+		@Override
+		public Properties getResourceMetaData()
 		{
-			super(aModel.getName(), aModel.getFile(), aModel.getEncoding());
+			return ((DKProModel) getModel()).properties;
 		}
 	}
 }

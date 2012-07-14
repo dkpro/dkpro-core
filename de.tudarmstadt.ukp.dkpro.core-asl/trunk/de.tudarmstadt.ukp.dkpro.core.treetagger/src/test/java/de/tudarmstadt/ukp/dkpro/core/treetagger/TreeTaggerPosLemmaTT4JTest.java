@@ -229,8 +229,8 @@ class TreeTaggerPosLemmaTT4JTest
 	private void checkModelsAndBinary(String lang)
 	{
 		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/" + lang
-						+ "-tagger-little-endian.par") != null);
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
+						+ "-little-endian.par") != null);
 
 		Assume.assumeTrue(getClass().getResource(
 				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
@@ -242,7 +242,8 @@ class TreeTaggerPosLemmaTT4JTest
 	{
 		checkModelsAndBinary(language);
 		
-        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class,
+        		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
         
