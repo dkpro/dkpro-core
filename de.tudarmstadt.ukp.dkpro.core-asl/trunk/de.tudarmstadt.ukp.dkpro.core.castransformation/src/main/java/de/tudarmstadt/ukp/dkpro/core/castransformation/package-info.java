@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * Components for working with texts that require corrected or otherwise changed in order to be
+ * Components for working with texts that require to be corrected or otherwise changed in order to be
  * analyzed further. Modifications are tracked and analysises on the modified text can be related to
  * the original texts.
  *

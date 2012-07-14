@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2010-2011
+ * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -17,9 +17,8 @@
  ******************************************************************************/
 
 /**
- * Support for <a href="http://cwb.sourceforge.net/">IMS Corpus Workbench</a> tab-separated format
- * also used by <a href="http://wacky.sslmit.unibo.it/doku.php">WaCky</a>.
+ * Integration of the <a href="http://opennlp.apache.org/">Apache OpenNLP</a> tools.
  *
- * @since 1.2.0
+ * @since 1.4.0
  */
-package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
+package de.tudarmstadt.ukp.dkpro.core.opennlp;
