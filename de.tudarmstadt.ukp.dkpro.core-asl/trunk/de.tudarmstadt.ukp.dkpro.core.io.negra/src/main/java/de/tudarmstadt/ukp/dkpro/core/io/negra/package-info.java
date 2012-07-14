@@ -17,8 +17,8 @@
  ******************************************************************************/
 
 /**
- * Support for <a href="http://cwb.sourceforge.net/">IMS Corpus Workbench</a> tab-separated format
- * also used by <a href="http://wacky.sslmit.unibo.it/doku.php?id=start">WaCky</a>.
+ * Support for the <a href="http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/negra-corpus.html/">NEGRA</a> 
+export format.</a>.
  *
  * @since 1.2.0
  */
