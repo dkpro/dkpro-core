@@ -43,12 +43,15 @@
 		<!--
 		  - Does currently not work with CoreNLP because some classes are missing. If added,
 		  - tagset information should be added here as well.
-		  -
+		-->
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/arabicFactored.ser.gz" md5="d3196072515f39dbd2c690c928e2653f"
-    		tool="parser" language="ar" variant="factored" extension="ser.gz" version="${parser.version}"/>		
+    		tool="parser" language="ar" variant="factored" extension="ser.gz" version="${parser.version}">
+			<metadata>
+	    		<entry key="tagger.tagset" value="atb"/>
+			</metadata>
+		</install-model-file>
 		<delete dir="target/model-staging"/>
-		-->
 	</target>
 
 	<target name="de" depends="download-tagger, download-german-ner,download-parser">
@@ -214,19 +217,24 @@
 		<!--
 		  - Does currently not work with CoreNLP because some classes are missing. If added,
 		  - tagset information should be added here as well.
-		  -
+		-->
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/chinesePCFG.ser.gz" md5="e17b4ab2a3e58665e19c47220c6f3294"
     		tool="parser" language="zh" variant="pcfg" extension="ser.gz" version="${parser.version}">		
+    		<metadata>
+        		<entry key="tagger.tagset" value="ctb"/>
+    		</metadata>
 		</install-model-file>		
 		<delete dir="target/model-staging"/>
 
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		file="target/download/parser/chineseFactored.ser.gz" md5="4a732a689d6828067c52363690f76dd4"
     		tool="parser" language="zh" variant="factored" extension="ser.gz" version="${parser.version}">		
+    		<metadata>
+        		<entry key="tagger.tagset" value="ctb"/>
+    		</metadata>
 		</install-model-file>
 		<delete dir="target/model-staging"/>
-		-->
 	</target>
 
 	<target name="separate-jars-coref">

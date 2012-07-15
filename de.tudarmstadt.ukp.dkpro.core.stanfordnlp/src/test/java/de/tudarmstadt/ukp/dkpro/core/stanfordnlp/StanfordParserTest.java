@@ -21,7 +21,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -216,27 +215,27 @@ public class StanfordParserTest
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
-	@Ignore("This requires two classes from the parser package that do currently not ship with " +
-			"CoreNLP (ChineseUnknownWordModel ). Even if we just add it to DKPro Core and test, " +
-			"we get no proper results. Somebody needs to investigate this. Maybe a tokenizer " +
-			"issue?")
+//	@Ignore("This requires a class from the parser package that do currently not ship with " +
+//			"CoreNLP (ChineseUnknownWordModel). Even if we just add it to DKPro Core and test, " +
+//			"we get no proper results. Somebody needs to investigate this. Maybe a tokenizer " +
+//			"issue?")
 	@Test
 	public void testChineseFactored()
 		throws Exception
 	{
 		JCas jcas = runTest("zh", "factored", "我们需要一个非常复杂的句子，例如其中包含许多成分和尽可能的依赖。");
 		
-		String[] constituentMapped = new String[] {  };
+		String[] constituentMapped = new String[] { "QP 0,13", "ROOT 0,32", "VP 14,31", "X 0,32" };
 
-		String[] constituentOriginal = new String[] {  };
+		String[] constituentOriginal = new String[] { "IP 0,32", "QP 0,13", "ROOT 0,32", "VP 14,31" };
 
-		String[] dependencies = new String[] {  };
+		String[] dependencies = new String[] { "NSUBJ 14,31,0,13" };
 
 		String[] lemmas = new String[] {  };
 
-		String[] posMapped = new String[] {  };
+		String[] posMapped = new String[] { "CARD", "PUNC", "V", "PUNC" };
 
-		String[] posOriginal = new String[] {  };
+		String[] posOriginal = new String[] { "CD", "PU", "VV", "PU" };
 		
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -244,27 +243,27 @@ public class StanfordParserTest
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
-	@Ignore("This requires two classes from the parser package that do currently not ship with " +
-			"CoreNLP (ArabicUnknownWordModel and ArabicUnknownWordSignatures). Even if we " +
-			"just add them to DKPro Core and test, we get no proper results. Somebody needs to " +
-			"investigate this. Maybe a tokenizer issue?")
+//	@Ignore("This requires two classes from the parser package that do currently not ship with " +
+//			"CoreNLP (ArabicUnknownWordModel and ArabicUnknownWordSignatures). Even if we " +
+//			"just add them to DKPro Core and test, we get no proper results. Somebody needs to " +
+//			"investigate this. Maybe a tokenizer issue?")
 	@Test
 	public void testArabicFactored()
 		throws Exception
 	{
 		JCas jcas = runTest("ar", "factored", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن.");
 		
-		String[] constituentMapped = new String[] {  };
+		String[] constituentMapped = new String[] { "NP 0,1", "ROOT 0,1" };
 
-		String[] constituentOriginal = new String[] {  };
+		String[] constituentOriginal = new String[] { "NP 0,1", "ROOT 0,1" };
 
 		String[] dependencies = new String[] {  };
 
 		String[] lemmas = new String[] {  };
 
-		String[] posMapped = new String[] {  };
+		String[] posMapped = new String[] { "POS", "POS" };
 
-		String[] posOriginal = new String[] {  };
+		String[] posOriginal = new String[] { "NN", "NN" };
 		
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));

@@ -102,7 +102,6 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-factored</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--  
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</artifactId>
@@ -113,7 +112,6 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-factored</artifactId>
 			<scope>test</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en</artifactId>
@@ -237,7 +235,6 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-factored</artifactId>
 				<version>20120522.0</version>
 			</dependency>
-			<!--
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</artifactId>
@@ -248,7 +245,6 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-pcfg</artifactId>
 				<version>20120522.0</version>
 			</dependency>
-			-->
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-fast</artifactId>
