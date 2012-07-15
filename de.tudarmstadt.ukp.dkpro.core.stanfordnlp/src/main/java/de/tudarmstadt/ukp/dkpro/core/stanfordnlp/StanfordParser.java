@@ -80,9 +80,9 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	public static final String PARAM_MAPPING_LOCATION = "mappingLocation";
-	@ConfigurationParameter(name = PARAM_MAPPING_LOCATION, mandatory = false)
-	protected String mappingLocation;
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = "taggerMappingLocation";
+	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
+	protected String taggerMappingLocation;
 
 	/**
 	 * Sets whether to create or not to create dependency annotations. <br/>
@@ -260,7 +260,7 @@ public class StanfordParser
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
-		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LOCATION, taggerMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		posMappingProvider.addImport("tagger.tagset", modelProvider);
 	}
