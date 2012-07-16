@@ -26,7 +26,7 @@
     		file="target/download/tagger/arabic-accurate.tagger" md5="730f09c873334d7ea1dc319aeac8b827"
     		tool="tagger" language="ar" variant="accurate" extension="tagger" version="${tagger.version}">		
 			<metadata>
-	    		<entry key="tagger.tagset" value="ptb"/>
+	    		<entry key="tagger.tagset" value="atb"/>
 			</metadata>
 		</install-model-file>
 		<delete dir="target/model-staging"/>
@@ -35,7 +35,7 @@
     		file="target/download/tagger/arabic-fast.tagger" md5="cc88707a0f57a2a303b40428d96a5853"
     		tool="tagger" language="ar" variant="fast" extension="tagger" version="${tagger.version}">		
 			<metadata>
-	    		<entry key="tagger.tagset" value="ptb"/>
+	    		<entry key="tagger.tagset" value="atb"/>
 			</metadata>
 		</install-model-file>
 		<delete dir="target/model-staging"/>
@@ -209,7 +209,7 @@
     		file="target/download/tagger/chinese.tagger" md5="b24484906f448c248bcbf7fc676ef523"
     		tool="tagger" language="zh" variant="default" extension="tagger" version="${tagger.version}">		
 			<metadata>
-	    		<entry key="tagger.tagset" value="ptb"/>
+	    		<entry key="tagger.tagset" value="ctb"/>
 			</metadata>
 		</install-model-file>
 		<delete dir="target/model-staging"/>
