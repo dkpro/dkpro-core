@@ -21,6 +21,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -215,10 +216,6 @@ public class StanfordParserTest
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
-//	@Ignore("This requires a class from the parser package that do currently not ship with " +
-//			"CoreNLP (ChineseUnknownWordModel). Even if we just add it to DKPro Core and test, " +
-//			"we get no proper results. Somebody needs to investigate this. Maybe a tokenizer " +
-//			"issue?")
 	@Test
 	public void testChineseFactored()
 		throws Exception
@@ -243,10 +240,7 @@ public class StanfordParserTest
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
-//	@Ignore("This requires two classes from the parser package that do currently not ship with " +
-//			"CoreNLP (ArabicUnknownWordModel and ArabicUnknownWordSignatures). Even if we " +
-//			"just add them to DKPro Core and test, we get no proper results. Somebody needs to " +
-//			"investigate this. Maybe a tokenizer issue?")
+	@Ignore("Currently fails an assertion in StanfordAnnotator:188 - need to investigate")
 	@Test
 	public void testArabicFactored()
 		throws Exception
