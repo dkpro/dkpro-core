@@ -17,11 +17,17 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Timestamp;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
@@ -49,6 +55,7 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
  * Abstract base class for all readers based on revisions.
  *
  * @author zesch
+ * @author Oliver Ferschke
  *
  */
 public abstract class WikipediaRevisionReaderBase
@@ -65,18 +72,38 @@ public abstract class WikipediaRevisionReaderBase
 	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
 	protected int pageBuffer;
 
+	/**
+	 * Defines the path to a file containing a line-separated list of
+	 * revision ids of the revisions that should be retrieved. (Optional)
+	 */
+	public static final String PARAM_PATH_TO_REVISION_ID_LIST = "RevisionIdsFromFile";
+	@ConfigurationParameter(name = PARAM_PATH_TO_REVISION_ID_LIST, mandatory = false)
+	protected String revisionIdFile;
+
+	/**
+	 * Defines an array of
+	 * revision ids of the revisions that should be retrieved. (Optional)
+	 */
+	public static final String PARAM_REVISION_ID_LIST = "RevisionIdFromArray";
+	@ConfigurationParameter(name = PARAM_REVISION_ID_LIST, mandatory = false)
+	protected String[] revisionIdParamArray;
+
 	protected Page currentArticle;
 
-	protected RevisionApi revisionEncoder;
+	protected RevisionApi revisionApi;
 
-	protected Iterator<Timestamp> timestampIter;
+	protected Iterator<Page> pageIter; //for page iteration - revs are subiterated
+	protected Iterator<Timestamp> timestampIter; //for rev subiteration
+	protected Iterator<String> revIdIterator; //for list-based rev iteration
 
 	protected long currentArticleIndex;
+	protected long currentRevisionIndex;
 	protected long nrOfArticles;
 
-	protected Iterator<Page> pageIter;
 
 	protected MediaWikiParser parser;
+
+	protected Set<String> revisionIds = new HashSet<String>();
 
 	@Override
 	public void initialize(UimaContext context)
@@ -84,81 +111,125 @@ public abstract class WikipediaRevisionReaderBase
 	{
 		super.initialize(context);
 
-		MetaData md = wiki.getMetaData();
-		this.nrOfArticles = md.getNumberOfPages()
-				- md.getNumberOfDisambiguationPages()
-				- md.getNumberOfRedirectPages();
+		try {
+			if (revisionIdFile != null) {
+				revisionIds = loadFile(revisionIdFile);
+			}
+			if (revisionIdParamArray != null && revisionIdParamArray.length > 0) {
+				for(String id: revisionIdParamArray){
+					revisionIds.add(id);
+				}
+			}
+		}
+		catch (Exception e) {
+			throw new ResourceInitializationException(e);
+		}
 
-		pageIter = new PageIterator(wiki, true, pageBuffer);
+
+		//Use one of the lists or iterate over all articles?
+		if(!revisionIds.isEmpty())
+		{
+			revIdIterator=revisionIds.iterator();
+		}
+		else //use iterator over all pages in the db
+		{
+			MetaData md = wiki.getMetaData();
+			this.nrOfArticles = md.getNumberOfPages()
+					- md.getNumberOfDisambiguationPages()
+					- md.getNumberOfRedirectPages();
+
+			pageIter = new PageIterator(wiki, true, pageBuffer);
+
+			try {
+				if (pageIter.hasNext()) {
+					currentArticle = pageIter.next();
+				}
+				else {
+					throw new IOException("No articles in database.");
+				}
+
+				this.revisionApi = new RevisionApi(dbconfig);
+
+				this.timestampIter = getTimestampIter(currentArticle.getPageId());
+			}
+			catch (WikiInitializationException e) {
+				throw new ResourceInitializationException(e);
+			}
+			catch (WikiApiException e) {
+				throw new ResourceInitializationException(e);
+			}
+			catch (IOException e) {
+				throw new ResourceInitializationException(e);
+			}
+		}
 
 		currentArticleIndex = 0;
+		currentRevisionIndex = 0;
 
 	    //TODO Use SWEBLE
 		MediaWikiParserFactory pf = new MediaWikiParserFactory();
 		pf.setTemplateParserClass(FlushTemplates.class);
-
 		parser = pf.createParser();
 
-		try {
-			if (pageIter.hasNext()) {
-				currentArticle = pageIter.next();
-			}
-			else {
-				throw new IOException("No articles in database.");
-			}
-
-			this.revisionEncoder = new RevisionApi(dbconfig);
-
-			this.timestampIter = getTimestampIter(currentArticle.getPageId());
-		}
-		catch (WikiInitializationException e) {
-			throw new ResourceInitializationException(e);
-		}
-		catch (WikiApiException e) {
-			throw new ResourceInitializationException(e);
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
 	}
 
 	public boolean hasNext()
 		throws IOException, CollectionException
 	{
-		if (!timestampIter.hasNext()) {
-			if (pageIter.hasNext()) {
-				currentArticle = pageIter.next();
-				currentArticleIndex++;
-				this.timestampIter = getTimestampIter(currentArticle
-						.getPageId());
-			}
-			else {
+
+		//If a list of revisions is provided, just use the hasNext() of the iterator
+		if(!revisionIds.isEmpty()){
+			if(revIdIterator.hasNext()){
+				currentRevisionIndex++;
+				return true;
+			}else{
 				return false;
 			}
 		}
+		//If no list of revisions is provided, we iterate over pages and subiterate over revisions
+		else{
+			if (!timestampIter.hasNext()) {
+				if (pageIter.hasNext()) {
+					currentArticle = pageIter.next();
+					currentArticleIndex++;
+					this.timestampIter = getTimestampIter(currentArticle
+							.getPageId());
+				}
+				else {
+					return false;
+				}
+			}
 
-		if (!timestampIter.hasNext()) {
-			// if we are in here, we tried to update with last available page,
-			// but it contained no revisions
-			return false;
+			if (!timestampIter.hasNext()) {
+				// if we are in here, we tried to update with last available page,
+				// but it contained no revisions
+				return false;
+			}
+			return true;
 		}
-
-		return true;
 	}
 
 	@Override
 	public Progress[] getProgress()
 	{
-		return new Progress[] { new ProgressImpl(Long.valueOf(
-				currentArticleIndex).intValue(), Long.valueOf(nrOfArticles)
-				.intValue(), Progress.ENTITIES) };
+		if(revisionIds.isEmpty()){
+			//if we iterate over ALL revisions, we can only report the progress in <articles>
+			return new Progress[] { new ProgressImpl(Long.valueOf(
+					currentArticleIndex).intValue(), Long.valueOf(nrOfArticles)
+					.intValue(), Progress.ENTITIES) };
+		}else{
+			//if we iterate over a revision list, we can actually report the progress in <revisions>
+			return new Progress[] { new ProgressImpl(Long.valueOf(
+					currentRevisionIndex).intValue(), Long.valueOf(revisionIds.size())
+					.intValue(), Progress.ENTITIES) };
+		}
 	}
 
 	protected Iterator<Timestamp> getTimestampIter(int pageId)
 		throws IOException
 	{
 		try {
-			List<Timestamp> timestamps = this.revisionEncoder
+			List<Timestamp> timestamps = this.revisionApi
 					.getRevisionTimestamps(pageId);
 			Collections.sort(timestamps);
 			return timestamps.iterator();
@@ -195,5 +266,46 @@ public abstract class WikipediaRevisionReaderBase
 		metaData.setDocumentId(Integer.valueOf(revisionId).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
 
+	}
+
+	/**
+	 * Loads a text file line-by-line into a Set of Strings.
+	 *
+	 * @param fileName
+	 *            path to the file
+	 * @return a Set containing the individual lines of the text file
+	 * @throws IOException
+	 *             if any error occurs while reading the file
+	 */
+	private Set<String> loadFile(String fileName)
+		throws IOException
+	{
+		Set<String> container = new HashSet<String>();
+
+		FileInputStream fstream=null;
+		DataInputStream in=null;
+		BufferedReader br=null;
+		try{
+			fstream = new FileInputStream(fileName);
+			in = new DataInputStream(fstream);
+			br = new BufferedReader(new InputStreamReader(in));
+
+			String strLine;
+			while ((strLine = br.readLine()) != null) {
+				container.add(strLine);
+			}
+		}finally{
+			if(br!=null){
+				br.close();
+			}
+			if(in!=null){
+				in.close();
+			}
+			if(fstream!=null){
+				fstream.close();
+			}
+		}
+
+		return container;
 	}
 }

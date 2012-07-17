@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.uima.collection.CollectionException;
@@ -43,11 +42,16 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
     {
     	super.getNext(jcas);
 
-        // if hasNext() is true, a next timestamp should be available
-        Timestamp timestamp = timestampIter.next();
-
         try {
-            Revision revision = this.revisionEncoder.getRevision(currentArticle.getPageId(), timestamp);
+        	Revision revision = null;
+        	if(!revisionIds.isEmpty()){
+                //in case we iterate over a given list of revisions
+        		revision = this.revisionApi.getRevision(Integer.parseInt(revIdIterator.next()));
+            }else{
+                //in case we iterate over ALL revisions
+            	revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestampIter.next());
+            }
+
 
             String text = "";
             if (outputPlainText) {
@@ -60,7 +64,7 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
             }
             jcas.setDocumentText(text);
 
-            addDocumentMetaData(jcas, currentArticle.getPageId(), revision.getRevisionID());
+            addDocumentMetaData(jcas, revision.getArticleID(), revision.getRevisionID());
             addRevisionAnnotation(jcas, revision);
         }
         catch (WikiApiException e) {
