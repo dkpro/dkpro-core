@@ -73,7 +73,13 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public void initialize(UimaContext context)
         throws ResourceInitializationException
     {
-        super.initialize(context);
+    	if(revisionIdFile!=null||revisionIdParamArray!=null){
+    		this.getLogger().log(Level.WARNING, "Reading a predefined list of revisions is currently not supported by the WikipediaRevisionPairReader. Falling back to reading ALL revisions.");
+    		revisionIdFile=null;
+	    	revisionIdParamArray=null;
+	    	//TODO add support for reading a defined set of revisions (like the WikipediaRevisionReader)
+    	}
+    	super.initialize(context);
         savedTimestamp = null;
         nrOfRevisionsProcessed = 0;
     }
@@ -180,7 +186,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 
         if (timestamp != null) {
             try {
-                revision = this.revisionEncoder.getRevision(currentArticle.getPageId(), timestamp);
+                revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestamp);
             }
             catch (WikiApiException e) {
                 throw new CollectionException(e);
