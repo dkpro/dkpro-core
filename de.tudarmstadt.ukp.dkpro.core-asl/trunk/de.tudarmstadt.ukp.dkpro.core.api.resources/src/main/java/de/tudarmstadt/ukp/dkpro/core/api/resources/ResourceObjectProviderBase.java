@@ -213,7 +213,16 @@ public abstract class ResourceObjectProviderBase<M>
 		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 		Properties props = getAggregatedProperties();
 		
-		String modelLocation = pph.replacePlaceholders(props.getProperty(LOCATION), props);
+		String modelLocation;
+		try {
+			modelLocation = pph.replacePlaceholders(props.getProperty(LOCATION), props);
+		}
+		catch (IllegalArgumentException e) {
+			throw new IllegalStateException("Unable to resolve the model location ["
+					+ props.getProperty(LOCATION) + "]: " + e.getMessage() + ". Possibly there is " +
+					"no default model configured for the specified language [" + 
+					props.getProperty(LANGUAGE) + "] or the language is set incorrectly.");
+		}
 		
 		boolean success = false;
 		try {
@@ -251,7 +260,7 @@ public abstract class ResourceObjectProviderBase<M>
 				String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
 				String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
 				String modelVersion = pph.replacePlaceholders(props.getProperty(VERSION), props);
-				sb.append(" Please make sure that ").append(modelArtifact).append(" version ")
+				sb.append("\nPlease make sure that ").append(modelArtifact).append(" version ")
 						.append(modelVersion).append(" is on the classpath.");
 			}
 			
