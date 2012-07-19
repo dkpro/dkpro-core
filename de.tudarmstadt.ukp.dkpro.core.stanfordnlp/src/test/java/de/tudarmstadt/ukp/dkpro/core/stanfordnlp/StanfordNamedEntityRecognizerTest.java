@@ -117,4 +117,18 @@ public class StanfordNamedEntityRecognizerTest
 		// Return iterator for the named entities
 		return JCasUtil.iterator(testCas, NamedEntity.class);
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void testMissingModel() throws Exception
+	{
+		AnalysisEngineDescription desc = createPrimitiveDescription(
+				StanfordNamedEntityRecognizer.class,
+				StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
+
+		AnalysisEngine ae = UIMAFramework.produceAnalysisEngine(desc);
+		JCas testCas = ae.newJCas();
+		testCas.setDocumentLanguage("xx");
+		testCas.setDocumentText("Xec xena Xeo.");
+		ae.process(testCas);
+	}
 }

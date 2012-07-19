@@ -96,7 +96,6 @@ public class StanfordNamedEntityRecognizer
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
 						"ner-${language}-${variant}.ser.gz");
-				setDefault(VARIANT, "maxent");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
