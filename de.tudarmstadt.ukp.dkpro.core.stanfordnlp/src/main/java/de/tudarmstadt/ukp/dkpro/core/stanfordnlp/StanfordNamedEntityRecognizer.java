@@ -87,7 +87,7 @@ public class StanfordNamedEntityRecognizer
 
 		modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>>() {
 			{
-				setDefault(VERSION, "20120108");
+				setDefault(VERSION, "20120709.0");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-${language}-${variant}");

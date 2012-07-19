@@ -15,7 +15,6 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -34,20 +33,6 @@ public class StanfordLemmatizerTest
 
 	}
 
-	/**
-	 * There seems to be a bug in the lemmatizer code causing an NPE when a token ends in a dash.
-	 * Should this bug go away some day, this test will fail. When somebody uses the
-	 * {@link StanfordLemmatizer}, a workaround is usually enabled, which we explicitly disable in
-	 * this test case ({@link StanfordLemmatizer#PARAM_DASH_BUG_WORKAROUND});
-	 */
-	@Test(expected=AnalysisEngineProcessException.class)
-	public void testEnglishEndingWithDash() throws Exception
-	{
-        runTest("en", "bidirectional-distsim-wsj-0-18", "b-",
-        		null,
-        		new String[] { "b-" });
-	}
-
 	private void runTest(String aLanguage, String aVariant, String testDocument, String[] tags,
 			String[] lemmas)
 		throws Exception
@@ -55,8 +40,7 @@ public class StanfordLemmatizerTest
 		AnalysisEngineDescription posTagger = createPrimitiveDescription(StanfordPosTagger.class,
 				StanfordPosTagger.PARAM_VARIANT, aVariant);
 
-		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(StanfordLemmatizer.class,
-				StanfordLemmatizer.PARAM_DASH_BUG_WORKAROUND, false);
+		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(StanfordLemmatizer.class);
 
 		JCas aJCas = TestRunner.runTest(createAggregateDescription(posTagger, lemmatizer),
 				aLanguage, testDocument);

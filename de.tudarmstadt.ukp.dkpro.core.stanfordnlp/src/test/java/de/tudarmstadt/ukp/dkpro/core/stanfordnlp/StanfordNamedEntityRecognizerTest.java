@@ -20,6 +20,7 @@ import java.util.Iterator;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Test;
@@ -118,7 +119,7 @@ public class StanfordNamedEntityRecognizerTest
 		return JCasUtil.iterator(testCas, NamedEntity.class);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
 		AnalysisEngineDescription desc = createPrimitiveDescription(

@@ -190,14 +190,14 @@ public class StanfordParserTest
 				"compliqué, qui contient des constituants que de nombreuses dépendances et que " +
 				"possible.");
 		
-		String[] constituentMapped = new String[] { "NP 11,17", "NP 18,42", "NP 59,62", "NP 72,88",
-				"NP 93,118", "ROOT 0,135", "X 0,10", "X 0,135", "X 119,134", "X 122,134",
-				"X 126,134", "X 18,57", "X 31,42", "X 43,57", "X 59,88", "X 63,71", "X 89,134" };
+		String[] constituentMapped = new String[] { "NP 18,30", "NP 59,62", "NP 72,88",
+				"NP 93,118", "ROOT 0,135", "X 0,135", "X 0,17", "X 0,42", "X 119,134", "X 122,134",
+				"X 126,134", "X 31,42", "X 43,57", "X 5,17", "X 59,88", "X 63,71", "X 89,134" };
 
 		String[] constituentOriginal = new String[] { "AP 126,134", "COORD 119,134", "MWADV 31,42",
-				"NP 11,17", "NP 18,42", "NP 59,62", "NP 72,88", "NP 93,118", "ROOT 0,135",
-				"SENT 0,135", "Srel 18,57", "Srel 59,88", "Ssub 122,134", "Ssub 89,134", "VN 0,10",
-				"VN 43,57", "VN 63,71" };
+				"MWV 5,17", "NP 18,30", "NP 59,62", "NP 72,88", "NP 93,118", "ROOT 0,135",
+				"SENT 0,135", "Srel 59,88", "Ssub 122,134", "Ssub 89,134", "VN 0,17", "VN 43,57",
+				"VN 63,71", "VPinf 0,42" };
 
 		String[] dependencies = new String[] { /** No dependencies for French */ };
 
