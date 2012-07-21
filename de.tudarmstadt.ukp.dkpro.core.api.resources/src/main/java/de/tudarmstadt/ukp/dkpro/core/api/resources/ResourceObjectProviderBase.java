@@ -199,6 +199,33 @@ public abstract class ResourceObjectProviderBase<M>
 	}
 	
 	/**
+	 * For use in test cases.
+	 */
+	protected String getModelLocation() throws IOException
+	{
+		return getModelLocation(null);
+	}
+	
+	protected String getModelLocation(Properties aProperties) throws IOException
+	{
+		Properties props = aProperties;
+		if (props == null) {
+			props = getAggregatedProperties();
+		}
+		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+		
+		try {
+			return pph.replacePlaceholders(props.getProperty(LOCATION), props);
+		}
+		catch (IllegalArgumentException e) {
+			throw new IllegalStateException("Unable to resolve the model location ["
+					+ props.getProperty(LOCATION) + "]: " + e.getMessage() + ". Possibly there is " +
+					"no default model configured for the specified language [" + 
+					props.getProperty(LANGUAGE) + "] or the language is set incorrectly.");
+		}
+	}
+	
+	/**
 	 * Configure a resource using the current configuration. The resource can be fetched then using
 	 * {@link #getResource()}.
 	 * <p>
@@ -210,19 +237,8 @@ public abstract class ResourceObjectProviderBase<M>
 	 */
 	public void configure() throws IOException
 	{
-		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 		Properties props = getAggregatedProperties();
-		
-		String modelLocation;
-		try {
-			modelLocation = pph.replacePlaceholders(props.getProperty(LOCATION), props);
-		}
-		catch (IllegalArgumentException e) {
-			throw new IllegalStateException("Unable to resolve the model location ["
-					+ props.getProperty(LOCATION) + "]: " + e.getMessage() + ". Possibly there is " +
-					"no default model configured for the specified language [" + 
-					props.getProperty(LANGUAGE) + "] or the language is set incorrectly.");
-		}
+		String modelLocation = getModelLocation(props);
 		
 		boolean success = false;
 		try {
@@ -257,6 +273,7 @@ public abstract class ResourceObjectProviderBase<M>
 
 			Set<String> names = props.stringPropertyNames();
 			if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID) && names.contains(VERSION)) {
+				PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 				String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
 				String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
 				String modelVersion = pph.replacePlaceholders(props.getProperty(VERSION), props);
@@ -298,15 +315,7 @@ public abstract class ResourceObjectProviderBase<M>
 	{
 		Properties defaultValues = new Properties(defaults);
 		defaultValues.putAll(getProperties());
-		
-		if (defaultVariants == null && defaultVariantsLocation != null) {
-			setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
-		}
-		
-		if (defaultVariants != null && defaultVariants.containsKey(defaultValues.get(LANGUAGE))) {
-			defaultValues.setProperty(VARIANT, defaultVariants.getProperty(defaultValues.getProperty(LANGUAGE)));
-		}
-		
+
 		Properties importedValues = new Properties(defaultValues);
 		for (Entry<String, HasResourceMetadata> e : imports.entrySet()) {
 			String value = e.getValue().getResourceMetaData().getProperty(e.getKey());
@@ -317,7 +326,16 @@ public abstract class ResourceObjectProviderBase<M>
 		
 		Properties overriddenValues = new Properties(importedValues);
 		overriddenValues.putAll(overrides);
+
+		if (defaultVariants == null && defaultVariantsLocation != null) {
+			setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
+		}
 		
+		String language = overriddenValues.getProperty(LANGUAGE);
+		if (defaultVariants != null && defaultVariants.containsKey(language)) {
+			defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
+		}
+
 		return overriddenValues;
 	}
 

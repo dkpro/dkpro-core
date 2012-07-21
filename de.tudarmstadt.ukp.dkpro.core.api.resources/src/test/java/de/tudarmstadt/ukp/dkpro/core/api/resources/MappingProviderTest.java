@@ -22,6 +22,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.resource.metadata.impl.TypeSystemDescription_impl;
@@ -48,7 +49,37 @@ public class MappingProviderTest
 		Map<String, String> deMap = mappingProvider.getResource();
 		assertEquals("de", deMap.get("value"));
 	}
-	
+
+	@Test
+	public void testDefaultVariantWithLanguageOverride() throws Exception
+	{
+		Properties defaultVariants = new Properties();
+		defaultVariants.setProperty("de", "variant1");
+		defaultVariants.setProperty("en", "variant2");
+		
+		MappingProvider mappingProvider = new MappingProvider();
+		mappingProvider.setDefaultVariants(defaultVariants);
+		mappingProvider.setDefault(MappingProvider.LOCATION, "${language}-${variant}.map");
+
+		CAS cas = CasCreationUtils.createCas(new TypeSystemDescription_impl(), null, null);
+		
+		// Test default behavior
+		cas.setDocumentLanguage("en");
+		mappingProvider.configure(cas);
+		assertEquals("en-variant2.map", mappingProvider.getModelLocation());
+
+		// Test language override affects variant
+		mappingProvider.setOverride(MappingProvider.LANGUAGE, "de");
+		mappingProvider.configure(cas);
+		assertEquals("de-variant1.map", mappingProvider.getModelLocation());
+
+		// Test variant can still be overridden after language override
+		mappingProvider.setOverride(MappingProvider.LANGUAGE, "de");
+		mappingProvider.setOverride(MappingProvider.VARIANT, "variant3");
+		mappingProvider.configure(cas);
+		assertEquals("de-variant3.map", mappingProvider.getModelLocation());
+}
+
 	@Test
 	public void testTagsetChange() throws Exception
 	{
@@ -85,5 +116,5 @@ public class MappingProviderTest
 		Map<String, String> deMap = mappingProvider.getResource();
 		assertEquals("de", deMap.get("value"));
 		assertEquals("mytags2", deMap.get("tagset"));
-	}	
+	}
 }
