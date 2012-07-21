@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
-import de.tudarmstadt.ukp.wikipedia.util.WikipediaTemplateInfo;
+import de.tudarmstadt.ukp.wikipedia.util.templates.WikipediaTemplateInfo;
 
 /**
  * Reads all pages that contain or do not contain the templates specified
