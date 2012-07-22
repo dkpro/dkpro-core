@@ -6,6 +6,6 @@
     <version>1.4.0-SNAPSHOT</version>
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.performance</artifactId>
+  <artifactId>de.tudarmstadt.ukp.dkpro.core.performance-asl</artifactId>
   <version>1.4.0-SNAPSHOT</version>
 </project>
