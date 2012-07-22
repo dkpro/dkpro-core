@@ -471,6 +471,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.performance</module>
 	</modules>
 	<build>
 		<plugins>
