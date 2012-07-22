@@ -151,6 +151,29 @@ public class TEIReaderTest
     }
     
     @Test
+    public void brownReaderTest3()
+        throws Exception
+    {
+        File reference = new File("src/test/resources/brown_ims.gz.txt");
+        File output = new File("target/test-output/brown_ims.gz.txt");
+        
+        CollectionReaderDescription reader = createDescription(
+                TEIReader.class,
+                TEIReader.PARAM_LANGUAGE, "en",
+                TEIReader.PARAM_PATH, "classpath:/brown_tei_gzip/",
+                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
+        
+        AnalysisEngineDescription writer = createPrimitiveDescription(ImsCwbWriter.class,
+                ImsCwbWriter.PARAM_TARGET_LOCATION, output);
+
+        SimplePipeline.runPipeline(reader, writer);
+        
+        assertEquals(
+                FileUtils.readFileToString(reference, "UTF-8"), 
+                FileUtils.readFileToString(output, "UTF-8"));
+    }
+    
+    @Test
     public void brownReaderTest_noSentences()
         throws Exception
     {
