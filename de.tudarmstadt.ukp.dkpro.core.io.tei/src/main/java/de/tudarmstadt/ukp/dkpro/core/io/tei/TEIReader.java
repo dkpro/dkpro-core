@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.UimaContext;
@@ -204,6 +205,11 @@ public class TEIReader
 
 			try {
 				is = currentResource.getInputStream();
+				
+				if (currentResource.getPath().endsWith(".gz")) {
+				    is = new GZIPInputStream(is);
+				}
+				
 				InputSource source = new InputSource(is);
 				source.setPublicId(currentResource.getLocation());
 				source.setSystemId(currentResource.getLocation());
