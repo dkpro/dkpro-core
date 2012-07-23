@@ -69,4 +69,35 @@
   		<scope>test</scope>
   	</dependency>
   </dependencies>
+  <profiles>
+      <profile>
+          <id>use-proprietary-resources</id>
+          <dependencies>
+              <dependency>
+                  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                  <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-de</artifactId>
+                  <version>20120417.0</version>
+                  <optional>true</optional>
+              </dependency>
+              <dependency>
+                  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                  <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</artifactId>
+                  <version>20111109.0</version>
+                  <optional>true</optional>
+              </dependency>
+             <dependency>
+                  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                  <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-zh</artifactId>
+                  <version>20101115.0</version>
+                  <optional>true</optional>
+              </dependency>
+              <dependency>
+                  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                  <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
+                  <version>20120425.0</version>
+                  <optional>true</optional>
+              </dependency>
+          </dependencies>
+      </profile>
+  </profiles>
 </project>
