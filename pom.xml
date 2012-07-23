@@ -78,6 +78,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.arktools</module>
 	</modules>
 	<build>
 		<plugins>
