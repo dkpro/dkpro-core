@@ -103,13 +103,14 @@ public abstract class WikipediaRevisionReaderBase
 
 	protected MediaWikiParser parser;
 
-	protected Set<String> revisionIds = new HashSet<String>();
+	protected Set<String> revisionIds = null;
 
 	@Override
 	public void initialize(UimaContext context)
 		throws ResourceInitializationException
 	{
 		super.initialize(context);
+		revisionIds = new HashSet<String>();
 
 		try {
 			if (revisionIdFile != null) {

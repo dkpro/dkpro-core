@@ -98,8 +98,8 @@ public abstract class WikipediaStandardReaderBase
 	@ConfigurationParameter(name = PARAM_PAGE_TITLE_LIST, mandatory = false)
 	protected String[] pageNameParamArray;
 
-	private Set<String> pageIds = new HashSet<String>();
-	private Set<String> pageTitles = new HashSet<String>();
+	private Set<String> pageIds = null;
+	private Set<String> pageTitles = null;
 
 	protected long currentArticleIndex;
 	protected long nrOfArticles;
@@ -115,6 +115,9 @@ public abstract class WikipediaStandardReaderBase
 		throws ResourceInitializationException
 	{
 		super.initialize(context);
+
+		pageIds = new HashSet<String>();
+		pageTitles = new HashSet<String>();
 
 		try {
 			if (pageIdFile != null) {
