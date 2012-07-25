@@ -74,11 +74,11 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
-		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.distribution</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktools</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -96,7 +96,6 @@
 						</group>
 						<group>
 							<title>Analysis Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.stanfordnlp*</packages>
 						</group>
 						<group>
 							<title>I/O Components</title>
