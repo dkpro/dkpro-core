@@ -20,4 +20,16 @@
   <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
   <version>1.4.0-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.martiansoftware</groupId>
+  		<artifactId>jsap</artifactId>
+  		<version>2.1</version>
+  	</dependency>
+  	<dependency>
+        <groupId>edu.cmu.ark</groupId>
+        <artifactId>arabic-tagger</artifactId>
+        <version>1.0</version>
+    </dependency>
+  </dependencies>
 </project>
