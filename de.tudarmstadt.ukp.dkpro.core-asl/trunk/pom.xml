@@ -464,9 +464,9 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.tei-asl-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
