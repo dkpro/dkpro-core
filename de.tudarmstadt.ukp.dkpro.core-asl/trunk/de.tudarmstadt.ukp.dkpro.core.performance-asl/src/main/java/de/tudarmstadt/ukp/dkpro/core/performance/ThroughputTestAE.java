@@ -130,6 +130,8 @@ public class ThroughputTestAE
         formatter.format("Time / 10^4 Token:     %,.3f\n", getNormalizedTime(sumMillis, nrofTokens, 1000));
         formatter.format("Time / 10^4 Sentences: %,.3f\n", getNormalizedTime(sumMillis, nrofSentences, 1000));
    
+        formatter.close();
+        
         return sb.toString();
     }
     
