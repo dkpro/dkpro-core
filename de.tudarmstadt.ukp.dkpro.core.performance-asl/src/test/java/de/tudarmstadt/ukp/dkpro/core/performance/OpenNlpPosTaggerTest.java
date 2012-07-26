@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.performance;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
@@ -31,6 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
  */
 public class OpenNlpPosTaggerTest
 {
+    @Ignore
     @Test
     public void performanceTest()
         throws Exception
