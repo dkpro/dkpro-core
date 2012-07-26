@@ -46,12 +46,12 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
         	Revision revision = null;
         	if(!revisionIds.isEmpty()){
                 //in case we iterate over a given list of revisions
-        		revision = this.revisionApi.getRevision(Integer.parseInt(revIdIterator.next()));
+        		String nextId = revIdIterator.next();
+        		revision = this.revisionApi.getRevision(Integer.parseInt(nextId));
             }else{
                 //in case we iterate over ALL revisions
             	revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestampIter.next());
             }
-
 
             String text = "";
             if (outputPlainText) {
