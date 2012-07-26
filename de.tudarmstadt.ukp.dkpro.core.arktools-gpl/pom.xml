@@ -17,9 +17,7 @@
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <version>1.4.0-SNAPSHOT</version>
   </parent>
-  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
-  <version>1.4.0-SNAPSHOT</version>
   <dependencies>
   	<dependency>
   		<groupId>com.martiansoftware</groupId>
