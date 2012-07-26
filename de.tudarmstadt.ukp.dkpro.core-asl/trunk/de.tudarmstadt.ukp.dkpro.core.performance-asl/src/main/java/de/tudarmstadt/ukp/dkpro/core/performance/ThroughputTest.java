@@ -30,6 +30,7 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.pipeline.SimplePipeline;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
 
 /**
@@ -59,8 +60,7 @@ public class ThroughputTest {
     
     public static CollectionReader getStandardReader(String languageCode) throws IOException, ResourceInitializationException {
         if (languageCode.equals("en")) {
-//            String brownPath = "src/test/resources/brown_tei_gzip";
-            String brownPath = "/home/zesch/tmp/brown_tei";
+            String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";    
             
             return createCollectionReader(
                     TEIReader.class,
