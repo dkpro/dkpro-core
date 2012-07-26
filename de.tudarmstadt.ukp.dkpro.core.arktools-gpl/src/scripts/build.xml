@@ -13,7 +13,7 @@
 
                 <mkdir dir="target/download/ner"/>
                 
-                <get src="https://github.com/nschneid/arabic-tagger/blob/master/model/arabic-ner-superROP200.selfROP100.ser.gz" dest="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" skipexisting="true"/>
+                <get src="https://github.com/nschneid/arabic-tagger/blob/master/model/arabic-ner-superROP200.selfROP100.ser.gz?raw=true" dest="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" skipexisting="true"/>
                 <install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.arktools"
                 file="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" md5="62a3c96b9aee9c5ecf3737788571b108"
                 tool="ner" language="ar" variant="superROP" extension="gz" version="1.0"/>                            
