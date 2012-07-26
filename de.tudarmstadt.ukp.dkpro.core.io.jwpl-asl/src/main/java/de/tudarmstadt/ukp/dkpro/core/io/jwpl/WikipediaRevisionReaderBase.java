@@ -43,7 +43,6 @@ import de.tudarmstadt.ukp.wikipedia.api.MetaData;
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.PageIterator;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
-import de.tudarmstadt.ukp.wikipedia.api.exception.WikiInitializationException;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
@@ -113,6 +112,8 @@ public abstract class WikipediaRevisionReaderBase
 		revisionIds = new HashSet<String>();
 
 		try {
+			this.revisionApi = new RevisionApi(dbconfig);
+
 			if (revisionIdFile != null) {
 				revisionIds = loadFile(revisionIdFile);
 			}
@@ -142,6 +143,7 @@ public abstract class WikipediaRevisionReaderBase
 			pageIter = new PageIterator(wiki, true, pageBuffer);
 
 			try {
+
 				if (pageIter.hasNext()) {
 					currentArticle = pageIter.next();
 				}
@@ -149,15 +151,8 @@ public abstract class WikipediaRevisionReaderBase
 					throw new IOException("No articles in database.");
 				}
 
-				this.revisionApi = new RevisionApi(dbconfig);
 
 				this.timestampIter = getTimestampIter(currentArticle.getPageId());
-			}
-			catch (WikiInitializationException e) {
-				throw new ResourceInitializationException(e);
-			}
-			catch (WikiApiException e) {
-				throw new ResourceInitializationException(e);
 			}
 			catch (IOException e) {
 				throw new ResourceInitializationException(e);
@@ -259,14 +254,13 @@ public abstract class WikipediaRevisionReaderBase
 	}
 
 	protected void addDocumentMetaData(JCas jcas, int pageId, int revisionId)
-		throws WikiTitleParsingException
+		throws WikiTitleParsingException, WikiApiException
 	{
 		DocumentMetaData metaData = DocumentMetaData.create(jcas);
-		metaData.setDocumentTitle(currentArticle.getTitle().getWikiStyleTitle());
+		metaData.setDocumentTitle(wiki.getPage(pageId).getTitle().getWikiStyleTitle());
 		metaData.setCollectionId(Integer.valueOf(pageId).toString());
 		metaData.setDocumentId(Integer.valueOf(revisionId).toString());
 		metaData.setLanguage(dbconfig.getLanguage().toString());
-
 	}
 
 	/**
