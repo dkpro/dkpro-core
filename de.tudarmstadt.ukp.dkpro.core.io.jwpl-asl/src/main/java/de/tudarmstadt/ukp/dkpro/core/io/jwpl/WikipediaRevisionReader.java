@@ -29,9 +29,10 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 
 /**
- * Reads all revisions of all articles.
+ * Reads Wikipedia page revision.
  *
  * @author zesch
+ * @author oferschke
  *
  */
 public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
