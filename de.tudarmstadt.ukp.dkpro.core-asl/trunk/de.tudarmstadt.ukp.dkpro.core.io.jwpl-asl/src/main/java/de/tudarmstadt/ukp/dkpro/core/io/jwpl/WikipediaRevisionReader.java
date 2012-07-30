@@ -29,7 +29,7 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 
 /**
- * Reads Wikipedia page revision.
+ * Reads Wikipedia page revisions.
  *
  * @author zesch
  * @author oferschke
@@ -60,7 +60,7 @@ public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
             }else{
                 //in case we iterate over ALL revisions
             	try{
-                	revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestampIter.next());            		
+                	revision = this.revisionApi.getRevision(currentArticle.getPageId(), timestampIter.next());
             	}catch(Exception e){
             		//in case of lost connection
             		//TODO should be handled in RevisionAPI
