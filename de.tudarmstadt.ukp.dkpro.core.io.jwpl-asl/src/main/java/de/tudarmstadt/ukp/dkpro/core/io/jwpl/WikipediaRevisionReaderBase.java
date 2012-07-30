@@ -91,14 +91,16 @@ public abstract class WikipediaRevisionReaderBase
 
 	protected RevisionApi revisionApi;
 
+	//These Iterators are used when iterating over ALL revisions
 	protected Iterator<Page> pageIter; //for page iteration - revs are subiterated
 	protected Iterator<Timestamp> timestampIter; //for rev subiteration
+
+	//This iterator is used when iterating over a predefined list of revisions
 	protected Iterator<String> revIdIterator; //for list-based rev iteration
 
 	protected long currentArticleIndex;
 	protected long currentRevisionIndex;
 	protected long nrOfArticles;
-
 
 	protected MediaWikiParser parser;
 
@@ -260,7 +262,7 @@ public abstract class WikipediaRevisionReaderBase
 		metaData.setDocumentTitle(wiki.getPage(pageId).getTitle().getWikiStyleTitle());
 		metaData.setCollectionId(Integer.valueOf(pageId).toString());
 		metaData.setDocumentId(Integer.valueOf(revisionId).toString());
-		metaData.setLanguage(dbconfig.getLanguage().toString());
+		metaData.setLanguage(dbconfig.getLanguage().toString()); //should be ISO language code
 	}
 
 	/**
