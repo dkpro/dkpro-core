@@ -1,1 +1,1 @@
-classpath*:desc/type/Segmentation.xml
+classpath*:desc/type/LexicalUnits.xml
