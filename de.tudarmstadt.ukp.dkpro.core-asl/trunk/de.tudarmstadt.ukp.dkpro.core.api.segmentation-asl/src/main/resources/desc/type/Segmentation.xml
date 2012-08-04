@@ -70,14 +70,10 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>part1</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>part2</name>
-          <description/>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
+          <name>splits</name>
+          <description>A word that can be decomposed into different parts.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</elementType>
         </featureDescription>
       </features>
     </typeDescription>
@@ -112,6 +108,24 @@
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</name>
+      <description>A part of a compound word.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>category</name>
+          <description>The type of morpheme. (morpheme or linking-morpheme)</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>splits</name>
+          <description>Sub-splits of the current split.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</elementType>
+        </featureDescription>
+      </features>
     </typeDescription>
   </types>
 </typeSystemDescription>

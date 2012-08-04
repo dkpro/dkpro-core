@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Sat Aug 04 18:47:40 CEST 2012 */
+/* First created by JCasGen Sat Aug 04 18:47:41 CEST 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
 import org.apache.uima.jcas.JCas;
@@ -13,10 +13,10 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** 
+/** A part of a compound word.
  * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
  * @generated */
-public class Compound_Type extends Annotation_Type {
+public class Split_Type extends Annotation_Type {
   /** @generated */
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
@@ -24,25 +24,43 @@ public class Compound_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (Compound_Type.this.useExistingInstance) {
+  			 if (Split_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = Compound_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = Split_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new Compound(addr, Compound_Type.this);
-  			   Compound_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new Split(addr, Split_Type.this);
+  			   Split_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new Compound(addr, Compound_Type.this);
+        } else return new Split(addr, Split_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = Compound.typeIndexID;
+  public final static int typeIndexID = Split.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
+ 
+  /** @generated */
+  final Feature casFeat_category;
+  /** @generated */
+  final int     casFeatCode_category;
+  /** @generated */ 
+  public String getCategory(int addr) {
+        if (featOkTst && casFeat_category == null)
+      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_category);
+  }
+  /** @generated */    
+  public void setCategory(int addr, String v) {
+        if (featOkTst && casFeat_category == null)
+      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
+    ll_cas.ll_setStringValue(addr, casFeatCode_category, v);}
+    
+  
  
   /** @generated */
   final Feature casFeat_splits;
@@ -51,19 +69,19 @@ public class Compound_Type extends Annotation_Type {
   /** @generated */ 
   public int getSplits(int addr) {
         if (featOkTst && casFeat_splits == null)
-      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
     return ll_cas.ll_getRefValue(addr, casFeatCode_splits);
   }
   /** @generated */    
   public void setSplits(int addr, int v) {
         if (featOkTst && casFeat_splits == null)
-      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
     ll_cas.ll_setRefValue(addr, casFeatCode_splits, v);}
     
    /** @generated */
   public int getSplits(int addr, int i) {
         if (featOkTst && casFeat_splits == null)
-      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
     if (lowLevelTypeChecks)
       return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_splits), i, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_splits), i);
@@ -73,7 +91,7 @@ public class Compound_Type extends Annotation_Type {
   /** @generated */ 
   public void setSplits(int addr, int i, int v) {
         if (featOkTst && casFeat_splits == null)
-      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+      jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
     if (lowLevelTypeChecks)
       ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_splits), i, v, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_splits), i);
@@ -85,9 +103,13 @@ public class Compound_Type extends Annotation_Type {
 
   /** initialize variables to correspond with Cas Type and Features
 	* @generated */
-  public Compound_Type(JCas jcas, Type casType) {
+  public Split_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
+
+ 
+    casFeat_category = jcas.getRequiredFeatureDE(casType, "category", "uima.cas.String", featOkTst);
+    casFeatCode_category  = (null == casFeat_category) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_category).getCode();
 
  
     casFeat_splits = jcas.getRequiredFeatureDE(casType, "splits", "uima.cas.FSArray", featOkTst);
