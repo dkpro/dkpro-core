@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu Dec 09 22:13:11 CET 2010
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation/src/main/resources/desc/type/LexicalUnits.xml
+ * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/Segmentation.xml
  * @generated */
 public class Paragraph extends Annotation {
   /** @generated
@@ -28,7 +28,7 @@ public class Paragraph extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Paragraph() {}
+  protected Paragraph() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated */

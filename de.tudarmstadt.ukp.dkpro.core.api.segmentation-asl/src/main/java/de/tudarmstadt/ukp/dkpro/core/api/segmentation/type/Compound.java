@@ -1,34 +1,38 @@
 
 
-/* First created by JCasGen Sun Nov 21 13:42:50 CET 2010 */
+/* First created by JCasGen Sat Aug 04 18:47:40 CEST 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
 
+import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Thu Dec 09 22:13:11 CET 2010
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation/src/main/resources/desc/type/LexicalUnits.xml
+ * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/Segmentation.xml
  * @generated */
 public class Compound extends Annotation {
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = JCasRegistry.register(Compound.class);
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int type = typeIndexID;
   /** @generated  */
+  @Override
   public              int getTypeIndexID() {return typeIndexID;}
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Compound() {}
+  protected Compound() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated */
@@ -55,44 +59,42 @@ public class Compound extends Annotation {
     * Write your own initialization here
     * <!-- end-user-doc -->
   @generated modifiable */
-  private void readObject() {}
+  private void readObject() {/*default - does nothing empty block */}
      
  
     
   //*--------------*
-  //* Feature: part1
+  //* Feature: splits
 
-  /** getter for part1 - gets 
+  /** getter for splits - gets A word that can be decomposed into different parts.
    * @generated */
-  public String getPart1() {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_part1 == null)
-      jcasType.jcas.throwFeatMissing("part1", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Compound_Type)jcasType).casFeatCode_part1);}
+  public FSArray getSplits() {
+    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null)
+      jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+    return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits)));}
     
-  /** setter for part1 - sets  
+  /** setter for splits - sets A word that can be decomposed into different parts. 
    * @generated */
-  public void setPart1(String v) {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_part1 == null)
-      jcasType.jcas.throwFeatMissing("part1", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Compound_Type)jcasType).casFeatCode_part1, v);}    
-   
+  public void setSplits(FSArray v) {
+    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null)
+      jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits, jcasType.ll_cas.ll_getFSRef(v));}    
     
-  //*--------------*
-  //* Feature: part2
+  /** indexed getter for splits - gets an indexed value - A word that can be decomposed into different parts.
+   * @generated */
+  public Split getSplits(int i) {
+    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null)
+      jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+    jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i);
+    return (Split)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i)));}
 
-  /** getter for part2 - gets 
+  /** indexed setter for splits - sets an indexed value - A word that can be decomposed into different parts.
    * @generated */
-  public String getPart2() {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_part2 == null)
-      jcasType.jcas.throwFeatMissing("part2", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Compound_Type)jcasType).casFeatCode_part2);}
-    
-  /** setter for part2 - sets  
-   * @generated */
-  public void setPart2(String v) {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_part2 == null)
-      jcasType.jcas.throwFeatMissing("part2", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Compound_Type)jcasType).casFeatCode_part2, v);}    
+  public void setSplits(int i, Split v) { 
+    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null)
+      jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+    jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i);
+    jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i, jcasType.ll_cas.ll_getFSRef(v));}
   }
 
     

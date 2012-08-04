@@ -12,7 +12,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sat Jan 01 21:06:33 CET 2011
+ * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
  * @generated */
 public class Heading_Type extends Annotation_Type {
   /** @generated */

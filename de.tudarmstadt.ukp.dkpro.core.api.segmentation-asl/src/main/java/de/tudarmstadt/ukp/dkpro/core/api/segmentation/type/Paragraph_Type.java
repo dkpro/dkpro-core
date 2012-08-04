@@ -12,7 +12,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Thu Dec 09 22:13:11 CET 2010
+ * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
  * @generated */
 public class Paragraph_Type extends Annotation_Type {
   /** @generated */
