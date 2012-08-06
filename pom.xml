@@ -542,6 +542,7 @@
 								</goals>
 								<configuration>
 									<excludes>
+										<exclude>.gitignore</exclude>
 										<!-- release generated artifact -->
 										<exclude>release.properties</exclude>
 										<exclude>CHANGES</exclude>
