@@ -78,6 +78,7 @@ public class WikiUtils
         plainText = plainText.replaceAll("__.+?__", " ");
         plainText = plainText.replaceAll("\\[http.+?\\]", " ");
         plainText = plainText.replaceAll("\\{\\|.+?\\|\\}", " ");
+        plainText = plainText.replaceAll("\\{\\{.+?\\}\\}", " ");
         plainText = plainText.replaceAll(" - ", " ");
 
         plainText = plainText.replace('"', ' ');
