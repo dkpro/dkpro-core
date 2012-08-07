@@ -130,7 +130,16 @@ public class StanfordParser
 	public static final String PARAM_CREATE_POS_TAGS = "createPosTags";
 	@ConfigurationParameter(name = PARAM_CREATE_POS_TAGS, mandatory = true, defaultValue = "true")
 	private boolean createPosTags;
-
+	
+	/**
+	 * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to
+	 * avoid out of memory exceptions.<br/>
+	 * Default: {@code 130}
+	 */
+	public static final String PARAM_MAX_TOKENS = "maxTokens";
+	@ConfigurationParameter(name = PARAM_MAX_TOKENS, mandatory = true, defaultValue = "130")
+	private int maxTokens;
+	
 	/**
 	 * Sets whether to create or not to create Lemma tags. The creation of
 	 * constituent tags must be turned on for this to work.<br/>
@@ -244,6 +253,7 @@ public class StanfordParser
 					}
 
 					in.close();
+					pd.setOptionFlags("-maxLength", String.valueOf(maxTokens));
 					return pd;
 				}
 				catch (ClassNotFoundException e) {
@@ -334,7 +344,7 @@ public class StanfordParser
 			try {
 				getContext().getLogger().log(FINE, tokenizedSentence.toString());
 				LexicalizedParser parser = modelProvider.getResource();
-				if (tokenizedSentence.size() <= 160) {
+				if (tokenizedSentence.size() <= maxTokens) {
 					LexicalizedParserQuery query = parser.parserQuery();
 					query.parse(tokenizedSentence);
 					parseTree = query.getBestParse();
