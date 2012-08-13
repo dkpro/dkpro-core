@@ -17,8 +17,16 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Set;
 
+import bak.pcj.LongIterator;
 import bak.pcj.map.ObjectKeyLongMap;
 import bak.pcj.map.ObjectKeyLongOpenHashMap;
 
@@ -54,7 +62,10 @@ import bak.pcj.map.ObjectKeyLongOpenHashMap;
  * @author zesch
  */
 public class FrequencyDistribution<T>
+    implements Serializable
 {
+    
+    private static final long serialVersionUID = 140;
 
     private ObjectKeyLongMap freqDist;
 
@@ -205,37 +216,66 @@ public class FrequencyDistribution<T>
 
         return sb.toString();
     }
-    //
-    // /**
-    // * Sorts a Map by its values.
-    // *
-    // * @return the sorted Map
-    // */
-    // @SuppressWarnings("unchecked")
-    // private ObjectKeyIntOpenHashMap sortByValue(ObjectKeyIntOpenHashMap map)
-    // {
-    // List list = new LinkedList();
-    // ObjectKeyIntMapIterator entryIter = map.entries();
-    // while (entryIter.hasNext()) {
-    // entryIter.next();
-    // list.add();
-    // }
-    // Collections.sort(list, new Comparator()
-    // {
-    // @Override
-    // public int compare(Object arg0, Object arg1)
-    // {
-    // return ((Comparable) ((Map.Entry) (arg1)).getValue()).compareTo(((Map.Entry)
-    // (arg0)).getValue());
-    // }
-    //
-    // });
-    //
-    // Map result = new LinkedHashMap();
-    // for (Iterator iter = list.iterator(); iter.hasNext();) {
-    // Map.Entry entry = (Map.Entry) iter.next();
-    // result.put(entry.getKey(), entry.getValue());
-    // }
-    // return result;
-    // }
+
+//    public void save(File file)
+//            throws IOException
+//    {
+//        Properties prop = new Properties();
+//        
+//        ObjectKeyLongMapIterator entryIter = freqDist.entries();
+//
+//        while (entryIter.hasNext()) {
+//            entryIter.next();
+//            prop.put(entryIter.getKey(), Long.toString(entryIter.getValue()));
+//        }
+//
+//        prop.store(new FileOutputStream(file), "FrequencyDistribution");
+//    }
+//
+//    public void load(File file)
+//            throws IOException, ClassNotFoundException
+//    {
+//        Properties prop = new Properties();
+//        prop.load(new FileInputStream(file));
+//
+//        for (Entry<Object, Object> entry : prop.entrySet()) {
+//            this.addSample((T) entry.getKey(), Long.parseLong((String) entry.getValue()));
+//        }
+//        
+//        int samples = 0;
+//        
+//        LongIterator sampleIter = freqDist.values().iterator();
+//
+//        while (sampleIter.hasNext()) {
+//            long count = sampleIter.next();
+//            samples += count;
+//        }
+//        n = samples;
+//    }    
+    
+    public void save(File file)
+            throws IOException
+    {
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file));
+        out.writeObject(freqDist);
+        out.close();
+    }
+
+    public void load(File file)
+            throws IOException, ClassNotFoundException
+    {
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
+        freqDist = (ObjectKeyLongMap) in.readObject();
+        in.close();
+
+        int samples = 0;
+        
+        LongIterator sampleIter = freqDist.values().iterator();
+
+        while (sampleIter.hasNext()) {
+            long count = sampleIter.next();
+            samples += count;
+        }
+        n = samples;
+    }
 }
