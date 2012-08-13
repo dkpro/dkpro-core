@@ -19,16 +19,22 @@ package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 public class FrequencyDistributionTest
 {
 
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
+    
     @Test
-    public void cfdTest() {
+    public void fdTest() {
         
         List<String> tokens = Arrays.asList("This is a first test that contains a first test example".split(" "));
         
@@ -46,7 +52,29 @@ public class FrequencyDistributionTest
     }
 
     @Test
-    public void cfdTest_specialToken() {
+    public void saveAndLoadFdTest() throws Exception {
+        List<String> tokens = Arrays.asList("This is a first test that contains a first test example".split(" "));
+        
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.incAll(tokens);
+        
+        File outputFile = folder.newFile();
+        
+        fd.save(outputFile);
+        
+        FrequencyDistribution<String> loadedFd = new FrequencyDistribution<String>();
+        loadedFd.load(outputFile);
+
+        assertEquals(11, loadedFd.getN());
+        assertEquals(8, loadedFd.getB());
+        
+        assertEquals(0, loadedFd.getCount("humpelgrumpf"));
+        assertEquals(1, loadedFd.getCount("This"));
+        assertEquals(2, loadedFd.getCount("test"));
+    }
+    
+    @Test
+    public void fdTest_specialToken() {
         
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(", ");
