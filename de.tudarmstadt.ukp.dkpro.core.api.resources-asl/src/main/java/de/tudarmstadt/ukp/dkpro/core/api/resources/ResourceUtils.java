@@ -275,7 +275,7 @@ public class ResourceUtils
 			}
 			else {
 				// if there is no caller, we use the thread  classloader
-				url = Thread.currentThread().getContextClassLoader().getResource(
+				url = ResourceUtils.class.getResource(
 						aLocation.substring(prefixClasspath.length()));
 			}
 			if (url == null) {
