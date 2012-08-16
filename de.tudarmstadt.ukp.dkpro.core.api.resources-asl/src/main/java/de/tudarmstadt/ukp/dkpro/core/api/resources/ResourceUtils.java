@@ -254,6 +254,46 @@ public class ResourceUtils
 	 *
 	 * @param aLocation
 	 *            a location (classpath, URL, file or UIMA resource location).
+	 * @return the resolved URL.
+	 * @throws IOException
+	 *             if the target could not be found.
+	 */
+	public static URL resolveLocation(String aLocation)
+		throws IOException
+	{
+		return resolveLocation(aLocation, null, null);
+	}	
+	
+	/**
+	 * Resolve a location (which can be many things) to an URL. If the location starts with
+	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+	 * the target may not actually exist.
+	 *
+	 * @param aLocation
+	 *            a location (classpath, URL, file or UIMA resource location).
+	 * @param aContext
+	 *            a UIMA context.
+	 * @return the resolved URL.
+	 * @throws IOException
+	 *             if the target could not be found.
+	 */
+	public static URL resolveLocation(String aLocation, UimaContext aContext)
+		throws IOException
+	{
+		return resolveLocation(aLocation, null, aContext);
+	}	
+	
+	/**
+	 * Resolve a location (which can be many things) to an URL. If the location starts with
+	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+	 * the target may not actually exist.
+	 *
+	 * @param aLocation
+	 *            a location (classpath, URL, file or UIMA resource location).
 	 * @param aCaller
 	 *            the instance calling this method (for classpath loading).
 	 * @param aContext
@@ -265,13 +305,40 @@ public class ResourceUtils
 	public static URL resolveLocation(String aLocation, Object aCaller, UimaContext aContext)
 		throws IOException
 	{
+		ClassLoader cl = null;
+		if (aCaller != null) {
+			cl = aCaller.getClass().getClassLoader();
+		}
+		return resolveLocation(aLocation, cl, aContext);
+	}
+	
+	/**
+	 * Resolve a location (which can be many things) to an URL. If the location starts with
+	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+	 * the target may not actually exist.
+	 *
+	 * @param aLocation
+	 *            a location (classpath, URL, file or UIMA resource location).
+	 * @param aClassLoader
+	 *            the class loader to be used for classpath URLs.
+	 * @param aContext
+	 *            a UIMA context.
+	 * @return the resolved URL.
+	 * @throws IOException
+	 *             if the target could not be found.
+	 */
+	public static URL resolveLocation(String aLocation, ClassLoader aClassLoader, UimaContext aContext)
+		throws IOException
+	{
 		// If a location starts with "classpath:"
 		String prefixClasspath = "classpath:";
 		if (aLocation.startsWith(prefixClasspath)) {
 			URL url;
-			if (aCaller != null) {
+			if (aClassLoader != null) {
 				// if we have a caller, we use it's classloader
-				url = aCaller.getClass().getResource(aLocation.substring(prefixClasspath.length()));
+				url = aClassLoader.getResource(aLocation.substring(prefixClasspath.length()));
 			}
 			else {
 				// if there is no caller, we use the thread  classloader
