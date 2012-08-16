@@ -60,6 +60,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  *     FileSetCollectionReaderBase.PARAM_PATH,     new File("some/path").getAbsolutePath(),
  *     FileSetCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]foodata&#47;**&#47;*.foo" });
  * </pre>
+ * <p>
+ * The list of resources returned is sorted, so for the same set of resources, they are always 
+ * returned in the same order.
  *
  * @see <a href="http://ant.apache.org/manual/dirtasks.html#patterns">Documentation of <b>ant</b> patterns</a>
  *
