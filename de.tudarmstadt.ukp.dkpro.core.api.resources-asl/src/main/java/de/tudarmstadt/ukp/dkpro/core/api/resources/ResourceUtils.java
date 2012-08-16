@@ -332,19 +332,21 @@ public class ResourceUtils
 	public static URL resolveLocation(String aLocation, ClassLoader aClassLoader, UimaContext aContext)
 		throws IOException
 	{
+		// if we have a caller, we use it's classloader
+		ClassLoader classLoader = aClassLoader;
+		if (classLoader == null) {
+			classLoader = ResourceUtils.class.getClassLoader();
+		}
+		
 		// If a location starts with "classpath:"
 		String prefixClasspath = "classpath:";
 		if (aLocation.startsWith(prefixClasspath)) {
-			URL url;
-			if (aClassLoader != null) {
-				// if we have a caller, we use it's classloader
-				url = aClassLoader.getResource(aLocation.substring(prefixClasspath.length()));
+			String cpLocation = aLocation.substring(prefixClasspath.length());
+			if (cpLocation.startsWith("/")) {
+				cpLocation = cpLocation.substring(1);
 			}
-			else {
-				// if there is no caller, we use the thread  classloader
-				url = ResourceUtils.class.getResource(
-						aLocation.substring(prefixClasspath.length()));
-			}
+			URL url = classLoader.getResource(cpLocation);
+			
 			if (url == null) {
 				throw new FileNotFoundException("No file found at [" + aLocation + "]");
 			}
