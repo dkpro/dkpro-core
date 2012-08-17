@@ -58,7 +58,7 @@ public class BrownTEICorpus
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, LANGUAGE,
                 TEIReader.PARAM_PATH, brownPath,
-                TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}
+                TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
         );
     }
 
