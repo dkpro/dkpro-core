@@ -32,12 +32,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.zip.GZIPInputStream;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.tools.bzip2.CBZip2InputStream;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
 import org.springframework.core.io.Resource;
@@ -226,23 +223,7 @@ public class ResourceUtils
 	public static InputStream resolveCompressedInputStream(InputStream is, String filename)
 		throws IOException
 	{
-        String nameLC = filename.toLowerCase();
-	    InputStream resolvedIS;
-	    if (nameLC.endsWith(".gz")) {
-            resolvedIS = new GZIPInputStream(is);
-        }
-        else if (nameLC.endsWith(".bzip2") || nameLC.endsWith(".bz2")) {
-            int read = is.read(new byte[2]); // Read the stream markers "BZ"
-            if (read != 2) {
-            	throw new IOException("Unable to read BZ marker from stream");
-            }
-            resolvedIS = new CBZip2InputStream(is);
-        }
-        else {
-            resolvedIS = is;
-        }
-
-	    return resolvedIS;
+		return CompressionUtils.getInputStream(filename, is);
 	}
 
 	/**

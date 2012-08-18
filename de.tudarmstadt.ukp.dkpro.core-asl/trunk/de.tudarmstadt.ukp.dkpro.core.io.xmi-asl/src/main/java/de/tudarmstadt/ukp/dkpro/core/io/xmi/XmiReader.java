@@ -28,7 +28,7 @@ import org.apache.uima.collection.CollectionException;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * @author Richard Eckart de Castilho
@@ -45,10 +45,8 @@ public class XmiReader
 
 		InputStream is = null;
 		try {
-		    InputStream resolvedIS = ResourceUtils.resolveCompressedInputStream(
-		            res.getInputStream(),
-		            res.getPath()
-		    );
+			InputStream resolvedIS = CompressionUtils.getInputStream(res.getLocation(),
+					res.getInputStream());
 			XmiCasDeserializer.deserialize(resolvedIS, aCAS);
 		}
 		catch (SAXException e) {
