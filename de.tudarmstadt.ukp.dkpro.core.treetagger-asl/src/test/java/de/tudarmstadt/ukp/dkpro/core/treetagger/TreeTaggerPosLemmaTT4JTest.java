@@ -83,6 +83,11 @@ class TreeTaggerPosLemmaTT4JTest
 	public void treeTaggerAnnotatorGermanTest()
 		throws Exception
     {
+        runTest("de", "10 Minuten sind das Mikro an und die Bühne frei .",
+        		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "." },
+        		new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON",  "ART", "NN", "PTKVZ", "$."   },
+        		new String[] { "CARD", "NN", "V",     "ART", "NN", "V",     "CONJ", "ART", "NN", "V",     "PUNC" });
+        
         runTest("de", "Das ist ein Test .",
         		new String[] { "die", "sein",  "eine", "Test", "."   },
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
