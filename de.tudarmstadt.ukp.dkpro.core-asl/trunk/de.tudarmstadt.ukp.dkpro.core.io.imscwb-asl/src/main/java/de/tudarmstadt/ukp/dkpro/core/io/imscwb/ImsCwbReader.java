@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.internal.util.XMLUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
@@ -75,6 +75,31 @@ public class ImsCwbReader
     @ConfigurationParameter(name = PARAM_WRITE_LEMMAS, mandatory = true, defaultValue = "true")
     private boolean writeLemmas;
 
+	/**
+	 * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
+	 * but for the purpose of setting the document ID, a new ID is generated. (Default: false)
+	 */
+	public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
+	@ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
+	private boolean generateNewIds;
+    
+	/**
+	 * If true, the unit text ID encoded in the corpus file is stored as the URI in the document
+	 * meta data. This setting has is not affected by {@link #PARAM_GENERATE_NEW_IDS} 
+	 * (Default: false)
+	 */
+	public static final String PARAM_ID_IS_URL = "idIsUrl";
+	@ConfigurationParameter(name = PARAM_ID_IS_URL, mandatory = true, defaultValue = "false")
+	private boolean idIsUrl;
+	
+	/**
+	 * Replace non-XML characters with spaces.
+	 * (Default: true)
+	 */
+	public static final String PARAM_REPLACE_NON_XML = "replaceNonXml";
+	@ConfigurationParameter(name = PARAM_REPLACE_NON_XML, mandatory = true, defaultValue = "true")
+	private boolean replaceNonXml;
+	
     private Type tokenType;
     private Type lemmaType;
     private Type sentenceType;
@@ -85,6 +110,10 @@ public class ImsCwbReader
 
 	private MappingProvider posMappingProvider;
 
+	private int documentCount;
+	private int qualifier;
+	private Resource lastResource;
+	
     @Override
     public void initialize(UimaContext aContext)
     	throws ResourceInitializationException
@@ -100,6 +129,10 @@ public class ImsCwbReader
 		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
 		posMappingProvider.setOverride("tagger.tagset", posTagset);
+		
+		documentCount = 0;
+		qualifier = 0;
+		lastResource = null;
     }
 
     @Override
@@ -115,7 +148,31 @@ public class ImsCwbReader
     {
 		Resource res = wackyIterator.getCurrentResource();
         CorpusText text = wackyIterator.next();
-		initCas(aCAS, res, text.getDocumentTitle());
+
+        // Reset counter when a new file is read.
+        if (!res.equals(lastResource)) {
+        	qualifier = 0;
+        	lastResource  = res;
+        }
+        
+		String documentId;
+		if (generateNewIds) {
+			documentId = String.valueOf(documentCount);
+		}
+		else {
+			documentId = text.getDocumentTitle();
+		}
+
+		initCas(aCAS, res, String.valueOf(qualifier));
+		DocumentMetaData meta = DocumentMetaData.get(aCAS);
+		meta.setDocumentTitle(text.getDocumentTitle());
+		meta.setDocumentId(documentId);
+		
+		if (idIsUrl) {
+			meta.setDocumentBaseUri(null);
+			meta.setDocumentUri(text.getDocumentTitle());
+		}
+		
 		posMappingProvider.configure(aCAS);
 
         List<AnnotationFS> tokenAnnotations    = new ArrayList<AnnotationFS>();
@@ -134,9 +191,9 @@ public class ImsCwbReader
         for (CorpusSentence sentence : text.getSentences()) {
             int savedOffset = offset;
             for (int i=0; i<sentence.getTokens().size(); i++) {
-                String token = sentence.getTokens().get(i);
-                String lemma = sentence.getLemmas().get(i);
-                String pos   = sentence.getPOS().get(i);
+                String token = doReplaceNonXml(sentence.getTokens().get(i));
+                String lemma = doReplaceNonXml(sentence.getLemmas().get(i));
+                String pos   = doReplaceNonXml(sentence.getPOS().get(i));
                 int len = token.length();
 
                 if (writePOS) {
@@ -183,7 +240,9 @@ public class ImsCwbReader
             }
         }
 
-        aCAS.setDocumentText(sb.toString());
+        String sText = sb.toString();
+                
+        aCAS.setDocumentText(sText);
 
         // finally add the annotations to the CAS
         for (AnnotationFS t : tokenAnnotations) {
@@ -200,6 +259,8 @@ public class ImsCwbReader
         }
 
         completed++;
+        documentCount++;
+        qualifier++;
     }
 
     @Override
@@ -207,28 +268,24 @@ public class ImsCwbReader
     {
         return new Progress[] { new ProgressImpl(completed, 0, "text") };
     }
-
-    // we need our own version of initCas, as a lot of documents are created from the same underlying document
-    @Override
-    protected void initCas(CAS aCas, Resource aResource, String title)
+    
+    private String doReplaceNonXml(String aString)
     {
-        try {
-            // Set the document metadata
-            DocumentMetaData docMetaData = DocumentMetaData.create(aCas.getJCas());
-            docMetaData.setDocumentTitle(title);
-            docMetaData.setDocumentUri(aResource.getResolvedUri().toString());
-            docMetaData.setDocumentId(aResource.getPath());
-            if (aResource.getBase() != null) {
-                docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
-                docMetaData.setCollectionId(aResource.getResolvedBase());
-            }
-
-            // Set the document language
-            aCas.setDocumentLanguage(getLanguage());
-        }
-        catch (CASException e) {
-            // This should not happen.
-            throw new RuntimeException(e);
-        }
+    	if (!replaceNonXml) {
+    		return aString;
+    	}
+    	
+    	char[] buf = aString.toCharArray();
+    	int pos = XMLUtils.checkForNonXmlCharacters(buf, 0, buf.length, false);
+    	
+    	if (pos == -1) {
+    		return aString;
+    	}
+    	
+    	while (pos != -1) {
+    		buf[pos] = ' ';
+    		pos = XMLUtils.checkForNonXmlCharacters(buf, pos, buf.length - pos, false);
+    	}
+    	return String.valueOf(buf);
     }
 }

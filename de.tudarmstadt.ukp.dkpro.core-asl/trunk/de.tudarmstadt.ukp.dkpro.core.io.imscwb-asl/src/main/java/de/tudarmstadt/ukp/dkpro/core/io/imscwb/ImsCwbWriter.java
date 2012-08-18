@@ -125,11 +125,13 @@ public class ImsCwbWriter
 	private File cqpHome;
 
 	/**
-	 * Set this parameter to compres the token streams and the indexes using cwb-huffcode and
-	 * cwb-compress-rdx.
+	 * Set this parameter to compress the token streams and the indexes using cwb-huffcode and
+	 * cwb-compress-rdx. With modern hardware, this may actually slow down queries, so we turn it
+	 * off by default. If you have large data sets, you best try yourself what works best for you.
+	 * (default: false)
 	 */
 	public static final String PARAM_CQP_COMPRESS = "cqpCompress";
-	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="true")
+	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="false")
 	private boolean cqpCompress;
 
 	private static final String LS = "\n";
