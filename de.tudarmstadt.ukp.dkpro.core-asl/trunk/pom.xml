@@ -173,6 +173,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</artifactId>
+				<version>1.4.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</artifactId>
 				<version>1.4.0-SNAPSHOT</version>
 			</dependency>
@@ -477,6 +482,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -612,6 +618,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.frequency-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.aclanthology/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.annis/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bincas/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jdbc/src/main/java" includes="**/*.java" />
