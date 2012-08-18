@@ -71,6 +71,37 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-de</artifactId>
+				<version>20120417.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</artifactId>
+				<version>20111109.0</version>
+			</dependency>
+			<!--  Slovene model currently not in Artifactory because we do not know tagset yet
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-sl</artifactId>
+				<version>20100703.0</version>
+			</dependency>
+			-->
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-zh</artifactId>
+				<version>20101115.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
+				<version>20120425.0</version>
+			</dependency>			
+		</dependencies>
+	</dependencyManagement>
 	<profiles>
 		<profile>
 			<id>use-proprietary-resources</id>
@@ -78,14 +109,12 @@
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-de</artifactId>
-					<version>20120417.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</artifactId>
-					<version>20111109.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
@@ -93,7 +122,6 @@
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-sl</artifactId>
-					<version>20100703.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
@@ -101,14 +129,12 @@
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-zh</artifactId>
-					<version>20101115.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
-					<version>20120425.0</version>
 					<scope>test</scope>
 					<optional>true</optional>
 				</dependency>
