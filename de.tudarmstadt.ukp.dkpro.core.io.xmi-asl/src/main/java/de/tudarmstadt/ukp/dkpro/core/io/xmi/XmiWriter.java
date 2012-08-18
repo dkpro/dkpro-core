@@ -18,16 +18,21 @@
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CASRuntimeException;
 import org.apache.uima.cas.impl.XmiCasSerializer;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.TypeSystemUtil;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * @author Richard Eckart de Castilho
@@ -48,30 +53,57 @@ public class XmiWriter
 	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
 	private File typeSystemFile;
 
+	private boolean typeSystemWritten;
+	
+	@Override
+	public void initialize(UimaContext aContext)
+		throws ResourceInitializationException
+	{
+		super.initialize(aContext);
+		
+		typeSystemWritten = false;
+	}
+	
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
 		OutputStream docOS = null;
-		OutputStream typeOS = null;
 		try {
 			docOS = getOutputStream(aJCas, ".xmi");
 			
-			if (typeSystemFile != null) {
-				typeOS = getOutputStream(typeSystemFile);
-			}
-			else {
-				typeOS = getOutputStream(getTargetPath("typesystem", ".xml"));
-			}
-			
 			XmiCasSerializer.serialize(aJCas.getCas(), docOS);
-			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
+			
+			if (!typeSystemWritten || typeSystemFile == null) {
+				writeTypeSystem(aJCas);
+				typeSystemWritten = true;
+			}
 		}
 		catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
 		finally {
 			closeQuietly(docOS);
+		}
+	}
+	
+	private void writeTypeSystem(JCas aJCas) throws IOException, CASRuntimeException, SAXException
+	{
+		OutputStream typeOS = null;
+		
+		File typeOSFile;
+		if (typeSystemFile != null) {
+			typeOSFile = typeSystemFile;
+		}
+		else {
+			typeOSFile = getTargetPath("typesystem", ".xml");
+		}
+		typeOS = CompressionUtils.getOutputStream(typeOSFile);
+		
+		try {
+			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
+		}
+		finally {
 			closeQuietly(typeOS);
 		}
 	}

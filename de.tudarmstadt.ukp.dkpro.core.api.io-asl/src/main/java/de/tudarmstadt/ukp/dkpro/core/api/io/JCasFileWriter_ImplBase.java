@@ -17,15 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import static org.apache.commons.io.FileUtils.forceMkdir;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.jcas.JCas;
@@ -34,6 +30,8 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
  * @author Richard Eckart de Castilho
@@ -49,11 +47,13 @@ public abstract class JCasFileWriter_ImplBase
 	private File path;
 
     /**
-     * Enabled/disable gzip compression. If this is set, all files will have the ".gz" ending.
+     * Choose a compression method. (default: {@link CompressionMethod#NONE})
+     * 
+     * @see CompressionMethod
      */
-    public static final String PARAM_COMPRESS = "compress";
-    @ConfigurationParameter(name=PARAM_COMPRESS, mandatory=true, defaultValue="false")
-    private boolean compress;
+	public static final String PARAM_COMPRESSION = "compression";
+	@ConfigurationParameter(name=PARAM_COMPRESSION, mandatory=false, defaultValue="NONE")
+	private CompressionMethod compression;
     
     /**
      * Remove the original extension.
@@ -76,9 +76,9 @@ public abstract class JCasFileWriter_ImplBase
     @ConfigurationParameter(name=PARAM_ESCAPE_DOCUMENT_ID, mandatory=true, defaultValue="true")
     private boolean escapeDocumentId;
 
-    protected boolean isCompress()
+    protected CompressionMethod getCompressionMethod()
 	{
-		return compress;
+		return compression;
 	}
     
     protected boolean isStripExtension()
@@ -94,27 +94,7 @@ public abstract class JCasFileWriter_ImplBase
     protected OutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
     {
     	File outputFile = getTargetPath(aJCas, aExtension);
-		return getOutputStream(outputFile);
-    }
-
-    /**
-     * Make sure the target directory exists and get a stream writing to the specified file within.
-     * If the file name ends in ".gz", the stream will be compressed.
-     * 
-     * @param aFile the target file.
-     * @return a stream to write to.
-     */
-    protected OutputStream getOutputStream(File aFile) throws IOException
-    {
-		// Create parent folders for output file and set up stream
-		if (aFile.getParentFile() != null) {
-			forceMkdir(aFile.getParentFile());
-		}
-		OutputStream os = new FileOutputStream(aFile);
-		if (aFile.getName().endsWith(".gz")) {
-			os = new GZIPOutputStream(os);
-		}
-		return os;
+		return CompressionUtils.getOutputStream(outputFile);
     }
 
 	/**
@@ -188,11 +168,6 @@ public abstract class JCasFileWriter_ImplBase
 	 */
 	protected File getTargetPath(String aRelativePath, String aExtension)
 	{
-		if (compress) {
-			return new File(path, aRelativePath + aExtension + ".gz");
-		}
-		else {
-			return new File(path, aRelativePath + aExtension);
-		}
+		return new File(path, aRelativePath + aExtension + compression.getExtension());
 	}
 }
