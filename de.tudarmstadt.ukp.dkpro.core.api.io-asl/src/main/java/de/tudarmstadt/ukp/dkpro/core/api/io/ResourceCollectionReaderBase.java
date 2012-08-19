@@ -102,7 +102,14 @@ public abstract class ResourceCollectionReaderBase
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
 	private String language;
-
+	/**
+	 * Name of optional configuration parameter that contains the class of a alternative
+	 * ResourceLoader implementation for locating resources.
+	*/
+	public static final String PARAM_RESOURCE_LOADER = "ResourceLoader";
+	@ConfigurationParameter(name = PARAM_RESOURCE_LOADER, mandatory = false)
+	private Class resourceLoaderClass;
+	
     private int completed;
 	private Collection<Resource> resources;
 	private Iterator<Resource> resourceIterator;
@@ -274,7 +281,23 @@ public abstract class ResourceCollectionReaderBase
 			excludes = aExcludes;
 		}
 
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		ResourcePatternResolver resolver = null;
+		// if a custom ResourcePatternResolver has been specified, use it, by default
+		// use PathMatchingResourcePatternresolber
+		if (this.resourceLoaderClass == null) {
+			resolver = new PathMatchingResourcePatternResolver();
+		} else {
+		
+			try {
+				resolver = (ResourcePatternResolver) resourceLoaderClass.newInstance();
+			} catch (final InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (final IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 		AntPathMatcher matcher = new AntPathMatcher();
 		List<Resource> result = new ArrayList<Resource>();
 
@@ -368,29 +391,30 @@ public abstract class ResourceCollectionReaderBase
 	 * @return the URI of the resource
 	 */
 	private URI getUri(org.springframework.core.io.Resource aResource, boolean aFileOrDir)
-		throws IOException
-	{
+			throws IOException
+			{
 		try {
-			File file = aResource.getFile();
+
+			final File file = aResource.getFile();
 
 			// Exclude hidden files/dirs if requested
-			if (file.isHidden() && !includeHidden) {
+			if (file.isHidden() && !this.includeHidden) {
 				return null;
 			}
 
 			// Return only dirs or files...
-			if ((aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
+			if ((aFileOrDir && file.isFile())
+					|| (!aFileOrDir && file.isDirectory())) {
 				return aResource.getFile().toURI();
-			}
-			else {
+			} else {
 				return null;
 			}
-		}
-		catch (IOException e) {
+		} catch (final IOException e) {
+			return aResource.getURI();
+		} catch (final UnsupportedOperationException e) {
 			return aResource.getURI();
 		}
-	}
-
+			}
 	/**
 	 * Initialize the {@DocumentMetaData}. This must be called before setting the
 	 * document text, otherwise the end feature of this annotation will not be set correctly.
