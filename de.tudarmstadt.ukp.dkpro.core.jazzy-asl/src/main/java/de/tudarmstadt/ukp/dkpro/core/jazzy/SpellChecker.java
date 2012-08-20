@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 
 import java.io.IOException;
@@ -79,7 +78,7 @@ public class SpellChecker
 		InputStream is = null;
 		try {
 			URL url = ResourceUtils.resolveLocation(dictPath, this, context);
-			context.getLogger().log(INFO, "Loading dictionary from " + url);
+			this.getLogger().debug("Loading dictionary from " + url);
 			is = url.openStream();
 			dict = new SpellDictionaryHashMap(new InputStreamReader(is, dictEncoding));
 		}
