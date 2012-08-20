@@ -41,12 +41,9 @@ public class OpenNlpPosTaggerTest
                 ThroughputTest.getStandardReader("en"),
                 createAggregateDescription(
                     createPrimitiveDescription(
-                            BreakIteratorSegmenter.class
-                    ),
+                            BreakIteratorSegmenter.class),
                     createPrimitiveDescription(
-                            OpenNlpPosTagger.class,
-                            OpenNlpPosTagger.PARAM_LANGUAGE, "en"
-                    )
+                            OpenNlpPosTagger.class)
                 )
         );
     }
