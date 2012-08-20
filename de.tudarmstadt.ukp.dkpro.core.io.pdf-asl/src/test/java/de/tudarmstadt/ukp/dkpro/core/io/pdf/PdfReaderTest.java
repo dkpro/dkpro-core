@@ -17,8 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATH;
-import static de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
@@ -48,8 +46,8 @@ public class PdfReaderTest
 		File outputFile = new File(folder.getRoot(), "dump-output.txt");
 
 		CollectionReader reader = createCollectionReader(PdfReader.class,
-				PARAM_PATH, "src/test/resources/data",
-				PARAM_PATTERNS, new String[] { "[+]**/*.pdf"  });
+				PdfReader.PARAM_PATH, "src/test/resources/data",
+				PdfReader.PARAM_PATTERNS, new String[] { "[+]**/*.pdf"  });
 
 		AnalysisEngine writer = createPrimitive(CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, outputFile);
