@@ -64,7 +64,7 @@ public abstract class FileSetCollectionReaderBase
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
 	private File path;
 
-	public static final String PARAM_PATTERNS = "Patterns";
+	public static final String PARAM_PATTERNS = "patterns";
 	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
 	private String[] patterns;
 
@@ -73,8 +73,7 @@ public abstract class FileSetCollectionReaderBase
 	private String language;
 
 	/**
-	 * States whether the matching is done case sensitive.
-	 * <code>defaultValue=true</code>
+	 * States whether the matching is done case sensitive. (default: true)
 	 */
 	public static final String PARAM_CASE_SENSITIVE= "CaseSensitive";
 	@ConfigurationParameter(name=PARAM_CASE_SENSITIVE, mandatory=false, defaultValue="true")
