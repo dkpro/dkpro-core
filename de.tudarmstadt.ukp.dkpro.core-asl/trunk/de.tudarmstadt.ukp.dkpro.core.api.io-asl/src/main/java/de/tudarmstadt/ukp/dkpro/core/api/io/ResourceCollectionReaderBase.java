@@ -79,18 +79,18 @@ public abstract class ResourceCollectionReaderBase
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
 	private String path;
 
-	public static final String PARAM_PATTERNS = "Patterns";
+	public static final String PARAM_PATTERNS = "patterns";
 	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
 	private String[] patterns;
 
 	/**
 	 * Use the default excludes.
 	 */
-	public static final String PARAM_USE_DEFAULT_EXCLUDES = "UseDefaultExcludes";
+	public static final String PARAM_USE_DEFAULT_EXCLUDES = "useDefaultExcludes";
 	@ConfigurationParameter(name=PARAM_USE_DEFAULT_EXCLUDES, mandatory=true, defaultValue="true")
 	private boolean useDefaultExcludes;
 
-	public static final String PARAM_INCLUDE_HIDDEN = "IncludeHidden";
+	public static final String PARAM_INCLUDE_HIDDEN = "includeHidden";
 	@ConfigurationParameter(name=PARAM_INCLUDE_HIDDEN, mandatory=true, defaultValue="false")
 	private boolean includeHidden;
 
@@ -106,13 +106,15 @@ public abstract class ResourceCollectionReaderBase
 	 * Name of optional configuration parameter that contains the class of a alternative
 	 * ResourceLoader implementation for locating resources.
 	*/
-	public static final String PARAM_RESOURCE_LOADER = "ResourceLoader";
-	@ConfigurationParameter(name = PARAM_RESOURCE_LOADER, mandatory = false)
+	public static final String PARAM_RESOURCE_LOADER_CLASS = "resourceLoaderClass";
+	@ConfigurationParameter(name = PARAM_RESOURCE_LOADER_CLASS, mandatory = false)
 	private Class resourceLoaderClass;
 	
     private int completed;
 	private Collection<Resource> resources;
 	private Iterator<Resource> resourceIterator;
+	
+	private ResourcePatternResolver resolver;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -120,6 +122,23 @@ public abstract class ResourceCollectionReaderBase
 	{
 		super.initialize(aContext);
 
+		// if a custom ResourcePatternResolver has been specified, use it, by default
+		// use PathMatchingResourcePatternresolber
+		if (resourceLoaderClass == null) {
+			resolver = new PathMatchingResourcePatternResolver();
+		}
+		else {
+			try {
+				resolver = (ResourcePatternResolver) resourceLoaderClass.newInstance();
+			}
+			catch (final InstantiationException e) {
+				throw new ResourceInitializationException(e);
+			}
+			catch (final IllegalAccessException e) {
+				throw new ResourceInitializationException(e);
+			}
+		}
+		
 		// Parse the patterns and inject them into the FileSet
 		List<String> includes = new ArrayList<String>();
 		List<String> excludes = new ArrayList<String>();
@@ -281,23 +300,6 @@ public abstract class ResourceCollectionReaderBase
 			excludes = aExcludes;
 		}
 
-		ResourcePatternResolver resolver = null;
-		// if a custom ResourcePatternResolver has been specified, use it, by default
-		// use PathMatchingResourcePatternresolber
-		if (this.resourceLoaderClass == null) {
-			resolver = new PathMatchingResourcePatternResolver();
-		} else {
-		
-			try {
-				resolver = (ResourcePatternResolver) resourceLoaderClass.newInstance();
-			} catch (final InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (final IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		}
 		AntPathMatcher matcher = new AntPathMatcher();
 		List<Resource> result = new ArrayList<Resource>();
 
