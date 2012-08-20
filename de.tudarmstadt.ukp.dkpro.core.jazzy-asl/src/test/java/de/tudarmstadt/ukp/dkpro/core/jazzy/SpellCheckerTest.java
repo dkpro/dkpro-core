@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
@@ -37,40 +36,40 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class SpellCheckerTest
 {
 
-	@Test
-	public void spellCheckerTest()
-		throws Exception
-	{
-		String testDocumentEnglish = "The cat sta on the mat . Some errosr occur in user "
-				+ "discourse morre often . What do you tink ?";
+    @Test
+    public void spellCheckerTest()
+        throws Exception
+    {
+        String testDocumentEnglish = "The cat sta on the mat . Some errosr occur in user "
+                + "discourse morre often . What do you tink ?";
 
-		List<String> errorsEnglish = new ArrayList<String>();
-		errorsEnglish.add("sta");
-		errorsEnglish.add("errosr");
-		errorsEnglish.add("morre");
-		errorsEnglish.add("tink");
+        List<String> errorsEnglish = new ArrayList<String>();
+        errorsEnglish.add("sta");
+        errorsEnglish.add("errosr");
+        errorsEnglish.add("morre");
+        errorsEnglish.add("tink");
 
-		runEnglishSpellChecker(testDocumentEnglish, errorsEnglish);
-	}
+        runEnglishSpellChecker(testDocumentEnglish, errorsEnglish);
+    }
 
-	private void runEnglishSpellChecker(String testDocument, List<String> errors)
-		throws Exception
-	{
-		AnalysisEngine engine = createPrimitive(SpellChecker.class, createTypeSystemDescription(),
-				SpellChecker.PARAM_DICT_PATH, "src/test/resources/testdict.txt");
-		JCas aJCas = engine.newJCas();
+    private void runEnglishSpellChecker(String testDocument, List<String> errors)
+        throws Exception
+    {
+        AnalysisEngine engine = createPrimitive(SpellChecker.class, SpellChecker.PARAM_DICT_PATH,
+                "src/test/resources/testdict.txt");
+        JCas aJCas = engine.newJCas();
 
-		TokenBuilder<Token, Sentence> tb = TokenBuilder.create(Token.class, Sentence.class);
-		tb.buildTokens(aJCas, testDocument);
-		engine.process(aJCas);
+        TokenBuilder<Token, Sentence> tb = TokenBuilder.create(Token.class, Sentence.class);
+        tb.buildTokens(aJCas, testDocument);
+        engine.process(aJCas);
 
-		int i = 0;
-		for (SpellingAnomaly errorAnnotation : select(aJCas, SpellingAnomaly.class)) {
-			System.out.println(errorAnnotation.getCoveredText() + " - "
-					+ errorAnnotation.getSuggestions(0).getReplacement());
-			assertEquals(errors.get(i), errorAnnotation.getCoveredText());
-			i++;
-		}
-		System.out.println("Found " + i + " errors");
-	}
+        int i = 0;
+        for (SpellingAnomaly errorAnnotation : select(aJCas, SpellingAnomaly.class)) {
+            System.out.println(errorAnnotation.getCoveredText() + " - "
+                    + errorAnnotation.getSuggestions(0).getReplacement());
+            assertEquals(errors.get(i), errorAnnotation.getCoveredText());
+            i++;
+        }
+        System.out.println("Found " + i + " errors");
+    }
 }
