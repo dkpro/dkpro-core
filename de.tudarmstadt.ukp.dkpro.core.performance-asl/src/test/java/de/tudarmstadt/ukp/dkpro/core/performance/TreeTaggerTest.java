@@ -41,12 +41,9 @@ public class TreeTaggerTest
                 ThroughputTest.getStandardReader("en"),
                 createAggregateDescription(
                         createPrimitiveDescription(
-                                BreakIteratorSegmenter.class
-                        ),
+                                BreakIteratorSegmenter.class),
                         createPrimitiveDescription(
-                                TreeTaggerPosLemmaTT4J.class,
-                                TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "en"
-                        )
+                                TreeTaggerPosLemmaTT4J.class)
                 )
         );
     }
