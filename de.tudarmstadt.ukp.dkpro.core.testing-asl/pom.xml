@@ -46,4 +46,5 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - Unit Testing Support</name>
 </project>

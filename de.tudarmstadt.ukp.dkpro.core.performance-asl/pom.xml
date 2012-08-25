@@ -80,4 +80,5 @@
 			</dependencies>
 		</profile>
 	</profiles>
+	<name>DKPro Core ASL - Performance Measurement Support</name>
 </project>
