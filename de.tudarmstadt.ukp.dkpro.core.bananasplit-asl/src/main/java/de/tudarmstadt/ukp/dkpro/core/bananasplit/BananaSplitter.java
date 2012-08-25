@@ -38,6 +38,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.drni.bananasplit.BananaSplit;
 import de.drni.bananasplit.xmldict.XmlDictionary;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -53,7 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class BananaSplitter
 	extends CasAnnotator_ImplBase
 {
-	public static final String PARAM_DICT_PATH = "DictionaryPath";
+	public static final String PARAM_DICT_PATH = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_DICT_PATH, mandatory = true)
 	private String dictPath;
 

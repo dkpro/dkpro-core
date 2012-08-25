@@ -106,8 +106,8 @@ public class TokenMerger
 	/**
 	 * Override the tagset mapping.
 	 */
-	public static final String PARAM_MAPPING_LOCATION = "mappingLocation";
-	@ConfigurationParameter(name = PARAM_MAPPING_LOCATION, mandatory = false)
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String mappingLocation;
 
 	private MappingProvider mappingProvider;
