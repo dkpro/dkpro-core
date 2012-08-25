@@ -63,7 +63,7 @@ public abstract class TreeTaggerTT4JBase<T>
     public static final String RESOURCE_TREETAGGER = "TreeTagger";
 	protected DKProTreeTaggerWrapper<T> treetagger;
 
-	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 	
@@ -87,9 +87,9 @@ public abstract class TreeTaggerTT4JBase<T>
 	@ConfigurationParameter(name=PARAM_MODEL_ENCODING, mandatory=false)
 	protected String modelEncoding;
 
-	public static final String PARAM_INTERN_STRINGS = "InternStrings";
-	@ConfigurationParameter(name=PARAM_INTERN_STRINGS, mandatory=false, defaultValue="true")
-	private boolean internStrings;
+	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
+	@ConfigurationParameter(name=PARAM_INTERN_TAGS, mandatory=false, defaultValue="true")
+	private boolean internTags;
 
 //
 //	private Set<String> missingTags;
@@ -132,7 +132,7 @@ public abstract class TreeTaggerTT4JBase<T>
 
 	public boolean isInternStrings()
 	{
-		return internStrings;
+		return internTags;
 	}
 
 	protected abstract TokenAdapter<T> getAdapter()

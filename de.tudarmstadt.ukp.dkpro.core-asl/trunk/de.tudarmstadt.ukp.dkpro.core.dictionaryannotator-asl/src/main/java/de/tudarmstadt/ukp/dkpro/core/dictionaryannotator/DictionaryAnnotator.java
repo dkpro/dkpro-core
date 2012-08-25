@@ -36,6 +36,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -62,7 +64,7 @@ public class DictionaryAnnotator
 	/**
 	 * The file must contain one phrase per line - phrases will be split at " "
 	 */
-	public static final String PARAM_PHRASE_FILE = "phraseFile";
+	public static final String PARAM_PHRASE_FILE = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_PHRASE_FILE, mandatory = true, defaultValue = "phrases.txt")
 	private String phraseFile;
 

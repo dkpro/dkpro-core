@@ -42,6 +42,7 @@ import org.apache.uima.util.Logger;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -52,7 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TreeTaggerPosLemmaTT4J
 	extends TreeTaggerTT4JBase<AnnotationFS>
 {
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = "taggerMappingLocation";
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String taggerMappingLocation;
 	

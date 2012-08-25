@@ -39,6 +39,7 @@ import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
@@ -49,7 +50,7 @@ public
 class TreeTaggerChunkerTT4J
 extends TreeTaggerTT4JBase<AnnotationFS>
 {
-	public static final String PARAM_CHUNKER_MAPPING_LOCATION = "chunkerMappingLocation";
+	public static final String PARAM_CHUNKER_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNKER_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_CHUNKER_MAPPING_LOCATION, mandatory = false)
 	protected String chunkerMappingLocation;
 	

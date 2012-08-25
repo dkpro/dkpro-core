@@ -19,17 +19,29 @@ package de.tudarmstadt.ukp.dkpro.core.api.parameter;
 
 public interface ComponentParameters
 {
-	public static final String PARAM_LANGUAGE = "Language";
+	public static final String PARAM_LANGUAGE = "language";
 
-	public static final String PARAM_MODEL_LOCATION = "ModelLocation";
+	public static final String PARAM_VARIANT = "variant";
 
-	public static final String PARAM_MODEL_ENCODING = "ModelEncoding";
+	public static final String PARAM_MODEL_LOCATION = "modelLocation";
 
-	public static final String PARAM_SOURCE_LOCATION = "SourceLocation";
+	public static final String PARAM_MODEL_ENCODING = "modelEncoding";
 
-	public static final String PARAM_SOURCE_ENCODING = "SourceEncoding";
+	public static final String PARAM_SOURCE_LOCATION = "sourceLocation";
 
-	public static final String PARAM_TARGET_LOCATION = "TargetLocation";
+	public static final String PARAM_SOURCE_ENCODING = "sourceEncoding";
 
-	public static final String PARAM_TARGET_ENCODING = "TargetEncoding";
+	public static final String PARAM_TARGET_LOCATION = "targetLocation";
+
+	public static final String PARAM_TARGET_ENCODING = "targetEncoding";
+
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = "taggerMappingLocation";
+	
+	public static final String PARAM_CHUNKER_MAPPING_LOCATION = "chunkerMappingLocation";
+	
+	public static final String PARAM_ENTITY_MAPPING_LOCATION = "entityMappingLocation";
+	
+	public static final String PARAM_PRINT_TAGSET = "printTagSet";
+
+	public static final String PARAM_INTERN_TAGS = "internTags";
 }
