@@ -145,7 +145,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="20120425.0"/>
+		<property name="version.bin" value="20120803.0"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -173,16 +173,21 @@
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-MacOSX-3.2.tar.gz"
 			platform="osx-ppc" file="tree-tagger" md5="63560dcb3a5932bc5ae0e9aab8f48e42"/>
 		
+		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2012-08-03 | now        | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
+		  -->
+		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2-64bit.tar.gz"
+			platform="linux-x86_64" file="tree-tagger" md5="1bab69906368061d6e7c7466abdeb643"/>
+
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
 		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
 		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
-		  - 2012-04-18 | now        | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
+		  - 2012-04-18 | 2012-08-03 | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
+		  - 2012-08-03 | now        | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit 
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="45bfecd9daac30a4c05c40d03ed1f6f9"/>
-		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_32" file="tree-tagger" md5="45bfecd9daac30a4c05c40d03ed1f6f9"/>
+			platform="linux-x86_32" file="tree-tagger" md5="33c2b37803114ec68f36733b1f8b1702"/>
 		
 		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
