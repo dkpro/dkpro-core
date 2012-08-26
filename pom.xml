@@ -43,9 +43,9 @@
 		<url>http://code.google.com/p/dkpro-core-gpl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>http://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>http://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
+		<connection>http://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.4.x</connection>
+		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.4.x</developerConnection>
+		<url>http://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.4.x</url>
 	</scm>
 	<dependencyManagement>
 		<dependencies>
