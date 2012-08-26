@@ -1,0 +1,52 @@
+# Penn Chinese Treebank tagset used by Stanford PosTagger
+#
+# Source: http://www.ldc.upenn.edu/Catalog/docs/LDC2007T36/ctb-posguide.pdf
+# .$$.
+# AD - adverb
+AD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# AS - aspect marker
+# BA - XX in ba-construction
+# CC - coordinating conjunction
+CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONH
+# CD - cardinal number
+CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# CS - subordinating conjunction
+# DEC - XX in a relative clause
+# DEG - associative XX
+# DER - XX in V-de const. and V-de-R
+# DEV - XX bevore VP
+# DT - determiner
+DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET
+# ETC - for words XX, XX XX
+# FW - foreign words
+# IJ - interjection
+# JJ - other noun-modifier
+# LB - X in long bei-const
+# LC - localizer
+# M - measure word
+# MSP - other particle
+# NN - common noun
+NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# NR - proper noun
+NR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# NT - temporal noun
+NT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# OD - ordinal number
+# ON - onomatopoeia
+# P - preposition excl. XX and XX
+P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# PN - pronoun
+PN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PU - punctuation
+PU=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# SB - XX in short bei-const
+# SP - sentence final particle
+# VA - predicative adjective
+VA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# VC - XX
+# VE - XX as the main verb
+VE=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VV - other verb
+VV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# X
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O

@@ -1,0 +1,32 @@
+# French Treebank
+#
+# Source: http://www.llf.cnrs.fr/Gens/Abeille/guide-morpho-synt.02.pdf
+#
+# A - Adjective
+A=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# ADV - Adverb
+ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# C - Conjunction
+C=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# CL
+CL=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# D - Determiner
+D=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# ET
+ET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# I
+I=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# N
+N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+# P - Preposition
+P=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# PREF
+PREF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# PRO
+PRO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# PUNC - Punctuation
+PUNC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# V
+V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+
