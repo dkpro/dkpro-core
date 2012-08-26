@@ -31,9 +31,9 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>jazzy</groupId>
-			<artifactId>jazzy-core</artifactId>
-			<version>0.5.2</version>
+			<groupId>net.sf.jazzy</groupId>
+			<artifactId>jazzy</artifactId>
+			<version>0.5.2-rtext-1.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

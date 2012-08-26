@@ -34,11 +34,6 @@
 			<version>3.0</version>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.lab</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.lab.uima.engine.simple</artifactId>
-			<version>0.7.0</version>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
 			<scope>test</scope>
