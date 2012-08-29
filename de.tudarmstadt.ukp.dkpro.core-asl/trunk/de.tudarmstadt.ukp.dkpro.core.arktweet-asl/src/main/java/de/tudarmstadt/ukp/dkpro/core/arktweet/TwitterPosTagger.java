@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.arktweet;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 
 import org.apache.uima.UimaContext;
@@ -32,7 +31,8 @@ import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.CasAnnotator_ImplBase;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.cmu.cs.lti.ark.ssl.pos.POSFeatureTemplates;
 import edu.cmu.cs.lti.ark.ssl.pos.POSModel;
@@ -61,6 +61,8 @@ public class TwitterPosTagger
 
     private SemiSupervisedPOSTaggerUKP tweetTagger;
     private POSModel model;
+    
+    private MappingProvider mappingProvider;
     
     @Override
     public void initialize(UimaContext context)
@@ -112,6 +114,11 @@ public class TwitterPosTagger
 
         POSFeatureTemplates.log.setLevel(Level.WARNING);
         SemiSupervisedPOSTagger.log.setLevel(Level.WARNING);
+        
+        mappingProvider = new MappingProvider();
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/lexmorph/tagset/en-arktweet.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
     }
 
     @Override
@@ -132,14 +139,8 @@ public class TwitterPosTagger
         List<String> tokens = Twokenize.tokenizeForTagger_J(text);
         List<String> tags   = getTagsForOneSentence(tokens);
 
-        Map<String,String> tagMapping = TagsetMappingFactory.getMapping(
-                "arktweet",
-                cas.getDocumentLanguage(),
-                "*"
-        );
-        
-        TypeSystem ts = cas.getTypeSystem();
-        
+        mappingProvider.configure(cas);
+                
         int start = 0;
         int end = 0;
         int offset = 0;
@@ -150,7 +151,7 @@ public class TwitterPosTagger
             start = offset;
             end = offset + token.length();
 
-            Type posType = TagsetMappingFactory.getTagType(tagMapping, tag, ts);
+            Type posType = mappingProvider.getTagType(tag);
             
             AnnotationFS posAnno = cas.createAnnotation(posType, start, end);
             posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), tag);
