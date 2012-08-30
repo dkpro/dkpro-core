@@ -31,7 +31,7 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>jazzy</groupId>
+			<groupId>net.sf.jazzy</groupId>
 			<artifactId>jazzy-core</artifactId>
 			<version>0.5.2</version>
 		</dependency>
