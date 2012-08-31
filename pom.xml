@@ -474,6 +474,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.norvig-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.snowball-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.textcat-asl</module>
@@ -493,7 +494,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.ccg-illinois</module>
 	</modules>
 	<build>
 		<plugins>
