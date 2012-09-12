@@ -31,7 +31,7 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>banana-split</groupId>
+			<groupId>de.drni.bananasplit</groupId>
 			<artifactId>banana-split</artifactId>
 			<version>0.4.0</version>
 		</dependency>
