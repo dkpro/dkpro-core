@@ -84,6 +84,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
 	</modules>
 	<build>
 		<plugins>
