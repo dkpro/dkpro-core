@@ -36,7 +36,7 @@ public class MateParserTest
 	public void testGerman()
 		throws Exception
 	{
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 200000000);
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
 				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
