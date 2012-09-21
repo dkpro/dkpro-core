@@ -138,11 +138,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
@@ -488,7 +483,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktweet-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
@@ -621,7 +615,6 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.structure/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.syntax/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.transform/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.arktweet-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.bananasplit/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.castransformation/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.dictionaryannotator/src/main/java" includes="**/*.java" />
