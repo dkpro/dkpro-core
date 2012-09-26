@@ -488,6 +488,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</module>
 	</modules>
 	<build>
 		<plugins>
