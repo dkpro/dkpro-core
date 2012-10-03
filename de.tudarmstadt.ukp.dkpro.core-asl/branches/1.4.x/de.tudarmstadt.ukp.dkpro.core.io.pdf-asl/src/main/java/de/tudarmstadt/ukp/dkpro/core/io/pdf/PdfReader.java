@@ -23,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.annolab.core.util.SubstitutionTrieParser;
-import org.annolab.core.util.Trie;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;

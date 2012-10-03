@@ -1,3 +1,9 @@
+The PdfReader code and associated classes were originally developed as part of the
+AnnoLab project by Richard Eckart de Castilho. They were originally licensed under
+the LGPL and have been relicenced under the Apache License 2.0 by the original
+author.
+
+
 PDFLayoutEventStripper.java:
 
 This class is based on the class PDFTextStripper originally written by Ben Litchfield from the 
