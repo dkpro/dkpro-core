@@ -26,9 +26,9 @@
 	<name>DKPro Core ASL - IO - MMAX2 (ASL)</name>
 	<dependencies>
 		<dependency>
-			<groupId>org.eml.mmax2</groupId>
-			<artifactId>org.eml.mmax2</artifactId>
-			<version>1.13.003-UKP-1</version>
+			<groupId>net.sf.mmax2</groupId>
+			<artifactId>mmax2</artifactId>
+			<version>1.13.003b</version>
 		</dependency>
 		<dependency>
 			<groupId>jung</groupId>
