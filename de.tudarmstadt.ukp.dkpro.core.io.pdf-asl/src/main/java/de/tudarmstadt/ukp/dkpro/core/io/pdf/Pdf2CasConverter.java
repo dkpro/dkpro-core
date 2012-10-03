@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.annolab.core.util.Trie;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
