@@ -40,8 +40,8 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.chasen</groupId>
-			<artifactId>mecab</artifactId>
+			<groupId>org.chasen.mecab</groupId>
+			<artifactId>mecab-java</artifactId>
 			<version>0.993</version>
 		</dependency>
 		<dependency>
