@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
+import org.junit.Assume;
 import org.junit.Test;
 
 public class TreeTaggerLemmatizerTest
@@ -30,6 +31,8 @@ public class TreeTaggerLemmatizerTest
     public void treeTaggerAnnotatorEnglishTest()
         throws Exception
     {
+    	checkModelsAndBinary("en");
+    	
         runTest("en", "This is a test .",
                 new String[] { "this", "be",  "a",   "test", "."    }
         );
@@ -62,4 +65,14 @@ public class TreeTaggerLemmatizerTest
             i++;
         }
     }
+    
+	private void checkModelsAndBinary(String lang)
+	{
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
+						+ "-little-endian.par") != null);
+
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
+	}
 }
