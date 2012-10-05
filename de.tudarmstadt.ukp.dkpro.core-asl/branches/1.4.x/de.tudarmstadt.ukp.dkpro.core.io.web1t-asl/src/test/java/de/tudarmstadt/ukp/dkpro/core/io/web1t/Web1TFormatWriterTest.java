@@ -28,6 +28,7 @@ import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -157,6 +158,8 @@ public class Web1TFormatWriterTest {
 	}
 
 	private void writeWeb1TFormat(String[] inputPath) throws Exception {
+    	checkModelsAndBinary("en");
+    	
 		CollectionReader reader = createCollectionReader(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
@@ -178,5 +181,15 @@ public class Web1TFormatWriterTest {
 
 	private void deleteIndexFolder() {
 		INDEX_FOLDER.delete();
+	}    
+	
+	private void checkModelsAndBinary(String lang)
+	{
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
+						+ "-little-endian.par") != null);
+
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
 	}
 }
