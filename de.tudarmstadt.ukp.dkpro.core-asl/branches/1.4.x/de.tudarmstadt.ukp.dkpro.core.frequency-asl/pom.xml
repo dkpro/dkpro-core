@@ -47,6 +47,11 @@
 			<version>1.2.1</version>
 		</dependency>
 		<dependency>
+			<groupId>edu.berkeley.nlp</groupId>
+			<artifactId>berkeleylm</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
 		</dependency>
