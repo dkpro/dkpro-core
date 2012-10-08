@@ -97,8 +97,9 @@ public class GateLemmatizer extends JCasAnnotator_ImplBase {
 				else if (pos.getClass().equals(PR.class)) {
 					category = GATE_LEMMATIZER_NOUN_CATEGORY_STRING;
 				}
-				else
-					category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
+                else {
+                    category = GATE_LEMMATIZER_ALL_CATEGORIES_STRING;
+                }
 			}
 			else
 			{
