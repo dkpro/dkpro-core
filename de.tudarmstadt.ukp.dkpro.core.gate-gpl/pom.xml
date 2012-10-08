@@ -20,9 +20,9 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>uk.ac.gate</groupId>
-			<artifactId>gate</artifactId>
-			<version>3.1</version>
+		    <groupId>uk.ac.gate</groupId>
+		    <artifactId>gate-core</artifactId>
+		    <version>7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

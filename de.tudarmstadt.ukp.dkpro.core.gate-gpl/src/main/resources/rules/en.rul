@@ -16,6 +16,8 @@ ESEDING ==> "es" OR "ed" OR "ing"
 defineRules
 
 #misc. irregular exceptions
+<*>"POS" ==> irreg_stem("POS","")
+<*>"pos" ==> irreg_stem("pos","")
 <*>"aches"                 ==> irreg_stem("ache","s")
 <verb>"ach"{EDING}     ==> semi_reg_stem(0,"e")
 <verb>"being"          ==> irreg_stem("be","ing")
@@ -30,6 +32,7 @@ defineRules
 <verb>"tast"{ESEDING}  ==> semi_reg_stem(0,"e")
 <verb>"torpedo"{EDING}  ==> semi_reg_stem(0,"")
 <verb>"wast"{ESEDING}  ==> semi_reg_stem(0,"e")
+
 
 
 // WordNet irregular verb exceptions
@@ -1245,7 +1248,7 @@ defineRules
 <verb>"singeing"  ==> irreg_stem("singe","ing")
 <verb>"trecked"  ==> irreg_stem("trek","ed")
 <verb>"trecking"  ==> irreg_stem("trek","ing")
-<verb>("adher" OR "ador" OR "attun" OR "bast" OR "bor" OR "bronz" OR "can" OR "centr" OR "cit" OR "compet" OR "complet" OR "concret" OR "condon" OR "contraven" OR "conven" OR "cran" OR "delet" OR "delineat" OR "dop" OR "drap" OR "dron" OR "escap" OR "excit" OR "fort" OR "gazett" OR "grop" OR "hon" OR "ignit" OR "ignor" OR "incit" OR "interven" OR "inton" OR "invit" OR "landscap" OR "manoeuvr" OR "nauseat" OR "normalis" OR "outmanoeuvr" OR "overaw" OR "permeat" OR "persever" OR "por" OR "postpon" OR "prun" OR "recit" OR "reshap" OR "rop" OR "shap" OR "shor" OR "snor" OR "ston" OR "wip"){ESEDING}  ==> semi_reg_stem(0,"e")
+<verb>("adher" OR "ador" OR "attun" OR "bast" OR "bor" OR "bronz" OR "can" OR "centr" OR "cit" OR "compet" OR "complet" OR "concret" OR "condon" OR "contraven" OR "conven" OR "cran" OR "delet" OR "delineat" OR "dop" OR "drap" OR "dron" OR "escap" OR "excit" OR "fort" OR "gazett" OR "grop" OR "hon" OR "hop" OR "ignit" OR "ignor" OR "incit" OR "interven" OR "inton" OR "invit" OR "landscap" OR "manoeuvr" OR "nauseat" OR "normalis" OR "outmanoeuvr" OR "overaw" OR "permeat" OR "persever" OR "por" OR "postpon" OR "prun" OR "recit" OR "reshap" OR "rop" OR "shap" OR "shor" OR "snor" OR "ston" OR "wip"){ESEDING}  ==> semi_reg_stem(0,"e")
 <verb>("ape" OR "appall" OR "augur" OR "belong" OR "berth" OR "burr" OR "conquer" OR "egg" OR "enroll" OR "enthrall" OR "forestall" OR "froth" OR "fulfill" OR "install" OR "instill" OR "lacquer" OR "martyr" OR "mouth" OR "murmur" OR "pivot" OR "preceed" OR "prolong" OR "purr" OR "quell" OR "recall" OR "refill" OR "remill" OR "resell" OR "retell" OR "smooth" OR "throng" OR "twang" OR "unearth"){EDING}  ==> semi_reg_stem(0,"")
 <noun>"canvases"  ==> irreg_stem("canvas","s")
 <noun>"carcases"  ==> irreg_stem("carcas","s")
@@ -1256,7 +1259,7 @@ defineRules
 <noun>(({A}+"itis") OR "abdomen" OR "achimenes" OR "acumen" OR "Afrikaans" OR "alibi" OR "alkali" OR "amnesia" OR "anaesthesia" OR "aphis" OR "aria" OR "asbestos" OR "asphyxia" OR "atlas" OR "axis" OR "bedclothes" OR "begonia" OR "bias" OR "bikini" OR "calyptopis" OR "cannula" OR "cantharides" OR "canvas" OR "caries" OR "chas" OR "chamois" OR "chaos" OR "chili" OR "chinchilla" OR "Christmas" OR "confetti" OR "contretemps" OR "cornucopia" OR "corps" OR "cosmos" OR "cupola" OR "cyclamen" OR "dais" OR "debris" OR "diabetes" OR "diphtheria" OR "dysphagia" OR "encyclopaedia" OR "ennui" OR "escallonia" OR "ethos" OR "extremis" OR "fella" OR "ferris" OR "flotilla" OR "formula" OR "forsythia" OR "gallows" OR "ganglia" OR "gardenia" OR "gas" OR "gasworks" OR "gondola" OR "grata" OR "guerrilla" OR "haemophilia" OR "hors" OR "hovis" OR "hustings" OR "hysteria" OR "inertia" OR "innards" OR "iris" OR "isosceles" OR "khaki" OR "koala" OR "lens" OR "macaroni" OR "manilla" OR "mania" OR "mantis" OR "maquis" OR "martini" OR "matins" OR "memorabilia" OR "metropolis" OR "minutiae" OR "molasses" OR "morphia" OR "mortis" OR "neurasthenia" OR "normoglycaemia" OR "nostalgia" OR "omen" OR "pantometria" OR "parabola" OR "paraphernalia" OR "pastis" OR "patella" OR "patens"!  OR "pathos" OR "patois" OR "pectoris" OR "pelvis" OR "peninsula" OR "phantasmagoria" OR "pharos" OR "plumbites" OR "pneumonia" OR "polyuria" OR "portcullis" OR "pyrexia" OR "regalia" OR "rhinoceros" OR "safari" OR "salami" OR "sari" OR "saturnalia" OR "series" OR "spaghetti" OR "specimen" OR "species" OR "submatrices" OR "subtopia" OR "suburbia" OR "syphilis" OR "tares" OR "taxi" OR "tennis" OR "toccata" OR "trellis" OR "tripos" OR "turps" OR "tutti" OR "umbrella" OR "utopia" OR "villa")  ==> null_stem()
 <noun>("accoutrements" OR "aerodynamics" OR "aeronautics" OR "aesthetics" OR "algae" OR "amends" OR "ammonia" OR "ancients" OR "annals" OR "antics" OR "arrears" OR "assizes" OR "auspices" OR "backwoods" OR "bacteria" OR "banns" OR "barracks" OR "baths" OR "battlements" OR "bellows" OR "belongings" OR "billiards" OR "binoculars" OR "bitters" OR "blandishments" OR "bleachers" OR "blinkers" OR "blues" OR "breeches" OR "brussels" OR "clothes" OR "clutches" OR "commons" OR "confines" OR "contents" OR "credentials" OR "crossbones" OR "crossroads" OR "curia" OR "damages" OR "dealings" OR "dentures" OR "depths" OR "devotions" OR "diggings" OR "doings" OR "downs" OR "droppings" OR "dues" OR "dynamics" OR "earnings" OR "eatables" OR "eaves" OR "economics" OR "electrodynamics" OR "electronics" OR "entrails" OR "environs" OR "equities" OR "ethics" OR "eugenics" OR "filings" OR "finances" OR "folks" OR "footlights" OR "fumes" OR "furnishings" OR "genitals" OR "goggles" OR "goods" OR "grits" OR "groceries" OR "grounds" OR "handcuffs" OR "headquarters" OR "histrionics" OR "hostilities" OR "humanities" OR "hydraulics" OR "hysterics" OR "illuminations" OR "innings" OR "italics" OR "jeans" OR "jitters" OR "kinetics" OR "knickers" OR "kudos" OR "la! titudes" OR "leggings" OR "likes" OR "linguistics" OR "lodgings" OR "loggerheads" OR "mains" OR "manners" OR "mathematics" OR "means" OR "measles" OR "media" OR "memoirs" OR "metaphysics" OR "mews" OR "mockers" OR "morals" OR "motions" OR "munitions" OR "news" OR "nutria" OR "nylons" OR "oats" OR "odds" OR "oils" OR "oilskins" OR "optics" OR "orthodontics" OR "outskirts" OR "overalls" OR "overtones" OR "pants" OR "pantaloons" OR "papers" OR "paras" OR "paratroops" OR "particulars" OR "pediatrics" OR "phonemics" OR "phonetics" OR "physics" OR "pincers" OR "plastics" OR "politics" OR "proceeds" OR "proceedings" OR "prospects" OR "provinces" OR "provisions" OR "pyjamas" OR "races" OR "rations" OR "ravages" OR "refreshments" OR "regards" OR "reinforcements" OR "remains" OR "respects" OR "returns" OR "riches" OR "rights" OR "savings" OR "schizophrenia" OR "scissors" OR "seconds" OR "semantics" OR "senses" OR "shades" OR "shallows" OR "shambles" OR "shares" OR "shivers" OR "shorts" OR "singles" OR "skittles" OR "slacks" OR "soundings" OR "specifics" OR "spectacles" OR "spoils" OR "stamens" OR "statics" OR "statistics" OR "stratums" OR "summons" OR "supplies" OR "surroundings" OR "suspenders" OR "takings" OR "teens" OR "telecommunications" OR "tent! erhooks" OR "thanks" OR "theatricals" OR "thermos" OR "thermodynamics" OR "tights" OR "toils" OR "tops" OR "trades" OR "trappings" OR "travels" OR "troops" OR "tropics" OR "trousers" OR "tweeds" OR "underpants" OR "vapours" OR "vicissitudes" OR "vitals" OR "volumes" OR "wages" OR "wanderings" OR "wares" OR "waters" OR "whereabouts" OR "whites" OR "winnings" OR "withers" OR "woollens" OR "workings" OR "writings" OR "yes")  ==> null_stem()
 <noun>("boatie" OR "bonhomie" OR "clippie" OR "creepie" OR "dearie" OR "droppie" OR "gendarmerie" OR "girlie" OR "goalie" OR "haddie" OR "kookie" OR "kyrie" OR "lambie" OR "lassie" OR "marie" OR "menagerie" OR "pettie" OR "reverie" OR "snottie" OR "sweetie")"s"  ==> stem(1,"","s")
-	
+    
 //Additions from PENN treebank 
 
 <verb>("buffett" OR "plummett"){EDING}  ==> semi_reg_stem(1,"")
@@ -1361,16 +1364,16 @@ defineRules
 
 // regular expression rules */
 
-<*>{A}+{CX2S}"es"             ==> stem(2,"","s")
+<*>{A}+{CX2S}"es"             ==> stem(2,"","es")
 <*>{A}+"thes"                 ==> stem(1,"","s")
 <*>{A}+{CX}[cglsv]"es"        ==> stem(1,"","s")
 <*>{A}+"ettes"                ==> stem(1,"","s")
-<*>{A}+({CX}{2})"es"          ==> stem(2,"","s")
-<*>{A}+({VI}{2})"es"          ==> stem(2,"","s")
-<*>{A}+"xes"                  ==> stem(2,"","s")
+<*>{A}+{CX}{CX}"es"          ==> stem(2,"","es")
+<*>{A}+{VI}{VI}"es"          ==> stem(2,"","es")
+<*>{A}+"xes"                  ==> stem(2,"","es")
 <*>{A}+{S}"es"                ==> stem(1,"","s")
-<*>{A}+{C}"ies"               ==> stem(3,"y","s")
-<*>{A}*{CX}"oes"              ==> stem(2,"","s")
+<*>{A}+{C}"ies"               ==> stem(3,"y","ies")
+<*>{A}*{CX}"oes"              ==> stem(2,"","es")
 <*>{A}+"s"                    ==> stem(1,"","s")
 
 
@@ -1390,17 +1393,18 @@ defineRules
 <verb>{A}*{C}"leted"             ==> stem(1,"","ed")
 <verb>{PRE}*{C}+[ei]"ted"        ==> stem(1,"","ed")
 <verb>{A}+[ei]"ted"              ==> stem(2,"","ed")
-<verb>{PRE}({CX}{2})"eated"      ==> stem(2,"","ed")
-<verb>{A}*{V}({CX}{2})"eated"    ==> stem(1,"","ed")
+<verb>{PRE}{CX}{CX}"eated"      ==> stem(2,"","ed")
+<verb>{A}*{V}{CX}{CX}"eated"    ==> stem(1,"","ed")
 <verb>{A}+[eo]"ated"             ==> stem(2,"","ed")
 <verb>{A}+{V}"ated"              ==> stem(1,"","ed")
-<verb>{A}*({V}{2})[cgsvz]"ed"    ==> stem(1,"","ed")
-<verb>{A}*({V}{2}){C}"ed"        ==> stem(2,"","ed")
+<verb>{A}*{V}{V}[cgsvz]"ed"    ==> stem(1,"","ed")
+
+<verb>{A}*{V}{V}{C}"ed"        ==> stem(2,"","ed")
 <verb>{A}+[rw]"led"              ==> stem(2,"","ed")
 <verb>{A}+"thed"                 ==> stem(1,"","ed")
 <verb>{A}+{CX}[cglsv]"ed"        ==> stem(1,"","ed")
-<verb>{A}+({CX}{2})"ed"          ==> stem(2,"","ed")
-<verb>{A}+({VI}{2})"ed"          ==> stem(2,"","ed")
+<verb>{A}+{CX}{CX}"ed"          ==> stem(2,"","ed")
+<verb>{A}+{VI}{VI}"ed"          ==> stem(2,"","ed")
 <verb>{PRE}*{C}+"ored"           ==> stem(1,"","ed")
 <verb>{A}+"ctored"               ==> stem(2,"","ed")
 <verb>{A}*{C}[clnt]"ored"        ==> stem(1,"","ed")
@@ -1421,17 +1425,18 @@ defineRules
 <verb>{A}*{C}"leting"            ==> stem(3,"e","ing")
 <verb>{PRE}*{C}+[ei]"ting"       ==> stem(3,"e","ing")
 <verb>{A}+[ei]"ting"             ==> stem(3,"","ing")
-<verb>{A}*{PRE}({CX}{2})"eating"  ==> stem(3,"","ing")
-<verb>{A}*{V}({CX}{2})"eating"   ==> stem(3,"e","ing")
+<verb>{A}*{PRE}{CX}{CX}"eating"  ==> stem(3,"","ing")
+<verb>{A}*{V}{CX}{CX}"eating"   ==> stem(3,"e","ing")
 <verb>{A}+[eo]"ating"            ==> stem(3,"","ing")
 <verb>{A}+{V}"ating"             ==> stem(3,"e","ing")
-<verb>{A}*({V}{2})[cgsvz]"ing"   ==> stem(3,"e","ing")
-<verb>{A}*({V}{2}){C}"ing"       ==> stem(3,"","ing")
+<verb>{A}*{V}{V}[cgsvz]"ing"   ==> stem(3,"e","ing")
+
+<verb>{A}*{V}{V}{C}"ing"       ==> stem(3,"","ing")
 <verb>{A}+[rw]"ling"             ==> stem(3,"","ing")
 <verb>{A}+"thing"                ==> stem(3,"e","ing")
 <verb>{A}+{CX}[cglsv]"ing"       ==> stem(3,"e","ing")
-<verb>{A}+({CX}{2})"ing"         ==> stem(3,"","ing")
-<verb>{A}+({VI}{2})"ing"         ==> stem(3,"","ing")
+<verb>{A}+{CX}{CX}"ing"         ==> stem(3,"","ing")
+<verb>{A}+{VI}{VI}"ing"         ==> stem(3,"","ing")
 <verb>{PRE}*{C}"ying"            ==> stem(4,"ie","ing")
 <verb>{A}+"ying"                 ==> stem(3,"","ing")
 <verb>{A}*{CX}"oing"             ==> stem(3,"","ing")
@@ -1448,5 +1453,9 @@ defineRules
 <verb>"'s"  ==> irreg_stem("be","s")
 <verb>"'ve"  ==> irreg_stem("have","")
 
-
 <*>{A}+"'s" ==> stem(2,"","'")
+
+
+// Result of tokenizing "can't" 
+<verb>ca  ==> irreg_stem("can","")
+
