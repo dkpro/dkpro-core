@@ -27,12 +27,13 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import static org.apache.commons.lang.StringUtils.*;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
@@ -186,7 +187,18 @@ public class AssertAnnotations
 
 		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
 	}
-	
+
+	public static void assertPennTree(String aExpected, PennTree aActual)
+	{
+		String expected = normalizeSpace(aExpected);
+		String actual = normalizeSpace(aActual != null ? aActual.getPennTree() : "<none>");
+		
+		System.out.printf("%-20s - Expected: %s%n", "Penn tree", expected);
+		System.out.printf("%-20s - Actual  : %s%n", "Penn tree", actual);
+
+		assertEquals(expected, actual);
+	}
+
 	public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
 	{
 		if (aCollection.isEmpty()) {
@@ -194,10 +206,10 @@ public class AssertAnnotations
 		}
 		else {
 			if (aLinebreak) {
-				return "{\n\"" + StringUtils.join(aCollection, "\",\n\"") + "\"\n}";
+				return "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
 			}
 			else {
-				return "{ \"" + StringUtils.join(aCollection, "\", \"") + "\" }";
+				return "{ \"" + join(aCollection, "\", \"") + "\" }";
 			}
 		}
 	}

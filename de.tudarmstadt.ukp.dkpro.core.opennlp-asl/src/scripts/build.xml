@@ -171,6 +171,19 @@
 			</metadata>
     	</install-model-file>
 		<delete dir="target/model-staging"/>
+
+		<!-- FILE: models-1.5/en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-06-16 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
+		  -->
+    	<get src="http://opennlp.sourceforge.net/models-1.5/en-parser-chunking.bin" dest="target/download/en-parser-chunking.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/en-parser-chunking.bin" md5="47c1b3f4dd7d08e992abdca4e16638ce"
+    		tool="parser" language="en" variant="chunking" extension="bin" version="20120616.0">
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
 	</target>
 
 	<target name="es">
