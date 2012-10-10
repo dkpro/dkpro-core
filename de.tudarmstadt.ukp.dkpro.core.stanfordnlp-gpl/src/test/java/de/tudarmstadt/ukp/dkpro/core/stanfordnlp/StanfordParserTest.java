@@ -15,6 +15,7 @@ import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescripti
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
+import static org.uimafit.util.JCasUtil.selectSingle;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -32,6 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import edu.stanford.nlp.ling.StringLabel;
@@ -72,9 +74,15 @@ public class StanfordParserTest
 
 		String[] dependencies = new String[] { /** No dependencies for German */ };
 
+		String pennTree = "(ROOT (S (PPER-SB Wir) (VVFIN brauchen) (NP-OA (ART ein) (AP " +
+				"(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS-SB welches) " +
+				"(ADV möglichst) (NP-SB (PIDAT viele) (CNP (NN Konstituenten) (KON und) " +
+				"(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
+		
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 
@@ -101,9 +109,15 @@ public class StanfordParserTest
 
 		String[] dependencies = new String[] { /** No dependencies for German */ };
 		
+		String pennTree = "(ROOT (S (PPER-SB Wir) (VVFIN brauchen) (NP-OA (ART ein) (AP " +
+				"(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS-SB welches) " +
+				"(NP-DA (AP (ADV möglichst) (PIDAT viele)) (CNP (NN Konstituenten) (KON und) " +
+				"(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
+		
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 
@@ -138,8 +152,14 @@ public class StanfordParserTest
 				"NN", ",", "WDT", "VBZ", "IN", "JJ", "NNS", "CC",
 				"NNS", "IN", "JJ", "." };
 		
+		String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) " +
+				"(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) " +
+				"(S (VP (VBZ contains) (PP (IN as) (NP (JJ many) (NNS constituents) (CC and) " +
+				"(NNS dependencies))) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
+		
 		AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -174,10 +194,16 @@ public class StanfordParserTest
 		String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
 				"WDT", "VBZ", "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
 		
+		String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) " +
+				"(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) " +
+				"(S (VP (VBZ contains) (NP (ADJP (RB as) (JJ many)) (NNS constituents) (CC and) " +
+				"(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
+		
 		AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 	}
 	
 	@Test
@@ -210,17 +236,25 @@ public class StanfordParserTest
 		String[] posOriginal = new String[] { "CL", "V", "N", "D", "N", "P", "N", "ADV", "V",
 				"PUNC", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "PUNC" };
 		
+		String pennTree = "(ROOT (SENT (VPinf (VN (CL Nous) (MWV (V avons) (N besoin))) " +
+				"(NP (D d'une) (N phrase)) (MWADV (P par) (N exemple))) (VN (ADV très) " +
+				"(V compliqué)) (PUNC ,) (Srel (NP (PRO qui)) (VN (V contient)) (NP (D des) " +
+				"(N constituants))) (Ssub (C que) (NP (D de) (A nombreuses) (N dépendances)) " +
+				"(COORD (C et) (Ssub (C que) (AP (A possible))))) (PUNC .)))";
+		
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
 	
+	@Ignore("Dependency types not yet mapped")
 	@Test
 	public void testChineseFactored()
 		throws Exception
 	{
-		JCas jcas = runTest("zh", "factored", "我们需要一个非常复杂的句子，例如其中包含许多成分和尽可能的依赖。");
+		JCas jcas = runTest("zh", "factored", "我们需要一个非常复杂的句子例如其中包含许多成分和尽可能的依赖。");
 		
 		String[] constituentMapped = new String[] { "QP 0,13", "ROOT 0,32", "VP 14,31", "X 0,32" };
 
@@ -230,12 +264,20 @@ public class StanfordParserTest
 
 		String[] lemmas = new String[] {  };
 
-		String[] posMapped = new String[] { "CARD", "PUNC", "V", "PUNC" };
+		String[] posMapped = new String[] { "PR", "V", "NN", "ADJ", "ADJ", "O", "NN", "ADJ", "NN",
+				"V", "CARD", "NN", "CONJ", "NN", "O", "NN", "PUNC" };
 
-		String[] posOriginal = new String[] { "CD", "PU", "VV", "PU" };
+		String[] posOriginal = new String[] { "PN", "VV", "NN", "AD", "VA", "DEC", "NN", "AD",
+				"NN", "VV", "CD", "NN", "CC", "NN", "DEG", "NN", "PU" };
+		
+		String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (NP (CP (IP (NP (NN 一个)) " +
+				"(VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子)) (PRN (ADVP " +
+				"(AD 例如)) (NP (IP (NP (NN 其中)) (VP (VV 包含))) (QP (CD 许多)) (NP (NN 成分))))) " +
+				"(CC 和) (NP (DNP (NP (NN 尽可能)) (DEG 的)) (NP (NN 依赖))))) (PU 。)))";
 		
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -264,6 +306,7 @@ public class StanfordParserTest
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
+	
 	/**
 	 * This tests whether a complete syntax tree can be recreated from the
 	 * annotations without any loss. Consequently, all links to children should
@@ -310,7 +353,14 @@ public class StanfordParserTest
 	private JCas runTest(String aLanguage, String aVariant, String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(StanfordSegmenter.class);
+		AnalysisEngineDescription segmenter;
+
+		if ("zh".equals(aLanguage)) {
+			segmenter = createPrimitiveDescription(LanguageToolSegmenter.class);
+		}
+		else {
+			segmenter = createPrimitiveDescription(StanfordSegmenter.class);
+		}
 
 		// setup English
 		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
@@ -319,7 +369,8 @@ public class StanfordParserTest
 				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
 				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
 				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
-				StanfordParser.PARAM_CREATE_POS_TAGS, true);
+				StanfordParser.PARAM_CREATE_POS_TAGS, true,
+				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
 		
