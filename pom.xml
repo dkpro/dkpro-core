@@ -63,6 +63,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
@@ -79,12 +84,13 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
-		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
 	</modules>
 	<build>
 		<plugins>

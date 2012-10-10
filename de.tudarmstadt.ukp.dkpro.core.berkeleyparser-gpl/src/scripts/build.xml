@@ -1,0 +1,116 @@
+<project basedir="../.." default="separate-jars">
+	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/berkeleyparser"/>
+	
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="separate-jars" depends="ar,bg,de,en,fr,zh"/>
+
+	<target name="ar">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: arb_sm5.gr - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-09-17 | now        | f2cfc366f1bf0f0e6dacad8742f87435
+		  -->
+    	<get src="http://berkeleyparser.googlecode.com/files/arb_sm5.gr" dest="target/download/arb_sm5.gr" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.berkeleyparser"
+    		file="target/download/arb_sm5.gr" md5="f2cfc366f1bf0f0e6dacad8742f87435"
+    		tool="parser" language="ar" variant="sm5" extension="bin" version="20090917.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="atb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+
+	<target name="bg">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: bul_sm5.gr - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-09-17 | now        | 8635627821f4691a4b34cc702fb5b54f
+		  -->
+    	<get src="http://berkeleyparser.googlecode.com/files/bul_sm5.gr" dest="target/download/bul_sm5.gr" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.berkeleyparser"
+    		file="target/download/bul_sm5.gr" md5="8635627821f4691a4b34cc702fb5b54f"
+    		tool="parser" language="bg" variant="sm5" extension="bin" version="20090917.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="btb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+	
+	<target name="de">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: ger_sm5.gr - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-09-17 | now        | 8436fb36995f9372728e3e478201527d
+		  -->
+    	<get src="http://berkeleyparser.googlecode.com/files/ger_sm5.gr" dest="target/download/ger_sm5.gr" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.berkeleyparser"
+    		file="target/download/ger_sm5.gr" md5="8436fb36995f9372728e3e478201527d"
+    		tool="parser" language="de" variant="sm5" extension="bin" version="20090917.0">
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+
+	<target name="en">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: eng_sm6.gr - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-08-19 | now        | 4b184fd229cb238678aef9a2e48baba5
+		  -->
+    	<get src="http://berkeleyparser.googlecode.com/files/eng_sm6.gr" dest="target/download/eng_sm6.gr" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.berkeleyparser"
+    		file="target/download/eng_sm6.gr" md5="4b184fd229cb238678aef9a2e48baba5"
+    		tool="parser" language="en" variant="sm6" extension="bin" version="20100819.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+
+	<target name="fr">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: fra_sm5.gr - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-09-17 | now        | e390c2715626c0d09d4b237bac534bce
+		  -->
+    	<get src="http://berkeleyparser.googlecode.com/files/fra_sm5.gr" dest="target/download/fra_sm5.gr" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.berkeleyparser"
+    		file="target/download/fra_sm5.gr" md5="e390c2715626c0d09d4b237bac534bce"
+    		tool="parser" language="fr" variant="sm5" extension="bin" version="20090917.0">
+			<metadata>
+	    		<entry key="tagger.tagset" value="ftb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+
+	<target name="zh">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: chn_sm5.gr - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-09-17 | now        | c1b221cbb8dfcd60118ffd4a75001b42
+		  -->
+    	<get src="http://berkeleyparser.googlecode.com/files/chn_sm5.gr" dest="target/download/chn_sm5.gr" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.berkeleyparser"
+    		file="target/download/chn_sm5.gr" md5="c1b221cbb8dfcd60118ffd4a75001b42"
+    		tool="parser" language="zh" variant="sm5" extension="bin" version="20090917.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ctb"/>
+			</metadata>
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+</project>
