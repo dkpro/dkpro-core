@@ -274,7 +274,7 @@ public class StanfordAnnotator
 
 	/**
 	 * Creates a new Constituent annotation. Links to parent- and
-	 * child-annotations are not yet crated here.
+	 * child-annotations are not yet created here.
 	 *
 	 * @param jCas
 	 *            the CAS
@@ -329,6 +329,11 @@ public class StanfordAnnotator
 		String dependencyTypeName = DEPPACKAGE + dependencyType.toUpperCase();
 
 		Type type = jCas.getTypeSystem().getType(dependencyTypeName);
+        if (type == null) {
+			throw new IllegalStateException("Type [" + dependencyTypeName + "] mapped to tag ["
+					+ dependencyType + "] is not defined in type system");
+        }
+		
 		AnnotationFS anno = jCas.getCas().createAnnotation(type, aBegin, aEnd);
 		anno.setStringValue(type.getFeatureByBaseName("DependencyType"), dependencyType);
 		anno.setFeatureValue(type.getFeatureByBaseName("Governor"), aGovernor);
