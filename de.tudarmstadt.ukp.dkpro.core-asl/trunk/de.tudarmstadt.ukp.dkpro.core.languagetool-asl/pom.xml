@@ -49,37 +49,7 @@
 		<dependency>
 			<groupId>org.languagetool</groupId>
 			<artifactId>languagetool</artifactId>
-			<version>1.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.languagetool</groupId>
-			<artifactId>languagetool-resources</artifactId>
-			<version>1.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.carrot2</groupId>
-			<artifactId>morfologik-stemming</artifactId>
-			<version>1.5.2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.segment</groupId>
-			<artifactId>segment</artifactId>
-			<version>1.4.1</version>
-		</dependency>
-		<dependency>
-			<groupId>de.abelssoft</groupId>
-			<artifactId>jwordsplitter</artifactId>
-			<version>3.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code</groupId>
-			<artifactId>cjftransform</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ictclas4j</groupId>
-			<artifactId>ictclas4j</artifactId>
-			<version>1.0</version>
+			<version>1.9</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
