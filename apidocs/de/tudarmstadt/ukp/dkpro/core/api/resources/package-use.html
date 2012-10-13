@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.3.0 API)
+Uses of Package de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Uses of Package de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.3.
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="Uses of Package de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -89,8 +89,33 @@ function windowTitle()
 Packages that use <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.api.io"><B>de.tudarmstadt.ukp.dkpro.core.api.io</B></A></TD>
+<TD>API for I/O components.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.api.resources"><B>de.tudarmstadt.ukp.dkpro.core.api.resources</B></A></TD>
 <TD>API for accessing resources.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.treetagger"><B>de.tudarmstadt.ukp.dkpro.core.treetagger</B></A></TD>
+<TD>Integration of the <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/DecisionTreeTagger.html">
+ TreeTagger</a> part-of-speech tagger, lemmatizer and chunker via <a href="http://code.google.com/p/tt4j/">
+ TT4J</a>.&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="de.tudarmstadt.ukp.dkpro.core.api.io"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</A> used by <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.io</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/CompressionMethod.html#de.tudarmstadt.ukp.dkpro.core.api.io"><B>CompressionMethod</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compression methods.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -102,10 +127,50 @@ Packages that use <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/ap
 Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</A> used by <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/CasConfigurableProviderBase.html#de.tudarmstadt.ukp.dkpro.core.api.resources"><B>CasConfigurableProviderBase</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/CompressionMethod.html#de.tudarmstadt.ukp.dkpro.core.api.resources"><B>CompressionMethod</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compression methods.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/DKProContext.html#de.tudarmstadt.ukp.dkpro.core.api.resources"><B>DKProContext</B></A></B>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Runtime context for DKPro.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/HasResourceMetadata.html#de.tudarmstadt.ukp.dkpro.core.api.resources"><B>HasResourceMetadata</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interface for objects that provide meta data that can be imported by a ResourceObjectProvider.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/ResourceObjectProviderBase.html#de.tudarmstadt.ukp.dkpro.core.api.resources"><B>ResourceObjectProviderBase</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for resource providers that produce a resource from some URL depending on changing
+ parameters such as language.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="de.tudarmstadt.ukp.dkpro.core.treetagger"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</A> used by <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/treetagger/package-summary.html">de.tudarmstadt.ukp.dkpro.core.treetagger</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/class-use/HasResourceMetadata.html#de.tudarmstadt.ukp.dkpro.core.treetagger"><B>HasResourceMetadata</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interface for objects that provide meta data that can be imported by a ResourceObjectProvider.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -164,6 +229,6 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

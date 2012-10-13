@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Pdf2CasConverter (DKPro Core ASL 1.3.0 API)
+Pdf2CasConverter (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Pdf2CasConverter (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Pdf2CasConverter (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="Pdf2CasConverter (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -91,8 +91,8 @@ de.tudarmstadt.ukp.dkpro.core.io.pdf</FONT>
 <BR>
 Class Pdf2CasConverter</H2>
 <PRE>
-<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.pdfbox.util.PDFStreamEngine
+<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.pdfbox.util.PDFStreamEngine
       <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">de.tudarmstadt.ukp.dkpro.core.io.pdf.PDFLayoutEventStripper</A>
           <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.io.pdf.Pdf2CasConverter</B>
 </PRE>
@@ -178,7 +178,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#endDocument(org.pdfbox.pdmodel.PDDocument)">endDocument</A></B>(org.pdfbox.pdmodel.PDDocument&nbsp;aPdf)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#endDocument(org.apache.pdfbox.pdmodel.PDDocument)">endDocument</A></B>(org.apache.pdfbox.pdmodel.PDDocument&nbsp;aPdf)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method is available for subclasses of this class.</TD>
@@ -186,10 +186,10 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#endPage(int, int, int, org.pdfbox.pdmodel.PDPage)">endPage</A></B>(int&nbsp;aStartPage,
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#endPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">endPage</A></B>(int&nbsp;aStartPage,
         int&nbsp;aEndPage,
         int&nbsp;aCurrentPage,
-        org.pdfbox.pdmodel.PDPage&nbsp;page)</CODE>
+        org.apache.pdfbox.pdmodel.PDPage&nbsp;page)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;End a page.</TD>
@@ -204,7 +204,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#getHeadingType()">getHeadingType</A></B>()</CODE>
 
 <BR>
@@ -212,7 +212,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#getParagraphType()">getParagraphType</A></B>()</CODE>
 
 <BR>
@@ -220,7 +220,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;org.annolab.core.util.Trie&lt;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Trie.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">Trie</A>&lt;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#getSubstitutionTable()">getSubstitutionTable</A></B>()</CODE>
 
 <BR>
@@ -245,7 +245,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#setHeadingType(java.lang.String)">setHeadingType</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aHeadingType)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#setHeadingType(java.lang.String)">setHeadingType</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aHeadingType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -253,7 +253,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#setParagraphType(java.lang.String)">setParagraphType</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aParagraphType)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#setParagraphType(java.lang.String)">setParagraphType</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aParagraphType)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -261,7 +261,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#setSubstitutionTable(org.annolab.core.util.Trie)">setSubstitutionTable</A></B>(org.annolab.core.util.Trie&lt;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;aSubstitutionTable)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#setSubstitutionTable(de.tudarmstadt.ukp.dkpro.core.io.pdf.Trie)">setSubstitutionTable</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Trie.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">Trie</A>&lt;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;aSubstitutionTable)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -269,7 +269,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#startDocument(org.pdfbox.pdmodel.PDDocument)">startDocument</A></B>(org.pdfbox.pdmodel.PDDocument&nbsp;aPdf)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#startDocument(org.apache.pdfbox.pdmodel.PDDocument)">startDocument</A></B>(org.apache.pdfbox.pdmodel.PDDocument&nbsp;aPdf)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method is available for subclasses of this class.</TD>
@@ -277,10 +277,10 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#startPage(int, int, int, org.pdfbox.pdmodel.PDPage)">startPage</A></B>(int&nbsp;aFirstPage,
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#startPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">startPage</A></B>(int&nbsp;aFirstPage,
           int&nbsp;aLastPage,
           int&nbsp;aCurrentPage,
-          org.pdfbox.pdmodel.PDPage&nbsp;page)</CODE>
+          org.apache.pdfbox.pdmodel.PDPage&nbsp;page)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start a new page.</TD>
@@ -296,7 +296,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>protected &nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#writeCharacters(org.pdfbox.util.TextPosition)">writeCharacters</A></B>(org.pdfbox.util.TextPosition&nbsp;aText)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#writeCharacters(org.apache.pdfbox.util.TextPosition)">writeCharacters</A></B>(org.apache.pdfbox.util.TextPosition&nbsp;aText)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write the string to the output stream.</TD>
@@ -305,7 +305,7 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Pdf2CasConverter.html#writeText(org.apache.uima.cas.CAS, java.io.InputStream)">writeText</A></B>(org.apache.uima.cas.CAS&nbsp;aCas,
-          <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)</CODE>
+          <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
@@ -317,25 +317,25 @@ Converts a PDF to a CAS. Uses a substitution table.
 <TH ALIGN="left"><B>Methods inherited from class de.tudarmstadt.ukp.dkpro.core.io.pdf.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getCharactersByArticle()">getCharactersByArticle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getCurrentPageNo()">getCurrentPageNo</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getEndPage()">getEndPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getStartPage()">getStartPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getStyle(org.pdfbox.util.TextPosition)">getStyle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processArticle(java.util.List)">processArticle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processPage(org.pdfbox.pdmodel.PDPage, org.pdfbox.cos.COSStream)">processPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processPages(java.util.List)">processPages</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setEndPage(int)">setEndPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setShouldSeparateByBeads(boolean)">setShouldSeparateByBeads</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setStartPage(int)">setStartPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setSuppressDuplicateOverlappingText(boolean)">setSuppressDuplicateOverlappingText</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#shouldSeparateByBeads()">shouldSeparateByBeads</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#shouldSuppressDuplicateOverlappingText()">shouldSuppressDuplicateOverlappingText</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#showCharacter(org.pdfbox.util.TextPosition)">showCharacter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#writeText(org.pdfbox.pdmodel.PDDocument)">writeText</A></CODE></TD>
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getCharactersByArticle()">getCharactersByArticle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getCurrentPageNo()">getCurrentPageNo</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getEndPage()">getEndPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getStartPage()">getStartPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#getStyle(org.apache.pdfbox.util.TextPosition)">getStyle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processArticle(java.util.List)">processArticle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processPage(org.apache.pdfbox.pdmodel.PDPage, org.apache.pdfbox.cos.COSStream)">processPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processPages(java.util.List)">processPages</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processTextPosition(org.apache.pdfbox.util.TextPosition)">processTextPosition</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setEndPage(int)">setEndPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setShouldSeparateByBeads(boolean)">setShouldSeparateByBeads</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setStartPage(int)">setStartPage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#setSuppressDuplicateOverlappingText(boolean)">setSuppressDuplicateOverlappingText</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#shouldSeparateByBeads()">shouldSeparateByBeads</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#shouldSuppressDuplicateOverlappingText()">shouldSuppressDuplicateOverlappingText</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#writeText(org.apache.pdfbox.pdmodel.PDDocument)">writeText</A></CODE></TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_org.pdfbox.util.PDFStreamEngine"><!-- --></A>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.pdfbox.util.PDFStreamEngine"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class org.pdfbox.util.PDFStreamEngine</B></TH>
+<TH ALIGN="left"><B>Methods inherited from class org.apache.pdfbox.util.PDFStreamEngine</B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>getColorSpaces, getCurrentPage, getFonts, getGraphicsStack, getGraphicsState, getGraphicsStates, getResources, getTextLineMatrix, getTextMatrix, getXObjects, processOperator, processOperator, processStream, processSubStream, registerOperatorProcessor, resetEngine, setColorSpaces, setFonts, setGraphicsStack, setGraphicsState, setGraphicsStates, setTextLineMatrix, setTextMatrix, showString</CODE></TD>
+<TD><CODE>getColorSpaces, getCurrentPage, getFonts, getGraphicsStack, getGraphicsState, getGraphicsStates, getResources, getTextLineMatrix, getTextMatrix, getTotalCharCnt, getValidCharCnt, getXObjects, inspectFontEncoding, isForceParsing, processEncodedText, processOperator, processOperator, processStream, processSubStream, registerOperatorProcessor, resetEngine, setColorSpaces, setFonts, setForceParsing, setGraphicsStack, setGraphicsState, setGraphicsStates, setTextLineMatrix, setTextMatrix</CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -355,12 +355,12 @@ Converts a PDF to a CAS. Uses a substitution table.
 Pdf2CasConverter</H3>
 <PRE>
 public <B>Pdf2CasConverter</B>()
-                 throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                 throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -377,55 +377,55 @@ public <B>Pdf2CasConverter</B>()
 writeText</H3>
 <PRE>
 public void <B>writeText</B>(org.apache.uima.cas.CAS&nbsp;aCas,
-                      <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)
-               throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                      <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;aIs)
+               throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="startDocument(org.pdfbox.pdmodel.PDDocument)"><!-- --></A><H3>
+<A NAME="startDocument(org.apache.pdfbox.pdmodel.PDDocument)"><!-- --></A><H3>
 startDocument</H3>
 <PRE>
-protected void <B>startDocument</B>(org.pdfbox.pdmodel.PDDocument&nbsp;aPdf)
-                      throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+protected void <B>startDocument</B>(org.apache.pdfbox.pdmodel.PDDocument&nbsp;aPdf)
+                      throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startDocument(org.pdfbox.pdmodel.PDDocument)">PDFLayoutEventStripper</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startDocument(org.apache.pdfbox.pdmodel.PDDocument)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>This method is available for subclasses of this class. It will be called before processing of
  the document start.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startDocument(org.pdfbox.pdmodel.PDDocument)">startDocument</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startDocument(org.apache.pdfbox.pdmodel.PDDocument)">startDocument</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>aPdf</CODE> - The PDF document that is being processed.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If an IO error occurs.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If an IO error occurs.</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="endDocument(org.pdfbox.pdmodel.PDDocument)"><!-- --></A><H3>
+<A NAME="endDocument(org.apache.pdfbox.pdmodel.PDDocument)"><!-- --></A><H3>
 endDocument</H3>
 <PRE>
-protected void <B>endDocument</B>(org.pdfbox.pdmodel.PDDocument&nbsp;aPdf)
-                    throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+protected void <B>endDocument</B>(org.apache.pdfbox.pdmodel.PDDocument&nbsp;aPdf)
+                    throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endDocument(org.pdfbox.pdmodel.PDDocument)">PDFLayoutEventStripper</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endDocument(org.apache.pdfbox.pdmodel.PDDocument)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>This method is available for subclasses of this class. It will be called after processing of
  the document finishes.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endDocument(org.pdfbox.pdmodel.PDDocument)">endDocument</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endDocument(org.apache.pdfbox.pdmodel.PDDocument)">endDocument</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>aPdf</CODE> - The PDF document that is being processed.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If an IO error occurs.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If an IO error occurs.</DL>
 </DD>
 </DL>
 <HR>
@@ -434,7 +434,7 @@ protected void <B>endDocument</B>(org.pdfbox.pdmodel.PDDocument&nbsp;aPdf)
 processLineSeparator</H3>
 <PRE>
 protected void <B>processLineSeparator</B>()
-                             throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                             throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processLineSeparator()">processLineSeparator</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
@@ -442,7 +442,7 @@ protected void <B>processLineSeparator</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -451,7 +451,7 @@ protected void <B>processLineSeparator</B>()
 processWordSeparator</H3>
 <PRE>
 protected void <B>processWordSeparator</B>()
-                             throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                             throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 <DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#processWordSeparator()">processWordSeparator</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
@@ -459,53 +459,53 @@ protected void <B>processWordSeparator</B>()
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="startPage(int, int, int, org.pdfbox.pdmodel.PDPage)"><!-- --></A><H3>
+<A NAME="startPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)"><!-- --></A><H3>
 startPage</H3>
 <PRE>
 protected void <B>startPage</B>(int&nbsp;aFirstPage,
                          int&nbsp;aLastPage,
                          int&nbsp;aCurrentPage,
-                         org.pdfbox.pdmodel.PDPage&nbsp;page)
-                  throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                         org.apache.pdfbox.pdmodel.PDPage&nbsp;page)
+                  throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startPage(int, int, int, org.pdfbox.pdmodel.PDPage)">PDFLayoutEventStripper</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>Start a new page.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startPage(int, int, int, org.pdfbox.pdmodel.PDPage)">startPage</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">startPage</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
 </DD>
 <DD><DL>
 <DD><CODE>page</CODE> - The page we are about to process.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="endPage(int, int, int, org.pdfbox.pdmodel.PDPage)"><!-- --></A><H3>
+<A NAME="endPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)"><!-- --></A><H3>
 endPage</H3>
 <PRE>
 protected void <B>endPage</B>(int&nbsp;aStartPage,
                        int&nbsp;aEndPage,
                        int&nbsp;aCurrentPage,
-                       org.pdfbox.pdmodel.PDPage&nbsp;page)
-                throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                       org.apache.pdfbox.pdmodel.PDPage&nbsp;page)
+                throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endPage(int, int, int, org.pdfbox.pdmodel.PDPage)">PDFLayoutEventStripper</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>End a page.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endPage(int, int, int, org.pdfbox.pdmodel.PDPage)">endPage</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">endPage</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
 </DD>
 <DD><DL>
 <DD><CODE>page</CODE> - The page we are about to process.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
 </DD>
 </DL>
 <HR>
@@ -514,7 +514,7 @@ protected void <B>endPage</B>(int&nbsp;aStartPage,
 startRegion</H3>
 <PRE>
 protected void <B>startRegion</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.Style.html" title="enum in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper.Style</A>&nbsp;aStyle)
-                    throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                    throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#startRegion(de.tudarmstadt.ukp.dkpro.core.io.pdf.PDFLayoutEventStripper.Style)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>Start a new region.
@@ -525,7 +525,7 @@ protected void <B>startRegion</B>(<A HREF="../../../../../../../de/tudarmstadt/u
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
 </DD>
 </DL>
 <HR>
@@ -534,7 +534,7 @@ protected void <B>startRegion</B>(<A HREF="../../../../../../../de/tudarmstadt/u
 endRegion</H3>
 <PRE>
 protected void <B>endRegion</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.Style.html" title="enum in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper.Style</A>&nbsp;aStyle)
-                  throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+                  throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#endRegion(de.tudarmstadt.ukp.dkpro.core.io.pdf.PDFLayoutEventStripper.Style)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>End a region.
@@ -545,35 +545,35 @@ protected void <B>endRegion</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is any error writing to the stream.</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="writeCharacters(org.pdfbox.util.TextPosition)"><!-- --></A><H3>
+<A NAME="writeCharacters(org.apache.pdfbox.util.TextPosition)"><!-- --></A><H3>
 writeCharacters</H3>
 <PRE>
-protected void <B>writeCharacters</B>(org.pdfbox.util.TextPosition&nbsp;aText)
-                        throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+protected void <B>writeCharacters</B>(org.apache.pdfbox.util.TextPosition&nbsp;aText)
+                        throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
-<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#writeCharacters(org.pdfbox.util.TextPosition)">PDFLayoutEventStripper</A></CODE></B></DD>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#writeCharacters(org.apache.pdfbox.util.TextPosition)">PDFLayoutEventStripper</A></CODE></B></DD>
 <DD>Write the string to the output stream.
 <P>
 <DD><DL>
-<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#writeCharacters(org.pdfbox.util.TextPosition)">writeCharacters</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html#writeCharacters(org.apache.pdfbox.util.TextPosition)">writeCharacters</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PDFLayoutEventStripper</A></CODE></DL>
 </DD>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>aText</CODE> - The text to write to the stream.
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is an error when writing the text.</DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - If there is an error when writing the text.</DL>
 </DD>
 </DL>
 <HR>
 
-<A NAME="setSubstitutionTable(org.annolab.core.util.Trie)"><!-- --></A><H3>
+<A NAME="setSubstitutionTable(de.tudarmstadt.ukp.dkpro.core.io.pdf.Trie)"><!-- --></A><H3>
 setSubstitutionTable</H3>
 <PRE>
-public void <B>setSubstitutionTable</B>(org.annolab.core.util.Trie&lt;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;aSubstitutionTable)</PRE>
+public void <B>setSubstitutionTable</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Trie.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">Trie</A>&lt;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt;&nbsp;aSubstitutionTable)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -584,7 +584,7 @@ public void <B>setSubstitutionTable</B>(org.annolab.core.util.Trie&lt;<A HREF="h
 <A NAME="getSubstitutionTable()"><!-- --></A><H3>
 getSubstitutionTable</H3>
 <PRE>
-public org.annolab.core.util.Trie&lt;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>getSubstitutionTable</B>()</PRE>
+public <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/Trie.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">Trie</A>&lt;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&gt; <B>getSubstitutionTable</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -595,7 +595,7 @@ public org.annolab.core.util.Trie&lt;<A HREF="http://download.oracle.com/javase/
 <A NAME="getParagraphType()"><!-- --></A><H3>
 getParagraphType</H3>
 <PRE>
-public <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getParagraphType</B>()</PRE>
+public <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getParagraphType</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -606,7 +606,7 @@ public <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.ht
 <A NAME="setParagraphType(java.lang.String)"><!-- --></A><H3>
 setParagraphType</H3>
 <PRE>
-public void <B>setParagraphType</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aParagraphType)</PRE>
+public void <B>setParagraphType</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aParagraphType)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -617,7 +617,7 @@ public void <B>setParagraphType</B>(<A HREF="http://download.oracle.com/javase/6
 <A NAME="getHeadingType()"><!-- --></A><H3>
 getHeadingType</H3>
 <PRE>
-public <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getHeadingType</B>()</PRE>
+public <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getHeadingType</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -628,7 +628,7 @@ public <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.ht
 <A NAME="setHeadingType(java.lang.String)"><!-- --></A><H3>
 setHeadingType</H3>
 <PRE>
-public void <B>setHeadingType</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aHeadingType)</PRE>
+public void <B>setHeadingType</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aHeadingType)</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -695,6 +695,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

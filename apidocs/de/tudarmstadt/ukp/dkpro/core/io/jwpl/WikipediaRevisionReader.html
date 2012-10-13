@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-WikipediaRevisionReader (DKPro Core ASL 1.3.0 API)
+WikipediaRevisionReader (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ WikipediaRevisionReader (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="WikipediaRevisionReader (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="WikipediaRevisionReader (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -91,7 +91,7 @@ de.tudarmstadt.ukp.dkpro.core.io.jwpl</FONT>
 <BR>
 Class WikipediaRevisionReader</H2>
 <PRE>
-<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.Resource_ImplBase
       <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.ConfigurableResource_ImplBase
           <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.collection.CollectionReader_ImplBase
@@ -109,13 +109,13 @@ Class WikipediaRevisionReader</H2>
 </PRE>
 
 <P>
-Reads all revisions of all articles.
+Reads Wikipedia page revisions.
 <P>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
-  <DD>zesch</DD>
+  <DD>zesch, oferschke</DD>
 </DL>
 <HR>
 
@@ -135,7 +135,7 @@ Reads all revisions of all articles.
 <TH ALIGN="left"><B>Fields inherited from class de.tudarmstadt.ukp.dkpro.core.io.jwpl.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.jwpl">WikipediaRevisionReaderBase</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentArticle">currentArticle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentArticleIndex">currentArticleIndex</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#nrOfArticles">nrOfArticles</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#outputPlainText">outputPlainText</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#pageBuffer">pageBuffer</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#pageIter">pageIter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_OUTPUT_PLAIN_TEXT">PARAM_OUTPUT_PLAIN_TEXT</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_PAGE_BUFFER">PARAM_PAGE_BUFFER</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#parser">parser</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revisionEncoder">revisionEncoder</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#timestampIter">timestampIter</A></CODE></TD>
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentArticle">currentArticle</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentArticleIndex">currentArticleIndex</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#currentRevisionIndex">currentRevisionIndex</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#nrOfArticles">nrOfArticles</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#outputPlainText">outputPlainText</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#pageBuffer">pageBuffer</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#pageIter">pageIter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_OUTPUT_PLAIN_TEXT">PARAM_OUTPUT_PLAIN_TEXT</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_PAGE_BUFFER">PARAM_PAGE_BUFFER</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_PATH_TO_REVISION_ID_LIST">PARAM_PATH_TO_REVISION_ID_LIST</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#PARAM_REVISION_ID_LIST">PARAM_REVISION_ID_LIST</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#parser">parser</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revIdIterator">revIdIterator</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revisionApi">revisionApi</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revisionIdFile">revisionIdFile</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revisionIdParamArray">revisionIdParamArray</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#revisionIds">revisionIds</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/jwpl/WikipediaRevisionReaderBase.html#timestampIter">timestampIter</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.io.jwpl.WikipediaReaderBase"><!-- --></A>
@@ -238,10 +238,10 @@ Reads all revisions of all articles.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource"><!-- --></A>
@@ -296,7 +296,7 @@ public <B>WikipediaRevisionReader</B>()</PRE>
 getNext</H3>
 <PRE>
 public void <B>getNext</B>(org.apache.uima.jcas.JCas&nbsp;jcas)
-             throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+             throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                     org.apache.uima.collection.CollectionException</PRE>
 <DL>
 <DD><DL>
@@ -305,7 +305,7 @@ public void <B>getNext</B>(org.apache.uima.jcas.JCas&nbsp;jcas)
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE>org.apache.uima.collection.CollectionException</CODE></DL>
 </DD>
 </DL>
@@ -370,6 +370,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

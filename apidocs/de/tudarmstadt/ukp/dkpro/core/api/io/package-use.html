@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Uses of Package de.tudarmstadt.ukp.dkpro.core.api.io (DKPro Core ASL 1.3.0 API)
+Uses of Package de.tudarmstadt.ukp.dkpro.core.api.io (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Uses of Package de.tudarmstadt.ukp.dkpro.core.api.io (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Package de.tudarmstadt.ukp.dkpro.core.api.io (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="Uses of Package de.tudarmstadt.ukp.dkpro.core.api.io (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -97,13 +97,17 @@ Packages that use <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/ap
 <TD>Reader for the ACL Anthology Corpus.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.io.bincas"><B>de.tudarmstadt.ukp.dkpro.core.io.bincas</B></A></TD>
+<TD>Support for fast binary serialization of UIMA CAS.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.io.bnc"><B>de.tudarmstadt.ukp.dkpro.core.io.bnc</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
+<TD>Support for <a href="http://www.natcorp.ox.ac.uk/docs/URG/">British National Corpus XML Edition</a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.io.imscwb"><B>de.tudarmstadt.ukp.dkpro.core.io.imscwb</B></A></TD>
 <TD>Support for <a href="http://cwb.sourceforge.net/">IMS Corpus Workbench</a> tab-separated format
- also used by WaCky.&nbsp;</TD>
+ also used by <a href="http://wacky.sslmit.unibo.it/doku.php">WaCky</a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.io.imscwb.util"><B>de.tudarmstadt.ukp.dkpro.core.io.imscwb.util</B></A></TD>
@@ -115,7 +119,7 @@ Packages that use <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/ap
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.io.tei"><B>de.tudarmstadt.ukp.dkpro.core.io.tei</B></A></TD>
-<TD>&nbsp;&nbsp;</TD>
+<TD>Support for <a href="http://www.tei-c.org/">TEI XML</a>.&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><A HREF="#de.tudarmstadt.ukp.dkpro.core.io.text"><B>de.tudarmstadt.ukp.dkpro.core.io.text</B></A></TD>
@@ -180,6 +184,28 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/pa
 </TABLE>
 &nbsp;
 <P>
+<A NAME="de.tudarmstadt.ukp.dkpro.core.io.bincas"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.io</A> used by <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.bincas</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/JCasFileWriter_ImplBase.html#de.tudarmstadt.ukp.dkpro.core.io.bincas"><B>JCasFileWriter_ImplBase</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/ResourceCollectionReaderBase.html#de.tudarmstadt.ukp.dkpro.core.io.bincas"><B>ResourceCollectionReaderBase</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for collection readers that plan to access resources on the file system or in the
+ classpath or basically anywhere where Spring can resolve them.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
 <A NAME="de.tudarmstadt.ukp.dkpro.core.io.bnc"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
@@ -192,6 +218,12 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/pa
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for collection readers that plan to access resources on the file system or in the
  classpath or basically anywhere where Spring can resolve them.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/ResourceCollectionReaderBase.Resource.html#de.tudarmstadt.ukp.dkpro.core.io.bnc"><B>ResourceCollectionReaderBase.Resource</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -208,12 +240,6 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/pa
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for collection readers that plan to access resources on the file system or in the
  classpath or basically anywhere where Spring can resolve them.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/ResourceCollectionReaderBase.Resource.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb"><B>ResourceCollectionReaderBase.Resource</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -240,10 +266,11 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/pa
 Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.io</A> used by <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.pdf</A></FONT></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/FileSetCollectionReaderBase.html#de.tudarmstadt.ukp.dkpro.core.io.pdf"><B>FileSetCollectionReaderBase</B></A></B>
+<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/ResourceCollectionReaderBase.html#de.tudarmstadt.ukp.dkpro.core.io.pdf"><B>ResourceCollectionReaderBase</B></A></B>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for file system collection readers.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base class for collection readers that plan to access resources on the file system or in the
+ classpath or basically anywhere where Spring can resolve them.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -253,12 +280,6 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/pa
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.io</A> used by <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/tei/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.tei</A></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/JCasResourceCollectionReader_ImplBase.html#de.tudarmstadt.ukp.dkpro.core.io.tei"><B>JCasResourceCollectionReader_ImplBase</B></A></B>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/class-use/ResourceCollectionReaderBase.html#de.tudarmstadt.ukp.dkpro.core.io.tei"><B>ResourceCollectionReaderBase</B></A></B>
@@ -412,6 +433,6 @@ Classes in <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/pa
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

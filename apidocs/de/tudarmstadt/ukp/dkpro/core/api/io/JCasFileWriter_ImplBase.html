@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-JCasFileWriter_ImplBase (DKPro Core ASL 1.3.0 API)
+JCasFileWriter_ImplBase (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ JCasFileWriter_ImplBase (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JCasFileWriter_ImplBase (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="JCasFileWriter_ImplBase (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -91,7 +91,7 @@ de.tudarmstadt.ukp.dkpro.core.api.io</FONT>
 <BR>
 Class JCasFileWriter_ImplBase</H2>
 <PRE>
-<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.AnalysisComponent_ImplBase
       <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.Annotator_ImplBase
           <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.analysis_component.JCasAnnotator_ImplBase
@@ -102,7 +102,7 @@ Class JCasFileWriter_ImplBase</H2>
 <DT><B>All Implemented Interfaces:</B> <DD>org.apache.uima.analysis_component.AnalysisComponent</DD>
 </DL>
 <DL>
-<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text">TextWriter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xmi">XmiWriter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlWriterInline</A></DD>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/SerializedCasWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.bincas">SerializedCasWriter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/text/TextWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.text">TextWriter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xmi/XmiWriter.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xmi">XmiWriter</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlWriterInline.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlWriterInline</A></DD>
 </DL>
 <HR>
 <DL>
@@ -127,15 +127,23 @@ Class JCasFileWriter_ImplBase</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESS">PARAM_COMPRESS</A></B></CODE>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION">PARAM_COMPRESSION</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enabled/disable gzip compression.</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Choose a compression method.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_ESCAPE_DOCUMENT_ID">PARAM_ESCAPE_DOCUMENT_ID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use the document ID as file name even if a relative path information is present.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_PATH">PARAM_PATH</A></B></CODE>
 
 <BR>
@@ -143,7 +151,7 @@ Class JCasFileWriter_ImplBase</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_STRIP_EXTENSION">PARAM_STRIP_EXTENSION</A></B></CODE>
 
 <BR>
@@ -151,7 +159,7 @@ Class JCasFileWriter_ImplBase</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID">PARAM_USE_DOCUMENT_ID</A></B></CODE>
 
 <BR>
@@ -185,24 +193,24 @@ Class JCasFileWriter_ImplBase</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(java.io.File)">getOutputStream</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;aFile)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make sure the target directory exists and get a stream writing to the specified file within.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)">getOutputStream</A></B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
-                <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</CODE>
+<CODE>protected &nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionMethod.html" title="enum in de.tudarmstadt.ukp.dkpro.core.api.resources">CompressionMethod</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getCompressionMethod()">getCompressionMethod</A></B>()</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)">getOutputStream</A></B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
+                <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getRelativePath(org.apache.uima.jcas.JCas)">getRelativePath</A></B>(org.apache.uima.jcas.JCas&nbsp;aJCas)</CODE>
 
 <BR>
@@ -210,29 +218,21 @@ Class JCasFileWriter_ImplBase</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<CODE>protected &nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(org.apache.uima.jcas.JCas, java.lang.String)">getTargetPath</A></B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
-              <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</CODE>
+              <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the full target path for the given CAS and extension.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(java.lang.String, java.lang.String)">getTargetPath</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aRelativePath,
-              <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</CODE>
+<CODE>protected &nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(java.lang.String, java.lang.String)">getTargetPath</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aRelativePath,
+              <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the full target path for the given relative path and extension.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>protected &nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#isCompress()">isCompress</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -290,10 +290,10 @@ Class JCasFileWriter_ImplBase</H2>
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -312,7 +312,7 @@ Class JCasFileWriter_ImplBase</H2>
 <A NAME="PARAM_PATH"><!-- --></A><H3>
 PARAM_PATH</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PATH</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PATH</B></PRE>
 <DL>
 <DD>The folder to write the generated XMI files to.
 <P>
@@ -321,22 +321,23 @@ public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/l
 </DL>
 <HR>
 
-<A NAME="PARAM_COMPRESS"><!-- --></A><H3>
-PARAM_COMPRESS</H3>
+<A NAME="PARAM_COMPRESSION"><!-- --></A><H3>
+PARAM_COMPRESSION</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_COMPRESS</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_COMPRESSION</B></PRE>
 <DL>
-<DD>Enabled/disable gzip compression. If this is set, all files will have the ".gz" ending.
+<DD>Choose a compression method. (default: <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionMethod.html#NONE"><CODE>CompressionMethod.NONE</CODE></A>)
 <P>
 <DL>
-<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase.PARAM_COMPRESS">Constant Field Values</A></DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionMethod.html" title="enum in de.tudarmstadt.ukp.dkpro.core.api.resources"><CODE>CompressionMethod</CODE></A>, 
+<A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase.PARAM_COMPRESSION">Constant Field Values</A></DL>
 </DL>
 <HR>
 
 <A NAME="PARAM_STRIP_EXTENSION"><!-- --></A><H3>
 PARAM_STRIP_EXTENSION</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_STRIP_EXTENSION</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_STRIP_EXTENSION</B></PRE>
 <DL>
 <DD>Remove the original extension.
 <P>
@@ -348,12 +349,24 @@ public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/l
 <A NAME="PARAM_USE_DOCUMENT_ID"><!-- --></A><H3>
 PARAM_USE_DOCUMENT_ID</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_USE_DOCUMENT_ID</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_USE_DOCUMENT_ID</B></PRE>
 <DL>
 <DD>Use the document ID as file name even if a relative path information is present.
 <P>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase.PARAM_USE_DOCUMENT_ID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_ESCAPE_DOCUMENT_ID"><!-- --></A><H3>
+PARAM_ESCAPE_DOCUMENT_ID</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_ESCAPE_DOCUMENT_ID</B></PRE>
+<DL>
+<DD>Use the document ID as file name even if a relative path information is present.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase.PARAM_ESCAPE_DOCUMENT_ID">Constant Field Values</A></DL>
 </DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
@@ -383,10 +396,10 @@ public <B>JCasFileWriter_ImplBase</B>()</PRE>
 </TR>
 </TABLE>
 
-<A NAME="isCompress()"><!-- --></A><H3>
-isCompress</H3>
+<A NAME="getCompressionMethod()"><!-- --></A><H3>
+getCompressionMethod</H3>
 <PRE>
-protected boolean <B>isCompress</B>()</PRE>
+protected <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionMethod.html" title="enum in de.tudarmstadt.ukp.dkpro.core.api.resources">CompressionMethod</A> <B>getCompressionMethod</B>()</PRE>
 <DL>
 <DD><DL>
 </DL>
@@ -419,32 +432,14 @@ protected boolean <B>isUseDocumentId</B>()</PRE>
 <A NAME="getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)"><!-- --></A><H3>
 getOutputStream</H3>
 <PRE>
-protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A> <B>getOutputStream</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
-                                       <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)
-                                throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+protected <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A> <B>getOutputStream</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
+                                       <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)
+                                throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getOutputStream(java.io.File)"><!-- --></A><H3>
-getOutputStream</H3>
-<PRE>
-protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</A> <B>getOutputStream</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A>&nbsp;aFile)
-                                throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Make sure the target directory exists and get a stream writing to the specified file within.
- If the file name ends in ".gz", the stream will be compressed.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aFile</CODE> - the target file.
-<DT><B>Returns:</B><DD>a stream to write to.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
 </DD>
 </DL>
 <HR>
@@ -452,7 +447,7 @@ protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/OutputSt
 <A NAME="getRelativePath(org.apache.uima.jcas.JCas)"><!-- --></A><H3>
 getRelativePath</H3>
 <PRE>
-protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getRelativePath</B>(org.apache.uima.jcas.JCas&nbsp;aJCas)</PRE>
+protected <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>getRelativePath</B>(org.apache.uima.jcas.JCas&nbsp;aJCas)</PRE>
 <DL>
 <DD>Get the relative path from the CAS. If the CAS does not contain relative path information or
  if <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID"><CODE>PARAM_USE_DOCUMENT_ID</CODE></A> is set, the document ID is used.
@@ -467,11 +462,11 @@ protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String
 <A NAME="getTargetPath(org.apache.uima.jcas.JCas, java.lang.String)"><!-- --></A><H3>
 getTargetPath</H3>
 <PRE>
-protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getTargetPath</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
-                             <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</PRE>
+protected <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getTargetPath</B>(org.apache.uima.jcas.JCas&nbsp;aJCas,
+                             <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</PRE>
 <DL>
 <DD>Get the full target path for the given CAS and extension. If the
- <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESS"><CODE>PARAM_COMPRESS</CODE></A> is set, ".gz" is appended to the path.
+ <CODE>#PARAM_COMPRESS</CODE> is set, ".gz" is appended to the path.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>aRelativePath</CODE> - the relative path.<DD><CODE>aExtension</CODE> - the extension.
@@ -483,11 +478,11 @@ protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.htm
 <A NAME="getTargetPath(java.lang.String, java.lang.String)"><!-- --></A><H3>
 getTargetPath</H3>
 <PRE>
-protected <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getTargetPath</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aRelativePath,
-                             <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</PRE>
+protected <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getTargetPath</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aRelativePath,
+                             <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aExtension)</PRE>
 <DL>
 <DD>Get the full target path for the given relative path and extension. If the
- <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESS"><CODE>PARAM_COMPRESS</CODE></A> is set, ".gz" is appended to the path.
+ <CODE>#PARAM_COMPRESS</CODE> is set, ".gz" is appended to the path.
 <P>
 <DD><DL>
 <DT><B>Parameters:</B><DD><CODE>aRelativePath</CODE> - the relative path.<DD><CODE>aExtension</CODE> - the extension.
@@ -555,6 +550,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>
