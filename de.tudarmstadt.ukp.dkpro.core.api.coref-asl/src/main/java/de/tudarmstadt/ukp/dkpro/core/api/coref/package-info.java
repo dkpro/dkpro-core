@@ -17,6 +17,6 @@
  ******************************************************************************/
 
 /**
- * Types for annotating spelling or grammar problems.
+ * Types for coreference annotations.
  */
-package de.tudarmstadt.ukp.dkpro.core.api.anomaly.type;
+package de.tudarmstadt.ukp.dkpro.core.api.coref;
