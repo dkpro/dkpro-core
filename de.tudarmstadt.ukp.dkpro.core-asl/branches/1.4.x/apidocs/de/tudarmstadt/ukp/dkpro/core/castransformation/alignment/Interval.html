@@ -1,0 +1,659 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+Interval (DKPro Core ASL 1.4.0 API)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Interval (DKPro Core ASL 1.4.0 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Interval.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/ImmutableInterval.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/WeakHashSet.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Interval.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+de.tudarmstadt.ukp.dkpro.core.castransformation.alignment</FONT>
+<BR>
+Interface Interval</H2>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/AbstractInterval.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">AbstractInterval</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/ImmutableInterval.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">ImmutableInterval</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>Interval</B></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util">Comparator</A>&lt;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#SEG_END_CMP">SEG_END_CMP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util">Comparator</A>&lt;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#SEG_START_CMP">SEG_START_CMP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#contains(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">contains</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#endsEarilerThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">endsEarilerThan</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#endsLaterThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">endsLaterThan</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#endsSameAs(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">endsSameAs</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#follows(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">follows</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#getEnd()">getEnd</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the end of the interval.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#getLength()">getLength</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the length of the interval.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#getStart()">getStart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the start of the interval.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#immediatelyFollows(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">immediatelyFollows</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#immediatelyPrecedes(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">immediatelyPrecedes</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#leftAligned(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">leftAligned</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#overlap(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">overlap</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#overlaps(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">overlaps</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Test if the current and the given reference interval overlap.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#overlapsLeft(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">overlapsLeft</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#overlapsRight(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">overlapsRight</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this:     [  s  ][e]
+ i:     ss-----ee</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#precedes(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">precedes</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#rightAligned(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">rightAligned</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#sameExtent(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">sameExtent</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#startsEarilerThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">startsEarilerThan</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#startsLaterThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">startsLaterThan</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html#startsSameAs(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)">startsSameAs</A></B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SEG_START_CMP"><!-- --></A><H3>
+SEG_START_CMP</H3>
+<PRE>
+static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util">Comparator</A>&lt;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&gt; <B>SEG_START_CMP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SEG_END_CMP"><!-- --></A><H3>
+SEG_END_CMP</H3>
+<PRE>
+static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Comparator.html?is-external=true" title="class or interface in java.util">Comparator</A>&lt;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&gt; <B>SEG_END_CMP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getLength()"><!-- --></A><H3>
+getLength</H3>
+<PRE>
+int <B>getLength</B>()</PRE>
+<DL>
+<DD>Get the length of the interval.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the interval length.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStart()"><!-- --></A><H3>
+getStart</H3>
+<PRE>
+int <B>getStart</B>()</PRE>
+<DL>
+<DD>Get the start of the interval.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the start offset.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnd()"><!-- --></A><H3>
+getEnd</H3>
+<PRE>
+int <B>getEnd</B>()</PRE>
+<DL>
+<DD>Get the end of the interval.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the end offset.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="overlaps(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+overlaps</H3>
+<PRE>
+boolean <B>overlaps</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD>Test if the current and the given reference interval overlap.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>interval</CODE> - the reference interval.
+<DT><B>Returns:</B><DD><code>true</code> if there is an overlap.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="overlapsLeft(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+overlapsLeft</H3>
+<PRE>
+boolean <B>overlapsLeft</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="overlapsRight(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+overlapsRight</H3>
+<PRE>
+boolean <B>overlapsRight</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD>this:     [  s  ][e]
+ i:     ss-----ee
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>i</CODE> - 
+<DT><B>Returns:</B><DD></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="overlap(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+overlap</H3>
+<PRE>
+<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A> <B>overlap</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="rightAligned(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+rightAligned</H3>
+<PRE>
+boolean <B>rightAligned</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="leftAligned(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+leftAligned</H3>
+<PRE>
+boolean <B>leftAligned</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="sameExtent(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+sameExtent</H3>
+<PRE>
+boolean <B>sameExtent</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="contains(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+contains</H3>
+<PRE>
+boolean <B>contains</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="precedes(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+precedes</H3>
+<PRE>
+boolean <B>precedes</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="immediatelyPrecedes(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+immediatelyPrecedes</H3>
+<PRE>
+boolean <B>immediatelyPrecedes</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="follows(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+follows</H3>
+<PRE>
+boolean <B>follows</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="immediatelyFollows(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+immediatelyFollows</H3>
+<PRE>
+boolean <B>immediatelyFollows</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="startsEarilerThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+startsEarilerThan</H3>
+<PRE>
+boolean <B>startsEarilerThan</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="startsLaterThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+startsLaterThan</H3>
+<PRE>
+boolean <B>startsLaterThan</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="startsSameAs(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+startsSameAs</H3>
+<PRE>
+boolean <B>startsSameAs</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="endsEarilerThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+endsEarilerThan</H3>
+<PRE>
+boolean <B>endsEarilerThan</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="endsLaterThan(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+endsLaterThan</H3>
+<PRE>
+boolean <B>endsLaterThan</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="endsSameAs(de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval)"><!-- --></A><H3>
+endsSameAs</H3>
+<PRE>
+boolean <B>endsSameAs</B>(<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" title="interface in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment">Interval</A>&nbsp;interval)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Interval.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/ImmutableInterval.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/WeakHashSet.html" title="class in de.tudarmstadt.ukp.dkpro.core.castransformation.alignment"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/castransformation/alignment/Interval.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Interval.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2011-2012. All Rights Reserved.
+</BODY>
+</HTML>
