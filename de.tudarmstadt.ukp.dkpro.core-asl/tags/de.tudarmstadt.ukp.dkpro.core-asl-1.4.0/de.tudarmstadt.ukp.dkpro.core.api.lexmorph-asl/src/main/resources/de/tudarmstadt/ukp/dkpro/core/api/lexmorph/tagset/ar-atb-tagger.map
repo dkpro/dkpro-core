@@ -1,0 +1,35 @@
+# Adapted Penn Arabic Treebank tagset used by Stanford PosTagger
+#
+# ADJ
+# CC
+# CD
+# DT
+# DTJJ
+# DTJJR
+# DTNN
+# DTNNP
+# DTNNPS
+# DTNNS
+# IN
+# JJ
+# JJR
+# NN 
+# NNP
+# NNPS
+# NNS
+# NOUN
+# PRP
+# PRP$
+# PUNC
+# RB
+# RP
+# UH
+# VB
+# VBD
+# VBG
+# VBN
+# VBP
+# VN
+# WP
+# WRB
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS

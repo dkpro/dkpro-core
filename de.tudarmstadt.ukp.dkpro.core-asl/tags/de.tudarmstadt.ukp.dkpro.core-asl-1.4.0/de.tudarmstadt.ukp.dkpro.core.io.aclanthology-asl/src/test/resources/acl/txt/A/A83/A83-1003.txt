@@ -1,0 +1,591 @@
+INTRODUCING ASK, A SIMPLE KNOWLEDGEABLE SYSTEM
+ 
+Bozenn H. Thompson F r e d e r i c k B. Thompson California Inatitnce of 
+Technology Pasadena, California 91125
+ 
+ABSTRACT
+ 
+ASK, ~ ~ i m p l e K n o w l e d g e a b l e S y s t e m , i s a t o t a l 
+system for the structuring, manipulation and communication of information. It is 
+a simple system in t h e sense thaC its development concentrated on c l e a n e 
+n g i n e e r i n g solutions to w h a t c o u l d be d o n e now w i t h g o o 
+d r e s p o n s e t i m e s . The user interface is a limited dialect of 
+English. In contrast to expert systems, in which experts build the knowledge 
+base and users make u s e o f t h i s e x p e r t k n o w l e d g e , ASK i s a 
+i m e d a t t h e u s e r who w i s h e s t o c r e a t e , test, modify, extend 
+a n d m a k e u s e o f h i s own k n o w l e d g e b a s e . It is a s y s t e 
+m for a research team, a m a n a g e m e n t or
+ military staff, or a business office.
+ 
+some h a v e t h e f o l l o w i n g n u m b e r a t t r i b u t e s : speed 
+length beam >List the destinations a n d home p o r t o f each ship, ship 
+destination home p o r t Ubu New York Naples Tokyo --Morn 0slo Tokyo Kittyhawk 
+Naples Boston Boston -London
+ 
+This paper is designed to give you a feel for the general performance of t h e 
+ASK S y s t e m a n d overview of its operational capabilities. To Chin end, the 
+movie you see will continue throughout the talk. Indeed, the talk itself is a 
+commentary on t h i s b a c k g r o u n d m o v i e . The m o v i e i s bona f i 
+d e and in real time, i t i s o f t h e ASK S y s t e m i n action. (Many o f t 
+h e i l l u s t r a t i o n s from the movie are reproduced in the written 
+paper.)
+ 
+I. ASK AS A DATABASE SYSTEM
+ 
+A. Examples o f ASK English
+ 
+To i n t r o d u c e a few examples
+ 
+you to ASK, we w i l l s t a r t o u t w i t h of queries of a simple data base
+ The uninitiated user may wish
+ 
+London London N e w York --North Scar London New York gimitz London Norfolk 
+Saratoga unknown Norfolk >What c i t i e s a r e t h e home p o r t s o f s h i 
+p s whose d e s t i n a t i o n i s London? Boston London New York Norfolk >Are 
+t h e r e s h i p s t h a t do n o t h a v e a c a r g o ? yes >What i s t h e 
+number o f New York s h i p s ? There are 2 answers: ( 1 ) New York ( d e s t i 
+n a t i o n ) ships 2 ( 2 ) New York (home p o r t ) s h i p s 1 >How many s h i 
+p s a r e t h e r e w i t h l n e g t h g r e a t e r t h a n 600 f e e t ? 
+Spelling correction: " l n e g t h " to " l e n g t h " 4 >What ships t h a t 
+carry wheat go to London or
+ Alamo Oslo? ships that carry wheat London Maru Oslo Alamo >Does the Maru carry 
+wheat and go co London? yes
+ 
+concerning ships. simply to ask:
+ 
+>How many ships are there? 7 >What is known about ships? some are in the 
+following classes: Navy freighter old
+ 
+S. The ASK Data Structures A l t h o u g h in the t e r m i n o l o g y of data 
+base theory, ASK can be considered as an "entityrelation" system, ASK retains 
+its information in records w h i c h are interlinked in a s e m a n t i c net. 
+One reason we refer to ALE as simple is because ic uses only a few kinds of 
+nodes in its s e m a n t i c
+ 
+tanker a l l have t h e f o l l o w i n g a t t r i b u t e s : destination home 
+p o r t some have t h e f o l l o w i n g a t t r i b u t e s : cargo a l l have 
+t h e f o l l o w i n g number a t t r i b u t e s : age 17
+ 
+net,
+ 
+namely:
+ 
+fio
+ 
+Attributes Relations
+ 
+and the ctbvious c o r r e s p o n d i n g arcs. We speak of this as the COAR 
+structure. A~tributes are single valued, e.g., "father", "home port", " t i t l 
+e " ; relations may be m u l t i p l e valued, e.g., "child"~ "cargo", "author". 
+The d i f f e r e n c e between attributes and relations can be seen in the 
+following p r o t o c o l . >What is the cargo and home port of the Maru? cargo 
+home port wheat London >The home port of Maru is Boston. London has been 
+replaced by Boston as the home port of Maru. >The cargo of Maru is coal. coal 
+has been added as the cargo of Maru. >What i s the cargo and home port of the 
+Maru? cargo home port wheat BosCon coal ---
+ 
+>definition:long:paper whose number of pages e x c e e d s 49 Defined. 
+>definition:long:book whose number o f p a g e s e x c e e d s 800 Defined. 
+>What AI bibliography i t e m s a r e long? There are 2 answers: (1) long:paper 
+whose number of pages exceeds 49 Physical Symbol Systems A General Syntactic P r 
+o c e s s o r (2) long:book whose number of pages exceeds 800 Human Problem 
+Solving >What long books were written in 19727 long:book whose number of pages 
+exceeds 800 Human Problem Solving
+ Family relationships make for a g o o d illustration of definitions; we switch 
+to a small family relationship context. >What are attributes? 
+individual/individual attributes : spouse >What are relations? individua 
+I/individual relations : parent >What are classes? individual classes : male 
+female >What are definitions? definition:mother :female parent definition: 
+father :male parent definition:child:converse of parent definition:sibling:child 
+of parent bur not oneself definition'cousin:child of sibling of parent >List the 
+father and mother of each of Billy Smith's cousins. Billy Smith's cousins father 
+mother Baby Boyd R o b e r t Boyd J i l l Boy
+ 
+C. Extendin K and Hodifyin~ I. Definitions
+ 
+t h e Dat~
+ 
+To make such a system more knowledgeable, one needs to be able co add d e f i n 
+i t i o n s that e m b o d y interrelationships a m o n g the basic classes, 
+objects, a t t r i b u t e s and relations of the data. The simplest form of 
+definition is synonym: >definition:tub:old Defined. ship
+ 
+Although this form of definition allows one to introduce abbreviations and many 
+forms of jargon, more extensive forms of definition are desirable. Here are 
+three illustrations using the same "ship" file as above. In the third 
+definition, note the use of quotes to create local '~ariables". 
+>definition:area:length * beam Defined >List the length, beam and area of each 
+tub. tub length beam area foot foot foot**2 Ubu 231.667 48 11120.016 Alamo 564.5 
+84 47418. >definition:meter:39.37 * (foot / 12) Defined. >beam of the Alamo 
+squared in square meters? 655.526472343 square meters >definition:longest 
+"ship":"ship" whose length is the maximum length of "ship"s Defined. >What is 
+the length in meters of the longest ship whose home port is Naples? 
+121.920243840 meters T h e n o t i o n of w h a t is l o n g m a y be q u i t e 
+different in another context, say in the context of b i b l i o g r a p h y of a 
+r t i f i c i a l intelligence literature. 18
+ 
+2. Verbs Most verbs e m b o d y k n o w l e d g e specific to the application in 
+which they are used, the exceptions being the copula verbs. Therefore the only 
+verbs initially known to the ASK System are "to be" and "to have". The user c a 
+n add n e w v e r b s by paraphrase. >verb:ships "go" to New York:destination of 
+ships is New York Defined. >verb:ships "carry" coal from London to Boston:ships 
+have coal as cargo, have L o n d o n as home port and go to Boston Defined. 
+>Each old ship carries what cargo to each port? old ship port cargo Ubu New York 
+oil Tokyo oil Alamo London wheat coal
+ 
+fi>What i s c a r r i e d by t h e Alamo? wheat coal >Wheat i s c a r r i e d to 
+London from what p o r t s ? New York >What c i t i e s does t h e Alamo c a r r 
+y wheat to? London
+ 
+Pronouns and Ellinses
+ 
+>Create t h e a t t r i b u t e : r a t i n g The a t t r i b u t e r a t i n g 
+h a s been a d d e d . >Create i n d i v i d u a l s : s e m i n a l , e x c e l 
+l e n t , f a i r and i m p o s s i b l e The f o l l o w i n g i n d i v i d u 
+a l s have been added: seminal excellent fair impossible >The r a t i n g o f W 
+i n o g r a d ' s 1980 p a p e r i n Cognitive Science is excellent. e x c e l l 
+e n t h a s been added a s t h e r a t i n g o f W i n o g r a d ' 8 1980 p a p 
+e r in C o g n i t i v e S c i e n c e >Rating o f A Framework f o r R e p r e s 
+e n t i n g
+ 
+In p r a c t i c a l s y s t e m s f o r e x p e r t s , a b b r e v i a t e d f 
+o r m s of a d d r e s s i n g t h e c o m p u t e r a r e common. Thus the 
+ability to h a n d l e p r o n o m i n a l and e l l i p t i c a l constructions 
+are of considerable importance. A l t h o u g h t h e r e has been p r o g r e s 
+s i n t h e l a s t few years in the linguistic understanding of these c o n s t 
+r u c t i o n s , many d i f f i c u l t i e s r e m a i n . However, b u i l d 
+i n g on t h e work t h a t ham been a c c o m p l i s h e d , many o f t h e s 
+e c o n s t r u c t i o n s can be h a n d l e d by t h e ASK System. In o r d e 
+r to a v o i d m i s l e a d i n g t h e u s e r when t h e c o m p u t a t i o 
+n a l a l g o r i t h m does not make t h e c o r r e c t i n t e r p r e t a t 
+i o n , echo i s u s e d t o i n f o r m t h e u s e r of t h e i n t e r p r e 
+t a t i o n t h a t h a s been t a k e n . >Is t h e r e a s h i p whose d e s t 
+i n a t i o n i s unknown? yes >What is it? What is it [ship whose destination 
+is ..knov.] ? Saratoga >Is its cargo wheat or c o a l ? I s i t s [ s h i p 
+whose d e s t i n a t i o n i s unknown] cargo wheat or c o a l ? wheat no coal 
+yes >Does t h e A l a m o ' s l e n g t h exceed t h a t of t h e Ubu? yes >What 
+about t h e N o r t h e r n S t a r ? [the Northern Star?] does t h e A l a m o 
+' s l e n g t h exceed t h a t of t h e Northern Star? no >Is i t s cargo wheat? 
+Is its [Northern Star] cargo wheat? no >Is it that of the Ubu? Is i t [Norther, 
+Star cargo] that [cargo] of the Obu? yes >Wheat is carried by how many ships? 2 
+>Coal and oil? c o a l and o i l i s c a r r i e d by how many ship*? coal I oil 
+2 >by the Ubu? c o a l and o i l i s c a r r i e d by t h e Ubu? coal no oil 
+yes
+ 
+Knowledge i s i m p o s s i b l e .
+ i m p o s s i b l e h a s been added as t h e r a t i n g o f A ¥remework f o r 
+R e p r e s e n t i n g Knowledge. >Scripts, P l a n s , Goals and U n d e r s t 
+a n d i n g ' s rating is se~.nal. s e m i n a l h a s been added a s t h e r a 
+t i n g o f S c r i p t s , P l a n s , Goals and U n d e r s t a n d i n g . 
+>The r a t i n g o f M i n s k y ' s paper i n The P s y c h o l o g y of 
+Computer V i s i o n is seminal. i m p o s s i b l e has been r e p l a c e d by 
+s e m i n a l as t h e r a t i n g o f M i n s k y ' s p a p e r i n The P s y c 
+h o l o g y o f Computer V i s i o n . > L i s t t h e a u t h o r of e a c h 
+paper t h a t h a s a r a t i n g o f e i t h e r s e m i n a l or e x c e l l e 
+n t .
+ 
+paper S c r i p t s , Plans, Goals and Understanding R. C. Schauk
+ A Framework f o r R e p r e s e n t i n g Knowledge M. Minsky What Does I t Mean 
+to U n d e r s t a n d N a t u r a l Language To Winograd > r e l a t i o n : 
+keyword The r e l a t i o n keyword h a s been added. >individuals:context, 
+natural language, knowledge r e p r e s e n t a t i o n The f o l l o w i n g i 
+n d i v i d u a l s have been added: c o n t e x t n a t u r a l l a n g u a g e 
+knowledge representation >Context and knowledge r e p r e s e n t a t i o n a r 
+e k e ~ o r d a of S c r i p t s , P l a n s , Goals and U n d e r s t a n d i n 
+g and A Framework f o r R e p r e s e n t i n g Knowledge. c o n t e x t 
+knowledge r e p r e s e n t a t i o n have been added as keywords o f S c r i p 
+t s , P l a n s , Goals and U n d e r s t a n d i n g . c o n t e x t knowledge 
+r e p r e s e n t a t i o n have been added as keywords o f A Framework f o r R 
+e p r e s e n t i n g Knowledge. > N a t u r a l l a n g u a g e i s a keyword 
+of S c r i p t s , P l a n s , Goals and U n d e r s t a n d i n g . n a t u r a 
+l l a n g u a g e h a s been added a s keyword of Scripts, Plans, Goals and 
+Understanding. >definition:about "booka'*:converse of keyword of "books" 
+Defined. >What AI Sibliosraphy items are about knowledge r e p r e s e n t a t i 
+o n ? S c r i p t s , P l a n s , Goals and U n d e r s t a n d i n g A 
+Framework f o r R e p r e s e n t i n g Knowledge D. Inheritanc~
+ 
+4. E x t e n d i n 2 th_...eeVocabular 7 an...~dDa~a Bas~ New o b j e c t s , c 
+l a s s e s , a t t r i b u t e s and r e l a t i o n s may be a d d e d a t w i 
+l l . T h i s w i l l be i l l u s t r a t e d using the AI Bibliography. 19 
+Classes, as well as objects, may be t h e a r g u m e n t s or v a l u e s o f a 
+t t r i b u t e s and r e l a t i o n s . T h i s r a i s e s t h e q u e s t i 
+o n of i n h e r i t a n c e of properties and attributes. The a n s w e r is to 
+be
+ 
+fifound in the following protocol, using attribute of color; inheritance for 
+relations h a n d l e d i n s i m i l a r ways. >class: r a c i n g sloop, 
+sports b o a t , Norwegian The following classes have been added: racing sloop 
+sports boat Norwegian >attribute: color The a t t r i b u t e c o l o r h a s 
+been a d d e d . >individuals: white, blue, b l a c k , g r a y The following i 
+n d i v i d u a l s have b e e n added: white blue black gray >Saratoga is a 
+racing sloop. S a r a t o g a has b e e n added to r a c i n g s l o o p . 
+>Racing s l o o p s a r e s p o r t s b o a t s . r a c i n g s l o o p s have b 
+e e n added to s p o r t s boats. >Alamo is industrial and Norwegian. Alamo has 
+b e e n added to i n d u s t r i a l Norwegian. >The c o l o r o f s p o r t s b 
+o a t s i s w h i t e . w h i t e h a s b e e n added a s c o l o r o f s p o r 
+t s boats · >Maru's color is gray. g r a y has b e e n added a s c o l o r o f 
+Maru. >Black i s t h e c o l o r of i n d u s t r i a l . b l a c k has b e e n 
+added as t h e c o l o r o f industrial. >Blue is the color of Norwegian. b l u 
+e h a s b e e n added a s t h e color of Norwegian. >What i s the color of each 
+s h i p ? There are 3 answers: (t) ship color Maru gray Saratoga white (2) Alamo 
+as industrial ship color Alamo black (3) Alamo as Norwegian ship color Alamo 
+blue
+ 
+the is
+ 
+There are 2 answers: ( i ) T h e r e a r e no p o r t s ( 2 ) T h e r e a r e no 
+U.S. d e s t i n a t i o n s o f Maru. > I s some E u r o p e a n p o r t a p o 
+r t o f Maru? The f o l l o w i n g word i s n o t i n t h e v o c a b u l a r y 
+: portof Correction: Is some European port a port of Maru? There is no port. 
+>London is Alamo's port. London h a s b e e n added a s t h e p o r t o f Alamo. 
+> I s som E u r o p e a n p o r t a p r o t o f Maru? Spelling corrections: 
+"son" to "some" "prot" tO " p o r t " T h e r e i s no p o r t o f Maru. >New 
+York i s M a r u ' s p o r t . New York h a s b e e n added a s p o r t o f 
+Maru. > I s some E u r o p e a n p o r t a p o r t o f Maru. I s some E u r o p 
+e a n p o r t a p o r t o f Maru? no
+ 
+II. INTEGRATION
+ 
+OF MULTIPLE OBJECT TYPES
+ 
+A. Extension of COAR ~o Multiple Object Types So far we have i l l u s t r a t e 
+d ASK using only two types of objects: capabilities
+ 
+individuals, e.g., "John Jones", "Maru" numbers, e.g., "34.6 feet", "length of 
+Maru", "number of ships". ASK has been designed, however, to facilitate many 
+kinds of objects. This is a capability orthogonal to the simple COAR s t r u c t 
+u r e in that for any types of objects there m a y be c o r r e s p o n d i n g 
+classes, attributes and relations.
+ 
+B. An Examvle:
+ 
+E. DiaKnostics Our objectives in the design respond to the experienced user: o o 
+of ASK are to
+ 
+with the responses s/he desires in at l e a s t 90% o f t h e c a s e s ; w i t 
+h a r e s p o n s e that includes what s/he desires, but perhaps additional 
+information also, in 90% of t h e remaining cases; with a response, although oot 
+the desired one, but one which clearly indicates the system's interpretation of 
+the request in the remaining cases.
+ 
+We will illustrate this m u l t i p l e object type capability with the 
+additional object type: text. Once this new object type was added (together with 
+p r o c e d u r e s t o m a n i p u l a t e texts, i.e., a "word processor") 
+then text classes, individual/text and text/individual a t t r i b u t e s and r 
+e l a t i o n s w e r e immediately available. It was a small task to add an e l 
+e c t r o n i c mail s y s t e m to ASK; all that w a s required was an a d d i 
+t i o n to the a u t h o r i z a t i o n procedure that assigned to each newly 
+authorized person a new text class as his/her mail box. >Create the t e x t / t 
+e x t relation:comment The t e x t / t e x t r e l a t i o n co-~.ent has been 
+added. >Create a file: budget correspondence The text class budget 
+correspondence has been added. >File the Budget Proposal in budget 
+correspondence. Budget Proposal has been added to the text class budget 
+correspondence. >Who have I received mail from? J o h n Smith Peter Jackson 20
+ 
+This third objective calls for good diagnostics. The diagnostic capabilities of 
+ASK are illustrated in the following protocol. >attribute:port The a t t r i b u 
+t e p o r t has been added. >What a r e t h e p o r t s and U.S. d e s t i n a t 
+i o n s t h e Maru?
+ 
+of
+ 
+fi> D i s p l a y my m a i l f r o m J o h n S m i t h . F r e d , Your B u d g 
+e t P r o p o s a l l o o k s good t o me. S u g g e s t you s u b m i t i t a s 
+i s . John > F i l e i t i n my b u d g e t c o r r e s p o n d e n c e f i l e 
+. F i l e i t [my m a i l f r o m J o h n S m i t h ] i n my budget 
+correspondence file. my m a i l f r o m J o h n S m i t h h a s b e e n a d d e 
+d co the text class budget correspondence. >amm-va i t f r o m my m a i l b o x 
+. Bemove i c [my m a i l f r o m J o h n S m i t h ] f r o m my m a i l box. my 
+m a i l f r o m J o h n S m i t h h a s b e e n r e m o v e d from your mail. > 
+C r e a t e a b u d g e t c o r r e s p o n d e n c e named Budget Plans Please 
+e n t e r t e x t : S t a f f l e v e l b u d g e t m e e t i n g on Wed. a t 3 
+i n Tom's o f f i c e . P l e a s e s e n d me y o u r c o m m e n t s b e f o r 
+e t h e m e e t i n g ; f i l e t h e m a s "commenCe on B u d g e t P l a n e " 
+. \ Budget Plane class budget >Mail Budget Budget plane manager. h a s b e e n a 
+d d e d Co t h e t e x t correspondence. Plans to each section manager. h a s b 
+e e n s e n t to e a c h s e c t i o n
+ 
+Ill. MORE GENERAL ASPECTS OF THE ASK SYSTEM
+ 
+A. R e s v o n s e Times The movie, which accompanied the oral presentation of 
+this paper, demonstrated that the response rime, i.e., the time between 
+completion of t h e t y p i n g of t h e i n p u t by t h e u s e r Co t h e 
+appearance of t h e r e s p o n s e on t h e t e r m i n a l , is very good. But 
+the data bases used in the illustrations have been small, Coy d a t a b a s e s 
+. The f o l l o w i n g t a b l e g i v e s a v e r a g e r e s p o n s e t i m 
+e s for a few cases using larger data bases. The query used for this 
+illustration is: >What arm t h e d e s t i n a t i o n s of tankers?
+ 
+The r e s p o u s e t i m e i s r a t h e r i n s e n s t i t i v e to the Coral 
+number of individuals, classes, attributes and relations in the data base, 
+depending primarily on the size of the relation (destination) and i t s a r g u 
+m e n t ( C a n k e r s ) . Suppose t h a t t h e r e a r e m t a n k e r s i n 
+t h e d a t a b a s e and t h a t n individuals have destinations, i.e., the 
+size of the destination relation i s n. T h e t a b l e g i v e s time in 
+seconds.
+ 
+no. of tankers > D i s p l a y t h e commence on B u d g e t P l a n s by e a c 
+h section manager. D i s p l a y i n g commence on B u d g e t P l a n s by e a 
+c h section manager: J o h n Dobbs: D ( i s p l a y ) , S(kip), o r Q(uit):
+ 
+2 2 a 9
+ 
+dastinscions
+ 
+I I I I
+ 
+C. A d d i n z New O b i e c t T y ~ e s A l t h o u g h t h e ASK S y s t e m h 
+a s b e e n d e s i g n e d t o allow the addition o f new o b j e c t t y p e s 
+, t h i s c a n be d o n e o n l y by a n a p p l i c a t i o n programmer. The 
+major obstacle is the necessity to provide a procedure to initialize instances 
+of the new object type and procedures that carry out their intrinsic 
+manipulation. However, we expect the addition of new object types to be a c o m 
+m o n occurrence in the applications of the ASK System. In any potential 
+applicaion areas, using groups have accumulations of data already structured in 
+specific ways and families of procedures that they have developed to manipulate 
+these structures. In ASK, they can identify these data structures as a new 
+object type, design simple syucax for them to invoke their procedures, and thus 
+embed their familar objects and manipulations within the ASK English dialect and 
+within the same context as other associated aspects of their tasks. The class, 
+attributed and relation constructions become immediately available.
+ 
+B e s p o n e e Time i n S e c o n d s f o r : >What a r e t h e d e s t i n a t 
+i o n s of tankers?
+ 
+B. The C q n c e v t o f A Use ~ C o n t e x t an_...dd
+ 
+the Basing Ooeration
+ In the t e r m i n o l o g y of ASK, a user "Context" is a knowledge base 
+together with the vocabulary and definitions that S o with it. A given user will 
+usually have several Contexts for v a r i o u s purposes, some of which may be 
+the small "Ships" Context, a (truncated) bibliography of Artificial Intelligence 
+literature and an a d m i n i s t r a t i v e Context concerning budget matters. 
+When one initiates a session with the ASK System, one is initially in the 
+Command Context: >Welcome to ASK Please identify yourself. >Fred >Pass word: You 
+have mail. Fred is in COMMAND, proceed. At this point, you can list the 
+Directory of Contexts available to you, create or delete Contexts, authorize 
+others to use Contexts which you have created, and enter any of the Contexts in 
+21
+ 
+fi>Directory context BASE Ships AI Bibliography Family Management Matters
+ 
+creator MASTER Fred Fred Fred Fred
+ 
+enter no yes yes yes yes
+ 
+b~s~ yes yes yes yes yes
+ 
+>enter Management Matters You are in Management Matters, proceed. >Who have I 
+received mail from? Peter Jackson John Dobbs A new C o n t e x t is c r e a t e 
+d by basing it on an already existing one. Consider a u s e r who h a s b e e n 
+a u t h o r i z e d f o r b a s i n g on t h e AI B i b l i o g r a p h y 
+Context illustrated a b o v e and who w a n t s t o b u i l d a w i d e r b i b 
+l i o g r a p h y C o n t e x t ( a d d i n g new i n f o r m a t i o n 
+--vocabulary, data and definitions), however, without disturbing the old one. To 
+do s o , a l l s / h e n e e d s t o do i s s e l e c t a new n a m e , s a y CS 
+B i b l i o g r a p h y , and t y p e : >exit You a r e >Base CS The new 
+created
+ 
+>individual: E x p e r i e n c e w i t h ROBOT, L. H a r r i s The f o l l o w i 
+n g i n d i v i d u a l s have been added: E x p e r i e n c e w i t h ROBOT L. 
+H a r r i s >The a u t h o r o f E x p e r i e n c e w i t h ROBOT i s L. 
+Harris. L. H a r r i s h a s b e e n a d d e d a s a u t h o r o f E x p e r i e 
+n c e w i t h ROBOT. >Keyword o f E x p e r i e n c e w i t h ROBOT i s d a t a 
+b a s e . database has been added as keyword of E x p e r i e n c e with ROBOT. 
+>Who wrote what about databases? author D. L. W a l t z N a t u r a l L a n g u 
+a g e A c c e s s t o a Large Data Base L. H a r r i s E x p e r i e n c e w i t 
+h ROBOT > e x i t t o CB B i b l i o g r a p h y , You a r e i n CS B i b l i o 
+g r a p h y , proceed. >Who w r o t e w h a t a b o u t d a t a b a s e s ? 
+author D. L. W a l t z N a t u r a l L a n g u a g e A c c e s s t o a Large 
+Data Base C. J. D a t e An I n t r o d u c t i o n to Database Systems L. H a r 
+r i s E x p e r i e n c e w i t h ROBOT Several C o n t e x t s can be based on 
+a g i v e n one, and one C o n t e x t can be b a s e d on several, thus a 
+hierarchical structure of Contexts can be realized. All Contexts are directly or 
+indirectly based upon the BASE Context, w h i c h c o n t a i n s the f u n c t 
+i o n words and g r a m m a r of the ASK d i a l e c t of English, the 
+mathematical and statistical capabilities, and the word processor.
+ 
+i n COMMAND, p r o c e e d . Bibliography on AI Bibliography context CS 
+Bibliography has been b a s e d on AI B i b l i o g r a p h y basing action is t 
+h i s new C o n t e x t : a ne w
+ 
+The r e s u l t of this Context. Upon e n t e r i n g
+ 
+> E n t e r CS B i b l i o g r a p h y You a r e in CS Bibliography, one c a n 
+make a d d i t i o n s :
+ 
+proceed. C. T~anspo~tabilitv It is easy and fast to apply ASK to a n e w domain, 
+given that a data base for this new domain is a v a i l a b l e in m a c h i n e 
+r e a d a b l e form. The vehicle is t h e ASK dialogue-driven Bulk Data Input 
+capability, w h i c h can be called upon to build an existing database into 
+one's Context. The result not only i n t e g r a t e s this n e w data w i t h 
+that already in the C o n t e x t and under the ASK d i a l e c t of English, 
+but in m a n y c i r c u m s t a n c e s w i l l make the use of this data m o r 
+e r e s p o n s i v e to users"
+ 
+> i n d i v i d u a l s :An I n t r o d u c t i o n to Database S y s t e m s , 
+C. J . D a t e The f o l l o w i n g i n d i v i d u a l s h a v e b e e n a d d 
+e d : An I n t r o d u c t i o n to D a t a b a s e S y s t e m s C. J . D a t e 
+>The a u t h o r o f An I n t r o d u c t i o n to Database S y s t e m s i s C. 
+J . D a t e . C. J . D a t e h a s been added a s a u t h o r of An Introduction 
+to Database Systems. >Keyword o f An I n t r o d u c t i o n t o D a t a b a s e 
+Systems is database. d a t a b a s e h a s been a d d e d a s k e y w o r d o f 
+An Introduction to Database Systems. >Who w r o t e w h a t a b o u t d a t a b 
+a s e s ? author D. L. W a l t z N a t u r a l L a n g u a g e A c c e s s t o a 
+L a r g e D a t a Base C. J. D a t e An I n t r o d u c t i o n to D a t a b a s 
+e Systems These additions to the CS B i b l i o g r a p h y would not, of c o u 
+r s e , e f f e c t She AI B i b l i o g r a p h y Context. However, a d d i t i 
+o n s and m o d i f i c a t i o n s that are subsequently made in the AI 
+Bibliography Context would automatically be reflected in the CS Bibliography. 
+>exit You are in COMMAND, proceed. >Enter AI Bibliography You are in AI 
+Bibliography, proceed. 22
+ 
+needs.
+ The Bulk Data Input D i a l o g u e p r o m p t s the user for n e c e s s a r y 
+i n f o r m a t i o n to (i) e s t a b l i s h t h e physical structure of the d 
+a t a b a s e to be included, (2) add necessary classes and attributes as needed 
+for the new data entries. The user also indicates, using E n g l i s h c o n s t 
+r u c t i o n s , the i n f o r m a t i o n a l r e l a t i o n s h i p s a m o 
+n g the fields in the p h y s i c a l records of the d a t a b a s e file that 
+s/he wishes carried over to the ASK Context.
+ 
+IV. DIALOGUES IN ASK
+ 
+Some have raised the question whether natural language is always the most 
+desirable medium for a user to c o m m u n i c a t e w i t h the computer. 
+Expert systems, for example, have tended to use computer guided dialogues. One 
+simple form such a dialogue
+ 
+fimight take is illustrated by t h e f o l l o w i n s in w h i c h a new e n t 
+r y i s a d d e d t o t h e AI B i b l i o g r a p h y :
+ >New b i b l i o g r a p h y i t e m >Add to what b i b l i o g r a p h y ? AI B 
+i b l i o g r a p h y >Title: Natural Language Processing >Author: Harry Tennant 
+>Keyword: n a t u r a l l a n g u a g e >Keyword: s y n t a x p r o c e s s i n 
+g >Keyword: s p e e c h a c t s >Keyword: Natural Language Processing has been 
+added t o AI B i b l i o g r a p h y . >Title: The "new b i b l i o g r a p h y 
+item" dialogue i8 completed. >What A I B i b l i o g r a p h y items were 
+written by Harry Tennant? E x p e r i e n c e with the Evaluation of Natural 
+Language Question Answerers Natural Language Processing
+ 
+necessary, respond with a diagnostic, (2) f i l l in other fields with data 
+developed from the knowledge base, (3) extend the knowledge base, adding to the 
+vocabulary and adding or changing the data itself, (4) file the completed form 
+in p r e s c r i b e d f i l e s o r i n t h o s e i n d i c a t e d by t h e u 
+s e r and a l s o m a i l it t o a s p e c i f i e d d i s t r i b u t i o n 
+list through the electronic mail subsystem. Since the Form p r o c e s s i n g c 
+a n c h e c k c o n s i s t e n c y and m o d i f y the knowledge base, Forms 
+can be used to facilitate data input. S i n c e Form p r o c e s s i n g c a n 
+fill f i e l d s in t h e Form, the forms c a p a b i l i t y includes the 
+functions of a report generator. L e t t e r s and memos c a n be written a s s 
+p e c i a l c a s e s of Form filling, automatically adding dates, addresses, 
+etc. and filing and dispatching the result. It must be easy and natural to add 
+new Forms, if they are to be a convenient tool. That is the function of the 
+Forms Designing Dialogue. Much like the Bulk Data Input Dialogue, the Forms 
+Designing Dialogue holds a dialogue with the the user through which s/he can 
+specify the fields of the Form itself and the processing of the above k i n d s 
+t o be a u t o m a t i c a l l y accomplished at the time the Form is filled in. 
+Here is a simple example of a from that was designed using the Forms Designing 
+Dialogue. >What i s t h e bona p o r t and c o ~ a n d e r old ship? There are 2 
+answers: (i) The~e is no c o - ~ . n d e r . of each
+ 
+Other alternative media for user/system communication are menu boards, selection 
+arrays and q u e r y by e x a m p l e . Many o t h e r c r y p t i c w a y s to 
+communicate user needs to a knowledgeable system c a n be t h o u g h t o f ; o 
+f t e n t h e m o s t u s e f u l m e a n s will be highly specific to the 
+particular application. For e x a m p l e , i n p o s i t i o n i n g c a r g o 
+i n t h e h o l d o f a s h i p , o n e w o u l d l i k e t o be a b l e t o 
+display the particular cargo space, showing its current cargo, and call for and 
+move into place o t h e r i t e m s t h a t a r e to be i n c l u d e d . In the 
+past, enabling the system to respond more intelligently to the user's needs 
+required the provision of elaborate programs since the u s e r ' s t a s k s m a 
+y be q u i t e i n v o l v e d , w i t h c o m p l e x decision structures. The 
+introduction of terse, effective communication has incurred lout delays and thus 
+the changing needs of a user had little c h a n c e o f b e i n g m e t . I n t 
+h e ASK S y s t e m , t h e u s e r s themselves can provide this knowledge. 
+They c a n i n s t r u c t t h e system on how to e l i c i t the necessary i n 
+f o r m a t i o n and how to c o m p l e t e t h e r e q u i r e d t a s k . 
+This ASK capability is quite facile, opening the way f o r i t s u b i q u i t o 
+u s use in extending the knowledgeable responsiveness of the computer to user's 
+immediate needs. ASK i n c l u d e s two s y s t e m guided dialogues, similar 
+to the Bulk Data Input d i a l o g u e by w h i c h u s e r s c a n i n s t r u 
+c t t h e S y s t e m on how to be more r e s p o n s i v e t o t h e i r n e e 
+d s .
+ A. Forms Desi~nin2 Dialogue The Form is an efficient means of communication with 
+which we are all familiar. A number of computer systems include a Forms package. 
+For most of these, however, filling in a Form results only in a document; the 
+Form does not constitute a medium for interacting with the knowledge base or 
+controllin K the actions of the system. The ASK Forms capability enlarges the 
+roles and ways in which Forms can be used as a m e d i u m for user interaction. 
+As the user fills in the fields of a Form, the System can make use of the 
+information being supplied to (1) check its consistency with the data already in 
+the k n o w l e d g e base and, if
+ 
+old ship hone port Ubu Naples Alamo London >Who i s J o h n S m i t h ? The f o 
+l l o w i n s w o r d s a r e n o t i n t h e v o c a b u l a r y : John Smith > 
+I n v e n t o r y o f wheat and c o r n o i l ? w h e a t and c o r n o i l i n 
+v e n t o r y wheat 86.7 corn oil 123~00.
+ Note that the home port of the Alamo is London and that it does not have a 
+commander, further that John Smith is not known to the System. >Fill s h i p p i 
+n g (For the purposes of the published paper, in contrast to the film shown at 
+the presentation of the paper, only the initial and final copies of the form are 
+given, under~ines indicate fields filled in by the "user", the o t h e r f i e l 
+d s automatically being filled by the System.) (before) Shipping Form ship: 
+port: quantity item $ price $ total
+ 
+commander: 23
+ 
+fi(after) S h i p p i n g Form ship: port: A;amQ London item whvac corn oi~ J@hn 
+SmiC~ price $ 35.75 $ 2.50 total $ 107.25 $1250.00
+ 
+quantity ! 500 colmander:
+ 
+natural language programming capabiltty. We hasten to add that it is not a 
+general purpose program environment. It is for "ultra-high" level programming, 
+gaining its programming efficiency t h r o u g h t h e a s s u m p t i o n o f 
+an e x t e n s i v e v o c a b u l a r y and knowledge base on which it can 
+draw. The illustrative d i a l o g u e a b o v e , w h i c h a d d s ' a new i t 
+e m to a bibliography, is an example of a simple d i a l o g u e d e s i g n e d 
+u s i n g DDD.
+ 
+V. ACKNOWLEDGEMENTS AND CURRENT STATUS Shipping List for Alamo has been filed in 
+Shipping Invoice File. S h i p p i n g L i s t for Alamo h a s b e e n m a i l e 
+d to J o n e s . mail t o : Fill shipping has been completed. > L i s t t h e 
+home p o r t and co-w,a n d e r o f e a c h old ship. old ship home p o r t 
+commander Ubu Naples -Alamo London John Smith >Inventory of wheat and corn oil? 
+w h e a t and c o r n o i l i n v e n t o r y wheat 83.7 c o r n oil 122900. 
+>What is in the Shipping Invoice File? Shipping List for Alamo
+ 
+The three System guided dialogues, Bulk Data Input, Dialogue Designing Dialogue 
+and Forms D e s i g n i n g D i a l o g u e , are f r o m the d o c t o r a l 
+dissertation of Tai-Ping Ho. The aspects of ASK c o n c e r n i n g b a s i n g 
+o n e C o n t e x t on a n o t h e r a r e f r o m the doctoral dissertation o f 
+K w a n 8 - I Yu. The methods for handling anaphora, fragments and correction of 
+inputs are from the doctoral dissertation of David Trawick. ASK is implemented 
+on the Hewlett Packard HP9836 desktop computer. To handle Contexts of r e a s o 
+n a b l e s i z e , one n e e d s a b a r d d i s k . An HP9836 with an HP9725 
+disk was used in the illustrations in this paper. Our work is supported by the 
+Hewlett Packard Corporation, Desktop Computer Division.
+ 
+B. DialoKue Desi~nin~ Dialogue In the day-by-day use of an interactive system, 
+users are very often involved in repetitive tasks. They c o u l d be r e l i e v 
+e d o f much o f t h e d r u d g e r y o f such tasks if the system were more 
+knowledgeable. Such a knowledgeable system, as it goes about a t a s k f o r t h 
+e u s e r , may need a d d i t i o n a l information from the user. What 
+information it needs aCa particular point may depend on earlier user inputs and 
+the current state of the database. The user must provide the system with 
+knowledge of a particular cask; more precisely s/he must program this knowledge 
+into t h e system. The result of this programming will be a system guided 
+dialogue which the user can subsequently initiate and which will then elicit the 
+necessary inputs. Using these inputs in c o n j u n c t i o n w i t h the 
+knowledge already available, particularly the data base, the system completes 
+the task. It is this system-guided dialogue chat the user needs to be able to d 
+e s i g n . In the ASK System, there is a special dialogue w h i c h can be used 
+co d e s i g n s y s t e m g u i d e d dialogues Co accomplish particular casks. 
+We call this the Dialogue Designing Dialogue (DDD). Using DDD, the user becomes 
+a computer-aided designer. Since DDD, in conducting its dialogue with the user, 
+only requires simple responses or responses phrased in ASK English, the user 
+need have little programming skill or experience. Using DDD, the user alone can 
+replace a tedious, repetitive cask with an efficient system guided dialogue, all 
+in a natural language environment. The ASK Dialogue Designing Dialogue 
+constitutes a high level, 24
+ 

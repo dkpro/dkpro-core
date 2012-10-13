@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<topics>
+	<top>
+        <EN-title>
+        	<num>01</num>
+        	<text>English as a National Foreign Language in India</text>
+        </EN-title>
+        <EN-desc>Find documents about English as a National Foreign Language in India.</EN-desc>
+        <EN-narr>Find documents addressing the status of English as a National Foreign Language in India as well as documents about its relevance to Hindi-speaking teachers.</EN-narr>
+    </top>
+    <top>
+        <EN-title>
+        	<num>02</num>
+        	<text>Gender bias and poverty</text>
+        </EN-title>
+        <EN-desc>Find documents on gender bias and resultant poverty problems.</EN-desc>
+        <EN-narr>Documents and research reports that look into gender bias as well as its revelations on poverty problems.</EN-narr>
+    </top>
+</topics>
