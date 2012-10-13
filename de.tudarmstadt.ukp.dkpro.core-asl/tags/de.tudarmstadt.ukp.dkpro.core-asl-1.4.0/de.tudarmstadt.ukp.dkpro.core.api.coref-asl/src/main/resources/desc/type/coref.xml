@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Coreference</name>
+  <version>1.0</version>
+  <vendor/>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>next</name>
+          <description/>
+          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>referenceType</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain</name>
+      <description/>
+      <supertypeName>uima.cas.AnnotationBase</supertypeName>
+      <features>
+        <featureDescription>
+          <name>first</name>
+          <description/>
+          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

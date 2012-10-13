@@ -1,0 +1,591 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>
+XmlReaderXPath (DKPro Core ASL 1.4.0 API)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="XmlReaderXPath (DKPro Core ASL 1.4.0 API)";
+    }
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+<HR>
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XmlReaderXPath.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.XmlNodes.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XmlReaderXPath.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+de.tudarmstadt.ukp.dkpro.core.io.xml</FONT>
+<BR>
+Class XmlReaderXPath</H2>
+<PRE>
+<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.Resource_ImplBase
+      <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.ConfigurableResource_ImplBase
+          <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.collection.CollectionReader_ImplBase
+              <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.uimafit.component.CasCollectionReader_ImplBase
+                  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase</A>
+                      <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>org.apache.uima.collection.base_cpm.BaseCollectionReader, org.apache.uima.collection.CollectionReader, org.apache.uima.resource.ConfigurableResource, org.apache.uima.resource.Resource</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XmlReaderXPath</B><DT>extends <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></DL>
+</PRE>
+
+<P>
+A component reader for XML files implemented with XPath.
+ <p>
+ This is currently optimized for TREC format, which means the style topics are
+ presented in. You should provide the parameter XPath expression that of the
+ <i>parent</i> node And the child nodes of each parent node will be stored
+ separately in its own CAS.
+ <p>
+ If your expression evaluates to leaf nodes, empty CASes will be created.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Shuo Yang</DD>
+</DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.XmlNodes.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderXPath.XmlNodes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#PARAM_DOC_ID_TAG">PARAM_DOC_ID_TAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#PARAM_EXCLUDE_TAG">PARAM_EXCLUDE_TAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#PARAM_INCLUDE_TAG">PARAM_INCLUDE_TAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#PARAM_LANGUAGE">PARAM_LANGUAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional, language of the documents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#PARAM_SUBSTITUTE_TAGS">PARAM_SUBSTITUTE_TAGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Optional.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#PARAM_XPATH_EXPRESSION">PARAM_XPATH_EXPRESSION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mandatory.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#EXCLUDE_PREFIX">EXCLUDE_PREFIX</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#INCLUDE_PREFIX">INCLUDE_PREFIX</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_CASE_SENSITIVE">PARAM_CASE_SENSITIVE</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATH">PARAM_PATH</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATTERNS">PARAM_PATTERNS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.uima.resource.Resource"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface org.apache.uima.resource.Resource</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>PARAM_AGGREGATE_SOFA_MAPPINGS, PARAM_CONFIG_MANAGER, PARAM_CONFIG_PARAM_SETTINGS, PARAM_PERFORMANCE_TUNING_SETTINGS, PARAM_RESOURCE_MANAGER, PARAM_UIMA_CONTEXT</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#XmlReaderXPath()">XmlReaderXPath</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#getNext(org.apache.uima.cas.CAS)">getNext</A></B>(org.apache.uima.cas.CAS&nbsp;cas)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#hasNext()">hasNext</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check whether there is still nodes to be processed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html#initialize(org.apache.uima.UimaContext)">initialize</A></B>(org.apache.uima.UimaContext&nbsp;arg0)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getFileSetIterator()">getFileSetIterator</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getIncludedFilesCount()">getIncludedFilesCount</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getLanguage()">getLanguage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getProgress()">getProgress</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, org.apache.tools.ant.types.resources.FileResource, java.lang.String)">initCas</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#nextFile()">nextFile</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.uimafit.component.CasCollectionReader_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.uimafit.component.CasCollectionReader_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>close, getLogger, initialize</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.collection.CollectionReader_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.uima.collection.CollectionReader_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>destroy, getCasInitializer, getProcessingResourceMetaData, initialize, isConsuming, reconfigure, setCasInitializer, typeSystemInit</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.uima.resource.ConfigurableResource_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>getConfigParameterValue, getConfigParameterValue, setConfigParameterValue, setConfigParameterValue</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.Resource_ImplBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.uima.resource.Resource_ImplBase</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>getCasManager, getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger, setMetaData</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface org.apache.uima.resource.ConfigurableResource</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>getConfigParameterValue, getConfigParameterValue, setConfigParameterValue, setConfigParameterValue</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.Resource"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface org.apache.uima.resource.Resource</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PARAM_XPATH_EXPRESSION"><!-- --></A><H3>
+PARAM_XPATH_EXPRESSION</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_XPATH_EXPRESSION</B></PRE>
+<DL>
+<DD>Mandatory. Specifies the XPath expression to all nodes to be processed.
+ Different segments will be separated via PARAM_ID_TAG, and each segment
+ will be stored in a separate CAS.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath.PARAM_XPATH_EXPRESSION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_INCLUDE_TAG"><!-- --></A><H3>
+PARAM_INCLUDE_TAG</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_INCLUDE_TAG</B></PRE>
+<DL>
+<DD>Optional. Tags which should be worked on. If empty then all tags will be
+ processed.
+ <p>
+ 
+ If this and PARAM_EXCLUDE_TAG are both provided, tags in set
+ PARAM_INCLUDE_TAG - PARAM_EXCLUDE_TAG will be processed.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath.PARAM_INCLUDE_TAG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_EXCLUDE_TAG"><!-- --></A><H3>
+PARAM_EXCLUDE_TAG</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_EXCLUDE_TAG</B></PRE>
+<DL>
+<DD>Optional. Tags which should be ignored. If empty then all tags will be
+ processed.
+ <p>
+ 
+ If this and PARAM_INCLUDE_TAG are both provided, tags in set
+ PARAM_INCLUDE_TAG - PARAM_EXCLUDE_TAG will be processed.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath.PARAM_EXCLUDE_TAG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_LANGUAGE"><!-- --></A><H3>
+PARAM_LANGUAGE</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_LANGUAGE</B></PRE>
+<DL>
+<DD>Optional, language of the documents. If given, it will be set in each
+ CAS.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath.PARAM_LANGUAGE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_SUBSTITUTE_TAGS"><!-- --></A><H3>
+PARAM_SUBSTITUTE_TAGS</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_SUBSTITUTE_TAGS</B></PRE>
+<DL>
+<DD>Optional. Specify to substitute tag names in CAS.
+ <p>
+ Please give the substitutions each in before - after order. For example
+ to substitute "foo" with "bar", and "hey" with "ho", you can provide {
+ "foo", "bar", "hey", "ho" }.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath.PARAM_SUBSTITUTE_TAGS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_DOC_ID_TAG"><!-- --></A><H3>
+PARAM_DOC_ID_TAG</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_DOC_ID_TAG</B></PRE>
+<DL>
+<DD>Optional. Tag which contains the docId. If it is given, it will be
+ ensured that within the same document there is only one id tag and it is
+ not empty
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath.PARAM_DOC_ID_TAG">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XmlReaderXPath()"><!-- --></A><H3>
+XmlReaderXPath</H3>
+<PRE>
+public <B>XmlReaderXPath</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="initialize(org.apache.uima.UimaContext)"><!-- --></A><H3>
+initialize</H3>
+<PRE>
+public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;arg0)
+                throws org.apache.uima.resource.ResourceInitializationException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initialize(org.apache.uima.UimaContext)">initialize</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>org.apache.uima.resource.ResourceInitializationException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasNext()"><!-- --></A><H3>
+hasNext</H3>
+<PRE>
+public boolean <B>hasNext</B>()
+                throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+                       org.apache.uima.collection.CollectionException</PRE>
+<DL>
+<DD>Check whether there is still nodes to be processed.
+ <p>
+ After all nodes from current file get processed, read in nodes from the
+ next file
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>hasNext</CODE> in interface <CODE>org.apache.uima.collection.base_cpm.BaseCollectionReader</CODE><DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#hasNext()">hasNext</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if there is still nodes to process <br>
+         false iff there is neither nodes nor files remaining
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE>org.apache.uima.collection.CollectionException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNext(org.apache.uima.cas.CAS)"><!-- --></A><H3>
+getNext</H3>
+<PRE>
+public void <B>getNext</B>(org.apache.uima.cas.CAS&nbsp;cas)
+             throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XmlReaderXPath.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.TextExtractor.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.XmlNodes.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XmlReaderXPath.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+Copyright &#169; 2011-2012. All Rights Reserved.
+</BODY>
+</HTML>

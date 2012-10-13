@@ -1,0 +1,756 @@
+<?xml version="1.0"?><definitions name="boxnet" targetNamespace="urn:boxnet" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:boxnet" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<types xmlns="http://schemas.xmlsoap.org/wsdl/">
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:boxnet">
+<complexType name="SOAPUser">
+<all>
+<element name="login" type="xsd:string" />
+<element name="email" type="xsd:string" />
+<element name="access_id" type="xsd:int" />
+<element name="user_id" type="xsd:int" />
+<element name="space_amount" type="xsd:long" />
+<element name="space_used" type="xsd:long" />
+<element name="max_upload_size" type="xsd:long" />
+</all>
+</complexType>
+<complexType name="SOAPFolder">
+<all>
+<element name="folder_id" type="xsd:long" />
+<element name="folder_name" type="xsd:string" />
+<element name="folder_type_id" type="xsd:long" />
+<element name="user_id" type="xsd:int" />
+<element name="path" type="xsd:string" />
+<element name="shared" type="xsd:int" />
+<element name="public_name" type="xsd:string" />
+<element name="password" type="xsd:string" />
+<element name="parent_folder_id" type="xsd:long" />
+</all>
+</complexType>
+<complexType name="SOAPFileInfo">
+<all>
+<element name="file_id" type="xsd:long" />
+<element name="file_name" type="xsd:string" />
+<element name="folder_id" type="xsd:long" />
+<element name="shared" type="xsd:long" />
+<element name="public_name" type="xsd:string" />
+<element name="size" type="xsd:long" />
+<element name="description" type="xsd:string" />
+<element name="sha1" type="xsd:string" />
+<element name="created" type="xsd:long" />
+<element name="updated" type="xsd:long" />
+</all>
+</complexType>
+<complexType name="ArrayOfString">
+<complexContent>
+<restriction base="SOAP-ENC:Array">
+<attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]" />
+</restriction>
+</complexContent>
+</complexType>
+</schema>
+</types>
+<message name="authorizationRequest">
+<part name="api_key" type="xsd:string" />
+<part name="login" type="xsd:string" />
+<part name="password" type="xsd:string" />
+<part name="method" type="xsd:string" />
+</message>
+<message name="authorizationResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="logoutRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+</message>
+<message name="logoutResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="get_ticketRequest">
+<part name="api_key" type="xsd:string" />
+</message>
+<message name="get_ticketResponse">
+<part name="status" type="xsd:string" />
+<part name="ticket" type="xsd:string" />
+</message>
+<message name="get_auth_tokenRequest">
+<part name="api_key" type="xsd:string" />
+<part name="ticket" type="xsd:string" />
+</message>
+<message name="get_auth_tokenResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="check_tokenRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+</message>
+<message name="check_tokenResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="registerRequest">
+<part name="api_key" type="xsd:string" />
+<part name="login" type="xsd:string" />
+<part name="password" type="xsd:string" />
+</message>
+<message name="registerResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="register_new_userRequest">
+<part name="api_key" type="xsd:string" />
+<part name="login" type="xsd:string" />
+<part name="password" type="xsd:string" />
+</message>
+<message name="register_new_userResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="get_account_treeRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="folder_id" type="xsd:long" />
+<part name="params" type="tns:ArrayOfString" />
+</message>
+<message name="get_account_treeResponse">
+<part name="status" type="xsd:string" />
+<part name="tree" type="xsd:base64Binary" />
+</message>
+<message name="export_tagsRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+</message>
+<message name="export_tagsResponse">
+<part name="status" type="xsd:string" />
+<part name="tag_xml" type="xsd:base64Binary" />
+</message>
+<message name="create_folderRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="parent_id" type="xsd:long" />
+<part name="name" type="xsd:string" />
+<part name="share" type="xsd:long" />
+</message>
+<message name="create_folderResponse">
+<part name="status" type="xsd:string" />
+<part name="folder" type="tns:SOAPFolder" />
+</message>
+<message name="moveRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+<part name="destination_id" type="xsd:long" />
+</message>
+<message name="moveResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="renameRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+<part name="new_name" type="xsd:string" />
+</message>
+<message name="renameResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="deleteRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+</message>
+<message name="deleteResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="public_shareRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+<part name="password" type="xsd:string" />
+<part name="message" type="xsd:string" />
+<part name="emails" type="tns:ArrayOfString" />
+</message>
+<message name="public_shareResponse">
+<part name="status" type="xsd:string" />
+<part name="public_name" type="xsd:string" />
+</message>
+<message name="public_unshareRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+</message>
+<message name="public_unshareResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="private_shareRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+<part name="emails" type="tns:ArrayOfString" />
+<part name="message" type="xsd:string" />
+<part name="notify" type="xsd:boolean" />
+</message>
+<message name="private_shareResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="add_to_myboxRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="file_id" type="xsd:long" />
+<part name="public_name" type="xsd:string" />
+<part name="folder_id" type="xsd:long" />
+<part name="tags" type="xsd:string" />
+</message>
+<message name="add_to_myboxResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="box_add_nodeRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="box_id" type="xsd:long" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+</message>
+<message name="box_add_nodeResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="add_to_tagRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="tags" type="tns:ArrayOfString" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+</message>
+<message name="add_to_tagResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="email_sharedRequest">
+<part name="api_key" type="xsd:string" />
+<part name="shared_name" type="xsd:string" />
+<part name="emails" type="tns:ArrayOfString" />
+<part name="message" type="xsd:string" />
+<part name="from_email" type="xsd:string" />
+</message>
+<message name="email_sharedResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="get_public_folder_treeRequest">
+<part name="api_key" type="xsd:string" />
+<part name="public_name" type="xsd:string" />
+<part name="password" type="xsd:string" />
+<part name="params" type="tns:ArrayOfString" />
+</message>
+<message name="get_public_folder_treeResponse">
+<part name="status" type="xsd:string" />
+<part name="tree" type="xsd:base64Binary" />
+</message>
+<message name="add_to_public_folderRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="public_name" type="xsd:string" />
+<part name="password" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+</message>
+<message name="add_to_public_folderResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="verify_registration_emailRequest">
+<part name="api_key" type="xsd:string" />
+<part name="login" type="xsd:string" />
+</message>
+<message name="verify_registration_emailResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="get_file_infoRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="file_id" type="xsd:long" />
+</message>
+<message name="get_file_infoResponse">
+<part name="status" type="xsd:string" />
+<part name="info" type="tns:SOAPFileInfo" />
+</message>
+<message name="set_descriptionRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="target" type="xsd:string" />
+<part name="target_id" type="xsd:long" />
+<part name="description" type="xsd:string" />
+</message>
+<message name="set_descriptionResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="register_new_user_nameRequest">
+<part name="api_key" type="xsd:string" />
+<part name="login" type="xsd:string" />
+<part name="password" type="xsd:string" />
+<part name="name" type="xsd:string" />
+</message>
+<message name="register_new_user_nameResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="register_paid_userRequest">
+<part name="api_key" type="xsd:string" />
+<part name="login" type="xsd:string" />
+<part name="password" type="xsd:string" />
+<part name="name" type="xsd:string" />
+<part name="plan" type="xsd:string" />
+<part name="period" type="xsd:string" />
+<part name="credit_card_first_name" type="xsd:string" />
+<part name="credit_card_last_name" type="xsd:string" />
+<part name="credit_card_street_address" type="xsd:string" />
+<part name="credit_card_zip" type="xsd:string" />
+<part name="credit_card_country" type="xsd:string" />
+<part name="credit_card_number" type="xsd:string" />
+<part name="credit_card_cvv" type="xsd:string" />
+<part name="credit_card_exp_date" type="xsd:string" />
+</message>
+<message name="register_paid_userResponse">
+<part name="status" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="user" type="tns:SOAPUser" />
+</message>
+<message name="get_friendsRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="params" type="tns:ArrayOfString" />
+</message>
+<message name="get_friendsResponse">
+<part name="status" type="xsd:string" />
+<part name="friends" type="xsd:base64Binary" />
+</message>
+<message name="request_friendsRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="emails" type="tns:ArrayOfString" />
+<part name="message" type="xsd:string" />
+<part name="params" type="tns:ArrayOfString" />
+</message>
+<message name="request_friendsResponse">
+<part name="status" type="xsd:string" />
+</message>
+<message name="get_updatesRequest">
+<part name="api_key" type="xsd:string" />
+<part name="auth_token" type="xsd:string" />
+<part name="begin_timestamp" type="xsd:long" />
+<part name="params" type="tns:ArrayOfString" />
+</message>
+<message name="get_updatesResponse">
+<part name="status" type="xsd:string" />
+<part name="updates" type="xsd:base64Binary" />
+</message>
+<portType name="boxnetPort">
+<operation name="authorization">
+<input message="tns:authorizationRequest" />
+<output message="tns:authorizationResponse" />
+</operation>
+<operation name="logout">
+<input message="tns:logoutRequest" />
+<output message="tns:logoutResponse" />
+</operation>
+<operation name="get_ticket">
+<input message="tns:get_ticketRequest" />
+<output message="tns:get_ticketResponse" />
+</operation>
+<operation name="get_auth_token">
+<input message="tns:get_auth_tokenRequest" />
+<output message="tns:get_auth_tokenResponse" />
+</operation>
+<operation name="check_token">
+<input message="tns:check_tokenRequest" />
+<output message="tns:check_tokenResponse" />
+</operation>
+<operation name="register">
+<input message="tns:registerRequest" />
+<output message="tns:registerResponse" />
+</operation>
+<operation name="register_new_user">
+<input message="tns:register_new_userRequest" />
+<output message="tns:register_new_userResponse" />
+</operation>
+<operation name="get_account_tree">
+<input message="tns:get_account_treeRequest" />
+<output message="tns:get_account_treeResponse" />
+</operation>
+<operation name="export_tags">
+<input message="tns:export_tagsRequest" />
+<output message="tns:export_tagsResponse" />
+</operation>
+<operation name="create_folder">
+<input message="tns:create_folderRequest" />
+<output message="tns:create_folderResponse" />
+</operation>
+<operation name="move">
+<input message="tns:moveRequest" />
+<output message="tns:moveResponse" />
+</operation>
+<operation name="rename">
+<input message="tns:renameRequest" />
+<output message="tns:renameResponse" />
+</operation>
+<operation name="delete">
+<input message="tns:deleteRequest" />
+<output message="tns:deleteResponse" />
+</operation>
+<operation name="public_share">
+<input message="tns:public_shareRequest" />
+<output message="tns:public_shareResponse" />
+</operation>
+<operation name="public_unshare">
+<input message="tns:public_unshareRequest" />
+<output message="tns:public_unshareResponse" />
+</operation>
+<operation name="private_share">
+<input message="tns:private_shareRequest" />
+<output message="tns:private_shareResponse" />
+</operation>
+<operation name="add_to_mybox">
+<input message="tns:add_to_myboxRequest" />
+<output message="tns:add_to_myboxResponse" />
+</operation>
+<operation name="box_add_node">
+<input message="tns:box_add_nodeRequest" />
+<output message="tns:box_add_nodeResponse" />
+</operation>
+<operation name="add_to_tag">
+<input message="tns:add_to_tagRequest" />
+<output message="tns:add_to_tagResponse" />
+</operation>
+<operation name="email_shared">
+<input message="tns:email_sharedRequest" />
+<output message="tns:email_sharedResponse" />
+</operation>
+<operation name="get_public_folder_tree">
+<input message="tns:get_public_folder_treeRequest" />
+<output message="tns:get_public_folder_treeResponse" />
+</operation>
+<operation name="add_to_public_folder">
+<input message="tns:add_to_public_folderRequest" />
+<output message="tns:add_to_public_folderResponse" />
+</operation>
+<operation name="verify_registration_email">
+<input message="tns:verify_registration_emailRequest" />
+<output message="tns:verify_registration_emailResponse" />
+</operation>
+<operation name="get_file_info">
+<input message="tns:get_file_infoRequest" />
+<output message="tns:get_file_infoResponse" />
+</operation>
+<operation name="set_description">
+<input message="tns:set_descriptionRequest" />
+<output message="tns:set_descriptionResponse" />
+</operation>
+<operation name="register_new_user_name">
+<input message="tns:register_new_user_nameRequest" />
+<output message="tns:register_new_user_nameResponse" />
+</operation>
+<operation name="register_paid_user">
+<input message="tns:register_paid_userRequest" />
+<output message="tns:register_paid_userResponse" />
+</operation>
+<operation name="get_friends">
+<input message="tns:get_friendsRequest" />
+<output message="tns:get_friendsResponse" />
+</operation>
+<operation name="request_friends">
+<input message="tns:request_friendsRequest" />
+<output message="tns:request_friendsResponse" />
+</operation>
+<operation name="get_updates">
+<input message="tns:get_updatesRequest" />
+<output message="tns:get_updatesResponse" />
+</operation>
+</portType>
+<binding name="boxnetBinding" type="tns:boxnetPort">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" />
+<operation name="authorization">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#authorization" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="logout">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#logout" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_ticket">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_ticket" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_auth_token">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_auth_token" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="check_token">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#check_token" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="register">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#register" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="register_new_user">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#register_new_user" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_account_tree">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_account_tree" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="export_tags">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#export_tags" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="create_folder">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#create_folder" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="move">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#move" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="rename">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#rename" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="delete">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#delete" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="public_share">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#public_share" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="public_unshare">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#public_unshare" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="private_share">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#private_share" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="add_to_mybox">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#add_to_mybox" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="box_add_node">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#box_add_node" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="add_to_tag">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#add_to_tag" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="email_shared">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#email_shared" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_public_folder_tree">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_public_folder_tree" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="add_to_public_folder">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#add_to_public_folder" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="verify_registration_email">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#verify_registration_email" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_file_info">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_file_info" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="set_description">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#set_description" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="register_new_user_name">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#register_new_user_name" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="register_paid_user">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#register_paid_user" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_friends">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_friends" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="request_friends">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#request_friends" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+<operation name="get_updates">
+<soap:operation soapAction="urn:boxnet#Box_SoapApi#get_updates" />
+<input>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:boxnet" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+</output>
+</operation>
+</binding>
+<service name="boxnetService">
+<documentation />
+<port name="boxnetPort" binding="tns:boxnetBinding">
+<soap:address location="http://box.net/api/soap" />
+</port>
+</service>
+</definitions>
