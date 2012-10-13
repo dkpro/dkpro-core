@@ -109,7 +109,7 @@
 		<echo> </echo>
 		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
 		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</echo>
-		<echo>    version: 2010111500</echo>
+		<echo>    version: 20101115.0</echo>
 		<echo> </echo>
 		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
 		<echo>to enable additional test cases when building the DKPro TreeTagger Integration.</echo>
@@ -145,7 +145,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="20120803.0"/>
+		<property name="version.bin" value="20120912.0"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
