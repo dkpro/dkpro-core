@@ -7,7 +7,7 @@ AD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 # AS - aspect marker
 # BA - XX in ba-construction
 # CC - coordinating conjunction
-CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONH
+CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 # CD - cardinal number
 CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
 # CS - subordinating conjunction
