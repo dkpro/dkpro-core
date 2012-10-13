@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.3.0 API)
+de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="de.tudarmstadt.ukp.dkpro.core.api.resources (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -91,15 +91,68 @@ API for accessing resources.
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Interface Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</A></B></TD>
+<TD>Interface for objects that provide meta data that can be imported by a ResourceObjectProvider.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
 <B>Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CasConfigurableProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">CasConfigurableProviderBase&lt;M&gt;</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">CompressionUtils</A></B></TD>
+<TD>Utility methods for dealing with compressed data.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/DKProContext.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">DKProContext</A></B></TD>
 <TD>Runtime context for DKPro.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/PlatformDetector.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">PlatformDetector</A></B></TD>
+<TD>Detect platform information and normalize it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">ResourceObjectProviderBase&lt;M&gt;</A></B></TD>
+<TD>Base class for resource providers that produce a resource from some URL depending on changing
+ parameters such as language.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">ResourceUtils</A></B></TD>
 <TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/RuntimeProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">RuntimeProvider</A></B></TD>
+<TD>Provides temporary installation of binaries from the classpath to the local file system.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Enum Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionMethod.html" title="enum in de.tudarmstadt.ukp.dkpro.core.api.resources">CompressionMethod</A></B></TD>
+<TD>Compression methods.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -172,6 +225,6 @@ API for accessing resources.
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

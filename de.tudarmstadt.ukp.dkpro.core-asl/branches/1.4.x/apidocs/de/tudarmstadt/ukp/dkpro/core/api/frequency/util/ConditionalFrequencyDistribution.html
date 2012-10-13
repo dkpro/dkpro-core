@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-ConditionalFrequencyDistribution (DKPro Core ASL 1.3.0 API)
+ConditionalFrequencyDistribution (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ ConditionalFrequencyDistribution (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ConditionalFrequencyDistribution (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="ConditionalFrequencyDistribution (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -91,23 +91,53 @@ de.tudarmstadt.ukp.dkpro.core.api.frequency.util</FONT>
 <BR>
 Class ConditionalFrequencyDistribution&lt;C,V&gt;</H2>
 <PRE>
-<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution&lt;C,V&gt;</B>
 </PRE>
+<DL>
+<DT><DT><B>Type Parameters:</B><DD><CODE>C</CODE> - the type of the conditions<DD><CODE>V</CODE> - the type of the samples</DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>ConditionalFrequencyDistribution&lt;C,V&gt;</B><DT>extends <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
+<DT><PRE>public class <B>ConditionalFrequencyDistribution&lt;C,V&gt;</B><DT>extends <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
 </PRE>
 
 <P>
-Inspired by nltk.probability.ConditionalFreqDist
+Inspired by nltk.probability.ConditionalFreqDist Maps a condition to a
+ <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A>.
+ 
+ <p>
+ This class could be used to learn how frequently a word collocates with another word. Suppose we
+ want to know how frequently the word "of" appears after the word "because", then
+ <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>ConditionalFrequencyDistribution</CODE></A> can be used as follows:
+ 
+ <p><blockquote><pre>
+ <code>ConditionalFrequencyDistribution&lt;String, String&gt; cfd =
+     new ConditionalFrequencyDistribution&lt;String, String&gt;();
+
+ cfd.addSample("because", "in");
+ cfd.addSample("because", "of");
+ cfd.addSample("despite", "in");
+ cfd.addSample("because", "of");
+
+ System.out.println(cfd.getCount("despite", "of"));
+ </code>
+ </pre></blockquote>
+ 
+ </blockquote> The last call to <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#getCount(C, V)"><CODE>getCount(C, V)</CODE></A> will yield 2,
+ because given the <code>condition</code> that the first word in a two-word sequence is "because",
+ the word "of" has appeared twice.
+ 
+ <p>
+ This class was inspired by NLTK's <a href=
+ "http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.ConditionalFreqDist-class.html">
+ FreqDist</a>.
 <P>
 
 <P>
 <DL>
 <DT><B>Author:</B></DT>
   <DD>zesch</DD>
-</DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A></DL>
 <HR>
 
 <P>
@@ -124,13 +154,13 @@ Inspired by nltk.probability.ConditionalFreqDist
 <TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#ConditionalFrequencyDistribution()">ConditionalFrequencyDistribution</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new empty <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>ConditionalFrequencyDistribution</CODE></A>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#ConditionalFrequencyDistribution(java.util.Map)">ConditionalFrequencyDistribution</A></B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>,<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&gt;&nbsp;samples)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#ConditionalFrequencyDistribution(java.util.Map)">ConditionalFrequencyDistribution</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>,<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&gt;&nbsp;samples)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>ConditionalFrequencyDistribution</CODE></A> and fills it with samples from a map.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -145,45 +175,48 @@ Inspired by nltk.probability.ConditionalFreqDist
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#addSample(C, V)">addSample</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t,
+<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#addSample(C, V)">addSample</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition,
           <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&nbsp;sample)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a sample under a given <code>condition</code>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;void</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#addSamples(C, java.lang.Iterable)">addSamples</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t,
-           <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&nbsp;samples)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#addSamples(C, java.lang.Iterable)">addSamples</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition,
+           <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&nbsp;samples)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds multiple samples under a given <code>condition</code>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&gt;</CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&gt;</CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#getConditions()">getConditions</A></B>()</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all conditions for which samples have been recorded.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;long</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#getCount(C, V)">getCount</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t,
-         <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&nbsp;u)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#getCount(C, V)">getCount</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition,
+         <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&nbsp;sample)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the total number of samples which equal a given <code>sample</code> under a given
+ <code>condition</code>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util">FrequencyDistribution</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#getFrequencyDistribution(C)">getFrequencyDistribution</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;c)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#getFrequencyDistribution(C)">getFrequencyDistribution</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A> under a given <code>condition</code>, or
+ <code>null</code> if this distribution contains no such <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A> for
+ this <code>condition</code>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
@@ -196,14 +229,14 @@ Inspired by nltk.probability.ConditionalFreqDist
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
 <CODE>&nbsp;boolean</CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#hasCondition(C)">hasCondition</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t)</CODE>
+<TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#hasCondition(C)">hasCondition</A></B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition)</CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates whether samples have been recorded under a given <code>condition</code>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html#toString()">toString</A></B>()</CODE>
 
 <BR>
@@ -213,10 +246,10 @@ Inspired by nltk.probability.ConditionalFreqDist
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -237,14 +270,20 @@ ConditionalFrequencyDistribution</H3>
 <PRE>
 public <B>ConditionalFrequencyDistribution</B>()</PRE>
 <DL>
+<DD>Creates a new empty <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>ConditionalFrequencyDistribution</CODE></A>.
+<P>
 </DL>
 <HR>
 
 <A NAME="ConditionalFrequencyDistribution(java.util.Map)"><!-- --></A><H3>
 ConditionalFrequencyDistribution</H3>
 <PRE>
-public <B>ConditionalFrequencyDistribution</B>(<A HREF="http://download.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>,<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&gt;&nbsp;samples)</PRE>
+public <B>ConditionalFrequencyDistribution</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>,<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&gt;&nbsp;samples)</PRE>
 <DL>
+<DD>Creates a new <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>ConditionalFrequencyDistribution</CODE></A> and fills it with samples from a map.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>samples</CODE> - the <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang"><CODE>Iterable</CODE></A> to fill from</DL>
 </DL>
 
 <!-- ============ METHOD DETAIL ========== -->
@@ -264,7 +303,8 @@ public long <B>getN</B>()</PRE>
 <DL>
 <DD><DL>
 
-<DT><B>Returns:</B><DD>The total number of sample outcomes that have been recorded by this ConditionalFreqDist.</DL>
+<DT><B>Returns:</B><DD>The total number of sample outcomes that have been recorded by this
+         ConditionalFreqDist.</DL>
 </DD>
 </DL>
 <HR>
@@ -272,11 +312,19 @@ public long <B>getN</B>()</PRE>
 <A NAME="getCount(java.lang.Object,java.lang.Object)"><!-- --></A><A NAME="getCount(C, V)"><!-- --></A><H3>
 getCount</H3>
 <PRE>
-public long <B>getCount</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t,
-                     <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&nbsp;u)</PRE>
+public long <B>getCount</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition,
+                     <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&nbsp;sample)</PRE>
 <DL>
+<DD>Returns the total number of samples which equal a given <code>sample</code> under a given
+ <code>condition</code>.
+ 
+ <p>
+ If there are no samples for the condition in question on record, <code>0</code> will be
+ returned.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>condition</CODE> - the condition<DD><CODE>sample</CODE> - the sample under a given condition
+<DT><B>Returns:</B><DD>the number of all samples which equal <code>sample</code></DL>
 </DD>
 </DL>
 <HR>
@@ -284,10 +332,15 @@ public long <B>getCount</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/
 <A NAME="getFrequencyDistribution(java.lang.Object)"><!-- --></A><A NAME="getFrequencyDistribution(C)"><!-- --></A><H3>
 getFrequencyDistribution</H3>
 <PRE>
-public <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util">FrequencyDistribution</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt; <B>getFrequencyDistribution</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;c)</PRE>
+public <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util">FrequencyDistribution</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt; <B>getFrequencyDistribution</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition)</PRE>
 <DL>
+<DD>Returns the <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A> under a given <code>condition</code>, or
+ <code>null</code> if this distribution contains no such <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A> for
+ this <code>condition</code>.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>condition</CODE> - the condition
+<DT><B>Returns:</B><DD>the distribution the condition maps to</DL>
 </DD>
 </DL>
 <HR>
@@ -295,10 +348,13 @@ public <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/freque
 <A NAME="getConditions()"><!-- --></A><H3>
 getConditions</H3>
 <PRE>
-public <A HREF="http://download.oracle.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&gt; <B>getConditions</B>()</PRE>
+public <A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&gt; <B>getConditions</B>()</PRE>
 <DL>
+<DD>Returns all conditions for which samples have been recorded.
+<P>
 <DD><DL>
-</DL>
+
+<DT><B>Returns:</B><DD>a <A HREF="http://docs.oracle.com/javase/6/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util"><CODE>Set</CODE></A> of all recorded conditions</DL>
 </DD>
 </DL>
 <HR>
@@ -306,10 +362,13 @@ public <A HREF="http://download.oracle.com/javase/6/docs/api/java/util/Set.html?
 <A NAME="hasCondition(java.lang.Object)"><!-- --></A><A NAME="hasCondition(C)"><!-- --></A><H3>
 hasCondition</H3>
 <PRE>
-public boolean <B>hasCondition</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t)</PRE>
+public boolean <B>hasCondition</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition)</PRE>
 <DL>
+<DD>Indicates whether samples have been recorded under a given <code>condition</code>.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>condition</CODE> - the condition in question
+<DT><B>Returns:</B><DD>true if samples for <code>condition</code> exist</DL>
 </DD>
 </DL>
 <HR>
@@ -317,11 +376,13 @@ public boolean <B>hasCondition</B>(<A HREF="../../../../../../../../de/tudarmsta
 <A NAME="addSample(java.lang.Object,java.lang.Object)"><!-- --></A><A NAME="addSample(C, V)"><!-- --></A><H3>
 addSample</H3>
 <PRE>
-public void <B>addSample</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t,
+public void <B>addSample</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition,
                       <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&nbsp;sample)</PRE>
 <DL>
+<DD>Adds a sample under a given <code>condition</code>.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>condition</CODE> - the condition for this sample<DD><CODE>sample</CODE> - the sample to add</DL>
 </DD>
 </DL>
 <HR>
@@ -329,11 +390,17 @@ public void <B>addSample</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp
 <A NAME="addSamples(java.lang.Object,java.lang.Iterable)"><!-- --></A><A NAME="addSamples(C, java.lang.Iterable)"><!-- --></A><H3>
 addSamples</H3>
 <PRE>
-public void <B>addSamples</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;t,
-                       <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&nbsp;samples)</PRE>
+public void <B>addSamples</B>(<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">C</A>&nbsp;condition,
+                       <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Iterable.html?is-external=true" title="class or interface in java.lang">Iterable</A>&lt;<A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="type parameter in ConditionalFrequencyDistribution">V</A>&gt;&nbsp;samples)</PRE>
 <DL>
+<DD>Adds multiple samples under a given <code>condition</code>.
+ 
+ <p>
+ If there is no <A HREF="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><CODE>FrequencyDistribution</CODE></A> present for the given <code>condition</code>, a
+ new empty one will be created and populated from the given <code>samples</code>.
+<P>
 <DD><DL>
-</DL>
+<DT><B>Parameters:</B><DD><CODE>condition</CODE> - the condition for the samples<DD><CODE>samples</CODE> - the samples to add</DL>
 </DD>
 </DL>
 <HR>
@@ -341,10 +408,10 @@ public void <B>addSamples</B>(<A HREF="../../../../../../../../de/tudarmstadt/uk
 <A NAME="toString()"><!-- --></A><H3>
 toString</H3>
 <PRE>
-public <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>()</PRE>
+public <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>toString</B>()</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A></CODE> in class <CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A></CODE> in class <CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></CODE></DL>
 </DD>
 <DD><DL>
 </DL>
@@ -411,6 +478,6 @@ DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&n
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

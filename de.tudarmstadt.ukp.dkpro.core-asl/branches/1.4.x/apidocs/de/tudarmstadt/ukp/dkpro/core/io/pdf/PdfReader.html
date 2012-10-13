@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-PdfReader (DKPro Core ASL 1.3.0 API)
+PdfReader (DKPro Core ASL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ PdfReader (DKPro Core ASL 1.3.0 API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PdfReader (DKPro Core ASL 1.3.0 API)";
+        parent.document.title="PdfReader (DKPro Core ASL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -55,7 +55,7 @@ function windowTitle()
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.Values.html" title="enum in de.tudarmstadt.ukp.dkpro.core.io.pdf"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/SubstitutionTrieParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="PdfReader.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -75,7 +75,7 @@ function windowTitle()
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -91,12 +91,12 @@ de.tudarmstadt.ukp.dkpro.core.io.pdf</FONT>
 <BR>
 Class PdfReader</H2>
 <PRE>
-<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
+<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
   <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.Resource_ImplBase
       <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.resource.ConfigurableResource_ImplBase
           <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.apache.uima.collection.CollectionReader_ImplBase
               <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by ">org.uimafit.component.CasCollectionReader_ImplBase
-                  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase</A>
+                  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase</A>
                       <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader</B>
 </PRE>
 <DL>
@@ -104,7 +104,7 @@ Class PdfReader</H2>
 </DL>
 <HR>
 <DL>
-<DT><PRE>public class <B>PdfReader</B><DT>extends <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></DL>
+<DT><PRE>public class <B>PdfReader</B><DT>extends <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A></DL>
 </PRE>
 
 <P>
@@ -119,6 +119,25 @@ Collection reader for PDF files.
 <HR>
 
 <P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
 <!-- =========== FIELD SUMMARY =========== -->
 
 <A NAME="field_summary"><!-- --></A>
@@ -129,7 +148,7 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#BUILT_IN">BUILT_IN</A></B></CODE>
 
 <BR>
@@ -137,7 +156,15 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_END_PAGE">PARAM_END_PAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_HEADING_TYPE">PARAM_HEADING_TYPE</A></B></CODE>
 
 <BR>
@@ -145,7 +172,7 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_PARAGRAPH_TYPE">PARAM_PARAGRAPH_TYPE</A></B></CODE>
 
 <BR>
@@ -153,20 +180,28 @@ Collection reader for PDF files.
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_START_PAGE">PARAM_START_PAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html#PARAM_SUBSTITUTION_TABLE">PARAM_SUBSTITUTION_TABLE</A></B></CODE>
 
 <BR>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase"><!-- --></A>
+&nbsp;<A NAME="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Fields inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></B></TH>
+<TH ALIGN="left"><B>Fields inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#EXCLUDE_PREFIX">EXCLUDE_PREFIX</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#INCLUDE_PREFIX">INCLUDE_PREFIX</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_CASE_SENSITIVE">PARAM_CASE_SENSITIVE</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_LANGUAGE">PARAM_LANGUAGE</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATH">PARAM_PATH</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATTERNS">PARAM_PATTERNS</A></CODE></TD>
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#EXCLUDE_PREFIX">EXCLUDE_PREFIX</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#INCLUDE_PREFIX">INCLUDE_PREFIX</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_INCLUDE_HIDDEN">PARAM_INCLUDE_HIDDEN</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_LANGUAGE">PARAM_LANGUAGE</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_PATH">PARAM_PATH</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_PATTERNS">PARAM_PATTERNS</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_RESOURCE_LOADER_CLASS">PARAM_RESOURCE_LOADER_CLASS</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_USE_DEFAULT_EXCLUDES">PARAM_USE_DEFAULT_EXCLUDES</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="fields_inherited_from_class_org.apache.uima.resource.Resource"><!-- --></A>
@@ -220,13 +255,13 @@ Collection reader for PDF files.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
 </TR>
 </TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase"><!-- --></A>
+&nbsp;<A NAME="methods_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class de.tudarmstadt.ukp.dkpro.core.api.io.<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getFileSetIterator()">getFileSetIterator</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getIncludedFilesCount()">getIncludedFilesCount</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getLanguage()">getLanguage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getProgress()">getProgress</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#hasNext()">hasNext</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, org.apache.tools.ant.types.resources.FileResource)">initCas</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#nextFile()">nextFile</A></CODE></TD>
+<TD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getLanguage()">getLanguage</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getProgress()">getProgress</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getResourceIterator()">getResourceIterator</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getResources()">getResources</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#hasNext()">hasNext</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource)">initCas</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource, java.lang.String)">initCas</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#nextFile()">nextFile</A>, <A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#scan(java.lang.String, java.util.Collection, java.util.Collection)">scan</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.uimafit.component.CasCollectionReader_ImplBase"><!-- --></A>
@@ -268,10 +303,10 @@ Collection reader for PDF files.
 &nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
+<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
+<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
 </TR>
 </TABLE>
 &nbsp;<A NAME="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource"><!-- --></A>
@@ -308,7 +343,7 @@ Collection reader for PDF files.
 <A NAME="BUILT_IN"><!-- --></A><H3>
 BUILT_IN</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>BUILT_IN</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>BUILT_IN</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.BUILT_IN">Constant Field Values</A></DL>
@@ -318,7 +353,7 @@ public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/l
 <A NAME="PARAM_SUBSTITUTION_TABLE"><!-- --></A><H3>
 PARAM_SUBSTITUTION_TABLE</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_SUBSTITUTION_TABLE</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_SUBSTITUTION_TABLE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_SUBSTITUTION_TABLE">Constant Field Values</A></DL>
@@ -328,7 +363,7 @@ public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/l
 <A NAME="PARAM_HEADING_TYPE"><!-- --></A><H3>
 PARAM_HEADING_TYPE</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_HEADING_TYPE</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_HEADING_TYPE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_HEADING_TYPE">Constant Field Values</A></DL>
@@ -338,10 +373,30 @@ public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/l
 <A NAME="PARAM_PARAGRAPH_TYPE"><!-- --></A><H3>
 PARAM_PARAGRAPH_TYPE</H3>
 <PRE>
-public static final <A HREF="http://download.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PARAGRAPH_TYPE</B></PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_PARAGRAPH_TYPE</B></PRE>
 <DL>
 <DL>
 <DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_PARAGRAPH_TYPE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_START_PAGE"><!-- --></A><H3>
+PARAM_START_PAGE</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_START_PAGE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_START_PAGE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PARAM_END_PAGE"><!-- --></A><H3>
+PARAM_END_PAGE</H3>
+<PRE>
+public static final <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>PARAM_END_PAGE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfReader.PARAM_END_PAGE">Constant Field Values</A></DL>
 </DL>
 
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
@@ -378,7 +433,7 @@ public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;aContext)
                 throws org.apache.uima.resource.ResourceInitializationException</PRE>
 <DL>
 <DD><DL>
-<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initialize(org.apache.uima.UimaContext)">initialize</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">FileSetCollectionReaderBase</A></CODE></DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initialize(org.apache.uima.UimaContext)">initialize</A></CODE> in class <CODE><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</A></CODE></DL>
 </DD>
 <DD><DL>
 
@@ -392,13 +447,13 @@ public void <B>initialize</B>(org.apache.uima.UimaContext&nbsp;aContext)
 getNext</H3>
 <PRE>
 public void <B>getNext</B>(org.apache.uima.cas.CAS&nbsp;aCAS)
-             throws <A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
+             throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A>,
                     org.apache.uima.collection.CollectionException</PRE>
 <DL>
 <DD><DL>
 
 <DT><B>Throws:</B>
-<DD><CODE><A HREF="http://download.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
+<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE>
 <DD><CODE>org.apache.uima.collection.CollectionException</CODE></DL>
 </DD>
 </DL>
@@ -434,7 +489,7 @@ public void <B>getNext</B>(org.apache.uima.cas.CAS&nbsp;aCAS)
 <TR>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
 &nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PDFLayoutEventStripper.Values.html" title="enum in de.tudarmstadt.ukp.dkpro.core.io.pdf"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;NEXT CLASS</FONT></TD>
+&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/SubstitutionTrieParser.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf"><B>NEXT CLASS</B></A></FONT></TD>
 <TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
   <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" target="_top"><B>FRAMES</B></A>  &nbsp;
 &nbsp;<A HREF="PdfReader.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
@@ -454,7 +509,7 @@ public void <B>getNext</B>(org.apache.uima.cas.CAS&nbsp;aCAS)
 </TR>
 <TR>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
 <TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
 DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
 </TR>
@@ -463,6 +518,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2012. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>
