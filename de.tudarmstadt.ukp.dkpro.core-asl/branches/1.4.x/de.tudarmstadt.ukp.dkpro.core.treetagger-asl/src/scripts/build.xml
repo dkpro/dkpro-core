@@ -174,10 +174,11 @@
 			platform="osx-ppc" file="tree-tagger" md5="63560dcb3a5932bc5ae0e9aab8f48e42"/>
 		
 		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-08-03 | now        | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
+		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
+		  - 2012-09-12 | now        | 4b6459574b6b334a090399b76dbc2cdb
 		  -->
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2-64bit.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="1bab69906368061d6e7c7466abdeb643"/>
+			platform="linux-x86_64" file="tree-tagger" md5="4b6459574b6b334a090399b76dbc2cdb"/>
 
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
