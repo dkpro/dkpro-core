@@ -1,0 +1,56 @@
+# Latin TreeTagger Part-of-Speech Tags
+#
+# Gabriele Brandolini
+#
+# Source: extracted from model file using TT4J
+# ABBR
+# ADJ
+# ADJ:COM
+# ADJ:NUM
+# ADJ:NUM:abl
+# ADJ:SUP
+# ADJ:abl
+# ADV
+# CC
+# CS
+# DET
+# DIMOS
+# ENCL
+# ESSE:IND
+# ESSE:INF
+# ESSE:SUB
+# EXCL
+# FW
+# INDEF
+# INT
+# N:NOM
+# N:abl
+# N:acc
+# N:dat
+# N:gen
+# N:loc
+# N:nom
+# N:voc
+# NPR
+# POSS
+# PREP
+# PRON
+# PUN
+# REL
+# SENT
+# SYM
+# V:GED
+# V:GER
+# V:IMP
+# V:IND
+# V:INDIND
+# V:INF
+# V:PTC
+# V:PTC:abl
+# V:PTC:acc
+# V:PTC:gen
+# V:PTC:nom
+# V:SUB
+# V:SUP:abl
+# V:SUP:acc
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
