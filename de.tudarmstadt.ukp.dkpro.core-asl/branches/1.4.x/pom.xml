@@ -31,22 +31,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!--
-		<repository>
-			<id>central_bundles-216-languagetool-1_9</id>
-			<url>https://oss.sonatype.org/content/repositories/central_bundles-216</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>central_bundles-216-berkeleylm-1_1_2</id>
-			<url>https://oss.sonatype.org/content/repositories/central_bundles-320</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		-->
 	</repositories>
 	<issueManagement>
 		<system>Google Code</system>
