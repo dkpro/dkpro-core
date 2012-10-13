@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.5.0-SNAPSHOT</version>
+		<version>1.4.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</artifactId>
 	<name>DKPro Core ASL - IO - PDFBox (BSD)</name>
@@ -46,14 +46,9 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.annolab</groupId>
-			<artifactId>org.annolab.core.util</artifactId>
-			<version>0.5.2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
-			<version>1.6.0</version>
+			<version>1.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

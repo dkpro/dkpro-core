@@ -66,8 +66,6 @@ public abstract class ResourceObjectProviderBase<M>
 {
 	private final Log log = LogFactory.getLog(getClass());
 	
-	public static final String NOT_REQUIRED = "-=* NOT REQUIRED *=-";
-	
 	/**
 	 * The language.
 	 */
@@ -215,7 +213,7 @@ public abstract class ResourceObjectProviderBase<M>
 			props = getAggregatedProperties();
 		}
 		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
-
+		
 		try {
 			return pph.replacePlaceholders(props.getProperty(LOCATION), props);
 		}
@@ -244,38 +242,29 @@ public abstract class ResourceObjectProviderBase<M>
 		
 		boolean success = false;
 		try {
-			if (NOT_REQUIRED.equals(modelLocation)) {
-				if (!StringUtils.equals(resourceUrl, modelLocation)) {
-					log.info("Producing resource from thin air");
-					resource = produceResource(null);
-					resourceUrl = modelLocation;
-				}
-			}
-			else {
-				URL url = resolveLocation(modelLocation, this, null);
-				if (!StringUtils.equals(resourceUrl, url.toString())) {
-					// Load resource meta data if present
-					resourceMetaData = new Properties();
-					
-					try {
-						if (modelLocation.toLowerCase().endsWith(".gz")) {
-							modelLocation = modelLocation.substring(0, modelLocation.length() - 3);
-						}
-						if (modelLocation.toLowerCase().endsWith(".bz2")) {
-							modelLocation = modelLocation.substring(0, modelLocation.length() - 4);
-						}
-						String modelMetaDataLocation = FilenameUtils.removeExtension(modelLocation)+".properties";
-						URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
-						resourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(modelMetaDataUrl));
+			URL url = resolveLocation(modelLocation, this, null);
+			if (!StringUtils.equals(resourceUrl, url.toString())) {
+				// Load resource meta data if present
+				resourceMetaData = new Properties();
+				
+				try {
+					if (modelLocation.toLowerCase().endsWith(".gz")) {
+						modelLocation = modelLocation.substring(0, modelLocation.length() - 3);
 					}
-					catch (FileNotFoundException e) {
-						// If no metadata was found, just leave the properties empty.
+					if (modelLocation.toLowerCase().endsWith(".bz2")) {
+						modelLocation = modelLocation.substring(0, modelLocation.length() - 4);
 					}
-					
-					log.info("Producing resource from " + url);
-					resource = produceResource(url);
-					resourceUrl = url.toString();
+					String modelMetaDataLocation = FilenameUtils.removeExtension(modelLocation)+".properties";
+					URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
+					resourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(modelMetaDataUrl));
 				}
+				catch (FileNotFoundException e) {
+					// If no metadata was found, just leave the properties empty.
+				}
+				
+				log.info("Producing resource from " + url);
+				resource = produceResource(url);
+				resourceUrl = url.toString();
 			}
 			success = true;
 		}
@@ -289,8 +278,7 @@ public abstract class ResourceObjectProviderBase<M>
 				String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
 				String modelVersion = pph.replacePlaceholders(props.getProperty(VERSION), props);
 				sb.append("\nPlease make sure that ").append(modelArtifact).append(" version ")
-						.append(modelVersion).append(" is on the classpath. If the version ")
-						.append("shown here is not available, try a recent version.");
+						.append(modelVersion).append(" is on the classpath.");
 			}
 			
 			throw new IOException("Unable to load resource [" + modelLocation + "]: "

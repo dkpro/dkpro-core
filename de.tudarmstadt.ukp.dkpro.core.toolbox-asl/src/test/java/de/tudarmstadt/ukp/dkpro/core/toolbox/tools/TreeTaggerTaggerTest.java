@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
+import org.junit.Assume;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
@@ -33,6 +34,8 @@ public class TreeTaggerTaggerTest
     public void treeTaggerAnnotatorEnglishTest()
         throws Exception
     {
+    	checkModelsAndBinary("en");
+    	
         runTest("en", "This is a test .",
                 new TaggedToken[] {
                     new TaggedToken(
@@ -79,4 +82,14 @@ public class TreeTaggerTaggerTest
             i++;
         }
     }
+    
+	private void checkModelsAndBinary(String lang)
+	{
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
+						+ "-little-endian.par") != null);
+
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
+	}
 }

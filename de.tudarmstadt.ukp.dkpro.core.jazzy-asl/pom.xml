@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.5.0-SNAPSHOT</version>
+		<version>1.4.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</artifactId>
 	<name>DKPro Core ASL - Jazzy (LGPL)</name>
@@ -31,7 +31,7 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>jazzy</groupId>
+			<groupId>net.sf.jazzy</groupId>
 			<artifactId>jazzy-core</artifactId>
 			<version>0.5.2</version>
 		</dependency>

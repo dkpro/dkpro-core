@@ -278,9 +278,4 @@ public class FrequencyDistribution<T>
         }
         n = samples;
     }
-    
-    public void clear() {
-        freqDist.clear();
-        n = 0;
-    }
 }

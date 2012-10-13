@@ -28,6 +28,7 @@ import java.util.Collection;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,6 +46,7 @@ class SegmenterCompatibilityTest
 
 	@Test
 	public void segmenterCompatibilityTest() throws Exception {
+    	checkModelsAndBinary("en");
 	
 	    AnalysisEngineDescription desc = createAggregateDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
@@ -67,5 +69,15 @@ class SegmenterCompatibilityTest
             assertEquals("In position "+i, expected[i], lemmaAnnotation.getValue());
             i++;
         }
+	}
+	
+	private void checkModelsAndBinary(String lang)
+	{
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
+						+ "-little-endian.par") != null);
+
+		Assume.assumeTrue(getClass().getResource(
+				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
 	}
 }
