@@ -1,3 +1,5 @@
+de.tudarmstadt.ukp.dkpro.core.api.anomaly
+de.tudarmstadt.ukp.dkpro.core.api.coref
 de.tudarmstadt.ukp.dkpro.core.api.featurepath
 de.tudarmstadt.ukp.dkpro.core.api.frequency
 de.tudarmstadt.ukp.dkpro.core.api.frequency.provider
