@@ -4,7 +4,7 @@
 <HEAD>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <TITLE>
-Overview (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
+Overview (DKPro Core GPL 1.4.0 API)
 </TITLE>
 
 
@@ -14,7 +14,7 @@ Overview (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)
 function windowTitle()
 {
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Overview (de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API)";
+        parent.document.title="Overview (DKPro Core GPL 1.4.0 API)";
     }
 }
 </SCRIPT>
@@ -80,14 +80,22 @@ function windowTitle()
 <HR>
 <CENTER>
 <H1>
-de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API
+DKPro Core GPL 1.4.0 API
 </H1>
 </CENTER>
 
 <TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
 <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
 <TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Analysis Components</B></FONT></TH>
+<B>Other Packages</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="20%"><B><A HREF="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/package-summary.html">de.tudarmstadt.ukp.dkpro.core.berkeleyparser</A></B></TD>
+<TD>Integration of the <a href="http://code.google.com/p/berkeleyparser/">Berkeley Parser</a>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="20%"><B><A HREF="de/tudarmstadt/ukp/dkpro/core/gate/package-summary.html">de.tudarmstadt.ukp.dkpro.core.gate</A></B></TD>
+<TD>Integration of NLP components from <a href="http://gate.ac.uk">GATE</a>.</TD>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="20%"><B><A HREF="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/package-summary.html">de.tudarmstadt.ukp.dkpro.core.stanfordnlp</A></B></TD>
@@ -96,7 +104,11 @@ de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD WIDTH="20%"><B><A HREF="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/package-summary.html">de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util</A></B></TD>
-<TD>&nbsp;</TD>
+<TD>Utility classes shared between different components.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="20%"><B><A HREF="edu/stanford/nlp/parser/lexparser/package-summary.html">edu.stanford.nlp.parser.lexparser</A></B></TD>
+<TD>Classes from the Stanford parser distribution which are not included in the Core NLP distribution.</TD>
 </TR>
 </TABLE>
 
@@ -155,6 +167,6 @@ de.tudarmstadt.ukp.dkpro.core-gpl 1.1.0-SNAPSHOT API
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 
 <HR>
-Copyright &#169; 2011. All Rights Reserved.
+Copyright &#169; 2011-2012. All Rights Reserved.
 </BODY>
 </HTML>

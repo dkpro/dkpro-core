@@ -1,2 +1,5 @@
+de.tudarmstadt.ukp.dkpro.core.berkeleyparser
+de.tudarmstadt.ukp.dkpro.core.gate
 de.tudarmstadt.ukp.dkpro.core.stanfordnlp
 de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util
+edu.stanford.nlp.parser.lexparser
