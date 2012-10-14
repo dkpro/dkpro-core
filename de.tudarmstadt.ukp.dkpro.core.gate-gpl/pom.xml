@@ -30,4 +30,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core GPL - GATE</name>
 </project>

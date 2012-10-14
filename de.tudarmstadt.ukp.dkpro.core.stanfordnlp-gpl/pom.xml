@@ -19,7 +19,7 @@
 		<version>1.4.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
-	<name>DKPro Core GPL - Stanford NPL Tools</name>
+	<name>DKPro Core GPL - Stanford CoreNLP Suite</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
