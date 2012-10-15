@@ -14,6 +14,7 @@ import static org.uimafit.util.JCasUtil.selectCovered;
 import is2.data.SentenceData09;
 import is2.parser.Parser;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
@@ -109,7 +110,7 @@ public class MateParser extends JCasAnnotator_ImplBase {
             @Override
             protected Parser produceResource(URL aUrl) throws IOException
             {
-                java.io.File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+                File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
                 
                 String[] args = {"-model", modelFile.getPath()};
                 is2.parser.Options option = new is2.parser.Options(args);
