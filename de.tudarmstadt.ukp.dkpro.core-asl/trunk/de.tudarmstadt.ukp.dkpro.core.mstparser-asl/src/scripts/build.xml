@@ -1,0 +1,26 @@
+<project basedir="../.." default="separate-jars">
+	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/mstparser"/>
+	
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="separate-jars" depends="en"/>
+
+	<target name="en">
+		<mkdir dir="target/download"/>
+
+    	<get src="http://dkpro-core-asl.googlecode.com/files/mstparser-0.5.0-20121019-en.model" dest="target/download/mstparser-0.5.0-20121019-en.model" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mstparser"
+    		file="target/download/mstparser-0.5.0-20121019-en.model" md5="faa3b061186df15d1e3ec12bb78ee9df" 
+    		  language="en" tool="parser" variant="default" extension="bin" version="20121910.0">		
+		</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+
+</project>

@@ -38,5 +38,43 @@
             de.tudarmstadt.ukp.dkpro.core.testing-asl
         </artifactId>
     </dependency>
+    <dependency>
+    	<groupId>mstparser</groupId>
+    	<artifactId>mstparser</artifactId>
+    	<version>0.5.0</version>
+    </dependency>
+    <dependency>
+        <groupId>trove</groupId>
+        <artifactId>trove</artifactId>
+        <version>1.1-beta-5</version>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    	<artifactId>
+    		de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-default
+    	</artifactId>
+    	<version>20121910.0</version>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    	<artifactId>
+    		de.tudarmstadt.ukp.dkpro.core.opennlp-asl
+    	</artifactId>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    	<artifactId>
+    		de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent
+    	</artifactId>
+    	<version>20120616.0</version>
+    	<scope>test</scope>
+    </dependency>
   </dependencies>
 </project>
