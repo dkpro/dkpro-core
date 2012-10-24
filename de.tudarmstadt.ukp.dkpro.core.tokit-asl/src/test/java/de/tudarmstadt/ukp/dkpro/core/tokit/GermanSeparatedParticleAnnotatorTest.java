@@ -22,6 +22,7 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -29,11 +30,14 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+import org.uimafit.testing.factory.TokenBuilder;
+import org.uimafit.util.JCasUtil;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 
 
@@ -44,39 +48,69 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 public class GermanSeparatedParticleAnnotatorTest
 {
 	
+
+	
 	@Test
 	public void testGermanSeparatedParticles()
 		throws Exception
 	{
-        runTest("de", "Wir schlagen ein Treffen nächste Woche vor .",
-        		new String[] { "wir", "vorschlagen", "eine", "Treffen", "nah", "Woche", "vor", "."    });
+        runTest("de", "Wir schlagen ein Treffen vor .",
+        		new String[] { "wir", "schlagen", "eine", "Treffen", "vor", "."    },
+        		new String[] { "PPER", "VVFIN", "ART", "NN", "PTKVZ", "$."    },
+        		new String[] { "wir", "vorschlagen", "eine", "Treffen", "vor", "."    });
  
-        runTest("de", "Wir können gleich anfangen .",
-        		new String[] { "wir", "können", "gleich", "anfangen", "."    });
 
         runTest("de", "Fangen wir jetzt an ?",
-        		new String[] { "anfangen", "wir", "jetzt", "an", "?"    });
+        		new String[] { "fangen", "wir", "jetzt", "an", "?"    },
+				new String[] { "VVFIN", "PPER", "ADV", "PTKVZ", "$."    },
+				new String[] { "anfangen", "wir", "jetzt", "an", "?"    });
+
         
 	}
 
-	private void runTest(String language, String testDocument, String[] lemmatizedDocument)
-		throws Exception
+	private void runTest(String language, String testDocument, String[] documentTreeTaggerLemmas,
+			String[] documentPosTags, String[] lemmatizedDocument) throws UIMAException
 	{
-		
+
 		AnalysisEngineDescription processor = createAggregateDescription(
-				
-				createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
-						TreeTaggerPosLemmaTT4J.PARAM_LANGUAGE_CODE, "de"),
-						
+										
 				createPrimitiveDescription(GermanSeparatedParticleAnnotator.class)
 		);
-			
+		
 		AnalysisEngine engine = createPrimitive(processor);
+		JCas aJCas = engine.newJCas();
+		aJCas.setDocumentLanguage(language);		
+		
+		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+				Sentence.class);
+		tb.buildTokens(aJCas, testDocument);
+		
+		
+		int offset = 0;
+		for (Token token : JCasUtil.select(aJCas, Token.class)) {
+			POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+			pos.setPosValue(documentPosTags[offset]);
+			pos.addToIndexes();
 
-		JCas jcas = TestRunner.runTest(engine, language, testDocument);
+			token.setPos(pos);
+			
+			Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
+			lemma.setValue(documentTreeTaggerLemmas[offset]);
+			lemma.addToIndexes();
+			
+			token.setLemma(lemma);
 
-		AssertAnnotations.assertLemma(lemmatizedDocument, select(jcas, Lemma.class));
+			
+			offset++;
+		}
+		engine.process(aJCas);
+		
+		AssertAnnotations.assertLemma(lemmatizedDocument, select(aJCas, Lemma.class));
+
+		
+		
 	}
+
 
 	@Rule
 	public TestName name = new TestName();
