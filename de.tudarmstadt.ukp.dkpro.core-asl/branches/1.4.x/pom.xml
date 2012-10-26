@@ -22,15 +22,6 @@
 	<prerequisites>
 		<maven>2.2.1</maven>
 	</prerequisites>
-	<repositories>
-		<repository>
-			<id>ukp-oss-model-releases</id>
-			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
