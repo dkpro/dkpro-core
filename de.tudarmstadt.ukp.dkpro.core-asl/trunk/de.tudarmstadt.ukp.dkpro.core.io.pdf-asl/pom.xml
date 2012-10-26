@@ -46,14 +46,9 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.annolab</groupId>
-			<artifactId>org.annolab.core.util</artifactId>
-			<version>0.5.2</version>
-		</dependency>
-		<dependency>
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
-			<version>1.6.0</version>
+			<version>1.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
