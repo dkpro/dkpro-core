@@ -25,11 +25,11 @@
 	<packaging>pom</packaging>
 	<repositories>
 		<repository>
+			<id>ukp-oss-releases</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<id>ukp-oss</id>
-			<url>http://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/repo/</url>
 		</repository>
 	</repositories>
 	<distributionManagement>
@@ -47,6 +47,11 @@
 		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
 		<url>http://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
 	</scm>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -68,11 +73,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
@@ -87,7 +87,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.frequency-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
