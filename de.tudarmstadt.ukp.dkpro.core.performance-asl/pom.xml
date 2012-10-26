@@ -22,7 +22,17 @@
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<version>1.4.1-SNAPSHOT</version>
 	</parent>
+	<name>DKPro Core ASL - Performance Measurement Support</name>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.performance-asl</artifactId>
+	<repositories>
+		<repository>
+			<id>ukp-oss-model-releases</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -74,5 +84,4 @@
 			</dependencies>
 		</profile>
 	</profiles>
-	<name>DKPro Core ASL - Performance Measurement Support</name>
 </project>
