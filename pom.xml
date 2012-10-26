@@ -17,47 +17,42 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-	<version>1.5.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>2</version>
+		<version>3</version>
 	</parent>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+	<version>1.5.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>DKPro Core ASL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<url>http://code.google.com/p/dkpro-core-asl/</url>
+	<prerequisites>
+		<maven>2.2.1</maven>
+	</prerequisites>
 	<repositories>
 		<repository>
-			<id>ukp-oss</id>
-			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
+			<id>ukp-oss-model-releases</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
-	<distributionManagement>
-		<repository>
-			<id>ukp-oss</id>
-			<url>dav:https://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
-		</repository>
-	</distributionManagement>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
+		<connection>scm:svn:http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk</connection>
 		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
 		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.target>1.6</java.target>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -392,9 +387,9 @@
 				<version>1.8.1</version>
 			</dependency>
 			<dependency>
-				<groupId>trove</groupId>
-				<artifactId>trove</artifactId>
-				<version>2.0.4</version>
+				<groupId>net.sf.trove4j</groupId>
+				<artifactId>trove4j</artifactId>
+				<version>3.0.1</version>
 			</dependency>
 			<dependency>
 				<groupId>jaxen</groupId>

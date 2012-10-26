@@ -37,7 +37,6 @@
 		<dependency>
 			<groupId>net.sf.trove4j</groupId>
 			<artifactId>trove4j</artifactId>
-			<version>3.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
