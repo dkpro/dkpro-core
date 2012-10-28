@@ -24,15 +24,6 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
 	<name>DKPro Core ASL - IO - WEB1T (ASL)</name>
-	<repositories>
-		<repository>
-			<id>ukp-oss-model-releases</id>
-			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.uimafit</groupId>
