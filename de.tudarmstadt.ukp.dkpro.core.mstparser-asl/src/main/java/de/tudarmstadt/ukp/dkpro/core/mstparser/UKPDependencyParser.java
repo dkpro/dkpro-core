@@ -28,7 +28,7 @@ import mstparser.DependencyPipe;
 import mstparser.ParserOptions;
 
 public class UKPDependencyParser
-    extends DependencyParser
+extends DependencyParser
 {
 
     public UKPDependencyParser(DependencyPipe pipe, ParserOptions options)
@@ -40,11 +40,10 @@ public class UKPDependencyParser
 
         return getParseTrees(false);
     }
-    
+
     private List<DependencyInstance> getParseTrees(boolean printParses) throws IOException {
 
         String tFile = options.testfile;
-        //String file = options.outfile;
         List <DependencyInstance> allInstances = new ArrayList<DependencyInstance>();
         ConfidenceEstimator confEstimator = null;
         if (options.confidenceEstimator != null){
@@ -55,10 +54,8 @@ public class UKPDependencyParser
                     options.confidenceEstimator);
         }
 
-        long start = System.currentTimeMillis();
 
         pipe.initInputFile(tFile);
-        //pipe.initOutputFile(file);
 
         DependencyInstance instance = pipe.nextInstance();
 
@@ -66,7 +63,6 @@ public class UKPDependencyParser
 
         while(instance != null) {
             cnt++;
-            System.out.print(cnt+" ");
             String[] forms = instance.forms;
             String[] formsNoRoot = new String[forms.length-1];
             String[] posNoRoot = new String[formsNoRoot.length];
@@ -92,21 +88,11 @@ public class UKPDependencyParser
             }
             allInstances.add(parsedInstance);
 
-            //String line1 = ""; String line2 = ""; String line3 = ""; String line4 = "";
-            //for(int j = 1; j < pos.length; j++) {
-            //  String[] trip = res[j-1].split("[\\|:]");
-            //  line1+= sent[j] + "\t"; line2 += pos[j] + "\t";
-            //  line4 += trip[0] + "\t"; line3 += pipe.types[Integer.parseInt(trip[2])] + "\t";
-            //}
-            //pred.write(line1.trim() + "\n" + line2.trim() + "\n"
-            //         + (pipe.labeled ? line3.trim() + "\n" : "")
-            //         + line4.trim() + "\n\n");
 
             instance = pipe.nextInstance();
         }
         pipe.close();
-        long end = System.currentTimeMillis();
-        System.out.println("Took: " + (end-start));
+
         return allInstances;
 
     }
