@@ -17,12 +17,16 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
+import static org.uimafit.util.JCasUtil.select;
+import static org.uimafit.util.JCasUtil.selectCovered;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import mstparser.DependencyInstance;
@@ -30,14 +34,16 @@ import mstparser.DependencyPipe;
 import mstparser.DependencyPipe2O;
 import mstparser.ParserOptions;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasConsumer_ImplBase;
-import org.uimafit.util.JCasUtil;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -47,25 +53,29 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
  * Wrapper for the MSTParser.
- * More information about the parser can be found here:<br>
- * http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html<br>
+ * More information about the parser can be found <a href=http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html>here<\a><br>
  * and<br>
- * http://sourceforge.net/projects/mstparser/<br>
- *  * 
- * @author beinborn, zesch
+ * http:and <a href=//sourceforge.net/projects/mstparser/>here<\a><br>
+ *  *
+ * @author beinborn
+ * @author zesch
  *
  */
 
 public class MSTParser
-    extends JCasConsumer_ImplBase
+extends JCasConsumer_ImplBase
 {
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    protected boolean printTagSet;
+
     private CasConfigurableProviderBase<UKPDependencyParser> modelProvider;
 
     /**
-     * Processes the given text using the MSTParser.
-     * As the MSTParser expects an input file, a temporary file is created.
-     * @param jcas
-     * @throws AnalysisEngingeProcessException
+     * Initializes the MSTParser and creates a ModelResourceProvicer
+     * 
+     * @param jcas The JCas containing the textual input
+     * @throws ResourceInitializationException Cannot be initialized
      */
     @Override
     public void initialize(UimaContext context)
@@ -86,151 +96,165 @@ public class MSTParser
                         "parser-${language}-${variant}.bin");
 
             }
-            
+
             @Override
             protected UKPDependencyParser produceResource(URL aUrl) throws IOException
             {
                 // mst.ParserOptions needs a String as argument
-                String[] dummy = { "" };
-                ParserOptions options = new ParserOptions(dummy);
+                ParserOptions options = new ParserOptions(new String[]{});
                 options.test = true;
                 options.train = false;
                 options.trainfile = "";
                 options.eval = false;
                 options.format = "MST";
                 options.goldfile = "";
-                System.out.println("retrieve model file");
+                options.testfile = "";
+                getLogger().info("Retrieving model");
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl,true);
                 options.modelName = modelFile.getAbsolutePath();
-                System.out.println(options.modelName);
+
                 DependencyPipe pipe = options.secondOrder ? new DependencyPipe2O(options) : new DependencyPipe(options);
 
                 UKPDependencyParser dp = new UKPDependencyParser(pipe, options);
                 getLogger().info("Loading model:  " + options.modelName);
                 try {
                     dp.loadModel(options.modelName);
+                    getLogger().info("... done.");
+
+                    if (printTagSet){
+                        getLogger().info(Arrays.toString(pipe.typeAlphabet.toArray()));
+                    }
                 }
                 catch (Exception e) {
                     throw new IOException(e);
                 }
-                getLogger().info("... done.");
-                pipe.closeAlphabets();
+                finally{
+                    pipe.closeAlphabets();
+                }
+
+
                 return dp;
 
             };
         };
-    }
-
+            }
+    /**
+     * Processes the given text using the MSTParser.
+     * As the MSTParser expects an input file, a temporary file is created.
+     * @param jcas The JCas containing the textual input
+     * @throws AnalysisEngineProcessException No parse created
+     */
     @Override
     public void process(JCas jcas)
-        throws AnalysisEngineProcessException
-    {
-        try {
-            modelProvider.configure(jcas.getCas());
-            System.out.println("modelprovider configured");
-            
-            // currently the parser needs a file as input, it cannot yet work directly with the cas-structure
+            throws AnalysisEngineProcessException
+            {
+        modelProvider.configure(jcas.getCas());
+        UKPDependencyParser dp = modelProvider.getResource();
+
+        // currently the parser needs a file as input, it cannot yet work directly with the cas-structure
+        try{
             String tempfile = generateTempInputFile(jcas);
-            System.out.println("tempfile generated");
-     
-            UKPDependencyParser dp = modelProvider.getResource();
-            System.out.println("parser retrieved");
-            
             dp.options.testfile = tempfile;
+        }
+        catch (IOException e){
+            getLogger().info("Temporary file could not be created");
+            throw new AnalysisEngineProcessException();
+        }
 
-            //Run the parser
-            //dp.getParses() is a method that we added to the MSTParser codebase, it returns a list of parses.
-            //Originally this was dp.outputParses() and the method wrote the parses into a file.
-            //The old method is still available.
-            List<DependencyInstance> parsedInstances = dp.getParses();
-            List<Sentence> sentences = new ArrayList<Sentence>(JCasUtil.select(jcas, Sentence.class));
 
-            for (int instanceIndex = 0; instanceIndex < parsedInstances.size(); instanceIndex++) {
 
-                DependencyInstance instance = parsedInstances.get(instanceIndex);
-                Sentence sentence = sentences.get(instanceIndex);
+        //Run the parser
+        //dp.getParses() is a method that we added to the MSTParser codebase, it returns a list of parses.
+        //Originally this was dp.outputParses() and the method wrote the parses into a file.
+        //The old method is still available.
+        List<DependencyInstance> parsedInstances;
+        try {
+            parsedInstances = dp.getParses();
+        }
+        catch (IOException e) {
+            getLogger().info("Parsing failed");
+            throw new AnalysisEngineProcessException();
+        }
 
-                List<Token> tokens = new ArrayList<Token>(JCasUtil.selectCovered(jcas, Token.class, sentence));
+        List<Sentence> sentences = new ArrayList<Sentence>(select(jcas, Sentence.class));
 
-                // iterate through tokens
-                for (int formsIndex = 0; formsIndex < instance.forms.length; formsIndex++) {
-                    Token token = tokens.get(formsIndex);
+        for (int instanceIndex = 0; instanceIndex < parsedInstances.size(); instanceIndex++) {
 
-                    // get dependency relation and head information for token
-                    String depRel = instance.deprels[formsIndex];
-                    int head = instance.heads[formsIndex];
+            DependencyInstance instance = parsedInstances.get(instanceIndex);
+            Sentence sentence = sentences.get(instanceIndex);
 
-                    // write dependency information as annotation to JCas
-                    Dependency depAnnotation = new Dependency(jcas, token.getBegin(), token.getEnd());
-                    depAnnotation.setDependencyType(depRel);
+            List<Token> tokens = new ArrayList<Token>(selectCovered(jcas, Token.class, sentence));
 
-                    // the dependent is the token itself
-                    depAnnotation.setDependent(token);
-                    if (head > 0) {
-                        depAnnotation.setGovernor(tokens.get(head - 1));
-                    }
-                    // the root is its own head
-                    else {
-                        depAnnotation.setGovernor(token);
-                    }
-                    depAnnotation.addToIndexes();
+            // iterate through tokens
+            for (int formsIndex = 0; formsIndex < instance.forms.length; formsIndex++) {
+                Token token = tokens.get(formsIndex);
+
+                // get dependency relation and head information for token
+                String depRel = instance.deprels[formsIndex];
+                int head = instance.heads[formsIndex];
+
+                // write dependency information as annotation to JCas
+                Dependency depAnnotation = new Dependency(jcas, token.getBegin(), token.getEnd());
+                depAnnotation.setDependencyType(depRel);
+
+                // the dependent is the token itself
+                depAnnotation.setDependent(token);
+                if (head > 0) {
+                    depAnnotation.setGovernor(tokens.get(head - 1));
                 }
-
+                // the root is its own head
+                else {
+                    depAnnotation.setGovernor(token);
+                }
+                depAnnotation.addToIndexes();
             }
+
         }
-        catch (Exception e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-    }
+            }
+
 
     /**
      * Generates a temporary file from a jcas.
      * This is needed as input to the MST parser.
-     * @param jcas
+     * @param jcas The JCas containing the textual input
      * @return The path to the created temporary file.
-     * @throws IOException
+     * @throws IOException The temporary file could not be created
      */
     private String generateTempInputFile(JCas jcas)
-        throws IOException
-    {
-        
-        String LF = System.getProperty("line.separator");
+            throws IOException
+            {
         File tempfile = File.createTempFile("MSTinput", "txt");
         BufferedWriter out = new BufferedWriter(new FileWriter(tempfile, true));
 
         // write sentences to temporary file in MST input format
-        for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
-            StringBuilder sb = new StringBuilder();
+        for (Sentence sentence : select(jcas, Sentence.class)) {
             int tokencount = 0;
-            sb.append("");
 
-            for (Token token : JCasUtil.selectCovered(jcas, Token.class, sentence)) {
-                sb.append(token.getCoveredText() + "\t");
+            for (Token token : selectCovered(jcas, Token.class, sentence)) {
+                out.write(token.getCoveredText() + "\t");
                 tokencount++;
             }
-            sb.append(LF);
-            for (POS pos : JCasUtil.selectCovered(jcas, POS.class, sentence)) {
-                sb.append(pos.getPosValue() + "\t");
+            out.write("\n");
+            for (POS pos : selectCovered(jcas, POS.class, sentence)) {
+                out.write(pos.getPosValue() + "\t");
 
             }
             // Dummy values for labels
-            sb.append(LF);
+            out.write("\n");
             for (int k = 0; k < tokencount; k++) {
-                sb.append("Dummy\t");
+                out.write("Dummy\t");
             }
             // Dummy values for heads
-            sb.append(LF);
+            out.write("\n");
             for (int i = 0; i < tokencount; i++) {
-                sb.append("0\t");
+                out.write("0\t");
             }
 
-            sb.append(LF);
-            sb.append(LF);
-            out.write(sb.toString());
+            out.write("\n\n");
         }
 
-        out.close();
-
-        return tempfile.getCanonicalPath();
-    }
+        IOUtils.closeQuietly(out);
+        tempfile.deleteOnExit();
+        return tempfile.getPath();
+            }
 }
