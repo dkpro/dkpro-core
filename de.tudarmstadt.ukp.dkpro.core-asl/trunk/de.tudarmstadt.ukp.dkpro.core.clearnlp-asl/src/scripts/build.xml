@@ -1,0 +1,114 @@
+<!--
+   Copyright 2012
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/clearnlp"/>
+	
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+	</import>
+	
+	<target name="local-maven">
+		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="separate-jars" depends="en"/>
+
+	<target name="en">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: ontonotes-en-pos - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-17 | now        | 856d5a410dfb4cee3f673f67caead481
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/ontonotes-en-pos-1.1.0g.jar" dest="target/download/ontonotes-en-pos.jar" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/ontonotes-en-pos.jar" md5="856d5a410dfb4cee3f673f67caead481"
+    		tool="tagger" language="en" variant="ontonotes" extension="bin" version="20121017.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<!-- FILE: medical-en-pos - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-17 | now        | 21e0958358c50d5aaaa471a4d67f60e4
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/medical-en-pos-1.1.0g.jar" dest="target/download/medical-en-pos.jar" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/medical-en-pos.jar" md5="21e0958358c50d5aaaa471a4d67f60e4"
+    		tool="tagger" language="en" variant="medical" extension="bin" version="20121017.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<!-- FILE: craft-en-pos - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-17 | now        | d199e0e39e651a9f0727399d9ad870ab
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/craft-en-pos-1.1.0g.jar" dest="target/download/craft-en-pos.jar" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/craft-en-pos.jar" md5="d199e0e39e651a9f0727399d9ad870ab"
+    		tool="tagger" language="en" variant="craft" extension="bin" version="20121017.0">		
+			<metadata>
+	    		<entry key="tagger.tagset" value="ptb"/>
+			</metadata>
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<!-- FILE: ontonotes-en-dep - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-17 | now        | 240c6620d9c9ed881685bf33d4aa0d2f
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/ontonotes-en-dep-1.1.0b3.jar" dest="target/download/ontonotes-en-dep.jar" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/ontonotes-en-dep.jar" md5="240c6620d9c9ed881685bf33d4aa0d2f"
+    		tool="parser" language="en" variant="ontonotes" extension="bin" version="20121017.0">		
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<!-- FILE: medical-en-dep - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-17 | now        | 1287b36b6bc31facbc74a036f5ef6ac8
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/medical-en-dep-1.1.0b3.jar" dest="target/download/medical-en-dep.jar" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/medical-en-dep.jar" md5="1287b36b6bc31facbc74a036f5ef6ac8"
+    		tool="parser" language="en" variant="medical" extension="bin" version="20121017.0">		
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<!-- FILE: craft-en-dep - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-17 | now        | 7a7656e1c837cebe7839377db1643edf
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/craft-en-dep-1.1.0b1.jar" dest="target/download/craft-en-dep.jar" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/craft-en-dep.jar" md5="7a7656e1c837cebe7839377db1643edf"
+    		tool="parser" language="en" variant="craft" extension="bin" version="20121017.0">		
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+
+		<!-- FILE: dictionary-en - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-31 | now        | d2c3e23ae3603d7f73fb7229ae60e33d
+		  -->
+    	<get src="http://cdn.bitbucket.org/jdchoi77/models/downloads/dictionary-1.2.0.zip" dest="target/download/dictionary.zip" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+    		file="target/download/dictionary.zip" md5="d2c3e23ae3603d7f73fb7229ae60e33d"
+    		tool="morph" language="en" variant="default" extension="bin" version="20121031.0">		
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+	</target>
+</project>
