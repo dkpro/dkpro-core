@@ -129,7 +129,7 @@ public class OpenNlpParser
 				
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
 						"parser-${language}-${variant}.bin");
-				setDefault(VARIANT, "maxent");
+				setDefault(VARIANT, "chunking");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
