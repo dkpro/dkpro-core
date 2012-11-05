@@ -39,10 +39,9 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 /**
- * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
+ * Tokenizer and sentence splitter using OpenNLP.
  * 
  * @author Richard Eckart de Castilho
  */
