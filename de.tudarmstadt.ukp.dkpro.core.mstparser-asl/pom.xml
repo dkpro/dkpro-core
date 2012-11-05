@@ -70,4 +70,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - MSTParser</name>
 </project>

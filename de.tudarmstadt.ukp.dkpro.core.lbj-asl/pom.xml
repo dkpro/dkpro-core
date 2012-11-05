@@ -49,4 +49,5 @@
   		</artifactId>
   	</dependency>
   </dependencies>
+  <name>DKPro Core ASL - Learning-based Java</name>
 </project>
