@@ -56,7 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
+ * Clear parser annotator. 
  * 
  * @author Richard Eckart de Castilho
  */
