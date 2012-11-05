@@ -22,6 +22,7 @@ import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +38,8 @@ public class ClearNlpPosTaggerTest
 	public void testEnglish()
 		throws Exception
 	{
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
+		
         runTest("en", null, "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
@@ -103,6 +106,10 @@ public class ClearNlpPosTaggerTest
 	@Before
 	public void printSeparator()
 	{
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
 }
