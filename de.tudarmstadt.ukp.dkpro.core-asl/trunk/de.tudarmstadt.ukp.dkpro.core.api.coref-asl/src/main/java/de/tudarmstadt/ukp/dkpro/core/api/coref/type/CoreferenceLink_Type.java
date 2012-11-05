@@ -30,7 +30,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sun Nov 20 19:36:17 CET 2011
+ * Updated by JCasGen Sat Nov 03 19:52:11 CET 2012
  * @generated */
 public class CoreferenceLink_Type extends Annotation_Type {
   /** @generated */
@@ -92,6 +92,24 @@ public class CoreferenceLink_Type extends Annotation_Type {
     ll_cas.ll_setStringValue(addr, casFeatCode_referenceType, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_referenceRelation;
+  /** @generated */
+  final int     casFeatCode_referenceRelation;
+  /** @generated */ 
+  public String getReferenceRelation(int addr) {
+        if (featOkTst && casFeat_referenceRelation == null)
+      jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_referenceRelation);
+  }
+  /** @generated */    
+  public void setReferenceRelation(int addr, String v) {
+        if (featOkTst && casFeat_referenceRelation == null)
+      jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
+    ll_cas.ll_setStringValue(addr, casFeatCode_referenceRelation, v);}
+    
+  
 
 
 
@@ -108,6 +126,10 @@ public class CoreferenceLink_Type extends Annotation_Type {
  
     casFeat_referenceType = jcas.getRequiredFeatureDE(casType, "referenceType", "uima.cas.String", featOkTst);
     casFeatCode_referenceType  = (null == casFeat_referenceType) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_referenceType).getCode();
+
+ 
+    casFeat_referenceRelation = jcas.getRequiredFeatureDE(casType, "referenceRelation", "uima.cas.String", featOkTst);
+    casFeatCode_referenceRelation  = (null == casFeat_referenceRelation) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_referenceRelation).getCode();
 
   }
 }

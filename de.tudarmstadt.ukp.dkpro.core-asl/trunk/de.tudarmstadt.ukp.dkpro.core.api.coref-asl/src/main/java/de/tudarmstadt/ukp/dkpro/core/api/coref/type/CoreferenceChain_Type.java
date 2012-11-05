@@ -30,7 +30,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.AnnotationBase_Type;
 
 /** 
- * Updated by JCasGen Sun Nov 20 19:36:17 CET 2011
+ * Updated by JCasGen Sat Nov 03 19:52:11 CET 2012
  * @generated */
 public class CoreferenceChain_Type extends AnnotationBase_Type {
   /** @generated */

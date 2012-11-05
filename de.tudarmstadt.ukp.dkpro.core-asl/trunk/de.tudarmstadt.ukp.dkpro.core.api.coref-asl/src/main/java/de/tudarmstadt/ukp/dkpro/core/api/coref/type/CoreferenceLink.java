@@ -26,8 +26,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sun Nov 20 19:36:17 CET 2011
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-indigo/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.coref/src/main/resources/desc/type/coref.xml
+ * Updated by JCasGen Sat Nov 03 19:52:11 CET 2012
+ * XML source: /home/likewise-open/UKP/yimam/dkproworkspace/de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/resources/desc/type/coref.xml
  * @generated */
 public class CoreferenceLink extends Annotation {
   /** @generated
@@ -43,7 +43,7 @@ public class CoreferenceLink extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected CoreferenceLink() {}
+  protected CoreferenceLink() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated */
@@ -108,6 +108,24 @@ public class CoreferenceLink extends Annotation {
     if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceType == null)
       jcasType.jcas.throwFeatMissing("referenceType", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
     jcasType.ll_cas.ll_setStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceType, v);}    
+   
+    
+  //*--------------*
+  //* Feature: referenceRelation
+
+  /** getter for referenceRelation - gets 
+   * @generated */
+  public String getReferenceRelation() {
+    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceRelation == null)
+      jcasType.jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceRelation);}
+    
+  /** setter for referenceRelation - sets  
+   * @generated */
+  public void setReferenceRelation(String v) {
+    if (CoreferenceLink_Type.featOkTst && ((CoreferenceLink_Type)jcasType).casFeat_referenceRelation == null)
+      jcasType.jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
+    jcasType.ll_cas.ll_setStringValue(addr, ((CoreferenceLink_Type)jcasType).casFeatCode_referenceRelation, v);}    
   }
 
     
