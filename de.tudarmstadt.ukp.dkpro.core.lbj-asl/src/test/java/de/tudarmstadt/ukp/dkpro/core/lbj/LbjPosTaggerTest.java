@@ -31,7 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class IllinoisPosTaggerTest
+public class LbjPosTaggerTest
 {
     @Test
     public void testEnglish()
@@ -54,7 +54,7 @@ public class IllinoisPosTaggerTest
             String[] tagClasses)
         throws Exception
     {
-        AnalysisEngine engine = createPrimitive(IllinoisPosTagger.class);
+        AnalysisEngine engine = createPrimitive(LbjPosTagger.class);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
         

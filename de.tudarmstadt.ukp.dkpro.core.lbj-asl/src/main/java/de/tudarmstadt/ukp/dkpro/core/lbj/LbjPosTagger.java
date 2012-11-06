@@ -47,7 +47,7 @@ import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
  * @author zesch
  * @author Richard Eckart de Castilho
  */
-public class IllinoisPosTagger
+public class LbjPosTagger
     extends JCasAnnotator_ImplBase
 {
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
