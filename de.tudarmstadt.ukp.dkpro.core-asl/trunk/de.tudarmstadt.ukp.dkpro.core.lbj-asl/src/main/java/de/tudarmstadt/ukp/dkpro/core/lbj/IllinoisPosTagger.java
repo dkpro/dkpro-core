@@ -17,27 +17,27 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
+import static org.uimafit.util.JCasUtil.select;
+import static org.uimafit.util.JCasUtil.selectCovered;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
-import org.apache.uima.cas.TypeSystem;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.CasAnnotator_ImplBase;
-import org.uimafit.util.JCasUtil;
+import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.ConfigurationParameter;
 
 import LBJ2.nlp.Word;
-import LBJ2.nlp.seg.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
 
 /**
@@ -45,19 +45,19 @@ import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
  * http://cogcomp.cs.illinois.edu/page/software
  *  
  * @author zesch
- *
+ * @author Richard Eckart de Castilho
  */
 public class IllinoisPosTagger
-    extends CasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-
+	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
+	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
+	private boolean internTags;
+	
     private POSTagger tagger;
     
     private MappingProvider mappingProvider;
     
-    private Type tokenType;
-    private Feature featPos;
-
     
     @Override
     public void initialize(UimaContext context)
@@ -69,64 +69,44 @@ public class IllinoisPosTagger
         
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/en-default-tagger.map");
+                "core/api/lexmorph/tagset/en-ptb-tagger.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
     }
     
     @Override
-    public void typeSystemInit(TypeSystem aTypeSystem)
+    public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        super.typeSystemInit(aTypeSystem);
-
-        tokenType = aTypeSystem.getType(de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token.class.getName());
-        featPos = tokenType.getFeatureByBaseName("pos");
-    }
-
-    @Override
-    public void process(CAS cas)
-        throws AnalysisEngineProcessException
-    {
+    	CAS cas = aJCas.getCas();
+    	
         mappingProvider.configure(cas);
 
-        JCas jcas;
-        try {
-            jcas = cas.getJCas();
-        }
-        catch (CASException e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-        
-        for (Sentence s : JCasUtil.select(jcas, Sentence.class)) {
-            List<Word> words = new ArrayList<Word>();
-            for (de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token t : JCasUtil.selectCovered(jcas, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token.class, s)) {
-                words.add(new Word(t.getCoveredText(), t.getBegin(), t.getEnd()));
-            }
-            
-            List<Token> tokens = new ArrayList<Token>();
-
-            Token lastToken = null;
-            for (Word w : words) {
-                Token lbjToken = new Token(w, lastToken, null);
+        for (Sentence s : select(aJCas, Sentence.class)) {
+        	// Get tokens from CAS
+        	List<Token> casTokens = selectCovered(aJCas, Token.class, s);
+        	
+        	// Convert to tagger input
+            List<LBJ2.nlp.seg.Token> tokens = new ArrayList<LBJ2.nlp.seg.Token>();
+            LBJ2.nlp.seg.Token lastToken = null;
+            for (Token t : casTokens) {
+            	Word w = new Word(t.getCoveredText(), t.getBegin(), t.getEnd());
+                LBJ2.nlp.seg.Token lbjToken = new LBJ2.nlp.seg.Token(w, lastToken, null);
                 lastToken = lbjToken;
                 tokens.add(lbjToken);
             }                
             
-            for (Token token : tokens) {
-                int start = token.start;
-                int end = token.end;
+            int i = 0;
+            for (LBJ2.nlp.seg.Token t : tokens) {
+            	// Run tagger
+                String tag = tagger.discreteValue(t);
                 
-                String tag = tagger.discreteValue(token);
-                
-                Type posType = mappingProvider.getTagType(tag);
-                
-                AnnotationFS posAnno = cas.createAnnotation(posType, start, end);
-                posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), tag);
-                cas.addFsToIndexes(posAnno);
-
-                AnnotationFS tokenAnno = cas.createAnnotation(tokenType, start, end);
-                tokenAnno.setFeatureValue(featPos, posAnno);
-                cas.addFsToIndexes(tokenAnno);
+                // Convert tagger output to CAS
+				Type posTag = mappingProvider.getTagType(tag);
+				POS posAnno = (POS) cas.createAnnotation(posTag, t.start, t.end);
+				posAnno.setPosValue(internTags ? tag.intern() : tag);
+				posAnno.addToIndexes();
+				casTokens.get(i).setPos((POS) posAnno);
+				i++;
             }
         }
     }
