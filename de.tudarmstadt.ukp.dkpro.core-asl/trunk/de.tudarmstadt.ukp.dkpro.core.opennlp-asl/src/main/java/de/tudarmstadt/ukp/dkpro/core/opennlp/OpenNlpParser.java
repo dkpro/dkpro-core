@@ -27,7 +27,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import opennlp.model.AbstractModel;
 import opennlp.tools.parser.AbstractBottomUpParser;
@@ -208,10 +210,18 @@ public class OpenNlpParser
 	
 	private void printTags(String aType, AbstractModel aModel)
 	{
-		List<String> tags = new ArrayList<String>();
+		Set<String> tagSet = new HashSet<String>();
 		for (int i = 0; i < aModel.getNumOutcomes(); i++) {
-			tags.add(aModel.getOutcome(i));
+			String t = aModel.getOutcome(i);
+			if (t.startsWith("C-") || t.startsWith("S-")) {
+				tagSet.add(t.substring(2));
+			}
+			else {
+				tagSet.add(t);
+			}
 		}
+		
+		List<String> tags = new ArrayList<String>(tagSet);
 		Collections.sort(tags);
 		
 		StringBuilder sb = new StringBuilder();
