@@ -76,8 +76,8 @@ public class BerkeleyParserTest
 		JCas jcas = runTest("bg", "Имаме нужда от един много сложен пример изречение, " +
 				"което съдържа най-много съставки и зависимости, колкото е възможно.");
 		
-		String[] constituentMapped = new String[] { "PP 12,117", "ROOT 0,118", "S 0,118",
-				"X 0,117", "X 0,5", "X 107,108", "X 107,117", "X 109,117", "X 12,14", "X 15,117",
+		String[] constituentMapped = new String[] { "ROOT 0,118", "X 0,117", "X 0,118", "X 0,5",
+				"X 107,108", "X 107,117", "X 109,117", "X 12,117", "X 12,14", "X 15,117",
 				"X 15,19", "X 15,39", "X 15,49", "X 20,25", "X 20,32", "X 20,39", "X 26,32",
 				"X 33,39", "X 40,49", "X 49,117", "X 51,117", "X 51,56", "X 51,97", "X 57,64",
 				"X 57,97", "X 6,11", "X 6,117", "X 65,74", "X 65,97", "X 75,83", "X 75,97",
@@ -184,8 +184,8 @@ public class BerkeleyParserTest
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
 				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
-		String[] constituentMapped = new String[] { "NP 13,110", "NP 54,99", "ROOT 0,111",
-				"S 0,110", "S 46,110", "X 0,111", "X 17,35", "X 70,99" };
+		String[] constituentMapped = new String[] { "ADJP 17,35", "NP 13,110", "NP 54,99",
+				"ROOT 0,111", "S 0,110", "S 46,110", "X 0,111", "X 70,99" };
 
 		String[] constituentOriginal = new String[] { "AP 17,35", "CNP 70,99", "NP 13,110",
 				"NP 54,99", "PSEUDO 0,111", "ROOT 0,111", "S 0,110", "S 46,110" };
@@ -215,7 +215,7 @@ public class BerkeleyParserTest
 				"possible.");
 		
 		String[] constituentMapped = new String[] { "NP 18,30", "NP 59,62", "NP 72,88",
-				"NP 93,118", "ROOT 0,135", "X 0,135", "X 0,17", "X 122,134", "X 43,57", "X 59,88",
+				"NP 93,118", "ROOT 0,135", "S 0,135", "X 0,17", "X 122,134", "X 43,57", "X 59,88",
 				"X 63,71", "X 89,118" };
 
 		String[] constituentOriginal = new String[] { "AP 43,57", "NP 18,30", "NP 59,62",

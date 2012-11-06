@@ -42,6 +42,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.OperationalProperties;
 import org.uimafit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -66,6 +67,7 @@ import edu.berkeley.nlp.util.Numberer;
  * 
  * @author Richard Eckart de Castilho
  */
+@OperationalProperties(multipleDeploymentAllowed=false)
 public class BerkeleyParser
 	extends JCasAnnotator_ImplBase
 {
@@ -165,7 +167,8 @@ public class BerkeleyParser
 	private boolean binarize;
 
 	private CasConfigurableProviderBase<Parser> modelProvider;
-	private MappingProvider mappingProvider;
+	private MappingProvider posMappingProvider;
+	private MappingProvider constMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -240,15 +243,23 @@ public class BerkeleyParser
 			}
 		};
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
 				+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("tagger.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("tagger.tagset", modelProvider);
-
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		posMappingProvider.addImport("tagger.tagset", modelProvider);
+		
+		constMappingProvider = new MappingProvider();
+		constMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
+				+ "core/api/syntax/tagset/${language}-${constituency.tagset}-constituency.map");
+		constMappingProvider.setDefault(MappingProvider.BASE_TYPE, Constituent.class.getName());
+		constMappingProvider.setDefault("constituency.tagset", "default");
+		constMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		constMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		constMappingProvider.addImport("constituency.tagset", modelProvider);
 	}
 
 	private void printTags(String aType, List<String> aTags)
@@ -272,7 +283,8 @@ public class BerkeleyParser
 		CAS cas = aJCas.getCas();
 
 		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+		posMappingProvider.configure(cas);
+		constMappingProvider.configure(cas);
 
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
@@ -321,7 +333,7 @@ public class BerkeleyParser
 			// only add POS to index if we want POS-tagging
 			if (createPosTags) {
 				String typeName = aNode.getLabel();
-				Type posTag = mappingProvider.getTagType(typeName);
+				Type posTag = posMappingProvider.getTagType(typeName);
 				POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
 						token.getEnd());
 				posAnno.setPosValue(internTags ? typeName.intern() : typeName);
@@ -338,16 +350,9 @@ public class BerkeleyParser
 			String typeName = aNode.getLabel();
 
 			// create the necessary objects and methods
-			String constituentTypeName = CONPACKAGE + typeName;
+			Type constType = constMappingProvider.getTagType(typeName);
 
-			Type type = aJCas.getTypeSystem().getType(constituentTypeName);
-
-			// if type is unknown, map to X-type
-			if (type == null) {
-				type = aJCas.getTypeSystem().getType(CONPACKAGE + "X");
-			}
-
-			Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(type, 0, 0);
+			Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(constType, 0, 0);
 			constAnno.setConstituentType(typeName);
 
 			// link to parent
@@ -379,18 +384,5 @@ public class BerkeleyParser
 
 			return constAnno;
 		}
-	}
-
-	/**
-	 * Given a list of tokens (e.g. those from a sentence) return the one at the specified position.
-	 */
-	private Token getToken(List<Token> aTokens, int aBegin, int aEnd)
-	{
-		for (Token t : aTokens) {
-			if (aBegin == t.getBegin() && aEnd == t.getEnd()) {
-				return t;
-			}
-		}
-		throw new IllegalStateException("Token not found");
 	}
 }
