@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Mon Nov 22 18:16:12 CET 2010 */
+/* First created by JCasGen Tue Nov 06 15:58:03 CET 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent;
 
 import org.apache.uima.jcas.JCas;
@@ -11,10 +11,11 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 
 /** 
- * Updated by JCasGen Mon Nov 22 18:16:12 CET 2010
+ * Updated by JCasGen Tue Nov 06 16:00:55 CET 2012
  * @generated */
 public class WHPP_Type extends Constituent_Type {
   /** @generated */
+  @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
@@ -33,9 +34,11 @@ public class WHPP_Type extends Constituent_Type {
   	  }
     };
   /** @generated */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = WHPP.typeIndexID;
   /** @generated 
      @modifiable */
+  @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.WHPP");
 
 

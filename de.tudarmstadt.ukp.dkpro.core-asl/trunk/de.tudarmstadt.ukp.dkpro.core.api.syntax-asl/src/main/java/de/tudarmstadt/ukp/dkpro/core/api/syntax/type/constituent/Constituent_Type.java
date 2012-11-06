@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Mon Nov 22 18:16:12 CET 2010 */
+/* First created by JCasGen Tue Nov 06 15:58:03 CET 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent;
 
 import org.apache.uima.jcas.JCas;
@@ -14,10 +14,11 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Tue Nov 08 14:39:15 CET 2011
+ * Updated by JCasGen Tue Nov 06 16:00:54 CET 2012
  * @generated */
 public class Constituent_Type extends Annotation_Type {
   /** @generated */
+  @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
@@ -36,9 +37,11 @@ public class Constituent_Type extends Annotation_Type {
   	  }
     };
   /** @generated */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = Constituent.typeIndexID;
   /** @generated 
      @modifiable */
+  @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
  
   /** @generated */
