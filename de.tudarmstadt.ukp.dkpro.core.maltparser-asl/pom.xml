@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>org.maltparser</groupId>
 			<artifactId>maltparser</artifactId>
-			<version>1.7.1</version>
+			<version>1.7.2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -137,7 +137,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-model-parser-sv-linear</artifactId>
-				<version>20120312.0</version>
+				<version>20120925.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
