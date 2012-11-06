@@ -6,4 +6,48 @@
     <version>1.5.0-SNAPSHOT</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.uimafit</groupId>
+  		<artifactId>uimafit</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  	</dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>
+            de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl
+        </artifactId>
+        <version>1.5.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+        <version>1.5.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.semantics</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.semantics.morphology-model-morph-tr-sfst</artifactId>
+        <version>20121025.0</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.semantics</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.semantics.morphology-model-morph-de-sfst</artifactId>
+        <version>02022011.0</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.semantics</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.semantics.morphology-sfst</artifactId>
+        <version>20120111.0</version>
+        <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>
