@@ -60,12 +60,17 @@ public class ClearNlpLemmatizerTest
 		return jcas;
 	}
 	
+
 	@Rule
 	public TestName name = new TestName();
 
 	@Before
 	public void printSeparator()
 	{
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		Runtime.getRuntime().gc();
+		
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
 }
