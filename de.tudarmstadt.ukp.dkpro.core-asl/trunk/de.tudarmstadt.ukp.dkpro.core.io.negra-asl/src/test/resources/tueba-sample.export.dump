@@ -239,12 +239,6 @@ Token
       end: 5
       PosValue: "PPOSAT"
 [Position]
-NN
-   sofa: _InitialView
-   begin: 6
-   end: 14
-   PosValue: "NN"
-[Position]
 Token
    sofa: _InitialView
    begin: 6
@@ -299,6 +293,12 @@ Token
       begin: 6
       end: 14
       PosValue: "NN"
+[Position]
+NN
+   sofa: _InitialView
+   begin: 6
+   end: 14
+   PosValue: "NN"
 [bei der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -524,12 +524,6 @@ ART
    end: 22
    PosValue: "ART"
 [Prüfgesellschaft]
-NN
-   sofa: _InitialView
-   begin: 23
-   end: 39
-   PosValue: "NN"
-[Prüfgesellschaft]
 Token
    sofa: _InitialView
    begin: 23
@@ -591,6 +585,18 @@ Token
       begin: 23
       end: 39
       PosValue: "NN"
+[Prüfgesellschaft]
+NN
+   sofa: _InitialView
+   begin: 23
+   end: 39
+   PosValue: "NN"
+[mußte]
+V
+   sofa: _InitialView
+   begin: 40
+   end: 45
+   PosValue: "VMFIN"
 [mußte]
 Constituent
    sofa: _InitialView
@@ -658,12 +664,6 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "HD"
-[mußte]
-V
-   sofa: _InitialView
-   begin: 40
-   end: 45
-   PosValue: "VMFIN"
 [mußte]
 Token
    sofa: _InitialView
@@ -743,6 +743,12 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [er]
+PR
+   sofa: _InitialView
+   begin: 46
+   end: 48
+   PosValue: "PPER"
+[er]
 Constituent
    sofa: _InitialView
    begin: 46
@@ -779,12 +785,6 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "ON"
-[er]
-PR
-   sofa: _InitialView
-   begin: 46
-   end: 48
-   PosValue: "PPER"
 [er]
 Token
    sofa: _InitialView
@@ -925,6 +925,12 @@ Token
       end: 55
       PosValue: "ADV"
 [niederlegen]
+V
+   sofa: _InitialView
+   begin: 56
+   end: 67
+   PosValue: "VVINF"
+[niederlegen]
 Constituent
    sofa: _InitialView
    begin: 56
@@ -991,12 +997,6 @@ Constituent
       syntacticFunction: "KONJ"
    children: FSArray
    syntacticFunction: "-"
-[niederlegen]
-V
-   sofa: _InitialView
-   begin: 56
-   end: 67
-   PosValue: "VVINF"
 [niederlegen]
 Token
    sofa: _InitialView
@@ -1216,12 +1216,6 @@ ART
    end: 73
    PosValue: "ART"
 [AWO-Posten]
-NN
-   sofa: _InitialView
-   begin: 74
-   end: 84
-   PosValue: "NN"
-[AWO-Posten]
 Token
    sofa: _InitialView
    begin: 74
@@ -1269,6 +1263,18 @@ Token
       begin: 74
       end: 84
       PosValue: "NN"
+[AWO-Posten]
+NN
+   sofa: _InitialView
+   begin: 74
+   end: 84
+   PosValue: "NN"
+[nicht]
+O
+   sofa: _InitialView
+   begin: 85
+   end: 90
+   PosValue: "PTKNEG"
 [nicht]
 Constituent
    sofa: _InitialView
@@ -1336,12 +1342,6 @@ Constituent
       syntacticFunction: "KONJ"
    children: FSArray
    syntacticFunction: "-"
-[nicht]
-O
-   sofa: _InitialView
-   begin: 85
-   end: 90
-   PosValue: "PTKNEG"
 [nicht]
 Token
    sofa: _InitialView
@@ -1470,12 +1470,6 @@ Sentence
    begin: 93
    end: 98
 [K.]
-NP
-   sofa: _InitialView
-   begin: 93
-   end: 95
-   PosValue: "NE"
-[K.]
 Token
    sofa: _InitialView
    begin: 93
@@ -1509,11 +1503,11 @@ Token
       begin: 93
       end: 95
       PosValue: "NE"
-[W.]
+[K.]
 NP
    sofa: _InitialView
-   begin: 96
-   end: 98
+   begin: 93
+   end: 95
    PosValue: "NE"
 [W.]
 Token
@@ -1549,6 +1543,12 @@ Token
       begin: 96
       end: 98
       PosValue: "NE"
+[W.]
+NP
+   sofa: _InitialView
+   begin: 96
+   end: 98
+   PosValue: "NE"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
@@ -1653,12 +1653,6 @@ Constituent
    children: FSArray
    syntacticFunction: "KONJ"
 [SPD]
-NP
-   sofa: _InitialView
-   begin: 0
-   end: 3
-   PosValue: "NE"
-[SPD]
 Token
    sofa: _InitialView
    begin: 0
@@ -1699,6 +1693,12 @@ Token
       begin: 0
       end: 3
       PosValue: "NE"
+[SPD]
+NP
+   sofa: _InitialView
+   begin: 0
+   end: 3
+   PosValue: "NE"
 [/]
 PUNC
    sofa: _InitialView
@@ -1756,12 +1756,6 @@ Constituent
    children: FSArray
    syntacticFunction: "KONJ"
 [CDU]
-NP
-   sofa: _InitialView
-   begin: 6
-   end: 9
-   PosValue: "NE"
-[CDU]
 Token
    sofa: _InitialView
    begin: 6
@@ -1802,6 +1796,12 @@ Token
       begin: 6
       end: 9
       PosValue: "NE"
+[CDU]
+NP
+   sofa: _InitialView
+   begin: 6
+   end: 9
+   PosValue: "NE"
 [/]
 PUNC
    sofa: _InitialView
@@ -1859,12 +1859,6 @@ Constituent
    children: FSArray
    syntacticFunction: "KONJ"
 [AfB]
-NP
-   sofa: _InitialView
-   begin: 12
-   end: 15
-   PosValue: "NE"
-[AfB]
 Token
    sofa: _InitialView
    begin: 12
@@ -1905,6 +1899,12 @@ Token
       begin: 12
       end: 15
       PosValue: "NE"
+[AfB]
+NP
+   sofa: _InitialView
+   begin: 12
+   end: 15
+   PosValue: "NE"
 [für Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -1999,12 +1999,6 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [Daewoo-Millionen]
-NN
-   sofa: _InitialView
-   begin: 20
-   end: 36
-   PosValue: "NN"
-[Daewoo-Millionen]
 Token
    sofa: _InitialView
    begin: 20
@@ -2045,6 +2039,12 @@ Token
       begin: 20
       end: 36
       PosValue: "NN"
+[Daewoo-Millionen]
+NN
+   sofa: _InitialView
+   begin: 20
+   end: 36
+   PosValue: "NN"
 [Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
 ROOT
    sofa: _InitialView
@@ -2229,12 +2229,6 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [Bremerhavens]
-NP
-   sofa: _InitialView
-   begin: 42
-   end: 54
-   PosValue: "NE"
-[Bremerhavens]
 Token
    sofa: _InitialView
    begin: 42
@@ -2282,11 +2276,11 @@ Token
       begin: 42
       end: 54
       PosValue: "NE"
-[AfB]
+[Bremerhavens]
 NP
    sofa: _InitialView
-   begin: 55
-   end: 58
+   begin: 42
+   end: 54
    PosValue: "NE"
 [AfB]
 Token
@@ -2329,6 +2323,18 @@ Token
       begin: 55
       end: 58
       PosValue: "NE"
+[AfB]
+NP
+   sofa: _InitialView
+   begin: 55
+   end: 58
+   PosValue: "NE"
+[fordert]
+V
+   sofa: _InitialView
+   begin: 59
+   end: 66
+   PosValue: "VVFIN"
 [fordert]
 Constituent
    sofa: _InitialView
@@ -2382,12 +2388,6 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "HD"
-[fordert]
-V
-   sofa: _InitialView
-   begin: 59
-   end: 66
-   PosValue: "VVFIN"
 [fordert]
 Token
    sofa: _InitialView
@@ -2560,12 +2560,6 @@ Constituent
    children: FSArray
    syntacticFunction: "OA"
 [Untersuchungsausschuß]
-NN
-   sofa: _InitialView
-   begin: 73
-   end: 94
-   PosValue: "NN"
-[Untersuchungsausschuß]
 Token
    sofa: _InitialView
    begin: 73
@@ -2606,6 +2600,12 @@ Token
       begin: 73
       end: 94
       PosValue: "NN"
+[Untersuchungsausschuß]
+NN
+   sofa: _InitialView
+   begin: 73
+   end: 94
+   PosValue: "NN"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 1 end ==================================
