@@ -23,6 +23,9 @@ import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescripti
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectSingle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -112,32 +115,35 @@ public class BerkeleyParserTest
 	public void testChinese()
 		throws Exception
 	{
-		JCas jcas = runTest("zh", "我们需要一个非常复杂的句子例如其中包含许多成分和尽可能的依赖。");
+		JCas jcas = runTest("zh", "我们需要一个非常复杂的例句，它要包含尽可能多的句子成分和依存性。");
 		
-		String[] constituentMapped = new String[] { "ADVP 13,15", "ADVP 6,8", "NP 0,2", "NP 11,13",
-				"NP 15,17", "NP 15,23", "NP 21,23", "NP 24,27", "NP 24,30", "NP 28,30", "NP 4,23",
-				"NP 4,30", "NP 4,6", "QP 19,21", "ROOT 0,31", "VP 17,19", "VP 2,30", "VP 6,10",
-				"VP 8,10", "X 0,31", "X 13,23", "X 15,19", "X 24,28", "X 4,10", "X 4,11" };
+		String[] constituentMapped = new String[] { "ADVP 18,21", "ADVP 6,8", "NP 0,2", "NP 11,13",
+				"NP 14,15", "NP 18,31", "NP 23,30", "NP 30,31", "NP 6,13", "ROOT 0,14",
+				"ROOT 14,32", "VP 15,31", "VP 16,31", "VP 18,22", "VP 2,13", "VP 21,22", "VP 4,13",
+				"VP 6,10", "VP 8,10", "X 0,14", "X 14,32", "X 18,22", "X 18,23", "X 6,10", "X 6,11" };
 
-		String[] constituentOriginal = new String[] { "ADVP 13,15", "ADVP 6,8", "CP 4,11",
-				"DNP 24,28", "IP 0,31", "IP 15,19", "IP 4,10", "NP 0,2", "NP 11,13", "NP 15,17",
-				"NP 15,23", "NP 21,23", "NP 24,27", "NP 24,30", "NP 28,30", "NP 4,23", "NP 4,30",
-				"NP 4,6", "PRN 13,23", "QP 19,21", "ROOT 0,31", "VP 17,19", "VP 2,30", "VP 6,10",
-				"VP 8,10" };
+		String[] constituentOriginal = new String[] { "ADVP 18,21", "ADVP 6,8", "CP 18,23",
+				"CP 6,11", "IP 0,14", "IP 14,32", "IP 18,22", "IP 6,10", "NP 0,2", "NP 11,13",
+				"NP 14,15", "NP 18,31", "NP 23,30", "NP 30,31", "NP 6,13", "ROOT 0,14",
+				"ROOT 14,32", "VP 15,31", "VP 16,31", "VP 18,22", "VP 2,13", "VP 21,22", "VP 4,13",
+				"VP 6,10", "VP 8,10" };
 
-		String[] posMapped = new String[] { "PR", "V", "NN", "ADJ", "ADJ", "O", "NN", "ADJ", "NN",
-				"V", "CARD", "NN", "CONJ", "NN", "O", "NN", "PUNC" };
+		String[] posMapped = new String[] { "PR", "V", "V", "ADJ", "ADJ", "O", "NN", "PUNC", "PR",
+				"V", "V", "ADJ", "ADJ", "O", "NN", "CONJ", "NN", "NN", "PUNC" };
 
-		String[] posOriginal = new String[] { "PN", "VV", "NN", "AD", "VA", "DEC", "NN", "AD",
-				"NN", "VV", "CD", "NN", "CC", "NN", "DEG", "NN", "PU" };
+		String[] posOriginal = new String[] { "PN", "VV", "VV", "AD", "VA", "DEC", "NN", "PU",
+				"PN", "VV", "VV", "AD", "VA", "DEC", "NN", "CC", "NN", "NN", "PU" };
 		
-		String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (NP (CP (IP (NP (NN 一个)) " +
-				"(VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子)) (PRN (ADVP " +
-				"(AD 例如)) (NP (IP (NP (NN 其中)) (VP (VV 包含))) (QP (CD 许多)) (NP (NN 成分))))) " +
-				"(CC 和) (NP (DNP (NP (NN 尽可能)) (DEG 的)) (NP (NN 依赖))))) (PU 。)))";
+		String[] pennTree = new String[] { "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (VP (VV 一个) " +
+				"(NP (CP (IP (VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 例句))))) " +
+				"(PU ，)))", "(ROOT (IP (NP (PN 它)) (VP (VV 要) (VP (VV 包含) (NP (CP (IP (VP " +
+				"(ADVP (AD 尽可能)) (VP (VA 多)))) (DEC 的)) (NP (NN 句子成分) (CC 和) (NN 依存)) " +
+				"(NP (NN 性))))) (PU 。)))" };
 		
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
+		AssertAnnotations.assertPennTree(pennTree[0], trees.get(0));
+		AssertAnnotations.assertPennTree(pennTree[1], trees.get(1));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 	}
 

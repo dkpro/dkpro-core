@@ -55,7 +55,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import edu.berkeley.nlp.PCFGLA.CoarseToFineMaxRuleParser;
 import edu.berkeley.nlp.PCFGLA.Grammar;
 import edu.berkeley.nlp.PCFGLA.Lexicon;
-import edu.berkeley.nlp.PCFGLA.Option;
 import edu.berkeley.nlp.PCFGLA.Parser;
 import edu.berkeley.nlp.PCFGLA.ParserData;
 import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
@@ -115,26 +114,55 @@ public class BerkeleyParser
 			defaultValue = "false")
 	private boolean createPennTreeString;
 
-	@Option(name = "-viterbi", usage = "Compute viterbi derivation instead of max-rule tree (Default: max-rule)")
-	public boolean viterbi;
+	/**
+	 * Compute viterbi derivation instead of max-rule tree (Default: false = max-rule)")
+	 */
+	public static final String PARAM_VITERBI = "viterbi";
+	@ConfigurationParameter(name = PARAM_VITERBI, mandatory = true, defaultValue = "false")
+	private boolean viterbi;
 
-    @Option(name = "-substates", usage = "Output subcategories (only for binarized viterbi trees). (Default: false)")
-	public boolean substates;
+	/**
+	 * Output subcategories (only for binarized viterbi trees). (Default: false)
+	 */
+	public static final String PARAM_SUBSTATES = "substates";
+	@ConfigurationParameter(name = PARAM_SUBSTATES, mandatory = true, defaultValue = "false")
+    private boolean substates;
 
-	@Option(name = "-scores", usage = "Output inside scores (only for binarized viterbi trees). (Default: false)")
-	public boolean scores;
+	/**
+	 * Output inside scores (only for binarized viterbi trees). (Default: false)
+	 */
+	public static final String PARAM_SCORES = "scores";
+	@ConfigurationParameter(name = PARAM_SCORES, mandatory = true, defaultValue = "false")
+	private boolean scores;
 
-	@Option(name = "-accurate", usage = "Set thresholds for accuracy. (Default: set thresholds for efficiency)")
-	public boolean accurate;
+	/**
+	 * Set thresholds for accuracy. (Default: set thresholds for efficiency)
+	 */
+	public static final String PARAM_ACCURATE = "accurate";
+	@ConfigurationParameter(name = PARAM_ACCURATE, mandatory = true, defaultValue = "false")
+	private boolean accurate;
 
-	@Option(name = "-variational", usage = "Use variational rule score approximation instead of max-rule (Default: false)")
-	public boolean variational;
+	/**
+	 * Use variational rule score approximation instead of max-rule (Default: false)
+	 */
+	public static final String PARAM_VARIATIONAL = "variational";
+	@ConfigurationParameter(name = PARAM_VARIATIONAL, mandatory = true, defaultValue = "false")
+	private boolean variational;
 
-    @Option(name = "-keepFunctionLabels", usage = "Retain predicted function labels. Model must have been trained with function labels. (Default: false)")
-    public boolean keepFunctionLabels;
+	/**
+	 * Retain predicted function labels. Model must have been trained with function labels. 
+	 * (Default: false)
+	 */
+	public static final String PARAM_KEEP_FUNCTION_LABELS = "keepFunctionLabels";
+	@ConfigurationParameter(name = PARAM_KEEP_FUNCTION_LABELS, mandatory = true, defaultValue = "false")
+    private boolean keepFunctionLabels;
     
-	@Option(name = "-binarize", usage = "Output binarized trees. (Default: false)")
-	public boolean binarize;
+	/**
+	 * Output binarized trees. (Default: false)
+	 */
+	public static final String PARAM_BINARIZE = "binarize";
+	@ConfigurationParameter(name = PARAM_BINARIZE, mandatory = true, defaultValue = "false")
+	private boolean binarize;
 
 	private CasConfigurableProviderBase<Parser> modelProvider;
 	private MappingProvider mappingProvider;
