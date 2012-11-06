@@ -1,0 +1,21 @@
+# French Treebank Tagset (?)
+#
+# Source: ?
+#
+#AP
+#AdP
+NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
+PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
+SENT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S
+#Sint
+#Srel
+#Ssub
+#VN
+#VPinf
+#VPpart
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X

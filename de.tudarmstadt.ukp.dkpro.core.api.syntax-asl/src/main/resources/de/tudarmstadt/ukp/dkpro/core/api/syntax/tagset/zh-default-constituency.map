@@ -1,0 +1,46 @@
+# Chinese Treebank Tagset (?)
+#
+# Source: ?
+#
+# ADJP 
+ADJP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
+# ADVP 
+ADVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP
+# CLP 
+# CP
+# DNP
+# DP
+# DVP
+# FRAG
+FRAG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.FRAG
+# INTJ
+INTJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.INTJ
+# IP
+# LCP
+# LST
+LST=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.LST
+# MSP
+# NN
+# NP
+NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
+# PP
+PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
+# PRN
+PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN
+# QP
+# UCP
+UCP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.UCP
+# VCD
+# VCP
+# VNV
+# VP
+VP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
+# VPT
+# VRD
+# VSB
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
