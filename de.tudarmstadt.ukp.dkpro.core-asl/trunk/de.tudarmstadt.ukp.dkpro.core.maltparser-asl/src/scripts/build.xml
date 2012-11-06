@@ -94,12 +94,13 @@
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: swemalt-1.7.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-03-12 | now        | a6af19821327d87abcc4e13d68d4c012
+		  - 2012-03-12 | 2012-09-25 | a6af19821327d87abcc4e13d68d4c012
+		  - 2012-09-25 | now        | 7969078c343a7b43d5da2a6cb7270932
 		  -->
-		<get src="http://www.maltparser.org/mco/swedish_parser/swemalt-1.7.mco" dest="target/download/sv-malt-linear.mco" skipexisting="true"/>
+		<get src="http://www.maltparser.org/mco/swedish_parser/swemalt-1.7.2.mco" dest="target/download/sv-malt-linear.mco" skipexisting="true"/>
     	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="target/download/sv-malt-linear.mco" md5="a6af19821327d87abcc4e13d68d4c012"
-    		tool="parser" language="sv" variant="linear" extension="mco" version="20120312.0"/>		
+    		file="target/download/sv-malt-linear.mco" md5="7969078c343a7b43d5da2a6cb7270932"
+    		tool="parser" language="sv" variant="linear" extension="mco" version="20120925.0"/>		
 		<delete dir="target/model-staging"/>
 	</target>
 </project>
