@@ -90,6 +90,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</module>
 	</modules>
 	<build>
 		<plugins>
