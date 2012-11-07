@@ -496,6 +496,9 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
+		<module>
+			de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl
+		</module>
 	</modules>
 	<build>
 		<plugins>
