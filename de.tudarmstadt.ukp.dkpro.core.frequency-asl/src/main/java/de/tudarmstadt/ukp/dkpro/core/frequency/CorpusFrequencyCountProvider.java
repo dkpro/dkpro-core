@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency;
 
+import java.util.Iterator;
+
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
@@ -30,8 +32,11 @@ public class CorpusFrequencyCountProvider
 
     private final ConditionalFrequencyDistribution<Integer,String> cfd;
     
+    private Corpus corpus;
+    
     public CorpusFrequencyCountProvider(Corpus corpus, int minN, int maxN) throws Exception {
         cfd = new ConditionalFrequencyDistribution<Integer,String>();
+        this.corpus = corpus;
         
         if (minN > maxN) {
             throw new IllegalArgumentException("minN > maxN");
@@ -103,5 +108,12 @@ public class CorpusFrequencyCountProvider
     {
         // FIXME implement this 
         throw new Exception("Not implemented yet.");
+    }
+
+    @Override
+    public Iterator<String> getNgramIterator(int n)
+        throws Exception
+    {
+        return corpus.getTokens().iterator();
     }
 }

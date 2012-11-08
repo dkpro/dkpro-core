@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 /**
  *  Frequency provider to be used in unit tests.
@@ -54,5 +55,12 @@ public class TestFrequencyCountProvider
     @Override
     public long getNrOfTokens() {
         return 100l;
+    }
+
+    @Override
+    public Iterator<String> getNgramIterator(int n)
+        throws Exception
+    {
+        throw new UnsupportedOperationException("This method is currently not supported.");
     }
 }
