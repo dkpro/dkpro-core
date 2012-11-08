@@ -140,6 +140,13 @@ public class ConditionalFrequencyDistribution<C, V>
     {
         return cfd.get(condition);
     }
+    
+    /**
+     * Directly set the frequency distribution for a given condition.
+     */
+    public void setFrequencyDistribution(C condition, FrequencyDistribution<V> fd) {
+        cfd.put(condition, fd);
+    }
 
     /**
      * Returns all conditions for which samples have been recorded.
