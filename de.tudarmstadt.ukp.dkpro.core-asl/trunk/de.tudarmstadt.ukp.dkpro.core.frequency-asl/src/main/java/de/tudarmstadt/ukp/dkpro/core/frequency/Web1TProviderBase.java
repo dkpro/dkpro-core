@@ -18,7 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.frequency;
 
 import java.io.IOException;
+import java.util.Iterator;
 
+import com.googlecode.jweb1t.JWeb1TIterator;
 import com.googlecode.jweb1t.Searcher;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
@@ -30,6 +32,8 @@ public abstract class Web1TProviderBase
     public static final String EOS = "</S>";
 
     protected Searcher searcher;
+    protected JWeb1TIterator iterator;
+
 
     @Override
     public long getNrOfNgrams(int n)
@@ -56,4 +60,11 @@ public abstract class Web1TProviderBase
     {
         return searcher.getFrequency(phrase);
     }
+    
+    @Override
+    public Iterator<String> getNgramIterator(int n)
+        throws Exception
+    {
+        return iterator.getIterator();
+    }    
 }

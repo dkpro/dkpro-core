@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
 
+import java.util.Iterator;
+
 public interface FrequencyCountProvider
 {
 
@@ -69,4 +71,11 @@ public interface FrequencyCountProvider
      * Returns the number of distinct ngrams of a given size in the corpus.
      */
     public long getNrOfDistinctNgrams(int n) throws Exception;
+    
+    /**
+     * Returns an iterator over all ngrams of a given size in the corpus.
+     */
+    public Iterator<String> getNgramIterator(int n) throws Exception;
+    
+    
 }

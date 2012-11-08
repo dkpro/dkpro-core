@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
+import java.util.Iterator;
+
 import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -76,5 +78,12 @@ public abstract class FrequencyCountResourceBase
         throws Exception
     {
         return provider.getNrOfDistinctNgrams(n);
+    }
+    
+    @Override
+    public Iterator<String> getNgramIterator(int n)
+        throws Exception
+    {
+        return provider.getNgramIterator(n);
     }
 }
