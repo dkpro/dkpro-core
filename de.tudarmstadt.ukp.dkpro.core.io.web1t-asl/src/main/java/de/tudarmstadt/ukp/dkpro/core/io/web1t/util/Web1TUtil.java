@@ -15,22 +15,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.web1t;
+package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.File;
 
-import org.apache.uima.util.Level;
-import org.apache.uima.util.Logger;
-
 public class Web1TUtil
 {
-
-	public static void writeToLog(Logger logger, String desc, String entry)
-	{
-		if (logger != null) {
-			logger.log(Level.WARNING, desc + " " + entry);
-		}
-	}
 
 	public static String cutOffUnderscoredSuffixFromFileName(File file)
 	{

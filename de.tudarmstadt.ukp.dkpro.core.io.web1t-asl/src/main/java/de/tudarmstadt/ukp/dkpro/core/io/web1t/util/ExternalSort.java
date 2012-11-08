@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.io.web1t;
+package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
