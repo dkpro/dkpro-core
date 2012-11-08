@@ -30,6 +30,8 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TFileSorter;
+
 public class Web1TSorterTest
 {
 
@@ -41,7 +43,7 @@ public class Web1TSorterTest
 	public void testSorter()
 		throws IOException
 	{
-		Web1TFileSorter sorter = new Web1TFileSorter(filesToSort, comparator, null);
+		Web1TFileSorter sorter = new Web1TFileSorter(filesToSort, comparator);
 		sorter.sort();
 		LinkedList<File> sortedFiles = sorter.getSortedFiles();
 		
@@ -87,7 +89,8 @@ public class Web1TSorterTest
 		while ((line = reader.readLine()) != null) {
 			lines.add(line);
 		}
-
+		reader.close();
+		
 		return lines.toArray(new String[0]);
 	}
 

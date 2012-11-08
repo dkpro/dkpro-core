@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.web1t;
+package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +23,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.uima.util.Logger;
 
 
 public class Web1TFileSorter
@@ -34,7 +33,7 @@ public class Web1TFileSorter
 	private final Comparator<String> comparator;
 
 	public Web1TFileSorter(LinkedList<File> unsortedFiles,
-			Comparator<String> comparator, Logger logger)
+			Comparator<String> comparator)
 	{
 		this.inputFiles = unsortedFiles;
 		this.comparator = comparator;

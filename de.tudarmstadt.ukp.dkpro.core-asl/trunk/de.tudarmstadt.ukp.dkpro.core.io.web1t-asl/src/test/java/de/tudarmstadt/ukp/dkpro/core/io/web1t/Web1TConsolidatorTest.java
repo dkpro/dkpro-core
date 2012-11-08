@@ -30,6 +30,8 @@ import java.util.LinkedList;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TFileConsolidator;
+
 public class Web1TConsolidatorTest
 {
 	LinkedList<File> filesToSort;
@@ -40,7 +42,7 @@ public class Web1TConsolidatorTest
 		throws IOException
 	{
 		Web1TFileConsolidator consolidator = new Web1TFileConsolidator(
-				filesToSort, comparator, "UTF-8", 1, null);
+				filesToSort, comparator, "UTF-8", 1);
 
 		consolidator.consolidate();
 
@@ -81,7 +83,7 @@ public class Web1TConsolidatorTest
 		throws IOException
 	{
 		Web1TFileConsolidator consolidator = new Web1TFileConsolidator(
-				filesToSort, comparator, "UTF-8", 10, null);
+				filesToSort, comparator, "UTF-8", 10);
 
 		consolidator.consolidate();
 
@@ -124,7 +126,8 @@ public class Web1TConsolidatorTest
 	{
 		comparator = new Comparator<String>()
 		{
-			public int compare(String r1, String r2)
+			@Override
+            public int compare(String r1, String r2)
 			{
 				return r1.compareTo(r2);
 			}
@@ -157,6 +160,7 @@ public class Web1TConsolidatorTest
 		while ((line = reader.readLine()) != null) {
 			lines.add(line);
 		}
+		reader.close();
 
 		return lines.toArray(new String[0]);
 	}

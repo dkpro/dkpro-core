@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.web1t;
+package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,7 +31,6 @@ import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
-import org.apache.uima.util.Logger;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 
@@ -47,11 +46,10 @@ public class Web1TFileSplitter
 
 	private HashMap<String, BufferedWriter> writerMap;
 	private LinkedList<File> splittedFiles = new LinkedList<File>();
-	private final Logger logger;
 
 	public Web1TFileSplitter(File inputFile, File outputFolder,
 			String fileEncoding, FrequencyDistribution<String> letterFD,
-			double threshold, int startingFileNumber, Logger logger)
+			double threshold, int startingFileNumber)
 	{
 		this.inputFile = inputFile;
 		this.outputFolder = outputFolder;
@@ -59,8 +57,6 @@ public class Web1TFileSplitter
 		this.letterFD = letterFD;
 		this.threshold = threshold;
 		this.fileNumber = startingFileNumber;
-		this.logger = logger;
-
 	}
 
 	public void split()
@@ -90,7 +86,7 @@ public class Web1TFileSplitter
 			int indexOfTab = readLine.indexOf(TAB);
 
 			if (indexOfTab == -1) {
-				Web1TUtil.writeToLog(logger, "No tab found in line: ", readLine);
+			    System.err.println("No tab found in line: " + readLine);
 				continue;
 			}
 
@@ -99,11 +95,11 @@ public class Web1TFileSplitter
 			BufferedWriter writer = writerMap.get(key);
 
 			if (writer == null) {
-				Web1TUtil.writeToLog(logger, "No writer found for key: ", key);
+			    System.err.println("No writer found for key: " + key);
 				key = key.substring(0, 1);
 				writer = writerMap.get(key);
 				if (writer == null) {
-					Web1TUtil.writeToLog(logger, "No writer for key: ", key);
+				    System.err.println("No writer for key: " + key);
 					continue;
 				}
 			}
@@ -112,7 +108,7 @@ public class Web1TFileSplitter
 			writer.write(LF);
 			writer.flush();
 		}
-
+		reader.close();
 	}
 
 	private void createMappingsAndFileList()

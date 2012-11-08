@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
+import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TFileSplitter;
 
 public class Web1TSplitterTest
 {
@@ -46,8 +47,7 @@ public class Web1TSplitterTest
 	public void testSplitter()
 		throws IOException
 	{
-		Web1TFileSplitter splitter = new Web1TFileSplitter(input, output, "UTF-8", fdist, 0.1, 0,
-				null);
+		Web1TFileSplitter splitter = new Web1TFileSplitter(input, output, "UTF-8", fdist, 0.1, 0);
 		splitter.split();
 		List<File> splits = splitter.getFiles();
 

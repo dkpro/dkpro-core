@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.web1t;
+package de.tudarmstadt.ukp.dkpro.core.io.web1t.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -28,7 +28,6 @@ import java.io.OutputStreamWriter;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-import org.apache.uima.util.Logger;
 
 public class Web1TFileConsolidator
 {
@@ -38,20 +37,17 @@ public class Web1TFileConsolidator
 	private LinkedList<File> consolidatedFiles = new LinkedList<File>();
 	private final String fileEncoding;
 	private final int minFreq;
-	private final Logger logger;
 
 	private final String TAB = "\t";
 	private final String LF = "\n";
 
 	public Web1TFileConsolidator(LinkedList<File> sortedInputFiles,
-			Comparator<String> comparator, String fileEncoding, int minFreq,
-			Logger logger)
+			Comparator<String> comparator, String fileEncoding, int minFreq)
 	{
 		this.inputFiles = sortedInputFiles;
 		this.comparator = comparator;
 		this.fileEncoding = fileEncoding;
 		this.minFreq = minFreq;
-		this.logger = logger;
 	}
 
 	public void consolidate()
@@ -87,8 +83,7 @@ public class Web1TFileConsolidator
 				int tabPos = entry.indexOf(TAB);
 
 				if (hasLineInvalidFormat(tabPos)) {
-					Web1TUtil.writeToLog(logger, "Wrong file format in line: ",
-							entry);
+				    System.err.println("Wrong file format in line: " + entry);
 					continue;
 				}
 
@@ -120,6 +115,8 @@ public class Web1TFileConsolidator
 			}
 			writeAggregatedEntryToFile(writer, prevEntry, prevEntryFreq);
 			writer.close();
+			
+			sortedSplitFileReader.close();
 		}
 	}
 
