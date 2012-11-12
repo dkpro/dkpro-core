@@ -130,7 +130,7 @@
 										<exclude>NOTICE</exclude>
 										<exclude>README</exclude>
 										<exclude>src/main/resources/**/*</exclude>
-										<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/io/web1t/ExternalSort.java</exclude>
+										<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/io/web1t/util/ExternalSort.java</exclude>
 										<exclude>src/test/resources/**/*</exclude>
 										<!-- generated JCas wrappers -->
 										<exclude>src/main/java/**/type/**/*</exclude>
