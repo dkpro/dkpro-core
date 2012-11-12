@@ -67,7 +67,7 @@ public class MorphologyAnnotatorTest
         );
 
         AnalysisEngineDescription morphology = createPrimitiveDescription(
-                MorphologyAnnotator.class
+                SfstAnnotator.class
         );
 
         AnalysisEngineDescription aggregate = createAggregateDescription(

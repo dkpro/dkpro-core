@@ -57,7 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.sfst.parser.TurkishAnalysisParser;
  * 
  */
 
-public class MorphologyAnnotator
+public class SfstAnnotator
     extends JCasAnnotator_ImplBase
 {
 
@@ -116,10 +116,9 @@ public class MorphologyAnnotator
         modelProvider = new CasConfigurableProviderBase<File>()
         {
             {
-                setDefault(LOCATION,
-                        "classpath:/de/tudarmstadt/ukp/dkpro/semantics/morphology/lib/"
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/"
                                 + "morph-${language}-${variant}.a");
-                setDefault(VARIANT, "sfst");
+                setDefault(VARIANT, "default");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
@@ -135,8 +134,7 @@ public class MorphologyAnnotator
         };
 
         // provider for the sfst binary
-        runtimeProvider = new RuntimeProvider(
-                "classpath:/de/tudarmstadt/ukp/dkpro/semantics/morphology/bin/");
+        runtimeProvider = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/bin/");
     }
 
     @Override

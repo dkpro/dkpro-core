@@ -1,0 +1,71 @@
+<!--
+   Copyright 2012
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+        <property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst"/>
+        
+        <import>
+                <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+        </import>
+        
+        <target name="local-maven">
+                <property name="install-artifact-enable" value="true"/>
+                <antcall target="separate-jars"/>
+        </target>
+        
+        <target name="separate-jars" depends="de, tr, install-executables"/>
+
+        <target name="tr">
+                <mkdir dir="target/download"/>
+                
+        <get src="http://dkpro-core-gpl.googlecode.com/files/trmorph.a" dest="target/download/trmorph.a" skipexisting="true"/>
+        <install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+                file="target/download/trmorph.a" md5="f16db56fb0203ede5c134938e7bdfca0"
+                tool="morph" language="tr" variant="default" extension="a" version="20121025.0"/>           
+                <delete dir="target/model-staging"/>
+        </target>
+        
+        <target name="de">
+                <mkdir dir="target/download"/>
+
+        <get src="http://morphisto.googlecode.com/files/morphisto-02022011.a" dest="target/download/morphisto-02022011.a" skipexisting="true"/>
+        <install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+                file="target/download/morphisto-02022011.a" md5="9d85be57380188890156b7fa49b5c122"
+                tool="morph" language="de" variant="default" extension="a" version="02022011.0"/>           
+                <delete dir="target/model-staging"/>              
+        </target>
+	
+        <target name="install-executables">        	       	
+            <mkdir dir="target/download"/>
+        	<get src="http://dkpro-core-gpl.googlecode.com/files/sfst-1.4.6g-bin.tar.gz" dest="target/download" skipexisting="true"/>
+        	<gunzip src="target/download/sfst-1.4.6g-bin.tar.gz"/>
+        	<untar src="target/download/sfst-1.4.6g-bin.tar" dest="target/download"/>
+        	<delete file="target/download/sfst-1.4.6g-bin.tar"/>   	
+        	<mkdir dir="${outputDir}/bin"/>
+        	<copydir src="target/download/sfst/" dest="${outputDir}/bin" includes="**/*"/>
+            <clean-pom/>
+            <generate-pom version="20120111.0" groupId="de.tudarmstadt.ukp.dkpro.core" 
+                    artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"/>
+            <jar destfile="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-20120111.0.jar" compress="true">
+                <fileset dir="target/model-staging/">
+                	   <include name="de/tudarmstadt/ukp/dkpro/core/sfst/bin/**/"/>
+                	   <include name="META-INF/maven/**/pom.xml"/>
+                </fileset>
+            </jar>	
+            <delete dir="target/model-staging"/>   
+       </target>
+</project>
