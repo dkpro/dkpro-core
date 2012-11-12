@@ -1,0 +1,12 @@
+Tgrep2
+------
+
+Available at http://tedlab.mit.edu/~dr/Tgrep2/
+
+Precompiled binaries from http://www.acsu.buffalo.edu/~droland/tgrep2/
+
+Author: Douglas L. T. Rohde
+	dr+tg@tedlab.mit.edu
+	
+	formerly of the Department of Brain and Cognitive Science,
+	Massachusetts Institute of Technology

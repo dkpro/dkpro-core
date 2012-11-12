@@ -91,6 +91,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</module>
 	</modules>
 	<build>
 		<plugins>
