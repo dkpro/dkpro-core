@@ -81,11 +81,6 @@ public class Web1TConverter {
         ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
         letterFDs = initializeLetterFDs(minNgramLength, maxNgramLength);
 
-        if (minFrequency < 1) {
-            throw new IllegalArgumentException(
-                            "Parameter MIN_FREQUENCY is invalid (must be >= 1)");
-        }
-
         if (splitThreshold >= 100) {
             throw new IllegalArgumentException(
                     "Threshold has to be lower 100");
@@ -139,7 +134,8 @@ public class Web1TConverter {
 	public void createIndex()
 	        throws IOException
 	{
-		closeWriters(ngramWriters.values());
+        
+        closeWriters(ngramWriters.values());
 
 		Comparator<String> comparator = new Comparator<String>()
 		{
@@ -521,6 +517,11 @@ public class Web1TConverter {
 
         public void setMinFrequency(int minFrequency)
         {
+            if (minFrequency < 1) {
+                throw new IllegalArgumentException(
+                                "Parameter MIN_FREQUENCY is invalid (must be >= 1)");
+            }
+
             this.minFrequency = minFrequency;
         }
 
