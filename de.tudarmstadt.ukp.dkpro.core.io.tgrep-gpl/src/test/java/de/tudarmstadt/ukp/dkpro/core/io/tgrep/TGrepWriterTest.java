@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 
-public class TgrepCorpusWriterTest
+public class TGrepWriterTest
 {
 	private File outputPath = new File("src/test/resources/tgrep");
 
@@ -50,12 +50,12 @@ public class TgrepCorpusWriterTest
 				StanfordParser.PARAM_LANGUAGE, "en",
 				StanfordParser.PARAM_VARIANT, "pcfg");
 
-		AnalysisEngineDescription tgrep = createPrimitiveDescription(TgrepCorpusWriter.class,
-				TgrepCorpusWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-				TgrepCorpusWriter.PARAM_DROP_MALFORMED_TREES, true,
-				TgrepCorpusWriter.PARAM_OUTPUT_PATH, outputPath,
-				TgrepCorpusWriter.PARAM_WRITE_COMMENTS, true,
-				TgrepCorpusWriter.PARAM_WRITE_T2C, false);
+		AnalysisEngineDescription tgrep = createPrimitiveDescription(TGrepWriter.class,
+				TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
+				TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,
+				TGrepWriter.PARAM_OUTPUT_PATH, outputPath,
+				TGrepWriter.PARAM_WRITE_COMMENTS, true,
+				TGrepWriter.PARAM_WRITE_T2C, false);
 
 		JCas jcas = JCasFactory.createJCas();
 		jcas.setDocumentLanguage(language);

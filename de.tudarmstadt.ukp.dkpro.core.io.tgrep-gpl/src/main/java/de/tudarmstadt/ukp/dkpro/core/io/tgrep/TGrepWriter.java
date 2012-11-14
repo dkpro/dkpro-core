@@ -43,7 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
  * 
  * @author Erik-Lân Do Dinh
  */
-public class TgrepCorpusWriter
+public class TGrepWriter
 	extends JCasAnnotator_ImplBase
 {
 	public static final String PARAM_OUTPUT_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
