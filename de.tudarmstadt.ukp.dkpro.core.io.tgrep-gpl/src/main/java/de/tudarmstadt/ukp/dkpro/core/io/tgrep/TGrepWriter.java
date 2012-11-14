@@ -46,8 +46,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 public class TGrepWriter
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_OUTPUT_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
-	@ConfigurationParameter(name = PARAM_OUTPUT_PATH, mandatory = true)
+	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
+	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private File outputPath;
 
 	/**

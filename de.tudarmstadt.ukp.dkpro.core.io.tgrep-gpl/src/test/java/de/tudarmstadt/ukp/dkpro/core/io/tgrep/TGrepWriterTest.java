@@ -51,9 +51,9 @@ public class TGrepWriterTest
 				StanfordParser.PARAM_VARIANT, "pcfg");
 
 		AnalysisEngineDescription tgrep = createPrimitiveDescription(TGrepWriter.class,
+				TGrepWriter.PARAM_TARGET_LOCATION, outputPath,
 				TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
 				TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,
-				TGrepWriter.PARAM_OUTPUT_PATH, outputPath,
 				TGrepWriter.PARAM_WRITE_COMMENTS, true,
 				TGrepWriter.PARAM_WRITE_T2C, false);
 
