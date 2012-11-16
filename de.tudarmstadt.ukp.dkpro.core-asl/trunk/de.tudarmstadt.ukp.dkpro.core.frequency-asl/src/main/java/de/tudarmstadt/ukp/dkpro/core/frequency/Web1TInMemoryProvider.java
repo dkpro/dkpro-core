@@ -29,5 +29,6 @@ public class Web1TInMemoryProvider
         throws IOException
     {
         searcher = new JWeb1TSearcherInMemory(ngramLocation, maxNgramLevel);
+        basePath = ngramLocation;
     }
 }
