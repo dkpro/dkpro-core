@@ -32,6 +32,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -129,6 +130,12 @@ public class ResourceUtils
 			        	finally {
 			        		IOUtils.closeQuietly(is);
 			        		IOUtils.closeQuietly(os);
+			        	}
+			        	
+			        	// WORKAROUND: folders get written as files if inside jars
+			        	// delete files of size zero
+			        	if (target.length() == 0) {
+			        	    FileUtils.deleteQuietly(target);
 			        	}
 			        }
 		        }
