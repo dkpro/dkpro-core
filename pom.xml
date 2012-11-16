@@ -118,6 +118,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.srl-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
@@ -448,6 +453,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.srl-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</module>
@@ -470,35 +476,33 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.norvig-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.snowball-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.textcat-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.posfilter-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
-		<module>
-			de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl
-		</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.norvig-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.posfilter-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.snowball-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.textcat-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
 	</modules>
 	<build>
 		<plugins>
