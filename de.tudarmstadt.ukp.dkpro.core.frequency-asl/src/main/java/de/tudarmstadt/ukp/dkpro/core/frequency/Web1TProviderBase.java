@@ -32,8 +32,7 @@ public abstract class Web1TProviderBase
     public static final String EOS = "</S>";
 
     protected Searcher searcher;
-    protected JWeb1TIterator iterator;
-
+    protected String basePath;
 
     @Override
     public long getNrOfNgrams(int n)
@@ -65,6 +64,6 @@ public abstract class Web1TProviderBase
     public Iterator<String> getNgramIterator(int n)
         throws Exception
     {
-        return iterator.getIterator();
+        return new JWeb1TIterator(basePath, 1).getIterator();
     }    
 }

@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.util.Iterator;
 
 import org.junit.Test;
 
@@ -47,6 +48,24 @@ public class Web1TFrequencyProviderTest
         );
 
         test(web1t);
+    }
+
+    @Test
+    public void web1tNgramIteratorTest() throws Exception
+    {
+        Web1TProviderBase web1t = new Web1TFileAccessProvider(
+                new File("src/test/resources/web1t/"),
+                1,
+                2
+        );
+
+        int i=0;
+        Iterator<String> ngramIterator = web1t.getNgramIterator(1);
+        while (ngramIterator.hasNext()) {
+            ngramIterator.next();
+            i++;
+        }
+        assertEquals(i, 11);
     }
 
     private void test(Web1TProviderBase web1t) throws Exception {
