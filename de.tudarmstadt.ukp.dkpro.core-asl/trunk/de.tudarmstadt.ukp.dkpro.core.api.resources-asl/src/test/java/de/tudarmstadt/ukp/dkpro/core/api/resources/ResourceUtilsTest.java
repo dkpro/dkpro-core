@@ -17,12 +17,17 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,7 +48,24 @@ public class ResourceUtilsTest
 		System.out.println("As file: "+file.getPath());
 		assertTrue(file.getName().endsWith(".class"));
 	}
-	
+
+	@Test
+	public void testClasspathAsFolder()
+		throws Exception
+	{
+		File file = ResourceUtils.getClasspathAsFolder("classpath:/de/tudarmstadt/ukp/dkpro/core/api", true);
+		
+		List<String> files = new ArrayList<String>();
+		for (File f : FileUtils.listFiles(file, null, true)) {
+			files.add(f.getAbsolutePath().substring(file.getAbsolutePath().length()));
+		}
+		Collections.sort(files);
+		assertEquals(
+				asList("/resources/MappingProviderTest$1.class",
+						"/resources/MappingProviderTest.class",
+						"/resources/ResourceUtilsTest.class"), files);
+	}
+
 	@Test
 	public void testWithSpace()
 		throws Exception
