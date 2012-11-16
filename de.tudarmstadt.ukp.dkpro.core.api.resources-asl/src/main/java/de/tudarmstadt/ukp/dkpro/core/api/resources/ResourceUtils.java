@@ -74,7 +74,7 @@ public class ResourceUtils
 	 * Make a given classpath location available as a folder. A temporary folder is created and
 	 * deleted upon a regular shutdown of the JVM.
 	 * 
-	 * @param aClasspathLocation
+	 * @param aClasspathBase
 	 *            a classpath location as used by
 	 *            {@link PathMatchingResourcePatternResolver#getResources(String)}
 	 * @param aCache
@@ -82,36 +82,59 @@ public class ResourceUtils
 	 * @return
 	 * @see {@link PathMatchingResourcePatternResolver}
 	 */
-	public static File getClasspathAsFolder(String aClasspathLocation, boolean aCache)
+	public static File getClasspathAsFolder(String aClasspathBase, boolean aCache)
 		throws IOException
 	{
 		synchronized (classpathFolderCache) {
-			File folder = classpathFolderCache.get(aClasspathLocation);
+			File folder = classpathFolderCache.get(aClasspathBase);
 
 	        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-	        Resource[] resources = resolver.getResources(aClasspathLocation);
 
 			if (!aCache || (folder == null) || !folder.exists()) {
 				folder = File.createTempFile("dkpro-package", "");
 				folder.delete();
 				FileUtils.forceMkdir(folder);
-				
-		        for (Resource resource : resources) {
-		        	InputStream is = null;
-		        	OutputStream os = null;
-		        	try {
-		        		is = resource.getInputStream();
-		        		os = new FileOutputStream(new File(folder, resource.getFilename()));
-		        		IOUtils.copyLarge(is, os);
-		        	}
-		        	finally {
-		        		IOUtils.closeQuietly(is);
-		        		IOUtils.closeQuietly(os);
-		        	}
+
+		        Resource[] roots = resolver.getResources(aClasspathBase);
+		        for (Resource root : roots) {
+		        	String base = root.getURL().toString();
+		        	Resource[] resources = resolver.getResources(base+"/**/*");
+			        for (Resource resource : resources) {
+			        	if (!resource.isReadable()) {
+			        		// This is true for folders/packages
+			        		continue;
+			        	}
+
+			        	// Relativize
+			        	String res = resource.getURL().toString();
+			        	if (!res.startsWith(base)) {
+			        		throw new IOException("Resource location does not start with base location");
+			        	}
+		        		String relative = resource.getURL().toString().substring(base.length());
+
+		        		// Make sure the target folder exists
+		        		File target = new File(folder, relative).getAbsoluteFile();
+		        		if (target.getParentFile() != null) {
+		        			FileUtils.forceMkdir(target.getParentFile());
+		        		}
+
+		        		// Copy data
+			        	InputStream is = null;
+			        	OutputStream os = null;
+			        	try {
+			        		is = resource.getInputStream();
+			        		os = new FileOutputStream(target);
+			        		IOUtils.copyLarge(is, os);
+			        	}
+			        	finally {
+			        		IOUtils.closeQuietly(is);
+			        		IOUtils.closeQuietly(os);
+			        	}
+			        }
 		        }
 		        
 		        if (aCache) {
-		        	classpathFolderCache.put(aClasspathLocation, folder);
+		        	classpathFolderCache.put(aClasspathBase, folder);
 		        }
 			}
 			

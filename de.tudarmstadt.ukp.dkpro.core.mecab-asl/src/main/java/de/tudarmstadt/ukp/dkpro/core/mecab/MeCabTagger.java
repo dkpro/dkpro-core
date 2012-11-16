@@ -131,7 +131,7 @@ public class MeCabTagger
 		String packagePrefix = getClass().getPackage().getName().replaceAll("\\.", "/");
 
 		File binFolder = ResourceUtils.getClasspathAsFolder("classpath*:" + packagePrefix + "/"
-				+ prefix + "lib*", true);
+				+ prefix, true);
 
 		System.load(new File(binFolder, sysLib).getAbsolutePath());
 		System.load(new File(binFolder, javaWrapper).getAbsolutePath());
@@ -146,7 +146,7 @@ public class MeCabTagger
 		// and it is quite unlikely that the temp folder has spaces in its path. (See comment
 		// below as well). -- REC 2012-06-03
 		File dictFolder = ResourceUtils.getClasspathAsFolder("classpath*:" + packagePrefix + 
-				"/lib/ipadic/*", true);
+				"/lib/ipadic", true);
 
 		getLogger().log(Level.INFO, "Native library folder: " + binFolder);
 		getLogger().log(Level.INFO, "Dictionary folder: " + dictFolder);
