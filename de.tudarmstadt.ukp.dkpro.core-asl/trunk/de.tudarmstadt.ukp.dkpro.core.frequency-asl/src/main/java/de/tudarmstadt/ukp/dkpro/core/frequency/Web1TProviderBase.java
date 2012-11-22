@@ -64,6 +64,6 @@ public abstract class Web1TProviderBase
     public Iterator<String> getNgramIterator(int n)
         throws Exception
     {
-        return new JWeb1TIterator(basePath, 1).getIterator();
+        return new JWeb1TIterator(basePath, n).getIterator();
     }    
 }
