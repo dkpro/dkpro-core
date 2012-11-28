@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Mon Nov 12 23:24:12 CET 2012
+ * Updated by JCasGen Wed Nov 28 21:03:03 CET 2012
  * @generated */
 public class SemanticArgument_Type extends Annotation_Type {
   /** @generated */

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Semantic Role Labelling</name>
   <description/>
-  <version>1.0</version>
-  <vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate</name>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate</name>
       <description>The predicate or main verb of a sentence.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
