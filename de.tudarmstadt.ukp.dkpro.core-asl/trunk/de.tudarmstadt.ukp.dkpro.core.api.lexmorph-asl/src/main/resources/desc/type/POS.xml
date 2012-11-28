@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Parts-of-Speech</name>
   <description/>
-  <version>1.0</version>
-  <vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</name>
@@ -20,32 +19,32 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ</name>
-      <description>Adjective</description>
+      <description>Adjectives</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV</name>
-      <description>Adverb</description>
+      <description>Adverbs</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART</name>
-      <description>Article</description>
+      <description>Determiners and articles</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD</name>
-      <description>Cardinal number</description>
+      <description>Numerals</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ</name>
-      <description>Conjunction</description>
+      <description>Conjunctions</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N</name>
-      <description>Noun</description>
+      <description>Nouns</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
@@ -60,12 +59,12 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O</name>
-      <description>Exclamation</description>
+      <description>Catch-all for other categories such as abbreviations or foreign words</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP</name>
-      <description>Preposition</description>
+      <description>Prepositions and postpositions</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
@@ -74,13 +73,18 @@
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT</name>
+      <description>Particles</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
+    </typeDescription>
+    <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC</name>
-      <description>Punctuation</description>
+      <description>Punctuation marks</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V</name>
-      <description>Verb and verb phrase</description>
+      <description>Verbs</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</supertypeName>
     </typeDescription>
   </types>
