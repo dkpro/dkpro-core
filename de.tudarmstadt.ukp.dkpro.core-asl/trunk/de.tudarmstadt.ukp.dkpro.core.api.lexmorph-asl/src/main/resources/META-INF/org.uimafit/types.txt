@@ -1,1 +1,3 @@
-classpath*:desc/type/**/*.xml
+classpath*:desc/type/Morpheme.xml
+classpath*:desc/type/POS.xml
+classpath*:desc/type/TweetPOS.xml
