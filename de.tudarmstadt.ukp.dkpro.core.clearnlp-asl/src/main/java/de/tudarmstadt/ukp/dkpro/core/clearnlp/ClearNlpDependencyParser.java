@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
@@ -29,14 +28,15 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.internal.util.SymbolTable;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Logger;
 import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.PropertyAccessor;
 import org.uimafit.component.JCasAnnotator_ImplBase;
@@ -49,6 +49,7 @@ import com.googlecode.clearnlp.dependency.DEPTree;
 import com.googlecode.clearnlp.engine.EngineGetter;
 import com.googlecode.clearnlp.engine.EngineProcess;
 import com.googlecode.clearnlp.pos.POSNode;
+
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -79,13 +80,6 @@ public class ClearNlpDependencyParser
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	// Not sure if we'll ever have to use different symbol tables
-	public static final String SYMBOL_TABLE = "symbolTableName";
-	@ConfigurationParameter(name = SYMBOL_TABLE, mandatory = true, defaultValue = "DEPREL")
-	private String symbolTableName;
-
-	private Logger logger;
-	private SymbolTable symbolTable;
 	private File workingDir;
 
 	private CasConfigurableProviderBase<AbstractDEPParser> parserProvider;
@@ -95,8 +89,6 @@ public class ClearNlpDependencyParser
 		throws ResourceInitializationException
 	{
 		super.initialize(context);
-
-		logger = getContext().getLogger();
 
 		parserProvider = new CasConfigurableProviderBase<AbstractDEPParser>()
 		{
@@ -127,12 +119,22 @@ public class ClearNlpDependencyParser
 					if (printTagSet) {
 						StringBuilder sb = new StringBuilder();
 						try {
-							List<String> tagList = new ArrayList<String>();
+							Set<String> tagSet = new HashSet<String>();
 							
 							PropertyAccessor accessor = new DirectFieldAccessor(parser);
 							StringModel model = (StringModel) accessor.getPropertyValue("s_model");
-							tagList.addAll(asList(model.getLabels()));
+							for (String label : model.getLabels()) {
+								String[] fields = label.split("_");
+								if (fields.length == 3) {
+									tagSet.add(fields[2]);
+								}
+//								else {
+//									getContext().getLogger().log(WARNING,
+//											"Unknown label format: [" + label + "]");
+//								}
+							}
 							
+							List<String> tagList = new ArrayList<String>(tagSet);
 							Collections.sort(tagList);
 							
 							sb.append("Model contains [").append(tagList.size()).append("] tags: ");
