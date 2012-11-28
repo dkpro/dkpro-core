@@ -123,6 +123,20 @@
 			</metadata>
     	</install-model-file>
 		<delete dir="target/model-staging"/>
+		
+		<!-- THIS IS A CHUNKER MODEL, NOT A PARSER MODEL. Also need to check which postags are used -->
+		<!-- FILE: OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-09-05 | now        | 412cd69c1a67e2e1e6dc947c6815dcaa
+    	<get src="http://gromgull.net/2010/01/npchunking/OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip" dest="target/download/de-parser-chunking.bin" skipexisting="true"/>
+    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/de-parser-chunking.bin" md5="412cd69c1a67e2e1e6dc947c6815dcaa"
+    		tool="parser" language="de" variant="chunking" extension="bin" version="20110905.0">
+			<metadata>
+	    		<entry key="tagger.tagset" value="stts"/>
+			</metadata>
+    	</install-model-file>
+		<delete dir="target/model-staging"/>
+		  -->
 	</target>
 
 	<target name="en">
