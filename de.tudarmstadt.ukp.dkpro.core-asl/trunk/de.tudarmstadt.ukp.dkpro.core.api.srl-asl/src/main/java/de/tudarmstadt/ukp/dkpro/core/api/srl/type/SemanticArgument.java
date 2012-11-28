@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Mon Nov 12 23:24:12 CET 2012
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.srl-asl/src/main/resources/desc/type/SemanticRoleLabelling.xml
+ * Updated by JCasGen Wed Nov 28 21:03:03 CET 2012
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.srl-asl/src/main/resources/desc/type/SemanticRoleLabeling.xml
  * @generated */
 public class SemanticArgument extends Annotation {
   /** @generated

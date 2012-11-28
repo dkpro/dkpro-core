@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Mon Nov 12 23:24:12 CET 2012 */
+/* First created by JCasGen Wed Nov 28 21:03:03 CET 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.srl.type;
 
 import org.apache.uima.jcas.JCas;
@@ -14,9 +14,9 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** The predicate or main verb of a sentence.
- * Updated by JCasGen Mon Nov 12 23:24:12 CET 2012
+ * Updated by JCasGen Wed Nov 28 21:03:03 CET 2012
  * @generated */
-public class Predicate_Type extends Annotation_Type {
+public class SemanticPredicate_Type extends Annotation_Type {
   /** @generated */
   @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
@@ -24,25 +24,25 @@ public class Predicate_Type extends Annotation_Type {
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
       public FeatureStructure createFS(int addr, CASImpl cas) {
-  			 if (Predicate_Type.this.useExistingInstance) {
+  			 if (SemanticPredicate_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
-  		     FeatureStructure fs = Predicate_Type.this.jcas.getJfsFromCaddr(addr);
+  		     FeatureStructure fs = SemanticPredicate_Type.this.jcas.getJfsFromCaddr(addr);
   		     if (null == fs) {
-  		       fs = new Predicate(addr, Predicate_Type.this);
-  			   Predicate_Type.this.jcas.putJfsFromCaddr(addr, fs);
+  		       fs = new SemanticPredicate(addr, SemanticPredicate_Type.this);
+  			   SemanticPredicate_Type.this.jcas.putJfsFromCaddr(addr, fs);
   			   return fs;
   		     }
   		     return fs;
-        } else return new Predicate(addr, Predicate_Type.this);
+        } else return new SemanticPredicate(addr, SemanticPredicate_Type.this);
   	  }
     };
   /** @generated */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = Predicate.typeIndexID;
+  public final static int typeIndexID = SemanticPredicate.typeIndexID;
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
  
   /** @generated */
   final Feature casFeat_category;
@@ -51,13 +51,13 @@ public class Predicate_Type extends Annotation_Type {
   /** @generated */ 
   public String getCategory(int addr) {
         if (featOkTst && casFeat_category == null)
-      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
     return ll_cas.ll_getStringValue(addr, casFeatCode_category);
   }
   /** @generated */    
   public void setCategory(int addr, String v) {
         if (featOkTst && casFeat_category == null)
-      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
     ll_cas.ll_setStringValue(addr, casFeatCode_category, v);}
     
   
@@ -69,19 +69,19 @@ public class Predicate_Type extends Annotation_Type {
   /** @generated */ 
   public int getArguments(int addr) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
     return ll_cas.ll_getRefValue(addr, casFeatCode_arguments);
   }
   /** @generated */    
   public void setArguments(int addr, int v) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
     ll_cas.ll_setRefValue(addr, casFeatCode_arguments, v);}
     
    /** @generated */
   public int getArguments(int addr, int i) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
     if (lowLevelTypeChecks)
       return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i);
@@ -91,7 +91,7 @@ public class Predicate_Type extends Annotation_Type {
   /** @generated */ 
   public void setArguments(int addr, int i, int v) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.Predicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
     if (lowLevelTypeChecks)
       ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i, v, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i);
@@ -103,7 +103,7 @@ public class Predicate_Type extends Annotation_Type {
 
   /** initialize variables to correspond with Cas Type and Features
 	* @generated */
-  public Predicate_Type(JCas jcas, Type casType) {
+  public SemanticPredicate_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
 
