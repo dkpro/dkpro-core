@@ -585,6 +585,8 @@
 								<configuration>
 									<excludes>
 										<exclude>.gitignore</exclude>
+										<!-- maven config files -->
+										<exclude>src/filter/**/*</exclude>
 										<!-- release generated artifact -->
 										<exclude>release.properties</exclude>
 										<exclude>CHANGES</exclude>
