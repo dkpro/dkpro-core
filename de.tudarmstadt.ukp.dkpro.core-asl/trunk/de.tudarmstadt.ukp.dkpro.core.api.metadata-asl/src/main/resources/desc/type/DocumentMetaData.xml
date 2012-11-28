@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>MetaData</name>
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Document Meta Data</name>
   <description>Meta data about a document.</description>
-  <version>1.0</version>
-  <vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData</name>
@@ -40,33 +39,6 @@
           <description>CAS de-multipliers need to know whether a CAS is the last multiplied segment.
 Thus CAS multipliers should set this field to true for the last CAS they produce.</description>
           <rangeTypeName>uima.cas.Boolean</rangeTypeName>
-        </featureDescription>
-      </features>
-    </typeDescription>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.ProcessorMetaData</name>
-      <description>Information about a CAS processor such as a reader, analysis engine, multiplier, or consumer.</description>
-      <supertypeName>uima.cas.TOP</supertypeName>
-      <features>
-        <featureDescription>
-          <name>instanceId</name>
-          <description>Unique identifier for this processor instance. If the same processor is applied multiple times to the CAS in different configurations, each application has a unique instance ID. In a clustered environment, each cluster node running a processor in a particular configuration should produce the same instanceId.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>name</name>
-          <description>Name of the processor as per the 'name' field in the processor meta data.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>version</name>
-          <description>Version of the processor as per the 'version' field in the processor meta data.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>annotatorImplementationName</name>
-          <description>Java class implementing the processor.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
         </featureDescription>
       </features>
     </typeDescription>
