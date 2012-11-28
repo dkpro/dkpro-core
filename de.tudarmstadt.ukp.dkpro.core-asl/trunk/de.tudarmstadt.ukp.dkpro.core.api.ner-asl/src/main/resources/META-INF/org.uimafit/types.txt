@@ -1,1 +1,1 @@
-classpath*:desc/type/**/*.xml
+classpath*:desc/type/NamedEntity.xml
