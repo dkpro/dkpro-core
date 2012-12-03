@@ -515,6 +515,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.www-asl</module>
 	</modules>
 	<build>
 		<plugins>
