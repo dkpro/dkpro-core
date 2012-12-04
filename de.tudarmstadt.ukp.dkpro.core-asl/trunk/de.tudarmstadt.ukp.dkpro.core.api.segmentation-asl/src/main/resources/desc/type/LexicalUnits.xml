@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Segmentation</name>
   <description/>
   <version>${version}</version>
@@ -78,12 +79,14 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</name>
-      <description/>
+      <description>Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case"; "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
+&lt;p&gt;
+</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
           <name>parent</name>
-          <description>The parent of this token.</description>
+          <description>the parent of this token. This feature is meant to be used in when the token participates in a constituency parse and then refers to a constituent containing this token. The type of this feature is {@link Annotation} to avoid adding a dependency on the syntax API module.</description>
           <rangeTypeName>uima.tcas.Annotation</rangeTypeName>
         </featureDescription>
         <featureDescription>
