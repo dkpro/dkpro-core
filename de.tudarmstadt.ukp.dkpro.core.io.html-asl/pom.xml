@@ -23,7 +23,7 @@
     <version>1.5.0-SNAPSHOT</version>
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core.io</groupId>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.io.www-asl</artifactId>
+  <artifactId>de.tudarmstadt.ukp.dkpro.core.io.html-asl</artifactId>
   <dependencies>
   	<dependency>
   		<groupId>org.uimafit</groupId>

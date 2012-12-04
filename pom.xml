@@ -476,6 +476,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.html-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.mmax2-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</module>
@@ -515,7 +516,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.www-asl</module>
 	</modules>
 	<build>
 		<plugins>
