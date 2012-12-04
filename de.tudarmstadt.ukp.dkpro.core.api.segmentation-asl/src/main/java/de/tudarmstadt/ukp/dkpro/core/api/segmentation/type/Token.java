@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Sun Nov 21 13:42:50 CET 2010 */
+/* First created by JCasGen Tue Dec 04 00:43:53 CET 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
 import org.apache.uima.jcas.JCas; 
@@ -11,20 +11,24 @@ import org.apache.uima.jcas.tcas.Annotation;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 
-/** 
- * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/Segmentation.xml
+/** Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -> "Camel", "Case"; "Zauberstab" -> "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
+<p>
+ * Updated by JCasGen Tue Dec 04 00:57:50 CET 2012
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
 public class Token extends Annotation {
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = JCasRegistry.register(Token.class);
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int type = typeIndexID;
   /** @generated  */
+  @Override
   public              int getTypeIndexID() {return typeIndexID;}
  
   /** Never called.  Disable default constructor
@@ -56,21 +60,21 @@ public class Token extends Annotation {
     * Write your own initialization here
     * <!-- end-user-doc -->
   @generated modifiable */
-  private void readObject() {}
+  private void readObject() {/*default - does nothing empty block */}
      
  
     
   //*--------------*
-  //* Feature: Parent
+  //* Feature: parent
 
-  /** getter for Parent - gets The parent of this token.
+  /** getter for parent - gets the parent of this token. This feature is meant to be used in when the token participates in a constituency parse and then refers to a constituent containing this token. The type of this feature is {@link Annotation} to avoid adding a dependency on the syntax API module.
    * @generated */
   public Annotation getParent() {
     if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_parent == null)
       jcasType.jcas.throwFeatMissing("parent", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
     return (Annotation)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type)jcasType).casFeatCode_parent)));}
     
-  /** setter for Parent - sets The parent of this token. 
+  /** setter for parent - sets the parent of this token. This feature is meant to be used in when the token participates in a constituency parse and then refers to a constituent containing this token. The type of this feature is {@link Annotation} to avoid adding a dependency on the syntax API module. 
    * @generated */
   public void setParent(Annotation v) {
     if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_parent == null)

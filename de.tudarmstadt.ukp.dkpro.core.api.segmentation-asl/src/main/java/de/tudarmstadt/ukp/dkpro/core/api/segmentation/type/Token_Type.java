@@ -1,5 +1,5 @@
 
-/* First created by JCasGen Sun Nov 21 13:42:50 CET 2010 */
+/* First created by JCasGen Tue Dec 04 00:43:53 CET 2012 */
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
 import org.apache.uima.jcas.JCas;
@@ -13,11 +13,13 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** 
- * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
+/** Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -> "Camel", "Case"; "Zauberstab" -> "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
+<p>
+ * Updated by JCasGen Tue Dec 04 00:57:50 CET 2012
  * @generated */
 public class Token_Type extends Annotation_Type {
   /** @generated */
+  @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
@@ -36,9 +38,11 @@ public class Token_Type extends Annotation_Type {
   	  }
     };
   /** @generated */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = Token.typeIndexID;
   /** @generated 
      @modifiable */
+  @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
  
   /** @generated */
