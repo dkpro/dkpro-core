@@ -32,7 +32,7 @@ import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
-public class WWWReaderTest
+public class HTMLReaderTest
 {
 
     @Test
@@ -40,8 +40,8 @@ public class WWWReaderTest
         throws Exception
     {
         CollectionReader reader = createCollectionReader(
-                WWWReader.class,
-                WWWReader.PARAM_INPUT_URL, new URL("http://www.ukp.tu-darmstadt.de")
+                HTMLReader.class,
+                HTMLReader.PARAM_INPUT_URL, new URL("http://www.ukp.tu-darmstadt.de")
         );
 
         for (JCas jcas : new JCasIterable(reader)) {

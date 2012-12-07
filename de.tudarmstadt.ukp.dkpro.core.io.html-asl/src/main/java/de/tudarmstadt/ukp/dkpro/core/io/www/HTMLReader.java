@@ -47,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * @author zesch
  *
  */
-public class WWWReader
+public class HTMLReader
     extends JCasCollectionReader_ImplBase
 { 
     
