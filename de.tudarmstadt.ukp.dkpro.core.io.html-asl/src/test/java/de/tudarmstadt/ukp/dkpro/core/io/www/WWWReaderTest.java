@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.www;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.uimafit.util.JCasUtil.select;
 
@@ -26,32 +27,28 @@ import java.net.URL;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 public class WWWReaderTest
 {
 
-    @Ignore
     @Test
     public void wwwReaderTest()
         throws Exception
     {
         CollectionReader reader = createCollectionReader(
                 WWWReader.class,
-                ResourceCollectionReaderBase.PARAM_PATH, new URL("http://www.ukp.tu-darmstadt.de").getPath(),
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*" });
+                WWWReader.PARAM_INPUT_URL, new URL("http://www.ukp.tu-darmstadt.de")
+        );
 
         for (JCas jcas : new JCasIterable(reader)) {
             dumpMetaData(DocumentMetaData.get(jcas));
             assertEquals(1, select(jcas, DocumentAnnotation.class).size());
             
-            System.out.println(jcas.getDocumentText());
+            assertTrue(jcas.getDocumentText().startsWith("UKP Home"));
         }
     }
 
