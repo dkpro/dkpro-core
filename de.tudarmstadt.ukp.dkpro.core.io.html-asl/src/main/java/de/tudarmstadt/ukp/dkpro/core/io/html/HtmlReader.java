@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.io.www;
+package de.tudarmstadt.ukp.dkpro.core.io.html;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
@@ -47,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * @author zesch
  *
  */
-public class HTMLReader
+public class HtmlReader
     extends JCasCollectionReader_ImplBase
 { 
     /**

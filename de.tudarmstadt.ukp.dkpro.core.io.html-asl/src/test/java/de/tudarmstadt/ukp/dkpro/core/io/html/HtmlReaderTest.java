@@ -31,9 +31,9 @@ import org.junit.Test;
 import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.io.html.HTMLReader;
+import de.tudarmstadt.ukp.dkpro.core.io.html.HtmlReader;
 
-public class HTMLReaderTest
+public class HtmlReaderTest
 {
 
     @Test
@@ -41,8 +41,8 @@ public class HTMLReaderTest
         throws Exception
     {
         CollectionReader reader = createCollectionReader(
-                HTMLReader.class,
-                HTMLReader.PARAM_SOURCE_LOCATION, new URL("http://www.ukp.tu-darmstadt.de")
+                HtmlReader.class,
+                HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.ukp.tu-darmstadt.de")
         );
 
         for (JCas jcas : new JCasIterable(reader)) {
