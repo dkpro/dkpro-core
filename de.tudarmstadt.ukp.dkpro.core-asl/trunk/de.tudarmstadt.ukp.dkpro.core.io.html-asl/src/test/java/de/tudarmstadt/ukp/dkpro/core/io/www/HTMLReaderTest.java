@@ -41,7 +41,7 @@ public class HTMLReaderTest
     {
         CollectionReader reader = createCollectionReader(
                 HTMLReader.class,
-                HTMLReader.PARAM_INPUT_URL, new URL("http://www.ukp.tu-darmstadt.de")
+                HTMLReader.PARAM_SOURCE_LOCATION, new URL("http://www.ukp.tu-darmstadt.de")
         );
 
         for (JCas jcas : new JCasIterable(reader)) {
