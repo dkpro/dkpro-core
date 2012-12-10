@@ -50,7 +50,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 public class HTMLReader
     extends JCasCollectionReader_ImplBase
 { 
-    
     /**
      * Automatically detect encoding.
      * 
@@ -65,47 +64,52 @@ public class HTMLReader
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
 
-    public static final String PARAM_INPUT_URL = "InputURL";
-    @ConfigurationParameter(name=PARAM_INPUT_URL, mandatory=true)
+    public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
+    @ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=true)
     private URL inputURL;
 
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	private String language;
 
-    boolean hasNext;
+    private boolean isDone = false;
 
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
     {
         super.initialize(context);
-        
-        hasNext = true;
+        isDone = false;
     }
 
     @Override
     public boolean hasNext()
         throws IOException, CollectionException
     {
-        if (hasNext) {
-            hasNext = false;
-            return true;
-        }
-        
-        return false;
+    	return !isDone;
     }
 
     @Override
     public Progress[] getProgress() {
-        return new Progress[] { new ProgressImpl(1, 1, Progress.ENTITIES) };
+        return new Progress[] { new ProgressImpl(isDone ? 1 : 0, 1, Progress.ENTITIES) };
     }
 
     @Override
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {
+        isDone = true;
+        
         InputStream is = null;
         try {
+            DocumentMetaData dmd = DocumentMetaData.create(jcas);
+            dmd.setDocumentUri(inputURL.toURI().toString());
+            dmd.setDocumentTitle(inputURL.getPath());
+            dmd.setLanguage(language);
+
             is = inputURL.openStream();
             String text;
+            
             if (ENCODING_AUTO.equals(encoding)) {
                 CharsetDetector detector = new CharsetDetector();
                 text = IOUtils.toString(detector.getReader(is, null));
@@ -113,12 +117,9 @@ public class HTMLReader
             else {
                 text = IOUtils.toString(is, encoding);
             }
+            
             String cleanedText = Jsoup.parse(text).text();
             jcas.setDocumentText(cleanedText);
-            
-            DocumentMetaData dmd = DocumentMetaData.create(jcas);
-            dmd.setDocumentUri(inputURL.toURI().toString());
-            dmd.setDocumentTitle(inputURL.getPath());
         }
         catch (URISyntaxException e) {
             throw new IOException(e);
