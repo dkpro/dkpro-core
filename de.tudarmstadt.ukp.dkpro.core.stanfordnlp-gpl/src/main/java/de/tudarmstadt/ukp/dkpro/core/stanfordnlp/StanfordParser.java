@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
@@ -68,6 +69,8 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
+	
+	
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
@@ -92,6 +95,15 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_TAGS, mandatory = true, defaultValue = "true")
 	private boolean createDependencyTags;
 
+	
+	/**
+	 * Sets whether to create or not to create collapsed dependencies. <br/>
+	 * Default: {@code false}
+	 */
+	public static final String PARAM_CREATE_COLLAPSED_DEPENDENCIES= "createCollapsedDependencies";
+	@ConfigurationParameter(name = PARAM_CREATE_COLLAPSED_DEPENDENCIES, mandatory = false, defaultValue="false")
+	protected boolean createCollapsedDependencies;
+	
 	/**
 	 * Sets whether to create or not to create constituent tags. This is
 	 * required for POS-tagging and lemmatization.<br/>
@@ -389,8 +401,14 @@ public class StanfordParser
 		}
 
 		GrammaticalStructure gs = gsf.newGrammaticalStructure(parseTree);
-
-		for (TypedDependency currTypedDep : gs.typedDependencies()) {
+		Collection<TypedDependency> dependencies =  null;
+		if(createCollapsedDependencies){
+			dependencies = gs.typedDependenciesCollapsed();
+		}else{
+			dependencies = gs.typedDependencies();
+		}
+		
+		for (TypedDependency currTypedDep : dependencies) {
 			int govIndex = currTypedDep.gov().index();
 			int depIndex = currTypedDep.dep().index();
 			if (govIndex != 0) {
