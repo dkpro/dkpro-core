@@ -335,7 +335,7 @@ public class StanfordAnnotator
         }
 		
 		AnnotationFS anno = jCas.getCas().createAnnotation(type, aBegin, aEnd);
-		anno.setStringValue(type.getFeatureByBaseName("DependencyType"), dependencyType);
+		anno.setStringValue(type.getFeatureByBaseName("DependencyType"), aGramRel.toString());
 		anno.setFeatureValue(type.getFeatureByBaseName("Governor"), aGovernor);
 		anno.setFeatureValue(type.getFeatureByBaseName("Dependent"), aDependent);
 
