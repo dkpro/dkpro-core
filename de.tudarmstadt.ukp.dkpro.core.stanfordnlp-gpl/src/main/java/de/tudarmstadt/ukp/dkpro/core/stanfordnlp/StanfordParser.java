@@ -194,7 +194,6 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
 	private List<String> quoteEnd;
 
-	
 	private GrammaticalStructureFactory gsf;
 
 	// distinction between createLemmas & paramCreateLemmas necessary
@@ -295,6 +294,13 @@ public class StanfordParser
 						Set<String> constTags = new HashSet<String>();
 						for (String tag : pd.stateIndex) {
 							String t = lp.basicCategory(tag);
+							// https://mailman.stanford.edu/pipermail/parser-user/2012-December/002156.html
+							// The parser algorithm used is a binary parser, so what we do is 
+							// binarize trees by turning A -> B, C, D into A -> B, @A, @A -> C, D.
+							// (That's roughly how it goes, although the exact details are somewhat
+							// different.)  When parsing, we parse to a binarized tree and then
+							// unbinarize it before returning.  That's the origin of the @ classes.
+							// -- J. Bauer
 							if (!t.startsWith("@")) {
 								constTags.add(t);
 							}
