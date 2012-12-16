@@ -26,9 +26,12 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+import org.uimafit.factory.JCasBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
@@ -42,7 +45,7 @@ import edu.stanford.nlp.trees.Tree;
 /**
  * @author Oliver Ferschke
  * @author Niklas Jakob
- *
+ * @author Richard Eckart de Castilho
  */
 public class StanfordParserTest
 {
@@ -203,6 +206,52 @@ public class StanfordParserTest
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+	}
+	
+	/**
+	 * This test uses simple double quotes.
+	 */
+	@Test
+	public void testEnglishFactoredDirectSpeech()
+		throws Exception
+	{
+		JCas jcas = runTest("en", "factored", "\"It's cold outside,\" he said, \"and it's starting to rain.\"");
+		
+		String[] posOriginal = new String[] { "``", "PRP", "VBZ", "JJ", "JJ", ",", "''", "PRP",
+				"VBD", ",", "``", "CC", "PRP", "VBZ", "VBG", "TO", "NN", ".", "''" };
+		
+		String pennTree = "(ROOT (S (`` ``) (S (NP (PRP It)) (VP (VBZ 's) (ADJP (JJ cold)) (S " +
+				"(ADJP (JJ outside))))) (PRN (, ,) ('' '') (S (NP (PRP he)) (VP (VBD said))) " +
+				"(, ,) (`` ``)) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP " +
+				"(TO to) (NP (NN rain)))))) (. .) ('' '')))";
+		
+		AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
+		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+	}
+
+	/**
+	 * This test uses UTF-8 quotes as they can be found in the British National Corpus.
+	 */
+	@Test
+	public void testEnglishFactoredDirectSpeech2()
+		throws Exception
+	{
+//		JCas jcas = runTest("en", "factored", "‘Prices are used as a barrier so that the sort of " +
+//				"people we don't want go over the road ,’ he said .");
+		JCas jcas = runTest("en", "factored", new String[] { "‘", "It", "'s", "cold", "outside",
+				",", "’", "he", "said", ",", "‘", "and", "it", "'s", "starting", "to", "rain", ".",
+				"’" });
+		
+		String[] posOriginal = new String[] { "``", "PRP", "VBZ", "JJ", "JJ", ",", "''", "PRP",
+				"VBD", ",", "``", "CC", "PRP", "VBZ", "VBG", "TO", "NN", ".", "''" };
+		
+		String pennTree = "(ROOT (S (`` ``) (S (NP (PRP It)) (VP (VBZ 's) (ADJP (JJ cold)) (S " +
+				"(ADJP (JJ outside))))) (PRN (, ,) ('' '') (S (NP (PRP he)) (VP (VBD said))) " +
+				"(, ,) (`` ``)) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP " +
+				"(TO to) (NP (NN rain)))))) (. .) ('' '')))";
+		
+		AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 	}
 	
@@ -383,6 +432,41 @@ public class StanfordParserTest
 		return jcas;
 	}
 	
+	/**
+	 * Setup CAS to test parser for the English language (is only called once if
+	 * an English test is run)
+	 */
+	private JCas runTest(String aLanguage, String aVariant, String[] aTokens)
+		throws Exception
+	{
+		// setup English
+		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
+				StanfordParser.PARAM_VARIANT, aVariant,
+				StanfordParser.PARAM_PRINT_TAGSET, true,
+				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
+				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
+				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
+				StanfordParser.PARAM_CREATE_POS_TAGS, true,
+				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
+				StanfordParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
+				StanfordParser.PARAM_QUOTE_END, new String[] { "’" });
+
+		AnalysisEngine engine = createPrimitive(parser);
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage(aLanguage);
+		
+		JCasBuilder builder = new JCasBuilder(jcas);
+		for (String t : aTokens) {
+			builder.add(t, Token.class);
+			builder.add(" ");
+		}
+		builder.add(0, Sentence.class);
+		builder.close();
+		
+		engine.process(jcas);
+		
+		return jcas;
+	}
 	@Rule
 	public TestName name = new TestName();
 

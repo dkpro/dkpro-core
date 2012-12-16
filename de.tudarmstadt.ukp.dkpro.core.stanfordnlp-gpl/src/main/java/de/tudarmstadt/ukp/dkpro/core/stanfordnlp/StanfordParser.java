@@ -23,10 +23,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
@@ -48,13 +49,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
-import edu.stanford.nlp.ling.CyclicCoreLabel;
+import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParserQuery;
+import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 
 /**
@@ -69,8 +72,6 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
-	
-	
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
@@ -176,6 +177,24 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_CREATE_LEMMAS, mandatory = false)
 	private Boolean paramCreateLemmas;
 
+	/**
+	 * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-). 
+	 * 
+	 * @see PTBEscapingProcessor
+	 */
+	public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
+	@ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue="true")
+	private boolean ptb3Escaping;
+	
+	public static final String PARAM_QUOTE_BEGIN = "quoteBegin";
+	@ConfigurationParameter(name = PARAM_QUOTE_BEGIN, mandatory = false)
+	private List<String> quoteBegin;
+	
+	public static final String PARAM_QUOTE_END = "quoteEnd";
+	@ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
+	private List<String> quoteEnd;
+
+	
 	private GrammaticalStructureFactory gsf;
 
 	// distinction between createLemmas & paramCreateLemmas necessary
@@ -185,6 +204,9 @@ public class StanfordParser
 
 	private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
 	private MappingProvider posMappingProvider;
+	
+	private PTBEscapingProcessor<HasWord, String, Word> escaper = 
+			new PTBEscapingProcessor<HasWord, String, Word>();
 
 	@Override
 	public void initialize(UimaContext context)
@@ -229,7 +251,7 @@ public class StanfordParser
 			{
 				getContext().getLogger().log(Level.INFO,
 						"Loading parser from serialized file " + aUrl + " ...");
-				ObjectInputStream in;
+				ObjectInputStream in = null;
 				InputStream is = null;
 				try {
 					is = aUrl.openStream();
@@ -244,8 +266,9 @@ public class StanfordParser
 						in = new ObjectInputStream(new BufferedInputStream(is));
 					}
 					LexicalizedParser pd = (LexicalizedParser) in.readObject();
+					TreebankLanguagePack lp = pd.getTLPParams().treebankLanguagePack();
 					try {
-						gsf = pd.getTLPParams().treebankLanguagePack().grammaticalStructureFactory();
+						gsf = lp.grammaticalStructureFactory();
 					}
 					catch (UnsupportedOperationException e) {
 						getContext().getLogger().log(WARNING, "Current model does not seem to support " +
@@ -254,17 +277,34 @@ public class StanfordParser
 					}
 
 					if (printTagSet) {
-						List<String> tags = new ArrayList<String>();
+						// https://mailman.stanford.edu/pipermail/parser-user/2012-November/002117.html
+						// The tagIndex does give all and only the set of POS tags used in the
+						// current grammar. However, these are the split tags actually used by the
+						// grammar.  If you really want the user-visible non-split tags of the
+						// original treebank, then you'd need to map them all through the
+						// op.treebankLanguagePack().basicCategory(). -- C. Manning
+						Set<String> posTags = new HashSet<String>();
 						for (String tag : pd.tagIndex) {
-							tags.add(tag);
-						}					
-						Collections.sort(tags);
-
-						getContext().getLogger().log(INFO, "Model contains [" + tags.size() + 
-								"] tags: "+StringUtils.join(tags, " "));
+							posTags.add(lp.basicCategory(tag));
+						}			
+						// https://mailman.stanford.edu/pipermail/parser-user/2012-November/002117.html
+						// For constituent categories, there isn't an index of just them. The
+						// stateIndex has both constituent categories and POS tags in it, so you'd
+						// need to set difference out the tags from the tagIndex, and then it's as
+						// above. -- C. Manning
+						Set<String> constTags = new HashSet<String>();
+						for (String tag : pd.stateIndex) {
+							String t = lp.basicCategory(tag);
+							if (!t.startsWith("@")) {
+								constTags.add(t);
+							}
+						}
+						constTags.removeAll(posTags);
+						
+						printTags("tagger", posTags);
+						printTags("parser", constTags);
 					}
 
-					in.close();
 					pd.setOptionFlags("-maxLength", String.valueOf(maxTokens));
 					return pd;
 				}
@@ -272,6 +312,7 @@ public class StanfordParser
 					throw new IOException(e);
 				}
 				finally {
+					closeQuietly(in);
 					closeQuietly(is);
 				}
 			}
@@ -285,6 +326,21 @@ public class StanfordParser
 		posMappingProvider.setOverride(MappingProvider.LOCATION, taggerMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		posMappingProvider.addImport("tagger.tagset", modelProvider);
+	}
+
+	private void printTags(String aType, Collection<String> aTags)
+	{
+		List<String> tags = new ArrayList<String>(aTags);
+		Collections.sort(tags);
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("Model of " + aType + " contains [").append(tags.size()).append("] tags: ");
+		
+		for (String tag : tags) {
+			sb.append(tag);
+			sb.append(" ");
+		}
+		getContext().getLogger().log(INFO, sb.toString());
 	}
 
 	/**
@@ -340,23 +396,34 @@ public class StanfordParser
 
 		while(typeToParseIterator.hasNext()){
 			Annotation currAnnotationToParse = typeToParseIterator.next();
-			List<Word> tokenizedSentence = new ArrayList<Word>();
+			List<HasWord> tokenizedSentence = new ArrayList<HasWord>();
 			List<Token> tokens = new ArrayList<Token>();
 
-			/*
-			 * Split sentence to tokens for annotating indexes
-			 */
+			// Split sentence to tokens for annotating indexes
 			for (Token token : JCasUtil.selectCovered(Token.class, currAnnotationToParse)) {
-				tokenizedSentence.add(getPennTokenText(token));
+				tokenizedSentence.add(tokenToWord(token));
 				tokens.add(token);
 			}
 
-			// Get parsetree
 			Tree parseTree;
 			try {
 				getContext().getLogger().log(FINE, tokenizedSentence.toString());
 				LexicalizedParser parser = modelProvider.getResource();
 				if (tokenizedSentence.size() <= maxTokens) {
+					// Apply PTB escaping
+					if (ptb3Escaping) {
+						tokenizedSentence = escaper.apply(tokenizedSentence);
+						for (HasWord w : tokenizedSentence) {
+							if (quoteBegin != null && quoteBegin.contains(w.word())) {
+								w.setWord("``");
+							}
+							else if (quoteEnd != null && quoteEnd.contains(w.word())) {
+								w.setWord("\'\'");
+							}
+						}
+					}
+					
+					// Get parse
 					LexicalizedParserQuery query = parser.parserQuery();
 					query.parse(tokenizedSentence);
 					parseTree = query.getBestParse();
@@ -369,6 +436,7 @@ public class StanfordParser
 			catch (Exception e) {
 				throw new AnalysisEngineProcessException(e);
 			}
+			
 			// Create new StanfordAnnotator object
 			StanfordAnnotator sfAnnotator = null;
 			try {
@@ -379,15 +447,19 @@ public class StanfordParser
 				throw new AnalysisEngineProcessException(e);
 			}
 
+			// Create Penn bracketed structure annotations
 			if (createPennTreeString) {
 				sfAnnotator.createPennTreeAnnotation(currAnnotationToParse.getBegin(),
 						currAnnotationToParse.getEnd());
 			}
-
-			doCreateDependencyTags(sfAnnotator, currAnnotationToParse, parseTree, tokens);
-
+			
+			// Create dependency annotations
+			if (createDependencyTags && gsf != null) {
+				doCreateDependencyTags(sfAnnotator, currAnnotationToParse, parseTree, tokens);
+			}
+			
+			// Create constituent annotations
 			if (createConstituentTags) {
-				// create constituent annotations from parse tree
 				sfAnnotator.createConstituentAnnotationFromTree(createPosTags, createLemmas);
 			}
 		}
@@ -396,15 +468,12 @@ public class StanfordParser
 	protected void doCreateDependencyTags(StanfordAnnotator sfAnnotator,
 			Annotation currAnnotationToParse, Tree parseTree, List<Token> tokens)
 	{
-		if (!createDependencyTags || gsf == null) {
-			return;
-		}
-
 		GrammaticalStructure gs = gsf.newGrammaticalStructure(parseTree);
-		Collection<TypedDependency> dependencies =  null;
-		if(createCollapsedDependencies){
+		Collection<TypedDependency> dependencies = null;
+		if (createCollapsedDependencies) {
 			dependencies = gs.typedDependenciesCollapsed();
-		}else{
+		}
+		else {
 			dependencies = gs.typedDependencies();
 		}
 		
@@ -412,7 +481,7 @@ public class StanfordParser
 			int govIndex = currTypedDep.gov().index();
 			int depIndex = currTypedDep.dep().index();
 			if (govIndex != 0) {
-				// Stanford CoreNLP produces a depencency relation between a verb and ROOT-0 which
+				// Stanford CoreNLP produces a dependency relation between a verb and ROOT-0 which
 				// is not token at all!
 				Token govToken = tokens.get(govIndex - 1);
 				Token depToken = tokens.get(depIndex - 1);
@@ -424,22 +493,8 @@ public class StanfordParser
 		}
 	}
 
-	protected Word getPennTokenText(Token aToken)
+	protected Word tokenToWord(Token aToken)
 	{
-		String tokenString = aToken.getCoveredText();
-		if (tokenString.equals("(") || tokenString.equals("[")) {
-			tokenString = "-LRB-";
-		}
-		else if (tokenString.equals(")") || tokenString.equals("]")) {
-			tokenString = "-RRB-";
-		}
-
-		CyclicCoreLabel label = new CyclicCoreLabel();
-		label.setWord(tokenString);
-		label.setValue(tokenString);
-		label.setBeginPosition(aToken.getBegin());
-		label.setEndPosition(aToken.getEnd());
-
-		return new Word(tokenString, aToken.getBegin(), aToken.getEnd());
+		return new Word(aToken.getCoveredText(), aToken.getBegin(), aToken.getEnd());
 	}
 }
