@@ -1,0 +1,2 @@
+classpath*:BasicTypeSystem.xml
+classpath*:InternalTypeSystem.xml
