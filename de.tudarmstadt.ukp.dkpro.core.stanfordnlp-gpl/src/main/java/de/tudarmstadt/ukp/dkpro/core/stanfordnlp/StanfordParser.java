@@ -416,8 +416,10 @@ public class StanfordParser
 				getContext().getLogger().log(FINE, tokenizedSentence.toString());
 				LexicalizedParser parser = modelProvider.getResource();
 				if (tokenizedSentence.size() <= maxTokens) {
-					// Apply PTB escaping
 					if (ptb3Escaping) {
+						// Apply escaper to the whole sentence, not to each token individually. The
+						// escaper takes context into account, e.g. when transforming regular double
+						// quotes into PTB opening and closing quotes (`` and '').
 						tokenizedSentence = escaper.apply(tokenizedSentence);
 						for (HasWord w : tokenizedSentence) {
 							if (quoteBegin != null && quoteBegin.contains(w.word())) {
