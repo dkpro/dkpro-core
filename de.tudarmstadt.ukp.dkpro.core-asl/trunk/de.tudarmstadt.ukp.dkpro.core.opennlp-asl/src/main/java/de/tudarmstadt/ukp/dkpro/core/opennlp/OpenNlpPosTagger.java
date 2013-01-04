@@ -42,6 +42,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -55,6 +56,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+		outputs = { 
+		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class OpenNlpPosTagger
 	extends JCasAnnotator_ImplBase
 {

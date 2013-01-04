@@ -49,6 +49,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -65,6 +66,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+		outputs = { 
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
 public class OpenNlpParser
 	extends JCasAnnotator_ImplBase
 {
