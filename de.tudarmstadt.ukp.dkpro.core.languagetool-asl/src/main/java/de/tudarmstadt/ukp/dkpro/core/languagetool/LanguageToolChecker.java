@@ -27,6 +27,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
@@ -39,6 +40,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  *
  * @author Zhi Shen
  */
+@TypeCapability(
+	    outputs = {
+		    "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly" })
 public class LanguageToolChecker
 	extends JCasAnnotator_ImplBase
 {
