@@ -31,6 +31,7 @@ import org.languagetool.AnalyzedToken;
 import org.languagetool.AnalyzedTokenReadings;
 import org.languagetool.Language;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -45,6 +46,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+	    outputs = {
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class LanguageToolLemmatizer
 	extends JCasAnnotator_ImplBase
 {

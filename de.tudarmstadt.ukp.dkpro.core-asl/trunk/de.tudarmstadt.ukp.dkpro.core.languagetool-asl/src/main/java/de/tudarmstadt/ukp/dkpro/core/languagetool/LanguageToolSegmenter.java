@@ -22,6 +22,7 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.languagetool.Language;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
@@ -31,6 +32,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    outputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class LanguageToolSegmenter extends SegmenterBase
 {
 	@Override
