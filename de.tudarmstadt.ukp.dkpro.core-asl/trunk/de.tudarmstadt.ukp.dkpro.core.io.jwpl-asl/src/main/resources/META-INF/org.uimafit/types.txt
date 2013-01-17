@@ -1,1 +1,2 @@
 classpath*:desc/type/jwpl.xml
+classpath*:desc/type/wikipediaLink.xml
