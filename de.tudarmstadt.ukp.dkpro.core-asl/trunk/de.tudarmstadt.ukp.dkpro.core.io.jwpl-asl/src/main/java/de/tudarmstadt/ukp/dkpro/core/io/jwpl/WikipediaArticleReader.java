@@ -17,67 +17,21 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
-import org.apache.uima.UimaContext;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.descriptor.ConfigurationParameter;
-
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
-import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 
 /**
  * Reads all article pages.
  *
  * A parameter controls whether the full article or only the first paragraph is set as the document text.
+ * 
+ * No Redirects, disambiguation pages, or discussion pages are regarded, however.
  *
  * @author zesch
  *
  */
-public class WikipediaArticleReader extends WikipediaStandardReaderBase
+public class WikipediaArticleReader extends WikipediaPageReader
 {
-
-    /** If set to true, only the first paragraph instead of the whole article is used. */
-    public static final String PARAM_ONLY_FIRST_PARAGRAPH = "OnlyFirstParagraph";
-    @ConfigurationParameter(name = PARAM_ONLY_FIRST_PARAGRAPH, mandatory=true, defaultValue="false")
-    private boolean onlyFirstParagraph;
-
-    @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
-    {
-        super.initialize(context);
-
-        if (!outputPlainText && onlyFirstParagraph) {
-            throw new ResourceInitializationException(
-                    new IllegalArgumentException(
-                            "First paragraph can only be accessed in plain text mode. Either '" +
-                            PARAM_ONLY_FIRST_PARAGRAPH + "' or '" + PARAM_OUTPUT_PLAIN_TEXT +
-                            "' need to be set differently."
-                    )
-            );
-        }
-    }
-
-    //TODO Use SWEBLE
-    @Override
-    protected String getPlainDocumentText(Page page)
-    {
-        String text = "";
-        ParsedPage pp = parser.parse(page.getText());
-
-        if (onlyFirstParagraph) {
-            if (pp != null && pp.getParagraph(0) != null) {
-                text = pp.getParagraph(0).getText();
-            }
-        }
-        else {
-            if (pp != null ) {
-                text = pp.getText();
-            }
-        }
-
-        return text;
-    }
 
     @Override
     protected boolean isValidPage(Page page) throws WikiTitleParsingException
