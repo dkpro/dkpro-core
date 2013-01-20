@@ -165,7 +165,8 @@ public abstract class WikipediaStandardReaderBase
 		parser = pf.createParser();
 	}
 
-	public boolean hasNext()
+	@Override
+    public boolean hasNext()
 		throws IOException, CollectionException
 	{
 		return pageIter.hasNext();
@@ -226,11 +227,14 @@ public abstract class WikipediaStandardReaderBase
 	private void addDocumentMetaData(JCas jcas, Page page)
 		throws WikiTitleParsingException
 	{
+	    String language = WikiUtils.jwplLanguage2dkproLanguage(dbconfig.getLanguage());
 		DocumentMetaData metaData = DocumentMetaData.create(jcas);
 		metaData.setDocumentTitle(page.getTitle().getWikiStyleTitle());
 		metaData.setCollectionId(Integer.valueOf(page.getPageId()).toString());
 		metaData.setDocumentId(Integer.valueOf(page.getPageId()).toString());
-		metaData.setLanguage(dbconfig.getLanguage().toString());
+		metaData.setDocumentBaseUri("http://" + language + ".wikipedia.org");
+		metaData.setDocumentUri("http://" + language + ".wikipedia.org/w/index.php?title=" + page.getTitle().getWikiStyleTitle());
+        metaData.setLanguage(language);
 	}
 
 	/**
