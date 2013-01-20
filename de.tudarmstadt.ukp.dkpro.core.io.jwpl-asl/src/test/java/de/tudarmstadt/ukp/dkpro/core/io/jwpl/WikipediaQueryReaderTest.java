@@ -53,4 +53,28 @@ public class WikipediaQueryReaderTest
 
 		assertEquals(1, i);
 	}
+	
+	   @Test
+	    public void wikipediaReaderTest2()
+	        throws Exception
+	    {
+	        CollectionReader reader = createCollectionReader(
+	                WikipediaQueryReader.class,
+	                WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
+	                WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
+	                WikipediaReaderBase.PARAM_USER,     "student",
+	                WikipediaReaderBase.PARAM_PASSWORD, "student",
+	                WikipediaReaderBase.PARAM_LANGUAGE, Language._test,
+	                WikipediaQueryReader.PARAM_MIN_TOKENS, 1,
+	                WikipediaQueryReader.PARAM_MAX_TOKENS, 200,
+	                WikipediaQueryReader.PARAM_TITLE_PATTERN, "UK%");
+
+	        int i = 0;
+	        for (JCas jcas : new JCasIterable(reader)) {
+	            assertNotNull(jcas);
+	            i++;
+	        }
+
+	        assertEquals(1, i);
+	    }
 }
