@@ -40,9 +40,10 @@ import com.googlecode.jweb1t.JWeb1TIndexer;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
+import de.tudarmstadt.ukp.dkpro.core.gate.GateLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 
 public class Web1TFormatWriterTest {
 
@@ -127,8 +128,10 @@ public class Web1TFormatWriterTest {
 
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription treeTagger = createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class);
+		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
 
+        AnalysisEngineDescription lemmatizer = createPrimitiveDescription(GateLemmatizer.class);
+		
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,
 				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
@@ -137,7 +140,7 @@ public class Web1TFormatWriterTest {
 				Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM,
 				Web1TFormatWriter.PARAM_MIN_FREQUENCY, minFreq);
 
-		SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
+		SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);
 	}
 
 	private Web1TFileAccessProvider prepareWeb1TFormatTest(
@@ -167,7 +170,9 @@ public class Web1TFormatWriterTest {
 
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription treeTagger = createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class);
+		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
+        
+		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(GateLemmatizer.class);
 
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,
@@ -176,7 +181,7 @@ public class Web1TFormatWriterTest {
 				Web1TFormatWriter.PARAM_MIN_NGRAM_LENGTH, MIN_NGRAM,
 				Web1TFormatWriter.PARAM_MAX_NGRAM_LENGTH, MAX_NGRAM);
 
-		SimplePipeline.runPipeline(reader, segmenter, treeTagger, ngramWriter);
+		SimplePipeline.runPipeline(reader, segmenter, tagger, lemmatizer, ngramWriter);
 	}
 
 	private void deleteIndexFolder() {
