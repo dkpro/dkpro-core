@@ -39,8 +39,8 @@ import com.googlecode.jweb1t.JWeb1TIndexer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.clearnlp.ClearNlpLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
-import de.tudarmstadt.ukp.dkpro.core.gate.GateLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
@@ -130,7 +130,7 @@ public class Web1TFormatWriterTest {
 
 		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
 
-        AnalysisEngineDescription lemmatizer = createPrimitiveDescription(GateLemmatizer.class);
+        AnalysisEngineDescription lemmatizer = createPrimitiveDescription(ClearNlpLemmatizer.class);
 		
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,
@@ -172,7 +172,7 @@ public class Web1TFormatWriterTest {
 
 		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
         
-		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(GateLemmatizer.class);
+		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(ClearNlpLemmatizer.class);
 
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,
