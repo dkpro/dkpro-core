@@ -87,10 +87,15 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>
-				de.tudarmstadt.ukp.dkpro.core.gate-gpl
+				de.tudarmstadt.ukp.dkpro.core.clearnlp-asl
 			</artifactId>
-			<scope>test</scope>
-			<version>1.5.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+				de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default
+			</artifactId>
+			<version>20121031.0</version>
 		</dependency>
 	</dependencies>
 	<profiles>
