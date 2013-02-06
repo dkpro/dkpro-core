@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Tokenizer tokenizer using Clear NLP.
+ * Lemmatizer using Clear NLP.
  * 
  * @author Richard Eckart de Castilho
  */
