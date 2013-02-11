@@ -18,10 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import java.io.IOException;
-
+import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
+import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.factory.JCasFactory;
@@ -30,8 +32,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
- * Simple reader that generates a CAS from a String. This can be useful in situations where a
- * reader is preferred over manually crafting a CAS using {@link JCasFactory#createJCas()}.
+ * Simple reader that generates a CAS from a String. This can be useful in situations where a reader
+ * is preferred over manually crafting a CAS using {@link JCasFactory#createJCas()}.
  * 
  * @author Erik-Lân Do Dinh
  * @author Richard Eckart de Castilho
@@ -48,11 +50,13 @@ public class StringReader
 	private String language;
 
 	public static final String PARAM_COLLECTION_ID = "collectionId";
-	@ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true, defaultValue = "COLLECTION_ID")
+	@ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true,
+			defaultValue = "COLLECTION_ID")
 	private String collectionId;
 
 	public static final String PARAM_DOCUMENT_ID = "documentId";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true, defaultValue = "DOCUMENT_ID")
+	@ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true,
+			defaultValue = "DOCUMENT_ID")
 	private String documentId;
 
 	public static final String PARAM_DOCUMENT_BASE_URI = "documentBaseUri";
@@ -66,19 +70,27 @@ public class StringReader
 	private boolean isDone = false;
 
 	@Override
+	public void initialize(UimaContext aContext)
+		throws ResourceInitializationException
+	{
+		super.initialize(aContext);
+		isDone = false;
+	}
+	
+	@Override
 	public void getNext(JCas sJCas)
 		throws IOException
 	{
+		isDone = true;
+		
 		DocumentMetaData meta = DocumentMetaData.create(sJCas);
 		meta.setCollectionId(collectionId);
 		meta.setDocumentUri(documentUri);
 		meta.setDocumentId(documentId);
 		meta.setDocumentBaseUri(documentBaseUri);
-		
+
 		sJCas.setDocumentLanguage(language);
 		sJCas.setDocumentText(documentText);
-
-		isDone = true;
 	}
 
 	@Override
@@ -91,6 +103,6 @@ public class StringReader
 	@Override
 	public Progress[] getProgress()
 	{
-		return null;
+		return new Progress[] { new ProgressImpl(isDone ? 0 : 1, 1, Progress.ENTITIES) };
 	}
 }
