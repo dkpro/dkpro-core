@@ -2,8 +2,8 @@
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Tag</name>
   <description/>
-  <version>1.0</version>
-  <vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.Tag</name>

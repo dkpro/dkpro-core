@@ -2,8 +2,8 @@
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>PennTree</name>
   <description>A Penn Treebank-style phrase structure tree with optional transformation information.</description>
-  <version>2.0</version>
-  <vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree</name>
