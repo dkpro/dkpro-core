@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Document Meta Data</name>
-  <description>Meta data about a document.</description>
+  <description>Meta data about a document.
+&lt;p&gt;
+In addition to the features given here, there is a &lt;i&gt;language&lt;/i&gt; feature inherited from UIMA's {@link DocumentAnnotation}. DKPro Core components expect a two letter ISO 639-1 language code there.</description>
   <version>${version}</version>
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
