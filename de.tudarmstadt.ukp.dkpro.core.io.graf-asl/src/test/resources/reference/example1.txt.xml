@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graph xmlns="http://www.xces.org/ns/GrAF/1.0/">
+    <graphHeader>
+        <labelsDecl>
+            <labelUsage label="V" occurs="4"/>
+            <labelUsage label="ART" occurs="2"/>
+            <labelUsage label="PP" occurs="2"/>
+            <labelUsage label="PR" occurs="1"/>
+            <labelUsage label="Sentence" occurs="2"/>
+            <labelUsage label="PUNC" occurs="4"/>
+            <labelUsage label="O" occurs="2"/>
+            <labelUsage label="Token" occurs="20"/>
+            <labelUsage label="DocumentMetaData" occurs="1"/>
+            <labelUsage label="ADV" occurs="2"/>
+            <labelUsage label="NP" occurs="3"/>
+        </labelsDecl>
+        <annotationSpaces>
+            <annotationSpace as.id="type"/>
+            <annotationSpace as.id="pos"/>
+        </annotationSpaces>
+    </graphHeader>
+    <region xml:id="region0" anchors="0 89"/>
+    <region xml:id="region1" anchors="0 18"/>
+    <region xml:id="region2" anchors="0 5"/>
+    <region xml:id="region3" anchors="6 8"/>
+    <region xml:id="region4" anchors="9 17"/>
+    <region xml:id="region5" anchors="17 18"/>
+    <region xml:id="region6" anchors="19 89"/>
+    <region xml:id="region7" anchors="19 27"/>
+    <region xml:id="region8" anchors="28 34"/>
+    <region xml:id="region9" anchors="35 40"/>
+    <region xml:id="region10" anchors="41 44"/>
+    <region xml:id="region11" anchors="44 45"/>
+    <region xml:id="region12" anchors="46 47"/>
+    <region xml:id="region13" anchors="47 52"/>
+    <region xml:id="region14" anchors="53 55"/>
+    <region xml:id="region15" anchors="56 64"/>
+    <region xml:id="region16" anchors="64 65"/>
+    <region xml:id="region17" anchors="66 69"/>
+    <region xml:id="region18" anchors="70 76"/>
+    <region xml:id="region19" anchors="77 81"/>
+    <region xml:id="region20" anchors="82 87"/>
+    <region xml:id="region21" anchors="87 88"/>
+    <region xml:id="region22" anchors="88 89"/>
+    <node xml:id="node0">
+        <link targets="region0"/>
+    </node>
+    <a xml:id="a-0" label="DocumentMetaData" ref="node0" as="type">
+        <fs>
+            <f name="language" value="en"/>
+            <f name="documentTitle" value="example1.txt"/>
+            <f name="documentId" value="example1.txt"/>
+            <f name="documentUri" value="file:/Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-nonfree/de.tudarmstadt.ukp.dkpro.core.io.graf-nonfree/src/test/resources/texts/example1.txt"/>
+            <f name="collectionId" value="file:/Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-nonfree/de.tudarmstadt.ukp.dkpro.core.io.graf-nonfree/src/test/resources/texts/"/>
+            <f name="documentBaseUri" value="file:/Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-nonfree/de.tudarmstadt.ukp.dkpro.core.io.graf-nonfree/src/test/resources/texts/"/>
+            <f name="isLastSegment" value="false"/>
+        </fs>
+    </a>
+    <node xml:id="node1">
+        <link targets="region1"/>
+    </node>
+    <a xml:id="a-1" label="Sentence" ref="node1" as="type"/>
+    <node xml:id="node10">
+        <link targets="region6"/>
+    </node>
+    <a xml:id="a-10" label="Sentence" ref="node10" as="type"/>
+    <node xml:id="node11">
+        <link targets="region7"/>
+    </node>
+    <a xml:id="a-11" label="ADV" ref="node11" as="pos">
+        <fs>
+            <f name="PosValue" value="RB"/>
+        </fs>
+    </a>
+    <node xml:id="node12">
+        <link targets="region7"/>
+    </node>
+    <a xml:id="a-12" label="Token" ref="node12" as="type"/>
+    <node xml:id="node13">
+        <link targets="region8"/>
+    </node>
+    <a xml:id="a-13" label="NP" ref="node13" as="pos">
+        <fs>
+            <f name="PosValue" value="NNP"/>
+        </fs>
+    </a>
+    <node xml:id="node14">
+        <link targets="region8"/>
+    </node>
+    <a xml:id="a-14" label="Token" ref="node14" as="type"/>
+    <node xml:id="node15">
+        <link targets="region9"/>
+    </node>
+    <a xml:id="a-15" label="V" ref="node15" as="pos">
+        <fs>
+            <f name="PosValue" value="VBZ"/>
+        </fs>
+    </a>
+    <node xml:id="node16">
+        <link targets="region9"/>
+    </node>
+    <a xml:id="a-16" label="Token" ref="node16" as="type"/>
+    <node xml:id="node17">
+        <link targets="region10"/>
+    </node>
+    <a xml:id="a-17" label="PP" ref="node17" as="pos">
+        <fs>
+            <f name="PosValue" value="RP"/>
+        </fs>
+    </a>
+    <node xml:id="node18">
+        <link targets="region10"/>
+    </node>
+    <a xml:id="a-18" label="Token" ref="node18" as="type"/>
+    <node xml:id="node19">
+        <link targets="region11"/>
+    </node>
+    <a xml:id="a-19" label="PUNC" ref="node19" as="pos">
+        <fs>
+            <f name="PosValue" value=":"/>
+        </fs>
+    </a>
+    <node xml:id="node2">
+        <link targets="region2"/>
+    </node>
+    <a xml:id="a-2" label="ADV" ref="node2" as="pos">
+        <fs>
+            <f name="PosValue" value="WRB"/>
+        </fs>
+    </a>
+    <node xml:id="node20">
+        <link targets="region11"/>
+    </node>
+    <a xml:id="a-20" label="Token" ref="node20" as="type"/>
+    <node xml:id="node21">
+        <link targets="region12"/>
+    </node>
+    <a xml:id="a-21" label="O" ref="node21" as="pos">
+        <fs>
+            <f name="PosValue" value="``"/>
+        </fs>
+    </a>
+    <node xml:id="node22">
+        <link targets="region12"/>
+    </node>
+    <a xml:id="a-22" label="Token" ref="node22" as="type"/>
+    <node xml:id="node23">
+        <link targets="region13"/>
+    </node>
+    <a xml:id="a-23" label="Token" ref="node23" as="type"/>
+    <node xml:id="node24">
+        <link targets="region13"/>
+    </node>
+    <a xml:id="a-24" label="ART" ref="node24" as="pos">
+        <fs>
+            <f name="PosValue" value="EX"/>
+        </fs>
+    </a>
+    <node xml:id="node25">
+        <link targets="region14"/>
+    </node>
+    <a xml:id="a-25" label="V" ref="node25" as="pos">
+        <fs>
+            <f name="PosValue" value="VBZ"/>
+        </fs>
+    </a>
+    <node xml:id="node26">
+        <link targets="region14"/>
+    </node>
+    <a xml:id="a-26" label="Token" ref="node26" as="type"/>
+    <node xml:id="node27">
+        <link targets="region15"/>
+    </node>
+    <a xml:id="a-27" label="NP" ref="node27" as="pos">
+        <fs>
+            <f name="PosValue" value="NNP"/>
+        </fs>
+    </a>
+    <node xml:id="node28">
+        <link targets="region15"/>
+    </node>
+    <a xml:id="a-28" label="Token" ref="node28" as="type"/>
+    <node xml:id="node29">
+        <link targets="region16"/>
+    </node>
+    <a xml:id="a-29" label="PUNC" ref="node29" as="pos">
+        <fs>
+            <f name="PosValue" value=","/>
+        </fs>
+    </a>
+    <node xml:id="node3">
+        <link targets="region2"/>
+    </node>
+    <a xml:id="a-3" label="Token" ref="node3" as="type"/>
+    <node xml:id="node30">
+        <link targets="region16"/>
+    </node>
+    <a xml:id="a-30" label="Token" ref="node30" as="type"/>
+    <node xml:id="node31">
+        <link targets="region17"/>
+    </node>
+    <a xml:id="a-31" label="PR" ref="node31" as="pos">
+        <fs>
+            <f name="PosValue" value="PRP"/>
+        </fs>
+    </a>
+    <node xml:id="node32">
+        <link targets="region17"/>
+    </node>
+    <a xml:id="a-32" label="Token" ref="node32" as="type"/>
+    <node xml:id="node33">
+        <link targets="region18"/>
+    </node>
+    <a xml:id="a-33" label="V" ref="node33" as="pos">
+        <fs>
+            <f name="PosValue" value="VBZ"/>
+        </fs>
+    </a>
+    <node xml:id="node34">
+        <link targets="region18"/>
+    </node>
+    <a xml:id="a-34" label="Token" ref="node34" as="type"/>
+    <node xml:id="node35">
+        <link targets="region19"/>
+    </node>
+    <a xml:id="a-35" label="PP" ref="node35" as="pos">
+        <fs>
+            <f name="PosValue" value="IN"/>
+        </fs>
+    </a>
+    <node xml:id="node36">
+        <link targets="region19"/>
+    </node>
+    <a xml:id="a-36" label="Token" ref="node36" as="type"/>
+    <node xml:id="node37">
+        <link targets="region20"/>
+    </node>
+    <a xml:id="a-37" label="Token" ref="node37" as="type"/>
+    <node xml:id="node38">
+        <link targets="region20"/>
+    </node>
+    <a xml:id="a-38" label="ART" ref="node38" as="pos">
+        <fs>
+            <f name="PosValue" value="EX"/>
+        </fs>
+    </a>
+    <node xml:id="node39">
+        <link targets="region21"/>
+    </node>
+    <a xml:id="a-39" label="PUNC" ref="node39" as="pos">
+        <fs>
+            <f name="PosValue" value="."/>
+        </fs>
+    </a>
+    <node xml:id="node4">
+        <link targets="region3"/>
+    </node>
+    <a xml:id="a-4" label="V" ref="node4" as="pos">
+        <fs>
+            <f name="PosValue" value="VBZ"/>
+        </fs>
+    </a>
+    <node xml:id="node40">
+        <link targets="region21"/>
+    </node>
+    <a xml:id="a-40" label="Token" ref="node40" as="type"/>
+    <node xml:id="node41">
+        <link targets="region22"/>
+    </node>
+    <a xml:id="a-41" label="O" ref="node41" as="pos">
+        <fs>
+            <f name="PosValue" value="''"/>
+        </fs>
+    </a>
+    <node xml:id="node42">
+        <link targets="region22"/>
+    </node>
+    <a xml:id="a-42" label="Token" ref="node42" as="type"/>
+    <node xml:id="node5">
+        <link targets="region3"/>
+    </node>
+    <a xml:id="a-5" label="Token" ref="node5" as="type"/>
+    <node xml:id="node6">
+        <link targets="region4"/>
+    </node>
+    <a xml:id="a-6" label="NP" ref="node6" as="pos">
+        <fs>
+            <f name="PosValue" value="NNP"/>
+        </fs>
+    </a>
+    <node xml:id="node7">
+        <link targets="region4"/>
+    </node>
+    <a xml:id="a-7" label="Token" ref="node7" as="type"/>
+    <node xml:id="node8">
+        <link targets="region5"/>
+    </node>
+    <a xml:id="a-8" label="PUNC" ref="node8" as="pos">
+        <fs>
+            <f name="PosValue" value="."/>
+        </fs>
+    </a>
+    <node xml:id="node9">
+        <link targets="region5"/>
+    </node>
+    <a xml:id="a-9" label="Token" ref="node9" as="type"/>
+</graph>
