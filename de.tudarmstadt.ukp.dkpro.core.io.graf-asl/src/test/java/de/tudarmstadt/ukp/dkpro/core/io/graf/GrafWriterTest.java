@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.DocumentMetaDataStripper;
 
 public class GrafWriterTest
 {
@@ -65,7 +66,10 @@ public class GrafWriterTest
 		
 		AnalysisEngineDescription posTagger = createPrimitiveDescription(
 				OpenNlpPosTagger.class);
-		
+
+		AnalysisEngineDescription stripper = createPrimitiveDescription(
+				DocumentMetaDataStripper.class);
+
 		AnalysisEngineDescription grafWriter = createPrimitiveDescription(
 				GrafWriter.class,
 				GrafWriter.PARAM_PATH, testFolder.getRoot().getPath());
@@ -74,7 +78,7 @@ public class GrafWriterTest
 				CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, "-");
 
-		runPipeline(textReader, segmenter, posTagger, grafWriter, dumpWriter);
+		runPipeline(textReader, segmenter, posTagger, stripper, grafWriter, dumpWriter);
 
 		File output = new File(testFolder.getRoot(), "example1.txt.xml");
 		assertTrue(output.exists());
