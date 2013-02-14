@@ -50,9 +50,6 @@
             <f name="language" value="en"/>
             <f name="documentTitle" value="example1.txt"/>
             <f name="documentId" value="example1.txt"/>
-            <f name="documentUri" value="file:/Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-nonfree/de.tudarmstadt.ukp.dkpro.core.io.graf-nonfree/src/test/resources/texts/example1.txt"/>
-            <f name="collectionId" value="file:/Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-nonfree/de.tudarmstadt.ukp.dkpro.core.io.graf-nonfree/src/test/resources/texts/"/>
-            <f name="documentBaseUri" value="file:/Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-nonfree/de.tudarmstadt.ukp.dkpro.core.io.graf-nonfree/src/test/resources/texts/"/>
             <f name="isLastSegment" value="false"/>
         </fs>
     </a>
@@ -79,15 +76,15 @@
     <node xml:id="node13">
         <link targets="region8"/>
     </node>
-    <a xml:id="a-13" label="NP" ref="node13" as="pos">
+    <a xml:id="a-13" label="Token" ref="node13" as="type"/>
+    <node xml:id="node14">
+        <link targets="region8"/>
+    </node>
+    <a xml:id="a-14" label="NP" ref="node14" as="pos">
         <fs>
             <f name="PosValue" value="NNP"/>
         </fs>
     </a>
-    <node xml:id="node14">
-        <link targets="region8"/>
-    </node>
-    <a xml:id="a-14" label="Token" ref="node14" as="type"/>
     <node xml:id="node15">
         <link targets="region9"/>
     </node>
@@ -171,15 +168,15 @@
     <node xml:id="node27">
         <link targets="region15"/>
     </node>
-    <a xml:id="a-27" label="NP" ref="node27" as="pos">
+    <a xml:id="a-27" label="Token" ref="node27" as="type"/>
+    <node xml:id="node28">
+        <link targets="region15"/>
+    </node>
+    <a xml:id="a-28" label="NP" ref="node28" as="pos">
         <fs>
             <f name="PosValue" value="NNP"/>
         </fs>
     </a>
-    <node xml:id="node28">
-        <link targets="region15"/>
-    </node>
-    <a xml:id="a-28" label="Token" ref="node28" as="type"/>
     <node xml:id="node29">
         <link targets="region16"/>
     </node>
@@ -283,15 +280,15 @@
     <node xml:id="node6">
         <link targets="region4"/>
     </node>
-    <a xml:id="a-6" label="NP" ref="node6" as="pos">
+    <a xml:id="a-6" label="Token" ref="node6" as="type"/>
+    <node xml:id="node7">
+        <link targets="region4"/>
+    </node>
+    <a xml:id="a-7" label="NP" ref="node7" as="pos">
         <fs>
             <f name="PosValue" value="NNP"/>
         </fs>
     </a>
-    <node xml:id="node7">
-        <link targets="region4"/>
-    </node>
-    <a xml:id="a-7" label="Token" ref="node7" as="type"/>
     <node xml:id="node8">
         <link targets="region5"/>
     </node>
