@@ -45,4 +45,6 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - TextMarker</name>
+	<description>Provides a thin uimaFIT convenience-wrapper around the TextMarker analysis engine.</description>
 </project>

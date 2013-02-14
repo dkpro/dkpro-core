@@ -34,4 +34,5 @@
 			<artifactId>commons-lang</artifactId>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - IO - Penn Treebank Format</name>
 </project>

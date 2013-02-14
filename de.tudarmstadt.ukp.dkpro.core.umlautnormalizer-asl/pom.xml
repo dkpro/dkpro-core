@@ -58,4 +58,6 @@
         <version>20121116.0</version>
     </dependency>
   </dependencies>
+  <name>DKPro Core ASL - Umlaut normalizer</name>
+  <description>Takes a text and checks for umlauts written as &quot;ae&quot;, &quot;oe&quot;, or &quot;ue&quot; and normalizes them if they really are umlauts depending on a frequency model.</description>
 </project>
