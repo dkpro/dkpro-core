@@ -85,4 +85,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<name>DKPro Core ASL - IO - Graph Annotation Format (GrAF)</name>
 </project>

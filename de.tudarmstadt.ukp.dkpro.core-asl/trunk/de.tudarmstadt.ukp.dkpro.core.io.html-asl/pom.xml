@@ -53,4 +53,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<name>DKPro Core ASL - IO - HTML</name>
 </project>
