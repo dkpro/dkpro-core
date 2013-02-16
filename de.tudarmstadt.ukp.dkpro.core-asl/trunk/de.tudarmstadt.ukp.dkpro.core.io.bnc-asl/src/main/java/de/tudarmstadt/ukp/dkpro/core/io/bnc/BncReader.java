@@ -25,6 +25,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -41,6 +42,13 @@ import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderText;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+		outputs = { 
+			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class BncReader
 	extends XmlReaderText
 {
