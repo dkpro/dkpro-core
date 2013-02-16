@@ -34,6 +34,7 @@ import org.apache.uima.util.ProgressImpl;
 import org.jsoup.Jsoup;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
 
@@ -47,6 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * @author zesch
  *
  */
+@TypeCapability(
+		outputs = { 
+			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class HtmlReader
     extends JCasCollectionReader_ImplBase
 { 
