@@ -46,6 +46,7 @@ import org.jaxen.JaxenException;
 import org.jaxen.XPath;
 import org.jaxen.dom4j.Dom4jXPath;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -64,6 +65,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+		outputs = { 
+			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class TEIReader
 	extends ResourceCollectionReaderBase
 {
