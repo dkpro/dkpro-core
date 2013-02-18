@@ -48,6 +48,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.factory.JCasBuilder;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -78,9 +79,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  *   <li>OutputParameterType</li>
  * </ul>
  *
- *
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+		outputs = { 
+			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+		    "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field",
+		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.StopWord" })
 public class WsdlReader
 	extends ResourceCollectionReaderBase
 {
