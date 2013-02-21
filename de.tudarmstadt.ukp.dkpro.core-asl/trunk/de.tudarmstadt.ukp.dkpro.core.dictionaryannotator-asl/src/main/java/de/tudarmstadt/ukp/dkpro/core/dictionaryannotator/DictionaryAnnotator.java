@@ -17,16 +17,17 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator;
 
+import static org.uimafit.util.CasUtil.getType;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
@@ -36,44 +37,58 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NGram;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Takes a plain text file with phrases as input and annotates
- * the phrases in the CAS file. The annotation type defaults to
- * {@link NGram}, but can be changed.
- *
- * The format of the phrase file is one phrase per line, tokens are
- * separated by space:
- *
+ * Takes a plain text file with phrases as input and annotates the phrases in the CAS file. The
+ * annotation type defaults to {@link NGram}, but can be changed.
+ * 
+ * The component requires that {@link Token}s and {@link Sentence}es are annotated in the CAS.
+ * 
+ * The format of the phrase file is one phrase per line, tokens are separated by space:
+ * 
  * <pre>
  * this is a phrase
  * another phrase
  * </pre>
- *
+ * 
  * @author Johannes Hoffart
- *
+ * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class DictionaryAnnotator
 	extends JCasAnnotator_ImplBase
 {
 	/**
 	 * The file must contain one phrase per line - phrases will be split at " "
 	 */
-	public static final String PARAM_PHRASE_FILE = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_PHRASE_FILE, mandatory = true, defaultValue = "phrases.txt")
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
 	private String phraseFile;
 
+	public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+	@ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
+	private String modelEncoding;
+
+	/**
+	 * The annotation to create on matching phases. If nothing is specified, this defaults to
+	 * {@link NGram}.
+	 */
 	public static final String PARAM_ANNOTATION_TYPE = "annotationType";
 	@ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = false)
 	private String annotationType;
 
 	public static final String PARAM_VALUE_FEATURE = "valueFeature";
-	@ConfigurationParameter(name = PARAM_VALUE_FEATURE, mandatory = false, defaultValue="value")
+	@ConfigurationParameter(name = PARAM_VALUE_FEATURE, mandatory = false, defaultValue = "value")
 	private String valueFeature;
 
 	public static final String PARAM_VALUE = "value";
@@ -94,22 +109,20 @@ public class DictionaryAnnotator
 
 		phrases = new PhraseTree();
 
+		InputStream is = null;
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(phraseFile));
-
-			String inputLine;
-			while ((inputLine = reader.readLine()) != null) {
+			URL phraseFileUrl = ResourceUtils.resolveLocation(phraseFile, aContext);
+			is = phraseFileUrl.openStream();
+			for (String inputLine : IOUtils.readLines(is, modelEncoding)) {
 				String[] phraseSplit = inputLine.split(" ");
 				phrases.addPhrase(phraseSplit);
 			}
-
-			reader.close();
-		}
-		catch (FileNotFoundException e) {
-			throw new ResourceInitializationException(e);
 		}
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
+		}
+		finally {
+			IOUtils.closeQuietly(is);
 		}
 	}
 
@@ -117,20 +130,25 @@ public class DictionaryAnnotator
 	public void process(JCas jcas)
 		throws AnalysisEngineProcessException
 	{
-		Type type = jcas.getTypeSystem().getType(annotationType);
+		Type type = getType(jcas.getCas(), annotationType);
+
 		Feature f = null;
 		if ((valueFeature != null) && (value != null)) {
 			f = type.getFeatureByBaseName(valueFeature);
+			if (f == null) {
+				throw new IllegalArgumentException("Undeclared feature [" + valueFeature
+						+ "] in type [" + annotationType + "]");
+			}
 		}
 
 		for (Sentence currSentence : select(jcas, Sentence.class)) {
 			ArrayList<Token> tokens = new ArrayList<Token>(selectCovered(Token.class, currSentence));
 
 			for (int i = 0; i < tokens.size(); i++) {
-				List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size()-1);
+				List<Token> tokensToSentenceEnd = tokens.subList(i, tokens.size() - 1);
 				String[] sentenceToEnd = new String[tokens.size()];
 
-				for (int j=0;j<tokensToSentenceEnd.size();j++) {
+				for (int j = 0; j < tokensToSentenceEnd.size(); j++) {
 					sentenceToEnd[j] = tokensToSentenceEnd.get(j).getCoveredText();
 				}
 
@@ -142,11 +160,11 @@ public class DictionaryAnnotator
 
 					AnnotationFS newFound = jcas.getCas().createAnnotation(type,
 							beginToken.getBegin(), endToken.getEnd());
-					
+
 					if (f != null) {
 						newFound.setFeatureValueFromString(f, value);
 					}
-					
+
 					jcas.getCas().addFsToIndexes(newFound);
 				}
 			}
