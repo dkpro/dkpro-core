@@ -19,7 +19,10 @@ package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator;
 
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.util.JCasUtil.selectSingle;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 import org.uimafit.factory.JCasFactory;
@@ -37,14 +40,14 @@ public class DictionaryAnnotatorTest
 	{
 		AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
 				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
-				DictionaryAnnotator.PARAM_PHRASE_FILE, "src/test/resources/persons.txt");
+				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 		
 		JCas jcas = JCasFactory.createJCas();
 		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
 		tb.buildTokens(jcas, "I am John Silver 's ghost .");
 		
 		ae.process(jcas);
-		
+
 		NamedEntity ne = selectSingle(jcas, NamedEntity.class);
 		assertEquals("John Silver", ne.getCoveredText());
 	}
@@ -55,7 +58,7 @@ public class DictionaryAnnotatorTest
 		AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
 				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 				DictionaryAnnotator.PARAM_VALUE, "PERSON",
-				DictionaryAnnotator.PARAM_PHRASE_FILE, "src/test/resources/persons.txt");
+				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 		
 		JCas jcas = JCasFactory.createJCas();
 		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
@@ -66,5 +69,48 @@ public class DictionaryAnnotatorTest
 		NamedEntity ne = selectSingle(jcas, NamedEntity.class);
 		assertEquals("PERSON", ne.getValue());
 		assertEquals("John Silver", ne.getCoveredText());
+	}
+
+	@Test
+	public void testWithWrongType() throws Exception
+	{
+		try {
+			AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
+					DictionaryAnnotator.PARAM_ANNOTATION_TYPE, "lala",
+					DictionaryAnnotator.PARAM_VALUE, "PERSON",
+					DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+			
+			JCas jcas = JCasFactory.createJCas();
+			TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
+			tb.buildTokens(jcas, "I am John Silver 's ghost .");
+			
+			ae.process(jcas);
+			fail("An exception for an undeclared type should have been thrown");
+		}
+		catch (AnalysisEngineProcessException e) {
+			assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared type"));
+		}
+	}
+
+	@Test
+	public void testWithWrongValueFeature() throws Exception
+	{
+		try {
+			AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
+					DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
+					DictionaryAnnotator.PARAM_VALUE_FEATURE, "lala",
+					DictionaryAnnotator.PARAM_VALUE, "PERSON",
+					DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
+			
+			JCas jcas = JCasFactory.createJCas();
+			TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
+			tb.buildTokens(jcas, "I am John Silver 's ghost .");
+			
+			ae.process(jcas);
+			fail("An exception for an undeclared type should have been thrown");
+		}
+		catch (AnalysisEngineProcessException e) {
+			assertTrue(ExceptionUtils.getRootCauseMessage(e).contains("Undeclared feature"));
+		}
 	}
 }
