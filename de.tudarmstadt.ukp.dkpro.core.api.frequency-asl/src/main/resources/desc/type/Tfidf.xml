@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Tfidf</name>
+  <description>Annotates the tf.idf score of a token, stem, or lemma.</description>
+  <version>1.0</version>
+  <vendor/>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>tfidfValue</name>
+          <description>The tf.idf score.</description>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>term</name>
+          <description>The string that was used to compute this tf.idf score.
+If a stem or lemma was used, the covered text of this annotation does not need to be equal to this string.
+
+This string can be used to construct a vector space with the right terms without having to access the indexes again.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
