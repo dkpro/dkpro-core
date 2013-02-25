@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
 import edu.stanford.nlp.ling.HasWord;
+import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParserQuery;
@@ -143,6 +144,15 @@ public class StanfordParser
 	public static final String PARAM_CREATE_POS_TAGS = "createPosTags";
 	@ConfigurationParameter(name = PARAM_CREATE_POS_TAGS, mandatory = true, defaultValue = "true")
 	private boolean createPosTags;
+	
+	/**
+	 * Sets whether to use or not to use already existing POS tags from another annotator for the
+	 * parsing process. These should be mapped to the PTB tagset with {@link PosMapper} before.<br/>
+	 * Default: {@code false}
+	 */
+	public static final String PARAM_USE_EXISTING_POS_TAGS = "useExistingPosTags";
+	@ConfigurationParameter(name = PARAM_USE_EXISTING_POS_TAGS, mandatory = true, defaultValue = "false")
+	private boolean useExistingPosTags;
 	
 	/**
 	 * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to
@@ -503,6 +513,15 @@ public class StanfordParser
 
 	protected Word tokenToWord(Token aToken)
 	{
-		return new Word(aToken.getCoveredText(), aToken.getBegin(), aToken.getEnd());
+		if (useExistingPosTags && aToken.getPos() != null) {
+			String posValue = aToken.getPos().getPosValue();
+			TaggedWord tw = new TaggedWord(aToken.getCoveredText(), posValue);
+			tw.setBeginPosition(aToken.getBegin());
+			tw.setEndPosition(aToken.getEnd());
+			return tw;
+		}
+		else {
+			return new Word(aToken.getCoveredText(), aToken.getBegin(), aToken.getEnd());
+		}
 	}
 }
