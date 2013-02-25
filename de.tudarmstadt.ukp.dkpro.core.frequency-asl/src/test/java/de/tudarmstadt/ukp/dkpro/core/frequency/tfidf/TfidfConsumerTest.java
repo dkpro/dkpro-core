@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.*;
 import static org.junit.Assert.assertEquals;
@@ -15,10 +15,12 @@ import org.junit.AfterClass;
 import org.junit.Test;
 import org.uimafit.pipeline.SimplePipeline;
 
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfConsumer;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.model.DfModel;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util.TfidfUtils;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfModel;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
 
 /**
  * Unit test of {@link TfidfConsumer} and {@link TfidfAnnotator}.

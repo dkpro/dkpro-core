@@ -1,10 +1,10 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.model;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model;
 
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util.FreqDist;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.FreqDist;
 
 
 /**

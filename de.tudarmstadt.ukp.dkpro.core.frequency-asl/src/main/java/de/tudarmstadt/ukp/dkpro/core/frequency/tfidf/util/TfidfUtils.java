@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.model.DfModel;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfModel;
 
 /**
  * Serialization and deserialization methods.

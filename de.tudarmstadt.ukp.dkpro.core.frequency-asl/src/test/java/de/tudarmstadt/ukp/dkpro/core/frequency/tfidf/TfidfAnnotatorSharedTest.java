@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
@@ -28,12 +28,14 @@ import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.pipeline.JCasIterable;
 import org.uimafit.pipeline.SimplePipeline;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.TfidfAnnotator.WeightingModeIdf;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.TfidfAnnotator.WeightingModeTf;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.model.SharedDfModel;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.SharedDfModel;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotatorShared;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfConsumer;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator.WeightingModeIdf;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator.WeightingModeTf;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 

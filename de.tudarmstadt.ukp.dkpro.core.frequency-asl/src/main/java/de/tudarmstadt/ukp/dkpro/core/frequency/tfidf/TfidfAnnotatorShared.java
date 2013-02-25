@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
 import java.util.Map.Entry;
 
@@ -14,9 +14,10 @@ import org.uimafit.descriptor.ExternalResource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.model.*;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util.FreqDist;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util.TermIterator;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfConsumer;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.*;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.FreqDist;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 
 /**

@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util;
 
 import java.io.Serializable;
 import java.util.*;
