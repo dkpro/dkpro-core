@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util;
 
 import java.util.Iterator;
 import java.util.Map.Entry;

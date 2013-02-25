@@ -1,4 +1,4 @@
-package de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf;
+package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -7,9 +7,9 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.model.DfStore;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util.TermIterator;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.util.TfidfUtils;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
 
 /**
  * This consumer builds a {@link DfModel}. It collects the df (document
