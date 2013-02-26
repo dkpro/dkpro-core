@@ -47,7 +47,7 @@ public class NameAnnotationPipeline
 
 		AnalysisEngineDescription nameFinder = createPrimitiveDescription(
 				DictionaryAnnotator.class,
-				DictionaryAnnotator.PARAM_PHRASE_FILE, "src/test/resources/dictionaries/names.txt",
+				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/dictionaries/names.txt",
 				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, Name.class.getName());
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
