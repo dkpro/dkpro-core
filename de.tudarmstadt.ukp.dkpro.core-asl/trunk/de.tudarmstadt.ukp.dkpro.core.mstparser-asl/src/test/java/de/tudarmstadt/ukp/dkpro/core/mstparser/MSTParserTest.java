@@ -33,52 +33,54 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
- * @author beinborn, zesch
- *
+ * @author beinborn
+ * @author zesch
  */
 public class MSTParserTest
 {
-    static final String documentEnglish = "This is an easy example sentence";
+	static final String documentEnglish = "This is an easy example sentence";
 
-    /**This method runs the MSTParser for an example sentence and checks if it returns the correct annotations.
-     * An annotation consists of:
-     * dependency type, begin of dependency, end of dependency, begin of the head, end of the head
-     * @throws Exception
-     */
-    @Test
-    public void testEnglish()
-            throws Exception
-    {
-        JCas jcas = runTestEnglish(documentEnglish);
-        String[] dependencies = new String[] {
-                "NP-SBJ 5,7,0,4", "ROOT 5,7,5,7", "DEP 24,32,8,10",
-                "DEP 24,32,11,15", "DEP 24,32,16,23", "NP-PRD 5,7,24,32" };
+	/**
+	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
+	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
+	 * dependency, begin of the head, end of the head
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void testEnglish()
+		throws Exception
+	{
+		JCas jcas = runTestEnglish(documentEnglish);
 
-        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+		String[] dependencies = new String[] { "NP-SBJ 5,7,0,4", "ROOT 5,7,5,7", "DEP 24,32,8,10",
+				"DEP 24,32,11,15", "DEP 24,32,16,23", "NP-PRD 5,7,24,32" };
 
-    }
+		AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
 
-    /**
-     * Generates a JCas from the input text and annotates it with dependencies.
-     * @param aText
-     * @return jcas annotated with dependency relations
-     * @throws Exception
-     */
-    private JCas runTestEnglish(String aText)
-        throws Exception
-    {
-        AnalysisEngineDescription aggregate = createAggregateDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(OpenNlpPosTagger.class),
-                createPrimitiveDescription(MSTParser.class)
-        );
+	}
 
-        AnalysisEngine engine = createPrimitive(aggregate);
-        JCas jcas = engine.newJCas();
-        jcas.setDocumentLanguage("en");
-        jcas.setDocumentText(aText);
-        engine.process(jcas);
+	/**
+	 * Generates a JCas from the input text and annotates it with dependencies.
+	 * 
+	 * @param aText
+	 * @return jcas annotated with dependency relations
+	 * @throws Exception
+	 */
+	private JCas runTestEnglish(String aText)
+		throws Exception
+	{
+		AnalysisEngineDescription aggregate = createAggregateDescription(
+				createPrimitiveDescription(BreakIteratorSegmenter.class),
+				createPrimitiveDescription(OpenNlpPosTagger.class),
+				createPrimitiveDescription(MSTParser.class, MSTParser.PARAM_PRINT_TAGSET, true));
 
-        return jcas;
-    }
+		AnalysisEngine engine = createPrimitive(aggregate);
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage("en");
+		jcas.setDocumentText(aText);
+		engine.process(jcas);
+
+		return jcas;
+	}
 }
