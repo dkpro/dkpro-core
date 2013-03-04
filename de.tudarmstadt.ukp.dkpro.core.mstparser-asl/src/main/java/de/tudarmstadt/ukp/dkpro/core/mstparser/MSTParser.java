@@ -71,6 +71,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 public class MSTParser
 	extends JCasConsumer_ImplBase
 {
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	protected String language;
+
+	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+	protected String variant;
+
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
+	
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
 	protected boolean printTagSet;
@@ -103,6 +115,10 @@ public class MSTParser
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/mstparser/lib/"
 						+ "parser-${language}-${variant}.bin");
+				
+				setOverride(LOCATION, modelLocation);
+				setOverride(LANGUAGE, language);
+				setOverride(VARIANT, variant);
 			}
 
 			@Override
