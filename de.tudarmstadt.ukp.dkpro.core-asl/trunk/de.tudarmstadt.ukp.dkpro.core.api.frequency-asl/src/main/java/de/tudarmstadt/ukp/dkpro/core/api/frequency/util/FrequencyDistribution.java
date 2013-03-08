@@ -72,6 +72,12 @@ public class FrequencyDistribution<T>
     /** The total number of samples (accumulated count). */
     private long n;
 
+    /** The maximum frequency in the distribution */
+    private long maxFreq;
+
+    /** The sample with the maximum frequency in the distribution */
+    private T maxSample;
+
     /**
      * Creates a new empty {@link FrequencyDistribution}.
      */
@@ -193,11 +199,16 @@ public class FrequencyDistribution<T>
     public void addSample(T sample, long number)
     {
         this.n = this.n + number;
+        
+        long sampleFreq = number;
         if (freqDist.containsKey(sample)) {
-            freqDist.put(sample, freqDist.get(sample) + number);
+            sampleFreq = freqDist.get(sample) + number;
         }
-        else {
-            freqDist.put(sample, number);
+        freqDist.put(sample, sampleFreq);
+        
+        if (sampleFreq > maxFreq) {
+            maxFreq = sampleFreq;
+            maxSample = sample;
         }
     }
 
@@ -217,6 +228,19 @@ public class FrequencyDistribution<T>
         return sb.toString();
     }
 
+    /** Returns the highest frequency that is currently stored. */
+    public long getMaxFreq() {
+        return maxFreq;
+    }
+    
+    /**
+     * Returns the sample which has currently the highest frequency.
+     * If there is more than one sample which share the highest frequency, returns the one that was added first. 
+     */
+    public T getSampleWithMaxFreq() {
+        return maxSample;
+    }
+    
 //    public void save(File file)
 //            throws IOException
 //    {
