@@ -49,6 +49,9 @@ public class FrequencyDistributionTest
         assertEquals(0, fd.getCount("humpelgrumpf"));
         assertEquals(1, fd.getCount("This"));
         assertEquals(2, fd.getCount("test"));
+        
+        assertEquals(2, fd.getMaxFreq());
+        assertEquals("a", fd.getSampleWithMaxFreq());
     }
 
     @Test
