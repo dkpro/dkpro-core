@@ -145,7 +145,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="20120912.0"/>
+		<property name="version.bin" value="20130228.0"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -175,20 +175,22 @@
 		
 		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
-		  - 2012-09-12 | now        | 4b6459574b6b334a090399b76dbc2cdb
+		  - 2012-09-12 | 2013-02-28 | 4b6459574b6b334a090399b76dbc2cdb
+		  - 2013-02-28 | now        | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build 
 		  -->
-		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2-64bit.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="4b6459574b6b334a090399b76dbc2cdb"/>
+		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
+			platform="linux-x86_64" file="tree-tagger" md5="3c8433d34cc2430197f8ed7b9e220b9c"/>
 
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
 		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
 		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
 		  - 2012-04-18 | 2012-08-03 | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
-		  - 2012-08-03 | now        | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit 
-		  -->
+		  - 2012-08-03 | 2013-02-02 | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit 
+		  - 2013-02-28 | now        | 32-bit version is no longer available! 
 		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
 			platform="linux-x86_32" file="tree-tagger" md5="33c2b37803114ec68f36733b1f8b1702"/>
+		  -->
 		
 		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
@@ -254,7 +256,7 @@
 	</target>
 
 	<target name="de">
-		<property name="version.de" value="20120417.0"/>
+		<property name="version.de" value="20121207.0"/>
 		
 		<!-- FILE: german-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-02-09 | now        | 6618dd26e4974193ae50fbed0888666a
@@ -273,11 +275,12 @@
 		<!-- FILE: german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
 		  - 2012-02-13 | 2012-03-15 | 45afdcdabfffc69995523748cd42bf81
-		  - 2012-03-15 | now        | 3a18444accf080f54c5ebf655fedc781
+		  - 2012-03-15 | 2012-12-07 | 3a18444accf080f54c5ebf655fedc781
+		  - 2012-12-07 | now        | 54f16f045083ae6ebe8b9d9d4a24484e
 		  -->
     	<install-model-file-url url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/german-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="de" encoding="UTF-8" tagset="stts"
-    		md5="3a18444accf080f54c5ebf655fedc781"/>
+    		md5="54f16f045083ae6ebe8b9d9d4a24484e"/>
 
 		<!-- FILE: german-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-04-29 | now        | 56ea6ac618bc21d28929a85a6964ff65
@@ -288,21 +291,23 @@
 	</target>
 	
 	<target name="nl">
-		<property name="version.nl" value="20120611.0"/>
+		<property name="version.nl" value="20130207.0"/>
 		
-		<!-- FILE: dutch2-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		<!-- FILE: dutch-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-02 | now        | 44bc760c29fb202d2ca5fe5f8acd1dd3
 		  -->
     	<install-model-file-url url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-par-3.1.bin.gz"
     		type="tagger" endianness="big-endian" language="nl" encoding="ISO-8859-1" tagset="tt"
     		md5="0fed5cd154759632ff8181ec588a67e3"/>
 
-		<!-- FILE: dutch2-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2008-06-02 | now        | 22dd271035795747768ead15b2931c75
+		<!-- FILE: dutch-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | ????-??-?? | 22dd271035795747768ead15b2931c75 (dutch-par-linux-3.1)
+		  - ????-??-?? | 2013-01-07 | 7d533ea8e8b768f87d9c684e47a59872 (dutch-par-linux-3.1)
+		  - 2013-01-07 | now        | 40c82daae0c7063eb3eabf1541303fca
 		  -->
-    	<install-model-file-url url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-par-linux-3.1.bin.gz"
-    		type="tagger" endianness="little-endian" language="nl" encoding="ISO-8859-1" tagset="tt"
-    		md5="7d533ea8e8b768f87d9c684e47a59872"/>
+    	<install-model-file-url url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/dutch-par-linux-3.2-utf8.bin.gz"
+    		type="tagger" endianness="little-endian" language="nl" encoding="UTF-8" tagset="tt"
+    		md5="40c82daae0c7063eb3eabf1541303fca"/>
 	</target>
 	
 	<target name="bg">
@@ -423,7 +428,7 @@
 	</target>
 	
 	<target name="es">
-		<property name="version.es" value="20111107.0"/>
+		<property name="version.es" value="20130214.0"/>
 		
 		<!-- FILE: spanish-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-02 | now        | 5ccc79322b7954bfc82923e6123cac04
@@ -433,11 +438,12 @@
     		md5="5ccc79322b7954bfc82923e6123cac04"/>
 
 		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-11-07 | now        | 9770d507bd3cfb30385e1c2d4ce46f89
+		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
+		  - 2013-02-14 | now        | 33359d3deca5f9acab7f3b5b38529e17
 		  -->
     	<install-model-file-url url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="es" encoding="UTF-8" tagset="crater"
-    		md5="9770d507bd3cfb30385e1c2d4ce46f89"/>
+    		md5="33359d3deca5f9acab7f3b5b38529e17"/>
 	</target>
 
 	<target name="pt">
