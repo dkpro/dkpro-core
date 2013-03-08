@@ -84,7 +84,7 @@ class TreeTaggerPosLemmaTT4JTest
 		throws Exception
     {
         runTest("de", "10 Minuten sind das Mikro an und die Bühne frei .",
-        		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "." },
+        		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "."  },
         		new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON",  "ART", "NN", "PTKVZ", "$."   },
         		new String[] { "CARD", "NN", "V",     "ART", "NN", "V",     "CONJ", "ART", "NN", "V",     "PUNC" });
         
@@ -92,6 +92,21 @@ class TreeTaggerPosLemmaTT4JTest
         		new String[] { "die", "sein",  "eine", "Test", "."   },
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
+
+	@Test
+	public void treeTaggerAnnotatorDutchTest()
+		throws Exception
+    {
+        runTest("nl", "Dit is een test .",
+        		new String[] { "dit",      "zijn",       "een",      "test",   "."    },
+        		new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$."   },
+        		new String[] { "POS",      "POS",        "POS",      "POS",    "POS" });
+        
+        runTest("nl", "10 minuten op de microfoon en vrij podium .",
+        		new String[] { "@card@",   "minuut", "op",   "de",       "microfoon", "en",        "vrij", "podium", "."   },
+        		new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg",    "conjcoord", "adj",  "nounsg", "$."  },
+        		new String[] { "POS",      "POS",    "POS",  "POS",      "POS",       "POS",       "POS",  "POS",    "POS" });
     }
 
 	@Test
