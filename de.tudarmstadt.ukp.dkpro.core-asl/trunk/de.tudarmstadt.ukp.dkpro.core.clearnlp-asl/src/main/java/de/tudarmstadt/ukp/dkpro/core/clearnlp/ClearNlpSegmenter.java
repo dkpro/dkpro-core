@@ -32,6 +32,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.engine.EngineGetter;
 import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
@@ -45,6 +46,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    outputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class ClearNlpSegmenter
 	extends SegmenterBase
 {
