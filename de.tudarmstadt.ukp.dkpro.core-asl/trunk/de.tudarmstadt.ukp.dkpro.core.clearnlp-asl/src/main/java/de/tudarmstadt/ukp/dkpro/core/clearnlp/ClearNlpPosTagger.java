@@ -43,6 +43,7 @@ import org.springframework.beans.DirectFieldAccessor;
 import org.springframework.beans.PropertyAccessor;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.engine.EngineGetter;
@@ -63,6 +64,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+		outputs = { 
+		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ClearNlpPosTagger
 	extends JCasAnnotator_ImplBase
 {
