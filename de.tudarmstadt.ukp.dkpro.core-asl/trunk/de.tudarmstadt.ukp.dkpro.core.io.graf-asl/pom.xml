@@ -24,6 +24,7 @@
 		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
+	<name>DKPro Core ASL - IO - Graph Annotation Format (GrAF)</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.uimafit</groupId>
@@ -41,6 +42,11 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -85,5 +91,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<name>DKPro Core ASL - IO - Graph Annotation Format (GrAF)</name>
 </project>
