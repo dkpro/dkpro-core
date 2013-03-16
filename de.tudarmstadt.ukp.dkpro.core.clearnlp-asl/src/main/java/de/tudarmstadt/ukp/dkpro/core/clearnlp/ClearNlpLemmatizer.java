@@ -47,14 +47,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class ClearNlpLemmatizer
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Use this language instead of the language set in the CAS to locate the model.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 
+	/**
+	 * Override the default variant used to locate the model.
+	 */
 	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;
 
+	/**
+	 * Load the model from this location instead of locating the model automatically.
+	 */
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
