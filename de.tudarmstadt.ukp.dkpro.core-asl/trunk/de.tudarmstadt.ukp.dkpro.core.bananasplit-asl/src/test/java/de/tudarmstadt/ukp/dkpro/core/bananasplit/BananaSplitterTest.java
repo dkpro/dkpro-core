@@ -38,7 +38,7 @@ public class BananaSplitterTest
 	{
 		ae = createPrimitive(BananaSplitter.class, createTypeSystemDescription(),
 				BananaSplitter.PARAM_DELETE_COVER, false,
-				BananaSplitter.PARAM_DICT_PATH, "classpath:/dict.xml");
+				BananaSplitter.PARAM_MODEL_LOCATION, "classpath:/dict.xml");
 	}
 
 	@Test
