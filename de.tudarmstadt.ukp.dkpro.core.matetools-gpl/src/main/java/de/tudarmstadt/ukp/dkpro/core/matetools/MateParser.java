@@ -38,16 +38,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
-
 /**
  * <p>
  * DKPro Annotator for the MateToolsParser
  * </p>
  * 
- * Please cite the following paper, if you use the parser
- *   Bernd Bohnet. 2010.
- *   Top Accuracy and Fast Dependency Parsing is not a Contradiction.
- *   The 23rd International Conference on Computational Linguistics (COLING 2010), Beijing, China. 
+ * Please cite the following paper, if you use the parser Bernd Bohnet. 2010. Top Accuracy and Fast
+ * Dependency Parsing is not a Contradiction. The 23rd International Conference on Computational
+ * Linguistics (COLING 2010), Beijing, China.
  * 
  * Required annotations:<br/>
  * <ul>
@@ -65,108 +63,117 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * 
  * @author AnNa, zesch
  */
-public class MateParser extends JCasAnnotator_ImplBase {
-    
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    protected String language;
+public class MateParser
+	extends JCasAnnotator_ImplBase
+{
+	/**
+	 * Use this language instead of the language set in the CAS to locate the model.
+	 */
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	protected String language;
 
-    public static final String PARAM_VARIANT = "variant";
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-    protected String variant;
+	/**
+	 * Override the default variant used to locate the model.
+	 */
+	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+	protected String variant;
 
-    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-    protected String modelLocation;
+	/**
+	 * Load the model from this location instead of locating the model automatically.
+	 */
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
 
-    public static final String PARAM_MAPPING_LOCATION = "mappingLocation";
-    @ConfigurationParameter(name = PARAM_MAPPING_LOCATION, mandatory = false)
-    protected String mappingLocation;
+	private CasConfigurableProviderBase<Parser> modelProvider;
 
-    private CasConfigurableProviderBase<Parser> modelProvider;
-        
-    @Override
-    public void initialize(UimaContext aContext)
-        throws ResourceInitializationException
-    {
-        super.initialize(aContext);
+	@Override
+	public void initialize(UimaContext aContext)
+		throws ResourceInitializationException
+	{
+		super.initialize(aContext);
 
-        modelProvider = new CasConfigurableProviderBase<Parser>() {
-            {
-                setDefault(VERSION, "20120626.0");
-                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-                setDefault(ARTIFACT_ID,
-                        "de.tudarmstadt.ukp.dkpro.core-nonfree-model-parser-${language}-${variant}");
-                
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/matetools/lib/" +
-                        "parser-${language}-${variant}.model");
-                setDefault(VARIANT, "crosstrain");
-                
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
-            
-            @Override
-            protected Parser produceResource(URL aUrl) throws IOException
-            {
-                File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
-                
-                String[] args = {"-model", modelFile.getPath()};
-                is2.parser.Options option = new is2.parser.Options(args);
-                return new is2.parser.Parser(option);  // create a parser
-            }
-        };        
-    }
+		modelProvider = new CasConfigurableProviderBase<Parser>()
+		{
+			{
+				setDefault(VERSION, "20120626.0");
+				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+				setDefault(ARTIFACT_ID,
+						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-parser-${language}-${variant}");
 
-    @Override
-    public void process(JCas jcas) throws AnalysisEngineProcessException {
-        CAS cas = jcas.getCas();
+				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/matetools/lib/"
+						+ "parser-${language}-${variant}.model");
+				setDefault(VARIANT, "crosstrain");
 
-        modelProvider.configure(cas);
-                
-	    for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
-	        
-	        List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
-	            	        
-	        LinkedList<String> forms = new LinkedList<String>();
-	        forms.add("<root>");    	        
-	        for (Token token : selectCovered(Token.class, sentence)){  
-	            forms.add(token.getCoveredText());
-	        }
-	        
-	        LinkedList<String> lemmas = new LinkedList<String>();
-	        lemmas.add("<root>");
-	        for(Lemma lemma : JCasUtil.selectCovered(Lemma.class, sentence)){
-	            lemmas.add(lemma.getValue());
-	        }
-	        
-	        LinkedList<String> posTags = new LinkedList<String>();
-	        posTags.add("<root-POS>");
-            for(POS posTag : JCasUtil.selectCovered(POS.class, sentence)){
-                posTags.add(posTag.getPosValue());
-            }
-            
-            SentenceData09 sd = new SentenceData09();
-            sd.init(forms.toArray(new String[0]));
-            sd.setLemmas(lemmas.toArray(new String[0]));
-            sd.setPPos(posTags.toArray(new String[0]));
-           
-       	    SentenceData09 parsed = modelProvider.getResource().parse(sd);
-            for (int i=0; i<parsed.labels.length; i++){
-	            
-	            Dependency dep = new Dependency(jcas, sentence.getBegin(), sentence.getEnd());
-	            
-	            Token sourceToken = tokens.get(i);
-//    	            Token targetToken = null; //for "ROOT"
-	            if (parsed.heads[i]!=0) {
-	            	Token targetToken = tokens.get(parsed.heads[i] - 1);
-    	            dep.setGovernor(targetToken);
-    	            dep.setDependent(sourceToken);
-    	            dep.setDependencyType(parsed.labels[i]);
-    	            dep.addToIndexes();            
-	            }
-	        }
-	    }
-    }
+				setOverride(LOCATION, modelLocation);
+				setOverride(LANGUAGE, language);
+				setOverride(VARIANT, variant);
+			}
+
+			@Override
+			protected Parser produceResource(URL aUrl)
+				throws IOException
+			{
+				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+
+				String[] args = { "-model", modelFile.getPath() };
+				is2.parser.Options option = new is2.parser.Options(args);
+				return new is2.parser.Parser(option); // create a parser
+			}
+		};
+	}
+
+	@Override
+	public void process(JCas jcas)
+		throws AnalysisEngineProcessException
+	{
+		CAS cas = jcas.getCas();
+
+		modelProvider.configure(cas);
+
+		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
+
+			LinkedList<String> forms = new LinkedList<String>();
+			forms.add("<root>");
+			for (Token token : selectCovered(Token.class, sentence)) {
+				forms.add(token.getCoveredText());
+			}
+
+			LinkedList<String> lemmas = new LinkedList<String>();
+			lemmas.add("<root>");
+			for (Lemma lemma : JCasUtil.selectCovered(Lemma.class, sentence)) {
+				lemmas.add(lemma.getValue());
+			}
+
+			LinkedList<String> posTags = new LinkedList<String>();
+			posTags.add("<root-POS>");
+			for (POS posTag : JCasUtil.selectCovered(POS.class, sentence)) {
+				posTags.add(posTag.getPosValue());
+			}
+
+			SentenceData09 sd = new SentenceData09();
+			sd.init(forms.toArray(new String[0]));
+			sd.setLemmas(lemmas.toArray(new String[0]));
+			sd.setPPos(posTags.toArray(new String[0]));
+
+			SentenceData09 parsed = modelProvider.getResource().parse(sd);
+			for (int i = 0; i < parsed.labels.length; i++) {
+
+				Dependency dep = new Dependency(jcas, sentence.getBegin(), sentence.getEnd());
+
+				Token sourceToken = tokens.get(i);
+				// Token targetToken = null; //for "ROOT"
+				if (parsed.heads[i] != 0) {
+					Token targetToken = tokens.get(parsed.heads[i] - 1);
+					dep.setGovernor(targetToken);
+					dep.setDependent(sourceToken);
+					dep.setDependencyType(parsed.labels[i]);
+					dep.addToIndexes();
+				}
+			}
+		}
+	}
 }
