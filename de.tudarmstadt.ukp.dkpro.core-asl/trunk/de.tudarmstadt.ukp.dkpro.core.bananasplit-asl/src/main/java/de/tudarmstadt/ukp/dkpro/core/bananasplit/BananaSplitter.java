@@ -54,15 +54,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class BananaSplitter
 	extends CasAnnotator_ImplBase
 {
-	public static final String PARAM_DICT_PATH = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_DICT_PATH, mandatory = true)
+	/**
+	 * Location from which the model is read.
+	 */
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
 	private String dictPath;
 
-	public static final String PARAM_DELETE_COVER = "DeleteCover";
+	public static final String PARAM_DELETE_COVER = "deleteCover";
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
-	public static final String PARAM_TOKEN_TYPE = "TokenType";
+	public static final String PARAM_TOKEN_TYPE = "tokenType";
 	@ConfigurationParameter(name = PARAM_TOKEN_TYPE, mandatory = false)
 	private String tokenType;
 

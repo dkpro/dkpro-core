@@ -35,6 +35,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -48,8 +49,8 @@ extends JCasAnnotator_ImplBase
     /**
      * A list of type names used for zoning.
      */
-	public final static String PARAM_ZONE_FEATURES = "ZoneTypes";
-	@ConfigurationParameter(name=PARAM_ZONE_FEATURES, mandatory=false)
+	public final static String PARAM_ZONE_TYPES = "zoneTypes";
+	@ConfigurationParameter(name=PARAM_ZONE_TYPES, mandatory=false)
     private String[] zoneTypes;
 
     /**
@@ -65,15 +66,24 @@ extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name=PARAM_STRICT_ZONING, mandatory=true, defaultValue="true")
     private boolean strictZoning;
 
-    public static final String PARAM_LOCALE = "Locale";
-	@ConfigurationParameter(name=PARAM_LOCALE, mandatory=false)
-    private String locale;
+	/**
+	 * The language.
+	 */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
+    private String language;
 
-    public static final String PARAM_CREATE_TOKENS = "CreateTokens";
+	/**
+	 * Create {@link Token} annotations.
+	 */
+    public static final String PARAM_CREATE_TOKENS = "createTokens";
 	@ConfigurationParameter(name=PARAM_CREATE_TOKENS, mandatory=true, defaultValue="true")
     private boolean createTokens;
 
-    public static final String PARAM_CREATE_SENTENCES = "CreateSentences";
+	/**
+	 * Create {@link Sentence} annotations.
+	 */
+    public static final String PARAM_CREATE_SENTENCES = "createTokens";
 	@ConfigurationParameter(name=PARAM_CREATE_SENTENCES, mandatory=true, defaultValue="true")
     private boolean createSentences;
 
@@ -299,13 +309,13 @@ extends JCasAnnotator_ImplBase
 	 */
 	public Locale getLocale(JCas aJCas)
 	{
-		if (locale != null) {
-			return new Locale(locale);
+		if (language != null) {
+			return new Locale(language);
 		}
 
-		locale = aJCas.getDocumentLanguage();
-		if (locale != null) {
-			return new Locale(locale);
+		language = aJCas.getDocumentLanguage();
+		if (language != null) {
+			return new Locale(language);
 		}
 
 		return Locale.getDefault();
