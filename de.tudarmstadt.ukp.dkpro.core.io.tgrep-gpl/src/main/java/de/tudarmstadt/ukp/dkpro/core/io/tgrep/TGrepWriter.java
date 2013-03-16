@@ -46,21 +46,24 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 public class TGrepWriter
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Path to which the output is written.
+	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private File outputPath;
 
 	/**
 	 * Set this parameter to true if you want to add a comment to each PennTree which is written to
-	 * the output files.<br/>
-	 * The comment is of the form documentId,beginOffset,endOffset.
+	 * the output files. The comment is of the form {@code documentId,beginOffset,endOffset}.
 	 */
 	public static final String PARAM_WRITE_COMMENTS = "writeComments";
 	@ConfigurationParameter(name = PARAM_WRITE_COMMENTS, mandatory = true)
 	private boolean writeComments;
 
 	/**
-	 * Set this parameter to true if you want to encode directly into the tgrep2 binary format.<br/>
+	 * Set this parameter to true if you want to encode directly into the tgrep2 binary format.
+	 * 
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_T2C = "writeT2c";
@@ -69,8 +72,9 @@ public class TGrepWriter
 
 	/**
 	 * Method to compress the tgrep file (only used if PARAM_WRITE_T2C is true). Only NONE, GZIP and
-	 * BZIP2 are supported.<br/>
-	 * Default: {@code CompressionMethod.NONE}
+	 * BZIP2 are supported.
+	 * 
+	 * Default: {@link CompressionMethod#NONE}
 	 * 
 	 * @see CompressionMethod
 	 */
@@ -79,7 +83,8 @@ public class TGrepWriter
 	private CompressionMethod compression;
 
 	/**
-	 * If true, silently drops malformed Penn Trees instead of throwing an exception.<br/>
+	 * If true, silently drops malformed Penn Trees instead of throwing an exception.
+	 * 
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_DROP_MALFORMED_TREES = "dropMalformedTrees";
