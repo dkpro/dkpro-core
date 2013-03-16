@@ -82,10 +82,10 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]*.txt" },
-				ImsCwbReader.PARAM_WRITE_TOKENS, false, 
-				ImsCwbReader.PARAM_WRITE_LEMMAS, false,
-				ImsCwbReader.PARAM_WRITE_POS, false, 
-				ImsCwbReader.PARAM_WRITE_SENTENCES, false);
+				ImsCwbReader.PARAM_READ_TOKENS, false, 
+				ImsCwbReader.PARAM_READ_LEMMAS, false,
+				ImsCwbReader.PARAM_READ_POS, false, 
+				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
 		int i = 0;
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -107,9 +107,11 @@ public class ImsCwbReaderTest
 		CollectionReader reader = createCollectionReader(ImsCwbReader.class,
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15", ImsCwbReader.PARAM_WRITE_TOKENS, false,
-				ImsCwbReader.PARAM_WRITE_LEMMAS, true, ImsCwbReader.PARAM_WRITE_POS, false,
-				ImsCwbReader.PARAM_WRITE_SENTENCES, false);
+				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15", 
+				ImsCwbReader.PARAM_READ_TOKENS, false,
+				ImsCwbReader.PARAM_READ_LEMMAS, true, 
+				ImsCwbReader.PARAM_READ_POS, false,
+				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
 		for (JCas jcas : new JCasIterable(reader)) {
 			// should never get here

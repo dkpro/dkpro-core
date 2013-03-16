@@ -76,42 +76,78 @@ public class ImsCwbWriter
 	public static final String ATTR_ID = "id";
 	public static final String ATTR_URI = "uri";
 	
+	/**
+	 * Location to which the output is written.
+	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private File outputFile;
 
+	/**
+	 * Character encoding of the output data.
+	 */
 	public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
 	@ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
+	/**
+	 * Write the document ID for each token. It is usually a better idea to generate a 
+	 * {@link #PARAM_WRITE_DOCUMENT_TAG document tag} or a {@link #PARAM_WRITE_TEXT_TAG text tag}
+	 * which also contain the document ID that can be queried in CQP.
+	 */
 	public static final String PARAM_WRITE_DOC_ID = "writeDocId";
 	@ConfigurationParameter(name = PARAM_WRITE_DOC_ID, mandatory = true, defaultValue = "false")
 	private boolean writeDocId;
 	
+	/**
+	 * Write part-of-speech tags.
+	 */
 	public static final String PARAM_WRITE_POS = "writePOS";
 	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
 	private boolean writePOS;
 
+	/**
+	 * Write coarse-grained part-of-speech tags. These are the simple names of the UIMA types used
+	 * to represent the part-of-speech tag.
+	 */
 	public static final String PARAM_WRITE_CPOS = "writeCPOS";
 	@ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
 	private boolean writeCPOS;
 
+	/**
+	 * Write lemmata.
+	 */
 	public static final String PARAM_WRITE_LEMMA = "writeLemma";
 	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
 	private boolean writeLemma;
 
+	/**
+	 * Write a pseudo-XML tag with the name {@code document} to mark the start and end of a 
+	 * document.
+	 */
 	public static final String PARAM_WRITE_DOCUMENT_TAG = "writeDocumentTag";
 	@ConfigurationParameter(name = PARAM_WRITE_DOCUMENT_TAG, mandatory = true, defaultValue = "false")
 	private boolean writeDocumentTag;
 
+	/**
+	 * Write a pseudo-XML tag with the name {@code text} to mark the start and end of a 
+	 * document. This is used by CQPweb.
+	 */
 	public static final String PARAM_WRITE_TEXT_TAG = "writeTextTag";
 	@ConfigurationParameter(name = PARAM_WRITE_TEXT_TAG, mandatory = true, defaultValue = "true")
 	private boolean writeTextTag;
 
+	/**
+	 * Write the start and end position of each token.
+	 */
 	public static final String PARAM_WRITE_OFFSETS = "writeOffsets";
 	@ConfigurationParameter(name = PARAM_WRITE_OFFSETS, mandatory = true, defaultValue = "false")
 	private boolean writeOffsets;
 
+	/**
+	 * Make document IDs compatible with CQPweb. CQPweb demands an id consisting of only letters,
+	 * numbers and underscore.
+	 */
 	public static final String PARAM_CQPWEB_COMPATIBILITY = "cqpwebCompatibility";
 	@ConfigurationParameter(name = PARAM_CQPWEB_COMPATIBILITY, mandatory = true, defaultValue = "false")
 	private boolean cqpwebCompatibility;

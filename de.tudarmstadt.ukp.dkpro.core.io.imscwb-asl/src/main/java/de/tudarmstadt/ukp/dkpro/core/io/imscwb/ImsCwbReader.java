@@ -47,33 +47,57 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 public class ImsCwbReader
     extends ResourceCollectionReaderBase
 {
+	/**
+	 * Character encoding of the output.
+	 */
     public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name=PARAM_ENCODING, mandatory=true, defaultValue="UTF-8")
     private String encoding;
 
-	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String mappingPosLocation;
 
+	/**
+	 * Specify which tag set should be used to locate the mapping file.
+	 * 
+	 */
 	public static final String PARAM_POS_TAGSET = "posTagset";
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	@ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
 	protected String posTagset;
 
-    public static final String PARAM_WRITE_TOKENS = "WriteTokens";
-    @ConfigurationParameter(name = PARAM_WRITE_TOKENS, mandatory = true, defaultValue = "true")
-    private boolean writeTokens;
+	/**
+	 * Read tokens and generate {@link Token} annotations.
+	 */
+    public static final String PARAM_READ_TOKENS = "readTokens";
+    @ConfigurationParameter(name = PARAM_READ_TOKENS, mandatory = true, defaultValue = "true")
+    private boolean readTokens;
 
-    public static final String PARAM_WRITE_POS = "WritePOS";
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
-    private boolean writePOS;
+	/**
+	 * Read part-of-speech tags and generate {@link POS} annotations or subclasses if a
+	 * {@link #PARAM_POS_TAGSET tag set} or {@link #PARAM_TAGGER_MAPPING_LOCATION mapping file} is
+	 * used.
+	 */
+    public static final String PARAM_READ_POS = "readPos";
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    private boolean readPos;
 
-    public static final String PARAM_WRITE_SENTENCES = "WriteSentences";
-    @ConfigurationParameter(name = PARAM_WRITE_SENTENCES, mandatory = true, defaultValue = "true")
-    private boolean writeSentences;
+	/**
+	 * Read sentences.
+	 */
+    public static final String PARAM_READ_SENTENCES = "readSentences";
+    @ConfigurationParameter(name = PARAM_READ_SENTENCES, mandatory = true, defaultValue = "true")
+    private boolean readSentences;
 
-    public static final String PARAM_WRITE_LEMMAS = "WriteLemmas";
-    @ConfigurationParameter(name = PARAM_WRITE_LEMMAS, mandatory = true, defaultValue = "true")
-    private boolean writeLemmas;
+	/**
+	 * Read lemmas.
+	 */
+    public static final String PARAM_READ_LEMMAS = "readLemmas";
+    @ConfigurationParameter(name = PARAM_READ_LEMMAS, mandatory = true, defaultValue = "true")
+    private boolean readLemmas;
 
 	/**
 	 * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
@@ -196,29 +220,29 @@ public class ImsCwbReader
                 String pos   = doReplaceNonXml(sentence.getPOS().get(i));
                 int len = token.length();
 
-                if (writePOS) {
+                if (readPos) {
     				Type posType = posMappingProvider.getTagType(pos);
     				AnnotationFS posAnno = aCAS.createAnnotation(posType, offset, offset + len);
                     posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), pos);
                     posAnnotations.add(posAnno);
                 }
 
-                if (writeLemmas) {
+                if (readLemmas) {
                     AnnotationFS lemmaAnno = aCAS.createAnnotation(
                                 lemmaType, offset, offset + len);
                     lemmaAnno.setStringValue(lemmaType.getFeatureByBaseName("value"), lemma);
                     lemmaAnnotations.add(lemmaAnno);
                 }
 
-                if (writeTokens) {
+                if (readTokens) {
                     AnnotationFS tokenAnno = aCAS.createAnnotation(
                             tokenType, offset, offset + len);
-                    if (writePOS) {
+                    if (readPos) {
                         tokenAnno.setFeatureValue(
                                 tokenType.getFeatureByBaseName("pos"),
                                 posAnnotations.get(posAnnotations.size()-1));
                     }
-                    if (writeLemmas) {
+                    if (readLemmas) {
                         tokenAnno.setFeatureValue(
                                 tokenType.getFeatureByBaseName("lemma"),
                                 lemmaAnnotations.get(lemmaAnnotations.size()-1));
@@ -233,7 +257,7 @@ public class ImsCwbReader
                 offset += len + 1;
             }
 
-            if (writeSentences) {
+            if (readSentences) {
                 AnnotationFS sentenceAnno = aCAS.createAnnotation(
                         sentenceType, savedOffset, offset);
                 sentenceAnnotations.add(sentenceAnno);
