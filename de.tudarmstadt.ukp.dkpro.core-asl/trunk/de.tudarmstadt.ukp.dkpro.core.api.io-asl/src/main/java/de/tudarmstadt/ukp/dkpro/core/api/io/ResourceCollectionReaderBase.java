@@ -75,10 +75,19 @@ public abstract class ResourceCollectionReaderBase
 	public static final String INCLUDE_PREFIX = "[+]";
 	public static final String EXCLUDE_PREFIX = "[-]";
 
+	/**
+	 * Location from which the input is read.
+	 */
 	public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
 	private String path;
 
+	/**
+	 * A set of Ant-like include/exclude patterns. A pattern starts with {@link #INCLUDE_PREFIX [+]}
+	 * if it is an include pattern and with {@link #EXCLUDE_PREFIX [-]} if it is an exclude pattern.
+	 * The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+	 * The wildcard {@code *} can be used to a address a part of a name.
+	 */
 	public static final String PARAM_PATTERNS = "patterns";
 	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
 	private String[] patterns;
@@ -90,6 +99,9 @@ public abstract class ResourceCollectionReaderBase
 	@ConfigurationParameter(name=PARAM_USE_DEFAULT_EXCLUDES, mandatory=true, defaultValue="true")
 	private boolean useDefaultExcludes;
 
+	/**
+	 * Include hidden files and directories.
+	 */
 	public static final String PARAM_INCLUDE_HIDDEN = "includeHidden";
 	@ConfigurationParameter(name=PARAM_INCLUDE_HIDDEN, mandatory=true, defaultValue="false")
 	private boolean includeHidden;
