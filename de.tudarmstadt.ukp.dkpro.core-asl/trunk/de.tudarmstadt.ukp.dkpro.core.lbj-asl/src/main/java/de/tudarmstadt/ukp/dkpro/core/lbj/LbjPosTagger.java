@@ -50,6 +50,12 @@ import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
 public class LbjPosTagger
     extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+	 * spaming the heap with thousands of strings representing only a few different tags.
+	 * 
+	 * Default: {@code true}
+	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
 	private boolean internTags;
