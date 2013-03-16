@@ -107,6 +107,7 @@ public abstract class ResourceObjectProviderBase<M>
 
 	private Properties resourceMetaData;
 	private String resourceUrl;
+	private String initialResourceUrl;
 	private M resource;
 	
 	private Properties overrides = new Properties();
@@ -252,29 +253,68 @@ public abstract class ResourceObjectProviderBase<M>
 				}
 			}
 			else {
-				URL url = resolveLocation(modelLocation, this, null);
-				if (!StringUtils.equals(resourceUrl, url.toString())) {
-					// Load resource meta data if present
+				URL initialUrl = resolveLocation(modelLocation, this, null);
+				
+				if (!StringUtils.equals(initialResourceUrl, initialUrl.toString())) {
+					URL url = initialUrl;
 					resourceMetaData = new Properties();
 					
+					// If the model points to a properties file, try to find a new location in that
+					// file. If that points to a properties file again, repeat the process.
+					while (modelLocation.endsWith(".properties")) {
+						URL modelMetaDataUrl = resolveLocation(modelLocation, this, null);
+						Properties tmpResourceMetaData = PropertiesLoaderUtils
+								.loadProperties(new UrlResource(modelMetaDataUrl));
+
+						// Values in the redirecting properties override values in the redirected-to
+						// properties - except LOCATION
+						resourceMetaData.remove(LOCATION);
+						mergeProperties(resourceMetaData, tmpResourceMetaData);
+
+						modelLocation = resourceMetaData.getProperty(LOCATION);
+						if (modelLocation == null) {
+							throw new IOException("Model URL resolves to properties at ["
+									+ modelMetaDataUrl + "] but no redirect property [" + LOCATION
+									+ "] found there.");
+						}
+						url = resolveLocation(modelLocation, this, null);
+					}
+
+					// Load resource meta data if present
 					try {
-						if (modelLocation.toLowerCase().endsWith(".gz")) {
-							modelLocation = modelLocation.substring(0, modelLocation.length() - 3);
+						String baseLocation = modelLocation;
+						if (baseLocation.toLowerCase().endsWith(".gz")) {
+							baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
 						}
-						if (modelLocation.toLowerCase().endsWith(".bz2")) {
-							modelLocation = modelLocation.substring(0, modelLocation.length() - 4);
+						else if (baseLocation.toLowerCase().endsWith(".bz2")) {
+							baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
 						}
-						String modelMetaDataLocation = FilenameUtils.removeExtension(modelLocation)+".properties";
+						
+						String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
+								+ ".properties";
 						URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
-						resourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(modelMetaDataUrl));
+						Properties tmpResourceMetaData = PropertiesLoaderUtils
+								.loadProperties(new UrlResource(modelMetaDataUrl));
+						
+						// Values in the redirecting properties override values in the redirected-to
+						// properties.
+						mergeProperties(resourceMetaData, tmpResourceMetaData);
 					}
 					catch (FileNotFoundException e) {
 						// If no metadata was found, just leave the properties empty.
 					}
-					
-					log.info("Producing resource from " + url);
-					resource = produceResource(url);
+
 					resourceUrl = url.toString();
+					initialResourceUrl = initialUrl.toString();
+
+					if (initialResourceUrl.equals(resourceUrl)) {
+						log.info("Producing resource from " + url);
+					}
+					else {
+						log.info("Producing resource from [" + url + "] redirected from ["
+								+ initialResourceUrl + "]");
+					}
+					resource = produceResource(url);
 				}
 			}
 			success = true;
@@ -359,5 +399,17 @@ public abstract class ResourceObjectProviderBase<M>
 	public Properties getResourceMetaData()
 	{
 		return resourceMetaData;
+	}
+	
+	/**
+	 * Copy all properties that not already exist in target from source.
+	 */
+	private void mergeProperties(Properties aTarget, Properties aSource)
+	{
+		for (Object key : aSource.keySet()) {
+			if (!aTarget.containsKey(key)) {
+				aTarget.put(key, aSource.get(key));
+			}
+		}
 	}
 }
