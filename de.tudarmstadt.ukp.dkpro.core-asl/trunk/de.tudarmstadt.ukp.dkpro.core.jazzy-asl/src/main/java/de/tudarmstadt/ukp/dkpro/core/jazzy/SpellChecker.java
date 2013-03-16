@@ -52,12 +52,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class SpellChecker
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_DICT_PATH = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_DICT_PATH, mandatory = true)
+	/**
+	 * Location from which the model is read. The model file is a simple word-list with one word
+	 * per line.
+	 */
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
 	private String dictPath;
 
-	public static final String PARAM_DICT_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-	@ConfigurationParameter(name = PARAM_DICT_ENCODING, mandatory = true, defaultValue = "UTF-8")
+	/**
+	 * The character encoding used by the model.
+	 */
+	public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+	@ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String dictEncoding;
 
     /**

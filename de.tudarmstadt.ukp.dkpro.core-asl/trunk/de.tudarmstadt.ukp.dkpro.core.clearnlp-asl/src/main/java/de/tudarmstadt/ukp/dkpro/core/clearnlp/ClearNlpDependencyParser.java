@@ -64,18 +64,31 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 public class ClearNlpDependencyParser
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Write the tag set(s) to the log when a model is loaded.
+	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
 	protected boolean printTagSet;
 
+	/**
+	 * The language.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 
+	/**
+	 * Variant of a model the model. Used to address a specific model if here are multiple models
+	 * for one language.
+	 */
 	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;
 
+	/**
+	 * Location from which the model is read.
+	 */
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;

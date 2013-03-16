@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class SpellCheckerTest
 {
-
     @Test
     public void spellCheckerTest()
         throws Exception
@@ -55,8 +54,8 @@ public class SpellCheckerTest
     private void runEnglishSpellChecker(String testDocument, List<String> errors)
         throws Exception
     {
-        AnalysisEngine engine = createPrimitive(SpellChecker.class, SpellChecker.PARAM_DICT_PATH,
-                "src/test/resources/testdict.txt");
+		AnalysisEngine engine = createPrimitive(SpellChecker.class,
+				SpellChecker.PARAM_MODEL_LOCATION, "src/test/resources/testdict.txt");
         JCas aJCas = engine.newJCas();
 
         TokenBuilder<Token, Sentence> tb = TokenBuilder.create(Token.class, Sentence.class);
