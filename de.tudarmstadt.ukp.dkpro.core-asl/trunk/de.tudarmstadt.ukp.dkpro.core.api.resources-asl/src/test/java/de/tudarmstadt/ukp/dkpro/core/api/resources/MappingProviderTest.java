@@ -78,7 +78,7 @@ public class MappingProviderTest
 		mappingProvider.setOverride(MappingProvider.VARIANT, "variant3");
 		mappingProvider.configure(cas);
 		assertEquals("de-variant3.map", mappingProvider.getModelLocation());
-}
+	}
 
 	@Test
 	public void testTagsetChange() throws Exception
@@ -116,5 +116,39 @@ public class MappingProviderTest
 		Map<String, String> deMap = mappingProvider.getResource();
 		assertEquals("de", deMap.get("value"));
 		assertEquals("mytags2", deMap.get("tagset"));
+	}
+
+	@Test
+	public void testRedirect() throws Exception
+	{
+		CasConfigurableProviderBase<String> modelProvider = new CasConfigurableProviderBase<String>()
+		{
+			{
+				setDefault(LOCATION, "src/test/resources/${language}-redirect2.properties");
+			}
+			
+			@Override
+			protected String produceResource(URL aUrl)
+				throws IOException
+			{
+				return aUrl.toString();
+			}
+		};
+		
+		MappingProvider mappingProvider = new MappingProvider();
+		mappingProvider.setDefault(MappingProvider.LOCATION, "src/test/resources/${language}-${tagset}.map");
+		mappingProvider.addImport("tagset", modelProvider);
+		
+		CAS cas = CasCreationUtils.createCas(new TypeSystemDescription_impl(), null, null);
+		
+		cas.setDocumentLanguage("de");
+		modelProvider.configure(cas);
+		mappingProvider.configure(cas);
+		Map<String, String> deMap = mappingProvider.getResource();
+		assertEquals("de-override", deMap.get("value"));
+		Properties meta = modelProvider.getResourceMetaData();
+		assertEquals("mytags1", meta.getProperty("tagset"));
+		assertEquals("true", meta.getProperty("redirect"));
+		assertEquals("true", meta.getProperty("redirect2"));
 	}
 }
