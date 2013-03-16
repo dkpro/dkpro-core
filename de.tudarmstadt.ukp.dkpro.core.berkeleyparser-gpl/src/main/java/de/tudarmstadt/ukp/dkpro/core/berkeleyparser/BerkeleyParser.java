@@ -73,14 +73,23 @@ public class BerkeleyParser
 {
 	private static final String CONPACKAGE = Constituent.class.getPackage().getName() + ".";
 
+	/**
+	 * Use this language instead of the language set in the CAS to locate the model.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 
+	/**
+	 * Override the default variant used to locate the model.
+	 */
 	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;
 
+	/**
+	 * Load the model from this location instead of locating the model automatically.
+	 */
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
@@ -89,17 +98,29 @@ public class BerkeleyParser
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String mappingLocation;
 
+	/**
+	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+	 * spaming the heap with thousands of strings representing only a few different tags.
+	 * 
+	 * Default: {@code true}
+	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
 	private boolean internTags;
 
+	/**
+	 * Log the tag set(s) when a model is loaded.
+	 * 
+	 * Default: {@code false}
+	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
 	protected boolean printTagSet;
 
 	/**
 	 * Sets whether to create or not to create POS tags. The creation of constituent tags must be
-	 * turned on for this to work.<br/>
+	 * turned on for this to work.
+	 * 
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_CREATE_POS_TAGS = "createPosTags";
@@ -108,7 +129,8 @@ public class BerkeleyParser
 
 	/**
 	 * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
-	 * containing the whole parse tree in Prenn Treebank style format.<br/>
+	 * containing the whole parse tree in Prenn Treebank style format.
+	 * 
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_CREATE_PENN_TREE_STRING = "createPennTreeString";
@@ -117,35 +139,45 @@ public class BerkeleyParser
 	private boolean createPennTreeString;
 
 	/**
-	 * Compute viterbi derivation instead of max-rule tree (Default: false = max-rule)")
+	 * Compute viterbi derivation instead of max-rule tree.
+	 * 
+	 * Default: {@code false} (max-rule)
 	 */
 	public static final String PARAM_VITERBI = "viterbi";
 	@ConfigurationParameter(name = PARAM_VITERBI, mandatory = true, defaultValue = "false")
 	private boolean viterbi;
 
 	/**
-	 * Output subcategories (only for binarized viterbi trees). (Default: false)
+	 * Output sub-categories (only for binarized viterbi trees).
+	 * 
+	 * Default: {@code false}
 	 */
 	public static final String PARAM_SUBSTATES = "substates";
 	@ConfigurationParameter(name = PARAM_SUBSTATES, mandatory = true, defaultValue = "false")
     private boolean substates;
 
 	/**
-	 * Output inside scores (only for binarized viterbi trees). (Default: false)
+	 * Output inside scores (only for binarized viterbi trees).
+	 * 
+	 * Default: {@code false}
 	 */
 	public static final String PARAM_SCORES = "scores";
 	@ConfigurationParameter(name = PARAM_SCORES, mandatory = true, defaultValue = "false")
 	private boolean scores;
 
 	/**
-	 * Set thresholds for accuracy. (Default: set thresholds for efficiency)
+	 * Set thresholds for accuracy.
+	 * 
+	 * Default: {@code false} (set thresholds for efficiency)
 	 */
 	public static final String PARAM_ACCURATE = "accurate";
 	@ConfigurationParameter(name = PARAM_ACCURATE, mandatory = true, defaultValue = "false")
 	private boolean accurate;
 
 	/**
-	 * Use variational rule score approximation instead of max-rule (Default: false)
+	 * Use variational rule score approximation instead of max-rule
+	 * 
+	 * Default: {@code false}
 	 */
 	public static final String PARAM_VARIATIONAL = "variational";
 	@ConfigurationParameter(name = PARAM_VARIATIONAL, mandatory = true, defaultValue = "false")
@@ -153,14 +185,17 @@ public class BerkeleyParser
 
 	/**
 	 * Retain predicted function labels. Model must have been trained with function labels. 
-	 * (Default: false)
+	 * 
+	 * Default: {@code false}
 	 */
 	public static final String PARAM_KEEP_FUNCTION_LABELS = "keepFunctionLabels";
 	@ConfigurationParameter(name = PARAM_KEEP_FUNCTION_LABELS, mandatory = true, defaultValue = "false")
     private boolean keepFunctionLabels;
     
 	/**
-	 * Output binarized trees. (Default: false)
+	 * Output binarized trees.
+	 * 
+	 * Default: {@code false}
 	 */
 	public static final String PARAM_BINARIZE = "binarize";
 	@ConfigurationParameter(name = PARAM_BINARIZE, mandatory = true, defaultValue = "false")
