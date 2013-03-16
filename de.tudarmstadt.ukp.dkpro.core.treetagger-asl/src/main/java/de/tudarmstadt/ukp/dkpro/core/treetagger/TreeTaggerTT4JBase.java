@@ -63,36 +63,49 @@ public abstract class TreeTaggerTT4JBase<T>
     public static final String RESOURCE_TREETAGGER = "TreeTagger";
 	protected DKProTreeTaggerWrapper<T> treetagger;
 
+	/**
+	 * Write the tag set(s) to the log when a model is loaded.
+	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 	
-    public static final String PARAM_LANGUAGE_CODE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name=PARAM_LANGUAGE_CODE, mandatory=false)
+	/**
+	 * The language.
+	 */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
 	protected String languageCode;
 
-    public static final String PARAM_PERFORMANCE_MODE = "PerformanceMode";
+    public static final String PARAM_PERFORMANCE_MODE = "performanceMode";
 	@ConfigurationParameter(name=PARAM_PERFORMANCE_MODE, mandatory=true, defaultValue="false")
 	private boolean performanceMode;
 
-    public static final String PARAM_EXECUTABLE_PATH = "ExecutablePath";
+    public static final String PARAM_EXECUTABLE_PATH = "executablePath";
 	@ConfigurationParameter(name=PARAM_EXECUTABLE_PATH, mandatory=false)
 	private File executablePath;
 
+	/**
+	 * Location from which the model is read.
+	 */
     public static final String PARAM_MODEL_PATH = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name=PARAM_MODEL_PATH, mandatory=false)
 	protected File modelPath;
 
+	/**
+	 * The character encoding used by the model.
+	 */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
 	@ConfigurationParameter(name=PARAM_MODEL_ENCODING, mandatory=false)
 	protected String modelEncoding;
 
+	/**
+	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+	 * spamming the heap with thousands of strings representing only a few different tags.
+	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name=PARAM_INTERN_TAGS, mandatory=false, defaultValue="true")
+	@ConfigurationParameter(name=PARAM_INTERN_TAGS, mandatory=true, defaultValue="true")
 	private boolean internTags;
-
-//
-//	private Set<String> missingTags;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -105,8 +118,6 @@ public abstract class TreeTaggerTT4JBase<T>
 				throw new IllegalArgumentException("When specifying a model file, the model " +
 						"encoding has to be specified as well.");
 			}
-
-//			missingTags = new HashSet<String>();
 
 			treetagger = new DKProTreeTaggerWrapper<T>();
 
