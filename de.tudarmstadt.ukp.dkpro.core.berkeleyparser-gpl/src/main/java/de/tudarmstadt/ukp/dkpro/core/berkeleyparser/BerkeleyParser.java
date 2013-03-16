@@ -94,6 +94,10 @@ public class BerkeleyParser
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+	/**
+	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+	 * the mapping automatically.
+	 */
 	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String mappingLocation;
