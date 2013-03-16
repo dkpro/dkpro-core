@@ -42,7 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
- * Tokenizer tokenizer using Clear NLP.
+ * Tokenizer using Clear NLP.
  * 
  * @author Richard Eckart de Castilho
  */
