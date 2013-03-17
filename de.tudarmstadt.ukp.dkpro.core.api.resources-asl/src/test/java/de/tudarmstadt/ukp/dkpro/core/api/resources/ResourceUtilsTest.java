@@ -62,6 +62,7 @@ public class ResourceUtilsTest
 		Collections.sort(files);
 		assertEquals(
 				asList("/resources/MappingProviderTest$1.class",
+						"/resources/MappingProviderTest$2.class",
 						"/resources/MappingProviderTest.class",
 						"/resources/ResourceUtilsTest.class"), files);
 	}
