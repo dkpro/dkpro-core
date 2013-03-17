@@ -26,14 +26,28 @@
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
 	<name>DKPro Core ASL - IO - Graph Annotation Format (GrAF)</name>
 	<repositories>
-	<repository>
-		<!-- Required while UimaUtils 3.0.0 is not yet released -->
-		<id>anc-snapshots</id>
-		<url>http://www.anc.org:8080/nexus/content/repositories/snapshots</url>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-	</repository>
+		<repository>
+			<!-- Required while UimaUtils 3.0.0 is not yet one Maven Central -->
+			<id>anc-releases</id>
+			<url>http://www.anc.org:8080/nexus/content/repositories/releases/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<!-- Required while UimaUtils 3.0.0 is not yet released -->
+			<id>anc-snapshots</id>
+			<url>http://www.anc.org:8080/nexus/content/repositories/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
