@@ -46,10 +46,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 public class LanguageToolChecker
 	extends JCasAnnotator_ImplBase
 {
-
-	public static final String PARAM_LANGUAGE_CODE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE_CODE, mandatory = true, defaultValue = "en")
+	/**
+	 * Use this language instead of the document language to resolve the model.
+	 */
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	private String languageCode;
+	
 	private Language language;
 
 	private boolean languageOverride = false;

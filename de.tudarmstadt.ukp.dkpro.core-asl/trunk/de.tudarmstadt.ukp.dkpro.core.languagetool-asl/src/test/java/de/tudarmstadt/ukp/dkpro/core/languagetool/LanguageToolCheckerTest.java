@@ -39,7 +39,7 @@ public class LanguageToolCheckerTest
 		String testDocument = "A sentence with a error in the Hitchhiker's Guide tot he Galaxy .";
 
 		AnalysisEngine engine = createPrimitive(LanguageToolChecker.class,
-				LanguageToolChecker.PARAM_LANGUAGE_CODE, "en");
+				LanguageToolChecker.PARAM_LANGUAGE, "en");
 		JCas aJCas = engine.newJCas();
 
 		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
