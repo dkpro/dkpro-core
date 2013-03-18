@@ -68,10 +68,16 @@ public class HtmlReader
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
 
+	/**
+	 * URL from which the input is read.
+	 */
     public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
     @ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=true)
     private URL inputURL;
 
+    /**
+     * Set this as the language of the produced documents.
+     */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	private String language;
