@@ -115,9 +115,9 @@ public class MaltParser
 	protected boolean printTagSet;
 
 	// Not sure if we'll ever have to use different symbol tables
-	public static final String SYMBOL_TABLE = "symbolTableName";
-	@ConfigurationParameter(name = SYMBOL_TABLE, mandatory = true, defaultValue = "DEPREL")
-	private String symbolTableName;
+    // public static final String SYMBOL_TABLE = "symbolTableName";
+    // @ConfigurationParameter(name = SYMBOL_TABLE, mandatory = true, defaultValue = "DEPREL")
+	private String symbolTableName = "DEPREL";
 
 	private Logger logger;
 	private SymbolTable symbolTable;
