@@ -41,10 +41,10 @@ public class StanfordCoreferenceResolverTest
 		AnalysisEngine aggregate = createAggregate(createAggregateDescription(
 				createPrimitiveDescription(StanfordSegmenter.class),
 				createPrimitiveDescription(StanfordParser.class,
-						StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
-						StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
-						StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
-						StanfordParser.PARAM_CREATE_POS_TAGS, true),
+						StanfordParser.PARAM_WRITE_CONSTITUENT, true,
+						StanfordParser.PARAM_WRITE_DEPENDENCY, true,
+						StanfordParser.PARAM_WRITE_PENN_TREE, true,
+						StanfordParser.PARAM_WRITE_POS, true),
 				createPrimitiveDescription(
 						StanfordNamedEntityRecognizer.class),
 				createPrimitiveDescription(StanfordCoreferenceResolver.class)));

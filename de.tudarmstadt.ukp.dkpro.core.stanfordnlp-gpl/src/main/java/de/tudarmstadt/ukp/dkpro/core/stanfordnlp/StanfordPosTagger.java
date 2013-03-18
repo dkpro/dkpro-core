@@ -45,26 +45,50 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 public class StanfordPosTagger
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Log the tag set(s) when a model is loaded.
+	 * 
+	 * Default: {@code false}
+	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
+	/**
+	 * The language.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 
+	/**
+	 * Variant of a model the model. Used to address a specific model if here are multiple models
+	 * for one language.
+	 */
 	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;
 
+	/**
+	 * Location from which the model is read.
+	 */
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
-	protected String mappingLocation;
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posMappingLocation;
 
+	/**
+	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+	 * spaming the heap with thousands of strings representing only a few different tags.
+	 * 
+	 * Default: {@code false}
+	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
 	private boolean internStrings;
@@ -129,7 +153,7 @@ public class StanfordPosTagger
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		mappingProvider.setDefault("tagger.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		mappingProvider.addImport("tagger.tagset", modelProvider);
 	}

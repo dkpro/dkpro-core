@@ -72,7 +72,7 @@ public class StanfordNamedEntityRecognizer
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	public static final String PARAM_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_ENTITY_MAPPING_LOCATION;
+	public static final String PARAM_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_ENTITY_MAPPING_LOCATION, mandatory = false)
 	protected String mappingLocation;
 

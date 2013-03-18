@@ -259,7 +259,7 @@ public class BerkeleyParserTest
 		// setup English
 		AnalysisEngineDescription parser = createPrimitiveDescription(BerkeleyParser.class,
 				BerkeleyParser.PARAM_PRINT_TAGSET, true,
-				BerkeleyParser.PARAM_CREATE_PENN_TREE_STRING, true);
+				BerkeleyParser.PARAM_WRITE_PENN_TREE, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
 		

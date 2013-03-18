@@ -83,12 +83,12 @@ public class MatePosTagger
 	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
 	 * mapping automatically.
 	 */
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
 
 	private CasConfigurableProviderBase<Tagger> modelProvider;
-	private MappingProvider mappingProvider;
+	private MappingProvider posMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -125,14 +125,14 @@ public class MatePosTagger
 			}
 		};
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
+		posMappingProvider = new MappingProvider();
+		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
 				+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("tagger.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("tagger.tagset", modelProvider);
+		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		posMappingProvider.addImport("tagger.tagset", modelProvider);
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class MatePosTagger
 		CAS cas = jcas.getCas();
 
 		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+		posMappingProvider.configure(cas);
 
 		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
@@ -154,7 +154,7 @@ public class MatePosTagger
 
 			for (int i = 0; i < posTags.length; i++) {
 				Token token = tokens.get(i);
-				Type posType = mappingProvider.getTagType(posTags[i]);
+				Type posType = posMappingProvider.getTagType(posTags[i]);
 				POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
 				posTag.setPosValue(posTags[i]);
 				posTag.addToIndexes();

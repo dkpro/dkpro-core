@@ -43,6 +43,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.OperationalProperties;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -68,11 +69,16 @@ import edu.berkeley.nlp.util.Numberer;
  * @author Richard Eckart de Castilho
  */
 @OperationalProperties(multipleDeploymentAllowed=false)
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+		outputs = { 
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
 public class BerkeleyParser
 	extends JCasAnnotator_ImplBase
 {
-	private static final String CONPACKAGE = Constituent.class.getPackage().getName() + ".";
-
 	/**
 	 * Use this language instead of the language set in the CAS to locate the model.
 	 */
@@ -98,9 +104,9 @@ public class BerkeleyParser
 	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
 	 * the mapping automatically.
 	 */
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
-	protected String mappingLocation;
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posMappingLocation;
 
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
@@ -127,23 +133,23 @@ public class BerkeleyParser
 	 * 
 	 * Default: {@code true}
 	 */
-	public static final String PARAM_CREATE_POS_TAGS = "createPosTags";
-	@ConfigurationParameter(name = PARAM_CREATE_POS_TAGS, mandatory = true, defaultValue = "true")
+	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
+	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
 	private boolean createPosTags;
 
 	/**
 	 * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
-	 * containing the whole parse tree in Prenn Treebank style format.
+	 * containing the whole parse tree in Penn Treebank style format.
 	 * 
 	 * Default: {@code false}
 	 */
-	public static final String PARAM_CREATE_PENN_TREE_STRING = "createPennTreeString";
-	@ConfigurationParameter(name = PARAM_CREATE_PENN_TREE_STRING, mandatory = true,
+	public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
+	@ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true,
 			defaultValue = "false")
 	private boolean createPennTreeString;
 
 	/**
-	 * Compute viterbi derivation instead of max-rule tree.
+	 * Compute Viterbi derivation instead of max-rule tree.
 	 * 
 	 * Default: {@code false} (max-rule)
 	 */
@@ -152,7 +158,7 @@ public class BerkeleyParser
 	private boolean viterbi;
 
 	/**
-	 * Output sub-categories (only for binarized viterbi trees).
+	 * Output sub-categories (only for binarized Viterbi trees).
 	 * 
 	 * Default: {@code false}
 	 */
@@ -207,7 +213,7 @@ public class BerkeleyParser
 
 	private CasConfigurableProviderBase<Parser> modelProvider;
 	private MappingProvider posMappingProvider;
-	private MappingProvider constMappingProvider;
+	private MappingProvider constituentMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -287,18 +293,18 @@ public class BerkeleyParser
 				+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
-		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		posMappingProvider.addImport("tagger.tagset", modelProvider);
 		
-		constMappingProvider = new MappingProvider();
-		constMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
+		constituentMappingProvider = new MappingProvider();
+		constituentMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
 				+ "core/api/syntax/tagset/${language}-${constituency.tagset}-constituency.map");
-		constMappingProvider.setDefault(MappingProvider.BASE_TYPE, Constituent.class.getName());
-		constMappingProvider.setDefault("constituency.tagset", "default");
-		constMappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		constMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		constMappingProvider.addImport("constituency.tagset", modelProvider);
+		constituentMappingProvider.setDefault(MappingProvider.BASE_TYPE, Constituent.class.getName());
+		constituentMappingProvider.setDefault("constituency.tagset", "default");
+		constituentMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
+		constituentMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+		constituentMappingProvider.addImport("constituency.tagset", modelProvider);
 	}
 
 	private void printTags(String aType, List<String> aTags)
@@ -323,7 +329,7 @@ public class BerkeleyParser
 
 		modelProvider.configure(cas);
 		posMappingProvider.configure(cas);
-		constMappingProvider.configure(cas);
+		constituentMappingProvider.configure(cas);
 
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
@@ -389,7 +395,7 @@ public class BerkeleyParser
 			String typeName = aNode.getLabel();
 
 			// create the necessary objects and methods
-			Type constType = constMappingProvider.getTagType(typeName);
+			Type constType = constituentMappingProvider.getTagType(typeName);
 
 			Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(constType, 0, 0);
 			constAnno.setConstituentType(typeName);

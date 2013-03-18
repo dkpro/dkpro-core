@@ -415,11 +415,11 @@ public class StanfordParserTest
 		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
 				StanfordParser.PARAM_VARIANT, aVariant,
 				StanfordParser.PARAM_PRINT_TAGSET, true,
-				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
-				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
-				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
-				StanfordParser.PARAM_CREATE_POS_TAGS, true,
-				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true);
+				StanfordParser.PARAM_WRITE_CONSTITUENT, true,
+				StanfordParser.PARAM_WRITE_DEPENDENCY, true,
+				StanfordParser.PARAM_WRITE_PENN_TREE, true,
+				StanfordParser.PARAM_WRITE_POS, true,
+				StanfordParser.PARAM_WRITE_PENN_TREE, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
 		
@@ -443,11 +443,11 @@ public class StanfordParserTest
 		AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
 				StanfordParser.PARAM_VARIANT, aVariant,
 				StanfordParser.PARAM_PRINT_TAGSET, true,
-				StanfordParser.PARAM_CREATE_CONSTITUENT_TAGS, true,
-				StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
-				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
-				StanfordParser.PARAM_CREATE_POS_TAGS, true,
-				StanfordParser.PARAM_CREATE_PENN_TREE_STRING, true,
+				StanfordParser.PARAM_WRITE_CONSTITUENT, true,
+				StanfordParser.PARAM_WRITE_DEPENDENCY, true,
+				StanfordParser.PARAM_WRITE_PENN_TREE, true,
+				StanfordParser.PARAM_WRITE_POS, true,
+				StanfordParser.PARAM_WRITE_PENN_TREE, true,
 				StanfordParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
 				StanfordParser.PARAM_QUOTE_END, new String[] { "’" });
 

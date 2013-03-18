@@ -69,34 +69,46 @@ import edu.stanford.nlp.trees.TypedDependency;
 public class StanfordParser
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Write the tag set(s) to the log when a model is loaded.
+	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
+	/**
+	 * The language.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 
+	/**
+	 * Variant of a model the model. Used to address a specific model if here are multiple models
+	 * for one language.
+	 */
 	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;
 
+	/**
+	 * Location from which the model is read.
+	 */
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
-	protected String taggerMappingLocation;
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posMappingLocation;
 
 	/**
 	 * Sets whether to create or not to create dependency annotations. <br/>
 	 * Default: {@code true}
 	 */
-	public static final String PARAM_CREATE_DEPENDENCY_TAGS = "createDependencyTags";
-	@ConfigurationParameter(name = PARAM_CREATE_DEPENDENCY_TAGS, mandatory = true, defaultValue = "true")
-	private boolean createDependencyTags;
-
+	public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
+	@ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
+	private boolean writeDependency;
 	
 	/**
 	 * Sets whether to create or not to create collapsed dependencies. <br/>
@@ -111,19 +123,19 @@ public class StanfordParser
 	 * required for POS-tagging and lemmatization.<br/>
 	 * Default: {@code true}
 	 */
-	public static final String PARAM_CREATE_CONSTITUENT_TAGS = "createConstituentTags";
-	@ConfigurationParameter(name = PARAM_CREATE_CONSTITUENT_TAGS, mandatory = true, defaultValue = "true")
-	private boolean createConstituentTags;
+	public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+	@ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "true")
+	private boolean writeConstituent;
 
 	/**
-	 * If this paramter is set to true, each sentence is annotated with a
-	 * PennTree-Annotation, containing the whole parse tree in Prenn Treebank
+	 * If this parameter is set to true, each sentence is annotated with a
+	 * PennTree-Annotation, containing the whole parse tree in Penn Treebank
 	 * style format.<br/>
 	 * Default: {@code false}
 	 */
-	public static final String PARAM_CREATE_PENN_TREE_STRING = "createPennTreeString";
-	@ConfigurationParameter(name = PARAM_CREATE_PENN_TREE_STRING, mandatory = true, defaultValue = "false")
-	private boolean createPennTreeString;
+	public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
+	@ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
+	private boolean writePennTree;
 
 	/**
 	 * This parameter can be used to override the standard behavior which
@@ -141,18 +153,18 @@ public class StanfordParser
 	 * constituent tags must be turned on for this to work.<br/>
 	 * Default: {@code true}
 	 */
-	public static final String PARAM_CREATE_POS_TAGS = "createPosTags";
-	@ConfigurationParameter(name = PARAM_CREATE_POS_TAGS, mandatory = true, defaultValue = "true")
-	private boolean createPosTags;
+	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
+	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+	private boolean writePos;
 	
 	/**
 	 * Sets whether to use or not to use already existing POS tags from another annotator for the
 	 * parsing process. These should be mapped to the PTB tagset with {@link PosMapper} before.<br/>
 	 * Default: {@code false}
 	 */
-	public static final String PARAM_USE_EXISTING_POS_TAGS = "useExistingPosTags";
-	@ConfigurationParameter(name = PARAM_USE_EXISTING_POS_TAGS, mandatory = true, defaultValue = "false")
-	private boolean useExistingPosTags;
+	public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+	@ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
+	private boolean readPos;
 	
 	/**
 	 * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to
@@ -223,19 +235,19 @@ public class StanfordParser
 	{
 		super.initialize(context);
 
-		if (!createConstituentTags && !createDependencyTags && !createPennTreeString) {
+		if (!writeConstituent && !writeDependency && !writePennTree) {
 			getContext().getLogger().log( WARNING, "Invalid parameter configuration... will create" +
 					"dependency tags.");
-			createDependencyTags = true;
+			writeDependency = true;
 		}
 
 		//Check if we want to create Lemmas or POS tags while Consituent tags
 		//are disabled. In this case, we have to switch on constituent tagging
-		if (!createConstituentTags && ((createLemmas!=null&&createLemmas) || createPosTags)) {
+		if (!writeConstituent && ((createLemmas!=null&&createLemmas) || writePos)) {
 			getContext().getLogger().log(WARNING, "Invalid parameter configuration. Constituent " +
 					"tag creation is required for POS tagging and Lemmatization. Will create " +
 					"constituent tags.");
-			createConstituentTags = true;
+			writeConstituent = true;
 		}
 
 		modelProvider = new CasConfigurableProviderBase<LexicalizedParser>() {
@@ -248,7 +260,7 @@ public class StanfordParser
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"parser-${language}-${variant}.ser.gz");
+						"parser-${language}-${variant}.properties");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
@@ -339,7 +351,7 @@ public class StanfordParser
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
-		posMappingProvider.setOverride(MappingProvider.LOCATION, taggerMappingLocation);
+		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		posMappingProvider.addImport("tagger.tagset", modelProvider);
 	}
@@ -466,19 +478,19 @@ public class StanfordParser
 			}
 
 			// Create Penn bracketed structure annotations
-			if (createPennTreeString) {
+			if (writePennTree) {
 				sfAnnotator.createPennTreeAnnotation(currAnnotationToParse.getBegin(),
 						currAnnotationToParse.getEnd());
 			}
 			
 			// Create dependency annotations
-			if (createDependencyTags && gsf != null) {
+			if (writeDependency && gsf != null) {
 				doCreateDependencyTags(sfAnnotator, currAnnotationToParse, parseTree, tokens);
 			}
 			
 			// Create constituent annotations
-			if (createConstituentTags) {
-				sfAnnotator.createConstituentAnnotationFromTree(createPosTags, createLemmas);
+			if (writeConstituent) {
+				sfAnnotator.createConstituentAnnotationFromTree(writePos, createLemmas);
 			}
 		}
 	}
@@ -513,7 +525,7 @@ public class StanfordParser
 
 	protected Word tokenToWord(Token aToken)
 	{
-		if (useExistingPosTags && aToken.getPos() != null) {
+		if (readPos && aToken.getPos() != null) {
 			String posValue = aToken.getPos().getPosValue();
 			TaggedWord tw = new TaggedWord(aToken.getCoveredText(), posValue);
 			tw.setBeginPosition(aToken.getBegin());
