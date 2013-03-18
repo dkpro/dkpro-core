@@ -33,27 +33,50 @@ import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 public class Web1TFormatWriter
 	extends JCasAnnotator_ImplBase
 {
-
+	/**
+	 * Types to generate n-grams from.
+	 * 
+	 * Example: {@code Token.class.getName() + "/pos/PosValue"} for part-of-speech n-grams
+	 */
 	public static final String PARAM_INPUT_TYPES = "inputTypes";
 	@ConfigurationParameter(name = PARAM_INPUT_TYPES, mandatory = true)
 	private Set<String> inputPaths;
 
+	/**
+	 * Location to which the output is written.
+	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private String outputPath;
 
+	/**
+	 * Character encoding of the output data.
+	 */
 	public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
 	@ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = false, defaultValue = "UTF-8")
 	private String outputEncoding;
 
-	public static final String PARAM_MIN_NGRAM_LENGTH = "MinNgramLength";
+	/**
+	 * Minimum n-gram length.
+	 * 
+	 * Default: {@code 1}
+	 */
+	public static final String PARAM_MIN_NGRAM_LENGTH = "minNgramLength";
 	@ConfigurationParameter(name = PARAM_MIN_NGRAM_LENGTH, mandatory = false, defaultValue = "1")
 	private int minNgramLength;
 
-	public static final String PARAM_MAX_NGRAM_LENGTH = "MaxNgramLength";
+	/**
+	 * Maximum n-gram length.
+	 * 
+	 * Default: {@code 3}
+	 */
+	public static final String PARAM_MAX_NGRAM_LENGTH = "maxNgramLength";
 	@ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = false, defaultValue = "3")
 	private int maxNgramLength;
 	
+	/**
+	 * Create a lower case index.
+	 */
 	public static final String PARAM_LOWERCASE = "lowercase";
 	@ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = false, defaultValue = "false")
 	private boolean lowercase;
