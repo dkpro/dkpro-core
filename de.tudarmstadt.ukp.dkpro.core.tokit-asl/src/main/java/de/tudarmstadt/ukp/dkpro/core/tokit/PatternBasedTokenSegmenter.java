@@ -31,6 +31,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
@@ -47,8 +48,13 @@ public class PatternBasedTokenSegmenter
 	public static final String INCLUDE_PREFIX = "+|";
 	public static final String EXCLUDE_PREFIX = "-|";
 
-	public static final String PARAM_DELETE_COVER = "DeleteCover";
-	@ConfigurationParameter(name=PARAM_DELETE_COVER, defaultValue="true", mandatory=true)
+	/**
+	 * Wether to remove the original token.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
+	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
 	public static final String PARAM_PATTERNS = "Patterns";

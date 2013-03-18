@@ -27,6 +27,7 @@ import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
@@ -37,8 +38,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class CamelCaseTokenSegmenter
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_DELETE_COVER = "DeleteCover";
-	@ConfigurationParameter(name=PARAM_DELETE_COVER, mandatory=true, defaultValue="true")
+	/**
+	 * Wether to remove the original token.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
+	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
 	@Override

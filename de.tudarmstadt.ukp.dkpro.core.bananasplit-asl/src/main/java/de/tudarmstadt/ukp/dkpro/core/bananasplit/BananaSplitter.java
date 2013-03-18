@@ -61,10 +61,20 @@ public class BananaSplitter
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
 	private String dictPath;
 
-	public static final String PARAM_DELETE_COVER = "deleteCover";
+	/**
+	 * Whether to remove the original token.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
+	/**
+	 * The annotation type to split.
+	 * 
+	 * Default: {@link Token}
+	 */
 	public static final String PARAM_TOKEN_TYPE = "tokenType";
 	@ConfigurationParameter(name = PARAM_TOKEN_TYPE, mandatory = false)
 	private String tokenType;

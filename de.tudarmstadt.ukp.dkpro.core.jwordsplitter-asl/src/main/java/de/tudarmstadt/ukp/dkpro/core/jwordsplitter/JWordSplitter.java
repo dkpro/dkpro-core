@@ -35,6 +35,7 @@ import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.abelssoft.wordtools.jwordsplitter.AbstractWordSplitter;
 import de.abelssoft.wordtools.jwordsplitter.impl.GermanWordSplitter;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
@@ -47,7 +48,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class JWordSplitter
 	extends CasAnnotator_ImplBase
 {
-	public static final String PARAM_DELETE_COVER = "DeleteCover";
+	/**
+	 * Wether to remove the original token.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
