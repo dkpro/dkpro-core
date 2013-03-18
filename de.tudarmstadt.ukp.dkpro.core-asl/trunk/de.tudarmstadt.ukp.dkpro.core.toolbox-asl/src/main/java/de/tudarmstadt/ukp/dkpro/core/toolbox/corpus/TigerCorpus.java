@@ -56,7 +56,7 @@ public class TigerCorpus
     private void initialize(String tigerFile) throws Exception {
         reader = createCollectionReader(
                 NegraExportReader.class,
-                NegraExportReader.PARAM_INPUT_FILE, tigerFile,
+                NegraExportReader.PARAM_SOURCE_LOCATION, tigerFile,
                 NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
                 NegraExportReader.PARAM_LANGUAGE, LANGUAGE
         );
