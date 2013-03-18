@@ -271,7 +271,7 @@ public class StanfordParser
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"parser-${language}-${variant}.properties");
+						"parser-${language}-${variant}.ser.gz");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
