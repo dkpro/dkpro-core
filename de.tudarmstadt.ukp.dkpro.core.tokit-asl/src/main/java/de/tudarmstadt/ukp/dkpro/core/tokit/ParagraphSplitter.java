@@ -40,7 +40,12 @@ public class ParagraphSplitter
 	public static final String SINGLE_LINE_BREAKS_PATTERN = "((\n\r\n)+(\r\n)*)|((\n)+(\n)*)";
 	public static final String DOUBLE_LINE_BREAKS_PATTERN = "((\r\n\r\n)+(\r\n)*)|((\n\n)+(\n)*)";
 
-	public static final String PARAM_SPLIT_PATTERN = "SplitPattern";
+	/**
+	 * A regular expression used to detect paragraph splits.
+	 * 
+	 * Default: {@link #DOUBLE_LINE_BREAKS_PATTERN} (split on two consecutive line breaks)
+	 */
+	public static final String PARAM_SPLIT_PATTERN = "splitPattern";
 	@ConfigurationParameter(name = PARAM_SPLIT_PATTERN, defaultValue = DOUBLE_LINE_BREAKS_PATTERN)
 	private Pattern splitPattern;
 
