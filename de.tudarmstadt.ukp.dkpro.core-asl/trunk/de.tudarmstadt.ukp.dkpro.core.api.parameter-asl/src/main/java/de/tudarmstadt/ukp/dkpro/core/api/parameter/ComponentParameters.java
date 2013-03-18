@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.parameter;
 
-public interface ComponentParameters
+public final class ComponentParameters
 {
 	/**
 	 * The language.
@@ -61,29 +61,6 @@ public interface ComponentParameters
 	public static final String PARAM_TARGET_ENCODING = "targetEncoding";
 
 	/**
-	 * Location of the mapping file for part-of-speech tags to UIMA types.
-	 */
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = "taggerMappingLocation";
-	
-	public static final String PARAM_CHUNKER_MAPPING_LOCATION = "chunkerMappingLocation";
-	
-	public static final String PARAM_ENTITY_MAPPING_LOCATION = "entityMappingLocation";
-
-//	public static final String PARAM_CREATE_SENTENCE = "createSentence";
-//	
-//	public static final String PARAM_CREATE_TOKEN = "createToken";
-//
-//	public static final String PARAM_CREATE_LEMMA = "createLemma";
-//
-//	public static final String PARAM_CREATE_POS = "createPos";
-//
-//	public static final String PARAM_CREATE_CONSTITUENT = "createConstituent";
-//	
-//	public static final String PARAM_CREATE_DEPENDENCY = "createDependency";
-//	
-//	public static final String PARAM_CREATE_NAMED_ENTITY = "createNamedEntity";
-
-	/**
 	 * Log the tag set(s) when a model is loaded.
 	 */
 	public static final String PARAM_PRINT_TAGSET = "printTagSet";
@@ -100,4 +77,117 @@ public interface ComponentParameters
 	 * controls if the original annototation is kept or removed.
 	 */
 	public static final String PARAM_DELETE_COVER = "deleteCover";
+
+	// =============================================================================================
+	// Annotation types
+	// =============================================================================================
+
+	private static final String SENTENCE = "Sentence";
+	
+	private static final String TOKEN = "Token";
+
+	private static final String LEMMA = "Lemma";
+
+	private static final String POS = "POS";
+
+	private static final String CHUNK = "Chunk";
+	
+	private static final String CONSTITUENT = "Constituent";
+
+	private static final String PENN_TREE = "PennTree";
+	
+	private static final String DEPENDENCY = "Dependency";
+	
+	private static final String NAMED_ENTITY = "NamedEntity";
+
+	// =============================================================================================
+	// Verbs for parameters
+	// =============================================================================================
+
+	private static final String READ = "read";
+	
+	private static final String WRITE = "write";
+
+	// =============================================================================================
+	// Nouns for parameters
+	// =============================================================================================
+
+	private static final String TAG_SET = "TagSet";
+	
+	private static final String MAPPING_LOCATION = "MappingLocation";
+	
+	// =============================================================================================
+	// Enable / disable reading or writing of particular annotation types.
+	// =============================================================================================
+	
+	public static final String PARAM_READ_SENTENCE = READ + SENTENCE;
+	
+	public static final String PARAM_READ_TOKEN = READ + TOKEN;
+
+	public static final String PARAM_READ_LEMMA = READ + LEMMA;
+
+	public static final String PARAM_READ_POS = READ + POS;
+
+	public static final String PARAM_READ_CONSTITUENT = READ + CONSTITUENT;
+	
+	public static final String PARAM_READ_PENN_TREE = READ + PENN_TREE;
+	
+	public static final String PARAM_READ_DEPENDENCY = READ + DEPENDENCY;
+	
+	public static final String PARAM_READ_NAMED_ENTITY = READ + NAMED_ENTITY;
+
+	public static final String PARAM_WRITE_SENTENCE = WRITE + SENTENCE;
+	
+	public static final String PARAM_WRITE_TOKEN = WRITE + TOKEN;
+
+	public static final String PARAM_WRITE_LEMMA = WRITE + LEMMA;
+
+	public static final String PARAM_WRITE_POS = WRITE + POS;
+
+	public static final String PARAM_WRITE_CONSTITUENT = WRITE + CONSTITUENT;
+
+	public static final String PARAM_WRITE_PENN_TREE = WRITE + PENN_TREE;
+
+	public static final String PARAM_WRITE_DEPENDENCY = WRITE + DEPENDENCY;
+	
+	public static final String PARAM_WRITE_NAMED_ENTITY = WRITE + NAMED_ENTITY;
+
+	// =============================================================================================
+	// Configure tag sets for different kinds of annotations.
+	//
+	// Not using the type constants here because they are capitalized for use with verbs
+	// =============================================================================================
+
+	/**
+	 * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+	 * tag set defined as part of the model meta data. This can be useful if a custom model is
+	 * specified which does not have such meta data, or it can be used in readers.
+	 */
+	public static final String PARAM_POS_TAG_SET = "pos" + TAG_SET;
+
+	// =============================================================================================
+	// Configure mapping of tags to annotation types for different kinds of annotations.
+	//
+	// Not using the type constants here because they are capitalized for use with verbs
+	// =============================================================================================
+
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
+	public static final String PARAM_POS_MAPPING_LOCATION = "pos" + MAPPING_LOCATION;
+	
+	/**
+	 * Location of the mapping file for chunk tags to UIMA types.
+	 */
+	public static final String PARAM_CHUNK_MAPPING_LOCATION = "chunk" + MAPPING_LOCATION;
+	
+	/**
+	 * Location of the mapping file for named entity tags to UIMA types.
+	 */
+	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = "namedEntity" + MAPPING_LOCATION;
+
+	private ComponentParameters()
+	{
+		// No instances of this class
+	}
 }

@@ -53,20 +53,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TreeTaggerPosLemmaTT4J
 	extends TreeTaggerTT4JBase<AnnotationFS>
 {
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
+	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
-	protected String taggerMappingLocation;
+	protected String posMappingLocation;
 	
 	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
-	public static final String PARAM_POS_ENABLED = "PosEnabled";
-	@ConfigurationParameter(name=PARAM_POS_ENABLED, mandatory=true, defaultValue="true")
+	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
+	@ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
 	private boolean posEnabled;
 
-	public static final String PARAM_LEMMA_ENABLED = "LemmaEnabled";
-	@ConfigurationParameter(name=PARAM_LEMMA_ENABLED, mandatory=true, defaultValue="true")
+	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
+	@ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
 	private boolean lemmaEnabled;
 
 	private Type tokenType;
@@ -88,7 +88,7 @@ public class TreeTaggerPosLemmaTT4J
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		taggerMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		taggerMappingProvider.setDefault("tagger.tagset", "default");
-		taggerMappingProvider.setOverride(MappingProvider.LOCATION, taggerMappingLocation);
+		taggerMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		taggerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
 		taggerMappingProvider.addImport("tagger.tagset", treetagger);
 	}

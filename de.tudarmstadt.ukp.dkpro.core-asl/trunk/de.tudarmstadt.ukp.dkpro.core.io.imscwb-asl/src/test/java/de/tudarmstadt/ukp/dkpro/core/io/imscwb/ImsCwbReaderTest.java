@@ -82,8 +82,8 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]*.txt" },
-				ImsCwbReader.PARAM_READ_TOKENS, false, 
-				ImsCwbReader.PARAM_READ_LEMMAS, false,
+				ImsCwbReader.PARAM_READ_TOKEN, false, 
+				ImsCwbReader.PARAM_READ_LEMMA, false,
 				ImsCwbReader.PARAM_READ_POS, false, 
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
@@ -108,8 +108,8 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15", 
-				ImsCwbReader.PARAM_READ_TOKENS, false,
-				ImsCwbReader.PARAM_READ_LEMMAS, true, 
+				ImsCwbReader.PARAM_READ_TOKEN, false,
+				ImsCwbReader.PARAM_READ_LEMMA, true, 
 				ImsCwbReader.PARAM_READ_POS, false,
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 

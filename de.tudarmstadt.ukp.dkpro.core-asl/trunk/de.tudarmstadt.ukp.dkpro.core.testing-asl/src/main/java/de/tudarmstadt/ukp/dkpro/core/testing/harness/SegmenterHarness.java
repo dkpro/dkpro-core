@@ -46,6 +46,10 @@ public final class SegmenterHarness
 		new TestData("de.3", "de", "Mein Name ist Hans.",
 			new String[] { "Mein", "Name", "ist", "Hans", "." },
 			new String[] { "Mein Name ist Hans." }),
+		// DKPRO-CORE-ASL-98: BreakIteratorSegmenter turns hypens to separate tokens
+		new TestData("de.4", "de", "ihre Negativbei- spiele immer",
+				new String[] { "ihre", "Negativbei-", "spiele", "immer" },
+				new String[] { "ihre Negativbei- spiele immer" }),
 
 		new TestData("en.1", "en", "Sadler, A.L. Cha-No-Yu: The Japanese Tea Ceremony.",
 			new String[] { "Sadler", ",", "A.L.", "Cha-No-Yu", ":", "The",
