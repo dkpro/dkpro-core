@@ -64,7 +64,7 @@ public class SnowballStemmer
 	private static final String SNOWBALL_PACKAGE = "org.tartarus.snowball.ext.";
 
 	/**
-	 * Override the language set in the {@link CAS}.
+	 * Use this language instead of the document language to resolve the model.
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)

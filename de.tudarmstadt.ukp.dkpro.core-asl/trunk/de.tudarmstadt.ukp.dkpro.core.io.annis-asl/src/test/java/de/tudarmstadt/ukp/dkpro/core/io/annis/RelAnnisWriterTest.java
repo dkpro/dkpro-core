@@ -44,7 +44,7 @@ public class RelAnnisWriterTest
 	{
 		// create NegraExportReader output
 		CollectionReaderDescription reader = createDescription(NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/tueba/input/tueba-sample.export",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba/input/tueba-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 		

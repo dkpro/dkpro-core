@@ -41,28 +41,46 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 public class StringReader
 	extends JCasCollectionReader_ImplBase
 {
-	public static final String PARAM_DOCUMENT_TEXT = "documentText";
-	@ConfigurationParameter(name = PARAM_DOCUMENT_TEXT, mandatory = true)
-	private String documentText;
-
+	/**
+	 * Set this as the language of the produced documents.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
 	private String language;
 
+	/**
+	 * The document text.
+	 */
+	public static final String PARAM_DOCUMENT_TEXT = "documentText";
+	@ConfigurationParameter(name = PARAM_DOCUMENT_TEXT, mandatory = true)
+	private String documentText;
+
+	/**
+	 * The collection ID to set in the {@link DocumentMetaData}.
+	 */
 	public static final String PARAM_COLLECTION_ID = "collectionId";
 	@ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = true,
 			defaultValue = "COLLECTION_ID")
 	private String collectionId;
 
+	/**
+	 * The document ID to set in the {@link DocumentMetaData}.
+	 */
 	public static final String PARAM_DOCUMENT_ID = "documentId";
 	@ConfigurationParameter(name = PARAM_DOCUMENT_ID, mandatory = true,
 			defaultValue = "DOCUMENT_ID")
 	private String documentId;
 
+	/**
+	 * The document base URI to set in the {@link DocumentMetaData}.
+	 */
 	public static final String PARAM_DOCUMENT_BASE_URI = "documentBaseUri";
 	@ConfigurationParameter(name = PARAM_DOCUMENT_BASE_URI, mandatory = false)
 	private String documentBaseUri;
 
+	/**
+	 * The document URI to set in the {@link DocumentMetaData}.
+	 */
 	public static final String PARAM_DOCUMENT_URI = "documentUri";
 	@ConfigurationParameter(name = PARAM_DOCUMENT_URI, mandatory = true, defaultValue = "STRING")
 	private String documentUri;

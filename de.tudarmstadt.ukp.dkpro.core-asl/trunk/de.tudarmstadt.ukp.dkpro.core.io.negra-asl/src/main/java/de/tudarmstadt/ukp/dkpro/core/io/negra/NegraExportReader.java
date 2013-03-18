@@ -84,32 +84,59 @@ public class NegraExportReader
 		SENTENCE_ID
 	}
 
-	public static final String PARAM_INPUT_FILE = ComponentParameters.PARAM_SOURCE_LOCATION;
-	@ConfigurationParameter(name = PARAM_INPUT_FILE, mandatory = true)
+	/**
+	 * Location from which the input is read.
+	 */
+	public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
+	@ConfigurationParameter(name = PARAM_SOURCE_LOCATION, mandatory = true)
 	private File inputFile;
 
+	/**
+	 * The language.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
 	private String language;
 
+	/**
+	 * Character encoding of the input data.
+	 */
 	public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
 	@ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
 	private String encoding;
 
-	public static final String PARAM_POS_ENABLED = "posEnabled";
-	@ConfigurationParameter(name = PARAM_POS_ENABLED, mandatory = true, defaultValue = "true")
+	/**
+	 * Write part-of-speech information.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+	@ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
 	private boolean posEnabled;
 
-	public static final String PARAM_LEMMA_ENABLED = "lemmaEnabled";
-	@ConfigurationParameter(name = PARAM_LEMMA_ENABLED, mandatory = true, defaultValue = "true")
+	/**
+	 * Write lemma information.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
+	@ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
 	private boolean lemmaEnabled;
 
-	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String mappingPosLocation;
 
-	public static final String PARAM_POS_TAGSET = "posTagset";
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	/**
+	 * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+	 * tag set defined as part of the model meta data. This can be useful if a custom model is
+	 * specified which does not have such meta data, or it can be used in readers.
+	 */
+	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
+	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
 	protected String posTagset;
 
 	/**

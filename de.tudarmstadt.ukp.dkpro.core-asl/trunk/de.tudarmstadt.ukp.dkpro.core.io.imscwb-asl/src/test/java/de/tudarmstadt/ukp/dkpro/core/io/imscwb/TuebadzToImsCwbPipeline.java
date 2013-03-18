@@ -44,7 +44,7 @@ public class TuebadzToImsCwbPipeline
 	{
 		CollectionReader ner = createCollectionReader(
 				NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, inputFile,
+				NegraExportReader.PARAM_SOURCE_LOCATION, inputFile,
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-1");
 
