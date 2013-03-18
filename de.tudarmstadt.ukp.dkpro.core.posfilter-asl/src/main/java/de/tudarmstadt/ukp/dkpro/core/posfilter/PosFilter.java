@@ -39,7 +39,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
  * parts of speech.
  *
  * @author Torsten Zesch
- *
  */
 public class PosFilter
 	extends JCasAnnotator_ImplBase
@@ -47,50 +46,83 @@ public class PosFilter
 	/**
 	 * The fully qualified name of the type that should be filtered.
 	 */
-	public static final String PARAM__TYPE_TO_REMOVE = "TypeToRemove";
-	@ConfigurationParameter(name = PARAM__TYPE_TO_REMOVE, mandatory = true)
+	public static final String PARAM_TYPE_TO_REMOVE = "TypeToRemove";
+	@ConfigurationParameter(name = PARAM_TYPE_TO_REMOVE, mandatory = true)
 	private String typeToRemove;
 
+	/**
+	 * Keep/remove adjectives (true: keep, false: remove)
+	 */
 	public static final String PARAM_ADJ = "Adjectives";
 	@ConfigurationParameter(name = PARAM_ADJ, mandatory = true, defaultValue = "false")
 	private boolean adj;
 
+	/**
+	 * Keep/remove adverbs (true: keep, false: remove)
+	 */
 	public static final String PARAM_ADV = "Adverbs";
 	@ConfigurationParameter(name = PARAM_ADV, mandatory = true, defaultValue = "false")
 	private boolean adv;
 
+	/**
+	 * Keep/remove articles (true: keep, false: remove)
+	 */
 	public static final String PARAM_ART = "Articles";
 	@ConfigurationParameter(name = PARAM_ART, mandatory = true, defaultValue = "false")
 	private boolean art;
 
+	/**
+	 * Keep/remove cardinal numbers (true: keep, false: remove)
+	 */
 	public static final String PARAM_CARD = "Cardinals";
 	@ConfigurationParameter(name = PARAM_CARD, mandatory = true, defaultValue = "false")
 	private boolean card;
 
+	/**
+	 * Keep/remove conjunctions (true: keep, false: remove)
+	 */
 	public static final String PARAM_CONJ = "Conjunctions";
 	@ConfigurationParameter(name = PARAM_CONJ, mandatory = true, defaultValue = "false")
 	private boolean conj;
 
+	/**
+	 * Keep/remove nouns (true: keep, false: remove)
+	 */
 	public static final String PARAM_N = "Nouns";
 	@ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "false")
 	private boolean n;
 
+	/**
+	 * Keep/remove "others" (true: keep, false: remove)
+	 */
 	public static final String PARAM_O = "Others";
 	@ConfigurationParameter(name = PARAM_O, mandatory = true, defaultValue = "false")
 	private boolean o;
 
+	/**
+	 * Keep/remove prepositions (true: keep, false: remove)
+	 */
 	public static final String PARAM_PP = "Prepositions";
 	@ConfigurationParameter(name = PARAM_PP, mandatory = true, defaultValue = "false")
 	private boolean pp;
 
+	/**
+	 * Keep/remove pronouns (true: keep, false: remove)
+	 */
 	public static final String PARAM_PR = "Pronouns";
 	@ConfigurationParameter(name = PARAM_PR, mandatory = true, defaultValue = "false")
 	private boolean pr;
 
+	/**
+	 * Keep/remove punctuation (true: keep, false: remove)
+	 */
 	public static final String PARAM_PUNC = "Punctuation";
 	@ConfigurationParameter(name = PARAM_PUNC, mandatory = true, defaultValue = "false")
 	private boolean punc;
 
+	/**
+	 * Keep/remove verbs (true: keep, false: remove)
+	 */
 	public static final String PARAM_V = "Verbs";
 	@ConfigurationParameter(name = PARAM_V, mandatory = true, defaultValue = "false")
 	private boolean v;
