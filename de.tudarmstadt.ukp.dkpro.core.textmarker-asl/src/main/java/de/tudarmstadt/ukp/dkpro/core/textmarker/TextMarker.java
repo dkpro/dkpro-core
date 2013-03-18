@@ -22,9 +22,8 @@ import static org.uimafit.factory.TypePrioritiesFactory.createTypePriorities;
 import java.util.List;
 
 import org.apache.uima.resource.metadata.TypePriorities;
+import org.apache.uima.textmarker.engine.TextMarkerEngine;
 import org.uimafit.descriptor.ConfigurationParameter;
-
-import de.uniwue.tm.textmarker.engine.TextMarkerEngine;
 
 /**
  * {@link TextMarkerEngine} drop-in replacement decorated with uimaFIT configuration parameter
@@ -34,9 +33,16 @@ import de.uniwue.tm.textmarker.engine.TextMarkerEngine;
  */
 public class TextMarker extends TextMarkerEngine
 {
+	/**
+	 * Load script in Java notation, with "{@code .}" as package separator and no extension. File
+	 * needs to be located in the path specified below with ending {@code .tm}.
+	 */
 	@ConfigurationParameter(name = MAIN_SCRIPT, mandatory = true)
 	private String mainScipt;
 	
+	/**
+	 * Path(s) where the scripts are located
+	 */
 	@ConfigurationParameter(name = SCRIPT_PATHS, mandatory = true)
 	private List<String> scriptPaths;
 
@@ -49,9 +55,9 @@ public class TextMarker extends TextMarkerEngine
 	@ConfigurationParameter(name = ADDITIONAL_ENGINES, mandatory = true, defaultValue = {})
 	private List<String> additionalEngines;
 
-	@ConfigurationParameter(name = CREATE_STYLE_MAP, mandatory = true, defaultValue = "false")
-	private boolean createStyleMap;
-
+	/**
+	 * Whether to create debug information in that CAS.
+	 */
 	@ConfigurationParameter(name = CREATE_DEBUG_INFO, mandatory = true, defaultValue = "false")
 	private boolean createDebugInfo;
 
@@ -59,18 +65,18 @@ public class TextMarker extends TextMarkerEngine
 	private boolean removeBasics;
 
 	@ConfigurationParameter(name = SEEDERS, mandatory = false, defaultValue = {
-			"de.uniwue.tm.textmarker.seed.DefaultSeeder"})
+			"org.apache.uima.textmarker.seed.DefaultSeeder"})
 	private List<String> seeders;
 
 	@ConfigurationParameter(name = DEFAULT_FILTERED_TYPES, mandatory = true, defaultValue = {
-			"de.uniwue.tm.type.SPACE", "de.uniwue.tm.type.NBSP", "de.uniwue.tm.type.BREAK",
-			"de.uniwue.tm.type.MARKUP"})
+			"org.apache.uima.textmarker.type.SPACE", "org.apache.uima.textmarker.type.NBSP",
+			"org.apache.uima.textmarker.type.BREAK", "org.apache.uima.textmarker.type.MARKUP" })
 	private List<String> defaultFilteredTypes;
 	
 	public static final TypePriorities getTypePriorities()
 	{
 		return createTypePriorities(new String[] {
-				"de.uniwue.tm.textmarker.kernel.type.TextMarkerFrame", "uima.tcas.Annotation",
-				"de.uniwue.tm.textmarker.kernel.type.TextMarkerBasic" });
+				"org.apache.uima.textmarker.type.TextMarkerFrame", "uima.tcas.Annotation",
+				"org.apache.uima.textmarker.type.TextMarkerBasic" });
 	}
 }
