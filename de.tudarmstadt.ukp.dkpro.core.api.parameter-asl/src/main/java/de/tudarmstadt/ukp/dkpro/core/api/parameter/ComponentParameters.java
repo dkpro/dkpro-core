@@ -20,7 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.api.parameter;
 public final class ComponentParameters
 {
 	/**
-	 * The language.
+	 * For analysis engines: Use this language instead of the document language to resolve the model
+	 * and tag set mapping.
+	 * 
+	 * For readers: Set this as the language of the produced documents.
 	 */
 	public static final String PARAM_LANGUAGE = "language";
 

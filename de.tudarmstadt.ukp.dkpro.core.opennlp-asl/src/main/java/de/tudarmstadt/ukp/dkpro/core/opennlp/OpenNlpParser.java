@@ -79,7 +79,7 @@ public class OpenNlpParser
 	private static final String CONPACKAGE = Constituent.class.getPackage().getName()+".";
 	
 	/**
-	 * Use this language instead of the language set in the CAS to locate the model.
+	 * Use this language instead of the document language to resolve the model.
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)

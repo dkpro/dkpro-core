@@ -71,16 +71,24 @@ public abstract class TreeTaggerTT4JBase<T>
 	protected boolean printTagSet;
 	
 	/**
-	 * The language.
+	 * Use this language instead of the document language to resolve the model and tag set mapping.
 	 */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
 	protected String languageCode;
 
+	/**
+	 * TT4J setting: Disable some sanity checks, e.g. whether tokens contain line breaks (which is
+	 * not allowed). Turning this on will increase your performance, but the wrapper may throw
+	 * exceptions if illegal data is provided.
+	 */
     public static final String PARAM_PERFORMANCE_MODE = "performanceMode";
 	@ConfigurationParameter(name=PARAM_PERFORMANCE_MODE, mandatory=true, defaultValue="false")
 	private boolean performanceMode;
 
+	/**
+	 * Use this TreeTagger executable instead of trying to locate the executable automatically.
+	 */
     public static final String PARAM_EXECUTABLE_PATH = "executablePath";
 	@ConfigurationParameter(name=PARAM_EXECUTABLE_PATH, mandatory=false)
 	private File executablePath;
