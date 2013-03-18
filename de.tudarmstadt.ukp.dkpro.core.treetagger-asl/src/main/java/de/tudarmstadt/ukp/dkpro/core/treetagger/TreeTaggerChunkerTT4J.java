@@ -57,8 +57,8 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	@ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
 	protected String chunkMappingLocation;
 	
-	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
-	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
+//	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
+//	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
 	private MappingProvider chunkerMappingProvider;
