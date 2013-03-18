@@ -40,6 +40,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -56,29 +57,59 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * constituent and dependency structure.
  *
  * @author Erik-Lân Do Dinh
- *
  */
+@TypeCapability(
+	    inputs = { 
+	        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+	        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+	        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+	        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class RelAnnisWriter
 	extends JCasConsumer_ImplBase
 {
+	/**
+	 * Location to which the output is written.
+	 */
 	public static final String PARAM_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name = PARAM_PATH, mandatory = true)
 	private String path;
 
-	public static final String PARAM_WRITE_POS = "WritePos";
+	/**
+	 * Write part-of-speech information.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
 	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue="true")
 	private boolean writePos;
 
-	public static final String PARAM_WRITE_LEMMA = "WriteLemma";
+	/**
+	 * Write lemma information.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
 	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue="true")
 	private boolean writeLemma;
 
-	public static final String PARAM_WRITE_CONSTITUENTS = "WriteConstituents";
-	@ConfigurationParameter(name = PARAM_WRITE_CONSTITUENTS, mandatory = true, defaultValue="true")
+	/**
+	 * Write constituent structure information.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+	@ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue="true")
 	private boolean writeConstituents;
 
-	public static final String PARAM_WRITE_DEPENDENCIES = "WriteDependencies";
-	@ConfigurationParameter(name = PARAM_WRITE_DEPENDENCIES, mandatory = true, defaultValue="true")
+	/**
+	 * Write dependency relation information.
+	 * 
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
+	@ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue="true")
 	private boolean writeDependencies;
 
 	private int textId;
