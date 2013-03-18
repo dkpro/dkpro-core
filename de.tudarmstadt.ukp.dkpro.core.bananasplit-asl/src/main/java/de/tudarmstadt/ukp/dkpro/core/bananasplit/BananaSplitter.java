@@ -75,9 +75,9 @@ public class BananaSplitter
 	 * 
 	 * Default: {@link Token}
 	 */
-	public static final String PARAM_TOKEN_TYPE = "tokenType";
-	@ConfigurationParameter(name = PARAM_TOKEN_TYPE, mandatory = false)
-	private String tokenType;
+	public static final String PARAM_TYPE_TO_SPLIT = "typeToSplit";
+	@ConfigurationParameter(name = PARAM_TYPE_TO_SPLIT, mandatory = false)
+	private String typeToSplit;
 
 	private BananaSplit bananaSplitter;
 
@@ -87,8 +87,8 @@ public class BananaSplitter
 	{
 		super.initialize(context);
 
-		if (tokenType == null) {
-			tokenType = Token.class.getName();
+		if (typeToSplit == null) {
+			typeToSplit = Token.class.getName();
 		}
 
 		InputStream is = null;
@@ -113,7 +113,7 @@ public class BananaSplitter
 		Collection<FeatureStructure> toAdd = new ArrayList<FeatureStructure>();
 		Collection<FeatureStructure> toRemove = new ArrayList<FeatureStructure>();
 
-		Type type = aCas.getTypeSystem().getType(tokenType);
+		Type type = aCas.getTypeSystem().getType(typeToSplit);
 		for (AnnotationFS token : select(aCas, type)) {
 			split(aCas, token, token.getCoveredText(), toAdd, toRemove);
 		}
@@ -145,7 +145,7 @@ public class BananaSplitter
 			return;
 		}
 
-		Type type = aCas.getTypeSystem().getType(tokenType);
+		Type type = aCas.getTypeSystem().getType(typeToSplit);
 
 		String leftAtom = bananaSplitter.getCompound().getLeftAtom();
 		int leftStart = aText.indexOf(leftAtom);

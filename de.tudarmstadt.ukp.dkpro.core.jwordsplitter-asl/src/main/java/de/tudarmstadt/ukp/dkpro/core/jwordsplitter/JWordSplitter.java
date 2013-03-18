@@ -49,7 +49,7 @@ public class JWordSplitter
 	extends CasAnnotator_ImplBase
 {
 	/**
-	 * Wether to remove the original token.
+	 * Whether to remove the original token.
 	 * 
 	 * Default: {@code true}
 	 */
@@ -57,9 +57,14 @@ public class JWordSplitter
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
-	public static final String PARAM_TOKEN_TYPE = "TokenType";
-	@ConfigurationParameter(name = PARAM_TOKEN_TYPE, mandatory = false)
-	private String tokenType;
+	/**
+	 * The annotation type to split.
+	 * 
+	 * Default: {@link Token}
+	 */
+	public static final String PARAM_TYPE_TO_SPLIT = "typeToSplit";
+	@ConfigurationParameter(name = PARAM_TYPE_TO_SPLIT, mandatory = false)
+	private String typeToSplit;
 
 	private AbstractWordSplitter splitter;
 
@@ -69,8 +74,8 @@ public class JWordSplitter
 	{
 		super.initialize(context);
 
-		if (tokenType == null) {
-			tokenType = Token.class.getName();
+		if (typeToSplit == null) {
+			typeToSplit = Token.class.getName();
 		}
 
 		try {
@@ -88,7 +93,7 @@ public class JWordSplitter
 		Collection<FeatureStructure> toAdd = new ArrayList<FeatureStructure>();
 		Collection<FeatureStructure> toRemove = new ArrayList<FeatureStructure>();
 
-		Type type = aCas.getTypeSystem().getType(tokenType);
+		Type type = aCas.getTypeSystem().getType(typeToSplit);
 		for (AnnotationFS token : select(aCas, type)) {
 			split(aCas, token, token.getCoveredText(), toAdd, toRemove);
 		}
@@ -119,7 +124,7 @@ public class JWordSplitter
 			return;
 		}
 
-		Type type = aCas.getTypeSystem().getType(tokenType);
+		Type type = aCas.getTypeSystem().getType(typeToSplit);
 		aToAdd.add(aCas.createAnnotation(type, aAnnotation.getBegin(),
 				aAnnotation.getBegin() + split[0].length()));
 		aToAdd.add(aCas.createAnnotation(type, aAnnotation.getBegin() + split[0].length(),
