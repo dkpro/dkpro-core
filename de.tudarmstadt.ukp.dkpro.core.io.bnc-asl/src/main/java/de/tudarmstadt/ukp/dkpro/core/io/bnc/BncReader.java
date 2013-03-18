@@ -31,6 +31,7 @@ import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -92,11 +93,18 @@ public class BncReader
 
 	private static final String ATTR_HEADWORD = "hw";
 
-	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String mappingPosLocation;
+	protected String posMappingLocation;
 
-	public static final String PARAM_POS_TAGSET = "posTagset";
+	/**
+	 * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+	 * tag set defined as part of the model meta data.
+	 */
+	public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String posTagset;
 
@@ -113,7 +121,7 @@ public class BncReader
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "c5");
-		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
+		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
 		posMappingProvider.setOverride("tagger.tagset", posTagset);
 	}

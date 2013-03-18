@@ -50,9 +50,9 @@ public
 class TreeTaggerChunkerTT4J
 extends TreeTaggerTT4JBase<AnnotationFS>
 {
-	public static final String PARAM_CHUNKER_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNKER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_CHUNKER_MAPPING_LOCATION, mandatory = false)
-	protected String chunkerMappingLocation;
+	public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
+	protected String chunkMappingLocation;
 	
 	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
@@ -78,7 +78,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 				"core/api/lexmorph/tagset/${language}-${chunker.tagset}-chunker.map");
 		chunkerMappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
 		chunkerMappingProvider.setDefault("chunker.tagset", "default");
-		chunkerMappingProvider.setOverride(MappingProvider.LOCATION, chunkerMappingLocation);
+		chunkerMappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
 		chunkerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
 //		posMappingProvider.addImport("tagger.tagset", modelProvider);
     }

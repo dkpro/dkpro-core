@@ -57,46 +57,53 @@ public class ImsCwbReader
 	/**
 	 * Location of the mapping file for part-of-speech tags to UIMA types.
 	 */
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String mappingPosLocation;
 
 	/**
 	 * Specify which tag set should be used to locate the mapping file.
-	 * 
 	 */
-	public static final String PARAM_POS_TAGSET = "posTagset";
-	@ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
+	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
+	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
 	protected String posTagset;
 
 	/**
 	 * Read tokens and generate {@link Token} annotations.
+	 * 
+	 * Default: {@code true}
 	 */
-    public static final String PARAM_READ_TOKENS = "readTokens";
-    @ConfigurationParameter(name = PARAM_READ_TOKENS, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
+    @ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
     private boolean readTokens;
 
 	/**
 	 * Read part-of-speech tags and generate {@link POS} annotations or subclasses if a
-	 * {@link #PARAM_POS_TAGSET tag set} or {@link #PARAM_TAGGER_MAPPING_LOCATION mapping file} is
+	 * {@link #PARAM_POS_TAG_SET tag set} or {@link #PARAM_POS_MAPPING_LOCATION mapping file} is
 	 * used.
+	 * 
+	 * Default: {@code true}
 	 */
-    public static final String PARAM_READ_POS = "readPos";
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
 
 	/**
 	 * Read sentences.
+	 * 
+	 * Default: {@code true}
 	 */
-    public static final String PARAM_READ_SENTENCES = "readSentences";
+    public static final String PARAM_READ_SENTENCES = ComponentParameters.PARAM_READ_SENTENCE;
     @ConfigurationParameter(name = PARAM_READ_SENTENCES, mandatory = true, defaultValue = "true")
     private boolean readSentences;
 
 	/**
 	 * Read lemmas.
+	 * 
+	 * Default: {@code true}
 	 */
-    public static final String PARAM_READ_LEMMAS = "readLemmas";
-    @ConfigurationParameter(name = PARAM_READ_LEMMAS, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
     private boolean readLemmas;
 
 	/**

@@ -75,6 +75,9 @@ public class DictionaryAnnotator
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
 	private String phraseFile;
 
+	/**
+	 * The character encoding used by the model.
+	 */
 	public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
 	@ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
 	private String modelEncoding;
@@ -87,10 +90,16 @@ public class DictionaryAnnotator
 	@ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = false)
 	private String annotationType;
 
+	/**
+	 * Set this feature on the created annotations.
+	 */
 	public static final String PARAM_VALUE_FEATURE = "valueFeature";
 	@ConfigurationParameter(name = PARAM_VALUE_FEATURE, mandatory = false, defaultValue = "value")
 	private String valueFeature;
 
+	/**
+	 * The value to set the feature configured in {@link #PARAM_VALUE_FEATURE} to.
+	 */
 	public static final String PARAM_VALUE = "value";
 	@ConfigurationParameter(name = PARAM_VALUE, mandatory = false)
 	private String value;

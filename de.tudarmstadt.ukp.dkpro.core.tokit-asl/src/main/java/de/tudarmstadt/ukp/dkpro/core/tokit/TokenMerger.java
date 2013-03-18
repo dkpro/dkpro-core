@@ -112,9 +112,9 @@ public class TokenMerger
 	/**
 	 * Override the tagset mapping.
 	 */
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_TAGGER_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
-	protected String mappingLocation;
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posMappingLocation;
 
 	private MappingProvider mappingProvider;
 
@@ -129,7 +129,7 @@ public class TokenMerger
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		mappingProvider.setDefault("tagger.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 	}
 	
