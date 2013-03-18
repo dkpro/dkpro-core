@@ -50,6 +50,9 @@ public
 class TreeTaggerChunkerTT4J
 extends TreeTaggerTT4JBase<AnnotationFS>
 {
+	/**
+	 * Location of the mapping file for chunk tags to UIMA types.
+	 */
 	public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
 	protected String chunkMappingLocation;

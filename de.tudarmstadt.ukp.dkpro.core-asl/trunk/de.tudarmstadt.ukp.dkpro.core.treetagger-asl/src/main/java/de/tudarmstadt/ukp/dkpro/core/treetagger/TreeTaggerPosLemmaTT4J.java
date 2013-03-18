@@ -53,6 +53,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TreeTaggerPosLemmaTT4J
 	extends TreeTaggerTT4JBase<AnnotationFS>
 {
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
 	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
@@ -61,13 +64,23 @@ public class TreeTaggerPosLemmaTT4J
 	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
+	/**
+	 * Write part-of-speech information.
+	 * 
+	 * Default: {@code true}
+	 */
 	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
 	@ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
-	private boolean posEnabled;
+	private boolean writePos;
 
+	/**
+	 * Write lemma information.
+	 * 
+	 * Default: {@code true}
+	 */
 	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
 	@ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
-	private boolean lemmaEnabled;
+	private boolean writeLemma;
 
 	private Type tokenType;
 	private Type lemmaType;
@@ -153,7 +166,7 @@ public class TreeTaggerPosLemmaTT4J
 					synchronized (aCas) {
 						TypeSystem ts = aCas.getTypeSystem();
 						// Add the Part of Speech
-						if (posEnabled && aPos != null) {
+						if (writePos && aPos != null) {
 							Type posType = taggerMappingProvider.getTagType(aPos);
 							AnnotationFS posAnno = aCas.createAnnotation(
 									posType, aToken.getBegin(), aToken.getEnd());
@@ -164,7 +177,7 @@ public class TreeTaggerPosLemmaTT4J
 						}
 
 						// Add the lemma
-						if (lemmaEnabled && aLemma != null) {
+						if (writeLemma && aLemma != null) {
 							AnnotationFS lemmaAnno = aCas.createAnnotation(
 									lemmaType, aToken.getBegin(), aToken.getEnd());
 							lemmaAnno.setStringValue(lemmaValue,

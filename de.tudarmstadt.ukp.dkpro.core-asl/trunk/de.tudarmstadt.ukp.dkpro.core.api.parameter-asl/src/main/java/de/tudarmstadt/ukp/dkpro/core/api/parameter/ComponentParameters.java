@@ -46,7 +46,7 @@ public final class ComponentParameters
 	public static final String PARAM_SOURCE_LOCATION = "sourceLocation";
 
 	/**
-	 * Character encoding of the input/output data.
+	 * Character encoding of the input data.
 	 */
 	public static final String PARAM_SOURCE_ENCODING = "sourceEncoding";
 
