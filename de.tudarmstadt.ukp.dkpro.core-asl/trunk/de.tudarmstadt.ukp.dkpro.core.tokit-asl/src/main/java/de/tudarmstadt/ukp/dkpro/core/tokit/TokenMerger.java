@@ -64,6 +64,12 @@ public class TokenMerger
 	@ConfigurationParameter(name=PARAM_ANNOTATION_TYPE, mandatory=true)
 	private String annotationType;
 	
+	/**
+	 * A constraint on the annotations that should be considered in form of a JXPath statement. 
+	 * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
+	 * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
+	 * part of a location named entity. 
+	 */
 	public static final String PARAM_CONSTRAINT = "constraint";
 	@ConfigurationParameter(name=PARAM_CONSTRAINT, mandatory=false)
 	private String constraint;
@@ -78,7 +84,7 @@ public class TokenMerger
 	private LemmaMode lemmaMode;
 	
 	/**
-	 * Set a new POS value for the new merged token. This is the actual tagset value and is subject
+	 * Set a new POS value for the new merged token. This is the actual tag set value and is subject
 	 * to tagset mapping. For example when merging tokens for named entities, the new POS value
 	 * may be set to "NNP" (English/Penn Treebank Tagset).
 	 */
@@ -88,7 +94,7 @@ public class TokenMerger
 
 	/**
 	 * Set a new POS tag for the new merged token. This is the mapped type. If this is specified,
-	 * tagset mapping will not be performed. This parameter has no effect unless PARAM_POS_VALUE
+	 * tag set mapping will not be performed. This parameter has no effect unless PARAM_POS_VALUE
 	 * is also set.
 	 */
 	public static final String PARAM_POS_TYPE = "posType";

@@ -33,7 +33,12 @@ public
 class BreakIteratorSegmenter
 extends SegmenterBase
 {
-	public static final String PARAM_SPLIT_AT_APOSTROPHE = "SplitAtApostrophe";
+	/**
+	 * Per default the Java {@link BreakIterator} does not split off contractions like
+	 * {@code John's} into two tokens. When this parameter is enabled, a non-default token split
+	 * is generated when an apostrophe ({@code '}) is encountered.
+	 */
+	public static final String PARAM_SPLIT_AT_APOSTROPHE = "splitAtApostrophe";
 	@ConfigurationParameter(name=PARAM_SPLIT_AT_APOSTROPHE, mandatory=true, defaultValue="false")
 	private boolean splitAtApostrophe;
 

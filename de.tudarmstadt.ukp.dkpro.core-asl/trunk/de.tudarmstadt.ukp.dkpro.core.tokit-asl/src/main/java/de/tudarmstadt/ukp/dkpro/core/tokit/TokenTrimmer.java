@@ -38,11 +38,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TokenTrimmer
 	extends JCasAnnotator_ImplBase
 {
-	public static final String PARAM_PREFIXES = "Prefixes";
+	/**
+	 * List of prefixes to remove. 
+	 */
+	public static final String PARAM_PREFIXES = "prefixes";
 	@ConfigurationParameter(name=PARAM_PREFIXES, mandatory=true)
 	private String[] prefixes;
 
-	public static final String PARAM_SUFFIXES = "Suffixes";
+	/**
+	 * List of suffixes to remove. 
+	 */
+	public static final String PARAM_SUFFIXES = "suffixes";
 	@ConfigurationParameter(name=PARAM_SUFFIXES, mandatory=true)
 	private String[] suffixes;
 

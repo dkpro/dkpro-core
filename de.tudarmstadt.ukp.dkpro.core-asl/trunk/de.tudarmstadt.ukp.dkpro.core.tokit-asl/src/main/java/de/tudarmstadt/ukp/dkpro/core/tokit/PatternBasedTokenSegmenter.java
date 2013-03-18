@@ -57,7 +57,12 @@ public class PatternBasedTokenSegmenter
 	@ConfigurationParameter(name = PARAM_DELETE_COVER, mandatory = true, defaultValue = "true")
 	private boolean deleteCover;
 
-	public static final String PARAM_PATTERNS = "Patterns";
+	/**
+	 * A list of regular expressions, prefixed with {@link #INCLUDE_PREFIX} or
+	 * {@link #EXCLUDE_PREFIX}. If neither of the prefixes is used, {@link #EXCLUDE_PREFIX} is 
+	 * assumed.
+	 */
+	public static final String PARAM_PATTERNS = "patterns";
 	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
 	private String[] rawPatterns;
 
