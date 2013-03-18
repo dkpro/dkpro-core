@@ -56,14 +56,24 @@ import edu.stanford.nlp.util.Triple;
 public class StanfordNamedEntityRecognizer
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Log the tag set(s) when a model is loaded.
+	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
+	/**
+	 * Use this language instead of the document language to resolve the model.
+	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
 	protected String language;
 
+	/**
+	 * Variant of a model the model. Used to address a specific model if here are multiple models
+	 * for one language.
+	 */
 	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;

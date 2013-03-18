@@ -55,7 +55,7 @@ public class StanfordPosTagger
 	protected boolean printTagSet;
 
 	/**
-	 * The language.
+	 * Use this language instead of the document language to resolve the model and tag set mapping.
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
