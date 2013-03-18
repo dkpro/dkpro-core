@@ -60,8 +60,8 @@ public class TreeTaggerPosLemmaTT4J
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
 	
-	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
-	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
+//	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
+//	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
 	/**
