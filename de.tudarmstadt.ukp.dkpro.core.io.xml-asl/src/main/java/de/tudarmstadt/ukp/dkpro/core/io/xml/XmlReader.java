@@ -21,7 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
@@ -48,12 +47,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
 
 public class XmlReader extends CasCollectionReader_ImplBase {
 
-	public static final String PARAM_INPUT_DIRECTORY = ComponentParameters.PARAM_SOURCE_LOCATION;
-	@ConfigurationParameter(name=PARAM_INPUT_DIRECTORY, mandatory=true)
+	/**
+	 * Location from which the input is read.
+	 */
+	public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
+	@ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=true)
 	private String inputDirectory;
 
 	/**
-	 *  optional, language of the documents (if set, will be set in each CAS)
+	 * Set this as the language of the produced documents.
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name=PARAM_LANGUAGE, mandatory=false)
@@ -82,17 +84,12 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 	@ConfigurationParameter(name=PARAM_DOC_ID_TAG, mandatory=false)
 	private String docIdTag;
 
-	public static final String PARAM_COLLECTION_ID = "CollectionId";
+	/**
+	 * The collection ID to set in the {@link DocumentMetaData}.
+	 */
+	public static final String PARAM_COLLECTION_ID = "collectionId";
 	@ConfigurationParameter(name=PARAM_COLLECTION_ID, mandatory=false)
 	private String collectionId;
-
-	public static final String PARAM_SUBSTITUTE_TAGS = "SubstituteTag";
-	@ConfigurationParameter(name=PARAM_SUBSTITUTE_TAGS, mandatory=true, defaultValue={})
-	private String[] substituteTag;
-
-	public static final String PARAM_SUBSTITUTE_WITH = "SubstituteWith";
-	@ConfigurationParameter(name=PARAM_SUBSTITUTE_WITH, mandatory=true, defaultValue={})
-	private String[] substituteWith;
 
 	private static final String MESSAGE_DIGEST = "de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReader_Messages";
 	private static final String INVALID_PATH_EXCEPTION = "invalid_path_error";
@@ -142,21 +139,6 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 					MESSAGE_DIGEST,
 					INVALID_PATH_EXCEPTION,
 					new Object[] {inDir});
-		}
-
-		if(substituteTag.length != substituteWith.length) {
-			throw new ResourceInitializationException(
-					MESSAGE_DIGEST,
-					SUBSTITUTE_EXCEPTION,
-					new Object[] {substituteTag.length, substituteWith.length});
-		}
-
-		if (substituteTag.length > 0 && substituteWith.length > 0) {
-			useSubstitution = true;
-			substitution = new HashMap<String,String>(substituteTag.length);
-			for (int i=0;i<substituteTag.length;i++) {
-				substitution.put(substituteTag[i], substituteWith[i]);
-			}
 		}
 
 		// if xmlFiles is not empty, then initialize the Stax Reader
