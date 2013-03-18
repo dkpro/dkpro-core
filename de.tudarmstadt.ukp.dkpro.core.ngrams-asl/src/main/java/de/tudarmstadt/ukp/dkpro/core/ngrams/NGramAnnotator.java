@@ -31,7 +31,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class NGramAnnotator
 	extends JCasAnnotator_ImplBase
 {
-
+	/**
+	 * The length of the n-grams to generate (the "n" in n-gram).
+	 */
 	public static final String PARAM_N = "N";
 	@ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "3")
 	private int n;
