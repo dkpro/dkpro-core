@@ -70,7 +70,7 @@ public class PosFilterTest
 		throws Exception
 	{
 		List<Object> posFilterParams = new ArrayList<Object>();
-		posFilterParams.addAll(asList(PosFilter.PARAM__TYPE_TO_REMOVE, Token.class.getName()));
+		posFilterParams.addAll(asList(PosFilter.PARAM_TYPE_TO_REMOVE, Token.class.getName()));
 		posFilterParams.addAll(asList(aExtraParams));
 		
 		AnalysisEngineDescription aggregate = createAggregateDescription(
