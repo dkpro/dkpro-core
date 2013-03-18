@@ -87,7 +87,7 @@ public class WackyCorpus
                 ImsCwbReader.PARAM_PATH, wackyPath,
                 ImsCwbReader.PARAM_LANGUAGE, languageEdition.name(),
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
-                ImsCwbReader.PARAM_POS_TAGSET, languageEdition.getTagSet(),
+                ImsCwbReader.PARAM_POS_TAG_SET, languageEdition.getTagSet(),
                 ImsCwbReader.PARAM_PATTERNS, new String[] {
                     ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt.gz" 
                 }

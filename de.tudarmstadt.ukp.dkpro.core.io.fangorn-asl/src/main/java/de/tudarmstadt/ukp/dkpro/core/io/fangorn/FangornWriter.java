@@ -53,6 +53,9 @@ public class FangornWriter
 	public static final String FIELD_BEGIN = "begin";
 	public static final String FIELD_END = "end";
 	
+	/**
+	 * Location to which the output is written.
+	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
 	private File outputFolder;

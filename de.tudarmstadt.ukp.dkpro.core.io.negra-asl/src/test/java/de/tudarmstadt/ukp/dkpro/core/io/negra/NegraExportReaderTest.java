@@ -50,7 +50,7 @@ public class NegraExportReaderTest
 
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, new File("src/test/resources/sentence.export"),
+				NegraExportReader.PARAM_SOURCE_LOCATION, new File("src/test/resources/sentence.export"),
 				NegraExportReader.PARAM_LANGUAGE, "de");
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(CASDumpWriter.class,
@@ -74,7 +74,7 @@ public class NegraExportReaderTest
 		
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/tiger-sample.export",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tiger-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-15");
 
@@ -99,7 +99,7 @@ public class NegraExportReaderTest
 		
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/tueba-sample.export",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8"
 		);

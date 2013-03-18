@@ -49,7 +49,7 @@ public class ImsCwbWriterTest
 	{
 		CollectionReader ner = createCollectionReader(
 				NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/corpus-sample.export",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
@@ -111,7 +111,7 @@ public class ImsCwbWriterTest
 	{
 		CollectionReader ner = createCollectionReader(
 				NegraExportReader.class,
-				NegraExportReader.PARAM_INPUT_FILE, "src/test/resources/corpus-sample.export",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
