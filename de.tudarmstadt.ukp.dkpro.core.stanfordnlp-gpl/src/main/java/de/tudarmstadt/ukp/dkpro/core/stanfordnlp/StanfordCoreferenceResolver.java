@@ -57,18 +57,31 @@ import edu.stanford.nlp.util.TypesafeMap.Key;
 public class StanfordCoreferenceResolver
 	extends JCasAnnotator_ImplBase
 {
+	/**
+	 * DCoRef parameter: Sieve passes - each class is defined in dcoref/sievepasses/.
+	 */
 	public static final String PARAM_SIEVES = "sieves";
 	@ConfigurationParameter(name = PARAM_SIEVES, defaultValue = Constants.SIEVEPASSES, mandatory = true)
 	private String sieves;
 
+	/**
+	 * DCoRef parameter: Scoring the output of the system
+	 */
 	public static final String PARAM_SCORE = "score";
 	@ConfigurationParameter(name = PARAM_SCORE, defaultValue = "false", mandatory = true)
 	private boolean score;
 
+	/**
+	 * DCoRef parameter: Do post processing
+	 */
 	public static final String PARAM_POSTPROCESSING = "postprocessing";
 	@ConfigurationParameter(name = PARAM_POSTPROCESSING, defaultValue = "false", mandatory = true)
 	private boolean postprocessing;
 
+	/**
+	 * DCoRef parameter: Maximum sentence distance between two mentions for resolution (-1: no
+	 * constraint on the distance)
+	 */
 	public static final String PARAM_MAXDIST = "maxDist";
 	@ConfigurationParameter(name = PARAM_MAXDIST, defaultValue = "-1", mandatory = true)
 	private int maxdist;

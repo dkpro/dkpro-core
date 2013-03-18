@@ -78,12 +78,18 @@ public class StanfordNamedEntityRecognizer
 	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
 	protected String variant;
 
+	/**
+	 * Location from which the model is read.
+	 */
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	public static final String PARAM_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_ENTITY_MAPPING_LOCATION, mandatory = false)
+	/**
+	 * Location of the mapping file for named entity tags to UIMA types.
+	 */
+	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
 	protected String mappingLocation;
 
 	private CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>> modelProvider;

@@ -98,6 +98,9 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
 	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
@@ -208,10 +211,18 @@ public class StanfordParser
 	@ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue="true")
 	private boolean ptb3Escaping;
 	
+	/**
+	 * List of extra token texts (usually single character strings) that should be treated like
+	 * opening quotes and escaped accordingly before being sent to the parser.
+	 */
 	public static final String PARAM_QUOTE_BEGIN = "quoteBegin";
 	@ConfigurationParameter(name = PARAM_QUOTE_BEGIN, mandatory = false)
 	private List<String> quoteBegin;
 	
+	/**
+	 * List of extra token texts (usually single character strings) that should be treated like
+	 * closing quotes and escaped accordingly before being sent to the parser.
+	 */
 	public static final String PARAM_QUOTE_END = "quoteEnd";
 	@ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
 	private List<String> quoteEnd;
