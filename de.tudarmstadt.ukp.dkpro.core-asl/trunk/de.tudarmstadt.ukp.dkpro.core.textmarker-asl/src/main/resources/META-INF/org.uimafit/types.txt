@@ -1,2 +1,4 @@
-classpath*:BasicTypeSystem.xml
-classpath*:InternalTypeSystem.xml
+classpath*:org/apache/uima/textmarker/engine/BasicTypeSystem.xml
+classpath*:org/apache/uima/textmarker/engine/InternalTypeSystem.xml
+classpath*:org/apache/uima/textmarker/engine/HtmlTypeSystem.xml
+classpath*:org/apache/uima/textmarker/engine/PlainTextTypeSystem.xml
