@@ -198,8 +198,8 @@ public class StanfordParser
 	 * publicly available. See:
 	 * http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
 	 */
-	public static final String PARAM_CREATE_LEMMAS = "createLemmas";
-	@ConfigurationParameter(name = PARAM_CREATE_LEMMAS, mandatory = false)
+	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
+	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = false)
 	private Boolean paramCreateLemmas;
 
 	/**
