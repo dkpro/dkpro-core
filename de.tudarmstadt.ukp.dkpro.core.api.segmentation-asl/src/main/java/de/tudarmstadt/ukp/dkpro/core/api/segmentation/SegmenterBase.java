@@ -83,7 +83,7 @@ extends JCasAnnotator_ImplBase
 	/**
 	 * Create {@link Sentence} annotations.
 	 */
-    public static final String PARAM_CREATE_SENTENCES = "createTokens";
+    public static final String PARAM_CREATE_SENTENCES = "createSentences";
 	@ConfigurationParameter(name=PARAM_CREATE_SENTENCES, mandatory=true, defaultValue="true")
     private boolean createSentences;
 
