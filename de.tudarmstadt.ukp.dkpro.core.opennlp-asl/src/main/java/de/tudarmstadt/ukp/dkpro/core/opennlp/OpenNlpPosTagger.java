@@ -90,9 +90,9 @@ public class OpenNlpPosTagger
 	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
 	 * the mapping automatically.
 	 */
-	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
-	protected String mappingLocation;
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posMappingLocation;
 
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
@@ -176,7 +176,7 @@ public class OpenNlpPosTagger
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		mappingProvider.setDefault("tagger.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		mappingProvider.addImport("tagger.tagset", modelProvider);
 		
