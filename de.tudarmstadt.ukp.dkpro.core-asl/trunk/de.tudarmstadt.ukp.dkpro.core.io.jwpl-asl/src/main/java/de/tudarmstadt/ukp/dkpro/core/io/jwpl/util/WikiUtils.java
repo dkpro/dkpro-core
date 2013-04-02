@@ -212,7 +212,7 @@ public class WikiUtils
         put("german", "de");
 //        gilaki,
 //        gothic,
-//        greek,
+        put("greek", "el");
 //        greenlandic,
 //        guarani,
 //        gujarati,
