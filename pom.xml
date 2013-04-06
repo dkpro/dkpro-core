@@ -516,6 +516,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.langdect-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
