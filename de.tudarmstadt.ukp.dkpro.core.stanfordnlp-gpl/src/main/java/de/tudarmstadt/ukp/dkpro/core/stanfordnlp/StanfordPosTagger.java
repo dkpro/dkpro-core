@@ -112,7 +112,7 @@ public class StanfordPosTagger
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"tagger-${language}-${variant}.tagger");
+						"tagger-${language}-${variant}.properties");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
@@ -150,12 +150,12 @@ public class StanfordPosTagger
 		mappingProvider.setDefaultVariantsLocation(
 				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
 		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-tagger.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("tagger.tagset", "default");
+		mappingProvider.setDefault("pos.tagset", "default");
 		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("tagger.tagset", modelProvider);
+		mappingProvider.addImport("pos.tagset", modelProvider);
 	}
 
 	@Override

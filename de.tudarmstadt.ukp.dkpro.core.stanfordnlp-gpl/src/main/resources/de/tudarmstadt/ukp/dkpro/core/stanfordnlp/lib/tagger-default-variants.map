@@ -1,4 +1,4 @@
 ar=fast
 de=fast
-en=bidirectional-distsim-wsj-0-18
+en=wsj-0-18-bidirectional-distsim
 zh=default

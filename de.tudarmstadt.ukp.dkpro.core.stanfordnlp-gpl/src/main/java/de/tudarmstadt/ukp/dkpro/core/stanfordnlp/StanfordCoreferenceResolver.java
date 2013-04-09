@@ -258,7 +258,7 @@ public class StanfordCoreferenceResolver
 	{
 	};
 	
-	public static final String BASE = "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/coref-en/";
+	public static final String BASE = "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/coref/en/default/";
 	
 	public static final String DEFAULT_DCOREF_ANIMATE = BASE + "animate.unigrams.txt";
 	public static final String DEFAULT_DCOREF_DEMONYM = BASE + "demonyms.txt";

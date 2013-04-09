@@ -62,9 +62,10 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 
 /**
+ * Stanford Parser component.
+ * 
  * @author Oliver Ferschke
  * @author Niklas Jakob
- *
  */
 public class StanfordParser
 	extends JCasAnnotator_ImplBase
@@ -271,7 +272,7 @@ public class StanfordParser
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"parser-${language}-${variant}.ser.gz");
+						"parser-${language}-${variant}.properties");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
@@ -359,12 +360,12 @@ public class StanfordParser
 		
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-tagger.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setDefault("pos.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		posMappingProvider.addImport("tagger.tagset", modelProvider);
+		posMappingProvider.addImport("pos.tagset", modelProvider);
 	}
 
 	private void printTags(String aType, Collection<String> aTags)

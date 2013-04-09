@@ -5,13 +5,14 @@
 
 	All rights reserved.
 
-	This program and the accompanying materials are made available under the 
+	This program and the accompanying materials are made available under the
 	terms of the GNU Public
 	License v3.0 which accompanies this distribution, and is available at
 
 	http://www.gnu.org/licenses/gpl-3.0.txt
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
@@ -118,7 +119,7 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -148,7 +149,7 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim-wsj-0-18</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-bidirectional-distsim</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -171,123 +172,123 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en</artifactId>
-				<version>20120709.0</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default</artifactId>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-dewac_175m_600.crf</artifactId>
-				<version>20110920.0</version>
+				<version>20120522.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-hgc_175m_600.crf</artifactId>
-				<version>20110920.0</version>
+				<version>20120522.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.4class.distsim.crf</artifactId>
-				<version>20120709.0</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-conll.4class.distsim.crf</artifactId>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.distsim.crf</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-ar-factored</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-factored</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-pcfg</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-factored</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-pcfg</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-factored</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-factored</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-pcfg</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-fast</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-accurate</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-dewac</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-hgc</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim</artifactId>
-				<version>20120709.0</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim-wsj-0-18</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-left3words-distsim-wsj-0-18</artifactId>
-				<version>20120709.0</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-bidirectional-distsim</artifactId>
+				<version>20120709.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-left3words-distsim</artifactId>
+				<version>20120709.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-zh-default</artifactId>
-				<version>20120709.0</version>
+				<version>20120709.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

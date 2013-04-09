@@ -111,7 +111,7 @@ public class StanfordNamedEntityRecognizer
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"ner-${language}-${variant}.ser.gz");
+						"ner-${language}-${variant}.properties");
 				
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
