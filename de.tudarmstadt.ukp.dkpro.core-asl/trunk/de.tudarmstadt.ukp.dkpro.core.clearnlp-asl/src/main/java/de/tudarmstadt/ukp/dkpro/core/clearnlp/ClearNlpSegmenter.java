@@ -85,7 +85,7 @@ public class ClearNlpSegmenter
 		modelProvider = new CasConfigurableProviderBase<AbstractSegmenter>()
 		{
 			{
-				setDefault(VERSION, "20121017.0");
+				setDefault(VERSION, "20130226.0");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-${language}-${variant}");
