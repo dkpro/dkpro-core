@@ -39,19 +39,16 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.springframework.beans.DirectFieldAccessor;
-import org.springframework.beans.PropertyAccessor;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
+import com.googlecode.clearnlp.component.pos.CPOSTagger;
+import com.googlecode.clearnlp.dependency.DEPTree;
 import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.engine.EngineProcess;
-import com.googlecode.clearnlp.pos.POSNode;
-import com.googlecode.clearnlp.pos.POSTagger;
-import com.googlecode.clearnlp.util.pair.Pair;
-
+import com.googlecode.clearnlp.nlp.NLPDecode;
+import com.googlecode.clearnlp.nlp.NLPLib;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -117,7 +114,7 @@ public class ClearNlpPosTagger
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
 	protected boolean printTagSet;
 
-	private CasConfigurableProviderBase<Pair<POSTagger[],Double>> modelProvider;
+	private CasConfigurableProviderBase<CPOSTagger> modelProvider;
 	private MappingProvider posMappingProvider;
 	
 	@Override
@@ -126,9 +123,9 @@ public class ClearNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<Pair<POSTagger[],Double>>() {
+		modelProvider = new CasConfigurableProviderBase<CPOSTagger>() {
 			{
-				setDefault(VERSION, "20121017.0");
+				setDefault(VERSION, "20121229.1");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-tagger-${language}-${variant}");
@@ -143,19 +140,18 @@ public class ClearNlpPosTagger
 			}
 			
 			@Override
-			protected Pair<POSTagger[],Double> produceResource(URL aUrl) throws IOException
+			protected CPOSTagger produceResource(URL aUrl) throws IOException
 			{
 				InputStream is = null;
 				try {
 					is = aUrl.openStream();
-					Pair<POSTagger[],Double> taggers = EngineGetter.getPOSTaggers(is);
+					CPOSTagger tagger = (CPOSTagger) EngineGetter.getComponent(is,
+							getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_POS);
 					
 					if (printTagSet) {
 						Set<String> tagSet = new HashSet<String>();
 						
-						for (POSTagger tagger : taggers.o1) {
-							PropertyAccessor accessor = new DirectFieldAccessor(tagger);
-							StringModel model = (StringModel) accessor.getPropertyValue("s_model");
+						for (StringModel model : tagger.getModels()) {
 							tagSet.addAll(asList(model.getLabels()));
 						}
 						
@@ -172,7 +168,10 @@ public class ClearNlpPosTagger
 						getContext().getLogger().log(INFO, sb.toString());
 					}
 					
-					return taggers;
+					return tagger;
+				}
+				catch (IOException e) {
+					throw e;
 				}
 				catch (Exception e) {
 					throw new IOException(e);
@@ -185,12 +184,12 @@ public class ClearNlpPosTagger
 		
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-tagger.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setDefault("pos.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		posMappingProvider.addImport("tagger.tagset", modelProvider);
+		posMappingProvider.addImport("pos.tagset", modelProvider);
 	}
 
 	@Override
@@ -206,14 +205,20 @@ public class ClearNlpPosTagger
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 			List<String> tokenTexts = asList(toText(tokens).toArray(new String[tokens.size()]));
 
-			Pair<POSTagger[],Double> taggers = modelProvider.getResource();
-			POSNode[] posNodes = EngineProcess.getPOSNodes(taggers, tokenTexts);
+			NLPDecode nlp = new NLPDecode();
+			DEPTree tree = nlp.toDEPTree(tokenTexts);
+			
+			CPOSTagger tagger = modelProvider.getResource();
+			tagger.process(tree);
 
+			String[] posTags = tree.getPOSTags();
+			
 			int i = 0;
 			for (Token t : tokens) {
-				Type posTag = posMappingProvider.getTagType(posNodes[i].pos);
+				String tag = internTags ? posTags[i+1].intern() : posTags[i+1];
+				Type posTag = posMappingProvider.getTagType(tag);
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-				posAnno.setPosValue(internTags ? posNodes[i].pos.intern() : posNodes[i].pos);
+				posAnno.setPosValue(tag);
 				posAnno.addToIndexes();
 				t.setPos((POS) posAnno);
 				i++;

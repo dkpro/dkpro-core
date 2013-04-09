@@ -21,7 +21,6 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,19 +36,15 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.springframework.beans.DirectFieldAccessor;
-import org.springframework.beans.PropertyAccessor;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
-import com.googlecode.clearnlp.dependency.AbstractDEPParser;
+import com.googlecode.clearnlp.component.dep.CDEPPassParser;
 import com.googlecode.clearnlp.dependency.DEPNode;
 import com.googlecode.clearnlp.dependency.DEPTree;
 import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.engine.EngineProcess;
-import com.googlecode.clearnlp.pos.POSNode;
-
+import com.googlecode.clearnlp.nlp.NLPLib;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -95,7 +90,7 @@ public class ClearNlpDependencyParser
 
 	private File workingDir;
 
-	private CasConfigurableProviderBase<AbstractDEPParser> parserProvider;
+	private CasConfigurableProviderBase<CDEPPassParser> parserProvider;
 		
 	@Override
 	public void initialize(UimaContext context)
@@ -103,10 +98,10 @@ public class ClearNlpDependencyParser
 	{
 		super.initialize(context);
 
-		parserProvider = new CasConfigurableProviderBase<AbstractDEPParser>()
+		parserProvider = new CasConfigurableProviderBase<CDEPPassParser>()
 		{
 			{
-				setDefault(VERSION, "20121017.0");
+				setDefault(VERSION, "20121229.0");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-${language}-${variant}");
@@ -121,30 +116,31 @@ public class ClearNlpDependencyParser
 			}
 
 			@Override
-			protected AbstractDEPParser produceResource(URL aUrl)
+			protected CDEPPassParser produceResource(URL aUrl)
 				throws IOException
 			{
 				InputStream is = null;
 				try {
 					is = aUrl.openStream();
-					AbstractDEPParser parser = EngineGetter.getDEPParser(is);
-					
+					CDEPPassParser parser = (CDEPPassParser) EngineGetter.getComponent(is,
+							getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_DEP);
+
 					if (printTagSet) {
 						StringBuilder sb = new StringBuilder();
 						try {
 							Set<String> tagSet = new HashSet<String>();
 							
-							PropertyAccessor accessor = new DirectFieldAccessor(parser);
-							StringModel model = (StringModel) accessor.getPropertyValue("s_model");
-							for (String label : model.getLabels()) {
-								String[] fields = label.split("_");
-								if (fields.length == 3) {
-									tagSet.add(fields[2]);
+							for (StringModel model : parser.getModels()) {
+								for (String label : model.getLabels()) {
+									String[] fields = label.split("_");
+									if (fields.length == 3) {
+										tagSet.add(fields[2]);
+									}
+//									else {
+//										getContext().getLogger().log(WARNING,
+//												"Unknown label format: [" + label + "]");
+//									}
 								}
-//								else {
-//									getContext().getLogger().log(WARNING,
-//											"Unknown label format: [" + label + "]");
-//								}
 							}
 							
 							List<String> tagList = new ArrayList<String>(tagSet);
@@ -195,32 +191,28 @@ public class ClearNlpDependencyParser
 		parserProvider.configure(aJCas.getCas());
 
 		// Iterate over all sentences
-		for (Sentence curSentence : select(aJCas, Sentence.class)) {
-
-			// Generate list of tokens for current sentence
-			List<Token> tokens = selectCovered(Token.class, curSentence);
+		for (Sentence sentence : select(aJCas, Sentence.class)) {
+			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
+			
+			DEPTree tree = new DEPTree();
 
 			// Generate input format required by parser
-			POSNode[] posNodes = new POSNode[tokens.size()];
-			for (int i = 0; i < posNodes.length; i++) {
+			for (int i = 0; i < tokens.size(); i++) {
 				Token t = tokens.get(i);
-				posNodes[i] = new POSNode(t.getCoveredText(), t.getPos().getPosValue());
+				DEPNode node = new DEPNode(i+1, tokens.get(i).getCoveredText());
+				node.pos = t.getPos().getPosValue();
 				if (t.getLemma() != null) {
-					posNodes[i].lemma = t.getLemma().getValue();
+					node.lemma = t.getLemma().getValue();
 				}
+				tree.add(node);
 			}
 
-			DEPTree depTree = EngineProcess.toDEPTree(posNodes);
-			for (int i = 1; i < depTree.size(); i++) {
-				depTree.get(i).lemma = tokens.get(i-1).getLemma().getValue();
-			}
-			
 			// Parse sentence
-			AbstractDEPParser parser = parserProvider.getResource();
-			parser.parse(depTree);
+			CDEPPassParser parser = parserProvider.getResource();
+			parser.process(tree);
 		
-			for (int i = 1; i < depTree.size(); i++) {
-				DEPNode node = depTree.get(i);
+			for (int i = 1; i < tree.size(); i++) {
+				DEPNode node = tree.get(i);
 
 				if (node.hasHead()) {
 					if (node.getHead().id == 0) {
@@ -228,8 +220,7 @@ public class ClearNlpDependencyParser
 						continue;
 					}
 					
-					Dependency dep = new Dependency(aJCas, curSentence.getBegin(),
-							curSentence.getEnd());
+					Dependency dep = new Dependency(aJCas, sentence.getBegin(), sentence.getEnd());
 					dep.setGovernor(tokens.get(node.getHead().id-1)); 
 					dep.setDependent(tokens.get(node.id-1));
 					dep.setDependencyType(node.getLabel());

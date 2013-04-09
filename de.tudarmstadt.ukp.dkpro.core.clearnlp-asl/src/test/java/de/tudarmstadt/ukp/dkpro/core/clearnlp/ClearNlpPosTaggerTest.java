@@ -54,35 +54,18 @@ public class ClearNlpPosTaggerTest
     }
 	
 	@Test
-	public void testEnglishCraft()
+	public void testEnglishMayo()
 		throws Exception
 	{
-        runTest("en", "craft", "This is a test . \n",
+        runTest("en", "mayo", "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
 
-        runTest("en", "craft", "A neural net . \n",
+        runTest("en", "mayo", "A neural net . \n",
         		new String[] { "DT",  "JJ",     "NN",  "." },
         		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
 
-        runTest("en", "craft", "John is purchasing oranges . \n",
-        		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
-        		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
-    }	
-
-	@Test
-	public void testEnglishMedical()
-		throws Exception
-	{
-        runTest("en", "medical", "This is a test . \n",
-				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
-				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
-
-        runTest("en", "medical", "A neural net . \n",
-        		new String[] { "DT",  "JJ",     "NN",  "." },
-        		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
-
-        runTest("en", "medical", "John is purchasing oranges . \n",
+        runTest("en", "mayo", "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }	
