@@ -46,12 +46,23 @@ public class TextMarker extends TextMarkerEngine
 	@ConfigurationParameter(name = SCRIPT_PATHS, mandatory = true)
 	private List<String> scriptPaths;
 
+	/**
+	 * Lookup paths for the resource files like word lists.
+	 */
 	@ConfigurationParameter(name = RESOURCE_PATHS, mandatory = true, defaultValue = {})
 	private List<String> resourcePaths;
 
+	/**
+	 * Names of referenced script files: file name without extension with package namespace
+	 * separated by periods.
+	 */
 	@ConfigurationParameter(name = ADDITIONAL_SCRIPTS, mandatory = true, defaultValue = {})
 	private List<String> additionalScripts;
 	
+	/**
+	 * Names of referenced analysis engine descriptors, without extension and with package
+	 * namespace.
+	 */
 	@ConfigurationParameter(name = ADDITIONAL_ENGINES, mandatory = true, defaultValue = {})
 	private List<String> additionalEngines;
 
@@ -61,13 +72,24 @@ public class TextMarker extends TextMarkerEngine
 	@ConfigurationParameter(name = CREATE_DEBUG_INFO, mandatory = true, defaultValue = "false")
 	private boolean createDebugInfo;
 
+	/**
+	 * Option to remove the inference annotations after the script was applied.
+	 */
 	@ConfigurationParameter(name = REMOVE_BASICS, mandatory = true, defaultValue = "true")
 	private boolean removeBasics;
 
+	/**
+	 * List of some implementations that add annotations before the script is applied. By default
+	 * there is the TextMarker lexer which adds the annotations like CW
+	 */
 	@ConfigurationParameter(name = SEEDERS, mandatory = false, defaultValue = {
 			"org.apache.uima.textmarker.seed.DefaultSeeder"})
 	private List<String> seeders;
 
+	/**
+	 * The types that are filtered by default. Defining parts of text which are normally not
+	 * interesting.
+	 */
 	@ConfigurationParameter(name = DEFAULT_FILTERED_TYPES, mandatory = true, defaultValue = {
 			"org.apache.uima.textmarker.type.SPACE", "org.apache.uima.textmarker.type.NBSP",
 			"org.apache.uima.textmarker.type.BREAK", "org.apache.uima.textmarker.type.MARKUP" })
