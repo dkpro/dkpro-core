@@ -36,6 +36,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation;
 
 /**
+ * Can be used to measure how long the processing between two points in a pipeline takes.
+ * For that purpose, the AE is added two times, before and after the part of the pipeline that should be measured.
+ * The parameter makes sure the downstream component knows its status.
+ * 
  * @author zesch
  *
  */
@@ -43,8 +47,11 @@ public class ThroughputTestAE
     extends JCasAnnotator_ImplBase
 {
 
-    public static final String PARAM_IS_FINAL_TIME = "isFinalTime";
-    @ConfigurationParameter(name = PARAM_IS_FINAL_TIME, mandatory = true)
+    public static final String PARAM_IS_DOWNSTREAM_TIMER = "isDownstreamTimer";
+    /**
+     * If true, this is the downstream timer, i.e. the second of a timer pair.
+     */
+    @ConfigurationParameter(name = PARAM_IS_DOWNSTREAM_TIMER, mandatory = true)
     private boolean isFinalTime;
         
     private List<Long> times;
