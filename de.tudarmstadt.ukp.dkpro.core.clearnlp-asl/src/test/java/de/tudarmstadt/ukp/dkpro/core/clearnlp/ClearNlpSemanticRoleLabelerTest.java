@@ -23,6 +23,7 @@ import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class ClearNlpSemanticRoleLabelerTest
 	public void testEnglish()
 		throws Exception
 	{
-		// Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
 		JCas jcas = runTest("en", null, documentEnglish);
 
@@ -58,7 +59,7 @@ public class ClearNlpSemanticRoleLabelerTest
 	public void testEnglishMayo()
 		throws Exception
 	{
-		// Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
 		JCas jcas = runTest("en", "mayo", documentEnglish);
 
