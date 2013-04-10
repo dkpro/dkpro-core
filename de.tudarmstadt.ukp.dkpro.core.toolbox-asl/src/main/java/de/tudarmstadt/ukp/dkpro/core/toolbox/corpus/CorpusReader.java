@@ -37,15 +37,13 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
 /**
  * Reads a corpus and outputs a CAS for every document in the corpus.
  *
- * <ul>
- * <li><code>Corpus</code> - the fully qualified name of the corpus class to be used</li>
- * </ul>
- *
  * @author zesch
- * 
  */
 public class CorpusReader extends JCasCollectionReader_ImplBase {
 
+	/**
+	 * The fully qualified name of the corpus class to be used.
+	 */
     public static final String PARAM_CORPUS = "Corpus";
     @ConfigurationParameter(name=PARAM_CORPUS, mandatory=true)
     private String corpusClassName;
@@ -75,7 +73,8 @@ public class CorpusReader extends JCasCollectionReader_ImplBase {
 
     }
 
-    public boolean hasNext()
+    @Override
+	public boolean hasNext()
         throws IOException 
     {
         return textIter.hasNext();
@@ -132,7 +131,8 @@ public class CorpusReader extends JCasCollectionReader_ImplBase {
     public void close() throws IOException {
     }
 
-    public Progress[] getProgress() {
+    @Override
+	public Progress[] getProgress() {
         return new Progress[] { new ProgressImpl(currentIndex, currentIndex, Progress.ENTITIES) };
     }
 }
