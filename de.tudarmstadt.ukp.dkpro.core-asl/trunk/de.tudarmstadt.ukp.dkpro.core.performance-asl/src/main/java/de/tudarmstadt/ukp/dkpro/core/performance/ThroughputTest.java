@@ -79,7 +79,7 @@ public class ThroughputTest {
     {
         return createPrimitiveDescription(
                 ThroughputTestAE.class,
-                ThroughputTestAE.PARAM_IS_FINAL_TIME, isFinalTimer
+                ThroughputTestAE.PARAM_IS_DOWNSTREAM_TIMER, isFinalTimer
         );
     }
 }
