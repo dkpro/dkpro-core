@@ -38,6 +38,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.component.dep.CDEPPassParser;
@@ -56,6 +57,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * 
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+		inputs={
+				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+		},
+		outputs={
+				"de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"
+		}
+)
 public class ClearNlpDependencyParser
 	extends JCasAnnotator_ImplBase
 {
