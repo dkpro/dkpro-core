@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -39,6 +39,7 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.FSCollectionFactory;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
@@ -60,6 +61,17 @@ import de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"},
+        outputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate",
+                "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument"}
+        )
 public class ClearNlpSemanticRoleLabeler
 	extends JCasAnnotator_ImplBase
 {
