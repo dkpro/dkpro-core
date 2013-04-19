@@ -44,6 +44,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -52,16 +53,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * This Consumer outputs the content of all CASes into the IMS workbench format.
- * 
+ *
  * This writer produces a text file which needs to be converted to the binary IMS CWB index files
- * using the command line tools that come with the CWB. 
- * 
+ * using the command line tools that come with the CWB.
+ *
  * It is possible to set the parameter {@link #PARAM_CQP_HOME} to directly create output in the
  * native binary CQP format via the original CWB command line tools.
- * 
+ *
  * @author Erik-Lân Do Dinh
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"}
+)
+
 public class ImsCwbWriter
 	extends JCasAnnotator_ImplBase
 {
@@ -75,7 +86,7 @@ public class ImsCwbWriter
 	public static final String ATTR_LEMMA = "lemma";
 	public static final String ATTR_ID = "id";
 	public static final String ATTR_URI = "uri";
-	
+
 	/**
 	 * Location to which the output is written.
 	 */
@@ -91,14 +102,14 @@ public class ImsCwbWriter
 	private String encoding;
 
 	/**
-	 * Write the document ID for each token. It is usually a better idea to generate a 
+	 * Write the document ID for each token. It is usually a better idea to generate a
 	 * {@link #PARAM_WRITE_DOCUMENT_TAG document tag} or a {@link #PARAM_WRITE_TEXT_TAG text tag}
 	 * which also contain the document ID that can be queried in CQP.
 	 */
 	public static final String PARAM_WRITE_DOC_ID = "writeDocId";
 	@ConfigurationParameter(name = PARAM_WRITE_DOC_ID, mandatory = true, defaultValue = "false")
 	private boolean writeDocId;
-	
+
 	/**
 	 * Write part-of-speech tags.
 	 */
@@ -122,7 +133,7 @@ public class ImsCwbWriter
 	private boolean writeLemma;
 
 	/**
-	 * Write a pseudo-XML tag with the name {@code document} to mark the start and end of a 
+	 * Write a pseudo-XML tag with the name {@code document} to mark the start and end of a
 	 * document.
 	 */
 	public static final String PARAM_WRITE_DOCUMENT_TAG = "writeDocumentTag";
@@ -130,7 +141,7 @@ public class ImsCwbWriter
 	private boolean writeDocumentTag;
 
 	/**
-	 * Write a pseudo-XML tag with the name {@code text} to mark the start and end of a 
+	 * Write a pseudo-XML tag with the name {@code text} to mark the start and end of a
 	 * document. This is used by CQPweb.
 	 */
 	public static final String PARAM_WRITE_TEXT_TAG = "writeTextTag";
@@ -178,8 +189,8 @@ public class ImsCwbWriter
 	private Process childProcess;
 	private File dataDirectory;
 	private File registryDirectory;
-	private String corpusName = "corpus";
-	
+	private final String corpusName = "corpus";
+
 	@Override
 	public void initialize(UimaContext context)
 		throws ResourceInitializationException
@@ -195,7 +206,7 @@ public class ImsCwbWriter
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
 		}
-		
+
 		try {
 			bw = getWriter();
 		}
@@ -253,7 +264,7 @@ public class ImsCwbWriter
 					if (writeCPOS) {
 						field(token.getPos() != null ? token.getPos().getType().getShortName() : "-");
 					}
-					
+
 					// write lemma
 					if (writeLemma) {
 						field(token.getLemma() != null ? token.getLemma().getValue() : "-");
@@ -286,7 +297,7 @@ public class ImsCwbWriter
 			throw new AnalysisEngineProcessException(e);
 		}
 	}
-	
+
 	private void startElement(String aElement, String... aAttributes) throws IOException
 	{
 		bw.write('<');
@@ -303,22 +314,22 @@ public class ImsCwbWriter
 		bw.write('>');
 		bw.write(LS);
 	}
-	
+
 	private void endElement(String aElement) throws IOException
 	{
 		bw.write("</");
 		bw.write(aElement);
 		bw.write('>');
 		bw.write(LS);
-		
+
 	}
-	
+
 	private void field(String aValue) throws IOException
 	{
 		bw.write(TAB);
 		bw.write(escapeXml(aValue));
 	}
-	
+
 	private Writer getWriter() throws IOException
 	{
 		if (cqpHome != null) {
@@ -326,7 +337,7 @@ public class ImsCwbWriter
 			registryDirectory = new File(outputFile, "registry");
 			forceMkdir(dataDirectory);
 			forceMkdir(registryDirectory);
-			
+
 			List<String> cmd = new ArrayList<String>();
 			cmd.add(new File(cqpHome, "cwb-encode").getAbsolutePath());
 
@@ -344,13 +355,13 @@ public class ImsCwbWriter
 			// -R <rf>   create registry entry (named <rf>) listing all encoded attributes
 			cmd.add("-R");
 			cmd.add(new File(registryDirectory, corpusName).getPath());
-			
+
 			// -P <att>  declare additional p-attribute <att>
 			if (writePOS) {
 				cmd.add("-P");
 				cmd.add(ATTR_POS);
 			}
-			
+
 			if (writeCPOS) {
 				cmd.add("-P");
 				cmd.add(ATTR_CPOS);
@@ -372,7 +383,7 @@ public class ImsCwbWriter
 				cmd.add("-P");
 				cmd.add(ATTR_END);
 			}
-			
+
 			if (writeDocumentTag) {
 				cmd.add("-S");
 				cmd.add(E_DOCUMENT+":0+"+ATTR_URI);
@@ -389,7 +400,7 @@ public class ImsCwbWriter
 			}
 
 			getLogger().info("Spawning cwb-encode: " + join(cmd, " "));
-			
+
 			final ProcessBuilder pb = new ProcessBuilder();
 			pb.command(cmd);
 			childProcess = pb.start();
@@ -400,7 +411,7 @@ public class ImsCwbWriter
 					encoding));
 		}
 	}
-	
+
 	private void attendChildProceess()
 	{
 		if (childProcess != null) {
@@ -438,7 +449,7 @@ public class ImsCwbWriter
 			catch (InterruptedException e) {
 				throw new AnalysisEngineProcessException(e);
 			}
-		
+
 			runCwbCommand("cwb-makeall", "-r", registryDirectory.getPath(), "-V",
 					corpusName.toUpperCase());
 
@@ -451,7 +462,7 @@ public class ImsCwbWriter
 				for (File f : listFiles(dataDirectory, new String[] { "huf" }, false)) {
 					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus"));
 				}
-				
+
 				// Compress the index of a positional attribute. Creates .crc and .crx files
 				// which replace the corresponding .corpus.rev and .corpus.rdx files. After
 				// running this tool successfully, the latter files can be deleted.
@@ -464,7 +475,7 @@ public class ImsCwbWriter
 			}
 		}
 	}
-	
+
 	private void runCwbCommand(String aCommand, String... aArguments)
 			throws AnalysisEngineProcessException
 		{
@@ -474,7 +485,7 @@ public class ImsCwbWriter
 				for (String arg : aArguments) {
 					args.add(arg);
 				}
-				
+
 				ProcessBuilder pb = new ProcessBuilder(args);
 				getLogger().info("Spawning " + aCommand + ": " + join(args, " "));
 				childProcess = pb.start();
@@ -497,7 +508,7 @@ public class ImsCwbWriter
 		CHARSET_MAPPING.put("ISO-8859-1", "latin1");
 		CHARSET_MAPPING.put("UTF-8", "utf8");
 	}
-	
+
 	private static String getCwbCharset(String aEncoding)
 	{
 		String enc = CHARSET_MAPPING.get(aEncoding);
@@ -506,7 +517,7 @@ public class ImsCwbWriter
 		}
 		return enc;
 	}
-	
+
 	private static String escapeXml(String aString)
 	{
 		return aString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
