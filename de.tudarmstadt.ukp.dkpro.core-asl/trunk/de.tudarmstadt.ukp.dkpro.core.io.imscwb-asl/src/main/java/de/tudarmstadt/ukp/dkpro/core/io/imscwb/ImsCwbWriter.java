@@ -181,6 +181,10 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="false")
 	private boolean cqpCompress;
 
+	public static final String PARAM_CORPUS_NAME = "corpusName";
+	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true)
+	private String corpusName;
+	
 	private static final String LS = "\n";
 	private static final String TAB = "\t";
 	private Writer bw;
@@ -189,7 +193,6 @@ public class ImsCwbWriter
 	private Process childProcess;
 	private File dataDirectory;
 	private File registryDirectory;
-	private final String corpusName = "corpus";
 
 	@Override
 	public void initialize(UimaContext context)
