@@ -182,7 +182,7 @@ public class ImsCwbWriter
 	private boolean cqpCompress;
 
 	public static final String PARAM_CORPUS_NAME = "corpusName";
-	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true)
+	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue="corpus")
 	private String corpusName;
 	
 	private static final String LS = "\n";
