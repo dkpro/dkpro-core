@@ -31,6 +31,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.chasen.mecab.Tagger;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -45,12 +46,12 @@ import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
  * <p>
  * DKPro Annotator for the MeCab Japanese POS Tagger
  * </p>
- * 
+ *
  * Required annotations:<br/>
  * <ul>
  * <li>None</li>
  * </ul>
- * 
+ *
  * Generated annotations:<br/>
  * <ul>
  * <li>Sentence</li>
@@ -58,10 +59,18 @@ import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
  * <li>Lemma</li>
  * <li>POS</li>
  * </ul>
- * 
- * 
+ *
+ *
  * @author Jungi Kim
  */
+
+@TypeCapability(
+        outputs={ "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"}
+        )
+
 public class MeCabTagger
 	extends SegmenterBase
 {
@@ -70,7 +79,7 @@ public class MeCabTagger
 
 	/**
 	 * @see org.uimafit.component.JCasAnnotator_ImplBase#initialize(org.apache.uima .UimaContext)
-	 * 
+	 *
 	 *      Loads MeCab library from system default paths. Throws and UnsatisfiedLinkError in case
 	 *      the native code cannot be read.
 	 */
@@ -145,7 +154,7 @@ public class MeCabTagger
 		// We force a temporary location because Mecab cannot deal with paths containing spaces
 		// and it is quite unlikely that the temp folder has spaces in its path. (See comment
 		// below as well). -- REC 2012-06-03
-		File dictFolder = ResourceUtils.getClasspathAsFolder("classpath*:" + packagePrefix + 
+		File dictFolder = ResourceUtils.getClasspathAsFolder("classpath*:" + packagePrefix +
 				"/lib/ipadic", true);
 
 		getLogger().log(Level.INFO, "Native library folder: " + binFolder);
@@ -181,7 +190,7 @@ public class MeCabTagger
 
 		/*
 		 * First, read all morphemes and POS tags.
-		 * 
+		 *
 		 * The native library seems to have a problem with parseToNode(), parseToString() functions
 		 * For now, we have to parse the test from parse() function.
 		 */
@@ -490,7 +499,7 @@ public class MeCabTagger
 	 * Based on a simple heuristic it is attempted to mark the morphemes with I-B-O tags if they
 	 * belong to the same word. O = 1-morpheme word B = morpheme marks the beginning of a word I =
 	 * morpheme is part of a word
-	 * 
+	 *
 	 * @author Tobias Horsmann
 	 */
 	private String getIBO(String morph, String[] features, List<String> iboList)
