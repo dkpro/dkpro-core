@@ -58,10 +58,6 @@
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.trove4j</groupId>
-			<artifactId>trove4j</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.ibm.icu</groupId>
 			<artifactId>icu4j</artifactId>
 		</dependency>
