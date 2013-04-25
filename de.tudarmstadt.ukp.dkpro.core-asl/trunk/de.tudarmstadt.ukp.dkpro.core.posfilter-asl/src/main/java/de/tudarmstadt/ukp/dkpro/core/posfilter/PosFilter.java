@@ -28,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.CasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
@@ -40,6 +41,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
  *
  * @author Torsten Zesch
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+
 public class PosFilter
 	extends JCasAnnotator_ImplBase
 {
