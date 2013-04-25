@@ -28,6 +28,7 @@ import org.apache.uima.cas.FSIterator;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
@@ -40,6 +41,14 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
  * @since 1.1.0
  * @see Backmapper
  */
+@TypeCapability(
+        inputs={
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"},
+        outputs={
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+
 public class ApplyChangesAnnotator
 	extends JCasAnnotator_ImplBase
 {
