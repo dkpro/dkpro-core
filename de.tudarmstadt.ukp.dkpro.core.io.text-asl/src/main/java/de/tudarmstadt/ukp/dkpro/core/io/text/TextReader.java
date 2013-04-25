@@ -27,6 +27,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
 
@@ -38,16 +39,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  *
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class TextReader
 	extends ResourceCollectionReaderBase
 {
 	/**
 	 * Automatically detect encoding.
-	 * 
+	 *
 	 * @see CharsetDetector
 	 */
 	public static final String ENCODING_AUTO = "auto";
-	
+
 	/**
 	 * Name of configuration parameter that contains the character encoding used by the input files.
 	 */
