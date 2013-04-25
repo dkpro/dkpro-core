@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
@@ -35,6 +36,10 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
  * @author ferschke
  *
  */
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig"})
+
 public class WikipediaPageReader extends WikipediaStandardReaderBase
 {
 
