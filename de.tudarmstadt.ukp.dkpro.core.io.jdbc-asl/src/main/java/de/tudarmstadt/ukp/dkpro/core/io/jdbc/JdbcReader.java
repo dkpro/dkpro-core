@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jdbc;
 
+import static java.util.Arrays.asList;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -36,9 +38,9 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.CasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import static java.util.Arrays.asList;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
@@ -51,10 +53,15 @@ import static java.util.Arrays.asList;
  * <p>
  * will create a CAS for each record, write the content of "text" column into CAS documen text and
  * that of "title" column into the document title field of the {@link DocumentMetadata} annotation.
- * 
+ *
  * @author Shuo Yang
- * 
+ *
  */
+
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class JdbcReader
     extends CasCollectionReader_ImplBase
 {
@@ -66,7 +73,7 @@ public class JdbcReader
     public static final String CAS_METADATA_COLLECTION_ID = "cas_metadata_collection_id";
     public static final String CAS_METADATA_DOCUMENT_URI = "cas_metadata_document_uri";
     public static final String CAS_METADATA_DOCUMENT_BASE_URI = "cas_metadata_document_base_uri";
-    
+
     private static final Set<String> CAS_COLUMNS = new HashSet<String>(asList(
     		CAS_TEXT, CAS_METADATA_TITLE, CAS_METADATA_LANGUAGE, CAS_METADATA_DOCUMENT_ID,
     		CAS_METADATA_COLLECTION_ID, CAS_METADATA_DOCUMENT_URI, CAS_METADATA_DOCUMENT_BASE_URI));
@@ -204,7 +211,7 @@ public class JdbcReader
         metadata.setCollectionId(getStringQuietly(CAS_METADATA_COLLECTION_ID));
         metadata.setDocumentUri(getStringQuietly(CAS_METADATA_DOCUMENT_URI));
         metadata.setDocumentBaseUri(getStringQuietly(CAS_METADATA_DOCUMENT_BASE_URI));
-        
+
         completed++;
     }
 
