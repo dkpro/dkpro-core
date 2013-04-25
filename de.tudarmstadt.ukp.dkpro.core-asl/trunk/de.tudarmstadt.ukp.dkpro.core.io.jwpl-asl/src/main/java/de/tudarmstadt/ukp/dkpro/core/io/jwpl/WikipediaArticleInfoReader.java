@@ -26,6 +26,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo;
@@ -40,6 +41,13 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
  * @author ferschke
  *
  */
+
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo"})
+
+
 public class WikipediaArticleInfoReader extends WikipediaReaderBase
 {
     protected long currentArticleIndex;
