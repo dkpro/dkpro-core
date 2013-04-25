@@ -28,14 +28,15 @@ import org.apache.uima.util.Level;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.ExternalResource;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfConsumer;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.*;
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfModel;
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.FreqDist;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 
 /**
  * This component adds {@link Tfidf} annotations consisting of a term and a
@@ -52,6 +53,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
  * @author zesch, n_erbs, parzonka
  *
  */
+
+@TypeCapability(
+        outputs={"de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf"}
+        )
+
+
 public class TfidfAnnotatorShared
 	extends JCasAnnotator_ImplBase
 {
@@ -107,8 +114,9 @@ public class TfidfAnnotatorShared
 		throws ResourceInitializationException
 	{
 		super.initialize(context);
-		if (dfModel == null)
-			throw new ResourceInitializationException();
+		if (dfModel == null) {
+            throw new ResourceInitializationException();
+        }
 		featurePath = dfModel.getFeaturePath();
 	}
 
@@ -134,9 +142,10 @@ public class TfidfAnnotatorShared
 
 				int tf = termFrequencies.getCount(term);
 				int df = dfModel.getDf(term);
-				if (df == 0)
-					getContext().getLogger().log(Level.WARNING,
+				if (df == 0) {
+                    getContext().getLogger().log(Level.WARNING,
 							"Term " + term + " not found in dfStore!");
+                }
 
 				double tfidf = getWeightedTf(tf)
 						* getWeightedIdf(df, dfModel.getDocumentCount());
