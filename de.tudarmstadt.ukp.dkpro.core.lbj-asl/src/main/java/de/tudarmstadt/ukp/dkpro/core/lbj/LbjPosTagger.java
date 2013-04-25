@@ -31,6 +31,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import LBJ2.nlp.Word;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -43,54 +44,62 @@ import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
 /**
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
  * http://cogcomp.cs.illinois.edu/page/software
- *  
+ *
  * @author zesch
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+       outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+
 public class LbjPosTagger
     extends JCasAnnotator_ImplBase
 {
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spaming the heap with thousands of strings representing only a few different tags.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
 	private boolean internTags;
-	
+
     private POSTagger tagger;
-    
+
     private MappingProvider mappingProvider;
-    
-    
+
+
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
     {
         super.initialize(context);
-       
+
         tagger = new POSTagger();
-        
+
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
                 "core/api/lexmorph/tagset/en-ptb-tagger.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
     }
-    
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
     	CAS cas = aJCas.getCas();
-    	
+
         mappingProvider.configure(cas);
 
         for (Sentence s : select(aJCas, Sentence.class)) {
         	// Get tokens from CAS
         	List<Token> casTokens = selectCovered(aJCas, Token.class, s);
-        	
+
         	// Convert to tagger input
             List<LBJ2.nlp.seg.Token> tokens = new ArrayList<LBJ2.nlp.seg.Token>();
             LBJ2.nlp.seg.Token lastToken = null;
@@ -99,19 +108,19 @@ public class LbjPosTagger
                 LBJ2.nlp.seg.Token lbjToken = new LBJ2.nlp.seg.Token(w, lastToken, null);
                 lastToken = lbjToken;
                 tokens.add(lbjToken);
-            }                
-            
+            }
+
             int i = 0;
             for (LBJ2.nlp.seg.Token t : tokens) {
             	// Run tagger
                 String tag = tagger.discreteValue(t);
-                
+
                 // Convert tagger output to CAS
 				Type posTag = mappingProvider.getTagType(tag);
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.start, t.end);
 				posAnno.setPosValue(internTags ? tag.intern() : tag);
 				posAnno.addToIndexes();
-				casTokens.get(i).setPos((POS) posAnno);
+				casTokens.get(i).setPos(posAnno);
 				i++;
             }
         }
