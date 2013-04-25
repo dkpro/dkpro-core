@@ -37,6 +37,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasToInlineXml;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -62,6 +63,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class XmlWriterInline
 	extends JCasFileWriter_ImplBase
 {
@@ -101,7 +107,7 @@ public class XmlWriterInline
 		OutputStream docOS = null;
 		try {
 			docOS = getOutputStream(aJCas, ".xml");
-			
+
 			final String xmlAnnotations = cas2xml.generateXML(aJCas.getCas());
 			if (transformer != null) {
 				transformer.transform(
