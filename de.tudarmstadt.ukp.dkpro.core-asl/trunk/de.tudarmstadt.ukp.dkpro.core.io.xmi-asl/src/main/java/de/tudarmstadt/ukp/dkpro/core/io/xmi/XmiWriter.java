@@ -18,9 +18,11 @@
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASRuntimeException;
@@ -29,6 +31,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.TypeSystemUtil;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
@@ -37,6 +40,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 /**
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 public class XmiWriter
 	extends JCasFileWriter_ImplBase
 {
@@ -54,16 +60,16 @@ public class XmiWriter
 	private File typeSystemFile;
 
 	private boolean typeSystemWritten;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-		
+
 		typeSystemWritten = false;
 	}
-	
+
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
@@ -71,9 +77,9 @@ public class XmiWriter
 		OutputStream docOS = null;
 		try {
 			docOS = getOutputStream(aJCas, ".xmi");
-			
+
 			XmiCasSerializer.serialize(aJCas.getCas(), docOS);
-			
+
 			if (!typeSystemWritten || typeSystemFile == null) {
 				writeTypeSystem(aJCas);
 				typeSystemWritten = true;
@@ -86,11 +92,11 @@ public class XmiWriter
 			closeQuietly(docOS);
 		}
 	}
-	
+
 	private void writeTypeSystem(JCas aJCas) throws IOException, CASRuntimeException, SAXException
 	{
 		OutputStream typeOS = null;
-		
+
 		File typeOSFile;
 		if (typeSystemFile != null) {
 			typeOSFile = typeSystemFile;
@@ -99,7 +105,7 @@ public class XmiWriter
 			typeOSFile = getTargetPath("typesystem", ".xml");
 		}
 		typeOS = CompressionUtils.getOutputStream(typeOSFile);
-		
+
 		try {
 			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
 		}
