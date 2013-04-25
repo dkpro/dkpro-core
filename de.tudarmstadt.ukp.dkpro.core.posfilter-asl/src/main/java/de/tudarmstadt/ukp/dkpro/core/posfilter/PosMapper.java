@@ -51,6 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
         outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 
 public class PosMapper
