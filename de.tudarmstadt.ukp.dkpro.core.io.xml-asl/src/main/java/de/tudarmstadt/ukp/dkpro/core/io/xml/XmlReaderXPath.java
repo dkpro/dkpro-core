@@ -44,6 +44,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -61,10 +62,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * separately in its own CAS.
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
- * 
+ *
  * @author Shuo Yang
- * 
+ *
  */
+
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field"})
+
 public class XmlReaderXPath
 	extends FileSetCollectionReaderBase
 {
@@ -82,7 +89,7 @@ public class XmlReaderXPath
 	 * Optional. Tags which should be worked on. If empty then all tags will be
 	 * processed.
 	 * <p>
-	 * 
+	 *
 	 * If this and PARAM_EXCLUDE_TAG are both provided, tags in set
 	 * PARAM_INCLUDE_TAG - PARAM_EXCLUDE_TAG will be processed.
 	 */
@@ -94,7 +101,7 @@ public class XmlReaderXPath
 	 * Optional. Tags which should be ignored. If empty then all tags will be
 	 * processed.
 	 * <p>
-	 * 
+	 *
 	 * If this and PARAM_INCLUDE_TAG are both provided, tags in set
 	 * PARAM_INCLUDE_TAG - PARAM_EXCLUDE_TAG will be processed.
 	 */
@@ -116,7 +123,7 @@ public class XmlReaderXPath
 	 * Please give the substitutions each in before - after order. For example
 	 * to substitute "foo" with "bar", and "hey" with "ho", you can provide {
 	 * "foo", "bar", "hey", "ho" }.
-	 * 
+	 *
 	 */
 	public static final String PARAM_SUBSTITUTE_TAGS = "SubstituteTag";
 	@ConfigurationParameter(name = PARAM_SUBSTITUTE_TAGS, mandatory = false)
@@ -152,9 +159,10 @@ public class XmlReaderXPath
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		nodes = new ArrayDeque<Node>();
 
-		if (StringUtils.isWhitespace(rootXPath))
-			throw new IllegalArgumentException(
+		if (StringUtils.isWhitespace(rootXPath)) {
+            throw new IllegalArgumentException(
 					"Illegal root XPath expression. Please provide a valid one.");
+        }
 		try {
 			compiledRootXPath = xpath.compile(rootXPath);
 		}
@@ -164,9 +172,10 @@ public class XmlReaderXPath
 		}
 
 		if (idXPath != null) {
-			if (StringUtils.isWhitespace(idXPath))
-				throw new IllegalArgumentException(
+			if (StringUtils.isWhitespace(idXPath)) {
+                throw new IllegalArgumentException(
 						"Illegal ID XPath expression. Please provide a valid one.");
+            }
 			try {
 				compiledIdXPath = xpath.compile(idXPath);
 			}
@@ -237,7 +246,7 @@ public class XmlReaderXPath
 	 * <p>
 	 * After all nodes from current file get processed, read in nodes from the
 	 * next file
-	 * 
+	 *
 	 * @return true if there is still nodes to process <br>
 	 *         false iff there is neither nodes nor files remaining
 	 */
@@ -290,7 +299,7 @@ public class XmlReaderXPath
 	 * Add the text in current node to document text buffer, create and add to
 	 * index a Field annotation out of the text. This usually processes a
 	 * document.
-	 * 
+	 *
 	 * @param cas
 	 * @param node
 	 * @param documentText
@@ -378,7 +387,7 @@ public class XmlReaderXPath
 
 	/**
 	 * Create and add to index a Field annotation with the given data
-	 * 
+	 *
 	 * @param cas
 	 * @param nodeTag
 	 * @param begin
