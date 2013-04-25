@@ -22,9 +22,13 @@ import static org.uimafit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasConsumer_ImplBase;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class DependencyDumper
 	extends JCasConsumer_ImplBase
 {
