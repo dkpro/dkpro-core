@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
@@ -35,6 +36,13 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
  * @author oferschke
  *
  */
+
+@TypeCapability(
+    outputs={
+            "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision"})
+
 public class WikipediaRevisionReader extends WikipediaRevisionReaderBase
 {
 
