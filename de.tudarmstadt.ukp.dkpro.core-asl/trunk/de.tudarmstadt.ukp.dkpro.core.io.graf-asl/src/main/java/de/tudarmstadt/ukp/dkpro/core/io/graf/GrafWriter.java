@@ -23,12 +23,17 @@ import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.uimafit.descriptor.TypeCapability;
 import org.xces.graf.api.IGraph;
 import org.xces.graf.io.GrafRenderer;
 import org.xces.graf.io.IRenderer;
 import org.xces.graf.uima.GraphFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 
 public class GrafWriter
 extends JCasFileWriter_ImplBase
@@ -41,12 +46,12 @@ extends JCasFileWriter_ImplBase
 		IRenderer renderer = null;
 		try {
 			docOS = getOutputStream(aJCas, ".xml");
-			
+
 			// Convert CAS
 			GraphFactory grafFactory = new GraphFactory();
 			IGraph graph = grafFactory.createGraph(aJCas.getCas());
 
-			// Write CAS 
+			// Write CAS
 			renderer = new GrafRenderer(docOS);
 			renderer.render(graph);
 		}
