@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,6 +26,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -35,12 +36,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
+
 public class CamelCaseTokenSegmenter
 	extends JCasAnnotator_ImplBase
 {
 	/**
 	 * Wether to remove the original token.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
