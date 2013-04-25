@@ -32,6 +32,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -40,10 +41,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Maps existing POS tags from one tagset to another using a user provided properties file.
- * 
+ *
  * @author Erik-Lân Do Dinh
- * 
+ *
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
+
 public class PosMapper
 	extends JCasAnnotator_ImplBase
 {
