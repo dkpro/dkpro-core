@@ -28,6 +28,7 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -39,6 +40,13 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
  *
  * @author zesch
  */
+
+@TypeCapability(
+    outputs={
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
+
 public class CorpusReader extends JCasCollectionReader_ImplBase {
 
 	/**
@@ -50,9 +58,9 @@ public class CorpusReader extends JCasCollectionReader_ImplBase {
 
     private Corpus corpus;
     private Iterator<Text> textIter;
-    
+
     private int currentIndex;
-    
+
     @Override
 	public void initialize(UimaContext aContext) throws ResourceInitializationException {
         try {
@@ -75,7 +83,7 @@ public class CorpusReader extends JCasCollectionReader_ImplBase {
 
     @Override
 	public boolean hasNext()
-        throws IOException 
+        throws IOException
     {
         return textIter.hasNext();
     }
@@ -87,35 +95,35 @@ public class CorpusReader extends JCasCollectionReader_ImplBase {
         jcas.setDocumentLanguage(corpus.getLanguage());
 
         Text text = textIter.next();
-        
+
         jcas.setDocumentText(text.toString());
 
         int sentenceOffset = 0;
         int tokenOffset = 0;
         for (de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence s : text.getSentences()) {
-            int sentenceLength = s.toString().length();   
+            int sentenceLength = s.toString().length();
 
             Sentence sAnno = new Sentence(jcas);
             sAnno.setBegin(sentenceOffset);
             sAnno.setEnd(sentenceOffset + sentenceLength);
             sAnno.addToIndexes();
-            
+
             sentenceOffset += sentenceLength;
-            
+
             for (String t : s.getTokens()) {
-                
+
                 Token tAnno = new Token(jcas);
                 tAnno.setBegin(tokenOffset);
 
                 tokenOffset += t.length();
-                
+
                 tAnno.setEnd(tokenOffset);
                 tAnno.addToIndexes();
-                
+
                 // there is a whitespace after each token
                 tokenOffset += 1;
             }
-            
+
             // there is a whitespace between sentences
             sentenceOffset += 1;
         }
