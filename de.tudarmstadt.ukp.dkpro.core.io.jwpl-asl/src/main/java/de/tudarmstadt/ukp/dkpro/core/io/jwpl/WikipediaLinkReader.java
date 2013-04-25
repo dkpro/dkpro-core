@@ -24,12 +24,17 @@ import java.util.List;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
 import de.tudarmstadt.ukp.wikipedia.parser.Link;
 import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
+
+@TypeCapability(outputs={
+    "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+    "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink"})
 
 public class WikipediaLinkReader extends WikipediaStandardReaderBase {
 
@@ -62,12 +67,12 @@ public class WikipediaLinkReader extends WikipediaStandardReaderBase {
 		super.getNext(jcas);
 
 		ParsedPage pp = parser.parse(getPage().getText());
-		
+
 		//Don't do anything if there is no document text
 		if(jcas.getDocumentText().length()==0){
 			return;
 		}
-		
+
 		//add link annotations
 		List<String> allowedLinkTypeList = Arrays.asList(this.allowedLinkTypes);
 		WikipediaLink wikipediaLink;
