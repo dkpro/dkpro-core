@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -53,6 +54,7 @@ import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -64,23 +66,32 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <p>
  * DKPro Annotator for the MaltParser
  * </p>
- * 
+ *
  * Required annotations:<br/>
  * <ul>
  * <li>Token</li>
  * <li>Sentence</li>
  * <li>POS</li>
  * </ul>
- * 
+ *
  * Generated annotations:<br/>
  * <ul>
  * <li>Dependency (annotated over sentence-span)</li>
  * </ul>
- * 
- * 
+ *
+ *
  * @author Oliver Ferschke
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
+
 public class MaltParser
 	extends JCasAnnotator_ImplBase
 {
@@ -104,10 +115,10 @@ public class MaltParser
 	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
-	
+
 	/**
 	 * Log the tag set(s) when a model is loaded.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -117,15 +128,15 @@ public class MaltParser
 	// Not sure if we'll ever have to use different symbol tables
     // public static final String SYMBOL_TABLE = "symbolTableName";
     // @ConfigurationParameter(name = SYMBOL_TABLE, mandatory = true, defaultValue = "DEPREL")
-	private String symbolTableName = "DEPREL";
+	private final String symbolTableName = "DEPREL";
 
 	private Logger logger;
 	private SymbolTable symbolTable;
 	private File workingDir;
-	
+
 	private CasConfigurableProviderBase<MaltParserService> modelProvider;
 
-	
+
 	@Override
 	public void initialize(UimaContext context)
 		throws ResourceInitializationException
@@ -133,7 +144,7 @@ public class MaltParser
 		super.initialize(context);
 
 		logger = getContext().getLogger();
-		
+
 		try {
 			workingDir = File.createTempFile("maltparser", ".tmp");
 			workingDir.delete();
@@ -146,22 +157,22 @@ public class MaltParser
 
 		modelProvider = new CasConfigurableProviderBase<MaltParserService>() {
 			private MaltParserService parser;
-			
+
 			{
 				setDefault(VERSION, "1.7");
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.maltparser-model-parser-${language}-${variant}");
 				setDefault(VARIANT, "linear");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/maltparser/lib/" +
 						"parser-${language}-${variant}.mco");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected MaltParserService produceResource(URL aUrl) throws IOException
 			{
@@ -176,7 +187,7 @@ public class MaltParser
 								"MaltParser exception while terminating parser model: " + e.getMessage());
 					}
 				}
-				
+
 				try {
 					// However, Maltparser is not happy at all if the model file does not have the right
 					// name, so we are forced to create a temporary directory and place the file there.
@@ -195,7 +206,7 @@ public class MaltParser
 							IOUtils.closeQuietly(os);
 						}
 					}
-					
+
 					// Maltparser has a very odd way of finding out which command line options it supports.
 					// By manually initializing the OptionManager before Maltparser tries it, we can work
 					// around Maltparsers' own broken code.
@@ -204,7 +215,7 @@ public class MaltParser
 								MaltParserService.class.getResource("/appdata/options.xml"));
 						OptionManager.instance().generateMaps();
 					}
-					
+
 					// Ok, now we can finally initialize the parser
 					parser = new MaltParserService();
 					parser.initializeParserModel("-w " + workingDir + " -c " + modelFile.getName()
@@ -214,7 +225,7 @@ public class MaltParser
 					if (printTagSet) {
 						PropertyAccessor paDirect = PropertyAccessorFactory.forDirectFieldAccess(parser);
 						SingleMalt singleMalt = (SingleMalt) paDirect.getPropertyValue("singleMalt");
-						
+
 						List<String> posTags = new ArrayList<String>();
 						SymbolTable posTagTable = singleMalt.getSymbolTables().getSymbolTable("POSTAG");
 						for (int i : posTagTable.getCodes()) {
@@ -222,7 +233,7 @@ public class MaltParser
 						}
 						Collections.sort(posTags);
 
-						getContext().getLogger().log(INFO, "Model expects [" + posTags.size() + 
+						getContext().getLogger().log(INFO, "Model expects [" + posTags.size() +
 								"] postags: "+StringUtils.join(posTags, " "));
 
 						List<String> depRels = new ArrayList<String>();
@@ -232,10 +243,10 @@ public class MaltParser
 						}
 						Collections.sort(depRels);
 
-						getContext().getLogger().log(INFO, "Model contains [" + depRels.size() + 
+						getContext().getLogger().log(INFO, "Model contains [" + depRels.size() +
 								"] tags: "+StringUtils.join(depRels, " "));
 					}
-					
+
 					return parser;
 				}
 				catch (MaltChainedException e) {
@@ -264,7 +275,7 @@ public class MaltParser
 		throws AnalysisEngineProcessException
 	{
 		modelProvider.configure(aJCas.getCas());
-		
+
 		// Iterate over all sentences
 		for (Sentence curSentence : select(aJCas, Sentence.class)) {
 
@@ -280,7 +291,7 @@ public class MaltParser
 				parserInput[i] = String.format("%1$d\t%2$s\t_\t%3$s\t%3$s\t_", i + 1,
 						t.getCoveredText(), t.getPos().getPosValue());
 			}
-			
+
 			// Parse sentence
 			DependencyStructure graph = null;
 			try {
@@ -340,7 +351,7 @@ public class MaltParser
 	{
 		JarEntry je = null;
 		JarInputStream jis = null;
-				
+
 		try {
 			jis = new JarInputStream(aUrl.openConnection().getInputStream());
 			while ((je = jis.getNextJarEntry()) != null) {
@@ -360,11 +371,11 @@ public class MaltParser
 								"Could not find the configuration name and type from the URL '"
 										+ aUrl.toString() + "'. ");
 					}
-					
+
 					return entryName.substring(indexSeparator+1, indexUnderScore) + ".mco";
 				}
 			}
-			
+
 			throw new IllegalStateException(
 					"Could not find the configuration name and type from the URL '"
 							+ aUrl.toString() + "'. ");
