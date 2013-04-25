@@ -20,15 +20,21 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 /**
- * Removes fields from the document meta data which may be different depending on the machine a 
+ * Removes fields from the document meta data which may be different depending on the machine a
  * test is run on.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs={"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"},
+        outputs={"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class DocumentMetaDataStripper
 	extends JCasAnnotator_ImplBase
 {
