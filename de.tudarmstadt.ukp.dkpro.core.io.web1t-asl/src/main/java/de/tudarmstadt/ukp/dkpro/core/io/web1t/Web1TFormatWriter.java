@@ -26,16 +26,21 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
+
+@TypeCapability(
+        inputs={
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"})
 
 public class Web1TFormatWriter
 	extends JCasAnnotator_ImplBase
 {
 	/**
 	 * Types to generate n-grams from.
-	 * 
+	 *
 	 * Example: {@code Token.class.getName() + "/pos/PosValue"} for part-of-speech n-grams
 	 */
 	public static final String PARAM_INPUT_TYPES = "inputTypes";
@@ -58,7 +63,7 @@ public class Web1TFormatWriter
 
 	/**
 	 * Minimum n-gram length.
-	 * 
+	 *
 	 * Default: {@code 1}
 	 */
 	public static final String PARAM_MIN_NGRAM_LENGTH = "minNgramLength";
@@ -67,13 +72,13 @@ public class Web1TFormatWriter
 
 	/**
 	 * Maximum n-gram length.
-	 * 
+	 *
 	 * Default: {@code 3}
 	 */
 	public static final String PARAM_MAX_NGRAM_LENGTH = "maxNgramLength";
 	@ConfigurationParameter(name = PARAM_MAX_NGRAM_LENGTH, mandatory = false, defaultValue = "3")
 	private int maxNgramLength;
-	
+
 	/**
 	 * Create a lower case index.
 	 */
@@ -113,8 +118,8 @@ public class Web1TFormatWriter
 	public static final String PARAM_SPLIT_TRESHOLD = "splitFileTreshold";
 	@ConfigurationParameter(name = PARAM_SPLIT_TRESHOLD, mandatory = false, defaultValue = "1.0")
 	private float splitThreshold;
-	
-	
+
+
 	private Web1TConverter converter;
 
 	@Override
@@ -122,14 +127,14 @@ public class Web1TFormatWriter
 		throws ResourceInitializationException
 	{
 		super.initialize(context);
-		
+
 		try {
             this.converter = new Web1TConverter(outputPath);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-		
+
 		converter.setWriteIndexes(createIndexes);
 		converter.setSplitThreshold(splitThreshold);
 		converter.setMinFrequency(minFreq);
