@@ -27,6 +27,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
 
@@ -34,14 +35,19 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 
 /**
  * Reada the ACL anthology corpus and outputs CASes with plain text documents.
- * 
+ *
  * @author zesch
  *
  */
-public class AclAnthologyReader 
+
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
+public class AclAnthologyReader
     extends ResourceCollectionReaderBase
 {
-    
+
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      * If not specified, the default system encoding will be used.
@@ -60,7 +66,7 @@ public class AclAnthologyReader
             (char) 1378, (char) 1390, (char) 1426, (char) 1436,  (char) 1462,  (char) 1490, (char) 1525, (char) 1562,
             (char) 1697, (char) 1720, (char) 1802, (char) 1954,  (char) 8222,  (char) 8226, (char) 8228, (char) 8249,
             (char) 8250, (char) 9632, (char) 9642, (char) 10003, (char) 65279, (char) 65533 };
-    
+
     @Override
     public void getNext(CAS aCAS)
         throws IOException, CollectionException
@@ -71,7 +77,7 @@ public class AclAnthologyReader
         InputStream is = null;
         try {
             is = new BufferedInputStream(res.getInputStream());
-            
+
             String text = "";
             if ("auto".equals(encoding.toLowerCase())) {
                 CharsetDetector detector = new CharsetDetector();
@@ -86,13 +92,13 @@ public class AclAnthologyReader
             for (char c : replaceChars) {
                 cleanedText = cleanedText.replace(c, ' ');
             }
-            
+
             // replace hyphens
             cleanedText = replaceHyphens(cleanedText);
-            
+
             cleanedText = cleanedText.replaceAll("\\s{2,}", " ");
             cleanedText = cleanedText.replaceAll("\\r?\\n", " ");
-            
+
             aCAS.setDocumentText(cleanedText);
         }
         finally {
