@@ -35,6 +35,7 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.swabunga.spell.engine.SpellDictionary;
 import com.swabunga.spell.engine.SpellDictionaryHashMap;
@@ -49,6 +50,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * This annotator uses Jazzy for the decision whether a word is spelled correctly or not.
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly",
+                "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction"})
+
 public class SpellChecker
 	extends JCasAnnotator_ImplBase
 {
