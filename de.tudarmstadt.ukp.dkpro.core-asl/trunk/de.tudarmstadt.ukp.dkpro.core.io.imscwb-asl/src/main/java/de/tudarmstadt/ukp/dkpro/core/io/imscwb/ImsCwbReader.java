@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
@@ -31,6 +32,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -43,6 +45,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
+
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
 
 public class ImsCwbReader
     extends ResourceCollectionReaderBase
@@ -70,7 +80,7 @@ public class ImsCwbReader
 
 	/**
 	 * Read tokens and generate {@link Token} annotations.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
     public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
@@ -81,7 +91,7 @@ public class ImsCwbReader
 	 * Read part-of-speech tags and generate {@link POS} annotations or subclasses if a
 	 * {@link #PARAM_POS_TAG_SET tag set} or {@link #PARAM_POS_MAPPING_LOCATION mapping file} is
 	 * used.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -90,7 +100,7 @@ public class ImsCwbReader
 
 	/**
 	 * Read sentences.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
     public static final String PARAM_READ_SENTENCES = ComponentParameters.PARAM_READ_SENTENCE;
@@ -99,7 +109,7 @@ public class ImsCwbReader
 
 	/**
 	 * Read lemmas.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
@@ -113,16 +123,16 @@ public class ImsCwbReader
 	public static final String PARAM_GENERATE_NEW_IDS = "generateNewIds";
 	@ConfigurationParameter(name = PARAM_GENERATE_NEW_IDS, mandatory = true, defaultValue = "false")
 	private boolean generateNewIds;
-    
+
 	/**
 	 * If true, the unit text ID encoded in the corpus file is stored as the URI in the document
-	 * meta data. This setting has is not affected by {@link #PARAM_GENERATE_NEW_IDS} 
+	 * meta data. This setting has is not affected by {@link #PARAM_GENERATE_NEW_IDS}
 	 * (Default: false)
 	 */
 	public static final String PARAM_ID_IS_URL = "idIsUrl";
 	@ConfigurationParameter(name = PARAM_ID_IS_URL, mandatory = true, defaultValue = "false")
 	private boolean idIsUrl;
-	
+
 	/**
 	 * Replace non-XML characters with spaces.
 	 * (Default: true)
@@ -130,7 +140,7 @@ public class ImsCwbReader
 	public static final String PARAM_REPLACE_NON_XML = "replaceNonXml";
 	@ConfigurationParameter(name = PARAM_REPLACE_NON_XML, mandatory = true, defaultValue = "true")
 	private boolean replaceNonXml;
-	
+
     private Type tokenType;
     private Type lemmaType;
     private Type sentenceType;
@@ -144,14 +154,14 @@ public class ImsCwbReader
 	private int documentCount;
 	private int qualifier;
 	private Resource lastResource;
-	
+
     @Override
     public void initialize(UimaContext aContext)
     	throws ResourceInitializationException
     {
     	super.initialize(aContext);
     	wackyIterator = new TextIterable(getResources(), encoding);
-    	
+
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
@@ -160,7 +170,7 @@ public class ImsCwbReader
 		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
 		posMappingProvider.setOverride("tagger.tagset", posTagset);
-		
+
 		documentCount = 0;
 		qualifier = 0;
 		lastResource = null;
@@ -185,7 +195,7 @@ public class ImsCwbReader
         	qualifier = 0;
         	lastResource  = res;
         }
-        
+
 		String documentId;
 		if (generateNewIds) {
 			documentId = String.valueOf(documentCount);
@@ -198,12 +208,12 @@ public class ImsCwbReader
 		DocumentMetaData meta = DocumentMetaData.get(aCAS);
 		meta.setDocumentTitle(text.getDocumentTitle());
 		meta.setDocumentId(documentId);
-		
+
 		if (idIsUrl) {
 			meta.setDocumentBaseUri(null);
 			meta.setDocumentUri(text.getDocumentTitle());
 		}
-		
+
 		posMappingProvider.configure(aCAS);
 
         List<AnnotationFS> tokenAnnotations    = new ArrayList<AnnotationFS>();
@@ -218,7 +228,7 @@ public class ImsCwbReader
 
         StringBuilder sb = new StringBuilder();
         int offset = 0;
-        
+
         for (CorpusSentence sentence : text.getSentences()) {
             int savedOffset = offset;
             for (int i=0; i<sentence.getTokens().size(); i++) {
@@ -272,7 +282,7 @@ public class ImsCwbReader
         }
 
         String sText = sb.toString();
-                
+
         aCAS.setDocumentText(sText);
 
         // finally add the annotations to the CAS
@@ -299,20 +309,20 @@ public class ImsCwbReader
     {
         return new Progress[] { new ProgressImpl(completed, 0, "text") };
     }
-    
+
     private String doReplaceNonXml(String aString)
     {
     	if (!replaceNonXml) {
     		return aString;
     	}
-    	
+
     	char[] buf = aString.toCharArray();
     	int pos = XMLUtils.checkForNonXmlCharacters(buf, 0, buf.length, false);
-    	
+
     	if (pos == -1) {
     		return aString;
     	}
-    	
+
     	while (pos != -1) {
     		buf[pos] = ' ';
     		pos = XMLUtils.checkForNonXmlCharacters(buf, pos, buf.length - pos, false);
