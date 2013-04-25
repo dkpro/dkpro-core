@@ -28,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
@@ -40,6 +41,11 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
  * @author zesch
  *
  */
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 {
 
