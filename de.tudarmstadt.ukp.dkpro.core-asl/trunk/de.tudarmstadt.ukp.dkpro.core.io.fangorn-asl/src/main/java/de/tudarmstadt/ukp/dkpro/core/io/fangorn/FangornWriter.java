@@ -33,16 +33,22 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.uimafit.component.JCasConsumer_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import au.edu.unimelb.csse.ParseException;
 import au.edu.unimelb.csse.analyser.Node;
 import au.edu.unimelb.csse.analyser.NodeTreebankAnalyser;
 import au.edu.unimelb.csse.analyser.OverflowException;
 import au.edu.unimelb.csse.analyser.String2NodesParser;
-
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
+
+
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
 
 public class FangornWriter
 	extends JCasConsumer_ImplBase
@@ -52,7 +58,7 @@ public class FangornWriter
 	public static final String FIELD_DOCUMENT_ID = "documentId";
 	public static final String FIELD_BEGIN = "begin";
 	public static final String FIELD_END = "end";
-	
+
 	/**
 	 * Location to which the output is written.
 	 */
@@ -62,16 +68,16 @@ public class FangornWriter
 
 	private IndexWriter writer;
 	private NodeTreebankAnalyser analyser;
-	private String2NodesParser parser = new String2NodesParser();
+	private final String2NodesParser parser = new String2NodesParser();
 
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-		
+
 		analyser = new NodeTreebankAnalyser(false);
-		
+
 		try {
 			writer = new IndexWriter(outputFolder, analyser, true,
 					IndexWriter.MaxFieldLength.UNLIMITED);
@@ -80,13 +86,13 @@ public class FangornWriter
 			throw new ResourceInitializationException(e);
 		}
 	}
-	
+
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
 		DocumentMetaData meta = DocumentMetaData.get(aJCas);
-		
+
 		for (PennTree s : select(aJCas, PennTree.class)) {
 			Node root;
 			try {
