@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import java.io.IOException;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
@@ -26,6 +27,7 @@ import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.component.JCasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.factory.JCasFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -34,10 +36,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 /**
  * Simple reader that generates a CAS from a String. This can be useful in situations where a reader
  * is preferred over manually crafting a CAS using {@link JCasFactory#createJCas()}.
- * 
+ *
  * @author Erik-Lân Do Dinh
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        outputs={
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class StringReader
 	extends JCasCollectionReader_ImplBase
 {
@@ -94,13 +101,13 @@ public class StringReader
 		super.initialize(aContext);
 		isDone = false;
 	}
-	
+
 	@Override
 	public void getNext(JCas sJCas)
 		throws IOException
 	{
 		isDone = true;
-		
+
 		DocumentMetaData meta = DocumentMetaData.create(sJCas);
 		meta.setCollectionId(collectionId);
 		meta.setDocumentUri(documentUri);
