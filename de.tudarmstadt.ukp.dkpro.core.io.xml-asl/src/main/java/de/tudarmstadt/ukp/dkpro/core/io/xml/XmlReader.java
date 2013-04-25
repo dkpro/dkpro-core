@@ -38,12 +38,18 @@ import org.apache.uima.util.ProgressImpl;
 import org.codehaus.stax2.XMLStreamReader2;
 import org.uimafit.component.CasCollectionReader_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import com.ctc.wstx.stax.WstxInputFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
+
+@TypeCapability(
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field",
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
 
 public class XmlReader extends CasCollectionReader_ImplBase {
 
@@ -100,7 +106,7 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 	private static final String SUBSTITUTE_EXCEPTION = "substitute_error";
 
 	// mandatory, list of xml files to be readed in
-	private ArrayList<File> xmlFiles = new ArrayList<File>();
+	private final ArrayList<File> xmlFiles = new ArrayList<File>();
 
 	// Xml stream reader
 	private XMLStreamReader2 xmlReader;
