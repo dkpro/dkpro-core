@@ -32,6 +32,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
@@ -63,6 +64,12 @@ import de.tudarmstadt.ukp.wikipedia.util.templates.WikipediaTemplateInfo;
  *
  * @author Oliver Ferschke
  */
+
+@TypeCapability(
+    outputs={
+            "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
+
 public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 {
 
