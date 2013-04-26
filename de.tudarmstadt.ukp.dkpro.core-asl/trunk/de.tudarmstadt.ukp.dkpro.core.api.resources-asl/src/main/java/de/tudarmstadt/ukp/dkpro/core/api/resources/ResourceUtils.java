@@ -47,13 +47,18 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  */
 public class ResourceUtils
 {
+
+    private static final String XDG_RUNTIME_DIR_ENV_VAR = "XDG_RUNTIME_DIR";
+    private static final String DKPRO_HOME_ENV_VAR = "DKPRO_HOME";
+    private static final String USER_HOME_PROP = "user.home";
+
 	private static Map<String, File> urlFileCache;
 	private static Map<String, File> classpathFolderCache;
 
 	static {
 		urlFileCache = new HashMap<String, File>();
 		classpathFolderCache = new HashMap<String, File>();
-		
+
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
 			public void run()
@@ -74,7 +79,7 @@ public class ResourceUtils
 	/**
 	 * Make a given classpath location available as a folder. A temporary folder is created and
 	 * deleted upon a regular shutdown of the JVM.
-	 * 
+	 *
 	 * @param aClasspathBase
 	 *            a classpath location as used by
 	 *            {@link PathMatchingResourcePatternResolver#getResources(String)}
@@ -131,7 +136,7 @@ public class ResourceUtils
 			        		IOUtils.closeQuietly(is);
 			        		IOUtils.closeQuietly(os);
 			        	}
-			        	
+
 			        	// WORKAROUND: folders get written as files if inside jars
 			        	// delete files of size zero
 			        	if (target.length() == 0) {
@@ -139,12 +144,12 @@ public class ResourceUtils
 			        	}
 			        }
 		        }
-		        
+
 		        if (aCache) {
 		        	classpathFolderCache.put(aClasspathBase, folder);
 		        }
 			}
-			
+
 	        return folder;
 		}
 	}
@@ -155,7 +160,7 @@ public class ResourceUtils
 	 * file is remembered in a cache and if a file is requested for the same URL at a later time,
 	 * the same file is returned again. If the previously created file has been deleted meanwhile,
 	 * it is recreated from the URL.
-	 * 
+	 *
 	 * @param aUrl
 	 *            the URL.
 	 * @param aCache
@@ -176,7 +181,7 @@ public class ResourceUtils
 	 * file is remembered in a cache and if a file is requested for the same URL at a later time,
 	 * the same file is returned again. If the previously created file has been deleted meanwhile,
 	 * it is recreated from the URL.
-	 * 
+	 *
 	 * @param aUrl
 	 *            the URL.
 	 * @param aCache
@@ -213,9 +218,18 @@ public class ResourceUtils
 				}
 				String name = FilenameUtils.getBaseName(aUrl.getPath());
 
-				// Get a temporary file which will be deleted when the JVM shuts
-				// down.
-				file = File.createTempFile(name, "."+suffix);
+				String fileNamePrefix;
+
+                if (System.getenv(XDG_RUNTIME_DIR_ENV_VAR) != null) {
+                    fileNamePrefix = System.getenv(XDG_RUNTIME_DIR_ENV_VAR);
+                } else if (System.getenv(DKPRO_HOME_ENV_VAR) != null) {
+                    fileNamePrefix = System.getenv(DKPRO_HOME_ENV_VAR);
+                } else {
+                    fileNamePrefix = System.getProperty(USER_HOME_PROP);
+                }
+
+		        file = new File(fileNamePrefix,name+"."+suffix);
+
 				file.deleteOnExit();
 
 				// Now copy the file from the URL to the file.
@@ -238,7 +252,7 @@ public class ResourceUtils
 				}
 			}
 
-			return file;			
+			return file;
 		}
 	}
 
@@ -273,8 +287,8 @@ public class ResourceUtils
 		throws IOException
 	{
 		return resolveLocation(aLocation, null, null);
-	}	
-	
+	}
+
 	/**
 	 * Resolve a location (which can be many things) to an URL. If the location starts with
 	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
@@ -294,8 +308,8 @@ public class ResourceUtils
 		throws IOException
 	{
 		return resolveLocation(aLocation, null, aContext);
-	}	
-	
+	}
+
 	/**
 	 * Resolve a location (which can be many things) to an URL. If the location starts with
 	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
@@ -322,7 +336,7 @@ public class ResourceUtils
 		}
 		return resolveLocation(aLocation, cl, aContext);
 	}
-	
+
 	/**
 	 * Resolve a location (which can be many things) to an URL. If the location starts with
 	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
@@ -348,7 +362,7 @@ public class ResourceUtils
 		if (classLoader == null) {
 			classLoader = ResourceUtils.class.getClassLoader();
 		}
-		
+
 		// If a location starts with "classpath:"
 		String prefixClasspath = "classpath:";
 		if (aLocation.startsWith(prefixClasspath)) {
@@ -357,7 +371,7 @@ public class ResourceUtils
 				cpLocation = cpLocation.substring(1);
 			}
 			URL url = classLoader.getResource(cpLocation);
-			
+
 			if (url == null) {
 				throw new FileNotFoundException("No file found at [" + aLocation + "]");
 			}
