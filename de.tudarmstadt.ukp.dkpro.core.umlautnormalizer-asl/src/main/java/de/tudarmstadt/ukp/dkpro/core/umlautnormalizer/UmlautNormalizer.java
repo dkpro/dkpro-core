@@ -27,6 +27,7 @@ import java.util.TreeMap;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -40,16 +41,23 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
 /**
  * Takes a text and checks for umlauts written as "ae", "oe", or "ue"
  * and normalizes them if they really are umlauts depending on a frequency model.
- * 
+ *
  * @author zesch
  *
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+
 public class UmlautNormalizer
     extends Normalizer_ImplBase
 {
-    
+
     private static final int MIN_FREQ_THRESHOLD = 100;
-    
+
     @SuppressWarnings("serial")
     public final static Map<String,String> replacementMap = new HashMap<String,String>() {{
         put("ae", "ä");
@@ -59,7 +67,7 @@ public class UmlautNormalizer
         put("Oe", "Ö");
         put("Ue", "Ü");
     }};
-    
+
     /* (non-Javadoc)
      * @see de.tudarmstadt.ukp.experiments.normalization.Normalizer_ImplBase#createSofaChangesMap(org.apache.uima.jcas.JCas)
      */
@@ -70,7 +78,7 @@ public class UmlautNormalizer
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             String tokenString = token.getCoveredText();
             tokenPosition++;
-            
+
             List<SofaChangeAnnotation> tokenChangeList = new ArrayList<SofaChangeAnnotation>();
             for (Map.Entry<String, String> entry : replacementMap.entrySet()) {
                 int currentIndex = 0;
@@ -84,7 +92,7 @@ public class UmlautNormalizer
                     sca.setEnd(token.getBegin() + index + entry.getKey().length());
                     sca.setOperation(OP_REPLACE);
                     sca.setValue(entry.getValue());
-                    
+
                     tokenChangeList.add(sca);
                 }
             }
@@ -93,7 +101,7 @@ public class UmlautNormalizer
 
         return changesMap;
     }
-    
+
     /* (non-Javadoc)
      * @see de.tudarmstadt.ukp.experiments.normalization.Normalizer_ImplBase#createTokenReplaceMap(org.apache.uima.jcas.JCas, org.annolab.core.util.AlignedString)
      */
@@ -106,9 +114,9 @@ public class UmlautNormalizer
         int i=0;
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             i++;
-            
+
             String origToken = token.getCoveredText();
-            
+
             Interval resolved = as.inverseResolve(new ImmutableInterval(token.getBegin(), token.getEnd()));
             String changedToken = as.get(resolved.getStart(), resolved.getEnd());
 
@@ -116,7 +124,7 @@ public class UmlautNormalizer
                 tokenReplaceMap.put(i, false);
                 continue;
             }
-            
+
             // check for frequency of original and changed token
             try {
                 long freqOrigToken    = provider.getFrequency(origToken);
@@ -124,10 +132,10 @@ public class UmlautNormalizer
 
                 System.out.println(origToken + " - " + freqOrigToken);
                 System.out.println(changedToken + " - " + freqChangedToken);
-                
+
                 // increase by one as cheap check against division by zero
                 freqChangedToken++;
-                
+
                 // if absolut counts are too low, do not change
                 if (freqOrigToken < MIN_FREQ_THRESHOLD && freqChangedToken < MIN_FREQ_THRESHOLD) {
                     tokenReplaceMap.put(i, false);
@@ -145,7 +153,7 @@ public class UmlautNormalizer
                 throw new AnalysisEngineProcessException(e);
             }
         }
-        
+
         return tokenReplaceMap;
     }
 }
