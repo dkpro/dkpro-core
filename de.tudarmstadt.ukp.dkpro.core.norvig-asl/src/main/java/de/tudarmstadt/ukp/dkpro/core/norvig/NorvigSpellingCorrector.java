@@ -25,6 +25,7 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -38,6 +39,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
  * @author Richard Eckart de Castilho
  * @author Delphine Bernhard
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
+
 public class NorvigSpellingCorrector
 	extends JCasAnnotator_ImplBase
 {
