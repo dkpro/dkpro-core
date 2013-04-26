@@ -27,6 +27,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -35,18 +36,24 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
+
 public class TokenTrimmer
 	extends JCasAnnotator_ImplBase
 {
 	/**
-	 * List of prefixes to remove. 
+	 * List of prefixes to remove.
 	 */
 	public static final String PARAM_PREFIXES = "prefixes";
 	@ConfigurationParameter(name=PARAM_PREFIXES, mandatory=true)
 	private String[] prefixes;
 
 	/**
-	 * List of suffixes to remove. 
+	 * List of suffixes to remove.
 	 */
 	public static final String PARAM_SUFFIXES = "suffixes";
 	@ConfigurationParameter(name=PARAM_SUFFIXES, mandatory=true)
