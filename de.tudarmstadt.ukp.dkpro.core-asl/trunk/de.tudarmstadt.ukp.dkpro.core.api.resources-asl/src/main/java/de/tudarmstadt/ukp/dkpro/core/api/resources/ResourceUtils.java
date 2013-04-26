@@ -52,368 +52,382 @@ public class ResourceUtils
     private static final String DKPRO_HOME_ENV_VAR = "DKPRO_HOME";
     private static final String USER_HOME_PROP = "user.home";
 
-	private static Map<String, File> urlFileCache;
-	private static Map<String, File> classpathFolderCache;
+    private static Map<String, File> urlFileCache;
+    private static Map<String, File> classpathFolderCache;
 
-	static {
-		urlFileCache = new HashMap<String, File>();
-		classpathFolderCache = new HashMap<String, File>();
+    static {
+        urlFileCache = new HashMap<String, File>();
+        classpathFolderCache = new HashMap<String, File>();
 
-		Runtime.getRuntime().addShutdownHook(new Thread() {
-			@Override
-			public void run()
-			{
-				if (classpathFolderCache != null) {
-					synchronized (classpathFolderCache) {
-						for (Entry<String, File> e : classpathFolderCache.entrySet()) {
-							if (e.getValue().isDirectory()) {
-								FileUtils.deleteQuietly(e.getValue());
-							}
-						}
-					}
-				}
-			}
-		});
-	}
+        Runtime.getRuntime().addShutdownHook(new Thread()
+        {
+            @Override
+            public void run()
+            {
+                if (classpathFolderCache != null) {
+                    synchronized (classpathFolderCache) {
+                        for (Entry<String, File> e : classpathFolderCache.entrySet()) {
+                            if (e.getValue().isDirectory()) {
+                                FileUtils.deleteQuietly(e.getValue());
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
 
-	/**
-	 * Make a given classpath location available as a folder. A temporary folder is created and
-	 * deleted upon a regular shutdown of the JVM.
-	 *
-	 * @param aClasspathBase
-	 *            a classpath location as used by
-	 *            {@link PathMatchingResourcePatternResolver#getResources(String)}
-	 * @param aCache
-	 *            use the cache or not.
-	 * @return
-	 * @see {@link PathMatchingResourcePatternResolver}
-	 */
-	public static File getClasspathAsFolder(String aClasspathBase, boolean aCache)
-		throws IOException
-	{
-		synchronized (classpathFolderCache) {
-			File folder = classpathFolderCache.get(aClasspathBase);
+    /**
+     * Make a given classpath location available as a folder. A temporary folder is created and
+     * deleted upon a regular shutdown of the JVM.
+     *
+     * @param aClasspathBase
+     *            a classpath location as used by
+     *            {@link PathMatchingResourcePatternResolver#getResources(String)}
+     * @param aCache
+     *            use the cache or not.
+     * @return
+     * @see {@link PathMatchingResourcePatternResolver}
+     */
+    public static File getClasspathAsFolder(String aClasspathBase, boolean aCache)
+        throws IOException
+    {
+        synchronized (classpathFolderCache) {
+            File folder = classpathFolderCache.get(aClasspathBase);
 
-	        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-			if (!aCache || (folder == null) || !folder.exists()) {
-				folder = File.createTempFile("dkpro-package", "");
-				folder.delete();
-				FileUtils.forceMkdir(folder);
+            if (!aCache || (folder == null) || !folder.exists()) {
 
-		        Resource[] roots = resolver.getResources(aClasspathBase);
-		        for (Resource root : roots) {
-		        	String base = root.getURL().toString();
-		        	Resource[] resources = resolver.getResources(base+"/**/*");
-			        for (Resource resource : resources) {
-			        	if (!resource.isReadable()) {
-			        		// This is true for folders/packages
-			        		continue;
-			        	}
+                folder = createTemporaryFile("dkpro-package", "");
+                folder.delete();
+                FileUtils.forceMkdir(folder);
 
-			        	// Relativize
-			        	String res = resource.getURL().toString();
-			        	if (!res.startsWith(base)) {
-			        		throw new IOException("Resource location does not start with base location");
-			        	}
-		        		String relative = resource.getURL().toString().substring(base.length());
+                Resource[] roots = resolver.getResources(aClasspathBase);
+                for (Resource root : roots) {
+                    String base = root.getURL().toString();
+                    Resource[] resources = resolver.getResources(base + "/**/*");
+                    for (Resource resource : resources) {
+                        if (!resource.isReadable()) {
+                            // This is true for folders/packages
+                            continue;
+                        }
 
-		        		// Make sure the target folder exists
-		        		File target = new File(folder, relative).getAbsoluteFile();
-		        		if (target.getParentFile() != null) {
-		        			FileUtils.forceMkdir(target.getParentFile());
-		        		}
+                        // Relativize
+                        String res = resource.getURL().toString();
+                        if (!res.startsWith(base)) {
+                            throw new IOException(
+                                    "Resource location does not start with base location");
+                        }
+                        String relative = resource.getURL().toString().substring(base.length());
 
-		        		// Copy data
-			        	InputStream is = null;
-			        	OutputStream os = null;
-			        	try {
-			        		is = resource.getInputStream();
-			        		os = new FileOutputStream(target);
-			        		IOUtils.copyLarge(is, os);
-			        	}
-			        	finally {
-			        		IOUtils.closeQuietly(is);
-			        		IOUtils.closeQuietly(os);
-			        	}
+                        // Make sure the target folder exists
+                        File target = new File(folder, relative).getAbsoluteFile();
+                        if (target.getParentFile() != null) {
+                            FileUtils.forceMkdir(target.getParentFile());
+                        }
 
-			        	// WORKAROUND: folders get written as files if inside jars
-			        	// delete files of size zero
-			        	if (target.length() == 0) {
-			        	    FileUtils.deleteQuietly(target);
-			        	}
-			        }
-		        }
+                        // Copy data
+                        InputStream is = null;
+                        OutputStream os = null;
+                        try {
+                            is = resource.getInputStream();
+                            os = new FileOutputStream(target);
+                            IOUtils.copyLarge(is, os);
+                        }
+                        finally {
+                            IOUtils.closeQuietly(is);
+                            IOUtils.closeQuietly(os);
+                        }
 
-		        if (aCache) {
-		        	classpathFolderCache.put(aClasspathBase, folder);
-		        }
-			}
-
-	        return folder;
-		}
-	}
-
-	/**
-	 * Make the given URL available as a file. A temporary file is created and deleted upon a
-	 * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
-	 * file is remembered in a cache and if a file is requested for the same URL at a later time,
-	 * the same file is returned again. If the previously created file has been deleted meanwhile,
-	 * it is recreated from the URL.
-	 *
-	 * @param aUrl
-	 *            the URL.
-	 * @param aCache
-	 *            use the cache or not.
-	 * @return a file created from the given URL.
-	 * @throws IOException
-	 *             if the URL cannot be accessed to (re)create the file.
-	 */
-	public static File getUrlAsFile(URL aUrl, boolean aCache)
-		throws IOException
-	{
-		return getUrlAsFile(aUrl, aCache, false);
-	}
-
-	/**
-	 * Make the given URL available as a file. A temporary file is created and deleted upon a
-	 * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
-	 * file is remembered in a cache and if a file is requested for the same URL at a later time,
-	 * the same file is returned again. If the previously created file has been deleted meanwhile,
-	 * it is recreated from the URL.
-	 *
-	 * @param aUrl
-	 *            the URL.
-	 * @param aCache
-	 *            use the cache or not.
-	 * @param aForceTemp
-	 *            always create a temporary file, even if the URL is already a file.
-	 * @return a file created from the given URL.
-	 * @throws IOException
-	 *             if the URL cannot be accessed to (re)create the file.
-	 */
-	public static synchronized File getUrlAsFile(URL aUrl, boolean aCache, boolean aForceTemp)
-		throws IOException
-	{
-		// If the URL already points to a file, there is not really much to do.
-		if (!aForceTemp && "file".equalsIgnoreCase(aUrl.getProtocol())) {
-			try {
-				return new File(aUrl.toURI());
-			}
-			catch (URISyntaxException e) {
-				throw new IOException(e);
-			}
-		}
-
-		synchronized (urlFileCache) {
-			// Lets see if we already have a file for this URL in our cache. Maybe
-			// the file has been deleted meanwhile, so we also check if the file
-			// actually still exists on disk.
-			File file = urlFileCache.get(aUrl.toString());
-			if (!aCache || (file == null) || !file.exists()) {
-				// Create a temporary file and try to preserve the file extension
-				String suffix = FilenameUtils.getExtension(aUrl.getPath());
-				if (suffix.length() == 0) {
-					suffix = "temp";
-				}
-				String name = FilenameUtils.getBaseName(aUrl.getPath());
-
-				String fileNamePrefix;
-
-                if (System.getenv(XDG_RUNTIME_DIR_ENV_VAR) != null) {
-                    fileNamePrefix = System.getenv(XDG_RUNTIME_DIR_ENV_VAR);
-                } else if (System.getenv(DKPRO_HOME_ENV_VAR) != null) {
-                    fileNamePrefix = System.getenv(DKPRO_HOME_ENV_VAR);
-                } else {
-                    fileNamePrefix = System.getProperty(USER_HOME_PROP);
+                        // WORKAROUND: folders get written as files if inside jars
+                        // delete files of size zero
+                        if (target.length() == 0) {
+                            FileUtils.deleteQuietly(target);
+                        }
+                    }
                 }
 
-		        file = new File(fileNamePrefix,name+"."+suffix);
+                if (aCache) {
+                    classpathFolderCache.put(aClasspathBase, folder);
+                }
+            }
 
-				file.deleteOnExit();
+            return folder;
+        }
+    }
 
-				// Now copy the file from the URL to the file.
+    /**
+     * Make the given URL available as a file. A temporary file is created and deleted upon a
+     * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
+     * file is remembered in a cache and if a file is requested for the same URL at a later time,
+     * the same file is returned again. If the previously created file has been deleted meanwhile,
+     * it is recreated from the URL.
+     *
+     * @param aUrl
+     *            the URL.
+     * @param aCache
+     *            use the cache or not.
+     * @return a file created from the given URL.
+     * @throws IOException
+     *             if the URL cannot be accessed to (re)create the file.
+     */
+    public static File getUrlAsFile(URL aUrl, boolean aCache)
+        throws IOException
+    {
+        return getUrlAsFile(aUrl, aCache, false);
+    }
 
-				InputStream is = null;
-				OutputStream os = null;
-				try {
-					is = aUrl.openStream();
-					os = new FileOutputStream(file);
-					copy(is, os);
-				}
-				finally {
-					closeQuietly(is);
-					closeQuietly(os);
-				}
+    /**
+     * Make the given URL available as a file. A temporary file is created and deleted upon a
+     * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
+     * file is remembered in a cache and if a file is requested for the same URL at a later time,
+     * the same file is returned again. If the previously created file has been deleted meanwhile,
+     * it is recreated from the URL.
+     *
+     * @param aUrl
+     *            the URL.
+     * @param aCache
+     *            use the cache or not.
+     * @param aForceTemp
+     *            always create a temporary file, even if the URL is already a file.
+     * @return a file created from the given URL.
+     * @throws IOException
+     *             if the URL cannot be accessed to (re)create the file.
+     */
+    public static synchronized File getUrlAsFile(URL aUrl, boolean aCache, boolean aForceTemp)
+        throws IOException
+    {
+        // If the URL already points to a file, there is not really much to do.
+        if (!aForceTemp && "file".equalsIgnoreCase(aUrl.getProtocol())) {
+            try {
+                return new File(aUrl.toURI());
+            }
+            catch (URISyntaxException e) {
+                throw new IOException(e);
+            }
+        }
 
-				// Remember the file
-				if (aCache) {
-					urlFileCache.put(aUrl.toString(), file);
-				}
-			}
+        synchronized (urlFileCache) {
+            // Lets see if we already have a file for this URL in our cache. Maybe
+            // the file has been deleted meanwhile, so we also check if the file
+            // actually still exists on disk.
+            File file = urlFileCache.get(aUrl.toString());
+            if (!aCache || (file == null) || !file.exists()) {
+                // Create a temporary file and try to preserve the file extension
+                String suffix = FilenameUtils.getExtension(aUrl.getPath());
+                if (suffix.length() == 0) {
+                    suffix = "temp";
+                }
 
-			return file;
-		}
-	}
+                String name = FilenameUtils.getBaseName(aUrl.getPath());
 
+                file = createTemporaryFile(name, suffix);
+                file.deleteOnExit();
 
-	/**
-	 * @param is An {@link InputStream}.
-	 * @param filename The filename this stream was created from.
-	 * @return A resolved {@link InputStream}
-	 * @throws IOException
-	 *             if something went wrong during resolving the input stream
-	 */
-	public static InputStream resolveCompressedInputStream(InputStream is, String filename)
-		throws IOException
-	{
-		return CompressionUtils.getInputStream(filename, is);
-	}
+                // Now copy the file from the URL to the file.
 
-	/**
-	 * Resolve a location (which can be many things) to an URL. If the location starts with
-	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
-	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
-	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
-	 * the target may not actually exist.
-	 *
-	 * @param aLocation
-	 *            a location (classpath, URL, file or UIMA resource location).
-	 * @return the resolved URL.
-	 * @throws IOException
-	 *             if the target could not be found.
-	 */
-	public static URL resolveLocation(String aLocation)
-		throws IOException
-	{
-		return resolveLocation(aLocation, null, null);
-	}
+                InputStream is = null;
+                OutputStream os = null;
+                try {
+                    is = aUrl.openStream();
+                    os = new FileOutputStream(file);
+                    copy(is, os);
+                }
+                finally {
+                    closeQuietly(is);
+                    closeQuietly(os);
+                }
 
-	/**
-	 * Resolve a location (which can be many things) to an URL. If the location starts with
-	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
-	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
-	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
-	 * the target may not actually exist.
-	 *
-	 * @param aLocation
-	 *            a location (classpath, URL, file or UIMA resource location).
-	 * @param aContext
-	 *            a UIMA context.
-	 * @return the resolved URL.
-	 * @throws IOException
-	 *             if the target could not be found.
-	 */
-	public static URL resolveLocation(String aLocation, UimaContext aContext)
-		throws IOException
-	{
-		return resolveLocation(aLocation, null, aContext);
-	}
+                // Remember the file
+                if (aCache) {
+                    urlFileCache.put(aUrl.toString(), file);
+                }
+            }
 
-	/**
-	 * Resolve a location (which can be many things) to an URL. If the location starts with
-	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
-	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
-	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
-	 * the target may not actually exist.
-	 *
-	 * @param aLocation
-	 *            a location (classpath, URL, file or UIMA resource location).
-	 * @param aCaller
-	 *            the instance calling this method (for classpath loading).
-	 * @param aContext
-	 *            a UIMA context.
-	 * @return the resolved URL.
-	 * @throws IOException
-	 *             if the target could not be found.
-	 */
-	public static URL resolveLocation(String aLocation, Object aCaller, UimaContext aContext)
-		throws IOException
-	{
-		ClassLoader cl = null;
-		if (aCaller != null) {
-			cl = aCaller.getClass().getClassLoader();
-		}
-		return resolveLocation(aLocation, cl, aContext);
-	}
+            return file;
+        }
+    }
 
-	/**
-	 * Resolve a location (which can be many things) to an URL. If the location starts with
-	 * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
-	 * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
-	 * location, an URL is only returned if the target exists. If it is an URL, it is possible that
-	 * the target may not actually exist.
-	 *
-	 * @param aLocation
-	 *            a location (classpath, URL, file or UIMA resource location).
-	 * @param aClassLoader
-	 *            the class loader to be used for classpath URLs.
-	 * @param aContext
-	 *            a UIMA context.
-	 * @return the resolved URL.
-	 * @throws IOException
-	 *             if the target could not be found.
-	 */
-	public static URL resolveLocation(String aLocation, ClassLoader aClassLoader, UimaContext aContext)
-		throws IOException
-	{
-		// if we have a caller, we use it's classloader
-		ClassLoader classLoader = aClassLoader;
-		if (classLoader == null) {
-			classLoader = ResourceUtils.class.getClassLoader();
-		}
+    /**
+     * @param is
+     *            An {@link InputStream}.
+     * @param filename
+     *            The filename this stream was created from.
+     * @return A resolved {@link InputStream}
+     * @throws IOException
+     *             if something went wrong during resolving the input stream
+     */
+    public static InputStream resolveCompressedInputStream(InputStream is, String filename)
+        throws IOException
+    {
+        return CompressionUtils.getInputStream(filename, is);
+    }
 
-		// If a location starts with "classpath:"
-		String prefixClasspath = "classpath:";
-		if (aLocation.startsWith(prefixClasspath)) {
-			String cpLocation = aLocation.substring(prefixClasspath.length());
-			if (cpLocation.startsWith("/")) {
-				cpLocation = cpLocation.substring(1);
-			}
-			URL url = classLoader.getResource(cpLocation);
+    /**
+     * Resolve a location (which can be many things) to an URL. If the location starts with
+     * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+     * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+     * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+     * the target may not actually exist.
+     *
+     * @param aLocation
+     *            a location (classpath, URL, file or UIMA resource location).
+     * @return the resolved URL.
+     * @throws IOException
+     *             if the target could not be found.
+     */
+    public static URL resolveLocation(String aLocation)
+        throws IOException
+    {
+        return resolveLocation(aLocation, null, null);
+    }
 
-			if (url == null) {
-				throw new FileNotFoundException("No file found at [" + aLocation + "]");
-			}
-			return url;
-		}
+    /**
+     * Resolve a location (which can be many things) to an URL. If the location starts with
+     * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+     * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+     * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+     * the target may not actually exist.
+     *
+     * @param aLocation
+     *            a location (classpath, URL, file or UIMA resource location).
+     * @param aContext
+     *            a UIMA context.
+     * @return the resolved URL.
+     * @throws IOException
+     *             if the target could not be found.
+     */
+    public static URL resolveLocation(String aLocation, UimaContext aContext)
+        throws IOException
+    {
+        return resolveLocation(aLocation, null, aContext);
+    }
 
-		// If it is a true well-formed URL, we assume that it is just that.
-		try {
-			return new URL(aLocation);
-		}
-		catch (MalformedURLException e) {
-			// Ok - was not an URL.
-		}
+    /**
+     * Resolve a location (which can be many things) to an URL. If the location starts with
+     * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+     * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+     * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+     * the target may not actually exist.
+     *
+     * @param aLocation
+     *            a location (classpath, URL, file or UIMA resource location).
+     * @param aCaller
+     *            the instance calling this method (for classpath loading).
+     * @param aContext
+     *            a UIMA context.
+     * @return the resolved URL.
+     * @throws IOException
+     *             if the target could not be found.
+     */
+    public static URL resolveLocation(String aLocation, Object aCaller, UimaContext aContext)
+        throws IOException
+    {
+        ClassLoader cl = null;
+        if (aCaller != null) {
+            cl = aCaller.getClass().getClassLoader();
+        }
+        return resolveLocation(aLocation, cl, aContext);
+    }
 
-		// Otherwise we try if it is a file.
-		File file = new File(aLocation);
-		if (file.exists()) {
-			return file.toURI().toURL();
-		}
+    /**
+     * Resolve a location (which can be many things) to an URL. If the location starts with
+     * {@code classpath:} the location is interpreted as a classpath location. Otherwise it is tried
+     * as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
+     * location, an URL is only returned if the target exists. If it is an URL, it is possible that
+     * the target may not actually exist.
+     *
+     * @param aLocation
+     *            a location (classpath, URL, file or UIMA resource location).
+     * @param aClassLoader
+     *            the class loader to be used for classpath URLs.
+     * @param aContext
+     *            a UIMA context.
+     * @return the resolved URL.
+     * @throws IOException
+     *             if the target could not be found.
+     */
+    public static URL resolveLocation(String aLocation, ClassLoader aClassLoader,
+            UimaContext aContext)
+        throws IOException
+    {
+        // if we have a caller, we use it's classloader
+        ClassLoader classLoader = aClassLoader;
+        if (classLoader == null) {
+            classLoader = ResourceUtils.class.getClassLoader();
+        }
 
-		// Otherwise we look into the context (if there was one)
-		if (aContext != null) {
-			Exception ex = null;
-			URL url = null;
-			try {
-				url = aContext.getResourceURL(aLocation);
-			}
-			catch (ResourceAccessException e) {
-				ex = e;
-			}
-			if (url == null) {
-				FileNotFoundException e = new FileNotFoundException("No file found at ["
-						+ aLocation + "]");
-				if (ex != null) {
-					e.initCause(ex);
-				}
-				throw e;
-			}
-			return url;
-		}
+        // If a location starts with "classpath:"
+        String prefixClasspath = "classpath:";
+        if (aLocation.startsWith(prefixClasspath)) {
+            String cpLocation = aLocation.substring(prefixClasspath.length());
+            if (cpLocation.startsWith("/")) {
+                cpLocation = cpLocation.substring(1);
+            }
+            URL url = classLoader.getResource(cpLocation);
 
-		// Otherwise bail out
-		throw new FileNotFoundException("No file found at [" + aLocation + "]");
-	}
+            if (url == null) {
+                throw new FileNotFoundException("No file found at [" + aLocation + "]");
+            }
+            return url;
+        }
+
+        // If it is a true well-formed URL, we assume that it is just that.
+        try {
+            return new URL(aLocation);
+        }
+        catch (MalformedURLException e) {
+            // Ok - was not an URL.
+        }
+
+        // Otherwise we try if it is a file.
+        File file = new File(aLocation);
+        if (file.exists()) {
+            return file.toURI().toURL();
+        }
+
+        // Otherwise we look into the context (if there was one)
+        if (aContext != null) {
+            Exception ex = null;
+            URL url = null;
+            try {
+                url = aContext.getResourceURL(aLocation);
+            }
+            catch (ResourceAccessException e) {
+                ex = e;
+            }
+            if (url == null) {
+                FileNotFoundException e = new FileNotFoundException("No file found at ["
+                        + aLocation + "]");
+                if (ex != null) {
+                    e.initCause(ex);
+                }
+                throw e;
+            }
+            return url;
+        }
+
+        // Otherwise bail out
+        throw new FileNotFoundException("No file found at [" + aLocation + "]");
+    }
+
+    private static File createTemporaryFile(String aName, String aSuffix)
+    {
+
+        String fileNamePrefix;
+
+        if (System.getenv(XDG_RUNTIME_DIR_ENV_VAR) != null) {
+            fileNamePrefix = System.getenv(XDG_RUNTIME_DIR_ENV_VAR);
+        }
+        else if (System.getenv(DKPRO_HOME_ENV_VAR) != null) {
+            fileNamePrefix = System.getenv(DKPRO_HOME_ENV_VAR);
+        }
+        else {
+            fileNamePrefix = System.getProperty(USER_HOME_PROP);
+        }
+
+        return new File(fileNamePrefix, aName + "." + aSuffix);
+    }
+
 }
