@@ -38,6 +38,7 @@ import org.apache.uima.cas.text.AnnotationIndex;
 import org.apache.uima.jcas.JCas;
 import org.tartarus.snowball.SnowballProgram;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathAnnotatorBase;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
@@ -57,6 +58,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
+
+@TypeCapability(
+        outputs={
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
+
 public class SnowballStemmer
 	extends FeaturePathAnnotatorBase
 {
