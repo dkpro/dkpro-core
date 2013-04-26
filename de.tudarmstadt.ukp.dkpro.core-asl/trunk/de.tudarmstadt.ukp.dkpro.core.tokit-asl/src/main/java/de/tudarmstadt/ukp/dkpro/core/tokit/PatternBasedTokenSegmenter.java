@@ -30,6 +30,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -42,6 +43,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
+
 public class PatternBasedTokenSegmenter
 	extends JCasAnnotator_ImplBase
 {
@@ -50,7 +58,7 @@ public class PatternBasedTokenSegmenter
 
 	/**
 	 * Wether to remove the original token.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
@@ -59,7 +67,7 @@ public class PatternBasedTokenSegmenter
 
 	/**
 	 * A list of regular expressions, prefixed with {@link #INCLUDE_PREFIX} or
-	 * {@link #EXCLUDE_PREFIX}. If neither of the prefixes is used, {@link #EXCLUDE_PREFIX} is 
+	 * {@link #EXCLUDE_PREFIX}. If neither of the prefixes is used, {@link #EXCLUDE_PREFIX} is
 	 * assumed.
 	 */
 	public static final String PARAM_PATTERNS = "patterns";
