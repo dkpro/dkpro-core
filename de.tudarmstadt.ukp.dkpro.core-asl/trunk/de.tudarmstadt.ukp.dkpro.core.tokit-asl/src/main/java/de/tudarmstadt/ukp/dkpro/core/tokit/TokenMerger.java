@@ -37,7 +37,9 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.CasUtil;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -50,39 +52,48 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @author Richard Eckart de Castilho
  */
+
+@TypeCapability(
+        inputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"},
+        outputs={
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
+
 public class TokenMerger
 	extends JCasAnnotator_ImplBase
 {
 	public static enum LemmaMode {
 		JOIN, REMOVE, LEAVE
 	}
-	
+
 	/**
 	 * Annotation type for which tokens should be merged.
 	 */
 	public static final String PARAM_ANNOTATION_TYPE = "annotationType";
 	@ConfigurationParameter(name=PARAM_ANNOTATION_TYPE, mandatory=true)
 	private String annotationType;
-	
+
 	/**
-	 * A constraint on the annotations that should be considered in form of a JXPath statement. 
+	 * A constraint on the annotations that should be considered in form of a JXPath statement.
 	 * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
 	 * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
-	 * part of a location named entity. 
+	 * part of a location named entity.
 	 */
 	public static final String PARAM_CONSTRAINT = "constraint";
 	@ConfigurationParameter(name=PARAM_CONSTRAINT, mandatory=false)
 	private String constraint;
 
 	/**
-	 * Configure what should happen to the lemma of the merged tokens. It is possible to JOIN 
+	 * Configure what should happen to the lemma of the merged tokens. It is possible to JOIN
 	 * the lemmata to a single lemma (space separated), to REMOVE the lemma or LEAVE the lemma
 	 * of the first token as-is.
 	 */
 	public static final String PARAM_LEMMA_MODE = "lemmaMode";
 	@ConfigurationParameter(name=PARAM_LEMMA_MODE, mandatory=true, defaultValue="JOIN")
 	private LemmaMode lemmaMode;
-	
+
 	/**
 	 * Set a new POS value for the new merged token. This is the actual tag set value and is subject
 	 * to tagset mapping. For example when merging tokens for named entities, the new POS value
@@ -131,17 +142,17 @@ public class TokenMerger
 		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 	}
-	
+
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
 		CAS cas = aJCas.getCas();
-		
+
 		if (posValue != null) {
 			mappingProvider.configure(cas);
 		}
-		
+
 		Collection<Annotation> toRemove = new ArrayList<Annotation>();
 		for (AnnotationFS cover : CasUtil.select(cas, CasUtil.getAnnotationType(cas, annotationType))) {
 			List<Token> covered = selectCovered(Token.class, cover);
@@ -156,42 +167,42 @@ public class TokenMerger
 					continue;
 				}
 			}
-			
+
 			Iterator<Token> i = covered.iterator();
-			
+
 			// Extend first token
 			Token token = i.next();
 			token.setEnd(covered.get(covered.size() - 1).getEnd());
-			
+
 			// Optionally update the POS value
 			if (posValue != null) {
 				updatePos(token, toRemove);
 			}
-			
+
 			// Record lemma - may be needed for join later
 			List<String> lemmata = new ArrayList<String>();
 			if (token.getLemma() != null) {
 				lemmata.add(token.getLemma().getValue());
 			}
-			
+
 			// Mark the rest for deletion - record lemmata if desired for later join
 			while (i.hasNext()) {
 				Token t = i.next();
-				
+
 				Lemma lemma = t.getLemma();
 				if (lemma != null) {
 					lemmata.add(lemma.getValue());
 					toRemove.add(lemma);
 				}
-				
+
 				POS pos = t.getPos();
 				if (pos != null) {
 					toRemove.add(pos);
 				}
-				
+
 				toRemove.add(t);
 			}
-			
+
 			// Join lemmata if desired
 			if (lemmaMode == LemmaMode.JOIN) {
 				Lemma lemma = token.getLemma();
@@ -215,20 +226,20 @@ public class TokenMerger
 					toRemove.add(lemma);
 				}
 			}
-			
+
 			// Update offsets for lemma
 			if (token.getLemma() != null) {
 				token.getLemma().setBegin(token.getBegin());
 				token.getLemma().setEnd(token.getEnd());
 			}
 		}
-		
+
 		// Remove tokens no longer needed
 		for (Annotation t : toRemove) {
 			t.removeFromIndexes();
 		}
 	}
-	
+
 	private void updatePos(Token aToken, Collection<Annotation> aToRemove)
 	{
 		// Determine the mapped type
@@ -246,7 +257,7 @@ public class TokenMerger
 			aToRemove.add(pos);
 			pos = null;
 		}
-		
+
 		if (pos == null) {
 			// Create correct annotation
 			pos = (POS) aToken.getCAS().createAnnotation(type, aToken.getBegin(),
@@ -258,9 +269,9 @@ public class TokenMerger
 			pos.setBegin(aToken.getBegin());
 			pos.setEnd(aToken.getEnd());
 		}
-		
+
 		// Update the POS value
 		pos.setPosValue(posValue);
-		aToken.setPos(pos);		
+		aToken.setPos(pos);
 	}
 }
