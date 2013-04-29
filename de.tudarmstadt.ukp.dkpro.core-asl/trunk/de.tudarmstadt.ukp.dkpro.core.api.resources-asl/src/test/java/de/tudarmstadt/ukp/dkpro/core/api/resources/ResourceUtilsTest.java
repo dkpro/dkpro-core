@@ -18,10 +18,13 @@
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,50 +38,70 @@ import org.junit.rules.TemporaryFolder;
 
 public class ResourceUtilsTest
 {
-	@Rule
-	public TemporaryFolder workspace = new TemporaryFolder();
-	
-	@Test
-	public void testGetUrlAsFile()
-		throws Exception
-	{
-		URL url = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/FileSetCollectionReaderBase.class");
-		System.out.println("Original: "+url);
-		File file = ResourceUtils.getUrlAsFile(url, false);
-		System.out.println("As file: "+file.getPath());
-		assertTrue(file.getName().endsWith(".class"));
-	}
+    @Rule
+    public TemporaryFolder workspace = new TemporaryFolder();
 
-	@Test
-	public void testClasspathAsFolder()
-		throws Exception
-	{
-		File file = ResourceUtils.getClasspathAsFolder("classpath:/de/tudarmstadt/ukp/dkpro/core/api", true);
-		
-		List<String> files = new ArrayList<String>();
-		for (File f : FileUtils.listFiles(file, null, true)) {
-			files.add(f.getAbsolutePath().substring(file.getAbsolutePath().length()));
-		}
-		Collections.sort(files);
-		assertEquals(
-				asList("/resources/MappingProviderTest$1.class",
-						"/resources/MappingProviderTest$2.class",
-						"/resources/MappingProviderTest.class",
-						"/resources/ResourceUtilsTest.class"), files);
-	}
+    @Test
+    public void testGetUrlAsFile()
+        throws Exception
+    {
+        URL url = new URL(
+                "jar:file:src/test/resources/testfiles.zip!/testfiles/FileSetCollectionReaderBase.class");
+        System.out.println("Original: " + url);
+        File file = ResourceUtils.getUrlAsFile(url, false);
+        System.out.println("As file: " + file.getPath());
+        assertTrue(file.getName().endsWith(".class"));
+    }
 
-	@Test
-	public void testWithSpace()
-		throws Exception
-	{
-		File dir = workspace.newFolder("this is a test");
-		File file = new File(dir, "this is a file name.extension with spaces");
-		
-		System.out.println("Original: "+file);
-		System.out.println("Original (URL): "+file.toURI().toURL());
-		File asFile = ResourceUtils.getUrlAsFile(file.toURI().toURL(), false);
-		System.out.println("As file: "+asFile.getPath());
-		assertEquals("this is a file name", FilenameUtils.getBaseName(asFile.getPath()));
-		assertEquals("extension with spaces", FilenameUtils.getExtension(asFile.getPath()));
-	}
+    @Test
+    public void testClasspathAsFolder()
+        throws Exception
+    {
+        File file = ResourceUtils.getClasspathAsFolder(
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/api", true);
+
+        List<String> files = new ArrayList<String>();
+        for (File f : FileUtils.listFiles(file, null, true)) {
+            files.add(f.getAbsolutePath().substring(file.getAbsolutePath().length()));
+        }
+        Collections.sort(files);
+        assertEquals(
+                asList("/resources/MappingProviderTest$1.class",
+                        "/resources/MappingProviderTest$2.class",
+                        "/resources/MappingProviderTest.class",
+                        "/resources/ResourceUtilsTest.class"), files);
+    }
+
+    @Test
+    public void testWithSpace()
+        throws Exception
+    {
+        File dir = workspace.newFolder("this is a test");
+        File file = new File(dir, "this is a file name.extension with spaces");
+
+        System.out.println("Original: " + file);
+        System.out.println("Original (URL): " + file.toURI().toURL());
+        File asFile = ResourceUtils.getUrlAsFile(file.toURI().toURL(), false);
+        System.out.println("As file: " + asFile.getPath());
+        assertEquals("this is a file name", FilenameUtils.getBaseName(asFile.getPath()));
+        assertEquals("extension with spaces", FilenameUtils.getExtension(asFile.getPath()));
+    }
+
+    @Test
+    public void testGetUrlAsExecutable()
+        throws IOException
+    {
+
+        URL url = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
+                + "FileSetCollectionReaderBase.class");
+        File file = ResourceUtils.getUrlAsExecutable(url, false);
+        assertThat(file.getName().endsWith("temp"), is(true));
+
+        URL url2 = new URL("jar:file:src/test/resources/testfiles.zip!/testfiles/"
+                + "ResourceCollectionReaderBase.class");
+        file = ResourceUtils.getUrlAsExecutable(url2, true);
+        assertThat(file.getName().endsWith("temp"), is(true));
+
+    }
+
 }
