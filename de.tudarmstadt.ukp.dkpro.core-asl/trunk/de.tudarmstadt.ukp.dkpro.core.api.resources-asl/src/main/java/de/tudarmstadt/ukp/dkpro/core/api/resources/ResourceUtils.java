@@ -29,6 +29,7 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,8 +37,11 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
+import org.apache.uima.util.Level;
+import org.apache.uima.util.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -49,6 +53,9 @@ public class ResourceUtils
 {
     private static Map<String, File> urlFileCache;
     private static Map<String, File> classpathFolderCache;
+    private static final Logger LOGGER = UIMAFramework.getLogger(ResourceUtils.class);
+    private static final String XDG_RUNTIME_DIR_ENV_VAR = "XDG_RUNTIME_DIR";
+    private static final String DKPRO_HOME_ENV_VAR = "DKPRO_HOME";
 
     static {
         urlFileCache = new HashMap<String, File>();
@@ -74,7 +81,8 @@ public class ResourceUtils
 
     /**
      * Make a given classpath location available as a folder. A temporary folder is created and
-     * deleted upon a regular shutdown of the JVM.
+     * deleted upon a regular shutdown of the JVM. This method must not be used for creating
+     * executable binaries. For this purpose, getUrlAsExecutable should be used.
      *
      * @param aClasspathBase
      *            a classpath location as used by
@@ -156,7 +164,8 @@ public class ResourceUtils
      * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
      * file is remembered in a cache and if a file is requested for the same URL at a later time,
      * the same file is returned again. If the previously created file has been deleted meanwhile,
-     * it is recreated from the URL.
+     * it is recreated from the URL. This method should not be used for creating executable
+     * binaries. For this purpose, getUrlAsExecutable should be used.
      *
      * @param aUrl
      *            the URL.
@@ -177,7 +186,8 @@ public class ResourceUtils
      * regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the temporary
      * file is remembered in a cache and if a file is requested for the same URL at a later time,
      * the same file is returned again. If the previously created file has been deleted meanwhile,
-     * it is recreated from the URL.
+     * it is recreated from the URL. This method should not be used for creating executable
+     * binaries. For this purpose, getUrlAsExecutable should be used.
      *
      * @param aUrl
      *            the URL.
@@ -242,6 +252,78 @@ public class ResourceUtils
 
             return file;
         }
+    }
+
+    /**
+     * Make the given URL available as an executable file. A temporary file is created and deleted
+     * upon a regular shutdown of the JVM. If the parameter {@code aCache} is {@code true}, the
+     * temporary file is remembered in a cache and if a file is requested for the same URL at a
+     * later time, the same file is returned again. If the previously created file has been deleted
+     * meanwhile, it is recreated from the URL.
+     *
+     * @param aUrl
+     *            the URL.
+     * @param aCache
+     *            use the cache or not.
+     * @return an executable file created from the given URL.
+     * @throws IOException
+     *             if the file has permissions issues.
+     */
+
+    public static synchronized File getUrlAsExecutable(URL aUrl, boolean aCache)
+        throws IOException
+    {
+
+        File file;
+        synchronized (urlFileCache) {
+
+            file = urlFileCache.get(aUrl.toString());
+            if (!aCache || (file == null) || !file.exists()) {
+
+                String name = FilenameUtils.getBaseName(aUrl.getPath());
+                file = File.createTempFile(name, ".temp");
+                file.setExecutable(true);
+                if (!file.canExecute()) {
+                    LOGGER.log(Level.WARNING, "Tried to use temporary folder, but seems it is not "
+                            + "executable. Please check the permissions rights from your "
+                            + "temporary folder. Trying to use XDR_RUNTIME_DIR folder.");
+
+                    if (isEnvironmentVariableDefined(XDG_RUNTIME_DIR_ENV_VAR)) {
+                        file = getFileAsExecutable(aUrl, System.getenv(XDG_RUNTIME_DIR_ENV_VAR));
+                    }
+                    else if (isEnvironmentVariableDefined(DKPRO_HOME_ENV_VAR)) {
+                        LOGGER.log(Level.WARNING,
+                                "XDG_RUNTIME_DIR is not defined. Using DKPRO_HOME " + "folder.");
+                        file = getFileAsExecutable(aUrl, System.getenv(DKPRO_HOME_ENV_VAR)
+                                + File.separator + "temp");
+                    }
+                    else {
+                        LOGGER.log(Level.WARNING,
+                                "XDG_RUNTIME_DIR and DKPRO_HOME are not defined. "
+                                        + "Using user home folder.");
+                        file = getFileAsExecutable(aUrl, System.getProperty("user.home")
+                                + File.separator + ".dkpro" + File.separator + "temp");
+                    }
+
+                }
+                file.deleteOnExit();
+                InputStream inputStream = null;
+                OutputStream outputStream = null;
+                try {
+                    inputStream = aUrl.openStream();
+                    outputStream = new FileOutputStream(file);
+                    copy(inputStream, outputStream);
+                }
+                finally {
+                    closeQuietly(inputStream);
+                    closeQuietly(outputStream);
+                }
+                if (aCache) {
+                    urlFileCache.put(aUrl.toString(), file);
+                }
+            }
+        }
+        return file;
     }
 
     /**
@@ -406,4 +488,63 @@ public class ResourceUtils
         // Otherwise bail out
         throw new FileNotFoundException("No file found at [" + aLocation + "]");
     }
+
+    /**
+     *
+     * Checks if an environment variable is defined in the System.
+     *
+     * @param aVariable
+     *            Variable's name to be checked in the system.
+     * @return true if the variable is defined
+     *
+     * */
+
+    private static boolean isEnvironmentVariableDefined(String aVariable)
+    {
+        return System.getenv(aVariable) != null;
+    }
+
+    /**
+     *
+     * Creates a file in the specified directory for the given URL. Checks if the file already
+     * exists in this directory for not overwriting it.
+     *
+     * @param aUrl
+     *            URL containing the file's name.
+     * @param aDirectory
+     *            String containing the path where the temporary file will be created
+     * @return The temporary executable file
+     *
+     * @throws IOException
+     *             If the directory does not contain read and/or write permissions.
+     *
+     * */
+
+    private static synchronized File getFileAsExecutable(URL aUrl, String aDirectory)
+        throws IOException
+    {
+        File directory = new File(aDirectory);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        if (!directory.canRead()) {
+            throw new IOException("The directory [" + directory + "] is not readable. "
+                    + "Please check your permissions rights.");
+        }
+        if (!directory.canWrite()) {
+            throw new IOException("The directory [" + directory + "] is not writeble. "
+                    + "Please check your permissions rights.");
+        }
+        StringBuffer nameBuffer = new StringBuffer();
+        nameBuffer.append(FilenameUtils.getBaseName(aUrl.getPath()));
+        SecureRandom random = new SecureRandom();
+        File file;
+        do {
+            nameBuffer.append(random.nextLong());
+            file = new File(aDirectory, nameBuffer.toString() + ".temp");
+        }
+        while (file.exists());
+        return file;
+    }
+
 }
