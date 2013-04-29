@@ -47,11 +47,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
  */
 public class ResourceUtils
 {
-
-    private static final String XDG_RUNTIME_DIR_ENV_VAR = "XDG_RUNTIME_DIR";
-    private static final String DKPRO_HOME_ENV_VAR = "DKPRO_HOME";
-    private static final String USER_HOME_PROP = "user.home";
-
     private static Map<String, File> urlFileCache;
     private static Map<String, File> classpathFolderCache;
 
@@ -98,8 +93,7 @@ public class ResourceUtils
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
             if (!aCache || (folder == null) || !folder.exists()) {
-
-                folder = createTemporaryFile("dkpro-package", "");
+                folder = File.createTempFile("dkpro-package", "");
                 folder.delete();
                 FileUtils.forceMkdir(folder);
 
@@ -219,10 +213,11 @@ public class ResourceUtils
                 if (suffix.length() == 0) {
                     suffix = "temp";
                 }
-
                 String name = FilenameUtils.getBaseName(aUrl.getPath());
 
-                file = createTemporaryFile(name, suffix);
+                // Get a temporary file which will be deleted when the JVM shuts
+                // down.
+                file = File.createTempFile(name, "." + suffix);
                 file.deleteOnExit();
 
                 // Now copy the file from the URL to the file.
@@ -411,23 +406,4 @@ public class ResourceUtils
         // Otherwise bail out
         throw new FileNotFoundException("No file found at [" + aLocation + "]");
     }
-
-    private static File createTemporaryFile(String aName, String aSuffix)
-    {
-
-        String fileNamePrefix;
-
-        if (System.getenv(XDG_RUNTIME_DIR_ENV_VAR) != null) {
-            fileNamePrefix = System.getenv(XDG_RUNTIME_DIR_ENV_VAR);
-        }
-        else if (System.getenv(DKPRO_HOME_ENV_VAR) != null) {
-            fileNamePrefix = System.getenv(DKPRO_HOME_ENV_VAR);
-        }
-        else {
-            fileNamePrefix = System.getProperty(USER_HOME_PROP);
-        }
-
-        return new File(fileNamePrefix, aName + "." + aSuffix);
-    }
-
 }
