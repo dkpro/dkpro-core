@@ -84,7 +84,7 @@ public class LbjPosTagger
 
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/en-ptb-tagger.map");
+                "core/api/lexmorph/tagset/en-ptb-pos.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
     }
 
