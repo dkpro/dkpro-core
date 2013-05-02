@@ -63,21 +63,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
 /**
  * Parser annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-	    inputs = { 
+	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-		outputs = { 
+		outputs = {
 		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
 		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree"})
 public class OpenNlpParser
 	extends JCasAnnotator_ImplBase
 {
 	private static final String CONPACKAGE = Constituent.class.getPackage().getName()+".";
-	
+
 	/**
 	 * Use this language instead of the document language to resolve the model.
 	 */
@@ -110,7 +110,7 @@ public class OpenNlpParser
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spaming the heap with thousands of strings representing only a few different tags.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
@@ -119,7 +119,7 @@ public class OpenNlpParser
 
 	/**
 	 * Log the tag set(s) when a model is loaded.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -129,7 +129,7 @@ public class OpenNlpParser
 	/**
 	 * Sets whether to create or not to create POS tags. The creation of
 	 * constituent tags must be turned on for this to work.<br/>
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
@@ -139,7 +139,7 @@ public class OpenNlpParser
 	/**
 	 * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
 	 * containing the whole parse tree in Penn Treebank style format.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_CREATE_PENN_TREE_STRING = ComponentParameters.PARAM_WRITE_PENN_TREE;
@@ -148,7 +148,7 @@ public class OpenNlpParser
 
 	private CasConfigurableProviderBase<Parser> modelProvider;
 	private MappingProvider posMappingProvider;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -161,16 +161,16 @@ public class OpenNlpParser
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-${language}-${variant}");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
 						"parser-${language}-${variant}.bin");
 				setDefault(VARIANT, "chunking");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected Parser produceResource(URL aUrl) throws IOException
 			{
@@ -191,16 +191,16 @@ public class OpenNlpParser
 				}
 			}
 		};
-		
+
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		posMappingProvider.addImport("tagger.tagset", modelProvider);
-		
+
 	}
 
 	@Override
@@ -211,12 +211,12 @@ public class OpenNlpParser
 
 		modelProvider.configure(cas);
 		posMappingProvider.configure(cas);
-				
+
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
-		    Parse parseInput = new Parse(cas.getDocumentText(), 
-		    		new Span(sentence.getBegin(), sentence.getEnd()), 
+		    Parse parseInput = new Parse(cas.getDocumentText(),
+		    		new Span(sentence.getBegin(), sentence.getEnd()),
 		    		AbstractBottomUpParser.INC_NODE, 0, 0);
 		    int i=0;
 			for (Token t : tokens) {
@@ -224,23 +224,23 @@ public class OpenNlpParser
 						AbstractBottomUpParser.TOK_NODE, 0, i));
 				i++;
 		    }
-			
+
 			Parse parseOutput = modelProvider.getResource().parse(parseInput);
 
 			createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens);
-			
+
 			if (createPennTreeString) {
 				StringBuffer sb = new StringBuffer();
 				parseOutput.setType("ROOT"); // in DKPro the root is ROOT, not TOP
 				parseOutput.show(sb);
-				
+
 				PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
 				pTree.setPennTree(sb.toString());
 				pTree.addToIndexes();
 			}
 		}
 	}
-	
+
 	private void printTags(String aType, AbstractModel aModel)
 	{
 		Set<String> tagSet = new HashSet<String>();
@@ -253,13 +253,13 @@ public class OpenNlpParser
 				tagSet.add(t);
 			}
 		}
-		
+
 		List<String> tags = new ArrayList<String>(tagSet);
 		Collections.sort(tags);
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("Model of " + aType + " contains [").append(tags.size()).append("] tags: ");
-		
+
 		for (String tag : tags) {
 			sb.append(tag);
 			sb.append(" ");
@@ -267,7 +267,7 @@ public class OpenNlpParser
 		getContext().getLogger().log(INFO, sb.toString());
 
 	}
-	
+
 	/**
 	 * Creates linked constituent annotations + POS annotations
 	 *
@@ -286,21 +286,21 @@ public class OpenNlpParser
 		// create parent link on token and (if not turned off) create POS tag
 		if (aNode.isPosTag()) {
 			Token token = getToken(aTokens, aNode.getSpan().getStart(), aNode.getSpan().getEnd());
-			
+
 			// link token to its parent constituent
 			if (aParentFS != null) {
 				token.setParent(aParentFS);
 			}
-			
+
 			// only add POS to index if we want POS-tagging
 			if (createPosTags) {
 				Type posTag = posMappingProvider.getTagType(aNode.getType());
 				POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
 				posAnno.setPosValue(internTags ? aNode.getType().intern() : aNode.getType());
 				posAnno.addToIndexes();
-				token.setPos((POS) posAnno);
+				token.setPos(posAnno);
 			}
-			
+
 			return token;
 		}
 		// Check if node is a constituent node on sentence or phrase-level
@@ -309,7 +309,7 @@ public class OpenNlpParser
 			if (AbstractBottomUpParser.TOP_NODE.equals(typeName)) {
 				typeName = "ROOT"; // in DKPro the root is ROOT, not TOP
 			}
-			
+
 			// create the necessary objects and methods
 			String constituentTypeName = CONPACKAGE + typeName;
 
@@ -320,7 +320,7 @@ public class OpenNlpParser
 				type = aJCas.getTypeSystem().getType(CONPACKAGE+"X");
 			}
 
-			Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(type, 
+			Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(type,
 					aNode.getSpan().getStart(), aNode.getSpan().getEnd());
 			constAnno.setConstituentType(typeName);
 
@@ -328,7 +328,7 @@ public class OpenNlpParser
 			if (aParentFS != null) {
 				constAnno.setParent(aParentFS);
 			}
-	
+
 			// Do we have any children?
 			List<Annotation> childAnnotations = new ArrayList<Annotation>();
 			for (Parse child : aNode.getChildren()) {
@@ -337,15 +337,15 @@ public class OpenNlpParser
 					childAnnotations.add(childAnnotation);
 				}
 			}
-	
+
 			// Now that we know how many children we have, link annotation of
 			// current node with its children
 			FSArray childArray = (FSArray) FSCollectionFactory.createFSArray(aJCas, childAnnotations);
 			constAnno.setChildren(childArray);
-				
+
 			// write annotation for current node to index
 			aJCas.addFsToIndexes(constAnno);
-			
+
 			return constAnno;
 		}
 	}
@@ -353,7 +353,7 @@ public class OpenNlpParser
 	/**
 	 * Given a list of tokens (e.g. those from a sentence) return the one at the specified position.
 	 */
-	private Token getToken(List<Token> aTokens, int aBegin, int aEnd) 
+	private Token getToken(List<Token> aTokens, int aBegin, int aEnd)
 	{
 		for (Token t : aTokens) {
 			if (aBegin == t.getBegin() && aEnd == t.getEnd()) {
