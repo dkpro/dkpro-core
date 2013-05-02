@@ -37,10 +37,8 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
-import org.apache.uima.util.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -52,11 +50,8 @@ public class ResourceUtils
 {
     private static Map<String, File> urlFileCache;
     private static Map<String, File> classpathFolderCache;
-    private static final Logger LOGGER = UIMAFramework.getLogger(ResourceUtils.class);
     private static final String XDG_RUNTIME_DIR_ENV_VAR = "XDG_RUNTIME_DIR";
     private static final String DKPRO_HOME_ENV_VAR = "DKPRO_HOME";
-    private static boolean xdgFolderPermissions;
-    private static boolean dkproFolderPermissions;
 
     static {
         urlFileCache = new HashMap<String, File>();
