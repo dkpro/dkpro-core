@@ -53,14 +53,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-	    inputs = { 
+	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-		outputs = { 
+		outputs = {
 		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class OpenNlpPosTagger
 	extends JCasAnnotator_ImplBase
@@ -97,7 +97,7 @@ public class OpenNlpPosTagger
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spaming the heap with thousands of strings representing only a few different tags.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
@@ -106,7 +106,7 @@ public class OpenNlpPosTagger
 
 	/**
 	 * Log the tag set(s) when a model is loaded.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -115,7 +115,7 @@ public class OpenNlpPosTagger
 
 	private CasConfigurableProviderBase<POSTagger> modelProvider;
 	private MappingProvider mappingProvider;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -128,16 +128,16 @@ public class OpenNlpPosTagger
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-${language}-${variant}");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
 						"tagger-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected POSTagger produceResource(URL aUrl) throws IOException
 			{
@@ -152,10 +152,10 @@ public class OpenNlpPosTagger
 							tags.add(model.getPosModel().getOutcome(i));
 						}
 						Collections.sort(tags);
-						
+
 						StringBuilder sb = new StringBuilder();
 						sb.append("Model contains [").append(tags.size()).append("] tags: ");
-						
+
 						for (String tag : tags) {
 							sb.append(tag);
 							sb.append(" ");
@@ -170,16 +170,16 @@ public class OpenNlpPosTagger
 				}
 			}
 		};
-		
+
 		mappingProvider = new MappingProvider();
 		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		mappingProvider.setDefault("tagger.tagset", "default");
 		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		mappingProvider.addImport("tagger.tagset", modelProvider);
-		
+
 	}
 
 	@Override
@@ -190,7 +190,7 @@ public class OpenNlpPosTagger
 
 		modelProvider.configure(cas);
 		mappingProvider.configure(cas);
-				
+
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 			String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
@@ -203,7 +203,7 @@ public class OpenNlpPosTagger
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
 				posAnno.setPosValue(internTags ? tags[i].intern() : tags[i]);
 				posAnno.addToIndexes();
-				t.setPos((POS) posAnno);
+				t.setPos(posAnno);
 				i++;
 			}
 		}
