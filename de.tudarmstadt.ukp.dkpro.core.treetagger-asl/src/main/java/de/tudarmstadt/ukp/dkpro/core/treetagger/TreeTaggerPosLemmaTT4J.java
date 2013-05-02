@@ -59,14 +59,14 @@ public class TreeTaggerPosLemmaTT4J
 	public static final String PARAM_TAGGER_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_TAGGER_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
-	
+
 //	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 //	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
 
 	/**
 	 * Write part-of-speech information.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
@@ -75,7 +75,7 @@ public class TreeTaggerPosLemmaTT4J
 
 	/**
 	 * Write lemma information.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
@@ -87,7 +87,7 @@ public class TreeTaggerPosLemmaTT4J
 	private Feature lemmaValue;
 	private Feature featLemma;
 	private Feature featPos;
-	
+
 	private MappingProvider taggerMappingProvider;
 
 	@Override
@@ -95,23 +95,23 @@ public class TreeTaggerPosLemmaTT4J
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-		
+
 		taggerMappingProvider = new MappingProvider();
 		taggerMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		taggerMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		taggerMappingProvider.setDefault("tagger.tagset", "default");
 		taggerMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		taggerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
 		taggerMappingProvider.addImport("tagger.tagset", treetagger);
 	}
-	
+
 	@Override
 	public void typeSystemInit(TypeSystem aTypeSystem)
 		throws AnalysisEngineProcessException
 	{
 		super.typeSystemInit(aTypeSystem);
-		
+
 		tokenType = aTypeSystem.getType(Token.class.getName());
 		lemmaType = aTypeSystem.getType(Lemma.class.getName());
 		lemmaValue = lemmaType.getFeatureByBaseName("value");
