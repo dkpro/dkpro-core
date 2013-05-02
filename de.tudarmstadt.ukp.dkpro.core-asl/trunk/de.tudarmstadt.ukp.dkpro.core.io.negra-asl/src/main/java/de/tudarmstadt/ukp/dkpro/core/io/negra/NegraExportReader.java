@@ -68,7 +68,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-		outputs = { 
+		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -107,7 +107,7 @@ public class NegraExportReader
 
 	/**
 	 * Write part-of-speech information.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -116,7 +116,7 @@ public class NegraExportReader
 
 	/**
 	 * Write lemma information.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
@@ -229,10 +229,10 @@ public class NegraExportReader
 		catch (IOException e) {
 			throw new ResourceInitializationException(e);
 		}
-		
+
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
@@ -249,7 +249,7 @@ public class NegraExportReader
 		String originId = readOriginId(true);
 		String sentenceId = readSentenceHeader(BOS_FIELD_NUM, true);
 		String casId = originId2casId(originId, sentenceId);
-		
+
 		String documentId;
 		if (generateNewIds) {
 			documentId = String.valueOf(documentCount);
@@ -283,7 +283,7 @@ public class NegraExportReader
 
 			originId = readOriginId(true);
 			sentenceId = readSentenceHeader(BOS_FIELD_NUM, true);
-			
+
 			lastCasId = casId;
 			casId = originId2casId(originId, sentenceId);
 		}
@@ -292,7 +292,7 @@ public class NegraExportReader
 
 		documentCount++;
 	}
-	
+
 	private String originId2casId(String aOriginId, String aSentenceId)
 	{
 		switch (documentUnit) {
