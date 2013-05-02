@@ -40,11 +40,11 @@ import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderText;
 
 /**
  * Reader for the British National Corpus (XML version).
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-		outputs = { 
+		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -57,12 +57,12 @@ public class BncReader
 	 * (character) contains a significant punctuation mark as identified by the CLAWS tagger.
 	 */
 	private static final String TAG_CHARACTER = "c";
-	
+
 	/**
 	 * (word) represents a grammatical (not necessarily orthographic) word.
 	 */
 	private static final String TAG_WORD = "w";
-	
+
 	/**
 	 * (s-unit) contains a sentence-like division of a text.
 	 */
@@ -78,12 +78,12 @@ public class BncReader
 	 * contains a single written text.
 	 */
 	private static final String TAG_WTEXT = "wtext";
-	
+
 	/**
 	 * contains the full title of a work of any kind.
 	 */
 	private static final String TAG_TITLE = "title";
-	
+
 	/**
 	 * the root tag
 	 */
@@ -115,24 +115,24 @@ public class BncReader
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-		
+
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "c5");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
 		posMappingProvider.setOverride("tagger.tagset", posTagset);
 	}
-	
+
 	@Override
 	protected void initCas(CAS aCas, Resource aResource, String aQualifier)
 	{
 		super.initCas(aCas, aResource, aQualifier);
 		posMappingProvider.configure(aCas);
 	}
-	
+
 	@Override
 	protected Handler newSaxHandler()
 	{
@@ -149,7 +149,7 @@ public class BncReader
 		private String c5Tag = null;
 		private String headword = null;
 		private boolean complete = false;
-		
+
 		@Override
 		public void startElement(String aUri, String aLocalName, String aName,
 				Attributes aAttributes)
@@ -173,7 +173,7 @@ public class BncReader
 				headword = aAttributes.getValue(ATTR_HEADWORD);
 			}
 		}
-		
+
 		@Override
 		public void endElement(String aUri, String aLocalName, String aName)
 			throws SAXException
@@ -196,30 +196,30 @@ public class BncReader
 				if (isNotBlank(getBuffer().substring(tokenStart, getBuffer().length()))) {
 					Token token = new Token(getJCas(), tokenStart, getBuffer().length());
 					trim(token);
-					
+
 					if (c5Tag != null) {
 						Type posTag = posMappingProvider.getTagType(c5Tag);
-						POS pos = (POS) getJCas().getCas().createAnnotation(posTag, 
+						POS pos = (POS) getJCas().getCas().createAnnotation(posTag,
 								token.getBegin(), token.getEnd());
 						pos.setPosValue(c5Tag);
 						pos.addToIndexes();
 						token.setPos(pos);
 					}
-					
+
 					if (headword != null) {
 						Lemma lemma = new Lemma(getJCas(), token.getBegin(), token.getEnd());
 						lemma.setValue(headword);
 						lemma.addToIndexes();
 						token.setLemma(lemma);
 					}
-					
+
 					token.addToIndexes();
 				}
-				
+
 				tokenStart = -1;
 			}
 		}
-		
+
 		@Override
 		public void characters(char[] aCh, int aStart, int aLength)
 			throws SAXException
@@ -227,12 +227,12 @@ public class BncReader
 			if (complete) {
 				throw new SAXException("Extra content after stext is not permitted.");
 			}
-			
+
 			if (captureText) {
 				super.characters(aCh, aStart, aLength);
 			}
 		}
-		
+
 		@Override
 		public void ignorableWhitespace(char[] aCh, int aStart, int aLength)
 			throws SAXException
@@ -240,12 +240,12 @@ public class BncReader
 			if (complete) {
 				throw new SAXException("Extra content after stext is not permitted.");
 			}
-			
+
 			if (captureText) {
 				super.ignorableWhitespace(aCh, aStart, aLength);
 			}
 		}
-		
+
 		private void trim(Annotation aAnnotation)
 		{
 			StringBuilder buffer = getBuffer();
