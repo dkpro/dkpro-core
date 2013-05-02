@@ -29,7 +29,7 @@ public class TagsetMappingFactoryTest
 	@Test
 	public void test()
 	{
-		Map<String, String> mapping = TagsetMappingFactory.getMapping("tagger", "de", null);
+		Map<String, String> mapping = TagsetMappingFactory.getMapping("pos", "de", null);
 		assertEquals(107, mapping.size());
 	}
 }
