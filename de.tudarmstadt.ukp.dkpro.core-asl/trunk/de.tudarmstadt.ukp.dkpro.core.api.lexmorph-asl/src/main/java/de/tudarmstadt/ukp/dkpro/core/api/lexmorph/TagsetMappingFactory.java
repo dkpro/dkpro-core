@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 @Deprecated
 public class TagsetMappingFactory
 {
-	public static final String TAGGER = "tagger";
+	public static final String POS = "pos";
 	public static final String CHUNKER = "chunker";
 
 	/**
