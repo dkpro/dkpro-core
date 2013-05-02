@@ -164,7 +164,7 @@ public class ImsCwbReader
 
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
