@@ -40,7 +40,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.uima.UIMAFramework;
 import org.apache.uima.UimaContext;
 import org.apache.uima.resource.ResourceAccessException;
-import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -56,6 +55,8 @@ public class ResourceUtils
     private static final Logger LOGGER = UIMAFramework.getLogger(ResourceUtils.class);
     private static final String XDG_RUNTIME_DIR_ENV_VAR = "XDG_RUNTIME_DIR";
     private static final String DKPRO_HOME_ENV_VAR = "DKPRO_HOME";
+    private static boolean xdgFolderPermissions;
+    private static boolean dkproFolderPermissions;
 
     static {
         urlFileCache = new HashMap<String, File>();
@@ -284,23 +285,29 @@ public class ResourceUtils
                 file = File.createTempFile(name, ".temp");
                 file.setExecutable(true);
                 if (!file.canExecute()) {
-                    LOGGER.log(Level.WARNING, "Tried to use temporary folder, but seems it is not "
+                    StringBuffer errorMessage = new StringBuffer(128);
+                    errorMessage.append("Tried to use temporary folder, but seems it is not "
                             + "executable. Please check the permissions rights from your "
-                            + "temporary folder. Trying to use XDR_RUNTIME_DIR folder.");
+                            + "temporary folder.\n");
 
-                    if (isEnvironmentVariableDefined(XDG_RUNTIME_DIR_ENV_VAR)) {
+                    if (isEnvironmentVariableDefined(XDG_RUNTIME_DIR_ENV_VAR, errorMessage)
+                            && checkFolderPermissions(errorMessage,
+                                    System.getenv(XDG_RUNTIME_DIR_ENV_VAR))) {
                         file = getFileAsExecutable(aUrl, System.getenv(XDG_RUNTIME_DIR_ENV_VAR));
                     }
-                    else if (isEnvironmentVariableDefined(DKPRO_HOME_ENV_VAR)) {
-                        LOGGER.log(Level.WARNING,
-                                "XDG_RUNTIME_DIR is not defined. Using DKPRO_HOME " + "folder.");
+                    else if (isEnvironmentVariableDefined(DKPRO_HOME_ENV_VAR, errorMessage)
+                            && checkFolderPermissions(errorMessage,
+                                    System.getenv(DKPRO_HOME_ENV_VAR) + File.separator + "temp")) {
                         file = getFileAsExecutable(aUrl, System.getenv(DKPRO_HOME_ENV_VAR)
                                 + File.separator + "temp");
                     }
                     else {
-                        LOGGER.log(Level.WARNING,
-                                "XDG_RUNTIME_DIR and DKPRO_HOME are not defined. "
-                                        + "Using user home folder.");
+                        if (!isUserHomeDefined(errorMessage)
+                                || !checkFolderPermissions(errorMessage,
+                                        System.getProperty("user.home") + File.separator + ".dkpro"
+                                                + File.separator + "temp")) {
+                            throw new IOException(errorMessage.toString());
+                        }
                         file = getFileAsExecutable(aUrl, System.getProperty("user.home")
                                 + File.separator + ".dkpro" + File.separator + "temp");
                     }
@@ -491,17 +498,76 @@ public class ResourceUtils
 
     /**
      *
-     * Checks if an environment variable is defined in the System.
+     * Checks if user.home property is defined in the System.
      *
-     * @param aVariable
-     *            Variable's name to be checked in the system.
+     * @param aStringBuffer
+     *            StringBuffer containing an error message for the exception which will be thrown
      * @return true if the variable is defined
      *
      * */
 
-    private static boolean isEnvironmentVariableDefined(String aVariable)
+    private static boolean isUserHomeDefined(StringBuffer aStringBuffer)
     {
-        return System.getenv(aVariable) != null;
+        boolean isDefined = System.getProperty("user.home") != null;
+        if (!isDefined) {
+            aStringBuffer.append("user.home folder is not defined.");
+        }
+        return isDefined;
+    }
+
+    /**
+     *
+     * Checks if an environment variable is defined in the System.
+     *
+     * @param aVariable
+     *            Variable's name to be checked in the system.
+     * @param aStringBuffer
+     *            StringBuffer containing an error message if an exception is thrown
+     * @return true if the variable is defined
+     *
+     * */
+
+    private static boolean isEnvironmentVariableDefined(String aVariable, StringBuffer aStringBuffer)
+    {
+        boolean isDefined = System.getenv(aVariable) != null;
+        if (!isDefined) {
+            aStringBuffer.append("The environment variable: " + aVariable
+                    + " is not defined. Please specify this environment variable.\n");
+        }
+        return isDefined;
+    }
+
+    /**
+     *
+     * Checks if a directory already exists. If it does not exist it is created. If it already
+     * exists then, its permissions are ok.
+     *
+     * @param aStringBuffer
+     *            StringBuffer containing an error message if an exception is thrown
+     * @param aDirectory
+     *            String containing the directory path.
+     * @return true if the variable is defined
+     *
+     * */
+
+    private static synchronized boolean checkFolderPermissions(StringBuffer aStringBuffer,
+            String aDirectory)
+    {
+        File directory = new File(aDirectory);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        if (!directory.canRead()) {
+            aStringBuffer.append("The directory [" + directory + "] is not readable. "
+                    + "Please check your permissions rights.\n");
+            return false;
+        }
+        if (!directory.canWrite()) {
+            aStringBuffer.append("The directory [" + directory + "] is not writable. "
+                    + "Please check your permissions rights.\n");
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -521,20 +587,7 @@ public class ResourceUtils
      * */
 
     private static synchronized File getFileAsExecutable(URL aUrl, String aDirectory)
-        throws IOException
     {
-        File directory = new File(aDirectory);
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-        if (!directory.canRead()) {
-            throw new IOException("The directory [" + directory + "] is not readable. "
-                    + "Please check your permissions rights.");
-        }
-        if (!directory.canWrite()) {
-            throw new IOException("The directory [" + directory + "] is not writeble. "
-                    + "Please check your permissions rights.");
-        }
         StringBuffer nameBuffer = new StringBuffer();
         nameBuffer.append(FilenameUtils.getBaseName(aUrl.getPath()));
         SecureRandom random = new SecureRandom();
