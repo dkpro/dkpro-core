@@ -136,7 +136,7 @@ public class TokenMerger
 
 		mappingProvider = new MappingProvider();
 		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		mappingProvider.setDefault("tagger.tagset", "default");
 		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
