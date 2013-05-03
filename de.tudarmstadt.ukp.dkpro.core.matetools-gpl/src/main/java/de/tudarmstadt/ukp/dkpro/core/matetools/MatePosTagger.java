@@ -39,20 +39,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <p>
  * DKPro Annotator for the MateToolsPosTagger
  * </p>
- * 
+ *
  * Required annotations:<br/>
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>Lemma</li>
  * </ul>
- * 
+ *
  * Generated annotations:<br/>
  * <ul>
  * <li>POSTag</li>
  * </ul>
- * 
- * 
+ *
+ *
  * @author AnNa, zesch
  */
 public class MatePosTagger
@@ -127,7 +127,7 @@ public class MatePosTagger
 
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-				+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-tagger.map");
+				+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
