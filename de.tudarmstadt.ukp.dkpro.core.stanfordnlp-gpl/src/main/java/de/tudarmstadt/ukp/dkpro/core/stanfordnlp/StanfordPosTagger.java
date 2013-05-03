@@ -47,7 +47,7 @@ public class StanfordPosTagger
 {
 	/**
 	 * Log the tag set(s) when a model is loaded.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -86,7 +86,7 @@ public class StanfordPosTagger
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spaming the heap with thousands of strings representing only a few different tags.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
@@ -108,27 +108,27 @@ public class StanfordPosTagger
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-${language}-${variant}");
-				
+
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
 						"tagger-${language}-${variant}.properties");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected MaxentTagger produceResource(URL aUrl) throws IOException
 			{
 				try {
 					MaxentTagger tagger = new MaxentTagger(aUrl.toString());
-					
+
 					if (printTagSet) {
 						StringBuilder sb = new StringBuilder();
 						sb.append("Model contains [").append(tagger.getTags().getSize()).append("] tags: ");
-						
+
 						List<String> tags = new ArrayList<String>();
 						for (int i = 0; i < tagger.getTags().getSize(); i ++) {
 							tags.add(tagger.getTags().getTag(i));
@@ -136,8 +136,8 @@ public class StanfordPosTagger
 						Collections.sort(tags);
 						sb.append(StringUtils.join(tags, " "));
 						getContext().getLogger().log(INFO, sb.toString());
-					}					
-					
+					}
+
 					return tagger;
 				}
 				catch (ClassNotFoundException e) {
@@ -145,12 +145,12 @@ public class StanfordPosTagger
 				}
 			}
 		};
-		
+
 		mappingProvider = new MappingProvider();
 		mappingProvider.setDefaultVariantsLocation(
 				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
 		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
 		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		mappingProvider.setDefault("pos.tagset", "default");
 		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
@@ -166,7 +166,7 @@ public class StanfordPosTagger
 
 		modelProvider.configure(cas);
 		mappingProvider.configure(cas);
-				
+
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
@@ -184,7 +184,7 @@ public class StanfordPosTagger
 				posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
 						internStrings ? tt.tag().intern() : tt.tag());
 				posAnno.addToIndexes();
-				t.setPos((POS) posAnno);
+				t.setPos(posAnno);
 				i++;
 			}
 		}
