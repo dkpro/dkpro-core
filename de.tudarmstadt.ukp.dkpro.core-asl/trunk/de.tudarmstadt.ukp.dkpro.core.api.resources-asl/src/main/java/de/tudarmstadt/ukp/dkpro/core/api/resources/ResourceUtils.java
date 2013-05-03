@@ -280,7 +280,7 @@ public class ResourceUtils
                 file = File.createTempFile(name, ".temp");
                 file.setExecutable(true);
                 if (!file.canExecute()) {
-                    StringBuffer errorMessage = new StringBuffer(128);
+                    StringBuilder errorMessage = new StringBuilder(128);
                     errorMessage.append("Tried to use temporary folder, but seems it is not "
                             + "executable. Please check the permissions rights from your "
                             + "temporary folder.\n");
@@ -495,17 +495,17 @@ public class ResourceUtils
      *
      * Checks if user.home property is defined in the System.
      *
-     * @param aStringBuffer
-     *            StringBuffer containing an error message for the exception which will be thrown
+     * @param aStringBuilder
+     *            StringBuilder containing an error message for the exception which will be thrown
      * @return true if the variable is defined
      *
      * */
 
-    private static boolean isUserHomeDefined(StringBuffer aStringBuffer)
+    private static boolean isUserHomeDefined(StringBuilder aStringBuilder)
     {
         boolean isDefined = System.getProperty("user.home") != null;
         if (!isDefined) {
-            aStringBuffer.append("user.home folder is not defined.");
+            aStringBuilder.append("user.home folder is not defined.");
         }
         return isDefined;
     }
@@ -516,17 +516,17 @@ public class ResourceUtils
      *
      * @param aVariable
      *            Variable's name to be checked in the system.
-     * @param aStringBuffer
-     *            StringBuffer containing an error message if an exception is thrown
+     * @param aStringBuilder
+     *            StringBuilder containing an error message if an exception is thrown
      * @return true if the variable is defined
      *
      * */
 
-    private static boolean isEnvironmentVariableDefined(String aVariable, StringBuffer aStringBuffer)
+    private static boolean isEnvironmentVariableDefined(String aVariable, StringBuilder aStringBuilder)
     {
         boolean isDefined = System.getenv(aVariable) != null;
         if (!isDefined) {
-            aStringBuffer.append("The environment variable: " + aVariable
+            aStringBuilder.append("The environment variable: " + aVariable
                     + " is not defined. Please specify this environment variable.\n");
         }
         return isDefined;
@@ -537,15 +537,15 @@ public class ResourceUtils
      * Checks if a directory already exists. If it does not exist it is created. If it already
      * exists then, its permissions are ok.
      *
-     * @param aStringBuffer
-     *            StringBuffer containing an error message if an exception is thrown
+     * @param aStringBuilder
+     *            StringBuilder containing an error message if an exception is thrown
      * @param aDirectory
      *            String containing the directory path.
      * @return true if the variable is defined
      *
      * */
 
-    private static synchronized boolean checkFolderPermissions(StringBuffer aStringBuffer,
+    private static synchronized boolean checkFolderPermissions(StringBuilder aStringBuilder,
             String aDirectory)
     {
         File directory = new File(aDirectory);
@@ -553,12 +553,12 @@ public class ResourceUtils
             directory.mkdirs();
         }
         if (!directory.canRead()) {
-            aStringBuffer.append("The directory [" + directory + "] is not readable. "
+            aStringBuilder.append("The directory [" + directory + "] is not readable. "
                     + "Please check your permissions rights.\n");
             return false;
         }
         if (!directory.canWrite()) {
-            aStringBuffer.append("The directory [" + directory + "] is not writable. "
+            aStringBuilder.append("The directory [" + directory + "] is not writable. "
                     + "Please check your permissions rights.\n");
             return false;
         }
