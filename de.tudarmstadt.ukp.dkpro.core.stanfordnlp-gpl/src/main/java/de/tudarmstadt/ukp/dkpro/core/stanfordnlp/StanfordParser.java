@@ -63,7 +63,7 @@ import edu.stanford.nlp.trees.TypedDependency;
 
 /**
  * Stanford Parser component.
- * 
+ *
  * @author Oliver Ferschke
  * @author Niklas Jakob
  */
@@ -113,7 +113,7 @@ public class StanfordParser
 	public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
 	@ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
 	private boolean writeDependency;
-	
+
 	/**
 	 * Sets whether to create or not to create collapsed dependencies. <br/>
 	 * Default: {@code false}
@@ -121,7 +121,7 @@ public class StanfordParser
 	public static final String PARAM_CREATE_COLLAPSED_DEPENDENCIES= "createCollapsedDependencies";
 	@ConfigurationParameter(name = PARAM_CREATE_COLLAPSED_DEPENDENCIES, mandatory = false, defaultValue="false")
 	protected boolean createCollapsedDependencies;
-	
+
 	/**
 	 * Sets whether to create or not to create constituent tags. This is
 	 * required for POS-tagging and lemmatization.<br/>
@@ -160,7 +160,7 @@ public class StanfordParser
 	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
 	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
 	private boolean writePos;
-	
+
 	/**
 	 * Sets whether to use or not to use already existing POS tags from another annotator for the
 	 * parsing process. These should be mapped to the PTB tagset with {@link PosMapper} before.<br/>
@@ -169,7 +169,7 @@ public class StanfordParser
 	public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
 	@ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
 	private boolean readPos;
-	
+
 	/**
 	 * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to
 	 * avoid out of memory exceptions.<br/>
@@ -178,7 +178,7 @@ public class StanfordParser
 	public static final String PARAM_MAX_TOKENS = "maxTokens";
 	@ConfigurationParameter(name = PARAM_MAX_TOKENS, mandatory = true, defaultValue = "130")
 	private int maxTokens;
-	
+
 	/**
 	 * Sets whether to create or not to create Lemma tags. The creation of
 	 * constituent tags must be turned on for this to work.<br/>
@@ -204,14 +204,14 @@ public class StanfordParser
 	private Boolean paramCreateLemmas;
 
 	/**
-	 * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-). 
-	 * 
+	 * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+	 *
 	 * @see PTBEscapingProcessor
 	 */
 	public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
 	@ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue="true")
 	private boolean ptb3Escaping;
-	
+
 	/**
 	 * List of extra token texts (usually single character strings) that should be treated like
 	 * opening quotes and escaped accordingly before being sent to the parser.
@@ -219,7 +219,7 @@ public class StanfordParser
 	public static final String PARAM_QUOTE_BEGIN = "quoteBegin";
 	@ConfigurationParameter(name = PARAM_QUOTE_BEGIN, mandatory = false)
 	private List<String> quoteBegin;
-	
+
 	/**
 	 * List of extra token texts (usually single character strings) that should be treated like
 	 * closing quotes and escaped accordingly before being sent to the parser.
@@ -237,8 +237,8 @@ public class StanfordParser
 
 	private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
 	private MappingProvider posMappingProvider;
-	
-	private PTBEscapingProcessor<HasWord, String, Word> escaper = 
+
+	private final PTBEscapingProcessor<HasWord, String, Word> escaper =
 			new PTBEscapingProcessor<HasWord, String, Word>();
 
 	@Override
@@ -268,17 +268,17 @@ public class StanfordParser
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-${language}-${variant}");
-				
+
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/parser-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
 						"parser-${language}-${variant}.properties");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected LexicalizedParser produceResource(URL aUrl) throws IOException
 			{
@@ -319,7 +319,7 @@ public class StanfordParser
 						Set<String> posTags = new HashSet<String>();
 						for (String tag : pd.tagIndex) {
 							posTags.add(lp.basicCategory(tag));
-						}			
+						}
 						// https://mailman.stanford.edu/pipermail/parser-user/2012-November/002117.html
 						// For constituent categories, there isn't an index of just them. The
 						// stateIndex has both constituent categories and POS tags in it, so you'd
@@ -329,7 +329,7 @@ public class StanfordParser
 						for (String tag : pd.stateIndex) {
 							String t = lp.basicCategory(tag);
 							// https://mailman.stanford.edu/pipermail/parser-user/2012-December/002156.html
-							// The parser algorithm used is a binary parser, so what we do is 
+							// The parser algorithm used is a binary parser, so what we do is
 							// binarize trees by turning A -> B, C, D into A -> B, @A, @A -> C, D.
 							// (That's roughly how it goes, although the exact details are somewhat
 							// different.)  When parsing, we parse to a binarized tree and then
@@ -340,7 +340,7 @@ public class StanfordParser
 							}
 						}
 						constTags.removeAll(posTags);
-						
+
 						printTags("tagger", posTags);
 						printTags("parser", constTags);
 					}
@@ -357,10 +357,10 @@ public class StanfordParser
 				}
 			}
 		};
-		
+
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-tagger.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("pos.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
@@ -372,10 +372,10 @@ public class StanfordParser
 	{
 		List<String> tags = new ArrayList<String>(aTags);
 		Collections.sort(tags);
-		
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("Model of " + aType + " contains [").append(tags.size()).append("] tags: ");
-		
+
 		for (String tag : tags) {
 			sb.append(tag);
 			sb.append(" ");
@@ -397,7 +397,7 @@ public class StanfordParser
 	{
 		modelProvider.configure(aJCas.getCas());
 		posMappingProvider.configure(aJCas.getCas());
-		
+
 		/*
 		 * In order to work with mixed language document collections, default
 		 * behavior of lemmatization has to be set anew for each CAS.
@@ -464,21 +464,21 @@ public class StanfordParser
 							}
 						}
 					}
-					
+
 					// Get parse
 					LexicalizedParserQuery query = parser.parserQuery();
 					query.parse(tokenizedSentence);
 					parseTree = query.getBestParse();
-				} 
+				}
 				else{
 					continue;
 				}
-				
+
 			}
 			catch (Exception e) {
 				throw new AnalysisEngineProcessException(e);
 			}
-			
+
 			// Create new StanfordAnnotator object
 			StanfordAnnotator sfAnnotator = null;
 			try {
@@ -494,12 +494,12 @@ public class StanfordParser
 				sfAnnotator.createPennTreeAnnotation(currAnnotationToParse.getBegin(),
 						currAnnotationToParse.getEnd());
 			}
-			
+
 			// Create dependency annotations
 			if (writeDependency && gsf != null) {
 				doCreateDependencyTags(sfAnnotator, currAnnotationToParse, parseTree, tokens);
 			}
-			
+
 			// Create constituent annotations
 			if (writeConstituent) {
 				sfAnnotator.createConstituentAnnotationFromTree(writePos, createLemmas);
@@ -518,7 +518,7 @@ public class StanfordParser
 		else {
 			dependencies = gs.typedDependencies();
 		}
-		
+
 		for (TypedDependency currTypedDep : dependencies) {
 			int govIndex = currTypedDep.gov().index();
 			int depIndex = currTypedDep.dep().index();
