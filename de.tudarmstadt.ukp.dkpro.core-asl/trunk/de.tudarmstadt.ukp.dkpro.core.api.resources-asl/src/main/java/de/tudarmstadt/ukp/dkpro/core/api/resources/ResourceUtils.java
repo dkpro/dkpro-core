@@ -29,7 +29,6 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -522,7 +521,8 @@ public class ResourceUtils
      *
      * */
 
-    private static boolean isEnvironmentVariableDefined(String aVariable, StringBuilder aStringBuilder)
+    private static boolean isEnvironmentVariableDefined(String aVariable,
+            StringBuilder aStringBuilder)
     {
         boolean isDefined = System.getenv(aVariable) != null;
         if (!isDefined) {
@@ -567,8 +567,7 @@ public class ResourceUtils
 
     /**
      *
-     * Creates a file in the specified directory for the given URL. Checks if the file already
-     * exists in this directory for not overwriting it.
+     * Creates a temporary file in the specified directory for the given URL.
      *
      * @param aUrl
      *            URL containing the file's name.
@@ -577,22 +576,15 @@ public class ResourceUtils
      * @return The temporary executable file
      *
      * @throws IOException
-     *             If the directory does not contain read and/or write permissions.
+     *             If a file could not be created
      *
      * */
 
     private static synchronized File getFileAsExecutable(URL aUrl, String aDirectory)
+        throws IOException
     {
-        StringBuffer nameBuffer = new StringBuffer();
-        nameBuffer.append(FilenameUtils.getBaseName(aUrl.getPath()));
-        SecureRandom random = new SecureRandom();
-        File file;
-        do {
-            nameBuffer.append(random.nextLong());
-            file = new File(aDirectory, nameBuffer.toString() + ".temp");
-        }
-        while (file.exists());
-        return file;
-    }
 
+        return File.createTempFile(FilenameUtils.getBaseName(aUrl.getPath()), ".temp", new File(
+                aDirectory));
+    }
 }
