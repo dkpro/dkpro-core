@@ -31,49 +31,94 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
  * @author zesch
  *
  */
-public class WikipediaQueryReader extends WikipediaArticleReader
+public class WikipediaQueryReader
+    extends WikipediaArticleReader
 {
 
+    /**
+     * Maximum number of categories.
+     * Articles with a higher number of categories will not be returned by the query.
+     */
     public static final String PARAM_MAX_CATEGORIES = "MaxCategories";
     @ConfigurationParameter(name = PARAM_MAX_CATEGORIES, mandatory=false, defaultValue="-1")
     private int maxCategories;
     
+    /**
+     * Minimum number of categories.
+     * Articles with a lower number of categories will not be returned by the query.
+     */
     public static final String PARAM_MIN_CATEGORIES = "MinCategories";
     @ConfigurationParameter(name = PARAM_MIN_CATEGORIES, mandatory=false, defaultValue="-1")
     private int minCategories;
     
+    /**
+     * Maximum number of incoming links.
+     * Articles with a higher number of incoming links will not be returned by the query.
+     */
     public static final String PARAM_MAX_INLINKS = "MaxInlinks";
     @ConfigurationParameter(name = PARAM_MAX_INLINKS, mandatory=false, defaultValue="-1")
     private int maxInlinks;
 
+    /**
+     * Minimum number of incoming links.
+     * Articles with a lower number of incoming links will not be returned by the query.
+     */
     public static final String PARAM_MIN_INLINKS = "MinInlinks";
     @ConfigurationParameter(name = PARAM_MIN_INLINKS, mandatory=false, defaultValue="-1")
     private int minInlinks;
 
+    /**
+     * Maximum number of outgoing links.
+     * Articles with a higher number of outgoing links will not be returned by the query.
+     */
     public static final String PARAM_MAX_OUTLINKS = "MaxOutlinks";
     @ConfigurationParameter(name = PARAM_MAX_OUTLINKS, mandatory=false, defaultValue="-1")
     private int maxOutlinks;
 
+    /**
+     * Minimum number of outgoing links.
+     * Articles with a lower number of outgoing links will not be returned by the query.
+     */
     public static final String PARAM_MIN_OUTLINKS = "MinOutlinks";
     @ConfigurationParameter(name = PARAM_MIN_OUTLINKS, mandatory=false, defaultValue="-1")
     private int minOutlinks;
 
+    /**
+     * Maximum number of redirects.
+     * Articles with a higher number of redirects will not be returned by the query.
+     */
     public static final String PARAM_MAX_REDIRECTS = "MaxRedirects";
     @ConfigurationParameter(name = PARAM_MAX_REDIRECTS, mandatory=false, defaultValue="-1")
     private int maxRedirects;
 
+    /**
+     * Minimum number of redirects.
+     * Articles with a lower number of redirects will not be returned by the query.
+     */
     public static final String PARAM_MIN_REDIRECTS = "MinRedirects";
     @ConfigurationParameter(name = PARAM_MIN_REDIRECTS, mandatory=false, defaultValue="-1")
     private int minRedirects;
 
+    /**
+     * Maximum number of tokens.
+     * Articles with a higher number of tokens will not be returned by the query.
+     */
     public static final String PARAM_MAX_TOKENS = "MaxTokens";
     @ConfigurationParameter(name = PARAM_MAX_TOKENS, mandatory=false, defaultValue="-1")
     private int maxTokens;
 
+    /**
+     * Minimum number of tokens.
+     * Articles with a lower number of tokens will not be returned by the query.
+     */
     public static final String PARAM_MIN_TOKENS = "MinTokens";
     @ConfigurationParameter(name = PARAM_MIN_TOKENS, mandatory=false, defaultValue="-1")
     private int minTokens;
 
+    /**
+     * SQL-style title pattern.
+     * Only articles that  match the pattern will be returned by the query.
+     */
     public static final String PARAM_TITLE_PATTERN = "TitlePattern";
     @ConfigurationParameter(name = PARAM_TITLE_PATTERN, mandatory=false, defaultValue="")
     private String titlePattern;
@@ -152,7 +197,7 @@ public class WikipediaQueryReader extends WikipediaArticleReader
                 pageIter = wiki.getPages(query).iterator();
             }
             catch (WikiApiException e) {
-                e.printStackTrace();
+                throw new ResourceInitializationException(e);
             }
 
         }
