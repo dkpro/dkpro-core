@@ -183,7 +183,7 @@ public class TEIReaderTest
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
         		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
-                TEIReader.PARAM_WRITE_SENTENCES, false);
+                TEIReader.PARAM_WRITE_SENTENCE, false);
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
@@ -212,7 +212,7 @@ public class TEIReaderTest
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
         		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
-                TEIReader.PARAM_WRITE_TOKENS, false,
+                TEIReader.PARAM_WRITE_TOKEN, false,
                 TEIReader.PARAM_WRITE_POS, false
         );
 
@@ -244,7 +244,7 @@ public class TEIReaderTest
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
         		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
                 TEIReader.PARAM_WRITE_POS, true,
-                TEIReader.PARAM_WRITE_TOKENS, false);
+                TEIReader.PARAM_WRITE_TOKEN, false);
 
         for (JCas jcas : new JCasIterable(reader)) {
             // should never get here
