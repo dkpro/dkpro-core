@@ -49,23 +49,39 @@ public class PdfReader
     public static final String BUILT_IN = "<built-in>";
     private static final String NOT_RESTRICTED = "-1";
 
-    public static final String PARAM_SUBSTITUTION_TABLE = "SubstitutionTable";
-    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE, mandatory = false, defaultValue = BUILT_IN)
-    private String aSubstitutionTableLocation;
+    /**
+     * The location of the substitution table use to post-process the text extracted form the PDF,
+     * e.g. to convert ligatures to separate characters.
+     */
+    public static final String PARAM_SUBSTITUTION_TABLE_LOCATION = "substitutionTableLocation";
+    @ConfigurationParameter(name = PARAM_SUBSTITUTION_TABLE_LOCATION, mandatory = false, defaultValue = BUILT_IN)
+    private String substitutionTableLocation;
 
-    public static final String PARAM_HEADING_TYPE = "HeadingType";
+    /**
+     * The type used to annotate headings.
+     */
+    public static final String PARAM_HEADING_TYPE = "headingType";
     @ConfigurationParameter(name = PARAM_HEADING_TYPE, mandatory = false, defaultValue = BUILT_IN)
     private String headingType;
 
-    public static final String PARAM_PARAGRAPH_TYPE = "ParagraphType";
+    /**
+     * The type used to annotate paragraphs.
+     */
+    public static final String PARAM_PARAGRAPH_TYPE = "paragraphType";
     @ConfigurationParameter(name = PARAM_PARAGRAPH_TYPE, mandatory = false, defaultValue = BUILT_IN)
     private String paragraphType;
 
-    public static final String PARAM_START_PAGE = "StartPage";
+    /**
+     * The first page to be extracted from the PDF.
+     */
+    public static final String PARAM_START_PAGE = "startPage";
     @ConfigurationParameter(name = PARAM_START_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
     private int startPage;
 
-    public static final String PARAM_END_PAGE = "EndPage";
+    /**
+     * The last page to be extracted from the PDF.
+     */
+    public static final String PARAM_END_PAGE = "endPage";
     @ConfigurationParameter(name = PARAM_END_PAGE, mandatory = false, defaultValue = NOT_RESTRICTED)
     private int endPage;
 
@@ -85,14 +101,14 @@ public class PdfReader
             paragraphType = Paragraph.class.getName();
         }
 
-        if (aSubstitutionTableLocation != null) {
-            if (BUILT_IN.equals(aSubstitutionTableLocation)) {
-                aSubstitutionTableLocation = "classpath:/de/tudarmstadt/ukp/dkpro/core/io/pdf/substitutionTable.xml";
+        if (substitutionTableLocation != null) {
+            if (BUILT_IN.equals(substitutionTableLocation)) {
+                substitutionTableLocation = "classpath:/de/tudarmstadt/ukp/dkpro/core/io/pdf/substitutionTable.xml";
             }
 
             InputStream is = null;
             try {
-                URL url = ResourceUtils.resolveLocation(aSubstitutionTableLocation, this, aContext);
+                URL url = ResourceUtils.resolveLocation(substitutionTableLocation, this, aContext);
                 is = url.openStream();
                 substitutionTable = SubstitutionTrieParser.parse(is);
             }
