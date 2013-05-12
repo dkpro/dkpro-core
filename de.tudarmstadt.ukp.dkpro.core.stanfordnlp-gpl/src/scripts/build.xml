@@ -6,20 +6,24 @@
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
-	<property name="tagger.version" value="20120709"/>
-	<property name="tagger.date" value="2012-07-09"/>
+	<property name="tagger.version" value="20130404"/>
+	<property name="tagger.version.real" value="3.1.5"/>
+	<property name="tagger.date" value="2013-04-04"/>
 	
-	<property name="core.version" value="20120709"/>
-	<property name="core.date" value="2012-07-09"/>
+	<property name="parser.version" value="20130405"/>
+	<property name="parser.version.real" value="2.0.5"/>
+	<property name="parser.date" value="2013-04-05"/>
 	
-	<property name="parser.version" value="20120709"/>
-	<property name="parser.date" value="2012-07-09"/>
-	
-	<property name="corenlp.version" value="20120709"/>
-	<property name="corenlp.version.real" value="1.3.3"/>
+	<property name="corenlp.version" value="20130404"/>
+	<property name="corenlp.version.real" value="1.3.5"/>
+	<property name="core.version" value="20130404"/>
+	<property name="core.date" value="2013-04-04"/>
 	
 	<property name="german.ner.version" value="20120522"/>
 	<property name="german.ner.date" value="2012-05-22"/>
+
+	<property name="chinese.ner.version" value="20121111"/>
+	<property name="chinese.ner.date" value="2012-11-11"/>
 
 	<!-- 
 	  - Output package configuration
@@ -48,10 +52,10 @@
 		  -->
     	<install-stub-and-upstream-file 
        		file="target/download/tagger/arabic-accurate.tagger"
-       		md5="730f09c873334d7ea1dc319aeac8b827"
+       		md5="d41cc1ac37710351480fe55a09c18bc0"
        		groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${tagger.version}"
+    		upstreamVersion="20130404"
     		metaDataVersion="1"
     		tool="tagger"
     		language="ar"
@@ -69,10 +73,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/tagger/arabic-fast.tagger"
-    		md5="cc88707a0f57a2a303b40428d96a5853"
+    		md5="982d817fd0ef998784b60d31f9039134"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${tagger.version}"
+    		upstreamVersion="20130404"
     		metaDataVersion="1"
     		tool="tagger"
     		language="ar"
@@ -90,10 +94,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/arabicFactored.ser.gz" 
-    		md5="8a51cee3387c9665f30095fc14f51e6e"
+    		md5="1aa4885dfbb3403a864163a518e79e64"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="ar" 
@@ -114,10 +118,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/tagger/german-dewac.tagger" 
-    		md5="9b131f68fec38e168211f565db6d2bf5"
+    		md5="8546271271a5f58f987542c13116b639"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${tagger.version}"
+    		upstreamVersion="20130404"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="de" 
@@ -135,10 +139,10 @@
 		  -->
 		<install-stub-and-upstream-file 
     		file="target/download/tagger/german-hgc.tagger" 
-			md5="f83e545f0ded54937c88c3ba62b6f0c0"
+			md5="39fd9261d992db3614b9f35337dd2a27"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${tagger.version}"
+    		upstreamVersion="20130404"
     		metaDataVersion="1"
 			tool="tagger" 
 			language="de" 
@@ -156,10 +160,10 @@
 		  -->
 		<install-stub-and-upstream-file 
     		file="target/download/tagger/german-fast.tagger" 
-			md5="8494b5e56c1545cca77bf7faf7b9967c"
+			md5="aeb1214d01a936f2bb3c09d9141023b6"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-    		upstreamVersion="${tagger.version}"
+    		upstreamVersion="20130404"
     		metaDataVersion="1"
     		tool="tagger" 
 			language="de" 
@@ -211,10 +215,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/germanPCFG.ser.gz" 
-    		md5="aeaad5aafd9073ac5f31aa781758901d"
+    		md5="90a857e71df21c00b8aa08ffbf320550"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="de" 
@@ -232,10 +236,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/germanFactored.ser.gz" 
-    		md5="3a3ce2c8af8f832cef888f67b585d079"
+    		md5="d93e78dc383c2b898ce7f05548052568"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="de" 
@@ -269,10 +273,10 @@
 
     	<install-stub-and-upstream-file 
     		file="target/download/core/english-bidirectional-distsim.tagger" 
-    		md5="ba0b97a7604a63e4a7f3da9e5a3b6897"
+    		md5="85f18afa9296c997659299f7a056c282"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20130404" 
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -304,10 +308,10 @@
 		
     	<install-stub-and-upstream-file 
     		file="target/download/core/english-left3words-distsim.tagger" 
-    		md5="4518df668bcd871bb3c4bd795842b4ad"
+    		md5="0e6cec69969c478caad4337a2c6a6d60"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20130404" 
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -339,10 +343,10 @@
 
     	<install-stub-and-upstream-file 
     		file="target/download/core/wsj-0-18-bidirectional-distsim.tagger" 
-    		md5="ad465a43281c196c8aadee1adaab9251"
+    		md5="1e4706e977d5980197b00d66ced4546f"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20130404" 
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -374,10 +378,10 @@
 		
     	<install-stub-and-upstream-file 
     		file="target/download/core/wsj-0-18-left3words-distsim.tagger" 
-    		md5="5686c26b2c28cb3bdbeea6c53c4f1ff4"
+    		md5="39d6dbf571c9a245099dcfaae59d5a35"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20130404" 
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
@@ -412,7 +416,7 @@
     		tool="ner" 
     		language="en" 
     		variant="muc.7class.distsim.crf" 
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20120709" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 		</install-stub-and-upstream-file>		
@@ -438,7 +442,7 @@
     		md5="2ddc5439816fc9f8e8a5382035fc4785"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20120709" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -464,10 +468,10 @@
 
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.all.3class.distsim.crf.ser.gz" 
-    		md5="a80a32baf6b2315f42194128b004c4b0"
+    		md5="d1b3303f09be587660e9228c6d08617c"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20130404" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -496,13 +500,13 @@
 
     	<install-stub-and-upstream-file 
     		file="target/download/core/englishPCFG.ser.gz" 
-    		md5="5869a7ec84d83a4b0e21643f3cd50890"
+    		md5="690081b0af9f0daa0a64ee791793111b"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="parser" 
     		language="en" 
     		variant="pcfg" 
-    		upstreamVersion="${corenlp.version}" 
+    		upstreamVersion="20130404" 
     		metaDataVersion="1"
     		extension="ser.gz">		
 			<metadata>
@@ -517,10 +521,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/englishFactored.ser.gz" 
-    		md5="86e58f283f41bfc3ac7e41f29ceaa79f"
+    		md5="4296500a90fba2a7c00a0ebfc42d099d"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="en" 
@@ -550,10 +554,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/frenchFactored.ser.gz" 
-    		md5="7a43d0d00d84f1cf5a8639ea99a0703d"
+    		md5="635bc3e0a084050b102be7a79c9cc1ed"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="fr" 
@@ -572,21 +576,42 @@
 		  - collide with the corenlp:models.
 		  -->
     	<install-stub-and-upstream-file 
-    		file="target/download/tagger/chinese.tagger" 
-    		md5="b24484906f448c248bcbf7fc676ef523"
+    		file="target/download/tagger/chinese-distsim.tagger" 
+    		md5="f206c8f75dfaff26a8e9afe3606a4abb"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${tagger.version}"
+    		upstreamVersion="20130404"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="zh" 
-    		variant="default" 
+    		variant="distsim" 
     		extension="tagger" >		
 			<metadata>
 	    		<entry key="pos.tagset" value="ctb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
+
+		<!-- 
+		  - Non-english models are not contained in the CoreNLP models (yet) 
+		  - We cannot use the one from the stanford-parser:models artifact, because the packages
+		  - collide with the corenlp:models.
+		  -->
+    	<install-stub-and-upstream-file 
+    		file="target/download/tagger/chinese-nodistsim.tagger" 
+    		md5="52bca6ccb025a910a7d3ca062fa3f9c4"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130404"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="zh" 
+    		variant="nodistsim" 
+    		extension="tagger" >		
+			<metadata>
+	    		<entry key="pos.tagset" value="ctb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
 		<!-- 
 		  - Non-english models are not contained in the CoreNLP models (yet) 
 		  - We cannot use the one from the stanford-parser:models artifact, because the packages
@@ -594,10 +619,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/chinesePCFG.ser.gz" 
-    		md5="09b3379f7abbb2b580c63eebb6f0652b"
+    		md5="17640b43a92d69214955da5161f010fe"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -615,10 +640,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/chineseFactored.ser.gz" 
-    		md5="e8d2efaeb9fb0799b10ca5a02896a909"
+    		md5="7e5658819ddf915895a0f04b7a9631ba"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="${parser.version}"
+    		upstreamVersion="20130405"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -644,9 +669,8 @@
 	
 	<target name="download-core">
 		<mkdir dir="target/download/core"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-${core.date}.tgz" dest="target/download/core/core-nlp.tar.gz" skipexisting="true"/>
-    	<gunzip src="target/download/core/core-nlp.tar.gz"/>
-    	<untar src="target/download/core/core-nlp.tar" dest="target/download/core">
+    	<get src="http://nlp.stanford.edu/software/stanford-corenlp-full-${core.date}.zip" dest="target/download/core/core-nlp.zip" skipexisting="true"/>
+    	<unzip src="target/download/core/core-nlp.zip" dest="target/download/core">
     		<patternset>
     			<include name="**/stanford-corenlp-*-models.jar"/>		
 			</patternset>
@@ -656,7 +680,7 @@
 					<globmapper from="*" to="stanford-corenlp-models.jar"/>
 				</firstmatchmapper>
     		</chainedmapper>
-    	</untar>
+    	</unzip>
 		<unzip src="target/download/core/stanford-corenlp-models.jar" dest="target/download/core">
     		<patternset>
     			<include name="**/*.ser.gz"/>		
@@ -675,24 +699,21 @@
     		</chainedmapper>
 		</unzip>
     	<delete file="target/download/core/stanford-corenlp-models.jar"/>
-    	<!--delete file="target/download/core/core-nlp.tar.gz"/-->
-    	<delete file="target/download/core/core-nlp.tar"/>
 	</target>
 
 	<target name="download-parser">
 		<mkdir dir="target/download/parser"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-parser-${parser.date}.tgz" dest="target/download/parser/parser.tar.gz" skipexisting="true"/>
-    	<gunzip src="target/download/parser/parser.tar.gz"/>
-    	<untar src="target/download/parser/parser.tar" dest="target/download/parser">
+    	<get src="http://nlp.stanford.edu/software/stanford-parser-${parser.date}.zip" dest="target/download/parser/parser.zip" skipexisting="true"/>
+    	<unzip src="target/download/parser/parser.zip" dest="target/download/parser">
     		<patternset>
     			<include name="**/grammar/**/*.ser.gz"/>		
 			</patternset>
     		<chainedmapper>
 	    		<mapper type="flatten"/>
     		</chainedmapper>
-    	</untar>
+    	</unzip>
 
-    	<untar src="target/download/parser/parser.tar" dest="target/download/parser">
+    	<unzip src="target/download/parser/parser.zip" dest="target/download/parser">
     		<patternset>
     			<include name="**/stanford-parser-*-models.jar"/>		
 			</patternset>
@@ -702,7 +723,7 @@
 					<globmapper from="*" to="stanford-parser-models.jar"/>
 				</firstmatchmapper>
     		</chainedmapper>
-    	</untar>
+        	</unzip>
 
 		<unzip src="target/download/parser/stanford-parser-models.jar" dest="target/download/parser">
     		<patternset>
@@ -714,25 +735,22 @@
     		</chainedmapper>
 		</unzip>
 
-    	<!--delete file="target/download/parser/parser.tar.gz"/-->
     	<delete file="stanford-parser-models.jar"/>
-    	<delete file="target/download/parser/parser.tar"/>
 	</target>
 
 	<target name="download-tagger">
 		<mkdir dir="target/download/tagger"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-${tagger.date}.tgz" dest="target/download/tagger/postagger.tar.gz" skipexisting="true"/>
-	   	<gunzip src="target/download/tagger/postagger.tar.gz"/>
-    	<untar src="target/download/tagger/postagger.tar" dest="target/download/tagger">
+    	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-${tagger.date}.zip" dest="target/download/tagger/postagger.zip" skipexisting="true"/>
+		<unzip src="target/download/tagger/postagger.zip" dest="target/download/tagger">
     		<patternset>
     			<include name="**/models//*.tagger*"/>		
 			</patternset>
     		<chainedmapper>
 	    		<mapper type="flatten"/>
     		</chainedmapper>
-    	</untar>
+    	</unzip>
     	<!--delete file="target/download/parser/postagger.tar.gz"/-->
-    	<delete file="target/download/parser/postagger.tar"/>
+    	<!--delete file="target/download/parser/postagger.tar"/-->
 	</target>
 
 	<target name="jar-notice">

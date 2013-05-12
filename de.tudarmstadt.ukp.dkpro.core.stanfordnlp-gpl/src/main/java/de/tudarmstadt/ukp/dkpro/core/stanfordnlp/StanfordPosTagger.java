@@ -119,32 +119,27 @@ public class StanfordPosTagger
 				setOverride(VARIANT, variant);
 			}
 
-			@Override
-			protected MaxentTagger produceResource(URL aUrl) throws IOException
-			{
-				try {
-					MaxentTagger tagger = new MaxentTagger(aUrl.toString());
+            @Override
+            protected MaxentTagger produceResource(URL aUrl) throws IOException
+            {
+                MaxentTagger tagger = new MaxentTagger(aUrl.toString());
+                
+                if (printTagSet) {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("Model contains [").append(tagger.getTags().getSize()).append("] tags: ");
 
-					if (printTagSet) {
-						StringBuilder sb = new StringBuilder();
-						sb.append("Model contains [").append(tagger.getTags().getSize()).append("] tags: ");
-
-						List<String> tags = new ArrayList<String>();
-						for (int i = 0; i < tagger.getTags().getSize(); i ++) {
-							tags.add(tagger.getTags().getTag(i));
-						}
-						Collections.sort(tags);
-						sb.append(StringUtils.join(tags, " "));
-						getContext().getLogger().log(INFO, sb.toString());
-					}
-
-					return tagger;
-				}
-				catch (ClassNotFoundException e) {
-					throw new IOException(e);
-				}
-			}
-		};
+                    List<String> tags = new ArrayList<String>();
+                    for (int i = 0; i < tagger.getTags().getSize(); i ++) {
+                        tags.add(tagger.getTags().getTag(i));
+                    }
+                    Collections.sort(tags);
+                    sb.append(StringUtils.join(tags, " "));
+                    getContext().getLogger().log(INFO, sb.toString());
+                }                   
+                
+                return tagger;
+            }
+        };
 
 		mappingProvider = new MappingProvider();
 		mappingProvider.setDefaultVariantsLocation(

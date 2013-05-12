@@ -49,11 +49,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
+import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
-import edu.stanford.nlp.parser.lexparser.LexicalizedParserQuery;
+import edu.stanford.nlp.parser.lexparser.ParserQuery;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
@@ -301,7 +301,8 @@ public class StanfordParser
 					LexicalizedParser pd = (LexicalizedParser) in.readObject();
 					TreebankLanguagePack lp = pd.getTLPParams().treebankLanguagePack();
 					try {
-						gsf = lp.grammaticalStructureFactory();
+                        gsf = lp.grammaticalStructureFactory(lp.punctuationWordRejectFilter(),
+                                lp.typedDependencyHeadFinder());
 					}
 					catch (UnsupportedOperationException e) {
 						getContext().getLogger().log(WARNING, "Current model does not seem to support " +
@@ -466,7 +467,7 @@ public class StanfordParser
 					}
 
 					// Get parse
-					LexicalizedParserQuery query = parser.parserQuery();
+					ParserQuery query = parser.parserQuery();
 					query.parse(tokenizedSentence);
 					parseTree = query.getBestParse();
 				}
@@ -535,17 +536,19 @@ public class StanfordParser
 		}
 	}
 
-	protected Word tokenToWord(Token aToken)
+	protected CoreLabel tokenToWord(Token aToken)
 	{
+        CoreLabel tw = new CoreLabel();
+        tw.setValue(aToken.getCoveredText());
+        tw.setWord(aToken.getCoveredText());
+        tw.setBeginPosition(aToken.getBegin());
+        tw.setEndPosition(aToken.getEnd());
+        
 		if (readPos && aToken.getPos() != null) {
 			String posValue = aToken.getPos().getPosValue();
-			TaggedWord tw = new TaggedWord(aToken.getCoveredText(), posValue);
-			tw.setBeginPosition(aToken.getBegin());
-			tw.setEndPosition(aToken.getEnd());
-			return tw;
+			tw.setTag(posValue);
 		}
-		else {
-			return new Word(aToken.getCoveredText(), aToken.getBegin(), aToken.getEnd());
-		}
+		
+		return tw;
 	}
 }
