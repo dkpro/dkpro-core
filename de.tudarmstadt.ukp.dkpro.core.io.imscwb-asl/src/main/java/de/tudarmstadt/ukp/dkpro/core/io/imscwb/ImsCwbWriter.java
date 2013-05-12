@@ -181,6 +181,9 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="false")
 	private boolean cqpCompress;
 
+	/**
+	 * The name of the generated corpus.
+	 */
 	public static final String PARAM_CORPUS_NAME = "corpusName";
 	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue="corpus")
 	private String corpusName;
