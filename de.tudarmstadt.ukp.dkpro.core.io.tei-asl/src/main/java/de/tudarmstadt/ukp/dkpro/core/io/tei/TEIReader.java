@@ -55,6 +55,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -75,20 +76,32 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TEIReader
 	extends ResourceCollectionReaderBase
 {
-	public static final String PARAM_WRITE_TOKENS = "writeTokens";
-	@ConfigurationParameter(name = PARAM_WRITE_TOKENS, mandatory = true, defaultValue = "true")
+    /**
+     * Write token annotations to the CAS.
+     */
+	public static final String PARAM_WRITE_TOKEN = ComponentParameters.PARAM_WRITE_TOKEN;
+	@ConfigurationParameter(name = PARAM_WRITE_TOKEN, mandatory = true, defaultValue = "true")
 	private boolean writeTokens;
 
-	public static final String PARAM_WRITE_POS = "writePOS";
+    /**
+     * Write part-of-speech annotations to the CAS.
+     */
+	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
 	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
 	private boolean writePOS;
 
-	public static final String PARAM_WRITE_LEMMA = "writeLemma";
+    /**
+     * Write lemma annotations to the CAS.
+     */
+	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
 	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
 	private boolean writeLemma;
 
-	public static final String PARAM_WRITE_SENTENCES = "writeSentences";
-	@ConfigurationParameter(name = PARAM_WRITE_SENTENCES, mandatory = true, defaultValue = "true")
+	/**
+	 * Write sentence annotations to the CAS.
+	 */
+	public static final String PARAM_WRITE_SENTENCE = ComponentParameters.PARAM_WRITE_SENTENCE;
+	@ConfigurationParameter(name = PARAM_WRITE_SENTENCE, mandatory = true, defaultValue = "true")
 	private boolean writeSentences;
 
 	/**
@@ -108,17 +121,28 @@ public class TEIReader
 	@ConfigurationParameter(name = PARAM_USE_FILENAME_ID, mandatory = true, defaultValue = "false")
 	private boolean useFilenameId;
 
+	/**
+	 * Do not write <em>ignoreable whitespace</em> from the XML file to the CAS.
+	 */
 	// REC: This does not seem to work. Maybe because SAXWriter does not generate this event?
 	public static final String PARAM_OMIT_IGNORABLE_WHITESPACE = "omitIgnorableWhitespace";
 	@ConfigurationParameter(name = PARAM_OMIT_IGNORABLE_WHITESPACE, mandatory = true, defaultValue = "false")
 	private boolean omitIgnorableWhitespace;
 
-	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+    /**
+     * Location of the mapping file for part-of-speech tags to UIMA types.
+     */
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String mappingPosLocation;
 
-	public static final String PARAM_POS_TAGSET = "posTagset";
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    /**
+     * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+     * tag set defined as part of the model meta data. This can be useful if a custom model is
+     * specified which does not have such meta data, or it can be used in readers.
+     */
+	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
+	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
 	protected String posTagset;
 
 	/**
