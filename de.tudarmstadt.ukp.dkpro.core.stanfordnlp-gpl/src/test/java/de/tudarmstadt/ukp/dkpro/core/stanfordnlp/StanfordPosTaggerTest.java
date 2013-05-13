@@ -77,8 +77,8 @@ public class StanfordPosTaggerTest
 
         // How far is China from the world brand?
         runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
-        		new String[] { "NR", "P",  "NN", "NN", "NN", "VE", "JJ", "PU"   } ,
-        		new String[] { "NP", "PP", "NN", "NN", "NN", "V",  "O",  "PUNC" } );
+        		new String[] { "NR", "P",  "NN", "NN", "NN", "VE", "NN", "PU"   } ,
+        		new String[] { "NP", "PP", "NN", "NN", "NN", "V",  "NN",  "PUNC" } );
     }
     
     @Test
