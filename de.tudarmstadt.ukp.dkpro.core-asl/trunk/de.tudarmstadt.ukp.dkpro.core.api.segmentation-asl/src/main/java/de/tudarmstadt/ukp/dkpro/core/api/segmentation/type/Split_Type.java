@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** A part of a compound word.
- * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
+ * Updated by JCasGen Mon May 13 18:03:33 CEST 2013
  * @generated */
 public class Split_Type extends Annotation_Type {
   /** @generated */
@@ -43,24 +43,6 @@ public class Split_Type extends Annotation_Type {
      @modifiable */
   @SuppressWarnings ("hiding")
   public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
- 
-  /** @generated */
-  final Feature casFeat_category;
-  /** @generated */
-  final int     casFeatCode_category;
-  /** @generated */ 
-  public String getCategory(int addr) {
-        if (featOkTst && casFeat_category == null)
-      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
-    return ll_cas.ll_getStringValue(addr, casFeatCode_category);
-  }
-  /** @generated */    
-  public void setCategory(int addr, String v) {
-        if (featOkTst && casFeat_category == null)
-      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
-    ll_cas.ll_setStringValue(addr, casFeatCode_category, v);}
-    
-  
  
   /** @generated */
   final Feature casFeat_splits;
@@ -106,10 +88,6 @@ public class Split_Type extends Annotation_Type {
   public Split_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
-
- 
-    casFeat_category = jcas.getRequiredFeatureDE(casType, "category", "uima.cas.String", featOkTst);
-    casFeatCode_category  = (null == casFeat_category) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_category).getCode();
 
  
     casFeat_splits = jcas.getRequiredFeatureDE(casType, "splits", "uima.cas.FSArray", featOkTst);

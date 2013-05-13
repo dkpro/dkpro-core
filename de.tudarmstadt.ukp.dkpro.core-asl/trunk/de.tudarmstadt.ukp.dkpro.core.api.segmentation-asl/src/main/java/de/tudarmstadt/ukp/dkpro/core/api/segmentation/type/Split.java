@@ -12,8 +12,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** A part of a compound word.
- * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/Segmentation.xml
+ * Updated by JCasGen Mon May 13 18:03:33 CEST 2013
+ * XML source: /home/likewise-open/UKP/santos/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
 public class Split extends Annotation {
   /** @generated
@@ -62,24 +62,6 @@ public class Split extends Annotation {
   private void readObject() {/*default - does nothing empty block */}
      
  
-    
-  //*--------------*
-  //* Feature: category
-
-  /** getter for category - gets The type of morpheme. (morpheme or linking-morpheme)
-   * @generated */
-  public String getCategory() {
-    if (Split_Type.featOkTst && ((Split_Type)jcasType).casFeat_category == null)
-      jcasType.jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
-    return jcasType.ll_cas.ll_getStringValue(addr, ((Split_Type)jcasType).casFeatCode_category);}
-    
-  /** setter for category - sets The type of morpheme. (morpheme or linking-morpheme) 
-   * @generated */
-  public void setCategory(String v) {
-    if (Split_Type.featOkTst && ((Split_Type)jcasType).casFeat_category == null)
-      jcasType.jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split");
-    jcasType.ll_cas.ll_setStringValue(addr, ((Split_Type)jcasType).casFeatCode_category, v);}    
-   
     
   //*--------------*
   //* Feature: splits
