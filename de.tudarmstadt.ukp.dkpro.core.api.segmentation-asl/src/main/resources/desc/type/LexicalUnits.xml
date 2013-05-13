@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Segmentation</name>
   <description/>
   <version>${version}</version>
@@ -80,8 +79,7 @@
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</name>
       <description>Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case"; "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
-&lt;p&gt;
-</description>
+&lt;p&gt;</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -117,17 +115,22 @@
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
-          <name>category</name>
-          <description>The type of morpheme. (morpheme or linking-morpheme)</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
           <name>splits</name>
           <description>Sub-splits of the current split.</description>
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
           <elementType>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</elementType>
         </featureDescription>
       </features>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Morpheme</name>
+      <description>A part of a decompounding word which is a Morpheme.</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme</name>
+      <description>A part of a decompouding word which is a Linking Morpheme.</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
     </typeDescription>
   </types>
 </typeSystemDescription>
