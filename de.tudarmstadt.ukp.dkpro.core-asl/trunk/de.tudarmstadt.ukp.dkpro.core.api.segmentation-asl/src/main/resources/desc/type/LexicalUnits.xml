@@ -123,13 +123,13 @@
       </features>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Morpheme</name>
-      <description>A part of a decompounding word which is a Morpheme.</description>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme</name>
+      <description>A part of a decompouding word which is a Linking Morpheme.</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme</name>
-      <description>A part of a decompouding word which is a Linking Morpheme.</description>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart</name>
+      <description>A part of a decompounding word.</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
     </typeDescription>
   </types>

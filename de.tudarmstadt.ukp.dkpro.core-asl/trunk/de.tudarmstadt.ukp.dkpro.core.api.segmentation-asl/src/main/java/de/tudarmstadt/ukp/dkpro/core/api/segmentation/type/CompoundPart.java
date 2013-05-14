@@ -1,6 +1,6 @@
 
 
-/* First created by JCasGen Mon May 13 18:03:33 CEST 2013 */
+/* First created by JCasGen Tue May 14 09:31:43 CEST 2013 */
 package de.tudarmstadt.ukp.dkpro.core.api.segmentation.type;
 
 import org.apache.uima.jcas.JCas; 
@@ -9,16 +9,16 @@ import org.apache.uima.jcas.cas.TOP_Type;
 
 
 
-/** A part of a decompounding word which is a Morpheme.
- * Updated by JCasGen Mon May 13 18:03:33 CEST 2013
+/** A part of a decompounding word.
+ * Updated by JCasGen Tue May 14 09:31:43 CEST 2013
  * XML source: /home/likewise-open/UKP/santos/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
-public class Morpheme extends Split {
+public class CompoundPart extends Split {
   /** @generated
    * @ordered 
    */
   @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(Morpheme.class);
+  public final static int typeIndexID = JCasRegistry.register(CompoundPart.class);
   /** @generated
    * @ordered 
    */
@@ -30,23 +30,23 @@ public class Morpheme extends Split {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Morpheme() {/* intentionally empty block */}
+  protected CompoundPart() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated */
-  public Morpheme(int addr, TOP_Type type) {
+  public CompoundPart(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
   
   /** @generated */
-  public Morpheme(JCas jcas) {
+  public CompoundPart(JCas jcas) {
     super(jcas);
     readObject();   
   } 
 
   /** @generated */  
-  public Morpheme(JCas jcas, int begin, int end) {
+  public CompoundPart(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
     setEnd(end);
