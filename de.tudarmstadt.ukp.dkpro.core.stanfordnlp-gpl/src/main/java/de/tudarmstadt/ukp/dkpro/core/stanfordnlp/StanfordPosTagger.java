@@ -104,7 +104,8 @@ public class StanfordPosTagger
 
 		modelProvider = new CasConfigurableProviderBase<MaxentTagger>() {
 			{
-				setDefault(VERSION, "20120709.0");
+			    setContextObject(StanfordPosTagger.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-${language}-${variant}");
