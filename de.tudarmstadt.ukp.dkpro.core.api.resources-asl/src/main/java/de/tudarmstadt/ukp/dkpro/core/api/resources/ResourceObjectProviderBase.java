@@ -18,10 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -32,7 +34,13 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.Model;
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
@@ -40,9 +48,9 @@ import org.springframework.util.PropertyPlaceholderHelper;
  * Base class for resource providers that produce a resource from some URL depending on changing
  * parameters such as language.
  * <p>
- * A component using such a provider sets defaults and overrides. The defaults should be set to 
- * sensible values with which the component should be able to work out of the box. For example
- * the {@link #LOCATION} may be set to "classpath:/resources/${language}/model.ser.gz".
+ * A component using such a provider sets defaults and overrides. The defaults should be set to
+ * sensible values with which the component should be able to work out of the box. For example the
+ * {@link #LOCATION} may be set to "classpath:/resources/${language}/model.ser.gz".
  * <p>
  * The overrides should only be set if the user explicitly wants to override some settings.
  * <p>
@@ -52,364 +60,494 @@ import org.springframework.util.PropertyPlaceholderHelper;
  * The {@link #LOCATION} may contain variables referring to any of the other settings, e.g.
  * <code>"${language}"</code>.
  * <p>
- * It is possible a different default variant needs to be used depending on the language. This
- * can be configured by placing a properties file in the classpath and setting its location using
+ * It is possible a different default variant needs to be used depending on the language. This can
+ * be configured by placing a properties file in the classpath and setting its location using
  * {@link #setDefaultVariantsLocation(String)} or by using {@link #setDefaultVariants(Properties)}.
  * The key in the properties is the language and the value is used a default variant.
  * 
  * @author Richard Eckart de Castilho
- *
- * @param <M> the kind of resource produced
+ * 
+ * @param <M>
+ *            the kind of resource produced
  */
 public abstract class ResourceObjectProviderBase<M>
-	implements HasResourceMetadata
+    implements HasResourceMetadata
 {
-	private final Log log = LogFactory.getLog(getClass());
-	
-	public static final String NOT_REQUIRED = "-=* NOT REQUIRED *=-";
-	
-	/**
-	 * The language.
-	 */
-	public static final String LANGUAGE = "language";
-	
-	/**
-	 * The variant. (optional)
-	 */
-	public static final String VARIANT  = "variant";
-	
-	
-	/**
-	 * The location from which the resource should be read. Variables in the location are resolved
-	 * when {@link #configure()} is called.
-	 * 
-	 * @see ResourceUtils#resolveLocation(String, Object, org.apache.uima.UimaContext)
-	 */
-	public static final String LOCATION = "location";
-	
-	/**
-	 * The group ID of the Maven artifact containing a resource. Variables in the location are
-	 * resolved when {@link #configure()} is called. (optional)
-	 */
-	public static final String GROUP_ID = "groupId";
-	
-	/**
-	 * The artifact ID of the Maven artifact containing a resource. Variables in the location are
-	 * resolved when {@link #configure()} is called. (optional)
-	 */
-	public static final String ARTIFACT_ID = "artifactId";
-	
-	/**
-	 * The version of the Maven artifact containing a resource. Variables in the location are
-	 * resolved when {@link #configure()} is called. (optional)
-	 */
-	public static final String VERSION  = "version";
+    private final Log log = LogFactory.getLog(getClass());
 
-	private Properties resourceMetaData;
-	private String resourceUrl;
-	private String initialResourceUrl;
-	private M resource;
-	
-	private Properties overrides = new Properties();
-	private Properties defaults = new Properties();
-	private Properties defaultVariants = null;
-	
-	private String defaultVariantsLocation;
+    public static final String NOT_REQUIRED = "-=* NOT REQUIRED *=-";
 
-	private Map<String, HasResourceMetadata> imports = new HashMap<String, HasResourceMetadata>();
+    /**
+     * The language.
+     */
+    public static final String LANGUAGE = "language";
 
-	public void setOverride(String aKey, String aValue)
-	{
-		if (aValue == null) {
-			overrides.remove(aKey);
-		}
-		else {
-			overrides.setProperty(aKey, aValue);
-		}
-	}
-	
-	public String getOverride(String aKey)
-	{
-		return (String) overrides.get(aKey);
-	}
-	
-	public void removeOverride(String aKey)
-	{
-		overrides.remove(aKey);
-	}
+    /**
+     * The variant. (optional)
+     */
+    public static final String VARIANT = "variant";
 
-	public void setDefault(String aKey, String aValue)
-	{
-		if (aValue == null) {
-			defaults.remove(aKey);
-		}
-		else {
-			defaults.setProperty(aKey, aValue);
-		}
-	}
-	
-	public String getDefault(String aKey)
-	{
-		return (String) defaults.get(aKey);
-	}
-	
-	public void removeDefault(String aKey)
-	{
-		defaults.remove(aKey);
-	}
-	
-	public void addImport(String aString, HasResourceMetadata aSource) 
-	{
-		imports.put(aString, aSource);
-	}
-	
-	public void removeImport(String aString)
-	{
-		imports.remove(aString);
-	}
-	
-	/**
-	 * Set the location in the classpath from where to load the language-dependent default variants
-	 * properties file. The key in the properties is the language and the value is used a default
-	 * variant.
-	 * 
-	 * @param aLocation
-	 *            a location in the form "some/package/name/tool-default-variants.properties". This
-	 *            is always a classpath location. This location may not contain variables.
-	 */
-	public void setDefaultVariantsLocation(String aLocation)
-	{
-		defaultVariantsLocation = aLocation;
-	}
-	
-	/**
-	 * Sets language-dependent default variants. The key in the properties is the language and the
-	 * value is used a default variant.
-	 * 
-	 * @param aDefaultVariants
-	 *            the default variant per language
-	 */
-	public void setDefaultVariants(Properties aDefaultVariants)
-	{
-		if (aDefaultVariants.size() == 0) {
-			log.warn("setDefaultVariants called with zero-sized variants map.");
-			defaultVariants = null;
-		}
-		else {
-			defaultVariants = new Properties();
-			defaultVariants.putAll(aDefaultVariants);
-		}
-	}
-	
-	/**
-	 * For use in test cases.
-	 */
-	protected String getModelLocation() throws IOException
-	{
-		return getModelLocation(null);
-	}
-	
-	protected String getModelLocation(Properties aProperties) throws IOException
-	{
-		Properties props = aProperties;
-		if (props == null) {
-			props = getAggregatedProperties();
-		}
-		PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+    /**
+     * The location from which the resource should be read. Variables in the location are resolved
+     * when {@link #configure()} is called.
+     * 
+     * @see ResourceUtils#resolveLocation(String, Object, org.apache.uima.UimaContext)
+     */
+    public static final String LOCATION = "location";
 
-		try {
-			return pph.replacePlaceholders(props.getProperty(LOCATION), props);
-		}
-		catch (IllegalArgumentException e) {
-			throw new IllegalStateException("Unable to resolve the model location ["
-					+ props.getProperty(LOCATION) + "]: " + e.getMessage() + ". Possibly there is " +
-					"no default model configured for the specified language [" + 
-					props.getProperty(LANGUAGE) + "] or the language is set incorrectly.");
-		}
-	}
-	
-	/**
-	 * Configure a resource using the current configuration. The resource can be fetched then using
-	 * {@link #getResource()}.
-	 * <p>
-	 * Call this method after all configurations have been made. A already configured resource
-	 * will only be recreated if the URL from which the resource is generated has changed due to
-	 * configuration changes.
-	 * 
-	 * @throws IOException if the resource cannot be created.
-	 */
-	public void configure() throws IOException
-	{
-		Properties props = getAggregatedProperties();
-		String modelLocation = getModelLocation(props);
-		
-		boolean success = false;
-		try {
-			if (NOT_REQUIRED.equals(modelLocation)) {
-				if (!StringUtils.equals(resourceUrl, modelLocation)) {
-					log.info("Producing resource from thin air");
-					resource = produceResource(null);
-					resourceUrl = modelLocation;
-				}
-			}
-			else {
-				URL initialUrl = resolveLocation(modelLocation, this, null);
-				
-				if (!StringUtils.equals(initialResourceUrl, initialUrl.toString())) {
-					URL url = initialUrl;
-					resourceMetaData = new Properties();
-					
-					// If the model points to a properties file, try to find a new location in that
-					// file. If that points to a properties file again, repeat the process.
-					while (modelLocation.endsWith(".properties")) {
-						URL modelMetaDataUrl = resolveLocation(modelLocation, this, null);
-						Properties tmpResourceMetaData = PropertiesLoaderUtils
-								.loadProperties(new UrlResource(modelMetaDataUrl));
+    /**
+     * The group ID of the Maven artifact containing a resource. Variables in the location are
+     * resolved when {@link #configure()} is called. (optional)
+     */
+    public static final String GROUP_ID = "groupId";
 
-						// Values in the redirecting properties override values in the redirected-to
-						// properties - except LOCATION
-						resourceMetaData.remove(LOCATION);
-						mergeProperties(resourceMetaData, tmpResourceMetaData);
+    /**
+     * The artifact ID of the Maven artifact containing a resource. Variables in the location are
+     * resolved when {@link #configure()} is called. (optional)
+     */
+    public static final String ARTIFACT_ID = "artifactId";
 
-						modelLocation = resourceMetaData.getProperty(LOCATION);
-						if (modelLocation == null) {
-							throw new IOException("Model URL resolves to properties at ["
-									+ modelMetaDataUrl + "] but no redirect property [" + LOCATION
-									+ "] found there.");
-						}
-						url = resolveLocation(modelLocation, this, null);
-					}
+    /**
+     * The version of the Maven artifact containing a resource. Variables in the location are
+     * resolved when {@link #configure()} is called. (optional)
+     */
+    public static final String VERSION = "version";
 
-					// Load resource meta data if present
-					try {
-						String baseLocation = modelLocation;
-						if (baseLocation.toLowerCase().endsWith(".gz")) {
-							baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
-						}
-						else if (baseLocation.toLowerCase().endsWith(".bz2")) {
-							baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
-						}
-						
-						String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
-								+ ".properties";
-						URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
-						Properties tmpResourceMetaData = PropertiesLoaderUtils
-								.loadProperties(new UrlResource(modelMetaDataUrl));
-						
-						// Values in the redirecting properties override values in the redirected-to
-						// properties.
-						mergeProperties(resourceMetaData, tmpResourceMetaData);
-					}
-					catch (FileNotFoundException e) {
-						// If no metadata was found, just leave the properties empty.
-					}
+    private Properties resourceMetaData;
+    private String resourceUrl;
+    private String initialResourceUrl;
+    private M resource;
 
-					resourceUrl = url.toString();
-					initialResourceUrl = initialUrl.toString();
+    private Object contextObject;
 
-					if (initialResourceUrl.equals(resourceUrl)) {
-						log.info("Producing resource from " + url);
-					}
-					else {
-						log.info("Producing resource from [" + url + "] redirected from ["
-								+ initialResourceUrl + "]");
-					}
-					resource = produceResource(url);
-				}
-			}
-			success = true;
-		}
-		catch (IOException e) {
-			StringBuilder sb = new StringBuilder();
+    private Properties overrides = new Properties();
+    private Properties defaults = new Properties();
+    private Properties defaultVariants = null;
 
-			Set<String> names = props.stringPropertyNames();
-			if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID) && names.contains(VERSION)) {
-				PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
-				String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
-				String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
-				String modelVersion = pph.replacePlaceholders(props.getProperty(VERSION), props);
-				sb.append("\nPlease make sure that ").append(modelArtifact).append(" version ")
-						.append(modelVersion).append(" is on the classpath. If the version ")
-						.append("shown here is not available, try a recent version.");
-			}
-			
-			throw new IOException("Unable to load resource [" + modelLocation + "]: "
-					+ ExceptionUtils.getRootCauseMessage(e) + sb.toString());
-		}
-		finally {
-			if (!success) {
-				resourceUrl = null;
-				resource = null;
-			}
-		}
-	}
+    private String defaultVariantsLocation;
 
-	/**
-	 * Get the currently configured resources. Before this can be used, {@link #configure()} needs
-	 * to be called once or whenever the configuration changes. Mind that sub-classes may provide
-	 * alternative configuration methods that may need to be used instead of {@link #configure()}.
-	 * 
-	 * @return the currently configured resources.
-	 */
-	public M getResource()
-	{
-		return resource;
-	}
+    private Map<String, HasResourceMetadata> imports = new HashMap<String, HasResourceMetadata>();
 
-	/**
-	 * Builds the aggregated configuration from defaults and overrides.
-	 * 
-	 * @return the aggregated effective configuration.
-	 * @throws IOException
-	 *             if the language-dependent default variants location is set but cannot be read.
-	 */
-	protected Properties getAggregatedProperties() throws IOException
-	{
-		Properties defaultValues = new Properties(defaults);
-		defaultValues.putAll(getProperties());
+    public void setOverride(String aKey, String aValue)
+    {
+        if (aValue == null) {
+            overrides.remove(aKey);
+        }
+        else {
+            overrides.setProperty(aKey, aValue);
+        }
+    }
 
-		Properties importedValues = new Properties(defaultValues);
-		for (Entry<String, HasResourceMetadata> e : imports.entrySet()) {
-			String value = e.getValue().getResourceMetaData().getProperty(e.getKey());
-			if (value != null) {
-				importedValues.setProperty(e.getKey(), value);
-			}
-		}
-		
-		Properties overriddenValues = new Properties(importedValues);
-		overriddenValues.putAll(overrides);
+    public String getOverride(String aKey)
+    {
+        return (String) overrides.get(aKey);
+    }
 
-		if (defaultVariants == null && defaultVariantsLocation != null) {
-			setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
-		}
-		
-		String language = overriddenValues.getProperty(LANGUAGE);
-		if (defaultVariants != null && defaultVariants.containsKey(language)) {
-			defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
-		}
+    public void removeOverride(String aKey)
+    {
+        overrides.remove(aKey);
+    }
 
-		return overriddenValues;
-	}
+    public void setDefault(String aKey, String aValue)
+    {
+        if (aValue == null) {
+            defaults.remove(aKey);
+        }
+        else {
+            defaults.setProperty(aKey, aValue);
+        }
+    }
 
-	protected abstract Properties getProperties();
+    public String getDefault(String aKey)
+    {
+        return (String) defaults.get(aKey);
+    }
 
-	protected abstract M produceResource(URL aUrl) throws IOException;
-	
-	@Override
-	public Properties getResourceMetaData()
-	{
-		return resourceMetaData;
-	}
-	
-	/**
-	 * Copy all properties that not already exist in target from source.
-	 */
-	private void mergeProperties(Properties aTarget, Properties aSource)
-	{
-		for (Object key : aSource.keySet()) {
-			if (!aTarget.containsKey(key)) {
-				aTarget.put(key, aSource.get(key));
-			}
-		}
-	}
+    public void removeDefault(String aKey)
+    {
+        defaults.remove(aKey);
+    }
+
+    public void addImport(String aString, HasResourceMetadata aSource)
+    {
+        imports.put(aString, aSource);
+    }
+
+    public void removeImport(String aString)
+    {
+        imports.remove(aString);
+    }
+
+    /**
+     * Set the location in the classpath from where to load the language-dependent default variants
+     * properties file. The key in the properties is the language and the value is used a default
+     * variant.
+     * 
+     * @param aLocation
+     *            a location in the form "some/package/name/tool-default-variants.properties". This
+     *            is always a classpath location. This location may not contain variables.
+     */
+    public void setDefaultVariantsLocation(String aLocation)
+    {
+        defaultVariantsLocation = aLocation;
+    }
+
+    /**
+     * Sets language-dependent default variants. The key in the properties is the language and the
+     * value is used a default variant.
+     * 
+     * @param aDefaultVariants
+     *            the default variant per language
+     */
+    public void setDefaultVariants(Properties aDefaultVariants)
+    {
+        if (aDefaultVariants.size() == 0) {
+            log.warn("setDefaultVariants called with zero-sized variants map.");
+            defaultVariants = null;
+        }
+        else {
+            defaultVariants = new Properties();
+            defaultVariants.putAll(aDefaultVariants);
+        }
+    }
+
+    /**
+     * Set an object which can be used to try finding a Maven POM from which resource version
+     * information could be extracted.
+     * 
+     * @param aObject
+     *            a context object, usually the object creating the provider.
+     */
+    public void setContextObject(Object aObject)
+    {
+        contextObject = aObject;
+    }
+
+    /**
+     * Tries to get the version of the required model from the dependency management section of the
+     * Maven POM belonging to the context object.
+     * 
+     * @throws IOException
+     *             if there was a problem loading the POM file
+     * @throws FileNotFoundException
+     *             if no POM could be found
+     * @throws IllegalStateException
+     *             if more than one POM was found, if the version information could not be found in
+     *             the POM, or if no context object was set.
+     */
+    protected String getModelVersionFromMavenPom()
+        throws IOException
+    {
+        if (contextObject == null) {
+            throw new IllegalStateException("No context object specified");
+        }
+
+        // Get the properties and resolve the artifact coordinates
+        Properties props = getAggregatedProperties();
+        PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+        String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
+        String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
+
+        // Try to determine the location of the POM file belonging to the context object
+        URL url = contextObject.getClass().getResource(
+                contextObject.getClass().getSimpleName() + ".class");
+        String classPart = contextObject.getClass().getName().replace(".", "/") + ".class";
+        String base = url.toString();
+        base = base.substring(0, base.length() - classPart.length());
+        String pomPattern = base + "META-INF/maven/" + modelGroup + "/*/pom.xml";
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource[] resources = resolver.getResources(pomPattern);
+
+        // Bail out if no POM was found
+        if (resources.length == 0) {
+            throw new FileNotFoundException("No POM file found using [" + pomPattern + "]");
+        }
+
+        // Bail out if more than one POM was found (we could also just use the first one or the
+        // highest version of the model artifact referenced in any of them.
+        if (resources.length > 2) {
+            throw new IllegalStateException("Found more than one POM file found using ["
+                    + pomPattern + "]");
+        }
+
+        // Parser the POM
+        Model model;
+        try {
+            MavenXpp3Reader reader = new MavenXpp3Reader();
+            model = reader.read(resources[0].getInputStream());
+
+        }
+        catch (XmlPullParserException e) {
+            throw new IOException(e);
+        }
+
+        // Extract the version of the model artifact
+        List<Dependency> deps = model.getDependencyManagement().getDependencies();
+        for (Dependency dep : deps) {
+            if (StringUtils.equals(dep.getGroupId(), modelGroup)
+                    && StringUtils.equals(dep.getArtifactId(), modelArtifact)) {
+                return dep.getVersion();
+            }
+        }
+
+        // Bail out if no version information for that artifact could be found
+        throw new IllegalStateException("No version information found in [" + resources[0].getURL()
+                + "]");
+    }
+
+    /**
+     * For use in test cases.
+     */
+    protected String getModelLocation()
+        throws IOException
+    {
+        return getModelLocation(null);
+    }
+
+    protected String getModelLocation(Properties aProperties)
+        throws IOException
+    {
+        Properties props = aProperties;
+        if (props == null) {
+            props = getAggregatedProperties();
+        }
+        PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+
+        try {
+            return pph.replacePlaceholders(props.getProperty(LOCATION), props);
+        }
+        catch (IllegalArgumentException e) {
+            throw new IllegalStateException("Unable to resolve the model location ["
+                    + props.getProperty(LOCATION) + "]: " + e.getMessage() + ". Possibly there is "
+                    + "no default model configured for the specified language ["
+                    + props.getProperty(LANGUAGE) + "] or the language is set incorrectly.");
+        }
+    }
+
+    /**
+     * Configure a resource using the current configuration. The resource can be fetched then using
+     * {@link #getResource()}.
+     * <p>
+     * Call this method after all configurations have been made. A already configured resource will
+     * only be recreated if the URL from which the resource is generated has changed due to
+     * configuration changes.
+     * 
+     * @throws IOException
+     *             if the resource cannot be created.
+     */
+    public void configure()
+        throws IOException
+    {
+        Properties props = getAggregatedProperties();
+        String modelLocation = getModelLocation(props);
+
+        boolean success = false;
+        try {
+            if (NOT_REQUIRED.equals(modelLocation)) {
+                if (!StringUtils.equals(resourceUrl, modelLocation)) {
+                    log.info("Producing resource from thin air");
+                    resource = produceResource(null);
+                    resourceUrl = modelLocation;
+                }
+            }
+            else {
+                URL initialUrl = resolveLocation(modelLocation, this, null);
+
+                if (!StringUtils.equals(initialResourceUrl, initialUrl.toString())) {
+                    URL url = initialUrl;
+                    resourceMetaData = new Properties();
+
+                    // If the model points to a properties file, try to find a new location in that
+                    // file. If that points to a properties file again, repeat the process.
+                    while (modelLocation.endsWith(".properties")) {
+                        URL modelMetaDataUrl = resolveLocation(modelLocation, this, null);
+                        Properties tmpResourceMetaData = PropertiesLoaderUtils
+                                .loadProperties(new UrlResource(modelMetaDataUrl));
+
+                        // Values in the redirecting properties override values in the redirected-to
+                        // properties - except LOCATION
+                        resourceMetaData.remove(LOCATION);
+                        mergeProperties(resourceMetaData, tmpResourceMetaData);
+
+                        modelLocation = resourceMetaData.getProperty(LOCATION);
+                        if (modelLocation == null) {
+                            throw new IOException("Model URL resolves to properties at ["
+                                    + modelMetaDataUrl + "] but no redirect property [" + LOCATION
+                                    + "] found there.");
+                        }
+                        url = resolveLocation(modelLocation, this, null);
+                    }
+
+                    // Load resource meta data if present
+                    try {
+                        String baseLocation = modelLocation;
+                        if (baseLocation.toLowerCase().endsWith(".gz")) {
+                            baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
+                        }
+                        else if (baseLocation.toLowerCase().endsWith(".bz2")) {
+                            baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
+                        }
+
+                        String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
+                                + ".properties";
+                        URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
+                        Properties tmpResourceMetaData = PropertiesLoaderUtils
+                                .loadProperties(new UrlResource(modelMetaDataUrl));
+
+                        // Values in the redirecting properties override values in the redirected-to
+                        // properties.
+                        mergeProperties(resourceMetaData, tmpResourceMetaData);
+                    }
+                    catch (FileNotFoundException e) {
+                        // If no metadata was found, just leave the properties empty.
+                    }
+
+                    resourceUrl = url.toString();
+                    initialResourceUrl = initialUrl.toString();
+
+                    if (initialResourceUrl.equals(resourceUrl)) {
+                        log.info("Producing resource from " + url);
+                    }
+                    else {
+                        log.info("Producing resource from [" + url + "] redirected from ["
+                                + initialResourceUrl + "]");
+                    }
+                    resource = produceResource(url);
+                }
+            }
+            success = true;
+        }
+        catch (IOException e) {
+            StringBuilder sb = new StringBuilder();
+
+            Set<String> names = props.stringPropertyNames();
+            if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
+                PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null,
+                        false);
+                String artifactId = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
+                String groupId = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
+                String version = pph.replacePlaceholders(props.getProperty(VERSION, ""), props);
+
+                // Try getting better information about the model version.
+                String extraErrorInfo = "";
+                try {
+                    version = getModelVersionFromMavenPom();
+                }
+                catch (IOException ex) {
+                    extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
+                }
+                catch (IllegalStateException ex) {
+                    extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
+                }
+
+                // Tell user how to add model dependency
+                sb.append("\nPlease make sure that [").append(artifactId).append(']');
+                if (StringUtils.isNotBlank(version)) {
+                    sb.append(" version [").append(version).append(']');
+                }
+
+                sb.append(" is on the classpath.\n");
+
+                if (StringUtils.isNotBlank(version)) {
+                    sb.append("If the version ").append(
+                            "shown here is not available, try a recent version.\n");
+                    sb.append('\n');
+                    sb.append("If you are using Maven, add the following dependency to your pom.xml file:\n");
+                    sb.append('\n');
+                    sb.append("<dependency>\n");
+                    sb.append("  <groupId>").append(groupId).append("</groupId>\n");
+                    sb.append("  <artifactId>").append(artifactId).append("</artifactId>\n");
+                    sb.append("  <version>").append(version).append("</version>\n");
+                    sb.append("</dependency>\n");
+                }
+                else {
+                    sb.append(
+                            "I was unable to determine which version of the desired model is "
+                                    + "compatible with this component:\n").append(extraErrorInfo)
+                            .append("\n");
+                }
+
+            }
+
+            throw new IOException("Unable to load resource [" + modelLocation + "]: \n"
+                    + ExceptionUtils.getRootCauseMessage(e) + "\n" + sb.toString());
+        }
+        finally {
+            if (!success) {
+                resourceUrl = null;
+                resource = null;
+            }
+        }
+    }
+
+    /**
+     * Get the currently configured resources. Before this can be used, {@link #configure()} needs
+     * to be called once or whenever the configuration changes. Mind that sub-classes may provide
+     * alternative configuration methods that may need to be used instead of {@link #configure()}.
+     * 
+     * @return the currently configured resources.
+     */
+    public M getResource()
+    {
+        return resource;
+    }
+
+    /**
+     * Builds the aggregated configuration from defaults and overrides.
+     * 
+     * @return the aggregated effective configuration.
+     * @throws IOException
+     *             if the language-dependent default variants location is set but cannot be read.
+     */
+    protected Properties getAggregatedProperties()
+        throws IOException
+    {
+        Properties defaultValues = new Properties(defaults);
+        defaultValues.putAll(getProperties());
+
+        Properties importedValues = new Properties(defaultValues);
+        for (Entry<String, HasResourceMetadata> e : imports.entrySet()) {
+            String value = e.getValue().getResourceMetaData().getProperty(e.getKey());
+            if (value != null) {
+                importedValues.setProperty(e.getKey(), value);
+            }
+        }
+
+        Properties overriddenValues = new Properties(importedValues);
+        overriddenValues.putAll(overrides);
+
+        if (defaultVariants == null && defaultVariantsLocation != null) {
+            setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
+        }
+
+        String language = overriddenValues.getProperty(LANGUAGE);
+        if (defaultVariants != null && defaultVariants.containsKey(language)) {
+            defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
+        }
+
+        return overriddenValues;
+    }
+
+    protected abstract Properties getProperties();
+
+    protected abstract M produceResource(URL aUrl)
+        throws IOException;
+
+    @Override
+    public Properties getResourceMetaData()
+    {
+        return resourceMetaData;
+    }
+
+    /**
+     * Copy all properties that not already exist in target from source.
+     */
+    private void mergeProperties(Properties aTarget, Properties aSource)
+    {
+        for (Object key : aSource.keySet()) {
+            if (!aTarget.containsKey(key)) {
+                aTarget.put(key, aSource.get(key));
+            }
+        }
+    }
 }
