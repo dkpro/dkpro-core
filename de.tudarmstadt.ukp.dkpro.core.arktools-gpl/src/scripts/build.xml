@@ -1,21 +1,44 @@
 <project basedir="../.." default="separate-jars">
-	    <import>
-        	<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
-        </import>
-        
-        <target name="local-maven">
-                <property name="install-artifact-enable" value="true"/>
-                <antcall target="separate-jars"/>
-        </target>
-        
-        <target name="separate-jars">
-                <property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/arktools"/>
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+	</import>
 
-                <mkdir dir="target/download/ner"/>
-                
-                <get src="https://github.com/nschneid/arabic-tagger/blob/master/model/arabic-ner-superROP200.selfROP100.ser.gz?raw=true" dest="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" skipexisting="true"/>
-                <install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.arktools"
-                file="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" md5="62a3c96b9aee9c5ecf3737788571b108"
-                tool="ner" language="ar" variant="superROP" extension="ser.gz" version="20120726.0"/>                            
-        </target>
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/arktools/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars">
+		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/arktools"/>
+
+		<mkdir dir="target/download/ner"/>
+
+		<get 
+			src="https://raw.github.com/nschneid/arabic-tagger/master/model/arabic-ner-superROP200.selfROP100.ser.gz" 
+			dest="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" 
+			skipexisting="true"/>
+		
+    	<install-stub-and-upstream-file 
+       		file="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz"
+       		md5="62a3c96b9aee9c5ecf3737788571b108"
+       		groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.arktools"
+    		upstreamVersion="20120515"
+    		metaDataVersion="1"
+    		tool="ner"
+    		language="ar"
+			variant="superROP"
+		    extension="ser.gz">		
+		</install-stub-and-upstream-file>
+	</target>
 </project>
