@@ -65,7 +65,7 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound</name>
-      <description/>
+      <description>This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two Splits. </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -111,7 +111,7 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</name>
-      <description>A part of a compound word.</description>
+      <description>This type represents a part of a decompounding word. A Split can be either a CompoundPart or a LinkingMorpheme. </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -124,12 +124,12 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme</name>
-      <description>A part of a decompouding word which is a Linking Morpheme.</description>
+      <description>This type represents a linking morpheme between two CompoundParts. </description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart</name>
-      <description>A part of a decompounding word.</description>
+      <description>A CompoundPart represents one fragment from the compounding word. Besides that, it can store other CompoundParts if it can be split again. The way it stores a decompounding word represents a decompounding tree.</description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
     </typeDescription>
   </types>
