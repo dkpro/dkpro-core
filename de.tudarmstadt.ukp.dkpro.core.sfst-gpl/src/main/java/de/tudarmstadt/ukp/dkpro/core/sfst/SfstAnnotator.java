@@ -60,7 +60,25 @@ import de.tudarmstadt.ukp.dkpro.core.sfst.parser.TurkishAnalysisParser;
 public class SfstAnnotator
     extends JCasAnnotator_ImplBase
 {
-	/**
+    /**
+     * Write part-of-speech information.
+     *
+     * Default: {@code true}
+     */
+    public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
+    @ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
+    private boolean writePos;
+
+    /**
+     * Write lemma information.
+     *
+     * Default: {@code true}
+     */
+    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
+    @ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
+    private boolean writeLemma;
+
+    /**
 	 * Use this language instead of the document language to resolve the model.
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
@@ -177,19 +195,19 @@ public class SfstAnnotator
                     ParsedAnalysis parse = parser.parse(results.get(0));
                     
                     // TODO: concert parse into more fine-grained morph tags
-                    Morpheme morpheme = new Morpheme(jcas);
+                    Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
                     morpheme.setMorphTag(parse.getRaw());
                     morpheme.addToIndexes();
                     
-                    if (parse.getLemma() != null) {
-                        Lemma lemma = new Lemma(jcas);
+                    if (writeLemma && parse.getLemma() != null) {
+                        Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
                         lemma.setValue(parse.getLemma());
                         lemma.addToIndexes();
                     }
                     
                     // TODO add more fine-grained POS tags                    
-                    if (parse.getTag(TagType.POS) != null) {
-                        POS pos = new POS(jcas);
+                    if (writePos && parse.getTag(TagType.POS) != null) {
+                        POS pos = new POS(jcas, token.getBegin(), token.getEnd());
                         pos.setPosValue(parse.getTag(TagType.POS).name()); 
                         pos.addToIndexes();
                     }

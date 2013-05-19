@@ -14,6 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -25,6 +26,7 @@ import org.uimafit.util.JCasUtil;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 
@@ -42,10 +44,14 @@ public class MorphologyAnnotatorTest
         jcas.setDocumentLanguage("tr");
         jcas.setDocumentText("Doktor hastanede çalışıyorum.");
         ae.process(jcas);
-        
+
+        String[] lemmas = new String[] { "Doktor", "hastane", "çalış", "."  };
+
+        String[] posOriginal = new String[] { "notAvailable", "n", "v", "notAvailable" };
+
+        AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         assertEquals(4, JCasUtil.select(jcas, Morpheme.class).size());
-        assertEquals(4, JCasUtil.select(jcas, Lemma.class).size());
-        assertEquals(4, JCasUtil.select(jcas, POS.class).size());
     }
     
     @Test
@@ -58,6 +64,13 @@ public class MorphologyAnnotatorTest
         jcas.setDocumentText("Der Arzt arbeitet im Krankenhaus.");
         ae.process(jcas);
         
+        String[] lemmas = new String[] { };
+
+        String[] posOriginal = new String[] { "notAvailable", "notAvailable", "notAvailable",
+                "notAvailable", "notAvailable", "notAvailable" };
+
+        AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         assertEquals(6, JCasUtil.select(jcas, Morpheme.class).size());
     }
     
