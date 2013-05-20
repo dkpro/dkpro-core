@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>2</version>
+		<version>3</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
   	<version>1.5.0-SNAPSHOT</version>
@@ -51,6 +51,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -111,6 +112,10 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimafit-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
@@ -140,6 +145,47 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.uima</groupId>
+					<artifactId>uimafit-maven-plugin</artifactId>
+					<version>2.0.0-SNAPSHOT</version>
+					<configuration>
+						<componentVendor>DKPro Core Project</componentVendor>
+						<componentCopyright>
+							Copyright 2010
+							Ubiquitous Knowledge Processing (UKP) Lab
+							Technische Universität Darmstadt
+						</componentCopyright>
+						<failOnMissingMetaData>true</failOnMissingMetaData>
+					</configuration>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+					<dependencies>
+						<!-- Enable support for legacy annotations -->
+						<dependency>
+							<groupId>org.apache.uima</groupId>
+							<artifactId>uimafit-legacy-support</artifactId>
+							<version>2.0.0-SNAPSHOT</version>
+						</dependency>
+						<dependency>
+							<groupId>org.uimafit</groupId>
+							<artifactId>uimafit</artifactId>
+							<version>1.4.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<profiles>
 		<profile>
