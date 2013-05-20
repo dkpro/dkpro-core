@@ -111,10 +111,12 @@
 	</modules>
 	<build>
 		<plugins>
+			<!--  
 			<plugin>
 				<groupId>org.apache.uima</groupId>
 				<artifactId>uimafit-maven-plugin</artifactId>
 			</plugin>
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -147,6 +149,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+			    <!--  
 				<plugin>
 					<groupId>org.apache.uima</groupId>
 					<artifactId>uimafit-maven-plugin</artifactId>
@@ -171,7 +174,7 @@
 						</execution>
 					</executions>
 					<dependencies>
-						<!-- Enable support for legacy annotations -->
+						<!- - Enable support for legacy annotations - ->
 						<dependency>
 							<groupId>org.apache.uima</groupId>
 							<artifactId>uimafit-legacy-support</artifactId>
@@ -184,40 +187,11 @@
 						</dependency>
 					</dependencies>
 				</plugin>
+				-->
 			</plugins>
 		</pluginManagement>
 	</build>
 	<profiles>
-		<profile>
-			<id>rat-check</id>
-			<activation>
-				<file>
-					<exists>src/main/java</exists>
-				</file>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.rat</groupId>
-						<artifactId>apache-rat-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>default</id>
-								<configuration>
-									<excludes>
-										<!-- 
-										   Exclude all - We inherit from the ASL parent POM but we have
-										   only GPL code in this part.
-										-->
-										<exclude>**/*</exclude> 
-									</excludes>
-								</configuration>
-							</execution>
-						</executions>						
-					</plugin>
-				</plugins>
-			</build>
-		</profile>		
 		<profile>
 			<id>build-apidocs</id>
 			<build>
