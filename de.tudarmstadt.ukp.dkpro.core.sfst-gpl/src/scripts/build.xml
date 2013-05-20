@@ -58,9 +58,9 @@
         	<mkdir dir="${outputDir}/bin"/>
         	<copydir src="target/download/sfst/" dest="${outputDir}/bin" includes="**/*"/>
             <clean-pom/>
-            <generate-pom version="20120111.0" groupId="de.tudarmstadt.ukp.dkpro.core" 
+            <generate-pom version="20120111.1" groupId="de.tudarmstadt.ukp.dkpro.core" 
                     artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"/>
-            <jar destfile="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-20120111.0.jar" compress="true">
+            <jar destfile="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-20120111.1.jar" compress="true">
                 <fileset dir="target/model-staging/">
                 	   <include name="de/tudarmstadt/ukp/dkpro/core/sfst/bin/**/"/>
                 	   <include name="META-INF/maven/**/pom.xml"/>

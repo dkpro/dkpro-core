@@ -63,7 +63,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-bin</artifactId>
-				<version>20120111.0</version>
+				<version>20120111.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
