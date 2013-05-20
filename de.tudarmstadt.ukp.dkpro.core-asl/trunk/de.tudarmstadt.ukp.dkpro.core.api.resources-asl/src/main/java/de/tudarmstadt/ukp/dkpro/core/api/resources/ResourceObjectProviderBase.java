@@ -19,8 +19,10 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -254,27 +256,49 @@ public abstract class ResourceObjectProviderBase<M>
         String classPart = contextObject.getClass().getName().replace(".", "/") + ".class";
         String base = url.toString();
         base = base.substring(0, base.length() - classPart.length());
-        String pomPattern = base + "META-INF/maven/" + modelGroup + "/*/pom.xml";
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources(pomPattern);
 
-        // Bail out if no POM was found
-        if (resources.length == 0) {
-            throw new FileNotFoundException("No POM file found using [" + pomPattern + "]");
+        URL pomUrl = null;
+        
+        if ("file".equals(url.getProtocol()) && base.endsWith("target/classes/")) {
+            // This is an alternative strategy when running during a Maven build. In a normal
+            // Maven build, the Maven descriptor in META-INF is only created during the
+            // "package" phase, so we try looking in the project directory.
+            // See also: http://jira.codehaus.org/browse/MJAR-76
+            
+            base = base.substring(0, base.length() - "target/classes/".length());
+            File pomFile = new File(new File(URI.create(base)), "pom.xml");
+            if (pomFile.exists()) {
+                
+            }
+            pomUrl = pomFile.toURI().toURL();
         }
-
-        // Bail out if more than one POM was found (we could also just use the first one or the
-        // highest version of the model artifact referenced in any of them.
-        if (resources.length > 2) {
-            throw new IllegalStateException("Found more than one POM file found using ["
-                    + pomPattern + "]");
+        
+        if (pomUrl == null) {
+            // This is the default strategy supposed to look in the JAR
+            String pomPattern = base + "META-INF/maven/" + modelGroup + "/*/pom.xml";
+            PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+            Resource[] resources = resolver.getResources(pomPattern);
+    
+            // Bail out if no POM was found
+            if (resources.length == 0) {
+                throw new FileNotFoundException("No POM file found using [" + pomPattern + "]");
+            }
+    
+            // Bail out if more than one POM was found (we could also just use the first one or the
+            // highest version of the model artifact referenced in any of them.
+            if (resources.length > 2) {
+                throw new IllegalStateException("Found more than one POM file found using ["
+                        + pomPattern + "]");
+            }
+            
+            pomUrl = resources[0].getURL();
         }
 
         // Parser the POM
         Model model;
         try {
             MavenXpp3Reader reader = new MavenXpp3Reader();
-            model = reader.read(resources[0].getInputStream());
+            model = reader.read(pomUrl.openStream());
 
         }
         catch (XmlPullParserException e) {
@@ -291,8 +315,7 @@ public abstract class ResourceObjectProviderBase<M>
         }
 
         // Bail out if no version information for that artifact could be found
-        throw new IllegalStateException("No version information found in [" + resources[0].getURL()
-                + "]");
+        throw new IllegalStateException("No version information found in [" + pomUrl + "]");
     }
 
     /**
