@@ -147,13 +147,11 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-dewac</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--  
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-bidirectional-distsim</artifactId>
 			<scope>test</scope>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-fast</artifactId>
