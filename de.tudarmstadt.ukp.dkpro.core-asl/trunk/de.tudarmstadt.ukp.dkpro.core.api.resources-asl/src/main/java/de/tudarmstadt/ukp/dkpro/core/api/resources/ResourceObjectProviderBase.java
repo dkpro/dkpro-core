@@ -259,6 +259,7 @@ public abstract class ResourceObjectProviderBase<M>
 
         URL pomUrl = null;
         
+        String extraNotFoundInfo = "";
         if ("file".equals(url.getProtocol()) && base.endsWith("target/classes/")) {
             // This is an alternative strategy when running during a Maven build. In a normal
             // Maven build, the Maven descriptor in META-INF is only created during the
@@ -268,9 +269,12 @@ public abstract class ResourceObjectProviderBase<M>
             base = base.substring(0, base.length() - "target/classes/".length());
             File pomFile = new File(new File(URI.create(base)), "pom.xml");
             if (pomFile.exists()) {
-                
+                pomUrl = pomFile.toURI().toURL();
             }
-            pomUrl = pomFile.toURI().toURL();
+            else {
+                extraNotFoundInfo = " Since it looks like you are running a Maven build, it POM " +
+                		"file was also searched for at [" + pomFile + "], but it doesn't exist there.";
+            }
         }
         
         if (pomUrl == null) {
@@ -281,7 +285,8 @@ public abstract class ResourceObjectProviderBase<M>
     
             // Bail out if no POM was found
             if (resources.length == 0) {
-                throw new FileNotFoundException("No POM file found using [" + pomPattern + "]");
+                throw new FileNotFoundException("No POM file found using [" + pomPattern + "]"
+                        + extraNotFoundInfo);
             }
     
             // Bail out if more than one POM was found (we could also just use the first one or the
