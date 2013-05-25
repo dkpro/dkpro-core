@@ -39,15 +39,17 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 public class TreeTaggerPosTagger
 {
 
-    private AnalysisEngineDescription tagger;
+    private AnalysisEngine engine;
 
     public TreeTaggerPosTagger()
         throws Exception
    {
-        tagger = createAggregateDescription(
+        AnalysisEngineDescription tagger = createAggregateDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
         );
+        engine = createPrimitive(tagger);
+
     }
     
     public Collection<TaggedToken> tag(String text, String language)
@@ -55,7 +57,6 @@ public class TreeTaggerPosTagger
     {
         List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();
 
-        AnalysisEngine engine = createPrimitive(tagger);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(text);

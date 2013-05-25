@@ -38,15 +38,17 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
 public class OpenNlpPosTagger
 {
 
-    private AnalysisEngineDescription tagger;
+    private AnalysisEngine engine;
 
     public OpenNlpPosTagger()
         throws Exception
    {
-        tagger = createAggregateDescription(
+        AnalysisEngineDescription tagger = createAggregateDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger.class)
         );
+        engine = createPrimitive(tagger);
+
     }
     
     public Collection<TaggedToken> tag(String text, String language)
@@ -54,7 +56,6 @@ public class OpenNlpPosTagger
     {
         List<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();
 
-        AnalysisEngine engine = createPrimitive(tagger);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(text);
