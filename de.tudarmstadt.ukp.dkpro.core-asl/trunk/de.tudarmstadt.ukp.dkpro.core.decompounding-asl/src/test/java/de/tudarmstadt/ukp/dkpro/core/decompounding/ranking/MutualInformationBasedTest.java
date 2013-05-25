@@ -40,7 +40,7 @@ public class MutualInformationBasedTest
 
     static File source = new File("src/test/resources/ranking/n-grams-2");
     static File index = new File("target/test/index");
-    static File jWeb1T = new File("/home/likewise-open/UKP/santos/UKP/Library/DKPro/web1t/de");
+    static File jWeb1T = new File("src/test/resources/web1t/de");
 
     @BeforeClass
     public static void createIndex()
@@ -69,11 +69,9 @@ public class MutualInformationBasedTest
         list.add(s3);
 
         List<DecompoundedWord> result = ranker.rank(list);
-        System.out.println(result);
-        Assert.assertEquals(s3, result.get(0));
-        Assert.assertEquals(s1, result.get(1));
+        Assert.assertEquals(s1, result.get(0));
 
-        Assert.assertEquals(s3, ranker.highestRank(list));
+        Assert.assertEquals(s1, ranker.highestRank(list));
     }
 
     @Test
@@ -91,7 +89,7 @@ public class MutualInformationBasedTest
         tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
         DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s3, result);
+        Assert.assertEquals(s2, result);
     }
 
     @AfterClass
