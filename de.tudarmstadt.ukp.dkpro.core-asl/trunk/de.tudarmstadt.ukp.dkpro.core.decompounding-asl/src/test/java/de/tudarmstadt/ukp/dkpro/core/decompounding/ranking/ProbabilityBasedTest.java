@@ -40,7 +40,7 @@ public class ProbabilityBasedTest
 
 	static File source = new File("src/test/resources/ranking/n-grams");
 	static File index = new File("target/test/index");
-	static File jWeb1T = new File("/home/likewise-open/UKP/santos/UKP/Library/DKPro/web1t/de");
+	static File jWeb1T = new File("src/test/resources/web1t/de");
 
 	@BeforeClass
 	public static void createIndex()
@@ -85,7 +85,7 @@ public class ProbabilityBasedTest
 		tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
 		DecompoundedWord result = ranker.highestRank(tree);
-		Assert.assertEquals(s1, result);
+		Assert.assertEquals(s2, result);
 	}
 
 
