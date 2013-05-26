@@ -17,8 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.core;
 
-import java.net.MalformedURLException;
+import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.util.TagUtil;
 
 public class Tag
@@ -27,11 +28,18 @@ public class Tag
     private String tag;
     private String simplifiedTag;
 
-    public Tag(String tag, String language) throws MalformedURLException
+    public Tag(String tag, String language)
+            throws ResourceInitializationException
+    {
+        this(tag, language, TagUtil.getMappingProvider(language));
+    }
+
+    public Tag(String tag, String language, MappingProvider mappingProvider)
+            throws ResourceInitializationException
     {
         super();
-        this.tag = tag;
-        this.simplifiedTag = TagUtil.getSimplifiedTag(tag, language);
+        this.tag = mappingProvider.getTagType(tag).getName();
+        this.simplifiedTag = mappingProvider.getTagType(tag).getShortName();
     }
     
     public String getTag()

@@ -17,13 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.pipeline.JCasIterable;
 import org.uimafit.util.JCasUtil;
 
@@ -70,7 +70,7 @@ public class TextIterable
                 try {
                     toolboxSentences.add(ToolboxUtils.UimaSentence2ToolboxSentence(jcas, language , sentence));
                 }
-                catch (MalformedURLException e) {
+                catch (ResourceInitializationException e) {
                     throw new RuntimeException(e);
                 }
             }

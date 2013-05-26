@@ -95,7 +95,15 @@
 			<version>20120616.0</version>
 			<scope>test</scope>
 		</dependency>
--->	</dependencies>
+-->
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+				de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent
+			</artifactId>
+			<version>20120616.0</version>
+		</dependency>
+	</dependencies>
 	<profiles>
 		<profile>
 			<id>use-proprietary-resources</id>

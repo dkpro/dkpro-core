@@ -17,42 +17,71 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.core.util;
 
-import java.net.MalformedURLException;
-import java.util.Map;
+import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.TagsetMappingFactory;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.resource.ResourceInitializationException;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+
 
 public class TagUtil
 {
-
-    public static String getSimplifiedTag(String tag, String language)
-        throws MalformedURLException
-    {
-		Map<String, String> mapping = TagsetMappingFactory.getMapping(TagsetMappingFactory.POS,
-				language, null);
-        
-        if (mapping.containsKey(tag)) {
-            return getShortName(mapping.get(tag)); 
-        }
-        else {
-            if (mapping.containsKey("*")) {
-                return getShortName(mapping.get("*")); 
-            }
-            else {
-                throw new IllegalStateException("No fallback (*) mapping defined!");
-            }
-        }
-    }
     
-    private static String getShortName(String longName) {
+    private static MappingProvider posMappingProvider = null;
+    
+    public static MappingProvider getMappingProvider(String language) throws ResourceInitializationException {
+        if (posMappingProvider == null) {
+         
+            posMappingProvider = new MappingProvider();
+            posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                    "core/api/lexmorph/tagset/" + language + "-default-pos.map");
+            posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+            posMappingProvider.setDefault("tagger.tagset", "default");
+            
+            AnalysisEngineDescription tagger = createAggregateDescription(
+                    createPrimitiveDescription(OpenNlpPosTagger.class)
+            );
+            AnalysisEngine engine = createPrimitive(tagger);      
+            posMappingProvider.configure(engine.newCAS());
+        }      
         
-        String[] parts = longName.split("\\.");
-        
-        if (parts.length <= 1) {
-            return longName;
-        }
-        else {
-            return parts[parts.length-1];
-        }
+        return posMappingProvider;
     }
+
+//    public static String getSimplifiedTag(String tag, String language)
+//        throws MalformedURLException
+//    {
+//		Map<String, String> mapping = TagsetMappingFactory.getMapping(TagsetMappingFactory.POS,
+//				language, null);
+//        
+//        if (mapping.containsKey(tag)) {
+//            return getShortName(mapping.get(tag)); 
+//        }
+//        else {
+//            if (mapping.containsKey("*")) {
+//                return getShortName(mapping.get("*")); 
+//            }
+//            else {
+//                throw new IllegalStateException("No fallback (*) mapping defined!");
+//            }
+//        }
+//    }
+//    
+//    private static String getShortName(String longName) {
+//        
+//        String[] parts = longName.split("\\.");
+//        
+//        if (parts.length <= 1) {
+//            return longName;
+//        }
+//        else {
+//            return parts[parts.length-1];
+//        }
+//    }
 }

@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.util;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -38,7 +38,7 @@ public class ToolboxUtils
             String languageCode,
             de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence uimaSentence
     )
-        throws MalformedURLException
+        throws ResourceInitializationException
     {
         List<String> tokens = JCasUtil.toText(JCasUtil.selectCovered(jcas, Token.class, uimaSentence));
         
@@ -59,7 +59,7 @@ public class ToolboxUtils
             String languageCode,
             POS pos
     )
-        throws MalformedURLException
+        throws ResourceInitializationException
     {
         return new Tag(pos.getPosValue(), languageCode);
     }

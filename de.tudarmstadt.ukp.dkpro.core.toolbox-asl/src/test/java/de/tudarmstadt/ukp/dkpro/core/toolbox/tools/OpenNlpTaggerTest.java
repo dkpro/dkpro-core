@@ -21,20 +21,18 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
-import org.junit.Assume;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
 
-public class TreeTaggerTaggerTest
+public class OpenNlpTaggerTest
 {
 
     @Test
-    public void treeTaggerAnnotatorEnglishTest()
+    public void openNlpAnnotatorEnglishTest()
         throws Exception
     {
-    	checkModelsAndBinary("en");
     	
         runTest("en", "This is a test .",
                 new TaggedToken[] {
@@ -65,10 +63,10 @@ public class TreeTaggerTaggerTest
     private void runTest(String language, String testDocument, TaggedToken[] taggedTokens)
         throws Exception
     {
-        TreeTaggerPosTagger tagger = new TreeTaggerPosTagger();
+        OpenNlpPosTagger tagger = new OpenNlpPosTagger();
         
         if (taggedTokens != null) {
-            checkTaggedTokens(taggedTokens,  tagger.tag(testDocument, language));
+            checkTaggedTokens(taggedTokens, tagger.tag(testDocument, language));
         }
     }
 
@@ -81,14 +79,4 @@ public class TreeTaggerTaggerTest
             i++;
         }
     }
-    
-	private void checkModelsAndBinary(String lang)
-	{
-		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
-						+ "-little-endian.par") != null);
-
-		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
-	}
 }
