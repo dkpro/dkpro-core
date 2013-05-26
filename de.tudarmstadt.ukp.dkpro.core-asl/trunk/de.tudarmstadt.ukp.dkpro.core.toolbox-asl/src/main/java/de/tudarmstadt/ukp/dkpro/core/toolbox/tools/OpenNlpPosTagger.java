@@ -39,7 +39,7 @@ public class OpenNlpPosTagger
 {
 
     private AnalysisEngine engine;
-
+    
     public OpenNlpPosTagger()
         throws Exception
    {
@@ -47,8 +47,7 @@ public class OpenNlpPosTagger
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger.class)
         );
-        engine = createPrimitive(tagger);
-
+        engine = createPrimitive(tagger);      
     }
     
     public Collection<TaggedToken> tag(String text, String language)
@@ -58,7 +57,7 @@ public class OpenNlpPosTagger
 
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(language);
-        jcas.setDocumentText(text);
+        jcas.setDocumentText(text);        
         engine.process(jcas);
 
         for (Token t : select(jcas, Token.class)) {

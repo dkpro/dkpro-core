@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
-import java.net.MalformedURLException;
 import java.util.Queue;
 
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.pipeline.JCasIterable;
 import org.uimafit.util.JCasUtil;
 
@@ -40,7 +40,7 @@ public class TaggedTokenIterable
 
     @Override
     protected void fillQueue(JCasIterable jcasIterable, Queue<TaggedToken> items)
-        throws MalformedURLException
+        throws ResourceInitializationException
     {
         if (jcasIterable.hasNext()) {
             JCas jcas = jcasIterable.next();

@@ -40,7 +40,7 @@ public class TreeTaggerPosTagger
 {
 
     private AnalysisEngine engine;
-
+    
     public TreeTaggerPosTagger()
         throws Exception
    {
@@ -49,7 +49,6 @@ public class TreeTaggerPosTagger
                 createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
         );
         engine = createPrimitive(tagger);
-
     }
     
     public Collection<TaggedToken> tag(String text, String language)

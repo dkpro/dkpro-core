@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
-import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.pipeline.JCasIterable;
 
 public abstract class CorpusIterableBase 
@@ -42,7 +42,8 @@ public abstract class CorpusIterableBase
         return new CorpusItemIterator<T>();
     }
 
-    protected abstract void fillQueue(JCasIterable jcasIterable, Queue<T> items) throws MalformedURLException;
+    protected abstract void fillQueue(JCasIterable jcasIterable, Queue<T> items)
+            throws ResourceInitializationException;
     
     private class CorpusItemIterator
         <A> implements Iterator<T>
@@ -64,7 +65,7 @@ public abstract class CorpusIterableBase
                 try {
                     fillQueue(jcasIterable, items);
                 }
-                catch (MalformedURLException e) {
+                catch (ResourceInitializationException e) {
                     e.printStackTrace();
                 }
             }
