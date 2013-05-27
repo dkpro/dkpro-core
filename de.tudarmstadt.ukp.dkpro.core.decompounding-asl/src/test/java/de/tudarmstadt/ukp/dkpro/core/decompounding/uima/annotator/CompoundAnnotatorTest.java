@@ -57,7 +57,7 @@ public class CompoundAnnotatorTest
 
     static File source = new File("src/test/resources/ranking/n-grams");
     static File index = new File("target/test/index");
-    static String jWeb1TPath = "/home/likewise-open/UKP/santos/UKP/Library/DKPro/web1t/de";
+    static String jWeb1TPath = "src/test/resources/web1t/de";
     static String indexPath = "target/test/index";
 
 
@@ -105,7 +105,7 @@ public class CompoundAnnotatorTest
                 createExternalResourceDescription(LeftToRightSplitterResource.class),
                 CompoundAnnotator.PARAM_RANKING_ALGO,
                 createExternalResourceDescription(FrequencyRankerResource.class),
-                CompoundAnnotator.PARAM_DICT_RESOURCE, 
+                CompoundAnnotator.PARAM_DICT_RESOURCE,
                 createExternalResourceDescription(SharedDictionary.class),
                 CompoundAnnotator.PARAM_MORPHEME_RESOURCE,
                 createExternalResourceDescription(SharedLinkingMorphemes.class),

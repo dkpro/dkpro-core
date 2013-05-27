@@ -56,10 +56,10 @@ public class FinderTest
 		Assert.assertEquals(100, result.get(0).getFreq());
 
 		result = f.find("relax");
-		Assert.assertEquals(2, result.size());
+		Assert.assertEquals(3, result.size());
 
 		result = f.find("relax");
-		Assert.assertEquals(2, result.size());
+		Assert.assertEquals(3, result.size());
 
 		// Delete index again
 		for (File file : index.listFiles()) {
@@ -97,10 +97,10 @@ public class FinderTest
 		Assert.assertEquals(100, result.get(0).getFreq());
 
 		result = f.find("relax");
-		Assert.assertEquals(2, result.size());
+		Assert.assertEquals(3, result.size());
 
 		result = f.find("relax");
-		Assert.assertEquals(2, result.size());
+		Assert.assertEquals(3, result.size());
 
 		// Delete index again
 		for (File file : index.listFiles()) {
