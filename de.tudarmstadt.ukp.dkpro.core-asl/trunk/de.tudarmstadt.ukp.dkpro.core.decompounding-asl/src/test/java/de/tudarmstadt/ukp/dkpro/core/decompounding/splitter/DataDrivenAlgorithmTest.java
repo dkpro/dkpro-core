@@ -21,6 +21,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +30,8 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
@@ -56,16 +59,15 @@ public class DataDrivenAlgorithmTest
         throws IOException
     {
 
-        URL dictURL = getClass().getResource("/dic/de_DE.dic");
-        SimpleDictionary dict = new SimpleDictionary(dictURL.openStream());
-        URL morphemesURL = getClass().getResource("/dic/de_DE.linking");
-        LinkingMorphemes morphemes = new LinkingMorphemes(morphemesURL.openStream());
+        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+        SimpleDictionary dict = new SimpleDictionary(dictFile);
+        final File morphemesFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.linking"), false);
+        LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
         DataDrivenSplitterAlgorithm splitter = new DataDrivenSplitterAlgorithm(dict, morphemes);
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
-        for (DecompoundedWord split : result) {
-            System.out.println(split);
-        }
-        assertThat(result.size(), is(3));
+        assertThat(result.size(), is(1));
 
     }
 }
