@@ -19,29 +19,31 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary;
 
 import java.io.File;
+import java.io.IOException;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class German98DictionaryTest
 {
 
 	@Test
-	public void testContains()
+	public void testContains() throws IOException
 	{
-		German98Dictionary dict = new German98Dictionary(new File(
-				"src/test/resources/dic/igerman98.dic"), new File(
-				"src/test/resources/dic/igerman98.aff"));
-		Assert.assertEquals(6, dict.getAll().size());
+		
+        final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.aff"), false);
+        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
+		Assert.assertEquals(286818, dict.getAll().size());
 
-		Assert.assertTrue(dict.contains("hello"));
-		Assert.assertTrue(dict.contains("try"));
-		Assert.assertTrue(dict.contains("tried"));
-		Assert.assertTrue(dict.contains("work"));
-		Assert.assertTrue(dict.contains("worked"));
-		Assert.assertTrue(dict.contains("rework"));
+		Assert.assertTrue(dict.contains("hallo"));
+		Assert.assertTrue(dict.contains("versuchen"));
+		Assert.assertTrue(dict.contains("arbeiten"));
+		Assert.assertTrue(dict.contains("arbeit"));
 	}
 }
