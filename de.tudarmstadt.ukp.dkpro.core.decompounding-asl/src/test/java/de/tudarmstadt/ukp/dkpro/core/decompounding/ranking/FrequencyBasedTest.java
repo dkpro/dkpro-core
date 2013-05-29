@@ -68,9 +68,9 @@ public class FrequencyBasedTest
         list.add(s3);
 
         List<DecompoundedWord> result = ranker.rank(list);
-        Assert.assertEquals(s1, result.get(0));
+        Assert.assertEquals(s3, result.get(0));
 
-        Assert.assertEquals(s1, ranker.highestRank(list));
+        Assert.assertEquals(s3, ranker.highestRank(list));
 
         list.clear();
         s1 = DecompoundedWord.createFromString("einfuhr+zoll");
@@ -96,7 +96,7 @@ public class FrequencyBasedTest
         tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
         DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s2, result);
+        Assert.assertEquals(s3, result);
     }
 
     @AfterClass
