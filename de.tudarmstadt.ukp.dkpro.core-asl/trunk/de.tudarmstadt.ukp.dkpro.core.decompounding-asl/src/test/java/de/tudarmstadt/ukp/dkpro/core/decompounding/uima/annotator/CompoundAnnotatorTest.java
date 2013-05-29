@@ -72,32 +72,6 @@ public class CompoundAnnotatorTest
     }
 
     @Test
-    public void testAnnotator()
-        throws Exception
-    {
-        AnalysisEngineDescription aed = createPrimitiveDescription(
-                CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
-                createExternalResourceDescription(LeftToRightSplitterResource.class),
-                CompoundAnnotator.PARAM_RANKING_ALGO,
-                createExternalResourceDescription(FrequencyRankerResource.class),
-                CompoundAnnotator.PARAM_DICT_RESOURCE,
-                createExternalResourceDescription(
-                        SharedDictionary.class,
-                        SharedDictionary.PARAM_DICTIONARY_PATH, "src/test/resources/dic/de_DE.dic"),
-                CompoundAnnotator.PARAM_MORPHEME_RESOURCE,
-                createExternalResourceDescription(
-                        SharedLinkingMorphemes.class,
-                        SharedLinkingMorphemes.PARAM_MORPHEMES_PATH, "src/test/resources/dic/de_DE.linking"),
-                CompoundAnnotator.PARAM_FINDER_RESOURCE,
-                createExternalResourceDescription(SharedFinder.class,
-                        SharedFinder.PARAM_INDEX_PATH, indexPath,
-                        SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath));
-                runAnnotator(aed);
-
-    }
-
-    @Test
     public void testWithDefaults() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createPrimitiveDescription(
                 CompoundAnnotator.class,
