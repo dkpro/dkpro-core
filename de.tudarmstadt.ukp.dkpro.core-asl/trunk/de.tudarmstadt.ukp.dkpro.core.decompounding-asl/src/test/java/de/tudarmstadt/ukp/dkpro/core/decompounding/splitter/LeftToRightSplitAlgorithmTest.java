@@ -21,6 +21,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +30,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
@@ -101,11 +103,13 @@ public class LeftToRightSplitAlgorithmTest
 	@Test
 	public void testSplit4() throws IOException{
 
-	    URL dictURL = getClass().getResource("/dic/de_DE.dic");
-	    URL morphURL =  getClass().getResource("/dic/de_DE.linking");
+        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+        final File morphemesFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.linking"), false);
 
-	    Dictionary dict = new SimpleDictionary(dictURL.openStream());
-	    LinkingMorphemes morphemes = new LinkingMorphemes(morphURL.openStream());
+	    Dictionary dict = new SimpleDictionary(dictFile);
+	    LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
 
 	    LeftToRightSplitterAlgorithm splitter = new LeftToRightSplitterAlgorithm(dict,morphemes);
 
