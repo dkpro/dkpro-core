@@ -69,9 +69,9 @@ public class MutualInformationBasedTest
         list.add(s3);
 
         List<DecompoundedWord> result = ranker.rank(list);
-        Assert.assertEquals(s1, result.get(0));
+        Assert.assertEquals(s3, result.get(0));
 
-        Assert.assertEquals(s1, ranker.highestRank(list));
+        Assert.assertEquals(s3, ranker.highestRank(list));
     }
 
     @Test
@@ -89,7 +89,7 @@ public class MutualInformationBasedTest
         tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
         DecompoundedWord result = ranker.highestRank(tree);
-        Assert.assertEquals(s2, result);
+        Assert.assertEquals(s3, result);
     }
 
     @AfterClass
