@@ -23,30 +23,41 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
+import java.io.IOException;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class SimpleDictionaryTest
 {
 
+	private SimpleDictionary dict;
+	
+	@Before
+	public void setUp() throws IOException{
+
+        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+	    dict = new SimpleDictionary(dictFile);
+	}
+	
 	@Test
 	public void testContains()
 	{
-		SimpleDictionary dict = new SimpleDictionary(new File(
-				"src/test/resources/dic/simple.dic"));
-		Assert.assertEquals(3, dict.getAll().size());
+		Assert.assertEquals(71030, dict.getAll().size());
 
-		Assert.assertTrue(dict.contains("word1"));
-		Assert.assertTrue(dict.contains("word2"));
-		Assert.assertTrue(dict.contains("word3"));
+		Assert.assertTrue(dict.contains("worauf"));
+		Assert.assertTrue(dict.contains("woraufhin"));
+		Assert.assertTrue(dict.contains("woraus"));
 	}
 
 	@Test
 	public void testDictionary(){
-	    SimpleDictionary dict = new SimpleDictionary(new File(
-                "src/test/resources/dic/de_DE.dic"));
+		
 	    assertThat(dict.getAll().size(), not(0));
 	    assertThat(dict.contains("zu"),is(true));
 	}
