@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -28,6 +29,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
@@ -48,9 +50,10 @@ public class JWordSplitterTest
     @Test
 	public void testSplliter2() throws IOException {
 	    JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
-	    URL dictURL = getClass().getResource("/dic/de_DE.dic");
+        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);;
 
-	    Dictionary dict = new SimpleDictionary(dictURL.openStream());
+	    Dictionary dict = new SimpleDictionary(dictFile);
 	    splitter.setDictionary(dict);
 	    List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 	    assertThat(result.size(),is(1));
