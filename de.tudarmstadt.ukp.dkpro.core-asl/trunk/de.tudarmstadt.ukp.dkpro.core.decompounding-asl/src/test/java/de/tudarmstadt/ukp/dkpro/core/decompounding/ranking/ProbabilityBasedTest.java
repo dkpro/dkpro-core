@@ -85,7 +85,7 @@ public class ProbabilityBasedTest
 		tree.getRoot().addChild(new ValueNode<DecompoundedWord>(s3));
 
 		DecompoundedWord result = ranker.highestRank(tree);
-		Assert.assertEquals(s2, result);
+		Assert.assertEquals(s1, result);
 	}
 
 
