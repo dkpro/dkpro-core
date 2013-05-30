@@ -48,7 +48,7 @@ public class SimpleDictionaryTest
 	@Test
 	public void testContains()
 	{
-		Assert.assertEquals(71030, dict.getAll().size());
+		Assert.assertEquals(70999, dict.getAll().size());
 
 		Assert.assertTrue(dict.contains("worauf"));
 		Assert.assertTrue(dict.contains("woraufhin"));
