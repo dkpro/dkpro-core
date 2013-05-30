@@ -39,7 +39,7 @@ public class German98DictionaryTest
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
         		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
 		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
-		Assert.assertEquals(286818, dict.getAll().size());
+		Assert.assertEquals(286322, dict.getAll().size());
 
 		Assert.assertTrue(dict.contains("hallo"));
 		Assert.assertTrue(dict.contains("versuchen"));
