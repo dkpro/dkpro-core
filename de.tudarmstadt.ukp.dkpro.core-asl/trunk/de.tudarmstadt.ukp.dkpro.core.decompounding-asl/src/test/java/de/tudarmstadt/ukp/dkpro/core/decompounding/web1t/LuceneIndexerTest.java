@@ -27,6 +27,7 @@ import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.store.FSDirectory;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class LuceneIndexerTest
@@ -74,7 +75,7 @@ public class LuceneIndexerTest
 		Assert.assertEquals(f.find("couchdb").size(), 1);
 	}
 
-	@Test
+	@Ignore
 	public void testData()
 		throws Exception
 	{
