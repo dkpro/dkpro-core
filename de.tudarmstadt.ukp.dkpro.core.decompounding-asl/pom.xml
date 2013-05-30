@@ -112,4 +112,5 @@
 		</dependencies>
 	</profile>
   </profiles>
+  <name>DKPro Core ASL - Decompounding</name>
 </project>
