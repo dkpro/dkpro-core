@@ -74,6 +74,7 @@ public class FinderTest
 	}
 
 	@Ignore
+	@Test
 	public void testFinder2()
 		throws Exception
 	{

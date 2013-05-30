@@ -18,48 +18,35 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-
-import java.io.File;
-import java.io.IOException;
-
-import junit.framework.Assert;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
 public class SimpleDictionaryTest
 {
 
 	private SimpleDictionary dict;
 	
-	@Before
-	public void setUp() throws IOException{
-
-        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
-	    dict = new SimpleDictionary(dictFile);
-	}
-	
-	@Test
-	public void testContains()
-	{
-		Assert.assertEquals(70999, dict.getAll().size());
-
-		Assert.assertTrue(dict.contains("worauf"));
-		Assert.assertTrue(dict.contains("woraufhin"));
-		Assert.assertTrue(dict.contains("woraus"));
-	}
-
-	@Test
-	public void testDictionary(){
-		
-	    assertThat(dict.getAll().size(), not(0));
-	    assertThat(dict.contains("zu"),is(true));
-	}
+//	@Before
+//	public void setUp() throws IOException{
+//
+//        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+//        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+//	    dict = new SimpleDictionary(dictFile);
+//	}
+//	
+//	@Test
+//	public void testContains()
+//	{
+//		Assert.assertEquals(70999, dict.getAll().size());
+//
+//		Assert.assertTrue(dict.contains("worauf"));
+//		Assert.assertTrue(dict.contains("woraufhin"));
+//		Assert.assertTrue(dict.contains("woraus"));
+//	}
+//
+//	@Test
+//	public void testDictionary(){
+//		
+//	    assertThat(dict.getAll().size(), not(0));
+//	    assertThat(dict.contains("zu"),is(true));
+//	}
 
 }
