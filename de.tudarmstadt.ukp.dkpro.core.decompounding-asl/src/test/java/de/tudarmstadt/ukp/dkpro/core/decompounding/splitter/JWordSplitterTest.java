@@ -22,11 +22,11 @@ import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -47,6 +47,7 @@ public class JWordSplitterTest
         Assert.assertEquals("Aktion(s)+plan", result.get(1).toString());
     }
 
+    @Ignore
     @Test
 	public void testSplliter2() throws IOException {
 	    JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
