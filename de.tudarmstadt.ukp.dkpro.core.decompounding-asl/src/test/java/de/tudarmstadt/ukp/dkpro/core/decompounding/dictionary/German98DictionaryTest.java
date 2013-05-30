@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import junit.framework.Assert;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -30,6 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 public class German98DictionaryTest
 {
 
+    @Ignore
 	@Test
 	public void testContains() throws IOException
 	{

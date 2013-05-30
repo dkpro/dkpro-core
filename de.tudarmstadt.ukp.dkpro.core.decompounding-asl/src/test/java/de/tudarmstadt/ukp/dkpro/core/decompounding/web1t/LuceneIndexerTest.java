@@ -76,6 +76,7 @@ public class LuceneIndexerTest
 	}
 
 	@Ignore
+	@Test
 	public void testData()
 		throws Exception
 	{
