@@ -24,7 +24,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import bak.pcj.LongIterator;
 import bak.pcj.map.ObjectKeyLongMap;
@@ -65,7 +71,7 @@ public class FrequencyDistribution<T>
     implements Serializable
 {
     
-    private static final long serialVersionUID = 140;
+    private static final long serialVersionUID = 150;
 
     private ObjectKeyLongMap freqDist;
 
@@ -241,41 +247,6 @@ public class FrequencyDistribution<T>
         return maxSample;
     }
     
-//    public void save(File file)
-//            throws IOException
-//    {
-//        Properties prop = new Properties();
-//        
-//        ObjectKeyLongMapIterator entryIter = freqDist.entries();
-//
-//        while (entryIter.hasNext()) {
-//            entryIter.next();
-//            prop.put(entryIter.getKey(), Long.toString(entryIter.getValue()));
-//        }
-//
-//        prop.store(new FileOutputStream(file), "FrequencyDistribution");
-//    }
-//
-//    public void load(File file)
-//            throws IOException, ClassNotFoundException
-//    {
-//        Properties prop = new Properties();
-//        prop.load(new FileInputStream(file));
-//
-//        for (Entry<Object, Object> entry : prop.entrySet()) {
-//            this.addSample((T) entry.getKey(), Long.parseLong((String) entry.getValue()));
-//        }
-//        
-//        int samples = 0;
-//        
-//        LongIterator sampleIter = freqDist.values().iterator();
-//
-//        while (sampleIter.hasNext()) {
-//            long count = sampleIter.next();
-//            samples += count;
-//        }
-//        n = samples;
-//    }    
     
     public void save(File file)
             throws IOException
@@ -306,5 +277,58 @@ public class FrequencyDistribution<T>
     public void clear() {
         freqDist.clear();
         n = 0;
+    }
+    
+    /**
+     * Returns the n most frequent samples in the distribution.
+     * The ordering within in a group of samples with the same frequency is undefined.
+     */
+    public List<T> getMostFrequentSamples(long n) {
+
+        List<T> topSamples = new ArrayList<T>();
+        
+        Map<T, Long> map = new HashMap<T, Long>();
+
+        for (T key : this.getKeys()) {
+            map.put(key, this.getCount(key));
+        }
+
+        Map<T, Long> sorted_map = new TreeMap<T, Long>(new ValueComparator(map));
+        sorted_map.putAll(map);
+
+        int i = 0;
+        for (T key : sorted_map.keySet()) {
+            if (i >= n) {
+                break;
+            }
+            topSamples.add(key);
+            i++;
+        }
+        
+        return topSamples;
+    }
+    
+    class ValueComparator
+        implements Comparator<T>
+    {
+    
+        Map<T, Long> base;
+    
+        public ValueComparator(Map<T, Long> base)
+        {
+            this.base = base;
+        }
+    
+        @Override
+        public int compare(T a, T b)
+        {
+    
+            if (base.get(a) < base.get(b)) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
     }
 }
