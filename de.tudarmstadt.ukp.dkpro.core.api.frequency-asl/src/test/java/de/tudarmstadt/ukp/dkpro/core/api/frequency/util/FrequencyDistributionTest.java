@@ -52,6 +52,12 @@ public class FrequencyDistributionTest
         
         assertEquals(2, fd.getMaxFreq());
         assertEquals("a", fd.getSampleWithMaxFreq());
+        
+        List<String> top5 = fd.getMostFrequentSamples(5);
+        assertEquals(5, top5.size());
+        assertEquals("first", top5.get(0));
+        assertEquals("a", top5.get(1));
+        assertEquals("test", top5.get(2));
     }
 
     @Test
