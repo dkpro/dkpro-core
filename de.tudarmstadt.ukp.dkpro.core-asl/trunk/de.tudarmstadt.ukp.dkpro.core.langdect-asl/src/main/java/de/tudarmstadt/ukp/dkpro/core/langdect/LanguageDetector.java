@@ -19,8 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.langdect;
 
 import static de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase.BOS;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,25 +27,24 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
 public class LanguageDetector
     extends JCasAnnotator_ImplBase
 {
 
-    public static final String PARAM_WEB1T_SOURCES = "Web1TSources";
-    @ConfigurationParameter(name = PARAM_WEB1T_SOURCES, mandatory = true)
-    private String[] web1Tsources;
+    public static final String PARAM_WEB1T_RESOURCES = "Web1TResources";
+    @ConfigurationParameter(name = PARAM_WEB1T_RESOURCES, mandatory = true)
+    private FrequencyCountProvider[] web1Tresources;
 
     public static final String PARAM_MIN_NGRAM_SIZE = "MinNGramSize";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_SIZE, mandatory = true, defaultValue = "1")
@@ -67,19 +64,13 @@ public class LanguageDetector
         
         providerMap = new HashMap<String,FrequencyCountProvider>();
         
-        for (String web1Tsource : web1Tsources) {
-            FrequencyCountProvider provider;
+        for (FrequencyCountProvider provider : web1Tresources) {
             try {
-                provider = new Web1TFileAccessProvider(new File(web1Tsource), minNGramSize, maxNGramSize);
+                providerMap.put(provider.getLanguage(), provider);
             }
-            catch (IOException e) {
+            catch (Exception e) {
                 throw new ResourceInitializationException(e);
             }
-
-            String[] parts = web1Tsource.split("/");
-            String language = parts[parts.length - 1];
-            
-            providerMap.put(language, provider);
         }
     }
 
