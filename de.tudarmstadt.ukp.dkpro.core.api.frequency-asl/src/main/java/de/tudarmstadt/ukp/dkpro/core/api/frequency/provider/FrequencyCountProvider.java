@@ -77,5 +77,14 @@ public interface FrequencyCountProvider
      */
     public Iterator<String> getNgramIterator(int n) throws Exception;
     
+    /**
+     * Returns the language for which the frequencies are provided.
+     */
+    public String getLanguage() throws Exception;
+        
+    /**
+     * Returns an ID that identifies the frequency provider
+     */
+    public String getID() throws Exception;
     
 }

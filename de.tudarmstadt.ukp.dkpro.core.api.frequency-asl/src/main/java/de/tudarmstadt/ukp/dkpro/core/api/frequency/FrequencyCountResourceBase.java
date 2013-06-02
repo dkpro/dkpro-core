@@ -19,8 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import java.util.Iterator;
 
-import org.uimafit.component.Resource_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.component.Resource_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 
@@ -86,4 +86,20 @@ public abstract class FrequencyCountResourceBase
     {
         return provider.getNgramIterator(n);
     }
+
+    @Override
+    public String getLanguage()
+        throws Exception
+    {
+        return provider.getLanguage();
+    }
+
+    @Override
+    public String getID()
+        throws Exception
+    {
+        return provider.getID();
+    }
+    
+    
 }

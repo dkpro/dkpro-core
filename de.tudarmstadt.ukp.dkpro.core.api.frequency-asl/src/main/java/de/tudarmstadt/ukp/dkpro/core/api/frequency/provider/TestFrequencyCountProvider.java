@@ -63,4 +63,18 @@ public class TestFrequencyCountProvider
     {
         throw new UnsupportedOperationException("This method is currently not supported.");
     }
+
+    @Override
+    public String getLanguage()
+        throws Exception
+    {
+        return "__test";
+    }
+
+    @Override
+    public String getID()
+        throws Exception
+    {
+        return "1.5.0";
+    }
 }

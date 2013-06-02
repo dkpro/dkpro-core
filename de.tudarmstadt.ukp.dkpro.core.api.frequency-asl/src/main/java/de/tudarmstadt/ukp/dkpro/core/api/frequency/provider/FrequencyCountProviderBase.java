@@ -97,4 +97,11 @@ public abstract class FrequencyCountProviderBase
             System.err.println("Invalid scale down factor. It needs to be larger than 0.");
         }
     }
+    
+    @Override
+    public String getID()
+        throws Exception
+    {
+        return this.getClass().getSimpleName();
+    }
 }
