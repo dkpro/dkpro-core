@@ -29,7 +29,8 @@ public class BerkeleyLMProviderTest
     @Test
     public void berkeleyLMTest() throws Exception {
         BerkeleyLMProvider lm  = new BerkeleyLMProvider(
-                "src/test/resources/test.ser"
+                "src/test/resources/test.ser",
+                "en"
         );
 
         assertEquals(50, lm.getFrequency("of the ("));

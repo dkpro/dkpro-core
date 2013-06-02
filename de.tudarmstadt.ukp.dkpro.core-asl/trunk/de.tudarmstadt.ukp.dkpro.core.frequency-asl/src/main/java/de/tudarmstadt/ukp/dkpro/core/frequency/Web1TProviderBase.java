@@ -65,5 +65,12 @@ public abstract class Web1TProviderBase
         throws Exception
     {
         return new JWeb1TIterator(basePath, n).getIterator();
-    }    
+    }
+    
+    @Override
+    public String getLanguage()
+        throws Exception
+    {
+        return this.basePath;
+    }
 }

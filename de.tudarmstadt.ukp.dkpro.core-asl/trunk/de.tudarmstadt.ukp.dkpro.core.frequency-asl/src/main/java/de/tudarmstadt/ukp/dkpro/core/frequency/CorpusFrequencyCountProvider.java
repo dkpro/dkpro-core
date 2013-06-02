@@ -116,4 +116,11 @@ public class CorpusFrequencyCountProvider
     {
         return corpus.getTokens().iterator();
     }
+
+    @Override
+    public String getLanguage()
+        throws Exception
+    {
+        return corpus.getLanguage();
+    }
 }
