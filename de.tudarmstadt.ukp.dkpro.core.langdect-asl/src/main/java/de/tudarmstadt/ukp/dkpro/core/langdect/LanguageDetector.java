@@ -29,6 +29,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -43,7 +44,7 @@ public class LanguageDetector
 {
 
     public static final String PARAM_WEB1T_RESOURCES = "Web1TResources";
-    @ConfigurationParameter(name = PARAM_WEB1T_RESOURCES, mandatory = true)
+    @ExternalResource(key = PARAM_WEB1T_RESOURCES, mandatory = true)
     private FrequencyCountProvider[] web1Tresources;
 
     public static final String PARAM_MIN_NGRAM_SIZE = "MinNGramSize";
