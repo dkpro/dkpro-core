@@ -34,11 +34,13 @@ public class BerkeleyLMProvider
 {
 
     private final NgramLanguageModel<String> lm;
+    private String language;
     
-	public BerkeleyLMProvider(String binaryFile)
+	public BerkeleyLMProvider(String binaryFile, String language)
 	    throws Exception
 	{
 	    lm = LmReaders.readLmBinary(binaryFile);
+	    this.language = language;
 	}
 
 	// FIXME how to obtain phrase count from logProb
@@ -90,5 +92,19 @@ public class BerkeleyLMProvider
         throws Exception
     {
         throw new Exception("Not implemented yet.");
+    }
+
+    @Override
+    public String getLanguage()
+        throws Exception
+    {
+        return this.language;
+    }
+    
+    @Override
+    public String getID()
+        throws Exception
+    {
+        return this.getClass().getSimpleName();
     }
 }

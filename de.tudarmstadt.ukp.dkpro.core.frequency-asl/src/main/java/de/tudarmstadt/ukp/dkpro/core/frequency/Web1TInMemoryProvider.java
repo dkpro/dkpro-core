@@ -24,7 +24,7 @@ import com.googlecode.jweb1t.JWeb1TSearcherInMemory;
 public class Web1TInMemoryProvider
     extends Web1TProviderBase
 {
-
+    
     public Web1TInMemoryProvider(String ngramLocation, int maxNgramLevel)
         throws IOException
     {
