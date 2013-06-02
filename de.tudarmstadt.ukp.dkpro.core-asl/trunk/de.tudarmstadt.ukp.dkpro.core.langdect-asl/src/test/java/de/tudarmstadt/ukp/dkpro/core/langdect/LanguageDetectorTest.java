@@ -64,7 +64,10 @@ public class LanguageDetectorTest
             aJCas.setDocumentText(text);
             engine.process(aJCas);
             
-            assertEquals(language, aJCas.getDocumentLanguage());
+            String[] languageParts = aJCas.getDocumentLanguage().split("/");
+            String casLanguage = languageParts[languageParts.length-1];
+
+            assertEquals(language, casLanguage);
         }
     }
     

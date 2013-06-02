@@ -1,4 +1,4 @@
-Das ist ein Test.
-This is a test.
-Ich auch.
-In the end.
+Das ist ein Test.	de
+This is a test.	en
+Ich auch.	de
+In the end.	en
