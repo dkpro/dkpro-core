@@ -51,6 +51,7 @@ public class BerkeleyLMFrequencyCountProviderTest
         AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class,
         		Annotator.MODEL_KEY, createExternalResourceDescription(
         				BerkeleyLMFrequencyCountProvider.class,
+        				BerkeleyLMFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
                         BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
         
         // Check the external resource was injected
