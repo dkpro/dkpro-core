@@ -39,18 +39,33 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
+/**
+ * Language detector based on n-gram frequency counts, e.g. as provided by Web1T
+ * 
+ * @author zesch
+ *
+ */
 public class LanguageDetector
     extends JCasAnnotator_ImplBase
 {
 
-    public static final String PARAM_WEB1T_RESOURCES = "Web1TResources";
-    @ExternalResource(key = PARAM_WEB1T_RESOURCES, mandatory = true)
-    private FrequencyCountProvider[] web1Tresources;
+    /**
+     * An array of external resources of frequency providers (one for each language that should be detected). 
+     */
+    public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "FrequencyProviderResources";
+    @ExternalResource(key = PARAM_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)
+    private FrequencyCountProvider[] providers;
 
+    /**
+     * The minimum n-gram size that should be considered. Default is 1. 
+     */
     public static final String PARAM_MIN_NGRAM_SIZE = "MinNGramSize";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_SIZE, mandatory = true, defaultValue = "1")
     private int minNGramSize;
     
+    /**
+     * The maximum n-gram size that should be considered. Default is 3. 
+     */
     public static final String PARAM_MAX_NGRAM_SIZE = "MaxNGramSize";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_SIZE, mandatory = true, defaultValue = "3")
     private int maxNGramSize;
@@ -65,7 +80,7 @@ public class LanguageDetector
         
         providerMap = new HashMap<String,FrequencyCountProvider>();
         
-        for (FrequencyCountProvider provider : web1Tresources) {
+        for (FrequencyCountProvider provider : providers) {
             try {
                 providerMap.put(provider.getLanguage(), provider);
             }
