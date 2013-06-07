@@ -37,38 +37,40 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 
 /**
  * Reads pairs of adjacent revisions of all articles.
- *
+ * 
  * @author zesch
- *
+ * 
  */
 @TypeCapability(
-        outputs={
+        outputs = {
                 "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
-public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
+                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+public class WikipediaRevisionPairReader
+    extends WikipediaRevisionReaderBase
 {
 
     public static final String REVISION_1 = "Revision1";
     public static final String REVISION_2 = "Revision2";
 
     /**
-     * Restrict revision pairs to cases where the length of the revisions differ more than this value (counted in characters).
+     * Restrict revision pairs to cases where the length of the revisions differ more than this
+     * value (counted in characters).
      * */
     public static final String PARAM_MIN_CHANGE = "MinChange";
-    @ConfigurationParameter(name = PARAM_MIN_CHANGE, mandatory=true, defaultValue="0")
+    @ConfigurationParameter(name = PARAM_MIN_CHANGE, mandatory = true, defaultValue = "0")
     private int minChange;
 
     /**
-     * Restrict revision pairs to cases where the length of the revisions does not differ more than this value (counted in characters).
+     * Restrict revision pairs to cases where the length of the revisions does not differ more than
+     * this value (counted in characters).
      * */
     public static final String PARAM_MAX_CHANGE = "MaxChange";
-    @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory=true, defaultValue="10000")
+    @ConfigurationParameter(name = PARAM_MAX_CHANGE, mandatory = true, defaultValue = "10000")
     private int maxChange;
 
     /** The number of revision pairs that should be skipped in the beginning. */
-    public static final String PARAM_SKIP_FIRST_N_PAIRS= "SkipFirstNPairs";
-    @ConfigurationParameter(name = PARAM_SKIP_FIRST_N_PAIRS, mandatory=false)
+    public static final String PARAM_SKIP_FIRST_N_PAIRS = "SkipFirstNPairs";
+    @ConfigurationParameter(name = PARAM_SKIP_FIRST_N_PAIRS, mandatory = false)
     protected int skipFirstNPairs;
 
     private Timestamp savedTimestamp;
@@ -79,13 +81,16 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public void initialize(UimaContext context)
         throws ResourceInitializationException
     {
-    	if(revisionIdFile!=null||revisionIdParamArray!=null){
-    		this.getLogger().log(Level.WARNING, "Reading a predefined list of revisions is currently not supported by the WikipediaRevisionPairReader. Falling back to reading ALL revisions.");
-    		revisionIdFile=null;
-	    	revisionIdParamArray=null;
-	    	//TODO add support for reading a defined set of revisions (like the WikipediaRevisionReader)
-    	}
-    	super.initialize(context);
+        if (revisionIdFile != null || revisionIdParamArray != null) {
+            this.getLogger()
+                    .log(Level.WARNING,
+                            "Reading a predefined list of revisions is currently not supported by the WikipediaRevisionPairReader. Falling back to reading ALL revisions.");
+            revisionIdFile = null;
+            revisionIdParamArray = null;
+            // TODO add support for reading a defined set of revisions (like the
+            // WikipediaRevisionReader)
+        }
+        super.initialize(context);
         savedTimestamp = null;
         nrOfRevisionsProcessed = 0;
     }
@@ -94,12 +99,13 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {
-    	super.getNext(jcas);
+        super.getNext(jcas);
 
         Timestamp currentTimestamp = timestampIter.next();
 
         if (currentTimestamp == null) {
-            throw new CollectionException(new Throwable ("Current timestamp is null. Upps ... should not happen."));
+            throw new CollectionException(new Throwable(
+                    "Current timestamp is null. Upps ... should not happen."));
         }
 
         this.getLogger().log(Level.FINE, currentArticle.getPageId() + "-" + currentTimestamp);
@@ -116,7 +122,8 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 
             if (nrOfRevisionsProcessed < skipFirstNPairs) {
                 if (nrOfRevisionsProcessed % 1000 == 0) {
-                    this.getLogger().log(Level.INFO, "Skipping " + nrOfRevisionsProcessed + "th revision.");
+                    this.getLogger().log(Level.INFO,
+                            "Skipping " + nrOfRevisionsProcessed + "th revision.");
                 }
                 // create fake revisions
                 revision1 = getRevision(null);
@@ -139,7 +146,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             revView1.setDocumentText(text1);
             revView2.setDocumentText(text2);
 
-            addDocumentMetaData(jcas,     currentArticle.getPageId(), revision1.getRevisionID());
+            addDocumentMetaData(jcas, currentArticle.getPageId(), revision1.getRevisionID());
             addDocumentMetaData(revView1, currentArticle.getPageId(), revision1.getRevisionID());
             addDocumentMetaData(revView2, currentArticle.getPageId(), revision2.getRevisionID());
 
@@ -162,8 +169,9 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
         }
     }
 
-    //TODO Use SWEBLE
-    private String getText(Revision rev) {
+    // TODO Use SWEBLE
+    private String getText(Revision rev)
+    {
         String text = rev.getRevisionText();
 
         if (outputPlainText) {
@@ -177,7 +185,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 
             text = pp.getText();
 
-//            text = WikiUtils.mediaWikiMarkup2PlainText(text);
+            // text = WikiUtils.mediaWikiMarkup2PlainText(text);
 
             // replace multiple white space with single white space
             text = WikiUtils.cleanText(text);
@@ -187,7 +195,9 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
 
     }
 
-    private Revision getRevision(Timestamp timestamp) throws CollectionException {
+    private Revision getRevision(Timestamp timestamp)
+        throws CollectionException
+    {
         Revision revision;
 
         if (timestamp != null) {
@@ -207,6 +217,7 @@ public class WikipediaRevisionPairReader extends WikipediaRevisionReaderBase
             revision.setRevisionID(0);
             revision.setRevisionText("");
             revision.setTimeStamp(timestamp);
+            revision.setMinor(false);
         }
 
         return revision;

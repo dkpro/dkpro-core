@@ -52,257 +52,259 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
  * Abstract base class for all readers based on revisions.
- *
+ * 
  * @author zesch
  * @author Oliver Ferschke
- *
+ * 
  */
 public abstract class WikipediaRevisionReaderBase
-	extends WikipediaReaderBase
+    extends WikipediaReaderBase
 {
 
-	/** Whether the reader outputs plain text or wiki markup. */
-	public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
-	@ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
-	protected boolean outputPlainText;
+    /** Whether the reader outputs plain text or wiki markup. */
+    public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
+    @ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
+    protected boolean outputPlainText;
 
-	/** The page buffer size (#pages) of the page iterator. */
-	public static final String PARAM_PAGE_BUFFER = "PageBuffer";
-	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
-	protected int pageBuffer;
+    /** The page buffer size (#pages) of the page iterator. */
+    public static final String PARAM_PAGE_BUFFER = "PageBuffer";
+    @ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
+    protected int pageBuffer;
 
-	/**
-	 * Defines the path to a file containing a line-separated list of
-	 * revision ids of the revisions that should be retrieved. (Optional)
-	 */
-	public static final String PARAM_PATH_TO_REVISION_ID_LIST = "RevisionIdsFromFile";
-	@ConfigurationParameter(name = PARAM_PATH_TO_REVISION_ID_LIST, mandatory = false)
-	protected String revisionIdFile;
+    /**
+     * Defines the path to a file containing a line-separated list of revision ids of the revisions
+     * that should be retrieved. (Optional)
+     */
+    public static final String PARAM_PATH_TO_REVISION_ID_LIST = "RevisionIdsFromFile";
+    @ConfigurationParameter(name = PARAM_PATH_TO_REVISION_ID_LIST, mandatory = false)
+    protected String revisionIdFile;
 
-	/**
-	 * Defines an array of
-	 * revision ids of the revisions that should be retrieved. (Optional)
-	 */
-	public static final String PARAM_REVISION_ID_LIST = "RevisionIdFromArray";
-	@ConfigurationParameter(name = PARAM_REVISION_ID_LIST, mandatory = false)
-	protected String[] revisionIdParamArray;
+    /**
+     * Defines an array of revision ids of the revisions that should be retrieved. (Optional)
+     */
+    public static final String PARAM_REVISION_ID_LIST = "RevisionIdFromArray";
+    @ConfigurationParameter(name = PARAM_REVISION_ID_LIST, mandatory = false)
+    protected String[] revisionIdParamArray;
 
-	protected Page currentArticle;
+    protected Page currentArticle;
 
-	protected RevisionApi revisionApi;
+    protected RevisionApi revisionApi;
 
-	//These Iterators are used when iterating over ALL revisions
-	protected Iterator<Page> pageIter; //for page iteration - revs are subiterated
-	protected Iterator<Timestamp> timestampIter; //for rev subiteration
+    // These Iterators are used when iterating over ALL revisions
+    protected Iterator<Page> pageIter; // for page iteration - revs are subiterated
+    protected Iterator<Timestamp> timestampIter; // for rev subiteration
 
-	//This iterator is used when iterating over a predefined list of revisions
-	protected Iterator<String> revIdIterator; //for list-based rev iteration
+    // This iterator is used when iterating over a predefined list of revisions
+    protected Iterator<String> revIdIterator; // for list-based rev iteration
 
-	protected long currentArticleIndex;
-	protected long currentRevisionIndex;
-	protected long nrOfArticles;
+    protected long currentArticleIndex;
+    protected long currentRevisionIndex;
+    protected long nrOfArticles;
 
-	protected MediaWikiParser parser;
+    protected MediaWikiParser parser;
 
-	protected Set<String> revisionIds = null;
+    protected Set<String> revisionIds = null;
 
-	@Override
-	public void initialize(UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
-		revisionIds = new HashSet<String>();
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
+        revisionIds = new HashSet<String>();
 
-		try {
-			this.revisionApi = new RevisionApi(dbconfig);
+        try {
+            this.revisionApi = new RevisionApi(dbconfig);
 
-			if (revisionIdFile != null) {
-				revisionIds = loadFile(revisionIdFile);
-			}
-			if (revisionIdParamArray != null && revisionIdParamArray.length > 0) {
-				for(String id: revisionIdParamArray){
-					revisionIds.add(id);
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new ResourceInitializationException(e);
-		}
+            if (revisionIdFile != null) {
+                revisionIds = loadFile(revisionIdFile);
+            }
+            if (revisionIdParamArray != null && revisionIdParamArray.length > 0) {
+                for (String id : revisionIdParamArray) {
+                    revisionIds.add(id);
+                }
+            }
+        }
+        catch (Exception e) {
+            throw new ResourceInitializationException(e);
+        }
 
+        // Use one of the lists or iterate over all articles?
+        if (!revisionIds.isEmpty())
+        {
+            revIdIterator = revisionIds.iterator();
+        }
+        else // use iterator over all pages in the db
+        {
+            MetaData md = wiki.getMetaData();
+            this.nrOfArticles = md.getNumberOfPages()
+                    - md.getNumberOfDisambiguationPages()
+                    - md.getNumberOfRedirectPages();
 
-		//Use one of the lists or iterate over all articles?
-		if(!revisionIds.isEmpty())
-		{
-			revIdIterator=revisionIds.iterator();
-		}
-		else //use iterator over all pages in the db
-		{
-			MetaData md = wiki.getMetaData();
-			this.nrOfArticles = md.getNumberOfPages()
-					- md.getNumberOfDisambiguationPages()
-					- md.getNumberOfRedirectPages();
+            pageIter = new PageIterator(wiki, true, pageBuffer);
 
-			pageIter = new PageIterator(wiki, true, pageBuffer);
+            try {
 
-			try {
+                if (pageIter.hasNext()) {
+                    currentArticle = pageIter.next();
+                }
+                else {
+                    throw new IOException("No articles in database.");
+                }
 
-				if (pageIter.hasNext()) {
-					currentArticle = pageIter.next();
-				}
-				else {
-					throw new IOException("No articles in database.");
-				}
+                this.timestampIter = getTimestampIter(currentArticle.getPageId());
+            }
+            catch (IOException e) {
+                throw new ResourceInitializationException(e);
+            }
+        }
 
+        currentArticleIndex = 0;
+        currentRevisionIndex = 0;
 
-				this.timestampIter = getTimestampIter(currentArticle.getPageId());
-			}
-			catch (IOException e) {
-				throw new ResourceInitializationException(e);
-			}
-		}
+        // TODO Use SWEBLE
+        MediaWikiParserFactory pf = new MediaWikiParserFactory();
+        pf.setTemplateParserClass(FlushTemplates.class);
+        parser = pf.createParser();
 
-		currentArticleIndex = 0;
-		currentRevisionIndex = 0;
+    }
 
-	    //TODO Use SWEBLE
-		MediaWikiParserFactory pf = new MediaWikiParserFactory();
-		pf.setTemplateParserClass(FlushTemplates.class);
-		parser = pf.createParser();
+    public boolean hasNext()
+        throws IOException, CollectionException
+    {
 
-	}
+        // If a list of revisions is provided, just use the hasNext() of the iterator
+        if (!revisionIds.isEmpty()) {
+            if (revIdIterator.hasNext()) {
+                currentRevisionIndex++;
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        // If no list of revisions is provided, we iterate over pages and subiterate over revisions
+        else {
+            if (!timestampIter.hasNext()) {
+                if (pageIter.hasNext()) {
+                    currentArticle = pageIter.next();
+                    currentArticleIndex++;
+                    this.timestampIter = getTimestampIter(currentArticle
+                            .getPageId());
+                }
+                else {
+                    return false;
+                }
+            }
 
-	public boolean hasNext()
-		throws IOException, CollectionException
-	{
+            if (!timestampIter.hasNext()) {
+                // if we are in here, we tried to update with last available page,
+                // but it contained no revisions
+                return false;
+            }
+            return true;
+        }
+    }
 
-		//If a list of revisions is provided, just use the hasNext() of the iterator
-		if(!revisionIds.isEmpty()){
-			if(revIdIterator.hasNext()){
-				currentRevisionIndex++;
-				return true;
-			}else{
-				return false;
-			}
-		}
-		//If no list of revisions is provided, we iterate over pages and subiterate over revisions
-		else{
-			if (!timestampIter.hasNext()) {
-				if (pageIter.hasNext()) {
-					currentArticle = pageIter.next();
-					currentArticleIndex++;
-					this.timestampIter = getTimestampIter(currentArticle
-							.getPageId());
-				}
-				else {
-					return false;
-				}
-			}
+    @Override
+    public Progress[] getProgress()
+    {
+        if (revisionIds.isEmpty()) {
+            // if we iterate over ALL revisions, we can only report the progress in <articles>
+            return new Progress[] { new ProgressImpl(Long.valueOf(
+                    currentArticleIndex).intValue(), Long.valueOf(nrOfArticles)
+                    .intValue(), Progress.ENTITIES) };
+        }
+        else {
+            // if we iterate over a revision list, we can actually report the progress in
+            // <revisions>
+            return new Progress[] { new ProgressImpl(Long.valueOf(
+                    currentRevisionIndex).intValue(), Long.valueOf(revisionIds.size())
+                    .intValue(), Progress.ENTITIES) };
+        }
+    }
 
-			if (!timestampIter.hasNext()) {
-				// if we are in here, we tried to update with last available page,
-				// but it contained no revisions
-				return false;
-			}
-			return true;
-		}
-	}
+    protected Iterator<Timestamp> getTimestampIter(int pageId)
+        throws IOException
+    {
+        try {
+            List<Timestamp> timestamps = this.revisionApi
+                    .getRevisionTimestamps(pageId);
+            Collections.sort(timestamps);
+            return timestamps.iterator();
+        }
+        catch (WikiApiException e) {
+            throw new IOException(e);
+        }
+    }
 
-	@Override
-	public Progress[] getProgress()
-	{
-		if(revisionIds.isEmpty()){
-			//if we iterate over ALL revisions, we can only report the progress in <articles>
-			return new Progress[] { new ProgressImpl(Long.valueOf(
-					currentArticleIndex).intValue(), Long.valueOf(nrOfArticles)
-					.intValue(), Progress.ENTITIES) };
-		}else{
-			//if we iterate over a revision list, we can actually report the progress in <revisions>
-			return new Progress[] { new ProgressImpl(Long.valueOf(
-					currentRevisionIndex).intValue(), Long.valueOf(revisionIds.size())
-					.intValue(), Progress.ENTITIES) };
-		}
-	}
+    protected void addRevisionAnnotation(JCas jcas, Revision revision)
+    {
+        WikipediaRevision revAnno = new WikipediaRevision(jcas);
+        revAnno.setRevisionId(revision.getRevisionID());
+        revAnno.setPageId(revision.getArticleID());
+        revAnno.setContributorName(revision.getContributorName());
+        Integer contribId = revision.getContributorId();
+        if (contribId != null) {
+            revAnno.setContributorId(revision.getContributorId());
+        }
+        Timestamp timestamp = revision.getTimeStamp();
+        if (timestamp != null) {
+            revAnno.setTimestamp(timestamp.getTime());
+        }
+        revAnno.setComment(revision.getComment());
+        revAnno.setIsMinor(revision.isMinor());
+        revAnno.addToIndexes();
+    }
 
-	protected Iterator<Timestamp> getTimestampIter(int pageId)
-		throws IOException
-	{
-		try {
-			List<Timestamp> timestamps = this.revisionApi
-					.getRevisionTimestamps(pageId);
-			Collections.sort(timestamps);
-			return timestamps.iterator();
-		}
-		catch (WikiApiException e) {
-			throw new IOException(e);
-		}
-	}
+    protected void addDocumentMetaData(JCas jcas, int pageId, int revisionId)
+        throws WikiTitleParsingException, WikiApiException
+    {
+        DocumentMetaData metaData = DocumentMetaData.create(jcas);
+        metaData.setDocumentTitle(wiki.getPage(pageId).getTitle().getWikiStyleTitle());
+        metaData.setCollectionId(Integer.valueOf(pageId).toString());
+        metaData.setDocumentId(Integer.valueOf(revisionId).toString());
+        metaData.setLanguage(dbconfig.getLanguage().toString()); // should be ISO language code
+    }
 
-	protected void addRevisionAnnotation(JCas jcas, Revision revision)
-	{
-		WikipediaRevision revAnno = new WikipediaRevision(jcas);
-		revAnno.setRevisionId(revision.getRevisionID());
-		revAnno.setPageId(revision.getArticleID());
-		revAnno.setContributorName(revision.getContributorName());
-		Integer contribId = revision.getContributorId();
-		if (contribId != null) {
-			revAnno.setContributorId(revision.getContributorId());
-		}
-		Timestamp timestamp = revision.getTimeStamp();
-		if (timestamp != null) {
-			revAnno.setTimestamp(timestamp.getTime());
-		}
-		revAnno.setComment(revision.getComment());
-		revAnno.addToIndexes();
-	}
+    /**
+     * Loads a text file line-by-line into a Set of Strings.
+     * 
+     * @param fileName
+     *            path to the file
+     * @return a Set containing the individual lines of the text file
+     * @throws IOException
+     *             if any error occurs while reading the file
+     */
+    private Set<String> loadFile(String fileName)
+        throws IOException
+    {
+        Set<String> container = new HashSet<String>();
 
-	protected void addDocumentMetaData(JCas jcas, int pageId, int revisionId)
-		throws WikiTitleParsingException, WikiApiException
-	{
-		DocumentMetaData metaData = DocumentMetaData.create(jcas);
-		metaData.setDocumentTitle(wiki.getPage(pageId).getTitle().getWikiStyleTitle());
-		metaData.setCollectionId(Integer.valueOf(pageId).toString());
-		metaData.setDocumentId(Integer.valueOf(revisionId).toString());
-		metaData.setLanguage(dbconfig.getLanguage().toString()); //should be ISO language code
-	}
+        FileInputStream fstream = null;
+        DataInputStream in = null;
+        BufferedReader br = null;
+        try {
+            fstream = new FileInputStream(fileName);
+            in = new DataInputStream(fstream);
+            br = new BufferedReader(new InputStreamReader(in));
 
-	/**
-	 * Loads a text file line-by-line into a Set of Strings.
-	 *
-	 * @param fileName
-	 *            path to the file
-	 * @return a Set containing the individual lines of the text file
-	 * @throws IOException
-	 *             if any error occurs while reading the file
-	 */
-	private Set<String> loadFile(String fileName)
-		throws IOException
-	{
-		Set<String> container = new HashSet<String>();
+            String strLine;
+            while ((strLine = br.readLine()) != null) {
+                container.add(strLine);
+            }
+        }
+        finally {
+            if (br != null) {
+                br.close();
+            }
+            if (in != null) {
+                in.close();
+            }
+            if (fstream != null) {
+                fstream.close();
+            }
+        }
 
-		FileInputStream fstream=null;
-		DataInputStream in=null;
-		BufferedReader br=null;
-		try{
-			fstream = new FileInputStream(fileName);
-			in = new DataInputStream(fstream);
-			br = new BufferedReader(new InputStreamReader(in));
-
-			String strLine;
-			while ((strLine = br.readLine()) != null) {
-				container.add(strLine);
-			}
-		}finally{
-			if(br!=null){
-				br.close();
-			}
-			if(in!=null){
-				in.close();
-			}
-			if(fstream!=null){
-				fstream.close();
-			}
-		}
-
-		return container;
-	}
+        return container;
+    }
 }
