@@ -100,7 +100,7 @@
           <rangeTypeName>uima.cas.Long</rangeTypeName>
         </featureDescription>
         <featureDescription>
-          <name>isMinor</name>
+          <name>minor</name>
           <description>Whether this revision has been marked as minor edit by its contributor.</description>
           <rangeTypeName>uima.cas.Boolean</rangeTypeName>
         </featureDescription>

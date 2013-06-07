@@ -252,7 +252,7 @@ public abstract class WikipediaRevisionReaderBase
             revAnno.setTimestamp(timestamp.getTime());
         }
         revAnno.setComment(revision.getComment());
-        revAnno.setIsMinor(revision.isMinor());
+        revAnno.setMinor(revision.isMinor());
         revAnno.addToIndexes();
     }
 

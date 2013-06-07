@@ -163,20 +163,20 @@ public class WikipediaRevision_Type
   
  
   /** @generated */
-  final Feature casFeat_isMinor;
+  final Feature casFeat_minor;
   /** @generated */
-  final int     casFeatCode_isMinor;
+  final int     casFeatCode_minor;
   /** @generated */ 
-  public boolean getIsMinor(int addr) {
-        if (featOkTst && casFeat_isMinor == null)
-      jcas.throwFeatMissing("isMinor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    return ll_cas.ll_getBooleanValue(addr, casFeatCode_isMinor);
+  public boolean getMinor(int addr) {
+        if (featOkTst && casFeat_minor == null)
+      jcas.throwFeatMissing("minor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return ll_cas.ll_getBooleanValue(addr, casFeatCode_minor);
   }
   /** @generated */    
-  public void setIsMinor(int addr, boolean v) {
-        if (featOkTst && casFeat_isMinor == null)
-      jcas.throwFeatMissing("isMinor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    ll_cas.ll_setBooleanValue(addr, casFeatCode_isMinor, v);}
+  public void setMinor(int addr, boolean v) {
+        if (featOkTst && casFeat_minor == null)
+      jcas.throwFeatMissing("minor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    ll_cas.ll_setBooleanValue(addr, casFeatCode_minor, v);}
     
   
 
@@ -216,8 +216,8 @@ public class WikipediaRevision_Type
     casFeatCode_timestamp  = (null == casFeat_timestamp) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_timestamp).getCode();
 
  
-    casFeat_isMinor = jcas.getRequiredFeatureDE(casType, "isMinor", "uima.cas.Boolean", featOkTst);
-    casFeatCode_isMinor  = (null == casFeat_isMinor) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_isMinor).getCode();
+    casFeat_minor = jcas.getRequiredFeatureDE(casType, "minor", "uima.cas.Boolean", featOkTst);
+    casFeatCode_minor  = (null == casFeat_minor) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_minor).getCode();
 
   }
 }
