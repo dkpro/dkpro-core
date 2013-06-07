@@ -22,8 +22,7 @@ public class WikipediaRevision
 	 * @generated
 	 * @ordered
 	 */
-	public final static int typeIndexID = JCasRegistry
-			.register(WikipediaRevision.class);
+	public final static int typeIndexID = JCasRegistry.register(WikipediaRevision.class);
 	/**
 	 * @generated
 	 * @ordered
@@ -32,46 +31,38 @@ public class WikipediaRevision
 
 	/** @generated */
 	@Override
-	public int getTypeIndexID()
-	{
-		return typeIndexID;
-	}
-
+	public int getTypeIndexID() {return typeIndexID;}
+ 
 	/**
 	 * Never called. Disable default constructor
 	 * 
 	 * @generated
 	 */
-	protected WikipediaRevision()
-	{/* intentionally empty block */
-	}
-
+	protected WikipediaRevision() {/* intentionally empty block */}
+    
 	/**
 	 * Internal - constructor used by generator
 	 * 
 	 * @generated
 	 */
-	public WikipediaRevision(int addr, TOP_Type type)
-	{
-		super(addr, type);
-		readObject();
-	}
+	public WikipediaRevision(int addr, TOP_Type type) {
+    super(addr, type);
+    readObject();
+  }
+  
+	/** @generated */
+	public WikipediaRevision(JCas jcas) {
+    super(jcas);
+    readObject();   
+  } 
 
 	/** @generated */
-	public WikipediaRevision(JCas jcas)
-	{
-		super(jcas);
-		readObject();
-	}
-
-	/** @generated */
-	public WikipediaRevision(JCas jcas, int begin, int end)
-	{
-		super(jcas);
-		setBegin(begin);
-		setEnd(end);
-		readObject();
-	}
+	public WikipediaRevision(JCas jcas, int begin, int end) {
+    super(jcas);
+    setBegin(begin);
+    setEnd(end);
+    readObject();
+  }   
 
 	/**
 	 * <!-- begin-user-doc --> Write your own initialization here <!--
@@ -91,35 +82,22 @@ public class WikipediaRevision
 	 * 
 	 * @generated
 	 */
-	public int getRevisionId()
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_revisionId == null) {
-			jcasType.jcas
-					.throwFeatMissing("revisionId",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		return jcasType.ll_cas.ll_getIntValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_revisionId);
-	}
-
+	public int getRevisionId() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_revisionId == null)
+      jcasType.jcas.throwFeatMissing("revisionId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_revisionId);}
+    
 	/**
 	 * setter for revisionId - sets The ID of the revision.
 	 * 
 	 * @generated
 	 */
-	public void setRevisionId(int v)
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_revisionId == null) {
-			jcasType.jcas
-					.throwFeatMissing("revisionId",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		jcasType.ll_cas.ll_setIntValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_revisionId, v);
-	}
-
+	public void setRevisionId(int v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_revisionId == null)
+      jcasType.jcas.throwFeatMissing("revisionId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_revisionId, v);}    
+   
+    
 	// *--------------*
 	// * Feature: pageId
 
@@ -129,36 +107,23 @@ public class WikipediaRevision
 	 * 
 	 * @generated
 	 */
-	public int getPageId()
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_pageId == null) {
-			jcasType.jcas
-					.throwFeatMissing("pageId",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		return jcasType.ll_cas.ll_getIntValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_pageId);
-	}
-
+	public int getPageId() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_pageId == null)
+      jcasType.jcas.throwFeatMissing("pageId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_pageId);}
+    
 	/**
 	 * setter for pageId - sets The pageId of the Wikipedia page of this
 	 * revision.
 	 * 
 	 * @generated
 	 */
-	public void setPageId(int v)
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_pageId == null) {
-			jcasType.jcas
-					.throwFeatMissing("pageId",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		jcasType.ll_cas.ll_setIntValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_pageId, v);
-	}
-
+	public void setPageId(int v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_pageId == null)
+      jcasType.jcas.throwFeatMissing("pageId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_pageId, v);}    
+   
+    
 	// *--------------*
 	// * Feature: contributorName
 
@@ -168,41 +133,23 @@ public class WikipediaRevision
 	 * 
 	 * @generated
 	 */
-	public String getContributorName()
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_contributorName == null) {
-			jcasType.jcas
-					.throwFeatMissing("contributorName",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		return jcasType.ll_cas
-				.ll_getStringValue(
-						addr,
-						((WikipediaRevision_Type) jcasType).casFeatCode_contributorName);
-	}
-
+	public String getContributorName() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorName == null)
+      jcasType.jcas.throwFeatMissing("contributorName", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorName);}
+    
 	/**
 	 * setter for contributorName - sets The username of the user/contributor
 	 * who edited this revision.
 	 * 
 	 * @generated
 	 */
-	public void setContributorName(String v)
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_contributorName == null) {
-			jcasType.jcas
-					.throwFeatMissing("contributorName",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		jcasType.ll_cas
-				.ll_setStringValue(
-						addr,
-						((WikipediaRevision_Type) jcasType).casFeatCode_contributorName,
-						v);
-	}
-
+	public void setContributorName(String v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorName == null)
+      jcasType.jcas.throwFeatMissing("contributorName", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorName, v);}    
+   
+    
 	// *--------------*
 	// * Feature: comment
 
@@ -212,36 +159,23 @@ public class WikipediaRevision
 	 * 
 	 * @generated
 	 */
-	public String getComment()
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_comment == null) {
-			jcasType.jcas
-					.throwFeatMissing("comment",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		return jcasType.ll_cas.ll_getStringValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_comment);
-	}
-
+	public String getComment() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_comment == null)
+      jcasType.jcas.throwFeatMissing("comment", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_comment);}
+    
 	/**
 	 * setter for comment - sets The comment that the editor entered for this
 	 * revision.
 	 * 
 	 * @generated
 	 */
-	public void setComment(String v)
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_comment == null) {
-			jcasType.jcas
-					.throwFeatMissing("comment",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		jcasType.ll_cas.ll_setStringValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_comment, v);
-	}
-
+	public void setComment(String v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_comment == null)
+      jcasType.jcas.throwFeatMissing("comment", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setStringValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_comment, v);}    
+   
+    
 	// *--------------*
 	// * Feature: contributorId
 
@@ -251,37 +185,23 @@ public class WikipediaRevision
 	 * 
 	 * @generated
 	 */
-	public int getContributorId()
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_contributorId == null) {
-			jcasType.jcas
-					.throwFeatMissing("contributorId",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		return jcasType.ll_cas.ll_getIntValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_contributorId);
-	}
-
+	public int getContributorId() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
+      jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId);}
+    
 	/**
 	 * setter for contributorId - sets The userId of the user/contributor who
 	 * created this revision
 	 * 
 	 * @generated
 	 */
-	public void setContributorId(int v)
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_contributorId == null) {
-			jcasType.jcas
-					.throwFeatMissing("contributorId",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		jcasType.ll_cas.ll_setIntValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_contributorId,
-				v);
-	}
-
+	public void setContributorId(int v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_contributorId == null)
+      jcasType.jcas.throwFeatMissing("contributorId", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setIntValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_contributorId, v);}    
+   
+    
 	// *--------------*
 	// * Feature: timestamp
 
@@ -291,33 +211,37 @@ public class WikipediaRevision
 	 * 
 	 * @generated
 	 */
-	public long getTimestamp()
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_timestamp == null) {
-			jcasType.jcas
-					.throwFeatMissing("timestamp",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		return jcasType.ll_cas.ll_getLongValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_timestamp);
-	}
-
+	public long getTimestamp() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_timestamp == null)
+      jcasType.jcas.throwFeatMissing("timestamp", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getLongValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_timestamp);}
+    
 	/**
 	 * setter for timestamp - sets The timestamp of the revision, given in
 	 * milliseconds since the standard base time (January 1, 1970, 00:00:00 GMT)
 	 * 
 	 * @generated
 	 */
-	public void setTimestamp(long v)
-	{
-		if (WikipediaRevision_Type.featOkTst
-				&& ((WikipediaRevision_Type) jcasType).casFeat_timestamp == null) {
-			jcasType.jcas
-					.throwFeatMissing("timestamp",
-							"de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-		}
-		jcasType.ll_cas.ll_setLongValue(addr,
-				((WikipediaRevision_Type) jcasType).casFeatCode_timestamp, v);
-	}
-}
+	public void setTimestamp(long v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_timestamp == null)
+      jcasType.jcas.throwFeatMissing("timestamp", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setLongValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_timestamp, v);}    
+   
+    
+  //*--------------*
+  //* Feature: isMinor
+
+  /** getter for isMinor - gets Whether this revision has been marked as minor edit by its contributor.
+   * @generated */
+  public boolean getIsMinor() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_isMinor == null)
+      jcasType.jcas.throwFeatMissing("isMinor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getBooleanValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_isMinor);}
+    
+  /** setter for isMinor - sets Whether this revision has been marked as minor edit by its contributor. 
+   * @generated */
+  public void setIsMinor(boolean v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_isMinor == null)
+      jcasType.jcas.throwFeatMissing("isMinor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setBooleanValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_isMinor, v);}    
+  }

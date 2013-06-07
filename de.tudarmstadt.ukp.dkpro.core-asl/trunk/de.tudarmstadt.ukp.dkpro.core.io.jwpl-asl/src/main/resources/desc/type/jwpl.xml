@@ -99,6 +99,11 @@
           <description>The timestamp of the revision, given in milliseconds since the standard base time (January 1, 1970, 00:00:00 GMT)</description>
           <rangeTypeName>uima.cas.Long</rangeTypeName>
         </featureDescription>
+        <featureDescription>
+          <name>isMinor</name>
+          <description>Whether this revision has been marked as minor edit by its contributor.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
   </types>
