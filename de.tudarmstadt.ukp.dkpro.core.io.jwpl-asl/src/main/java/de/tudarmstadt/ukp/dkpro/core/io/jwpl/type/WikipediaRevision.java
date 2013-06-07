@@ -229,19 +229,19 @@ public class WikipediaRevision
    
     
   //*--------------*
-  //* Feature: isMinor
+  //* Feature: minor
 
-  /** getter for isMinor - gets Whether this revision has been marked as minor edit by its contributor.
+  /** getter for minor - gets Whether this revision has been marked as minor edit by its contributor.
    * @generated */
-  public boolean getIsMinor() {
-    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_isMinor == null)
-      jcasType.jcas.throwFeatMissing("isMinor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    return jcasType.ll_cas.ll_getBooleanValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_isMinor);}
+  public boolean getMinor() {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_minor == null)
+      jcasType.jcas.throwFeatMissing("minor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    return jcasType.ll_cas.ll_getBooleanValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_minor);}
     
-  /** setter for isMinor - sets Whether this revision has been marked as minor edit by its contributor. 
+  /** setter for minor - sets Whether this revision has been marked as minor edit by its contributor. 
    * @generated */
-  public void setIsMinor(boolean v) {
-    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_isMinor == null)
-      jcasType.jcas.throwFeatMissing("isMinor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
-    jcasType.ll_cas.ll_setBooleanValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_isMinor, v);}    
+  public void setMinor(boolean v) {
+    if (WikipediaRevision_Type.featOkTst && ((WikipediaRevision_Type)jcasType).casFeat_minor == null)
+      jcasType.jcas.throwFeatMissing("minor", "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision");
+    jcasType.ll_cas.ll_setBooleanValue(addr, ((WikipediaRevision_Type)jcasType).casFeatCode_minor, v);}    
   }
