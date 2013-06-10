@@ -8,7 +8,7 @@
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *   
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,20 +21,15 @@ import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.component.Resource_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DataDrivenSplitterAlgorithm;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
 
 public class DataDrivenSplitterResource
-	extends Resource_ImplBase
-	implements SplitterAlgorithm
+	extends SplitterResource
 {
-
-	private DataDrivenSplitterAlgorithm algo;
 
 	@SuppressWarnings({ "rawtypes" })
 	@Override
@@ -46,7 +41,7 @@ public class DataDrivenSplitterResource
 			return false;
 		}
 
-		algo = new DataDrivenSplitterAlgorithm();
+		splitter = new DataDrivenSplitterAlgorithm();
 
 		return true;
 	}
@@ -54,24 +49,24 @@ public class DataDrivenSplitterResource
 	@Override
 	public DecompoundingTree split(String aWord)
 	{
-		return algo.split(aWord);
+		return splitter.split(aWord);
 	}
 
 	@Override
 	public void setDictionary(Dictionary aDict)
 	{
-		algo.setDictionary(aDict);
+		splitter.setDictionary(aDict);
 	}
 
 	@Override
 	public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
 	{
-		algo.setLinkingMorphemes(aMorphemes);
+		splitter.setLinkingMorphemes(aMorphemes);
 	}
-	
+
 	@Override
 	public void setMaximalTreeDepth(int aDepth)
 	{
-		algo.setMaximalTreeDepth(aDepth);
+		splitter.setMaximalTreeDepth(aDepth);
 	}
 }

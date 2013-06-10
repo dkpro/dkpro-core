@@ -23,20 +23,15 @@ import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.component.Resource_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.AsvToolboxSplitterAlgorithm;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
 
 public class AsvToolboxSplitterResource
-    extends Resource_ImplBase
-    implements SplitterAlgorithm
+    extends SplitterResource
 {
-
-    private AsvToolboxSplitterAlgorithm splitter;
 
     @Override
     public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)

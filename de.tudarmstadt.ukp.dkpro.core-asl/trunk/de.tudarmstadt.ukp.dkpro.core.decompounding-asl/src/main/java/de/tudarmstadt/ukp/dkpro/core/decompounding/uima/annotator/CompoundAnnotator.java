@@ -42,9 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedDictionary;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedFinder;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedLinkingMorphemes;
 
 @TypeCapability(
       inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
@@ -68,30 +65,11 @@ public class CompoundAnnotator
     @ExternalResource(key = PARAM_RANKING_ALGO)
     private Ranker ranker;
 
-    // Dictionary resource
-    public static final String PARAM_DICT_RESOURCE = "dictionaryResource";
-    @ExternalResource(key = PARAM_DICT_RESOURCE)
-    private SharedDictionary dictResource;
-
-    // Linking morphemes resource
-    public static final String PARAM_MORPHEME_RESOURCE = "linkingMorphemeResource";
-    @ExternalResource(key = PARAM_MORPHEME_RESOURCE)
-    private SharedLinkingMorphemes morphemesResource;
-
-    // Finder resource
-    public static final String PARAM_FINDER_RESOURCE = "finderResource";
-    @ExternalResource(key = PARAM_FINDER_RESOURCE)
-    private SharedFinder finderResource;
-
     @Override
     public void initialize(final UimaContext context)
         throws ResourceInitializationException
     {
         super.initialize(context);
-        splitter.setDictionary(dictResource.getDictionary());
-        splitter.setLinkingMorphemes(morphemesResource.getLinkingMorphemes());
-
-        ranker.setFinder(finderResource.getFinder());
     }
 
     @Override

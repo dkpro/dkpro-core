@@ -20,7 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.resource.ResourceSpecifier;
 import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -39,8 +42,14 @@ public class SharedLinkingMorphemes
     private LinkingMorphemes morphemes;
 
     @Override
-    public void afterResourcesInitialized()
+    public boolean initialize(ResourceSpecifier aSpecifier,
+            Map aAdditionalParams)
+        throws ResourceInitializationException
     {
+
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
         try {
             URL url = morphemesPath.equals(DEFAULT_MORPHEMES_PATH) ? getClass().getResource(
                     morphemesPath) : ResourceUtils.resolveLocation(new File(morphemesPath).toURI()
@@ -49,8 +58,10 @@ public class SharedLinkingMorphemes
             morphemes = new LinkingMorphemes(url.openStream());
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResourceInitializationException(e);
         }
+
+        return true;
 
     }
 

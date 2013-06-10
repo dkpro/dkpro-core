@@ -8,7 +8,7 @@
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *   
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,20 +22,15 @@ import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.component.Resource_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.FrequencyGeometricMeanRanker;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 
 public class FrequencyRankerResource
-	extends Resource_ImplBase
-	implements Ranker
+	extends RankerResource
 {
-
-	private FrequencyGeometricMeanRanker ranker;
 
 	@SuppressWarnings({ "rawtypes" })
 	@Override
@@ -48,7 +43,6 @@ public class FrequencyRankerResource
 		}
 
 		ranker = new FrequencyGeometricMeanRanker();
-
 		return true;
 	}
 
@@ -63,7 +57,7 @@ public class FrequencyRankerResource
 	{
 		ranker.setFinder(aFinder);
 	}
-	
+
 	@Override
 	public List<DecompoundedWord> bestPath(DecompoundingTree aTree)
 	{

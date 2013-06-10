@@ -21,7 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Map;
 
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.resource.ResourceSpecifier;
 import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -43,8 +46,14 @@ public class SharedFinder
     private Finder finder;
 
     @Override
-    public void afterResourcesInitialized()
+    public boolean initialize(ResourceSpecifier aSpecifier,
+            Map aAdditionalParams)
+        throws ResourceInitializationException
     {
+
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
 
         try {
             URL ngramUrl = ResourceUtils.resolveLocation(ngramLocation, this, null);
@@ -52,11 +61,12 @@ public class SharedFinder
             finder = new Finder(new File(indexUrl.toURI()), new File(ngramUrl.toURI()));
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResourceInitializationException(e);
         }
         catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new ResourceInitializationException(e);
         }
+        return true;
     }
 
     public Finder getFinder()

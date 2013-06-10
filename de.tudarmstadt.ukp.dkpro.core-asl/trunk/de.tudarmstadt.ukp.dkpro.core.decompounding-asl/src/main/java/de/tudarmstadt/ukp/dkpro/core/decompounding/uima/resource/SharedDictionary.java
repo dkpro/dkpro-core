@@ -21,7 +21,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Map;
 
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.resource.ResourceSpecifier;
 import org.uimafit.component.Resource_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
@@ -42,8 +45,15 @@ public class SharedDictionary
     private Dictionary dict;
 
     @Override
-    public void afterResourcesInitialized()
+    public boolean initialize(ResourceSpecifier aSpecifier,
+            Map aAdditionalParams)
+        throws ResourceInitializationException
     {
+
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
+
         try {
             final URL uri = dictionaryPath.equals(DEFAULT_DICTIONARY_PATH) ? getClass()
                     .getResource(dictionaryPath) : ResourceUtils.resolveLocation(new File(
@@ -62,11 +72,14 @@ public class SharedDictionary
             }
         }
         catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new ResourceInitializationException(e);
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ResourceInitializationException(e);
         }
+
+        return true;
+
     }
 
     public Dictionary getDictionary()
