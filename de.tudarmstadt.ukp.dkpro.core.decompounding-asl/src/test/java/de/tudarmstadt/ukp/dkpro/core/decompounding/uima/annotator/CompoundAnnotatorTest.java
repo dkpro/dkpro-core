@@ -35,7 +35,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.testing.factory.TokenBuilder;
@@ -48,9 +47,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.FrequencyRankerResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.LeftToRightSplitterResource;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.RankerResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedDictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedFinder;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedLinkingMorphemes;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SplitterResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer;
 
 public class CompoundAnnotatorTest
@@ -72,23 +73,24 @@ public class CompoundAnnotatorTest
         indexer.index();
     }
 
-    @Ignore
     @Test
     public void testWithDefaults() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createPrimitiveDescription(
                 CompoundAnnotator.class,
                 CompoundAnnotator.PARAM_SPLITTING_ALGO,
-                createExternalResourceDescription(LeftToRightSplitterResource.class),
+                createExternalResourceDescription(
+                        LeftToRightSplitterResource.class,
+                        SplitterResource.PARAM_DICT_RESOURCE,
+                        createExternalResourceDescription(SharedDictionary.class),
+                        SplitterResource.PARAM_MORPHEME_RESOURCE,
+                        createExternalResourceDescription(SharedLinkingMorphemes.class)),
                 CompoundAnnotator.PARAM_RANKING_ALGO,
-                createExternalResourceDescription(FrequencyRankerResource.class),
-                CompoundAnnotator.PARAM_DICT_RESOURCE,
-                createExternalResourceDescription(SharedDictionary.class),
-                CompoundAnnotator.PARAM_MORPHEME_RESOURCE,
-                createExternalResourceDescription(SharedLinkingMorphemes.class),
-                CompoundAnnotator.PARAM_FINDER_RESOURCE,
-                createExternalResourceDescription(SharedFinder.class,
-                        SharedFinder.PARAM_INDEX_PATH, indexPath,
-                        SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath));
+                createExternalResourceDescription(
+                        FrequencyRankerResource.class,
+                        RankerResource.PARAM_FINDER_RESOURCE,
+                        createExternalResourceDescription(SharedFinder.class,
+                                SharedFinder.PARAM_INDEX_PATH, indexPath,
+                                SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath)));
                 runAnnotator(aed);
     }
 

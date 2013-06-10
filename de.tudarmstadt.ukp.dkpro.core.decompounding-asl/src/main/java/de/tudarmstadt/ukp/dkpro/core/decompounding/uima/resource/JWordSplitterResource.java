@@ -8,7 +8,7 @@
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *   
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,21 +21,16 @@ import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.component.Resource_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.JWordSplitterAlgorithm;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.JWordSplitterAlgorithm;
 
 public class JWordSplitterResource
-	extends Resource_ImplBase
-	implements SplitterAlgorithm
+	extends SplitterResource
 {
 
-	private JWordSplitterAlgorithm splitter;
-	
 	@SuppressWarnings({ "rawtypes" })
 	@Override
 	public boolean initialize(ResourceSpecifier aSpecifier,
@@ -50,7 +45,7 @@ public class JWordSplitterResource
 
 		return true;
 	}
-	
+
 	@Override
 	public DecompoundingTree split(String aWord)
 	{
@@ -68,7 +63,7 @@ public class JWordSplitterResource
 	{
 		splitter.setLinkingMorphemes(aMorphemes);
 	}
-	
+
 	@Override
 	public void setMaximalTreeDepth(int aDepth)
 	{
