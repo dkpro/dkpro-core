@@ -19,7 +19,10 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,8 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.testing.factory.TokenBuilder;
@@ -40,38 +45,74 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.utils.TestUtils;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.FrequencyRankerResource;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.LeftToRightSplitterResource;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.RankerResource;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedDictionary;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedFinder;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedLinkingMorphemes;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SplitterResource;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer;
 
 public class CompoundAnnotatorTest
 {
 
-    @Test
-    public void testWithDefaults()
-        throws CASException, UIMAException
+    static File source = new File("src/test/resources/ranking/n-grams");
+    static File index = new File("target/test/index");
+    static String jWeb1TPath = "src/test/resources/web1t/de";
+    static String indexPath = "target/test/index";
+
+
+    @BeforeClass
+    public static void createIndex()
+        throws Exception
     {
-        runAnnotator(TestUtils.getDefaultCompoundAnnotatorDescription());
+        index.mkdirs();
+
+        LuceneIndexer indexer = new LuceneIndexer(source, index);
+        indexer.index();
     }
 
-    private void runAnnotator(final AnalysisEngineDescription aed)
-        throws CASException, UIMAException
-    {
+    @Test
+    public void testWithDefaults() throws CASException, UIMAException {
+        AnalysisEngineDescription aed = createPrimitiveDescription(
+                CompoundAnnotator.class,
+                CompoundAnnotator.PARAM_SPLITTING_ALGO,
+                createExternalResourceDescription(
+                        LeftToRightSplitterResource.class,
+                        SplitterResource.PARAM_DICT_RESOURCE,
+                        createExternalResourceDescription(SharedDictionary.class),
+                        SplitterResource.PARAM_MORPHEME_RESOURCE,
+                        createExternalResourceDescription(SharedLinkingMorphemes.class)),
+                CompoundAnnotator.PARAM_RANKING_ALGO,
+                createExternalResourceDescription(
+                        FrequencyRankerResource.class,
+                        RankerResource.PARAM_FINDER_RESOURCE,
+                        createExternalResourceDescription(SharedFinder.class,
+                                SharedFinder.PARAM_INDEX_PATH, indexPath,
+                                SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath)));
+                runAnnotator(aed);
+    }
+
+    private void runAnnotator(AnalysisEngineDescription aed)
+        throws CASException, UIMAException{
         // Create Analysis Engine
-        final AnalysisEngine analysisEngine = AnalysisEngineFactory.createAggregate(aed);
+        AnalysisEngine ae = AnalysisEngineFactory.createAggregate(aed);
 
         // Create cas with token
-        final CAS cas = analysisEngine.newCAS();
-        final TokenBuilder<Token, Annotation> builder = new TokenBuilder<Token, Annotation>(
-                Token.class, Annotation.class);
+        CAS cas = ae.newCAS();
+        TokenBuilder<Token, Annotation> builder = new TokenBuilder<Token, Annotation>(Token.class,
+                Annotation.class);
         builder.buildTokens(cas.getJCas(), "Aktionsplan im Doppelprozessormaschine");
-        analysisEngine.typeSystemInit(cas.getTypeSystem());
-        analysisEngine.process(cas);
+        ae.typeSystemInit(cas.getTypeSystem());
+        ae.process(cas);
 
-        final String[] splits = new String[] { "Aktion", "s", "plan", "Doppel",
-                "prozessormaschine", "prozessor", "maschine" };
-        final String[] compounds = new String[] { "Aktionsplan", "Doppelprozessormaschine" };
-        final String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel",
-                "prozessormaschine", "prozessor", "maschine" };
-        final String[] linkingMorphemes = new String[] { "s" };
+        String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine",
+                "prozessor","maschine"};
+        String[] compounds = new String[] {"Aktionsplan", "Doppelprozessormaschine"};
+        String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine",
+                "prozessor","maschine"};
+        String[] linkingMorphemes = new String[] {"s"};
 
         // Check if splits and morphemes are equal
         assertThat(getAnnotation(cas.getJCas(), Compound.class), is(compounds));
@@ -80,15 +121,29 @@ public class CompoundAnnotatorTest
         assertThat(getAnnotation(cas.getJCas(), LinkingMorpheme.class), is(linkingMorphemes));
     }
 
-    public static <T extends Annotation> String[] getAnnotation(final JCas aCas,
-            final Class<T> aClass)
+    protected <T extends Annotation> String[] getAnnotation(JCas aCas, Class<T> aClass)
     {
-        final List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<String>();
         for (T s : JCasUtil.select(aCas, aClass)) {
             result.add(s.getCoveredText());
         }
 
         return result.toArray(new String[] {});
+    }
+
+    @AfterClass
+    public static void tearDown()
+        throws Exception
+    {
+        // Delete index again
+        for (File f : index.listFiles()) {
+            for (File _f : f.listFiles()) {
+                _f.delete();
+            }
+            f.delete();
+        }
+
+        index.delete();
     }
 
 }
