@@ -283,7 +283,7 @@ public class FrequencyDistribution<T>
      * Returns the n most frequent samples in the distribution.
      * The ordering within in a group of samples with the same frequency is undefined.
      */
-    public List<T> getMostFrequentSamples(long n) {
+    public List<T> getMostFrequentSamples(int n) {
 
         List<T> topSamples = new ArrayList<T>();
         
