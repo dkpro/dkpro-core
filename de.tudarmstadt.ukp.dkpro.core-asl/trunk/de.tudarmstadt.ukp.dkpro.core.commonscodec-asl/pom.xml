@@ -23,4 +23,44 @@
     <version>1.5.0-SNAPSHOT</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>commons-codec</groupId>
+  			<artifactId>commons-codec</artifactId>
+  			<version>1.6</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
+  <dependencies>
+  	 <dependency>
+  		<groupId>commons-codec</groupId>
+  		<artifactId>commons-codec</artifactId>
+  	 </dependency>
+  	    <dependency>
+            <groupId>org.apache.uima</groupId>
+            <artifactId>uimaj-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.uimafit</groupId>
+        	<artifactId>uimafit</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        	<artifactId>
+        		de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl
+        	</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>
+                de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl
+            </artifactId>
+        </dependency>
+  </dependencies>
 </project>
