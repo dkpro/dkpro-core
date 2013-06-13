@@ -158,6 +158,16 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
+                <version>1.5.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
+                <version>1.5.0-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</artifactId>
@@ -520,6 +530,8 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
@@ -546,7 +558,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
 	</modules>
 	<build>
 		<plugins>
