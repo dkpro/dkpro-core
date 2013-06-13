@@ -108,6 +108,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
+                <version>1.5.0-SNAPSHOT</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
@@ -483,6 +488,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.srl-asl</module>
