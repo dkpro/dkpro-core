@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2010
+ * Copyright 2013
 
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -22,8 +22,6 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
-
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
@@ -35,9 +33,11 @@ public class AsvToolboxSplitterTest
         throws ResourceInitializationException
     {
         AsvToolboxSplitterAlgorithm splitter = new AsvToolboxSplitterAlgorithm();
-        List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 
-        assertThat(result.get(0).toString(), is("gerät(e)+elektronik"));
+        assertThat(splitter.split("geräteelektronik").getAllSplits().get(0).toString(),
+                is("gerät(e)+elektronik"));
+        assertThat(splitter.split("teppichteil").getAllSplits().get(0).toString(),
+                is("teppich+teil"));
 
     }
 
