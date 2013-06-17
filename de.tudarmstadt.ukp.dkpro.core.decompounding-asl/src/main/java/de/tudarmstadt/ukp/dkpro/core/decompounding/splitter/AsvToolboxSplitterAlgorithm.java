@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2010
+ * Copyright 2013
 
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -440,8 +440,7 @@ public class AsvToolboxSplitterAlgorithm
                     found = true;
                 }
                 else if (aSplit.startsWith(rest)) {
-                    retvec.add(aSplit);
-                    retvec.add("(" + rest.substring(aSplit.length()) + ")");
+                    retvec.add(rest);
                     found = true;
                 }
                 else if (aSplit.startsWith(restGrund)) {
