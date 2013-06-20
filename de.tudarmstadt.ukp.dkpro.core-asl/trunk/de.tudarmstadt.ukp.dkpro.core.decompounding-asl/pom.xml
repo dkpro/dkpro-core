@@ -56,11 +56,6 @@
 	</dependency>
 	<dependency>
 		<groupId>de.uni_leipzig.asv.toolbox</groupId>
-		<artifactId>de.uni_leipzig.asv.toolbox.util</artifactId>
-		<version>1.0</version>
-	</dependency>
-	<dependency>
-		<groupId>de.uni_leipzig.asv.toolbox</groupId>
 		<artifactId>de.uni_leipzig.asv.toolbox.utils</artifactId>
 		<version>1.0</version>
 	</dependency>
