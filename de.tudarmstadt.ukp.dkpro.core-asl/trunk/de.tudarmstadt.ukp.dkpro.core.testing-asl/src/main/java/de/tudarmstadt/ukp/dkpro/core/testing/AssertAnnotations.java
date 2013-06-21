@@ -33,6 +33,7 @@ import java.util.List;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate;
@@ -129,6 +130,26 @@ public class AssertAnnotations
 		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
 	}
 
+	   public static void assertStem(String[] aExpected, Collection<Stem> aActual)
+	    {
+	        if (aExpected == null) {
+	            return;
+	        }
+
+	        List<String> expected = asList(aExpected);
+	        List<String> actual = new ArrayList<String>();
+
+	        for (Stem a : aActual) {
+	            actual.add(a.getValue());
+	        }
+
+	        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
+	        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
+
+	        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+	    }
+
+
 	public static void assertConstituents(String[] aExpectedMapped, String[] aExpectedOriginal,
 			Collection<Constituent> aActual)
 	{
@@ -215,6 +236,17 @@ public class AssertAnnotations
 
 		assertEquals(expected, actual);
 	}
+
+   public static void assertPennTree(String aExpected, String aActual)
+    {
+        String expected = normalizeSpace(aExpected);
+        String actual = normalizeSpace(aActual != null ? aActual : "<none>");
+
+        System.out.printf("%-20s - Expected: %s%n", "Penn tree", expected);
+        System.out.printf("%-20s - Actual  : %s%n", "Penn tree", actual);
+
+        assertEquals(expected, actual);
+    }
 
 	public static void assertSemanticPredicates(String[] aExpected,
 			Collection<SemanticPredicate> aActual)
