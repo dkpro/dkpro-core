@@ -35,7 +35,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.uimafit.factory.AnalysisEngineFactory;
 import org.uimafit.testing.factory.TokenBuilder;
@@ -74,7 +73,6 @@ public class CompoundAnnotatorTest
         indexer.index();
     }
 
-    @Ignore("Currently resources are not available")
     @Test
     public void testWithDefaults() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createPrimitiveDescription(
