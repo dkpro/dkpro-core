@@ -26,6 +26,11 @@
 		<antcall target="separate-jars" />
 	</target>
 
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
 	<target name="separate-jars">
 		<mkdir dir="target/download" />
 		<mkdir dir="target/download/ASV_Toolbox_Baseformsv1.0l"/>
@@ -69,6 +74,7 @@
 				<include name="de_DE_igerman98/**/*"/>
 			</patternset>
 		</unzip>
+		<copy file="src/script/res/de_DE.linking" todir="target/download/igerman98/de_DE_igerman98"/>
 		<install-stub-and-upstream-folder
 			folder="target/download/igerman98/de_DE_igerman98"
 			groupId="de.tudarmstadt.ukp.dkpro.core"

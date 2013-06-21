@@ -17,7 +17,6 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
@@ -35,8 +34,7 @@ public class SharedLinkingMorphemes
 {
 
     public static final String PARAM_MORPHEMES_PATH = "morphemesPath";
-    public static final String DEFAULT_MORPHEMES_PATH = "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.linking";
-    @ConfigurationParameter(name = PARAM_MORPHEMES_PATH, mandatory = false, defaultValue = DEFAULT_MORPHEMES_PATH)
+    @ConfigurationParameter(name = PARAM_MORPHEMES_PATH, mandatory = false, defaultValue = "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE.linking")
     private String morphemesPath;
 
     private LinkingMorphemes morphemes;
@@ -51,9 +49,7 @@ public class SharedLinkingMorphemes
             return false;
         }
         try {
-            URL url = morphemesPath.equals(DEFAULT_MORPHEMES_PATH) ? getClass().getResource(
-                    morphemesPath) : ResourceUtils.resolveLocation(new File(morphemesPath).toURI()
-                    .toString(), this, null);
+            URL url = ResourceUtils.resolveLocation(morphemesPath, this, null);
 
             morphemes = new LinkingMorphemes(url.openStream());
         }

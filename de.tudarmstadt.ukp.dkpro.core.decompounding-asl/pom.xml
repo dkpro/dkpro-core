@@ -92,6 +92,11 @@
 	    <artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-splitter-de-asv</artifactId>
 	    <version>20130521</version>
 	</dependency>
+	<dependency>
+	    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+	    <artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-igerman98</artifactId>
+	    <version>20110621.1</version>
+	</dependency>
   </dependencies>
   <profiles>
 	<profile>
