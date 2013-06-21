@@ -18,8 +18,23 @@
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static org.junit.Assert.assertEquals;
+import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.uimafit.util.JCasUtil.selectSingle;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.jcas.JCas;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
+
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 /**
  * @author Richard Eckart de Castilho
@@ -72,4 +87,66 @@ public class PennTreeUtilsTest
 		System.out.println(PennTreeUtils.selectDfs(n, 11));
 		System.out.println(PennTreeUtils.selectDfs(n, 12));
 	}
+	
+    @Test
+    public void testFromUimaConversion()
+        throws Exception
+    {
+        String documentEnglish = 
+                "It is for this reason that deconstruction remains a ( fundamental ) threat to " +
+                "Marxism , and by implication to other culturalist and contextualizing " +
+                "approaches .";
+        
+        String pennTree = "(ROOT (S (S (NP (PRP It)) (VP (VBZ is) (PP (IN for) (NP (DT this) " +
+        		"(NN reason))) (SBAR (IN that) (S (NP (NN deconstruction)) (VP (VBZ remains) " +
+        		"(NP (NP (DT a) (-LRB- -LRB-) (NN fundamental) (-RRB- -RRB-) (NN threat)) (PP " +
+        		"(TO to) (NP (NNP Marxism))))))))) (, ,) (CC and) (S (PP (IN by) (NP " +
+        		"(NN implication))) (PP (TO to) (NP (NP (JJ other) (NN culturalist)) (CC and) " +
+        		"(NP (VBG contextualizing) (NNS approaches))))) (. .)))";
+        
+        JCas jcas = runTest("en", "chunking", documentEnglish);
+        
+        ROOT root = selectSingle(jcas, ROOT.class);
+        PennTreeNode r = PennTreeUtils.convertPennTree(root);
+        
+        assertEquals(documentEnglish.trim(), PennTreeUtils.toText(r).trim());
+        AssertAnnotations.assertPennTree(pennTree, PennTreeUtils.toPennTree(r));
+    }
+
+	
+	/**
+     * Setup CAS to test parser for the English language (is only called once if
+     * an English test is run)
+     */
+    private JCas runTest(String aLanguage, String aVariant, String aText)
+        throws Exception
+    {
+        AnalysisEngineDescription segmenter = createPrimitiveDescription(OpenNlpSegmenter.class);
+
+        // setup English
+        AnalysisEngineDescription parser = createPrimitiveDescription(OpenNlpParser.class,
+                OpenNlpParser.PARAM_VARIANT, aVariant,
+                OpenNlpParser.PARAM_PRINT_TAGSET, true,
+                OpenNlpParser.PARAM_CREATE_PENN_TREE_STRING, true);
+
+        AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
+        
+        AnalysisEngine engine = createPrimitive(aggregate);
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(aLanguage);
+        jcas.setDocumentText(aText);
+        engine.process(jcas);
+        
+        return jcas;
+    }
+    
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
+
 }
