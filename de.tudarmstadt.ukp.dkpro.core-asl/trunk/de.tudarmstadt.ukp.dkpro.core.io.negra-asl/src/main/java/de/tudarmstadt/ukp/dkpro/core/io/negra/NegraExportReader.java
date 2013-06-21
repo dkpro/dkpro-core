@@ -589,6 +589,7 @@ public class NegraExportReader
 		if (pennTreeEnabled) {
 		    PennTree pt = new PennTree(aJCas, root.getBegin(), root.getEnd());
 		    pt.setPennTree(PennTreeUtils.toPennTree(PennTreeUtils.convertPennTree(root)));
+		    pt.addToIndexes();
 		}
 		
 		// add constituents at the end of the sentence
