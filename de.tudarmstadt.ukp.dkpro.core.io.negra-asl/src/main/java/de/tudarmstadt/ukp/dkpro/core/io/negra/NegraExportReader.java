@@ -57,8 +57,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 
 /**
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
@@ -124,6 +126,15 @@ public class NegraExportReader
 	private boolean lemmaEnabled;
 
 	/**
+     * Write Penn Treebank bracketed structure information.
+     *
+     * Default: {@code true}
+     */
+    public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+    private boolean pennTreeEnabled;
+
+	/**
 	 * Location of the mapping file for part-of-speech tags to UIMA types.
 	 */
 	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
@@ -138,6 +149,13 @@ public class NegraExportReader
 	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
 	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
 	protected String posTagset;
+
+	/**
+     * The collection ID to the written to the document meta data. (Default: none)
+     */
+    public static final String PARAM_COLLECTION_ID = "collectionId";
+    @ConfigurationParameter(name = PARAM_COLLECTION_ID, mandatory = false)
+    private String collectionId;
 
 	/**
 	 * If true, the unit IDs are used only to detect if a new document (CAS) needs to be created,
@@ -261,6 +279,7 @@ public class NegraExportReader
 		// Set meta data
 		DocumentMetaData meta = DocumentMetaData.create(aJCas);
 		meta.setDocumentUri(inputFile.toURI()+"#"+documentId);
+		meta.setCollectionId(collectionId);
 		meta.setDocumentId(documentId);
 		aJCas.setDocumentLanguage(language);
 
@@ -567,6 +586,11 @@ public class NegraExportReader
 		Sentence sentence = new Sentence(aJCas, root.getBegin(), root.getEnd());
 		sentence.addToIndexes(aJCas);
 
+		if (pennTreeEnabled) {
+		    PennTree pt = new PennTree(aJCas, root.getBegin(), root.getEnd());
+		    pt.setPennTree(PennTreeUtils.toPennTree(PennTreeUtils.convertPennTree(root)));
+		}
+		
 		// add constituents at the end of the sentence
 		for (Constituent c : constituents.values()) {
 			c.addToIndexes(aJCas);
