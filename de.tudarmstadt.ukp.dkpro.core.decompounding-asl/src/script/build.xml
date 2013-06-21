@@ -56,7 +56,28 @@
 			language="de"
 			variant="asv">
 		</install-stub-and-upstream-folder>
+		
+		<get
+			src="http://extensions.libreoffice.org/extension-center/german-de-de-igerman98-dictionaries/pscreleasefolder.2011-11-05.3634814500/2011.06.21/dict-de_de-igerman98_2011-06-21"
+			dest="target/download/igerman98.zip"
+			skipexisting="true" />
+		<mkdir dir="target/download/igerman98"/>
+		<unzip
+			src="target/download/igerman98.zip"
+			dest="target/download/igerman98">
+			<patternset>
+				<include name="de_DE_igerman98/**/*"/>
+			</patternset>
+		</unzip>
+		<install-stub-and-upstream-folder
+			folder="target/download/igerman98/de_DE_igerman98"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			upstreamVersion="20110621"
+			metaDataVersion="1"
+			tool="spelling"
+			language="de"
+			variant="igerman98">
+		</install-stub-and-upstream-folder>
 	</target>
-
-
 </project>

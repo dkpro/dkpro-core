@@ -17,7 +17,6 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -38,26 +37,21 @@ public class SharedDictionary
 {
 
     public final static String PARAM_DICTIONARY_PATH = "dictionaryPath";
-    public final static String DEFAULT_DICTIONARY_PATH = "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic";
-    @ConfigurationParameter(name = PARAM_DICTIONARY_PATH, mandatory = false, defaultValue = DEFAULT_DICTIONARY_PATH)
+    @ConfigurationParameter(name = PARAM_DICTIONARY_PATH, mandatory = false, defaultValue = "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic")
     private String dictionaryPath;
 
     private Dictionary dict;
 
     @Override
-    public boolean initialize(ResourceSpecifier aSpecifier,
-            Map aAdditionalParams)
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
         throws ResourceInitializationException
     {
-
         if (!super.initialize(aSpecifier, aAdditionalParams)) {
             return false;
         }
 
         try {
-            final URL uri = dictionaryPath.equals(DEFAULT_DICTIONARY_PATH) ? getClass()
-                    .getResource(dictionaryPath) : ResourceUtils.resolveLocation(new File(
-                    dictionaryPath).toURI().toString(), this, null);
+            final URL uri = ResourceUtils.resolveLocation(dictionaryPath, this, null);
 
             final String uriString = uri.toURI().toString();
 
