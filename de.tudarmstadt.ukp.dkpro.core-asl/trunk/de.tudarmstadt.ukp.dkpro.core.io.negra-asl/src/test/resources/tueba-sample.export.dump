@@ -23,6 +23,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht .]
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 92
+   PennTree: "(ROOT ($, ,) ($. .) (SIMPX (SIMPX (VF (NX (ART den) (NN AWO-Posten))) (MF (ADVX (PTKNEG nicht)))) (SIMPX (LK (VXFIN (VMFIN mußte))) (MF (NX (PPER er)) (ADVX (ADV damals))) (VC (VXINF (VVINF niederlegen))) (VF (NX (NX (PPOSAT Seine) (NN Position)) (PX (APPR bei) (NX (ART der) (NN Prüfgesellschaft))))))))"
+   TransformationNames: <null>
+[Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht .]
 Sentence
    sofa: _InitialView
    begin: 0
@@ -1465,6 +1472,13 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [K. W.]
+PennTree
+   sofa: _InitialView
+   begin: 93
+   end: 98
+   PennTree: "(ROOT (EN-ADD (NX (NE K.) (NE W.))))"
+   TransformationNames: <null>
+[K. W.]
 Sentence
    sofa: _InitialView
    begin: 93
@@ -1594,6 +1608,13 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "--"
+[SPD / CDU / AfB für Daewoo-Millionen]
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 36
+   PennTree: "(ROOT ($( /) ($( /) (NX (NX (NX (NE SPD)) (NX (NE CDU)) (NX (NE AfB))) (PX (APPR für) (NX (NN Daewoo-Millionen)))))"
+   TransformationNames: <null>
 [SPD / CDU / AfB für Daewoo-Millionen]
 Sentence
    sofa: _InitialView
@@ -2070,6 +2091,13 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "--"
+[Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
+PennTree
+   sofa: _InitialView
+   begin: 37
+   end: 94
+   PennTree: "(ROOT (SIMPX (KOORD (KON Aber)) (LK (VXFIN (VVFIN fordert))) (MF (ADVX (ADV jetzt)) (NX (NN Untersuchungsausschuß))) (VF (NX (NE AfB) (NX (NE Bremerhavens))))))"
+   TransformationNames: <null>
 [Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
 Sentence
    sofa: _InitialView
@@ -2609,5 +2637,3 @@ NN
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 1 end ==================================
-
-

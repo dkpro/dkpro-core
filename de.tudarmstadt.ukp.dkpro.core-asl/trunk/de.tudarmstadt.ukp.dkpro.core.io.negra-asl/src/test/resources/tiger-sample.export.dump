@@ -23,6 +23,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 56
+   PennTree: "(ROOT ($( ``) ($( '') (-- (VAFIN wäre) (ADV vielleicht) (-- (NE Ross) (NE Perot)) (-- (ART ein) (ADJA prächtiger) (NN Diktator))))"
+   TransformationNames: <null>
+[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 Sentence
    sofa: _InitialView
    begin: 0
@@ -507,6 +514,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Konzernchefs lehnen den Milliardär als US-Präsidenten ab /]
+PennTree
+   sofa: _InitialView
+   begin: 57
+   end: 115
+   PennTree: "(ROOT ($( /) (-- (NN Konzernchefs) (VVFIN lehnen) (PTKVZ ab) (-- (ART den) (NN Milliardär)) (-- (APPR als) (NN US-Präsidenten))))"
+   TransformationNames: <null>
+[Konzernchefs lehnen den Milliardär als US-Präsidenten ab /]
 Sentence
    sofa: _InitialView
    begin: 57
@@ -963,6 +977,13 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "--"
+[Texaner gibt nur vage Auskunft über seine Wirtschaftspolitik]
+PennTree
+   sofa: _InitialView
+   begin: 116
+   end: 176
+   PennTree: "(ROOT (-- (NN Texaner) (VVFIN gibt) (-- (NN Auskunft) (-- (ADV nur) (ADJA vage)) (-- (APPR über) (PPOSAT seine) (NN Wirtschaftspolitik)))))"
+   TransformationNames: <null>
 [Texaner gibt nur vage Auskunft über seine Wirtschaftspolitik]
 Sentence
    sofa: _InitialView
@@ -1481,6 +1502,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
+PennTree
+   sofa: _InitialView
+   begin: 177
+   end: 276
+   PennTree: "(ROOT ($. .) (-- (VAFIN hat) (-- (ART Der) (ADJA texanische) (NN Milliardär) (-- (NE Ross) (NE Perot))) (-- (VVPP aufgeschreckt) (-- (ART das) (ADJA politische) (NN Establishment) (-- (APPR in) (NE Washington))))))"
+   TransformationNames: <null>
 [Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
 Sentence
    sofa: _InitialView
@@ -2346,6 +2374,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Nach Meinungsumfragen liegt der parteilose Self-mademan gut im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton .]
+PennTree
+   sofa: _InitialView
+   begin: 277
+   end: 457
+   PennTree: "(ROOT ($. .) (-- (VVFIN liegt) (ADJD gut) (-- (APPR Nach) (NN Meinungsumfragen)) (-- (ART der) (ADJA parteilose) (FM Self-mademan)) (-- (APPRART im) (NN Rennen) (-- (APPR um) (ART den) (NN Chefsessel) (-- (APPRART im) (-- (-- (ADJA Weißen) (NN Haus))))) (-- (APPR mit) (-- (KON und) (-- (ART dem) (ADJA amtierenden) (NN Präsidenten) (-- (NE George) (NE Bush))) (-- (ART dem) (NN Demokraten) (-- (NE Bill) (NE Clinton))))))))"
+   TransformationNames: <null>
 [Nach Meinungsumfragen liegt der parteilose Self-mademan gut im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton .]
 Sentence
    sofa: _InitialView
@@ -4516,6 +4551,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Daß Perot ein Unternehmen erfolgreich leiten kann , davon sind selbst seine Kritiker überzeugt .]
+PennTree
+   sofa: _InitialView
+   begin: 458
+   end: 554
+   PennTree: "(ROOT ($, ,) ($. .) (-- (VAFIN sind) (-- (ADV selbst) (PPOSAT seine) (NN Kritiker)) (-- (VVPP überzeugt) (-- (PROAV davon) (-- (KOUS Daß) (NE Perot) (VMFIN kann) (-- (ADJD erfolgreich) (VVINF leiten) (-- (ART ein) (NN Unternehmen))))))))"
+   TransformationNames: <null>
+[Daß Perot ein Unternehmen erfolgreich leiten kann , davon sind selbst seine Kritiker überzeugt .]
 Sentence
    sofa: _InitialView
    begin: 458
@@ -5615,6 +5657,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Ob diese Fähigkeiten aber ausreichen , um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen , bezweifeln viele Ökonomen .]
+PennTree
+   sofa: _InitialView
+   begin: 555
+   end: 688
+   PennTree: "(ROOT ($, ,) ($, ,) ($. .) (-- (VVFIN bezweifeln) (-- (PIAT viele) (NN Ökonomen)) (-- (KOUS Ob) (ADV aber) (VVFIN ausreichen) (-- (PDAT diese) (NN Fähigkeiten)) (-- (KOUI um) (-- (APPR aus) (PPOSAT ihrer) (NN Krise)) (-- (PTKZU zu) (VVINF führen)) (-- (ART die) (ADJA größte) (NN Volkswirtschaft) (-- (ART der) (NN Welt)))))))"
+   TransformationNames: <null>
 [Ob diese Fähigkeiten aber ausreichen , um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen , bezweifeln viele Ökonomen .]
 Sentence
    sofa: _InitialView
@@ -7133,6 +7182,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Und auch die Konzernchefs in den USA halten nicht viel von dem 62jährigen .]
+PennTree
+   sofa: _InitialView
+   begin: 689
+   end: 764
+   PennTree: "(ROOT ($. .) (-- (KON Und) (VVFIN halten) (-- (PTKNEG nicht) (PIS viel)) (-- (APPR von) (ART dem) (NN 62jährigen)) (-- (ADV auch) (ART die) (NN Konzernchefs) (-- (APPR in) (ART den) (NE USA)))))"
+   TransformationNames: <null>
+[Und auch die Konzernchefs in den USA halten nicht viel von dem 62jährigen .]
 Sentence
    sofa: _InitialView
    begin: 689
@@ -7954,6 +8010,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Zwar können sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen - nur nicht ausgerechnet Perot .]
+PennTree
+   sofa: _InitialView
+   begin: 765
+   end: 891
+   PennTree: "(ROOT ($( -) ($. .) (-- (-- (ADV Zwar) (VMFIN können) (ADV durchaus) (-- (ART die) (PIAT meisten) (NN Topmanager)) (-- (PRF sich) (VVINF vorstellen) (-- (ART einen) (NN Unternehmer)) (-- (APPR als) (NN Präsidenten)))) (-- (ADV nur) (PTKNEG nicht) (-- (-- (ADV ausgerechnet) (NE Perot))))))"
+   TransformationNames: <null>
 [Zwar können sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen - nur nicht ausgerechnet Perot .]
 Sentence
    sofa: _InitialView
@@ -9222,6 +9285,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Nach einer Umfrage des Wirtschaftsmagazins Fortune unter den Bossen von 500 Großunternehmen wünschten im Mai nur elf Prozent `` Ross for President '' , während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen .]
+PennTree
+   sofa: _InitialView
+   begin: 892
+   end: 1119
+   PennTree: "(ROOT ($( ``) ($( '') ($, ,) ($. .) (-- (VVFIN wünschten) (NE Ross) (-- (APPRART im) (NN Mai)) (-- (FM for) (FM President)) (-- (NN Prozent) (-- (ADV nur) (CARD elf))) (-- (APPR Nach) (ART einer) (NN Umfrage) (-- (ART des) (NN Wirtschaftsmagazins) (NE Fortune)) (-- (APPR unter) (ART den) (NN Bossen) (-- (APPR von) (CARD 500) (NN Großunternehmen)))) (-- (KON und) (-- (KOUS während) (PRF sich) (-- (CARD 78) (NN Prozent)) (-- (APPR für) (NE Bush))) (-- (VVFIN aussprachen) (-- (CARD vier) (NN Prozent)) (-- (APPR für) (NE Clinton))))))"
+   TransformationNames: <null>
 [Nach einer Umfrage des Wirtschaftsmagazins Fortune unter den Bossen von 500 Großunternehmen wünschten im Mai nur elf Prozent `` Ross for President '' , während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen .]
 Sentence
    sofa: _InitialView
@@ -11714,6 +11784,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Allerdings glaubt fast die Hälfte der Chief Executives , daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert .]
+PennTree
+   sofa: _InitialView
+   begin: 1120
+   end: 1271
+   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (-- (ADV Allerdings) (VVFIN glaubt) (-- (ADV fast) (ART die) (NN Hälfte) (-- (ART der) (FM Chief) (FM Executives))) (-- (KOUS daß) (NE Perot) (ADV durchaus) (VAFIN habe) (-- (KOUS wenn) (PPER er) (ADV denn) (VVFIN kandidiert)) (-- (NN Chancen) (-- (-- (PTKZU zu) (VVINF gewinnen)) (-- (ART die) (NN Wahl) (-- (APPRART im) (NN November))))))))"
+   TransformationNames: <null>
+[Allerdings glaubt fast die Hälfte der Chief Executives , daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert .]
 Sentence
    sofa: _InitialView
    begin: 1120
@@ -13532,6 +13609,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Als größte Schwäche des Texaners nennen die Befragten seinen Mangel an Erfahrung auf dem politischen Parkett .]
+PennTree
+   sofa: _InitialView
+   begin: 1272
+   end: 1382
+   PennTree: "(ROOT ($. .) (-- (VVFIN nennen) (-- (ART die) (NN Befragten)) (-- (APPR Als) (ADJA größte) (NN Schwäche) (-- (ART des) (NN Texaners))) (-- (PPOSAT seinen) (NN Mangel) (-- (APPR an) (NN Erfahrung) (-- (APPR auf) (ART dem) (ADJA politischen) (NN Parkett))))))"
+   TransformationNames: <null>
+[Als größte Schwäche des Texaners nennen die Befragten seinen Mangel an Erfahrung auf dem politischen Parkett .]
 Sentence
    sofa: _InitialView
    begin: 1272
@@ -14640,6 +14724,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Viele meinen , daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde .]
+PennTree
+   sofa: _InitialView
+   begin: 1383
+   end: 1476
+   PennTree: "(ROOT ($, ,) ($. .) (-- (PIS Viele) (VVFIN meinen) (-- (KOUS daß) (NE Perot) (VAFIN würde) (-- (VVINF laufen) (-- (APPR mit) (PPOSAT seinem) (NN Befehlston)) (-- (APPR auf) (ART dem) (NE Capitol)) (-- (APPR gegen) (ART eine) (NN Wand))))))"
+   TransformationNames: <null>
 [Viele meinen , daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde .]
 Sentence
    sofa: _InitialView
@@ -15776,6 +15867,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [So erklärt etwa Edward Brandon von dem Unternehmen National City in Ohio :]
+PennTree
+   sofa: _InitialView
+   begin: 1477
+   end: 1551
+   PennTree: "(ROOT ($. :) (-- (ADV So) (VVFIN erklärt) (-- (ADV etwa) (-- (NE Edward) (NE Brandon)) (-- (APPR von) (ART dem) (NN Unternehmen) (-- (NE National) (NE City)) (-- (APPR in) (NE Ohio))))))"
+   TransformationNames: <null>
+[So erklärt etwa Edward Brandon von dem Unternehmen National City in Ohio :]
 Sentence
    sofa: _InitialView
    begin: 1477
@@ -16675,6 +16773,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[`` Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre .]
+PennTree
+   sofa: _InitialView
+   begin: 1552
+   end: 1674
+   PennTree: "(ROOT ($( ``) ($, ,) ($, ,) ($, ,) ($. .) (-- (PPER Ich) (VVFIN glaube) (ADV kaum) (-- (KOUS daß) (VAFIN wäre) (-- (ART ein) (NN Gefallen)) (-- (VVPP getan) (-- (ART dem) (NN Land)) (-- (APPR mit) (PPOSAT seinem) (NN Stil) (-- (ITJ naja) (ADV etwas) (ADJA undiplomatischen)) (-- (APPRART im) (-- (-- (ADJA Weißen) (NN Haus)))))))))"
+   TransformationNames: <null>
 [`` Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre .]
 Sentence
    sofa: _InitialView
@@ -18414,6 +18519,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Er wäre vielleicht ein prächtiger Diktator - aber das ist nicht unser System . '']
+PennTree
+   sofa: _InitialView
+   begin: 1675
+   end: 1756
+   PennTree: "(ROOT ($( -) ($. .) ($( '') (-- (KON aber) (-- (PPER Er) (VAFIN wäre) (ADV vielleicht) (-- (ART ein) (ADJA prächtiger) (NN Diktator))) (-- (PDS das) (VAFIN ist) (PTKNEG nicht) (-- (PPOSAT unser) (NN System)))))"
+   TransformationNames: <null>
+[Er wäre vielleicht ein prächtiger Diktator - aber das ist nicht unser System . '']
 Sentence
    sofa: _InitialView
    begin: 1675
@@ -19285,6 +19397,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Und ein anderer Manager vermutet , daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab '' .]
+PennTree
+   sofa: _InitialView
+   begin: 1757
+   end: 1904
+   PennTree: "(ROOT ($, ,) ($( ``) ($, ,) ($( '') ($. .) (-- (KON Und) (VVFIN vermutet) (-- (ART ein) (ADJA anderer) (NN Manager)) (-- (KOUS daß) (VAFIN würde) (-- (ART ein) (NN Dogmatiker) (-- (KOKOM wie) (NE Perot))) (-- (PRF sich) (ADJD schwer) (VVINF tun) (-- (APPR in) (NE Washington)) (-- (PPER es) (VAFIN sei) (ADV denn) (-- (PPER er) (VVFIN schafft) (PTKVZ ab) (-- (ART den) (NN Kongreß))))))))"
+   TransformationNames: <null>
 [Und ein anderer Manager vermutet , daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab '' .]
 Sentence
    sofa: _InitialView
@@ -21245,6 +21364,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Ein ehemaliger Geschäftsführer , der heute in fünf Konzernen im Aufsichtsgremium sitzt , `` kennt niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre '' .]
+PennTree
+   sofa: _InitialView
+   begin: 1905
+   end: 2093
+   PennTree: "(ROOT ($, ,) ($, ,) ($( ``) ($, ,) ($, ,) ($( '') ($. .) (-- (VVFIN kennt) (-- (ART Ein) (ADJA ehemaliger) (NN Geschäftsführer) (-- (PRELS der) (ADV heute) (VVFIN sitzt) (-- (APPR in) (CARD fünf) (NN Konzernen)) (-- (APPRART im) (NN Aufsichtsgremium)))) (-- (PIS niemanden) (-- (PRELS der) (PTKNEG nicht) (VVFIN glaubt) (-- (KOUS daß) (NE Perot) (VAFIN wäre) (-- (APPR als) (NN Präsident)) (-- (ART eine) (ADJA absolute) (NN Katastrophe)))))))"
+   TransformationNames: <null>
 [Ein ehemaliger Geschäftsführer , der heute in fünf Konzernen im Aufsichtsgremium sitzt , `` kennt niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre '' .]
 Sentence
    sofa: _InitialView
@@ -23284,6 +23410,13 @@ ROOT
    parent: <null>
    children: FSArray
    syntacticFunction: <null>
+[Allerdings gibt es dem Magazin zufolge in kleinen und mittleren Firmen viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen .]
+PennTree
+   sofa: _InitialView
+   begin: 2094
+   end: 2260
+   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (-- (ADV Allerdings) (VVFIN gibt) (PPER es) (-- (ART dem) (NN Magazin) (APPO zufolge)) (-- (APPR in) (NN Firmen) (-- (ADJA kleinen) (KON und) (ADJA mittleren))) (-- (PIAT viele) (NN Unternehmer) (-- (KON und) (-- (PRELS die) (VVFIN unterstützen) (-- (ART den) (NN Texaner))) (-- (PRELS die) (VVFIN meinen) (-- (NE Perot) (VAFIN sei) (-- (PIS einer) (-- (APPR von) (PPER ihnen)))))))))"
+   TransformationNames: <null>
 [Allerdings gibt es dem Magazin zufolge in kleinen und mittleren Firmen viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen .]
 Sentence
    sofa: _InitialView
@@ -25354,6 +25487,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Zwei Themen , die Perot immer wieder anspricht , Rezession und Bürokratie , machen ihnen besonders zu schaffen .]
+PennTree
+   sofa: _InitialView
+   begin: 2261
+   end: 2373
+   PennTree: "(ROOT ($, ,) ($, ,) ($, ,) ($. .) (-- (VVFIN machen) (-- (PPER ihnen) (ADV besonders) (-- (PTKZU zu) (VVINF schaffen))) (-- (CARD Zwei) (NN Themen) (-- (NN Rezession) (KON und) (NN Bürokratie)) (-- (PRELS die) (NE Perot) (VVFIN anspricht) (-- (ADV immer) (ADV wieder))))))"
+   TransformationNames: <null>
+[Zwei Themen , die Perot immer wieder anspricht , Rezession und Bürokratie , machen ihnen besonders zu schaffen .]
 Sentence
    sofa: _InitialView
    begin: 2261
@@ -26521,5 +26661,3 @@ Token
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
