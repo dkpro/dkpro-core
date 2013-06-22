@@ -51,7 +51,8 @@ public class NegraExportReaderTest
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, new File("src/test/resources/sentence.export"),
-				NegraExportReader.PARAM_LANGUAGE, "de");
+				NegraExportReader.PARAM_LANGUAGE, "de",
+				NegraExportReader.PARAM_READ_PENN_TREE, true);
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
@@ -76,7 +77,8 @@ public class NegraExportReaderTest
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tiger-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "ISO-8859-15");
+				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+                NegraExportReader.PARAM_READ_PENN_TREE, true);
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
@@ -101,8 +103,8 @@ public class NegraExportReaderTest
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "UTF-8"
-		);
+				NegraExportReader.PARAM_ENCODING, "UTF-8",
+                NegraExportReader.PARAM_READ_PENN_TREE, true);
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(CASDumpWriter.class,
 				CASDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());

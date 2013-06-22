@@ -23,6 +23,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 91
+   PennTree: "(ROOT ($, ,) ($. .) (CS (S (PPER Sie) (VVFIN gehen) (PTKVZ ein) (CNP (KON und) (NN Risiken) (NP (ADJA gewagte) (NN Verbindungen)))) (S (VVFIN versuchen) (VP (VVIZU auszureizen) (NP (PPOSAT ihre) (NN Möglichkeiten))))))"
+   TransformationNames: <null>
+[Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
 Sentence
    sofa: _InitialView
    begin: 0
@@ -795,5 +802,3 @@ Token
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
