@@ -56,9 +56,11 @@ public class TGrepWriter
 	/**
 	 * Set this parameter to true if you want to add a comment to each PennTree which is written to
 	 * the output files. The comment is of the form {@code documentId,beginOffset,endOffset}.
+     * 
+     * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_COMMENTS = "writeComments";
-	@ConfigurationParameter(name = PARAM_WRITE_COMMENTS, mandatory = true)
+	@ConfigurationParameter(name = PARAM_WRITE_COMMENTS, mandatory = true, defaultValue="true")
 	private boolean writeComments;
 
 	/**
@@ -198,7 +200,7 @@ public class TGrepWriter
 			case '(':
 				bracketCount++;
 				if (justOpened) {
-					// "((" is illegal, also with spaces inbetween
+					// "((" is illegal, also with spaces in between
 					return false;
 				}
 				justOpened = true;
@@ -208,7 +210,7 @@ public class TGrepWriter
 			case ')':
 				bracketCount--;
 				if (justOpened) {
-					// "()" is illegal, also with spaces inbetween
+					// "()" is illegal, also with spaces in between
 					return false;
 				}
 				if (bracketCount < 0) {
