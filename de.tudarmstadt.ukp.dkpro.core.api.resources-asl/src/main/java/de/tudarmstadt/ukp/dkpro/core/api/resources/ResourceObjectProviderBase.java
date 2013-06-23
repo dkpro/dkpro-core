@@ -24,9 +24,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLClassLoader;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
@@ -36,6 +40,16 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ivy.Ivy;
+import org.apache.ivy.core.module.descriptor.DefaultDependencyDescriptor;
+import org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor;
+import org.apache.ivy.core.module.id.ModuleRevisionId;
+import org.apache.ivy.core.report.ArtifactDownloadReport;
+import org.apache.ivy.core.report.ResolveReport;
+import org.apache.ivy.core.resolve.ResolveOptions;
+import org.apache.ivy.core.settings.IvySettings;
+import org.apache.ivy.plugins.resolver.ChainResolver;
+import org.apache.ivy.plugins.resolver.IBiblioResolver;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -118,6 +132,7 @@ public abstract class ResourceObjectProviderBase<M>
     private Properties resourceMetaData;
     private String resourceUrl;
     private String initialResourceUrl;
+    private String lastModelLocation;
     private M resource;
 
     private Object contextObject;
@@ -129,6 +144,9 @@ public abstract class ResourceObjectProviderBase<M>
     private String defaultVariantsLocation;
 
     private Map<String, HasResourceMetadata> imports = new HashMap<String, HasResourceMetadata>();
+
+    private ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(getClass()
+            .getClassLoader());
 
     public void setOverride(String aKey, String aValue)
     {
@@ -258,44 +276,45 @@ public abstract class ResourceObjectProviderBase<M>
         base = base.substring(0, base.length() - classPart.length());
 
         URL pomUrl = null;
-        
+
         String extraNotFoundInfo = "";
         if ("file".equals(url.getProtocol()) && base.endsWith("target/classes/")) {
             // This is an alternative strategy when running during a Maven build. In a normal
             // Maven build, the Maven descriptor in META-INF is only created during the
             // "package" phase, so we try looking in the project directory.
             // See also: http://jira.codehaus.org/browse/MJAR-76
-            
+
             base = base.substring(0, base.length() - "target/classes/".length());
             File pomFile = new File(new File(URI.create(base)), "pom.xml");
             if (pomFile.exists()) {
                 pomUrl = pomFile.toURI().toURL();
             }
             else {
-                extraNotFoundInfo = " Since it looks like you are running a Maven build, it POM " +
-                		"file was also searched for at [" + pomFile + "], but it doesn't exist there.";
+                extraNotFoundInfo = " Since it looks like you are running a Maven build, it POM "
+                        + "file was also searched for at [" + pomFile
+                        + "], but it doesn't exist there.";
             }
         }
-        
+
         if (pomUrl == null) {
             // This is the default strategy supposed to look in the JAR
             String pomPattern = base + "META-INF/maven/" + modelGroup + "/*/pom.xml";
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(pomPattern);
-    
+
             // Bail out if no POM was found
             if (resources.length == 0) {
                 throw new FileNotFoundException("No POM file found using [" + pomPattern + "]"
                         + extraNotFoundInfo);
             }
-    
+
             // Bail out if more than one POM was found (we could also just use the first one or the
             // highest version of the model artifact referenced in any of them.
             if (resources.length > 2) {
                 throw new IllegalStateException("Found more than one POM file found using ["
                         + pomPattern + "]");
             }
-            
+
             pomUrl = resources[0].getURL();
         }
 
@@ -367,7 +386,10 @@ public abstract class ResourceObjectProviderBase<M>
         throws IOException
     {
         Properties props = getAggregatedProperties();
+
         String modelLocation = getModelLocation(props);
+        boolean modelLocationChanged = !StringUtils.equals(modelLocation, lastModelLocation);
+        lastModelLocation = modelLocation;
 
         boolean success = false;
         try {
@@ -379,7 +401,30 @@ public abstract class ResourceObjectProviderBase<M>
                 }
             }
             else {
-                URL initialUrl = resolveLocation(modelLocation, this, null);
+                URL initialUrl;
+                try {
+                    initialUrl = resolveLocation(modelLocation, loader, null);
+                }
+                catch (IOException e) {
+                    if (modelLocationChanged) {
+                        // Try resolving the dependency and adding the stuff to the loader
+                        try {
+                            resolveDependency(props);
+                        }
+                        catch (Throwable re) {
+                            // Ignore - if we cannot resolve, we cannot resolve. Re-throw the
+                            // original
+                            // exception
+                            throw e;
+                        }
+
+                        // Try resolving again, this time with the potentially extended classpath
+                        initialUrl = resolveLocation(modelLocation, loader, null);
+                    }
+                    else {
+                        throw e;
+                    }
+                }
 
                 if (!StringUtils.equals(initialResourceUrl, initialUrl.toString())) {
                     URL url = initialUrl;
@@ -388,7 +433,7 @@ public abstract class ResourceObjectProviderBase<M>
                     // If the model points to a properties file, try to find a new location in that
                     // file. If that points to a properties file again, repeat the process.
                     while (modelLocation.endsWith(".properties")) {
-                        URL modelMetaDataUrl = resolveLocation(modelLocation, this, null);
+                        URL modelMetaDataUrl = resolveLocation(modelLocation, loader, null);
                         Properties tmpResourceMetaData = PropertiesLoaderUtils
                                 .loadProperties(new UrlResource(modelMetaDataUrl));
 
@@ -403,7 +448,7 @@ public abstract class ResourceObjectProviderBase<M>
                                     + modelMetaDataUrl + "] but no redirect property [" + LOCATION
                                     + "] found there.");
                         }
-                        url = resolveLocation(modelLocation, this, null);
+                        url = resolveLocation(modelLocation, loader, null);
                     }
 
                     // Load resource meta data if present
@@ -418,7 +463,7 @@ public abstract class ResourceObjectProviderBase<M>
 
                         String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
                                 + ".properties";
-                        URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, this, null);
+                        URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
                         Properties tmpResourceMetaData = PropertiesLoaderUtils
                                 .loadProperties(new UrlResource(modelMetaDataUrl));
 
@@ -446,59 +491,7 @@ public abstract class ResourceObjectProviderBase<M>
             success = true;
         }
         catch (IOException e) {
-            StringBuilder sb = new StringBuilder();
-
-            Set<String> names = props.stringPropertyNames();
-            if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
-                PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null,
-                        false);
-                String artifactId = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
-                String groupId = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
-                String version = pph.replacePlaceholders(props.getProperty(VERSION, ""), props);
-
-                // Try getting better information about the model version.
-                String extraErrorInfo = "";
-                try {
-                    version = getModelVersionFromMavenPom();
-                }
-                catch (IOException ex) {
-                    extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
-                }
-                catch (IllegalStateException ex) {
-                    extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
-                }
-
-                // Tell user how to add model dependency
-                sb.append("\nPlease make sure that [").append(artifactId).append(']');
-                if (StringUtils.isNotBlank(version)) {
-                    sb.append(" version [").append(version).append(']');
-                }
-
-                sb.append(" is on the classpath.\n");
-
-                if (StringUtils.isNotBlank(version)) {
-                    sb.append("If the version ").append(
-                            "shown here is not available, try a recent version.\n");
-                    sb.append('\n');
-                    sb.append("If you are using Maven, add the following dependency to your pom.xml file:\n");
-                    sb.append('\n');
-                    sb.append("<dependency>\n");
-                    sb.append("  <groupId>").append(groupId).append("</groupId>\n");
-                    sb.append("  <artifactId>").append(artifactId).append("</artifactId>\n");
-                    sb.append("  <version>").append(version).append("</version>\n");
-                    sb.append("</dependency>\n");
-                }
-                else {
-                    sb.append(
-                            "I was unable to determine which version of the desired model is "
-                                    + "compatible with this component:\n").append(extraErrorInfo)
-                            .append("\n");
-                }
-
-            }
-
-            throw new IOException("Unable to load resource [" + modelLocation + "]: \n"
-                    + ExceptionUtils.getRootCauseMessage(e) + "\n" + sb.toString());
+            throw handleResolvingError(e, modelLocation, props);
         }
         finally {
             if (!success) {
@@ -506,6 +499,163 @@ public abstract class ResourceObjectProviderBase<M>
                 resource = null;
             }
         }
+    }
+
+    /**
+     * Tries to figure out which artifact contains the desired resource, tries to acquire it and
+     * add it to the loader. The dependencyManagement information from the POM of the caller is
+     * taken into account if possible.
+     */
+    private void resolveDependency(Properties aProps)
+        throws IOException, IllegalStateException
+    {
+        Set<String> names = aProps.stringPropertyNames();
+        if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
+            PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+            String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
+            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
+            String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
+            // Try getting better information about the model version.
+            try {
+                version = getModelVersionFromMavenPom();
+            }
+            catch (IOException e) {
+                // Ignore - this will be tried and reported again later by handleResolvingError
+            }
+            catch (IllegalStateException e) {
+                // Ignore - this will be tried and reported again later by handleResolvingError
+            }
+
+            // Register files with loader
+            try {
+                List<File> files = resolveWithIvy(groupId, artifactId, version);
+                for (File file : files) {
+                    loader.addURL(file.toURI().toURL());
+                }
+            }
+            catch (ParseException e) {
+                throw new IllegalStateException(e);
+            }
+        }
+    }
+
+    /**
+     * Try to fetch an artifact and its dependencies from the UKP model repository or from 
+     * Maven Central.
+     */
+    private List<File> resolveWithIvy(String aGroupId, String aArtifactId, String aVersion)
+        throws ParseException, IOException
+    {
+        // Configure Ivy
+        IvySettings ivySettings = new IvySettings();
+        ivySettings.loadDefault();
+        ivySettings.configureRepositories(true);
+        ivySettings.configureDefaultVersionMatcher();
+
+        // Add a resolver for the UKP model repository
+        IBiblioResolver ukpModels = new IBiblioResolver();
+        ukpModels.setName("ukp-model-releases");
+        ukpModels.setRoot("http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/" +
+        		"public-model-releases-local");
+        ukpModels.setM2compatible(true);
+        ukpModels.setSettings(ivySettings);
+        ivySettings.addResolver(ukpModels);
+        ((ChainResolver) ivySettings.getResolver("main")).add(ukpModels);
+
+        // Initialize Ivy
+        Ivy ivy = Ivy.newInstance(ivySettings);
+
+        // Create a dummy module which has the desired artifact as a dependency
+        // The dummy module is kept in the Ivy cache only temporary, so make use it is unique
+        // using a UUID and make sure it is removed from the cache at the end.
+        UUID uuid = UUID.randomUUID();
+        ModuleRevisionId moduleId = ModuleRevisionId
+                .newInstance("dkpro", uuid.toString(), "working");
+        DefaultModuleDescriptor md = DefaultModuleDescriptor.newDefaultInstance(moduleId);
+        DefaultDependencyDescriptor dd = new DefaultDependencyDescriptor(md,
+                ModuleRevisionId.newInstance(aGroupId, aArtifactId, aVersion), false, false, true);
+        dd.addDependencyConfiguration("default", "default");
+        md.addDependency(dd);
+        
+        ResolveReport report;
+        try {
+            // Resolve the temporary module
+            ResolveOptions options = new ResolveOptions();
+            //options.setLog(LogOptions.LOG_QUIET);
+            options.setConfs(new String[] { "default" });
+            report = ivy.resolve(md, options);
+        }
+        finally {
+            // Remove temporary module
+            String resid = ResolveOptions.getDefaultResolveId(md);
+            ivy.getResolutionCacheManager().getResolvedIvyFileInCache(moduleId).delete();
+            ivy.getResolutionCacheManager().getResolvedIvyPropertiesInCache(moduleId).delete();
+            ivy.getResolutionCacheManager().getConfigurationResolveReportInCache(resid, "default")
+                    .delete();
+        }
+        
+        // Get the artifact and all its transitive dependencies
+        List<File> files = new ArrayList<File>();
+        for (ArtifactDownloadReport rep : report.getAllArtifactsReports()) {
+            files.add(rep.getLocalFile());
+        }
+        return files;
+    }
+
+    private IOException handleResolvingError(Throwable aCause, String aLocation, Properties aProps)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        Set<String> names = aProps.stringPropertyNames();
+        if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
+            PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+            String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
+            String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
+            String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
+
+            // Try getting better information about the model version.
+            String extraErrorInfo = "";
+            try {
+                version = getModelVersionFromMavenPom();
+            }
+            catch (IOException ex) {
+                extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
+            }
+            catch (IllegalStateException ex) {
+                extraErrorInfo = ExceptionUtils.getRootCauseMessage(ex);
+            }
+
+            // Tell user how to add model dependency
+            sb.append("\nPlease make sure that [").append(artifactId).append(']');
+            if (StringUtils.isNotBlank(version)) {
+                sb.append(" version [").append(version).append(']');
+            }
+
+            sb.append(" is on the classpath.\n");
+
+            if (StringUtils.isNotBlank(version)) {
+                sb.append("If the version ").append(
+                        "shown here is not available, try a recent version.\n");
+                sb.append('\n');
+                sb.append("If you are using Maven, add the following dependency to your pom.xml file:\n");
+                sb.append('\n');
+                sb.append("<dependency>\n");
+                sb.append("  <groupId>").append(groupId).append("</groupId>\n");
+                sb.append("  <artifactId>").append(artifactId).append("</artifactId>\n");
+                sb.append("  <version>").append(version).append("</version>\n");
+                sb.append("</dependency>\n");
+            }
+            else {
+                sb.append(
+                        "I was unable to determine which version of the desired model is "
+                                + "compatible with this component:\n").append(extraErrorInfo)
+                        .append("\n");
+            }
+
+        }
+
+        return new IOException("Unable to load resource [" + aLocation + "]: \n"
+                + ExceptionUtils.getRootCauseMessage(aCause) + "\n" + sb.toString());
     }
 
     /**
@@ -576,6 +726,21 @@ public abstract class ResourceObjectProviderBase<M>
             if (!aTarget.containsKey(key)) {
                 aTarget.put(key, aSource.get(key));
             }
+        }
+    }
+
+    private static final class ExtensibleURLClassLoader
+        extends URLClassLoader
+    {
+        public ExtensibleURLClassLoader(ClassLoader aParent)
+        {
+            super(new URL[0], aParent);
+        }
+
+        @Override
+        public void addURL(URL aUrl)
+        {
+            super.addURL(aUrl);
         }
     }
 }
