@@ -29,7 +29,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -44,21 +44,33 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class GateLemmatizer
 	extends JCasAnnotator_ImplBase
 {
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Load the lemmatizer rules from this location.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true,
-			defaultValue = "classpath:/rules/en.rul")
-	private String ruleFile;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
+
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
 	// constants
 	public static final String GATE_LEMMATIZER_VERB_CATEGORY_STRING = "VB";
 	public static final String GATE_LEMMATIZER_NOUN_CATEGORY_STRING = "NN";
 	public static final String GATE_LEMMATIZER_ALL_CATEGORIES_STRING = "*";
 
-	private Interpret gateLemmatizerInterpretObject = null;
+    private CasConfigurableProviderBase<Interpret> modelProvider;
 
 	@Override
 	public void initialize(UimaContext context)
@@ -66,25 +78,38 @@ public class GateLemmatizer
 	{
 		super.initialize(context);
 
-		URL ruleFileURL = null;
-		try {
-			ruleFileURL = ResourceUtils.resolveLocation(ruleFile, this, context);
+		modelProvider = new CasConfigurableProviderBase<Interpret>() {
+            {
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
+                        "morph-${language}-${variant}.rul");
+                setDefault(VARIANT, "default");
 
-			gateLemmatizerInterpretObject = new Interpret();
-			gateLemmatizerInterpretObject.init(ruleFileURL);
-		}
-		catch (IOException e) {
-			throw new ResourceInitializationException(e);
-		}
-		catch (ResourceInstantiationException e) {
-			throw new ResourceInitializationException(e);
-		}
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
+
+            @Override
+            protected Interpret produceResource(URL aUrl) throws IOException
+            {
+                try {
+                    Interpret gateLemmatizerInterpretObject = new Interpret();
+                    gateLemmatizerInterpretObject.init(aUrl);
+                    return gateLemmatizerInterpretObject;
+                }
+                catch (ResourceInstantiationException e) {
+                    throw new IOException(e);
+                }
+            }
+        };
 	}
 
 	@Override
 	public void process(JCas jcas)
 		throws AnalysisEngineProcessException
 	{
+	    modelProvider.configure(jcas.getCas());
+	    
 		String category = null;
 		for (Token token : JCasUtil.select(jcas, Token.class)) {
 			POS pos = token.getPos();
@@ -108,7 +133,7 @@ public class GateLemmatizer
 			}
 
 			String tokenString = token.getCoveredText();
-			String lemmaString = gateLemmatizerInterpretObject.runMorpher(tokenString, category);
+			String lemmaString = modelProvider.getResource().runMorpher(tokenString, category);
 
 			Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
 			lemma.setValue(lemmaString);
