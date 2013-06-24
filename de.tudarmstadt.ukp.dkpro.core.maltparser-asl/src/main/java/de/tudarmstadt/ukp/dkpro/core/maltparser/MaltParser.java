@@ -328,11 +328,12 @@ public class MaltParser
 
 						// create dep-annotation for current edge
 						if (sourceToken != null && targetToken != null) {
-							Dependency dep = new Dependency(aJCas, curSentence.getBegin(),
-									curSentence.getEnd());
+							Dependency dep = new Dependency(aJCas);
+                            dep.setDependencyType(edge.getLabelSymbol(symbolTable));
 							dep.setGovernor(sourceToken); // TODO check if source=Governor
 							dep.setDependent(targetToken); // TODO check if target=Dependent
-							dep.setDependencyType(edge.getLabelSymbol(symbolTable));
+		                    dep.setBegin(dep.getGovernor().getBegin());
+		                    dep.setEnd(dep.getGovernor().getEnd());
 							dep.addToIndexes();
 						}
 					}

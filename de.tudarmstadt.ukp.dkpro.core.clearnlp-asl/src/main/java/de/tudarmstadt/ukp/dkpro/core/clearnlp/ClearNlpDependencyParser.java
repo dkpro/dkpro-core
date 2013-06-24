@@ -232,10 +232,12 @@ public class ClearNlpDependencyParser
 						continue;
 					}
 					
-					Dependency dep = new Dependency(aJCas, sentence.getBegin(), sentence.getEnd());
+					Dependency dep = new Dependency(aJCas);
 					dep.setGovernor(tokens.get(node.getHead().id-1)); 
 					dep.setDependent(tokens.get(node.id-1));
 					dep.setDependencyType(node.getLabel());
+	                dep.setBegin(dep.getGovernor().getBegin());
+	                dep.setEnd(dep.getGovernor().getEnd());
 					dep.addToIndexes();
 				}
 			}

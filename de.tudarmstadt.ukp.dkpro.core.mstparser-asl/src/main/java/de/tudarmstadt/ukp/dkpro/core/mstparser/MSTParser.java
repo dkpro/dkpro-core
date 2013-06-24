@@ -118,7 +118,7 @@ public class MSTParser
         {
             {
                 setContextObject(MSTParser.this);
-                
+
                 setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID,
                         "de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-${language}-${variant}");
@@ -234,19 +234,21 @@ public class MSTParser
                 int head = instance.heads[formsIndex];
 
                 // write dependency information as annotation to JCas
-                Dependency depAnnotation = new Dependency(jcas, token.getBegin(), token.getEnd());
-                depAnnotation.setDependencyType(depRel);
+                Dependency dep = new Dependency(jcas);
+                dep.setDependencyType(depRel);
 
                 // the dependent is the token itself
-                depAnnotation.setDependent(token);
+                dep.setDependent(token);
                 if (head > 0) {
-                    depAnnotation.setGovernor(tokens.get(head - 1));
+                    dep.setGovernor(tokens.get(head - 1));
                 }
                 // the root is its own head
                 else {
-                    depAnnotation.setGovernor(token);
+                    dep.setGovernor(token);
                 }
-                depAnnotation.addToIndexes();
+                dep.setBegin(dep.getGovernor().getBegin());
+                dep.setEnd(dep.getGovernor().getEnd());
+                dep.addToIndexes();
             }
         }
     }

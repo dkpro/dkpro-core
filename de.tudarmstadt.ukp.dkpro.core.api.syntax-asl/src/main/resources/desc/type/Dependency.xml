@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Dependency</name>
   <description/>
   <version>${version}</version>
@@ -298,40 +299,6 @@
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.POSSESSIVE</name>
       <description/>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency</supertypeName>
-    </typeDescription>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Governor</name>
-      <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>Dependent</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>Dependency</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency</rangeTypeName>
-        </featureDescription>
-      </features>
-    </typeDescription>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependent</name>
-      <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>Governor</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>Dependency</name>
-          <description/>
-          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency</rangeTypeName>
-        </featureDescription>
-      </features>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NPADVMOD</name>
