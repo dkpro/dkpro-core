@@ -17,15 +17,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 import static org.uimafit.util.JCasUtil.toText;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,6 +44,7 @@ import org.uimafit.descriptor.TypeCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -122,9 +120,10 @@ public class OpenNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<POSTagger>() {
+		modelProvider = new CasConfigurableStreamProviderBase<POSTagger>() {
 			{
-				setDefault(VERSION, "20120616.0");
+                setContextObject(OpenNlpPosTagger.this);
+                
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-${language}-${variant}");
@@ -139,35 +138,29 @@ public class OpenNlpPosTagger
 			}
 
 			@Override
-			protected POSTagger produceResource(URL aUrl) throws IOException
+			protected POSTagger produceResource(InputStream aStream)
+			    throws Exception
 			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					POSModel model = new POSModel(is);
+				POSModel model = new POSModel(aStream);
 
-					if (printTagSet) {
-						List<String> tags = new ArrayList<String>();
-						for (int i = 0; i < model.getPosModel().getNumOutcomes(); i++) {
-							tags.add(model.getPosModel().getOutcome(i));
-						}
-						Collections.sort(tags);
-
-						StringBuilder sb = new StringBuilder();
-						sb.append("Model contains [").append(tags.size()).append("] tags: ");
-
-						for (String tag : tags) {
-							sb.append(tag);
-							sb.append(" ");
-						}
-						getContext().getLogger().log(INFO, sb.toString());
+				if (printTagSet) {
+					List<String> tags = new ArrayList<String>();
+					for (int i = 0; i < model.getPosModel().getNumOutcomes(); i++) {
+						tags.add(model.getPosModel().getOutcome(i));
 					}
+					Collections.sort(tags);
 
-					return new POSTaggerME(model);
+					StringBuilder sb = new StringBuilder();
+					sb.append("Model contains [").append(tags.size()).append("] tags: ");
+
+					for (String tag : tags) {
+						sb.append(tag);
+						sb.append(" ");
+					}
+					getContext().getLogger().log(INFO, sb.toString());
 				}
-				finally {
-					closeQuietly(is);
-				}
+
+				return new POSTaggerME(model);
 			}
 		};
 
@@ -179,7 +172,6 @@ public class OpenNlpPosTagger
 		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		mappingProvider.addImport("tagger.tagset", modelProvider);
-
 	}
 
 	@Override

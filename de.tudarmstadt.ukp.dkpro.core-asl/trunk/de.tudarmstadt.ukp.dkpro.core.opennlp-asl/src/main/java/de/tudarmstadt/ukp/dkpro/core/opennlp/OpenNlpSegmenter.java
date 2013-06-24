@@ -17,12 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
 import opennlp.tools.tokenize.TokenizerME;
@@ -39,6 +34,7 @@ import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
@@ -83,9 +79,10 @@ public class OpenNlpSegmenter
 	{
 		super.initialize(aContext);
 
-		sentenceModelProvider = new CasConfigurableProviderBase<SentenceDetectorME>() {
+		sentenceModelProvider = new CasConfigurableStreamProviderBase<SentenceDetectorME>() {
 			{
-				setDefault(VERSION, "20120616.0");
+			    setContextObject(OpenNlpSegmenter.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
@@ -100,23 +97,18 @@ public class OpenNlpSegmenter
 			}
 			
 			@Override
-			protected SentenceDetectorME produceResource(URL aUrl) throws IOException
+			protected SentenceDetectorME produceResource(InputStream aStream)
+			    throws Exception
 			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					SentenceModel model = new SentenceModel(is);
-					return new SentenceDetectorME(model);
-				}
-				finally {
-					closeQuietly(is);
-				}
+				SentenceModel model = new SentenceModel(aStream);
+				return new SentenceDetectorME(model);
 			}
 		};
 		
-		tokenModelProvider = new CasConfigurableProviderBase<TokenizerME>() {
+		tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>() {
 			{
-				setDefault(VERSION, "1.5");
+                setContextObject(OpenNlpSegmenter.this);
+                
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
@@ -131,19 +123,14 @@ public class OpenNlpSegmenter
 			}
 			
 			@Override
-			protected TokenizerME produceResource(URL aUrl) throws IOException
+			protected TokenizerME produceResource(InputStream aStream)
+			    throws Exception
 			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					TokenizerModel model = new TokenizerModel(is);
-					return new TokenizerME(model);
-				}
-				finally {
-					closeQuietly(is);
-				}
+				TokenizerModel model = new TokenizerModel(aStream);
+				return new TokenizerME(model);
 			}
-		};	}
+		};	
+	}
 
 	@Override
 	public void process(JCas aJCas)
