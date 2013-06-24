@@ -31,6 +31,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
@@ -43,201 +44,244 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 public class AssertAnnotations
 {
-	public static void assertToken(String[] aExpected, Collection<Token> aActual)
-	{
-		if (aExpected == null) {
-			return;
-		}
+    public static void assertToken(String[] aExpected, Collection<Token> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
 
-		List<String> expected = asList(aExpected);
-		List<String> actual = toText(aActual);
+        List<String> expected = asList(aExpected);
+        List<String> actual = toText(aActual);
 
-		System.out.printf("%-20s - Expected: %s%n", "Tokens", asCopyableString(expected));
-		System.out.printf("%-20s - Actual  : %s%n", "Tokens", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Tokens", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Tokens", asCopyableString(actual));
 
-		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-	}
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
 
-	public static void assertSentence(String[] aExpected, Collection<Sentence> aActual)
-	{
-		if (aExpected == null) {
-			return;
-		}
+    public static void assertSentence(String[] aExpected, Collection<Sentence> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
 
-		List<String> expected = asList(aExpected);
-		List<String> actual = toText(aActual);
+        List<String> expected = asList(aExpected);
+        List<String> actual = toText(aActual);
 
-		System.out.printf("%-20s - Expected: %s%n", "Sentences", asCopyableString(expected));
-		System.out.printf("%-20s - Actual  : %s%n", "Sentences", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Sentences", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Sentences", asCopyableString(actual));
 
-		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-	}
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
 
-	public static void assertPOS(String[] aExpectedMapped, String[] aExpectedOriginal,
-			Collection<POS> actual)
-	{
-		List<String> expectedOriginal = aExpectedOriginal != null ? asList(aExpectedOriginal)
-				: null;
-		List<String> expectedMapped = aExpectedMapped != null ? asList(aExpectedMapped) : null;
-		List<String> actualOriginal = new ArrayList<String>();
-		List<String> actualMapped = new ArrayList<String>();
+    public static void assertPOS(String[] aExpectedMapped, String[] aExpectedOriginal,
+            Collection<POS> actual)
+    {
+        List<String> expectedOriginal = aExpectedOriginal != null ? asList(aExpectedOriginal)
+                : null;
+        List<String> expectedMapped = aExpectedMapped != null ? asList(aExpectedMapped) : null;
+        List<String> actualOriginal = new ArrayList<String>();
+        List<String> actualMapped = new ArrayList<String>();
 
-		for (POS posAnnotation : actual) {
-			actualOriginal.add(posAnnotation.getPosValue());
-			actualMapped.add(posAnnotation.getType().getShortName());
-		}
+        for (POS posAnnotation : actual) {
+            actualOriginal.add(posAnnotation.getPosValue());
+            actualMapped.add(posAnnotation.getType().getShortName());
+        }
 
-		if (aExpectedOriginal != null) {
-			System.out.printf("%-20s - Expected: %s%n", "POS (original)",
-					asCopyableString(expectedOriginal));
-			System.out.printf("%-20s - Actual  : %s%n", "POS (original)",
-					asCopyableString(actualOriginal));
-		}
+        if (aExpectedOriginal != null) {
+            System.out.printf("%-20s - Expected: %s%n", "POS (original)",
+                    asCopyableString(expectedOriginal));
+            System.out.printf("%-20s - Actual  : %s%n", "POS (original)",
+                    asCopyableString(actualOriginal));
+        }
 
-		if (aExpectedMapped != null) {
-			System.out.printf("%-20s - Expected: %s%n", "POS (mapped)",
-					asCopyableString(expectedMapped));
-			System.out.printf("%-20s - Actual  : %s%n", "POS (mapped)",
-					asCopyableString(actualMapped));
-		}
+        if (aExpectedMapped != null) {
+            System.out.printf("%-20s - Expected: %s%n", "POS (mapped)",
+                    asCopyableString(expectedMapped));
+            System.out.printf("%-20s - Actual  : %s%n", "POS (mapped)",
+                    asCopyableString(actualMapped));
+        }
 
-		if (aExpectedOriginal != null) {
-			assertEquals(asCopyableString(expectedOriginal, true),
-					asCopyableString(actualOriginal, true));
-		}
-		if (aExpectedMapped != null) {
-			assertEquals(asCopyableString(expectedMapped, true),
-					asCopyableString(actualMapped, true));
-		}
-	}
+        if (aExpectedOriginal != null) {
+            assertEquals(asCopyableString(expectedOriginal, true),
+                    asCopyableString(actualOriginal, true));
+        }
+        if (aExpectedMapped != null) {
+            assertEquals(asCopyableString(expectedMapped, true),
+                    asCopyableString(actualMapped, true));
+        }
+    }
 
-	public static void assertLemma(String[] aExpected, Collection<Lemma> aActual)
-	{
-		if (aExpected == null) {
-			return;
-		}
+    public static void assertLemma(String[] aExpected, Collection<Lemma> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
 
-		List<String> expected = asList(aExpected);
-		List<String> actual = new ArrayList<String>();
+        List<String> expected = asList(aExpected);
+        List<String> actual = new ArrayList<String>();
 
-		for (Lemma a : aActual) {
-			actual.add(a.getValue());
-		}
+        for (Lemma a : aActual) {
+            actual.add(a.getValue());
+        }
 
-		System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
-		System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
 
-		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-	}
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
 
-	   public static void assertStem(String[] aExpected, Collection<Stem> aActual)
-	    {
-	        if (aExpected == null) {
-	            return;
-	        }
+    public static void assertStem(String[] aExpected, Collection<Stem> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
 
-	        List<String> expected = asList(aExpected);
-	        List<String> actual = new ArrayList<String>();
+        List<String> expected = asList(aExpected);
+        List<String> actual = new ArrayList<String>();
 
-	        for (Stem a : aActual) {
-	            actual.add(a.getValue());
-	        }
+        for (Stem a : aActual) {
+            actual.add(a.getValue());
+        }
 
-	        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
-	        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
 
-	        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-	    }
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
 
+    public static void assertNamedEntity(String[] aExpectedMapped, String[] aExpectedOriginal,
+            Collection<NamedEntity> aActual)
+    {
+        String[] actualTags = new String[aActual.size()];
+        String[] actualClasses = new String[aActual.size()];
 
-	public static void assertConstituents(String[] aExpectedMapped, String[] aExpectedOriginal,
-			Collection<Constituent> aActual)
-	{
-		String[] actualTags = new String[aActual.size()];
-		String[] actualClasses = new String[aActual.size()];
+        int i = 0;
+        for (NamedEntity a : aActual) {
+            actualTags[i] = String.format("%s '%s'", a.getValue(), a.getCoveredText(),
+                    a.getBegin(), a.getEnd());
+            actualClasses[i] = String.format("%s '%s'", a.getType().getShortName(),
+                    a.getCoveredText(), a.getBegin(), a.getEnd());
+            i++;
+        }
 
-		int i = 0;
-		for (Constituent a : aActual) {
-			actualTags[i] = String.format("%s %d,%d", a.getConstituentType(), a.getBegin(),
-					a.getEnd());
-			actualClasses[i] = String.format("%s %d,%d", a.getType().getShortName(), a.getBegin(),
-					a.getEnd());
-			i++;
-		}
+        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
+        List<String> sortedExpectedMapped = deduplicateAndSort(asList(aExpectedMapped));
+        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
+        List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
-		List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
-		List<String> sortedExpectedMapped = deduplicateAndSort(asList(aExpectedMapped));
-		List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
-		List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
+        if (aExpectedOriginal != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Constituents (original)",
+                    asCopyableString(sortedExpectedOriginal));
+            System.out.printf("%-20s - Actual  : %s%n", "Constituents (original)",
+                    asCopyableString(sortedActualOriginal));
+        }
 
-		if (aExpectedOriginal != null) {
-			System.out.printf("%-20s - Expected: %s%n", "Constituents (original)",
-					asCopyableString(sortedExpectedOriginal));
-			System.out.printf("%-20s - Actual  : %s%n", "Constituents (original)",
-					asCopyableString(sortedActualOriginal));
-		}
+        if (aExpectedMapped != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Named entities (mapped)",
+                    asCopyableString(sortedExpectedMapped));
+            System.out.printf("%-20s - Actual  : %s%n", "Named entities (mapped)",
+                    asCopyableString(sortedActualMapped));
+        }
 
-		if (aExpectedMapped != null) {
-			System.out.printf("%-20s - Expected: %s%n", "Constituents (mapped)",
-					asCopyableString(sortedExpectedMapped));
-			System.out.printf("%-20s - Actual  : %s%n", "Constituents (mapped)",
-					asCopyableString(sortedActualMapped));
-		}
+        if (aExpectedOriginal != null) {
+            assertEquals(asCopyableString(sortedExpectedOriginal, true),
+                    asCopyableString(sortedActualOriginal, true));
+        }
+        if (aExpectedMapped != null) {
+            assertEquals(asCopyableString(sortedExpectedMapped, true),
+                    asCopyableString(sortedActualMapped, true));
+        }
+    }
 
-		if (aExpectedOriginal != null) {
-			assertEquals(asCopyableString(sortedExpectedOriginal, true),
-					asCopyableString(sortedActualOriginal, true));
-		}
-		if (aExpectedMapped != null) {
-			assertEquals(asCopyableString(sortedExpectedMapped, true),
-					asCopyableString(sortedActualMapped, true));
-		}
-	}
+    public static void assertConstituents(String[] aExpectedMapped, String[] aExpectedOriginal,
+            Collection<Constituent> aActual)
+    {
+        String[] actualTags = new String[aActual.size()];
+        String[] actualClasses = new String[aActual.size()];
 
-	public static <T extends Comparable<T>> List<T> deduplicateAndSort(Collection<T> aCollection)
-	{
-		if (aCollection == null) {
-			return null;
-		}
-		else {
-			List<T> result = new ArrayList<T>(new HashSet<T>(aCollection));
-			Collections.sort(result);
-			return result;
-		}
-	}
+        int i = 0;
+        for (Constituent a : aActual) {
+            actualTags[i] = String.format("%s %d,%d", a.getConstituentType(), a.getBegin(),
+                    a.getEnd());
+            actualClasses[i] = String.format("%s %d,%d", a.getType().getShortName(), a.getBegin(),
+                    a.getEnd());
+            i++;
+        }
 
-	public static void assertDependencies(String[] aExpected, Collection<Dependency> aActual)
-	{
-		List<String> expected = new ArrayList<String>(asList(aExpected));
-		List<String> actual = new ArrayList<String>();
+        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
+        List<String> sortedExpectedMapped = deduplicateAndSort(asList(aExpectedMapped));
+        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
+        List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
-		for (Dependency a : aActual) {
-			actual.add(String.format("%s %d,%d,%d,%d", a.getDependencyType().toUpperCase(), a
-					.getGovernor().getBegin(), a.getGovernor().getEnd(), a.getDependent()
-					.getBegin(), a.getDependent().getEnd()));
-		}
+        if (aExpectedOriginal != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Constituents (original)",
+                    asCopyableString(sortedExpectedOriginal));
+            System.out.printf("%-20s - Actual  : %s%n", "Constituents (original)",
+                    asCopyableString(sortedActualOriginal));
+        }
 
-		Collections.sort(actual);
-		Collections.sort(expected);
+        if (aExpectedMapped != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Constituents (mapped)",
+                    asCopyableString(sortedExpectedMapped));
+            System.out.printf("%-20s - Actual  : %s%n", "Constituents (mapped)",
+                    asCopyableString(sortedActualMapped));
+        }
 
-		System.out.printf("%-20s - Expected: %s%n", "Dependencies", asCopyableString(expected));
-		System.out.printf("%-20s - Actual  : %s%n", "Dependencies", asCopyableString(actual));
+        if (aExpectedOriginal != null) {
+            assertEquals(asCopyableString(sortedExpectedOriginal, true),
+                    asCopyableString(sortedActualOriginal, true));
+        }
+        if (aExpectedMapped != null) {
+            assertEquals(asCopyableString(sortedExpectedMapped, true),
+                    asCopyableString(sortedActualMapped, true));
+        }
+    }
 
-		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-	}
+    public static <T extends Comparable<T>> List<T> deduplicateAndSort(Collection<T> aCollection)
+    {
+        if (aCollection == null) {
+            return null;
+        }
+        else {
+            List<T> result = new ArrayList<T>(new HashSet<T>(aCollection));
+            Collections.sort(result);
+            return result;
+        }
+    }
 
-	public static void assertPennTree(String aExpected, PennTree aActual)
-	{
-		String expected = normalizeSpace(aExpected);
-		String actual = normalizeSpace(aActual != null ? aActual.getPennTree() : "<none>");
+    public static void assertDependencies(String[] aExpected, Collection<Dependency> aActual)
+    {
+        List<String> expected = new ArrayList<String>(asList(aExpected));
+        List<String> actual = new ArrayList<String>();
 
-		System.out.printf("%-20s - Expected: %s%n", "Penn tree", expected);
-		System.out.printf("%-20s - Actual  : %s%n", "Penn tree", actual);
+        for (Dependency a : aActual) {
+            actual.add(String.format("%s %d,%d,%d,%d", a.getDependencyType().toUpperCase(), a
+                    .getGovernor().getBegin(), a.getGovernor().getEnd(), a.getDependent()
+                    .getBegin(), a.getDependent().getEnd()));
+        }
 
-		assertEquals(expected, actual);
-	}
+        Collections.sort(actual);
+        Collections.sort(expected);
 
-   public static void assertPennTree(String aExpected, String aActual)
+        System.out.printf("%-20s - Expected: %s%n", "Dependencies", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Dependencies", asCopyableString(actual));
+
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+
+    public static void assertPennTree(String aExpected, PennTree aActual)
+    {
+        String expected = normalizeSpace(aExpected);
+        String actual = normalizeSpace(aActual != null ? aActual.getPennTree() : "<none>");
+
+        System.out.printf("%-20s - Expected: %s%n", "Penn tree", expected);
+        System.out.printf("%-20s - Actual  : %s%n", "Penn tree", actual);
+
+        assertEquals(expected, actual);
+    }
+
+    public static void assertPennTree(String aExpected, String aActual)
     {
         String expected = normalizeSpace(aExpected);
         String actual = normalizeSpace(aActual != null ? aActual : "<none>");
@@ -248,52 +292,52 @@ public class AssertAnnotations
         assertEquals(expected, actual);
     }
 
-	public static void assertSemanticPredicates(String[] aExpected,
-			Collection<SemanticPredicate> aActual)
-	{
-		List<String> expected = new ArrayList<String>(asList(aExpected));
-		List<String> actual = new ArrayList<String>();
+    public static void assertSemanticPredicates(String[] aExpected,
+            Collection<SemanticPredicate> aActual)
+    {
+        List<String> expected = new ArrayList<String>(asList(aExpected));
+        List<String> actual = new ArrayList<String>();
 
-		for (SemanticPredicate p : aActual) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(p.getCoveredText()).append(" (").append(p.getCategory()).append("): [");
-			for (SemanticArgument a : select(p.getArguments(), SemanticArgument.class)) {
-				sb.append('(').append(a.getRole()).append(':').append(a.getCoveredText())
-						.append(')');
-			}
-			sb.append(']');
-			actual.add(sb.toString());
-		}
+        for (SemanticPredicate p : aActual) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(p.getCoveredText()).append(" (").append(p.getCategory()).append("): [");
+            for (SemanticArgument a : select(p.getArguments(), SemanticArgument.class)) {
+                sb.append('(').append(a.getRole()).append(':').append(a.getCoveredText())
+                        .append(')');
+            }
+            sb.append(']');
+            actual.add(sb.toString());
+        }
 
-		Collections.sort(actual);
-		Collections.sort(expected);
+        Collections.sort(actual);
+        Collections.sort(expected);
 
-		System.out.printf("%-20s - Expected: %s%n", "Semantic predicates",
-				asCopyableString(expected));
-		System.out
-				.printf("%-20s - Actual  : %s%n", "Semantic predicates", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Semantic predicates",
+                asCopyableString(expected));
+        System.out
+                .printf("%-20s - Actual  : %s%n", "Semantic predicates", asCopyableString(actual));
 
-		assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-	}
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
 
-	public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
-	{
-		if (aCollection.isEmpty()) {
-			return "{}";
-		}
-		else {
-			if (aLinebreak) {
-				return "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
-			}
-			else {
-				return "{ \"" + join(aCollection, "\", \"") + "\" }";
-			}
-		}
-	}
+    public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
+    {
+        if (aCollection.isEmpty()) {
+            return "{}";
+        }
+        else {
+            if (aLinebreak) {
+                return "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
+            }
+            else {
+                return "{ \"" + join(aCollection, "\", \"") + "\" }";
+            }
+        }
+    }
 
-	private static String asCopyableString(Collection<String> aCollection)
-	{
-		return asCopyableString(aCollection, false);
-	}
+    private static String asCopyableString(Collection<String> aCollection)
+    {
+        return asCopyableString(aCollection, false);
+    }
 
 }
