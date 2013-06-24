@@ -17,14 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -55,6 +52,7 @@ import org.uimafit.util.FSCollectionFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -155,9 +153,10 @@ public class OpenNlpParser
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<Parser>() {
+		modelProvider = new CasConfigurableStreamProviderBase<Parser>() {
 			{
-				setDefault(VERSION, "20120616.0");
+                setContextObject(OpenNlpParser.this);
+                
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-${language}-${variant}");
@@ -172,23 +171,17 @@ public class OpenNlpParser
 			}
 
 			@Override
-			protected Parser produceResource(URL aUrl) throws IOException
+			protected Parser produceResource(InputStream aStream)
+			    throws Exception
 			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					ParserModel model = new ParserModel(is);
+				ParserModel model = new ParserModel(aStream);
 
-					if (printTagSet) {
-						printTags("tagger", model.getParserTaggerModel().getPosModel());
-						printTags("parser", model.getParserChunkerModel().getChunkerModel());
-					}
+				if (printTagSet) {
+					printTags("tagger", model.getParserTaggerModel().getPosModel());
+					printTags("parser", model.getParserChunkerModel().getChunkerModel());
+				}
 
-					return ParserFactory.create(model);
-				}
-				finally {
-					closeQuietly(is);
-				}
+				return ParserFactory.create(model);
 			}
 		};
 
