@@ -161,16 +161,16 @@ public class MateParser
 
 			SentenceData09 parsed = modelProvider.getResource().parse(sd);
 			for (int i = 0; i < parsed.labels.length; i++) {
-
-				Dependency dep = new Dependency(jcas, sentence.getBegin(), sentence.getEnd());
-
 				Token sourceToken = tokens.get(i);
 				// Token targetToken = null; //for "ROOT"
 				if (parsed.heads[i] != 0) {
 					Token targetToken = tokens.get(parsed.heads[i] - 1);
+	                Dependency dep = new Dependency(jcas);
 					dep.setGovernor(targetToken);
 					dep.setDependent(sourceToken);
 					dep.setDependencyType(parsed.labels[i]);
+					dep.setBegin(dep.getGovernor().getBegin());
+                    dep.setEnd(dep.getGovernor().getEnd());
 					dep.addToIndexes();
 				}
 			}

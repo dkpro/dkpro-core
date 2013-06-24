@@ -18,7 +18,6 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -334,12 +333,13 @@ public class StanfordAnnotator
 					+ dependencyType + "] is not defined in type system");
         }
 		
-		AnnotationFS anno = jCas.getCas().createAnnotation(type, aBegin, aEnd);
-		anno.setStringValue(type.getFeatureByBaseName("DependencyType"), aGramRel.toString());
-		anno.setFeatureValue(type.getFeatureByBaseName("Governor"), aGovernor);
-		anno.setFeatureValue(type.getFeatureByBaseName("Dependent"), aDependent);
-
-		jCas.addFsToIndexes(anno);
+        Dependency dep = (Dependency) jCas.getCas().createAnnotation(type, aBegin, aEnd);
+        dep.setDependencyType(aGramRel.toString());
+        dep.setGovernor(aGovernor);
+        dep.setDependent(aDependent);
+        dep.setBegin(dep.getGovernor().getBegin());
+        dep.setEnd(dep.getGovernor().getEnd());
+        dep.addToIndexes();
 	}
 
 	/**
