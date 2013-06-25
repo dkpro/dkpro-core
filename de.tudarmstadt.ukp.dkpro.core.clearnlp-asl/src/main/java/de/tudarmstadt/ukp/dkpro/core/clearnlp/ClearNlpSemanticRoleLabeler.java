@@ -133,6 +133,8 @@ public class ClearNlpSemanticRoleLabeler
 		predicateFinder = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
+			    setContextObject(ClearNlpSemanticRoleLabeler.this);
+			    
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "pred-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -156,6 +158,8 @@ public class ClearNlpSemanticRoleLabeler
 		roleSetClassifier = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
+                setContextObject(ClearNlpSemanticRoleLabeler.this);
+                
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "role-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -179,6 +183,8 @@ public class ClearNlpSemanticRoleLabeler
 		roleLabeller = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
+                setContextObject(ClearNlpSemanticRoleLabeler.this);
+                
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "srl-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");

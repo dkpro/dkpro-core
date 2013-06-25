@@ -159,7 +159,8 @@ public class MaltParser
 			private MaltParserService parser;
 
 			{
-				setDefault(VERSION, "1.7");
+			    setContextObject(MaltParser.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.maltparser-model-parser-${language}-${variant}");
