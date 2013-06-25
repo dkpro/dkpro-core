@@ -114,6 +114,8 @@ public class SfstAnnotator
         parserProvider = new CasConfigurableProviderBase<AnalysisParser>()
         {
             {
+                setContextObject(SfstAnnotator.this);
+                
                 setDefault(LOCATION, NOT_REQUIRED);
                 setOverride(LANGUAGE, language);
             }
@@ -142,6 +144,8 @@ public class SfstAnnotator
         modelProvider = new CasConfigurableProviderBase<File>()
         {
             {
+                setContextObject(SfstAnnotator.this);
+                
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/"
                                 + "morph-${language}-${variant}.a");
                 setDefault(VARIANT, "default");

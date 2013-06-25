@@ -80,6 +80,8 @@ public class GateLemmatizer
 
 		modelProvider = new CasConfigurableProviderBase<Interpret>() {
             {
+                setContextObject(GateLemmatizer.this);
+                
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
                         "morph-${language}-${variant}.rul");
                 setDefault(VARIANT, "default");

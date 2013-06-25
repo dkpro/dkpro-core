@@ -224,7 +224,8 @@ public class BerkeleyParser
 		modelProvider = new CasConfigurableProviderBase<Parser>()
 		{
 			{
-				setDefault(VERSION, "20090917.0");
+			    setContextObject(BerkeleyParser.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.berkeleyparser-model-parser-${language}-${variant}");

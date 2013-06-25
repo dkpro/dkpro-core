@@ -264,7 +264,8 @@ public class StanfordParser
 
 		modelProvider = new CasConfigurableProviderBase<LexicalizedParser>() {
 			{
-				setDefault(VERSION, "20120709.0");
+			    setContextObject(StanfordParser.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-${language}-${variant}");

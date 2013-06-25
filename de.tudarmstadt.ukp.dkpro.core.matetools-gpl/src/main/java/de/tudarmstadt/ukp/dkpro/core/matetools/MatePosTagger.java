@@ -99,7 +99,8 @@ public class MatePosTagger
 		modelProvider = new CasConfigurableProviderBase<Tagger>()
 		{
 			{
-				setDefault(VERSION, "20120626.0");
+			    setContextObject(MatePosTagger.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-${language}-${variant}");

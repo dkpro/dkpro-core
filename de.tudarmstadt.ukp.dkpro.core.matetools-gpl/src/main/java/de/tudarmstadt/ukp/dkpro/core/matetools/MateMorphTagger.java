@@ -88,7 +88,8 @@ public class MateMorphTagger
 		modelProvider = new CasConfigurableProviderBase<Main>()
 		{
 			{
-				setDefault(VERSION, "20120626.0");
+			    setContextObject(MateMorphTagger.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-morphtagger-${language}-${variant}");

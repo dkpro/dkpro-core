@@ -104,6 +104,8 @@ public class HepplePosTagger
 
         ruleProvider = new CasConfigurableProviderBase<URL>() {
             {
+                setContextObject(HepplePosTagger.this);
+                
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
                         "tagger-${language}-${variant}.rul");
                 setDefault(VARIANT, "default");

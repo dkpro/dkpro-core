@@ -87,7 +87,8 @@ public class MateLemmatizer
 		modelProvider = new CasConfigurableProviderBase<Lemmatizer>()
 		{
 			{
-				setDefault(VERSION, "20120626.0");
+			    setContextObject(MateLemmatizer.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-lemmatizer-${language}-${variant}");
