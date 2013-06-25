@@ -113,7 +113,8 @@ public class ClearNlpDependencyParser
 		parserProvider = new CasConfigurableProviderBase<CDEPPassParser>()
 		{
 			{
-				setDefault(VERSION, "20121229.0");
+			    setContextObject(ClearNlpDependencyParser.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-${language}-${variant}");

@@ -126,7 +126,8 @@ public class ClearNlpPosTagger
 
 		modelProvider = new CasConfigurableProviderBase<CPOSTagger>() {
 			{
-				setDefault(VERSION, "20121229.1");
+			    setContextObject(ClearNlpPosTagger.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-tagger-${language}-${variant}");

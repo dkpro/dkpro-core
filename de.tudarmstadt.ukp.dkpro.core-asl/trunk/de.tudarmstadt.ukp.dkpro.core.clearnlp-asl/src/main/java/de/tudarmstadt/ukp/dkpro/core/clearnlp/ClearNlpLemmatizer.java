@@ -97,7 +97,8 @@ public class ClearNlpLemmatizer
 		modelProvider = new CasConfigurableProviderBase<AbstractComponent>()
 		{
 			{
-				setDefault(VERSION, "20130226.0");
+			    setContextObject(ClearNlpLemmatizer.this);
+			    
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-${language}-${variant}");
