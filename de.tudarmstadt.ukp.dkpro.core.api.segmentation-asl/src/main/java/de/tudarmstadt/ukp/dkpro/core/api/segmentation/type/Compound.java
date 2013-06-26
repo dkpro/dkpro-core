@@ -15,184 +15,211 @@ import org.apache.uima.jcas.tcas.Annotation;
 import org.uimafit.util.FSCollectionFactory;
 
 
+
 /**
  * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
  * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/Segmentation.xml
  * @generated */
 public class Compound extends Annotation {
-  /** @generated
-   * @ordered
-   */
-  @SuppressWarnings ("hiding")
-  public final static int typeIndexID = JCasRegistry.register(Compound.class);
-  /** @generated
-   * @ordered
-   */
-  @SuppressWarnings ("hiding")
-  public final static int type = typeIndexID;
-  /** @generated  */
-  @Override
-  public              int getTypeIndexID() {return typeIndexID;}
+	/** @generated
+	 * @ordered
+	 */
+	@SuppressWarnings ("hiding")
+	public final static int typeIndexID = JCasRegistry.register(Compound.class);
+	/** @generated
+	 * @ordered
+	 */
+	@SuppressWarnings ("hiding")
+	public final static int type = typeIndexID;
+	/** @generated  */
+	@Override
+	public              int getTypeIndexID() {return typeIndexID;}
 
-  /** Never called.  Disable default constructor
-   * @generated */
-  protected Compound() {/* intentionally empty block */}
+	/** Never called.  Disable default constructor
+	 * @generated */
+	protected Compound() {/* intentionally empty block */}
 
-  /** Internal - constructor used by generator
-   * @generated */
-  public Compound(int addr, TOP_Type type) {
-    super(addr, type);
-    readObject();
-  }
+	/** Internal - constructor used by generator
+	 * @generated */
+	public Compound(int addr, TOP_Type type) {
+		super(addr, type);
+		readObject();
+	}
 
-  /** @generated */
-  public Compound(JCas jcas) {
-    super(jcas);
-    readObject();
-  }
+	/** @generated */
+	public Compound(JCas jcas) {
+		super(jcas);
+		readObject();
+	}
 
-  /** @generated */
-  public Compound(JCas jcas, int begin, int end) {
-    super(jcas);
-    setBegin(begin);
-    setEnd(end);
-    readObject();
-  }
+	/** @generated */
+	public Compound(JCas jcas, int begin, int end) {
+		super(jcas);
+		setBegin(begin);
+		setEnd(end);
+		readObject();
+	}
 
-  /** <!-- begin-user-doc -->
-    * Write your own initialization here
-    * <!-- end-user-doc -->
+	/** <!-- begin-user-doc -->
+	 * Write your own initialization here
+	 * <!-- end-user-doc -->
   @generated modifiable */
-  private void readObject() {/*default - does nothing empty block */}
+	private void readObject() {/*default - does nothing empty block */}
 
 
 
-  //*--------------*
-  //* Feature: splits
+	//*--------------*
+	//* Feature: splits
 
-  /** getter for splits - gets A word that can be decomposed into different parts.
-   * @generated */
-  public FSArray getSplits() {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
-        jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    }
-    return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits)));}
+	/** getter for splits - gets A word that can be decomposed into different parts.
+	 * @generated */
+	public FSArray getSplits() {
+		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
+			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+		}
+		return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits)));}
 
-  /** setter for splits - sets A word that can be decomposed into different parts.
-   * @generated */
-  public void setSplits(FSArray v) {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
-        jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    }
-    jcasType.ll_cas.ll_setRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits, jcasType.ll_cas.ll_getFSRef(v));}
+	/** setter for splits - sets A word that can be decomposed into different parts.
+	 * @generated */
+	public void setSplits(FSArray v) {
+		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
+			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+		}
+		jcasType.ll_cas.ll_setRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits, jcasType.ll_cas.ll_getFSRef(v));}
 
-  /** indexed getter for splits - gets an indexed value - A word that can be decomposed into different parts.
-   * @generated */
-  public Split getSplits(int i) {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
-        jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    }
-    jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i);
-    return (Split)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i)));}
+	/** indexed getter for splits - gets an indexed value - A word that can be decomposed into different parts.
+	 * @generated */
+	public Split getSplits(int i) {
+		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
+			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+		}
+		jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i);
+		return (Split)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i)));}
 
-  /** indexed setter for splits - sets an indexed value - A word that can be decomposed into different parts.
-   * @generated */
-  public void setSplits(int i, Split v) {
-    if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
-        jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
-    }
-    jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i);
-    jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i, jcasType.ll_cas.ll_getFSRef(v));}
+	/** indexed setter for splits - sets an indexed value - A word that can be decomposed into different parts.
+	 * @generated */
+	public void setSplits(int i, Split v) {
+		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
+			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
+		}
+		jcasType.jcas.checkArrayBounds(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i);
+		jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i, jcasType.ll_cas.ll_getFSRef(v));}
 
-      /**
-      *
-      * Returns the splits from each leave from the split tree, excluding the linking morphemes
-      *
-      * @param aCompound
-      *            Compound containing the splits
-      * @return An array with the splits from each leave from the split tree.
-      *
-      * */
 
-     public Split[] getSplitsWithoutMorpheme()
-     {
-         final List<Split> splits = new ArrayList<Split>();
-         getSplits(createSplitsFromFSArray(getSplits()), false, splits);
-         return splits.toArray(new Split[splits.size()]);
-     }
+	/**
+	 * 
+	 * Enum for all possible split levels for decompounding
+	 * @author erbs
+	 *
+	 */
+	public enum RECURSIVE_SPLIT_LEVEL {NONE, ALL, LOWEST, HIGHEST};
 
-     /**
-      *
-      * Returns the splits from each leave from the split tree, including the linking morphemes
-      *
-      * @param aCompound
-      *            Compound containing the splits
-      * @return An array with the splits from each leave from the split tree.
-      *
-      * */
 
-     public Split[] getSplitsWithMorpheme()
-     {
-         final List<Split> splits = new ArrayList<Split>();
-         getSplits(createSplitsFromFSArray(getSplits()), true, splits);
-         return splits.toArray(new Split[splits.size()]);
-     }
+	/**
+	 *
+	 * Returns the splits from each leave from the split tree, excluding the linking morphemes
+	 *
+	 * @param aCompound
+	 *            Compound containing the splits
+	 * @return An array with the splits from each leave from the split tree.
+	 *
+	 * */
 
-     /**
-      *
-      * Adds to the returningList the fragments present in the leaves from the split tree stored in
-      * the splits array.
-      *
-      * @param splits
-      *            Array containing the split tree
-      * @param withMorpheme
-      *            Indicates whether or not the linking morphemes should be included
-      * @param returningList
-      *            Stores the returning list
-      *
-      * */
+	public Split[] getSplitsWithoutMorpheme(RECURSIVE_SPLIT_LEVEL splitLevel)
+	{
+		List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), false, splitLevel);
+		return splits.toArray(new Split[splits.size()]);
+	}
 
-     private void getSplits(final Split[] splits, final boolean withMorpheme,
-             final List<Split> returningList)
-     {
+	/**
+	 *
+	 * Returns the splits from each leave from the split tree, including the linking morphemes
+	 *
+	 * @param aCompound
+	 *            Compound containing the splits
+	 * @return An array with the splits from each leave from the split tree.
+	 *
+	 * */
 
-         returningList.add(splits[0]);
-         final Split secondSplit = splits[1];
-         Split lastSplit;
-         if (secondSplit instanceof LinkingMorpheme) {
-             if (withMorpheme) {
-                 returningList.add(secondSplit);
-             }
-             lastSplit = splits[2];
-         }
-         else {
-             lastSplit = splits[1];
-         }
-         final FSArray splitsFSArray = lastSplit.getSplits();
-         if (splitsFSArray == null || splitsFSArray.size() == 0) {
-             returningList.add(lastSplit);
-         }
-         else {
-             getSplits(createSplitsFromFSArray(splitsFSArray), withMorpheme, returningList);
-         }
-     }
+	public Split[] getSplitsWithMorpheme(RECURSIVE_SPLIT_LEVEL splitLevel)
+	{
+		final List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), true, splitLevel);
+		return splits.toArray(new Split[splits.size()]);
+	}
 
-     /**
-      *
-      * Create a Split[] array from a FSArray
-      *
-      * @param splitsFSArray
-      *            FSArray containing the splits
-      * @return The array containing the splits from FSArray
-      *
-      * */
+	/**
+	 *
+	 * Returns a list of the fragments present in the leaves from the split tree stored in
+	 * the splits array.
+	 *
+	 * @param splits
+	 *            Array containing the split tree
+	 * @param withMorpheme
+	 *            Indicates whether or not the linking morphemes should be included
+	 * @param splitLevel
+	 *            The level of leaves that should be returned
+	 * @return
+	 *            A list of all splits on a level
+	 */
+	private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme, RECURSIVE_SPLIT_LEVEL splitLevel)
+	{
+		List<Split> splitList = new ArrayList<Split>();
 
-     private Split[] createSplitsFromFSArray(final FSArray splitsFSArray)
-     {
-         final Collection<Split> splitsCollection = FSCollectionFactory.create(splitsFSArray,
-                 Split.class);
-         return splitsCollection.toArray(new Split[splitsCollection.size()]);
-     }
+		switch (splitLevel){
 
-  }
+		case ALL:
+		for(Split split : splits){
+			if(includeMorpheme || !(split instanceof LinkingMorpheme)){
+				splitList.add(split);
+			}
+			if(split.getSplits() != null){
+				splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()), includeMorpheme, splitLevel));
+			}
+		}
+		return splitList;
+		
+		case LOWEST:
+		for(Split split : splits){
+			if((includeMorpheme || !(split instanceof LinkingMorpheme)) && (split.getSplits() == null || split.getSplits().size() == 0)){
+				splitList.add(split);
+			}
+			if(split.getSplits() != null){
+				splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()), includeMorpheme, splitLevel));
+			}
+			
+		}
+		return splitList;
+		
+		case HIGHEST:
+		for(Split split : splits){
+			if(includeMorpheme || !(split instanceof LinkingMorpheme)){
+				splitList.add(split);
+			}
+		}
+		return splitList;
+		
+		default:
+			return splitList;
+		}
+
+	}
+
+	/**
+	 *
+	 * Create a Split[] array from a FSArray
+	 *
+	 * @param splitsFSArray
+	 *            FSArray containing the splits
+	 * @return The array containing the splits from FSArray
+	 *
+	 * */
+
+	private Split[] createSplitsFromFSArray(final FSArray splitsFSArray)
+	{
+		final Collection<Split> splitsCollection = FSCollectionFactory.create(splitsFSArray,
+				Split.class);
+		return splitsCollection.toArray(new Split[splitsCollection.size()]);
+	}
+
+}
 
