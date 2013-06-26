@@ -33,7 +33,7 @@ import org.uimafit.factory.JCasBuilder;
 import org.uimafit.factory.JCasFactory;
 import org.uimafit.util.FSCollectionFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.DECOMPOUNDING_SPLIT_LEVEL;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.COMPOUND_SPLIT_LEVEL;
 
 public class CompoundTest
 {
@@ -74,7 +74,7 @@ public class CompoundTest
 			{
 		
 		final String[] splitsList = new String[] { "getränk", "automat", "auto", "mat" };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(DECOMPOUNDING_SPLIT_LEVEL.ALL)),
+		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(COMPOUND_SPLIT_LEVEL.ALL)),
 				is(splitsList));
 
 			}
@@ -85,7 +85,7 @@ public class CompoundTest
 			{
 		
 		final String[] splitsList = new String[] { "getränk", "auto", "mat" };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(DECOMPOUNDING_SPLIT_LEVEL.LOWEST)),
+		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(COMPOUND_SPLIT_LEVEL.LOWEST)),
 				is(splitsList));
 
 			}
@@ -96,7 +96,7 @@ public class CompoundTest
 			{
 		
 		final String[] splitsList = new String[] { "getränk", "automat" };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(DECOMPOUNDING_SPLIT_LEVEL.HIGHEST)),
+		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(COMPOUND_SPLIT_LEVEL.HIGHEST)),
 				is(splitsList));
 
 			}
@@ -107,7 +107,7 @@ public class CompoundTest
 			{
 		
 		final String[] splitsList = new String[] { };
-		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(DECOMPOUNDING_SPLIT_LEVEL.NONE)),
+		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(COMPOUND_SPLIT_LEVEL.NONE)),
 				is(splitsList));
 
 			}
