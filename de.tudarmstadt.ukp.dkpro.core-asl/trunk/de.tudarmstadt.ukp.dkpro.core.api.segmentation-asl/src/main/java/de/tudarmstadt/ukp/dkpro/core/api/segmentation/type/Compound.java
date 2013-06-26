@@ -112,7 +112,7 @@ public class Compound extends Annotation {
 	 * @author erbs
 	 *
 	 */
-	public enum RECURSIVE_SPLIT_LEVEL {NONE, ALL, LOWEST, HIGHEST};
+	public enum DECOMPOUNDING_SPLIT_LEVEL {NONE, ALL, LOWEST, HIGHEST};
 
 
 	/**
@@ -125,7 +125,7 @@ public class Compound extends Annotation {
 	 *
 	 * */
 
-	public Split[] getSplitsWithoutMorpheme(RECURSIVE_SPLIT_LEVEL splitLevel)
+	public Split[] getSplitsWithoutMorpheme(DECOMPOUNDING_SPLIT_LEVEL splitLevel)
 	{
 		List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), false, splitLevel);
 		return splits.toArray(new Split[splits.size()]);
@@ -141,7 +141,7 @@ public class Compound extends Annotation {
 	 *
 	 * */
 
-	public Split[] getSplitsWithMorpheme(RECURSIVE_SPLIT_LEVEL splitLevel)
+	public Split[] getSplitsWithMorpheme(DECOMPOUNDING_SPLIT_LEVEL splitLevel)
 	{
 		final List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), true, splitLevel);
 		return splits.toArray(new Split[splits.size()]);
@@ -161,7 +161,7 @@ public class Compound extends Annotation {
 	 * @return
 	 *            A list of all splits on a level
 	 */
-	private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme, RECURSIVE_SPLIT_LEVEL splitLevel)
+	private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme, DECOMPOUNDING_SPLIT_LEVEL splitLevel)
 	{
 		List<Split> splitList = new ArrayList<Split>();
 
