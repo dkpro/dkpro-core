@@ -112,7 +112,7 @@ public class Compound extends Annotation {
 	 * @author erbs
 	 *
 	 */
-	public enum COMPOUND_SPLIT_LEVEL {NONE, ALL, LOWEST, HIGHEST};
+	public enum CompoundSplitLevel {NONE, ALL, LOWEST, HIGHEST};
 
 
 	/**
@@ -125,7 +125,7 @@ public class Compound extends Annotation {
 	 *
 	 * */
 
-	public Split[] getSplitsWithoutMorpheme(COMPOUND_SPLIT_LEVEL splitLevel)
+	public Split[] getSplitsWithoutMorpheme(CompoundSplitLevel splitLevel)
 	{
 		List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), false, splitLevel);
 		return splits.toArray(new Split[splits.size()]);
@@ -141,7 +141,7 @@ public class Compound extends Annotation {
 	 *
 	 * */
 
-	public Split[] getSplitsWithMorpheme(COMPOUND_SPLIT_LEVEL splitLevel)
+	public Split[] getSplitsWithMorpheme(CompoundSplitLevel splitLevel)
 	{
 		final List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), true, splitLevel);
 		return splits.toArray(new Split[splits.size()]);
@@ -161,7 +161,7 @@ public class Compound extends Annotation {
 	 * @return
 	 *            A list of all splits on a level
 	 */
-	private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme, COMPOUND_SPLIT_LEVEL splitLevel)
+	private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme, CompoundSplitLevel splitLevel)
 	{
 		List<Split> splitList = new ArrayList<Split>();
 
