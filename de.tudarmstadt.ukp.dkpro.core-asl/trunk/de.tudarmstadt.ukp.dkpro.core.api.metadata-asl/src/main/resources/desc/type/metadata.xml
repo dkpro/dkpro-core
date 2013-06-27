@@ -1,49 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-  <name>Document Meta Data</name>
-  <description>Meta data about a document.
-&lt;p&gt;
-In addition to the features given here, there is a &lt;i&gt;language&lt;/i&gt; feature inherited from UIMA's {@link DocumentAnnotation}. DKPro Core components expect a two letter ISO 639-1 language code there.</description>
-  <version>${version}</version>
-  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
-  <types>
-    <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData</name>
-      <description/>
-      <supertypeName>uima.tcas.DocumentAnnotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>documentTitle</name>
-          <description>The human readable title of the document.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>documentId</name>
-          <description>The id of the document.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>documentUri</name>
-          <description>The URI of the document.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>collectionId</name>
-          <description>The ID of the whole document collection.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>documentBaseUri</name>
-          <description>Base URI of the document.</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-        <featureDescription>
-          <name>isLastSegment</name>
-          <description>CAS de-multipliers need to know whether a CAS is the last multiplied segment.
-Thus CAS multipliers should set this field to true for the last CAS they produce.</description>
-          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
-        </featureDescription>
-      </features>
-    </typeDescription>
-  </types>
+	<name>Document Meta Data</name>
+	<description>Meta data about a document.
+		&lt;p&gt;
+		In addition to the features given here, there is a
+		&lt;i&gt;language&lt;/i&gt; feature inherited from UIMA's {@link
+		DocumentAnnotation}. DKPro Core components expect a two letter ISO
+		639-1 language code there.</description>
+	<version>${version}</version>
+	<vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische
+		Universität Darmstadt</vendor>
+	<types>
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData
+			</name>
+			<description />
+			<supertypeName>uima.tcas.DocumentAnnotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>documentTitle</name>
+					<description>The human readable title of the document.
+					</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>documentId</name>
+					<description>The id of the document.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>documentUri</name>
+					<description>The URI of the document.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>collectionId</name>
+					<description>The ID of the whole document collection.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>documentBaseUri</name>
+					<description>Base URI of the document.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>isLastSegment</name>
+					<description>CAS de-multipliers need to know whether a CAS is the
+						last multiplied segment.
+						Thus CAS multipliers should set this field to true for the last CAS
+						they produce.
+					</description>
+					<rangeTypeName>uima.cas.Boolean</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription
+			</name>
+			<description>Information about a tagset (controlled vocabulary).
+			</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>layer</name>
+					<description>The layer to which the tagset applies. This is
+						typically the name of an UIMA type such as
+						"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS".
+					</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>name</name>
+					<description>The name of the tagset.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>tags</name>
+					<description>Descriptions of the tags belonging to this tagset.
+					</description>
+					<rangeTypeName>uima.cas.FSArray</rangeTypeName>
+					<elementType>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription
+					</elementType>
+				</featureDescription>
+			</features>
+		</typeDescription>
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription
+			</name>
+			<description>Description of an individual tag.</description>
+			<supertypeName>uima.cas.TOP</supertypeName>
+			<features>
+				<featureDescription>
+					<name>name</name>
+					<description>The name of the tag.</description>
+					<rangeTypeName>uima.cas.String</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+	</types>
 </typeSystemDescription>
