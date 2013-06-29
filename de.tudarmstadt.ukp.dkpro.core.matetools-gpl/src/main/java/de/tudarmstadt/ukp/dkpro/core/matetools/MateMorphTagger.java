@@ -10,10 +10,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import is2.mtag.Main;
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.mtag.Options;
+import is2.mtag.Tagger;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -29,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -77,7 +81,7 @@ public class MateMorphTagger
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	private CasConfigurableProviderBase<Main> modelProvider;
+	private CasConfigurableProviderBase<Tagger> modelProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -85,11 +89,11 @@ public class MateMorphTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<Main>()
+		modelProvider = new CasConfigurableProviderBase<Tagger>()
 		{
 			{
-			    setContextObject(MateMorphTagger.this);
-			    
+				setContextObject(MateMorphTagger.this);
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-morphtagger-${language}-${variant}");
@@ -105,14 +109,14 @@ public class MateMorphTagger
 			}
 
 			@Override
-			protected Main produceResource(URL aUrl)
+			protected Tagger produceResource(URL aUrl)
 				throws IOException
 			{
-				java.io.File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
 				String[] args = { "-model", modelFile.getPath() };
-				is2.mtag.Options option = new is2.mtag.Options(args);
-				return new is2.mtag.Main(option); // create a MorphTagger
+				Options option = new Options(args);
+				return new Tagger(option); // create a MorphTagger
 			}
 		};
 
@@ -129,14 +133,24 @@ public class MateMorphTagger
 		try {
 			for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 				List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
-				List<Lemma> lemmas = JCasUtil.selectCovered(Lemma.class, sentence);
 
-				String[] morphTags = modelProvider.getResource().out(
-						JCasUtil.toText(tokens).toArray(new String[0]),
-						JCasUtil.toText(lemmas).toArray(new String[0])).pfeats;
+				List<String> forms = new LinkedList<String>();
+				forms.add(CONLLReader09.ROOT);
+				forms.addAll(JCasUtil.toText(tokens));
 
-				for (int i = 0; i < morphTags.length; i++) {
-					Token token = tokens.get(i);
+				List<String> lemmas = new LinkedList<String>();
+				lemmas.add(CONLLReader09.ROOT_LEMMA);
+				for (Token token : tokens) {
+					lemmas.add(token.getLemma().getValue());
+				}
+
+				SentenceData09 sd = new SentenceData09();
+				sd.init(forms.toArray(new String[0]));
+				sd.setLemmas(lemmas.toArray(new String[0]));
+				String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
+
+				for (int i = 1; i < morphTags.length; i++) {
+					Token token = tokens.get(i - 1);
 					Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
 					morpheme.setMorphTag(morphTags[i]);
 					morpheme.addToIndexes();

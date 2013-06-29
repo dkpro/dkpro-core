@@ -36,13 +36,13 @@ public class MatePosTaggerTest
 		throws Exception
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
-		
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
-				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
+
+		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
+				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
 		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"beispiel", "_", "welcher", "möglichst", "vieler", "konstituent", "und",
-				"dependenz", "beinhalten", "_" };
+				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
+				"Dependenz", "beinhalten", "--" };
 
 		String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
 				"PRELS", "ADV", "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
@@ -53,7 +53,7 @@ public class MatePosTaggerTest
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 	}
-	
+
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
@@ -62,16 +62,16 @@ public class MatePosTaggerTest
 		AnalysisEngineDescription posTag = createPrimitiveDescription(MatePosTagger.class);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(seg, lemma, posTag);
-		
+
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 	@Rule
 	public TestName name = new TestName();
 

@@ -10,10 +10,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
 import is2.lemmatizer.Lemmatizer;
+import is2.lemmatizer.Options;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -87,8 +92,8 @@ public class MateLemmatizer
 		modelProvider = new CasConfigurableProviderBase<Lemmatizer>()
 		{
 			{
-			    setContextObject(MateLemmatizer.this);
-			    
+				setContextObject(MateLemmatizer.this);
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-lemmatizer-${language}-${variant}");
@@ -106,11 +111,11 @@ public class MateLemmatizer
 			protected Lemmatizer produceResource(URL aUrl)
 				throws IOException
 			{
-				java.io.File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
 				String[] args = { "-model", modelFile.getPath() };
-				is2.lemmatizer.Options option = new is2.lemmatizer.Options(args);
-				return new is2.lemmatizer.Lemmatizer(option); // create a lemmatizer
+				Options option = new Options(args);
+				return new Lemmatizer(option); // create a lemmatizer
 			}
 		};
 	}
@@ -126,8 +131,13 @@ public class MateLemmatizer
 		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
 
-			String[] lemmas = modelProvider.getResource().lemma(
-					JCasUtil.toText(tokens).toArray(new String[0]), true);
+			List<String> forms = new LinkedList<String>();
+			forms.add(CONLLReader09.ROOT);
+			forms.addAll(JCasUtil.toText(tokens));
+
+			SentenceData09 sd = new SentenceData09();
+			sd.init(forms.toArray(new String[0]));
+			String[] lemmas = modelProvider.getResource().apply(sd).plemmas;
 
 			for (int i = 0; i < lemmas.length; i++) {
 				Token token = tokens.get(i);

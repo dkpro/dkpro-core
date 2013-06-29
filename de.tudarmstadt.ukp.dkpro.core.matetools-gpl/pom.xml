@@ -41,13 +41,13 @@
     <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-de-crosstrain</artifactId>
-        <version>20100919.0</version>
+        <version>20121024.0</version>
         <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-de-crosstrain</artifactId>
-        <version>20100919.0</version>
+        <version>20121024.0</version>
         <scope>test</scope>
     </dependency>
     <dependency>
@@ -55,7 +55,7 @@
         <artifactId>
             de.tudarmstadt.ukp.dkpro.core.matetools-model-morphtagger-de-default
         </artifactId>
-        <version>20101026.0</version>
+        <version>20121024.0</version>
         <scope>test</scope>
     </dependency>
     <dependency>
@@ -63,13 +63,13 @@
         <artifactId>
             de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-de-default
         </artifactId>
-        <version>20100919.0</version>
+        <version>20121024.0</version>
         <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>is2</groupId>
-    	<artifactId>is2</artifactId>
-    	<version>20100913</version>
+    	<groupId>mate-tools</groupId>
+    	<artifactId>mate-tools</artifactId>
+    	<version>201206</version>
     </dependency>
   </dependencies>
 </project>

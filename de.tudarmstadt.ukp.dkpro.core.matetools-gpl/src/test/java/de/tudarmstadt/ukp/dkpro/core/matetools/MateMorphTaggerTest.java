@@ -39,48 +39,47 @@ public class MateMorphTaggerTest
 		throws Exception
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
-		
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
-				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
+
+		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
+				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
 		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"beispiel", "_", "welcher", "möglichst", "vieler", "konstituent", "und",
-				"dependenz", "beinhalten", "_" };
-		
+				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
+				"Dependenz", "beinhalten", "--" };
+
 		LinkedList<String> morphTagsExpected = new LinkedList<String>();
-		morphTagsExpected.add("1|Nom|Pl|*");
-		morphTagsExpected.add("1|Pl|Pres|Ind");
-		morphTagsExpected.add("Nom|Sg|Neut");
+		morphTagsExpected.add("case=nom|number=pl|gender=*|person=1");
+		morphTagsExpected.add("number=pl|person=1|tense=pres|mood=ind");
+		morphTagsExpected.add("case=acc|number=sg|gender=neut");
 		morphTagsExpected.add("_");
-		morphTagsExpected.add("Pos|Nom|Sg|Neut");
-		morphTagsExpected.add("Acc|Sg|Neut");
+		morphTagsExpected.add("case=acc|number=sg|gender=neut|degree=pos");
+		morphTagsExpected.add("case=acc|number=sg|gender=neut");
 		morphTagsExpected.add("_");
-		morphTagsExpected.add("Nom|Sg|Neut");
+		morphTagsExpected.add("case=acc|number=sg|gender=neut");
 		morphTagsExpected.add("_");
-		morphTagsExpected.add("Nom|Pl|*");
-		morphTagsExpected.add("Dat|Pl|Neut");
+		morphTagsExpected.add("case=acc|number=pl|gender=*");
+		morphTagsExpected.add("case=acc|number=pl|gender=*");
 		morphTagsExpected.add("_");
-		morphTagsExpected.add("Dat|Pl|Fem");
-		morphTagsExpected.add("3|Sg|Pres|Ind");
+		morphTagsExpected.add("case=dat|number=pl|gender=fem");
 		morphTagsExpected.add("_");
-		
+		morphTagsExpected.add("_");
 
 		LinkedList<String> morphTagsActual = new LinkedList<String>();
-		for (Morpheme morpheme : select(jcas, Morpheme.class)) { 
+		for (Morpheme morpheme : select(jcas, Morpheme.class)) {
 			morphTagsActual.add(morpheme.getMorphTag());
 		}
-		
-		
+
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-		
+
 		System.out.printf("%-20s - Expected: %s%n", "MorphTags",
 				AssertAnnotations.asCopyableString(morphTagsExpected, false));
 		System.out.printf("%-20s - Actual  : %s%n", "MorphTags",
 				AssertAnnotations.asCopyableString(morphTagsActual, false));
-		assertArrayEquals(morphTagsExpected.toArray(new String[0]), morphTagsActual.toArray(new String[0]));
-		
+		assertArrayEquals(morphTagsExpected.toArray(new String[0]),
+				morphTagsActual.toArray(new String[0]));
+
 	}
-	
+
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
@@ -89,16 +88,16 @@ public class MateMorphTaggerTest
 		AnalysisEngineDescription morphTag = createPrimitiveDescription(MateMorphTagger.class);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(seg, lemma, morphTag);
-		
+
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 	@Rule
 	public TestName name = new TestName();
 

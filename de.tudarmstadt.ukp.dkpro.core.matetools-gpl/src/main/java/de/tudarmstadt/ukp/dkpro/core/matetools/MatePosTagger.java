@@ -10,10 +10,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import is2.tag3.Tagger;
+import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.tag.Options;
+import is2.tag.Tagger;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -31,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -39,20 +43,20 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * <p>
  * DKPro Annotator for the MateToolsPosTagger
  * </p>
- *
+ * 
  * Required annotations:<br/>
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>Lemma</li>
  * </ul>
- *
+ * 
  * Generated annotations:<br/>
  * <ul>
  * <li>POSTag</li>
  * </ul>
- *
- *
+ * 
+ * 
  * @author AnNa, zesch
  */
 public class MatePosTagger
@@ -99,8 +103,8 @@ public class MatePosTagger
 		modelProvider = new CasConfigurableProviderBase<Tagger>()
 		{
 			{
-			    setContextObject(MatePosTagger.this);
-			    
+				setContextObject(MatePosTagger.this);
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-${language}-${variant}");
@@ -118,17 +122,18 @@ public class MatePosTagger
 			protected Tagger produceResource(URL aUrl)
 				throws IOException
 			{
-				java.io.File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
 				String[] args = { "-model", modelFile.getPath() };
-				is2.tag3.Options option = new is2.tag3.Options(args);
-				return new is2.tag3.Tagger(option); // create a POSTagger
+				Options option = new Options(args);
+				return new Tagger(option); // create a POSTagger
 			}
 		};
 
 		posMappingProvider = new MappingProvider();
-		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-				+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+		posMappingProvider.setDefault(MappingProvider.LOCATION,
+				"classpath:/de/tudarmstadt/ukp/dkpro/"
+						+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		posMappingProvider.setDefault("tagger.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
@@ -147,14 +152,24 @@ public class MatePosTagger
 
 		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
-			List<Lemma> lemmas = JCasUtil.selectCovered(Lemma.class, sentence);
 
-			String[] posTags = modelProvider.getResource().tag(
-					JCasUtil.toText(tokens).toArray(new String[0]),
-					JCasUtil.toText(lemmas).toArray(new String[0]));
+			List<String> forms = new LinkedList<String>();
+			forms.add(CONLLReader09.ROOT);
+			forms.addAll(JCasUtil.toText(tokens));
 
-			for (int i = 0; i < posTags.length; i++) {
-				Token token = tokens.get(i);
+			List<String> lemmas = new LinkedList<String>();
+			lemmas.add(CONLLReader09.ROOT_LEMMA);
+			for (Token token : tokens) {
+				lemmas.add(token.getLemma().getValue());
+			}
+
+			SentenceData09 sd = new SentenceData09();
+			sd.init(forms.toArray(new String[0]));
+			sd.setLemmas(lemmas.toArray(new String[0]));
+			String[] posTags = modelProvider.getResource().apply(sd).ppos;
+
+			for (int i = 1; i < posTags.length; i++) {
+				Token token = tokens.get(i - 1);
 				Type posType = posMappingProvider.getTagType(posTags[i]);
 				POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
 				posTag.setPosValue(posTags[i]);

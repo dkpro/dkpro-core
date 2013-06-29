@@ -38,12 +38,12 @@ public class MateParserTest
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
-				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
+		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
+				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
 		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"beispiel", "_", "welcher", "möglichst", "vieler", "konstituent", "und",
-				"dependenz", "beinhalten", "_" };
+				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
+				"Dependenz", "beinhalten", "--" };
 
 		String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
 				"PRELS", "ADV", "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
@@ -51,35 +51,34 @@ public class MateParserTest
 		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
 				"ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
 
-		String[] dependencies = new String[] { "CD 70,83,84,87", "CJ 70,83,88,99",
-				"MO 22,35,17,21", "MO 64,69,54,63", "NK 36,44,13,16", "NK 36,44,22,35",
-				"NK 70,83,64,69", "OA 100,110,70,83", "OA 4,12,36,44", "PUNC 36,44,44,45",
-				"PUNC 4,12,110,111", "RC 36,44,100,110", "SB 100,110,46,53", "SB 4,12,0,3" };
+		String[] dependencies = new String[] { "-- 100,110,110,111", "-- 36,44,44,45",
+				"CD 70,83,84,87", "CJ 84,87,88,99", "MO 22,35,17,21", "MO 64,69,54,63",
+				"NK 36,44,13,16", "NK 36,44,22,35", "NK 70,83,64,69", "OA 100,110,70,83",
+				"OA 4,12,36,44", "RC 36,44,100,110", "SB 100,110,46,53", "SB 4,12,0,3" };
 
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
-	
+
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
 		AnalysisEngineDescription aggregate = createAggregateDescription(
-		        createPrimitiveDescription(BreakIteratorSegmenter.class),
-		        createPrimitiveDescription(MateLemmatizer.class),
-		        createPrimitiveDescription(MatePosTagger.class),
-		        createPrimitiveDescription(MateParser.class)
-		);
+				createPrimitiveDescription(BreakIteratorSegmenter.class),
+				createPrimitiveDescription(MateLemmatizer.class),
+				createPrimitiveDescription(MatePosTagger.class),
+				createPrimitiveDescription(MateParser.class));
 
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 	@Rule
 	public TestName name = new TestName();
 

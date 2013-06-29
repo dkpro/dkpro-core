@@ -10,8 +10,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.uimafit.util.JCasUtil.selectCovered;
 import is2.data.SentenceData09;
+import is2.io.CONLLReader09;
+import is2.parser.Options;
 import is2.parser.Parser;
 
 import java.io.File;
@@ -29,11 +30,9 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.util.JCasUtil;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -98,8 +97,8 @@ public class MateParser
 		modelProvider = new CasConfigurableProviderBase<Parser>()
 		{
 			{
-			    setContextObject(MateParser.this);
-			    
+				setContextObject(MateParser.this);
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-parser-${language}-${variant}");
@@ -120,8 +119,8 @@ public class MateParser
 				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
 				String[] args = { "-model", modelFile.getPath() };
-				is2.parser.Options option = new is2.parser.Options(args);
-				return new is2.parser.Parser(option); // create a parser
+				Options option = new Options(args);
+				return new Parser(option); // create a parser
 			}
 		};
 	}
@@ -137,41 +136,36 @@ public class MateParser
 		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
 
-			LinkedList<String> forms = new LinkedList<String>();
-			forms.add("<root>");
-			for (Token token : selectCovered(Token.class, sentence)) {
-				forms.add(token.getCoveredText());
-			}
+			List<String> forms = new LinkedList<String>();
+			forms.add(CONLLReader09.ROOT);
+			forms.addAll(JCasUtil.toText(tokens));
 
-			LinkedList<String> lemmas = new LinkedList<String>();
-			lemmas.add("<root>");
-			for (Lemma lemma : JCasUtil.selectCovered(Lemma.class, sentence)) {
-				lemmas.add(lemma.getValue());
-			}
-
-			LinkedList<String> posTags = new LinkedList<String>();
-			posTags.add("<root-POS>");
-			for (POS posTag : JCasUtil.selectCovered(POS.class, sentence)) {
-				posTags.add(posTag.getPosValue());
+			List<String> lemmas = new LinkedList<String>();
+			List<String> posTags = new LinkedList<String>();
+			lemmas.add(CONLLReader09.ROOT_LEMMA);
+			posTags.add(CONLLReader09.ROOT_POS);
+			for (Token token : tokens) {
+				lemmas.add(token.getLemma().getValue());
+				posTags.add(token.getPos().getPosValue());
 			}
 
 			SentenceData09 sd = new SentenceData09();
 			sd.init(forms.toArray(new String[0]));
 			sd.setLemmas(lemmas.toArray(new String[0]));
 			sd.setPPos(posTags.toArray(new String[0]));
+			SentenceData09 parsed = modelProvider.getResource().apply(sd);
 
-			SentenceData09 parsed = modelProvider.getResource().parse(sd);
 			for (int i = 0; i < parsed.labels.length; i++) {
-				Token sourceToken = tokens.get(i);
-				// Token targetToken = null; //for "ROOT"
-				if (parsed.heads[i] != 0) {
-					Token targetToken = tokens.get(parsed.heads[i] - 1);
-	                Dependency dep = new Dependency(jcas);
-					dep.setGovernor(targetToken);
-					dep.setDependent(sourceToken);
-					dep.setDependencyType(parsed.labels[i]);
-					dep.setBegin(dep.getGovernor().getBegin());
-                    dep.setEnd(dep.getGovernor().getEnd());
+				if (parsed.pheads[i] != 0) {
+					Token sourceToken = tokens.get(parsed.pheads[i] - 1);
+					Token targetToken = tokens.get(i);
+
+					Dependency dep = new Dependency(jcas);
+					dep.setBegin(sourceToken.getBegin());
+					dep.setEnd(sourceToken.getEnd());
+					dep.setGovernor(sourceToken);
+					dep.setDependent(targetToken);
+					dep.setDependencyType(parsed.plabels[i]);
 					dep.addToIndexes();
 				}
 			}

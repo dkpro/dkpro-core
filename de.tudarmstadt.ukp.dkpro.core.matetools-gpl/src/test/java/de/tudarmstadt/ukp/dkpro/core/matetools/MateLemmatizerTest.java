@@ -33,16 +33,16 @@ public class MateLemmatizerTest
 	public void testGerman()
 		throws Exception
 	{
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
-				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
+		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
+				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
 		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"beispiel", "_", "welcher", "möglichst", "vieler", "konstituent", "und",
-				"dependenz", "beinhalten", "_" };
+				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
+				"Dependenz", "beinhalten", "--" };
 
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 	}
-	
+
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
@@ -50,16 +50,16 @@ public class MateLemmatizerTest
 		AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(seg, lemma);
-		
+
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 	@Rule
 	public TestName name = new TestName();
 
