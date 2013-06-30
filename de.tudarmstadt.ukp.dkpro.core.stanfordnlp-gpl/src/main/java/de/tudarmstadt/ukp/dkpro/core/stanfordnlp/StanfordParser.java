@@ -48,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -57,10 +58,14 @@ import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.ParserQuery;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
+import edu.stanford.nlp.trees.EnglishGrammaticalRelations;
+import edu.stanford.nlp.trees.EnglishGrammaticalStructureFactory;
+import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TypedDependency;
+import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
 
 /**
  * Stanford Parser component.
@@ -547,6 +552,23 @@ public class StanfordParser
                 constTags.removeAll(posTags);
                 addTagset(constTags, writeConstituent);
 
+                // There is no way to determine the relations via the GrammaticalStructureFactory
+                // API, so we do it manually here for the languages known to support this.
+                if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class, null);
+                    for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
+                        depTags.add(r.getShortName());
+                    }
+                    addTagset(depTags, writeDependency);
+                }
+                else if (gsf != null && ChineseGrammaticalRelations.class.equals(gsf.getClass())) {
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class, null);
+                    for (GrammaticalRelation r : ChineseGrammaticalRelations.values()) {
+                        depTags.add(r.getShortName());
+                    }
+                    addTagset(depTags, writeDependency);
+                }
+                
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }
