@@ -515,7 +515,7 @@ public class StanfordParser
                         // syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
                         t = t.substring(0, gfIdx);
                     }
-                    posTags.add(lp.basicCategory(tag));
+                    posTags.add(lp.basicCategory(t));
                 }
                 addTagset(posTags, writePos);
 
