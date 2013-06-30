@@ -593,8 +593,10 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
+		<!--  
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
+		-->
 	</modules>
 	<build>
 		<plugins>
