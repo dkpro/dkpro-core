@@ -29,38 +29,34 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-public class UmlautNormalizerTest {
+public class UmlautNormalizerTest
+{
 
     @Test
-    public void test() 
+    public void test()
         throws Exception
     {
         AggregateBuilder builder = new AggregateBuilder();
-        builder.add(
-                createPrimitiveDescription(BreakIteratorSegmenter.class)
-        );
-        builder.add(
-                createPrimitiveDescription(
-                		UmlautNormalizer.class
-                )
-        );
-        builder.add(
-                createPrimitiveDescription(ApplyChangesAnnotator.class),
-                "source", "_InitialView",
-                "target", "umlaut_cleaned"
-        );
-        
+        builder.add(createPrimitiveDescription(BreakIteratorSegmenter.class));
+        builder.add(createPrimitiveDescription(UmlautNormalizer.class));
+        builder.add(createPrimitiveDescription(ApplyChangesAnnotator.class), "source",
+                "_InitialView", "target", "umlaut_cleaned");
+
         AnalysisEngine engine = builder.createAggregate();
-        
-        String text = "Die Buechsenoeffner koennen oefter benuetzt werden. Neuerscheinungen muss der kaeufer kaufen. Schon zum Fruehstueck traf er auf den Maerchenerzaehler, den Uebergeek und den Ueberraschungeioeffner. Sein Oeuvre ist beeindruckend.";
+
+        String text = "Die Buechsenoeffner koennen oefter benuetzt werden. Neuerscheinungen muss " +
+        		"der kaeufer kaufen. Schon zum Fruehstueck traf er auf den Maerchenerzaehler, " +
+        		"den Uebergeek und den Ueberraschungeioeffner. Sein Oeuvre ist beeindruckend.";
         JCas jcas = engine.newJCas();
         jcas.setDocumentText(text);
         DocumentMetaData.create(jcas);
-        
+
         engine.process(jcas);
 
         JCas view = jcas.getView("umlaut_cleaned");
-        String normalizedText = "Die Büchsenöffner können öfter benützt werden. Neuerscheinungen muss der käufer kaufen. Schon zum Frühstück traf er auf den Märchenerzähler, den Uebergeek und den Ueberraschungeioeffner. Sein Oeuvre ist beeindruckend.";
+        String normalizedText = "Die Büchsenöffner können öfter benützt werden. Neuerscheinungen " +
+        		"muss der käufer kaufen. Schon zum Frühstück traf er auf den Märchenerzähler, " +
+        		"den Uebergeek und den Ueberraschungeioeffner. Sein Oeuvre ist beeindruckend.";
         assertEquals(normalizedText, view.getDocumentText());
     }
 }

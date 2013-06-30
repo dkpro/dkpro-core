@@ -660,7 +660,7 @@
 							Ubiquitous Knowledge Processing	(UKP) Lab
 							Technische Universität Darmstadt
 						</componentCopyright>
-						<failOnMissingMetaData>true</failOnMissingMetaData>
+						<failOnMissingMetaData>false</failOnMissingMetaData>
 					</configuration>
 					<executions>
 						<execution>

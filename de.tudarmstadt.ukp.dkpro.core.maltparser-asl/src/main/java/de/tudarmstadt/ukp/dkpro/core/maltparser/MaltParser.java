@@ -27,9 +27,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.jar.JarEntry;
@@ -37,7 +34,6 @@ import java.util.jar.JarInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
@@ -170,7 +166,7 @@ public class MaltParser
 						"${groupId}.maltparser-model-parser-${language}-${variant}");
 				setDefault(VARIANT, "linear");
 
-				setDefault(LOCATION, "classpath:/${package}/maltparser/lib/parser-${language}-${variant}.mco");
+				setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.mco");
 
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
