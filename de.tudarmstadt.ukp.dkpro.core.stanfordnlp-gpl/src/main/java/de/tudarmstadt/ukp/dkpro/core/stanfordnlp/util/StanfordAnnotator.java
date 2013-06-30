@@ -105,8 +105,6 @@ public class StanfordAnnotator
     /**
      * Creates linked constituent annotations, POS annotations and lemma-annotations.<br/>
      * Note: The annotations are directly written to the indexes of the CAS.
-     * 
-     * @param aTreebankLanguagePack
      */
     public void createConstituentAnnotationFromTree(TreebankLanguagePack aTreebankLanguagePack,
             boolean aCreatePos, boolean aCreateLemma)

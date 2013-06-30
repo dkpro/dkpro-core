@@ -342,11 +342,11 @@ public class StanfordParser
                 tokens.add(token);
             }
 
+            getContext().getLogger().log(FINE, tokenizedSentence.toString());
             LexicalizedParser parser = modelProvider.getResource();
 
             Tree parseTree;
             try {
-                getContext().getLogger().log(FINE, tokenizedSentence.toString());
                 if (tokenizedSentence.size() <= maxTokens) {
                     if (ptb3Escaping) {
                         // Apply escaper to the whole sentence, not to each token individually. The
@@ -371,6 +371,7 @@ public class StanfordParser
                 else {
                     continue;
                 }
+
             }
             catch (Exception e) {
                 throw new AnalysisEngineProcessException(e);
