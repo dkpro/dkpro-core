@@ -140,10 +140,9 @@ public class BerkeleyParserTest
 				"(ADVP (AD 尽可能)) (VP (VA 多)))) (DEC 的)) (NP (NN 句子成分) (CC 和) (NN 依存)) " +
 				"(NP (NN 性))))) (PU 。)))" };
 		
-        String[] posTags = new String[] { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG",
-                "DER", "DEV", "DT", "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN",
-                "NR", "NT", "OD", "ON", "P", "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV",
-                "X" };
+        String[] posTags = new String[] { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
+                "DEV", "DT", "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NP", "NR",
+                "NT", "OD", "P", "PN", "PU", "SB", "SP", "VA", "VC", "VE", "VP", "VV", "X" };
 
         String[] constituentTags = new String[] { "ADJP", "ADVP", "CLP", "CP", "DFL", "DNP", "DP",
                 "DVP", "FLR", "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT",
@@ -190,8 +189,8 @@ public class BerkeleyParserTest
 
         String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
                 "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
-                "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "ROOT", "RP", "SYM", "TO",
-                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+                "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH",
+                "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
         String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "RRC", "S", "SBAR",
