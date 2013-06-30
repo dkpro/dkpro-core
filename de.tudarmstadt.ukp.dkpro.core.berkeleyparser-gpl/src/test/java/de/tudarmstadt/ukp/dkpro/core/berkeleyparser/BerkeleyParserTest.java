@@ -144,13 +144,12 @@ public class BerkeleyParserTest
                 "DEV", "DT", "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NP", "NR",
                 "NT", "OD", "P", "PN", "PU", "SB", "SP", "VA", "VC", "VE", "VP", "VV", "X" };
 
-        String[] constituentTags = new String[] { "ADJP", "ADVP", "CLP", "CP", "DFL", "DNP", "DP",
-                "DVP", "FLR", "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT",
-                "UCP", "VCD", "VCP", "VNV", "VP", "VPT", "VRD", "VSB", "WHPP" };
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CLP", "CP", "DNP", "DP", "DVP",
+                "FRAG", "INTJ", "IP", "LCP", "LST", "MSP", "NN", "NP", "PP", "PRN", "QP", "ROOT",
+                "UCP", "VCD", "VCP", "VNV", "VP", "VPT", "VRD", "VSB" };
 
-        String[] unmappedPos = new String[] { ".$$.", "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV",
-                "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "OD", "ON", "SB", "SP",
-                "URL", "VC", "X" };
+        String[] unmappedPos = new String[] { "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV", "ETC",
+                "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NP", "OD", "SB", "SP", "VC", "VP", "X" };
 
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
@@ -193,10 +192,10 @@ public class BerkeleyParserTest
                 "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
         String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
-                "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "RRC", "S", "SBAR",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR",
                 "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
         
-        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "ROOT", "``" };
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
