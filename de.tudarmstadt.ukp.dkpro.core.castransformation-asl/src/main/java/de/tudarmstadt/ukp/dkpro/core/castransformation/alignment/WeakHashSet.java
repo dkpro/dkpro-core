@@ -43,13 +43,20 @@ implements Iterable<E>, Set<E>
 		return beforeSize != size();
 	}
 
-	public
-	void remove(
-			final E o)
+	@Override
+    public
+	boolean remove(
+			final Object o)
 	{
-		data.remove(o);
+		return data.remove(o) != null;
 	}
 
+	@Override
+	public boolean contains(Object o)
+	{
+	    return data.containsKey(o);
+	}
+	
 	@Override
 	public
 	Iterator<E> iterator()
