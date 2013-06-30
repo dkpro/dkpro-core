@@ -40,6 +40,15 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<!-- For uimaFIT 2.0.0-SNAPSHOT -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
 	</repositories>
 	<issueManagement>
 		<system>Google Code</system>
@@ -108,11 +117,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
-                <version>1.5.0-SNAPSHOT</version>
-            </dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
@@ -158,16 +167,16 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
-                <version>1.5.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-                <artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
-                <version>1.5.0-SNAPSHOT</version>
-            </dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</artifactId>
@@ -513,7 +522,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</module>
-        <module>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.srl-asl</module>
@@ -545,8 +554,8 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
-        <module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
-        <module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
@@ -585,7 +594,7 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<configuration>
 					<notimestamp>true</notimestamp>
-					<!-- Exclude UIMA types and internal API-->
+					<!-- Exclude UIMA types and internal API -->
 					<excludePackageNames>*.type:*.internal.*</excludePackageNames>
 					<groups>
 						<group>
@@ -633,9 +642,10 @@
 						<componentVendor>DKPro Core Project</componentVendor>
 						<componentCopyright>
 							Copyright 2010
-							Ubiquitous Knowledge Processing (UKP) Lab
+							Ubiquitous Knowledge Processing	(UKP) Lab
 							Technische Universität Darmstadt
 						</componentCopyright>
+						<failOnMissingMetaData>true</failOnMissingMetaData>
 					</configuration>
 					<executions>
 						<execution>
