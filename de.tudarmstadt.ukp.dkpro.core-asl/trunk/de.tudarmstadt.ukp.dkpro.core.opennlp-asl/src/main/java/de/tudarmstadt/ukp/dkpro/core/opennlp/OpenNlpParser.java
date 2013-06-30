@@ -23,12 +23,9 @@ import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Properties;
 
-import opennlp.model.AbstractModel;
 import opennlp.tools.parser.AbstractBottomUpParser;
 import opennlp.tools.parser.Parse;
 import opennlp.tools.parser.Parser;
@@ -52,12 +49,14 @@ import org.uimafit.util.FSCollectionFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpParserTagsetDescriptionProvider;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 
 /**
  * Parser annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
@@ -153,37 +152,7 @@ public class OpenNlpParser
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableStreamProviderBase<Parser>() {
-			{
-                setContextObject(OpenNlpParser.this);
-                
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-${language}-${variant}");
-
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"parser-${language}-${variant}.bin");
-				setDefault(VARIANT, "chunking");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
-			@Override
-			protected Parser produceResource(InputStream aStream)
-			    throws Exception
-			{
-				ParserModel model = new ParserModel(aStream);
-
-				if (printTagSet) {
-					printTags("tagger", model.getParserTaggerModel().getPosModel());
-					printTags("parser", model.getParserChunkerModel().getChunkerModel());
-				}
-
-				return ParserFactory.create(model);
-			}
-		};
+		modelProvider = new OpenNlpParserModelProvider();
 
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
@@ -195,7 +164,7 @@ public class OpenNlpParser
 		posMappingProvider.addImport("tagger.tagset", modelProvider);
 
 	}
-
+	
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
@@ -232,33 +201,6 @@ public class OpenNlpParser
 				pTree.addToIndexes();
 			}
 		}
-	}
-
-	private void printTags(String aType, AbstractModel aModel)
-	{
-		Set<String> tagSet = new HashSet<String>();
-		for (int i = 0; i < aModel.getNumOutcomes(); i++) {
-			String t = aModel.getOutcome(i);
-			if (t.startsWith("C-") || t.startsWith("S-")) {
-				tagSet.add(t.substring(2));
-			}
-			else {
-				tagSet.add(t);
-			}
-		}
-
-		List<String> tags = new ArrayList<String>(tagSet);
-		Collections.sort(tags);
-
-		StringBuilder sb = new StringBuilder();
-		sb.append("Model of " + aType + " contains [").append(tags.size()).append("] tags: ");
-
-		for (String tag : tags) {
-			sb.append(tag);
-			sb.append(" ");
-		}
-		getContext().getLogger().log(INFO, sb.toString());
-
 	}
 
 	/**
@@ -355,4 +297,41 @@ public class OpenNlpParser
 		}
 		throw new IllegalStateException("Token not found");
 	}
+
+    private class OpenNlpParserModelProvider
+        extends ModelProviderBase<Parser>
+    {
+        {
+            setContextObject(OpenNlpParser.this);
+
+            setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-parser-${language}-${variant}");
+            setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.bin");
+            setDefault(VARIANT, "chunking");
+
+            setOverride(LOCATION, modelLocation);
+            setOverride(LANGUAGE, language);
+            setOverride(VARIANT, variant);
+        }
+
+        @Override
+        protected Parser produceResource(InputStream aStream)
+            throws Exception
+        {
+            ParserModel model = new ParserModel(aStream);
+            Properties metadata = getResourceMetaData();
+
+            addTagset(new OpenNlpTagsetDescriptionProvider(
+                    metadata.getProperty("tagger.tagset"), POS.class, model.getParserTaggerModel()
+                            .getPosModel()));
+            addTagset(new OpenNlpParserTagsetDescriptionProvider(
+                    metadata.getProperty("constituent.type.tagset"), Constituent.class, model
+                            .getParserChunkerModel().getChunkerModel()));
+
+            if (printTagSet) {
+                getContext().getLogger().log(INFO, getTagset().toString());
+            }
+
+            return ParserFactory.create(model);
+        }
+    }
 }

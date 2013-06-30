@@ -29,7 +29,9 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -56,8 +58,11 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.TypeCapability;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
@@ -155,19 +160,17 @@ public class MaltParser
 			throw new ResourceInitializationException(e);
 		}
 
-		modelProvider = new CasConfigurableProviderBase<MaltParserService>() {
+		modelProvider = new ModelProviderBase<MaltParserService>() {
 			private MaltParserService parser;
 
 			{
 			    setContextObject(MaltParser.this);
 			    
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.maltparser-model-parser-${language}-${variant}");
+						"${groupId}.maltparser-model-parser-${language}-${variant}");
 				setDefault(VARIANT, "linear");
 
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/maltparser/lib/" +
-						"parser-${language}-${variant}.mco");
+				setDefault(LOCATION, "classpath:/${package}/maltparser/lib/parser-${language}-${variant}.mco");
 
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
@@ -223,30 +226,31 @@ public class MaltParser
 							+ " -m parse");
 					// parser.initializeParserModel("-u " + modelUrl.toString() + " -m parse");
 
-					if (printTagSet) {
-						PropertyAccessor paDirect = PropertyAccessorFactory.forDirectFieldAccess(parser);
-						SingleMalt singleMalt = (SingleMalt) paDirect.getPropertyValue("singleMalt");
+					
+	                Properties metadata = getResourceMetaData();
 
-						List<String> posTags = new ArrayList<String>();
-						SymbolTable posTagTable = singleMalt.getSymbolTables().getSymbolTable("POSTAG");
-						for (int i : posTagTable.getCodes()) {
-							posTags.add(posTagTable.getSymbolCodeToString(i));
-						}
-						Collections.sort(posTags);
+                    PropertyAccessor paDirect = PropertyAccessorFactory.forDirectFieldAccess(parser);
+                    SingleMalt singleMalt = (SingleMalt) paDirect.getPropertyValue("singleMalt");
 
-						getContext().getLogger().log(INFO, "Model expects [" + posTags.size() +
-								"] postags: "+StringUtils.join(posTags, " "));
+	                SingletonTagset posTags = new SingletonTagset(
+	                        POS.class, metadata.getProperty("pos.tagset"));
+                    SymbolTable posTagTable = singleMalt.getSymbolTables().getSymbolTable("POSTAG");
+                    for (int i : posTagTable.getCodes()) {
+                        posTags.add(posTagTable.getSymbolCodeToString(i));
+                    }
+	                addTagset(posTags);
 
-						List<String> depRels = new ArrayList<String>();
-						SymbolTable depRelTable = singleMalt.getSymbolTables().getSymbolTable("DEPREL");
-						for (int i : depRelTable.getCodes()) {
-							depRels.add(depRelTable.getSymbolCodeToString(i));
-						}
-						Collections.sort(depRels);
-
-						getContext().getLogger().log(INFO, "Model contains [" + depRels.size() +
-								"] tags: "+StringUtils.join(depRels, " "));
-					}
+	                SingletonTagset depTags = new SingletonTagset(
+	                        Dependency.class, metadata.getProperty("dependency.tagset"));
+                    SymbolTable depRelTable = singleMalt.getSymbolTables().getSymbolTable("DEPREL");
+                    for (int i : depRelTable.getCodes()) {
+                        depTags.add(depRelTable.getSymbolCodeToString(i));
+                    }
+	                addTagset(depTags);
+					
+	                if (printTagSet) {
+	                    getContext().getLogger().log(INFO, getTagset().toString());
+	                }
 
 					return parser;
 				}

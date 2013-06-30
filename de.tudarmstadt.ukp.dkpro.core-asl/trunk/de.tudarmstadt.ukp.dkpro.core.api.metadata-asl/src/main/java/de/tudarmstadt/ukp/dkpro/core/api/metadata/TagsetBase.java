@@ -22,21 +22,21 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * Abstract base class for {@link TagsetDescriptionProvider}s.
+ * Abstract base class for {@link Tagset}s.
  */
-public abstract class TagsetDescriptionProviderBase
-    implements TagsetDescriptionProvider
+public abstract class TagsetBase
+    implements Tagset
 {
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
 
-        Map<String, String> tagsets = getTagsets();
+        Map<String, String> layers = getLayers();
 
-        sb.append("There are [" + tagsets.size() + "] tagsets:");
+        sb.append("There are [" + layers.size() + "] layers:");
 
-        for (Entry<String, String> e : tagsets.entrySet()) {
+        for (Entry<String, String> e : layers.entrySet()) {
             if (sb.length() > 0) {
                 sb.append('\n');
             }

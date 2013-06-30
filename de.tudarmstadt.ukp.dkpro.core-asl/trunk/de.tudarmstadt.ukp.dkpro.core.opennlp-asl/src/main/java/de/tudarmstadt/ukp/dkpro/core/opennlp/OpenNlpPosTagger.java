@@ -23,8 +23,6 @@ import static org.uimafit.util.JCasUtil.selectCovered;
 import static org.uimafit.util.JCasUtil.toText;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import opennlp.tools.postag.POSModel;
@@ -42,12 +40,14 @@ import org.uimafit.descriptor.ConfigurationParameter;
 import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 
 /**
  * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
@@ -120,16 +120,12 @@ public class OpenNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableStreamProviderBase<POSTagger>() {
+		modelProvider = new ModelProviderBase<POSTagger>() {
 			{
                 setContextObject(OpenNlpPosTagger.this);
                 
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-${language}-${variant}");
-
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"tagger-${language}-${variant}.bin");
+                setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-tagger-${language}-${variant}");
+				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
 
 				setOverride(LOCATION, modelLocation);
@@ -143,21 +139,12 @@ public class OpenNlpPosTagger
 			{
 				POSModel model = new POSModel(aStream);
 
+                Tagset tsdp = new OpenNlpTagsetDescriptionProvider(getResourceMetaData()
+                        .getProperty("tagger.tagset"), POS.class, model.getPosModel());
+                addTagset(tsdp);
+
 				if (printTagSet) {
-					List<String> tags = new ArrayList<String>();
-					for (int i = 0; i < model.getPosModel().getNumOutcomes(); i++) {
-						tags.add(model.getPosModel().getOutcome(i));
-					}
-					Collections.sort(tags);
-
-					StringBuilder sb = new StringBuilder();
-					sb.append("Model contains [").append(tags.size()).append("] tags: ");
-
-					for (String tag : tags) {
-						sb.append(tag);
-						sb.append(" ");
-					}
-					getContext().getLogger().log(INFO, sb.toString());
+					getContext().getLogger().log(INFO, tsdp.toString());
 				}
 
 				return new POSTaggerME(model);

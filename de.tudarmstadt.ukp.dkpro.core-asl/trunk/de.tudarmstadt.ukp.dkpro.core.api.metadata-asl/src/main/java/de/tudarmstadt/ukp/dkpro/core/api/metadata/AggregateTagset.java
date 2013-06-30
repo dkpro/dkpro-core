@@ -24,35 +24,35 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Aggregator providing a unified access to multiple {@link TagsetDescriptionProvider}s. It is
+ * Aggregator providing a unified access to multiple {@link Tagset}s. It is
  * assumed that for each layer only a single deletate provider is responsible.
  */
-public class TagsetDescriptionAggregator
-    extends TagsetDescriptionProviderBase
+public class AggregateTagset
+    extends TagsetBase
 {
-    private List<TagsetDescriptionProvider> delegates = new ArrayList<TagsetDescriptionProvider>();
+    private List<Tagset> delegates = new ArrayList<Tagset>();
 
-    public TagsetDescriptionAggregator()
+    public AggregateTagset()
     {
         // Nothing to do.
     }
 
-    public TagsetDescriptionAggregator(TagsetDescriptionProvider... aProviders)
+    public AggregateTagset(Tagset... aProviders)
     {
-        for (TagsetDescriptionProvider p : aProviders) {
+        for (Tagset p : aProviders) {
             add(p);
         }
     }
 
-    public void add(TagsetDescriptionProvider aProvider)
+    public void add(Tagset aProvider)
     {
         delegates.add(aProvider);
     }
 
-    private TagsetDescriptionProvider getTagsetDelegate(String aLayerName)
+    private Tagset getTagsetDelegate(String aLayerName)
     {
-        for (TagsetDescriptionProvider provider : delegates) {
-            if (provider.getTagsets().containsKey(aLayerName)) {
+        for (Tagset provider : delegates) {
+            if (provider.getLayers().containsKey(aLayerName)) {
                 return provider;
             }
         }
@@ -61,12 +61,12 @@ public class TagsetDescriptionAggregator
     }
 
     @Override
-    public Map<String, String> getTagsets()
+    public Map<String, String> getLayers()
     {
         Map<String, String> tagsets = new HashMap<String, String>();
 
-        for (TagsetDescriptionProvider provider : delegates) {
-            tagsets.putAll(provider.getTagsets());
+        for (Tagset provider : delegates) {
+            tagsets.putAll(provider.getLayers());
         }
 
         return tagsets;

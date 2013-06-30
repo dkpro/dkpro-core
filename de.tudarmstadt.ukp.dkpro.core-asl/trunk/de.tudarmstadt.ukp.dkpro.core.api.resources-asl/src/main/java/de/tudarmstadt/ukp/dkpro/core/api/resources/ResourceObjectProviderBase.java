@@ -129,9 +129,11 @@ public abstract class ResourceObjectProviderBase<M>
      */
     public static final String VERSION = "version";
 
+    public static final String PACKAGE = "package";
+    
     private Properties resourceMetaData;
-    private String resourceUrl;
-    private String initialResourceUrl;
+    private URL resourceUrl;
+    private URL initialResourceUrl;
     private String lastModelLocation;
     private M resource;
 
@@ -148,6 +150,17 @@ public abstract class ResourceObjectProviderBase<M>
     private ExtensibleURLClassLoader loader = new ExtensibleURLClassLoader(getClass()
             .getClassLoader());
 
+    private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
+    
+    {
+        init();
+    }
+    
+    protected void init()
+    {
+        setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+    }
+    
     public void setOverride(String aKey, String aValue)
     {
         if (aValue == null) {
@@ -241,6 +254,7 @@ public abstract class ResourceObjectProviderBase<M>
     public void setContextObject(Object aObject)
     {
         contextObject = aObject;
+        setDefault(PACKAGE, aObject.getClass().getPackage().getName().replace('.', '/'));
     }
 
     /**
@@ -264,7 +278,6 @@ public abstract class ResourceObjectProviderBase<M>
 
         // Get the properties and resolve the artifact coordinates
         Properties props = getAggregatedProperties();
-        PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
         String modelArtifact = pph.replacePlaceholders(props.getProperty(ARTIFACT_ID), props);
         String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
 
@@ -358,7 +371,6 @@ public abstract class ResourceObjectProviderBase<M>
         if (props == null) {
             props = getAggregatedProperties();
         }
-        PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 
         try {
             return pph.replacePlaceholders(props.getProperty(LOCATION), props);
@@ -385,19 +397,20 @@ public abstract class ResourceObjectProviderBase<M>
     public void configure()
         throws IOException
     {
+        boolean success = false;
+        
         Properties props = getAggregatedProperties();
-
         String modelLocation = getModelLocation(props);
         boolean modelLocationChanged = !StringUtils.equals(modelLocation, lastModelLocation);
         lastModelLocation = modelLocation;
 
-        boolean success = false;
         try {
             if (NOT_REQUIRED.equals(modelLocation)) {
-                if (!StringUtils.equals(resourceUrl, modelLocation)) {
+                resourceUrl = null;
+                initialResourceUrl = null;
+                if (modelLocationChanged) {
                     log.info("Producing resource from thin air");
                     resource = produceResource(null);
-                    resourceUrl = modelLocation;
                 }
             }
             else {
@@ -413,8 +426,7 @@ public abstract class ResourceObjectProviderBase<M>
                         }
                         catch (Throwable re) {
                             // Ignore - if we cannot resolve, we cannot resolve. Re-throw the
-                            // original
-                            // exception
+                            // original exception
                             throw e;
                         }
 
@@ -425,73 +437,19 @@ public abstract class ResourceObjectProviderBase<M>
                         throw e;
                     }
                 }
-
-                if (!StringUtils.equals(initialResourceUrl, initialUrl.toString())) {
-                    URL url = initialUrl;
+                
+                if (!equals(initialResourceUrl, initialUrl)) {
+                    initialResourceUrl = initialUrl;
                     resourceMetaData = new Properties();
-
-                    // If the model points to a properties file, try to find a new location in that
-                    // file. If that points to a properties file again, repeat the process.
-                    while (modelLocation.endsWith(".properties")) {
-                        URL modelMetaDataUrl = resolveLocation(modelLocation, loader, null);
-                        Properties tmpResourceMetaData = PropertiesLoaderUtils
-                                .loadProperties(new UrlResource(modelMetaDataUrl));
-
-                        // Values in the redirecting properties override values in the redirected-to
-                        // properties - except LOCATION
-                        resourceMetaData.remove(LOCATION);
-                        mergeProperties(resourceMetaData, tmpResourceMetaData);
-
-                        modelLocation = resourceMetaData.getProperty(LOCATION);
-                        if (modelLocation == null) {
-                            throw new IOException("Model URL resolves to properties at ["
-                                    + modelMetaDataUrl + "] but no redirect property [" + LOCATION
-                                    + "] found there.");
-                        }
-                        url = resolveLocation(modelLocation, loader, null);
-                    }
-
-                    // Load resource meta data if present
-                    try {
-                        String baseLocation = modelLocation;
-                        if (baseLocation.toLowerCase().endsWith(".gz")) {
-                            baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
-                        }
-                        else if (baseLocation.toLowerCase().endsWith(".bz2")) {
-                            baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
-                        }
-
-                        String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
-                                + ".properties";
-                        URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
-                        Properties tmpResourceMetaData = PropertiesLoaderUtils
-                                .loadProperties(new UrlResource(modelMetaDataUrl));
-
-                        // Values in the redirecting properties override values in the redirected-to
-                        // properties.
-                        mergeProperties(resourceMetaData, tmpResourceMetaData);
-                    }
-                    catch (FileNotFoundException e) {
-                        // If no metadata was found, just leave the properties empty.
-                    }
-
-                    resourceUrl = url.toString();
-                    initialResourceUrl = initialUrl.toString();
-
-                    if (initialResourceUrl.equals(resourceUrl)) {
-                        log.info("Producing resource from " + url);
-                    }
-                    else {
-                        log.info("Producing resource from [" + url + "] redirected from ["
-                                + initialResourceUrl + "]");
-                    }
-                    resource = produceResource(url);
+                    resourceUrl = followRedirects(initialResourceUrl);
+                    loadMetadata();
+                    loadResource();
                 }
             }
             success = true;
         }
         catch (IOException e) {
-            throw handleResolvingError(e, modelLocation, props);
+            throw handleResolvingError(e, lastModelLocation, props);
         }
         finally {
             if (!success) {
@@ -499,6 +457,85 @@ public abstract class ResourceObjectProviderBase<M>
                 resource = null;
             }
         }
+    }
+    
+    private static boolean equals(URL aUrl1, URL aUrl2)
+    {
+        if (aUrl1 == aUrl2) {
+            return true;
+        }
+        
+        if (aUrl1 == null || aUrl2 == null) {
+            return false;
+        }
+        
+        return aUrl1.toString().equals(aUrl2.toString());
+    }
+    
+    protected URL followRedirects(URL aUrl) throws IOException
+    {
+        URL url = aUrl;
+        
+        // If the model points to a properties file, try to find a new location in that
+        // file. If that points to a properties file again, repeat the process.
+        while (url.getPath().endsWith(".properties")) {
+            Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
+                    url));
+
+            // Values in the redirecting properties override values in the redirected-to
+            // properties - except LOCATION
+            resourceMetaData.remove(LOCATION);
+            mergeProperties(resourceMetaData, tmpResourceMetaData);
+
+            String redirect = resourceMetaData.getProperty(LOCATION);
+            if (redirect == null) {
+                throw new IOException("Model URL resolves to properties at [" + url
+                        + "] but no redirect property [" + LOCATION + "] found there.");
+            }
+            url = resolveLocation(redirect, loader, null);
+        }
+        
+        return url;
+    }
+    
+    protected void loadMetadata() throws IOException
+    {
+        // Load resource meta data if present
+        try {
+            String baseLocation = resourceUrl.toString();
+            if (baseLocation.toLowerCase().endsWith(".gz")) {
+                baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
+            }
+            else if (baseLocation.toLowerCase().endsWith(".bz2")) {
+                baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
+            }
+
+            String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
+                    + ".properties";
+            URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
+            Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
+                    modelMetaDataUrl));
+
+            // Values in the redirecting properties override values in the redirected-to
+            // properties.
+            mergeProperties(resourceMetaData, tmpResourceMetaData);
+        }
+        catch (FileNotFoundException e) {
+            // If no metadata was found, just leave the properties empty.
+        }
+    }
+    
+    
+    protected void loadResource() throws IOException
+    {
+        if (initialResourceUrl.equals(resourceUrl)) {
+            log.info("Producing resource from " + resourceUrl);
+        }
+        else {
+            log.info("Producing resource from [" + resourceUrl + "] redirected from [" + initialResourceUrl
+                    + "]");
+        }
+        resource = produceResource(resourceUrl);
     }
 
     /**
@@ -511,7 +548,6 @@ public abstract class ResourceObjectProviderBase<M>
     {
         Set<String> names = aProps.stringPropertyNames();
         if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
-            PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
             String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
             String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
             String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
@@ -608,7 +644,6 @@ public abstract class ResourceObjectProviderBase<M>
 
         Set<String> names = aProps.stringPropertyNames();
         if (names.contains(ARTIFACT_ID) && names.contains(GROUP_ID)) {
-            PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
             String artifactId = pph.replacePlaceholders(aProps.getProperty(ARTIFACT_ID), aProps);
             String groupId = pph.replacePlaceholders(aProps.getProperty(GROUP_ID), aProps);
             String version = pph.replacePlaceholders(aProps.getProperty(VERSION, ""), aProps);
@@ -695,7 +730,8 @@ public abstract class ResourceObjectProviderBase<M>
         overriddenValues.putAll(overrides);
 
         if (defaultVariants == null && defaultVariantsLocation != null) {
-            setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(defaultVariantsLocation));
+            String dvl = pph.replacePlaceholders(defaultVariantsLocation, overriddenValues);
+            setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(dvl));
         }
 
         String language = overriddenValues.getProperty(LANGUAGE);

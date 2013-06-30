@@ -17,37 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
-import java.io.IOException;
-import java.util.Properties;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-
-public abstract class CasConfigurableProviderBase<M>
-    extends ResourceObjectProviderBase<M>
+/**
+ * Interface for objects that provide tagsets.
+ * 
+ * @author Richard Eckart de Castilho
+ */
+public interface HasTagsets
 {
-    private String language;
-
-    public void configure(CAS aCas)
-        throws AnalysisEngineProcessException
-    {
-        try {
-            language = aCas.getDocumentLanguage();
-            super.configure();
-        }
-        catch (IOException e) {
-            throw new AnalysisEngineProcessException(e);
-        }
-    }
-
-    @Override
-    protected Properties getProperties()
-    {
-        Properties props = new Properties();
-        if (language != null) {
-            props.setProperty(LANGUAGE, language);
-        }
-
-        return props;
-    }
+	Tagset getTagset();
 }
