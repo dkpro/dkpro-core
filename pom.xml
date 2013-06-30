@@ -50,6 +50,17 @@
 			</releases>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<!-- For uimaFIT 2.0.0-SNAPSHOT maven plugin -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
@@ -582,6 +593,8 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
 	</modules>
 	<build>
 		<plugins>
