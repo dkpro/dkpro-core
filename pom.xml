@@ -25,11 +25,20 @@
 	<packaging>pom</packaging>
 	<repositories>
 		<repository>
-			<id>ukp-oss-releases</id>
+			<id>ukp-oss-model-releases</id>
 			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<!-- For uimaFIT 2.0.0-SNAPSHOT -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
 		</repository>
 	</repositories>
 	<distributionManagement>
@@ -149,7 +158,6 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-			    <!--  
 				<plugin>
 					<groupId>org.apache.uima</groupId>
 					<artifactId>uimafit-maven-plugin</artifactId>
@@ -161,7 +169,7 @@
 							Ubiquitous Knowledge Processing (UKP) Lab
 							Technische Universität Darmstadt
 						</componentCopyright>
-						<failOnMissingMetaData>true</failOnMissingMetaData>
+						<failOnMissingMetaData>false</failOnMissingMetaData>
 					</configuration>
 					<executions>
 						<execution>
@@ -174,7 +182,7 @@
 						</execution>
 					</executions>
 					<dependencies>
-						<!- - Enable support for legacy annotations - ->
+						<!-- Enable support for legacy annotations -->
 						<dependency>
 							<groupId>org.apache.uima</groupId>
 							<artifactId>uimafit-legacy-support</artifactId>
@@ -187,7 +195,6 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-				-->
 			</plugins>
 		</pluginManagement>
 	</build>
