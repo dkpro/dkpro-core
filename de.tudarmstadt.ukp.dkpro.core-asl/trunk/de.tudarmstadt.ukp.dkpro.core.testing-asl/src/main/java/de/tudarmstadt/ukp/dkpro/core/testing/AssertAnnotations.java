@@ -268,6 +268,35 @@ public class AssertAnnotations
         }
     }
 
+    public static void assertSyntacticFunction(String[] aExpectedOriginal,
+            Collection<Constituent> aActual)
+    {
+        List<String> actualTagsList = new ArrayList<String>();
+
+        for (Constituent a : aActual) {
+            if (a.getSyntacticFunction() != null) {
+                actualTagsList.add(String.format("%s %d,%d", a.getSyntacticFunction(), a.getBegin(),
+                    a.getEnd()));
+            }
+        }
+
+        String[] actualTags = actualTagsList.toArray(new String[actualTagsList.size()]);
+        
+        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
+        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
+
+        if (aExpectedOriginal != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Syn. func. (orig.)",
+                    asCopyableString(sortedExpectedOriginal));
+            System.out.printf("%-20s - Actual  : %s%n", "Syn. func. (orig.)",
+                    asCopyableString(sortedActualOriginal));
+        }
+
+        if (aExpectedOriginal != null) {
+            assertEquals(asCopyableString(sortedExpectedOriginal, true),
+                    asCopyableString(sortedActualOriginal, true));
+        }
+    }
     public static <T extends Comparable<T>> List<T> deduplicateAndSort(Collection<T> aCollection)
     {
         if (aCollection == null) {
