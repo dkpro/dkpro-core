@@ -140,11 +140,27 @@ public class BerkeleyParserTest
 				"(ADVP (AD 尽可能)) (VP (VA 多)))) (DEC 的)) (NP (NN 句子成分) (CC 和) (NN 依存)) " +
 				"(NP (NN 性))))) (PU 。)))" };
 		
+        String[] posTags = new String[] { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG",
+                "DER", "DEV", "DT", "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN",
+                "NR", "NT", "OD", "ON", "P", "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV",
+                "X" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CLP", "CP", "DFL", "DNP", "DP",
+                "DVP", "FLR", "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT",
+                "UCP", "VCD", "VCP", "VNV", "VP", "VPT", "VRD", "VSB", "WHPP" };
+
+        String[] unmappedPos = new String[] { ".$$.", "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV",
+                "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "OD", "ON", "SB", "SP",
+                "URL", "VC", "X" };
+
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
 		AssertAnnotations.assertPennTree(pennTree[0], trees.get(0));
 		AssertAnnotations.assertPennTree(pennTree[1], trees.get(1));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "ctb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
 	}
 
 	@Test
@@ -172,9 +188,23 @@ public class BerkeleyParserTest
 				"(VP (VBZ contains) (NP (ADJP (IN as) (JJ many)) (NNS constituents) (CC and) " +
 				"(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
 
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
+                "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
+                "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "ROOT", "RP", "SYM", "TO",
+                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "RRC", "S", "SBAR",
+                "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+        
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "ROOT", "``" };
+
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
 	}
 
 	@Test
