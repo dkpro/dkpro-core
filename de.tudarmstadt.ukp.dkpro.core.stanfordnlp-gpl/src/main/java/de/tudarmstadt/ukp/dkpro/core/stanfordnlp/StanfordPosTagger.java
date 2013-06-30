@@ -17,10 +17,8 @@ import static org.uimafit.util.JCasUtil.selectCovered;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -31,9 +29,11 @@ import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ling.TaggedWord;
@@ -102,18 +102,15 @@ public class StanfordPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<MaxentTagger>() {
+		modelProvider = new ModelProviderBase<MaxentTagger>() {
 			{
 			    setContextObject(StanfordPosTagger.this);
 			    
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-${language}-${variant}");
-
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.stanfordnlp-model-tagger-${language}-${variant}");
+                setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
 				setDefaultVariantsLocation(
-						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"tagger-${language}-${variant}.properties");
+						"${package}/lib/tagger-default-variants.map");
 
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
@@ -125,17 +122,15 @@ public class StanfordPosTagger
             {
                 MaxentTagger tagger = new MaxentTagger(aUrl.toString());
                 
+                SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
+                        .getProperty(("pos.tagset")));
+                for (int i = 0; i < tagger.getTags().getSize(); i ++) {
+                    tags.add(tagger.getTags().getTag(i));
+                }
+                addTagset(tags);
+                
                 if (printTagSet) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Model contains [").append(tagger.getTags().getSize()).append("] tags: ");
-
-                    List<String> tags = new ArrayList<String>();
-                    for (int i = 0; i < tagger.getTags().getSize(); i ++) {
-                        tags.add(tagger.getTags().getTag(i));
-                    }
-                    Collections.sort(tags);
-                    sb.append(StringUtils.join(tags, " "));
-                    getContext().getLogger().log(INFO, sb.toString());
+                    getContext().getLogger().log(INFO, getTagset().toString());
                 }                   
                 
                 return tagger;
