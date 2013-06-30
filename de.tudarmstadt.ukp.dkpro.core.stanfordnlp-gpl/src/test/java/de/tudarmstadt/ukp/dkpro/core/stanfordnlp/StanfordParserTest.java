@@ -59,14 +59,16 @@ public class StanfordParserTest
         JCas jcas = runTest("de", "pcfg", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
-        String[] constituentMapped = new String[] { "ROOT 0,111", "S 0,111", "S 46,110",
-                "X 13,110", "X 17,35", "X 64,99", "X 70,99" };
+        String[] constituentMapped = new String[] { "NP 13,110", "NP 54,99", "ROOT 0,111",
+                "S 0,111", "S 46,110", "X 17,35", "X 54,69", "X 70,99" };
 
-        String[] constituentOriginal = new String[] { "AP 17,35", "CNP 70,99", "NP-OA 13,110",
-                "NP-SB 64,99", "ROOT 0,111", "S 0,111", "S 46,110" };
+        String[] constituentOriginal = new String[] { "AP 17,35", "AP 54,69", "CNP 70,99",
+                "NP 13,110", "NP 54,99", "ROOT 0,111", "S 0,111", "S 46,110" };
 
-        String[] posOriginal = new String[] { "PPER-SB", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
-                "PRELS-SB", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
+        String[] synFunc = new String[] { "OA 13,110", "SB 64,99" };
+
+        String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
+                "PRELS", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
                 "ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
@@ -93,17 +95,14 @@ public class StanfordParserTest
                 "TRUNC-SB", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN",
                 "VVIMP", "VVINF", "VVINF-SB", "VVIZU", "VVPP", "XY", "XY-SB" };
 
-        String[] constituentTags = new String[] { "AA", "AA-OA", "AP", "AP-OA", "AP-SB", "AVP",
-                "AVP-OA", "CAC", "CAP", "CAP-OA", "CAP-SB", "CAVP", "CCP", "CH", "CNP", "CNP-DA",
-                "CNP-OA", "CNP-SB", "CO", "CO-OA", "CO-SB", "CPP", "CPP-SBP", "CS", "CS-SB", "CVP",
-                "CVP-SB", "CVZ", "DL", "ISU", "ISU-OA", "MPN", "MPN-DA", "MPN-OA", "MPN-SB", "MTA",
-                "NM", "NM-OA", "NM-SB", "NP", "NP-DA", "NP-OA", "NP-OA2", "NP-SB", "NUR", "PP",
-                "PP-SB", "PP-SBP", "QL", "QL-OA", "ROOT", "S", "S-OA", "S-SB", "VP", "VP-OA",
-                "VP-SB", "VZ" };
+        String[] constituentTags = new String[] { "AA", "AP", "AVP", "CAC", "CAP", "CAVP", "CCP",
+                "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA", "NM",
+                "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
+        AssertAnnotations.assertSyntacticFunction(synFunc, select(jcas, Constituent.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
@@ -118,16 +117,16 @@ public class StanfordParserTest
                 "Wir brauchen ein sehr kompliziertes Beispiel, welches "
                         + "möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
-        String[] constituentMapped = new String[] { "ROOT 0,111", "S 0,111", "S 46,110",
-                "X 13,110", "X 17,35", "X 54,69", "X 54,99", "X 70,99" };
+        String[] constituentMapped = new String[] { "NP 13,110", "NP 54,99", "ROOT 0,111",
+                "S 0,111", "S 46,110", "X 17,35", "X 54,69", "X 70,99" };
 
         String[] constituentOriginal = new String[] { "AP 17,35", "AP 54,69", "CNP 70,99",
-                "NP-DA 54,99", "NP-OA 13,110", "ROOT 0,111", "S 0,111", "S 46,110" };
+                "NP 13,110", "NP 54,99", "ROOT 0,111", "S 0,111", "S 46,110" };
 
-        String[] posOriginal = new String[] { "PPER-SB", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
-                "PRELS-SB", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
+        String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
+                "PRELS", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
+      String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
                 "ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
 
         String[] dependencies = new String[] {/** No dependencies for German */
@@ -242,7 +241,7 @@ public class StanfordParserTest
         String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
-        
+
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
@@ -269,10 +268,10 @@ public class StanfordParserTest
         String[] posOriginal = new String[] { "``", "PRP", "VBZ", "JJ", "JJ", ",", "''", "PRP",
                 "VBD", ",", "``", "CC", "PRP", "VBZ", "VBG", "TO", "NN", ".", "''" };
 
-        String pennTree = "(ROOT (S (`` \") (S (NP (PRP It)) (VP (VBZ 's) (ADJP (JJ cold)) (S " +
-        		"(ADJP (JJ outside))))) (PRN (, ,) ('' \") (S (NP (PRP he)) (VP (VBD said))) (, " +
-        		",) (`` \")) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP " +
-        		"(TO to) (NP (NN rain)))))) (. .) ('' \")))";
+        String pennTree = "(ROOT (S (`` \") (S (NP (PRP It)) (VP (VBZ 's) (ADJP (JJ cold)) (S "
+                + "(ADJP (JJ outside))))) (PRN (, ,) ('' \") (S (NP (PRP he)) (VP (VBD said))) (, "
+                + ",) (`` \")) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP "
+                + "(TO to) (NP (NN rain)))))) (. .) ('' \")))";
 
         AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -295,10 +294,10 @@ public class StanfordParserTest
         String[] posOriginal = new String[] { "``", "PRP", "VBZ", "JJ", "JJ", ",", "''", "PRP",
                 "VBD", ",", "``", "CC", "PRP", "VBZ", "VBG", "TO", "NN", ".", "''" };
 
-        String pennTree = "(ROOT (S (`` ‘) (S (NP (PRP It)) (VP (VBZ 's) (ADJP (JJ cold)) (S " +
-        		"(ADJP (JJ outside))))) (PRN (, ,) ('' ’) (S (NP (PRP he)) (VP (VBD said))) " +
-        		"(, ,) (`` ‘)) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP " +
-        		"(TO to) (NP (NN rain)))))) (. .) ('' ’)))";
+        String pennTree = "(ROOT (S (`` ‘) (S (NP (PRP It)) (VP (VBZ 's) (ADJP (JJ cold)) (S "
+                + "(ADJP (JJ outside))))) (PRN (, ,) ('' ’) (S (NP (PRP he)) (VP (VBD said))) "
+                + "(, ,) (`` ‘)) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP "
+                + "(TO to) (NP (NN rain)))))) (. .) ('' ’)))";
 
         AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -308,7 +307,7 @@ public class StanfordParserTest
     public void testFrenchFactored()
         throws Exception
     {
-        //Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+        // Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
         JCas jcas = runTest("fr", "factored", "Nous avons besoin d'une phrase par exemple très "
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
@@ -358,7 +357,7 @@ public class StanfordParserTest
         AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
     }
 
-    //@Ignore("Dependency types not yet mapped")
+    // @Ignore("Dependency types not yet mapped")
     @Test
     public void testChineseFactored()
         throws Exception
@@ -388,10 +387,10 @@ public class StanfordParserTest
         String[] posOriginal = new String[] { "PN", "VV", "CD", "AD", "JJ", "DEG", "NN", "AD",
                 "NN", "VV", "CD", "NN", "CC", "AD", "DEV", "VV", "PU" };
 
-        String pennTree = "(ROOT (IP (IP (NP (PN 我们)) (VP (VV 需要) (NP (QP (CD 一个)) (DNP " +
-        		"(ADJP (ADVP (AD 非常)) (ADJP (JJ 复杂))) (DEG 的)) (NP (NN 句子))))) (IP (ADVP " +
-        		"(AD 例如)) (NP (NN 其中)) (VP (VP (VV 包含) (NP (QP (CD 许多)) (NP (NN 成分)))) " +
-        		"(CC 和) (VP (DVP (ADVP (AD 尽可能)) (DEV 的)) (VP (VV 依赖))))) (PU 。)))";
+        String pennTree = "(ROOT (IP (IP (NP (PN 我们)) (VP (VV 需要) (NP (QP (CD 一个)) (DNP "
+                + "(ADJP (ADVP (AD 非常)) (ADJP (JJ 复杂))) (DEG 的)) (NP (NN 句子))))) (IP (ADVP "
+                + "(AD 例如)) (NP (NN 其中)) (VP (VP (VV 包含) (NP (QP (CD 许多)) (NP (NN 成分)))) "
+                + "(CC 和) (VP (DVP (ADVP (AD 尽可能)) (DEV 的)) (VP (VV 依赖))))) (PU 。)))";
 
         String[] posTags = new String[] { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG",
                 "DER", "DEV", "DT", "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN",
@@ -416,7 +415,7 @@ public class StanfordParserTest
         AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
     }
 
-    //@Ignore("Currently fails an assertion in StanfordAnnotator:188 - need to investigate")
+    // @Ignore("Currently fails an assertion in StanfordAnnotator:188 - need to investigate")
     @Test
     public void testArabicFactored()
         throws Exception

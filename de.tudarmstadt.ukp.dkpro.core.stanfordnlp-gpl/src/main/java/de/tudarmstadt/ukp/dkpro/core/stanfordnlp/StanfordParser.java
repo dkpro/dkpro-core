@@ -539,7 +539,9 @@ public class StanfordParser
                             t = t.substring(0, gfIdx);
                         }
                         
-                        constTags.add(t);
+                        if (t.length() > 0) {
+                            constTags.add(t);
+                        }
                     }
                 }
                 constTags.removeAll(posTags);
