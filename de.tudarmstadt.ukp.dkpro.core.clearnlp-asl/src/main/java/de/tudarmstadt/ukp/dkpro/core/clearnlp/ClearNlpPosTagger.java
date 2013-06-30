@@ -18,21 +18,13 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 import static org.uimafit.util.JCasUtil.toText;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -51,9 +43,11 @@ import com.googlecode.clearnlp.nlp.NLPDecode;
 import com.googlecode.clearnlp.nlp.NLPLib;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -124,16 +118,12 @@ public class ClearNlpPosTagger
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<CPOSTagger>() {
+		modelProvider = new ModelProviderBase<CPOSTagger>() {
 			{
 			    setContextObject(ClearNlpPosTagger.this);
 			    
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-tagger-${language}-${variant}");
-
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/" +
-						"tagger-${language}-${variant}.bin");
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-tagger-${language}-${variant}");
+				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, modelLocation);
@@ -142,45 +132,24 @@ public class ClearNlpPosTagger
 			}
 
 			@Override
-			protected CPOSTagger produceResource(URL aUrl) throws IOException
+			protected CPOSTagger produceResource(InputStream aStream)
+			    throws Exception
 			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					CPOSTagger tagger = (CPOSTagger) EngineGetter.getComponent(is,
-							getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_POS);
+                CPOSTagger tagger = (CPOSTagger) EngineGetter.getComponent(aStream,
+                        getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_POS);
 
-					if (printTagSet) {
-						Set<String> tagSet = new HashSet<String>();
+                SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
+                        .getProperty(("pos.tagset")));
+                for (StringModel model : tagger.getModels()) {
+                    tags.addAll(asList(model.getLabels()));
+                }
+                addTagset(tags, true);
+                
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, getTagset().toString());
+                }                   
 
-						for (StringModel model : tagger.getModels()) {
-							tagSet.addAll(asList(model.getLabels()));
-						}
-
-						List<String> tagList = new ArrayList<String>(tagSet);
-						Collections.sort(tagList);
-
-						StringBuilder sb = new StringBuilder();
-						sb.append("Model contains [").append(tagList.size()).append("] tags: ");
-
-						for (String tag : tagList) {
-							sb.append(tag);
-							sb.append(" ");
-						}
-						getContext().getLogger().log(INFO, sb.toString());
-					}
-
-					return tagger;
-				}
-				catch (IOException e) {
-					throw e;
-				}
-				catch (Exception e) {
-					throw new IOException(e);
-				}
-				finally {
-					closeQuietly(is);
-				}
+                return tagger;
 			}
 		};
 

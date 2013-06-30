@@ -23,12 +23,12 @@ import java.util.Set;
 /**
  * API for getting tagset information.
  */
-public interface TagsetDescriptionProvider
+public interface Tagset
 {
     /**
      * Get a map (key-value pairs) using the layer name as key and the tagset as value. 
      */
-    Map<String, String> getTagsets();
+    Map<String, String> getLayers();
     
     Set<String> listTags(String aLayer, String aTagsetName);
 }

@@ -23,7 +23,6 @@ import static org.uimafit.util.JCasUtil.toText;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinder;
@@ -39,12 +38,14 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 
 /**
  * OpenNLP name finder wrapper.
@@ -122,20 +123,10 @@ public class OpenNlpNameFinder
                 TokenNameFinderModel model = new TokenNameFinderModel(aStream);
 
                 if (printTagSet) {
-                    List<String> tags = new ArrayList<String>();
-                    for (int i = 0; i < model.getNameFinderModel().getNumOutcomes(); i++) {
-                        tags.add(model.getNameFinderModel().getOutcome(i));
-                    }
-                    Collections.sort(tags);
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("Model contains [").append(tags.size()).append("] tags: ");
-
-                    for (String tag : tags) {
-                        sb.append(tag);
-                        sb.append(" ");
-                    }
-                    getContext().getLogger().log(INFO, sb.toString());
+                    String tagsetName = getResourceMetaData().getProperty("tagger.tagset");
+                    Tagset tsdp = new OpenNlpTagsetDescriptionProvider(
+                            tagsetName, NamedEntity.class, model.getNameFinderModel());
+                    getContext().getLogger().log(INFO, tsdp.toString());
                 }
 
                 return new NameFinderME(model);

@@ -17,9 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
+import static java.util.Arrays.asList;
+import static org.apache.uima.util.Level.INFO;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.selectCovered;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +39,10 @@ import org.uimafit.descriptor.TypeCapability;
 
 import LBJ2.nlp.Word;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
@@ -69,10 +75,18 @@ public class LbjPosTagger
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
 	private boolean internTags;
 
-    private POSTagger tagger;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+    protected boolean printTagSet;
 
+    private ModelProviderBase<POSTagger> taggerProvider;
+    
     private MappingProvider mappingProvider;
-
 
     @Override
     public void initialize(UimaContext context)
@@ -80,8 +94,32 @@ public class LbjPosTagger
     {
         super.initialize(context);
 
-        tagger = new POSTagger();
+        taggerProvider = new ModelProviderBase<POSTagger>() {
+            {
+                setContextObject(LbjPosTagger.this);
+                setDefault(LOCATION, NOT_REQUIRED);
+            }
 
+            @Override
+            protected POSTagger produceResource(URL aUrl) throws IOException
+            {
+                if (!"en".equals(getAggregatedProperties().getProperty(LANGUAGE))) {
+                    throw new IllegalArgumentException("Only language [en] is supported");
+                }
+                
+                SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
+                tags.addAll(asList(LBJ2.nlp.POS.tokens));
+                addTagset(tags);
+                
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, getTagset().toString());
+                }                   
+                
+                return new POSTagger();
+            }
+            
+        };
+        
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
                 "core/api/lexmorph/tagset/en-ptb-pos.map");
@@ -94,6 +132,7 @@ public class LbjPosTagger
     {
     	CAS cas = aJCas.getCas();
 
+    	taggerProvider.configure(cas);
         mappingProvider.configure(cas);
 
         for (Sentence s : select(aJCas, Sentence.class)) {
@@ -113,7 +152,7 @@ public class LbjPosTagger
             int i = 0;
             for (LBJ2.nlp.seg.Token t : tokens) {
             	// Run tagger
-                String tag = tagger.discreteValue(t);
+                String tag = taggerProvider.getResource().discreteValue(t);
 
                 // Convert tagger output to CAS
 				Type posTag = mappingProvider.getTagType(tag);

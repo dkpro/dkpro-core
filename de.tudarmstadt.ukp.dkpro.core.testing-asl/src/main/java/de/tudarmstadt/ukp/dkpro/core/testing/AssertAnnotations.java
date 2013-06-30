@@ -23,15 +23,26 @@ import static org.apache.commons.lang.StringUtils.normalizeSpace;
 import static org.junit.Assert.assertEquals;
 import static org.uimafit.util.JCasUtil.select;
 import static org.uimafit.util.JCasUtil.toText;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
+import junit.framework.Assert;
+
+import org.apache.uima.jcas.JCas;
+import org.codehaus.plexus.util.StringUtils;
+
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
@@ -131,6 +142,25 @@ public class AssertAnnotations
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
+    public static void assertMorpheme(String[] aExpected, Collection<Morpheme> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
+
+        List<String> expected = asList(aExpected);
+        List<String> actual = new ArrayList<String>();
+
+        for (Morpheme a : aActual) {
+            actual.add(a.getMorphTag());
+        }
+
+        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
+
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+
     public static void assertStem(String[] aExpected, Collection<Stem> aActual)
     {
         if (aExpected == null) {
@@ -171,16 +201,16 @@ public class AssertAnnotations
         List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
         if (aExpectedOriginal != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Constituents (original)",
+            System.out.printf("%-20s - Expected: %s%n", "Named entities (orig.)",
                     asCopyableString(sortedExpectedOriginal));
-            System.out.printf("%-20s - Actual  : %s%n", "Constituents (original)",
+            System.out.printf("%-20s - Actual  : %s%n", "Named entities (orig.)",
                     asCopyableString(sortedActualOriginal));
         }
 
         if (aExpectedMapped != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Named entities (mapped)",
+            System.out.printf("%-20s - Expected: %s%n", "Named entities (map.)",
                     asCopyableString(sortedExpectedMapped));
-            System.out.printf("%-20s - Actual  : %s%n", "Named entities (mapped)",
+            System.out.printf("%-20s - Actual  : %s%n", "Named entities (map.)",
                     asCopyableString(sortedActualMapped));
         }
 
@@ -215,16 +245,16 @@ public class AssertAnnotations
         List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
         if (aExpectedOriginal != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Constituents (original)",
+            System.out.printf("%-20s - Expected: %s%n", "Constituents (orig.)",
                     asCopyableString(sortedExpectedOriginal));
-            System.out.printf("%-20s - Actual  : %s%n", "Constituents (original)",
+            System.out.printf("%-20s - Actual  : %s%n", "Constituents (orig.)",
                     asCopyableString(sortedActualOriginal));
         }
 
         if (aExpectedMapped != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Constituents (mapped)",
+            System.out.printf("%-20s - Expected: %s%n", "Constituents (map.)",
                     asCopyableString(sortedExpectedMapped));
-            System.out.printf("%-20s - Actual  : %s%n", "Constituents (mapped)",
+            System.out.printf("%-20s - Actual  : %s%n", "Constituents (map.)",
                     asCopyableString(sortedActualMapped));
         }
 
@@ -275,8 +305,8 @@ public class AssertAnnotations
         String expected = normalizeSpace(aExpected);
         String actual = normalizeSpace(aActual != null ? aActual.getPennTree() : "<none>");
 
-        System.out.printf("%-20s - Expected: %s%n", "Penn tree", expected);
-        System.out.printf("%-20s - Actual  : %s%n", "Penn tree", actual);
+        System.out.printf("%-20s - Expected: \"%s\"%n", "Penn tree", expected);
+        System.out.printf("%-20s - Actual  : \"%s\"%n", "Penn tree", actual);
 
         assertEquals(expected, actual);
     }
@@ -318,6 +348,103 @@ public class AssertAnnotations
                 .printf("%-20s - Actual  : %s%n", "Semantic predicates", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+
+    public static void assertTagset(Class<?> aLayer, String aName, String[] aExpected, JCas aJCas)
+    {
+        List<String> expected = new ArrayList<String>(asList(aExpected));
+        Collections.sort(expected);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (TagsetDescription tsd : select(aJCas, TagsetDescription.class)) {
+            sb.append('\t');
+            sb.append(tsd.getLayer());
+            sb.append(" - ");
+            sb.append(tsd.getName());
+            sb.append('\n');
+
+            if (StringUtils.equals(aLayer.getName(), tsd.getLayer())
+                    && StringUtils.equals(aName, tsd.getName())) {
+                List<String> actual = new ArrayList<String>();
+                for (TagDescription td : select(tsd.getTags(), TagDescription.class)) {
+                    actual.add(td.getName());
+                }
+
+                Collections.sort(actual);
+
+                System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
+                System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s - Expected: %s%n", "Tags", asCopyableString(expected));
+                System.out.printf("%-20s - Actual  : %s%n", "Tags", asCopyableString(actual));
+
+                assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+                return;
+            }
+        }
+
+        System.out.println("The CAS does not containg a description for layer [" + aLayer.getName()
+                + "] tagset [" + aName + "]");
+        System.out.println("What has been found is:\n" + sb);
+        fail("No tagset definition found for layer [" + aLayer.getName() + "] tagset [" + aName
+                + "]");
+    }
+
+    public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped, JCas aJCas)
+    {
+        MappingProvider mp = new MappingProvider();
+        mp.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
+        mp.setDefault("pos.tagset", aName);
+        mp.configure(aJCas.getCas());
+
+        Map<String, String> mapping = mp.getResource();
+        Assert.assertNotNull("No mapping found for layer [" + aLayer.getName()
+                + "] tagset [" + aName + "]", mapping);
+        
+        
+        List<String> expected = new ArrayList<String>(asList(aDefaultMapped));
+        Collections.sort(expected);
+        
+        List<String> mappedTags = new ArrayList<String>(mapping.keySet());
+        Collections.sort(mappedTags);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (TagsetDescription tsd : select(aJCas, TagsetDescription.class)) {
+            sb.append('\t');
+            sb.append(tsd.getLayer());
+            sb.append(" - ");
+            sb.append(tsd.getName());
+            sb.append('\n');
+
+            if (StringUtils.equals(aLayer.getName(), tsd.getLayer())
+                    && StringUtils.equals(aName, tsd.getName())) {
+                List<String> actual = new ArrayList<String>();
+                for (TagDescription td : select(tsd.getTags(), TagDescription.class)) {
+                    actual.add(td.getName());
+                }
+
+                Collections.sort(actual);
+                
+                // Keep only the unmapped tags
+                actual.removeAll(mappedTags);
+                
+                System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
+                System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s - Expected: %s%n", "Unmapped tags", asCopyableString(expected));
+                System.out.printf("%-20s - Actual  : %s%n", "Unmapped tags", asCopyableString(actual));
+
+                assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+                return;
+            }
+        }
+
+        System.out.println("The CAS does not containg a description for layer [" + aLayer.getName()
+                + "] tagset [" + aName + "]");
+        System.out.println("What has been found is:\n" + sb);
+        fail("No tagset definition found for layer [" + aLayer.getName() + "] tagset [" + aName
+                + "]");
     }
 
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
