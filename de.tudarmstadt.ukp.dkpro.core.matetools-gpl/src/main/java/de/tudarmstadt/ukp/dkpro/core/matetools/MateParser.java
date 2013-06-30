@@ -10,16 +10,20 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
+import static org.apache.uima.util.Level.INFO;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
+import is2.parser.MFO;
 import is2.parser.Options;
 import is2.parser.Parser;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -28,10 +32,14 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.component.JCasAnnotator_ImplBase;
 import org.uimafit.descriptor.ConfigurationParameter;
+import org.uimafit.descriptor.TypeCapability;
 import org.uimafit.util.JCasUtil;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -50,7 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
- * <li>Lemma</li>
  * <li>POS</li>
  * </ul>
  * 
@@ -62,6 +69,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * 
  * @author AnNa, zesch
  */
+@TypeCapability(
+        inputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
+        outputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class MateParser
 	extends JCasAnnotator_ImplBase
 {
@@ -86,6 +100,15 @@ public class MateParser
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
+    
 	private CasConfigurableProviderBase<Parser> modelProvider;
 
 	@Override
@@ -94,18 +117,15 @@ public class MateParser
 	{
 		super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<Parser>()
+		modelProvider = new ModelProviderBase<Parser>()
 		{
 			{
 				setContextObject(MateParser.this);
 
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-parser-${language}-${variant}");
-
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/matetools/lib/"
-						+ "parser-${language}-${variant}.model");
-				setDefault(VARIANT, "crosstrain");
+						"${groupId}matetools-model-parser-${language}-${variant}");
+				setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.model");
+                setDefaultVariantsLocation("${package}/lib/parser-default-variants.map");
 
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
@@ -120,7 +140,28 @@ public class MateParser
 
 				String[] args = { "-model", modelFile.getPath() };
 				Options option = new Options(args);
-				return new Parser(option); // create a parser
+				Parser parser = new Parser(option); // create a parser
+				
+				Properties metadata = getResourceMetaData();
+				
+				HashMap<String, HashMap<String, Integer>> featureSet = MFO.getFeatureSet();
+                SingletonTagset posTags = new SingletonTagset(
+                        POS.class, metadata.getProperty("pos.tagset"));
+                HashMap<String, Integer> posTagFeatures = featureSet.get("POS");
+                posTags.addAll(posTagFeatures.keySet());
+                addTagset(posTags);
+
+                SingletonTagset depTags = new SingletonTagset(
+                        Dependency.class, metadata.getProperty("dependency.tagset"));
+                HashMap<String, Integer> depTagFeatures = featureSet.get("REL");
+                depTags.addAll(depTagFeatures.keySet());
+                addTagset(depTags);
+
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, getTagset().toString());
+                }
+
+				return parser;
 			}
 		};
 	}
@@ -140,18 +181,18 @@ public class MateParser
 			forms.add(CONLLReader09.ROOT);
 			forms.addAll(JCasUtil.toText(tokens));
 
-			List<String> lemmas = new LinkedList<String>();
+//			List<String> lemmas = new LinkedList<String>();
 			List<String> posTags = new LinkedList<String>();
-			lemmas.add(CONLLReader09.ROOT_LEMMA);
+//			lemmas.add(CONLLReader09.ROOT_LEMMA);
 			posTags.add(CONLLReader09.ROOT_POS);
 			for (Token token : tokens) {
-				lemmas.add(token.getLemma().getValue());
+//				lemmas.add(token.getLemma().getValue());
 				posTags.add(token.getPos().getPosValue());
 			}
 
 			SentenceData09 sd = new SentenceData09();
 			sd.init(forms.toArray(new String[0]));
-			sd.setLemmas(lemmas.toArray(new String[0]));
+//			sd.setLemmas(lemmas.toArray(new String[0]));
 			sd.setPPos(posTags.toArray(new String[0]));
 			SentenceData09 parsed = modelProvider.getResource().apply(sd);
 

@@ -10,12 +10,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
@@ -25,47 +22,52 @@ import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateLemmatizerTest
 {
-	@Test
-	public void testGerman()
-		throws Exception
-	{
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
-				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
-				"Dependenz", "beinhalten", "--" };
+        String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
+                "beispiel", "--", "welcher", "möglichst", "vieler", "konstituent", "und",
+                "dependenz", "beinhalten", "--" };
 
-		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-	}
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+    }
 
-	private JCas runTest(String aLanguage, String aText)
-		throws Exception
-	{
-		AnalysisEngineDescription seg = createPrimitiveDescription(BreakIteratorSegmenter.class);
-		AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .");
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(seg, lemma);
+        String[] lemmas = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
 
-		AnalysisEngine engine = createPrimitive(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+    }
 
-		return jcas;
-	}
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
+        AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
 
-	@Rule
-	public TestName name = new TestName();
+        return TestRunner.runTest(lemma, aLanguage, aText);
+    }
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

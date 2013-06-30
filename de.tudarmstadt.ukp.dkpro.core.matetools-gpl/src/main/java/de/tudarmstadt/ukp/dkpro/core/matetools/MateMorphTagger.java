@@ -33,6 +33,7 @@ import org.uimafit.util.JCasUtil;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -58,107 +59,106 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @author AnNa, zesch
  */
 public class MateMorphTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	private CasConfigurableProviderBase<Tagger> modelProvider;
+    private CasConfigurableProviderBase<Tagger> modelProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<Tagger>()
-		{
-			{
-				setContextObject(MateMorphTagger.this);
+        modelProvider = new ModelProviderBase<Tagger>()
+        {
+            {
+                setContextObject(MateMorphTagger.this);
 
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-morphtagger-${language}-${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}.matetools-model-morphtagger-${language}-${variant}");
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/morphtagger-${language}-${variant}.model");
+                setDefaultVariantsLocation("${package}/lib/morphtagger-default-variants.map");
 
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/matetools/lib/"
-						+ "morphtagger-${language}-${variant}.model");
+                setDefault(VARIANT, "default");
 
-				setDefault(VARIANT, "default");
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+            @Override
+            protected Tagger produceResource(URL aUrl)
+                throws IOException
+            {
+                File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
-			@Override
-			protected Tagger produceResource(URL aUrl)
-				throws IOException
-			{
-				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+                String[] args = { "-model", modelFile.getPath() };
+                Options option = new Options(args);
+                return new Tagger(option); // create a MorphTagger
+            }
+        };
 
-				String[] args = { "-model", modelFile.getPath() };
-				Options option = new Options(args);
-				return new Tagger(option); // create a MorphTagger
-			}
-		};
+    }
 
-	}
+    @Override
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = jcas.getCas();
 
-	@Override
-	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = jcas.getCas();
+        modelProvider.configure(cas);
 
-		modelProvider.configure(cas);
+        try {
+            for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+                List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
 
-		try {
-			for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
-				List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
+                List<String> forms = new LinkedList<String>();
+                forms.add(CONLLReader09.ROOT);
+                forms.addAll(JCasUtil.toText(tokens));
 
-				List<String> forms = new LinkedList<String>();
-				forms.add(CONLLReader09.ROOT);
-				forms.addAll(JCasUtil.toText(tokens));
+                List<String> lemmas = new LinkedList<String>();
+                lemmas.add(CONLLReader09.ROOT_LEMMA);
+                for (Token token : tokens) {
+                    lemmas.add(token.getLemma().getValue());
+                }
 
-				List<String> lemmas = new LinkedList<String>();
-				lemmas.add(CONLLReader09.ROOT_LEMMA);
-				for (Token token : tokens) {
-					lemmas.add(token.getLemma().getValue());
-				}
+                SentenceData09 sd = new SentenceData09();
+                sd.init(forms.toArray(new String[0]));
+                sd.setLemmas(lemmas.toArray(new String[0]));
+                String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
 
-				SentenceData09 sd = new SentenceData09();
-				sd.init(forms.toArray(new String[0]));
-				sd.setLemmas(lemmas.toArray(new String[0]));
-				String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
-
-				for (int i = 1; i < morphTags.length; i++) {
-					Token token = tokens.get(i - 1);
-					Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
-					morpheme.setMorphTag(morphTags[i]);
-					morpheme.addToIndexes();
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+                for (int i = 1; i < morphTags.length; i++) {
+                    Token token = tokens.get(i - 1);
+                    Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
+                    morpheme.setMorphTag(morphTags[i]);
+                    morpheme.addToIndexes();
+                }
+            }
+        }
+        catch (Exception e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 }

@@ -10,74 +10,84 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MatePosTaggerTest
 {
-	@Test
-	public void testGerman()
-		throws Exception
-	{
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
-				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
+        String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
+                "PRELS", "ADV", "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
-				"Dependenz", "beinhalten", "--" };
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
+                "ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
 
-		String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
-				"PRELS", "ADV", "PIAT", "NN", "KON", "NN", "VVFIN", "$." };
+        String[] posTags = new String[] { "$(", "$,", "$.", "<None>", "<root-POS>", "ADJA", "ADJD",
+                "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "END", "FM", "ITJ",
+                "KOKOM", "KON", "KOUI", "KOUS", "MID", "NE", "NN", "NNE", "PDAT", "PDS", "PIAT",
+                "PIS", "PPER", "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA",
+                "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "STPOS", "STR",
+                "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN",
+                "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
-		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
-				"ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
+    }
 
-		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-	}
+    @Test
+    public void testEnglish()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
+                "contains as many constituents and dependencies as possible .");
 
-	private JCas runTest(String aLanguage, String aText)
-		throws Exception
-	{
-		AnalysisEngineDescription seg = createPrimitiveDescription(BreakIteratorSegmenter.class);
-		AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
-		AnalysisEngineDescription posTag = createPrimitiveDescription(MatePosTagger.class);
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
+                "WDT", "VBZ", "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(seg, lemma, posTag);
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
+                "ART", "V", "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
-		AnalysisEngine engine = createPrimitive(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
+        String[] posTags = new String[] { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
+                "<root-POS>", "CC", "CD", "DT", "END", "EX", "FW", "HYPH", "IN", "JJ", "JJR",
+                "JJS", "LS", "MD", "MID", "NIL", "NN", "NNP", "NNPS", "NNS", "PDT", "POS", "PRF",
+                "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "STPOS", "STR", "SYM", "TO", "UH", "VB",
+                "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+        
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+    }
 
-		return jcas;
-	}
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
+        AnalysisEngineDescription posTag = createPrimitiveDescription(MatePosTagger.class);
 
-	@Rule
-	public TestName name = new TestName();
+        return TestRunner.runTest(posTag, aLanguage, aText);
+    }
 
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

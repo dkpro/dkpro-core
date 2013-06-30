@@ -32,6 +32,7 @@ import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -58,94 +59,92 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @author zesch
  */
 public class MateLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = "variant";
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = "variant";
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	private CasConfigurableProviderBase<Lemmatizer> modelProvider;
+    private CasConfigurableProviderBase<Lemmatizer> modelProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<Lemmatizer>()
-		{
-			{
-				setContextObject(MateLemmatizer.this);
+        modelProvider = new ModelProviderBase<Lemmatizer>()
+        {
+            {
+                setContextObject(MateLemmatizer.this);
 
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core-nonfree-model-lemmatizer-${language}-${variant}");
+                setDefault(ARTIFACT_ID,
+                        "${groupId}-matetools-model-lemmatizer-${language}-${variant}");
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/lemmatizer-${language}-${variant}.model");
+                setDefaultVariantsLocation("${package}/lib/lemmatizer-default-variants.map");
 
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/matetools/lib/"
-						+ "lemmatizer-${language}-${variant}.model");
-				setDefault(VARIANT, "default");
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+            @Override
+            protected Lemmatizer produceResource(URL aUrl)
+                throws IOException
+            {
+                File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
-			@Override
-			protected Lemmatizer produceResource(URL aUrl)
-				throws IOException
-			{
-				File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+                String[] args = { "-model", modelFile.getPath() };
+                Options option = new Options(args);
+                return new Lemmatizer(option); // create a lemmatizer
+            }
+        };
+    }
 
-				String[] args = { "-model", modelFile.getPath() };
-				Options option = new Options(args);
-				return new Lemmatizer(option); // create a lemmatizer
-			}
-		};
-	}
+    @Override
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = jcas.getCas();
 
-	@Override
-	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = jcas.getCas();
+        modelProvider.configure(cas);
 
-		modelProvider.configure(cas);
+        for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
+            List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
 
-		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
-			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
+            List<String> forms = new LinkedList<String>();
+            forms.add(CONLLReader09.ROOT);
+            forms.addAll(JCasUtil.toText(tokens));
 
-			List<String> forms = new LinkedList<String>();
-			forms.add(CONLLReader09.ROOT);
-			forms.addAll(JCasUtil.toText(tokens));
+            SentenceData09 sd = new SentenceData09();
+            sd.init(forms.toArray(new String[0]));
+            String[] lemmas = modelProvider.getResource().apply(sd).plemmas;
 
-			SentenceData09 sd = new SentenceData09();
-			sd.init(forms.toArray(new String[0]));
-			String[] lemmas = modelProvider.getResource().apply(sd).plemmas;
-
-			for (int i = 0; i < lemmas.length; i++) {
-				Token token = tokens.get(i);
-				Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
-				lemma.setValue(lemmas[i]);
-				lemma.addToIndexes();
-				token.setLemma(lemma);
-			}
-		}
-	}
+            for (int i = 0; i < lemmas.length; i++) {
+                Token token = tokens.get(i);
+                Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
+                lemma.setValue(lemmas[i]);
+                lemma.addToIndexes();
+                token.setLemma(lemma);
+            }
+        }
+    }
 }

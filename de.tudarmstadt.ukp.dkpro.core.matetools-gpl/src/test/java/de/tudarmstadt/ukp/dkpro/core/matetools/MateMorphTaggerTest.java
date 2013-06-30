@@ -10,15 +10,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.uimafit.util.JCasUtil.select;
 
-import java.util.LinkedList;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -30,80 +25,51 @@ import org.junit.rules.TestName;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MateMorphTaggerTest
 {
-	@Test
-	public void testGerman()
-		throws Exception
-	{
-		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
 
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches "
-				+ "möglichst viele Konstituenten und Dependenzen beinhaltet.");
+        JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-		String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-				"Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
-				"Dependenz", "beinhalten", "--" };
+        String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
+                "beispiel", "--", "welcher", "möglichst", "vieler", "konstituent", "und",
+                "dependenz", "beinhalten", "--" };
 
-		LinkedList<String> morphTagsExpected = new LinkedList<String>();
-		morphTagsExpected.add("case=nom|number=pl|gender=*|person=1");
-		morphTagsExpected.add("number=pl|person=1|tense=pres|mood=ind");
-		morphTagsExpected.add("case=acc|number=sg|gender=neut");
-		morphTagsExpected.add("_");
-		morphTagsExpected.add("case=acc|number=sg|gender=neut|degree=pos");
-		morphTagsExpected.add("case=acc|number=sg|gender=neut");
-		morphTagsExpected.add("_");
-		morphTagsExpected.add("case=acc|number=sg|gender=neut");
-		morphTagsExpected.add("_");
-		morphTagsExpected.add("case=acc|number=pl|gender=*");
-		morphTagsExpected.add("case=acc|number=pl|gender=*");
-		morphTagsExpected.add("_");
-		morphTagsExpected.add("case=dat|number=pl|gender=fem");
-		morphTagsExpected.add("_");
-		morphTagsExpected.add("_");
+        String[] morphTagsExpected = { "case=nom|number=pl|gender=*|person=1",
+                "number=pl|person=1|tense=pres|mood=ind", "case=acc|number=sg|gender=neut", "_",
+                "case=acc|number=sg|gender=neut|degree=pos", "case=acc|number=sg|gender=neut", "_",
+                "case=acc|number=sg|gender=neut", "_", "case=acc|number=pl|gender=*",
+                "case=acc|number=pl|gender=*", "_", "case=acc|number=pl|gender=fem",
+                "number=sg|person=3|tense=pres|mood=ind", "_" };
 
-		LinkedList<String> morphTagsActual = new LinkedList<String>();
-		for (Morpheme morpheme : select(jcas, Morpheme.class)) {
-			morphTagsActual.add(morpheme.getMorphTag());
-		}
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+    }
 
-		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
+        AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
+        AnalysisEngineDescription morphTag = createPrimitiveDescription(MateMorphTagger.class);
 
-		System.out.printf("%-20s - Expected: %s%n", "MorphTags",
-				AssertAnnotations.asCopyableString(morphTagsExpected, false));
-		System.out.printf("%-20s - Actual  : %s%n", "MorphTags",
-				AssertAnnotations.asCopyableString(morphTagsActual, false));
-		assertArrayEquals(morphTagsExpected.toArray(new String[0]),
-				morphTagsActual.toArray(new String[0]));
+        AnalysisEngineDescription aggregate = createAggregateDescription(lemma, morphTag);
 
-	}
+        return TestRunner.runTest(aggregate, aLanguage, aText);
+    }
 
-	private JCas runTest(String aLanguage, String aText)
-		throws Exception
-	{
-		AnalysisEngineDescription seg = createPrimitiveDescription(BreakIteratorSegmenter.class);
-		AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
-		AnalysisEngineDescription morphTag = createPrimitiveDescription(MateMorphTagger.class);
+    @Rule
+    public TestName name = new TestName();
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(seg, lemma, morphTag);
-
-		AnalysisEngine engine = createPrimitive(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
-
-		return jcas;
-	}
-
-	@Rule
-	public TestName name = new TestName();
-
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

@@ -35,89 +35,271 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<!--
-		TODO add english and spanish models, test components for these languages
-		<target name="separate-jars" depends="de, en, es"/>
-	-->
-	<target name="separate-jars" depends="de"/>
+	<target name="separate-jars" depends="de, en, es, zh"/>
 
 	<target name="de">
 		<mkdir dir="target/download"/>
 		
-		<!-- FILE: tiger-complete.anna-3-1.lemmatizer.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		<!-- FILE: tiger-complete.anna-3-1.lemmatizer.model - - - - - - -  - - - - - - - - - - - - - 
 		  - 2012-10-24 | now        | 8ba8c53fe00c5fd254f347d7342b5e84
 		  -->
     	<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.lemmatizer.model" 
-    		dest="target/download/lemmatizer-de-default.model" 
+    		dest="target/download/lemmatizer-de-tiger.model" 
     		skipexisting="true"/>
     	<install-model-file 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
-    		file="target/download/lemmatizer-de-default.model" 
+    		file="target/download/lemmatizer-de-tiger.model" 
     		md5="8ba8c53fe00c5fd254f347d7342b5e84"
     		tool="lemmatizer" 
     		language="de" 
-    		variant="default" 
+    		variant="tiger" 
     		extension="model" 
     		version="20121024.0"/>
 		
-		<!-- FILE: tiger-complete.anna-3-1.morphtagger.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		<!-- FILE: tiger-complete.anna-3-1.morphtagger.model - - - - - - - - - - - - - - - - - - - - 
 		  - 2012-10-24 | now        | fb68d604f189feeb77afd06a023ddd59
 		  -->
     	<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.morphtagger.model" 
-    		dest="target/download/morphtagger-de-default.model" 
+    		dest="target/download/morphtagger-de-tiger.model" 
     		skipexisting="true"/>
     	<install-model-file 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
-    		file="target/download/morphtagger-de-default.model" 
+    		file="target/download/morphtagger-de-tiger.model" 
     		md5="fb68d604f189feeb77afd06a023ddd59"
     		tool="morphtagger" 
     		language="de" 
-    		variant="default" 
+    		variant="tiger" 
     		extension="model" 
     		version="20121024.0"/>
 
-		<!-- FILE: tiger-complete.anna-3-1.postagger.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		<!-- FILE: tiger-complete.anna-3-1.postagger.model - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-10-24 | now        | 62539b0c8f6f4a30715cc64c0ac2bb9d
 		  -->
     	<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.postagger.model" 
-    		dest="target/download/tagger-de-crosstrain.model" 
+    		dest="target/download/tagger-de-tiger.model" 
     		skipexisting="true"/>
     	<install-model-file 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
-    		file="target/download/tagger-de-crosstrain.model" 
+    		file="target/download/tagger-de-tiger.model" 
     		md5="62539b0c8f6f4a30715cc64c0ac2bb9d"
     		tool="tagger" 
     		language="de" 
-    		variant="crosstrain" 
+    		variant="tiger" 
     		extension="model" 
     		version="20121024.0">
     			<metadata>
-    				<entry key="tagger.tagset" value="stts"/>
+    				<entry key="pos.tagset" value="stts"/>
     			</metadata>
     	</install-model-file>
 		
-		<!-- FILE: tiger-complete.anna-3-1.parser.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		<!-- FILE: tiger-complete.anna-3-1.parser.model - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2012-10-24 | now        | 015a08643dfc022ed9ff2378ef858af2
 		  -->
     	<get 
     		src="http://mate-tools.googlecode.com/files/tiger-complete.anna-3-1.parser.model" 
-    		dest="target/download/parser-de-crosstrain.model" 
+    		dest="target/download/parser-de-tiger.model" 
     		skipexisting="true"/>
     	<install-model-file 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
-    		file="target/download/parser-de-crosstrain.model" 
+    		file="target/download/parser-de-tiger.model" 
     		md5="015a08643dfc022ed9ff2378ef858af2"
     		tool="parser" 
     		language="de" 
-    		variant="crosstrain" 
+    		variant="tiger" 
     		extension="model" 
     		version="20121024.0"/>
+	</target>
+
+	<target name="en">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | 2b9bbdc88c84e3577b74ded1f214c42b
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.lemmatizer.model" 
+    		dest="target/download/lemmatizer-en-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/lemmatizer-en-conll2009.model" 
+    		md5="2b9bbdc88c84e3577b74ded1f214c42b"
+    		tool="lemmatizer" 
+    		language="en" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0"/>
+		
+		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | f6d8bfdc70ffa41de4f009ec62423807
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.postagger.model" 
+    		dest="target/download/tagger-en-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/tagger-en-conll2009.model" 
+    		md5="f6d8bfdc70ffa41de4f009ec62423807"
+    		tool="tagger" 
+    		language="en" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0">
+    			<metadata>
+    				<entry key="pos.tagset" value="ptb"/>
+    			</metadata>
+    	</install-model-file>
+		
+		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | 50377962a1d2f37f953834bfb3b4b7b9
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.parser.model" 
+    		dest="target/download/parser-en-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/parser-en-conll2009.model" 
+    		md5="50377962a1d2f37f953834bfb3b4b7b9"
+    		tool="parser" 
+    		language="en" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0"/>
+	</target>
+
+	<target name="es">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.lemmatizer.model - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | de0e3d1ee25602a0f7a57b58aa102422
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.lemmatizer.model" 
+    		dest="target/download/lemmatizer-es-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/lemmatizer-es-conll2009.model" 
+    		md5="de0e3d1ee25602a0f7a57b58aa102422"
+    		tool="lemmatizer" 
+    		language="es" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0"/>
+		
+		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.morphtagger.model - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | 7e37d85f91120bcd8990d3bbd5af5fa2
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.morphtagger.model" 
+    		dest="target/download/morphtagger-es-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/morphtagger-es-conll2009.model" 
+    		md5="7e37d85f91120bcd8990d3bbd5af5fa2"
+    		tool="morphtagger" 
+    		language="es" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0"/>
+
+		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - -
+		  - 2013-01-17 | now        | 090c002511b0814ee67a563a7e7d897e
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.postagger.model" 
+    		dest="target/download/tagger-es-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/tagger-es-conll2009.model" 
+    		md5="090c002511b0814ee67a563a7e7d897e"
+    		tool="tagger" 
+    		language="es" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0">
+    			<!--metadata>
+    				<entry key="pos.tagset" value="stts"/>
+    			</metadata-->
+    	</install-model-file>
+		
+		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | cacf5d5ab108c5fb690be5dfcac78b20
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.parser.model" 
+    		dest="target/download/parser-es-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/parser-es-conll2009.model" 
+    		md5="cacf5d5ab108c5fb690be5dfcac78b20"
+    		tool="parser" 
+    		language="es" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0"/>
+	</target>	
+
+	<target name="zh">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.postagger.model - - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | e0d3ea8bab810ca05e7769afe8b88890
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Chinese-ALL.anna-3.3.postagger.model" 
+    		dest="target/download/tagger-zh-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/tagger-zh-conll2009.model" 
+    		md5="e0d3ea8bab810ca05e7769afe8b88890"
+    		tool="tagger" 
+    		language="zh" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0">
+    			<metadata>
+    				<entry key="pos.tagset" value="ctb"/>
+    			</metadata>
+    	</install-model-file>
+		
+		<!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.parser.model - - - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | 1a594bff47dafa43ed608dd5f0005f42
+		  -->
+    	<get 
+    		src="http://mate-tools.googlecode.com/files/CoNLL2009-ST-Chinese-ALL.anna-3.3.parser.model" 
+    		dest="target/download/parser-zh-conll2009.model" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		file="target/download/parser-zh-conll2009.model" 
+    		md5="1a594bff47dafa43ed608dd5f0005f42"
+    		tool="parser" 
+    		language="zh" 
+    		variant="conll2009" 
+    		extension="model" 
+    		version="20130117.0"/>
 	</target>
 </project>
