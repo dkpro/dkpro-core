@@ -126,7 +126,7 @@ public class StanfordParserTest
         String[] posOriginal = new String[] { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
                 "PRELS", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-      String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
                 "ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
 
         String[] dependencies = new String[] {/** No dependencies for German */
@@ -188,6 +188,14 @@ public class StanfordParserTest
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
+                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
+                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
+                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
+                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -196,6 +204,7 @@ public class StanfordParserTest
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
     }
 
     @Test
@@ -494,11 +503,12 @@ public class StanfordParserTest
 
         // setup English
         AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
-                StanfordParser.PARAM_VARIANT, aVariant, StanfordParser.PARAM_PRINT_TAGSET, true,
+                StanfordParser.PARAM_VARIANT, aVariant, 
+                StanfordParser.PARAM_PRINT_TAGSET, true,
                 StanfordParser.PARAM_WRITE_CONSTITUENT, true,
-                StanfordParser.PARAM_WRITE_DEPENDENCY, true, StanfordParser.PARAM_WRITE_PENN_TREE,
-                true, StanfordParser.PARAM_WRITE_POS, true, StanfordParser.PARAM_WRITE_PENN_TREE,
-                true);
+                StanfordParser.PARAM_WRITE_DEPENDENCY, true, 
+                StanfordParser.PARAM_WRITE_PENN_TREE, true, 
+                StanfordParser.PARAM_WRITE_POS, true);
 
         AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
 
