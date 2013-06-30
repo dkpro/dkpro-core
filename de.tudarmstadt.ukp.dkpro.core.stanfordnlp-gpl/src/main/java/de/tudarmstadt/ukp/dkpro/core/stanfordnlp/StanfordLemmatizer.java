@@ -24,7 +24,7 @@ import edu.stanford.nlp.ling.WordTag;
 import edu.stanford.nlp.process.Morphology;
 
 /**
- * @author Richard Eckart de Castilho
+ * Stanford Lemmatizer component.
  */
 public class StanfordLemmatizer
 	extends JCasAnnotator_ImplBase

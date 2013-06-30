@@ -40,7 +40,8 @@ import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 /**
- * @author Richard Eckart de Castilho
+ * Stanford Part-of-Speech tagger component.
+ * 
  */
 public class StanfordPosTagger
 	extends JCasAnnotator_ImplBase

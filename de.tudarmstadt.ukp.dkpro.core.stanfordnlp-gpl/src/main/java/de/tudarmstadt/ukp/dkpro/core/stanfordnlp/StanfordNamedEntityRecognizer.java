@@ -41,14 +41,7 @@ import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.Triple;
 
 /**
- * This Annotator that uses the Stanford' implementation of the <br>
- * named entity recognizer.
- * <p>
- * Model files are not distributed as part of DKPro and need to be obtained from the Stanford NLP
- * tools homepage. Alternatively you can use the ANT script src/scripts/build.xml included with the
- * source code of this component, which downloads the models from the Stanford NLP homepage and
- * packages them conveniently as JARs which you may then install in your local Maven repository or
- * deploy to a private Maven repository.
+ * Stanford Named Entity Recognizer component.
  * 
  * @author Richard Eckart de Castilho
  * @author Oliver Ferschke
