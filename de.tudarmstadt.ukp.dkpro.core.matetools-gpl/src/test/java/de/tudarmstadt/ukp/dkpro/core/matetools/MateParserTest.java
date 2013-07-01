@@ -16,6 +16,7 @@ import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,8 +33,6 @@ public class MateParserTest
 	public void testGerman()
 		throws Exception
 	{
-//		Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
-
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
 				+ "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
@@ -98,6 +97,8 @@ public class MateParserTest
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+
 		AnalysisEngineDescription aggregate = createAggregateDescription(
 				createPrimitiveDescription(MatePosTagger.class),
 				createPrimitiveDescription(MateParser.class));

@@ -15,6 +15,7 @@ import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -57,6 +58,8 @@ public class MateLemmatizerTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+
         AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
 
         return TestRunner.runTest(lemma, aLanguage, aText);

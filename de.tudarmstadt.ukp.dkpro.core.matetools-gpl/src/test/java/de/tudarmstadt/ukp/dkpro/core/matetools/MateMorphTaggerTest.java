@@ -56,6 +56,8 @@ public class MateMorphTaggerTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+
         AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
         AnalysisEngineDescription morphTag = createPrimitiveDescription(MateMorphTagger.class);
 

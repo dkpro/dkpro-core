@@ -15,6 +15,7 @@ import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,6 +56,8 @@ public class MatePosTaggerTest
     public void testEnglish()
         throws Exception
     {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
 
