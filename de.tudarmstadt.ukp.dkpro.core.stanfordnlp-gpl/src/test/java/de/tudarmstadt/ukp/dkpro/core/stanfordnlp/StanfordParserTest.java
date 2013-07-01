@@ -83,19 +83,12 @@ public class StanfordParserTest
                 + "(ADV möglichst) (NP-SB (PIDAT viele) (CNP (NN Konstituenten) (KON und) "
                 + "(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
 
-        String[] posTags = new String[] { "$*LRB*", "$,", "$.", "-", ".$$.", "ADJA", "ADJA-OA",
-                "ADJA-SB", "ADJD", "ADJD-OA", "ADJD-SB", "ADV", "ADV-DA", "ADV-OA", "APPO", "APPR",
-                "APPR-SB", "APPRART", "APZR", "ART", "ART-OA", "ART-SB", "CARD", "CARD-OA",
-                "CARD-SB", "FM", "FM-OA", "FM-SB", "ITJ", "ITJ-SB", "KOKOM", "KON", "KOUI", "KOUS",
-                "KOUS-SB", "NE", "NE-DA", "NE-OA", "NE-SB", "NN", "NN-DA", "NN-OA", "NN-OA2",
-                "NN-SB", "PDAT", "PDAT-SB", "PDS", "PDS-DA", "PDS-OA", "PDS-SB", "PIAT", "PIAT-SB",
-                "PIDAT", "PIDAT-DA", "PIS", "PIS-DA", "PIS-OA", "PIS-SB", "PPER", "PPER-DA",
-                "PPER-OA", "PPER-SB", "PPOSAT", "PPOSS", "PPOSS-OA", "PRELAT", "PRELS", "PRELS-DA",
-                "PRELS-OA", "PRELS-OA2", "PRELS-SB", "PRF", "PRF-DA", "PRF-OA", "PROAV",
-                "PROAV-SB", "PTKA", "PTKANT", "PTKANT-OA", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
-                "PWAT-OA", "PWAV", "PWS", "PWS-DA", "PWS-OA", "PWS-OA2", "PWS-SB", "TRUNC",
-                "TRUNC-SB", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN",
-                "VVIMP", "VVINF", "VVINF-SB", "VVIZU", "VVPP", "XY", "XY-SB" };
+        String[] posTags = new String[] { "$*LRB*", "$,", "$.", "-", ".$$.", "ADJA", "ADJD", "ADV",
+                "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON",
+                "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER",
+                "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG",
+                "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF",
+                "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
         String[] constituentTags = new String[] { "AA", "AP", "AVP", "CAC", "CAP", "CAVP", "CCP",
                 "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA", "NM",

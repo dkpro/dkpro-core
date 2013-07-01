@@ -133,7 +133,7 @@ public class StanfordAnnotator
         String syntacticFunction = null;
         AbstractTreebankLanguagePack tlp = (AbstractTreebankLanguagePack) aTreebankLanguagePack;
         int gfIdx = nodeLabelValue.indexOf(tlp.getGfCharacter());
-        if (gfIdx >= 0) {
+        if (gfIdx > 0) {
             syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
             nodeLabelValue = nodeLabelValue.substring(0, gfIdx);
         }

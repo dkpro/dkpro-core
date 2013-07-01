@@ -510,7 +510,7 @@ public class StanfordParser
                     
                     // Strip grammatical function from tag
                     int gfIdx = t.indexOf(lp.getGfCharacter());
-                    if (gfIdx >= 0) {
+                    if (gfIdx > 0) {
                         // TODO should collect syntactic functions in separate tagset
                         // syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
                         t = t.substring(0, gfIdx);
@@ -539,7 +539,7 @@ public class StanfordParser
                         
                         // Strip grammatical function from tag
                         int gfIdx = t.indexOf(lp.getGfCharacter());
-                        if (gfIdx >= 0) {
+                        if (gfIdx > 0) {
                             // TODO should collect syntactic functions in separate tagset
                             // syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
                             t = t.substring(0, gfIdx);
