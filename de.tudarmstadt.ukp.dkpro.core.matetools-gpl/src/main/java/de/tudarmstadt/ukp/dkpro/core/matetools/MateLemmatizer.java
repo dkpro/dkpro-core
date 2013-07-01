@@ -96,9 +96,9 @@ public class MateLemmatizer
                 setContextObject(MateLemmatizer.this);
 
                 setDefault(ARTIFACT_ID,
-                        "${groupId}-matetools-model-lemmatizer-${language}-${variant}");
+                        "${groupId}.matetools-model-lemmatizer-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/lemmatizer-${language}-${variant}.model");
+                        "classpath:/${package}/lib/lemmatizer-${language}-${variant}.properties");
                 setDefaultVariantsLocation("${package}/lib/lemmatizer-default-variants.map");
 
                 setOverride(LOCATION, modelLocation);

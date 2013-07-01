@@ -106,7 +106,7 @@ public class MatePosTagger
 
                 setDefault(ARTIFACT_ID, "${groupId}.matetools-model-tagger-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/tagger-${language}-${variant}.model");
+                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
                 setDefaultVariantsLocation("${package}/lib/tagger-default-variants.map");
 
                 setOverride(LOCATION, modelLocation);

@@ -123,8 +123,8 @@ public class MateParser
 				setContextObject(MateParser.this);
 
 				setDefault(ARTIFACT_ID,
-						"${groupId}matetools-model-parser-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.model");
+						"${groupId}.matetools-model-parser-${language}-${variant}");
+				setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.properties");
                 setDefaultVariantsLocation("${package}/lib/parser-default-variants.map");
 
 				setOverride(LOCATION, modelLocation);

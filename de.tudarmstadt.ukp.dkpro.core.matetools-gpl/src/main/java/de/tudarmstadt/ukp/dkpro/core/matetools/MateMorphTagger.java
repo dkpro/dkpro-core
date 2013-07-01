@@ -98,7 +98,7 @@ public class MateMorphTagger
                 setDefault(ARTIFACT_ID,
                         "${groupId}.matetools-model-morphtagger-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/morphtagger-${language}-${variant}.model");
+                        "classpath:/${package}/lib/morphtagger-${language}-${variant}.properties");
                 setDefaultVariantsLocation("${package}/lib/morphtagger-default-variants.map");
 
                 setDefault(VARIANT, "default");

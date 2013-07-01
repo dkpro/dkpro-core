@@ -39,28 +39,111 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-de-tiger</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-de-tiger</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-morphtagger-de-tiger</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-de-tiger</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-en-conll2009</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-en-conll2009</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-en-conll2009</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-de-tiger</artifactId>
-				<version>20121024.0</version>
+				<version>20121024.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-de-tiger</artifactId>
-				<version>20121024.0</version>
+				<version>20121024.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-morphtagger-de-tiger</artifactId>
-				<version>20121024.0</version>
+				<version>20121024.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-de-tiger</artifactId>
-				<version>20121024.0</version>
+				<version>20121024.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-en-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-en-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-en-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-es-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-es-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-morphtagger-es-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-es-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-zh-conll2009</artifactId>
+				<version>20130117.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-zh-conll2009</artifactId>
+				<version>20130117.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

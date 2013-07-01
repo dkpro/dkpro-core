@@ -57,8 +57,8 @@ public class MateParserTest
                 "UC", "VO" };
         
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, null, posTags, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, null, dependencyTags, jcas);
+        AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "negra", dependencyTags, jcas);
 	}
 
     @Test
@@ -91,8 +91,8 @@ public class MateParserTest
                 "PRT", "PUT", "ROOT", "SBJ", "SUB", "SUFFIX", "TITLE", "TMP", "VC", "VOC" };
         
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(POS.class, null, posTags, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, null, dependencyTags, jcas);
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "conll2009", dependencyTags, jcas);
     }
 
 	private JCas runTest(String aLanguage, String aText)
