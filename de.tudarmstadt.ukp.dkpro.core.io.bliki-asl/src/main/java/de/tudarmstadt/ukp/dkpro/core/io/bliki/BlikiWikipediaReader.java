@@ -39,6 +39,7 @@ import org.sweble.wikitext.engine.PageTitle;
 import org.sweble.wikitext.engine.utils.SimpleWikiConfiguration;
 
 import de.fau.cs.osr.ptk.common.AstVisitor;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 import de.tudarmstadt.ukp.wikipedia.api.sweble.PlainTextConverter;
@@ -51,12 +52,12 @@ public class BlikiWikipediaReader
      * Wikiapi URL
      * E.g. for the English Wikipedia it should be: http://en.wikipedia.org/w/api.php
      */
-    public static final String PARAM_WIKIAPI_URL = "WikiapiUrl";
+    public static final String PARAM_WIKIAPI_URL = ComponentParameters.PARAM_SOURCE_LOCATION;
     @ConfigurationParameter(name = PARAM_WIKIAPI_URL, mandatory = true, defaultValue = "true")
     private String wikiapiUrl;
 
     /** Whether the reader outputs plain text or wiki markup. */
-    public static final String PARAM_OUTPUT_PLAIN_TEXT = "OutputPlainText";
+    public static final String PARAM_OUTPUT_PLAIN_TEXT = "outputPlainText";
     @ConfigurationParameter(name = PARAM_OUTPUT_PLAIN_TEXT, mandatory = true, defaultValue = "true")
     private boolean outputPlainText;
 
