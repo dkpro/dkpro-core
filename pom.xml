@@ -597,6 +597,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
 		-->
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</module>
 	</modules>
 	<build>
 		<plugins>
