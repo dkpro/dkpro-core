@@ -28,10 +28,10 @@
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
   	</dependency>
-  	<dependency>
-  		<groupId>org.uimafit</groupId>
-  		<artifactId>uimafit</artifactId>
-  	</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit</artifactId>
+		</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>
