@@ -20,17 +20,17 @@ package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.StringEncoder;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.TypeCapability;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Base class for all kinds of phonetic transcriptors based on Apache Commons Codec.
- * 
+ *
  * @author zesch
  *
  */
@@ -43,7 +43,7 @@ public abstract class PhoneticTranscriptor_ImplBase
     extends JCasAnnotator_ImplBase
 {
     protected StringEncoder encoder;
-    
+
     @Override
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
@@ -51,14 +51,14 @@ public abstract class PhoneticTranscriptor_ImplBase
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             PhoneticTranscription transcription = new PhoneticTranscription(jcas, token.getBegin(), token.getEnd());
             transcription.setTranscription(encode(token.getCoveredText()));
-            transcription.setName(encoder.getClass().getName());  
+            transcription.setName(encoder.getClass().getName());
             transcription.addToIndexes();
-        }       
+        }
     }
 
     protected String encode(String string)
             throws AnalysisEngineProcessException
-    {       
+    {
         try {
             String encodedString = encoder.encode(string);
             return encodedString;
@@ -66,6 +66,6 @@ public abstract class PhoneticTranscriptor_ImplBase
         }
         catch (EncoderException e) {
             throw new AnalysisEngineProcessException(e);
-        }  
+        }
     }
 }
