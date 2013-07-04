@@ -27,7 +27,7 @@
 	<description>UIMA integration for Niels Ott's BananaSplit (http://niels.drni.de/s9y/pages/bananasplit.html).</description>
 	<dependencies>
 		<dependency>
-			<groupId>org.uimafit</groupId>
+			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
