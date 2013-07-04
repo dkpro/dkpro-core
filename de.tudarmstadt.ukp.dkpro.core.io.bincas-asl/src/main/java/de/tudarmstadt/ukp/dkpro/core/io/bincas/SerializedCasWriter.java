@@ -24,13 +24,14 @@ import static org.apache.uima.cas.impl.Serialization.serializeCASMgr;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.cas.impl.TypeSystemImpl;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
@@ -56,7 +57,7 @@ public class SerializedCasWriter
 	private File typeSystemFile;
 
 	private boolean typeSystemWritten;
-	
+
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
@@ -64,7 +65,7 @@ public class SerializedCasWriter
 		ObjectOutputStream docOS = null;
         try {
         	docOS = new ObjectOutputStream(getOutputStream(aJCas, ".ser"));
-        	
+
         	if (typeSystemFile == null) {
 	    		CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
 	    		docOS.writeObject(serializer);
@@ -90,7 +91,7 @@ public class SerializedCasWriter
 	private void writeTypeSystem(JCas aJCas) throws IOException
 	{
 		ObjectOutputStream typeOS = null;
-		
+
 		File typeOSFile;
 		if (typeSystemFile != null) {
 			typeOSFile = typeSystemFile;
@@ -98,9 +99,9 @@ public class SerializedCasWriter
 		else {
 			typeOSFile = getTargetPath("typesystem", ".ser");
 		}
-		
+
 		typeOS = new ObjectOutputStream(CompressionUtils.getOutputStream(typeOSFile));
-		
+
 		try {
 			CASMgrSerializer casMgrSerializer = serializeCASMgr(aJCas.getCasImpl());
 			casMgrSerializer.addTypeSystem((TypeSystemImpl) aJCas.getTypeSystem());
