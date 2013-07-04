@@ -22,8 +22,8 @@ import static org.apache.commons.io.FileUtils.forceMkdir;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.apache.commons.io.FilenameUtils.removeExtension;
 import static org.apache.commons.lang.StringUtils.join;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -40,11 +40,11 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -187,7 +187,7 @@ public class ImsCwbWriter
 	public static final String PARAM_CORPUS_NAME = "corpusName";
 	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue="corpus")
 	private String corpusName;
-	
+
 	private static final String LS = "\n";
 	private static final String TAB = "\t";
 	private Writer bw;

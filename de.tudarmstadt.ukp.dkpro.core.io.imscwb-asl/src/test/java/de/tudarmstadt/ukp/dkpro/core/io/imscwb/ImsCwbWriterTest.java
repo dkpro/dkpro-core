@@ -16,19 +16,19 @@
  * limitations under the License.
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.uimafit.component.xwriter.CASDumpWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
