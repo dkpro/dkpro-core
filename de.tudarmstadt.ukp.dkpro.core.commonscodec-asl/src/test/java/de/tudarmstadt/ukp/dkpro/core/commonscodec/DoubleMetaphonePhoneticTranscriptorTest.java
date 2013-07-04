@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import org.junit.Test;
 
@@ -27,7 +27,7 @@ public class DoubleMetaphonePhoneticTranscriptorTest
 
     @Test
     public void doubleMetaphoneTest() throws Exception {
-  
+
         runTest(
                 createPrimitiveDescription(DoubleMetaphonePhoneticTranscriptor.class),
                 "The knight entered the store in the night .",

@@ -17,14 +17,14 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.testing.factory.TokenBuilder;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.testing.factory.TokenBuilder;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.phonetics.type.PhoneticTranscription;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -33,13 +33,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class PhoneticTranscriptorTestUtil
 {
     public static void runTest(AnalysisEngineDescription desc, String text, String ... goldTranscriptions) throws Exception {
-   
+
         AnalysisEngine engine = createPrimitive(desc);
         JCas jcas = engine.newJCas();
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
         tb.buildTokens(jcas, text);
         engine.process(jcas);
-        
+
         int i=0;
         for (PhoneticTranscription transcription : JCasUtil.select(jcas, PhoneticTranscription.class)) {
             assertEquals(goldTranscriptions[i], transcription.getTranscription());

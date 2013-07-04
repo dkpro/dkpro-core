@@ -18,12 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.language.Metaphone;
-import org.uimafit.descriptor.TypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 
 /**
  * Metaphone phonetic transcription based on Apache Commons Codec.
  * Works for English.
- * 
+ *
  * @author zesch
  *
  */

@@ -18,12 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import org.apache.commons.codec.language.ColognePhonetic;
-import org.uimafit.descriptor.TypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 
 /**
  * Cologne phonetic (Kölner Phonetik) transcription based on Apache Commons Codec.
  * Works for German.
- * 
+ *
  * @author zesch
  *
  */
