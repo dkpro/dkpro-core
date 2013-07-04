@@ -18,8 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.io.fangorn;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +30,10 @@ import org.apache.lucene.document.Document;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.pipeline.SimplePipeline;
 
 import au.edu.unimelb.csse.queryParser.QueryBuilder;
 import au.edu.unimelb.csse.search.SimpleHitCollector;
@@ -60,7 +61,7 @@ public class FangornWriterTest
 		DocumentMetaData meta = DocumentMetaData.create(jcas);
 		meta.setCollectionId("dummyCollection");
 		meta.setDocumentId("dummyId");
-		
+
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(OpenNlpSegmenter.class);
 
 		AnalysisEngineDescription parser = createPrimitiveDescription(OpenNlpParser.class,
@@ -86,7 +87,7 @@ public class FangornWriterTest
 		}
 
 		List<String> actual = new ArrayList<String>();
-		
+
 		for (int i = 0; i < hitCollector.totalHits; i++) {
 			Document doc = searcher.doc(hitCollector.hits[i]);
 			actual.add(String.format("%s %s %s %s %s",
@@ -96,12 +97,12 @@ public class FangornWriterTest
 					doc.get(FangornWriter.FIELD_END),
 					resultMeta[i].asJSONString().replace('"', '\'')));
 		}
-		
+
 		List<String> expected = asList(
 				"dummyCollection dummyId 0 15 {'num':'2','ms':[{'m':[{'s':'','e':'1_0_2_8','o':'0','t':'0'}]},{'m':[{'s':'','e':'4_2_3_6','o':'0','t':'0'}]}]}",
 				"dummyCollection dummyId 16 27 {'num':'1','ms':[{'m':[{'s':'','e':'1_0_2_7','o':'0','t':'0'}]}]}",
 				"dummyCollection dummyId 28 47 {'num':'1','ms':[{'m':[{'s':'','e':'2_1_2_9','o':'0','t':'0'}]}]}");
-		
+
 		assertEquals(StringUtils.join(expected, "\n"), StringUtils.join(actual, "\n"));
 	}
 }
