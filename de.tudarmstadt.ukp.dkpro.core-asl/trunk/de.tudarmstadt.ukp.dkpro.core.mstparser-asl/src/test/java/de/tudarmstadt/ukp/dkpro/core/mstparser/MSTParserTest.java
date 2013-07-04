@@ -17,15 +17,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
@@ -44,7 +44,7 @@ public class MSTParserTest
 	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
 	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
 	 * dependency, begin of the head, end of the head
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -62,7 +62,7 @@ public class MSTParserTest
 
 	/**
 	 * Generates a JCas from the input text and annotates it with dependencies.
-	 * 
+	 *
 	 * @param aText
 	 * @return jcas annotated with dependency relations
 	 * @throws Exception
