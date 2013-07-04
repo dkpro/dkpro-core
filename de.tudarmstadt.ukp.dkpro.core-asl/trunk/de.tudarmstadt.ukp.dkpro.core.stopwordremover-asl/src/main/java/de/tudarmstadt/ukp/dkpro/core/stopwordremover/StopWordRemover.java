@@ -18,10 +18,10 @@
 package de.tudarmstadt.ukp.dkpro.core.stopwordremover;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
+import static org.apache.uima.fit.util.CasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.getView;
 import static org.apache.uima.util.Level.FINE;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.CasUtil.select;
-import static org.uimafit.util.JCasUtil.getView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,12 +40,12 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Logger;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
