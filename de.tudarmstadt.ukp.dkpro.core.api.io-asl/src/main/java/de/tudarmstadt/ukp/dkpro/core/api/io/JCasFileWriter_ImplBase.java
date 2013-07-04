@@ -24,9 +24,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.component.JCasConsumer_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -48,13 +48,13 @@ public abstract class JCasFileWriter_ImplBase
 
     /**
      * Choose a compression method. (default: {@link CompressionMethod#NONE})
-     * 
+     *
      * @see CompressionMethod
      */
 	public static final String PARAM_COMPRESSION = "compression";
 	@ConfigurationParameter(name=PARAM_COMPRESSION, mandatory=false, defaultValue="NONE")
 	private CompressionMethod compression;
-    
+
     /**
      * Remove the original extension.
      */
@@ -80,17 +80,17 @@ public abstract class JCasFileWriter_ImplBase
 	{
 		return compression;
 	}
-    
+
     protected boolean isStripExtension()
 	{
 		return stripExtension;
 	}
-    
+
     protected boolean isUseDocumentId()
 	{
 		return useDocumentId;
 	}
-    
+
     protected OutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
     {
     	File outputFile = getTargetPath(aJCas, aExtension);
@@ -100,7 +100,7 @@ public abstract class JCasFileWriter_ImplBase
 	/**
 	 * Get the relative path from the CAS. If the CAS does not contain relative path information or
 	 * if {@link #PARAM_USE_DOCUMENT_ID} is set, the document ID is used.
-	 * 
+	 *
 	 * @param aJCas a CAS.
 	 * @return the relative target path.
 	 */
@@ -127,9 +127,9 @@ public abstract class JCasFileWriter_ImplBase
 			if (meta.getDocumentId() == null) {
 				throw new IllegalStateException("Neither base URI/document URI nor document ID set");
 			}
-			
+
 			relativeDocumentPath = meta.getDocumentId();
-			
+
 			if (escapeDocumentId) {
 				try {
 					relativeDocumentPath = URLEncoder.encode(relativeDocumentPath, "UTF-8");
@@ -140,7 +140,7 @@ public abstract class JCasFileWriter_ImplBase
 					throw new IllegalStateException(e);
 				}
 			}
-			
+
 			return relativeDocumentPath;
 		}
 	}
@@ -148,7 +148,7 @@ public abstract class JCasFileWriter_ImplBase
 	/**
 	 * Get the full target path for the given CAS and extension. If the
 	 * {@link #PARAM_COMPRESS} is set, ".gz" is appended to the path.
-	 * 
+	 *
 	 * @param aRelativePath the relative path.
 	 * @param aExtension the extension.
 	 * @return the full path.
@@ -161,7 +161,7 @@ public abstract class JCasFileWriter_ImplBase
 	/**
 	 * Get the full target path for the given relative path and extension. If the
 	 * {@link #PARAM_COMPRESS} is set, ".gz" is appended to the path.
-	 * 
+	 *
 	 * @param aRelativePath the relative path.
 	 * @param aExtension the extension.
 	 * @return the full path.
