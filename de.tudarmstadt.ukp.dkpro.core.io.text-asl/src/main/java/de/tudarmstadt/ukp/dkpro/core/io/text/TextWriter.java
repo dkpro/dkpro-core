@@ -23,9 +23,9 @@ import java.io.OutputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 

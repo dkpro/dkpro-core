@@ -17,12 +17,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.uimafit.util.JCasUtil.select;
 
 import java.io.File;
 import java.util.Arrays;
@@ -30,13 +30,13 @@ import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.xwriter.XWriter;
+import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.uimafit.component.xwriter.XWriter;
-import org.uimafit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -114,7 +114,7 @@ public class TextReaderTest
             writer.process(jcas);
 		}
 	}
-	
+
 	@Test
 	public void fileSystemReaderTest3()
 		throws Exception
