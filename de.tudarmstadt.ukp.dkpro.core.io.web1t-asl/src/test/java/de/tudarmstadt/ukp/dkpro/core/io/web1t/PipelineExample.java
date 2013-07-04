@@ -17,14 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.uimafit.pipeline.SimplePipeline;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
@@ -65,7 +65,7 @@ public class PipelineExample
                 segmenter,
                 ngramWriter
         );
-        
+
         JWeb1TIndexer indexCreator = new JWeb1TIndexer("target/web1t/", 3);
         indexCreator.create();
 

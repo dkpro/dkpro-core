@@ -40,8 +40,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.util.CasUtil;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
@@ -60,7 +60,7 @@ public class Web1TConverter {
 	private static final String LF = "\n";
 	private static final String TAB = "\t";
 
-	private String outputPath;
+	private final String outputPath;
     private String outputEncoding = "UTF-8";
 	private int minNgramLength = 1;
 	private int maxNgramLength = 3;
@@ -68,16 +68,16 @@ public class Web1TConverter {
 	private boolean toLowercase = false;
 	private boolean writeIndexes = true;
 	private float splitThreshold = 1.0f;
-	
-	private Map<Integer, BufferedWriter> ngramWriters;
-	private Map<Integer, FrequencyDistribution<String>> letterFDs;
+
+	private final Map<Integer, BufferedWriter> ngramWriters;
+	private final Map<Integer, FrequencyDistribution<String>> letterFDs;
 
 	public Web1TConverter(String outputPath) throws IOException
     {
         super();
-        
+
         this.outputPath = outputPath;
-        
+
         ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
         letterFDs = initializeLetterFDs(minNgramLength, maxNgramLength);
 
@@ -86,7 +86,7 @@ public class Web1TConverter {
                     "Threshold has to be lower 100");
         }
     }
-	
+
 	public void add(JCas jcas, Set<String> inputPaths)
 	        throws IOException
 	{
@@ -124,17 +124,17 @@ public class Web1TConverter {
 
         add(cfd);
 	}
-	
+
 	public void add(ConditionalFrequencyDistribution<Integer, String> cfd)
 	        throws IOException
 	{
         writeFrequencyDistributionsToNGramFiles(cfd);
 	}
-	
+
 	public void createIndex()
 	        throws IOException
 	{
-        
+
         closeWriters(ngramWriters.values());
 
 		Comparator<String> comparator = new Comparator<String>()
@@ -211,9 +211,9 @@ public class Web1TConverter {
 
 	/**
 	 * Write the frequency distributions to the corresponding n-gram files.
-	 * 
+	 *
 	 * @param cfd
-	 * @throws IOException 
+	 * @throws IOException
 	 * @throws AnalysisEngineProcessException
 	 */
 	private void writeFrequencyDistributionsToNGramFiles(
@@ -318,7 +318,7 @@ public class Web1TConverter {
 	 * The default file for words which do not account for
 	 * <code>thresholdSplit</code> percent may have grown large. In order to
 	 * prevent an real large misc. file we split again.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	private void processCreatedMiscFileAgain(int level,
@@ -372,7 +372,7 @@ public class Web1TConverter {
 	/**
 	 * Creates a new frequency distribution over the starting letters in the
 	 * misc file as preparation for splitting
-	 * 
+	 *
 	 * @param misc
 	 * @return
 	 * @throws IOException
@@ -459,7 +459,7 @@ public class Web1TConverter {
 			writer.close();
 		}
 	}
-	
+
 	   public boolean isWriteIndexes()
 	    {
 	        return writeIndexes;
@@ -534,5 +534,5 @@ public class Web1TConverter {
         {
             this.toLowercase = toLowercase;
         }
-        
+
 }

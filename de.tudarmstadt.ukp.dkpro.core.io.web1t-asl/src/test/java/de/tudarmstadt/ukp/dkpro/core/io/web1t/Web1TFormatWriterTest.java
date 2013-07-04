@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,13 +27,13 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.uimafit.pipeline.SimplePipeline;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
@@ -108,15 +108,15 @@ public class Web1TFormatWriterTest {
 			throws Exception {
 		deleteIndexFolder();
 		writeWeb1TFormat(new String[] { Token.class.getName() }, -1);
-		
+
 	}
-	
+
 	@Test(expected=ResourceInitializationException.class)
 	public void web1TFormatTest_exceptionForInvalidMinFrequency2()
 			throws Exception {
 		deleteIndexFolder();
 		writeWeb1TFormat(new String[] { Token.class.getName() }, 0);
-		
+
 	}
 
 	private void writeWeb1TFormat(String[] strings, int minFreq)
@@ -131,7 +131,7 @@ public class Web1TFormatWriterTest {
 		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
 
         AnalysisEngineDescription lemmatizer = createPrimitiveDescription(ClearNlpLemmatizer.class);
-		
+
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
 				Web1TFormatWriter.class,
 				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
@@ -162,7 +162,7 @@ public class Web1TFormatWriterTest {
 
 	private void writeWeb1TFormat(String[] inputPath) throws Exception {
     	checkModelsAndBinary("en");
-    	
+
 		CollectionReader reader = createCollectionReader(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
@@ -171,7 +171,7 @@ public class Web1TFormatWriterTest {
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
 
 		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
-        
+
 		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(ClearNlpLemmatizer.class);
 
 		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
@@ -186,8 +186,8 @@ public class Web1TFormatWriterTest {
 
 	private void deleteIndexFolder() {
 		INDEX_FOLDER.delete();
-	}    
-	
+	}
+
 	private void checkModelsAndBinary(String lang)
 	{
 		Assume.assumeTrue(getClass().getResource(
