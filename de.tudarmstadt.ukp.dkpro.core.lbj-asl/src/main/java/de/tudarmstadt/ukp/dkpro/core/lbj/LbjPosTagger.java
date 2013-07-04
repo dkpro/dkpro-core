@@ -18,9 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,11 +31,11 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import LBJ2.nlp.Word;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -85,7 +85,7 @@ public class LbjPosTagger
     protected boolean printTagSet;
 
     private ModelProviderBase<POSTagger> taggerProvider;
-    
+
     private MappingProvider mappingProvider;
 
     @Override
@@ -106,20 +106,20 @@ public class LbjPosTagger
                 if (!"en".equals(getAggregatedProperties().getProperty(LANGUAGE))) {
                     throw new IllegalArgumentException("Only language [en] is supported");
                 }
-                
+
                 SingletonTagset tags = new SingletonTagset(POS.class, "ptb");
                 tags.addAll(asList(LBJ2.nlp.POS.tokens));
                 addTagset(tags);
-                
+
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
-                }                   
-                
+                }
+
                 return new POSTagger();
             }
-            
+
         };
-        
+
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
                 "core/api/lexmorph/tagset/en-ptb-pos.map");
