@@ -18,17 +18,17 @@
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
@@ -42,26 +42,26 @@ public class ThroughputTest {
     public void testAggregate(CollectionReader reader, AnalysisEngineDescription aggr)
         throws IOException, UIMAException
     {
- 
+
         AnalysisEngineDescription startTimerDesc = getTimerAED(false);
         AnalysisEngineDescription endTimerDesc   = getTimerAED(true);
-        
+
         AnalysisEngineDescription timerAggregate = createAggregateDescription(
                 startTimerDesc,
                 aggr,
                 endTimerDesc
         );
-        
+
         SimplePipeline.runPipeline(
                 reader,
                 timerAggregate
         );
     }
-    
+
     public static CollectionReader getStandardReader(String languageCode) throws IOException, ResourceInitializationException {
         if (languageCode.equals("en")) {
-            String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";    
-            
+            String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
+
             return createCollectionReader(
                     TEIReader.class,
                     TEIReader.PARAM_LANGUAGE, "en",
@@ -73,7 +73,7 @@ public class ThroughputTest {
             throw new IllegalArgumentException("No standard reader available for language code: " + languageCode);
         }
     }
-    
+
     private AnalysisEngineDescription getTimerAED(boolean isFinalTimer)
         throws ResourceInitializationException
     {
