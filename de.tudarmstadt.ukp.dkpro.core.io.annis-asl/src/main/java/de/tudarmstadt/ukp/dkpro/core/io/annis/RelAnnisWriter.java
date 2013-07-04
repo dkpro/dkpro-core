@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.annis;
 
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,13 +36,13 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasConsumer_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -55,7 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * This Consumer outputs the content of all CASes into the relAnnis file format. The produced files
  * can be fed into Annis2 (http://www.sfb632.uni-potsdam.de/d1/annis/) to visualize the data. e.g.
  * constituent and dependency structure.
- * 
+ *
  * @author Erik-Lân Do Dinh
  */
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
@@ -76,7 +76,7 @@ public class RelAnnisWriter
 
     /**
      * Write part-of-speech information.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
@@ -85,7 +85,7 @@ public class RelAnnisWriter
 
     /**
      * Write lemma information.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
@@ -94,7 +94,7 @@ public class RelAnnisWriter
 
     /**
      * Write constituent structure information.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -103,7 +103,7 @@ public class RelAnnisWriter
 
     /**
      * Write dependency relation information.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
@@ -236,7 +236,7 @@ public class RelAnnisWriter
     /**
      * Recursively traverse the constituent structure, writing<br>
      * component.tab, edge_annotation.tab, node.tab, node_annotation.tab, rank.tab
-     * 
+     *
      * @param jcas
      * @param currAnno
      *            the parent annotation from where to start the traversal
@@ -351,7 +351,7 @@ public class RelAnnisWriter
     /**
      * Recursively traverse the dependency structure, writing to<br>
      * edge_annotation.tab, rank.tab
-     * 
+     *
      * @param governor
      *            the annotation whose dependents shall be visited
      * @param func
@@ -427,7 +427,7 @@ public class RelAnnisWriter
     /**
      * Concatenates the elements of input (with tab-separation) and appends the resulting string to
      * file fileId.tab.
-     * 
+     *
      * @param fileId
      *            the tab-filename to write input to (without ".tab")
      * @param input
