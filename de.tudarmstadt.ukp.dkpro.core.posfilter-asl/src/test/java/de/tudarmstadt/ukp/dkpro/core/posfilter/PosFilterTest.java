@@ -18,9 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
 import static java.util.Arrays.asList;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +31,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
@@ -64,7 +65,7 @@ public class PosFilterTest
 		runTest("en", testDocument, tokens, PosFilter.PARAM_ADJ, true, PosFilter.PARAM_N, true,
 				PosFilter.PARAM_V, true);
 	}
-	
+
 	private void runTest(String language, String testDocument,
 			String[] aTokens, Object... aExtraParams)
 		throws Exception
@@ -72,14 +73,14 @@ public class PosFilterTest
 		List<Object> posFilterParams = new ArrayList<Object>();
 		posFilterParams.addAll(asList(PosFilter.PARAM_TYPE_TO_REMOVE, Token.class.getName()));
 		posFilterParams.addAll(asList(aExtraParams));
-		
+
 		AnalysisEngineDescription aggregate = createAggregateDescription(
 				createPrimitiveDescription(OpenNlpPosTagger.class),
 				createPrimitiveDescription(PosFilter.class,
 						posFilterParams.toArray(new Object[posFilterParams.size()])));
 
 		JCas jcas = TestRunner.runTest(aggregate, language, testDocument);
-		
+
 		AssertAnnotations.assertToken(aTokens, select(jcas, Token.class));
 	}
 

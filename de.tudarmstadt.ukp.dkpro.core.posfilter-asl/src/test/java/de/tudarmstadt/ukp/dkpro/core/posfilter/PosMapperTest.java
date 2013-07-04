@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class PosMapperTest
 {
-	private File testBase = new File("src/test/resources/de/tudarmstadt/ukp/dkpro/core/posfilter");
-	private String testDocument1 = "This sentence consists of fourtynine characters .";
+	private final File testBase = new File("src/test/resources/de/tudarmstadt/ukp/dkpro/core/posfilter");
+	private final String testDocument1 = "This sentence consists of fourtynine characters .";
 
 	@Test
 	public void testEnglishOriginal()
