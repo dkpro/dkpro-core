@@ -17,13 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.metadata.type;
 
-import static org.uimafit.util.JCasUtil.selectSingle;
+import static org.apache.uima.fit.util.JCasUtil.selectSingle;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
 import org.junit.Test;
-import org.uimafit.factory.JCasFactory;
-import static org.junit.Assert.*;
 
 public class DocumentMetaDataTest
 {
@@ -36,19 +37,19 @@ public class DocumentMetaDataTest
 	{
 		String documentText = "initialized";
 		String documentLanguage = "en";
-		
+
 		JCas jcas = JCasFactory.createJCas();
 
 		// Let UIMA create a DocumentAnnotation
 		jcas.setDocumentText(documentText);
 		jcas.setDocumentLanguage(documentLanguage);
-		
+
 		// Check it's there and correctly initialized
 		DocumentAnnotation documentAnnotation = selectSingle(jcas, DocumentAnnotation.class);
 		assertEquals(0, documentAnnotation.getBegin());
 		assertEquals(documentText.length(), documentAnnotation.getEnd());
 		assertEquals(documentLanguage, documentAnnotation.getLanguage());
-		
+
 		// Now create a DKPro DocumentMetaData which is also a DocumentAnnotation
 		DocumentMetaData meta = DocumentMetaData.create(jcas);
 		assertTrue(meta == jcas.getDocumentAnnotationFs());
@@ -68,7 +69,7 @@ public class DocumentMetaDataTest
 	public void offsetTest() throws Exception
 	{
 		String documentText = "initialized";
-		
+
 		JCas jcas = JCasFactory.createJCas();
 
 		// Create a DKPro DocumentMetaData which is also a DocumentAnnotation
@@ -79,14 +80,14 @@ public class DocumentMetaDataTest
 
 		// Make sure we still have a DocumentMetaData as DocumentAnnotation
 		jcas.setDocumentText(documentText);
-		
+
 		DocumentMetaData.get(jcas);
 
 		// Make sure we still only have one
 		assertEquals(0, meta.getBegin());
 		assertEquals(documentText.length(), meta.getEnd());
 	}
-	
+
 	/**
 	 * Check that {@link DocumentMetaData#get} fails if no {@link DocumentMetaData} in the CAS.
 	 */
@@ -96,7 +97,7 @@ public class DocumentMetaDataTest
 		JCas jcas = JCasFactory.createJCas();
 		DocumentMetaData.get(jcas);
 	}
-	
+
 	/**
 	 * Check that {@link DocumentMetaData#get} fails if there is more than one
 	 * {@link DocumentMetaData} in the CAS.
@@ -109,7 +110,7 @@ public class DocumentMetaDataTest
 		meta.addToIndexes();
 		DocumentMetaData.get(jcas);
 	}
-	
+
 	/**
 	 * Check that {@link DocumentMetaData#get} fails if there is more than one
 	 * {@link DocumentAnnotation} in the CAS.
