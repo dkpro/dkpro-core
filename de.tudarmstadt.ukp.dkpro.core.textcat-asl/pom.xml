@@ -28,7 +28,7 @@
 	<description>http://textcat.sourceforge.net/</description>
 	<dependencies>
 		<dependency>
-			<groupId>org.uimafit</groupId>
+			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
