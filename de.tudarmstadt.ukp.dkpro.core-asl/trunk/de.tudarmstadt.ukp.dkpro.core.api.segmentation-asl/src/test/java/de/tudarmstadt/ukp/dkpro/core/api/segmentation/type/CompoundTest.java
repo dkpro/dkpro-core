@@ -24,20 +24,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.UIMAException;
+import org.apache.uima.fit.factory.JCasBuilder;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Before;
 import org.junit.Test;
-import org.uimafit.factory.JCasBuilder;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound.CompoundSplitLevel;
 
 public class CompoundTest
 {
-	
+
 	private Compound compound;
 
 	@Before
@@ -56,13 +55,13 @@ public class CompoundTest
 		final List<Split> splits = new ArrayList<Split>();
 		splits.add(auto);
 		splits.add(mat);
-		automat.setSplits((FSArray) FSCollectionFactory.createFSArray(jcas, splits));
+		automat.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
 		automat.addToIndexes();
 		compound = new Compound(jcas, beginPosition, jcasBuilder.getPosition());
 		splits.clear();
 		splits.add(getrank);
 		splits.add(automat);
-		compound.setSplits((FSArray) FSCollectionFactory.createFSArray(jcas, splits));
+		compound.setSplits(FSCollectionFactory.createFSArray(jcas, splits));
 		compound.addToIndexes();
 		jcasBuilder.close();
 
@@ -72,7 +71,7 @@ public class CompoundTest
 	public void testAll()
 			throws UIMAException
 			{
-		
+
 		final String[] splitsList = new String[] { "getränk", "automat", "auto", "mat" };
 		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.ALL)),
 				is(splitsList));
@@ -83,7 +82,7 @@ public class CompoundTest
 	public void testLowest()
 			throws UIMAException
 			{
-		
+
 		final String[] splitsList = new String[] { "getränk", "auto", "mat" };
 		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.LOWEST)),
 				is(splitsList));
@@ -94,7 +93,7 @@ public class CompoundTest
 	public void testHighest()
 			throws UIMAException
 			{
-		
+
 		final String[] splitsList = new String[] { "getränk", "automat" };
 		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.HIGHEST)),
 				is(splitsList));
@@ -105,7 +104,7 @@ public class CompoundTest
 	public void testNone()
 			throws UIMAException
 			{
-		
+
 		final String[] splitsList = new String[] { };
 		assertThat(coveredTextArrayFromAnnotations(compound.getSplitsWithoutMorpheme(CompoundSplitLevel.NONE)),
 				is(splitsList));
