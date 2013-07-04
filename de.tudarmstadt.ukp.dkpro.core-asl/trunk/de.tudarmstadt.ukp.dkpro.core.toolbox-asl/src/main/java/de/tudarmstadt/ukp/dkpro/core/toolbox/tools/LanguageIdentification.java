@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -30,8 +30,8 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class LanguageIdentification {
 
-    private AnalysisEngineDescription identificator;
-    
+    private final AnalysisEngineDescription identificator;
+
     public LanguageIdentification()
         throws Exception
     {
@@ -40,7 +40,7 @@ public class LanguageIdentification {
                 createPrimitiveDescription(LanguageIdentifier.class)
         );
     }
-    
+
     public String identifyLanguage(String text)
         throws Exception
     {

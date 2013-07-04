@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
 import org.apache.uima.collection.CollectionReader;
-import org.uimafit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
@@ -34,10 +34,12 @@ public abstract class CorpusBase
     implements Corpus
 {
 
+    @Override
     public abstract String getLanguage();
 
+    @Override
     public abstract String getName();
-    
+
     protected abstract CollectionReader getReader();
 
     @Override

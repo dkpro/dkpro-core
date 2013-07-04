@@ -22,27 +22,27 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.pipeline.JCasIterable;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.util.ToolboxUtils;
 
-public class TextIterable 
+public class TextIterable
     implements Iterable<Text>
 {
 
     private final JCasIterable jcasIterable;
     private final String language;
-    
+
     public TextIterable(JCasIterable jcasIterable, String language) {
         this.jcasIterable = jcasIterable;
         this.language = language;
     }
-    
+
     @Override
     public Iterator<Text> iterator()
     {
@@ -74,7 +74,7 @@ public class TextIterable
                     throw new RuntimeException(e);
                 }
             }
-            
+
             return new Text(toolboxSentences);
         }
 

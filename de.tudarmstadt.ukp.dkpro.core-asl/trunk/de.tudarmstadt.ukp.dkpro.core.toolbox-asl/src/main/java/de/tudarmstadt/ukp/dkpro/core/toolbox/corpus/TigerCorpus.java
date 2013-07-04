@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.collection.CollectionReader;
 
@@ -27,7 +27,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 
 /**
  * Tiger Corpus
- * 
+ *
  * @author zesch
  *
  */
@@ -37,14 +37,14 @@ public class TigerCorpus
 
     static final String LANGUAGE = "de";
     static final String NAME = "Tiger";
-    
+
     CollectionReader reader;
 
     public TigerCorpus() throws Exception
     {
         String tigerFile = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
         "/tiger_export/tiger_release_dec05.export";
-        
+
         initialize(tigerFile);
     }
 

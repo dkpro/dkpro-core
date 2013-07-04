@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,8 +28,8 @@ import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.util.CasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
@@ -39,13 +39,13 @@ public class Segmenter
 {
 
     private final AnalysisEngineDescription segmenter;
-    
+
     public Segmenter()
         throws Exception
     {
         segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
     }
-    
+
     public Collection<String> tokenize(String text, String language)
         throws Exception
     {
@@ -54,10 +54,10 @@ public class Segmenter
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(text);
         engine.process(jcas);
-    
+
         return CasUtil.toText(select(jcas, Token.class));
     }
-    
+
     public Collection<Sentence> sentenceSplit(String text, String language)
         throws Exception
     {

@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,8 +39,8 @@ import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
 public class TreeTaggerPosTagger
 {
 
-    private AnalysisEngine engine;
-    
+    private final AnalysisEngine engine;
+
     public TreeTaggerPosTagger()
         throws Exception
    {
@@ -50,7 +50,7 @@ public class TreeTaggerPosTagger
         );
         engine = createPrimitive(tagger);
     }
-    
+
     public Collection<TaggedToken> tag(String text, String language)
         throws Exception
     {

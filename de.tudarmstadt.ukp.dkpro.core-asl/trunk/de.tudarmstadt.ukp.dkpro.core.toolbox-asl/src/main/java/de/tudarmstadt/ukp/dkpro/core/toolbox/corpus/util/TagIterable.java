@@ -19,16 +19,16 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
 import java.util.Queue;
 
+import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.pipeline.JCasIterable;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.util.ToolboxUtils;
 
-public class TagIterable 
+public class TagIterable
     extends CorpusIterableBase<Tag>
 {
 

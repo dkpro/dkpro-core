@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.core.util;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -32,25 +32,25 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 public class TagUtil
 {
-    
+
     private static MappingProvider posMappingProvider = null;
-    
+
     public static MappingProvider getMappingProvider(String language) throws ResourceInitializationException {
         if (posMappingProvider == null) {
-         
+
             posMappingProvider = new MappingProvider();
             posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
                     "core/api/lexmorph/tagset/" + language + "-default-pos.map");
             posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
             posMappingProvider.setDefault("tagger.tagset", "default");
-            
+
             AnalysisEngineDescription tagger = createAggregateDescription(
                     createPrimitiveDescription(OpenNlpPosTagger.class)
             );
-            AnalysisEngine engine = createPrimitive(tagger);      
+            AnalysisEngine engine = createPrimitive(tagger);
             posMappingProvider.configure(engine.newCAS());
-        }      
-        
+        }
+
         return posMappingProvider;
     }
 
@@ -59,24 +59,24 @@ public class TagUtil
 //    {
 //		Map<String, String> mapping = TagsetMappingFactory.getMapping(TagsetMappingFactory.POS,
 //				language, null);
-//        
+//
 //        if (mapping.containsKey(tag)) {
-//            return getShortName(mapping.get(tag)); 
+//            return getShortName(mapping.get(tag));
 //        }
 //        else {
 //            if (mapping.containsKey("*")) {
-//                return getShortName(mapping.get("*")); 
+//                return getShortName(mapping.get("*"));
 //            }
 //            else {
 //                throw new IllegalStateException("No fallback (*) mapping defined!");
 //            }
 //        }
 //    }
-//    
+//
 //    private static String getShortName(String longName) {
-//        
+//
 //        String[] parts = longName.split("\\.");
-//        
+//
 //        if (parts.length <= 1) {
 //            return longName;
 //        }

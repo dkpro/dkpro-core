@@ -20,9 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -41,7 +41,7 @@ public class ToolboxUtils
         throws ResourceInitializationException
     {
         List<String> tokens = JCasUtil.toText(JCasUtil.selectCovered(jcas, Token.class, uimaSentence));
-        
+
         List<String> lemmas = new ArrayList<String>();
         for (Lemma lemma : JCasUtil.selectCovered(jcas, Lemma.class, uimaSentence)) {
             lemmas.add(lemma.getValue());
