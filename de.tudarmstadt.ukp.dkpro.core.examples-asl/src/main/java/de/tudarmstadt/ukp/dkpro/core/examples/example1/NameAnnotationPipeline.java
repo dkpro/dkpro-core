@@ -18,13 +18,13 @@
 package de.tudarmstadt.ukp.dkpro.core.examples.example1;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.uimafit.component.xwriter.CASDumpWriter;
-import org.uimafit.pipeline.SimplePipeline;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.DictionaryAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.examples.type.Name;
