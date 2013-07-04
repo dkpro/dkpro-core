@@ -18,19 +18,19 @@
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.uimafit.component.xwriter.CASDumpWriter;
-import org.uimafit.pipeline.SimplePipeline;
 
 /**
  * @author Richard Eckart de Castilho
