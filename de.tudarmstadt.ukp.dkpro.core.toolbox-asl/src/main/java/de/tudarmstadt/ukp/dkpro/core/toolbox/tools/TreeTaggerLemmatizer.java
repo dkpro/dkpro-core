@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,17 +37,17 @@ public class TreeTaggerLemmatizer
 {
     private final AnalysisEngine tagger;
     private final JCas jcas;
-    
+
     public TreeTaggerLemmatizer()
         throws Exception
     {
         tagger = createAggregate(createAggregateDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)));
-        
+
         jcas = tagger.newJCas();
     }
-    
+
     public Collection<String> lemmatize(String text, String language)
         throws Exception
     {

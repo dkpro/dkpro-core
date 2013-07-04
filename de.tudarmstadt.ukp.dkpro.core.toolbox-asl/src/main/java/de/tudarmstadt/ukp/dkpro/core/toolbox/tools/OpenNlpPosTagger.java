@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,8 +38,8 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
 public class OpenNlpPosTagger
 {
 
-    private AnalysisEngine engine;
-    
+    private final AnalysisEngine engine;
+
     public OpenNlpPosTagger()
         throws Exception
    {
@@ -47,9 +47,9 @@ public class OpenNlpPosTagger
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger.class)
         );
-        engine = createPrimitive(tagger);      
+        engine = createPrimitive(tagger);
     }
-    
+
     public Collection<TaggedToken> tag(String text, String language)
         throws Exception
     {
@@ -57,7 +57,7 @@ public class OpenNlpPosTagger
 
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(language);
-        jcas.setDocumentText(text);        
+        jcas.setDocumentText(text);
         engine.process(jcas);
 
         for (Token t : select(jcas, Token.class)) {

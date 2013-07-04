@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.collection.CollectionReader;
 
@@ -28,7 +28,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
 
 /**
  * Tiger Corpus
- * 
+ *
  * @author zesch
  *
  */
@@ -37,14 +37,14 @@ public class BrownTEICorpus
 {
     static final String LANGUAGE = "en";
     static final String NAME = "Brown";
-    
+
     CollectionReader reader;
 
     public BrownTEICorpus() throws Exception
     {
         String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
         "/brown_tei/";
-        
+
         initialize(brownPath);
     }
 

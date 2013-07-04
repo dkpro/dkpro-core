@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.collection.CollectionReader;
 
@@ -28,47 +28,47 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
 /**
  * A wrapper for the WaCky large-scale Web corpora. It searches a DKPRO_HOME
  * workspace.
- * 
- * Language editions are assumed to be gzipped and folders shold be  
+ *
+ * Language editions are assumed to be gzipped and folders shold be
  * named according to the enum {@link WackyLanguageEdition}.
- * 
+ *
  * @author zesch
- * 
+ *
  */
-public class WackyCorpus 
+public class WackyCorpus
     extends CorpusBase
 {
-    
+
     public enum WackyLanguageEdition {
         // FIXME are those really the right tagsets for the corpora and isn't there a better method to provide this?
         DEWAC("de", "stts"),
         UKWAC("en", "ptb");
-        
+
         private String language;
         private String tagSet;
-        
+
         private WackyLanguageEdition(String aLanguage, String aTagSet)
 		{
         	language = aLanguage;
         	tagSet = aTagSet;
 		}
-        
+
         public String getTagSet()
 		{
 			return tagSet;
 		}
-        
+
         public String getLanguage()
 		{
 			return language;
 		}
     }
-    
+
     private static final String WORKSPACE = "wacky";
-    
+
     private WackyLanguageEdition edition;
     private CollectionReader reader;
-    
+
     public WackyCorpus(WackyLanguageEdition languageEdition) throws Exception
     {
         String wackyPath = DKProContext.getContext().getWorkspace(WORKSPACE).getAbsolutePath() + "/"
@@ -89,13 +89,13 @@ public class WackyCorpus
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ImsCwbReader.PARAM_POS_TAG_SET, languageEdition.getTagSet(),
                 ImsCwbReader.PARAM_PATTERNS, new String[] {
-                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt.gz" 
+                    ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt.gz"
                 }
         );
 
         edition = languageEdition;
     }
-    
+
     @Override
     public String getLanguage()
     {
