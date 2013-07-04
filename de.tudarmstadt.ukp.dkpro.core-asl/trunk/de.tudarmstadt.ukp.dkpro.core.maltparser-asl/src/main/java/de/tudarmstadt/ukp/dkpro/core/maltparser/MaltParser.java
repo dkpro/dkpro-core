@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,6 +36,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
@@ -50,9 +53,6 @@ import org.maltparser.core.syntaxgraph.node.TokenNode;
 import org.maltparser.parser.SingleMalt;
 import org.springframework.beans.PropertyAccessor;
 import org.springframework.beans.PropertyAccessorFactory;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
@@ -161,7 +161,7 @@ public class MaltParser
 
 			{
 			    setContextObject(MaltParser.this);
-			    
+
 				setDefault(ARTIFACT_ID,
 						"${groupId}.maltparser-model-parser-${language}-${variant}");
 				setDefault(VARIANT, "linear");
@@ -222,7 +222,7 @@ public class MaltParser
 							+ " -m parse");
 					// parser.initializeParserModel("-u " + modelUrl.toString() + " -m parse");
 
-					
+
 	                Properties metadata = getResourceMetaData();
 
                     PropertyAccessor paDirect = PropertyAccessorFactory.forDirectFieldAccess(parser);
@@ -243,7 +243,7 @@ public class MaltParser
                         depTags.add(depRelTable.getSymbolCodeToString(i));
                     }
 	                addTagset(depTags);
-					
+
 	                if (printTagSet) {
 	                    getContext().getLogger().log(INFO, getTagset().toString());
 	                }

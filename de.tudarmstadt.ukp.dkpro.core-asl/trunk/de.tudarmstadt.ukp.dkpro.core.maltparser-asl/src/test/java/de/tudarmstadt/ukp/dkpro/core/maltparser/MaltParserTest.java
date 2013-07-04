@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -43,13 +43,13 @@ public class MaltParserTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence , which " +
 			"contains as many constituents and dependencies as possible .";
-	
+
 	@Test
 	public void testEnglishDependenciesDefault()
 		throws Exception
 	{
 		JCas jcas = runTest("en", null, documentEnglish);
-		
+
 		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
 				"AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98", "DET 35,43,8,9",
 				"DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2", "NSUBJ 52,60,46,51",
@@ -64,7 +64,7 @@ public class MaltParserTest
 		throws Exception
 	{
 		JCas jcas = runTest("en", "linear", documentEnglish);
-		
+
 		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
 				"AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98", "DET 35,43,8,9",
 				"DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2", "NSUBJ 52,60,46,51",
@@ -79,7 +79,7 @@ public class MaltParserTest
 		throws Exception
 	{
 		JCas jcas = runTest("en", "poly", documentEnglish);
-		
+
 		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
 				"AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98", "DET 35,43,8,9",
 				"DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2", "NSUBJ 52,60,46,51",
@@ -94,12 +94,12 @@ public class MaltParserTest
 		throws Exception
 	{
 		checkModel("de", "linear");
-		
+
 		String documentGerman = "Wir brauchen ein sehr kompliziertes Beispiel , welches möglichst "
 				+ "viele Konstituenten und Dependenzen beinhaltet .";
-		
+
 		JCas jcas = runTest("de", "linear", documentGerman);
-		
+
 		String[] dependencies = new String[] { "-PUNCT- 89,100,112,113", "DET 13,16,17,21",
 				"DET 36,44,22,35", "DET 4,12,13,16", "DET 45,46,47,54", "DET 47,54,55,64",
 				"DET 55,64,65,70", "DET 65,70,71,84", "DET 71,84,85,88", "DET 85,88,89,100",
@@ -124,7 +124,7 @@ public class MaltParserTest
 //		jcas.setDocumentLanguage("sv");
 //
 //		runPipeline(jcas, pipeline);
-//		
+//
 //		Set<String> expected = new HashSet<String>();
 //		expected.add("SS 0,2,3,10");
 //		expected.add("SS 3,10,21,32");
@@ -141,7 +141,7 @@ public class MaltParserTest
 //		expected.add("SP 41,49,50,53");
 //		expected.add("HD 21,32,33,40");
 //		expected.add("DT 21,32,14,20");
-//		
+//
 //		assertDependencies(jcas, expected);
 //	}
 //
@@ -165,7 +165,7 @@ public class MaltParserTest
 //		jcas.setDocumentLanguage("fr");
 //
 //		runPipeline(jcas, pipeline);
-//		
+//
 //		Set<String> expected = new HashSet<String>();
 //		expected.add("DEP 24,30,31,34");
 //		expected.add("DEP 43,47,57,58");
@@ -177,7 +177,7 @@ public class MaltParserTest
 //		expected.add("MOD 76,88,89,92");
 //		expected.add("MOD 59,62,63,71");
 //		expected.add("DEP 43,47,48,57");
-//		
+//
 //		assertDependencies(jcas, expected);
 //	}
 //
@@ -191,7 +191,7 @@ public class MaltParserTest
 						MaltParser.PARAM_VARIANT, aVariant,
 						MaltParser.PARAM_PRINT_TAGSET, true),
 				createPrimitiveDescription(DependencyDumper.class));
-		
+
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}
 
@@ -201,7 +201,7 @@ public class MaltParserTest
 				"/de/tudarmstadt/ukp/dkpro/core/maltparser/lib/parser-" + aLanguage
 						+ "-"+aVariant+".mco") != null);
 	}
-	
+
 	@Rule public TestName testName = new TestName();
 	@Before
 	public void printSeparator()
