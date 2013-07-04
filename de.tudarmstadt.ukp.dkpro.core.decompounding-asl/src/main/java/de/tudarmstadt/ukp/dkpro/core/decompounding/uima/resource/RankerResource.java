@@ -19,10 +19,10 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
 import java.util.Map;
 
+import org.apache.uima.fit.component.Resource_ImplBase;
+import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.component.Resource_ImplBase;
-import org.uimafit.descriptor.ExternalResource;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 

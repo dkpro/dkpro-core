@@ -18,20 +18,20 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;
 
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ExternalResource;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ExternalResource;
-import org.uimafit.descriptor.TypeCapability;
-import org.uimafit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
