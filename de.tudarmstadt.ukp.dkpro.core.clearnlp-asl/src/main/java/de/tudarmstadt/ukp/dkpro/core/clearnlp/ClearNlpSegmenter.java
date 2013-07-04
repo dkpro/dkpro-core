@@ -29,25 +29,26 @@ import java.util.List;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.engine.EngineGetter;
 import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
 import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
+
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
  * Tokenizer using Clear NLP.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-	    outputs = { 
+	    outputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class ClearNlpSegmenter
@@ -75,7 +76,7 @@ public class ClearNlpSegmenter
 	protected String modelLocation;
 
 	private CasConfigurableProviderBase<AbstractSegmenter> modelProvider;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -86,15 +87,15 @@ public class ClearNlpSegmenter
 		{
 			{
 			    setContextObject(ClearNlpSegmenter.this);
-			    
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-${language}-${variant}");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/" +
 						"morph-${language}-${variant}.bin");
 				setDefault(VARIANT, "default");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
@@ -127,7 +128,7 @@ public class ClearNlpSegmenter
 	{
 		CAS cas = aJCas.getCas();
 		modelProvider.configure(cas);
-		
+
 		super.process(aJCas);
 	}
 
@@ -138,19 +139,19 @@ public class ClearNlpSegmenter
 		AbstractSegmenter segmenter = modelProvider.getResource();
 
 		List<List<String>> sentences = segmenter.getSentences(new BufferedReader(new StringReader(aText)));
-		
+
 		int sBegin = 0;
 		int sEnd = 0;
 		int tBegin = 0;
 		int tEnd = 0;
-		
+
 		for (List<String> sentence : sentences) {
 			sBegin = -1;
-			
+
 			for (String token : sentence) {
 				tBegin = aText.indexOf(token, tBegin);
 				tEnd = tBegin + token.length();
-				
+
 				if (sBegin == -1) {
 					sBegin = tBegin;
 				}
@@ -158,7 +159,7 @@ public class ClearNlpSegmenter
 				createToken(aJCas, aZoneBegin + tBegin, aZoneBegin + tEnd);
 			}
 			sEnd = tEnd;
-			
+
 			createSentence(aJCas, aZoneBegin + sBegin, aZoneBegin + sEnd);
 		}
 	}

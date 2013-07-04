@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -39,7 +39,7 @@ public class ClearNlpDependencyParserTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence , which " +
 			"contains as many constituents and dependencies as possible .";
-	
+
 	@Test
 	public void testEnglishDependencies()
 		throws Exception
@@ -47,7 +47,7 @@ public class ClearNlpDependencyParserTest
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 3000000000l);
 
 		JCas jcas = runTest("en", null, documentEnglish);
-		
+
 		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
 				"AMOD 69,81,64,68", "AMOD 99,101,102,110", "CC 69,81,82,85", "CONJ 69,81,86,98",
 				"DET 35,43,8,9", "DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2",
@@ -62,9 +62,9 @@ public class ClearNlpDependencyParserTest
 		throws Exception
 	{
 //		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
-		
+
 		JCas jcas = runTest("en", "mayo", documentEnglish);
-		
+
 		String[] dependencies = new String[] { "ADVCL 52,60,102,110", "ADVMOD 15,26,10,14",
 				"AMOD 35,43,15,26", "AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98",
 				"DET 35,43,8,9", "DOBJ 3,7,35,43", "MARK 102,110,99,101", "NN 35,43,27,34",
@@ -84,7 +84,7 @@ public class ClearNlpDependencyParserTest
 						ClearNlpDependencyParser.PARAM_VARIANT, aVariant,
 						ClearNlpDependencyParser.PARAM_PRINT_TAGSET, true),
 				createPrimitiveDescription(DependencyDumper.class));
-		
+
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}
 
@@ -95,7 +95,7 @@ public class ClearNlpDependencyParserTest
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
-		
+
 		System.out.println("\n=== "+testName.getMethodName()+" =====================");
 	}
 }

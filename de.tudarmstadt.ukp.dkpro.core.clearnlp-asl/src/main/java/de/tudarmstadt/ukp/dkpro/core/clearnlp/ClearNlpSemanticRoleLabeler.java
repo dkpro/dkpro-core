@@ -18,9 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -34,13 +34,12 @@ import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
-import org.uimafit.util.FSCollectionFactory;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.component.AbstractComponent;
@@ -134,7 +133,7 @@ public class ClearNlpSemanticRoleLabeler
 		{
 			{
 			    setContextObject(ClearNlpSemanticRoleLabeler.this);
-			    
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "pred-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -159,7 +158,7 @@ public class ClearNlpSemanticRoleLabeler
 		{
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
-                
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "role-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -184,7 +183,7 @@ public class ClearNlpSemanticRoleLabeler
 		{
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
-                
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "srl-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -287,7 +286,7 @@ public class ClearNlpSemanticRoleLabeler
 
 			for (Entry<SemanticPredicate, List<SemanticArgument>> e : predArgs.entrySet()) {
 				e.getKey().setArguments(
-						(FSArray) FSCollectionFactory.createFSArray(aJCas, e.getValue()));
+						FSCollectionFactory.createFSArray(aJCas, e.getValue()));
 			}
 		}
 	}
