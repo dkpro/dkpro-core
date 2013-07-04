@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.harness;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,31 +114,31 @@ public final class SegmenterHarness
 				"？" },
 			new String[] { "中国离世界技术品牌有多远?" })
 	};
-	
+
 	private SegmenterHarness()
 	{
 		// No instances
 	}
-	
+
 	public static void run(AnalysisEngineDescription aAed, String... aIgnoreIds) throws Throwable
 	{
 		AnalysisEngine ae = createPrimitive(aAed);
 		JCas jCas = ae.newJCas();
 
 		List<String> results = new ArrayList<String>();
-		
+
 		try {
 			for (TestData td : DATA) {
 				System.out.printf("== %s ==%n", td.id);
 				jCas.reset();
 				jCas.setDocumentLanguage(td.language);
 				jCas.setDocumentText(td.text);
-				
+
 				boolean failed = false;
-				
+
 				try {
 					ae.process(jCas);
-					
+
 					AssertAnnotations.assertSentence(td.sentences, select(jCas, Sentence.class));
 					AssertAnnotations.assertToken(td.tokens, select(jCas, Token.class));
 
@@ -154,7 +154,7 @@ public final class SegmenterHarness
 						results.add(String.format("%s FAIL - Known, ignored", td.id));
 					}
 				}
-				
+
 				if (!failed && ArrayUtils.contains(aIgnoreIds, td.id)) {
 					results.add(String.format("%s FAIL", td.id));
 					Assert.fail(td.id + " passed but was expected to fail");
@@ -168,7 +168,7 @@ public final class SegmenterHarness
 			}
 		}
 	}
-	
+
 	static class TestData
 	{
 		final String id;

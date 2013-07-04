@@ -20,9 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang.StringUtils.join;
 import static org.apache.commons.lang.StringUtils.normalizeSpace;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.toText;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -281,7 +281,7 @@ public class AssertAnnotations
         }
 
         String[] actualTags = actualTagsList.toArray(new String[actualTagsList.size()]);
-        
+
         List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
         List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
 
@@ -430,11 +430,11 @@ public class AssertAnnotations
         Map<String, String> mapping = mp.getResource();
         Assert.assertNotNull("No mapping found for layer [" + aLayer.getName()
                 + "] tagset [" + aName + "]", mapping);
-        
-        
+
+
         List<String> expected = new ArrayList<String>(asList(aDefaultMapped));
         Collections.sort(expected);
-        
+
         List<String> mappedTags = new ArrayList<String>(mapping.keySet());
         Collections.sort(mappedTags);
 
@@ -455,10 +455,10 @@ public class AssertAnnotations
                 }
 
                 Collections.sort(actual);
-                
+
                 // Keep only the unmapped tags
                 actual.removeAll(mappedTags);
-                
+
                 System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
                 System.out.printf("%-20s - Expected: %s%n", "Unmapped tags", asCopyableString(expected));
