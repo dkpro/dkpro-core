@@ -2,13 +2,13 @@
  * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,32 +17,30 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.pipeline.SimplePipeline.runPipeline;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.IOException;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
 import org.junit.Test;
-import org.uimafit.component.xwriter.CASDumpWriter;
-
-import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderXPath;
 
 public class XmlReaderXPathFeatureTest
 {
 	private static final String VALID_DOCS_ROOT = "src/test/resources/input/valid_docs";
-	
+
 	@Test
 	public void abbreviatedFormatTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createCollectionReader(
-				XmlReaderXPath.class, 
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT, 
+				XmlReaderXPath.class,
+				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top", 
+		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
@@ -54,16 +52,16 @@ public class XmlReaderXPathFeatureTest
 
 		runPipeline(reader, writer);
 	}
-	
-	
+
+
 	@Test
 	public void fullFormatTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createCollectionReader(
-				XmlReaderXPath.class, 
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT, 
+				XmlReaderXPath.class,
+				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic", 
+		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
@@ -75,16 +73,16 @@ public class XmlReaderXPathFeatureTest
 
 		runPipeline(reader, writer);
 	}
-	
-	
+
+
 	@Test
 	public void heteroFormatsTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createCollectionReader(
-				XmlReaderXPath.class, 
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT, 
+				XmlReaderXPath.class,
+				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top", 
+		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
@@ -102,8 +100,8 @@ public class XmlReaderXPathFeatureTest
 	public void recursiveReadingTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createCollectionReader(
-				XmlReaderXPath.class, 
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT, 
+				XmlReaderXPath.class,
+				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
@@ -117,16 +115,16 @@ public class XmlReaderXPathFeatureTest
 
 		runPipeline(reader, writer);
 	}
-	
-	
+
+
 	@Test
 	public void tagFilteringTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createCollectionReader(
-				XmlReaderXPath.class, 
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT, 
+				XmlReaderXPath.class,
+				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top", 
+		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_INCLUDE_TAG, new String[] { "EN-title", "num" }, // read only num and EN-title tags
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
@@ -139,15 +137,15 @@ public class XmlReaderXPathFeatureTest
 		runPipeline(reader, writer);
 	}
 
-	
+
 	@Test
 	public void substitutionTest() throws UIMAException, IOException
 	{
 		CollectionReader reader = createCollectionReader(
-				XmlReaderXPath.class, 
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT, 
+				XmlReaderXPath.class,
+				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
-		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top", 
+		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        // Subtitute "EN-title" tag with "title" and "EN-narr" with "narration"
 		        XmlReaderXPath.PARAM_SUBSTITUTE_TAGS, new String[] { "EN-title", "title", "EN-narr", "narration" },
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
@@ -158,8 +156,8 @@ public class XmlReaderXPathFeatureTest
 				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/substitution.txt"
 		);
 
-		runPipeline(reader, writer);	
+		runPipeline(reader, writer);
 	}
-	
-	
+
+
 }
