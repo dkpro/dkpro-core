@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
-import org.uimafit.descriptor.TypeCapability;
+import org.apache.uima.fit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
