@@ -27,14 +27,14 @@ import java.net.URL;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
 import org.jsoup.Jsoup;
-import org.uimafit.component.JCasCollectionReader_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import com.ibm.icu.text.CharsetDetector;
 
@@ -44,23 +44,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 /**
  * Reads the contents of a given URL and strips the HTML.
  * Returns only the textual contents.
- * 
+ *
  * @author zesch
  *
  */
 @TypeCapability(
-		outputs = { 
+		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class HtmlReader
     extends JCasCollectionReader_ImplBase
-{ 
+{
     /**
      * Automatically detect encoding.
-     * 
+     *
      * @see CharsetDetector
      */
     public static final String ENCODING_AUTO = "auto";
-    
+
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
@@ -109,7 +109,7 @@ public class HtmlReader
         throws IOException, CollectionException
     {
         isDone = true;
-        
+
         InputStream is = null;
         try {
             DocumentMetaData dmd = DocumentMetaData.create(jcas);
@@ -119,7 +119,7 @@ public class HtmlReader
 
             is = inputURL.openStream();
             String text;
-            
+
             if (ENCODING_AUTO.equals(encoding)) {
                 CharsetDetector detector = new CharsetDetector();
                 text = IOUtils.toString(detector.getReader(is, null));
@@ -127,7 +127,7 @@ public class HtmlReader
             else {
                 text = IOUtils.toString(is, encoding);
             }
-            
+
             String cleanedText = Jsoup.parse(text).text();
             jcas.setDocumentText(cleanedText);
         }
