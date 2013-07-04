@@ -22,29 +22,29 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.factory.AnalysisEngineFactory;
+import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Test;
-import org.uimafit.component.xwriter.CASDumpWriter;
-import org.uimafit.factory.AnalysisEngineFactory;
-import org.uimafit.factory.CollectionReaderFactory;
-import org.uimafit.pipeline.SimplePipeline;
 
 public class JdbcReaderExample
 {
-    
+
     @Test
     public void localhostMysqlExample()
         throws UIMAException, IOException
     {
         // This is a dummy example. It only shows how to use JdbcReader and may not run on your
         // system.
-        
+
         String query = "SELECT title AS " + JdbcReader.CAS_METADATA_TITLE + ", text AS "
                 + JdbcReader.CAS_TEXT + " FROM test_table;";
         CollectionReader pdfReader = CollectionReaderFactory.createCollectionReader(
-                JdbcReader.class, 
-                JdbcReader.PARAM_DATABASE, "test_db", 
-                JdbcReader.PARAM_USER, "root", 
-                JdbcReader.PARAM_PASSWORD, "", 
+                JdbcReader.class,
+                JdbcReader.PARAM_DATABASE, "test_db",
+                JdbcReader.PARAM_USER, "root",
+                JdbcReader.PARAM_PASSWORD, "",
                 JdbcReader.PARAM_QUERY, query);
 
         AnalysisEngine extractor = AnalysisEngineFactory.createPrimitive(CASDumpWriter.class,
@@ -52,5 +52,5 @@ public class JdbcReaderExample
 
         SimplePipeline.runPipeline(pdfReader, extractor);
     }
-    
+
 }
