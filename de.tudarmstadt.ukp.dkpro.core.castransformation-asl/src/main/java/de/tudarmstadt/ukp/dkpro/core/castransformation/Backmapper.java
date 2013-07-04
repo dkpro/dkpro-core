@@ -31,10 +31,10 @@ import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.ImmutableInterval;
