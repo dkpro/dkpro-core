@@ -19,9 +19,9 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import java.util.Map;
 
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
@@ -29,9 +29,9 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLMProvider;
 
 /**
  * External resource wrapper for the Berkeley LM frequency count provider.
- * 
+ *
  * @author zesch
- * 
+ *
  */
 public final class BerkeleyLMFrequencyCountProvider
 	extends FrequencyCountResourceBase
@@ -41,7 +41,7 @@ public final class BerkeleyLMFrequencyCountProvider
 	public static final String PARAM_BINARY = "BinaryFile";
 	@ConfigurationParameter(name = PARAM_BINARY, mandatory = true)
 	protected String file;
-	
+
 	public static final String PARAM_PROVIDER_LANGUAGE = "ProviderLanguage";
 	@ConfigurationParameter(name = PARAM_PROVIDER_LANGUAGE, mandatory = true)
 	protected String language;

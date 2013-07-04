@@ -19,11 +19,12 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
+import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfModel;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
@@ -84,8 +85,9 @@ public class TfidfConsumer
 		dfStore.registerNewDocument();
 
 		for (String term : TermIterator.create(jcas, featurePath,
-				convertToLowercase))
-			dfStore.countTerm(term);
+				convertToLowercase)) {
+            dfStore.countTerm(term);
+        }
 
 		dfStore.closeCurrentDocument();
 	}
