@@ -23,12 +23,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.pipeline.JCasIterable;
 public class BlikiWikipediaReaderTest
 {
-    
+
     @Test
     public void wikipediaReaderTestPlainText()
         throws Exception
@@ -50,7 +50,7 @@ public class BlikiWikipediaReaderTest
 
         assertEquals(2, i);
     }
-    
+
     @Test
     public void wikipediaReaderTestMarkup()
         throws Exception
@@ -73,7 +73,7 @@ public class BlikiWikipediaReaderTest
 
         assertEquals(2, i);
     }
-    
+
     @Test
     public void wikipediaReaderUnknownPage()
         throws Exception
