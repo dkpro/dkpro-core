@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
 
 import java.util.Collection;
 
@@ -47,7 +47,7 @@ class SegmenterCompatibilityTest
 	@Test
 	public void segmenterCompatibilityTest() throws Exception {
     	checkModelsAndBinary("en");
-	
+
 	    AnalysisEngineDescription desc = createAggregateDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
@@ -70,7 +70,7 @@ class SegmenterCompatibilityTest
             i++;
         }
 	}
-	
+
 	private void checkModelsAndBinary(String lang)
 	{
 		Assume.assumeTrue(getClass().getResource(
