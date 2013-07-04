@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,14 +18,15 @@
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.toText;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.apache.commons.jxpath.ClassFunctions;
 import org.apache.commons.jxpath.DynamicPropertyHandler;
 import org.apache.commons.jxpath.ExpressionContext;
@@ -39,11 +40,12 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.factory.JCasBuilder;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.factory.JCasBuilder;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.util.CasUtil;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR;
@@ -110,11 +112,11 @@ public class TokenMergerTest
 
 		assertEquals(asList("I", "love", "new york", "."), pick(select(jcas, Token.class), "./lemma/value"));
 	}
-	
+
 	private JCas initCas() throws UIMAException
 	{
 		JCas jcas = JCasFactory.createJCas();
-		
+
 		JCasBuilder builder = new JCasBuilder(jcas);
 		setLemmaPos(builder.add("I", Token.class), PR.class, "PR", "I");
 		builder.add(" ");
@@ -127,36 +129,36 @@ public class TokenMergerTest
 		city.setValue("LOCATION");
 		setLemmaPos(builder.add(".", Token.class), PUNC.class, "PUNT", ".");
 		builder.close();
-		
+
 		return builder.getJCas();
 	}
-	
+
 	private Token setLemmaPos(Token aToken, Class<? extends POS> aPosType, String aPosValue,
 			String aLemma)
 		throws CASException
 	{
 		CAS cas = aToken.getCAS();
-		
-		POS pos = (POS) cas.createAnnotation(CasUtil.getType(cas, aPosType), aToken.getBegin(), 
+
+		POS pos = (POS) cas.createAnnotation(CasUtil.getType(cas, aPosType), aToken.getBegin(),
 				aToken.getEnd());
 		pos.setPosValue(aPosValue);
 		aToken.setPos(pos);
-		
+
 		Lemma lemma = new Lemma(aToken.getCAS().getJCas(), aToken.getBegin(), aToken.getEnd());
 		lemma.setValue(aLemma);
 		aToken.setLemma(lemma);
-		
+
 		return aToken;
 	}
-	
+
 	// =============================================================================================
 	// == JXPath helper methods
 	// =============================================================================================
-	
+
 	{
 		JXPathIntrospector.registerDynamicClass(FeatureStructure.class, FeatureStructureHandler.class);
 	}
-	
+
 	public static class FeatureStructureHandler implements DynamicPropertyHandler
 	{
 		@Override
@@ -166,7 +168,7 @@ public class TokenMergerTest
 			Type t = fs.getType();
 			List<Feature> features = t.getFeatures();
 			String[] featureNames = new String[features.size()];
-			
+
 			int i = 0;
 			for (Feature f : features) {
 				featureNames[i] = f.getShortName();
@@ -215,7 +217,7 @@ public class TokenMergerTest
 			throw new UnsupportedOperationException();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static List<Object> pick(Collection<?> aContext, String aPath)
 	{
@@ -227,7 +229,7 @@ public class TokenMergerTest
 		}
 		return result;
 	}
-	
+
 	public static class JXPathCasFunctions
 	{
 		public static String text(ExpressionContext aCtx)
@@ -240,5 +242,5 @@ public class TokenMergerTest
 				return String.valueOf(value);
 			}
 		}
-	}	
+	}
 }

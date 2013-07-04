@@ -25,17 +25,17 @@ import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 
 /**
  * Removes annotations that do not conform to minimum or maximum length constraints.
- * 
+ *
  * (This was previously called TokenFilter).
  *
  * @author Torsten Zesch
@@ -51,7 +51,7 @@ public class AnnotationByLengthFilter
     public static final String PARAM_FILTER_ANNOTATION_TYPES = "FilterTypes";
     @ConfigurationParameter(name=PARAM_FILTER_ANNOTATION_TYPES, mandatory=true, defaultValue={})
     private Set<String> filterTypes;
-    
+
 	/**
 	 * Any annotation in filterTypes shorter than this value will be removed.
 	 */
@@ -65,7 +65,7 @@ public class AnnotationByLengthFilter
 	public static final String PARAM_MAX_LENGTH = "MaxLengthFilter";
 	@ConfigurationParameter(name=PARAM_MAX_LENGTH, mandatory=true, defaultValue="1000")
 	private int maxTokenLength;
-	
+
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
