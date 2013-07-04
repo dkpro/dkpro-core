@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang.StringUtils.startsWith;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -38,6 +38,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -45,10 +49,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
-import org.uimafit.component.JCasCollectionReader_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
-import org.uimafit.factory.JCasBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -67,7 +67,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 /**
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
  * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
- * 
+ *
  * @author Erik-Lân Do Dinh
  * @author Richard Eckart de Castilho
  */
@@ -108,7 +108,7 @@ public class NegraExportReader
 
     /**
      * Write part-of-speech information.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -117,7 +117,7 @@ public class NegraExportReader
 
     /**
      * Write lemma information.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
@@ -128,7 +128,7 @@ public class NegraExportReader
      * Write Penn Treebank bracketed structure information. Mind this may not work with all tagsets,
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
@@ -311,7 +311,7 @@ public class NegraExportReader
         }
 
         casBuilder.close();
-        
+
         // Can only do that after the builder is closed, otherwise the text is not yet set in the
         // CAS and we get "null" for all token strings.
         if (pennTreeEnabled) {
@@ -366,7 +366,7 @@ public class NegraExportReader
 
     /**
      * Read the originId from the #BOS line that is expected to follow.
-     * 
+     *
      * @param aPeek
      *            if true, stream will not advance
      * @return the next origin id or null if there is none
@@ -379,7 +379,7 @@ public class NegraExportReader
 
     /**
      * Read the originId from the #BOS line that is expected to follow.
-     * 
+     *
      * @param aPeek
      *            if true, stream will not advance
      * @return the next origin id or null if there is none

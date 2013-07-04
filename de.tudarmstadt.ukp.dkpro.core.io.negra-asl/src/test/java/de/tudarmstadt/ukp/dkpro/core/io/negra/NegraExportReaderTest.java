@@ -18,17 +18,17 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
 import org.junit.Test;
-import org.uimafit.component.xwriter.CASDumpWriter;
 
 /**
  *
@@ -72,7 +72,7 @@ public class NegraExportReaderTest
 	{
 		File testDump = new File("target/tiger-sample.export.dump");
 		File referenceDump = new File("src/test/resources/tiger-sample.export.dump");
-		
+
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tiger-sample.export",
@@ -98,7 +98,7 @@ public class NegraExportReaderTest
 	{
 		File testDump = new File("target/tueba-sample.export.dump");
 		File referenceDump = new File("src/test/resources/tueba-sample.export.dump");
-		
+
 		// create NegraExportReader output
 		CollectionReader ner = createCollectionReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba-sample.export",
