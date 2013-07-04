@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -39,7 +39,7 @@ public class ClearNlpPosTaggerTest
 		throws Exception
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
-		
+
         runTest("en", null, "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
@@ -52,7 +52,7 @@ public class ClearNlpPosTaggerTest
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
-	
+
 	@Test
 	public void testEnglishMayo()
 		throws Exception
@@ -68,7 +68,7 @@ public class ClearNlpPosTaggerTest
         runTest("en", "mayo", "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
-    }	
+    }
 
 	private void runTest(String language, String variant, String testDocument, String[] tags,
 			String[] tagClasses)
@@ -79,7 +79,7 @@ public class ClearNlpPosTaggerTest
 				ClearNlpPosTagger.PARAM_PRINT_TAGSET, true);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
-		
+
 		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
 	}
 
@@ -92,7 +92,7 @@ public class ClearNlpPosTaggerTest
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
-		
+
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
 }

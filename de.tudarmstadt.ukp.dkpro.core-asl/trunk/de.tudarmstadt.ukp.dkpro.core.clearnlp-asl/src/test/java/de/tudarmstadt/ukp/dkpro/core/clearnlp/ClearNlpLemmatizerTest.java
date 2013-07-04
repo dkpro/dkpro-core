@@ -10,10 +10,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -50,7 +50,7 @@ public class ClearNlpLemmatizerTest
 		throws Exception
 	{
 //		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
-		
+
 		JCas jcas = runTest("en", "We need a very complicated example sentence, which " +
 			"contains as many constituents and dependencies as possible.");
 
@@ -60,7 +60,7 @@ public class ClearNlpLemmatizerTest
 
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 	}
-	
+
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
@@ -69,16 +69,16 @@ public class ClearNlpLemmatizerTest
 		AnalysisEngineDescription lemma = createPrimitiveDescription(ClearNlpLemmatizer.class);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(seg, tagger, lemma);
-		
+
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 
 	@Rule
 	public TestName name = new TestName();
@@ -89,7 +89,7 @@ public class ClearNlpLemmatizerTest
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().gc();
-		
+
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
 }

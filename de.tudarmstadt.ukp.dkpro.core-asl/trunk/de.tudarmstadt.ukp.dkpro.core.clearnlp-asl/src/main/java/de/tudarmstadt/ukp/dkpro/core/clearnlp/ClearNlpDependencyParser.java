@@ -18,10 +18,10 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.util.Level.WARNING;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,14 +29,15 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Properties;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.component.dep.CDEPPassParser;
@@ -55,7 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
  * Clear parser annotator.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -129,7 +130,7 @@ public class ClearNlpDependencyParser
                             getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_DEP);
 
                     Properties metadata = getResourceMetaData();
-                    
+
                     SingletonTagset depTags = new SingletonTagset(
                             Dependency.class, metadata.getProperty("dependency.tagset"));
 

@@ -18,9 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,11 +28,11 @@ import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.component.AbstractComponent;
 import com.googlecode.clearnlp.dependency.DEPNode;
@@ -49,7 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Lemmatizer using Clear NLP.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
@@ -87,7 +86,7 @@ public class ClearNlpLemmatizer
 	protected String modelLocation;
 
 	private CasConfigurableProviderBase<AbstractComponent> modelProvider;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -98,15 +97,15 @@ public class ClearNlpLemmatizer
 		{
 			{
 			    setContextObject(ClearNlpLemmatizer.this);
-			    
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-${language}-${variant}");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/" +
 						"morph-${language}-${variant}.bin");
 				setDefault(VARIANT, "default");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
@@ -120,8 +119,8 @@ public class ClearNlpLemmatizer
 				try {
 					is = aUrl.openStream();
 					String language = getAggregatedProperties().getProperty(PARAM_LANGUAGE);
-					
-					return EngineGetter.getComponent(is, language, NLPLib.MODE_MORPH);					
+
+					return EngineGetter.getComponent(is, language, NLPLib.MODE_MORPH);
 				}
 				catch (Exception e) {
 					throw new IOException(e);
@@ -139,11 +138,11 @@ public class ClearNlpLemmatizer
 	{
 		modelProvider.configure(aJCas.getCas());
 		AbstractComponent analyzer = modelProvider.getResource();
-		
+
 		// Iterate over all sentences
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-			
+
 			DEPTree tree = new DEPTree();
 
 			// Generate input format required by analyzer
@@ -153,7 +152,7 @@ public class ClearNlpLemmatizer
 				node.pos = t.getPos().getPosValue();
 				tree.add(node);
 			}
-			
+
 			analyzer.process(tree);
 
 			int i = 0;
@@ -162,7 +161,7 @@ public class ClearNlpLemmatizer
 				Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
 				l.setValue(node.lemma);
 				l.addToIndexes();
-				
+
 				t.setLemma(l);
 				i++;
 			}

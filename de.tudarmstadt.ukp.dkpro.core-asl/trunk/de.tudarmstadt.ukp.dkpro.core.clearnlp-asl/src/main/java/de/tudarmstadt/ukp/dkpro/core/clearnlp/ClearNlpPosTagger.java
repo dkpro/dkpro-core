@@ -18,22 +18,23 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
-import static org.uimafit.util.JCasUtil.toText;
 
 import java.io.InputStream;
 import java.util.List;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import com.googlecode.clearnlp.classification.model.StringModel;
 import com.googlecode.clearnlp.component.pos.CPOSTagger;
@@ -121,7 +122,7 @@ public class ClearNlpPosTagger
 		modelProvider = new ModelProviderBase<CPOSTagger>() {
 			{
 			    setContextObject(ClearNlpPosTagger.this);
-			    
+
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-tagger-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -144,10 +145,10 @@ public class ClearNlpPosTagger
                     tags.addAll(asList(model.getLabels()));
                 }
                 addTagset(tags, true);
-                
+
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
-                }                   
+                }
 
                 return tagger;
 			}
