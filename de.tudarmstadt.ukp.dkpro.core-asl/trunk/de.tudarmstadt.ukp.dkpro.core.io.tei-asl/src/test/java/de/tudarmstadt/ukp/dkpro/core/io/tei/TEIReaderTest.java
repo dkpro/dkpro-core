@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.factory.CollectionReaderFactory.createDescription;
 
 import java.io.File;
 import java.util.LinkedHashMap;
@@ -32,12 +32,12 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
-import org.uimafit.pipeline.JCasIterable;
-import org.uimafit.pipeline.SimplePipeline;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -58,8 +58,8 @@ public class TEIReaderTest
                 TEIReader.PARAM_LANGUAGE, "de",
                 TEIReader.PARAM_PATH, "classpath:/digibib",
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
-        
-        AnalysisEngine writer = createPrimitive(TextWriter.class, 
+
+        AnalysisEngine writer = createPrimitive(TextWriter.class,
         		TextWriter.PARAM_USE_DOCUMENT_ID, true,
         		TextWriter.PARAM_PATH, "target/digibibTest/");
 
@@ -69,10 +69,10 @@ public class TEIReaderTest
         	String text = jcas.getDocumentText();
         	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 			actualSizes.put(meta.getDocumentId(), text.length());
-			
+
 			writer.process(jcas);
         }
-        
+
         Map<String, Integer> expectedSizes = new LinkedHashMap<String, Integer>();
         expectedSizes.put("Literatur-Balde,-Jacob.xml#1", 152);
         expectedSizes.put("Literatur-Balde,-Jacob.xml#2", 14378);
@@ -91,10 +91,10 @@ public class TEIReaderTest
         expectedSizes.put("Literatur-Kobell,-Franz-von.xml#3", 50730);
         expectedSizes.put("Literatur-Marcel,-Gabriel.xml#1", 52696);
         expectedSizes.put("Literatur-Meister,-Johann-Gottlieb.xml#1", 41418);
-        
+
         assertEquals(expectedSizes, actualSizes);
     }
-	
+
     @Test
     public void brownReaderTest()
         throws Exception
@@ -113,17 +113,17 @@ public class TEIReaderTest
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
         	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
-        	
+
             if (i == 0) {
                 assertEquals(2239, JCasUtil.select(jcas, Token.class).size());
                 assertEquals(2239, JCasUtil.select(jcas, POS.class).size());
                 assertEquals(98, JCasUtil.select(jcas, Sentence.class).size());
-                
+
                 assertEquals(firstSentence, JCasUtil.select(jcas, Sentence.class).iterator().next().getCoveredText());
             }
             i++;
         }
-        
+
         assertEquals(3, i);
     }
 
@@ -133,51 +133,51 @@ public class TEIReaderTest
     {
     	File reference = new File("src/test/resources/brown_ims.txt");
     	File output = new File("target/test-output/brown_ims.txt");
-    	
+
         CollectionReaderDescription reader = createDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei/",
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
-        
+
         AnalysisEngineDescription writer = createPrimitiveDescription(ImsCwbWriter.class,
         		ImsCwbWriter.PARAM_TARGET_LOCATION, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        
+
         assertEquals(
-        		FileUtils.readFileToString(reference, "UTF-8"), 
+        		FileUtils.readFileToString(reference, "UTF-8"),
         		FileUtils.readFileToString(output, "UTF-8"));
     }
-    
+
     @Test
     public void brownReaderTest3()
         throws Exception
     {
         File reference = new File("src/test/resources/brown_ims.gz.txt");
         File output = new File("target/test-output/brown_ims.gz.txt");
-        
+
         CollectionReaderDescription reader = createDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei_gzip/",
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
-        
+
         AnalysisEngineDescription writer = createPrimitiveDescription(ImsCwbWriter.class,
                 ImsCwbWriter.PARAM_TARGET_LOCATION, output);
 
         SimplePipeline.runPipeline(reader, writer);
-        
+
         assertEquals(
-                FileUtils.readFileToString(reference, "UTF-8"), 
+                FileUtils.readFileToString(reference, "UTF-8"),
                 FileUtils.readFileToString(output, "UTF-8"));
     }
-    
+
     @Test
     public void brownReaderTest_noSentences()
         throws Exception
     {
-        
+
         CollectionReader reader = createCollectionReader(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
@@ -190,7 +190,7 @@ public class TEIReaderTest
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
         	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
-        	
+
             if (i == 0) {
                 assertEquals(2239, JCasUtil.select(jcas, Token.class).size());
                 assertEquals(2239, JCasUtil.select(jcas, POS.class).size());
@@ -198,7 +198,7 @@ public class TEIReaderTest
             }
             i++;
         }
-        
+
         assertEquals(3, i);
     }
 
@@ -206,7 +206,7 @@ public class TEIReaderTest
     public void brownReaderTest_noToken_noPOS()
         throws Exception
     {
-        
+
         CollectionReader reader = createCollectionReader(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
@@ -221,7 +221,7 @@ public class TEIReaderTest
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
         	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
-        	
+
             if (i == 0) {
                 assertEquals(0, JCasUtil.select(jcas, Token.class).size());
                 assertEquals(0, JCasUtil.select(jcas, POS.class).size());
@@ -229,7 +229,7 @@ public class TEIReaderTest
             }
             i++;
         }
-        
+
         assertEquals(3, i);
     }
 
@@ -237,7 +237,7 @@ public class TEIReaderTest
     public void brownReaderTest_expectedException()
         throws Exception
     {
-        
+
         CollectionReader reader = createCollectionReader(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
