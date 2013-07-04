@@ -17,17 +17,17 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.ExternalResourceFactory.createExternalResourceDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ExternalResource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 
@@ -53,7 +53,7 @@ public class BerkeleyLMFrequencyCountProviderTest
         				BerkeleyLMFrequencyCountProvider.class,
         				BerkeleyLMFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
                         BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
-        
+
         // Check the external resource was injected
         AnalysisEngine ae = createPrimitive(desc);
         ae.process(ae.newJCas());

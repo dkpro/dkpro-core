@@ -17,13 +17,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model;
 
-import static org.uimafit.factory.ExternalResourceFactory.bindResource;
+import static org.apache.uima.fit.factory.ExternalResourceFactory.bindResource;
 
 import java.io.File;
 import java.io.ObjectInputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.resource.*;
+import org.apache.uima.resource.DataResource;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.resource.SharedResourceObject;
 
 /**
  * Shared {@link DfModel}.

@@ -17,14 +17,16 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.*;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.uimafit.util.JCasUtil.iterate;
 
 import java.io.File;
 import java.util.HashMap;
@@ -33,24 +35,22 @@ import java.util.Map;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.uimafit.pipeline.JCasIterable;
-import org.uimafit.pipeline.SimplePipeline;
 
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator;
-import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfConsumer;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator.WeightingModeIdf;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.TfidfAnnotator.WeightingModeTf;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type.Tfidf;
 
 /**
  *
@@ -166,7 +166,7 @@ public class TfidfAnnotatorTest
     private void testIt(JCas jcas, Map<String, Double> expectedDoc1, Map<String, Double> expectedDoc2) {
         if (DocumentMetaData.get(jcas).getDocumentTitle().equals("test1.txt")) {
             int i = 0;
-            for (Tfidf tfidf : iterate(jcas, Tfidf.class)) {
+            for (Tfidf tfidf : select(jcas, Tfidf.class)) {
                 assertEquals(tfidf.getTerm(), expectedDoc1.get(tfidf.getTerm()).doubleValue(), tfidf.getTfidfValue(), EPSILON);
                 i++;
             }
@@ -174,7 +174,7 @@ public class TfidfAnnotatorTest
         }
         else if (DocumentMetaData.get(jcas).getDocumentTitle().equals("test2.txt")) {
             int i = 0;
-            for (Tfidf tfidf : iterate(jcas, Tfidf.class)) {
+            for (Tfidf tfidf : select(jcas, Tfidf.class)) {
                 assertEquals(tfidf.getTerm(), expectedDoc2.get(tfidf.getTerm()).doubleValue(), tfidf.getTfidfValue(), EPSILON);
                 i++;
             }
