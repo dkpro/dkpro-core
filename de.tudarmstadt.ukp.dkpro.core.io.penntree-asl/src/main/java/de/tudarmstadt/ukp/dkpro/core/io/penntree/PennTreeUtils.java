@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.lang.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
-import org.uimafit.util.FSCollectionFactory;
+import org.apache.uima.fit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -41,17 +41,17 @@ public class PennTreeUtils
 {
     private static final Map<String, String> ESCAPE = new HashMap<String, String>();
     private static final Map<String, String> UNESCAPE = new HashMap<String, String>();
-    
+
     static {
         ESCAPE.put("(", "-LRB-");
         ESCAPE.put(")", "-RRB-");
     }
-    
+
     static {
         UNESCAPE.put("-LRB-", "(");
         UNESCAPE.put("-RRB-", ")");
     }
-    
+
     public static PennTreeNode convertPennTree(Constituent aConstituent)
     {
         PennTreeNode node = new PennTreeNode();
@@ -62,7 +62,7 @@ public class PennTreeUtils
             if (c instanceof Constituent) {
                 children.add(convertPennTree((Constituent) c));
             }
-            
+
             if (c instanceof Token) {
                 Token t = (Token) c;
 
@@ -72,7 +72,7 @@ public class PennTreeUtils
                 PennTreeNode preterm = new PennTreeNode();
                 preterm.setLabel(t.getPos().getPosValue());
                 preterm.setChildren(singletonList(term));
-                
+
                 children.add(preterm);
             }
         }
@@ -80,7 +80,7 @@ public class PennTreeUtils
         node.setChildren(children);
         return node;
     }
-    
+
     public static String escapeToken(String aToken)
     {
         String value = ESCAPE.get(aToken);
