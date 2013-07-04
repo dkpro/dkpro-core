@@ -18,8 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static java.util.Arrays.asList;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,11 +38,11 @@ import mstparser.ParserOptions;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasConsumer_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasConsumer_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -57,16 +57,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * href=http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html>here<\a><br>
  * and<br>
  * and <a href="http://sourceforge.net/projects/mstparser/">here<\a><br>
- * 
+ *
  * @author beinborn
  * @author zesch
  */
 @TypeCapability(
-        inputs = { 
+        inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
-        outputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+        outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class MSTParser
     extends JCasConsumer_ImplBase
@@ -94,7 +94,7 @@ public class MSTParser
 
     /**
      * Log the tag set(s) when a model is loaded.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -105,7 +105,7 @@ public class MSTParser
 
     /**
      * Initializes the MSTParser and creates a ModelResourceProvicer
-     * 
+     *
      * @param jcas
      *            The JCas containing the textual input
      * @throws ResourceInitializationException
@@ -184,7 +184,7 @@ public class MSTParser
     /**
      * Processes the given text using the MSTParser. As the MSTParser expects an input file, a
      * temporary file is created.
-     * 
+     *
      * @param jcas
      *            The JCas containing the textual input
      * @throws AnalysisEngineProcessException
@@ -259,7 +259,7 @@ public class MSTParser
 
     /**
      * Generates a temporary file from a jcas. This is needed as input to the MST parser.
-     * 
+     *
      * @param jcas
      *            The JCas containing the textual input
      * @return The path to the created temporary file.
