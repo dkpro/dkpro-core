@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,13 +23,13 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
-import org.uimafit.util.CasUtil;
 
-/** 
+/**
  * Updated by JCasGen Sun Nov 21 13:28:48 CET 2010
  * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.metadata/src/main/resources/desc/type/DocumentMetaData.xml
  * @generated */
@@ -50,14 +50,14 @@ public class DocumentMetaData
 	/** @generated */
 	@Override
 	public int getTypeIndexID() {return typeIndexID;}
- 
+
 	/**
 	 * Never called. Disable default constructor
 	 *
 	 * @generated
 	 */
 	protected DocumentMetaData() {}
-    
+
 	/**
 	 * Internal - constructor used by generator
 	 *
@@ -67,12 +67,12 @@ public class DocumentMetaData
     super(addr, type);
     readObject();
   }
-  
+
 	/** @generated */
 	public DocumentMetaData(JCas jcas) {
     super(jcas);
-    readObject();   
-  } 
+    readObject();
+  }
 
 	/** @generated */
 	public DocumentMetaData(JCas jcas, int begin, int end) {
@@ -80,7 +80,7 @@ public class DocumentMetaData
     setBegin(begin);
     setEnd(end);
     readObject();
-  }   
+  }
 
   /** <!-- begin-user-doc --> Write your own initialization here <!-- end-user-doc -->
   @generated modifiable */
@@ -97,21 +97,23 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public String getDocumentTitle() {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentTitle == null)
-      jcasType.jcas.throwFeatMissing("documentTitle", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentTitle == null) {
+        jcasType.jcas.throwFeatMissing("documentTitle", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
     return jcasType.ll_cas.ll_getStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentTitle);}
-    
+
 	/**
 	 * setter for documentTitle - sets The human readable title of the document.
 	 *
 	 * @generated
 	 */
 	public void setDocumentTitle(String v) {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentTitle == null)
-      jcasType.jcas.throwFeatMissing("documentTitle", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentTitle, v);}    
-   
-    
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentTitle == null) {
+        jcasType.jcas.throwFeatMissing("documentTitle", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
+    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentTitle, v);}
+
+
 	// *--------------*
 	// * Feature: documentId
 
@@ -121,21 +123,23 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public String getDocumentId() {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentId == null)
-      jcasType.jcas.throwFeatMissing("documentId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentId == null) {
+        jcasType.jcas.throwFeatMissing("documentId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
     return jcasType.ll_cas.ll_getStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentId);}
-    
+
 	/**
 	 * setter for documentId - sets The id of the document.
 	 *
 	 * @generated
 	 */
 	public void setDocumentId(String v) {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentId == null)
-      jcasType.jcas.throwFeatMissing("documentId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentId, v);}    
-   
-    
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentId == null) {
+        jcasType.jcas.throwFeatMissing("documentId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
+    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentId, v);}
+
+
 	// *--------------*
 	// * Feature: documentUri
 
@@ -145,21 +149,23 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public String getDocumentUri() {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentUri == null)
-      jcasType.jcas.throwFeatMissing("documentUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentUri == null) {
+        jcasType.jcas.throwFeatMissing("documentUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
     return jcasType.ll_cas.ll_getStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentUri);}
-    
+
 	/**
 	 * setter for documentUri - sets The URI of the document.
 	 *
 	 * @generated
 	 */
 	public void setDocumentUri(String v) {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentUri == null)
-      jcasType.jcas.throwFeatMissing("documentUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentUri, v);}    
-   
-    
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentUri == null) {
+        jcasType.jcas.throwFeatMissing("documentUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
+    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentUri, v);}
+
+
 	// *--------------*
 	// * Feature: collectionId
 
@@ -169,21 +175,23 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public String getCollectionId() {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_collectionId == null)
-      jcasType.jcas.throwFeatMissing("collectionId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_collectionId == null) {
+        jcasType.jcas.throwFeatMissing("collectionId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
     return jcasType.ll_cas.ll_getStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_collectionId);}
-    
+
 	/**
 	 * setter for collectionId - sets The ID of the whole document collection.
 	 *
 	 * @generated
 	 */
 	public void setCollectionId(String v) {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_collectionId == null)
-      jcasType.jcas.throwFeatMissing("collectionId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_collectionId, v);}    
-   
-    
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_collectionId == null) {
+        jcasType.jcas.throwFeatMissing("collectionId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
+    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_collectionId, v);}
+
+
 	// *--------------*
 	// * Feature: documentBaseUri
 
@@ -193,21 +201,23 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public String getDocumentBaseUri() {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentBaseUri == null)
-      jcasType.jcas.throwFeatMissing("documentBaseUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentBaseUri == null) {
+        jcasType.jcas.throwFeatMissing("documentBaseUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
     return jcasType.ll_cas.ll_getStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentBaseUri);}
-    
+
 	/**
 	 * setter for documentBaseUri - sets Base URI of the document.
 	 *
 	 * @generated
 	 */
 	public void setDocumentBaseUri(String v) {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentBaseUri == null)
-      jcasType.jcas.throwFeatMissing("documentBaseUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentBaseUri, v);}    
-   
-    
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentBaseUri == null) {
+        jcasType.jcas.throwFeatMissing("documentBaseUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
+    jcasType.ll_cas.ll_setStringValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_documentBaseUri, v);}
+
+
 	// *--------------*
 	// * Feature: isLastSegment
 
@@ -219,10 +229,11 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public boolean getIsLastSegment() {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_isLastSegment == null)
-      jcasType.jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_isLastSegment == null) {
+        jcasType.jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
     return jcasType.ll_cas.ll_getBooleanValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_isLastSegment);}
-    
+
 	/**
 	 * setter for isLastSegment - sets CAS de-multipliers need to know whether a CAS is the last
 	 * multiplied segment. Thus CAS multipliers should set this field to true for the last CAS they
@@ -231,9 +242,10 @@ public class DocumentMetaData
 	 * @generated
 	 */
 	public void setIsLastSegment(boolean v) {
-    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_isLastSegment == null)
-      jcasType.jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
-    jcasType.ll_cas.ll_setBooleanValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_isLastSegment, v);}    
+    if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_isLastSegment == null) {
+        jcasType.jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
+    }
+    jcasType.ll_cas.ll_setBooleanValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_isLastSegment, v);}
         	/**
 	 * Create a new {@link DocumentMetaData} annotation in the given CAS. The meta data fields can
 	 * then be set on the returned object.
@@ -283,7 +295,7 @@ public class DocumentMetaData
 			return docMetaData;
 		}
 	}
-	
+
 	private static DocumentMetaData initDocumentMetaData(DocumentMetaData aMetaData)
 	{
 		// If there is already a DocumentAnnotation copy it's information and delete it
@@ -298,7 +310,7 @@ public class DocumentMetaData
 			aMetaData.setBegin(0);
 			aMetaData.setEnd(aMetaData.getView().getDocumentText().length());
 		}
-		
+
 		aMetaData.addToIndexes();
 		return aMetaData;
 	}
@@ -375,7 +387,7 @@ public class DocumentMetaData
 
 		return result;
 	}
-	
+
 	/**
 	 * Get the {@link DocumentMetaData} from the CAS.
 	 *
