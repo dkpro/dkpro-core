@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import java.io.InputStream;
+
 import opennlp.tools.sentdetect.SentenceDetectorME;
 import opennlp.tools.sentdetect.SentenceModel;
 import opennlp.tools.tokenize.TokenizerME;
@@ -27,10 +28,10 @@ import opennlp.tools.util.Span;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -39,11 +40,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
  * Tokenizer and sentence splitter using OpenNLP.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-	    outputs = { 
+	    outputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class OpenNlpSegmenter
@@ -72,7 +73,7 @@ public class OpenNlpSegmenter
 
 	private CasConfigurableProviderBase<SentenceDetectorME> sentenceModelProvider;
 	private CasConfigurableProviderBase<TokenizerME> tokenModelProvider;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -82,20 +83,20 @@ public class OpenNlpSegmenter
 		sentenceModelProvider = new CasConfigurableStreamProviderBase<SentenceDetectorME>() {
 			{
 			    setContextObject(OpenNlpSegmenter.this);
-			    
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
 						"sentence-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected SentenceDetectorME produceResource(InputStream aStream)
 			    throws Exception
@@ -104,24 +105,24 @@ public class OpenNlpSegmenter
 				return new SentenceDetectorME(model);
 			}
 		};
-		
+
 		tokenModelProvider = new CasConfigurableStreamProviderBase<TokenizerME>() {
 			{
                 setContextObject(OpenNlpSegmenter.this);
-                
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
-				
+
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
 						"token-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected TokenizerME produceResource(InputStream aStream)
 			    throws Exception
@@ -129,7 +130,7 @@ public class OpenNlpSegmenter
 				TokenizerModel model = new TokenizerModel(aStream);
 				return new TokenizerME(model);
 			}
-		};	
+		};
 	}
 
 	@Override
@@ -139,7 +140,7 @@ public class OpenNlpSegmenter
 		CAS cas = aJCas.getCas();
 		sentenceModelProvider.configure(cas);
 		tokenModelProvider.configure(cas);
-		
+
 		super.process(aJCas);
 	}
 

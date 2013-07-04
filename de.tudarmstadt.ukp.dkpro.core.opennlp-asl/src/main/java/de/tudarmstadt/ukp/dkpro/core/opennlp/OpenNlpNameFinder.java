@@ -17,13 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.toText;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.TokenNameFinder;
 import opennlp.tools.namefind.TokenNameFinderModel;
@@ -33,17 +34,17 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionProvider;
 
@@ -102,7 +103,7 @@ public class OpenNlpNameFinder
         {
             {
                 setContextObject(OpenNlpNameFinder.this);
-                
+
                 setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
                 setDefault(ARTIFACT_ID,
                         "de.tudarmstadt.ukp.dkpro.core.opennlp-model-ner-${language}-${variant}");
@@ -165,7 +166,7 @@ public class OpenNlpNameFinder
         for (Span namedEntity : namedEntities) {
             int begin = tokenList.get(namedEntity.getStart()).getBegin();
             int end = tokenList.get(namedEntity.getEnd()-1).getEnd();
-            
+
             Type type = mappingProvider.getTagType(namedEntity.getType());
             NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
             neAnno.setValue(namedEntity.getType());

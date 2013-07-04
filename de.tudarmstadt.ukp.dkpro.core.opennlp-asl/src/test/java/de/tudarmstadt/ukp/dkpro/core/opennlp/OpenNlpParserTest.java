@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectSingle;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -40,27 +40,27 @@ public class OpenNlpParserTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence, which " +
 			"contains as many constituents and dependencies as possible.";
-	
+
 	@Test
 	public void testEnglishChunking()
 		throws Exception
 	{
 		JCas jcas = runTest("en", "chunking", documentEnglish);
-		
-		String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2", 
-				"NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109", 
-				"ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", 
+
+		String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+				"NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
+				"ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
 				"WHNP 45,50" };
 
-		String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2", 
-				"NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109", 
-				"ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", 
+		String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+				"NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
+				"ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
 				"WHNP 45,50" };
 
 		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
 				"ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
-		String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", 
+		String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN",
 				"NN", ",", "WDT", "VBZ", "IN", "JJ", "NNS", "CC",
 				"NNS", "IN", "JJ", "." };
 
@@ -101,16 +101,16 @@ public class OpenNlpParserTest
 				OpenNlpParser.PARAM_CREATE_PENN_TREE_STRING, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
-		
+
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 	@Rule
 	public TestName name = new TestName();
 
