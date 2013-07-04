@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.util.FSCollectionFactory;
 
 
 
@@ -107,7 +107,7 @@ public class Compound extends Annotation {
 
 
 	/**
-	 * 
+	 *
 	 * Enum for all possible split levels for decompounding
 	 * @author erbs
 	 *
@@ -177,7 +177,7 @@ public class Compound extends Annotation {
 			}
 		}
 		return splitList;
-		
+
 		case LOWEST:
 		for(Split split : splits){
 			if((includeMorpheme || !(split instanceof LinkingMorpheme)) && (split.getSplits() == null || split.getSplits().size() == 0)){
@@ -186,10 +186,10 @@ public class Compound extends Annotation {
 			if(split.getSplits() != null){
 				splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()), includeMorpheme, splitLevel));
 			}
-			
+
 		}
 		return splitList;
-		
+
 		case HIGHEST:
 		for(Split split : splits){
 			if(includeMorpheme || !(split instanceof LinkingMorpheme)){
@@ -197,7 +197,7 @@ public class Compound extends Annotation {
 			}
 		}
 		return splitList;
-		
+
 		default:
 			return splitList;
 		}
