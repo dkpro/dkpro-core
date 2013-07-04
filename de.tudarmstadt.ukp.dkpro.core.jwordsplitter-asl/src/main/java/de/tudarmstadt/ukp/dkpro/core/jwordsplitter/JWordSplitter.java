@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.jwordsplitter;
 
-import static org.uimafit.util.CasUtil.select;
+import static org.apache.uima.fit.util.CasUtil.select;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,9 +29,9 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.CasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.CasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.abelssoft.wordtools.jwordsplitter.AbstractWordSplitter;
 import de.abelssoft.wordtools.jwordsplitter.impl.GermanWordSplitter;
@@ -50,7 +50,7 @@ public class JWordSplitter
 {
 	/**
 	 * Whether to remove the original token.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_DELETE_COVER = ComponentParameters.PARAM_DELETE_COVER;
@@ -59,7 +59,7 @@ public class JWordSplitter
 
 	/**
 	 * The annotation type to split.
-	 * 
+	 *
 	 * Default: {@link Token}
 	 */
 	public static final String PARAM_TYPE_TO_SPLIT = "typeToSplit";
