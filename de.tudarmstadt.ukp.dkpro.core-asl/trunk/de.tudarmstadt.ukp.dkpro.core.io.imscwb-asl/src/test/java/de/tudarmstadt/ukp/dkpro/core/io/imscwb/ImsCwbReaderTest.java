@@ -17,15 +17,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
-import org.uimafit.pipeline.JCasIterable;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -82,9 +82,9 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]*.txt" },
-				ImsCwbReader.PARAM_READ_TOKEN, false, 
+				ImsCwbReader.PARAM_READ_TOKEN, false,
 				ImsCwbReader.PARAM_READ_LEMMA, false,
-				ImsCwbReader.PARAM_READ_POS, false, 
+				ImsCwbReader.PARAM_READ_POS, false,
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
 		int i = 0;
@@ -107,9 +107,9 @@ public class ImsCwbReaderTest
 		CollectionReader reader = createCollectionReader(ImsCwbReader.class,
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15", 
+				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ImsCwbReader.PARAM_READ_TOKEN, false,
-				ImsCwbReader.PARAM_READ_LEMMA, true, 
+				ImsCwbReader.PARAM_READ_LEMMA, true,
 				ImsCwbReader.PARAM_READ_POS, false,
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
