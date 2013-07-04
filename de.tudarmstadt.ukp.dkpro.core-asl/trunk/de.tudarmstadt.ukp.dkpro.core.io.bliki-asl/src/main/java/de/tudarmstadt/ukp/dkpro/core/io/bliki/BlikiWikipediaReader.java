@@ -39,6 +39,7 @@ import org.sweble.wikitext.engine.PageTitle;
 import org.sweble.wikitext.engine.utils.SimpleWikiConfiguration;
 
 import de.fau.cs.osr.ptk.common.AstVisitor;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
@@ -55,6 +56,13 @@ public class BlikiWikipediaReader
     public static final String PARAM_WIKIAPI_URL = ComponentParameters.PARAM_SOURCE_LOCATION;
     @ConfigurationParameter(name = PARAM_WIKIAPI_URL, mandatory = true, defaultValue = "true")
     private String wikiapiUrl;
+
+    /** 
+     * The language of the wiki installation.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    private String language;
 
     /** Whether the reader outputs plain text or wiki markup. */
     public static final String PARAM_OUTPUT_PLAIN_TEXT = "outputPlainText";
@@ -94,9 +102,22 @@ public class BlikiWikipediaReader
     public void getNext(JCas jcas)
         throws IOException, CollectionException
     {       
+        
+        Page page = listOfPages.get(pageOffset);
+        
+        DocumentMetaData dmd = new DocumentMetaData(jcas);
+        dmd.setDocumentTitle(page.getTitle());
+        dmd.setDocumentUri(wikiapiUrl + "?title=" + page.getTitle());
+        dmd.setDocumentId(page.getPageid());
+        dmd.setDocumentBaseUri(wikiapiUrl);
+        dmd.setCollectionId(page.getPageid());
+        dmd.addToIndexes();
+
+        jcas.setDocumentLanguage(language);
+        
         if (outputPlainText) {
             try {
-                jcas.setDocumentText(getPlainText(listOfPages.get(pageOffset)));
+                jcas.setDocumentText(getPlainText(page));                
             }
             catch (CASRuntimeException e) {
                 throw new CollectionException(e);
@@ -106,7 +127,7 @@ public class BlikiWikipediaReader
             }
         }
         else {
-            jcas.setDocumentText(listOfPages.get(pageOffset).getCurrentContent());
+            jcas.setDocumentText(page.getCurrentContent());
         }
         
         pageOffset++;
@@ -137,7 +158,7 @@ public class BlikiWikipediaReader
      * @return The plain text of a Wikipedia article
      * @throws WikiApiException
      */
-    public String getPlainText(Page page)
+    private String getPlainText(Page page)
             throws WikiApiException
     {
         return (String) parsePage(page, new PlainTextConverter());
@@ -156,7 +177,7 @@ public class BlikiWikipediaReader
      *         type of the go() method of your visitor.
      * @throws WikiApiException
      */
-    public Object parsePage(Page page, AstVisitor v) throws WikiApiException
+    private Object parsePage(Page page, AstVisitor v) throws WikiApiException
     {
         // Use the provided visitor to parse the page
         return v.go(getCompiledPage(page).getPage());
@@ -169,7 +190,7 @@ public class BlikiWikipediaReader
      * @return the parsed page
      * @throws WikiApiException
      */
-    public CompiledPage getCompiledPage(Page page) throws WikiApiException
+    private CompiledPage getCompiledPage(Page page) throws WikiApiException
     {
         CompiledPage cp;
         try{

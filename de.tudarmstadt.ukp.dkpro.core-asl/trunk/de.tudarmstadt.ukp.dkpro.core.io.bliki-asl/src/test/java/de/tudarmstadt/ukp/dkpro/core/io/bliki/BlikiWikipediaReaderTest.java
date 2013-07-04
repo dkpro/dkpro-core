@@ -23,9 +23,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
+import org.uimafit.pipeline.JCasIterable;
 public class BlikiWikipediaReaderTest
 {
     
@@ -36,6 +36,7 @@ public class BlikiWikipediaReaderTest
         CollectionReader reader = createCollectionReader(
                 BlikiWikipediaReader.class,
                 BlikiWikipediaReader.PARAM_WIKIAPI_URL, "http://en.wikipedia.org/w/api.php",
+                BlikiWikipediaReader.PARAM_LANGUAGE, "en",
                 BlikiWikipediaReader.PARAM_PAGE_TITLES, new String[]{"New York City", "Darmstadt"}
         );
 
@@ -58,6 +59,7 @@ public class BlikiWikipediaReaderTest
                 BlikiWikipediaReader.class,
                 BlikiWikipediaReader.PARAM_OUTPUT_PLAIN_TEXT, false,
                 BlikiWikipediaReader.PARAM_WIKIAPI_URL, "http://en.wikipedia.org/w/api.php",
+                BlikiWikipediaReader.PARAM_LANGUAGE, "en",
                 BlikiWikipediaReader.PARAM_PAGE_TITLES, new String[]{"New York City", "Darmstadt"}
         );
 
@@ -79,6 +81,7 @@ public class BlikiWikipediaReaderTest
         CollectionReader reader = createCollectionReader(
                 BlikiWikipediaReader.class,
                 BlikiWikipediaReader.PARAM_WIKIAPI_URL, "http://en.wikipedia.org/w/api.php",
+                BlikiWikipediaReader.PARAM_LANGUAGE, "en",
                 BlikiWikipediaReader.PARAM_PAGE_TITLES, new String[]{"humbelgrpf"}
         );
 
