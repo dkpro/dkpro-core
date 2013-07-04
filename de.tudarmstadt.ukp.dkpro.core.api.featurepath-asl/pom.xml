@@ -27,8 +27,8 @@
 	<description>The FeaturePath classes were extracted from the Apache UIMA Sandbox Dictionary Annotator.</description>
 	<dependencies>
 		<dependency>
-			<groupId>org.uimafit</groupId>
-			<artifactId>uimafit</artifactId>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
