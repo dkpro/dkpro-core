@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator;
 
-import static org.uimafit.util.CasUtil.getType;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.CasUtil.getType;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,11 +33,11 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -48,21 +48,21 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Takes a plain text file with phrases as input and annotates the phrases in the CAS file. The
  * annotation type defaults to {@link NGram}, but can be changed.
- * 
+ *
  * The component requires that {@link Token}s and {@link Sentence}es are annotated in the CAS.
- * 
+ *
  * The format of the phrase file is one phrase per line, tokens are separated by space:
- * 
+ *
  * <pre>
  * this is a phrase
  * another phrase
  * </pre>
- * 
+ *
  * @author Johannes Hoffart
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-	    inputs = { 
+	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" })
 public class DictionaryAnnotator
