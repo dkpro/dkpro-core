@@ -38,6 +38,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.collection.CollectionReader_ImplBase;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceConfigurationException;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -48,7 +49,6 @@ import org.eml.MMAX2.annotation.markables.Markable;
 import org.eml.MMAX2.annotation.markables.MarkableLevel;
 import org.eml.MMAX2.discourse.MMAX2Discourse;
 import org.eml.MMAX2.discourse.MMAX2DiscourseElement;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;

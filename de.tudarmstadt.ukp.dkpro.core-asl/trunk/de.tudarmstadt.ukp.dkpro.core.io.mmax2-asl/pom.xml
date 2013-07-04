@@ -37,7 +37,7 @@
 			<version>1.7.6</version>
 		</dependency>
 		<dependency>
-			<groupId>org.uimafit</groupId>
+			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
