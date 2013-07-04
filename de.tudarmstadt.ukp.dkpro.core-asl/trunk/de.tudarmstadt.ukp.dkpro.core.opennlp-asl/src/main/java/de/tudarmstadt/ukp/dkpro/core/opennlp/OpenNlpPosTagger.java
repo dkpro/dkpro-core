@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
-import static org.uimafit.util.JCasUtil.toText;
 
 import java.io.InputStream;
 import java.util.List;
@@ -33,11 +33,11 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
@@ -123,7 +123,7 @@ public class OpenNlpPosTagger
 		modelProvider = new ModelProviderBase<POSTagger>() {
 			{
                 setContextObject(OpenNlpPosTagger.this);
-                
+
                 setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-tagger-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");

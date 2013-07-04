@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -49,7 +49,7 @@ public class OpenNlpPosTaggerTest
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
-	
+
 	@Test
 	public void testGerman()
 		throws Exception
@@ -85,7 +85,7 @@ public class OpenNlpPosTaggerTest
 				OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
-		
+
 		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
 	}
 
