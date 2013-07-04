@@ -17,21 +17,21 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
-import static org.uimafit.util.JCasUtil.toText;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.languagetool.AnalyzedSentence;
 import org.languagetool.AnalyzedToken;
 import org.languagetool.AnalyzedTokenReadings;
 import org.languagetool.Language;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -43,11 +43,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * LanguageTool. Multiple readings are produced. The annotator simply takes the most frequent
  * lemma from those readings. If no readings could be found, the original text is assigned as
  * lemma.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @TypeCapability(
-	    inputs = { 
+	    inputs = {
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
 	    outputs = {
@@ -61,21 +61,21 @@ public class LanguageToolLemmatizer
 	{
 		try {
 			Language lang = Language.getLanguageForShortName(aJCas.getDocumentLanguage());
-			
+
 			for (Sentence s : select(aJCas, Sentence.class)) {
 				// Get the tokens from the sentence
 				List<Token> tokens = selectCovered(Token.class, s);
 				List<String> tokenText = toText(tokens);
-				
+
 				// Let LanguageTool analyze the tokens
 				List<AnalyzedTokenReadings> rawTaggedTokens = lang.getTagger().tag(tokenText);
 				AnalyzedSentence as = new AnalyzedSentence(
 						rawTaggedTokens.toArray(new AnalyzedTokenReadings[rawTaggedTokens.size()]));
 				as = lang.getDisambiguator().disambiguate(as);
-				
+
 				for (int i = 0; i < tokens.size(); i++) {
 					Token token = tokens.get(i);
-					
+
 					// Get the most frequent lemma
 					String best = getMostFrequentLemma(as.getTokens()[i]);
 
@@ -91,7 +91,7 @@ public class LanguageToolLemmatizer
 			throw new AnalysisEngineProcessException(e);
 		}
 	}
-	
+
 	private String getMostFrequentLemma(AnalyzedTokenReadings aReadings)
 	{
 		FrequencyDistribution<String> freq = new FrequencyDistribution<String>();
@@ -100,7 +100,7 @@ public class LanguageToolLemmatizer
 				freq.inc(t.getLemma());
 			}
 		}
-		
+
 		String best = null;
 		for (String l : freq.getKeys()) {
 			if (best == null) {
@@ -110,7 +110,7 @@ public class LanguageToolLemmatizer
 				best = l;
 			}
 		}
-		
+
 		return best;
 	}
 }
