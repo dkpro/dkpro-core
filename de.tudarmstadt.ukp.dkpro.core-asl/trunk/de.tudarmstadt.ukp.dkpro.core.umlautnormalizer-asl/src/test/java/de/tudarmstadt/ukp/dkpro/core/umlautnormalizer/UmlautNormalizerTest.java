@@ -17,13 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.umlautnormalizer;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
-import org.uimafit.factory.AggregateBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
