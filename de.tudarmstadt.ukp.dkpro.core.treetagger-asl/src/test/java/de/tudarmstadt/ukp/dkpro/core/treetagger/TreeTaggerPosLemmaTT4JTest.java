@@ -18,9 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.apache.commons.lang.StringUtils.repeat;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +28,8 @@ import java.util.List;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.factory.JCasBuilder;
+import org.apache.uima.fit.testing.util.HideOutput;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
@@ -35,8 +37,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.uimafit.factory.JCasBuilder;
-import org.uimafit.testing.util.HideOutput;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -87,7 +87,7 @@ class TreeTaggerPosLemmaTT4JTest
         		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "."  },
         		new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON",  "ART", "NN", "PTKVZ", "$."   },
         		new String[] { "CARD", "NN", "V",     "ART", "NN", "V",     "CONJ", "ART", "NN", "V",     "PUNC" });
-        
+
         runTest("de", "Das ist ein Test .",
         		new String[] { "die", "sein",  "eine", "Test", "."   },
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
@@ -102,7 +102,7 @@ class TreeTaggerPosLemmaTT4JTest
         		new String[] { "dit",      "zijn",       "een",      "test",   "."    },
         		new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$."   },
         		new String[] { "POS",      "POS",        "POS",      "POS",    "POS" });
-        
+
         runTest("nl", "10 minuten op de microfoon en vrij podium .",
         		new String[] { "@card@",   "minuut", "op",   "de",       "microfoon", "en",        "vrij", "podium", "."   },
         		new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg",    "conjcoord", "adj",  "nounsg", "$."  },
@@ -218,10 +218,10 @@ class TreeTaggerPosLemmaTT4JTest
 
         HideOutput hideOut = new HideOutput();
 		try {
-			
+
 			for (int n = 0; n < 100; n++) {
 		        JCas aJCas = TestRunner.runTest(engine, "en", testDocument);
-		        
+
 		        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
 		        AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
 			}
@@ -262,12 +262,12 @@ class TreeTaggerPosLemmaTT4JTest
 		throws Exception
 	{
 		checkModelsAndBinary(language);
-		
+
         AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class,
         		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
-        
+
         AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
 

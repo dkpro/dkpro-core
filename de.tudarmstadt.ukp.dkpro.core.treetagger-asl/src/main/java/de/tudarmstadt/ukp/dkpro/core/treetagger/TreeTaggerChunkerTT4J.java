@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.uimafit.util.CasUtil.select;
+import static org.apache.uima.fit.util.CasUtil.select;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -56,7 +56,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
 	protected String chunkMappingLocation;
-	
+
 //	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
 //	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
 	private String typeAdapterClass;
@@ -75,7 +75,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 
     	treetagger.setEpsilon(0.00000001);
     	treetagger.setHyphenHeuristics(true);
-    	
+
 		chunkerMappingProvider = new MappingProvider();
 		chunkerMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
 				"core/api/lexmorph/tagset/${language}-${chunker.tagset}-chunker.map");
@@ -91,12 +91,12 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		throws AnalysisEngineProcessException
 	{
 		super.typeSystemInit(aTypeSystem);
-		
+
 		posType = aTypeSystem.getType(POS.class.getName());
 		chunkType = aTypeSystem.getType(Chunk.class.getName());
 		chunkValue = chunkType.getFeatureByBaseName("chunkValue");
 	}
-    
+
     @Override
     public void destroy()
     {
@@ -205,7 +205,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			handler.token(null, null, null);
 
 			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " chunks");
-		} 
+		}
 		catch (Exception e) {
 			throw new AnalysisEngineProcessException(e);
 		}
