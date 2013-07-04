@@ -2,13 +2,13 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,16 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
 import org.apache.uima.UimaContext;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.wikipedia.api.PageQuery;
 import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 
 /**
  * Reads all article pages that match a query created by the numerous parameters of this class.
- * 
+ *
  * @author zesch
  *
  */
@@ -42,7 +42,7 @@ public class WikipediaQueryReader
     public static final String PARAM_MAX_CATEGORIES = "MaxCategories";
     @ConfigurationParameter(name = PARAM_MAX_CATEGORIES, mandatory=false, defaultValue="-1")
     private int maxCategories;
-    
+
     /**
      * Minimum number of categories.
      * Articles with a lower number of categories will not be returned by the query.
@@ -50,7 +50,7 @@ public class WikipediaQueryReader
     public static final String PARAM_MIN_CATEGORIES = "MinCategories";
     @ConfigurationParameter(name = PARAM_MIN_CATEGORIES, mandatory=false, defaultValue="-1")
     private int minCategories;
-    
+
     /**
      * Maximum number of incoming links.
      * Articles with a higher number of incoming links will not be returned by the query.
@@ -133,7 +133,7 @@ public class WikipediaQueryReader
         super.initialize(context);
 
         PageQuery query = new PageQuery();
-        
+
         if (maxCategories != -1) {
             query.setMaxCategories(maxCategories);
             queryInitialized = true;

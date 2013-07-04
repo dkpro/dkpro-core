@@ -31,11 +31,11 @@ import java.util.Set;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision;
@@ -52,10 +52,10 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 
 /**
  * Abstract base class for all readers based on revisions.
- * 
+ *
  * @author zesch
  * @author Oliver Ferschke
- * 
+ *
  */
 public abstract class WikipediaRevisionReaderBase
     extends WikipediaReaderBase
@@ -168,6 +168,7 @@ public abstract class WikipediaRevisionReaderBase
 
     }
 
+    @Override
     public boolean hasNext()
         throws IOException, CollectionException
     {
@@ -268,7 +269,7 @@ public abstract class WikipediaRevisionReaderBase
 
     /**
      * Loads a text file line-by-line into a Set of Strings.
-     * 
+     *
      * @param fileName
      *            path to the file
      * @return a Set containing the individual lines of the text file
