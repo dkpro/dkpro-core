@@ -18,11 +18,11 @@ import java.net.URL;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -35,9 +35,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Wrapper for the GATE rule based lemmatizer.
- * 
+ *
  * Based on code by Asher Stern from the BIUTEE textual entailment tool.
- * 
+ *
  * @author zesch
  * @since 1.4.0
  */
@@ -81,7 +81,7 @@ public class GateLemmatizer
 		modelProvider = new CasConfigurableProviderBase<Interpret>() {
             {
                 setContextObject(GateLemmatizer.this);
-                
+
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
                         "morph-${language}-${variant}.rul");
                 setDefault(VARIANT, "default");
@@ -111,7 +111,7 @@ public class GateLemmatizer
 		throws AnalysisEngineProcessException
 	{
 	    modelProvider.configure(jcas.getCas());
-	    
+
 		String category = null;
 		for (Token token : JCasUtil.select(jcas, Token.class)) {
 			POS pos = token.getPos();

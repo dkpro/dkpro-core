@@ -10,10 +10,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -22,6 +22,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;

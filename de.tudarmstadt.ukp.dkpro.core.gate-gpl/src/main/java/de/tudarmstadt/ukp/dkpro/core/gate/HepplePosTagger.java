@@ -1,9 +1,9 @@
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
 import static java.util.Collections.singletonList;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
-import static org.uimafit.util.JCasUtil.toText;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import hepple.postag.InvalidRuleException;
 import hepple.postag.POSTagger;
 
@@ -15,11 +15,11 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -91,7 +91,7 @@ public class HepplePosTagger
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
     protected boolean printTagSet;
-    
+
     private CasConfigurableProviderBase<URL> ruleProvider;
     private CasConfigurableProviderBase<URL> lexiconProvider;
     private MappingProvider mappingProvider;
@@ -105,7 +105,7 @@ public class HepplePosTagger
         ruleProvider = new CasConfigurableProviderBase<URL>() {
             {
                 setContextObject(HepplePosTagger.this);
-                
+
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/gate/lib/" +
                         "tagger-${language}-${variant}.rul");
                 setDefault(VARIANT, "default");
@@ -150,7 +150,7 @@ public class HepplePosTagger
         mappingProvider.addImport("tagger.tagset", ruleProvider);
     }
 
-    
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -178,7 +178,7 @@ public class HepplePosTagger
 
             List<String[]> tagged = (List<String[]>) posTagger.runTagger(singletonList(tokenTexts))
                     .get(0);
-            
+
             int i = 0;
             for (Token t : tokens) {
                 Type posTag = mappingProvider.getTagType(tagged.get(i)[1]);

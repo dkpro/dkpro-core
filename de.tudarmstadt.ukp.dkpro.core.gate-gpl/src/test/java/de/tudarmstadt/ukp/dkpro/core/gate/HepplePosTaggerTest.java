@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -49,7 +49,7 @@ public class HepplePosTaggerTest
         		new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
         		new String[] { "NP",  "V",   "V",   "NN",  "PUNC" });
     }
-	
+
 	private void runTest(String language, String variant, String testDocument, String[] tags,
 			String[] tagClasses)
 		throws Exception
@@ -59,7 +59,7 @@ public class HepplePosTaggerTest
 		        HepplePosTagger.PARAM_PRINT_TAGSET, true);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
-		
+
 		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
 	}
 

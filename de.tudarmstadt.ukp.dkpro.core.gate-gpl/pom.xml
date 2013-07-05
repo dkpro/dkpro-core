@@ -9,7 +9,7 @@
 	<name>DKPro Core GPL - GATE</name>
 	<dependencies>
 		<dependency>
-			<groupId>org.uimafit</groupId>
+			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit</artifactId>
 		</dependency>
 		<dependency>
