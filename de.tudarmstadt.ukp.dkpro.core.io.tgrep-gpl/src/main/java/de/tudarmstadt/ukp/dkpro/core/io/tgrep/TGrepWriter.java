@@ -26,11 +26,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 /**
  * TGrep2 corpus file writer. Requires {@link PennTree}s to be annotated before.
- * 
+ *
  * @author Erik-Lân Do Dinh
  */
 public class TGrepWriter
@@ -56,7 +56,7 @@ public class TGrepWriter
 	/**
 	 * Set this parameter to true if you want to add a comment to each PennTree which is written to
 	 * the output files. The comment is of the form {@code documentId,beginOffset,endOffset}.
-     * 
+     *
      * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_COMMENTS = "writeComments";
@@ -65,7 +65,7 @@ public class TGrepWriter
 
 	/**
 	 * Set this parameter to true if you want to encode directly into the tgrep2 binary format.
-	 * 
+	 *
 	 * Default: {@code true}
 	 */
 	public static final String PARAM_WRITE_T2C = "writeT2c";
@@ -75,9 +75,9 @@ public class TGrepWriter
 	/**
 	 * Method to compress the tgrep file (only used if PARAM_WRITE_T2C is true). Only NONE, GZIP and
 	 * BZIP2 are supported.
-	 * 
+	 *
 	 * Default: {@link CompressionMethod#NONE}
-	 * 
+	 *
 	 * @see CompressionMethod
 	 */
 	public static final String PARAM_COMPRESSION = "compression";
@@ -86,7 +86,7 @@ public class TGrepWriter
 
 	/**
 	 * If true, silently drops malformed Penn Trees instead of throwing an exception.
-	 * 
+	 *
 	 * Default: {@code false}
 	 */
 	public static final String PARAM_DROP_MALFORMED_TREES = "dropMalformedTrees";
@@ -180,7 +180,7 @@ public class TGrepWriter
 
 	/**
 	 * Check if a given Penn tree will be rejected by TGrep2.
-	 * 
+	 *
 	 * @param aTree
 	 *            the Penn tree to check
 	 * @return true if aTree is fit for use with Tgrep2, false otherwise
@@ -257,7 +257,7 @@ public class TGrepWriter
 
 	/**
 	 * Produces a TGrep2 binary corpus file.
-	 * 
+	 *
 	 * @param aFilename
 	 *            the name of the file from which a corpus file shall be created, without extension
 	 * @throws IOException

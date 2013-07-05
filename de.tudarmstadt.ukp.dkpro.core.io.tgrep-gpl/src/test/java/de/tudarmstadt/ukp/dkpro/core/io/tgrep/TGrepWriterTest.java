@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tgrep;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.junit.After;
 import org.junit.Assert;
@@ -25,8 +27,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
@@ -35,7 +35,7 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 
 public class TGrepWriterTest
 {
-	private File outputPath = new File("src/test/resources/tgrep");
+	private final File outputPath = new File("src/test/resources/tgrep");
 
 	@Test
 	public void testTxt()
@@ -88,7 +88,7 @@ public class TGrepWriterTest
 	{
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
-	
+
 	@After
 	public void cleanUp()
 	{
