@@ -22,8 +22,8 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.descriptor.TypeCapability;
 import org.xces.graf.api.IGraph;
 import org.xces.graf.io.GrafRenderer;
 import org.xces.graf.io.IRenderer;
