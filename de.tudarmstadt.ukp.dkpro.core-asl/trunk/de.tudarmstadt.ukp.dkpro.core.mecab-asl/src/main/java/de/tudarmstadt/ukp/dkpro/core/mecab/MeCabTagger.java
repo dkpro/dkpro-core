@@ -78,7 +78,7 @@ public class MeCabTagger
 	private Tagger tagger;
 
 	/**
-	 * @see org.uimafit.component.JCasAnnotator_ImplBase#initialize(org.apache.uima .UimaContext)
+	 * @see org.apache.uima.fit.component.JCasAnnotator_ImplBase#initialize(org.apache.uima .UimaContext)
 	 *
 	 *      Loads MeCab library from system default paths. Throws and UnsatisfiedLinkError in case
 	 *      the native code cannot be read.
