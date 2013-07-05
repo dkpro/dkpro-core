@@ -10,18 +10,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.sfst;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -53,7 +53,7 @@ public class MorphologyAnnotatorTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         assertEquals(4, JCasUtil.select(jcas, Morpheme.class).size());
     }
-    
+
     @Test
     public void germanMorhologyAnnotatorTest()
         throws Exception
@@ -63,7 +63,7 @@ public class MorphologyAnnotatorTest
         jcas.setDocumentLanguage("de");
         jcas.setDocumentText("Der Arzt arbeitet im Krankenhaus.");
         ae.process(jcas);
-        
+
         String[] lemmas = new String[] { };
 
         String[] posOriginal = new String[] { "notAvailable", "notAvailable", "notAvailable",
@@ -73,7 +73,7 @@ public class MorphologyAnnotatorTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         assertEquals(6, JCasUtil.select(jcas, Morpheme.class).size());
     }
-    
+
     private AnalysisEngine getEngine() throws ResourceInitializationException {
         AnalysisEngineDescription segmenter = createPrimitiveDescription(
                 BreakIteratorSegmenter.class

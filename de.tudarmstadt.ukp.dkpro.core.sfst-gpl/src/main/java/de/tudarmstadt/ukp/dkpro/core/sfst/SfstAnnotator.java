@@ -22,11 +22,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -44,17 +44,17 @@ import de.tudarmstadt.ukp.dkpro.core.sfst.parser.TurkishAnalysisParser;
 
 /**
  * UIMA wrapper for morphological analyzer based on SFST.
- * 
+ *
  * (Binaries and models are distributed under GPL licence.
  *  Run the Ant build script to download and install artifacts locally.)
- *  
+ *
  * Writes Lemma, POS, and Morpheme annotations.
- * 
- * 
+ *
+ *
  * @author zesch
  * @author eckart
  * @author flekova
- * 
+ *
  */
 
 public class SfstAnnotator
@@ -115,7 +115,7 @@ public class SfstAnnotator
         {
             {
                 setContextObject(SfstAnnotator.this);
-                
+
                 setDefault(LOCATION, NOT_REQUIRED);
                 setOverride(LANGUAGE, language);
             }
@@ -134,7 +134,7 @@ public class SfstAnnotator
                 else {
                     ap = new SimpleParser();
                 }
-                 
+
                 return ap;
             }
         };
@@ -145,7 +145,7 @@ public class SfstAnnotator
         {
             {
                 setContextObject(SfstAnnotator.this);
-                
+
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/"
                                 + "morph-${language}-${variant}.a");
                 setDefault(VARIANT, "default");
@@ -191,28 +191,28 @@ public class SfstAnnotator
                 List<String> results = runTRMorph(executable, model, token.getCoveredText());
 
                 AnalysisParser parser = parserProvider.getResource();
-                
+
                 if (results.size() > 0) {
-                    
-                    // TODO currently, we just use the first analysis 
+
+                    // TODO currently, we just use the first analysis
                     //      as we have no way to decide which analyis is the correct one
                     ParsedAnalysis parse = parser.parse(results.get(0));
-                    
+
                     // TODO: concert parse into more fine-grained morph tags
                     Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
                     morpheme.setMorphTag(parse.getRaw());
                     morpheme.addToIndexes();
-                    
+
                     if (writeLemma && parse.getLemma() != null) {
                         Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
                         lemma.setValue(parse.getLemma());
                         lemma.addToIndexes();
                     }
-                    
-                    // TODO add more fine-grained POS tags                    
+
+                    // TODO add more fine-grained POS tags
                     if (writePos && parse.getTag(TagType.POS) != null) {
                         POS pos = new POS(jcas, token.getBegin(), token.getEnd());
-                        pos.setPosValue(parse.getTag(TagType.POS).name()); 
+                        pos.setPosValue(parse.getTag(TagType.POS).name());
                         pos.addToIndexes();
                     }
                 }
