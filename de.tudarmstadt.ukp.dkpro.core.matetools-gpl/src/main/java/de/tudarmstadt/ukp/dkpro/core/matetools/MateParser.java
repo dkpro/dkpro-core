@@ -28,12 +28,12 @@ import java.util.Properties;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.TypeCapability;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
@@ -49,32 +49,32 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <p>
  * DKPro Annotator for the MateToolsParser
  * </p>
- * 
+ *
  * Please cite the following paper, if you use the parser Bernd Bohnet. 2010. Top Accuracy and Fast
  * Dependency Parsing is not a Contradiction. The 23rd International Conference on Computational
  * Linguistics (COLING 2010), Beijing, China.
- * 
+ *
  * Required annotations:<br/>
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>POS</li>
  * </ul>
- * 
+ *
  * Generated annotations:<br/>
  * <ul>
  * <li>Dependency</li>
  * </ul>
- * 
- * 
+ *
+ *
  * @author AnNa, zesch
  */
 @TypeCapability(
-        inputs = { 
+        inputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
-        outputs = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+        outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class MateParser
 	extends JCasAnnotator_ImplBase
@@ -108,7 +108,7 @@ public class MateParser
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
-    
+
 	private CasConfigurableProviderBase<Parser> modelProvider;
 
 	@Override
@@ -141,9 +141,9 @@ public class MateParser
 				String[] args = { "-model", modelFile.getPath() };
 				Options option = new Options(args);
 				Parser parser = new Parser(option); // create a parser
-				
+
 				Properties metadata = getResourceMetaData();
-				
+
 				HashMap<String, HashMap<String, Integer>> featureSet = MFO.getFeatureSet();
                 SingletonTagset posTags = new SingletonTagset(
                         POS.class, metadata.getProperty("pos.tagset"));

@@ -10,9 +10,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
@@ -54,7 +54,7 @@ public class MateParserTest
                 "END", "EP", "JU", "MNR", "MO", "NG", "NK", "NMC", "OA", "OA2", "OC", "OG", "OP",
                 "PAR", "PD", "PG", "PH", "PM", "PNC", "RC", "RE", "RS", "SB", "SBP", "SP", "SVP",
                 "UC", "VO" };
-        
+
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "negra", dependencyTags, jcas);
@@ -66,7 +66,7 @@ public class MateParserTest
     {
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
-        
+
         String[] dependencies = new String[] { "AMOD 15,26,10,14", "AMOD 64,68,61,63",
                 "CONJ 82,85,86,98", "COORD 69,81,82,85", "NMOD 35,43,15,26", "NMOD 35,43,27,34",
                 "NMOD 35,43,52,60", "NMOD 35,43,8,9", "NMOD 69,81,64,68", "NMOD 69,81,99,101",
@@ -88,7 +88,7 @@ public class MateParserTest
                 "LOC-OPRD", "LOC-PRD", "LOC-TMP", "MNR", "MNR-PRD", "MNR-TMP", "NAME", "NMOD",
                 "OBJ", "OPRD", "P", "PMOD", "POSTHON", "PRD", "PRD-PRP", "PRD-TMP", "PRN", "PRP",
                 "PRT", "PUT", "ROOT", "SBJ", "SUB", "SUFFIX", "TITLE", "TMP", "VC", "VOC" };
-        
+
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagset(Dependency.class, "conll2009", dependencyTags, jcas);
