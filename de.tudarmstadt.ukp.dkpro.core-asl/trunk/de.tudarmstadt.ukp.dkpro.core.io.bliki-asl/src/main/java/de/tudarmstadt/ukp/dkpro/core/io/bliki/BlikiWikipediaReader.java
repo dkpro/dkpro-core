@@ -20,8 +20,11 @@ package de.tudarmstadt.ukp.dkpro.core.io.bliki;
 import info.bliki.api.Page;
 import info.bliki.api.User;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+
+import javax.xml.bind.JAXBException;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CASRuntimeException;
@@ -78,6 +81,9 @@ public class BlikiWikipediaReader
     private List<Page> listOfPages;
     private int pageOffset = 0;
     
+    private SimpleWikiConfiguration config;
+    private Compiler compiler;
+
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
@@ -86,6 +92,17 @@ public class BlikiWikipediaReader
 
         User user = new User("", "", wikiapiUrl);
         user.login();
+        
+        try {
+            config = new SimpleWikiConfiguration(WikiConstants.SWEBLE_CONFIG);
+        }
+        catch (FileNotFoundException e) {
+            throw new ResourceInitializationException(e);
+        }
+        catch (JAXBException e) {
+            throw new ResourceInitializationException(e);
+        }
+        compiler = new Compiler(config);
         
         listOfPages = user.queryContent(pageTitles);
         
@@ -194,13 +211,11 @@ public class BlikiWikipediaReader
     {
         CompiledPage cp;
         try{
-            SimpleWikiConfiguration config = new SimpleWikiConfiguration(WikiConstants.SWEBLE_CONFIG);
 
             PageTitle pageTitle = PageTitle.make(config, page.getTitle());
             PageId pageId = new PageId(pageTitle, -1);
 
             // Compile the retrieved page
-            Compiler compiler = new Compiler(config);
             cp = compiler.postprocess(pageId, page.getCurrentContent(), null);
         }catch(Exception e){
             throw new WikiApiException(e);
