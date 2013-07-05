@@ -18,20 +18,20 @@
 package de.tudarmstadt.ukp.dkpro.core.io.graf;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createDescription;
-import static org.uimafit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.component.xwriter.CASDumpWriter;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.uimafit.component.xwriter.CASDumpWriter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
@@ -63,7 +63,7 @@ public class GrafWriterTest
 
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(
 				OpenNlpSegmenter.class);
-		
+
 		AnalysisEngineDescription posTagger = createPrimitiveDescription(
 				OpenNlpPosTagger.class);
 
@@ -82,12 +82,12 @@ public class GrafWriterTest
 
 		File output = new File(testFolder.getRoot(), "example1.txt.xml");
 		assertTrue(output.exists());
-		
+
 		String expected = readFileToString(new File("src/test/resources/reference/example1.txt.xml"), "UTF-8");
 		String actual = readFileToString(output, "UTF-8");
-		
+
 		System.out.println(actual);
-		
+
 		assertEquals(expected, actual);
 	}
 
@@ -105,6 +105,6 @@ public class GrafWriterTest
 //
 //		String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
 //		assertEquals(refText, cas.getDocumentText());
-//		assertEquals("latin", cas.getDocumentLanguage());	
+//		assertEquals("latin", cas.getDocumentLanguage());
 //	}
 }
