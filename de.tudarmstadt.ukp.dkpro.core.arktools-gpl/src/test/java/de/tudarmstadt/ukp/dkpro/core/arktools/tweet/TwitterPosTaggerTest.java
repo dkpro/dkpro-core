@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.arktools.tweet;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
 
 import java.util.Collection;
 
@@ -60,7 +60,7 @@ public class TwitterPosTaggerTest
                 new String[] { "!",    ",",    "V",   "P",  "D",   "A",    "N",   "A",     "N",       "P",  "$",    "R",   "V",      "D",   "N",       "&",    "$",    "R",   "V",     "N",   "N",   "P",  "N",    ",",    "V",     "O",  "^",   ",",    "#"     },
                 new String[] { "INT",  "PUNC", "V",   "PP", "ART", "ADJ",  "NN",  "ADJ",   "NN",      "PP", "CARD", "ADV", "V",      "ART", "NN",      "CONJ", "CARD", "ADV", "V",     "NN",  "NN",  "PP", "NN",   "PUNC", "V",     "PR", "NP",  "PUNC", "HASH"  }
         );
-    
+
         runTest("en",
                 "Different smiley styles :) :-) (^_^) ^o #smiley",
                 new String[] { "Different", "smiley",  "styles", ":)", ":-)", "(^_^)", "^o", "#smiley"},
@@ -87,7 +87,7 @@ public class TwitterPosTaggerTest
 
         // test tokens
         checkTokens(tokens, select(aJCas, Token.class));
-        
+
         // test POS annotations
         if (tagClasses != null && tags != null) {
             checkTags(tagClasses, tags, select(aJCas, POS.class));
@@ -95,7 +95,7 @@ public class TwitterPosTaggerTest
 
         return aJCas;
     }
-    
+
     private void checkTokens(String[] expected, Collection<Token> actual)
     {
         int i = 0;

@@ -28,8 +28,8 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.CasAnnotator_ImplBase;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.CasAnnotator_ImplBase;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -44,26 +44,26 @@ import fig.basic.Pair;
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
  * As described in
- * 
+ *
  * "Part-of-Speech Tagging for Twitter: Annotation, Features, and Experiments."
  * Kevin Gimpel, Nathan Schneider, Brendan O'Connor, Dipanjan Das, Daniel Mills, Jacob Eisenstein, Michael Heilman, Dani Yogatama, Jeffrey Flanigan, and Noah A. Smith
  * In Proceedings of the Annual Meeting of the Association for Computational Linguistics, companion volume, Portland, OR, June 2011.
- *  
+ *
  * @author zesch
  *
  */
 public class TwitterPosTagger
     extends CasAnnotator_ImplBase
 {
-    
+
     private Type tokenType;
     private Feature featPos;
 
     private SemiSupervisedPOSTaggerUKP tweetTagger;
     private POSModel model;
-    
+
     private MappingProvider mappingProvider;
-    
+
     @Override
     public void initialize(UimaContext context)
             throws ResourceInitializationException
@@ -104,17 +104,17 @@ public class TwitterPosTagger
         argList.add("200");
         String[] args = new String[argList.size()];
         argList.toArray(args);
-        
+
         POSOptionsUKP options = new POSOptionsUKP(args);
-        options.parseArgs(args); 
-        
+        options.parseArgs(args);
+
         tweetTagger = new SemiSupervisedPOSTaggerUKP(options);
         model = (POSModel) BasicFileIO.readSerializedObject("src/main/resources/tweet/tweetpos.model");
         tweetTagger.initializeDataStructures();
 
         POSFeatureTemplates.log.setLevel(Level.WARNING);
         SemiSupervisedPOSTagger.log.setLevel(Level.WARNING);
-        
+
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
                 "core/api/lexmorph/tagset/en-arktweet.map");
@@ -130,17 +130,17 @@ public class TwitterPosTagger
         tokenType = aTypeSystem.getType(Token.class.getName());
         featPos = tokenType.getFeatureByBaseName("pos");
     }
-    
+
     @Override
     public void process(CAS cas) throws AnalysisEngineProcessException {
-        
+
         String text = cas.getDocumentText();
 
         List<String> tokens = Twokenize.tokenizeForTagger_J(text);
         List<String> tags   = getTagsForOneSentence(tokens);
 
         mappingProvider.configure(cas);
-                
+
         int start = 0;
         int end = 0;
         int offset = 0;
@@ -152,7 +152,7 @@ public class TwitterPosTagger
             end = offset + token.length();
 
             Type posType = mappingProvider.getTagType(tag);
-            
+
             AnnotationFS posAnno = cas.createAnnotation(posType, start, end);
             posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), tag);
             cas.addFsToIndexes(posAnno);
@@ -160,11 +160,11 @@ public class TwitterPosTagger
             AnnotationFS tokenAnno = cas.createAnnotation(tokenType, start, end);
             tokenAnno.setFeatureValue(featPos, posAnno);
             cas.addFsToIndexes(tokenAnno);
-            
+
             offset = end;
         }
     }
-    
+
     private List<String> getTagsForOneSentence(List<String> words) {
         List<String> dTags = new ArrayList<String>();
         for (int i=0; i<words.size(); i++) {
@@ -174,7 +174,7 @@ public class TwitterPosTagger
         List<Pair<List<String>, List<String>>> col = new ArrayList<Pair<List<String>, List<String>>>();
         col.add(new Pair<List<String>, List<String>>(words, dTags));
         List<List<String>> col1 = tweetTagger.testCRF(col, model);
-        
+
         if (col1.size() != 1) {
             throw new RuntimeException("Problem with the returned size of the collection. Should be 1.");
         }
