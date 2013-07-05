@@ -26,15 +26,15 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.util.CoreMap;
@@ -42,7 +42,7 @@ import edu.stanford.nlp.util.Triple;
 
 /**
  * Stanford Named Entity Recognizer component.
- * 
+ *
  * @author Richard Eckart de Castilho
  * @author Oliver Ferschke
  */
@@ -87,7 +87,7 @@ public class StanfordNamedEntityRecognizer
 
 	private CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>> modelProvider;
 	private MappingProvider mappingProvider;
-	
+
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -97,21 +97,21 @@ public class StanfordNamedEntityRecognizer
 		modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>>() {
 			{
 			    setContextObject(StanfordNamedEntityRecognizer.this);
-			    
+
 				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
 				setDefault(ARTIFACT_ID,
 						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-${language}-${variant}");
-				
+
 				setDefaultVariantsLocation(
 						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
 						"ner-${language}-${variant}.properties");
-				
+
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
-			
+
 			@Override
 			protected AbstractSequenceClassifier<? extends CoreMap> produceResource(URL aUrl) throws IOException
 			{
@@ -122,24 +122,24 @@ public class StanfordNamedEntityRecognizer
 						// it's faster to do the buffering _outside_ the gzipping as here
 						is = new GZIPInputStream(is);
 					}
-					
+
 					@SuppressWarnings("unchecked")
 					AbstractSequenceClassifier<? extends CoreMap> classifier = CRFClassifier.getClassifier(is);
-					
+
 					if (printTagSet) {
 						StringBuilder sb = new StringBuilder();
 						sb.append("Model contains [").append(classifier.classIndex.size()).append("] tags: ");
-						
+
 						List<String> tags = new ArrayList<String>();
 						for (String t : classifier.classIndex) {
 							tags.add(t);
 						}
-						
+
 						Collections.sort(tags);
 						sb.append(StringUtils.join(tags, " "));
 						getContext().getLogger().log(INFO, sb.toString());
-					}										
-					
+					}
+
 					return classifier;
 				}
 				catch (ClassNotFoundException e) {
@@ -150,7 +150,7 @@ public class StanfordNamedEntityRecognizer
 				}
 			}
 		};
-		
+
 		mappingProvider = new MappingProvider();
 		mappingProvider.setDefaultVariantsLocation(
 				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
@@ -169,7 +169,7 @@ public class StanfordNamedEntityRecognizer
 		CAS cas = aJCas.getCas();
 		modelProvider.configure(cas);
 		mappingProvider.configure(cas);
-		
+
 		// get the document text
 		String documentText = cas.getDocumentText();
 

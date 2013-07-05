@@ -2,7 +2,7 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
@@ -12,7 +12,7 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static java.lang.Character.isWhitespace;
 import static java.lang.Math.min;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.StringReader;
 import java.util.ArrayList;

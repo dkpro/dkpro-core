@@ -2,7 +2,7 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
@@ -14,14 +14,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -46,7 +47,7 @@ import edu.stanford.nlp.util.IntPair;
  * A StanfordAnnotator-object creates most of the annotations for the StanfordParser component.<br/>
  * The code has been moved away from the Parser component because it is also used by other
  * components (e.g. Transformations)
- * 
+ *
  * @author Oliver Ferschke
  * @author Richard Eckart de Castilho
  */
@@ -115,7 +116,7 @@ public class StanfordAnnotator
 
     /**
      * Creates linked constituent annotations + POS annotations
-     * 
+     *
      * @param aNode
      *            the source tree
      * @param aParentFS
@@ -217,7 +218,7 @@ public class StanfordAnnotator
 
             // link token to its parent constituent
             if (aParentFS != null) {
-                ((Token) token).setParent(aParentFS);
+                token.setParent(aParentFS);
             }
 
             return token;
@@ -229,7 +230,7 @@ public class StanfordAnnotator
 
     /**
      * Creates a tag-annotation over a constituent
-     * 
+     *
      * @param jCas
      *            the CAS
      * @param aBegin
@@ -250,7 +251,7 @@ public class StanfordAnnotator
     /**
      * Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
      * created here.
-     * 
+     *
      * @param jCas
      *            the CAS
      * @param aBegin
@@ -287,7 +288,7 @@ public class StanfordAnnotator
     /**
      * Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
      * created here.
-     * 
+     *
      * @param jCas
      *            the CAS
      * @param aBegin
@@ -314,7 +315,7 @@ public class StanfordAnnotator
 
     /**
      * Writes dependency annotations to the JCas
-     * 
+     *
      * @param jCas
      *            the CAS
      * @param aBegin
@@ -359,7 +360,7 @@ public class StanfordAnnotator
 
     /**
      * Creates annotation with Penn Treebank style representations of the syntax tree
-     * 
+     *
      * @param aBegin
      * @param aEnd
      */
@@ -380,12 +381,12 @@ public class StanfordAnnotator
     /**
      * Recovers annotations from a Stanford Tree-Object, which have been saved within the CoreLabel
      * of the tree.<br/>
-     * 
+     *
      * Note:<br/>
      * Copying has to be done in batch, because we need to have ALL annotations that should be
      * recovered together when copying them. The reason is that some annotations reference each
      * other, which can cause problem if a referenced annotation has not yet been recovered.
-     * 
+     *
      */
     public void recoverAnnotationsFromNodes()
     {

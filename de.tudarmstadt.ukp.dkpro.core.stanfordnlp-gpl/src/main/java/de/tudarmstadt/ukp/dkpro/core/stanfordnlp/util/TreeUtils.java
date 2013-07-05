@@ -2,7 +2,7 @@
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the GNU Public License v3.0
  * which accompanies this distribution, and is available at
@@ -10,8 +10,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
-import static org.uimafit.util.JCasUtil.selectFollowing;
-import static org.uimafit.util.JCasUtil.selectPreceding;
+import static org.apache.uima.fit.util.JCasUtil.selectFollowing;
+import static org.apache.uima.fit.util.JCasUtil.selectPreceding;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -21,10 +21,10 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.uima.cas.CASException;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -44,9 +44,9 @@ import edu.stanford.nlp.util.IntPair;
 
 /**
  * Utility class for the StanfordParser
- * 
+ *
  * @author Oliver Ferschke
- * 
+ *
  */
 public class TreeUtils
 {
@@ -54,9 +54,9 @@ public class TreeUtils
 	 * Recursively creates an edu.stanford.nlp.trees.Tree from a ROOT annotation It also saves the
 	 * whitespaces before and after a token as <code>CoreAnnotation.BeforeAnnotation</code> and
 	 * <code>CoreAnnotation.AfterAnnotation</code> in the respective label of the current node.
-	 * 
+	 *
 	 * @author Oliver Ferschke
-	 * 
+	 *
 	 * @param root
 	 *            the ROOT annotation
 	 * @return an edu.stanford.nlp.trees.Tree object representing the syntax structure of the
@@ -159,7 +159,7 @@ public class TreeUtils
 	 * non-StanfordParser-Annotations within the scope of the sentence in the label of the best
 	 * fitting node.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * <strong>CAUTION: </strong><i>This method is intended for the use by CAS Multipliers, which
 	 * create new CASes from this tree. The annotation-spans in the source-CAS will be changed!!!!!!
@@ -167,14 +167,14 @@ public class TreeUtils
 	 * createStanfordTree()-method does not change the CAS, so use this instead, if the annotations
 	 * do not have to be recovered or accessed in the tree.</i>
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * TODO: This behavior could be changed by making COPIES of the annotations and changing the
 	 * copied instead of the originals. However, in order to being able to make copies, a dummy CAS
 	 * must be introduced to which the annotations can be copied. When they are recovered, they will
 	 * be copied to the new destination CAS anyway.
 	 * </p>
-	 * 
+	 *
 	 * @param root
 	 *            the ROOT annotation
 	 * @return an edu.stanford.nlp.trees.Tree object representing the syntax structure of the
@@ -257,7 +257,7 @@ public class TreeUtils
 
 	/**
 	 * Returns the sentence from its tree representation.
-	 * 
+	 *
 	 * @param t
 	 *            the tree representation of the sentence
 	 * @return the sentence
@@ -270,7 +270,7 @@ public class TreeUtils
 
 	/**
 	 * Returns the sentence from its tree representation.
-	 * 
+	 *
 	 * @param t
 	 *            the tree representation of the sentence
 	 * @return the sentence
@@ -305,7 +305,7 @@ public class TreeUtils
 
 	/**
 	 * Returns a list of Token annotations from a Tree-object
-	 * 
+	 *
 	 * @param aJCas
 	 * @param t
 	 * @return
@@ -336,7 +336,7 @@ public class TreeUtils
 	 * Reimplementation of the indexLeaves() method of stanford tree objects. This method reindexes
 	 * already indexed trees starting with index 1. The method expects trees with
 	 * <code>CoreMap</code>-type labels.
-	 * 
+	 *
 	 * @see edu.stanford.nlp.trees.Tree.indexLeaves()
 	 * @param t
 	 *            a tree with CoreLabel-type labels.
@@ -363,7 +363,7 @@ public class TreeUtils
 
 	/**
 	 * Reads in a Penn Treebank-style String and returns a tree.
-	 * 
+	 *
 	 * @param pennString
 	 *            A Penn Treebank-style String as produced by the StandfordParser
 	 * @return a tree representation of the PennString (LabeledScoredTree)

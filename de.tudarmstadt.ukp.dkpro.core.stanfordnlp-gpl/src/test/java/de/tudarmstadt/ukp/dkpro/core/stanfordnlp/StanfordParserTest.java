@@ -10,15 +10,16 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertTrue;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectSingle;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
@@ -26,7 +27,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.uimafit.factory.JCasBuilder;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -447,7 +447,7 @@ public class StanfordParserTest
      * This tests whether a complete syntax tree can be recreated from the annotations without any
      * loss. Consequently, all links to children should be correct. (This makes no assertions about
      * the parent-links, because they are not used for the recreation)
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -498,11 +498,11 @@ public class StanfordParserTest
 
         // setup English
         AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
-                StanfordParser.PARAM_VARIANT, aVariant, 
+                StanfordParser.PARAM_VARIANT, aVariant,
                 StanfordParser.PARAM_PRINT_TAGSET, true,
                 StanfordParser.PARAM_WRITE_CONSTITUENT, true,
-                StanfordParser.PARAM_WRITE_DEPENDENCY, true, 
-                StanfordParser.PARAM_WRITE_PENN_TREE, true, 
+                StanfordParser.PARAM_WRITE_DEPENDENCY, true,
+                StanfordParser.PARAM_WRITE_PENN_TREE, true,
                 StanfordParser.PARAM_WRITE_POS, true);
 
         AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);

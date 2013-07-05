@@ -10,9 +10,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,10 +23,10 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
@@ -41,7 +41,7 @@ import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 /**
  * Stanford Part-of-Speech tagger component.
- * 
+ *
  */
 public class StanfordPosTagger
 	extends JCasAnnotator_ImplBase
@@ -106,7 +106,7 @@ public class StanfordPosTagger
 		modelProvider = new ModelProviderBase<MaxentTagger>() {
 			{
 			    setContextObject(StanfordPosTagger.this);
-			    
+
                 setDefault(ARTIFACT_ID,
                         "${groupId}.stanfordnlp-model-tagger-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
@@ -122,18 +122,18 @@ public class StanfordPosTagger
             protected MaxentTagger produceResource(URL aUrl) throws IOException
             {
                 MaxentTagger tagger = new MaxentTagger(aUrl.toString());
-                
+
                 SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
                         .getProperty(("pos.tagset")));
                 for (int i = 0; i < tagger.getTags().getSize(); i ++) {
                     tags.add(tagger.getTags().getTag(i));
                 }
                 addTagset(tags);
-                
+
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
-                }                   
-                
+                }
+
                 return tagger;
             }
         };

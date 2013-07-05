@@ -31,13 +31,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
@@ -69,7 +69,7 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
 
 /**
  * Stanford Parser component.
- * 
+ *
  * @author Oliver Ferschke
  * @author Niklas Jakob
  */
@@ -194,7 +194,7 @@ public class StanfordParser
      * <li>false, if document text is not English</li>
      * </ul>
      * <br/>
-     * 
+     *
      * <strong>Info:</strong><br>
      * The Stanford Morphology-class computes the base form of English words, by removing just
      * inflections (not derivational morphology). That is, it only does noun plurals, pronoun case,
@@ -208,7 +208,7 @@ public class StanfordParser
 
     /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
-     * 
+     *
      * @see PTBEscapingProcessor
      */
     public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
@@ -282,7 +282,7 @@ public class StanfordParser
 
     /**
      * Processes the given text using the StanfordParser.
-     * 
+     *
      * @param aJCas
      *            the {@link JCas} to process
      * @throws AnalysisEngineProcessException
@@ -507,7 +507,7 @@ public class StanfordParser
                         POS.class, metadata.getProperty("pos.tagset"));
                 for (String tag : pd.tagIndex) {
                     String t = lp.basicCategory(tag);
-                    
+
                     // Strip grammatical function from tag
                     int gfIdx = t.indexOf(lp.getGfCharacter());
                     if (gfIdx > 0) {
@@ -536,7 +536,7 @@ public class StanfordParser
                     // unbinarize it before returning. That's the origin of the @ classes.
                     // -- J. Bauer
                     if (!t.startsWith("@")) {
-                        
+
                         // Strip grammatical function from tag
                         int gfIdx = t.indexOf(lp.getGfCharacter());
                         if (gfIdx > 0) {
@@ -544,7 +544,7 @@ public class StanfordParser
                             // syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
                             t = t.substring(0, gfIdx);
                         }
-                        
+
                         if (t.length() > 0) {
                             constTags.add(t);
                         }
@@ -569,7 +569,7 @@ public class StanfordParser
                     }
                     addTagset(depTags, writeDependency);
                 }
-                
+
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }

@@ -10,8 +10,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.util.JCasUtil.select;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -19,6 +19,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
@@ -41,7 +42,7 @@ public class StanfordPosTaggerTest
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
-	
+
 	@Test
 	public void testGerman()
 		throws Exception
@@ -58,7 +59,7 @@ public class StanfordPosTaggerTest
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
-	
+
     @Test
     public
     void testChinese()
@@ -80,7 +81,7 @@ public class StanfordPosTaggerTest
         		new String[] { "NR", "P",  "NN", "NN", "NN", "VE", "NN", "PU"   } ,
         		new String[] { "NP", "PP", "NN", "NN", "NN", "V",  "NN",  "PUNC" } );
     }
-    
+
     @Test
     public
     void testArabic()

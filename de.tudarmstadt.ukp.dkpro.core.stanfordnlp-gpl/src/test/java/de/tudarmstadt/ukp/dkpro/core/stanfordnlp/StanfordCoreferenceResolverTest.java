@@ -11,12 +11,12 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregate;
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.toText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,7 @@ public class StanfordCoreferenceResolverTest
 	@Test
 	public void test()
 		throws Exception
-	{ 
+	{
 		// Coreference resolution requires the parser and the NER to run before
 		AnalysisEngine aggregate = createAggregate(createAggregateDescription(
 				createPrimitiveDescription(StanfordSegmenter.class),
@@ -54,13 +54,13 @@ public class StanfordCoreferenceResolverTest
 		jcas.setDocumentLanguage("en");
 		jcas.setDocumentText("John bought a car. He is very happy with it.");
 		aggregate.process(jcas);
-		
+
 		// Dump results
 		List<CoreferenceChain> chains = new ArrayList<CoreferenceChain>(select(jcas, CoreferenceChain.class));
 		for (CoreferenceChain chain : chains) {
 			System.out.println("Chain: [" + StringUtils.join(toText(chain.links()), "] , [") + "]");
 		}
-	
+
 		// Checks
 		assertEquals(2, chains.size());
 		assertEquals(asList("John", "He"), toText(chains.get(0).links()));
