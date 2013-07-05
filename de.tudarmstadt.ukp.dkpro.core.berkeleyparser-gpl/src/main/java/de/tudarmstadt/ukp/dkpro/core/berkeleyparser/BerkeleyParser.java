@@ -18,13 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectCovered;
-import static org.uimafit.util.JCasUtil.toText;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -37,23 +36,20 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.OperationalProperties;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.descriptor.OperationalProperties;
-import org.uimafit.descriptor.TypeCapability;
-import org.uimafit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.AggregateTagset;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.HasTagsets;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -71,7 +67,7 @@ import edu.berkeley.nlp.util.Numberer;
 
 /**
  * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
- * 
+ *
  * @author Richard Eckart de Castilho
  */
 @OperationalProperties(multipleDeploymentAllowed = false)
@@ -114,7 +110,7 @@ public class BerkeleyParser
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
      * the heap with thousands of strings representing only a few different tags.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
@@ -123,7 +119,7 @@ public class BerkeleyParser
 
     /**
      * Log the tag set(s) when a model is loaded.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -133,7 +129,7 @@ public class BerkeleyParser
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
-     * 
+     *
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
@@ -143,7 +139,7 @@ public class BerkeleyParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
@@ -152,7 +148,7 @@ public class BerkeleyParser
 
     /**
      * Compute Viterbi derivation instead of max-rule tree.
-     * 
+     *
      * Default: {@code false} (max-rule)
      */
     public static final String PARAM_VITERBI = "viterbi";
@@ -161,7 +157,7 @@ public class BerkeleyParser
 
     /**
      * Output sub-categories (only for binarized Viterbi trees).
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_SUBSTATES = "substates";
@@ -170,7 +166,7 @@ public class BerkeleyParser
 
     /**
      * Output inside scores (only for binarized viterbi trees).
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_SCORES = "scores";
@@ -179,7 +175,7 @@ public class BerkeleyParser
 
     /**
      * Set thresholds for accuracy.
-     * 
+     *
      * Default: {@code false} (set thresholds for efficiency)
      */
     public static final String PARAM_ACCURATE = "accurate";
@@ -188,7 +184,7 @@ public class BerkeleyParser
 
     /**
      * Use variational rule score approximation instead of max-rule
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_VARIATIONAL = "variational";
@@ -197,7 +193,7 @@ public class BerkeleyParser
 
     /**
      * Retain predicted function labels. Model must have been trained with function labels.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_KEEP_FUNCTION_LABELS = "keepFunctionLabels";
@@ -206,7 +202,7 @@ public class BerkeleyParser
 
     /**
      * Output binarized trees.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_BINARIZE = "binarize";
@@ -280,7 +276,7 @@ public class BerkeleyParser
 
     /**
      * Creates linked constituent annotations + POS annotations
-     * 
+     *
      * @param aNode
      *            the source tree
      * @param aParentFS
@@ -311,7 +307,7 @@ public class BerkeleyParser
                         token.getEnd());
                 posAnno.setPosValue(internTags ? typeName.intern() : typeName);
                 posAnno.addToIndexes();
-                token.setPos((POS) posAnno);
+                token.setPos(posAnno);
             }
 
             aIndex.add(1);
@@ -348,7 +344,7 @@ public class BerkeleyParser
 
             // Now that we know how many children we have, link annotation of
             // current node with its children
-            FSArray childArray = (FSArray) FSCollectionFactory.createFSArray(aJCas,
+            FSArray childArray = FSCollectionFactory.createFSArray(aJCas,
                     childAnnotations);
             constAnno.setChildren(childArray);
 
@@ -411,7 +407,7 @@ public class BerkeleyParser
                         posTags.add(tag);
                     }
                 }
-                
+
                 addTagset(posTags, createPosTags);
                 addTagset(constTags);
 

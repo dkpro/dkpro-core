@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.util.JCasUtil.select;
-import static org.uimafit.util.JCasUtil.selectSingle;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,14 +46,14 @@ public class BerkeleyParserTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence, which " +
 			"contains as many constituents and dependencies as possible.";
-	
+
 	@Ignore("We don't seem to have a proper tokenizer for arabic...")
 	@Test
 	public void testArabic()
 		throws Exception
 	{
 		JCas jcas = runTest("ar", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن.");
-		
+
 		String[] constituentMapped = new String[] { "NP 0,1", "ROOT 0,1" };
 
 		String[] constituentOriginal = new String[] { "NP 0,1", "ROOT 0,1" };
@@ -75,7 +75,7 @@ public class BerkeleyParserTest
 	{
 		JCas jcas = runTest("bg", "Имаме нужда от един много сложен пример изречение, " +
 				"което съдържа най-много съставки и зависимости, колкото е възможно.");
-		
+
 		String[] constituentMapped = new String[] { "ROOT 0,118", "X 0,117", "X 0,118", "X 0,5",
 				"X 107,108", "X 107,117", "X 109,117", "X 12,117", "X 12,14", "X 15,117",
 				"X 15,19", "X 15,39", "X 15,49", "X 20,25", "X 20,32", "X 20,39", "X 26,32",
@@ -97,7 +97,7 @@ public class BerkeleyParserTest
 		String[] posOriginal = new String[] { "Vpitf", "Ncfsi", "R", "Mcmsi", "Md", "Amsi",
 				"Ncmsi", "Ncnsi", "pt", "Pre", "Vpitf", "Md", "Ncmpi", "Cp", "Ncfpi", "pt", "Prq",
 				"Vxitf", "Dd", "pt" };
-		
+
 		String pennTree = "(ROOT (ROOT (S (VPC (V (Vpitf Имаме)) (NPA (N (Ncfsi нужда)) (PP " +
 				"(Prep (R от)) (NPA (NPA (NPA (M (Mcmsi един)) (NPA (APA (Adv (Md много)) (A " +
 				"(Amsi сложен))) (N (Ncmsi пример)))) (N (Ncnsi изречение))) (CLR (pt ,) (VPA " +
@@ -105,18 +105,18 @@ public class BerkeleyParserTest
 				"(CoordP (ConjArg (N (Ncmpi съставки))) (Conj (C (Cp и))) (ConjArg (N " +
 				"(Ncfpi зависимости))))))) (CLR (pt ,) (VPA (Adv (Prq колкото)) (VPC (V " +
 				"(Vxitf е)) (Adv (Dd възможно))))))))))) (pt .))))";
-		
+
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-	}	
+	}
 
 	@Test
 	public void testChinese()
 		throws Exception
 	{
 		JCas jcas = runTest("zh", "我们需要一个非常复杂的例句，它要包含尽可能多的句子成分和依存性。");
-		
+
 		String[] constituentMapped = new String[] { "ADVP 18,21", "ADVP 6,8", "NP 0,2", "NP 11,13",
 				"NP 14,15", "NP 18,31", "NP 23,30", "NP 30,31", "NP 6,13", "ROOT 0,14",
 				"ROOT 14,32", "VP 15,31", "VP 16,31", "VP 18,22", "VP 2,13", "VP 21,22", "VP 4,13",
@@ -133,13 +133,13 @@ public class BerkeleyParserTest
 
 		String[] posOriginal = new String[] { "PN", "VV", "VV", "AD", "VA", "DEC", "NN", "PU",
 				"PN", "VV", "VV", "AD", "VA", "DEC", "NN", "CC", "NN", "NN", "PU" };
-		
+
 		String[] pennTree = new String[] { "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (VP (VV 一个) " +
 				"(NP (CP (IP (VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 例句))))) " +
 				"(PU ，)))", "(ROOT (IP (NP (PN 它)) (VP (VV 要) (VP (VV 包含) (NP (CP (IP (VP " +
 				"(ADVP (AD 尽可能)) (VP (VA 多)))) (DEC 的)) (NP (NN 句子成分) (CC 和) (NN 依存)) " +
 				"(NP (NN 性))))) (PU 。)))" };
-		
+
         String[] posTags = new String[] { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
                 "DEV", "DT", "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NP", "NR",
                 "NT", "OD", "P", "PN", "PU", "SB", "SP", "VA", "VC", "VE", "VP", "VV", "X" };
@@ -166,7 +166,7 @@ public class BerkeleyParserTest
 		throws Exception
 	{
 		JCas jcas = runTest("en", documentEnglish);
-		
+
 		String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
 				"NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
 				"S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
@@ -194,7 +194,7 @@ public class BerkeleyParserTest
         String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR",
                 "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
-        
+
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -233,7 +233,7 @@ public class BerkeleyParserTest
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 	}
-	
+
 	@Test
 	public void testFrench()
 		throws Exception
@@ -241,7 +241,7 @@ public class BerkeleyParserTest
 		JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très " +
 				"compliqué, qui contient des constituants que de nombreuses dépendances et que " +
 				"possible.");
-		
+
 		String[] constituentMapped = new String[] { "NP 18,30", "NP 59,62", "NP 72,88",
 				"NP 93,118", "ROOT 0,135", "S 0,135", "X 0,17", "X 122,134", "X 43,57", "X 59,88",
 				"X 63,71", "X 89,118" };
@@ -256,18 +256,18 @@ public class BerkeleyParserTest
 
 		String[] posOriginal = new String[] { "CL", "V", "V", "N", "N", "P", "N", "ADV", "A", ",",
 				"PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "." };
-		
+
 		String pennTree = "(ROOT (ROOT (SENT (VN (CL Nous) (V avons) (V besoin)) (NP (N d'une) " +
 				"(N phrase)) (P par) (N exemple) (AP (ADV très) (A compliqué)) (, ,) (Srel (NP " +
 				"(PRO qui)) (VN (V contient)) (NP (D des) (N constituants))) (Ssub (C que) (NP " +
 				"(D de) (A nombreuses) (N dépendances))) (C et) (Ssub (C que) (A possible)) " +
 				"(. .))))";
-		
+
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
 	}
-	
+
 	/**
 	 * Setup CAS to test parser for the English language (is only called once if
 	 * an English test is run)
@@ -276,7 +276,7 @@ public class BerkeleyParserTest
 		throws Exception
 	{
 		AnalysisEngineDescription segmenter;
-		
+
 		if ("zh".equals(aLanguage)) {
 			segmenter = createPrimitiveDescription(LanguageToolSegmenter.class);
 		}
@@ -290,16 +290,16 @@ public class BerkeleyParserTest
 				BerkeleyParser.PARAM_WRITE_PENN_TREE, true);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
-		
+
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
 		engine.process(jcas);
-		
+
 		return jcas;
 	}
-	
+
 	@Rule
 	public TestName name = new TestName();
 
