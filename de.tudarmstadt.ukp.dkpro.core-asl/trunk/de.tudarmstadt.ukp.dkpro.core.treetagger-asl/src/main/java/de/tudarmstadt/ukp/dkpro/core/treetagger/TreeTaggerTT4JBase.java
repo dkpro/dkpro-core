@@ -20,14 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.getUrlAsExecutable;
 import static java.io.File.separator;
 import static org.annolab.tt4j.Util.getSearchPaths;
-import static org.apache.uima.util.Level.INFO;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
@@ -36,10 +32,8 @@ import org.annolab.tt4j.DefaultModel;
 import org.annolab.tt4j.DefaultModelResolver;
 import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
-import org.annolab.tt4j.TreeTaggerModelUtil;
 import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.fit.component.CasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -350,7 +344,6 @@ public abstract class TreeTaggerTT4JBase<T>
             if (overrideModelPath != null) {
                 DKProModel model = new DKProModel(aModelName, overrideModelPath,
                         overrideModelEncoding, null);
-                printTagset(model);
                 return model;
             }
 
@@ -408,24 +401,7 @@ public abstract class TreeTaggerTT4JBase<T>
             modelEnc = (overrideModelEncoding != null) ? overrideModelEncoding : properties
                     .getProperty("encoding");
             DKProModel model = new DKProModel(aModelName, modelFile, modelEnc, properties);
-            printTagset(model);
             return model;
-        }
-
-        private void printTagset(DKProModel aModel)
-            throws IOException
-        {
-            if (printTagSet) {
-                List<String> tags = TreeTaggerModelUtil.getTagset(aModel.getFile(),
-                        aModel.getEncoding());
-
-                Collections.sort(tags);
-
-                getContext().getLogger()
-                        .log(INFO,
-                                "Model contains [" + tags.size() + "] tags: "
-                                        + StringUtils.join(tags, " "));
-            }
         }
     }
 

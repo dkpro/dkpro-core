@@ -17,18 +17,22 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
+import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.fit.util.CasUtil.select;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerException;
+import org.annolab.tt4j.TreeTaggerModelUtil;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -42,8 +46,10 @@ import org.apache.uima.util.Level;
 import org.apache.uima.util.Logger;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -88,6 +94,8 @@ public class TreeTaggerPosLemmaTT4J
 	private Feature featLemma;
 	private Feature featPos;
 
+	private ModelProviderBase<DKProTreeTaggerWrapper<AnnotationFS>> taggerProvider;
+	
 	private MappingProvider taggerMappingProvider;
 
 	@Override
@@ -96,6 +104,39 @@ public class TreeTaggerPosLemmaTT4J
 	{
 		super.initialize(aContext);
 
+		taggerProvider = new ModelProviderBase<DKProTreeTaggerWrapper<AnnotationFS>>() {
+		    {
+		        setContextObject(TreeTaggerPosLemmaTT4J.this);
+		        setDefault(LOCATION, NOT_REQUIRED);
+		        
+		        setOverride(LANGUAGE, languageCode);
+		    }
+		    
+		    @Override
+		    protected de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerTT4JBase.DKProTreeTaggerWrapper<AnnotationFS> produceResource(
+		            URL aUrl)
+		        throws IOException
+		    {
+		        // Reconfigure tagger
+                Properties props = getAggregatedProperties();
+	            treetagger.setModel(props.getProperty(LANGUAGE));
+	            
+	            // Get tagset
+                List<String> tags = TreeTaggerModelUtil.getTagset(treetagger.getModel().getFile(),
+                        treetagger.getModel().getEncoding());
+                SingletonTagset posTags = new SingletonTagset(POS.class, treetagger
+                        .getResourceMetaData().getProperty("tagger.tagset"));
+                posTags.addAll(tags);
+                addTagset(posTags);
+
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, getTagset().toString());
+                }
+
+		        return treetagger;
+		    }
+		};
+		
 		taggerMappingProvider = new MappingProvider();
 		taggerMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
 				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
@@ -124,30 +165,13 @@ public class TreeTaggerPosLemmaTT4J
 		throws AnalysisEngineProcessException
 	{
 		getLogger().debug("Running TreeTagger POS tagger and lemmatizer");
+
+        taggerProvider.configure(aCas);
+        
+        // Must be done after configuring the TreeTagger since we import from it
+        taggerMappingProvider.configure(aCas);
+
 		try {
-			final String language;
-
-	        // If language override is not active && the document language is
-			// "x-unspecified" which means that is has not been set at all
-			// then we should throw an exception, as we do not know what language to
-			// use. Using a default language in this case, could lead to very
-			// confusing results for the user that are hard to track down.
-	        if (languageCode != null) {
-	        	language = languageCode;
-	        }
-	        else if (
-	        		aCas.getDocumentLanguage() != null &&
-	        		!aCas.getDocumentLanguage().equals("x-unspecified")
-	        ) {
-	        	language = aCas.getDocumentLanguage();
-	        }
-	        else {
-	            throw new AnalysisEngineProcessException(new Throwable(
-	            		"Neither the LanguageCode parameter nor the document " +
-	            		"language is set. Do not know what language to use. " +
-	            		"Exiting."));
-	        }
-
 			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
 			for (AnnotationFS fs : select(aCas, tokenType)) {
 				tokens.add(fs);
@@ -158,7 +182,6 @@ public class TreeTaggerPosLemmaTT4J
 			// Set the handler creating new UIMA annotations from the analyzed
 			// tokens
 			final AtomicInteger count = new AtomicInteger(0);
-        	treetagger.setModel(language);
 			treetagger.setHandler(new TokenHandler<AnnotationFS>() {
 				@Override
 				public void token(AnnotationFS aToken, String aPos, String aLemma)
@@ -191,10 +214,7 @@ public class TreeTaggerPosLemmaTT4J
 				}
 			});
 
-			// Must be done after configuring the TreeTagger since we import from it
-			taggerMappingProvider.configure(aCas);
-
-			treetagger.process(tokens);
+			taggerProvider.getResource().process(tokens);
 
 			Logger log = getContext().getLogger();
 			if (log.isLoggable(Level.FINE)) {
