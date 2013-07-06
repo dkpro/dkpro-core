@@ -57,23 +57,29 @@ class TreeTaggerPosLemmaTT4JTest
 	public void treeTaggerAnnotatorEnglishTest()
 		throws Exception
 	{
-        runTest("en", "This is a test .",
+        String[] tagset = { "#", "$", "''", "(", ")", ",", ":", "CC", "CD", "DT", "EX", "FW", "IN",
+                "IN/that", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNS", "NP", "NPS", "NS", "PDT",
+                "POS", "PP", "PP$", "RB", "RBR", "RBS", "RP", "SENT", "SYM", "TO", "UH", "VB",
+                "VBD", "VBG", "VBN", "VBP", "VBZ", "VH", "VHD", "VHG", "VHN", "VHP", "VHZ", "VV",
+                "VVD", "VVG", "VVN", "VVP", "VVZ", "WDT", "WP", "WP$", "WRB", "``" };
+	    
+        runTest("en", "ptb", tagset, "This is a test .",
 				new String[] { "this", "be",  "a",   "test", "."    },
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
 
-        runTest("en", "A neural net .",
+        runTest("en", "ptb", tagset, "A neural net .",
         		new String[] { "a",   "neural", "net", "."    },
         		new String[] { "DT",  "JJ",     "NN",  "SENT" },
         		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
 
-        runTest("en", "John is purchasing oranges .",
+        runTest("en", "ptb", tagset, "John is purchasing oranges .",
         		new String[] { "John", "be",  "purchase", "orange", "."    },
         		new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
 
         // TT4J per default runs TreeTagger with the -sgml option, so XML tags are not tagged
-        runTest("en", "My homepage is <url> http://null.dummy </url> .",
+        runTest("en", "ptb", tagset, "My homepage is <url> http://null.dummy </url> .",
         		new String[] { "my", "homepage", "be", "http://null.dummy", "." },
         		new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
         		new String[] { "PR",  "NN", "V",   "ADJ", "PUNC" });
@@ -83,12 +89,19 @@ class TreeTaggerPosLemmaTT4JTest
 	public void treeTaggerAnnotatorGermanTest()
 		throws Exception
     {
-        runTest("de", "10 Minuten sind das Mikro an und die Bühne frei .",
+        String[] tagset = { "$(", "$,", "$.", "ADJ", "ADJA", "ADJD", "ADV", "APPO", "APPR",
+                "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS",
+                "NE", "NN", "PAV", "PDAT", "PDS", "PIAT", "PIS", "PPER", "PPOSAT", "PPOSS",
+                "PRELAT", "PRELS", "PRF", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU", "PWAT",
+                "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF",
+                "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+	    
+        runTest("de", "stts", tagset, "10 Minuten sind das Mikro an und die Bühne frei .",
         		new String[] { "10", "Minute", "sein", "die", "Mikro", "an", "und", "die", "Bühne", "frei", "."  },
         		new String[] { "CARD", "NN", "VAFIN", "ART", "NN", "PTKVZ", "KON",  "ART", "NN", "PTKVZ", "$."   },
         		new String[] { "CARD", "NN", "V",     "ART", "NN", "V",     "CONJ", "ART", "NN", "V",     "PUNC" });
 
-        runTest("de", "Das ist ein Test .",
+        runTest("de", "stts", tagset, "Das ist ein Test .",
         		new String[] { "die", "sein",  "eine", "Test", "."   },
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."   },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
@@ -98,12 +111,20 @@ class TreeTaggerPosLemmaTT4JTest
 	public void treeTaggerAnnotatorDutchTest()
 		throws Exception
     {
-        runTest("nl", "Dit is een test .",
+        String[] tagset = { "$.", "adj", "adj*kop", "adjabbr", "adv", "advabbr", "conjcoord",
+                "conjsubo", "det__art", "det__demo", "det__excl", "det__indef", "det__poss",
+                "det__quest", "det__rel", "int", "noun*kop", "nounabbr", "nounpl", "nounprop",
+                "nounsg", "num__card", "num__ord", "partte", "prep", "prepabbr", "pronadv",
+                "prondemo", "pronindef", "pronpers", "pronposs", "pronquest", "pronrefl",
+                "pronrel", "punc", "verbinf", "verbpapa", "verbpastpl", "verbpastsg", "verbpresp",
+                "verbprespl", "verbpressg" };
+	    
+        runTest("nl", "tt", tagset, "Dit is een test .",
         		new String[] { "dit",      "zijn",       "een",      "test",   "."    },
         		new String[] { "prondemo", "verbpressg", "det__art", "nounsg", "$."   },
         		new String[] { "POS",      "POS",        "POS",      "POS",    "POS" });
 
-        runTest("nl", "10 minuten op de microfoon en vrij podium .",
+        runTest("nl", "tt", tagset, "10 minuten op de microfoon en vrij podium .",
         		new String[] { "@card@",   "minuut", "op",   "de",       "microfoon", "en",        "vrij", "podium", "."   },
         		new String[] { "num__ord", "nounpl", "prep", "det__art", "nounsg",    "conjcoord", "adj",  "nounsg", "$."  },
         		new String[] { "POS",      "POS",    "POS",  "POS",      "POS",       "POS",       "POS",  "POS",    "POS" });
@@ -114,12 +135,14 @@ class TreeTaggerPosLemmaTT4JTest
 	public void treeTaggerAnnotatorSloveneTest()
 		throws Exception
     {
-        runTest("sl", "To je test .",
+        String[] tagset = { };
+        
+        runTest("sl",  null, tagset, "To je test .",
         		new String[] { "ta",          "biti",      "test",  "." },
         		new String[] { "zk-sei----s", "gvpste--n", "somei", "SENT" },
         		new String[] { "POS",         "POS",       "POS",   "POS" });
 
-        runTest("sl", "Gremo na Češko za kosilo .",
+        runTest("sl",  null, tagset, "Gremo na Češko za kosilo .",
         		new String[] { "iti",             "na",   "Češko", "za",   "kosilo", "." },
         		new String[] { "gppspm--n-----d", "dpet", "slmei", "dpet", "soset",  "SENT" },
         		new String[] { "POS",             "POS",  "POS",   "POS",  "POS",    "POS" });
@@ -130,21 +153,26 @@ class TreeTaggerPosLemmaTT4JTest
     void treeTaggerAnnotatorChineseTest()
     	throws Exception
     {
+        String[] tagset = { "a", "ad", "ag", "an", "b", "bg", "c", "d", "dg", "e", "ew", "f", "g",
+                "h", "i", "j", "k", "l", "m", "mg", "n", "nd", "ng", "nh", "ni", "nl", "nr", "ns",
+                "nt", "nx", "nz", "o", "p", "q", "r", "rg", "s", "t", "tg", "u", "v", "vd", "vg",
+                "vn", "w", "wp", "ws", "x", "y", "z" };
+        
     	// The rudder often in the wake of the wind round the back of the area.
-        runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
+        runTest("zh", "lcmc", tagset, "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
         		new String[] { "_",  "_",  "_",   "_", "风轮", "_", "_", "_",  "_",  "_"    },
         		new String[] { "ng", "n",  "d",   "v", "n",   "f", "u", "n",  "nl", "ew"   },
         		new String[] { "O",  "NN", "ADV", "V", "NN",  "O", "O", "NN", "O",  "PUNC" } );
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
-        runTest("zh", "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
+        runTest("zh", "lcmc", tagset, "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
         		new String[] { "_",  "_", "_",  "_",  "_", "_", "_", "_", "_",  "_"     },
         		new String[] { "n",  "v", "ns", "n",  "v", "v", "u", "a", "n",  "ew"    },
         		new String[] { "NN", "V", "O",  "NN", "V", "V", "O", "O", "NN", "PUNC"  } );
 
         // How far is China from the world brand?
-        runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
+        runTest("zh", "lcmc", tagset, "中国 离 世界 技术 品牌 有 多远 ？",
         		new String[] { "_",  "_", "_",  "_",  "_",  "_", "多远", "_"  },
         		new String[] { "ns", "v", "n",  "n",  "n",  "v", "n",   "ew" },
         		new String[] { "O",  "V", "NN", "NN", "NN", "V", "NN",  "PUNC" } );
@@ -155,7 +183,7 @@ class TreeTaggerPosLemmaTT4JTest
 	public void testOddCharacters()
 		throws Exception
     {
-        runTest("en", "² § ¶ § °",
+        runTest("en", null, null, "² § ¶ § °",
         		new String[] { "²",  "§",    "¶",  "§",    "°"   },
         		new String[] { "NN", "SYM",  "NN", "SYM",  "SYM" },
         		new String[] { "NN", "PUNC", "NN", "PUNC", "PUNC"   });
@@ -182,7 +210,7 @@ class TreeTaggerPosLemmaTT4JTest
 		int reps = 4000000 / text.length();
         String testString = repeat(text, " ", reps);
 
-        JCas jcas = runTest("en", testString, null, null, null);
+        JCas jcas = runTest("en", null, null, testString, null, null, null);
     	List<POS> actualTags = new ArrayList<POS>(select(jcas, POS.class));
         assertEquals(reps * 5, actualTags.size());
 
@@ -257,8 +285,8 @@ class TreeTaggerPosLemmaTT4JTest
 				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
 	}
 
-	private JCas runTest(String language, String testDocument, String[] lemmas, String[] tags,
-			String[] tagClasses)
+    private JCas runTest(String language, String tagsetName, String[] tagset, String testDocument,
+            String[] lemmas, String[] tags, String[] tagClasses)
 		throws Exception
 	{
 		checkModelsAndBinary(language);
@@ -270,6 +298,9 @@ class TreeTaggerPosLemmaTT4JTest
 
         AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
+        if (tagset != null) {
+            AssertAnnotations.assertTagset(POS.class, tagsetName, tagset, aJCas);        
+        }
 
         return aJCas;
     }
