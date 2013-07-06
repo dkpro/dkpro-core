@@ -127,7 +127,7 @@ public class PennTreeUtilsTest
         AnalysisEngineDescription parser = createPrimitiveDescription(OpenNlpParser.class,
                 OpenNlpParser.PARAM_VARIANT, aVariant,
                 OpenNlpParser.PARAM_PRINT_TAGSET, true,
-                OpenNlpParser.PARAM_CREATE_PENN_TREE_STRING, true);
+                OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
         AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
 
