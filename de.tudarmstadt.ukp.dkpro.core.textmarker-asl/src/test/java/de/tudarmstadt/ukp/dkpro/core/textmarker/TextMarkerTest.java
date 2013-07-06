@@ -18,53 +18,57 @@
 package de.tudarmstadt.ukp.dkpro.core.textmarker;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import java.io.File;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.component.xwriter.CASDumpWriter;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TextMarkerTest
 {
-	@Test
-	public void test() throws Exception
-	{
-		AnalysisEngine tm = createPrimitive(TextMarker.class,
-				// Specify type system explicitly because there is no signature which accepts
-				// only priorities
-				createTypeSystemDescription(),
-				// Load the type priorities needed by TextMarker, uimaFIT doesn't support automatic
-				// priority detection yet
-				TextMarker.getTypePriorities(),
-				// Load script in "Java" notation, with "." as package separator and no extension.
-				// File needs to be located in the path specified below with ending ".tm".
-				TextMarker.MAIN_SCRIPT, "textmarker.TokensToSentence",
-				// Path(s) where the scripts are located
-				TextMarker.SCRIPT_PATHS, new String[] { "src/test/resources" } );
+    @Test
+    public void test()
+        throws Exception
+    {
+        AnalysisEngine tm = createPrimitive(TextMarker.class,
+                // Load script in "Java" notation, with "." as package separator and no extension.
+                // File needs to be located in the path specified below with ending ".tm".
+                TextMarker.MAIN_SCRIPT, "textmarker.TokensToSentence",
+                // Path(s) where the scripts are located
+                TextMarker.SCRIPT_PATHS, new String[] { "src/test/resources" });
 
-		// Create a CAS from the AE so it has the required type priorities
-		JCas jcas = tm.newJCas();
+        // Create a CAS from the AE so it has the required type priorities
+        JCas jcas = tm.newJCas();
 
-		// Fill the CAS with some tokens
-		JCasBuilder builder = new JCasBuilder(jcas);
-		builder.add("This", Token.class);
-		builder.add(" ");
-		builder.add("is", Token.class);
-		builder.add(" ");
-		builder.add("a", Token.class);
-		builder.add(" ");
-		builder.add("test", Token.class);
-		builder.add(".", Token.class);
-		builder.close();
+        // Fill the CAS with some tokens
+        JCasBuilder builder = new JCasBuilder(jcas);
+        builder.add("This", Token.class);
+        builder.add(" ");
+        builder.add("is", Token.class);
+        builder.add(" ");
+        builder.add("a", Token.class);
+        builder.add(" ");
+        builder.add("test", Token.class);
+        builder.add(".", Token.class);
+        builder.close();
 
-		// Apply the script
-		tm.process(jcas);
+        // Apply the script
+        tm.process(jcas);
 
-		AnalysisEngine dumper = createPrimitive(CASDumpWriter.class);
-		dumper.process(jcas);
-	}
+        AnalysisEngine dumper = createPrimitive(CASDumpWriter.class,
+                CASDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/casdump.txt");
+        dumper.process(jcas);
+
+        String expected = FileUtils.readFileToString(new File(
+                "src/test/resources/reference/casdump.txt"), "UTF-8");
+        String actual = FileUtils.readFileToString(new File("target/test-output/casdump.txt"),
+                "UTF-8");
+        Assert.assertEquals(expected.trim(), actual.trim());
+    }
 }
