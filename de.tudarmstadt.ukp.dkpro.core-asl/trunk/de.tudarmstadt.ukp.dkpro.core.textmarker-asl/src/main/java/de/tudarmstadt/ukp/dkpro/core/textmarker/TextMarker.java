@@ -17,12 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.textmarker;
 
-import static org.apache.uima.fit.factory.TypePrioritiesFactory.createTypePriorities;
-
 import java.util.List;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.resource.metadata.TypePriorities;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.textmarker.engine.TextMarkerEngine;
 
 /**
@@ -94,11 +92,4 @@ public class TextMarker extends TextMarkerEngine
 			"org.apache.uima.textmarker.type.SPACE", "org.apache.uima.textmarker.type.NBSP",
 			"org.apache.uima.textmarker.type.BREAK", "org.apache.uima.textmarker.type.MARKUP" })
 	private List<String> defaultFilteredTypes;
-
-	public static final TypePriorities getTypePriorities()
-	{
-		return createTypePriorities(new String[] {
-				"org.apache.uima.textmarker.type.TextMarkerFrame", "uima.tcas.Annotation",
-				"org.apache.uima.textmarker.type.TextMarkerBasic" });
-	}
 }
