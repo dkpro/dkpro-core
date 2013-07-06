@@ -65,7 +65,7 @@ public class FangornWriterTest
 		AnalysisEngineDescription segmenter = createPrimitiveDescription(OpenNlpSegmenter.class);
 
 		AnalysisEngineDescription parser = createPrimitiveDescription(OpenNlpParser.class,
-				OpenNlpParser.PARAM_CREATE_PENN_TREE_STRING, true);
+				OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(FangornWriter.class,
 				FangornWriter.PARAM_TARGET_LOCATION, outputFile);

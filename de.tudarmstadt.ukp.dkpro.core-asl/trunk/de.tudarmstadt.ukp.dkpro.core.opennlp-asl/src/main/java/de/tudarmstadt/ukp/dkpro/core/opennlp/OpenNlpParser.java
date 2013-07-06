@@ -139,8 +139,8 @@ public class OpenNlpParser
 	 *
 	 * Default: {@code false}
 	 */
-	public static final String PARAM_CREATE_PENN_TREE_STRING = ComponentParameters.PARAM_WRITE_PENN_TREE;
-	@ConfigurationParameter(name = PARAM_CREATE_PENN_TREE_STRING, mandatory = true, defaultValue = "false")
+	public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
+	@ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
 	private boolean createPennTreeString;
 
 	private CasConfigurableProviderBase<Parser> modelProvider;
