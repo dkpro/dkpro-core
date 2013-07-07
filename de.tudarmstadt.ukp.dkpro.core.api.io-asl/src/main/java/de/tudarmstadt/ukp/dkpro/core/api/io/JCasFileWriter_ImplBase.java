@@ -42,8 +42,8 @@ public abstract class JCasFileWriter_ImplBase
 	/**
 	 * The folder to write the generated XMI files to.
 	 */
-	public static final String PARAM_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
-	@ConfigurationParameter(name=PARAM_PATH, mandatory=true)
+	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
+	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=true)
 	private File path;
 
     /**

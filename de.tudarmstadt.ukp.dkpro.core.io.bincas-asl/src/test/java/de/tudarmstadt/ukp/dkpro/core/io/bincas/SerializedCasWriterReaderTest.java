@@ -62,7 +62,7 @@ public class SerializedCasWriterReaderTest
 
 		AnalysisEngine xmiWriter = AnalysisEngineFactory.createPrimitive(
 				SerializedCasWriter.class,
-				SerializedCasWriter.PARAM_PATH, testFolder.getRoot().getPath());
+				SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 
 		runPipeline(textReader, xmiWriter);
 

@@ -42,7 +42,7 @@ public class XmlWriterInlineTest
 		String testDocument = "This is a test.";
 
 		AnalysisEngine consumer = createPrimitive(XmlWriterInline.class,
-				XmlWriterInline.PARAM_PATH, workspace.getRoot().getPath(),
+				XmlWriterInline.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
 				XmlWriterInline.PARAM_STRIP_EXTENSION, true);
 
 		JCas jcas = consumer.newJCas();

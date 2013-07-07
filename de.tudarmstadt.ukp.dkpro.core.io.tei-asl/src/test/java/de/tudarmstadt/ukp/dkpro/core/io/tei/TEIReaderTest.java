@@ -61,7 +61,7 @@ public class TEIReaderTest
 
         AnalysisEngine writer = createPrimitive(TextWriter.class,
         		TextWriter.PARAM_USE_DOCUMENT_ID, true,
-        		TextWriter.PARAM_PATH, "target/digibibTest/");
+        		TextWriter.PARAM_TARGET_LOCATION, "target/digibibTest/");
 
         Map<String, Integer> actualSizes = new LinkedHashMap<String, Integer>();
         for (JCas jcas : new JCasIterable(reader)) {
