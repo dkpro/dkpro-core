@@ -51,13 +51,12 @@ import de.tudarmstadt.ukp.wikipedia.api.sweble.PlainTextConverter;
 public class BlikiWikipediaReader
     extends JCasCollectionReader_ImplBase
 {
-
     /** 
      * Wikiapi URL
      * E.g. for the English Wikipedia it should be: http://en.wikipedia.org/w/api.php
      */
-    public static final String PARAM_WIKIAPI_URL = ComponentParameters.PARAM_SOURCE_LOCATION;
-    @ConfigurationParameter(name = PARAM_WIKIAPI_URL, mandatory = true, defaultValue = "true")
+    public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
+    @ConfigurationParameter(name = PARAM_SOURCE_LOCATION, mandatory = true)
     private String wikiapiUrl;
 
     /** 
@@ -73,7 +72,7 @@ public class BlikiWikipediaReader
     private boolean outputPlainText;
 
     /** Which page titles should be retrieved. */
-    public static final String PARAM_PAGE_TITLES = "PageTitles";
+    public static final String PARAM_PAGE_TITLES = "pageTitles";
     @ConfigurationParameter(name = PARAM_PAGE_TITLES, mandatory = true)
     private String[] pageTitles;
 

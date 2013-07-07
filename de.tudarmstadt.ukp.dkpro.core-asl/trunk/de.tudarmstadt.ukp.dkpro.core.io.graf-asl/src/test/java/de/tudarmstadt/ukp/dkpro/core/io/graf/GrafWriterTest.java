@@ -72,7 +72,7 @@ public class GrafWriterTest
 
 		AnalysisEngineDescription grafWriter = createPrimitiveDescription(
 				GrafWriter.class,
-				GrafWriter.PARAM_PATH, testFolder.getRoot().getPath());
+				GrafWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 
 		AnalysisEngineDescription dumpWriter = createPrimitiveDescription(
 				CASDumpWriter.class,
