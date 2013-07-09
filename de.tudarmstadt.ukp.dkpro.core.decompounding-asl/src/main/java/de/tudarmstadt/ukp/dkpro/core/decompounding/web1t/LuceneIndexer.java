@@ -26,6 +26,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -34,6 +35,7 @@ import org.apache.commons.cli.OptionBuilder;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -71,6 +73,8 @@ public class LuceneIndexer
 	private File outputPath;
 	private int indexes;
 	private Dictionary dictionary;
+	
+	private static Logger logger;
 
 	/**
 	 * A Worker thread.
@@ -98,6 +102,7 @@ public class LuceneIndexer
 		@Override
 		public void run()
 		{
+
 			try {
 				IndexWriter writer = new IndexWriter(FSDirectory.open(output),
 						new StandardAnalyzer(Version.LUCENE_30), true,
@@ -141,7 +146,7 @@ public class LuceneIndexer
 							}
 						}
 						i++;
-						System.out.println(file.getName() + " is Ready. Only "
+						logger.info(file.getName() + " is Ready. Only "
 								+ (files.size() - i) + " files left ...");
 					}
 					finally {
@@ -149,20 +154,20 @@ public class LuceneIndexer
 					}
 				}
 
-				System.out.println("The index is optimized for you! This can take a moment...");
+				logger.info("The index is optimized for you! This can take a moment...");
 				writer.optimize();
 				writer.close();
 			}
 			catch (CorruptIndexException e) {
-				// TODO Auto-generated catch block
+				logger.severe(e.getMessage());
 				e.printStackTrace();
 			}
 			catch (LockObtainFailedException e) {
-				// TODO Auto-generated catch block
+				logger.severe(e.getMessage());
 				e.printStackTrace();
 			}
 			catch (IOException e) {
-				// TODO Auto-generated catch block
+				logger.severe(e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -197,6 +202,7 @@ public class LuceneIndexer
 		web1tFolder = aWeb1tFolder;
 		outputPath = aOutputPath;
 		indexes = aIndexes;
+		logger = Logger.getLogger(this.getClass().getSimpleName());
 	}
 
 	/**
@@ -224,14 +230,14 @@ public class LuceneIndexer
 			}));
 		}
 		else {
-			throw new FileNotFoundException();
+			throw new FileNotFoundException("File " + web1tFolder + " cannot be found.");
 		}
 
 		if (indexes > files.size()) {
 			indexes = files.size();
 		}
 
-		System.out.println("Oh, you started a long running task. Take a cup of coffee ...");
+		logger.info("Oh, you started a long running task. Take a cup of coffee ...");
 
 		int perIndex = (int) Math.ceil((float) files.size()
 				/ (float) indexes);
@@ -243,7 +249,7 @@ public class LuceneIndexer
 				end = files.size();
 			}
 
-			System.out.println(files.subList(start, end));
+			logger.info(StringUtils.join(files.subList(start, end), ", "));
 
 			Worker w = new Worker(files.subList(start, end), new File(
 					outputPath.getAbsoluteFile() + "/" + i), dictionary);
@@ -255,7 +261,7 @@ public class LuceneIndexer
 			workers[i].join();
 		}
 
-		System.out.println("Great, index is ready. Have fun!");
+		logger.info("Great, index is ready. Have fun!");
 	}
 
 	public Dictionary getDictionary()
@@ -278,7 +284,7 @@ public class LuceneIndexer
 	 * @param args
 	 */
 	@SuppressWarnings("static-access")
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
 		Options options = new Options();
 		options.addOption(OptionBuilder.withLongOpt("web1t")
@@ -320,10 +326,9 @@ public class LuceneIndexer
 			indexer.index();
 		}
 		catch (Exception e) {
-			System.err.println("Error: " + e.getMessage());
-
 			HelpFormatter formatter = new HelpFormatter();
 			formatter.printHelp("LuceneIndexer", options);
+			throw e;
 		}
 	}
 }
