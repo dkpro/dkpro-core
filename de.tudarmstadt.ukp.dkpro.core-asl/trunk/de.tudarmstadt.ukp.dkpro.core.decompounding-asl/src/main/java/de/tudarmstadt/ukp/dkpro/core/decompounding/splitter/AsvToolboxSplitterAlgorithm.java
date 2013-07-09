@@ -25,9 +25,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.Vector;
-import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -40,12 +41,12 @@ implements SplitterAlgorithm
 {
 	private final Zerleger2 splitter;
 
-	private Logger logger;
+	private Log logger;
 
 	public AsvToolboxSplitterAlgorithm()
 			throws ResourceInitializationException
 			{
-		logger = Logger.getLogger(this.getClass().getName());
+		logger = LogFactory.getLog(this.getClass());
 
 		splitter = new Zerleger2();
 		try {
@@ -80,15 +81,15 @@ implements SplitterAlgorithm
 		// splitter.kZerlegung("providerdaten");
 		// splitter.kZerlegung("zahnärzten");
 
-		logger.finer("SPLITTING WORD: "+aWord);
+		logger.debug("SPLITTING WORD: "+aWord);
 		Vector<String> split = splitter.kZerlegung(aWord);
 		String joined = StringUtils.join(split, "").replace("(", "").replace(")", "");
 		if (!joined.equals(aWord)) {
-			logger.severe("Failed while splitting " + aWord + " into " + split);
+			logger.error("Failed while splitting " + aWord + " into " + split);
 		}
 
 		if (StringUtils.join(split, "").contains("()")) {
-			logger.severe(aWord + " -> " + split);
+			logger.error(aWord + " -> " + split);
 			throw new ResourceInitializationException("Failed while splitting " + aWord + " into " + split, null);
 		}
 
@@ -142,11 +143,11 @@ implements SplitterAlgorithm
 		public Vector<String> kZerlegung(String aAktwort)
 		{
 			//            if (d) {
-			//                logger.config("grf: " + aAktwort + "->");
+			//                logger.debug("grf: " + aAktwort + "->");
 			//            }
 			String aktwort = grundFormReduktion(aAktwort);
 			//            if (d) {
-			//                logger.config(aktwort);
+			//                logger.debug(aktwort);
 			//            }
 			Vector<String> retvec = new Vector<String>();
 			String classvv = new String();
@@ -157,15 +158,15 @@ implements SplitterAlgorithm
 			int zahlvv = 0, zahlvh = 0;
 			boolean vhOk, vvOk;
 			//            if (d) {
-			//                logger.config("Zerlege " + aktwort);
+			//                logger.debug("Zerlege " + aktwort);
 			//            }
 			classvv = kompvvTree.classify(aktwort + "<");
 			classvh = kompvhTree.classify(reverse(aktwort) + "<");
 			//            if (d) {
-			//                logger.config("VV liefert " + classvv);
+			//                logger.debug("VV liefert " + classvv);
 			//            }
 			//            if (d) {
-			//                logger.config("VH liefert " + classvh);
+			//                logger.debug("VH liefert " + classvh);
 			//            }
 
 			zervv = new Vector<String>();
@@ -185,7 +186,7 @@ implements SplitterAlgorithm
 				for (int i = 0; i < classvv.length(); i++) {
 					char c = classvv.charAt(i);
 					//                    if (d) {
-					//                        logger.config("Parse: " + c + " " + (int) c);
+					//                        logger.debug("Parse: " + c + " " + (int) c);
 					//                    }
 					if ((c < 58) && (c > 47)) {
 						zahlStrvv += c;
@@ -233,7 +234,7 @@ implements SplitterAlgorithm
 			if (vvOk) {
 				for (int i = 0; i < suffixvv.length(); i++) {
 					//                    if (d) {
-						//                        logger.config("VV matche " + suffixvv.charAt(i) + " und "
+						//                        logger.debug("VV matche " + suffixvv.charAt(i) + " und "
 								//                                + aktwort.charAt(zahlvv + i));
 					//                    }
 					if (aktwort.length() > (zahlvv + i)) {
@@ -262,7 +263,7 @@ implements SplitterAlgorithm
 				zervv.addElement(vvteil1);
 				zervv.addElement(vvteil2);
 				//                if (d) {
-					//                    logger.config("VV zerlegt in " + vvteil1 + " " + vvteil2);
+					//                    logger.debug("VV zerlegt in " + vvteil1 + " " + vvteil2);
 				//                }
 				if (vvteil2.length() <= 3) {
 					vvOk = false;
@@ -277,7 +278,7 @@ implements SplitterAlgorithm
 				zervh.addElement(vhteil1);
 				zervh.addElement(vhteil2);
 				//                if (d) {
-					//                    logger.config("VH zerlegt in " + vhteil1 + " " + vhteil2);
+					//                    logger.debug("VH zerlegt in " + vhteil1 + " " + vhteil2);
 				//                }
 
 				if (vhteil1.length() <= 3) {
@@ -329,7 +330,7 @@ implements SplitterAlgorithm
 			}
 
 			//            if (d) {
-			//                logger.config("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
+			//                logger.debug("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
 			//            }
 
 			if (retvec.size() == 1) {
@@ -346,7 +347,7 @@ implements SplitterAlgorithm
 					// throw new
 					// IllegalStateException("Bad assumption: first split not changed by
 					// grundFormReduktion");
-					logger.severe("Unable to map split " + asList(w1, w2)
+					logger.error("Unable to map split " + asList(w1, w2)
 							+ " back to original " + aAktwort + "... no splitting");
 					retvec.add(aAktwort);
 				}
@@ -366,7 +367,7 @@ implements SplitterAlgorithm
 					// throw new
 					// IllegalStateException("Bad assumption: first split not changed by
 					// grundFormReduktion");
-					logger.severe("Unable to map split " + asList(w1, w2, w3)
+					logger.error("Unable to map split " + asList(w1, w2, w3)
 							+ " back to original " + aAktwort + "... no splitting");
 					retvec.add(aAktwort);
 				}
@@ -377,7 +378,7 @@ implements SplitterAlgorithm
 						// throw new
 						// IllegalStateException("Bad assumption: second split not changed by
 						// grundFormReduktion");
-						logger.severe("Unable to map split " + asList(w1, w2, w3)
+						logger.error("Unable to map split " + asList(w1, w2, w3)
 								+ " back to original " + aAktwort + "... no splitting");
 						retvec.clear();
 						retvec.add(aAktwort);
@@ -394,7 +395,7 @@ implements SplitterAlgorithm
 			}
 
 			//            if (d) {
-			//                logger.config("Ergebnis: " + retvec);
+			//                logger.debug("Ergebnis: " + retvec);
 			//            }
 
 			Vector<String> retvec2 = new Vector<String>();
@@ -417,7 +418,7 @@ implements SplitterAlgorithm
 			}
 
 			//            if (d) {
-			//                logger.config("Ergebnis2: " + retvec2.toString());
+			//                logger.debug("Ergebnis2: " + retvec2.toString());
 			//            }
 
 			return retvec2;
@@ -523,25 +524,25 @@ implements SplitterAlgorithm
 		{
 			// B�ume initialisierung
 			// logger.info("Loading from "+grfFile);
-			logger.config("Loading " + kompvv + " ...");
+			logger.debug("Loading " + kompvv + " ...");
 			kompvvTree.load(kompvv);
-			//                logger.config("loaded");
+			//                logger.debug("loaded");
 			kompvvTree.setIgnoreCase(true);
 			kompvvTree.setThresh(0.51);
 
 			// Kompositazerlegung-Beum initialisieren
-			logger.config("Loading " + kompvh + " ...");
+			logger.debug("Loading " + kompvh + " ...");
 
 			kompvhTree.load(kompvh);
 
-			//                logger.config("loaded");
+			//                logger.debug("loaded");
 			kompvhTree.setIgnoreCase(true); // Trainingsmenge in
 			// lowcase :(
 			kompvhTree.setThresh(0.51); // weiss nicht?
-			logger.config("Loading " + gfred + " ...");
+			logger.debug("Loading " + gfred + " ...");
 
 			grfTree.load(gfred);
-			//                logger.config("loaded");
+			//                logger.debug("loaded");
 			grfTree.setIgnoreCase(true); // Trainingsmenge in lowcase
 			// :(
 			grfTree.setThresh(0.46); // weiss nicht?
