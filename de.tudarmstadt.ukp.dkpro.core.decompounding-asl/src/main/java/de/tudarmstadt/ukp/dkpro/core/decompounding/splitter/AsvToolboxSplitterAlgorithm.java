@@ -128,7 +128,7 @@ public class AsvToolboxSplitterAlgorithm
         Pretree grfTree = new Pretree();
         String anweisungGrf = new String();
         String anweisungKomp = new String();
-        boolean d = true; // debugguing
+//        boolean d = true; // debugguing
 
         String reverse(String torev)
         {
@@ -141,13 +141,13 @@ public class AsvToolboxSplitterAlgorithm
 
         public Vector<String> kZerlegung(String aAktwort)
         {
-            if (d) {
-                logger.config("grf: " + aAktwort + "->");
-            }
+//            if (d) {
+//                logger.config("grf: " + aAktwort + "->");
+//            }
             String aktwort = grundFormReduktion(aAktwort);
-            if (d) {
-                logger.config(aktwort);
-            }
+//            if (d) {
+//                logger.config(aktwort);
+//            }
             Vector<String> retvec = new Vector<String>();
             String classvv = new String();
             String classvh = new String();
@@ -156,17 +156,17 @@ public class AsvToolboxSplitterAlgorithm
             Vector<String> zervv = new Vector<String>();
             int zahlvv = 0, zahlvh = 0;
             boolean vhOk, vvOk;
-            if (d) {
-                logger.config("Zerlege " + aktwort);
-            }
+//            if (d) {
+//                logger.config("Zerlege " + aktwort);
+//            }
             classvv = kompvvTree.classify(aktwort + "<");
             classvh = kompvhTree.classify(reverse(aktwort) + "<");
-            if (d) {
-                logger.config("VV liefert " + classvv);
-            }
-            if (d) {
-                logger.config("VH liefert " + classvh);
-            }
+//            if (d) {
+//                logger.config("VV liefert " + classvv);
+//            }
+//            if (d) {
+//                logger.config("VH liefert " + classvh);
+//            }
 
             zervv = new Vector<String>();
             zervh = new Vector<String>();
@@ -184,9 +184,9 @@ public class AsvToolboxSplitterAlgorithm
             if (vvOk) {
                 for (int i = 0; i < classvv.length(); i++) {
                     char c = classvv.charAt(i);
-                    if (d) {
-                        logger.config("Parse: " + c + " " + (int) c);
-                    }
+//                    if (d) {
+//                        logger.config("Parse: " + c + " " + (int) c);
+//                    }
                     if ((c < 58) && (c > 47)) {
                         zahlStrvv += c;
                     }
@@ -198,9 +198,9 @@ public class AsvToolboxSplitterAlgorithm
             if (vhOk) {
                 for (int i = 0; i < classvh.length(); i++) {
                     char c = classvh.charAt(i);
-                    if (d) {
-                        logger.info("Parse: " + c + " " + (int) c);
-                    }
+//                    if (d) {
+//                        logger.info("Parse: " + c + " " + (int) c);
+//                    }
                     if ((c < 58) && (c > 47)) {
                         zahlStrvh += c;
                     }
@@ -232,10 +232,10 @@ public class AsvToolboxSplitterAlgorithm
 
             if (vvOk) {
                 for (int i = 0; i < suffixvv.length(); i++) {
-                    if (d) {
-                        logger.config("VV matche " + suffixvv.charAt(i) + " und "
-                                + aktwort.charAt(zahlvv + i));
-                    }
+//                    if (d) {
+//                        logger.config("VV matche " + suffixvv.charAt(i) + " und "
+//                                + aktwort.charAt(zahlvv + i));
+//                    }
                     if (aktwort.length() > (zahlvv + i)) {
                         if (suffixvv.charAt(i) != aktwort.charAt(zahlvv + i)) {
                             vvOk = false;
@@ -261,9 +261,9 @@ public class AsvToolboxSplitterAlgorithm
                 vvteil2 = aktwort.substring(zahlvv + suffixvv.length(), aktwort.length());
                 zervv.addElement(vvteil1);
                 zervv.addElement(vvteil2);
-                if (d) {
-                    logger.config("VV zerlegt in " + vvteil1 + " " + vvteil2);
-                }
+//                if (d) {
+//                    logger.config("VV zerlegt in " + vvteil1 + " " + vvteil2);
+//                }
                 if (vvteil2.length() <= 3) {
                     vvOk = false;
                 }
@@ -276,9 +276,9 @@ public class AsvToolboxSplitterAlgorithm
                         aktwort.length());
                 zervh.addElement(vhteil1);
                 zervh.addElement(vhteil2);
-                if (d) {
-                    logger.config("VH zerlegt in " + vhteil1 + " " + vhteil2);
-                }
+//                if (d) {
+//                    logger.config("VH zerlegt in " + vhteil1 + " " + vhteil2);
+//                }
 
                 if (vhteil1.length() <= 3) {
                     vhOk = false;
@@ -328,9 +328,9 @@ public class AsvToolboxSplitterAlgorithm
                 retvec.addElement(aktwort);
             }
 
-            if (d) {
-                logger.config("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
-            }
+//            if (d) {
+//                logger.config("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
+//            }
 
             if (retvec.size() == 1) {
                 // If there was no split, return verbatim
@@ -393,9 +393,9 @@ public class AsvToolboxSplitterAlgorithm
                 }
             }
 
-            if (d) {
-                logger.config("Ergebnis: " + retvec);
-            }
+//            if (d) {
+//                logger.config("Ergebnis: " + retvec);
+//            }
 
             Vector<String> retvec2 = new Vector<String>();
 
@@ -416,9 +416,9 @@ public class AsvToolboxSplitterAlgorithm
                 retvec2 = retvec;
             }
 
-            if (d) {
-                logger.config("Ergebnis2: " + retvec2.toString());
-            }
+//            if (d) {
+//                logger.config("Ergebnis2: " + retvec2.toString());
+//            }
 
             return retvec2;
         } // end kZerlegung
