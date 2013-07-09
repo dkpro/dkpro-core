@@ -18,6 +18,8 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
+import org.apache.uima.resource.ResourceInitializationException;
+
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 
@@ -36,8 +38,9 @@ public interface SplitterAlgorithm
 	 * @param aWord
 	 *            The word to split
 	 * @return
+	 * @throws ResourceInitializationException 
 	 */
-	public DecompoundingTree split(String aWord);
+	public DecompoundingTree split(String aWord) throws ResourceInitializationException;
 	
 	/**
 	 * Sets the dictionary for the algorithm

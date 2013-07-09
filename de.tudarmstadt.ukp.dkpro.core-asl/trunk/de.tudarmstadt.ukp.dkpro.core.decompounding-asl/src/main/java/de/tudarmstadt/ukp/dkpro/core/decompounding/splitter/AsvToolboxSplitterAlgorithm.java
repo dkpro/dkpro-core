@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -38,10 +39,14 @@ public class AsvToolboxSplitterAlgorithm
     implements SplitterAlgorithm
 {
     private final Zerleger2 splitter;
+    
+    private Logger logger;
 
     public AsvToolboxSplitterAlgorithm()
         throws ResourceInitializationException
     {
+    	logger = Logger.getLogger(this.getClass().getName());
+    	
         splitter = new Zerleger2();
         try {
             File kompVVicTree = ResourceUtils.getUrlAsFile(getClass().getResource(
@@ -66,7 +71,7 @@ public class AsvToolboxSplitterAlgorithm
     }
 
     @Override
-    public DecompoundingTree split(String aWord)
+    public DecompoundingTree split(String aWord) throws ResourceInitializationException
     {
         // splitter.kZerlegung("katalogleichen");
         // splitter.kZerlegung("nischenthemen");
@@ -74,16 +79,17 @@ public class AsvToolboxSplitterAlgorithm
         // splitter.kZerlegung("autokorrelationszeit");
         // splitter.kZerlegung("providerdaten");
         // splitter.kZerlegung("zahnärzten");
+    	
+    	logger.info("SPLITTING WORD: "+aWord);
         Vector<String> split = splitter.kZerlegung(aWord);
         String joined = StringUtils.join(split, "").replace("(", "").replace(")", "");
         if (!joined.equals(aWord)) {
-            System.out.printf("%s -> %s%n", aWord, split);
-            System.exit(1);
+            throw new ResourceInitializationException("Failed while splitting " + aWord + " into " + split, null);
         }
 
         if (StringUtils.join(split, "").contains("()")) {
             System.out.printf("%s -> %s%n", aWord, split);
-            System.exit(1);
+            throw new ResourceInitializationException("Failed while splitting " + aWord + " into " + split, null);
         }
 
         StringBuilder splitStr = new StringBuilder();
@@ -122,7 +128,7 @@ public class AsvToolboxSplitterAlgorithm
         Pretree grfTree = new Pretree();
         String anweisungGrf = new String();
         String anweisungKomp = new String();
-        boolean d = !true; // debugguing
+        boolean d = true; // debugguing
 
         String reverse(String torev)
         {
@@ -136,11 +142,11 @@ public class AsvToolboxSplitterAlgorithm
         public Vector<String> kZerlegung(String aAktwort)
         {
             if (d) {
-                System.out.print("grf: " + aAktwort + "->");
+                logger.config("grf: " + aAktwort + "->");
             }
             String aktwort = grundFormReduktion(aAktwort);
             if (d) {
-                System.out.println(aktwort);
+                logger.config(aktwort);
             }
             Vector<String> retvec = new Vector<String>();
             String classvv = new String();
@@ -151,15 +157,15 @@ public class AsvToolboxSplitterAlgorithm
             int zahlvv = 0, zahlvh = 0;
             boolean vhOk, vvOk;
             if (d) {
-                System.out.println("Zerlege " + aktwort);
+                logger.config("Zerlege " + aktwort);
             }
             classvv = kompvvTree.classify(aktwort + "<");
             classvh = kompvhTree.classify(reverse(aktwort) + "<");
             if (d) {
-                System.out.println("VV liefert " + classvv);
+                logger.config("VV liefert " + classvv);
             }
             if (d) {
-                System.out.println("VH liefert " + classvh);
+                logger.config("VH liefert " + classvh);
             }
 
             zervv = new Vector<String>();
@@ -179,7 +185,7 @@ public class AsvToolboxSplitterAlgorithm
                 for (int i = 0; i < classvv.length(); i++) {
                     char c = classvv.charAt(i);
                     if (d) {
-                        System.out.println("Parse: " + c + " " + (int) c);
+                        logger.config("Parse: " + c + " " + (int) c);
                     }
                     if ((c < 58) && (c > 47)) {
                         zahlStrvv += c;
@@ -193,7 +199,7 @@ public class AsvToolboxSplitterAlgorithm
                 for (int i = 0; i < classvh.length(); i++) {
                     char c = classvh.charAt(i);
                     if (d) {
-                        System.out.println("Parse: " + c + " " + (int) c);
+                        logger.info("Parse: " + c + " " + (int) c);
                     }
                     if ((c < 58) && (c > 47)) {
                         zahlStrvh += c;
@@ -227,7 +233,7 @@ public class AsvToolboxSplitterAlgorithm
             if (vvOk) {
                 for (int i = 0; i < suffixvv.length(); i++) {
                     if (d) {
-                        System.out.println("VV matche " + suffixvv.charAt(i) + " und "
+                        logger.config("VV matche " + suffixvv.charAt(i) + " und "
                                 + aktwort.charAt(zahlvv + i));
                     }
                     if (aktwort.length() > (zahlvv + i)) {
@@ -256,7 +262,7 @@ public class AsvToolboxSplitterAlgorithm
                 zervv.addElement(vvteil1);
                 zervv.addElement(vvteil2);
                 if (d) {
-                    System.out.println("VV zerlegt in " + vvteil1 + " " + vvteil2);
+                    logger.config("VV zerlegt in " + vvteil1 + " " + vvteil2);
                 }
                 if (vvteil2.length() <= 3) {
                     vvOk = false;
@@ -271,7 +277,7 @@ public class AsvToolboxSplitterAlgorithm
                 zervh.addElement(vhteil1);
                 zervh.addElement(vhteil2);
                 if (d) {
-                    System.out.println("VH zerlegt in " + vhteil1 + " " + vhteil2);
+                    logger.config("VH zerlegt in " + vhteil1 + " " + vhteil2);
                 }
 
                 if (vhteil1.length() <= 3) {
@@ -323,7 +329,7 @@ public class AsvToolboxSplitterAlgorithm
             }
 
             if (d) {
-                System.out.println("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
+                logger.config("Pre-Ergebnis: [" + aAktwort + "] -> " + retvec);
             }
 
             if (retvec.size() == 1) {
@@ -340,7 +346,7 @@ public class AsvToolboxSplitterAlgorithm
                     // throw new
                     // IllegalStateException("Bad assumption: first split not changed by
                     // grundFormReduktion");
-                    System.err.println("Unable to map split " + asList(w1, w2)
+                	logger.severe("Unable to map split " + asList(w1, w2)
                             + " back to original " + aAktwort + "... no splitting");
                     retvec.add(aAktwort);
                 }
@@ -360,7 +366,7 @@ public class AsvToolboxSplitterAlgorithm
                     // throw new
                     // IllegalStateException("Bad assumption: first split not changed by
                     // grundFormReduktion");
-                    System.err.println("Unable to map split " + asList(w1, w2, w3)
+                	logger.severe("Unable to map split " + asList(w1, w2, w3)
                             + " back to original " + aAktwort + "... no splitting");
                     retvec.add(aAktwort);
                 }
@@ -371,7 +377,7 @@ public class AsvToolboxSplitterAlgorithm
                         // throw new
                         // IllegalStateException("Bad assumption: second split not changed by
                         // grundFormReduktion");
-                        System.err.println("Unable to map split " + asList(w1, w2, w3)
+                    	logger.severe("Unable to map split " + asList(w1, w2, w3)
                                 + " back to original " + aAktwort + "... no splitting");
                         retvec.clear();
                         retvec.add(aAktwort);
@@ -388,7 +394,7 @@ public class AsvToolboxSplitterAlgorithm
             }
 
             if (d) {
-                System.out.println("Ergebnis: " + retvec);
+                logger.config("Ergebnis: " + retvec);
             }
 
             Vector<String> retvec2 = new Vector<String>();
@@ -411,7 +417,7 @@ public class AsvToolboxSplitterAlgorithm
             }
 
             if (d) {
-                System.out.println("Ergebnis2: " + retvec2.toString());
+                logger.config("Ergebnis2: " + retvec2.toString());
             }
 
             return retvec2;
@@ -472,7 +478,7 @@ public class AsvToolboxSplitterAlgorithm
         {
             String retwort = wort;
             anweisungGrf = grfTree.classify(reverse(wort));
-            // System.out.println("Anweisung f�r "+wort+": "+anweisungGrf);
+            // logger.info("Anweisung f�r "+wort+": "+anweisungGrf);
             if (!anweisungGrf.equals("undecided")) {
                 StringTokenizer kommatok = new StringTokenizer(anweisungGrf, ",");
                 anweisungGrf = kommatok.nextToken(); // nehme bei
@@ -484,7 +490,7 @@ public class AsvToolboxSplitterAlgorithm
 
                 for (int i = 0; i < anweisungGrf.length(); i++) {
                     char c = anweisungGrf.charAt(i);
-                    // System.out.println("Parse: "+c+" "+(int)c);
+                    // logger.info("Parse: "+c+" "+(int)c);
                     if ((c < 58) && (c > 47)) {
                         zahlStr += c;
                     }
@@ -493,7 +499,7 @@ public class AsvToolboxSplitterAlgorithm
                     }
                 } // rof i
 
-                // System.out.println(anweisungGrf+"->"+zahlStr+"-"+suffix+"'");
+                // logger.info(anweisungGrf+"->"+zahlStr+"-"+suffix+"'");
 
                 int cutpos = new Integer(zahlStr).intValue();
                 if (cutpos > retwort.length()) {
@@ -516,27 +522,27 @@ public class AsvToolboxSplitterAlgorithm
         public void init(String kompvv, String kompvh, String gfred)
         {
             // B�ume initialisierung
-            // System.out.println("Loading from "+grfFile);
+            // logger.info("Loading from "+grfFile);
             try {
-                System.out.print("Loading " + kompvv + " ...");
+                logger.info("Loading " + kompvv + " ...");
                 kompvvTree.load(kompvv);
-                System.out.println("loaded");
+                logger.info("loaded");
                 kompvvTree.setIgnoreCase(true);
                 kompvvTree.setThresh(0.51);
 
                 // Kompositazerlegung-Beum initialisieren
-                System.out.print("Loading " + kompvh + " ...");
+                logger.info("Loading " + kompvh + " ...");
 
                 kompvhTree.load(kompvh);
 
-                System.out.println("loaded");
+                logger.info("loaded");
                 kompvhTree.setIgnoreCase(true); // Trainingsmenge in
                 // lowcase :(
                 kompvhTree.setThresh(0.51); // weiss nicht?
-                System.out.print("Loading " + gfred + " ...");
+                logger.info("Loading " + gfred + " ...");
 
                 grfTree.load(gfred);
-                System.out.println("loaded");
+                logger.info("loaded");
                 grfTree.setIgnoreCase(true); // Trainingsmenge in lowcase
                 // :(
                 grfTree.setThresh(0.46); // weiss nicht?

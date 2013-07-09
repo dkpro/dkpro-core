@@ -45,7 +45,7 @@ public class AsvToolboxSplitterResource
     }
 
     @Override
-    public DecompoundingTree split(String aWord)
+    public DecompoundingTree split(String aWord) throws ResourceInitializationException
     {
         return splitter.split(aWord);
     }
