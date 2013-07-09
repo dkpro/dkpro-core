@@ -26,7 +26,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -36,6 +35,8 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.PosixParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -74,7 +75,7 @@ public class LuceneIndexer
 	private int indexes;
 	private Dictionary dictionary;
 	
-	private static Logger logger;
+	private static Log logger;
 
 	/**
 	 * A Worker thread.
@@ -159,15 +160,15 @@ public class LuceneIndexer
 				writer.close();
 			}
 			catch (CorruptIndexException e) {
-				logger.severe(e.getMessage());
+				logger.error(e.getMessage());
 				e.printStackTrace();
 			}
 			catch (LockObtainFailedException e) {
-				logger.severe(e.getMessage());
+				logger.error(e.getMessage());
 				e.printStackTrace();
 			}
 			catch (IOException e) {
-				logger.severe(e.getMessage());
+				logger.error(e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -202,7 +203,7 @@ public class LuceneIndexer
 		web1tFolder = aWeb1tFolder;
 		outputPath = aOutputPath;
 		indexes = aIndexes;
-		logger = Logger.getLogger(this.getClass().getSimpleName());
+		logger = LogFactory.getLog(this.getClass());
 	}
 
 	/**
