@@ -15,7 +15,7 @@
 		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
-	<name>DKPro Core ASL - IO - Text</name>
+	<name>DKPro Core ASL - IO - CONLL</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
