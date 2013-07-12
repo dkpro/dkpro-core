@@ -536,6 +536,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</module>
