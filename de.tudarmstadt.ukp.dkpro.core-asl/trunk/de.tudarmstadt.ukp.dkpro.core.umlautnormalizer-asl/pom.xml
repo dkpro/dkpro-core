@@ -23,6 +23,8 @@
     <version>1.5.0-SNAPSHOT</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</artifactId>
+  <name>DKPro Core ASL - Umlaut normalizer</name>
+  <description>Takes a text and checks for umlauts written as &quot;ae&quot;, &quot;oe&quot;, or &quot;ue&quot; and normalizes them if they really are umlauts depending on a frequency model.</description>
   <dependencies>
   	<dependency>
   		<groupId>junit</groupId>
@@ -34,23 +36,15 @@
 		</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.castransformation-asl
-  		</artifactId>
-  		<version>1.5.0-SNAPSHOT</version>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.frequency-asl
-  		</artifactId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.io.web1t-asl
-  		</artifactId>
-  		<version>1.5.0-SNAPSHOT</version>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
   	</dependency>
   	<dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -58,6 +52,4 @@
         <version>20121116.0</version>
     </dependency>
   </dependencies>
-  <name>DKPro Core ASL - Umlaut normalizer</name>
-  <description>Takes a text and checks for umlauts written as &quot;ae&quot;, &quot;oe&quot;, or &quot;ue&quot; and normalizes them if they really are umlauts depending on a frequency model.</description>
 </project>
