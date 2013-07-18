@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>3</version>
+		<version>4-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 	<version>1.5.0-SNAPSHOT</version>
@@ -71,9 +71,6 @@
 		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
 	</scm>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
 	<dependencyManagement>
@@ -220,7 +217,17 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -236,6 +243,11 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -261,6 +273,11 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -291,11 +308,6 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -535,24 +547,26 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.html-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.mmax2-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.text-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
@@ -588,7 +602,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
 		-->
-		<module>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -807,7 +820,13 @@
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bincas-asl/src/main/java"
 										includes="**/*.java" />
 									<fileset
+										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bliki-asl/src/main/java"
+										includes="**/*.java" />
+									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc-asl/src/main/java"
+										includes="**/*.java" />
+									<fileset
+										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/main/java"
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl/src/main/java"
@@ -829,6 +848,9 @@
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pentree-asl/src/main/java"
+										includes="**/*.java" />
+									<fileset
+										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tcf-asl/src/main/java"
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tei-asl/src/main/java"
