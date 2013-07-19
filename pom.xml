@@ -41,6 +41,17 @@
 			</releases>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<!-- For uimaFIT 2.0.0-SNAPSHOT maven plugin -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 	<distributionManagement>
 		<repository>
 			<id>ukp-oss</id>
