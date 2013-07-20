@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -26,26 +26,25 @@ import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.xwriter.CASDumpWriter;
 import org.junit.Test;
 
-public class ConllReaderWriterTest
+public class Conll2006ReaderWriterTest
 {
     @Test
-
     public void test()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(ConllReader.class, ConllReader.PARAM_PATH,
-                new File("src/test/resources/conll/").getAbsolutePath(), ConllReader.PARAM_PATTERNS,
-                new String[] { "[+]fk003_2006_08_ZH1.conll10" });
+        CollectionReaderDescription reader = createDescription(Conll2006Reader.class, 
+                Conll2006Reader.PARAM_PATH, new File("src/test/resources/conll/").getAbsolutePath(), 
+                Conll2006Reader.PARAM_PATTERNS, new String[] { "[+]fk003_2006_08_ZH1.conll10" });
 
-        AnalysisEngineDescription writer = createPrimitiveDescription(ConllWriter.class,
-                ConllWriter.PARAM_TARGET_LOCATION, "target/test-output", ConllWriter.PARAM_STRIP_EXTENSION,
-                true);
+        AnalysisEngineDescription writer = createEngineDescription(Conll2006Writer.class,
+                Conll2006Writer.PARAM_TARGET_LOCATION, "target/test-output", 
+                Conll2006Writer.PARAM_STRIP_EXTENSION, true);
 
-        AnalysisEngineDescription dumper = createPrimitiveDescription(CASDumpWriter.class,
+        AnalysisEngineDescription dumper = createEngineDescription(CASDumpWriter.class,
                 CASDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/dump.txt");
 
         runPipeline(reader, writer, dumper);
