@@ -17,12 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.core.util;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -44,10 +41,7 @@ public class TagUtil
             posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
             posMappingProvider.setDefault("tagger.tagset", "default");
 
-            AnalysisEngineDescription tagger = createAggregateDescription(
-                    createPrimitiveDescription(OpenNlpPosTagger.class)
-            );
-            AnalysisEngine engine = createPrimitive(tagger);
+            AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
             posMappingProvider.configure(engine.newCAS());
         }
 

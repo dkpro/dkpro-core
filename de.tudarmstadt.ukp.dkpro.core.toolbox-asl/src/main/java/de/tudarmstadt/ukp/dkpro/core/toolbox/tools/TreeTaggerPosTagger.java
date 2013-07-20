@@ -17,9 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
@@ -44,11 +42,11 @@ public class TreeTaggerPosTagger
     public TreeTaggerPosTagger()
         throws Exception
    {
-        AnalysisEngineDescription tagger = createAggregateDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
+        AnalysisEngineDescription tagger = createEngineDescription(
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(TreeTaggerPosLemmaTT4J.class)
         );
-        engine = createPrimitive(tagger);
+        engine = createEngine(tagger);
     }
 
     public Collection<TaggedToken> tag(String text, String language)

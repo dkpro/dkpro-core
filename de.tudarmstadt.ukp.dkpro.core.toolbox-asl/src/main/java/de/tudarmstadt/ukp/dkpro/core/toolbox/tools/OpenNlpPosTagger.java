@@ -17,9 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
@@ -43,11 +42,11 @@ public class OpenNlpPosTagger
     public OpenNlpPosTagger()
         throws Exception
    {
-        AnalysisEngineDescription tagger = createAggregateDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger.class)
+        AnalysisEngineDescription tagger = createEngineDescription(
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger.class)
         );
-        engine = createPrimitive(tagger);
+        engine = createEngine(tagger);
     }
 
     public Collection<TaggedToken> tag(String text, String language)

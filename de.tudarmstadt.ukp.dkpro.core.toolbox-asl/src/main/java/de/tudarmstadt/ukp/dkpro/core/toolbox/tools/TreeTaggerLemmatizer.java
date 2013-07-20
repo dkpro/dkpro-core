@@ -17,9 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
@@ -41,9 +40,9 @@ public class TreeTaggerLemmatizer
     public TreeTaggerLemmatizer()
         throws Exception
     {
-        tagger = createAggregate(createAggregateDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)));
+        tagger = createEngine(createEngineDescription(
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(TreeTaggerPosLemmaTT4J.class)));
 
         jcas = tagger.newJCas();
     }
