@@ -17,9 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -35,16 +34,16 @@ public class LanguageIdentification {
     public LanguageIdentification()
         throws Exception
     {
-        this.identificator = createAggregateDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(LanguageIdentifier.class)
+        this.identificator = createEngineDescription(
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(LanguageIdentifier.class)
         );
     }
 
     public String identifyLanguage(String text)
         throws Exception
     {
-        AnalysisEngine engine = createPrimitive(identificator);
+        AnalysisEngine engine = createEngine(identificator);
         JCas jcas = engine.newJCas();
         jcas.setDocumentText(text);
         engine.process(jcas);

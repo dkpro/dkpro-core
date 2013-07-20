@@ -17,8 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.tools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
@@ -43,13 +42,13 @@ public class Segmenter
     public Segmenter()
         throws Exception
     {
-        segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
+        segmenter = createEngineDescription(BreakIteratorSegmenter.class);
     }
 
     public Collection<String> tokenize(String text, String language)
         throws Exception
     {
-        AnalysisEngine engine = createPrimitive(segmenter);
+        AnalysisEngine engine = createEngine(segmenter);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(text);
@@ -63,13 +62,14 @@ public class Segmenter
     {
         List<Sentence> sentences = new ArrayList<Sentence>();
 
-        AnalysisEngine engine = createPrimitive(segmenter);
+        AnalysisEngine engine = createEngine(segmenter);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(language);
         jcas.setDocumentText(text);
         engine.process(jcas);
 
-        for (de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence s : select(jcas, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence.class)) {
+        for (de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence s : select(jcas,
+                de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence.class)) {
             List<String> tokens = CasUtil.toText(selectCovered(jcas, Token.class, s));
             sentences.add(new Sentence(tokens));
         }
