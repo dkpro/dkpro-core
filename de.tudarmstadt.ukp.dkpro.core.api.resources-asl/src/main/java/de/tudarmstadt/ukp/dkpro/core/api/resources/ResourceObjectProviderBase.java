@@ -343,11 +343,14 @@ public abstract class ResourceObjectProviderBase<M>
         }
 
         // Extract the version of the model artifact
-        List<Dependency> deps = model.getDependencyManagement().getDependencies();
-        for (Dependency dep : deps) {
-            if (StringUtils.equals(dep.getGroupId(), modelGroup)
-                    && StringUtils.equals(dep.getArtifactId(), modelArtifact)) {
-                return dep.getVersion();
+        if (model.getDependencyManagement() != null
+                && model.getDependencyManagement().getDependencies() != null) {
+            List<Dependency> deps = model.getDependencyManagement().getDependencies();
+            for (Dependency dep : deps) {
+                if (StringUtils.equals(dep.getGroupId(), modelGroup)
+                        && StringUtils.equals(dep.getArtifactId(), modelArtifact)) {
+                    return dep.getVersion();
+                }
             }
         }
 
