@@ -28,7 +28,7 @@
 	<packaging>pom</packaging>
 	<name>DKPro Core ASL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
-	<url>http://code.google.com/p/dkpro-core-asl/</url>
+	<url>https://code.google.com/p/dkpro-core-asl/</url>
 	<prerequisites>
 		<maven>3.0.4</maven>
 	</prerequisites>
@@ -63,12 +63,12 @@
 	</pluginRepositories>
 	<issueManagement>
 		<system>Google Code</system>
-		<url>http://code.google.com/p/dkpro-core-asl/issues/list</url>
+		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk</connection>
+		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
 		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
-		<url>http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk</url>
+		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
