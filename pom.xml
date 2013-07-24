@@ -21,7 +21,7 @@
   	<version>1.5.0-SNAPSHOT</version>
 	<name>DKPro Core GPL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
-	<url>http://code.google.com/p/dkpro-core-gpl/</url>
+	<url>https://code.google.com/p/dkpro-core-gpl/</url>
 	<packaging>pom</packaging>
 	<repositories>
 		<repository>
@@ -60,12 +60,12 @@
 	</distributionManagement>
 	<issueManagement>
 		<system>Google Code</system>
-		<url>http://code.google.com/p/dkpro-core-gpl/issues/list</url>
+		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>http://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
+		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
 		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>http://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
+		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
