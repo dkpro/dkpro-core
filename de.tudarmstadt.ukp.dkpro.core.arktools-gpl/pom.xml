@@ -32,43 +32,12 @@
           <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
       </dependency>
       <dependency>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-math</artifactId>
-          <version>2.2</version>
-      </dependency>
-      <dependency>
-          <groupId>commons-codec</groupId>
-          <artifactId>commons-codec</artifactId>
-          <version>1.6</version>
-      </dependency>
-      <dependency>
-          <groupId>org.scala-lang</groupId>
-          <artifactId>scala-library</artifactId>
-          <version>2.9.0-1</version>
-      </dependency>
-      <dependency>
-          <groupId>edu.cmu.cs.lti.ark.tweetnlp</groupId>
-          <artifactId>edu.cmu.cs.lti.ark.tweetnlp.ark-tweet-nlp</artifactId>
-          <version>0.1.0</version>
-      </dependency>
-      <dependency>
-          <groupId>jargs.gnu</groupId>
-          <artifactId>jargs.gnu.jargs</artifactId>
-          <version>1.0</version>
-      </dependency>
-      <dependency>
-          <groupId>edu.berkeley.nlp</groupId>
-          <artifactId>edu.berkeley.nlp</artifactId>
-          <version>0.1</version>
-      </dependency>
-      <dependency>
       	<groupId>junit</groupId>
       	<artifactId>junit</artifactId>
       </dependency>
       <dependency>
         <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
-        <version>20120919.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
