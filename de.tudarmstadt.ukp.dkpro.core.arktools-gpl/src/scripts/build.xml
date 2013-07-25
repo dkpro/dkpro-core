@@ -21,24 +21,48 @@
 	<target name="separate-jars">
 		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/arktools"/>
 
-		<mkdir dir="target/download/ner"/>
+		<mkdir dir="target/download/arktweet"/>
 
 		<get 
-			src="https://raw.github.com/nschneid/arabic-tagger/master/model/arabic-ner-superROP200.selfROP100.ser.gz" 
-			dest="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz" 
+			src="http://www.ark.cs.cmu.edu/TweetNLP/model.20120919" 
+			dest="target/download/arktweet/englisch-pos-default-20120919.model" 
 			skipexisting="true"/>
 		
-    	<install-stub-and-upstream-file 
-       		file="target/download/ner/arabic-ner-superROP200.selfROP100.ser.gz"
-       		md5="62a3c96b9aee9c5ecf3737788571b108"
+		<get 
+            src="http://www.ark.cs.cmu.edu/TweetNLP/model.irc.20121211" 
+            dest="target/download/arktweet/englisch-pos-irc-20121211.model" 
+            skipexisting="true"/>
+		
+		<install-stub-and-upstream-file
+       		file="target/download/arktweet/englisch-pos-default-20120919.model"
+       		md5="1b9e88785891aecc5d55f255e37e0566"
        		groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.arktools"
-    		upstreamVersion="20120515"
-    		metaDataVersion="1"
-    		tool="ner"
-    		language="ar"
-			variant="superROP"
-		    extension="ser.gz">		
+            upstreamVersion="20120919" 
+            metaDataVersion="1"
+    		tool="tagger"
+    		language="en"
+			variant="default"
+		    extension="model">
+            <metadata>
+              <entry key="pos.tagset" value="arktweet"/>
+            </metadata>
 		</install-stub-and-upstream-file>
+		
+		<install-stub-and-upstream-file
+            file="target/download/arktweet/englisch-pos-irc-20121211.model"
+            md5="09e3816574eec28ab28147955b78f5af"
+            groupId="de.tudarmstadt.ukp.dkpro.core"
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.arktools"
+            upstreamVersion="20121211" 
+            metaDataVersion="1"
+            tool="tagger"
+            language="en"
+            variant="irc"
+            extension="model">
+            <metadata>
+              <entry key="pos.tagset" value="ptb"/>
+            </metadata>
+        </install-stub-and-upstream-file>
 	</target>
 </project>

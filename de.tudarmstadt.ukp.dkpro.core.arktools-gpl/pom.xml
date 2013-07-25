@@ -62,9 +62,36 @@
           <version>0.1</version>
       </dependency>
       <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <scope>test</scope>
+      	<groupId>junit</groupId>
+      	<artifactId>junit</artifactId>
+      </dependency>
+      <dependency>
+        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+        <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
+        <version>20120919.1</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+      	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+      	<artifactId>
+      		de.tudarmstadt.ukp.dkpro.core.api.resources-asl
+      	</artifactId>
+      </dependency>
+      <dependency>
+      	<groupId>edu.cmu.cs</groupId>
+      	<artifactId>ark-tweet-nlp</artifactId>
+      	<version>0.3.2</version>
       </dependency>
   </dependencies>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  			<artifactId>
+  				de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default
+  			</artifactId>
+  			<version>20120919.1</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
 </project>
