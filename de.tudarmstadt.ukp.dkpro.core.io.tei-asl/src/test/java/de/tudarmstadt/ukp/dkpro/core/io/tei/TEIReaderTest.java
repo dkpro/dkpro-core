@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -52,14 +52,14 @@ public class TEIReaderTest
     public void digibibTest()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
                 TEIReader.class,
                 TEIReader.PARAM_OMIT_IGNORABLE_WHITESPACE, true,
                 TEIReader.PARAM_LANGUAGE, "de",
                 TEIReader.PARAM_PATH, "classpath:/digibib",
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
-        AnalysisEngine writer = createPrimitive(TextWriter.class,
+        AnalysisEngine writer = createEngine(TextWriter.class,
         		TextWriter.PARAM_USE_DOCUMENT_ID, true,
         		TextWriter.PARAM_TARGET_LOCATION, "target/digibibTest/");
 
@@ -100,7 +100,7 @@ public class TEIReaderTest
         throws Exception
     {
 
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei/",
@@ -134,13 +134,13 @@ public class TEIReaderTest
     	File reference = new File("src/test/resources/brown_ims.txt");
     	File output = new File("target/test-output/brown_ims.txt");
 
-        CollectionReaderDescription reader = createDescription(
+        CollectionReaderDescription reader = createReaderDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei/",
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
-        AnalysisEngineDescription writer = createPrimitiveDescription(ImsCwbWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
         		ImsCwbWriter.PARAM_TARGET_LOCATION, output);
 
         SimplePipeline.runPipeline(reader, writer);
@@ -157,13 +157,13 @@ public class TEIReaderTest
         File reference = new File("src/test/resources/brown_ims.gz.txt");
         File output = new File("target/test-output/brown_ims.gz.txt");
 
-        CollectionReaderDescription reader = createDescription(
+        CollectionReaderDescription reader = createReaderDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei_gzip/",
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
 
-        AnalysisEngineDescription writer = createPrimitiveDescription(ImsCwbWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
                 ImsCwbWriter.PARAM_TARGET_LOCATION, output);
 
         SimplePipeline.runPipeline(reader, writer);
@@ -178,7 +178,7 @@ public class TEIReaderTest
         throws Exception
     {
 
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
@@ -207,7 +207,7 @@ public class TEIReaderTest
         throws Exception
     {
 
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
@@ -238,7 +238,7 @@ public class TEIReaderTest
         throws Exception
     {
 
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
