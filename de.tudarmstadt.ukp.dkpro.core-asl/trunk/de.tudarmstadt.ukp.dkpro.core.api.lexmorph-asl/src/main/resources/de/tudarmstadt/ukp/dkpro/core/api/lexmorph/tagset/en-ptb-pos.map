@@ -63,7 +63,7 @@ SENT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # 24.	SYM	Symbol
 SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # 25.	TO	to
-TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 # 26.	UH	Interjection
 UH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 # 27.	VB	Verb, base form
