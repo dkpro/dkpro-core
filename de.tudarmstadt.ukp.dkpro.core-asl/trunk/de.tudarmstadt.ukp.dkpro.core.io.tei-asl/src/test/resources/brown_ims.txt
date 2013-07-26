@@ -86,7 +86,7 @@ Court	NN	NN	-
 Judge	NN	NN	-
 Durwood	NP	NP	-
 Pye	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 investigate	VB	V	-
 reports	NNS	NN	-
 of	IN	PP	-
@@ -181,7 +181,7 @@ Fulton	NP	NP	-
 legislators	NNS	NN	-
 act	VB	V	-
 ``	pct	O	-
-to	TO	O	-
+to	TO	PP	-
 have	HV	O	-
 these	DTS	O	-
 laws	NNS	NN	-
@@ -263,7 +263,7 @@ offices	NNS	NN	-
 should	MD	V	-
 be	BE	O	-
 combined	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 achieve	VB	V	-
 greater	JJR	ADJ	-
 efficiency	NN	NN	-
@@ -312,7 +312,7 @@ city	NN	NN	-
 ``	pct	O	-
 take	VB	V	-
 steps	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 remedy	VB	V	-
 &apos;&apos;	pct	O	-
 this	DT	ART	-
@@ -422,7 +422,7 @@ Department	NN	NN	-
 has	HVZ	O	-
 seen	VBN	V	-
 fit	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 distribute	VB	V	-
 these	DTS	O	-
 funds	NNS	NN	-
@@ -507,12 +507,12 @@ said	VBD	V	-
 <sentence>
 ``	pct	O	-
 Failure	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 do	DO	O	-
 this	DT	ART	-
 will	MD	V	-
 continue	VB	V	-
-to	TO	O	-
+to	TO	PP	-
 place	VB	V	-
 a	AT	O	-
 disproportionate	JJ	ADJ	-
@@ -604,7 +604,7 @@ These	DTS	O	-
 actions	NNS	NN	-
 should	MD	V	-
 serve	VB	V	-
-to	TO	O	-
+to	TO	PP	-
 protect	VB	V	-
 in	IN	PP	-
 fact	NN	NN	-
@@ -768,7 +768,7 @@ work	VB	V	-
 with	IN	PP	-
 city	NN	NN	-
 officials	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 pass	VB	V	-
 enabling	VBG	V	-
 legislation	NN	NN	-
@@ -1080,7 +1080,7 @@ are	BER	O	-
 getting	VBG	V	-
 strong	JJ	ADJ	-
 encouragement	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 enter	VB	V	-
 a	AT	O	-
 candidate	NN	NN	-
@@ -1139,7 +1139,7 @@ for	IN	PP	-
 a	AT	O	-
 state	NN	NN	-
 rally	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 be	BE	O	-
 held	VBN	V	-
 Sept.	NP	NP	-
@@ -1181,14 +1181,14 @@ governor	NN	NN	-
 would	MD	V	-
 force	VB	V	-
 it	PPO	O	-
-to	TO	O	-
+to	TO	PP	-
 take	VB	V	-
 petitions	NNS	NN	-
 out	RP	PP	-
 into	IN	PP	-
 voting	VBG	V	-
 precincts	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 obtain	VB	V	-
 the	AT	O	-
 signatures	NNS	NN	-
@@ -1207,7 +1207,7 @@ was	BEDZ	O	-
 a	AT	O	-
 unanimous	JJ	ADJ	-
 vote	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 enter	VB	V	-
 a	AT	O	-
 candidate	NN	NN	-
@@ -1228,12 +1228,12 @@ asked	VBN	V	-
 whether	CS	O	-
 it	PPS	O	-
 wanted	VBD	V	-
-to	TO	O	-
+to	TO	PP	-
 wait	VB	V	-
 one	CD	CARD	-
 more	AP	O	-
 term	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 make	VB	V	-
 the	AT	O	-
 race	NN	NN	-
@@ -1257,7 +1257,7 @@ the	AT	O	-
 Republicans	NPS	NP	-
 would	MD	V	-
 have	HV	O	-
-to	TO	O	-
+to	TO	PP	-
 face	VB	V	-
 is	BEZ	O	-
 a	AT	O	-
@@ -1302,7 +1302,7 @@ the	AT	O	-
 Republicans	NPS	NP	-
 be	BE	O	-
 allowed	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 place	VB	V	-
 names	NNS	NN	-
 of	IN	PP	-
@@ -1353,7 +1353,7 @@ director	NN	NN	-
 ,	pct	O	-
 resigned	VBD	V	-
 Tuesday	NR	O	-
-to	TO	O	-
+to	TO	PP	-
 work	VB	V	-
 for	IN	PP	-
 Lt.	NN	NN	-
@@ -1406,7 +1406,7 @@ starts	VBZ	V	-
 Caldwell	NP	NP	-
 is	BEZ	O	-
 expected	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 become	VB	V	-
 a	AT	O	-
 campaign	NN	NN	-
@@ -1455,7 +1455,7 @@ the	AT	O	-
 Senate	NN	NN	-
 is	BEZ	O	-
 expected	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 approve	VB	V	-
 a	AT	O	-
 study	NN	NN	-
@@ -1470,7 +1470,7 @@ rural	JJ	ADJ	-
 and	CC	CONJ	-
 urban	JJ	ADJ	-
 areas	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 determine	VB	V	-
 what	WDT	ART	-
 adjustments	NNS	NN	-
@@ -1484,7 +1484,7 @@ Gov.	NN	NN	-
 Vandiver	NP	NP	-
 is	BEZ	O	-
 expected	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 make	VB	V	-
 the	AT	O	-
 traditional	JJ	ADJ	-
@@ -1541,7 +1541,7 @@ very	QL	O	-
 near	RB	ADV	-
 being	BEG	O	-
 ready	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 issue	VB	V	-
 the	AT	O	-
 first	OD	O	-
@@ -1569,7 +1569,7 @@ a	AT	O	-
 friendly	JJ	ADJ	-
 test	NN	NN	-
 suit	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 test	VB	V	-
 the	AT	O	-
 validity	NN	NN	-
@@ -1611,7 +1611,7 @@ is	BEZ	O	-
 a	AT	O	-
 plan	NN	NN	-
 there	RB	ADV	-
-to	TO	O	-
+to	TO	PP	-
 issue	VB	V	-
 some	DTI	O	-
 $3	NNS	NN	-
@@ -1642,7 +1642,7 @@ The	AT	O	-
 department	NN	NN	-
 apparently	RB	ADV	-
 intends	VBZ	V	-
-to	TO	O	-
+to	TO	PP	-
 make	VB	V	-
 the	AT	O	-
 Rural	JJ	ADJ	-
@@ -1730,7 +1730,7 @@ yet	RB	ADV	-
 about	IN	PP	-
 the	AT	O	-
 plans	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 issue	VB	V	-
 the	AT	O	-
 new	JJ	ADJ	-
@@ -1754,7 +1754,7 @@ Monday	NR	O	-
 in	IN	PP	-
 the	AT	O	-
 House	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 rescind	VB	V	-
 the	AT	O	-
 body&apos;s	NNg	O	-
@@ -1803,7 +1803,7 @@ whether	CS	O	-
 notice	NN	NN	-
 would	MD	V	-
 have	HV	O	-
-to	TO	O	-
+to	TO	PP	-
 first	RB	ADV	-
 be	BE	O	-
 given	VBN	V	-
@@ -1835,7 +1835,7 @@ his	PPg	O	-
 resolution	NN	NN	-
 would	MD	V	-
 seek	VB	V	-
-to	TO	O	-
+to	TO	PP	-
 set	VB	V	-
 aside	RB	ADV	-
 the	AT	O	-
@@ -1880,7 +1880,7 @@ resolution	NN	NN	-
 being	BEG	O	-
 offered	VBN	V	-
 there	RB	ADV	-
-to	TO	O	-
+to	TO	PP	-
 rescind	VB	V	-
 the	AT	O	-
 action	NN	NN	-
@@ -1899,10 +1899,10 @@ rejected	VBD	V	-
 a	AT	O	-
 constitutional	JJ	ADJ	-
 amendment	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 allow	VB	V	-
 legislators	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 vote	VB	V	-
 on	IN	PP	-
 pay	NN	NN	-
@@ -1925,7 +1925,7 @@ the	AT	O	-
 Georgia	NP	NP	-
 House	NN	NN	-
 Monday	NR	O	-
-to	TO	O	-
+to	TO	PP	-
 back	VB	V	-
 federal	JJ	ADJ	-
 aid	NN	NN	-
@@ -1956,7 +1956,7 @@ in	IN	PP	-
 a	AT	O	-
 privilege	NN	NN	-
 resolution	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 ``	pct	O	-
 endorse	VB	V	-
 increased	VBN	V	-
@@ -2008,7 +2008,7 @@ Washington	NP	NP	-
 who	WPS	O	-
 would	MD	V	-
 like	VB	V	-
-to	TO	O	-
+to	TO	PP	-
 see	VB	V	-
 it	PPO	O	-
 (	pct	O	-
@@ -2031,7 +2031,7 @@ congressmen	NNS	NN	-
 specifically	RB	ADV	-
 asked	VBD	V	-
 him	PPO	O	-
-to	TO	O	-
+to	TO	PP	-
 offer	VB	V	-
 the	AT	O	-
 resolution	NN	NN	-
@@ -2083,7 +2083,7 @@ Education	NN	NN	-
 should	MD	V	-
 be	BE	O	-
 directed	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 ``	pct	O	-
 give	VB	V	-
 priority	NN	NN	-
@@ -2199,7 +2199,7 @@ by	IN	PP	-
 at	IN	PP	-
 the	AT	O	-
 polls	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 insure	VB	V	-
 order	NN	NN	-
 .	pct	O	-
@@ -2386,7 +2386,7 @@ got	VBD	V	-
 himself	PPL	O	-
 a	AT	O	-
 permit	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 carry	VB	V	-
 a	AT	O	-
 gun	NN	NN	-
@@ -2560,7 +2560,7 @@ produce	VB	V	-
 17	CD	CARD	-
 million	CD	CARD	-
 dollars	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 help	VB	V	-
 erase	VB	V	-
 an	AT	O	-
@@ -2619,7 +2619,7 @@ It	PPS	O	-
 permits	VBZ	V	-
 the	AT	O	-
 state	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 take	VB	V	-
 over	RP	PP	-
 bank	NN	NN	-
@@ -2663,7 +2663,7 @@ companies	NNS	NN	-
 and	CC	CONJ	-
 other	AP	O	-
 corporations	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 report	VB	V	-
 such	JJ	ADJ	-
 property	NN	NN	-
@@ -2685,7 +2685,7 @@ it	PPS	O	-
 is	BEZ	O	-
 almost	RB	ADV	-
 impossible	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 locate	VB	V	-
 such	JJ	ADJ	-
 property	NN	NN	-
@@ -2718,7 +2718,7 @@ it	PPS	O	-
 would	MD	V	-
 force	VB	V	-
 banks	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 violate	VB	V	-
 their	PPg	O	-
 contractual	JJ	ADJ	-
@@ -2785,7 +2785,7 @@ bill	NN	NN	-
 said	VBD	V	-
 a	AT	O	-
 failure	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 enact	VB	V	-
 it	PPS	O	-
 would	MD	V	-
@@ -2931,7 +2931,7 @@ The	AT	O	-
 bill	NN	NN	-
 is	BEZ	O	-
 designed	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 provide	VB	V	-
 special	JJ	ADJ	-
 schooling	NN	NN	-
@@ -2977,7 +2977,7 @@ the	AT	O	-
 Texas	NP	NP	-
 Education	NN	NN	-
 Agency	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 establish	VB	V	-
 county-wide	JJ	ADJ	-
 day	NN	NN	-
@@ -3003,7 +3003,7 @@ and	CC	CONJ	-
 years	NNS	NN	-
 of	IN	PP	-
 age	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 attend	VB	V	-
 the	AT	O	-
 day	NN	NN	-
@@ -3012,7 +3012,7 @@ schools	NNS	NN	-
 permitting	VBG	V	-
 older	JJR	ADJ	-
 ones	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 attend	VB	V	-
 the	AT	O	-
 residential	JJ	ADJ	-
@@ -3084,7 +3084,7 @@ would	MD	V	-
 be	BE	O	-
 182	CD	CARD	-
 scholastics	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 attend	VB	V	-
 the	AT	O	-
 day	NN	NN	-
@@ -3099,7 +3099,7 @@ from	IN	PP	-
 coming	VBG	V	-
 to	IN	PP	-
 Austin	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 live	VB	V	-
 in	IN	PP	-
 the	AT	O	-
@@ -3112,7 +3112,7 @@ school	NN	NN	-
 Dallas	NP	NP	-
 may	MD	V	-
 get	VB	V	-
-to	TO	O	-
+to	TO	PP	-
 hear	VB	V	-
 a	AT	O	-
 debate	NN	NN	-
@@ -3139,7 +3139,7 @@ While	CS	O	-
 details	NNS	NN	-
 are	BER	O	-
 still	RB	ADV	-
-to	TO	O	-
+to	TO	PP	-
 be	BE	O	-
 worked	VBN	V	-
 out	RP	PP	-
@@ -3148,7 +3148,7 @@ Ratcliff	NP	NP	-
 said	VBD	V	-
 he	PPS	O	-
 expects	VBZ	V	-
-to	TO	O	-
+to	TO	PP	-
 tell	VB	V	-
 home	NR	O	-
 folks	NNS	NN	-
@@ -3213,7 +3213,7 @@ also	RB	ADV	-
 </sentence>
 <sentence>
 willing	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 stake	VB	V	-
 my	PPg	O	-
 political	JJ	ADJ	-
@@ -3257,7 +3257,7 @@ option	NN	NN	-
 proposal	NN	NN	-
 is	BEZ	O	-
 expected	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 give	VB	V	-
 it	PPO	O	-
 a	AT	O	-
@@ -3293,7 +3293,7 @@ State	NN	NN	-
 Health	NN	NN	-
 Department&apos;s	NNg	O	-
 authority	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 give	VB	V	-
 planning	VBG	V	-
 assistance	NN	NN	-
@@ -3599,7 +3599,7 @@ of	IN	PP	-
 El	NP	NP	-
 Paso	NP	NP	-
 ,	pct	O	-
-to	TO	O	-
+to	TO	PP	-
 acquire	VB	V	-
 sites	NNS	NN	-
 for	IN	PP	-
@@ -3627,7 +3627,7 @@ Commission	NN	NN	-
 suggested	VBD	V	-
 a	AT	O	-
 plan	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 fill	VB	V	-
 by	IN	PP	-
 appointment	NN	NN	-
@@ -3709,7 +3709,7 @@ taxes	NNS	NN	-
 Texans	NPS	NP	-
 would	MD	V	-
 prefer	VB	V	-
-to	TO	O	-
+to	TO	PP	-
 pay	VB	V	-
 .	pct	O	-
 </sentence>
@@ -3791,7 +3791,7 @@ Hollowell	NP	NP	-
 of	IN	PP	-
 the	AT	O	-
 committee	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 set	VB	V	-
 it	PPO	O	-
 for	IN	PP	-
@@ -3807,7 +3807,7 @@ The	AT	O	-
 proposal	NN	NN	-
 would	MD	V	-
 have	HV	O	-
-to	TO	O	-
+to	TO	PP	-
 receive	VB	V	-
 final	JJ	ADJ	-
 legislative	JJ	ADJ	-
@@ -3820,7 +3820,7 @@ majorities	NNS	NN	-
 before	IN	PP	-
 March	NP	NP	-
 1	CD	CARD	-
-to	TO	O	-
+to	TO	PP	-
 be	BE	O	-
 printed	VBN	V	-
 on	IN	PP	-
@@ -3849,7 +3849,7 @@ proposals	NNS	NN	-
 for	IN	PP	-
 the	AT	O	-
 voters	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 make	VB	V	-
 an	AT	O	-
 intelligent	JJ	ADJ	-
@@ -3925,7 +3925,7 @@ Dallas	NP	NP	-
 and	CC	CONJ	-
 Fort	NN	NN	-
 Worth	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 cover	VB	V	-
 up	RP	PP	-
 places	NNS	NN	-
@@ -4025,7 +4025,7 @@ veiled	VBN	V	-
 effort	NN	NN	-
 by	IN	PP	-
 Parkhouse	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 help	VB	V	-
 Dallas	NP	NP	-
 and	CC	CONJ	-
@@ -4223,7 +4223,7 @@ methods	NNS	NN	-
 &apos;&apos;	pct	O	-
 courses	NNS	NN	-
 required	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 obtain	VB	V	-
 a	AT	O	-
 junior	JJ	ADJ	-
@@ -4256,7 +4256,7 @@ require	VB	V	-
 junior-senior	JJ	ADJ	-
 high	NN	NN	-
 teachers	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 have	HV	O	-
 at	IN	PP	-
 least	AP	O	-
@@ -4315,7 +4315,7 @@ courses	NNS	NN	-
 is	BEZ	O	-
 not	NEG	O	-
 permitted	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 teach	VB	V	-
 in	IN	PP	-
 the	AT	O	-
@@ -4335,7 +4335,7 @@ Texas	NP	NP	-
 are	BER	O	-
 not	NEG	O	-
 required	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 have	HV	O	-
 the	AT	O	-
 Education	NN	NN	-
@@ -4681,7 +4681,7 @@ long	JJ	ADJ	-
 range	NN	NN	-
 recommendations	NNS	NN	-
 designed	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 reduce	VB	V	-
 the	AT	O	-
 soaring	VBG	V	-
@@ -4772,7 +4772,7 @@ have	HV	O	-
 forced	VBN	V	-
 these	DTS	O	-
 people	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 depend	VB	V	-
 upon	IN	PP	-
 ADC	NN	NN	-
@@ -4801,7 +4801,7 @@ the	AT	O	-
 community	NN	NN	-
 is	BEZ	O	-
 able	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 deal	VB	V	-
 effectively	RB	ADV	-
 with	IN	PP	-
@@ -4986,7 +4986,7 @@ he	PPS	O	-
 asked	VBD	V	-
 Judge	NN	NN	-
 Parsons	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 grant	VB	V	-
 his	PPg	O	-
 client	NN	NN	-
@@ -5062,7 +5062,7 @@ property	NN	NN	-
 It	PPS	O	-
 is	BEZ	O	-
 impossible	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 get	VB	V	-
 a	AT	O	-
 fair	JJ	ADJ	-
@@ -5169,7 +5169,7 @@ other	AP	O	-
 White	JJ	ADJ	-
 House	NN	NN	-
 business	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 devote	VB	V	-
 all	ABN	O	-
 his	PPg	O	-
@@ -5271,7 +5271,7 @@ had	HVD	O	-
 quite	ABL	O	-
 a	AT	O	-
 way	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 go	VB	V	-
 &apos;&apos;	pct	O	-
 toward	IN	PP	-
@@ -5285,7 +5285,7 @@ made	VBN	V	-
 </sentence>
 <sentence>
 Asked	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 elaborate	VB	V	-
 ,	pct	O	-
 Pierre	NP	NP	-
@@ -5303,7 +5303,7 @@ I	PPSS	O	-
 would	MD	V	-
 say	VB	V	-
 got	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 go	VB	V	-
 thru	IN	PP	-
 several	AP	O	-
@@ -5345,7 +5345,7 @@ decisions	NNS	NN	-
 on	IN	PP	-
 administration	NN	NN	-
 plans	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 meet	VB	V	-
 the	AT	O	-
 latest	JJT	O	-
@@ -5473,7 +5473,7 @@ had	HVD	O	-
 been	BEN	O	-
 ``	pct	O	-
 unable	JJ	ADJ	-
-to	TO	O	-
+to	TO	PP	-
 make	VB	V	-
 a	AT	O	-
 case	NN	NN	-
@@ -5599,7 +5599,7 @@ act	NN	NN	-
 &apos;&apos;	pct	O	-
 for	IN	PP	-
 Wexler	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 take	VB	V	-
 statements	NNS	NN	-
 ``	pct	O	-
@@ -5702,7 +5702,7 @@ been	BEN	O	-
 scheduled	VBN	V	-
 this	DT	ART	-
 week	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 hear	VB	V	-
 seven	CD	CARD	-
 cases	NNS	NN	-
@@ -5899,7 +5899,7 @@ workers	NNS	NN	-
 would	MD	V	-
 be	BE	O	-
 raised	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 pay	VB	V	-
 the	AT	O	-
 hospital	NN	NN	-
@@ -5949,7 +5949,7 @@ for	IN	PP	-
 large	JJ	ADJ	-
 federal	JJ	ADJ	-
 grants	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 finance	VB	V	-
 medical	JJ	ADJ	-
 and	CC	CONJ	-
@@ -6155,7 +6155,7 @@ levy	NN	NN	-
 is	BEZ	O	-
 already	RB	ADV	-
 scheduled	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 go	VB	V	-
 up	RP	PP	-
 by	IN	PP	-
@@ -6165,7 +6165,7 @@ cent	NN	NN	-
 on	IN	PP	-
 that	DT	ART	-
 date	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 pay	VB	V	-
 for	IN	PP	-
 other	AP	O	-
@@ -6448,7 +6448,7 @@ providing	VBG	V	-
 grants	NNS	NN	-
 to	IN	PP	-
 states	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 help	VB	V	-
 pay	VB	V	-
 medical	JJ	ADJ	-
@@ -6471,7 +6471,7 @@ his	PPg	O	-
 plan	NN	NN	-
 is	BEZ	O	-
 designed	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 ``	pct	O	-
 meet	VB	V	-
 the	AT	O	-
@@ -6483,7 +6483,7 @@ who	WPS	O	-
 have	HV	O	-
 no	AT	O	-
 wish	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 receive	VB	V	-
 care	NN	NN	-
 at	IN	PP	-
@@ -6527,7 +6527,7 @@ very	QL	O	-
 modest	JJ	ADJ	-
 proposal	NN	NN	-
 cut	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 meet	VB	V	-
 absolutely	RB	ADV	-
 essential	JJ	ADJ	-
@@ -6545,7 +6545,7 @@ sufficient	JJ	ADJ	-
 deductible	JJ	ADJ	-
 &apos;	pct	O	-
 requirements	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 discourage	VB	V	-
 any	DTI	O	-
 malingering	NN	NN	-
@@ -6646,7 +6646,7 @@ scholarships	NNS	NN	-
 ,	pct	O	-
 and	CC	CONJ	-
 grants	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 build	VB	V	-
 or	CC	CONJ	-
 enlarge	VB	V	-
@@ -6674,7 +6674,7 @@ the	AT	O	-
 student	NN	NN	-
 load	NN	NN	-
 needed	VBN	V	-
-to	TO	O	-
+to	TO	PP	-
 meet	VB	V	-
 the	AT	O	-
 rising	VBG	V	-
@@ -6749,7 +6749,7 @@ could	MD	V	-
 use	VB	V	-
 the	AT	O	-
 money	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 pay	VB	V	-
 4-year	JJ	ADJ	-
 scholarships	NNS	NN	-
@@ -6908,7 +6908,7 @@ grants	NNS	NN	-
 &apos;&apos;	pct	O	-
 to	IN	PP	-
 states	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 improve	VB	V	-
 nursing	VBG	V	-
 homes	NNS	NN	-
@@ -6959,7 +6959,7 @@ He	PPS	O	-
 also	RB	ADV	-
 asked	VBN	V	-
 Congress	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 approve	VB	V	-
 establishment	NN	NN	-
 of	IN	PP	-
@@ -6983,7 +6983,7 @@ he	PPS	O	-
 will	MD	V	-
 ask	VB	V	-
 Congress	NP	NP	-
-to	TO	O	-
+to	TO	PP	-
 increase	VB	V	-
 grants	NNS	NN	-
 to	IN	PP	-
@@ -7091,7 +7091,7 @@ facilities	NNS	NN	-
 and	CC	CONJ	-
 the	AT	O	-
 means	NNS	NN	-
-to	TO	O	-
+to	TO	PP	-
 pay	VB	V	-
 for	IN	PP	-
 them	PPO	O	-
@@ -7172,7 +7172,7 @@ did	DOD	O	-
 not	NEG	O	-
 persuade	VB	V	-
 them	PPO	O	-
-to	TO	O	-
+to	TO	PP	-
 change	VB	V	-
 their	PPg	O	-
 opposition	NN	NN	-
@@ -7304,7 +7304,7 @@ were	BED	O	-
 ignored	VBN	V	-
 in	IN	PP	-
 order	NN	NN	-
-to	TO	O	-
+to	TO	PP	-
 speed	VB	V	-
 approval	NN	NN	-
 of	IN	PP	-
