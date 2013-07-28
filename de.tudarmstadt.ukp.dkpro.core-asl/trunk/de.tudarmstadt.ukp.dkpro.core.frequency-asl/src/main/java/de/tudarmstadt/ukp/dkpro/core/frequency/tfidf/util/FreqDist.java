@@ -95,12 +95,23 @@ public class FreqDist<T>
 	 */
 	public void count(T element)
 	{
-		totalCount++;
+		count(element, 1);
+	}
+
+	/**
+	 * Increment the count by number for the given element.
+	 *
+	 * @param element
+	 *            the element to be counted
+	 */
+	public void count(T element, int number)
+	{
+		totalCount+=number;
 		if (counts.containsKey(element)) {
-			counts.put(element, counts.get(element) + 1);
+			counts.put(element, counts.get(element) + number);
 		}
 		else {
-			counts.put(element, 1);
+			counts.put(element, number);
 		}
 	}
 
