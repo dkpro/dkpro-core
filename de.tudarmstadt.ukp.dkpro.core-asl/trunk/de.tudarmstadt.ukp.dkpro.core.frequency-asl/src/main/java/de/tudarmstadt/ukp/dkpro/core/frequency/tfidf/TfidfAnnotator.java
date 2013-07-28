@@ -67,7 +67,7 @@ public class TfidfAnnotator
 	 */
 	public static final String PARAM_FEATURE_PATH = "FeaturePath";
 	@ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true)
-	private String featurePath;
+	protected String featurePath;
 
 	/**
 	 * Provide the path to the Df-Model. When a shared {@link SharedDfModel} is
@@ -82,7 +82,7 @@ public class TfidfAnnotator
 	 */
 	public static final String PARAM_LOWERCASE = "ConvertToLowercase";
 	@ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = false, defaultValue = "false")
-	private boolean convertToLowercase;
+	protected boolean convertToLowercase;
 
 	/**
 	 * The model for term frequency weighting.<br>
