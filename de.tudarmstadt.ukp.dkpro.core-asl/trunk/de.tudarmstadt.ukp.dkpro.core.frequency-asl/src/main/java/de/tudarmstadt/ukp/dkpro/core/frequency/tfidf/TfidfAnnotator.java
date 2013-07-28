@@ -140,12 +140,7 @@ public class TfidfAnnotator
 		throws AnalysisEngineProcessException
 	{
 
-		// count all terms with the given annotation
-		FreqDist<String> termFrequencies = new FreqDist<String>();
-		for (String term : TermIterator.create(jcas, featurePath,
-				convertToLowercase)) {
-			termFrequencies.count(term);
-		}
+		FreqDist<String> termFrequencies = getTermFrequencies(jcas);
 
 		try {
 			for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(
@@ -178,6 +173,17 @@ public class TfidfAnnotator
 		catch (FeaturePathException e) {
 			throw new AnalysisEngineProcessException(e);
 		}
+	}
+
+	protected FreqDist<String> getTermFrequencies(JCas jcas)
+			throws AnalysisEngineProcessException {
+		// count all terms with the given annotation
+		FreqDist<String> termFrequencies = new FreqDist<String>();
+		for (String term : TermIterator.create(jcas, featurePath,
+				convertToLowercase)) {
+			termFrequencies.count(term);
+		}
+		return termFrequencies;
 	}
 
 	/**
