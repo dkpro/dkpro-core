@@ -73,13 +73,13 @@ public class StanfordPosTaggerTest
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
-        		new String[] { "NN", "VV", "NR", "NN", "NN", "VV", "DEC", "JJ", "NN", "PU"    },
-        		new String[] { "NN", "V",  "NP", "NN", "NN", "V",  "O",   "O",  "NN", "PUNC"  } );
+        		new String[] { "NN", "VV", "NR", "NN", "VV", "VV", "DEC", "JJ", "NN", "PU"    },
+        		new String[] { "NN", "V",  "NP", "NN", "V", "V",  "O",   "O",  "NN", "PUNC"  } );
 
         // How far is China from the world brand?
         runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
-        		new String[] { "NR", "P",  "NN", "NN", "NN", "VE", "NN", "PU"   } ,
-        		new String[] { "NP", "PP", "NN", "NN", "NN", "V",  "NN",  "PUNC" } );
+        		new String[] { "NR", "P",  "NN", "NN", "NN", "VE", "VV", "PU"   } ,
+        		new String[] { "NP", "PP", "NN", "NN", "NN", "V",  "V",  "PUNC" } );
     }
 
     @Test
@@ -92,10 +92,6 @@ public class StanfordPosTaggerTest
         		new String[] { "VBP", "DTNN", "DTJJR", "DTNN", "DTJJ", "NNS", "JJ",  "NN"  },
         		new String[] { "POS", "POS",  "POS",   "POS",  "POS",  "POS", "POS", "POS" } );
 
-    	// Covering the following sub-Saharan countries with vast areas very
-        runTest("ar", "accurate", "تغطي الصحراء الكبرى الدول التالية بمساحات شاسعة جدا",
-        		new String[] { "VBP", "DTNN", "DTJJR", "DTNN", "DTJJ", "NNS", "JJ",  "NN"  },
-        		new String[] { "POS", "POS",  "POS",   "POS",  "POS",  "POS", "POS", "POS" } );
 }
 
 	private void runTest(String language, String testDocument, String[] tags, String[] tagClasses)
