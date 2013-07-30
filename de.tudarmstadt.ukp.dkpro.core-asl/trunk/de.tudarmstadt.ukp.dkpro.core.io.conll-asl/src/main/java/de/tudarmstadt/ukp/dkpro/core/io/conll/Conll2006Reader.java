@@ -46,7 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
  * Reads a specific Conll File (9 TAB separated) annotation and change it to CAS object. Format:
- * 
+ *
  * <pre>Heutzutage heutzutage ADV _ _ ADV _ _</pre>
  * <ol>
  * <li>ID - token number in sentence</li>
@@ -60,11 +60,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>PHEAD - unused</li>
  * <li>PDEPREL - unused</li>
  * </ol>
- * 
+ *
  * Sentences are separated by a blank new line
- * 
+ *
  * @author Seid Muhie Yimam
- * 
+ *
  * @see <a href="http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
 public class Conll2006Reader
@@ -200,12 +200,12 @@ public class Conll2006Reader
 
                 outDependency.setBegin(begin);
                 outDependency.setEnd(end);
-                outDependency.setGovernor(tokensStored.get("t_" + i));
+                outDependency.setDependent(tokensStored.get("t_" + i));
                 if (dependencyDependent.get(i) == 0) {
-                    outDependency.setDependent(tokensStored.get("t_" + i));
+                    outDependency.setGovernor(tokensStored.get("t_" + i));
                 }
                 else {
-                    outDependency.setDependent(tokensStored.get("t_" + dependencyDependent.get(i)));
+                    outDependency.setGovernor(tokensStored.get("t_" + dependencyDependent.get(i)));
                 }
                 outDependency.addToIndexes();
             }

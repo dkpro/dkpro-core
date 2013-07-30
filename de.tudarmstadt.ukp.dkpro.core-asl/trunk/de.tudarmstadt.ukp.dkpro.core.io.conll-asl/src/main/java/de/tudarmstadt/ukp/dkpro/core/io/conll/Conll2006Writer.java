@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 /**
  * Writes a specific Conll File (9 TAB separated) annotation from the CAS object. Example of output
  * file:
- * 
+ *
  * <pre>
  * Heutzutage heutzutage ADV _ _ ADV _ _
  * </pre>
@@ -56,9 +56,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>PHEAD - unused</li>
  * <li>PDEPREL - unused</li>
  * </ol>
- * 
+ *
  * Sentences are separated by a blank new line
- * 
+ *
  * @author Seid Muhie Yimam
  * @see <a href="http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
@@ -106,9 +106,10 @@ public class Conll2006Writer
             Map<Integer, String> dependencyTypeMap = new HashMap<Integer, String>();
 
             for (Dependency dependecny : selectCovered(Dependency.class, sentence)) {
-                dependentMap.put(dependecny.getGovernor().getAddress(), dependecny.getDependent()
-                        .getAddress());
+                dependentMap.put(dependecny.getDependent()
+                        .getAddress(), dependecny.getGovernor().getAddress());
             }
+
 
             int i = 1;
             for (Token token : selectCovered(Token.class, sentence)) {
@@ -117,7 +118,7 @@ public class Conll2006Writer
             }
 
             for (Dependency dependecny : selectCovered(Dependency.class, sentence)) {
-                dependencyTypeMap.put(dependecny.getGovernor().getAddress(),
+                dependencyTypeMap.put(dependecny.getDependent().getAddress(),
                         dependecny.getDependencyType());
             }
 
