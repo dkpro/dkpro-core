@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -36,15 +36,18 @@ public class Conll2006ReaderWriterTest
     public void test()
         throws Exception
     {
-        CollectionReaderDescription reader = createDescription(Conll2006Reader.class, 
-                Conll2006Reader.PARAM_PATH, new File("src/test/resources/conll/").getAbsolutePath(), 
-                Conll2006Reader.PARAM_PATTERNS, new String[] { "[+]fk003_2006_08_ZH1.conll10" });
+        CollectionReaderDescription reader = createReaderDescription(
+                Conll2006Reader.class, 
+                Conll2006Reader.PARAM_PATH, "src/test/resources/conll/", 
+                Conll2006Reader.PARAM_PATTERNS, "[+]fk003_2006_08_ZH1.conll10");
 
-        AnalysisEngineDescription writer = createEngineDescription(Conll2006Writer.class,
+        AnalysisEngineDescription writer = createEngineDescription(
+                Conll2006Writer.class,
                 Conll2006Writer.PARAM_TARGET_LOCATION, "target/test-output", 
                 Conll2006Writer.PARAM_STRIP_EXTENSION, true);
 
-        AnalysisEngineDescription dumper = createEngineDescription(CASDumpWriter.class,
+        AnalysisEngineDescription dumper = createEngineDescription(
+                CASDumpWriter.class,
                 CASDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/dump.txt");
 
         runPipeline(reader, writer, dumper);

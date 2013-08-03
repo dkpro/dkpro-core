@@ -46,30 +46,34 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
  * Reads a specific Conll File (9 TAB separated) annotation and change it to CAS object. Format:
- *
- * <pre>Heutzutage heutzutage ADV _ _ ADV _ _</pre>
+ * 
+ * <pre>
+ * Heutzutage heutzutage ADV _ _ ADV _ _
+ * </pre>
  * <ol>
  * <li>ID - token number in sentence</li>
  * <li>FORM - token</li>
  * <li>LEMMA - lemma</li>
- * <li>CPOSTAG - part-of-speech tag</li>
- * <li>POSTAG - unused</li>
+ * <li>CPOSTAG - part-of-speech tag (coarse grained)</li>
+ * <li>POSTAG - part-of-speech tag</li>
  * <li>FEATS - unused</li>
  * <li>HEAD - target token for a dependency parsing</li>
- * <li>DEPREL - function of the dependency parsing </li>
+ * <li>DEPREL - function of the dependency parsing</li>
  * <li>PHEAD - unused</li>
  * <li>PDEPREL - unused</li>
  * </ol>
- *
+ * 
  * Sentences are separated by a blank new line
- *
+ * 
  * @author Seid Muhie Yimam
- *
+ * 
  * @see <a href="http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
 public class Conll2006Reader
     extends JCasResourceCollectionReader_ImplBase
 {
+    private static final String UNUSED = "_";
+
     public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
@@ -122,8 +126,8 @@ public class Conll2006Reader
                 text.append(token + " ");
                 tokens.put(tokenNumber, token);
                 lemma.put(tokenNumber, lineTk.nextToken());
-                pos.put(tokenNumber, lineTk.nextToken());
-                lineTk.nextToken();
+                lineTk.nextToken(); // coarse grained POS
+                pos.put(tokenNumber, lineTk.nextToken()); // POS
                 lineTk.nextToken();
                 String dependentValue = lineTk.nextToken();
                 if (NumberUtils.isDigits(dependentValue)) {
@@ -143,7 +147,7 @@ public class Conll2006Reader
 
         int tokenBeginPosition = 0;
         int tokenEndPosition = 0;
-        Map<String, Token> tokensStored = new HashMap<String, Token>();
+        Map<Integer, Token> tokensStored = new HashMap<Integer, Token>();
 
         for (int i = 1; i <= tokens.size(); i++) {
             tokenBeginPosition = text.indexOf(tokens.get(i), tokenBeginPosition);
@@ -155,7 +159,7 @@ public class Conll2006Reader
             outToken.addToIndexes();
 
             // Add pos to CAS if exist
-            if (!pos.get(i).equals("_")) {
+            if (!pos.get(i).equals(UNUSED)) {
                 POS outPos = new POS(aJCas, outToken.getBegin(), outToken.getEnd());
                 outPos.setPosValue(pos.get(i));
                 outPos.addToIndexes();
@@ -163,13 +167,13 @@ public class Conll2006Reader
             }
 
             // Add lemma if exist
-            if (!lemma.get(i).equals("_")) {
+            if (!lemma.get(i).equals(UNUSED)) {
                 Lemma outLemma = new Lemma(aJCas, outToken.getBegin(), outToken.getEnd());
                 outLemma.setValue(lemma.get(i));
                 outLemma.addToIndexes();
                 outToken.setLemma(outLemma);
             }
-            tokensStored.put("t_" + i, outToken);
+            tokensStored.put(i, outToken);
         }
 
         // add Dependency parsing to CAS, if exist
@@ -184,28 +188,27 @@ public class Conll2006Reader
                 int begin = 0, end = 0;
                 // if not ROOT
                 if (dependencyDependent.get(i) != 0) {
-                    begin = tokensStored.get("t_" + i).getBegin() > tokensStored.get(
-                            "t_" + dependencyDependent.get(i)).getBegin() ? tokensStored.get(
-                            "t_" + dependencyDependent.get(i)).getBegin() : tokensStored.get(
-                            "t_" + i).getBegin();
-                    end = tokensStored.get("t_" + i).getEnd() < tokensStored.get(
-                            "t_" + dependencyDependent.get(i)).getEnd() ? tokensStored.get(
-                            "t_" + dependencyDependent.get(i)).getEnd() : tokensStored
-                            .get("t_" + i).getEnd();
+                    begin = tokensStored.get(i).getBegin() > tokensStored.get(
+                            dependencyDependent.get(i)).getBegin() ? tokensStored.get(
+                            dependencyDependent.get(i)).getBegin() : tokensStored.get(+i)
+                            .getBegin();
+                    end = tokensStored.get(i).getEnd() < tokensStored.get(
+                            dependencyDependent.get(i)).getEnd() ? tokensStored.get(
+                            dependencyDependent.get(i)).getEnd() : tokensStored.get(i).getEnd();
                 }
                 else {
-                    begin = tokensStored.get("t_" + i).getBegin();
-                    end = tokensStored.get("t_" + i).getEnd();
+                    begin = tokensStored.get(i).getBegin();
+                    end = tokensStored.get(i).getEnd();
                 }
 
                 outDependency.setBegin(begin);
                 outDependency.setEnd(end);
-                outDependency.setDependent(tokensStored.get("t_" + i));
+                outDependency.setDependent(tokensStored.get(i));
                 if (dependencyDependent.get(i) == 0) {
-                    outDependency.setGovernor(tokensStored.get("t_" + i));
+                    outDependency.setGovernor(tokensStored.get(i));
                 }
                 else {
-                    outDependency.setGovernor(tokensStored.get("t_" + dependencyDependent.get(i)));
+                    outDependency.setGovernor(tokensStored.get(dependencyDependent.get(i)));
                 }
                 outDependency.addToIndexes();
             }
@@ -215,29 +218,24 @@ public class Conll2006Reader
             Sentence outSentence = new Sentence(aJCas);
             // Only last sentence, and no the only sentence in the document (i!=0)
             if (i == firstTokenInSentence.size() - 1 && i != 0) {
-                outSentence.setBegin(tokensStored.get("t_" + firstTokenInSentence.get(i)).getEnd());
-                outSentence.setEnd(tokensStored.get("t_" + (tokensStored.size())).getEnd());
+                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getEnd());
+                outSentence.setEnd(tokensStored.get((tokensStored.size())).getEnd());
                 outSentence.addToIndexes();
                 break;
             }
             if (i == firstTokenInSentence.size() - 1 && i == 0) {
-                outSentence.setBegin(tokensStored.get("t_" + firstTokenInSentence.get(i))
-                        .getBegin());
-                outSentence.setEnd(tokensStored.get("t_" + (tokensStored.size())).getEnd());
+                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getBegin());
+                outSentence.setEnd(tokensStored.get((tokensStored.size())).getEnd());
                 outSentence.addToIndexes();
             }
             else if (i == 0) {
-                outSentence.setBegin(tokensStored.get("t_" + firstTokenInSentence.get(i))
-                        .getBegin());
-                outSentence.setEnd(tokensStored.get("t_" + firstTokenInSentence.get(i + 1))
-                        .getEnd());
+                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getBegin());
+                outSentence.setEnd(tokensStored.get(firstTokenInSentence.get(i + 1)).getEnd());
                 outSentence.addToIndexes();
             }
             else {
-                outSentence
-                        .setBegin(tokensStored.get("t_" + firstTokenInSentence.get(i)).getEnd() + 1);
-                outSentence.setEnd(tokensStored.get("t_" + firstTokenInSentence.get(i + 1))
-                        .getEnd());
+                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getEnd() + 1);
+                outSentence.setEnd(tokensStored.get(firstTokenInSentence.get(i + 1)).getEnd());
                 outSentence.addToIndexes();
             }
         }
