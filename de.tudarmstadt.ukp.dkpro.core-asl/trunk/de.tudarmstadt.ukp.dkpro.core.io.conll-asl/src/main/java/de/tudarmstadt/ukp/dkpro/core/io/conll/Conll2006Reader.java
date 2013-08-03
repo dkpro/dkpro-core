@@ -19,23 +19,18 @@ package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.util.Level;
-
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -54,7 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>ID - token number in sentence</li>
  * <li>FORM - token</li>
  * <li>LEMMA - lemma</li>
- * <li>CPOSTAG - part-of-speech tag (coarse grained)</li>
+ * <li>CPOSTAG - unused</li>
  * <li>POSTAG - part-of-speech tag</li>
  * <li>FEATS - unused</li>
  * <li>HEAD - target token for a dependency parsing</li>
@@ -66,6 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * Sentences are separated by a blank new line
  * 
  * @author Seid Muhie Yimam
+ * @author Richard Eckart de Castilho
  * 
  * @see <a href="http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
@@ -74,172 +70,20 @@ public class Conll2006Reader
 {
     private static final String UNUSED = "_";
 
+    private static final int ID = 0;
+    private static final int FORM = 1;
+    private static final int LEMMA = 2;
+    // private static final int CPOSTAG = 3;
+    private static final int POSTAG = 4;
+    // private static final int FEATS = 5;
+    private static final int HEAD = 6;
+    private static final int DEPREL = 7;
+    // private static final int PHEAD = 8;
+    // private static final int PDEPREL = 9;
+
     public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
-
-    public void convertToCas(JCas aJCas, InputStream aIs, String aEncoding)
-        throws IOException
-    {
-        StringBuilder text = new StringBuilder();
-        int tokenNumber = 0;
-        Map<Integer, String> tokens = new HashMap<Integer, String>();
-        Map<Integer, String> pos = new HashMap<Integer, String>();
-        Map<Integer, String> lemma = new HashMap<Integer, String>();
-        Map<Integer, String> dependencyFunction = new HashMap<Integer, String>();
-        Map<Integer, Integer> dependencyDependent = new HashMap<Integer, Integer>();
-
-        List<Integer> firstTokenInSentence = new ArrayList<Integer>();
-        boolean first = true;
-        int base = 0;
-
-        LineIterator lineIterator = IOUtils.lineIterator(aIs, aEncoding);
-        while (lineIterator.hasNext()) {
-            String line = lineIterator.next().trim();
-            int count = StringUtils.countMatches(line, "\t");
-            if (line.isEmpty()) {
-                continue;
-            }
-            if (count != 9) {// not a proper conll file
-                getUimaContext().getLogger().log(Level.INFO, "This is not valid conll File");
-                throw new IOException("This is not valid conll File");
-            }
-            StringTokenizer lineTk = new StringTokenizer(line, "\t");
-
-            if (first) {
-                tokenNumber = Integer.parseInt(line.substring(0, line.indexOf("\t")));
-                firstTokenInSentence.add(tokenNumber);
-                first = false;
-            }
-            else {
-                int lineNumber = Integer.parseInt(line.substring(0, line.indexOf("\t")));
-                if (lineNumber == 1) {
-                    base = tokenNumber;
-                    firstTokenInSentence.add(base);
-                }
-                tokenNumber = base + Integer.parseInt(line.substring(0, line.indexOf("\t")));
-            }
-
-            while (lineTk.hasMoreElements()) {
-                lineTk.nextToken();
-                String token = lineTk.nextToken();
-                text.append(token + " ");
-                tokens.put(tokenNumber, token);
-                lemma.put(tokenNumber, lineTk.nextToken());
-                lineTk.nextToken(); // coarse grained POS
-                pos.put(tokenNumber, lineTk.nextToken()); // POS
-                lineTk.nextToken();
-                String dependentValue = lineTk.nextToken();
-                if (NumberUtils.isDigits(dependentValue)) {
-                    int dependent = Integer.parseInt(dependentValue);
-                    dependencyDependent.put(tokenNumber, dependent == 0 ? 0 : base + dependent);
-                    dependencyFunction.put(tokenNumber, lineTk.nextToken());
-                }
-                else {
-                    lineTk.nextToken();
-                }
-                lineTk.nextToken();
-                lineTk.nextToken();
-            }
-        }
-
-        aJCas.setDocumentText(text.toString());
-
-        int tokenBeginPosition = 0;
-        int tokenEndPosition = 0;
-        Map<Integer, Token> tokensStored = new HashMap<Integer, Token>();
-
-        for (int i = 1; i <= tokens.size(); i++) {
-            tokenBeginPosition = text.indexOf(tokens.get(i), tokenBeginPosition);
-            Token outToken = new Token(aJCas, tokenBeginPosition, text.indexOf(tokens.get(i),
-                    tokenBeginPosition) + tokens.get(i).length());
-            tokenEndPosition = text.indexOf(tokens.get(i), tokenBeginPosition)
-                    + tokens.get(i).length();
-            tokenBeginPosition = tokenEndPosition;
-            outToken.addToIndexes();
-
-            // Add pos to CAS if exist
-            if (!pos.get(i).equals(UNUSED)) {
-                POS outPos = new POS(aJCas, outToken.getBegin(), outToken.getEnd());
-                outPos.setPosValue(pos.get(i));
-                outPos.addToIndexes();
-                outToken.setPos(outPos);
-            }
-
-            // Add lemma if exist
-            if (!lemma.get(i).equals(UNUSED)) {
-                Lemma outLemma = new Lemma(aJCas, outToken.getBegin(), outToken.getEnd());
-                outLemma.setValue(lemma.get(i));
-                outLemma.addToIndexes();
-                outToken.setLemma(outLemma);
-            }
-            tokensStored.put(i, outToken);
-        }
-
-        // add Dependency parsing to CAS, if exist
-        for (int i = 1; i <= tokens.size(); i++) {
-            if (dependencyFunction.get(i) != null) {
-                Dependency outDependency = new Dependency(aJCas);
-                outDependency.setDependencyType(dependencyFunction.get(i));
-
-                // if span A has (start,end)= (20, 26) and B has (start,end)= (30, 36)
-                // arc drawn from A to B, dependency will have (start, end) = (20, 36)
-                // arc drawn from B to A, still dependency will have (start, end) = (20, 36)
-                int begin = 0, end = 0;
-                // if not ROOT
-                if (dependencyDependent.get(i) != 0) {
-                    begin = tokensStored.get(i).getBegin() > tokensStored.get(
-                            dependencyDependent.get(i)).getBegin() ? tokensStored.get(
-                            dependencyDependent.get(i)).getBegin() : tokensStored.get(+i)
-                            .getBegin();
-                    end = tokensStored.get(i).getEnd() < tokensStored.get(
-                            dependencyDependent.get(i)).getEnd() ? tokensStored.get(
-                            dependencyDependent.get(i)).getEnd() : tokensStored.get(i).getEnd();
-                }
-                else {
-                    begin = tokensStored.get(i).getBegin();
-                    end = tokensStored.get(i).getEnd();
-                }
-
-                outDependency.setBegin(begin);
-                outDependency.setEnd(end);
-                outDependency.setDependent(tokensStored.get(i));
-                if (dependencyDependent.get(i) == 0) {
-                    outDependency.setGovernor(tokensStored.get(i));
-                }
-                else {
-                    outDependency.setGovernor(tokensStored.get(dependencyDependent.get(i)));
-                }
-                outDependency.addToIndexes();
-            }
-        }
-
-        for (int i = 0; i < firstTokenInSentence.size(); i++) {
-            Sentence outSentence = new Sentence(aJCas);
-            // Only last sentence, and no the only sentence in the document (i!=0)
-            if (i == firstTokenInSentence.size() - 1 && i != 0) {
-                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getEnd());
-                outSentence.setEnd(tokensStored.get((tokensStored.size())).getEnd());
-                outSentence.addToIndexes();
-                break;
-            }
-            if (i == firstTokenInSentence.size() - 1 && i == 0) {
-                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getBegin());
-                outSentence.setEnd(tokensStored.get((tokensStored.size())).getEnd());
-                outSentence.addToIndexes();
-            }
-            else if (i == 0) {
-                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getBegin());
-                outSentence.setEnd(tokensStored.get(firstTokenInSentence.get(i + 1)).getEnd());
-                outSentence.addToIndexes();
-            }
-            else {
-                outSentence.setBegin(tokensStored.get(firstTokenInSentence.get(i)).getEnd() + 1);
-                outSentence.setEnd(tokensStored.get(firstTokenInSentence.get(i + 1)).getEnd());
-                outSentence.addToIndexes();
-            }
-        }
-    }
 
     @Override
     public void getNext(JCas aJCas)
@@ -247,13 +91,114 @@ public class Conll2006Reader
     {
         Resource res = nextFile();
         initCas(aJCas, res);
-        InputStream is = null;
+        BufferedReader reader = null;
         try {
-            is = res.getInputStream();
-            convertToCas(aJCas, is, encoding);
+            reader = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
+            convert(aJCas, reader);
         }
         finally {
-            closeQuietly(is);
+            closeQuietly(reader);
+        }
+    }
+
+    public void convert(JCas aJCas, BufferedReader aReader)
+        throws IOException
+    {
+        JCasBuilder doc = new JCasBuilder(aJCas);
+
+        List<String[]> words;
+        while ((words = readSentence(aReader)) != null) {
+            if (words.isEmpty()) {
+                continue;
+            }
+
+            int sentenceBegin = doc.getPosition();
+            int sentenceEnd = sentenceBegin;
+
+            // Tokens, Lemma, POS
+            Map<Integer, Token> tokens = new HashMap<Integer, Token>();
+            for (String[] word : words) {
+                // Read token
+                Token token = doc.add(word[FORM], Token.class);
+                tokens.put(Integer.valueOf(word[ID]), token);
+                doc.add(" ");
+
+                // Read lemma
+                if (!UNUSED.equals(word[LEMMA])) {
+                    Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
+                    lemma.setValue(word[LEMMA]);
+                    lemma.addToIndexes();
+                    token.setLemma(lemma);
+                }
+
+                // Read part-of-speech tag
+                if (!UNUSED.equals(word[POSTAG])) {
+                    POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+                    pos.setPosValue(word[POSTAG]);
+                    pos.addToIndexes();
+                    token.setPos(pos);
+                }
+
+                sentenceEnd = token.getEnd();
+            }
+
+            // Dependencies
+            for (String[] word : words) {
+                if (!UNUSED.equals(word[DEPREL])) {
+                    int depId = Integer.valueOf(word[ID]);
+                    int govId = Integer.valueOf(word[HEAD]);
+
+                    // Model the root as a loop onto itself
+                    if (govId == 0) {
+                        govId = depId;
+                    }
+
+                    Dependency rel = new Dependency(aJCas);
+                    rel.setGovernor(tokens.get(govId));
+                    rel.setDependent(tokens.get(depId));
+                    rel.setDependencyType(word[DEPREL]);
+                    rel.setBegin(rel.getDependent().getBegin());
+                    rel.setEnd(rel.getDependent().getEnd());
+                    rel.addToIndexes();
+                }
+            }
+
+            // Sentence
+            Sentence sentence = new Sentence(aJCas, sentenceBegin, sentenceEnd);
+            sentence.addToIndexes();
+
+            // Once sentence per line.
+            doc.add("\n");
+        }
+
+        doc.close();
+    }
+
+    /**
+     * Read a single sentence.
+     */
+    private static List<String[]> readSentence(BufferedReader aReader)
+        throws IOException
+    {
+        List<String[]> words = new ArrayList<String[]>();
+        String line;
+        while ((line = aReader.readLine()) != null) {
+            if (StringUtils.isBlank(line)) {
+                break; // End of sentence
+            }
+            String[] fields = line.split("\t");
+            if (fields.length != 10) {
+                throw new IOException(
+                        "Invalid file format. Line needs to have 10 tab-separted fields.");
+            }
+            words.add(fields);
+        }
+
+        if (line == null && words.isEmpty()) {
+            return null;
+        }
+        else {
+            return words;
         }
     }
 }

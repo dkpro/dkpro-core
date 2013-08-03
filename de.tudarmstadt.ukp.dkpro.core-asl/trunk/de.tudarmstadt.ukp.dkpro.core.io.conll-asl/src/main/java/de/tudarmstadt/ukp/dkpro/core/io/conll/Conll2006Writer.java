@@ -60,6 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * Sentences are separated by a blank new line
  * 
  * @author Seid Muhie Yimam
+ * @author Richard Eckart de Castilho
+ * 
  * @see <a href="http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
 public class Conll2006Writer
