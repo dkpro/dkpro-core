@@ -56,6 +56,10 @@ public class SerializedCasWriter
 	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
 	private File typeSystemFile;
 
+    public static final String PARAM_EXTENSION = "extension";
+    @ConfigurationParameter(name=PARAM_EXTENSION, mandatory=true, defaultValue=".ser")
+    private String extension;
+
 	private boolean typeSystemWritten;
 
 	@Override
@@ -64,7 +68,7 @@ public class SerializedCasWriter
 	{
 		ObjectOutputStream docOS = null;
         try {
-        	docOS = new ObjectOutputStream(getOutputStream(aJCas, ".ser"));
+        	docOS = new ObjectOutputStream(getOutputStream(aJCas, extension));
 
         	if (typeSystemFile == null) {
 	    		CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());

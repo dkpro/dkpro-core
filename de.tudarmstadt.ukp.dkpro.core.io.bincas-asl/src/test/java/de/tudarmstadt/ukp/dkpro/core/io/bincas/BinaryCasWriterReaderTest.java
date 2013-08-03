@@ -17,21 +17,20 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.bincas;
 
+import static org.apache.uima.fit.pipeline.SimplePipeline.*;
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.resource.metadata.TypeSystemDescription;
 import org.apache.uima.util.CasCreationUtils;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -48,61 +47,108 @@ public class BinaryCasWriterReaderTest
     public void test0()
         throws Exception
     {
-        write(0);
-        read();
+        write("0");
+        read(createTypeSystemDescription());
     }
 
     @Test
     public void test4()
         throws Exception
     {
-        write(4);
-        read();
+        write("4");
+        read(createTypeSystemDescription());
     }
 
-    @Ignore("Currently ends up with document text being null - Asking Marschall why...")
     @Test
     public void test6()
         throws Exception
     {
-        write(6);
-        read();
+        write("6");
+        read(createTypeSystemDescription());
     }
 
-	public void write(int aFormat) throws Exception
-	{
-		CollectionReader textReader = CollectionReaderFactory.createCollectionReader(
-				TextReader.class,
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
-				},
-				ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
+    @Test
+    public void test6plus0()
+        throws Exception
+    {
+        write("6+");
+        read(createTypeSystemDescription());
+    }
 
-		AnalysisEngine xmiWriter = AnalysisEngineFactory.createPrimitive(
-				BinaryCasWriter.class,
-				BinaryCasWriter.PARAM_FORMAT, aFormat,
-				BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
+    @Test
+    public void test6plus1()
+        throws Exception
+    {
+        write("6+");
+        read(createTypeSystemDescription("desc.type.metadata"));
+    }
 
-		runPipeline(textReader, xmiWriter);
+    @Test
+    public void testSerialized()
+        throws Exception
+    {
+        writeSerialized();
+        read(createTypeSystemDescription());
+    }
 
-		assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
-	}
+    public void write(String aFormat)
+        throws Exception
+    {
+        System.out.println("--- WRITING ---");
+        CollectionReader textReader = CollectionReaderFactory.createReader(TextReader.class,
+                ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt",
+                ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
-	public void read() throws Exception
-	{
-		CollectionReader xmiReader = CollectionReaderFactory.createCollectionReader(
-				BinaryCasReader.class,
-				ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.bin"
-				});
+        AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(BinaryCasWriter.class,
+                BinaryCasWriter.PARAM_FORMAT, aFormat, 
+                BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 
-		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
-		xmiReader.getNext(cas);
+//        AnalysisEngine dumper = createEngine(CASDumpWriter.class);
 
-		String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
-		assertEquals(refText, cas.getDocumentText());
-		assertEquals("latin", cas.getDocumentLanguage());
-	}
+        runPipeline(textReader, /*dumper,*/ xmiWriter);
+
+        assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
+    }
+
+    public void writeSerialized()
+            throws Exception
+        {
+            System.out.println("--- WRITING ---");
+            CollectionReader textReader = CollectionReaderFactory.createReader(TextReader.class,
+                    ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+                    ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt",
+                    ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
+
+            AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(SerializedCasWriter.class,
+                    SerializedCasWriter.PARAM_EXTENSION, ".bin",
+                    SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
+
+//            AnalysisEngine dumper = createEngine(CASDumpWriter.class);
+
+            runPipeline(textReader, /*dumper,*/ xmiWriter);
+
+            assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
+        }
+
+
+    public void read(TypeSystemDescription aTSD)
+        throws Exception
+    {
+        System.out.println("--- READING ---");
+        CollectionReader reader = CollectionReaderFactory.createReader(BinaryCasReader.class,
+                ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
+                ResourceCollectionReaderBase.PARAM_PATTERNS,
+                new String[] { ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.bin" });
+
+        CAS cas = CasCreationUtils.createCas(aTSD, null, null);
+        reader.getNext(cas);
+
+//        createEngine(CASDumpWriter.class).process(cas);
+
+        String refText = readFileToString(new File("src/test/resources/texts/example1.txt"));
+        
+        assertEquals(refText, cas.getDocumentText());
+        assertEquals("latin", cas.getDocumentLanguage());
+    }
 }
