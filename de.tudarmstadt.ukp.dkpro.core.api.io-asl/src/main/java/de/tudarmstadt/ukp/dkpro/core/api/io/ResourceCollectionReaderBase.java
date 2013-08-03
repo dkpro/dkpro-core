@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.api.io;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -233,15 +234,17 @@ public abstract class ResourceCollectionReaderBase
 	 *
 	 * @param aLocation the location.
 	 * @return an URL.
+	 * @throws MalformedURLException 
 	 */
-	private String locationToUrl(String aLocation)
+	private String locationToUrl(String aLocation) throws MalformedURLException
 	{
+	    String location = aLocation;
+	    
 		if (isUnmarkedFileLocation(aLocation)) {
-			return "file:"+aLocation;
+			location = new File(location).toURI().toURL().toString();
 		}
-		else {
-			return aLocation;
-		}
+				
+		return location;
 	}
 
 	/**
