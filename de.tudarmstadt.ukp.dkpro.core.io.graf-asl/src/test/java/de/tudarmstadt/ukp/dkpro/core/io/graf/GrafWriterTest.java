@@ -18,8 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.graf;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -28,7 +28,7 @@ import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -53,7 +53,7 @@ public class GrafWriterTest
 
 	public void write() throws Exception
 	{
-		CollectionReaderDescription textReader = createDescription(
+		CollectionReaderDescription textReader = createReaderDescription(
 				TextReader.class,
 				TextReader.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
@@ -61,22 +61,22 @@ public class GrafWriterTest
 					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
 				});
 
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(
+		AnalysisEngineDescription segmenter = createEngineDescription(
 				OpenNlpSegmenter.class);
 
-		AnalysisEngineDescription posTagger = createPrimitiveDescription(
+		AnalysisEngineDescription posTagger = createEngineDescription(
 				OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription stripper = createPrimitiveDescription(
+		AnalysisEngineDescription stripper = createEngineDescription(
 				DocumentMetaDataStripper.class);
 
-		AnalysisEngineDescription grafWriter = createPrimitiveDescription(
+		AnalysisEngineDescription grafWriter = createEngineDescription(
 				GrafWriter.class,
 				GrafWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 
-		AnalysisEngineDescription dumpWriter = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "-");
+		AnalysisEngineDescription dumpWriter = createEngineDescription(
+		        CasDumpWriter.class,
+		        CasDumpWriter.PARAM_OUTPUT_FILE, "-");
 
 		runPipeline(textReader, segmenter, posTagger, stripper, grafWriter, dumpWriter);
 

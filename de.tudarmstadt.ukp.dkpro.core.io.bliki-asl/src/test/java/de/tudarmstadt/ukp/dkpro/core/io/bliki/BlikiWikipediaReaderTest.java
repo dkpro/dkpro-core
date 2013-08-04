@@ -17,12 +17,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.bliki;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class BlikiWikipediaReaderTest
     public void wikipediaReaderTestPlainText()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 BlikiWikipediaReader.class,
                 BlikiWikipediaReader.PARAM_SOURCE_LOCATION, "http://en.wikipedia.org/w/api.php",
                 BlikiWikipediaReader.PARAM_LANGUAGE, "en",
@@ -56,7 +56,7 @@ public class BlikiWikipediaReaderTest
     public void wikipediaReaderTestMarkup()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 BlikiWikipediaReader.class,
                 BlikiWikipediaReader.PARAM_OUTPUT_PLAIN_TEXT, false,
                 BlikiWikipediaReader.PARAM_SOURCE_LOCATION, "http://en.wikipedia.org/w/api.php",
@@ -79,7 +79,7 @@ public class BlikiWikipediaReaderTest
     public void wikipediaReaderUnknownPage()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 BlikiWikipediaReader.class,
                 BlikiWikipediaReader.PARAM_SOURCE_LOCATION, "http://en.wikipedia.org/w/api.php",
                 BlikiWikipediaReader.PARAM_LANGUAGE, "en",

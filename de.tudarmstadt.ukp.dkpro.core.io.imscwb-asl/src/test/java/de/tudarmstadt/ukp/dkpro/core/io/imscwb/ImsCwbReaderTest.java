@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -40,8 +40,8 @@ public class ImsCwbReaderTest
 	public void wackyTest()
 		throws Exception
 	{
-
-		CollectionReader reader = createCollectionReader(ImsCwbReader.class,
+        CollectionReaderDescription reader = createReaderDescription(
+		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
@@ -77,7 +77,8 @@ public class ImsCwbReaderTest
 	public void wackyTest_noAnnotations()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(ImsCwbReader.class,
+        CollectionReaderDescription reader = createReaderDescription(
+		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
@@ -104,7 +105,8 @@ public class ImsCwbReaderTest
 	public void wackyTest__expectedException()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(ImsCwbReader.class,
+        CollectionReaderDescription reader = createReaderDescription(
+		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",

@@ -58,6 +58,10 @@ public class BinaryCasWriter
     @ConfigurationParameter(name = PARAM_FORMAT, mandatory = true, defaultValue = "6+")
     private String format;
 
+    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
+    @ConfigurationParameter(name=PARAM_FILENAME_SUFFIX, mandatory=true, defaultValue=".ser")
+    private String filenameSuffix;
+
     private boolean typeSystemWritten;
 
     @Override
@@ -66,7 +70,7 @@ public class BinaryCasWriter
     {
         OutputStream docOS = null;
         try {
-            docOS = getOutputStream(aJCas, ".bin");
+            docOS = getOutputStream(aJCas, filenameSuffix);
 
             if ("0".equals(format)) {
                 serializeCAS(aJCas.getCas(), docOS);

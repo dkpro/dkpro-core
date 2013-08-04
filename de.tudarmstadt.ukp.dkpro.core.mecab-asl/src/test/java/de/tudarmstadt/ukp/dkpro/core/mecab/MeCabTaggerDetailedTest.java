@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mecab;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -28,7 +28,7 @@ import java.util.List;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -45,14 +45,15 @@ public class MeCabTaggerDetailedTest {
 
     @Test
     public void testMeCabTagger() throws UIMAException, IOException {
-        CollectionReader cr = createCollectionReader(TextReader.class,
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class,
         		TextReader.PARAM_PATH, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja",
                 TextReader.PARAM_PATTERNS, new String[] { "[+]detailedTest.txt" });
 
         AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
         try {
-            JCas jcas = new JCasIterable(cr).iterator().next();
+            JCas jcas = new JCasIterable(reader).iterator().next();
             Collection<Sentence> totalFound = getSentences(jTagger, jcas);
 
             assertEquals(1, totalFound.size());

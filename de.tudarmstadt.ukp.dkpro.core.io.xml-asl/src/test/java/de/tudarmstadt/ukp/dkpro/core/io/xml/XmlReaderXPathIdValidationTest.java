@@ -26,7 +26,7 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.junit.Test;
 
 public class XmlReaderXPathIdValidationTest
@@ -50,8 +50,8 @@ public class XmlReaderXPathIdValidationTest
 
 		// Should find two files
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/id_validation.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/id_validation.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -72,8 +72,8 @@ public class XmlReaderXPathIdValidationTest
 
 		// Should find two files
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_id_validation.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_id_validation.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -92,8 +92,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/attribute_id.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/attribute_id.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -112,8 +112,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/deep_tag_id.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/deep_tag_id.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -132,8 +132,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/deep_attribute_id.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/deep_attribute_id.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -155,8 +155,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/invalid_subst_param.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/invalid_subst_param.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -178,8 +178,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/empty_id.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/empty_id.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -200,8 +200,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/no_id_tag.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/no_id_tag.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -228,8 +228,8 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/duplicated_id_tags.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/duplicated_id_tags.txt"
 		);
 
 		runPipeline(reader, writer);

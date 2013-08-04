@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mecab;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ import java.util.List;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -48,12 +48,14 @@ public class MeCabWhiteSpacesTest {
 
     @Test
     public void sequenceOfWhitespacesAtEndOfFile() throws UIMAException, IOException {
-        CollectionReader cr = createCollectionReader(TextReader.class, TextReader.PARAM_PATH, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", TextReader.PARAM_PATTERNS,
-                new String[] { "[+]EoFWithSequenceOfWhitespacesAndBlanks.txt" });
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class, 
+                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_LANGUAGE, "ja", 
+                TextReader.PARAM_PATTERNS, "[+]EoFWithSequenceOfWhitespacesAndBlanks.txt");
         AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
         try {
-            JCas jcas = new JCasIterable(cr).iterator().next();
+            JCas jcas = new JCasIterable(reader).iterator().next();
             jTagger.process(jcas);
             Collection<JapaneseToken> tokens = JCasUtil.select(jcas, JapaneseToken.class);
             assertEquals(2, tokens.size());
@@ -69,13 +71,15 @@ public class MeCabWhiteSpacesTest {
 
     @Test
     public void whitespaceBeforeToken() throws UIMAException, IOException {
-        CollectionReader cr = createCollectionReader(TextReader.class, TextReader.PARAM_PATH, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", TextReader.PARAM_PATTERNS,
-                new String[] { "[+]TokenPreceedingWhitespace.txt" });
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class, 
+                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_LANGUAGE, "ja", 
+                TextReader.PARAM_PATTERNS, new String[] { "[+]TokenPreceedingWhitespace.txt" });
 
         AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
         try {
-            JCas jcas = new JCasIterable(cr).iterator().next();
+            JCas jcas = new JCasIterable(reader).iterator().next();
             jTagger.process(jcas);
             Collection<JapaneseToken> tokens = JCasUtil.select(jcas, JapaneseToken.class);
             List<String> stringTokens = new LinkedList<String>();
@@ -92,12 +96,15 @@ public class MeCabWhiteSpacesTest {
 
     @Test
     public void whitespaceIsAnnotatedAsToken() throws UIMAException, IOException {
-        CollectionReader cr = createCollectionReader(TextReader.class, TextReader.PARAM_PATH, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", TextReader.PARAM_PATTERNS, new String[] { "[+]WhiteSpaceAsToken.txt" });
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class, 
+                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_LANGUAGE, "ja", 
+                TextReader.PARAM_PATTERNS, new String[] { "[+]WhiteSpaceAsToken.txt" });
 
         AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
         try {
-            JCas jcas = new JCasIterable(cr).iterator().next();
+            JCas jcas = new JCasIterable(reader).iterator().next();
             jTagger.process(jcas);
             Collection<JapaneseToken> tokens = JCasUtil.select(jcas, JapaneseToken.class);
             List<String> stringTokens = new LinkedList<String>();

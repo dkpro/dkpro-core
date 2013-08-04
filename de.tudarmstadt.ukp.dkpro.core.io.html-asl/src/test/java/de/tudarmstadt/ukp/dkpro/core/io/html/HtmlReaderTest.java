@@ -17,14 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.html;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
@@ -39,7 +39,7 @@ public class HtmlReaderTest
     public void wwwReaderTest()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 HtmlReader.class,
                 HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.ukp.tu-darmstadt.de")
         );

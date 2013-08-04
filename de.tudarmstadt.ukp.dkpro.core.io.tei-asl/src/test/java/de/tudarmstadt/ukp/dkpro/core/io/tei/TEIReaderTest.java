@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
@@ -30,7 +29,6 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -52,7 +50,7 @@ public class TEIReaderTest
     public void digibibTest()
         throws Exception
     {
-        CollectionReader reader = createReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 TEIReader.class,
                 TEIReader.PARAM_OMIT_IGNORABLE_WHITESPACE, true,
                 TEIReader.PARAM_LANGUAGE, "de",
@@ -99,8 +97,7 @@ public class TEIReaderTest
     public void brownReaderTest()
         throws Exception
     {
-
-        CollectionReader reader = createReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, "en",
                 TEIReader.PARAM_PATH, "classpath:/brown_tei/",
@@ -177,8 +174,7 @@ public class TEIReaderTest
     public void brownReaderTest_noSentences()
         throws Exception
     {
-
-        CollectionReader reader = createReader(
+        CollectionReaderDescription reader = createReaderDescription(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
@@ -206,8 +202,7 @@ public class TEIReaderTest
     public void brownReaderTest_noToken_noPOS()
         throws Exception
     {
-
-        CollectionReader reader = createReader(
+        CollectionReaderDescription reader = createReaderDescription(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",
@@ -237,8 +232,7 @@ public class TEIReaderTest
     public void brownReaderTest_expectedException()
         throws Exception
     {
-
-        CollectionReader reader = createReader(
+        CollectionReaderDescription reader = createReaderDescription(
         		TEIReader.class,
         		TEIReader.PARAM_LANGUAGE, "en",
         		TEIReader.PARAM_PATH, "classpath:/brown_tei/",

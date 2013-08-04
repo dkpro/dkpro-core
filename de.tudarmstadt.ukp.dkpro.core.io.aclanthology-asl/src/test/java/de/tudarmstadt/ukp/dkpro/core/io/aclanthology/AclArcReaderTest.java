@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.aclanthology;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
@@ -34,10 +34,10 @@ public class AclArcReaderTest
     public void aclArcReaderTest()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 AclAnthologyReader.class,
                 ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/acl/",
-                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" } );
+                ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]**/*.txt" );
 
         int i=0;
         for (JCas jcas : new JCasIterable(reader)) {

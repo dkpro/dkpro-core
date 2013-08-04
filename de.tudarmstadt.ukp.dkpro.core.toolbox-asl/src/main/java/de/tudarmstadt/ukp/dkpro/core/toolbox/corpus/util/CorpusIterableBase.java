@@ -27,7 +27,6 @@ import org.apache.uima.resource.ResourceInitializationException;
 public abstract class CorpusIterableBase
     <T> implements Iterable<T>
 {
-
     protected final JCasIterable jcasIterable;
     protected final String language;
 
