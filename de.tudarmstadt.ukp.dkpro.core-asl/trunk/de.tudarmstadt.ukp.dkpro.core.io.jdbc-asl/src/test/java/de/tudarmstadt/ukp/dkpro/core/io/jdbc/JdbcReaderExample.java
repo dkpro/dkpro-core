@@ -22,7 +22,7 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -47,8 +47,8 @@ public class JdbcReaderExample
                 JdbcReader.PARAM_PASSWORD, "",
                 JdbcReader.PARAM_QUERY, query);
 
-        AnalysisEngine extractor = AnalysisEngineFactory.createPrimitive(CASDumpWriter.class,
-                CASDumpWriter.PARAM_OUTPUT_FILE, "-");
+        AnalysisEngine extractor = AnalysisEngineFactory.createPrimitive(CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "-");
 
         SimplePipeline.runPipeline(pdfReader, extractor);
     }

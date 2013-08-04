@@ -20,10 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -32,9 +30,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
@@ -68,12 +65,12 @@ public class TfidfAnnotatorTest
     @Before
     public void buildModel() throws Exception {
         // write the model
-        CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class,
                 PARAM_PATH, CONSUMER_TEST_DATA_PATH,
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
 
-        AnalysisEngineDescription aggregate = createAggregateDescription(
+        AnalysisEngineDescription aggregate = createEngineDescription(
                 createPrimitiveDescription(BreakIteratorSegmenter.class),
                 createPrimitiveDescription(
                         TfidfConsumer.class,
@@ -91,7 +88,7 @@ public class TfidfAnnotatorTest
     @Test
     public void tfidfTest_normal_constantOne() throws Exception {
 
-        AnalysisEngine tfidfAnnotator = createPrimitive(
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(
                 TfidfAnnotator.class,
                 TfidfAnnotator.PARAM_FEATURE_PATH, Token.class.getName(),
                 TfidfAnnotator.PARAM_TFDF_PATH,    OUTPUT_PATH,
@@ -116,7 +113,7 @@ public class TfidfAnnotatorTest
     @Test
     public void tfidfTest_binary_binary() throws Exception {
 
-        AnalysisEngine tfidfAnnotator = createPrimitive(
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(
                 TfidfAnnotator.class,
                 TfidfAnnotator.PARAM_FEATURE_PATH, Token.class.getName(),
                 TfidfAnnotator.PARAM_TFDF_PATH,    OUTPUT_PATH,
@@ -141,7 +138,7 @@ public class TfidfAnnotatorTest
     @Test
     public void tfidfTest_normal_log() throws Exception {
 
-        AnalysisEngine tfidfAnnotator = createPrimitive(
+        AnalysisEngineDescription tfidfAnnotator = createEngineDescription(
                 TfidfAnnotator.class,
                 TfidfAnnotator.PARAM_FEATURE_PATH, Token.class.getName(),
                 TfidfAnnotator.PARAM_TFDF_PATH,    OUTPUT_PATH,
@@ -185,14 +182,14 @@ public class TfidfAnnotatorTest
         }
     }
 
-    private CollectionReader getReader() throws ResourceInitializationException {
-            return createCollectionReader(
+    private CollectionReaderDescription getReader() throws ResourceInitializationException {
+            return createReaderDescription(
                 TextReader.class,
                 PARAM_PATH, CONSUMER_TEST_DATA_PATH,
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
     }
 
-    private AnalysisEngine getTokenizer() throws ResourceInitializationException {
-        return createPrimitive(BreakIteratorSegmenter.class);
+    private AnalysisEngineDescription getTokenizer() throws ResourceInitializationException {
+        return createEngineDescription(BreakIteratorSegmenter.class);
     }
 }

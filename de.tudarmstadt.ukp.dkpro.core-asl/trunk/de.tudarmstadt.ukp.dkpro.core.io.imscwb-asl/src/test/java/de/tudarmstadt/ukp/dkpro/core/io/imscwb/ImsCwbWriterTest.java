@@ -26,7 +26,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -62,8 +62,8 @@ public class ImsCwbWriterTest
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
 
 		runPipeline(ner, tag, tw, cdw);
 
@@ -92,8 +92,8 @@ public class ImsCwbWriterTest
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription cdw = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
 
 		runPipeline(ner, tw, cdw);
 

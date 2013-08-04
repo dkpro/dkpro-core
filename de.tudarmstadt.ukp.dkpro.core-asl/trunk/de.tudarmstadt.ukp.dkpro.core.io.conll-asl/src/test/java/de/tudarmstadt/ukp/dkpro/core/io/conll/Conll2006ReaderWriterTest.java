@@ -27,7 +27,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.junit.Test;
 
 public class Conll2006ReaderWriterTest
@@ -47,8 +47,8 @@ public class Conll2006ReaderWriterTest
                 Conll2006Writer.PARAM_STRIP_EXTENSION, true);
 
         AnalysisEngineDescription dumper = createEngineDescription(
-                CASDumpWriter.class,
-                CASDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/dump.txt");
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/dump.txt");
 
         runPipeline(reader, writer, dumper);
 

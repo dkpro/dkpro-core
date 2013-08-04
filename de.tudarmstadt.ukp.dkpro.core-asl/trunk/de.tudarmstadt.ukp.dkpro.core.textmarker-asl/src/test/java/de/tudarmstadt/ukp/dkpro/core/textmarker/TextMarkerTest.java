@@ -17,12 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.textmarker;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assert;
@@ -36,7 +37,7 @@ public class TextMarkerTest
     public void test()
         throws Exception
     {
-        AnalysisEngine tm = createPrimitive(TextMarker.class,
+        AnalysisEngine tm = createEngine(TextMarker.class,
                 // Load script in "Java" notation, with "." as package separator and no extension.
                 // File needs to be located in the path specified below with ending ".tm".
                 TextMarker.MAIN_SCRIPT, "textmarker.TokensToSentence",
@@ -61,8 +62,8 @@ public class TextMarkerTest
         // Apply the script
         tm.process(jcas);
 
-        AnalysisEngine dumper = createPrimitive(CASDumpWriter.class,
-                CASDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/casdump.txt");
+        AnalysisEngine dumper = createEngine(CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/casdump.txt");
         dumper.process(jcas);
 
         String expected = FileUtils.readFileToString(new File(

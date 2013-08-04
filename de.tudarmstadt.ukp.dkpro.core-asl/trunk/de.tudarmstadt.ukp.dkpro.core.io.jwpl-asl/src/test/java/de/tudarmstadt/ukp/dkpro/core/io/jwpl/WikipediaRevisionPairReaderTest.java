@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class WikipediaRevisionPairReaderTest
 	public void wikipediaRevisionReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaRevisionPairReader.class,
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_simple_20090119",

@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -39,7 +39,7 @@ public class WikipediaLinkReaderTest
 	public void wikipediaReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaLinkReader.class,
 		        WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, new String[]{Link.type.INTERNAL.name()},
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
@@ -61,7 +61,7 @@ public class WikipediaLinkReaderTest
 	public void wikipediaLinkReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 				WikipediaLinkReader.class,
 				WikipediaLinkReader.PARAM_ALLOWED_LINK_TYPES, new String[]{Link.type.INTERNAL.name()},
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",

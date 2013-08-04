@@ -17,11 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.jwpl;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class WikipediaArticleReaderTest
 	public void wikipediaReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaArticleReader.class,
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
 				WikipediaReaderBase.PARAM_DB,       "wikiapi_test",
@@ -57,7 +57,7 @@ public class WikipediaArticleReaderTest
 	public void wikipediaArticleIdReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaArticleReader.class,
 		        WikipediaArticleReader.PARAM_PAGE_ID_LIST, new String[]{"1041","103","107"},
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
@@ -79,7 +79,7 @@ public class WikipediaArticleReaderTest
 	public void wikipediaArticleTitleReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaArticleReader.class,
 		        WikipediaArticleReader.PARAM_PAGE_TITLE_LIST, new String[]{"TK1","TK3"},
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
@@ -101,7 +101,7 @@ public class WikipediaArticleReaderTest
 	public void wikipediaArticleIdFileReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaArticleReader.class,
 		        WikipediaArticleReader.PARAM_PATH_TO_PAGE_ID_LIST, "src/test/resources/idList",
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",
@@ -123,7 +123,7 @@ public class WikipediaArticleReaderTest
 	public void wikipediaArticleTitleFileReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
 		        WikipediaArticleReader.class,
 		        WikipediaArticleReader.PARAM_PATH_TO_PAGE_TITLE_LIST, "src/test/resources/titleList",
 				WikipediaReaderBase.PARAM_HOST,     "bender.ukp.informatik.tu-darmstadt.de",

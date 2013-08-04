@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -36,7 +36,7 @@ public class CorpusReaderTest
     @Test
     public void corpusReaderTest() throws Exception {
 
-        CollectionReader reader = CollectionReaderFactory.createCollectionReader(
+        CollectionReaderDescription reader = createReaderDescription(
                 CorpusReader.class,
                 CorpusReader.PARAM_CORPUS, BrownTEICorpus.class.getName()
         );

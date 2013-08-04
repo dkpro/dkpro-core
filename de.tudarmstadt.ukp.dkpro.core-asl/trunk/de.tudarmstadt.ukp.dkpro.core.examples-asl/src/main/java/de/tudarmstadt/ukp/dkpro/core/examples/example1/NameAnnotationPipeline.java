@@ -17,13 +17,12 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.examples.example1;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.DictionaryAnnotator;
@@ -36,23 +35,23 @@ public class NameAnnotationPipeline
 	public static void main(String[] args)
 		throws Exception
 	{
-		CollectionReaderDescription reader = createDescription(
+		CollectionReaderDescription reader = createReaderDescription(
 				TextReader.class,
 				TextReader.PARAM_PATH, "src/test/resources/text",
-				TextReader.PARAM_PATTERNS, new String[] { INCLUDE_PREFIX + "*.txt" },
+				TextReader.PARAM_PATTERNS, "[+]*.txt",
 				TextReader.PARAM_LANGUAGE, "en");
 
-		AnalysisEngineDescription tokenizer = createPrimitiveDescription(
+		AnalysisEngineDescription tokenizer = createEngineDescription(
 				BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription nameFinder = createPrimitiveDescription(
+		AnalysisEngineDescription nameFinder = createEngineDescription(
 				DictionaryAnnotator.class,
 				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/dictionaries/names.txt",
-				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, Name.class.getName());
+				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, Name.class);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
+		AnalysisEngineDescription writer = createEngineDescription(
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output.txt");
 
 		SimplePipeline.runPipeline(reader, tokenizer, nameFinder, writer);
 	}

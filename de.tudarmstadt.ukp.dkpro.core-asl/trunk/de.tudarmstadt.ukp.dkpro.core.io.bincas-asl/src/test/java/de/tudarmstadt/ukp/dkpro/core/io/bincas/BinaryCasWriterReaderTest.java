@@ -121,7 +121,7 @@ public class BinaryCasWriterReaderTest
                     ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
             AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(SerializedCasWriter.class,
-                    SerializedCasWriter.PARAM_EXTENSION, ".bin",
+                    SerializedCasWriter.PARAM_FILENAME_SUFFIX, ".bin",
                     SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 
 //            AnalysisEngine dumper = createEngine(CASDumpWriter.class);

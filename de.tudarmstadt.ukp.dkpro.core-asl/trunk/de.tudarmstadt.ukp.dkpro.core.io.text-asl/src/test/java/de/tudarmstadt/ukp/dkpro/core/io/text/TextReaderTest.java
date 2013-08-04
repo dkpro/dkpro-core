@@ -17,8 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
@@ -29,7 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.xwriter.XWriter;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
@@ -51,13 +52,11 @@ public class TextReaderTest
 	public void fileSystemReaderTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(TextReader.class,
-				createTypeSystemDescription(),
+		CollectionReaderDescription reader = createReaderDescription(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
-					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
+				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
 
-        AnalysisEngine writer = createPrimitive(XWriter.class,
+        AnalysisEngine writer = createEngine(XWriter.class,
         		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
 
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -85,13 +84,12 @@ public class TextReaderTest
 	public void fileSystemReaderAbsolutePathTest()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(TextReader.class,
-				createTypeSystemDescription(),
+		CollectionReaderDescription reader = createReaderDescription(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_PATH, new File("src/test/resources/texts").getAbsolutePath(),
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
-        AnalysisEngine writer = createPrimitive(XWriter.class,
+        AnalysisEngine writer = createEngine(XWriter.class,
         		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
 
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -119,7 +117,7 @@ public class TextReaderTest
 	public void fileSystemReaderTest3()
 		throws Exception
 	{
-		CollectionReader reader = createCollectionReader(TextReader.class,
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
 				createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/name with space",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
@@ -153,7 +151,7 @@ public class TextReaderTest
     public void fileSystemReaderTest2()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(TextReader.class,
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 createTypeSystemDescription(),
                 ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
@@ -185,7 +183,7 @@ public class TextReaderTest
     public void fileSystemReaderTest4()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(TextReader.class,
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 createTypeSystemDescription(),
                 ResourceCollectionReaderBase.PARAM_PATH, "classpath:texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);

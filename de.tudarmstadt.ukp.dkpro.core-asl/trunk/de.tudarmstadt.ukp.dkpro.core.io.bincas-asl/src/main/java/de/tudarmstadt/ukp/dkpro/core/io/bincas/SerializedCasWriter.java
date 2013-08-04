@@ -56,9 +56,9 @@ public class SerializedCasWriter
 	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
 	private File typeSystemFile;
 
-    public static final String PARAM_EXTENSION = "extension";
-    @ConfigurationParameter(name=PARAM_EXTENSION, mandatory=true, defaultValue=".ser")
-    private String extension;
+    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
+    @ConfigurationParameter(name=PARAM_FILENAME_SUFFIX, mandatory=true, defaultValue=".ser")
+    private String filenameSuffix;
 
 	private boolean typeSystemWritten;
 
@@ -68,7 +68,7 @@ public class SerializedCasWriter
 	{
 		ObjectOutputStream docOS = null;
         try {
-        	docOS = new ObjectOutputStream(getOutputStream(aJCas, extension));
+        	docOS = new ObjectOutputStream(getOutputStream(aJCas, filenameSuffix));
 
         	if (typeSystemFile == null) {
 	    		CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());

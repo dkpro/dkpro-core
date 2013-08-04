@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.mecab;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -30,7 +30,7 @@ import java.util.Iterator;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
@@ -42,24 +42,29 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 public class MeCabTaggerTest {
     @Test
     public void testMeCabTaggerEngine() throws UIMAException, IOException {
-        CollectionReader cr = createCollectionReader(TextReader.class, TextReader.PARAM_PATH, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", TextReader.PARAM_PATTERNS, new String[] { "[+]*.txt" });
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class, 
+                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_LANGUAGE, "ja", 
+                TextReader.PARAM_PATTERNS, new String[] { "[+]*.txt" });
 
         AnalysisEngineDescription JTagger = createPrimitiveDescription(MeCabTagger.class);
 
-        runPipeline(cr, JTagger);
+        runPipeline(reader, JTagger);
     }
 
     @Test
     public void testMeCabTaggerFileInput() throws UIMAException, IOException {
-
-        CollectionReader cr = createCollectionReader(TextReader.class, TextReader.PARAM_PATH, "src/test/resources",
-                TextReader.PARAM_LANGUAGE, "ja", TextReader.PARAM_PATTERNS, new String[] { "[+]test*.txt" });
+        CollectionReaderDescription reader = createReaderDescription(
+                TextReader.class, 
+                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_LANGUAGE, "ja", 
+                TextReader.PARAM_PATTERNS, new String[] { "[+]test*.txt" });
 
         AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
         try {
             Collection<Sentence> sentences = null;
-            Iterator<JCas> iterator = new JCasIterable(cr).iterator();
+            Iterator<JCas> iterator = new JCasIterable(reader).iterator();
             if (iterator.hasNext()) {
                 JCas doc1 = iterator.next();
                 jTagger.process(doc1);

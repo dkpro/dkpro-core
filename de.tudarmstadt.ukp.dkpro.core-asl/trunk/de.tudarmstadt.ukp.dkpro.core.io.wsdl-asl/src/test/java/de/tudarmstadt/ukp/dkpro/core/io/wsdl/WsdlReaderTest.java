@@ -20,15 +20,15 @@ package de.tudarmstadt.ukp.dkpro.core.io.wsdl;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,11 +45,12 @@ public class WsdlReaderTest
 	{
 		File tmpFile = workdir.newFile("services-new.txt");
 
-		CollectionReader reader = createCollectionReader(WsdlReader.class,
+		CollectionReaderDescription reader = createReaderDescription(
+		        WsdlReader.class,
 				PARAM_PATH, "src/test/resources/wsdl",
-				PARAM_PATTERNS, new String[] { "[+]**/*.wsdl" });
-		AnalysisEngine writer = createPrimitive(CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
+				PARAM_PATTERNS, "[+]**/*.wsdl" );
+		AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
 		SimplePipeline.runPipeline(reader, writer);
 
 		String reference = readFileToString(new File("src/test/resources/reference/services-new.txt")).trim();
@@ -63,12 +64,13 @@ public class WsdlReaderTest
 	{
 		File tmpFile = workdir.newFile("operations-new.txt");
 
-		CollectionReader reader = createCollectionReader(WsdlReader.class,
+        CollectionReaderDescription reader = createReaderDescription(
+		        WsdlReader.class,
 				WsdlReader.PARAM_OPERATION_AS_DOCID, true,
 				PARAM_PATH, "classpath:/wsdl",
-				PARAM_PATTERNS, new String[] { "[+]**/*.wsdl" });
-		AnalysisEngine writer = createPrimitive(CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
+				PARAM_PATTERNS, "[+]**/*.wsdl");
+        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
 		SimplePipeline.runPipeline(reader, writer);
 
 		String reference = readFileToString(new File("src/test/resources/reference/operations-new.txt")).trim();

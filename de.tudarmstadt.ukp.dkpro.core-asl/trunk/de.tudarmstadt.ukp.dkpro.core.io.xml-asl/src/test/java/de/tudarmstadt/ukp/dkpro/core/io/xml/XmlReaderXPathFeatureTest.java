@@ -26,7 +26,7 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.xwriter.CASDumpWriter;
+import org.apache.uima.fit.component.xwriter.CasDumpWriter;
 import org.junit.Test;
 
 public class XmlReaderXPathFeatureTest
@@ -46,8 +46,8 @@ public class XmlReaderXPathFeatureTest
 
 		// Should find one file
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-		        CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/abbr_format_reading.txt"
+				CasDumpWriter.class,
+		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/abbr_format_reading.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -67,8 +67,8 @@ public class XmlReaderXPathFeatureTest
 
 		// Should find one file
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-		        CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/full_format_reading.txt"
+				CasDumpWriter.class,
+		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/full_format_reading.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -88,8 +88,8 @@ public class XmlReaderXPathFeatureTest
 
 		// Should find one file
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-		        CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_reading.txt"
+				CasDumpWriter.class,
+		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_reading.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -109,8 +109,8 @@ public class XmlReaderXPathFeatureTest
 
 		// Should find two files
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/recursive_reading.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/recursive_reading.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -130,8 +130,8 @@ public class XmlReaderXPathFeatureTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/tag_filtering.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/tag_filtering.txt"
 		);
 
 		runPipeline(reader, writer);
@@ -152,8 +152,8 @@ public class XmlReaderXPathFeatureTest
 		);
 
 		AnalysisEngineDescription writer = createPrimitiveDescription(
-				CASDumpWriter.class,
-				CASDumpWriter.PARAM_OUTPUT_FILE, "target/output/substitution.txt"
+				CasDumpWriter.class,
+				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/substitution.txt"
 		);
 
 		runPipeline(reader, writer);
