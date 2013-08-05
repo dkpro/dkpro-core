@@ -18,13 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.pipeline.SimplePipeline.stepPipeline;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.pipeline.JCasIterable;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -45,22 +44,22 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]*.txt" });
+				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
 
 		String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von " +
 				"September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai " +
 				"2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
 
 		int i = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
+		for (JCas jcas : stepPipeline(reader)) {
 			// System.out.println(jcas.getDocumentText());
 			if (i == 0) {
-				assertEquals(11406, JCasUtil.select(jcas, Token.class).size());
-				assertEquals(11406, JCasUtil.select(jcas, Lemma.class).size());
-				assertEquals(11406, JCasUtil.select(jcas, POS.class).size());
-				assertEquals(717, JCasUtil.select(jcas, Sentence.class).size());
+				assertEquals(11406, select(jcas, Token.class).size());
+				assertEquals(11406, select(jcas, Lemma.class).size());
+				assertEquals(11406, select(jcas, POS.class).size());
+				assertEquals(717, select(jcas, Sentence.class).size());
 
-				assertEquals(firstSentence, JCasUtil.select(jcas, Sentence.class).iterator().next()
+				assertEquals(firstSentence, select(jcas, Sentence.class).iterator().next()
 						.getCoveredText());
 
 				assertEquals("\"http://www.epguides.de/nikita.htm\"", DocumentMetaData.get(jcas)
@@ -82,18 +81,18 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]*.txt" },
+				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt",
 				ImsCwbReader.PARAM_READ_TOKEN, false,
 				ImsCwbReader.PARAM_READ_LEMMA, false,
 				ImsCwbReader.PARAM_READ_POS, false,
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
 		int i = 0;
-		for (JCas jcas : new JCasIterable(reader)) {
+		for (JCas jcas : stepPipeline(reader)) {
 			if (i == 0) {
-				assertEquals(0, JCasUtil.select(jcas, Token.class).size());
-				assertEquals(0, JCasUtil.select(jcas, POS.class).size());
-				assertEquals(0, JCasUtil.select(jcas, Sentence.class).size());
+				assertEquals(0, select(jcas, Token.class).size());
+				assertEquals(0, select(jcas, POS.class).size());
+				assertEquals(0, select(jcas, Sentence.class).size());
 			}
 			i++;
 		}
@@ -101,7 +100,7 @@ public class ImsCwbReaderTest
 		assertEquals(4, i);
 	}
 
-	@Test(expected = ResourceInitializationException.class)
+	@Test(expected = IllegalStateException.class)
 	public void wackyTest__expectedException()
 		throws Exception
 	{
@@ -115,7 +114,7 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_READ_POS, false,
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
-		for (JCas jcas : new JCasIterable(reader)) {
+		for (JCas jcas : stepPipeline(reader)) {
 			// should never get here
 			System.out.println(jcas.getDocumentText());
 		}
