@@ -195,8 +195,10 @@ public class AssertAnnotations
             i++;
         }
 
-        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
-        List<String> sortedExpectedMapped = deduplicateAndSort(asList(aExpectedMapped));
+        List<String> sortedExpectedOriginal = aExpectedOriginal != null ? 
+                deduplicateAndSort(asList(aExpectedOriginal)) : null;
+        List<String> sortedExpectedMapped = aExpectedMapped != null ? 
+                deduplicateAndSort(asList(aExpectedMapped)) : null;
         List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
         List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
