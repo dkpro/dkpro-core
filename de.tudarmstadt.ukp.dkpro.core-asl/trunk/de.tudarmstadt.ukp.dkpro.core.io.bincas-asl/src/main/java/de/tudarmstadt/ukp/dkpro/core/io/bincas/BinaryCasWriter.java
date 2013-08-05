@@ -59,7 +59,7 @@ public class BinaryCasWriter
     private String format;
 
     public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name=PARAM_FILENAME_SUFFIX, mandatory=true, defaultValue=".ser")
+    @ConfigurationParameter(name=PARAM_FILENAME_SUFFIX, mandatory=true, defaultValue=".bin")
     private String filenameSuffix;
 
     private boolean typeSystemWritten;
