@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
 import java.util.Queue;
 
-import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -32,17 +32,17 @@ public class TagIterable
     extends CorpusIterableBase<Tag>
 {
 
-    public TagIterable(JCasIterable jcasIterable, String language)
+    public TagIterable(JCasIterator jcasIterator, String language)
     {
-        super(jcasIterable, language);
+        super(jcasIterator, language);
     }
 
     @Override
-    protected void fillQueue(JCasIterable jcasIterable, Queue<Tag> items)
+    protected void fillQueue(JCasIterator jcasIterator, Queue<Tag> items)
         throws ResourceInitializationException
     {
-        if (jcasIterable.hasNext()) {
-            JCas jcas = jcasIterable.next();
+        if (jcasIterator.hasNext()) {
+            JCas jcas = jcasIterator.next();
             for (POS pos : JCasUtil.select(jcas, POS.class)) {
                 items.add(ToolboxUtils.UimaPos2ToolboxTag(jcas, language, pos));
             }

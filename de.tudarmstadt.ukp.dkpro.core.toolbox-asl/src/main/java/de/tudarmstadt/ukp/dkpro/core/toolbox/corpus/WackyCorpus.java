@@ -17,9 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
-
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
@@ -67,7 +66,7 @@ public class WackyCorpus
     private static final String WORKSPACE = "wacky";
 
     private WackyLanguageEdition edition;
-    private CollectionReader reader;
+    private CollectionReaderDescription reader;
 
     public WackyCorpus(WackyLanguageEdition languageEdition) throws Exception
     {
@@ -82,7 +81,7 @@ public class WackyCorpus
     }
 
     private void initialize(String wackyPath, WackyLanguageEdition languageEdition) throws Exception {
-        reader = createCollectionReader(
+        reader = CollectionReaderFactory.createReaderDescription(
                 ImsCwbReader.class,
                 ImsCwbReader.PARAM_PATH, wackyPath,
                 ImsCwbReader.PARAM_LANGUAGE, languageEdition.name(),
@@ -109,7 +108,7 @@ public class WackyCorpus
     }
 
     @Override
-    protected CollectionReader getReader()
+    protected CollectionReaderDescription getReader()
     {
         return reader;
     }

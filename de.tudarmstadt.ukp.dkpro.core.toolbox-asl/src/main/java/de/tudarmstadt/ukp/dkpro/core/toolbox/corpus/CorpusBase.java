@@ -17,7 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.JCasIterable;
 
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
@@ -40,15 +41,15 @@ public abstract class CorpusBase
     @Override
     public abstract String getName();
 
-    protected abstract CollectionReader getReader();
+    protected abstract CollectionReaderDescription getReader();
 
     @Override
     public Iterable<Sentence> getSentences()
         throws Exception
     {
         // reconfigure to re-initialize the reader
-        getReader().reconfigure();
-        return new SentenceIterable(new JCasIterable(getReader()), getLanguage());
+        CollectionReaderFactory.createReader(getReader()).reconfigure();
+        return new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 
     @Override
@@ -56,8 +57,8 @@ public abstract class CorpusBase
         throws Exception
     {
         // reconfigure to re-initialize the reader
-        getReader().reconfigure();
-        return new TaggedTokenIterable(new JCasIterable(getReader()), getLanguage());
+//        getReader().reconfigure();
+        return new TaggedTokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 
     @Override
@@ -65,8 +66,8 @@ public abstract class CorpusBase
         throws Exception
     {
         // reconfigure to re-initialize the reader
-        getReader().reconfigure();
-        return new TagIterable(new JCasIterable(getReader()), getLanguage());
+//        getReader().reconfigure();
+        return new TagIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 
     @Override
@@ -74,8 +75,8 @@ public abstract class CorpusBase
         throws Exception
     {
         // reconfigure to re-initialize the reader
-        getReader().reconfigure();
-        return new TextIterable(new JCasIterable(getReader()), getLanguage());
+//        getReader().reconfigure();
+        return new TextIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 
     @Override
@@ -83,7 +84,7 @@ public abstract class CorpusBase
         throws Exception
     {
         // reconfigure to re-initialize the reader
-        getReader().reconfigure();
-        return new TokenIterable(new JCasIterable(getReader()), getLanguage());
+//        getReader().reconfigure();
+        return new TokenIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 }

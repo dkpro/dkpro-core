@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.util;
 
 import java.util.Queue;
 
-import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -30,17 +30,17 @@ public class TokenIterable
     extends CorpusIterableBase<String>
 {
 
-    public TokenIterable(JCasIterable jcasIterable, String language)
+    public TokenIterable(JCasIterator jcasIterator, String language)
     {
-        super(jcasIterable, language);
+        super(jcasIterator, language);
     }
 
     @Override
-    protected void fillQueue(JCasIterable jcasIterable, Queue<String> items)
+    protected void fillQueue(JCasIterator jcasIterator, Queue<String> items)
         throws ResourceInitializationException
     {
-        if (jcasIterable.hasNext()) {
-            JCas jcas = jcasIterable.next();
+        if (jcasIterator.hasNext()) {
+            JCas jcas = jcasIterator.next();
             items.addAll(JCasUtil.toText(JCasUtil.select(jcas, Token.class)));
         }
     }

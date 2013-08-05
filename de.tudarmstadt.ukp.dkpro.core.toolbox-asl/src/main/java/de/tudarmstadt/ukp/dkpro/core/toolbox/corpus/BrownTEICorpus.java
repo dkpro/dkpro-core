@@ -18,9 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
@@ -38,7 +38,7 @@ public class BrownTEICorpus
     static final String LANGUAGE = "en";
     static final String NAME = "Brown";
 
-    CollectionReader reader;
+    CollectionReaderDescription reader;
 
     public BrownTEICorpus() throws Exception
     {
@@ -54,7 +54,7 @@ public class BrownTEICorpus
     }
 
     private void initialize(String brownPath) throws Exception {
-        reader = createCollectionReader(
+        reader = CollectionReaderFactory.createReaderDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, LANGUAGE,
                 TEIReader.PARAM_PATH, brownPath,
@@ -63,7 +63,7 @@ public class BrownTEICorpus
     }
 
     @Override
-    protected CollectionReader getReader()
+    protected CollectionReaderDescription getReader()
     {
         return reader;
     }

@@ -21,17 +21,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.resource.ResourceInitializationException;
 
 public abstract class CorpusIterableBase
     <T> implements Iterable<T>
 {
-    protected final JCasIterable jcasIterable;
+    protected final JCasIterator jcasIterator;
     protected final String language;
 
-    public CorpusIterableBase(JCasIterable jcasIterable, String language) {
-        this.jcasIterable = jcasIterable;
+    public CorpusIterableBase(JCasIterator jcasIterator, String language) {
+        this.jcasIterator = jcasIterator;
         this.language = language;
     }
 
@@ -41,7 +41,7 @@ public abstract class CorpusIterableBase
         return new CorpusItemIterator<T>();
     }
 
-    protected abstract void fillQueue(JCasIterable jcasIterable, Queue<T> items)
+    protected abstract void fillQueue(JCasIterator jcasIterator, Queue<T> items)
             throws ResourceInitializationException;
 
     private class CorpusItemIterator
@@ -62,7 +62,7 @@ public abstract class CorpusIterableBase
             }
             else {
                 try {
-                    fillQueue(jcasIterable, items);
+                    fillQueue(jcasIterator, items);
                 }
                 catch (ResourceInitializationException e) {
                     e.printStackTrace();
