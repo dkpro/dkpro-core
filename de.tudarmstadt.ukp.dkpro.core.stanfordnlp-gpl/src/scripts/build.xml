@@ -371,6 +371,70 @@
 			</metadata>
 		</install-stub-and-upstream-file>		
 		
+		<install-stub-and-upstream-file
+			file="target/download/tagger/english-fast.41.model"
+			md5="1ad785e08f82b15f18851f29e9ce140d"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+			upstreamVersion="20130730"
+			metaDataVersion="1"
+			tool="tagger"
+			language="en"
+			variant="fast.41"
+			extension="model">
+			<metadata>
+				<entry key="pos.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
+		<install-stub-and-upstream-file
+			file="target/download/tagger/english-newswire-fast.model"
+			md5="942d2efa3c392ccd5efdfde403d2162d"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+			upstreamVersion="20130730"
+			metaDataVersion="1"
+			tool="tagger"
+			language="en"
+			variant="newswire-fast"
+			extension="model">
+			<metadata>
+				<entry key="pos.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
+		<install-stub-and-upstream-file
+			file="target/download/tagger/english-twitter.model"
+			md5="3b17b53af303095bb57d269ab3a42027"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+			upstreamVersion="20130730"
+			metaDataVersion="1"
+			tool="tagger"
+			language="en"
+			variant="twitter"
+			extension="model">
+			<metadata>
+				<entry key="pos.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
+		<install-stub-and-upstream-file
+			file="target/download/tagger/gate-EN-twitter-fast.model"
+			md5="185a9535e138218e9bd9a7a197250ee7"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+			upstreamVersion="20130730"
+			metaDataVersion="1"
+			tool="tagger"
+			language="en"
+			variant="twitter-fast"
+			extension="model">
+			<metadata>
+				<entry key="pos.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
 		<!--
     	<install-model-stub 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
@@ -512,7 +576,7 @@
 			<metadata>
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
-		</install-stub-and-upstream-file>	
+		</install-stub-and-upstream-file>		
 		
 		<install-stub-and-upstream-folder 
 			folder="target/download/core/coref-en"
@@ -523,6 +587,7 @@
 			tool="coref"
 			language="en"
 			variant="default"/>
+		
 	</target>
 	
 	<target name="fr" depends="download-parser">
@@ -720,6 +785,8 @@
 	<target name="download-tagger">
 		<mkdir dir="target/download/tagger"/>
     	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-${tagger.date}.zip" dest="target/download/tagger/postagger.zip" skipexisting="true"/>
+		<get src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/twitie_pos_pr.zip" dest="target/download/tagger/twitter.zip" skipexisting="true"/>
+		<get src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/gate-EN-twitter-fast.model" dest="target/download/tagger/gate-EN-twitter-fast.model" skipexisting="true"/>
 		<unzip src="target/download/tagger/postagger.zip" dest="target/download/tagger">
     		<patternset>
     			<include name="**/models//*.tagger*"/>		
@@ -728,6 +795,15 @@
 	    		<mapper type="flatten"/>
     		</chainedmapper>
     	</unzip>
+		<unzip src="target/download/tagger/twitter.zip" dest="target/download/tagger">
+			<patternset>
+				<include name="**/Tagger_Twitter/resources//*.model*"/>
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+		
     	<!--delete file="target/download/parser/postagger.tar.gz"/-->
     	<!--delete file="target/download/parser/postagger.tar"/-->
 	</target>
