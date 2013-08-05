@@ -34,7 +34,6 @@ import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -228,7 +227,7 @@ public class TEIReaderTest
         assertEquals(3, i);
     }
 
-    @Test(expected=ResourceInitializationException.class)
+    @Test(expected=IllegalStateException.class)
     public void brownReaderTest_expectedException()
         throws Exception
     {
