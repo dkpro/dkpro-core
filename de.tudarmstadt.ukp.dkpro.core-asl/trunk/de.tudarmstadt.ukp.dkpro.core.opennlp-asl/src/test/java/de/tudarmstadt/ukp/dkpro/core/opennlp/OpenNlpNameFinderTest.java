@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -49,7 +49,7 @@ public class OpenNlpNameFinderTest
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
-        AnalysisEngine engine = createPrimitive(OpenNlpNameFinder.class,
+        AnalysisEngine engine = createEngine(OpenNlpNameFinder.class,
                 OpenNlpNameFinder.PARAM_VARIANT, variant,
                 OpenNlpNameFinder.PARAM_PRINT_TAGSET, true);
 
