@@ -1,0 +1,4 @@
+vanilla	plant
+sky	object
+jumpiness	feeling
+braveness	attribute
