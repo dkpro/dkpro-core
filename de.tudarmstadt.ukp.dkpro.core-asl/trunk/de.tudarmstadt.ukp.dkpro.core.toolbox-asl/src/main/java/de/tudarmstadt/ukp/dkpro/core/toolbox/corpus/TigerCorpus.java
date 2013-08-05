@@ -17,9 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
-
-import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
@@ -38,7 +37,7 @@ public class TigerCorpus
     static final String LANGUAGE = "de";
     static final String NAME = "Tiger";
 
-    CollectionReader reader;
+    CollectionReaderDescription reader;
 
     public TigerCorpus() throws Exception
     {
@@ -54,7 +53,7 @@ public class TigerCorpus
     }
 
     private void initialize(String tigerFile) throws Exception {
-        reader = createCollectionReader(
+        reader = CollectionReaderFactory.createReaderDescription(
                 NegraExportReader.class,
                 NegraExportReader.PARAM_SOURCE_LOCATION, tigerFile,
                 NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
@@ -63,7 +62,7 @@ public class TigerCorpus
     }
 
     @Override
-    protected CollectionReader getReader()
+    protected CollectionReaderDescription getReader()
     {
         return reader;
     }

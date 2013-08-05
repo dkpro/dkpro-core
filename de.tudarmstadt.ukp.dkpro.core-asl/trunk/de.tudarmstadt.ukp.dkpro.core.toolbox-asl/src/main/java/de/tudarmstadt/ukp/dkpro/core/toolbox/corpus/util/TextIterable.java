@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.pipeline.JCasIterator;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -35,11 +35,11 @@ public class TextIterable
     implements Iterable<Text>
 {
 
-    private final JCasIterable jcasIterable;
+    private final JCasIterator jcasIterator;
     private final String language;
 
-    public TextIterable(JCasIterable jcasIterable, String language) {
-        this.jcasIterable = jcasIterable;
+    public TextIterable(JCasIterator jcasIterator, String language) {
+        this.jcasIterator = jcasIterator;
         this.language = language;
     }
 
@@ -56,7 +56,7 @@ public class TextIterable
         @Override
         public boolean hasNext()
         {
-            return jcasIterable.hasNext();
+            return jcasIterator.hasNext();
         }
 
         @Override
@@ -64,7 +64,7 @@ public class TextIterable
         {
             List<de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence> toolboxSentences = new ArrayList<de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence>();
 
-            JCas jcas = jcasIterable.next();
+            JCas jcas = jcasIterator.next();
             Collection<Sentence> sentences = JCasUtil.select(jcas, Sentence.class);
             for (Sentence sentence : sentences) {
                 try {
