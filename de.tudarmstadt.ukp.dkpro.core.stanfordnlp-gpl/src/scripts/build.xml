@@ -388,22 +388,6 @@
 		</install-stub-and-upstream-file>
 		
 		<install-stub-and-upstream-file
-			file="target/download/tagger/english-newswire-fast.model"
-			md5="942d2efa3c392ccd5efdfde403d2162d"
-			groupId="de.tudarmstadt.ukp.dkpro.core"
-			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-			upstreamVersion="20130730"
-			metaDataVersion="1"
-			tool="tagger"
-			language="en"
-			variant="newswire-fast"
-			extension="model">
-			<metadata>
-				<entry key="pos.tagset" value="ptb"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-		
-		<install-stub-and-upstream-file
 			file="target/download/tagger/english-twitter.model"
 			md5="3b17b53af303095bb57d269ab3a42027"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
