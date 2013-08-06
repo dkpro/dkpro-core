@@ -381,7 +381,7 @@
 			tool="tagger"
 			language="en"
 			variant="fast.41"
-			extension="model">
+			extension="tagger">
 			<metadata>
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
@@ -397,7 +397,7 @@
 			tool="tagger"
 			language="en"
 			variant="twitter"
-			extension="model">
+			extension="tagger">
 			<metadata>
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
@@ -413,7 +413,7 @@
 			tool="tagger"
 			language="en"
 			variant="twitter-fast"
-			extension="model">
+			extension="tagger">
 			<metadata>
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
