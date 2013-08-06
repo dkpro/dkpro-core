@@ -277,6 +277,21 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-fast.41</artifactId>
+				<version>20130730.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-twitter</artifactId>
+				<version>20130730.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-twitter-fast</artifactId>
+				<version>20130730.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-zh-distsim</artifactId>
 				<version>20130620.1</version>
 			</dependency>
