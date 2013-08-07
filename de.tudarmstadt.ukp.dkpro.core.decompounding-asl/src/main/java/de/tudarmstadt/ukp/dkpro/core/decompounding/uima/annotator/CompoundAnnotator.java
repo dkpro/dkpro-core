@@ -55,12 +55,22 @@ public class CompoundAnnotator
 extends JCasAnnotator_ImplBase
 {
 
-	// Splitting algorithm
+    /**
+    *
+    * This component allows the user to create different strategies for decompounding words,
+    * combining different splitting algorithms with different ranking algorithms. This external
+    * resource wraps the splitter algorithm which shall be used by the annotator.
+    *
+    * */
 	public static final String PARAM_SPLITTING_ALGO = "splittingAlgorithm";
 	@ExternalResource(key = PARAM_SPLITTING_ALGO)
 	private SplitterAlgorithm splitter;
 
-	// Ranking algorithm
+	/**
+	 *
+	 * This external resource wraps the ranking algorithm which shall be used by the annotator.
+	 *
+	 * */
 	public static final String PARAM_RANKING_ALGO = "rankingAlgorithm";
 	@ExternalResource(key = PARAM_RANKING_ALGO)
 	private Ranker ranker;
@@ -117,7 +127,7 @@ extends JCasAnnotator_ImplBase
 		}
 		final Split remainingSplit = new CompoundPart(aJCas, newBeginIndex, tokenEndIndex);
 		splitChildren.add(remainingSplit);
-		final FSArray childArray = (FSArray) FSCollectionFactory.createFSArray(aJCas, splitChildren);
+		final FSArray childArray = FSCollectionFactory.createFSArray(aJCas, splitChildren);
 		if (parentSplit == null) {
 			compound.setSplits(childArray);
 		}
