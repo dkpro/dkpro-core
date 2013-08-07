@@ -75,7 +75,7 @@ public class NounSemanticFieldAnnotator extends JCasAnnotator_ImplBase
 			for (NN nn : select(aJCas, NN.class)) {
 				for (Token token : JCasUtil.selectCovered(aJCas, Token.class, nn)) {
 					try {
-						String semanticField = nounSemanticFieldResource.getSemanticTag(token.getLemma().getValue());
+						String semanticField = nounSemanticFieldResource.getSemanticTag(token);
 						NamedEntity semanticFieldAnnotation = new NamedEntity(aJCas, token.getBegin(), token.getEnd());
 						semanticFieldAnnotation.setValue(semanticField);
 						semanticFieldAnnotation.addToIndexes();
