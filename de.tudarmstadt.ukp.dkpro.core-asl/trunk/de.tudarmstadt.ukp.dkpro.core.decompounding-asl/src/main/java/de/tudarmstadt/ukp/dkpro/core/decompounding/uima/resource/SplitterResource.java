@@ -31,12 +31,22 @@ public abstract class SplitterResource
     implements SplitterAlgorithm
 {
 
-    // Dictionary resource
+    /**
+     *
+     * This external resource wraps the dictionary which shall be used by the splitter.
+     *
+     * */
+
     public static final String PARAM_DICT_RESOURCE = "dictionaryResource";
     @ExternalResource(key = PARAM_DICT_RESOURCE)
     private SharedDictionary dictResource;
 
-    // Linking morphemes resource
+    /**
+     *
+     * This external resource wraps the morphemes list which shall be used by the splitter.
+     *
+     * */
+
     public static final String PARAM_MORPHEME_RESOURCE = "linkingMorphemeResource";
     @ExternalResource(key = PARAM_MORPHEME_RESOURCE)
     private SharedLinkingMorphemes morphemesResource;

@@ -31,7 +31,11 @@ public abstract class RankerResource
     implements Ranker
 {
 
-    // Finder resource
+    /**
+     *
+     * This external resource wraps the finder resource used by the ranker.
+     *
+     * */
     public static final String PARAM_FINDER_RESOURCE = "finderResource";
     @ExternalResource(key = PARAM_FINDER_RESOURCE)
     private SharedFinder finderResource;
