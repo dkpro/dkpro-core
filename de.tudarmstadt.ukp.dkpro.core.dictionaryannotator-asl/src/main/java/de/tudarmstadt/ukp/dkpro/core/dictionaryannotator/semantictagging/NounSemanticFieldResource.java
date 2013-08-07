@@ -30,6 +30,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 
 /**
@@ -76,10 +77,10 @@ public class NounSemanticFieldResource
 
 
 	@Override
-	public String getSemanticTag(String nounLemma) throws Exception {
+	public String getSemanticTag(Token token) throws Exception {
 
-		if (nounSemanticFieldMap.containsKey(nounLemma)) {
-			return nounSemanticFieldMap.get(nounLemma);
+		if (nounSemanticFieldMap.containsKey(token.getLemma().getValue())) {
+			return nounSemanticFieldMap.get(token.getLemma().getValue());
 		} else {
 			return "UNKNOWN"; 
 		}

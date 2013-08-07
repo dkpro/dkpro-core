@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+
 public interface SemanticTagProvider {
 
     /**
@@ -30,15 +32,15 @@ public interface SemanticTagProvider {
 
 	
     /**
-     * Get a semantic tag for the lemma of a token.
+     * Get a semantic tag for a token.
      *
-     * @param lemma
-     *            lemma to tag
+     * @param token
+     *            token to tag
      *            
-     * @return semantic tag of the lemma. Returns "UNKNOWN" if the lemma does not exist in the resource.
+     * @return semantic tag of the token. Returns "UNKNOWN" if the (lemma of the) token does not exist in the resource.
      * @throws Exception 
      */
 
-	public String getSemanticTag(String lemma) throws Exception;
+	public String getSemanticTag(Token token) throws Exception;
 
 }
