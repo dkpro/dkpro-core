@@ -40,7 +40,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
-			<artifactId>uimafit</artifactId>
+			<artifactId>uimafit-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
