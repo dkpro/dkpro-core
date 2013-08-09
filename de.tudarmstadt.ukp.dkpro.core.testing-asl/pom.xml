@@ -54,7 +54,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
-			<artifactId>uimafit</artifactId>
+			<artifactId>uimafit-core</artifactId>
 		</dependency>
 	</dependencies>
 	<name>DKPro Core ASL - Unit Testing Support</name>
