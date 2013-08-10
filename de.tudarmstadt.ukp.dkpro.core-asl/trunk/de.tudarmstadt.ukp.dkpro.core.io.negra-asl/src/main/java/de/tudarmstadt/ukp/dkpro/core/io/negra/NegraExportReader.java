@@ -348,7 +348,13 @@ public class NegraExportReader
     public boolean hasNext()
         throws IOException, CollectionException
     {
-        return readOriginId(true) != null;
+        if (br != null) {
+            return readOriginId(true) != null;
+        }
+        else {
+            // Has already been closed.
+            return false;
+        }
     }
 
     @Override
@@ -362,6 +368,7 @@ public class NegraExportReader
         throws IOException
     {
         closeQuietly(br);
+        br = null;
     }
 
     /**
