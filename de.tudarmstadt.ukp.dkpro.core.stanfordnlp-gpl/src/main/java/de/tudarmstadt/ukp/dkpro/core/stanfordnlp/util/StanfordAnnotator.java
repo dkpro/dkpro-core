@@ -328,7 +328,7 @@ public class StanfordAnnotator
      * @param aDependent
      *            the dependent-word
      */
-    public void createDependencyAnnotation(int aBegin, int aEnd, String aDependencyType,
+    public void createDependencyAnnotation(String aDependencyType,
             Token aGovernor, Token aDependent)
     {
         // create the necessary objects and methods
@@ -342,12 +342,12 @@ public class StanfordAnnotator
             // + dependencyType + "] is not defined in type system");
         }
 
-        Dependency dep = (Dependency) jCas.getCas().createAnnotation(type, aBegin, aEnd);
+        Dependency dep = (Dependency) jCas.getCas().createFS(type);
         dep.setDependencyType(aDependencyType);
         dep.setGovernor(aGovernor);
         dep.setDependent(aDependent);
-        dep.setBegin(dep.getGovernor().getBegin());
-        dep.setEnd(dep.getGovernor().getEnd());
+        dep.setBegin(dep.getDependent().getBegin());
+        dep.setEnd(dep.getDependent().getEnd());
         dep.addToIndexes();
     }
 

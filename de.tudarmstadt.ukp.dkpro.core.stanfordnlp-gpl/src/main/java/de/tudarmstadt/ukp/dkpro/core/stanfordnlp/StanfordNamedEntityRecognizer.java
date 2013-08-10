@@ -42,150 +42,152 @@ import edu.stanford.nlp.util.Triple;
 
 /**
  * Stanford Named Entity Recognizer component.
- *
+ * 
  * @author Richard Eckart de Castilho
  * @author Oliver Ferschke
  */
 public class StanfordNamedEntityRecognizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Log the tag set(s) when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
-	/**
-	 * Variant of a model the model. Used to address a specific model if here are multiple models
-	 * for one language.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Variant of a model the model. Used to address a specific model if here are multiple models
+     * for one language.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Location from which the model is read.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Location from which the model is read.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	/**
-	 * Location of the mapping file for named entity tags to UIMA types.
-	 */
-	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
-	protected String mappingLocation;
+    /**
+     * Location of the mapping file for named entity tags to UIMA types.
+     */
+    public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = ComponentParameters.PARAM_NAMED_ENTITY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
+    protected String mappingLocation;
 
-	private CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>> modelProvider;
-	private MappingProvider mappingProvider;
+    private CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>> modelProvider;
+    private MappingProvider mappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>>() {
-			{
-			    setContextObject(StanfordNamedEntityRecognizer.this);
+        modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>>()
+        {
+            {
+                setContextObject(StanfordNamedEntityRecognizer.this);
 
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-${language}-${variant}");
+                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
+                setDefault(ARTIFACT_ID,
+                        "de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-${language}-${variant}");
 
-				setDefaultVariantsLocation(
-						"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/" +
-						"ner-${language}-${variant}.properties");
+                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/"
+                        + "ner-${language}-${variant}.properties");
 
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
 
-			@Override
-			protected AbstractSequenceClassifier<? extends CoreMap> produceResource(URL aUrl) throws IOException
-			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					if (aUrl.toString().endsWith(".gz")) {
-						// it's faster to do the buffering _outside_ the gzipping as here
-						is = new GZIPInputStream(is);
-					}
+            @Override
+            protected AbstractSequenceClassifier<? extends CoreMap> produceResource(URL aUrl)
+                throws IOException
+            {
+                InputStream is = null;
+                try {
+                    is = aUrl.openStream();
+                    if (aUrl.toString().endsWith(".gz")) {
+                        // it's faster to do the buffering _outside_ the gzipping as here
+                        is = new GZIPInputStream(is);
+                    }
 
-					@SuppressWarnings("unchecked")
-					AbstractSequenceClassifier<? extends CoreMap> classifier = CRFClassifier.getClassifier(is);
+                    AbstractSequenceClassifier<? extends CoreMap> classifier = CRFClassifier
+                            .getClassifier(is);
 
-					if (printTagSet) {
-						StringBuilder sb = new StringBuilder();
-						sb.append("Model contains [").append(classifier.classIndex.size()).append("] tags: ");
+                    if (printTagSet) {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append("Model contains [").append(classifier.classIndex.size())
+                                .append("] tags: ");
 
-						List<String> tags = new ArrayList<String>();
-						for (String t : classifier.classIndex) {
-							tags.add(t);
-						}
+                        List<String> tags = new ArrayList<String>();
+                        for (String t : classifier.classIndex) {
+                            tags.add(t);
+                        }
 
-						Collections.sort(tags);
-						sb.append(StringUtils.join(tags, " "));
-						getContext().getLogger().log(INFO, sb.toString());
-					}
+                        Collections.sort(tags);
+                        sb.append(StringUtils.join(tags, " "));
+                        getContext().getLogger().log(INFO, sb.toString());
+                    }
 
-					return classifier;
-				}
-				catch (ClassNotFoundException e) {
-					throw new IOException(e);
-				}
-				finally {
-					closeQuietly(is);
-				}
-			}
-		};
+                    return classifier;
+                }
+                catch (ClassNotFoundException e) {
+                    throw new IOException(e);
+                }
+                finally {
+                    closeQuietly(is);
+                }
+            }
+        };
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefaultVariantsLocation(
-				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/stanfordnlp/lib/ner-${language}-${variant}.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
-		mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.setOverride(MappingProvider.VARIANT, variant);
-	}
+        mappingProvider = new MappingProvider();
+        mappingProvider
+                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
+                + "core/stanfordnlp/lib/ner-${language}-${variant}.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
+        mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        mappingProvider.setOverride(MappingProvider.VARIANT, variant);
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
-		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = aJCas.getCas();
+        modelProvider.configure(cas);
+        mappingProvider.configure(cas);
 
-		// get the document text
-		String documentText = cas.getDocumentText();
+        // get the document text
+        String documentText = cas.getDocumentText();
 
-		// test the string
-		List<Triple<String, Integer, Integer>> namedEntities = modelProvider.getResource()
-				.classifyToCharacterOffsets(documentText);
+        // test the string
+        List<Triple<String, Integer, Integer>> namedEntities = modelProvider.getResource()
+                .classifyToCharacterOffsets(documentText);
 
-		// get the named entities and their character offsets
-		for (Triple<String, Integer, Integer> namedEntity : namedEntities) {
-			int begin = namedEntity.second();
-			int end = namedEntity.third();
+        // get the named entities and their character offsets
+        for (Triple<String, Integer, Integer> namedEntity : namedEntities) {
+            int begin = namedEntity.second();
+            int end = namedEntity.third();
 
-			Type type = mappingProvider.getTagType(namedEntity.first());
-			NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
-			neAnno.setValue(namedEntity.first());
-			neAnno.addToIndexes();
-		}
-	}
+            Type type = mappingProvider.getTagType(namedEntity.first());
+            NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
+            neAnno.setValue(namedEntity.first());
+            neAnno.addToIndexes();
+        }
+    }
 }

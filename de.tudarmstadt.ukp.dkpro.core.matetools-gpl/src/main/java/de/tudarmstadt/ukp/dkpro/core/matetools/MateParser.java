@@ -202,11 +202,11 @@ public class MateParser
 					Token targetToken = tokens.get(i);
 
 					Dependency dep = new Dependency(jcas);
-					dep.setBegin(sourceToken.getBegin());
-					dep.setEnd(sourceToken.getEnd());
 					dep.setGovernor(sourceToken);
 					dep.setDependent(targetToken);
 					dep.setDependencyType(parsed.plabels[i]);
+                    dep.setBegin(dep.getDependent().getBegin());
+                    dep.setEnd(dep.getDependent().getEnd());
 					dep.addToIndexes();
 				}
 			}

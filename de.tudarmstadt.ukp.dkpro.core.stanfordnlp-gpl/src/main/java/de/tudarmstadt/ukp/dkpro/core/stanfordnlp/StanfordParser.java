@@ -404,7 +404,7 @@ public class StanfordParser
 
             // Create dependency annotations
             if (writeDependency && gsf != null) {
-                doCreateDependencyTags(sfAnnotator, currAnnotationToParse, parseTree, tokens);
+                doCreateDependencyTags(sfAnnotator, parseTree, tokens);
             }
 
             // Create constituent annotations
@@ -415,8 +415,8 @@ public class StanfordParser
         }
     }
 
-    protected void doCreateDependencyTags(StanfordAnnotator sfAnnotator,
-            Annotation currAnnotationToParse, Tree parseTree, List<Token> tokens)
+    protected void doCreateDependencyTags(StanfordAnnotator sfAnnotator, Tree parseTree,
+            List<Token> tokens)
     {
         GrammaticalStructure gs = gsf.newGrammaticalStructure(parseTree);
         Collection<TypedDependency> dependencies = null;
@@ -439,8 +439,7 @@ public class StanfordParser
                 String depRel = upperCaseDependencies ? currTypedDep.reln().getShortName()
                         .toUpperCase() : currTypedDep.reln().getShortName();
                 
-                sfAnnotator.createDependencyAnnotation(currAnnotationToParse.getBegin(),
-                        currAnnotationToParse.getEnd(), depRel, govToken, depToken);
+                sfAnnotator.createDependencyAnnotation(depRel, govToken, depToken);
             }
         }
     }
