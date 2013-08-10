@@ -11,9 +11,9 @@ import org.apache.uima.jcas.tcas.Annotation;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 
-/** 
- * Updated by JCasGen Mon Nov 22 18:23:21 CET 2010
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-primary/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.syntax/src/main/resources/desc/type/Dependency.xml
+/** A dependency relation between two tokens. The dependency annotation begin and end offsets correspond to those of the dependent.
+ * Updated by JCasGen Sat Aug 10 16:38:05 CEST 2013
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.syntax-asl/src/main/resources/desc/type/Dependency.xml
  * @generated */
 public class Dependency extends Annotation {
   /** @generated
@@ -29,7 +29,7 @@ public class Dependency extends Annotation {
  
   /** Never called.  Disable default constructor
    * @generated */
-  protected Dependency() {}
+  protected Dependency() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
    * @generated */
