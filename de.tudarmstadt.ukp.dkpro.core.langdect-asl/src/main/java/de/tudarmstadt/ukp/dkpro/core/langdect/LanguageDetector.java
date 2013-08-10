@@ -52,21 +52,21 @@ public class LanguageDetector
     /**
      * An array of external resources of frequency providers (one for each language that should be detected). 
      */
-    public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "FrequencyProviderResources";
+    public static final String PARAM_FREQUENCY_PROVIDER_RESOURCES = "frequencyProviders";
     @ExternalResource(key = PARAM_FREQUENCY_PROVIDER_RESOURCES, mandatory = true)
-    private FrequencyCountProvider[] providers;
+    private FrequencyCountProvider[] frequencyProviders;
 
     /**
      * The minimum n-gram size that should be considered. Default is 1. 
      */
-    public static final String PARAM_MIN_NGRAM_SIZE = "MinNGramSize";
+    public static final String PARAM_MIN_NGRAM_SIZE = "minNGramSize";
     @ConfigurationParameter(name = PARAM_MIN_NGRAM_SIZE, mandatory = true, defaultValue = "1")
     private int minNGramSize;
     
     /**
      * The maximum n-gram size that should be considered. Default is 3. 
      */
-    public static final String PARAM_MAX_NGRAM_SIZE = "MaxNGramSize";
+    public static final String PARAM_MAX_NGRAM_SIZE = "maxNGramSize";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_SIZE, mandatory = true, defaultValue = "3")
     private int maxNGramSize;
 
@@ -80,7 +80,7 @@ public class LanguageDetector
         
         providerMap = new HashMap<String,FrequencyCountProvider>();
         
-        for (FrequencyCountProvider provider : providers) {
+        for (FrequencyCountProvider provider : frequencyProviders) {
             try {
                 providerMap.put(provider.getLanguage(), provider);
             }
