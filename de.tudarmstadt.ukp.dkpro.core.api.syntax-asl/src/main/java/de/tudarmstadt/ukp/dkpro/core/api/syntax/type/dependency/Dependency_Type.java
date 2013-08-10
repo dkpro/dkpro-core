@@ -13,8 +13,8 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** 
- * Updated by JCasGen Mon Nov 22 18:23:21 CET 2010
+/** A dependency relation between two tokens. The dependency annotation begin and end offsets correspond to those of the dependent.
+ * Updated by JCasGen Sat Aug 10 16:38:05 CEST 2013
  * @generated */
 public class Dependency_Type extends Annotation_Type {
   /** @generated */
