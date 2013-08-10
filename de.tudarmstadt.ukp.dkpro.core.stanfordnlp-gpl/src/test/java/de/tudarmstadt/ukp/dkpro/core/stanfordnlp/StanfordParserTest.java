@@ -10,13 +10,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasBuilder;
@@ -199,6 +200,31 @@ public class StanfordParserTest
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
+    }
+
+    @Test
+    public void testEnglishPcfgUpperCaseDepTags()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "pcfg", documentEnglish, 
+                StanfordParser.PARAM_UPPER_CASE_DEPENDENCIES, true);
+
+        String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "RCMOD 35,43,51,59",
+                "DET 35,43,8,9", "POBJ 60,62,68,80", "POBJ 98,100,101,109", "DOBJ 3,7,35,43",
+                "AMOD 35,43,15,26", "AMOD 68,80,63,67", "NSUBJ 3,7,0,2", "NSUBJ 51,59,45,50",
+                "PREP 51,59,60,62", "PREP 51,59,98,100", "CC 68,80,81,84", "NN 35,43,27,34",
+                "CONJ 68,80,85,97" };
+
+        String[] depTags = new String[] { "ACOMP", "ADVCL", "ADVMOD", "AGENT", "AMOD", "APPOS",
+                "ARG", "ATTR", "AUX", "AUXPASS", "CC", "CCOMP", "COMP", "CONJ", "COP", "CSUBJ",
+                "CSUBJPASS", "DEP", "DET", "DISCOURSE", "DOBJ", "EXPL", "GOESWITH", "GOV",
+                "INFMOD", "IOBJ", "MARK", "MOD", "MWE", "NEG", "NN", "NPADVMOD", "NSUBJ",
+                "NSUBJPASS", "NUM", "NUMBER", "OBJ", "PARATAXIS", "PARTMOD", "PCOMP", "POBJ",
+                "POSS", "POSSESSIVE", "PRECONJ", "PRED", "PREDET", "PREP", "PRT", "PUNCT",
+                "QUANTMOD", "RCMOD", "REF", "REL", "SDEP", "SUBJ", "TMOD", "XCOMP", "XSUBJ" };
+
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
     }
 
@@ -484,30 +510,30 @@ public class StanfordParserTest
      * Setup CAS to test parser for the English language (is only called once if an English test is
      * run)
      */
-    private JCas runTest(String aLanguage, String aVariant, String aText)
+    private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
         throws Exception
     {
         AnalysisEngineDescription segmenter;
 
         if ("zh".equals(aLanguage)) {
-            segmenter = createPrimitiveDescription(LanguageToolSegmenter.class);
+            segmenter = createEngineDescription(LanguageToolSegmenter.class);
         }
         else {
-            segmenter = createPrimitiveDescription(StanfordSegmenter.class);
+            segmenter = createEngineDescription(StanfordSegmenter.class);
         }
-
         // setup English
-        AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
+        Object[] params = new Object[] {
                 StanfordParser.PARAM_VARIANT, aVariant,
                 StanfordParser.PARAM_PRINT_TAGSET, true,
                 StanfordParser.PARAM_WRITE_CONSTITUENT, true,
                 StanfordParser.PARAM_WRITE_DEPENDENCY, true,
                 StanfordParser.PARAM_WRITE_PENN_TREE, true,
-                StanfordParser.PARAM_WRITE_POS, true);
+                StanfordParser.PARAM_WRITE_POS, true};
+        params = ArrayUtils.addAll(params, aExtraParams);
+        AnalysisEngineDescription parser = createEngineDescription(StanfordParser.class, params);
 
-        AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
+        AnalysisEngine engine = createEngine(createEngineDescription(segmenter, parser));
 
-        AnalysisEngine engine = createPrimitive(aggregate);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(aLanguage);
         jcas.setDocumentText(aText);
@@ -524,12 +550,15 @@ public class StanfordParserTest
         throws Exception
     {
         // setup English
-        AnalysisEngineDescription parser = createPrimitiveDescription(StanfordParser.class,
-                StanfordParser.PARAM_VARIANT, aVariant, StanfordParser.PARAM_PRINT_TAGSET, true,
+        AnalysisEngineDescription parser = createEngineDescription(StanfordParser.class,
+                StanfordParser.PARAM_VARIANT, aVariant, 
+                StanfordParser.PARAM_PRINT_TAGSET, true,
                 StanfordParser.PARAM_WRITE_CONSTITUENT, true,
-                StanfordParser.PARAM_WRITE_DEPENDENCY, true, StanfordParser.PARAM_WRITE_PENN_TREE,
-                true, StanfordParser.PARAM_WRITE_POS, true, StanfordParser.PARAM_WRITE_PENN_TREE,
-                true, StanfordParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
+                StanfordParser.PARAM_WRITE_DEPENDENCY, true, 
+                StanfordParser.PARAM_WRITE_PENN_TREE, true, 
+                StanfordParser.PARAM_WRITE_POS, true, 
+                StanfordParser.PARAM_WRITE_PENN_TREE, true, 
+                StanfordParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
                 StanfordParser.PARAM_QUOTE_END, new String[] { "’" });
 
         AnalysisEngine engine = createPrimitive(parser);

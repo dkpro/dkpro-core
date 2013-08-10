@@ -38,7 +38,6 @@ import edu.stanford.nlp.ling.WordLemmaTag;
 import edu.stanford.nlp.ling.WordTag;
 import edu.stanford.nlp.process.Morphology;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
-import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.util.IntPair;
@@ -329,17 +328,11 @@ public class StanfordAnnotator
      * @param aDependent
      *            the dependent-word
      */
-    public void createDependencyAnnotation(int aBegin, int aEnd, GrammaticalRelation aGramRel,
+    public void createDependencyAnnotation(int aBegin, int aEnd, String aDependencyType,
             Token aGovernor, Token aDependent)
     {
-        String dependencyType = aGramRel.getShortName();
-
-        // if (dependencyType.equalsIgnoreCase("AUX")) {
-        // dependencyType = "AUX0";
-        // }
-
         // create the necessary objects and methods
-        String dependencyTypeName = DEPPACKAGE + dependencyType.toUpperCase();
+        String dependencyTypeName = DEPPACKAGE + aDependencyType.toUpperCase();
 
         Type type = jCas.getTypeSystem().getType(dependencyTypeName);
         if (type == null) {
@@ -350,7 +343,7 @@ public class StanfordAnnotator
         }
 
         Dependency dep = (Dependency) jCas.getCas().createAnnotation(type, aBegin, aEnd);
-        dep.setDependencyType(aGramRel.toString());
+        dep.setDependencyType(aDependencyType);
         dep.setGovernor(aGovernor);
         dep.setDependent(aDependent);
         dep.setBegin(dep.getGovernor().getBegin());
