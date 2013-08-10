@@ -10,7 +10,7 @@
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency</name>
-      <description/>
+      <description>A dependency relation between two tokens. The dependency annotation begin and end offsets correspond to those of the dependent.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
