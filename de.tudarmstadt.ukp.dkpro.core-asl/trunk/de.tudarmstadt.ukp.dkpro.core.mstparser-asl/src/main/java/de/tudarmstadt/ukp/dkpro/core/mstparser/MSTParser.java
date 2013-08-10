@@ -250,8 +250,8 @@ public class MSTParser
                 else {
                     dep.setGovernor(token);
                 }
-                dep.setBegin(dep.getGovernor().getBegin());
-                dep.setEnd(dep.getGovernor().getEnd());
+                dep.setBegin(dep.getDependent().getBegin());
+                dep.setEnd(dep.getDependent().getEnd());
                 dep.addToIndexes();
             }
         }

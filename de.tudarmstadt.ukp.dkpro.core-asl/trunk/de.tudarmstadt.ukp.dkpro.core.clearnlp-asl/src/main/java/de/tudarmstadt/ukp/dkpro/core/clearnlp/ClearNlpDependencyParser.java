@@ -222,8 +222,8 @@ public class ClearNlpDependencyParser
                     dep.setGovernor(tokens.get(node.getHead().id - 1));
                     dep.setDependent(tokens.get(node.id - 1));
                     dep.setDependencyType(node.getLabel());
-                    dep.setBegin(dep.getGovernor().getBegin());
-                    dep.setEnd(dep.getGovernor().getEnd());
+                    dep.setBegin(dep.getDependent().getBegin());
+                    dep.setEnd(dep.getDependent().getEnd());
                     dep.addToIndexes();
                 }
             }
