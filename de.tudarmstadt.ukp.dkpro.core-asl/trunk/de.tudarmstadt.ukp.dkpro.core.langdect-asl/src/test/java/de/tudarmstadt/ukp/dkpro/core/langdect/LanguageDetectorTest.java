@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.langdect;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.junit.Assert.assertEquals;
 
@@ -48,10 +48,10 @@ public class LanguageDetectorTest
         
         AnalysisEngine engine = createAggregate(
             createAggregateDescription(
-                createPrimitiveDescription(
+                createEngineDescription(
                         BreakIteratorSegmenter.class
                 ),
-                createPrimitiveDescription(
+                createEngineDescription(
                     LanguageDetector.class,
                     LanguageDetector.PARAM_FREQUENCY_PROVIDER_RESOURCES, 
                     Arrays.asList(
@@ -96,10 +96,10 @@ public class LanguageDetectorTest
 //        
 //        AnalysisEngine engine = createAggregate(
 //            createAggregateDescription(
-//                createPrimitiveDescription(
+//                createEngineDescription(
 //                        BreakIteratorSegmenter.class
 //                ),
-//                createPrimitiveDescription(
+//                createEngineDescription(
 //                    LanguageDetector.class,
 //                    LanguageDetector.PARAM_WEB1T_SOURCES, 
 //                    new String[] {

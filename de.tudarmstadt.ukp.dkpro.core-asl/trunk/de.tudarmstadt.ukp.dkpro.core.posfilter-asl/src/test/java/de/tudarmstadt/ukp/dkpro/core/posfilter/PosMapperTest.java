@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.File;
@@ -71,11 +71,11 @@ public class PosMapperTest
 		throws Exception
 	{
 		List<AnalysisEngineDescription> descs = new ArrayList<AnalysisEngineDescription>();
-		descs.add(createPrimitiveDescription(OpenNlpPosTagger.class,
+		descs.add(createEngineDescription(OpenNlpPosTagger.class,
 				OpenNlpPosTagger.PARAM_LANGUAGE, "en"));
 
 		if (mapToDifferentTagset) {
-			descs.add(createPrimitiveDescription(PosMapper.class, PosMapper.PARAM_MAPPING_FILE,
+			descs.add(createEngineDescription(PosMapper.class, PosMapper.PARAM_MAPPING_FILE,
 					new File(testBase, "ptb-to-dummy.map"), PosMapper.PARAM_DKPRO_MAPPING_LOCATION,
 					new File(testBase, "dummy-to-dkpro.map")));
 		}

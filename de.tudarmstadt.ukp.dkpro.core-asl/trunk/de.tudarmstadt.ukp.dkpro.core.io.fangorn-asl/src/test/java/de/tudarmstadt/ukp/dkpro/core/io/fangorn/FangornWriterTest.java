@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.fangorn;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -62,12 +62,12 @@ public class FangornWriterTest
 		meta.setCollectionId("dummyCollection");
 		meta.setDocumentId("dummyId");
 
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(OpenNlpSegmenter.class);
+		AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
 
-		AnalysisEngineDescription parser = createPrimitiveDescription(OpenNlpParser.class,
+		AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
 				OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(FangornWriter.class,
+		AnalysisEngineDescription writer = createEngineDescription(FangornWriter.class,
 				FangornWriter.PARAM_TARGET_LOCATION, outputFile);
 
 		SimplePipeline.runPipeline(jcas, segmenter, parser, writer);

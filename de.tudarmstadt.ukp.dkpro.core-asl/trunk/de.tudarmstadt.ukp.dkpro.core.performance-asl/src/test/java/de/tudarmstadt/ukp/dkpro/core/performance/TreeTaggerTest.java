@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,9 +40,9 @@ public class TreeTaggerTest
         new ThroughputTest().testAggregate(
                 ThroughputTest.getStandardReader("en"),
                 createAggregateDescription(
-                        createPrimitiveDescription(
+                        createEngineDescription(
                                 BreakIteratorSegmenter.class),
-                        createPrimitiveDescription(
+                        createEngineDescription(
                                 TreeTaggerPosLemmaTT4J.class)
                 )
         );

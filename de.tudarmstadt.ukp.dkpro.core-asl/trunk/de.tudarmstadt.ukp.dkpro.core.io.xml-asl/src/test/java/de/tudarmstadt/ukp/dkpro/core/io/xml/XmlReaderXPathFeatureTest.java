@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
@@ -45,7 +45,7 @@ public class XmlReaderXPathFeatureTest
 		);
 
 		// Should find one file
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/abbr_format_reading.txt"
 		);
@@ -66,7 +66,7 @@ public class XmlReaderXPathFeatureTest
 		);
 
 		// Should find one file
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/full_format_reading.txt"
 		);
@@ -87,7 +87,7 @@ public class XmlReaderXPathFeatureTest
 		);
 
 		// Should find one file
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 		        CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_reading.txt"
 		);
@@ -108,7 +108,7 @@ public class XmlReaderXPathFeatureTest
 		);
 
 		// Should find two files
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/recursive_reading.txt"
 		);
@@ -129,7 +129,7 @@ public class XmlReaderXPathFeatureTest
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/tag_filtering.txt"
 		);
@@ -151,7 +151,7 @@ public class XmlReaderXPathFeatureTest
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/substitution.txt"
 		);

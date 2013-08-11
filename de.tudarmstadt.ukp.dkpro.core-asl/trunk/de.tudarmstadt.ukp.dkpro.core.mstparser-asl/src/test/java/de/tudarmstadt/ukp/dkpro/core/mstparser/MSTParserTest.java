@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -71,9 +71,9 @@ public class MSTParserTest
 		throws Exception
 	{
 		AnalysisEngineDescription aggregate = createAggregateDescription(
-				createPrimitiveDescription(BreakIteratorSegmenter.class),
-				createPrimitiveDescription(OpenNlpPosTagger.class),
-				createPrimitiveDescription(MSTParser.class, MSTParser.PARAM_PRINT_TAGSET, true));
+				createEngineDescription(BreakIteratorSegmenter.class),
+				createEngineDescription(OpenNlpPosTagger.class),
+				createEngineDescription(MSTParser.class, MSTParser.PARAM_PRINT_TAGSET, true));
 
 		AnalysisEngine engine = createPrimitive(aggregate);
 		JCas jcas = engine.newJCas();

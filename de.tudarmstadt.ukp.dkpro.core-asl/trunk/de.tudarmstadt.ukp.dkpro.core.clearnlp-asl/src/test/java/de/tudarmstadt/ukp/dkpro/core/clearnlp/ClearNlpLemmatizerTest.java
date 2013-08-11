@@ -12,7 +12,7 @@ package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -64,9 +64,9 @@ public class ClearNlpLemmatizerTest
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription seg = createPrimitiveDescription(ClearNlpSegmenter.class);
-		AnalysisEngineDescription tagger = createPrimitiveDescription(ClearNlpPosTagger.class);
-		AnalysisEngineDescription lemma = createPrimitiveDescription(ClearNlpLemmatizer.class);
+		AnalysisEngineDescription seg = createEngineDescription(ClearNlpSegmenter.class);
+		AnalysisEngineDescription tagger = createEngineDescription(ClearNlpPosTagger.class);
+		AnalysisEngineDescription lemma = createEngineDescription(ClearNlpLemmatizer.class);
 
 		AnalysisEngineDescription aggregate = createAggregateDescription(seg, tagger, lemma);
 

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
@@ -30,7 +30,7 @@ class OpenNlpSegmenterTest
 	@Test
 	public void run() throws Throwable
 	{
-		AnalysisEngineDescription aed = createPrimitiveDescription(OpenNlpSegmenter.class);
+		AnalysisEngineDescription aed = createEngineDescription(OpenNlpSegmenter.class);
 
 		SegmenterHarness.run(aed, "de.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
 	}

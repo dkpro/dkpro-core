@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -84,7 +84,7 @@ public class NounSemanticFieldAnnotatorTest {
                
 		AnalysisEngineDescription processor = createAggregateDescription(
 
-				createPrimitiveDescription(NounSemanticFieldAnnotator.class,
+				createEngineDescription(NounSemanticFieldAnnotator.class,
 						NounSemanticFieldAnnotator.PARAM_NOUN_SEMANTIC_FIELD_RESOURCE, 
 							createExternalResourceDescription(NounSemanticFieldResource.class,
 									NounSemanticFieldResource.PARAM_RESOURCE_PATH, "src/test/resources/nounSemanticFieldMapTest.txt")

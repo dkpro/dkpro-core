@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class ColognePhoneticTranscriptorTest
     public void colognePhoneticTest() throws Exception {
 
         runTest(
-                createPrimitiveDescription(ColognePhoneticTranscriptor.class),
+                createEngineDescription(ColognePhoneticTranscriptor.class),
                 "Man sagt die Ente ist das Ende vom Mann .",
                 "66", "842", "2", "062", "082", "28", "062", "36", "66", ""
         );

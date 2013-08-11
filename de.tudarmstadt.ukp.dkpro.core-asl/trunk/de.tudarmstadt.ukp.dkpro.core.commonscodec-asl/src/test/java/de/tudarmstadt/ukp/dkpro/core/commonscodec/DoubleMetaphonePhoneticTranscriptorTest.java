@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class DoubleMetaphonePhoneticTranscriptorTest
     public void doubleMetaphoneTest() throws Exception {
 
         runTest(
-                createPrimitiveDescription(DoubleMetaphonePhoneticTranscriptor.class),
+                createEngineDescription(DoubleMetaphonePhoneticTranscriptor.class),
                 "The knight entered the store in the night .",
                 "0", "NT", "ANTR", "0", "STR", "AN", "0", "NT", ""
         );

@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
@@ -54,7 +54,7 @@ public class NegraExportReaderTest
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_READ_PENN_TREE, true);
 
-		AnalysisEngineDescription cdw = createPrimitiveDescription(CasDumpWriter.class,
+		AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
 
 		runPipeline(ner, cdw);
@@ -80,7 +80,7 @@ public class NegraExportReaderTest
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
                 NegraExportReader.PARAM_READ_PENN_TREE, true);
 
-		AnalysisEngineDescription cdw = createPrimitiveDescription(CasDumpWriter.class,
+		AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
 
 		runPipeline(ner, cdw);
@@ -106,7 +106,7 @@ public class NegraExportReaderTest
 				NegraExportReader.PARAM_ENCODING, "UTF-8",
                 NegraExportReader.PARAM_READ_PENN_TREE, true);
 
-		AnalysisEngineDescription cdw = createPrimitiveDescription(CasDumpWriter.class,
+		AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
 
 		runPipeline(ner, cdw);

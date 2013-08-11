@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
@@ -92,10 +92,10 @@ public class OpenNlpParserTest
 	private JCas runTest(String aLanguage, String aVariant, String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(OpenNlpSegmenter.class);
+		AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
 
 		// setup English
-		AnalysisEngineDescription parser = createPrimitiveDescription(OpenNlpParser.class,
+		AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
 				OpenNlpParser.PARAM_VARIANT, aVariant,
 				OpenNlpParser.PARAM_PRINT_TAGSET, true,
 				OpenNlpParser.PARAM_WRITE_PENN_TREE, true);

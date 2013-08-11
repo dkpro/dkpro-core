@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -47,11 +47,11 @@ public class PipelineExample
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
         );
 
-        AnalysisEngineDescription segmenter = createPrimitiveDescription(
+        AnalysisEngineDescription segmenter = createEngineDescription(
                 BreakIteratorSegmenter.class
         );
 
-        AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
+        AnalysisEngineDescription ngramWriter = createEngineDescription(
                 Web1TFormatWriter.class,
                 Web1TFormatWriter.PARAM_TARGET_LOCATION, "target/web1t/",
                 Web1TFormatWriter.PARAM_INPUT_TYPES, new String[] { Token.class.getName() },

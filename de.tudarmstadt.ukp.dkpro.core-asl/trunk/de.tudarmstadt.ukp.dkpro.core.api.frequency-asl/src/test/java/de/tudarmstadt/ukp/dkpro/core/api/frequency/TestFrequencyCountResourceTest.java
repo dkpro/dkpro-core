@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -54,7 +54,7 @@ public class TestFrequencyCountResourceTest
 
     @Test
     public void configureAggregatedExample() throws Exception {
-        AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class,
+        AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
         		Annotator.FREQUENCY_COUNT_RESOURCE, createExternalResourceDescription(
         				TestFrequencyCountResource.class,
                         TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"));

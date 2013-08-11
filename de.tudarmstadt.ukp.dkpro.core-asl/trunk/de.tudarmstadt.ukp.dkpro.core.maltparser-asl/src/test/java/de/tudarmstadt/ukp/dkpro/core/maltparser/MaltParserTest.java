@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -186,11 +186,11 @@ public class MaltParserTest
 		throws Exception
 	{
 		AnalysisEngineDescription engine = createAggregateDescription(
-				createPrimitiveDescription(OpenNlpPosTagger.class),
-				createPrimitiveDescription(MaltParser.class,
+				createEngineDescription(OpenNlpPosTagger.class),
+				createEngineDescription(MaltParser.class,
 						MaltParser.PARAM_VARIANT, aVariant,
 						MaltParser.PARAM_PRINT_TAGSET, true),
-				createPrimitiveDescription(DependencyDumper.class));
+				createEngineDescription(DependencyDumper.class));
 
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}
