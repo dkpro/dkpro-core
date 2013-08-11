@@ -139,7 +139,7 @@ public class ClearNlpDependencyParser
                             for (String label : model.getLabels()) {
                                 String[] fields = label.split("_");
                                 if (fields.length == 3) {
-                                    depTags.add(fields[2].toUpperCase());
+                                    depTags.add(fields[2]);
                                 }
                                 // else {
                                 // getContext().getLogger().log(WARNING,
