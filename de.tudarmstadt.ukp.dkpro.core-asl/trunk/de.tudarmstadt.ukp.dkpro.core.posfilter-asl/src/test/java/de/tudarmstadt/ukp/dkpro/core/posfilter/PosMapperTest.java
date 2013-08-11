@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -80,7 +80,7 @@ public class PosMapperTest
 					new File(testBase, "dummy-to-dkpro.map")));
 		}
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(descs
+		AnalysisEngineDescription aggregate = createEngineDescription(descs
 				.toArray(new AnalysisEngineDescription[0]));
 		JCas jcas = TestRunner.runTest(aggregate, language, testDocument);
 

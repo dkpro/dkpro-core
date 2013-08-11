@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -74,7 +74,7 @@ public class ClearNlpSemanticRoleLabelerTest
 	private JCas runTest(String aLanguage, String aVariant, String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription engine = createAggregateDescription(
+		AnalysisEngineDescription engine = createEngineDescription(
 				createEngineDescription(OpenNlpPosTagger.class),
 				createEngineDescription(ClearNlpLemmatizer.class),
 				createEngineDescription(ClearNlpDependencyParser.class),

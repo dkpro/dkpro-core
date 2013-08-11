@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.junit.Assert.assertEquals;
@@ -59,7 +59,7 @@ public class TfidfConsumerTest {
                 PARAM_PATH, CONSUMER_TEST_DATA_PATH,
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
 
-        AnalysisEngineDescription aggregate = createAggregateDescription(
+        AnalysisEngineDescription aggregate = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
                 createEngineDescription(TfidfConsumer.class,
                     TfidfConsumer.PARAM_FEATURE_PATH, de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token.class.getName(),

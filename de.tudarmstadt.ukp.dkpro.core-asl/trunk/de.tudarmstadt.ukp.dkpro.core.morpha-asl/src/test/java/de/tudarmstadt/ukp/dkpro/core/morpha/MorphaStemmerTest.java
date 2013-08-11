@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.morpha;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -68,12 +68,12 @@ public class MorphaStemmerTest
         AnalysisEngineDescription engine;
         
         if (aUsePosTags) {
-            engine = createAggregateDescription(
+            engine = createEngineDescription(
                     createEngineDescription(OpenNlpPosTagger.class),
                     createEngineDescription(MorphaStemmer.class));
         }
         else {
-            engine = createAggregateDescription(
+            engine = createEngineDescription(
                     createEngineDescription(MorphaStemmer.class));
         }
 

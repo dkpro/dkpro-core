@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
@@ -82,7 +82,7 @@ public class NounSemanticFieldAnnotatorTest {
 			String[] documentNounSemanticFields) throws UIMAException {
 
                
-		AnalysisEngineDescription processor = createAggregateDescription(
+		AnalysisEngineDescription processor = createEngineDescription(
 
 				createEngineDescription(NounSemanticFieldAnnotator.class,
 						NounSemanticFieldAnnotator.PARAM_NOUN_SEMANTIC_FIELD_RESOURCE, 
