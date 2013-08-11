@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.mstparser;
 import static java.util.Arrays.asList;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+import static org.apache.uima.util.Level.INFO;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,7 +28,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -168,11 +168,8 @@ public class MSTParser
                     depTags.addAll(asList(pipe.types));
                     addTagset(depTags);
                     
-                    
                     if (printTagSet) {
-                        List<String> tags = new ArrayList<String>(asList(pipe.types));
-                        Collections.sort(tags);
-                        getLogger().info(tags);
+                        getContext().getLogger().log(INFO, getTagset().toString());
                     }
                 }
                 catch (Exception e) {
