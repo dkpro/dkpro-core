@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -40,7 +40,7 @@ public class DictionaryAnnotatorTest
 	@Test
 	public void test() throws Exception
 	{
-		AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
+		AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
 				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
 
@@ -57,7 +57,7 @@ public class DictionaryAnnotatorTest
 	@Test
 	public void testWithValue() throws Exception
 	{
-		AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
+		AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
 				DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 				DictionaryAnnotator.PARAM_VALUE, "PERSON",
 				DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
@@ -77,7 +77,7 @@ public class DictionaryAnnotatorTest
 	public void testWithWrongType() throws Exception
 	{
 		try {
-			AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
+			AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
 					DictionaryAnnotator.PARAM_ANNOTATION_TYPE, "lala",
 					DictionaryAnnotator.PARAM_VALUE, "PERSON",
 					DictionaryAnnotator.PARAM_MODEL_LOCATION, "src/test/resources/persons.txt");
@@ -98,7 +98,7 @@ public class DictionaryAnnotatorTest
 	public void testWithWrongValueFeature() throws Exception
 	{
 		try {
-			AnalysisEngine ae = createPrimitive(DictionaryAnnotator.class,
+			AnalysisEngine ae = createEngine(DictionaryAnnotator.class,
 					DictionaryAnnotator.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 					DictionaryAnnotator.PARAM_VALUE_FEATURE, "lala",
 					DictionaryAnnotator.PARAM_VALUE, "PERSON",

@@ -60,7 +60,7 @@ public class XmiWriterReaderTest
 				},
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
-		AnalysisEngine xmiWriter = AnalysisEngineFactory.createPrimitive(
+		AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(
 				XmiWriter.class,
 				XmiWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 

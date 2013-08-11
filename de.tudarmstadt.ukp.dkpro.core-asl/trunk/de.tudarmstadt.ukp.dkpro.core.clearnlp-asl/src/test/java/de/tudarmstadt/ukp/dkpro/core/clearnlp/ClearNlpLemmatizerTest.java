@@ -11,7 +11,7 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -70,7 +70,7 @@ public class ClearNlpLemmatizerTest
 
 		AnalysisEngineDescription aggregate = createEngineDescription(seg, tagger, lemma);
 
-		AnalysisEngine engine = createPrimitive(aggregate);
+		AnalysisEngine engine = createEngine(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);

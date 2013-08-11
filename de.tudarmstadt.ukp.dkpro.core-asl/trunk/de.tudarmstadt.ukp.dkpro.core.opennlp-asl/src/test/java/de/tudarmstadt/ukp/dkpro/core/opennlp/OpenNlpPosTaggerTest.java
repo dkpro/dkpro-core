@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -80,7 +80,7 @@ public class OpenNlpPosTaggerTest
 			String[] tagClasses)
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(OpenNlpPosTagger.class,
+		AnalysisEngine engine = createEngine(OpenNlpPosTagger.class,
 				OpenNlpPosTagger.PARAM_VARIANT, variant,
 				OpenNlpPosTagger.PARAM_PRINT_TAGSET, true);
 

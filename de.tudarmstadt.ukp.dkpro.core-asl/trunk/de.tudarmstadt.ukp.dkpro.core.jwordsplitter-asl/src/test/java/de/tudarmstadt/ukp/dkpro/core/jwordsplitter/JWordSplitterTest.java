@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.jwordsplitter;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertTrue;
@@ -36,7 +36,7 @@ public class JWordSplitterTest
 	@BeforeClass
 	public static void setup() throws Exception
 	{
-		ae = createPrimitive(JWordSplitter.class, createTypeSystemDescription(),
+		ae = createEngine(JWordSplitter.class, createTypeSystemDescription(),
 				JWordSplitter.PARAM_DELETE_COVER, false);
 	}
 

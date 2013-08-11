@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.apache.commons.lang.StringUtils.repeat;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -242,7 +242,7 @@ class TreeTaggerPosLemmaTT4JTest
 		String[] tags       = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
 		String[] tagClasses = new String[] { "ART",  "V",   "ART", "NN",   "PUNC" };
 
-        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class);
 
         HideOutput hideOut = new HideOutput();
 		try {
@@ -291,7 +291,7 @@ class TreeTaggerPosLemmaTT4JTest
 	{
 		checkModelsAndBinary(language);
 
-        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class,
+        AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class,
         		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
@@ -314,7 +314,7 @@ class TreeTaggerPosLemmaTT4JTest
 	{
     	checkModelsAndBinary("en");
 
-        AnalysisEngine engine = createPrimitive(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class);
         JCas jcas = engine.newJCas();
 
 		try {
@@ -362,11 +362,11 @@ class TreeTaggerPosLemmaTT4JTest
 //				FileSystemReader.PARAM_INPUTDIR, getTestResource(
 //						"test_files/annotator/TreeTaggerPosLemmaTT4J/strange"));
 //
-//		AnalysisEngine sentenceSplitter = createPrimitive(
+//		AnalysisEngine sentenceSplitter = createEngine(
 //				BreakIteratorSegmenter.class,
 //				tsd);
 //
-//		AnalysisEngine tt = createPrimitive(TreeTaggerPosLemmaTT4J.class, tsd,
+//		AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
 //				TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en");
 //
 //		runPipeline(reader, sentenceSplitter, tt);
@@ -386,11 +386,11 @@ class TreeTaggerPosLemmaTT4JTest
 //				FileSystemReader.PARAM_INPUTDIR, getTestResource(
 //						"test_files/annotator/TreeTaggerPosLemmaTT4J/strange"));
 //
-//		AnalysisEngine sentenceSplitter = createPrimitive(
+//		AnalysisEngine sentenceSplitter = createEngine(
 //				BreakIteratorSegmenter.class,
 //				tsd);
 //
-//		AnalysisEngine tt = createPrimitive(TreeTaggerPosLemmaTT4J.class, tsd,
+//		AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
 //				TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en",
 //				TreeTaggerTT4JBase.PARAM_PERFORMANCE_MODE, true);
 //
@@ -417,11 +417,11 @@ class TreeTaggerPosLemmaTT4JTest
 //				FileSystemReader.PARAM_INPUTDIR, getTestResource(
 //						"test_files/annotator/TreeTaggerPosLemmaTT4J/multiDoc"));
 //
-//		AnalysisEngine sentenceSplitter = createPrimitive(
+//		AnalysisEngine sentenceSplitter = createEngine(
 //				BreakIteratorSegmenter.class,
 //				tsd);
 //
-//		AnalysisEngine tt = createPrimitive(TreeTaggerPosLemmaTT4J.class, tsd,
+//		AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class, tsd,
 //				TreeTaggerTT4JBase.PARAM_LANGUAGE_CODE, "en");
 //
 //		runPipeline(

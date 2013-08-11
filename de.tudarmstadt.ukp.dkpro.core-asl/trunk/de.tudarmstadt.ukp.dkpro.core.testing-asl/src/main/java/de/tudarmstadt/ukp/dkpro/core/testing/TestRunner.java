@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -42,7 +42,7 @@ public class TestRunner
 	 */
 	public static JCas runTest(AnalysisEngineDescription aEngine, String aLanguage, String aDocument) throws UIMAException
 	{
-		return runTest(createPrimitive(aEngine), aLanguage, aDocument);
+		return runTest(createEngine(aEngine), aLanguage, aDocument);
 	}
 
 	/**

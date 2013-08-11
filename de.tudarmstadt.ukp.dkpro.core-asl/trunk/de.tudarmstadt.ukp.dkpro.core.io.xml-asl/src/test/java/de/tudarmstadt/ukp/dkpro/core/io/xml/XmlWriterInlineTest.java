@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -41,7 +41,7 @@ public class XmlWriterInlineTest
 	{
 		String testDocument = "This is a test.";
 
-		AnalysisEngine consumer = createPrimitive(XmlWriterInline.class,
+		AnalysisEngine consumer = createEngine(XmlWriterInline.class,
 				XmlWriterInline.PARAM_TARGET_LOCATION, workspace.getRoot().getPath(),
 				XmlWriterInline.PARAM_STRIP_EXTENSION, true);
 

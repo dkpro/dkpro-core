@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.bananasplit;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertTrue;
@@ -36,7 +36,7 @@ public class BananaSplitterTest
 	@BeforeClass
 	public static void setup() throws Exception
 	{
-		ae = createPrimitive(BananaSplitter.class, createTypeSystemDescription(),
+		ae = createEngine(BananaSplitter.class, createTypeSystemDescription(),
 				BananaSplitter.PARAM_DELETE_COVER, false,
 				BananaSplitter.PARAM_MODEL_LOCATION, "classpath:/dict.xml");
 	}

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mecab;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
@@ -61,7 +61,7 @@ public class MeCabTaggerTest {
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]test*.txt" });
 
-        AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
+        AnalysisEngine jTagger = createEngine(MeCabTagger.class);
         try {
             Collection<Sentence> sentences = null;
             Iterator<JCas> iterator = new JCasIterable(reader).iterator();

@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -123,7 +123,7 @@ public class TextReaderTest
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
-        AnalysisEngine writer = createPrimitive(XWriter.class,
+        AnalysisEngine writer = createEngine(XWriter.class,
         		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
 
 		for (JCas jcas : new JCasIterable(reader)) {
@@ -156,7 +156,7 @@ public class TextReaderTest
                 ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
-        AnalysisEngine writer = createPrimitive(XWriter.class,
+        AnalysisEngine writer = createEngine(XWriter.class,
         		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
 
         for (JCas jcas : new JCasIterable(reader)) {
@@ -188,7 +188,7 @@ public class TextReaderTest
                 ResourceCollectionReaderBase.PARAM_PATH, "classpath:texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
-        AnalysisEngine writer = createPrimitive(XWriter.class,
+        AnalysisEngine writer = createEngine(XWriter.class,
         		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
 
         for (JCas jcas : new JCasIterable(reader)) {

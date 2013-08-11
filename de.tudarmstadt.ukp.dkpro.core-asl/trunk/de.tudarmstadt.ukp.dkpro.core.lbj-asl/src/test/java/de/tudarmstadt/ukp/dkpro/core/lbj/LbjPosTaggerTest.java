@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.lbj;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -54,7 +54,7 @@ public class LbjPosTaggerTest
             String[] tagClasses)
         throws Exception
     {
-        AnalysisEngine engine = createPrimitive(LbjPosTagger.class);
+        AnalysisEngine engine = createEngine(LbjPosTagger.class);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 

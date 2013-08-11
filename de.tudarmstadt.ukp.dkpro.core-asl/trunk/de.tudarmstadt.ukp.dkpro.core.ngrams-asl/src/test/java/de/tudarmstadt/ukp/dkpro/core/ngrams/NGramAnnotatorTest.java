@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.ngrams;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertTrue;
 
@@ -38,7 +38,7 @@ class NGramAnnotatorTest
     void ngramAnnotatorTest()
     throws Exception
     {
-		AnalysisEngine ae = createPrimitive(NGramAnnotator.class);
+		AnalysisEngine ae = createEngine(NGramAnnotator.class);
         JCas jcas = ae.newJCas();
 
         JCasBuilder jb = new JCasBuilder(jcas);

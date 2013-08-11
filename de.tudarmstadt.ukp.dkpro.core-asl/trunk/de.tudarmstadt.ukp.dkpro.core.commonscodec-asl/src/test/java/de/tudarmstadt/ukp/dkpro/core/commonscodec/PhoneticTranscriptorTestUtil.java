@@ -17,7 +17,7 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -34,7 +34,7 @@ public class PhoneticTranscriptorTestUtil
 {
     public static void runTest(AnalysisEngineDescription desc, String text, String ... goldTranscriptions) throws Exception {
 
-        AnalysisEngine engine = createPrimitive(desc);
+        AnalysisEngine engine = createEngine(desc);
         JCas jcas = engine.newJCas();
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class, Sentence.class);
         tb.buildTokens(jcas, text);

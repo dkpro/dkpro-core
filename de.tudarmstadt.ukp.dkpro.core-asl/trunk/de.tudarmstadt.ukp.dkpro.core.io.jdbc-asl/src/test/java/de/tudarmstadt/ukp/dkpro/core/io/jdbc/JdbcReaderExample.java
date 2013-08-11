@@ -47,7 +47,7 @@ public class JdbcReaderExample
                 JdbcReader.PARAM_PASSWORD, "",
                 JdbcReader.PARAM_QUERY, query);
 
-        AnalysisEngine extractor = AnalysisEngineFactory.createPrimitive(CasDumpWriter.class,
+        AnalysisEngine extractor = AnalysisEngineFactory.createEngine(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, "-");
 
         SimplePipeline.runPipeline(pdfReader, extractor);

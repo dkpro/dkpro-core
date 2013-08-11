@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
@@ -102,7 +102,7 @@ public class OpenNlpParserTest
 
 		AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
 
-		AnalysisEngine engine = createPrimitive(aggregate);
+		AnalysisEngine engine = createEngine(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);

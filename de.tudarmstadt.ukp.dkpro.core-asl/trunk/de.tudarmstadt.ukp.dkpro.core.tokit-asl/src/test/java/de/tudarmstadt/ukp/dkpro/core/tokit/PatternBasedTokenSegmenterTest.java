@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
@@ -41,7 +41,7 @@ public class PatternBasedTokenSegmenterTest
 	public void testProcess()
 		throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(PatternBasedTokenSegmenter.class,
+		AnalysisEngine seg = createEngine(PatternBasedTokenSegmenter.class,
 				PatternBasedTokenSegmenter.PARAM_PATTERNS, PATTERNS);
 
 		// 01234567890123456789012345
@@ -63,7 +63,7 @@ public class PatternBasedTokenSegmenterTest
 	public void testProcess2()
 		throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(PatternBasedTokenSegmenter.class,
+		AnalysisEngine seg = createEngine(PatternBasedTokenSegmenter.class,
 				PatternBasedTokenSegmenter.PARAM_PATTERNS, PATTERNS);
 
 		// 0123456789012345678901234567
@@ -85,7 +85,7 @@ public class PatternBasedTokenSegmenterTest
 	public void testProcess3()
 		throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(PatternBasedTokenSegmenter.class,
+		AnalysisEngine seg = createEngine(PatternBasedTokenSegmenter.class,
 				PatternBasedTokenSegmenter.PARAM_PATTERNS, PATTERNS);
 
 		// 012345
@@ -106,7 +106,7 @@ public class PatternBasedTokenSegmenterTest
 	public void testProcess4()
 		throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(PatternBasedTokenSegmenter.class,
+		AnalysisEngine seg = createEngine(PatternBasedTokenSegmenter.class,
 				PatternBasedTokenSegmenter.PARAM_PATTERNS, PATTERNS);
 
 		// 0123456789012345
@@ -127,7 +127,7 @@ public class PatternBasedTokenSegmenterTest
 	public void testProcess5()
 		throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(PatternBasedTokenSegmenter.class,
+		AnalysisEngine seg = createEngine(PatternBasedTokenSegmenter.class,
 				PatternBasedTokenSegmenter.PARAM_PATTERNS, PATTERNS);
 
 		// 012345
@@ -148,7 +148,7 @@ public class PatternBasedTokenSegmenterTest
 	public void testProcess6()
 		throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(PatternBasedTokenSegmenter.class,
+		AnalysisEngine seg = createEngine(PatternBasedTokenSegmenter.class,
 				PatternBasedTokenSegmenter.PARAM_PATTERNS, PATTERNS);
 
 		// 012345

@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
@@ -131,7 +131,7 @@ public class PennTreeUtilsTest
 
         AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
 
-        AnalysisEngine engine = createPrimitive(aggregate);
+        AnalysisEngine engine = createEngine(aggregate);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(aLanguage);
         jcas.setDocumentText(aText);

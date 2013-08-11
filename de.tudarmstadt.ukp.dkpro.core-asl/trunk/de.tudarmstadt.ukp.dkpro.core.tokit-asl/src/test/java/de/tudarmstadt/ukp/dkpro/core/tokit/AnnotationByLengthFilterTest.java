@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
@@ -42,7 +42,7 @@ public class AnnotationByLengthFilterTest
     public void testMin()
         throws Exception
     {
-        AnalysisEngine filter = createPrimitive(
+        AnalysisEngine filter = createEngine(
                 AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName()},
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 5);
@@ -60,7 +60,7 @@ public class AnnotationByLengthFilterTest
 	public void testMax()
 		throws Exception
 	{
-		AnalysisEngine filter = createPrimitive(
+		AnalysisEngine filter = createEngine(
 		        AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName()},
 				AnnotationByLengthFilter.PARAM_MAX_LENGTH, 5);
@@ -78,7 +78,7 @@ public class AnnotationByLengthFilterTest
     public void testMinMax()
         throws Exception
     {
-        AnalysisEngine filter = createPrimitive(
+        AnalysisEngine filter = createEngine(
                 AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName()},
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 3,
@@ -97,7 +97,7 @@ public class AnnotationByLengthFilterTest
     public void testMinMaxTokenStem()
         throws Exception
     {
-        AnalysisEngine filter = createPrimitive(
+        AnalysisEngine filter = createEngine(
                 AnnotationByLengthFilter.class,
                 AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName(), Stem.class.getName()},
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 3,

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -58,7 +58,7 @@ public class LanguageToolLemmatizerTest
 	private void runTest(String language, String testDocument, String[] aLemma)
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(LanguageToolLemmatizer.class);
+		AnalysisEngine engine = createEngine(LanguageToolLemmatizer.class);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
 

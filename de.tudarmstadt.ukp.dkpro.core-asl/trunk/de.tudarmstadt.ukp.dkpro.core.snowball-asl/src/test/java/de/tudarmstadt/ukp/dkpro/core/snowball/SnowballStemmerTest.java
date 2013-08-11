@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.snowball;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertTrue;
 
@@ -35,7 +35,7 @@ public class SnowballStemmerTest
 	public void testGerman()
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(SnowballStemmer.class);
+		AnalysisEngine engine = createEngine(SnowballStemmer.class);
 
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage("de");
@@ -59,7 +59,7 @@ public class SnowballStemmerTest
 	public void testEnglish()
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(SnowballStemmer.class);
+		AnalysisEngine engine = createEngine(SnowballStemmer.class);
 
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage("en");
@@ -94,7 +94,7 @@ public class SnowballStemmerTest
 	public void testEnglishCaseInsensitive()
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(SnowballStemmer.class,
+		AnalysisEngine engine = createEngine(SnowballStemmer.class,
 				SnowballStemmer.PARAM_LOWER_CASE, true);
 
 		JCas jcas = engine.newJCas();
@@ -123,7 +123,7 @@ public class SnowballStemmerTest
 	public void testEnglishCaseSensitive()
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(SnowballStemmer.class,
+		AnalysisEngine engine = createEngine(SnowballStemmer.class,
 				SnowballStemmer.PARAM_LOWER_CASE, false);
 
 		JCas jcas = engine.newJCas();
