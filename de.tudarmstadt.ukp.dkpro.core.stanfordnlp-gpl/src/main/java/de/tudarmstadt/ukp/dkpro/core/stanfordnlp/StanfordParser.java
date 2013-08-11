@@ -121,15 +121,6 @@ public class StanfordParser
     private boolean writeDependency;
 
     /**
-     * Stanford dependency relations are lower-case but other parsers user upper-case categories. 
-     * This parameter can be used to upper-case relation names.<br/>
-     * Default: {@code false}
-     */
-    public static final String PARAM_UPPER_CASE_DEPENDENCIES = "upperCaseDependencies";
-    @ConfigurationParameter(name = PARAM_UPPER_CASE_DEPENDENCIES, mandatory = true, defaultValue = "false")
-    private boolean upperCaseDependencies;
-
-    /**
      * Sets whether to create or not to create collapsed dependencies. <br/>
      * Default: {@code false}
      */
@@ -436,8 +427,7 @@ public class StanfordParser
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
-                String depRel = upperCaseDependencies ? currTypedDep.reln().getShortName()
-                        .toUpperCase() : currTypedDep.reln().getShortName();
+                String depRel = currTypedDep.reln().getShortName();
                 
                 sfAnnotator.createDependencyAnnotation(depRel, govToken, depToken);
             }
@@ -569,16 +559,14 @@ public class StanfordParser
                 if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, null);
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
-                        depTags.add(upperCaseDependencies ? r.getShortName().toUpperCase() : r
-                                .getShortName());
+                        depTags.add(r.getShortName());
                     }
                     addTagset(depTags, writeDependency);
                 }
                 else if (gsf != null && ChineseGrammaticalRelations.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, null);
                     for (GrammaticalRelation r : ChineseGrammaticalRelations.values()) {
-                        depTags.add(upperCaseDependencies ? r.getShortName().toUpperCase() : r
-                                .getShortName());
+                        depTags.add(r.getShortName());
                     }
                     addTagset(depTags, writeDependency);
                 }
