@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -74,7 +74,7 @@ public class PosFilterTest
 		posFilterParams.addAll(asList(PosFilter.PARAM_TYPE_TO_REMOVE, Token.class.getName()));
 		posFilterParams.addAll(asList(aExtraParams));
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(
+		AnalysisEngineDescription aggregate = createEngineDescription(
 				createEngineDescription(OpenNlpPosTagger.class),
 				createEngineDescription(PosFilter.class,
 						posFilterParams.toArray(new Object[posFilterParams.size()])));

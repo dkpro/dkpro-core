@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -72,7 +72,7 @@ public class GermanSeparatedParticleAnnotatorTest
 			String[] documentPosTags, String[] lemmatizedDocument) throws UIMAException
 	{
 
-		AnalysisEngineDescription processor = createAggregateDescription(
+		AnalysisEngineDescription processor = createEngineDescription(
 
 				createEngineDescription(GermanSeparatedParticleAnnotator.class)
 		);

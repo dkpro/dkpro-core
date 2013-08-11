@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
@@ -70,7 +70,7 @@ public class MSTParserTest
 	private JCas runTestEnglish(String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription aggregate = createAggregateDescription(
+		AnalysisEngineDescription aggregate = createEngineDescription(
 				createEngineDescription(BreakIteratorSegmenter.class),
 				createEngineDescription(OpenNlpPosTagger.class),
 				createEngineDescription(MSTParser.class, MSTParser.PARAM_PRINT_TAGSET, true));

@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
@@ -46,7 +46,7 @@ public class ThroughputTest {
         AnalysisEngineDescription startTimerDesc = getTimerAED(false);
         AnalysisEngineDescription endTimerDesc   = getTimerAED(true);
 
-        AnalysisEngineDescription timerAggregate = createAggregateDescription(
+        AnalysisEngineDescription timerAggregate = createEngineDescription(
                 startTimerDesc,
                 aggr,
                 endTimerDesc

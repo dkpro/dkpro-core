@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
@@ -129,7 +129,7 @@ public class PennTreeUtilsTest
                 OpenNlpParser.PARAM_PRINT_TAGSET, true,
                 OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
-        AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
+        AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
 
         AnalysisEngine engine = createPrimitive(aggregate);
         JCas jcas = engine.newJCas();
