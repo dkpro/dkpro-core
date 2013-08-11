@@ -17,7 +17,7 @@
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -42,7 +42,7 @@ public class TuebadzToImsCwbPipeline
 	public void convert()
 		throws Exception
 	{
-		CollectionReader ner = createCollectionReader(
+		CollectionReader ner = createReader(
 				NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, inputFile,
 				NegraExportReader.PARAM_LANGUAGE, "de",

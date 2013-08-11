@@ -52,7 +52,7 @@ public class XmiWriterReaderTest
 
 	public void write() throws Exception
 	{
-		CollectionReader textReader = CollectionReaderFactory.createCollectionReader(
+		CollectionReader textReader = CollectionReaderFactory.createReader(
 				TextReader.class,
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
@@ -71,7 +71,7 @@ public class XmiWriterReaderTest
 
 	public void read() throws Exception
 	{
-		CollectionReader xmiReader = CollectionReaderFactory.createCollectionReader(
+		CollectionReader xmiReader = CollectionReaderFactory.createReader(
 				XmiReader.class,
 				ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {

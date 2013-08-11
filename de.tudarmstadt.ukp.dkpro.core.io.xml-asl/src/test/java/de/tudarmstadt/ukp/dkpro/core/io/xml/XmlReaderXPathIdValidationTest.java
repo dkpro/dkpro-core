@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class XmlReaderXPathIdValidationTest
 	@Test
 	public void idValidationTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
@@ -61,7 +61,7 @@ public class XmlReaderXPathIdValidationTest
 	@Test
 	public void heteroFormatsIdValidationTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
@@ -83,7 +83,7 @@ public class XmlReaderXPathIdValidationTest
 	@Test
 	public void attributeIdTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]attribute_id.xml" },
@@ -103,7 +103,7 @@ public class XmlReaderXPathIdValidationTest
 	@Test
 	public void deepTagIdTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]deep_tag_id.xml" },
@@ -123,7 +123,7 @@ public class XmlReaderXPathIdValidationTest
 	@Test
 	public void deepAttributeIdTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]deep_attribute_id.xml" },
@@ -145,7 +145,7 @@ public class XmlReaderXPathIdValidationTest
 	@Test(expected = IllegalArgumentException.class)
 	public void invalidSubstitutionParameterTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]*.*" },
@@ -168,7 +168,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		// Doc contains ID tag but no value is provided within the tag.
 		// E.g. <num></num>
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]empty_id.xml" },
@@ -190,7 +190,7 @@ public class XmlReaderXPathIdValidationTest
 	public void noIdTagTest() throws UIMAException, IOException
 	{
 		// Doc doesn't contain ID tag at all
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]no_id_tag.xml" },
@@ -218,7 +218,7 @@ public class XmlReaderXPathIdValidationTest
 		//        <title>.....
 		//        ...
 		//      </top>
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]duplicated_id_tags.xml" },

@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class XmlReaderXPathFeatureTest
 	@Test
 	public void abbreviatedFormatTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.xml" },
@@ -57,7 +57,7 @@ public class XmlReaderXPathFeatureTest
 	@Test
 	public void fullFormatTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml" },
@@ -78,7 +78,7 @@ public class XmlReaderXPathFeatureTest
 	@Test
 	public void heteroFormatsTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
@@ -99,7 +99,7 @@ public class XmlReaderXPathFeatureTest
 	@Test
 	public void recursiveReadingTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
@@ -120,7 +120,7 @@ public class XmlReaderXPathFeatureTest
 	@Test
 	public void tagFilteringTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
@@ -141,7 +141,7 @@ public class XmlReaderXPathFeatureTest
 	@Test
 	public void substitutionTest() throws UIMAException, IOException
 	{
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
 				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },

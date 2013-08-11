@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -39,7 +39,7 @@ public class ResourceCollectionReaderBaseTest
 	@Test
 	public void testClasspath() throws Exception
 	{
-		CollectionReader reader = createCollectionReader(DummyReader.class, createTypeSystemDescription(),
+		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "classpath*:/de/tudarmstadt/ukp/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
@@ -51,7 +51,7 @@ public class ResourceCollectionReaderBaseTest
 	@Test
 	public void testZip() throws Exception
 	{
-		CollectionReader reader = createCollectionReader(DummyReader.class, createTypeSystemDescription(),
+		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "jar:file:src/test/resources/testfiles.zip!",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
@@ -64,7 +64,7 @@ public class ResourceCollectionReaderBaseTest
 	@Test
 	public void testRemoteZip() throws Exception
 	{
-		CollectionReader reader = createCollectionReader(DummyReader.class, createTypeSystemDescription(),
+		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "jar:http://search.maven.org/remotecontent?filepath=org/annolab/tt4j/org.annolab.tt4j/1.0.16/org.annolab.tt4j-1.0.16.jar!",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
@@ -76,7 +76,7 @@ public class ResourceCollectionReaderBaseTest
 	@Test
 	public void testFile() throws Exception
 	{
-		CollectionReader reader = createCollectionReader(DummyReader.class, createTypeSystemDescription(),
+		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
 				ResourceCollectionReaderBase.PARAM_PATH, "file:src/main/java/de/tudarmstadt/ukp/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.java",

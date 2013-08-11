@@ -356,7 +356,7 @@ class TreeTaggerPosLemmaTT4JTest
 //    void testStrangeDocument()
 //    throws Exception
 //    {
-//		CollectionReader reader = createCollectionReader(
+//		CollectionReader reader = createReader(
 //				FileSystemReader.class,
 //				createTypeSystemDescription(),
 //				FileSystemReader.PARAM_INPUTDIR, getTestResource(
@@ -380,7 +380,7 @@ class TreeTaggerPosLemmaTT4JTest
 //    void testStrangeDocumentFail()
 //    throws Exception
 //    {
-//		CollectionReader reader = createCollectionReader(
+//		CollectionReader reader = createReader(
 //				FileSystemReader.class,
 //				createTypeSystemDescription(),
 //				FileSystemReader.PARAM_INPUTDIR, getTestResource(
@@ -411,7 +411,7 @@ class TreeTaggerPosLemmaTT4JTest
 //    void testRealMultiDocument()
 //    throws Exception
 //    {
-//		CollectionReader reader = createCollectionReader(
+//		CollectionReader reader = createReader(
 //				FileSystemReader.class,
 //				createTypeSystemDescription(),
 //				FileSystemReader.PARAM_INPUTDIR, getTestResource(

@@ -17,7 +17,7 @@
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -47,7 +47,7 @@ public class ImsCwbWriterTest
 	public void test1()
 		throws Exception
 	{
-		CollectionReader ner = createCollectionReader(
+		CollectionReader ner = createReader(
 				NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
@@ -80,7 +80,7 @@ public class ImsCwbWriterTest
 	public void test1a()
 		throws Exception
 	{
-		CollectionReader ner = createCollectionReader(
+		CollectionReader ner = createReader(
 				BncReader.class,
 				BncReader.PARAM_PATH, "src/test/resources",
 				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
@@ -109,7 +109,7 @@ public class ImsCwbWriterTest
 	public void test2()
 		throws Exception
 	{
-		CollectionReader ner = createCollectionReader(
+		CollectionReader ner = createReader(
 				NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",

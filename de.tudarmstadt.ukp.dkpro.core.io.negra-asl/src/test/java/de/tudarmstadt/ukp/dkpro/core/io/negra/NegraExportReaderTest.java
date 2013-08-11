@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -49,7 +49,7 @@ public class NegraExportReaderTest
 		File referenceDump = new File("src/test/resources/sentence.export.dump");
 
 		// create NegraExportReader output
-		CollectionReader ner = createCollectionReader(NegraExportReader.class,
+		CollectionReader ner = createReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, new File("src/test/resources/sentence.export"),
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_READ_PENN_TREE, true);
@@ -74,7 +74,7 @@ public class NegraExportReaderTest
 		File referenceDump = new File("src/test/resources/tiger-sample.export.dump");
 
 		// create NegraExportReader output
-		CollectionReader ner = createCollectionReader(NegraExportReader.class,
+		CollectionReader ner = createReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tiger-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
@@ -100,7 +100,7 @@ public class NegraExportReaderTest
 		File referenceDump = new File("src/test/resources/tueba-sample.export.dump");
 
 		// create NegraExportReader output
-		CollectionReader ner = createCollectionReader(NegraExportReader.class,
+		CollectionReader ner = createReader(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8",
