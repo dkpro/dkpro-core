@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
 import static org.junit.Assert.assertEquals;
 
@@ -40,7 +40,7 @@ public class BncReaderTest
 				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
 				BncReader.PARAM_LANGUAGE, "en");
 
-		AnalysisEngineDescription casDumper = createPrimitiveDescription(CasDumpWriter.class,
+		AnalysisEngineDescription casDumper = createEngineDescription(CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/FX8.dump");
 
 		SimplePipeline.runPipeline(reader, casDumper);

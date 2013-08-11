@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.annis;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
 import static org.junit.Assert.assertEquals;
 
@@ -49,7 +49,7 @@ public class RelAnnisWriterTest
 //				NegraExportReader.PARAM_READ_PENN_TREE, false,
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(RelAnnisWriter.class,
+		AnalysisEngineDescription writer = createEngineDescription(RelAnnisWriter.class,
 				RelAnnisWriter.PARAM_PATH, workspace.getRoot().getPath());
 
 		SimplePipeline.runPipeline(reader, writer);

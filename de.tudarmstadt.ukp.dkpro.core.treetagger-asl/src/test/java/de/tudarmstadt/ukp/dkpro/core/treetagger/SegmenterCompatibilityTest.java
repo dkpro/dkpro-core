@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -49,8 +49,8 @@ class SegmenterCompatibilityTest
     	checkModelsAndBinary("en");
 
 	    AnalysisEngineDescription desc = createAggregateDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class)
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(TreeTaggerPosLemmaTT4J.class)
         );
         AnalysisEngine engine = createPrimitive(desc);
 

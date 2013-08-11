@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xml;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
@@ -49,7 +49,7 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		// Should find two files
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/id_validation.txt"
 		);
@@ -71,7 +71,7 @@ public class XmlReaderXPathIdValidationTest
 		);
 
 		// Should find two files
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/hetero_formats_id_validation.txt"
 		);
@@ -91,7 +91,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "@num"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/attribute_id.txt"
 		);
@@ -111,7 +111,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "EN-title/num"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/deep_tag_id.txt"
 		);
@@ -131,7 +131,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "EN-title/@num"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/deep_attribute_id.txt"
 		);
@@ -154,7 +154,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/invalid_subst_param.txt"
 		);
@@ -177,7 +177,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/empty_id.txt"
 		);
@@ -199,7 +199,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/no_id_tag.txt"
 		);
@@ -227,7 +227,7 @@ public class XmlReaderXPathIdValidationTest
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 
-		AnalysisEngineDescription writer = createPrimitiveDescription(
+		AnalysisEngineDescription writer = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/output/duplicated_id_tags.txt"
 		);

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.umlautnormalizer;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -37,9 +37,9 @@ public class UmlautNormalizerTest
         throws Exception
     {
         AggregateBuilder builder = new AggregateBuilder();
-        builder.add(createPrimitiveDescription(BreakIteratorSegmenter.class));
-        builder.add(createPrimitiveDescription(UmlautNormalizer.class));
-        builder.add(createPrimitiveDescription(ApplyChangesAnnotator.class), "source",
+        builder.add(createEngineDescription(BreakIteratorSegmenter.class));
+        builder.add(createEngineDescription(UmlautNormalizer.class));
+        builder.add(createEngineDescription(ApplyChangesAnnotator.class), "source",
                 "_InitialView", "target", "umlaut_cleaned");
 
         AnalysisEngine engine = builder.createAggregate();

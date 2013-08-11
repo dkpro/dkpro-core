@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class ThroughputTest {
     private AnalysisEngineDescription getTimerAED(boolean isFinalTimer)
         throws ResourceInitializationException
     {
-        return createPrimitiveDescription(
+        return createEngineDescription(
                 ThroughputTestAE.class,
                 ThroughputTestAE.PARAM_IS_DOWNSTREAM_TIMER, isFinalTimer
         );

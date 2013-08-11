@@ -17,7 +17,7 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.annotator;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -75,7 +75,7 @@ public class CompoundAnnotatorTest
 
     @Test
     public void testWithDefaults() throws CASException, UIMAException {
-        AnalysisEngineDescription aed = createPrimitiveDescription(
+        AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
                 CompoundAnnotator.PARAM_SPLITTING_ALGO,
                 createExternalResourceDescription(

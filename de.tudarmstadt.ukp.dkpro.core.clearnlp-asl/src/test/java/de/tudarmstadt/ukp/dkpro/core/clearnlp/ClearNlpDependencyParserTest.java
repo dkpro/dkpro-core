@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -78,12 +78,12 @@ public class ClearNlpDependencyParserTest
 			throws Exception
 	{
 		AnalysisEngineDescription engine = createAggregateDescription(
-				createPrimitiveDescription(OpenNlpPosTagger.class),
-				createPrimitiveDescription(ClearNlpLemmatizer.class),
-				createPrimitiveDescription(ClearNlpDependencyParser.class,
+				createEngineDescription(OpenNlpPosTagger.class),
+				createEngineDescription(ClearNlpLemmatizer.class),
+				createEngineDescription(ClearNlpDependencyParser.class,
 						ClearNlpDependencyParser.PARAM_VARIANT, aVariant,
 						ClearNlpDependencyParser.PARAM_PRINT_TAGSET, true),
-				createPrimitiveDescription(DependencyDumper.class));
+				createEngineDescription(DependencyDumper.class));
 
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}

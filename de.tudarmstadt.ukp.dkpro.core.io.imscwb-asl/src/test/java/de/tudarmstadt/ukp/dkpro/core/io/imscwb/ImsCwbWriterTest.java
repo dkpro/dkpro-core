@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
@@ -53,15 +53,15 @@ public class ImsCwbWriterTest
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
-		AnalysisEngineDescription tag = createPrimitiveDescription(
+		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription tw = createPrimitiveDescription(
+		AnalysisEngineDescription tw = createEngineDescription(
 				ImsCwbWriter.class,
 				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
 
-		AnalysisEngineDescription cdw = createPrimitiveDescription(
+		AnalysisEngineDescription cdw = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
 
@@ -86,12 +86,12 @@ public class ImsCwbWriterTest
 				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
 				BncReader.PARAM_LANGUAGE, "en");
 
-		AnalysisEngineDescription tw = createPrimitiveDescription(
+		AnalysisEngineDescription tw = createEngineDescription(
 				ImsCwbWriter.class,
 				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
 
-		AnalysisEngineDescription cdw = createPrimitiveDescription(
+		AnalysisEngineDescription cdw = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
 
@@ -115,10 +115,10 @@ public class ImsCwbWriterTest
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
-		AnalysisEngineDescription tag = createPrimitiveDescription(
+		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription tw = createPrimitiveDescription(
+		AnalysisEngineDescription tw = createEngineDescription(
 				ImsCwbWriter.class,
 				ImsCwbWriter.PARAM_TARGET_LOCATION, "target/cqbformat",
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",

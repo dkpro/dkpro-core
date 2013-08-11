@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.UIMAException;
@@ -74,7 +74,7 @@ public class GermanSeparatedParticleAnnotatorTest
 
 		AnalysisEngineDescription processor = createAggregateDescription(
 
-				createPrimitiveDescription(GermanSeparatedParticleAnnotator.class)
+				createEngineDescription(GermanSeparatedParticleAnnotator.class)
 		);
 
 		AnalysisEngine engine = createPrimitive(processor);

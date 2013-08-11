@@ -71,8 +71,8 @@ public class TfidfAnnotatorTest
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
 
         AnalysisEngineDescription aggregate = createEngineDescription(
-                createPrimitiveDescription(BreakIteratorSegmenter.class),
-                createPrimitiveDescription(
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(
                         TfidfConsumer.class,
                         TfidfConsumer.PARAM_FEATURE_PATH, Token.class.getName(),
                         TfidfConsumer.PARAM_OUTPUT_PATH,  OUTPUT_PATH));

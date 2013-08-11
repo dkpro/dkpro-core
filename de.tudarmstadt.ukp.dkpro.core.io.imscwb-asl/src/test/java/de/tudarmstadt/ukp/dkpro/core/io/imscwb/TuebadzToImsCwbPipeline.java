@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 
@@ -48,10 +48,10 @@ public class TuebadzToImsCwbPipeline
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-1");
 
-		AnalysisEngineDescription tag = createPrimitiveDescription(
+		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription tw = createPrimitiveDescription(
+		AnalysisEngineDescription tw = createEngineDescription(
 				ImsCwbWriter.class,
 				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");

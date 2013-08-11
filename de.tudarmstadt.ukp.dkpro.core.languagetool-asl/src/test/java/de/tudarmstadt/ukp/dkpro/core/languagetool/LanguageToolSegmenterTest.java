@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class LanguageToolSegmenterTest
 	@Test
 	public void run() throws Throwable
 	{
-		AnalysisEngineDescription aed = createPrimitiveDescription(LanguageToolSegmenter.class);
+		AnalysisEngineDescription aed = createEngineDescription(LanguageToolSegmenter.class);
 
 		SegmenterHarness.run(aed, "de.1", "en.1", "en.3", "en.6", "en.7", "en.9", "ar.1", "zh.2");
 	}

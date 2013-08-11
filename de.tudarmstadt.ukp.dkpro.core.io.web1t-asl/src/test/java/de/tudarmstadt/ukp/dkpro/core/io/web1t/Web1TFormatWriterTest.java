@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 import static org.junit.Assert.assertEquals;
 
@@ -126,13 +126,13 @@ public class Web1TFormatWriterTest {
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
+		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
 
-        AnalysisEngineDescription lemmatizer = createPrimitiveDescription(ClearNlpLemmatizer.class);
+        AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
-		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
+		AnalysisEngineDescription ngramWriter = createEngineDescription(
 				Web1TFormatWriter.class,
 				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
 				Web1TFormatWriter.PARAM_INPUT_TYPES, strings,
@@ -168,13 +168,13 @@ public class Web1TFormatWriterTest {
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
-		AnalysisEngineDescription segmenter = createPrimitiveDescription(BreakIteratorSegmenter.class);
+		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(ClearNlpLemmatizer.class);
+		AnalysisEngineDescription lemmatizer = createEngineDescription(ClearNlpLemmatizer.class);
 
-		AnalysisEngineDescription ngramWriter = createPrimitiveDescription(
+		AnalysisEngineDescription ngramWriter = createEngineDescription(
 				Web1TFormatWriter.class,
 				Web1TFormatWriter.PARAM_TARGET_LOCATION, INDEX_FOLDER.getAbsolutePath(),
 				Web1TFormatWriter.PARAM_INPUT_TYPES, inputPath,

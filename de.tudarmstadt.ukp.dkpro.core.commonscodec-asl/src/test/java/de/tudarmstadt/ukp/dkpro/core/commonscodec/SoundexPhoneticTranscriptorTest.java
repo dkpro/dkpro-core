@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.commonscodec;
 
 import static de.tudarmstadt.ukp.dkpro.core.commonscodec.PhoneticTranscriptorTestUtil.runTest;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class SoundexPhoneticTranscriptorTest
     public void soundexTest() throws Exception {
 
         runTest(
-                createPrimitiveDescription(SoundexPhoneticTranscriptor.class),
+                createEngineDescription(SoundexPhoneticTranscriptor.class),
                 "The knight entered the store in the night .",
                 "T000", "K523", "E536", "T000", "S360", "I500", "T000", "N230", ""
         );

@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -48,7 +48,7 @@ public class Web1tInMemoryResourceTest
 
     @Test
     public void configureAggregatedExample() throws Exception {
-        AnalysisEngineDescription desc = createPrimitiveDescription(Annotator.class,
+        AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
         		Annotator.MODEL_KEY, createExternalResourceDescription(
         				Web1TInMemoryFrequencyCountResource.class,
                         Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION, "src/test/resources/web1t/",
