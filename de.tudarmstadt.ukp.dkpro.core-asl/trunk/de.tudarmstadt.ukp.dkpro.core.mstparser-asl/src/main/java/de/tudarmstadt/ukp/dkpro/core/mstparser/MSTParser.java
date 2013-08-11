@@ -29,6 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 import mstparser.DependencyInstance;
 import mstparser.DependencyPipe;
@@ -45,8 +46,9 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -54,9 +56,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
  * Wrapper for the MSTParser. More information about the parser can be found <a
- * href=http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html>here<\a><br>
+ * href=http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html>here</a><br>
  * and<br>
- * and <a href="http://sourceforge.net/projects/mstparser/">here<\a><br>
+ * and <a href="http://sourceforge.net/projects/mstparser/">here</a><br>
  *
  * @author beinborn
  * @author zesch
@@ -101,7 +103,7 @@ public class MSTParser
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
-    private CasConfigurableProviderBase<UKPDependencyParser> modelProvider;
+    private ModelProviderBase<UKPDependencyParser> modelProvider;
 
     /**
      * Initializes the MSTParser and creates a ModelResourceProvicer
@@ -118,19 +120,16 @@ public class MSTParser
         super.initialize(context);
 
         // the modelProvider reads in the model and produces a parser
-        modelProvider = new CasConfigurableProviderBase<UKPDependencyParser>()
+        modelProvider = new ModelProviderBase<UKPDependencyParser>()
         {
             {
                 setContextObject(MSTParser.this);
 
-                setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-                setDefault(ARTIFACT_ID,
-                        "de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-${language}-${variant}");
+                setDefault(ARTIFACT_ID, "${groupId}.mstparser-model-parser-${language}-${variant}");
 
                 setDefault(LANGUAGE, "en");
                 setDefault(VARIANT, "default");
-                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/mstparser/lib/"
-                        + "parser-${language}-${variant}.bin");
+                setDefault(LOCATION, "classpath:${package}/lib/parser-${language}-${variant}.bin");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
@@ -163,6 +162,13 @@ public class MSTParser
                     dp.loadModel(options.modelName);
                     getLogger().info("... done.");
 
+                    Properties metadata = getResourceMetaData();
+                    SingletonTagset depTags = new SingletonTagset(
+                            Dependency.class, metadata.getProperty("dependency.tagset"));
+                    depTags.addAll(asList(pipe.types));
+                    addTagset(depTags);
+                    
+                    
                     if (printTagSet) {
                         List<String> tags = new ArrayList<String>(asList(pipe.types));
                         Collections.sort(tags);

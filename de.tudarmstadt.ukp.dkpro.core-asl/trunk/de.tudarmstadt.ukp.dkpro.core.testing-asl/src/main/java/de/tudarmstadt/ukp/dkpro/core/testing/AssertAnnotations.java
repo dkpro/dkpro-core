@@ -23,6 +23,7 @@ import static org.apache.commons.lang.StringUtils.normalizeSpace;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -195,10 +196,10 @@ public class AssertAnnotations
             i++;
         }
 
-        List<String> sortedExpectedOriginal = aExpectedOriginal != null ? 
-                deduplicateAndSort(asList(aExpectedOriginal)) : null;
-        List<String> sortedExpectedMapped = aExpectedMapped != null ? 
-                deduplicateAndSort(asList(aExpectedMapped)) : null;
+        List<String> sortedExpectedOriginal = aExpectedOriginal != null ? deduplicateAndSort(asList(aExpectedOriginal))
+                : null;
+        List<String> sortedExpectedMapped = aExpectedMapped != null ? deduplicateAndSort(asList(aExpectedMapped))
+                : null;
         List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
         List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
@@ -277,8 +278,8 @@ public class AssertAnnotations
 
         for (Constituent a : aActual) {
             if (a.getSyntacticFunction() != null) {
-                actualTagsList.add(String.format("%s %d,%d", a.getSyntacticFunction(), a.getBegin(),
-                    a.getEnd()));
+                actualTagsList.add(String.format("%s %d,%d", a.getSyntacticFunction(),
+                        a.getBegin(), a.getEnd()));
             }
         }
 
@@ -299,6 +300,7 @@ public class AssertAnnotations
                     asCopyableString(sortedActualOriginal, true));
         }
     }
+
     public static <T extends Comparable<T>> List<T> deduplicateAndSort(Collection<T> aCollection)
     {
         if (aCollection == null) {
@@ -316,10 +318,15 @@ public class AssertAnnotations
         List<String> expected = new ArrayList<String>(asList(aExpected));
         List<String> actual = new ArrayList<String>();
 
+        boolean offsetCorrect = true;
         for (Dependency a : aActual) {
-            actual.add(String.format("%s %d,%d,%d,%d", a.getDependencyType().toUpperCase(), a
-                    .getGovernor().getBegin(), a.getGovernor().getEnd(), a.getDependent()
-                    .getBegin(), a.getDependent().getEnd()));
+            actual.add(String.format("%s(%s)[%d,%d] D(%s)[%d,%d] G(%s)[%d,%d]", a.getClass()
+                    .getSimpleName(), a.getDependencyType(), a.getBegin(), a.getEnd(), a
+                    .getDependent().getCoveredText(), a.getDependent().getBegin(), a.getDependent()
+                    .getEnd(), a.getGovernor().getCoveredText(), a.getGovernor().getBegin(), a
+                    .getGovernor().getEnd()));
+            offsetCorrect &= (a.getBegin() == a.getDependent().getBegin())
+                    && (a.getEnd() == a.getDependent().getEnd());
         }
 
         Collections.sort(actual);
@@ -329,6 +336,7 @@ public class AssertAnnotations
         System.out.printf("%-20s - Actual  : %s%n", "Dependencies", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+        assertTrue("Dependency offsets must match dependent offsets", offsetCorrect);
     }
 
     public static void assertPennTree(String aExpected, PennTree aActual)
@@ -421,18 +429,18 @@ public class AssertAnnotations
                 + "]");
     }
 
-    public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped, JCas aJCas)
+    public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped,
+            JCas aJCas)
     {
         MappingProvider mp = new MappingProvider();
-        mp.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
+        mp.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
+                + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         mp.setDefault("pos.tagset", aName);
         mp.configure(aJCas.getCas());
 
         Map<String, String> mapping = mp.getResource();
-        Assert.assertNotNull("No mapping found for layer [" + aLayer.getName()
-                + "] tagset [" + aName + "]", mapping);
-
+        Assert.assertNotNull("No mapping found for layer [" + aLayer.getName() + "] tagset ["
+                + aName + "]", mapping);
 
         List<String> expected = new ArrayList<String>(asList(aDefaultMapped));
         Collections.sort(expected);
@@ -463,8 +471,10 @@ public class AssertAnnotations
 
                 System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
-                System.out.printf("%-20s - Expected: %s%n", "Unmapped tags", asCopyableString(expected));
-                System.out.printf("%-20s - Actual  : %s%n", "Unmapped tags", asCopyableString(actual));
+                System.out.printf("%-20s - Expected: %s%n", "Unmapped tags",
+                        asCopyableString(expected));
+                System.out.printf("%-20s - Actual  : %s%n", "Unmapped tags",
+                        asCopyableString(actual));
 
                 assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
                 return;

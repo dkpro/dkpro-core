@@ -36,7 +36,8 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
  */
 public class MSTParserTest
 {
-	static final String documentEnglish = "This is an easy example sentence";
+	static final String documentEnglish = "We need a very complicated example sentence , which " +
+            "contains as many constituents and dependencies as possible .";
 
 	/**
 	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
@@ -51,8 +52,25 @@ public class MSTParserTest
 	{
 		JCas jcas = runTestEnglish(documentEnglish);
 
-		String[] dependencies = new String[] { "NP-SBJ 5,7,0,4", "ROOT 5,7,5,7", "DEP 24,32,8,10",
-				"DEP 24,32,11,15", "DEP 24,32,16,23", "NP-PRD 5,7,24,32" };
+		String[] dependencies = new String[] { 
+		        "Dependency(ADJP)[102,110] D(possible)[102,110] G(as)[99,101]",
+		        "Dependency(DEP)[10,14] D(very)[10,14] G(complicated)[15,26]",
+		        "Dependency(DEP)[111,112] D(.)[111,112] G(need)[3,7]",
+		        "Dependency(DEP)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+		        "Dependency(DEP)[27,34] D(example)[27,34] G(sentence)[35,43]",
+		        "Dependency(DEP)[44,45] D(,)[44,45] G(need)[3,7]",
+		        "Dependency(DEP)[64,68] D(many)[64,68] G(constituents)[69,81]",
+		        "Dependency(DEP)[8,9] D(a)[8,9] G(sentence)[35,43]",
+		        "Dependency(DEP)[82,85] D(and)[82,85] G(dependencies)[86,98]",
+		        "Dependency(NP)[69,81] D(constituents)[69,81] G(as)[61,63]",
+		        "Dependency(NP)[86,98] D(dependencies)[86,98] G(as)[61,63]",
+		        "Dependency(NP-OBJ)[35,43] D(sentence)[35,43] G(need)[3,7]",
+		        "Dependency(NP-SBJ)[0,2] D(We)[0,2] G(need)[3,7]",
+		        "Dependency(PP)[61,63] D(as)[61,63] G(contains)[52,60]",
+		        "Dependency(PP)[99,101] D(as)[99,101] G(dependencies)[86,98]",
+		        "Dependency(ROOT)[3,7] D(need)[3,7] G(need)[3,7]",
+		        "Dependency(S)[52,60] D(contains)[52,60] G(which)[46,51]",
+		        "Dependency(SBAR)[46,51] D(which)[46,51] G(need)[3,7]"};
 
 		AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
 
