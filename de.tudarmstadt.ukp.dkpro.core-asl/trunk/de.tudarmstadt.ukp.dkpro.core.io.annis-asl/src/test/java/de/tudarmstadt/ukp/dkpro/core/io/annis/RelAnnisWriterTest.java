@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.annis;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -43,7 +43,7 @@ public class RelAnnisWriterTest
 		throws Exception
 	{
 		// create NegraExportReader output
-		CollectionReaderDescription reader = createDescription(NegraExportReader.class,
+		CollectionReaderDescription reader = createReaderDescription(NegraExportReader.class,
 				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba/input/tueba-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 //				NegraExportReader.PARAM_READ_PENN_TREE, false,

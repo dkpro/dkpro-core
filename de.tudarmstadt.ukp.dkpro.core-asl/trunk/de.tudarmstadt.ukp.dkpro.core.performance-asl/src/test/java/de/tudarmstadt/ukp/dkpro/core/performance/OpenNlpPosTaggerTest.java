@@ -18,8 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-
 import org.junit.Ignore;
 import org.junit.Test;
 

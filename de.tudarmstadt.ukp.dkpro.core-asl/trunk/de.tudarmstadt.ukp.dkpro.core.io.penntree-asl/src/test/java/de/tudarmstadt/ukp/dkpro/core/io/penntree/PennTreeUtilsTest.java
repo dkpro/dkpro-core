@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
 

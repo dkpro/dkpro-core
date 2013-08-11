@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -35,7 +35,7 @@ public class BncReaderTest
 	@Test
 	public void test() throws Exception
 	{
-		CollectionReaderDescription reader = createDescription(BncReader.class,
+		CollectionReaderDescription reader = createReaderDescription(BncReader.class,
 				BncReader.PARAM_PATH, "src/test/resources",
 				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
 				BncReader.PARAM_LANGUAGE, "en");
