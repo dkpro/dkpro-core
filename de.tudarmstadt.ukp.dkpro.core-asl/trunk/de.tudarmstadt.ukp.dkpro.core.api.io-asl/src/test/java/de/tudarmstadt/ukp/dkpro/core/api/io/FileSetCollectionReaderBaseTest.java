@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.junit.Assert.assertTrue;
 
@@ -38,7 +38,7 @@ public class FileSetCollectionReaderBaseTest
     public void testBaseUri()
         throws Exception
     {
-        CollectionReader reader = createCollectionReader(DummyReader.class,
+        CollectionReader reader = createReader(DummyReader.class,
                 createTypeSystemDescription(), FileSetCollectionReaderBase.PARAM_PATH,
                 "src/main/java/de/tudarmstadt/ukp/", FileSetCollectionReaderBase.PARAM_PATTERNS,
                 new String[] { "[+]**/*.java" });

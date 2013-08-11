@@ -40,7 +40,7 @@ public class JdbcReaderExample
 
         String query = "SELECT title AS " + JdbcReader.CAS_METADATA_TITLE + ", text AS "
                 + JdbcReader.CAS_TEXT + " FROM test_table;";
-        CollectionReader pdfReader = CollectionReaderFactory.createCollectionReader(
+        CollectionReader pdfReader = CollectionReaderFactory.createReader(
                 JdbcReader.class,
                 JdbcReader.PARAM_DATABASE, "test_db",
                 JdbcReader.PARAM_USER, "root",

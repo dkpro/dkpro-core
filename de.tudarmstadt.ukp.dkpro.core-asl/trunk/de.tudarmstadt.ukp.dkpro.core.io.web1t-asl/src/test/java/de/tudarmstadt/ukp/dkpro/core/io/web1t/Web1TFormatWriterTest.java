@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -121,7 +121,7 @@ public class Web1TFormatWriterTest {
 
 	private void writeWeb1TFormat(String[] strings, int minFreq)
 			throws UIMAException, IOException {
-		CollectionReader reader = createCollectionReader(TextReader.class,
+		CollectionReader reader = createReader(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
@@ -163,7 +163,7 @@ public class Web1TFormatWriterTest {
 	private void writeWeb1TFormat(String[] inputPath) throws Exception {
     	checkModelsAndBinary("en");
 
-		CollectionReader reader = createCollectionReader(TextReader.class,
+		CollectionReader reader = createReader(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
 				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });

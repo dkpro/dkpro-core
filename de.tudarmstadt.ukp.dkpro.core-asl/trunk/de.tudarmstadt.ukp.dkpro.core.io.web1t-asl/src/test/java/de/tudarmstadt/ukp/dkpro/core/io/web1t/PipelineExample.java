@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.web1t;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -41,7 +41,7 @@ public class PipelineExample
     public void pipelineTest() throws Exception
     {
         String corpusPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
                 TEIReader.class,
                 TEIReader.PARAM_PATH, corpusPath,
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }

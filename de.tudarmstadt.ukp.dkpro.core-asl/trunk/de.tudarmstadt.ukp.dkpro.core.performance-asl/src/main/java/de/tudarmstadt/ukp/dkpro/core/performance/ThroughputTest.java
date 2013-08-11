@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.performance;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 
 import java.io.IOException;
 
@@ -62,7 +62,7 @@ public class ThroughputTest {
         if (languageCode.equals("en")) {
             String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
 
-            return createCollectionReader(
+            return createReader(
                     TEIReader.class,
                     TEIReader.PARAM_LANGUAGE, "en",
                     TEIReader.PARAM_PATH, brownPath,

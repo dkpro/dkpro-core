@@ -93,7 +93,7 @@ public class GrafWriterTest
 
 //	public void read() throws Exception
 //	{
-//		CollectionReader xmiReader = CollectionReaderFactory.createCollectionReader(
+//		CollectionReader xmiReader = CollectionReaderFactory.createReader(
 //				XmiReader.class,
 //				ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
 //				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {

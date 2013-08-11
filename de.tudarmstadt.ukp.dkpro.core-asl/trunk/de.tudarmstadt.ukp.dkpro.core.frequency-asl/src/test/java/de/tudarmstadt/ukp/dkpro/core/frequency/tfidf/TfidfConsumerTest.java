@@ -22,7 +22,7 @@ import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -54,7 +54,7 @@ public class TfidfConsumerTest {
     public void RawScoresTest()
 	    throws Exception {
 
-        CollectionReader reader = createCollectionReader(
+        CollectionReader reader = createReader(
                 TextReader.class,
                 PARAM_PATH, CONSUMER_TEST_DATA_PATH,
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
