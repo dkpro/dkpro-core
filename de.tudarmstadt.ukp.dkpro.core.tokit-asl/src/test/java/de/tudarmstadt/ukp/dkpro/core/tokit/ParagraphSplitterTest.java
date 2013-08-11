@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -42,7 +42,7 @@ public class ParagraphSplitterTest
 		sb.append(System.getProperty("line.separator"));
 		sb.append("paragraph3");
 
-		AnalysisEngine ae = createPrimitive(ParagraphSplitter.class,
+		AnalysisEngine ae = createEngine(ParagraphSplitter.class,
 				ParagraphSplitter.PARAM_SPLIT_PATTERN, ParagraphSplitter.SINGLE_LINE_BREAKS_PATTERN);
 
 		JCas jcas = ae.newJCas();
@@ -78,7 +78,7 @@ public class ParagraphSplitterTest
 		sb.append(System.getProperty("line.separator"));
 		sb.append("paragraph2");
 
-		AnalysisEngine ae = createPrimitive(ParagraphSplitter.class);
+		AnalysisEngine ae = createEngine(ParagraphSplitter.class);
 
 		JCas jcas = ae.newJCas();
 		jcas.setDocumentLanguage("en");

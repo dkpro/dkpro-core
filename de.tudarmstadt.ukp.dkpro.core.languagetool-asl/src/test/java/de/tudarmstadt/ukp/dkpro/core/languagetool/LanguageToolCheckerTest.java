@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -38,7 +38,7 @@ public class LanguageToolCheckerTest
 	{
 		String testDocument = "A sentence with a error in the Hitchhiker's Guide tot he Galaxy .";
 
-		AnalysisEngine engine = createPrimitive(LanguageToolChecker.class,
+		AnalysisEngine engine = createEngine(LanguageToolChecker.class,
 				LanguageToolChecker.PARAM_LANGUAGE, "en");
 		JCas aJCas = engine.newJCas();
 

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.harness;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.util.ArrayList;
@@ -122,7 +122,7 @@ public final class SegmenterHarness
 
 	public static void run(AnalysisEngineDescription aAed, String... aIgnoreIds) throws Throwable
 	{
-		AnalysisEngine ae = createPrimitive(aAed);
+		AnalysisEngine ae = createEngine(aAed);
 		JCas jCas = ae.newJCas();
 
 		List<String> results = new ArrayList<String>();

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
@@ -105,8 +105,8 @@ class TreeTaggerChunkerTT4JTest
 	{
     	checkModelsAndBinary(language);
 
-		AnalysisEngine tagger = createPrimitive(TreeTaggerPosLemmaTT4J.class);
-        AnalysisEngine chunker = createPrimitive(TreeTaggerChunkerTT4J.class,
+		AnalysisEngine tagger = createEngine(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine chunker = createEngine(TreeTaggerChunkerTT4J.class,
         		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null).getJCas();

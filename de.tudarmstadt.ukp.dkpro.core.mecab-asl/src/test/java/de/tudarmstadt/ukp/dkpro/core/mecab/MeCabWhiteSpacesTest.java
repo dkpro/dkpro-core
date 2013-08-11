@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mecab;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.junit.Assert.assertEquals;
 
@@ -53,7 +53,7 @@ public class MeCabWhiteSpacesTest {
                 TextReader.PARAM_PATH, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, "[+]EoFWithSequenceOfWhitespacesAndBlanks.txt");
-        AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
+        AnalysisEngine jTagger = createEngine(MeCabTagger.class);
         try {
             JCas jcas = new JCasIterable(reader).iterator().next();
             jTagger.process(jcas);
@@ -77,7 +77,7 @@ public class MeCabWhiteSpacesTest {
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]TokenPreceedingWhitespace.txt" });
 
-        AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
+        AnalysisEngine jTagger = createEngine(MeCabTagger.class);
         try {
             JCas jcas = new JCasIterable(reader).iterator().next();
             jTagger.process(jcas);
@@ -102,7 +102,7 @@ public class MeCabWhiteSpacesTest {
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]WhiteSpaceAsToken.txt" });
 
-        AnalysisEngine jTagger = createPrimitive(MeCabTagger.class);
+        AnalysisEngine jTagger = createEngine(MeCabTagger.class);
         try {
             JCas jcas = new JCasIterable(reader).iterator().next();
             jTagger.process(jcas);

@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
@@ -60,7 +60,7 @@ public class TestFrequencyCountResourceTest
                         TestFrequencyCountResource.PARAM_SCALE_DOWN_FACTOR, "10"));
 
         // Check the external resource was injected
-        AnalysisEngine ae = createPrimitive(desc);
+        AnalysisEngine ae = createEngine(desc);
         ae.process(ae.newJCas());
     }
 }

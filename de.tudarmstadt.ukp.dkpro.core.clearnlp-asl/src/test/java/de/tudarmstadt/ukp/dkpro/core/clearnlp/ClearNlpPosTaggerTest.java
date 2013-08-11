@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -74,7 +74,7 @@ public class ClearNlpPosTaggerTest
 			String[] tagClasses)
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(ClearNlpPosTagger.class,
+		AnalysisEngine engine = createEngine(ClearNlpPosTagger.class,
 				ClearNlpPosTagger.PARAM_VARIANT, variant,
 				ClearNlpPosTagger.PARAM_PRINT_TAGSET, true);
 

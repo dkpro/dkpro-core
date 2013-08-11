@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
@@ -62,7 +62,7 @@ public class TokenMergerTest
 	public void testSimpleMerge()
 		throws Exception
 	{
-		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+		AnalysisEngine filter = createEngine(TokenMerger.class,
 				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class);
 
 		JCas jcas = initCas();
@@ -75,7 +75,7 @@ public class TokenMergerTest
 	public void testWithConstraintMatch()
 		throws Exception
 	{
-		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+		AnalysisEngine filter = createEngine(TokenMerger.class,
 				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 				TokenMerger.PARAM_CONSTRAINT, ".[value = 'LOCATION']");
 
@@ -89,7 +89,7 @@ public class TokenMergerTest
 	public void testWithConstraintNoMatch()
 		throws Exception
 	{
-		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+		AnalysisEngine filter = createEngine(TokenMerger.class,
 				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 				TokenMerger.PARAM_CONSTRAINT, ".[value = 'PERSON']");
 
@@ -103,7 +103,7 @@ public class TokenMergerTest
 	public void testSimpleMergeLemmaJoin()
 		throws Exception
 	{
-		AnalysisEngine filter = createPrimitive(TokenMerger.class,
+		AnalysisEngine filter = createEngine(TokenMerger.class,
 				TokenMerger.PARAM_ANNOTATION_TYPE, NamedEntity.class,
 				TokenMerger.PARAM_LEMMA_MODE, LemmaMode.JOIN);
 

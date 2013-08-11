@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 
@@ -55,7 +55,7 @@ public class BerkeleyLMFrequencyCountProviderTest
                         BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
 
         // Check the external resource was injected
-        AnalysisEngine ae = createPrimitive(desc);
+        AnalysisEngine ae = createEngine(desc);
         ae.process(ae.newJCas());
     }
 }

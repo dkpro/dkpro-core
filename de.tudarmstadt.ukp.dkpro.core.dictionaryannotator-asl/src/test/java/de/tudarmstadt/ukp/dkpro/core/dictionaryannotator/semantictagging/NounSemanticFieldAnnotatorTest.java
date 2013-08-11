@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -91,7 +91,7 @@ public class NounSemanticFieldAnnotatorTest {
 									)
 		);
 
-		AnalysisEngine engine = createPrimitive(processor);
+		AnalysisEngine engine = createEngine(processor);
 		JCas aJCas = engine.newJCas();
 		aJCas.setDocumentLanguage(language);
 

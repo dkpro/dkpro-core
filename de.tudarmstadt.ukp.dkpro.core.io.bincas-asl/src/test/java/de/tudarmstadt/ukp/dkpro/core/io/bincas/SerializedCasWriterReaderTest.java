@@ -60,7 +60,7 @@ public class SerializedCasWriterReaderTest
 				},
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
-		AnalysisEngine xmiWriter = AnalysisEngineFactory.createPrimitive(
+		AnalysisEngine xmiWriter = AnalysisEngineFactory.createEngine(
 				SerializedCasWriter.class,
 				SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
 

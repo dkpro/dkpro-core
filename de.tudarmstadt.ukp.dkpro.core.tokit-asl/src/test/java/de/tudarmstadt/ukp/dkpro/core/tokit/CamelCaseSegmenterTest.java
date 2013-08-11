@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.tokit;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
@@ -36,7 +36,7 @@ public class CamelCaseSegmenterTest
 	@Test
 	public void testProcess() throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(CamelCaseTokenSegmenter.class);
+		AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class);
 
 		//                0123456789012345678901
 		String content = "ThisIsACamel CaseText";
@@ -56,7 +56,7 @@ public class CamelCaseSegmenterTest
 	@Test
 	public void testProcess2() throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(CamelCaseTokenSegmenter.class);
+		AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class);
 
 		//                01234567890123456789012
 		String content = "GetFileUploadURLRequest";
@@ -75,7 +75,7 @@ public class CamelCaseSegmenterTest
 	@Test
 	public void testProcess3() throws Exception
 	{
-		AnalysisEngine seg = createPrimitive(CamelCaseTokenSegmenter.class);
+		AnalysisEngine seg = createEngine(CamelCaseTokenSegmenter.class);
 
 		//                01234567890123
 		String content = "_ORGANIZATION";

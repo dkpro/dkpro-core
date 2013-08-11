@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.jazzy;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -54,7 +54,7 @@ public class SpellCheckerTest
     private void runEnglishSpellChecker(String testDocument, List<String> errors)
         throws Exception
     {
-		AnalysisEngine engine = createPrimitive(SpellChecker.class,
+		AnalysisEngine engine = createEngine(SpellChecker.class,
 				SpellChecker.PARAM_MODEL_LOCATION, "src/test/resources/testdict.txt");
         JCas aJCas = engine.newJCas();
 

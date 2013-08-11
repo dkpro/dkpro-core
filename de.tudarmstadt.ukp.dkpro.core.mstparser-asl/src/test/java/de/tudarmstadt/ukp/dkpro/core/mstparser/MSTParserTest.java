@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -75,7 +75,7 @@ public class MSTParserTest
 				createEngineDescription(OpenNlpPosTagger.class),
 				createEngineDescription(MSTParser.class, MSTParser.PARAM_PRINT_TAGSET, true));
 
-		AnalysisEngine engine = createPrimitive(aggregate);
+		AnalysisEngine engine = createEngine(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage("en");
 		jcas.setDocumentText(aText);
