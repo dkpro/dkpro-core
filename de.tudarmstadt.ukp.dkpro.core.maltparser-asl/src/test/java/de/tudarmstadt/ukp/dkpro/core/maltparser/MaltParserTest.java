@@ -49,11 +49,24 @@ public class MaltParserTest
 	{
 		JCas jcas = runTest("en", null, documentEnglish);
 
-		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
-				"AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98", "DET 35,43,8,9",
-				"DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2", "NSUBJ 52,60,46,51",
-				"POBJ 61,63,69,81", "POBJ 99,101,102,110", "PREP 52,60,61,63", "PREP 69,81,99,101",
-				"PUNCT 3,7,111,112", "PUNCT 35,43,44,45", "RCMOD 35,43,52,60" };
+		String[] dependencies = new String[] { 
+		        "Dependency(advmod)[10,14] D(very)[10,14] G(complicated)[15,26]",
+		        "Dependency(amod)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+		        "Dependency(amod)[64,68] D(many)[64,68] G(constituents)[69,81]",
+		        "Dependency(cc)[82,85] D(and)[82,85] G(constituents)[69,81]",
+		        "Dependency(conj)[86,98] D(dependencies)[86,98] G(constituents)[69,81]",
+		        "Dependency(det)[8,9] D(a)[8,9] G(sentence)[35,43]",
+		        "Dependency(dobj)[35,43] D(sentence)[35,43] G(need)[3,7]",
+		        "Dependency(nn)[27,34] D(example)[27,34] G(sentence)[35,43]",
+		        "Dependency(nsubj)[0,2] D(We)[0,2] G(need)[3,7]",
+		        "Dependency(nsubj)[46,51] D(which)[46,51] G(contains)[52,60]",
+		        "Dependency(pobj)[102,110] D(possible)[102,110] G(as)[99,101]",
+		        "Dependency(pobj)[69,81] D(constituents)[69,81] G(as)[61,63]",
+		        "Dependency(prep)[61,63] D(as)[61,63] G(contains)[52,60]",
+		        "Dependency(prep)[99,101] D(as)[99,101] G(constituents)[69,81]",
+		        "Dependency(punct)[111,112] D(.)[111,112] G(need)[3,7]",
+		        "Dependency(punct)[44,45] D(,)[44,45] G(sentence)[35,43]",
+		        "Dependency(rcmod)[52,60] D(contains)[52,60] G(sentence)[35,43]" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -64,11 +77,24 @@ public class MaltParserTest
 	{
 		JCas jcas = runTest("en", "linear", documentEnglish);
 
-		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
-				"AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98", "DET 35,43,8,9",
-				"DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2", "NSUBJ 52,60,46,51",
-				"POBJ 61,63,69,81", "POBJ 99,101,102,110", "PREP 52,60,61,63", "PREP 69,81,99,101",
-				"PUNCT 3,7,111,112", "PUNCT 35,43,44,45", "RCMOD 35,43,52,60" };
+		String[] dependencies = new String[] { 
+		        "Dependency(advmod)[10,14] D(very)[10,14] G(complicated)[15,26]",
+		        "Dependency(amod)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+		        "Dependency(amod)[64,68] D(many)[64,68] G(constituents)[69,81]",
+		        "Dependency(cc)[82,85] D(and)[82,85] G(constituents)[69,81]",
+		        "Dependency(conj)[86,98] D(dependencies)[86,98] G(constituents)[69,81]",
+		        "Dependency(det)[8,9] D(a)[8,9] G(sentence)[35,43]",
+		        "Dependency(dobj)[35,43] D(sentence)[35,43] G(need)[3,7]",
+		        "Dependency(nn)[27,34] D(example)[27,34] G(sentence)[35,43]",
+		        "Dependency(nsubj)[0,2] D(We)[0,2] G(need)[3,7]",
+		        "Dependency(nsubj)[46,51] D(which)[46,51] G(contains)[52,60]",
+		        "Dependency(pobj)[102,110] D(possible)[102,110] G(as)[99,101]",
+		        "Dependency(pobj)[69,81] D(constituents)[69,81] G(as)[61,63]",
+		        "Dependency(prep)[61,63] D(as)[61,63] G(contains)[52,60]",
+		        "Dependency(prep)[99,101] D(as)[99,101] G(constituents)[69,81]",
+		        "Dependency(punct)[111,112] D(.)[111,112] G(need)[3,7]",
+		        "Dependency(punct)[44,45] D(,)[44,45] G(sentence)[35,43]",
+		        "Dependency(rcmod)[52,60] D(contains)[52,60] G(sentence)[35,43]" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -79,11 +105,24 @@ public class MaltParserTest
 	{
 		JCas jcas = runTest("en", "poly", documentEnglish);
 
-		String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "AMOD 35,43,15,26",
-				"AMOD 69,81,64,68", "CC 69,81,82,85", "CONJ 69,81,86,98", "DET 35,43,8,9",
-				"DOBJ 3,7,35,43", "NN 35,43,27,34", "NSUBJ 3,7,0,2", "NSUBJ 52,60,46,51",
-				"POBJ 61,63,69,81", "POBJ 99,101,102,110", "PREP 52,60,61,63", "PREP 69,81,99,101",
-				"PUNCT 3,7,111,112", "PUNCT 35,43,44,45", "RCMOD 35,43,52,60" };
+		String[] dependencies = new String[] { 
+		        "Dependency(advmod)[10,14] D(very)[10,14] G(complicated)[15,26]",
+		        "Dependency(amod)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+		        "Dependency(amod)[64,68] D(many)[64,68] G(constituents)[69,81]",
+		        "Dependency(cc)[82,85] D(and)[82,85] G(constituents)[69,81]",
+		        "Dependency(conj)[86,98] D(dependencies)[86,98] G(constituents)[69,81]",
+		        "Dependency(det)[8,9] D(a)[8,9] G(sentence)[35,43]",
+		        "Dependency(dobj)[35,43] D(sentence)[35,43] G(need)[3,7]",
+		        "Dependency(nn)[27,34] D(example)[27,34] G(sentence)[35,43]",
+		        "Dependency(nsubj)[0,2] D(We)[0,2] G(need)[3,7]",
+		        "Dependency(nsubj)[46,51] D(which)[46,51] G(contains)[52,60]",
+		        "Dependency(pobj)[102,110] D(possible)[102,110] G(as)[99,101]",
+		        "Dependency(pobj)[69,81] D(constituents)[69,81] G(as)[61,63]",
+		        "Dependency(prep)[61,63] D(as)[61,63] G(contains)[52,60]",
+		        "Dependency(prep)[99,101] D(as)[99,101] G(constituents)[69,81]",
+		        "Dependency(punct)[111,112] D(.)[111,112] G(need)[3,7]",
+		        "Dependency(punct)[44,45] D(,)[44,45] G(sentence)[35,43]",
+		        "Dependency(rcmod)[52,60] D(contains)[52,60] G(sentence)[35,43]" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
@@ -99,10 +138,21 @@ public class MaltParserTest
 
 		JCas jcas = runTest("de", "linear", documentGerman);
 
-		String[] dependencies = new String[] { "-PUNCT- 89,100,112,113", "DET 13,16,17,21",
-				"DET 36,44,22,35", "DET 4,12,13,16", "DET 45,46,47,54", "DET 47,54,55,64",
-				"DET 55,64,65,70", "DET 65,70,71,84", "DET 71,84,85,88", "DET 85,88,89,100",
-				"GMOD 17,21,36,44", "KON 4,12,45,46", "PN 112,113,101,111", "ROOT 0,3,4,12" };
+		String[] dependencies = new String[] { 
+		        "Dependency(-PUNCT-)[112,113] D(.)[112,113] G(Dependenzen)[89,100]",
+		        "Dependency(DET)[13,16] D(ein)[13,16] G(brauchen)[4,12]",
+		        "Dependency(DET)[17,21] D(sehr)[17,21] G(ein)[13,16]",
+		        "Dependency(DET)[22,35] D(kompliziertes)[22,35] G(Beispiel)[36,44]",
+		        "Dependency(DET)[47,54] D(welches)[47,54] G(,)[45,46]",
+		        "Dependency(DET)[55,64] D(möglichst)[55,64] G(welches)[47,54]",
+		        "Dependency(DET)[65,70] D(viele)[65,70] G(möglichst)[55,64]",
+		        "Dependency(DET)[71,84] D(Konstituenten)[71,84] G(viele)[65,70]",
+		        "Dependency(DET)[85,88] D(und)[85,88] G(Konstituenten)[71,84]",
+		        "Dependency(DET)[89,100] D(Dependenzen)[89,100] G(und)[85,88]",
+		        "Dependency(GMOD)[36,44] D(Beispiel)[36,44] G(sehr)[17,21]",
+		        "Dependency(KON)[45,46] D(,)[45,46] G(brauchen)[4,12]",
+		        "Dependency(PN)[101,111] D(beinhaltet)[101,111] G(.)[112,113]",
+		        "Dependency(ROOT)[4,12] D(brauchen)[4,12] G(Wir)[0,3]" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 	}
