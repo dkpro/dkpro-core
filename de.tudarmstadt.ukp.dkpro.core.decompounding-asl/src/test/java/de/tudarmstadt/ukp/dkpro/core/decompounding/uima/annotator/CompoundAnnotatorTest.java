@@ -97,7 +97,7 @@ public class CompoundAnnotatorTest
     private void runAnnotator(AnalysisEngineDescription aed)
         throws CASException, UIMAException{
         // Create Analysis Engine
-        AnalysisEngine ae = AnalysisEngineFactory.createAggregate(aed);
+        AnalysisEngine ae = AnalysisEngineFactory.createEngine(aed);
 
         // Create cas with token
         CAS cas = ae.newCAS();

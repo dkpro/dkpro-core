@@ -17,8 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.langdect;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.junit.Assert.assertEquals;
@@ -46,7 +45,7 @@ public class LanguageDetectorTest
     {
         String web1TBaseDir = new DKProContext().getWorkspace("web1t").getAbsolutePath();
         
-        AnalysisEngine engine = createAggregate(
+        AnalysisEngine engine = createEngine(
             createEngineDescription(
                 createEngineDescription(
                         BreakIteratorSegmenter.class
@@ -94,7 +93,7 @@ public class LanguageDetectorTest
 //    {
 //        String web1TBaseDir = new DKProContext().getWorkspace("web1t").getAbsolutePath();
 //        
-//        AnalysisEngine engine = createAggregate(
+//        AnalysisEngine engine = createEngine(
 //            createEngineDescription(
 //                createEngineDescription(
 //                        BreakIteratorSegmenter.class

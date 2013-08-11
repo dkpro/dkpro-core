@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.posfilter;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.File;

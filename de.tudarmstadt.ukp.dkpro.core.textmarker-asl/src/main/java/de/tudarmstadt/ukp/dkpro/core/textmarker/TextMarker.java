@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.textmarker;
 import java.util.List;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.textmarker.engine.TextMarkerEngine;
 
 /**
