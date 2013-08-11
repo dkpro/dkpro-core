@@ -12,7 +12,6 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertTrue;
@@ -48,6 +47,7 @@ import edu.stanford.nlp.trees.Tree;
  * @author Niklas Jakob
  * @author Richard Eckart de Castilho
  */
+@SuppressWarnings("unused")
 public class StanfordParserTest
 {
     static final String documentEnglish = "We need a very complicated example sentence, which "
@@ -561,7 +561,7 @@ public class StanfordParserTest
                 StanfordParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
                 StanfordParser.PARAM_QUOTE_END, new String[] { "’" });
 
-        AnalysisEngine engine = createPrimitive(parser);
+        AnalysisEngine engine = createEngine(parser);
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(aLanguage);
 

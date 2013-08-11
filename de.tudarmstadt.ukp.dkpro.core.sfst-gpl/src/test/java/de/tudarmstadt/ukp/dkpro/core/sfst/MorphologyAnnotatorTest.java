@@ -10,9 +10,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.sfst;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -75,19 +74,19 @@ public class MorphologyAnnotatorTest
     }
 
     private AnalysisEngine getEngine() throws ResourceInitializationException {
-        AnalysisEngineDescription segmenter = createPrimitiveDescription(
+        AnalysisEngineDescription segmenter = createEngineDescription(
                 BreakIteratorSegmenter.class
         );
 
-        AnalysisEngineDescription morphology = createPrimitiveDescription(
+        AnalysisEngineDescription morphology = createEngineDescription(
                 SfstAnnotator.class
         );
 
-        AnalysisEngineDescription aggregate = createAggregateDescription(
+        AnalysisEngineDescription aggregate = createEngineDescription(
                 segmenter,
                 morphology
         );
 
-        return createAggregate(aggregate);
+        return createEngine(aggregate);
     }
 }

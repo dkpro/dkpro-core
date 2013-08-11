@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
@@ -23,7 +23,7 @@ class StanfordSegmenterTest
 	@Test
 	public void run() throws Throwable
 	{
-		AnalysisEngineDescription aed = createPrimitiveDescription(StanfordSegmenter.class);
+		AnalysisEngineDescription aed = createEngineDescription(StanfordSegmenter.class);
 
 		SegmenterHarness.run(aed, "de.4", "en.9", "ar.1", "zh.1", "zh.2");
 	}

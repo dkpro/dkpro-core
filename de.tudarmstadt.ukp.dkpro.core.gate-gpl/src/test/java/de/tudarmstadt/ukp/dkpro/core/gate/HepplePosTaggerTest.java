@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -54,7 +54,7 @@ public class HepplePosTaggerTest
 			String[] tagClasses)
 		throws Exception
 	{
-		AnalysisEngine engine = createPrimitive(HepplePosTagger.class,
+		AnalysisEngine engine = createEngine(HepplePosTagger.class,
 		        HepplePosTagger.PARAM_VARIANT, variant,
 		        HepplePosTagger.PARAM_PRINT_TAGSET, true);
 

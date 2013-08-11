@@ -10,9 +10,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.gate;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -58,13 +57,13 @@ public class GateLemmatizerTest
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
-		AnalysisEngineDescription seg = createPrimitiveDescription(OpenNlpSegmenter.class);
-		AnalysisEngineDescription tagger = createPrimitiveDescription(OpenNlpPosTagger.class);
-		AnalysisEngineDescription lemma = createPrimitiveDescription(GateLemmatizer.class);
+		AnalysisEngineDescription seg = createEngineDescription(OpenNlpSegmenter.class);
+		AnalysisEngineDescription tagger = createEngineDescription(OpenNlpPosTagger.class);
+		AnalysisEngineDescription lemma = createEngineDescription(GateLemmatizer.class);
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(seg, tagger, lemma);
+		AnalysisEngineDescription aggregate = createEngineDescription(seg, tagger, lemma);
 
-		AnalysisEngine engine = createPrimitive(aggregate);
+		AnalysisEngine engine = createEngine(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);

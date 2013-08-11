@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tgrep;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,14 +43,14 @@ public class TGrepWriterTest
 	{
 		String language = "en";
 		String text = "This is a sample sentence. Followed by another one.";
-		AnalysisEngineDescription seg = createPrimitiveDescription(StanfordSegmenter.class);
+		AnalysisEngineDescription seg = createEngineDescription(StanfordSegmenter.class);
 
-		AnalysisEngineDescription parse = createPrimitiveDescription(StanfordParser.class,
+		AnalysisEngineDescription parse = createEngineDescription(StanfordParser.class,
 				StanfordParser.PARAM_WRITE_PENN_TREE, true,
 				StanfordParser.PARAM_LANGUAGE, "en",
 				StanfordParser.PARAM_VARIANT, "pcfg");
 
-		AnalysisEngineDescription tgrep = createPrimitiveDescription(TGrepWriter.class,
+		AnalysisEngineDescription tgrep = createEngineDescription(TGrepWriter.class,
 				TGrepWriter.PARAM_TARGET_LOCATION, outputPath,
 				TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
 				TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -60,7 +60,7 @@ public class MateLemmatizerTest
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
-        AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
+        AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class);
 
         return TestRunner.runTest(lemma, aLanguage, aText);
     }

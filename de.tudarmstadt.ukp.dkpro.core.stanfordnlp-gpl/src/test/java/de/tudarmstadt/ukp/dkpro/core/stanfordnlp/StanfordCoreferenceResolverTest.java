@@ -11,9 +11,8 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static java.util.Arrays.asList;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregate;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
@@ -38,16 +37,16 @@ public class StanfordCoreferenceResolverTest
 		throws Exception
 	{
 		// Coreference resolution requires the parser and the NER to run before
-		AnalysisEngine aggregate = createAggregate(createAggregateDescription(
-				createPrimitiveDescription(StanfordSegmenter.class),
-				createPrimitiveDescription(StanfordParser.class,
+		AnalysisEngine aggregate = createEngine(createEngineDescription(
+				createEngineDescription(StanfordSegmenter.class),
+				createEngineDescription(StanfordParser.class,
 						StanfordParser.PARAM_WRITE_CONSTITUENT, true,
 						StanfordParser.PARAM_WRITE_DEPENDENCY, true,
 						StanfordParser.PARAM_WRITE_PENN_TREE, true,
 						StanfordParser.PARAM_WRITE_POS, true),
-				createPrimitiveDescription(
+				createEngineDescription(
 						StanfordNamedEntityRecognizer.class),
-				createPrimitiveDescription(StanfordCoreferenceResolver.class)));
+				createEngineDescription(StanfordCoreferenceResolver.class)));
 
 		// Set up a simple example
 		JCas jcas = aggregate.newJCas();

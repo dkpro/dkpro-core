@@ -10,8 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -38,12 +37,12 @@ public class StanfordLemmatizerTest
 			String[] lemmas)
 		throws Exception
 	{
-		AnalysisEngineDescription posTagger = createPrimitiveDescription(StanfordPosTagger.class,
+		AnalysisEngineDescription posTagger = createEngineDescription(StanfordPosTagger.class,
 				StanfordPosTagger.PARAM_VARIANT, aVariant);
 
-		AnalysisEngineDescription lemmatizer = createPrimitiveDescription(StanfordLemmatizer.class);
+		AnalysisEngineDescription lemmatizer = createEngineDescription(StanfordLemmatizer.class);
 
-		JCas aJCas = TestRunner.runTest(createAggregateDescription(posTagger, lemmatizer),
+		JCas aJCas = TestRunner.runTest(createEngineDescription(posTagger, lemmatizer),
 				aLanguage, testDocument);
 
 		AssertAnnotations.assertPOS(null, tags, select(aJCas, POS.class));

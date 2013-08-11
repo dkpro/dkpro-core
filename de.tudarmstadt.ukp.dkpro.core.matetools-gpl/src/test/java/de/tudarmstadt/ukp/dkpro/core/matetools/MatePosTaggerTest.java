@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -80,7 +80,7 @@ public class MatePosTaggerTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
-        AnalysisEngineDescription posTag = createPrimitiveDescription(MatePosTagger.class);
+        AnalysisEngineDescription posTag = createEngineDescription(MatePosTagger.class);
 
         return TestRunner.runTest(posTag, aLanguage, aText);
     }

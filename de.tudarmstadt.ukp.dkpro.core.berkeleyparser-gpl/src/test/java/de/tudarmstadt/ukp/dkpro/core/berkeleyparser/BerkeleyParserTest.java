@@ -17,9 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
@@ -278,20 +277,20 @@ public class BerkeleyParserTest
 		AnalysisEngineDescription segmenter;
 
 		if ("zh".equals(aLanguage)) {
-			segmenter = createPrimitiveDescription(LanguageToolSegmenter.class);
+			segmenter = createEngineDescription(LanguageToolSegmenter.class);
 		}
 		else {
-			segmenter = createPrimitiveDescription(StanfordSegmenter.class);
+			segmenter = createEngineDescription(StanfordSegmenter.class);
 		}
 
 		// setup English
-		AnalysisEngineDescription parser = createPrimitiveDescription(BerkeleyParser.class,
+		AnalysisEngineDescription parser = createEngineDescription(BerkeleyParser.class,
 				BerkeleyParser.PARAM_PRINT_TAGSET, true,
 				BerkeleyParser.PARAM_WRITE_PENN_TREE, true);
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(segmenter, parser);
+		AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
 
-		AnalysisEngine engine = createPrimitive(aggregate);
+		AnalysisEngine engine = createEngine(aggregate);
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);

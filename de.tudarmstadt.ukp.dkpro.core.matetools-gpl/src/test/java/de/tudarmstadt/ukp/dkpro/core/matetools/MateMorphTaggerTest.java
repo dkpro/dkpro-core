@@ -10,8 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -58,10 +57,10 @@ public class MateMorphTaggerTest
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
-        AnalysisEngineDescription lemma = createPrimitiveDescription(MateLemmatizer.class);
-        AnalysisEngineDescription morphTag = createPrimitiveDescription(MateMorphTagger.class);
+        AnalysisEngineDescription lemma = createEngineDescription(MateLemmatizer.class);
+        AnalysisEngineDescription morphTag = createEngineDescription(MateMorphTagger.class);
 
-        AnalysisEngineDescription aggregate = createAggregateDescription(lemma, morphTag);
+        AnalysisEngineDescription aggregate = createEngineDescription(lemma, morphTag);
 
         return TestRunner.runTest(aggregate, aLanguage, aText);
     }

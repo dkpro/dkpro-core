@@ -1,11 +1,6 @@
 package edu.stanford.nlp.parser.lexparser;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import edu.stanford.nlp.stats.ClassicCounter;
-import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.Index;
 
 /**

@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -105,7 +105,7 @@ public class StanfordNamedEntityRecognizerTest
 	private Iterator<NamedEntity> runNER(String testDocument, String language)
 		throws Exception
 	{
-		AnalysisEngineDescription desc = createPrimitiveDescription(
+		AnalysisEngineDescription desc = createEngineDescription(
 				StanfordNamedEntityRecognizer.class,
 				StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
 
@@ -122,7 +122,7 @@ public class StanfordNamedEntityRecognizerTest
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
-		AnalysisEngineDescription desc = createPrimitiveDescription(
+		AnalysisEngineDescription desc = createEngineDescription(
 				StanfordNamedEntityRecognizer.class,
 				StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
 

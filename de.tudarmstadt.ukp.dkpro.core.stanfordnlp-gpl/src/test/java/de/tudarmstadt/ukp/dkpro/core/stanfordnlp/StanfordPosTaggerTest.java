@@ -10,7 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -103,7 +103,7 @@ public class StanfordPosTaggerTest
 	private void runTest(String language, String variant, String testDocument, String[] tags, String[] tagClasses)
 		throws Exception
 	{
-        AnalysisEngine engine = createPrimitive(StanfordPosTagger.class,
+        AnalysisEngine engine = createEngine(StanfordPosTagger.class,
         		StanfordPosTagger.PARAM_VARIANT, variant,
         		StanfordPosTagger.PARAM_PRINT_TAGSET, true);
 		JCas aJCas = TestRunner.runTest(engine, language, testDocument);

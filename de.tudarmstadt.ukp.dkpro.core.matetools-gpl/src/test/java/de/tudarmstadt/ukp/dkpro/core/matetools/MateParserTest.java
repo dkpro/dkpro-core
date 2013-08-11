@@ -10,8 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
@@ -99,9 +98,9 @@ public class MateParserTest
 	{
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
 
-		AnalysisEngineDescription aggregate = createAggregateDescription(
-				createPrimitiveDescription(MatePosTagger.class),
-				createPrimitiveDescription(MateParser.class));
+		AnalysisEngineDescription aggregate = createEngineDescription(
+				createEngineDescription(MatePosTagger.class),
+				createEngineDescription(MateParser.class));
 
         return TestRunner.runTest(aggregate, aLanguage, aText);
 	}
