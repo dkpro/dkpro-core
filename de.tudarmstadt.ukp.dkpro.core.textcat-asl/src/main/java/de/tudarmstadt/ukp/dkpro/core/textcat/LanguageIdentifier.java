@@ -20,8 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.textcat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
 import org.knallgrau.utils.textcat.TextCategorizer;
 

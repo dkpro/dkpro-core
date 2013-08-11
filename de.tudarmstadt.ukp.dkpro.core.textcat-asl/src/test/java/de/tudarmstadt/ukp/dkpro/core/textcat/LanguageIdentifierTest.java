@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.textcat;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.junit.Assert.assertEquals;
 
@@ -33,7 +33,7 @@ class LanguageIdentifierTest
 	void testEnglish()
 	throws Exception
 	{
-		AnalysisEngine ae = createPrimitive(LanguageIdentifier.class, createTypeSystemDescription());
+		AnalysisEngine ae = createEngine(LanguageIdentifier.class, createTypeSystemDescription());
 		JCas aJCas = ae.newJCas();
 		aJCas.setDocumentText("This is an english file.");
 		ae.process(aJCas);
@@ -45,7 +45,7 @@ class LanguageIdentifierTest
 	void testGerman()
 	throws Exception
 	{
-		AnalysisEngine ae = createPrimitive(LanguageIdentifier.class, createTypeSystemDescription());
+		AnalysisEngine ae = createEngine(LanguageIdentifier.class, createTypeSystemDescription());
 		JCas aJCas = ae.newJCas();
 		aJCas.setDocumentText("Das ist ein deutsches Dokument.");
 		ae.process(aJCas);
