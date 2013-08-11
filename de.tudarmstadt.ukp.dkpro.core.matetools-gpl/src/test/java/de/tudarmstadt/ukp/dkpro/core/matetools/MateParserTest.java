@@ -35,10 +35,21 @@ public class MateParserTest
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
 				+ "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] dependencies = new String[] { "-- 101,111,112,113", "-- 36,44,45,46",
-                "CD 71,84,85,88", "CJ 85,88,89,100", "MO 22,35,17,21", "MO 65,70,55,64",
-                "NK 36,44,13,16", "NK 36,44,22,35", "NK 71,84,65,70", "OA 101,111,71,84",
-                "OA 4,12,36,44", "RC 36,44,101,111", "SB 101,111,47,54", "SB 4,12,0,3" };
+        String[] dependencies = new String[] { 
+                "Dependency(--)[112,113] D(.)[112,113] G(beinhaltet)[101,111]",
+                "Dependency(--)[45,46] D(,)[45,46] G(Beispiel)[36,44]",
+                "Dependency(CD)[85,88] D(und)[85,88] G(Konstituenten)[71,84]",
+                "Dependency(CJ)[89,100] D(Dependenzen)[89,100] G(und)[85,88]",
+                "Dependency(MO)[17,21] D(sehr)[17,21] G(kompliziertes)[22,35]",
+                "Dependency(MO)[55,64] D(möglichst)[55,64] G(viele)[65,70]",
+                "Dependency(NK)[13,16] D(ein)[13,16] G(Beispiel)[36,44]",
+                "Dependency(NK)[22,35] D(kompliziertes)[22,35] G(Beispiel)[36,44]",
+                "Dependency(NK)[65,70] D(viele)[65,70] G(Konstituenten)[71,84]",
+                "Dependency(OA)[36,44] D(Beispiel)[36,44] G(brauchen)[4,12]",
+                "Dependency(OA)[71,84] D(Konstituenten)[71,84] G(beinhaltet)[101,111]",
+                "Dependency(RC)[101,111] D(beinhaltet)[101,111] G(Beispiel)[36,44]",
+                "Dependency(SB)[0,3] D(Wir)[0,3] G(brauchen)[4,12]",
+                "Dependency(SB)[47,54] D(welches)[47,54] G(beinhaltet)[101,111]" };
 
         String[] posTags = new String[] { "$(", "$,", "$.", "<None>", "<root-POS>", "ADJA", "ADJD",
                 "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "END", "FM", "ITJ",
@@ -66,11 +77,24 @@ public class MateParserTest
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = new String[] { "AMOD 15,26,10,14", "AMOD 64,68,61,63",
-                "CONJ 82,85,86,98", "COORD 69,81,82,85", "NMOD 35,43,15,26", "NMOD 35,43,27,34",
-                "NMOD 35,43,52,60", "NMOD 35,43,8,9", "NMOD 69,81,64,68", "NMOD 69,81,99,101",
-                "OBJ 3,7,35,43", "OBJ 52,60,69,81", "P 3,7,111,112", "P 35,43,44,45",
-                "PMOD 99,101,102,110", "SBJ 3,7,0,2", "SBJ 52,60,46,51" };
+        String[] dependencies = new String[] { 
+                "Dependency(AMOD)[10,14] D(very)[10,14] G(complicated)[15,26]",
+                "Dependency(AMOD)[61,63] D(as)[61,63] G(many)[64,68]",
+                "Dependency(CONJ)[86,98] D(dependencies)[86,98] G(and)[82,85]",
+                "Dependency(COORD)[82,85] D(and)[82,85] G(constituents)[69,81]",
+                "Dependency(NMOD)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+                "Dependency(NMOD)[27,34] D(example)[27,34] G(sentence)[35,43]",
+                "Dependency(NMOD)[52,60] D(contains)[52,60] G(sentence)[35,43]",
+                "Dependency(NMOD)[64,68] D(many)[64,68] G(constituents)[69,81]",
+                "Dependency(NMOD)[8,9] D(a)[8,9] G(sentence)[35,43]",
+                "Dependency(NMOD)[99,101] D(as)[99,101] G(constituents)[69,81]",
+                "Dependency(OBJ)[35,43] D(sentence)[35,43] G(need)[3,7]",
+                "Dependency(OBJ)[69,81] D(constituents)[69,81] G(contains)[52,60]",
+                "Dependency(P)[111,112] D(.)[111,112] G(need)[3,7]",
+                "Dependency(P)[44,45] D(,)[44,45] G(sentence)[35,43]",
+                "Dependency(PMOD)[102,110] D(possible)[102,110] G(as)[99,101]",
+                "Dependency(SBJ)[0,2] D(We)[0,2] G(need)[3,7]",
+                "Dependency(SBJ)[46,51] D(which)[46,51] G(contains)[52,60]" };
 
         String[] posTags = new String[] { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
                 "<root-POS>", "CC", "CD", "DT", "END", "EX", "FW", "HYPH", "IN", "JJ", "JJR",

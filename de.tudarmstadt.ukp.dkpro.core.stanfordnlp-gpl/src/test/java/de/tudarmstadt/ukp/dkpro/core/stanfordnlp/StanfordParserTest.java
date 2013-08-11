@@ -154,11 +154,22 @@ public class StanfordParserTest
                 "VP 3,109", "NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50",
                 "VP 51,109", "S 51,109", "PP 60,97", "NP 63,97", "PP 98,109", "ADJP 101,109" };
 
-        String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "RCMOD 35,43,51,59",
-                "DET 35,43,8,9", "POBJ 60,62,68,80", "POBJ 98,100,101,109", "DOBJ 3,7,35,43",
-                "AMOD 35,43,15,26", "AMOD 68,80,63,67", "NSUBJ 3,7,0,2", "NSUBJ 51,59,45,50",
-                "PREP 51,59,60,62", "PREP 51,59,98,100", "CC 68,80,81,84", "NN 35,43,27,34",
-                "CONJ 68,80,85,97" };
+        String[] dependencies = new String[] { 
+                "ADVMOD(advmod)[10,14] D(very)[10,14] G(complicated)[15,26]",
+                "AMOD(amod)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+                "AMOD(amod)[63,67] D(many)[63,67] G(constituents)[68,80]",
+                "CC(cc)[81,84] D(and)[81,84] G(constituents)[68,80]",
+                "CONJ(conj)[85,97] D(dependencies)[85,97] G(constituents)[68,80]",
+                "DET(det)[8,9] D(a)[8,9] G(sentence)[35,43]",
+                "DOBJ(dobj)[35,43] D(sentence)[35,43] G(need)[3,7]",
+                "NN(nn)[27,34] D(example)[27,34] G(sentence)[35,43]",
+                "NSUBJ(nsubj)[0,2] D(We)[0,2] G(need)[3,7]",
+                "NSUBJ(nsubj)[45,50] D(which)[45,50] G(contains)[51,59]",
+                "POBJ(pobj)[101,109] D(possible)[101,109] G(as)[98,100]",
+                "POBJ(pobj)[68,80] D(constituents)[68,80] G(as)[60,62]",
+                "PREP(prep)[60,62] D(as)[60,62] G(contains)[51,59]",
+                "PREP(prep)[98,100] D(as)[98,100] G(contains)[51,59]",
+                "RCMOD(rcmod)[51,59] D(contains)[51,59] G(sentence)[35,43]" };
 
         String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
@@ -204,31 +215,6 @@ public class StanfordParserTest
     }
 
     @Test
-    public void testEnglishPcfgUpperCaseDepTags()
-        throws Exception
-    {
-        JCas jcas = runTest("en", "pcfg", documentEnglish, 
-                StanfordParser.PARAM_UPPER_CASE_DEPENDENCIES, true);
-
-        String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "RCMOD 35,43,51,59",
-                "DET 35,43,8,9", "POBJ 60,62,68,80", "POBJ 98,100,101,109", "DOBJ 3,7,35,43",
-                "AMOD 35,43,15,26", "AMOD 68,80,63,67", "NSUBJ 3,7,0,2", "NSUBJ 51,59,45,50",
-                "PREP 51,59,60,62", "PREP 51,59,98,100", "CC 68,80,81,84", "NN 35,43,27,34",
-                "CONJ 68,80,85,97" };
-
-        String[] depTags = new String[] { "ACOMP", "ADVCL", "ADVMOD", "AGENT", "AMOD", "APPOS",
-                "ARG", "ATTR", "AUX", "AUXPASS", "CC", "CCOMP", "COMP", "CONJ", "COP", "CSUBJ",
-                "CSUBJPASS", "DEP", "DET", "DISCOURSE", "DOBJ", "EXPL", "GOESWITH", "GOV",
-                "INFMOD", "IOBJ", "MARK", "MOD", "MWE", "NEG", "NN", "NPADVMOD", "NSUBJ",
-                "NSUBJPASS", "NUM", "NUMBER", "OBJ", "PARATAXIS", "PARTMOD", "PCOMP", "POBJ",
-                "POSS", "POSSESSIVE", "PRECONJ", "PRED", "PREDET", "PREP", "PRT", "PUNCT",
-                "QUANTMOD", "RCMOD", "REF", "REL", "SDEP", "SUBJ", "TMOD", "XCOMP", "XSUBJ" };
-
-        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
-        AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
-    }
-
-    @Test
     public void testEnglishFactored()
         throws Exception
     {
@@ -242,11 +228,22 @@ public class StanfordParserTest
                 "NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
                 "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
-        String[] dependencies = new String[] { "ADVMOD 15,26,10,14", "ADVMOD 63,67,60,62",
-                "AMOD 35,43,15,26", "AMOD 68,80,63,67", "CC 68,80,81,84", "CONJ 68,80,85,97",
-                "DET 35,43,8,9", "DOBJ 3,7,35,43", "DOBJ 51,59,68,80", "NN 35,43,27,34",
-                "NSUBJ 3,7,0,2", "NSUBJ 51,59,45,50", "POBJ 98,100,101,109", "PREP 51,59,98,100",
-                "RCMOD 35,43,51,59" };
+        String[] dependencies = new String[] { 
+                "ADVMOD(advmod)[10,14] D(very)[10,14] G(complicated)[15,26]",
+                "ADVMOD(advmod)[60,62] D(as)[60,62] G(many)[63,67]",
+                "AMOD(amod)[15,26] D(complicated)[15,26] G(sentence)[35,43]",
+                "AMOD(amod)[63,67] D(many)[63,67] G(constituents)[68,80]",
+                "CC(cc)[81,84] D(and)[81,84] G(constituents)[68,80]",
+                "CONJ(conj)[85,97] D(dependencies)[85,97] G(constituents)[68,80]",
+                "DET(det)[8,9] D(a)[8,9] G(sentence)[35,43]",
+                "DOBJ(dobj)[35,43] D(sentence)[35,43] G(need)[3,7]",
+                "DOBJ(dobj)[68,80] D(constituents)[68,80] G(contains)[51,59]",
+                "NN(nn)[27,34] D(example)[27,34] G(sentence)[35,43]",
+                "NSUBJ(nsubj)[0,2] D(We)[0,2] G(need)[3,7]",
+                "NSUBJ(nsubj)[45,50] D(which)[45,50] G(contains)[51,59]",
+                "POBJ(pobj)[101,109] D(possible)[101,109] G(as)[98,100]",
+                "PREP(prep)[98,100] D(as)[98,100] G(contains)[51,59]",
+                "RCMOD(rcmod)[51,59] D(contains)[51,59] G(sentence)[35,43]" };
 
         String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
@@ -405,11 +402,22 @@ public class StanfordParserTest
                 "QP 19,21", "QP 4,6", "ROOT 0,31", "VP 17,23", "VP 17,30", "VP 2,13", "VP 24,30",
                 "VP 28,30" };
 
-        String[] dependencies = new String[] { "ADVMOD 17,19,13,15", "ADVMOD 8,10,6,8",
-                "ASSM 8,10,10,11", "ASSMOD 11,13,8,10", "CC 17,19,23,24", "CONJ 17,19,28,30",
-                "DEP 2,4,17,19", "DOBJ 17,19,21,23", "DOBJ 2,4,11,13", "DVPM 24,27,27,28",
-                "DVPMOD 28,30,24,27", "NSUBJ 17,19,15,17", "NSUBJ 2,4,0,2", "NUMMOD 11,13,4,6",
-                "NUMMOD 21,23,19,21" };
+        String[] dependencies = new String[] { 
+                "ADVMOD(advmod)[13,15] D(例如)[13,15] G(包含)[17,19]",
+                "ADVMOD(advmod)[6,8] D(非常)[6,8] G(复杂)[8,10]",
+                "CC(cc)[23,24] D(和)[23,24] G(包含)[17,19]",
+                "CONJ(conj)[28,30] D(依赖)[28,30] G(包含)[17,19]",
+                "DEP(dep)[17,19] D(包含)[17,19] G(需要)[2,4]",
+                "DOBJ(dobj)[11,13] D(句子)[11,13] G(需要)[2,4]",
+                "DOBJ(dobj)[21,23] D(成分)[21,23] G(包含)[17,19]",
+                "Dependency(assm)[10,11] D(的)[10,11] G(复杂)[8,10]",
+                "Dependency(assmod)[8,10] D(复杂)[8,10] G(句子)[11,13]",
+                "Dependency(dvpm)[27,28] D(的)[27,28] G(尽可能)[24,27]",
+                "Dependency(dvpmod)[24,27] D(尽可能)[24,27] G(依赖)[28,30]",
+                "Dependency(nummod)[19,21] D(许多)[19,21] G(成分)[21,23]",
+                "Dependency(nummod)[4,6] D(一个)[4,6] G(句子)[11,13]",
+                "NSUBJ(nsubj)[0,2] D(我们)[0,2] G(需要)[2,4]",
+                "NSUBJ(nsubj)[15,17] D(其中)[15,17] G(包含)[17,19]" };
 
         String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "O", "O", "NN", "ADJ", "NN",
                 "V", "CARD", "NN", "CONJ", "ADJ", "O", "V", "PUNC" };
