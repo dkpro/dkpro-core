@@ -320,11 +320,11 @@ public class AssertAnnotations
 
         boolean offsetCorrect = true;
         for (Dependency a : aActual) {
-            actual.add(String.format("%s(%s)[%d,%d] D(%s)[%d,%d] G(%s)[%d,%d]", a.getClass()
-                    .getSimpleName(), a.getDependencyType(), a.getBegin(), a.getEnd(), a
-                    .getDependent().getCoveredText(), a.getDependent().getBegin(), a.getDependent()
-                    .getEnd(), a.getGovernor().getCoveredText(), a.getGovernor().getBegin(), a
-                    .getGovernor().getEnd()));
+            actual.add(String.format("[%3d,%3d]%s(%s) D[%d,%d](%s) G[%d,%d](%s)", a.getBegin(), a
+                    .getEnd(), a.getClass().getSimpleName(), a.getDependencyType(), a
+                    .getDependent().getBegin(), a.getDependent().getEnd(), a.getDependent()
+                    .getCoveredText(), a.getGovernor().getBegin(), a.getGovernor().getEnd(), a
+                    .getGovernor().getCoveredText()));
             offsetCorrect &= (a.getBegin() == a.getDependent().getBegin())
                     && (a.getEnd() == a.getDependent().getEnd());
         }

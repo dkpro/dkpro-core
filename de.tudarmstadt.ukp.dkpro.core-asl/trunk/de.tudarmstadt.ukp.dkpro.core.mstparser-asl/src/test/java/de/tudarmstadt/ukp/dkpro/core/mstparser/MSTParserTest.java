@@ -72,8 +72,12 @@ public class MSTParserTest
 		        "Dependency(S)[52,60] D(contains)[52,60] G(which)[46,51]",
 		        "Dependency(SBAR)[46,51] D(which)[46,51] G(need)[3,7]"};
 
-		AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        String[] depTags = new String[] { "<no-type>", "ADJP", "ADVP", "CONJP", "DEP", "FRAG",
+                "NAC", "NP", "NP-OBJ", "NP-PRD", "NP-SBJ", "NX", "PP", "PRN", "PRT", "QP", "ROOT",
+                "S", "SBAR", "SINV", "SQ", "UCP", "VP", "WHNP" };
 
+		AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
 	}
 
 	/**
