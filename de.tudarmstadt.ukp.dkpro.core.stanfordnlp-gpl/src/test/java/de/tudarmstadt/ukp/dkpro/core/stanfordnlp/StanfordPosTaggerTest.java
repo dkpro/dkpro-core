@@ -41,6 +41,18 @@ public class StanfordPosTaggerTest
         runTest("en", "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
+
+        runTest("en", "fast.41", "This is a test . \n",
+                new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
+                new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
+
+        runTest("en", "twitter", "A neural net . \n",
+                new String[] { "DT",  "JJ",     "NN",  "." },
+                new String[] { "ART", "ADJ",    "NN",  "PUNC" });
+
+        runTest("en", "twitter-fast", "John is purchasing oranges . \n",
+                new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
+                new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
 
 	@Test
