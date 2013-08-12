@@ -87,19 +87,15 @@ public class NounSemanticFieldResource
 	}
 	
 	
-	private void readFileToMap(BufferedReader bufferedReader) {		
+	private void readFileToMap(BufferedReader bufferedReader) throws IOException {		
 		String line;
-		try {
-			while((line = bufferedReader.readLine())!=null){	
-				String temp[] = line.split("\t");
-				String noun = temp[0];
-				String semField = temp[1];
-				System.out.println(line);
-				nounSemanticFieldMap.put(noun, semField);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+		while((line = bufferedReader.readLine())!=null){	
+			String temp[] = line.split("\t");
+			String noun = temp[0];
+			String semField = temp[1];
+			System.out.println(line);
+			nounSemanticFieldMap.put(noun, semField);
 		}
 	}
 	
