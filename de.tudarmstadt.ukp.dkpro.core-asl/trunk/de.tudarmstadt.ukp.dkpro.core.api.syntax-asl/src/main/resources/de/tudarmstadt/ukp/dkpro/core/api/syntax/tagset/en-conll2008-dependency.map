@@ -1,0 +1,47 @@
+# Stanford typed dependencies
+#
+# Source: http://barcelona.research.yahoo.net/dokuwiki/lib/exe/fetch.php?id=conll2008%3Aformat&cache=cache&media=conll2008:conll-syntax.pdf
+# 
+# 4.1 Labels Retained from the Penn Treebank
+# Label Meaning
+# ADV Unclassified adverbial
+# BNF Benefactor (the for phrase for verbs that undergo dative shift) DIR Direction
+# DTV Dative (the to phrase for verbs that undergo dative shift) EXT Extent
+# LGS Logical subject
+# LOC Location
+# MNR Manner
+# PRD Predicative complement
+# PRP Purpose or reason
+# PUT Various locative complements of the verb put
+# SBJ Subject
+# TMP Temporal
+# VOC Vocative
+
+
+# 4.2 Labels Derived from GLARF
+# Label Meaning
+# APPO Apposition
+# HMOD Modifier in hyphenation, such as two in two-part HYPH Between first part of hyphenation and hyphen NAME Name-internal link
+# POSTHON Posthonorifics such as Jr, Inc.
+# SUFFIX Possessive ’s
+# TITLE Titles such as Mr, Dr
+
+
+# 4.3 Inferred Labels
+# Label Meaning
+# AMOD Modifier of adjective or adverb
+# CONJ Between conjunction and second conjunct in a coordination
+# COORD Coordination
+# DEP Unclassified relation
+# EXTR Extraposed element in expletive constructions
+# GAP Gapping: between conjunction and the parts of a structure with an ellipsed head IM Between infinitive marker and verb
+# NMOD Modifier of nominal
+# OBJ Direct or indirect object or clause complement
+# OPRD Object complement
+# P Punctuation
+# PMOD Between preposition and its child in a PP
+# PRN Parenthetical
+# PRT Particle
+# ROOT Root
+# SUB Between subordinating conjunction and verb
+# VC Verb chain
