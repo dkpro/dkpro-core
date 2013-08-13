@@ -1,0 +1,105 @@
+# NEGRA grammatical functions
+#
+# Source: http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/kanten.html
+#
+# AC adpositional case marker
+AC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# ADC adjective component
+ADC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# AMS measure argument of adj
+AMS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# APP apposition
+APP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# AVC adverbial phrase component
+AVC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# CC comparative complement
+CC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# CD coordinating conjunction
+CD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# CJ conjunct
+CJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# CM comparative concjunction
+CM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# CP complementizer
+CP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# DA dative
+DA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# DH discourse-level head
+DH=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# DM discourse marker
+DM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# GL prenominal genitive 
+# GR postnominal genitive
+# HD head
+# JU junctor
+JU=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# MC comitative
+# MI instrumental 
+# ML locative
+# MNR postnominal modifier
+MNR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# MO modifier
+MO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# MR rhetorical modifier
+# MW way (directional modifier)
+# NG negation 
+NG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# NK noun kernel modifier 
+NK=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# NMC numerical component 
+NMC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# OA accusative object 
+OA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# OA2 second accusative object 
+OA2=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# OC clausal object 
+OC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# OG genitive object 
+OG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PD predicate
+PD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PG pseudo-genitive
+PG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PH placeholder
+PH=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PM morphological particle
+PM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PNC proper noun component 
+PNC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# RC relative clause 
+RC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# RE repeated element 
+RE=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# RS reported speech
+RS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SB subject 
+SB=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SBP passivised subject (PP) 
+SBP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SP subject or predicate
+SP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SVP separable verb prefix
+SVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# UC (idiosyncratic) unit component 
+UC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# VO vocative 
+VO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+
+# In English model of Malt parser
+# --
+# <None>
+# <no-type>
+# <root-type>
+# AG
+# CVC
+# END
+# EP
+# OP
+# PAR
+
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+
