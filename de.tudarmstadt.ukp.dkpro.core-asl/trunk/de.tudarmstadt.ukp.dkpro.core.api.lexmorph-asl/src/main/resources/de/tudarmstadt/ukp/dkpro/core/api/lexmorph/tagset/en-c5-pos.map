@@ -69,13 +69,13 @@ DTQ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
 #       nouns such as committee and team are tagged NN0, on the grounds that they are capable of
 #       taking singular or plural agreement with the following verb: e.g. 'The committee disagrees/
 #       disagree'.]
-NN0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+NN0=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 
 # NN1	Singular common noun (e.g. pencil, goose, time, revelation)
-NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+NN1=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 
 # NN2	Plural common noun (e.g. pencils, geese, times, revelations)
-NN2=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.N
+NN2=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
 
 # NP0	Proper noun (e.g. London, Michael, Mars, IBM) [N.B. the distinction between singular and 
 #       plural proper nouns is not indicated in the tagset, plural proper nouns being a comparative
