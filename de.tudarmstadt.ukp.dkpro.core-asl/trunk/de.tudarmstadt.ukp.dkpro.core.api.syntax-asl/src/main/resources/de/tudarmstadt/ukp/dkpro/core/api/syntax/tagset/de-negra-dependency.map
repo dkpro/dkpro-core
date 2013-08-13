@@ -85,7 +85,7 @@ UC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # VO vocative 
 VO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 
-# In English model of Malt parser
+# In German model of Malt parser
 # --
 # <None>
 # <no-type>
