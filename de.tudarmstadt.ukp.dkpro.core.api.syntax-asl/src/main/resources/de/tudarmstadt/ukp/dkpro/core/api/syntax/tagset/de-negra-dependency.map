@@ -1,6 +1,7 @@
 # NEGRA grammatical functions
 #
 # Source: http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/kanten.html
+# see also http://doras.dcu.ie/14900/1/Ines-Rehbein-PhD-Thesis-09.pdf, p. 30 ff.
 #
 # AC adpositional case marker
 AC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -18,11 +19,12 @@ CC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 CD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # CJ conjunct
 CJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
-# CM comparative concjunction
+# CM comparative conjunction
 CM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # CP complementizer
 CP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # DA dative
+# uby: gf=complement, case=dative
 DA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # DH discourse-level head
 DH=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -49,12 +51,16 @@ NK=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # NMC numerical component 
 NMC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # OA accusative object 
+# uby: gf=directObject, case=accusative
 OA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # OA2 second accusative object 
+# uby: gf=objectComplement
 OA2=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # OC clausal object 
+# uby: gf=directObject or complement, sc=subordinateClause or declarativeClause
 OC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # OG genitive object 
+# uby: gf=complement, case=genitive
 OG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # PD predicate
 PD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -73,6 +79,7 @@ RE=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # RS reported speech
 RS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # SB subject 
+# uby: gf=subject
 SB=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # SBP passivised subject (PP) 
 SBP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -94,7 +101,9 @@ VO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # CVC
 # END
 # EP
+# uby: sc=expletive
 # OP
+# uby: gf=prepositionalComplement
 # PAR
 
 

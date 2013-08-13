@@ -9,6 +9,7 @@ AMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # APPO Apposition
 APPO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # BNF Benefactor (the for phrase for verbs that undergo dative shift) DIR Direction
+# uby: gf= prepositionalComplement, preposition=for
 BNF=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # CONJ Between conjunction and second conjunct in a coordination
 CONJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -17,6 +18,7 @@ COORD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # DEP Unclassified relation
 DEP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # DTV Dative (the to phrase for verbs that undergo dative shift) EXT Extent
+uby: gf= prepositionalComplement, preposition=to
 DTV=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # EXTR Extraposed element in expletive constructions
 EXTR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -24,6 +26,7 @@ EXTR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # HMOD Modifier in hyphenation, such as two in two-part HYPH Between first part of hyphenation and hyphen NAME Name-internal link
 HMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # LGS Logical subject
+# uby: gf=subj
 LGS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # LOC Location
 LOC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -32,8 +35,10 @@ MNR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # NMOD Modifier of nominal
 NMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # OBJ Direct or indirect object or clause complement
+# uby: gf=complement
 OBJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # OPRD Object complement
+# uby: gf=objectComplement
 OPRD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # P Punctuation
 P=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -54,6 +59,7 @@ PUT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ROOT Root
 ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # SBJ Subject
+# uby: gf=subj
 SBJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # SUB Between subordinating conjunction and verb
 SUB=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
