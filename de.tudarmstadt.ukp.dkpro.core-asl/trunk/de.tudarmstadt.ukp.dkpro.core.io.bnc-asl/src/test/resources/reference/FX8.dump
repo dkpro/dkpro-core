@@ -268,13 +268,13 @@ Token
       end: 41
       value: "wound"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 36
       end: 41
       PosValue: "NN1"
 [wound]
-N
+NN
    sofa: _InitialView
    begin: 36
    end: 41
@@ -432,13 +432,13 @@ Token
       end: 58
       value: "bit"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 55
       end: 58
       PosValue: "NN1"
 [bit]
-N
+NN
    sofa: _InitialView
    begin: 55
    end: 58
@@ -1195,13 +1195,13 @@ Token
       end: 172
       value: "nightdress"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 162
       end: 172
       PosValue: "NN1"
 [nightdress]
-N
+NN
    sofa: _InitialView
    begin: 162
    end: 172
@@ -1852,13 +1852,13 @@ Token
       end: 290
       value: "clinic"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 284
       end: 290
       PosValue: "NN1"
 [clinic]
-N
+NN
    sofa: _InitialView
    begin: 284
    end: 290
@@ -1939,13 +1939,13 @@ Token
       end: 305
       value: "clinic"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 299
       end: 305
       PosValue: "NN1"
 [clinic]
-N
+NN
    sofa: _InitialView
    begin: 299
    end: 305
@@ -2847,13 +2847,13 @@ Token
       end: 443
       value: "doctor"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 437
       end: 443
       PosValue: "NN1"
 [doctor]
-N
+NN
    sofa: _InitialView
    begin: 437
    end: 443
@@ -3812,13 +3812,13 @@ Token
       end: 563
       value: "week"
    stem: <null>
-   pos: N
+   pos: NN
       sofa: _InitialView
       begin: 558
       end: 563
       PosValue: "NN2"
 [weeks]
-N
+NN
    sofa: _InitialView
    begin: 558
    end: 563
