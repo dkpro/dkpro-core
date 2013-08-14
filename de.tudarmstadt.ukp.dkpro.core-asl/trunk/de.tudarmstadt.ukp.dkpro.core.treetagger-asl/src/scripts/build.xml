@@ -176,7 +176,8 @@
 		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
 		  - 2012-09-12 | 2013-02-28 | 4b6459574b6b334a090399b76dbc2cdb
-		  - 2013-02-28 | now        | 9c015219f8a5c696f03ee43b72e913b0 : only 64 bit build 
+		  - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
+		  - 2013-05-07 | now        | 9c015219f8a5c696f03ee43b72e913b0
 		  -->
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
 			platform="linux-x86_64" file="tree-tagger" md5="9c015219f8a5c696f03ee43b72e913b0"/>
@@ -397,7 +398,8 @@
 		<property name="version.sw" value="20101115.0"/>
 		
 		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-03-17 | now        | 002bebeeca52d1112aa5f31173c5ecec
+		  - 2010-03-17 | 2013-07-29 | 0df5f70b0cc81a3b437a46a9e0a3d71b
+		  - 2013-07-29 | now        | 002bebeeca52d1112aa5f31173c5ecec
 		  -->
     	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swahili-par-linux-3.2.bin.gz"
     		type="tagger" endianness="little-endian" language="sw" encoding="ISO-8859-1" tagset="swatwol"
@@ -439,7 +441,8 @@
 
 		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
-		  - 2013-02-14 | now        | 30a9c4deed380e7986a4a76753ecde51
+		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
+		  - 2013-04-03 | now        | 30a9c4deed380e7986a4a76753ecde51
 		  -->
     	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="es" encoding="UTF-8" tagset="crater"
