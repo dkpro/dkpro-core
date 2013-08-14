@@ -145,7 +145,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="20130228.0"/>
+		<property name="version.bin" value="20130507.0"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -395,7 +395,7 @@
 	</target>
 
 	<target name="sw">
-		<property name="version.sw" value="20101115.0"/>
+		<property name="version.sw" value="20130729.0"/>
 		
 		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-03-17 | 2013-07-29 | 0df5f70b0cc81a3b437a46a9e0a3d71b
@@ -430,7 +430,7 @@
 	</target>
 	
 	<target name="es">
-		<property name="version.es" value="20130214.0"/>
+		<property name="version.es" value="20130403.0"/>
 		
 		<!-- FILE: spanish-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-02 | now        | 5ccc79322b7954bfc82923e6123cac04
