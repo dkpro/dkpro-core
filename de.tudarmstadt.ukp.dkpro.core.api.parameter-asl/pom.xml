@@ -24,11 +24,4 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
 	<name>DKPro Core ASL - Parameter API</name>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
 </project>
