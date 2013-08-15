@@ -1,0 +1,72 @@
+# Stanford typed dependencies
+#
+# Source: http://nlp.stanford.edu/software/dependencies_manual.pdf
+#
+# abbrev: abbreviation modifier
+# acomp: adjectival complement
+# advcl: adverbial clause modifier
+# advmod: adverbial modifier
+# agent: agent
+# amod: adjectival modifier
+# appos: appositional modifier
+# attr: attributive
+# aux: auxiliary
+# auxpass: passive auxiliary
+# cc: coordination
+# ccomp: clausal complement
+# complm: complementizer
+# conj: conjunct
+# cop: copula
+# csubj : clausal subject
+# csubjpass: clausal passive subject
+# dep: dependent
+# det: determiner
+# dobj : direct object
+# expl: expletive
+# infmod: infinitival modifier
+# iobj : indirect object
+# mark: marker
+# mwe: multi-word expression
+# neg: negation modifier
+# nn: noun compound modifier
+# npadvmod: noun phrase as adverbial modifier
+# nsubj : nominal subject
+# nsubjpass: passive nominal subject
+# num: numeric modifier
+# number: element of compound number
+# parataxis: parataxis
+# partmod: participial modifier
+# pcomp: prepositional complement
+# pobj: object of a preposition
+# poss: possession modifier
+# possessive: possessive modifier
+# preconj: preconjunct
+# predet: predeterminer
+# prep: prepositional modifier
+# prepc: prepositional clausal modifier
+# prt: phrasal verb particle
+# punct: punctuation
+# purpcl: purpose clause modifier
+# quantmod: quantifier phrase modifier
+# rcmod: relative clause modifier
+# ref: referent
+# rel: relative
+# root: root
+# tmod: temporal modifier
+# xcomp: open clausal complement
+# xsubj : controlling subject
+
+#
+# Additional tags used in Clear NLP ontoparser model
+#
+# HMOD
+# HYPH
+# INTJ
+# META
+# NMOD
+# OPRD
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DEP
