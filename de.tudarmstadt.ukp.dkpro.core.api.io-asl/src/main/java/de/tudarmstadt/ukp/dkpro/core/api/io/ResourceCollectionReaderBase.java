@@ -76,11 +76,18 @@ public abstract class ResourceCollectionReaderBase
 	public static final String INCLUDE_PREFIX = "[+]";
 	public static final String EXCLUDE_PREFIX = "[-]";
 
+    /**
+     * Location from which the input is read.
+     * 
+     * @deprecated use {@link #PARAM_SOURCE_LOCATION}
+     */
+	@Deprecated
+    public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
 	/**
 	 * Location from which the input is read.
 	 */
-	public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
-	@ConfigurationParameter(name=PARAM_PATH, mandatory=false)
+    public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
+	@ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=false)
 	private String path;
 
 	/**
