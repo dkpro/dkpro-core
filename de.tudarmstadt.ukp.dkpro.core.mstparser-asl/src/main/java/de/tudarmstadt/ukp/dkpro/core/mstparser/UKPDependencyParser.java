@@ -17,10 +17,19 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+
+import mstparser.Alphabet;
 import mstparser.ConfidenceEstimator;
 import mstparser.DependencyInstance;
 import mstparser.DependencyParser;
@@ -28,7 +37,7 @@ import mstparser.DependencyPipe;
 import mstparser.ParserOptions;
 
 public class UKPDependencyParser
-extends DependencyParser
+    extends DependencyParser
 {
 
     public UKPDependencyParser(DependencyPipe pipe, ParserOptions options)
@@ -36,24 +45,44 @@ extends DependencyParser
         super(pipe, options);
     }
 
-    public List<DependencyInstance> getParses() throws IOException {
+    @Override
+    public void loadModel(String file)
+        throws Exception
+    {
+        URL url = ResourceUtils.resolveLocation(file);
+        InputStream is = null;
+        try {
+            is = CompressionUtils.getInputStream(file, url.openStream());
+            
+            ObjectInputStream in = new ObjectInputStream(is);
+            params.parameters = (double[]) in.readObject();
+            pipe.dataAlphabet = (Alphabet) in.readObject();
+            pipe.typeAlphabet = (Alphabet) in.readObject();
+            pipe.closeAlphabets();
+        }
+        finally {
+            closeQuietly(is);
+        }
+    }
+
+    public List<DependencyInstance> getParses()
+        throws IOException
+    {
 
         return getParseTrees(false);
     }
 
-    private List<DependencyInstance> getParseTrees(boolean printParses) throws IOException {
+    private List<DependencyInstance> getParseTrees(boolean printParses)
+        throws IOException
+    {
 
         String tFile = options.testfile;
-        List <DependencyInstance> allInstances = new ArrayList<DependencyInstance>();
+        List<DependencyInstance> allInstances = new ArrayList<DependencyInstance>();
         ConfidenceEstimator confEstimator = null;
-        if (options.confidenceEstimator != null){
-            confEstimator =
-                    ConfidenceEstimator.resolveByName(options.confidenceEstimator,
-                            this);
-            System.out.println("Applying confidence estimation: "+
-                    options.confidenceEstimator);
+        if (options.confidenceEstimator != null) {
+            confEstimator = ConfidenceEstimator.resolveByName(options.confidenceEstimator, this);
+            System.out.println("Applying confidence estimation: " + options.confidenceEstimator);
         }
-
 
         pipe.initInputFile(tFile);
 
@@ -61,33 +90,27 @@ extends DependencyParser
 
         int cnt = 0;
 
-        while(instance != null) {
+        while (instance != null) {
             cnt++;
             String[] forms = instance.forms;
-            String[] formsNoRoot = new String[forms.length-1];
+            String[] formsNoRoot = new String[forms.length - 1];
             String[] posNoRoot = new String[formsNoRoot.length];
             String[] labels = new String[formsNoRoot.length];
             int[] heads = new int[formsNoRoot.length];
 
-            decode (instance,
-                    options.testK,
-                    params,
-                    formsNoRoot,
-                    posNoRoot,
-                    labels,
-                    heads );
-            DependencyInstance parsedInstance = new DependencyInstance(formsNoRoot, posNoRoot, labels, heads);
-            if (confEstimator != null ) {
-                double[] confidenceScores =
-                        confEstimator.estimateConfidence(instance);
-                parsedInstance =  new DependencyInstance(formsNoRoot, posNoRoot, labels, heads, confidenceScores);
+            decode(instance, options.testK, params, formsNoRoot, posNoRoot, labels, heads);
+            DependencyInstance parsedInstance = new DependencyInstance(formsNoRoot, posNoRoot,
+                    labels, heads);
+            if (confEstimator != null) {
+                double[] confidenceScores = confEstimator.estimateConfidence(instance);
+                parsedInstance = new DependencyInstance(formsNoRoot, posNoRoot, labels, heads,
+                        confidenceScores);
 
             }
-            if (printParses){
+            if (printParses) {
                 pipe.outputInstance(parsedInstance);
             }
             allInstances.add(parsedInstance);
-
 
             instance = pipe.nextInstance();
         }
