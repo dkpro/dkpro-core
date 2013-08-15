@@ -24,6 +24,7 @@
 		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
+	<name>DKPro Core ASL - Clear NLP</name>
 	<dependencies>
 		<dependency>
 			<groupId>com.googlecode.clearnlp</groupId>
@@ -202,5 +203,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<name>DKPro Core ASL - Clear NLP</name>
 </project>
