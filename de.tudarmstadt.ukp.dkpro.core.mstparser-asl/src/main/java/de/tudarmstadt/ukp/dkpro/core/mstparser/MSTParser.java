@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.util.JCasUtil.exists;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
@@ -49,14 +50,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
  * Wrapper for the MSTParser. More information about the parser can be found <a
- * href=http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html>here</a><br>
+ * href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a><br>
  * and<br>
  * and <a href="http://sourceforge.net/projects/mstparser/">here</a><br>
  *
@@ -129,7 +129,8 @@ public class MSTParser
 
                 setDefault(LANGUAGE, "en");
                 setDefault(VARIANT, "default");
-                setDefault(LOCATION, "classpath:${package}/lib/parser-${language}-${variant}.bin");
+                setDefault(LOCATION,
+                        "classpath:${package}/lib/parser-${language}-${variant}.properties");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
@@ -150,8 +151,7 @@ public class MSTParser
                 options.goldfile = "";
                 options.testfile = "";
                 getLogger().info("Retrieving model");
-                File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
-                options.modelName = modelFile.getAbsolutePath();
+                options.modelName = aUrl.toString();
 
                 DependencyPipe pipe = options.secondOrder ? new DependencyPipe2O(options)
                         : new DependencyPipe(options);
@@ -200,6 +200,11 @@ public class MSTParser
         modelProvider.configure(jcas.getCas());
         UKPDependencyParser dp = modelProvider.getResource();
 
+        // If there are no sentences or tokens in the CAS, skip it.
+        if (!exists(jcas, Sentence.class) || !exists(jcas, Token.class)) {
+            return;
+        }
+        
         // currently the parser needs a file as input, it cannot yet work directly with the
         // cas-structure
         try {
