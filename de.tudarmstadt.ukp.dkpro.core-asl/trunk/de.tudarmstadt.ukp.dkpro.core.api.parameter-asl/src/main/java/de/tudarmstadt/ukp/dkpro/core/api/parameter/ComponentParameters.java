@@ -189,6 +189,11 @@ public final class ComponentParameters
 	 */
 	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = "namedEntity" + MAPPING_LOCATION;
 
+	/**
+     * Location of the mapping file for dependency tags to UIMA types.
+     */
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = "dependency" + MAPPING_LOCATION;
+
 	private ComponentParameters()
 	{
 		// No instances of this class
