@@ -40,6 +40,8 @@ import mstparser.ParserOptions;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
@@ -49,17 +51,22 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Wrapper for the MSTParser. More information about the parser can be found <a
- * href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a><br>
+ * Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
+ * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a><br>
  * and<br>
  * and <a href="http://sourceforge.net/projects/mstparser/">here</a><br>
- *
+ * The MSTParser models tend to be very large, e.g. the 
+ * <a href="http://nlp.stanford.edu/software/stanford-dependencies.shtml">Eisner</a> model is about
+ * 600 MB uncompressed. With this model, parsing a simple sentence with MSTParser requires about
+ * 3 GB heap memory.
+ * 
  * @author beinborn
  * @author zesch
  */
@@ -103,7 +110,16 @@ public class MSTParser
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
+    /**
+     * Load the dependency to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
+    protected String dependencyMappingLocation;
+
     private ModelProviderBase<UKPDependencyParser> modelProvider;
+    private MappingProvider mappingProvider;
 
     /**
      * Initializes the MSTParser and creates a ModelResourceProvicer
@@ -127,8 +143,7 @@ public class MSTParser
 
                 setDefault(ARTIFACT_ID, "${groupId}.mstparser-model-parser-${language}-${variant}");
 
-                setDefault(LANGUAGE, "en");
-                setDefault(VARIANT, "default");
+                setDefaultVariantsLocation("${package}/lib/parser-default-variants.map");
                 setDefault(LOCATION,
                         "classpath:${package}/lib/parser-${language}-${variant}.properties");
 
@@ -182,6 +197,15 @@ public class MSTParser
                 return dp;
             };
         };
+        
+        mappingProvider = new MappingProvider();
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/syntax/tagset/${language}-${dependency.tagset}-dependency.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, Dependency.class.getName());
+        mappingProvider.setDefault("dependency.tagset", "default");
+        mappingProvider.setOverride(MappingProvider.LOCATION, dependencyMappingLocation);
+        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        mappingProvider.addImport("dependency.tagset", modelProvider);
     }
 
     /**
@@ -197,7 +221,9 @@ public class MSTParser
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
     {
-        modelProvider.configure(jcas.getCas());
+        CAS cas = jcas.getCas();
+        modelProvider.configure(cas);
+        mappingProvider.configure(cas);
         UKPDependencyParser dp = modelProvider.getResource();
 
         // If there are no sentences or tokens in the CAS, skip it.
@@ -242,12 +268,12 @@ public class MSTParser
                 Token token = tokens.get(formsIndex);
 
                 // get dependency relation and head information for token
-                String depRel = instance.deprels[formsIndex];
                 int head = instance.heads[formsIndex];
 
                 // write dependency information as annotation to JCas
-                Dependency dep = new Dependency(jcas);
-                dep.setDependencyType(depRel);
+                Type depRel = mappingProvider.getTagType(instance.deprels[formsIndex]);
+                Dependency dep = (Dependency) cas.createFS(depRel);
+                dep.setDependencyType(instance.deprels[formsIndex]);
 
                 // the dependent is the token itself
                 dep.setDependent(token);
