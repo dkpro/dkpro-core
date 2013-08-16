@@ -526,7 +526,7 @@ public class StanfordParser
                 // need to set difference out the tags from the tagIndex, and then it's as
                 // above. -- C. Manning
                 SingletonTagset constTags = new SingletonTagset(
-                        Constituent.class, metadata.getProperty("constituent.type.tagset"));
+                        Constituent.class, metadata.getProperty("constituent.tagset"));
                 for (String tag : pd.stateIndex) {
                     String t = lp.basicCategory(tag);
                     // https://mailman.stanford.edu/pipermail/parser-user/2012-December/002156.html
