@@ -324,7 +324,7 @@ public class OpenNlpParser
                     metadata.getProperty("tagger.tagset"), POS.class, model.getParserTaggerModel()
                             .getPosModel()));
             addTagset(new OpenNlpParserTagsetDescriptionProvider(
-                    metadata.getProperty("constituent.type.tagset"), Constituent.class, model
+                    metadata.getProperty("constituent.tagset"), Constituent.class, model
                             .getParserChunkerModel().getChunkerModel()));
 
             if (printTagSet) {
