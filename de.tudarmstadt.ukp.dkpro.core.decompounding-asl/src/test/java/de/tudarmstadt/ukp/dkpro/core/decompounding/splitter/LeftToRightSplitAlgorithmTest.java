@@ -27,7 +27,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -100,7 +99,6 @@ public class LeftToRightSplitAlgorithmTest
 		Assert.assertEquals("alarm+reaktion(en)", result.get(2).toString());
 	}
 
-	@Ignore
 	@Test
 	public void testSplit4() throws IOException{
 
