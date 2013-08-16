@@ -154,8 +154,6 @@ public class StanfordNamedEntityRecognizer
         };
 
         mappingProvider = new MappingProvider();
-        mappingProvider
-                .setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/ner-default-variants.map");
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
                 + "core/stanfordnlp/lib/ner-${language}-${variant}.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, NamedEntity.class.getName());
