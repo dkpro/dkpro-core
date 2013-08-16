@@ -8,7 +8,7 @@
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *   
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,7 +23,6 @@ import java.io.IOException;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -80,7 +79,6 @@ public class TrieTest
 		Assert.assertEquals(new Integer(0), t.findWord("abcde").getValue());
 	}
 
-	@Ignore
 	@Test
 	public void testSimpleDict() throws IOException
 	{
@@ -106,7 +104,6 @@ public class TrieTest
 
 	}
 
-	@Ignore
 	@Test
 	public void testSimpleDictReverse() throws IOException
 	{

@@ -23,7 +23,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class FinderTest
@@ -73,7 +72,6 @@ public class FinderTest
 		index.delete();
 	}
 
-	@Ignore
 	@Test
 	public void testFinder2()
 		throws Exception

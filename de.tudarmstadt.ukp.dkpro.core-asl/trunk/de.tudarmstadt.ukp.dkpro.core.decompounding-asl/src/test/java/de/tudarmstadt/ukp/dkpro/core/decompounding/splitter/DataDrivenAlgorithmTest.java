@@ -27,7 +27,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
@@ -53,7 +52,6 @@ public class DataDrivenAlgorithmTest
         Assert.assertEquals("friedens+politik", result.get(1).toString());
     }
 
-    @Ignore
     @Test
     public void testSplit2()
         throws IOException

@@ -8,7 +8,7 @@
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *   
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -23,13 +23,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
+import org.apache.ivy.util.cli.CommandLine;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
@@ -38,9 +32,9 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.NGramModel;
 
 /**
  * Contains base method for the ranking algorithms
- * 
+ *
  * @author Jens Haase <je.haase@googlemail.com>
- * 
+ *
  */
 public abstract class AbstractRanker implements Ranker
 {
@@ -49,23 +43,23 @@ public abstract class AbstractRanker implements Ranker
 
 	/**
 	 * Empty constructor
-	 * 
+	 *
 	 * Use setFinder before using this class
 	 */
 	public AbstractRanker() {
-		
+
 	}
-	
+
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param aFinder
 	 */
 	public AbstractRanker(Finder aFinder)
 	{
 		finder = aFinder;
 	}
-	
+
 	public Finder getFinder()
 	{
 		return finder;
@@ -73,7 +67,7 @@ public abstract class AbstractRanker implements Ranker
 
 	/**
 	 * Gets the frequency of a Split Element
-	 * 
+	 *
 	 * @param aWord
 	 * @return
 	 */
@@ -85,7 +79,7 @@ public abstract class AbstractRanker implements Ranker
 
 	/**
 	 * Returns the frequency of n-grams that contain both split elements
-	 * 
+	 *
 	 * @param aWord1
 	 * @param aWord2
 	 * @return
@@ -97,7 +91,7 @@ public abstract class AbstractRanker implements Ranker
 
 	/**
 	 * Returns the frequency for a array of words
-	 * 
+	 *
 	 * @param aWords
 	 * @return
 	 */
@@ -115,40 +109,6 @@ public abstract class AbstractRanker implements Ranker
 	public final static String INDEX_OPTION = "luceneIndex";
 	public final static String LIMIT_OPTION = "limit";
 
-	@SuppressWarnings("static-access")
-	protected static Options basicOptions()
-	{
-		// Set up options
-		Options options = new Options();
-		options.addOption(OptionBuilder.withLongOpt(INDEX_OPTION)
-				.withDescription("The path to the web1t lucene index").hasArg()
-				.isRequired().create());
-		options.addOption(OptionBuilder.withLongOpt(LIMIT_OPTION)
-				.withDescription("(optional) Limit of results to evaluate")
-				.hasArg().create());
-
-		return options;
-	}
-
-	public static CommandLine parseArgs(String[] args)
-	{
-		CommandLineParser parser = new PosixParser();
-		CommandLine cmd;
-		try {
-			cmd = parser.parse(AbstractRanker.basicOptions(), args);
-		}
-		catch (ParseException e) {
-			System.err.println("Error: " + e.getMessage());
-
-			HelpFormatter formatter = new HelpFormatter();
-			formatter
-					.printHelp("AbstractRanker", AbstractRanker.basicOptions());
-			return null;
-		}
-
-		return cmd;
-	}
-
 	public static int getLimitOption(CommandLine aCmd)
 	{
 		int i = Integer.MAX_VALUE;
@@ -163,12 +123,12 @@ public abstract class AbstractRanker implements Ranker
 	{
 		return aCmd.getOptionValue(INDEX_OPTION);
 	}
-	
+
 	@Override
 	public void setFinder(Finder aFinder) {
 		finder = aFinder;
 	}
-	
+
 	/**
 	 * Expects that the splits list contains at least one element and that this is the unsplit word.
 	 */
@@ -181,11 +141,11 @@ public abstract class AbstractRanker implements Ranker
 			}
 		}
 		Collections.sort(filtered);
-		
+
 		if (filtered.isEmpty()) {
 			filtered.add(aSplits.get(0));
 		}
-		
+
 		return filtered;
 	}
 }

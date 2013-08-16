@@ -27,12 +27,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.OptionBuilder;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.PosixParser;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -47,7 +41,6 @@ import org.apache.lucene.store.LockObtainFailedException;
 import org.apache.lucene.util.Version;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary;
 
 /**
  * Index the Google Web1T corpus in lucene.
@@ -70,11 +63,11 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary
 public class LuceneIndexer
 {
 
-	private File web1tFolder;
-	private File outputPath;
+	private final File web1tFolder;
+	private final File outputPath;
 	private int indexes;
 	private Dictionary dictionary;
-	
+
 	private static Log logger;
 
 	/**
@@ -86,9 +79,9 @@ public class LuceneIndexer
 		extends Thread
 	{
 
-		private List<File> files;
-		private File output;
-		private Dictionary dict;
+		private final List<File> files;
+		private final File output;
+		private final Dictionary dict;
 
 		public Worker(List<File> aFileList, File aOutputFolder,
 				Dictionary aDictionary)
@@ -275,61 +268,4 @@ public class LuceneIndexer
 		dictionary = aDictionary;
 	}
 
-	/**
-	 * Execute the indexer. Following parameter are allowed:
-	 *
-	 * * --web1t The folder with all extracted n-gram files * --outputPath The
-	 * lucene index folder * --index (optional) Number of how many indexes
-	 * should be created. Default: 1
-	 *
-	 * @param args
-	 */
-	@SuppressWarnings("static-access")
-	public static void main(String[] args) throws Exception
-	{
-		Options options = new Options();
-		options.addOption(OptionBuilder.withLongOpt("web1t")
-				.withDescription("Folder with the web1t extracted documents")
-				.hasArg().isRequired().create());
-		options.addOption(OptionBuilder.withLongOpt("outputPath")
-				.withDescription("File, where the index should be created")
-				.hasArg().isRequired().create());
-		options.addOption(OptionBuilder
-				.withLongOpt("index")
-				.withDescription(
-						"(optional) Number of how many indexes should be created. Default: 1")
-				.hasArg().create());
-		options.addOption(OptionBuilder
-				.withLongOpt("igerman98")
-				.withDescription(
-						"(optional) If this argument is set, only words of the german dictionary will be added to the index")
-				.create());
-
-		CommandLineParser parser = new PosixParser();
-		try {
-			CommandLine cmd = parser.parse(options, args);
-
-			int i = 1;
-			if (cmd.hasOption("index")) {
-				i = Integer.valueOf(cmd.getOptionValue("index"));
-			}
-
-			LuceneIndexer indexer = new LuceneIndexer(new File(
-					cmd.getOptionValue("web1t")), new File(
-					cmd.getOptionValue("outputPath")), i);
-
-			if (cmd.hasOption("igerman98")) {
-				indexer.setDictionary(new German98Dictionary(new File(
-						"src/main/resources/de_DE.dic"), new File(
-						"src/main/resources/de_DE.aff")));
-			}
-
-			indexer.index();
-		}
-		catch (Exception e) {
-			HelpFormatter formatter = new HelpFormatter();
-			formatter.printHelp("LuceneIndexer", options);
-			throw e;
-		}
-	}
 }
