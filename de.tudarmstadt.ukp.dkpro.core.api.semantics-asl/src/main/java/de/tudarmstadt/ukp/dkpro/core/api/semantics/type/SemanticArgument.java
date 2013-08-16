@@ -1,7 +1,7 @@
 
 
 /* First created by JCasGen Mon Nov 12 23:24:12 CET 2012 */
-package de.tudarmstadt.ukp.dkpro.core.api.srl.type;
+package de.tudarmstadt.ukp.dkpro.core.api.semantics.type;
 
 import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Wed Nov 28 21:03:03 CET 2012
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.srl-asl/src/main/resources/desc/type/SemanticRoleLabeling.xml
+ * Updated by JCasGen Fri Aug 16 15:51:53 CEST 2013
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/resources/desc/type/Semantics.xml
  * @generated */
 public class SemanticArgument extends Annotation {
   /** @generated
@@ -69,14 +69,14 @@ public class SemanticArgument extends Annotation {
    * @generated */
   public String getRole() {
     if (SemanticArgument_Type.featOkTst && ((SemanticArgument_Type)jcasType).casFeat_role == null)
-      jcasType.jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument");
+      jcasType.jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument");
     return jcasType.ll_cas.ll_getStringValue(addr, ((SemanticArgument_Type)jcasType).casFeatCode_role);}
     
   /** setter for role - sets The role which the argument takes. The value depends on the theory being used, e.g. Arg0, Arg1, etc. or Buyer, Seller, etc. 
    * @generated */
   public void setRole(String v) {
     if (SemanticArgument_Type.featOkTst && ((SemanticArgument_Type)jcasType).casFeat_role == null)
-      jcasType.jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument");
+      jcasType.jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument");
     jcasType.ll_cas.ll_setStringValue(addr, ((SemanticArgument_Type)jcasType).casFeatCode_role, v);}    
   }
 

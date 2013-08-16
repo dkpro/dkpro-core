@@ -1,6 +1,6 @@
 
 /* First created by JCasGen Mon Nov 12 23:24:12 CET 2012 */
-package de.tudarmstadt.ukp.dkpro.core.api.srl.type;
+package de.tudarmstadt.ukp.dkpro.core.api.semantics.type;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Wed Nov 28 21:03:03 CET 2012
+ * Updated by JCasGen Fri Aug 16 15:51:53 CEST 2013
  * @generated */
 public class SemanticArgument_Type extends Annotation_Type {
   /** @generated */
@@ -42,7 +42,7 @@ public class SemanticArgument_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument");
  
   /** @generated */
   final Feature casFeat_role;
@@ -51,13 +51,13 @@ public class SemanticArgument_Type extends Annotation_Type {
   /** @generated */ 
   public String getRole(int addr) {
         if (featOkTst && casFeat_role == null)
-      jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument");
+      jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument");
     return ll_cas.ll_getStringValue(addr, casFeatCode_role);
   }
   /** @generated */    
   public void setRole(int addr, String v) {
         if (featOkTst && casFeat_role == null)
-      jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument");
+      jcas.throwFeatMissing("role", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument");
     ll_cas.ll_setStringValue(addr, casFeatCode_role, v);}
     
   
