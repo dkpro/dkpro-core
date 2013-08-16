@@ -1,6 +1,6 @@
 
 /* First created by JCasGen Wed Nov 28 21:03:03 CET 2012 */
-package de.tudarmstadt.ukp.dkpro.core.api.srl.type;
+package de.tudarmstadt.ukp.dkpro.core.api.semantics.type;
 
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
@@ -14,7 +14,7 @@ import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** The predicate or main verb of a sentence.
- * Updated by JCasGen Wed Nov 28 21:03:03 CET 2012
+ * Updated by JCasGen Fri Aug 16 15:51:53 CEST 2013
  * @generated */
 public class SemanticPredicate_Type extends Annotation_Type {
   /** @generated */
@@ -42,7 +42,7 @@ public class SemanticPredicate_Type extends Annotation_Type {
   /** @generated 
      @modifiable */
   @SuppressWarnings ("hiding")
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
  
   /** @generated */
   final Feature casFeat_category;
@@ -51,13 +51,13 @@ public class SemanticPredicate_Type extends Annotation_Type {
   /** @generated */ 
   public String getCategory(int addr) {
         if (featOkTst && casFeat_category == null)
-      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
     return ll_cas.ll_getStringValue(addr, casFeatCode_category);
   }
   /** @generated */    
   public void setCategory(int addr, String v) {
         if (featOkTst && casFeat_category == null)
-      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+      jcas.throwFeatMissing("category", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
     ll_cas.ll_setStringValue(addr, casFeatCode_category, v);}
     
   
@@ -69,29 +69,29 @@ public class SemanticPredicate_Type extends Annotation_Type {
   /** @generated */ 
   public int getArguments(int addr) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
     return ll_cas.ll_getRefValue(addr, casFeatCode_arguments);
   }
   /** @generated */    
   public void setArguments(int addr, int v) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
     ll_cas.ll_setRefValue(addr, casFeatCode_arguments, v);}
     
    /** @generated */
   public int getArguments(int addr, int i) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
     if (lowLevelTypeChecks)
       return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i);
-	return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i);
+  return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i);
   }
    
   /** @generated */ 
   public void setArguments(int addr, int i, int v) {
         if (featOkTst && casFeat_arguments == null)
-      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate");
+      jcas.throwFeatMissing("arguments", "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate");
     if (lowLevelTypeChecks)
       ll_cas.ll_setRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i, v, true);
     jcas.checkArrayBounds(ll_cas.ll_getRefValue(addr, casFeatCode_arguments), i);

@@ -56,8 +56,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument;
-import de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 @TypeCapability(
@@ -68,8 +68,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"},
         outputs = {
-                "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate",
-                "de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument"}
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
+                "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"}
         )
 public class ClearNlpSemanticRoleLabeler
 	extends JCasAnnotator_ImplBase
