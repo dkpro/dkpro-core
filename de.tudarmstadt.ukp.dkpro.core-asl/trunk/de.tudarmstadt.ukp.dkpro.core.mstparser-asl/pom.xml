@@ -74,7 +74,12 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-default</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-eisner</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-sample</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -87,8 +92,13 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-default</artifactId>
-				<version>20121910.0</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-sample</artifactId>
+				<version>20121019.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-model-parser-en-eisner</artifactId>
+				<version>20100416.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

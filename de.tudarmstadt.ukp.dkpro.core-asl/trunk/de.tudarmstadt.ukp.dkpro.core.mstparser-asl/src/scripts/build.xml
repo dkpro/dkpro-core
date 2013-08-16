@@ -19,25 +19,76 @@
 	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/mstparser"/>
 	
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
 	</import>
-	
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/mstparser/lib"/>
+
 	<target name="local-maven">
-		<property name="install-artifact-enable" value="true"/>
+		<property name="install-artifact-mode" value="local"/>
 		<antcall target="separate-jars"/>
 	</target>
-	
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
 	<target name="separate-jars" depends="en"/>
 
 	<target name="en">
 		<mkdir dir="target/download"/>
 
-    	<get src="http://dkpro-core-asl.googlecode.com/files/mstparser-0.5.0-20121019-en.model" dest="target/download/mstparser-0.5.0-20121019-en.model" skipexisting="true"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mstparser"
-    		file="target/download/mstparser-0.5.0-20121019-en.model" md5="faa3b061186df15d1e3ec12bb78ee9df" 
-    		  language="en" tool="parser" variant="default" extension="bin" version="20121910.0">		
-		</install-model-file>
-		<delete dir="target/model-staging"/>
-	</target>
+		<!-- FILE: mstparser-0.5.0-20121019-en.model - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2012-10-19 | now        | faa3b061186df15d1e3ec12bb78ee9df
+		  -->
+    	<get 
+    		src="http://dkpro-core-asl.googlecode.com/files/mstparser-0.5.0-20121019-en.model" 
+    		dest="target/download/mstparser-0.5.0-20121019-en.model" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+       		file="target/download/mstparser-0.5.0-20121019-en.model"
+       		md5="faa3b061186df15d1e3ec12bb78ee9df"
+       		groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mstparser"
+    		upstreamVersion="20121019"
+    		metaDataVersion="1"
+    		tool="parser"
+    		language="en"
+    		variant="sample"
+			extension="model">		
+			<metadata>
+				<entry key="dependency.tagset" value="conll2008"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 
+		<!-- FILE: mst-eisner.model - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2010-04-16 | now        | 93a12f405009a73d6412bec588ecc33c
+		  -->
+    	<get 
+    		src="http://nlp.stanford.edu/software/stanford-dependencies/mst-eisner.mod.gz" 
+    		dest="target/download/mst-eisner.model.gz" 
+    		skipexisting="true"/>
+		<gunzip 
+			src="target/download/mst-eisner.model.gz"
+			dest="target/download/mst-eisner.model"/>
+    	<install-stub-and-upstream-file 
+       		file="target/download/mst-eisner.model"
+       		md5="93a12f405009a73d6412bec588ecc33c"
+       		groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mstparser"
+    		upstreamVersion="20100416"
+    		metaDataVersion="1"
+    		tool="parser"
+    		language="en"
+    		variant="eisner"
+			extension="model">		
+			<metadata>
+				<entry key="dependency.tagset" value="stanford"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
 </project>
