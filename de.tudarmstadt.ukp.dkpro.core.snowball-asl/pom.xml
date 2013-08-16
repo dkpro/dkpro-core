@@ -49,7 +49,6 @@
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-snowball</artifactId>
-			<version>3.0.2</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>lucene-core</artifactId>

@@ -73,6 +73,8 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<uima.version>2.4.2</uima.version>
+		<lucene.version>3.0.3</lucene.version>
+		<spring.version>3.1.0.RELEASE</spring.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -543,12 +545,22 @@
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>
-				<version>3.1.0.RELEASE</version>
+				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-beans</artifactId>
-				<version>3.1.0.RELEASE</version>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-snowball</artifactId>
+				<version>${lucene.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
