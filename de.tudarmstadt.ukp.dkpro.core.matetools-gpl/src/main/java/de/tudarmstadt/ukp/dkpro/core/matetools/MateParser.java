@@ -28,6 +28,7 @@ import java.util.Properties;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
@@ -39,6 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -109,7 +111,17 @@ public class MateParser
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
+    /**
+     * Load the dependency to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
+    protected String dependencyMappingLocation;
+
+
 	private CasConfigurableProviderBase<Parser> modelProvider;
+    private MappingProvider mappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -164,6 +176,15 @@ public class MateParser
 				return parser;
 			}
 		};
+		
+        mappingProvider = new MappingProvider();
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/syntax/tagset/${language}-${dependency.tagset}-dependency.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, Dependency.class.getName());
+        mappingProvider.setDefault("dependency.tagset", "default");
+        mappingProvider.setOverride(MappingProvider.LOCATION, dependencyMappingLocation);
+        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        mappingProvider.addImport("dependency.tagset", modelProvider);
 	}
 
 	@Override
@@ -173,6 +194,7 @@ public class MateParser
 		CAS cas = jcas.getCas();
 
 		modelProvider.configure(cas);
+		mappingProvider.configure(cas);
 
 		for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
 			List<Token> tokens = JCasUtil.selectCovered(Token.class, sentence);
@@ -201,7 +223,8 @@ public class MateParser
 					Token sourceToken = tokens.get(parsed.pheads[i] - 1);
 					Token targetToken = tokens.get(i);
 
-					Dependency dep = new Dependency(jcas);
+	                Type depRel = mappingProvider.getTagType(parsed.plabels[i]);
+	                Dependency dep = (Dependency) cas.createFS(depRel);
 					dep.setGovernor(sourceToken);
 					dep.setDependent(targetToken);
 					dep.setDependencyType(parsed.plabels[i]);
