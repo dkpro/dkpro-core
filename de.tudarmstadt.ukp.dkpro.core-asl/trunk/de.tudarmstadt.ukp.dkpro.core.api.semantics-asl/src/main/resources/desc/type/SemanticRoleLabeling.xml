@@ -5,7 +5,7 @@
   <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <types>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticPredicate</name>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate</name>
       <description>The predicate or main verb of a sentence.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
@@ -18,12 +18,12 @@
           <name>arguments</name>
           <description>The predicate's arguments.</description>
           <rangeTypeName>uima.cas.FSArray</rangeTypeName>
-          <elementType>de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument</elementType>
+          <elementType>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument</elementType>
         </featureDescription>
       </features>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.srl.type.SemanticArgument</name>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
