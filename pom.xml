@@ -143,7 +143,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.srl-asl</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -564,7 +564,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.api.srl-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</module>
@@ -810,6 +810,9 @@
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/java"
+										includes="**/*.java" />
+									<fileset
+										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/java"
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.structure-asl/src/main/java"
