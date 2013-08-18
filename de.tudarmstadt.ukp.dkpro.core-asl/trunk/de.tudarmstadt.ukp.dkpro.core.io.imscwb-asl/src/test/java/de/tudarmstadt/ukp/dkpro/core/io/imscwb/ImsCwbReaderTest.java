@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.imscwb;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.pipeline.SimplePipeline.stepPipeline;
+import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
@@ -51,7 +51,7 @@ public class ImsCwbReaderTest
 				"2000 von Stefan B\u00F6rzel \u00FCbernommen . ";
 
 		int i = 0;
-		for (JCas jcas : stepPipeline(reader)) {
+		for (JCas jcas : iteratePipeline(reader)) {
 			// System.out.println(jcas.getDocumentText());
 			if (i == 0) {
 				assertEquals(11406, select(jcas, Token.class).size());
@@ -88,7 +88,7 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
 		int i = 0;
-		for (JCas jcas : stepPipeline(reader)) {
+		for (JCas jcas : iteratePipeline(reader)) {
 			if (i == 0) {
 				assertEquals(0, select(jcas, Token.class).size());
 				assertEquals(0, select(jcas, POS.class).size());
@@ -114,7 +114,7 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_READ_POS, false,
 				ImsCwbReader.PARAM_READ_SENTENCES, false);
 
-		for (JCas jcas : stepPipeline(reader)) {
+		for (JCas jcas : iteratePipeline(reader)) {
 			// should never get here
 			System.out.println(jcas.getDocumentText());
 		}
