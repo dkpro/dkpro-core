@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*******************************************************************************
+ * Copyright 2013
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+-->  
+
+<!DOCTYPE LexicalResource SYSTEM "UBY_LMF.dtd">
+<LexicalResource dtdVersion="ubyLmfDTD_0_2_0.dtd" name="UBY">
+  <GlobalInformation label="UBY version for testing"/>
+    <Lexicon languageIdentifier="eng" id="FN_Lexicon_0" name="FrameNet">
+        <LexicalEntry id="FN_LexicalEntry_4417" partOfSpeech="verb">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="run"/>
+            </Lemma>
+            <Sense id="FN_Sense_5127" index="0">
+                <PredicativeRepresentation predicate="FN_SemanticPredicate_29"/>
+                <SenseExample id="FN_SenseExample_62807" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="They trailed 20-7 at half-time as Harlequins ran through their repertoire of slick back-line moves in preparation for their Cup final showdown with Bath ."/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62808" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="So I can run through it before the presentation . &quot;"/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62809" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="Memorise what each of the seven letters represents and run through the check list both during rehearsals and on E-day ."/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62810" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="So I can run through it before the presentation . &quot;"/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62811" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="At one she ran through her presentation ."/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62812" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="ENGLAND 'S cricketers found a tranquil haven here yesterday in which to run through their early tour practice routine ."/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62813" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="` I know you 'll have run through it already with the police , but I have to go through the motions . &quot;"/>
+                </SenseExample>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="FN: to discuss and/or enact the pieces of a performance in order"/>
+                </Definition>
+                <Frequency frequency="7" generator="annotated_instances"/>
+                <Frequency frequency="108" generator="all_instances"/>
+                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="10035"/>
+            </Sense>
+            <Sense id="FN_Sense_5128" index="0">
+                <PredicativeRepresentation predicate="FN_SemanticPredicate_700"/>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="FN: cause to move while in light contact. [Generally of the fingers, tongue, or some entity manipulated by the hand.]"/>
+                </Definition>
+                <Frequency frequency="0" generator="annotated_instances"/>
+                <Frequency frequency="0" generator="all_instances"/>
+                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="11008"/>
+            </Sense>
+            <Sense id="FN_Sense_5129" index="0">
+                <PredicativeRepresentation predicate="FN_SemanticPredicate_591"/>
+                <SenseExample id="FN_SenseExample_62814" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="Let me go , and if I run my head into a hornet 's nest you may disown me . &quot; "/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62815" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="I remember falling upstairs , carrying a glass test tube and running the glass into my hand . "/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62816" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="I was down in the workshops and I 've run a great splinter into my thumb . &quot; "/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62817" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="Unlike Henry , I have no intention of running my head into that particular noose . "/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62818" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="A young woman ran a pushchair into the back of her legs painfully and , when Meredith turned round , treated her to a furious glare which clearly said she had no business to be in the way . "/>
+                </SenseExample>
+                <SenseExample id="FN_SenseExample_62819" exampleType="senseInstance">
+                    <TextRepresentation languageIdentifier="eng" writtenText="NOW that the Queen has agreed to pay tax can we concentrate on scuttling the creaky old royal yacht , running the royal train into the buffers and grounding the Queen 's flight ? "/>
+                </SenseExample>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="FN: cause an object to collide with something."/>
+                </Definition>
+                <Frequency frequency="6" generator="annotated_instances"/>
+                <Frequency frequency="370" generator="all_instances"/>
+                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="7229"/>
+            </Sense>
+        </LexicalEntry>
+
+        <SemanticPredicate id="FN_SemanticPredicate_29" label="Practice">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="An Agent enacts an Action that is intended to be performed again at one or more later Occasions.  The goal of practicing is to ensure that the action at the later Occasion(s) comes off flawlessly. "/>
+            </Definition>
+            <SemanticArgument id="FN_SemanticArgument_245" semanticRole="Place" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Locative_relation" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.7822745495371197"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the place where the practicing occurs.&#10;&#10;Our band practices on the football field."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_246" semanticRole="Means" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="State_of_affairs" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.388204590241886"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the Means by which an Agent  practices.&#10;&#10;We practiced the slam dunk by bouncing on a trampoline."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_247" semanticRole="Time" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Time" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="141"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the time when the Agent practices.&#10;&#10;We practiced the play on Tuesday."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_248" semanticRole="Action" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the Action that the Agent performs intentionally in order to prepare for a later Occasion.&#10;&#10;Little Dieter practiced playing the piano all day."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_249" semanticRole="Iteration" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The number of times that the Action is practiced.&#10;&#10;We practice this scene daily"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_250" semanticRole="Duration" coreType="extraThematic" isIncorporated="no">
+                <SemanticLabel label="Duration" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="142"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The period of time during which an Action is repeatedly practiced.&#10;&#10;The troupe rehearsed the ballet for 4 months before going on tour."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_251" semanticRole="Agent" coreType="core" isIncorporated="no">
+                <SemanticLabel label="Sentient" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="5"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Agent performs the Action in preparation for later performances of the same type."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_252" semanticRole="Co_participant" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="A person who participates in a practice event along with the Agent.&#10;&#10; Then I went back to rehearsing with the band while she sat around listening "/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_253" semanticRole="Manner" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Manner" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="173"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="Any description of the practicing which is not covered by more specific FEs, including secondary effects (quietly, loudly), and general descriptions comparing events (the same way). In addition, it may indicate salient characteristics of an Agent that also affect the Action (presumptuously, coldly, deliberately, eagerly, carefully). &#10;&#10;We ran through the song at quarter speed.&#10;"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_254" semanticRole="Purpose" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="State_of_affairs" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.388204590241886"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the purpose for which an Agent performs an intentional act.&#10;John practiced typing to receive a raise."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_255" semanticRole="Occasion" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The later enactment or enactments that the Agent expects to perform. Note that the Agent does not have to have specific Occasions in mind.&#10;&#10;For our brother's wedding we had to rehearse the dinner twenty times."/>
+                </Definition>
+            </SemanticArgument>
+        </SemanticPredicate>
+        <SemanticPredicate id="FN_SemanticPredicate_700" label="Cause_motion">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="An Agent causes a Theme to undergo directed motion.  The motion may be described with respect to a Source, Path and/or Goal. In contrast with Placing, the Goal of motion is not emphasized.  For many of these words (cast.v, throw.v, chuck.v, etc.), the Agent has control of the Theme only at the Source of motion, and does not experience overall motion.   For others (e.g. drag.v, push.v, shove.v, etc.) the Agent has control of the Theme throughout the motion; for these words, the Theme is resistant to motion due to some friction with the surface along which they move.  (They thus differ from the words of the Carrying frame in that they are supported by this surface, rather than a Carrier.)  This frame contrasts with the following frames which talk about an Agent changing a Theme's position with respect to a landmark (either Source or Goal):  In Placing, the figure (Theme) is profiled as the object, and ends up on the ground (Goal).   Joyce placed the flowers onto the bed.  In Filling, the ground (Goal) is profiled as the object, and the figure (Theme) ends up on the ground (Goal).   John filled the box with old toys.  In Removing, the figure (Theme) is profiled, and is removed from the ground (Source).   Jennifer removed the flowers from the bed.  In Emptying, the ground (Source) is profiled and the figure (Theme) is removed from it.   Jason emptied the box of the old toys ."/>
+            </Definition>
+            <SemanticArgument id="FN_SemanticArgument_6581" semanticRole="Result" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="A resultant state that the Theme is in at the end of its motion.&#10;&#10;The fireman dragged the injured driver clear"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6582" semanticRole="Place" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Locative_relation" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.7822745495371197"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Place is the general area that provides a setting for a specific motion (with Source, Path, or Goal)."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6583" semanticRole="Depictive" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The state of a participant during the action&#10;We pushed the cart around, gleeful."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6584" semanticRole="Distance" coreType="peripheral" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Distance is any expression characterizing the extent of motion of the Theme.&#10;&#10;Pat threw the Javelin 50 meters."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6585" semanticRole="Area" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Area is used for expressions which describe a general area in which motion takes place when the motion is understood to be irregular or not to consist of a single, linear path. Locative setting adjuncts may also be assigned this frame element.&#10;&#10;Kim pushed the lawnmower around the garden."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6586" semanticRole="Agent" coreType="core" isIncorporated="no">
+                <SemanticLabel label="Sentient" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="5"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The the Agent is the one whose action causes the motion of a Theme.  The Agent is generally realized as the External Argument.&#10;&#10;Pat threw the china at the wall."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6587" semanticRole="Manner" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Manner" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="173"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Manner is any expression which describes a property of the motion of the Theme which is not directly related to the trajectory of motion. Descriptions of steadiness, grace, and other things count as Manner expressions.  &#10;"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6588" semanticRole="Initial_State" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="A previous state that the Theme was in before the beginning of its motion.&#10;&#10;Paul pulled Fran upright from her sitting position."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6589" semanticRole="Path" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Path is any description of a trajectory of motion which is neither a Source nor Goal.&#10;&#10;I pushed the trolley along the street."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6590" semanticRole="Handle" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Agent's manipulation of the Theme may be further specified as being localized to some part of the Theme, a Handle. The Handle is usually expressed as a PP"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6591" semanticRole="Source" coreType="core" isIncorporated="no">
+                <SemanticLabel label="Source" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="151"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FESource is the starting point of motion.&#10;&#10;Pat dragged the box out of the cupboard."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6592" semanticRole="Subregion" coreType="extraThematic" isIncorporated="no">
+                <SemanticLabel label="Locative_relation" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.7822745495371197"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="Subregion identifies the part of the Theme that makes contact with the resulting location. When Subregion is expressed, there usually is no Goal expressed.&#10;&#10;The horse pitched the rider on his head"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6593" semanticRole="Means" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="State_of_affairs" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.388204590241886"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Means indicates the action that is taken that results in the motion of the Theme&#10;"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6594" semanticRole="Time" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Time" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="141"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The time at which the motion of the Theme occurs.&#10;&#10;We shoved half of the cargo overboard on the 29th."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6595" semanticRole="Theme" coreType="core" isIncorporated="no">
+                <SemanticLabel label="Physical_object" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.3221895856392515"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Theme is generally an NP Object.&#10;&#10;Pat threw the china at the wall."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6596" semanticRole="Explanation" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE denotes a proposition from which the main clause logically follows."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6597" semanticRole="Degree" coreType="extraThematic" isIncorporated="no">
+                <SemanticLabel label="Degree" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="172"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="Degree to which event occurs"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6598" semanticRole="Instrument" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Physical_entity" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.11236554222268491"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="An entity saliently involved in the transmission of force from an Agent to a Theme.  It may be the Agent's bodypart, or some kind of device.&#10;&#10;When passing a basketball, you should throw with bath hands.&#10;&#10;"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6599" semanticRole="Cause" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="Cause marks expressions that indicate some non-intentional, typically non-human, force that causes the Theme to be set in motion.&#10;&#10;The storm tossed the sailor from the boat"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_6600" semanticRole="Goal" coreType="core" isIncorporated="no">
+                <SemanticLabel label="Goal" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="153"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Goal is the point at which the Theme ends up as a result of the motion.&#10;&#10;Kim threw the cat into the garden."/>
+                </Definition>
+            </SemanticArgument>
+        </SemanticPredicate>
+
+        <SemanticPredicate id="FN_SemanticPredicate_591" label="Cause_impact">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="An Agent causes an Impactor to make sudden, forcible contact with an Impactee, or manipulates two (or more) Impactors so that they make mutual forcible contact.    He slammed his fist down on the table and bellowed something unintelligible."/>
+            </Definition>
+            <SemanticArgument id="FN_SemanticArgument_5598" semanticRole="Place" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Locative_relation" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.7822745495371197"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="Where the event takes place.&#10;&#10;Father Shanahan , of Rushey Mead , Leicester , rammed his Datsun into another car on the way to the city 's Gilroes cemetery."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5599" semanticRole="Result" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the Result of the impact.&#10;&#10;I slammed the door shut."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5600" semanticRole="Impactee" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Impactee is the entity which is hit by the Impactor.&#10;&#10;What I want to know is who smacked my head with a 10-ton truck?&#10;He slammed the lid down on the top of the jar so hard that it broke."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5601" semanticRole="Agent" coreType="core" isIncorporated="no">
+                <SemanticLabel label="Sentient" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="5"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Agent  causes an impact.&#10;&#10;One juggler was hitting the ceiling with every other ball."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5602" semanticRole="Manner" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Manner" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="173"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Manner identifies the manner in which an Agent intentionally affects a Impactee.&#10;&#10;They ` hot-wired &quot; a prison van and repeatedly rammed it into a security gate."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5603" semanticRole="Force" coreType="peripheral" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Force is the amount of force in the course of the impact.&#10;&#10;He smacked the bat hard against the wall."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5604" semanticRole="Subregion" coreType="extraThematic" isIncorporated="no">
+                <SemanticLabel label="Locative_relation" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.7822745495371197"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="Subregion identifies the part of the larger whole which was hit.&#10;&#10;The gunman grazed him on his left temple.&#10;She struck him hard across the left cheek with the flat of her hand."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5605" semanticRole="Means" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="State_of_affairs" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.388204590241886"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Means identifies the means by which an Agent intentionally affects a Impactee."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5606" semanticRole="Speed" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Speed" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="234"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE indicates the Speed of the Impactor (or Impactors at impact.&#10;&#10;The statue was rammed into the wall at 30 mph--a bit faster than John could have hurled it."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5607" semanticRole="Time" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Time" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="141"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the Time  when the impact occurs.&#10;&#10;A postman rammed his Fiat Panda into a getaway car after spotting the burglars  ."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5608" semanticRole="Period_of_iterations" coreType="extraThematic" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the  Period_of_iterations during which the Agent repeatedly causes impacts."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5609" semanticRole="Purpose" coreType="extraThematic" isIncorporated="no">
+                <SemanticLabel label="State_of_affairs" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.388204590241886"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The FE Purpose identifies the purpose for which an Agent intentionally affects the Impactee.&#10;&#10;"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5610" semanticRole="Instrument" coreType="peripheral" isIncorporated="no">
+                <SemanticLabel label="Physical_entity" type="selectionalPreference">
+                    <MonolingualExternalRef externalSystem="FrameNet 1.5 semantic type ID" externalReference="0.11236554222268491"/>
+                </SemanticLabel>
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="This FE identifies the Instrument with which an Agent intentionally affects an Impactee."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5611" semanticRole="Impactors" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Impactors are the multiple entities that collide.&#10;&#10;Mr. Addams likes to collide toy trains at high speed."/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5612" semanticRole="Cause" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Cause marks expressions that indicate some non-intentional, &#10;typically non-human, force that causes an Impactor to make sudden, &#10;forcible contact with an Impactee.&#10;&#10;A violent explosionrattled the windows.&#10;&#10;"/>
+                </Definition>
+            </SemanticArgument>
+            <SemanticArgument id="FN_SemanticArgument_5613" semanticRole="Impactor" coreType="core" isIncorporated="no">
+                <Definition>
+                    <TextRepresentation languageIdentifier="eng" writtenText="The Impactor is the entity that hits the Impactee because of the Agent's efforts.&#10;&#10;Those hoodlums strike my car with water balloons every day!&#10;Well, then he just ran the car right into the wall."/>
+                </Definition>
+            </SemanticArgument>
+        </SemanticPredicate>
+    </Lexicon>
+
+    <Lexicon languageIdentifier="eng" id="VN_Lexicon_0" name="VerbNet">
+
+        <LexicalEntry id="VN_LexicalEntry_314" partOfSpeech="verb">
+            <Lemma>
+                <FormRepresentation writtenForm="run"/>
+            </Lemma>
+            <Sense id="VN_Sense_2430" index="2430">
+                <PredicativeRepresentation predicate="VN_SemanticPredicate_500"/>
+                <SenseExample id="VN_SenseExample_2430" exampleType="subcatFrame">
+                    <TextRepresentation writtenText="There jumped a little white rabbit out of the box."/>
+                </SenseExample>
+                <SemanticLabel label="run-51.3.2" type="verbnetClass"/>
+                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_run-51.3.2"/>
+            </Sense>
+            <Sense id="VN_Sense_2441" index="2441">
+                <PredicativeRepresentation predicate="VN_SemanticPredicate_500"/>
+                <SenseExample id="VN_SenseExample_2441" exampleType="subcatFrame">
+                    <TextRepresentation writtenText="There jumped out of the box a little white rabbit."/>
+                </SenseExample>
+                <SemanticLabel label="run-51.3.2" type="verbnetClass"/>
+                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_run-51.3.2"/>
+            </Sense>
+            <Sense id="VN_Sense_2455" index="2455">
+                <PredicativeRepresentation predicate="VN_SemanticPredicate_119"/>
+                <SenseExample id="VN_SenseExample_2455" exampleType="subcatFrame">
+                    <TextRepresentation writtenText="The grocery cart hit against the wall."/>
+                </SenseExample>
+                <SemanticLabel label="bump-18.4" type="verbnetClass"/>
+                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_bump-18.4"/>
+            </Sense>
+            <SyntacticBehaviour id="VN_SyntacticBehaviour_2430" sense="VN_Sense_2430" subcategorizationFrame="VN_SubcategorizationFrame_246" subcategorizationFrameSet="VN_SubcategorizationFrameSet_83"/>
+            <SyntacticBehaviour id="VN_SyntacticBehaviour_2441" sense="VN_Sense_2441" subcategorizationFrame="VN_SubcategorizationFrame_245" subcategorizationFrameSet="VN_SubcategorizationFrameSet_83"/>
+            <SyntacticBehaviour id="VN_SyntacticBehaviour_2455" sense="VN_Sense_2455" subcategorizationFrame="VN_SubcategorizationFrame_80" subcategorizationFrameSet="VN_SubcategorizationFrameSet_111"/>
+        </LexicalEntry>
+
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_245">
+            <SyntacticArgument id="VN_SyntacticArgument_633" grammaticalFunction="subject" syntacticCategory="expletive" lexeme="there"/>
+            <SyntacticArgument id="VN_SyntacticArgument_634" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" prepositionType="+path"/>
+            <SyntacticArgument id="VN_SyntacticArgument_635" grammaticalFunction="complement" syntacticCategory="nounPhrase" determiner="indefinite"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_246">
+            <SyntacticArgument id="VN_SyntacticArgument_636" grammaticalFunction="subject" syntacticCategory="expletive" lexeme="there"/>
+            <SyntacticArgument id="VN_SyntacticArgument_637" grammaticalFunction="complement" syntacticCategory="nounPhrase" determiner="indefinite"/>
+            <SyntacticArgument id="VN_SyntacticArgument_638" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" prepositionType="+path"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_80">
+            <SyntacticArgument id="VN_SyntacticArgument_208" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_209" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" preposition="against/into/onto"/>
+        </SubcategorizationFrame>
+
+        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_83" name="run-51.3.2">
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_217"/>
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_245"/>
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_246"/>
+        </SubcategorizationFrameSet>
+        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_111" name="bump-18.4">
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_80"/>
+        </SubcategorizationFrameSet>
+
+        <SemanticPredicate id="VN_SemanticPredicate_500">
+            <Definition>
+                <TextRepresentation writtenText="motion(during(E), Theme) AND Prep(E, Theme, Location)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_1089" semanticRole="Theme[+animate|+machine]"/>
+            <SemanticArgument id="VN_SemanticArgument_1090" semanticRole="Location[+concrete]"/>
+        </SemanticPredicate>
+        <SemanticPredicate id="VN_SemanticPredicate_119">
+            <Definition>
+                <TextRepresentation writtenText="manner(during(E), directedmotion, Theme) AND not(contact(during(E), Theme, Location)) AND manner(end(E), forceful, Theme) AND contact(end(E), Theme, Location)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_265" semanticRole="Theme[+concrete]"/>
+            <SemanticArgument id="VN_SemanticArgument_266" semanticRole="Location[+concrete]"/>
+        </SemanticPredicate>
+
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_25533">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_634" semanticArgument="VN_SemanticArgument_1089"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_635" semanticArgument="VN_SemanticArgument_1090"/>
+        </SynSemCorrespondence>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_25198">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_637" semanticArgument="VN_SemanticArgument_1089"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_638" semanticArgument="VN_SemanticArgument_1090"/>
+        </SynSemCorrespondence>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_4974">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_208" semanticArgument="VN_SemanticArgument_265"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_209" semanticArgument="VN_SemanticArgument_266"/>
+        </SynSemCorrespondence>
+
+
+      <LexicalEntry id="VN_LexicalEntry_0" partOfSpeech="verb">
+          <Lemma>
+                  <FormRepresentation writtenForm="question"/>
+          </Lemma>
+          <Sense id="VN_Sense_0" index="0">
+              <PredicativeRepresentation predicate="VN_SemanticPredicate_2"/>
+              <SenseExample id="VN_SenseExample_0" exampleType="subcatFrame">
+                  <TextRepresentation writtenText="I interrogated him about the incident."/>
+              </SenseExample>
+              <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="question_interrogate-37.1.3"/>
+              <SemanticLabel label="interrogate-37.1.3" type="verbnetClass"/>
+          </Sense>
+          <Sense id="VN_Sense_1" index="1">
+              <PredicativeRepresentation predicate="VN_SemanticPredicate_0"/>
+              <SenseExample id="VN_SenseExample_1" exampleType="subcatFrame">
+                  <TextRepresentation writtenText="I interrogated him."/>
+              </SenseExample>
+              <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="question_interrogate-37.1.3"/>
+              <SemanticLabel label="interrogate-37.1.3" type="verbnetClass"/>
+          </Sense>
+          <Sense id="VN_Sense_2" index="2">
+              <PredicativeRepresentation predicate="VN_SemanticPredicate_1"/>
+              <SenseExample id="VN_SenseExample_2" exampleType="subcatFrame">
+                  <TextRepresentation writtenText="I interrogated him as a suspect."/>
+              </SenseExample>
+              <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="question_interrogate-37.1.3"/>
+              <SemanticLabel label="interrogate-37.1.3" type="verbnetClass"/>
+          </Sense>
+          <SyntacticBehaviour id="VN_SyntacticBehaviour_0" sense="VN_Sense_0" subcategorizationFrame="VN_SubcategorizationFrame_2" subcategorizationFrameSet="VN_SubcategorizationFrameSet_0"/>
+          <SyntacticBehaviour id="VN_SyntacticBehaviour_1" sense="VN_Sense_1" subcategorizationFrame="VN_SubcategorizationFrame_0" subcategorizationFrameSet="VN_SubcategorizationFrameSet_0"/>
+          <SyntacticBehaviour id="VN_SyntacticBehaviour_2" sense="VN_Sense_2" subcategorizationFrame="VN_SubcategorizationFrame_1" subcategorizationFrameSet="VN_SubcategorizationFrameSet_0"/>
+      </LexicalEntry>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_0">
+            <SyntacticArgument id="VN_SyntacticArgument_0" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_1" grammaticalFunction="complement" syntacticCategory="nounPhrase"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_1">
+            <SyntacticArgument id="VN_SyntacticArgument_2" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_3" grammaticalFunction="complement" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_4" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" preposition="as"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_2">
+            <SyntacticArgument id="VN_SyntacticArgument_5" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_6" grammaticalFunction="complement" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_7" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" preposition="about"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_0" name="interrogate-37.1.3">
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_0"/>
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_2"/>
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_1"/>
+        </SubcategorizationFrameSet>
+        <SemanticPredicate id="VN_SemanticPredicate_0">
+            <Definition>
+                <TextRepresentation writtenText="transfer_info(during(E), Agent, Recipient, ?Topic) AND cause(Agent, E)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_0" semanticRole="Agent">
+                <SemanticLabel label="[+animate|+organization]" type="selectionalPreference"/>
+            </SemanticArgument>
+            <SemanticArgument id="VN_SemanticArgument_1" semanticRole="Recipient">
+                <SemanticLabel label="[+animate|+organization]" type="selectionalPreference"/>
+            </SemanticArgument>
+        </SemanticPredicate>
+        <SemanticPredicate id="VN_SemanticPredicate_1">
+            <Definition>
+                <TextRepresentation writtenText="transfer_info(during(E), Agent, Recipient, ?Topic, Predicate) AND cause(Agent, E)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_2" semanticRole="Agent">
+                <SemanticLabel label="[+animate|+organization]" type="selectionalPreference"/>
+            </SemanticArgument>
+            <SemanticArgument id="VN_SemanticArgument_3" semanticRole="Recipient">
+                <SemanticLabel label="[+animate|+organization]" type="selectionalPreference"/>
+            </SemanticArgument>
+            <SemanticArgument id="VN_SemanticArgument_4" semanticRole="Predicate"/>
+        </SemanticPredicate>
+        <SemanticPredicate id="VN_SemanticPredicate_2">
+            <Definition>
+                <TextRepresentation writtenText="transfer_info(during(E), Agent, Recipient, Topic) AND cause(Agent, E)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_5" semanticRole="Agent">
+                <SemanticLabel label="[+animate|+organization]" type="selectionalPreference"/>
+            </SemanticArgument>
+            <SemanticArgument id="VN_SemanticArgument_6" semanticRole="Recipient">
+                <SemanticLabel label="[+animate|+organization]" type="selectionalPreference"/>
+            </SemanticArgument>
+            <SemanticArgument id="VN_SemanticArgument_7" semanticRole="Topic"/>
+        </SemanticPredicate>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_2">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_5" semanticArgument="VN_SemanticArgument_5"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_6" semanticArgument="VN_SemanticArgument_6"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_7" semanticArgument="VN_SemanticArgument_7"/>
+        </SynSemCorrespondence>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_0">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_0" semanticArgument="VN_SemanticArgument_0"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_1" semanticArgument="VN_SemanticArgument_1"/>
+        </SynSemCorrespondence>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_1">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_2" semanticArgument="VN_SemanticArgument_2"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_3" semanticArgument="VN_SemanticArgument_3"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_4" semanticArgument="VN_SemanticArgument_4"/>
+        </SynSemCorrespondence>
+    </Lexicon>
+
+
+    <Lexicon languageIdentifier="eng" id="WN_Lexicon_0" name="WordNet">
+        <LexicalEntry id="WN_LexicalEntry_8251" partOfSpeech="verb">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </Lemma>
+            <RelatedForm targetLexicalEntry="WN_LexicalEntry_31301" relType="derivative" targetSense="WN_Sense_6">
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </RelatedForm>
+            <RelatedForm targetLexicalEntry="WN_LexicalEntry_31301" relType="derivative" targetSense="WN_Sense_7">
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </RelatedForm>
+            <RelatedForm targetLexicalEntry="WN_LexicalEntry_31301" relType="derivative" targetSense="WN_Sense_8">
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </RelatedForm>
+            <Sense id="WN_Sense_1" index="0" synset="WN_Synset_86301">
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: verb] question%2:32:01::"/>
+                <SemanticLabel label="verb.communication" type="semanticField" />
+            </Sense>
+            <Sense id="WN_Sense_2" index="1" synset="WN_Synset_85960">
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: verb] question%2:32:03::"/>
+                <SemanticLabel label="verb.communication" type="semanticField"/>
+            </Sense>
+            <Sense id="WN_Sense_3" index="2" synset="WN_Synset_85947">
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: verb] question%2:32:00::"/>
+                <SemanticLabel label="verb.communication" type="semanticField"/>
+            </Sense>
+        </LexicalEntry>
+        <LexicalEntry id="WN_LexicalEntry_31301" partOfSpeech="noun">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </Lemma>
+            <RelatedForm targetLexicalEntry="WN_LexicalEntry_8251" relType="derivative" targetSense="WN_Sense_1">
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </RelatedForm>
+            <RelatedForm targetLexicalEntry="WN_LexicalEntry_8251" relType="derivative" targetSense="WN_Sense_3">
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </RelatedForm>
+            <RelatedForm targetLexicalEntry="WN_LexicalEntry_8251" relType="derivative" targetSense="WN_Sense_2">
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </RelatedForm>
+            <Sense id="WN_Sense_6" index="0" synset="WN_Synset_26478">
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: noun] question%1:07:00::"/>
+                <SemanticLabel label="noun.attribute" type="semanticField"/>
+            </Sense>
+            <Sense id="WN_Sense_8" index="1" synset="WN_Synset_38915">
+                <SenseRelation target="WN_Sense_151518" relType="complementary" relName="antonym">
+                    <FormRepresentation languageIdentifier="eng" writtenForm="answer"/>
+                </SenseRelation>
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: noun] question%1:10:00::"/>
+                <SemanticLabel label="noun.communication" type="semanticField"/>
+            </Sense>
+            <Sense id="WN_Sense_7" index="2" synset="WN_Synset_38930">
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: noun] question%1:10:03::"/>
+                <SemanticLabel label="noun.communication" type="semanticField"/>
+            </Sense>
+        </LexicalEntry>
+        <LexicalEntry id="WN_LexicalEntry_114653" partOfSpeech="noun">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="answer"/>
+            </Lemma>
+            <Sense id="WN_Sense_151518" index="1" synset="WN_Synset_38949">
+                <SenseRelation target="WN_Sense_8" relType="complementary" relName="antonym">
+                    <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+                </SenseRelation>
+                <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and sense key" externalReference="[POS: noun] answer%1:10:00::"/>
+                <SemanticLabel label="noun.communication" type="semanticField"/>
+            </Sense>
+        </LexicalEntry>
+        <Synset id="WN_Synset_86301">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="challenge the accuracy, probity, or propriety of; &quot;We must question your judgment in this matter&quot;"/>
+            </Definition>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: verb] 867409"/>
+        </Synset>
+        <Synset id="WN_Synset_85960">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="pose a series of questions to; &quot;The suspect was questioned by the police&quot;; &quot;We questioned the survivor about the details of the explosion&quot;"/>
+            </Definition>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: verb] 788184"/>
+        </Synset>
+        <Synset id="WN_Synset_85947">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="pose a question"/>
+            </Definition>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: verb] 785008"/>
+        </Synset>
+        <Synset id="WN_Synset_26478">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="uncertainty about the truth or factuality or existence of something; &quot;the dubiousness of his claim&quot;; &quot;there is no question about the validity of the enterprise&quot;"/>
+            </Definition>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: noun] 4757522"/>
+        </Synset>
+        <Synset id="WN_Synset_38915">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="an instance of questioning; &quot;there was a question about my training&quot;; &quot;we made inquiries of all those who were present&quot;"/>
+            </Definition>
+            <SynsetRelation target="WN_Synset_38930" relType="association" relName="related"/>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: noun] 7193596"/>
+        </Synset>
+        <Synset id="WN_Synset_38930">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="a sentence of inquiry that asks for a reply; &quot;he asked a direct question&quot;; &quot;he had trouble phrasing his interrogations&quot;"/>
+            </Definition>
+	    <SynsetRelation target="WN_Synset_38915" relType="association" relName="related"/>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: noun] 7196682"/>
+        </Synset>
+    </Lexicon>
+    
+    <Lexicon languageIdentifier="eng" id="WktEn_Lexicon_1" name="Wiktionary">
+        <LexicalEntry id="WktEn_lexicalEntry_18566" partOfSpeech="verb">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </Lemma>
+            <Sense id="WktEn_sense_1" index="0">
+                <Definition definitionType="intensionalDefinition">
+                    <TextRepresentation languageIdentifier="eng" writtenText="To ask questions of; interrogate; enquire; ask for information."/>
+                </Definition>
+                <Equivalent languageIdentifier="nl" writtenForm="ondervragen"/>
+                <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:1:1"/>
+            </Sense>
+            <Sense id="WktEn_sense_2" index="1">
+                <Definition definitionType="intensionalDefinition">
+                    <TextRepresentation languageIdentifier="eng" writtenText="To raise doubts about; have doubts about."/>
+                </Definition>
+                <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:1:2"/>
+            </Sense>
+	      </LexicalEntry>
+        <LexicalEntry id="WktEn_lexicalEntry_18565" partOfSpeech="noun">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="question"/>
+            </Lemma>
+            <Sense id="WktEn_sense_3" index="0">
+                <SenseExample id="WktEN_SenseExample_13039">
+                  <TextRepresentation languageIdentifier="eng" writtenText="What is your question"/>
+                </SenseExample>
+                <Definition definitionType="intensionalDefinition">
+                    <TextRepresentation languageIdentifier="eng" writtenText="A sentence, phrase or word which asks for information, reply or response; an interrogative."/>
+                </Definition>
+                <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:0:1"/>
+            </Sense>
+            <Sense id="WktEn_sense_4" index="2">
+                <SenseExample id="WktEN_SenseExample_13040">
+                        <TextRepresentation languageIdentifier="de" writtenText="The question of seniority will be discussed at the meeting."/>
+                </SenseExample>
+                <Definition definitionType="intensionalDefinition">
+                    <TextRepresentation languageIdentifier="eng" writtenText="A subject or topic for consideration or investigation."/>
+                </Definition>
+               <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:0:2"/>
+            </Sense>
+            <Sense id="WktEn_sense_5" index="3">
+                <SenseExample id="WktEN_SenseExample_13041">
+                   <TextRepresentation languageIdentifier="de" writtenText="There was a question of which material to use."/>
+                </SenseExample>
+                <Definition definitionType="intensionalDefinition">
+                    <TextRepresentation languageIdentifier="eng" writtenText="An unknown."/>
+                </Definition>
+                <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:0:3"/>
+            </Sense>
+	      </LexicalEntry>    
+    </Lexicon>
+
+    <SenseAxis id="AnoEx_SenseAxis_3" senseOne="WktEn_sense_3" senseTwo="WN_Sense_7" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_5" senseOne="WN_Sense_2" senseTwo="VN_Sense_20" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_6" senseOne="WN_Sense_2" senseTwo="VN_Sense_21" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_7" senseOne="WN_Sense_2" senseTwo="VN_Sense_22" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_8" senseOne="FN_Sense_5129" senseTwo="VN_Sense_2455" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_9" senseOne="OW_deu_Sense_20765" senseTwo="WN_Sense_3" senseAxisType="crosslingualSenseAlignment"/>
+
+</LexicalResource>

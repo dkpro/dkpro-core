@@ -48,9 +48,21 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
  */
 public class UbySemanticFieldAnnotatorTest {
 
+	
+	@Test
+	public void testUbySemanticFieldAnnotatorOnInMemDb()
+		throws Exception
+	{
+		runAnnotatorTestOnInMemDb("en", "Answers question most questions .",
+        		new String[] { "answer", "question", "most", "question", "."    },
+        		new String[] { "NN", "V", "NOT_RELEVANT", "NN", "$."    },
+        		new String[] { "UNKNOWN '.'", "UNKNOWN 'most'", "communication 'Answers'", "communication 'question'", "communication 'questions'"  });
+
+	}
+
 	@Ignore	
 	@Test
-	public void testUbySemanticFieldAnnotator()
+	public void testUbySemanticFieldAnnotatorOnMySqlDb()
 		throws Exception
 	{
 		runAnnotatorTestOnMySqlDb("en", "Vanilla in the blue sky prefers braveness over jumpiness .",
@@ -63,9 +75,87 @@ public class UbySemanticFieldAnnotatorTest {
         		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "V", "NN", "NOT_RELEVANT", "NN", "$."    },
         		new String[] { "UNKNOWN '.'", "UNKNOWN 'distantGalaxyBehindJupiter'", "UNKNOWN 'in'", "UNKNOWN 'over'", "UNKNOWN 'the'", "attribute 'braveness'", "emotion 'prefers'", "feeling 'jumpiness'", "plant 'Vanilla'"     });
        
-
-
 	}
+	
+	 
+	/**
+	 * @param language
+	 * @param testDocument
+	 * @param documentLemmas
+	 * @param documentPosTags
+	 * @param documentUbySemanticFields
+	 * @return
+	 * @throws UIMAException 
+	 */
+	private void runAnnotatorTestOnInMemDb(String language, 
+			String testDocument, 
+			String[] documentLemmas,
+			String[] documentPosTags, 
+			String[] documentUbySemanticFields) throws UIMAException {
+
+               
+		AnalysisEngineDescription processor = createEngineDescription(
+
+				createEngineDescription(UbySemanticFieldAnnotator.class,
+						UbySemanticFieldAnnotator.PARAM_UBY_SEMANTIC_FIELD_RESOURCE, 
+							createExternalResourceDescription(UbySemanticFieldResource.class,
+									UbySemanticFieldResource.PARAM_URL, "not_important",
+									UbySemanticFieldResource.PARAM_DRIVER, "org.h2.Driver",
+									UbySemanticFieldResource.PARAM_DRIVER_NAME, "h2",
+									UbySemanticFieldResource.PARAM_USERNAME, "root",
+									UbySemanticFieldResource.PARAM_PASSWORD, "pass",
+									UbySemanticFieldResource.PARAM_LANGUAGE, language)
+									)
+		);
+
+		AnalysisEngine engine = createEngine(processor);
+		JCas aJCas = engine.newJCas();
+		aJCas.setDocumentLanguage(language);
+
+		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+				Sentence.class);
+		tb.buildTokens(aJCas, testDocument);
+
+		int offset = 0;
+		for (Token token : JCasUtil.select(aJCas, Token.class)) {
+			
+			if (documentPosTags[offset].matches("NN")) {
+				NN nn = new NN(aJCas, token.getBegin(), token.getEnd());
+				nn.setPosValue(documentPosTags[offset]);
+				nn.addToIndexes();
+				token.setPos(nn);
+			} else if (documentPosTags[offset].matches("V")) {
+				V v = new V(aJCas, token.getBegin(), token.getEnd());
+				v.setPosValue(documentPosTags[offset]);
+				v.addToIndexes();
+				token.setPos(v);
+			} else if (documentPosTags[offset].matches("ADJ")) {
+				ADJ adj = new ADJ(aJCas, token.getBegin(), token.getEnd());
+				adj.setPosValue(documentPosTags[offset]);
+				adj.addToIndexes();
+				token.setPos(adj);				
+			} else {
+				POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+				pos.setPosValue(documentPosTags[offset]);
+				pos.addToIndexes();
+				token.setPos(pos);
+			}
+			
+			Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
+			lemma.setValue(documentLemmas[offset]);
+			lemma.addToIndexes();
+			token.setLemma(lemma);
+
+			offset++;
+		}
+		engine.process(aJCas);
+
+		AssertAnnotations.assertNamedEntity(null,documentUbySemanticFields,
+				select(aJCas, NamedEntity.class));
+	
+	}
+	
+	
 
 	/**
 	 * @param language
