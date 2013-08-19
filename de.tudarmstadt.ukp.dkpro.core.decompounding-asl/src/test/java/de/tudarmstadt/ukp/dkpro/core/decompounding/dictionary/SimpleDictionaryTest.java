@@ -41,14 +41,14 @@ public class SimpleDictionaryTest
 	public void setUp() throws IOException{
 
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);
 	    dict = new SimpleDictionary(dictFile);
 	}
 
 	@Test
 	public void testContains()
 	{
-		Assert.assertEquals(70999, dict.getAll().size());
+		Assert.assertEquals(72508, dict.getAll().size());
 
 		Assert.assertTrue(dict.contains("worauf"));
 		Assert.assertTrue(dict.contains("woraufhin"));
