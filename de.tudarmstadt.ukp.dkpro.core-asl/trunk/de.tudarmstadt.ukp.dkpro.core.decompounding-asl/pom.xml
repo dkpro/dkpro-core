@@ -67,7 +67,7 @@
 		</dependency>
 		<dependency>
 			<groupId>de.uni_leipzig.asv.toolbox</groupId>
-			<artifactId>de.uni_leipzig.asv.toolbox.utils</artifactId>
+			<artifactId>toolbox-utils</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
@@ -91,26 +91,28 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-asv</artifactId>
-			<version>20130521.1</version>
+			<scope>test</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-igerman98</artifactId>
-			<version>20110621.1</version>
+			<scope>test</scope>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
-	<profiles>
-		<profile>
-			<id>use-proprietary-resources</id>
-			<dependencies>
-				<dependency>
-					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-models-de</artifactId>
-					<version>20071211</version>
-					<scope>test</scope>
-					<optional>true</optional>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-asv</artifactId>
+				<version>20130521.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-igerman98</artifactId>
+				<version>20110621.1</version>
+			</dependency>
+		</dependencies>		
+	</dependencyManagement>
 </project>

@@ -83,24 +83,24 @@ public class TrieTest
 	public void testSimpleDict() throws IOException
 	{
         final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.aff"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.aff"), false);
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);
 		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
 		TrieStructure t = TrieStructure.createForDict(dict);
 
-		Assert.assertEquals(new Integer(14308), t.findWord("h").getValue());
-		Assert.assertEquals(new Integer(251), t.findWord("hel").getValue());
+		Assert.assertEquals(new Integer(14963), t.findWord("h").getValue());
+		Assert.assertEquals(new Integer(257), t.findWord("hel").getValue());
 		Assert.assertEquals(new Integer(0), t.findWord("hallo").getValue());
 
-		Assert.assertEquals(new Integer(7655), t.findWord("t").getValue());
-		Assert.assertEquals(new Integer(2596), t.findWord("tr").getValue());
-		Assert.assertEquals(new Integer(927), t.findWord("tra").getValue());
-		Assert.assertEquals(new Integer(23), t.findWord("tram").getValue());
+		Assert.assertEquals(new Integer(8033), t.findWord("t").getValue());
+		Assert.assertEquals(new Integer(2714), t.findWord("tr").getValue());
+		Assert.assertEquals(new Integer(996), t.findWord("tra").getValue());
+		Assert.assertEquals(new Integer(38), t.findWord("tram").getValue());
 
-		Assert.assertEquals(new Integer(10844), t.findWord("w").getValue());
-		Assert.assertEquals(new Integer(181), t.findWord("wor").getValue());
-		Assert.assertEquals(new Integer(163), t.findWord("wort").getValue());
+		Assert.assertEquals(new Integer(11138), t.findWord("w").getValue());
+		Assert.assertEquals(new Integer(178), t.findWord("wor").getValue());
+		Assert.assertEquals(new Integer(160), t.findWord("wort").getValue());
 
 	}
 
@@ -108,16 +108,16 @@ public class TrieTest
 	public void testSimpleDictReverse() throws IOException
 	{
         final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.aff"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.aff"), false);
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/de_DE.dic"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);
 		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
 		TrieStructure t = TrieStructure.createForDict(dict);
-		Assert.assertEquals(new Integer(10490), t.findWord("d").getValue());
-		Assert.assertEquals(new Integer(2351), t.findWord("de").getValue());
-		Assert.assertEquals(new Integer(68), t.findWord("dei").getValue());
+		Assert.assertEquals(new Integer(11121), t.findWord("d").getValue());
+		Assert.assertEquals(new Integer(2494), t.findWord("de").getValue());
+		Assert.assertEquals(new Integer(69), t.findWord("dei").getValue());
 
-		Assert.assertEquals(new Integer(13124), t.findWord("k").getValue());
-		Assert.assertEquals(new Integer(1944), t.findWord("o").getValue());
+		Assert.assertEquals(new Integer(13809), t.findWord("k").getValue());
+		Assert.assertEquals(new Integer(2101), t.findWord("o").getValue());
 	}
 }
