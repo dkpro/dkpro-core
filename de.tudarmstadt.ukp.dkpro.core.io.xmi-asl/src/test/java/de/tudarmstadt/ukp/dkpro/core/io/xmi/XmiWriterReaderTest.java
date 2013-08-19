@@ -54,7 +54,7 @@ public class XmiWriterReaderTest
 	{
 		CollectionReader textReader = CollectionReaderFactory.createReader(
 				TextReader.class,
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
 				},
@@ -73,7 +73,7 @@ public class XmiWriterReaderTest
 	{
 		CollectionReader xmiReader = CollectionReaderFactory.createReader(
 				XmiReader.class,
-				ResourceCollectionReaderBase.PARAM_PATH, testFolder.getRoot().getPath(),
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, testFolder.getRoot().getPath(),
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.xmi"
 				});

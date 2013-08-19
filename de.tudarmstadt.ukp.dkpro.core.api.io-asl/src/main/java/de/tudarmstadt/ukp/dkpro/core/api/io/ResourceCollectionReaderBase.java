@@ -88,7 +88,7 @@ public abstract class ResourceCollectionReaderBase
 	 */
     public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=false)
-	private String path;
+	private String sourceLocation;
 
 	/**
 	 * A set of Ant-like include/exclude patterns. A pattern starts with {@link #INCLUDE_PREFIX [+]}
@@ -209,7 +209,7 @@ public abstract class ResourceCollectionReaderBase
 		}
 
 		try {
-			if (path == null) {
+			if (sourceLocation == null) {
 				ListIterator<String> i = includes.listIterator();
 				while (i.hasNext()) {
 					i.set(locationToUrl(i.next()));
@@ -220,10 +220,10 @@ public abstract class ResourceCollectionReaderBase
 				}
 			}
 			else {
-				path = locationToUrl(path);
+				sourceLocation = locationToUrl(sourceLocation);
 			}
 
-			resources = scan(path, includes, excludes);
+			resources = scan(sourceLocation, includes, excludes);
 
 			// Get the iterator that will be used to actually traverse the FileSet.
 			resourceIterator = resources.iterator();

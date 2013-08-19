@@ -44,7 +44,7 @@ public class MeCabTaggerTest {
     public void testMeCabTaggerEngine() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class, 
-                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]*.txt" });
 
@@ -57,7 +57,7 @@ public class MeCabTaggerTest {
     public void testMeCabTaggerFileInput() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class, 
-                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]test*.txt" });
 

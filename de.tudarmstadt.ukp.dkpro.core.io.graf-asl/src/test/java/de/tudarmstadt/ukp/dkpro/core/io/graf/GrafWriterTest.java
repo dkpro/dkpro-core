@@ -56,7 +56,7 @@ public class GrafWriterTest
 		CollectionReaderDescription textReader = createReaderDescription(
 				TextReader.class,
 				TextReader.PARAM_LANGUAGE, "en",
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String [] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX+"*.txt"
 				});

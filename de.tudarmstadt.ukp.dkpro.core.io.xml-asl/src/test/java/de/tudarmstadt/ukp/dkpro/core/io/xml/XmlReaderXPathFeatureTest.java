@@ -38,7 +38,7 @@ public class XmlReaderXPathFeatureTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
@@ -59,7 +59,7 @@ public class XmlReaderXPathFeatureTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
@@ -80,7 +80,7 @@ public class XmlReaderXPathFeatureTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
@@ -101,7 +101,7 @@ public class XmlReaderXPathFeatureTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
@@ -122,7 +122,7 @@ public class XmlReaderXPathFeatureTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_INCLUDE_TAG, new String[] { "EN-title", "num" }, // read only num and EN-title tags
@@ -143,7 +143,7 @@ public class XmlReaderXPathFeatureTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        // Subtitute "EN-title" tag with "title" and "EN-narr" with "narration"

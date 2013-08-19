@@ -41,7 +41,7 @@ public class ImsCwbReaderTest
 	{
         CollectionReaderDescription reader = createReaderDescription(
 		        ImsCwbReader.class,
-				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
+				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
@@ -78,7 +78,7 @@ public class ImsCwbReaderTest
 	{
         CollectionReaderDescription reader = createReaderDescription(
 		        ImsCwbReader.class,
-				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky/",
+				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt",
@@ -106,7 +106,7 @@ public class ImsCwbReaderTest
 	{
         CollectionReaderDescription reader = createReaderDescription(
 		        ImsCwbReader.class,
-				ImsCwbReader.PARAM_PATH, "src/test/resources/wacky",
+				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
 				ImsCwbReader.PARAM_READ_TOKEN, false,

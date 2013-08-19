@@ -57,7 +57,7 @@ public class BrownTEICorpus
         reader = CollectionReaderFactory.createReaderDescription(
                 TEIReader.class,
                 TEIReader.PARAM_LANGUAGE, LANGUAGE,
-                TEIReader.PARAM_PATH, brownPath,
+                TEIReader.PARAM_SOURCE_LOCATION, brownPath,
                 TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
         );
     }

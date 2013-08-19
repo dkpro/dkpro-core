@@ -123,7 +123,7 @@ public class Web1TFormatWriterTest {
 			throws UIMAException, IOException {
 		CollectionReader reader = createReader(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
 		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
@@ -165,7 +165,7 @@ public class Web1TFormatWriterTest {
 
 		CollectionReader reader = createReader(TextReader.class,
 				ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]**/*.txt" });
 
 		AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);

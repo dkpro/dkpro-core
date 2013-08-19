@@ -38,7 +38,7 @@ public class Conll2006ReaderWriterTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 Conll2006Reader.class, 
-                Conll2006Reader.PARAM_PATH, "src/test/resources/conll/", 
+                Conll2006Reader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/", 
                 Conll2006Reader.PARAM_PATTERNS, "[+]fk003_2006_08_ZH1.conll10");
 
         AnalysisEngineDescription writer = createEngineDescription(

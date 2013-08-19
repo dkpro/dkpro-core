@@ -83,7 +83,7 @@ public class WackyCorpus
     private void initialize(String wackyPath, WackyLanguageEdition languageEdition) throws Exception {
         reader = CollectionReaderFactory.createReaderDescription(
                 ImsCwbReader.class,
-                ImsCwbReader.PARAM_PATH, wackyPath,
+                ImsCwbReader.PARAM_SOURCE_LOCATION, wackyPath,
                 ImsCwbReader.PARAM_LANGUAGE, languageEdition.name(),
                 ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
                 ImsCwbReader.PARAM_POS_TAG_SET, languageEdition.getTagSet(),

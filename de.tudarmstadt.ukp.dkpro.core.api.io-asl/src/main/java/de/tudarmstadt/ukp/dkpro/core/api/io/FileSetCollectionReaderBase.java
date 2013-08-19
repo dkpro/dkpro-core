@@ -46,10 +46,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Example of a hypothetic <code>FooReader</code> that should read only files ending in
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
  * <pre>
- * CollectionReader reader = createReader(FooReader.class, getDKProTypeSystem(),
+ * CollectionReader reader = createReader(FooReader.class,
  *     FileSetCollectionReaderBase.PARAM_LANGUAGE, "en",
- *     FileSetCollectionReaderBase.PARAM_PATH,     new File("some/path").getAbsolutePath(),
- *     FileSetCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]foodata&#47;**&#47;*.foo" });
+ *     FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION, "some/path",
+ *     FileSetCollectionReaderBase.PARAM_PATTERNS, "[+]foodata&#47;**&#47;*.foo" );
  * </pre>
  * @author Richard Eckart de Castilho
  * @since 1.0.6
@@ -67,12 +67,13 @@ public abstract class FileSetCollectionReaderBase
      */
     @Deprecated
     public static final String PARAM_PATH = ComponentParameters.PARAM_SOURCE_LOCATION;
+    
     /**
      * Location from which the input is read.
      */
     public static final String PARAM_SOURCE_LOCATION = ComponentParameters.PARAM_SOURCE_LOCATION;
 	@ConfigurationParameter(name=PARAM_SOURCE_LOCATION, mandatory=false)
-	private File path;
+	private File sourceLocation;
 
 	/**
 	 * A set of Ant-like include/exclude patterns. A pattern starts with {@link #INCLUDE_PREFIX [+]}
@@ -94,9 +95,9 @@ public abstract class FileSetCollectionReaderBase
 	/**
 	 * States whether the matching is done case sensitive. (default: true)
 	 */
-	public static final String PARAM_CASE_SENSITIVE= "CaseSensitive";
+	public static final String PARAM_CASE_SENSITIVE= "caseSensitive";
 	@ConfigurationParameter(name=PARAM_CASE_SENSITIVE, mandatory=false, defaultValue="true")
-	private boolean isCaseSensitive;
+	private boolean caseSensitive;
 
 	private DirectoryScanner directoryScanner;
 	private int completed;
@@ -111,12 +112,12 @@ public abstract class FileSetCollectionReaderBase
 
 		// Configure the FileSet.
 		directoryScanner = new DirectoryScanner();
-		if (path != null) {
-			directoryScanner.setBasedir(path);
+		if (sourceLocation != null) {
+			directoryScanner.setBasedir(sourceLocation);
 		}
 
 		// Configure case sensitivity
-		directoryScanner.setCaseSensitive(isCaseSensitive);
+		directoryScanner.setCaseSensitive(caseSensitive);
 
 		// Parse the patterns and inject them into the FileSet
 		List<String> includes = new ArrayList<String>();
@@ -139,7 +140,7 @@ public abstract class FileSetCollectionReaderBase
 		directoryScanner.scan();
 
 		// Get the iterator that will be used to actually traverse the FileSet.
-		fileSetIterator = new FileResourceIterator(null, path, directoryScanner.getIncludedFiles());
+		fileSetIterator = new FileResourceIterator(null, sourceLocation, directoryScanner.getIncludedFiles());
 
 		getLogger().info("Found [" + getIncludedFilesCount() + "] files to be read");
 	}
@@ -192,7 +193,7 @@ public abstract class FileSetCollectionReaderBase
 			docMetaData.setDocumentUri(file.toURI().toString()+qualifier);
 			docMetaData.setDocumentId(aFile.getName()+qualifier);
 			if (aFile.getBaseDir() != null) {
-			    docMetaData.setDocumentBaseUri(path.toURI().toString());
+			    docMetaData.setDocumentBaseUri(sourceLocation.toURI().toString());
 				docMetaData.setCollectionId(aFile.getBaseDir().getPath());
 			}
 
