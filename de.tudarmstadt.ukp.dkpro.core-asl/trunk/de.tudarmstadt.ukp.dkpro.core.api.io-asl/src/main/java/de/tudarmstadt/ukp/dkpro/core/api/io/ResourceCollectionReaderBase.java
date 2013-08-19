@@ -56,10 +56,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Example of a hypothetic <code>FooReader</code> that should read only files ending in
  * <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
  * <pre>
- * CollectionReader reader = createReader(FooReader.class, getDKProTypeSystem(),
- *     FileSetCollectionReaderBase.PARAM_LANGUAGE, "en",
- *     FileSetCollectionReaderBase.PARAM_PATH,     new File("some/path").getAbsolutePath(),
- *     FileSetCollectionReaderBase.PARAM_PATTERNS, new String[] { "[+]foodata&#47;**&#47;*.foo" });
+ * CollectionReader reader = createReader(FooReader.class,
+ *     ResourceCollectionReaderBase.PARAM_LANGUAGE, "en",
+ *     ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "some/path",
+ *     ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]foodata&#47;**&#47;*.foo" );
  * </pre>
  * <p>
  * The list of resources returned is sorted, so for the same set of resources, they are always
