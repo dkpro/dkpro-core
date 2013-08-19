@@ -39,7 +39,7 @@ public class FileSetCollectionReaderBaseTest
         throws Exception
     {
         CollectionReader reader = createReader(DummyReader.class,
-                createTypeSystemDescription(), FileSetCollectionReaderBase.PARAM_PATH,
+                createTypeSystemDescription(), FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION,
                 "src/main/java/de/tudarmstadt/ukp/", FileSetCollectionReaderBase.PARAM_PATTERNS,
                 new String[] { "[+]**/*.java" });
 

@@ -43,7 +43,7 @@ public class TcfReaderWriterTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(TcfReader.class, 
-                TcfReader.PARAM_PATH, new File("src/test/resources/").getAbsolutePath(), 
+                TcfReader.PARAM_SOURCE_LOCATION, new File("src/test/resources/").getAbsolutePath(), 
                 TcfReader.PARAM_PATTERNS, new String[] { "[+]tcf-after.xml" });
 
         AnalysisEngineDescription writer = createEngineDescription(

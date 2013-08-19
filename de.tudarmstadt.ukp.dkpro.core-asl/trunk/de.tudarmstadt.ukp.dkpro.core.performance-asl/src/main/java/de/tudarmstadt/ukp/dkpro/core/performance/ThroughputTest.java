@@ -64,7 +64,7 @@ public class ThroughputTest {
             return createReader(
                     TEIReader.class,
                     TEIReader.PARAM_LANGUAGE, "en",
-                    TEIReader.PARAM_PATH, brownPath,
+                    TEIReader.PARAM_SOURCE_LOCATION, brownPath,
                     TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml.gz"}
             );
         }

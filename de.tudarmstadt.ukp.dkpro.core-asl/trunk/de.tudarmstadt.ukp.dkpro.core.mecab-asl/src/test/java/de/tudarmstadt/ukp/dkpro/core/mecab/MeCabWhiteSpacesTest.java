@@ -50,7 +50,7 @@ public class MeCabWhiteSpacesTest {
     public void sequenceOfWhitespacesAtEndOfFile() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class, 
-                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, "[+]EoFWithSequenceOfWhitespacesAndBlanks.txt");
         AnalysisEngine jTagger = createEngine(MeCabTagger.class);
@@ -73,7 +73,7 @@ public class MeCabWhiteSpacesTest {
     public void whitespaceBeforeToken() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class, 
-                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]TokenPreceedingWhitespace.txt" });
 
@@ -98,7 +98,7 @@ public class MeCabWhiteSpacesTest {
     public void whitespaceIsAnnotatedAsToken() throws UIMAException, IOException {
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class, 
-                TextReader.PARAM_PATH, "src/test/resources",
+                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources",
                 TextReader.PARAM_LANGUAGE, "ja", 
                 TextReader.PARAM_PATTERNS, new String[] { "[+]WhiteSpaceAsToken.txt" });
 

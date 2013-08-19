@@ -52,7 +52,7 @@ public class TextReaderTest
 		throws Exception
 	{
 		CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
 
         AnalysisEngine writer = createEngine(XWriter.class,
@@ -84,7 +84,7 @@ public class TextReaderTest
 		throws Exception
 	{
 		CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-				ResourceCollectionReaderBase.PARAM_PATH, new File("src/test/resources/texts").getAbsolutePath(),
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, new File("src/test/resources/texts").getAbsolutePath(),
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
@@ -118,7 +118,7 @@ public class TextReaderTest
 	{
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
 				createTypeSystemDescription(),
-				ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/name with space",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/name with space",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
@@ -152,7 +152,7 @@ public class TextReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 createTypeSystemDescription(),
-                ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/texts",
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
         AnalysisEngine writer = createEngine(XWriter.class,
@@ -184,7 +184,7 @@ public class TextReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
                 createTypeSystemDescription(),
-                ResourceCollectionReaderBase.PARAM_PATH, "classpath:texts",
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "classpath:texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
         AnalysisEngine writer = createEngine(XWriter.class,

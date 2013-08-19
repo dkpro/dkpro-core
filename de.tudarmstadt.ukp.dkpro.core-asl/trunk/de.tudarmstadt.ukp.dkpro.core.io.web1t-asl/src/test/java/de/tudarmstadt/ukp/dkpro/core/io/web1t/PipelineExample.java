@@ -43,7 +43,7 @@ public class PipelineExample
         String corpusPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
         CollectionReader reader = createReader(
                 TEIReader.class,
-                TEIReader.PARAM_PATH, corpusPath,
+                TEIReader.PARAM_SOURCE_LOCATION, corpusPath,
                 TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
         );
 

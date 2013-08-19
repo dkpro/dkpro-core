@@ -36,7 +36,7 @@ public class BncReaderTest
 	public void test() throws Exception
 	{
 		CollectionReaderDescription reader = createReaderDescription(BncReader.class,
-				BncReader.PARAM_PATH, "src/test/resources",
+				BncReader.PARAM_SOURCE_LOCATION, "src/test/resources",
 				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
 				BncReader.PARAM_LANGUAGE, "en");
 

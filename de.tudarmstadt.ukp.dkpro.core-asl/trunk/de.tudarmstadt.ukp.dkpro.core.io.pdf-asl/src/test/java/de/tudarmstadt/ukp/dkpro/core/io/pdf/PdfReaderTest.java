@@ -47,7 +47,7 @@ public class PdfReaderTest
         File outputFile = new File(folder.getRoot(), "dump-output.txt");
 
         CollectionReader reader = createReader(PdfReader.class, 
-                PdfReader.PARAM_PATH, "src/test/resources/data", 
+                PdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data", 
                 PdfReader.PARAM_PATTERNS, "[+]**/*.pdf");
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,

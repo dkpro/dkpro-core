@@ -40,7 +40,7 @@ public class ResourceCollectionReaderBaseTest
 	public void testClasspath() throws Exception
 	{
 		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
-				ResourceCollectionReaderBase.PARAM_PATH, "classpath*:/de/tudarmstadt/ukp/",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "classpath*:/de/tudarmstadt/ukp/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
 					"[-]**/ResourceCollectionReaderBase.class"});
@@ -52,7 +52,7 @@ public class ResourceCollectionReaderBaseTest
 	public void testZip() throws Exception
 	{
 		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
-				ResourceCollectionReaderBase.PARAM_PATH, "jar:file:src/test/resources/testfiles.zip!",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "jar:file:src/test/resources/testfiles.zip!",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
 					"[-]**/ResourceCollectionReaderBase.class"});
@@ -65,7 +65,7 @@ public class ResourceCollectionReaderBaseTest
 	public void testRemoteZip() throws Exception
 	{
 		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
-				ResourceCollectionReaderBase.PARAM_PATH, "jar:http://search.maven.org/remotecontent?filepath=org/annolab/tt4j/org.annolab.tt4j/1.0.16/org.annolab.tt4j-1.0.16.jar!",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "jar:http://search.maven.org/remotecontent?filepath=org/annolab/tt4j/org.annolab.tt4j/1.0.16/org.annolab.tt4j-1.0.16.jar!",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.class",
 					"[-]**/ResourceCollectionReaderBase.class"});
@@ -77,7 +77,7 @@ public class ResourceCollectionReaderBaseTest
 	public void testFile() throws Exception
 	{
 		CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
-				ResourceCollectionReaderBase.PARAM_PATH, "file:src/main/java/de/tudarmstadt/ukp/",
+				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/de/tudarmstadt/ukp/",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					"[+]**/FileSetCollectionReaderBase.java",
 					"[-]**/ResourceCollectionReaderBase.java"});

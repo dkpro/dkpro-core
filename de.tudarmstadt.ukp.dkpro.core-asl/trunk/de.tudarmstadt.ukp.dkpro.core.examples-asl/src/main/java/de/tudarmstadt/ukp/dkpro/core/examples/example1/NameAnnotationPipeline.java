@@ -37,7 +37,7 @@ public class NameAnnotationPipeline
 	{
 		CollectionReaderDescription reader = createReaderDescription(
 				TextReader.class,
-				TextReader.PARAM_PATH, "src/test/resources/text",
+				TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/text",
 				TextReader.PARAM_PATTERNS, "[+]*.txt",
 				TextReader.PARAM_LANGUAGE, "en");
 

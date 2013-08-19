@@ -41,7 +41,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]**/abbr*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en",
@@ -63,7 +63,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]full*.xml", "[+]abbr*.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/topic | /topics/top",
 		        XmlReaderXPath.PARAM_LANGUAGE, "en",
@@ -85,7 +85,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]attribute_id.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "@num"
@@ -105,7 +105,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]deep_tag_id.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "EN-title/num"
@@ -125,7 +125,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, VALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]deep_attribute_id.xml" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "EN-title/@num"
@@ -147,7 +147,7 @@ public class XmlReaderXPathIdValidationTest
 	{
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]*.*" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_SUBSTITUTE_TAGS, new String[] { "EN-title" }, // User should provide even number parameters
@@ -170,7 +170,7 @@ public class XmlReaderXPathIdValidationTest
 		// E.g. <num></num>
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]empty_id.xml" },
 				XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num",
@@ -192,7 +192,7 @@ public class XmlReaderXPathIdValidationTest
 		// Doc doesn't contain ID tag at all
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]no_id_tag.xml" },
 				XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num",
@@ -220,7 +220,7 @@ public class XmlReaderXPathIdValidationTest
 		//      </top>
 		CollectionReader reader = createReader(
 				XmlReaderXPath.class,
-				XmlReaderXPath.PARAM_PATH, INVALID_DOCS_ROOT,
+				XmlReaderXPath.PARAM_SOURCE_LOCATION, INVALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]duplicated_id_tags.xml" },
 				XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
 		        XmlReaderXPath.PARAM_DOC_ID_TAG, "num",

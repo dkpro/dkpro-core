@@ -36,7 +36,7 @@ public class AclArcReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 AclAnthologyReader.class,
-                ResourceCollectionReaderBase.PARAM_PATH, "src/test/resources/acl/",
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/acl/",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]**/*.txt" );
 
         int i=0;

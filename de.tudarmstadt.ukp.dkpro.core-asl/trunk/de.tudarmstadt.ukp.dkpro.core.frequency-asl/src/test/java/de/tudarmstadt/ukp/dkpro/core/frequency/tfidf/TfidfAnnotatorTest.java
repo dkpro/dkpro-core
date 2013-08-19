@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.frequency.tfidf;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION;
 import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
@@ -67,7 +67,7 @@ public class TfidfAnnotatorTest
         // write the model
         CollectionReaderDescription reader = createReaderDescription(
                 TextReader.class,
-                PARAM_PATH, CONSUMER_TEST_DATA_PATH,
+                PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
 
         AnalysisEngineDescription aggregate = createEngineDescription(
@@ -185,7 +185,7 @@ public class TfidfAnnotatorTest
     private CollectionReaderDescription getReader() throws ResourceInitializationException {
             return createReaderDescription(
                 TextReader.class,
-                PARAM_PATH, CONSUMER_TEST_DATA_PATH,
+                PARAM_SOURCE_LOCATION, CONSUMER_TEST_DATA_PATH,
                 PARAM_PATTERNS, new String[] { INCLUDE_PREFIX+"*.txt" });
     }
 
