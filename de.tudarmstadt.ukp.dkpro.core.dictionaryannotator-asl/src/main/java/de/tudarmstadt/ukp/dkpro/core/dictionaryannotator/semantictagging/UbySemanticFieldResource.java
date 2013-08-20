@@ -17,11 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
-import static de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging.UbyResourceUtils.getMostFrequentSense;
 import static de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging.UbyResourceUtils.corePosToUbyPos;
+import static de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging.UbyResourceUtils.getMostFrequentSense;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +27,6 @@ import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
-import org.dom4j.DocumentException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.lmf.api.Uby;
@@ -40,8 +37,6 @@ import de.tudarmstadt.ukp.lmf.model.core.Sense;
 import de.tudarmstadt.ukp.lmf.model.enums.EPartOfSpeech;
 import de.tudarmstadt.ukp.lmf.model.meta.SemanticLabel;
 import de.tudarmstadt.ukp.lmf.transform.DBConfig;
-import de.tudarmstadt.ukp.lmf.transform.LMFDBUtils;
-import de.tudarmstadt.ukp.lmf.transform.XMLToDBTransformer;
 
 
 /**
@@ -100,11 +95,6 @@ public class UbySemanticFieldResource
         try {
  			DBConfig dbConfig = new DBConfig(ubyDatabaseUrl,databaseDriver,databaseDriverName,ubyUsername,ubyPassword,false);
  			
- 			if (databaseDriverName.equals("h2")) { // populate in memory DB
- 				LMFDBUtils.createTables(dbConfig);
- 				XMLToDBTransformer transformer = new XMLToDBTransformer(dbConfig);
- 				transformer.transform(new File("src/test/resources/UbyTestLexicon.xml"),"UbyTest");
- 			}
 			uby = new Uby(dbConfig);
 			
 			if (documentLanguage.equals("en")) {
@@ -115,10 +105,6 @@ public class UbySemanticFieldResource
         }
         catch (UbyInvalidArgumentException e) {       	       	
             throw new ResourceInitializationException(e);
-        } catch (FileNotFoundException e) {
-        	throw new ResourceInitializationException(e);
-		} catch (DocumentException e) {
-			throw new ResourceInitializationException(e);
 		}
 
         return true;

@@ -22,12 +22,16 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.dom4j.DocumentException;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -40,6 +44,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.lmf.exceptions.UbyInvalidArgumentException;
+import de.tudarmstadt.ukp.lmf.transform.DBConfig;
+import de.tudarmstadt.ukp.lmf.transform.LMFDBUtils;
+import de.tudarmstadt.ukp.lmf.transform.XMLToDBTransformer;
 
 
 /**
@@ -86,14 +94,28 @@ public class UbySemanticFieldAnnotatorTest {
 	 * @param documentUbySemanticFields
 	 * @return
 	 * @throws UIMAException 
+	 * @throws FileNotFoundException 
+	 * @throws UbyInvalidArgumentException 
+	 * @throws DocumentException 
 	 */
 	private void runAnnotatorTestOnInMemDb(String language, 
 			String testDocument, 
 			String[] documentLemmas,
 			String[] documentPosTags, 
-			String[] documentUbySemanticFields) throws UIMAException {
+			String[] documentUbySemanticFields) throws UIMAException, FileNotFoundException, DocumentException, UbyInvalidArgumentException {
 
                
+		
+	 	DBConfig dbConfig = new DBConfig("not_important","org.h2.Driver","h2","root","pass",false);
+		
+		LMFDBUtils.createTables(dbConfig);
+		
+		XMLToDBTransformer transformer;
+		transformer = new XMLToDBTransformer(dbConfig);
+		transformer.transform(new File("src/test/resources/UbyTestLexicon.xml"),"UbyTest");
+ 			
+			
+		 
 		AnalysisEngineDescription processor = createEngineDescription(
 
 				createEngineDescription(UbySemanticFieldAnnotator.class,
