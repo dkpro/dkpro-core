@@ -32,7 +32,7 @@ public class BrownCorpusTest
 
     @Test
     public void brownTest() throws Exception {
-        Corpus corpus = new BrownTEICorpus("src/test/resources/test_corpora/brown/");
+        Corpus corpus = new BrownTeiCorpus("src/test/resources/test_corpora/brown/");
         
         int nrOfTexts = 0;
         for (Text text : corpus.getTexts()) {
@@ -73,7 +73,7 @@ public class BrownCorpusTest
     @Ignore
     @Test
     public void brownTest_DKPRO_HOME() throws Exception {
-        CorpusBase corpus = new BrownTEICorpus();
+        CorpusBase corpus = new BrownTeiCorpus();
         
         for (Text text : corpus.getTexts()) {
             System.out.println(text);

@@ -77,7 +77,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
-public class MSTParser
+public class MstParser
     extends JCasConsumer_ImplBase
 {
     /**
@@ -118,7 +118,7 @@ public class MSTParser
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
 
-    private ModelProviderBase<UKPDependencyParser> modelProvider;
+    private ModelProviderBase<UkpDependencyParser> modelProvider;
     private MappingProvider mappingProvider;
 
     /**
@@ -136,10 +136,10 @@ public class MSTParser
         super.initialize(context);
 
         // the modelProvider reads in the model and produces a parser
-        modelProvider = new ModelProviderBase<UKPDependencyParser>()
+        modelProvider = new ModelProviderBase<UkpDependencyParser>()
         {
             {
-                setContextObject(MSTParser.this);
+                setContextObject(MstParser.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.mstparser-model-parser-${language}-${variant}");
 
@@ -153,7 +153,7 @@ public class MSTParser
             }
 
             @Override
-            protected UKPDependencyParser produceResource(URL aUrl)
+            protected UkpDependencyParser produceResource(URL aUrl)
                 throws IOException
             {
                 // mst.ParserOptions needs a String as argument
@@ -171,7 +171,7 @@ public class MSTParser
                 DependencyPipe pipe = options.secondOrder ? new DependencyPipe2O(options)
                         : new DependencyPipe(options);
 
-                UKPDependencyParser dp = new UKPDependencyParser(pipe, options);
+                UkpDependencyParser dp = new UkpDependencyParser(pipe, options);
                 getLogger().info("Loading model:  " + options.modelName);
                 try {
                     dp.loadModel(options.modelName);
@@ -224,7 +224,7 @@ public class MSTParser
         CAS cas = jcas.getCas();
         modelProvider.configure(cas);
         mappingProvider.configure(cas);
-        UKPDependencyParser dp = modelProvider.getResource();
+        UkpDependencyParser dp = modelProvider.getResource();
 
         // If there are no sentences or tokens in the CAS, skip it.
         if (!exists(jcas, Sentence.class) || !exists(jcas, Token.class)) {

@@ -23,7 +23,7 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownTEICorpus;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownTeiCorpus;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
 
 public class ProviderBenchmark
@@ -31,7 +31,7 @@ public class ProviderBenchmark
     public static void main(String[] args) throws Exception
     {
         Web1TProviderBase web1t = new Web1TFileAccessProvider(args);
-        Corpus brown = new BrownTEICorpus();
+        Corpus brown = new BrownTeiCorpus();
 
         StopWatch watch = new StopWatch();
         watch.start();

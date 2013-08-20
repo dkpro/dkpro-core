@@ -65,7 +65,7 @@ public class Basedata {
 		return words.get(offset);
 	}
 
-	public void save(File file) throws MMAXWriterException {
+	public void save(File file) throws MmaxWriterException {
 
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -94,19 +94,19 @@ public class Basedata {
 
      	   transformer.transform(source, result);
         } catch (ParserConfigurationException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (FileNotFoundException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (TransformerConfigurationException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (TransformerFactoryConfigurationError e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (TransformerException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         }
 	}
 
-	public void save(String filename) throws MMAXWriterException {
+	public void save(String filename) throws MmaxWriterException {
 		save(new File(filename));
 	}
 }

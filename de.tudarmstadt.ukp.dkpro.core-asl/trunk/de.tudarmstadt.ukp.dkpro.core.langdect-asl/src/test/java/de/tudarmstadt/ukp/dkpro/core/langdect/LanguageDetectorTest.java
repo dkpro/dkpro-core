@@ -31,7 +31,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
@@ -43,7 +43,7 @@ public class LanguageDetectorTest
     public void languageDetectorTest()
         throws Exception
     {
-        String web1TBaseDir = new DKProContext().getWorkspace("web1t").getAbsolutePath();
+        String web1TBaseDir = new DkproContext().getWorkspace("web1t").getAbsolutePath();
         
         AnalysisEngine engine = createEngine(
             createEngineDescription(

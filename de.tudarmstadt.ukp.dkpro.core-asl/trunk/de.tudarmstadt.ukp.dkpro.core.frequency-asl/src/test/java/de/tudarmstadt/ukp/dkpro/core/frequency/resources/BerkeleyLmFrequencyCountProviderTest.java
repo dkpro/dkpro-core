@@ -31,7 +31,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 
-public class BerkeleyLMFrequencyCountProviderTest
+public class BerkeleyLmFrequencyCountProviderTest
 {
     public static class Annotator extends JCasAnnotator_ImplBase {
         final static String MODEL_KEY = "FrequencyProvider";
@@ -50,9 +50,9 @@ public class BerkeleyLMFrequencyCountProviderTest
     public void configureAggregatedExample() throws Exception {
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
         		Annotator.MODEL_KEY, createExternalResourceDescription(
-        				BerkeleyLMFrequencyCountProvider.class,
-        				BerkeleyLMFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
-                        BerkeleyLMFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
+        				BerkeleyLmFrequencyCountProvider.class,
+        				BerkeleyLmFrequencyCountProvider.PARAM_PROVIDER_LANGUAGE, "en",
+                        BerkeleyLmFrequencyCountProvider.PARAM_BINARY, "src/test/resources/test.ser"));
 
         // Check the external resource was injected
         AnalysisEngine ae = createEngine(desc);

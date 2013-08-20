@@ -22,13 +22,13 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class BerkeleyLMProviderTest
+public class BerkeleyLmProviderTest
 {
 
     @Ignore
     @Test
     public void berkeleyLMTest() throws Exception {
-        BerkeleyLMProvider lm  = new BerkeleyLMProvider(
+        BerkeleyLmProvider lm  = new BerkeleyLmProvider(
                 "src/test/resources/test.ser",
                 "en"
         );

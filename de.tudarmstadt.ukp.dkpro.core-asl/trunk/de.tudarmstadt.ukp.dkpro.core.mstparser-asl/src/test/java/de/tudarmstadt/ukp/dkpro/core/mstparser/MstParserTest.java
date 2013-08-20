@@ -38,7 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
  * @author beinborn
  * @author zesch
  */
-public class MSTParserTest
+public class MstParserTest
 {
 	static final String documentEnglish = "We need a very complicated example sentence , which " +
             "contains as many constituents and dependencies as possible .";
@@ -144,9 +144,9 @@ public class MSTParserTest
 		AnalysisEngineDescription aggregate = createEngineDescription(
 				createEngineDescription(BreakIteratorSegmenter.class),
 				createEngineDescription(OpenNlpPosTagger.class),
-				createEngineDescription(MSTParser.class, 
-				        MSTParser.PARAM_VARIANT, aVariant,
-				        MSTParser.PARAM_PRINT_TAGSET, true));
+				createEngineDescription(MstParser.class, 
+				        MstParser.PARAM_VARIANT, aVariant,
+				        MstParser.PARAM_PRINT_TAGSET, true));
 
 		AnalysisEngine engine = createEngine(aggregate);
 		JCas jcas = engine.newJCas();

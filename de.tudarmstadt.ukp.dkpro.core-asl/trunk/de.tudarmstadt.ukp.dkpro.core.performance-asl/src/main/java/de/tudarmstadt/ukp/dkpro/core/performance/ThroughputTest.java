@@ -29,8 +29,8 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
-import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
+import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 
 /**
  * @author zesch
@@ -59,13 +59,13 @@ public class ThroughputTest {
 
     public static CollectionReader getStandardReader(String languageCode) throws IOException, ResourceInitializationException {
         if (languageCode.equals("en")) {
-            String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
+            String brownPath = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
 
             return createReader(
-                    TEIReader.class,
-                    TEIReader.PARAM_LANGUAGE, "en",
-                    TEIReader.PARAM_SOURCE_LOCATION, brownPath,
-                    TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml.gz"}
+                    TeiReader.class,
+                    TeiReader.PARAM_LANGUAGE, "en",
+                    TeiReader.PARAM_SOURCE_LOCATION, brownPath,
+                    TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml.gz"}
             );
         }
         else {

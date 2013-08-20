@@ -43,18 +43,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
 
-public class TEIReaderTest
+public class TeiReaderTest
 {
     @Test
     public void digibibTest()
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-                TEIReader.class,
-                TEIReader.PARAM_OMIT_IGNORABLE_WHITESPACE, true,
-                TEIReader.PARAM_LANGUAGE, "de",
-                TEIReader.PARAM_SOURCE_LOCATION, "classpath:/digibib",
-                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
+                TeiReader.class,
+                TeiReader.PARAM_OMIT_IGNORABLE_WHITESPACE, true,
+                TeiReader.PARAM_LANGUAGE, "de",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/digibib",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         AnalysisEngine writer = createEngine(TextWriter.class,
         		TextWriter.PARAM_USE_DOCUMENT_ID, true,
@@ -97,10 +97,10 @@ public class TEIReaderTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-                TEIReader.class,
-                TEIReader.PARAM_LANGUAGE, "en",
-                TEIReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, "en",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         String firstSentence = "The Fulton County Grand Jury said Friday an investigation of Atlanta's recent primary election produced `` no evidence '' that any irregularities took place . ";
 
@@ -131,10 +131,10 @@ public class TEIReaderTest
     	File output = new File("target/test-output/brown_ims.txt");
 
         CollectionReaderDescription reader = createReaderDescription(
-                TEIReader.class,
-                TEIReader.PARAM_LANGUAGE, "en",
-                TEIReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, "en",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
         		ImsCwbWriter.PARAM_TARGET_LOCATION, output);
@@ -154,10 +154,10 @@ public class TEIReaderTest
         File output = new File("target/test-output/brown_ims.gz.txt");
 
         CollectionReaderDescription reader = createReaderDescription(
-                TEIReader.class,
-                TEIReader.PARAM_LANGUAGE, "en",
-                TEIReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei_gzip/",
-                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, "en",
+                TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei_gzip/",
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
                 ImsCwbWriter.PARAM_TARGET_LOCATION, output);
@@ -174,11 +174,11 @@ public class TEIReaderTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-        		TEIReader.class,
-        		TEIReader.PARAM_LANGUAGE, "en",
-        		TEIReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-        		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
-                TEIReader.PARAM_WRITE_SENTENCE, false);
+        		TeiReader.class,
+        		TeiReader.PARAM_LANGUAGE, "en",
+        		TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+        		TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
+                TeiReader.PARAM_WRITE_SENTENCE, false);
 
         int i = 0;
         for (JCas jcas : new JCasIterable(reader)) {
@@ -202,12 +202,12 @@ public class TEIReaderTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-        		TEIReader.class,
-        		TEIReader.PARAM_LANGUAGE, "en",
-        		TEIReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-        		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
-                TEIReader.PARAM_WRITE_TOKEN, false,
-                TEIReader.PARAM_WRITE_POS, false
+        		TeiReader.class,
+        		TeiReader.PARAM_LANGUAGE, "en",
+        		TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+        		TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
+                TeiReader.PARAM_WRITE_TOKEN, false,
+                TeiReader.PARAM_WRITE_POS, false
         );
 
         int i = 0;
@@ -232,12 +232,12 @@ public class TEIReaderTest
         throws Exception
     {
         CollectionReaderDescription reader = createReaderDescription(
-        		TEIReader.class,
-        		TEIReader.PARAM_LANGUAGE, "en",
-        		TEIReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
-        		TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
-                TEIReader.PARAM_WRITE_POS, true,
-                TEIReader.PARAM_WRITE_TOKEN, false);
+        		TeiReader.class,
+        		TeiReader.PARAM_LANGUAGE, "en",
+        		TeiReader.PARAM_SOURCE_LOCATION, "classpath:/brown_tei/",
+        		TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" },
+                TeiReader.PARAM_WRITE_POS, true,
+                TeiReader.PARAM_WRITE_TOKEN, false);
 
         for (JCas jcas : new JCasIterable(reader)) {
             // should never get here

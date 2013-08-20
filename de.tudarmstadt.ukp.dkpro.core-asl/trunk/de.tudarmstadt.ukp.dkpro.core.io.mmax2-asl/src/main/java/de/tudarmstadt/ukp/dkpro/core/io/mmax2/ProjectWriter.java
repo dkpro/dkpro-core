@@ -78,7 +78,7 @@ public class ProjectWriter {
 	public void addProject(String filename, Basedata base, Graph graph,
 			String level) throws TransformerConfigurationException,
 			ParserConfigurationException, TransformerException,
-			TransformerFactoryConfigurationError, SAXException, IOException, MMAXWriterException {
+			TransformerFactoryConfigurationError, SAXException, IOException, MmaxWriterException {
 
         base.save(new File(basedataPath, filename + ".xml"));
 		createMMAXFile(filename);

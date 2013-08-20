@@ -59,7 +59,7 @@ import org.apache.pdfbox.util.TextPosition;
  * 
  * @author Richard Eckart de Castilho
  */
-public abstract class PDFLayoutEventStripper
+public abstract class PdfLayoutEventStripper
     extends PDFStreamEngine
 {
     /**
@@ -111,7 +111,7 @@ public abstract class PDFLayoutEventStripper
      * @throws IOException
      *             If there is an error loading the properties.
      */
-    public PDFLayoutEventStripper()
+    public PdfLayoutEventStripper()
         throws IOException
     {
         super(ResourceLoader.loadProperties(
@@ -128,7 +128,7 @@ public abstract class PDFLayoutEventStripper
      * @throws IOException
      *             If there is an error reading the properties.
      */
-    public PDFLayoutEventStripper(final Properties props)
+    public PdfLayoutEventStripper(final Properties props)
         throws IOException
     {
         super(props);

@@ -28,9 +28,9 @@ import org.junit.Test;
 
 import com.googlecode.jweb1t.JWeb1TIndexer;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
+import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class PipelineExample
@@ -40,11 +40,11 @@ public class PipelineExample
     @Test
     public void pipelineTest() throws Exception
     {
-        String corpusPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
+        String corpusPath = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() + "/brown_tei/";
         CollectionReader reader = createReader(
-                TEIReader.class,
-                TEIReader.PARAM_SOURCE_LOCATION, corpusPath,
-                TEIReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
+                TeiReader.class,
+                TeiReader.PARAM_SOURCE_LOCATION, corpusPath,
+                TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" }
         );
 
         AnalysisEngineDescription segmenter = createEngineDescription(

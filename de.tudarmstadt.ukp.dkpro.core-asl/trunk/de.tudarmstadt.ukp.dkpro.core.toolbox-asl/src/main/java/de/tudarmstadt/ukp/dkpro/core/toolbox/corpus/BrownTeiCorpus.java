@@ -22,8 +22,8 @@ import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
-import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
+import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 
 
 /**
@@ -32,7 +32,7 @@ import de.tudarmstadt.ukp.dkpro.core.io.tei.TEIReader;
  * @author zesch
  *
  */
-public class BrownTEICorpus
+public class BrownTeiCorpus
     extends CorpusBase
 {
     static final String LANGUAGE = "en";
@@ -40,25 +40,25 @@ public class BrownTEICorpus
 
     CollectionReaderDescription reader;
 
-    public BrownTEICorpus() throws Exception
+    public BrownTeiCorpus() throws Exception
     {
-        String brownPath = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
+        String brownPath = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
         "/brown_tei/";
 
         initialize(brownPath);
     }
 
-    public BrownTEICorpus(String brownPath) throws Exception
+    public BrownTeiCorpus(String brownPath) throws Exception
     {
         initialize(brownPath);
     }
 
     private void initialize(String brownPath) throws Exception {
         reader = CollectionReaderFactory.createReaderDescription(
-                TEIReader.class,
-                TEIReader.PARAM_LANGUAGE, LANGUAGE,
-                TEIReader.PARAM_SOURCE_LOCATION, brownPath,
-                TEIReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
+                TeiReader.class,
+                TeiReader.PARAM_LANGUAGE, LANGUAGE,
+                TeiReader.PARAM_SOURCE_LOCATION, brownPath,
+                TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml", INCLUDE_PREFIX + "*.xml.gz"}
         );
     }
 
