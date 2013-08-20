@@ -33,4 +33,5 @@
         	<artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+    <name>DKPro Core ASL - Phonetics API</name>
 </project>

@@ -24,7 +24,7 @@
 		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
-	<name>DKPro Core ASL - Semantic Role Labeling API</name>
+	<name>DKPro Core ASL - Semantics API</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
