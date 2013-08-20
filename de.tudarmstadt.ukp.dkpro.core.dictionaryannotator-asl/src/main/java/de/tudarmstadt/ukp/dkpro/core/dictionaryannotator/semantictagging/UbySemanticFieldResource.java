@@ -75,11 +75,6 @@ public class UbySemanticFieldResource
 	@ConfigurationParameter(name = PARAM_PASSWORD, mandatory = true)
 	private String ubyPassword;
 	
-	// the documentLanguage is specified as ISO 2-letter code (following the DKPro-Core convention)
-	public static final String PARAM_LANGUAGE = "documentLanguage";
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
-	private String documentLanguage;
-
 	private Uby uby;
 	private Lexicon lexicon;
 
@@ -97,11 +92,6 @@ public class UbySemanticFieldResource
  			
 			uby = new Uby(dbConfig);
 			
-			if (documentLanguage.equals("en")) {
-				lexicon = uby.getLexiconByName("WordNet");
-			} else if (documentLanguage.equals("de")) {
-				lexicon = uby.getLexiconByName("GermaNet");
-			}			
         }
         catch (UbyInvalidArgumentException e) {       	       	
             throw new ResourceInitializationException(e);
@@ -118,6 +108,13 @@ public class UbySemanticFieldResource
 		Sense sense = null;
 		String semanticField = "";
 		List<LexicalEntry> lexicalEntries;
+		
+		// the documentLanguage is specified as ISO 2-letter code (following the DKPro-Core convention)
+		if (token.getCAS().getDocumentLanguage().equals("en")) {
+			lexicon = uby.getLexiconByName("WordNet");
+		} else if (token.getCAS().getDocumentLanguage().equals("de")) {
+			lexicon = uby.getLexiconByName("GermaNet");
+		}			
 				
 		// does the token have a POS which has relevant information in the lexicon?	
 		if (corePosToUbyPos(token.getPos().getPosValue()).length == 0) {
