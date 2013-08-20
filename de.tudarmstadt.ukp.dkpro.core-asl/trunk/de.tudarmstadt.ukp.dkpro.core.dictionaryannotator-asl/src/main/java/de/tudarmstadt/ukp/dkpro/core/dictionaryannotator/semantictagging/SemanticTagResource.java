@@ -36,13 +36,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * 
  * This shared resource can be added as ExternalResource in Analysis Engines
- * that annotate common nouns with semantic field information from WordNet.
+ * that annotate tokens with semantic tags looked up in a key-value map
+ * e.g., to annotate common nouns with semantic field information from WordNet.
  *     
  * @author Judith Eckle-Kohler
  * 
  */
 
-public class NounSemanticFieldResource 
+public class SemanticTagResource 
 	extends Resource_ImplBase
 	implements SemanticTagProvider
 {
@@ -52,7 +53,7 @@ public class NounSemanticFieldResource
     // TODO add default like: defaultValue = "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"
     private String resourcePath;
 
-    private Map<String,String> nounSemanticFieldMap= new HashMap<String,String>();
+    private Map<String,String> keySemanticTagMap= new HashMap<String,String>();
     
     @Override
     public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
@@ -79,8 +80,8 @@ public class NounSemanticFieldResource
 	@Override
 	public String getSemanticTag(Token token) throws Exception {
 
-		if (nounSemanticFieldMap.containsKey(token.getLemma().getValue())) {
-			return nounSemanticFieldMap.get(token.getLemma().getValue());
+		if (keySemanticTagMap.containsKey(token.getLemma().getValue())) {
+			return keySemanticTagMap.get(token.getLemma().getValue());
 		} else {
 			return "UNKNOWN"; 
 		}
@@ -92,10 +93,10 @@ public class NounSemanticFieldResource
 	
 		while((line = bufferedReader.readLine())!=null){	
 			String temp[] = line.split("\t");
-			String noun = temp[0];
+			String key = temp[0];
 			String semField = temp[1];
 			System.out.println(line);
-			nounSemanticFieldMap.put(noun, semField);
+			keySemanticTagMap.put(key, semField);
 		}
 	}
 	

@@ -85,8 +85,8 @@ public class NounSemanticFieldAnnotatorTest {
 
 				createEngineDescription(NounSemanticFieldAnnotator.class,
 						NounSemanticFieldAnnotator.PARAM_NOUN_SEMANTIC_FIELD_RESOURCE, 
-							createExternalResourceDescription(NounSemanticFieldResource.class,
-									NounSemanticFieldResource.PARAM_RESOURCE_PATH, "src/test/resources/nounSemanticFieldMapTest.txt")
+							createExternalResourceDescription(SemanticTagResource.class,
+									SemanticTagResource.PARAM_RESOURCE_PATH, "src/test/resources/nounSemanticFieldMapTest.txt")
 									)
 		);
 
