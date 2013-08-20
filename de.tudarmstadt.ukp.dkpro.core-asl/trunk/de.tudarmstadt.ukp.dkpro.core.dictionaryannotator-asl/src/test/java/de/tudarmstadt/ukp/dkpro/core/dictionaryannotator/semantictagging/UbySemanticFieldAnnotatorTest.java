@@ -125,9 +125,8 @@ public class UbySemanticFieldAnnotatorTest {
 									UbySemanticFieldResource.PARAM_DRIVER, "org.h2.Driver",
 									UbySemanticFieldResource.PARAM_DRIVER_NAME, "h2",
 									UbySemanticFieldResource.PARAM_USERNAME, "root",
-									UbySemanticFieldResource.PARAM_PASSWORD, "pass",
-									UbySemanticFieldResource.PARAM_LANGUAGE, language)
-									)
+									UbySemanticFieldResource.PARAM_PASSWORD, "pass"
+									))
 		);
 
 		AnalysisEngine engine = createEngine(processor);
@@ -204,9 +203,8 @@ public class UbySemanticFieldAnnotatorTest {
 									UbySemanticFieldResource.PARAM_DRIVER, "com.mysql.jdbc.Driver",
 									UbySemanticFieldResource.PARAM_DRIVER_NAME, "mysql",
 									UbySemanticFieldResource.PARAM_USERNAME, "root",
-									UbySemanticFieldResource.PARAM_PASSWORD, "pass",
-									UbySemanticFieldResource.PARAM_LANGUAGE, language)
-									)
+									UbySemanticFieldResource.PARAM_PASSWORD, "pass"
+									))
 		);
 
 		AnalysisEngine engine = createEngine(processor);
