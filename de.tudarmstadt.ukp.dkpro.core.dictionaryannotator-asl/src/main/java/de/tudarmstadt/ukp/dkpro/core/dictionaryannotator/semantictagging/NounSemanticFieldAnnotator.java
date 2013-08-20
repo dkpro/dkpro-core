@@ -54,7 +54,7 @@ public class NounSemanticFieldAnnotator extends JCasAnnotator_ImplBase
 	
 	public static final String PARAM_NOUN_SEMANTIC_FIELD_RESOURCE = "nounSemanticFieldResource";
 	@ExternalResource(key = PARAM_NOUN_SEMANTIC_FIELD_RESOURCE)	
-	private NounSemanticFieldResource nounSemanticFieldResource;
+	private SemanticTagResource nounSemanticFieldResource;
 	
 	
 	@Override
