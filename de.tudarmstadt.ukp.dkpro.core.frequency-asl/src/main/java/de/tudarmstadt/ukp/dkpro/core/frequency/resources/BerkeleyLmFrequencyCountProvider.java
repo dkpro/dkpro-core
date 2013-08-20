@@ -25,7 +25,7 @@ import org.apache.uima.resource.ResourceSpecifier;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.FrequencyCountResourceBase;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLMProvider;
+import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLmProvider;
 
 /**
  * External resource wrapper for the Berkeley LM frequency count provider.
@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLMProvider;
  * @author zesch
  *
  */
-public final class BerkeleyLMFrequencyCountProvider
+public final class BerkeleyLmFrequencyCountProvider
 	extends FrequencyCountResourceBase
 	implements FrequencyCountProvider
 {
@@ -55,7 +55,7 @@ public final class BerkeleyLMFrequencyCountProvider
 		}
 
 		try {
-			provider = new BerkeleyLMProvider(file, language);
+			provider = new BerkeleyLmProvider(file, language);
 		}
 		catch (Exception e) {
 			throw new ResourceInitializationException(e);

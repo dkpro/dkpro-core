@@ -26,12 +26,12 @@ import java.io.IOException;
  * @author Richard Eckart de Castilho
  */
 public
-class DKProContext
+class DkproContext
 {
 	public static final String ENV_DKPRO_HOME = "DKPRO_HOME";
 	public static final String DEFAULT_ENCODING = "UTF-8";
 
-	private static DKProContext context;
+	private static DkproContext context;
 
 	/**
 	 * The the current context.
@@ -39,10 +39,10 @@ class DKProContext
 	 * @return the context.
 	 */
 	public static synchronized
-	DKProContext getContext()
+	DkproContext getContext()
 	{
 		if (context == null) {
-			context = new DKProContext();
+			context = new DkproContext();
 		}
 		return context;
 	}

@@ -36,11 +36,11 @@ import mstparser.DependencyParser;
 import mstparser.DependencyPipe;
 import mstparser.ParserOptions;
 
-public class UKPDependencyParser
+public class UkpDependencyParser
     extends DependencyParser
 {
 
-    public UKPDependencyParser(DependencyPipe pipe, ParserOptions options)
+    public UkpDependencyParser(DependencyPipe pipe, ParserOptions options)
     {
         super(pipe, options);
     }

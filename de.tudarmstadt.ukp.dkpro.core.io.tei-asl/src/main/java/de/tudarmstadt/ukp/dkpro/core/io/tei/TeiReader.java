@@ -73,7 +73,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
 		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
-public class TEIReader
+public class TeiReader
 	extends ResourceCollectionReaderBase
 {
     /**

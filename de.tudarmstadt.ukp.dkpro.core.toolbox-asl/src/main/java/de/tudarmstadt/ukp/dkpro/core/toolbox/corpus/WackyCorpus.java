@@ -21,7 +21,7 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbReader;
 
 /**
@@ -70,7 +70,7 @@ public class WackyCorpus
 
     public WackyCorpus(WackyLanguageEdition languageEdition) throws Exception
     {
-        String wackyPath = DKProContext.getContext().getWorkspace(WORKSPACE).getAbsolutePath() + "/"
+        String wackyPath = DkproContext.getContext().getWorkspace(WORKSPACE).getAbsolutePath() + "/"
             + languageEdition.name();
         initialize(wackyPath, languageEdition);
     }

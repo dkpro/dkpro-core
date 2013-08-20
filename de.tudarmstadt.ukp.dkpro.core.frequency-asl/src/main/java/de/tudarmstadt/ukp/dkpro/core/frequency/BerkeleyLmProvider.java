@@ -29,14 +29,14 @@ import edu.berkeley.nlp.lm.io.LmReaders;
  *
  * nGram index files are looked up in DKPRO_HOME directory.
  */
-public class BerkeleyLMProvider
+public class BerkeleyLmProvider
 	implements FrequencyCountProvider
 {
 
     private final NgramLanguageModel<String> lm;
     private String language;
     
-	public BerkeleyLMProvider(String binaryFile, String language)
+	public BerkeleyLmProvider(String binaryFile, String language)
 	    throws Exception
 	{
 	    lm = LmReaders.readLmBinary(binaryFile);

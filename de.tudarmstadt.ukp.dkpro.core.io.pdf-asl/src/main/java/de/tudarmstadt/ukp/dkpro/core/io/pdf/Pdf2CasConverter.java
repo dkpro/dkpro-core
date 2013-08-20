@@ -35,7 +35,7 @@ import org.apache.uima.cas.text.AnnotationFS;
  * @author Richard Eckart de Castilho
  */
 public class Pdf2CasConverter
-    extends PDFLayoutEventStripper
+    extends PdfLayoutEventStripper
 {
     private final Log log = LogFactory.getLog(getClass());
 

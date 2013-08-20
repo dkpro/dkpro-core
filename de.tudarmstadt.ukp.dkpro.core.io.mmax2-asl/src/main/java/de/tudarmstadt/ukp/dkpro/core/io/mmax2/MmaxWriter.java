@@ -65,7 +65,7 @@ import org.xml.sax.SAXException;
  *
  */
 // TODO add parameter for path to MMAX project, as this needs to be adapted to the task anyway
-public class MMAXWriter {
+public class MmaxWriter {
 	private final Log log = LogFactory.getLog(getClass());
 
     public enum StartUpMode {
@@ -98,7 +98,7 @@ public class MMAXWriter {
 
     private MMAX2Discourse discourse;
 
-    public MMAXWriter(File outputPath) throws MMAXWriterException {
+    public MmaxWriter(File outputPath) throws MmaxWriterException {
         this.projectPath = outputPath;
 
         this.basedata = new Basedata();
@@ -109,7 +109,7 @@ public class MMAXWriter {
             try {
                 copy(new File(SOURCE_PATH_STRING), projectPath);
             } catch (IOException e) {
-                throw new MMAXWriterException(e);
+                throw new MmaxWriterException(e);
             }
         }
 
@@ -166,7 +166,7 @@ public class MMAXWriter {
         return basedata.getId(offset);
     }
 
-    public String createMMAXFile(String mmaxFilename) throws MMAXWriterException {
+    public String createMMAXFile(String mmaxFilename) throws MmaxWriterException {
 
         log.info("Writing Basedata");
         File basedataFile = new File(basedataPath, mmaxFilename + ".xml");
@@ -194,7 +194,7 @@ public class MMAXWriter {
     	discourse = MMAX2Discourse.buildDiscourse(infile, commonPathsFile.getPath());
     }
 
-    public void registerMarkableLevel(String levelname, String schemeFilename, String customizationFilename) throws MMAXWriterException {
+    public void registerMarkableLevel(String levelname, String schemeFilename, String customizationFilename) throws MmaxWriterException {
 
         Document compath = loadXML(commonPathsFile);
 
@@ -230,10 +230,10 @@ public class MMAXWriter {
         return new Markable(node, id, null, null, level);
     }
 
-    public Markable addMarkable(String levelName, String[] ids, HashMap attributes) throws MMAXWriterException {
+    public Markable addMarkable(String levelName, String[] ids, HashMap attributes) throws MmaxWriterException {
         MarkableLevel level = getMarkableLevel(levelName);
         if (level == null) {
-            throw new MMAXWriterException("Could not get level: " + levelName);
+            throw new MmaxWriterException("Could not get level: " + levelName);
         }
         Markable markable = level.addMarkable(ids, attributes);
         return markable;
@@ -247,23 +247,23 @@ public class MMAXWriter {
         getMarkableLevel(levelName).saveMarkables("");
     }
 
-    private Document loadXML(File file) throws MMAXWriterException {
+    private Document loadXML(File file) throws MmaxWriterException {
         DocumentBuilder parser;
         Document doc;
         try {
             parser = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             doc = parser.parse(file);
         } catch (ParserConfigurationException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (SAXException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (IOException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         }
         return doc;
     }
 
-    private void saveXML(Document doc, File file, String outputkey, String doctype) throws MMAXWriterException {
+    private void saveXML(Document doc, File file, String outputkey, String doctype) throws MmaxWriterException {
 
         try {
             DOMSource source = new DOMSource(doc);
@@ -276,25 +276,25 @@ public class MMAXWriter {
             trans.transform(source, result);
             stream.close();
         } catch (FileNotFoundException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (TransformerConfigurationException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (TransformerFactoryConfigurationError e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (TransformerException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         } catch (IOException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         }
     }
 
-    public Document createXML() throws MMAXWriterException  {
+    public Document createXML() throws MmaxWriterException  {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
         } catch (ParserConfigurationException e) {
-            throw new MMAXWriterException(e);
+            throw new MmaxWriterException(e);
         }
         return builder.newDocument();
     }

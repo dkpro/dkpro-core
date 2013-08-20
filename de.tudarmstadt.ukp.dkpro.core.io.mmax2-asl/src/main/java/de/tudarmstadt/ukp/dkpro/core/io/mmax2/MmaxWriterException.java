@@ -17,23 +17,23 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.mmax2;
 
-public class MMAXWriterException extends Exception {
+public class MmaxWriterException extends Exception {
 
     static final long serialVersionUID = 1L;
     
-    public MMAXWriterException() {
+    public MmaxWriterException() {
     	super();
     }
     
-    public MMAXWriterException(String txt) {
+    public MmaxWriterException(String txt) {
         super(txt);
     }
     
-    public MMAXWriterException(String message, Throwable cause) {
+    public MmaxWriterException(String message, Throwable cause) {
 		super(message, cause);
 	}
     
-    public MMAXWriterException(Throwable cause) {
+    public MmaxWriterException(Throwable cause) {
 		super(cause);
 	}
 }

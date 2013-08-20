@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 import java.io.File;
 import java.io.IOException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
@@ -62,7 +62,7 @@ public class TazCorpus
     public TazCorpus(String workspace) throws IOException
     {
         tazPath = new File(
-                DKProContext.getContext().getWorkspace(workspace).getAbsolutePath() +
+                DkproContext.getContext().getWorkspace(workspace).getAbsolutePath() +
                 "/taz_corpus.txt.gz"
         );
     }

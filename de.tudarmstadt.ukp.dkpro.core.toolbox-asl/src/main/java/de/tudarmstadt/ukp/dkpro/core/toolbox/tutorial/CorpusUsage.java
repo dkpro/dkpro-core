@@ -21,7 +21,7 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.TaggedToken;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownTEICorpus;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownTeiCorpus;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
 
 public class CorpusUsage
@@ -29,7 +29,7 @@ public class CorpusUsage
 
     public static void main(String[] args) throws Exception
     {
-        Corpus brownCorpus = new BrownTEICorpus();
+        Corpus brownCorpus = new BrownTeiCorpus();
         
         for (Text t : brownCorpus.getTexts()) {
             System.out.println(t);

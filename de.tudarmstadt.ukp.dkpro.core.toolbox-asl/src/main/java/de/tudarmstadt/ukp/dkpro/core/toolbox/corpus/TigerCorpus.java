@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.DKProContext;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 
 
@@ -41,7 +41,7 @@ public class TigerCorpus
 
     public TigerCorpus() throws Exception
     {
-        String tigerFile = DKProContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
+        String tigerFile = DkproContext.getContext().getWorkspace("toolbox_corpora").getAbsolutePath() +
         "/tiger_export/tiger_release_dec05.export";
 
         initialize(tigerFile);
