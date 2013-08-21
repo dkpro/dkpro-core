@@ -13,8 +13,8 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** The predicate or main verb of a sentence.
- * Updated by JCasGen Fri Aug 16 15:51:53 CEST 2013
+/** One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates).
+ * Updated by JCasGen Wed Aug 21 10:12:09 CEST 2013
  * @generated */
 public class SemanticPredicate_Type extends Annotation_Type {
   /** @generated */
