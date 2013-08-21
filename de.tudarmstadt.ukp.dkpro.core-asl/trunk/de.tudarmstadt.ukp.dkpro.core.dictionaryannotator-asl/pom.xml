@@ -59,6 +59,10 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
 		</dependency>	
@@ -72,6 +76,11 @@
     		<artifactId>de.tudarmstadt.ukp.uby.lmf.model-asl</artifactId>
   			<version>0.3.0</version>
   		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.uby</groupId>
+			<artifactId>de.tudarmstadt.ukp.uby.persistence.transform-asl</artifactId>
+  			<version>0.3.0</version>
+		</dependency>	  	
   		<dependency>
   		    <groupId>de.tudarmstadt.ukp.uby</groupId>
     		<artifactId>de.tudarmstadt.ukp.uby.testing-asl</artifactId>
@@ -88,14 +97,8 @@
 		    <groupId>com.h2database</groupId>
 		    <artifactId>h2</artifactId>
 		    <version>1.3.160</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>		
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.uby</groupId>
-			<artifactId>de.tudarmstadt.ukp.uby.persistence.transform-asl</artifactId>
-  			<version>0.3.0</version>
-		</dependency>	  	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
