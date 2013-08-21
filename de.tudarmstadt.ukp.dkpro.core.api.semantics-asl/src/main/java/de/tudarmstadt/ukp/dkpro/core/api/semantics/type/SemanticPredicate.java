@@ -11,9 +11,9 @@ import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** The predicate or main verb of a sentence.
- * Updated by JCasGen Fri Aug 16 15:51:53 CEST 2013
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/resources/desc/type/Semantics.xml
+/** One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates).
+ * Updated by JCasGen Wed Aug 21 10:12:09 CEST 2013
+ * XML source: /home/user-ukp/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/resources/desc/type/Semantics.xml
  * @generated */
 public class SemanticPredicate extends Annotation {
   /** @generated

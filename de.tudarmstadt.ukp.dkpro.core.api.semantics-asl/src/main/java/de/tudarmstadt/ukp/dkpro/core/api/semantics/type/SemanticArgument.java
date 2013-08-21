@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Fri Aug 16 15:51:53 CEST 2013
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/resources/desc/type/Semantics.xml
+ * Updated by JCasGen Wed Aug 21 10:12:09 CEST 2013
+ * XML source: /home/user-ukp/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/resources/desc/type/Semantics.xml
  * @generated */
 public class SemanticArgument extends Annotation {
   /** @generated
