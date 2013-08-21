@@ -7,7 +7,7 @@
   <types>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate</name>
-      <description>The predicate or main verb of a sentence.</description>
+      <description>One of the predicates of a sentence (often a main verb, but nouns and adjectives can also be predicates).</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
