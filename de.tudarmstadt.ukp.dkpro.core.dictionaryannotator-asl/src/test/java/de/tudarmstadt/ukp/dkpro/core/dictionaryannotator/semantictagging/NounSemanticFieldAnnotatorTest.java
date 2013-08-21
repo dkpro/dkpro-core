@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -32,10 +32,10 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 
@@ -54,13 +54,12 @@ public class NounSemanticFieldAnnotatorTest {
         runAnnotatorTest("en", "Vanilla in the sky prefers braveness over jumpiness .",
         		new String[] { "vanilla", "in", "the", "sky", "prefer", "braveness", "over", "jumpiness", "."    },
         		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "attribute 'braveness'", "feeling 'jumpiness'", "object 'sky'", "plant 'Vanilla'"     });
+        		new String[] { "plant", "object", "attribute", "feeling"  });
 
         runAnnotatorTest("en", "Vanilla in the distantGalaxyBehindJupiter prefers braveness over jumpiness .",
         		new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter", "prefer", "braveness", "over", "jumpiness", "."    },
         		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "attribute 'braveness'", "feeling 'jumpiness'", "UNKNOWN 'distantGalaxyBehindJupiter'", "plant 'Vanilla'"     });
-       
+         		new String[] { "plant", "UNKNOWN", "attribute", "feeling"  });       
 
 
 	}
@@ -122,8 +121,8 @@ public class NounSemanticFieldAnnotatorTest {
 		}
 		engine.process(aJCas);
 
-		AssertAnnotations.assertNamedEntity(null,documentNounSemanticFields,
-				select(aJCas, NamedEntity.class));
+		AssertAnnotations.assertSemanticField(documentNounSemanticFields,
+				select(aJCas, SemanticField.class));
 	
 	}
 

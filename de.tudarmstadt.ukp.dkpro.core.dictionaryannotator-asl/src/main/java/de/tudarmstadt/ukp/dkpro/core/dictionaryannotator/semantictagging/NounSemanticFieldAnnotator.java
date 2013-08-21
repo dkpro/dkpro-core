@@ -29,8 +29,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 
 @TypeCapability(
 		inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -69,13 +69,11 @@ public class NounSemanticFieldAnnotator extends JCasAnnotator_ImplBase
 	public void process(JCas aJCas)
 			throws AnalysisEngineProcessException
 	{
-		// Note: it is not clear yet, if NN.class or N.class is the POS type which should be used here
-		// the 12 universal POS tags include only N
 		for (NN nn : select(aJCas, NN.class)) {
 			for (Token token : JCasUtil.selectCovered(aJCas, Token.class, nn)) {
 				try {
 					String semanticField = nounSemanticFieldResource.getSemanticTag(token);
-					NamedEntity semanticFieldAnnotation = new NamedEntity(aJCas, token.getBegin(), token.getEnd());
+					SemanticField semanticFieldAnnotation = new SemanticField(aJCas, token.getBegin(), token.getEnd());
 					semanticFieldAnnotation.setValue(semanticField);
 					semanticFieldAnnotation.addToIndexes();
 				} catch (Exception e) {

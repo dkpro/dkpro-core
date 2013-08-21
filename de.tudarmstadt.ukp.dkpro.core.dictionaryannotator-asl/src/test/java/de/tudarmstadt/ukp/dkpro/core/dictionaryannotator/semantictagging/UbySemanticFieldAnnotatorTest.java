@@ -39,10 +39,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.lmf.exceptions.UbyInvalidArgumentException;
 import de.tudarmstadt.ukp.lmf.transform.DBConfig;
@@ -64,7 +64,7 @@ public class UbySemanticFieldAnnotatorTest {
 		runAnnotatorTestOnInMemDb("en", "Answers question most questions .",
         		new String[] { "answer", "question", "most", "question", "."    },
         		new String[] { "NN", "V", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "UNKNOWN '.'", "UNKNOWN 'most'", "communication 'Answers'", "communication 'question'", "communication 'questions'"  });
+        		new String[] { "communication", "communication", "UNKNOWN", "communication", "UNKNOWN" } );
 
 	}
 
@@ -171,8 +171,8 @@ public class UbySemanticFieldAnnotatorTest {
 		}
 		engine.process(aJCas);
 
-		AssertAnnotations.assertNamedEntity(null,documentUbySemanticFields,
-				select(aJCas, NamedEntity.class));
+		AssertAnnotations.assertSemanticField(documentUbySemanticFields,
+				select(aJCas, SemanticField.class));
 	
 	}
 	
@@ -249,8 +249,8 @@ public class UbySemanticFieldAnnotatorTest {
 		}
 		engine.process(aJCas);
 
-		AssertAnnotations.assertNamedEntity(null,documentUbySemanticFields,
-				select(aJCas, NamedEntity.class));
+		AssertAnnotations.assertSemanticField(documentUbySemanticFields,
+				select(aJCas, SemanticField.class));
 	
 	}
 
