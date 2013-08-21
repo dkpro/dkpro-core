@@ -49,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
@@ -388,6 +389,26 @@ public class AssertAnnotations
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
+    
+    public static void assertSemanticField(String[] aExpected, Collection<SemanticField> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
+
+        List<String> expected = asList(aExpected);
+        List<String> actual = new ArrayList<String>();
+
+        for (SemanticField a : aActual) {
+            actual.add(a.getValue());
+        }
+
+        System.out.printf("%-20s - Expected: %s%n", "Semantic field values", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Semantic field values", asCopyableString(actual));
+
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+
 
     public static void assertTagset(Class<?> aLayer, String aName, String[] aExpected, JCas aJCas)
     {
