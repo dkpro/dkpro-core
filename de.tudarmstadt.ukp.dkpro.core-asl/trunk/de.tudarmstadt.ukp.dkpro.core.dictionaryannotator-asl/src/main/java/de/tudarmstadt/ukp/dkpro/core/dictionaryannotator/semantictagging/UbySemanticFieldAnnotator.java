@@ -29,8 +29,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 
 @TypeCapability(
 		inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -70,7 +70,7 @@ public class UbySemanticFieldAnnotator extends JCasAnnotator_ImplBase
 			for (Token token : JCasUtil.selectCovered(aJCas, Token.class, pos)) {
 				try {
 					String semanticField = ubySemanticFieldResource.getSemanticTag(token);
-					NamedEntity semanticFieldAnnotation = new NamedEntity(aJCas, token.getBegin(), token.getEnd());
+					SemanticField semanticFieldAnnotation = new SemanticField(aJCas, token.getBegin(), token.getEnd());
 					semanticFieldAnnotation.setValue(semanticField);
 					semanticFieldAnnotation.addToIndexes();
 				} catch (Exception e) {
