@@ -45,17 +45,17 @@ public abstract class Normalizer_ImplBase
     protected FrequencyCountProvider provider;
 
     /**
-     * @return A map, where a token position maps to a list of SofaChangeAnnotations that should be applied for that token
+     * @return A map, where a token position maps to a list of SofaChangeAnnotations that should be
+     *         applied for that token
      */
-    protected abstract Map<Integer,List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas);
+    protected abstract Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas);
 
     /**
-     * @return A map showing which token should be kept and which should be replaced. "true" indicates: "replace with changed version"
-     * @throws AnalysisEngineProcessException
+     * @return A map showing which token should be kept and which should be replaced. "true"
+     *         indicates: "replace with changed version"
      */
-    protected abstract Map<Integer,Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
+    protected abstract Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
         throws AnalysisEngineProcessException;
-
 
     @Override
     public void initialize(UimaContext context)
@@ -64,9 +64,10 @@ public abstract class Normalizer_ImplBase
         super.initialize(context);
 
         try {
-            File modelFolder = ResourceUtils.getClasspathAsFolder(
-                    "classpath*:/de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/lib/normalizer/de/default",
-                    true);
+            File modelFolder = ResourceUtils
+                    .getClasspathAsFolder(
+                            "classpath*:/de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/lib/normalizer/de/default",
+                            true);
             provider = new Web1TFileAccessProvider(modelFolder, 1, 1);
         }
         catch (IOException e) {
@@ -81,11 +82,11 @@ public abstract class Normalizer_ImplBase
 
         // Put all SofaChangeAnnotations in a map,
         // where a token position maps to a list of SFCs that should be applied for that token
-        Map<Integer,List<SofaChangeAnnotation>> changesMap = createSofaChangesMap(jcas);
+        Map<Integer, List<SofaChangeAnnotation>> changesMap = createSofaChangesMap(jcas);
 
         // create an AlignedString with all the changes applied and sort by offset
         List<SofaChangeAnnotation> allChanges = new ArrayList<SofaChangeAnnotation>();
-        for (Map.Entry<Integer, List<SofaChangeAnnotation>> changesEntry: changesMap.entrySet()) {
+        for (Map.Entry<Integer, List<SofaChangeAnnotation>> changesEntry : changesMap.entrySet()) {
             allChanges.addAll(changesEntry.getValue());
         }
         Collections.sort(allChanges, new SofaChangeComparator());
@@ -95,7 +96,7 @@ public abstract class Normalizer_ImplBase
 
         // create a map showing which token should be kept and which should be replaced
         // "true" means replace with changed version
-        Map<Integer,Boolean> tokenReplaceMap = createTokenReplaceMap(jcas, as);
+        Map<Integer, Boolean> tokenReplaceMap = createTokenReplaceMap(jcas, as);
 
         // add SofaChangeAnnotation to indexes if replace is valid
         for (int key : tokenReplaceMap.keySet()) {
@@ -107,7 +108,9 @@ public abstract class Normalizer_ImplBase
         }
     }
 
-    public class SofaChangeComparator implements Comparator<SofaChangeAnnotation> {
+    public class SofaChangeComparator
+        implements Comparator<SofaChangeAnnotation>
+    {
 
         @Override
         public int compare(SofaChangeAnnotation arg0, SofaChangeAnnotation arg1)
@@ -120,5 +123,4 @@ public abstract class Normalizer_ImplBase
             }
         }
     }
-
 }
