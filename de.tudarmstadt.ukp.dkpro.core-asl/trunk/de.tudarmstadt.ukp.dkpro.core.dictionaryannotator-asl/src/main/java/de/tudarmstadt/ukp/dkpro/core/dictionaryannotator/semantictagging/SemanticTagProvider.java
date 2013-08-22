@@ -27,7 +27,6 @@ public interface SemanticTagProvider {
      * that provide semantic tags.
      *     
      * @author Judith Eckle-Kohler
-     * 
      */
 
 	
@@ -38,9 +37,6 @@ public interface SemanticTagProvider {
      *            token to tag
      *            
      * @return semantic tag of the token. Returns "UNKNOWN" if the (lemma of the) token does not exist in the resource.
-     * @throws Exception 
      */
-
 	public String getSemanticTag(Token token) throws Exception;
-
 }

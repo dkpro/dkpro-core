@@ -54,18 +54,19 @@ import de.tudarmstadt.ukp.lmf.transform.XMLToDBTransformer;
  * @author Judith Eckle-Kohler
  *
  */
-public class UbySemanticFieldAnnotatorTest {
-
-	
+public class UbySemanticFieldAnnotatorTest
+{
 	@Test
 	public void testUbySemanticFieldAnnotatorOnInMemDb()
 		throws Exception
 	{
-		runAnnotatorTestOnInMemDb("en", "Answers question most questions .",
-        		new String[] { "answer", "question", "most", "question", "."    },
-        		new String[] { "NN", "V", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "communication", "communication", "UNKNOWN", "communication", "UNKNOWN" } );
-
+        String[] semanticFields = new String[] { "communication", "communication", "UNKNOWN",
+                "communication", "UNKNOWN" };
+	    
+        runAnnotatorTestOnInMemDb("en", "Answers question most questions .", 
+                new String[] { "answer", "question", "most", "question", "." }, 
+                new String[] { "NN", "V", "NOT_RELEVANT", "NN", "$." }, 
+                semanticFields);
 	}
 
 	@Ignore	
@@ -73,39 +74,46 @@ public class UbySemanticFieldAnnotatorTest {
 	public void testUbySemanticFieldAnnotatorOnMySqlDb()
 		throws Exception
 	{
-		runAnnotatorTestOnMySqlDb("en", "Vanilla in the blue sky prefers braveness over jumpiness .",
-        		new String[] { "vanilla", "in", "the", "blue", "sky", "prefer", "braveness", "over", "jumpiness", "."    },
-        		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "ADJ", "NN", "V", "NN", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "UNKNOWN '.'", "UNKNOWN 'in'", "UNKNOWN 'over'", "UNKNOWN 'the'", "all 'blue'", "attribute 'braveness'", "emotion 'prefers'", "feeling 'jumpiness'", "object 'sky'", "plant 'Vanilla'"     });
+        String[] lemmas = new String[] { "vanilla", "in", "the", "blue", "sky", "prefer",
+                "braveness", "over", "jumpiness", "." };
 
-		runAnnotatorTestOnMySqlDb("en", "Vanilla in the distantGalaxyBehindJupiter prefers braveness over jumpiness .",
-        		new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter", "prefer", "braveness", "over", "jumpiness", "."    },
-        		new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "V", "NN", "NOT_RELEVANT", "NN", "$."    },
-        		new String[] { "UNKNOWN '.'", "UNKNOWN 'distantGalaxyBehindJupiter'", "UNKNOWN 'in'", "UNKNOWN 'over'", "UNKNOWN 'the'", "attribute 'braveness'", "emotion 'prefers'", "feeling 'jumpiness'", "plant 'Vanilla'"     });
-       
+        String[] pos = new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "ADJ", "NN", "V", "NN",
+                "NOT_RELEVANT", "NN", "$." };
+
+        String[] semanticFields = new String[] { "UNKNOWN '.'", "UNKNOWN 'in'", "UNKNOWN 'over'",
+                "UNKNOWN 'the'", "all 'blue'", "attribute 'braveness'", "emotion 'prefers'",
+                "feeling 'jumpiness'", "object 'sky'", "plant 'Vanilla'" };
+
+        runAnnotatorTestOnMySqlDb("en",
+                "Vanilla in the blue sky prefers braveness over jumpiness .", lemmas, pos,
+                semanticFields);
 	}
-	
-	 
-	/**
-	 * @param language
-	 * @param testDocument
-	 * @param documentLemmas
-	 * @param documentPosTags
-	 * @param documentUbySemanticFields
-	 * @return
-	 * @throws UIMAException 
-	 * @throws FileNotFoundException 
-	 * @throws UbyInvalidArgumentException 
-	 * @throws DocumentException 
-	 */
-	private void runAnnotatorTestOnInMemDb(String language, 
-			String testDocument, 
-			String[] documentLemmas,
-			String[] documentPosTags, 
-			String[] documentUbySemanticFields) throws UIMAException, FileNotFoundException, DocumentException, UbyInvalidArgumentException {
 
-               
-		
+    @Ignore 
+    @Test
+    public void testUbySemanticFieldAnnotatorOnMySqlDb2()
+        throws Exception
+    {
+        String[] lemmas = new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter",
+                "prefer", "braveness", "over", "jumpiness", "." };
+
+        String[] pos = new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "V", "NN",
+                "NOT_RELEVANT", "NN", "$." };
+
+        String[] semanticFields = new String[] { "UNKNOWN '.'",
+                "UNKNOWN 'distantGalaxyBehindJupiter'", "UNKNOWN 'in'", "UNKNOWN 'over'",
+                "UNKNOWN 'the'", "attribute 'braveness'", "emotion 'prefers'",
+                "feeling 'jumpiness'", "plant 'Vanilla'" };
+
+        runAnnotatorTestOnMySqlDb("en",
+                "Vanilla in the distantGalaxyBehindJupiter prefers braveness over jumpiness .",
+                lemmas, pos, semanticFields);
+    }
+	 
+    private void runAnnotatorTestOnInMemDb(String language, String testDocument,
+            String[] documentLemmas, String[] documentPosTags, String[] documentUbySemanticFields)
+        throws UIMAException, FileNotFoundException, DocumentException, UbyInvalidArgumentException
+    {
 	 	DBConfig dbConfig = new DBConfig("not_important","org.h2.Driver","h2","root","pass",false);
 		
 		LMFDBUtils.createTables(dbConfig);
@@ -113,8 +121,6 @@ public class UbySemanticFieldAnnotatorTest {
 		XMLToDBTransformer transformer;
 		transformer = new XMLToDBTransformer(dbConfig);
 		transformer.transform(new File("src/test/resources/UbyTestLexicon.xml"),"UbyTest");
- 			
-			
 		 
 		AnalysisEngineDescription processor = createEngineDescription(
 
@@ -174,38 +180,23 @@ public class UbySemanticFieldAnnotatorTest {
 		AssertAnnotations.assertSemanticField(documentUbySemanticFields,
 				select(aJCas, SemanticField.class));
 	
-	}
-	
-	
+	}	
 
-	/**
-	 * @param language
-	 * @param testDocument
-	 * @param documentLemmas
-	 * @param documentPosTags
-	 * @param documentUbySemanticFields
-	 * @return
-	 * @throws UIMAException 
-	 */
-	private void runAnnotatorTestOnMySqlDb(String language, 
-			String testDocument, 
-			String[] documentLemmas,
-			String[] documentPosTags, 
-			String[] documentUbySemanticFields) throws UIMAException {
+    private void runAnnotatorTestOnMySqlDb(String language, String testDocument,
+            String[] documentLemmas, String[] documentPosTags, String[] documentUbySemanticFields)
+        throws UIMAException
+    {
+        AnalysisEngineDescription processor = createEngineDescription(
 
-               
-		AnalysisEngineDescription processor = createEngineDescription(
-
-				createEngineDescription(UbySemanticFieldAnnotator.class,
-						UbySemanticFieldAnnotator.PARAM_UBY_SEMANTIC_FIELD_RESOURCE, 
-							createExternalResourceDescription(UbySemanticFieldResource.class,
-									UbySemanticFieldResource.PARAM_URL, "localhost/uby_medium_0_2_0",
-									UbySemanticFieldResource.PARAM_DRIVER, "com.mysql.jdbc.Driver",
-									UbySemanticFieldResource.PARAM_DRIVER_NAME, "mysql",
-									UbySemanticFieldResource.PARAM_USERNAME, "root",
-									UbySemanticFieldResource.PARAM_PASSWORD, "pass"
-									))
-		);
+        createEngineDescription(
+                UbySemanticFieldAnnotator.class,
+                UbySemanticFieldAnnotator.PARAM_UBY_SEMANTIC_FIELD_RESOURCE,
+                createExternalResourceDescription(UbySemanticFieldResource.class,
+                        UbySemanticFieldResource.PARAM_URL, "localhost/uby_medium_0_2_0",
+                        UbySemanticFieldResource.PARAM_DRIVER, "com.mysql.jdbc.Driver",
+                        UbySemanticFieldResource.PARAM_DRIVER_NAME, "mysql",
+                        UbySemanticFieldResource.PARAM_USERNAME, "root",
+                        UbySemanticFieldResource.PARAM_PASSWORD, "pass")));
 
 		AnalysisEngine engine = createEngine(processor);
 		JCas aJCas = engine.newJCas();
@@ -251,8 +242,5 @@ public class UbySemanticFieldAnnotatorTest {
 
 		AssertAnnotations.assertSemanticField(documentUbySemanticFields,
 				select(aJCas, SemanticField.class));
-	
 	}
-
-
 }
