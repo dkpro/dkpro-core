@@ -247,9 +247,6 @@ public abstract class PdfLayoutEventStripper
 
     /**
      * This method tries do detect headings and paragraphs and line boundaries.
-     * 
-     * @param textList
-     * @throws IOException
      */
     protected void processArticle(final List<TextPosition> textList)
         throws IOException
@@ -555,11 +552,6 @@ public abstract class PdfLayoutEventStripper
     /**
      * Tests if two objects are vertically adjacent or if they are so far away from each other that
      * they have to be considered different blocks.
-     * 
-     * @param cur_top
-     * @param prev_top
-     * @param spacing
-     * @return
      */
     private static boolean isVerticallyAdjacent(final float cur_top, final float prev_top,
             final float spacing)
@@ -585,10 +577,6 @@ public abstract class PdfLayoutEventStripper
 
     /**
      * Check if the current fragment is in a new column.
-     * 
-     * @param cur
-     * @param block
-     * @return
      */
     private static boolean isColumnSwitch(final TextPosition cur, final Block block)
     {
@@ -610,10 +598,6 @@ public abstract class PdfLayoutEventStripper
      * Determine wether we need to insert a word separator between the two positions or not.
      * 
      * Adapted from PDFBox PDFTextStripper.flushText()
-     * 
-     * @param cur
-     * @param prev
-     * @return
      */
     private static boolean isNextChar(final TextPosition cur, final TextPosition prev)
     {
@@ -670,10 +654,6 @@ public abstract class PdfLayoutEventStripper
 
     /**
      * Return a block with the probable linespacing, lineheight and left and right borders.
-     * 
-     * @param blk_start
-     * @param depth
-     * @return
      */
     private Prediction predictGeneralStructure(final List<TextPosition> textList,
             final int blk_start, final int depth)
@@ -1028,9 +1008,6 @@ public abstract class PdfLayoutEventStripper
         /**
          * Return true if the text position is within the line height boundaries. Left and right
          * boundaries are not checked.
-         * 
-         * @param pos
-         * @return
          */
         boolean withinLine(final TextPosition pos)
         {
