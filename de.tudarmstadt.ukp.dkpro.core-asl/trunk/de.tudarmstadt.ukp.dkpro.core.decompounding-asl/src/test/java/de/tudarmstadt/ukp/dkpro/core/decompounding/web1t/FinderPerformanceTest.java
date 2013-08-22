@@ -31,7 +31,6 @@ public class FinderPerformanceTest
 	/**
 	 * Test the finder performace on the generated web1t index Time is printed
 	 * on the console.
-	 * @throws IOException
 	 */
 	@Test
 	public void testPerformance1() throws IOException

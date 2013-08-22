@@ -36,42 +36,21 @@ public class CompoundProbabilityRanker
 	extends AbstractRanker
 	implements RankerList
 {
-//	static BigInteger FREQUENCY = new BigInteger("143782944956");
-
 	/**
 	 * Empty constructor
 	 *
-	 * Use setFinder before using this class
+	 * Use {@link #setFinder(Finder)} before using this class
 	 */
 	public CompoundProbabilityRanker() {
-//		init();
 	}
 
 	/**
 	 * Constructor
-	 *
-	 * @param aFinder
 	 */
 	public CompoundProbabilityRanker(Finder aFinder)
 	{
 		super(aFinder);
-//		init();
 	}
-
-//	protected void init() {
-//		try {
-//			Properties properties = new Properties();
-//			BufferedInputStream stream = new BufferedInputStream(
-//					new FileInputStream("src/main/resources/index.properties"));
-//			properties.load(stream);
-//			stream.close();
-//
-//			FREQUENCY = new BigInteger(properties.getProperty("frequency"));
-//		}
-//		catch (Exception e) {
-//			FREQUENCY = new BigInteger("143782944956");
-//		}
-//	}
 
 	@Override
 	public DecompoundedWord highestRank(List<DecompoundedWord> aSplits)
@@ -94,9 +73,6 @@ public class CompoundProbabilityRanker
 
 	/**
 	 * Calculates the weight for a split
-	 *
-	 * @param aSplit
-	 * @return
 	 */
 	private float calcRank(DecompoundedWord aSplit)
 	{
@@ -125,9 +101,6 @@ public class CompoundProbabilityRanker
 
 	/**
 	 * Searches a a path throw the tree
-	 * 
-	 * @param aParent
-	 * @return
 	 */
 	private DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent, List<DecompoundedWord> aPath)
 	{
@@ -145,7 +118,7 @@ public class CompoundProbabilityRanker
 		DecompoundedWord best = result.get(0);
 
 		if (best.equals(aParent.getValue())) {
-			// None of the childs get a better score than the parent
+			// None of the children get a better score than the parent
 			return aParent.getValue();
 		}
 		else {

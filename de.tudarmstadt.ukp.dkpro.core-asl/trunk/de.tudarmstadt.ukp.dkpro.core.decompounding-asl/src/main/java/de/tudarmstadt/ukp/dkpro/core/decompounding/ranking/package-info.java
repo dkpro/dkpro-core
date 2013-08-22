@@ -18,12 +18,5 @@
 
 /**
  * Contains ranking algorithm.
- *
- * To implement you own ranking algorithm you can
- * use the {@see IRankTree} or {@see IRankList}
- * interfaces.
- *
- * Current algorithm can be found in {@see FrequencyBased},
- * {@see MutualInformationBased} and {@see ProbabilityBased}.
  */
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;

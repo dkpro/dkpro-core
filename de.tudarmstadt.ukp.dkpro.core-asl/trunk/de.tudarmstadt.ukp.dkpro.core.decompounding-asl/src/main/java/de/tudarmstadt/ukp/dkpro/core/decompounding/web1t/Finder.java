@@ -41,7 +41,7 @@ import com.googlecode.jweb1t.JWeb1TSearcher;
 
 /**
  * This class searches on the Lucene Index for n-grams.
- *
+ * 
  * @author Jens Haase <je.haase@googlemail.com>
  */
 public class Finder
@@ -53,16 +53,16 @@ public class Finder
 
     /**
      * Constructor for the finder.
-     *
+     * 
      * In case of performance it is recommended to use only one instance of this class.
-     *
+     * 
      * @param aIndexFolder
      *            The folder to the lucene index or a folder with multiple indexes.
-     *  @param nGramFolder
+     * @param nGramFolder
      *            The folder to the JWeb1T n-grams.
-     * @throws IOException
      */
-    public Finder(File aIndexFolder, File nGramFolder) throws IOException
+    public Finder(File aIndexFolder, File nGramFolder)
+        throws IOException
     {
         List<IndexSearcher> searcherList = new ArrayList<IndexSearcher>();
         if (checkForIndex(aIndexFolder)) {
@@ -83,18 +83,16 @@ public class Finder
         searcher = new ParallelMultiSearcher(searcherList.toArray(new IndexSearcher[0]));
         web1tSearcher = new JWeb1TSearcher(nGramFolder, 1, 1);
 
-//        web1tSearcher = new JWeb1TSearcher(new File("//home/likewise-open/UKP/santos/UKP/Library/" +
-//        		"DKPro/web1t/de"),1, 1);
+        // web1tSearcher = new JWeb1TSearcher(new
+        // File("//home/likewise-open/UKP/santos/UKP/Library/" +
+        // "DKPro/web1t/de"),1, 1);
         // web1tSearcher = new JWeb1TSearcher(new File("/Users/bluefire/UKP/Library/DKPro/tueba5"),
         // 1, 1);
 
     }
 
     /**
-     * Checks if the folder is a lucence index
-     *
-     * @param aIndexFolder
-     * @return
+     * Checks if the folder is a Lucence index
      */
     private boolean checkForIndex(File aIndexFolder)
     {
@@ -140,10 +138,9 @@ public class Finder
 
     /**
      * Find all n-grams in the index.
-     *
+     * 
      * @param aGram
-     *            A String of token splitted by space
-     * @return
+     *            A String of token split by space
      */
     public List<NGramModel> find(String aGram)
     {
@@ -152,10 +149,9 @@ public class Finder
 
     /**
      * Find all n-grams containing these tokens in order but optionally with words between them.
-     *
+     * 
      * @param aToken
      *            A list of tokens
-     * @return
      */
     @SuppressWarnings("unchecked")
     public List<NGramModel> find(String[] aToken)

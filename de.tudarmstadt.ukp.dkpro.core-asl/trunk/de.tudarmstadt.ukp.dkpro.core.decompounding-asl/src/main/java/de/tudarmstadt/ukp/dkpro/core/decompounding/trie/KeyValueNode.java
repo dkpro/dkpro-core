@@ -54,8 +54,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Returns the key object
-	 * 
-	 * @return
 	 */
 	public K getKey()
 	{
@@ -64,8 +62,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Set a new key to this object
-	 * 
-	 * @param aKey
 	 */
 	public void setKey(K aKey)
 	{
@@ -74,8 +70,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Returns the value object
-	 * 
-	 * @return
 	 */
 	public V getValue()
 	{
@@ -84,8 +78,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Sets a new value for this object
-	 * 
-	 * @param aValue
 	 */
 	public void setValue(V aValue)
 	{
@@ -94,8 +86,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Checks if this node has children
-	 * 
-	 * @return
 	 */
 	public boolean hasChildren()
 	{
@@ -105,9 +95,6 @@ public class KeyValueNode<K, V>
 	/**
 	 * Gets a child object for a given key. If a node with the given key do not
 	 * exist NULL is returned.
-	 * 
-	 * @param aKey
-	 * @return
 	 */
 	public KeyValueNode<K, V> getChild(K aKey)
 	{
@@ -122,9 +109,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Checks if this node has a child with a given key
-	 * 
-	 * @param aKey
-	 * @return
 	 */
 	public boolean hasChild(K aKey)
 	{
@@ -133,8 +117,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Adds a child object to this node
-	 * 
-	 * @param aNode
 	 */
 	public void addChild(KeyValueNode<K, V> aNode)
 	{
@@ -143,9 +125,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Adds child object to this node
-	 * 
-	 * @param aKey
-	 * @param aValue
 	 */
 	public void addChild(K aKey, V aValue)
 	{
@@ -154,8 +133,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Returns all children of the node
-	 * 
-	 * @return
 	 */
 	public List<KeyValueNode<K, V>> getChildren()
 	{
@@ -164,8 +141,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Set a list of children to this node
-	 * 
-	 * @param aChildren
 	 */
 	public void setChildren(List<KeyValueNode<K, V>> aChildren)
 	{
@@ -174,8 +149,6 @@ public class KeyValueNode<K, V>
 
 	/**
 	 * Checks if the node is a leaf node
-	 * 
-	 * @return
 	 */
 	public boolean isLeaf()
 	{

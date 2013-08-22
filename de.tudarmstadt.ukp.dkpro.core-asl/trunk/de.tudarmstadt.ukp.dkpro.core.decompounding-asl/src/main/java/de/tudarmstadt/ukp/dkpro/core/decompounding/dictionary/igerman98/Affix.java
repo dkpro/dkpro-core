@@ -147,7 +147,6 @@ public class Affix
 	/**
 	 * Adopt this affix on a given word
 	 * 
-	 * @param aWord
 	 * @return The word with a change prefix or affix
 	 */
 	public String handleWord(String aWord)

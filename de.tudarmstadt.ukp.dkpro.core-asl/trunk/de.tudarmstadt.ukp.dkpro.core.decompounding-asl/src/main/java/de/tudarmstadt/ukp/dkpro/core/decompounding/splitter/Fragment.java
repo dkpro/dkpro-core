@@ -19,193 +19,168 @@
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
 /**
- * Data container for a split element. A split element contains a word and
- * optional a linking morpheme
- *
+ * Data container for a split element. A split element contains a word and optional a linking
+ * morpheme
+ * 
  * @author Jens Haase <je.haase@googlemail.com>
  */
 public class Fragment
 {
 
-	private String word;
-	private String morpheme;
-	private boolean splitAgain = false;
+    private String word;
+    private String morpheme;
+    private boolean splitAgain = false;
 
-	/**
-	 * Creates a empty split element
-	 */
-	public Fragment()
-	{
-		this(null, null);
-	}
+    /**
+     * Creates a empty split element
+     */
+    public Fragment()
+    {
+        this(null, null);
+    }
 
-	/**
-	 * Creates a split element with a word but no linking morpheme
-	 *
-	 * @param aWord
-	 */
-	public Fragment(String aWord)
-	{
-		this(aWord, null);
-	}
+    /**
+     * Creates a split element with a word but no linking morpheme
+     */
+    public Fragment(String aWord)
+    {
+        this(aWord, null);
+    }
 
-	/**
-	 * Creates a split element with a word and a linking morpheme
-	 *
-	 * @param aWord
-	 * @param aMorpheme
-	 */
-	public Fragment(String aWord, String aMorpheme)
-	{
-		word = aWord;
-		morpheme = aMorpheme;
-	}
+    /**
+     * Creates a split element with a word and a linking morpheme
+     */
+    public Fragment(String aWord, String aMorpheme)
+    {
+        word = aWord;
+        morpheme = aMorpheme;
+    }
 
-	/**
-	 * Creates a split element from string. String format:
-	 *
-	 * word(morpheme)
-	 *
-	 * Example: "auto" or "auto(s)"
-	 *
-	 * @param aElement
-	 * @return
-	 */
-	public static Fragment createFromString(String aElement)
-	{
-		Fragment e = new Fragment();
+    /**
+     * Creates a split element from string. String format:
+     * 
+     * word(morpheme)
+     * 
+     * Example: "auto" or "auto(s)"
+     */
+    public static Fragment createFromString(String aElement)
+    {
+        Fragment e = new Fragment();
 
-		String[] splits = aElement.split("\\(");
-		e.setWord(splits[0]);
-		if (splits.length == 2 && splits[1].endsWith(")")) {
-			e.setMorpheme(splits[1].substring(0, splits[1].length() - 1));
-		}
+        String[] splits = aElement.split("\\(");
+        e.setWord(splits[0]);
+        if (splits.length == 2 && splits[1].endsWith(")")) {
+            e.setMorpheme(splits[1].substring(0, splits[1].length() - 1));
+        }
 
-		return e;
-	}
+        return e;
+    }
 
-	@Override
-	public int hashCode()
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((morpheme == null) ? 0 : morpheme.hashCode());
-		result = prime * result + ((word == null) ? 0 : word.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((morpheme == null) ? 0 : morpheme.hashCode());
+        result = prime * result + ((word == null) ? 0 : word.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null) {
-			return false;
-		}
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null) {
+            return false;
+        }
 
-		return toString().equals(obj.toString());
-	}
+        return toString().equals(obj.toString());
+    }
 
-	@Override
-	public String toString()
-	{
-		String s = word;
+    @Override
+    public String toString()
+    {
+        String s = word;
 
-		if (morpheme != null) {
-			s += "(" + morpheme + ")";
-		}
+        if (morpheme != null) {
+            s += "(" + morpheme + ")";
+        }
 
-		return s;
-	}
+        return s;
+    }
 
-	/**
-	 * Returns the word of the split element
-	 *
-	 * @return
-	 */
-	public String getWord()
-	{
-		return word;
-	}
+    /**
+     * Returns the word of the split element
+     */
+    public String getWord()
+    {
+        return word;
+    }
 
-	public String getWordWithMorpheme()
-	{
-		return word + ((morpheme != null) ? morpheme : "");
-	}
+    public String getWordWithMorpheme()
+    {
+        return word + ((morpheme != null) ? morpheme : "");
+    }
 
-	/**
-	 * Sets the word of the split element
-	 *
-	 * @param aWord
-	 */
-	public void setWord(String aWord)
-	{
-		word = aWord;
-	}
+    /**
+     * Sets the word of the split element
+     */
+    public void setWord(String aWord)
+    {
+        word = aWord;
+    }
 
-	/**
-	 * Returns the linking morpheme of the split element
-	 *
-	 * @return
-	 */
-	public String getMorpheme()
-	{
-		return morpheme;
-	}
+    /**
+     * Returns the linking morpheme of the split element
+     */
+    public String getMorpheme()
+    {
+        return morpheme;
+    }
 
-	/**
-	 * Checks if this element has an morpheme
-	 *
-	 * @return
-	 */
-	public boolean hasMorpheme()
-	{
-		return morpheme != null;
-	}
+    /**
+     * Checks if this element has an morpheme
+     */
+    public boolean hasMorpheme()
+    {
+        return morpheme != null;
+    }
 
-	/**
-	 * Sets the linking morpheme of the split element
-	 *
-	 * @param aMorpheme
-	 */
-	public void setMorpheme(String aMorpheme)
-	{
-		morpheme = aMorpheme;
-	}
+    /**
+     * Sets the linking morpheme of the split element
+     */
+    public void setMorpheme(String aMorpheme)
+    {
+        morpheme = aMorpheme;
+    }
 
-	/**
-	 * Similar to the toString method, but combines morpheme and word
-	 *
-	 * @return
-	 */
-	public String toStringWithoutMorpheme()
-	{
-		String s = word;
+    /**
+     * Similar to the toString method, but combines morpheme and word
+     */
+    public String toStringWithoutMorpheme()
+    {
+        String s = word;
 
-		if (morpheme != null) {
-			s += morpheme;
-		}
+        if (morpheme != null) {
+            s += morpheme;
+        }
 
-		return s;
-	}
+        return s;
+    }
 
-	/**
-	 * Checks if this split element should be split again by the algorithm.
-	 * Can be used for recursive splitting
-	 *
-	 * @return
-	 */
-	public boolean shouldSplitAgain()
-	{
-		return splitAgain;
-	}
+    /**
+     * Checks if this split element should be split again by the algorithm. Can be used for
+     * recursive splitting
+     */
+    public boolean shouldSplitAgain()
+    {
+        return splitAgain;
+    }
 
-	/**
-	 * Set the splitAgain variable
-	 *
-	 * @param aSplitAgain
-	 */
-	public void setSplitAgain(boolean aSplitAgain)
-	{
-		splitAgain = aSplitAgain;
-	}
+    /**
+     * Set the splitAgain variable
+     */
+    public void setSplitAgain(boolean aSplitAgain)
+    {
+        splitAgain = aSplitAgain;
+    }
 }
