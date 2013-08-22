@@ -21,7 +21,6 @@ import java.util.Iterator;
 
 public interface FrequencyCountProvider
 {
-
     /**
      * Get frequency for a phrase
      *
@@ -29,7 +28,6 @@ public interface FrequencyCountProvider
      *            phrase to search
      *            
      * @return frequency of the phrase. Returns 0 if the phrase does not exist in the corpus.
-     * @throws Exception 
      */
     public long getFrequency(String phrase) throws Exception;
 
@@ -42,7 +40,6 @@ public interface FrequencyCountProvider
      *            phrase to search
      *            
      * @return probability (=normalized frequency) of the phrase. Returns null if the phrase does not exist in the corpus.
-     * @throws Exception 
      */
     public double getProbability(String phrase) throws Exception;
 
@@ -53,7 +50,6 @@ public interface FrequencyCountProvider
      *            phrase to search
      *            
      * @return The log probability of the. Returns 0 if the phrase does not exist in the corpus.
-     * @throws Exception 
      */
     public double getLogProbability(String phrase) throws Exception;
     
