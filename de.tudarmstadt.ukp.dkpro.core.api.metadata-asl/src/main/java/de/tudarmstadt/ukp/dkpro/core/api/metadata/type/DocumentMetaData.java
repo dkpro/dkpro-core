@@ -275,7 +275,7 @@ public class DocumentMetaData
 	 * Create a new {@link DocumentMetaData} annotation in the given CAS. The meta data fields can
 	 * then be set on the returned object.
 	 *
-	 * @param aCas
+	 * @param aJcas
 	 *            the CAS to create the meta data for.
 	 * @return a {@link DocumentMetaData} annotation that has already been added to the CAS indexes.
 	 * @author Richard Eckart de Castilho
@@ -322,7 +322,6 @@ public class DocumentMetaData
 	 *            the source.
 	 * @param aTargetView
 	 *            the target.
-	 * @throws AnalysisEngineProcessException
 	 */
 	public static void copy(final JCas aSourceView, final JCas aTargetView)
 		throws AnalysisEngineProcessException
