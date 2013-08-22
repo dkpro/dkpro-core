@@ -42,10 +42,6 @@ public abstract class JCasResourceCollectionReader_ImplBase
 
 	/**
 	 * Subclasses implement this method rather than {@link #getNext(CAS)}
-	 * 
-	 * @param aJCas
-	 * @throws IOException
-	 * @throws CollectionException
 	 */
 	public abstract void getNext(JCas aJCas)
 		throws IOException, CollectionException;

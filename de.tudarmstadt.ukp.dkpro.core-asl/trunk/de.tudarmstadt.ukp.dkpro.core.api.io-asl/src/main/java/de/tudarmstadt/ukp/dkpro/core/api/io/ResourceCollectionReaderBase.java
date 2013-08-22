@@ -241,7 +241,6 @@ public abstract class ResourceCollectionReaderBase
 	 *
 	 * @param aLocation the location.
 	 * @return an URL.
-	 * @throws MalformedURLException 
 	 */
 	private String locationToUrl(String aLocation) throws MalformedURLException
 	{
