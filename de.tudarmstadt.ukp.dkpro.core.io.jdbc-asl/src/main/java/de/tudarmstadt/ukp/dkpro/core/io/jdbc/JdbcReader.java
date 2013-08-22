@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 
 /**
  * Collection reader for JDBC database.The obtained data will be written into CAS DocumentText as
- * well as fields of the {@link DocumentMetadata} annotation.
+ * well as fields of the {@link DocumentMetaData} annotation.
  * <p>
  * The field names are available as constants and begin with <code>CAS_</code>. Please specify the
  * mapping of the columns and the field names in the query. For example,
@@ -52,7 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * <code>SELECT text AS cas_text, title AS cas_metadata_title FROM test_table</code>
  * <p>
  * will create a CAS for each record, write the content of "text" column into CAS documen text and
- * that of "title" column into the document title field of the {@link DocumentMetadata} annotation.
+ * that of "title" column into the document title field of the {@link DocumentMetaData} annotation.
  *
  * @author Shuo Yang
  *
@@ -79,50 +79,50 @@ public class JdbcReader
     		CAS_METADATA_COLLECTION_ID, CAS_METADATA_DOCUMENT_URI, CAS_METADATA_DOCUMENT_BASE_URI));
 
     /**
-     * Optional for uimaFIT, mandatory for UIMA,. Specify the class name of the JDBC driver.
+     * Specify the class name of the JDBC driver.
      * <p>
      * If used with uimaFIT and the value is not given, <code>com.mysql.jdbc.Driver</code> will be
      * taken.
      */
-    public static final String PARAM_DRIVER = "Driver";
+    public static final String PARAM_DRIVER = "driver";
     @ConfigurationParameter(name = PARAM_DRIVER, mandatory = true, defaultValue = "com.mysql.jdbc.Driver")
     private String driver;
 
     /**
-     * Optional for uimaFIT, mandatory for UIMA. Specifies the URL to the database.
+     * Specifies the URL to the database.
      * <p>
      * If used with uimaFIT and the value is not given, <code>jdbc:mysql://127.0.0.1/</code> will be
      * taken.
      */
-    public static final String PARAM_CONNECTION = "Connection";
+    public static final String PARAM_CONNECTION = "connection";
     @ConfigurationParameter(name = PARAM_CONNECTION, mandatory = true, defaultValue = "jdbc:mysql://127.0.0.1/")
     private String connection;
 
     /**
-     * Mandatory. Specifies name of the database to be accessed.
+     * Specifies name of the database to be accessed.
      */
-    public static final String PARAM_DATABASE = "Database";
+    public static final String PARAM_DATABASE = "database";
     @ConfigurationParameter(name = PARAM_DATABASE, mandatory = true)
     private String database;
 
     /**
-     * Mandatory. Specifies the user name for database access.
+     * Specifies the user name for database access.
      */
-    public static final String PARAM_USER = "User";
+    public static final String PARAM_USER = "user";
     @ConfigurationParameter(name = PARAM_USER, mandatory = true)
     private String user;
 
     /**
-     * Mandatory. Specifies the password for database access.
+     * Specifies the password for database access.
      */
-    public static final String PARAM_PASSWORD = "Password";
+    public static final String PARAM_PASSWORD = "password";
     @ConfigurationParameter(name = PARAM_PASSWORD, mandatory = true)
     private String password;
 
     /**
-     * Mandatory. Specifies the query.
+     * Specifies the query.
      */
-    public static final String PARAM_QUERY = "Query";
+    public static final String PARAM_QUERY = "query";
     @ConfigurationParameter(name = PARAM_QUERY, mandatory = true)
     private String query;
 
@@ -163,7 +163,7 @@ public class JdbcReader
         }
     }
 
-    private void query()
+    private void query() throws ResourceInitializationException
     {
         try {
             Statement statement = sqlConnection.createStatement();
@@ -185,8 +185,7 @@ public class JdbcReader
             }
         }
         catch (SQLException e) {
-            throw new RuntimeException(
-                    "There was an unrecoverable error executing the specified SQL statement.", e);
+            throw new ResourceInitializationException(e);
         }
     }
 
