@@ -39,8 +39,6 @@ import org.apache.uima.cas.text.AnnotationFS;
 /**
  * Code copied and adjusted from Dictionary Annotator
  *
- * TODO: bug 17
- *
  * FeaturePathInfo implementation validates the given featurePath for a
  * specified annotation. It can return the featurePath value as string or match
  * the featurePath value against a specified condition.
@@ -95,8 +93,6 @@ public class FeaturePathInfo  {
 
    /**
     * checks the feature path for the given type and checks if it can be valid.
-    *
-    * @throws DictionaryAnnotatorProcessException
     */
    public void typeSystemInit(Type featurePathType)
          throws FeaturePathException {
@@ -680,7 +676,7 @@ public class FeaturePathInfo  {
    /**
     * Check the given String value for the specified condition
     *
-    * @param in
+    * @param s
     *           String value to check
     * @param condition
     *           condition to check
@@ -736,7 +732,7 @@ public class FeaturePathInfo  {
    /**
     * Check the given boolean value for the specified condition
     *
-    * @param in
+    * @param b
     *           boolean value to check
     * @param condition
     *           condition to check
@@ -758,5 +754,4 @@ public class FeaturePathInfo  {
       }
       }
    }
-
 }
