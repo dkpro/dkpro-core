@@ -35,6 +35,7 @@ import java.util.jar.JarInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -260,7 +261,7 @@ public class MaltParser
 	}
 
 	/**
-	 * @see org.apache.uima.AnalysisComponent.AnalysisComponent#collectionProcessComplete()
+	 * @see AnalysisComponent#collectionProcessComplete()
 	 */
 	@Override
 	public void collectionProcessComplete()
