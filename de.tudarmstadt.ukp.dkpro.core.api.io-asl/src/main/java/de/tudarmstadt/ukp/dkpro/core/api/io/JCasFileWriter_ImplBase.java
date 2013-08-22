@@ -147,9 +147,8 @@ public abstract class JCasFileWriter_ImplBase
 
 	/**
 	 * Get the full target path for the given CAS and extension. If the
-	 * {@link #PARAM_COMPRESS} is set, ".gz" is appended to the path.
+	 * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
 	 *
-	 * @param aRelativePath the relative path.
 	 * @param aExtension the extension.
 	 * @return the full path.
 	 */
@@ -160,7 +159,7 @@ public abstract class JCasFileWriter_ImplBase
 
 	/**
 	 * Get the full target path for the given relative path and extension. If the
-	 * {@link #PARAM_COMPRESS} is set, ".gz" is appended to the path.
+	 * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
 	 *
 	 * @param aRelativePath the relative path.
 	 * @param aExtension the extension.
