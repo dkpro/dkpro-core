@@ -20,9 +20,5 @@
  * Support for (de)serializing the CAS to/from XMI files.
  *
  * @since 1.1.0
- * @see org.apache.uima.tools.components.FileSystemCollectionReader
- * @see org.apache.uima.tools.components.XmiWriterCasConsumer
- * @see org.apache.uima.cas.impl.XmiCasSerializer
- * @see org.apache.uima.cas.impl.XmiCasDeserializer
  */
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
