@@ -44,7 +44,7 @@ public class TagsetMappingFactory
 	/**
 	 * Get the UIMA type name for the given tag in the given language.
 	 *
-	 * @param aModel a model
+	 * @param aMapping a mapping
 	 * @param aTag a tag.
 	 * @return UIMA type name
 	 */
