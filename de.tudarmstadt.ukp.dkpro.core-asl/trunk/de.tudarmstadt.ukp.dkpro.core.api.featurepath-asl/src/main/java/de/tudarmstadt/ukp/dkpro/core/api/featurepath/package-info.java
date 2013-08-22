@@ -19,7 +19,7 @@
 /**
  * Support for querying the CAS using feature paths.
  *
- * @see <a href="http://uima.apache.org/sandbox.html">Dictionary Annotator</a> in the UIMA Sandbox
+ * @see <a href="http://uima.apache.org/sandbox.html">Dictionary Annotator</a>
  * @since 1.1.0
  */
 package de.tudarmstadt.ukp.dkpro.core.api.featurepath;

@@ -39,7 +39,6 @@ public class FeaturePathFactory
 	 * @param aCas the CAS to search in.
 	 * @param aPath the full feature path.
 	 * @return annotation/value pairs.
-	 * @throws FeaturePathException
 	 */
 	public static Iterable<Entry<AnnotationFS, String>> select(CAS aCas, String aPath)
 		throws FeaturePathException
@@ -67,7 +66,6 @@ public class FeaturePathFactory
 	 * @param aAnchor the anchor type.
 	 * @param aPath a feature path relative to the anchor type.
 	 * @return annotation/value pairs.
-	 * @throws FeaturePathException
 	 */
 	public static <T extends Annotation> Iterable<Entry<T, String>> select(JCas aJCas, Class<T> aAnchor,
 			String aPath)
