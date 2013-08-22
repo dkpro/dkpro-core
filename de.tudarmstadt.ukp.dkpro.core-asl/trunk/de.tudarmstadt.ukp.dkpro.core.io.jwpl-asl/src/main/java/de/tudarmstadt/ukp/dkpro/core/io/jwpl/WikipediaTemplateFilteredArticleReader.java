@@ -416,7 +416,6 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	 *
 	 * @param page the page that should be checked for validity
 	 * @return true, if page is valid. false, else
-	 * @throws WikiTitleParsingException
 	 */
 	private boolean isValidPage(Page page)
 		throws WikiTitleParsingException
