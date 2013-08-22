@@ -51,7 +51,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata;
 public abstract class TreeTaggerTT4JBase<T>
     extends CasAnnotator_ImplBase
 {
-    public static final String RESOURCE_TREETAGGER = "TreeTagger";
     protected DKProTreeTaggerWrapper<T> treetagger;
 
     /**
@@ -202,31 +201,6 @@ public abstract class TreeTaggerTT4JBase<T>
             return null;
         }
 
-        public File searchInResources(final Set<String> aSearchedIn)
-        {
-            try {
-                if (getContext().getResourceURL(RESOURCE_TREETAGGER) != null) {
-                    // If we cannot find it in the classpath, try using the specified
-                    // resource
-                    String platformId = treetagger.getPlatformDetector().getPlatformId();
-                    String exeSuffix = treetagger.getPlatformDetector().getExecutableSuffix();
-                    String ttRelLoc = "/bin/" + platformId + "/tree-tagger" + exeSuffix;
-                    String ttPath = getContext().getResourceURL(RESOURCE_TREETAGGER).toURI()
-                            .getPath();
-                    ttPath += ttRelLoc;
-                    File ttFile = new File(ttPath);
-                    aSearchedIn.add(ttFile.toURI() + " (UIMA external resource)");
-                    if (ttFile.exists()) {
-                        return ttFile;
-                    }
-                }
-                return null;
-            }
-            catch (Exception e) {
-                return null;
-            }
-        }
-
         public File searchInClasspath(final Set<String> aSearchedIn)
         {
             try {
@@ -260,9 +234,6 @@ public abstract class TreeTaggerTT4JBase<T>
             }
             else {
                 exeFile = searchInFilesystem(searchedIn);
-                if (exeFile == null) {
-                    exeFile = searchInResources(searchedIn);
-                }
                 if (exeFile == null) {
                     exeFile = searchInClasspath(searchedIn);
                 }
