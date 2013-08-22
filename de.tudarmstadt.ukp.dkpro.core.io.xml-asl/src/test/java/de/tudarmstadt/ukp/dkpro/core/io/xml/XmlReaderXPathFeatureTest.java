@@ -125,7 +125,8 @@ public class XmlReaderXPathFeatureTest
 				XmlReaderXPath.PARAM_SOURCE_LOCATION, VALID_DOCS_ROOT,
 				XmlReaderXPath.PARAM_PATTERNS, new String[] { "[+]abbr*.*" },
 		        XmlReaderXPath.PARAM_XPATH_EXPRESSION, "/topics/top",
-		        XmlReaderXPath.PARAM_INCLUDE_TAG, new String[] { "EN-title", "num" }, // read only num and EN-title tags
+		        // read only num and EN-title tags
+		        XmlReaderXPath.PARAM_INCLUDE_TAGS, new String[] { "EN-title", "num" }, 
 		        XmlReaderXPath.PARAM_LANGUAGE, "en"
 		);
 

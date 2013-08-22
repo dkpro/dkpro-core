@@ -409,7 +409,6 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 	 * Collect all consecutive text starting at the current point.
 	 *
 	 * @return the concatenated consecutive text.
-	 * @throws XMLStreamException
 	 */
 	private String collectText() throws XMLStreamException
 	{
@@ -425,8 +424,6 @@ public class XmlReader extends CasCollectionReader_ImplBase {
 	 * Seek to the root element of the next sub-document and return its local name.
 	 *
 	 * @return the local name of the sub-document root element.
-	 * @throws XMLStreamException
-	 * @throws IOException
 	 */
 	private String seekSubDocumentRoot()
 		throws XMLStreamException, IOException
