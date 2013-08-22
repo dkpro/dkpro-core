@@ -49,7 +49,6 @@ public class SoundUtils
 	 * @param s
 	 *            The Darpabet phonemic transcription to convert.
 	 * @return The IPA equivalent of s.
-	 * @throws Exception
 	 */
     public static String arpabetToIPA(String s) throws Exception {
     	String[] arpaPhonemes = s.trim().split("[ \\t]+");
