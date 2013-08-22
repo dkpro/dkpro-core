@@ -27,17 +27,13 @@ import java.util.List;
 public interface Dictionary
 {
 
-	/**
-	 * Checks if a word is in a dictionary
-	 * 
-	 * @param aWord
-	 * @return
-	 */
-	public boolean contains(String aWord);
-	
-	/**
-	 * Returns all words in the dictionary
-	 * @return
-	 */
-	public List<String> getAll();
+    /**
+     * Checks if a word is in a dictionary
+     */
+    public boolean contains(String aWord);
+
+    /**
+     * Returns all words in the dictionary
+     */
+    public List<String> getAll();
 }

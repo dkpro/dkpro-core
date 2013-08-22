@@ -32,103 +32,87 @@ import java.util.List;
 public class ValueNode<V>
 {
 
-	V value;
-	List<ValueNode<V>> children = new ArrayList<ValueNode<V>>();
+    V value;
+    List<ValueNode<V>> children = new ArrayList<ValueNode<V>>();
 
-	public ValueNode()
-	{
-		this(null);
-	}
+    public ValueNode()
+    {
+        this(null);
+    }
 
-	public ValueNode(V aValue)
-	{
-		value = aValue;
-	}
+    public ValueNode(V aValue)
+    {
+        value = aValue;
+    }
 
-	/**
-	 * Returns the value object of this node
-	 * 
-	 * @return
-	 */
-	public V getValue()
-	{
-		return value;
-	}
+    /**
+     * Returns the value object of this node
+     */
+    public V getValue()
+    {
+        return value;
+    }
 
-	/**
-	 * Sets the value object of this node
-	 * 
-	 * @param aValue
-	 */
-	public void setValue(V aValue)
-	{
-		value = aValue;
-	}
+    /**
+     * Sets the value object of this node
+     */
+    public void setValue(V aValue)
+    {
+        value = aValue;
+    }
 
-	/**
-	 * Returns a children for this node
-	 * 
-	 * @return
-	 */
-	public List<ValueNode<V>> getChildren()
-	{
-		return children;
-	}
+    /**
+     * Returns a children for this node
+     */
+    public List<ValueNode<V>> getChildren()
+    {
+        return children;
+    }
 
-	/**
-	 * Returns all Children values
-	 * 
-	 * @return
-	 */
-	public List<V> getChildrenValues()
-	{
-		List<ValueNode<V>> values = getChildren();
-		List<V> result = new ArrayList<V>();
+    /**
+     * Returns all Children values
+     */
+    public List<V> getChildrenValues()
+    {
+        List<ValueNode<V>> values = getChildren();
+        List<V> result = new ArrayList<V>();
 
-		for (ValueNode<V> value : values) {
-			result.add(value.getValue());
-		}
+        for (ValueNode<V> value : values) {
+            result.add(value.getValue());
+        }
 
-		return result;
-	}
+        return result;
+    }
 
-	/**
-	 * Sets the children for this node
-	 * 
-	 * @param aChildren
-	 */
-	public void setChildren(List<ValueNode<V>> aChildren)
-	{
-		children = aChildren;
-	}
+    /**
+     * Sets the children for this node
+     */
+    public void setChildren(List<ValueNode<V>> aChildren)
+    {
+        children = aChildren;
+    }
 
-	/**
-	 * Adds a child object to this node
-	 * 
-	 * @param node
-	 */
-	public void addChild(ValueNode<V> node)
-	{
-		children.add(node);
-	}
+    /**
+     * Adds a child object to this node
+     */
+    public void addChild(ValueNode<V> node)
+    {
+        children.add(node);
+    }
 
-	/**
-	 * Checks if this node has children
-	 * 
-	 * @return
-	 */
-	public boolean hasChildren()
-	{
-		return children.size() > 0;
-	}
+    /**
+     * Checks if this node has children
+     */
+    public boolean hasChildren()
+    {
+        return children.size() > 0;
+    }
 
-	/**
-	 * Checks if the node is a leaf node
-	 * 
-	 * @return
-	 */
-	public boolean isLeaf()
-	{
-		return !hasChildren();
-	}
+    /**
+     * Checks if the node is a leaf node
+     */
+    public boolean isLeaf()
+    {
+        return !hasChildren();
+    }
 }

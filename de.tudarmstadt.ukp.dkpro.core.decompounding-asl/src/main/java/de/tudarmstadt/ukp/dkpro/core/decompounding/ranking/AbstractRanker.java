@@ -50,11 +50,6 @@ public abstract class AbstractRanker implements Ranker
 
 	}
 
-	/**
-	 * Constructor
-	 *
-	 * @param aFinder
-	 */
 	public AbstractRanker(Finder aFinder)
 	{
 		finder = aFinder;
@@ -67,22 +62,14 @@ public abstract class AbstractRanker implements Ranker
 
 	/**
 	 * Gets the frequency of a Split Element
-	 *
-	 * @param aWord
-	 * @return
 	 */
 	protected BigInteger freq(Fragment aWord)
 	{
 		return finder.freq(aWord.getWord());
-//		return freq(new String[] { aWord.getWord() });
 	}
 
 	/**
 	 * Returns the frequency of n-grams that contain both split elements
-	 *
-	 * @param aWord1
-	 * @param aWord2
-	 * @return
 	 */
 	protected BigInteger freq(Fragment aWord1, Fragment aWord2)
 	{
@@ -91,9 +78,6 @@ public abstract class AbstractRanker implements Ranker
 
 	/**
 	 * Returns the frequency for a array of words
-	 *
-	 * @param aWords
-	 * @return
 	 */
 	protected BigInteger freq(String[] aWords)
 	{

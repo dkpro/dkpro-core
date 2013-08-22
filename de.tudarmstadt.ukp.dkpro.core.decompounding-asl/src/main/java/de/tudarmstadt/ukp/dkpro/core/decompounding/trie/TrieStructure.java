@@ -28,121 +28,105 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 public class TrieStructure
 {
 
-	// Key: substring. Value: Successors
-	private KeyValueNode<String, Integer> root = new KeyValueNode<String, Integer>(
-			"", 0);
+    // Key: substring. Value: Successors
+    private KeyValueNode<String, Integer> root = new KeyValueNode<String, Integer>("", 0);
 
-	/**
-	 * Adds a word to the tree. Also increments the successor value for each
-	 * node
-	 * 
-	 * @param aWord
-	 */
-	public void addWord(String aWord)
-	{
-		KeyValueNode<String, Integer> parent = root;
+    /**
+     * Adds a word to the tree. Also increments the successor value for each node
+     */
+    public void addWord(String aWord)
+    {
+        KeyValueNode<String, Integer> parent = root;
 
-		for (int i = 0; i < aWord.length(); i++) {
-			String subword = aWord.substring(0, i + 1);
-			KeyValueNode<String, Integer> child = parent.getChild(subword);
+        for (int i = 0; i < aWord.length(); i++) {
+            String subword = aWord.substring(0, i + 1);
+            KeyValueNode<String, Integer> child = parent.getChild(subword);
 
-			if (child != null) {
-				if (!subword.equals(aWord)) {
-					child.setValue(child.getValue() + 1);
-				}
-			}
-			else {
-				Integer value = 1;
-				if (subword.equals(aWord)) {
-					value = 0;
-				}
-				child = new KeyValueNode<String, Integer>(subword, value);
-				parent.addChild(child);
-			}
+            if (child != null) {
+                if (!subword.equals(aWord)) {
+                    child.setValue(child.getValue() + 1);
+                }
+            }
+            else {
+                Integer value = 1;
+                if (subword.equals(aWord)) {
+                    value = 0;
+                }
+                child = new KeyValueNode<String, Integer>(subword, value);
+                parent.addChild(child);
+            }
 
-			parent = child;
-		}
-	}
+            parent = child;
+        }
+    }
 
-	/**
-	 * Finds a not with a given string. If not found NULL is returned.
-	 * 
-	 * @param aWord
-	 * @return
-	 */
-	public KeyValueNode<String, Integer> findWord(String aWord)
-	{
-		aWord = aWord.toLowerCase();
-		KeyValueNode<String, Integer> parent = root;
-		int depth = 1;
+    /**
+     * Finds a not with a given string. If not found NULL is returned.
+     */
+    public KeyValueNode<String, Integer> findWord(String aWord)
+    {
+        aWord = aWord.toLowerCase();
+        KeyValueNode<String, Integer> parent = root;
+        int depth = 1;
 
-		while (parent.hasChildren()) {
-			String w = aWord.substring(0, depth);
-			KeyValueNode<String, Integer> child = parent.getChild(w);
+        while (parent.hasChildren()) {
+            String w = aWord.substring(0, depth);
+            KeyValueNode<String, Integer> child = parent.getChild(w);
 
-			if (w.equals(aWord)) {
-				return child;
-			}
-			else if (child != null) {
-				parent = child;
-				depth++;
-			}
-			else {
-				return null;
-			}
-		}
+            if (w.equals(aWord)) {
+                return child;
+            }
+            else if (child != null) {
+                parent = child;
+                depth++;
+            }
+            else {
+                return null;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * Returns the number of successor for a node. If the node could not be
-	 * found the return value is 0.
-	 * 
-	 * @param aWord
-	 * @return
-	 */
-	public Integer getSuccessors(String aWord)
-	{
-		KeyValueNode<String, Integer> node = findWord(aWord);
-		if (node != null) {
-			return node.getValue();
-		}
+    /**
+     * Returns the number of successor for a node. If the node could not be found the return value
+     * is 0.
+     */
+    public Integer getSuccessors(String aWord)
+    {
+        KeyValueNode<String, Integer> node = findWord(aWord);
+        if (node != null) {
+            return node.getValue();
+        }
 
-		return 0;
-	}
+        return 0;
+    }
 
-	/**
-	 * Creates a Trie object for a SimpleDictionary
-	 * 
-	 * @param aDict
-	 * @return
-	 */
-	public static TrieStructure createForDict(Dictionary aDict)
-	{
-		TrieStructure t = new TrieStructure();
+    /**
+     * Creates a Trie object for a SimpleDictionary
+     */
+    public static TrieStructure createForDict(Dictionary aDict)
+    {
+        TrieStructure t = new TrieStructure();
 
-		for (String word : aDict.getAll()) {
-			t.addWord(word);
-		}
+        for (String word : aDict.getAll()) {
+            t.addWord(word);
+        }
 
-		return t;
-	}
+        return t;
+    }
 
-	/**
-	 * Creates a Trie object for a SimpleDictionary with all words reversed
-	 * 
-	 * @param aDict
-	 * @return
-	 */
-	public static TrieStructure createForDictReverse(Dictionary aDict)
-	{
-		TrieStructure t = new TrieStructure();
+    /**
+     * Creates a Trie object for a SimpleDictionary with all words reversed
+     */
+    public static TrieStructure createForDictReverse(Dictionary aDict)
+    {
+        TrieStructure t = new TrieStructure();
 
-		for (String word : aDict.getAll()) {
-			t.addWord(new StringBuffer(word).reverse().toString());
-		}
+        for (String word : aDict.getAll()) {
+            t.addWord(new StringBuffer(word).reverse().toString());
+        }
 
-		return t;
-	}
+        return t;
+    }
 }

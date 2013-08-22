@@ -95,7 +95,6 @@ public class SimpleDictionary
 	 * Reads the dictionary to set
 	 * 
 	 * @return A set of words
-	 * @throws IOException
 	 */
 	protected Set<String> readFileToSet(BufferedReader aReader)
 		throws IOException
@@ -109,7 +108,8 @@ public class SimpleDictionary
 		return words;
 	}
 
-	public List<String> getAll()
+	@Override
+    public List<String> getAll()
 	{
 		return new ArrayList<String>(words);
 	}

@@ -28,158 +28,162 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 
 /**
  * Wrapper for the banana splitter algorithm
- *
+ * 
  * @author Jens Haase <je.haase@googlemail.com>
  */
 public class BananaSplitterAlgorithm
-	implements SplitterAlgorithm
+    implements SplitterAlgorithm
 {
 
-	private static class DictionaryWrapper implements SimpleDictionaryInterface {
+    private static class DictionaryWrapper
+        implements SimpleDictionaryInterface
+    {
 
-		protected Dictionary dict;
+        protected Dictionary dict;
 
-		public DictionaryWrapper(Dictionary aDict) {
-			dict = aDict;
-		}
+        public DictionaryWrapper(Dictionary aDict)
+        {
+            dict = aDict;
+        }
 
-		@Override
-		public SimpleDictEntry findWord(String aWord)
-		{
-			if (dict.contains(aWord)) {
-				return new SimpleDictEntry(aWord, "UNKNOWN");
-			}
-			return null;
-		}
+        @Override
+        public SimpleDictEntry findWord(String aWord)
+        {
+            if (dict.contains(aWord)) {
+                return new SimpleDictEntry(aWord, "UNKNOWN");
+            }
+            return null;
+        }
 
-		@Override
-		public SimpleDictEntry findWordNoCase(String aWord)
-		{
-			return findWord(aWord.toLowerCase());
-		}
+        @Override
+        public SimpleDictEntry findWordNoCase(String aWord)
+        {
+            return findWord(aWord.toLowerCase());
+        }
 
-	}
+    }
 
-	private BananaSplit splitter;
-	private int maxTreeDepth = Integer.MAX_VALUE;
+    private BananaSplit splitter;
+    private int maxTreeDepth = Integer.MAX_VALUE;
 
-	@Override
-	public DecompoundingTree split(String aWord)
-	{
-		DecompoundingTree t = new DecompoundingTree(aWord);
-		t.getRoot().getValue().getSplits().get(0).setSplitAgain(true);
+    @Override
+    public DecompoundingTree split(String aWord)
+    {
+        DecompoundingTree t = new DecompoundingTree(aWord);
+        t.getRoot().getValue().getSplits().get(0).setSplitAgain(true);
 
-		bananaSplit(t.getRoot(),0);
+        bananaSplit(t.getRoot(), 0);
 
-		return t;
-	}
+        return t;
+    }
 
-	/**
-	 * Recursively creates the split tree
-	 * @param aParent The parent node
-	 */
-	protected void bananaSplit(ValueNode<DecompoundedWord> aParent, int aDepth)
-	{
-		if (aDepth > maxTreeDepth) {
-			return;
-		}
+    /**
+     * Recursively creates the split tree
+     * 
+     * @param aParent
+     *            The parent node
+     */
+    protected void bananaSplit(ValueNode<DecompoundedWord> aParent, int aDepth)
+    {
+        if (aDepth > maxTreeDepth) {
+            return;
+        }
 
-		for (int i = 0; i < aParent.getValue().getSplits().size(); i++) {
-			Fragment element = aParent.getValue().getSplits().get(i);
+        for (int i = 0; i < aParent.getValue().getSplits().size(); i++) {
+            Fragment element = aParent.getValue().getSplits().get(i);
 
-			if (element.shouldSplitAgain()) {
-				DecompoundedWord result = makeSplit(element.getWord());
+            if (element.shouldSplitAgain()) {
+                DecompoundedWord result = makeSplit(element.getWord());
 
-				if (result != null) {
-					DecompoundedWord copy = aParent.getValue().createCopy();
-					if (result.getSplits().size() > 1) {
-						result.getSplits().get(0).setSplitAgain(true);
-						result.getSplits().get(1).setSplitAgain(true);
-						copy.replaceSplitElement(i, result);
-						ValueNode<DecompoundedWord> child = new ValueNode<DecompoundedWord>(copy);
-						aParent.addChild(child);
-						bananaSplit(child, aDepth+1);
-					}
-					else if (result.getSplits().size() == 1
-							&& !result.equals(aParent.getValue())) {
-						copy.replaceSplitElement(i, result);
-						ValueNode<DecompoundedWord> child = new ValueNode<DecompoundedWord>(copy);
-						aParent.addChild(child);
-					}
-				}
-			}
-		}
-	}
+                if (result != null) {
+                    DecompoundedWord copy = aParent.getValue().createCopy();
+                    if (result.getSplits().size() > 1) {
+                        result.getSplits().get(0).setSplitAgain(true);
+                        result.getSplits().get(1).setSplitAgain(true);
+                        copy.replaceSplitElement(i, result);
+                        ValueNode<DecompoundedWord> child = new ValueNode<DecompoundedWord>(copy);
+                        aParent.addChild(child);
+                        bananaSplit(child, aDepth + 1);
+                    }
+                    else if (result.getSplits().size() == 1 && !result.equals(aParent.getValue())) {
+                        copy.replaceSplitElement(i, result);
+                        ValueNode<DecompoundedWord> child = new ValueNode<DecompoundedWord>(copy);
+                        aParent.addChild(child);
+                    }
+                }
+            }
+        }
+    }
 
-	/**
-	 * Split a word with the banana splitter
-	 * @param aWord The word to split
-	 * @return
-	 */
-	protected DecompoundedWord makeSplit(String aWord)
-	{
-		int resultValue;
-		try {
-			resultValue = splitter.splitCompound(aWord);
-		}
-		catch (Exception e) {
-			// Return empty result
-			return null;
-		}
+    /**
+     * Split a word with the banana splitter
+     * 
+     * @param aWord
+     *            The word to split
+     */
+    protected DecompoundedWord makeSplit(String aWord)
+    {
+        int resultValue;
+        try {
+            resultValue = splitter.splitCompound(aWord);
+        }
+        catch (Exception e) {
+            // Return empty result
+            return null;
+        }
 
-		if (resultValue != 0) {
-			// return empty result
-			return null;
-		}
+        if (resultValue != 0) {
+            // return empty result
+            return null;
+        }
 
-		return compoundToSplit(splitter.getCompound());
-	}
+        return compoundToSplit(splitter.getCompound());
+    }
 
-	/**
-	 * Converts the banana split compound to a split
-	 * @param aCompound
-	 * @return
-	 */
-	protected DecompoundedWord compoundToSplit(Compound aCompound) {
-		String s = "";
+    /**
+     * Converts the banana split compound to a split
+     */
+    protected DecompoundedWord compoundToSplit(Compound aCompound)
+    {
+        String s = "";
 
-		String left = aCompound.getLeftAtom();
-		if (left != null) {
-			Affix bounding = aCompound.getBoundingSuffix();
-			left = left.substring(0, left.length()-bounding.getDel().length());
-			if (bounding.getAdd().length() > 0) {
-				left += "(" + bounding.getAdd() + ")";
-			}
+        String left = aCompound.getLeftAtom();
+        if (left != null) {
+            Affix bounding = aCompound.getBoundingSuffix();
+            left = left.substring(0, left.length() - bounding.getDel().length());
+            if (bounding.getAdd().length() > 0) {
+                left += "(" + bounding.getAdd() + ")";
+            }
 
-			s += left + "+";
-		}
+            s += left + "+";
+        }
 
-		Affix suffix = aCompound.getInflectionSuffix();
-		String right = aCompound.getRightAtom();
-		right = right.substring(0, right.length()-suffix.getDel().length());
-		if (suffix.getAdd().length() > 0) {
-			right += "(" + suffix.getAdd() + ")";
-		}
-		s += right;
+        Affix suffix = aCompound.getInflectionSuffix();
+        String right = aCompound.getRightAtom();
+        right = right.substring(0, right.length() - suffix.getDel().length());
+        if (suffix.getAdd().length() > 0) {
+            right += "(" + suffix.getAdd() + ")";
+        }
+        s += right;
 
-		return DecompoundedWord.createFromString(s);
-	}
+        return DecompoundedWord.createFromString(s);
+    }
 
-	@Override
-	public void setDictionary(Dictionary aDict)
-	{
-		splitter = new BananaSplit(new DictionaryWrapper(aDict));
-	}
+    @Override
+    public void setDictionary(Dictionary aDict)
+    {
+        splitter = new BananaSplit(new DictionaryWrapper(aDict));
+    }
 
-	@Override
-	public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
-	{
-		// Not needed for this algorithm
-	}
+    @Override
+    public void setLinkingMorphemes(LinkingMorphemes aMorphemes)
+    {
+        // Not needed for this algorithm
+    }
 
-	@Override
-	public void setMaximalTreeDepth(int aDepth)
-	{
-		maxTreeDepth = aDepth;
-	}
+    @Override
+    public void setMaximalTreeDepth(int aDepth)
+    {
+        maxTreeDepth = aDepth;
+    }
 }

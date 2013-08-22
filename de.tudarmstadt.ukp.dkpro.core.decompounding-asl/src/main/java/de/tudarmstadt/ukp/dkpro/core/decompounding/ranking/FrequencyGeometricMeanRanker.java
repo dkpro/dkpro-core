@@ -38,21 +38,15 @@ public class FrequencyGeometricMeanRanker
 	extends AbstractRanker
 	implements RankerList
 {
-
 	/**
 	 * Empty constructor
 	 * 
-	 * Use setFinder before using this class
+	 * Use {@link #setFinder(Finder)} before using this class
 	 */
 	public FrequencyGeometricMeanRanker() {
 		
 	}
 	
-	/**
-	 * Constructor
-	 * 
-	 * @param aFinder
-	 */
 	public FrequencyGeometricMeanRanker(Finder aFinder)
 	{
 		super(aFinder);
@@ -76,21 +70,9 @@ public class FrequencyGeometricMeanRanker
 
 	/**
 	 * Calculates the weight for a split
-	 * 
-	 * @param aSplit
-	 * @return
 	 */
 	private double calcRank(DecompoundedWord aSplit)
 	{
-//		BigInteger result = new BigInteger("1");
-//
-//		for (SplitElement elem : aSplit.getSplits()) {
-//			result = result.multiply(freq(elem));
-//		}
-//
-//		return (float) Math.pow(result.doubleValue(), 1f / (double) aSplit
-//				.getSplits().size());
-		
 		SummaryStatistics stats = new SummaryStatistics();
 		for (Fragment elem : aSplit.getSplits()) {
 			stats.addValue(freq(elem).doubleValue());
@@ -114,9 +96,6 @@ public class FrequencyGeometricMeanRanker
 
 	/**
 	 * Searches a a path throw the tree
-	 * 
-	 * @param aParent
-	 * @return
 	 */
 	private DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent, List<DecompoundedWord> aPath)
 	{

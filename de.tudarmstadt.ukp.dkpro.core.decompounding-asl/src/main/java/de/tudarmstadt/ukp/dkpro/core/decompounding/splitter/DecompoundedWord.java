@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * A data container for a split of a word. This container stores on split of all possible splits.
- *
+ * 
  * @author Jens Haase <je.haase@google.com>
  */
 public class DecompoundedWord
@@ -36,13 +36,10 @@ public class DecompoundedWord
 
     /**
      * Create a split from a string
-     *
+     * 
      * The string has the structure: word1(morpheme)+word2(morpheme)+...+word3
-     *
+     * 
      * For example: "Aktion(s)+plan" or "Verbraucher+zahlen"
-     *
-     * @param aSplit
-     * @return
      */
     public static DecompoundedWord createFromString(String aSplit)
     {
@@ -92,8 +89,6 @@ public class DecompoundedWord
 
     /**
      * Adds a split element at the end
-     *
-     * @param aSplit
      */
     public void appendSplitElement(Fragment aSplit)
     {
@@ -102,8 +97,6 @@ public class DecompoundedWord
 
     /**
      * Adds a split element to the beginning
-     *
-     * @param aSplit
      */
     public void prependSplitElement(Fragment aSplit)
     {
@@ -112,8 +105,6 @@ public class DecompoundedWord
 
     /**
      * Returns all split elements
-     *
-     * @return
      */
     public List<Fragment> getSplits()
     {
@@ -122,8 +113,6 @@ public class DecompoundedWord
 
     /**
      * Set all split elements
-     *
-     * @param aSplits
      */
     public void setSplits(List<Fragment> aSplits)
     {
@@ -132,8 +121,6 @@ public class DecompoundedWord
 
     /**
      * Adds a list of split elements.
-     *
-     * @param aSplits
      */
     public void addAll(List<Fragment> aSplits)
     {
@@ -143,9 +130,6 @@ public class DecompoundedWord
     /**
      * Replace one split element with a split. That means all split elements will be inserted at the
      * position of the split element
-     *
-     * @param aIndex
-     * @param aSplit
      */
     public void replaceSplitElement(int aIndex, DecompoundedWord aSplit)
     {
@@ -158,9 +142,6 @@ public class DecompoundedWord
 
     /**
      * Replaces a split element with another one
-     *
-     * @param aIndex
-     * @param aSplitElement
      */
     public void replaceSplitElement(int aIndex, Fragment aSplitElement)
     {
@@ -169,9 +150,6 @@ public class DecompoundedWord
 
     /**
      * Similar to the equals method, but combines morpheme and word
-     *
-     * @param aOtherSplit
-     * @return
      */
     public boolean equalWithoutMorpheme(DecompoundedWord aOtherSplit)
     {
@@ -180,8 +158,6 @@ public class DecompoundedWord
 
     /**
      * Similar to the toString method, but combines morpheme and word
-     *
-     * @return
      */
     private String toStringWithoutMorpheme()
     {
@@ -199,8 +175,6 @@ public class DecompoundedWord
 
     /**
      * Returns the complete word without + or ()
-     *
-     * @return
      */
     public String getWord()
     {
@@ -217,8 +191,6 @@ public class DecompoundedWord
 
     /**
      * Creates a copy of this element.
-     *
-     * @return
      */
     public DecompoundedWord createCopy()
     {
@@ -229,8 +201,6 @@ public class DecompoundedWord
 
     /**
      * Returns the ranked weight of the split
-     *
-     * @return
      */
     public double getWeight()
     {
@@ -239,8 +209,6 @@ public class DecompoundedWord
 
     /**
      * Sets a rank weight for the split
-     *
-     * @param aWeight
      */
     public void setWeight(double aWeight)
     {
@@ -275,11 +243,11 @@ public class DecompoundedWord
     }
 
     /**
-     *
+     * 
      * Checks if this instance is a compounding word.
-     *
+     * 
      * @return true if this instance is a decompounded word
-     *
+     * 
      * */
     public boolean isCompound()
     {
@@ -287,12 +255,12 @@ public class DecompoundedWord
     }
 
     /**
-    *
-    * Checks if last fragment has a linking morpheme.
-    *
-    * @return true if this instance does not have a linking morpheme in the last fragment
-    *
-    * */
+     * 
+     * Checks if last fragment has a linking morpheme.
+     * 
+     * @return true if this instance does not have a linking morpheme in the last fragment
+     * 
+     * */
     public boolean hasLastFragmentMorpheme()
     {
         return splits.get(splits.size() - 1).hasMorpheme();
