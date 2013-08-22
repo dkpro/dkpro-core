@@ -51,11 +51,11 @@ public class XmiWriter
 	 * be written to the XMI output path. If this is set, it is expected to be a file relative
 	 * to the current work directory or an absolute file.
 	 * <br>
-	 * If this parameter is set, the {@link #PARAM_COMPRESS} parameter has no effect on the
+	 * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
 	 * type system. Instead, if the file name ends in ".gz", the file will be compressed,
 	 * otherwise not.
 	 */
-	public static final String PARAM_TYPE_SYSTEM_FILE = "TypeSystemFile";
+	public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
 	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
 	private File typeSystemFile;
 
