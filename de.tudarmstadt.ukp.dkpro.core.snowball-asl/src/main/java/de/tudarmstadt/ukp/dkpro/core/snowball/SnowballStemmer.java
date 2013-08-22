@@ -87,7 +87,7 @@ public class SnowballStemmer
 	 * <tr><td>educational</td><td>educ</td><td>educ</td></tr>
 	 * </table>
 	 */
-	public static final String PARAM_LOWER_CASE = "LowerCase";
+	public static final String PARAM_LOWER_CASE = "lowerCase";
 	@ConfigurationParameter(name = PARAM_LOWER_CASE, mandatory = false, defaultValue="false")
 	protected boolean lowerCase;
 
@@ -165,9 +165,7 @@ public class SnowballStemmer
 					throw new IllegalStateException(
 							"error occured while creating a stem annotation", e);
 				}
-
 			}
-
 		}
 	}
 
@@ -213,10 +211,8 @@ public class SnowballStemmer
 	 * Creates a Stem annotation with same begin and end as the AnnotationFS fs, the value is the
 	 * stemmed value derived by applying the featurepath.
 	 *
-	 * @param jcas
 	 * @param fs
 	 *            the AnnotationFS where the Stem annotation is created
-	 * @throws AnalysisEngineProcessException
 	 */
 	private void createStemAnnotation(JCas jcas, AnnotationFS fs)
 		throws AnalysisEngineProcessException
