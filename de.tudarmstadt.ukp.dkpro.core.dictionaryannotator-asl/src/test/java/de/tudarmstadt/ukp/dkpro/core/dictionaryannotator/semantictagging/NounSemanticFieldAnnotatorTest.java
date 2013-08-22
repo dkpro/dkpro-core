@@ -64,67 +64,55 @@ public class NounSemanticFieldAnnotatorTest {
 
 	}
 
-	/**
-	 * @param language
-	 * @param testDocument
-	 * @param documentLemmas
-	 * @param documentPosTags
-	 * @param documentNounSemanticFields
-	 * @return
-	 * @throws UIMAException 
-	 */
-	private void runAnnotatorTest(String language, 
-			String testDocument, 
-			String[] documentLemmas,
-			String[] documentPosTags, 
-			String[] documentNounSemanticFields) throws UIMAException {
+    private void runAnnotatorTest(String language, String testDocument, String[] documentLemmas,
+            String[] documentPosTags, String[] documentNounSemanticFields)
+        throws UIMAException
+    {
 
-               
-		AnalysisEngineDescription processor = createEngineDescription(
+        AnalysisEngineDescription processor = createEngineDescription(
 
-				createEngineDescription(NounSemanticFieldAnnotator.class,
-						NounSemanticFieldAnnotator.PARAM_NOUN_SEMANTIC_FIELD_RESOURCE, 
-							createExternalResourceDescription(SemanticTagResource.class,
-									SemanticTagResource.PARAM_RESOURCE_PATH, "src/test/resources/nounSemanticFieldMapTest.txt")
-									)
-		);
+        createEngineDescription(
+                NounSemanticFieldAnnotator.class,
+                NounSemanticFieldAnnotator.PARAM_NOUN_SEMANTIC_FIELD_RESOURCE,
+                createExternalResourceDescription(SemanticTagResource.class,
+                        SemanticTagResource.PARAM_RESOURCE_PATH,
+                        "src/test/resources/nounSemanticFieldMapTest.txt")));
 
-		AnalysisEngine engine = createEngine(processor);
-		JCas aJCas = engine.newJCas();
-		aJCas.setDocumentLanguage(language);
+        AnalysisEngine engine = createEngine(processor);
+        JCas aJCas = engine.newJCas();
+        aJCas.setDocumentLanguage(language);
 
-		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
-				Sentence.class);
-		tb.buildTokens(aJCas, testDocument);
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+                Sentence.class);
+        tb.buildTokens(aJCas, testDocument);
 
-		int offset = 0;
-		for (Token token : JCasUtil.select(aJCas, Token.class)) {
-			
-			if (documentPosTags[offset].matches("NN")) {
-				NN nn = new NN(aJCas, token.getBegin(), token.getEnd());
-				nn.setPosValue(documentPosTags[offset]);
-				nn.addToIndexes();
-				token.setPos(nn);
-			} else {
-				POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
-				pos.setPosValue(documentPosTags[offset]);
-				pos.addToIndexes();
-				token.setPos(pos);
-			}
-			
-			Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
-			lemma.setValue(documentLemmas[offset]);
-			lemma.addToIndexes();
-			token.setLemma(lemma);
+        int offset = 0;
+        for (Token token : JCasUtil.select(aJCas, Token.class)) {
 
-			offset++;
-		}
-		engine.process(aJCas);
+            if (documentPosTags[offset].matches("NN")) {
+                NN nn = new NN(aJCas, token.getBegin(), token.getEnd());
+                nn.setPosValue(documentPosTags[offset]);
+                nn.addToIndexes();
+                token.setPos(nn);
+            }
+            else {
+                POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+                pos.setPosValue(documentPosTags[offset]);
+                pos.addToIndexes();
+                token.setPos(pos);
+            }
 
-		AssertAnnotations.assertSemanticField(documentNounSemanticFields,
-				select(aJCas, SemanticField.class));
-	
-	}
+            Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
+            lemma.setValue(documentLemmas[offset]);
+            lemma.addToIndexes();
+            token.setLemma(lemma);
 
+            offset++;
+        }
+        engine.process(aJCas);
 
+        AssertAnnotations.assertSemanticField(documentNounSemanticFields,
+                select(aJCas, SemanticField.class));
+
+    }
 }
