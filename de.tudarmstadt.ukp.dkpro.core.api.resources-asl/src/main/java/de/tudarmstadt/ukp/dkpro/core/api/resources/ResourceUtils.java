@@ -84,8 +84,7 @@ public class ResourceUtils
      *            {@link PathMatchingResourcePatternResolver#getResources(String)}
      * @param aCache
      *            use the cache or not.
-     * @return
-     * @see {@link PathMatchingResourcePatternResolver}
+     * @see PathMatchingResourcePatternResolver
      */
     public static File getClasspathAsFolder(String aClasspathBase, boolean aCache)
         throws IOException
