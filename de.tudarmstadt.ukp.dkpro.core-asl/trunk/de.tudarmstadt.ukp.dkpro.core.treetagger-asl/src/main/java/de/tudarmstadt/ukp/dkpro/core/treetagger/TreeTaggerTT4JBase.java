@@ -47,8 +47,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata;
 
 /**
  * @author Richard Eckart de Castilho
- *
- * @param <T>
  */
 public abstract class TreeTaggerTT4JBase<T>
     extends CasAnnotator_ImplBase
@@ -68,7 +66,7 @@ public abstract class TreeTaggerTT4JBase<T>
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    protected String languageCode;
+    protected String language;
 
     /**
      * TT4J setting: Disable some sanity checks, e.g. whether tokens contain line breaks (which is

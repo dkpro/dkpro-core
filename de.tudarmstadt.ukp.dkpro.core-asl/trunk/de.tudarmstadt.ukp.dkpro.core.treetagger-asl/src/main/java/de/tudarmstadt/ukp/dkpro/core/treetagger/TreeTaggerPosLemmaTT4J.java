@@ -109,7 +109,7 @@ public class TreeTaggerPosLemmaTT4J
 		        setContextObject(TreeTaggerPosLemmaTT4J.this);
 		        setDefault(LOCATION, NOT_REQUIRED);
 		        
-		        setOverride(LANGUAGE, languageCode);
+		        setOverride(LANGUAGE, language);
 		    }
 		    
 		    @Override
@@ -143,7 +143,7 @@ public class TreeTaggerPosLemmaTT4J
 		taggerMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 		taggerMappingProvider.setDefault("tagger.tagset", "default");
 		taggerMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-		taggerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
+		taggerMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 		taggerMappingProvider.addImport("tagger.tagset", treetagger);
 	}
 

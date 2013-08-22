@@ -82,7 +82,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		chunkerMappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
 		chunkerMappingProvider.setDefault("chunker.tagset", "default");
 		chunkerMappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
-		chunkerMappingProvider.setOverride(MappingProvider.LANGUAGE, languageCode);
+		chunkerMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 //		posMappingProvider.addImport("tagger.tagset", modelProvider);
     }
 
@@ -110,21 +110,21 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 	{
 		getLogger().debug("Running TreeTagger chunker");
 		try {
-			final String language;
+			final String lang;
 
 	        // If language override is not active && the document language is
 			// "x-unspecified" which means that is has not been set at all
 			// then we should throw an exception, as we do not know what language to
 			// use. Using a default language in this case, could lead to very
 			// confusing results for the user that are hard to track down.
-	        if (languageCode != null) {
-	        	language = languageCode;
+	        if (language != null) {
+	            lang = language;
 	        }
 	        else if (
 	        		aCas.getDocumentLanguage() != null &&
 	        		!aCas.getDocumentLanguage().equals("x-unspecified")
 	        ) {
-	        	language = aCas.getDocumentLanguage();
+	            lang = aCas.getDocumentLanguage();
 	        }
 	        else {
 	            throw new AnalysisEngineProcessException(new Throwable(
@@ -136,7 +136,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 			// Set the handler creating new UIMA annotations from the analyzed
 			// tokens
 			final AtomicInteger count = new AtomicInteger(0);
-        	treetagger.setModel(language);
+        	treetagger.setModel(lang);
 			final TokenHandler<AnnotationFS> handler = new TokenHandler<AnnotationFS>()
 			{
 				private String openChunk;
