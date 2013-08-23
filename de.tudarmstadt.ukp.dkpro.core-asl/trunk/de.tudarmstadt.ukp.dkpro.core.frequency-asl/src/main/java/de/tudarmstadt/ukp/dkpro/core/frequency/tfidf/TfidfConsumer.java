@@ -34,10 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
  * This consumer builds a {@link DfModel}. It collects the df (document frequency) counts for the
  * processed collection. The counts are serialized as a {@link DfModel}-object.
  * 
- * Term frequency counts are not stored, as they can be computed online by {@link TfdfModel_Impl}.
- * 
  * @author zesch, n_erbs, parzonka
- * 
  */
 public class TfidfConsumer
     extends JCasAnnotator_ImplBase

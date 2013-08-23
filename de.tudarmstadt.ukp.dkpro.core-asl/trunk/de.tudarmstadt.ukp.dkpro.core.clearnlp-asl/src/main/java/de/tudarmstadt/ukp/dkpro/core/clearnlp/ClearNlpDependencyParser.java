@@ -32,6 +32,7 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -171,7 +172,7 @@ public class ClearNlpDependencyParser
     }
 
     /**
-     * @see org.apache.uima.AnalysisComponent.AnalysisComponent#collectionProcessComplete()
+     * @see AnalysisComponent#collectionProcessComplete()
      */
     @Override
     public void collectionProcessComplete()

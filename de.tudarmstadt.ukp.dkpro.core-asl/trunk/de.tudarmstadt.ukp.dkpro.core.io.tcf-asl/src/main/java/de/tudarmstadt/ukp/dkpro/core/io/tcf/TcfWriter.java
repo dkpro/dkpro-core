@@ -60,7 +60,7 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
 
 /**
  * Writer for the WebLicht TCF format.
- *
+ * 
  * @author Seid Muhie Yimam
  * @author Richard Eckart de Castilho
  */
@@ -116,9 +116,6 @@ public class TcfWriter
 
     /**
      * Create TCF File from scratch
-     *
-     * @param aJcas
-     * @return
      */
     public TextCorpusStored casToTcfWriter(JCas aJcas)
     {
@@ -136,15 +133,12 @@ public class TcfWriter
 
     /**
      * Merge annotations from CAS into an existing TCF file.
-     *
+     * 
      * @param aIs
      *            the TCF file with an existing annotation layers
      * @param aJcas
      *            an annotated CAS object
      * @return the merged annotation layer in the TCF format
-     * @throws ResourceInitializationException
-     * @throws AnalysisEngineProcessException
-     * @throws WLFormatException
      */
     public TextCorpusStored casToTcfWriter(InputStream aIs, JCas aJcas)
         throws ResourceInitializationException, AnalysisEngineProcessException, WLFormatException
@@ -158,11 +152,7 @@ public class TcfWriter
 
     /**
      * Add CAS annotations into TCF annotation layers
-     *
-     * @param aJCas
-     * @param aTextCorpus
      */
-    @SuppressWarnings("unchecked")
     public static void writeToTcf(JCas aJCas, TextCorpusStored aTextCorpus)
     {
         Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> tokensBeginPositionMap = new HashMap<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token>();
@@ -320,16 +310,14 @@ public class TcfWriter
     /**
      * in CAS, it is stored using the start/end offsets, in TCF, we should store separate tokens
      * with a token id for each one
-     *
-     * @param link
+     * 
+     * @param aLink
      *            the coreference link in CAS annotation
      * @param tokensBeginPositionMap
      *            a Map which store the begin positions of all tokens. This is used to get separate
      *            tokens, the only way to know multiple tokens in a link strat/end offset
      *            annotations.
-     * @return
      */
-
     private static List<eu.clarin.weblicht.wlfxb.tc.api.Token> getListOfTokens(JCas aJcas,
             CoreferenceLink aLink,
             Map<Integer, eu.clarin.weblicht.wlfxb.tc.api.Token> tokensBeginPositionMap)

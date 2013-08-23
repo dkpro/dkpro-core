@@ -111,10 +111,7 @@ public class TcfReader
     /**
      * This method builds texts from the {@link eu.clarin.weblicht.wlfxb.tc.api.Token} annotation
      * layer. The getText Method of {@link TextCorpusStreamed} is not used as some tokens, such as
-     * special characters represented differently than in the original Text.
-     * 
-     * @param aJCas
-     * @param aCorpusData
+     * special characters represented differently than in the original text.
      */
     private void convertText(JCas aJCas, TextCorpusStored aCorpusData)
     {
@@ -131,8 +128,6 @@ public class TcfReader
     /**
      * Convert TCF Tokens Layer to CAS Token Annotation.
      * 
-     * @param aJCas
-     * @param aCorpusData
      * @return returns {@code Map} of (token_id, Token), for later references
      */
     private Map<String, Token> convertTokens(JCas aJCas, TextCorpusStored aCorpusData)
@@ -333,10 +328,6 @@ public class TcfReader
      * <b>targets</b> alongside the <b>type</b> and <b>relations in different maps</b> <br>
      * Second, an iteration is made through all the maps and the {@link CoreferenceChain} and
      * {@link CoreferenceLink} annotations are constructed.
-     * 
-     * @param aJCas
-     * @param aCorpusData
-     * @param aTokens
      */
     private void convertCoreference(JCas aJCas, TextCorpusStored aCorpusData,
             Map<String, Token> aTokens)
