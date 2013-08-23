@@ -237,7 +237,6 @@ public class RelAnnisWriter
      * Recursively traverse the constituent structure, writing<br>
      * component.tab, edge_annotation.tab, node.tab, node_annotation.tab, rank.tab
      *
-     * @param jcas
      * @param currAnno
      *            the parent annotation from where to start the traversal
      * @param parent_rankPre

@@ -124,8 +124,6 @@ public class MstParser
     /**
      * Initializes the MSTParser and creates a ModelResourceProvicer
      *
-     * @param jcas
-     *            The JCas containing the textual input
      * @throws ResourceInitializationException
      *             Cannot be initialized
      */
