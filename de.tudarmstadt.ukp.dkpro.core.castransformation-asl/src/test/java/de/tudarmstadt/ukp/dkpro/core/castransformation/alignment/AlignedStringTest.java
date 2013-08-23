@@ -442,10 +442,6 @@ class AlignedStringTest
 	 *
 	 * Anchors are always in UL. They are referenced from the ObliqueSegments
 	 * in AD.
-	 *
-	 * @param _start
-	 * @param _end
-	 * @return
 	 */
 	@Test
 	public
