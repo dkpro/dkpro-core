@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.resource.ResourceAccessException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 
@@ -103,48 +104,53 @@ public class UbySemanticFieldResource
 
 
 	@Override
-	public String getSemanticTag(Token token) throws Exception {
+	public String getSemanticTag(Token token) throws ResourceAccessException {
 				
 		Sense sense = null;
 		String semanticField = "";
 		List<LexicalEntry> lexicalEntries;
 		
-		// the documentLanguage is specified as ISO 2-letter code (following the DKPro-Core convention)
-		if (token.getCAS().getDocumentLanguage().equals("en")) {
-			lexicon = uby.getLexiconByName("WordNet");
-		} else if (token.getCAS().getDocumentLanguage().equals("de")) {
-			lexicon = uby.getLexiconByName("GermaNet");
-		}			
-				
-		// does the token have a POS which has relevant information in the lexicon?	
-		if (corePosToUbyPos(token.getPos().getPosValue()).length == 0) {
-			return "UNKNOWN"; 
-		// does the lexicon contain the lemma?
-		} else if (uby.getLexicalEntries(token.getLemma().getValue(),null,lexicon).isEmpty()) { 
-			return "UNKNOWN"; 
-		} else { // the lexicon contains the lemma
-			for (EPartOfSpeech pos : corePosToUbyPos(token.getPos().getPosValue())) {
-				
-				if (!uby.getLexicalEntries(token.getLemma().getValue(),pos,lexicon).isEmpty()) { // the lemma is listed in the lexicon with the given POS
-					lexicalEntries = uby.getLexicalEntries(token.getLemma().getValue(),pos,lexicon);
-					if (lexicon.getName().equals("WordNet")) {
-						
-						// WordNet contains MFS information, since the senses are ordered by decreasing frequency in SemCor: 
-						// in UBY, this is the sense with index = 1
-						sense = getMostFrequentSense(lexicalEntries);
-					} else if (lexicon.getName().equals("GermaNet")) {
-						// GermaNet does not contain MFS information; the first sense is used
-						sense = lexicalEntries.get(0).getSenses().get(0);
-					}		
+		try {
+			// the documentLanguage is specified as ISO 2-letter code (following the DKPro-Core convention)
+			if (token.getCAS().getDocumentLanguage().equals("en")) {
+				lexicon = uby.getLexiconByName("WordNet");
+			} else if (token.getCAS().getDocumentLanguage().equals("de")) {
+				lexicon = uby.getLexiconByName("GermaNet");
+			}			
+					
+			// does the token have a POS which has relevant information in the lexicon?	
+			if (corePosToUbyPos(token.getPos().getPosValue()).length == 0) {
+				return "UNKNOWN"; 
+			// does the lexicon contain the lemma?
+			} else if (uby.getLexicalEntries(token.getLemma().getValue(),null,lexicon).isEmpty()) { 
+				return "UNKNOWN"; 
+			} else { // the lexicon contains the lemma
+				for (EPartOfSpeech pos : corePosToUbyPos(token.getPos().getPosValue())) {
+					
+					if (!uby.getLexicalEntries(token.getLemma().getValue(),pos,lexicon).isEmpty()) { // the lemma is listed in the lexicon with the given POS
+						lexicalEntries = uby.getLexicalEntries(token.getLemma().getValue(),pos,lexicon);
+						if (lexicon.getName().equals("WordNet")) {
+							
+							// WordNet contains MFS information, since the senses are ordered by decreasing frequency in SemCor: 
+							// in UBY, this is the sense with index = 1
+							sense = getMostFrequentSense(lexicalEntries);
+						} else if (lexicon.getName().equals("GermaNet")) {
+							// GermaNet does not contain MFS information; the first sense is used
+							sense = lexicalEntries.get(0).getSenses().get(0);
+						}		
+					}
+				}
+				semanticField = getSemanticField(sense);		
+				if (semanticField == null) {
+					return "UNKNOWN"; 
+				} else {
+					return semanticField;
 				}
 			}
-			semanticField = getSemanticField(sense);		
-			if (semanticField == null) {
-				return "UNKNOWN"; 
-			} else {
-				return semanticField;
-			}
+		} catch (Exception e) {
+	        throw new ResourceAccessException(e);
 		}
+
 				
 	}
 

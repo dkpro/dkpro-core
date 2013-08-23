@@ -26,6 +26,7 @@ import java.util.Map;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.resource.ResourceAccessException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 
@@ -78,13 +79,17 @@ public class SemanticTagResource
 
 
 	@Override
-	public String getSemanticTag(Token token) throws Exception {
+	public String getSemanticTag(Token token) throws ResourceAccessException {
 
-		if (keySemanticTagMap.containsKey(token.getLemma().getValue())) {
-			return keySemanticTagMap.get(token.getLemma().getValue());
-		} else {
-			return "UNKNOWN"; 
-		}
+		try {
+			if (keySemanticTagMap.containsKey(token.getLemma().getValue())) {
+				return keySemanticTagMap.get(token.getLemma().getValue());
+			} else {
+				return "UNKNOWN"; 
+			}
+		} catch (Exception e) {
+            throw new ResourceAccessException(e);
+        }
 	}
 	
 	
