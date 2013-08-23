@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
+import org.apache.uima.resource.ResourceAccessException;
+
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public interface SemanticTagProvider {
@@ -38,5 +40,5 @@ public interface SemanticTagProvider {
      *            
      * @return semantic tag of the token. Returns "UNKNOWN" if the (lemma of the) token does not exist in the resource.
      */
-	public String getSemanticTag(Token token) throws Exception;
+	public String getSemanticTag(Token token) throws ResourceAccessException ;
 }

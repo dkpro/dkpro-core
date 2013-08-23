@@ -26,6 +26,7 @@ import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceAccessException;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN;
@@ -76,7 +77,7 @@ public class NounSemanticFieldAnnotator extends JCasAnnotator_ImplBase
 					SemanticField semanticFieldAnnotation = new SemanticField(aJCas, token.getBegin(), token.getEnd());
 					semanticFieldAnnotation.setValue(semanticField);
 					semanticFieldAnnotation.addToIndexes();
-				} catch (Exception e) {
+				} catch (ResourceAccessException e) {
 					throw new AnalysisEngineProcessException(e);
 				}
 
