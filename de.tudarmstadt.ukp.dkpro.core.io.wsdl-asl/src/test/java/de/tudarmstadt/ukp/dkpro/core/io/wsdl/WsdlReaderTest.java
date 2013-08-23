@@ -17,8 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.wsdl;
 
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATH;
-import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.PARAM_PATTERNS;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -36,45 +34,44 @@ import org.junit.rules.TemporaryFolder;
 
 public class WsdlReaderTest
 {
-	@Rule
-	public TemporaryFolder workdir = new TemporaryFolder();
+    @Rule
+    public TemporaryFolder workdir = new TemporaryFolder();
 
-	@Test
-	public void testServices()
-		throws Exception
-	{
-		File tmpFile = workdir.newFile("services-new.txt");
+    @Test
+    public void testServices()
+        throws Exception
+    {
+        File tmpFile = workdir.newFile("services-new.txt");
 
-		CollectionReaderDescription reader = createReaderDescription(
-		        WsdlReader.class,
-				PARAM_PATH, "src/test/resources/wsdl",
-				PARAM_PATTERNS, "[+]**/*.wsdl" );
-		AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
-		SimplePipeline.runPipeline(reader, writer);
-
-		String reference = readFileToString(new File("src/test/resources/reference/services-new.txt")).trim();
-		String output = readFileToString(tmpFile).trim();
-		assertEquals(reference, output);
-	}
-
-	@Test
-	public void testOperations()
-		throws Exception
-	{
-		File tmpFile = workdir.newFile("operations-new.txt");
-
-        CollectionReaderDescription reader = createReaderDescription(
-		        WsdlReader.class,
-				WsdlReader.PARAM_OPERATION_AS_DOCID, true,
-				PARAM_PATH, "classpath:/wsdl",
-				PARAM_PATTERNS, "[+]**/*.wsdl");
+        CollectionReaderDescription reader = createReaderDescription(WsdlReader.class,
+                WsdlReader.PARAM_SOURCE_LOCATION, "src/test/resources/wsdl",
+                WsdlReader.PARAM_PATTERNS, "[+]**/*.wsdl");
         AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
-		SimplePipeline.runPipeline(reader, writer);
+                CasDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
+        SimplePipeline.runPipeline(reader, writer);
 
-		String reference = readFileToString(new File("src/test/resources/reference/operations-new.txt")).trim();
-		String output = readFileToString(tmpFile).trim();
-		assertEquals(reference, output);
-	}
+        String reference = readFileToString(
+                new File("src/test/resources/reference/services-new.txt")).trim();
+        String output = readFileToString(tmpFile).trim();
+        assertEquals(reference, output);
+    }
+
+    @Test
+    public void testOperations()
+        throws Exception
+    {
+        File tmpFile = workdir.newFile("operations-new.txt");
+
+        CollectionReaderDescription reader = createReaderDescription(WsdlReader.class,
+                WsdlReader.PARAM_OPERATION_AS_DOCID, true, WsdlReader.PARAM_SOURCE_LOCATION,
+                "classpath:/wsdl", WsdlReader.PARAM_PATTERNS, "[+]**/*.wsdl");
+        AnalysisEngineDescription writer = createEngineDescription(CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, tmpFile.getPath());
+        SimplePipeline.runPipeline(reader, writer);
+
+        String reference = readFileToString(
+                new File("src/test/resources/reference/operations-new.txt")).trim();
+        String output = readFileToString(tmpFile).trim();
+        assertEquals(reference, output);
+    }
 }
