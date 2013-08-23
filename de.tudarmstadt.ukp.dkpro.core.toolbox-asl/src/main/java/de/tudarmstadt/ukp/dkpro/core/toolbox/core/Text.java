@@ -36,7 +36,6 @@ public class Text
     
     /**
      * Initializes a document with the provided sentences.
-     * @param tokens A list of tokens.
      */
     public Text(List<Sentence> sentences) {
         super();
