@@ -31,87 +31,71 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * @author Richard Eckart de Castilho
  */
 
-@TypeCapability(
-        outputs={"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"}
-)
-
-public
-class BreakIteratorSegmenter
-extends SegmenterBase
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
+public class BreakIteratorSegmenter
+    extends SegmenterBase
 {
-	/**
-	 * Per default the Java {@link BreakIterator} does not split off contractions like
-	 * {@code John's} into two tokens. When this parameter is enabled, a non-default token split
-	 * is generated when an apostrophe ({@code '}) is encountered.
-	 */
-	public static final String PARAM_SPLIT_AT_APOSTROPHE = "splitAtApostrophe";
-	@ConfigurationParameter(name=PARAM_SPLIT_AT_APOSTROPHE, mandatory=true, defaultValue="false")
-	private boolean splitAtApostrophe;
+    /**
+     * Per default the Java {@link BreakIterator} does not split off contractions like
+     * {@code John's} into two tokens. When this parameter is enabled, a non-default token split is
+     * generated when an apostrophe ({@code '}) is encountered.
+     */
+    public static final String PARAM_SPLIT_AT_APOSTROPHE = "splitAtApostrophe";
+    @ConfigurationParameter(name = PARAM_SPLIT_AT_APOSTROPHE, mandatory = true, defaultValue = "false")
+    private boolean splitAtApostrophe;
 
-	@Override
-	protected
-	void process(
-			JCas aJCas,
-			String text,
-			int zoneBegin)
-	throws AnalysisEngineProcessException
-	{
-		BreakIterator bi = BreakIterator.getSentenceInstance(getLocale(aJCas));
-		bi.setText(text);
-		int last = bi.first() + zoneBegin;
-		int cur = bi.next();
-		while (cur != BreakIterator.DONE) {
-			cur += zoneBegin;
-			if (isCreateSentences()) {
-				Annotation segment = createSentence(aJCas, last, cur);
-				if (segment != null) {
-					processSentence(aJCas, segment.getCoveredText(), segment.getBegin());
-				}
-			}
-			else {
-				int[] span = new int[] { last, cur };
-				trim(aJCas.getDocumentText(), span);
-				processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]), span[0]);
-			}
-			last = cur;
-			cur = bi.next();
-		}
-	}
+    @Override
+    protected void process(JCas aJCas, String text, int zoneBegin)
+        throws AnalysisEngineProcessException
+    {
+        BreakIterator bi = BreakIterator.getSentenceInstance(getLocale(aJCas));
+        bi.setText(text);
+        int last = bi.first() + zoneBegin;
+        int cur = bi.next();
+        while (cur != BreakIterator.DONE) {
+            cur += zoneBegin;
+            if (isCreateSentences()) {
+                Annotation segment = createSentence(aJCas, last, cur);
+                if (segment != null) {
+                    processSentence(aJCas, segment.getCoveredText(), segment.getBegin());
+                }
+            }
+            else {
+                int[] span = new int[] { last, cur };
+                trim(aJCas.getDocumentText(), span);
+                processSentence(aJCas, aJCas.getDocumentText().substring(span[0], span[1]), span[0]);
+            }
+            last = cur;
+            cur = bi.next();
+        }
+    }
 
-	/**
-	 * Process the sentence to create tokens.
-	 *
-	 * @param aJCas
-	 * @param text
-	 * @param zoneBegin
-	 */
-	private
-	void processSentence(
-			JCas aJCas,
-			String text,
-			int zoneBegin)
-	{
-		BreakIterator bi = BreakIterator.getWordInstance(getLocale(aJCas));
-		bi.setText(text);
-		int last = bi.first() + zoneBegin;
-		int cur = bi.next();
-		while (cur != BreakIterator.DONE) {
-			cur += zoneBegin;
-			Annotation token = createToken(aJCas, last, cur);
-			if (token != null) {
-				if (splitAtApostrophe) {
-					int i = token.getCoveredText().indexOf("'");
-					if (i > 0) {
-						i += token.getBegin();
-						createToken(aJCas, i, token.getEnd());
-						token.setEnd(i);
-					}
-				}
-			}
+    /**
+     * Process the sentence to create tokens.
+     */
+    private void processSentence(JCas aJCas, String text, int zoneBegin)
+    {
+        BreakIterator bi = BreakIterator.getWordInstance(getLocale(aJCas));
+        bi.setText(text);
+        int last = bi.first() + zoneBegin;
+        int cur = bi.next();
+        while (cur != BreakIterator.DONE) {
+            cur += zoneBegin;
+            Annotation token = createToken(aJCas, last, cur);
+            if (token != null) {
+                if (splitAtApostrophe) {
+                    int i = token.getCoveredText().indexOf("'");
+                    if (i > 0) {
+                        i += token.getBegin();
+                        createToken(aJCas, i, token.getEnd());
+                        token.setEnd(i);
+                    }
+                }
+            }
 
-			last = cur;
-			cur = bi.next();
-		}
-	}
+            last = cur;
+            cur = bi.next();
+        }
+    }
 }
