@@ -45,13 +45,11 @@ import bak.pcj.map.ObjectKeyLongOpenHashMap;
  * can be used as follows:
  * 
  * <p><blockquote><pre>
- * {@code
  * FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
  * for (String word : "foo bar baz foo".split(" ")) {
  *     fd.inc(word);
  * }
  * System.out.println(fd.getCount("foo"));
- * }
  * </pre></blockquote>
  * 
  * The last call to {@link FrequencyDistribution#getCount} will yield 2, because the
