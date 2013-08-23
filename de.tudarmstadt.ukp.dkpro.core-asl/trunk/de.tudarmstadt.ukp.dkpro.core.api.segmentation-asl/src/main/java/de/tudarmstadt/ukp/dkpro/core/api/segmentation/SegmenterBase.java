@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.api.segmentation;
 import static org.apache.uima.fit.util.CasUtil.getType;
 import static org.apache.uima.fit.util.CasUtil.select;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.SortedSet;
@@ -87,7 +86,7 @@ extends JCasAnnotator_ImplBase
 	@ConfigurationParameter(name=PARAM_CREATE_SENTENCES, mandatory=true, defaultValue="true")
     private boolean createSentences;
 
-	private int sentenceCount;
+	//private int sentenceCount;
 	private int tokenCount;
 
     public boolean isStrictZoning()
@@ -114,7 +113,7 @@ extends JCasAnnotator_ImplBase
 	public void process(JCas jcas)
 		throws AnalysisEngineProcessException
     {
-    	sentenceCount = 0;
+    	//sentenceCount = 0;
     	tokenCount = 0;
 
 		String text = jcas.getDocumentText();
@@ -214,7 +213,7 @@ extends JCasAnnotator_ImplBase
 		if (!isEmpty(span[0], span[1]) && isCreateSentences()) {
 			Sentence seg = new Sentence(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
-			sentenceCount++;
+			//sentenceCount++;
 			tokenCount = 0;
 			return seg;
 		}
@@ -253,10 +252,6 @@ extends JCasAnnotator_ImplBase
 
 	/**
 	 * Remove trailing or leading whitespace from the annotation.
-	 *
-	 * @param a
-	 * @return True if the length of the trimmed annotation is > 0
-	 * @throws IOException
 	 */
 	public void trim(String aText, int[] aSpan)
 	{
