@@ -90,11 +90,6 @@ public class StanfordAnnotator
         posMappingProvider = aPosMappingProvider;
     }
 
-    /**
-     * @param tokens
-     *            the documentText of the CAS as <code>Token</code> annotations
-     * @throws CASException
-     */
     public StanfordAnnotator(TreeWithTokens aTokenTree)
         throws CASException
     {
@@ -118,7 +113,6 @@ public class StanfordAnnotator
      *
      * @param aNode
      *            the source tree
-     * @param aParentFS
      * @param aCreatePos
      *            sets whether to create or not to create POS tags
      * @param aCreateLemmas
@@ -230,15 +224,12 @@ public class StanfordAnnotator
     /**
      * Creates a tag-annotation over a constituent
      *
-     * @param jCas
-     *            the CAS
      * @param aBegin
      *            start-index of the constituent span
      * @param aEnd
      *            end-index of the constituent span
      * @param aTag
      *            the tag value
-     * @return the annotation
      */
     public void createTagAnnotation(int aBegin, int aEnd, String aTag)
     {
@@ -251,8 +242,6 @@ public class StanfordAnnotator
      * Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
      * created here.
      *
-     * @param jCas
-     *            the CAS
      * @param aBegin
      *            start-index of the constituent span
      * @param aEnd
@@ -288,8 +277,6 @@ public class StanfordAnnotator
      * Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
      * created here.
      *
-     * @param jCas
-     *            the CAS
      * @param aBegin
      *            start-index of the constituent span
      * @param aEnd
@@ -315,14 +302,6 @@ public class StanfordAnnotator
     /**
      * Writes dependency annotations to the JCas
      *
-     * @param jCas
-     *            the CAS
-     * @param aBegin
-     *            start-index of the constituent span
-     * @param aEnd
-     *            end-index of the constituent span
-     * @param aGramRel
-     *            the dependency-type
      * @param aGovernor
      *            the governing-word
      * @param aDependent
@@ -353,9 +332,6 @@ public class StanfordAnnotator
 
     /**
      * Creates annotation with Penn Treebank style representations of the syntax tree
-     *
-     * @param aBegin
-     * @param aEnd
      */
     public void createPennTreeAnnotation(int aBegin, int aEnd)
     {

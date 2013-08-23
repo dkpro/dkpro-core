@@ -168,7 +168,7 @@ public class StanfordParser
 
     /**
      * Sets whether to use or not to use already existing POS tags from another annotator for the
-     * parsing process. These should be mapped to the PTB tagset with {@link PosMapper} before.<br/>
+     * parsing process.<br/>
      * Default: {@code false}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -285,7 +285,6 @@ public class StanfordParser
      *
      * @param aJCas
      *            the {@link JCas} to process
-     * @throws AnalysisEngineProcessException
      * @see org.apache.uima.analysis_component.JCasAnnotator_ImplBase#process(org.apache.uima.jcas.JCas)
      */
     @Override

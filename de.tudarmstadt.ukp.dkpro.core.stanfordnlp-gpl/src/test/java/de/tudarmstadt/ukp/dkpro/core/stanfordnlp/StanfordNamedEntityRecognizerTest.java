@@ -97,10 +97,7 @@ public class StanfordNamedEntityRecognizerTest
 	 *
 	 * @param testDocument
 	 *            the document to be ne-tagged
-	 * @param classifier
-	 *            the NER-classifier that should be used
 	 * @return an iterator over all created NamedEntity-annotations
-	 * @throws Exception
 	 */
 	private Iterator<NamedEntity> runNER(String testDocument, String language)
 		throws Exception

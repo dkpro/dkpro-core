@@ -279,11 +279,6 @@ public class BerkeleyParser
      *
      * @param aNode
      *            the source tree
-     * @param aParentFS
-     * @param aCreatePos
-     *            sets whether to create or not to create POS tags
-     * @param aCreateLemmas
-     *            sets whether to create or not to create Lemmas
      * @return the child-structure (needed for recursive call only)
      */
     private Annotation createConstituentAnnotationFromTree(JCas aJCas, Tree<String> aNode,

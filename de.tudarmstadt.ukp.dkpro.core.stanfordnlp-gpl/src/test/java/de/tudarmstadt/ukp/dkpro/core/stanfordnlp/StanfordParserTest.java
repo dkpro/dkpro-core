@@ -47,7 +47,6 @@ import edu.stanford.nlp.trees.Tree;
  * @author Niklas Jakob
  * @author Richard Eckart de Castilho
  */
-@SuppressWarnings("unused")
 public class StanfordParserTest
 {
     static final String documentEnglish = "We need a very complicated example sentence, which "
@@ -481,8 +480,6 @@ public class StanfordParserTest
      * This tests whether a complete syntax tree can be recreated from the annotations without any
      * loss. Consequently, all links to children should be correct. (This makes no assertions about
      * the parent-links, because they are not used for the recreation)
-     *
-     * @throws Exception
      */
     @Test
     public void testEnglishSyntaxTreeReconstruction()
