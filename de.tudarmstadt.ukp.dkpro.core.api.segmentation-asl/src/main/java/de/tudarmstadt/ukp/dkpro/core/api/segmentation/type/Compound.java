@@ -106,120 +106,116 @@ public class Compound extends Annotation {
 		jcasType.ll_cas.ll_setRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i, jcasType.ll_cas.ll_getFSRef(v));}
 
 
-	/**
-	 *
-	 * Enum for all possible split levels for decompounding
-	 * @author erbs
-	 *
-	 */
-	public enum CompoundSplitLevel {NONE, ALL, LOWEST, HIGHEST};
+    /**
+     * 
+     * Enum for all possible split levels for decompounding
+     * 
+     * @author erbs
+     */
+    public enum CompoundSplitLevel
+    {
+        NONE, ALL, LOWEST, HIGHEST
+    };
 
+    /**
+     * 
+     * Returns the splits from each leave from the split tree, excluding the linking morphemes
+     * 
+     * @return An array with the splits from each leave from the split tree.
+     */
 
-	/**
-	 *
-	 * Returns the splits from each leave from the split tree, excluding the linking morphemes
-	 *
-	 * @param aCompound
-	 *            Compound containing the splits
-	 * @return An array with the splits from each leave from the split tree.
-	 *
-	 * */
+    public Split[] getSplitsWithoutMorpheme(CompoundSplitLevel splitLevel)
+    {
+        List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), false, splitLevel);
+        return splits.toArray(new Split[splits.size()]);
+    }
 
-	public Split[] getSplitsWithoutMorpheme(CompoundSplitLevel splitLevel)
-	{
-		List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), false, splitLevel);
-		return splits.toArray(new Split[splits.size()]);
-	}
+    /**
+     * 
+     * Returns the splits from each leave from the split tree, including the linking morphemes
+     * 
+     * @return An array with the splits from each leave from the split tree.
+     * 
+     */
 
-	/**
-	 *
-	 * Returns the splits from each leave from the split tree, including the linking morphemes
-	 *
-	 * @param aCompound
-	 *            Compound containing the splits
-	 * @return An array with the splits from each leave from the split tree.
-	 *
-	 * */
+    public Split[] getSplitsWithMorpheme(CompoundSplitLevel splitLevel)
+    {
+        final List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), true, splitLevel);
+        return splits.toArray(new Split[splits.size()]);
+    }
 
-	public Split[] getSplitsWithMorpheme(CompoundSplitLevel splitLevel)
-	{
-		final List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), true, splitLevel);
-		return splits.toArray(new Split[splits.size()]);
-	}
+    /**
+     * 
+     * Returns a list of the fragments present in the leaves from the split tree stored in the
+     * splits array.
+     * 
+     * @param splits
+     *            Array containing the split tree
+     * @param includeMorpheme
+     *            Indicates whether or not the linking morphemes should be included
+     * @param splitLevel
+     *            The level of leaves that should be returned
+     * @return A list of all splits on a level
+     */
+    private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme,
+            CompoundSplitLevel splitLevel)
+    {
+        List<Split> splitList = new ArrayList<Split>();
 
-	/**
-	 *
-	 * Returns a list of the fragments present in the leaves from the split tree stored in
-	 * the splits array.
-	 *
-	 * @param splits
-	 *            Array containing the split tree
-	 * @param withMorpheme
-	 *            Indicates whether or not the linking morphemes should be included
-	 * @param splitLevel
-	 *            The level of leaves that should be returned
-	 * @return
-	 *            A list of all splits on a level
-	 */
-	private List<Split> getSplits(final Split[] splits, final boolean includeMorpheme, CompoundSplitLevel splitLevel)
-	{
-		List<Split> splitList = new ArrayList<Split>();
+        switch (splitLevel) {
 
-		switch (splitLevel){
+        case ALL:
+            for (Split split : splits) {
+                if (includeMorpheme || !(split instanceof LinkingMorpheme)) {
+                    splitList.add(split);
+                }
+                if (split.getSplits() != null) {
+                    splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()),
+                            includeMorpheme, splitLevel));
+                }
+            }
+            return splitList;
 
-		case ALL:
-		for(Split split : splits){
-			if(includeMorpheme || !(split instanceof LinkingMorpheme)){
-				splitList.add(split);
-			}
-			if(split.getSplits() != null){
-				splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()), includeMorpheme, splitLevel));
-			}
-		}
-		return splitList;
+        case LOWEST:
+            for (Split split : splits) {
+                if ((includeMorpheme || !(split instanceof LinkingMorpheme))
+                        && (split.getSplits() == null || split.getSplits().size() == 0)) {
+                    splitList.add(split);
+                }
+                if (split.getSplits() != null) {
+                    splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()),
+                            includeMorpheme, splitLevel));
+                }
 
-		case LOWEST:
-		for(Split split : splits){
-			if((includeMorpheme || !(split instanceof LinkingMorpheme)) && (split.getSplits() == null || split.getSplits().size() == 0)){
-				splitList.add(split);
-			}
-			if(split.getSplits() != null){
-				splitList.addAll(getSplits(createSplitsFromFSArray(split.getSplits()), includeMorpheme, splitLevel));
-			}
+            }
+            return splitList;
 
-		}
-		return splitList;
+        case HIGHEST:
+            for (Split split : splits) {
+                if (includeMorpheme || !(split instanceof LinkingMorpheme)) {
+                    splitList.add(split);
+                }
+            }
+            return splitList;
 
-		case HIGHEST:
-		for(Split split : splits){
-			if(includeMorpheme || !(split instanceof LinkingMorpheme)){
-				splitList.add(split);
-			}
-		}
-		return splitList;
+        default:
+            return splitList;
+        }
+    }
 
-		default:
-			return splitList;
-		}
-
-	}
-
-	/**
-	 *
-	 * Create a Split[] array from a FSArray
-	 *
-	 * @param splitsFSArray
-	 *            FSArray containing the splits
-	 * @return The array containing the splits from FSArray
-	 *
-	 * */
-
-	private Split[] createSplitsFromFSArray(final FSArray splitsFSArray)
-	{
-		final Collection<Split> splitsCollection = FSCollectionFactory.create(splitsFSArray,
-				Split.class);
-		return splitsCollection.toArray(new Split[splitsCollection.size()]);
-	}
-
+    /**
+     * 
+     * Create a Split[] array from a FSArray
+     * 
+     * @param splitsFSArray
+     *            FSArray containing the splits
+     * @return The array containing the splits from FSArray
+     */
+    private Split[] createSplitsFromFSArray(final FSArray splitsFSArray)
+    {
+        final Collection<Split> splitsCollection = FSCollectionFactory.create(splitsFSArray,
+                Split.class);
+        return splitsCollection.toArray(new Split[splitsCollection.size()]);
+    }
 }
 
