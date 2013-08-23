@@ -40,7 +40,7 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
  * Spelling corrector based on Norvig's algorithm.
  *
  * @author Richard Eckart de Castilho
- * @see http://norvig.com/spell-correct.html
+ * @see <a href="http://norvig.com/spell-correct.html">Norvig's algorithm</a>
  */
 public class NorvigSpellingAlgorithm
 {
@@ -98,8 +98,6 @@ public class NorvigSpellingAlgorithm
 	/**
 	 * Read words from the given URL and count their occurrences.
 	 *
-	 * @param aReader
-	 *            the reader.
 	 * @param aEncoding
 	 *            the encoding.
 	 * @throws IOException
@@ -161,7 +159,7 @@ public class NorvigSpellingAlgorithm
 	 * better alternative is found, the word is returned verbatim. For performance reasons
 	 * corrections are cached.
 	 *
-	 * @param word
+	 * @param aWord
 	 *            the word to correct (has to be lower-case)
 	 * @return the possible correction.
 	 */

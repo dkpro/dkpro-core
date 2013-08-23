@@ -47,8 +47,6 @@ public class MstParserTest
 	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
 	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
 	 * dependency, begin of the head, end of the head
-	 *
-	 * @throws Exception
 	 */
 	@Test
 	public void testEnglishDefault()
@@ -94,8 +92,6 @@ public class MstParserTest
      * This method runs the MSTParser for an example sentence and checks if it returns the correct
      * annotations. An annotation consists of: dependency type, begin of dependency, end of
      * dependency, begin of the head, end of the head
-     *
-     * @throws Exception
      */
     @Test
     public void testEnglishSample()
@@ -133,10 +129,6 @@ public class MstParserTest
 
 	/**
 	 * Generates a JCas from the input text and annotates it with dependencies.
-	 *
-	 * @param aText
-	 * @return jcas annotated with dependency relations
-	 * @throws Exception
 	 */
 	private JCas runTestEnglish(String aVariant, String aText)
 		throws Exception

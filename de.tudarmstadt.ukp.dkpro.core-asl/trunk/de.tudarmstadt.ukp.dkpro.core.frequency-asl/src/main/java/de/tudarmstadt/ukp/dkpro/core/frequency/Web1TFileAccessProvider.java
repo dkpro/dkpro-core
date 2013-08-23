@@ -22,28 +22,30 @@ import java.io.IOException;
 
 import com.googlecode.jweb1t.JWeb1TSearcher;
 
-
 public class Web1TFileAccessProvider
     extends Web1TProviderBase
 {
-    public Web1TFileAccessProvider(String ... indexFiles)
+    public Web1TFileAccessProvider(String... indexFiles)
         throws IOException
     {
         searcher = new JWeb1TSearcher(indexFiles);
         basePath = new File(indexFiles[0]).getParent();
     }
-    
+
     /**
      * Try to deduce the index files from the given path.
-     * @param indexPath The path in which the ngram index files are located.
-     * @param minN The minimum ngram length.
-     * @param maxN The maximum ngram length.
-     * @throws IOException
+     * 
+     * @param indexPath
+     *            The path in which the ngram index files are located.
+     * @param minN
+     *            The minimum ngram length.
+     * @param maxN
+     *            The maximum ngram length.
      */
     public Web1TFileAccessProvider(File indexPath, int minN, int maxN)
         throws IOException
     {
         searcher = new JWeb1TSearcher(indexPath, minN, maxN);
         basePath = indexPath.getAbsolutePath();
-    }    
+    }
 }

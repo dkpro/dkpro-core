@@ -24,87 +24,83 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfModel;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TermIterator;
 import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.TfidfUtils;
 
 /**
- * This consumer builds a {@link DfModel}. It collects the df (document
- * frequency) counts for the processed collection. The counts are serialized as
- * a {@link DfModel}-object.
- *
- * Term frequency counts are not stored, as they can be computed online by
- * {@link TfdfModel_Impl}.
- *
+ * This consumer builds a {@link DfModel}. It collects the df (document frequency) counts for the
+ * processed collection. The counts are serialized as a {@link DfModel}-object.
+ * 
+ * Term frequency counts are not stored, as they can be computed online by {@link TfdfModel_Impl}.
+ * 
  * @author zesch, n_erbs, parzonka
- *
+ * 
  */
 public class TfidfConsumer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
+    @Deprecated
+    public static final String PARAM_OUTPUT_PATH = ComponentParameters.PARAM_TARGET_LOCATION;
+    /**
+     * Specifies the path and filename where the model file is written.
+     */
+    public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
+    @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
+    private String outputPath;
 
-	/**
-	 * Specifies the path and filename where the model file is written.
-	 */
-	public static final String PARAM_OUTPUT_PATH = "OutputPath";
-	@ConfigurationParameter(name = PARAM_OUTPUT_PATH, mandatory = true)
-	private String outputPath;
+    /**
+     * If set to true, the whole text is handled in lower case.
+     */
+    public static final String PARAM_LOWERCASE = "lowercase";
+    @ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
+    private boolean lowercase;
 
-	/**
-	 * If set to true, the whole text is handled in lower case.
-	 */
-	public static final String PARAM_LOWERCASE = "ConvertToLowercase";
-	@ConfigurationParameter(name = PARAM_LOWERCASE, mandatory = true, defaultValue = "false")
-	private boolean convertToLowercase;
+    /**
+     * This annotator is type agnostic, so it is mandatory to specify the type of the working
+     * annotation and how to obtain the string representation with the feature path.
+     */
+    public static final String PARAM_FEATURE_PATH = "featurePath";
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true)
+    private String featurePath;
 
-	/**
-	 * This annotator is type agnostic, so it is mandatory to specify the type
-	 * of the working annotation and how to obtain the string representation
-	 * with the feature path.
-	 */
-	public static final String PARAM_FEATURE_PATH = "FeaturePath";
-	@ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true)
-	private String featurePath;
+    private DfStore dfStore;
 
-	private DfStore dfStore;
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
+        super.initialize(context);
+        dfStore = new DfStore(featurePath, lowercase);
+    }
 
-	@Override
-	public void initialize(UimaContext context)
-		throws ResourceInitializationException
-	{
-		super.initialize(context);
-		dfStore = new DfStore(featurePath, convertToLowercase);
-	}
+    @Override
+    public void process(JCas jcas)
+        throws AnalysisEngineProcessException
+    {
+        dfStore.registerNewDocument();
 
-	@Override
-	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
-	{
-
-		dfStore.registerNewDocument();
-
-		for (String term : TermIterator.create(jcas, featurePath,
-				convertToLowercase)) {
+        for (String term : TermIterator.create(jcas, featurePath, lowercase)) {
             dfStore.countTerm(term);
         }
 
-		dfStore.closeCurrentDocument();
-	}
+        dfStore.closeCurrentDocument();
+    }
 
-	/**
-	 * When this method is called by the framework, the dfModel is serialized.
-	 */
-	@Override
-	public void collectionProcessComplete()
-		throws AnalysisEngineProcessException
-	{
-
-		try {
-			TfidfUtils.writeDfModel(dfStore, outputPath);
-		}
-		catch (Exception e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+    /**
+     * When this method is called by the framework, the dfModel is serialized.
+     */
+    @Override
+    public void collectionProcessComplete()
+        throws AnalysisEngineProcessException
+    {
+        try {
+            TfidfUtils.writeDfModel(dfStore, outputPath);
+        }
+        catch (Exception e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 }
