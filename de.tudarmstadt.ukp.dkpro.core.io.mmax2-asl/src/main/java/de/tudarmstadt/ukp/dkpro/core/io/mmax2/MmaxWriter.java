@@ -301,9 +301,6 @@ public class MmaxWriter {
 
     /**
      * Copies a source folder/file to a target folder/file. Used to duplicate the template project and template files.
-     * @param source
-     * @param target
-     * @throws IOException
      */
     private void copy(File source, File target) throws IOException {
         if (source.isFile() && !target.exists()) {

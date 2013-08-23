@@ -87,7 +87,6 @@ public class ExternalSort {
 	 * 
 	 * @param file some flat  file
 	 * @param cmp string comparator 
-	 * @param maxtmpfiles
 	 * @return a list of temporary flat files
 	 */
 	public static List<File> sortInBatch(File file, Comparator<String> cmp, int maxtmpfiles) throws IOException {
@@ -140,14 +139,13 @@ public class ExternalSort {
 	
 	/**
 	 * This merges a bunch of temporary flat files 
-	 * @param files
-	 * @param output file
-         * @return The number of lines sorted. (P. Beaudoin)
+     * @return The number of lines sorted. (P. Beaudoin)
 	 */
 	public static int mergeSortedFiles(List<File> files, File outputfile, final Comparator<String> cmp) throws IOException {
 		PriorityQueue<BinaryFileBuffer> pq = new PriorityQueue<BinaryFileBuffer>(11, 
             new Comparator<BinaryFileBuffer>() {
-              public int compare(BinaryFileBuffer i, BinaryFileBuffer j) {
+              @Override
+            public int compare(BinaryFileBuffer i, BinaryFileBuffer j) {
                 return cmp.compare(i.peek(), j.peek());
               }
             }
@@ -203,7 +201,8 @@ public class ExternalSort {
 			return;
 		}
 		Comparator<String> comparator = new Comparator<String>() {
-			public int compare(String r1, String r2){
+			@Override
+            public int compare(String r1, String r2){
 				return r1.compareTo(r2);}};
 		List<File> l = sortInBatch(new File(inputfile), comparator, maxtmpfiles) ;
 		if(verbose) System.out.println("created "+l.size()+" tmp files");

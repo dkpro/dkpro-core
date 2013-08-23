@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.mmax2;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
@@ -172,18 +174,24 @@ public class MmaxAnnotationReader
 
 		String textFileContent = "";
 		String inputLine;
-		BufferedReader breader = new BufferedReader(new InputStreamReader(new FileInputStream(
-				matchingTextFile)));
-		while ((inputLine = breader.readLine()) != null) {
-			// if(inputLine.startsWith("## ")){
-			// continue;
-			// }else{
-			textFileContent += inputLine;
-			textFileContent += "\n";
-			// }
-		}
+        BufferedReader breader = null;
+        try {
+            breader = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(matchingTextFile)));
+            while ((inputLine = breader.readLine()) != null) {
+                // if(inputLine.startsWith("## ")){
+                // continue;
+                // }else{
+                textFileContent += inputLine;
+                textFileContent += "\n";
+                // }
+            }
+        }
+        finally {
+            closeQuietly(breader);
+        }
 		/**
-		 * * Load the discourse, put the raw text to be annotated in the Cas, do the DocumentMeta
+		 * Load the discourse, put the raw text to be annotated in the Cas, do the DocumentMeta
 		 * data annotation here***
 		 */
 		// System.out.println(mmaxFile.getAbsolutePath());
