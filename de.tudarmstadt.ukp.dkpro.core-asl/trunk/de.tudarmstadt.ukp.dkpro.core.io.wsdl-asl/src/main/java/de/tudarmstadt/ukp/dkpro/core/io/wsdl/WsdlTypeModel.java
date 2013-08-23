@@ -258,7 +258,8 @@ public class WsdlTypeModel
 
 				XPath xpAttrs = new DOMXPath("//xsd:attribute[@wsdl:arrayType]");
 				xpAttrs.setNamespaceContext(nsContext);
-				List<Element> result = xpAttrs.selectNodes(root);
+				@SuppressWarnings("unchecked")
+                List<Element> result = xpAttrs.selectNodes(root);
 
 				XPath xpType = new DOMXPath("ancestor::xsd:complexType/@name");
 				xpType.setNamespaceContext(nsContext);
