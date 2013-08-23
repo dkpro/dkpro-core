@@ -54,10 +54,6 @@ public class TazCorpus
     /**
      * @param workspace
      *            The DKPRO_HOME workspace
-     * @param corpus
-     *            The name of the corpus, i.e. the name of the folder in the
-     *            given workspace.
-     * @throws IOException 
      */
     public TazCorpus(String workspace) throws IOException
     {
