@@ -38,8 +38,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Split up existing tokens again at particular split-chars.
  * The prefix states whether the split chars should be added as separate {@link Token Tokens}.
- * If the {@link INCLUDE_PREFIX} precedes the split pattern, the pattern is included.
- * Consequently, patterns following the {@link EXCLUDE_PREFIX}, will not be added as a Token.
+ * If the {@link #INCLUDE_PREFIX} precedes the split pattern, the pattern is included.
+ * Consequently, patterns following the {@link #EXCLUDE_PREFIX}, will not be added as a Token.
  *
  * @author Richard Eckart de Castilho
  */
