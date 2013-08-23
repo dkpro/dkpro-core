@@ -30,42 +30,36 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class TestRunner
 {
-	/**
-	 * Run an analysis engine using a document. The document is automatically split into tokens
-	 * and sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
-	 *
-	 * @param aEngine
-	 * @param aLanguage
-	 * @param aDocument
-	 * @throws UIMAException
-	 * @see {@link TokenBuilder}
-	 */
-	public static JCas runTest(AnalysisEngineDescription aEngine, String aLanguage, String aDocument) throws UIMAException
-	{
-		return runTest(createEngine(aEngine), aLanguage, aDocument);
-	}
+    /**
+     * Run an analysis engine using a document. The document is automatically split into tokens and
+     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * 
+     * @see TokenBuilder
+     */
+    public static JCas runTest(AnalysisEngineDescription aEngine, String aLanguage, String aDocument)
+        throws UIMAException
+    {
+        return runTest(createEngine(aEngine), aLanguage, aDocument);
+    }
 
-	/**
-	 * Run an analysis engine using a document. The document is automatically split into tokens
-	 * and sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
-	 *
-	 * @param aEngine
-	 * @param aLanguage
-	 * @param aDocument
-	 * @throws UIMAException
-	 * @see {@link TokenBuilder}
-	 */
-	public static JCas runTest(AnalysisEngine aEngine, String aLanguage, String aDocument) throws UIMAException
-	{
-		JCas aJCas = aEngine.newJCas();
-		aJCas.setDocumentLanguage(aLanguage);
+    /**
+     * Run an analysis engine using a document. The document is automatically split into tokens and
+     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * 
+     * @see TokenBuilder
+     */
+    public static JCas runTest(AnalysisEngine aEngine, String aLanguage, String aDocument)
+        throws UIMAException
+    {
+        JCas aJCas = aEngine.newJCas();
+        aJCas.setDocumentLanguage(aLanguage);
 
-		TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
-				Sentence.class);
-		tb.buildTokens(aJCas, aDocument);
+        TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+                Sentence.class);
+        tb.buildTokens(aJCas, aDocument);
 
-		aEngine.process(aJCas);
+        aEngine.process(aJCas);
 
-		return aJCas;
-	}
+        return aJCas;
+    }
 }
