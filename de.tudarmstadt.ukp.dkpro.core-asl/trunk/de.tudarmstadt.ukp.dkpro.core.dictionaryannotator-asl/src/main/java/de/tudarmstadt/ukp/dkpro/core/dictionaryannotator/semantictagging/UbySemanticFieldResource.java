@@ -35,8 +35,10 @@ import de.tudarmstadt.ukp.lmf.exceptions.UbyInvalidArgumentException;
 import de.tudarmstadt.ukp.lmf.model.core.LexicalEntry;
 import de.tudarmstadt.ukp.lmf.model.core.Lexicon;
 import de.tudarmstadt.ukp.lmf.model.core.Sense;
+import de.tudarmstadt.ukp.lmf.model.enums.ELabelTypeSemantics;
 import de.tudarmstadt.ukp.lmf.model.enums.EPartOfSpeech;
 import de.tudarmstadt.ukp.lmf.model.meta.SemanticLabel;
+import de.tudarmstadt.ukp.lmf.model.multilingual.SenseAxis;
 import de.tudarmstadt.ukp.lmf.transform.DBConfig;
 
 
@@ -77,7 +79,7 @@ public class UbySemanticFieldResource
 	private String ubyPassword;
 	
 	private Uby uby;
-	private Lexicon lexicon;
+	private Lexicon wordnet;
 
 	
     @Override
@@ -106,47 +108,46 @@ public class UbySemanticFieldResource
 	@Override
 	public String getSemanticTag(Token token) throws ResourceAccessException {
 				
-		Sense sense = null;
-		String semanticField = "";
-		List<LexicalEntry> lexicalEntries;
+		String semanticField = "UNKNOWN";
 		
 		try {
 			// the documentLanguage is specified as ISO 2-letter code (following the DKPro-Core convention)
 			if (token.getCAS().getDocumentLanguage().equals("en")) {
-				lexicon = uby.getLexiconByName("WordNet");
+				wordnet = uby.getLexiconByName("WordNet");
 			} else if (token.getCAS().getDocumentLanguage().equals("de")) {
-				lexicon = uby.getLexiconByName("GermaNet");
+				wordnet = uby.getLexiconByName("GermaNet");
 			}			
 					
 			// does the token have a POS which has relevant information in the lexicon?	
 			if (corePosToUbyPos(token.getPos().getPosValue()).length == 0) {
 				return "UNKNOWN"; 
-			// does the lexicon contain the lemma?
-			} else if (uby.getLexicalEntries(token.getLemma().getValue(),null,lexicon).isEmpty()) { 
+			// is the lemma contained in any of the UBY lexicons?
+			} else if (uby.getLexicalEntries(token.getLemma().getValue(),null,null).isEmpty()) { 
 				return "UNKNOWN"; 
-			} else { // the lexicon contains the lemma
+			} else { // there is at least one UBY lexicon that contains the lemma
 				for (EPartOfSpeech pos : corePosToUbyPos(token.getPos().getPosValue())) {
 					
-					if (!uby.getLexicalEntries(token.getLemma().getValue(),pos,lexicon).isEmpty()) { // the lemma is listed in the lexicon with the given POS
-						lexicalEntries = uby.getLexicalEntries(token.getLemma().getValue(),pos,lexicon);
-						if (lexicon.getName().equals("WordNet")) {
-							
-							// WordNet contains MFS information, since the senses are ordered by decreasing frequency in SemCor: 
-							// in UBY, this is the sense with index = 1
-							sense = getMostFrequentSense(lexicalEntries);
-						} else if (lexicon.getName().equals("GermaNet")) {
-							// GermaNet does not contain MFS information; the first sense is used
-							sense = lexicalEntries.get(0).getSenses().get(0);
-						}		
-					}
-				}
-				semanticField = getSemanticField(sense);		
-				if (semanticField == null) {
-					return "UNKNOWN"; 
-				} else {
-					return semanticField;
+					if (!uby.getLexicalEntries(token.getLemma().getValue(),pos,wordnet).isEmpty()) { 
+						// the lemma is listed in the English or German wordnet with the given POS
+						
+						List<LexicalEntry> lexicalEntries = uby.getLexicalEntries(token.getLemma().getValue(),pos,wordnet);
+						Sense sense = getWordnetSense(lexicalEntries);
+						return getSemanticField(sense);
+						
+					} 
+					 else {
+						 // find the UBY lexical entry for the given lemma,
+						 // get a semantic label of type domain, if it exists
+						 // and retrieve the semantic field of the domain label 
+						List<LexicalEntry> lexicalEntries = uby.getLexicalEntries(token.getLemma().getValue(),null,null);						
+						String otherSemanticLabelValue = getOtherSemanticLabelValue(lexicalEntries);
+						return getSemanticField(otherSemanticLabelValue);						
+					}					
 				}
 			}
+			
+			return semanticField;
+			
 		} catch (Exception e) {
 	        throw new ResourceAccessException(e);
 		}
@@ -156,8 +157,24 @@ public class UbySemanticFieldResource
 
 
 
+	private Sense getWordnetSense(List<LexicalEntry> lexicalEntries) {
+		Sense sense = null;
+		
+		if (wordnet.getName().equals("WordNet")) {
+			
+			// WordNet contains MFS information, since the senses are ordered by decreasing frequency in SemCor: 
+			// in UBY, this is the sense with index = 1
+			sense = getMostFrequentSense(lexicalEntries);
+		} else if (wordnet.getName().equals("GermaNet")) {
+			// GermaNet does not contain MFS information; the first sense is used
+			sense = lexicalEntries.get(0).getSenses().get(0);
+		}		
+		return sense;
+	}
+
+
 	private String getSemanticField(Sense sense) {	
-		String semanticField = null;
+		String semanticField = "UNKNOWN";
 		
 		if (!(sense == null)) {
 			for (SemanticLabel sl : sense.getSemanticLabels()) {
@@ -166,9 +183,42 @@ public class UbySemanticFieldResource
 					semanticField = semanticField.replaceAll(".*\\.", "");
 				}			
 			}
+		} else {
+			System.out.println("sense was null");
 		}
 		return semanticField;
 	}
+	
+
+	private String getOtherSemanticLabelValue(List<LexicalEntry> lexicalEntries) {
+		String semanticLabelValue = "";
+		// grab the first entry with a semantic label of type domain
+		for (LexicalEntry lexicalEntry:lexicalEntries) {					    	
+	    	for (Sense s:lexicalEntry.getSenses()) {
+	    		for (SemanticLabel sl:s.getSemanticLabels()) {
+	    			if (sl.getType().equals(ELabelTypeSemantics.domain)) {
+	    				semanticLabelValue = sl.getLabel();
+	    				break;
+	    			}
+	    		}
+	    	}
+		}
+
+		return semanticLabelValue;
+	}
+
+	private String getSemanticField(String semanticLabelValue) {
+		// get the semantic field of a semantic label value of type "domain"
+		String semanticField = "UNKNOWN";
+		if (!uby.getLexicalEntries(semanticLabelValue,null,wordnet).isEmpty()) { 
+			List<LexicalEntry> lexicalEntries = uby.getLexicalEntries(semanticLabelValue,null,wordnet);
+			Sense sense = getWordnetSense(lexicalEntries);
+			semanticField = getSemanticField(sense);
+		}
+		
+		return semanticField;
+	}
+
 
 		
 }

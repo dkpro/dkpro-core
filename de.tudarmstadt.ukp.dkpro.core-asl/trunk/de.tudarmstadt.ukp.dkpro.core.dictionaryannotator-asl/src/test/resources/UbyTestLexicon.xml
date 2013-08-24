@@ -779,6 +779,16 @@
                 <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:0:3"/>
             </Sense>
 	      </LexicalEntry>    
+	      <LexicalEntry id="WktEn_lexicalEntry_18555" partOfSpeech="noun">
+            <Lemma>
+                <FormRepresentation languageIdentifier="eng" writtenForm="botnet"/>
+            </Lemma>
+           <Sense id="WktEn_sense_1111" index="2">
+                <MonolingualExternalRef externalSystem="Wiktionary sense key" externalReference="49890:1:1"/>
+                <SemanticLabel label="question" type="domain"/>
+            </Sense>            
+ 	     </LexicalEntry>	    
+	      
     </Lexicon>
 
     <SenseAxis id="AnoEx_SenseAxis_3" senseOne="WktEn_sense_3" senseTwo="WN_Sense_7" senseAxisType="monolingualSenseAlignment"/>

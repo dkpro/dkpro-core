@@ -64,12 +64,21 @@ public class UbySemanticFieldAnnotatorTest
                 "communication", "UNKNOWN" };
 	    
         runAnnotatorTestOnInMemDb("en", "Answers question most questions .", 
-                new String[] { "answer", "question", "most", "question", "." }, 
+               new String[] { "answer", "question", "most", "question", "." }, 
                 new String[] { "NN", "V", "NOT_RELEVANT", "NN", "$." }, 
                 semanticFields);
+  
+        
+        // botnet: Wiktionary domain=question (just for the test case) -> question: WordNet semantic field = communication
+        runAnnotatorTestOnInMemDb("en", "Botnets question most questions .", 
+                new String[] { "botnet", "question", "most", "question", "." }, 
+                new String[] { "NN", "V", "NOT_RELEVANT", "NN", "$." }, 
+                semanticFields);
+       
+        
 	}
 
-	@Ignore	
+	@Ignore
 	@Test
 	public void testUbySemanticFieldAnnotatorOnMySqlDb()
 		throws Exception
@@ -80,36 +89,28 @@ public class UbySemanticFieldAnnotatorTest
         String[] pos = new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "ADJ", "NN", "V", "NN",
                 "NOT_RELEVANT", "NN", "$." };
 
-        String[] semanticFields = new String[] { "UNKNOWN '.'", "UNKNOWN 'in'", "UNKNOWN 'over'",
-                "UNKNOWN 'the'", "all 'blue'", "attribute 'braveness'", "emotion 'prefers'",
-                "feeling 'jumpiness'", "object 'sky'", "plant 'Vanilla'" };
-
+        String[] semanticFields = new String[] { "plant", "UNKNOWN", "UNKNOWN", "all" , "object" , "emotion" , "attribute" , "UNKNOWN" , "feeling" , "UNKNOWN" };
+        
         runAnnotatorTestOnMySqlDb("en",
                 "Vanilla in the blue sky prefers braveness over jumpiness .", lemmas, pos,
                 semanticFields);
-	}
-
-    @Ignore 
-    @Test
-    public void testUbySemanticFieldAnnotatorOnMySqlDb2()
-        throws Exception
-    {
-        String[] lemmas = new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter",
+        
+ 
+        String[] lemmas2 = new String[] { "vanilla", "in", "the", "distantGalaxyBehindJupiter",
                 "prefer", "braveness", "over", "jumpiness", "." };
 
-        String[] pos = new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "V", "NN",
+        String[] pos2 = new String[] { "NN", "NOT_RELEVANT", "NOT_RELEVANT", "NN", "V", "NN",
                 "NOT_RELEVANT", "NN", "$." };
 
-        String[] semanticFields = new String[] { "UNKNOWN '.'",
-                "UNKNOWN 'distantGalaxyBehindJupiter'", "UNKNOWN 'in'", "UNKNOWN 'over'",
-                "UNKNOWN 'the'", "attribute 'braveness'", "emotion 'prefers'",
-                "feeling 'jumpiness'", "plant 'Vanilla'" };
-
+        String[] semanticFields2 = new String[] { "plant", "UNKNOWN", "UNKNOWN", "UNKNOWN" , "emotion" , "attribute" , "UNKNOWN" , "feeling" , "UNKNOWN" };
+               
         runAnnotatorTestOnMySqlDb("en",
                 "Vanilla in the distantGalaxyBehindJupiter prefers braveness over jumpiness .",
-                lemmas, pos, semanticFields);
-    }
-	 
+                lemmas2, pos2, semanticFields2);
+
+	}
+
+ 	 
     private void runAnnotatorTestOnInMemDb(String language, String testDocument,
             String[] documentLemmas, String[] documentPosTags, String[] documentUbySemanticFields)
         throws UIMAException, FileNotFoundException, DocumentException, UbyInvalidArgumentException
@@ -192,7 +193,7 @@ public class UbySemanticFieldAnnotatorTest
                 UbySemanticFieldAnnotator.class,
                 UbySemanticFieldAnnotator.PARAM_UBY_SEMANTIC_FIELD_RESOURCE,
                 createExternalResourceDescription(UbySemanticFieldResource.class,
-                        UbySemanticFieldResource.PARAM_URL, "localhost/uby_medium_0_2_0",
+                        UbySemanticFieldResource.PARAM_URL, "localhost/uby_open_0_3_0",
                         UbySemanticFieldResource.PARAM_DRIVER, "com.mysql.jdbc.Driver",
                         UbySemanticFieldResource.PARAM_DRIVER_NAME, "mysql",
                         UbySemanticFieldResource.PARAM_USERNAME, "root",
