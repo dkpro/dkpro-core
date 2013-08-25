@@ -27,7 +27,7 @@ import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.xwriter.CasDumpWriter;
+import org.apache.uima.fit.component.CasDumpWriter;
 import org.junit.Test;
 
 /**
