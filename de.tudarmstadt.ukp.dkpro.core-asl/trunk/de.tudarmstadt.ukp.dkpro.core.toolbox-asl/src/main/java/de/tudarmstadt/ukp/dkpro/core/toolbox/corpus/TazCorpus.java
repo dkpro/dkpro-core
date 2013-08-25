@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.DkproContext;
@@ -65,14 +66,22 @@ public class TazCorpus
 
     @Override
     public Iterable<Sentence> getSentences()
-        throws Exception
+        throws CorpusException
     {
-        return new TazSentenceIterable(tazPath, CHARSET);
+        try {
+            return new TazSentenceIterable(tazPath, CHARSET);
+        }
+        catch (FileNotFoundException e) {
+            throw new CorpusException(e);
+        }
+        catch (IOException e) {
+            throw new CorpusException(e);
+        }
     }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
-        throws Exception
+        throws CorpusException
     {
         // FIXME add implementation
         throw new UnsupportedOperationException();
@@ -80,7 +89,7 @@ public class TazCorpus
 
     @Override
     public Iterable<Tag> getTags()
-        throws Exception
+        throws CorpusException
     {
         // FIXME add implementation
         throw new UnsupportedOperationException();
@@ -88,7 +97,7 @@ public class TazCorpus
 
     @Override
     public Iterable<String> getTokens()
-        throws Exception
+        throws CorpusException
     {
         // FIXME add implementation
         throw new UnsupportedOperationException();
@@ -96,7 +105,7 @@ public class TazCorpus
 
     @Override
     public Iterable<Text> getTexts()
-        throws Exception
+        throws CorpusException
     {
         // FIXME add implementation
         throw new UnsupportedOperationException();

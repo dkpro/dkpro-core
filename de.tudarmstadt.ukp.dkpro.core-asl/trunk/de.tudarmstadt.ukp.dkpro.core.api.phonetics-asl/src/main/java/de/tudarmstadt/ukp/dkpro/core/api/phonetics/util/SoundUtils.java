@@ -21,8 +21,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-// TODO has formerly been located in DKPro Similarity Sound, but I think it fits better here, now there is the module
-// once we move to a DKPro Core version in DKPro Similarity that included this module, the old version should be deleted there (merge new changes before that)
 public class SoundUtils
 {
 	public static int differenceEncoded(String es1, String es2) {
@@ -50,7 +48,7 @@ public class SoundUtils
 	 *            The Darpabet phonemic transcription to convert.
 	 * @return The IPA equivalent of s.
 	 */
-    public static String arpabetToIPA(String s) throws Exception {
+    public static String arpabetToIPA(String s) throws IllegalArgumentException {
     	String[] arpaPhonemes = s.trim().split("[ \\t]+");
     	StringBuffer ipaPhonemes = new StringBuffer(s.length());
 
@@ -63,7 +61,7 @@ public class SoundUtils
 
     		String ipaPhoneme = arpabetMap.get(arpaPhoneme);
     		if (ipaPhoneme == null) {
-    			throw new Exception();
+    			throw new IllegalArgumentException();
     		}
     		ipaPhonemes.append(ipaPhoneme);
     	}

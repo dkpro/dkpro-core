@@ -24,15 +24,15 @@ import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
 
 public interface Corpus {
 
-	public Iterable<String> getTokens() throws Exception;
+	public Iterable<String> getTokens() throws CorpusException;
 	
-	public Iterable<TaggedToken> getTaggedTokens() throws Exception;
+	public Iterable<TaggedToken> getTaggedTokens() throws CorpusException;
 	
-	public Iterable<Sentence> getSentences() throws Exception;
+	public Iterable<Sentence> getSentences() throws CorpusException;
 	
-    public Iterable<Tag> getTags() throws Exception;
+    public Iterable<Tag> getTags() throws CorpusException;
     
-    public Iterable<Text> getTexts() throws Exception;
+    public Iterable<Text> getTexts() throws CorpusException;
 
     /**
      * @return The language code of the corpus language.
