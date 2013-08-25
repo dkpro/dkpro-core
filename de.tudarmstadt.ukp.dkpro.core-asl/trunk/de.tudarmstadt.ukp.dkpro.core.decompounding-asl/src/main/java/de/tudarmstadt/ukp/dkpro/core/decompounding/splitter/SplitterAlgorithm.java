@@ -37,8 +37,6 @@ public interface SplitterAlgorithm
 	 * 
 	 * @param aWord
 	 *            The word to split
-	 * @return
-	 * @throws ResourceInitializationException 
 	 */
 	public DecompoundingTree split(String aWord) throws ResourceInitializationException;
 	
@@ -51,15 +49,11 @@ public interface SplitterAlgorithm
 	
 	/**
 	 * Sets the linking morphemes for the algorithm
-	 * 
-	 * @param aMorphemes
 	 */
 	public void setLinkingMorphemes(LinkingMorphemes aMorphemes);
 	
 	/**
 	 * Set the maximal tree depth. Default: Integer.MaxValue
-	 * 
-	 * @param aDepth
 	 */
 	public void setMaximalTreeDepth(int aDepth);
 }

@@ -44,9 +44,6 @@ public class JWordSplitterDictionary
 
 	/**
 	 * Constructor for a simple dictionary
-	 * 
-	 * @param aDict
-	 *            The file with all words
 	 */
 	public JWordSplitterDictionary()
 	{
@@ -68,7 +65,6 @@ public class JWordSplitterDictionary
 	 * Reads the dictionary to set
 	 * 
 	 * @return A set of words
-	 * @throws IOException
 	 */
 	protected Set<String> readFileToSet(BufferedReader aReader)
 		throws IOException

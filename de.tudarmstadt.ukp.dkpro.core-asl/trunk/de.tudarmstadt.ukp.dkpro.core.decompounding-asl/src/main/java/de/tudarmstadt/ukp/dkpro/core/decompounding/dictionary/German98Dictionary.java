@@ -141,7 +141,6 @@ public class German98Dictionary
 	 *            The header of the affix
 	 * @param aReader
 	 *            The file reader to read the rest of the affix
-	 * @throws IOException
 	 */
 	private void parseAffix(String aHeader, BufferedReader aReader)
 		throws IOException
@@ -178,10 +177,6 @@ public class German98Dictionary
 
 	/**
 	 * Uses affixes to build new words
-	 *
-	 * @param aWord
-	 * @param aFlags
-	 * @return
 	 */
 	protected List<String> buildWords(String aWord, char[] aFlags)
 	{
