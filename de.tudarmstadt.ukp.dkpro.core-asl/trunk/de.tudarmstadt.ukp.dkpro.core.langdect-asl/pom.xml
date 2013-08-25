@@ -40,4 +40,5 @@
   		<artifactId>uimafit-core</artifactId>
   	</dependency>
   </dependencies>
+  <name>DKPro Core ASL - LangDect</name>
 </project>

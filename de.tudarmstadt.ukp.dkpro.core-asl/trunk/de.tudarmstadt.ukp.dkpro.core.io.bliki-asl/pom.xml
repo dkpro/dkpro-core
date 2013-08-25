@@ -77,4 +77,5 @@
     	<artifactId>uimafit-core</artifactId>
     </dependency>
   </dependencies>
+  <name>DKPro Core ASL - IO - Wikipedia via Bliki Engine</name>
 </project>
