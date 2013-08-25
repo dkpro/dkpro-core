@@ -40,63 +40,63 @@ public abstract class FrequencyCountResourceBase
 
     @Override
     public long getFrequency(String phrase)
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getFrequency(phrase);
     }
 
     @Override
     public double getProbability(String phrase)
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getProbability(phrase);
     }
 
     @Override
     public double getLogProbability(String phrase)
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getLogProbability(phrase);
     }
     
     @Override
     public long getNrOfTokens()
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getNrOfTokens();
     }    
 
     @Override
     public long getNrOfNgrams(int n)
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getNrOfNgrams(n);
     }
     
     @Override
     public long getNrOfDistinctNgrams(int n)
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getNrOfDistinctNgrams(n);
     }
     
     @Override
     public Iterator<String> getNgramIterator(int n)
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getNgramIterator(n);
     }
 
     @Override
     public String getLanguage()
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getLanguage();
     }
 
     @Override
     public String getID()
-        throws Exception
+        throws IllegalArgumentException
     {
         return provider.getID();
     }

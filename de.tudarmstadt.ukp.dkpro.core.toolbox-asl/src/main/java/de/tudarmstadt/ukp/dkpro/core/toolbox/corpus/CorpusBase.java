@@ -20,6 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.toolbox.corpus;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.resource.ResourceConfigurationException;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Tag;
@@ -45,16 +47,24 @@ public abstract class CorpusBase
 
     @Override
     public Iterable<Sentence> getSentences()
-        throws Exception
+        throws CorpusException
     {
         // reconfigure to re-initialize the reader
-        CollectionReaderFactory.createReader(getReader()).reconfigure();
+        try {
+            CollectionReaderFactory.createReader(getReader()).reconfigure();
+        }
+        catch (ResourceConfigurationException e) {
+            throw new CorpusException(e);
+        }
+        catch (ResourceInitializationException e) {
+            throw new CorpusException(e);
+        }
         return new SentenceIterable(new JCasIterable(getReader()).iterator(), getLanguage());
     }
 
     @Override
     public Iterable<TaggedToken> getTaggedTokens()
-        throws Exception
+        throws CorpusException
     {
         // reconfigure to re-initialize the reader
 //        getReader().reconfigure();
@@ -63,7 +73,7 @@ public abstract class CorpusBase
 
     @Override
     public Iterable<Tag> getTags()
-        throws Exception
+        throws CorpusException
     {
         // reconfigure to re-initialize the reader
 //        getReader().reconfigure();
@@ -72,7 +82,7 @@ public abstract class CorpusBase
 
     @Override
     public Iterable<Text> getTexts()
-        throws Exception
+        throws CorpusException
     {
         // reconfigure to re-initialize the reader
 //        getReader().reconfigure();
@@ -81,7 +91,7 @@ public abstract class CorpusBase
 
     @Override
     public Iterable<String> getTokens()
-        throws Exception
+        throws CorpusException
     {
         // reconfigure to re-initialize the reader
 //        getReader().reconfigure();

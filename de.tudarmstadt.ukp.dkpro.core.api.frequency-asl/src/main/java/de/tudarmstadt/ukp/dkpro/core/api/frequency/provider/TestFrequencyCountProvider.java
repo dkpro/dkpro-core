@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
 
-import java.io.IOException;
 import java.util.Iterator;
 
 /**
@@ -30,7 +29,7 @@ public class TestFrequencyCountProvider
 
     @Override
     protected long getFrequencyFromProvider(String phrase)
-        throws IOException
+        throws IllegalArgumentException
     {
         return new Double(Math.floor(
                             Math.pow(
@@ -47,7 +46,7 @@ public class TestFrequencyCountProvider
     
     @Override
     public long getNrOfDistinctNgrams(int n)
-        throws Exception
+        throws IllegalArgumentException
     {
         return 10l * n;
     }
@@ -59,21 +58,21 @@ public class TestFrequencyCountProvider
 
     @Override
     public Iterator<String> getNgramIterator(int n)
-        throws Exception
+        throws IllegalArgumentException
     {
         throw new UnsupportedOperationException("This method is currently not supported.");
     }
 
     @Override
     public String getLanguage()
-        throws Exception
+        throws IllegalArgumentException
     {
         return "__test";
     }
 
     @Override
     public String getID()
-        throws Exception
+        throws IllegalArgumentException
     {
         return "1.5.0";
     }

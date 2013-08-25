@@ -44,7 +44,7 @@ public abstract class FrequencyCountProviderBase
     
     @Override
     public double getProbability(String phrase)
-        throws Exception
+        throws IllegalArgumentException
     {
         long n = getNrOfNgrams(FrequencyUtils.getPhraseLength(phrase));
         
@@ -58,21 +58,21 @@ public abstract class FrequencyCountProviderBase
     
     @Override
     public double getLogProbability(String phrase)
-        throws Exception
+        throws IllegalArgumentException
     {
         return Math.log(getProbability(phrase));
     }
 
     @Override
     public long getFrequency(String phrase)
-        throws Exception
+        throws IllegalArgumentException
     {
         long frequency = getFrequencyFromProvider(phrase);
         return frequency / getScaleDownFactor();
     }
 
     protected abstract long getFrequencyFromProvider(String phrase)
-        throws Exception;
+        throws IllegalArgumentException;
     
     public double getLogLikelihood(int termFrequency, int sizeOfCorpus, String term) throws Exception {
         return FrequencyUtils.loglikelihood(
@@ -100,7 +100,7 @@ public abstract class FrequencyCountProviderBase
     
     @Override
     public String getID()
-        throws Exception
+        throws IllegalArgumentException
     {
         return this.getClass().getSimpleName();
     }
