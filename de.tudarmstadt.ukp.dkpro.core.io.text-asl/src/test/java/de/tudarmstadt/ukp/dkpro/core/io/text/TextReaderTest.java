@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.text;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
@@ -28,9 +27,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.xwriter.XWriter;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
@@ -55,9 +52,6 @@ public class TextReaderTest
 				ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
 
-        AnalysisEngine writer = createEngine(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
 		for (JCas jcas : new JCasIterable(reader)) {
 			DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
@@ -74,8 +68,6 @@ public class TextReaderTest
 			assertTrue(
 					!FILE2.equals(md.getDocumentId())
 					|| "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
 		}
 	}
 
@@ -88,9 +80,6 @@ public class TextReaderTest
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
-        AnalysisEngine writer = createEngine(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
 		for (JCas jcas : new JCasIterable(reader)) {
 			DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
@@ -107,8 +96,6 @@ public class TextReaderTest
 			assertTrue(
 					!FILE2.equals(md.getDocumentId())
 					|| "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
 		}
 	}
 
@@ -122,9 +109,6 @@ public class TextReaderTest
 				ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
 					ResourceCollectionReaderBase.INCLUDE_PREFIX + "*.txt" });
 
-        AnalysisEngine writer = createEngine(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
 		for (JCas jcas : new JCasIterable(reader)) {
 			DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
@@ -141,8 +125,6 @@ public class TextReaderTest
 			assertTrue(
 					!FILE2.equals(md.getDocumentId())
 					|| "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
 		}
 	}
 
@@ -155,9 +137,6 @@ public class TextReaderTest
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
-        AnalysisEngine writer = createEngine(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
         for (JCas jcas : new JCasIterable(reader)) {
             DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
@@ -173,8 +152,6 @@ public class TextReaderTest
             assertTrue(
                     !FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
         }
     }
 
@@ -187,9 +164,6 @@ public class TextReaderTest
                 ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "classpath:texts",
                 ResourceCollectionReaderBase.PARAM_PATTERNS, new String[0]);
 
-        AnalysisEngine writer = createEngine(XWriter.class,
-        		XWriter.PARAM_OUTPUT_DIRECTORY_NAME, "target/test-output/"+name.getMethodName());
-
         for (JCas jcas : new JCasIterable(reader)) {
             DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
@@ -205,8 +179,6 @@ public class TextReaderTest
             assertTrue(
                     !FILE2.equals(md.getDocumentId())
                     || "This is a second test.".equals(jcas.getDocumentText()));
-
-            writer.process(jcas);
         }
     }
 
