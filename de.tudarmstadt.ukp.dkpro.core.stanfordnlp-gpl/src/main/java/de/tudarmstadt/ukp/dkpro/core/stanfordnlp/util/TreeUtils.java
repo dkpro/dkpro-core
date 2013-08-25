@@ -47,7 +47,6 @@ import edu.stanford.nlp.util.IntPair;
  * Utility class for the StanfordParser
  * 
  * @author Oliver Ferschke
- * 
  */
 public class TreeUtils
 {
@@ -55,8 +54,6 @@ public class TreeUtils
      * Recursively creates an edu.stanford.nlp.trees.Tree from a ROOT annotation It also saves the
      * whitespaces before and after a token as <code>CoreAnnotation.BeforeAnnotation</code> and
      * <code>CoreAnnotation.AfterAnnotation</code> in the respective label of the current node.
-     * 
-     * @author Oliver Ferschke
      * 
      * @param root
      *            the ROOT annotation
