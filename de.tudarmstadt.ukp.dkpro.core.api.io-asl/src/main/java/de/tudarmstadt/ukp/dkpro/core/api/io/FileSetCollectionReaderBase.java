@@ -179,7 +179,7 @@ public abstract class FileSetCollectionReaderBase
 	}
 
 	/**
-	 * Initialize the {@DocumentMetaData}. This must be called before setting the
+	 * Initialize the {@link DocumentMetaData}. This must be called before setting the
 	 * document text, otherwise the end feature of this annotation will not be set correctly.
 	 */
 	protected void initCas(CAS aCas, FileResource aFile, String aQualifier)

@@ -61,8 +61,6 @@ import org.apache.uima.jcas.cas.Sofa;
  * CasCopier and use it to copy multiple FeatureStructures. The CasCopier will remember previously
  * copied FeatureStructures, so if you later copy another FS that has a reference to a previously
  * copied FS, it will not duplicate the multiply-referenced FS.
- * 
- * @see org.apache.uima.util.CasCopier
  */
 public class CasCopier
 {

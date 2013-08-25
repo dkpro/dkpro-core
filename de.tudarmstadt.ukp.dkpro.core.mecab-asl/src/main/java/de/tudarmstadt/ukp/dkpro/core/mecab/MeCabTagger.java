@@ -77,12 +77,10 @@ public class MeCabTagger
 	private Logger logger;
 	private Tagger tagger;
 
-	/**
-	 * @see org.apache.uima.fit.component.JCasAnnotator_ImplBase#initialize(org.apache.uima .UimaContext)
-	 *
-	 *      Loads MeCab library from system default paths. Throws and UnsatisfiedLinkError in case
-	 *      the native code cannot be read.
-	 */
+    /**
+     * Loads MeCab library from system default paths. Throws and UnsatisfiedLinkError in case the
+     * native code cannot be read.
+     */
 	@Override
 	public void initialize(UimaContext context)
 		throws ResourceInitializationException
