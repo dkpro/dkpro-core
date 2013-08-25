@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.provider;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 public interface FrequencyCountProvider
@@ -30,7 +31,7 @@ public interface FrequencyCountProvider
      *            
      * @return frequency of the phrase. Returns 0 if the phrase does not exist in the corpus.
      */
-    public long getFrequency(String phrase) throws IllegalArgumentException;
+    public long getFrequency(String phrase) throws IOException;
 
     /**
      * Get the probability (=normalized frequency) for a phrase.<br>
@@ -42,7 +43,7 @@ public interface FrequencyCountProvider
      *            
      * @return probability (=normalized frequency) of the phrase. Returns null if the phrase does not exist in the corpus.
      */
-    public double getProbability(String phrase) throws IllegalArgumentException;
+    public double getProbability(String phrase) throws IOException;
 
     /**
      * Get the log probability for a phrase
@@ -52,36 +53,36 @@ public interface FrequencyCountProvider
      *            
      * @return The log probability of the. Returns 0 if the phrase does not exist in the corpus.
      */
-    public double getLogProbability(String phrase) throws IllegalArgumentException;
+    public double getLogProbability(String phrase) throws IOException;
     
     /**
      * @return The number of tokens in the corpus.
      */
-    public long getNrOfTokens() throws IllegalArgumentException;
+    public long getNrOfTokens() throws IOException;
     
     /**
      * Returns the number of ngrams of a given size in the corpus.
      */
-    public long getNrOfNgrams(int n) throws IllegalArgumentException;
+    public long getNrOfNgrams(int n) throws IOException;
 
     /**
      * Returns the number of distinct ngrams of a given size in the corpus.
      */
-    public long getNrOfDistinctNgrams(int n) throws IllegalArgumentException;
+    public long getNrOfDistinctNgrams(int n) throws IOException;
     
     /**
      * Returns an iterator over all ngrams of a given size in the corpus.
      */
-    public Iterator<String> getNgramIterator(int n) throws IllegalArgumentException;
+    public Iterator<String> getNgramIterator(int n) throws IOException;
     
     /**
      * Returns the language for which the frequencies are provided.
      */
-    public String getLanguage() throws IllegalArgumentException;
+    public String getLanguage() throws IOException;
         
     /**
      * Returns an ID that identifies the frequency provider
      */
-    public String getID() throws IllegalArgumentException;
+    public String getID();
     
 }

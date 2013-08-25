@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
@@ -40,66 +41,63 @@ public abstract class FrequencyCountResourceBase
 
     @Override
     public long getFrequency(String phrase)
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getFrequency(phrase);
     }
 
     @Override
     public double getProbability(String phrase)
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getProbability(phrase);
     }
 
     @Override
     public double getLogProbability(String phrase)
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getLogProbability(phrase);
     }
     
     @Override
     public long getNrOfTokens()
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getNrOfTokens();
     }    
 
     @Override
     public long getNrOfNgrams(int n)
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getNrOfNgrams(n);
     }
     
     @Override
     public long getNrOfDistinctNgrams(int n)
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getNrOfDistinctNgrams(n);
     }
     
     @Override
     public Iterator<String> getNgramIterator(int n)
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getNgramIterator(n);
     }
 
     @Override
     public String getLanguage()
-        throws IllegalArgumentException
+        throws IOException
     {
         return provider.getLanguage();
     }
 
     @Override
     public String getID()
-        throws IllegalArgumentException
     {
         return provider.getID();
     }
-    
-    
 }
