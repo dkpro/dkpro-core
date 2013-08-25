@@ -52,9 +52,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
  */
 public class NounSemanticFieldAnnotator extends JCasAnnotator_ImplBase
 {
-    /**
-     * This is a test.
-     */
 	public static final String PARAM_NOUN_SEMANTIC_FIELD_RESOURCE = "nounSemanticFieldResource";
 	@ExternalResource(key = PARAM_NOUN_SEMANTIC_FIELD_RESOURCE)	
 	private SemanticTagResource nounSemanticFieldResource;
