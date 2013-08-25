@@ -27,7 +27,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.xwriter.CasDumpWriter;
+import org.apache.uima.fit.component.CasDumpWriter;
 import org.junit.Test;
 
 public class Conll2006ReaderWriterTest
