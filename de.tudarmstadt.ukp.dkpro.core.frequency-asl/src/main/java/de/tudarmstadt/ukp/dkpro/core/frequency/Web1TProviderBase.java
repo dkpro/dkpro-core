@@ -41,35 +41,33 @@ public abstract class Web1TProviderBase
     }
 
     @Override
-	public long getNrOfTokens()
+    public long getNrOfTokens()
     {
         return searcher.getNrOfNgrams(1);
     }
 
     @Override
     public long getNrOfDistinctNgrams(int n)
-        throws Exception
     {
         return searcher.getNrOfDistinctNgrams(n);
     }
-    
+
     @Override
     protected long getFrequencyFromProvider(String phrase)
         throws IOException
     {
         return searcher.getFrequency(phrase);
     }
-    
+
     @Override
     public Iterator<String> getNgramIterator(int n)
-        throws Exception
+        throws IOException
     {
         return new JWeb1TIterator(basePath, n).getIterator();
     }
-    
+
     @Override
     public String getLanguage()
-        throws Exception
     {
         return this.basePath;
     }

@@ -46,64 +46,55 @@ public class BerkeleyLmProvider
 	// FIXME how to obtain phrase count from logProb
     @Override
     public long getFrequency(String phrase)
-		throws Exception
 	{
-        throw new Exception("Not implemented yet.");
+        throw new UnsupportedOperationException("Not implemented yet.");
 //        return getProbnew Float(Math.exp(logProb)).longValue();
 	}
 
     @Override
     public double getProbability(String phrase)
-        throws Exception
     {
         return Math.exp(getLogProbability(phrase));
     }
 
     @Override
     public double getLogProbability(String phrase)
-        throws Exception
     {
         return lm.getLogProb(Arrays.asList(phrase.split(" ")));
     }
 
     @Override
     public long getNrOfTokens()
-        throws Exception
     {
         return lm.getWordIndexer().numWords();
     }
 
     @Override
     public long getNrOfNgrams(int n)
-        throws Exception
     {
-        throw new Exception("Not implemented yet.");
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
     public long getNrOfDistinctNgrams(int n)
-        throws Exception
     {
-        throw new Exception("Not implemented yet.");
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
     public Iterator<String> getNgramIterator(int n)
-        throws Exception
     {
-        throw new Exception("Not implemented yet.");
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
     public String getLanguage()
-        throws Exception
     {
         return this.language;
     }
     
     @Override
     public String getID()
-        throws Exception
     {
         return this.getClass().getSimpleName();
     }

@@ -17,6 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency;
 
+import java.io.IOException;
 import java.util.Iterator;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProviderBase;
@@ -25,37 +26,38 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
+import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.CorpusException;
 
 public class CorpusFrequencyCountProvider
     extends FrequencyCountProviderBase
 {
 
-    private final ConditionalFrequencyDistribution<Integer,String> cfd;
-    
+    private final ConditionalFrequencyDistribution<Integer, String> cfd;
+
     private Corpus corpus;
-    
-    public CorpusFrequencyCountProvider(Corpus corpus, int minN, int maxN) throws Exception {
-        cfd = new ConditionalFrequencyDistribution<Integer,String>();
+
+    public CorpusFrequencyCountProvider(Corpus corpus, int minN, int maxN)
+        throws Exception
+    {
+        cfd = new ConditionalFrequencyDistribution<Integer, String>();
         this.corpus = corpus;
-        
+
         if (minN > maxN) {
             throw new IllegalArgumentException("minN > maxN");
         }
-        
-        for (int i=minN; i<=maxN; i++) {
+
+        for (int i = minN; i <= maxN; i++) {
             for (Sentence s : corpus.getSentences()) {
-                cfd.addSamples(
-                        i,
-                        new NGramStringIterable(s.getTokens(), i, i)
-                );
+                cfd.addSamples(i, new NGramStringIterable(s.getTokens(), i, i));
             }
         }
     }
-    
+
     @Override
-    protected long getFrequencyFromProvider(String phrase) throws Exception {
+    protected long getFrequencyFromProvider(String phrase)
+    {
         int phraseLength = FrequencyUtils.getPhraseLength(phrase);
-        
+
         if (cfd.hasCondition(phraseLength)) {
             return cfd.getCount(phraseLength, phrase);
         }
@@ -66,12 +68,12 @@ public class CorpusFrequencyCountProvider
 
     @Override
     public double getProbability(String phrase)
-        throws Exception
+        throws IOException
     {
         long count = getFrequency(phrase);
 
         long N = cfd.getN();
-        
+
         if (N == 0) {
             return 0;
         }
@@ -82,44 +84,45 @@ public class CorpusFrequencyCountProvider
 
     @Override
     public double getLogProbability(String phrase)
-        throws Exception
+        throws IOException
     {
         return Math.log(getProbability(phrase));
     }
 
     @Override
     public long getNrOfTokens()
-        throws Exception
     {
         return cfd.getFrequencyDistribution(1).getN();
     }
 
     @Override
     public long getNrOfNgrams(int n)
-        throws Exception
     {
-        // FIXME implement this 
-        throw new Exception("Not implemented yet.");
+        // FIXME implement this
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
     public long getNrOfDistinctNgrams(int n)
-        throws Exception
     {
-        // FIXME implement this 
-        throw new Exception("Not implemented yet.");
+        // FIXME implement this
+        throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     @Override
     public Iterator<String> getNgramIterator(int n)
-        throws Exception
+        throws IOException
     {
-        return corpus.getTokens().iterator();
+        try {
+            return corpus.getTokens().iterator();
+        }
+        catch (CorpusException e) {
+            throw new IOException(e);
+        }
     }
 
     @Override
     public String getLanguage()
-        throws Exception
     {
         return corpus.getLanguage();
     }
