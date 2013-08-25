@@ -35,14 +35,11 @@ public interface RankerList extends Ranker
 	 * 
 	 * @param aSplits
 	 *            The highest ranked split
-	 * @return
 	 */
 	public DecompoundedWord highestRank(List<DecompoundedWord> aSplits);
 
 	/**
 	 * Ranks all splits and returns a order list
-	 * 
-	 * @return
 	 */
 	public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits);
 }
