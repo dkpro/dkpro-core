@@ -53,18 +53,18 @@
                 <Definition>
                     <TextRepresentation languageIdentifier="eng" writtenText="FN: to discuss and/or enact the pieces of a performance in order"/>
                 </Definition>
+                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="10035"/>               
                 <Frequency frequency="7" generator="annotated_instances"/>
                 <Frequency frequency="108" generator="all_instances"/>
-                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="10035"/>
-            </Sense>
+             </Sense>
             <Sense id="FN_Sense_5128" index="0">
                 <PredicativeRepresentation predicate="FN_SemanticPredicate_700"/>
                 <Definition>
                     <TextRepresentation languageIdentifier="eng" writtenText="FN: cause to move while in light contact. [Generally of the fingers, tongue, or some entity manipulated by the hand.]"/>
                 </Definition>
+                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="11008"/>                
                 <Frequency frequency="0" generator="annotated_instances"/>
                 <Frequency frequency="0" generator="all_instances"/>
-                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="11008"/>
             </Sense>
             <Sense id="FN_Sense_5129" index="0">
                 <PredicativeRepresentation predicate="FN_SemanticPredicate_591"/>
@@ -89,10 +89,10 @@
                 <Definition>
                     <TextRepresentation languageIdentifier="eng" writtenText="FN: cause an object to collide with something."/>
                 </Definition>
+                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="7229"/>                
                 <Frequency frequency="6" generator="annotated_instances"/>
                 <Frequency frequency="370" generator="all_instances"/>
-                <MonolingualExternalRef externalSystem="FrameNet 1.5 lexical unit ID" externalReference="7229"/>
-            </Sense>
+             </Sense>
         </LexicalEntry>
 
         <SemanticPredicate id="FN_SemanticPredicate_29" label="Practice">
@@ -440,83 +440,29 @@
                 <SenseExample id="VN_SenseExample_2430" exampleType="subcatFrame">
                     <TextRepresentation writtenText="There jumped a little white rabbit out of the box."/>
                 </SenseExample>
+                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_run-51.3.2"/>                
                 <SemanticLabel label="run-51.3.2" type="verbnetClass"/>
-                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_run-51.3.2"/>
             </Sense>
             <Sense id="VN_Sense_2441" index="2441">
                 <PredicativeRepresentation predicate="VN_SemanticPredicate_500"/>
                 <SenseExample id="VN_SenseExample_2441" exampleType="subcatFrame">
                     <TextRepresentation writtenText="There jumped out of the box a little white rabbit."/>
                 </SenseExample>
+                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_run-51.3.2"/>                
                 <SemanticLabel label="run-51.3.2" type="verbnetClass"/>
-                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_run-51.3.2"/>
             </Sense>
             <Sense id="VN_Sense_2455" index="2455">
                 <PredicativeRepresentation predicate="VN_SemanticPredicate_119"/>
                 <SenseExample id="VN_SenseExample_2455" exampleType="subcatFrame">
                     <TextRepresentation writtenText="The grocery cart hit against the wall."/>
                 </SenseExample>
+                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_bump-18.4"/>                
                 <SemanticLabel label="bump-18.4" type="verbnetClass"/>
-                <MonolingualExternalRef externalSystem="VerbNet v3.1" externalReference="run_bump-18.4"/>
             </Sense>
             <SyntacticBehaviour id="VN_SyntacticBehaviour_2430" sense="VN_Sense_2430" subcategorizationFrame="VN_SubcategorizationFrame_246" subcategorizationFrameSet="VN_SubcategorizationFrameSet_83"/>
             <SyntacticBehaviour id="VN_SyntacticBehaviour_2441" sense="VN_Sense_2441" subcategorizationFrame="VN_SubcategorizationFrame_245" subcategorizationFrameSet="VN_SubcategorizationFrameSet_83"/>
             <SyntacticBehaviour id="VN_SyntacticBehaviour_2455" sense="VN_Sense_2455" subcategorizationFrame="VN_SubcategorizationFrame_80" subcategorizationFrameSet="VN_SubcategorizationFrameSet_111"/>
         </LexicalEntry>
-
-        <SubcategorizationFrame id="VN_SubcategorizationFrame_245">
-            <SyntacticArgument id="VN_SyntacticArgument_633" grammaticalFunction="subject" syntacticCategory="expletive" lexeme="there"/>
-            <SyntacticArgument id="VN_SyntacticArgument_634" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" prepositionType="+path"/>
-            <SyntacticArgument id="VN_SyntacticArgument_635" grammaticalFunction="complement" syntacticCategory="nounPhrase" determiner="indefinite"/>
-        </SubcategorizationFrame>
-        <SubcategorizationFrame id="VN_SubcategorizationFrame_246">
-            <SyntacticArgument id="VN_SyntacticArgument_636" grammaticalFunction="subject" syntacticCategory="expletive" lexeme="there"/>
-            <SyntacticArgument id="VN_SyntacticArgument_637" grammaticalFunction="complement" syntacticCategory="nounPhrase" determiner="indefinite"/>
-            <SyntacticArgument id="VN_SyntacticArgument_638" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" prepositionType="+path"/>
-        </SubcategorizationFrame>
-        <SubcategorizationFrame id="VN_SubcategorizationFrame_80">
-            <SyntacticArgument id="VN_SyntacticArgument_208" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
-            <SyntacticArgument id="VN_SyntacticArgument_209" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" preposition="against/into/onto"/>
-        </SubcategorizationFrame>
-
-        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_83" name="run-51.3.2">
-            <SubcatFrameSetElement element="VN_SubcategorizationFrame_217"/>
-            <SubcatFrameSetElement element="VN_SubcategorizationFrame_245"/>
-            <SubcatFrameSetElement element="VN_SubcategorizationFrame_246"/>
-        </SubcategorizationFrameSet>
-        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_111" name="bump-18.4">
-            <SubcatFrameSetElement element="VN_SubcategorizationFrame_80"/>
-        </SubcategorizationFrameSet>
-
-        <SemanticPredicate id="VN_SemanticPredicate_500">
-            <Definition>
-                <TextRepresentation writtenText="motion(during(E), Theme) AND Prep(E, Theme, Location)"/>
-            </Definition>
-            <SemanticArgument id="VN_SemanticArgument_1089" semanticRole="Theme[+animate|+machine]"/>
-            <SemanticArgument id="VN_SemanticArgument_1090" semanticRole="Location[+concrete]"/>
-        </SemanticPredicate>
-        <SemanticPredicate id="VN_SemanticPredicate_119">
-            <Definition>
-                <TextRepresentation writtenText="manner(during(E), directedmotion, Theme) AND not(contact(during(E), Theme, Location)) AND manner(end(E), forceful, Theme) AND contact(end(E), Theme, Location)"/>
-            </Definition>
-            <SemanticArgument id="VN_SemanticArgument_265" semanticRole="Theme[+concrete]"/>
-            <SemanticArgument id="VN_SemanticArgument_266" semanticRole="Location[+concrete]"/>
-        </SemanticPredicate>
-
-        <SynSemCorrespondence id="VN_SynSemCorrespondence_25533">
-            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_634" semanticArgument="VN_SemanticArgument_1089"/>
-            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_635" semanticArgument="VN_SemanticArgument_1090"/>
-        </SynSemCorrespondence>
-        <SynSemCorrespondence id="VN_SynSemCorrespondence_25198">
-            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_637" semanticArgument="VN_SemanticArgument_1089"/>
-            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_638" semanticArgument="VN_SemanticArgument_1090"/>
-        </SynSemCorrespondence>
-        <SynSemCorrespondence id="VN_SynSemCorrespondence_4974">
-            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_208" semanticArgument="VN_SemanticArgument_265"/>
-            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_209" semanticArgument="VN_SemanticArgument_266"/>
-        </SynSemCorrespondence>
-
-
       <LexicalEntry id="VN_LexicalEntry_0" partOfSpeech="verb">
           <Lemma>
                   <FormRepresentation writtenForm="question"/>
@@ -549,6 +495,22 @@
           <SyntacticBehaviour id="VN_SyntacticBehaviour_1" sense="VN_Sense_1" subcategorizationFrame="VN_SubcategorizationFrame_0" subcategorizationFrameSet="VN_SubcategorizationFrameSet_0"/>
           <SyntacticBehaviour id="VN_SyntacticBehaviour_2" sense="VN_Sense_2" subcategorizationFrame="VN_SubcategorizationFrame_1" subcategorizationFrameSet="VN_SubcategorizationFrameSet_0"/>
       </LexicalEntry>
+        
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_245">
+            <SyntacticArgument id="VN_SyntacticArgument_633" grammaticalFunction="subject" syntacticCategory="expletive" lexeme="there"/>
+            <SyntacticArgument id="VN_SyntacticArgument_634" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" prepositionType="+path"/>
+            <SyntacticArgument id="VN_SyntacticArgument_635" grammaticalFunction="complement" syntacticCategory="nounPhrase" determiner="indefinite"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_246">
+            <SyntacticArgument id="VN_SyntacticArgument_636" grammaticalFunction="subject" syntacticCategory="expletive" lexeme="there"/>
+            <SyntacticArgument id="VN_SyntacticArgument_637" grammaticalFunction="complement" syntacticCategory="nounPhrase" determiner="indefinite"/>
+            <SyntacticArgument id="VN_SyntacticArgument_638" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" prepositionType="+path"/>
+        </SubcategorizationFrame>
+        <SubcategorizationFrame id="VN_SubcategorizationFrame_80">
+            <SyntacticArgument id="VN_SyntacticArgument_208" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
+            <SyntacticArgument id="VN_SyntacticArgument_209" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" preposition="against/into/onto"/>
+        </SubcategorizationFrame>
+
         <SubcategorizationFrame id="VN_SubcategorizationFrame_0">
             <SyntacticArgument id="VN_SyntacticArgument_0" grammaticalFunction="subject" syntacticCategory="nounPhrase"/>
             <SyntacticArgument id="VN_SyntacticArgument_1" grammaticalFunction="complement" syntacticCategory="nounPhrase"/>
@@ -563,11 +525,34 @@
             <SyntacticArgument id="VN_SyntacticArgument_6" grammaticalFunction="complement" syntacticCategory="nounPhrase"/>
             <SyntacticArgument id="VN_SyntacticArgument_7" grammaticalFunction="complement" syntacticCategory="prepositionalPhrase" preposition="about"/>
         </SubcategorizationFrame>
+        
+        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_83" name="run-51.3.2">
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_245"/>
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_246"/>
+        </SubcategorizationFrameSet>
+        <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_111" name="bump-18.4">
+            <SubcatFrameSetElement element="VN_SubcategorizationFrame_80"/>
+        </SubcategorizationFrameSet>        
         <SubcategorizationFrameSet id="VN_SubcategorizationFrameSet_0" name="interrogate-37.1.3">
             <SubcatFrameSetElement element="VN_SubcategorizationFrame_0"/>
             <SubcatFrameSetElement element="VN_SubcategorizationFrame_2"/>
             <SubcatFrameSetElement element="VN_SubcategorizationFrame_1"/>
         </SubcategorizationFrameSet>
+        
+        <SemanticPredicate id="VN_SemanticPredicate_500">
+            <Definition>
+                <TextRepresentation writtenText="motion(during(E), Theme) AND Prep(E, Theme, Location)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_1089" semanticRole="Theme[+animate|+machine]"/>
+            <SemanticArgument id="VN_SemanticArgument_1090" semanticRole="Location[+concrete]"/>
+        </SemanticPredicate>
+        <SemanticPredicate id="VN_SemanticPredicate_119">
+            <Definition>
+                <TextRepresentation writtenText="manner(during(E), directedmotion, Theme) AND not(contact(during(E), Theme, Location)) AND manner(end(E), forceful, Theme) AND contact(end(E), Theme, Location)"/>
+            </Definition>
+            <SemanticArgument id="VN_SemanticArgument_265" semanticRole="Theme[+concrete]"/>
+            <SemanticArgument id="VN_SemanticArgument_266" semanticRole="Location[+concrete]"/>
+        </SemanticPredicate>        
         <SemanticPredicate id="VN_SemanticPredicate_0">
             <Definition>
                 <TextRepresentation writtenText="transfer_info(during(E), Agent, Recipient, ?Topic) AND cause(Agent, E)"/>
@@ -603,6 +588,20 @@
             </SemanticArgument>
             <SemanticArgument id="VN_SemanticArgument_7" semanticRole="Topic"/>
         </SemanticPredicate>
+        
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_25533">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_634" semanticArgument="VN_SemanticArgument_1089"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_635" semanticArgument="VN_SemanticArgument_1090"/>
+        </SynSemCorrespondence>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_25198">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_637" semanticArgument="VN_SemanticArgument_1089"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_638" semanticArgument="VN_SemanticArgument_1090"/>
+        </SynSemCorrespondence>
+        <SynSemCorrespondence id="VN_SynSemCorrespondence_4974">
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_208" semanticArgument="VN_SemanticArgument_265"/>
+            <SynSemArgMap syntacticArgument="VN_SyntacticArgument_209" semanticArgument="VN_SemanticArgument_266"/>
+        </SynSemCorrespondence>
+        
         <SynSemCorrespondence id="VN_SynSemCorrespondence_2">
             <SynSemArgMap syntacticArgument="VN_SyntacticArgument_5" semanticArgument="VN_SemanticArgument_5"/>
             <SynSemArgMap syntacticArgument="VN_SyntacticArgument_6" semanticArgument="VN_SemanticArgument_6"/>
@@ -723,9 +722,17 @@
             <Definition>
                 <TextRepresentation languageIdentifier="eng" writtenText="a sentence of inquiry that asks for a reply; &quot;he asked a direct question&quot;; &quot;he had trouble phrasing his interrogations&quot;"/>
             </Definition>
-	    <SynsetRelation target="WN_Synset_38915" relType="association" relName="related"/>
+	        <SynsetRelation target="WN_Synset_38915" relType="association" relName="related"/>
             <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: noun] 7196682"/>
         </Synset>
+        
+        <Synset id="WN_Synset_38949">
+            <Definition>
+                <TextRepresentation languageIdentifier="eng" writtenText="a statement that solves a problem or explains how to solve the problem"/>
+            </Definition>
+            <MonolingualExternalRef externalSystem="WordNet 3.0 part of speech and synset offset" externalReference="[POS: noun] 6756201"/>
+        </Synset>
+        
     </Lexicon>
     
     <Lexicon languageIdentifier="eng" id="WktEn_Lexicon_1" name="Wiktionary">
@@ -792,10 +799,8 @@
     </Lexicon>
 
     <SenseAxis id="AnoEx_SenseAxis_3" senseOne="WktEn_sense_3" senseTwo="WN_Sense_7" senseAxisType="monolingualSenseAlignment"/>
-    <SenseAxis id="AnoEx_SenseAxis_5" senseOne="WN_Sense_2" senseTwo="VN_Sense_20" senseAxisType="monolingualSenseAlignment"/>
-    <SenseAxis id="AnoEx_SenseAxis_6" senseOne="WN_Sense_2" senseTwo="VN_Sense_21" senseAxisType="monolingualSenseAlignment"/>
-    <SenseAxis id="AnoEx_SenseAxis_7" senseOne="WN_Sense_2" senseTwo="VN_Sense_22" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_5" senseOne="WN_Sense_2" senseTwo="VN_Sense_0" senseAxisType="monolingualSenseAlignment"/>
+    <SenseAxis id="AnoEx_SenseAxis_6" senseOne="WN_Sense_2" senseTwo="VN_Sense_1" senseAxisType="monolingualSenseAlignment"/>
     <SenseAxis id="AnoEx_SenseAxis_8" senseOne="FN_Sense_5129" senseTwo="VN_Sense_2455" senseAxisType="monolingualSenseAlignment"/>
-    <SenseAxis id="AnoEx_SenseAxis_9" senseOne="OW_deu_Sense_20765" senseTwo="WN_Sense_3" senseAxisType="crosslingualSenseAlignment"/>
 
 </LexicalResource>
