@@ -28,7 +28,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.Formatter;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -177,7 +176,7 @@ public class Web1TFileSplitter
 
 			double percentage = (double) freq / total * 100;
 			if ((threshold > 0.0) && (percentage >= threshold)) {
-				String filename = new Formatter().format("%08d", fileNumber++).toString();
+				String filename = String.format("%08d", fileNumber++);
 				letterToFileNameMap.put(key, filename);
 			}
 			else {
