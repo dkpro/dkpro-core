@@ -40,27 +40,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<!-- For uimaFIT 2.0.0-SNAPSHOT -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<!-- For uimaFIT 2.0.0-SNAPSHOT maven plugin -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
@@ -73,7 +53,7 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<uima.version>2.4.2</uima.version>
-		<uimafit.version>2.0.0-SNAPSHOT</uimafit.version>
+		<uimafit.version>2.0.0</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 	</properties>
@@ -518,6 +498,11 @@
 				<groupId>net.sf.trove4j</groupId>
 				<artifactId>trove4j</artifactId>
 				<version>3.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>trove</groupId>
+				<artifactId>trove</artifactId>
+				<version>1.1-beta-5</version>
 			</dependency>
 			<dependency>
 				<groupId>jaxen</groupId>
