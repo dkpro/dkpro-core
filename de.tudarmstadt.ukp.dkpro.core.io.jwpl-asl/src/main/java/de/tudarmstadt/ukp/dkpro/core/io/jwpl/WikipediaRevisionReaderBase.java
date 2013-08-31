@@ -39,6 +39,7 @@ import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision;
+import de.tudarmstadt.ukp.dkpro.core.io.jwpl.util.WikiUtils;
 import de.tudarmstadt.ukp.wikipedia.api.MetaData;
 import de.tudarmstadt.ukp.wikipedia.api.Page;
 import de.tudarmstadt.ukp.wikipedia.api.PageIterator;
@@ -260,11 +261,14 @@ public abstract class WikipediaRevisionReaderBase
     protected void addDocumentMetaData(JCas jcas, int pageId, int revisionId)
         throws WikiTitleParsingException, WikiApiException
     {
+        // fix for issue http://code.google.com/p/dkpro-core-asl/issues/detail?id=209
+        String language = WikiUtils.jwplLanguage2dkproLanguage(dbconfig.getLanguage());
+        System.out.println(language);
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(wiki.getPage(pageId).getTitle().getWikiStyleTitle());
         metaData.setCollectionId(Integer.valueOf(pageId).toString());
         metaData.setDocumentId(Integer.valueOf(revisionId).toString());
-        metaData.setLanguage(dbconfig.getLanguage().toString()); // should be ISO language code
+        metaData.setLanguage(language);
     }
 
     /**
