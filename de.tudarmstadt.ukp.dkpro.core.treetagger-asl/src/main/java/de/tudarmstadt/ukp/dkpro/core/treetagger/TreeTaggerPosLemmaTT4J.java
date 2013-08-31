@@ -187,7 +187,6 @@ public class TreeTaggerPosLemmaTT4J
 				public void token(AnnotationFS aToken, String aPos, String aLemma)
 				{
 					synchronized (aCas) {
-						TypeSystem ts = aCas.getTypeSystem();
 						// Add the Part of Speech
 						if (writePos && aPos != null) {
 							Type posType = taggerMappingProvider.getTagType(aPos);
