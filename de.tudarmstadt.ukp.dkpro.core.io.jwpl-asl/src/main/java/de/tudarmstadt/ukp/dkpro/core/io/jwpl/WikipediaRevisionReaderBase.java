@@ -263,7 +263,7 @@ public abstract class WikipediaRevisionReaderBase
     {
         // fix for issue http://code.google.com/p/dkpro-core-asl/issues/detail?id=209
         String language = WikiUtils.jwplLanguage2dkproLanguage(dbconfig.getLanguage());
-        System.out.println(language);
+
         DocumentMetaData metaData = DocumentMetaData.create(jcas);
         metaData.setDocumentTitle(wiki.getPage(pageId).getTitle().getWikiStyleTitle());
         metaData.setCollectionId(Integer.valueOf(pageId).toString());
