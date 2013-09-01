@@ -52,10 +52,10 @@ public class MorphaStemmer
 
             for (Token t : tokens) {
                 Stem l = new Stem(aJCas, t.getBegin(), t.getEnd());
-                
+
                 if (t.getPos() != null) {
-                    l.setValue(edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(t
-                            .getCoveredText(), t.getPos().getPosValue()));
+                    l.setValue(edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
+                            t.getCoveredText(), t.getPos().getPosValue()));
                 }
                 else {
                     l.setValue(edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(t
