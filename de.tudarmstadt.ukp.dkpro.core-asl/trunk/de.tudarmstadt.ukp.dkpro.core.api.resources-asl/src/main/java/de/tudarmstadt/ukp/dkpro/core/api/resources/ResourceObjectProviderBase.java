@@ -430,14 +430,18 @@ public abstract class ResourceObjectProviderBase<M>
                         catch (Throwable re) {
                             // Ignore - if we cannot resolve, we cannot resolve. Re-throw the
                             // original exception
-                            throw e;
+                            throw handleResolvingError(e, lastModelLocation, props);
                         }
 
-                        // Try resolving again, this time with the potentially extended classpath
-                        initialUrl = resolveLocation(modelLocation, loader, null);
+                        try {
+                            initialUrl = resolveLocation(modelLocation, loader, null);
+                        }
+                        catch (Throwable re) {
+                            throw handleResolvingError(e, lastModelLocation, props);
+                        }
                     }
                     else {
-                        throw e;
+                        throw handleResolvingError(e, lastModelLocation, props);
                     }
                 }
                 
@@ -450,9 +454,6 @@ public abstract class ResourceObjectProviderBase<M>
                 }
             }
             success = true;
-        }
-        catch (IOException e) {
-            throw handleResolvingError(e, lastModelLocation, props);
         }
         finally {
             if (!success) {
@@ -719,7 +720,10 @@ public abstract class ResourceObjectProviderBase<M>
         throws IOException
     {
         Properties defaultValues = new Properties(defaults);
-        defaultValues.putAll(getProperties());
+        Properties props = getProperties();
+        if (props != null) {
+            defaultValues.putAll(props);
+        }
 
         Properties importedValues = new Properties(defaultValues);
         for (Entry<String, HasResourceMetadata> e : imports.entrySet()) {
