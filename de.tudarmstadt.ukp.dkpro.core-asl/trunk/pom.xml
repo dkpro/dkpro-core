@@ -326,6 +326,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.morpha-asl</artifactId>
+				<version>1.5.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
@@ -607,6 +612,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.norvig-asl</module>
@@ -622,9 +628,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
-		<!--  
-		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
-		-->
 	</modules>
 	<build>
 		<plugins>
@@ -907,6 +910,9 @@
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java"
+										includes="**/*.java" />
+									<fileset
+										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java"
 										includes="**/*.java" />
 									<fileset
 										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java"

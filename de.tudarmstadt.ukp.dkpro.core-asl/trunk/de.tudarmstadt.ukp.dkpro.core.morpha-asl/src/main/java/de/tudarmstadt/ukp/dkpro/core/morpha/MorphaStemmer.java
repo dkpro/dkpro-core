@@ -25,14 +25,16 @@ import java.util.List;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Lemmatizer using Morpha.
+ * Stemmer using Morpha.
  * 
  * @author Richard Eckart de Castilho
  */
@@ -42,6 +44,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class MorphaStemmer
     extends JCasAnnotator_ImplBase
 {
+    /**
+     * Pass part-of-speech information on to Morpha. Since we currently do not know in which format
+     * the part-of-speech tags are expected by Morpha, we just pass on the actual pos tag value
+     * we get from the token. This may produce worse results than not passing on pos tags at all,
+     * so this is disabled by default.
+     */
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+    @ConfigurationParameter(name=PARAM_READ_POS, mandatory=true, defaultValue="false")
+    private boolean readPos;
+    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -53,7 +65,7 @@ public class MorphaStemmer
             for (Token t : tokens) {
                 Stem l = new Stem(aJCas, t.getBegin(), t.getEnd());
 
-                if (t.getPos() != null) {
+                if (readPos && (t.getPos() != null)) {
                     l.setValue(edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
                             t.getCoveredText(), t.getPos().getPosValue()));
                 }
