@@ -693,8 +693,14 @@ public abstract class ResourceObjectProviderBase<M>
 
         }
 
-        return new IOException("Unable to load resource [" + aLocation + "]: \n"
-                + ExceptionUtils.getRootCauseMessage(aCause) + "\n" + sb.toString());
+        if (NOT_REQUIRED.equals(aLocation)) {
+            return new IOException("Unable to load resource: \n"
+                    + ExceptionUtils.getRootCauseMessage(aCause) + "\n" + sb.toString());
+        }
+        else {
+            return new IOException("Unable to load resource [" + aLocation + "]: \n"
+                    + ExceptionUtils.getRootCauseMessage(aCause) + "\n" + sb.toString());
+        }
     }
 
     /**
