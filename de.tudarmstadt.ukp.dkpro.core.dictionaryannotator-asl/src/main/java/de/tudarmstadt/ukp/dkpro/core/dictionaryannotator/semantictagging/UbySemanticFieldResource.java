@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.lmf.model.core.Sense;
 import de.tudarmstadt.ukp.lmf.model.enums.ELabelTypeSemantics;
 import de.tudarmstadt.ukp.lmf.model.enums.EPartOfSpeech;
 import de.tudarmstadt.ukp.lmf.model.meta.SemanticLabel;
-import de.tudarmstadt.ukp.lmf.model.multilingual.SenseAxis;
 import de.tudarmstadt.ukp.lmf.transform.DBConfig;
 
 
@@ -119,13 +118,13 @@ public class UbySemanticFieldResource
 			}			
 					
 			// does the token have a POS which has relevant information in the lexicon?	
-			if (corePosToUbyPos(token.getPos().getPosValue()).length == 0) {
+			if (corePosToUbyPos(token.getPos().getType().getShortName()).length == 0) {
 				return "UNKNOWN"; 
 			// is the lemma contained in any of the UBY lexicons?
 			} else if (uby.getLexicalEntries(token.getLemma().getValue(),null,null).isEmpty()) { 
 				return "UNKNOWN"; 
 			} else { // there is at least one UBY lexicon that contains the lemma
-				for (EPartOfSpeech pos : corePosToUbyPos(token.getPos().getPosValue())) {
+				for (EPartOfSpeech pos : corePosToUbyPos(token.getPos().getType().getShortName())) {
 					
 					if (!uby.getLexicalEntries(token.getLemma().getValue(),pos,wordnet).isEmpty()) { 
 						// the lemma is listed in the English or German wordnet with the given POS
