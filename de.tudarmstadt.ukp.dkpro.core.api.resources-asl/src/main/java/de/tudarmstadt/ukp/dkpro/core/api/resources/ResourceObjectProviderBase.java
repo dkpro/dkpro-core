@@ -504,29 +504,56 @@ public abstract class ResourceObjectProviderBase<M>
     
     protected void loadMetadata() throws IOException
     {
-        // Load resource meta data if present
+        Properties modelMetaData = null;
+                
+        // Load resource meta data if present, look directly next to the resolved model
         try {
-            String baseLocation = resourceUrl.toString();
-            if (baseLocation.toLowerCase().endsWith(".gz")) {
-                baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
-            }
-            else if (baseLocation.toLowerCase().endsWith(".bz2")) {
-                baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
-            }
-
-            String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
-                    + ".properties";
+            String modelMetaDataLocation = getModelMetaDataLocation(resourceUrl.toString());
             URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
-            Properties tmpResourceMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
+            modelMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
                     modelMetaDataUrl));
-
-            // Values in the redirecting properties override values in the redirected-to
-            // properties.
-            mergeProperties(resourceMetaData, tmpResourceMetaData);
         }
         catch (FileNotFoundException e) {
-            // If no metadata was found, just leave the properties empty.
+            // Ignore
         }
+        
+        // Try in the again, this time derive the metadata location first an then resolve.
+        // This can help if the metadata is in another artifact, e.g. because the migration
+        // to proxy/resource mode is not completed yet and the provide still looks for the model
+        // and not for the properties file.
+        if (modelMetaData == null) {
+            try {
+                String modelMetaDataLocation = getModelMetaDataLocation(lastModelLocation);
+                URL modelMetaDataUrl = resolveLocation(modelMetaDataLocation, loader, null);
+                modelMetaData = PropertiesLoaderUtils.loadProperties(new UrlResource(
+                        modelMetaDataUrl));
+            }
+            catch (FileNotFoundException e2) {
+                // If no metadata was found, just leave the properties empty.
+            }
+        }
+        
+        // Values in the redirecting properties override values in the redirected-to
+        // properties.
+        if (modelMetaData != null) {
+            mergeProperties(resourceMetaData, modelMetaData);
+        }
+    }
+    
+    private String getModelMetaDataLocation(String aLocation)
+    {
+        String baseLocation = aLocation;
+        if (baseLocation.toLowerCase().endsWith(".gz")) {
+            baseLocation = baseLocation.substring(0, baseLocation.length() - 3);
+        }
+        else if (baseLocation.toLowerCase().endsWith(".bz2")) {
+            baseLocation = baseLocation.substring(0, baseLocation.length() - 4);
+        }
+
+        String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
+                + ".properties";
+        
+        return modelMetaDataLocation;
     }
     
     
