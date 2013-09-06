@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mstparser;
 
 import static java.util.Arrays.asList;
+import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.exists;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
@@ -27,12 +28,14 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import mstparser.DependencyInstance;
+import mstparser.DependencyParser;
 import mstparser.DependencyPipe;
 import mstparser.DependencyPipe2O;
 import mstparser.ParserOptions;
@@ -51,6 +54,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -118,7 +122,7 @@ public class MstParser
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
 
-    private ModelProviderBase<UkpDependencyParser> modelProvider;
+    private ModelProviderBase<DependencyParser> modelProvider;
     private MappingProvider mappingProvider;
 
     /**
@@ -134,7 +138,7 @@ public class MstParser
         super.initialize(context);
 
         // the modelProvider reads in the model and produces a parser
-        modelProvider = new ModelProviderBase<UkpDependencyParser>()
+        modelProvider = new ModelProviderBase<DependencyParser>()
         {
             {
                 setContextObject(MstParser.this);
@@ -151,7 +155,7 @@ public class MstParser
             }
 
             @Override
-            protected UkpDependencyParser produceResource(URL aUrl)
+            protected DependencyParser produceResource(URL aUrl)
                 throws IOException
             {
                 // mst.ParserOptions needs a String as argument
@@ -169,27 +173,25 @@ public class MstParser
                 DependencyPipe pipe = options.secondOrder ? new DependencyPipe2O(options)
                         : new DependencyPipe(options);
 
-                UkpDependencyParser dp = new UkpDependencyParser(pipe, options);
-                getLogger().info("Loading model:  " + options.modelName);
+                DependencyParser dp = new DependencyParser(pipe, options);
+                
+                InputStream is = null;
                 try {
-                    dp.loadModel(options.modelName);
-                    getLogger().info("... done.");
-
-                    Properties metadata = getResourceMetaData();
-                    SingletonTagset depTags = new SingletonTagset(
-                            Dependency.class, metadata.getProperty("dependency.tagset"));
-                    depTags.addAll(asList(pipe.types));
-                    addTagset(depTags);
-                    
-                    if (printTagSet) {
-                        getContext().getLogger().log(INFO, getTagset().toString());
-                    }
-                }
-                catch (Exception e) {
-                    throw new IOException(e);
+                    is = CompressionUtils.getInputStream(aUrl.getFile(), aUrl.openStream());
+                    dp.loadModel(is);
                 }
                 finally {
-                    pipe.closeAlphabets();
+                    closeQuietly(is);
+                }
+                
+                Properties metadata = getResourceMetaData();
+                SingletonTagset depTags = new SingletonTagset(
+                        Dependency.class, metadata.getProperty("dependency.tagset"));
+                depTags.addAll(asList(pipe.types));
+                addTagset(depTags);
+                
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, getTagset().toString());
                 }
 
                 return dp;
@@ -222,7 +224,7 @@ public class MstParser
         CAS cas = jcas.getCas();
         modelProvider.configure(cas);
         mappingProvider.configure(cas);
-        UkpDependencyParser dp = modelProvider.getResource();
+        DependencyParser dp = modelProvider.getResource();
 
         // If there are no sentences or tokens in the CAS, skip it.
         if (!exists(jcas, Sentence.class) || !exists(jcas, Token.class)) {
