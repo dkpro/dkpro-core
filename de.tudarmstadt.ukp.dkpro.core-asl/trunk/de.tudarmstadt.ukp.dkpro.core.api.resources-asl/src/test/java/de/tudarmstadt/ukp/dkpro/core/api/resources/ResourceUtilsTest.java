@@ -69,6 +69,10 @@ public class ResourceUtilsTest
                 asList("/resources/MappingProviderTest$1.class",
                         "/resources/MappingProviderTest$2.class",
                         "/resources/MappingProviderTest.class",
+                        "/resources/ResourceObjectProviderTest$1.class",
+                        "/resources/ResourceObjectProviderTest$2.class",
+                        "/resources/ResourceObjectProviderTest$3.class",
+                        "/resources/ResourceObjectProviderTest.class",
                         "/resources/ResourceUtilsTest.class"), files);
     }
 
