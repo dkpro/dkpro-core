@@ -69,7 +69,8 @@ public class MorphaStemmerTest
         if (aUsePosTags) {
             engine = createEngineDescription(
                     createEngineDescription(OpenNlpPosTagger.class),
-                    createEngineDescription(MorphaStemmer.class));
+                    createEngineDescription(MorphaStemmer.class,
+                            MorphaStemmer.PARAM_READ_POS, true));
         }
         else {
             engine = createEngineDescription(
