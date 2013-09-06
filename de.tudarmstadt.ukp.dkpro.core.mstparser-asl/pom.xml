@@ -31,14 +31,9 @@
 			<artifactId>uimafit-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mstparser</groupId>
+			<groupId>net.sourceforge.mstparser</groupId>
 			<artifactId>mstparser</artifactId>
-			<version>0.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>trove</groupId>
-			<artifactId>trove</artifactId>
-			<version>1.1-beta-5</version>
+			<version>0.5.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
