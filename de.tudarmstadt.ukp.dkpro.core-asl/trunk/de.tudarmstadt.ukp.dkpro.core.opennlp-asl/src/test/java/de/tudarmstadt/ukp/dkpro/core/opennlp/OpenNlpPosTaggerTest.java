@@ -67,6 +67,19 @@ public class OpenNlpPosTaggerTest
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
 
+    @Test
+    public void testItalian()
+        throws Exception
+    {
+        runTest("it", null, "Questo è un test .",
+                new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
+                new String[] { "PR", "V",    "ART", "NN", "PUNC" });
+        
+        runTest("it", "perceptron", "Questo è un test .",
+                new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
+                new String[] { "PR", "V",    "ART", "NN", "PUNC" });
+    }
+		
 	@Test
 	public void testSpanish()
 		throws Exception
