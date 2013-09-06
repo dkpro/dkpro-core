@@ -455,6 +455,99 @@
     	</install-model-file>
 	</target>
 
+	<target name="it">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: it-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-06-18 | now        | b8d6248590f0c0e0af7271ff389aa18e
+		  -->
+    	<get 
+    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-sent.bin" 
+    		dest="target/download/it-sent.bin" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/it-sent.bin" 
+    		md5="b8d6248590f0c0e0af7271ff389aa18e"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20130618"
+    		metaDataVersion="0"
+    		tool="sentence" 
+    		language="it" 
+    		variant="maxent" 
+    		extension="bin">
+		</install-stub-and-upstream-file>
+
+		<!-- FILE: it-token.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-06-18 | now        | fec71d44b64742ba2566d5fc16b69f63
+		  -->
+    	<get 
+    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-token.bin" 
+    		dest="target/download/it-token.bin" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/it-token.bin" 
+    		md5="fec71d44b64742ba2566d5fc16b69f63"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20130618"
+    		metaDataVersion="0"
+    		tool="token" 
+    		language="it" 
+    		variant="maxent" 
+    		extension="bin">
+		</install-stub-and-upstream-file>
+
+		<!-- FILE: it-pos_perceptron.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-06-16 | now        | 95d966c9790da33173ba192e266aca60
+ 		  -->
+    	<get 
+    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-pos_perceptron.bin" 
+    		dest="target/download/it-pos_perceptron.bin" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/it-pos_perceptron.bin" 
+    		md5="95d966c9790da33173ba192e266aca60"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20130618"
+    		metaDataVersion="0"
+    		tool="tagger" 
+    		language="it" 
+    		variant="perceptron" 
+    		extension="bin">
+			<metadata>
+				<!-- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset -->
+	    		<entry key="tagger.tagset" value="tanl"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
+		<!-- This file is too large, we cannot download it using HTTP from github. It would be
+		  - necessary to check out the repository -->
+		<!-- FILE: it-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-06-16 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
+    	<get 
+    		src="https://raw.github.com/aciapetti/opennlp-italian-models/master/models/it/it-pos-maxent.bin" 
+    		dest="target/download/it-pos-maxent.bin" 
+    		skipexisting="true"/>
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		file="target/download/it-pos-maxent.bin" 
+    		md5="39ecc4c56e037b3dde859cb6d90b4b6a"
+    		tool="tagger" 
+    		language="it" 
+    		variant="maxent" 
+    		extension="bin" 
+    		version="20130618.0">
+			<metadata>
+				<!- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset ->
+	    		<entry key="tagger.tagset" value="tanl"/>
+			</metadata>
+    	</install-model-file>	
+		  -->
+	</target>	
+	
 	<target name="es">
 		<mkdir dir="target/download"/>
 
