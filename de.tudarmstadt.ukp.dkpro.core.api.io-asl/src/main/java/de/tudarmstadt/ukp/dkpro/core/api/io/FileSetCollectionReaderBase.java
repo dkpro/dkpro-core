@@ -85,6 +85,14 @@ public abstract class FileSetCollectionReaderBase
 	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
 	private String[] patterns;
 
+    /**
+     * Use the default excludes.
+     */
+    public static final String PARAM_USE_DEFAULT_EXCLUDES = "useDefaultExcludes";
+    @ConfigurationParameter(name=PARAM_USE_DEFAULT_EXCLUDES, mandatory=true, defaultValue="true")
+    private boolean useDefaultExcludes;
+
+
 	/**
 	 * The language.
 	 */
@@ -138,6 +146,39 @@ public abstract class FileSetCollectionReaderBase
                 includes.add(pattern);
             }
 		}
+		
+        // These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
+        if (useDefaultExcludes) {
+            excludes.add("**/*~");
+            excludes.add("**/#*#");
+            excludes.add("**/.#*");
+            excludes.add("**/%*%");
+            excludes.add("**/._*");
+            excludes.add("**/CVS");
+            excludes.add("**/CVS/**");
+            excludes.add("**/.cvsignore");
+            excludes.add("**/SCCS");
+            excludes.add("**/SCCS/**");
+            excludes.add("**/vssver.scc");
+            excludes.add("**/.svn");
+            excludes.add("**/.svn/**");
+            excludes.add("**/.DS_Store");
+            excludes.add("**/.git");
+            excludes.add("**/.git/**");
+            excludes.add("**/.gitattributes");
+            excludes.add("**/.gitignore");
+            excludes.add("**/.gitmodules");
+            excludes.add("**/.hg");
+            excludes.add("**/.hg/**");
+            excludes.add("**/.hgignore");
+            excludes.add("**/.hgsub");
+            excludes.add("**/.hgsubstate");
+            excludes.add("**/.hgtags");
+            excludes.add("**/.bzr");
+            excludes.add("**/.bzr/**");
+            excludes.add("**/.bzrignore");
+        }		
+		
 		directoryScanner.setIncludes(includes.toArray(new String[includes.size()]));
 		directoryScanner.setExcludes(excludes.toArray(new String[excludes.size()]));
 		directoryScanner.scan();
