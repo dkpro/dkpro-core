@@ -97,7 +97,7 @@ public abstract class ResourceCollectionReaderBase
 	 * The wildcard {@code *} can be used to a address a part of a name.
 	 */
 	public static final String PARAM_PATTERNS = "patterns";
-	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=true)
+	@ConfigurationParameter(name=PARAM_PATTERNS, mandatory=false)
 	private String[] patterns;
 
 	/**
@@ -159,24 +159,35 @@ public abstract class ResourceCollectionReaderBase
 			}
 		}
 
+		if (patterns == null) {
+            // If the source location contains a wildcard, split it up into a base and a pattern
+            int asterisk = sourceLocation.indexOf('*');
+            if (asterisk != -1) {
+                patterns = new String[] { INCLUDE_PREFIX+sourceLocation.substring(asterisk)};
+                sourceLocation = sourceLocation.substring(0, asterisk);
+            }
+		}
+		
 		// Parse the patterns and inject them into the FileSet
 		List<String> includes = new ArrayList<String>();
 		List<String> excludes = new ArrayList<String>();
-		for (String pattern : patterns) {
-			if (pattern.startsWith(INCLUDE_PREFIX)) {
-				includes.add(pattern.substring(INCLUDE_PREFIX.length()));
-			}
-			else if (pattern.startsWith(EXCLUDE_PREFIX)) {
-				excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
-			}
-			else if (pattern.matches("^\\[.\\].*")) {
-				throw new ResourceInitializationException(new IllegalArgumentException(
-						"Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
-								+ "."));
-			}
-			else {
-                includes.add(pattern);
-			}
+		if (patterns != null) {
+    		for (String pattern : patterns) {
+    			if (pattern.startsWith(INCLUDE_PREFIX)) {
+    				includes.add(pattern.substring(INCLUDE_PREFIX.length()));
+    			}
+    			else if (pattern.startsWith(EXCLUDE_PREFIX)) {
+    				excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
+    			}
+    			else if (pattern.matches("^\\[.\\].*")) {
+    				throw new ResourceInitializationException(new IllegalArgumentException(
+    						"Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
+    								+ "."));
+    			}
+    			else {
+                    includes.add(pattern);
+    			}
+    		}
 		}
 
 		// These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
@@ -306,12 +317,32 @@ public abstract class ResourceCollectionReaderBase
 			Collection<String> aExcludes)
 		throws IOException
 	{
-		String base = (aBase != null) ? aBase+"/" : "";
+	    boolean singleLocation = patterns == null;
+	    
+	    String base;
+	    if (aBase != null) {
+	        base = aBase;
+	        // If this is a real base location, then add a "/" if there is none
+	        if (!singleLocation) {
+	            if (!base.endsWith("/")) {
+                    base += "/";
+                }
+	        }
+	    }
+	    else {
+	        base = "";
+	    }
+	    
 		Collection<String> includes;
 		Collection<String> excludes;
 
 		if (aIncludes == null || aIncludes.size() == 0) {
-			includes = Collections.singleton("**/*");
+		    if (!singleLocation) {
+		        includes = Collections.singleton("**/*");
+		    }
+		    else {
+		        includes = Collections.singleton("");
+		    }
 		}
 		else {
 			includes = aIncludes;
@@ -351,7 +382,7 @@ public abstract class ResourceCollectionReaderBase
 
 				// Determine the resolved base for this location
 				String matchBase = null;
-				if (base.length() > 0) {
+				if (base.length() > 0 && !singleLocation) {
 					for (String b : rsBases) {
 						if (!sResource.startsWith(b)) {
 							continue;
@@ -417,30 +448,32 @@ public abstract class ResourceCollectionReaderBase
 	 * @return the URI of the resource
 	 */
 	private URI getUri(org.springframework.core.io.Resource aResource, boolean aFileOrDir)
-			throws IOException
-			{
-		try {
+        throws IOException
+    {
+        try {
+            final File file = aResource.getFile();
 
-			final File file = aResource.getFile();
+            // Exclude hidden files/dirs if requested
+            if (file.isHidden() && !this.includeHidden) {
+                return null;
+            }
 
-			// Exclude hidden files/dirs if requested
-			if (file.isHidden() && !this.includeHidden) {
-				return null;
-			}
+            // Return only dirs or files...
+            if ((aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
+                return aResource.getFile().toURI();
+            }
+            else {
+                return null;
+            }
+        }
+        catch (final IOException e) {
+            return aResource.getURI();
+        }
+        catch (final UnsupportedOperationException e) {
+            return aResource.getURI();
+        }
+    }
 
-			// Return only dirs or files...
-			if ((aFileOrDir && file.isFile())
-					|| (!aFileOrDir && file.isDirectory())) {
-				return aResource.getFile().toURI();
-			} else {
-				return null;
-			}
-		} catch (final IOException e) {
-			return aResource.getURI();
-		} catch (final UnsupportedOperationException e) {
-			return aResource.getURI();
-		}
-			}
 	/**
 	 * Initialize the {@link DocumentMetaData}. This must be called before setting the
 	 * document text, otherwise the end feature of this annotation will not be set correctly.
