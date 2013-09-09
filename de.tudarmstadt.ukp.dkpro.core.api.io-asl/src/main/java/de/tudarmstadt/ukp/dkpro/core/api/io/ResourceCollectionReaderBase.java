@@ -169,10 +169,13 @@ public abstract class ResourceCollectionReaderBase
 			else if (pattern.startsWith(EXCLUDE_PREFIX)) {
 				excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
 			}
-			else {
+			else if (pattern.matches("^\\[.\\].*")) {
 				throw new ResourceInitializationException(new IllegalArgumentException(
 						"Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
 								+ "."));
+			}
+			else {
+                includes.add(pattern);
 			}
 		}
 

@@ -1,4 +1,5 @@
 /*******************************************************************************
+
  * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
@@ -27,6 +28,7 @@ import java.io.IOException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCreationUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -84,6 +86,29 @@ public class ResourceCollectionReaderBaseTest
 
 		searchForResourceCollectionReaderBase(reader);
 	}
+
+    @Test
+    public void testFileNoPrefix() throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/de/tudarmstadt/ukp/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                    "**/FileSetCollectionReaderBase.java",
+                    "[-]**/ResourceCollectionReaderBase.java"});
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+   @Test(expected=ResourceInitializationException.class)
+    public void testBrokenPattern() throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class, createTypeSystemDescription(),
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, "file:src/main/java/de/tudarmstadt/ukp/",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                    "[?]**/FileSetCollectionReaderBase.java"});
+
+        searchForResourceCollectionReaderBase(reader);
+    }
 
 	public void searchForResourceCollectionReaderBase(CollectionReader aReader)
 		throws Exception
