@@ -129,11 +129,14 @@ public abstract class FileSetCollectionReaderBase
 			else if (pattern.startsWith(EXCLUDE_PREFIX)) {
 				excludes.add(pattern.substring(EXCLUDE_PREFIX.length()));
 			}
-			else {
-				throw new ResourceInitializationException(new IllegalArgumentException(
-						"Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
-								+ "."));
-			}
+            else if (pattern.matches("^\\[.\\].*")) {
+                throw new ResourceInitializationException(new IllegalArgumentException(
+                        "Patterns have to start with " + INCLUDE_PREFIX + " or " + EXCLUDE_PREFIX
+                                + "."));
+            }
+            else {
+                includes.add(pattern);
+            }
 		}
 		directoryScanner.setIncludes(includes.toArray(new String[includes.size()]));
 		directoryScanner.setExcludes(excludes.toArray(new String[excludes.size()]));
