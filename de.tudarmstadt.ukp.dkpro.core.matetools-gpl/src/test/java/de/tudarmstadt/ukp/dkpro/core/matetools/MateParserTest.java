@@ -35,7 +35,7 @@ public class MateParserTest
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
 				+ "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  3]Dependency(SB) D[0,3](Wir) G[4,12](brauchen)",
                 "[ 13, 16]Dependency(NK) D[13,16](ein) G[36,44](Beispiel)",
                 "[ 17, 21]Dependency(MO) D[17,21](sehr) G[22,35](kompliziertes)",
@@ -47,7 +47,7 @@ public class MateParserTest
                 "[ 65, 70]Dependency(NK) D[65,70](viele) G[71,84](Konstituenten)",
                 "[ 71, 84]DOBJ(OA) D[71,84](Konstituenten) G[101,111](beinhaltet)",
                 "[ 85, 88]Dependency(CD) D[85,88](und) G[71,84](Konstituenten)",
-                "[ 89,100]Dependency(CJ) D[89,100](Dependenzen) G[85,88](und)",
+                "[ 89,100]CONJ(CJ) D[89,100](Dependenzen) G[85,88](und)",
                 "[101,111]Dependency(RC) D[101,111](beinhaltet) G[36,44](Beispiel)",
                 "[112,113]Dependency(--) D[112,113](.) G[101,111](beinhaltet)" };
 
@@ -77,7 +77,7 @@ public class MateParserTest
         JCas jcas = runTest("en", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]Dependency(SBJ) D[0,2](We) G[3,7](need)",
                 "[  8,  9]Dependency(NMOD) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]Dependency(AMOD) D[10,14](very) G[15,26](complicated)",
