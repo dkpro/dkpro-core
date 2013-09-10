@@ -25,6 +25,12 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</artifactId>
 	<name>DKPro Core ASL - MSTParser</name>
+	<repositories>
+	    <repository>
+	    	<id>netsourceforgemstparser-1000</id>
+	    	<url>http://oss.sonatype.org/content/repositories/netsourceforgemstparser-1000</url>
+	    </repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -33,7 +39,7 @@
 		<dependency>
 			<groupId>net.sourceforge.mstparser</groupId>
 			<artifactId>mstparser</artifactId>
-			<version>0.5.1-SNAPSHOT</version>
+			<version>0.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
