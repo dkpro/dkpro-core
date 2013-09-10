@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -437,6 +438,12 @@ public abstract class ResourceCollectionReaderBase
 			}
 		});
 
+		if (singleLocation && result.isEmpty()) {
+            throw new FileNotFoundException("Resource not found or not a file: [" + aBase + 
+                    "]. Please specify a file or use a pattern. Directories without patterns are " +
+                    "not valid.");
+		}
+		
 		return result;
 	}
 
