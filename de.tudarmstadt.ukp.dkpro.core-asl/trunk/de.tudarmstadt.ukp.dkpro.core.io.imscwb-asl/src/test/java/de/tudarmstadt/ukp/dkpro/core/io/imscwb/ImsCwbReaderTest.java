@@ -21,6 +21,7 @@ import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDe
 import static org.apache.uima.fit.pipeline.SimplePipeline.iteratePipeline;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
@@ -79,9 +80,9 @@ public class ImsCwbReaderTest
         CollectionReaderDescription reader = createReaderDescription(
 		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
+                ImsCwbReader.PARAM_PATTERNS, "[+]*.txt",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt",
 				ImsCwbReader.PARAM_READ_TOKEN, false,
 				ImsCwbReader.PARAM_READ_LEMMA, false,
 				ImsCwbReader.PARAM_READ_POS, false,
@@ -116,7 +117,8 @@ public class ImsCwbReaderTest
 
 		for (JCas jcas : iteratePipeline(reader)) {
 			// should never get here
-			System.out.println(jcas.getDocumentText());
+		    fail("no Exception!");
 		}
+        fail("no Exception!");
 	}
 }
