@@ -25,6 +25,10 @@ import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.jcas.JCas;
 
+/**
+ * @deprecated use {@link JCasResourceCollectionReader_ImplBase} instead.
+ */
+@Deprecated
 public abstract class JCasFileSetCollectionReader_ImplBase
 	extends FileSetCollectionReaderBase
 {

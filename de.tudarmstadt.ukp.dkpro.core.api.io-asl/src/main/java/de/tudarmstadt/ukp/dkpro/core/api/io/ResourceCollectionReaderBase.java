@@ -160,8 +160,9 @@ public abstract class ResourceCollectionReaderBase
 			}
 		}
 
+		// If there are no patterns, then look for a pattern in the location itself.
+        // If the source location contains a wildcard, split it up into a base and a pattern
 		if (patterns == null) {
-            // If the source location contains a wildcard, split it up into a base and a pattern
             int asterisk = sourceLocation.indexOf('*');
             if (asterisk != -1) {
                 patterns = new String[] { INCLUDE_PREFIX+sourceLocation.substring(asterisk)};
