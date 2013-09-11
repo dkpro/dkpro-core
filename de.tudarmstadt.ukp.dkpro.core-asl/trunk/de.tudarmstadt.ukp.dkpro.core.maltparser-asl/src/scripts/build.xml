@@ -17,40 +17,76 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
 	</import>
-	
-	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/maltparser"/>
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/maltparser/lib"/>
 
 	<target name="local-maven">
 		<property name="install-artifact-enable" value="true"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars" depends="de, en, fr, sv"/>
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="de, en, es, fr, sv"/>
 		
 	<target name="de">
 		<mkdir dir="target/download"/>
 		
 		<!--
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="src/main/resources/german_stackproj_linear.mco" md5="b24b584bb18e5fad940c5945bdbb0c6b"
-    		tool="parser" language="de" variant="linear" extension="mco" version="1.7"/>		
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		file="src/main/resources/german_stackproj_linear.mco" 
+    		md5="b24b584bb18e5fad940c5945bdbb0c6b"
+    		tool="parser" 
+    		language="de" 
+    		variant="linear" 
+    		extension="mco" 
+    		version="1.7"/>		
 		<delete dir="target/model-staging"/>
 
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="src/main/resources/german_planar_linear.mco" md5="c0525255574007a19761d667d5f3d691"
-    		tool="parser" language="de" variant="linear-planar" extension="mco" version="1.7"/>		
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		file="src/main/resources/german_planar_linear.mco" 
+    		md5="c0525255574007a19761d667d5f3d691"
+    		tool="parser" 
+    		language="de" 
+    		variant="linear-planar" 
+    		extension="mco" 
+    		version="1.7"/>		
 		<delete dir="target/model-staging"/>
 
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="src/main/resources/german_nivre_linear.mco" md5="bb204b4591398fbf901becc7451f33cf"
-    		tool="parser" language="de" variant="linear-nivre" extension="mco" version="1.7"/>		
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		file="src/main/resources/german_nivre_linear.mco" 
+    		md5="bb204b4591398fbf901becc7451f33cf"
+    		tool="parser" 
+    		language="de" 
+    		variant="linear-nivre" 
+    		extension="mco" 
+    		version="1.7"/>		
 		<delete dir="target/model-staging"/>
 		
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="src/main/resources/german_stackproj_poly.mco" md5="36c945109f1a7872c2fe971b91dd25dc"
-    		tool="parser" language="de" variant="poly-stackproj" extension="mco" version="1.7"/>		
+    	<install-model-file 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		file="src/main/resources/german_stackproj_poly.mco" 
+    		md5="36c945109f1a7872c2fe971b91dd25dc"
+    		tool="parser" 
+    		language="de" 
+    		variant="poly-stackproj" 
+    		extension="mco" 
+    		version="1.7"/>		
 		<delete dir="target/model-staging"/>
     	-->
 	</target>
@@ -61,20 +97,83 @@
 		<!-- FILE: engmalt.poly-1.7.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-03-12 | now        | 6f81de28b4c3f1f309a578d7d21fcb6e
 		  -->
-    	<get src="http://www.maltparser.org/mco/english_parser/engmalt.poly-1.7.mco" dest="target/download/en-malt.poly.mco" skipexisting="true"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="target/download/en-malt.poly.mco" md5="6f81de28b4c3f1f309a578d7d21fcb6e"
-    		tool="parser" language="en" variant="poly" extension="mco" version="20120312.0"/>
-		<delete dir="target/model-staging"/>
+    	<get 
+    		src="http://www.maltparser.org/mco/english_parser/engmalt.poly-1.7.mco" 
+    		dest="target/download/en-malt.poly.mco" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/en-malt.poly.mco" 
+    		md5="6f81de28b4c3f1f309a578d7d21fcb6e"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20120312"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="poly" 
+    		extension="mco">
+			<metadata>
+	    		<!-- input only: entry key="tagger.tagset" value="ptb"/ -->
+				<entry key="dependency.tagset" value="stanford"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 
 		<!-- FILE: engmalt.linear-1.7.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-03-12 | now        | ca24797d5470763d41e142c977f54321
 		  -->
-		<get src="http://www.maltparser.org/mco/english_parser/engmalt.linear-1.7.mco" dest="target/download/en-malt.linear.mco" skipexisting="true"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="target/download/en-malt.linear.mco" md5="ca24797d5470763d41e142c977f54321"
-    		tool="parser" language="en" variant="linear" extension="mco" version="20120312.0"/>		
-		<delete dir="target/model-staging"/>
+		<get 
+			src="http://www.maltparser.org/mco/english_parser/engmalt.linear-1.7.mco" 
+			dest="target/download/en-malt.linear.mco" 
+			skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/en-malt.linear.mco" 
+    		md5="ca24797d5470763d41e142c977f54321"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20120312"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="linear" 
+    		extension="mco">
+			<metadata>
+	    		<!-- input only: entry key="tagger.tagset" value="ptb"/ -->
+				<entry key="dependency.tagset" value="stanford"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="es">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: espmalt-1.0.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-02-20 | now        | 4ea6a0af55b267e3b9cb88e9327ff44d
+		  -->
+		<get 
+			src="http://repositori.upf.edu/bitstream/handle/10230/20407/TRL_maltparser_modul_ES.rar?sequence=1" 
+			dest="target/download/TRL_maltparser_modul_ES.rar" 
+			skipexisting="true"/>
+		<exec executable="unrar" dir="target/download/">
+			<arg value="x"/>
+			<arg value="o+"/>
+			<arg value="TRL_maltparser_modul_ES.rar"/>
+		</exec>
+    	<install-stub-and-upstream-file 
+    		file="target/download/espmalt-1.0.mco" 
+    		md5="4ea6a0af55b267e3b9cb88e9327ff44d"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20130220"
+    		metaDataVersion="0"
+    		tool="parser" 
+    		language="es" 
+    		variant="linear" 
+    		extension="mco">
+			<metadata>
+	    		<!-- input only: entry key="tagger.tagset" value="freeling"/ -->
+				<entry key="dependency.tagset" value="iula"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="fr">
@@ -83,11 +182,26 @@
 		<!-- FILE: fremalt-1.7.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-03-12 | now        | a1fab4c0efd7dba980fe710636efad9c
 		  -->
-		<get src="http://www.maltparser.org/mco/french_parser/fremalt-1.7.mco" dest="target/download/fr-malt-linear.mco" skipexisting="true"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="target/download/fr-malt-linear.mco" md5="a1fab4c0efd7dba980fe710636efad9c"
-    		tool="parser" language="fr" variant="linear" extension="mco" version="20120312.0"/>		
-		<delete dir="target/model-staging"/>
+		<get 
+			src="http://www.maltparser.org/mco/french_parser/fremalt-1.7.mco" 
+			dest="target/download/fr-malt-linear.mco" 
+			skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/fr-malt-linear.mco" 
+    		md5="a1fab4c0efd7dba980fe710636efad9c"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20120312"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="fr" 
+    		variant="linear" 
+    		extension="mco">
+			<metadata>
+				<!-- http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf -->
+				<entry key="dependency.tagset" value="ftb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="sv">
@@ -97,10 +211,27 @@
 		  - 2012-03-12 | 2012-09-25 | a6af19821327d87abcc4e13d68d4c012
 		  - 2012-09-25 | now        | 7969078c343a7b43d5da2a6cb7270932
 		  -->
-		<get src="http://www.maltparser.org/mco/swedish_parser/swemalt-1.7.2.mco" dest="target/download/sv-malt-linear.mco" skipexisting="true"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
-    		file="target/download/sv-malt-linear.mco" md5="7969078c343a7b43d5da2a6cb7270932"
-    		tool="parser" language="sv" variant="linear" extension="mco" version="20120925.0"/>		
-		<delete dir="target/model-staging"/>
+		<get 
+			src="http://www.maltparser.org/mco/swedish_parser/swemalt-1.7.2.mco" 
+			dest="target/download/sv-malt-linear.mco" 
+			skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/sv-malt-linear.mco" 
+    		md5="7969078c343a7b43d5da2a6cb7270932"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20120925"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="sv" 
+    		variant="linear" 
+    		extension="mco">
+			<metadata>
+				<!-- http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html -->
+	    		<!-- input only: entry key="tagger.tagset" value="ptb"/ -->
+				<!-- http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html -->
+				<entry key="dependency.tagset" value="stb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 </project>
