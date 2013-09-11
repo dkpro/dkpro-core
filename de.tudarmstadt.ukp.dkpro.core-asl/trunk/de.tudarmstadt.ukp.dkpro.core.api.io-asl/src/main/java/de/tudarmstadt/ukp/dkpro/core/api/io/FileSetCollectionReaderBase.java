@@ -53,7 +53,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * </pre>
  * @author Richard Eckart de Castilho
  * @since 1.0.6
+ * @deprecated use {@link ResourceCollectionReaderBase} instead.
  */
+@Deprecated
 public abstract class FileSetCollectionReaderBase
 	extends CasCollectionReader_ImplBase
 {
