@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId>net.sourceforge.mstparser</groupId>
 			<artifactId>mstparser</artifactId>
-			<version>0.5.1-SNAPSHOT</version>
+			<version>0.5.1</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
