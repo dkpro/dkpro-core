@@ -107,6 +107,9 @@
     		language="en" 
     		variant="ontonotes" 
     		extension="bin">		
+			<metadata>
+				<entry key="dependency.tagset" value="stanford"/>
+			</metadata>
     	</install-stub-and-upstream-file>
 
 		<!-- FILE: mayo-en-dep - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -128,6 +131,9 @@
     		language="en" 
     		variant="mayo" 
     		extension="bin">		
+			<metadata>
+				<entry key="dependency.tagset" value="stanford"/>
+			</metadata>
     	</install-stub-and-upstream-file>
 
 		<!-- FILE: ontonotes-en-pred - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
