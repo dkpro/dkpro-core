@@ -16,14 +16,19 @@
    limitations under the License.
 -->
 <project basedir="../.." default="separate-jars">
-	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/mecab"/>
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/mecab/lib"/>
 	
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
 	</import>
 	
 	<target name="local-maven">
 		<property name="install-artifact-enable" value="true"/>
+		<antcall target="separate-jars"/>
+	</target>
+	
+	<target name="remote-maven">
+	    <property name="install-artifact-mode" value="remote"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
@@ -39,7 +44,7 @@
 			artifactId="de.tudarmstadt.ukp.dkpro.core.mecab-model-jp-ipadic"/>
 		
     	<get src="http://dkpro-core-asl.googlecode.com/files/mecab-ipadic-2.7.0-20070801-precompiled.zip" dest="target/download/ipadic/ipadic.zip" skipexisting="true"/>
-    	<unzip src="target/download/ipadic/ipadic.zip" dest="${outputDir}/lib/ipadic">
+    	<unzip src="target/download/ipadic/ipadic.zip" dest="target/lib/ipadic">
     		<chainedmapper>
 	    		<mapper type="flatten"/>
     		</chainedmapper>
