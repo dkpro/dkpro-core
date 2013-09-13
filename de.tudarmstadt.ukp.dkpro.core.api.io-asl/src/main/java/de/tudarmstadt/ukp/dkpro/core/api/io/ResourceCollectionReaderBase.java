@@ -40,7 +40,6 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.component.CasCollectionReader_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.ExternalResource;
-import org.apache.uima.fit.descriptor.ExternalResourceLocator;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Progress;
 import org.apache.uima.util.ProgressImpl;
@@ -130,8 +129,8 @@ public abstract class ResourceCollectionReaderBase
      * Name of optional external (uima) resource that contains the Locator for a (spring)
      * ResourcePatternResolver implementation for locating (spring) resources.
      */
-    public static final String RESOURCE_RESOLVER_KEY = "resolver";
-    @ExternalResource(key = RESOURCE_RESOLVER_KEY, mandatory = false)
+    public static final String KEY_RESOURCE_RESOLVER = "resolver";
+    @ExternalResource(key = KEY_RESOURCE_RESOLVER, mandatory = false)
     private final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
     private int completed;
