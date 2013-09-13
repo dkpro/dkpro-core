@@ -99,7 +99,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="ddt"/>
+	    		<entry key="pos.tagset" value="ddt"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -122,7 +122,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="ddt"/>
+	    		<entry key="pos.tagset" value="ddt"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -187,7 +187,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="stts"/>
+	    		<entry key="pos.tagset" value="stts"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -210,7 +210,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="stts"/>
+	    		<entry key="pos.tagset" value="stts"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -222,7 +222,7 @@
     		file="target/download/de-parser-chunking.bin" md5="412cd69c1a67e2e1e6dc947c6815dcaa"
     		tool="parser" language="de" variant="chunking" extension="bin" version="20110905.0">
 			<metadata>
-	    		<entry key="tagger.tagset" value="stts"/>
+	    		<entry key="pos.tagset" value="stts"/>
 			</metadata>
     	</install-model-file>
 		  -->
@@ -290,7 +290,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="ptb"/>
+	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -313,7 +313,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="ptb"/>
+	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -336,7 +336,7 @@
     		variant="chunking" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="ptb"/>
+	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -503,7 +503,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="parole-reduced"/>
+	    		<entry key="pos.tagset" value="parole-reduced"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -526,7 +526,7 @@
     		variant="maxent-universal" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="universal"/>
+	    		<entry key="pos.tagset" value="universal"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -549,7 +549,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="parole-reduced"/>
+	    		<entry key="pos.tagset" value="parole-reduced"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -572,7 +572,7 @@
     		variant="perceptron-universal" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="universal"/>
+	    		<entry key="pos.tagset" value="universal"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -721,7 +721,7 @@
     		extension="bin">
 			<metadata>
 				<!-- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset -->
-	    		<entry key="tagger.tagset" value="tanl"/>
+	    		<entry key="pos.tagset" value="tanl"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -745,7 +745,7 @@
     		version="20130618.0">
 			<metadata>
 				<!- http://medialab.di.unipi.it/wiki/Tanl_POS_Tagset ->
-	    		<entry key="tagger.tagset" value="tanl"/>
+	    		<entry key="pos.tagset" value="tanl"/>
 			</metadata>
     	</install-model-file>	
 		  -->
@@ -857,7 +857,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="alpino"/>
+	    		<entry key="pos.tagset" value="alpino"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -880,7 +880,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="alpino"/>
+	    		<entry key="pos.tagset" value="alpino"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -1027,7 +1027,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="bosque"/>
+	    		<entry key="pos.tagset" value="bosque"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -1050,7 +1050,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="bosque"/>
+	    		<entry key="pos.tagset" value="bosque"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -1117,7 +1117,7 @@
     		variant="maxent" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="talbanken05"/>
+	    		<entry key="pos.tagset" value="talbanken05"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -1140,7 +1140,7 @@
     		variant="perceptron" 
     		extension="bin">
 			<metadata>
-	    		<entry key="tagger.tagset" value="talbanken05"/>
+	    		<entry key="pos.tagset" value="talbanken05"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
