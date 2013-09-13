@@ -89,6 +89,15 @@ public class OpenNlpPosTaggerTest
         		new String[] { "POS", "POS", "POS", "POS", "POS" });
     }
 
+   @Test
+    public void testSwedish()
+        throws Exception
+    {
+        runTest("sv", "maxent", "Detta är ett test .",
+                new String[] { "PO",  "AV",  "EN",  "NN",  "IP"    },
+                new String[] { "POS", "POS", "POS", "POS", "POS" });
+    }
+
 	private void runTest(String language, String variant, String testDocument, String[] tags,
 			String[] tagClasses)
 		throws Exception
