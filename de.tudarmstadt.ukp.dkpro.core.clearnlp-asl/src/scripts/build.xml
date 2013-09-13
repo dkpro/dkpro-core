@@ -55,7 +55,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
     		upstreamVersion="20130715"
-    		metaDataVersion="1"
+    		metaDataVersion="0"
     		tool="tagger" 
     		language="en" 
     		variant="ontonotes" 
@@ -80,7 +80,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
     		upstreamVersion="20130715"
-    		metaDataVersion="1"
+    		metaDataVersion="0"
     		tool="tagger" 
     		language="en" 
     		variant="mayo" 
@@ -111,9 +111,11 @@
     		variant="ontonotes" 
     		extension="bin">		
 			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
 				<entry key="dependency.tagset" value="stanford"/>
 			</metadata>
     	</install-stub-and-upstream-file>
+		
 		<!-- FILE: mayo-en-dep - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-10-17 | 2012-12-29 | 1287b36b6bc31facbc74a036f5ef6ac8 (medical-en-dep - 1.1.0b3)
 		  - 2012-12-29 | 2013-07-15 | cd6795630fbe1770e02a19d07e587dce (1.3.0)
@@ -135,6 +137,7 @@
     		variant="mayo" 
     		extension="bin">		
 			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
 				<entry key="dependency.tagset" value="stanford"/>
 			</metadata>
     	</install-stub-and-upstream-file>
