@@ -84,6 +84,7 @@
     		extension="ser.gz">
 			<metadata>
 	    		<entry key="pos.tagset" value="atb"/>
+	    		<entry key="constituent.tagset" value="atb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -205,6 +206,7 @@
     		extension="ser.gz">		
 			<metadata>
 	    		<entry key="pos.tagset" value="stts"/>
+	    		<entry key="constituent.tagset" value="negra"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -226,6 +228,7 @@
     		extension="ser.gz">		
 			<metadata>
 	    		<entry key="pos.tagset" value="stts"/>
+	    		<entry key="constituent.tagset" value="negra"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -403,13 +406,17 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 		
+		<!-- FILE: gate-EN-twitter-fast.model - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2013-07-30 | 2013-09-14 | 185a9535e138218e9bd9a7a197250ee7
+		  - 2013-09-14 | now        | 54dc0d178d6412243e7c02915acadeb2
+		  -->
 		<install-stub-and-upstream-file
 			file="target/download/tagger/gate-EN-twitter-fast.model"
-			md5="185a9535e138218e9bd9a7a197250ee7"
+			md5="54dc0d178d6412243e7c02915acadeb2"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-			upstreamVersion="20130730"
-			metaDataVersion="1"
+			upstreamVersion="20130914"
+			metaDataVersion="0"
 			tool="tagger"
 			language="en"
 			variant="twitter-fast"
@@ -538,6 +545,7 @@
     		extension="ser.gz">		
 			<metadata>
 	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
 
@@ -559,6 +567,7 @@
     		extension="ser.gz">		
 			<metadata>
 	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
 		
@@ -593,6 +602,7 @@
     		extension="ser.gz">		
 			<metadata>
 	    		<entry key="pos.tagset" value="ftb"/>
+				<entry key="constituent.tagset" value="ftb"/>
 			</metadata>
 		</install-stub-and-upstream-file>	
 	</target>
@@ -658,6 +668,7 @@
     		extension="ser.gz">		
     		<metadata>
         		<entry key="pos.tagset" value="ctb"/>
+				<entry key="constituent.tagset" value="ctb"/>
     		</metadata>
 		</install-stub-and-upstream-file>		
 
@@ -679,6 +690,7 @@
     		extension="ser.gz">		
     		<metadata>
         		<entry key="pos.tagset" value="ctb"/>
+				<entry key="constituent.tagset" value="ctb"/>
     		</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -768,9 +780,10 @@
 
 	<target name="download-tagger">
 		<mkdir dir="target/download/tagger"/>
-    	<get src="http://nlp.stanford.edu/software/stanford-postagger-full-${tagger.date}.zip" dest="target/download/tagger/postagger.zip" skipexisting="true"/>
-		<get src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/twitie_pos_pr.zip" dest="target/download/tagger/twitter.zip" skipexisting="true"/>
-		<get src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/gate-EN-twitter-fast.model" dest="target/download/tagger/gate-EN-twitter-fast.model" skipexisting="true"/>
+    	<get 
+    		src="http://nlp.stanford.edu/software/stanford-postagger-full-${tagger.date}.zip" 
+    		dest="target/download/tagger/postagger.zip" 
+    		skipexisting="true"/>
 		<unzip src="target/download/tagger/postagger.zip" dest="target/download/tagger">
     		<patternset>
     			<include name="**/models//*.tagger*"/>		
@@ -779,15 +792,31 @@
 	    		<mapper type="flatten"/>
     		</chainedmapper>
     	</unzip>
-		<unzip src="target/download/tagger/twitter.zip" dest="target/download/tagger">
+		
+		<get 
+			src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/twitie-tagger.zip" 
+			dest="target/download/tagger/twitie-tagger.zip" 
+			skipexisting="true"/>
+		<!--
+		<get 
+			src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/twitie_pos_pr.zip" 
+			dest="target/download/tagger/twitter.zip" 
+			skipexisting="true"/>
+		-->
+		<unzip src="target/download/tagger/twitie-tagger.zip" dest="target/download/tagger">
 			<patternset>
-				<include name="**/Tagger_Twitter/resources//*.model*"/>
+				<include name="**/*.model*"/>
 			</patternset>
     		<chainedmapper>
 	    		<mapper type="flatten"/>
     		</chainedmapper>
 		</unzip>
-		
+
+		<get 
+			src="https://s3-eu-west-1.amazonaws.com/software.gate.ac.uk/twitie/gate-EN-twitter-fast.model" 
+			dest="target/download/tagger/gate-EN-twitter-fast.model" 
+			skipexisting="true"/>
+
     	<!--delete file="target/download/parser/postagger.tar.gz"/-->
     	<!--delete file="target/download/parser/postagger.tar"/-->
 	</target>

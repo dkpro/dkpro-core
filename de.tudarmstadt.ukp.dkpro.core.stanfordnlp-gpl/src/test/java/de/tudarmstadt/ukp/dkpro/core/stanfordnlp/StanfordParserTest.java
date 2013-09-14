@@ -93,6 +93,10 @@ public class StanfordParserTest
         String[] constituentTags = new String[] { "AA", "AP", "AVP", "CAC", "CAP", "CAVP", "CCP",
                 "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA", "NM",
                 "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
+        
+        String[] unmappedPos = new String[] { "$*LRB*", "-", ".$$." };
+
+        String[] unmappedConst = new String[] { "NUR" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
@@ -101,7 +105,9 @@ public class StanfordParserTest
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "stts", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "negra", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
     }
 
     @Test
@@ -132,11 +138,30 @@ public class StanfordParserTest
                 + "(NP-DA (AP (ADV möglichst) (PIDAT viele)) (CNP (NN Konstituenten) (KON und) "
                 + "(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
 
+        String[] posTags = new String[] { "$*LRB*", "$,", "$.", "-", ".$$.", "ADJA", "ADJD", "ADV",
+                "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON",
+                "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER",
+                "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG",
+                "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF",
+                "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+
+        String[] constituentTags = new String[] { "AA", "AP", "AVP", "CAC", "CAP", "CAVP", "CCP",
+                "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA", "NM",
+                "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
+        
+        String[] unmappedPos = new String[] { "$*LRB*", "-", ".$$." };
+
+        String[] unmappedConst = new String[] { "NUR" };
+
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "stts", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "negra", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
     }
 
     @Test
@@ -202,6 +227,12 @@ public class StanfordParserTest
                 "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
                 "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
 
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+        
+        String[] unmappedDep = new String[] { "gov" };
+        
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -209,8 +240,11 @@ public class StanfordParserTest
                 select(jcas, Constituent.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
     }
 
     @Test
@@ -268,7 +302,19 @@ public class StanfordParserTest
                 "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
+                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
+                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
+                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
+                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+        
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+        
+        String[] unmappedDep = new String[] { "gov" };
 
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -278,7 +324,10 @@ public class StanfordParserTest
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
     }
 
     /**
@@ -371,16 +420,27 @@ public class StanfordParserTest
                 "MWCL", "MWD", "MWET", "MWI", "MWN", "MWP", "MWPRO", "MWV", "NP", "PP", "ROOT",
                 "SENT", "Sint", "Srel", "Ssub", "VN", "VPinf", "VPpart" };
 
+        // NO DEP TAGS String[] depTags = new String[] {};
+
         String[] unmappedPos = new String[] { ".$$." };
+
+        String[] unmappedConst = new String[] { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET",
+                "MWI", "MWN", "MWP", "MWPRO", "MWV" };
+        
+        // NO DEP TAGS String[] unmappedDep = new String[] {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+
         AssertAnnotations.assertTagset(POS.class, "ftb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ftb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ftb", unmappedConst, jcas);
+        // NO DEP TAGS AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
+        // NO DEP TAGS AssertAnnotations.assertTagsetMapping(Dependency.class, null, unmappedDep, jcas);
     }
 
     // @Ignore("Dependency types not yet mapped")
@@ -438,9 +498,15 @@ public class StanfordParserTest
                 "DVP", "FLR", "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT",
                 "UCP", "VCD", "VCP", "VNV", "VP", "VPT", "VRD", "VSB", "WHPP" };
 
+        // NO DEP TAGS String[] depTags = new String[] {};
+
         String[] unmappedPos = new String[] { ".$$.", "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV",
                 "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "OD", "ON", "SB", "SP",
                 "URL", "VC", "X" };
+
+        String[] unmappedConst = new String[] { "DFL", "FLR", "INC", "WHPP" };
+        
+        // NO DEP TAGS String[] unmappedDep = new String[] {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -449,7 +515,10 @@ public class StanfordParserTest
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ctb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ctb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ctb", unmappedConst, jcas);
+        // NO DEP TAGS AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
+        // NO DEP TAGS AssertAnnotations.assertTagsetMapping(Dependency.class, null, unmappedDep, jcas);
     }
 
     @Ignore("Currently fails an assertion in StanfordAnnotator:188 - need to investigate")

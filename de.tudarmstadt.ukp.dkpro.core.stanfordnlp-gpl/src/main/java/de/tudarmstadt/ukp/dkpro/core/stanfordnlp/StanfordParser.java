@@ -556,14 +556,14 @@ public class StanfordParser
                 // There is no way to determine the relations via the GrammaticalStructureFactory
                 // API, so we do it manually here for the languages known to support this.
                 if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
-                    SingletonTagset depTags = new SingletonTagset(Dependency.class, null);
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford");
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
                     addTagset(depTags, writeDependency);
                 }
                 else if (gsf != null && ChineseGrammaticalRelations.class.equals(gsf.getClass())) {
-                    SingletonTagset depTags = new SingletonTagset(Dependency.class, null);
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford");
                     for (GrammaticalRelation r : ChineseGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
