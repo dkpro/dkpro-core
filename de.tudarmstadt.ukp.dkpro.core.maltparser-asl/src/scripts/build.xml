@@ -113,7 +113,7 @@
     		variant="poly" 
     		extension="mco">
 			<metadata>
-	    		<!-- input only: entry key="tagger.tagset" value="ptb"/ -->
+	    		<entry key="pos.tagset" value="ptb"/>
 				<entry key="dependency.tagset" value="stanford"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -137,7 +137,7 @@
     		variant="linear" 
     		extension="mco">
 			<metadata>
-	    		<!-- input only: entry key="tagger.tagset" value="ptb"/ -->
+	    		<entry key="pos.tagset" value="ptb"/>
 				<entry key="dependency.tagset" value="stanford"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -155,7 +155,7 @@
 			skipexisting="true"/>
 		<exec executable="unrar" dir="target/download/">
 			<arg value="x"/>
-			<arg value="o+"/>
+			<arg value="-o+"/>
 			<arg value="TRL_maltparser_modul_ES.rar"/>
 		</exec>
     	<install-stub-and-upstream-file 
@@ -170,7 +170,7 @@
     		variant="linear" 
     		extension="mco">
 			<metadata>
-	    		<!-- input only: entry key="tagger.tagset" value="freeling"/ -->
+	    		<entry key="pos.tagset" value="freeling"/>
 				<entry key="dependency.tagset" value="iula"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -198,6 +198,7 @@
     		variant="linear" 
     		extension="mco">
 			<metadata>
+	    		<entry key="pos.tagset" value="melt"/>
 				<!-- http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf -->
 				<entry key="dependency.tagset" value="ftb"/>
 			</metadata>
@@ -228,7 +229,7 @@
     		extension="mco">
 			<metadata>
 				<!-- http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html -->
-	    		<!-- input only: entry key="tagger.tagset" value="ptb"/ -->
+	    		<entry key="pos.tagset" value="stb"/>
 				<!-- http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html -->
 				<entry key="dependency.tagset" value="stb"/>
 			</metadata>
