@@ -453,10 +453,26 @@ public class AssertAnnotations
     public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped,
             JCas aJCas)
     {
+        String pattern;
+        if (aLayer == POS.class) {
+            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
+                    + "core/api/lexmorph/tagset/${language}-${tagset}-pos.map";
+        }
+        else if (aLayer == Dependency.class) {
+            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
+                    + "core/api/syntax/tagset/${language}-${tagset}-dependency.map";
+        }
+        else if (aLayer == Constituent.class) {
+            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
+                    + "core/api/syntax/tagset/${language}-${tagset}-constituency.map";
+        }
+        else {
+            throw new IllegalArgumentException("Unsupported layer: " + aLayer.getName());
+        }
+        
         MappingProvider mp = new MappingProvider();
-        mp.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        mp.setDefault("pos.tagset", aName);
+        mp.setDefault(MappingProvider.LOCATION, pattern);
+        mp.setDefault("tagset", aName);
         mp.configure(aJCas.getCas());
 
         Map<String, String> mapping = mp.getResource();
