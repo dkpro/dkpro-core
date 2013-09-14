@@ -44,21 +44,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 /**
  * 
  * This Analysis Engine annotates 
- * English common nouns with semantic field information from WordNet.
- * The annotation is stored in the NamedEntity annotation type.
+ * English single words with semantic field information retrieved from an ExternalResource
+ * This could be a lexical resource such as WordNet or a simple key-value map.
+ * The annotation is stored in the SemanticField annotation type.
  *     
  * @author Judith Eckle-Kohler
+ * 
+ * @author Richard Eckart de Castilho
  * 
  */
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
 {
-    public static final String PARAM_SEMANTIC_FIELD_RESOURCE = "nounSemanticFieldResource";
+    public static final String PARAM_SEMANTIC_FIELD_RESOURCE = "semanticFieldResource";
     @ExternalResource(key = PARAM_SEMANTIC_FIELD_RESOURCE)
-    private SemanticTagResource nounSemanticFieldResource;
+    private SemanticTagResource semanticFieldResource;
 
+    // TODO a parameter for the language would be good
+    
     /**
-     * Annotation type for which tokens should be merged.
+     * Annotation types which should be annotated with semantic fields
      */
     public static final String PARAM_ANNOTATION_TYPE = "annotationType";
     @ConfigurationParameter(name = PARAM_ANNOTATION_TYPE, mandatory = true)
@@ -67,7 +72,7 @@ public class SemanticFieldAnnotator
     /**
      * A constraint on the annotations that should be considered in form of a JXPath statement.
      * Example: set {@link #PARAM_ANNOTATION_TYPE} to a {@code NamedEntity} type and set the
-     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to merge only tokens that are
+     * {@link #PARAM_CONSTRAINT} to {@code ".[value = 'LOCATION']"} to annotate only tokens with semantic fields that are
      * part of a location named entity.
      */
     public static final String PARAM_CONSTRAINT = "constraint";
@@ -110,7 +115,7 @@ public class SemanticFieldAnnotator
             
             for (Token token : tokens) {
                 try {
-                    String semanticField = nounSemanticFieldResource.getSemanticTag(token);
+                    String semanticField = semanticFieldResource.getSemanticTag(token);
                     SemanticField semanticFieldAnnotation = new SemanticField(aJCas,
                             token.getBegin(), token.getEnd());
                     semanticFieldAnnotation.setValue(semanticField);

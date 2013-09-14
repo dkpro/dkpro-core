@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 /**
  * @author Judith Eckle-Kohler
  *
+ * @author Richard Eckart de Castilho
  */
 public class SemanticFieldAnnotatorTest {
 
