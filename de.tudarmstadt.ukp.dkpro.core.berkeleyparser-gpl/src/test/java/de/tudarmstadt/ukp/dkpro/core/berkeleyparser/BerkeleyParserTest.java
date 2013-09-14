@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
@@ -29,7 +29,6 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -46,26 +45,40 @@ public class BerkeleyParserTest
 	static final String documentEnglish = "We need a very complicated example sentence, which " +
 			"contains as many constituents and dependencies as possible.";
 
-	@Ignore("We don't seem to have a proper tokenizer for arabic...")
+//	@Ignore("We don't seem to have a proper tokenizer for arabic...")
 	@Test
 	public void testArabic()
 		throws Exception
 	{
 		JCas jcas = runTest("ar", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن.");
 
-		String[] constituentMapped = new String[] { "NP 0,1", "ROOT 0,1" };
+		String[] constituentMapped = new String[] { "Constituent 0,1" };
 
-		String[] constituentOriginal = new String[] { "NP 0,1", "ROOT 0,1" };
+		String[] constituentOriginal = new String[] {"ROOT 0,1", "X 0,1" };
 
 		String[] posMapped = new String[] { "POS", "POS" };
 
 		String[] posOriginal = new String[] { "PUNC", "PUNC" };
 
-		String pennTree = "...";
+		String pennTree = "(ROOT (ROOT (X (PUNC ن) (PUNC ن))))";
 
+        String[] posTags = new String[] { "CC", "CD", "DEM", "DT", "IN", "JJ", "NN", "NNP", "NNPS",
+                "NNS", "NOFUNC", "NUMCOMMA", "PRP", "PRP$", "PUNC", "RB", "RP", "UH", "VB", "VBD",
+                "VBN", "VBP", "VERB", "WP", "WRB" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "S", "SBAR", "SBARQ", "SINV",
+                "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+        
+        String[] unmappedConst = new String[] { "LST", "SINV" };
+		
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "atb", posTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "atb", new String[] {}, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "atb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "atb", unmappedConst, jcas);
 	}
 
 	@Test
@@ -104,10 +117,46 @@ public class BerkeleyParserTest
 				"(CoordP (ConjArg (N (Ncmpi съставки))) (Conj (C (Cp и))) (ConjArg (N " +
 				"(Ncfpi зависимости))))))) (CLR (pt ,) (VPA (Adv (Prq колкото)) (VPC (V " +
 				"(Vxitf е)) (Adv (Dd възможно))))))))))) (pt .))))";
+		
+        String[] posTags = new String[] { "A", "Afsd", "Afsi", "Ams", "Amsf", "Amsh", "Amsi",
+                "Ansd", "Ansi", "Cc", "Cp", "Cr", "Cs", "Dd", "Dl", "Dm", "Dq", "Dt", "Hfsi",
+                "Hmsf", "I", "Mc", "Mcf", "Mcfpd", "Mcfpi", "Mcfsd", "Mcfsi", "Mcm", "Mcmpd",
+                "Mcmpi", "Mcmsf", "Mcmsi", "Mcn", "Mcnpd", "Mcnpi", "Mcnsd", "Mcnsi", "Md", "Mo",
+                "Mofsd", "Mofsi", "Momsf", "Momsh", "Momsi", "Monsd", "Monsi", "My", "Nc", "Ncfpd",
+                "Ncfpi", "Ncfs", "Ncfsd", "Ncfsi", "Ncmpd", "Ncmpi", "Ncms", "Ncmsd", "Ncmsf",
+                "Ncmsh", "Ncmsi", "Ncmt", "Ncnpd", "Ncnpi", "Ncnsd", "Ncnsi", "Npfsi", "Npnsi",
+                "Pca", "Pce", "Pcl", "Pcq", "Pct", "Pda", "Pde", "Pdl", "Pdm", "Pdq", "Pds", "Pdt",
+                "Pfa", "Pfe", "Pfl", "Pfm", "Pfp", "Pfq", "Pft", "Pfy", "Pia", "Pic", "Pie", "Pil",
+                "Pim", "Pip", "Piq", "Pit", "Pna", "Pne", "Pnl", "Pnm", "Pnp", "Pnt", "Ppe",
+                "Ppelap1", "Ppelap2", "Ppelap3", "Ppelas1", "Ppelas2", "Ppelas3f", "Ppelas3m",
+                "Ppelas3n", "Ppeldp1", "Ppelds1", "Ppelds2", "Ppelds3m", "Ppetap1", "Ppetap2",
+                "Ppetap3", "Ppetas1", "Ppetas2", "Ppetas3f", "Ppetas3m", "Ppetas3n", "Ppetdp1",
+                "Ppetdp2", "Ppetdp3", "Ppetds1", "Ppetds2", "Ppetds3f", "Ppetds3m", "Ppetds3n",
+                "Ppetsp1", "Ppetsp2", "Ppetsp3", "Ppetss1", "Ppetss2", "Ppetss3f", "Ppetss3m",
+                "Pph", "Pphlas2", "Pphtas2", "Pphtds2", "Pphtss2", "Ppxta", "Ppxtd", "Ppxts",
+                "Pra", "Pre", "Prl", "Prm", "Prp", "Prq", "Prs", "Prt", "Pshl", "Psht", "Psol",
+                "Psot", "Psxlop", "Psxlos", "Psxto", "Pszl", "Pszt", "R", "Ta", "Te", "Tg", "Ti",
+                "Tm", "Tn", "Tv", "Tx", "Viitf", "Vniicam", "Vniicao", "Vniif", "Vnitcam",
+                "Vnitcao", "Vnitf", "Vnpicao", "Vnpif", "Vnptcao", "Vnptf", "Vpiicam", "Vpiicao",
+                "Vpiicar", "Vpiif", "Vpiig", "Vpiiz", "Vpitcam", "Vpitcao", "Vpitcar", "Vpitcv",
+                "Vpitf", "Vpitg", "Vpitz", "Vppicam", "Vppicao", "Vppif", "Vppiz", "Vpptcam",
+                "Vpptcao", "Vpptcv", "Vpptf", "Vpptz", "Vxitcat", "Vxitf", "Vxitu", "Vyptf",
+                "Vyptz", "abbr", "foreign", "mw", "name", "pt", "w" };
+
+        String[] constituentTags = new String[] { "A", "APA", "APC", "Adv", "AdvPA", "AdvPC", "C",
+                "CL", "CLCHE", "CLDA", "CLQ", "CLR", "CLZADA", "Conj", "ConjArg", "CoordP",
+                "Gerund", "H", "M", "N", "NPA", "NPC", "PP", "Participle", "Prep", "Pron", "ROOT",
+                "S", "T", "V", "VPA", "VPC", "VPF", "VPS", "Verbalised" };
+        
+        String[] unmappedConstituents = new String[] { "Conj", "ConjArg", "NPC", "Verbalised" };
 
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "btb", posTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "btb", new String[] {}, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "btb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "btb", unmappedConstituents, jcas);
 	}
 
 	@Test
@@ -149,7 +198,7 @@ public class BerkeleyParserTest
 
         String[] unmappedPos = new String[] { "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV", "ETC",
                 "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NP", "OD", "SB", "SP", "VC", "VP", "X" };
-
+        
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
 		AssertAnnotations.assertPennTree(pennTree[0], trees.get(0));
@@ -157,7 +206,8 @@ public class BerkeleyParserTest
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         AssertAnnotations.assertTagset(POS.class, "ctb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ctb", constituentTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ctb", new String[] {}, jcas);
 	}
 
 	@Test
@@ -196,12 +246,15 @@ public class BerkeleyParserTest
 
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
+        String[] unmappedConst = new String[] { };
+
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
 	}
 
 	@Test
@@ -228,9 +281,30 @@ public class BerkeleyParserTest
 				"(ADV möglichst) (PIDAT viele) (CNP (NN Konstituenten) (KON und) " +
 				"(NN Dependenzen))) (VVFIN beinhaltet)))) ($. .)))";
 
+        String[] posTags = new String[] { "$*LRB*", "$,", "$.", "*T1*", "*T2*", "*T3*", "*T4*",
+                "*T5*", "*T6*", "*T7*", "*T8*", "--", "ADJA", "ADJD", "ADV", "APPO", "APPR",
+                "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON", "KOUI", "KOUS",
+                "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT", "PPOSS",
+                "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ", "PTKZU",
+                "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN",
+                "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+
+        String[] constituentTags = new String[] { "---CJ", "AA", "AP", "AVP", "CAC", "CAP", "CAVP",
+                "CCP", "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA",
+                "NM", "NP", "PP", "PSEUDO", "QL", "ROOT", "S", "VP", "VZ" };
+
+        String[] unmappedPos = new String[] { "$*LRB*", "*T1*", "*T2*", "*T3*", "*T4*", "*T5*",
+                "*T6*", "*T7*", "*T8*", "--" };
+        
+        String[] unmappedConst = new String[] { "---CJ", "PSEUDO", "ROOT" };
+        
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "stts", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "negra", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
 	}
 
 	@Test
@@ -262,9 +336,23 @@ public class BerkeleyParserTest
 				"(D de) (A nombreuses) (N dépendances))) (C et) (Ssub (C que) (A possible)) " +
 				"(. .))))";
 
+        String[] posTags = new String[] { "\"", ",", "-LRB-", "-RRB-", ".", ":", "A", "ADV",
+                "ADVP", "Afs", "C", "CC", "CL", "CS", "D", "Dmp", "ET", "I", "N", "ND", "P", "PC",
+                "PREF", "PRO", "S", "V", "X", "_unknown_", "p", "près" };
+
+        String[] constituentTags = new String[] { "AP", "AdP", "NP", "PP", "ROOT", "SENT", "Sint",
+                "Srel", "Ssub", "VN", "VPinf", "VPpart" };
+
+        String[] unmappedPos = new String[] { "\"", "-LRB-", "-RRB-", ":", "ADVP", "Afs", "CC",
+                "CS", "Dmp", "ND", "PC", "S", "X", "_unknown_", "p", "près" };
+
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "ftb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ftb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ftb", new String[] {}, jcas);
 	}
 
 	/**

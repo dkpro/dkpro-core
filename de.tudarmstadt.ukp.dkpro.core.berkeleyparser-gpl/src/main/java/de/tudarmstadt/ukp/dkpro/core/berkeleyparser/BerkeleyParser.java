@@ -224,12 +224,12 @@ public class BerkeleyParser
         posMappingProvider = new MappingProvider();
         posMappingProvider.setDefault(MappingProvider.LOCATION,
                 "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("tagger.tagset", "default");
+        posMappingProvider.setDefault("pos.tagset", "default");
         posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
         posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        posMappingProvider.addImport("tagger.tagset", modelProvider);
+        posMappingProvider.addImport("pos.tagset", modelProvider);
 
         constituentMappingProvider = new MappingProvider();
         constituentMappingProvider
@@ -382,9 +382,9 @@ public class BerkeleyParser
 
                 Properties metadata = getResourceMetaData();
                 SingletonTagset posTags = new SingletonTagset(
-                        POS.class, metadata.getProperty("tagger.tagset"));
+                        POS.class, metadata.getProperty("pos.tagset"));
                 SingletonTagset constTags = new SingletonTagset(
-                        Constituent.class, metadata.getProperty("constituent.type.tagset"));
+                        Constituent.class, metadata.getProperty("constituent.tagset"));
 
                 Numberer tagNumberer = (Numberer) pData.getNumbs().get("tags");
                 for (int i = 0; i < tagNumberer.size(); i++) {
