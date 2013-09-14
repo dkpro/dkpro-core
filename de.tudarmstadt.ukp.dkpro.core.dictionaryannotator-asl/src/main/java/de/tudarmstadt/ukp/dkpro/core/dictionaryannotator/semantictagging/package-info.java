@@ -18,8 +18,8 @@
 
 /**
  *
- * Interface to resources that provide semantic tagsets.
- * Annotators that perform semantic tagging based on these resources.
+ * Interface that provides access to semantic tags from various resources (UBY, key-value maps ...)
+ * 
  *
  */
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
