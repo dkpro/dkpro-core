@@ -41,6 +41,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ivy.Ivy;
+import org.apache.ivy.core.LogOptions;
 import org.apache.ivy.core.module.descriptor.DefaultDependencyDescriptor;
 import org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor;
 import org.apache.ivy.core.module.id.ModuleRevisionId;
@@ -648,7 +649,18 @@ public abstract class ResourceObjectProviderBase<M>
         try {
             // Resolve the temporary module
             ResolveOptions options = new ResolveOptions();
-            //options.setLog(LogOptions.LOG_QUIET);
+            if (log.isDebugEnabled()) {
+                System.out.println("Debug is enabled");
+                options.setLog(LogOptions.LOG_DEFAULT);
+            }
+            else if (log.isInfoEnabled()) {
+                System.out.println("Info is enabled");
+                options.setLog(LogOptions.LOG_DOWNLOAD_ONLY);
+            }
+            else {
+                System.out.println("Nothing is enabled");
+                options.setLog(LogOptions.LOG_QUIET);
+            }
             options.setConfs(new String[] { "default" });
             report = ivy.resolve(md, options);
         }
