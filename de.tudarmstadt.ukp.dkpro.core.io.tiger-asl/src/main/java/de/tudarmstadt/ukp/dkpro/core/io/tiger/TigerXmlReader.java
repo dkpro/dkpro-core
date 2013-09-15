@@ -106,12 +106,12 @@ public class TigerXmlReader
         posMappingProvider = new MappingProvider();
         posMappingProvider.setDefault(MappingProvider.LOCATION,
                 "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("tagger.tagset", "default");
+        posMappingProvider.setDefault("pos.tagset", "default");
         posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
         posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-        posMappingProvider.setOverride("tagger.tagset", posTagset);
+        posMappingProvider.setOverride("pos.tagset", posTagset);
     }
 
     @Override

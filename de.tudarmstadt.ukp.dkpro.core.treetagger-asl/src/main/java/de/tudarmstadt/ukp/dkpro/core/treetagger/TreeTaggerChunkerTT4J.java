@@ -83,7 +83,7 @@ extends TreeTaggerTT4JBase<AnnotationFS>
 		chunkerMappingProvider.setDefault("chunker.tagset", "default");
 		chunkerMappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
 		chunkerMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-//		posMappingProvider.addImport("tagger.tagset", modelProvider);
+//		posMappingProvider.addImport("pos.tagset", modelProvider);
     }
 
 	@Override

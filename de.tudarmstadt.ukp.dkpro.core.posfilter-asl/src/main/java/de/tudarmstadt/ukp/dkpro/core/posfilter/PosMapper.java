@@ -100,9 +100,9 @@ public class PosMapper
 			mappingProvider = new MappingProvider();
 			mappingProvider.setDefault(MappingProvider.LOCATION, dkproMappingLocation);
 			mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-			mappingProvider.setDefault("tagger.tagset", "default");
+			mappingProvider.setDefault("pos.tagset", "default");
 			// mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-			// mappingProvider.addImport("tagger.tagset", modelProvider);
+			// mappingProvider.addImport("pos.tagset", modelProvider);
 		}
 	}
 
