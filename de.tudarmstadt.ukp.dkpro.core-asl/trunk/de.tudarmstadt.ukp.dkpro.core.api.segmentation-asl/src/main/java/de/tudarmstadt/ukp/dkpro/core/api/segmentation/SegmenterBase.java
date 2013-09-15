@@ -280,7 +280,7 @@ extends JCasAnnotator_ImplBase
 
 	public boolean isEmpty(int aBegin, int aEnd)
 	{
-		return aBegin > aEnd;
+		return aBegin >= aEnd;
 	}
 
 	public boolean trimChar(final char aChar)
