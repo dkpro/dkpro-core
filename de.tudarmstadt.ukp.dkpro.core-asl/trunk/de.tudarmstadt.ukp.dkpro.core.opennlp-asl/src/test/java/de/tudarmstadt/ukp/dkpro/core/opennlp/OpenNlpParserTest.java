@@ -77,9 +77,9 @@ public class OpenNlpParserTest
                 "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S",
                 "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-        String[] unmappedPos = new String[] { ".$$." };
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
-        String[] unmappedConst = new String[] {};
+        String[] unmappedConst = new String[] { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
         
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -90,10 +90,10 @@ public class OpenNlpParserTest
         AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
 	}
 
-	/**
-	 * Setup CAS to test parser for the English language (is only called once if
-	 * an English test is run)
-	 */
+    /**
+     * Setup CAS to test parser for the English language (is only called once if an English test is
+     * run)
+     */
 	private JCas runTest(String aLanguage, String aVariant, String aText)
 		throws Exception
 	{
