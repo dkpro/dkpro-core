@@ -124,9 +124,8 @@ public class OpenNlpNameFinder
                 TokenNameFinderModel model = new TokenNameFinderModel(aStream);
 
                 if (printTagSet) {
-                    String tagsetName = getResourceMetaData().getProperty("tagger.tagset");
                     Tagset tsdp = new OpenNlpTagsetDescriptionProvider(
-                            tagsetName, NamedEntity.class, model.getNameFinderModel());
+                            null, NamedEntity.class, model.getNameFinderModel());
                     getContext().getLogger().log(INFO, tsdp.toString());
                 }
 
