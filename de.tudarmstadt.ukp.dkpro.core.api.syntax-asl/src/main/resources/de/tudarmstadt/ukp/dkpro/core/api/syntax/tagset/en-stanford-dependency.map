@@ -3,58 +3,129 @@
 # Source: http://nlp.stanford.edu/software/dependencies_manual.pdf
 #
 # abbrev: abbreviation modifier
+abbrev=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # acomp: adjectival complement
+acomp=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # advcl: adverbial clause modifier
+advcl=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # advmod: adverbial modifier
+advmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # agent: agent
+agent=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # amod: adjectival modifier
+amod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # appos: appositional modifier
+appos=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# arg: argument
+arg=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # attr: attributive
+attr=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # aux: auxiliary
+aux=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # auxpass: passive auxiliary
+auxpass=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # cc: coordination
+cc=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ccomp: clausal complement
+ccomp=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# comp: complement
+comp=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # complm: complementizer
+complm=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # conj: conjunct
+conj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # cop: copula
+cop=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # csubj : clausal subject
+csubj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # csubjpass: clausal passive subject
+csubjpass=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # dep: dependent
+dep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # det: determiner
+det=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# discourse: discourse element
+discourse=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # dobj : direct object
+dobj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # expl: expletive
+expl=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# goeswith: goes with
+goeswith=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # infmod: infinitival modifier
+infmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # iobj : indirect object
+iobj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # mark: marker
+mark=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# mod: modifier
+mod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # mwe: multi-word expression
+mwe=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # neg: negation modifier
+neg=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # nn: noun compound modifier
+nn=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # npadvmod: noun phrase as adverbial modifier
+npadvmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # nsubj : nominal subject
+nsubj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # nsubjpass: passive nominal subject
+nsubjpass=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # num: numeric modifier
+num=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # number: element of compound number
+number=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# obj: object
+obj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # parataxis: parataxis
+parataxis=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # partmod: participial modifier
+partmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # pcomp: prepositional complement
+pcomp=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # pobj: object of a preposition
+pobj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # poss: possession modifier
+poss=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # possessive: possessive modifier
+possessive=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # preconj: preconjunct
+preconj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# pred: predicate
+pred=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # predet: predeterminer
+predet=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # prep: prepositional modifier
+prep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # prepc: prepositional clausal modifier
+prepc=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # prt: phrasal verb particle
+prt=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # punct: punctuation
+punct=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # purpcl: purpose clause modifier
+purpcl=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # quantmod: quantifier phrase modifier
+quantmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # rcmod: relative clause modifier
+rcmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ref: referent
+ref=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # rel: relative
+rel=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # root: root
+root=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# sdep: semantic dependent
+sdep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# subj: subject
+subj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # tmod: temporal modifier
+tmod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # xcomp: open clausal complement
+xcomp=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # xsubj : controlling subject
+xsubj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 
 #
 # Additional tags used in Clear NLP ontoparser model
@@ -69,4 +140,4 @@
 #
 # Categories used by DKPro internally
 #
-*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DEP
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency

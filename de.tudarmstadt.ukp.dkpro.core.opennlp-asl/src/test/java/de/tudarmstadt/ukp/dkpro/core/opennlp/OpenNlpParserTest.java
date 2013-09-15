@@ -77,11 +77,17 @@ public class OpenNlpParserTest
                 "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S",
                 "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
+        String[] unmappedPos = new String[] { ".$$." };
+
+        String[] unmappedConst = new String[] {};
+        
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-		AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, null, constituentTags, jcas);
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
 	}
 
 	/**

@@ -337,6 +337,7 @@
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="ptb"/>
+	    		<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 

@@ -57,5 +57,6 @@ CVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Constituent
 #
 # Categories used by DKPro internally
 #
-*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Constituent
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 
