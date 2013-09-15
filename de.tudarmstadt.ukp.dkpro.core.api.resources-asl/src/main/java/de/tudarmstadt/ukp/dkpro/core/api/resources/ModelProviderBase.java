@@ -95,7 +95,8 @@ public class ModelProviderBase<M>
                     continue;
                 }
                 
-                TagsetDescription tsd = new TagsetDescription(jcas, 0, aCas.size());
+                TagsetDescription tsd = new TagsetDescription(jcas, 0, aCas.getDocumentText()
+                        .length());
                 tsd.setLayer(e.getKey());
                 tsd.setName(e.getValue());
 
