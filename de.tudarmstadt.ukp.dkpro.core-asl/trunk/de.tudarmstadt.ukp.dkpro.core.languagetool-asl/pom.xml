@@ -57,6 +57,12 @@
 			<version>2.2</version>
 		</dependency>
 		<dependency>
+		    <!-- Fix incompatibility with xercesImpl - Remove when languagetool-core is upgraded-->
+			<groupId>net.sourceforge.segment</groupId>
+			<artifactId>segment</artifactId>
+			<version>1.4.2</version>
+		</dependency>
+		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
