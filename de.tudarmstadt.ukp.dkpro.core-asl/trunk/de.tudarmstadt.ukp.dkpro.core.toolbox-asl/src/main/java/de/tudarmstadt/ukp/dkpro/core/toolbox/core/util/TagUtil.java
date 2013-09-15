@@ -39,7 +39,7 @@ public class TagUtil
             posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
                     "core/api/lexmorph/tagset/" + language + "-default-pos.map");
             posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-            posMappingProvider.setDefault("tagger.tagset", "default");
+            posMappingProvider.setDefault("pos.tagset", "default");
 
             AnalysisEngine engine = createEngine(OpenNlpPosTagger.class);
             posMappingProvider.configure(engine.newCAS());

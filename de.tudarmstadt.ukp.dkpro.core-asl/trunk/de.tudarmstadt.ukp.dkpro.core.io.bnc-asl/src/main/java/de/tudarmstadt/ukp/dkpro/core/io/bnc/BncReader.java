@@ -118,12 +118,12 @@ public class BncReader
 
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		posMappingProvider.setDefault("tagger.tagset", "c5");
+		posMappingProvider.setDefault("pos.tagset", "c5");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-		posMappingProvider.setOverride("tagger.tagset", posTagset);
+		posMappingProvider.setOverride("pos.tagset", posTagset);
 	}
 
 	@Override

@@ -156,12 +156,12 @@ public class OpenNlpParser
 
 		posMappingProvider = new MappingProvider();
 		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
 		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		posMappingProvider.setDefault("tagger.tagset", "default");
+		posMappingProvider.setDefault("pos.tagset", "default");
 		posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
 		posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		posMappingProvider.addImport("tagger.tagset", modelProvider);
+		posMappingProvider.addImport("pos.tagset", modelProvider);
 
 	}
 
@@ -316,7 +316,7 @@ public class OpenNlpParser
             Properties metadata = getResourceMetaData();
 
             addTagset(new OpenNlpTagsetDescriptionProvider(
-                    metadata.getProperty("tagger.tagset"), POS.class, model.getParserTaggerModel()
+                    metadata.getProperty("pos.tagset"), POS.class, model.getParserTaggerModel()
                             .getPosModel()));
             addTagset(new OpenNlpParserTagsetDescriptionProvider(
                     metadata.getProperty("constituent.tagset"), Constituent.class, model
