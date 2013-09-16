@@ -83,7 +83,7 @@ public class MatePosTagger
 
     /**
      * Log the tag set(s) when a model is loaded.
-     *
+     * 
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -142,12 +142,12 @@ public class MatePosTagger
         posMappingProvider = new MappingProvider();
         posMappingProvider.setDefault(MappingProvider.LOCATION,
                 "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("tagger.tagset", "default");
+        posMappingProvider.setDefault("pos.tagset", "default");
         posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
         posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        posMappingProvider.addImport("tagger.tagset", modelProvider);
+        posMappingProvider.addImport("pos.tagset", modelProvider);
     }
 
     @Override
@@ -166,15 +166,19 @@ public class MatePosTagger
             forms.add(CONLLReader09.ROOT);
             forms.addAll(JCasUtil.toText(tokens));
 
-            // List<String> lemmas = new LinkedList<String>();
-            // lemmas.add(CONLLReader09.ROOT_LEMMA);
-            // for (Token token : tokens) {
-            // lemmas.add(token.getLemma().getValue());
-            // }
+            List<String> lemmas = new LinkedList<String>();
+            lemmas.add(CONLLReader09.ROOT_LEMMA);
+            for (Token token : tokens) {
+                if (token.getLemma() != null) {
+                    lemmas.add(token.getLemma().getValue());
+                } else {
+                    lemmas.add("_");
+                }
+            }
 
             SentenceData09 sd = new SentenceData09();
             sd.init(forms.toArray(new String[0]));
-            // sd.setLemmas(lemmas.toArray(new String[0]));
+            sd.setLemmas(lemmas.toArray(new String[0]));
             String[] posTags = modelProvider.getResource().apply(sd).ppos;
 
             for (int i = 1; i < posTags.length; i++) {

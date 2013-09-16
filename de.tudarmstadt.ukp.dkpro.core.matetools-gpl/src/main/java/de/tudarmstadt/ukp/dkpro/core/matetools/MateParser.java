@@ -203,19 +203,24 @@ public class MateParser
 			forms.add(CONLLReader09.ROOT);
 			forms.addAll(JCasUtil.toText(tokens));
 
-//			List<String> lemmas = new LinkedList<String>();
+			List<String> lemmas = new LinkedList<String>();
 			List<String> posTags = new LinkedList<String>();
-//			lemmas.add(CONLLReader09.ROOT_LEMMA);
+			lemmas.add(CONLLReader09.ROOT_LEMMA);
 			posTags.add(CONLLReader09.ROOT_POS);
 			for (Token token : tokens) {
-//				lemmas.add(token.getLemma().getValue());
+			    if (token.getLemma() != null) {
+			        lemmas.add(token.getLemma().getValue());
+			    }
+			    else {
+			        lemmas.add("_");
+			    }
 				posTags.add(token.getPos().getPosValue());
 			}
 
 			SentenceData09 sd = new SentenceData09();
-			sd.init(forms.toArray(new String[0]));
-//			sd.setLemmas(lemmas.toArray(new String[0]));
-			sd.setPPos(posTags.toArray(new String[0]));
+			sd.init(forms.toArray(new String[forms.size()]));
+			sd.setLemmas(lemmas.toArray(new String[lemmas.size()]));
+			sd.setPPos(posTags.toArray(new String[posTags.size()]));
 			SentenceData09 parsed = modelProvider.getResource().apply(sd);
 
 			for (int i = 0; i < parsed.labels.length; i++) {
