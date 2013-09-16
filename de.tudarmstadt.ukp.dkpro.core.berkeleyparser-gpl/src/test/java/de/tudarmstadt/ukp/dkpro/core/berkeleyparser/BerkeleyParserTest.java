@@ -296,7 +296,7 @@ public class BerkeleyParserTest
         String[] unmappedPos = new String[] { "$*LRB*", "*T1*", "*T2*", "*T3*", "*T4*", "*T5*",
                 "*T6*", "*T7*", "*T8*", "--" };
         
-        String[] unmappedConst = new String[] { "---CJ", "PSEUDO", "ROOT" };
+        String[] unmappedConst = new String[] { "---CJ", "PSEUDO" };
         
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
