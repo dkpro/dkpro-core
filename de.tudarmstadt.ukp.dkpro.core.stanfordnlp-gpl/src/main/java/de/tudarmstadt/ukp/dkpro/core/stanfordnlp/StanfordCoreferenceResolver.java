@@ -25,6 +25,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -62,6 +63,17 @@ import edu.stanford.nlp.util.TypesafeMap.Key;
 /**
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+            "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink"})
 public class StanfordCoreferenceResolver
     extends JCasAnnotator_ImplBase
 {
