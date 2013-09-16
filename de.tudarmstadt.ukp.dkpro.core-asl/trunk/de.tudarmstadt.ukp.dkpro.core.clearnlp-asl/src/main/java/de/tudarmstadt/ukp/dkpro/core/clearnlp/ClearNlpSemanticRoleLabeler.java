@@ -134,6 +134,7 @@ public class ClearNlpSemanticRoleLabeler
 			{
 			    setContextObject(ClearNlpSemanticRoleLabeler.this);
 
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-pred-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "pred-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -159,6 +160,7 @@ public class ClearNlpSemanticRoleLabeler
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-role-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "role-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
@@ -184,6 +186,7 @@ public class ClearNlpSemanticRoleLabeler
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-srl-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
 						+ "srl-${language}-${variant}.bin");
 				setDefault(VARIANT, "ontonotes");
