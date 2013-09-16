@@ -650,15 +650,12 @@ public abstract class ResourceObjectProviderBase<M>
             // Resolve the temporary module
             ResolveOptions options = new ResolveOptions();
             if (log.isDebugEnabled()) {
-                System.out.println("Debug is enabled");
                 options.setLog(LogOptions.LOG_DEFAULT);
             }
             else if (log.isInfoEnabled()) {
-                System.out.println("Info is enabled");
                 options.setLog(LogOptions.LOG_DOWNLOAD_ONLY);
             }
             else {
-                System.out.println("Nothing is enabled");
                 options.setLog(LogOptions.LOG_QUIET);
             }
             options.setConfs(new String[] { "default" });
