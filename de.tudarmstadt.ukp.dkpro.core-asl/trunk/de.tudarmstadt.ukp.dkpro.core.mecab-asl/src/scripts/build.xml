@@ -50,16 +50,15 @@
     		</chainedmapper>
     	</unzip>
 		
-		<jar destfile="target/de.tudarmstadt.ukp.dkpro.core.mecab-model-jp-ipadic-${ipadic.version}.jar" compress="true">
-			<fileset dir="target/model-staging">
-				<include name="META-INF/**/*"/>
-				<include name="**/lib/ipadic/*"/>
-			</fileset>
-		</jar>
-		
-		<install-artifact file="target/de.tudarmstadt.ukp.dkpro.core.mecab-model-jp-ipadic-${ipadic.version}.jar"
-			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.mecab-model-jp-ipadic"
-			version="${ipadic.version}"/>
+		<install-stub-and-upstream-folder
+		    folder="target/lib/ipadic"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.mecab" 
+			metadataversion="0"
+			upstreamversion="20070801"
+			tool="tagger"
+			language="jp"
+			variant="ipadic"/>
 		
 		<clean-pom/>
 	</target>	

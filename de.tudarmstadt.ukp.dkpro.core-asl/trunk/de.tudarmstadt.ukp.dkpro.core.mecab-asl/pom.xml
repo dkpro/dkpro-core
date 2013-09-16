@@ -55,14 +55,14 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-jp-ipadic</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-ipadic</artifactId>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-jp-ipadic</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-ipadic</artifactId>
 				<version>20070801.0</version>
 			</dependency>
 		</dependencies>
