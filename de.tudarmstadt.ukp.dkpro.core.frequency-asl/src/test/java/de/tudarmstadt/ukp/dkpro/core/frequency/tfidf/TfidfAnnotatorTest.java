@@ -62,7 +62,7 @@ public class TfidfAnnotatorTest
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
 
-    private File model;
+    protected File model;
 
     @Before
     public void buildModel()
