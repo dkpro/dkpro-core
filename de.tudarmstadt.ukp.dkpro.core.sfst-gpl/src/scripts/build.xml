@@ -16,56 +16,86 @@
    limitations under the License.
 -->
 <project basedir="../.." default="separate-jars">
-        <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/sfst/lib"/>
-        
-        <import>
-                <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
-        </import>
-        
-        <target name="local-maven">
-                <property name="install-artifact-enable" value="true"/>
-                <antcall target="separate-jars"/>
-        </target>
-        
-        <target name="separate-jars" depends="de, tr, install-executables"/>
+    <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/sfst/lib"/>
+    
+    <import>
+        <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+    </import>
+    
+    <target name="local-maven">
+        <property name="install-artifact-enable" value="true"/>
+        <antcall target="separate-jars"/>
+    </target>
+    
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
 
-        <target name="tr">
-                <mkdir dir="target/download"/>
-                
-        <get src="http://dkpro-core-gpl.googlecode.com/files/trmorph.a" dest="target/download/trmorph.a" skipexisting="true"/>
-        <install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
-                file="target/download/trmorph.a" md5="f16db56fb0203ede5c134938e7bdfca0"
-                tool="morph" language="tr" variant="default" extension="a" version="20121025.0"/>           
-                <delete dir="target/model-staging"/>
-        </target>
-        
-        <target name="de">
-                <mkdir dir="target/download"/>
+    <target name="separate-jars" depends="de, tr, install-executables"/>
 
-        <get src="http://morphisto.googlecode.com/files/morphisto-02022011.a" dest="target/download/morphisto-02022011.a" skipexisting="true"/>
-        <install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
-                file="target/download/morphisto-02022011.a" md5="9d85be57380188890156b7fa49b5c122"
-                tool="morph" language="de" variant="default" extension="a" version="02022011.0"/>           
-                <delete dir="target/model-staging"/>              
-        </target>
-	
-        <target name="install-executables">        	       	
-            <mkdir dir="target/download"/>
-        	<get src="http://dkpro-core-gpl.googlecode.com/files/sfst-1.4.6g-bin.tar.gz" dest="target/download" skipexisting="true"/>
-        	<gunzip src="target/download/sfst-1.4.6g-bin.tar.gz"/>
-        	<untar src="target/download/sfst-1.4.6g-bin.tar" dest="target/download"/>
-        	<delete file="target/download/sfst-1.4.6g-bin.tar"/>   	
-        	<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin"/>
-        	<copydir src="target/download/sfst/" dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin" includes="**/*"/>
-            <clean-pom/>
-            <generate-pom version="20120111.1" groupId="de.tudarmstadt.ukp.dkpro.core" 
-                    artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"/>
-            <jar destfile="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-20120111.1.jar" compress="true">
-                <fileset dir="target/model-staging/">
-                	   <include name="de/tudarmstadt/ukp/dkpro/core/sfst/bin/**/"/>
-                	   <include name="META-INF/maven/**/pom.xml"/>
-                </fileset>
-            </jar>	
-            <delete dir="target/model-staging"/>   
-       </target>
+    <target name="tr">
+        <mkdir dir="target/download"/>
+        <get 
+        	src="http://dkpro-core-gpl.googlecode.com/files/trmorph.a" 
+        	dest="target/download/trmorph.a" 
+        	skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/trmorph.a" 
+        	md5="f16db56fb0203ede5c134938e7bdfca0"
+        	groupId="de.tudarmstadt.ukp.dkpro.core" 
+        	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20121025"
+    		metaDataVersion="1"
+            tool="morph" 
+        	language="tr" 
+        	variant="default" 
+    		extension="a">
+		</install-stub-and-upstream-file>
+    </target>
+    
+    <target name="de">
+	    <mkdir dir="target/download"/>
+	    <get 
+	    	src="http://morphisto.googlecode.com/files/morphisto-02022011.a" 
+	    	dest="target/download/morphisto-02022011.a" 
+	    	skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/morphisto-02022011.a" 
+	    	md5="9d85be57380188890156b7fa49b5c122"
+	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="02022011"
+    		metaDataVersion="1"
+            tool="morph" 
+	    	language="de" 
+	    	variant="default" 
+    		extension="a">
+		</install-stub-and-upstream-file>
+    </target>
+
+    <target name="install-executables">        	       	
+        <mkdir dir="target/download"/>
+    	<get 
+    		src="http://dkpro-core-gpl.googlecode.com/files/sfst-1.4.6g-bin.tar.gz" 
+    		dest="target/download" 
+    		skipexisting="true"/>
+    	<gunzip src="target/download/sfst-1.4.6g-bin.tar.gz"/>
+    	<untar src="target/download/sfst-1.4.6g-bin.tar" dest="target/download"/>
+    	<delete file="target/download/sfst-1.4.6g-bin.tar"/>   	
+    	<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin"/>
+    	<copydir 
+    		src="target/download/sfst/" 
+    		dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin" includes="**/*"/>
+        <clean-pom/>
+        <generate-pom version="20120111.1" groupId="de.tudarmstadt.ukp.dkpro.core" 
+                artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"/>
+        <jar destfile="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-20120111.1.jar" compress="true">
+            <fileset dir="target/model-staging/">
+        	   <include name="de/tudarmstadt/ukp/dkpro/core/sfst/bin/**/"/>
+        	   <include name="META-INF/maven/**/pom.xml"/>
+            </fileset>
+        </jar>	
+        <delete dir="target/model-staging"/>   
+   </target>
 </project>
