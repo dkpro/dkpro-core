@@ -37,10 +37,22 @@
 	<target name="en">
 		<mkdir dir="target/download"/>
 
-    	<get src="http://dkpro-core-asl.googlecode.com/files/umlaut_web1t_model_20121116.zip" dest="target/download/umlaut_web1t_model.zip" skipexisting="true"/>
-    	<unzip dest="target/download/umlaut_web1t_model" src="target/download/umlaut_web1t_model.zip"></unzip>
-		<install-model-folder groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.umlautnormalizer"
-    		folder="target/download/umlaut_web1t_model" language="de" tool="normalizer" variant="default" version="20121116.0">		
+    	<get 
+    		src="http://dkpro-core-asl.googlecode.com/files/umlaut_web1t_model_20121116.zip" 
+    		dest="target/download/umlaut_web1t_model.zip" 
+    		skipexisting="true"/>
+    	<unzip 
+    		dest="target/download/umlaut_web1t_model" 
+    		src="target/download/umlaut_web1t_model.zip">
+    	</unzip>
+		<install-model-folder 
+			groupId="de.tudarmstadt.ukp.dkpro.core" 
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.umlautnormalizer"
+    		folder="target/download/umlaut_web1t_model" 
+			language="de" 
+			tool="normalizer" 
+			variant="default" 
+			version="20121116.0">		
 		</install-model-folder>
 		<delete dir="target/model-staging"/>
 	</target>
