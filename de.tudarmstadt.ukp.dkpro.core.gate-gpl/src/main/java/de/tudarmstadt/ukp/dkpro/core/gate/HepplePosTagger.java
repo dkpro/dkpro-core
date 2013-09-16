@@ -142,12 +142,12 @@ public class HepplePosTagger
 
         mappingProvider = new MappingProvider();
         mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+                "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
         mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        mappingProvider.setDefault("tagger.tagset", "default");
+        mappingProvider.setDefault("pos.tagset", "default");
         mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
         mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        mappingProvider.addImport("tagger.tagset", ruleProvider);
+        mappingProvider.addImport("pos.tagset", ruleProvider);
     }
 
 
