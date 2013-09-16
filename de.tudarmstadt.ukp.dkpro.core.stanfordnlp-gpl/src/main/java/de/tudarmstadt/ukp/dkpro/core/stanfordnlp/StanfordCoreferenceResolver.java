@@ -13,11 +13,14 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -28,6 +31,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
@@ -89,54 +94,78 @@ public class StanfordCoreferenceResolver
     @ConfigurationParameter(name = PARAM_MAXDIST, defaultValue = "-1", mandatory = true)
     private int maxdist;
 
-    private MentionExtractor mentionExtractor;
-    private SieveCoreferenceSystem corefSystem;
+    private CasConfigurableProviderBase<Coreferencer> modelProvider;
 
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
+        
+        modelProvider = new ModelProviderBase<Coreferencer>() {
+            {
+                setContextObject(StanfordCoreferenceResolver.this);
+                
+                setDefault(ARTIFACT_ID, "${groupId}.stanfordnlp-model-coref-${language}-${variant}");
+                setDefault(LOCATION, "classpath:/${package}/lib/coref/${language}/${variant}/countries");
+                setDefault(VARIANT, "default");
 
-        Properties props = new Properties();
-        props.setProperty(Constants.SIEVES_PROP, sieves);
-        props.setProperty(Constants.SCORE_PROP, String.valueOf(score));
-        props.setProperty(Constants.POSTPROCESSING_PROP, String.valueOf(postprocessing));
-        props.setProperty(Constants.MAXDIST_PROP, String.valueOf(maxdist));
-        props.setProperty(Constants.REPLICATECONLL_PROP, "false");
-        props.setProperty(Constants.CONLL_SCORER, Constants.conllMentionEvalScript);
+                // setOverride(LOCATION, modelLocation);
+                // setOverride(LANGUAGE, language);
+                // setOverride(VARIANT, variant);
+            }
 
-        props.setProperty(Constants.DEMONYM_PROP, DEFAULT_DCOREF_DEMONYM);
-        props.setProperty(Constants.ANIMATE_PROP, DEFAULT_DCOREF_ANIMATE);
-        props.setProperty(Constants.INANIMATE_PROP, DEFAULT_DCOREF_INANIMATE);
-        props.setProperty(Constants.MALE_PROP, DEFAULT_DCOREF_MALE);
-        props.setProperty(Constants.NEUTRAL_PROP, DEFAULT_DCOREF_NEUTRAL);
-        props.setProperty(Constants.FEMALE_PROP, DEFAULT_DCOREF_FEMALE);
-        props.setProperty(Constants.PLURAL_PROP, DEFAULT_DCOREF_PLURAL);
-        props.setProperty(Constants.SINGULAR_PROP, DEFAULT_DCOREF_SINGULAR);
-        props.setProperty(Constants.STATES_PROP, DEFAULT_DCOREF_STATES);
-        props.setProperty(Constants.GENDER_NUMBER_PROP, DEFAULT_DCOREF_GENDER_NUMBER);
-        props.setProperty(Constants.COUNTRIES_PROP, DEFAULT_DCOREF_COUNTRIES);
-        props.setProperty(Constants.STATES_PROVINCES_PROP, DEFAULT_DCOREF_STATES_AND_PROVINCES);
-        props.setProperty(Constants.EXTRA_GENDER_PROP, DEFAULT_DCOREF_EXTRA_GENDER);
-        props.setProperty(Constants.SINGLETON_PROP, DEFAULT_DCOREF_SINGLETON_PROP);
-        props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
-        props.setProperty(Constants.REPLICATECONLL_PROP, "false");
+            @Override
+            protected Coreferencer produceResource(URL aUrl)
+                throws IOException
+            {
+                String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString())+"/";
+                
+                Properties props = new Properties();
+                props.setProperty(Constants.SIEVES_PROP, sieves);
+                props.setProperty(Constants.SCORE_PROP, String.valueOf(score));
+                props.setProperty(Constants.POSTPROCESSING_PROP, String.valueOf(postprocessing));
+                props.setProperty(Constants.MAXDIST_PROP, String.valueOf(maxdist));
+                props.setProperty(Constants.REPLICATECONLL_PROP, "false");
+                props.setProperty(Constants.CONLL_SCORER, Constants.conllMentionEvalScript);
 
-        try {
-            corefSystem = new SieveCoreferenceSystem(props);
-            mentionExtractor = new MentionExtractor(corefSystem.dictionaries(),
-                    corefSystem.semantics());
-        }
-        catch (Exception e) {
-            throw new ResourceInitializationException(e);
-        }
+                props.setProperty(Constants.DEMONYM_PROP, base + "demonyms.txt");
+                props.setProperty(Constants.ANIMATE_PROP, base + "animate.unigrams.txt");
+                props.setProperty(Constants.INANIMATE_PROP, base + "inanimate.unigrams.txt");
+                props.setProperty(Constants.MALE_PROP, base + "male.unigrams.txt");
+                props.setProperty(Constants.NEUTRAL_PROP, base + "neutral.unigrams.txt");
+                props.setProperty(Constants.FEMALE_PROP, base + "female.unigrams.txt");
+                props.setProperty(Constants.PLURAL_PROP, base + "plural.unigrams.txt");
+                props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
+                props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
+                props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.data.gz");
+                props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
+                props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
+                props.setProperty(Constants.EXTRA_GENDER_PROP, base + "namegender.combine.txt");
+                props.setProperty(Constants.SINGLETON_PROP, base + "singleton.predictor.ser");
+                props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
+                props.setProperty(Constants.REPLICATECONLL_PROP, "false");
+
+                try {
+                    Coreferencer coref = new Coreferencer();
+                    coref.corefSystem = new SieveCoreferenceSystem(props);
+                    coref.mentionExtractor = new MentionExtractor(coref.corefSystem.dictionaries(),
+                            coref.corefSystem.semantics());
+                    return coref;
+                }
+                catch (Exception e) {
+                    throw new IOException(e);
+                }
+            }
+        };
     }
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        modelProvider.configure(aJCas.getCas());
+        
         List<Tree> trees = new ArrayList<Tree>();
         List<CoreMap> sentences = new ArrayList<CoreMap>();
         List<List<CoreLabel>> sentenceTokens = new ArrayList<List<CoreLabel>>();
@@ -209,17 +238,19 @@ public class StanfordCoreferenceResolver
         Annotation document = new Annotation(aJCas.getDocumentText());
         document.set(SentencesAnnotation.class, sentences);
 
+        Coreferencer coref = modelProvider.getResource();
+        
         // extract all possible mentions
         RuleBasedCorefMentionFinder finder = new RuleBasedCorefMentionFinder();
         List<List<Mention>> allUnprocessedMentions = finder.extractPredictedMentions(document, 0,
-                corefSystem.dictionaries());
+                coref.corefSystem.dictionaries());
 
         // add the relevant info to mentions and order them for coref
         Map<Integer, CorefChain> result;
         try {
-            Document doc = mentionExtractor.arrange(document, sentenceTokens, trees,
+            Document doc = coref.mentionExtractor.arrange(document, sentenceTokens, trees,
                     allUnprocessedMentions);
-            result = corefSystem.coref(doc);
+            result = coref.corefSystem.coref(doc);
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
@@ -265,22 +296,9 @@ public class StanfordCoreferenceResolver
         implements Key<Token>
     {
     };
-
-    public static final String BASE = "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/coref/en/default/";
-
-    public static final String DEFAULT_DCOREF_ANIMATE = BASE + "animate.unigrams.txt";
-    public static final String DEFAULT_DCOREF_DEMONYM = BASE + "demonyms.txt";
-    public static final String DEFAULT_DCOREF_FEMALE = BASE + "female.unigrams.txt";
-    public static final String DEFAULT_DCOREF_INANIMATE = BASE + "inanimate.unigrams.txt";
-    public static final String DEFAULT_DCOREF_MALE = BASE + "male.unigrams.txt";
-    public static final String DEFAULT_DCOREF_NEUTRAL = BASE + "neutral.unigrams.txt";
-    public static final String DEFAULT_DCOREF_PLURAL = BASE + "plural.unigrams.txt";
-    public static final String DEFAULT_DCOREF_SINGULAR = BASE + "singular.unigrams.txt";
-    public static final String DEFAULT_DCOREF_STATES = BASE + "state-abbreviations.txt";
-
-    public static final String DEFAULT_DCOREF_COUNTRIES = BASE + "countries";
-    public static final String DEFAULT_DCOREF_STATES_AND_PROVINCES = BASE + "statesandprovinces";
-    public static final String DEFAULT_DCOREF_GENDER_NUMBER = BASE + "gender.data.gz";
-    public static final String DEFAULT_DCOREF_EXTRA_GENDER = BASE + "namegender.combine.txt";
-    public static final String DEFAULT_DCOREF_SINGLETON_PROP = BASE + "singleton.predictor.ser";
+    
+    private static class Coreferencer {
+        MentionExtractor mentionExtractor;
+        SieveCoreferenceSystem corefSystem;
+    }
 }
