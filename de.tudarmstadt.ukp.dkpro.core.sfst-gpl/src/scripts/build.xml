@@ -16,10 +16,10 @@
    limitations under the License.
 -->
 <project basedir="../.." default="separate-jars">
-        <property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst"/>
+        <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/sfst/lib"/>
         
         <import>
-                <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+                <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
         </import>
         
         <target name="local-maven">
@@ -55,8 +55,8 @@
         	<gunzip src="target/download/sfst-1.4.6g-bin.tar.gz"/>
         	<untar src="target/download/sfst-1.4.6g-bin.tar" dest="target/download"/>
         	<delete file="target/download/sfst-1.4.6g-bin.tar"/>   	
-        	<mkdir dir="${outputDir}/bin"/>
-        	<copydir src="target/download/sfst/" dest="${outputDir}/bin" includes="**/*"/>
+        	<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin"/>
+        	<copydir src="target/download/sfst/" dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin" includes="**/*"/>
             <clean-pom/>
             <generate-pom version="20120111.1" groupId="de.tudarmstadt.ukp.dkpro.core" 
                     artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"/>
