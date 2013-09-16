@@ -20,43 +20,33 @@
             <annotationSpace as.id="pos"/>
         </annotationSpaces>
     </graphHeader>
-    <region xml:id="region0" anchors="0 3000000"/>
-    <region xml:id="region1" anchors="0 89"/>
-    <region xml:id="region2" anchors="0 18"/>
-    <region xml:id="region3" anchors="0 5"/>
-    <region xml:id="region4" anchors="6 8"/>
-    <region xml:id="region5" anchors="9 17"/>
-    <region xml:id="region6" anchors="17 18"/>
-    <region xml:id="region7" anchors="19 89"/>
-    <region xml:id="region8" anchors="19 27"/>
-    <region xml:id="region9" anchors="28 34"/>
-    <region xml:id="region10" anchors="35 40"/>
-    <region xml:id="region11" anchors="41 44"/>
-    <region xml:id="region12" anchors="44 45"/>
-    <region xml:id="region13" anchors="46 47"/>
-    <region xml:id="region14" anchors="47 52"/>
-    <region xml:id="region15" anchors="53 55"/>
-    <region xml:id="region16" anchors="56 64"/>
-    <region xml:id="region17" anchors="64 65"/>
-    <region xml:id="region18" anchors="66 69"/>
-    <region xml:id="region19" anchors="70 76"/>
-    <region xml:id="region20" anchors="77 81"/>
-    <region xml:id="region21" anchors="82 87"/>
-    <region xml:id="region22" anchors="87 88"/>
-    <region xml:id="region23" anchors="88 89"/>
+    <region xml:id="region0" anchors="0 89"/>
+    <region xml:id="region1" anchors="0 18"/>
+    <region xml:id="region2" anchors="0 5"/>
+    <region xml:id="region3" anchors="6 8"/>
+    <region xml:id="region4" anchors="9 17"/>
+    <region xml:id="region5" anchors="17 18"/>
+    <region xml:id="region6" anchors="19 89"/>
+    <region xml:id="region7" anchors="19 27"/>
+    <region xml:id="region8" anchors="28 34"/>
+    <region xml:id="region9" anchors="35 40"/>
+    <region xml:id="region10" anchors="41 44"/>
+    <region xml:id="region11" anchors="44 45"/>
+    <region xml:id="region12" anchors="46 47"/>
+    <region xml:id="region13" anchors="47 52"/>
+    <region xml:id="region14" anchors="53 55"/>
+    <region xml:id="region15" anchors="56 64"/>
+    <region xml:id="region16" anchors="64 65"/>
+    <region xml:id="region17" anchors="66 69"/>
+    <region xml:id="region18" anchors="70 76"/>
+    <region xml:id="region19" anchors="77 81"/>
+    <region xml:id="region20" anchors="82 87"/>
+    <region xml:id="region21" anchors="87 88"/>
+    <region xml:id="region22" anchors="88 89"/>
     <node xml:id="node0">
         <link targets="region0"/>
     </node>
-    <a xml:id="a-0" label="TagsetDescription" ref="node0" as="type">
-        <fs>
-            <f name="layer" value="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"/>
-            <f name="name" value="ptb"/>
-        </fs>
-    </a>
-    <node xml:id="node1">
-        <link targets="region1"/>
-    </node>
-    <a xml:id="a-1" label="DocumentMetaData" ref="node1" as="type">
+    <a xml:id="a-0" label="DocumentMetaData" ref="node0" as="type">
         <fs>
             <f name="language" value="en"/>
             <f name="documentTitle" value="example1.txt"/>
@@ -64,16 +54,25 @@
             <f name="isLastSegment" value="false"/>
         </fs>
     </a>
+    <node xml:id="node1">
+        <link targets="region0"/>
+    </node>
+    <a xml:id="a-1" label="TagsetDescription" ref="node1" as="type">
+        <fs>
+            <f name="layer" value="de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"/>
+            <f name="name" value="ptb"/>
+        </fs>
+    </a>
     <node xml:id="node10">
-        <link targets="region6"/>
+        <link targets="region5"/>
     </node>
     <a xml:id="a-10" label="Token" ref="node10" as="type"/>
     <node xml:id="node11">
-        <link targets="region7"/>
+        <link targets="region6"/>
     </node>
     <a xml:id="a-11" label="Sentence" ref="node11" as="type"/>
     <node xml:id="node12">
-        <link targets="region8"/>
+        <link targets="region7"/>
     </node>
     <a xml:id="a-12" label="ADV" ref="node12" as="pos">
         <fs>
@@ -81,11 +80,11 @@
         </fs>
     </a>
     <node xml:id="node13">
-        <link targets="region8"/>
+        <link targets="region7"/>
     </node>
     <a xml:id="a-13" label="Token" ref="node13" as="type"/>
     <node xml:id="node14">
-        <link targets="region9"/>
+        <link targets="region8"/>
     </node>
     <a xml:id="a-14" label="NP" ref="node14" as="pos">
         <fs>
@@ -93,11 +92,11 @@
         </fs>
     </a>
     <node xml:id="node15">
-        <link targets="region9"/>
+        <link targets="region8"/>
     </node>
     <a xml:id="a-15" label="Token" ref="node15" as="type"/>
     <node xml:id="node16">
-        <link targets="region10"/>
+        <link targets="region9"/>
     </node>
     <a xml:id="a-16" label="V" ref="node16" as="pos">
         <fs>
@@ -105,11 +104,11 @@
         </fs>
     </a>
     <node xml:id="node17">
-        <link targets="region10"/>
+        <link targets="region9"/>
     </node>
     <a xml:id="a-17" label="Token" ref="node17" as="type"/>
     <node xml:id="node18">
-        <link targets="region11"/>
+        <link targets="region10"/>
     </node>
     <a xml:id="a-18" label="PP" ref="node18" as="pos">
         <fs>
@@ -117,15 +116,15 @@
         </fs>
     </a>
     <node xml:id="node19">
-        <link targets="region11"/>
+        <link targets="region10"/>
     </node>
     <a xml:id="a-19" label="Token" ref="node19" as="type"/>
     <node xml:id="node2">
-        <link targets="region2"/>
+        <link targets="region1"/>
     </node>
     <a xml:id="a-2" label="Sentence" ref="node2" as="type"/>
     <node xml:id="node20">
-        <link targets="region12"/>
+        <link targets="region11"/>
     </node>
     <a xml:id="a-20" label="PUNC" ref="node20" as="pos">
         <fs>
@@ -133,11 +132,11 @@
         </fs>
     </a>
     <node xml:id="node21">
-        <link targets="region12"/>
+        <link targets="region11"/>
     </node>
     <a xml:id="a-21" label="Token" ref="node21" as="type"/>
     <node xml:id="node22">
-        <link targets="region13"/>
+        <link targets="region12"/>
     </node>
     <a xml:id="a-22" label="O" ref="node22" as="pos">
         <fs>
@@ -145,15 +144,15 @@
         </fs>
     </a>
     <node xml:id="node23">
-        <link targets="region13"/>
+        <link targets="region12"/>
     </node>
     <a xml:id="a-23" label="Token" ref="node23" as="type"/>
     <node xml:id="node24">
-        <link targets="region14"/>
+        <link targets="region13"/>
     </node>
     <a xml:id="a-24" label="Token" ref="node24" as="type"/>
     <node xml:id="node25">
-        <link targets="region14"/>
+        <link targets="region13"/>
     </node>
     <a xml:id="a-25" label="ART" ref="node25" as="pos">
         <fs>
@@ -161,7 +160,7 @@
         </fs>
     </a>
     <node xml:id="node26">
-        <link targets="region15"/>
+        <link targets="region14"/>
     </node>
     <a xml:id="a-26" label="V" ref="node26" as="pos">
         <fs>
@@ -169,11 +168,11 @@
         </fs>
     </a>
     <node xml:id="node27">
-        <link targets="region15"/>
+        <link targets="region14"/>
     </node>
     <a xml:id="a-27" label="Token" ref="node27" as="type"/>
     <node xml:id="node28">
-        <link targets="region16"/>
+        <link targets="region15"/>
     </node>
     <a xml:id="a-28" label="NP" ref="node28" as="pos">
         <fs>
@@ -181,11 +180,11 @@
         </fs>
     </a>
     <node xml:id="node29">
-        <link targets="region16"/>
+        <link targets="region15"/>
     </node>
     <a xml:id="a-29" label="Token" ref="node29" as="type"/>
     <node xml:id="node3">
-        <link targets="region3"/>
+        <link targets="region2"/>
     </node>
     <a xml:id="a-3" label="ADV" ref="node3" as="pos">
         <fs>
@@ -193,7 +192,7 @@
         </fs>
     </a>
     <node xml:id="node30">
-        <link targets="region17"/>
+        <link targets="region16"/>
     </node>
     <a xml:id="a-30" label="PUNC" ref="node30" as="pos">
         <fs>
@@ -201,11 +200,11 @@
         </fs>
     </a>
     <node xml:id="node31">
-        <link targets="region17"/>
+        <link targets="region16"/>
     </node>
     <a xml:id="a-31" label="Token" ref="node31" as="type"/>
     <node xml:id="node32">
-        <link targets="region18"/>
+        <link targets="region17"/>
     </node>
     <a xml:id="a-32" label="PR" ref="node32" as="pos">
         <fs>
@@ -213,11 +212,11 @@
         </fs>
     </a>
     <node xml:id="node33">
-        <link targets="region18"/>
+        <link targets="region17"/>
     </node>
     <a xml:id="a-33" label="Token" ref="node33" as="type"/>
     <node xml:id="node34">
-        <link targets="region19"/>
+        <link targets="region18"/>
     </node>
     <a xml:id="a-34" label="V" ref="node34" as="pos">
         <fs>
@@ -225,11 +224,11 @@
         </fs>
     </a>
     <node xml:id="node35">
-        <link targets="region19"/>
+        <link targets="region18"/>
     </node>
     <a xml:id="a-35" label="Token" ref="node35" as="type"/>
     <node xml:id="node36">
-        <link targets="region20"/>
+        <link targets="region19"/>
     </node>
     <a xml:id="a-36" label="PP" ref="node36" as="pos">
         <fs>
@@ -237,15 +236,15 @@
         </fs>
     </a>
     <node xml:id="node37">
-        <link targets="region20"/>
+        <link targets="region19"/>
     </node>
     <a xml:id="a-37" label="Token" ref="node37" as="type"/>
     <node xml:id="node38">
-        <link targets="region21"/>
+        <link targets="region20"/>
     </node>
     <a xml:id="a-38" label="Token" ref="node38" as="type"/>
     <node xml:id="node39">
-        <link targets="region21"/>
+        <link targets="region20"/>
     </node>
     <a xml:id="a-39" label="ART" ref="node39" as="pos">
         <fs>
@@ -253,11 +252,11 @@
         </fs>
     </a>
     <node xml:id="node4">
-        <link targets="region3"/>
+        <link targets="region2"/>
     </node>
     <a xml:id="a-4" label="Token" ref="node4" as="type"/>
     <node xml:id="node40">
-        <link targets="region22"/>
+        <link targets="region21"/>
     </node>
     <a xml:id="a-40" label="PUNC" ref="node40" as="pos">
         <fs>
@@ -265,11 +264,11 @@
         </fs>
     </a>
     <node xml:id="node41">
-        <link targets="region22"/>
+        <link targets="region21"/>
     </node>
     <a xml:id="a-41" label="Token" ref="node41" as="type"/>
     <node xml:id="node42">
-        <link targets="region23"/>
+        <link targets="region22"/>
     </node>
     <a xml:id="a-42" label="O" ref="node42" as="pos">
         <fs>
@@ -277,11 +276,11 @@
         </fs>
     </a>
     <node xml:id="node43">
-        <link targets="region23"/>
+        <link targets="region22"/>
     </node>
     <a xml:id="a-43" label="Token" ref="node43" as="type"/>
     <node xml:id="node5">
-        <link targets="region4"/>
+        <link targets="region3"/>
     </node>
     <a xml:id="a-5" label="V" ref="node5" as="pos">
         <fs>
@@ -289,11 +288,11 @@
         </fs>
     </a>
     <node xml:id="node6">
-        <link targets="region4"/>
+        <link targets="region3"/>
     </node>
     <a xml:id="a-6" label="Token" ref="node6" as="type"/>
     <node xml:id="node7">
-        <link targets="region5"/>
+        <link targets="region4"/>
     </node>
     <a xml:id="a-7" label="NP" ref="node7" as="pos">
         <fs>
@@ -301,11 +300,11 @@
         </fs>
     </a>
     <node xml:id="node8">
-        <link targets="region5"/>
+        <link targets="region4"/>
     </node>
     <a xml:id="a-8" label="Token" ref="node8" as="type"/>
     <node xml:id="node9">
-        <link targets="region6"/>
+        <link targets="region5"/>
     </node>
     <a xml:id="a-9" label="PUNC" ref="node9" as="pos">
         <fs>
