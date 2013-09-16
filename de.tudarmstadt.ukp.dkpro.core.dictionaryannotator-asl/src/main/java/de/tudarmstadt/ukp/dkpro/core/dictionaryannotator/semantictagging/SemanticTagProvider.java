@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.dictionaryannotator.semantictagging;
 
+import java.util.List;
+
 import org.apache.uima.resource.ResourceAccessException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -41,4 +43,16 @@ public interface SemanticTagProvider {
      * @return semantic tag of the token. Returns "UNKNOWN" if the (lemma of the) token does not exist in the resource.
      */
 	public String getSemanticTag(Token token) throws ResourceAccessException ;
+	
+	/**
+     * Get a semantic tag for a list of tokens (e.g. a multiword).
+     *
+     * @param tokens
+     *            list of tokens to tag
+     *            
+     * @return semantic tag of the multiword. Returns "UNKNOWN" if the (lemma of the) multiword does not exist in the resource.
+     */
+	public String getSemanticTag(List<Token> tokens) throws ResourceAccessException;
+
+
 }

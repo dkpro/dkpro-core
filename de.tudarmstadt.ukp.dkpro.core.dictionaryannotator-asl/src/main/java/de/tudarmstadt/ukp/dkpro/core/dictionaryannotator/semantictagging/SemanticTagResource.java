@@ -21,8 +21,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.StringUtils;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -91,6 +94,27 @@ public class SemanticTagResource
             throw new ResourceAccessException(e);
         }
 	}
+	
+	@Override
+	public String getSemanticTag(List<Token> tokens) throws ResourceAccessException {
+
+		List<String> lemmas = new ArrayList<String>();
+		for (Token token : tokens) {
+			lemmas.add(token.getLemma().getValue());
+		}
+		String lemmaString = StringUtils.join(lemmas, " ");
+				
+		try {
+			if (keySemanticTagMap.containsKey(lemmaString)) {
+				return keySemanticTagMap.get(lemmaString);
+			} else {
+				return "UNKNOWN"; 
+			}
+		} catch (Exception e) {
+            throw new ResourceAccessException(e);
+        }
+	}
+
 	
 	
 	private void readFileToMap(BufferedReader bufferedReader) throws IOException {		
