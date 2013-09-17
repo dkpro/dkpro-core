@@ -220,16 +220,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
@@ -316,11 +306,6 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.langdect-asl</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
 				<version>1.5.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -584,8 +569,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.html-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</module>
@@ -614,7 +597,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.langdect-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
