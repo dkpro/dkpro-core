@@ -15,8 +15,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -46,9 +45,9 @@
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk</url>
+		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/branches/1.5.x</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/branches/1.5.x</developerConnection>
+		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk/branches/1.5.x</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
@@ -773,199 +772,74 @@
 						</dependencies>
 						<configuration>
 							<target>
-								<taskdef classpathref="maven.runtime.classpath"
-									resource="tasks.properties" />
-								<cobertura-merge
-									datafile="${project.build.directory}/cobertura/cobertura.ser">
+								<taskdef classpathref="maven.runtime.classpath" resource="tasks.properties" />
+								<cobertura-merge datafile="${project.build.directory}/cobertura/cobertura.ser">
 									<fileset dir="${project.build.directory}/..">
 										<include name="**/target/cobertura/cobertura.ser" />
 									</fileset>
 								</cobertura-merge>
-								<cobertura-report format="html" encoding="UTF-8"
-									destdir="${project.build.directory}/site/cobertura" datafile="${project.build.directory}/cobertura/cobertura.ser">
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.corpus-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.frequency-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.io-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.metadata-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.ner-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.parameter-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.resources-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.structure-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.syntax-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.transform-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.bananasplit-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.castransformation-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.examples-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.frequency-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.annis-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bincas-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bliki-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.mmax2-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.negra-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pdf-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pentree-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tcf-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tei-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.text-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tiger-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.web1t-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xmi-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xml-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jazzy-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mecab-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ngrams-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.norvig-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.posfilter-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.snowball-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textcat-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textmarker-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.tokit-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.toolbox-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.treetagger-asl/src/main/java"
-										includes="**/*.java" />
-									<fileset
-										dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl/src/main/java"
-										includes="**/*.java" />
+								<cobertura-report format="html" encoding="UTF-8" destdir="${project.build.directory}/site/cobertura" datafile="${project.build.directory}/cobertura/cobertura.ser">
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.corpus-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.frequency-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.io-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.metadata-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.ner-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.parameter-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.resources-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.structure-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.syntax-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.transform-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.bananasplit-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.castransformation-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.examples-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.frequency-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.annis-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bincas-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bliki-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.mmax2-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.negra-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pdf-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pentree-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tcf-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tei-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.text-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tiger-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.web1t-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xmi-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xml-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jazzy-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mecab-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ngrams-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.norvig-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.posfilter-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.snowball-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textcat-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textmarker-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.tokit-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.toolbox-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.treetagger-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl/src/main/java" includes="**/*.java" />
 								</cobertura-report>
 							</target>
 						</configuration>
