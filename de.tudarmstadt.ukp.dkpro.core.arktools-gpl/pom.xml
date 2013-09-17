@@ -42,9 +42,7 @@
       </dependency>
       <dependency>
       	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      	<artifactId>
-      		de.tudarmstadt.ukp.dkpro.core.api.resources-asl
-      	</artifactId>
+      	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
       </dependency>
       <dependency>
       	<groupId>edu.cmu.cs</groupId>
@@ -56,11 +54,10 @@
   	<dependencies>
   		<dependency>
   			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  			<artifactId>
-  				de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default
-  			</artifactId>
+  			<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
   			<version>20120919.1</version>
   		</dependency>
   	</dependencies>
   </dependencyManagement>
+  <name>DKPro Core GPL - ARK</name>
 </project>
