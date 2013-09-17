@@ -63,9 +63,9 @@
 		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
+		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.5.x</connection>
+		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.5.x</developerConnection>
+		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.5.x</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
