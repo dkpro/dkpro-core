@@ -70,12 +70,7 @@
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
-		</dependency>	
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-	  		<artifactId>commons-lang3</artifactId>
-	  		<version>3.1</version>	
-  		</dependency>	
+		</dependency>		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
