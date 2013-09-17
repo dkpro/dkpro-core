@@ -73,7 +73,7 @@ public class OpenNlpNameFinder
      * for one language.
      */
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true)
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue="person")
     protected String variant;
 
     /**
