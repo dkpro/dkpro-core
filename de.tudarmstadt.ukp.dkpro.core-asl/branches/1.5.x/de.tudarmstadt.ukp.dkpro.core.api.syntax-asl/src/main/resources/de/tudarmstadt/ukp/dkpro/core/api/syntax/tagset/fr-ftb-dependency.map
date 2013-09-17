@@ -1,0 +1,39 @@
+# French Treebank Dependency Tagset
+#
+# Source: http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf
+
+# ￼￼￼suj
+# ￼obj
+# de_obj
+# ￼a_obj
+# p_obj
+# ￼ats
+# ato
+# ￼mod
+# ￼auux_tps
+# aux_pass
+# aux_caus
+# ￼aff
+# ￼mod
+# mod_rel
+# ￼coord
+# ￼arg
+# dep_coord
+# det
+# ￼ponct
+# ￼dep
+# mod_loc
+# mod_cleft
+# p_obj_agt
+# p_obj_loc
+# suj_imper
+# aff_moyen
+# arg_comp
+# arg_cons
+
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X

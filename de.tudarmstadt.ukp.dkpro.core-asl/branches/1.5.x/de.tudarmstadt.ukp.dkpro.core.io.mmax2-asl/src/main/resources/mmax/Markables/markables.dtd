@@ -1,0 +1,3 @@
+<!ELEMENT markable ANY>
+<!ELEMENT markables (markable*)>
+<!ATTLIST markable id ID #REQUIRED>
