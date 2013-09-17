@@ -16,7 +16,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.5.0-SNAPSHOT</version>
+		<version>1.6.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
 	<name>DKPro Core GPL - TGrep2</name>
@@ -60,7 +60,7 @@
 				<artifactId>
 					de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl
 				</artifactId>
-				<version>1.5.0-SNAPSHOT</version>
+				<version>1.6.0-SNAPSHOT</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
