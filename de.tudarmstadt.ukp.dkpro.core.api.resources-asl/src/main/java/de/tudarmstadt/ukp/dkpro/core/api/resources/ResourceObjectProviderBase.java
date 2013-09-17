@@ -50,6 +50,7 @@ import org.apache.ivy.core.report.ResolveReport;
 import org.apache.ivy.core.resolve.ResolveOptions;
 import org.apache.ivy.core.settings.IvySettings;
 import org.apache.ivy.plugins.resolver.ChainResolver;
+import org.apache.ivy.plugins.resolver.DependencyResolver;
 import org.apache.ivy.plugins.resolver.IBiblioResolver;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
@@ -92,6 +93,14 @@ public abstract class ResourceObjectProviderBase<M>
 {
     private final Log log = LogFactory.getLog(getClass());
 
+    public static final String PROP_REPO_ID = "dkpro.model.repository.id";
+    public static final String PROP_REPO_URL = "dkpro.model.repository.url";
+    
+    private static final String DEFAULT_REPO_ID = "ukp-model-releases";
+    
+    private static final String DEFAULT_REPO_URL = "http://zoidberg.ukp.informatik.tu-darmstadt.de/"
+            + "artifactory/public-model-releases-local";
+    
     public static final String NOT_REQUIRED = "-=* NOT REQUIRED *=-";
 
     /**
@@ -607,6 +616,15 @@ public abstract class ResourceObjectProviderBase<M>
         }
     }
 
+    protected DependencyResolver getModelResolver()
+    {
+        IBiblioResolver ukpModels = new IBiblioResolver();
+        ukpModels.setName(System.getProperty(PROP_REPO_ID, DEFAULT_REPO_ID));
+        ukpModels.setRoot(System.getProperty(PROP_REPO_URL, DEFAULT_REPO_URL));
+        ukpModels.setM2compatible(true);
+        return ukpModels;
+    }
+    
     /**
      * Try to fetch an artifact and its dependencies from the UKP model repository or from 
      * Maven Central.
@@ -619,16 +637,12 @@ public abstract class ResourceObjectProviderBase<M>
         ivySettings.loadDefault();
         ivySettings.configureRepositories(true);
         ivySettings.configureDefaultVersionMatcher();
-
+        
         // Add a resolver for the UKP model repository
-        IBiblioResolver ukpModels = new IBiblioResolver();
-        ukpModels.setName("ukp-model-releases");
-        ukpModels.setRoot("http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/" +
-        		"public-model-releases-local");
-        ukpModels.setM2compatible(true);
-        ukpModels.setSettings(ivySettings);
-        ivySettings.addResolver(ukpModels);
-        ((ChainResolver) ivySettings.getResolver("main")).add(ukpModels);
+        DependencyResolver modelResolver = getModelResolver();
+        modelResolver.setSettings(ivySettings);
+        ivySettings.addResolver(modelResolver);
+        ((ChainResolver) ivySettings.getResolver("main")).add(modelResolver);
 
         // Initialize Ivy
         Ivy ivy = Ivy.newInstance(ivySettings);
