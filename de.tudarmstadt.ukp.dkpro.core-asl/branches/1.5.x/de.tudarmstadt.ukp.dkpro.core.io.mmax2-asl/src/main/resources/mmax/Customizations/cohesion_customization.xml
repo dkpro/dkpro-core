@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<customization>
-<rule pattern="{all}" style="foreground=blue"/>
-<rule pattern="!coh_neighb={empty}" style="bold=true"/>
-</customization>
