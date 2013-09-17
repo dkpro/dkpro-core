@@ -45,15 +45,16 @@
     		dest="target/download/umlaut_web1t_model" 
     		src="target/download/umlaut_web1t_model.zip">
     	</unzip>
-		<install-model-folder 
+		<install-stub-and-upstream-folder 
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.umlautnormalizer"
-    		folder="target/download/umlaut_web1t_model" 
+    		folder="target/download/umlaut_web1t_model"
+    		metaDataVersion="0"
+    		upstreamVersion="20121116" 
 			language="de" 
 			tool="normalizer" 
-			variant="default" 
-			version="20121116.0">		
-		</install-model-folder>
+			variant="default"> 	
+		</install-stub-and-upstream-folder>
 		<delete dir="target/model-staging"/>
 	</target>
 </project>
