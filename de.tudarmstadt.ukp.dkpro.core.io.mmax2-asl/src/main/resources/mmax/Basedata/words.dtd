@@ -1,3 +1,0 @@
-<!ELEMENT words (word*)>
-<!ELEMENT word (#PCDATA)>
-<!ATTLIST word id ID #REQUIRED>
