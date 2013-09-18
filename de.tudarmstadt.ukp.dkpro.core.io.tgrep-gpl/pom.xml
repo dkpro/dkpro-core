@@ -19,7 +19,7 @@
 		<version>1.5.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
-	<name>DKPro Core GPL - TGrep2</name>
+	<name>DKPro Core GPL - IO - TGrep2</name>
 	<dependencies>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
