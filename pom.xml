@@ -32,12 +32,6 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	<distributionManagement>
-		<repository>
-			<id>ukp-oss</id>
-			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
-		</repository>
-	</distributionManagement>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
