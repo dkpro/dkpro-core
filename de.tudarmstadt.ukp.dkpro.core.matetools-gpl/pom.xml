@@ -146,4 +146,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<name>DKPro Core GPL - Mate-Tools</name>
 </project>
