@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>edu.washington.cs.knowitall</groupId>
 			<artifactId>morpha-stemmer</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
