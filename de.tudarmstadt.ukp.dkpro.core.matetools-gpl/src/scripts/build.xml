@@ -35,7 +35,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de, en, es, zh"/>
+	<target name="separate-jars" depends="de, en, es, fr, zh"/>
 
 	<target name="de">
 		<mkdir dir="target/download"/>
@@ -199,6 +199,99 @@
 		</install-stub-and-upstream-file>
 	</target>
 
+	<target name="fr">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model- - - - - - - - - -
+		  - 2013-09-18 | now        | 42d0dcd2aefbd2a7e2a315ed240b460f
+		  -->
+		<get 
+    		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.lemmatizer.model" 
+    		dest="target/download/lemmatizer-fr-ftb.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/lemmatizer-fr-ftb.model" 
+    		md5="42d0dcd2aefbd2a7e2a315ed240b460f"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130918"
+    		metaDataVersion="0"
+    		tool="lemmatizer" 
+    		language="fr" 
+    		variant="ftb" 
+    		extension="model" >
+		</install-stub-and-upstream-file>
+
+
+		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model - - - - - - - - -
+		  - 2013-09-18 | now        | d305f33557c185ce483658dff37762aa
+		  -->
+		<get 
+    		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.morphtagger.model" 
+    		dest="target/download/morphtagger-fr-ftb.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/morphtagger-fr-ftb.model" 
+    		md5="d305f33557c185ce483658dff37762aa"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130918"
+    		metaDataVersion="0"
+    		tool="morphtagger" 
+    		language="fr" 
+    		variant="ftb" 
+    		extension="model"/>
+
+		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model - - - - - - - - - -
+		  - 2013-09-18 | now        | 5bfa668db119e8974768480a5b5ef5d7
+		  -->
+		<get 
+    		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.postagger.model" 
+    		dest="target/download/tagger-fr-ftb.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/tagger-fr-ftb.model" 
+    		md5="5bfa668db119e8974768480a5b5ef5d7"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130918"
+    		metaDataVersion="0"
+    		tool="tagger" 
+    		language="fr" 
+    		variant="ftb" 
+    		extension="model">
+			<metadata>
+				<!-- http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README -->
+				<entry key="pos.tagset" value="melt"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
+		<!-- FILE: ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model - - - - - - - - - - - 
+		  - 2013-09-18 | now        | 37b1b7fad6a3798d0c9853036d928d37
+		  -->
+		<get 
+    		src="http://mate-tools.googlecode.com/files/ftb6_1.conll09.crossannotated.anna-3.3-d8.jar.parser.model" 
+    		dest="target/download/parser-fr-ftb.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/parser-fr-ftb.model" 
+    		md5="37b1b7fad6a3798d0c9853036d928d37"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130918"
+    		metaDataVersion="0"
+    		tool="parser" 
+    		language="fr" 
+    		variant="ftb" 
+    		extension="model">
+			<metadata>
+				<!-- http://opus.lingfil.uu.se/tools/public/tagger/melt-0.6/README -->
+				<entry key="pos.tagset" value="melt"/>
+				<entry key="dependency.tagset" value="ftb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+	
 	<target name="es">
 		<mkdir dir="target/download"/>
 

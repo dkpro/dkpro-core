@@ -55,6 +55,21 @@ public class MateLemmatizerTest
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
 
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
+                + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
+                + "possible .");
+
+        String[] lemmas = new String[] { "il", "avoir", "besoin", "d'une", "phrase", "par",
+                "exemple", "très", "compliqué,", "qui", "contenir", "de", "constituant", "que",
+                "de", "nombreux", "dépendance", "et", "que", "possible", "." };
+
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+    }
+
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
