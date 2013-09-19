@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>5</version>
+		<version>6-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 	<version>1.5.0-SNAPSHOT</version>
@@ -624,13 +624,6 @@
 							<packages>de.tudarmstadt.ukp.dkpro.core.examples*</packages>
 						</group>
 					</groups>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<argLine>-Xmx1g</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
