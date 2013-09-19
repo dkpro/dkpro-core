@@ -35,5 +35,4 @@
 #
 # Categories used by DKPro internally
 #
-ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
-*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
