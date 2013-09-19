@@ -12,7 +12,6 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -117,6 +116,66 @@ public class MateParserTest
         AssertAnnotations.assertTagset(Dependency.class, "conll2009", dependencyTags, jcas);
     }
 
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
+                + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
+                + "possible .");
+
+        String[] dependencies = new String[] {
+                "[  0,  4]Dependency(suj) D[0,4](Nous) G[5,10](avons)",
+                "[ 11, 17]Dependency(obj) D[11,17](besoin) G[5,10](avons)",
+                "[ 18, 23]Dependency(mod) D[18,23](d'une) G[5,10](avons)",
+                "[ 24, 30]Dependency(obj) D[24,30](phrase) G[18,23](d'une)",
+                "[ 31, 34]Dependency(dep) D[31,34](par) G[24,30](phrase)",
+                "[ 35, 42]Dependency(obj) D[35,42](exemple) G[31,34](par)",
+                "[ 43, 47]Dependency(mod) D[43,47](très) G[48,58](compliqué,)",
+                "[ 48, 58]Dependency(mod) D[48,58](compliqué,) G[35,42](exemple)",
+                "[ 59, 62]Dependency(suj) D[59,62](qui) G[63,71](contient)",
+                "[ 63, 71]Dependency(mod_rel) D[63,71](contient) G[24,30](phrase)",
+                "[ 72, 75]Dependency(det) D[72,75](des) G[76,88](constituants)",
+                "[ 76, 88]Dependency(obj) D[76,88](constituants) G[63,71](contient)",
+                "[ 89, 92]Dependency(dep) D[89,92](que) G[76,88](constituants)",
+                "[ 93, 95]Dependency(det) D[93,95](de) G[107,118](dépendances)",
+                "[ 96,106]Dependency(mod) D[96,106](nombreuses) G[107,118](dépendances)",
+                "[107,118]Dependency(obj) D[107,118](dépendances) G[89,92](que)",
+                "[119,121]Dependency(coord) D[119,121](et) G[89,92](que)",
+                "[122,125]Dependency(dep_coord) D[122,125](que) G[119,121](et)",
+                "[126,134]Dependency(obj) D[126,134](possible) G[122,125](que)",
+                "[135,136]Dependency(ponct) D[135,136](.) G[5,10](avons)" };
+
+        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
+                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
+                "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
+
+        String[] posTags = new String[] { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
+                "CC", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "END", "ET", "I", "MID", "NC",
+                "NPP", "P", "P+D", "P+PRO", "PONCT", "PREF", "PRO", "PROREL", "PROWH", "STPOS",
+                "STR", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
+
+        String[] depTags = new String[] { "<None>", "<no-type>", "<root-type>", "END", "a_obj",
+                "aff", "arg", "ato", "ats", "aux_caus", "aux_pass", "aux_tps", "comp", "coord",
+                "de_obj", "dep", "dep_coord", "det", "missinghead", "mod", "mod_rel", "obj",
+                "obj1", "p_obj", "ponct", "root", "suj" };
+        
+        String[] unmappedPos = new String[] { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
+        
+        String[] unmappedDep = new String[] { "<None>", "<no-type>", "<root-type>", "END", "comp",
+                "missinghead", "obj1", "root" };
+
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+
+        AssertAnnotations.assertTagset(POS.class, "melt", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "melt", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "ftb", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", unmappedDep, jcas);
+    }
+    
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{

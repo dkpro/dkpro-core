@@ -12,7 +12,6 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -75,6 +74,33 @@ public class MatePosTaggerTest
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+    }
+
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
+                + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
+                + "possible .");
+
+        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
+                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
+                "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
+
+        String[] posTags = new String[] { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
+                "CC", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "END", "ET", "I", "MID", "NC",
+                "NPP", "P", "P+D", "P+PRO", "PONCT", "PREF", "PRO", "PROREL", "PROWH", "STPOS",
+                "STR", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
+
+        String[] unmappedPos = new String[] { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
+        
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+
+        AssertAnnotations.assertTagset(POS.class, "melt", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "melt", unmappedPos, jcas);
     }
 
     private JCas runTest(String aLanguage, String aText)

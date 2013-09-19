@@ -52,6 +52,30 @@ public class MateMorphTaggerTest
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
     }
 
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+
+        JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
+                + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
+                + "possible .");
+
+        String[] lemmas = new String[] { "il", "avoir", "besoin", "d'une", "phrase", "par",
+                "exemple", "très", "compliqué,", "qui", "contenir", "de", "constituant", "que",
+                "de", "nombreux", "dépendance", "et", "que", "possible", "." };
+
+        String[] morphTagsExpected = { "g=m|n=p|p=1|s=suj", "m=ind|n=p|p=1|t=pst", "g=m|n=s|s=c",
+                "_", "g=f|n=s|s=c", "_", "g=m|n=s|s=c", "_", "g=m|n=s|s=qual", "g=m|n=p|p=3|s=rel",
+                "m=ind|n=s|p=3|t=pst", "g=m|n=p|s=ind", "g=m|n=p|s=c", "g=m|n=p|p=3|s=rel",
+                "g=f|n=p|s=ind", "g=f|n=p|s=qual", "g=f|n=p|s=c", "s=c", "s=s", "g=m|n=s|s=qual",
+                "s=s" };
+
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+    }
+
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
