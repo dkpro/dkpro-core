@@ -157,8 +157,8 @@ public class AssertAnnotations
             actual.add(a.getMorphTag());
         }
 
-        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Morphemes", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Morphemes", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
@@ -176,8 +176,8 @@ public class AssertAnnotations
             actual.add(a.getValue());
         }
 
-        System.out.printf("%-20s - Expected: %s%n", "Lemmas", asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Lemmas", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Stems", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Stems", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
