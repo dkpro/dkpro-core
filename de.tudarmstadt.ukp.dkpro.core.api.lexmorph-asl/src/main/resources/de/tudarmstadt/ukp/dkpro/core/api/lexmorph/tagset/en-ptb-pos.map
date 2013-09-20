@@ -100,3 +100,12 @@ WP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 WRB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 \!=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 \:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+
+# Additional tags in ClearNLP models
+#
+# Source: http://clear.colorado.edu/compsem/documents/treebank_guidelines.pdf
+#
+# HYPH - unbound hyphen (Warner et al., 2004)
+# AFX - unbound affix (Warner et al., 2004)
+# GW - mistranscription (Taylor, 1996)
+# XX - uninterpretable material (Mott et al., 2009)
