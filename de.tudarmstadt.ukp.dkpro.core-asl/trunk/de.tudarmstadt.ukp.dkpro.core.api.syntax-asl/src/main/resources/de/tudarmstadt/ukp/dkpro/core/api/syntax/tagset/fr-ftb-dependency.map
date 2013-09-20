@@ -3,34 +3,61 @@
 # Source: http://alpage.inria.fr/statgram/frdep/Publications/FTB-GuideDepSurface.pdf
 
 # ￼￼￼suj
+suj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼obj
+obj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # de_obj
+de_obj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼a_obj
+a_obj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # p_obj
+p_obj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼ats
+ats=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ato
+ato=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼mod
-# ￼auux_tps
+mod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# ￼aux_tps
+aux_tps=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # aux_pass
+aux_pass=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # aux_caus
+aux_caus=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼aff
+aff=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼mod
+mod=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # mod_rel
+mod_rel=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼coord
+coord=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼arg
+arg=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # dep_coord
+dep_coord=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # det
+det=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼ponct
+ponct=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # ￼dep
+dep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # mod_loc
+mod_loc=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # mod_cleft
+mod_cleft=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # p_obj_agt
+p_obj_agt=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # p_obj_loc
+p_obj_loc=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # suj_imper
+suj_imper=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # aff_moyen
+aff_moyen=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # arg_comp
+arg_comp=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # arg_cons
-
+arg_cons=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 
 #
 # Categories used by DKPro internally

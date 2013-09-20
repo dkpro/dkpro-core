@@ -57,25 +57,25 @@ public class MstParserTest
         
 		JCas jcas = runTestEnglish(null, documentEnglish);
 
-		String[] dependencies = new String[] { 
-		        "[  0,  2]DEP(nsubj) D[0,2](We) G[3,7](need)",
-		        "[  3,  7]DEP(null) D[3,7](need) G[3,7](need)",
-		        "[  8,  9]DEP(det) D[8,9](a) G[35,43](sentence)",
-		        "[ 10, 14]DEP(advmod) D[10,14](very) G[15,26](complicated)",
-		        "[ 15, 26]DEP(amod) D[15,26](complicated) G[35,43](sentence)",
-		        "[ 27, 34]DEP(nn) D[27,34](example) G[35,43](sentence)",
-		        "[ 35, 43]DEP(dobj) D[35,43](sentence) G[3,7](need)",
-		        "[ 44, 45]DEP(punct) D[44,45](,) G[35,43](sentence)",
-		        "[ 46, 51]DEP(nsubj) D[46,51](which) G[52,60](contains)",
-		        "[ 52, 60]DEP(rcmod) D[52,60](contains) G[35,43](sentence)",
-		        "[ 61, 63]DEP(prep) D[61,63](as) G[52,60](contains)",
-		        "[ 64, 68]DEP(amod) D[64,68](many) G[69,81](constituents)",
-		        "[ 69, 81]DEP(pobj) D[69,81](constituents) G[61,63](as)",
-		        "[ 82, 85]DEP(cc) D[82,85](and) G[69,81](constituents)",
-		        "[ 86, 98]DEP(conj) D[86,98](dependencies) G[69,81](constituents)",
-		        "[ 99,101]DEP(dep) D[99,101](as) G[61,63](as)",
-		        "[102,110]DEP(pobj) D[102,110](possible) G[99,101](as)",
-		        "[111,112]DEP(punct) D[111,112](.) G[3,7](need)"};
+        String[] dependencies = new String[] {
+                "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
+                "[  3,  7]Dependency(null) D[3,7](need) G[3,7](need)",
+                "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]Dependency(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]Dependency(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]Dependency(nn) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]Dependency(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 44, 45]Dependency(punct) D[44,45](,) G[35,43](sentence)",
+                "[ 46, 51]Dependency(nsubj) D[46,51](which) G[52,60](contains)",
+                "[ 52, 60]Dependency(rcmod) D[52,60](contains) G[35,43](sentence)",
+                "[ 61, 63]Dependency(prep) D[61,63](as) G[52,60](contains)",
+                "[ 64, 68]Dependency(amod) D[64,68](many) G[69,81](constituents)",
+                "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
+                "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
+                "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
+                "[ 99,101]Dependency(dep) D[99,101](as) G[61,63](as)",
+                "[102,110]Dependency(pobj) D[102,110](possible) G[99,101](as)",
+                "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
 
         String[] depTags = new String[] { "<no-type>", "abbrev", "acomp", "advcl", "advmod",
                 "amod", "appos", "attr", "aux", "auxpass", "cc", "ccomp", "complm", "conj", "cop",
