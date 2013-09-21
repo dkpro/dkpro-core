@@ -31,13 +31,6 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>detudarmstadtukpdkpro-1004</id>
-			<url>https://oss.sonatype.org/content/repositories/detudarmstadtukpdkpro-1004</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
 	</repositories>
 	<issueManagement>
 		<system>Google Code</system>
