@@ -15,6 +15,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -62,14 +63,28 @@ public class StanfordPosTaggerTest
         runTest("de", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
 
-        runTest("de", "hgc", "Das ist ein Test .",
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    @Test
+    public void testGermanHgc()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000l);
 
+        runTest("de", "Das ist ein Test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
+
+    @Test
+    public void testGermanDewac()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000l);
+        
         runTest("de", "dewac", "Das ist ein Test .",
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
 
     @Test
