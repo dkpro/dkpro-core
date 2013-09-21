@@ -10,13 +10,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,7 +49,7 @@ public class ClearNlpLemmatizerTest
 	public void testEnglish()
 		throws Exception
 	{
-//		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
 
 		JCas jcas = runTest("en", "We need a very complicated example sentence, which " +
 			"contains as many constituents and dependencies as possible.");
