@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>JapaneseToken</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <imports>
+    <import name="desc.type.LexicalUnits"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken</name>
+      <description/>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</supertypeName>
+      <features>
+        <featureDescription>
+          <name>kana</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>ibo</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>kei</name>
+          <description/>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>dan</name>
+          <description>Specifies the kind of the verb if the current token is a verb. Either it is a vowel stem verb (ichi-dan) or a consonant stem verb (go-dan). Blank if not a verb.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>
