@@ -129,7 +129,7 @@ public class WikiUtils
 
 	    }
 	    else {
-	        System.err.println("Do not know DKPro language for JWPL language: " + jwplLanguage.name());
+//	        System.err.println("Do not know DKPro language for JWPL language: " + jwplLanguage.name());
 	        return "x-unknown"; 
 	    }
 	}
