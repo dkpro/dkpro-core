@@ -1,482 +1,487 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!--NewPage-->
-<HTML>
-<HEAD>
-<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<TITLE>
-ResourceUtils (DKPro Core ASL 1.4.0 API)
-</TITLE>
-
-
-<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../stylesheet.css" TITLE="Style">
-
-<SCRIPT type="text/javascript">
-function windowTitle()
-{
+<!-- NewPage -->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>ResourceUtils (DKPro Core ASL 1.5.0 API)</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ResourceUtils (DKPro Core ASL 1.4.0 API)";
+        parent.document.title="ResourceUtils (DKPro Core ASL 1.5.0 API)";
     }
-}
-</SCRIPT>
-<NOSCRIPT>
-</NOSCRIPT>
-
-</HEAD>
-
-<BODY BGCOLOR="white" onload="windowTitle();">
-<HR>
-
-
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
 <!-- ========= START OF TOP NAVBAR ======= -->
-<A NAME="navbar_top"><!-- --></A>
-<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
-<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
-<TR>
-<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
-<A NAME="navbar_top_firstrow"><!-- --></A>
-<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
-  <TR ALIGN="center" VALIGN="top">
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ResourceUtils.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
-  </TR>
-</TABLE>
-</TD>
-<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
-</EM>
-</TD>
-</TR>
-
-<TR>
-<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/RuntimeProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><B>NEXT CLASS</B></A></FONT></TD>
-<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" target="_top"><B>FRAMES</B></A>  &nbsp;
-&nbsp;<A HREF="ResourceUtils.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
-&nbsp;<SCRIPT type="text/javascript">
-  <!--
+<div class="topNav"><a name="navbar_top">
+<!--   -->
+</a><a href="#skip-navbar_top" title="Skip navigation links"></a><a name="navbar_top_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/ResourceUtils.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/RuntimeProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" target="_top">Frames</a></li>
+<li><a href="ResourceUtils.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
   if(window==top) {
-    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
   }
   //-->
-</SCRIPT>
-<NOSCRIPT>
-  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
-</NOSCRIPT>
-
-
-</FONT></TD>
-</TR>
-<TR>
-<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
-<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
-</TR>
-</TABLE>
-<A NAME="skip-navbar_top"></A>
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_top">
+<!--   -->
+</a></div>
 <!-- ========= END OF TOP NAVBAR ========= -->
-
-<HR>
 <!-- ======== START OF CLASS DATA ======== -->
-<H2>
-<FONT SIZE="-1">
-de.tudarmstadt.ukp.dkpro.core.api.resources</FONT>
-<BR>
-Class ResourceUtils</H2>
-<PRE>
-<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</A>
-  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils</B>
-</PRE>
-<HR>
-<DL>
-<DT><PRE>public class <B>ResourceUtils</B><DT>extends <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></DL>
-</PRE>
-
-<P>
-<DL>
-<DT><B>Since:</B></DT>
-  <DD>1.1.0</DD>
-<DT><B>Author:</B></DT>
-  <DD>Richard Eckart de Castilho</DD>
-</DL>
-<HR>
-
-<P>
-
+<div class="header">
+<div class="subTitle">de.tudarmstadt.ukp.dkpro.core.api.resources</div>
+<h2 title="Class ResourceUtils" class="title">Class ResourceUtils</h2>
+</div>
+<div class="contentContainer">
+<ul class="inheritance">
+<li><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>
+<ul class="inheritance">
+<li>de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<hr>
+<br>
+<pre>public class <span class="strong">ResourceUtils</span>
+extends <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
+<dl><dt><span class="strong">Since:</span></dt>
+  <dd>1.1.0</dd>
+<dt><span class="strong">Author:</span></dt>
+  <dd>Richard Eckart de Castilho</dd></dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
-
-<A NAME="constructor_summary"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Constructor Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#ResourceUtils()">ResourceUtils</A></B>()</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-</TABLE>
-&nbsp;
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#ResourceUtils()">ResourceUtils</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
-
-<A NAME="method_summary"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
-<B>Method Summary</B></FONT></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getClasspathAsFolder(java.lang.String, boolean)">getClasspathAsFolder</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aClasspathLocation,
-                     boolean&nbsp;aCache)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make a given classpath location available as a folder.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getUrlAsFile(java.net.URL, boolean)">getUrlAsFile</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;aUrl,
-             boolean&nbsp;aCache)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make the given URL available as a file.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getUrlAsFile(java.net.URL, boolean, boolean)">getUrlAsFile</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;aUrl,
-             boolean&nbsp;aCache,
-             boolean&nbsp;aForceTemp)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make the given URL available as a file.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveCompressedInputStream(java.io.InputStream, java.lang.String)">resolveCompressedInputStream</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;is,
-                             <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;filename)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String)">resolveLocation</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve a location (which can be many things) to an URL.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, java.lang.ClassLoader, org.apache.uima.UimaContext)">resolveLocation</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation,
-                <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;aClassLoader,
-                org.apache.uima.UimaContext&nbsp;aContext)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve a location (which can be many things) to an URL.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, java.lang.Object, org.apache.uima.UimaContext)">resolveLocation</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation,
-                <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;aCaller,
-                org.apache.uima.UimaContext&nbsp;aContext)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve a location (which can be many things) to an URL.</TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>static&nbsp;<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A></CODE></FONT></TD>
-<TD><CODE><B><A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, org.apache.uima.UimaContext)">resolveLocation</A></B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation,
-                org.apache.uima.UimaContext&nbsp;aContext)</CODE>
-
-<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve a location (which can be many things) to an URL.</TD>
-</TR>
-</TABLE>
-&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TH ALIGN="left"><B>Methods inherited from class java.lang.<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A></B></TH>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</A>, <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</A></CODE></TD>
-</TR>
-</TABLE>
-&nbsp;
-<P>
-
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getClasspathAsFolder(java.lang.String, boolean)">getClasspathAsFolder</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aClasspathBase,
+                    boolean&nbsp;aCache)</code>
+<div class="block">Make a given classpath location available as a folder.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getUrlAsExecutable(java.net.URL, boolean)">getUrlAsExecutable</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl,
+                  boolean&nbsp;aCache)</code>
+<div class="block">Make the given URL available as an executable file.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getUrlAsFile(java.net.URL, boolean)">getUrlAsFile</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl,
+            boolean&nbsp;aCache)</code>
+<div class="block">Make the given URL available as a file.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#getUrlAsFile(java.net.URL, boolean, boolean)">getUrlAsFile</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl,
+            boolean&nbsp;aCache,
+            boolean&nbsp;aForceTemp)</code>
+<div class="block">Make the given URL available as a file.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveCompressedInputStream(java.io.InputStream, java.lang.String)">resolveCompressedInputStream</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</a>&nbsp;is,
+                            <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;filename)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String)">resolveLocation</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)</code>
+<div class="block">Resolve a location (which can be many things) to an URL.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, java.lang.ClassLoader, org.apache.uima.UimaContext)">resolveLocation</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation,
+               <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</a>&nbsp;aClassLoader,
+               org.apache.uima.UimaContext&nbsp;aContext)</code>
+<div class="block">Resolve a location (which can be many things) to an URL.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, java.lang.Object, org.apache.uima.UimaContext)">resolveLocation</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation,
+               <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;aCaller,
+               org.apache.uima.UimaContext&nbsp;aContext)</code>
+<div class="block">Resolve a location (which can be many things) to an URL.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, org.apache.uima.UimaContext)">resolveLocation</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation,
+               org.apache.uima.UimaContext&nbsp;aContext)</code>
+<div class="block">Resolve a location (which can be many things) to an URL.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
+<code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
-
-<A NAME="constructor_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Constructor Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="ResourceUtils()"><!-- --></A><H3>
-ResourceUtils</H3>
-<PRE>
-public <B>ResourceUtils</B>()</PRE>
-<DL>
-</DL>
-
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="ResourceUtils()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ResourceUtils</h4>
+<pre>public&nbsp;ResourceUtils()</pre>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ============ METHOD DETAIL ========== -->
-
-<A NAME="method_detail"><!-- --></A>
-<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
-<B>Method Detail</B></FONT></TH>
-</TR>
-</TABLE>
-
-<A NAME="getClasspathAsFolder(java.lang.String, boolean)"><!-- --></A><H3>
-getClasspathAsFolder</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getClasspathAsFolder</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aClasspathLocation,
-                                        boolean&nbsp;aCache)
-                                 throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Make a given classpath location available as a folder. A temporary folder is created and
- deleted upon a regular shutdown of the JVM.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aClasspathLocation</CODE> - a classpath location as used by
-            <CODE>PathMatchingResourcePatternResolver.getResources(String)</CODE><DD><CODE>aCache</CODE> - use the cache or not.
-<DT><B>Returns:</B><DD>
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE><DT><B>See Also:</B><DD><CODE>PathMatchingResourcePatternResolver}</CODE></DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getUrlAsFile(java.net.URL, boolean)"><!-- --></A><H3>
-getUrlAsFile</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getUrlAsFile</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;aUrl,
-                                boolean&nbsp;aCache)
-                         throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Make the given URL available as a file. A temporary file is created and deleted upon a
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getClasspathAsFolder(java.lang.String, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getClasspathAsFolder</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getClasspathAsFolder(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aClasspathBase,
+                        boolean&nbsp;aCache)
+                                 throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Make a given classpath location available as a folder. A temporary folder is created and
+ deleted upon a regular shutdown of the JVM. This method must not be used for creating
+ executable binaries. For this purpose, getUrlAsExecutable should be used.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aClasspathBase</code> - a classpath location as used by
+            <code>PathMatchingResourcePatternResolver.getResources(String)</code></dd><dd><code>aCache</code> - use the cache or not.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd><dt><span class="strong">See Also:</span></dt><dd><code>PathMatchingResourcePatternResolver</code></dd></dl>
+</li>
+</ul>
+<a name="getUrlAsFile(java.net.URL, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getUrlAsFile</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getUrlAsFile(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl,
+                boolean&nbsp;aCache)
+                         throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Make the given URL available as a file. A temporary file is created and deleted upon a
  regular shutdown of the JVM. If the parameter <code>aCache</code> is <code>true</code>, the temporary
  file is remembered in a cache and if a file is requested for the same URL at a later time,
  the same file is returned again. If the previously created file has been deleted meanwhile,
- it is recreated from the URL.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aUrl</CODE> - the URL.<DD><CODE>aCache</CODE> - use the cache or not.
-<DT><B>Returns:</B><DD>a file created from the given URL.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the URL cannot be accessed to (re)create the file.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="getUrlAsFile(java.net.URL, boolean, boolean)"><!-- --></A><H3>
-getUrlAsFile</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</A> <B>getUrlAsFile</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A>&nbsp;aUrl,
-                                boolean&nbsp;aCache,
-                                boolean&nbsp;aForceTemp)
-                         throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Make the given URL available as a file. A temporary file is created and deleted upon a
+ it is recreated from the URL. This method should not be used for creating executable
+ binaries. For this purpose, getUrlAsExecutable should be used.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aUrl</code> - the URL.</dd><dd><code>aCache</code> - use the cache or not.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>a file created from the given URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the URL cannot be accessed to (re)create the file.</dd></dl>
+</li>
+</ul>
+<a name="getUrlAsFile(java.net.URL, boolean, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getUrlAsFile</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getUrlAsFile(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl,
+                boolean&nbsp;aCache,
+                boolean&nbsp;aForceTemp)
+                         throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Make the given URL available as a file. A temporary file is created and deleted upon a
  regular shutdown of the JVM. If the parameter <code>aCache</code> is <code>true</code>, the temporary
  file is remembered in a cache and if a file is requested for the same URL at a later time,
  the same file is returned again. If the previously created file has been deleted meanwhile,
- it is recreated from the URL.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aUrl</CODE> - the URL.<DD><CODE>aCache</CODE> - use the cache or not.<DD><CODE>aForceTemp</CODE> - always create a temporary file, even if the URL is already a file.
-<DT><B>Returns:</B><DD>a file created from the given URL.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the URL cannot be accessed to (re)create the file.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="resolveCompressedInputStream(java.io.InputStream, java.lang.String)"><!-- --></A><H3>
-resolveCompressedInputStream</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A> <B>resolveCompressedInputStream</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</A>&nbsp;is,
-                                                       <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;filename)
-                                                throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>is</CODE> - An <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><CODE>InputStream</CODE></A>.<DD><CODE>filename</CODE> - The filename this stream was created from.
-<DT><B>Returns:</B><DD>A resolved <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><CODE>InputStream</CODE></A>
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if something went wrong during resolving the input stream</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="resolveLocation(java.lang.String)"><!-- --></A><H3>
-resolveLocation</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A> <B>resolveLocation</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation)
-                           throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Resolve a location (which can be many things) to an URL. If the location starts with
+ it is recreated from the URL. This method should not be used for creating executable
+ binaries. For this purpose, getUrlAsExecutable should be used.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aUrl</code> - the URL.</dd><dd><code>aCache</code> - use the cache or not.</dd><dd><code>aForceTemp</code> - always create a temporary file, even if the URL is already a file.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>a file created from the given URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the URL cannot be accessed to (re)create the file.</dd></dl>
+</li>
+</ul>
+<a name="getUrlAsExecutable(java.net.URL, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getUrlAsExecutable</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getUrlAsExecutable(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl,
+                      boolean&nbsp;aCache)
+                               throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Make the given URL available as an executable file. A temporary file is created and deleted
+ upon a regular shutdown of the JVM. If the parameter <code>aCache</code> is <code>true</code>, the
+ temporary file is remembered in a cache and if a file is requested for the same URL at a
+ later time, the same file is returned again. If the previously created file has been deleted
+ meanwhile, it is recreated from the URL.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aUrl</code> - the URL.</dd><dd><code>aCache</code> - use the cache or not.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>an executable file created from the given URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the file has permissions issues.</dd></dl>
+</li>
+</ul>
+<a name="resolveCompressedInputStream(java.io.InputStream, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resolveCompressedInputStream</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</a>&nbsp;resolveCompressedInputStream(<a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</a>&nbsp;is,
+                                       <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;filename)
+                                                throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>is</code> - An <a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><code>InputStream</code></a>.</dd><dd><code>filename</code> - The filename this stream was created from.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>A resolved <a href="http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io"><code>InputStream</code></a></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if something went wrong during resolving the input stream</dd></dl>
+</li>
+</ul>
+<a name="resolveLocation(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resolveLocation</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;resolveLocation(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Resolve a location (which can be many things) to an URL. If the location starts with
  <code>classpath:</code> the location is interpreted as a classpath location. Otherwise it is tried
  as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
  location, an URL is only returned if the target exists. If it is an URL, it is possible that
- the target may not actually exist.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aLocation</CODE> - a location (classpath, URL, file or UIMA resource location).
-<DT><B>Returns:</B><DD>the resolved URL.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the target could not be found.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="resolveLocation(java.lang.String, org.apache.uima.UimaContext)"><!-- --></A><H3>
-resolveLocation</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A> <B>resolveLocation</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation,
-                                  org.apache.uima.UimaContext&nbsp;aContext)
-                           throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Resolve a location (which can be many things) to an URL. If the location starts with
+ the target may not actually exist.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aLocation</code> - a location (classpath, URL, file or UIMA resource location).</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the resolved URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the target could not be found.</dd></dl>
+</li>
+</ul>
+<a name="resolveLocation(java.lang.String, org.apache.uima.UimaContext)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resolveLocation</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;resolveLocation(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation,
+                  org.apache.uima.UimaContext&nbsp;aContext)
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Resolve a location (which can be many things) to an URL. If the location starts with
  <code>classpath:</code> the location is interpreted as a classpath location. Otherwise it is tried
  as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
  location, an URL is only returned if the target exists. If it is an URL, it is possible that
- the target may not actually exist.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aLocation</CODE> - a location (classpath, URL, file or UIMA resource location).<DD><CODE>aContext</CODE> - a UIMA context.
-<DT><B>Returns:</B><DD>the resolved URL.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the target could not be found.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="resolveLocation(java.lang.String, java.lang.Object, org.apache.uima.UimaContext)"><!-- --></A><H3>
-resolveLocation</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A> <B>resolveLocation</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation,
-                                  <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</A>&nbsp;aCaller,
-                                  org.apache.uima.UimaContext&nbsp;aContext)
-                           throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Resolve a location (which can be many things) to an URL. If the location starts with
+ the target may not actually exist.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aLocation</code> - a location (classpath, URL, file or UIMA resource location).</dd><dd><code>aContext</code> - a UIMA context.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the resolved URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the target could not be found.</dd></dl>
+</li>
+</ul>
+<a name="resolveLocation(java.lang.String, java.lang.Object, org.apache.uima.UimaContext)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resolveLocation</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;resolveLocation(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation,
+                  <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;aCaller,
+                  org.apache.uima.UimaContext&nbsp;aContext)
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Resolve a location (which can be many things) to an URL. If the location starts with
  <code>classpath:</code> the location is interpreted as a classpath location. Otherwise it is tried
  as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
  location, an URL is only returned if the target exists. If it is an URL, it is possible that
- the target may not actually exist.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aLocation</CODE> - a location (classpath, URL, file or UIMA resource location).<DD><CODE>aCaller</CODE> - the instance calling this method (for classpath loading).<DD><CODE>aContext</CODE> - a UIMA context.
-<DT><B>Returns:</B><DD>the resolved URL.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the target could not be found.</DL>
-</DD>
-</DL>
-<HR>
-
-<A NAME="resolveLocation(java.lang.String, java.lang.ClassLoader, org.apache.uima.UimaContext)"><!-- --></A><H3>
-resolveLocation</H3>
-<PRE>
-public static <A HREF="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</A> <B>resolveLocation</B>(<A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A>&nbsp;aLocation,
-                                  <A HREF="http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</A>&nbsp;aClassLoader,
-                                  org.apache.uima.UimaContext&nbsp;aContext)
-                           throws <A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></PRE>
-<DL>
-<DD>Resolve a location (which can be many things) to an URL. If the location starts with
+ the target may not actually exist.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aLocation</code> - a location (classpath, URL, file or UIMA resource location).</dd><dd><code>aCaller</code> - the instance calling this method (for classpath loading).</dd><dd><code>aContext</code> - a UIMA context.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the resolved URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the target could not be found.</dd></dl>
+</li>
+</ul>
+<a name="resolveLocation(java.lang.String, java.lang.ClassLoader, org.apache.uima.UimaContext)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>resolveLocation</h4>
+<pre>public static&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;resolveLocation(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation,
+                  <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang">ClassLoader</a>&nbsp;aClassLoader,
+                  org.apache.uima.UimaContext&nbsp;aContext)
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Resolve a location (which can be many things) to an URL. If the location starts with
  <code>classpath:</code> the location is interpreted as a classpath location. Otherwise it is tried
  as a URL, file and at last UIMA resource. If the location is treated as a classpath or file
  location, an URL is only returned if the target exists. If it is an URL, it is possible that
- the target may not actually exist.
-<P>
-<DD><DL>
-<DT><B>Parameters:</B><DD><CODE>aLocation</CODE> - a location (classpath, URL, file or UIMA resource location).<DD><CODE>aClassLoader</CODE> - the class loader to be used for classpath URLs.<DD><CODE>aContext</CODE> - a UIMA context.
-<DT><B>Returns:</B><DD>the resolved URL.
-<DT><B>Throws:</B>
-<DD><CODE><A HREF="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</A></CODE> - if the target could not be found.</DL>
-</DD>
-</DL>
+ the target may not actually exist.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aLocation</code> - a location (classpath, URL, file or UIMA resource location).</dd><dd><code>aClassLoader</code> - the class loader to be used for classpath URLs.</dd><dd><code>aContext</code> - a UIMA context.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the resolved URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the target could not be found.</dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 <!-- ========= END OF CLASS DATA ========= -->
-<HR>
-
-
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
-<A NAME="navbar_bottom"><!-- --></A>
-<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
-<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
-<TR>
-<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
-<A NAME="navbar_bottom_firstrow"><!-- --></A>
-<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
-  <TR ALIGN="center" VALIGN="top">
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ResourceUtils.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
-  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
-  </TR>
-</TABLE>
-</TD>
-<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
-</EM>
-</TD>
-</TR>
-
-<TR>
-<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><B>PREV CLASS</B></A>&nbsp;
-&nbsp;<A HREF="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/RuntimeProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><B>NEXT CLASS</B></A></FONT></TD>
-<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
-  <A HREF="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" target="_top"><B>FRAMES</B></A>  &nbsp;
-&nbsp;<A HREF="ResourceUtils.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
-&nbsp;<SCRIPT type="text/javascript">
-  <!--
+<div class="bottomNav"><a name="navbar_bottom">
+<!--   -->
+</a><a href="#skip-navbar_bottom" title="Skip navigation links"></a><a name="navbar_bottom_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/ResourceUtils.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/RuntimeProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" target="_top">Frames</a></li>
+<li><a href="ResourceUtils.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
   if(window==top) {
-    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
   }
   //-->
-</SCRIPT>
-<NOSCRIPT>
-  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
-</NOSCRIPT>
-
-
-</FONT></TD>
-</TR>
-<TR>
-<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
-<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
-DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
-</TR>
-</TABLE>
-<A NAME="skip-navbar_bottom"></A>
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_bottom">
+<!--   -->
+</a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-
-<HR>
-Copyright &#169; 2011-2012. All Rights Reserved.
-</BODY>
-</HTML>
+<p class="legalCopy"><small>Copyright &#169; 2011-2013. All Rights Reserved.</small></p>
+</body>
+</html>
