@@ -1,0 +1,27 @@
+# French Treebank Tagset
+#
+# Source: http://www.llf.cnrs.fr/Gens/Abeille/guide-annot.pdf
+#
+# == Syntactic categories ==
+# AP - Adjective phase
+# AdP - Adverbial phrase
+# COORD = coordinate phrase
+# NP - nominal phrase
+NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
+# PP - Preposition (or amalgame pronoun)
+PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
+# PREF - Prefix (including hyphen)
+# SENT - independent phase
+SENT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S
+# Sint - Conjugated sentence
+# Srel - Relative sentence
+# Ssub - Subordinate sentence
+# VN - Verb phrase
+# VPinf - Infinitive phrase
+# VPpart - Participle phrase
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
