@@ -43,7 +43,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<dkpro.core.asl.version>1.5.0</dkpro.core.asl.version>
+		<dkpro.core.asl.version>1.5.1-SNAPSHOT</dkpro.core.asl.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
