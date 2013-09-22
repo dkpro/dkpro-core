@@ -1,0 +1,671 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>FileSetCollectionReaderBase (DKPro Core ASL 1.5.0 API)</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<script type="text/javascript"><!--
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="FileSetCollectionReaderBase (DKPro Core ASL 1.5.0 API)";
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar_top">
+<!--   -->
+</a><a href="#skip-navbar_top" title="Skip navigation links"></a><a name="navbar_top_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/FileSetCollectionReaderBase.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li>Prev Class</li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileSetCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" target="_top">Frames</a></li>
+<li><a href="FileSetCollectionReaderBase.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="subTitle">de.tudarmstadt.ukp.dkpro.core.api.io</div>
+<h2 title="Class FileSetCollectionReaderBase" class="title">Class FileSetCollectionReaderBase</h2>
+</div>
+<div class="contentContainer">
+<ul class="inheritance">
+<li><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.resource.Resource_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.resource.ConfigurableResource_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.collection.CollectionReader_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.fit.component.CasCollectionReader_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd>org.apache.uima.collection.base_cpm.BaseCollectionReader, org.apache.uima.collection.CollectionReader, org.apache.uima.resource.ConfigurableResource, org.apache.uima.resource.Resource</dd>
+</dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileSetCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileSetCollectionReader_ImplBase</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderXPath.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderXPath</a></dd>
+</dl>
+<hr>
+<div class="block"><strong>Deprecated.</strong>&nbsp;
+<div class="block"><i>use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><code>ResourceCollectionReaderBase</code></a> instead.</i></div>
+</div>
+<br>
+<pre><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+public abstract class <span class="strong">FileSetCollectionReaderBase</span>
+extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
+<div class="block">Base class for file system collection readers. Uses an Ant FileSet to conveniently walk the
+ file system.
+ <p>
+ Example of a hypothetic <code>FooReader</code> that should read only files ending in
+ <code>.foo</code> from in the directory <code>foodata</code> or any subdirectory thereof:
+ <pre>
+ CollectionReader reader = createReader(FooReader.class,
+     FileSetCollectionReaderBase.PARAM_LANGUAGE, "en",
+     FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION, "some/path",
+     FileSetCollectionReaderBase.PARAM_PATTERNS, "[+]foodata&#47;**&#47;*.foo" );
+ </pre></div>
+<dl><dt><span class="strong">Since:</span></dt>
+  <dd>1.0.6</dd>
+<dt><span class="strong">Author:</span></dt>
+  <dd>Richard Eckart de Castilho</dd></dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#EXCLUDE_PREFIX">EXCLUDE_PREFIX</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#INCLUDE_PREFIX">INCLUDE_PREFIX</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_CASE_SENSITIVE">PARAM_CASE_SENSITIVE</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+<div class="block">States whether the matching is done case sensitive.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+<div class="block">The language.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATH">PARAM_PATH</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;
+<div class="block"><i>use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_SOURCE_LOCATION"><code>PARAM_SOURCE_LOCATION</code></a></i></div>
+</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_PATTERNS">PARAM_PATTERNS</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+<div class="block">A set of Ant-like include/exclude patterns.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_SOURCE_LOCATION">PARAM_SOURCE_LOCATION</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+<div class="block">Location from which the input is read.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_USE_DEFAULT_EXCLUDES">PARAM_USE_DEFAULT_EXCLUDES</a></strong></code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+<div class="block">Use the default excludes.</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="fields_inherited_from_class_org.apache.uima.resource.Resource">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;org.apache.uima.resource.Resource</h3>
+<code>PARAM_AGGREGATE_SOFA_MAPPINGS, PARAM_CONFIG_MANAGER, PARAM_CONFIG_PARAM_SETTINGS, PARAM_EXTERNAL_OVERRIDE_SETTINGS, PARAM_PERFORMANCE_TUNING_SETTINGS, PARAM_RESOURCE_MANAGER, PARAM_UIMA_CONTEXT</code></li>
+</ul>
+</li>
+</ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#FileSetCollectionReaderBase()">FileSetCollectionReaderBase</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;org.apache.tools.ant.types.resources.FileResource&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getFileSetIterator()">getFileSetIterator</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected int</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getIncludedFilesCount()">getIncludedFilesCount</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getLanguage()">getLanguage</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>org.apache.uima.util.Progress[]</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#getProgress()">getProgress</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#hasNext()">hasNext</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, org.apache.tools.ant.types.resources.FileResource, java.lang.String)">initCas</a></strong>(org.apache.uima.cas.CAS&nbsp;aCas,
+       org.apache.tools.ant.types.resources.FileResource&nbsp;aFile,
+       <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aQualifier)</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+<div class="block">Initialize the <code>DocumentMetaData</code>.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#initialize(org.apache.uima.UimaContext)">initialize</a></strong>(org.apache.uima.UimaContext&nbsp;aContext)</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected org.apache.tools.ant.types.resources.FileResource</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#nextFile()">nextFile</a></strong>()</code>
+<div class="block"><strong>Deprecated.</strong>&nbsp;</div>
+&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.fit.component.CasCollectionReader_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.fit.component.CasCollectionReader_ImplBase</h3>
+<code>close, getLogger, initialize</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.collection.CollectionReader_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.collection.CollectionReader_ImplBase</h3>
+<code>destroy, getCasInitializer, getProcessingResourceMetaData, initialize, isConsuming, reconfigure, setCasInitializer, typeSystemInit</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.resource.ConfigurableResource_ImplBase</h3>
+<code>getConfigParameterValue, getConfigParameterValue, setConfigParameterValue, setConfigParameterValue</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.resource.Resource_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.resource.Resource_ImplBase</h3>
+<code>getCasManager, getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger, setMetaData</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
+<code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.collection.CollectionReader">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.apache.uima.collection.CollectionReader</h3>
+<code>getNext</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.resource.ConfigurableResource">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.apache.uima.resource.ConfigurableResource</h3>
+<code>getConfigParameterValue, getConfigParameterValue, setConfigParameterValue, setConfigParameterValue</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.resource.Resource">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;org.apache.uima.resource.Resource</h3>
+<code>getMetaData, getResourceManager, getUimaContext, getUimaContextAdmin, setLogger</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="INCLUDE_PREFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>INCLUDE_PREFIX</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> INCLUDE_PREFIX</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.INCLUDE_PREFIX">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="EXCLUDE_PREFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>EXCLUDE_PREFIX</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> EXCLUDE_PREFIX</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.EXCLUDE_PREFIX">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_PATH">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_PATH</h4>
+<pre><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_PATH</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;<i>use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#PARAM_SOURCE_LOCATION"><code>PARAM_SOURCE_LOCATION</code></a></i></div>
+<div class="block">Location from which the input is read.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATH">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_SOURCE_LOCATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_SOURCE_LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_SOURCE_LOCATION</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<div class="block">Location from which the input is read.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_PATTERNS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_PATTERNS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_PATTERNS</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<div class="block">A set of Ant-like include/exclude patterns. A pattern starts with <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#INCLUDE_PREFIX"><code>[+]</code></a>
+ if it is an include pattern and with <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html#EXCLUDE_PREFIX"><code>[-]</code></a> if it is an exclude pattern.
+ The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
+ The wildcard <code>*</code> can be used to a address a part of a name.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_PATTERNS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_USE_DEFAULT_EXCLUDES">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_USE_DEFAULT_EXCLUDES</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_USE_DEFAULT_EXCLUDES</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<div class="block">Use the default excludes.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_USE_DEFAULT_EXCLUDES">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_LANGUAGE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_LANGUAGE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_LANGUAGE</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<div class="block">The language.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_LANGUAGE">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CASE_SENSITIVE">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>PARAM_CASE_SENSITIVE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CASE_SENSITIVE</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<div class="block">States whether the matching is done case sensitive. (default: true)</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.FileSetCollectionReaderBase.PARAM_CASE_SENSITIVE">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="FileSetCollectionReaderBase()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>FileSetCollectionReaderBase</h4>
+<pre>public&nbsp;FileSetCollectionReaderBase()</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="initialize(org.apache.uima.UimaContext)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>initialize</h4>
+<pre>public&nbsp;void&nbsp;initialize(org.apache.uima.UimaContext&nbsp;aContext)
+                throws org.apache.uima.resource.ResourceInitializationException</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>initialize</code>&nbsp;in class&nbsp;<code>org.apache.uima.fit.component.CasCollectionReader_ImplBase</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>org.apache.uima.resource.ResourceInitializationException</code></dd></dl>
+</li>
+</ul>
+<a name="getIncludedFilesCount()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getIncludedFilesCount</h4>
+<pre>protected&nbsp;int&nbsp;getIncludedFilesCount()</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+<a name="getFileSetIterator()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFileSetIterator</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;org.apache.tools.ant.types.resources.FileResource&gt;&nbsp;getFileSetIterator()</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+<a name="nextFile()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>nextFile</h4>
+<pre>protected&nbsp;org.apache.tools.ant.types.resources.FileResource&nbsp;nextFile()</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+<a name="getProgress()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getProgress</h4>
+<pre>public&nbsp;org.apache.uima.util.Progress[]&nbsp;getProgress()</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+<a name="hasNext()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>hasNext</h4>
+<pre>public&nbsp;boolean&nbsp;hasNext()
+                throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a>,
+                       org.apache.uima.collection.CollectionException</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd>
+<dd><code>org.apache.uima.collection.CollectionException</code></dd></dl>
+</li>
+</ul>
+<a name="initCas(org.apache.uima.cas.CAS, org.apache.tools.ant.types.resources.FileResource, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>initCas</h4>
+<pre>protected&nbsp;void&nbsp;initCas(org.apache.uima.cas.CAS&nbsp;aCas,
+           org.apache.tools.ant.types.resources.FileResource&nbsp;aFile,
+           <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aQualifier)</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+<div class="block">Initialize the <code>DocumentMetaData</code>. This must be called before setting the
+ document text, otherwise the end feature of this annotation will not be set correctly.</div>
+</li>
+</ul>
+<a name="getLanguage()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getLanguage</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getLanguage()</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar_bottom">
+<!--   -->
+</a><a href="#skip-navbar_bottom" title="Skip navigation links"></a><a name="navbar_bottom_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/FileSetCollectionReaderBase.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li>Prev Class</li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileSetCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.html" target="_top">Frames</a></li>
+<li><a href="FileSetCollectionReaderBase.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small>Copyright &#169; 2011-2013. All Rights Reserved.</small></p>
+</body>
+</html>

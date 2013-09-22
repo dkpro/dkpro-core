@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>FrequencyCountProvider (DKPro Core ASL 1.5.0 API)</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<script type="text/javascript"><!--
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="FrequencyCountProvider (DKPro Core ASL 1.5.0 API)";
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar_top">
+<!--   -->
+</a><a href="#skip-navbar_top" title="Skip navigation links"></a><a name="navbar_top_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/FrequencyCountProvider.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li>Prev Class</li>
+<li><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.provider"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html" target="_top">Frames</a></li>
+<li><a href="FrequencyCountProvider.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="subTitle">de.tudarmstadt.ukp.dkpro.core.api.frequency.provider</div>
+<h2 title="Interface FrequencyCountProvider" class="title">Interface FrequencyCountProvider</h2>
+</div>
+<div class="contentContainer">
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/resources/BerkeleyLmFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency.resources">BerkeleyLmFrequencyCountProvider</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/BerkeleyLmProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency">BerkeleyLmProvider</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/CorpusFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency">CorpusFrequencyCountProvider</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.provider">FrequencyCountProviderBase</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/FrequencyCountResourceBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">FrequencyCountResourceBase</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/TestFrequencyCountProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.provider">TestFrequencyCountProvider</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/TestFrequencyCountResource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency">TestFrequencyCountResource</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/Web1TFileAccessProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency">Web1TFileAccessProvider</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/resources/Web1TFrequencyCountResource.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency.resources">Web1TFrequencyCountResource</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/resources/Web1TInMemoryFrequencyCountResource.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency.resources">Web1TInMemoryFrequencyCountResource</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/Web1TInMemoryProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency">Web1TInMemoryProvider</a>, <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/Web1TProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.frequency">Web1TProviderBase</a></dd>
+</dl>
+<hr>
+<br>
+<pre>public interface <span class="strong">FrequencyCountProvider</span></pre>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getFrequency(java.lang.String)">getFrequency</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;phrase)</code>
+<div class="block">Get frequency for a phrase</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getID()">getID</a></strong>()</code>
+<div class="block">Returns an ID that identifies the frequency provider</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getLanguage()">getLanguage</a></strong>()</code>
+<div class="block">Returns the language for which the frequencies are provided.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>double</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getLogProbability(java.lang.String)">getLogProbability</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;phrase)</code>
+<div class="block">Get the log probability for a phrase</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNgramIterator(int)">getNgramIterator</a></strong>(int&nbsp;n)</code>
+<div class="block">Returns an iterator over all ngrams of a given size in the corpus.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfDistinctNgrams(int)">getNrOfDistinctNgrams</a></strong>(int&nbsp;n)</code>
+<div class="block">Returns the number of distinct ngrams of a given size in the corpus.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfNgrams(int)">getNrOfNgrams</a></strong>(int&nbsp;n)</code>
+<div class="block">Returns the number of ngrams of a given size in the corpus.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfTokens()">getNrOfTokens</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>double</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getProbability(java.lang.String)">getProbability</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;phrase)</code>
+<div class="block">Get the probability (=normalized frequency) for a phrase.<br>
+ The frequency count is normalized by the number of phrases in the corpus.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getFrequency(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFrequency</h4>
+<pre>long&nbsp;getFrequency(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;phrase)
+                  throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Get frequency for a phrase</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>phrase</code> - phrase to search</dd>
+<dt><span class="strong">Returns:</span></dt><dd>frequency of the phrase. Returns 0 if the phrase does not exist in the corpus.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getProbability(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getProbability</h4>
+<pre>double&nbsp;getProbability(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;phrase)
+                      throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Get the probability (=normalized frequency) for a phrase.<br>
+ The frequency count is normalized by the number of phrases in the corpus.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>phrase</code> - phrase to search</dd>
+<dt><span class="strong">Returns:</span></dt><dd>probability (=normalized frequency) of the phrase. Returns null if the phrase does not exist in the corpus.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getLogProbability(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLogProbability</h4>
+<pre>double&nbsp;getLogProbability(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;phrase)
+                         throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Get the log probability for a phrase</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>phrase</code> - phrase to search</dd>
+<dt><span class="strong">Returns:</span></dt><dd>The log probability of the. Returns 0 if the phrase does not exist in the corpus.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getNrOfTokens()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNrOfTokens</h4>
+<pre>long&nbsp;getNrOfTokens()
+                   throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Returns:</span></dt><dd>The number of tokens in the corpus.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getNrOfNgrams(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNrOfNgrams</h4>
+<pre>long&nbsp;getNrOfNgrams(int&nbsp;n)
+                   throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Returns the number of ngrams of a given size in the corpus.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getNrOfDistinctNgrams(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNrOfDistinctNgrams</h4>
+<pre>long&nbsp;getNrOfDistinctNgrams(int&nbsp;n)
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Returns the number of distinct ngrams of a given size in the corpus.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getNgramIterator(int)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getNgramIterator</h4>
+<pre><a href="http://docs.oracle.com/javase/6/docs/api/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;getNgramIterator(int&nbsp;n)
+                                  throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Returns an iterator over all ngrams of a given size in the corpus.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getLanguage()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLanguage</h4>
+<pre><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getLanguage()
+                   throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Returns the language for which the frequencies are provided.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getID()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getID</h4>
+<pre><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getID()</pre>
+<div class="block">Returns an ID that identifies the frequency provider</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar_bottom">
+<!--   -->
+</a><a href="#skip-navbar_bottom" title="Skip navigation links"></a><a name="navbar_bottom_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/FrequencyCountProvider.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li>Prev Class</li>
+<li><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.provider"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html" target="_top">Frames</a></li>
+<li><a href="FrequencyCountProvider.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small>Copyright &#169; 2011-2013. All Rights Reserved.</small></p>
+</body>
+</html>

@@ -1,0 +1,870 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>ResourceObjectProviderBase (DKPro Core ASL 1.5.0 API)</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<script type="text/javascript"><!--
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="ResourceObjectProviderBase (DKPro Core ASL 1.5.0 API)";
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar_top">
+<!--   -->
+</a><a href="#skip-navbar_top" title="Skip navigation links"></a><a name="navbar_top_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/ResourceObjectProviderBase.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/PlatformDetector.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" target="_top">Frames</a></li>
+<li><a href="ResourceObjectProviderBase.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="subTitle">de.tudarmstadt.ukp.dkpro.core.api.resources</div>
+<h2 title="Class ResourceObjectProviderBase" class="title">Class ResourceObjectProviderBase&lt;M&gt;</h2>
+</div>
+<div class="contentContainer">
+<ul class="inheritance">
+<li><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>
+<ul class="inheritance">
+<li>de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase&lt;M&gt;</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl><dt><span class="strong">Type Parameters:</span></dt><dd><code>M</code> - the kind of resource produced</dd></dl>
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a></dd>
+</dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CasConfigurableProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">CasConfigurableProviderBase</a></dd>
+</dl>
+<hr>
+<br>
+<pre>public abstract class <span class="strong">ResourceObjectProviderBase&lt;M&gt;</span>
+extends <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>
+implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a></pre>
+<div class="block">Base class for resource providers that produce a resource from some URL depending on changing
+ parameters such as language.
+ <p>
+ A component using such a provider sets defaults and overrides. The defaults should be set to
+ sensible values with which the component should be able to work out of the box. For example the
+ <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#LOCATION"><code>LOCATION</code></a> may be set to "classpath:/resources/${language}/model.ser.gz".
+ <p>
+ The overrides should only be set if the user explicitly wants to override some settings.
+ <p>
+ Finally, parameters that may change, e.g. depending on the CAS content should be returned from
+ <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getProperties()"><code>getProperties()</code></a>.
+ <p>
+ The <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#LOCATION"><code>LOCATION</code></a> may contain variables referring to any of the other settings, e.g.
+ <code>"${language}"</code>.
+ <p>
+ It is possible a different default variant needs to be used depending on the language. This can
+ be configured by placing a properties file in the classpath and setting its location using
+ <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariantsLocation(java.lang.String)"><code>setDefaultVariantsLocation(String)</code></a> or by using <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariants(java.util.Properties)"><code>setDefaultVariants(Properties)</code></a>.
+ The key in the properties is the language and the value is used a default variant.</div>
+<dl><dt><span class="strong">Author:</span></dt>
+  <dd>Richard Eckart de Castilho</dd></dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#ARTIFACT_ID">ARTIFACT_ID</a></strong></code>
+<div class="block">The artifact ID of the Maven artifact containing a resource.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#GROUP_ID">GROUP_ID</a></strong></code>
+<div class="block">The group ID of the Maven artifact containing a resource.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#LANGUAGE">LANGUAGE</a></strong></code>
+<div class="block">The language.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#LOCATION">LOCATION</a></strong></code>
+<div class="block">The location from which the resource should be read.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#NOT_REQUIRED">NOT_REQUIRED</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#PACKAGE">PACKAGE</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#PROP_REPO_ID">PROP_REPO_ID</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#PROP_REPO_URL">PROP_REPO_URL</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#VARIANT">VARIANT</a></strong></code>
+<div class="block">The variant.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#VERSION">VERSION</a></strong></code>
+<div class="block">The version of the Maven artifact containing a resource.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#ResourceObjectProviderBase()">ResourceObjectProviderBase</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#addImport(java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata)">addImport</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aString,
+         <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a>&nbsp;aSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()">configure</a></strong>()</code>
+<div class="block">Configure a resource using the current configuration.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#followRedirects(java.net.URL)">followRedirects</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getAggregatedProperties()">getAggregatedProperties</a></strong>()</code>
+<div class="block">Builds the aggregated configuration from defaults and overrides.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getDefault(java.lang.String)">getDefault</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getModelLocation()">getModelLocation</a></strong>()</code>
+<div class="block">For use in test cases.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getModelLocation(java.util.Properties)">getModelLocation</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aProperties)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected org.apache.ivy.plugins.resolver.DependencyResolver</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getModelResolver()">getModelResolver</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getModelVersionFromMavenPom()">getModelVersionFromMavenPom</a></strong>()</code>
+<div class="block">Tries to get the version of the required model from the dependency management section of the
+ Maven POM belonging to the context object.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getOverride(java.lang.String)">getOverride</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected abstract <a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getProperties()">getProperties</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="type parameter in ResourceObjectProviderBase">M</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getResource()">getResource</a></strong>()</code>
+<div class="block">Get the currently configured resources.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getResourceMetaData()">getResourceMetaData</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#init()">init</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#loadMetadata()">loadMetadata</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#loadResource()">loadResource</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected abstract <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="type parameter in ResourceObjectProviderBase">M</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#produceResource(java.net.URL)">produceResource</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#removeDefault(java.lang.String)">removeDefault</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#removeImport(java.lang.String)">removeImport</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aString)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#removeOverride(java.lang.String)">removeOverride</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setContextObject(java.lang.Object)">setContextObject</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;aObject)</code>
+<div class="block">Set an object which can be used to try finding a Maven POM from which resource version
+ information could be extracted.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefault(java.lang.String, java.lang.String)">setDefault</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey,
+          <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aValue)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariants(java.util.Properties)">setDefaultVariants</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aDefaultVariants)</code>
+<div class="block">Sets language-dependent default variants.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariantsLocation(java.lang.String)">setDefaultVariantsLocation</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)</code>
+<div class="block">Set the location in the classpath from where to load the language-dependent default variants
+ properties file.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setOverride(java.lang.String, java.lang.String)">setOverride</a></strong>(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey,
+           <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aValue)</code>&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
+<code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="PROP_REPO_ID">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PROP_REPO_ID</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PROP_REPO_ID</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PROP_REPO_ID">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PROP_REPO_URL">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PROP_REPO_URL</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PROP_REPO_URL</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PROP_REPO_URL">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="NOT_REQUIRED">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>NOT_REQUIRED</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> NOT_REQUIRED</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.NOT_REQUIRED">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="LANGUAGE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>LANGUAGE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> LANGUAGE</pre>
+<div class="block">The language.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LANGUAGE">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="VARIANT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>VARIANT</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> VARIANT</pre>
+<div class="block">The variant. (optional)</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.VARIANT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="LOCATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> LOCATION</pre>
+<div class="block">The location from which the resource should be read. Variables in the location are resolved
+ when <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()"><code>configure()</code></a> is called.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html#resolveLocation(java.lang.String, java.lang.Object, org.apache.uima.UimaContext)"><code>ResourceUtils.resolveLocation(String, Object, org.apache.uima.UimaContext)</code></a>, 
+<a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.LOCATION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="GROUP_ID">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>GROUP_ID</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> GROUP_ID</pre>
+<div class="block">The group ID of the Maven artifact containing a resource. Variables in the location are
+ resolved when <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()"><code>configure()</code></a> is called. (optional)</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.GROUP_ID">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ARTIFACT_ID">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ARTIFACT_ID</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ARTIFACT_ID</pre>
+<div class="block">The artifact ID of the Maven artifact containing a resource. Variables in the location are
+ resolved when <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()"><code>configure()</code></a> is called. (optional)</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.ARTIFACT_ID">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="VERSION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>VERSION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> VERSION</pre>
+<div class="block">The version of the Maven artifact containing a resource. Variables in the location are
+ resolved when <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()"><code>configure()</code></a> is called. (optional)</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.VERSION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PACKAGE">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>PACKAGE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PACKAGE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="ResourceObjectProviderBase()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ResourceObjectProviderBase</h4>
+<pre>public&nbsp;ResourceObjectProviderBase()</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="init()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>init</h4>
+<pre>protected&nbsp;void&nbsp;init()</pre>
+</li>
+</ul>
+<a name="setOverride(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setOverride</h4>
+<pre>public&nbsp;void&nbsp;setOverride(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey,
+               <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aValue)</pre>
+</li>
+</ul>
+<a name="getOverride(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOverride</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getOverride(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</pre>
+</li>
+</ul>
+<a name="removeOverride(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>removeOverride</h4>
+<pre>public&nbsp;void&nbsp;removeOverride(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</pre>
+</li>
+</ul>
+<a name="setDefault(java.lang.String, java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDefault</h4>
+<pre>public&nbsp;void&nbsp;setDefault(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey,
+              <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aValue)</pre>
+</li>
+</ul>
+<a name="getDefault(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDefault</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getDefault(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</pre>
+</li>
+</ul>
+<a name="removeDefault(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>removeDefault</h4>
+<pre>public&nbsp;void&nbsp;removeDefault(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey)</pre>
+</li>
+</ul>
+<a name="addImport(java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>addImport</h4>
+<pre>public&nbsp;void&nbsp;addImport(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aString,
+             <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a>&nbsp;aSource)</pre>
+</li>
+</ul>
+<a name="removeImport(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>removeImport</h4>
+<pre>public&nbsp;void&nbsp;removeImport(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aString)</pre>
+</li>
+</ul>
+<a name="setDefaultVariantsLocation(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDefaultVariantsLocation</h4>
+<pre>public&nbsp;void&nbsp;setDefaultVariantsLocation(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)</pre>
+<div class="block">Set the location in the classpath from where to load the language-dependent default variants
+ properties file. The key in the properties is the language and the value is used a default
+ variant.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aLocation</code> - a location in the form "some/package/name/tool-default-variants.properties". This
+            is always a classpath location. This location may not contain variables.</dd></dl>
+</li>
+</ul>
+<a name="setDefaultVariants(java.util.Properties)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setDefaultVariants</h4>
+<pre>public&nbsp;void&nbsp;setDefaultVariants(<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aDefaultVariants)</pre>
+<div class="block">Sets language-dependent default variants. The key in the properties is the language and the
+ value is used a default variant.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aDefaultVariants</code> - the default variant per language</dd></dl>
+</li>
+</ul>
+<a name="setContextObject(java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setContextObject</h4>
+<pre>public&nbsp;void&nbsp;setContextObject(<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;aObject)</pre>
+<div class="block">Set an object which can be used to try finding a Maven POM from which resource version
+ information could be extracted.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aObject</code> - a context object, usually the object creating the provider.</dd></dl>
+</li>
+</ul>
+<a name="getModelVersionFromMavenPom()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getModelVersionFromMavenPom</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getModelVersionFromMavenPom()
+                                      throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Tries to get the version of the required model from the dependency management section of the
+ Maven POM belonging to the context object.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if there was a problem loading the POM file</dd>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/FileNotFoundException.html?is-external=true" title="class or interface in java.io">FileNotFoundException</a></code> - if no POM could be found</dd>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</a></code> - if more than one POM was found, if the version information could not be found in
+             the POM, or if no context object was set.</dd></dl>
+</li>
+</ul>
+<a name="getModelLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getModelLocation</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getModelLocation()
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">For use in test cases.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getModelLocation(java.util.Properties)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getModelLocation</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getModelLocation(<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aProperties)
+                           throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="configure()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>configure</h4>
+<pre>public&nbsp;void&nbsp;configure()
+               throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Configure a resource using the current configuration. The resource can be fetched then using
+ <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getResource()"><code>getResource()</code></a>.
+ <p>
+ Call this method after all configurations have been made. A already configured resource will
+ only be recreated if the URL from which the resource is generated has changed due to
+ configuration changes.</div>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the resource cannot be created.</dd></dl>
+</li>
+</ul>
+<a name="followRedirects(java.net.URL)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>followRedirects</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;followRedirects(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl)
+                       throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="loadMetadata()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>loadMetadata</h4>
+<pre>protected&nbsp;void&nbsp;loadMetadata()
+                     throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="loadResource()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>loadResource</h4>
+<pre>protected&nbsp;void&nbsp;loadResource()
+                     throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getModelResolver()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getModelResolver</h4>
+<pre>protected&nbsp;org.apache.ivy.plugins.resolver.DependencyResolver&nbsp;getModelResolver()</pre>
+</li>
+</ul>
+<a name="getResource()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getResource</h4>
+<pre>public&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="type parameter in ResourceObjectProviderBase">M</a>&nbsp;getResource()</pre>
+<div class="block">Get the currently configured resources. Before this can be used, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()"><code>configure()</code></a> needs
+ to be called once or whenever the configuration changes. Mind that sub-classes may provide
+ alternative configuration methods that may need to be used instead of <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#configure()"><code>configure()</code></a>.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the currently configured resources.</dd></dl>
+</li>
+</ul>
+<a name="getAggregatedProperties()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAggregatedProperties</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;getAggregatedProperties()
+                                      throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<div class="block">Builds the aggregated configuration from defaults and overrides.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the aggregated effective configuration.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the language-dependent default variants location is set but cannot be read.</dd></dl>
+</li>
+</ul>
+<a name="getProperties()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getProperties</h4>
+<pre>protected abstract&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;getProperties()</pre>
+</li>
+</ul>
+<a name="produceResource(java.net.URL)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>produceResource</h4>
+<pre>protected abstract&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="type parameter in ResourceObjectProviderBase">M</a>&nbsp;produceResource(<a href="http://docs.oracle.com/javase/6/docs/api/java/net/URL.html?is-external=true" title="class or interface in java.net">URL</a>&nbsp;aUrl)
+                              throws <a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/6/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+</li>
+</ul>
+<a name="getResourceMetaData()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getResourceMetaData</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/6/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;getResourceMetaData()</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html#getResourceMetaData()">getResourceMetaData</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a></code></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar_bottom">
+<!--   -->
+</a><a href="#skip-navbar_bottom" title="Skip navigation links"></a><a name="navbar_bottom_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/ResourceObjectProviderBase.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/PlatformDetector.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources"><span class="strong">Next Class</span></a></li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" target="_top">Frames</a></li>
+<li><a href="ResourceObjectProviderBase.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small>Copyright &#169; 2011-2013. All Rights Reserved.</small></p>
+</body>
+</html>
