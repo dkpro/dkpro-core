@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-		<version>1.6.0-SNAPSHOT</version>
+		<version>1.5.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
 	<name>DKPro Core GPL - Berkeley Parser</name>
@@ -50,11 +50,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-model-parser-ar-sm5</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

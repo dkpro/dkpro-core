@@ -18,7 +18,7 @@
 		<version>6</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-  	<version>1.6.0-SNAPSHOT</version>
+  	<version>1.5.0</version>
 	<name>DKPro Core GPL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<url>https://code.google.com/p/dkpro-core-gpl/</url>
@@ -32,67 +32,62 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	<distributionManagement>
-		<repository>
-			<id>ukp-oss</id>
-			<url>dav:https://zoidberg.tk.informatik.tu-darmstadt.de/artifactory/public-ukp-releases-local</url>
-		</repository>
-	</distributionManagement>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
+		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.5.0</connection>
+		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.5.0</developerConnection>
+		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.5.0</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<dkpro.core.asl.version>1.5.0</dkpro.core.asl.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>${dkpro.core.asl.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
+				<version>1.5.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

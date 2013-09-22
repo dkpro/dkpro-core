@@ -12,6 +12,7 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -30,6 +31,8 @@ public class MatePosTaggerTest
     public void testGerman()
         throws Exception
     {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+        
         JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
@@ -80,6 +83,8 @@ public class MatePosTaggerTest
     public void testFrench()
         throws Exception
     {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 2000000000);
+        
         JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très "
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible .");
