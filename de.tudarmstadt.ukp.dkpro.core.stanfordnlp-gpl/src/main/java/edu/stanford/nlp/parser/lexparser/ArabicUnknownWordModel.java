@@ -1,3 +1,24 @@
+/**
+ * Copyright 2013
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Copyright 2002-2012
+ * The Board of Trustees of The Leland Stanford Junior University
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package edu.stanford.nlp.parser.lexparser;
 
 import edu.stanford.nlp.stats.ClassicCounter;
@@ -29,9 +50,9 @@ public class ArabicUnknownWordModel extends BaseUnknownWordModel {
   protected int unknownSuffixSize = 0;
   protected int unknownPrefixSize = 0;
 
-  public ArabicUnknownWordModel(Options op, Lexicon lex, 
-                                Index<String> wordIndex, 
-                                Index<String> tagIndex, 
+  public ArabicUnknownWordModel(Options op, Lexicon lex,
+                                Index<String> wordIndex,
+                                Index<String> tagIndex,
                                 ClassicCounter<IntTaggedWord> unSeenCounter) {
     super(op, lex, wordIndex, tagIndex, unSeenCounter, null, null, null);
     unknownLevel = op.lexOptions.useUnknownWordSignatures;
@@ -54,7 +75,7 @@ public class ArabicUnknownWordModel extends BaseUnknownWordModel {
    * lines containing the data.
    */
   public ArabicUnknownWordModel(Options op, Lexicon lex,
-                                Index<String> wordIndex, 
+                                Index<String> wordIndex,
                                 Index<String> tagIndex) {
     this(op, lex, wordIndex, tagIndex, new ClassicCounter<IntTaggedWord>());
   }

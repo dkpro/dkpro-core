@@ -1,0 +1,27 @@
+AQMAR Arabic Tagger
+
+This package provides a sequence tagger implementation customized for Arabic features,
+including a named entity detection model especially intended for Arabic Wikipedia.
+It was trained on labeled ACE and ANER data as well as an unlabeled Wikipedia corpus.
+Learning is with the structured perceptron, optionally in a cost-augmented fashion.
+Feature extraction is handled as a preprocessing step prior to learning/decoding.
+
+The tagger was used for the experiments reported in
+
+  Behrang Mohit, Nathan Schneider, Rishav Bhowmick, Kemal Oflazer, and Noah A. Smith (2012),
+  Recall-Oriented Learning of Named Entities in Arabic Wikipedia. Proceedings of EACL.
+
+and accompanies the AQMAR Arabic Wikipedia Named Entity Corpus also described in that work;
+both can be obtained at
+
+  http://www.ark.cs.cmu.edu/AQMAR/
+
+The Java tagger was adapted from Michael Heilman's supersense tagger implementation
+for English (http://www.ark.cs.cmu.edu/mheilman/questions/). It requires a minimum
+Java version of 1.6. Feature extraction uses Python and depends on the MADA toolkit
+(http://www1.ccls.columbia.edu/MADA/; version 3.1 was used for the Named Entity Corpus).
+
+The AQMAR Arabic Tagger is released under the GNU General Public License (GPL) version 3 or
+later; see LICENSE. (Michael Heilman's supersense tagger, which we modify, was originally
+released in 2011 under GPL version 2 or later; the JSAP library, which we link to, was
+originally released by Martian Software in 2011 under the Lesser GNU Public License.)
