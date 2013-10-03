@@ -486,8 +486,8 @@ public class StanfordParserTest
                 "[ 27, 28]Dependency(dvpm) D[27,28](的) G[24,27](尽可能)",
                 "[ 28, 30]CONJ(conj) D[28,30](依赖) G[17,19](包含)" };
 
-        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "O", "O", "NN", "ADJ", "NN",
-                "V", "CARD", "NN", "CONJ", "ADJ", "O", "V", "PUNC" };
+        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "ADJ", "PRT", "NN", "ADJ",
+                "NN", "V", "CARD", "NN", "CONJ", "ADJ", "PRT", "V", "PUNC" };
 
         String[] posOriginal = new String[] { "PN", "VV", "CD", "AD", "JJ", "DEG", "NN", "AD",
                 "NN", "VV", "CD", "NN", "CC", "AD", "DEV", "VV", "PU" };
@@ -508,9 +508,7 @@ public class StanfordParserTest
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = new String[] { ".$$.", "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV",
-                "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "OD", "ON", "SB", "SP",
-                "URL", "VC", "X" };
+        String[] unmappedPos = new String[] { ".$$.", "FRAG", "URL" };
 
         String[] unmappedConst = new String[] { "DFL", "FLR", "INC", "WHPP" };
         

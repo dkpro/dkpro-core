@@ -87,14 +87,14 @@ public class StanfordPosTaggerTest
     {
     	// The rudder often in the wake of the wind round the back of the area.
         runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
-        		new String[] { "NN", "NN", "AD", "VV", "NN", "NN", "DEG", "NN", "NN", "PU"   },
-        		new String[] { "NN", "NN", "ADJ", "V", "NN", "NN", "O",   "NN", "NN", "PUNC" } );
+        		new String[] { "NN", "NN", "AD",  "VV", "NN", "NN", "DEG", "NN", "NN", "PU"   },
+        		new String[] { "NN", "NN", "ADJ", "V",  "NN", "NN", "PRT", "NN", "NN", "PUNC" } );
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
-        		new String[] { "NN", "VV", "NR", "NN", "VV", "VV", "DEC", "JJ", "NN", "PU"    },
-        		new String[] { "NN", "V",  "NP", "NN", "V", "V",  "O",   "O",  "NN", "PUNC"  } );
+        		new String[] { "NN", "VV", "NR", "NN", "VV", "VV", "DEC", "JJ",  "NN", "PU"    },
+        		new String[] { "NN", "V",  "NP", "NN", "V",  "V",  "PRT", "ADJ", "NN", "PUNC"  } );
 
         // How far is China from the world brand?
         runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
