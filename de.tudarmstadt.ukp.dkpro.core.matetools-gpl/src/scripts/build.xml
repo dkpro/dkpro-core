@@ -190,14 +190,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
     		upstreamVersion="20130117"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="parser" 
     		language="en" 
     		variant="conll2009" 
     		extension="model">
 			<metadata>
 				<entry key="pos.tagset" value="ptb"/>
-				<entry key="dependency.tagset" value="conll2009"/>
+				<entry key="dependency.tagset" value="conll2008"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>

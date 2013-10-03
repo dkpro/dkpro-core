@@ -144,7 +144,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-en-conll2009</artifactId>
-				<version>20130117.1</version>
+				<version>20130117.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
