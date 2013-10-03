@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<customization>
-<rule pattern="{all}" style="foreground=blue"/>
-<rule pattern="!lexical_chain={empty}" style="bold=true"/>
-</customization>
