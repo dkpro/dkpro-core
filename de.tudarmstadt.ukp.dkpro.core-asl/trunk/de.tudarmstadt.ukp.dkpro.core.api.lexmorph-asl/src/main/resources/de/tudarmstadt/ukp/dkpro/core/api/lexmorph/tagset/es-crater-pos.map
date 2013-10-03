@@ -1,6 +1,7 @@
 # Spanish TreeTagger Part-of-Speech Tags
 # 
-# Source: ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt
+# Source: http://arxiv.org/pdf/cmp-lg/9406023v1.pdf
+#         ftp://ftp.ims.uni-stuttgart.de/pub/corpora/spanish-tagset.txt
 #
 # This looks like a simpified version of the CRATER tagset for Spanish.
 # See: http://arxiv.org/pdf/cmp-lg/9406023.pdf
