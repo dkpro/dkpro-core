@@ -113,7 +113,7 @@ public class MateParserTest
 
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "conll2009", dependencyTags, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "conll2008", dependencyTags, jcas);
     }
 
     @Test
