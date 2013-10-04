@@ -177,8 +177,8 @@ public class BerkeleyParserTest
 				"ROOT 14,32", "VP 15,31", "VP 16,31", "VP 18,22", "VP 2,13", "VP 21,22", "VP 4,13",
 				"VP 6,10", "VP 8,10" };
 
-		String[] posMapped = new String[] { "PR", "V", "V", "ADJ", "ADJ", "O", "NN", "PUNC", "PR",
-				"V", "V", "ADJ", "ADJ", "O", "NN", "CONJ", "NN", "NN", "PUNC" };
+        String[] posMapped = new String[] { "PR", "V", "V", "ADJ", "V", "PRT", "NN", "PUNC", "PR",
+                "V", "V", "ADJ", "V", "PRT", "NN", "CONJ", "NN", "NN", "PUNC" };
 
 		String[] posOriginal = new String[] { "PN", "VV", "VV", "AD", "VA", "DEC", "NN", "PU",
 				"PN", "VV", "VV", "AD", "VA", "DEC", "NN", "CC", "NN", "NN", "PU" };
