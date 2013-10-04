@@ -197,8 +197,7 @@ public class BerkeleyParserTest
                 "FRAG", "INTJ", "IP", "LCP", "LST", "MSP", "NN", "NP", "PP", "PRN", "QP", "ROOT",
                 "UCP", "VCD", "VCP", "VNV", "VP", "VPT", "VRD", "VSB" };
 
-        String[] unmappedPos = new String[] { "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV", "ETC",
-                "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NP", "OD", "SB", "SP", "VC", "VP", "X" };
+        String[] unmappedPos = new String[] { "NP", "VP" };
         
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
