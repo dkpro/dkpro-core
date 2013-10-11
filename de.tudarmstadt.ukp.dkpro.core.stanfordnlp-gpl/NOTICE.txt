@@ -1,0 +1,10 @@
+== edu.stanford.nlp.parser.lexparser ==
+
+Classes in this package are taken from the Stanford Parser 3.2.0 package because they are missing
+from the CoreNLP 3.2.0 distribution. 
+
+Copyright (c) 2002-2012 The Board of Trustees of The Leland Stanford Junior
+University. All Rights Reserved.
+
+The files are included without modifications.
+The files bear no original copyright header.

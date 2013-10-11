@@ -338,6 +338,172 @@ public class StanfordParserTest
         AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
     }
 
+    @Test
+    public void testEnglishRnn()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "rnn", documentEnglish);
+
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
+                "NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
+                "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
+                "NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
+                "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+
+        String[] dependencies = new String[] { 
+                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
+                "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
+                "[ 60, 62]ADVMOD(advmod) D[60,62](as) G[63,67](many)",
+                "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
+                "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
+                "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
+                "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
+                "[ 98,100]PREP(prep) D[98,100](as) G[51,59](contains)",
+                "[101,109]POBJ(pobj) D[101,109](possible) G[98,100](as)" };
+
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
+                "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
+                "WDT", "VBZ", "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
+                + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
+                + "(S (VP (VBZ contains) (NP (ADJP (RB as) (JJ many)) (NNS constituents) (CC and) "
+                + "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
+
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ".$$.", ":",
+                "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP",
+                "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO",
+                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
+                "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
+                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
+                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
+                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
+                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+        
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+        
+        String[] unmappedDep = new String[] { "gov" };
+
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
+    }
+    
+    @Test
+    public void testEnglishWsjRnn()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "wsj-rnn", documentEnglish);
+
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "QP 60,67", "ROOT 0,110",
+                "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "QP 60,67", "ROOT 0,110",
+                "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+
+        String[] dependencies = new String[] { 
+                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
+                "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
+                "[ 60, 62]QUANTMOD(quantmod) D[60,62](as) G[63,67](many)",
+                "[ 63, 67]NUM(num) D[63,67](many) G[68,80](constituents)",
+                "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
+                "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
+                "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
+                "[ 98,100]PREP(prep) D[98,100](as) G[51,59](contains)",
+                "[101,109]POBJ(pobj) D[101,109](possible) G[98,100](as)" };
+
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
+                "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
+                "WDT", "VBZ", "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
+                + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
+                + "(S (VP (VBZ contains) (NP (QP (RB as) (JJ many)) (NNS constituents) (CC and) "
+                + "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
+
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ".$$.", ":",
+                "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP",
+                "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO",
+                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
+                "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
+                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
+                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
+                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
+                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+        
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+        
+        String[] unmappedDep = new String[] { "gov" };
+
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
+    }
+    
     /**
      * This test uses simple double quotes.
      */
@@ -451,7 +617,6 @@ public class StanfordParserTest
         // NO DEP TAGS AssertAnnotations.assertTagsetMapping(Dependency.class, null, unmappedDep, jcas);
     }
 
-    // @Ignore("Dependency types not yet mapped")
     @Test
     public void testChineseFactored()
         throws Exception
@@ -511,6 +676,82 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { ".$$.", "FRAG", "URL" };
 
         String[] unmappedConst = new String[] { "DFL", "FLR", "INC", "WHPP" };
+        
+        // NO DEP TAGS String[] unmappedDep = new String[] {};
+
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "ctb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ctb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ctb", unmappedConst, jcas);
+        // NO DEP TAGS AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
+        // NO DEP TAGS AssertAnnotations.assertTagsetMapping(Dependency.class, null, unmappedDep, jcas);
+    }
+
+    @Test
+    public void testChineseXinhuaFactored()
+        throws Exception
+    {
+        JCas jcas = runTest("zh", "xinhua-factored", "我们需要一个非常复杂的句子例如其中包含许多成分和尽可能的依赖。");
+
+        String[] constituentMapped = new String[] { "ADVP 13,15", "ADVP 24,27", "ADVP 6,8",
+                "NP 0,2", "NP 11,13", "NP 15,17", "NP 19,23", "NP 21,23", "NP 28,30", "NP 4,30",
+                "NP 6,13", "QP 19,21", "QP 4,6", "ROOT 0,31", "VP 17,23", "VP 17,27", "VP 2,30",
+                "VP 24,27", "VP 6,10", "VP 8,10", "X 0,31", "X 13,27", "X 6,10", "X 6,11",
+                "X 6,27", "X 6,28" };
+
+        String[] constituentOriginal = new String[] { "ADVP 13,15", "ADVP 24,27", "ADVP 6,8",
+                "CP 6,11", "CP 6,28", "IP 0,31", "IP 13,27", "IP 6,10", "IP 6,27", "NP 0,2",
+                "NP 11,13", "NP 15,17", "NP 19,23", "NP 21,23", "NP 28,30", "NP 4,30", "NP 6,13",
+                "QP 19,21", "QP 4,6", "ROOT 0,31", "VP 17,23", "VP 17,27", "VP 2,30", "VP 24,27",
+                "VP 6,10", "VP 8,10" };
+
+        String[] dependencies = new String[] { 
+                "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[2,4](需要)",
+                "[  4,  6]Dependency(nummod) D[4,6](一个) G[28,30](依赖)",
+                "[  6,  8]ADVMOD(advmod) D[6,8](非常) G[8,10](复杂)",
+                "[  8, 10]RCMOD(rcmod) D[8,10](复杂) G[11,13](句子)",
+                "[ 10, 11]Dependency(cpm) D[10,11](的) G[8,10](复杂)",
+                "[ 11, 13]NSUBJ(nsubj) D[11,13](句子) G[17,19](包含)",
+                "[ 13, 15]ADVMOD(advmod) D[13,15](例如) G[17,19](包含)",
+                "[ 15, 17]NSUBJ(nsubj) D[15,17](其中) G[17,19](包含)",
+                "[ 17, 19]RCMOD(rcmod) D[17,19](包含) G[28,30](依赖)",
+                "[ 19, 21]Dependency(nummod) D[19,21](许多) G[21,23](成分)",
+                "[ 21, 23]DOBJ(dobj) D[21,23](成分) G[17,19](包含)",
+                "[ 23, 24]CC(cc) D[23,24](和) G[17,19](包含)",
+                "[ 24, 27]CONJ(conj) D[24,27](尽可能) G[17,19](包含)",
+                "[ 27, 28]Dependency(cpm) D[27,28](的) G[17,19](包含)",
+                "[ 28, 30]DOBJ(dobj) D[28,30](依赖) G[2,4](需要)" };
+
+        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "V", "PRT", "NN", "ADJ",
+                "NN", "V", "CARD", "NN", "CONJ", "ADJ", "PRT", "NN", "PUNC" };
+
+        String[] posOriginal = new String[] { "PN", "VV", "CD", "AD", "VA", "DEC", "NN", "AD",
+                "NN", "VV", "CD", "NN", "CC", "AD", "DEC", "NN", "PU" };
+
+        String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (QP (CD 一个)) (CP (IP (NP "
+                + "(CP (IP (VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子))) (IP "
+                + "(ADVP (AD 例如)) (NP (NN 其中)) (VP (VP (VV 包含) (NP (QP (CD 许多)) (NP "
+                + "(NN 成分)))) (CC 和) (VP (ADVP (AD 尽可能)))))) (DEC 的)) (NP (NN 依赖)))) "
+                + "(PU 。)))";
+
+        String[] posTags = new String[] { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG",
+                "DER", "DEV", "DT", "ETC", "FW", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT",
+                "OD", "P", "PN", "PU", "SB", "SP", "VA", "VC", "VE", "VV" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CLP", "CP", "DNP", "DP", "DVP",
+                "FRAG", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT", "UCP", "VCD", "VCP",
+                "VNV", "VP", "VPT", "VRD", "VSB" };
+
+        // NO DEP TAGS String[] depTags = new String[] {};
+
+        String[] unmappedPos = new String[] { ".$$." };
+
+        String[] unmappedConst = new String[] { };
         
         // NO DEP TAGS String[] unmappedDep = new String[] {};
 
