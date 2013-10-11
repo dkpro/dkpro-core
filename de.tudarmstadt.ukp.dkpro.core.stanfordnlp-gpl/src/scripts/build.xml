@@ -570,7 +570,75 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/englishRNN.ser.gz" 
+    		md5="8d675bd69f92e56dc2065c4e14243196"
+    	    groupId="de.tudarmstadt.ukp.dkpro.core" 
+    	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130620"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="rnn" 
+    		extension="ser.gz">		
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>		
+
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/wsjFactored.ser.gz" 
+    		md5="3a9287d6bef1354931b1f167333418d8"
+    	    groupId="de.tudarmstadt.ukp.dkpro.core" 
+    	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130620"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="wsj-factored" 
+    		extension="ser.gz">		
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>		
 		
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/wsjPCFG.ser.gz" 
+    		md5="fdd2506edec29b675939f373d0648e9f"
+    	    groupId="de.tudarmstadt.ukp.dkpro.core" 
+    	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130620"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="wsj-pcfg" 
+    		extension="ser.gz">		
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>		
+		
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/wsjRNN.ser.gz" 
+    		md5="9dff703d836d6acbaefbd1ff4a68fa41"
+    	    groupId="de.tudarmstadt.ukp.dkpro.core" 
+    	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130620"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="wsj-rnn" 
+    		extension="ser.gz">		
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>		
+
 		<install-stub-and-upstream-folder 
 			folder="target/download/core/coref-en"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
@@ -687,6 +755,40 @@
     		tool="parser" 
     		language="zh" 
     		variant="factored" 
+    		extension="ser.gz">		
+    		<metadata>
+        		<entry key="pos.tagset" value="ctb"/>
+				<entry key="constituent.tagset" value="ctb"/>
+    		</metadata>
+		</install-stub-and-upstream-file>
+		
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/xinhuaFactored.ser.gz" 
+    		md5="2e837dadaed058b869fcb1754df5dce3"
+			groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130620"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="zh" 
+    		variant="xinhua-factored" 
+    		extension="ser.gz">		
+    		<metadata>
+        		<entry key="pos.tagset" value="ctb"/>
+				<entry key="constituent.tagset" value="ctb"/>
+    		</metadata>
+		</install-stub-and-upstream-file>
+		
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/xinhuaPCFG.ser.gz" 
+    		md5="cfa9246ec932ddd152862c414d01d6e3"
+			groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20130620"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="zh" 
+    		variant="xinhua-pcfg" 
     		extension="ser.gz">		
     		<metadata>
         		<entry key="pos.tagset" value="ctb"/>

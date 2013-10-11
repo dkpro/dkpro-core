@@ -1,4 +1,4 @@
-CasCopier.java:
+== CasCopier.java ==
 
 Apache UIMA
 Copyright 2006, 2009 The Apache Software Foundation
@@ -12,3 +12,15 @@ licensed to the Apache Software Foundation under the
 "Software Grant License Agreement", informally known as the 
 "IBM UIMA License Agreement".
 Copyright (c) 2003, 2006 IBM Corporation.
+
+
+== edu.stanford.nlp.parser.lexparser ==
+
+Classes in this package are taken from the Stanford Parser 3.2.0 package because they are missing
+from the CoreNLP 3.2.0 distribution. 
+
+Copyright (c) 2002-2012 The Board of Trustees of The Leland Stanford Junior
+University. All Rights Reserved.
+
+The files are included without modifications.
+The files bear no original copyright header.
