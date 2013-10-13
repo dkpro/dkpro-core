@@ -37,6 +37,16 @@ public final class ComponentParameters
 	 * Location from which the model is read.
 	 */
 	public static final String PARAM_MODEL_LOCATION = "modelLocation";
+	
+	/**
+     * Location from which the segmentation model is read.
+     */
+    public static final String PARAM_SEGMENTATION_MODEL_LOCATION = "segmentationModelLocation";
+
+    /**
+     * Location from which the tokenization model is read.
+     */
+    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = "tokenizationModelLocation";
 
 	/**
 	 * The character encoding used by the model.
