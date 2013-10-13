@@ -228,12 +228,19 @@ public class ConditionalFrequencyDistribution<C, V>
      */
     public void addSample(C condition, V sample, long frequency)
     {
-        List<V> samples = new ArrayList<V>();
-        for (long i=0; i<frequency; i++) {
-            samples.add(sample);
+        FrequencyDistribution<V> freqDist = null;
+
+        if (cfd.containsKey(condition)) {
+            freqDist = cfd.get(condition);
+        }
+        else {
+            freqDist = new FrequencyDistribution<V>();
+            cfd.put(condition, freqDist);
         }
 
-        incAll(condition, samples);
+        long countBefore = freqDist.getN();
+        freqDist.addSample(sample, frequency);
+        this.n = n + (freqDist.getN() - countBefore);
     }
 
     @Override
