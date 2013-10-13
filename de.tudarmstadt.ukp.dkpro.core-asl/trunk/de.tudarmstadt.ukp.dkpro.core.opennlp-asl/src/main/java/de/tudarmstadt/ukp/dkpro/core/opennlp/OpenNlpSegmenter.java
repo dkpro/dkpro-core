@@ -65,11 +65,18 @@ public class OpenNlpSegmenter
 	protected String variant;
 
 	/**
-	 * Load the model from this location instead of locating the model automatically.
+	 * Load the segmentation model from this location instead of locating the model automatically.
 	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+	public static final String PARAM_SEGMENTATION_MODEL_LOCATION = ComponentParameters.PARAM_SEGMENTATION_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_SEGMENTATION_MODEL_LOCATION, mandatory = false)
+	protected String segmentationModelLocation;
+	
+	/**
+     * Load the tokenization model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_TOKENIZATION_MODEL_LOCATION, mandatory = false)
+    protected String tokenizationModelLocation;
 
 	private CasConfigurableProviderBase<SentenceDetectorME> sentenceModelProvider;
 	private CasConfigurableProviderBase<TokenizerME> tokenModelProvider;
@@ -92,7 +99,7 @@ public class OpenNlpSegmenter
 						"sentence-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
 
-				setOverride(LOCATION, modelLocation);
+				setOverride(LOCATION, segmentationModelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
@@ -118,7 +125,7 @@ public class OpenNlpSegmenter
 						"token-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
 
-				setOverride(LOCATION, modelLocation);
+				setOverride(LOCATION, tokenizationModelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
