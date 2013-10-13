@@ -56,4 +56,16 @@ public class ConditionalFrequencyDistributionTest
         assertEquals(2, cfd.getCount(condition1, "test"));
         assertEquals(2, cfd.getCount(condition2, "example"));
     }
+    
+    @Test
+    public void addSampleTest() {
+                
+        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
+        cfd.addSample("condition", "key", 10);
+                
+        assertEquals(1, cfd.getConditions().size());
+        assertEquals(10, cfd.getN());
+        
+        assertEquals(10, cfd.getCount("condition", "key"));
+    }
 }
