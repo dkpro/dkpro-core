@@ -48,7 +48,7 @@ public class CorpusFrequencyCountProvider
 
         for (int i = minN; i <= maxN; i++) {
             for (Sentence s : corpus.getSentences()) {
-                cfd.addSamples(i, new NGramStringIterable(s.getTokens(), i, i));
+                cfd.incAll(i, new NGramStringIterable(s.getTokens(), i, i));
             }
         }
     }

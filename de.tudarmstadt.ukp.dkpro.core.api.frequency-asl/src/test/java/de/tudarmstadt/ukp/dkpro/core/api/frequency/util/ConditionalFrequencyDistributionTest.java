@@ -38,8 +38,8 @@ public class ConditionalFrequencyDistributionTest
         List<String> tokens2 = Arrays.asList("This second example contains other example tokens".split(" "));
         
         ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
-        cfd.addSamples(condition1, tokens1);
-        cfd.addSamples(condition2, tokens2);
+        cfd.incAll(condition1, tokens1);
+        cfd.incAll(condition2, tokens2);
         
         System.out.println(cfd);
         
