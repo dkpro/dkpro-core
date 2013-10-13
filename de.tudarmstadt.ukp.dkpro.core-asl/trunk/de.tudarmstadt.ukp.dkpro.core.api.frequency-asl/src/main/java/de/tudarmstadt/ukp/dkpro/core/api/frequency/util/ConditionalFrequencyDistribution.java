@@ -90,7 +90,7 @@ public class ConditionalFrequencyDistribution<C, V>
     {
         this();
         for (Map.Entry<C, Iterable<V>> entry : samples.entrySet()) {
-            addSamples(entry.getKey(), entry.getValue());
+            incAll(entry.getKey(), entry.getValue());
         }
     }
 
@@ -171,23 +171,23 @@ public class ConditionalFrequencyDistribution<C, V>
     }
 
     /**
-     * Adds a sample under a given <code>condition</code>.
+     * Increases a sample under a given <code>condition</code>.
      * 
      * @param condition
      *            the condition for this sample
      * @param sample
      *            the sample to add
      */
-    public void addSample(C condition, V sample)
+    public void inc(C condition, V sample)
     {
         List<V> samples = new ArrayList<V>();
         samples.add(sample);
 
-        addSamples(condition, samples);
+        incAll(condition, samples);
     }
 
     /**
-     * Adds multiple samples under a given <code>condition</code>.
+     * Increases all provided samples under a given <code>condition</code>.
      * 
      * <p>
      * If there is no {@link FrequencyDistribution} present for the given <code>condition</code>, a
@@ -199,7 +199,7 @@ public class ConditionalFrequencyDistribution<C, V>
      *            the samples to add
      */
 
-    public void addSamples(C condition, Iterable<V> samples)
+    public void incAll(C condition, Iterable<V> samples)
     {
         FrequencyDistribution<V> freqDist = null;
 
@@ -214,6 +214,26 @@ public class ConditionalFrequencyDistribution<C, V>
         long countBefore = freqDist.getN();
         freqDist.incAll(samples);
         this.n = n + (freqDist.getN() - countBefore);
+    }
+
+    /**
+     * Adds a sample with a certain frequency under a given <code>condition</code>.
+     * 
+     * @param condition
+     *            the condition for this sample
+     * @param sample
+     *            the sample to add
+     * @param frequency
+     *            the frequenc of the sample
+     */
+    public void addSample(C condition, V sample, long frequency)
+    {
+        List<V> samples = new ArrayList<V>();
+        for (long i=0; i<frequency; i++) {
+            samples.add(sample);
+        }
+
+        incAll(condition, samples);
     }
 
     @Override
