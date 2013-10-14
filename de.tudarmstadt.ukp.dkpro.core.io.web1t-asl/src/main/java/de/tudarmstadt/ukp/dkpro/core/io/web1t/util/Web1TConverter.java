@@ -116,7 +116,7 @@ public class Web1TConverter
                 }
 
                 for (int ngramLength = minNgramLength; ngramLength <= maxNgramLength; ngramLength++) {
-                    cfd.addSamples(ngramLength, new NGramStringIterable(tokenStrings, ngramLength,
+                    cfd.incAll(ngramLength, new NGramStringIterable(tokenStrings, ngramLength,
                             ngramLength));
                 }
             }
