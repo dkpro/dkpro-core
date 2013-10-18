@@ -21,10 +21,11 @@ import org.apache.commons.lang.time.StopWatch;
 
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Text;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.BrownTeiCorpus;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
+import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.core.Text;
+import dkpro.toolbox.corpus.BrownTeiCorpus;
+import dkpro.toolbox.corpus.Corpus;
+
 
 public class ProviderBenchmark
 {

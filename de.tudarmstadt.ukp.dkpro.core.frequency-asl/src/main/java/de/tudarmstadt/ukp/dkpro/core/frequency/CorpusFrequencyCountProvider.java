@@ -24,9 +24,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvid
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyUtils;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.core.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.Corpus;
-import de.tudarmstadt.ukp.dkpro.core.toolbox.corpus.CorpusException;
+import dkpro.toolbox.core.Sentence;
+import dkpro.toolbox.corpus.Corpus;
+import dkpro.toolbox.corpus.CorpusException;
+
 
 public class CorpusFrequencyCountProvider
     extends FrequencyCountProviderBase

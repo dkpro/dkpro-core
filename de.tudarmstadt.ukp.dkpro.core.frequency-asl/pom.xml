@@ -53,10 +53,6 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
 		</dependency>
 		<dependency>
@@ -67,6 +63,17 @@
 		      <dependency>
             <groupId>org.apache.uima</groupId>
             <artifactId>uimafit-core</artifactId>
+        </dependency>
+		      <dependency>
+		      	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		      	<artifactId>
+		      		de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl
+		      	</artifactId>
+		      </dependency>
+		<dependency>
+            <groupId>dkpro.toolbox</groupId>
+            <artifactId>dkpro.toolbox.corpus-asl</artifactId>
+            <version>0.1.0</version>
         </dependency>
 	</dependencies>
 </project>
