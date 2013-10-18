@@ -68,6 +68,5 @@ public class PipelineExample
 
         JWeb1TIndexer indexCreator = new JWeb1TIndexer("target/web1t/", 3);
         indexCreator.create();
-
     }
 }
