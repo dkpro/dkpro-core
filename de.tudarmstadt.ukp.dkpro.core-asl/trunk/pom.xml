@@ -390,11 +390,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</artifactId>
-				<version>1.6.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</artifactId>
 				<version>1.6.0-SNAPSHOT</version>
 			</dependency>
@@ -618,7 +613,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.textcat-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
 	</modules>
@@ -647,10 +641,6 @@
 						<group>
 							<title>I/O Components</title>
 							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
-						</group>
-						<group>
-							<title>Toolbox</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.toolbox*</packages>
 						</group>
 						<group>
 							<title>Testing</title>
@@ -816,7 +806,6 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textcat-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.tokit-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.toolbox-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.treetagger-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl/src/main/java" includes="**/*.java" />
 								</cobertura-report>
