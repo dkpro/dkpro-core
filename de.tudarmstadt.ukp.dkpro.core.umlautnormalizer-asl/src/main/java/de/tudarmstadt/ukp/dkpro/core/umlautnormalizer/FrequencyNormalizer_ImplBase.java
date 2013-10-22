@@ -48,7 +48,7 @@ public abstract class FrequencyNormalizer_ImplBase
 
         try {
             File modelFolder;
-            if(frequencyModel.contains("/lib/")){
+            if(frequencyModel.startsWith("classpath")){
             modelFolder = ResourceUtils
                     .getClasspathAsFolder(
                             frequencyModel,
