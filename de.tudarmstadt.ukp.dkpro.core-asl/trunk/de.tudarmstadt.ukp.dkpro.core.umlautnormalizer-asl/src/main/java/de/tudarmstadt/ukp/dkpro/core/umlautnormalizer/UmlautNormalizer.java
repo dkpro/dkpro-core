@@ -53,7 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
                 "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
 
 public class UmlautNormalizer
-    extends Normalizer_ImplBase
+    extends FrequencyNormalizer_ImplBase
 {
 
     private static final int MIN_FREQ_THRESHOLD = 100;
