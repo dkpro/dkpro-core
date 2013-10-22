@@ -42,8 +42,6 @@ public abstract class Normalizer_ImplBase
     extends JCasAnnotator_ImplBase
 {
 
-    protected FrequencyCountProvider provider;
-
     /**
      * @return A map, where a token position maps to a list of SofaChangeAnnotations that should be
      *         applied for that token
@@ -56,24 +54,6 @@ public abstract class Normalizer_ImplBase
      */
     protected abstract Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
         throws AnalysisEngineProcessException;
-
-    @Override
-    public void initialize(UimaContext context)
-        throws ResourceInitializationException
-    {
-        super.initialize(context);
-
-        try {
-            File modelFolder = ResourceUtils
-                    .getClasspathAsFolder(
-                            "classpath*:/de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/lib/normalizer/de/default",
-                            true);
-            provider = new Web1TFileAccessProvider(modelFolder, 1, 1);
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
-        }
-    }
 
     @Override
     public void process(JCas jcas)
