@@ -17,25 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.umlautnormalizer;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 import de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.util.NormalizationUtils;
 
 public abstract class Normalizer_ImplBase
