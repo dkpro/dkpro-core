@@ -1,0 +1,280 @@
+<!--
+	Copyright 2013
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+		<version>1.6.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core.docbook-asl</artifactId>
+	<properties>
+	    <uimaBuildResourcesVersion>5</uimaBuildResourcesVersion>
+		<uimaScmProject>${project.artifactId}</uimaScmProject>
+		<bookNameRoot>dkpro.core.book</bookNameRoot>
+	</properties>
+
+	<!-- ********************************** -->
+	<!-- * Docbook Processing * -->
+	<!-- ********************************** -->
+
+	<!-- Skip docbook processing unless
+		the leaf child project has a docbook directory -->
+	<build>
+		<plugins>
+			<!-- use the dependency:unpack goal to get the shared resource
+				that has the docbook-shared directory
+				Unpack into spot relative to project - because
+				these are referred to in docbook sources using
+				relative references -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<!-- use the dependency:unpack goal to get the shared resource
+							that has the docbook-shared directory
+							Unpack into spot relative to project - because
+							these are referred to in docbook sources using
+							relative references -->
+						<id>copyDocbookInfo</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.apache.uima</groupId>
+									<artifactId>uima-build-resources</artifactId>
+									<version>${uimaBuildResourcesVersion}</version>
+									<includes>docbook-shared/**</includes>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<version>2.0.14</version>
+				<configuration>  <!-- general configuration for both html and pdf -->
+					<sourceDirectory>${basedir}/src/docbook</sourceDirectory>
+					<includes>${bookNameRoot}.xml</includes>
+					<highlightSource>1</highlightSource>
+					<xincludeSupported>true</xincludeSupported>
+					<!-- olink common to pdf and html -->
+					<collectXrefTargets>yes</collectXrefTargets>
+				</configuration>
+				<executions>
+					<execution>
+						<id>html</id>
+						<goals>
+							<goal>generate-html</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<targetDirectory>${project.build.directory}/site/d</targetDirectory>
+							<htmlCustomization>${project.build.directory}/docbook-shared/top/html-single.xsl</htmlCustomization>
+						</configuration>
+					</execution>
+					<execution>
+						<id>pdf</id>
+						<goals>
+							<goal>generate-pdf</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<!-- pdf: generate first in docbkx, then move.
+								because pdf generates an extra temp file xxx.fo
+								which we want to keep a bit in target in case of debug need -->
+
+							<foCustomization>${project.build.directory}/docbook-shared/top/pdf.xsl</foCustomization>
+
+							<fop1Extensions>true</fop1Extensions>
+
+							<fontSelectionStrategy>character-by-character</fontSelectionStrategy>
+
+							<paperType>${pdfPaperType}</paperType>
+						</configuration>
+					</execution>
+				</executions>
+
+				<dependencies>
+					<dependency>
+						<groupId>org.docbook</groupId>
+						<artifactId>docbook-xml</artifactId>
+						<version>4.4</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<!-- copy the images to the html/images dir -->
+					<execution>
+						<id>docbook-copy-images</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site/d/images</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/docbook/images</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<!-- copy the css stylesheet to the html dir -->
+					<execution>
+						<id>docbook-copy-css</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site/d/css</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/docbook-shared/css</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<!-- move the pdf from the docbkx to the site/d/ -->
+					<execution>
+						<id>docbook-move-pdf</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>  <!-- no "move" goal, use copy -->
+						<phase>package</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/site/d</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/docbkx/pdf</directory>
+									<excludes>
+										<exclude>**.fo</exclude>
+									</excludes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+
+						<!--This plugin's configuration is used to store Eclipse m2e settings
+							only. It has no influence on the Maven build itself. -->
+						<plugin>
+							<groupId>org.eclipse.m2e</groupId>
+							<artifactId>lifecycle-mapping</artifactId>
+							<version>1.0.0</version>
+							<configuration>
+								<lifecycleMappingMetadata>
+									<pluginExecutions>
+
+										<!-- ***************************** -->
+										<!-- IGNORE remote resources -->
+										<!-- ***************************** -->
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.apache.maven.plugins</groupId>
+												<artifactId>
+													maven-remote-resources-plugin
+												</artifactId>
+												<versionRange>[1,)</versionRange>
+												<goals>
+													<goal>process</goal>
+													<goal>bundle</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+
+										<!-- ***************************** -->
+										<!-- EXECUTE parse-date-time -->
+										<!-- ***************************** -->
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.apache.uima</groupId>
+												<artifactId>
+													uima-build-helper-maven-plugin
+												</artifactId>
+												<versionRange>[2,)</versionRange>
+												<goals>
+													<goal>parse-date-time</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<execute />
+											</action>
+										</pluginExecution>
+
+										<!-- ******************************* -->
+										<!-- IGNORE dependency copy / unpack -->
+										<!-- ******************************* -->
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>org.apache.maven.plugins</groupId>
+												<artifactId>maven-dependency-plugin</artifactId>
+												<versionRange>[2,)</versionRange>
+												<goals>
+													<goal>unpack</goal>
+													<goal>copy-dependencies</goal>
+													<goal>unpack-dependencies</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+									</pluginExecutions>
+								</lifecycleMappingMetadata>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+</project>
