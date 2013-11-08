@@ -2,31 +2,30 @@
 <!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
 "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd">
 <!--
-Licensed to the Apache Software Foundation (ASF) under one
-or more contributor license agreements.  See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership.  The ASF licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License.  You may obtain a copy of the License at
+	Copyright 2013
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
 
-   http://www.apache.org/licenses/LICENSE-2.0
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
 
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied.  See the License for the
-specific language governing permissions and limitations
-under the License.
--->  
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
 <bookinfo>
 
     <releaseinfo>Version <?eval ${project.version}?></releaseinfo>
 
-    <productname>Apache uimaFIT&#8482;</productname>
+    <productname>DKPro Core</productname>
 
     <authorgroup>
-      <corpauthor>Written and maintained by the Apache UIMA&#8482; Development Community</corpauthor>
+      <corpauthor>Written and maintained by the DKPro Core Development Community</corpauthor>
     </authorgroup>
 
  <!--
@@ -41,7 +40,8 @@ under the License.
       <formalpara>
         <title>License and Disclaimer</title>
 
-        <para>The ASF licenses this documentation
+        <para>The Ubiquitous Knowledge Processing (UKP) Lab at Technische Universität Darmstadt 
+           licenses this documentation
            to you under the Apache License, Version 2.0 (the
            "License"); you may not use this documentation except in compliance
            with the License.  You may obtain a copy of the License at
@@ -73,7 +73,7 @@ under the License.
     <copyright>
       <year><?eval ${project.inceptionYear}?></year>
       <year><?eval ${project.properties.buildYear}?></year>
-      <holder>The Apache Software Foundation</holder>
+      <holder>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</holder>
     </copyright>
     <pubdate><?eval ${project.properties.buildMonth}?>, <?eval ${project.properties.buildYear}?></pubdate>
   </bookinfo>
