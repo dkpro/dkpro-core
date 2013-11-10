@@ -14,9 +14,9 @@
 	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 	See the License for the specific language governing permissions and
 	limitations under the License.
---><chapter id="ugr.dkpro.core.gettingstarted">
+-->
+<chapter id="ugr.dkpro.core.gettingstarted">
   <title>Getting Started</title>
-
   <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
     invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
     justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -25,7 +25,27 @@
     et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
     est Lorem ipsum dolor sit amet.</para>
   <section>
-    <title>Using a DKPro Core component in your project</title>
+    <title>Prerequisites</title>
+    <para>To use DKPro Core to the best effect, we recommend the following system
+      configuration:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Java JDK version 6 or higher</para>
+      </listitem>
+      <listitem>
+        <para>Eclipse 4.3.x Classic distribution</para>
+      </listitem>
+      <listitem>
+        <para>Maven Integration for Eclipse (M2E) plugin (comes pre-installed in the Eclipse Classic
+          distribution)</para>
+      </listitem>
+      <listitem>
+        <para>a fast internet connection</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+  <section>
+    <title>Building a simple pipeline</title>
     <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
       invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
       justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -34,7 +54,7 @@
       et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
       sanctus est Lorem ipsum dolor sit amet.</para>
     <section>
-      <title>Maven users</title>
+      <title>Setting up a Maven project</title>
       <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
         invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
         et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
@@ -49,7 +69,7 @@
 &lt;/dependency></programlisting>
     </section>
     <section>
-      <title>Non-Maven users</title>
+      <title>Implementing the pipeline</title>
       <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
         invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
         et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
@@ -58,18 +78,5 @@
         voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
         gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</para>
     </section>
-  </section>
-
-  <section>
-    <title>A simple pipeline</title>
-    <para> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-      justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-      et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-      sanctus est Lorem ipsum dolor sit amet.</para>
-
-    <programlisting format="linespecific">lala</programlisting>
   </section>
 </chapter>
