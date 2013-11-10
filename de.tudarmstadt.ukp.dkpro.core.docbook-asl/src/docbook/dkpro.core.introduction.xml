@@ -17,11 +17,10 @@
 -->
 <chapter id="ugr.dkpro.core.introduction">
   <title>Introduction</title>
-  <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-    et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-    est Lorem ipsum dolor sit amet.</para>
+  <para>Many powerful and state-of-the-art NLP tools are already freely available in the NLP
+		research community. New and improved tools are being developed and released continuously.
+		The tools cover the whole range of NLP-related processing tasks. DKPro Core provides UIMA
+		components wrapping these tools so they can be used interchangeably in processing pipelines.
+		DKPro Core builds heavily on uimaFIT which allows for rapid and easy development of
+		UIMA-based NLP processing pipelines.</para>
 </chapter>

@@ -16,7 +16,7 @@
 	limitations under the License.
 -->
 <chapter id="ugr.dkpro.core.typesystem">
-  <title>Type System Detection</title>
+  <title>Type System</title>
   <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
     invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
     justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
@@ -24,4 +24,28 @@
     eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
     et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
     est Lorem ipsum dolor sit amet.</para>
+	<section>
+		<title>Meta data</title>
+		<para/>
+		<section>
+			<title>DocumentMetaData</title>
+			<para/>
+		</section>
+	</section>
+	<section>
+		<title>Segmentation</title>
+		<para/>
+	</section>
+	<section>
+		<title>Morphology</title>
+		<para/>
+	</section>
+	<section>
+		<title>Syntax</title>
+		<para/>
+	</section>
+	<section>
+		<title>Semantics</title>
+		<para/>
+	</section>
 </chapter>
