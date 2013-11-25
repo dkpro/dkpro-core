@@ -28,68 +28,6 @@ Sentence
    sofa: _InitialView
    begin: 0
    end: 55
-[``Ross Perot wäre vielleicht ein prächtiger Diktator]
-Constituent
-   sofa: _InitialView
-   begin: 0
-   end: 52
-   constituentType: "NP"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 52
-      constituentType: "S"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 55
-         constituentType: "VROOT"
-         parent: <null>
-         children: FSArray
-         syntacticFunction: <null>
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "PD"
-[``Ross Perot wäre vielleicht ein prächtiger Diktator]
-Constituent
-   sofa: _InitialView
-   begin: 0
-   end: 52
-   constituentType: "S"
-   parent: ROOT
-      sofa: _InitialView
-      begin: 0
-      end: 55
-      constituentType: "VROOT"
-      parent: <null>
-      children: FSArray
-      syntacticFunction: <null>
-   children: FSArray
-   syntacticFunction: "--"
-[``Ross Perot]
-Constituent
-   sofa: _InitialView
-   begin: 0
-   end: 12
-   constituentType: "PN"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 52
-      constituentType: "S"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 0
-         end: 55
-         constituentType: "VROOT"
-         parent: <null>
-         children: FSArray
-         syntacticFunction: <null>
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "SB"
 [``]
 PUNC
    sofa: _InitialView
@@ -119,6 +57,45 @@ Token
       begin: 0
       end: 2
       PosValue: "$("
+[Ross Perot wäre vielleicht ein prächtiger Diktator]
+Constituent
+   sofa: _InitialView
+   begin: 2
+   end: 52
+   constituentType: "S"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 55
+      constituentType: "VROOT"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
+   children: FSArray
+   syntacticFunction: "--"
+[Ross Perot]
+Constituent
+   sofa: _InitialView
+   begin: 2
+   end: 12
+   constituentType: "PN"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 2
+      end: 52
+      constituentType: "S"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 55
+         constituentType: "VROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "SB"
 [Ross]
 NP
    sofa: _InitialView
@@ -235,6 +212,29 @@ Token
       begin: 18
       end: 28
       PosValue: "ADV"
+[ein prächtiger Diktator]
+Constituent
+   sofa: _InitialView
+   begin: 29
+   end: 52
+   constituentType: "NP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 2
+      end: 52
+      constituentType: "S"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 55
+         constituentType: "VROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "PD"
 [ein]
 Lemma
    sofa: _InitialView
@@ -354,3 +354,5 @@ Token
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
+
+
