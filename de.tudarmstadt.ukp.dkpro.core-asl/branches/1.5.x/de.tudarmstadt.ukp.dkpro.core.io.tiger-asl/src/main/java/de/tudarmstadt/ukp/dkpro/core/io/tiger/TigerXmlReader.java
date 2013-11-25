@@ -223,7 +223,7 @@ public class TigerXmlReader
     private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals, TigerGraph aGraph,
             Constituent aParent, TigerEdge aInEdge, TigerNode aNode)
     {
-        int begin = 0;
+        int begin = Integer.MAX_VALUE;
         int end = 0;
         List<Annotation> children = new ArrayList<Annotation>();
         if (aNode instanceof TigerNonTerminal) {
