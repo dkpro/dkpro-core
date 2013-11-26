@@ -175,7 +175,6 @@ public class TigerXmlReader
 
     protected void readSentence(JCasBuilder aBuilder, TigerSentence aSentence)
     {
-        boolean first = true;
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
         Map<String, Token> terminals = new HashMap<String, Token>();
@@ -202,12 +201,8 @@ public class TigerXmlReader
             // Remember position before adding space
             sentenceEnd = aBuilder.getPosition();
 
-            if (!first) {
-                aBuilder.add(" ");
-            }
-            else {
-                first = false;
-            }
+            aBuilder.add(" ");
+
         }
         aBuilder.add("\n");
 
