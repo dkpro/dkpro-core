@@ -30,12 +30,65 @@ import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.impl.CASMgrSerializer;
+import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
+/**
+ * Write CAS in one of the UIMA binary formats. Several formats are supported:
+ * 
+ * <table>
+ * <tr>
+ * <th>Format</th>
+ * <th>Description</th>
+ * <th>Type system on load</th>
+ * <th>CAS Addresses preserved</th>
+ * </tr>
+ * <tr>
+ * <td>0</td>
+ * <td>CAS structures are dumped to disc as they are using Java serialization ({@link CASSerializer}
+ * ). Because these structures are pre-allocated in memory at larger sizes than what is actually
+ * required, files in this format may be larger than necessary. However, the CAS addresses of
+ * feature structures are preserved in this format. When the data is loaded back into a CAS, it must
+ * have been initialized with the same type system as the original CAS. Note that the DKPro Core
+ * SerializedCasWriter is not writing in form 0 (using CASSerializer), but in an another form (using
+ * CASCompleteSerializer) which also includes the complete type system definition and indexes.</td>
+ * <td>must be the same</td>
+ * <td>yes</td>
+ * </tr>
+ * <tr>
+ * <td>4</td>
+ * <td>
+ * UIMA binary serialization saving all feature structures (reachable or not). This format
+ * internally uses gzip compression and a binary representation of the CAS, making it much more
+ * efficient than format 0.</td>
+ * <td>must be the same</td>
+ * <td>yes</td>
+ * </tr>
+ * <tr>
+ * <td>6</td>
+ * <td>
+ * UIMA binary serialization as format 4, but saving only reachable feature structures.</td>
+ * <td>must be the same</td>
+ * <td>no</td>
+ * </tr>
+ * <tr>
+ * <td>6+</td>
+ * <td>
+ * UIMA binary serialization as format 6, but also contains the type system defintion. This allows
+ * the {@link BinaryCasReader} to load data leniently into a CAS that has been initialized with a
+ * different type system.</td>
+ * <td>lenient loading</td>
+ * <td>no</td>
+ * </tr>
+ * </table>
+ * 
+ * @see <a href="http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress">Compressed
+ *      Binary CASes</a>
+ */
 public class BinaryCasWriter
     extends JCasFileWriter_ImplBase
 {
