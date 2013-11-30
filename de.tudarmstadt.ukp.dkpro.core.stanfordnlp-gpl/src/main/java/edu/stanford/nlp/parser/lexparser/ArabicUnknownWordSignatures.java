@@ -3,7 +3,7 @@
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * Copyright 2002-2012
+ * Copyright 2002-2013
  * The Board of Trustees of The Leland Stanford Junior University
  *
  * This program is free software: you can redistribute it and/or modify
@@ -81,15 +81,12 @@ class ArabicUnknownWordSignatures {
   // there doesn't seem to be second-person marking in the corpus, just first
   // and non-first (?)
   static String pastTenseVerbNumberSuffix(String word) {
-    if (singularPastTenseSuffixPattern.matcher(word).find()) {
-        return "-PV.sg";
-    }
-    if (pluralFirstPersonPastTenseSuffixPattern.matcher(word).find()) {
-        return "-PV.pl1";
-    }
-    if (pluralThirdPersonMasculinePastTenseSuffixPattern.matcher(word).find()) {
-        return "-PV.pl3m";
-    }
+    if (singularPastTenseSuffixPattern.matcher(word).find())
+      return "-PV.sg";
+    if (pluralFirstPersonPastTenseSuffixPattern.matcher(word).find())
+      return "-PV.pl1";
+    if (pluralThirdPersonMasculinePastTenseSuffixPattern.matcher(word).find())
+      return "-PV.pl3m";
     return "";
   }
 

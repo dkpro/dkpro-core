@@ -228,7 +228,7 @@ public class StanfordParserTest
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
-                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
                 "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
                 "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
                 "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
@@ -311,13 +311,13 @@ public class StanfordParserTest
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
-                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
                 "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
                 "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
                 "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
                 "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
                 "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
-        
+
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
@@ -394,13 +394,13 @@ public class StanfordParserTest
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
-                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
                 "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
                 "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
                 "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
                 "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
                 "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
-        
+
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
@@ -477,13 +477,13 @@ public class StanfordParserTest
                 "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
-                "arg", "attr", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
                 "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
                 "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
                 "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
                 "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
                 "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
-        
+
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
@@ -643,7 +643,7 @@ public class StanfordParserTest
                 "[ 11, 13]DOBJ(dobj) D[11,13](句子) G[2,4](需要)",
                 "[ 13, 15]ADVMOD(advmod) D[13,15](例如) G[17,19](包含)",
                 "[ 15, 17]NSUBJ(nsubj) D[15,17](其中) G[17,19](包含)",
-                "[ 17, 19]DEP(dep) D[17,19](包含) G[2,4](需要)",
+                "[ 17, 19]CONJ(conj) D[17,19](包含) G[2,4](需要)",
                 "[ 19, 21]Dependency(nummod) D[19,21](许多) G[21,23](成分)",
                 "[ 21, 23]DOBJ(dobj) D[21,23](成分) G[17,19](包含)",
                 "[ 23, 24]CC(cc) D[23,24](和) G[17,19](包含)",
