@@ -138,25 +138,48 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.SCORE_PROP, String.valueOf(score));
                 props.setProperty(Constants.POSTPROCESSING_PROP, String.valueOf(postprocessing));
                 props.setProperty(Constants.MAXDIST_PROP, String.valueOf(maxdist));
+//              props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
                 props.setProperty(Constants.REPLICATECONLL_PROP, "false");
                 props.setProperty(Constants.CONLL_SCORER, Constants.conllMentionEvalScript);
 
+                // Cf. edu.stanford.nlp.dcoref.Dictionaries.Dictionaries(Properties)
+                // props.getProperty(Constants.DEMONYM_PROP, DefaultPaths.DEFAULT_DCOREF_DEMONYM),
                 props.setProperty(Constants.DEMONYM_PROP, base + "demonyms.txt");
+                // props.getProperty(Constants.ANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_ANIMATE),
                 props.setProperty(Constants.ANIMATE_PROP, base + "animate.unigrams.txt");
+                // props.getProperty(Constants.INANIMATE_PROP, DefaultPaths.DEFAULT_DCOREF_INANIMATE),
                 props.setProperty(Constants.INANIMATE_PROP, base + "inanimate.unigrams.txt");
+                // props.getProperty(Constants.MALE_PROP),
                 props.setProperty(Constants.MALE_PROP, base + "male.unigrams.txt");
+                // props.getProperty(Constants.NEUTRAL_PROP),
                 props.setProperty(Constants.NEUTRAL_PROP, base + "neutral.unigrams.txt");
+                // props.getProperty(Constants.FEMALE_PROP),
                 props.setProperty(Constants.FEMALE_PROP, base + "female.unigrams.txt");
+                // props.getProperty(Constants.PLURAL_PROP),
                 props.setProperty(Constants.PLURAL_PROP, base + "plural.unigrams.txt");
+                // props.getProperty(Constants.SINGULAR_PROP),
                 props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
+                // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
                 props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
+                // props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER),
                 props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.data.gz");
+                // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
                 props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
+                // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
                 props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
-                props.setProperty(Constants.EXTRA_GENDER_PROP, base + "namegender.combine.txt");
+                if (sieves.contains("CorefDictionaryMatch")) {
+                    // FIXME Issue 277 set these properties when the next CoreNLP version is out. In
+                    // CoreNLP 3.3.0, this cannot be properly configured.
+                    // See also: https://github.com/stanfordnlp/CoreNLP/commit/07f9d21632337d8f0f70ada234e3466433b23c22
+//                  new String[]{
+          //            DefaultPaths.DEFAULT_DCOREF_DICT1, 
+          //            DefaultPaths.DEFAULT_DCOREF_DICT2,
+          //            DefaultPaths.DEFAULT_DCOREF_DICT3, 
+          //            DefaultPaths.DEFAULT_DCOREF_DICT4},
+          //            DefaultPaths.DEFAULT_DCOREF_DICT1,
+          //            DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES);                
+                }
                 props.setProperty(Constants.SINGLETON_PROP, base + "singleton.predictor.ser");
-                props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
-                props.setProperty(Constants.REPLICATECONLL_PROP, "false");
 
                 try {
                     Coreferencer coref = new Coreferencer();
@@ -185,26 +208,7 @@ public class StanfordCoreferenceResolver
             // Copy all relevant information from the tokens
             List<CoreLabel> tokens = new ArrayList<CoreLabel>();
             for (Token token : selectCovered(Token.class, root)) {
-                CoreLabel t = new CoreLabel();
-                t.set(TokenKey.class, token);
-                t.setOriginalText(token.getCoveredText());
-                t.setWord(token.getCoveredText());
-                t.setBeginPosition(token.getBegin());
-                t.setEndPosition(token.getEnd());
-                if (token.getLemma() != null) {
-                    t.setLemma(token.getLemma().getValue());
-                }
-                if (token.getPos() != null) {
-                    t.setTag(token.getPos().getPosValue());
-                }
-                List<NamedEntity> nes = selectCovered(NamedEntity.class, token);
-                if (nes.size() > 0) {
-                    t.setNER(nes.get(0).getValue());
-                }
-                else {
-                    t.setNER("O");
-                }
-                tokens.add(t);
+                tokens.add(tokenToWord(token));
             }
             sentenceTokens.add(tokens);
 
@@ -226,6 +230,7 @@ public class StanfordCoreferenceResolver
 
             // deep copy of the tree. These are modified inside coref!
             Tree treeCopy = TreeUtils.createStanfordTree(root, tFact).treeSkeletonCopy();
+            treeCopy.indexSpans();
             trees.add(treeCopy);
 
             // Build the sentence
@@ -253,7 +258,9 @@ public class StanfordCoreferenceResolver
         Coreferencer coref = modelProvider.getResource();
         
         // extract all possible mentions
-        RuleBasedCorefMentionFinder finder = new RuleBasedCorefMentionFinder();
+        // Reparsing only works when the full CoreNLP pipeline system is set up! Passing false here
+        // disables reparsing.
+        RuleBasedCorefMentionFinder finder = new RuleBasedCorefMentionFinder(false);
         List<List<Mention>> allUnprocessedMentions = finder.extractPredictedMentions(document, 0,
                 coref.corefSystem.dictionaries());
 
@@ -297,6 +304,30 @@ public class StanfordCoreferenceResolver
                 link.addToIndexes();
             }
         }
+    }
+
+    protected CoreLabel tokenToWord(Token aToken)
+    {
+        CoreLabel t = new CoreLabel();
+        t.set(TokenKey.class, aToken);
+        t.setOriginalText(aToken.getCoveredText());
+        t.setWord(aToken.getCoveredText());
+        t.setBeginPosition(aToken.getBegin());
+        t.setEndPosition(aToken.getEnd());
+        if (aToken.getLemma() != null) {
+            t.setLemma(aToken.getLemma().getValue());
+        }
+        if (aToken.getPos() != null) {
+            t.setTag(aToken.getPos().getPosValue());
+        }
+        List<NamedEntity> nes = selectCovered(NamedEntity.class, aToken);
+        if (nes.size() > 0) {
+            t.setNER(nes.get(0).getValue());
+        }
+        else {
+            t.setNER("O");
+        }
+        return t;
     }
 
     private static class RootKey

@@ -42,7 +42,7 @@ public class StanfordNamedEntityRecognizerTest
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-		Iterator<NamedEntity> iter = runNER("SAP where John works is in Germany.", "en");
+		Iterator<NamedEntity> iter = runNER("IBM where John works is in Germany.", "en");
 
 		assertNE(iter.next(), Organization.class, 0, 3);
 		assertNE(iter.next(), Person.class, 10, 14);

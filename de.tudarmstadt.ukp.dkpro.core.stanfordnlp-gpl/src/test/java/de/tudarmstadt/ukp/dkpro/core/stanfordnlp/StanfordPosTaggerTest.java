@@ -11,9 +11,11 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
@@ -22,6 +24,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -88,6 +91,30 @@ public class StanfordPosTaggerTest
     }
 
     @Test
+    public void testFrench()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", null, "Nous avons besoin d'une phrase par exemple très "
+                + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
+                + "possible.");
+
+        String[] posMapped = new String[] { "PR", "V", "N", "PP", "N", "PP", "N", "ADV", "ADJ",
+                "PUNC", "PR", "V", "ART", "N", "PR", "ART", "ADJ", "N", "CONJ", "CONJ", "ADJ",
+                "PUNC" };
+
+        String[] posOriginal = new String[] { "CL", "V", "N", "P", "N", "P", "N", "ADV", "A",
+                "PUNC", "PRO", "V", "D", "N", "PRO", "D", "A", "N", "C", "C", "A", "PUNC" };
+
+        String[] posTags = new String[] { ".$$.", "A", "ADV", "C", "CL", "D", "ET", "I", "N", "P",
+                "PREF", "PRO", "PUNC", "V" };
+
+        String[] unmappedPos = new String[] { ".$$." };
+
+        AssertAnnotations.assertTagset(POS.class, "ftb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+    }
+    @Test
     public
     void testChinese()
     	throws Exception
@@ -119,23 +146,55 @@ public class StanfordPosTaggerTest
         		new String[] { "VBP", "DTNN", "DTJJR", "DTNN", "DTJJ", "NNS", "JJ",  "NN"  },
         		new String[] { "POS", "POS",  "POS",   "POS",  "POS",  "POS", "POS", "POS" } );
 
-}
+    }
 
+    /**
+     * Setup CAS to test parser for the English language (is only called once if an English test is
+     * run)
+     */
+    private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
+        throws Exception
+    {
+        AnalysisEngineDescription segmenter;
+
+        if ("zh".equals(aLanguage)) {
+            segmenter = createEngineDescription(LanguageToolSegmenter.class);
+        }
+        else {
+            segmenter = createEngineDescription(StanfordSegmenter.class);
+        }
+        
+        Object[] params = new Object[] {
+                StanfordPosTagger.PARAM_VARIANT, aVariant,
+                StanfordPosTagger.PARAM_PRINT_TAGSET, true };
+        params = ArrayUtils.addAll(params, aExtraParams);
+        AnalysisEngineDescription parser = createEngineDescription(StanfordPosTagger.class, params);
+
+        AnalysisEngine engine = createEngine(createEngineDescription(segmenter, parser));
+
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(aLanguage);
+        jcas.setDocumentText(aText);
+        engine.process(jcas);
+
+        return jcas;
+    }    
 	private void runTest(String language, String testDocument, String[] tags, String[] tagClasses)
 			throws Exception
 	{
 		runTest(language, null, testDocument, tags, tagClasses);
 	}
 
-	private void runTest(String language, String variant, String testDocument, String[] tags, String[] tagClasses)
-		throws Exception
-	{
+    private void runTest(String language, String variant, String testDocument, String[] tags,
+            String[] tagClasses)
+        throws Exception
+    {
         AnalysisEngine engine = createEngine(StanfordPosTagger.class,
-        		StanfordPosTagger.PARAM_VARIANT, variant,
-        		StanfordPosTagger.PARAM_PRINT_TAGSET, true);
-		JCas aJCas = TestRunner.runTest(engine, language, testDocument);
+                StanfordPosTagger.PARAM_VARIANT, variant, StanfordPosTagger.PARAM_PRINT_TAGSET,
+                true);
+        JCas aJCas = TestRunner.runTest(engine, language, testDocument);
 
-		AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
+        AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
     }
 
 	@Rule

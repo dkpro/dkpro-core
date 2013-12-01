@@ -1,3 +1,24 @@
+/**
+ * Copyright 2013
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Copyright 2002-2013
+ * The Board of Trustees of The Leland Stanford Junior University
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package edu.stanford.nlp.parser.lexparser;
 
 import edu.stanford.nlp.stats.ClassicCounter;
@@ -10,8 +31,7 @@ import edu.stanford.nlp.util.Index;
  * <i>Implementation note: the contents of this class tend to overlap somewhat
  * with {@link EnglishUnknownWordModel} and were originally included in {@link BaseLexicon}.
  *
- * @author Dan Klein
- * @author Galen Andrew
+ * @author Roger Levy
  * @author Christopher Manning
  * @author Anna Rafferty
  */
@@ -23,25 +43,18 @@ public class ArabicUnknownWordModel extends BaseUnknownWordModel {
 
   private static final int MAX_UNKNOWN = 10;
 
-  protected boolean smartMutation = false;
+  protected final boolean smartMutation;
+  protected final int unknownSuffixSize;
+  protected final int unknownPrefixSize;
 
-
-  protected int unknownSuffixSize = 0;
-  protected int unknownPrefixSize = 0;
 
   public ArabicUnknownWordModel(Options op, Lexicon lex, 
                                 Index<String> wordIndex, 
                                 Index<String> tagIndex, 
                                 ClassicCounter<IntTaggedWord> unSeenCounter) {
     super(op, lex, wordIndex, tagIndex, unSeenCounter, null, null, null);
-    unknownLevel = op.lexOptions.useUnknownWordSignatures;
     if (unknownLevel < MIN_UNKNOWN || unknownLevel > MAX_UNKNOWN) {
-      if (unknownLevel < MIN_UNKNOWN) {
-        unknownLevel = MIN_UNKNOWN;
-      } else if (unknownLevel > MAX_UNKNOWN) {
-        unknownLevel = MAX_UNKNOWN;
-      }
-      System.err.println("Invalid value for useUnknownWordSignatures");
+      throw new IllegalArgumentException("Invalid value for useUnknownWordSignatures: " + unknownLevel);
     }
     this.smartMutation = op.lexOptions.smartMutation;
     this.unknownSuffixSize = op.lexOptions.unknownSuffixSize;
@@ -247,12 +260,6 @@ public class ArabicUnknownWordModel extends BaseUnknownWordModel {
     // System.err.println("Summarized " + word + " to " + sb.toString());
     return sb.toString();
   } // end getSignature()
-
-
-  @Override
-  public void setUnknownLevel(int unknownLevel) {
-    this.unknownLevel = unknownLevel;
-  }
 
   @Override
   public int getUnknownLevel() {

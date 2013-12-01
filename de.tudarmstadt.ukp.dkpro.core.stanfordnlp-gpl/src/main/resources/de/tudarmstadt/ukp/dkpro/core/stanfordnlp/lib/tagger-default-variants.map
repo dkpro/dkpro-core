@@ -1,4 +1,5 @@
 ar=accurate
 de=fast
-en=wsj-0-18-bidirectional-distsim
+fr=default
+en=bidirectional-distsim
 zh=distsim

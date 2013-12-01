@@ -27,7 +27,7 @@ public class StanfordLemmatizerTest
 	@Test
 	public void testEnglish() throws Exception
 	{
-        runTest("en", "wsj-0-18-bidirectional-distsim", "This is a test .",
+        runTest("en", null, "This is a test .",
         		new String[] { "DT", "VBZ", "DT", "NN",  "."    },
         		new String[] { "this",  "be",  "a", "test", "." });
 
