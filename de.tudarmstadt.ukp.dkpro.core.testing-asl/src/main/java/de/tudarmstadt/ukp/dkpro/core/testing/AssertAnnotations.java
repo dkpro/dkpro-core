@@ -38,6 +38,7 @@ import junit.framework.Assert;
 import org.apache.uima.jcas.JCas;
 import org.codehaus.plexus.util.StringUtils;
 
+import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
@@ -351,6 +352,14 @@ public class AssertAnnotations
         assertEquals(expected, actual);
     }
 
+    public static void assertPennTree(String aExpected[], Collection<PennTree> aActual) {
+        List<PennTree> actual = new ArrayList<PennTree>(aActual);
+        assertEquals(aExpected.length, aActual.size());
+        for (int i = 0; i < aExpected.length; i++) {
+            assertPennTree(aExpected[i], actual.get(i));
+        }
+    }
+
     public static void assertPennTree(String aExpected, String aActual)
     {
         String expected = normalizeSpace(aExpected);
@@ -403,13 +412,31 @@ public class AssertAnnotations
             actual.add(a.getValue());
         }
 
-        System.out.printf("%-20s - Expected: %s%n", "Semantic field values", asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Semantic field values", asCopyableString(actual));
+        System.out.printf("%-20s - Expected: %s%n", "Semantic field values",
+                asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Semantic field values",
+                asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
-
+    public static void assertCoreference(String[][] aExpected, Collection<CoreferenceChain> aActual)
+    {
+        List<CoreferenceChain> actual = new ArrayList<CoreferenceChain>(aActual);
+        assertEquals(aExpected.length, aActual.size());
+        for (int i = 0; i < aExpected.length; i++) {
+            System.out.printf("%-20s - Expected: %s%n", "Coreference",
+                    asCopyableString(asList(aExpected[i])));
+            System.out.printf("%-20s - Actual  : %s%n", "Coreference",
+                    asCopyableString(toText(actual.get(i).links())));
+        }
+        
+        for (int i = 0; i < aExpected.length; i++) {
+            assertEquals(asCopyableString(asList(aExpected[i]), true),
+                    asCopyableString(toText(actual.get(i).links()), true));
+        }
+    }
+    
     public static void assertTagset(Class<?> aLayer, String aName, String[] aExpected, JCas aJCas)
     {
         List<String> expected = new ArrayList<String>(asList(aExpected));
