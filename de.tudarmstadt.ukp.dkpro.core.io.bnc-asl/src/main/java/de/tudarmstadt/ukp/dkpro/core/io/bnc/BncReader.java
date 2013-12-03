@@ -105,7 +105,7 @@ public class BncReader
 	 * tag set defined as part of the model meta data.
 	 */
 	public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	@ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
 	protected String posTagset;
 
 	private MappingProvider posMappingProvider;
