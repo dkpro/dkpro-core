@@ -30,6 +30,14 @@
 		<bookNameRoot>dkpro.core.book</bookNameRoot>
 	</properties>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-public</id>
+			<name>Sonatype Public</name>
+			<url>http://repository.sonatype.org/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<!-- ********************************** -->
 	<!-- * Docbook Processing * -->
 	<!-- ********************************** -->
@@ -122,9 +130,9 @@
 
 				<dependencies>
 					<dependency>
-						<groupId>org.docbook</groupId>
+						<groupId>docbook</groupId>
 						<artifactId>docbook-xml</artifactId>
-						<version>4.4</version>
+						<version>4.5</version>
 						<scope>runtime</scope>
 					</dependency>
 				</dependencies>
