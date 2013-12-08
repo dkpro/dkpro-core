@@ -27,6 +27,7 @@ import org.apache.uima.jcas.JCas;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.international.arabic.process.ArabicTokenizer;
+import edu.stanford.nlp.international.french.process.FrenchTokenizer;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -53,8 +54,9 @@ extends SegmenterBase
 
     static {
     	tokenizerFactories = new HashMap<String, InternalTokenizerFactory>();
+        tokenizerFactories.put("ar", new InternalArabicTokenizerFactory());
     	tokenizerFactories.put("en", new InternalPTBTokenizerFactory());
-    	tokenizerFactories.put("ar", new InternalArabicTokenizerFactory());
+        tokenizerFactories.put("fr", new InternalFrenchTokenizerFactory());
     	// The Negra tokenizer is not really a full tokenizer.
 //    	tokenizerFactories.put("de", new InternalNegraPennTokenizerFactory());
     	// Not sure if those really work - don't know how to test
@@ -254,6 +256,19 @@ extends SegmenterBase
     	{
     		return ArabicTokenizer.newArabicTokenizer(new StringReader(s), new Properties());
     	}
+    }
+
+    private static
+    class InternalFrenchTokenizerFactory
+    implements InternalTokenizerFactory
+    {
+        @Override
+        public
+        Tokenizer<?> create(
+                final String s)
+        {
+            return FrenchTokenizer.factory().getTokenizer(new StringReader(s), "tokenizeNLs=false");
+        }
     }
 
     // While the stanford parser should come with a proper tokenizer for
