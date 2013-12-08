@@ -99,6 +99,13 @@ public class SfstAnnotator
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+	 /**
+     * Specifies the model encoding.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
+    protected String modelEncoding;
+
     private CasConfigurableProviderBase<File> modelProvider;
     private CasConfigurableProviderBase<AnalysisParser> parserProvider;
     private RuntimeProvider runtimeProvider;
@@ -240,14 +247,14 @@ public class SfstAnnotator
 
         try {
             tempFile = File.createTempFile("sfst-morph-token", ".txt");
-            FileUtils.writeStringToFile(tempFile, token);
+            FileUtils.writeStringToFile(tempFile, token, modelEncoding);
             ProcessBuilder pb = new ProcessBuilder(aExecutable.getAbsolutePath(),
                     aModel.getAbsolutePath(), tempFile.getAbsolutePath());
             pb.redirectErrorStream();
 
             p = pb.start();
             in = p.getInputStream();
-            List<String> result = IOUtils.readLines(in, "UTF-8");
+            List<String> result = IOUtils.readLines(in, modelEncoding);
             ListIterator<String> i = result.listIterator();
 
             while (i.hasNext()) {
