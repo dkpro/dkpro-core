@@ -91,11 +91,11 @@ public class StanfordPosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible.");
 
-        String[] posMapped = new String[] { "PR", "V", "N", "PP", "N", "PP", "N", "ADV", "ADJ",
-                "PUNC", "PR", "V", "ART", "N", "PR", "ART", "ADJ", "N", "CONJ", "CONJ", "ADJ",
-                "PUNC" };
+        String[] posMapped = new String[] { "PR", "V", "N", "PP", "ART", "N", "PP", "N", "ADV",
+                "ADJ", "PUNC", "PR", "V", "ART", "N", "PR", "ART", "ADJ", "N", "CONJ", "CONJ",
+                "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CL", "V", "N", "P", "N", "P", "N", "ADV", "A",
+        String[] posOriginal = new String[] { "CL", "V", "N", "P", "D", "N", "P", "N", "ADV", "A",
                 "PUNC", "PRO", "V", "D", "N", "PRO", "D", "A", "N", "C", "C", "A", "PUNC" };
 
         String[] posTags = new String[] { ".$$.", "A", "ADV", "C", "CL", "D", "ET", "I", "N", "P",
@@ -107,6 +107,22 @@ public class StanfordPosTaggerTest
         AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
+
+    @Test
+    public void testFrench2()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", null, "La traduction d'un texte du français vers l'anglais.");
+
+        String[] posMapped = new String[] { "ART", "N", "PP", "ART", "N", "PP", "N", "PP", "ART",
+                "N", "PUNC" };
+
+        String[] posOriginal = new String[] { "D", "N", "P", "D", "N", "P", "N", "P", "D", "N",
+                "PUNC" };
+
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+    }
+    
     @Test
     public
     void testChinese()
