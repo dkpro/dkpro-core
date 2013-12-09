@@ -306,7 +306,7 @@ public class BerkeleyParserTest
         AssertAnnotations.assertTagset(Constituent.class, "negra", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
 	}
-
+	
 	@Test
 	public void testFrench()
 		throws Exception
@@ -315,26 +315,26 @@ public class BerkeleyParserTest
 				"compliqué, qui contient des constituants que de nombreuses dépendances et que " +
 				"possible.");
 
-		String[] constituentMapped = new String[] { "NP 18,30", "NP 59,62", "NP 72,88",
-				"NP 93,118", "ROOT 0,135", "S 0,135", "X 0,17", "X 122,134", "X 43,57", "X 59,88",
-				"X 63,71", "X 89,118" };
+        String[] constituentMapped = new String[] { "NP 20,88", "NP 35,42", "NP 59,62", "NP 72,88",
+                "NP 93,118", "PP 18,88", "PP 31,42", "ROOT 0,135", "S 0,135", "X 0,17",
+                "X 122,134", "X 43,57", "X 59,88", "X 63,71", "X 89,118" };
 
-		String[] constituentOriginal = new String[] { "AP 43,57", "NP 18,30", "NP 59,62",
-				"NP 72,88", "NP 93,118", "ROOT 0,135", "SENT 0,135", "Srel 59,88", "Ssub 122,134",
-				"Ssub 89,118", "VN 0,17", "VN 63,71" };
+        String[] constituentOriginal = new String[] { "AP 43,57", "NP 20,88", "NP 35,42",
+                "NP 59,62", "NP 72,88", "NP 93,118", "PP 18,88", "PP 31,42", "ROOT 0,135",
+                "SENT 0,135", "Srel 59,88", "Ssub 122,134", "Ssub 89,118", "VN 0,17", "VN 63,71" };
 
-		String[] posMapped = new String[] { "PR", "V", "V", "N", "N", "PP", "N", "ADV", "ADJ",
-				"PUNC", "PR", "V", "ART", "N", "CONJ", "ART", "ADJ", "N", "CONJ", "CONJ", "ADJ",
-				"PUNC" };
+        String[] posMapped = new String[] { "PR", "V", "V", "PP", "ART", "N", "PP", "N", "ADV",
+                "ADJ", "PUNC", "PR", "V", "ART", "N", "CONJ", "ART", "ADJ", "N", "CONJ", "CONJ",
+                "ADJ", "PUNC" };
 
-		String[] posOriginal = new String[] { "CL", "V", "V", "N", "N", "P", "N", "ADV", "A", ",",
-				"PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "." };
+        String[] posOriginal = new String[] { "CL", "V", "V", "P", "D", "N", "P", "N", "ADV", "A",
+                ",", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "." };
 
-		String pennTree = "(ROOT (ROOT (SENT (VN (CL Nous) (V avons) (V besoin)) (NP (N d'une) " +
-				"(N phrase)) (P par) (N exemple) (AP (ADV très) (A compliqué)) (, ,) (Srel (NP " +
-				"(PRO qui)) (VN (V contient)) (NP (D des) (N constituants))) (Ssub (C que) (NP " +
-				"(D de) (A nombreuses) (N dépendances))) (C et) (Ssub (C que) (A possible)) " +
-				"(. .))))";
+		String pennTree = "(ROOT (ROOT (SENT (VN (CL Nous) (V avons) (V besoin)) (PP (P d') (NP "
+		        + "(D une) (N phrase) (PP (P par) (NP (N exemple))) (AP (ADV très) (A compliqué)) "
+		        + "(, ,) (Srel (NP (PRO qui)) (VN (V contient)) (NP (D des) (N constituants))))) "
+		        + "(Ssub (C que) (NP (D de) (A nombreuses) (N dépendances))) (C et) (Ssub (C que) "
+		        + "(A possible)) (. .))))";
 
         String[] posTags = new String[] { "\"", ",", "-LRB-", "-RRB-", ".", ":", "A", "ADV",
                 "ADVP", "Afs", "C", "CC", "CL", "CS", "D", "Dmp", "ET", "I", "N", "ND", "P", "PC",
