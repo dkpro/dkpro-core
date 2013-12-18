@@ -61,7 +61,20 @@ public abstract class FrequencyCountProviderBase
     public double getLogProbability(String phrase)
         throws IOException
     {
-        return Math.log(getProbability(phrase));
+        double logProbability = Math.log(getProbability(phrase));
+        if (Double.isInfinite(logProbability)) {
+            long n = getNrOfNgrams(FrequencyUtils.getPhraseLength(phrase));
+
+            if (n == 0) {
+                return logProbability;
+            }
+            
+            // set a bit lower than 
+            // TODO we need real language models with backoff and smoothing
+            logProbability = 0.5 / n;
+        }
+         
+        return logProbability;
     }
 
     @Override
