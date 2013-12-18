@@ -45,21 +45,22 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class TigerXmlReaderTest
 {
+
     @Test
-    public void test() throws Exception
+    public void test()
+        throws Exception
     {
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
-        
+                TigerXmlReader.PARAM_LANGUAGE, "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
-        
-        String pennTree = "(VROOT ($( ``) (S (PN (NE Ross) (NE Perot)) (VAFIN wäre) " +
-        		"(ADV vielleicht) (NP (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))";
-        
+
+        String pennTree = "(VROOT ($( ``) (S (PN (NE Ross) (NE Perot)) (VAFIN wäre) "
+                + "(ADV vielleicht) (NP (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))";
+
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
     }
 
@@ -86,4 +87,30 @@ public class TigerXmlReaderTest
         String test = readFileToString(testDump, "UTF-8").trim();
 
         assertEquals(reference, test);
-    }}
+    }
+
+    @Test
+    public void semevalSampleTest()
+        throws Exception
+    {
+        File testDump = new File("target/semeval10-sample.xml.dump");
+        File referenceDump = new File("src/test/resources/semeval10-sample.xml.dump");
+
+        // create NegraExportReader output
+        CollectionReader reader = createReader(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]*-en-sample.xml", TigerXmlReader.PARAM_LANGUAGE,
+                "en");
+
+        AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
+
+        runPipeline(reader, cdw);
+
+        // compare both dumps
+        String reference = readFileToString(referenceDump, "UTF-8").trim();
+        String test = readFileToString(testDump, "UTF-8").trim();
+
+        assertEquals(reference, test);
+    }
+}

@@ -48,6 +48,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -59,6 +60,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
@@ -178,6 +181,7 @@ public class TigerXmlReader
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
         Map<String, Token> terminals = new HashMap<String, Token>();
+        Map<String, Constituent> nonterminals = new HashMap<String, Constituent>();
         for (TigerTerminal t : aSentence.graph.terminals) {
             Token token = aBuilder.add(t.word, Token.class);
             terminals.put(t.id, token);
@@ -210,13 +214,99 @@ public class TigerXmlReader
         sentence.addToIndexes();
 
         if (aSentence.graph.root != null) {
-            readNode(aBuilder.getJCas(), terminals, aSentence.graph, null, null,
+            readNode(aBuilder.getJCas(), terminals, nonterminals, aSentence.graph, null, null,
                     aSentence.graph.get(aSentence.graph.root));
+        }
+
+        // Read Semeval 2010 frame and role annotations
+        if (aSentence.sem != null) {
+            if (aSentence.sem.splitwords != null) {
+                // read splitwords as terminals/tokens
+                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords);
+            }
+            readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem);
         }
     }
 
-    private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals, TigerGraph aGraph,
-            Constituent aParent, TigerEdge aInEdge, TigerNode aNode)
+    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords)
+    {
+        for (TigerSplitword split : splitwords) {
+            Token orig = terminals.get(split.idref);
+            int begin = orig.getBegin();
+            int end = 0;
+            for (TigerPart part : split.parts) {
+                end = begin + part.word.length();
+                Token t = new Token(jCas, begin, end);
+                t.addToIndexes();
+                terminals.put(part.id, t);
+                begin = end;
+            }
+        }
+    }
+
+    private void readSem(JCas jCas, Map<String, Token> terminals,
+            Map<String, Constituent> nonterminals, TigerSem sem)
+    {
+        if (sem.frames != null) {
+            for (TigerFrame frame : sem.frames) {
+                SemanticPredicate p = new SemanticPredicate(jCas);
+                p.setCategory(frame.name);
+                int begin = Integer.MAX_VALUE;
+                int end = 0;
+                for (TigerFeNode fenode : frame.target.fenodes) {
+                    String reference = fenode.idref;
+                    if (terminals.containsKey(reference)) {
+                        Token target = terminals.get(reference);
+                        begin = Math.min(begin, target.getBegin());
+                        end = Math.max(end, target.getEnd());
+                    }
+                    else if (nonterminals.containsKey(reference)) {
+                        Constituent target = nonterminals.get(reference);
+                        begin = Math.min(begin, target.getBegin());
+                        end = Math.max(end, target.getEnd());
+                    }
+                }
+                p.setBegin(begin);
+                p.setEnd(end);
+
+                List<SemanticArgument> arguments = new ArrayList<SemanticArgument>();
+                if (frame.fes != null) {
+                    for (TigerFrameElement fe : frame.fes) {
+                        if (fe.fenodes != null) {
+                            for (TigerFeNode fenode : fe.fenodes) {
+                                if (terminals.containsKey(fenode.idref)) {
+                                    Token argument = terminals.get(fenode.idref);
+                                    SemanticArgument a = new SemanticArgument(jCas,
+                                            argument.getBegin(), argument.getEnd());
+                                    a.setRole(fe.name);
+                                    a.addToIndexes();
+                                    arguments.add(a);
+                                }
+                                else if (nonterminals.containsKey(fenode.idref)) {
+                                    Constituent argument = nonterminals.get(fenode.idref);
+                                    SemanticArgument a = new SemanticArgument(jCas,
+                                            argument.getBegin(), argument.getEnd());
+                                    a.setRole(fe.name);
+                                    a.addToIndexes();
+                                    arguments.add(a);
+                                }
+                            }
+                        }
+                    }
+                    FSArray fsa = new FSArray(jCas, arguments.size());
+                    for (int i = 0; i < arguments.size(); i++) {
+                        fsa.set(i, arguments.get(i));
+                    }
+                    p.setArguments(fsa);
+                }
+                p.addToIndexes();
+            }
+        }
+    }
+
+    private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
+            Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
+            TigerEdge aInEdge, TigerNode aNode)
     {
         int begin = Integer.MAX_VALUE;
         int end = 0;
@@ -231,7 +321,7 @@ public class TigerXmlReader
             }
 
             for (TigerEdge edge : aNode.edges) {
-                Annotation child = readNode(aJCas, aTerminals, aGraph, con, edge,
+                Annotation child = readNode(aJCas, aTerminals, aNonTerminals, aGraph, con, edge,
                         aGraph.get(edge.idref));
                 children.add(child);
                 begin = Math.min(child.getBegin(), begin);
@@ -247,6 +337,7 @@ public class TigerXmlReader
             con.setBegin(begin);
             con.setEnd(end);
             con.addToIndexes();
+            aNonTerminals.put(aNode.id, con);
             return con;
         }
         else /* Terminal node */{
@@ -320,6 +411,7 @@ public class TigerXmlReader
         @XmlID
         public String id;
         public TigerGraph graph;
+        public TigerSem sem;
 
         public String getText()
         {
@@ -332,6 +424,69 @@ public class TigerXmlReader
             }
             return sb.toString();
         }
+    }
+
+    public static class TigerSem
+    {
+        @XmlElementWrapper(name = "frames")
+        @XmlElement(name = "frame")
+        public List<TigerFrame> frames;
+
+        @XmlElementWrapper(name = "splitwords")
+        @XmlElement(name = "splitword")
+        public List<TigerSplitword> splitwords;
+    }
+
+    public static class TigerSplitword
+    {
+        @XmlAttribute
+        public String idref = null;
+        @XmlElement(name = "part")
+        public List<TigerPart> parts;
+    }
+
+    public static class TigerPart
+    {
+        @XmlAttribute
+        public String id;
+        @XmlAttribute
+        public String word;
+    }
+
+    public static class TigerFrame
+    {
+        @XmlAttribute
+        public String id;
+        @XmlAttribute
+        public String name;
+        @XmlElement(name = "fe")
+        public List<TigerFrameElement> fes;
+        @XmlElement(name = "target")
+        public TigerTarget target;
+    }
+
+    public static class TigerFrameElement
+    {
+        @XmlAttribute
+        public String id;
+        @XmlAttribute
+        public String name;
+        @XmlElement(name = "fenode")
+        public List<TigerFeNode> fenodes;
+    }
+
+    public static class TigerTarget
+    {
+        @XmlElement(name = "fenode")
+        public List<TigerFeNode> fenodes;
+    }
+
+    public static class TigerFeNode
+    {
+        @XmlAttribute
+        public String idref;
+        @XmlAttribute
+        public Boolean is_split;
     }
 
     public static class TigerGraph
