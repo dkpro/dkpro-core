@@ -616,6 +616,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.readability-asl</module>
 	</modules>
 	<build>
 		<plugins>
