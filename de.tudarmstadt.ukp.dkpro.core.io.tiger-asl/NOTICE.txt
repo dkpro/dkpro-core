@@ -14,3 +14,10 @@ We use it according to the conditions in the accompanying README file "Semeval20
   Evaluations: Recent Achievements and Future Directions (SEW-09),
   Boulder, Colorado, USA, June 4, 2009."
 
+
+File src/test/resources/tiger-sample.xml
+
+An example sentence from the TIGER corpus.
+
+   http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/TIGERCorpus/license/htmlicense.html
+   http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html
