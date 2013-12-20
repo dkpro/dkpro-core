@@ -93,13 +93,13 @@ public class TigerXmlReaderTest
     public void semevalSampleTest()
         throws Exception
     {
-        File testDump = new File("target/semeval10-sample.xml.dump");
-        File referenceDump = new File("src/test/resources/semeval10-sample.xml.dump");
+        File testDump = new File("target/semeval1010-sample.xml.dump");
+        File referenceDump = new File("src/test/resources/semeval1010-sample.xml.dump");
 
         // create NegraExportReader output
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                TigerXmlReader.PARAM_PATTERNS, "[+]*-en-sample.xml", TigerXmlReader.PARAM_LANGUAGE,
+                TigerXmlReader.PARAM_PATTERNS, "[+]semeval1010-en-sample.xml", TigerXmlReader.PARAM_LANGUAGE,
                 "en");
 
         AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
