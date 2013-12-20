@@ -1,0 +1,16 @@
+File semeval1010-en-sample.xml in de.tudarmstadt.ukp.dkpro.core.io.tiger-asl/src/test/resources:
+
+The example sentence in the file was extracted from the Semeval 2010 task 10 shared task Fdataset available here:
+http://semeval2.fbk.eu/semeval2.php?location=download&task_id=9&datatype=training
+
+We use it according to the conditions in the accompanying README file "Semeval2010.Task10.TrainingData.FN.readme":
+  "If you make use of these data for purposes other than participation in
+  the SemEval 2010 shared task "Linking Events and their Participants in
+  Discourse" we would kindly ask you to refer to the following paper:
+
+  Josef Ruppenhofer, Caroline Sporleder, Roser Morante, Collin Baker and
+  Martha Palmer.   "SemEval-2010 Task 10: Linking Events and Their
+  Participants in Discourse". The NAACL-HLT 2009 Workshop on Semantic
+  Evaluations: Recent Achievements and Future Directions (SEW-09),
+  Boulder, Colorado, USA, June 4, 2009."
+
