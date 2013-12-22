@@ -554,17 +554,20 @@ public class AssertAnnotations
 
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
     {
+        String result;
         if (aCollection.isEmpty()) {
-            return "{}";
+            result = "{}";
         }
         else {
             if (aLinebreak) {
-                return "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
+                result = "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
             }
             else {
-                return "{ \"" + join(aCollection, "\", \"") + "\" }";
+                result = "{ \"" + join(aCollection, "\", \"") + "\" }";
             }
         }
+        
+        return result.replace("\\", "\\\\");
     }
 
     private static String asCopyableString(Collection<String> aCollection)
