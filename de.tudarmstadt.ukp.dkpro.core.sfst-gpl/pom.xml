@@ -26,14 +26,11 @@
 		<version>1.6.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
+	<name>DKPro Core GPL - SFST</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -50,15 +47,26 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-default</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-default</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -71,13 +79,18 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</artifactId>
-				<version>20121025.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-default</artifactId>
+				<version>20110202.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-default</artifactId>
-				<version>02022011.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-default</artifactId>
+				<version>20090223.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</artifactId>
+				<version>20121025.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -86,5 +99,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<name>DKPro Core GPL - SFST</name>
 </project>
