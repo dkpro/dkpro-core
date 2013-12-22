@@ -32,10 +32,65 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-    <target name="separate-jars" depends="de, tr, install-executables"/>
+    <target name="separate-jars" depends="de, it, tr, install-executables"/>
+
+    <target name="de">
+	    <mkdir dir="target/download"/>
+		<!-- FILE: morphisto-02022011.a - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-02-02 | now        | 9d85be57380188890156b7fa49b5c122
+		  -->
+	    <get 
+	    	src="http://morphisto.googlecode.com/files/morphisto-02022011.a" 
+	    	dest="target/download/morphisto-02022011.a" 
+	    	skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/morphisto-02022011.a" 
+	    	md5="9d85be57380188890156b7fa49b5c122"
+	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20110202"
+    		metaDataVersion="1"
+            tool="morph" 
+	    	language="de" 
+	    	variant="default" 
+    		extension="a">
+		</install-stub-and-upstream-file>
+    </target>
+
+    <target name="it">
+	    <mkdir dir="target/download"/>
+		<!-- FILE: morph-it_automata.tgz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-02-23 | now        | 6a75a3ca1c244361a89a955df272654d
+		  -->
+	    <get 
+	    	src="http://sslmitdev-online.sslmit.unibo.it/linguistics/downloads/morph-it_automata.tgz" 
+	    	dest="target/download/morph-it_automata.tgz" 
+	    	skipexisting="true"/>
+		<gunzip 
+			src="target/download/morph-it_automata.tgz"
+			dest="target/download/morph-it_automata.tar"/>
+		<untar 
+			src="target/download/morph-it_automata.tar"
+			dest="target/download"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/morph-it_automata_048/pippi-automaton_048.a" 
+	    	md5="6a75a3ca1c244361a89a955df272654d"
+	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20090223"
+    		metaDataVersion="1"
+            tool="morph" 
+	    	language="it" 
+	    	variant="default" 
+    		extension="a">
+		</install-stub-and-upstream-file>
+    </target>
 
     <target name="tr">
         <mkdir dir="target/download"/>
+		<!-- FILE: trmorph.a - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-10-25 | now        | f16db56fb0203ede5c134938e7bdfca0
+		  -->
         <get 
         	src="http://dkpro-core-gpl.googlecode.com/files/trmorph.a" 
         	dest="target/download/trmorph.a" 
@@ -54,26 +109,6 @@
 		</install-stub-and-upstream-file>
     </target>
     
-    <target name="de">
-	    <mkdir dir="target/download"/>
-	    <get 
-	    	src="http://morphisto.googlecode.com/files/morphisto-02022011.a" 
-	    	dest="target/download/morphisto-02022011.a" 
-	    	skipexisting="true"/>
-    	<install-stub-and-upstream-file 
-            file="target/download/morphisto-02022011.a" 
-	    	md5="9d85be57380188890156b7fa49b5c122"
-	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
-	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
-    		upstreamVersion="02022011"
-    		metaDataVersion="1"
-            tool="morph" 
-	    	language="de" 
-	    	variant="default" 
-    		extension="a">
-		</install-stub-and-upstream-file>
-    </target>
-
     <target name="install-executables">        	       	
         <mkdir dir="target/download"/>
     	<get 
