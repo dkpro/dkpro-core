@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE bookinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <!--
 	Copyright 2013
@@ -29,4 +29,8 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.gettingstarted.xml"/>
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.typesystem.xml"/>
+
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.analytics.xml"/>
+
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.io.xml"/>
 </book>
