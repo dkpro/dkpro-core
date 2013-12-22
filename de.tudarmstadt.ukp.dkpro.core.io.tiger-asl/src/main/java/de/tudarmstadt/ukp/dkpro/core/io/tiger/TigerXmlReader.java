@@ -30,11 +30,6 @@ import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlValue;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -45,6 +40,7 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
@@ -67,7 +63,34 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.AnnotationDecl;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.Meta;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerEdge;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerFeNode;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerFrame;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerFrameElement;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerGraph;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNode;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNonTerminal;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerPart;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSem;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSplitword;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
 
+/**
+ * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the 
+ * Semeval 2010 task which includes semantic role data.
+ */
+@TypeCapability(
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument",
+            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -154,8 +177,7 @@ public class TigerXmlReader
             jb.close();
 
             // Can only do that after the builder is closed, otherwise the text is not yet set in
-            // the
-            // CAS and we get "null" for all token strings.
+            // the CAS and we get "null" for all token strings.
             if (pennTreeEnabled) {
                 for (ROOT root : select(aJCas, ROOT.class)) {
                     PennTree pt = new PennTree(aJCas, root.getBegin(), root.getEnd());
@@ -349,224 +371,5 @@ public class TigerXmlReader
     {
         return aEvent.isStartElement()
                 && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
-    }
-
-    public static class Meta
-    {
-        public String name;
-        public String author;
-        public String date;
-        public String description;
-        public String format;
-
-        @Override
-        public String toString()
-        {
-            return "Meta [name=" + name + ", author=" + author + ", date=" + date
-                    + ", description=" + description + ", format=" + format + "]";
-        }
-    }
-
-    public static class AnnotationDecl
-    {
-        @XmlElement(name = "feature")
-        public List<FeatureDecl> features;
-        @XmlElement(name = "edgelabel")
-        public List<EdgeLabelDecl> edgeLabels;
-        @XmlElement(name = "secedgelabel")
-        public List<EdgeLabelDecl> secEdgeLabels;
-    }
-
-    public static class EdgeLabelDecl
-    {
-        public List<ValueDecl> values;
-    }
-
-    public static class FeatureDecl
-    {
-        @XmlAttribute
-        public String name;
-        @XmlAttribute
-        public String domain;
-        @XmlElement(name = "value")
-        public List<ValueDecl> values;
-    }
-
-    public static class ValueDecl
-    {
-        @XmlAttribute
-        public String name;
-        @XmlValue
-        public String value;
-
-        @Override
-        public String toString()
-        {
-            return "ValueDecl [name=" + name + ", value=" + value + "]";
-        }
-    }
-
-    public static class TigerSentence
-    {
-        @XmlID
-        public String id;
-        public TigerGraph graph;
-        public TigerSem sem;
-
-        public String getText()
-        {
-            StringBuilder sb = new StringBuilder();
-            for (TigerTerminal t : graph.terminals) {
-                if (sb.length() > 0) {
-                    sb.append(' ');
-                }
-                sb.append(t.word);
-            }
-            return sb.toString();
-        }
-    }
-
-    public static class TigerSem
-    {
-        @XmlElementWrapper(name = "frames")
-        @XmlElement(name = "frame")
-        public List<TigerFrame> frames;
-
-        @XmlElementWrapper(name = "splitwords")
-        @XmlElement(name = "splitword")
-        public List<TigerSplitword> splitwords;
-    }
-
-    public static class TigerSplitword
-    {
-        @XmlAttribute
-        public String idref = null;
-        @XmlElement(name = "part")
-        public List<TigerPart> parts;
-    }
-
-    public static class TigerPart
-    {
-        @XmlAttribute
-        public String id;
-        @XmlAttribute
-        public String word;
-    }
-
-    public static class TigerFrame
-    {
-        @XmlAttribute
-        public String id;
-        @XmlAttribute
-        public String name;
-        @XmlElement(name = "fe")
-        public List<TigerFrameElement> fes;
-        @XmlElement(name = "target")
-        public TigerTarget target;
-    }
-
-    public static class TigerFrameElement
-    {
-        @XmlAttribute
-        public String id;
-        @XmlAttribute
-        public String name;
-        @XmlElement(name = "fenode")
-        public List<TigerFeNode> fenodes;
-    }
-
-    public static class TigerTarget
-    {
-        @XmlElement(name = "fenode")
-        public List<TigerFeNode> fenodes;
-    }
-
-    public static class TigerFeNode
-    {
-        @XmlAttribute
-        public String idref;
-        @XmlAttribute
-        public Boolean is_split;
-    }
-
-    public static class TigerGraph
-    {
-        @XmlAttribute
-        public String root;
-        @XmlAttribute
-        public boolean discontinuous;
-        @XmlElementWrapper(name = "terminals")
-        @XmlElement(name = "t")
-        public List<TigerTerminal> terminals;
-        @XmlElementWrapper(name = "nonterminals")
-        @XmlElement(name = "nt")
-        public List<TigerNonTerminal> nonTerminals;
-
-        TigerNode get(String aId)
-        {
-            for (TigerNode n : terminals) {
-                if (aId.equals(n.id)) {
-                    return n;
-                }
-            }
-            for (TigerNode n : nonTerminals) {
-                if (aId.equals(n.id)) {
-                    return n;
-                }
-            }
-            return null;
-        }
-    }
-
-    public static class TigerNode
-    {
-        @XmlAttribute
-        public String id;
-        @XmlElement(name = "edge")
-        public List<TigerEdge> edges;
-        @XmlElement(name = "secedge")
-        public List<TigerEdge> secEdges;
-    }
-
-    public static class TigerTerminal
-        extends TigerNode
-    {
-        @XmlAttribute
-        public String word;
-        @XmlAttribute
-        public String lemma;
-        @XmlAttribute
-        public String pos;
-        @XmlAttribute
-        public String morph;
-        @XmlAttribute(name = "case")
-        public String casus;
-        @XmlAttribute
-        public String number;
-        @XmlAttribute
-        public String gender;
-        @XmlAttribute
-        public String person;
-        @XmlAttribute
-        public String degree;
-        @XmlAttribute
-        public String tense;
-        @XmlAttribute
-        public String mood;
-    }
-
-    public static class TigerNonTerminal
-        extends TigerNode
-    {
-        @XmlAttribute
-        public String cat;
-    }
-
-    public static class TigerEdge
-    {
-        @XmlAttribute
-        public String idref;
-        @XmlAttribute
-        public String label;
     }
 }
