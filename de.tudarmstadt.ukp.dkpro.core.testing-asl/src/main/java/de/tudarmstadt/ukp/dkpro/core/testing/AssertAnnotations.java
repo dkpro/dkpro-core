@@ -53,6 +53,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
@@ -260,6 +261,49 @@ public class AssertAnnotations
             System.out.printf("%-20s - Expected: %s%n", "Constituents (map.)",
                     asCopyableString(sortedExpectedMapped));
             System.out.printf("%-20s - Actual  : %s%n", "Constituents (map.)",
+                    asCopyableString(sortedActualMapped));
+        }
+
+        if (aExpectedOriginal != null) {
+            assertEquals(asCopyableString(sortedExpectedOriginal, true),
+                    asCopyableString(sortedActualOriginal, true));
+        }
+        if (aExpectedMapped != null) {
+            assertEquals(asCopyableString(sortedExpectedMapped, true),
+                    asCopyableString(sortedActualMapped, true));
+        }
+    }
+
+    public static void assertChunks(String[] aExpectedMapped, String[] aExpectedOriginal,
+            Collection<Chunk> aActual)
+    {
+        String[] actualTags = new String[aActual.size()];
+        String[] actualClasses = new String[aActual.size()];
+
+        int i = 0;
+        for (Chunk a : aActual) {
+            actualTags[i] = String.format("%s %d,%d", a.getChunkValue(), a.getBegin(), a.getEnd());
+            actualClasses[i] = String.format("%s %d,%d", a.getType().getShortName(), a.getBegin(),
+                    a.getEnd());
+            i++;
+        }
+
+        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
+        List<String> sortedExpectedMapped = deduplicateAndSort(asList(aExpectedMapped));
+        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
+        List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
+
+        if (aExpectedOriginal != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Chunks (orig.)",
+                    asCopyableString(sortedExpectedOriginal));
+            System.out.printf("%-20s - Actual  : %s%n", "Chunks (orig.)",
+                    asCopyableString(sortedActualOriginal));
+        }
+
+        if (aExpectedMapped != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Chunks (map.)",
+                    asCopyableString(sortedExpectedMapped));
+            System.out.printf("%-20s - Actual  : %s%n", "Chunks (map.)",
                     asCopyableString(sortedActualMapped));
         }
 
@@ -492,6 +536,10 @@ public class AssertAnnotations
         else if (aLayer == Constituent.class) {
             pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
                     + "core/api/syntax/tagset/${language}-${tagset}-constituency.map";
+        }
+        else if (aLayer == Chunk.class) {
+            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
+                    + "core/api/syntax/tagset/${language}-${tagset}-chunk.map";
         }
         else {
             throw new IllegalArgumentException("Unsupported layer: " + aLayer.getName());
