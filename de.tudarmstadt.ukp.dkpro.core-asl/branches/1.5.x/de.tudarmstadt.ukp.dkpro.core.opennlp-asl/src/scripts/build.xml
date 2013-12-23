@@ -214,17 +214,28 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 		
-		<!-- THIS IS A CHUNKER MODEL, NOT A PARSER MODEL. Also need to check which postags are used -->
+		<!-- This model is quite useless. It only knows of noun phrases -->
 		<!-- FILE: OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip - - - - - - - - - - - - - - - - - -
 		  - 2011-09-05 | now        | 412cd69c1a67e2e1e6dc947c6815dcaa
-    	<get src="http://gromgull.net/2010/01/npchunking/OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip" dest="target/download/de-parser-chunking.bin" skipexisting="true"/>
-    	<install-model-file groupId="de.tudarmstadt.ukp.dkpro.core" artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		file="target/download/de-parser-chunking.bin" md5="412cd69c1a67e2e1e6dc947c6815dcaa"
-    		tool="parser" language="de" variant="chunking" extension="bin" version="20110905.0">
+    	<get 
+    		src="http://gromgull.net/2010/01/npchunking/OpenNLP_1.5.1-German-Chunker-TigerCorps07.zip" 
+    		dest="target/download/de-parser-chunking.bin" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/de-parser-chunking.bin" 
+    		md5="412cd69c1a67e2e1e6dc947c6815dcaa"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20110905"
+    		metaDataVersion="1"
+    		tool="chunker" 
+    		language="de" 
+    		variant="default" 
+    		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="stts"/>
 			</metadata>
-    	</install-model-file>
+    	</install-stub-and-upstream-file>
 		  -->
 	</target>
 
@@ -317,6 +328,31 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 
+		<!-- FILE: models-1.5/en-chunker.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-06-16 | now        | f058c62bcdab7b6d6113a3ceea213b91
+		  -->
+    	<get 
+    		src="http://opennlp.sourceforge.net/models-1.5/en-chunker.bin" 
+    		dest="target/download/en-chunker.bin" 
+    		skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/en-chunker.bin" 
+    		md5="f058c62bcdab7b6d6113a3ceea213b91"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20100908"
+    		metaDataVersion="1"
+    		tool="chunker" 
+    		language="en" 
+    		variant="default" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+				<!-- http://www.ai.mit.edu/projects/jmlr/papers/volume2/zhang02c/zhang02c.pdf -->
+	    		<entry key="chunk.tagset" value="conll2000"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
 		<!-- FILE: models-1.5/en-parser-chunking.bin - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2012-06-16 | now        | 47c1b3f4dd7d08e992abdca4e16638ce
 		  -->
