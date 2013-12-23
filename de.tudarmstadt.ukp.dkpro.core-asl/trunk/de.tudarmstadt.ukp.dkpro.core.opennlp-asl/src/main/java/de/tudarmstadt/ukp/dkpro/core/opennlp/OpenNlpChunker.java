@@ -187,6 +187,7 @@ public class OpenNlpChunker
                     throw new IllegalStateException("Every token must have a POS tag.");
                 }
 			    tokenTexts[i] = t.getPos().getPosValue();
+                //System.out.printf("%s %s %n", t.getCoveredText(), t.getPos().getPosValue());
 			    i++;
 			}
 
@@ -215,9 +216,8 @@ public class OpenNlpChunker
         {
             int i = 0;
             for (Token token : aTokens) {
-                System.out.printf("%s %s %n", token.getCoveredText(), aChunkTags[i]);
+                // System.out.printf("%s %s %n", token.getCoveredText(), aChunkTags[i]);
                 String fields[] = aChunkTags[i].split("-");
-                //String tag = fields1[0];
                 String flag = fields.length == 2 ? fields[0] : "NONE";
                 String chunk = fields.length == 2 ? fields[1] : fields[0];
     
