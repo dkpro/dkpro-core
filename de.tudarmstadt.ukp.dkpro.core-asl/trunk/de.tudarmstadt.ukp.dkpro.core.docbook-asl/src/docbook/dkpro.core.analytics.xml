@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"[
+<!ENTITY imgroot "images/dkpro.core.analytics/" >
+]>
 <!--
 	Copyright 2013
 	Ubiquitous Knowledge Processing (UKP) Lab
@@ -22,9 +24,18 @@
   <title>Analysis Components</title>
 	<para>This section provides an overview of the analysis componens that can be deployed at the
 		different levels of analysis.</para>
+	<para/>
 	<section>
 		<title>Coreference</title>
 		<para/>
+		<figure>
+			<title>Coreference types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;coreference.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<table frame="all">
 			<title>Coreference components</title>
 			<tgroup cols="2">
@@ -121,6 +132,14 @@
 	<section>
 		<title>Language Identification</title>
 		<para/>
+		<figure>
+			<title>DocumentAnnotation type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="20%" fileref="&imgroot;language_identification.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<table frame="all">
 			<title>Language identification components</title>
 			<tgroup cols="2">
@@ -148,6 +167,14 @@
 	<section>
 		<title>Lemmatization</title>
 		<para/>
+		<figure>
+			<title>Lemma type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;lemmatization.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<table frame="all">
 			<title>Lemmatization components</title>
 			<tgroup cols="2">
@@ -292,6 +319,14 @@
 	<section>
 		<title>Part-of-Speech Tagging</title>
 		<para/>
+		<figure>
+			<title>Part-of-speech type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;part-of-speech.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<table frame="all">
 			<title>Part-of-speech tagging components</title>
 			<tgroup cols="2">
@@ -347,6 +382,14 @@
 	<section>
 		<title>Segmentation / Tokenization</title>
 		<para>Segmenter components identify sentence boundaries and tokens.</para>
+		<figure>
+			<title>Segmentation types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="30%" fileref="&imgroot;segmentation.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<table frame="all">
 			<title>Segmentation components</title>
 			<tgroup cols="2">
@@ -440,6 +483,14 @@
 	<section>
 		<title>Stemming</title>
 		<para/>
+		<figure>
+			<title>Stem type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;stemming.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 		<table frame="all">
 			<title>Stemming components</title>
 			<tgroup cols="2">
