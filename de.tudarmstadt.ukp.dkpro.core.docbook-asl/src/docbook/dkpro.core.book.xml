@@ -19,7 +19,7 @@
 	limitations under the License.
 -->
 <book lang="en">
-  <title>DKPro Core &#8482; Guide and Reference</title>
+  <title>DKPro Core&#8482; Guide and Reference</title>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="common_book_info.xml"/>
     
   <toc/>
@@ -33,4 +33,6 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.analytics.xml"/>
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.io.xml"/>
+
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.testing.xml"/>
 </book>
