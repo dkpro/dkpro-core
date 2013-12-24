@@ -46,6 +46,32 @@
 		the leaf child project has a docbook directory -->
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uima-build-helper-maven-plugin</artifactId>
+				<version>7</version>
+				<executions>
+					<execution>
+						<id>set buildYear and buildMonth</id>
+						<goals>
+							<goal>parse-date-time</goal>
+						</goals>
+						<configuration>
+							<parseSpecs>
+								<parseSpec>
+									<name>buildYear</name>
+									<format>yyyy</format>
+								</parseSpec>
+								<parseSpec>
+									<name>buildMonth</name>
+									<format>MMMM</format>
+								</parseSpec>
+							</parseSpecs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>     
+		
 			<!-- use the dependency:unpack goal to get the shared resource
 				that has the docbook-shared directory
 				Unpack into spot relative to project - because
