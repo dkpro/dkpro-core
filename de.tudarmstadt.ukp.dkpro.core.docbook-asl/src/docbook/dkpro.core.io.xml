@@ -23,8 +23,7 @@
 	<para>This section gives an overview on the I/O components. The components are organized into one
 		module per file type. These modules contain typically one reader and/or writer
 		component.</para>
-	<para>All readers initialize the CAS with a <link linkend="ugr.dkpro.core.typesystem.DocumentMetaData">DocumentMetaData</link>
-		annotation.</para>
+	<para>All readers initialize the CAS with a DocumentMetaData annotation.</para>
 	<para>Most readers and writers do not support all features of the respective formats.
 		Additionally,  readers and writers may onle support  a specific variant of a format.</para>
 	<section>
@@ -82,6 +81,14 @@
 				</tbody>
 			</tgroup>
 		</table>
+		<para>See also:</para>
+		<itemizedlist>
+			<listitem>
+				<para><ulink url="http://www.sfb632.uni-potsdam.de/annis/">ANNIS: Search and
+						Visualization in Multilayer Linguistic Corpora</ulink>
+				</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	<section>
 		<title>Binary CAS</title>
@@ -118,7 +125,14 @@
 				</tbody>
 			</tgroup>
 		</table>
-		<para/>
+		<para>See also:</para>
+		<itemizedlist>
+			<listitem>
+				<para><ulink
+						url="http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress"
+						>Compressed Binary CASes</ulink></para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	<section>
 		<title>Bliki (Wikipedia)</title>
@@ -217,6 +231,10 @@
 			<listitem>
 				<para><ulink url="http://www.linguateca.pt/floresta/CoNLL-X">Floresta Sintá(c)tica
 						(Bosque-CONLL)</ulink> - Portuguese (CONLL 2006)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://stp.lingfil.uu.se/%7Emojgan/UPDT.html">Uppsala Persian
+						Dependency Treebank</ulink> - Persian (Farsi) (CONLL 2006)</para>
 			</listitem>
 			<listitem>
 				<para><ulink url="http://nl.ijs.si/sdt/">Slovene Dependency Treebank</ulink> -

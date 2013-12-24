@@ -104,6 +104,7 @@
 						<configuration>
 							<targetDirectory>${project.build.directory}/site/d</targetDirectory>
 							<htmlCustomization>${project.build.directory}/docbook-shared/top/html-single.xsl</htmlCustomization>
+							<ignoreImageScaling>true</ignoreImageScaling>
 						</configuration>
 					</execution>
 					<execution>

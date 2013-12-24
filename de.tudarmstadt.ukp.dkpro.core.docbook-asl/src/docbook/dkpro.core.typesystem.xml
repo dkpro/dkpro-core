@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"[
+<!ENTITY imgroot "images/dkpro.core.typesystem/" >
+]>
 <!--
 	Copyright 2013
 	Ubiquitous Knowledge Processing (UKP) Lab
@@ -29,26 +31,66 @@
     est Lorem ipsum dolor sit amet.</para>
 	<section>
 		<title>Meta data</title>
-		<para/>
-		<section>
-			<title id="ugr.dkpro.core.typesystem.DocumentMetaData">DocumentMetaData</title>
-			<para/>
-		</section>
+		<para/>		
+		<figure>
+			<title>Metadata types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="20%" fileref="&imgroot;document_meta_data.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 	</section>
 	<section>
 		<title>Segmentation</title>
 		<para/>
+		<figure>
+			<title>Segmentation types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="100%" fileref="&imgroot;segmentation.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 	</section>
 	<section>
 		<title>Morphology</title>
 		<para/>
 	</section>
 	<section>
+		<title>Coreference</title>
+		<para/>
+		<figure>
+			<title>Coreference types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;coreference.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
+	<section>
 		<title>Syntax</title>
 		<para/>
+		<figure>
+			<title>Syntax types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="100%" fileref="&imgroot;syntax.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 	</section>
 	<section>
 		<title>Semantics</title>
 		<para/>
+		<figure>
+			<title>Segmentation types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;semantics.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
 	</section>
 </chapter>
