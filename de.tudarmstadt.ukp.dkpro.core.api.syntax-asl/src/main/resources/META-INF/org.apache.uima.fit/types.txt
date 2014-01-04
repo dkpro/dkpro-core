@@ -1,6 +1,5 @@
 classpath*:desc/type/Chunks.xml
 classpath*:desc/type/Constituency.xml
 classpath*:desc/type/Dependency.xml
-classpath*:desc/type/IOB.xml
 classpath*:desc/type/PennTree.xml
 classpath*:desc/type/Tag.xml
