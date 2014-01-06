@@ -41,17 +41,18 @@ public class OpenNlpChunkerTaggerTest
         JCas jcas = runTest("en", null, "We need a very complicated example sentence, which " +
                 "contains as many constituents and dependencies as possible.");
 
-        String[] chunkMapped = new String[] { "Chunk 0,43", "Chunk 109,110", "Chunk 43,44",
-                "Chunk 45,109" };
-
-        String[] chunkOriginal = new String[] { "NP 0,43", "NP 45,109", "O 109,110", "O 43,44" };
+        String[] chunks = new String[] { 
+                "[  0, 43]Chunk(NP) (We need a very complicated example sentence)",
+                "[ 43, 44]Chunk(O) (,)",
+                "[ 45,109]Chunk(NP) (which contains as many constituents and dependencies as possible)",
+                "[109,110]Chunk(O) (.)" };
 
         String[] chunkTags = new String[] { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "O",
                 "PP", "PRT", "SBAR", "UCP", "VP" };
 
         // String[] unmappedChunk = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
-        assertChunks(chunkMapped, chunkOriginal, select(jcas, Chunk.class));
+        assertChunks(chunks, select(jcas, Chunk.class));
         assertTagset(Chunk.class, "conll2000", chunkTags, jcas);
         // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }
