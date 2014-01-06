@@ -40,7 +40,27 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<repository>
+			<!-- For uimaFIT SNAPSHOT -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<!-- For uimaFIT SNAPSHOT maven plugin -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 	<distributionManagement>
 		<repository>
 			<id>ukp-oss</id>
@@ -58,6 +78,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<uimafit.version>2.0.1-SNAPSHOT</uimafit.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -187,7 +208,7 @@
 				<plugin>
 					<groupId>org.apache.uima</groupId>
 					<artifactId>uimafit-maven-plugin</artifactId>
-					<version>2.0.0</version>
+					<version>${uimafit.version}</version>
 					<configuration>
 						<componentVendor>DKPro Core Project</componentVendor>
 						<componentCopyright>
