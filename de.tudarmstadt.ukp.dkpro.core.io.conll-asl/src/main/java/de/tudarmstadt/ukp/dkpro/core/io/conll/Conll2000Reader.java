@@ -170,8 +170,12 @@ public class Conll2000Reader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        posMappingProvider.configure(aJCas.getCas());
-        chunkMappingProvider.configure(aJCas.getCas());
+        if (posEnabled) {
+            posMappingProvider.configure(aJCas.getCas());
+        }
+        if (chunkEnabled) {
+            chunkMappingProvider.configure(aJCas.getCas());
+        }
         
         Resource res = nextFile();
         initCas(aJCas, res);
