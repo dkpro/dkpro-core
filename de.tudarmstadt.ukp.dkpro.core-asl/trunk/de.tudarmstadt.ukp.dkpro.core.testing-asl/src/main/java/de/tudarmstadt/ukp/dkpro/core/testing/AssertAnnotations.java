@@ -444,15 +444,18 @@ public class AssertAnnotations
     public static void assertCoreference(String[][] aExpected, Collection<CoreferenceChain> aActual)
     {
         List<CoreferenceChain> actual = new ArrayList<CoreferenceChain>(aActual);
-        assertEquals(aExpected.length, aActual.size());
-        for (int i = 0; i < aExpected.length; i++) {
+        for (String[] i : aExpected) {
             System.out.printf("%-20s - Expected: %s%n", "Coreference",
-                    asCopyableString(asList(aExpected[i])));
-            System.out.printf("%-20s - Actual  : %s%n", "Coreference",
-                    asCopyableString(toText(actual.get(i).links())));
+                    asCopyableString(asList(i)));
         }
-        
-        for (int i = 0; i < aExpected.length; i++) {
+
+        for (CoreferenceChain i : actual) {
+            System.out.printf("%-20s - Actual  : %s%n", "Coreference",
+                    asCopyableString(toText(i.links())));
+        }
+
+        assertEquals(aExpected.length, aActual.size());
+        for (int i = 0; i < actual.size(); i++) {
             assertEquals(asCopyableString(asList(aExpected[i]), true),
                     asCopyableString(toText(actual.get(i).links()), true));
         }
