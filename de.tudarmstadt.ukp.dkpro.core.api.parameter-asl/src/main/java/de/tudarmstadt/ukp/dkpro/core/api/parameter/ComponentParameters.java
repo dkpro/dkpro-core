@@ -142,6 +142,8 @@ public final class ComponentParameters
 
 	public static final String PARAM_READ_POS = READ + POS;
 
+    public static final String PARAM_READ_CHUNK = READ + CHUNK;
+    
 	public static final String PARAM_READ_CONSTITUENT = READ + CONSTITUENT;
 	
 	public static final String PARAM_READ_PENN_TREE = READ + PENN_TREE;
@@ -179,6 +181,13 @@ public final class ComponentParameters
 	 */
 	public static final String PARAM_POS_TAG_SET = POS + TAG_SET;
 
+    /**
+     * Use this chunk tag set to use to resolve the tag set mapping instead of using the
+     * tag set defined as part of the model meta data. This can be useful if a custom model is
+     * specified which does not have such meta data, or it can be used in readers.
+     */
+    public static final String PARAM_CHUNK_TAG_SET = CHUNK + TAG_SET;
+	
 	// =============================================================================================
 	// Configure mapping of tags to annotation types for different kinds of annotations.
 	//
@@ -194,8 +203,6 @@ public final class ComponentParameters
 	 * Location of the mapping file for chunk tags to UIMA types.
 	 */
 	public static final String PARAM_CHUNK_MAPPING_LOCATION = CHUNK + MAPPING_LOCATION;
-	public static final String PARAM_READ_CHUNK = READ + CHUNK;
-    public static final String PARAM_CHUNK_TAG_SET = CHUNK + TAG_SET;
 
 	/**
 	 * Location of the mapping file for named entity tags to UIMA types.
