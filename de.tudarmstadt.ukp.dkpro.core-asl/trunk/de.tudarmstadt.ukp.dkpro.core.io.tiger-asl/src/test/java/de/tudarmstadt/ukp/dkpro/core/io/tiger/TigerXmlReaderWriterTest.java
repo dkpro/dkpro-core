@@ -19,17 +19,17 @@ package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.xml.sax.InputSource;
 
 public class TigerXmlReaderWriterTest
 {
@@ -52,12 +52,8 @@ public class TigerXmlReaderWriterTest
         
         SimplePipeline.runPipeline(reader, writer);
         
-        assertEquals(
-                FileUtils.readFileToString(
-                        new File("src/test/resources/simple-sentence.xml"), 
-                        "UTF-8").trim(),
-                FileUtils.readFileToString(
-                        new File(targetFolder, "simple-sentence.xml"), 
-                        "UTF-8").trim());
+        XMLAssert.assertXMLEqual(
+                new InputSource("src/test/resources/simple-sentence.xml"),
+                new InputSource(new File(targetFolder, "simple-sentence.xml").getPath()));
     }
 }
