@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2013
+ * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -27,10 +27,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 /**
- * Converts a chunk annotations into IOB-style 
+ * Converts a chunk annotations into IOB-style
  * 
  * @author Torsten Zesch
- *
  */
 public class IobEncoder
 {
@@ -42,8 +41,8 @@ public class IobEncoder
     {
         super();
         jcas = aJCas;
-        
-        // fill map for whole jcas in order to efficiently encode IOB
+
+        // fill map for whole JCas in order to efficiently encode IOB
         iobBeginMap = new HashMap<Integer, String>();
         iobInsideMap = new HashMap<Integer, String>();
 
@@ -58,22 +57,20 @@ public class IobEncoder
             }
         }
     }
-    
+
     /**
      * Returns the IOB tag for a given token.
-     * @param annotation
-     * @return
      */
     public String encode(Token token)
     {
         if (iobBeginMap.containsKey(token.getBegin())) {
             return "B-" + iobBeginMap.get(token.getBegin());
         }
-        
+
         if (iobInsideMap.containsKey(token.getBegin())) {
             return "I-" + iobInsideMap.get(token.getBegin());
         }
-        
+
         return "O";
     }
 }
