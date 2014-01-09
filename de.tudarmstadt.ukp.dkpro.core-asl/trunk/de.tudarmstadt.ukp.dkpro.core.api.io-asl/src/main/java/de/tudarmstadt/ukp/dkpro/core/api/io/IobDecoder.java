@@ -26,6 +26,14 @@ import org.apache.uima.cas.text.AnnotationFS;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 
+/**
+ * Creates Chunk annotations from IOB encoded data.
+ * For example, the sequence (B-NP I-NP) will be converted into a NP-chunk
+ * annotation spanning two tokens.
+ * 
+ * @author Richard Eckart
+ *
+ */
 public class IobDecoder
 {
     private CAS cas;
