@@ -18,16 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
+import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
@@ -54,12 +54,8 @@ public class TigerXmlWriterTest
                 TigerXmlWriter.PARAM_TARGET_LOCATION, targetFolder);
         writer.process(jcas);
         
-        assertEquals(
-                FileUtils.readFileToString(
-                        new File("src/test/resources/simple-sentence.xml"), 
-                        "UTF-8").trim(),
-                FileUtils.readFileToString(
-                        new File(targetFolder, "dummy.xml"), 
-                        "UTF-8").trim());
+        XMLAssert.assertXMLEqual(
+                new InputSource("src/test/resources/simple-sentence.xml"),
+                new InputSource(new File(targetFolder, "dummy.xml").getPath()));
     }
 }
