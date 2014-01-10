@@ -18,7 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -34,6 +36,7 @@ import org.languagetool.rules.RuleMatch;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 
 /**
  * Detect grammatical errors in text using LanguageTool a rule based grammar checker.
@@ -51,65 +54,52 @@ public class LanguageToolChecker
 	 */
 	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
 	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	private String languageCode;
+	private String language;
 
-	private Language language;
-
-	private boolean languageOverride = false;
-	private JLanguageTool langTool;
-
+	private ModelProviderBase<JLanguageTool> modelProvider;
+	
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
 	{
 		super.initialize(aContext);
-
-		languageOverride = true;
-		language = Language.getLanguageForShortName(languageCode);
-		if (language == null) {
-			throw new ResourceInitializationException(new Throwable("The language code '"
-					+ languageCode + "' is not supported by LanguageTool."));
-		}
-		try {
-			langTool = new JLanguageTool(language);
-			langTool.activateDefaultPatternRules();
-		}
-		catch (Exception e) {
-			throw new ResourceInitializationException(e);
-		}
+		
+		modelProvider = new ModelProviderBase<JLanguageTool>() {
+		    {
+                setContextObject(LanguageToolChecker.this);
+                setDefault(LOCATION, NOT_REQUIRED);
+                
+                setOverride(LANGUAGE, language);
+		    }
+		    
+		    @Override
+		    protected JLanguageTool produceResource(URL aUrl)
+		        throws IOException
+		    {
+                Properties props = getAggregatedProperties();
+		        Language lang = Language.getLanguageForShortName(props.getProperty(LANGUAGE));
+		        if (lang == null) {
+		            throw new IOException("The language code '"
+		                    + props.getProperty(LANGUAGE) + "' is not supported by LanguageTool.");
+		        }
+		        JLanguageTool langTool = new JLanguageTool(lang);
+	            langTool.activateDefaultPatternRules();
+	            return langTool;
+		    }
+		};
 	}
 
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
-		if (!languageOverride && aJCas.getDocumentLanguage().equals("x-unspecified")) {
-			throw new AnalysisEngineProcessException(new Throwable(
-					"Neither the LanguageCode parameter " + "nor the document language is set. "
-							+ "Do not know what language to use. Exiting."));
-		}
-
-		if (!languageOverride && !languageCode.equals(aJCas.getDocumentLanguage())) {
-			language = Language.getLanguageForShortName(aJCas.getDocumentLanguage());
-			if (language == null) {
-				throw new AnalysisEngineProcessException(new Throwable("The language code '"
-						+ languageCode + "' is not supported by LanguageTool."));
-			}
-			languageCode = aJCas.getDocumentLanguage();
-			try {
-				langTool = new JLanguageTool(language);
-				langTool.activateDefaultPatternRules();
-			}
-			catch (IOException e) {
-				throw new AnalysisEngineProcessException(e);
-			}
-		}
-
+	    modelProvider.configure(aJCas.getCas());
+	    
 		// get document text
 		String docText = aJCas.getDocumentText();
 
 		try {
-			List<RuleMatch> matches = langTool.check(docText);
+			List<RuleMatch> matches = modelProvider.getResource().check(docText);
 			for (RuleMatch match : matches) {
 				// create annotation
 				GrammarAnomaly annotation = new GrammarAnomaly(aJCas);
