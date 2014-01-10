@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.util.JCasUtil;
@@ -12,6 +14,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.NC;
 
 public class IobEncoderTest
@@ -26,7 +29,11 @@ public class IobEncoderTest
         };
         
         JCas jcas = getJCas();
-        IobEncoder encoder = new IobEncoder(jcas);
+
+        Type chunkType = JCasUtil.getType(jcas, Chunk.class);
+        Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
+
+        IobEncoder encoder = new IobEncoder(jcas.getCas(), chunkType, chunkValue);
         
         int i=0;
         for (Token token : JCasUtil.select(jcas, Token.class)) {

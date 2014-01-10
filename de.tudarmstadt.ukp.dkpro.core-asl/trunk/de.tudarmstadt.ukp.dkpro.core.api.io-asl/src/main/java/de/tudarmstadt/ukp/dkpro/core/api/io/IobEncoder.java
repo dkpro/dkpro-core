@@ -20,57 +20,63 @@ package de.tudarmstadt.ukp.dkpro.core.api.io;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.uima.fit.util.JCasUtil;
-import org.apache.uima.jcas.JCas;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.util.CasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 /**
- * Converts a chunk annotations into IOB-style
+ * Converts a chunk annotations into IOB-style 
  * 
  * @author Torsten Zesch
+ *
  */
 public class IobEncoder
-{
-    private JCas jcas;
+{  
     private Map<Integer, String> iobBeginMap;
     private Map<Integer, String> iobInsideMap;
 
-    public IobEncoder(JCas aJCas)
+    public IobEncoder(CAS aCas, Type chunkType, Feature aChunkValueFeature)
     {
         super();
-        jcas = aJCas;
-
-        // fill map for whole JCas in order to efficiently encode IOB
+        
+        // fill map for whole jcas in order to efficiently encode IOB
         iobBeginMap = new HashMap<Integer, String>();
         iobInsideMap = new HashMap<Integer, String>();
 
-        for (Chunk chunk : JCasUtil.select(jcas, Chunk.class)) {
-            for (Token token : JCasUtil.selectCovered(jcas, Token.class, chunk)) {
+        for (AnnotationFS chunk : CasUtil.select(aCas, chunkType)) {
+            String chunkValue = chunk.getStringValue(aChunkValueFeature);
+
+            for (AnnotationFS token : CasUtil.selectCovered(aCas, CasUtil.getType(aCas, Token.class), chunk)) {
+
                 if (token.getBegin() == chunk.getBegin()) {
-                    iobBeginMap.put(token.getBegin(), chunk.getChunkValue());
+                    iobBeginMap.put(token.getBegin(), chunkValue);
                 }
                 else {
-                    iobInsideMap.put(token.getBegin(), chunk.getChunkValue());
+                    iobInsideMap.put(token.getBegin(), chunkValue);
                 }
             }
         }
     }
-
+    
     /**
      * Returns the IOB tag for a given token.
+     * @param annotation
+     * @return
      */
     public String encode(Token token)
     {
         if (iobBeginMap.containsKey(token.getBegin())) {
             return "B-" + iobBeginMap.get(token.getBegin());
         }
-
+        
         if (iobInsideMap.containsKey(token.getBegin())) {
             return "I-" + iobInsideMap.get(token.getBegin());
         }
-
+        
         return "O";
     }
 }
