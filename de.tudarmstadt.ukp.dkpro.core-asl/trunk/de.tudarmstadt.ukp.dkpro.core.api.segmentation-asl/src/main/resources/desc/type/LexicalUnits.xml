@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Segmentation</name>
   <description/>
   <version>${version}</version>
@@ -29,13 +28,6 @@
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence</name>
       <description/>
       <supertypeName>uima.tcas.Annotation</supertypeName>
-    <features>
-        <featureDescription>
-          <name>comment</name>
-          <description>Comments to be added to a sentence such as source of the sentence obtained, id of the sentence to be preserved,...</description>
-          <rangeTypeName>uima.cas.String</rangeTypeName>
-        </featureDescription>
-      </features>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph</name>
@@ -73,7 +65,7 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound</name>
-      <description>This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two Splits.</description>
+      <description>This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two Splits. </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -119,7 +111,7 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</name>
-      <description>This type represents a part of a decompounding word. A Split can be either a CompoundPart or a LinkingMorpheme.</description>
+      <description>This type represents a part of a decompounding word. A Split can be either a CompoundPart or a LinkingMorpheme. </description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -132,7 +124,7 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme</name>
-      <description>This type represents a linking morpheme between two CompoundParts.</description>
+      <description>This type represents a linking morpheme between two CompoundParts. </description>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</supertypeName>
     </typeDescription>
     <typeDescription>
