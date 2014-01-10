@@ -11,8 +11,8 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sat Aug 04 18:48:32 CEST 2012
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/Segmentation.xml
+ * Updated by JCasGen Fri Jan 10 09:54:06 CET 2014
+ * XML source: C:/Users/Seid/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
 public class Sentence extends Annotation {
   /** @generated
@@ -57,6 +57,22 @@ public class Sentence extends Annotation {
   @generated modifiable */
   private void readObject() {}
      
-}
+  //*--------------*
+  //* Feature: comment
+
+  /** getter for comment - gets Comments to be added to a sentence such as source of the sentence obtained, id of the sentence to be preserved,...
+   * @generated */
+  public String getComment() {
+    if (Sentence_Type.featOkTst && ((Sentence_Type)jcasType).casFeat_comment == null)
+      jcasType.jcas.throwFeatMissing("comment", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence");
+    return jcasType.ll_cas.ll_getStringValue(addr, ((Sentence_Type)jcasType).casFeatCode_comment);}
+    
+  /** setter for comment - sets Comments to be added to a sentence such as source of the sentence obtained, id of the sentence to be preserved,... 
+   * @generated */
+  public void setComment(String v) {
+    if (Sentence_Type.featOkTst && ((Sentence_Type)jcasType).casFeat_comment == null)
+      jcasType.jcas.throwFeatMissing("comment", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence");
+    jcasType.ll_cas.ll_setStringValue(addr, ((Sentence_Type)jcasType).casFeatCode_comment, v);}    
+  }
 
     
