@@ -1,0 +1,343 @@
+<!--
+   Copyright 2014
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+	</import>
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/hunpos/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="install-executables,en,fa,hu,pt,sv"/>
+
+	<target name="en">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: en_wsj.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2007-07-24 | now        | f666dc61f7cbf3cc69366010a4e1f29f
+		  -->
+		<get 
+    		src="http://hunpos.googlecode.com/files/en_wsj.model.gz" 
+    		dest="target/download/en_wsj.model.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/en_wsj.model.gz"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/en_wsj.model" 
+    		md5="f666dc61f7cbf3cc69366010a4e1f29f"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20070724"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="en" 
+    		variant="wsj" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="fa">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: model_TagPer - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-05-20-07-24 | now        | 5f24f894d7d4f99653f9fa80c314e5a8
+		  -->
+		<get 
+    		src="http://stp.lingfil.uu.se/~mojgan/model_TagPer.tar.gz" 
+    		dest="target/download/model_TagPer.tar.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/model_TagPer.tar.gz"/>
+		<untar
+			src="target/download/model_TagPer.tar"
+			dest="target/download">
+	    </untar>
+		<install-stub-and-upstream-file 
+    		file="target/download/model_TagPer" 
+    		md5="5f24f894d7d4f99653f9fa80c314e5a8"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20130520"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="fa" 
+    		variant="upc" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="upc"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="hu">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: hu_szeged_kr.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2007-07-24 | now        | c0a86d638481fee5253697a29a64b481
+		  -->
+		<get 
+    		src="http://hunpos.googlecode.com/files/hu_szeged_kr.model.gz" 
+    		dest="target/download/hu_szeged_kr.model.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/hu_szeged_kr.model.gz"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/hu_szeged_kr.model" 
+    		md5="c0a86d638481fee5253697a29a64b481"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20070724"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="hu" 
+    		variant="szeged_kr" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="unknown"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="pt">
+		<mkdir dir="target/download"/>
+
+		<get 
+    		src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
+    		dest="target/download/aelius.zip" 
+    		skipexisting="true"/>
+
+		<!-- FILE: AeliusHunPos - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-04-19 | now        | df94eedd14d0895e84d5f954c73d42c6
+		  -->
+		<unzip src="target/download/aelius.zip" dest="target/download">
+			<patternset>
+				<include name="*/aelius_data/AeliusHunPos" />
+			</patternset>
+			<mapper type="flatten" />
+		</unzip>
+		<install-stub-and-upstream-file 
+    		file="target/download/AeliusHunPos" 
+    		md5="df94eedd14d0895e84d5f954c73d42c6"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20110419"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="tbchp" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="unknown"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
+		<!-- FILE: AeliusHunPosMM - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-01-19 | now        | a40e1304264398e13341b7a349d5745e
+		  -->
+		<unzip src="target/download/aelius.zip" dest="target/download">
+			<patternset>
+				<include name="*/aelius_data/AeliusHunPosMM" />
+			</patternset>
+			<mapper type="flatten" />
+		</unzip>
+		<install-stub-and-upstream-file 
+    		file="target/download/AeliusHunPosMM" 
+    		md5="a40e1304264398e13341b7a349d5745e"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20130119"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="mm" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="mm"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="sv">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: suc-suctags.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-09-27 | now        | 132dd7c75651dcbccbd693defc72b6dd
+		  -->
+		<get 
+    		src="http://stp.lingfil.uu.se/~bea/resources/hunpos/suc-suctags.model.gz" 
+    		dest="target/download/suc-suctags.model.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/suc-suctags.model.gz"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/suc-suctags.model" 
+    		md5="132dd7c75651dcbccbd693defc72b6dd"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20100927"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sv" 
+    		variant="suctags" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="suc"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
+		<!-- FILE: suc-paroletags.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-02-15 | now        | 0771a0f6d297a6397fd153f4c398df9e
+		  -->
+		<get 
+    		src="http://stp.lingfil.uu.se/~bea/resources/hunpos/suc-paroletags.model.gz" 
+    		dest="target/download/suc-paroletags.model.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/suc-paroletags.model.gz"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/suc-paroletags.model" 
+    		md5="0771a0f6d297a6397fd153f4c398df9e"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20100215"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sv" 
+    		variant="paroletags" 
+    		extension="model">
+			<metadata>
+				<!-- http://spraakbanken.gu.se/parole/tags.phtml -->
+	    		<entry key="pos.tagset" value="parole"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="install-executables">
+		<property name="version.bin" value="20130507.0"/>
+
+		<mkdir dir="target/download"/>
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32"/>
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64"/>
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_32"/>
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_64"/>
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_32"/>
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_64"/>
+
+		<get 
+    		src="http://hunpos.googlecode.com/files/hunpos-1.0-linux.tgz" 
+    		dest="target/download/hunpos-1.0-linux.tar.gz" 
+    		skipexisting="true"/>
+		<gunzip 
+			src="target/download/hunpos-1.0-linux.tar.gz"
+			dest="target/download/hunpos-1.0-linux.tar"/>
+		<untar 
+			src="target/download/hunpos-1.0-linux.tar"
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32">
+			<patternset>
+				<include name="*/*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+		<propertyfile
+		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32/manifest.properties">
+		  <entry  key="hunpos-tag" value="executable"/>
+		  <entry  key="hunpos-train" value="executable"/>
+		</propertyfile>
+		<copydir 
+			src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32" 
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64"/>
+
+		<get 
+			src="http://hunpos.googlecode.com/files/hunpos-1.0-win.zip" 
+			dest="target/download/hunpos-1.0-win.zip" 
+			skipexisting="true" />
+		<unzip 
+			src="target/download/hunpos-1.0-win.zip"
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_32">
+			<patternset>
+				<include name="*/*" />
+			</patternset>
+			<mapper type="flatten" />
+		</unzip>
+		<propertyfile
+		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_32/manifest.properties">
+		  <entry  key="hunpos-tag" value="executable"/>
+		  <entry  key="hunpos-train" value="executable"/>
+		  <entry  key="cygwin1.dll" value="library"/>
+		</propertyfile>
+		<copydir 
+			src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_32" 
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/windows-x86_64"/>
+
+		<get 
+    		src="http://hunpos.googlecode.com/files/hunpos-1.0-macosx.tgz" 
+    		dest="target/download/hunpos-1.0-macosx.tar.gz" 
+    		skipexisting="true"/>
+		<gunzip 
+			src="target/download/hunpos-1.0-macosx.tar.gz"
+			dest="target/download/hunpos-1.0-macosx.tar"/>
+		<untar 
+			src="target/download/hunpos-1.0-macosx.tar"
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_32">
+			<patternset>
+				<include name="*/*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+		<propertyfile
+		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_32/manifest.properties">
+		  <entry  key="hunpos-tag" value="executable"/>
+		  <entry  key="hunpos-train" value="executable"/>
+		</propertyfile>
+		<copydir 
+			src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_32" 
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/osx-x86_64"/>
+
+		<jar 
+			destfile="target/de.tudarmstadt.ukp.dkpro.core.hunpos-bin-${version.bin}.jar" 
+			compress="true">
+			<fileset dir="target/model-staging">
+				<include name="META-INF/**/*"/>
+				<include name="**/bin/**/*"/>
+			</fileset>
+		</jar>
+
+		<generate-pom 
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactId="de.tudarmstadt.ukp.dkpro.core.hunpos-bin" 
+			version="${version.bin}"/>
+
+		<install-artifact 
+			file="target/de.tudarmstadt.ukp.dkpro.core.hunpos-bin-${version.bin}.jar"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactId="de.tudarmstadt.ukp.dkpro.core.hunpos-bin" 
+			version="${version.bin}"/>
+		<clean-pom/>
+		<delete dir="target/model-staging"/>
+	</target>
+</project>
