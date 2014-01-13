@@ -60,6 +60,10 @@
     		variant="wsj" 
     		extension="model">
 			<metadata>
+				<entry key="DC.title" value="english-wsj-1.0"/>
+				<entry key="DC.creator" value="Péter Halácsy"/>
+				<entry key="DC.identifier" value="http://code.google.com/p/hunpos/downloads/detail?name=en_wsj.model.gz"/>
+				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -92,6 +96,10 @@
     		variant="upc" 
     		extension="model">
 			<metadata>
+				<entry key="DC.title" value="Persian Language Model for HunPoS: TagPer"/>
+				<entry key="DC.creator" value="Mojgan Seraji"/>
+				<entry key="DC.identifier" value="http://stp.lingfil.uu.se/~mojgan/model_TagPer.tar.gz"/>
+				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="upc"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -120,6 +128,10 @@
     		variant="szeged_kr" 
     		extension="model">
 			<metadata>
+				<entry key="DC.title" value="hungarian-szeged-kr-1.0"/>
+				<entry key="DC.creator" value="Péter Halácsy"/>
+				<entry key="DC.identifier" value="http://code.google.com/p/hunpos/downloads/detail?name=hu_szeged_kr.model.gz"/>
+				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="unknown"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -154,7 +166,12 @@
     		variant="tbchp" 
     		extension="model">
 			<metadata>
-	    		<entry key="pos.tagset" value="unknown"/>
+				<entry key="DC.title" value="AeliusHunPos"/>
+				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
+				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusHunPos"/>
+				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
+				<!-- http://www.tycho.iel.unicamp.br/~tycho/corpus/manual/pos2003.html -->
+	    		<entry key="pos.tagset" value="tychobrahe"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -179,6 +196,10 @@
     		variant="mm" 
     		extension="model">
 			<metadata>
+				<entry key="DC.title" value="AeliusHunPosMM"/>
+				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
+				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusHunPosMM"/>
+				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
 	    		<entry key="pos.tagset" value="mm"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -207,6 +228,10 @@
     		variant="suctags" 
     		extension="model">
 			<metadata>
+				<entry key="DC.title" value="Swedish HunPoS model with SUC-tags"/>
+				<entry key="DC.creator" value="Beáta Megyesi"/>
+				<entry key="DC.identifier" value="http://stp.lingfil.uu.se/~bea/resources/hunpos/suc-suctags.model.gz"/>
+				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="suc"/>
 			</metadata>
 		</install-stub-and-upstream-file>
@@ -231,6 +256,10 @@
     		variant="paroletags" 
     		extension="model">
 			<metadata>
+				<entry key="DC.title" value="Swedish HunPoS model with Parole-tags"/>
+				<entry key="DC.creator" value="Beáta Megyesi"/>
+				<entry key="DC.identifier" value="http://stp.lingfil.uu.se/~bea/resources/hunpos/suc-paroletags.model.gz"/>
+				<entry key="DC.rights" value="unknown"/>
 				<!-- http://spraakbanken.gu.se/parole/tags.phtml -->
 	    		<entry key="pos.tagset" value="parole"/>
 			</metadata>
