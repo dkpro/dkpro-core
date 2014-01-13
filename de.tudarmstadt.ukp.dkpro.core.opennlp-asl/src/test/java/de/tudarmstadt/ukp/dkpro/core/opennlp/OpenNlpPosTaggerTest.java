@@ -79,7 +79,33 @@ public class OpenNlpPosTaggerTest
                 new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
                 new String[] { "PR", "V",    "ART", "NN", "PUNC" });
     }
-		
+
+    @Test
+    public void testPortuguese()
+        throws Exception
+    {
+        runTest("pt", null, "Este é um teste . \n",
+                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
+                new String[] { "POS",      "POS",   "POS", "POS", "POS" });
+        
+        runTest("pt", "maxent", "Este é um teste . \n",
+                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
+                new String[] { "POS",      "POS",   "POS", "POS", "POS" });
+
+        runTest("pt", "perceptron", "Este é um teste . \n",
+                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
+                new String[] { "POS",      "POS",   "POS", "POS", "POS" });
+
+        runTest("pt", "mm-maxent", "Este é um teste . \n",
+                new String[] { "PROSUB", "V",   "ART", "N",   "." },
+                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+
+        runTest("pt", "mm-perceptron", "Este é um teste . \n",
+                new String[] { "PROSUB", "V",   "ART", "N",   "." },
+                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+    }
+    
+    
 	@Test
 	public void testSpanish()
 		throws Exception

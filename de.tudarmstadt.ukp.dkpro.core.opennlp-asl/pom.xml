@@ -348,6 +348,16 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-pt-mm-maxent</artifactId>
+				<version>20130121.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-pt-mm-perceptron</artifactId>
+				<version>20130121.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</artifactId>
 				<version>20120616.1</version>
 			</dependency>
