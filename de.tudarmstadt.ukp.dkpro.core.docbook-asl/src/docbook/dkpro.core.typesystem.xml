@@ -36,10 +36,12 @@
 			<title>Metadata types</title>
 			<mediaobject>
 				<imageobject>
-					<imagedata width="20%" fileref="&imgroot;document_meta_data.png"/>
+					<imagedata fileref="&imgroot;metadata.png" width="70%"/>
 				</imageobject>
 			</mediaobject>
 		</figure>
+		<para>FIXME: Describe DocumentMetaData</para>
+		<para>FIXME: Describe TagDescription and TagsetDescription</para>
 	</section>
 	<section>
 		<title>Segmentation</title>
@@ -52,9 +54,16 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
+		<para>FIXME: Describe Sentence &amp; Token</para>
+		<para>FIXME: Describe Document, Heading, and Paragraph</para>
+		<para>FIXME: Describe Compound, Split, CompoundPart, and LinkingMorpheme</para>
 	</section>
 	<section>
 		<title>Morphology</title>
+		<para/>
+	</section>
+	<section>
+		<title>Phonetics</title>
 		<para/>
 	</section>
 	<section>
@@ -82,7 +91,7 @@
 		</figure>
 	</section>
 	<section>
-		<title>Semantics</title>
+		<title>Semantics and Named Entities</title>
 		<para/>
 		<figure>
 			<title>Segmentation types</title>
@@ -92,5 +101,8 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
+		<para>FIXME: Describe SemanticField</para>
+		<para>FIXME: Describe SemanticPredicate and SemanticArgument</para>
+		<para>FIXME: Describe NamedEntity</para>
 	</section>
 </chapter>
