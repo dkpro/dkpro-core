@@ -84,6 +84,13 @@ public class HunPosTagger
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false, defaultValue="UTF-8")
+    protected String modelEncoding;
+
 	/**
 	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
 	 * the mapping automatically.
@@ -187,8 +194,10 @@ public class HunPosTagger
         try {
             proc = pb.start();
             
-            PrintWriter out = new PrintWriter(new OutputStreamWriter(proc.getOutputStream(), "UTF-8"));
-            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(), "UTF-8"));
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(proc.getOutputStream(),
+                    modelEncoding));
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(),
+                    modelEncoding));
             
             for (Sentence sentence : select(aJCas, Sentence.class)) {
                 List<Token> tokens = selectCovered(Token.class, sentence);

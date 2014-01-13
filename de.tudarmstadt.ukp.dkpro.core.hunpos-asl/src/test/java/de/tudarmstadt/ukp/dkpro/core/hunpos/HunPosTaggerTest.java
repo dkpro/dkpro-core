@@ -76,7 +76,7 @@ public class HunPosTaggerTest
     {
         runTest("sv", null, "Detta är ett test . \n",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "DL_MAD"    },
-                new String[] { "POS", "POS", "POS", "POS", "POS" });
+                new String[] { "O", "O", "O", "O", "O" });
     }
 
     @Test
