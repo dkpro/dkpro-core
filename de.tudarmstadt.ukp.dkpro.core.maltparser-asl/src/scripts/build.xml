@@ -26,7 +26,7 @@
 	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/maltparser/lib"/>
 
 	<target name="local-maven">
-		<property name="install-artifact-enable" value="true"/>
+		<property name="install-artifact-mode" value="local"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
@@ -35,8 +35,38 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de, en, es, fr, sv"/>
+	<target name="separate-jars" depends="bn, de, en, es, fa, fr, sv"/>
+
+	<target name="bn">
+		<mkdir dir="target/download"/>
 		
+		<!-- FILE: bengali_stack.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-09-05 | now        | 1aed08f8c51197ac417cff4b2727eebe
+		  -->
+		<get 
+			src="http://www.isical.ac.in/~utpal/docs/bengali_stack.mco" 
+			dest="target/download/bengali_stack.mco" 
+			skipexisting="true"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/bengali_stack.mco" 
+    		md5="1aed08f8c51197ac417cff4b2727eebe"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20120905"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="bn" 
+    		variant="linear" 
+    		extension="mco">
+			<metadata>
+				<!-- http://www.isical.ac.in/~utpal/docs/POS-Tag%20List.pdf -->
+	    		<entry key="pos.tagset" value="utpal"/>
+				<!-- http://www.isical.ac.in/~utpal/docs/Dependency%20Tag%20for%20Bengali.pdf -->
+				<entry key="dependency.tagset" value="utpal"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
 	<target name="de">
 		<mkdir dir="target/download"/>
 		
@@ -218,8 +248,47 @@
     		variant="linear" 
     		extension="mco">
 			<metadata>
+				<entry key="DC.title" value="TRL Malt Parser module for Spanish"/>
+				<entry key="DC.creator" value="Universitat Pompeu Fabra. Institut Universitari de Lingüística Aplicada (IULA)"/>
+				<entry key="DC.identifier" value="http://hdl.handle.net/10230/20407"/>
+				<entry key="DC.rights" value="http://creativecommons.org/licenses/by/3.0/"/>
 	    		<entry key="pos.tagset" value="freeling"/>
 				<entry key="dependency.tagset" value="iula"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="fa">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: langModel_130522.mco - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-05-22 | now        | 4ea6a0af55b267e3b9cb88e9327ff44d
+		  -->
+		<get 
+			src="http://stp.lingfil.uu.se/~mojgan/langModel_130522.tar.gz" 
+			dest="target/download/langModel_130522.tar.gz" 
+			skipexisting="true"/>
+		<gunzip 
+			src="target/download/langModel_130522.tar.gz"
+			dest="target/download/langModel_130522.tar"/>
+		<untar 
+			src="target/download/langModel_130522.tar"
+			dest="target/download"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/langModel_130522/langModel_130522.mco" 
+    		md5="c0693327ca4bf6786ac6caa3349d34f2"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
+    		upstreamVersion="20130522"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="fa" 
+    		variant="linear" 
+    		extension="mco">
+			<metadata>
+				<!-- http://stp.lingfil.uu.se/~mojgan/Manual.pdf -->
+	    		<entry key="pos.tagset" value="upc"/>
+				<entry key="dependency.tagset" value="updt"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -270,14 +339,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.maltparser"
     		upstreamVersion="20120925"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="parser" 
     		language="sv" 
     		variant="linear" 
     		extension="mco">
 			<metadata>
 				<!-- http://stp.lingfil.uu.se/~nivre/swedish_treebank/pos.html -->
-	    		<entry key="pos.tagset" value="stb"/>
+	    		<entry key="pos.tagset" value="suc"/>
 				<!-- http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html -->
 				<entry key="dependency.tagset" value="stb"/>
 			</metadata>
