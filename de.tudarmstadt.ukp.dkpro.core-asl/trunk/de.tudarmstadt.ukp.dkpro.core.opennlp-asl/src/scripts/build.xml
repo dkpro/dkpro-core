@@ -1090,8 +1090,71 @@
 	    		<entry key="pos.tagset" value="bosque"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+
+		<get 
+    		src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
+    		dest="target/download/aelius.zip" 
+    		skipexisting="true"/>
+
+		<!-- FILE: AeliusMaxentOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-04-19 | now        | ed1545b69ac33b079033fd1c8bc3153b
+		  -->
+		<unzip src="target/download/aelius.zip" dest="target/download">
+			<patternset>
+				<include name="*/aelius_data/AeliusMaxentOpenNLP.bin" />
+			</patternset>
+			<mapper type="flatten" />
+		</unzip>
+		<install-stub-and-upstream-file 
+    		file="target/download/AeliusMaxentOpenNLP.bin" 
+    		md5="ed1545b69ac33b079033fd1c8bc3153b"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20130121"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="mm-maxent" 
+    		extension="bin">
+			<metadata>
+				<entry key="DC.title" value="AeliusMaxentOpenNLP.bin"/>
+				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
+				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusMaxentOpenNLP.bin"/>
+				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
+	    		<entry key="pos.tagset" value="mm"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
+		<!-- FILE: AeliusPerceptronOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-01-19 | now        | 38f62c6ad10de98ac2b8e837de4dd655
+		  -->
+		<unzip src="target/download/aelius.zip" dest="target/download">
+			<patternset>
+				<include name="*/aelius_data/AeliusPerceptronOpenNLP.bin" />
+			</patternset>
+			<mapper type="flatten" />
+		</unzip>
+		<install-stub-and-upstream-file 
+    		file="target/download/AeliusPerceptronOpenNLP.bin" 
+    		md5="38f62c6ad10de98ac2b8e837de4dd655"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+    		upstreamVersion="20130121"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="mm-perceptron" 
+    		extension="bin">
+			<metadata>
+				<entry key="DC.title" value="AeliusPerceptronOpenNLP.bin"/>
+				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
+				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusPerceptronOpenNLP.bin"/>
+				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
+	    		<entry key="pos.tagset" value="mm"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
-		
+	
 	<target name="sv">
 		<mkdir dir="target/download"/>
 
