@@ -24,6 +24,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
+@Ignore("Currently doesn't seem to work on Jenkins")
 public class HunPosTaggerTest
 {
 	@Test
