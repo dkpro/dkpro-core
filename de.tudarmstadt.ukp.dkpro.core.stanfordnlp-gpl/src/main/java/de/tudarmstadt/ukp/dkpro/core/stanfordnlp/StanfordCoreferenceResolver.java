@@ -107,6 +107,13 @@ public class StanfordCoreferenceResolver
     private boolean postprocessing;
 
     /**
+     * DCoRef parameter: setting singleton predictor
+     */
+    public static final String PARAM_SINGLETON = "singleton";
+    @ConfigurationParameter(name = PARAM_SINGLETON, defaultValue = "true", mandatory = true)
+    private boolean singleton;
+
+    /**
      * DCoRef parameter: Maximum sentence distance between two mentions for resolution (-1: no
      * constraint on the distance)
      */
@@ -145,6 +152,9 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.SIEVES_PROP, sieves);
                 props.setProperty(Constants.SCORE_PROP, String.valueOf(score));
                 props.setProperty(Constants.POSTPROCESSING_PROP, String.valueOf(postprocessing));
+                props.setProperty(Constants.SINGLETON_PROP, String.valueOf(singleton));
+                props.setProperty(Constants.SINGLETON_MODEL_PROP, base + "singleton.predictor.ser");
+                
                 props.setProperty(Constants.MAXDIST_PROP, String.valueOf(maxdist));
 //              props.setProperty(Constants.BIG_GENDER_NUMBER_PROP, "false");
                 props.setProperty(Constants.REPLICATECONLL_PROP, "false");
@@ -175,19 +185,19 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
                 // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
                 props.setProperty(Constants.STATES_PROVINCES_PROP, base + "statesandprovinces");
-                if (sieves.contains("CorefDictionaryMatch")) {
-                    // FIXME Issue 277 set these properties when the next CoreNLP version is out. In
-                    // CoreNLP 3.3.0, this cannot be properly configured.
-                    // See also: https://github.com/stanfordnlp/CoreNLP/commit/07f9d21632337d8f0f70ada234e3466433b23c22
-//                  new String[]{
-          //            DefaultPaths.DEFAULT_DCOREF_DICT1, 
-          //            DefaultPaths.DEFAULT_DCOREF_DICT2,
-          //            DefaultPaths.DEFAULT_DCOREF_DICT3, 
-          //            DefaultPaths.DEFAULT_DCOREF_DICT4},
-          //            DefaultPaths.DEFAULT_DCOREF_DICT1,
-          //            DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES);                
-                }
-                props.setProperty(Constants.SINGLETON_PROP, base + "singleton.predictor.ser");
+        
+                // The following properties are only relevant if the "CorefDictionaryMatch" sieve
+                // is enabled.
+                // PropertiesUtils.getStringArray(props, Constants.DICT_LIST_PROP,
+                //   new String[]{DefaultPaths.DEFAULT_DCOREF_DICT1, DefaultPaths.DEFAULT_DCOREF_DICT2,
+                //   DefaultPaths.DEFAULT_DCOREF_DICT3, DefaultPaths.DEFAULT_DCOREF_DICT4}),
+                props.put(Constants.DICT_LIST_PROP, '[' + base + "coref.dict1.tsv" + ',' + base
+                        + "coref.dict1.tsv" + ',' + base + "coref.dict1.tsv" + ',' + base
+                        + "coref.dict1.tsv" + ']');
+                // props.getProperty(Constants.DICT_PMI_PROP, DefaultPaths.DEFAULT_DCOREF_DICT1),
+                props.put(Constants.DICT_PMI_PROP, base + "coref.dict1.tsv");
+                // props.getProperty(Constants.SIGNATURES_PROP, DefaultPaths.DEFAULT_DCOREF_NE_SIGNATURES));
+                props.put(Constants.SIGNATURES_PROP, base + "ne.signatures.txt");
 
                 try {
                     Coreferencer coref = new Coreferencer();
