@@ -221,11 +221,11 @@ public class StanfordParserTest
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
                 "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
-                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
-                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
-                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
-                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
-                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
 
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
@@ -243,8 +243,8 @@ public class StanfordParserTest
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
 
     @Test
@@ -304,11 +304,11 @@ public class StanfordParserTest
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
                 "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
-                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
-                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
-                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
-                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
-                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
 
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
@@ -326,8 +326,8 @@ public class StanfordParserTest
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
 
     @Test
@@ -336,13 +336,13 @@ public class StanfordParserTest
     {
         JCas jcas = runTest("en", "rnn", documentEnglish);
 
-        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
-                "NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
-                "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "QP 60,67", "ROOT 0,110",
+                "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
-        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
-                "NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
-                "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "QP 60,67", "ROOT 0,110",
+                "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
         String[] dependencies = new String[] { 
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
@@ -353,8 +353,8 @@ public class StanfordParserTest
                 "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
                 "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
                 "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
-                "[ 60, 62]ADVMOD(advmod) D[60,62](as) G[63,67](many)",
-                "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
+                "[ 60, 62]QUANTMOD(quantmod) D[60,62](as) G[63,67](many)",
+                "[ 63, 67]NUM(num) D[63,67](many) G[68,80](constituents)",
                 "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
                 "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
                 "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
@@ -373,7 +373,7 @@ public class StanfordParserTest
 
         String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
                 + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
-                + "(S (VP (VBZ contains) (NP (ADJP (RB as) (JJ many)) (NNS constituents) (CC and) "
+                + "(S (VP (VBZ contains) (NP (QP (RB as) (JJ many)) (NNS constituents) (CC and) "
                 + "(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
 
         String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ".$$.", ":",
@@ -387,11 +387,11 @@ public class StanfordParserTest
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
                 "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
-                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
-                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
-                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
-                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
-                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
 
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
@@ -409,8 +409,8 @@ public class StanfordParserTest
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
     
     @Test
@@ -470,11 +470,11 @@ public class StanfordParserTest
 
         String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
                 "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
-                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov",
-                "infmod", "iobj", "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj",
-                "nsubjpass", "num", "number", "obj", "parataxis", "partmod", "pcomp", "pobj",
-                "poss", "possessive", "preconj", "pred", "predet", "prep", "prt", "punct",
-                "quantmod", "rcmod", "ref", "rel", "sdep", "subj", "tmod", "xcomp", "xsubj" };
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
 
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
@@ -492,8 +492,8 @@ public class StanfordParserTest
         AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
-        AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", unmappedDep, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
     
     /**

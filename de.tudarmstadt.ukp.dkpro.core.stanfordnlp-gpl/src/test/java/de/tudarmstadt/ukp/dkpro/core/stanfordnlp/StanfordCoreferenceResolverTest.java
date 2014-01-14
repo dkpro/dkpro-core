@@ -22,6 +22,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import edu.stanford.nlp.dcoref.Constants;
 
 /**
  * @author Richard Eckart de Castilho
@@ -41,6 +42,22 @@ public class StanfordCoreferenceResolverTest
 		
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
 	}
+
+   @Test
+    public void testDictionarySieve()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "John joined Google in 2012. He is doing research for the company.",
+                Constants.SIEVEPASSES + ",CorefDictionaryMatch");
+
+        String[][] ref = new String[][] {
+                new String[] { "John", "He" },
+                new String[] { "Google", "the company" },
+                new String[] { "2012" }
+        };
+        
+        AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
+    }
 
     @Test
     public void testTriggerReparse()
@@ -114,9 +131,14 @@ public class StanfordCoreferenceResolverTest
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
     }
 
+    private JCas runTest(String aLanguage, String aText)
+            throws Exception
+    {
+        return runTest(aLanguage, aText, Constants.SIEVEPASSES);
+    }
     
 
-    private JCas runTest(String aLanguage, String aText)
+    private JCas runTest(String aLanguage, String aText, String aSieves)
         throws Exception
     {
         // Coreference resolution requires the parser and the NER to run before
@@ -129,7 +151,8 @@ public class StanfordCoreferenceResolverTest
                         StanfordParser.PARAM_WRITE_POS, true),
                 createEngineDescription(
                         StanfordNamedEntityRecognizer.class),
-                createEngineDescription(StanfordCoreferenceResolver.class)));
+                createEngineDescription(StanfordCoreferenceResolver.class,
+                        StanfordCoreferenceResolver.PARAM_SIEVES, aSieves)));
 
         // Set up a simple example
         JCas jcas = engine.newJCas();

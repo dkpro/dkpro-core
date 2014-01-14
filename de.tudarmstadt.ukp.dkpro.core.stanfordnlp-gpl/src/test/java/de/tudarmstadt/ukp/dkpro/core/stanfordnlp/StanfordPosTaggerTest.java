@@ -13,12 +13,14 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -126,6 +128,20 @@ public class StanfordPosTaggerTest
 
         String[] posOriginal = new String[] { "D", "N", "P", "D", "N", "P", "N", "P", "D", "N",
                 "PUNC" };
+
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+    }
+
+    @Test
+    @Ignore("Aelius models not compatible with 3.3.1")
+    public void testPortuguese()
+        throws Exception
+    {
+        JCas jcas = runTest("pt", null, "Este é um teste . \n");
+
+        String[] posMapped = new String[] { "PROSUB", "V", "ART", "N", "." };
+
+        String[] posOriginal = new String[] { "POS", "POS", "POS", "POS", "POS" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
