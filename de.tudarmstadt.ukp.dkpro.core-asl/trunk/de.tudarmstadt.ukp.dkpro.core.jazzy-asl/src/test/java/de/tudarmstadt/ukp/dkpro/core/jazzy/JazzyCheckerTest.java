@@ -33,7 +33,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public class SpellCheckerTest
+public class JazzyCheckerTest
 {
     @Test
     public void spellCheckerTest()
@@ -54,8 +54,8 @@ public class SpellCheckerTest
     private void runEnglishSpellChecker(String testDocument, List<String> errors)
         throws Exception
     {
-		AnalysisEngine engine = createEngine(SpellChecker.class,
-				SpellChecker.PARAM_MODEL_LOCATION, "src/test/resources/testdict.txt");
+		AnalysisEngine engine = createEngine(JazzyChecker.class,
+				JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/testdict.txt");
         JCas aJCas = engine.newJCas();
 
         TokenBuilder<Token, Sentence> tb = TokenBuilder.create(Token.class, Sentence.class);

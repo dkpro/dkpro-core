@@ -58,7 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
                 "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly",
                 "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction"})
 
-public class SpellChecker
+public class JazzyChecker
 	extends JCasAnnotator_ImplBase
 {
 	/**
