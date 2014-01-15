@@ -71,7 +71,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.4.2</uima.version>
+		<uima.version>2.5.0</uima.version>
 		<uimafit.version>2.0.1-SNAPSHOT</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
