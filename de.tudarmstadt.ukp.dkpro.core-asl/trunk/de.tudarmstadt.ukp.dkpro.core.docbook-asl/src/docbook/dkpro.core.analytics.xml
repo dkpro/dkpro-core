@@ -26,7 +26,7 @@
 		different levels of analysis.</para>
 	<para/>
 	<section>
-		<title>Coreference</title>
+		<title>Coreference Resolution</title>
 		<para/>
 		<figure>
 			<title>Coreference types</title>
@@ -352,6 +352,10 @@
 						<entry/>
 					</row>
 					<row>
+						<entry>HunPosTagger</entry>
+						<entry>(uses native binary)</entry>
+					</row>
+					<row>
 						<entry>LbjPosTagger</entry>
 						<entry>(not in release)</entry>
 					</row>
@@ -380,8 +384,11 @@
 		</table>
 	</section>
 	<section>
-		<title>Segmentation / Tokenization</title>
-		<para>Segmenter components identify sentence boundaries and tokens.</para>
+		<title>Segmentation</title>
+		<para>Segmenter components identify sentence boundaries and tokens. The order in which sentence
+			splitting and tokenization are done differs between the integrated the NLP libraries.
+			Thus, we chose to integrate both steps into a segmenter component to avoid the need to
+			reorder the components in a pipeline when replacing one segmenter with another.</para>
 		<figure>
 			<title>Segmentation types</title>
 			<mediaobject>
@@ -473,8 +480,8 @@
 						<entry/>
 					</row>
 					<row>
-						<entry>SpellChecker</entry>
-						<entry>Uses Jazzy</entry>
+						<entry>JazzyChecker</entry>
+						<entry/>
 					</row>
 				</tbody>
 			</tgroup>
