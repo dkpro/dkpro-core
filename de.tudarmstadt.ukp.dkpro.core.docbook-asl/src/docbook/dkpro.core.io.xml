@@ -194,7 +194,11 @@
 		</itemizedlist>
 	</section>
 	<section>
-		<title>CONLL Shared Task Data Formats</title>
+		<title>CoNLL Shared Task Data Formats</title>
+		<para>The CoNLL shared tasks use different tabular, tab-separated formats. Almost every year
+			a CoNLL shared task was held, a new format was defined. Due to their simplicity, the
+			CoNLL formats are quite popular. Many corpora are provided in the CoNLL-X (2006) format
+			and many tools can natively read or write this format.</para>
 		<table frame="all">
 			<title>Components</title>
 			<tgroup cols="2">
@@ -225,24 +229,33 @@
 		<para>Known corpora in this format:</para>
 		<itemizedlist>
 			<listitem>
-				<para><ulink url="http://nltk.org/nltk_data/">CONLL 2000 Chunking Corpus</ulink> -
-					English (CONLL 2000)</para>
+				<para><ulink url="http://nltk.org/nltk_data/">CoNLL 2000 Chunking Corpus</ulink> - English
+					(CoNLL 2000 format)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/"
+						>FinnTreeBank</ulink> - Finnish (CoNLL 2006 format, in recent versions with
+					additional pseudo-XML metadata)</para>
 			</listitem>
 			<listitem>
 				<para><ulink url="http://www.linguateca.pt/floresta/CoNLL-X">Floresta Sintá(c)tica
-						(Bosque-CONLL)</ulink> - Portuguese (CONLL 2006)</para>
+						(Bosque-CoNLL)</ulink> - Portuguese (CoNLL 2006 format)</para>
 			</listitem>
 			<listitem>
-				<para><ulink url="http://stp.lingfil.uu.se/%7Emojgan/UPDT.html">Uppsala Persian
-						Dependency Treebank</ulink> - Persian (Farsi) (CONLL 2006)</para>
+				<para><ulink url="http://nl.ijs.si/sdt/">Slovene Dependency Treebank</ulink> - Slovene (CoNLL
+					2006 format)</para>
 			</listitem>
 			<listitem>
-				<para><ulink url="http://nl.ijs.si/sdt/">Slovene Dependency Treebank</ulink> -
-					Slovene (CONLL 2006)</para>
+				<para><ulink url="http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/">Swedish Treebank</ulink>
+					- Swedish (CoNLL 2006 format)</para>
 			</listitem>
 			<listitem>
 				<para><ulink url="http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html"
-						>Talbanken05</ulink> - Swedish (CONLL 2006)</para>
+						>Talbanken05</ulink> - Swedish (CoNLL 2006 format)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://stp.lingfil.uu.se/%7Emojgan/UPDT.html">Uppsala Persian
+						Dependency Treebank</ulink> - Persian (Farsi) (CoNLL 2006 format)</para>
 			</listitem>
 		</itemizedlist>
 	</section>
@@ -560,7 +573,38 @@
 	</section>
 	<section>
 		<title>TCF</title>
-		<para/>
+		<para>The TCF (Text Corpus Format) was created in the context of the CLARIN project. It is
+			mainly used to exchange data between the different web-services that are part of the
+			WebLicht platform.</para>
+		<table frame="all">
+			<title>Components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>TcfReader (RR)</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>TcfWriter (FW)</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>Known corpora in this format:</para>
+		<itemizedlist>
+			<listitem>
+				<para>None</para>
+			</listitem>
+		</itemizedlist>
 	</section>
 	<section>
 		<title>TEI</title>
@@ -658,13 +702,14 @@
 					10</ulink></para>
 			</listitem>
 			<listitem>
+				<para><ulink url="http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/">Swedish
+						Treebank</ulink> - Swedish</para>
 				<para><ulink url="http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html"
-						>Talbanken05</ulink></para>
+						>Talbanken05</ulink> - Swedish</para>
 			</listitem>
 			<listitem>
-				<para><ulink
-						url="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html"
-						>TIGER</ulink></para>
+				<para><ulink url="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html"
+						>TIGER</ulink> - German</para>
 			</listitem>
 		</itemizedlist>
 	</section>
