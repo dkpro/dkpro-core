@@ -38,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import edu.stanford.nlp.util.StringUtils;
 
 /**
  * Stanford Part-of-Speech tagger component.
@@ -121,7 +122,9 @@ public class StanfordPosTagger
             @Override
             protected MaxentTagger produceResource(URL aUrl) throws IOException
             {
-                MaxentTagger tagger = new MaxentTagger(aUrl.toString());
+                String modelFile = aUrl.toString();
+                MaxentTagger tagger = new MaxentTagger(modelFile,
+                        StringUtils.argsToProperties(new String[] { "-model", modelFile }), false);
 
                 SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
                         .getProperty(("pos.tagset")));
