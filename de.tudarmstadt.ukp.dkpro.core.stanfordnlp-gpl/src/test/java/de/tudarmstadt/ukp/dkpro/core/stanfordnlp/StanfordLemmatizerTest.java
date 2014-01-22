@@ -20,8 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
@@ -32,12 +34,28 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class StanfordLemmatizerTest
 {
+
+    @Test
+    public void testUnderscore() throws Exception
+    {
+        AnalysisEngineDescription lemmatizer = createEngineDescription(StanfordLemmatizer.class);
+
+        JCas aJCas = TestRunner.runTest(createEngineDescription(lemmatizer),
+                "en", "foo _ bar");
+
+        Lemma[] lemmas = JCasUtil.select(aJCas, Lemma.class).toArray(new Lemma[0]);
+        assertEquals(3, lemmas.length);
+        assertEquals("foo", lemmas[0].getValue());
+        assertEquals("", lemmas[1].getValue());
+        assertEquals("bar", lemmas[2].getValue());
+    }
+
 	@Test
 	public void testEnglish() throws Exception
 	{
-        runTest("en", null, "This is a test .",
-        		new String[] { "DT", "VBZ", "DT", "NN",  "."    },
-        		new String[] { "this",  "be",  "a", "test", "." });
+        runTest("en", null, "This is a test _ .",
+        		new String[] { "DT", "VBZ", "DT", "NN",  "NN", "."    },
+        		new String[] { "this",  "be",  "a", "test", "", "." });
 
 	}
 
