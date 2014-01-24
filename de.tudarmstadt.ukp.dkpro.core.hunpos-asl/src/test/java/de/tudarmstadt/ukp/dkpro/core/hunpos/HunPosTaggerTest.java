@@ -43,7 +43,16 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class HunPosTaggerTest
 {
-	@Test
+    @Test
+    public void testCroatian()
+        throws Exception
+    {
+        runTest("hr", null, "Ovo je test . \n",
+                new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
+                new String[] { "POS",  "POS", "POS",  "POS" });
+    }
+    
+    @Test
 	public void testEnglish()
 		throws Exception
 	{

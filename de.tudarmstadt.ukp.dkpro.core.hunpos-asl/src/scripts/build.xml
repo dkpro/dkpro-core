@@ -35,7 +35,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="install-executables,en,fa,hu,pt,sv"/>
+	<target name="separate-jars" depends="install-executables,en,fa,hr,hu,pt,sv"/>
 
 	<target name="en">
 		<mkdir dir="target/download"/>
@@ -73,7 +73,7 @@
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: model_TagPer - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-05-20-07-24 | now        | 5f24f894d7d4f99653f9fa80c314e5a8
+		  - 2013-05-20 | now        | 5f24f894d7d4f99653f9fa80c314e5a8
 		  -->
 		<get 
     		src="http://stp.lingfil.uu.se/~mojgan/model_TagPer.tar.gz" 
@@ -105,6 +105,43 @@
 		</install-stub-and-upstream-file>
 	</target>
 
+	<target name="hr">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: model.hunpos.mte5.defnpout - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-05-209 | now        | 05c091e957235295aa72582291f36ec2
+		  -->
+		<get 
+    		src="http://nlp.ffzg.hr/data/tagging/model.hunpos.mte5.defnpout.tar.gz" 
+    		dest="target/download/model.hunpos.mte5.defnpout.tar.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/model.hunpos.mte5.defnpout.tar.gz"/>
+		<untar
+			src="target/download/model.hunpos.mte5.defnpout.tar"
+			dest="target/download">
+	    </untar>
+		<install-stub-and-upstream-file 
+    		file="target/download/model.hunpos.mte5.defnpout" 
+    		md5="05c091e957235295aa72582291f36ec2"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="201305209"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="hr" 
+    		variant="mte5.defnpout" 
+    		extension="model">
+			<metadata>
+				<entry key="DC.title" value="model.hunpos.mte5.defnpout"/>
+				<entry key="DC.creator" value="Željko Agić"/>
+				<entry key="DC.identifier" value="http://nlp.ffzg.hr/data/tagging/model.hunpos.mte5.defnpout.tar.gz"/>
+				<entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
+				<!-- http://aclweb.org/anthology/W/W13/W13-2408.pdf -->
+	    		<entry key="pos.tagset" value="mte5"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+	
 	<target name="hu">
 		<mkdir dir="target/download"/>
 
