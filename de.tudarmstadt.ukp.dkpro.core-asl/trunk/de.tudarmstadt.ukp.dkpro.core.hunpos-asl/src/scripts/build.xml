@@ -106,10 +106,11 @@
 	</target>
 
 	<target name="hr">
+		<property name="install-artifact-mode" value="remote"/>
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: model.hunpos.mte5.defnpout - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-05-209 | now        | 05c091e957235295aa72582291f36ec2
+		  - 2013-05-09 | now        | 05c091e957235295aa72582291f36ec2
 		  -->
 		<get 
     		src="http://nlp.ffzg.hr/data/tagging/model.hunpos.mte5.defnpout.tar.gz" 
@@ -125,7 +126,7 @@
     		md5="05c091e957235295aa72582291f36ec2"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
-    		upstreamVersion="201305209"
+    		upstreamVersion="20130509"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="hr" 
