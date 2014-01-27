@@ -233,6 +233,15 @@
 					(CoNLL 2000 format)</para>
 			</listitem>
 			<listitem>
+				<para><ulink url="http://ilk.uvt.nl/conll/free_data.html">CoNLL-X Shared Task free
+						data</ulink> - Danish, Dutch, Portuguese, and Swedish (CoNLL 2006
+					format)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="https://code.google.com/p/copenhagen-dependency-treebank/"
+						>Copenhagen Dependency Treebanks</ulink> - Danish (CoNLL 2006 format)</para>
+			</listitem>
+			<listitem>
 				<para><ulink url="http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/"
 						>FinnTreeBank</ulink> - Finnish (CoNLL 2006 format, in recent versions with
 					additional pseudo-XML metadata)</para>
@@ -240,6 +249,15 @@
 			<listitem>
 				<para><ulink url="http://www.linguateca.pt/floresta/CoNLL-X">Floresta Sintá(c)tica
 						(Bosque-CoNLL)</ulink> - Portuguese (CoNLL 2006 format)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://nlp.ffzg.hr/resources/corpora/setimes-hr/">SETimes.HR
+						corpus and dependency treebank of Croatian</ulink> - Croatian (CONLL 2006
+					format)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://zil.ipipan.waw.pl/Sk%C5%82adnica">Składnica
+						zależnościowa</ulink> - Polish (CoNLL 2006 format)</para>
 			</listitem>
 			<listitem>
 				<para><ulink url="http://nl.ijs.si/sdt/">Slovene Dependency Treebank</ulink> - Slovene (CoNLL
@@ -535,7 +553,6 @@
 				</tbody>
 			</tgroup>
 		</table>
-		<para/>
 	</section>
 	<section>
 		<title>Penn Treeback Bracketed Structure</title>
@@ -672,6 +689,16 @@
 	</section>
 	<section>
 		<title>TIGER XML</title>
+		<para>The <ulink
+				url="http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html"
+				>TIGER XML format</ulink> was created for encoding syntactic constituency structures
+			in the German TIGER corpus. It has since been used for many other corpora as well.
+				<ulink
+				url="http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html"
+				>TIGERSearch</ulink> is a linguistic search engine specifically targetting this
+			format. The format has later been <ulink
+				url="http://www.lrec-conf.org/proceedings/lrec2004/pdf/202.pdf">extended</ulink> to
+			also support semantic frame annotations.</para>
 		<table frame="all">
 			<title>Components</title>
 			<tgroup cols="2">
@@ -698,8 +725,16 @@
 		<para>Known corpora in this format:</para>
 		<itemizedlist>
 			<listitem>
-				<para><ulink url="http://semeval2.fbk.eu/semeval2.php">Semeval-2 Task
-					10</ulink></para>
+				<para><ulink url="http://www.linguateca.pt/floresta/corpus.html">Floresta
+						Sintá(c)tica (Bosque)</ulink> - Portuguese</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://semeval2.fbk.eu/semeval2.php">Semeval-2 Task 10</ulink> - (extended
+					format)</para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://zil.ipipan.waw.pl/Sk%C5%82adnica">Składnica frazowa</ulink>
+					-  Polish</para>
 			</listitem>
 			<listitem>
 				<para><ulink url="http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/">Swedish
@@ -741,8 +776,12 @@
 		<para>See also:</para>
 		<itemizedlist>
 			<listitem>
-				<para><ulink url="http://code.google.com/p/jweb1t/">Java API for text n-gram
-						frequency data in Web1T format</ulink></para>
+				<para><ulink url="http://code.google.com/p/jweb1t/">jweb1t - Java API for text n-gram frequency
+						data in Web1T format</ulink></para>
+			</listitem>
+			<listitem>
+				<para><ulink url="http://catalog.ldc.upenn.edu/LDC2006T13">Web1T n-gram
+						corpus</ulink></para>
 			</listitem>
 		</itemizedlist>
 	</section>
