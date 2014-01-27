@@ -19,12 +19,108 @@
 	limitations under the License.
 -->
 <chapter id="ugr.dkpro.core.testing">
-  <title>Testing</title>
-	<para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-		invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-		justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-		ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-		eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-		et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-		est Lorem ipsum dolor sit amet.</para>
+	<title>Testing</title>
+	<para>The testing module offers a convenient way to create unit tests for UIMA
+		components.</para>
+	<para>The AssertAnnotations class offers various static methods to test if a component has
+		properly created annotations of a certain kind. There are methods to test almost every kind
+		of annotation supported by DKPro Core, e.g.:</para>
+	<itemizedlist>
+		<listitem>
+			<para>assertToken</para>
+		</listitem>
+		<listitem>
+			<para>assertSentence</para>
+		</listitem>
+		<listitem>
+			<para>assertPOS</para>
+		</listitem>
+		<listitem>
+			<para>assertLemma</para>
+		</listitem>
+		<listitem>
+			<para>assertMorpheme</para>
+		</listitem>
+		<listitem>
+			<para>assertStem</para>
+		</listitem>
+		<listitem>
+			<para> assertNamedEntity</para>
+		</listitem>
+		<listitem>
+			<para>assertConstituents</para>
+		</listitem>
+		<listitem>
+			<para>assertChunks</para>
+		</listitem>
+		<listitem>
+			<para>assertDependencies</para>
+		</listitem>
+		<listitem>
+			<para>assertPennTree</para>
+		</listitem>
+		<listitem>
+			<para>assertSemanticPredicates</para>
+		</listitem>
+		<listitem>
+			<para>assertSemanticField</para>
+		</listitem>
+		<listitem>
+			<para>assertCoreference</para>
+		</listitem>
+		<listitem>
+			<para>assertTagset</para>
+		</listitem>
+		<listitem>
+			<para>assertTagsetMapping</para>
+		</listitem>
+	</itemizedlist>
+	<para>A typical unit test class has consists of two parts</para>
+	<para><orderedlist>
+			<listitem>
+				<para>the test cases</para>
+			</listitem>
+			<listitem>
+				<para>a <code>runTest</code> method - which sets up the pipeline required by the
+					test and then calls <code>TestRunner.runTest()</code>.</para>
+			</listitem>
+		</orderedlist>In the following example, mind that the text must be provided with spaces
+		separating the tokens (thus there must be a space before the full stop at the end of the
+		sentence) and with newline characters (\n) separating the sentences:</para>
+	<programlisting>@Test
+public void testEnglish() throws Exception
+{	
+  JCas jcas = runTest("en", null, "This is a test .");
+
+  String[] constituentMapped = new String[] { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16",
+    "VP 5,14" };
+
+  String[] constituentOriginal = new String[] { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16",
+    "VP 5,14" };
+
+  String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
+
+  String[] constituentTags = new String[] { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG",
+    "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S",
+    "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+  String[] unmappedConst = new String[] { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
+        
+  AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+  AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+  AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+  AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+}
+
+private JCas runTest(String aLanguage, String aVariant, String aDocument) throws Exception
+{
+  AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
+    OpenNlpParser.PARAM_VARIANT, aVariant,
+    OpenNlpParser.PARAM_PRINT_TAGSET, true,
+    OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
+  return TestRunner.runTest(parser, aLanguage, aDocument);
+}
+</programlisting>
+	<para>Test cases for segmenter components should not make use of the <code>TestRunner</code>
+		class, which already performs tokenization and sentence splitting internally.</para>
 </chapter>
