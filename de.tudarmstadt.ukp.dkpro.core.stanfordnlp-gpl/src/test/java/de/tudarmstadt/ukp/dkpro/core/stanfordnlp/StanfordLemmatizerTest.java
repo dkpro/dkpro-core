@@ -46,7 +46,7 @@ public class StanfordLemmatizerTest
         Lemma[] lemmas = JCasUtil.select(aJCas, Lemma.class).toArray(new Lemma[0]);
         assertEquals(3, lemmas.length);
         assertEquals("foo", lemmas[0].getValue());
-        assertEquals("", lemmas[1].getValue());
+        assertEquals("_", lemmas[1].getValue());
         assertEquals("bar", lemmas[2].getValue());
     }
 
@@ -55,7 +55,7 @@ public class StanfordLemmatizerTest
 	{
         runTest("en", null, "This is a test _ .",
         		new String[] { "DT", "VBZ", "DT", "NN",  "NN", "."    },
-        		new String[] { "this",  "be",  "a", "test", "", "." });
+        		new String[] { "this",  "be",  "a", "test", "_", "." });
 
 	}
 

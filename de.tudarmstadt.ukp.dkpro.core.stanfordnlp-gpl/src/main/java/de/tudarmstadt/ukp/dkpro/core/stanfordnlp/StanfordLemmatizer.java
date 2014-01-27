@@ -66,7 +66,7 @@ public class StanfordLemmatizer
 				lemma = morphology.stem(token);
 			}
 			if (lemma == null) {
-                lemma = "";
+                lemma = token;
             }
 			Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
 			l.setValue(lemma);
