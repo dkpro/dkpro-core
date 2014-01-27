@@ -18,11 +18,9 @@
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
@@ -34,27 +32,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpParserTest
 {
-	static final String documentEnglish = "We need a very complicated example sentence, which " +
-			"contains as many constituents and dependencies as possible.";
-
 	@Test
-	public void testEnglishChunking()
+	public void testEnglish()
 		throws Exception
 	{
-		JCas jcas = runTest("en", "chunking", documentEnglish);
+		JCas jcas = runTest("en", "chunking", "We need a very complicated example sentence , "
+		        + "which contains as many constituents and dependencies as possible .");
 
-		String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
-				"NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
-				"ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
-				"WHNP 45,50" };
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 102,110", "NP 0,2",
+                "NP 64,110", "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110",
+                "ROOT 0,112", "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110",
+                "WHNP 46,51" };
 
-		String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
-				"NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
-				"ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
-				"WHNP 45,50" };
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 102,110", "NP 0,2",
+                "NP 64,110", "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110",
+                "ROOT 0,112", "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110",
+                "WHNP 46,51" };
 
 		String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
 				"ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -64,9 +61,9 @@ public class OpenNlpParserTest
 				"NNS", "IN", "JJ", "." };
 
 		String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) " +
-				"(VBN complicated)) (NN example) (NN sentence))(, ,) (SBAR (WHNP (WDT which)) " +
+				"(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) " +
 				"(S (VP (VBZ contains) (PP (IN as) (NP (NP (JJ many) (NNS constituents) (CC and) " +
-				"(NNS dependencies)) (PP (IN as) (ADJP (JJ possible))))))))))(. .)))";
+				"(NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))))) (. .)))";
 
         String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
                 "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
@@ -94,26 +91,15 @@ public class OpenNlpParserTest
      * Setup CAS to test parser for the English language (is only called once if an English test is
      * run)
      */
-	private JCas runTest(String aLanguage, String aVariant, String aText)
+	private JCas runTest(String aLanguage, String aVariant, String aDocument)
 		throws Exception
 	{
-		AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
-
-		// setup English
 		AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
 				OpenNlpParser.PARAM_VARIANT, aVariant,
 				OpenNlpParser.PARAM_PRINT_TAGSET, true,
 				OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
 
-		AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
-
-		AnalysisEngine engine = createEngine(aggregate);
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
-
-		return jcas;
+		return TestRunner.runTest(parser, aLanguage, aDocument);
 	}
 
 	@Rule
