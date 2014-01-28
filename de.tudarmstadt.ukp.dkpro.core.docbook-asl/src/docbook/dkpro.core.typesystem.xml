@@ -101,8 +101,21 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
-		<para>FIXME: Describe SemanticField</para>
-		<para>FIXME: Describe SemanticPredicate and SemanticArgument</para>
+		<para>The SemanticField is a coarse-grained semantic category that can be
+		attached to nouns, verbs or adjectives. Semantic field information is present e.g. in WordNet as
+		lexicographer file names. Previously, this kind of semantic information has also been called 
+		supersenses or semantic types.
+		</para>
+		<para>The SemanticPredicate annotation can be attached to predicates in a sentences. Semantic predicates
+		express events or situations and take semantic arguments expressing the participants in these events ore
+		situations. All forms of main verbs can be annotated with a SemanticPredicate. However, there are also many
+		nouns and adjectives that take arguments and can thus be annotated with a SemanticPredicate, e.g. event nouns,
+		such as "suggestion" (with arguments what and by whom), or relational adjectives, such as "proud" (with arguments
+		who and of what). The SemanticArgument annotation is attached to semantic arguments of semantic predicates.
+		Semantic arguments are characterized by their semantic role, e.g. Agent, Experiencer, Topic. 
+		The semantic role of an argument is related to its semantic type (for communication verbs, the 
+		Agent can be a person or an organization, but typically not food).
+		The semantic type of arguments is not yet covered by the SemanticType.</para>
 		<para>FIXME: Describe NamedEntity</para>
 	</section>
 </chapter>
