@@ -107,6 +107,7 @@ public class ArktweetTagger
                 setDefault(ARTIFACT_ID,
                         "${groupId}.arktools-model-tagger-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+                setDefault(VARIANT, "default");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
