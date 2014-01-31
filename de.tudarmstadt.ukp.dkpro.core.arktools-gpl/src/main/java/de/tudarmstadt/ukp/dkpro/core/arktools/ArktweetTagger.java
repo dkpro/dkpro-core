@@ -35,6 +35,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import cmu.arktweetnlp.Tagger;
 import cmu.arktweetnlp.Tagger.TaggedToken;
+import cmu.arktweetnlp.Twokenize;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -153,6 +154,8 @@ public class ArktweetTagger
     public void process(CAS cas) throws AnalysisEngineProcessException {
 
         String text = cas.getDocumentText();
+        // possibly normalized text as used inside ArktweetTagger
+        String normalizedText = Twokenize.normalizeTextForTagger(text);
 
         mappingProvider.configure(cas);
         modelProvider.configure(cas);
@@ -161,15 +164,29 @@ public class ArktweetTagger
 
         int start = 0;
         int end = 0;
-        int offset = 0;
+        int searchOffset = 0;
         for (TaggedToken taggedToken : taggedTokens) {
             String token = taggedToken.token;
             String tag = taggedToken.tag;
             
-            offset = text.indexOf(token, offset);
-            start = offset;
-            end = offset + token.length();
+            int tokenOffset = text.indexOf(token, searchOffset);
+            int normalizedOffset = normalizedText.indexOf(token, searchOffset);
+          
+            // the token cannot be found in the original text
+            // i.e. it has been normalized
+            // we need to find the replaced text
+            if (tokenOffset == -1) {
+                int ampersandOffset = text.indexOf("&", searchOffset);
+                int semicolonOffset = text.indexOf(";", searchOffset);
 
+                start = normalizedOffset;
+                end = normalizedOffset + token.length() + (semicolonOffset - ampersandOffset);
+            } 
+            else {
+                start = tokenOffset;
+                end = tokenOffset + token.length();
+            }            
+            
             Type posType = mappingProvider.getTagType(tag);
 
             AnnotationFS posAnno = cas.createAnnotation(posType, start, end);
@@ -180,7 +197,7 @@ public class ArktweetTagger
             tokenAnno.setFeatureValue(featPos, posAnno);
             cas.addFsToIndexes(tokenAnno);
 
-            offset = end;
+            searchOffset = end;
         }
     }
 }
