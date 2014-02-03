@@ -23,12 +23,15 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
 import static org.apache.uima.util.Level.WARNING;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.Properties;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UimaContext;
@@ -40,12 +43,11 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import com.googlecode.clearnlp.classification.model.StringModel;
-import com.googlecode.clearnlp.component.dep.CDEPPassParser;
-import com.googlecode.clearnlp.dependency.DEPNode;
-import com.googlecode.clearnlp.dependency.DEPTree;
-import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.nlp.NLPLib;
+import com.clearnlp.classification.model.StringModel;
+import com.clearnlp.component.dep.AbstractDEPParser;
+import com.clearnlp.dependency.DEPNode;
+import com.clearnlp.dependency.DEPTree;
+import com.clearnlp.nlp.NLPGetter;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -95,24 +97,27 @@ public class ClearNlpDependencyParser
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
-
+    protected String defaultModelLocation;
     private File workingDir;
 
-    private CasConfigurableProviderBase<CDEPPassParser> parserProvider;
+    private CasConfigurableProviderBase<AbstractDEPParser> parserProvider;
 
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
     {
         super.initialize(context);
+        
+        defaultModelLocation = variant != null && variant.equals("mayo") ?
+                    "classpath:/medical-en/dep": "classpath:/general-en/dep";
 
-        parserProvider = new ModelProviderBase<CDEPPassParser>()
+        parserProvider = new ModelProviderBase<AbstractDEPParser>()
         {
             {
                 setContextObject(ClearNlpDependencyParser.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-parser-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.bin");
+                setDefault(LOCATION, defaultModelLocation);
                 setDefault(VARIANT, "ontonotes");
 
                 setOverride(LOCATION, modelLocation);
@@ -121,19 +126,25 @@ public class ClearNlpDependencyParser
             }
 
             @Override
-            protected CDEPPassParser produceResource(URL aUrl)
+            protected AbstractDEPParser produceResource(URL aUrl)
                 throws IOException
             {
                 InputStream is = null;
+                BufferedInputStream bis = null;
+                ObjectInputStream ois = null;
+                GZIPInputStream gis = null;
+
                 try {
                     is = aUrl.openStream();
-                    CDEPPassParser parser = (CDEPPassParser) EngineGetter.getComponent(is,
-                            getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_DEP);
-
+                    String language = getAggregatedProperties().getProperty(LANGUAGE);
+                    gis = new GZIPInputStream(is);
+                    bis = new BufferedInputStream(gis);
+                    ois = new ObjectInputStream(bis);
+                    AbstractDEPParser parser = NLPGetter.getDEPParser(ois, language);
                     Properties metadata = getResourceMetaData();
 
-                    SingletonTagset depTags = new SingletonTagset(
-                            Dependency.class, metadata.getProperty("dependency.tagset"));
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class,
+                            metadata.getProperty("dependency.tagset"));
 
                     try {
                         for (StringModel model : parser.getModels()) {
@@ -165,6 +176,9 @@ public class ClearNlpDependencyParser
                     throw new IOException(e);
                 }
                 finally {
+                    closeQuietly(ois);
+                    closeQuietly(bis);
+                    closeQuietly(gis);
                     closeQuietly(is);
                 }
             }
@@ -178,7 +192,7 @@ public class ClearNlpDependencyParser
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
-        if (workingDir != null && workingDir.isDirectory()) {
+        if ((workingDir != null) && workingDir.isDirectory()) {
             FileUtils.deleteQuietly(workingDir);
         }
     }
@@ -207,7 +221,7 @@ public class ClearNlpDependencyParser
             }
 
             // Parse sentence
-            CDEPPassParser parser = parserProvider.getResource();
+            AbstractDEPParser parser = parserProvider.getResource();
             parser.process(tree);
 
             for (int i = 1; i < tree.size(); i++) {
