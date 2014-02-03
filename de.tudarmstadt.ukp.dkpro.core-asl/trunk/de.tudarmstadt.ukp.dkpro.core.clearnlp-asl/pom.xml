@@ -26,10 +26,10 @@
 	<name>DKPro Core ASL - Clear NLP</name>
 	<dependencies>
 		<dependency>
-			<groupId>com.googlecode.clearnlp</groupId>
+			<groupId>com.clearnlp</groupId>
 			<artifactId>clearnlp</artifactId>
-			<version>1.3.1</version>
-		</dependency>
+			<version>2.0.2</version>
+ 		</dependency>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit-core</artifactId>
@@ -154,57 +154,57 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</artifactId>
-				<version>20130226.0</version>
+				<version>20130715.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-en-mayo</artifactId>
-				<version>20121229.1</version>
+				<version>20131111.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-en-ontonotes</artifactId>
-				<version>20121229.1</version>
+				<version>20131128.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-tagger-en-mayo</artifactId>
-				<version>20121229.1</version>
+				<version>20131111.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-tagger-en-ontonotes</artifactId>
-				<version>20121229.1</version>
+				<version>20131128.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-pred-en-ontonotes</artifactId>
-				<version>20121229.0</version>
+				<version>20131128.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-pred-en-mayo</artifactId>
-				<version>20121229.0</version>
+				<version>20131111.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-role-en-ontonotes</artifactId>
-				<version>20121229.0</version>
+				<version>20131111.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-role-en-mayo</artifactId>
-				<version>20121229.0</version>
+				<version>20131111.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-srl-en-ontonotes</artifactId>
-				<version>20121229.0</version>
+				<version>20131128.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-srl-en-mayo</artifactId>
-				<version>20121229.0</version>
+				<version>20131111.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

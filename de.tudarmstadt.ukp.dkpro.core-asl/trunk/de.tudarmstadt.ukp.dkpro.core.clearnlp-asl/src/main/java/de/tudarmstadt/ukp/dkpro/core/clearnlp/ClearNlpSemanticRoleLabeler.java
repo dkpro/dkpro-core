@@ -18,11 +18,15 @@
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
 import static java.util.Arrays.asList;
+import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -31,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -41,15 +46,15 @@ import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import com.googlecode.clearnlp.classification.model.StringModel;
-import com.googlecode.clearnlp.component.AbstractComponent;
-import com.googlecode.clearnlp.component.AbstractStatisticalComponent;
-import com.googlecode.clearnlp.dependency.DEPArc;
-import com.googlecode.clearnlp.dependency.DEPLib;
-import com.googlecode.clearnlp.dependency.DEPNode;
-import com.googlecode.clearnlp.dependency.DEPTree;
-import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.nlp.NLPLib;
+import com.clearnlp.classification.model.StringModel;
+import com.clearnlp.component.AbstractComponent;
+import com.clearnlp.component.AbstractStatisticalComponent;
+import com.clearnlp.dependency.DEPArc;
+import com.clearnlp.dependency.DEPLib;
+import com.clearnlp.dependency.DEPNode;
+import com.clearnlp.dependency.DEPTree;
+import com.clearnlp.nlp.NLPGetter;
+import com.clearnlp.nlp.NLPMode;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -102,6 +107,7 @@ public class ClearNlpSemanticRoleLabeler
 	public static final String PARAM_PRED_MODEL_LOCATION = "predModelLocation";
 	@ConfigurationParameter(name = PARAM_PRED_MODEL_LOCATION, mandatory = false)
 	protected String predModelLocation;
+	protected String defaultPredModelLocation;
 
 	/**
 	 * Location from which the roleset classification model is read.
@@ -109,6 +115,7 @@ public class ClearNlpSemanticRoleLabeler
 	public static final String PARAM_ROLE_MODEL_LOCATION = "roleModelLocation";
 	@ConfigurationParameter(name = PARAM_ROLE_MODEL_LOCATION, mandatory = false)
 	protected String roleModelLocation;
+	protected String defaultRoleModelLocation;
 
 	/**
 	 * Location from which the semantic role labeling model is read.
@@ -116,6 +123,7 @@ public class ClearNlpSemanticRoleLabeler
 	public static final String PARAM_SRL_MODEL_LOCATION = "srlModelLocation";
 	@ConfigurationParameter(name = PARAM_SRL_MODEL_LOCATION, mandatory = false)
 	protected String srlModelLocation;
+    protected String defaultSrlModelLocation;
 
 	private CasConfigurableProviderBase<AbstractComponent> predicateFinder;
 
@@ -129,14 +137,15 @@ public class ClearNlpSemanticRoleLabeler
 	{
 		super.initialize(aContext);
 
+		defaultPredModelLocation = variant != null && variant.equals("mayo") ?
+                "classpath:/medical-en/pred": "classpath:/general-en/pred";
 		predicateFinder = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
 			    setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-pred-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
-						+ "pred-${language}-${variant}.bin");
+                setDefault(LOCATION, defaultPredModelLocation);
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, predModelLocation);
@@ -148,21 +157,38 @@ public class ClearNlpSemanticRoleLabeler
 			protected AbstractComponent produceResource(InputStream aStream)
 				throws Exception
 			{
-				AbstractComponent component = EngineGetter.getComponent(aStream,
-						getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_PRED);
-				printTags(NLPLib.MODE_PRED, component);
-				return component;
+                BufferedInputStream bis = null;
+                ObjectInputStream ois = null;
+                GZIPInputStream gis = null;
+                try{
+                    gis = new GZIPInputStream(aStream);
+                    bis = new BufferedInputStream(gis);
+                    ois = new ObjectInputStream(bis);
+                    AbstractComponent component = NLPGetter.getComponent(ois,
+						getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_PRED);
+                    printTags(NLPMode.MODE_PRED, component);
+                    return component;
+                }
+                catch (Exception e) {
+                    throw new IOException(e);
+                }
+                finally {
+                    closeQuietly(ois);
+                    closeQuietly(bis);
+                    closeQuietly(gis);
+                }
 			}
 		};
 
+		defaultRoleModelLocation = variant != null && variant.equals("mayo") ?
+                "classpath:/medical-en/role": "classpath:/general-en/role";
 		roleSetClassifier = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-role-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
-						+ "role-${language}-${variant}.bin");
+                setDefault(LOCATION, defaultRoleModelLocation);
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, roleModelLocation);
@@ -174,12 +200,32 @@ public class ClearNlpSemanticRoleLabeler
 			protected AbstractComponent produceResource(InputStream aStream)
 				throws Exception
 			{
-				AbstractComponent component = EngineGetter.getComponent(aStream,
-						getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_ROLE);
-				printTags(NLPLib.MODE_ROLE, component);
-				return component;
+                BufferedInputStream bis = null;
+                ObjectInputStream ois = null;
+                GZIPInputStream gis = null;
+                try{
+                    gis = new GZIPInputStream(aStream);
+                    bis = new BufferedInputStream(gis);
+                    ois = new ObjectInputStream(bis);
+                    AbstractComponent component = NLPGetter.getComponent(ois,
+						getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_ROLE);
+
+                    printTags(NLPMode.MODE_ROLE, component);
+                    return component;
+                }
+                catch (Exception e) {
+                    throw new IOException(e);
+                }
+                finally {
+                    closeQuietly(ois);
+                    closeQuietly(bis);
+                    closeQuietly(gis);
+                }
 			}
 		};
+		
+		defaultSrlModelLocation = variant != null && variant.equals("mayo") ?
+                "classpath:/medical-en/srl": "classpath:/general-en/srl";
 
 		roleLabeller = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
@@ -187,8 +233,7 @@ public class ClearNlpSemanticRoleLabeler
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-srl-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
-						+ "srl-${language}-${variant}.bin");
+                setDefault(LOCATION, defaultSrlModelLocation);
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, srlModelLocation);
@@ -200,10 +245,26 @@ public class ClearNlpSemanticRoleLabeler
 			protected AbstractComponent produceResource(InputStream aStream)
 				throws Exception
 			{
-				AbstractComponent component = EngineGetter.getComponent(aStream,
-						getAggregatedProperties().getProperty(LANGUAGE), NLPLib.MODE_SRL);
-				printTags(NLPLib.MODE_SRL, component);
-				return component;
+                BufferedInputStream bis = null;
+                ObjectInputStream ois = null;
+                GZIPInputStream gis = null;
+                try{
+                    gis = new GZIPInputStream(aStream);
+                    bis = new BufferedInputStream(gis);
+                    ois = new ObjectInputStream(bis);
+                    AbstractComponent component = NLPGetter.getComponent(ois,
+						getAggregatedProperties().getProperty(LANGUAGE), NLPMode.MODE_SRL);
+                    printTags(NLPMode.MODE_SRL, component);
+                    return component;
+                }
+                catch (Exception e) {
+                    throw new IOException(e);
+                }
+                finally {
+                    closeQuietly(ois);
+                    closeQuietly(bis);
+                    closeQuietly(gis);
+                }
 			}
 		};
 	}
@@ -219,9 +280,8 @@ public class ClearNlpSemanticRoleLabeler
 		// Iterate over all sentences
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
-
-			DEPTree tree = new DEPTree();
-
+            DEPTree tree = new DEPTree();
+            
 			// Generate:
 			// - DEPNode
 			// - pos tags
@@ -245,6 +305,16 @@ public class ClearNlpSemanticRoleLabeler
 
 				token.setHead(head, dep.getDependencyType());
 			}
+			// For the root node
+	        for (int i = 0; i < tokens.size(); i++) {
+	                DEPNode parserNode = tree.get(i + 1);
+	                if(parserNode.getLabel() == null){
+	                    int headIndex = tokens.indexOf(null);
+	                    DEPNode head = tree.get(headIndex + 1);
+	                    parserNode.setHead(head, "root");
+	                    break;
+	                }
+	         }
 
 			// Do the SRL
 			predicateFinder.getResource().process(tree);

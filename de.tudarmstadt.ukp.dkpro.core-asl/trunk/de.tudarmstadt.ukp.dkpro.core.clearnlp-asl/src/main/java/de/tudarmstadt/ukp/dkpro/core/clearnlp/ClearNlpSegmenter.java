@@ -17,29 +17,20 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
-import java.net.URL;
 import java.util.List;
 
-import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
 
-import com.googlecode.clearnlp.engine.EngineGetter;
-import com.googlecode.clearnlp.segmentation.AbstractSegmenter;
-import com.googlecode.clearnlp.tokenization.AbstractTokenizer;
+import com.clearnlp.nlp.NLPGetter;
+import com.clearnlp.segmentation.AbstractSegmenter;
+import com.clearnlp.tokenization.AbstractTokenizer;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
@@ -75,59 +66,10 @@ public class ClearNlpSegmenter
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	private CasConfigurableProviderBase<AbstractSegmenter> modelProvider;
-
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
-
-		modelProvider = new CasConfigurableProviderBase<AbstractSegmenter>()
-		{
-			{
-			    setContextObject(ClearNlpSegmenter.this);
-
-				setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
-				setDefault(ARTIFACT_ID,
-						"de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-${language}-${variant}");
-
-				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/" +
-						"morph-${language}-${variant}.bin");
-				setDefault(VARIANT, "default");
-
-				setOverride(LOCATION, modelLocation);
-				setOverride(LANGUAGE, language);
-				setOverride(VARIANT, variant);
-			}
-
-			@Override
-			protected AbstractSegmenter produceResource(URL aUrl)
-				throws IOException
-			{
-				InputStream is = null;
-				try {
-					is = aUrl.openStream();
-					String language = getAggregatedProperties().getProperty(PARAM_LANGUAGE);
-					AbstractTokenizer tokenizer = EngineGetter.getTokenizer(language, is);
-					return EngineGetter.getSegmenter(language, tokenizer);
-				}
-				catch (Exception e) {
-					throw new IOException(e);
-				}
-				finally {
-					closeQuietly(is);
-				}
-			}
-		};
-	}
-
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
-		CAS cas = aJCas.getCas();
-		modelProvider.configure(cas);
 
 		super.process(aJCas);
 	}
@@ -136,7 +78,8 @@ public class ClearNlpSegmenter
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-		AbstractSegmenter segmenter = modelProvider.getResource();
+	    AbstractTokenizer tokenizer = NLPGetter.getTokenizer(aJCas.getDocumentLanguage());
+	    AbstractSegmenter segmenter = NLPGetter.getSegmenter(aJCas.getDocumentLanguage(), tokenizer);
 
 		List<List<String>> sentences = segmenter.getSentences(new BufferedReader(new StringReader(aText)));
 
