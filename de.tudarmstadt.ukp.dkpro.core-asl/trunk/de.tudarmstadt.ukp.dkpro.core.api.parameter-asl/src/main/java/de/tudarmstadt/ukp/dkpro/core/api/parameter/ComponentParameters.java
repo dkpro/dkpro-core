@@ -104,6 +104,8 @@ public final class ComponentParameters
 
 	private static final String POS = "POS";
 
+    private static final String MORPH = "Morph";
+
 	private static final String CHUNK = "Chunk";
 	
 	private static final String CONSTITUENT = "Constituent";
@@ -159,6 +161,8 @@ public final class ComponentParameters
 	public static final String PARAM_WRITE_LEMMA = WRITE + LEMMA;
 
 	public static final String PARAM_WRITE_POS = WRITE + POS;
+
+    public static final String PARAM_WRITE_MORPH = WRITE + MORPH;
 
 	public static final String PARAM_WRITE_CONSTITUENT = WRITE + CONSTITUENT;
 
