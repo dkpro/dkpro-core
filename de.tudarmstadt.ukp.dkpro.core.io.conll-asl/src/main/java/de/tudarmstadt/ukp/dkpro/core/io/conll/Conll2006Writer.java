@@ -24,13 +24,15 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
+
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -62,7 +64,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * @author Seid Muhie Yimam
  * @author Richard Eckart de Castilho
  * 
- * @see <a href="http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */
 public class Conll2006Writer
     extends JCasFileWriter_ImplBase
@@ -79,6 +81,22 @@ public class Conll2006Writer
     public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
     @ConfigurationParameter(name = PARAM_FILENAME_SUFFIX, mandatory = true, defaultValue = ".conll")
     private String filenameSuffix;
+
+    public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+    private boolean writePos;
+
+    public static final String PARAM_WRITE_MORPH = "writeMorph";
+    @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
+    private boolean writeMorph;
+
+    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
+    private boolean writeLemma;
+
+    public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
+    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
+    private boolean writeDependency;
 
     @Override
     public void process(JCas aJCas)
@@ -104,11 +122,19 @@ public class Conll2006Writer
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
             // Tokens
-            Iterator<Token> tokens = selectCovered(Token.class, sentence).iterator();
-            for (int i = 1; tokens.hasNext(); i++) {
+            List<Token> tokens = selectCovered(Token.class, sentence);
+            
+            // Check if we should try to include the FEATS in output
+            List<Morpheme> morphology = selectCovered(Morpheme.class, sentence);
+            boolean useFeats = tokens.size() == morphology.size();
+            
+            for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
-                row.id = i;
-                row.token = tokens.next();
+                row.id = i+1;
+                row.token = tokens.get(i);
+                if (useFeats) {
+                    row.feats = morphology.get(i);
+                }
                 ctokens.put(row.token, row);
             }
 
@@ -119,12 +145,14 @@ public class Conll2006Writer
 
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
-                String lemma = (row.token.getLemma() != null) ? row.token.getLemma().getValue()
-                        : UNUSED;
+                String lemma = UNUSED;
+                if (writeLemma && (row.token.getLemma() != null)) {
+                    lemma = row.token.getLemma().getValue();
+                }
 
                 String pos = UNUSED;
                 String cpos = UNUSED;
-                if (row.token.getPos() != null) {
+                if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                     if (!(posAnno instanceof POS)) {
@@ -137,7 +165,7 @@ public class Conll2006Writer
                 
                 int head = 0;
                 String deprel = UNUSED;
-                if (row.deprel != null) {
+                if (writeDependency && (row.deprel != null)) {
                     deprel = row.deprel.getDependencyType();
                     head = ctokens.get(row.deprel.getGovernor()).id;
                     if (head == row.id) {
@@ -145,9 +173,18 @@ public class Conll2006Writer
                         head = 0;
                     }
                 }
+                
+                String feats = UNUSED;
+                if (writeMorph && (row.feats != null)) {
+                    feats = row.feats.getMorphTag();
+                }
+                
+                String phead = UNUSED;
+                String pdeprel = UNUSED;
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t_\t%d\t%s\t_\t_\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, head, deprel);
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n", row.id,
+                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
+                        pdeprel);
             }
 
             aOut.println();
@@ -158,6 +195,7 @@ public class Conll2006Writer
     {
         int id;
         Token token;
+        Morpheme feats;
         Dependency deprel;
     }
 }
