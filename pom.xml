@@ -647,7 +647,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.textcat-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
 	</modules>
 	<build>
