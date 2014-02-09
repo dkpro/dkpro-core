@@ -426,7 +426,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
 				<version>1.6.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -843,7 +843,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textcat-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.tokit-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.treetagger-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl/src/main/java" includes="**/*.java" />
 								</cobertura-report>
 							</target>
 						</configuration>
