@@ -30,8 +30,8 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementNormalizer.SrcSurroundings;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementNormalizer.TargetSurroundings;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
 
 public class NormalizerFactoryTest
 {
