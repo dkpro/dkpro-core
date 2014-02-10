@@ -37,7 +37,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class NormalizerFactory 
 {
-    String separator = java.io.File.separator;
     int view_counter = 0;
     private final static String INITIAL_VIEW = "_InitialView";
 

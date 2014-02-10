@@ -44,66 +44,66 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.Normalizer_ImplBase;
 
 @TypeCapability
 (
-	inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" }, 
-	outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"}
-	)
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" }, 
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"}
+        )
 
 public class SpellCheckerNormalizer extends Normalizer_ImplBase 
 {
     @Override
     protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap( JCas jcas) 
     {
-	Map<Integer, List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer, List<SofaChangeAnnotation>>();
-	int changesMapIndex = 1;
+        Map<Integer, List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer, List<SofaChangeAnnotation>>();
+        int changesMapIndex = 1;
 
-	for (Token token : JCasUtil.select(jcas, Token.class)) 
-	{	    
-	    List<SofaChangeAnnotation> tokenChangeList = new ArrayList<SofaChangeAnnotation>();
+        for (Token token : JCasUtil.select(jcas, Token.class)) 
+        {	    
+            List<SofaChangeAnnotation> tokenChangeList = new ArrayList<SofaChangeAnnotation>();
 
-	    List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class, token.getBegin(), token.getEnd());
+            List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class, token.getBegin(), token.getEnd());
 
-	    if (!anomalyList.isEmpty()) 
-	    {
-		SpellingAnomaly anomaly = anomalyList.get(0);
-		SofaChangeAnnotation sca = new SofaChangeAnnotation(jcas);
-		sca.setBegin(anomaly.getBegin());
-		sca.setEnd(anomaly.getEnd());
-		sca.setOperation(OP_REPLACE);
-		sca.setValue(getBestSuggestion(anomaly));
-		tokenChangeList.add(sca);
-	    }
+            if (!anomalyList.isEmpty()) 
+            {
+                SpellingAnomaly anomaly = anomalyList.get(0);
+                SofaChangeAnnotation sca = new SofaChangeAnnotation(jcas);
+                sca.setBegin(anomaly.getBegin());
+                sca.setEnd(anomaly.getEnd());
+                sca.setOperation(OP_REPLACE);
+                sca.setValue(getBestSuggestion(anomaly));
+                tokenChangeList.add(sca);
+            }
 
-	    changesMap.put(changesMapIndex, tokenChangeList);
-	    changesMapIndex++;
-	}
+            changesMap.put(changesMapIndex, tokenChangeList);
+            changesMapIndex++;
+        }
 
-	return changesMap;
+        return changesMap;
     }
 
     @Override
     protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as) throws AnalysisEngineProcessException 
     {
-	Map<Integer, Boolean> tokenReplaceMap = new TreeMap<Integer, Boolean>();
+        Map<Integer, Boolean> tokenReplaceMap = new TreeMap<Integer, Boolean>();
 
-	int replaceMapIndex = 1;
+        int replaceMapIndex = 1;
 
-	for (Token token : JCasUtil.select(jcas, Token.class)) 
-	{
-	    List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class, token.getBegin(), token.getEnd());
+        for (Token token : JCasUtil.select(jcas, Token.class)) 
+        {
+            List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class, token.getBegin(), token.getEnd());
 
-	    if (!anomalyList.isEmpty()) 
-	    {
-		tokenReplaceMap.put(replaceMapIndex, true);
-	    } 
-	    else 
-	    {
-		tokenReplaceMap.put(replaceMapIndex, false);
-	    }
+            if (!anomalyList.isEmpty()) 
+            {
+                tokenReplaceMap.put(replaceMapIndex, true);
+            } 
+            else 
+            {
+                tokenReplaceMap.put(replaceMapIndex, false);
+            }
 
-	    replaceMapIndex++;
-	}
+            replaceMapIndex++;
+        }
 
-	return tokenReplaceMap;
+        return tokenReplaceMap;
 
     }
 
@@ -112,27 +112,27 @@ public class SpellCheckerNormalizer extends Normalizer_ImplBase
     // first highest one.
     private String getBestSuggestion(SpellingAnomaly anomaly) 
     {
-	Float bestCertainty = 0.0f;
-	String bestReplacement = "";
+        Float bestCertainty = 0.0f;
+        String bestReplacement = "";
 
-	for (int i = 0; i < anomaly.getSuggestions().size(); i++) 
-	{
-	    Float currentCertainty = anomaly.getSuggestions(i).getCertainty();
-	    String currentReplacement = anomaly.getSuggestions(i).getReplacement();
+        for (int i = 0; i < anomaly.getSuggestions().size(); i++) 
+        {
+            Float currentCertainty = anomaly.getSuggestions(i).getCertainty();
+            String currentReplacement = anomaly.getSuggestions(i).getReplacement();
 
-	    if (currentCertainty > bestCertainty) 
-	    {
-		bestCertainty = currentCertainty;
-		bestReplacement = currentReplacement;
-	    }
+            if (currentCertainty > bestCertainty) 
+            {
+                bestCertainty = currentCertainty;
+                bestReplacement = currentReplacement;
+            }
 
-	    if (bestCertainty == 100) 
-	    {
-		break;
-	    }
-	}
+            if (bestCertainty == 100) 
+            {
+                break;
+            }
+        }
 
-	return bestReplacement;
+        return bestReplacement;
     }
 
 }
