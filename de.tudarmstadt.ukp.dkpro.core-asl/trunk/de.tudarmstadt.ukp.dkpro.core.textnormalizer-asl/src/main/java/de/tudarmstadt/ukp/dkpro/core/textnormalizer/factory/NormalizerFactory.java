@@ -26,13 +26,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.jazzy.JazzyChecker;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.CapitalizationNormalizer;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ExpressiveLengtheningNormalizer;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementNormalizer;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementNormalizer.SrcSurroundings;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementNormalizer.TargetSurroundings;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.CapitalizationNormalizer;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.ExpressiveLengtheningNormalizer;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.SharpSNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellCheckerNormalizer;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.UmlautSharpSNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class NormalizerFactory 
@@ -58,9 +58,9 @@ public class NormalizerFactory
     {
 	AggregateBuilder ab = new AggregateBuilder();
 	ab.add(createEngineDescription(BreakIteratorSegmenter.class), INITIAL_VIEW, getSourceView());
-	ab.add(createEngineDescription(	UmlautSharpSNormalizer.class,
-	        UmlautSharpSNormalizer.FREQUENCY_PROVIDER, frequencyProvider,
-	        UmlautSharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, minFrequency)
+	ab.add(createEngineDescription(	SharpSNormalizer.class,
+	        SharpSNormalizer.FREQUENCY_PROVIDER, frequencyProvider,
+	        SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD, minFrequency)
 	        , INITIAL_VIEW, getSourceView());
 	ab.add(createEngineDescription(ApplyChangesAnnotator.class), "source", getSourceView(), "target", getTargetView());
 	AnalysisEngineDescription aed = ab.createAggregateDescription();
@@ -73,10 +73,10 @@ public class NormalizerFactory
     {
 	AggregateBuilder ab = new AggregateBuilder();
 	ab.add(createEngineDescription(
-		ReplacementNormalizer.class, 
-		ReplacementNormalizer.PARAM_REPLACE_LOCATION, filepath,
-		ReplacementNormalizer.PARAM_SRC_SURROUNDINGS, src,
-		ReplacementNormalizer.PARAM_TARGET_SURROUNDINGS, target), INITIAL_VIEW, getSourceView());
+		ReplacementFileNormalizer.class, 
+		ReplacementFileNormalizer.PARAM_REPLACE_LOCATION, filepath,
+		ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, src,
+		ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, target), INITIAL_VIEW, getSourceView());
 	ab.add(createEngineDescription(ApplyChangesAnnotator.class), "source", getSourceView(), "target", getTargetView());	
 	AnalysisEngineDescription aed = ab.createAggregateDescription();
 //	aed.setAnnotatorImplementationName(new File(filepath).getName().split("\\")[0]);
