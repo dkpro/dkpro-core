@@ -76,7 +76,20 @@ public abstract class Normalizer_ImplBase
         for (Map.Entry<Integer, List<SofaChangeAnnotation>> changesEntry : changesMap.entrySet()) {
             allChanges.addAll(changesEntry.getValue());
         }
-        Collections.sort(allChanges, new SofaChangeComparator());
+        Collections.sort(allChanges, new Comparator<SofaChangeAnnotation>(){
+
+            @Override
+            public int compare(SofaChangeAnnotation arg0, SofaChangeAnnotation arg1)
+            {
+                if (arg0.getBegin() < arg1.getBegin()) {
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
+            }
+            
+        });
 
         AlignedString as = new AlignedString(jcas.getDocumentText());
         NormalizationUtils.applyChanges(as, allChanges);
@@ -91,22 +104,6 @@ public abstract class Normalizer_ImplBase
                 for (SofaChangeAnnotation c : changesMap.get(key)) {
                     c.addToIndexes();
                 }
-            }
-        }
-    }
-
-    public class SofaChangeComparator
-        implements Comparator<SofaChangeAnnotation>
-    {
-
-        @Override
-        public int compare(SofaChangeAnnotation arg0, SofaChangeAnnotation arg1)
-        {
-            if (arg0.getBegin() < arg1.getBegin()) {
-                return -1;
-            }
-            else {
-                return 1;
             }
         }
     }

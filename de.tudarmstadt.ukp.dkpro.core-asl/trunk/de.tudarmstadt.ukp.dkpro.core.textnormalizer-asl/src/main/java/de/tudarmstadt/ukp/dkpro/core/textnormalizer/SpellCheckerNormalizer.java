@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.Normalizer_ImplBase;
 
 /**
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.
