@@ -61,8 +61,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @author Richard Eckart de Castilho
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(
+    inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+    outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ClearNlpPosTagger
     extends JCasAnnotator_ImplBase
 {
@@ -86,8 +88,6 @@ public class ClearNlpPosTagger
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
-    
-    protected String defaultModelLocation; 
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
@@ -121,16 +121,14 @@ public class ClearNlpPosTagger
     {
         super.initialize(aContext);
         
-        defaultModelLocation = variant != null && variant.equals("mayo") ?
-                "classpath:/medical-en/pos": "classpath:/general-en/pos";
-
         modelProvider = new ModelProviderBase<AbstractPOSTagger>()
         {
             {
                 setContextObject(ClearNlpPosTagger.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-tagger-${language}-${variant}");
-                setDefault(LOCATION, defaultModelLocation);
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
                 setDefault(VARIANT, "ontonotes");
 
                 setOverride(LOCATION, modelLocation);
@@ -182,7 +180,6 @@ public class ClearNlpPosTagger
 
         };
 
-        
         posMappingProvider = new MappingProvider();
         posMappingProvider.setDefault(MappingProvider.LOCATION,
                 "classpath:/de/tudarmstadt/ukp/dkpro/"
@@ -225,6 +222,5 @@ public class ClearNlpPosTagger
                 i++;
             }
         }
-    }
-    
+    }    
 }
