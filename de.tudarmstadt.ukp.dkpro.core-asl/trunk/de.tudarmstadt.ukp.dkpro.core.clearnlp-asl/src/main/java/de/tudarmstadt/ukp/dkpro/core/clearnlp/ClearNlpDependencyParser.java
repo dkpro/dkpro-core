@@ -62,10 +62,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  *
  * @author Richard Eckart de Castilho
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+@TypeCapability(
+    inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" }, 
+    outputs = { "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class ClearNlpDependencyParser
     extends JCasAnnotator_ImplBase
 {
@@ -97,7 +99,7 @@ public class ClearNlpDependencyParser
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
-    protected String defaultModelLocation;
+    
     private File workingDir;
 
     private CasConfigurableProviderBase<AbstractDEPParser> parserProvider;
@@ -108,16 +110,13 @@ public class ClearNlpDependencyParser
     {
         super.initialize(context);
         
-        defaultModelLocation = variant != null && variant.equals("mayo") ?
-                    "classpath:/medical-en/dep": "classpath:/general-en/dep";
-
         parserProvider = new ModelProviderBase<AbstractDEPParser>()
         {
             {
                 setContextObject(ClearNlpDependencyParser.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-parser-${language}-${variant}");
-                setDefault(LOCATION, defaultModelLocation);
+                setDefault(LOCATION, "classpath:/${package}/lib/parser-${language}-${variant}.properties");
                 setDefault(VARIANT, "ontonotes");
 
                 setOverride(LOCATION, modelLocation);
