@@ -107,7 +107,6 @@ public class ClearNlpSemanticRoleLabeler
 	public static final String PARAM_PRED_MODEL_LOCATION = "predModelLocation";
 	@ConfigurationParameter(name = PARAM_PRED_MODEL_LOCATION, mandatory = false)
 	protected String predModelLocation;
-	protected String defaultPredModelLocation;
 
 	/**
 	 * Location from which the roleset classification model is read.
@@ -115,7 +114,6 @@ public class ClearNlpSemanticRoleLabeler
 	public static final String PARAM_ROLE_MODEL_LOCATION = "roleModelLocation";
 	@ConfigurationParameter(name = PARAM_ROLE_MODEL_LOCATION, mandatory = false)
 	protected String roleModelLocation;
-	protected String defaultRoleModelLocation;
 
 	/**
 	 * Location from which the semantic role labeling model is read.
@@ -123,7 +121,6 @@ public class ClearNlpSemanticRoleLabeler
 	public static final String PARAM_SRL_MODEL_LOCATION = "srlModelLocation";
 	@ConfigurationParameter(name = PARAM_SRL_MODEL_LOCATION, mandatory = false)
 	protected String srlModelLocation;
-    protected String defaultSrlModelLocation;
 
 	private CasConfigurableProviderBase<AbstractComponent> predicateFinder;
 
@@ -137,15 +134,14 @@ public class ClearNlpSemanticRoleLabeler
 	{
 		super.initialize(aContext);
 
-		defaultPredModelLocation = variant != null && variant.equals("mayo") ?
-                "classpath:/medical-en/pred": "classpath:/general-en/pred";
 		predicateFinder = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
 			    setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-pred-${language}-${variant}");
-                setDefault(LOCATION, defaultPredModelLocation);
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
+                        + "pred-${language}-${variant}.properties");
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, predModelLocation);
@@ -180,15 +176,14 @@ public class ClearNlpSemanticRoleLabeler
 			}
 		};
 
-		defaultRoleModelLocation = variant != null && variant.equals("mayo") ?
-                "classpath:/medical-en/role": "classpath:/general-en/role";
 		roleSetClassifier = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-role-${language}-${variant}");
-                setDefault(LOCATION, defaultRoleModelLocation);
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
+                        + "role-${language}-${variant}.properties");
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, roleModelLocation);
@@ -224,16 +219,14 @@ public class ClearNlpSemanticRoleLabeler
 			}
 		};
 		
-		defaultSrlModelLocation = variant != null && variant.equals("mayo") ?
-                "classpath:/medical-en/srl": "classpath:/general-en/srl";
-
 		roleLabeller = new CasConfigurableStreamProviderBase<AbstractComponent>()
 		{
 			{
                 setContextObject(ClearNlpSemanticRoleLabeler.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-srl-${language}-${variant}");
-                setDefault(LOCATION, defaultSrlModelLocation);
+                setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/clearnlp/lib/"
+                        + "srl-${language}-${variant}.properties");
 				setDefault(VARIANT, "ontonotes");
 
 				setOverride(LOCATION, srlModelLocation);
