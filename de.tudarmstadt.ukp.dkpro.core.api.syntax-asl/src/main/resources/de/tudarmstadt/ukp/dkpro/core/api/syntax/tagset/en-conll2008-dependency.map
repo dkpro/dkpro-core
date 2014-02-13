@@ -1,6 +1,6 @@
 # CONLL 2008 Dependency labels
 #
-# Source: http://barcelona.research.yahoo.net/dokuwiki/lib/exe/fetch.php?id=conll2008%3Aformat&cache=cache&media=conll2008:conll-syntax.pdf
+# Source: http://aclweb.org/anthology//W/W08/W08-2121.pdf
 #
 # ADV Unclassified adverbial
 ADV=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
@@ -18,7 +18,7 @@ COORD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # DEP Unclassified relation
 DEP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # DTV Dative (the to phrase for verbs that undergo dative shift) EXT Extent
-uby: gf= prepositionalComplement, preposition=to
+# uby: gf= prepositionalComplement, preposition=to
 DTV=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
 # EXTR Extraposed element in expletive constructions
 EXTR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
