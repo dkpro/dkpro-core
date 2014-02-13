@@ -53,4 +53,3 @@ X=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # Categories used by DKPro internally
 #
 ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
-*
