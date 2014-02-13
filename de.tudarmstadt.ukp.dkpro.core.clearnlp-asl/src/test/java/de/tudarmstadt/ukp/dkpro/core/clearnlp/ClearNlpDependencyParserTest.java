@@ -62,7 +62,7 @@ public class ClearNlpDependencyParserTest
 		        "[ 69, 81]Dependency(pobj) D[69,81](constituents) G[61,63](as)",
 		        "[ 82, 85]Dependency(cc) D[82,85](and) G[69,81](constituents)",
 		        "[ 86, 98]Dependency(conj) D[86,98](dependencies) G[69,81](constituents)",
-		        "[ 99,101]Dependency(prep) D[99,101](as) G[69,81](constituents)",
+		        "[ 99,101]Dependency(prep) D[99,101](as) G[86,98](dependencies)",
 		        "[102,110]Dependency(amod) D[102,110](possible) G[99,101](as)",
 		        "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
 
@@ -108,7 +108,7 @@ public class ClearNlpDependencyParserTest
 				createEngineDescription(ClearNlpDependencyParser.class,
 						ClearNlpDependencyParser.PARAM_VARIANT, aVariant,
 						ClearNlpDependencyParser.PARAM_PRINT_TAGSET, true),
-				createEngineDescription(DependencyDumper.class));
+		        createEngineDescription(DependencyDumper.class));
 
 		return TestRunner.runTest(engine, aLanguage, aText);
 	}
