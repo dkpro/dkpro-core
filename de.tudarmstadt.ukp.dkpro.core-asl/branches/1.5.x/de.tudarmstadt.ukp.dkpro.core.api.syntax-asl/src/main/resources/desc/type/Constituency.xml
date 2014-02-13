@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Constituent</name>
   <description>A constituent of a parser.</description>
   <version>${version}</version>
@@ -164,6 +165,11 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X</name>
+      <description/>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</supertypeName>
+    </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PRN</name>
       <description/>
       <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</supertypeName>
     </typeDescription>
