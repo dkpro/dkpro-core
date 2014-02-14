@@ -59,6 +59,7 @@
 		<model-lang-jar language="es"/>
 		<model-lang-jar language="et"/>
 		<model-lang-jar language="fr"/>
+		<model-lang-jar language="fi"/>
 		<!-- model-lang-jar language="gr"/ -->
 		<model-lang-jar language="gz"/>
 		<model-lang-jar language="it"/>
@@ -145,7 +146,7 @@
 	</target>
 	
 	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="20130507.0"/>
+		<property name="version.bin" value="20131118.0"/>
 			
 		<fail unless="outputDir">No output directory set.</fail>
 		<mkdir dir="${outputDir}/bin"/>
@@ -177,10 +178,11 @@
 		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
 		  - 2012-09-12 | 2013-02-28 | 4b6459574b6b334a090399b76dbc2cdb
 		  - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
-		  - 2013-05-07 | now        | 9c015219f8a5c696f03ee43b72e913b0
+		  - 2013-05-07 | 2013-11-18 | 9c015219f8a5c696f03ee43b72e913b0
+		  - 2013-11-18 | now        | cbc0833fd6cb8c1ec1ea4cae4d40b25a
 		  -->
 		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="9c015219f8a5c696f03ee43b72e913b0"/>
+			platform="linux-x86_64" file="tree-tagger" md5="cbc0833fd6cb8c1ec1ea4cae4d40b25a"/>
 
 		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
@@ -210,7 +212,7 @@
 			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
 	</target>
 	
-	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, it, ru, sw, es, pt, gz, zh, sl"/>
+	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, fi, it, ru, sw, es, pt, gz, zh, sl"/>
 	
 	<!--
 	- Little Endian - x86 (Linux, Windows, Mac-Intel)
@@ -329,6 +331,20 @@
     		md5="bd3661679ffe9630f6bd61c59cea391b"/>
 	</target>
 
+	<target name="fi">
+		<property name="version.fi" value="20130716.0"/>
+		
+		<!-- FILE: finnish-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-07-16 | now        | 241dbbae52baad70787a952d3a0e71a3
+		  -
+		  - Corpus: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/
+		  - Tagset: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/FinnTreeBankManual.pdf
+		  -->
+    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2.bin.gz"
+    		type="tagger" endianness="little-endian" language="fi" encoding="UTF-8" tagset="ftb-tt"
+    		md5="241dbbae52baad70787a952d3a0e71a3"/>
+	</target>
+	
 	<target name="fr">
 		<property name="version.fr" value="20101115.0"/>
 		
@@ -430,7 +446,7 @@
 	</target>
 	
 	<target name="es">
-		<property name="version.es" value="20130403.0"/>
+		<property name="version.es" value="20131007.0"/>
 		
 		<!-- FILE: spanish-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-02 | now        | 5ccc79322b7954bfc82923e6123cac04
@@ -442,11 +458,12 @@
 		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
 		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
-		  - 2013-04-03 | now        | 30a9c4deed380e7986a4a76753ecde51
+		  - 2013-04-03 | 2013-10-07 | 30a9c4deed380e7986a4a76753ecde51
+		  - 2013-10-07 | now        | 8488c4319fac414802637b654a61db37
 		  -->
     	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz"
     		type="tagger" endianness="little-endian" language="es" encoding="UTF-8" tagset="crater"
-    		md5="30a9c4deed380e7986a4a76753ecde51"/>
+    		md5="8488c4319fac414802637b654a61db37"/>
 	</target>
 
 	<target name="pt">
