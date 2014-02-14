@@ -28,6 +28,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [is]
 Token
    sofa: _InitialView
@@ -37,6 +38,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [Cornelia]
 Name
    sofa: _InitialView
@@ -51,6 +53,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [?]
 Token
    sofa: _InitialView
@@ -60,6 +63,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [Suddely Marcus shouts: "Cornelia is standing over there!"]
 Sentence
    sofa: _InitialView
@@ -74,6 +78,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [Marcus]
 Token
    sofa: _InitialView
@@ -83,6 +88,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [shouts]
 Token
    sofa: _InitialView
@@ -92,6 +98,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [:]
 Token
    sofa: _InitialView
@@ -101,6 +108,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 ["]
 Token
    sofa: _InitialView
@@ -110,6 +118,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [Cornelia]
 Name
    sofa: _InitialView
@@ -124,6 +133,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [is]
 Token
    sofa: _InitialView
@@ -133,6 +143,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [standing]
 Token
    sofa: _InitialView
@@ -142,6 +153,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [over]
 Token
    sofa: _InitialView
@@ -151,6 +163,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [there]
 Token
    sofa: _InitialView
@@ -160,6 +173,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 [!]
 Token
    sofa: _InitialView
@@ -169,6 +183,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 ["]
 Token
    sofa: _InitialView
@@ -178,8 +193,7 @@ Token
    lemma: <null>
    stem: <null>
    pos: <null>
+   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
