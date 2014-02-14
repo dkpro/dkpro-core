@@ -14,7 +14,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 /** Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -> "Camel", "Case"; "Zauberstab" -> "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
 <p>
- * Updated by JCasGen Thu Feb 13 16:04:48 CET 2014
+ * Updated by JCasGen Fri Feb 14 15:26:58 CET 2014
  * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
 public class Token extends Annotation {
@@ -157,25 +157,25 @@ public class Token extends Annotation {
    
     
   //*--------------*
-  //* Feature: morphologicalFeatures
+  //* Feature: morph
 
-  /** getter for morphologicalFeatures - gets The morphological feature associated with this token.
+  /** getter for morph - gets The morphological feature associated with this token.
    * @generated
    * @return value of the feature 
    */
-  public MorphologicalFeatures getMorphologicalFeatures() {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_morphologicalFeatures == null)
-      jcasType.jcas.throwFeatMissing("morphologicalFeatures", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    return (MorphologicalFeatures)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type)jcasType).casFeatCode_morphologicalFeatures)));}
+  public MorphologicalFeatures getMorph() {
+    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_morph == null)
+      jcasType.jcas.throwFeatMissing("morph", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    return (MorphologicalFeatures)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Token_Type)jcasType).casFeatCode_morph)));}
     
-  /** setter for morphologicalFeatures - sets The morphological feature associated with this token. 
+  /** setter for morph - sets The morphological feature associated with this token. 
    * @generated
    * @param v value to set into the feature 
    */
-  public void setMorphologicalFeatures(MorphologicalFeatures v) {
-    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_morphologicalFeatures == null)
-      jcasType.jcas.throwFeatMissing("morphologicalFeatures", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type)jcasType).casFeatCode_morphologicalFeatures, jcasType.ll_cas.ll_getFSRef(v));}    
+  public void setMorph(MorphologicalFeatures v) {
+    if (Token_Type.featOkTst && ((Token_Type)jcasType).casFeat_morph == null)
+      jcasType.jcas.throwFeatMissing("morph", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
+    jcasType.ll_cas.ll_setRefValue(addr, ((Token_Type)jcasType).casFeatCode_morph, jcasType.ll_cas.ll_getFSRef(v));}    
   }
 
     
