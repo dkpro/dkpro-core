@@ -47,7 +47,6 @@ class StanfordSegmenter
 extends SegmenterBase
 {
     public static final String PARAM_FALLBACK = "fallbackLanguage";
-    private final String fallbackLanguage = "en";
 
     private static final Map<String, InternalTokenizerFactory> tokenizerFactories;
 //    private static final Map<String, TreebankLanguagePack> languagePacks;
@@ -191,7 +190,7 @@ extends SegmenterBase
 	private
     Tokenizer getTokenizer(
     		final String aLanguage,
-    		final String aText)
+    		final String aText) throws AnalysisEngineProcessException
     {
 //    	TreebankLanguagePack tlp = languagePacks.get(aLanguage);
 //    	if (tlp == null) {
@@ -200,7 +199,9 @@ extends SegmenterBase
 
         InternalTokenizerFactory tk = tokenizerFactories.get(aLanguage);
         if (tk == null) {
-        	tk = tokenizerFactories.get(fallbackLanguage);
+        	throw new AnalysisEngineProcessException(
+        	        new IllegalArgumentException("StanfordSegmenter does not support this "
+        	        + "language: [" + aLanguage+"]"));
         }
     	return tk.create(aText);
     }
