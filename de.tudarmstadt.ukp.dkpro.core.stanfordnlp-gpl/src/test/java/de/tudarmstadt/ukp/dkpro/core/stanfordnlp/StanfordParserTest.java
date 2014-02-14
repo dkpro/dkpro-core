@@ -101,7 +101,7 @@ public class StanfordParserTest
         String[] constituentTags = new String[] { "AA", "AP", "AVP", "CAC", "CAP", "CAVP", "CCP",
                 "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA", "NM",
                 "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
-        
+
         String[] unmappedPos = new String[] { "$*LRB*", "-", ".$$." };
 
         String[] unmappedConst = new String[] { "NUR" };
@@ -156,7 +156,7 @@ public class StanfordParserTest
         String[] constituentTags = new String[] { "AA", "AP", "AVP", "CAC", "CAP", "CAVP", "CCP",
                 "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA", "NM",
                 "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
-        
+
         String[] unmappedPos = new String[] { "$*LRB*", "-", ".$$." };
 
         String[] unmappedConst = new String[] { "NUR" };
@@ -186,7 +186,7 @@ public class StanfordParserTest
                 "VP 3,109", "NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50",
                 "VP 51,109", "S 51,109", "PP 60,97", "NP 63,97", "PP 98,109", "ADJP 101,109" };
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
@@ -238,9 +238,9 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
-        
+
         String[] unmappedDep = new String[] { "gov" };
-        
+
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -269,7 +269,7 @@ public class StanfordParserTest
                 "NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
                 "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
@@ -321,7 +321,7 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
-        
+
         String[] unmappedDep = new String[] { "gov" };
 
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
@@ -352,7 +352,7 @@ public class StanfordParserTest
                 "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "QP 60,67", "ROOT 0,110",
                 "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
@@ -404,7 +404,7 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
-        
+
         String[] unmappedDep = new String[] { "gov" };
 
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
@@ -420,7 +420,7 @@ public class StanfordParserTest
         AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
         AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
-    
+
     @Test
     public void testEnglishWsjRnn()
         throws Exception
@@ -435,7 +435,7 @@ public class StanfordParserTest
                 "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "QP 60,67", "ROOT 0,110",
                 "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
                 "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
                 "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
@@ -487,7 +487,7 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
 
         String[] unmappedConst = new String[] {};
-        
+
         String[] unmappedDep = new String[] { "gov" };
 
         AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
@@ -503,7 +503,7 @@ public class StanfordParserTest
         AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
         AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
-    
+
     /**
      * This test uses simple double quotes.
      */
@@ -600,7 +600,7 @@ public class StanfordParserTest
 
         String[] unmappedConst = new String[] { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET",
                 "MWI", "MWN", "MWP", "MWPRO", "MWV" };
-        
+
         // NO DEP TAGS String[] unmappedDep = new String[] {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -646,7 +646,7 @@ public class StanfordParserTest
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
     }
-    
+
     @Test
     public void testChineseFactored()
         throws Exception
@@ -664,7 +664,7 @@ public class StanfordParserTest
                 "QP 19,21", "QP 4,6", "ROOT 0,31", "VP 17,23", "VP 17,30", "VP 2,13", "VP 24,30",
                 "VP 28,30" };
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[2,4](需要)",
                 "[  4,  6]Dependency(nummod) D[4,6](一个) G[11,13](句子)",
                 "[  6,  8]ADVMOD(advmod) D[6,8](非常) G[8,10](复杂)",
@@ -706,7 +706,7 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { ".$$.", "FRAG", "URL" };
 
         String[] unmappedConst = new String[] { "DFL", "FLR", "INC", "WHPP" };
-        
+
         // NO DEP TAGS String[] unmappedDep = new String[] {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -740,7 +740,7 @@ public class StanfordParserTest
                 "QP 19,21", "QP 4,6", "ROOT 0,31", "VP 17,23", "VP 17,27", "VP 2,30", "VP 24,27",
                 "VP 6,10", "VP 8,10" };
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = new String[] {
                 "[  0,  2]NSUBJ(nsubj) D[0,2](我们) G[2,4](需要)",
                 "[  4,  6]Dependency(nummod) D[4,6](一个) G[28,30](依赖)",
                 "[  6,  8]ADVMOD(advmod) D[6,8](非常) G[8,10](复杂)",
@@ -782,7 +782,7 @@ public class StanfordParserTest
         String[] unmappedPos = new String[] { ".$$." };
 
         String[] unmappedConst = new String[] { };
-        
+
         // NO DEP TAGS String[] unmappedDep = new String[] {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -866,7 +866,7 @@ public class StanfordParserTest
     {
         AnalysisEngineDescription segmenter;
 
-        if ("zh".equals(aLanguage)) {
+        if ("zh".equals(aLanguage) || "de".equals(aLanguage)) {
             segmenter = createEngineDescription(LanguageToolSegmenter.class);
         }
         else {
@@ -902,13 +902,13 @@ public class StanfordParserTest
     {
         // setup English
         AnalysisEngineDescription parser = createEngineDescription(StanfordParser.class,
-                StanfordParser.PARAM_VARIANT, aVariant, 
+                StanfordParser.PARAM_VARIANT, aVariant,
                 StanfordParser.PARAM_PRINT_TAGSET, true,
                 StanfordParser.PARAM_WRITE_CONSTITUENT, true,
-                StanfordParser.PARAM_WRITE_DEPENDENCY, true, 
-                StanfordParser.PARAM_WRITE_PENN_TREE, true, 
-                StanfordParser.PARAM_WRITE_POS, true, 
-                StanfordParser.PARAM_WRITE_PENN_TREE, true, 
+                StanfordParser.PARAM_WRITE_DEPENDENCY, true,
+                StanfordParser.PARAM_WRITE_PENN_TREE, true,
+                StanfordParser.PARAM_WRITE_POS, true,
+                StanfordParser.PARAM_WRITE_PENN_TREE, true,
                 StanfordParser.PARAM_QUOTE_BEGIN, new String[] { "‘" },
                 StanfordParser.PARAM_QUOTE_END, new String[] { "’" });
 

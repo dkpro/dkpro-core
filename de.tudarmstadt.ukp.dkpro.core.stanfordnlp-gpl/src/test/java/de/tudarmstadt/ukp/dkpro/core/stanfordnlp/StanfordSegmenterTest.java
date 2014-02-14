@@ -33,6 +33,6 @@ class StanfordSegmenterTest
 	{
 		AnalysisEngineDescription aed = createEngineDescription(StanfordSegmenter.class);
 
-		SegmenterHarness.run(aed, "de.4", "en.9", "ar.1", "zh.1", "zh.2");
+		SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.9", "ar.1", "zh.1", "zh.2");
 	}
 }
