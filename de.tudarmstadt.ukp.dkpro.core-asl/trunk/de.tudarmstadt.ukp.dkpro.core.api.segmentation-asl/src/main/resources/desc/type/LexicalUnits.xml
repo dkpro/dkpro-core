@@ -105,7 +105,7 @@
           <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</rangeTypeName>
         </featureDescription>
       <featureDescription>
-          <name>morphologicalFeatures</name>
+          <name>morph</name>
           <description>The morphological feature associated with this token.</description>
           <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures</rangeTypeName>
         </featureDescription>
