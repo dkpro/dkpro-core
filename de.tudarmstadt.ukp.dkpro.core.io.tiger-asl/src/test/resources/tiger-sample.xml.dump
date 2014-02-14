@@ -57,6 +57,7 @@ Token
       begin: 0
       end: 2
       PosValue: "$("
+   morph: <null>
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -125,6 +126,7 @@ Token
       begin: 3
       end: 7
       PosValue: "NE"
+   morph: <null>
 [Perot]
 NP
    sofa: _InitialView
@@ -154,6 +156,7 @@ Token
       begin: 8
       end: 13
       PosValue: "NE"
+   morph: <null>
 [wäre]
 Lemma
    sofa: _InitialView
@@ -183,6 +186,7 @@ Token
       begin: 14
       end: 18
       PosValue: "VAFIN"
+   morph: <null>
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -212,6 +216,7 @@ Token
       begin: 19
       end: 29
       PosValue: "ADV"
+   morph: <null>
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -258,6 +263,7 @@ Token
       begin: 30
       end: 33
       PosValue: "ART"
+   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -293,6 +299,7 @@ Token
       begin: 34
       end: 44
       PosValue: "ADJA"
+   morph: <null>
 [Diktator]
 NN
    sofa: _InitialView
@@ -322,6 +329,7 @@ Token
       begin: 45
       end: 53
       PosValue: "NN"
+   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -351,8 +359,7 @@ Token
       begin: 54
       end: 56
       PosValue: "$("
+   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
