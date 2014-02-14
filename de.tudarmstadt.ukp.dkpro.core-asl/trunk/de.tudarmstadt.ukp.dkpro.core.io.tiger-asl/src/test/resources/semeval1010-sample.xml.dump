@@ -73,6 +73,7 @@ Token
       begin: 0
       end: 4
       PosValue: "VB"
+   morph: <null>
 [for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -125,6 +126,7 @@ Token
       begin: 5
       end: 8
       PosValue: "IN"
+   morph: <null>
 [this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -184,6 +186,7 @@ Token
       begin: 9
       end: 13
       PosValue: "DT"
+   morph: <null>
 [this]
 ART
    sofa: _InitialView
@@ -219,6 +222,7 @@ Token
       begin: 14
       end: 17
       PosValue: "CD"
+   morph: <null>
 [excursion]
 NN
    sofa: _InitialView
@@ -262,6 +266,7 @@ Token
       begin: 18
       end: 27
       PosValue: "NN"
+   morph: <null>
 [,]
 Lemma
    sofa: _InitialView
@@ -291,6 +296,7 @@ Token
       begin: 28
       end: 29
       PosValue: "PUNC,"
+   morph: <null>
 [he]
 PR
    sofa: _InitialView
@@ -363,6 +369,7 @@ Token
       begin: 30
       end: 32
       PosValue: "PRP"
+   morph: <null>
 [spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -408,6 +415,7 @@ Token
       begin: 33
       end: 38
       PosValue: "VBD"
+   morph: <null>
 [his days]
 Constituent
    sofa: _InitialView
@@ -473,6 +481,7 @@ Token
       begin: 39
       end: 42
       PosValue: "PRP$"
+   morph: <null>
 [days]
 NN
    sofa: _InitialView
@@ -515,6 +524,7 @@ Token
       begin: 43
       end: 47
       PosValue: "NNS"
+   morph: <null>
 [in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -597,6 +607,7 @@ Token
       begin: 48
       end: 50
       PosValue: "IN"
+   morph: <null>
 [long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -714,6 +725,7 @@ Token
       begin: 51
       end: 55
       PosValue: "JJ"
+   morph: <null>
 [and]
 Lemma
    sofa: _InitialView
@@ -737,6 +749,7 @@ Token
       begin: 56
       end: 59
       PosValue: "CC"
+   morph: <null>
 [and]
 CONJ
    sofa: _InitialView
@@ -829,6 +842,7 @@ Token
       begin: 60
       end: 65
       PosValue: "RB"
+   morph: <null>
 [solitary]
 Lemma
    sofa: _InitialView
@@ -858,6 +872,7 @@ Token
       begin: 66
       end: 74
       PosValue: "JJ"
+   morph: <null>
 [walks]
 Lemma
    sofa: _InitialView
@@ -900,6 +915,7 @@ Token
       begin: 75
       end: 80
       PosValue: "VBZ"
+   morph: <null>
 [,]
 Lemma
    sofa: _InitialView
@@ -929,6 +945,7 @@ Token
       begin: 81
       end: 82
       PosValue: "PUNC,"
+   morph: <null>
 [or]
 Lemma
    sofa: _InitialView
@@ -952,6 +969,7 @@ Token
       begin: 83
       end: 85
       PosValue: "CC"
+   morph: <null>
 [or]
 CONJ
    sofa: _InitialView
@@ -1017,6 +1035,7 @@ Token
       begin: 86
       end: 88
       PosValue: "IN"
+   morph: <null>
 [chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1090,6 +1109,7 @@ Token
       begin: 89
       end: 97
       PosValue: "VBG"
+   morph: <null>
 [with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1169,6 +1189,7 @@ Token
       begin: 98
       end: 102
       PosValue: "IN"
+   morph: <null>
 [a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1301,6 +1322,7 @@ Token
       begin: 103
       end: 104
       PosValue: "DT"
+   morph: <null>
 [a]
 ART
    sofa: _InitialView
@@ -1349,6 +1371,7 @@ Token
       begin: 105
       end: 111
       PosValue: "NN"
+   morph: <null>
 [of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1442,6 +1465,7 @@ Token
       begin: 112
       end: 114
       PosValue: "IN"
+   morph: <null>
 [village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1608,6 +1632,7 @@ Token
       begin: 115
       end: 122
       PosValue: "NN"
+   morph: <null>
 [gossips]
 NN
    sofa: _InitialView
@@ -1637,6 +1662,7 @@ Token
       begin: 123
       end: 130
       PosValue: "NNS"
+   morph: <null>
 [whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1817,6 +1843,7 @@ Token
       begin: 131
       end: 136
       PosValue: "WP$"
+   morph: <null>
 [acquaintance]
 NN
    sofa: _InitialView
@@ -1846,6 +1873,7 @@ Token
       begin: 137
       end: 149
       PosValue: "NN"
+   morph: <null>
 [he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1967,6 +1995,7 @@ Token
       begin: 150
       end: 152
       PosValue: "PRP"
+   morph: <null>
 [had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2082,6 +2111,7 @@ Token
       begin: 153
       end: 156
       PosValue: "VBD"
+   morph: <null>
 [cultivated .]
 Constituent
    sofa: _InitialView
@@ -2210,6 +2240,7 @@ Token
       begin: 157
       end: 167
       PosValue: "VBN"
+   morph: <null>
 [.]
 Lemma
    sofa: _InitialView
@@ -2239,8 +2270,7 @@ Token
       begin: 168
       end: 169
       PosValue: "PUNC."
+   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
-
-
