@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.maltparser;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -101,8 +103,52 @@ public class MaltParserTest
 //        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", new String[] {}, jcas);
 //    }    
     
+    @Ignore("The parser model 'catmalt.mco' is created by MaltParser 1.4.1.")
     @Test
-    public void testEnglishDependenciesDefault()
+    public void testCatalan()
+        throws Exception
+    {
+        JCas jcas = runTest("dummy-ca", "linear", "Necessitem una oració d'exemple molt complicat "
+                + ", que conté la major quantitat de components i dependències com sigui possible .");
+
+        String[] dependencies = new String[] {
+                "[  7, 13]Dependency(adjunct) D[7,13](bardzo) G[28,36](przykład)",
+                "[ 14, 27]Dependency(mwe) D[14,27](skomplikowany) G[7,13](bardzo)",
+                "[ 28, 36]Dependency(pred) D[28,36](przykład) G[0,6](Musimy)",
+                "[ 37, 43]Dependency(mwe) D[37,43](zdanie) G[28,36](przykład)",
+                "[ 44, 45]Dependency(punct) D[44,45](,) G[28,36](przykład)",
+                "[ 46, 51]Dependency(pred) D[46,51](które) G[44,45](,)",
+                "[ 52, 59]Dependency(pred) D[52,59](zawiera) G[46,51](które)",
+                "[ 60, 63]Dependency(mwe) D[60,63](tak) G[52,59](zawiera)",
+                "[ 64, 69]Dependency(punct) D[64,69](wiele) G[52,59](zawiera)",
+                "[ 70, 80]Dependency(pred) D[70,80](składników) G[64,69](wiele)",
+                "[ 81, 82]Dependency(mwe) D[81,82](i) G[70,80](składników)",
+                "[ 83, 93]Dependency(punct) D[83,93](zależności) G[70,80](składników)",
+                "[ 94, 95]Dependency(punct) D[94,95](,) G[100,102](to)",
+                "[ 96, 99]Dependency(mwe) D[96,99](jak) G[100,102](to)",
+                "[100,102]Dependency(comp_fin) D[100,102](to) G[83,93](zależności)",
+                "[103,110]Dependency(mwe) D[103,110](możliwe) G[100,102](to)",
+                "[111,112]Dependency(punct) D[111,112](.) G[100,102](to)" };
+
+        String[] posTags = new String[] { "adj", "adja", "adjc", "adjp", "adv", "aglt", "bedzie",
+                "brev", "comp", "conj", "depr", "fin", "ger", "imps", "impt", "inf", "interp",
+                "num", "pact", "pant", "pcon", "ppas", "ppron12", "ppron3", "praet", "pred",
+                "prep", "qub", "siebie", "subst", "winien" };
+
+        String[] depTags = new String[] { "ROOT", "abbrev_punct", "adj", "adjunct", "aglt", "app",
+                "aux", "comp", "comp_fin", "comp_inf", "complm", "cond", "conjunct", "conjunt",
+                "coord", "coord_punct", "imp", "mwe", "ne", "neg", "obj", "obj_th", "pd",
+                "pre_coord", "pred", "punct", "refl", "subj" };
+
+        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "nkjp", posTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "pdp", depTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+    }
+    
+    @Test
+    public void testEnglishDefault()
         throws Exception
     {
         JCas jcas = runTest("en", null, "We need a very complicated example sentence , which "
@@ -149,7 +195,7 @@ public class MaltParserTest
     }
 
     @Test
-    public void testEnglishDependenciesLinear()
+    public void testEnglishLinear()
         throws Exception
     {
         JCas jcas = runTest("en", "linear", "We need a very complicated example sentence , which "
@@ -196,7 +242,7 @@ public class MaltParserTest
     }
 
     @Test
-    public void testEnglishDependenciesPoly()
+    public void testEnglishPoly()
         throws Exception
     {
         JCas jcas = runTest("en", "poly", "We need a very complicated example sentence , which "
@@ -241,7 +287,99 @@ public class MaltParserTest
         AssertAnnotations.assertTagset(Dependency.class, "stanford", depTags, jcas);
         // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford", new String[] {}, jcas);
     }
+    
+    /**
+     * Actually, we have no POS tagger for Polish...
+     */
+    @Test
+    public void testPolish()
+        throws Exception
+    {
+        JCas jcas = runTest("dummy-pl", "linear", "Musimy bardzo skomplikowany przykład zdanie , które "
+                + "zawiera tak wiele składników i zależności , jak to możliwe .");
 
+        String[] dependencies = new String[] {
+                "[  7, 13]Dependency(adjunct) D[7,13](bardzo) G[28,36](przykład)",
+                "[ 14, 27]Dependency(mwe) D[14,27](skomplikowany) G[7,13](bardzo)",
+                "[ 28, 36]Dependency(pred) D[28,36](przykład) G[0,6](Musimy)",
+                "[ 37, 43]Dependency(mwe) D[37,43](zdanie) G[28,36](przykład)",
+                "[ 44, 45]Dependency(punct) D[44,45](,) G[28,36](przykład)",
+                "[ 46, 51]Dependency(pred) D[46,51](które) G[44,45](,)",
+                "[ 52, 59]Dependency(pred) D[52,59](zawiera) G[46,51](które)",
+                "[ 60, 63]Dependency(mwe) D[60,63](tak) G[52,59](zawiera)",
+                "[ 64, 69]Dependency(punct) D[64,69](wiele) G[52,59](zawiera)",
+                "[ 70, 80]Dependency(pred) D[70,80](składników) G[64,69](wiele)",
+                "[ 81, 82]Dependency(mwe) D[81,82](i) G[70,80](składników)",
+                "[ 83, 93]Dependency(punct) D[83,93](zależności) G[70,80](składników)",
+                "[ 94, 95]Dependency(punct) D[94,95](,) G[100,102](to)",
+                "[ 96, 99]Dependency(mwe) D[96,99](jak) G[100,102](to)",
+                "[100,102]Dependency(comp_fin) D[100,102](to) G[83,93](zależności)",
+                "[103,110]Dependency(mwe) D[103,110](możliwe) G[100,102](to)",
+                "[111,112]Dependency(punct) D[111,112](.) G[100,102](to)" };
+
+        String[] posTags = new String[] { "adj", "adja", "adjc", "adjp", "adv", "aglt", "bedzie",
+                "brev", "comp", "conj", "depr", "fin", "ger", "imps", "impt", "inf", "interp",
+                "num", "pact", "pant", "pcon", "ppas", "ppron12", "ppron3", "praet", "pred",
+                "prep", "qub", "siebie", "subst", "winien" };
+
+        String[] depTags = new String[] { "ROOT", "abbrev_punct", "adj", "adjunct", "aglt", "app",
+                "aux", "comp", "comp_fin", "comp_inf", "complm", "cond", "conjunct", "conjunt",
+                "coord", "coord_punct", "imp", "mwe", "ne", "neg", "obj", "obj_th", "pd",
+                "pre_coord", "pred", "punct", "refl", "subj" };
+
+        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "nkjp", posTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "pdp", depTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+    }
+
+    @Ignore("Model not integrated")
+    @Test
+    public void testPortuguese()
+        throws Exception
+    {
+        JCas jcas = runTest("pt", "linear", "Precisamos de uma frase exemplo muito complicado , que "
+                + "contém o maior número de eleitores e dependências possível .");
+
+        String[] dependencies = new String[] {
+                "[ 11, 13]Dependency(N<) D[11,13](de) G[0,10](Precisamos)",
+                "[ 14, 17]Dependency(>N) D[14,17](uma) G[18,23](frase)",
+                "[ 18, 23]Dependency(P<) D[18,23](frase) G[11,13](de)",
+                "[ 24, 31]Dependency(A<) D[24,31](exemplo) G[18,23](frase)",
+                "[ 32, 37]Dependency(ADVL) D[32,37](muito) G[38,48](complicado)",
+                "[ 38, 48]Dependency(N<) D[38,48](complicado) G[24,31](exemplo)",
+                "[ 49, 50]Dependency(PUNC) D[49,50](,) G[18,23](frase)",
+                "[ 51, 54]Dependency(SUBJ) D[51,54](que) G[55,61](contém)",
+                "[ 55, 61]Dependency(N<PRED) D[55,61](contém) G[18,23](frase)",
+                "[ 62, 63]Dependency(>N) D[62,63](o) G[70,76](número)",
+                "[ 64, 69]Dependency(>N) D[64,69](maior) G[70,76](número)",
+                "[ 70, 76]Dependency(ACC) D[70,76](número) G[55,61](contém)",
+                "[ 77, 79]Dependency(N<) D[77,79](de) G[70,76](número)",
+                "[ 80, 89]Dependency(P<) D[80,89](eleitores) G[77,79](de)",
+                "[ 90, 91]Dependency(CO) D[90,91](e) G[80,89](eleitores)",
+                "[ 92,104]Dependency(CJT) D[92,104](dependências) G[80,89](eleitores)",
+                "[105,113]Dependency(N<) D[105,113](possível) G[92,104](dependências)",
+                "[114,115]Dependency(PUNC) D[114,115](.) G[0,10](Precisamos)" };
+
+        String[] posTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec", "in",
+                "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp", "punc",
+                "v-fin", "v-ger", "v-inf", "v-pcp", "vp" };
+
+        String[] depTags = new String[] { ">A", ">N", ">P", ">S", "?", "A<", "A<PRED", "ACC",
+                "ACC-PASS", "ACC>-PASS", "ADVL", "ADVO", "ADVS", "APP", "AS<", "AUX", "AUX<",
+                "CJT", "CJT&ADVL", "CJT&PRED", "CMD", "CO", "COM", "DAT", "EXC", "FOC", "H",
+                "KOMP<", "MV", "N<", "N<PRED", "NUM<", "OC", "P", "P<", "PASS", "PCJT", "PIV",
+                "PMV", "PRD", "PRED", "PRT-AUX", "PRT-AUX<", "PRT-AUX>", "PUNC", "QUE", "S<", "SC",
+                "STA", "SUB", "SUBJ", "TOP", "UTT", "VOC", "VOK" };
+
+        AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "bosque", posTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "freeling", new String[] {}, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "unknown", depTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Dependency.class, "iula", new String[] {}, jcas);
+    }
+    
     /**
      * This test really only checks the tagsets and if any dependencies are created. Since the POS
      * tags expected by the Spanish model do <b>not</b> correspond to those that the pos tagger
