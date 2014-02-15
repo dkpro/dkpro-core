@@ -91,7 +91,6 @@ public class TestRunner
                 Sentence.class);
         tb.buildTokens(jcas, aDocument);
 
-
         aEngine.process(jcas);
         
         return jcas;
