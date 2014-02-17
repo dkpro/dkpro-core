@@ -37,8 +37,8 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class NormalizerFactory 
 {
-    int view_counter = 0;
-    private final static String INITIAL_VIEW = "_InitialView";
+    private int view_counter = 0;
+    protected final static String INITIAL_VIEW = "_InitialView";
 
     public AnalysisEngineDescription getSpellcorrection(String filepath) throws ResourceInitializationException 
     {
@@ -108,14 +108,19 @@ public class NormalizerFactory
     }
 
 
-    private String getSourceView() 
+    protected String getSourceView() 
     {
-	return (view_counter > 0) ? "view" + view_counter : INITIAL_VIEW;
+        return (view_counter > 0) ? "view" + view_counter : INITIAL_VIEW;
     }
 
-    private String getTargetView() 
+    protected String getTargetView() 
     {
-	return "view" + ++view_counter;
+        return "view" + ++view_counter;
+    }
+
+    public String getOutputView() 
+    {
+        return "view" + view_counter;
     }
 
 
