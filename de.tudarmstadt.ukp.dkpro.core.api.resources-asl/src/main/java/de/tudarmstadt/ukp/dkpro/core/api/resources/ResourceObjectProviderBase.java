@@ -30,10 +30,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
@@ -62,6 +62,8 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
+
+import de.tudarmstadt.ukp.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
 
 /**
  * Base class for resource providers that produce a resource from some URL depending on changing
@@ -92,7 +94,7 @@ import org.springframework.util.PropertyPlaceholderHelper;
 public abstract class ResourceObjectProviderBase<M>
     implements HasResourceMetadata
 {
-    private final Log log = LogFactory.getLog(getClass());
+    private final Log log = LogFactory.getLog(ResourceObjectProviderBase.class);
 
     public static final String PROP_REPO_ID = "dkpro.model.repository.id";
     public static final String PROP_REPO_URL = "dkpro.model.repository.url";
@@ -634,7 +636,7 @@ public abstract class ResourceObjectProviderBase<M>
         throws ParseException, IOException
     {
         // Configure Ivy
-        Message.setDefaultLogger(new ApacheCommonsMessageLogger());
+        Message.setDefaultLogger(new ApacheCommonsLoggingAdapter(log));
         IvySettings ivySettings = new IvySettings();
         ivySettings.loadDefault();
         ivySettings.configureRepositories(true);
