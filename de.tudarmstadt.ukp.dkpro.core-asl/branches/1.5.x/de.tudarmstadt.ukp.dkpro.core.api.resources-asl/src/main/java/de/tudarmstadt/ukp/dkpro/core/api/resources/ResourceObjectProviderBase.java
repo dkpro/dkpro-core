@@ -2,13 +2,13 @@
  * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,10 +30,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
+import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
@@ -52,6 +52,7 @@ import org.apache.ivy.core.settings.IvySettings;
 import org.apache.ivy.plugins.resolver.ChainResolver;
 import org.apache.ivy.plugins.resolver.DependencyResolver;
 import org.apache.ivy.plugins.resolver.IBiblioResolver;
+import org.apache.ivy.util.Message;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
@@ -61,6 +62,8 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
+
+import de.tudarmstadt.ukp.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
 
 /**
  * Base class for resource providers that produce a resource from some URL depending on changing
@@ -82,25 +85,25 @@ import org.springframework.util.PropertyPlaceholderHelper;
  * be configured by placing a properties file in the classpath and setting its location using
  * {@link #setDefaultVariantsLocation(String)} or by using {@link #setDefaultVariants(Properties)}.
  * The key in the properties is the language and the value is used a default variant.
- * 
+ *
  * @author Richard Eckart de Castilho
- * 
+ *
  * @param <M>
  *            the kind of resource produced
  */
 public abstract class ResourceObjectProviderBase<M>
     implements HasResourceMetadata
 {
-    private final Log log = LogFactory.getLog(getClass());
+    private final Log log = LogFactory.getLog(ResourceObjectProviderBase.class);
 
     public static final String PROP_REPO_ID = "dkpro.model.repository.id";
     public static final String PROP_REPO_URL = "dkpro.model.repository.url";
-    
+
     private static final String DEFAULT_REPO_ID = "ukp-model-releases";
-    
+
     private static final String DEFAULT_REPO_URL = "http://zoidberg.ukp.informatik.tu-darmstadt.de/"
             + "artifactory/public-model-releases-local";
-    
+
     public static final String NOT_REQUIRED = "-=* NOT REQUIRED *=-";
 
     /**
@@ -116,7 +119,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * The location from which the resource should be read. Variables in the location are resolved
      * when {@link #configure()} is called.
-     * 
+     *
      * @see ResourceUtils#resolveLocation(String, Object, org.apache.uima.UimaContext)
      */
     public static final String LOCATION = "location";
@@ -140,7 +143,7 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String VERSION = "version";
 
     public static final String PACKAGE = "package";
-    
+
     private Properties resourceMetaData;
     private URL resourceUrl;
     private URL initialResourceUrl;
@@ -161,16 +164,16 @@ public abstract class ResourceObjectProviderBase<M>
             .getClassLoader());
 
     private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
-    
+
     {
         init();
     }
-    
+
     protected void init()
     {
         setDefault(GROUP_ID, "de.tudarmstadt.ukp.dkpro.core");
     }
-    
+
     public void setOverride(String aKey, String aValue)
     {
         if (aValue == null) {
@@ -225,7 +228,7 @@ public abstract class ResourceObjectProviderBase<M>
      * Set the location in the classpath from where to load the language-dependent default variants
      * properties file. The key in the properties is the language and the value is used a default
      * variant.
-     * 
+     *
      * @param aLocation
      *            a location in the form "some/package/name/tool-default-variants.properties". This
      *            is always a classpath location. This location may not contain variables.
@@ -238,7 +241,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Sets language-dependent default variants. The key in the properties is the language and the
      * value is used a default variant.
-     * 
+     *
      * @param aDefaultVariants
      *            the default variant per language
      */
@@ -257,7 +260,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Set an object which can be used to try finding a Maven POM from which resource version
      * information could be extracted.
-     * 
+     *
      * @param aObject
      *            a context object, usually the object creating the provider.
      */
@@ -270,7 +273,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Tries to get the version of the required model from the dependency management section of the
      * Maven POM belonging to the context object.
-     * 
+     *
      * @throws IOException
      *             if there was a problem loading the POM file
      * @throws FileNotFoundException
@@ -353,8 +356,8 @@ public abstract class ResourceObjectProviderBase<M>
         }
 
         // Extract the version of the model artifact
-        if (model.getDependencyManagement() != null
-                && model.getDependencyManagement().getDependencies() != null) {
+        if ((model.getDependencyManagement() != null)
+                && (model.getDependencyManagement().getDependencies() != null)) {
             List<Dependency> deps = model.getDependencyManagement().getDependencies();
             for (Dependency dep : deps) {
                 if (StringUtils.equals(dep.getGroupId(), modelGroup)
@@ -403,7 +406,7 @@ public abstract class ResourceObjectProviderBase<M>
      * Call this method after all configurations have been made. A already configured resource will
      * only be recreated if the URL from which the resource is generated has changed due to
      * configuration changes.
-     * 
+     *
      * @throws IOException
      *             if the resource cannot be created.
      */
@@ -411,7 +414,7 @@ public abstract class ResourceObjectProviderBase<M>
         throws IOException
     {
         boolean success = false;
-        
+
         Properties props = getAggregatedProperties();
         String modelLocation = getModelLocation(props);
         boolean modelLocationChanged = !StringUtils.equals(modelLocation, lastModelLocation);
@@ -454,7 +457,7 @@ public abstract class ResourceObjectProviderBase<M>
                         throw handleResolvingError(e, lastModelLocation, props);
                     }
                 }
-                
+
                 if (!equals(initialResourceUrl, initialUrl)) {
                     initialResourceUrl = initialUrl;
                     resourceMetaData = new Properties();
@@ -472,24 +475,24 @@ public abstract class ResourceObjectProviderBase<M>
             }
         }
     }
-    
+
     private static boolean equals(URL aUrl1, URL aUrl2)
     {
         if (aUrl1 == aUrl2) {
             return true;
         }
-        
-        if (aUrl1 == null || aUrl2 == null) {
+
+        if ((aUrl1 == null) || (aUrl2 == null)) {
             return false;
         }
-        
+
         return aUrl1.toString().equals(aUrl2.toString());
     }
-    
+
     protected URL followRedirects(URL aUrl) throws IOException
     {
         URL url = aUrl;
-        
+
         // If the model points to a properties file, try to find a new location in that
         // file. If that points to a properties file again, repeat the process.
         while (url.getPath().endsWith(".properties")) {
@@ -508,14 +511,14 @@ public abstract class ResourceObjectProviderBase<M>
             }
             url = resolveLocation(redirect, loader, null);
         }
-        
+
         return url;
     }
-    
+
     protected void loadMetadata() throws IOException
     {
         Properties modelMetaData = null;
-                
+
         // Load resource meta data if present, look directly next to the resolved model
         try {
             String modelMetaDataLocation = getModelMetaDataLocation(resourceUrl.toString());
@@ -526,7 +529,7 @@ public abstract class ResourceObjectProviderBase<M>
         catch (FileNotFoundException e) {
             // Ignore
         }
-        
+
         // Try in the again, this time derive the metadata location first an then resolve.
         // This can help if the metadata is in another artifact, e.g. because the migration
         // to proxy/resource mode is not completed yet and the provide still looks for the model
@@ -542,14 +545,14 @@ public abstract class ResourceObjectProviderBase<M>
                 // If no metadata was found, just leave the properties empty.
             }
         }
-        
+
         // Values in the redirecting properties override values in the redirected-to
         // properties.
         if (modelMetaData != null) {
             mergeProperties(resourceMetaData, modelMetaData);
         }
     }
-    
+
     private String getModelMetaDataLocation(String aLocation)
     {
         String baseLocation = aLocation;
@@ -562,11 +565,11 @@ public abstract class ResourceObjectProviderBase<M>
 
         String modelMetaDataLocation = FilenameUtils.removeExtension(baseLocation)
                 + ".properties";
-        
+
         return modelMetaDataLocation;
     }
-    
-    
+
+
     protected void loadResource() throws IOException
     {
         if (initialResourceUrl.equals(resourceUrl)) {
@@ -624,20 +627,21 @@ public abstract class ResourceObjectProviderBase<M>
         ukpModels.setM2compatible(true);
         return ukpModels;
     }
-    
+
     /**
-     * Try to fetch an artifact and its dependencies from the UKP model repository or from 
+     * Try to fetch an artifact and its dependencies from the UKP model repository or from
      * Maven Central.
      */
     private List<File> resolveWithIvy(String aGroupId, String aArtifactId, String aVersion)
         throws ParseException, IOException
     {
         // Configure Ivy
+        Message.setDefaultLogger(new ApacheCommonsLoggingAdapter(log));
         IvySettings ivySettings = new IvySettings();
         ivySettings.loadDefault();
         ivySettings.configureRepositories(true);
         ivySettings.configureDefaultVersionMatcher();
-        
+
         // Add a resolver for the UKP model repository
         DependencyResolver modelResolver = getModelResolver();
         modelResolver.setSettings(ivySettings);
@@ -658,7 +662,7 @@ public abstract class ResourceObjectProviderBase<M>
                 ModuleRevisionId.newInstance(aGroupId, aArtifactId, aVersion), false, false, true);
         dd.addDependencyConfiguration("default", "default");
         md.addDependency(dd);
-        
+
         ResolveReport report;
         try {
             // Resolve the temporary module
@@ -683,7 +687,7 @@ public abstract class ResourceObjectProviderBase<M>
             ivy.getResolutionCacheManager().getConfigurationResolveReportInCache(resid, "default")
                     .delete();
         }
-        
+
         // Get the artifact and all its transitive dependencies
         List<File> files = new ArrayList<File>();
         for (ArtifactDownloadReport rep : report.getAllArtifactsReports()) {
@@ -757,7 +761,7 @@ public abstract class ResourceObjectProviderBase<M>
      * Get the currently configured resources. Before this can be used, {@link #configure()} needs
      * to be called once or whenever the configuration changes. Mind that sub-classes may provide
      * alternative configuration methods that may need to be used instead of {@link #configure()}.
-     * 
+     *
      * @return the currently configured resources.
      */
     public M getResource()
@@ -767,7 +771,7 @@ public abstract class ResourceObjectProviderBase<M>
 
     /**
      * Builds the aggregated configuration from defaults and overrides.
-     * 
+     *
      * @return the aggregated effective configuration.
      * @throws IOException
      *             if the language-dependent default variants location is set but cannot be read.
@@ -792,13 +796,13 @@ public abstract class ResourceObjectProviderBase<M>
         Properties overriddenValues = new Properties(importedValues);
         overriddenValues.putAll(overrides);
 
-        if (defaultVariants == null && defaultVariantsLocation != null) {
+        if ((defaultVariants == null) && (defaultVariantsLocation != null)) {
             String dvl = pph.replacePlaceholders(defaultVariantsLocation, overriddenValues);
             setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(dvl));
         }
 
         String language = overriddenValues.getProperty(LANGUAGE);
-        if (defaultVariants != null && defaultVariants.containsKey(language)) {
+        if ((defaultVariants != null) && defaultVariants.containsKey(language)) {
             defaultValues.setProperty(VARIANT, defaultVariants.getProperty(language));
         }
 
