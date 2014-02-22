@@ -9,3 +9,4 @@ conjunction=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 adverb=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 numeral=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
 particle=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+preposition=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
