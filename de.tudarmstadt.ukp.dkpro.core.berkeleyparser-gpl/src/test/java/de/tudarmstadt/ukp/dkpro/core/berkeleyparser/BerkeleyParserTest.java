@@ -24,6 +24,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -86,7 +87,7 @@ public class BerkeleyParserTest
 	public void testBulgarian()
 		throws Exception
 	{
-		JCas jcas = runTest("bg", "Имаме нужда от един много сложен пример изречение, " +
+		JCas jcas = runTest("dummy-bg", "Имаме нужда от един много сложен пример изречение, " +
 				"което съдържа най-много съставки и зависимости, колкото е възможно.");
 
 		String[] constituentMapped = new String[] { "ROOT 0,118", "X 0,117", "X 0,118", "X 0,5",
@@ -364,7 +365,12 @@ public class BerkeleyParserTest
 	{
 		AnalysisEngineDescription segmenter;
 
-		if ("zh".equals(aLanguage)) {
+        if (aLanguage.startsWith("dummy-")) {
+            aLanguage = aLanguage.substring(6);
+            segmenter = createEngineDescription(LanguageToolSegmenter.class,
+                    LanguageToolSegmenter.PARAM_LANGUAGE, "en");
+        }
+        else if (Arrays.asList("zh", "de").contains(aLanguage)) {
 			segmenter = createEngineDescription(LanguageToolSegmenter.class);
 		}
 		else {
