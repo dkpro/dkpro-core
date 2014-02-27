@@ -42,7 +42,7 @@ public class LanguageToolSegmenter extends SegmenterBase
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-		Language lang = Language.getLanguageForShortName(aJCas.getDocumentLanguage());
+		Language lang = Language.getLanguageForShortName(getLanguage(aJCas));
 
 		List<String> sentences = lang.getSentenceTokenizer().tokenize(aText);
 
