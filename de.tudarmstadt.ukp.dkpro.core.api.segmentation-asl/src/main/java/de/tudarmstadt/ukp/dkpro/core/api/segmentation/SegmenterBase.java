@@ -298,21 +298,28 @@ extends JCasAnnotator_ImplBase
 		}
 	}
 
+	public String getLanguage(JCas aJCas)
+	{
+        if (language != null) {
+            return language;
+        }
+        else {
+            return aJCas.getDocumentLanguage();
+        }
+	}
+	
 	/**
 	 * Get the locale from the parameter, then from the document if available.
 	 * If no locale is set get the default locale from the VM.
 	 */
 	public Locale getLocale(JCas aJCas)
 	{
-		if (language != null) {
-			return new Locale(language);
-		}
-
-		language = aJCas.getDocumentLanguage();
-		if (language != null) {
-			return new Locale(language);
-		}
-
-		return Locale.getDefault();
+	    String lang = getLanguage(aJCas);
+	    if (lang != null) {
+	        return new Locale(lang);
+	    }
+	    else {
+	        return Locale.getDefault();
+	    }
 	}
 }
