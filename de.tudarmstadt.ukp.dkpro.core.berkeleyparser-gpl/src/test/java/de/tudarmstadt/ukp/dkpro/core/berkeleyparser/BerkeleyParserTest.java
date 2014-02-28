@@ -308,52 +308,6 @@ public class BerkeleyParserTest
         AssertAnnotations.assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
 	}
 
-//  @Ignore("Currently fails with an NPE in the parser. Need to investigate")
-//    @Test
-//    public void testGerman2()
-//        throws Exception
-//    {
-//        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-//        AnalysisEngineDescription parser = createEngineDescription(BerkeleyParser.class,
-//                BerkeleyParser.PARAM_PRINT_TAGSET, true, 
-//                BerkeleyParser.PARAM_WRITE_PENN_TREE, true);
-//
-//        AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
-//
-//        AnalysisEngine engine = createEngine(aggregate);
-//        JCas jcas = engine.newJCas();
-//        jcas.setDocumentLanguage("de");
-//        jcas.setDocumentText("Der These des Philologenverbands, dass die Abschaffung des "
-//                + "Sitzenbleibens vor allem auf Kosten der Qualität der Leistungsergebnisse bei "
-//                + "mittlerer Reife und Abitur gehen wird, stimmten 73 Prozent der Befragten zu. "
-//                + "jon Mehr auf SPIEGEL ONLINE: Streitthema Ehrenrunde \"Sitzenbleiben ist "
-//                + "peinlich\" (20.02.2013) http://www.spiegel.de/schulspiegel/wissen/0,1518,884286,00.html "
-//                + "Fotostrecke Prominente Sitzenbleiber http://www.spiegel.de/fotostrecke/fotostrecke-93367.html "
-//                + "Sitzenbleiber als Spitzenpolitiker \"Edmund, du bist faul!");
-//        engine.process(jcas);
-//
-//        String[] pennTrees = new String[] { 
-//                "(ROOT (PSEUDO (S (NP (ART Der) (NN These) (NP (ART des) (NN Philologenverbands)) "
-//                + "($, ,) (S (KOUS dass) (NP (ART die) (NN Abschaffung) (NP (ART des) "
-//                + "(NN Sitzenbleibens))) (VP (PP (PP (APPR vor) (PIS allem)) (APPR auf) "
-//                + "(NN Kosten) (NP (ART der) (NN Qualität) (NP (ART der) "
-//                + "(NN Leistungsergebnisse))) (PP (APPR bei) (ADJA mittlerer) (CNP (NN Reife) "
-//                + "(KON und) (NN Abitur)))) (VVINF gehen)) (VAFIN wird))) ($, ,) (VVFIN stimmten) "
-//                + "(NP (CARD 73) (NN Prozent) (NP (ART der) (NN Befragten))) (PTKVZ zu)) ($. .)))",
-//                "(ROOT (PSEUDO (DL (PP (ADV jon) (ADV Mehr) (APPR auf) (NE SPIEGEL) (NN ONLINE)) "
-//                + "($. :) (S (NP (NE Streitthema) (NN Ehrenrunde) ($*LRB* \") (NE Sitzenbleiben)) "
-//                + "(VAFIN ist) (AP (ADJD peinlich) ($*LRB* \") (CS (S (PIS () (NP "
-//                + "(CARD 20.02.2013) (MPN (NE )) "
-//                + "(CARD http://www.spiegel.de/schulspiegel/wissen/0,1518,884286,00.html) "
-//                + "(NE Fotostrecke) (NE Prominente) (NE Sitzenbleiber) "
-//                + "(NE http://www.spiegel.de/fotostrecke/fotostrecke-93367.html) "
-//                + "(NE Sitzenbleiber))) (PP (APPR als) (NN Spitzenpolitiker) ($*LRB* \") "
-//                + "(NE Edmund))) ($, ,) (S (PPER du) (VAFIN bist) (ADJD faul)))))) ($. !)))"
-//        };
-//        
-//        AssertAnnotations.assertPennTree(pennTrees, select(jcas, PennTree.class));
-//    }
-
 	@Test
 	public void testFrench()
 		throws Exception
