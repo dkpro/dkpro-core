@@ -260,6 +260,13 @@ public class BerkeleyParser
             List<String> tokenText = toText(tokens);
 
             Tree<String> parseOutput = modelProvider.getResource().getBestParse(tokenText);
+            
+            // Check if the sentence could be parsed or not
+            if (parseOutput.getChildren().isEmpty()) {
+                getLogger().warn("Unable to parse sentence: [" + sentence.getCoveredText() + "]");
+                continue;
+            }
+            
             if (!binarize) {
                 parseOutput = TreeAnnotations.unAnnotateTree(parseOutput, keepFunctionLabels);
             }
