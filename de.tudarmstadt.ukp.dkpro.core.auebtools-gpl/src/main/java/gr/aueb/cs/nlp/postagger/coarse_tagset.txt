@@ -1,0 +1,14 @@
+Below you can find the tags of the coarse set:
+
+article
+verb
+punctuation
+adjective
+adverb
+conjunction
+noun
+numeral
+particle
+preposition
+pronoun
+other
