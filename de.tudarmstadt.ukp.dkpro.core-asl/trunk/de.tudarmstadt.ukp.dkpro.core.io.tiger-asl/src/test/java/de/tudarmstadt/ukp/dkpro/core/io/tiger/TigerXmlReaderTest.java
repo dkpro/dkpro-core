@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
@@ -28,17 +28,19 @@ import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
+import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 public class TigerXmlReaderTest
 {
-
     @Test
     public void test()
         throws Exception
@@ -55,6 +57,21 @@ public class TigerXmlReaderTest
                 + "(ADV vielleicht) (NP (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))";
 
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void test2()
+        throws Exception
+    {
+        CollectionReaderDescription reader = createReaderDescription(TigerXmlReader.class,
+                TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
+                TigerXmlReader.PARAM_PATTERNS, "[+]simple-broken-sentence.xml",
+                TigerXmlReader.PARAM_LANGUAGE, "de", 
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+
+        for (JCas cas : SimplePipeline.iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+            System.out.printf("%s %n", DocumentMetaData.get(cas).getDocumentId());
+        }
     }
 
     @Test
