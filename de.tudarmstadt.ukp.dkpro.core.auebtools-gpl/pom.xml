@@ -56,4 +56,7 @@
 	  </dependency>
     </dependencies>
     <name>DKPro Core GPL - AUEB  Tools</name>
+    <properties>
+    	<maven.cobertura.instrumentation.maxmemory>128m</maven.cobertura.instrumentation.maxmemory>
+    </properties>
 </project>
