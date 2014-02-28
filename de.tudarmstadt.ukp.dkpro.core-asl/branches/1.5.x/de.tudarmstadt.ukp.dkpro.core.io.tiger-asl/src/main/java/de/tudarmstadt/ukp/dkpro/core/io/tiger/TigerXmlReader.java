@@ -30,11 +30,6 @@ import java.util.Map;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlValue;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -45,9 +40,11 @@ import org.apache.uima.UimaContext;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -59,12 +56,42 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.IllegalAnnotationStructureException;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.AnnotationDecl;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.Meta;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerEdge;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerFeNode;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerFrame;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerFrameElement;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerGraph;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNode;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerNonTerminal;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerPart;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSem;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSentence;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerSplitword;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerTerminal;
 
+/**
+ * UIMA collection reader for TIGER-XML files. Also supports the augmented format used in the 
+ * Semeval 2010 task which includes semantic role data.
+ */
+@TypeCapability(
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument",
+            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate" })
 public class TigerXmlReader
     extends JCasResourceCollectionReader_ImplBase
 {
@@ -94,6 +121,16 @@ public class TigerXmlReader
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
     @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
     private boolean pennTreeEnabled;
+
+    /**
+     * If a sentence has an illegal structure (e.g. TIGER 2.0 has non-terminal nodes that do not
+     * have child nodes), then just ignore these sentences.
+     * 
+     * Default: {@code false}
+     */
+    public static final String PARAM_IGNORE_ILLEGAL_SENTENCES = "ignoreIllegalSentences";
+    @ConfigurationParameter(name = PARAM_IGNORE_ILLEGAL_SENTENCES, mandatory = true, defaultValue = "false")
+    private boolean ignoreIllegalSentences;
 
     private MappingProvider posMappingProvider;
 
@@ -139,8 +176,22 @@ public class TigerXmlReader
             XMLEvent e = null;
             while ((e = xmlEventReader.peek()) != null) {
                 if (isStartElement(e, "s")) {
-                    readSentence(jb, unmarshaller.unmarshal(xmlEventReader, TigerSentence.class)
-                            .getValue());
+                    TigerSentence sentence = unmarshaller.unmarshal(xmlEventReader, TigerSentence.class)
+                            .getValue();
+                    try {
+                        readSentence(jb, sentence);
+                    }
+                    catch (IllegalAnnotationStructureException ex) {
+                        if (ignoreIllegalSentences) {
+                            getLogger().warn("Unable to read sentence [" + sentence.id + "]: "
+                                            + ex.getMessage());
+                        }
+                        else {
+                            getLogger().error("Unable to read sentence [" + sentence.id + "]: "
+                                    + ex.getMessage());
+                            throw new CollectionException(ex);
+                        }
+                    }
                 }
                 else {
                     xmlEventReader.next();
@@ -151,8 +202,7 @@ public class TigerXmlReader
             jb.close();
 
             // Can only do that after the builder is closed, otherwise the text is not yet set in
-            // the
-            // CAS and we get "null" for all token strings.
+            // the CAS and we get "null" for all token strings.
             if (pennTreeEnabled) {
                 for (ROOT root : select(aJCas, ROOT.class)) {
                     PennTree pt = new PennTree(aJCas, root.getBegin(), root.getEnd());
@@ -174,11 +224,12 @@ public class TigerXmlReader
     }
 
     protected void readSentence(JCasBuilder aBuilder, TigerSentence aSentence)
+        throws IllegalAnnotationStructureException
     {
-        boolean first = true;
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
         Map<String, Token> terminals = new HashMap<String, Token>();
+        Map<String, Constituent> nonterminals = new HashMap<String, Constituent>();
         for (TigerTerminal t : aSentence.graph.terminals) {
             Token token = aBuilder.add(t.word, Token.class);
             terminals.put(t.id, token);
@@ -202,12 +253,8 @@ public class TigerXmlReader
             // Remember position before adding space
             sentenceEnd = aBuilder.getPosition();
 
-            if (!first) {
-                aBuilder.add(" ");
-            }
-            else {
-                first = false;
-            }
+            aBuilder.add(" ");
+
         }
         aBuilder.add("\n");
 
@@ -215,13 +262,100 @@ public class TigerXmlReader
         sentence.addToIndexes();
 
         if (aSentence.graph.root != null) {
-            readNode(aBuilder.getJCas(), terminals, aSentence.graph, null, null,
+            readNode(aBuilder.getJCas(), terminals, nonterminals, aSentence.graph, null, null,
                     aSentence.graph.get(aSentence.graph.root));
+        }
+
+        // Read Semeval 2010 frame and role annotations
+        if (aSentence.sem != null) {
+            if (aSentence.sem.splitwords != null) {
+                // read splitwords as terminals/tokens
+                readSplit(aBuilder.getJCas(), terminals, aSentence.sem.splitwords);
+            }
+            readSem(aBuilder.getJCas(), terminals, nonterminals, aSentence.sem);
         }
     }
 
-    private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals, TigerGraph aGraph,
-            Constituent aParent, TigerEdge aInEdge, TigerNode aNode)
+    private void readSplit(JCas jCas, Map<String, Token> terminals, List<TigerSplitword> splitwords)
+    {
+        for (TigerSplitword split : splitwords) {
+            Token orig = terminals.get(split.idref);
+            int begin = orig.getBegin();
+            int end = 0;
+            for (TigerPart part : split.parts) {
+                end = begin + part.word.length();
+                Token t = new Token(jCas, begin, end);
+                t.addToIndexes();
+                terminals.put(part.id, t);
+                begin = end;
+            }
+        }
+    }
+
+    private void readSem(JCas jCas, Map<String, Token> terminals,
+            Map<String, Constituent> nonterminals, TigerSem sem)
+    {
+        if (sem.frames != null) {
+            for (TigerFrame frame : sem.frames) {
+                SemanticPredicate p = new SemanticPredicate(jCas);
+                p.setCategory(frame.name);
+                int begin = Integer.MAX_VALUE;
+                int end = 0;
+                for (TigerFeNode fenode : frame.target.fenodes) {
+                    String reference = fenode.idref;
+                    if (terminals.containsKey(reference)) {
+                        Token target = terminals.get(reference);
+                        begin = Math.min(begin, target.getBegin());
+                        end = Math.max(end, target.getEnd());
+                    }
+                    else if (nonterminals.containsKey(reference)) {
+                        Constituent target = nonterminals.get(reference);
+                        begin = Math.min(begin, target.getBegin());
+                        end = Math.max(end, target.getEnd());
+                    }
+                }
+                p.setBegin(begin);
+                p.setEnd(end);
+
+                List<SemanticArgument> arguments = new ArrayList<SemanticArgument>();
+                if (frame.fes != null) {
+                    for (TigerFrameElement fe : frame.fes) {
+                        if (fe.fenodes != null) {
+                            for (TigerFeNode fenode : fe.fenodes) {
+                                if (terminals.containsKey(fenode.idref)) {
+                                    Token argument = terminals.get(fenode.idref);
+                                    SemanticArgument a = new SemanticArgument(jCas,
+                                            argument.getBegin(), argument.getEnd());
+                                    a.setRole(fe.name);
+                                    a.addToIndexes();
+                                    arguments.add(a);
+                                }
+                                else if (nonterminals.containsKey(fenode.idref)) {
+                                    Constituent argument = nonterminals.get(fenode.idref);
+                                    SemanticArgument a = new SemanticArgument(jCas,
+                                            argument.getBegin(), argument.getEnd());
+                                    a.setRole(fe.name);
+                                    a.addToIndexes();
+                                    arguments.add(a);
+                                }
+                            }
+                        }
+                    }
+                    FSArray fsa = new FSArray(jCas, arguments.size());
+                    for (int i = 0; i < arguments.size(); i++) {
+                        fsa.set(i, arguments.get(i));
+                    }
+                    p.setArguments(fsa);
+                }
+                p.addToIndexes();
+            }
+        }
+    }
+
+    private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
+            Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
+            TigerEdge aInEdge, TigerNode aNode)
+        throws IllegalAnnotationStructureException
     {
         int begin = Integer.MAX_VALUE;
         int end = 0;
@@ -235,8 +369,14 @@ public class TigerXmlReader
                 con = new Constituent(aJCas);
             }
 
+            // TIGER 2.0 has some invalid non-terminal nodes without edges
+            if (aNode.edges == null) {
+                throw new IllegalAnnotationStructureException("Non-terminal node [" + aNode.id
+                        + "] has no edges.");
+            }
+            
             for (TigerEdge edge : aNode.edges) {
-                Annotation child = readNode(aJCas, aTerminals, aGraph, con, edge,
+                Annotation child = readNode(aJCas, aTerminals, aNonTerminals, aGraph, con, edge,
                         aGraph.get(edge.idref));
                 children.add(child);
                 begin = Math.min(child.getBegin(), begin);
@@ -252,6 +392,7 @@ public class TigerXmlReader
             con.setBegin(begin);
             con.setEnd(end);
             con.addToIndexes();
+            aNonTerminals.put(aNode.id, con);
             return con;
         }
         else /* Terminal node */{
@@ -263,160 +404,5 @@ public class TigerXmlReader
     {
         return aEvent.isStartElement()
                 && ((StartElement) aEvent).getName().getLocalPart().equals(aElement);
-    }
-
-    public static class Meta
-    {
-        public String name;
-        public String author;
-        public String date;
-        public String description;
-        public String format;
-
-        @Override
-        public String toString()
-        {
-            return "Meta [name=" + name + ", author=" + author + ", date=" + date
-                    + ", description=" + description + ", format=" + format + "]";
-        }
-    }
-
-    public static class AnnotationDecl
-    {
-        @XmlElement(name = "feature")
-        public List<FeatureDecl> features;
-        @XmlElement(name = "edgelabel")
-        public List<EdgeLabelDecl> edgeLabels;
-        @XmlElement(name = "secedgelabel")
-        public List<EdgeLabelDecl> secEdgeLabels;
-    }
-
-    public static class EdgeLabelDecl
-    {
-        public List<ValueDecl> values;
-    }
-
-    public static class FeatureDecl
-    {
-        @XmlAttribute
-        public String name;
-        @XmlAttribute
-        public String domain;
-        @XmlElement(name = "value")
-        public List<ValueDecl> values;
-    }
-
-    public static class ValueDecl
-    {
-        @XmlAttribute
-        public String name;
-        @XmlValue
-        public String value;
-
-        @Override
-        public String toString()
-        {
-            return "ValueDecl [name=" + name + ", value=" + value + "]";
-        }
-    }
-
-    public static class TigerSentence
-    {
-        @XmlID
-        public String id;
-        public TigerGraph graph;
-
-        public String getText()
-        {
-            StringBuilder sb = new StringBuilder();
-            for (TigerTerminal t : graph.terminals) {
-                if (sb.length() > 0) {
-                    sb.append(' ');
-                }
-                sb.append(t.word);
-            }
-            return sb.toString();
-        }
-    }
-
-    public static class TigerGraph
-    {
-        @XmlAttribute
-        public String root;
-        @XmlAttribute
-        public boolean discontinuous;
-        @XmlElementWrapper(name = "terminals")
-        @XmlElement(name = "t")
-        public List<TigerTerminal> terminals;
-        @XmlElementWrapper(name = "nonterminals")
-        @XmlElement(name = "nt")
-        public List<TigerNonTerminal> nonTerminals;
-
-        TigerNode get(String aId)
-        {
-            for (TigerNode n : terminals) {
-                if (aId.equals(n.id)) {
-                    return n;
-                }
-            }
-            for (TigerNode n : nonTerminals) {
-                if (aId.equals(n.id)) {
-                    return n;
-                }
-            }
-            return null;
-        }
-    }
-
-    public static class TigerNode
-    {
-        @XmlAttribute
-        public String id;
-        @XmlElement(name = "edge")
-        public List<TigerEdge> edges;
-        @XmlElement(name = "secedge")
-        public List<TigerEdge> secEdges;
-    }
-
-    public static class TigerTerminal
-        extends TigerNode
-    {
-        @XmlAttribute
-        public String word;
-        @XmlAttribute
-        public String lemma;
-        @XmlAttribute
-        public String pos;
-        @XmlAttribute
-        public String morph;
-        @XmlAttribute(name = "case")
-        public String casus;
-        @XmlAttribute
-        public String number;
-        @XmlAttribute
-        public String gender;
-        @XmlAttribute
-        public String person;
-        @XmlAttribute
-        public String degree;
-        @XmlAttribute
-        public String tense;
-        @XmlAttribute
-        public String mood;
-    }
-
-    public static class TigerNonTerminal
-        extends TigerNode
-    {
-        @XmlAttribute
-        public String cat;
-    }
-
-    public static class TigerEdge
-    {
-        @XmlAttribute
-        public String idref;
-        @XmlAttribute
-        public String label;
     }
 }
