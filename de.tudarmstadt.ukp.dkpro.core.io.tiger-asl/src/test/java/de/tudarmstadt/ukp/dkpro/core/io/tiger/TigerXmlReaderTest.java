@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.tiger;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
+import static org.apache.uima.fit.pipeline.SimplePipeline.*;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
 
@@ -31,7 +31,6 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.JCasFactory;
-import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
@@ -48,7 +47,8 @@ public class TigerXmlReaderTest
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de", TigerXmlReader.PARAM_READ_PENN_TREE, true);
+                TigerXmlReader.PARAM_LANGUAGE, "de", 
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
@@ -69,11 +69,11 @@ public class TigerXmlReaderTest
                 TigerXmlReader.PARAM_LANGUAGE, "de", 
                 TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
-        for (JCas cas : SimplePipeline.iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
+        for (JCas cas : iteratePipeline(reader, new AnalysisEngineDescription[] {})) {
             System.out.printf("%s %n", DocumentMetaData.get(cas).getDocumentId());
         }
     }
-
+    
     @Test
     public void tigerSampleTest()
         throws Exception
@@ -109,8 +109,8 @@ public class TigerXmlReaderTest
         // create NegraExportReader output
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
-                TigerXmlReader.PARAM_PATTERNS, "[+]semeval1010-en-sample.xml", TigerXmlReader.PARAM_LANGUAGE,
-                "en");
+                TigerXmlReader.PARAM_PATTERNS, "[+]semeval1010-en-sample.xml", 
+                TigerXmlReader.PARAM_LANGUAGE, "en");
 
         AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
