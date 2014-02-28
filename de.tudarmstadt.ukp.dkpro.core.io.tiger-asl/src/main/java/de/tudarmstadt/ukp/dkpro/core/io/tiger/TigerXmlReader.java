@@ -63,6 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
+import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.IllegalAnnotationStructureException;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.AnnotationDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.Meta;
 import de.tudarmstadt.ukp.dkpro.core.io.tiger.internal.model.TigerEdge;
@@ -121,6 +122,16 @@ public class TigerXmlReader
     @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
     private boolean pennTreeEnabled;
 
+    /**
+     * If a sentence has an illegal structure (e.g. TIGER 2.0 has non-terminal nodes that do not
+     * have child nodes), then just ignore these sentences.
+     * 
+     * Default: {@code false}
+     */
+    public static final String PARAM_IGNORE_ILLEGAL_SENTENCES = "ignoreIllegalSentences";
+    @ConfigurationParameter(name = PARAM_IGNORE_ILLEGAL_SENTENCES, mandatory = true, defaultValue = "false")
+    private boolean ignoreIllegalSentences;
+
     private MappingProvider posMappingProvider;
 
     @Override
@@ -165,8 +176,22 @@ public class TigerXmlReader
             XMLEvent e = null;
             while ((e = xmlEventReader.peek()) != null) {
                 if (isStartElement(e, "s")) {
-                    readSentence(jb, unmarshaller.unmarshal(xmlEventReader, TigerSentence.class)
-                            .getValue());
+                    TigerSentence sentence = unmarshaller.unmarshal(xmlEventReader, TigerSentence.class)
+                            .getValue();
+                    try {
+                        readSentence(jb, sentence);
+                    }
+                    catch (IllegalAnnotationStructureException ex) {
+                        if (ignoreIllegalSentences) {
+                            getLogger().warn("Unable to read sentence [" + sentence.id + "]: "
+                                            + ex.getMessage());
+                        }
+                        else {
+                            getLogger().error("Unable to read sentence [" + sentence.id + "]: "
+                                    + ex.getMessage());
+                            throw new CollectionException(ex);
+                        }
+                    }
                 }
                 else {
                     xmlEventReader.next();
@@ -199,6 +224,7 @@ public class TigerXmlReader
     }
 
     protected void readSentence(JCasBuilder aBuilder, TigerSentence aSentence)
+        throws IllegalAnnotationStructureException
     {
         int sentenceBegin = aBuilder.getPosition();
         int sentenceEnd = aBuilder.getPosition();
@@ -329,6 +355,7 @@ public class TigerXmlReader
     private Annotation readNode(JCas aJCas, Map<String, Token> aTerminals,
             Map<String, Constituent> aNonTerminals, TigerGraph aGraph, Constituent aParent,
             TigerEdge aInEdge, TigerNode aNode)
+        throws IllegalAnnotationStructureException
     {
         int begin = Integer.MAX_VALUE;
         int end = 0;
@@ -342,6 +369,12 @@ public class TigerXmlReader
                 con = new Constituent(aJCas);
             }
 
+            // TIGER 2.0 has some invalid non-terminal nodes without edges
+            if (aNode.edges == null) {
+                throw new IllegalAnnotationStructureException("Non-terminal node [" + aNode.id
+                        + "] has no edges.");
+            }
+            
             for (TigerEdge edge : aNode.edges) {
                 Annotation child = readNode(aJCas, aTerminals, aNonTerminals, aGraph, con, edge,
                         aGraph.get(edge.idref));
