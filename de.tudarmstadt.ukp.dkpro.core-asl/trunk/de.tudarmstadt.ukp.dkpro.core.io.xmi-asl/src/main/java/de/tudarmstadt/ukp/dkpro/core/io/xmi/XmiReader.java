@@ -17,14 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.xml.sax.SAXException;
 
@@ -32,7 +31,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
- * @author Richard Eckart de Castilho
+ * Reader for UIMA XMI files.
  */
 @TypeCapability(
         outputs={
@@ -40,6 +39,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 public class XmiReader
 	extends ResourceCollectionReaderBase
 {
+    /**
+     * In lenient mode, unknown types are ignored and do not cause an exception to be thrown.
+     */
+    public static final String PARAM_LENIENT = "lenient";
+    @ConfigurationParameter(name=PARAM_LENIENT, mandatory=true, defaultValue="false")
+    private boolean lenient;
+    
 	@Override
 	public void getNext(CAS aCAS)
 		throws IOException, CollectionException
@@ -47,17 +53,12 @@ public class XmiReader
 		Resource res = nextFile();
 		initCas(aCAS, res);
 
-		InputStream is = null;
-		try {
-			InputStream resolvedIS = CompressionUtils.getInputStream(res.getLocation(),
-					res.getInputStream());
-			XmiCasDeserializer.deserialize(resolvedIS, aCAS);
+        try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
+                res.getInputStream())) {
+			XmiCasDeserializer.deserialize(is, aCAS, lenient);
 		}
 		catch (SAXException e) {
 			throw new IOException(e);
-		}
-		finally {
-			closeQuietly(is);
 		}
 	}
 }
