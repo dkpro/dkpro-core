@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.xmi;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -53,12 +55,16 @@ public class XmiReader
 		Resource res = nextFile();
 		initCas(aCAS, res);
 
-        try (InputStream is = CompressionUtils.getInputStream(res.getLocation(),
-                res.getInputStream())) {
+		InputStream is = null;
+        try {
+            is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
 			XmiCasDeserializer.deserialize(is, aCAS, lenient);
 		}
 		catch (SAXException e) {
 			throw new IOException(e);
 		}
+        finally {
+            closeQuietly(is);
+        }
 	}
 }
