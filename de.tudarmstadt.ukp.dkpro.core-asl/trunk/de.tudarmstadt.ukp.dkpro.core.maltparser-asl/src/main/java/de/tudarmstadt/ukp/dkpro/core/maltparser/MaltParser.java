@@ -368,11 +368,10 @@ public class MaltParser
                 }
 
                 if (features.contains("FEATS")) {
-                    // FIXME When we have better support for features, hook them in here!
-//                    if (t.getPos() != null) {
-//                        lemma = t.getPos().getPosValue();
-//                    }
-//                    else 
+                    if (t.getMorph() != null) {
+                        feats = t.getMorph().getValue();
+                    }
+                    else 
                     if (!ignoreMissingFeatures) {
                         throw new IllegalStateException(
                                 "Model uses feature FEATS but there is no morphology information in CAS");
