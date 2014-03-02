@@ -386,7 +386,7 @@ public class MaltParserTest
      * running here produces, the dependencies are bogus.
      */
     @Test
-    public void testSpanishDependenciesLinear()
+    public void testSpanishLinear()
         throws Exception
     {
         JCas jcas = runTest("dummy-es", "linear",
@@ -458,7 +458,7 @@ public class MaltParserTest
     }
     
     @Test
-    public void testGermanDependencies()
+    public void testGerman()
         throws Exception
     {
         checkModel("de", "linear");
@@ -510,21 +510,21 @@ public class MaltParserTest
                         + "innehåller lika många beståndsdelar och beroenden som möjligt.");
 
         String[] dependencies = new String[] {
-                "[  3, 10]Dependency(ROOT) D[3,10](behöver) G[0,2](Vi)",
-                "[ 11, 13]Dependency(ROOT) D[11,13](en) G[3,10](behöver)",
-                "[ 14, 20]Dependency(ROOT) D[14,20](mycket) G[11,13](en)",
-                "[ 21, 32]Dependency(ROOT) D[21,32](komplicerad) G[14,20](mycket)",
-                "[ 33, 40]Dependency(ROOT) D[33,40](exempel) G[21,32](komplicerad)",
-                "[ 41, 49]Dependency(ROOT) D[41,49](meningen) G[33,40](exempel)",
+                "[  3, 10]Dependency(HD) D[3,10](behöver) G[0,2](Vi)",
+                "[ 11, 13]Dependency(HD) D[11,13](en) G[3,10](behöver)",
+                "[ 14, 20]Dependency(HD) D[14,20](mycket) G[11,13](en)",
+                "[ 21, 32]Dependency(HD) D[21,32](komplicerad) G[14,20](mycket)",
+                "[ 33, 40]Dependency(HD) D[33,40](exempel) G[21,32](komplicerad)",
+                "[ 41, 49]Dependency(HD) D[41,49](meningen) G[0,2](Vi)",
                 "[ 50, 53]Dependency(HD) D[50,53](som) G[41,49](meningen)",
                 "[ 54, 64]Dependency(HD) D[54,64](innehåller) G[41,49](meningen)",
-                "[ 65, 69]Dependency(AA) D[65,69](lika) G[41,49](meningen)",
-                "[ 70, 75]Dependency(HD) D[70,75](många) G[65,69](lika)",
-                "[ 76, 89]Dependency(HD) D[76,89](beståndsdelar) G[65,69](lika)",
-                "[ 90, 93]Dependency(HD) D[90,93](och) G[65,69](lika)",
-                "[ 94,103]Dependency(HD) D[94,103](beroenden) G[65,69](lika)",
-                "[104,107]Dependency(HD) D[104,107](som) G[65,69](lika)",
-                "[108,116]Dependency(HD) D[108,116](möjligt.) G[65,69](lika)" };
+                "[ 65, 69]Dependency(HD) D[65,69](lika) G[41,49](meningen)",
+                "[ 70, 75]Dependency(HD) D[70,75](många) G[41,49](meningen)",
+                "[ 76, 89]Dependency(HD) D[76,89](beståndsdelar) G[33,40](exempel)",
+                "[ 90, 93]Dependency(HD) D[90,93](och) G[76,89](beståndsdelar)",
+                "[ 94,103]Dependency(+F) D[94,103](beroenden) G[90,93](och)",
+                "[104,107]Dependency(HD) D[104,107](som) G[94,103](beroenden)",
+                "[108,116]Dependency(HD) D[108,116](möjligt.) G[0,2](Vi)"};
 
         String[] posTags = new String[] { "AB", "DT", "HA", "HD", "HP", "HS", "IE", "IN", "JJ",
                 "KN", "MAD", "MID", "NN", "PAD", "PC", "PL", "PM", "PN", "PP", "PS", "RG", "RO",
@@ -618,7 +618,7 @@ public class MaltParserTest
     // "For the French model the 5th column of the input format should contain fine-grained " +
     // "tags. See http://www.maltparser.org/mco/french_parser/fremalt.html")
     @Test
-    public void testFrenchDependencies()
+    public void testFrench()
         throws Exception
     {
         JCas jcas = runTest(
@@ -687,8 +687,10 @@ public class MaltParserTest
 
         engines.add(createEngineDescription(TagsetDescriptionStripper.class));
 
-        engines.add(createEngineDescription(MaltParser.class, MaltParser.PARAM_VARIANT, aVariant,
-                MaltParser.PARAM_PRINT_TAGSET, true));
+        engines.add(createEngineDescription(MaltParser.class, 
+                MaltParser.PARAM_VARIANT, aVariant,
+                MaltParser.PARAM_PRINT_TAGSET, true,
+                MaltParser.PARAM_IGNORE_MISSING_FEATURES, true));
 
         return createEngineDescription(engines
                 .toArray(new AnalysisEngineDescription[engines.size()]));
