@@ -31,8 +31,8 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<!-- For uimaFIT SNAPSHOT 
 		<repository>
-			<!-- For uimaFIT SNAPSHOT -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -40,10 +40,11 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+		-->
 	</repositories>
+	<!-- For uimaFIT SNAPSHOT maven plugin 
 	<pluginRepositories>
 		<pluginRepository>
-			<!-- For uimaFIT SNAPSHOT maven plugin -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -52,6 +53,7 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
+	-->
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
@@ -64,6 +66,7 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<dkpro.core.asl.version>1.5.1-SNAPSHOT</dkpro.core.asl.version>
+		<uimafit.version>2.0.0</uimafit.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -155,7 +158,7 @@
 				<plugin>
 					<groupId>org.apache.uima</groupId>
 					<artifactId>uimafit-maven-plugin</artifactId>
-					<version>2.0.1-SNAPSHOT</version>
+					<version>${uimafit.version}</version>
 					<configuration>
 						<componentVendor>DKPro Core Project</componentVendor>
 						<componentCopyright>
