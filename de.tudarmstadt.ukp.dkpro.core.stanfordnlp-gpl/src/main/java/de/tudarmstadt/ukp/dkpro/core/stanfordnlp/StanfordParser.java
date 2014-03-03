@@ -426,9 +426,7 @@ public class StanfordParser
                 Token govToken = tokens.get(govIndex - 1);
                 Token depToken = tokens.get(depIndex - 1);
 
-                String depRel = currTypedDep.reln().getShortName();
-                
-                sfAnnotator.createDependencyAnnotation(depRel, govToken, depToken);
+                sfAnnotator.createDependencyAnnotation(currTypedDep.reln(), govToken, depToken);
             }
         }
     }

@@ -248,6 +248,87 @@ public class StanfordParserTest
     }
 
     @Test
+    public void testEnglishPcfgCollapsed()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "pcfg", documentEnglish, 
+                StanfordParser.PARAM_CREATE_COLLAPSED_DEPENDENCIES, true);
+
+        String[] constituentMapped = new String[] { "ROOT 0,110", "S 0,110", "NP 0,2", "VP 3,109",
+                "NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50", "VP 51,109",
+                "S 51,109", "PP 60,97", "NP 63,97", "PP 98,109", "ADJP 101,109" };
+
+        String[] constituentOriginal = new String[] { "ROOT 0,110", "S 0,110", "NP 0,2",
+                "VP 3,109", "NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50",
+                "VP 51,109", "S 51,109", "PP 60,97", "NP 63,97", "PP 98,109", "ADJP 101,109" };
+
+        String[] dependencies = new String[] {
+                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
+                "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
+                "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
+                "[ 68, 80]PREP(prep_as) D[68,80](constituents) G[51,59](contains)",
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
+
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
+                "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
+                "WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
+                + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
+                + "(S (VP (VBZ contains) (PP (IN as) (NP (JJ many) (NNS constituents) (CC and) "
+                + "(NNS dependencies))) (PP (IN as) (ADJP (JJ possible)))))))) (. .)))";
+
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ".$$.", ":",
+                "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP",
+                "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO",
+                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
+                "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
+
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+
+        String[] unmappedDep = new String[] { "gov" };
+
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
+    }
+
+    @Test
     public void testEnglishFactored()
         throws Exception
     {
