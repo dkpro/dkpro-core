@@ -39,8 +39,8 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+		<!-- For uimaFIT SNAPSHOT 
 		<repository>
-			<!-- For uimaFIT SNAPSHOT -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -48,10 +48,11 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+		-->
 	</repositories>
+	<!-- For uimaFIT SNAPSHOT maven plugin 
 	<pluginRepositories>
 		<pluginRepository>
-			<!-- For uimaFIT SNAPSHOT maven plugin -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -60,6 +61,7 @@
 			</releases>
 		</pluginRepository>
 	</pluginRepositories>
+	-->
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
@@ -72,7 +74,7 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<uima.version>2.4.2</uima.version>
-		<uimafit.version>2.0.1-SNAPSHOT</uimafit.version>
+		<uimafit.version>2.0.0</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<spring.version>3.1.2.RELEASE</spring.version>
 	</properties>
