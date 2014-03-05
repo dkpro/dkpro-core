@@ -248,28 +248,6 @@ public class StanfordParser
     private int maxTokens;
 
     /**
-     * Sets whether to create or not to create Lemma tags. The creation of constituent tags must be
-     * turned on for this to work.<br/>
-     * This only works for ENGLISH.<br/>
-     * Default:<br/>
-     * <ul>
-     * <li>true, if document text is English</li>
-     * <li>false, if document text is not English</li>
-     * </ul>
-     * <br/>
-     *
-     * <strong>Info:</strong><br>
-     * The Stanford Morphology-class computes the base form of English words, by removing just
-     * inflections (not derivational morphology). That is, it only does noun plurals, pronoun case,
-     * and verb endings, and not things like comparative adjectives or derived nominals. It is based
-     * on a finite-state transducer implemented by John Carroll et al., written in flex and publicly
-     * available. See: http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
-     */
-    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = false)
-    private Boolean paramCreateLemmas;
-
-    /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
      *
      * @see PTBEscapingProcessor
@@ -296,11 +274,6 @@ public class StanfordParser
 
     private GrammaticalStructureFactory gsf;
 
-    // distinction between createLemmas & paramCreateLemmas necessary
-    // in order to work with mixed language document collections
-    // (correct default behavior for each CAS)
-    private Boolean createLemmas;
-
     private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
     private MappingProvider posMappingProvider;
 
@@ -313,20 +286,15 @@ public class StanfordParser
         super.initialize(context);
 
         if (!writeConstituent && !writeDependency && !writePennTree) {
-            getContext().getLogger().log(WARNING,
-                    "Invalid parameter configuration... will create" + "dependency tags.");
+            getLogger().warn("Invalid parameter configuration... will create dependency tags.");
             writeDependency = true;
         }
 
         // Check if we want to create Lemmas or POS tags while Consituent tags
         // are disabled. In this case, we have to switch on constituent tagging
-        if (!writeConstituent && ((createLemmas != null && createLemmas) || writePos)) {
-            getContext()
-                    .getLogger()
-                    .log(WARNING,
-                            "Invalid parameter configuration. Constituent "
-                                    + "tag creation is required for POS tagging and Lemmatization. Will create "
-                                    + "constituent tags.");
+        if (!writeConstituent && writePos) {
+            getLogger().warn("Constituent tag creation is required for POS tagging. Will create "
+                    + "constituent tags.");
             writeConstituent = true;
         }
 
@@ -356,30 +324,6 @@ public class StanfordParser
     {
         modelProvider.configure(aJCas.getCas());
         posMappingProvider.configure(aJCas.getCas());
-
-        /*
-         * In order to work with mixed language document collections, default behavior of
-         * lemmatization has to be set anew for each CAS.
-         */
-        // If lemmatization is explicitly turned on, but document is not
-        // English, give a warning, but still turn it on.
-        if (paramCreateLemmas != null && paramCreateLemmas
-                && !aJCas.getDocumentLanguage().equals("en")) {
-            getContext()
-                    .getLogger()
-                    .log(WARNING,
-                            "Lemmatization is turned on, but does not work with the document language of the current CAS.");
-
-            createLemmas = paramCreateLemmas;
-        }
-        // If lemmatization was not set, turn it on for English documents
-        // and off for non-English documents
-        else if (paramCreateLemmas == null) {
-            createLemmas = aJCas.getDocumentLanguage().equals("en") ? true : false;
-        }
-        else {
-            createLemmas = paramCreateLemmas;
-        }
 
         Type typeToParse;
         if (annotationTypeToParse != null) {
@@ -463,7 +407,7 @@ public class StanfordParser
             // Create constituent annotations
             if (writeConstituent) {
                 sfAnnotator.createConstituentAnnotationFromTree(parser.getTLPParams()
-                        .treebankLanguagePack(), writePos, createLemmas);
+                        .treebankLanguagePack(), writePos);
             }
         }
     }

@@ -34,7 +34,6 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.Tag;
@@ -42,9 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.StringLabel;
-import edu.stanford.nlp.ling.WordLemmaTag;
-import edu.stanford.nlp.ling.WordTag;
-import edu.stanford.nlp.process.Morphology;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
 import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.Tree;
@@ -111,10 +107,10 @@ public class StanfordAnnotator
      * Note: The annotations are directly written to the indexes of the CAS.
      */
     public void createConstituentAnnotationFromTree(TreebankLanguagePack aTreebankLanguagePack,
-            boolean aCreatePos, boolean aCreateLemma)
+            boolean aCreatePos)
     {
         createConstituentAnnotationFromTree(aTreebankLanguagePack, tokenTree.getTree(), null,
-                aCreatePos, aCreateLemma);
+                aCreatePos);
     }
 
     /**
@@ -130,7 +126,7 @@ public class StanfordAnnotator
      */
     private Annotation createConstituentAnnotationFromTree(
             TreebankLanguagePack aTreebankLanguagePack, Tree aNode, Annotation aParentFS,
-            boolean aCreatePos, boolean aCreateLemmas)
+            boolean aCreatePos)
     {
         String nodeLabelValue = aNode.value();
         String syntacticFunction = null;
@@ -168,7 +164,7 @@ public class StanfordAnnotator
             List<Annotation> childAnnotations = new ArrayList<Annotation>();
             for (Tree child : aNode.getChildrenAsList()) {
                 Annotation childAnnotation = createConstituentAnnotationFromTree(
-                        aTreebankLanguagePack, child, constituent, aCreatePos, aCreateLemmas);
+                        aTreebankLanguagePack, child, constituent, aCreatePos);
                 if (childAnnotation != null) {
                     childAnnotations.add(childAnnotation);
                 }
@@ -206,16 +202,6 @@ public class StanfordAnnotator
             if (aCreatePos) {
                 jCas.addFsToIndexes(pos);
                 token.setPos(pos);
-            }
-
-            // Lemmatization
-            if (aCreateLemmas) {
-                WordLemmaTag wlTag = Morphology.lemmatizeStatic(new WordTag(token.getCoveredText(),
-                        pos.getPosValue()));
-                Lemma lemma = new Lemma(jCas, span.getSource(), span.getTarget());
-                lemma.setValue(wlTag.lemma());
-                token.setLemma(lemma);
-                jCas.addFsToIndexes(lemma);
             }
 
             // link token to its parent constituent

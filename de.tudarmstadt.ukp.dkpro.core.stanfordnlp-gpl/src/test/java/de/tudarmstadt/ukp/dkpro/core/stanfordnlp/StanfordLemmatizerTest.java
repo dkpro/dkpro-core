@@ -20,78 +20,61 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class StanfordLemmatizerTest
 {
-
     @Test
     public void testUnderscore() throws Exception
     {
-        AnalysisEngineDescription lemmatizer = createEngineDescription(StanfordLemmatizer.class);
-
-        JCas aJCas = TestRunner.runTest(createEngineDescription(lemmatizer),
-                "en", "foo _ bar");
-
-        Lemma[] lemmas = JCasUtil.select(aJCas, Lemma.class).toArray(new Lemma[0]);
-        assertEquals(3, lemmas.length);
-        assertEquals("foo", lemmas[0].getValue());
-        assertEquals("_", lemmas[1].getValue());
-        assertEquals("bar", lemmas[2].getValue());
+        runTest("en", "foo _ bar",
+                new String[] { "foo",  "_",  "bar" });
     }
 
 	@Test
 	public void testEnglish() throws Exception
 	{
-        runTest("en", null, "This is a test _ .",
-        		new String[] { "DT", "VBZ", "DT", "NN",  "NN", "."    },
-        		new String[] { "this",  "be",  "a", "test", "_", "." });
+        runTest("en", "This is a test .",
+        		new String[] { "this",  "be",  "a", "test", "." });
 
+        runTest("en", "We need a very complicated example sentence , which "
+                + "contains as many constituents and dependencies as possible .",
+                new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." });
 	}
 
     @Test(expected = AnalysisEngineProcessException.class)
     public void testNotEnglish()
         throws Exception
     {
-        runTest("de", null, "Das ist ein test .",
-                new String[] { "DT", "VBZ", "DT", "NN", "NN", "." }, new String[] { "this", "be",
-                        "a", "test", "_", "." });
-
+        runTest("de", "Das ist ein test .", new String[] {} );
     }
 
     @Test
     public void testUrl() throws Exception
     {
-        runTest("en", null, "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
-                new String[] { "NNS", "VBP", "JJ", "NN", "JJ", "NN", "."    },
+        runTest("en", "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
                 new String[] { "detail", "hinzu", "findet", "man", "unter", "http://www.armytimes.com/news/2009/11/army", "." });
 
     }
 	
-	private void runTest(String aLanguage, String aVariant, String testDocument, String[] tags,
-			String[] lemmas)
+    private void runTest(String aLanguage, String testDocument, String[] lemmas)
 		throws Exception
 	{
-		AnalysisEngineDescription posTagger = createEngineDescription(StanfordPosTagger.class,
-				StanfordPosTagger.PARAM_VARIANT, aVariant);
-
+		AnalysisEngineDescription posTagger = createEngineDescription(StanfordPosTagger.class);
 		AnalysisEngineDescription lemmatizer = createEngineDescription(StanfordLemmatizer.class);
 
 		JCas aJCas = TestRunner.runTest(createEngineDescription(posTagger, lemmatizer),
 				aLanguage, testDocument);
 
-		AssertAnnotations.assertPOS(null, tags, select(aJCas, POS.class));
 		AssertAnnotations.assertLemma(lemmas, select(aJCas, Lemma.class));
     }
 }
