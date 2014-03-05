@@ -76,6 +76,56 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
 public class StanfordParser
     extends JCasAnnotator_ImplBase
 {
+    public static enum DependenciesMode {
+        /**
+         * Produce basic dependencies. <br>
+         * Corresponding parser option: {@code basic}
+         */
+        BASIC,                  // basic        - typedDependencies(false)
+        /**
+         * Produce basic dependencies plus extra arcs for control relationships, etc. <br>
+         * Corresponding parser option: {@code nonCollapsed}
+         */
+        NON_COLLAPSED,          // nonCollapsed - typedDependencies(true)
+        /**
+         * Produce collapsed dependencies. This removes dependencies on specific function words
+         * (e.g. prepositions and conjunctions). The result not be a tree, e.g. it can include
+         * cycles and re-entrancies. <br>
+         * Corresponding parser option: {@code collapsed}
+         */
+        COLLAPSED,              // collapsed     - typedDependenciesCollapsed(false)
+        /**
+         * Produce collapsed dependencies plus extra arcs for control relationships, etc. <br>
+         * Corresponding parser option: {@code not available}
+         */
+        COLLAPSED_WITH_EXTRA,   // - none -     - typedDependenciesCollapsed(true)
+        /**
+         * Produce collapsed dependencies plus extra arcs for control relationships, etc.
+         * In this mode, depencendies are collapsed across coordination. This mode is supposed to
+         * produce the best syntactic and semantic representation of a sentence. The result
+         * may not be a tree (may contain cycles), but is a directed graph.<br>
+         * Corresponding parser option: {@code CCPropagated}
+         */
+         CC_PROPAGATED,          // CCPropagated - typedDependenciesCCprocessed(true)
+        /**
+         * Produce dependencies collapsed across coordination. No extra dependencies for control
+         * relations are included.<br>
+         * Corresponding parser option: {@code not available}
+         */
+         CC_PROPAGATED_NO_EXTRA, // - none -     - typedDependenciesCCprocessed(false)
+        /**
+         * Produce mostly collapsed dependencies that remain a tree structure. Several steps are
+         * omitted:
+         * <ol>
+         * <li>no processing of relative clauses</li>
+         * <li>no xsubj relations</li>
+         * <li>no propagation of conjuncts</lu>
+         * </ol>
+         * Corresponding parser option: {@code tree}
+         */
+         TREE                    // tree         - typedDependencies(false) + collapseDependenciesTree(tdl)
+    }
+    
     /**
      * Write the tag set(s) to the log when a model is loaded.
      */
@@ -114,6 +164,7 @@ public class StanfordParser
 
     /**
      * Sets whether to create or not to create dependency annotations. <br/>
+     * 
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
@@ -121,16 +172,19 @@ public class StanfordParser
     private boolean writeDependency;
 
     /**
-     * Sets whether to create or not to create collapsed dependencies. <br/>
-     * Default: {@code false}
+     * Sets the kind of dependencies being created. <br/>
+     * 
+     * Default: {@link DependenciesMode#COLLAPSED TREE}
+     * @see DependenciesMode
      */
-    public static final String PARAM_CREATE_COLLAPSED_DEPENDENCIES = "createCollapsedDependencies";
-    @ConfigurationParameter(name = PARAM_CREATE_COLLAPSED_DEPENDENCIES, mandatory = false, defaultValue = "false")
-    protected boolean createCollapsedDependencies;
-
+    public static final String PARAM_MODE = "mode";
+    @ConfigurationParameter(name = PARAM_MODE, mandatory = false, defaultValue = "TREE")
+    protected DependenciesMode mode;
+    
     /**
      * Sets whether to create or not to create constituent tags. This is required for POS-tagging
      * and lemmatization.<br/>
+     * 
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -140,6 +194,7 @@ public class StanfordParser
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
      * containing the whole parse tree in Penn Treebank style format.<br/>
+     * 
      * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
@@ -410,11 +465,28 @@ public class StanfordParser
     {
         GrammaticalStructure gs = gsf.newGrammaticalStructure(parseTree);
         Collection<TypedDependency> dependencies = null;
-        if (createCollapsedDependencies) {
-            dependencies = gs.typedDependenciesCollapsed();
-        }
-        else {
-            dependencies = gs.typedDependencies();
+        switch (mode) {
+        case BASIC:
+            dependencies = gs.typedDependencies(); // gs.typedDependencies(false);
+            break;
+        case NON_COLLAPSED:
+            dependencies = gs.allTypedDependencies(); // gs.typedDependencies(true);
+            break;
+        case COLLAPSED_WITH_EXTRA:
+            dependencies = gs.typedDependenciesCollapsed(true);
+            break;
+        case COLLAPSED:
+            dependencies = gs.typedDependenciesCollapsed(false);
+            break;
+        case CC_PROPAGATED:
+            dependencies = gs.typedDependenciesCCprocessed(true);
+            break;
+        case CC_PROPAGATED_NO_EXTRA:
+            dependencies = gs.typedDependenciesCCprocessed(false);
+            break;
+        case TREE:
+            dependencies = gs.typedDependenciesCollapsedTree();
+            break;
         }
 
         for (TypedDependency currTypedDep : dependencies) {
