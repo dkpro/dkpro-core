@@ -195,13 +195,10 @@ public class StanfordParserTest
                 "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
                 "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
                 "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
-                "[ 60, 62]PREP(prep) D[60,62](as) G[51,59](contains)",
                 "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
-                "[ 68, 80]POBJ(pobj) D[68,80](constituents) G[60,62](as)",
-                "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
-                "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
-                "[ 98,100]PREP(prep) D[98,100](as) G[51,59](contains)",
-                "[101,109]POBJ(pobj) D[101,109](possible) G[98,100](as)" };
+                "[ 68, 80]PREP(prep_as) D[68,80](constituents) G[51,59](contains)",
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
         String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
@@ -260,7 +257,7 @@ public class StanfordParserTest
         throws Exception
     {
         JCas jcas = runTest("en", "pcfg", documentEnglish, 
-                StanfordParser.PARAM_CREATE_COLLAPSED_DEPENDENCIES, true);
+                StanfordParser.PARAM_MODE, StanfordParser.DependenciesMode.COLLAPSED_WITH_EXTRA);
 
         String[] constituentMapped = new String[] { "ROOT 0,110", "S 0,110", "NP 0,2", "VP 3,109",
                 "NP 8,109", "NP 8,43", "ADJP 10,26", "SBAR 45,109", "WHNP 45,50", "VP 51,109",
@@ -277,7 +274,7 @@ public class StanfordParserTest
                 "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
                 "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
                 "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
-                "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
+                "[ 35, 43]NSUBJ(nsubj) D[35,43](sentence) G[51,59](contains)",
                 "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
                 "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
                 "[ 68, 80]PREP(prep_as) D[68,80](constituents) G[51,59](contains)",
@@ -362,10 +359,8 @@ public class StanfordParserTest
                 "[ 60, 62]ADVMOD(advmod) D[60,62](as) G[63,67](many)",
                 "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
                 "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
-                "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
-                "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
-                "[ 98,100]PREP(prep) D[98,100](as) G[51,59](contains)",
-                "[101,109]POBJ(pobj) D[101,109](possible) G[98,100](as)" };
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
         String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
@@ -445,10 +440,8 @@ public class StanfordParserTest
                 "[ 60, 62]QUANTMOD(quantmod) D[60,62](as) G[63,67](many)",
                 "[ 63, 67]NUM(num) D[63,67](many) G[68,80](constituents)",
                 "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
-                "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
-                "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
-                "[ 98,100]PREP(prep) D[98,100](as) G[51,59](contains)",
-                "[101,109]POBJ(pobj) D[101,109](possible) G[98,100](as)" };
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
         String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
@@ -528,10 +521,8 @@ public class StanfordParserTest
                 "[ 60, 62]QUANTMOD(quantmod) D[60,62](as) G[63,67](many)",
                 "[ 63, 67]NUM(num) D[63,67](many) G[68,80](constituents)",
                 "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
-                "[ 81, 84]CC(cc) D[81,84](and) G[68,80](constituents)",
-                "[ 85, 97]CONJ(conj) D[85,97](dependencies) G[68,80](constituents)",
-                "[ 98,100]PREP(prep) D[98,100](as) G[51,59](contains)",
-                "[101,109]POBJ(pobj) D[101,109](possible) G[98,100](as)" };
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
         String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
