@@ -27,51 +27,63 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.ling.WordTag;
 import edu.stanford.nlp.process.Morphology;
 
 /**
- * Stanford Lemmatizer component.
+ * Stanford Lemmatizer component. The Stanford Morphology-class computes the base form of English
+ * words, by removing just inflections (not derivational morphology). That is, it only does noun
+ * plurals, pronoun case, and verb endings, and not things like comparative adjectives or derived
+ * nominals. It is based on a finite-state transducer implemented by John Carroll et al., written in
+ * flex and publicly available. See:
+ * http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
+ * 
+ * This only works for ENGLISH.<br/>
  */
 public class StanfordLemmatizer
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	private Morphology morphology;
+    private Morphology morphology;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-		morphology = new Morphology();
-	}
+        morphology = new Morphology();
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		for (Token t : select(aJCas, Token.class)) {
-			// Only verbs are lemmatized, the other words are simply stemmed. This corresponds
-			// roughly to what is happening in MorphaAnnotator.
-			String token = t.getCoveredText();
-			String lemma;
-			if (t.getPos() instanceof V) {
-				lemma = morphology.lemmatize(new WordTag(token, t.getPos().getPosValue()))
-						.lemma();
-			}
-			else {
-				lemma = morphology.stem(token);
-			}
-			if (lemma == null) {
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        if (!"en".equals(aJCas.getDocumentLanguage())) {
+            throw new AnalysisEngineProcessException(Messages.BUNDLE,
+                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aJCas.getDocumentLanguage() });
+        }
+        
+        for (Token t : select(aJCas, Token.class)) {
+            // Only verbs are lemmatized, the other words are simply stemmed. This corresponds
+            // roughly to what is happening in MorphaAnnotator.
+            String token = t.getCoveredText();
+            String lemma;
+            if (t.getPos() instanceof V) {
+                lemma = morphology.lemmatize(new WordTag(token, t.getPos().getPosValue())).lemma();
+            }
+            else {
+                lemma = morphology.stem(token);
+            }
+            if (lemma == null) {
                 lemma = token;
             }
-			Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
-			l.setValue(lemma);
-			l.addToIndexes();
-			t.setLemma(l);
-		}
-	}
+            Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
+            l.setValue(lemma);
+            l.addToIndexes();
+            t.setLemma(l);
+        }
+    }
 }

@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
@@ -59,6 +60,25 @@ public class StanfordLemmatizerTest
 
 	}
 
+    @Test(expected = AnalysisEngineProcessException.class)
+    public void testNotEnglish()
+        throws Exception
+    {
+        runTest("de", null, "Das ist ein test .",
+                new String[] { "DT", "VBZ", "DT", "NN", "NN", "." }, new String[] { "this", "be",
+                        "a", "test", "_", "." });
+
+    }
+
+    @Test
+    public void testUrl() throws Exception
+    {
+        runTest("en", null, "Details hinzu findet man unter http://www.armytimes.com/news/2009/11/army_M4_112109w/ .",
+                new String[] { "NNS", "VBP", "JJ", "NN", "JJ", "NN", "."    },
+                new String[] { "detail", "hinzu", "findet", "man", "unter", "http://www.armytimes.com/news/2009/11/army", "." });
+
+    }
+	
 	private void runTest(String aLanguage, String aVariant, String testDocument, String[] tags,
 			String[] lemmas)
 		throws Exception
