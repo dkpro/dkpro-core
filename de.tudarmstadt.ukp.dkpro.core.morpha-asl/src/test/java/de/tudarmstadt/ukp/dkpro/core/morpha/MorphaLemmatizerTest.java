@@ -26,12 +26,13 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
+
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class MorphaStemmerTest
+public class MorphaLemmatizerTest
 {
 	@Test
 	public void testEnglishNoPos()
@@ -44,7 +45,7 @@ public class MorphaStemmerTest
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
                 "dependency", "as", "possible", "." };
 
-		AssertAnnotations.assertStem(lemmas, select(jcas, Stem.class));
+		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 	}
 	
     @Test
@@ -58,7 +59,7 @@ public class MorphaStemmerTest
                 "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
                 "dependency", "as", "possible", "." };
 
-        AssertAnnotations.assertStem(lemmas, select(jcas, Stem.class));
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
     
 	private JCas runTest(String aLanguage, boolean aUsePosTags, String aText)
@@ -69,12 +70,12 @@ public class MorphaStemmerTest
         if (aUsePosTags) {
             engine = createEngineDescription(
                     createEngineDescription(OpenNlpPosTagger.class),
-                    createEngineDescription(MorphaStemmer.class,
-                            MorphaStemmer.PARAM_READ_POS, true));
+                    createEngineDescription(MorphaLemmatizer.class,
+                            MorphaLemmatizer.PARAM_READ_POS, true));
         }
         else {
             engine = createEngineDescription(
-                    createEngineDescription(MorphaStemmer.class));
+                    createEngineDescription(MorphaLemmatizer.class));
         }
 
         return TestRunner.runTest(engine, aLanguage, aText);
