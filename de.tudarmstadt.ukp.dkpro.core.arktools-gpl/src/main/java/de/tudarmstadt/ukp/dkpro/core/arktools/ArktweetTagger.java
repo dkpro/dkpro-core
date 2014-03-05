@@ -121,13 +121,11 @@ public class ArktweetTagger
             {
                 try {
                     Tagger tagger = new Tagger();
-                    System.out.println(ResourceUtils.getUrlAsFile(aUrl, false).getAbsolutePath());
                     tagger.loadModel(ResourceUtils.getUrlAsFile(aUrl, false).getAbsolutePath());
                     
                     return tagger;
                 }
                 catch (Exception e) {
-                    e.printStackTrace();
                     throw new IOException(e);
                 }
             }
