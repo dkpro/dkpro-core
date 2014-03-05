@@ -29,8 +29,8 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
@@ -38,10 +38,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * @author Richard Eckart de Castilho
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
-public class MorphaStemmer
+@TypeCapability(
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+                    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" }, 
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+public class MorphaLemmatizer
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -63,7 +65,7 @@ public class MorphaStemmer
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
             for (Token t : tokens) {
-                Stem l = new Stem(aJCas, t.getBegin(), t.getEnd());
+                Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
 
                 if (readPos && (t.getPos() != null)) {
                     l.setValue(edu.washington.cs.knowitall.morpha.MorphaStemmer.stemToken(
@@ -75,7 +77,7 @@ public class MorphaStemmer
                 }
                 l.addToIndexes();
 
-                t.setStem(l);
+                t.setLemma(l);
             }
         }
     }
