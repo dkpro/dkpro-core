@@ -32,6 +32,7 @@ import java.util.Properties;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.international.arabic.process.ArabicTokenizer;
@@ -207,9 +208,8 @@ extends SegmenterBase
 
         InternalTokenizerFactory tk = tokenizerFactories.get(aLanguage);
         if (tk == null) {
-        	throw new AnalysisEngineProcessException(
-        	        new IllegalArgumentException("StanfordSegmenter does not support this "
-        	        + "language: [" + aLanguage+"]"));
+            throw new AnalysisEngineProcessException(Messages.BUNDLE,
+                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aLanguage });
         }
     	return tk.create(aText);
     }
