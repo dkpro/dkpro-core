@@ -47,6 +47,10 @@ import edu.stanford.nlp.CLclassify.RVFDataset;
 import edu.stanford.nlp.CLling.RVFDatum;
 
 public class SmallSetFunctions {
+    
+    private static final String propertiesFileTrain = "target/properties_train.txt";
+    private static final String propertiesFileTest = "target/properties_test.txt";
+
 
     private static Vector<SmallSetInstance> train = new Vector<SmallSetInstance>();
     private static Vector<SmallSetInstance> test = new Vector<SmallSetInstance>();
@@ -108,11 +112,11 @@ public class SmallSetFunctions {
 
         smallSetMakeInstances(testSet, test);
 
-        smallSetWriteFileWithProperties("properties_test.txt", test);
+        smallSetWriteFileWithProperties(propertiesFileTest, test);
 
         try {
             dataSetTest = new RVFDataset();
-            MoreFunctions.readFileWithProperties("properties_test.txt", dataSetTest, true);//to arxeio to exoume test
+            MoreFunctions.readFileWithProperties(propertiesFileTest, dataSetTest, true);//to arxeio to exoume test
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MoreFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,11 +176,11 @@ public class SmallSetFunctions {
 
         smallSetMakeInstances(testSet, test);
 
-        smallSetWriteFileWithProperties("properties_test.txt", test);
+        smallSetWriteFileWithProperties(propertiesFileTest, test);
 
         try {
             dataSetTest = new RVFDataset();
-            MoreFunctions.readFileWithProperties("properties_test.txt", dataSetTest, true);//to arxeio to exoume test
+            MoreFunctions.readFileWithProperties(propertiesFileTest, dataSetTest, true);//to arxeio to exoume test
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MoreFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -729,7 +733,7 @@ public class SmallSetFunctions {
         endings2 = smallSetLoadTrainInstances("src/main/resources/smallTagSetFiles/smallSetEndings2Instance.txt");
         endings3 = smallSetLoadTrainInstances("src/main/resources/smallTagSetFiles/smallSetEndings3Instance.txt");
        smallSetMakeInstances(trainSet, train);
-       smallSetWriteFileWithProperties("properties_train.txt", train);
+       smallSetWriteFileWithProperties(propertiesFileTrain, train);
 
        for (int j = 0; j < trainSet.categories.size(); j++) {
             if (trainSet.categories.get(j).equals("null")) {
@@ -757,7 +761,7 @@ public class SmallSetFunctions {
         smallSetMakeList();
         try {
             dataSetTrain = new RVFDataset();
-            MoreFunctions.readFileWithProperties("properties_train.txt", dataSetTrain, true);
+            MoreFunctions.readFileWithProperties(propertiesFileTrain, dataSetTrain, true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MoreFunctions.class.getName()).log(Level.SEVERE, null, ex);
         }
