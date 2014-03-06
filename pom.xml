@@ -1,6 +1,6 @@
 <!--
 
-    Copyright 2013
+    Copyright 2007-2014    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -27,11 +27,12 @@
 		<version>7</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
+	<packaging>pom</packaging>
 	<version>1.6.0-SNAPSHOT</version>
 	<name>DKPro Core GPL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<url>https://code.google.com/p/dkpro-core-gpl/</url>
-	<packaging>pom</packaging>
+	<inceptionYear>2007</inceptionYear>
 	<repositories>
 		<repository>
 			<id>ukp-oss-model-releases</id>
@@ -148,14 +149,15 @@
 				<inherited>true</inherited>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>2.5</version>
+				<version>2.6</version>
 				<configuration>
 					<header>${basedir}/.license-header.txt</header>
 					<failIfMissing>true</failIfMissing>
 					<strictCheck>true</strictCheck>
-							<properties>
-								<year>2013</year>
-							</properties>
+					<properties>
+						<inceptionYear>${project.inceptionYear}</inceptionYear>
+						<currentYear>2014</currentYear>
+					</properties>
 					<excludes>
 						<exclude>release.properties</exclude>
 						<exclude>CHANGES</exclude>
@@ -217,8 +219,7 @@
 					<configuration>
 						<componentVendor>DKPro Core Project</componentVendor>
 						<componentCopyright>
-							Copyright 2010
-							Ubiquitous Knowledge Processing
+							Copyright 2007-2014							Ubiquitous Knowledge Processing
 							(UKP) Lab
 							Technische Universität Darmstadt
 						</componentCopyright>
@@ -259,5 +260,4 @@
 			</build>
 		</profile>
 	</profiles>
-	<inceptionYear>2007</inceptionYear>
 </project>
