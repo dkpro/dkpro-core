@@ -152,6 +152,7 @@ public class StanfordCoreferenceResolverTest
         // Coreference resolution requires the parser and the NER to run before
         AnalysisEngine engine = createEngine(createEngineDescription(
                 createEngineDescription(StanfordSegmenter.class),
+                createEngineDescription(StanfordLemmatizer.class),
                 createEngineDescription(StanfordParser.class,
                         StanfordParser.PARAM_WRITE_CONSTITUENT, true,
                         StanfordParser.PARAM_WRITE_DEPENDENCY, true,

@@ -37,7 +37,6 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -200,10 +199,6 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
-        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
-
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -238,7 +233,6 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
-        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
@@ -281,10 +275,6 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
-        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
-
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -319,7 +309,6 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
-        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
@@ -362,10 +351,6 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
-        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
-
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -400,7 +385,6 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
-        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
@@ -443,10 +427,6 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
-        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
-
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -481,7 +461,6 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
-        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
@@ -524,10 +503,6 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
-        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
-
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -562,7 +537,6 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
-        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
