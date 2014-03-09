@@ -38,8 +38,10 @@ import junit.framework.Assert;
 import org.apache.uima.jcas.JCas;
 import org.codehaus.plexus.util.StringUtils;
 
+import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
@@ -59,6 +61,36 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 public class AssertAnnotations
 {
+    public static void assertAnomaly(String[] aExpected, Collection<? extends Anomaly> aActual)
+    {
+        String[] actualTags = new String[aActual.size()];
+        String[] actualClasses = new String[aActual.size()];
+
+        int i = 0;
+        for (Anomaly a : aActual) {
+            actualTags[i] = String.format("[%3d,%3d] %s (%s)", a.getBegin(),
+                    a.getEnd(), a.getType().getShortName(), a.getDescription());
+            actualClasses[i] = String.format("[%3d,%3d] %s (%s)", a.getBegin(),
+                    a.getEnd(), a.getType().getShortName(), a.getDescription());
+            i++;
+        }
+
+        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpected));
+        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
+
+        if (aExpected != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Anomalies (orig.)",
+                    asCopyableString(sortedExpectedOriginal));
+            System.out.printf("%-20s - Actual  : %s%n", "Anomalies (orig.)",
+                    asCopyableString(sortedActualOriginal));
+        }
+
+        if (aExpected != null) {
+            assertEquals(asCopyableString(sortedExpectedOriginal, true),
+                    asCopyableString(sortedActualOriginal, true));
+        }
+    }
+    
     public static void assertToken(String[] aExpected, Collection<Token> aActual)
     {
         if (aExpected == null) {
@@ -161,6 +193,25 @@ public class AssertAnnotations
 
         System.out.printf("%-20s - Expected: %s%n", "Morphemes", asCopyableString(expected));
         System.out.printf("%-20s - Actual  : %s%n", "Morphemes", asCopyableString(actual));
+
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+
+    public static void assertMorph(String[] aExpected, Collection<MorphologicalFeatures> aActual)
+    {
+        if (aExpected == null) {
+            return;
+        }
+
+        List<String> expected = asList(aExpected);
+        List<String> actual = new ArrayList<String>();
+
+        for (MorphologicalFeatures a : aActual) {
+            actual.add(a.getValue());
+        }
+
+        System.out.printf("%-20s - Expected: %s%n", "Morph. feats.", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Morph. feats.", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
