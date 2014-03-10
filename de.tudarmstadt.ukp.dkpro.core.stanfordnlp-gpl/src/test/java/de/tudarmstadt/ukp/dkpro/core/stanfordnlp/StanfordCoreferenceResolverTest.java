@@ -74,14 +74,15 @@ public class StanfordCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = new String[][] {
-                new String[] { "'s", "I" },
-                new String[] { "the Don'", "he" }
+                new String[] { "'", "'s", "he" },
+                new String[] { "I" },
+                new String[] { "the Don'" }
         };
 
         String[] pennTree = new String[] { 
-                "(ROOT (S (LST (: ')) (VP (VB Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
-                "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP " + 
-                "(DT the) (NX (NNP Don) (POS ')))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
+                "(ROOT (S (NP (POS ')) (VP (VBD Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
+                "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
+                + "(NNPS Don) (POS '))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };
 
         AssertAnnotations.assertPennTree(pennTree, select(jcas, PennTree.class));
