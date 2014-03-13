@@ -90,8 +90,8 @@ public class ArktweetTaggerTest
         throws Exception
     {
         AnalysisEngine engine = createEngine(
-                ArktweetTagger.class,
-                ArktweetTagger.PARAM_VARIANT, "default"
+                ArktweetPosTagger.class,
+                ArktweetPosTagger.PARAM_VARIANT, "default"
         );
 
         JCas aJCas = engine.newJCas();

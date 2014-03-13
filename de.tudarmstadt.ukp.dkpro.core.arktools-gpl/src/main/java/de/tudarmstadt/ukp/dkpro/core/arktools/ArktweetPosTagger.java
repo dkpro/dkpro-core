@@ -55,7 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @author zesch
  *
  */
-public class ArktweetTagger
+public class ArktweetPosTagger
     extends CasAnnotator_ImplBase
 {
 
@@ -103,7 +103,7 @@ public class ArktweetTagger
 
         modelProvider = new ModelProviderBase<Tagger>() {
             {
-                setContextObject(ArktweetTagger.this);
+                setContextObject(ArktweetPosTagger.this);
 
                 setDefault(ARTIFACT_ID,
                         "${groupId}.arktools-model-tagger-${language}-${variant}");
