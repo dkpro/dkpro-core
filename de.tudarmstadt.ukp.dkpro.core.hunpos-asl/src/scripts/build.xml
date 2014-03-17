@@ -35,8 +35,119 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="install-executables,en,fa,hr,hu,pt,sv"/>
+	<target name="separate-jars" depends="install-executables,cs,da,de,en,fa,hr,hu,pt,ru,sl,sv"/>
+	
+	<target name="new">
+		<property name="install-artifact-mode" value="remote"/>
+		<mkdir dir="target/download"/>
+		<!-- FILE: pt_bosque.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | cacf136ab899fc50336ec8c991387277
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-pt/share/lang/hunpos/pt_bosque.model" 
+    		dest="target/download/pt_bosque.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/pt_bosque.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/pt_bosque.model" 
+    		md5="cacf136ab899fc50336ec8c991387277"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="bosque" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="bosque"/>
+			</metadata>
+		</install-stub-and-upstream-file>	</target>
+	
+	<target name="cs">
+		<mkdir dir="target/download"/>
 
+		<!-- FILE: cs_pdt.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | 3e3b31db95e765bf688bd53c35a72ae6
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-cs/share/lang/hunpos/cs_pdt.model" 
+    		dest="target/download/cs_pdt.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/cs_pdt.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/cs_pdt.model" 
+    		md5="3e3b31db95e765bf688bd53c35a72ae6"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="cs" 
+    		variant="pdt" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="pdt"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+
+	<target name="da">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: da_ddt.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | be06a848f750391c547c37f3416a5f2a
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-da/share/lang/hunpos/da_ddt.model" 
+    		dest="target/download/da_ddt.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/da_ddt.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/da_ddt.model" 
+    		md5="be06a848f750391c547c37f3416a5f2a"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="da" 
+    		variant="ddt" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="ddt"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+	
+	<target name="de">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: de_tiger.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | f2a76239845a1858bd88c8d54f203107
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-de/share/lang/hunpos/de_tiger.model" 
+    		dest="target/download/de_tiger.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/de_tiger.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/de_tiger.model" 
+    		md5="f2a76239845a1858bd88c8d54f203107"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="de" 
+    		variant="tiger" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="stts"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+	
 	<target name="en">
 		<mkdir dir="target/download"/>
 
@@ -106,7 +217,6 @@
 	</target>
 
 	<target name="hr">
-		<property name="install-artifact-mode" value="remote"/>
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: model.hunpos.mte5.defnpout - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -170,7 +280,7 @@
 				<entry key="DC.creator" value="Péter Halácsy"/>
 				<entry key="DC.identifier" value="http://code.google.com/p/hunpos/downloads/detail?name=hu_szeged_kr.model.gz"/>
 				<entry key="DC.rights" value="unknown"/>
-	    		<entry key="pos.tagset" value="unknown"/>
+	    		<entry key="pos.tagset" value="szeged"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -241,11 +351,92 @@
 	    		<entry key="pos.tagset" value="mm"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+		
+		<!-- FILE: pt_bosque.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | cacf136ab899fc50336ec8c991387277
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-pt/share/lang/hunpos/pt_bosque.model" 
+    		dest="target/download/pt_bosque.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/pt_bosque.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/pt_bosque.model" 
+    		md5="cacf136ab899fc50336ec8c991387277"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="bosque" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="bosque"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
+
+	<target name="ru">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: ru_rdt.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | 77af9066e63cbe8f863f6b464d44d8a1
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-ru/share/lang/hunpos/ru_rdt.model" 
+    		dest="target/download/ru_rdt.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/ru_rdt.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/ru_rdt.model" 
+    		md5="77af9066e63cbe8f863f6b464d44d8a1"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="ru" 
+    		variant="rdt" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="rdt"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+
+	<target name="sl">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: sl_jos.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2012-11-23 | now        | 9ccbfa00e08d236c71477628db87e23a
+		  -->
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-sl/share/lang/hunpos/sl_jos.model" 
+    		dest="target/download/sl_jos.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/sl_jos.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/sl_jos.model" 
+    		md5="9ccbfa00e08d236c71477628db87e23a"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sl" 
+    		variant="jos" 
+    		extension="model">
+			<metadata>
+				<!-- http://nl.ijs.si/jos/msd/html-en/index.html -->
+	    		<entry key="pos.tagset" value="jos"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
 
 	<target name="sv">
 		<mkdir dir="target/download"/>
-
+		
 		<!-- FILE: suc-suctags.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-09-27 | now        | 132dd7c75651dcbccbd693defc72b6dd
 		  -->
@@ -302,6 +493,30 @@
 	    		<entry key="pos.tagset" value="parole"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+		
+		<!-- FILE: se_Suc2x.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2012-11-23 | now        | 438ed80b8cfb5f9268057f21bb8337ae
+		<get 
+    		src="https://bitbucket.org/tiedemann/uplug/raw/9d5fc974518b196ab0511c0bea91d5f58636d7b1/uplug-sv/share/lang/hunpos/se_Suc2x.model" 
+    		dest="target/download/se_Suc2x.model" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/se_Suc2x.model"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/se_Suc2x.model" 
+    		md5="438ed80b8cfb5f9268057f21bb8337ae"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
+    		upstreamVersion="20121123"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sv" 
+    		variant="suc2x" 
+    		extension="model">
+			<metadata>
+	    		<entry key="pos.tagset" value="suc"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		  -->
 	</target>
 
 	<target name="install-executables">
