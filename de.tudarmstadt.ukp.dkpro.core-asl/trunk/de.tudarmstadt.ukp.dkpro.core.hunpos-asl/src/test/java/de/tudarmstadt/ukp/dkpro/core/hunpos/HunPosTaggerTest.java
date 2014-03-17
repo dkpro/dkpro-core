@@ -43,28 +43,46 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class HunPosTaggerTest
 {
+//    @Test
+//    public void testCatalan()
+//        throws Exception
+//    {
+//        runTest("ca", null, "Aquesta és una prova .",
+//                new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
+//                new String[] { "POS",  "POS", "POS",  "POS" });
+//    }
+    
     @Test
     public void testCroatian()
         throws Exception
     {
-        runTest("hr", null, "Ovo je test . \n",
+        runTest("hr", null, "Ovo je test .",
                 new String[] { "Pd-nsn--n-a", "Vcr3s", "N-msan", "Z" },
                 new String[] { "POS",  "POS", "POS",  "POS" });
     }
-    
+
+    @Test
+    public void testDanish()
+        throws Exception
+    {
+        runTest("da", null, "Dette er en test .",
+                new String[] { "PD", "VA", "PI", "NC", "XP" },
+                new String[] { "POS",  "POS", "POS", "POS", "POS" });
+    }
+
     @Test
 	public void testEnglish()
 		throws Exception
 	{
-        runTest("en", null, "This is a test . \n",
+        runTest("en", null, "This is a test .",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
 
-        runTest("en", null, "A neural net . \n",
+        runTest("en", null, "A neural net .",
         		new String[] { "DT",  "JJ",     "NN",  "." },
         		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
 
-        runTest("en", null, "John is purchasing oranges . \n",
+        runTest("en", null, "John is purchasing oranges .",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
     }
@@ -77,12 +95,21 @@ public class HunPosTaggerTest
                 new String[] { "DET", "PRO", "N_SING", "V_COP", "DELM" },
                 new String[] { "ART", "PR",  "N",      "V",     "PUNC" });
     }
-	
+    
+    @Test
+    public void testGerman()
+        throws Exception
+    {
+        runTest("de", null, "Das ist ein Test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
+
     @Test
     public void testHungarian()
         throws Exception
     {
-        runTest("hu", null, "Ez egy teszt . \n",
+        runTest("hu", null, "Ez egy teszt .",
                 new String[] { "NOUN", "ART", "NOUN", "PUNCT" },
                 new String[] { "POS",  "POS", "POS",  "POS" });
     }
@@ -91,18 +118,60 @@ public class HunPosTaggerTest
     public void testPortuguese()
         throws Exception
     {
-        runTest("pt", null, "Este é um teste . \n",
+        runTest("pt", null, "Este é um teste .",
+                new String[] {"pron-det", "v-fin", "art", "n", "punc" },
+                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+        
+        runTest("pt", "tbchp", "Este é um teste .",
+                new String[] { "D", "SR-P", "D-UM", "N", "." },
+                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+        
+        runTest("pt", "mm", "Este é um teste .",
                 new String[] { "PROSUB", "V",   "ART", "N",   "." },
+                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+
+        runTest("pt", "bosque", "Este é um teste .",
+                new String[] { "pron-det", "v-fin", "art", "n", "punc" },
                 new String[] { "POS",    "POS", "POS", "POS", "POS" });
     }
     
     @Test
+    public void testRussian()
+        throws Exception
+    {
+        runTest("ru", null, "Это тест .",
+                new String[] { "A", "S", "PUNC" },
+                new String[] { "POS",  "POS", "POS" });
+    }
+
+    @Test
+    public void testSlovenian()
+        throws Exception
+    {
+        runTest("sl", null, "To je test .",
+                new String[] { "zaimek-kazalni", "glagol-pomožni", "samostalnik-občno_ime", "PUNC" },
+                new String[] { "POS",  "POS", "POS",  "POS" });
+    }
+
+    @Test
     public void testSwedish()
         throws Exception
     {
-        runTest("sv", null, "Detta är ett test . \n",
+        runTest("sv", null, "Detta är ett test .",
                 new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "DL_MAD"    },
                 new String[] { "O", "O", "O", "O", "O" });
+        
+        runTest("sv", "paroletags", "Detta är ett test .",
+                new String[] { "PF@NS0@S", "V@IPAS", "DI@NS@S", "NCNSN@IS", "FE" },
+                new String[] { "POS",  "POS", "POS",  "POS", "POS" });
+        
+        runTest("sv", "suctags", "Detta är ett test .",
+                new String[] { "PN_NEU_SIN_DEF_SUB/OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "DL_MAD"    },
+                new String[] { "O", "O", "O", "O", "O" });
+        
+//        runTest("sv", "suc2x", "Detta är ett test .",
+//                new String[] { "PN_NEU_SIN_DEF_SUB@OBJ", "VB_PRS_AKT", "DT_NEU_SIN_IND", "NN_NEU_SIN_IND_NOM", "MAD"    },
+//                new String[] { "O", "O", "O", "O", "O" });
     }
 
     @Test
@@ -181,7 +250,7 @@ public class HunPosTaggerTest
         }
     }
 	
-	private void runTest(String language, String variant, String testDocument, String[] tags,
+	private JCas runTest(String language, String variant, String testDocument, String[] tags,
 			String[] tagClasses)
 		throws Exception
 	{
@@ -192,6 +261,8 @@ public class HunPosTaggerTest
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
 		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
+		
+		return jcas;
 	}
 
 	@Rule
