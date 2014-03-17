@@ -227,13 +227,13 @@
 	- FTP server is newer than the date added.
 	-->
 	<target name="en">
-		<property name="version.en" value="20111109.0"/>
+		<property name="version.en" value="20111109.1"/>
 		
 		<!-- FILE: english-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-10-31 | now        | 6037a03deda962b8938b7b243d0c902d
 		  -->
     	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-3.2.bin.gz"
-    		type="tagger" endianness="big-endian" language="en" encoding="ISO-8859-1" tagset="ptb"
+    		type="tagger" endianness="big-endian" language="en" encoding="ISO-8859-1" tagset="ptb-tt"
     		md5="6037a03deda962b8938b7b243d0c902d"/>
 
 		<!-- FILE: english-chunker-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -247,7 +247,7 @@
 		  - 2011-11-09 | now        | c64968dfed3f74d17b63987ff7421151
 		  -->
     	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="en" encoding="ISO-8859-1" tagset="ptb"
+    		type="tagger" endianness="little-endian" language="en" encoding="ISO-8859-1" tagset="ptb-tt"
     		md5="c64968dfed3f74d17b63987ff7421151"/>
 
 		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
