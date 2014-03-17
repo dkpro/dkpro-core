@@ -63,23 +63,23 @@ class TreeTaggerPosLemmaTT4JTest
                 "VBD", "VBG", "VBN", "VBP", "VBZ", "VH", "VHD", "VHG", "VHN", "VHP", "VHZ", "VV",
                 "VVD", "VVG", "VVN", "VVP", "VVZ", "WDT", "WP", "WP$", "WRB", "``" };
 	    
-        runTest("en", "ptb", tagset, "This is a test .",
+        runTest("en", "ptb-tt", tagset, "This is a test .",
 				new String[] { "this", "be",  "a",   "test", "."    },
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
 
-        runTest("en", "ptb", tagset, "A neural net .",
+        runTest("en", "ptb-tt", tagset, "A neural net .",
         		new String[] { "a",   "neural", "net", "."    },
         		new String[] { "DT",  "JJ",     "NN",  "SENT" },
         		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
 
-        runTest("en", "ptb", tagset, "John is purchasing oranges .",
+        runTest("en", "ptb-tt", tagset, "John is purchasing oranges .",
         		new String[] { "John", "be",  "purchase", "orange", "."    },
         		new String[] { "NP",   "VBZ", "VVG",      "NNS",    "SENT" },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
 
         // TT4J per default runs TreeTagger with the -sgml option, so XML tags are not tagged
-        runTest("en", "ptb", tagset, "My homepage is <url> http://null.dummy </url> .",
+        runTest("en", "ptb-tt", tagset, "My homepage is <url> http://null.dummy </url> .",
         		new String[] { "my", "homepage", "be", "http://null.dummy", "." },
         		new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
         		new String[] { "PR",  "NN", "V",   "ADJ", "PUNC" });
