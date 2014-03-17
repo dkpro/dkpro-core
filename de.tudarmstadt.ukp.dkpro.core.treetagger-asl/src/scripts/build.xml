@@ -59,6 +59,7 @@
 		<model-lang-jar language="es"/>
 		<model-lang-jar language="et"/>
 		<model-lang-jar language="fr"/>
+		<model-lang-jar language="fi"/>
 		<!-- model-lang-jar language="gr"/ -->
 		<model-lang-jar language="gz"/>
 		<model-lang-jar language="it"/>
@@ -211,7 +212,7 @@
 			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
 	</target>
 	
-	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, it, ru, sw, es, pt, gz, zh, sl"/>
+	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, fi, it, ru, sw, es, pt, gz, zh, sl"/>
 	
 	<!--
 	- Little Endian - x86 (Linux, Windows, Mac-Intel)
@@ -330,6 +331,20 @@
     		md5="bd3661679ffe9630f6bd61c59cea391b"/>
 	</target>
 
+	<target name="fi">
+		<property name="version.fi" value="20130716.0"/>
+		
+		<!-- FILE: finnish-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-07-16 | now        | 241dbbae52baad70787a952d3a0e71a3
+		  -
+		  - Corpus: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/
+		  - Tagset: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/FinnTreeBankManual.pdf
+		  -->
+    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2.bin.gz"
+    		type="tagger" endianness="little-endian" language="fi" encoding="UTF-8" tagset="ftb-tt"
+    		md5="241dbbae52baad70787a952d3a0e71a3"/>
+	</target>
+	
 	<target name="fr">
 		<property name="version.fr" value="20101115.0"/>
 		
