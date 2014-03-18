@@ -120,7 +120,7 @@ public class HunPosTaggerTest
     {
         runTest("pt", null, "Este é um teste .",
                 new String[] {"pron-det", "v-fin", "art", "n", "punc" },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+                new String[] { "PR", "V", "ART", "NN", "PUNC" });
         
         runTest("pt", "tbchp", "Este é um teste .",
                 new String[] { "D", "SR-P", "D-UM", "N", "." },
@@ -132,7 +132,7 @@ public class HunPosTaggerTest
 
         runTest("pt", "bosque", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n", "punc" },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+                new String[] { "PR", "V", "ART", "NN", "PUNC" });
     }
     
     @Test
