@@ -274,47 +274,24 @@ public class AssertAnnotations
         }
     }
 
-    public static void assertChunks(String[] aExpectedMapped, String[] aExpectedOriginal,
+    public static void assertChunks(String[] aExpected,
             Collection<Chunk> aActual)
     {
-        String[] actualTags = new String[aActual.size()];
-        String[] actualClasses = new String[aActual.size()];
+        List<String> expected = new ArrayList<String>(asList(aExpected));
+        List<String> actual = new ArrayList<String>();
 
-        int i = 0;
         for (Chunk a : aActual) {
-            actualTags[i] = String.format("%s %d,%d", a.getChunkValue(), a.getBegin(), a.getEnd());
-            actualClasses[i] = String.format("%s %d,%d", a.getType().getShortName(), a.getBegin(),
-                    a.getEnd());
-            i++;
+            actual.add(String.format("[%3d,%3d]%s(%s) (%s)", a.getBegin(), a.getEnd(), a.getClass()
+                    .getSimpleName(), a.getChunkValue(), a.getCoveredText()));
         }
 
-        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpectedOriginal));
-        List<String> sortedExpectedMapped = deduplicateAndSort(asList(aExpectedMapped));
-        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
-        List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
+        Collections.sort(actual);
+        Collections.sort(expected);
 
-        if (aExpectedOriginal != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Chunks (orig.)",
-                    asCopyableString(sortedExpectedOriginal));
-            System.out.printf("%-20s - Actual  : %s%n", "Chunks (orig.)",
-                    asCopyableString(sortedActualOriginal));
-        }
+        System.out.printf("%-20s - Expected: %s%n", "Chunks", asCopyableString(expected));
+        System.out.printf("%-20s - Actual  : %s%n", "Chunks", asCopyableString(actual));
 
-        if (aExpectedMapped != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Chunks (map.)",
-                    asCopyableString(sortedExpectedMapped));
-            System.out.printf("%-20s - Actual  : %s%n", "Chunks (map.)",
-                    asCopyableString(sortedActualMapped));
-        }
-
-        if (aExpectedOriginal != null) {
-            assertEquals(asCopyableString(sortedExpectedOriginal, true),
-                    asCopyableString(sortedActualOriginal, true));
-        }
-        if (aExpectedMapped != null) {
-            assertEquals(asCopyableString(sortedExpectedMapped, true),
-                    asCopyableString(sortedActualMapped, true));
-        }
+        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
     public static void assertSyntacticFunction(String[] aExpectedOriginal,

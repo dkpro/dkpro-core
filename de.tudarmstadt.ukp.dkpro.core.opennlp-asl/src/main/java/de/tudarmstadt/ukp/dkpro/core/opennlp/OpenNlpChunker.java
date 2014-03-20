@@ -186,7 +186,7 @@ public class OpenNlpChunker
                 if (t.getPos() == null || t.getPos().getPosValue() == null) {
                     throw new IllegalStateException("Every token must have a POS tag.");
                 }
-			    tokenTexts[i] = t.getPos().getPosValue();
+			    tokenTags[i] = t.getPos().getPosValue();
                 //System.out.printf("%s %s %n", t.getCoveredText(), t.getPos().getPosValue());
 			    i++;
 			}
