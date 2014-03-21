@@ -82,7 +82,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "(", ")", "PRT", "``" };
+        String[] unmappedPos = new String[] { "#", "$", "''", "PRT", "``" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
@@ -129,7 +129,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "(", ")", "PRT", "``" };
+        String[] unmappedPos = new String[] { "#", "$", "''", "PRT", "``" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
@@ -176,7 +176,7 @@ public class MaltParserTest
                 "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet", "prep", "prt",
                 "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "(", ")", "PRT", "``" };
+        String[] unmappedPos = new String[] { "#", "$", "''", "PRT", "``" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
