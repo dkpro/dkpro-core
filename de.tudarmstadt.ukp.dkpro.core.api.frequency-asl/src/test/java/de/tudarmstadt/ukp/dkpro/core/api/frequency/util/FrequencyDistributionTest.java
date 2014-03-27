@@ -61,6 +61,15 @@ public class FrequencyDistributionTest
     }
 
     @Test
+    public void testMaxIntHash() {
+        String badKey = "'s_'s_not_noticed";
+        
+        assertEquals(Integer.MIN_VALUE, badKey.hashCode());
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.inc(badKey);
+    }
+    
+    @Test
     public void saveAndLoadFdTest() throws Exception {
         List<String> tokens = Arrays.asList("This is a first test that contains a first test example".split(" "));
         
