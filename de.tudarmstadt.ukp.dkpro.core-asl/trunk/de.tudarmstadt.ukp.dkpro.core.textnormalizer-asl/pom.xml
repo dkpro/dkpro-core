@@ -15,8 +15,7 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -25,7 +24,7 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.textormalizer-asl</artifactId>
 	<name>DKPro Core ASL - Text normalizer</name>
-	<description>Provides normalizer for text. E.g. takes a text and checks for umlauts written as &quot;ae&quot;, &quot;oe&quot;, or &quot;ue&quot; and normalizes them if they really are umlauts depending on a frequency model.</description>
+	<description>Provides normalizer for text. E.g. takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they really are umlauts depending on a frequency model.</description>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
