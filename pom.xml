@@ -65,9 +65,9 @@
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk</url>
+		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/branches/dummy-0</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/branches/dummy-0</developerConnection>
+		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk/branches/dummy-0</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
