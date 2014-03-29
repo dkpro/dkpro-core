@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"[
+<!ENTITY imgroot "images/dkpro.core.analytics/" >
+]>
+<!--
+	Copyright 2013
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<chapter id="ugr.dkpro.core.analytics">
+  <title>Analysis Components</title>
+	<para>This section provides an overview of the analysis componens that can be deployed at the
+		different levels of analysis.</para>
+	<para/>
+	<section>
+		<title>Coreference Resolution</title>
+		<para/>
+		<figure>
+			<title>Coreference types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;coreference.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<table frame="all">
+			<title>Coreference components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>StanfordCoreferenceResolver</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Chunking</title>
+		<para/>
+		<table frame="all">
+			<title>Chunking components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>TreeTaggerChunkerTT4J</entry>
+						<entry>(uses native binary)</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Decompounding</title>
+		<para/>
+		<table frame="all">
+			<title>Decompounding components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>CompoundAnnotator</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Dictionary-Based Annotation</title>
+		<para/>
+		<table frame="all">
+			<title>Dictionary-based annotation components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>DictionaryAnnotator</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>SemanticFieldAnnotator</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Language Identification</title>
+		<para/>
+		<figure>
+			<title>DocumentAnnotation type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="20%" fileref="&imgroot;language_identification.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<table frame="all">
+			<title>Language identification components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>LangDect</entry>
+						<entry>Token ngram-based </entry>
+					</row>
+					<row>
+						<entry>TextCat</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Lemmatization</title>
+		<para/>
+		<figure>
+			<title>Lemma type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;lemmatization.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<table frame="all">
+			<title>Lemmatization components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>ClearNlpLemmatizer</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>GateLemmatizer</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>LanguageToolLemmatizer</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>MateLemmatizer</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>StanfordLemmatizer</entry>
+						<entry>(variant of Morpha)</entry>
+					</row>
+					<row>
+						<entry>TreeTaggerPosLemmaTT4J</entry>
+						<entry>(uses native binary)</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Morphological Analysis</title>
+		<para/>
+		<table frame="all">
+			<title>Morphological analysis components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>MateMorphTagger</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>SfstAnnotator</entry>
+						<entry>(uses native binary)</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Named-Entity Recognition</title>
+		<para/>
+		<table frame="all">
+			<title>Named-entity recognition components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>OpenNlpNameFinder</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>StanfordNamedEntityRecognizer</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Parsing</title>
+		<para/>
+		<table frame="all">
+			<title>Parsing components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>BerkeleyParser</entry>
+						<entry>constituents</entry>
+					</row>
+					<row>
+						<entry>ClearNlpDependencyParser</entry>
+						<entry>dependencies</entry>
+					</row>
+					<row>
+						<entry>OpenNlpParser</entry>
+						<entry>constituents</entry>
+					</row>
+					<row>
+						<entry>MaltParser</entry>
+						<entry>dependencies</entry>
+					</row>
+					<row>
+						<entry>MateParser</entry>
+						<entry>dependencies</entry>
+					</row>
+					<row>
+						<entry>MstParser</entry>
+						<entry>dependencies</entry>
+					</row>
+					<row>
+						<entry>StanfordParser</entry>
+						<entry>constituents, dependencies (for some languages)</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Part-of-Speech Tagging</title>
+		<para/>
+		<figure>
+			<title>Part-of-speech type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;part-of-speech.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<table frame="all">
+			<title>Part-of-speech tagging components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>ArktweetTagger</entry>
+						<entry>(not in release)</entry>
+					</row>
+					<row>
+						<entry>ClearNlpPosTagger</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>HepplePosTagger</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>HunPosTagger</entry>
+						<entry>(uses native binary)</entry>
+					</row>
+					<row>
+						<entry>LbjPosTagger</entry>
+						<entry>(not in release)</entry>
+					</row>
+					<row>
+						<entry>MatePosTagger</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>MeCabTagger</entry>
+						<entry>(uses native binary)</entry>
+					</row>
+					<row>
+						<entry>OpenNlpPosTagger</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>StanfordPosTagger</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>TreeTaggerPosLemmaTT4J</entry>
+						<entry>also does lemmatization (uses native binary)</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Segmentation</title>
+		<para>Segmenter components identify sentence boundaries and tokens. The order in which sentence
+			splitting and tokenization are done differs between the integrated the NLP libraries.
+			Thus, we chose to integrate both steps into a segmenter component to avoid the need to
+			reorder the components in a pipeline when replacing one segmenter with another.</para>
+		<figure>
+			<title>Segmentation types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="30%" fileref="&imgroot;segmentation.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<table frame="all">
+			<title>Segmentation components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>BreakIteratorSegmenter</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>ClearNlpSegmenter</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>LanguageToolSegmenter</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>OpenNlpSegmenter</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>StanfordSegmenter</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Semantic Role Labelling</title>
+		<para/>
+		<table frame="all">
+			<title>Semantic role labelling components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>ClearNlpSemanticRoleLabeler</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Spell Checking</title>
+		<para/>
+		<table frame="all">
+			<title>Spell checking components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>LanguageToolChecker</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>NorvigSpellingCorrector</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>JazzyChecker</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<section>
+		<title>Stemming</title>
+		<para/>
+		<figure>
+			<title>Stem type</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;stemming.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<table frame="all">
+			<title>Stemming components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="newCol2" colnum="2" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>MorphaStemmer</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>SnowballStemmer</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+</chapter>

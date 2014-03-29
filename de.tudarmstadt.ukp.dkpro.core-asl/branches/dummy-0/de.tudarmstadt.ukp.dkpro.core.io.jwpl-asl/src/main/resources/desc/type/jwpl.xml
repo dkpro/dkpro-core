@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>JWPL-specific types</name>
+  <description/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig</name>
+      <description>Database configuration for the connection to the database where the CAS data was retrieved.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>Host</name>
+          <description>DB Host</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>DB</name>
+          <description>Database</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>User</name>
+          <description>Username</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>Password</name>
+          <description>User password</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>Language</name>
+          <description>Wikipedia Language Versions</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.ArticleInfo</name>
+      <description>Contains basic information about the article.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>Authors</name>
+          <description>Number of unique authors of this article</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>Revisions</name>
+          <description>Number of revisions of this article.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>FirstAppearance</name>
+          <description>The Timestamp of the first appearance of this article.</description>
+          <rangeTypeName>uima.cas.Long</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>LastAppearance</name>
+          <description>The Timestamp of the last appearance of this article.</description>
+          <rangeTypeName>uima.cas.Long</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaRevision</name>
+      <description>Represents a revision in Wikipedia.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>revisionId</name>
+          <description>The ID of the revision.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>pageId</name>
+          <description>The pageId of the Wikipedia page of this revision.</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>contributorName</name>
+          <description>The username of the user/contributor who edited this revision.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>comment</name>
+          <description>The comment that the editor entered for this revision.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>contributorId</name>
+          <description>The userId of the user/contributor who created this revision</description>
+          <rangeTypeName>uima.cas.Integer</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>timestamp</name>
+          <description>The timestamp of the revision, given in milliseconds since the standard base time (January 1, 1970, 00:00:00 GMT)</description>
+          <rangeTypeName>uima.cas.Long</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>minor</name>
+          <description>Whether this revision has been marked as minor edit by its contributor.</description>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

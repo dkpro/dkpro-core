@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd"[
+<!ENTITY imgroot "images/dkpro.core.typesystem/" >
+]>
+<!--
+	Copyright 2013
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<chapter id="ugr.dkpro.core.typesystem">
+  <title>Type System</title>
+  <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
+    et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+    est Lorem ipsum dolor sit amet.</para>
+	<section>
+		<title>Meta data</title>
+		<para/>		
+		<figure>
+			<title>Metadata types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="&imgroot;metadata.png" width="70%"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>FIXME: Describe DocumentMetaData</para>
+		<para>FIXME: Describe TagDescription and TagsetDescription</para>
+	</section>
+	<section>
+		<title>Segmentation</title>
+		<para/>
+		<figure>
+			<title>Segmentation types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="100%" fileref="&imgroot;segmentation.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>FIXME: Describe Sentence &amp; Token</para>
+		<para>FIXME: Describe Document, Heading, and Paragraph</para>
+		<para>FIXME: Describe Compound, Split, CompoundPart, and LinkingMorpheme</para>
+	</section>
+	<section>
+		<title>Morphology</title>
+		<para/>
+	</section>
+	<section>
+		<title>Phonetics</title>
+		<para/>
+	</section>
+	<section>
+		<title>Coreference</title>
+		<para/>
+		<figure>
+			<title>Coreference types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;coreference.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
+	<section>
+		<title>Syntax</title>
+		<para/>
+		<figure>
+			<title>Syntax types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="100%" fileref="&imgroot;syntax.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+	</section>
+	<section>
+		<title>Semantics and Named Entities</title>
+		<para/>
+		<figure>
+			<title>Segmentation types</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata width="45%" fileref="&imgroot;semantics.png"/>
+				</imageobject>
+			</mediaobject>
+		</figure>
+		<para>The SemanticField is a coarse-grained semantic category that can be
+		attached to nouns, verbs or adjectives. Semantic field information is present e.g. in WordNet as
+		lexicographer file names. Previously, this kind of semantic information has also been called 
+		supersenses or semantic types.
+		</para>
+		<para>The SemanticPredicate annotation can be attached to predicates in a sentences. Semantic predicates
+		express events or situations and take semantic arguments expressing the participants in these events ore
+		situations. All forms of main verbs can be annotated with a SemanticPredicate. However, there are also many
+		nouns and adjectives that take arguments and can thus be annotated with a SemanticPredicate, e.g. event nouns,
+		such as "suggestion" (with arguments what and by whom), or relational adjectives, such as "proud" (with arguments
+		who and of what). The SemanticArgument annotation is attached to semantic arguments of semantic predicates.
+		Semantic arguments are characterized by their semantic role, e.g. Agent, Experiencer, Topic. 
+		The semantic role of an argument is related to its semantic type (for communication verbs, the 
+		Agent can be a person or an organization, but typically not food).
+		The semantic type of arguments is not yet covered by the SemanticType.</para>
+		<para>FIXME: Describe NamedEntity</para>
+	</section>
+</chapter>

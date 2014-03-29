@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!--
+	Copyright 2013
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<chapter id="ugr.dkpro.core.introduction">
+  <title>Introduction</title>
+  <para>Many powerful and state-of-the-art NLP tools are already freely available in the NLP
+		research community. New and improved tools are being developed and released continuously.
+		The tools cover the whole range of NLP-related processing tasks. DKPro Core provides UIMA
+		components wrapping these tools so they can be used interchangeably in processing pipelines.
+		DKPro Core builds heavily on uimaFIT which allows for rapid and easy development of
+		UIMA-based NLP processing pipelines.</para>
+</chapter>

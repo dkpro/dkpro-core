@@ -1,0 +1,365 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 58
+   language: "de"
+   documentTitle: "tiger-sample.xml"
+   documentId: "tiger-sample.xml"
+   isLastSegment: false
+
+CAS-Text:
+`` Ross Perot wäre vielleicht ein prächtiger Diktator '' 
+
+[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
+ROOT
+   sofa: _InitialView
+   begin: 0
+   end: 56
+   constituentType: "VROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
+[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
+Sentence
+   sofa: _InitialView
+   begin: 0
+   end: 56
+[``]
+PUNC
+   sofa: _InitialView
+   begin: 0
+   end: 2
+   PosValue: "$("
+[``]
+Lemma
+   sofa: _InitialView
+   begin: 0
+   end: 2
+   value: "--"
+[``]
+Token
+   sofa: _InitialView
+   begin: 0
+   end: 2
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 0
+      end: 2
+      value: "--"
+   stem: <null>
+   pos: PUNC
+      sofa: _InitialView
+      begin: 0
+      end: 2
+      PosValue: "$("
+   morph: <null>
+[Ross Perot wäre vielleicht ein prächtiger Diktator]
+Constituent
+   sofa: _InitialView
+   begin: 3
+   end: 53
+   constituentType: "S"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 56
+      constituentType: "VROOT"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
+   children: FSArray
+   syntacticFunction: "--"
+[Ross Perot]
+Constituent
+   sofa: _InitialView
+   begin: 3
+   end: 13
+   constituentType: "PN"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 3
+      end: 53
+      constituentType: "S"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 56
+         constituentType: "VROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "SB"
+[Ross]
+NP
+   sofa: _InitialView
+   begin: 3
+   end: 7
+   PosValue: "NE"
+[Ross]
+Lemma
+   sofa: _InitialView
+   begin: 3
+   end: 7
+   value: "Ross"
+[Ross]
+Token
+   sofa: _InitialView
+   begin: 3
+   end: 7
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 3
+      end: 7
+      value: "Ross"
+   stem: <null>
+   pos: NP
+      sofa: _InitialView
+      begin: 3
+      end: 7
+      PosValue: "NE"
+   morph: <null>
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 8
+   end: 13
+   PosValue: "NE"
+[Perot]
+Lemma
+   sofa: _InitialView
+   begin: 8
+   end: 13
+   value: "Perot"
+[Perot]
+Token
+   sofa: _InitialView
+   begin: 8
+   end: 13
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 8
+      end: 13
+      value: "Perot"
+   stem: <null>
+   pos: NP
+      sofa: _InitialView
+      begin: 8
+      end: 13
+      PosValue: "NE"
+   morph: <null>
+[wäre]
+Lemma
+   sofa: _InitialView
+   begin: 14
+   end: 18
+   value: "sein"
+[wäre]
+V
+   sofa: _InitialView
+   begin: 14
+   end: 18
+   PosValue: "VAFIN"
+[wäre]
+Token
+   sofa: _InitialView
+   begin: 14
+   end: 18
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 14
+      end: 18
+      value: "sein"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 14
+      end: 18
+      PosValue: "VAFIN"
+   morph: <null>
+[vielleicht]
+Lemma
+   sofa: _InitialView
+   begin: 19
+   end: 29
+   value: "vielleicht"
+[vielleicht]
+ADV
+   sofa: _InitialView
+   begin: 19
+   end: 29
+   PosValue: "ADV"
+[vielleicht]
+Token
+   sofa: _InitialView
+   begin: 19
+   end: 29
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 19
+      end: 29
+      value: "vielleicht"
+   stem: <null>
+   pos: ADV
+      sofa: _InitialView
+      begin: 19
+      end: 29
+      PosValue: "ADV"
+   morph: <null>
+[ein prächtiger Diktator]
+Constituent
+   sofa: _InitialView
+   begin: 30
+   end: 53
+   constituentType: "NP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 3
+      end: 53
+      constituentType: "S"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 56
+         constituentType: "VROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "PD"
+[ein]
+Lemma
+   sofa: _InitialView
+   begin: 30
+   end: 33
+   value: "ein"
+[ein]
+Token
+   sofa: _InitialView
+   begin: 30
+   end: 33
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 30
+      end: 33
+      value: "ein"
+   stem: <null>
+   pos: ART
+      sofa: _InitialView
+      begin: 30
+      end: 33
+      PosValue: "ART"
+   morph: <null>
+[ein]
+ART
+   sofa: _InitialView
+   begin: 30
+   end: 33
+   PosValue: "ART"
+[prächtiger]
+Lemma
+   sofa: _InitialView
+   begin: 34
+   end: 44
+   value: "prächtig"
+[prächtiger]
+ADJ
+   sofa: _InitialView
+   begin: 34
+   end: 44
+   PosValue: "ADJA"
+[prächtiger]
+Token
+   sofa: _InitialView
+   begin: 34
+   end: 44
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 34
+      end: 44
+      value: "prächtig"
+   stem: <null>
+   pos: ADJ
+      sofa: _InitialView
+      begin: 34
+      end: 44
+      PosValue: "ADJA"
+   morph: <null>
+[Diktator]
+NN
+   sofa: _InitialView
+   begin: 45
+   end: 53
+   PosValue: "NN"
+[Diktator]
+Lemma
+   sofa: _InitialView
+   begin: 45
+   end: 53
+   value: "Diktator"
+[Diktator]
+Token
+   sofa: _InitialView
+   begin: 45
+   end: 53
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 45
+      end: 53
+      value: "Diktator"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 45
+      end: 53
+      PosValue: "NN"
+   morph: <null>
+['']
+PUNC
+   sofa: _InitialView
+   begin: 54
+   end: 56
+   PosValue: "$("
+['']
+Lemma
+   sofa: _InitialView
+   begin: 54
+   end: 56
+   value: "--"
+['']
+Token
+   sofa: _InitialView
+   begin: 54
+   end: 56
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 54
+      end: 56
+      value: "--"
+   stem: <null>
+   pos: PUNC
+      sofa: _InitialView
+      begin: 54
+      end: 56
+      PosValue: "$("
+   morph: <null>
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================
