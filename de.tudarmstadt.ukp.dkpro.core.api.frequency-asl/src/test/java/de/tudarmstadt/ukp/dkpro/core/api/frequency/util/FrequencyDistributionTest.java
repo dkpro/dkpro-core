@@ -60,6 +60,9 @@ public class FrequencyDistributionTest
         assertEquals("test", top5.get(2));
     }
 
+    /**
+     * Bug in PCJ: see http://sourceforge.net/p/pcj/bugs/15/
+     */
     @Test
     public void testMaxIntHash() {
         String badKey = "'s_'s_not_noticed";
