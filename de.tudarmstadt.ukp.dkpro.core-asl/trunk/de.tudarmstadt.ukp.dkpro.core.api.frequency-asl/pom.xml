@@ -26,9 +26,9 @@
 	<name>DKPro Core ASL - Frequency Providers API (ASL)</name>
 	<dependencies>
 		<dependency>
-			<groupId>pcj</groupId>
-			<artifactId>pcj</artifactId>
-			<version>1.2</version>
+			<groupId>it.unimi.dsi</groupId>
+			<artifactId>fastutil</artifactId>
+			<version>6.5.13</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
