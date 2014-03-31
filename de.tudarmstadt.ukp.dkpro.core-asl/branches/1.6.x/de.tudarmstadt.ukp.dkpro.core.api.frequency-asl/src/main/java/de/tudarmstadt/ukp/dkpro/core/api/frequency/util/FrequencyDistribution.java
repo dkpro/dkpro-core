@@ -17,6 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
+import it.unimi.dsi.fastutil.longs.LongIterator;
+import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,10 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import bak.pcj.LongIterator;
-import bak.pcj.map.ObjectKeyLongMap;
-import bak.pcj.map.ObjectKeyLongOpenHashMap;
 
 // TODO already store sorted!
 /**
@@ -71,7 +70,7 @@ public class FrequencyDistribution<T>
     
     private static final long serialVersionUID = 150;
 
-    private ObjectKeyLongMap freqDist;
+    private Object2LongOpenHashMap<T> freqDist;
 
     /** The total number of samples (accumulated count). */
     private long n;
@@ -87,7 +86,7 @@ public class FrequencyDistribution<T>
      */
     public FrequencyDistribution()
     {
-        freqDist = new ObjectKeyLongOpenHashMap();
+        freqDist = new Object2LongOpenHashMap<T>();
         n = 0;
     }
 
@@ -258,7 +257,7 @@ public class FrequencyDistribution<T>
             throws IOException, ClassNotFoundException
     {
         ObjectInputStream in = new ObjectInputStream(new FileInputStream(file));
-        freqDist = (ObjectKeyLongMap) in.readObject();
+        freqDist = (Object2LongOpenHashMap<T>) in.readObject();
         in.close();
 
         int samples = 0;
