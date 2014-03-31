@@ -52,7 +52,7 @@ public class LanguageToolLemmatizerTest
         		new String[] { "a",   "neural", "net", "."    });
 
         runTest("en", "John is purchasing oranges .",
-        		new String[] { "John", "be",  "purchasing", "orange", "."    });
+        		new String[] { "John", "be",  "purchase", "orange", "."    });
     }
 
 	private void runTest(String language, String testDocument, String[] aLemma)
