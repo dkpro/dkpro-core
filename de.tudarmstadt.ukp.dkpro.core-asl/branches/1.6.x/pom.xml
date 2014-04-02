@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>7</version>
+		<version>8</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 	<version>1.6.1-SNAPSHOT</version>
