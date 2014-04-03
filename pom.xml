@@ -31,6 +31,9 @@
 	<name>DKPro Core GPL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<url>https://code.google.com/p/dkpro-core-gpl/</url>
+	<organization>
+    	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
+    </organization>
 	<inceptionYear>2007</inceptionYear>
 	<repositories>
 		<repository>
