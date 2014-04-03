@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.7.0-SNAPSHOT</version>
+		<version>1.6.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.snowball-asl</artifactId>
 	<name>DKPro Core ASL - Snowball (BSD)</name>
@@ -59,13 +59,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>
-				de.tudarmstadt.ukp.dkpro.core.testing-asl
-			</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

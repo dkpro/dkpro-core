@@ -142,17 +142,6 @@ public class ResourceCollectionReaderBaseTest
         searchForResourceCollectionReaderBase(reader);
     }
 
-    @Test
-    public void testFileNoSource()
-        throws Exception
-    {
-        CollectionReader reader = createReader(DummyReader.class,
-                ResourceCollectionReaderBase.PARAM_PATTERNS,
-                "src/main/java/de/tudarmstadt/ukp/**/FileSetCollectionReaderBase.java");
-
-        searchForResourceCollectionReaderBase(reader);
-    }
-    
     @Test(expected = ResourceInitializationException.class)
     public void testBrokenPattern()
         throws Exception

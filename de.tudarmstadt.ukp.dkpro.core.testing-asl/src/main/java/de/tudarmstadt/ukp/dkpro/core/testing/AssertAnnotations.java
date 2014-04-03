@@ -38,10 +38,8 @@ import junit.framework.Assert;
 import org.apache.uima.jcas.JCas;
 import org.codehaus.plexus.util.StringUtils;
 
-import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
@@ -61,36 +59,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 public class AssertAnnotations
 {
-    public static void assertAnomaly(String[] aExpected, Collection<? extends Anomaly> aActual)
-    {
-        String[] actualTags = new String[aActual.size()];
-        String[] actualClasses = new String[aActual.size()];
-
-        int i = 0;
-        for (Anomaly a : aActual) {
-            actualTags[i] = String.format("[%3d,%3d] %s (%s)", a.getBegin(),
-                    a.getEnd(), a.getType().getShortName(), a.getDescription());
-            actualClasses[i] = String.format("[%3d,%3d] %s (%s)", a.getBegin(),
-                    a.getEnd(), a.getType().getShortName(), a.getDescription());
-            i++;
-        }
-
-        List<String> sortedExpectedOriginal = deduplicateAndSort(asList(aExpected));
-        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
-
-        if (aExpected != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Anomalies (orig.)",
-                    asCopyableString(sortedExpectedOriginal));
-            System.out.printf("%-20s - Actual  : %s%n", "Anomalies (orig.)",
-                    asCopyableString(sortedActualOriginal));
-        }
-
-        if (aExpected != null) {
-            assertEquals(asCopyableString(sortedExpectedOriginal, true),
-                    asCopyableString(sortedActualOriginal, true));
-        }
-    }
-    
     public static void assertToken(String[] aExpected, Collection<Token> aActual)
     {
         if (aExpected == null) {
@@ -197,25 +165,6 @@ public class AssertAnnotations
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
-    public static void assertMorph(String[] aExpected, Collection<MorphologicalFeatures> aActual)
-    {
-        if (aExpected == null) {
-            return;
-        }
-
-        List<String> expected = asList(aExpected);
-        List<String> actual = new ArrayList<String>();
-
-        for (MorphologicalFeatures a : aActual) {
-            actual.add(a.getValue());
-        }
-
-        System.out.printf("%-20s - Expected: %s%n", "Morph. feats.", asCopyableString(expected));
-        System.out.printf("%-20s - Actual  : %s%n", "Morph. feats.", asCopyableString(actual));
-
-        assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-    }
-
     public static void assertStem(String[] aExpected, Collection<Stem> aActual)
     {
         if (aExpected == null) {
@@ -235,29 +184,49 @@ public class AssertAnnotations
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
-    public static void assertNamedEntity(String[] aExpected, Collection<NamedEntity> aActual)
+    public static void assertNamedEntity(String[] aExpectedMapped, String[] aExpectedOriginal,
+            Collection<NamedEntity> aActual)
     {
-        List<String> actual = new ArrayList<String>();
-        List<String> expected = new ArrayList<String>(asList(aExpected));
+        String[] actualTags = new String[aActual.size()];
+        String[] actualClasses = new String[aActual.size()];
 
+        int i = 0;
         for (NamedEntity a : aActual) {
-            actual.add(String.format("[%3d,%3d]%s(%s) (%s)", a.getBegin(), a.getEnd(), a
-                    .getClass().getSimpleName(), a.getValue(), a.getCoveredText()));
+            actualTags[i] = String.format("%s '%s'", a.getValue(), a.getCoveredText(),
+                    a.getBegin(), a.getEnd());
+            actualClasses[i] = String.format("%s '%s'", a.getType().getShortName(),
+                    a.getCoveredText(), a.getBegin(), a.getEnd());
+            i++;
         }
 
-        Collections.sort(actual);
-        Collections.sort(expected);
+        List<String> sortedExpectedOriginal = aExpectedOriginal != null ? deduplicateAndSort(asList(aExpectedOriginal))
+                : null;
+        List<String> sortedExpectedMapped = aExpectedMapped != null ? deduplicateAndSort(asList(aExpectedMapped))
+                : null;
+        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
+        List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
 
-        if (aExpected != null) {
+        if (aExpectedOriginal != null) {
             System.out.printf("%-20s - Expected: %s%n", "Named entities (orig.)",
-                    asCopyableString(expected));
+                    asCopyableString(sortedExpectedOriginal));
             System.out.printf("%-20s - Actual  : %s%n", "Named entities (orig.)",
-                    asCopyableString(actual));
+                    asCopyableString(sortedActualOriginal));
         }
 
-        if (aExpected != null) {
-            assertEquals(asCopyableString(expected, true),
-                    asCopyableString(actual, true));
+        if (aExpectedMapped != null) {
+            System.out.printf("%-20s - Expected: %s%n", "Named entities (map.)",
+                    asCopyableString(sortedExpectedMapped));
+            System.out.printf("%-20s - Actual  : %s%n", "Named entities (map.)",
+                    asCopyableString(sortedActualMapped));
+        }
+
+        if (aExpectedOriginal != null) {
+            assertEquals(asCopyableString(sortedExpectedOriginal, true),
+                    asCopyableString(sortedActualOriginal, true));
+        }
+        if (aExpectedMapped != null) {
+            assertEquals(asCopyableString(sortedExpectedMapped, true),
+                    asCopyableString(sortedActualMapped, true));
         }
     }
 
@@ -475,18 +444,15 @@ public class AssertAnnotations
     public static void assertCoreference(String[][] aExpected, Collection<CoreferenceChain> aActual)
     {
         List<CoreferenceChain> actual = new ArrayList<CoreferenceChain>(aActual);
-        for (String[] i : aExpected) {
-            System.out.printf("%-20s - Expected: %s%n", "Coreference",
-                    asCopyableString(asList(i)));
-        }
-
-        for (CoreferenceChain i : actual) {
-            System.out.printf("%-20s - Actual  : %s%n", "Coreference",
-                    asCopyableString(toText(i.links())));
-        }
-
         assertEquals(aExpected.length, aActual.size());
-        for (int i = 0; i < actual.size(); i++) {
+        for (int i = 0; i < aExpected.length; i++) {
+            System.out.printf("%-20s - Expected: %s%n", "Coreference",
+                    asCopyableString(asList(aExpected[i])));
+            System.out.printf("%-20s - Actual  : %s%n", "Coreference",
+                    asCopyableString(toText(actual.get(i).links())));
+        }
+        
+        for (int i = 0; i < aExpected.length; i++) {
             assertEquals(asCopyableString(asList(aExpected[i]), true),
                     asCopyableString(toText(actual.get(i).links()), true));
         }
@@ -613,20 +579,17 @@ public class AssertAnnotations
 
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
     {
-        String result;
         if (aCollection.isEmpty()) {
-            result = "{}";
+            return "{}";
         }
         else {
             if (aLinebreak) {
-                result = "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
+                return "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
             }
             else {
-                result = "{ \"" + join(aCollection, "\", \"") + "\" }";
+                return "{ \"" + join(aCollection, "\", \"") + "\" }";
             }
         }
-        
-        return result.replace("\\", "\\\\");
     }
 
     private static String asCopyableString(Collection<String> aCollection)

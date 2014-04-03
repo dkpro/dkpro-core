@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.7.0-SNAPSHOT</version>
+		<version>1.6.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
 	<name>DKPro Core ASL - LanguageTool (LGPL)</name>
@@ -47,10 +47,6 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.languagetool</groupId>
 			<artifactId>languagetool-core</artifactId>
 			<version>2.5</version>
@@ -59,21 +55,6 @@
 			<groupId>org.languagetool</groupId>
 			<artifactId>language-all</artifactId>
 			<version>2.5</version>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -86,15 +67,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-				<version>1.7.0-SNAPSHOT</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

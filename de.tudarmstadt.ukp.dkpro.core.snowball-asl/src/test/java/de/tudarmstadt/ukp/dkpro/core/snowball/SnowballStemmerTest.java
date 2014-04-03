@@ -17,78 +17,134 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.snowball;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.assertTrue;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class SnowballStemmerTest
 {
-    @Test
-    public void testGerman()
-        throws Exception
-    {
-        runTest("de", "Automobile Fenster", 
-                new String[] {"Automobil", "Fenst"} );
-    }
+	@Test
+	public void testGerman()
+		throws Exception
+	{
+		AnalysisEngine engine = createEngine(SnowballStemmer.class);
 
-    @Test
-    public void testEnglish()
-        throws Exception
-    {
-        runTest("en", "computers Computers deliberately", 
-                new String[] {"comput", "Comput", "deliber"} );
-        
-        runTest("en", "We need a very complicated example sentence , which " +
-                "contains as many constituents and dependencies as possible .",
-                new String[] { "We", "need", "a", "veri", "complic", "exampl", "sentenc", ",", 
-                "which", "contain", "as", "mani", "constitu", "and", "depend", "as", "possibl", 
-                "." });
-    }
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage("de");
+		JCasBuilder cb = new JCasBuilder(jcas);
+		cb.add("Automobile", Token.class);
+		cb.add(" ");
+		cb.add("Fenster", Token.class);
+		cb.close();
 
-    @Test
-    public void testEnglishCaseInsensitive()
-        throws Exception
-    {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"educ", "educ", "educ"},
-                SnowballStemmer.PARAM_LOWER_CASE, true);
-    }
+		engine.process(jcas);
 
-    @Test
-    public void testEnglishCaseSensitive()
-        throws Exception
-    {
-        runTest("en", "EDUCATIONAL Educational educational", 
-                new String[] {"EDUCATIONAL", "Educat", "educ"},
-                SnowballStemmer.PARAM_LOWER_CASE, false);
-    }
+		int i = 0;
+		for (Stem s : select(jcas, Stem.class)) {
+			assertTrue(i != 0 || "Automobil".equals(s.getValue()));
+			assertTrue(i != 1 || "Fenst".equals(s.getValue()));
+			i ++;
+		}
+	}
 
-    private JCas runTest(String aLanguage, String aText, String[] aStems, Object... aParams)
-        throws Exception
-    {
-        JCas result = TestRunner.runTest(createEngineDescription(SnowballStemmer.class, aParams),
-                aLanguage, aText);
+	@Test
+	public void testEnglish()
+		throws Exception
+	{
+		AnalysisEngine engine = createEngine(SnowballStemmer.class);
 
-        AssertAnnotations.assertStem(aStems, select(result, Stem.class));
-        
-        return result;
-    }
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage("en");
+		JCasBuilder cb = new JCasBuilder(jcas);
+		cb.add("computers", Token.class);
+		cb.add(" ");
+		cb.add("Computers", Token.class);
+		cb.add(" ");
+		cb.add("deliberately", Token.class);
+		cb.close();
 
-    @Rule
-    public TestName name = new TestName();
+		engine.process(jcas);
 
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+		int i = 0;
+		for (Stem s : select(jcas, Stem.class)) {
+			assertTrue(i != 0 || "comput".equals(s.getValue()));
+			assertTrue(i != 1 || "Comput".equals(s.getValue()));
+			assertTrue(i != 2 || "deliber".equals(s.getValue()));
+			i ++;
+		}
+
+		i = 0;
+		for (Token t : select(jcas, Token.class)) {
+			assertTrue(i != 0 || "comput".equals(t.getStem().getValue()));
+			assertTrue(i != 1 || "Comput".equals(t.getStem().getValue()));
+			assertTrue(i != 2 || "deliber".equals(t.getStem().getValue()));
+			i ++;
+		}
+	}
+
+	@Test
+	public void testEnglishCaseInsensitive()
+		throws Exception
+	{
+		AnalysisEngine engine = createEngine(SnowballStemmer.class,
+				SnowballStemmer.PARAM_LOWER_CASE, true);
+
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage("en");
+		JCasBuilder cb = new JCasBuilder(jcas);
+		cb.add("EDUCATIONAL", Token.class);
+		cb.add(" ");
+		cb.add("Educational", Token.class);
+		cb.add(" ");
+		cb.add("educational", Token.class);
+		cb.close();
+
+		engine.process(jcas);
+
+		int i = 0;
+		for (Token t : select(jcas, Token.class)) {
+			String stem = t.getStem().getValue();
+			assertTrue(stem, i != 0 || "educ".equals(stem));
+			assertTrue(stem, i != 1 || "educ".equals(stem));
+			assertTrue(stem, i != 2 || "educ".equals(stem));
+			i ++;
+		}
+	}
+
+	@Test
+	public void testEnglishCaseSensitive()
+		throws Exception
+	{
+		AnalysisEngine engine = createEngine(SnowballStemmer.class,
+				SnowballStemmer.PARAM_LOWER_CASE, false);
+
+		JCas jcas = engine.newJCas();
+		jcas.setDocumentLanguage("en");
+		JCasBuilder cb = new JCasBuilder(jcas);
+		cb.add("EDUCATIONAL", Token.class);
+		cb.add(" ");
+		cb.add("Educational", Token.class);
+		cb.add(" ");
+		cb.add("educational", Token.class);
+		cb.close();
+
+		engine.process(jcas);
+
+		int i = 0;
+		for (Token t : select(jcas, Token.class)) {
+			String stem = t.getStem().getValue();
+			assertTrue(stem, i != 0 || "EDUCATIONAL".equals(stem));
+			assertTrue(stem, i != 1 || "Educat".equals(stem));
+			assertTrue(stem, i != 2 || "educ".equals(stem));
+			i ++;
+		}
+	}
 }

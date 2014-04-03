@@ -113,7 +113,6 @@ Token
       begin: 0
       end: 3
       PosValue: "PPER"
-   morph: <null>
 [gehen]
 V
    sofa: _InitialView
@@ -154,7 +153,6 @@ Token
       begin: 4
       end: 9
       PosValue: "VVFIN"
-   morph: <null>
 [gewagte Verbindungen und Risiken]
 Constituent
    sofa: _InitialView
@@ -276,7 +274,6 @@ Token
       begin: 10
       end: 17
       PosValue: "ADJA"
-   morph: <null>
 [Verbindungen]
 NN
    sofa: _InitialView
@@ -331,7 +328,6 @@ Token
       begin: 18
       end: 30
       PosValue: "NN"
-   morph: <null>
 [und]
 Token
    sofa: _InitialView
@@ -373,7 +369,6 @@ Token
       begin: 31
       end: 34
       PosValue: "KON"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -427,7 +422,6 @@ Token
       begin: 35
       end: 42
       PosValue: "NN"
-   morph: <null>
 [ein]
 V
    sofa: _InitialView
@@ -468,7 +462,6 @@ Token
       begin: 43
       end: 46
       PosValue: "PTKVZ"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -495,7 +488,6 @@ Token
       begin: 47
       end: 48
       PosValue: "$,"
-   morph: <null>
 [versuchen ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -559,7 +551,6 @@ Token
       begin: 49
       end: 58
       PosValue: "VVFIN"
-   morph: <null>
 [ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -681,7 +672,6 @@ Token
       begin: 59
       end: 63
       PosValue: "PPOSAT"
-   morph: <null>
 [Möglichkeiten]
 NN
    sofa: _InitialView
@@ -736,7 +726,6 @@ Token
       begin: 64
       end: 77
       PosValue: "NN"
-   morph: <null>
 [auszureizen]
 V
    sofa: _InitialView
@@ -784,7 +773,6 @@ Token
       begin: 78
       end: 89
       PosValue: "VVIZU"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -811,7 +799,6 @@ Token
       begin: 90
       end: 91
       PosValue: "$."
-   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

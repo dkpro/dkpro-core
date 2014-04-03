@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.languagetool;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -59,9 +58,7 @@ public class LanguageToolLemmatizerTest
 	private void runTest(String language, String testDocument, String[] aLemma)
 		throws Exception
 	{
-		AnalysisEngineDescription engine = createEngineDescription(
-		        createEngineDescription(OpenNlpPosTagger.class),
-		        createEngineDescription(LanguageToolLemmatizer.class));
+		AnalysisEngine engine = createEngine(LanguageToolLemmatizer.class);
 
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
 

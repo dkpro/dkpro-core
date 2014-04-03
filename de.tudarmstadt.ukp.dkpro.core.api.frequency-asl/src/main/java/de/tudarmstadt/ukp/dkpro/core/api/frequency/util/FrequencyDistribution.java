@@ -29,12 +29,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
-import com.google.common.collect.MinMaxPriorityQueue;
-
+// TODO already store sorted!
 /**
  * It is basically a mapping from samples (keys) to long values (counts).
  * 
@@ -281,18 +282,27 @@ public class FrequencyDistribution<T>
      */
     public List<T> getMostFrequentSamples(int n) {
 
-        MinMaxPriorityQueue<TermFreqTuple<T>> topN = MinMaxPriorityQueue.maximumSize(n).create();
+        List<T> topSamples = new ArrayList<T>();
+        
+        Map<T, Long> map = new HashMap<T, Long>();
 
         for (T key : this.getKeys()) {
-            topN.add(new TermFreqTuple<T>(key, this.getCount(key)));
+            map.put(key, this.getCount(key));
+        }
+
+        Map<T, Long> sorted_map = new TreeMap<T, Long>(new ValueComparator(map));
+        sorted_map.putAll(map);
+
+        int i = 0;
+        for (T key : sorted_map.keySet()) {
+            if (i >= n) {
+                break;
+            }
+            topSamples.add(key);
+            i++;
         }
         
-        List<T> topNList = new ArrayList<T>();
-        while (!topN.isEmpty()) {
-            topNList.add(topN.poll().getKey());
-        }
-        
-        return topNList;
+        return topSamples;
     }
     
     class ValueComparator

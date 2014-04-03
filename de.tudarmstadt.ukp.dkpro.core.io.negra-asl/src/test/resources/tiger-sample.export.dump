@@ -70,7 +70,6 @@ Token
       begin: 0
       end: 2
       PosValue: "$("
-   morph: <null>
 [Ross Perot wäre vielleicht ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -160,7 +159,6 @@ Token
       begin: 3
       end: 7
       PosValue: "NE"
-   morph: <null>
 [Perot]
 NP
    sofa: _InitialView
@@ -211,7 +209,6 @@ Token
       begin: 8
       end: 13
       PosValue: "NE"
-   morph: <null>
 [wäre]
 Lemma
    sofa: _InitialView
@@ -255,7 +252,6 @@ Token
       begin: 14
       end: 18
       PosValue: "VAFIN"
-   morph: <null>
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -299,7 +295,6 @@ Token
       begin: 19
       end: 29
       PosValue: "ADV"
-   morph: <null>
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -367,7 +362,6 @@ Token
       begin: 30
       end: 33
       PosValue: "ART"
-   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -424,7 +418,6 @@ Token
       begin: 34
       end: 44
       PosValue: "ADJA"
-   morph: <null>
 [Diktator]
 NN
    sofa: _InitialView
@@ -475,7 +468,6 @@ Token
       begin: 45
       end: 53
       PosValue: "NN"
-   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -512,7 +504,6 @@ Token
       begin: 54
       end: 56
       PosValue: "$("
-   morph: <null>
 [Konzernchefs lehnen den Milliardär als US-Präsidenten ab /]
 ROOT
    sofa: _InitialView
@@ -593,7 +584,6 @@ Token
       begin: 57
       end: 69
       PosValue: "NN"
-   morph: <null>
 [lehnen]
 Lemma
    sofa: _InitialView
@@ -637,7 +627,6 @@ Token
       begin: 70
       end: 76
       PosValue: "VVFIN"
-   morph: <null>
 [den Milliardär]
 Constituent
    sofa: _InitialView
@@ -705,7 +694,6 @@ Token
       begin: 77
       end: 80
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -762,7 +750,6 @@ Token
       begin: 81
       end: 91
       PosValue: "NN"
-   morph: <null>
 [als US-Präsidenten]
 Constituent
    sofa: _InitialView
@@ -836,7 +823,6 @@ Token
       begin: 92
       end: 95
       PosValue: "APPR"
-   morph: <null>
 [US-Präsidenten]
 NN
    sofa: _InitialView
@@ -887,7 +873,6 @@ Token
       begin: 96
       end: 110
       PosValue: "NN"
-   morph: <null>
 [ab]
 Lemma
    sofa: _InitialView
@@ -931,7 +916,6 @@ Token
       begin: 111
       end: 113
       PosValue: "PTKVZ"
-   morph: <null>
 [/]
 PUNC
    sofa: _InitialView
@@ -968,7 +952,6 @@ Token
       begin: 114
       end: 115
       PosValue: "$("
-   morph: <null>
 [Texaner gibt nur vage Auskunft über seine Wirtschaftspolitik]
 ROOT
    sofa: _InitialView
@@ -1049,7 +1032,6 @@ Token
       begin: 116
       end: 123
       PosValue: "NN"
-   morph: <null>
 [gibt]
 Lemma
    sofa: _InitialView
@@ -1093,7 +1075,6 @@ Token
       begin: 124
       end: 128
       PosValue: "VVFIN"
-   morph: <null>
 [nur vage Auskunft über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1204,7 +1185,6 @@ Token
       begin: 129
       end: 132
       PosValue: "ADV"
-   morph: <null>
 [vage]
 Lemma
    sofa: _InitialView
@@ -1262,7 +1242,6 @@ Token
       begin: 133
       end: 137
       PosValue: "ADJA"
-   morph: <null>
 [Auskunft]
 NN
    sofa: _InitialView
@@ -1313,7 +1292,6 @@ Token
       begin: 138
       end: 146
       PosValue: "NN"
-   morph: <null>
 [über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1401,7 +1379,6 @@ Token
       begin: 147
       end: 151
       PosValue: "APPR"
-   morph: <null>
 [seine]
 PR
    sofa: _InitialView
@@ -1459,7 +1436,6 @@ Token
       begin: 152
       end: 157
       PosValue: "PPOSAT"
-   morph: <null>
 [Wirtschaftspolitik]
 NN
    sofa: _InitialView
@@ -1517,7 +1493,6 @@ Token
       begin: 158
       end: 176
       PosValue: "NN"
-   morph: <null>
 [Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
 ROOT
    sofa: _InitialView
@@ -1622,7 +1597,6 @@ Token
       begin: 177
       end: 180
       PosValue: "ART"
-   morph: <null>
 [Der]
 ART
    sofa: _InitialView
@@ -1679,7 +1653,6 @@ Token
       begin: 181
       end: 191
       PosValue: "ADJA"
-   morph: <null>
 [Milliardär]
 NN
    sofa: _InitialView
@@ -1730,7 +1703,6 @@ Token
       begin: 192
       end: 202
       PosValue: "NN"
-   morph: <null>
 [Ross Perot]
 Constituent
    sofa: _InitialView
@@ -1818,7 +1790,6 @@ Token
       begin: 203
       end: 207
       PosValue: "NE"
-   morph: <null>
 [Perot]
 NP
    sofa: _InitialView
@@ -1876,7 +1847,6 @@ Token
       begin: 208
       end: 213
       PosValue: "NE"
-   morph: <null>
 [hat]
 Lemma
    sofa: _InitialView
@@ -1920,7 +1890,6 @@ Token
       begin: 214
       end: 217
       PosValue: "VAFIN"
-   morph: <null>
 [das politische Establishment in Washington aufgeschreckt]
 Constituent
    sofa: _InitialView
@@ -2025,7 +1994,6 @@ Token
       begin: 218
       end: 221
       PosValue: "ART"
-   morph: <null>
 [das]
 ART
    sofa: _InitialView
@@ -2089,7 +2057,6 @@ Token
       begin: 222
       end: 232
       PosValue: "ADJA"
-   morph: <null>
 [Establishment]
 NN
    sofa: _InitialView
@@ -2147,7 +2114,6 @@ Token
       begin: 233
       end: 246
       PosValue: "NN"
-   morph: <null>
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -2249,7 +2215,6 @@ Token
       begin: 247
       end: 249
       PosValue: "APPR"
-   morph: <null>
 [Washington]
 NP
    sofa: _InitialView
@@ -2314,7 +2279,6 @@ Token
       begin: 250
       end: 260
       PosValue: "NE"
-   morph: <null>
 [aufgeschreckt]
 Lemma
    sofa: _InitialView
@@ -2365,7 +2329,6 @@ Token
       begin: 261
       end: 274
       PosValue: "VVPP"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -2402,7 +2365,6 @@ Token
       begin: 275
       end: 276
       PosValue: "$."
-   morph: <null>
 [Nach Meinungsumfragen liegt der parteilose Self-mademan gut im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton .]
 ROOT
    sofa: _InitialView
@@ -2513,7 +2475,6 @@ Token
       begin: 277
       end: 281
       PosValue: "APPR"
-   morph: <null>
 [Meinungsumfragen]
 NN
    sofa: _InitialView
@@ -2564,7 +2525,6 @@ Token
       begin: 282
       end: 298
       PosValue: "NN"
-   morph: <null>
 [liegt]
 Lemma
    sofa: _InitialView
@@ -2608,7 +2568,6 @@ Token
       begin: 299
       end: 304
       PosValue: "VVFIN"
-   morph: <null>
 [der parteilose Self-mademan]
 Constituent
    sofa: _InitialView
@@ -2676,7 +2635,6 @@ Token
       begin: 305
       end: 308
       PosValue: "ART"
-   morph: <null>
 [der]
 ART
    sofa: _InitialView
@@ -2733,7 +2691,6 @@ Token
       begin: 309
       end: 319
       PosValue: "ADJA"
-   morph: <null>
 [Self-mademan]
 Lemma
    sofa: _InitialView
@@ -2784,7 +2741,6 @@ Token
       begin: 320
       end: 332
       PosValue: "FM"
-   morph: <null>
 [gut]
 Lemma
    sofa: _InitialView
@@ -2828,7 +2784,6 @@ Token
       begin: 333
       end: 336
       PosValue: "ADJD"
-   morph: <null>
 [im Rennen um den Chefsessel im Weißen Haus mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -2902,7 +2857,6 @@ Token
       begin: 337
       end: 339
       PosValue: "APPRART"
-   morph: <null>
 [Rennen]
 NN
    sofa: _InitialView
@@ -2953,7 +2907,6 @@ Token
       begin: 340
       end: 346
       PosValue: "NN"
-   morph: <null>
 [um den Chefsessel im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3041,7 +2994,6 @@ Token
       begin: 347
       end: 349
       PosValue: "APPR"
-   morph: <null>
 [den]
 Lemma
    sofa: _InitialView
@@ -3093,7 +3045,6 @@ Token
       begin: 350
       end: 353
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -3157,7 +3108,6 @@ Token
       begin: 354
       end: 364
       PosValue: "NN"
-   morph: <null>
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3259,7 +3209,6 @@ Token
       begin: 365
       end: 367
       PosValue: "APPRART"
-   morph: <null>
 [Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3433,7 +3382,6 @@ Token
       begin: 368
       end: 374
       PosValue: "ADJA"
-   morph: <null>
 [Haus]
 NN
    sofa: _InitialView
@@ -3512,7 +3460,6 @@ Token
       begin: 375
       end: 379
       PosValue: "NN"
-   morph: <null>
 [mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3600,7 +3547,6 @@ Token
       begin: 380
       end: 383
       PosValue: "APPR"
-   morph: <null>
 [dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3747,7 +3693,6 @@ Token
       begin: 384
       end: 387
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -3825,7 +3770,6 @@ Token
       begin: 388
       end: 399
       PosValue: "ADJA"
-   morph: <null>
 [Präsidenten]
 NN
    sofa: _InitialView
@@ -3897,7 +3841,6 @@ Token
       begin: 400
       end: 411
       PosValue: "NN"
-   morph: <null>
 [George Bush]
 Constituent
    sofa: _InitialView
@@ -4027,7 +3970,6 @@ Token
       begin: 412
       end: 418
       PosValue: "NE"
-   morph: <null>
 [Bush]
 NP
    sofa: _InitialView
@@ -4106,7 +4048,6 @@ Token
       begin: 419
       end: 423
       PosValue: "NE"
-   morph: <null>
 [und]
 Lemma
    sofa: _InitialView
@@ -4165,7 +4106,6 @@ Token
       begin: 424
       end: 427
       PosValue: "KON"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -4281,7 +4221,6 @@ Token
       begin: 428
       end: 431
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -4359,7 +4298,6 @@ Token
       begin: 432
       end: 442
       PosValue: "NN"
-   morph: <null>
 [Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -4489,7 +4427,6 @@ Token
       begin: 443
       end: 447
       PosValue: "NE"
-   morph: <null>
 [Clinton]
 NP
    sofa: _InitialView
@@ -4568,7 +4505,6 @@ Token
       begin: 448
       end: 455
       PosValue: "NE"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -4605,7 +4541,6 @@ Token
       begin: 456
       end: 457
       PosValue: "$."
-   morph: <null>
 [Daß Perot ein Unternehmen erfolgreich leiten kann , davon sind selbst seine Kritiker überzeugt .]
 ROOT
    sofa: _InitialView
@@ -4791,7 +4726,6 @@ Token
       begin: 458
       end: 461
       PosValue: "KOUS"
-   morph: <null>
 [Daß]
 CONJ
    sofa: _InitialView
@@ -4862,7 +4796,6 @@ Token
       begin: 462
       end: 467
       PosValue: "NE"
-   morph: <null>
 [ein Unternehmen erfolgreich leiten]
 Constituent
    sofa: _InitialView
@@ -5030,7 +4963,6 @@ Token
       begin: 468
       end: 471
       PosValue: "ART"
-   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -5115,7 +5047,6 @@ Token
       begin: 472
       end: 483
       PosValue: "NN"
-   morph: <null>
 [erfolgreich]
 Lemma
    sofa: _InitialView
@@ -5187,7 +5118,6 @@ Token
       begin: 484
       end: 495
       PosValue: "ADJD"
-   morph: <null>
 [leiten]
 Lemma
    sofa: _InitialView
@@ -5259,7 +5189,6 @@ Token
       begin: 496
       end: 502
       PosValue: "VVINF"
-   morph: <null>
 [kann]
 Lemma
    sofa: _InitialView
@@ -5324,7 +5253,6 @@ Token
       begin: 503
       end: 507
       PosValue: "VMFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -5361,7 +5289,6 @@ Token
       begin: 508
       end: 509
       PosValue: "$,"
-   morph: <null>
 [davon]
 Lemma
    sofa: _InitialView
@@ -5419,7 +5346,6 @@ Token
       begin: 510
       end: 515
       PosValue: "PROAV"
-   morph: <null>
 [sind]
 Lemma
    sofa: _InitialView
@@ -5463,7 +5389,6 @@ Token
       begin: 516
       end: 520
       PosValue: "VAFIN"
-   morph: <null>
 [selbst seine Kritiker]
 Constituent
    sofa: _InitialView
@@ -5537,7 +5462,6 @@ Token
       begin: 521
       end: 527
       PosValue: "ADV"
-   morph: <null>
 [seine]
 PR
    sofa: _InitialView
@@ -5588,7 +5512,6 @@ Token
       begin: 528
       end: 533
       PosValue: "PPOSAT"
-   morph: <null>
 [Kritiker]
 NN
    sofa: _InitialView
@@ -5639,7 +5562,6 @@ Token
       begin: 534
       end: 542
       PosValue: "NN"
-   morph: <null>
 [überzeugt]
 Lemma
    sofa: _InitialView
@@ -5690,7 +5612,6 @@ Token
       begin: 543
       end: 552
       PosValue: "VVPP"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -5727,7 +5648,6 @@ Token
       begin: 553
       end: 554
       PosValue: "$."
-   morph: <null>
 [Ob diese Fähigkeiten aber ausreichen , um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen , bezweifeln viele Ökonomen .]
 ROOT
    sofa: _InitialView
@@ -5832,7 +5752,6 @@ Token
       begin: 555
       end: 557
       PosValue: "KOUS"
-   morph: <null>
 [Ob]
 CONJ
    sofa: _InitialView
@@ -5926,7 +5845,6 @@ Token
       begin: 558
       end: 563
       PosValue: "PDAT"
-   morph: <null>
 [Fähigkeiten]
 NN
    sofa: _InitialView
@@ -5984,7 +5902,6 @@ Token
       begin: 564
       end: 575
       PosValue: "NN"
-   morph: <null>
 [aber]
 Lemma
    sofa: _InitialView
@@ -6035,7 +5952,6 @@ Token
       begin: 576
       end: 580
       PosValue: "ADV"
-   morph: <null>
 [ausreichen]
 Lemma
    sofa: _InitialView
@@ -6086,7 +6002,6 @@ Token
       begin: 581
       end: 591
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -6123,7 +6038,6 @@ Token
       begin: 592
       end: 593
       PosValue: "$,"
-   morph: <null>
 [um die größte Volkswirtschaft der Welt aus ihrer Krise zu führen]
 Constituent
    sofa: _InitialView
@@ -6205,7 +6119,6 @@ Token
       begin: 594
       end: 596
       PosValue: "KOUI"
-   morph: <null>
 [um]
 CONJ
    sofa: _InitialView
@@ -6307,7 +6220,6 @@ Token
       begin: 597
       end: 600
       PosValue: "ART"
-   morph: <null>
 [die]
 ART
    sofa: _InitialView
@@ -6378,7 +6290,6 @@ Token
       begin: 601
       end: 607
       PosValue: "ADJA"
-   morph: <null>
 [Volkswirtschaft]
 NN
    sofa: _InitialView
@@ -6443,7 +6354,6 @@ Token
       begin: 608
       end: 623
       PosValue: "NN"
-   morph: <null>
 [der Welt]
 Constituent
    sofa: _InitialView
@@ -6553,7 +6463,6 @@ Token
       begin: 624
       end: 627
       PosValue: "ART"
-   morph: <null>
 [der]
 ART
    sofa: _InitialView
@@ -6631,7 +6540,6 @@ Token
       begin: 628
       end: 632
       PosValue: "NN"
-   morph: <null>
 [aus ihrer Krise]
 Constituent
    sofa: _InitialView
@@ -6733,7 +6641,6 @@ Token
       begin: 633
       end: 636
       PosValue: "APPR"
-   morph: <null>
 [ihrer]
 PR
    sofa: _InitialView
@@ -6798,7 +6705,6 @@ Token
       begin: 637
       end: 642
       PosValue: "PPOSAT"
-   morph: <null>
 [Krise]
 NN
    sofa: _InitialView
@@ -6863,7 +6769,6 @@ Token
       begin: 643
       end: 648
       PosValue: "NN"
-   morph: <null>
 [zu führen]
 Constituent
    sofa: _InitialView
@@ -6965,7 +6870,6 @@ Token
       begin: 649
       end: 651
       PosValue: "PTKZU"
-   morph: <null>
 [führen]
 Lemma
    sofa: _InitialView
@@ -7030,7 +6934,6 @@ Token
       begin: 652
       end: 658
       PosValue: "VVINF"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -7067,7 +6970,6 @@ Token
       begin: 659
       end: 660
       PosValue: "$,"
-   morph: <null>
 [bezweifeln]
 Lemma
    sofa: _InitialView
@@ -7111,7 +7013,6 @@ Token
       begin: 661
       end: 671
       PosValue: "VVFIN"
-   morph: <null>
 [viele Ökonomen]
 Constituent
    sofa: _InitialView
@@ -7185,7 +7086,6 @@ Token
       begin: 672
       end: 677
       PosValue: "PIAT"
-   morph: <null>
 [Ökonomen]
 NN
    sofa: _InitialView
@@ -7236,7 +7136,6 @@ Token
       begin: 678
       end: 686
       PosValue: "NN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -7273,7 +7172,6 @@ Token
       begin: 687
       end: 688
       PosValue: "$."
-   morph: <null>
 [Und auch die Konzernchefs in den USA halten nicht viel von dem 62jährigen .]
 ROOT
    sofa: _InitialView
@@ -7348,7 +7246,6 @@ Token
       begin: 689
       end: 692
       PosValue: "KON"
-   morph: <null>
 [Und]
 CONJ
    sofa: _InitialView
@@ -7428,7 +7325,6 @@ Token
       begin: 693
       end: 697
       PosValue: "ADV"
-   morph: <null>
 [die]
 Lemma
    sofa: _InitialView
@@ -7473,7 +7369,6 @@ Token
       begin: 698
       end: 701
       PosValue: "ART"
-   morph: <null>
 [die]
 ART
    sofa: _InitialView
@@ -7530,7 +7425,6 @@ Token
       begin: 702
       end: 714
       PosValue: "NN"
-   morph: <null>
 [in den USA]
 Constituent
    sofa: _InitialView
@@ -7618,7 +7512,6 @@ Token
       begin: 715
       end: 717
       PosValue: "APPR"
-   morph: <null>
 [den]
 Lemma
    sofa: _InitialView
@@ -7670,7 +7563,6 @@ Token
       begin: 718
       end: 721
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -7734,7 +7626,6 @@ Token
       begin: 722
       end: 725
       PosValue: "NE"
-   morph: <null>
 [halten]
 Lemma
    sofa: _InitialView
@@ -7778,7 +7669,6 @@ Token
       begin: 726
       end: 732
       PosValue: "VVFIN"
-   morph: <null>
 [nicht viel]
 Constituent
    sofa: _InitialView
@@ -7852,7 +7742,6 @@ Token
       begin: 733
       end: 738
       PosValue: "PTKNEG"
-   morph: <null>
 [viel]
 PR
    sofa: _InitialView
@@ -7903,7 +7792,6 @@ Token
       begin: 739
       end: 743
       PosValue: "PIS"
-   morph: <null>
 [von dem 62jährigen]
 Constituent
    sofa: _InitialView
@@ -7977,7 +7865,6 @@ Token
       begin: 744
       end: 747
       PosValue: "APPR"
-   morph: <null>
 [dem]
 Lemma
    sofa: _InitialView
@@ -8022,7 +7909,6 @@ Token
       begin: 748
       end: 751
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -8079,7 +7965,6 @@ Token
       begin: 752
       end: 762
       PosValue: "NN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -8116,7 +8001,6 @@ Token
       begin: 763
       end: 764
       PosValue: "$."
-   morph: <null>
 [Zwar können sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen - nur nicht ausgerechnet Perot .]
 ROOT
    sofa: _InitialView
@@ -8227,7 +8111,6 @@ Token
       begin: 765
       end: 769
       PosValue: "ADV"
-   morph: <null>
 [können]
 Lemma
    sofa: _InitialView
@@ -8278,7 +8161,6 @@ Token
       begin: 770
       end: 776
       PosValue: "VMFIN"
-   morph: <null>
 [sich die meisten Topmanager durchaus einen Unternehmer als Präsidenten vorstellen]
 Constituent
    sofa: _InitialView
@@ -8366,7 +8248,6 @@ Token
       begin: 777
       end: 781
       PosValue: "PRF"
-   morph: <null>
 [die meisten Topmanager]
 Constituent
    sofa: _InitialView
@@ -8448,7 +8329,6 @@ Token
       begin: 782
       end: 785
       PosValue: "ART"
-   morph: <null>
 [die]
 ART
    sofa: _InitialView
@@ -8512,7 +8392,6 @@ Token
       begin: 786
       end: 793
       PosValue: "PIAT"
-   morph: <null>
 [Topmanager]
 NN
    sofa: _InitialView
@@ -8570,7 +8449,6 @@ Token
       begin: 794
       end: 804
       PosValue: "NN"
-   morph: <null>
 [durchaus]
 Lemma
    sofa: _InitialView
@@ -8621,7 +8499,6 @@ Token
       begin: 805
       end: 813
       PosValue: "ADV"
-   morph: <null>
 [einen Unternehmer]
 Constituent
    sofa: _InitialView
@@ -8717,7 +8594,6 @@ Token
       begin: 814
       end: 819
       PosValue: "ART"
-   morph: <null>
 [einen]
 ART
    sofa: _InitialView
@@ -8788,7 +8664,6 @@ Token
       begin: 820
       end: 831
       PosValue: "NN"
-   morph: <null>
 [als Präsidenten]
 Constituent
    sofa: _InitialView
@@ -8890,7 +8765,6 @@ Token
       begin: 832
       end: 835
       PosValue: "APPR"
-   morph: <null>
 [Präsidenten]
 NN
    sofa: _InitialView
@@ -8955,7 +8829,6 @@ Token
       begin: 836
       end: 847
       PosValue: "NN"
-   morph: <null>
 [vorstellen]
 Lemma
    sofa: _InitialView
@@ -9013,7 +8886,6 @@ Token
       begin: 848
       end: 858
       PosValue: "VVINF"
-   morph: <null>
 [-]
 PUNC
    sofa: _InitialView
@@ -9050,7 +8922,6 @@ Token
       begin: 859
       end: 860
       PosValue: "$("
-   morph: <null>
 [nur nicht ausgerechnet Perot]
 Constituent
    sofa: _InitialView
@@ -9124,7 +8995,6 @@ Token
       begin: 861
       end: 864
       PosValue: "ADV"
-   morph: <null>
 [nicht]
 Lemma
    sofa: _InitialView
@@ -9175,7 +9045,6 @@ Token
       begin: 865
       end: 870
       PosValue: "PTKNEG"
-   morph: <null>
 [ausgerechnet Perot]
 Constituent
    sofa: _InitialView
@@ -9307,7 +9176,6 @@ Token
       begin: 871
       end: 883
       PosValue: "ADV"
-   morph: <null>
 [Perot]
 NP
    sofa: _InitialView
@@ -9372,7 +9240,6 @@ Token
       begin: 884
       end: 889
       PosValue: "NE"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -9409,7 +9276,6 @@ Token
       begin: 890
       end: 891
       PosValue: "$."
-   morph: <null>
 [Nach einer Umfrage des Wirtschaftsmagazins Fortune unter den Bossen von 500 Großunternehmen wünschten im Mai nur elf Prozent `` Ross for President '' , während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen .]
 ROOT
    sofa: _InitialView
@@ -9520,7 +9386,6 @@ Token
       begin: 892
       end: 896
       PosValue: "APPR"
-   morph: <null>
 [einer]
 Lemma
    sofa: _InitialView
@@ -9565,7 +9430,6 @@ Token
       begin: 897
       end: 902
       PosValue: "ART"
-   morph: <null>
 [einer]
 ART
    sofa: _InitialView
@@ -9622,7 +9486,6 @@ Token
       begin: 903
       end: 910
       PosValue: "NN"
-   morph: <null>
 [des Wirtschaftsmagazins Fortune]
 Constituent
    sofa: _InitialView
@@ -9704,7 +9567,6 @@ Token
       begin: 911
       end: 914
       PosValue: "ART"
-   morph: <null>
 [des]
 ART
    sofa: _InitialView
@@ -9768,7 +9630,6 @@ Token
       begin: 915
       end: 934
       PosValue: "NN"
-   morph: <null>
 [Fortune]
 NP
    sofa: _InitialView
@@ -9826,7 +9687,6 @@ Token
       begin: 935
       end: 942
       PosValue: "NE"
-   morph: <null>
 [unter den Bossen von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9914,7 +9774,6 @@ Token
       begin: 943
       end: 948
       PosValue: "APPR"
-   morph: <null>
 [den]
 Lemma
    sofa: _InitialView
@@ -9966,7 +9825,6 @@ Token
       begin: 949
       end: 952
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -10030,7 +9888,6 @@ Token
       begin: 953
       end: 959
       PosValue: "NN"
-   morph: <null>
 [von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -10132,7 +9989,6 @@ Token
       begin: 960
       end: 963
       PosValue: "APPR"
-   morph: <null>
 [500]
 CARD
    sofa: _InitialView
@@ -10197,7 +10053,6 @@ Token
       begin: 964
       end: 967
       PosValue: "CARD"
-   morph: <null>
 [Großunternehmen]
 NN
    sofa: _InitialView
@@ -10262,7 +10117,6 @@ Token
       begin: 968
       end: 983
       PosValue: "NN"
-   morph: <null>
 [wünschten]
 Lemma
    sofa: _InitialView
@@ -10306,7 +10160,6 @@ Token
       begin: 984
       end: 993
       PosValue: "VVFIN"
-   morph: <null>
 [im Mai]
 Constituent
    sofa: _InitialView
@@ -10380,7 +10233,6 @@ Token
       begin: 994
       end: 996
       PosValue: "APPRART"
-   morph: <null>
 [Mai]
 NN
    sofa: _InitialView
@@ -10431,7 +10283,6 @@ Token
       begin: 997
       end: 1000
       PosValue: "NN"
-   morph: <null>
 [nur elf Prozent]
 Constituent
    sofa: _InitialView
@@ -10542,7 +10393,6 @@ Token
       begin: 1001
       end: 1004
       PosValue: "ADV"
-   morph: <null>
 [elf]
 CARD
    sofa: _InitialView
@@ -10600,7 +10450,6 @@ Token
       begin: 1005
       end: 1008
       PosValue: "CARD"
-   morph: <null>
 [Prozent]
 NN
    sofa: _InitialView
@@ -10651,7 +10500,6 @@ Token
       begin: 1009
       end: 1016
       PosValue: "NN"
-   morph: <null>
 [``]
 PUNC
    sofa: _InitialView
@@ -10688,7 +10536,6 @@ Token
       begin: 1017
       end: 1019
       PosValue: "$("
-   morph: <null>
 [Ross]
 NP
    sofa: _InitialView
@@ -10732,7 +10579,6 @@ Token
       begin: 1020
       end: 1024
       PosValue: "NE"
-   morph: <null>
 [for President]
 Constituent
    sofa: _InitialView
@@ -10806,7 +10652,6 @@ Token
       begin: 1025
       end: 1028
       PosValue: "FM"
-   morph: <null>
 [President]
 Lemma
    sofa: _InitialView
@@ -10857,7 +10702,6 @@ Token
       begin: 1029
       end: 1038
       PosValue: "FM"
-   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -10894,7 +10738,6 @@ Token
       begin: 1039
       end: 1041
       PosValue: "$("
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -10931,7 +10774,6 @@ Token
       begin: 1042
       end: 1043
       PosValue: "$,"
-   morph: <null>
 [während 78 Prozent sich für Bush und vier Prozent für Clinton aussprachen]
 Constituent
    sofa: _InitialView
@@ -11036,7 +10878,6 @@ Token
       begin: 1044
       end: 1051
       PosValue: "KOUS"
-   morph: <null>
 [während]
 CONJ
    sofa: _InitialView
@@ -11144,7 +10985,6 @@ Token
       begin: 1052
       end: 1054
       PosValue: "CARD"
-   morph: <null>
 [Prozent]
 NN
    sofa: _InitialView
@@ -11209,7 +11049,6 @@ Token
       begin: 1055
       end: 1062
       PosValue: "NN"
-   morph: <null>
 [sich]
 PR
    sofa: _InitialView
@@ -11267,7 +11106,6 @@ Token
       begin: 1063
       end: 1067
       PosValue: "PRF"
-   morph: <null>
 [für Bush]
 Constituent
    sofa: _InitialView
@@ -11369,7 +11207,6 @@ Token
       begin: 1068
       end: 1071
       PosValue: "APPR"
-   morph: <null>
 [Bush]
 NP
    sofa: _InitialView
@@ -11434,7 +11271,6 @@ Token
       begin: 1072
       end: 1076
       PosValue: "NE"
-   morph: <null>
 [und]
 Lemma
    sofa: _InitialView
@@ -11479,7 +11315,6 @@ Token
       begin: 1077
       end: 1080
       PosValue: "KON"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -11617,7 +11452,6 @@ Token
       begin: 1081
       end: 1085
       PosValue: "CARD"
-   morph: <null>
 [Prozent]
 NN
    sofa: _InitialView
@@ -11682,7 +11516,6 @@ Token
       begin: 1086
       end: 1093
       PosValue: "NN"
-   morph: <null>
 [für Clinton]
 Constituent
    sofa: _InitialView
@@ -11784,7 +11617,6 @@ Token
       begin: 1094
       end: 1097
       PosValue: "APPR"
-   morph: <null>
 [Clinton]
 NP
    sofa: _InitialView
@@ -11849,7 +11681,6 @@ Token
       begin: 1098
       end: 1105
       PosValue: "NE"
-   morph: <null>
 [aussprachen]
 Lemma
    sofa: _InitialView
@@ -11907,7 +11738,6 @@ Token
       begin: 1106
       end: 1117
       PosValue: "VVFIN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -11944,7 +11774,6 @@ Token
       begin: 1118
       end: 1119
       PosValue: "$."
-   morph: <null>
 [Allerdings glaubt fast die Hälfte der Chief Executives , daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert .]
 ROOT
    sofa: _InitialView
@@ -12025,7 +11854,6 @@ Token
       begin: 1120
       end: 1130
       PosValue: "ADV"
-   morph: <null>
 [glaubt]
 Lemma
    sofa: _InitialView
@@ -12069,7 +11897,6 @@ Token
       begin: 1131
       end: 1137
       PosValue: "VVFIN"
-   morph: <null>
 [fast die Hälfte der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -12143,7 +11970,6 @@ Token
       begin: 1138
       end: 1142
       PosValue: "ADV"
-   morph: <null>
 [die]
 Lemma
    sofa: _InitialView
@@ -12188,7 +12014,6 @@ Token
       begin: 1143
       end: 1146
       PosValue: "ART"
-   morph: <null>
 [die]
 ART
    sofa: _InitialView
@@ -12245,7 +12070,6 @@ Token
       begin: 1147
       end: 1153
       PosValue: "NN"
-   morph: <null>
 [der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -12327,7 +12151,6 @@ Token
       begin: 1154
       end: 1157
       PosValue: "ART"
-   morph: <null>
 [der]
 ART
    sofa: _InitialView
@@ -12391,7 +12214,6 @@ Token
       begin: 1158
       end: 1163
       PosValue: "FM"
-   morph: <null>
 [Executives]
 Lemma
    sofa: _InitialView
@@ -12449,7 +12271,6 @@ Token
       begin: 1164
       end: 1174
       PosValue: "FM"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -12486,7 +12307,6 @@ Token
       begin: 1175
       end: 1176
       PosValue: "$,"
-   morph: <null>
 [daß Perot durchaus Chancen habe , die Wahl im November zu gewinnen , wenn er denn kandidiert]
 Constituent
    sofa: _InitialView
@@ -12554,7 +12374,6 @@ Token
       begin: 1177
       end: 1180
       PosValue: "KOUS"
-   morph: <null>
 [daß]
 CONJ
    sofa: _InitialView
@@ -12611,7 +12430,6 @@ Token
       begin: 1181
       end: 1186
       PosValue: "NE"
-   morph: <null>
 [durchaus]
 Lemma
    sofa: _InitialView
@@ -12662,7 +12480,6 @@ Token
       begin: 1187
       end: 1195
       PosValue: "ADV"
-   morph: <null>
 [Chancen habe , die Wahl im November zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12750,7 +12567,6 @@ Token
       begin: 1196
       end: 1203
       PosValue: "NN"
-   morph: <null>
 [habe]
 Lemma
    sofa: _InitialView
@@ -12801,7 +12617,6 @@ Token
       begin: 1204
       end: 1208
       PosValue: "VAFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -12838,7 +12653,6 @@ Token
       begin: 1209
       end: 1210
       PosValue: "$,"
-   morph: <null>
 [die Wahl im November zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -12985,7 +12799,6 @@ Token
       begin: 1211
       end: 1214
       PosValue: "ART"
-   morph: <null>
 [die]
 ART
    sofa: _InitialView
@@ -13063,7 +12876,6 @@ Token
       begin: 1215
       end: 1219
       PosValue: "NN"
-   morph: <null>
 [im November]
 Constituent
    sofa: _InitialView
@@ -13193,7 +13005,6 @@ Token
       begin: 1220
       end: 1222
       PosValue: "APPRART"
-   morph: <null>
 [November]
 NN
    sofa: _InitialView
@@ -13272,7 +13083,6 @@ Token
       begin: 1223
       end: 1231
       PosValue: "NN"
-   morph: <null>
 [zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -13388,7 +13198,6 @@ Token
       begin: 1232
       end: 1234
       PosValue: "PTKZU"
-   morph: <null>
 [gewinnen]
 Lemma
    sofa: _InitialView
@@ -13460,7 +13269,6 @@ Token
       begin: 1235
       end: 1243
       PosValue: "VVINF"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -13497,7 +13305,6 @@ Token
       begin: 1244
       end: 1245
       PosValue: "$,"
-   morph: <null>
 [wenn er denn kandidiert]
 Constituent
    sofa: _InitialView
@@ -13579,7 +13386,6 @@ Token
       begin: 1246
       end: 1250
       PosValue: "KOUS"
-   morph: <null>
 [wenn]
 CONJ
    sofa: _InitialView
@@ -13643,7 +13449,6 @@ Token
       begin: 1251
       end: 1253
       PosValue: "PPER"
-   morph: <null>
 [denn]
 Lemma
    sofa: _InitialView
@@ -13701,7 +13506,6 @@ Token
       begin: 1254
       end: 1258
       PosValue: "ADV"
-   morph: <null>
 [kandidiert]
 Lemma
    sofa: _InitialView
@@ -13759,7 +13563,6 @@ Token
       begin: 1259
       end: 1269
       PosValue: "VVFIN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -13796,7 +13599,6 @@ Token
       begin: 1270
       end: 1271
       PosValue: "$."
-   morph: <null>
 [Als größte Schwäche des Texaners nennen die Befragten seinen Mangel an Erfahrung auf dem politischen Parkett .]
 ROOT
    sofa: _InitialView
@@ -13907,7 +13709,6 @@ Token
       begin: 1272
       end: 1275
       PosValue: "APPR"
-   morph: <null>
 [größte]
 Lemma
    sofa: _InitialView
@@ -13958,7 +13759,6 @@ Token
       begin: 1276
       end: 1282
       PosValue: "ADJA"
-   morph: <null>
 [Schwäche]
 NN
    sofa: _InitialView
@@ -14009,7 +13809,6 @@ Token
       begin: 1283
       end: 1291
       PosValue: "NN"
-   morph: <null>
 [des Texaners]
 Constituent
    sofa: _InitialView
@@ -14091,7 +13890,6 @@ Token
       begin: 1292
       end: 1295
       PosValue: "ART"
-   morph: <null>
 [des]
 ART
    sofa: _InitialView
@@ -14155,7 +13953,6 @@ Token
       begin: 1296
       end: 1304
       PosValue: "NN"
-   morph: <null>
 [nennen]
 Lemma
    sofa: _InitialView
@@ -14199,7 +13996,6 @@ Token
       begin: 1305
       end: 1311
       PosValue: "VVFIN"
-   morph: <null>
 [die Befragten]
 Constituent
    sofa: _InitialView
@@ -14267,7 +14063,6 @@ Token
       begin: 1312
       end: 1315
       PosValue: "ART"
-   morph: <null>
 [die]
 ART
    sofa: _InitialView
@@ -14324,7 +14119,6 @@ Token
       begin: 1316
       end: 1325
       PosValue: "NN"
-   morph: <null>
 [seinen Mangel an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14398,7 +14192,6 @@ Token
       begin: 1326
       end: 1332
       PosValue: "PPOSAT"
-   morph: <null>
 [Mangel]
 NN
    sofa: _InitialView
@@ -14449,7 +14242,6 @@ Token
       begin: 1333
       end: 1339
       PosValue: "NN"
-   morph: <null>
 [an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14537,7 +14329,6 @@ Token
       begin: 1340
       end: 1342
       PosValue: "APPR"
-   morph: <null>
 [Erfahrung]
 NN
    sofa: _InitialView
@@ -14595,7 +14386,6 @@ Token
       begin: 1343
       end: 1352
       PosValue: "NN"
-   morph: <null>
 [auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14697,7 +14487,6 @@ Token
       begin: 1353
       end: 1356
       PosValue: "APPR"
-   morph: <null>
 [dem]
 Lemma
    sofa: _InitialView
@@ -14756,7 +14545,6 @@ Token
       begin: 1357
       end: 1360
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -14827,7 +14615,6 @@ Token
       begin: 1361
       end: 1372
       PosValue: "ADJA"
-   morph: <null>
 [Parkett]
 NN
    sofa: _InitialView
@@ -14892,7 +14679,6 @@ Token
       begin: 1373
       end: 1380
       PosValue: "NN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -14929,7 +14715,6 @@ Token
       begin: 1381
       end: 1382
       PosValue: "$."
-   morph: <null>
 [Viele meinen , daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde .]
 ROOT
    sofa: _InitialView
@@ -15010,7 +14795,6 @@ Token
       begin: 1383
       end: 1388
       PosValue: "PIS"
-   morph: <null>
 [meinen]
 Lemma
    sofa: _InitialView
@@ -15054,7 +14838,6 @@ Token
       begin: 1389
       end: 1395
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -15091,7 +14874,6 @@ Token
       begin: 1396
       end: 1397
       PosValue: "$,"
-   morph: <null>
 [daß Perot mit seinem Befehlston auf dem Capitol gegen eine Wand laufen würde]
 Constituent
    sofa: _InitialView
@@ -15159,7 +14941,6 @@ Token
       begin: 1398
       end: 1401
       PosValue: "KOUS"
-   morph: <null>
 [daß]
 CONJ
    sofa: _InitialView
@@ -15216,7 +14997,6 @@ Token
       begin: 1402
       end: 1407
       PosValue: "NE"
-   morph: <null>
 [mit seinem Befehlston auf dem Capitol gegen eine Wand laufen]
 Constituent
    sofa: _InitialView
@@ -15348,7 +15128,6 @@ Token
       begin: 1408
       end: 1411
       PosValue: "APPR"
-   morph: <null>
 [seinem]
 PR
    sofa: _InitialView
@@ -15413,7 +15192,6 @@ Token
       begin: 1412
       end: 1418
       PosValue: "PPOSAT"
-   morph: <null>
 [Befehlston]
 NN
    sofa: _InitialView
@@ -15478,7 +15256,6 @@ Token
       begin: 1419
       end: 1429
       PosValue: "NN"
-   morph: <null>
 [auf dem Capitol]
 Constituent
    sofa: _InitialView
@@ -15580,7 +15357,6 @@ Token
       begin: 1430
       end: 1433
       PosValue: "APPR"
-   morph: <null>
 [dem]
 Lemma
    sofa: _InitialView
@@ -15639,7 +15415,6 @@ Token
       begin: 1434
       end: 1437
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -15710,7 +15485,6 @@ Token
       begin: 1438
       end: 1445
       PosValue: "NE"
-   morph: <null>
 [gegen eine Wand]
 Constituent
    sofa: _InitialView
@@ -15812,7 +15586,6 @@ Token
       begin: 1446
       end: 1451
       PosValue: "APPR"
-   morph: <null>
 [eine]
 Lemma
    sofa: _InitialView
@@ -15871,7 +15644,6 @@ Token
       begin: 1452
       end: 1456
       PosValue: "ART"
-   morph: <null>
 [eine]
 ART
    sofa: _InitialView
@@ -15942,7 +15714,6 @@ Token
       begin: 1457
       end: 1461
       PosValue: "NN"
-   morph: <null>
 [laufen]
 Lemma
    sofa: _InitialView
@@ -16000,7 +15771,6 @@ Token
       begin: 1462
       end: 1468
       PosValue: "VVINF"
-   morph: <null>
 [würde]
 Lemma
    sofa: _InitialView
@@ -16051,7 +15821,6 @@ Token
       begin: 1469
       end: 1474
       PosValue: "VAFIN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -16088,7 +15857,6 @@ Token
       begin: 1475
       end: 1476
       PosValue: "$."
-   morph: <null>
 [So erklärt etwa Edward Brandon von dem Unternehmen National City in Ohio :]
 ROOT
    sofa: _InitialView
@@ -16169,7 +15937,6 @@ Token
       begin: 1477
       end: 1479
       PosValue: "ADV"
-   morph: <null>
 [erklärt]
 Lemma
    sofa: _InitialView
@@ -16213,7 +15980,6 @@ Token
       begin: 1480
       end: 1487
       PosValue: "VVFIN"
-   morph: <null>
 [etwa Edward Brandon von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -16287,7 +16053,6 @@ Token
       begin: 1488
       end: 1492
       PosValue: "ADV"
-   morph: <null>
 [Edward Brandon]
 Constituent
    sofa: _InitialView
@@ -16375,7 +16140,6 @@ Token
       begin: 1493
       end: 1499
       PosValue: "NE"
-   morph: <null>
 [Brandon]
 NP
    sofa: _InitialView
@@ -16433,7 +16197,6 @@ Token
       begin: 1500
       end: 1507
       PosValue: "NE"
-   morph: <null>
 [von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -16521,7 +16284,6 @@ Token
       begin: 1508
       end: 1511
       PosValue: "APPR"
-   morph: <null>
 [dem]
 Lemma
    sofa: _InitialView
@@ -16573,7 +16335,6 @@ Token
       begin: 1512
       end: 1515
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -16637,7 +16398,6 @@ Token
       begin: 1516
       end: 1527
       PosValue: "NN"
-   morph: <null>
 [National City]
 Constituent
    sofa: _InitialView
@@ -16739,7 +16499,6 @@ Token
       begin: 1528
       end: 1536
       PosValue: "NE"
-   morph: <null>
 [City]
 NP
    sofa: _InitialView
@@ -16804,7 +16563,6 @@ Token
       begin: 1537
       end: 1541
       PosValue: "NE"
-   morph: <null>
 [in Ohio]
 Constituent
    sofa: _InitialView
@@ -16906,7 +16664,6 @@ Token
       begin: 1542
       end: 1544
       PosValue: "APPR"
-   morph: <null>
 [Ohio]
 NP
    sofa: _InitialView
@@ -16971,7 +16728,6 @@ Token
       begin: 1545
       end: 1549
       PosValue: "NE"
-   morph: <null>
 [:]
 PUNC
    sofa: _InitialView
@@ -17008,7 +16764,6 @@ Token
       begin: 1550
       end: 1551
       PosValue: "$."
-   morph: <null>
 [`` Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre .]
 ROOT
    sofa: _InitialView
@@ -17066,7 +16821,6 @@ Token
       begin: 1552
       end: 1554
       PosValue: "$("
-   morph: <null>
 [Ich glaube kaum , daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre]
 Constituent
    sofa: _InitialView
@@ -17126,7 +16880,6 @@ Token
       begin: 1555
       end: 1558
       PosValue: "PPER"
-   morph: <null>
 [glaube]
 Lemma
    sofa: _InitialView
@@ -17170,7 +16923,6 @@ Token
       begin: 1559
       end: 1565
       PosValue: "VVFIN"
-   morph: <null>
 [kaum]
 Lemma
    sofa: _InitialView
@@ -17214,7 +16966,6 @@ Token
       begin: 1566
       end: 1570
       PosValue: "ADV"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -17251,7 +17002,6 @@ Token
       begin: 1571
       end: 1572
       PosValue: "$,"
-   morph: <null>
 [daß mit seinem , naja , etwas undiplomatischen Stil im Weißen Haus dem Land ein Gefallen getan wäre]
 Constituent
    sofa: _InitialView
@@ -17319,7 +17069,6 @@ Token
       begin: 1573
       end: 1576
       PosValue: "KOUS"
-   morph: <null>
 [daß]
 CONJ
    sofa: _InitialView
@@ -17457,7 +17206,6 @@ Token
       begin: 1577
       end: 1580
       PosValue: "APPR"
-   morph: <null>
 [seinem]
 PR
    sofa: _InitialView
@@ -17522,7 +17270,6 @@ Token
       begin: 1581
       end: 1587
       PosValue: "PPOSAT"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -17559,7 +17306,6 @@ Token
       begin: 1588
       end: 1589
       PosValue: "$,"
-   morph: <null>
 [naja , etwas undiplomatischen]
 Constituent
    sofa: _InitialView
@@ -17675,7 +17421,6 @@ Token
       begin: 1590
       end: 1594
       PosValue: "ITJ"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -17712,7 +17457,6 @@ Token
       begin: 1595
       end: 1596
       PosValue: "$,"
-   morph: <null>
 [etwas]
 Lemma
    sofa: _InitialView
@@ -17784,7 +17528,6 @@ Token
       begin: 1597
       end: 1602
       PosValue: "ADV"
-   morph: <null>
 [undiplomatischen]
 Lemma
    sofa: _InitialView
@@ -17856,7 +17599,6 @@ Token
       begin: 1603
       end: 1619
       PosValue: "ADJA"
-   morph: <null>
 [Stil]
 NN
    sofa: _InitialView
@@ -17921,7 +17663,6 @@ Token
       begin: 1620
       end: 1624
       PosValue: "NN"
-   morph: <null>
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -18037,7 +17778,6 @@ Token
       begin: 1625
       end: 1627
       PosValue: "APPRART"
-   morph: <null>
 [Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -18232,7 +17972,6 @@ Token
       begin: 1628
       end: 1634
       PosValue: "ADJA"
-   morph: <null>
 [Haus]
 NN
    sofa: _InitialView
@@ -18318,7 +18057,6 @@ Token
       begin: 1635
       end: 1639
       PosValue: "NN"
-   morph: <null>
 [dem Land]
 Constituent
    sofa: _InitialView
@@ -18414,7 +18152,6 @@ Token
       begin: 1640
       end: 1643
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -18485,7 +18222,6 @@ Token
       begin: 1644
       end: 1648
       PosValue: "NN"
-   morph: <null>
 [ein Gefallen]
 Constituent
    sofa: _InitialView
@@ -18567,7 +18303,6 @@ Token
       begin: 1649
       end: 1652
       PosValue: "ART"
-   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -18631,7 +18366,6 @@ Token
       begin: 1653
       end: 1661
       PosValue: "NN"
-   morph: <null>
 [getan]
 Lemma
    sofa: _InitialView
@@ -18689,7 +18423,6 @@ Token
       begin: 1662
       end: 1667
       PosValue: "VVPP"
-   morph: <null>
 [wäre]
 Lemma
    sofa: _InitialView
@@ -18740,7 +18473,6 @@ Token
       begin: 1668
       end: 1672
       PosValue: "VAFIN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -18777,7 +18509,6 @@ Token
       begin: 1673
       end: 1674
       PosValue: "$."
-   morph: <null>
 [Er wäre vielleicht ein prächtiger Diktator - aber das ist nicht unser System . '']
 ROOT
    sofa: _InitialView
@@ -18888,7 +18619,6 @@ Token
       begin: 1675
       end: 1677
       PosValue: "PPER"
-   morph: <null>
 [wäre]
 Lemma
    sofa: _InitialView
@@ -18939,7 +18669,6 @@ Token
       begin: 1678
       end: 1682
       PosValue: "VAFIN"
-   morph: <null>
 [vielleicht]
 Lemma
    sofa: _InitialView
@@ -18990,7 +18719,6 @@ Token
       begin: 1683
       end: 1693
       PosValue: "ADV"
-   morph: <null>
 [ein prächtiger Diktator]
 Constituent
    sofa: _InitialView
@@ -19072,7 +18800,6 @@ Token
       begin: 1694
       end: 1697
       PosValue: "ART"
-   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -19136,7 +18863,6 @@ Token
       begin: 1698
       end: 1708
       PosValue: "ADJA"
-   morph: <null>
 [Diktator]
 NN
    sofa: _InitialView
@@ -19194,7 +18920,6 @@ Token
       begin: 1709
       end: 1717
       PosValue: "NN"
-   morph: <null>
 [-]
 PUNC
    sofa: _InitialView
@@ -19231,7 +18956,6 @@ Token
       begin: 1718
       end: 1719
       PosValue: "$("
-   morph: <null>
 [aber]
 Lemma
    sofa: _InitialView
@@ -19269,7 +18993,6 @@ Token
       begin: 1720
       end: 1724
       PosValue: "KON"
-   morph: <null>
 [aber]
 CONJ
    sofa: _InitialView
@@ -19349,7 +19072,6 @@ Token
       begin: 1725
       end: 1728
       PosValue: "PDS"
-   morph: <null>
 [ist]
 Lemma
    sofa: _InitialView
@@ -19400,7 +19122,6 @@ Token
       begin: 1729
       end: 1732
       PosValue: "VAFIN"
-   morph: <null>
 [nicht]
 Lemma
    sofa: _InitialView
@@ -19451,7 +19172,6 @@ Token
       begin: 1733
       end: 1738
       PosValue: "PTKNEG"
-   morph: <null>
 [unser System]
 Constituent
    sofa: _InitialView
@@ -19539,7 +19259,6 @@ Token
       begin: 1739
       end: 1744
       PosValue: "PPOSAT"
-   morph: <null>
 [System]
 NN
    sofa: _InitialView
@@ -19597,7 +19316,6 @@ Token
       begin: 1745
       end: 1751
       PosValue: "NN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -19634,7 +19352,6 @@ Token
       begin: 1752
       end: 1753
       PosValue: "$."
-   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -19671,7 +19388,6 @@ Token
       begin: 1754
       end: 1756
       PosValue: "$("
-   morph: <null>
 [Und ein anderer Manager vermutet , daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab '' .]
 ROOT
    sofa: _InitialView
@@ -19746,7 +19462,6 @@ Token
       begin: 1757
       end: 1760
       PosValue: "KON"
-   morph: <null>
 [Und]
 CONJ
    sofa: _InitialView
@@ -19820,7 +19535,6 @@ Token
       begin: 1761
       end: 1764
       PosValue: "ART"
-   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -19877,7 +19591,6 @@ Token
       begin: 1765
       end: 1772
       PosValue: "ADJA"
-   morph: <null>
 [Manager]
 NN
    sofa: _InitialView
@@ -19928,7 +19641,6 @@ Token
       begin: 1773
       end: 1780
       PosValue: "NN"
-   morph: <null>
 [vermutet]
 Lemma
    sofa: _InitialView
@@ -19972,7 +19684,6 @@ Token
       begin: 1781
       end: 1789
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -20009,7 +19720,6 @@ Token
       begin: 1790
       end: 1791
       PosValue: "$,"
-   morph: <null>
 [daß sich `` ein Dogmatiker wie Perot in Washington schwer tun würde , es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -20077,7 +19787,6 @@ Token
       begin: 1792
       end: 1795
       PosValue: "KOUS"
-   morph: <null>
 [daß]
 CONJ
    sofa: _InitialView
@@ -20171,7 +19880,6 @@ Token
       begin: 1796
       end: 1800
       PosValue: "PRF"
-   morph: <null>
 [``]
 PUNC
    sofa: _InitialView
@@ -20208,7 +19916,6 @@ Token
       begin: 1801
       end: 1803
       PosValue: "$("
-   morph: <null>
 [ein Dogmatiker wie Perot]
 Constituent
    sofa: _InitialView
@@ -20290,7 +19997,6 @@ Token
       begin: 1804
       end: 1807
       PosValue: "ART"
-   morph: <null>
 [ein]
 ART
    sofa: _InitialView
@@ -20354,7 +20060,6 @@ Token
       begin: 1808
       end: 1818
       PosValue: "NN"
-   morph: <null>
 [wie Perot]
 Constituent
    sofa: _InitialView
@@ -20450,7 +20155,6 @@ Token
       begin: 1819
       end: 1822
       PosValue: "KOKOM"
-   morph: <null>
 [wie]
 CONJ
    sofa: _InitialView
@@ -20521,7 +20225,6 @@ Token
       begin: 1823
       end: 1828
       PosValue: "NE"
-   morph: <null>
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -20623,7 +20326,6 @@ Token
       begin: 1829
       end: 1831
       PosValue: "APPR"
-   morph: <null>
 [Washington]
 NP
    sofa: _InitialView
@@ -20688,7 +20390,6 @@ Token
       begin: 1832
       end: 1842
       PosValue: "NE"
-   morph: <null>
 [schwer]
 Lemma
    sofa: _InitialView
@@ -20746,7 +20447,6 @@ Token
       begin: 1843
       end: 1849
       PosValue: "ADJD"
-   morph: <null>
 [tun]
 Lemma
    sofa: _InitialView
@@ -20804,7 +20504,6 @@ Token
       begin: 1850
       end: 1853
       PosValue: "VVINF"
-   morph: <null>
 [würde]
 Lemma
    sofa: _InitialView
@@ -20855,7 +20554,6 @@ Token
       begin: 1854
       end: 1859
       PosValue: "VAFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -20892,7 +20590,6 @@ Token
       begin: 1860
       end: 1861
       PosValue: "$,"
-   morph: <null>
 [es sei denn er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -20994,7 +20691,6 @@ Token
       begin: 1862
       end: 1864
       PosValue: "PPER"
-   morph: <null>
 [sei]
 Lemma
    sofa: _InitialView
@@ -21059,7 +20755,6 @@ Token
       begin: 1865
       end: 1868
       PosValue: "VAFIN"
-   morph: <null>
 [denn]
 Lemma
    sofa: _InitialView
@@ -21124,7 +20819,6 @@ Token
       begin: 1869
       end: 1873
       PosValue: "ADV"
-   morph: <null>
 [er schafft den Kongreß ab]
 Constituent
    sofa: _InitialView
@@ -21240,7 +20934,6 @@ Token
       begin: 1874
       end: 1876
       PosValue: "PPER"
-   morph: <null>
 [schafft]
 Lemma
    sofa: _InitialView
@@ -21312,7 +21005,6 @@ Token
       begin: 1877
       end: 1884
       PosValue: "VVFIN"
-   morph: <null>
 [den Kongreß]
 Constituent
    sofa: _InitialView
@@ -21436,7 +21128,6 @@ Token
       begin: 1885
       end: 1888
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -21521,7 +21212,6 @@ Token
       begin: 1889
       end: 1896
       PosValue: "NN"
-   morph: <null>
 [ab]
 Lemma
    sofa: _InitialView
@@ -21593,7 +21283,6 @@ Token
       begin: 1897
       end: 1899
       PosValue: "PTKVZ"
-   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -21630,7 +21319,6 @@ Token
       begin: 1900
       end: 1902
       PosValue: "$("
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -21667,7 +21355,6 @@ Token
       begin: 1903
       end: 1904
       PosValue: "$."
-   morph: <null>
 [Ein ehemaliger Geschäftsführer , der heute in fünf Konzernen im Aufsichtsgremium sitzt , `` kennt niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre '' .]
 ROOT
    sofa: _InitialView
@@ -21772,7 +21459,6 @@ Token
       begin: 1905
       end: 1908
       PosValue: "ART"
-   morph: <null>
 [Ein]
 ART
    sofa: _InitialView
@@ -21829,7 +21515,6 @@ Token
       begin: 1909
       end: 1919
       PosValue: "ADJA"
-   morph: <null>
 [Geschäftsführer]
 NN
    sofa: _InitialView
@@ -21880,7 +21565,6 @@ Token
       begin: 1920
       end: 1935
       PosValue: "NN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -21917,7 +21601,6 @@ Token
       begin: 1936
       end: 1937
       PosValue: "$,"
-   morph: <null>
 [der heute in fünf Konzernen im Aufsichtsgremium sitzt]
 Constituent
    sofa: _InitialView
@@ -22005,7 +21688,6 @@ Token
       begin: 1938
       end: 1941
       PosValue: "PRELS"
-   morph: <null>
 [heute]
 Lemma
    sofa: _InitialView
@@ -22063,7 +21745,6 @@ Token
       begin: 1942
       end: 1947
       PosValue: "ADV"
-   morph: <null>
 [in fünf Konzernen]
 Constituent
    sofa: _InitialView
@@ -22165,7 +21846,6 @@ Token
       begin: 1948
       end: 1950
       PosValue: "APPR"
-   morph: <null>
 [fünf]
 CARD
    sofa: _InitialView
@@ -22230,7 +21910,6 @@ Token
       begin: 1951
       end: 1955
       PosValue: "CARD"
-   morph: <null>
 [Konzernen]
 NN
    sofa: _InitialView
@@ -22295,7 +21974,6 @@ Token
       begin: 1956
       end: 1965
       PosValue: "NN"
-   morph: <null>
 [im Aufsichtsgremium]
 Constituent
    sofa: _InitialView
@@ -22397,7 +22075,6 @@ Token
       begin: 1966
       end: 1968
       PosValue: "APPRART"
-   morph: <null>
 [Aufsichtsgremium]
 NN
    sofa: _InitialView
@@ -22462,7 +22139,6 @@ Token
       begin: 1969
       end: 1985
       PosValue: "NN"
-   morph: <null>
 [sitzt]
 Lemma
    sofa: _InitialView
@@ -22520,7 +22196,6 @@ Token
       begin: 1986
       end: 1991
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -22557,7 +22232,6 @@ Token
       begin: 1992
       end: 1993
       PosValue: "$,"
-   morph: <null>
 [``]
 PUNC
    sofa: _InitialView
@@ -22594,7 +22268,6 @@ Token
       begin: 1994
       end: 1996
       PosValue: "$("
-   morph: <null>
 [kennt]
 Lemma
    sofa: _InitialView
@@ -22638,7 +22311,6 @@ Token
       begin: 1997
       end: 2002
       PosValue: "VVFIN"
-   morph: <null>
 [niemanden , der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -22712,7 +22384,6 @@ Token
       begin: 2003
       end: 2012
       PosValue: "PIS"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -22749,7 +22420,6 @@ Token
       begin: 2013
       end: 2014
       PosValue: "$,"
-   morph: <null>
 [der nicht glaubt , daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -22837,7 +22507,6 @@ Token
       begin: 2015
       end: 2018
       PosValue: "PRELS"
-   morph: <null>
 [nicht]
 Lemma
    sofa: _InitialView
@@ -22895,7 +22564,6 @@ Token
       begin: 2019
       end: 2024
       PosValue: "PTKNEG"
-   morph: <null>
 [glaubt]
 Lemma
    sofa: _InitialView
@@ -22953,7 +22621,6 @@ Token
       begin: 2025
       end: 2031
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -22990,7 +22657,6 @@ Token
       begin: 2032
       end: 2033
       PosValue: "$,"
-   morph: <null>
 [daß Perot als Präsident eine absolute Katastrophe wäre]
 Constituent
    sofa: _InitialView
@@ -23086,7 +22752,6 @@ Token
       begin: 2034
       end: 2037
       PosValue: "KOUS"
-   morph: <null>
 [daß]
 CONJ
    sofa: _InitialView
@@ -23157,7 +22822,6 @@ Token
       begin: 2038
       end: 2043
       PosValue: "NE"
-   morph: <null>
 [als Präsident]
 Constituent
    sofa: _InitialView
@@ -23273,7 +22937,6 @@ Token
       begin: 2044
       end: 2047
       PosValue: "APPR"
-   morph: <null>
 [Präsident]
 NN
    sofa: _InitialView
@@ -23345,7 +23008,6 @@ Token
       begin: 2048
       end: 2057
       PosValue: "NN"
-   morph: <null>
 [eine absolute Katastrophe]
 Constituent
    sofa: _InitialView
@@ -23455,7 +23117,6 @@ Token
       begin: 2058
       end: 2062
       PosValue: "ART"
-   morph: <null>
 [eine]
 ART
    sofa: _InitialView
@@ -23533,7 +23194,6 @@ Token
       begin: 2063
       end: 2071
       PosValue: "ADJA"
-   morph: <null>
 [Katastrophe]
 NN
    sofa: _InitialView
@@ -23605,7 +23265,6 @@ Token
       begin: 2072
       end: 2083
       PosValue: "NN"
-   morph: <null>
 [wäre]
 Lemma
    sofa: _InitialView
@@ -23670,7 +23329,6 @@ Token
       begin: 2084
       end: 2088
       PosValue: "VAFIN"
-   morph: <null>
 ['']
 PUNC
    sofa: _InitialView
@@ -23707,7 +23365,6 @@ Token
       begin: 2089
       end: 2091
       PosValue: "$("
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -23744,7 +23401,6 @@ Token
       begin: 2092
       end: 2093
       PosValue: "$."
-   morph: <null>
 [Allerdings gibt es dem Magazin zufolge in kleinen und mittleren Firmen viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen .]
 ROOT
    sofa: _InitialView
@@ -23825,7 +23481,6 @@ Token
       begin: 2094
       end: 2104
       PosValue: "ADV"
-   morph: <null>
 [gibt]
 Lemma
    sofa: _InitialView
@@ -23869,7 +23524,6 @@ Token
       begin: 2105
       end: 2109
       PosValue: "VVFIN"
-   morph: <null>
 [es]
 PR
    sofa: _InitialView
@@ -23913,7 +23567,6 @@ Token
       begin: 2110
       end: 2112
       PosValue: "PPER"
-   morph: <null>
 [dem Magazin zufolge]
 Constituent
    sofa: _InitialView
@@ -23981,7 +23634,6 @@ Token
       begin: 2113
       end: 2116
       PosValue: "ART"
-   morph: <null>
 [dem]
 ART
    sofa: _InitialView
@@ -24038,7 +23690,6 @@ Token
       begin: 2117
       end: 2124
       PosValue: "NN"
-   morph: <null>
 [zufolge]
 PP
    sofa: _InitialView
@@ -24089,7 +23740,6 @@ Token
       begin: 2125
       end: 2132
       PosValue: "APPO"
-   morph: <null>
 [in kleinen und mittleren Firmen]
 Constituent
    sofa: _InitialView
@@ -24163,7 +23813,6 @@ Token
       begin: 2133
       end: 2135
       PosValue: "APPR"
-   morph: <null>
 [kleinen und mittleren]
 Constituent
    sofa: _InitialView
@@ -24251,7 +23900,6 @@ Token
       begin: 2136
       end: 2143
       PosValue: "ADJA"
-   morph: <null>
 [und]
 Lemma
    sofa: _InitialView
@@ -24303,7 +23951,6 @@ Token
       begin: 2144
       end: 2147
       PosValue: "KON"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -24367,7 +24014,6 @@ Token
       begin: 2148
       end: 2157
       PosValue: "ADJA"
-   morph: <null>
 [Firmen]
 NN
    sofa: _InitialView
@@ -24418,7 +24064,6 @@ Token
       begin: 2158
       end: 2164
       PosValue: "NN"
-   morph: <null>
 [viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -24492,7 +24137,6 @@ Token
       begin: 2165
       end: 2170
       PosValue: "PIAT"
-   morph: <null>
 [Unternehmer]
 NN
    sofa: _InitialView
@@ -24543,7 +24187,6 @@ Token
       begin: 2171
       end: 2182
       PosValue: "NN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -24580,7 +24223,6 @@ Token
       begin: 2183
       end: 2184
       PosValue: "$,"
-   morph: <null>
 [die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -24712,7 +24354,6 @@ Token
       begin: 2185
       end: 2188
       PosValue: "PRELS"
-   morph: <null>
 [meinen]
 Lemma
    sofa: _InitialView
@@ -24777,7 +24418,6 @@ Token
       begin: 2189
       end: 2195
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -24814,7 +24454,6 @@ Token
       begin: 2196
       end: 2197
       PosValue: "$,"
-   morph: <null>
 [Perot sei einer von ihnen]
 Constituent
    sofa: _InitialView
@@ -24930,7 +24569,6 @@ Token
       begin: 2198
       end: 2203
       PosValue: "NE"
-   morph: <null>
 [sei]
 Lemma
    sofa: _InitialView
@@ -25002,7 +24640,6 @@ Token
       begin: 2204
       end: 2207
       PosValue: "VAFIN"
-   morph: <null>
 [einer von ihnen]
 Constituent
    sofa: _InitialView
@@ -25132,7 +24769,6 @@ Token
       begin: 2208
       end: 2213
       PosValue: "PIS"
-   morph: <null>
 [von ihnen]
 Constituent
    sofa: _InitialView
@@ -25276,7 +24912,6 @@ Token
       begin: 2214
       end: 2217
       PosValue: "APPR"
-   morph: <null>
 [ihnen]
 PR
    sofa: _InitialView
@@ -25362,7 +24997,6 @@ Token
       begin: 2218
       end: 2223
       PosValue: "PPER"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -25399,7 +25033,6 @@ Token
       begin: 2224
       end: 2225
       PosValue: "$,"
-   morph: <null>
 [und]
 Lemma
    sofa: _InitialView
@@ -25451,7 +25084,6 @@ Token
       begin: 2226
       end: 2229
       PosValue: "KON"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -25559,7 +25191,6 @@ Token
       begin: 2230
       end: 2233
       PosValue: "PRELS"
-   morph: <null>
 [den Texaner]
 Constituent
    sofa: _InitialView
@@ -25669,7 +25300,6 @@ Token
       begin: 2234
       end: 2237
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -25747,7 +25377,6 @@ Token
       begin: 2238
       end: 2245
       PosValue: "NN"
-   morph: <null>
 [unterstützen]
 Lemma
    sofa: _InitialView
@@ -25812,7 +25441,6 @@ Token
       begin: 2246
       end: 2258
       PosValue: "VVFIN"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -25849,7 +25477,6 @@ Token
       begin: 2259
       end: 2260
       PosValue: "$."
-   morph: <null>
 [Zwei Themen , die Perot immer wieder anspricht , Rezession und Bürokratie , machen ihnen besonders zu schaffen .]
 ROOT
    sofa: _InitialView
@@ -25960,7 +25587,6 @@ Token
       begin: 2261
       end: 2265
       PosValue: "CARD"
-   morph: <null>
 [Themen]
 NN
    sofa: _InitialView
@@ -26011,7 +25637,6 @@ Token
       begin: 2266
       end: 2272
       PosValue: "NN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -26048,7 +25673,6 @@ Token
       begin: 2273
       end: 2274
       PosValue: "$,"
-   morph: <null>
 [die Perot immer wieder anspricht]
 Constituent
    sofa: _InitialView
@@ -26136,7 +25760,6 @@ Token
       begin: 2275
       end: 2278
       PosValue: "PRELS"
-   morph: <null>
 [Perot]
 NP
    sofa: _InitialView
@@ -26194,7 +25817,6 @@ Token
       begin: 2279
       end: 2284
       PosValue: "NE"
-   morph: <null>
 [immer wieder]
 Constituent
    sofa: _InitialView
@@ -26296,7 +25918,6 @@ Token
       begin: 2285
       end: 2290
       PosValue: "ADV"
-   morph: <null>
 [wieder]
 Lemma
    sofa: _InitialView
@@ -26361,7 +25982,6 @@ Token
       begin: 2291
       end: 2297
       PosValue: "ADV"
-   morph: <null>
 [anspricht]
 Lemma
    sofa: _InitialView
@@ -26419,7 +26039,6 @@ Token
       begin: 2298
       end: 2307
       PosValue: "VVFIN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -26456,7 +26075,6 @@ Token
       begin: 2308
       end: 2309
       PosValue: "$,"
-   morph: <null>
 [Rezession und Bürokratie]
 Constituent
    sofa: _InitialView
@@ -26544,7 +26162,6 @@ Token
       begin: 2310
       end: 2319
       PosValue: "NN"
-   morph: <null>
 [und]
 Lemma
    sofa: _InitialView
@@ -26596,7 +26213,6 @@ Token
       begin: 2320
       end: 2323
       PosValue: "KON"
-   morph: <null>
 [und]
 CONJ
    sofa: _InitialView
@@ -26660,7 +26276,6 @@ Token
       begin: 2324
       end: 2334
       PosValue: "NN"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -26697,7 +26312,6 @@ Token
       begin: 2335
       end: 2336
       PosValue: "$,"
-   morph: <null>
 [machen]
 Lemma
    sofa: _InitialView
@@ -26741,7 +26355,6 @@ Token
       begin: 2337
       end: 2343
       PosValue: "VVFIN"
-   morph: <null>
 [ihnen besonders zu schaffen]
 Constituent
    sofa: _InitialView
@@ -26815,7 +26428,6 @@ Token
       begin: 2344
       end: 2349
       PosValue: "PPER"
-   morph: <null>
 [besonders]
 Lemma
    sofa: _InitialView
@@ -26866,7 +26478,6 @@ Token
       begin: 2350
       end: 2359
       PosValue: "ADV"
-   morph: <null>
 [zu schaffen]
 Constituent
    sofa: _InitialView
@@ -26954,7 +26565,6 @@ Token
       begin: 2360
       end: 2362
       PosValue: "PTKZU"
-   morph: <null>
 [schaffen]
 Lemma
    sofa: _InitialView
@@ -27012,7 +26622,6 @@ Token
       begin: 2363
       end: 2371
       PosValue: "VVINF"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -27049,7 +26658,6 @@ Token
       begin: 2372
       end: 2373
       PosValue: "$."
-   morph: <null>
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================

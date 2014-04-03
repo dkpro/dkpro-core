@@ -70,7 +70,7 @@ public abstract class JCasFileWriter_ImplBase
     private boolean useDocumentId;
 
     /**
-     * URL-encode the document ID in the file name to avoid illegal characters (e.g. \, :, etc.)
+     * Use the document ID as file name even if a relative path information is present.
      */
     public static final String PARAM_ESCAPE_DOCUMENT_ID = "escapeDocumentId";
     @ConfigurationParameter(name=PARAM_ESCAPE_DOCUMENT_ID, mandatory=true, defaultValue="true")
