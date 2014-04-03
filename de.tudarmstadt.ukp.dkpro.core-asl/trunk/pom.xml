@@ -31,6 +31,9 @@
 	<prerequisites>
 		<maven>3.0.4</maven>
 	</prerequisites>
+	<organization>
+    	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
+    </organization>
 	<repositories>
 		<repository>
 			<id>ukp-oss-model-releases</id>
