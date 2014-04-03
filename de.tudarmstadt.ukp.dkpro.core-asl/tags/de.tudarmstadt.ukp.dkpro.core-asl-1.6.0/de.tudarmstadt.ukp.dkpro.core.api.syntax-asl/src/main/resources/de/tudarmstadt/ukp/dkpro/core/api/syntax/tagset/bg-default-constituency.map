@@ -1,0 +1,44 @@
+# Unknown tagset (?)
+#
+# Source: ?
+#
+# A 
+# APA 
+# APC 
+# Adv 
+# AdvPA 
+# AdvPC 
+# C 
+# CL 
+# CLCHE 
+# CLDA 
+# CLQ 
+# CLR 
+# CLZADA 
+# Conj 
+# ConjArg 
+# CoordP 
+# Gerund 
+# H 
+# M 
+# N 
+# NPA 
+# NPC 
+# PP 
+# Participle 
+# Prep 
+# Pron 
+# S 
+# T 
+# V 
+# VPA 
+# VPC 
+# VPF 
+# VPS 
+# Verbalised
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X

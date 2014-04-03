@@ -1,0 +1,40 @@
+# IULA Treebank  dependencies
+#
+# Source: http://repositori.upf.edu/handle/10230/20407
+#
+# ROOT: Root
+# SUBJ: Subject 
+# DO: Direct Object
+DO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DOBJ
+# IO: Indirect Object
+# OBLC: Oblique Object
+# ADV: Advervial Object
+# AUX: Auxiliar verb
+# BYAG: By agent complement
+# ATR: Attribute
+# PRD: Predicative complement
+# OPRD: Object predicative complement
+# PP-LOC: Locative prepositional complement
+# PP-DIR: Directional prepositional complement
+# SUBJ-GAP: Subject in a gapping construction
+# COMP-GAP: Complement in a gapping construction
+# MOD-GAP: Modifier in a gapping construction
+# VOC: Vocative
+# MIMPERS: Impersonal marker
+# MPAS: Passive marker (“se”)
+# MPRON: Pronominal marker
+# COMP: Complement (of N, ADJ, ADV, PREP)
+# MOD: Modifier
+# NEG: Negation#
+NEG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NEG
+# SPEC: Specifier
+# COORD: Coordination
+# CONJ: Conjunction
+CONJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CONJ
+# punct: Punctuation
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+
