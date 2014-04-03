@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.api.frequency.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Arrays;
@@ -32,62 +33,78 @@ public class FrequencyDistributionTest
 
     @Rule
     public TemporaryFolder folder = new TemporaryFolder();
-    
+
     @Test
-    public void fdTest() {
-        
-        List<String> tokens = Arrays.asList("This is a first test that contains a first test example".split(" "));
-        
+    public void fdTest()
+    {
+
+        List<String> tokens = Arrays
+                .asList("This is a first test that contains a first test example".split(" "));
+
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.incAll(tokens);
-        
+
         System.out.println(fd);
-        
+
         assertEquals(11, fd.getN());
         assertEquals(8, fd.getB());
-        
+
         assertEquals(0, fd.getCount("humpelgrumpf"));
         assertEquals(1, fd.getCount("This"));
         assertEquals(2, fd.getCount("test"));
-        
+
         assertEquals(2, fd.getMaxFreq());
         assertEquals("a", fd.getSampleWithMaxFreq());
-        
-        List<String> top5 = fd.getMostFrequentSamples(5);
-        assertEquals(5, top5.size());
-        assertEquals("first", top5.get(0));
-        assertEquals("a", top5.get(1));
-        assertEquals("test", top5.get(2));
+
+        List<String> top3 = fd.getMostFrequentSamples(3);
+        assertEquals(3, top3.size());
+        assertTrue(top3.contains("first"));
+        assertTrue(top3.contains("a"));
+        assertTrue(top3.contains("test"));
     }
 
     /**
      * Bug in PCJ: see http://sourceforge.net/p/pcj/bugs/15/
      */
     @Test
-    public void saveAndLoadFdTest() throws Exception {
-        List<String> tokens = Arrays.asList("This is a first test that contains a first test example".split(" "));
-        
+    public void testMaxIntHash()
+    {
+        String badKey = "'s_'s_not_noticed";
+
+        assertEquals(Integer.MIN_VALUE, badKey.hashCode());
+        FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+        fd.inc(badKey);
+    }
+
+    @Test
+    public void saveAndLoadFdTest()
+        throws Exception
+    {
+        List<String> tokens = Arrays
+                .asList("This is a first test that contains a first test example".split(" "));
+
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.incAll(tokens);
-        
+
         File outputFile = folder.newFile();
-        
+
         fd.save(outputFile);
-        
+
         FrequencyDistribution<String> loadedFd = new FrequencyDistribution<String>();
         loadedFd.load(outputFile);
 
         assertEquals(11, loadedFd.getN());
         assertEquals(8, loadedFd.getB());
-        
+
         assertEquals(0, loadedFd.getCount("humpelgrumpf"));
         assertEquals(1, loadedFd.getCount("This"));
         assertEquals(2, loadedFd.getCount("test"));
     }
-    
+
     @Test
-    public void fdTest_specialToken() {
-        
+    public void fdTest_specialToken()
+    {
+
         FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
         fd.inc(", ");
         fd.inc(". ");
@@ -95,12 +112,12 @@ public class FrequencyDistributionTest
         fd.inc(",");
         fd.inc("\t");
         fd.inc(",\t");
-        
+
         System.out.println(fd);
-        
+
         assertEquals(6, fd.getN());
         assertEquals(6, fd.getB());
-        
+
         assertEquals(0, fd.getCount("humpelgrumpf"));
         assertEquals(1, fd.getCount(", "));
         assertEquals(1, fd.getCount(","));
