@@ -1,5 +1,5 @@
 /**
- * Copyright 2007-2014
+ * Copyright 2013
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -48,9 +48,9 @@ public class ArabicUnknownWordModel extends BaseUnknownWordModel {
   protected final int unknownPrefixSize;
 
 
-  public ArabicUnknownWordModel(Options op, Lexicon lex,
-                                Index<String> wordIndex,
-                                Index<String> tagIndex,
+  public ArabicUnknownWordModel(Options op, Lexicon lex, 
+                                Index<String> wordIndex, 
+                                Index<String> tagIndex, 
                                 ClassicCounter<IntTaggedWord> unSeenCounter) {
     super(op, lex, wordIndex, tagIndex, unSeenCounter, null, null, null);
     if (unknownLevel < MIN_UNKNOWN || unknownLevel > MAX_UNKNOWN) {
@@ -67,7 +67,7 @@ public class ArabicUnknownWordModel extends BaseUnknownWordModel {
    * lines containing the data.
    */
   public ArabicUnknownWordModel(Options op, Lexicon lex,
-                                Index<String> wordIndex,
+                                Index<String> wordIndex, 
                                 Index<String> tagIndex) {
     this(op, lex, wordIndex, tagIndex, new ClassicCounter<IntTaggedWord>());
   }

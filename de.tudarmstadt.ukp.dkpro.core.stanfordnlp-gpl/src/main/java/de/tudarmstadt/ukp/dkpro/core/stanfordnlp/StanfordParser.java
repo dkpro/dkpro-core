@@ -1,21 +1,13 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -248,6 +240,28 @@ public class StanfordParser
     private int maxTokens;
 
     /**
+     * Sets whether to create or not to create Lemma tags. The creation of constituent tags must be
+     * turned on for this to work.<br/>
+     * This only works for ENGLISH.<br/>
+     * Default:<br/>
+     * <ul>
+     * <li>true, if document text is English</li>
+     * <li>false, if document text is not English</li>
+     * </ul>
+     * <br/>
+     *
+     * <strong>Info:</strong><br>
+     * The Stanford Morphology-class computes the base form of English words, by removing just
+     * inflections (not derivational morphology). That is, it only does noun plurals, pronoun case,
+     * and verb endings, and not things like comparative adjectives or derived nominals. It is based
+     * on a finite-state transducer implemented by John Carroll et al., written in flex and publicly
+     * available. See: http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
+     */
+    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = false)
+    private Boolean paramCreateLemmas;
+
+    /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
      *
      * @see PTBEscapingProcessor
@@ -274,6 +288,11 @@ public class StanfordParser
 
     private GrammaticalStructureFactory gsf;
 
+    // distinction between createLemmas & paramCreateLemmas necessary
+    // in order to work with mixed language document collections
+    // (correct default behavior for each CAS)
+    private Boolean createLemmas;
+
     private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
     private MappingProvider posMappingProvider;
 
@@ -286,15 +305,20 @@ public class StanfordParser
         super.initialize(context);
 
         if (!writeConstituent && !writeDependency && !writePennTree) {
-            getLogger().warn("Invalid parameter configuration... will create dependency tags.");
+            getContext().getLogger().log(WARNING,
+                    "Invalid parameter configuration... will create" + "dependency tags.");
             writeDependency = true;
         }
 
         // Check if we want to create Lemmas or POS tags while Consituent tags
         // are disabled. In this case, we have to switch on constituent tagging
-        if (!writeConstituent && writePos) {
-            getLogger().warn("Constituent tag creation is required for POS tagging. Will create "
-                    + "constituent tags.");
+        if (!writeConstituent && ((createLemmas != null && createLemmas) || writePos)) {
+            getContext()
+                    .getLogger()
+                    .log(WARNING,
+                            "Invalid parameter configuration. Constituent "
+                                    + "tag creation is required for POS tagging and Lemmatization. Will create "
+                                    + "constituent tags.");
             writeConstituent = true;
         }
 
@@ -324,6 +348,30 @@ public class StanfordParser
     {
         modelProvider.configure(aJCas.getCas());
         posMappingProvider.configure(aJCas.getCas());
+
+        /*
+         * In order to work with mixed language document collections, default behavior of
+         * lemmatization has to be set anew for each CAS.
+         */
+        // If lemmatization is explicitly turned on, but document is not
+        // English, give a warning, but still turn it on.
+        if (paramCreateLemmas != null && paramCreateLemmas
+                && !aJCas.getDocumentLanguage().equals("en")) {
+            getContext()
+                    .getLogger()
+                    .log(WARNING,
+                            "Lemmatization is turned on, but does not work with the document language of the current CAS.");
+
+            createLemmas = paramCreateLemmas;
+        }
+        // If lemmatization was not set, turn it on for English documents
+        // and off for non-English documents
+        else if (paramCreateLemmas == null) {
+            createLemmas = aJCas.getDocumentLanguage().equals("en") ? true : false;
+        }
+        else {
+            createLemmas = paramCreateLemmas;
+        }
 
         Type typeToParse;
         if (annotationTypeToParse != null) {
@@ -407,7 +455,7 @@ public class StanfordParser
             // Create constituent annotations
             if (writeConstituent) {
                 sfAnnotator.createConstituentAnnotationFromTree(parser.getTLPParams()
-                        .treebankLanguagePack(), writePos);
+                        .treebankLanguagePack(), writePos, createLemmas);
             }
         }
     }
