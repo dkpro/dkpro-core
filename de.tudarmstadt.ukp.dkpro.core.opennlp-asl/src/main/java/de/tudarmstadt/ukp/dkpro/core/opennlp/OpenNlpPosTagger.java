@@ -125,7 +125,7 @@ public class OpenNlpPosTagger
                 setContextObject(OpenNlpPosTagger.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-tagger-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.bin");
+				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
                 setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/tagger-default-variants.map");
 				setDefault(VARIANT, "maxent");
 
