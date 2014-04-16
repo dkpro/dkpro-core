@@ -125,7 +125,7 @@ public class OpenNlpChunker
                 setContextObject(OpenNlpChunker.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-chunker-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.bin");
+				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.properties");
                 setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/chunker-default-variants.map");
 				setDefault(VARIANT, "default");
 

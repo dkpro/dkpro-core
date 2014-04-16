@@ -96,7 +96,7 @@ public class OpenNlpSegmenter
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"sentence-${language}-${variant}.bin");
+						"sentence-${language}-${variant}.properties");
 				setDefault(VARIANT, "maxent");
 
 				setOverride(LOCATION, segmentationModelLocation);
@@ -122,7 +122,7 @@ public class OpenNlpSegmenter
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"token-${language}-${variant}.bin");
+						"token-${language}-${variant}.properties");
 				setDefault(VARIANT, "maxent");
 
 				setOverride(LOCATION, tokenizationModelLocation);
@@ -155,10 +155,12 @@ public class OpenNlpSegmenter
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-		for (Span sSpan : sentenceModelProvider.getResource().sentPosDetect(aText)) {
+	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
+		for (Span sSpan : sentences) {
 			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
-			for (Span tSpan : tokenModelProvider.getResource().tokenizePos(
-					aText.substring(sSpan.getStart(), sSpan.getEnd()))) {
+			Span[] tokens = tokenModelProvider.getResource().tokenizePos(
+                    aText.substring(sSpan.getStart(), sSpan.getEnd()));
+			for (Span tSpan : tokens) {
 				createToken(aJCas, tSpan.getStart() + sSpan.getStart() + aZoneBegin, tSpan.getEnd()
 						+ sSpan.getStart() + aZoneBegin);
 			}
