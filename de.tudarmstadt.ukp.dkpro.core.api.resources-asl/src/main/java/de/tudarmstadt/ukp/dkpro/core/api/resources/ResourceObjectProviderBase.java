@@ -150,7 +150,7 @@ public abstract class ResourceObjectProviderBase<M>
     private String lastModelLocation;
     private M resource;
 
-    private Object contextObject;
+    private Class<?> contextClass;
 
     private Properties overrides = new Properties();
     private Properties defaults = new Properties();
@@ -266,8 +266,20 @@ public abstract class ResourceObjectProviderBase<M>
      */
     public void setContextObject(Object aObject)
     {
-        contextObject = aObject;
-        setDefault(PACKAGE, aObject.getClass().getPackage().getName().replace('.', '/'));
+        setContextClass(aObject.getClass());
+    }
+    
+    /**
+     * Set a class which can be used to try finding a Maven POM from which resource version
+     * information could be extracted.
+     *
+     * @param aClass
+     *            a context class, usually the class creating the provider.
+     */
+    public void setContextClass(Class<?> aClass)
+    {
+        contextClass = aClass;
+        setDefault(PACKAGE, contextClass.getPackage().getName().replace('.', '/'));
     }
 
     /**
@@ -285,8 +297,8 @@ public abstract class ResourceObjectProviderBase<M>
     protected String getModelVersionFromMavenPom()
         throws IOException
     {
-        if (contextObject == null) {
-            throw new IllegalStateException("No context object specified");
+        if (contextClass == null) {
+            throw new IllegalStateException("No context class specified");
         }
 
         // Get the properties and resolve the artifact coordinates
@@ -295,9 +307,8 @@ public abstract class ResourceObjectProviderBase<M>
         String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
 
         // Try to determine the location of the POM file belonging to the context object
-        URL url = contextObject.getClass().getResource(
-                contextObject.getClass().getSimpleName() + ".class");
-        String classPart = contextObject.getClass().getName().replace(".", "/") + ".class";
+        URL url = contextClass.getResource(contextClass.getSimpleName() + ".class");
+        String classPart = contextClass.getName().replace(".", "/") + ".class";
         String base = url.toString();
         base = base.substring(0, base.length() - classPart.length());
 
