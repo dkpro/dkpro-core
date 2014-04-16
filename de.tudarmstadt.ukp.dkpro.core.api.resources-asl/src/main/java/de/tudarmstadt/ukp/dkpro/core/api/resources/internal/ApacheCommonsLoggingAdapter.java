@@ -72,7 +72,9 @@ public class ApacheCommonsLoggingAdapter
     @Override
     public void verbose(String msg)
     {
-        debug(msg);
+        if (logger.isTraceEnabled()) {
+            logger.trace(msg);
+        }
     }
 
     @Override
@@ -102,11 +104,12 @@ public class ApacheCommonsLoggingAdapter
     @Override
     protected void doProgress()
     {
+        // No nothing
     }
 
     @Override
     protected void doEndProgress(String msg)
     {
+        // No nothing
     }
-
 }
