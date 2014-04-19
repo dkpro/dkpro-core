@@ -221,8 +221,8 @@
 					<configuration>
 						<componentVendor>DKPro Core Project</componentVendor>
 						<componentCopyright>
-							Copyright 2007-2014							Ubiquitous Knowledge Processing
-							(UKP) Lab
+							Copyright 2007-2014
+                            Ubiquitous Knowledge Processing (UKP) Lab
 							Technische Universität Darmstadt
 						</componentCopyright>
 						<failOnMissingMetaData>false</failOnMissingMetaData>
