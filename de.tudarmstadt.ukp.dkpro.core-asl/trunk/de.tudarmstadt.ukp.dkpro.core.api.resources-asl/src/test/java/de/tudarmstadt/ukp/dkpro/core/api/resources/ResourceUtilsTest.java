@@ -72,6 +72,7 @@ public class ResourceUtilsTest
                         "/resources/ResourceObjectProviderTest$1.class",
                         "/resources/ResourceObjectProviderTest$2.class",
                         "/resources/ResourceObjectProviderTest$3.class",
+                        "/resources/ResourceObjectProviderTest$SharableObjectProvider.class", 
                         "/resources/ResourceObjectProviderTest.class",
                         "/resources/ResourceUtilsTest.class"), files);
     }
