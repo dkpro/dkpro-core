@@ -149,7 +149,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * If this property is set to {@code true}, resources loaded through this provider are 
      * remembered by the provider using a weak reference. If the same resource is requested by
-     * another instance of this provider class, the same resource is returned. 
+     * another instance of this provider class, the same resource is returned.
      */
     public static final String SHARABLE = "sharable";
 
@@ -612,13 +612,15 @@ public abstract class ResourceObjectProviderBase<M>
     {
         boolean sharable = "true".equals(aProperties.getProperty(SHARABLE, "false"));
         
-        ResourceHandle handle = new ResourceHandle(getClass(), resourceUrl.toString());
+        ResourceHandle handle = null;
         resource = null;
         
         // Check the cache
         if (sharable) {
             // We need to scan the cache manually because in the end we need to keep a reference
-            // to exactly the same key objec that was used to store the resource in the cache.
+            // to exactly the same key object that was used to store the resource in the cache.
+            handle = new ResourceHandle(getClass(), resourceUrl != null ? resourceUrl.toString()
+                    : null);
             for (Entry<ResourceHandle, Object> e : cache.entrySet()) {
                 if (handle.equals(e.getKey())) {
                     resourceHandle = e.getKey();
