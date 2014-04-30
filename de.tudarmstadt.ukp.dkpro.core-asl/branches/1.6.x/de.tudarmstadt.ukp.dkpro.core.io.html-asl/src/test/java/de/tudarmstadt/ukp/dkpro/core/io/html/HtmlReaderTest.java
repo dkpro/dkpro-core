@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.html;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -26,8 +25,8 @@ import java.net.URL;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.DocumentAnnotation;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
@@ -46,7 +45,8 @@ public class HtmlReaderTest
 
         for (JCas jcas : new JCasIterable(reader)) {
             dumpMetaData(DocumentMetaData.get(jcas));
-            assertEquals(1, select(jcas, DocumentAnnotation.class).size());
+            assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
+                    .size());
 
             assertTrue(jcas.getDocumentText().startsWith("UKP Home"));
         }
