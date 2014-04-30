@@ -17,23 +17,33 @@
 	<name>DKPro Core ASL - IO - Wikipedia via Bliki Engine</name>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>info.bliki.wiki</groupId>
 			<artifactId>bliki-core</artifactId>
 			<version>3.0.19</version>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>org.sweble.wikitext</groupId>
 			<artifactId>swc-parser-lazy</artifactId>
 			<version>1.1.0</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.sweble.wikitext</groupId>
 			<artifactId>swc-engine</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>de.fau.cs.osr.ptk</groupId>
+			<artifactId>ptk-common</artifactId>
 			<version>1.1.0</version>
 		</dependency>
 		<dependency>
@@ -50,8 +60,9 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.uima</groupId>
-			<artifactId>uimafit-core</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

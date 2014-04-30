@@ -34,8 +34,8 @@
 			<artifactId>uimafit-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</artifactId>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -44,6 +44,10 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
 			<artifactId>de.tudarmstadt.ukp.wikipedia.revisionmachine</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
+			<artifactId>de.tudarmstadt.ukp.wikipedia.parser</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.wikipedia</groupId>
