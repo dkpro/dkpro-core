@@ -110,12 +110,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Ross]
-NP
-   sofa: _InitialView
-   begin: 3
-   end: 7
-   PosValue: "NE"
-[Ross]
 Lemma
    sofa: _InitialView
    begin: 3
@@ -159,11 +153,11 @@ Token
       begin: 3
       end: 7
       PosValue: "NE"
-[Perot]
+[Ross]
 NP
    sofa: _InitialView
-   begin: 8
-   end: 13
+   begin: 3
+   end: 7
    PosValue: "NE"
 [Perot]
 Lemma
@@ -209,6 +203,12 @@ Token
       begin: 8
       end: 13
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 8
+   end: 13
+   PosValue: "NE"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -419,12 +419,6 @@ Token
       end: 44
       PosValue: "ADJA"
 [Diktator]
-NN
-   sofa: _InitialView
-   begin: 45
-   end: 53
-   PosValue: "NN"
-[Diktator]
 Lemma
    sofa: _InitialView
    begin: 45
@@ -468,6 +462,12 @@ Token
       begin: 45
       end: 53
       PosValue: "NN"
+[Diktator]
+NN
+   sofa: _InitialView
+   begin: 45
+   end: 53
+   PosValue: "NN"
 ['']
 PUNC
    sofa: _InitialView
@@ -542,12 +542,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Konzernchefs]
-NN
-   sofa: _InitialView
-   begin: 57
-   end: 69
-   PosValue: "NN"
-[Konzernchefs]
 Lemma
    sofa: _InitialView
    begin: 57
@@ -584,6 +578,12 @@ Token
       begin: 57
       end: 69
       PosValue: "NN"
+[Konzernchefs]
+NN
+   sofa: _InitialView
+   begin: 57
+   end: 69
+   PosValue: "NN"
 [lehnen]
 Lemma
    sofa: _InitialView
@@ -701,12 +701,6 @@ ART
    end: 80
    PosValue: "ART"
 [Milliardär]
-NN
-   sofa: _InitialView
-   begin: 81
-   end: 91
-   PosValue: "NN"
-[Milliardär]
 Lemma
    sofa: _InitialView
    begin: 81
@@ -750,6 +744,12 @@ Token
       begin: 81
       end: 91
       PosValue: "NN"
+[Milliardär]
+NN
+   sofa: _InitialView
+   begin: 81
+   end: 91
+   PosValue: "NN"
 [als US-Präsidenten]
 Constituent
    sofa: _InitialView
@@ -824,12 +824,6 @@ Token
       end: 95
       PosValue: "APPR"
 [US-Präsidenten]
-NN
-   sofa: _InitialView
-   begin: 96
-   end: 110
-   PosValue: "NN"
-[US-Präsidenten]
 Lemma
    sofa: _InitialView
    begin: 96
@@ -873,6 +867,12 @@ Token
       begin: 96
       end: 110
       PosValue: "NN"
+[US-Präsidenten]
+NN
+   sofa: _InitialView
+   begin: 96
+   end: 110
+   PosValue: "NN"
 [ab]
 Lemma
    sofa: _InitialView
@@ -990,12 +990,6 @@ Sentence
    begin: 116
    end: 176
 [Texaner]
-NN
-   sofa: _InitialView
-   begin: 116
-   end: 123
-   PosValue: "NN"
-[Texaner]
 Lemma
    sofa: _InitialView
    begin: 116
@@ -1032,6 +1026,12 @@ Token
       begin: 116
       end: 123
       PosValue: "NN"
+[Texaner]
+NN
+   sofa: _InitialView
+   begin: 116
+   end: 123
+   PosValue: "NN"
 [gibt]
 Lemma
    sofa: _InitialView
@@ -1243,12 +1243,6 @@ Token
       end: 137
       PosValue: "ADJA"
 [Auskunft]
-NN
-   sofa: _InitialView
-   begin: 138
-   end: 146
-   PosValue: "NN"
-[Auskunft]
 Lemma
    sofa: _InitialView
    begin: 138
@@ -1292,6 +1286,12 @@ Token
       begin: 138
       end: 146
       PosValue: "NN"
+[Auskunft]
+NN
+   sofa: _InitialView
+   begin: 138
+   end: 146
+   PosValue: "NN"
 [über seine Wirtschaftspolitik]
 Constituent
    sofa: _InitialView
@@ -1437,12 +1437,6 @@ Token
       end: 157
       PosValue: "PPOSAT"
 [Wirtschaftspolitik]
-NN
-   sofa: _InitialView
-   begin: 158
-   end: 176
-   PosValue: "NN"
-[Wirtschaftspolitik]
 Lemma
    sofa: _InitialView
    begin: 158
@@ -1493,6 +1487,12 @@ Token
       begin: 158
       end: 176
       PosValue: "NN"
+[Wirtschaftspolitik]
+NN
+   sofa: _InitialView
+   begin: 158
+   end: 176
+   PosValue: "NN"
 [Der texanische Milliardär Ross Perot hat das politische Establishment in Washington aufgeschreckt .]
 ROOT
    sofa: _InitialView
@@ -1654,12 +1654,6 @@ Token
       end: 191
       PosValue: "ADJA"
 [Milliardär]
-NN
-   sofa: _InitialView
-   begin: 192
-   end: 202
-   PosValue: "NN"
-[Milliardär]
 Lemma
    sofa: _InitialView
    begin: 192
@@ -1703,6 +1697,12 @@ Token
       begin: 192
       end: 202
       PosValue: "NN"
+[Milliardär]
+NN
+   sofa: _InitialView
+   begin: 192
+   end: 202
+   PosValue: "NN"
 [Ross Perot]
 Constituent
    sofa: _InitialView
@@ -1733,12 +1733,6 @@ Constituent
       syntacticFunction: "--"
    children: FSArray
    syntacticFunction: "--"
-[Ross]
-NP
-   sofa: _InitialView
-   begin: 203
-   end: 207
-   PosValue: "NE"
 [Ross]
 Lemma
    sofa: _InitialView
@@ -1790,11 +1784,11 @@ Token
       begin: 203
       end: 207
       PosValue: "NE"
-[Perot]
+[Ross]
 NP
    sofa: _InitialView
-   begin: 208
-   end: 213
+   begin: 203
+   end: 207
    PosValue: "NE"
 [Perot]
 Lemma
@@ -1847,6 +1841,12 @@ Token
       begin: 208
       end: 213
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 208
+   end: 213
+   PosValue: "NE"
 [hat]
 Lemma
    sofa: _InitialView
@@ -2058,12 +2058,6 @@ Token
       end: 232
       PosValue: "ADJA"
 [Establishment]
-NN
-   sofa: _InitialView
-   begin: 233
-   end: 246
-   PosValue: "NN"
-[Establishment]
 Lemma
    sofa: _InitialView
    begin: 233
@@ -2114,6 +2108,12 @@ Token
       begin: 233
       end: 246
       PosValue: "NN"
+[Establishment]
+NN
+   sofa: _InitialView
+   begin: 233
+   end: 246
+   PosValue: "NN"
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -2216,12 +2216,6 @@ Token
       end: 249
       PosValue: "APPR"
 [Washington]
-NP
-   sofa: _InitialView
-   begin: 250
-   end: 260
-   PosValue: "NE"
-[Washington]
 Lemma
    sofa: _InitialView
    begin: 250
@@ -2279,6 +2273,12 @@ Token
       begin: 250
       end: 260
       PosValue: "NE"
+[Washington]
+NP
+   sofa: _InitialView
+   begin: 250
+   end: 260
+   PosValue: "NE"
 [aufgeschreckt]
 Lemma
    sofa: _InitialView
@@ -2476,12 +2476,6 @@ Token
       end: 281
       PosValue: "APPR"
 [Meinungsumfragen]
-NN
-   sofa: _InitialView
-   begin: 282
-   end: 298
-   PosValue: "NN"
-[Meinungsumfragen]
 Lemma
    sofa: _InitialView
    begin: 282
@@ -2525,6 +2519,12 @@ Token
       begin: 282
       end: 298
       PosValue: "NN"
+[Meinungsumfragen]
+NN
+   sofa: _InitialView
+   begin: 282
+   end: 298
+   PosValue: "NN"
 [liegt]
 Lemma
    sofa: _InitialView
@@ -2858,12 +2858,6 @@ Token
       end: 339
       PosValue: "APPRART"
 [Rennen]
-NN
-   sofa: _InitialView
-   begin: 340
-   end: 346
-   PosValue: "NN"
-[Rennen]
 Lemma
    sofa: _InitialView
    begin: 340
@@ -2907,6 +2901,12 @@ Token
       begin: 340
       end: 346
       PosValue: "NN"
+[Rennen]
+NN
+   sofa: _InitialView
+   begin: 340
+   end: 346
+   PosValue: "NN"
 [um den Chefsessel im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3052,12 +3052,6 @@ ART
    end: 353
    PosValue: "ART"
 [Chefsessel]
-NN
-   sofa: _InitialView
-   begin: 354
-   end: 364
-   PosValue: "NN"
-[Chefsessel]
 Lemma
    sofa: _InitialView
    begin: 354
@@ -3108,6 +3102,12 @@ Token
       begin: 354
       end: 364
       PosValue: "NN"
+[Chefsessel]
+NN
+   sofa: _InitialView
+   begin: 354
+   end: 364
+   PosValue: "NN"
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -3383,12 +3383,6 @@ Token
       end: 374
       PosValue: "ADJA"
 [Haus]
-NN
-   sofa: _InitialView
-   begin: 375
-   end: 379
-   PosValue: "NN"
-[Haus]
 Lemma
    sofa: _InitialView
    begin: 375
@@ -3460,6 +3454,12 @@ Token
       begin: 375
       end: 379
       PosValue: "NN"
+[Haus]
+NN
+   sofa: _InitialView
+   begin: 375
+   end: 379
+   PosValue: "NN"
 [mit dem amtierenden Präsidenten George Bush und dem Demokraten Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -3771,12 +3771,6 @@ Token
       end: 399
       PosValue: "ADJA"
 [Präsidenten]
-NN
-   sofa: _InitialView
-   begin: 400
-   end: 411
-   PosValue: "NN"
-[Präsidenten]
 Lemma
    sofa: _InitialView
    begin: 400
@@ -3841,6 +3835,12 @@ Token
       begin: 400
       end: 411
       PosValue: "NN"
+[Präsidenten]
+NN
+   sofa: _InitialView
+   begin: 400
+   end: 411
+   PosValue: "NN"
 [George Bush]
 Constituent
    sofa: _InitialView
@@ -3892,12 +3892,6 @@ Constituent
       syntacticFunction: "--"
    children: FSArray
    syntacticFunction: "--"
-[George]
-NP
-   sofa: _InitialView
-   begin: 412
-   end: 418
-   PosValue: "NE"
 [George]
 Lemma
    sofa: _InitialView
@@ -3970,11 +3964,11 @@ Token
       begin: 412
       end: 418
       PosValue: "NE"
-[Bush]
+[George]
 NP
    sofa: _InitialView
-   begin: 419
-   end: 423
+   begin: 412
+   end: 418
    PosValue: "NE"
 [Bush]
 Lemma
@@ -4048,6 +4042,12 @@ Token
       begin: 419
       end: 423
       PosValue: "NE"
+[Bush]
+NP
+   sofa: _InitialView
+   begin: 419
+   end: 423
+   PosValue: "NE"
 [und]
 Lemma
    sofa: _InitialView
@@ -4228,12 +4228,6 @@ ART
    end: 431
    PosValue: "ART"
 [Demokraten]
-NN
-   sofa: _InitialView
-   begin: 432
-   end: 442
-   PosValue: "NN"
-[Demokraten]
 Lemma
    sofa: _InitialView
    begin: 432
@@ -4298,6 +4292,12 @@ Token
       begin: 432
       end: 442
       PosValue: "NN"
+[Demokraten]
+NN
+   sofa: _InitialView
+   begin: 432
+   end: 442
+   PosValue: "NN"
 [Bill Clinton]
 Constituent
    sofa: _InitialView
@@ -4349,12 +4349,6 @@ Constituent
       syntacticFunction: "--"
    children: FSArray
    syntacticFunction: "--"
-[Bill]
-NP
-   sofa: _InitialView
-   begin: 443
-   end: 447
-   PosValue: "NE"
 [Bill]
 Lemma
    sofa: _InitialView
@@ -4427,11 +4421,11 @@ Token
       begin: 443
       end: 447
       PosValue: "NE"
-[Clinton]
+[Bill]
 NP
    sofa: _InitialView
-   begin: 448
-   end: 455
+   begin: 443
+   end: 447
    PosValue: "NE"
 [Clinton]
 Lemma
@@ -4505,6 +4499,12 @@ Token
       begin: 448
       end: 455
       PosValue: "NE"
+[Clinton]
+NP
+   sofa: _InitialView
+   begin: 448
+   end: 455
+   PosValue: "NE"
 [.]
 PUNC
    sofa: _InitialView
@@ -4733,12 +4733,6 @@ CONJ
    end: 461
    PosValue: "KOUS"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 462
-   end: 467
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 462
@@ -4796,6 +4790,12 @@ Token
       begin: 462
       end: 467
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 462
+   end: 467
+   PosValue: "NE"
 [ein Unternehmen erfolgreich leiten]
 Constituent
    sofa: _InitialView
@@ -4970,12 +4970,6 @@ ART
    end: 471
    PosValue: "ART"
 [Unternehmen]
-NN
-   sofa: _InitialView
-   begin: 472
-   end: 483
-   PosValue: "NN"
-[Unternehmen]
 Lemma
    sofa: _InitialView
    begin: 472
@@ -5047,6 +5041,12 @@ Token
       begin: 472
       end: 483
       PosValue: "NN"
+[Unternehmen]
+NN
+   sofa: _InitialView
+   begin: 472
+   end: 483
+   PosValue: "NN"
 [erfolgreich]
 Lemma
    sofa: _InitialView
@@ -5513,12 +5513,6 @@ Token
       end: 533
       PosValue: "PPOSAT"
 [Kritiker]
-NN
-   sofa: _InitialView
-   begin: 534
-   end: 542
-   PosValue: "NN"
-[Kritiker]
 Lemma
    sofa: _InitialView
    begin: 534
@@ -5562,6 +5556,12 @@ Token
       begin: 534
       end: 542
       PosValue: "NN"
+[Kritiker]
+NN
+   sofa: _InitialView
+   begin: 534
+   end: 542
+   PosValue: "NN"
 [überzeugt]
 Lemma
    sofa: _InitialView
@@ -5846,12 +5846,6 @@ Token
       end: 563
       PosValue: "PDAT"
 [Fähigkeiten]
-NN
-   sofa: _InitialView
-   begin: 564
-   end: 575
-   PosValue: "NN"
-[Fähigkeiten]
 Lemma
    sofa: _InitialView
    begin: 564
@@ -5902,6 +5896,12 @@ Token
       begin: 564
       end: 575
       PosValue: "NN"
+[Fähigkeiten]
+NN
+   sofa: _InitialView
+   begin: 564
+   end: 575
+   PosValue: "NN"
 [aber]
 Lemma
    sofa: _InitialView
@@ -6291,12 +6291,6 @@ Token
       end: 607
       PosValue: "ADJA"
 [Volkswirtschaft]
-NN
-   sofa: _InitialView
-   begin: 608
-   end: 623
-   PosValue: "NN"
-[Volkswirtschaft]
 Lemma
    sofa: _InitialView
    begin: 608
@@ -6354,6 +6348,12 @@ Token
       begin: 608
       end: 623
       PosValue: "NN"
+[Volkswirtschaft]
+NN
+   sofa: _InitialView
+   begin: 608
+   end: 623
+   PosValue: "NN"
 [der Welt]
 Constituent
    sofa: _InitialView
@@ -6470,12 +6470,6 @@ ART
    end: 627
    PosValue: "ART"
 [Welt]
-NN
-   sofa: _InitialView
-   begin: 628
-   end: 632
-   PosValue: "NN"
-[Welt]
 Lemma
    sofa: _InitialView
    begin: 628
@@ -6540,6 +6534,12 @@ Token
       begin: 628
       end: 632
       PosValue: "NN"
+[Welt]
+NN
+   sofa: _InitialView
+   begin: 628
+   end: 632
+   PosValue: "NN"
 [aus ihrer Krise]
 Constituent
    sofa: _InitialView
@@ -6706,12 +6706,6 @@ Token
       end: 642
       PosValue: "PPOSAT"
 [Krise]
-NN
-   sofa: _InitialView
-   begin: 643
-   end: 648
-   PosValue: "NN"
-[Krise]
 Lemma
    sofa: _InitialView
    begin: 643
@@ -6769,6 +6763,12 @@ Token
       begin: 643
       end: 648
       PosValue: "NN"
+[Krise]
+NN
+   sofa: _InitialView
+   begin: 643
+   end: 648
+   PosValue: "NN"
 [zu führen]
 Constituent
    sofa: _InitialView
@@ -7087,12 +7087,6 @@ Token
       end: 677
       PosValue: "PIAT"
 [Ökonomen]
-NN
-   sofa: _InitialView
-   begin: 678
-   end: 686
-   PosValue: "NN"
-[Ökonomen]
 Lemma
    sofa: _InitialView
    begin: 678
@@ -7136,6 +7130,12 @@ Token
       begin: 678
       end: 686
       PosValue: "NN"
+[Ökonomen]
+NN
+   sofa: _InitialView
+   begin: 678
+   end: 686
+   PosValue: "NN"
 [.]
 PUNC
    sofa: _InitialView
@@ -7376,12 +7376,6 @@ ART
    end: 701
    PosValue: "ART"
 [Konzernchefs]
-NN
-   sofa: _InitialView
-   begin: 702
-   end: 714
-   PosValue: "NN"
-[Konzernchefs]
 Lemma
    sofa: _InitialView
    begin: 702
@@ -7425,6 +7419,12 @@ Token
       begin: 702
       end: 714
       PosValue: "NN"
+[Konzernchefs]
+NN
+   sofa: _InitialView
+   begin: 702
+   end: 714
+   PosValue: "NN"
 [in den USA]
 Constituent
    sofa: _InitialView
@@ -7570,12 +7570,6 @@ ART
    end: 721
    PosValue: "ART"
 [USA]
-NP
-   sofa: _InitialView
-   begin: 722
-   end: 725
-   PosValue: "NE"
-[USA]
 Lemma
    sofa: _InitialView
    begin: 722
@@ -7626,6 +7620,12 @@ Token
       begin: 722
       end: 725
       PosValue: "NE"
+[USA]
+NP
+   sofa: _InitialView
+   begin: 722
+   end: 725
+   PosValue: "NE"
 [halten]
 Lemma
    sofa: _InitialView
@@ -7916,12 +7916,6 @@ ART
    end: 751
    PosValue: "ART"
 [62jährigen]
-NN
-   sofa: _InitialView
-   begin: 752
-   end: 762
-   PosValue: "NN"
-[62jährigen]
 Lemma
    sofa: _InitialView
    begin: 752
@@ -7965,6 +7959,12 @@ Token
       begin: 752
       end: 762
       PosValue: "NN"
+[62jährigen]
+NN
+   sofa: _InitialView
+   begin: 752
+   end: 762
+   PosValue: "NN"
 [.]
 PUNC
    sofa: _InitialView
@@ -8393,12 +8393,6 @@ Token
       end: 793
       PosValue: "PIAT"
 [Topmanager]
-NN
-   sofa: _InitialView
-   begin: 794
-   end: 804
-   PosValue: "NN"
-[Topmanager]
 Lemma
    sofa: _InitialView
    begin: 794
@@ -8449,6 +8443,12 @@ Token
       begin: 794
       end: 804
       PosValue: "NN"
+[Topmanager]
+NN
+   sofa: _InitialView
+   begin: 794
+   end: 804
+   PosValue: "NN"
 [durchaus]
 Lemma
    sofa: _InitialView
@@ -8601,12 +8601,6 @@ ART
    end: 819
    PosValue: "ART"
 [Unternehmer]
-NN
-   sofa: _InitialView
-   begin: 820
-   end: 831
-   PosValue: "NN"
-[Unternehmer]
 Lemma
    sofa: _InitialView
    begin: 820
@@ -8664,6 +8658,12 @@ Token
       begin: 820
       end: 831
       PosValue: "NN"
+[Unternehmer]
+NN
+   sofa: _InitialView
+   begin: 820
+   end: 831
+   PosValue: "NN"
 [als Präsidenten]
 Constituent
    sofa: _InitialView
@@ -8766,12 +8766,6 @@ Token
       end: 835
       PosValue: "APPR"
 [Präsidenten]
-NN
-   sofa: _InitialView
-   begin: 836
-   end: 847
-   PosValue: "NN"
-[Präsidenten]
 Lemma
    sofa: _InitialView
    begin: 836
@@ -8829,6 +8823,12 @@ Token
       begin: 836
       end: 847
       PosValue: "NN"
+[Präsidenten]
+NN
+   sofa: _InitialView
+   begin: 836
+   end: 847
+   PosValue: "NN"
 [vorstellen]
 Lemma
    sofa: _InitialView
@@ -9177,12 +9177,6 @@ Token
       end: 883
       PosValue: "ADV"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 884
-   end: 889
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 884
@@ -9240,6 +9234,12 @@ Token
       begin: 884
       end: 889
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 884
+   end: 889
+   PosValue: "NE"
 [.]
 PUNC
    sofa: _InitialView
@@ -9437,12 +9437,6 @@ ART
    end: 902
    PosValue: "ART"
 [Umfrage]
-NN
-   sofa: _InitialView
-   begin: 903
-   end: 910
-   PosValue: "NN"
-[Umfrage]
 Lemma
    sofa: _InitialView
    begin: 903
@@ -9486,6 +9480,12 @@ Token
       begin: 903
       end: 910
       PosValue: "NN"
+[Umfrage]
+NN
+   sofa: _InitialView
+   begin: 903
+   end: 910
+   PosValue: "NN"
 [des Wirtschaftsmagazins Fortune]
 Constituent
    sofa: _InitialView
@@ -9574,12 +9574,6 @@ ART
    end: 914
    PosValue: "ART"
 [Wirtschaftsmagazins]
-NN
-   sofa: _InitialView
-   begin: 915
-   end: 934
-   PosValue: "NN"
-[Wirtschaftsmagazins]
 Lemma
    sofa: _InitialView
    begin: 915
@@ -9630,12 +9624,12 @@ Token
       begin: 915
       end: 934
       PosValue: "NN"
-[Fortune]
-NP
+[Wirtschaftsmagazins]
+NN
    sofa: _InitialView
-   begin: 935
-   end: 942
-   PosValue: "NE"
+   begin: 915
+   end: 934
+   PosValue: "NN"
 [Fortune]
 Lemma
    sofa: _InitialView
@@ -9687,6 +9681,12 @@ Token
       begin: 935
       end: 942
       PosValue: "NE"
+[Fortune]
+NP
+   sofa: _InitialView
+   begin: 935
+   end: 942
+   PosValue: "NE"
 [unter den Bossen von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9832,12 +9832,6 @@ ART
    end: 952
    PosValue: "ART"
 [Bossen]
-NN
-   sofa: _InitialView
-   begin: 953
-   end: 959
-   PosValue: "NN"
-[Bossen]
 Lemma
    sofa: _InitialView
    begin: 953
@@ -9888,6 +9882,12 @@ Token
       begin: 953
       end: 959
       PosValue: "NN"
+[Bossen]
+NN
+   sofa: _InitialView
+   begin: 953
+   end: 959
+   PosValue: "NN"
 [von 500 Großunternehmen]
 Constituent
    sofa: _InitialView
@@ -9990,12 +9990,6 @@ Token
       end: 963
       PosValue: "APPR"
 [500]
-CARD
-   sofa: _InitialView
-   begin: 964
-   end: 967
-   PosValue: "CARD"
-[500]
 Lemma
    sofa: _InitialView
    begin: 964
@@ -10053,12 +10047,12 @@ Token
       begin: 964
       end: 967
       PosValue: "CARD"
-[Großunternehmen]
-NN
+[500]
+CARD
    sofa: _InitialView
-   begin: 968
-   end: 983
-   PosValue: "NN"
+   begin: 964
+   end: 967
+   PosValue: "CARD"
 [Großunternehmen]
 Lemma
    sofa: _InitialView
@@ -10117,6 +10111,12 @@ Token
       begin: 968
       end: 983
       PosValue: "NN"
+[Großunternehmen]
+NN
+   sofa: _InitialView
+   begin: 968
+   end: 983
+   PosValue: "NN"
 [wünschten]
 Lemma
    sofa: _InitialView
@@ -10234,12 +10234,6 @@ Token
       end: 996
       PosValue: "APPRART"
 [Mai]
-NN
-   sofa: _InitialView
-   begin: 997
-   end: 1000
-   PosValue: "NN"
-[Mai]
 Lemma
    sofa: _InitialView
    begin: 997
@@ -10283,6 +10277,12 @@ Token
       begin: 997
       end: 1000
       PosValue: "NN"
+[Mai]
+NN
+   sofa: _InitialView
+   begin: 997
+   end: 1000
+   PosValue: "NN"
 [nur elf Prozent]
 Constituent
    sofa: _InitialView
@@ -10394,12 +10394,6 @@ Token
       end: 1004
       PosValue: "ADV"
 [elf]
-CARD
-   sofa: _InitialView
-   begin: 1005
-   end: 1008
-   PosValue: "CARD"
-[elf]
 Lemma
    sofa: _InitialView
    begin: 1005
@@ -10450,12 +10444,12 @@ Token
       begin: 1005
       end: 1008
       PosValue: "CARD"
-[Prozent]
-NN
+[elf]
+CARD
    sofa: _InitialView
-   begin: 1009
-   end: 1016
-   PosValue: "NN"
+   begin: 1005
+   end: 1008
+   PosValue: "CARD"
 [Prozent]
 Lemma
    sofa: _InitialView
@@ -10500,6 +10494,12 @@ Token
       begin: 1009
       end: 1016
       PosValue: "NN"
+[Prozent]
+NN
+   sofa: _InitialView
+   begin: 1009
+   end: 1016
+   PosValue: "NN"
 [``]
 PUNC
    sofa: _InitialView
@@ -10537,12 +10537,6 @@ Token
       end: 1019
       PosValue: "$("
 [Ross]
-NP
-   sofa: _InitialView
-   begin: 1020
-   end: 1024
-   PosValue: "NE"
-[Ross]
 Lemma
    sofa: _InitialView
    begin: 1020
@@ -10579,6 +10573,12 @@ Token
       begin: 1020
       end: 1024
       PosValue: "NE"
+[Ross]
+NP
+   sofa: _InitialView
+   begin: 1020
+   end: 1024
+   PosValue: "NE"
 [for President]
 Constituent
    sofa: _InitialView
@@ -10922,12 +10922,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [78]
-CARD
-   sofa: _InitialView
-   begin: 1052
-   end: 1054
-   PosValue: "CARD"
-[78]
 Lemma
    sofa: _InitialView
    begin: 1052
@@ -10985,12 +10979,12 @@ Token
       begin: 1052
       end: 1054
       PosValue: "CARD"
-[Prozent]
-NN
+[78]
+CARD
    sofa: _InitialView
-   begin: 1055
-   end: 1062
-   PosValue: "NN"
+   begin: 1052
+   end: 1054
+   PosValue: "CARD"
 [Prozent]
 Lemma
    sofa: _InitialView
@@ -11049,6 +11043,12 @@ Token
       begin: 1055
       end: 1062
       PosValue: "NN"
+[Prozent]
+NN
+   sofa: _InitialView
+   begin: 1055
+   end: 1062
+   PosValue: "NN"
 [sich]
 PR
    sofa: _InitialView
@@ -11208,12 +11208,6 @@ Token
       end: 1071
       PosValue: "APPR"
 [Bush]
-NP
-   sofa: _InitialView
-   begin: 1072
-   end: 1076
-   PosValue: "NE"
-[Bush]
 Lemma
    sofa: _InitialView
    begin: 1072
@@ -11271,6 +11265,12 @@ Token
       begin: 1072
       end: 1076
       PosValue: "NE"
+[Bush]
+NP
+   sofa: _InitialView
+   begin: 1072
+   end: 1076
+   PosValue: "NE"
 [und]
 Lemma
    sofa: _InitialView
@@ -11389,12 +11389,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [vier]
-CARD
-   sofa: _InitialView
-   begin: 1081
-   end: 1085
-   PosValue: "CARD"
-[vier]
 Lemma
    sofa: _InitialView
    begin: 1081
@@ -11452,12 +11446,12 @@ Token
       begin: 1081
       end: 1085
       PosValue: "CARD"
-[Prozent]
-NN
+[vier]
+CARD
    sofa: _InitialView
-   begin: 1086
-   end: 1093
-   PosValue: "NN"
+   begin: 1081
+   end: 1085
+   PosValue: "CARD"
 [Prozent]
 Lemma
    sofa: _InitialView
@@ -11516,6 +11510,12 @@ Token
       begin: 1086
       end: 1093
       PosValue: "NN"
+[Prozent]
+NN
+   sofa: _InitialView
+   begin: 1086
+   end: 1093
+   PosValue: "NN"
 [für Clinton]
 Constituent
    sofa: _InitialView
@@ -11618,12 +11618,6 @@ Token
       end: 1097
       PosValue: "APPR"
 [Clinton]
-NP
-   sofa: _InitialView
-   begin: 1098
-   end: 1105
-   PosValue: "NE"
-[Clinton]
 Lemma
    sofa: _InitialView
    begin: 1098
@@ -11681,6 +11675,12 @@ Token
       begin: 1098
       end: 1105
       PosValue: "NE"
+[Clinton]
+NP
+   sofa: _InitialView
+   begin: 1098
+   end: 1105
+   PosValue: "NE"
 [aussprachen]
 Lemma
    sofa: _InitialView
@@ -12021,12 +12021,6 @@ ART
    end: 1146
    PosValue: "ART"
 [Hälfte]
-NN
-   sofa: _InitialView
-   begin: 1147
-   end: 1153
-   PosValue: "NN"
-[Hälfte]
 Lemma
    sofa: _InitialView
    begin: 1147
@@ -12070,6 +12064,12 @@ Token
       begin: 1147
       end: 1153
       PosValue: "NN"
+[Hälfte]
+NN
+   sofa: _InitialView
+   begin: 1147
+   end: 1153
+   PosValue: "NN"
 [der Chief Executives]
 Constituent
    sofa: _InitialView
@@ -12381,12 +12381,6 @@ CONJ
    end: 1180
    PosValue: "KOUS"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 1181
-   end: 1186
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 1181
@@ -12430,6 +12424,12 @@ Token
       begin: 1181
       end: 1186
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 1181
+   end: 1186
+   PosValue: "NE"
 [durchaus]
 Lemma
    sofa: _InitialView
@@ -12511,12 +12511,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Chancen]
-NN
-   sofa: _InitialView
-   begin: 1196
-   end: 1203
-   PosValue: "NN"
-[Chancen]
 Lemma
    sofa: _InitialView
    begin: 1196
@@ -12567,6 +12561,12 @@ Token
       begin: 1196
       end: 1203
       PosValue: "NN"
+[Chancen]
+NN
+   sofa: _InitialView
+   begin: 1196
+   end: 1203
+   PosValue: "NN"
 [habe]
 Lemma
    sofa: _InitialView
@@ -12806,12 +12806,6 @@ ART
    end: 1214
    PosValue: "ART"
 [Wahl]
-NN
-   sofa: _InitialView
-   begin: 1215
-   end: 1219
-   PosValue: "NN"
-[Wahl]
 Lemma
    sofa: _InitialView
    begin: 1215
@@ -12876,6 +12870,12 @@ Token
       begin: 1215
       end: 1219
       PosValue: "NN"
+[Wahl]
+NN
+   sofa: _InitialView
+   begin: 1215
+   end: 1219
+   PosValue: "NN"
 [im November]
 Constituent
    sofa: _InitialView
@@ -13006,12 +13006,6 @@ Token
       end: 1222
       PosValue: "APPRART"
 [November]
-NN
-   sofa: _InitialView
-   begin: 1223
-   end: 1231
-   PosValue: "NN"
-[November]
 Lemma
    sofa: _InitialView
    begin: 1223
@@ -13083,6 +13077,12 @@ Token
       begin: 1223
       end: 1231
       PosValue: "NN"
+[November]
+NN
+   sofa: _InitialView
+   begin: 1223
+   end: 1231
+   PosValue: "NN"
 [zu gewinnen]
 Constituent
    sofa: _InitialView
@@ -13760,12 +13760,6 @@ Token
       end: 1282
       PosValue: "ADJA"
 [Schwäche]
-NN
-   sofa: _InitialView
-   begin: 1283
-   end: 1291
-   PosValue: "NN"
-[Schwäche]
 Lemma
    sofa: _InitialView
    begin: 1283
@@ -13809,6 +13803,12 @@ Token
       begin: 1283
       end: 1291
       PosValue: "NN"
+[Schwäche]
+NN
+   sofa: _InitialView
+   begin: 1283
+   end: 1291
+   PosValue: "NN"
 [des Texaners]
 Constituent
    sofa: _InitialView
@@ -13897,12 +13897,6 @@ ART
    end: 1295
    PosValue: "ART"
 [Texaners]
-NN
-   sofa: _InitialView
-   begin: 1296
-   end: 1304
-   PosValue: "NN"
-[Texaners]
 Lemma
    sofa: _InitialView
    begin: 1296
@@ -13953,6 +13947,12 @@ Token
       begin: 1296
       end: 1304
       PosValue: "NN"
+[Texaners]
+NN
+   sofa: _InitialView
+   begin: 1296
+   end: 1304
+   PosValue: "NN"
 [nennen]
 Lemma
    sofa: _InitialView
@@ -14070,12 +14070,6 @@ ART
    end: 1315
    PosValue: "ART"
 [Befragten]
-NN
-   sofa: _InitialView
-   begin: 1316
-   end: 1325
-   PosValue: "NN"
-[Befragten]
 Lemma
    sofa: _InitialView
    begin: 1316
@@ -14119,6 +14113,12 @@ Token
       begin: 1316
       end: 1325
       PosValue: "NN"
+[Befragten]
+NN
+   sofa: _InitialView
+   begin: 1316
+   end: 1325
+   PosValue: "NN"
 [seinen Mangel an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14193,12 +14193,6 @@ Token
       end: 1332
       PosValue: "PPOSAT"
 [Mangel]
-NN
-   sofa: _InitialView
-   begin: 1333
-   end: 1339
-   PosValue: "NN"
-[Mangel]
 Lemma
    sofa: _InitialView
    begin: 1333
@@ -14242,6 +14236,12 @@ Token
       begin: 1333
       end: 1339
       PosValue: "NN"
+[Mangel]
+NN
+   sofa: _InitialView
+   begin: 1333
+   end: 1339
+   PosValue: "NN"
 [an Erfahrung auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14330,12 +14330,6 @@ Token
       end: 1342
       PosValue: "APPR"
 [Erfahrung]
-NN
-   sofa: _InitialView
-   begin: 1343
-   end: 1352
-   PosValue: "NN"
-[Erfahrung]
 Lemma
    sofa: _InitialView
    begin: 1343
@@ -14386,6 +14380,12 @@ Token
       begin: 1343
       end: 1352
       PosValue: "NN"
+[Erfahrung]
+NN
+   sofa: _InitialView
+   begin: 1343
+   end: 1352
+   PosValue: "NN"
 [auf dem politischen Parkett]
 Constituent
    sofa: _InitialView
@@ -14616,12 +14616,6 @@ Token
       end: 1372
       PosValue: "ADJA"
 [Parkett]
-NN
-   sofa: _InitialView
-   begin: 1373
-   end: 1380
-   PosValue: "NN"
-[Parkett]
 Lemma
    sofa: _InitialView
    begin: 1373
@@ -14679,6 +14673,12 @@ Token
       begin: 1373
       end: 1380
       PosValue: "NN"
+[Parkett]
+NN
+   sofa: _InitialView
+   begin: 1373
+   end: 1380
+   PosValue: "NN"
 [.]
 PUNC
    sofa: _InitialView
@@ -14948,12 +14948,6 @@ CONJ
    end: 1401
    PosValue: "KOUS"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 1402
-   end: 1407
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 1402
@@ -14997,6 +14991,12 @@ Token
       begin: 1402
       end: 1407
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 1402
+   end: 1407
+   PosValue: "NE"
 [mit seinem Befehlston auf dem Capitol gegen eine Wand laufen]
 Constituent
    sofa: _InitialView
@@ -15193,12 +15193,6 @@ Token
       end: 1418
       PosValue: "PPOSAT"
 [Befehlston]
-NN
-   sofa: _InitialView
-   begin: 1419
-   end: 1429
-   PosValue: "NN"
-[Befehlston]
 Lemma
    sofa: _InitialView
    begin: 1419
@@ -15256,6 +15250,12 @@ Token
       begin: 1419
       end: 1429
       PosValue: "NN"
+[Befehlston]
+NN
+   sofa: _InitialView
+   begin: 1419
+   end: 1429
+   PosValue: "NN"
 [auf dem Capitol]
 Constituent
    sofa: _InitialView
@@ -15422,12 +15422,6 @@ ART
    end: 1437
    PosValue: "ART"
 [Capitol]
-NP
-   sofa: _InitialView
-   begin: 1438
-   end: 1445
-   PosValue: "NE"
-[Capitol]
 Lemma
    sofa: _InitialView
    begin: 1438
@@ -15485,6 +15479,12 @@ Token
       begin: 1438
       end: 1445
       PosValue: "NE"
+[Capitol]
+NP
+   sofa: _InitialView
+   begin: 1438
+   end: 1445
+   PosValue: "NE"
 [gegen eine Wand]
 Constituent
    sofa: _InitialView
@@ -15651,12 +15651,6 @@ ART
    end: 1456
    PosValue: "ART"
 [Wand]
-NN
-   sofa: _InitialView
-   begin: 1457
-   end: 1461
-   PosValue: "NN"
-[Wand]
 Lemma
    sofa: _InitialView
    begin: 1457
@@ -15714,6 +15708,12 @@ Token
       begin: 1457
       end: 1461
       PosValue: "NN"
+[Wand]
+NN
+   sofa: _InitialView
+   begin: 1457
+   end: 1461
+   PosValue: "NN"
 [laufen]
 Lemma
    sofa: _InitialView
@@ -16084,12 +16084,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Edward]
-NP
-   sofa: _InitialView
-   begin: 1493
-   end: 1499
-   PosValue: "NE"
-[Edward]
 Lemma
    sofa: _InitialView
    begin: 1493
@@ -16140,11 +16134,11 @@ Token
       begin: 1493
       end: 1499
       PosValue: "NE"
-[Brandon]
+[Edward]
 NP
    sofa: _InitialView
-   begin: 1500
-   end: 1507
+   begin: 1493
+   end: 1499
    PosValue: "NE"
 [Brandon]
 Lemma
@@ -16197,6 +16191,12 @@ Token
       begin: 1500
       end: 1507
       PosValue: "NE"
+[Brandon]
+NP
+   sofa: _InitialView
+   begin: 1500
+   end: 1507
+   PosValue: "NE"
 [von dem Unternehmen National City in Ohio]
 Constituent
    sofa: _InitialView
@@ -16342,12 +16342,6 @@ ART
    end: 1515
    PosValue: "ART"
 [Unternehmen]
-NN
-   sofa: _InitialView
-   begin: 1516
-   end: 1527
-   PosValue: "NN"
-[Unternehmen]
 Lemma
    sofa: _InitialView
    begin: 1516
@@ -16398,6 +16392,12 @@ Token
       begin: 1516
       end: 1527
       PosValue: "NN"
+[Unternehmen]
+NN
+   sofa: _InitialView
+   begin: 1516
+   end: 1527
+   PosValue: "NN"
 [National City]
 Constituent
    sofa: _InitialView
@@ -16435,12 +16435,6 @@ Constituent
       syntacticFunction: "--"
    children: FSArray
    syntacticFunction: "--"
-[National]
-NP
-   sofa: _InitialView
-   begin: 1528
-   end: 1536
-   PosValue: "NE"
 [National]
 Lemma
    sofa: _InitialView
@@ -16499,11 +16493,11 @@ Token
       begin: 1528
       end: 1536
       PosValue: "NE"
-[City]
+[National]
 NP
    sofa: _InitialView
-   begin: 1537
-   end: 1541
+   begin: 1528
+   end: 1536
    PosValue: "NE"
 [City]
 Lemma
@@ -16563,6 +16557,12 @@ Token
       begin: 1537
       end: 1541
       PosValue: "NE"
+[City]
+NP
+   sofa: _InitialView
+   begin: 1537
+   end: 1541
+   PosValue: "NE"
 [in Ohio]
 Constituent
    sofa: _InitialView
@@ -16665,12 +16665,6 @@ Token
       end: 1544
       PosValue: "APPR"
 [Ohio]
-NP
-   sofa: _InitialView
-   begin: 1545
-   end: 1549
-   PosValue: "NE"
-[Ohio]
 Lemma
    sofa: _InitialView
    begin: 1545
@@ -16728,6 +16722,12 @@ Token
       begin: 1545
       end: 1549
       PosValue: "NE"
+[Ohio]
+NP
+   sofa: _InitialView
+   begin: 1545
+   end: 1549
+   PosValue: "NE"
 [:]
 PUNC
    sofa: _InitialView
@@ -17600,12 +17600,6 @@ Token
       end: 1619
       PosValue: "ADJA"
 [Stil]
-NN
-   sofa: _InitialView
-   begin: 1620
-   end: 1624
-   PosValue: "NN"
-[Stil]
 Lemma
    sofa: _InitialView
    begin: 1620
@@ -17663,6 +17657,12 @@ Token
       begin: 1620
       end: 1624
       PosValue: "NN"
+[Stil]
+NN
+   sofa: _InitialView
+   begin: 1620
+   end: 1624
+   PosValue: "NN"
 [im Weißen Haus]
 Constituent
    sofa: _InitialView
@@ -17973,12 +17973,6 @@ Token
       end: 1634
       PosValue: "ADJA"
 [Haus]
-NN
-   sofa: _InitialView
-   begin: 1635
-   end: 1639
-   PosValue: "NN"
-[Haus]
 Lemma
    sofa: _InitialView
    begin: 1635
@@ -18057,6 +18051,12 @@ Token
       begin: 1635
       end: 1639
       PosValue: "NN"
+[Haus]
+NN
+   sofa: _InitialView
+   begin: 1635
+   end: 1639
+   PosValue: "NN"
 [dem Land]
 Constituent
    sofa: _InitialView
@@ -18159,12 +18159,6 @@ ART
    end: 1643
    PosValue: "ART"
 [Land]
-NN
-   sofa: _InitialView
-   begin: 1644
-   end: 1648
-   PosValue: "NN"
-[Land]
 Lemma
    sofa: _InitialView
    begin: 1644
@@ -18222,6 +18216,12 @@ Token
       begin: 1644
       end: 1648
       PosValue: "NN"
+[Land]
+NN
+   sofa: _InitialView
+   begin: 1644
+   end: 1648
+   PosValue: "NN"
 [ein Gefallen]
 Constituent
    sofa: _InitialView
@@ -18310,12 +18310,6 @@ ART
    end: 1652
    PosValue: "ART"
 [Gefallen]
-NN
-   sofa: _InitialView
-   begin: 1653
-   end: 1661
-   PosValue: "NN"
-[Gefallen]
 Lemma
    sofa: _InitialView
    begin: 1653
@@ -18366,6 +18360,12 @@ Token
       begin: 1653
       end: 1661
       PosValue: "NN"
+[Gefallen]
+NN
+   sofa: _InitialView
+   begin: 1653
+   end: 1661
+   PosValue: "NN"
 [getan]
 Lemma
    sofa: _InitialView
@@ -18864,12 +18864,6 @@ Token
       end: 1708
       PosValue: "ADJA"
 [Diktator]
-NN
-   sofa: _InitialView
-   begin: 1709
-   end: 1717
-   PosValue: "NN"
-[Diktator]
 Lemma
    sofa: _InitialView
    begin: 1709
@@ -18920,6 +18914,12 @@ Token
       begin: 1709
       end: 1717
       PosValue: "NN"
+[Diktator]
+NN
+   sofa: _InitialView
+   begin: 1709
+   end: 1717
+   PosValue: "NN"
 [-]
 PUNC
    sofa: _InitialView
@@ -19260,12 +19260,6 @@ Token
       end: 1744
       PosValue: "PPOSAT"
 [System]
-NN
-   sofa: _InitialView
-   begin: 1745
-   end: 1751
-   PosValue: "NN"
-[System]
 Lemma
    sofa: _InitialView
    begin: 1745
@@ -19316,6 +19310,12 @@ Token
       begin: 1745
       end: 1751
       PosValue: "NN"
+[System]
+NN
+   sofa: _InitialView
+   begin: 1745
+   end: 1751
+   PosValue: "NN"
 [.]
 PUNC
    sofa: _InitialView
@@ -19592,12 +19592,6 @@ Token
       end: 1772
       PosValue: "ADJA"
 [Manager]
-NN
-   sofa: _InitialView
-   begin: 1773
-   end: 1780
-   PosValue: "NN"
-[Manager]
 Lemma
    sofa: _InitialView
    begin: 1773
@@ -19641,6 +19635,12 @@ Token
       begin: 1773
       end: 1780
       PosValue: "NN"
+[Manager]
+NN
+   sofa: _InitialView
+   begin: 1773
+   end: 1780
+   PosValue: "NN"
 [vermutet]
 Lemma
    sofa: _InitialView
@@ -20004,12 +20004,6 @@ ART
    end: 1807
    PosValue: "ART"
 [Dogmatiker]
-NN
-   sofa: _InitialView
-   begin: 1808
-   end: 1818
-   PosValue: "NN"
-[Dogmatiker]
 Lemma
    sofa: _InitialView
    begin: 1808
@@ -20060,6 +20054,12 @@ Token
       begin: 1808
       end: 1818
       PosValue: "NN"
+[Dogmatiker]
+NN
+   sofa: _InitialView
+   begin: 1808
+   end: 1818
+   PosValue: "NN"
 [wie Perot]
 Constituent
    sofa: _InitialView
@@ -20162,12 +20162,6 @@ CONJ
    end: 1822
    PosValue: "KOKOM"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 1823
-   end: 1828
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 1823
@@ -20225,6 +20219,12 @@ Token
       begin: 1823
       end: 1828
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 1823
+   end: 1828
+   PosValue: "NE"
 [in Washington]
 Constituent
    sofa: _InitialView
@@ -20327,12 +20327,6 @@ Token
       end: 1831
       PosValue: "APPR"
 [Washington]
-NP
-   sofa: _InitialView
-   begin: 1832
-   end: 1842
-   PosValue: "NE"
-[Washington]
 Lemma
    sofa: _InitialView
    begin: 1832
@@ -20390,6 +20384,12 @@ Token
       begin: 1832
       end: 1842
       PosValue: "NE"
+[Washington]
+NP
+   sofa: _InitialView
+   begin: 1832
+   end: 1842
+   PosValue: "NE"
 [schwer]
 Lemma
    sofa: _InitialView
@@ -21135,12 +21135,6 @@ ART
    end: 1888
    PosValue: "ART"
 [Kongreß]
-NN
-   sofa: _InitialView
-   begin: 1889
-   end: 1896
-   PosValue: "NN"
-[Kongreß]
 Lemma
    sofa: _InitialView
    begin: 1889
@@ -21212,6 +21206,12 @@ Token
       begin: 1889
       end: 1896
       PosValue: "NN"
+[Kongreß]
+NN
+   sofa: _InitialView
+   begin: 1889
+   end: 1896
+   PosValue: "NN"
 [ab]
 Lemma
    sofa: _InitialView
@@ -21516,12 +21516,6 @@ Token
       end: 1919
       PosValue: "ADJA"
 [Geschäftsführer]
-NN
-   sofa: _InitialView
-   begin: 1920
-   end: 1935
-   PosValue: "NN"
-[Geschäftsführer]
 Lemma
    sofa: _InitialView
    begin: 1920
@@ -21565,6 +21559,12 @@ Token
       begin: 1920
       end: 1935
       PosValue: "NN"
+[Geschäftsführer]
+NN
+   sofa: _InitialView
+   begin: 1920
+   end: 1935
+   PosValue: "NN"
 [,]
 PUNC
    sofa: _InitialView
@@ -21847,12 +21847,6 @@ Token
       end: 1950
       PosValue: "APPR"
 [fünf]
-CARD
-   sofa: _InitialView
-   begin: 1951
-   end: 1955
-   PosValue: "CARD"
-[fünf]
 Lemma
    sofa: _InitialView
    begin: 1951
@@ -21910,12 +21904,12 @@ Token
       begin: 1951
       end: 1955
       PosValue: "CARD"
-[Konzernen]
-NN
+[fünf]
+CARD
    sofa: _InitialView
-   begin: 1956
-   end: 1965
-   PosValue: "NN"
+   begin: 1951
+   end: 1955
+   PosValue: "CARD"
 [Konzernen]
 Lemma
    sofa: _InitialView
@@ -21974,6 +21968,12 @@ Token
       begin: 1956
       end: 1965
       PosValue: "NN"
+[Konzernen]
+NN
+   sofa: _InitialView
+   begin: 1956
+   end: 1965
+   PosValue: "NN"
 [im Aufsichtsgremium]
 Constituent
    sofa: _InitialView
@@ -22076,12 +22076,6 @@ Token
       end: 1968
       PosValue: "APPRART"
 [Aufsichtsgremium]
-NN
-   sofa: _InitialView
-   begin: 1969
-   end: 1985
-   PosValue: "NN"
-[Aufsichtsgremium]
 Lemma
    sofa: _InitialView
    begin: 1969
@@ -22139,6 +22133,12 @@ Token
       begin: 1969
       end: 1985
       PosValue: "NN"
+[Aufsichtsgremium]
+NN
+   sofa: _InitialView
+   begin: 1969
+   end: 1985
+   PosValue: "NN"
 [sitzt]
 Lemma
    sofa: _InitialView
@@ -22759,12 +22759,6 @@ CONJ
    end: 2037
    PosValue: "KOUS"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 2038
-   end: 2043
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 2038
@@ -22822,6 +22816,12 @@ Token
       begin: 2038
       end: 2043
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 2038
+   end: 2043
+   PosValue: "NE"
 [als Präsident]
 Constituent
    sofa: _InitialView
@@ -22938,12 +22938,6 @@ Token
       end: 2047
       PosValue: "APPR"
 [Präsident]
-NN
-   sofa: _InitialView
-   begin: 2048
-   end: 2057
-   PosValue: "NN"
-[Präsident]
 Lemma
    sofa: _InitialView
    begin: 2048
@@ -23008,6 +23002,12 @@ Token
       begin: 2048
       end: 2057
       PosValue: "NN"
+[Präsident]
+NN
+   sofa: _InitialView
+   begin: 2048
+   end: 2057
+   PosValue: "NN"
 [eine absolute Katastrophe]
 Constituent
    sofa: _InitialView
@@ -23195,12 +23195,6 @@ Token
       end: 2071
       PosValue: "ADJA"
 [Katastrophe]
-NN
-   sofa: _InitialView
-   begin: 2072
-   end: 2083
-   PosValue: "NN"
-[Katastrophe]
 Lemma
    sofa: _InitialView
    begin: 2072
@@ -23265,6 +23259,12 @@ Token
       begin: 2072
       end: 2083
       PosValue: "NN"
+[Katastrophe]
+NN
+   sofa: _InitialView
+   begin: 2072
+   end: 2083
+   PosValue: "NN"
 [wäre]
 Lemma
    sofa: _InitialView
@@ -23641,12 +23641,6 @@ ART
    end: 2116
    PosValue: "ART"
 [Magazin]
-NN
-   sofa: _InitialView
-   begin: 2117
-   end: 2124
-   PosValue: "NN"
-[Magazin]
 Lemma
    sofa: _InitialView
    begin: 2117
@@ -23690,6 +23684,12 @@ Token
       begin: 2117
       end: 2124
       PosValue: "NN"
+[Magazin]
+NN
+   sofa: _InitialView
+   begin: 2117
+   end: 2124
+   PosValue: "NN"
 [zufolge]
 PP
    sofa: _InitialView
@@ -24015,12 +24015,6 @@ Token
       end: 2157
       PosValue: "ADJA"
 [Firmen]
-NN
-   sofa: _InitialView
-   begin: 2158
-   end: 2164
-   PosValue: "NN"
-[Firmen]
 Lemma
    sofa: _InitialView
    begin: 2158
@@ -24064,6 +24058,12 @@ Token
       begin: 2158
       end: 2164
       PosValue: "NN"
+[Firmen]
+NN
+   sofa: _InitialView
+   begin: 2158
+   end: 2164
+   PosValue: "NN"
 [viele Unternehmer , die meinen , Perot sei einer von ihnen , und die den Texaner unterstützen]
 Constituent
    sofa: _InitialView
@@ -24138,12 +24138,6 @@ Token
       end: 2170
       PosValue: "PIAT"
 [Unternehmer]
-NN
-   sofa: _InitialView
-   begin: 2171
-   end: 2182
-   PosValue: "NN"
-[Unternehmer]
 Lemma
    sofa: _InitialView
    begin: 2171
@@ -24187,6 +24181,12 @@ Token
       begin: 2171
       end: 2182
       PosValue: "NN"
+[Unternehmer]
+NN
+   sofa: _InitialView
+   begin: 2171
+   end: 2182
+   PosValue: "NN"
 [,]
 PUNC
    sofa: _InitialView
@@ -24499,12 +24499,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 2198
-   end: 2203
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 2198
@@ -24569,6 +24563,12 @@ Token
       begin: 2198
       end: 2203
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 2198
+   end: 2203
+   PosValue: "NE"
 [sei]
 Lemma
    sofa: _InitialView
@@ -25307,12 +25307,6 @@ ART
    end: 2237
    PosValue: "ART"
 [Texaner]
-NN
-   sofa: _InitialView
-   begin: 2238
-   end: 2245
-   PosValue: "NN"
-[Texaner]
 Lemma
    sofa: _InitialView
    begin: 2238
@@ -25377,6 +25371,12 @@ Token
       begin: 2238
       end: 2245
       PosValue: "NN"
+[Texaner]
+NN
+   sofa: _InitialView
+   begin: 2238
+   end: 2245
+   PosValue: "NN"
 [unterstützen]
 Lemma
    sofa: _InitialView
@@ -25538,12 +25538,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Zwei]
-CARD
-   sofa: _InitialView
-   begin: 2261
-   end: 2265
-   PosValue: "CARD"
-[Zwei]
 Lemma
    sofa: _InitialView
    begin: 2261
@@ -25587,12 +25581,12 @@ Token
       begin: 2261
       end: 2265
       PosValue: "CARD"
-[Themen]
-NN
+[Zwei]
+CARD
    sofa: _InitialView
-   begin: 2266
-   end: 2272
-   PosValue: "NN"
+   begin: 2261
+   end: 2265
+   PosValue: "CARD"
 [Themen]
 Lemma
    sofa: _InitialView
@@ -25637,6 +25631,12 @@ Token
       begin: 2266
       end: 2272
       PosValue: "NN"
+[Themen]
+NN
+   sofa: _InitialView
+   begin: 2266
+   end: 2272
+   PosValue: "NN"
 [,]
 PUNC
    sofa: _InitialView
@@ -25761,12 +25761,6 @@ Token
       end: 2278
       PosValue: "PRELS"
 [Perot]
-NP
-   sofa: _InitialView
-   begin: 2279
-   end: 2284
-   PosValue: "NE"
-[Perot]
 Lemma
    sofa: _InitialView
    begin: 2279
@@ -25817,6 +25811,12 @@ Token
       begin: 2279
       end: 2284
       PosValue: "NE"
+[Perot]
+NP
+   sofa: _InitialView
+   begin: 2279
+   end: 2284
+   PosValue: "NE"
 [immer wieder]
 Constituent
    sofa: _InitialView
@@ -26106,12 +26106,6 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Rezession]
-NN
-   sofa: _InitialView
-   begin: 2310
-   end: 2319
-   PosValue: "NN"
-[Rezession]
 Lemma
    sofa: _InitialView
    begin: 2310
@@ -26162,6 +26156,12 @@ Token
       begin: 2310
       end: 2319
       PosValue: "NN"
+[Rezession]
+NN
+   sofa: _InitialView
+   begin: 2310
+   end: 2319
+   PosValue: "NN"
 [und]
 Lemma
    sofa: _InitialView
@@ -26220,12 +26220,6 @@ CONJ
    end: 2323
    PosValue: "KON"
 [Bürokratie]
-NN
-   sofa: _InitialView
-   begin: 2324
-   end: 2334
-   PosValue: "NN"
-[Bürokratie]
 Lemma
    sofa: _InitialView
    begin: 2324
@@ -26276,6 +26270,12 @@ Token
       begin: 2324
       end: 2334
       PosValue: "NN"
+[Bürokratie]
+NN
+   sofa: _InitialView
+   begin: 2324
+   end: 2334
+   PosValue: "NN"
 [,]
 PUNC
    sofa: _InitialView
