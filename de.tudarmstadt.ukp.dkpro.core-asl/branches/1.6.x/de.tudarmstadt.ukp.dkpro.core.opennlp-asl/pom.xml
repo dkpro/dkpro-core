@@ -420,23 +420,23 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Constants from this module are inlined -->
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDepndency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
 							<!-- Models not detected by byte-code analysis -->
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-de-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-de-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-en-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-it-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-it-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-it-perceptron</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-chunker-en-default</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-ner-en-person</usedDepndency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-perceptron</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-de-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-de-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-en-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-sv-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-it-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-it-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-it-perceptron</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-es-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-chunker-en-default</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-ner-en-person</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>

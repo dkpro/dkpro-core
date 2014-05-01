@@ -100,9 +100,9 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-en-maxent</usedDepndency>
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</usedDepndency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-en-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-en-maxent</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>

@@ -111,7 +111,7 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDepndency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>

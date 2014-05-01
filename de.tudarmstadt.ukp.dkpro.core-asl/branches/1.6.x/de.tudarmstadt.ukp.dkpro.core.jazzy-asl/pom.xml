@@ -74,7 +74,7 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Constants from this module are inlined -->
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDepndency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>

@@ -80,9 +80,9 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Constants from this module are inlined -->
-							<usedDepndency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDepndency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
 							<!-- Models not detected by byte-code analysis -->
-							<usedDepndency>org.languagetool:language-all</usedDepndency>
+							<usedDependency>org.languagetool:language-all</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>
