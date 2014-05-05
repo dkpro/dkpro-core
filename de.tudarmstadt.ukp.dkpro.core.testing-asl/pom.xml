@@ -23,6 +23,7 @@
 		<version>1.7.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+	<name>DKPro Core ASL - Unit Testing Support</name>
 	<dependencies>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -64,6 +65,10 @@
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
 	</dependencies>
-	<name>DKPro Core ASL - Unit Testing Support</name>
 </project>
