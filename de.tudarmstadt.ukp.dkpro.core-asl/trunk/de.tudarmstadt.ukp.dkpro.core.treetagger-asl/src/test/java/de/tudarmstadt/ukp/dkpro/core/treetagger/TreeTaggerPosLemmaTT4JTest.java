@@ -54,7 +54,7 @@ class TreeTaggerPosLemmaTT4JTest
 	}
 
 	@Test
-	public void treeTaggerAnnotatorEnglishTest()
+	public void testEnglish()
 		throws Exception
 	{
         String[] tagset = { "#", "$", "''", "(", ")", ",", ":", "CC", "CD", "DT", "EX", "FW", "IN",
@@ -86,7 +86,7 @@ class TreeTaggerPosLemmaTT4JTest
 	}
 
 	@Test
-	public void treeTaggerAnnotatorGermanTest()
+	public void testGerman()
 		throws Exception
     {
         String[] tagset = { "$(", "$,", "$.", "ADJ", "ADJA", "ADJD", "ADV", "APPO", "APPR",
@@ -108,7 +108,7 @@ class TreeTaggerPosLemmaTT4JTest
     }
 
 	@Test
-	public void treeTaggerAnnotatorDutchTest()
+	public void testDutch()
 		throws Exception
     {
         String[] tagset = { "$.", "adj", "adj*kop", "adjabbr", "adv", "advabbr", "conjcoord",
@@ -132,7 +132,7 @@ class TreeTaggerPosLemmaTT4JTest
 
 	@Test
 	@Ignore("Slovene model currently not in Artifactory because we do not know tagset yet")
-	public void treeTaggerAnnotatorSloveneTest()
+	public void testSlovene()
 		throws Exception
     {
         String[] tagset = { };
@@ -150,7 +150,7 @@ class TreeTaggerPosLemmaTT4JTest
 
     @Test
     public
-    void treeTaggerAnnotatorChineseTest()
+    void testChinese()
     	throws Exception
     {
         String[] tagset = { "a", "ad", "ag", "an", "b", "bg", "c", "d", "dg", "e", "ew", "f", "g",
@@ -292,7 +292,7 @@ class TreeTaggerPosLemmaTT4JTest
 		checkModelsAndBinary(language);
 
         AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class,
-        		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
+                TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
 

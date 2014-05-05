@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2010
+ * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -17,256 +17,273 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.treetagger;
 
-import static org.apache.uima.fit.util.CasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.util.Level.INFO;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Properties;
 
-import org.annolab.tt4j.ModelResolver;
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
+import org.annolab.tt4j.TreeTaggerException;
+import org.annolab.tt4j.TreeTaggerModelUtil;
+import org.annolab.tt4j.TreeTaggerWrapper;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
-import org.apache.uima.cas.TypeSystem;
-import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.apache.uima.util.Level;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver;
 
 /**
- * @author Richard Eckart de Castilho
+ * Chunk annotator using TreeTagger.
  */
-public
-class TreeTaggerChunkerTT4J
-extends TreeTaggerTT4JBase<AnnotationFS>
+@TypeCapability(
+	    inputs = {
+	        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
+		outputs = {
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+public class TreeTaggerChunkerTT4J
+	extends JCasAnnotator_ImplBase
 {
 	/**
-	 * Location of the mapping file for chunk tags to UIMA types.
+	 * Use this language instead of the document language to resolve the model.
 	 */
-	public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
-	protected String chunkMappingLocation;
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	protected String language;
 
-//	public static final String PARAM_TYPE_ADAPTER = "TypeAdapter";
-//	@ConfigurationParameter(name=PARAM_TYPE_ADAPTER, mandatory=false)
-	private String typeAdapterClass;
+	/**
+	 * Override the default variant used to locate the model.
+	 */
+	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+	protected String variant;
 
-	private MappingProvider chunkerMappingProvider;
+    /**
+     * Use this TreeTagger executable instead of trying to locate the executable automatically.
+     */
+    public static final String PARAM_EXECUTABLE_PATH = "executablePath";
+    @ConfigurationParameter(name = PARAM_EXECUTABLE_PATH, mandatory = false)
+    private File executablePath;
+    
+	/**
+	 * Load the model from this location instead of locating the model automatically.
+	 */
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
 
-	private Type posType;
-	private Type chunkType;
-	private Feature chunkValue;
+    /**
+     * Location of the mapping file for chunk tags to UIMA types.
+     */
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
+    protected String chunkMappingLocation;
 
-    @Override
-	public void initialize(UimaContext context)
-    throws ResourceInitializationException
-    {
-    	super.initialize(context);
+	/**
+	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
+	 * spaming the heap with thousands of strings representing only a few different tags.
+	 *
+	 * Default: {@code true}
+	 */
+	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
+	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
+	private boolean internTags;
 
-    	treetagger.setEpsilon(0.00000001);
-    	treetagger.setHyphenHeuristics(true);
+	/**
+	 * Log the tag set(s) when a model is loaded.
+	 *
+	 * Default: {@code false}
+	 */
+	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
+	protected boolean printTagSet;
 
-		chunkerMappingProvider = new MappingProvider();
-		chunkerMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${chunker.tagset}-chunker.map");
-		chunkerMappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
-		chunkerMappingProvider.setDefault("chunker.tagset", "default");
-		chunkerMappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
-		chunkerMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-//		posMappingProvider.addImport("pos.tagset", modelProvider);
-    }
-
-	@Override
-	public void typeSystemInit(TypeSystem aTypeSystem)
-		throws AnalysisEngineProcessException
-	{
-		super.typeSystemInit(aTypeSystem);
-
-		posType = aTypeSystem.getType(POS.class.getName());
-		chunkType = aTypeSystem.getType(Chunk.class.getName());
-		chunkValue = chunkType.getFeatureByBaseName("chunkValue");
-	}
-
-    @Override
-    public void destroy()
-    {
-    	typeAdapterClass = null;
-    	super.destroy();
-    }
-
-	@Override
-	public void process(final CAS aCas)
-	throws AnalysisEngineProcessException
-	{
-		getLogger().debug("Running TreeTagger chunker");
-		try {
-			final String lang;
-
-	        // If language override is not active && the document language is
-			// "x-unspecified" which means that is has not been set at all
-			// then we should throw an exception, as we do not know what language to
-			// use. Using a default language in this case, could lead to very
-			// confusing results for the user that are hard to track down.
-	        if (language != null) {
-	            lang = language;
-	        }
-	        else if (
-	        		aCas.getDocumentLanguage() != null &&
-	        		!aCas.getDocumentLanguage().equals("x-unspecified")
-	        ) {
-	            lang = aCas.getDocumentLanguage();
-	        }
-	        else {
-	            throw new AnalysisEngineProcessException(new Throwable(
-	            		"Neither the LanguageCode parameter nor the document " +
-	            		"language is set. Do not know what language to use. " +
-	            		"Exiting."));
-	        }
-
-			// Set the handler creating new UIMA annotations from the analyzed
-			// tokens
-			final AtomicInteger count = new AtomicInteger(0);
-        	treetagger.setModel(lang);
-			final TokenHandler<AnnotationFS> handler = new TokenHandler<AnnotationFS>()
-			{
-				private String openChunk;
-				private int start;
-				private int end;
-
-				@Override
-				public void token(AnnotationFS aPOS, String aChunk,
-						String aDummy)
-				{
-					synchronized (aCas) {
-						if (aChunk == null) {
-							// End of processing signal
-							chunkComplete();
-							return;
-						}
-
-						String fields1[] = aChunk.split("/");
-						String fields2[] = fields1[1].split("-");
-						//String tag = fields1[0];
-						String flag = fields2.length == 2 ? fields2[0] : "NONE";
-						String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
-
-						// Start of a new hunk
-						if (!chunk.equals(openChunk) || "B".equals(flag)) {
-							if (openChunk != null) {
-								// End of previous chunk
-								chunkComplete();
-							}
-
-							openChunk = chunk;
-							start = aPOS.getBegin();
-						}
-
-						// Record how much of the chunk we have seen so far
-						end = aPOS.getEnd();
-					}
-				}
-
-				private void chunkComplete()
-				{
-					if (openChunk != null) {
-						Type chunkType = chunkerMappingProvider.getTagType(openChunk);
-						AnnotationFS chunk = aCas.createAnnotation(chunkType, start, end);
-						chunk.setStringValue(chunkValue, isInternStrings() ? openChunk.intern() :
-							openChunk);
-						aCas.addFsToIndexes(chunk);
-
-						count.getAndIncrement();
-						openChunk = null;
-					}
-				}
-			};
-			treetagger.setHandler(handler);
-
-			// Must be done after configuring the TreeTagger since we import from it
-			chunkerMappingProvider.configure(aCas);
-
-			List<AnnotationFS> tokens = new ArrayList<AnnotationFS>();
-			for (AnnotationFS fs : select(aCas, posType)) {
-				tokens.add(fs);
-			}
-
-			treetagger.process(tokens);
-			// Commit the final chunk
-			handler.token(null, null, null);
-
-			getContext().getLogger().log(Level.FINE, "Parsed " + count.get() + " chunks");
-		}
-		catch (Exception e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-	}
+    /**
+     * TT4J setting: Disable some sanity checks, e.g. whether tokens contain line breaks (which is
+     * not allowed). Turning this on will increase your performance, but the wrapper may throw
+     * exceptions if illegal data is provided.
+     */
+    public static final String PARAM_PERFORMANCE_MODE = "performanceMode";
+    @ConfigurationParameter(name = PARAM_PERFORMANCE_MODE, mandatory = true, defaultValue = "false")
+    private boolean performanceMode;
+	
+	private CasConfigurableProviderBase<TreeTaggerWrapper<POS>> modelProvider;
+	private MappingProvider mappingProvider;
 
 	@Override
-	@SuppressWarnings("unchecked")
-	protected TokenAdapter<AnnotationFS> getAdapter()
+	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
 	{
-		try {
-	    	if (typeAdapterClass == null) {
-	    		typeAdapterClass = DKProPOSTokenAdapter.class.getName();
-	    	}
+		super.initialize(aContext);
 
-			return (TokenAdapter<AnnotationFS>) Class.forName(typeAdapterClass).newInstance();
-		}
-		catch (Exception e) {
-			throw new ResourceInitializationException(e);
-		}
+		modelProvider = new ModelProviderBase<TreeTaggerWrapper<POS>>() {
+		    private TreeTaggerWrapper<POS> treetagger;
+		    
+			{
+                setContextObject(TreeTaggerChunkerTT4J.this);
+
+                setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-chunker-${language}-${variant}");
+				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.properties");
+                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-default-variants.map");
+				setDefault(VARIANT, "le"); // le = little-endian
+
+				setOverride(LOCATION, modelLocation);
+				setOverride(LANGUAGE, language);
+				setOverride(VARIANT, variant);
+				
+				treetagger = new TreeTaggerWrapper<POS>();
+	            treetagger.setPerformanceMode(performanceMode);
+		        treetagger.setEpsilon(0.00000001);
+		        treetagger.setHyphenHeuristics(true);
+	            DKProExecutableResolver executableProvider = new DKProExecutableResolver(treetagger);
+	            executableProvider.setExecutablePath(executablePath);
+	            treetagger.setExecutableProvider(executableProvider);
+                treetagger.setAdapter(new TokenAdapter<POS>()
+                {
+                    @Override
+                    public String getText(POS aPos)
+                    {
+                        synchronized (aPos.getCAS()) {
+                            return aPos.getCoveredText() + "-" + aPos.getPosValue();
+                        }
+                    }
+                });
+			}
+
+			@Override
+			protected TreeTaggerWrapper<POS> produceResource(URL aUrl)
+			    throws IOException
+			{
+			    Properties meta = getResourceMetaData();
+			    String encoding = meta.getProperty("encoding");
+			    String tagset = meta.getProperty("chunk.tagset");
+			    
+			    File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
+			    
+                // Reconfigure tagger
+                treetagger.setModel(modelFile.getPath() + ":" + encoding);
+                
+                // Get tagset
+                List<String> tags = TreeTaggerModelUtil.getTagset(modelFile, encoding);
+                SingletonTagset chunkTags = new SingletonTagset(Chunk.class, tagset);
+                for (String tag : tags) {
+                    String fields1[] = tag.split("/");
+                    String fields2[] = fields1[1].split("-");
+                    String chunkTag = fields2.length == 2 ? fields2[1] : fields2[0];
+                    chunkTags.add(chunkTag);
+                }
+                addTagset(chunkTags);
+
+                if (printTagSet) {
+                    getContext().getLogger().log(INFO, getTagset().toString());
+                }
+
+                return treetagger;
+			}
+		};
+
+        mappingProvider = new MappingProvider();
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/lexmorph/tagset/${language}-${chunk.tagset}-chunker.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
+        mappingProvider.setDefault("chunk.tagset", "default");
+        mappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
+        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 	}
 
 	@Override
-	protected
-	ModelResolver getModelResolver()
+	public void process(final JCas aJCas)
+		throws AnalysisEngineProcessException
 	{
-		return new ChunkerModelResolver(modelPath, modelEncoding);
-	}
+		final CAS cas = aJCas.getCas();
 
-	/**
-	 * @author Richard Eckart de Castilho
-	 */
-	private class ChunkerModelResolver
-		extends DKProModelResolver
-	{
-		public ChunkerModelResolver(File aModelPath, String aModelEncoding)
-		{
-			super(aModelPath, aModelEncoding);
-		}
+		modelProvider.configure(cas);
+		mappingProvider.configure(cas);
+		
+        try {
+            List<POS> posTags = new ArrayList<POS>(select(aJCas, POS.class));
 
-		@Override
-		protected String getType()
-		{
-			return "chunker";
-		}
-	}
+            // Set the handler creating new UIMA annotations from the analyzed tokens
+            final TokenHandler<POS> handler = new TokenHandler<POS>()
+            {
+                private String openChunk;
+                private int start;
+                private int end;
 
-	/**
-	 * @author Richard Eckart de Castilho
-	 */
-	public static class DKProPOSTokenAdapter
-		implements TokenAdapter<AnnotationFS>
-	{
-		@Override
-		public String getText(AnnotationFS aObject)
-		{
-			synchronized (aObject.getCAS()) {
-				Type t = aObject.getCAS().getTypeSystem().getType(POS.class.getName());
-				String pos = aObject.getFeatureValueAsString(t.getFeatureByBaseName("PosValue"));
-				return aObject.getCoveredText()+"-"+pos;
-			}
-		}
+                @Override
+                public void token(POS aPOS, String aChunk, String aDummy)
+                {
+                    synchronized (cas) {
+                        if (aChunk == null) {
+                            // End of processing signal
+                            chunkComplete();
+                            return;
+                        }
+
+                        String fields1[] = aChunk.split("/");
+                        String fields2[] = fields1[1].split("-");
+                        //String tag = fields1[0];
+                        String flag = fields2.length == 2 ? fields2[0] : "NONE";
+                        String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
+
+                        // Start of a new hunk
+                        if (!chunk.equals(openChunk) || "B".equals(flag)) {
+                            if (openChunk != null) {
+                                // End of previous chunk
+                                chunkComplete();
+                            }
+
+                            openChunk = chunk;
+                            start = aPOS.getBegin();
+                        }
+
+                        // Record how much of the chunk we have seen so far
+                        end = aPOS.getEnd();
+                    }
+                }
+
+                private void chunkComplete()
+                {
+                    if (openChunk != null) {
+                        Type chunkType = mappingProvider.getTagType(openChunk);
+                        Chunk chunk = (Chunk) cas.createAnnotation(chunkType, start, end);
+                        chunk.setChunkValue(internTags ? openChunk.intern() : openChunk);
+                        cas.addFsToIndexes(chunk);
+                        openChunk = null;
+                    }
+                }
+            };
+            
+            TreeTaggerWrapper<POS> treetagger = modelProvider.getResource();
+            treetagger.setHandler(handler);
+            treetagger.process(posTags);
+            // Commit the final chunk
+            handler.token(null, null, null);
+        }
+        catch (TreeTaggerException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }		
 	}
 }
