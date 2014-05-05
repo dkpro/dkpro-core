@@ -39,7 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class TreeTaggerChunkerTT4JTest
+public class TreeTaggerChunkerTest
 {
     @Before
     public void setupLogging()
@@ -108,11 +108,11 @@ public class TreeTaggerChunkerTT4JTest
     private JCas runTest(String aLanguage, String aVariant, String aText)
         throws Exception
     {
-        AnalysisEngineDescription tagger = createEngineDescription(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngineDescription tagger = createEngineDescription(TreeTaggerPosTagger.class);
 
-        AnalysisEngineDescription chunker = createEngineDescription(TreeTaggerChunkerTT4J.class,
-                TreeTaggerChunkerTT4J.PARAM_VARIANT, aVariant, 
-                TreeTaggerChunkerTT4J.PARAM_PRINT_TAGSET, true);
+        AnalysisEngineDescription chunker = createEngineDescription(TreeTaggerChunker.class,
+                TreeTaggerChunker.PARAM_VARIANT, aVariant, 
+                TreeTaggerChunker.PARAM_PRINT_TAGSET, true);
         
         AnalysisEngineDescription aggregate = createEngineDescription(tagger, chunker);
         
@@ -123,9 +123,9 @@ public class TreeTaggerChunkerTT4JTest
 			String[] aTagClasses)
 		throws Exception
 	{
-		AnalysisEngine tagger = createEngine(TreeTaggerPosLemmaTT4J.class);
-        AnalysisEngine chunker = createEngine(TreeTaggerChunkerTT4J.class,
-        		TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
+		AnalysisEngine tagger = createEngine(TreeTaggerPosTagger.class);
+        AnalysisEngine chunker = createEngine(TreeTaggerChunker.class,
+        		TreeTaggerPosTagger.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = JCasFactory.createJCas();
         aJCas.setDocumentLanguage(aLanguage);

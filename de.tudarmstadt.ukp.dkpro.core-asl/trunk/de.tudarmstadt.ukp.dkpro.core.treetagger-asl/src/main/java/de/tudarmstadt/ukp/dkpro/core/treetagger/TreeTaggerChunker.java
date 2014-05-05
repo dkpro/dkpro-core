@@ -26,7 +26,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
@@ -50,20 +49,18 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 import de.tudarmstadt.ukp.dkpro.core.treetagger.internal.DKProExecutableResolver;
 
 /**
- * Part-of-Speech and lemmatizer annotator using TreeTagger.
+ * Chunk annotator using TreeTagger.
  */
 @TypeCapability(
 	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+	        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
 		outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
-public class TreeTaggerPosLemmaTT4J
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+public class TreeTaggerChunker
 	extends JCasAnnotator_ImplBase
 {
 	/**
@@ -94,13 +91,12 @@ public class TreeTaggerPosLemmaTT4J
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Location of the mapping file for chunk tags to UIMA types.
+     */
+    public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_CHUNK_MAPPING_LOCATION, mandatory = false)
+    protected String chunkMappingLocation;
 
 	/**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
@@ -129,26 +125,8 @@ public class TreeTaggerPosLemmaTT4J
     public static final String PARAM_PERFORMANCE_MODE = "performanceMode";
     @ConfigurationParameter(name = PARAM_PERFORMANCE_MODE, mandatory = true, defaultValue = "false")
     private boolean performanceMode;
-    
-    /**
-     * Write part-of-speech information.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name=PARAM_WRITE_POS, mandatory=true, defaultValue="true")
-    private boolean writePos;
-
-    /**
-     * Write lemma information.
-     *
-     * Default: {@code true}
-     */
-    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name=PARAM_WRITE_LEMMA, mandatory=true, defaultValue="true")
-    private boolean writeLemma;
 	
-	private CasConfigurableProviderBase<TreeTaggerWrapper<Token>> modelProvider;
+	private CasConfigurableProviderBase<TreeTaggerWrapper<POS>> modelProvider;
 	private MappingProvider mappingProvider;
 
 	@Override
@@ -157,45 +135,47 @@ public class TreeTaggerPosLemmaTT4J
 	{
 		super.initialize(aContext);
 
-		modelProvider = new ModelProviderBase<TreeTaggerWrapper<Token>>() {
-		    private TreeTaggerWrapper<Token> treetagger;
+		modelProvider = new ModelProviderBase<TreeTaggerWrapper<POS>>() {
+		    private TreeTaggerWrapper<POS> treetagger;
 		    
 			{
-                setContextObject(TreeTaggerPosLemmaTT4J.this);
+                setContextObject(TreeTaggerChunker.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-tagger-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-default-variants.map");
+                setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-chunker-${language}-${variant}");
+				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.properties");
+                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-default-variants.map");
 				setDefault(VARIANT, "le"); // le = little-endian
 
 				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 				
-				treetagger = new TreeTaggerWrapper<Token>();
+				treetagger = new TreeTaggerWrapper<POS>();
 	            treetagger.setPerformanceMode(performanceMode);
+		        treetagger.setEpsilon(0.00000001);
+		        treetagger.setHyphenHeuristics(true);
 	            DKProExecutableResolver executableProvider = new DKProExecutableResolver(treetagger);
 	            executableProvider.setExecutablePath(executablePath);
 	            treetagger.setExecutableProvider(executableProvider);
-                treetagger.setAdapter(new TokenAdapter<Token>()
+                treetagger.setAdapter(new TokenAdapter<POS>()
                 {
                     @Override
-                    public String getText(Token aObject)
+                    public String getText(POS aPos)
                     {
-                        synchronized (aObject.getCAS()) {
-                            return aObject.getCoveredText();
+                        synchronized (aPos.getCAS()) {
+                            return aPos.getCoveredText() + "-" + aPos.getPosValue();
                         }
                     }
                 });
 			}
 
 			@Override
-			protected TreeTaggerWrapper<Token> produceResource(URL aUrl)
+			protected TreeTaggerWrapper<POS> produceResource(URL aUrl)
 			    throws IOException
 			{
 			    Properties meta = getResourceMetaData();
 			    String encoding = meta.getProperty("encoding");
-			    String tagset = meta.getProperty("pos.tagset");
+			    String tagset = meta.getProperty("chunk.tagset");
 			    
 			    File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 			    
@@ -204,9 +184,14 @@ public class TreeTaggerPosLemmaTT4J
                 
                 // Get tagset
                 List<String> tags = TreeTaggerModelUtil.getTagset(modelFile, encoding);
-                SingletonTagset posTags = new SingletonTagset(POS.class, tagset);
-                posTags.addAll(tags);
-                addTagset(posTags);
+                SingletonTagset chunkTags = new SingletonTagset(Chunk.class, tagset);
+                for (String tag : tags) {
+                    String fields1[] = tag.split("/");
+                    String fields2[] = fields1[1].split("-");
+                    String chunkTag = fields2.length == 2 ? fields2[1] : fields2[0];
+                    chunkTags.add(chunkTag);
+                }
+                addTagset(chunkTags);
 
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
@@ -216,14 +201,13 @@ public class TreeTaggerPosLemmaTT4J
 			}
 		};
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("pos.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("pos.tagset", modelProvider);
+        mappingProvider = new MappingProvider();
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/lexmorph/tagset/${language}-${chunk.tagset}-chunker.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
+        mappingProvider.setDefault("chunk.tagset", "default");
+        mappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
+        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
 	}
 
 	@Override
@@ -235,55 +219,65 @@ public class TreeTaggerPosLemmaTT4J
 		modelProvider.configure(cas);
 		mappingProvider.configure(cas);
 		
-		TreeTaggerWrapper<Token> treetagger = modelProvider.getResource();
-
         try {
-            List<Token> tokens = new ArrayList<Token>(select(aJCas, Token.class));
-            final POS pos[] = new POS[tokens.size()];
-            final Lemma lemma[] = new Lemma[tokens.size()];
+            List<POS> posTags = new ArrayList<POS>(select(aJCas, POS.class));
 
-            // Set the handler creating new UIMA annotations from the analyzed
-            // tokens
-            final AtomicInteger count = new AtomicInteger(0);
-            treetagger.setHandler(new TokenHandler<Token>() {
+            // Set the handler creating new UIMA annotations from the analyzed tokens
+            final TokenHandler<POS> handler = new TokenHandler<POS>()
+            {
+                private String openChunk;
+                private int start;
+                private int end;
+
                 @Override
-                public void token(Token aToken, String aPos, String aLemma)
+                public void token(POS aPOS, String aChunk, String aDummy)
                 {
                     synchronized (cas) {
-                        // Add the Part of Speech
-                        if (writePos && aPos != null) {
-                            Type posTag = mappingProvider.getTagType(aPos);
-                            POS posAnno = (POS) cas.createAnnotation(posTag, aToken.getBegin(),
-                                    aToken.getEnd());
-                            posAnno.setPosValue(internTags ? aPos.intern() : aPos);
-                            aToken.setPos(posAnno);
-                            pos[count.get()] = posAnno;
+                        if (aChunk == null) {
+                            // End of processing signal
+                            chunkComplete();
+                            return;
                         }
 
-                        // Add the lemma
-                        if (writeLemma && aLemma != null) {
-                            Lemma lemmaAnno = new Lemma(aJCas, aToken.getBegin(), aToken.getEnd());
-                            lemmaAnno.setValue(internTags ? aLemma.intern() : aLemma);
-                            aToken.setLemma(lemmaAnno);
-                            lemma[count.get()] = lemmaAnno;
+                        String fields1[] = aChunk.split("/");
+                        String fields2[] = fields1[1].split("-");
+                        //String tag = fields1[0];
+                        String flag = fields2.length == 2 ? fields2[0] : "NONE";
+                        String chunk = fields2.length == 2 ? fields2[1] : fields2[0];
+
+                        // Start of a new hunk
+                        if (!chunk.equals(openChunk) || "B".equals(flag)) {
+                            if (openChunk != null) {
+                                // End of previous chunk
+                                chunkComplete();
+                            }
+
+                            openChunk = chunk;
+                            start = aPOS.getBegin();
                         }
 
-                        count.getAndIncrement();
+                        // Record how much of the chunk we have seen so far
+                        end = aPOS.getEnd();
                     }
                 }
-            });
 
-            treetagger.process(tokens);
-
-            // Add the annotations to the indexes
-            for (int i = 0; i < count.get(); i++) {
-                if (pos[i] != null) {
-                    pos[i].addToIndexes();
+                private void chunkComplete()
+                {
+                    if (openChunk != null) {
+                        Type chunkType = mappingProvider.getTagType(openChunk);
+                        Chunk chunk = (Chunk) cas.createAnnotation(chunkType, start, end);
+                        chunk.setChunkValue(internTags ? openChunk.intern() : openChunk);
+                        cas.addFsToIndexes(chunk);
+                        openChunk = null;
+                    }
                 }
-                if (lemma[i] != null) {
-                    lemma[i].addToIndexes();
-                }
-            }
+            };
+            
+            TreeTaggerWrapper<POS> treetagger = modelProvider.getResource();
+            treetagger.setHandler(handler);
+            treetagger.process(posTags);
+            // Commit the final chunk
+            handler.token(null, null, null);
         }
         catch (TreeTaggerException e) {
             throw new AnalysisEngineProcessException(e);
