@@ -749,6 +749,38 @@
 		</itemizedlist>
 	</section>
 	<section>
+		<title>TüPP-D/Z</title>
+		<para>TüPP D/Z is a collection of articles from the German newspaper taz (die tageszeitung)
+			annotated and encoded in a XML format.</para>
+		<table frame="all">
+			<title>Components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>TueppReader (RR)</entry>
+						<entry>Read TüPP-D/Z XML format from files</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>Known corpora in this format:</para>
+		<itemizedlist>
+			<listitem>
+				<para><ulink
+						url="http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tuepp-dz.html"
+						>TüPP-D/Z</ulink> - German</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	<section>
 		<title>Web1t</title>
 		<para>The Web1T n-gram corpus is a huge collection of n-grams collected from the internet. The
 			jweb1t library allows to access this corpus efficiently. This module provides support
