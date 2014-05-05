@@ -1,5 +1,5 @@
 <!--
-   Copyright 2010
+   Copyright 2014
    Ubiquitous Knowledge Processing (UKP) Lab
    Technische Universität Darmstadt
    
@@ -17,322 +17,229 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.4.0/ant-macros.xml"/>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
 	</import>
-	
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/treetagger/lib"/>
+
 	<target name="local-maven">
-		<property name="install-artifact-enable" value="true"/>
+		<property name="install-artifact-mode" value="local"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
-	<target name="separate-jars">
-		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
-		<!-- 
-		 - antcall runs the target in a new project. For the "version.XX" properties to be
-		 - visible to the model-lang-jar macro, we have to run the "install-all" target and the
-		 - macros in the same project. Thus we set the outputDir here and then defer the rest
-		 - to the new project scope.
-		 -->
-		<antcall target="separate-jars-internal"/>
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars-internal" depends="install-all">
-		<clean-pom/>
-		<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
-			artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin" version="${version.bin}"/>
-		<jar destfile="target/treetagger-bin-${version.bin}.jar" compress="true">
-			<fileset dir="target/model-staging">
-				<include name="META-INF/**/*"/>
-				<include name="**/bin/**/*"/>
-			</fileset>
-		</jar>
-		
-		<install-artifact file="target/treetagger-bin-${version.bin}.jar"
-			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin"
-			version="${version.bin}"/>
-		
-		<clean-pom/>
-		
-		<model-lang-jar language="bg"/>
-		<model-lang-jar language="de"/>
-		<model-lang-jar language="en"/>
-		<model-lang-jar language="es"/>
-		<model-lang-jar language="et"/>
-		<model-lang-jar language="fr"/>
-		<model-lang-jar language="fi"/>
-		<!-- model-lang-jar language="gr"/ -->
-		<model-lang-jar language="gz"/>
-		<model-lang-jar language="it"/>
-		<model-lang-jar language="la"/>
-		<model-lang-jar language="nl"/>
-		<model-lang-jar language="pt"/>
-		<model-lang-jar language="ru"/>
-		<model-lang-jar language="sl"/>
-		<model-lang-jar language="sw"/>
-		<model-lang-jar language="zh"/>
-		
-		<antcall target="jar-notice"/>
-	</target>
-	
-	<target name="jar">
-		<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
-		<antcall target="install-all"/>
-		<jar basedir="target/model-staging" destfile="target/model-staging.jar" compress="true"/>
-		<antcall target="jar-notice"/>
-	</target>
+	<target name="separate-jars" depends="bg,de,en,es,et,fi,fr,it,la,nl,pt,sl,sw,zh"/>
 
-	<target name="jar-notice">
-		<echo>================================</echo>
-		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
-		<echo>================================</echo>
-		<echo> </echo>
-		<echo>JARs containing the TreeTagger binaries and models have been generated in:</echo>
-		<echo>   ${outputDir}.</echo>
-		<echo> </echo>
-		<echo>YOU MAY NOT REDISTRIBUTE THESE JARS WITHOUT THE EXPLICIT PERMISSION</echo>
-		<echo> </echo>
-		<echo>from HELMUT SCHMID at the Institute for Computational Linguistics of the</echo>
-		<echo>University of Stuttgart and/or by the ORIGINAL CREATORS OF THE MODEL FILES.</echo>
-		<echo> </echo>
-		<echo>For Maven users:</echo>
-		<echo> </echo>
-		<echo>Use the build target "local-maven" (ant local-maven) to automatically install</echo>
-		<echo>the jars into your local Maven repository at ~/.m2/repository.</echo>
-		<echo> </echo>
-		<echo>If you choose to upload these JARs to a PRIVATE repository or install them in</echo>
-		<echo>your local repository manually, use the following groupId and artifactId scheme:</echo>
-		<echo> </echo>
-		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-(bin|model-&lt;lang&gt;)</echo>
-		<echo>    version: &lt;use the timestamp encoded in the JAR file name&gt;</echo>
-		<echo> </echo>
-		<echo> Example:</echo>
-		<echo> </echo>
-		<echo>    groupId: de.tudarmstadt.ukp.dkpro.core</echo>
-		<echo> artifactId: de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</echo>
-		<echo>    version: 20101115.0</echo>
-		<echo> </echo>
-		<echo>If you have done that, you may enable the Maven profile "use-proprietary-resources"</echo>
-		<echo>to enable additional test cases when building the DKPro TreeTagger Integration.</echo>
-		<echo> </echo>
-		<echo>AGAIN REMEMBER THAT YOU MAY NOT REDISTRIBUTE THESE JARS - Thanks.</echo>
-	</target>
-
-	<target name="install">
-		<property name="outputDir" value="target/treetagger"/>
-		<antcall target="install-all"/>
-	</target>
-
-	<target name="install-all" depends="install-executables, install-all-models"/>
-	
-	<target name="check-license">
-		<!-- CHECK LICENSE AGREEMENT -->
-			
-		<echo>Before I can proceed downloading TreeTagger, you have to read and agree to the</echo>
-		<echo>TreeTagger license agreement. I am trying to download the latest version of the</echo>
-		<echo>agreement from the TreeTagger homepage.</echo>
-		<echo/>
-		<tempfile property="treetagger.license.tempfile" deleteonexit="true"/>
-		<get src="http://www.ims.uni-stuttgart.de/~schmid/Tagger-Licence" dest="${treetagger.license.tempfile}"/>
-		<loadfile property="treetagger.license.text" srcfile="${treetagger.license.tempfile}"/>
-		<echo>${treetagger.license.text}</echo>
-		<input message="Do you agree to respect the TreeTagger license agreement? (y/n)"
-			validargs="y,n"
-			addProperty="treetagger.license.ok"/>
-		<condition property="do.abort.on.treetagger.license">
-			<equals arg1="n" arg2="${treetagger.license.ok}"/>
-		</condition>
-		<fail if="do.abort.on.treetagger.license">License agreement not accepted. ABORTING.</fail>
-	</target>
-	
-	<target name="install-executables" depends="check-license">
-		<property name="version.bin" value="20131118.0"/>
-			
-		<fail unless="outputDir">No output directory set.</fail>
-		<mkdir dir="${outputDir}/bin"/>
-		<get src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/Tagger-Licence" dest="${outputDir}/bin/LICENSE.txt"/>
+	<target name="bg">
+		<mkdir dir="target/download"/>
 		
-		<!-- 
-		  - Helmut Schmid seems to have a habit of releasing new versions of TreeTagger without
-		  - updating the version number of maintaining any kind of changes file. Thus we record
-		  - here at which dates we notice that files change. We have also observed that treetagger
-		  - produces different output on different platforms even when using the same model file
-		  - and supposedly the same version of the package (e.g. 3.2).
+		<!-- FILE: bulgarian-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2006-02-17 | now        | bd3661679ffe9630f6bd61c59cea391b
 		  -->
-		<!-- FILE: tree-tagger-MacOSX-3.2-intel.tar.gz - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
-		  - 2012-04-25 | now        | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob 
-		  -->
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2-intel.tar.gz"
-			platform="osx-x86_64" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2-intel.tar.gz"
-			platform="osx-x86_32" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
-		
-		<!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-19 | now        | 63560dcb3a5932bc5ae0e9aab8f48e42
-		  -->
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.tar.gz"
-			platform="osx-ppc" file="tree-tagger" md5="63560dcb3a5932bc5ae0e9aab8f48e42"/>
-		
-		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
-		  - 2012-09-12 | 2013-02-28 | 4b6459574b6b334a090399b76dbc2cdb
-		  - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
-		  - 2013-05-07 | 2013-11-18 | 9c015219f8a5c696f03ee43b72e913b0
-		  - 2013-11-18 | now        | cbc0833fd6cb8c1ec1ea4cae4d40b25a
-		  -->
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_64" file="tree-tagger" md5="cbc0833fd6cb8c1ec1ea4cae4d40b25a"/>
-
-		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
-		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
-		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
-		  - 2012-04-18 | 2012-08-03 | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
-		  - 2012-08-03 | 2013-02-02 | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit 
-		  - 2013-02-28 | now        | 32-bit version is no longer available! 
-		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
-			platform="linux-x86_32" file="tree-tagger" md5="33c2b37803114ec68f36733b1f8b1702"/>
-		  -->
-		
-		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
-		  - 2012-02-06 | now        | bcebb9b9745e2ac12c5226a032b8bfb4 (ELF 32-bit MSB executable, SPARC, version 1 (SYSV), dynamically linked (uses shared libs), stripped)
-		  -->
-		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-3.2.tar.gz"
-			platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
-			
-		<!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
-		  - 2012-04-25 | now        | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob
-		  -->
-		<install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
-			platform="windows-x86_32" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
-		<install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
-			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
-	</target>
-	
-	<target name="install-all-models" depends="et, la, gr, de, en, nl, bg, fr, fi, it, ru, sw, es, pt, gz, zh, sl"/>
-	
-	<!--
-	- Little Endian - x86 (Linux, Windows, Mac-Intel)
-	- Big Endian    - PowerPC (Sparc-Solaris, Mac-PowerPC)
-	-
-	- A word on versioning:
-	-
-	- The models should use the date of the latest model in the bundle as version and append a two
-	- digit disambiguator in case two JARs must be released at the same day. The date of the files
-	- can usually be seen on the FTP server. Some models still use the date they were first added
-	- to this file as version. For these, that scheme should be maintained until the version on the
-	- FTP server is newer than the date added.
-	-->
-	<target name="en">
-		<property name="version.en" value="20111109.1"/>
-		
-		<!-- FILE: english-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-10-31 | now        | 6037a03deda962b8938b7b243d0c902d
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-3.2.bin.gz"
-    		type="tagger" endianness="big-endian" language="en" encoding="ISO-8859-1" tagset="ptb-tt"
-    		md5="6037a03deda962b8938b7b243d0c902d"/>
-
-		<!-- FILE: english-chunker-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2009-08-24 | now        | e751e720200feff98c611819f95e0f5e
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-3.2.bin.gz"
-    		type="chunker" endianness="big-endian" language="en" encoding="ISO-8859-1" tagset="tt"
-    		md5="e751e720200feff98c611819f95e0f5e"/>
-
-		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-11-09 | now        | c64968dfed3f74d17b63987ff7421151
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="en" encoding="ISO-8859-1" tagset="ptb-tt"
-    		md5="c64968dfed3f74d17b63987ff7421151"/>
-
-		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2009-08-24 | now        | 981df5901588a016ade69108d4421531
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2.bin.gz"
-    		type="chunker" endianness="little-endian" language="en" encoding="ISO-8859-1" tagset="tt"
-    		md5="981df5901588a016ade69108d4421531"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.1.bin.gz" 
+    		dest="target/download/bulgarian-par-linux-3.1.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/bulgarian-par-linux-3.1.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/bulgarian-par-linux-3.1.bin" 
+    		md5="bd3661679ffe9630f6bd61c59cea391b"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20060217"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="bg" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="btb"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="de">
-		<property name="version.de" value="20121207.0"/>
-		
-		<!-- FILE: german-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-02-09 | now        | 6618dd26e4974193ae50fbed0888666a
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-3.2.bin.gz"
-    		type="tagger" endianness="big-endian" language="de" encoding="ISO-8859-1" tagset="stts"
-    		md5="6618dd26e4974193ae50fbed0888666a"/>
-
-		<!-- FILE: german-chunker-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2008-06-02 | now        | 2a07ffa062165557ea99f4fcdf4303a9
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-3.1.bin.gz"
-    		type="chunker" endianness="big-endian" language="de" encoding="ISO-8859-1" tagset="tt"
-    		md5="2a07ffa062165557ea99f4fcdf4303a9"/>
-		
+		<mkdir dir="target/download"/>
 		<!-- FILE: german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
 		  - 2012-02-13 | 2012-03-15 | 45afdcdabfffc69995523748cd42bf81
 		  - 2012-03-15 | 2012-12-07 | 3a18444accf080f54c5ebf655fedc781
 		  - 2012-12-07 | now        | 54f16f045083ae6ebe8b9d9d4a24484e
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz"
-    		type="tagger" endianness="little-endian" language="de" encoding="UTF-8" tagset="stts"
-    		md5="54f16f045083ae6ebe8b9d9d4a24484e"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/german-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/german-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/german-par-linux-3.2-utf8.bin" 
+    		md5="54f16f045083ae6ebe8b9d9d4a24484e"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20121207"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="de" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="stts"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
 
-		<!-- FILE: german-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		<!-- FILE: german-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - -
 		  - 2011-04-29 | now        | 56ea6ac618bc21d28929a85a6964ff65
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-linux-3.2-utf8.bin.gz"
-    		type="chunker" endianness="little-endian" language="de" encoding="UTF-8" tagset="tt"
-    		md5="56ea6ac618bc21d28929a85a6964ff65"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/german-chunker-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/german-chunker-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/german-chunker-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/german-chunker-par-linux-3.2-utf8.bin" 
+    		md5="56ea6ac618bc21d28929a85a6964ff65"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20110429"
+    		metaDataVersion="1"
+    		tool="chunker" 
+    		language="de" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="chunk.tagset" value="tt"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>		
 	</target>
-	
-	<target name="nl">
-		<property name="version.nl" value="20130207.0"/>
-		
-		<!-- FILE: dutch-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2008-06-02 | now        | 44bc760c29fb202d2ca5fe5f8acd1dd3
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-par-3.1.bin.gz"
-    		type="tagger" endianness="big-endian" language="nl" encoding="ISO-8859-1" tagset="tt"
-    		md5="0fed5cd154759632ff8181ec588a67e3"/>
 
-		<!-- FILE: dutch-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2008-06-02 | ????-??-?? | 22dd271035795747768ead15b2931c75 (dutch-par-linux-3.1)
-		  - ????-??-?? | 2013-01-07 | 7d533ea8e8b768f87d9c684e47a59872 (dutch-par-linux-3.1)
-		  - 2013-01-07 | now        | 40c82daae0c7063eb3eabf1541303fca
+	<target name="en">
+		<mkdir dir="target/download"/>
+
+		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-11-09 | now        | c64968dfed3f74d17b63987ff7421151
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-par-linux-3.2-utf8.bin.gz"
-    		type="tagger" endianness="little-endian" language="nl" encoding="UTF-8" tagset="tt"
-    		md5="40c82daae0c7063eb3eabf1541303fca"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2.bin.gz" 
+    		dest="target/download/english-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/english-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/english-par-linux-3.2.bin" 
+    		md5="c64968dfed3f74d17b63987ff7421151"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20111109"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="en" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb-tt"/>
+	    		<entry key="encoding" value="ISO-8859-1"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+
+		<!-- FILE: english-chunker-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-08-24 | now        | 981df5901588a016ade69108d4421531
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2.bin.gz" 
+    		dest="target/download/english-chunker-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/english-chunker-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/english-chunker-par-linux-3.2.bin" 
+    		md5="981df5901588a016ade69108d4421531"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20090824"
+    		metaDataVersion="1"
+    		tool="chunker" 
+    		language="en" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="chunk.tagset" value="tt"/>
+	    		<entry key="encoding" value="ISO-8859-1"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 	
-	<target name="bg">
-		<property name="version.bg" value="20101115.0"/>
+	<target name="es">
+		<mkdir dir="target/download"/>
 		
-		<!-- FILE: bulgarian-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2006-02-17 | now        | 6a29dc14daf2256eacf036a52add4b9e
+		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
+		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
+		  - 2013-04-03 | 2013-10-07 | 30a9c4deed380e7986a4a76753ecde51
+		  - 2013-10-07 | now        | 8488c4319fac414802637b654a61db37
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-3.1.bin.gz"
-    		type="tagger" endianness="big-endian" language="bg" encoding="UTF-8" tagset="btb"
-    		md5="6a29dc14daf2256eacf036a52add4b9e"/>
-    	
-		<!-- FILE: bulgarian-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2006-02-17 | now        | bd3661679ffe9630f6bd61c59cea391b
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/spanish-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/spanish-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/spanish-par-linux-3.2-utf8.bin" 
+    		md5="8488c4319fac414802637b654a61db37"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20131007"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="es" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="crater"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="et">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: estonian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.1.bin.gz"
-    		type="tagger" endianness="little-endian" language="bg" encoding="UTF-8" tagset="btb"
-    		md5="bd3661679ffe9630f6bd61c59cea391b"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian-par-linux-3.2.bin.gz" 
+    		dest="target/download/estonian-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/estonian-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/estonian-par-linux-3.2.bin" 
+    		md5="4a98b412e36afefbc204fca9e561f5cb"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20110124"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="et" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="tartu"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="fi">
-		<property name="version.fi" value="20130716.0"/>
+		<mkdir dir="target/download"/>
 		
 		<!-- FILE: finnish-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2013-07-16 | now        | 241dbbae52baad70787a952d3a0e71a3
@@ -340,411 +247,301 @@
 		  - Corpus: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/
 		  - Tagset: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/FinnTreeBankManual.pdf
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="fi" encoding="UTF-8" tagset="ftb-tt"
-    		md5="241dbbae52baad70787a952d3a0e71a3"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2.bin.gz" 
+    		dest="target/download/finnish-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/finnish-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/finnish-par-linux-3.2.bin" 
+    		md5="241dbbae52baad70787a952d3a0e71a3"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20130716"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="fi" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="ftb-tt"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="fr">
-		<property name="version.fr" value="20101115.0"/>
+		<mkdir dir="target/download"/>
 		
-		<!-- FILE: french-par-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-01-11 | now        | e6f2f1ffb6c29e3a08bc11f140c5b9dc
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-3.2.bin.gz"
-    		type="tagger" endianness="big-endian" language="fr" encoding="ISO-8859-1" tagset="stein"
-    		md5="e6f2f1ffb6c29e3a08bc11f140c5b9dc"/>
-    	
 		<!-- FILE: french-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-01-11 | now        | 41d978f247b23d6fee733da32a55a775
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-linux-3.2-utf8.bin.gz"
-    		type="tagger" endianness="little-endian" language="fr" encoding="UTF-8" tagset="stein"
-    		md5="41d978f247b23d6fee733da32a55a775"/>
-
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/french-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/french-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/french-par-linux-3.2-utf8.bin" 
+    		md5="41d978f247b23d6fee733da32a55a775"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20100111"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="fr" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="stein"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+		
 		<!-- FILE: french-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-11 | now        | 975e3e306198c9f61f14428621ed87ba
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-chunker-par-linux-3.2-utf8.bin.gz"
-    		type="chunker" endianness="little-endian" language="fr" encoding="UTF-8" tagset="ftb"
-    		md5="975e3e306198c9f61f14428621ed87ba"/>
-	</target>
-	
-	<target name="gr">
-		<!--
-		  - REC 2012-02-09 - greek model is no longer available
-		<property name="version.gr" value="20110429.0"/>
-		
-    	<install-model-file-url url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/greek-par-linux-3.2-utf8.bin.gz"
-    		type="tagger" endianness="little-endian" language="gr" encoding="ISO-8859-7" 
-    		md5="a66e844856586fc77893f735c765acba"/>
-		-->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/french-chunker-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/french-chunker-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/french-chunker-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/french-chunker-par-linux-3.2-utf8.bin" 
+    		md5="975e3e306198c9f61f14428621ed87ba"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20080611"
+    		metaDataVersion="1"
+    		tool="chunker" 
+    		language="fr" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="chunk.tagset" value="ftb"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 	
 	<target name="it">
-		<property name="version.it" value="20101115.0"/>
+		<mkdir dir="target/download"/>
 		
-		<!-- FILE: italian-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2008-06-02 | now        | e7809f33e72a0e620ec4247ae8ad5a80
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-par-3.1.bin.gz"
-    		type="tagger" endianness="big-endian" language="it" encoding="ISO-8859-1" tagset="stein"
-    		md5="e7809f33e72a0e620ec4247ae8ad5a80"/>
-    	
 		<!-- FILE: italian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2009-06-22 | now        | 79c03b4cc14c89d58aa1f97a133d01d7
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-par-linux-3.2-utf8.bin.gz"
-    		type="tagger" endianness="little-endian" language="it" encoding="UTF-8" tagset="stein"
-    		md5="79c03b4cc14c89d58aa1f97a133d01d7"/>
-	</target>
-	
-	<target name="ru">
-		<property name="version.ru" value="20101115.0"/>
-		
-		<!-- FILE: russian-small.par.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-15 | now        | 244717e6226f1982a56b6e928cbb3c98
-		  -->
-    	<install-model-file-url url="http://corpus.leeds.ac.uk/mocky/russian-small.par.gz"
-    		type="tagger" endianness="little-endian" language="ru" encoding="UTF-8" tagset="mte"
-    		md5="244717e6226f1982a56b6e928cbb3c98"/>
-	</target>
-
-	<target name="sw">
-		<property name="version.sw" value="20130729.0"/>
-		
-		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-03-17 | 2013-07-29 | 0df5f70b0cc81a3b437a46a9e0a3d71b
-		  - 2013-07-29 | now        | 002bebeeca52d1112aa5f31173c5ecec
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swahili-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="sw" encoding="ISO-8859-1" tagset="swatwol"
-    		md5="002bebeeca52d1112aa5f31173c5ecec"/>
-	</target>
-
-	<target name="et">
-		<property name="version.et" value="20110124.0"/>
-		
-		<!-- FILE: estonian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="et" encoding="UTF-8" tagset="tartu"
-    		md5="4a98b412e36afefbc204fca9e561f5cb"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/italian-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/italian-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/italian-par-linux-3.2-utf8.bin" 
+    		md5="79c03b4cc14c89d58aa1f97a133d01d7"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20090622"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="it" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="stein"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="la">
-		<property name="version.la" value="20110912.0"/>
+		<mkdir dir="target/download"/>
 		
 		<!-- FILE: latin-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-05-07 | 2011-08-19 | f959f8633ef842f069f0331ad19dc8b4
 		  - 2011-08-19 | now        | bde1f6a63b2c5a658ba25a8eb90832a8
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/latin-par-linux-3.2.bin.gz"
-    		type="tagger" endianness="little-endian" language="la" encoding="ISO-8859-1" tagset="brandolini"
-    		md5="bde1f6a63b2c5a658ba25a8eb90832a8"/>
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/latin-par-linux-3.2.bin.gz" 
+    		dest="target/download/latin-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/latin-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/latin-par-linux-3.2.bin" 
+    		md5="bde1f6a63b2c5a658ba25a8eb90832a8"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20110819"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="la" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="brandolini"/>
+	    		<entry key="encoding" value="ISO-8859-1"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="nl">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: dutch-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2008-06-02 | ????-??-?? | 22dd271035795747768ead15b2931c75 (dutch-par-linux-3.1)
+		  - ????-??-?? | 2013-01-07 | 7d533ea8e8b768f87d9c684e47a59872 (dutch-par-linux-3.1)
+		  - 2013-01-07 | now        | 40c82daae0c7063eb3eabf1541303fca
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/dutch-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/dutch-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/dutch-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/dutch-par-linux-3.2-utf8.bin" 
+    		md5="40c82daae0c7063eb3eabf1541303fca"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20130107"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="nl" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="tt"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 	
-	<target name="es">
-		<property name="version.es" value="20131007.0"/>
-		
-		<!-- FILE: spanish-par-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2008-06-02 | now        | 5ccc79322b7954bfc82923e6123cac04
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-3.1.bin.gz"
-    		type="tagger" endianness="big-endian" language="es" encoding="ISO-8859-1" tagset="crater"
-    		md5="5ccc79322b7954bfc82923e6123cac04"/>
-
-		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
-		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
-		  - 2013-04-03 | 2013-10-07 | 30a9c4deed380e7986a4a76753ecde51
-		  - 2013-10-07 | now        | 8488c4319fac414802637b654a61db37
-		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz"
-    		type="tagger" endianness="little-endian" language="es" encoding="UTF-8" tagset="crater"
-    		md5="8488c4319fac414802637b654a61db37"/>
-	</target>
-
 	<target name="pt">
-		<property name="version.pt" value="20101115.0"/>
+		<mkdir dir="target/download"/>
 		
-		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
 		  -->
-    	<install-model-file-tar url="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
-    		type="tagger" endianness="little-endian" language="pt" encoding="UTF-8" file="pt.par"
-    		md5="cf9855b4e215fa7a393700aa135830b0" tagset="gamallo"/>
-	</target>
-
-	<target name="gz">
-		<property name="version.gz" value="20101115.0"/>
-		
-		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2010-11-15 | now        | cf9855b4e215fa7a393700aa135830b0
-		  -->
-    	<install-model-file-tar url="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz"
-    		type="tagger" endianness="little-endian" language="gz" encoding="UTF-8" file="gz.par"
-    		md5="bd54f16fd3f9147616841d97ba55331d" tagset="gamallo"/>
+    	<get 
+    		src="http://gramatica.usc.es/~gamallo/tagger/tree-taggerPT-GZ.tar.gz" 
+    		dest="target/download/tree-taggerPT-GZ.tar.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/tree-taggerPT-GZ.tar.gz"/>
+    	<untar src="target/download/tree-taggerPT-GZ.tar" dest="target/download">
+    		<patternset>
+    			<include name="**/pt.par"/>		
+			</patternset>
+    		<mapper type="flatten"/>
+    	</untar>
+    	<install-stub-and-upstream-file 
+    		file="target/download/pt.par" 
+    		md5="cf9855b4e215fa7a393700aa135830b0"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20101115"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pt" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="gamallo"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 	
 	<target name="sl">
-		<property name="version.sl" value="20100703.0"/>
+		<mkdir dir="target/download"/>
 		
 		<!-- FILE: slovenian.par.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-07-03 | now        | d6b230483364be5ec0a3054a1b78df2d
+		  - 
+		  - Excluded because we do not know the tagset
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovenian.par.gz" 
+    		dest="target/download/slovenian.par.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/slovenian.par.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/slovenian.par" 
+    		md5="d6b230483364be5ec0a3054a1b78df2d"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20100703"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sl" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="unknown"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 		  -->
-    	<install-model-file-url url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovenian.par.gz"
-    		type="tagger" endianness="little-endian" language="sl" encoding="UTF-8"
-    		md5="d6b230483364be5ec0a3054a1b78df2d"/>
+	</target>
+	
+	<target name="sw">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-03-17 | 2013-07-29 | 0df5f70b0cc81a3b437a46a9e0a3d71b
+		  - 2013-07-29 | now        | 002bebeeca52d1112aa5f31173c5ecec
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/swahili-par-linux-3.2.bin.gz" 
+    		dest="target/download/swahili-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/swahili-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/swahili-par-linux-3.2.bin" 
+    		md5="002bebeeca52d1112aa5f31173c5ecec"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20130729"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sw" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="swatwol"/>
+	    		<entry key="encoding" value="ISO-8859-1"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
 
 	<target name="zh">
-		<property name="version.zh" value="20101115.0"/>
+		<mkdir dir="target/download"/>
 		
-		<!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - -
+		<!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2010-11-15 | now        | 7392059e61b5555ab984918e3dea9464
 		  -->
-    	<install-model-file-tar url="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz"
-    		type="tagger" endianness="little-endian" language="zh" encoding="UTF-8" file="zh.par"
-    		md5="7392059e61b5555ab984918e3dea9464" tagset="lcmc"/>
+    	<get 
+    		src="http://corpus.leeds.ac.uk/tools/zh/tt-lcmc.tgz" 
+    		dest="target/download/tt-lcmc.tar.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/tt-lcmc.tar.gz"/>
+    	<untar src="target/download/tt-lcmc.tar" dest="target/download">
+    		<patternset>
+    			<include name="**/zh.par"/>		
+			</patternset>
+    		<mapper type="flatten"/>
+    	</untar>
+    	<install-stub-and-upstream-file 
+    		file="target/download/zh.par" 
+    		md5="7392059e61b5555ab984918e3dea9464"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20101115"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="zh" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="lcmc"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
 	</target>
-	
-	<macrodef name="model-lang-jar">
-		<attribute name="language"/>
-		<sequential>
-			<clean-pom/>
-			<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
-				artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-model-@{language}" 
-				version="${version.@{language}}"/>
-			<jar destfile="target/treetagger-model-@{language}-${version.@{language}}.jar" compress="true">
-				<fileset dir="target/model-staging">
-					<include name="META-INF/**/*"/>
-					<include name="**/lib/*-@{language}-*"/>
-				</fileset>
-			</jar>
-			
-			<install-artifact file="target/treetagger-model-@{language}-${version.@{language}}.jar"
-				groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-model-@{language}"
-				version="${version.@{language}}"/>
-			
-			<clean-pom/>
-		</sequential>
-	</macrodef>
-	
-	<macrodef name="install-model-file-tar">
-		<attribute name="url"/>
-		<attribute name="type"/>
-		<attribute name="endianness"/>
-		<attribute name="language"/>
-		<attribute name="tagset" default="default"/>
-		<attribute name="encoding"/>
-		<attribute name="file"/>
-		<attribute name="md5"/>
-		<attribute name="prop.verify.md5" default="verify.md5.@{type}.@{language}.@{endianness}"/>
-		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{type}.@{language}.@{endianness}"/>
-		<sequential>
-			<fail unless="outputDir">No output directory set.</fail>
-	    	<get src="@{url}" dest="${outputDir}/lib/temp-model-archive.tar.gz"/>
-	    	<gunzip src="${outputDir}/lib/temp-model-archive.tar.gz"/>
-	    	<delete file="${outputDir}/lib/temp-model-archive.tar.gz"/>
-	    	<untar src="${outputDir}/lib/temp-model-archive.tar" dest="${outputDir}/lib">
-	    		<patternset>
-	    			<include name="**/@{file}"/>		
-				</patternset>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-	    			<firstmatchmapper>
-	    				<globmapper from="@{file}" to="@{type}-@{language}-@{endianness}.par"/>
-	    			</firstmatchmapper>
-	    		</chainedmapper>
-	    	</untar>
-	    	<delete file="${outputDir}/lib/temp-model-archive.tar"/>
-			
-			<checksum file="${outputDir}/lib/@{type}-@{language}-@{endianness}.par" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
-			<checksum file="${outputDir}/lib/@{type}-@{language}-@{endianness}.par" property="@{prop.verify.md5.actual}"/>
-			<condition property="checksum.mismatch">
-				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
-			</condition>
-			<fail if="checksum.mismatch">
-MD5 checksum mismatch for [@{type}-@{language}-@{endianness}.par]. 
-Please verify the checksum and if necessary update this script. 
-Expected: @{md5}
-Actual  : ${@{prop.verify.md5.actual}}
-			</fail>
-			
-			<generate-model-properties tool="@{type}" language="@{language}" extension="par"
-				variant="@{endianness}">
-	    		<entry key="url" value="@{url}"/>
-	    		<entry key="@{type}.tagset" value="@{tagset}"/>
-	    		<entry key="encoding" value="@{encoding}"/>
-	    		<entry key="endianness" value="@{endianness}"/>
-			</generate-model-properties>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="install-model-file-url">
-		<attribute name="url"/>
-		<attribute name="type"/>
-		<attribute name="endianness"/>
-		<attribute name="language"/>
-		<attribute name="tagset" default="default"/>
-		<attribute name="encoding"/>
-		<attribute name="md5"/>
-		<attribute name="prop.verify.md5" default="verify.md5.@{type}.@{language}.@{endianness}"/>
-		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{type}.@{language}.@{endianness}"/>
-		<sequential>
-			<fail unless="outputDir">No output directory set.</fail>
-	    	<mkdir dir="${outputDir}/lib"/>
-	    	<copy todir="${outputDir}/lib">
-	    		<gzipresource>
-	    			<url url="@{url}"/>
-	    		</gzipresource>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-		    		<firstmatchmapper>
-						<globmapper from="*" to="@{type}-@{language}-@{endianness}.par"/>
-					</firstmatchmapper>
-	    		</chainedmapper>
-	    	</copy>
-			
-			<checksum file="${outputDir}/lib/@{type}-@{language}-@{endianness}.par" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
-			<checksum file="${outputDir}/lib/@{type}-@{language}-@{endianness}.par" property="@{prop.verify.md5.actual}"/>
-			<condition property="checksum.mismatch">
-				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
-			</condition>
-			<fail if="checksum.mismatch">
-MD5 checksum mismatch for [@{type}-@{language}-@{endianness}.par]. 
-Please verify the checksum and if necessary update this script. 
-Expected: @{md5}
-Actual  : ${@{prop.verify.md5.actual}}
-			</fail>
-			
-			<generate-model-properties tool="@{type}" language="@{language}" extension="par"
-				variant="@{endianness}">
-	    		<entry key="url" value="@{url}"/>
-	    		<entry key="@{type}.tagset" value="@{tagset}"/>
-	    		<entry key="encoding" value="@{encoding}"/>
-	    		<entry key="endianness" value="@{endianness}"/>
-			</generate-model-properties>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="install-executable-file-tar">
-		<attribute name="url"/>
-		<attribute name="platform"/>
-		<attribute name="file"/>
-		<attribute name="md5"/>
-		<attribute name="prop.verify.md5" default="verify.md5.@{platform}.@{file}"/>
-		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{platform}.@{file}"/>
-		<sequential>
-			<fail unless="outputDir">No output directory set.</fail>
-	    	<mkdir dir="${outputDir}/bin/@{platform}"/>
-	    	<copy todir="${outputDir}/bin/@{platform}">
-	    		<gzipresource>
-	    			<url url="@{url}"/>
-	    		</gzipresource>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-		    		<firstmatchmapper>
-						<globmapper from="*" to="tree-tagger-@{platform}.tar"/>
-					</firstmatchmapper>
-	    		</chainedmapper>
-	    	</copy>
-	    	<untar src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar" 
-	    		   dest="${outputDir}/bin/@{platform}">
-	    		<patternset>
-	    			<include name="**/@{file}"/>		
-				</patternset>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-	    		</chainedmapper>
-	    	</untar>
-			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar"/>
-			
-			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
-			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
-			<condition property="checksum.mismatch">
-				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
-			</condition>
-			<fail if="checksum.mismatch">
-MD5 checksum mismatch for [@{platform}/@{file}]. 
-Please verify the checksum and if necessary update this script. 
-Expected: @{md5}
-Actual  : ${@{prop.verify.md5.actual}}
-			</fail>
-			
-			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
-			<echo>Installed executable for @{platform} systems</echo>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="install-executable-file-zip">
-		<attribute name="url"/>
-		<attribute name="platform"/>
-		<attribute name="file"/>
-		<attribute name="md5"/>
-		<attribute name="prop.verify.md5" default="verify.md5.@{platform}.@{file}"/>
-		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{platform}.@{file}"/>
-		<sequential>
-			<fail unless="outputDir">No output directory set.</fail>
-	    	<mkdir dir="${outputDir}/bin/@{platform}"/>
-	    	<copy todir="${outputDir}/bin/@{platform}">
-    			<url url="@{url}"/>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-		    		<firstmatchmapper>
-						<globmapper from="*" to="tree-tagger-@{platform}.zip"/>
-					</firstmatchmapper>
-	    		</chainedmapper>
-	    	</copy>
-	    	<unzip src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip" 
-	    		   dest="${outputDir}/bin/@{platform}">
-	    		<patternset>
-	    			<include name="**/@{file}"/>		
-				</patternset>
-	    		<chainedmapper>
-		    		<mapper type="flatten"/>
-	    		</chainedmapper>
-	    	</unzip>
-			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip"/>
-			
-			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
-			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
-			<condition property="checksum.mismatch">
-				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
-			</condition>
-			<fail if="checksum.mismatch">
-MD5 checksum mismatch for [@{platform}/@{file}]. 
-Please verify the checksum and if necessary update this script. 
-Expected: @{md5}
-Actual  : ${@{prop.verify.md5.actual}}
-			</fail>
-
-			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
-			<echo>Installed executable for @{platform} systems</echo>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="generate-executable-properties">
-		<attribute name="url"/>
-		<attribute name="platform"/>
-		<attribute name="file"/>
-		<attribute name="prop.checksum.md5" default="checksum.md5.@{platform}/@{file}"/>
-		<attribute name="prop.checksum.sha1" default="checksum.sha1.@{platform}/@{file}"/>
-		<sequential>
-			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.checksum.md5}"
-				algorithm="MD5"/>
-			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.checksum.sha1}"
-				algorithm="SHA"/>
-			<propertyfile file="${outputDir}/bin/@{platform}/tree-tagger.properties"
-				comment="TreeTagger executable description">
-				<entry  key="url" value="@{url}"/>
-				<entry  key="platform" value="@{platform}"/>
-				<entry  key="downloaded" type="date" value="now"/>
-				<entry  key="md5" value="${@{prop.checksum.md5}}"/>
-				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
-			</propertyfile>
-		</sequential>
-	</macrodef>
 </project>
