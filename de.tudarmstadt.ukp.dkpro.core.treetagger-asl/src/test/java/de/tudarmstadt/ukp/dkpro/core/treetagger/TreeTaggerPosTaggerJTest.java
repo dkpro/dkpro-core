@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public
-class TreeTaggerPosLemmaTT4JTest
+class TreeTaggerPosTaggerJTest
 {
 	@Before
 	public void initTrace()
@@ -242,7 +242,7 @@ class TreeTaggerPosLemmaTT4JTest
 		String[] tags       = new String[] { "DT",   "VBZ", "DT",  "NN",   "SENT" };
 		String[] tagClasses = new String[] { "ART",  "V",   "ART", "NN",   "PUNC" };
 
-        AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class);
 
         HideOutput hideOut = new HideOutput();
 		try {
@@ -291,8 +291,8 @@ class TreeTaggerPosLemmaTT4JTest
 	{
 		checkModelsAndBinary(language);
 
-        AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class,
-                TreeTaggerPosLemmaTT4J.PARAM_PRINT_TAGSET, true);
+        AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class,
+                TreeTaggerPosTagger.PARAM_PRINT_TAGSET, true);
 
         JCas aJCas = TestRunner.runTest(engine, language, testDocument);
 
@@ -314,7 +314,7 @@ class TreeTaggerPosLemmaTT4JTest
 	{
     	checkModelsAndBinary("en");
 
-        AnalysisEngine engine = createEngine(TreeTaggerPosLemmaTT4J.class);
+        AnalysisEngine engine = createEngine(TreeTaggerPosTagger.class);
         JCas jcas = engine.newJCas();
 
 		try {

@@ -49,7 +49,7 @@ class SegmenterCompatibilityTest
 
 	    AnalysisEngineDescription desc = createEngineDescription(
                 createEngineDescription(BreakIteratorSegmenter.class),
-                createEngineDescription(TreeTaggerPosLemmaTT4J.class)
+                createEngineDescription(TreeTaggerPosTagger.class)
         );
         AnalysisEngine engine = createEngine(desc);
 
