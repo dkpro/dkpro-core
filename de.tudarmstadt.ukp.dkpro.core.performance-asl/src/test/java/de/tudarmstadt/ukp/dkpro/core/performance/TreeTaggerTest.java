@@ -22,7 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
-import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosLemmaTT4J;
+import de.tudarmstadt.ukp.dkpro.core.treetagger.TreeTaggerPosTagger;
 
 /**
  * @author zesch
@@ -41,7 +41,7 @@ public class TreeTaggerTest
                         createEngineDescription(
                                 BreakIteratorSegmenter.class),
                         createEngineDescription(
-                                TreeTaggerPosLemmaTT4J.class)
+                                TreeTaggerPosTagger.class)
                 )
         );
     }
