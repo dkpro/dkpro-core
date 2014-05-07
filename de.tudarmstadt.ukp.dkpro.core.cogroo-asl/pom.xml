@@ -37,12 +37,12 @@
 			<artifactId>uimafit-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.cogroo.lang.pt_br</groupId>
+			<groupId>org.cogroo</groupId>
 			<artifactId>cogroo-gc</artifactId>
 			<version>${cogroo.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.cogroo.lang.pt_br</groupId>
+			<groupId>org.cogroo</groupId>
 			<artifactId>cogroo-ann</artifactId>
 			<version>${cogroo.version}</version>
 		</dependency>
@@ -75,6 +75,12 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+			<!-- Constants in this dependency are inlined - dependency not required at runtime -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
