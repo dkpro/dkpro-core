@@ -37,6 +37,30 @@
 			<artifactId>uimafit-core</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.cogroo.lang.pt_br</groupId>
+			<artifactId>cogroo-gc</artifactId>
+			<version>${cogroo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cogroo.lang.pt_br</groupId>
+			<artifactId>cogroo-ann</artifactId>
+			<version>${cogroo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cogroo.lang.pt_br</groupId>
+			<artifactId>cogroo-ann-pt_br</artifactId>
+			<version>${cogroo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cogroo.lang.pt_br</groupId>
+			<artifactId>cogroo-gc-pt_br</artifactId>
+			<version>${cogroo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
 		</dependency>
@@ -53,16 +77,6 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.cogroo.lang.pt_br</groupId>
-			<artifactId>cogroo-ann-pt_br</artifactId>
-			<version>${cogroo.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.cogroo.lang.pt_br</groupId>
-			<artifactId>cogroo-gc-pt_br</artifactId>
-			<version>${cogroo.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
@@ -73,4 +87,21 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<configuration>
+						<usedDependencies>
+							<!-- Models not detected by byte-code analysis -->
+							<usedDependency>org.cogroo.lang.pt_br:cogroo-ann-pt_br</usedDependency>
+							<usedDependency>org.cogroo.lang.pt_br:cogroo-gc-pt_br</usedDependency>
+						</usedDependencies>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
