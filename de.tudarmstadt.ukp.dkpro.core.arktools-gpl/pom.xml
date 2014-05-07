@@ -1,71 +1,99 @@
 <!--
 
-    Copyright 2007-2014
-    Ubiquitous Knowledge Processing (UKP) Lab
-    Technische Universität Darmstadt
+	Copyright 2007-2014
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <version>1.7.0-SNAPSHOT</version>
-  </parent>
-  <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
-  <dependencies>
-      <dependency>
-          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-          <artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>org.apache.uima</groupId>
-          <artifactId>uimafit-core</artifactId>
-      </dependency>
-      <dependency>
-          <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-          <artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-      </dependency>
-      <dependency>
-      	<groupId>junit</groupId>
-      	<artifactId>junit</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-        <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-      	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-      	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-      </dependency>
-      <dependency>
-      	<groupId>edu.cmu.cs</groupId>
-      	<artifactId>ark-tweet-nlp</artifactId>
-      	<version>0.3.2</version>
-      </dependency>
-  </dependencies>
-  <dependencyManagement>
-  	<dependencies>
-  		<dependency>
-  			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  			<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
-  			<version>20120919.1</version>
-  		</dependency>
-  	</dependencies>
-  </dependencyManagement>
-  <name>DKPro Core GPL - ARK</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<version>1.7.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
+	<name>DKPro Core GPL - ARK</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimaj-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.uima</groupId>
+			<artifactId>uimafit-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>edu.cmu.cs</groupId>
+			<artifactId>ark-tweet-nlp</artifactId>
+			<version>0.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+			<!-- Constants in this dependency are inlined - dependency not required at runtime -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</artifactId>
+				<version>20120919.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<configuration>
+						<usedDependencies>
+							<!-- Models not detected by byte-code analysis -->
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.arktools-model-tagger-en-default</usedDependency>
+						</usedDependencies>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
