@@ -143,7 +143,7 @@ public class TreeTaggerChunker
 
                 setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-chunker-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.properties");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-default-variants.map");
+                //setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-default-variants.map");
 				setDefault(VARIANT, "le"); // le = little-endian
 
 				setOverride(LOCATION, modelLocation);

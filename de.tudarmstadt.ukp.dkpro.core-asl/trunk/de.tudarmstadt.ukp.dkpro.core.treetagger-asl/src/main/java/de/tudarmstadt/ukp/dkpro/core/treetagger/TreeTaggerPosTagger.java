@@ -165,7 +165,7 @@ public class TreeTaggerPosTagger
 
                 setDefault(ARTIFACT_ID, "${groupId}.treetagger-model-tagger-${language}-${variant}");
 				setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-default-variants.map");
+                //setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-default-variants.map");
 				setDefault(VARIANT, "le"); // le = little-endian
 
 				setOverride(LOCATION, modelLocation);

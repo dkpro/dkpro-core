@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public
-class TreeTaggerPosTaggerJTest
+class TreeTaggerPosTaggerTest
 {
 	@Before
 	public void initTrace()
@@ -278,8 +278,7 @@ class TreeTaggerPosTaggerJTest
 	private void checkModelsAndBinary(String lang)
 	{
 		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
-						+ "-little-endian.par") != null);
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang + "-le.bin") != null);
 
 		Assume.assumeTrue(getClass().getResource(
 				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);

@@ -30,6 +30,7 @@ import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -108,6 +109,8 @@ public class TreeTaggerChunkerTest
     private JCas runTest(String aLanguage, String aVariant, String aText)
         throws Exception
     {
+        checkModelsAndBinary(aLanguage);
+        
         AnalysisEngineDescription tagger = createEngineDescription(TreeTaggerPosTagger.class);
 
         AnalysisEngineDescription chunker = createEngineDescription(TreeTaggerChunker.class,
@@ -149,6 +152,15 @@ public class TreeTaggerChunkerTest
         }
 
         return aJCas;
+    }
+
+    private void checkModelsAndBinary(String lang)
+    {
+        Assume.assumeTrue(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/chunker-" + lang + "-le.bin") != null);
+
+        Assume.assumeTrue(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
     }
 
     @Rule
