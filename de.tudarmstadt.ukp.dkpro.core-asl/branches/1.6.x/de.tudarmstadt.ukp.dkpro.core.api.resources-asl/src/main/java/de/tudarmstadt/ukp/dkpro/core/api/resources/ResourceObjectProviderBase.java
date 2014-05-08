@@ -248,7 +248,6 @@ public abstract class ResourceObjectProviderBase<M>
     public void setDefaultVariants(Properties aDefaultVariants)
     {
         if (aDefaultVariants.size() == 0) {
-            log.warn("setDefaultVariants called with zero-sized variants map.");
             defaultVariants = null;
         }
         else {
