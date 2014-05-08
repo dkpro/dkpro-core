@@ -278,12 +278,6 @@ Token
       PosValue: "ADJA"
    morph: <null>
 [Verbindungen]
-NN
-   sofa: _InitialView
-   begin: 18
-   end: 30
-   PosValue: "NN"
-[Verbindungen]
 Token
    sofa: _InitialView
    begin: 18
@@ -332,6 +326,12 @@ Token
       end: 30
       PosValue: "NN"
    morph: <null>
+[Verbindungen]
+NN
+   sofa: _InitialView
+   begin: 18
+   end: 30
+   PosValue: "NN"
 [und]
 Token
    sofa: _InitialView
@@ -381,12 +381,6 @@ CONJ
    end: 34
    PosValue: "KON"
 [Risiken]
-NN
-   sofa: _InitialView
-   begin: 35
-   end: 42
-   PosValue: "NN"
-[Risiken]
 Token
    sofa: _InitialView
    begin: 35
@@ -428,6 +422,12 @@ Token
       end: 42
       PosValue: "NN"
    morph: <null>
+[Risiken]
+NN
+   sofa: _InitialView
+   begin: 35
+   end: 42
+   PosValue: "NN"
 [ein]
 V
    sofa: _InitialView
@@ -683,12 +683,6 @@ Token
       PosValue: "PPOSAT"
    morph: <null>
 [Möglichkeiten]
-NN
-   sofa: _InitialView
-   begin: 64
-   end: 77
-   PosValue: "NN"
-[Möglichkeiten]
 Token
    sofa: _InitialView
    begin: 64
@@ -737,6 +731,12 @@ Token
       end: 77
       PosValue: "NN"
    morph: <null>
+[Möglichkeiten]
+NN
+   sofa: _InitialView
+   begin: 64
+   end: 77
+   PosValue: "NN"
 [auszureizen]
 V
    sofa: _InitialView
