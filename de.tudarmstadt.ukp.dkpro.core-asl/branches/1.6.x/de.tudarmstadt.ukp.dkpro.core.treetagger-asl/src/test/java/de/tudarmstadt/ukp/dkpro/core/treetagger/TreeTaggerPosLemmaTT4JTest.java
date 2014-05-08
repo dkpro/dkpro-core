@@ -430,6 +430,29 @@ class TreeTaggerPosLemmaTT4JTest
 //				tt);
 //    }
 
+	/*
+	 * Uncomment to test explicitly setting model/binary locations
+	 */
+//	@Test
+//	public void testExplicitBinaryModel() throws Exception
+//	{
+//          AnalysisEngine tt = createEngine(TreeTaggerPosLemmaTT4J.class,
+//                  TreeTaggerPosLemmaTT4J.PARAM_EXECUTABLE_PATH, 
+//                  "/Applications/tree-tagger-MacOSX-3.2-intel/bin/tree-tagger",
+//                  TreeTaggerPosLemmaTT4J.PARAM_MODEL_PATH,
+//                  "/Applications/tree-tagger-MacOSX-3.2-intel/models/german-par-linux-3.2-utf8.bin",
+//                  TreeTaggerPosLemmaTT4J.PARAM_MODEL_ENCODING, "UTF-8");
+//          
+//          JCas jcas = JCasFactory.createJCas();
+//          jcas.setDocumentLanguage("de");
+//
+//          TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
+//                  Sentence.class);
+//          tb.buildTokens(jcas, "Dies ist ein test .");
+//          
+//          tt.process(jcas);
+//	}
+
 	@Rule
 	public TestName name = new TestName();
 

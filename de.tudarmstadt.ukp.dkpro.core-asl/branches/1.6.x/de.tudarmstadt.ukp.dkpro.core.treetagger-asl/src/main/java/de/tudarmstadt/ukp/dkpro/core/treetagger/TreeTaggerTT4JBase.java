@@ -385,7 +385,12 @@ public abstract class TreeTaggerTT4JBase<T>
         public DKProModel(String aName, File aFile, String aEncoding, Properties aProperties)
         {
             super(aName, aFile, aEncoding);
-            properties = aProperties;
+            if (aProperties != null) {
+                properties = aProperties;
+            }
+            else {
+                properties = new Properties();
+            }
         }
     }
 
