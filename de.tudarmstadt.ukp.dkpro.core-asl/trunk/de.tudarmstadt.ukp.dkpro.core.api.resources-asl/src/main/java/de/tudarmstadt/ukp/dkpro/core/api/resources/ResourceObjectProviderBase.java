@@ -63,6 +63,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.internal.ApacheCommonsLoggingAdapter;
@@ -861,7 +862,9 @@ public abstract class ResourceObjectProviderBase<M>
 
         if ((defaultVariants == null) && (defaultVariantsLocation != null)) {
             String dvl = pph.replacePlaceholders(defaultVariantsLocation, overriddenValues);
-            setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(dvl));
+            if (ClassUtils.getDefaultClassLoader().getResource(dvl) != null) {
+                setDefaultVariants(PropertiesLoaderUtils.loadAllProperties(dvl));
+            }
         }
 
         String language = overriddenValues.getProperty(LANGUAGE);
