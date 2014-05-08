@@ -45,7 +45,6 @@ public class BlikiWikipediaReaderTest
         for (JCas jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             assertTrue(jcas.getDocumentText().length() > 0);
-            System.out.println(jcas.getDocumentText());
             i++;
         }
 
@@ -68,7 +67,6 @@ public class BlikiWikipediaReaderTest
         for (JCas jcas : new JCasIterable(reader)) {
             assertNotNull(jcas);
             assertTrue(jcas.getDocumentText().length() > 0);
-            System.out.println(jcas.getDocumentText());
             i++;
         }
 
