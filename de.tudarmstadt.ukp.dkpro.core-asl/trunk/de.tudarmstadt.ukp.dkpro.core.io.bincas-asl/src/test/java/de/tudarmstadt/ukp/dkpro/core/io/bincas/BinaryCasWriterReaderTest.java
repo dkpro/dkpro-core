@@ -166,6 +166,7 @@ public class BinaryCasWriterReaderTest
         assertEquals("latin", cas.getDocumentLanguage());
     }
 
+    @Ignore("Run this only when you want to compare performance")
     @Test
     public void performanceTest()
         throws Exception
