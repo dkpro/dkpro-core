@@ -94,6 +94,13 @@ public class TreeTaggerPosTagger
 	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
 	protected String modelLocation;
 
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false)
+    protected String modelEncoding;
+
 	/**
 	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
 	 * the mapping automatically.
@@ -194,7 +201,8 @@ public class TreeTaggerPosTagger
 			    throws IOException
 			{
 			    Properties meta = getResourceMetaData();
-			    String encoding = meta.getProperty("encoding");
+                String encoding = modelEncoding != null ? modelEncoding : meta
+                        .getProperty("encoding");
 			    String tagset = meta.getProperty("pos.tagset");
 			    
 			    File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
