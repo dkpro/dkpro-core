@@ -31,9 +31,11 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.util.CasCreationUtils;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 
@@ -43,25 +45,32 @@ public class SerializedCasWriterReaderTest
 	public TemporaryFolder testFolder = new TemporaryFolder();
 
 	@Test
-	public void test() throws Exception
+	public void testCasWithTypeSystemEmbedded() throws Exception
 	{
-		write();
+		write(true);
 		read();
 	}
 
-	public void write() throws Exception
+    @Test
+    public void testCasWithTypeSystemSeparate() throws Exception
+    {
+        write(false);
+        read();
+    }
+
+	public void write(boolean aIncludeTypeSystem) throws Exception
 	{
 		CollectionReader reader = CollectionReaderFactory.createReader(
 				TextReader.class,
 				TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/texts",
-				TextReader.PARAM_PATTERNS, new String [] {
-				    TextReader.INCLUDE_PREFIX+"*.txt"
-				},
+				TextReader.PARAM_PATTERNS, "*.txt",
 				TextReader.PARAM_LANGUAGE, "latin");
 
 		AnalysisEngine writer = AnalysisEngineFactory.createEngine(
 				SerializedCasWriter.class,
-				SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
+				SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
+				SerializedCasWriter.PARAM_TYPE_SYSTEM_FILE, 
+				        aIncludeTypeSystem ? null : testFolder.newFile("typesystem.ser"));
 
 		runPipeline(reader, writer);
 
@@ -72,10 +81,10 @@ public class SerializedCasWriterReaderTest
 	{
 		CollectionReader reader = CollectionReaderFactory.createReader(
 				SerializedCasReader.class,
-				SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot().getPath(),
-				SerializedCasReader.PARAM_PATTERNS, new String [] {
-				    SerializedCasReader.INCLUDE_PREFIX+"*.ser"
-				});
+				SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot(),
+				SerializedCasReader.PARAM_PATTERNS, "*.ser",
+				SerializedCasReader.PARAM_TYPE_SYSTEM_FILE, 
+				        new File(testFolder.getRoot(), "typesystem.ser"));
 
 		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
 		reader.getNext(cas);
@@ -167,4 +176,19 @@ public class SerializedCasWriterReaderTest
 //        // Restore CAS data to new type system
 //        Serialization.deserializeCAS(aCas, new ByteArrayInputStream(os2.toByteArray()), oldTypeSystem, null);
 //    }
+
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+    }
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }

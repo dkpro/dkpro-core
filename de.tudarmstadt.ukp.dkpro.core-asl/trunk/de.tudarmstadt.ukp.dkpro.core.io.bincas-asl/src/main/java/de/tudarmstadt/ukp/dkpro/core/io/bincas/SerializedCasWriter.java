@@ -40,11 +40,11 @@ public class SerializedCasWriter
 	extends JCasFileWriter_ImplBase
 {
 	/**
-	 * Location to write the type system to. If this is not set, a file called
-	 * {@code typesystem.ser} will be written to the output path. If this is set, it is expected to
-	 * be a file relative to the current work directory or an absolute file.
+	 * Location to write the type system to. The type system is saved using Java serialization, it
+	 * is not saved as a XML type system description. We recommend to use the name
+	 * {@code typesystem.ser}.
 	 * <br>
-	 * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the
+	 * The {@link #PARAM_COMPRESSION} parameter has no effect on the
 	 * type system. Instead, if the type system file should be compressed or not is detected from
 	 * the file name extension (e.g. ".gz").
 	 * <br>
@@ -68,20 +68,26 @@ public class SerializedCasWriter
 	{
 		ObjectOutputStream docOS = null;
         try {
-        	docOS = new ObjectOutputStream(getOutputStream(aJCas, filenameSuffix));
+            File outputFile = getTargetPath(aJCas, filenameSuffix);
+            docOS = new ObjectOutputStream(CompressionUtils.getOutputStream(outputFile));
 
         	if (typeSystemFile == null) {
+                getLogger().debug("Writing CAS and type system to [" + outputFile + "]");
 	    		CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
 	    		docOS.writeObject(serializer);
         	}
         	else {
+                if (!typeSystemWritten) {
+                    getLogger().debug(
+                            "Writing type system to [" + typeSystemFile + "]");
+                    writeTypeSystem(aJCas);
+                    typeSystemWritten = true;
+                }
+                
+                getLogger().debug("Writing CAS to [" + outputFile + "]");
         		CASSerializer serializer = new CASSerializer();
         		serializer.addCAS(aJCas.getCasImpl());
 	    		docOS.writeObject(serializer);
-	    		if (!typeSystemWritten) {
-	    			writeTypeSystem(aJCas);
-	    			typeSystemWritten = true;
-	    		}
         	}
         }
         catch (Exception e) {
@@ -97,11 +103,11 @@ public class SerializedCasWriter
 		ObjectOutputStream typeOS = null;
 
 		File typeOSFile;
-		if (typeSystemFile != null) {
-			typeOSFile = typeSystemFile;
+		if (typeSystemFile == null) {
+            typeOSFile = getTargetPath("typesystem", ".ser");
 		}
 		else {
-			typeOSFile = getTargetPath("typesystem", ".ser");
+            typeOSFile = typeSystemFile;
 		}
 
 		typeOS = new ObjectOutputStream(CompressionUtils.getOutputStream(typeOSFile));

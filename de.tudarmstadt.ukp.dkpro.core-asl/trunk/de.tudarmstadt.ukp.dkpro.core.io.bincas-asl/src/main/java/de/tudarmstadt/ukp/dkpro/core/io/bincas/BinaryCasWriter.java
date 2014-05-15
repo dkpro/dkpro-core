@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.bincas;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.cas.impl.Serialization.serializeCAS;
+import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.cas.impl.Serialization.serializeCASMgr;
 import static org.apache.uima.cas.impl.Serialization.serializeWithCompression;
 
@@ -29,6 +30,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -48,14 +50,28 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * <th>CAS Addresses preserved</th>
  * </tr>
  * <tr>
- * <td>0</td>
+ * <td>S</td>
  * <td>CAS structures are dumped to disc as they are using Java serialization ({@link CASSerializer}
  * ). Because these structures are pre-allocated in memory at larger sizes than what is actually
  * required, files in this format may be larger than necessary. However, the CAS addresses of
  * feature structures are preserved in this format. When the data is loaded back into a CAS, it must
- * have been initialized with the same type system as the original CAS. Note that the DKPro Core
- * SerializedCasWriter is not writing in form 0 (using CASSerializer), but in an another form (using
- * CASCompleteSerializer) which also includes the complete type system definition and indexes.</td>
+ * have been initialized with the same type system as the original CAS.</td>
+ * <td>must be the same</td>
+ * <td>yes</td>
+ * </tr>
+ * <tr>
+ * <td>S+</td>
+ * <td>CAS structures are dumped to disc as they are using Java serialization as in form 0, but
+ * now using the {@link CASCompleteSerializer} which includes CAS metadata like type system and
+ * index repositories.</td>
+ * <td>is reinitialized</td>
+ * <td>yes</td>
+ * </tr>
+ * <tr>
+ * <td>0</td>
+ * <td>CAS structures are dumped to disc as they are using Java serialization ({@link CASSerializer}
+ * ). This is basically the same as format {@code S} but includes a UIMA header and can be read
+ * using {@link org.apache.uima.cas.impl.Serialization#deserializeCAS}.</td>
  * <td>must be the same</td>
  * <td>yes</td>
  * </tr>
@@ -93,15 +109,22 @@ public class BinaryCasWriter
     extends JCasFileWriter_ImplBase
 {
     /**
-     * Location to write the type system to. If this is not set, a file called typesystem.xml will
-     * be written to the output path. If this is set, it is expected to be a file relative to the
-     * current work directory or an absolute file. <br>
-     * If this parameter is set, the {@link #PARAM_COMPRESSION} parameter has no effect on the type
-     * system. Instead, if the type system file should be compressed or not is detected from the
-     * file name extension (e.g. ".gz"). <br>
+     * Location to write the type system to. The type system is saved using Java serialization, it
+     * is not saved as a XML type system description. We recommend to use the name
+     * {@code typesystem.ser}.
+     * <br>
+     * The {@link #PARAM_COMPRESSION} parameter has no effect on the
+     * type system. Instead, if the type system file should be compressed or not is detected from
+     * the file name extension (e.g. ".gz").
+     * <br>
      * If this parameter is set, the type system and index repository are no longer serialized into
-     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not read
-     * such files. Use this only if you really know what you are doing.
+     * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not
+     * read such files. Use this only if you really know what you are doing.
+     * <br>
+     * This parameter has no effect if formats S+ or 6+ are used as the type system information
+     * is embedded in each individual file. Otherwise, it is recommended that this parameter be
+     * set unless some other mechanism is used to initialize the CAS with the same type system and
+     * index repository during reading that was used during writing.
      */
     public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
     @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
@@ -123,27 +146,52 @@ public class BinaryCasWriter
     {
         OutputStream docOS = null;
         try {
-            docOS = getOutputStream(aJCas, filenameSuffix);
+            File outputFile = getTargetPath(aJCas, filenameSuffix);
+            docOS = CompressionUtils.getOutputStream(outputFile);
 
-            if ("0".equals(format)) {
+            if ("S".equals(format)) {
+                // Java-serialized CAS without type system
+                 getLogger().debug("Writing CAS to [" + outputFile + "]");
+                 CASSerializer serializer = new CASSerializer();
+                 serializer.addCAS(aJCas.getCasImpl());
+                 ObjectOutputStream objOS = new ObjectOutputStream(docOS);
+                 objOS.writeObject(serializer);
+                 objOS.flush();
+            }
+            else if ("S+".equals(format)) {
+                // Java-serialized CAS with type system
+                ObjectOutputStream objOS = new ObjectOutputStream(docOS);
+                CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
+                objOS.writeObject(serializer);
+                objOS.flush();
+                typeSystemWritten = true; // Embedded type system
+            }
+            else if ("0".equals(format)) {
+                // Java-serialized CAS without type system
                 serializeCAS(aJCas.getCas(), docOS);
             }
             else if ("4".equals(format)) {
+                // Binary compressed CAS without type system (form 4)
                 serializeWithCompression(aJCas.getCas(), docOS);
             }
             else if (format.startsWith("6")) {
+                // Binary compressed CAS (form 6)
                 if ("6+".equals(format)) {
+                    // ... with embedded Java-serialized type system
                     writeHeader(docOS);
                     writeTypeSystem(aJCas, docOS);
+                    typeSystemWritten = true; // Embedded type system
                 }
                 serializeWithCompression(aJCas.getCas(), docOS, aJCas.getTypeSystem());
             }
             else {
                 throw new IllegalArgumentException("Unknown format [" + format
-                        + "]. Must be 0, 4,  6, or 6+");
+                        + "]. Must be S, S+, 0, 4, 6, or 6+");
             }
-
-            if (!typeSystemWritten) {
+            
+            if (typeSystemFile != null && !typeSystemWritten) {
+                getLogger().debug(
+                        "Writing type system to [" + typeSystemFile + "]");
                 writeTypeSystem(aJCas);
                 typeSystemWritten = true;
             }
@@ -159,17 +207,9 @@ public class BinaryCasWriter
     private void writeTypeSystem(JCas aJCas)
         throws IOException
     {
-        File typeOSFile;
-        if (typeSystemFile != null) {
-            typeOSFile = typeSystemFile;
-        }
-        else {
-            typeOSFile = getTargetPath("typesystem", ".ser");
-        }
-
-        OutputStream typeOS = null;
+         OutputStream typeOS = null;
         try {
-            typeOS = CompressionUtils.getOutputStream(typeOSFile);
+            typeOS = CompressionUtils.getOutputStream(typeSystemFile);
             writeTypeSystem(aJCas, typeOS);
         }
         finally {

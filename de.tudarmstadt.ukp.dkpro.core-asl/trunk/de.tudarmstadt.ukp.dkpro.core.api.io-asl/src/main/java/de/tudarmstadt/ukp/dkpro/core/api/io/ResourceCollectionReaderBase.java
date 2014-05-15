@@ -158,7 +158,7 @@ public abstract class ResourceCollectionReaderBase
 
         // Parse the patterns and inject them into the FileSet
         List<String> includes = new ArrayList<String>();
-        List<String> excludes = new ArrayList<String>();
+        List<String> excludes = getDefaultExcludes();
         if (patterns != null) {
             for (String pattern : patterns) {
                 if (pattern.startsWith(INCLUDE_PREFIX)) {
@@ -178,6 +178,36 @@ public abstract class ResourceCollectionReaderBase
             }
         }
 
+        try {
+            if (sourceLocation == null) {
+                ListIterator<String> i = includes.listIterator();
+                while (i.hasNext()) {
+                    i.set(locationToUrl(i.next()));
+                }
+                i = excludes.listIterator();
+                while (i.hasNext()) {
+                    i.set(locationToUrl(i.next()));
+                }
+            }
+            else {
+                sourceLocation = locationToUrl(sourceLocation);
+            }
+
+            resources = scan(sourceLocation, includes, excludes);
+
+            // Get the iterator that will be used to actually traverse the FileSet.
+            resourceIterator = resources.iterator();
+
+            getLogger().info("Found [" + resources.size() + "] resources to be read");
+        }
+        catch (IOException e) {
+            throw new ResourceInitializationException(e);
+        }
+    }
+    
+    protected List<String> getDefaultExcludes()
+    {
+        List<String> excludes = new ArrayList<String>();
         // These should be the same as documented here: http://ant.apache.org/manual/dirtasks.html
         if (useDefaultExcludes) {
             excludes.add("**/*~");
@@ -209,32 +239,7 @@ public abstract class ResourceCollectionReaderBase
             excludes.add("**/.bzr/**");
             excludes.add("**/.bzrignore");
         }
-
-        try {
-            if (sourceLocation == null) {
-                ListIterator<String> i = includes.listIterator();
-                while (i.hasNext()) {
-                    i.set(locationToUrl(i.next()));
-                }
-                i = excludes.listIterator();
-                while (i.hasNext()) {
-                    i.set(locationToUrl(i.next()));
-                }
-            }
-            else {
-                sourceLocation = locationToUrl(sourceLocation);
-            }
-
-            resources = scan(sourceLocation, includes, excludes);
-
-            // Get the iterator that will be used to actually traverse the FileSet.
-            resourceIterator = resources.iterator();
-
-            getLogger().info("Found [" + resources.size() + "] resources to be read");
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
-        }
+        return excludes;
     }
 
     /**
