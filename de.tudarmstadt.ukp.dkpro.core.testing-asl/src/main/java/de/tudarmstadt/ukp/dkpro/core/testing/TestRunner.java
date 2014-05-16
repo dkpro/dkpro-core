@@ -26,6 +26,7 @@ import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -78,6 +79,10 @@ public class TestRunner
             String aDocument)
         throws UIMAException
     {
+        // No automatic downloading from repository during testing. This makes sure we fail if
+        // models are not properly added as test dependencies.
+        System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        
         JCas jcas = aEngine.newJCas();
 
         if (aDocumentId != null) {

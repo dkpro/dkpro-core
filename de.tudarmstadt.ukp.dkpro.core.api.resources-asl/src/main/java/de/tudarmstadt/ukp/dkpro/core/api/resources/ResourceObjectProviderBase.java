@@ -27,6 +27,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,6 +99,7 @@ public abstract class ResourceObjectProviderBase<M>
 {
     private final Log log = LogFactory.getLog(ResourceObjectProviderBase.class);
 
+    public static final String PROP_REPO_OFFLINE = "dkpro.model.repository.offline";
     public static final String PROP_REPO_ID = "dkpro.model.repository.id";
     public static final String PROP_REPO_URL = "dkpro.model.repository.url";
 
@@ -697,6 +699,12 @@ public abstract class ResourceObjectProviderBase<M>
     private List<File> resolveWithIvy(String aGroupId, String aArtifactId, String aVersion)
         throws ParseException, IOException
     {
+        if ("true".equals(System.getProperty(PROP_REPO_OFFLINE))) {
+            log.debug("Offline mode active - attempt to download missing resource automatically "
+                    + "is skipped.");
+            return Collections.emptyList();
+        }
+        
         // Configure Ivy
         Message.setDefaultLogger(new ApacheCommonsLoggingAdapter(log));
         IvySettings ivySettings = new IvySettings();
