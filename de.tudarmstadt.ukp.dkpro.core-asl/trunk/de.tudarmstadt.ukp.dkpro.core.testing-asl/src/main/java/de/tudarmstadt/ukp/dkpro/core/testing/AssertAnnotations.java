@@ -35,8 +35,8 @@ import java.util.Map;
 
 import junit.framework.Assert;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.jcas.JCas;
-import org.codehaus.plexus.util.StringUtils;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
