@@ -44,7 +44,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.TaggedWord;
+import edu.stanford.nlp.ling.Word;
+import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import edu.stanford.nlp.util.StringUtils;
 
@@ -103,9 +106,36 @@ public class StanfordPosTagger
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
 	private boolean internStrings;
 
+    /**
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     *
+     * @see PTBEscapingProcessor
+     */
+    public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "true")
+    private boolean ptb3Escaping;
+
+    /**
+     * List of extra token texts (usually single character strings) that should be treated like
+     * opening quotes and escaped accordingly before being sent to the parser.
+     */
+    public static final String PARAM_QUOTE_BEGIN = "quoteBegin";
+    @ConfigurationParameter(name = PARAM_QUOTE_BEGIN, mandatory = false)
+    private List<String> quoteBegin;
+
+    /**
+     * List of extra token texts (usually single character strings) that should be treated like
+     * closing quotes and escaped accordingly before being sent to the parser.
+     */
+    public static final String PARAM_QUOTE_END = "quoteEnd";
+    @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
+    private List<String> quoteEnd;
+	
 	private CasConfigurableProviderBase<MaxentTagger> modelProvider;
 	private MappingProvider mappingProvider;
 
+    private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
+    
 	@Override
 	public void initialize(UimaContext aContext)
 		throws ResourceInitializationException
@@ -173,15 +203,31 @@ public class StanfordPosTagger
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
-			List<TaggedWord> words = new ArrayList<TaggedWord>(tokens.size());
+			List<HasWord> words = new ArrayList<HasWord>(tokens.size());
 			for (Token t : tokens) {
 				words.add(new TaggedWord(t.getCoveredText()));
 			}
-			words = modelProvider.getResource().tagSentence(words);
+			
+            if (ptb3Escaping) {
+                // Apply escaper to the whole sentence, not to each token individually. The
+                // escaper takes context into account, e.g. when transforming regular double
+                // quotes into PTB opening and closing quotes (`` and '').
+                words = escaper.apply(words);
+                for (HasWord w : words) {
+                    if (quoteBegin != null && quoteBegin.contains(w.word())) {
+                        w.setWord("``");
+                    }
+                    else if (quoteEnd != null && quoteEnd.contains(w.word())) {
+                        w.setWord("\'\'");
+                    }
+                }
+            }
+			
+			List<TaggedWord> taggedWords = modelProvider.getResource().tagSentence(words);
 
 			int i = 0;
 			for (Token t : tokens) {
-				TaggedWord tt = words.get(i);
+				TaggedWord tt = taggedWords.get(i);
 				Type posTag = mappingProvider.getTagType(tt.tag());
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
 				posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
