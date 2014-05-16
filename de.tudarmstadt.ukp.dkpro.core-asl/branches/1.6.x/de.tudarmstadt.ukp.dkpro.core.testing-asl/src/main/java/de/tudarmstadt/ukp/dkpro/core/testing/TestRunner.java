@@ -25,6 +25,8 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -48,18 +50,54 @@ public class TestRunner
      * 
      * @see TokenBuilder
      */
+    public static JCas runTest(String aDocumentId, AnalysisEngineDescription aEngine,
+            String aLanguage, String aDocument)
+        throws UIMAException
+    {
+        return runTest(aDocumentId, createEngine(aEngine), aLanguage, aDocument);
+    }
+
+    /**
+     * Run an analysis engine using a document. The document is automatically split into tokens and
+     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * 
+     * @see TokenBuilder
+     */
     public static JCas runTest(AnalysisEngine aEngine, String aLanguage, String aDocument)
         throws UIMAException
     {
-        JCas aJCas = aEngine.newJCas();
-        aJCas.setDocumentLanguage(aLanguage);
+        return runTest(null, aEngine, aLanguage, aDocument);
+    }
+
+    /**
+     * Run an analysis engine using a document. The document is automatically split into tokens and
+     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * 
+     * @see TokenBuilder
+     */
+    public static JCas runTest(String aDocumentId, AnalysisEngine aEngine, String aLanguage,
+            String aDocument)
+        throws UIMAException
+    {
+        // No automatic downloading from repository during testing. This makes sure we fail if
+        // models are not properly added as test dependencies.
+        System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
+        
+        JCas jcas = aEngine.newJCas();
+
+        if (aDocumentId != null) {
+            DocumentMetaData meta = DocumentMetaData.create(jcas);
+            meta.setDocumentId(aDocumentId);
+        }
+
+        jcas.setDocumentLanguage(aLanguage);
 
         TokenBuilder<Token, Sentence> tb = new TokenBuilder<Token, Sentence>(Token.class,
                 Sentence.class);
-        tb.buildTokens(aJCas, aDocument);
+        tb.buildTokens(jcas, aDocument);
 
-        aEngine.process(aJCas);
-
-        return aJCas;
+        aEngine.process(jcas);
+        
+        return jcas;
     }
 }
