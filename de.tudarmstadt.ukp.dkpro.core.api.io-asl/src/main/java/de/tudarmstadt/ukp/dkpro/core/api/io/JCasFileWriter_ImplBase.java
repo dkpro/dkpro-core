@@ -17,13 +17,19 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.io;
 
+import static org.apache.commons.io.IOUtils.closeQuietly;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
@@ -39,12 +45,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 public abstract class JCasFileWriter_ImplBase
 	extends JCasConsumer_ImplBase
 {
+    protected static final String JAR_PREFIX = "jar:file:";
+    
 	/**
-	 * The folder to write the generated XMI files to.
+	 * Target location
 	 */
 	public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
 	@ConfigurationParameter(name=PARAM_TARGET_LOCATION, mandatory=true)
-	private File path;
+	private String targetLocation;
 
     /**
      * Choose a compression method. (default: {@link CompressionMethod#NONE})
@@ -76,6 +84,10 @@ public abstract class JCasFileWriter_ImplBase
     @ConfigurationParameter(name=PARAM_ESCAPE_DOCUMENT_ID, mandatory=true, defaultValue="true")
     private boolean escapeDocumentId;
 
+    private ZipOutputStream zipOutputStream;
+    private String zipPath;
+    private String zipEntryPrefix;
+    
     protected CompressionMethod getCompressionMethod()
 	{
 		return compression;
@@ -91,10 +103,87 @@ public abstract class JCasFileWriter_ImplBase
 		return useDocumentId;
 	}
 
-    protected OutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
+    @Override
+    public void collectionProcessComplete()
+        throws AnalysisEngineProcessException
     {
-    	File outputFile = getTargetPath(aJCas, aExtension);
-		return CompressionUtils.getOutputStream(outputFile);
+        if (zipOutputStream != null) {
+            closeQuietly(zipOutputStream);
+        }
+        super.collectionProcessComplete();
+    }
+    
+    protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
+    {
+        return getOutputStream(getRelativePath(aJCas), aExtension);
+    }
+
+    protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension) throws IOException
+    {
+        if (targetLocation.startsWith(JAR_PREFIX)) {
+            if (zipOutputStream == null) {
+                zipPath = targetLocation.substring(JAR_PREFIX.length());
+                zipEntryPrefix = "";
+                int sep = zipPath.indexOf('!');
+                if (sep > -1) {
+                    zipEntryPrefix = zipPath.substring(sep+1);
+                    zipPath = zipPath.substring(0, sep);
+                }
+                
+                if (zipEntryPrefix.length() > 0 && !zipEntryPrefix.endsWith("/")) {
+                    zipEntryPrefix += '/';
+                }
+                
+                zipOutputStream = new ZipOutputStream(new FileOutputStream(zipPath));
+            }
+            
+            // Begin new entry
+            ZipEntry entry = new ZipEntry(zipEntryPrefix + aRelativePath + aExtension
+                    + compression.getExtension());
+            zipOutputStream.putNextEntry(entry);
+            
+            // We return an OutputStream for an individual entry. When this is closed by the
+            // caller, it actually closes the entry. The full ZIP stream is closed when the 
+            // collectionProcessComplete event is triggered
+            return new ZipEntryOutputStream(JAR_PREFIX + zipPath + '!' + entry.getName(),
+                    zipOutputStream);
+        }
+        else {
+            File outputFile = getTargetPath(aRelativePath, aExtension);
+            return new NamedOutputStream(outputFile.getAbsolutePath(),
+                    CompressionUtils.getOutputStream(outputFile));
+        }
+    }
+    
+    /**
+     * Get the full target path for the given CAS and extension. If the
+     * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
+     *
+     * @param aExtension the extension.
+     * @return the full path.
+     * @deprecated Use {@link #getOutputStream(JCas, String)} instead
+     */
+    // Eventually, this method should become private
+    @Deprecated
+    protected File getTargetPath(JCas aJCas, String aExtension)
+    {
+        return getTargetPath(getRelativePath(aJCas), aExtension);
+    }
+
+    /**
+     * Get the full target path for the given relative path and extension. If the
+     * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
+     *
+     * @param aRelativePath the relative path.
+     * @param aExtension the extension.
+     * @return the full path.
+     * @deprecated Use {@link #getOutputStream(String, String)} instead
+     */
+    // Eventually, this method should become private
+    @Deprecated
+    protected File getTargetPath(String aRelativePath, String aExtension)
+    {
+        return new File(targetLocation, aRelativePath + aExtension + compression.getExtension());
     }
 
 	/**
@@ -144,29 +233,80 @@ public abstract class JCasFileWriter_ImplBase
 			return relativeDocumentPath;
 		}
 	}
+	
+    public static class NamedOutputStream
+        extends OutputStream
+    {
+        private final String name;
+        protected final OutputStream outputStream;
 
-	/**
-	 * Get the full target path for the given CAS and extension. If the
-	 * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
-	 *
-	 * @param aExtension the extension.
-	 * @return the full path.
-	 */
-	protected File getTargetPath(JCas aJCas, String aExtension)
-	{
-		return getTargetPath(getRelativePath(aJCas), aExtension);
-	}
+        public NamedOutputStream(String aName, OutputStream aOutputStream)
+        {
+            super();
+            name = aName;
+            outputStream = aOutputStream;
+        }
 
-	/**
-	 * Get the full target path for the given relative path and extension. If the
-	 * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
-	 *
-	 * @param aRelativePath the relative path.
-	 * @param aExtension the extension.
-	 * @return the full path.
-	 */
-	protected File getTargetPath(String aRelativePath, String aExtension)
-	{
-		return new File(path, aRelativePath + aExtension + compression.getExtension());
-	}
+        public String getName()
+        {
+            return name;
+        }
+
+        @Override
+        public void write(int paramInt)
+            throws IOException
+        {
+            outputStream.write(paramInt);
+        }
+
+        @Override
+        public void write(byte[] paramArrayOfByte)
+            throws IOException
+        {
+            outputStream.write(paramArrayOfByte);
+        }
+
+        @Override
+        public void write(byte[] paramArrayOfByte, int paramInt1, int paramInt2)
+            throws IOException
+        {
+            outputStream.write(paramArrayOfByte, paramInt1, paramInt2);
+        }
+
+        @Override
+        public void flush()
+            throws IOException
+        {
+            outputStream.flush();
+        }
+
+        @Override
+        public void close()
+            throws IOException
+        {
+            outputStream.close();
+        }
+        
+        @Override
+        public String toString()
+        {
+            return getName();
+        }
+    }
+    
+    private static class ZipEntryOutputStream extends NamedOutputStream
+    {
+
+        public ZipEntryOutputStream(String aName, ZipOutputStream aOutputStream)
+        {
+            super(aName, aOutputStream);
+        }
+        
+        @Override
+        public void close()
+            throws IOException
+        {
+            ((ZipOutputStream) outputStream).closeEntry();
+        }
+    }
 }

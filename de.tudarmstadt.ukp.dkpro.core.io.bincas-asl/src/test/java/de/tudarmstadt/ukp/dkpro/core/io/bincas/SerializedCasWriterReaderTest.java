@@ -69,7 +69,7 @@ public class SerializedCasWriterReaderTest
 		AnalysisEngine writer = AnalysisEngineFactory.createEngine(
 				SerializedCasWriter.class,
 				SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
-				SerializedCasWriter.PARAM_TYPE_SYSTEM_FILE, 
+				SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
 				        aIncludeTypeSystem ? null : testFolder.newFile("typesystem.ser"));
 
 		runPipeline(reader, writer);
@@ -83,7 +83,7 @@ public class SerializedCasWriterReaderTest
 				SerializedCasReader.class,
 				SerializedCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot(),
 				SerializedCasReader.PARAM_PATTERNS, "*.ser",
-				SerializedCasReader.PARAM_TYPE_SYSTEM_FILE, 
+				SerializedCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
 				        new File(testFolder.getRoot(), "typesystem.ser"));
 
 		CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);

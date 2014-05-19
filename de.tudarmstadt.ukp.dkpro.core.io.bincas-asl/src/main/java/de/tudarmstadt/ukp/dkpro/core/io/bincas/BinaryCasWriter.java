@@ -37,6 +37,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
@@ -126,17 +127,17 @@ public class BinaryCasWriter
      * set unless some other mechanism is used to initialize the CAS with the same type system and
      * index repository during reading that was used during writing.
      */
-    public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
-    @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_FILE, mandatory = false)
-    private File typeSystemFile;
+    public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
+    @ConfigurationParameter(name = PARAM_TYPE_SYSTEM_LOCATION, mandatory = false)
+    private String typeSystemLocation;
 
     public static final String PARAM_FORMAT = "format";
     @ConfigurationParameter(name = PARAM_FORMAT, mandatory = true, defaultValue = "6+")
     private String format;
 
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name=PARAM_FILENAME_SUFFIX, mandatory=true, defaultValue=".bin")
-    private String filenameSuffix;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name=PARAM_FILENAME_EXTENSION, mandatory=true, defaultValue=".bin")
+    private String filenameExtension;
 
     private boolean typeSystemWritten;
 
@@ -144,14 +145,13 @@ public class BinaryCasWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        OutputStream docOS = null;
+        NamedOutputStream docOS = null;
         try {
-            File outputFile = getTargetPath(aJCas, filenameSuffix);
-            docOS = CompressionUtils.getOutputStream(outputFile);
+            docOS = getOutputStream(aJCas, filenameExtension);
 
             if ("S".equals(format)) {
                 // Java-serialized CAS without type system
-                 getLogger().debug("Writing CAS to [" + outputFile + "]");
+                 getLogger().debug("Writing CAS to [" + docOS + "]");
                  CASSerializer serializer = new CASSerializer();
                  serializer.addCAS(aJCas.getCasImpl());
                  ObjectOutputStream objOS = new ObjectOutputStream(docOS);
@@ -188,13 +188,6 @@ public class BinaryCasWriter
                 throw new IllegalArgumentException("Unknown format [" + format
                         + "]. Must be S, S+, 0, 4, 6, or 6+");
             }
-            
-            if (typeSystemFile != null && !typeSystemWritten) {
-                getLogger().debug(
-                        "Writing type system to [" + typeSystemFile + "]");
-                writeTypeSystem(aJCas);
-                typeSystemWritten = true;
-            }
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
@@ -202,21 +195,48 @@ public class BinaryCasWriter
         finally {
             closeQuietly(docOS);
         }
+        
+        // To support writing to ZIPs, the type system must be written separately from the CAS data
+        try {
+            if (typeSystemLocation != null && !typeSystemWritten) {
+                writeTypeSystem(aJCas);
+                typeSystemWritten = true;
+            }
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
     }
 
     private void writeTypeSystem(JCas aJCas)
         throws IOException
     {
-         OutputStream typeOS = null;
-        try {
-            typeOS = CompressionUtils.getOutputStream(typeSystemFile);
-            writeTypeSystem(aJCas, typeOS);
+        // If the type system location is an absolute file system location, write it there,
+        // otherwise use the default storage which places the file relative to the target location
+        if (!typeSystemLocation.startsWith(JAR_PREFIX) && new File(typeSystemLocation).isAbsolute()) {
+            OutputStream typeOS = null;
+            try {
+                typeOS = CompressionUtils.getOutputStream(new File(typeSystemLocation));
+                getLogger().debug("Writing type system to [" + typeSystemLocation + "]");
+                writeTypeSystem(aJCas, typeOS);
+            }
+            finally {
+                closeQuietly(typeOS);
+            }
         }
-        finally {
-            closeQuietly(typeOS);
+        else {
+            NamedOutputStream typeOS = null;
+            try {
+                typeOS = getOutputStream(typeSystemLocation, "");
+                getLogger().debug("Writing type system to [" + typeOS + "]");
+                writeTypeSystem(aJCas, typeOS);
+            }
+            finally {
+                closeQuietly(typeOS);
+            }
         }
     }
-
+   
     private void writeHeader(OutputStream aOS)
         throws IOException
     {

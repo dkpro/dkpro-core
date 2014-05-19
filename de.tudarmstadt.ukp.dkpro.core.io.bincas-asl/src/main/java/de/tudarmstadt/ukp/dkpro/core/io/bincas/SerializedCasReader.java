@@ -21,7 +21,6 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
@@ -42,9 +41,9 @@ public class SerializedCasReader
     /**
      * The file from which to obtain the type system if it is not embedded in the serialized CAS.
      */
-    public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
-    @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
-    private File typeSystemFile;
+    public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
+    @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_LOCATION, mandatory=false)
+    private String typeSystemLocation;
     
     private CASMgrSerializer casMgrSerializer;
     
@@ -86,19 +85,30 @@ public class SerializedCasReader
 		}
 	}
 	
-	private CASMgrSerializer readCasManager() throws IOException
-	{
-	    // If we already read the type system, return it - do not read it again.
-	    if (casMgrSerializer != null) {
-	        return casMgrSerializer;
-	    }
-
-        getLogger().debug("Reading type system from [" + typeSystemFile + "]");
+    private CASMgrSerializer readCasManager() throws IOException
+    {
+        // If we already read the type system, return it - do not read it again.
+        if (casMgrSerializer != null) {
+            return casMgrSerializer;
+        }
+        
+        org.springframework.core.io.Resource r;
+        // Is absolute?
+        if (typeSystemLocation.indexOf(':') != -1 || typeSystemLocation.startsWith("/")
+                || typeSystemLocation.startsWith(File.separator)) {
+            // If the type system location is absolute, resolve it absolute
+            r = getResolver().getResource(locationToUrl(typeSystemLocation));
+        }
+        else {
+            // If the type system is not absolute, resolve it relative to the base location
+            r = getResolver().getResource(getBase() + typeSystemLocation);
+        }
+        getLogger().debug("Reading type system from [" + r.getURI() + "]");
 
         ObjectInputStream is = null;
         try {
-            is = new ObjectInputStream(CompressionUtils.getInputStream(
-                    typeSystemFile.getAbsolutePath(), new FileInputStream(typeSystemFile)));
+            is = new ObjectInputStream(CompressionUtils.getInputStream(typeSystemLocation, 
+                    r.getInputStream()));
             casMgrSerializer = (CASMgrSerializer) is.readObject();
         }
         catch (ClassNotFoundException e) {
@@ -109,5 +119,5 @@ public class SerializedCasReader
         }
         
         return casMgrSerializer;
-	}
+    }
 }

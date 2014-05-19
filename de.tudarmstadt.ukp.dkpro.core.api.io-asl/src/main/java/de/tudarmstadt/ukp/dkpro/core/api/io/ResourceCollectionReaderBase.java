@@ -78,6 +78,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 public abstract class ResourceCollectionReaderBase
     extends CasCollectionReader_ImplBase
 {
+    protected static final String JAR_PREFIX = "jar:file:";
+    
     public static final String INCLUDE_PREFIX = "[+]";
     public static final String EXCLUDE_PREFIX = "[-]";
 
@@ -126,8 +128,9 @@ public abstract class ResourceCollectionReaderBase
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
+    
     /**
-     * Name of optional external (uima) resource that contains the Locator for a (spring)
+     * Name of optional external (UIMA) resource that contains the Locator for a (Spring)
      * ResourcePatternResolver implementation for locating (spring) resources.
      */
     public static final String KEY_RESOURCE_RESOLVER = "resolver";
@@ -150,9 +153,24 @@ public abstract class ResourceCollectionReaderBase
         // If the source location contains a wildcard, split it up into a base and a pattern
         if (patterns == null) {
             int asterisk = sourceLocation.indexOf('*');
-            if (asterisk != -1) {
-                patterns = new String[] { INCLUDE_PREFIX + sourceLocation.substring(asterisk) };
-                sourceLocation = sourceLocation.substring(0, asterisk);
+            int colon = sourceLocation.indexOf(':');
+            if (asterisk != -1 && asterisk > colon) {
+                // asterisk < colon in a case such as "classpath*:file.txt"
+                int separator = Math.max(Math.max(
+                        sourceLocation.lastIndexOf(File.separatorChar, asterisk),
+                        sourceLocation.lastIndexOf('/', asterisk)), sourceLocation.lastIndexOf(':',
+                        asterisk));
+                if (separator != -1) {
+                    // If there is a separator before the asterisk use it to separate into
+                    // base and pattern. This is meant to catch cases such as "dir/foo*.txt" of
+                    // file:foo*.txt
+                    patterns = new String[] { INCLUDE_PREFIX + sourceLocation.substring(separator+1) };
+                    sourceLocation = sourceLocation.substring(0, separator+1);
+                }
+                else {
+                    patterns = new String[] { INCLUDE_PREFIX + sourceLocation };
+                    sourceLocation = "";
+                }
             }
         }
 
@@ -193,7 +211,7 @@ public abstract class ResourceCollectionReaderBase
                 sourceLocation = locationToUrl(sourceLocation);
             }
 
-            resources = scan(sourceLocation, includes, excludes);
+            resources = scan(getSourceLocation(), includes, excludes);
 
             // Get the iterator that will be used to actually traverse the FileSet.
             resourceIterator = resources.iterator();
@@ -249,13 +267,17 @@ public abstract class ResourceCollectionReaderBase
      *            the location.
      * @return an URL.
      */
-    private String locationToUrl(String aLocation)
+    protected String locationToUrl(String aLocation)
         throws MalformedURLException
     {
         String location = aLocation;
 
         if (isUnmarkedFileLocation(aLocation)) {
             location = new File(location).toURI().toURL().toString();
+        }
+        else if (location.startsWith(JAR_PREFIX) && !location.contains("!")) {
+            // If we write something like "jar:file:/my/archive.zip", append the required "!"
+            location += "!";
         }
 
         return location;
@@ -294,6 +316,45 @@ public abstract class ResourceCollectionReaderBase
             completed++;
         }
     }
+    
+    protected String getSourceLocation()
+    {
+        return sourceLocation;
+    }
+    
+    protected boolean isSingleLocation()
+    {
+        return patterns == null;
+    }
+    
+    /**
+     * Get the base location used by the reader. This location always ends in a / if it is set at
+     * all. If there is no base, an empty string is returned.
+     */
+    protected String getBase()
+    {
+        return getBase(getSourceLocation());
+    }
+    
+    protected String getBase(String aBase)
+    {
+        boolean singleLocation = patterns == null;
+        
+        String base;
+        if (aBase != null) {
+            base = aBase;
+            // If this is a real base location, then add a "/" if there is none
+            if (!singleLocation) {
+                if (!base.endsWith("/") && !base.endsWith(":")) {
+                    base += "/";
+                }
+            }
+        }
+        else {
+            base = "";
+        }
+        return base;
+    }
 
     @Override
     public Progress[] getProgress()
@@ -301,6 +362,11 @@ public abstract class ResourceCollectionReaderBase
         return new Progress[] { new ProgressImpl(completed, resources.size(), "file") };
     }
 
+    protected ResourcePatternResolver getResolver()
+    {
+        return resolver;
+    }
+    
     @Override
     public boolean hasNext()
         throws IOException, CollectionException
@@ -312,22 +378,11 @@ public abstract class ResourceCollectionReaderBase
             Collection<String> aExcludes)
         throws IOException
     {
-        boolean singleLocation = patterns == null;
+        boolean singleLocation = isSingleLocation();
+        String base = getBase(aBase);
 
-        String base;
-        if (aBase != null) {
-            base = aBase;
-            // If this is a real base location, then add a "/" if there is none
-            if (!singleLocation) {
-                if (!base.endsWith("/")) {
-                    base += "/";
-                }
-            }
-        }
-        else {
-            base = "";
-        }
-
+        getLogger().info("Scanning [" +base + "]");
+        
         Collection<String> includes;
         Collection<String> excludes;
 
@@ -466,7 +521,7 @@ public abstract class ResourceCollectionReaderBase
             }
 
             // Return only dirs or files...
-            if ((aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
+            if ((file.getPath().length() == 0) || (aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
                 return aResource.getFile().toURI();
             }
             else {
