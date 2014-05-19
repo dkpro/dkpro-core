@@ -17,9 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.bincas;
 
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.initRandomCas;
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measurePerformance;
-import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
@@ -36,7 +33,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
@@ -295,72 +291,6 @@ public class BinaryCasWriterReaderTest
         assertFalse(reader.hasNext());
     }
 
-    @Ignore("Run this only when you want to compare performance")
-    @Test
-    public void performanceTest()
-        throws Exception
-    {
-        // Generate test data
-        System.out.printf("Generating test data... ");
-        JCas jcas = JCasFactory.createJCas();
-        DocumentMetaData.create(jcas).setDocumentId("dummy");
-        initRandomCas(jcas, 10000, 30000, 0);
-        System.out.printf("done%n");
-        
-        System.out.printf("Data serialized to %s %n", testFolder.getRoot());
-        
-        // Set up configurations
-        Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<String, AnalysisEngineDescription>();
-        configs.put(
-                "Format 6+ - no compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-        configs.put(
-                "Format 6+ - GZip compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-        configs.put(
-                "Format 6+ - BZIP2 compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.BZIP2,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-        configs.put(
-                "Format 6+ - XZ compression",
-                createEngineDescription(
-                    BinaryCasWriter.class, 
-                    BinaryCasWriter.PARAM_FORMAT, "6+", 
-                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
-                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
-
-        // Run tests
-        for (Entry<String, AnalysisEngineDescription> cfg : configs.entrySet()) {
-            System.out.printf("%s%n", cfg.getKey());
-            
-            for (File f : FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null)) {
-                f.delete();
-            }
-            
-            SummaryStatistics stats = measurePerformance(cfg.getValue(), repeat(jcas, 1000));
-            System.out.printf("  Repeat  %10d times%n", stats.getN());
-            System.out.printf("  Total   %10.0f ms %n", stats.getSum());
-            System.out.printf("  Mean    %10.0f ms %n", stats.getMean());
-            System.out.printf("  Min     %10.0f ms %n", stats.getMin());
-            System.out.printf("  Max     %10.0f ms %n", stats.getMax());
-            
-            for (File f : FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null)) {
-                System.out.printf("  Size    %10d bytes%n", f.length());
-            }
-        }
-    }
-    
     @Before
     public void setupLogging()
     {
