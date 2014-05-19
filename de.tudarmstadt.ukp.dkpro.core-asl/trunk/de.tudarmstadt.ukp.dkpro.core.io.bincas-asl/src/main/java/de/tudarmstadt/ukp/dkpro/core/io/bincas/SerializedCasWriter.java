@@ -24,16 +24,17 @@ import static org.apache.uima.cas.impl.Serialization.serializeCASMgr;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
-import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 public class SerializedCasWriter
@@ -52,13 +53,13 @@ public class SerializedCasWriter
 	 * the same file as the test of the CAS. The {@link SerializedCasReader} can currently not
 	 * read such files. Use this only if you really know what you are doing.
 	 */
-	public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
-	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
-	private File typeSystemFile;
+	public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
+	@ConfigurationParameter(name=PARAM_TYPE_SYSTEM_LOCATION, mandatory=false)
+	private String typeSystemLocation;
 
-    public static final String PARAM_FILENAME_SUFFIX = "filenameSuffix";
-    @ConfigurationParameter(name=PARAM_FILENAME_SUFFIX, mandatory=true, defaultValue=".ser")
-    private String filenameSuffix;
+    public static final String PARAM_FILENAME_EXTENSION = ComponentParameters.PARAM_FILENAME_EXTENSION;
+    @ConfigurationParameter(name=PARAM_FILENAME_EXTENSION, mandatory=true, defaultValue=".ser")
+    private String filenameExtension;
 
 	private boolean typeSystemWritten;
 
@@ -66,25 +67,30 @@ public class SerializedCasWriter
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
+        // To support writing to ZIPs, the type system must be written before the CAS document
+        // output stream is obtained.
+	    try {
+            if (typeSystemLocation != null && !typeSystemWritten) {
+                writeTypeSystem(aJCas);
+                typeSystemWritten = true;
+            }
+	    }
+        catch (Exception e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+	    
 		ObjectOutputStream docOS = null;
         try {
-            File outputFile = getTargetPath(aJCas, filenameSuffix);
-            docOS = new ObjectOutputStream(CompressionUtils.getOutputStream(outputFile));
+            NamedOutputStream os = getOutputStream(aJCas, filenameExtension);
+            docOS = new ObjectOutputStream(os);
 
-        	if (typeSystemFile == null) {
-                getLogger().debug("Writing CAS and type system to [" + outputFile + "]");
+        	if (typeSystemLocation == null) {
+                getLogger().debug("Writing CAS and type system to [" + os + "]");
 	    		CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
 	    		docOS.writeObject(serializer);
         	}
         	else {
-                if (!typeSystemWritten) {
-                    getLogger().debug(
-                            "Writing type system to [" + typeSystemFile + "]");
-                    writeTypeSystem(aJCas);
-                    typeSystemWritten = true;
-                }
-                
-                getLogger().debug("Writing CAS to [" + outputFile + "]");
+                getLogger().debug("Writing CAS to [" + os + "]");
         		CASSerializer serializer = new CASSerializer();
         		serializer.addCAS(aJCas.getCasImpl());
 	    		docOS.writeObject(serializer);
@@ -98,27 +104,41 @@ public class SerializedCasWriter
         }
 	}
 
-	private void writeTypeSystem(JCas aJCas) throws IOException
-	{
-		ObjectOutputStream typeOS = null;
+    private void writeTypeSystem(JCas aJCas)
+        throws IOException
+    {
+        // If the type system location is an absolute file system location, write it there,
+        // otherwise use the default storage which places the file relative to the target location
+        if (!typeSystemLocation.startsWith(JAR_PREFIX) && new File(typeSystemLocation).isAbsolute()) {
+            OutputStream typeOS = null;
+            try {
+                typeOS = CompressionUtils.getOutputStream(new File(typeSystemLocation));
+                getLogger().debug("Writing type system to [" + typeSystemLocation + "]");
+                writeTypeSystem(aJCas, typeOS);
+            }
+            finally {
+                closeQuietly(typeOS);
+            }
+        }
+        else {
+            NamedOutputStream typeOS = null;
+            try {
+                typeOS = getOutputStream(typeSystemLocation, "");
+                getLogger().debug("Writing type system to [" + typeOS + "]");
+                writeTypeSystem(aJCas, typeOS);
+            }
+            finally {
+                closeQuietly(typeOS);
+            }
+        }
+    }
 
-		File typeOSFile;
-		if (typeSystemFile == null) {
-            typeOSFile = getTargetPath("typesystem", ".ser");
-		}
-		else {
-            typeOSFile = typeSystemFile;
-		}
-
-		typeOS = new ObjectOutputStream(CompressionUtils.getOutputStream(typeOSFile));
-
-		try {
-			CASMgrSerializer casMgrSerializer = serializeCASMgr(aJCas.getCasImpl());
-			casMgrSerializer.addTypeSystem((TypeSystemImpl) aJCas.getTypeSystem());
-			typeOS.writeObject(casMgrSerializer);
-		}
-		finally {
-			closeQuietly(typeOS);
-		}
-	}
+    private void writeTypeSystem(JCas aJCas, OutputStream aOS)
+        throws IOException
+    {
+        ObjectOutputStream typeOS = new ObjectOutputStream(aOS);
+        CASMgrSerializer casMgrSerializer = serializeCASMgr(aJCas.getCasImpl());
+        typeOS.writeObject(casMgrSerializer);
+        typeOS.flush();
+    }
 }

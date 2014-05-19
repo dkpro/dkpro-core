@@ -74,6 +74,16 @@ public final class ComponentParameters
 	 */
 	public static final String PARAM_TARGET_ENCODING = "targetEncoding";
 
+    /**
+     * Use this filename extension.
+     */
+    public static final String PARAM_FILENAME_EXTENSION = "filenameExtension";
+
+    /**
+     * Remove the original extension.
+     */
+    public static final String PARAM_STRIP_EXTENSION = "stripExtension";
+
 	/**
 	 * Log the tag set(s) when a model is loaded.
 	 */
