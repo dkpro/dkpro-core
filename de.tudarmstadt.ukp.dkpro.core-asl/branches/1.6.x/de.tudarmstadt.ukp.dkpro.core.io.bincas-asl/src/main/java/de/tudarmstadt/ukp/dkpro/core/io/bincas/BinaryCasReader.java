@@ -23,10 +23,10 @@ import static org.apache.uima.cas.impl.Serialization.*;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -40,6 +40,7 @@ import org.apache.uima.cas.impl.TypeSystemImpl;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
+
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
@@ -47,11 +48,11 @@ public class BinaryCasReader
     extends ResourceCollectionReaderBase
 {
     /**
-     * The file from which to obtain the type system when the CAS is stored in form 0.
+     * The location from which to obtain the type system when the CAS is stored in form 0.
      */
-    public static final String PARAM_TYPE_SYSTEM_FILE = "typeSystemFile";
-    @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_FILE, mandatory=false)
-    private File typeSystemFile;
+    public static final String PARAM_TYPE_SYSTEM_LOCATION = "typeSystemLocation";
+    @ConfigurationParameter(name=PARAM_TYPE_SYSTEM_LOCATION, mandatory=false)
+    private String typeSystemLocation;
     
     private CASMgrSerializer casMgrSerializer;
         
@@ -110,7 +111,7 @@ public class BinaryCasReader
                     
                     if ((version & 4) == 4 && (version1 != 0)) {
                         // This is a form 6
-                        if (ts == null && typeSystemFile != null) {
+                        if (ts == null && typeSystemLocation != null) {
                             // If there was not type system in the file but one is set, then load it
                             ts = readCasManager().getTypeSystem();
                             ts.commit();
@@ -138,7 +139,7 @@ public class BinaryCasReader
                     else if (object instanceof CASSerializer) {
                         getLogger().debug("Found CAS serialized using CASSerializer");
                         CASCompleteSerializer serializer;
-                        if (typeSystemFile != null) {
+                        if (typeSystemLocation != null) {
                             // Annotations and CAS metadata saved separately
                             serializer = new CASCompleteSerializer();
                             serializer.setCasMgrSerializer(readCasManager());
@@ -174,16 +175,38 @@ public class BinaryCasReader
         }
     }
     
+    /**
+     * It is possible that the type system overlaps with the scan pattern for files, e.g. because
+     * the type system ends in {@code .ser} and the resources also end in {@code .ser}. If this is
+     * the case, we filter the type system file from the resource files during scanning.
+     */
     @Override
     protected Collection<Resource> scan(String aBase, Collection<String> aIncludes,
             Collection<String> aExcludes)
         throws IOException
     {
         Collection<Resource> resources = super.scan(aBase, aIncludes, aExcludes);
-        if (typeSystemFile != null) {
-            resources.remove(new Resource(null, null, typeSystemFile.toURI(), null, null, null));
+        if (typeSystemLocation != null) {
+            org.springframework.core.io.Resource r = getTypeSystemResource();
+            resources.remove(new Resource(null, null, r.getURI(), null, null, r));
         }
         return resources;
+    }
+    
+    protected org.springframework.core.io.Resource getTypeSystemResource() throws MalformedURLException
+    {
+        org.springframework.core.io.Resource r;
+        // Is absolute?
+        if (typeSystemLocation.indexOf(':') != -1 || typeSystemLocation.startsWith("/")
+                || typeSystemLocation.startsWith(File.separator)) {
+            // If the type system location is absolute, resolve it absolute
+            r = getResolver().getResource(locationToUrl(typeSystemLocation));
+        }
+        else {
+            // If the type system is not absolute, resolve it relative to the base location
+            r = getResolver().getResource(getBase() + typeSystemLocation);
+        }
+        return r;
     }
     
     private CASMgrSerializer readCasManager() throws IOException
@@ -192,13 +215,14 @@ public class BinaryCasReader
         if (casMgrSerializer != null) {
             return casMgrSerializer;
         }
-
-        getLogger().debug("Reading type system from [" + typeSystemFile + "]");
+        
+        org.springframework.core.io.Resource r = getTypeSystemResource();
+        getLogger().debug("Reading type system from [" + r.getURI() + "]");
 
         ObjectInputStream is = null;
         try {
-            is = new ObjectInputStream(CompressionUtils.getInputStream(
-                    typeSystemFile.getAbsolutePath(), new FileInputStream(typeSystemFile)));
+            is = new ObjectInputStream(CompressionUtils.getInputStream(typeSystemLocation, 
+                    r.getInputStream()));
             casMgrSerializer = (CASMgrSerializer) is.readObject();
         }
         catch (ClassNotFoundException e) {

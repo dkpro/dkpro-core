@@ -66,6 +66,34 @@ public class ResourceCollectionReaderBaseTest
     }
 
     @Test
+    public void testZip2()
+        throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "jar:file:src/test/resources/testfiles.zip",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/FileSetCollectionReaderBase.class",
+                        "[-]**/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testZip3()
+        throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "jar:file:src/test/resources/testfiles.zip",
+                ResourceCollectionReaderBase.PARAM_PATTERNS, new String[] {
+                        "[+]**/FileSetCollectionReaderBase.class",
+                        "[-]test*/ResourceCollectionReaderBase.class" });
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
     public void testZipNoPattern()
         throws Exception
     {
@@ -142,6 +170,39 @@ public class ResourceCollectionReaderBaseTest
         searchForResourceCollectionReaderBase(reader);
     }
 
+    @Test
+    public void testFileNoPattern3()
+        throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "s*/main/java/de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testFileNoPattern4()
+        throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION,
+                "file:s*/main/java/de/tudarmstadt/ukp/dkpro/core/api/io/FileSetCollectionReaderBase.java");
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+
+    @Test
+    public void testFileNoSource()
+        throws Exception
+    {
+        CollectionReader reader = createReader(DummyReader.class,
+                ResourceCollectionReaderBase.PARAM_PATTERNS,
+                "src/main/java/de/tudarmstadt/ukp/**/FileSetCollectionReaderBase.java");
+
+        searchForResourceCollectionReaderBase(reader);
+    }
+    
     @Test(expected = ResourceInitializationException.class)
     public void testBrokenPattern()
         throws Exception
@@ -182,7 +243,7 @@ public class ResourceCollectionReaderBaseTest
         while (aReader.hasNext()) {
             aReader.getNext(cas);
             DocumentMetaData meta = DocumentMetaData.get(cas);
-            System.out.println("Found: " + meta.getDocumentUri());
+            System.out.printf("Found: %s (base: %s)%n ", meta.getDocumentUri(), meta.getDocumentBaseUri());
             if (meta.getDocumentUri().contains(goodNeedle)) {
                 found = true;
                 break;

@@ -72,40 +72,48 @@ public class BinaryCasWriterReaderTest
     public void testSReinitialize()
         throws Exception
     {
-        write("S", true);
-        read(NONE, true); // Type system is reinitialized from the persisted type system
+        write(testFolder.getRoot().getPath(), "S", true);
+        read(testFolder.getRoot().getPath(), NONE, true); // Type system is reinitialized from the persisted type system
+    }
+
+    @Test
+    public void testSReinitializeInZIP()
+        throws Exception
+    {
+        write("jar:file:" + testFolder.getRoot().getPath() + "/archive.zip", "S", true);
+        read("jar:file:" + testFolder.getRoot().getPath() + "/archive.zip", NONE, true); // Type system is reinitialized from the persisted type system
     }
 
     @Test
     public void testSPreinitialized()
         throws Exception
     {
-        write("S", false);
-        read(ALL, false);
+        write(testFolder.getRoot().getPath(), "S", false);
+        read(testFolder.getRoot().getPath(), ALL, false);
     }
 
     @Test
     public void testSplusReinitialize()
         throws Exception
     {
-        write("S+", false);
-        read(NONE, false); // Type system is reinitialized from the persisted CAS
+        write(testFolder.getRoot().getPath(), "S+", false);
+        read(testFolder.getRoot().getPath(), NONE, false); // Type system is reinitialized from the persisted CAS
     }
 
     @Test
     public void test0Preinitialized()
         throws Exception
     {
-        write("0", false);
-        read(ALL, false);
+        write(testFolder.getRoot().getPath(), "0", false);
+        read(testFolder.getRoot().getPath(), ALL, false);
     }
 
     @Test
     public void test4Preinitialized()
         throws Exception
     {
-        write("4", false);
-        read(ALL, false);
+        write(testFolder.getRoot().getPath(), "4", false);
+        read(testFolder.getRoot().getPath(), ALL, false);
     }
     
     /**
@@ -116,51 +124,51 @@ public class BinaryCasWriterReaderTest
     public void test6Lenient()
         throws Exception
     {
-        write("6", true);
-        read(METADATA, true);
+        write(testFolder.getRoot().getPath(), "6", true);
+        read(testFolder.getRoot().getPath(), METADATA, true);
     }
 
     @Test
     public void test6Preinitialized()
         throws Exception
     {
-        write("6", false);
-        read(ALL, false);
+        write(testFolder.getRoot().getPath(), "6", false);
+        read(testFolder.getRoot().getPath(), ALL, false);
     }
 
     @Test
     public void test6plusPreinitialized()
         throws Exception
     {
-        write("6+", false);
-        read(ALL, false);
+        write(testFolder.getRoot().getPath(), "6+", false);
+        read(testFolder.getRoot().getPath(), ALL, false);
     }
 
     @Test
     public void test6plusLenient()
         throws Exception
     {
-        write("6+", false);
-        read(METADATA, false);
+        write(testFolder.getRoot().getPath(), "6+", false);
+        read(testFolder.getRoot().getPath(), METADATA, false);
     }
 
     @Test
     public void testSerializedEmbeddedTypeSystem()
         throws Exception
     {
-        writeSerialized(true);
-        read(NONE, false); // Type system is reinitialized from the persisted CAS
+        writeSerialized(testFolder.getRoot().getPath(), false);
+        read(testFolder.getRoot().getPath(), NONE, false); // Type system is reinitialized from the persisted CAS
     }
 
     @Test
     public void testSerializedSeparateTypeSystem()
         throws Exception
     {
-        writeSerialized(false);
-        read(NONE, true); // Type system is reinitialized from the persisted CAS
+        writeSerialized(testFolder.getRoot().getPath(), true);
+        read(testFolder.getRoot().getPath(), NONE, true); // Type system is reinitialized from the persisted CAS
     }
 
-    public void write(String aFormat, boolean aWriteTypeSystem)
+    public void write(String aLocation, String aFormat, boolean aWriteTypeSystem)
         throws Exception
     {
         System.out.println("--- WRITING ---");
@@ -169,22 +177,38 @@ public class BinaryCasWriterReaderTest
                 ResourceCollectionReaderBase.PARAM_PATTERNS, "*.txt",
                 ResourceCollectionReaderBase.PARAM_LANGUAGE, "latin");
 
-        AnalysisEngine writer = createEngine(
-                BinaryCasWriter.class, 
-                BinaryCasWriter.PARAM_FORMAT, aFormat, 
-                BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
-                BinaryCasWriter.PARAM_TYPE_SYSTEM_FILE, 
-                        aWriteTypeSystem ? testFolder.newFile("typesystem.bin") : null);
+        AnalysisEngine writer;
+        if (false) {
+            writer = createEngine(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_FORMAT, aFormat, 
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aWriteTypeSystem ? new File(aLocation, "typesystem.bin") : null);
+        }
+        else {
+            writer = createEngine(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_FORMAT, aFormat, 
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aWriteTypeSystem ? "typesystem.bin" : null);
+        }
 
         // AnalysisEngine dumper = createEngine(CASDumpWriter.class);
 
         runPipeline(textReader, /* dumper, */writer);
 
-        assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
-        assertTrue(new File(testFolder.getRoot(), "example2.txt.bin").exists());
+        if (aLocation.startsWith("jar:")) {
+            assertTrue(new File(testFolder.getRoot(), "archive.zip").exists());
+        }
+        else {
+            assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
+            assertTrue(new File(testFolder.getRoot(), "example2.txt.bin").exists());
+        }
     }
 
-    public void writeSerialized(boolean aIncludeTypeSystem)
+    public void writeSerialized(String aLocation, boolean aWriteTypeSystem)
         throws Exception
     {
         System.out.println("--- WRITING ---");
@@ -194,19 +218,30 @@ public class BinaryCasWriterReaderTest
                 TextReader.PARAM_PATTERNS, "*.txt",
                 TextReader.PARAM_LANGUAGE, "latin");
 
-        AnalysisEngine writer = AnalysisEngineFactory.createEngine(
-                SerializedCasWriter.class,
-                SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
-                SerializedCasWriter.PARAM_FILENAME_SUFFIX, ".bin",
-                SerializedCasWriter.PARAM_TYPE_SYSTEM_FILE, 
-                        aIncludeTypeSystem ?  null : testFolder.newFile("typesystem.bin"));
+        AnalysisEngine writer;
+        if (false) {
+            writer = AnalysisEngineFactory.createEngine(
+                    SerializedCasWriter.class,
+                    SerializedCasWriter.PARAM_TARGET_LOCATION, aLocation,
+                    SerializedCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
+                    SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aWriteTypeSystem ? new File(aLocation, "typesystem.bin") : null);
+        }
+        else {
+            writer = AnalysisEngineFactory.createEngine(
+                    SerializedCasWriter.class,
+                    SerializedCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot(),
+                    SerializedCasWriter.PARAM_FILENAME_EXTENSION, ".bin",
+                    SerializedCasWriter.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aWriteTypeSystem ? "typesystem.bin" : null);
+        }
 
         runPipeline(reader, writer);
 
         assertTrue(new File(testFolder.getRoot(), "example1.txt.bin").exists());
     }
 
-    public void read(int aMode, boolean aLoadExternal)
+    public void read(String aLocation, int aMode, boolean aLoadExternal)
         throws Exception
     {
         TypeSystemDescription tsd;
@@ -225,13 +260,25 @@ public class BinaryCasWriterReaderTest
         }
         
         System.out.println("--- READING ---");
-        CollectionReader reader = CollectionReaderFactory.createReader(
-                BinaryCasReader.class,
-                BinaryCasReader.PARAM_SOURCE_LOCATION, testFolder.getRoot(),
-                BinaryCasReader.PARAM_PATTERNS, "*.bin",
-                // Allow loading only if TSD is not specified
-                BinaryCasReader.PARAM_TYPE_SYSTEM_FILE, 
-                aLoadExternal ? new File(testFolder.getRoot(), "typesystem.bin") : null);
+        CollectionReader reader;
+        if (false) {
+                reader = CollectionReaderFactory.createReader(
+                        BinaryCasReader.class,
+                        BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
+                        BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                        // Allow loading only if TSD is not specified
+                        BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
+                                aLoadExternal ? new File(aLocation, "typesystem.bin") : null);
+        }
+        else {
+            reader = CollectionReaderFactory.createReader(
+                    BinaryCasReader.class,
+                    BinaryCasReader.PARAM_SOURCE_LOCATION, aLocation,
+                    BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                    // Allow loading only if TSD is not specified
+                    BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, 
+                            aLoadExternal ? "typesystem.bin" : null);
+        }
 
         CAS cas = CasCreationUtils.createCas(tsd, null, null);
         
