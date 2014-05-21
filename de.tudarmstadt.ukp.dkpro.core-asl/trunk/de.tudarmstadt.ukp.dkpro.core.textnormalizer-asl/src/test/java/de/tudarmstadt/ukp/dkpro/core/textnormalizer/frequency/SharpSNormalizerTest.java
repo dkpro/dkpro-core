@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
@@ -64,8 +65,9 @@ public class SharpSNormalizerTest
                 SharpSNormalizer.class,
                 SharpSNormalizer.FREQUENCY_PROVIDER, frequencyProvider,
                 SharpSNormalizer.PARAM_MIN_FREQUENCY_THRESHOLD,0));
-        builder.add(createEngineDescription(ApplyChangesAnnotator.class), "source",
-                "_InitialView", "target", "sharpS_cleaned");
+        builder.add(createEngineDescription(ApplyChangesAnnotator.class), 
+                ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
+                ApplyChangesAnnotator.VIEW_TARGET, "sharpS_cleaned");
 
         AnalysisEngine engine = builder.createAggregate();
 
@@ -80,5 +82,4 @@ public class SharpSNormalizerTest
         String normalizedText = targetText;
         assertEquals(normalizedText, view.getDocumentText());
     }    
-
 }

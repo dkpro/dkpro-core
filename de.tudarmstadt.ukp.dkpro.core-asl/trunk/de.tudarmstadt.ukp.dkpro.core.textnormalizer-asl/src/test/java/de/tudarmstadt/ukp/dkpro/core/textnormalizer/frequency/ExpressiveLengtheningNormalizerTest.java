@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
@@ -63,7 +64,9 @@ public class ExpressiveLengtheningNormalizerTest
 	builder.add(createEngineDescription(
 		ExpressiveLengtheningNormalizer.class,
 		ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, frequencyProvider));
-	builder.add(createEngineDescription(ApplyChangesAnnotator.class), "source", "_InitialView", "target", "shortened");
+	builder.add(createEngineDescription(ApplyChangesAnnotator.class), 
+	        ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
+	        ApplyChangesAnnotator.VIEW_TARGET, "shortened");
 
 	AnalysisEngine engine = builder.createAggregate();
 
