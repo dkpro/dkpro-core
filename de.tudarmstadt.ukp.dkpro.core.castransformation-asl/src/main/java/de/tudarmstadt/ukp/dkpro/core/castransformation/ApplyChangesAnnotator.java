@@ -52,20 +52,20 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 public class ApplyChangesAnnotator
 	extends JCasAnnotator_ImplBase
 {
+    public static final String VIEW_SOURCE = "source";
+    public static final String VIEW_TARGET = "target";
+    
 	public static final String OP_INSERT = "insert";
 	public static final String OP_REPLACE = "replace";
 	public static final String OP_DELETE = "delete";
-
-	protected String sourceSofaId = "source";
-	protected String targetSofaId = "target";
 
 	@Override
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
 		try {
-			JCas sourceView = aJCas.getView(sourceSofaId);
-			JCas targetView = aJCas.createView(targetSofaId);
+			JCas sourceView = aJCas.getView(VIEW_SOURCE);
+			JCas targetView = aJCas.createView(VIEW_TARGET);
 			DocumentMetaData.copy(sourceView, targetView);
 			applyChanges(sourceView, targetView);
 		}
@@ -123,10 +123,10 @@ public class ApplyChangesAnnotator
 				}
 			}
 
-			// If we remove or add stuff all offsets right of the change location
-			// will change and thus the offsets in the change annotation are no
-			// longer valid. If we move from right to left it works better because
-			// the left offsets remain stable.
+            // If we remove or add stuff all offsets right of the change location
+            // will change and thus the offsets in the change annotation are no
+            // longer valid. If we move from right to left it works better because
+            // the left offsets remain stable.
 			Collections.reverse(edits);
 			for (SofaChangeAnnotation a : edits) {
 				if (OP_INSERT.equals(a.getOperation())) {
@@ -153,8 +153,7 @@ public class ApplyChangesAnnotator
 		// Set document language
 		aTargetView.setDocumentLanguage(aSourceView.getDocumentLanguage());
 
-		// Optionally we may want to remember the AlignedString for the
-		// Backmapper.
+		// Optionally we may want to remember the AlignedString for the backmapper.
 		AlignmentStorage.getInstance().put(aSourceView.getCasImpl().getBaseCAS(),
 				aSourceView.getViewName(), aTargetView.getViewName(), as);
 	}

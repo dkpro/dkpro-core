@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.castransformation;
 import static java.util.Arrays.asList;
 
 import java.util.LinkedList;
-
 import org.apache.uima.UIMAException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -68,8 +67,8 @@ extends JCasAnnotator_ImplBase
 			sofaChain.addAll(asList(chain));
 		}
 		else {
-			sofaChain.add("source");
-			sofaChain.add("target");
+			sofaChain.add(ApplyChangesAnnotator.VIEW_SOURCE);
+			sofaChain.add(ApplyChangesAnnotator.VIEW_TARGET);
 		}
 	}
 

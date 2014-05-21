@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
@@ -37,7 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class UmlautNormalizerTest
 {
-
     private ExternalResourceDescription frequencyProvider;
 
     @Before
@@ -60,8 +60,9 @@ public class UmlautNormalizerTest
                 ReplacementFrequencyNormalizer_ImplBase.FREQUENCY_PROVIDER, frequencyProvider,
                 ReplacementFrequencyNormalizer_ImplBase.PARAM_MIN_FREQUENCY_THRESHOLD,0
                 ));
-        builder.add(createEngineDescription(ApplyChangesAnnotator.class), "source",
-                "_InitialView", "target", "umlaut_cleaned");
+        builder.add(createEngineDescription(ApplyChangesAnnotator.class), 
+                ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
+                ApplyChangesAnnotator.VIEW_TARGET, "umlaut_cleaned");
 
         AnalysisEngine engine = builder.createAggregate();
 

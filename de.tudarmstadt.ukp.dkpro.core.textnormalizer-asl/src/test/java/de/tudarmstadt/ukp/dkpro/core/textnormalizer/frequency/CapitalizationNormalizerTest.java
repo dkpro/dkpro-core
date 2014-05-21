@@ -22,6 +22,7 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternal
 import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
@@ -56,7 +57,9 @@ public class CapitalizationNormalizerTest
         builder.add(createEngineDescription(
                 CapitalizationNormalizer.class,
                 CapitalizationNormalizer.FREQUENCY_PROVIDER, frequencyProvider));
-        builder.add(createEngineDescription(ApplyChangesAnnotator.class), "source", "_InitialView", "target", "normalized");
+        builder.add(createEngineDescription(ApplyChangesAnnotator.class), 
+                ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
+                ApplyChangesAnnotator.VIEW_TARGET, "normalized");
 
         AnalysisEngine engine = builder.createAggregate();
 
@@ -67,7 +70,7 @@ public class CapitalizationNormalizerTest
 
         engine.process(jcas);
 
-        JCas view0 = jcas.getView("_InitialView");
+        JCas view0 = jcas.getView(CAS.NAME_DEFAULT_SOFA);
         JCas view1 = jcas.getView("normalized");
 
         System.out.println(view0.getDocumentText());
