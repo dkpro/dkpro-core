@@ -64,6 +64,7 @@ import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.ParserQuery;
+import edu.stanford.nlp.parser.lexparser.TestOptions;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
 import edu.stanford.nlp.trees.EnglishGrammaticalRelations;
@@ -242,11 +243,24 @@ public class StanfordParser
      * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to avoid out
      * of memory exceptions.<br/>
      * Default: {@code 130}
+     * 
+     * @see TestOptions#maxLength
      */
     public static final String PARAM_MAX_TOKENS = "maxTokens";
     @ConfigurationParameter(name = PARAM_MAX_TOKENS, mandatory = true, defaultValue = "130")
     private int maxTokens;
 
+    /**
+     * Controls when the factored parser considers a sentence to be too complex and falls back
+     * to the PCFG parser.<br/>
+     * Default: {@code 200000}
+     * 
+     * @see TestOptions#MAX_ITEMS
+     */
+    public static final String PARAM_MAX_ITEMS = "maxItems";
+    @ConfigurationParameter(name = PARAM_MAX_ITEMS, mandatory = true, defaultValue = "200000")
+    private int maxItems;
+    
     /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
      *
@@ -596,7 +610,8 @@ public class StanfordParser
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }
 
-                pd.setOptionFlags("-maxLength", String.valueOf(maxTokens));
+                pd.setOptionFlags("-maxLength", String.valueOf(maxTokens), "-MAX_ITEMS",
+                        String.valueOf(maxItems));
                 return pd;
             }
             catch (ClassNotFoundException e) {

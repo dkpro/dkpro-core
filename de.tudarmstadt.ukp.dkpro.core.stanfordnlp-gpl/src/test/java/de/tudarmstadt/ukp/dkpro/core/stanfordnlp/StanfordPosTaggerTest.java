@@ -233,11 +233,6 @@ public class StanfordPosTaggerTest
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
     }
     
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
 
     @Rule
     public TestName name = new TestName();
@@ -246,5 +241,11 @@ public class StanfordPosTaggerTest
     public void printSeparator()
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
+    
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }
