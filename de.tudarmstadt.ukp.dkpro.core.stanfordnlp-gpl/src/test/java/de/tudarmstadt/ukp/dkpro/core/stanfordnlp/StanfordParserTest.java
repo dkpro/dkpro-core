@@ -46,6 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import edu.stanford.nlp.ling.StringLabel;
 import edu.stanford.nlp.trees.Tree;
 
@@ -593,6 +594,30 @@ public class StanfordParserTest
                 + "(ADJP (JJ outside))))) (PRN (, ,) ('' ’) (S (NP (PRP he)) (VP (VBD said))) "
                 + "(, ,) (`` ‘)) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP "
                 + "(TO to) (NP (NN rain)))))) (. .) ('' ’)))";
+
+        AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+    }
+
+    /**
+     * Tests the parser reading pre-existing POS tags
+     */
+    @Test
+    public void testExistingPos()
+        throws Exception
+    {
+        AnalysisEngineDescription engine = createEngineDescription(
+                createEngineDescription(StanfordPosTagger.class),
+                createEngineDescription(StanfordParser.class,
+                        StanfordParser.PARAM_READ_POS, true,
+                        StanfordParser.PARAM_WRITE_POS, false,
+                        StanfordParser.PARAM_WRITE_PENN_TREE, true));
+        
+        JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
+        
+        String[] posOriginal = new String[] { "DT", "VBZ", "DT", "NN", "." };
+
+        String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
 
         AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
