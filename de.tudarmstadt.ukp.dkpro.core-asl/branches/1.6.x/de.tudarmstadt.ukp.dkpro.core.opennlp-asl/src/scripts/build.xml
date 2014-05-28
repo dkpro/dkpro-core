@@ -519,10 +519,11 @@
 	</target>
 
 	<target name="es">
+		<property name="install-artifact-mode" value="remote"/>
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: opennlp-es-maxent-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
+		  - 2012-04-10 | now        | 39ecc4c56e037b3dde859cb6d90b4b6a
 		  -->
     	<get 
     		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-es.bin" 
@@ -533,7 +534,7 @@
     		md5="39ecc4c56e037b3dde859cb6d90b4b6a"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
+    		upstreamVersion="20120410"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
@@ -545,7 +546,7 @@
 		</install-stub-and-upstream-file>
 
 		<!-- FILE: opennlp-es-maxent-pos-universal.bin - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 967160032df49afc160d471bc41c7daa
+		  - 2012-04-10 | now        | 967160032df49afc160d471bc41c7daa
 		  -->
     	<get 
     		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-maxent-pos-universal.bin" 
@@ -556,7 +557,7 @@
     		md5="967160032df49afc160d471bc41c7daa"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
+    		upstreamVersion="20120410"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
@@ -568,7 +569,7 @@
 		</install-stub-and-upstream-file>
 
 		<!-- FILE: opennlp-es-perceptron-pos-es.bin - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | 5930da28536eed424fd0e478b1b52143
+		  - 2012-04-10 | now        | 5930da28536eed424fd0e478b1b52143
 		  -->
     	<get 
     		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-es.bin" 
@@ -579,7 +580,7 @@
     		md5="5930da28536eed424fd0e478b1b52143"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
+    		upstreamVersion="20120410"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
@@ -591,7 +592,7 @@
 		</install-stub-and-upstream-file>
 
 		<!-- FILE: opennlp-es-perceptron-pos-universal.bin - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-06-16 | now        | b4ac9cc413f455649e78db8f0f0c67fa
+		  - 2012-04-10 | now        | b4ac9cc413f455649e78db8f0f0c67fa
 		  -->
     	<get 
     		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/es/opennlp-es-perceptron-pos-universal.bin" 
@@ -602,7 +603,7 @@
     		md5="b4ac9cc413f455649e78db8f0f0c67fa"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
+    		upstreamVersion="20120410"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
@@ -792,7 +793,7 @@
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: nob-nowac-sent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | d9e960e375a1a7843600d28451f719e6
+		  - 2012-01-31 | now        | d9e960e375a1a7843600d28451f719e6
 		  -->
     	<get 
     		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/nob/nob-nowac-sent.bin" 
@@ -803,7 +804,7 @@
     		md5="d9e960e375a1a7843600d28451f719e6"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
+    		upstreamVersion="20120131"
     		metaDataVersion="1"
     		tool="sentence" 
     		language="nb" 
@@ -812,7 +813,7 @@
 		</install-stub-and-upstream-file>
 
 		<!-- FILE: nob-nowac-tok.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-		  - 2012-06-16 | now        | 8c6568a8734a71ccfa9210eba48d63ad
+		  - 2012-01-31 | now        | 8c6568a8734a71ccfa9210eba48d63ad
 		  -->
     	<get 
     		src="https://github.com/utcompling/OpenNLP-Models/raw/master/models/nob/nob-nowac-tok.bin" 
@@ -823,7 +824,7 @@
     		md5="8c6568a8734a71ccfa9210eba48d63ad"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20120616"
+    		upstreamVersion="20120131"
     		metaDataVersion="1"
     		tool="token" 
     		language="nb" 

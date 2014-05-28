@@ -45,6 +45,8 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+			<!-- Constants in this dependency are inlined - dependency not required at runtime -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -79,8 +81,6 @@
 					<artifactId>maven-dependency-plugin</artifactId>
 					<configuration>
 						<usedDependencies>
-							<!-- Constants from this module are inlined -->
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</usedDependency>
 							<!-- Models not detected by byte-code analysis -->
 							<usedDependency>org.languagetool:language-all</usedDependency>
 						</usedDependencies>
