@@ -27,6 +27,172 @@
 	<para>Most readers and writers do not support all features of the respective formats.
 		Additionally,  readers and writers may onle support  a specific variant of a format.</para>
 	<section>
+		<title>Common parameters</title>
+		<para>DKPro Core aims to provide a consistent API for reading and writing annotated data.
+			Most of our readers are resource readers (RR) or file writers (FW) and support a common
+			set of parameters which are explained below.</para>
+		<table frame="all">
+			<title>Resource reader parameters</title>
+			<tgroup cols="3">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
+				<colspec colname="newCol3" colnum="3" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Parameter</entry>
+						<entry>Description</entry>
+						<entry>Default</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>PARAM_SOURCE_LOCATION</entry>
+						<entry>Location to read from.</entry>
+						<entry>optional</entry>
+					</row>
+					<row>
+						<entry>PARAM_PATTERNS</entry>
+						<entry>Include/exclude patterns.</entry>
+						<entry>optional</entry>
+					</row>
+					<row>
+						<entry>PARAM_USE_DEFAULT_EXCLUDES</entry>
+						<entry>Enable default excludes for versioning systems like Subversion, git,
+							etc.</entry>
+						<entry>true</entry>
+					</row>
+					<row>
+						<entry>PARAM_INCLUDE_HIDDEN</entry>
+						<entry>Include hidden files</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>PARAM_LANGUAGE</entry>
+						<entry>Two letter ISO code</entry>
+						<entry>optional </entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>Either PARAM_SOURCE_LOCATION or PARAM_PATTERNS or both must be set. Examples:</para>
+		<itemizedlist>
+			<listitem>
+				<para>Read all files in the folder <filename>files/texts</filename></para>
+				<itemizedlist>
+						<listitem>
+							<para>PARAM_LOCATON: "files/texts"</para>
+						</listitem>
+					</itemizedlist>
+			</listitem>
+			<listitem>
+				<para>Recursively read all <filename>.txt</filename> files in the folder
+					<filename>files/texts</filename>: </para>
+				<itemizedlist>
+						<listitem>
+							<para>Pattern embedded in the location: PARAM_LOCATION:
+								"files/texts/**/*.txt"</para>
+						</listitem>
+						<listitem>
+							<para>Pattern separate: PARAM_LOCATION: "files/texts", PARAM_PATTERNS: "*.txt"</para>
+						</listitem>
+					</itemizedlist>
+			</listitem>
+			<listitem>
+				<para>Excluding some files:</para>
+				<itemizedlist>
+					<listitem>
+						<para>Pattern separate: PARAM_LOCATION: "files/texts", PARAM_PATTERNS: String[] {"*.txt",
+							"[-]broken*.txt"}</para>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem>
+				<para>Read from a ZIP archive:</para>
+					<itemizedlist>
+						<listitem>
+							<para>PARAM_LOCATION: "jar:file:archive.zip!texts/**/*.txt"</para>
+						</listitem>
+					</itemizedlist>
+			</listitem>
+			<listitem>
+				<para>Read from the classpath:</para>
+				<itemizedlist>
+					<listitem>
+						<para>PARAM_LOCATION: "classpath*:texts/*.txt"</para>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+		</itemizedlist>
+		<table frame="all">
+			<title>File writer parameters</title>
+			<tgroup cols="3">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
+				<colspec colname="newCol3" colnum="3" colwidth="1*"/>
+				<thead>
+					<row>
+						<entry>Parameter</entry>
+						<entry>Description</entry>
+						<entry>Default</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>PARAM_TARGET_LOCATION</entry>
+						<entry>Location to write to.</entry>
+						<entry>mandatory</entry>
+					</row>
+					<row>
+						<entry>PARAM_COMPRESSION</entry>
+						<entry>Compression algorithm to use when writing output. File suffix
+							automatically added depending on algorithm. Supported are: NONE, GZIP,
+							BZIP2, and XZ (see class
+							<classname>CompressionMethod</classname>).</entry>
+						<entry>NONE</entry>
+					</row>
+					<row>
+						<entry>PARAM_STRIP_EXTENSION</entry>
+						<entry>Whether to remove the original file extension when writing. E.g. with
+							the XmiWriter without extension stripping, an input file
+								<filename>MyText.txt</filename> would be written as
+								<filename>MyText.txt.xmi</filename> - with stripping it would be
+								<filename>MyText.xmi</filename>.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>PARAM_USE_DOCUMENT_ID</entry>
+						<entry>Use the document ID as the file name, even if an original file name
+							is present in the document URI.</entry>
+						<entry>false</entry>
+					</row>
+					<row>
+						<entry>PARAM_ESCAPE_DOCUMENT_ID</entry>
+						<entry>Escape the document ID in case it contains characters that are not
+							valid in a filename.</entry>
+						<entry>false</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>Most file writers write multiple files, so PARAM_TARGET_LOCATION is treated as a directory
+			name. A few only write a single file (e.g. NegraExportWriter), in which case the
+			parameter is treated as the file name. Instead of writing to a directory, it is possible
+			to write to a ZIP archive:</para>
+		<itemizedlist>
+			<listitem>
+				<para>Write to a ZIP archive</para>
+				<itemizedlist>
+					<listitem>
+						<para>PARAM_TARGET_LOCATION: "jar:file:archive.zip"</para>
+					</listitem>
+					<listitem>
+						<para>PARAM_TARGET_LOCATION: "jar:file:archive.zip!folder/within/zip"</para>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+		</itemizedlist>
+	</section>
+	<section>
 		<title>ACL anthology</title>
 		<table frame="all">
 			<title>Components</title>
