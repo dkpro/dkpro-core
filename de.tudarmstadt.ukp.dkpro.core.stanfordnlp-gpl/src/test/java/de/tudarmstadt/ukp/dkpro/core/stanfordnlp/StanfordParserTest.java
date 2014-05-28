@@ -24,7 +24,13 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.log4j.Appender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggingEvent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasBuilder;
@@ -928,6 +934,59 @@ public class StanfordParserTest
                 pennOriginal.equals(pennFromRecreatedTree));
     }
 
+    @Test
+    public void testModelSharing()
+        throws Exception
+    {
+        final List<LoggingEvent> records = new ArrayList<LoggingEvent>();
+
+        // Tell the logger to log everything
+        Logger rootLogger = org.apache.log4j.LogManager.getRootLogger();
+        final org.apache.log4j.Level oldLevel = rootLogger.getLevel();
+        rootLogger.setLevel(org.apache.log4j.Level.ALL);
+        Appender appender = (Appender) rootLogger.getAllAppenders().nextElement();
+        // Capture output, log only what would have passed the original logging level
+        appender.addFilter(new org.apache.log4j.spi.Filter()
+        {
+            @Override
+            public int decide(LoggingEvent event)
+            {
+                records.add(event);
+                return event.getLevel().toInt() >= oldLevel.toInt() ? org.apache.log4j.spi.Filter.NEUTRAL
+                        : org.apache.log4j.spi.Filter.DENY;
+            }
+        });
+
+        try {
+            AnalysisEngineDescription pipeline = createEngineDescription(
+                    createEngineDescription(StanfordParser.class,
+                            StanfordParser.PARAM_SHARED_MODEL, true,
+                            StanfordParser.PARAM_WRITE_CONSTITUENT, true,
+                            StanfordParser.PARAM_WRITE_DEPENDENCY, false),
+                    createEngineDescription(StanfordParser.class,
+                            StanfordParser.PARAM_SHARED_MODEL, true,
+                            StanfordParser.PARAM_WRITE_CONSTITUENT, false,
+                            StanfordParser.PARAM_WRITE_DEPENDENCY, true));
+            
+            TestRunner.runTest(pipeline, "en", "This is a test .");
+            
+            boolean found = false;
+            for (LoggingEvent e : records) {
+                if (String.valueOf(e.getMessage()).contains("Used resource from cache")) {
+                    found = true;
+                }
+            }
+            
+            assertTrue("No log message about using the cached resource was found!", found);
+        }
+        finally {
+            if (oldLevel != null) {
+                rootLogger.setLevel(oldLevel);
+                appender.clearFilters();
+            }
+        }
+    }
+    
     /**
      * Setup CAS to test parser for the English language (is only called once if an English test is
      * run)
