@@ -309,6 +309,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl</artifactId>
+				<version>1.7.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
@@ -579,6 +584,7 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
+	    <!-- API modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.coref-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus-asl</module>
@@ -596,6 +602,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</module>
+	    <!-- IO modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</module>
@@ -615,10 +622,12 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.text-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</module>
+	    <!-- Processing modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
@@ -626,8 +635,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.hunpos-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
@@ -652,8 +659,11 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
+	    <!-- Documentation and examples modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
+	    <!-- Distribution modules -->
+		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -830,6 +840,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tei-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.text-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tiger-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.web1t-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xmi-asl/src/main/java" includes="**/*.java" />
