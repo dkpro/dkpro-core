@@ -40,8 +40,49 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
-		<para>FIXME: Describe DocumentMetaData</para>
 		<para>FIXME: Describe TagDescription and TagsetDescription</para>
+		<section>
+			<title>DocumentMetaData</title>
+			<para>The DocumentMetaData annotation stores information about a single processed
+				document. There can only be one of these annotations per CAS. The annotation is
+				created by readers and contains information to uniquely identify the document from
+				which a CAS was created. Writer components use this information when determining
+				under which filename a CAS is stored.</para>
+			<para>There are two principle ways of identifying a document:</para>
+			<itemizedlist>
+				<listitem>
+					<para>collection id / document id: this simple system identifies a document
+						within a collection. The ID of the collection and the document are each
+						simple strings without any further semantics such as e.g. a hierarchy. For
+						this reason, this identification scheme is not well suited to preserve
+						information about directory structures.</para>
+				</listitem>
+				<listitem>
+					<para>document base URI / document URI: this system identifies a document using
+						a URI. The base URI is used to derive the relative path of the document with
+						respect to the base location from where it has been read. E.g. if the base
+						URI is <filename>file:/texts</filename> and the document URI is
+							<filename>file:/texts/english/text1.txt</filename>, then the relativ
+						path of the document is <filename>english/text1.txt</filename>. This
+						information is used by writers to recreate the directory structure found
+						under the base location in the target location.</para>
+				</listitem>
+			</itemizedlist>
+			<para>It is possible and indeed common for a writer to initialize both systems of
+				identification. If both systems are present, most writers default to using the
+				URI-based systems. However, most writers also allow forcing the use of the ID-based
+				systems.</para>
+		</section>
+		<section>
+			<title>TagsetDescription and TagDescription</title>
+			<note>
+				<para>Recording tagset and tag descriptions in the CAS is still a feature under
+					development. It is not supported by all components and it is not yet well
+					defined. Expect changes and enhancements to this feature in future versions of
+					DKPro Core. </para>
+			</note>
+			<para>FIXME</para>
+		</section>
 	</section>
 	<section>
 		<title>Segmentation</title>
@@ -101,21 +142,32 @@
 				</imageobject>
 			</mediaobject>
 		</figure>
-		<para>The SemanticField is a coarse-grained semantic category that can be
-		attached to nouns, verbs or adjectives. Semantic field information is present e.g. in WordNet as
-		lexicographer file names. Previously, this kind of semantic information has also been called 
-		supersenses or semantic types.
-		</para>
-		<para>The SemanticPredicate annotation can be attached to predicates in a sentences. Semantic predicates
-		express events or situations and take semantic arguments expressing the participants in these events ore
-		situations. All forms of main verbs can be annotated with a SemanticPredicate. However, there are also many
-		nouns and adjectives that take arguments and can thus be annotated with a SemanticPredicate, e.g. event nouns,
-		such as "suggestion" (with arguments what and by whom), or relational adjectives, such as "proud" (with arguments
-		who and of what). The SemanticArgument annotation is attached to semantic arguments of semantic predicates.
-		Semantic arguments are characterized by their semantic role, e.g. Agent, Experiencer, Topic. 
-		The semantic role of an argument is related to its semantic type (for communication verbs, the 
-		Agent can be a person or an organization, but typically not food).
-		The semantic type of arguments is not yet covered by the SemanticType.</para>
-		<para>FIXME: Describe NamedEntity</para>
+		<section>
+			<title>Named entities</title>
+			<para>FIXME</para>
+		</section>
+		<section>
+			<title>Semantic fields</title>
+			<para>The SemanticField is a coarse-grained semantic category that can be attached to
+				nouns, verbs or adjectives. Semantic field information is present e.g. in WordNet as
+				lexicographer file names. Previously, this kind of semantic information has also
+				been called supersenses or semantic types.</para>
+		</section>
+		<section>
+			<title>Semantic argument structure</title>
+			<para>The SemanticPredicate annotation can be attached to predicates in a sentences.
+				Semantic predicates express events or situations and take semantic arguments
+				expressing the participants in these events ore situations. All forms of main verbs
+				can be annotated with a SemanticPredicate. However, there are also many nouns and
+				adjectives that take arguments and can thus be annotated with a SemanticPredicate,
+				e.g. event nouns, such as "suggestion" (with arguments what and by whom), or
+				relational adjectives, such as "proud" (with arguments who and of what). The
+				SemanticArgument annotation is attached to semantic arguments of semantic
+				predicates. Semantic arguments are characterized by their semantic role, e.g. Agent,
+				Experiencer, Topic. The semantic role of an argument is related to its semantic type
+				(for communication verbs, the Agent can be a person or an organization, but
+				typically not food). The semantic type of arguments is not yet covered by the
+				SemanticType.</para>
+		</section>
 	</section>
 </chapter>
