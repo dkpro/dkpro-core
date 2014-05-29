@@ -187,6 +187,7 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-pt-mm-perceptron</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-pt-cogroo</artifactId>
@@ -211,6 +212,7 @@
 			<version>20130527.1</version>
 			<scope>test</scope>
 		</dependency>
+		-->
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
