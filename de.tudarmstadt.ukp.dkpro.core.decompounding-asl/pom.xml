@@ -80,7 +80,6 @@
 		<dependency>
 			<groupId>com.googlecode.jweb1t</groupId>
 			<artifactId>com.googlecode.jweb1t</artifactId>
-			<version>1.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
