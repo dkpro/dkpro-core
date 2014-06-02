@@ -175,7 +175,7 @@ public class Web1TConverter
                 outputEncoding, letterFD, splitThreshold, 0);
 
         splitter.split();
-        LinkedList<File> splitFiles = splitter.getFiles();
+        List<File> splitFiles = splitter.getFiles();
 
         Web1TFileSorter sorter = new Web1TFileSorter(splitFiles, comparator);
         sorter.sort();
@@ -309,7 +309,6 @@ public class Web1TConverter
             int nextFileNumber)
         throws IOException
     {
-
         File folder = getOutputFolder(level);
         File misc = new File(folder, "99999999");
 
@@ -326,11 +325,11 @@ public class Web1TConverter
         Web1TFileSplitter splitter = new Web1TFileSplitter(misc, folder, "UTF-8", letterFD,
                 splitThreshold, nextFileNumber);
         splitter.split();
-        LinkedList<File> splittedFiles = splitter.getFiles();
+        List<File> splittedFiles = splitter.getFiles();
 
         Web1TFileSorter sorter = new Web1TFileSorter(splittedFiles, comparator);
         sorter.sort();
-        LinkedList<File> sortedFiles = splitter.getFiles();
+        List<File> sortedFiles = splitter.getFiles();
 
         splitThreshold = oldThreshold;
         misc.delete();

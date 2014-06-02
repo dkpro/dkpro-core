@@ -27,12 +27,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class Web1TFileConsolidator
 {
 
-	private final LinkedList<File> inputFiles;
+	private final List<File> inputFiles;
 	private final Comparator<String> comparator;
 	private LinkedList<File> consolidatedFiles = new LinkedList<File>();
 	private final String fileEncoding;
@@ -41,7 +42,7 @@ public class Web1TFileConsolidator
 	private final String TAB = "\t";
 	private final String LF = "\n";
 
-	public Web1TFileConsolidator(LinkedList<File> sortedInputFiles,
+	public Web1TFileConsolidator(List<File> sortedInputFiles,
 			Comparator<String> comparator, String fileEncoding, int minFreq)
 	{
 		this.inputFiles = sortedInputFiles;
