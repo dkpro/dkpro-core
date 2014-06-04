@@ -27,14 +27,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 
 public class Web1TFileSplitter
 {
+    private final Log log = LogFactory.getLog(getClass());
 
 	private final File inputFile;
 	private final File outputFolder;
@@ -43,95 +51,88 @@ public class Web1TFileSplitter
 	private final double threshold;
 	private int fileNumber;
 
-	private HashMap<String, BufferedWriter> writerMap;
-	private LinkedList<File> splittedFiles = new LinkedList<File>();
+	private List<File> splittedFiles = new LinkedList<File>();
 
-	public Web1TFileSplitter(File inputFile, File outputFolder,
-			String fileEncoding, FrequencyDistribution<String> letterFD,
-			double threshold, int startingFileNumber)
+	public Web1TFileSplitter(File aInputFile, File aOutputFolder,
+			String aFileEncoding, FrequencyDistribution<String> aLetterFD,
+			double aThreshold, int aStartingFileNumber)
 	{
-		this.inputFile = inputFile;
-		this.outputFolder = outputFolder;
-		this.fileEncoding = fileEncoding;
-		this.letterFD = letterFD;
-		this.threshold = threshold;
-		this.fileNumber = startingFileNumber;
+		inputFile = aInputFile;
+		outputFolder = aOutputFolder;
+		fileEncoding = aFileEncoding;
+		letterFD = aLetterFD;
+		threshold = aThreshold;
+		fileNumber = aStartingFileNumber;
 	}
 
-	public void split()
-		throws IOException
-	{
-		createMappingsAndFileList();
-		distributeInputFileToSplitFiles();
-	}
-
-	public LinkedList<File> getFiles()
+	public List<File> getFiles()
 	{
 		return new LinkedList<File>(splittedFiles);
 	}
 
-	private void distributeInputFileToSplitFiles()
-		throws IOException
+    public void split()
+            throws IOException
 	{
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
-				new FileInputStream(inputFile), fileEncoding));
+        Map<String, String> letterToFileNameMap = mapStartingLettersToFilenames();
+        Map<String, File> fileMap = mapFileNamesToFileHandels(letterToFileNameMap);
+        Map<File, BufferedWriter> fileHandleToBufferdWriterMap = mapFileHandelsToWriterHandels(fileMap);
+        Map<String, BufferedWriter> writerMap = mapFileNamesToWriterHandels(fileMap,
+                fileHandleToBufferdWriterMap);
 
-		String TAB = "\t";
-		String LF = "\n";
-
-		String readLine = null;
-		while ((readLine = reader.readLine()) != null) {
-
-			int indexOfTab = readLine.indexOf(TAB);
-
-			if (indexOfTab == -1) {
-			    System.err.println("No tab found in line: " + readLine);
-				continue;
-			}
-
-			String key = Web1TUtil.getStartingLetters(readLine, indexOfTab);
-
-			BufferedWriter writer = writerMap.get(key);
-
-			if (writer == null) {
-			    System.err.println("No writer found for key: " + key);
-				key = key.substring(0, 1);
-				writer = writerMap.get(key);
-				if (writer == null) {
-				    System.err.println("No writer for key: " + key);
-					continue;
-				}
-			}
-
-			writer.write(readLine);
-			writer.write(LF);
-			writer.flush();
+        splittedFiles = generateListOfUniqueFiles(fileMap);
+	    
+		BufferedReader reader = null;
+		try {
+    		reader = new BufferedReader(new InputStreamReader(
+    				new FileInputStream(inputFile), fileEncoding));
+    
+    		String TAB = "\t";
+    		String LF = "\n";
+    
+    		String readLine = null;
+    		while ((readLine = reader.readLine()) != null) {
+    
+    			int indexOfTab = readLine.indexOf(TAB);
+    
+    			if (indexOfTab == -1) {
+    			    log.warn("No tab found in line: " + readLine);
+    				continue;
+    			}
+    
+    			String key = Web1TUtil.getStartingLetters(readLine, indexOfTab);
+    
+    			Writer writer = writerMap.get(key);
+    			if (writer == null) {
+    			    log.warn("No writer found for key: " + key);
+    				key = key.substring(0, 1);
+    				writer = writerMap.get(key);
+    				if (writer == null) {
+    				    log.warn("No writer for key: " + key);
+    					continue;
+    				}
+    			}
+    
+    			writer.write(readLine);
+    			writer.write(LF);
+    			writer.flush();
+    		}
 		}
-		reader.close();
+		finally {
+		    // Close reader
+		    IOUtils.closeQuietly(reader);
+		    // Close all writers
+		    for (Writer writer : writerMap.values()) {
+		        IOUtils.closeQuietly(writer);
+		    }
+		}
 	}
 
-	private void createMappingsAndFileList()
-		throws UnsupportedEncodingException, FileNotFoundException
-	{
-		HashMap<String, String> letterToFileNameMap = null;
-		HashMap<String, File> fileMap = null;
-		HashMap<File, BufferedWriter> fileHandleToBufferdWriterMap = null;
-
-		letterToFileNameMap = mapStartingLettersToFilenames();
-		fileMap = mapFileNamesToFileHandels(letterToFileNameMap);
-		fileHandleToBufferdWriterMap = mapFileHandelsToWriterHandels(fileMap);
-		writerMap = mapFileNamesToWriterHandels(fileMap,
-				fileHandleToBufferdWriterMap);
-
-		splittedFiles = generateListOfUniqueFiles(fileMap);
-	}
-
-	private HashMap<File, BufferedWriter> mapFileHandelsToWriterHandels(
-			HashMap<String, File> fileMap)
+	private Map<File, BufferedWriter> mapFileHandelsToWriterHandels(
+			Map<String, File> fileMap)
 		throws UnsupportedEncodingException, FileNotFoundException
 	{
 
-		HashMap<File, BufferedWriter> fileHandleToBufferdWriterMap = new HashMap<File, BufferedWriter>();
+		Map<File, BufferedWriter> fileHandleToBufferdWriterMap = new HashMap<File, BufferedWriter>();
 
 		for (String key : fileMap.keySet()) {
 			File file = fileMap.get(key);
@@ -144,11 +145,10 @@ public class Web1TFileSplitter
 		return fileHandleToBufferdWriterMap;
 	}
 
-	private HashMap<String, File> mapFileNamesToFileHandels(
-			HashMap<String, String> letterToFileNameMap)
+	private Map<String, File> mapFileNamesToFileHandels(
+			Map<String, String> letterToFileNameMap)
 	{
-
-		HashMap<String, File> fileMap = new HashMap<String, File>();
+		Map<String, File> fileMap = new HashMap<String, File>();
 
 		for (String key : letterToFileNameMap.keySet()) {
 			fileMap.put(key, new File(outputFolder + "/" + letterToFileNameMap.get(key)
@@ -162,12 +162,12 @@ public class Web1TFileSplitter
 		return fileNumber;
 	}
 
-	private HashMap<String, String> mapStartingLettersToFilenames()
+	private Map<String, String> mapStartingLettersToFilenames()
 	{
 
-		HashMap<String, String> letterToFileNameMap = new HashMap<String, String>();
+		Map<String, String> letterToFileNameMap = new HashMap<String, String>();
 
-		LinkedList<String> keyList = new LinkedList<String>(letterFD.getKeys());
+		List<String> keyList = new LinkedList<String>(letterFD.getKeys());
 		Collections.sort(keyList);
 		for (String key : keyList) {
 
@@ -187,12 +187,12 @@ public class Web1TFileSplitter
 		return letterToFileNameMap;
 	}
 
-	private HashMap<String, BufferedWriter> mapFileNamesToWriterHandels(
-			HashMap<String, File> fileMap,
-			HashMap<File, BufferedWriter> fileHandleToBufferdWriterMap)
+	private Map<String, BufferedWriter> mapFileNamesToWriterHandels(
+			Map<String, File> fileMap,
+			Map<File, BufferedWriter> fileHandleToBufferdWriterMap)
 		throws UnsupportedEncodingException, FileNotFoundException
 	{
-		HashMap<String, BufferedWriter> nameToWriterMap = new HashMap<String, BufferedWriter>();
+		Map<String, BufferedWriter> nameToWriterMap = new HashMap<String, BufferedWriter>();
 		for (String key : fileMap.keySet()) {
 			File file = fileMap.get(key);
 			BufferedWriter writer = fileHandleToBufferdWriterMap.get(file);
@@ -202,10 +202,10 @@ public class Web1TFileSplitter
 		return nameToWriterMap;
 	}
 
-	private LinkedList<File> generateListOfUniqueFiles(HashMap<String, File> fileMap)
+	private List<File> generateListOfUniqueFiles(Map<String, File> fileMap)
 	{
 		// Generate unique Filelist
-		HashMap<String, String> uniqeFiles = new HashMap<String, String>();
+		Map<String, String> uniqeFiles = new HashMap<String, String>();
 		for (File file : fileMap.values()) {
 			String absPath = file.getAbsolutePath();
 			if (uniqeFiles.get(absPath) == null) {
