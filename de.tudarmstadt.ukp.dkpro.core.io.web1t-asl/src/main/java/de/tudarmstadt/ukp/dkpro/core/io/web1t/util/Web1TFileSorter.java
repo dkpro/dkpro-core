@@ -28,11 +28,11 @@ import java.util.List;
 public class Web1TFileSorter
 {
 
-	private final LinkedList<File> inputFiles;
-	private LinkedList<File> sortedFiles = new LinkedList<File>();
+	private final List<File> inputFiles;
+	private List<File> sortedFiles = new LinkedList<File>();
 	private final Comparator<String> comparator;
 
-	public Web1TFileSorter(LinkedList<File> unsortedFiles,
+	public Web1TFileSorter(List<File> unsortedFiles,
 			Comparator<String> comparator)
 	{
 		this.inputFiles = unsortedFiles;
