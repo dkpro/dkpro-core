@@ -410,16 +410,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.apache.uima</groupId>
-				<artifactId>uimaj-tools</artifactId>
-				<version>${uima.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.uima</groupId>
-				<artifactId>uimaj-cpe</artifactId>
-				<version>${uima.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.uima</groupId>
 				<artifactId>uimaj-document-annotation</artifactId>
 				<version>${uima.version}</version>
 			</dependency>
@@ -427,21 +417,6 @@
 				<groupId>org.apache.uima</groupId>
 				<artifactId>uimafit-core</artifactId>
 				<version>${uimafit.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>xerces</groupId>
-				<artifactId>xercesImpl</artifactId>
-				<version>2.9.1</version>
-			</dependency>
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>xalan</artifactId>
-				<version>2.7.1</version>
-			</dependency>
-			<dependency>
-				<groupId>xalan</groupId>
-				<artifactId>serializer</artifactId>
-				<version>2.7.1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.ibm.icu</groupId>
@@ -487,16 +462,6 @@
 				<groupId>org.apache.ant</groupId>
 				<artifactId>ant</artifactId>
 				<version>1.8.1</version>
-			</dependency>
-			<dependency>
-				<groupId>net.sf.trove4j</groupId>
-				<artifactId>trove4j</artifactId>
-				<version>3.0.1</version>
-			</dependency>
-			<dependency>
-				<groupId>trove</groupId>
-				<artifactId>trove</artifactId>
-				<version>1.1-beta-5</version>
 			</dependency>
 			<dependency>
 				<groupId>jaxen</groupId>
