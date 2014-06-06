@@ -21,7 +21,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 /**
  * Data container for a split element. A split element contains a word and optional a linking
  * morpheme
- * 
+ *
  * @author Jens Haase <je.haase@googlemail.com>
  */
 public class Fragment
@@ -58,21 +58,19 @@ public class Fragment
 
     /**
      * Creates a split element from string. String format:
-     * 
+     *
      * word(morpheme)
-     * 
+     *
      * Example: "auto" or "auto(s)"
      */
     public static Fragment createFromString(String aElement)
     {
         Fragment e = new Fragment();
-
         String[] splits = aElement.split("\\(");
-        e.setWord(splits[0]);
-        if (splits.length == 2 && splits[1].endsWith(")")) {
+        e.setWord(splits.length!= 0 ? splits[0] : aElement);
+        if ((splits.length == 2) && splits[1].endsWith(")")) {
             e.setMorpheme(splits[1].substring(0, splits[1].length() - 1));
         }
-
         return e;
     }
 
@@ -81,8 +79,8 @@ public class Fragment
     {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((morpheme == null) ? 0 : morpheme.hashCode());
-        result = prime * result + ((word == null) ? 0 : word.hashCode());
+        result = (prime * result) + ((morpheme == null) ? 0 : morpheme.hashCode());
+        result = (prime * result) + ((word == null) ? 0 : word.hashCode());
         return result;
     }
 
