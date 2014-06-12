@@ -38,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.DummyRanker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.Ranker;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
@@ -49,7 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.SplitterAlgorithm;
 				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound",
 				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split",
 				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart",
-		"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme"})
+		        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme"})
 
 public class CompoundAnnotator
 extends JCasAnnotator_ImplBase
@@ -72,15 +73,17 @@ extends JCasAnnotator_ImplBase
 	 *
 	 * */
 	public static final String PARAM_RANKING_ALGO = "rankingAlgorithm";
-	@ExternalResource(key = PARAM_RANKING_ALGO)
+	@ExternalResource(key = PARAM_RANKING_ALGO, mandatory=false)
 	private Ranker ranker;
 
 	@Override
 	public void initialize(final UimaContext context)
-			throws ResourceInitializationException
-			{
+			throws ResourceInitializationException {
 		super.initialize(context);
-			}
+		if(ranker==null){
+		    ranker = new DummyRanker();
+		}
+	}
 
 	@Override
 	public void process(final JCas aJCas)
