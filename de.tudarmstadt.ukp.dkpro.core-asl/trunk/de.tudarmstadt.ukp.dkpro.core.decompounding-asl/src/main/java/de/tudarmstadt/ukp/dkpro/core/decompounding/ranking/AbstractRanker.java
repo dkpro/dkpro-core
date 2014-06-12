@@ -26,7 +26,9 @@ import java.util.List;
 import org.apache.ivy.util.cli.CommandLine;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.NGramModel;
 
@@ -120,7 +122,7 @@ public abstract class AbstractRanker implements Ranker
 		List<DecompoundedWord> filtered = new ArrayList<DecompoundedWord>();
 		for (DecompoundedWord s : aSplits) {
 			if (!Double.isInfinite(s.getWeight()) && !Double.isInfinite(s.getWeight())
-					&& s.getWeight() > 0.0) {
+					&& (s.getWeight() > 0.0)) {
 				filtered.add(s);
 			}
 		}
@@ -132,4 +134,13 @@ public abstract class AbstractRanker implements Ranker
 
 		return filtered;
 	}
+
+    @Override
+    public DecompoundedWord highestRank(DecompoundingTree aTree){
+        return highestRank(aTree.getRoot(), null);
+    }
+
+    public abstract DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent,
+            List<DecompoundedWord> aPath);
+
 }

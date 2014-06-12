@@ -18,12 +18,11 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 
@@ -67,7 +66,7 @@ public class CompoundProbabilityRanker
 
 		List<DecompoundedWord> result = filterAndSort(aSplits);
 		Collections.sort(result, Collections.reverseOrder());
-		
+
 		return result;
 	}
 
@@ -85,29 +84,17 @@ public class CompoundProbabilityRanker
 		return result;
 	}
 
-	@Override
-	public DecompoundedWord highestRank(DecompoundingTree aTree)
-	{
-		return highestRank(aTree.getRoot(), null);
-	}
-
-	@Override
-	public List<DecompoundedWord> bestPath(DecompoundingTree aTree)
-	{
-		List<DecompoundedWord> path = new ArrayList<DecompoundedWord>();
-		highestRank(aTree.getRoot(), path);
-		return path;
-	}
-
 	/**
 	 * Searches a a path throw the tree
 	 */
-	private DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent, List<DecompoundedWord> aPath)
+	@Override
+    public DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent,
+            List<DecompoundedWord> aPath)
 	{
 		if (aPath != null) {
 			aPath.add(aParent.getValue());
 		}
-		
+
 		List<DecompoundedWord> children = aParent.getChildrenValues();
 		if (children.size() == 0) {
 			return aParent.getValue();
