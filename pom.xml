@@ -42,27 +42,27 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
+<!-- 		<repository> -->
 			<!-- For uimaFIT SNAPSHOT -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
+<!-- 			<id>apache.snapshots</id> -->
+<!-- 			<name>Apache Snapshot Repository</name> -->
+<!-- 			<url>http://repository.apache.org/snapshots</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 		</repository> -->
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
+<!-- 	<pluginRepositories> -->
+<!-- 		<pluginRepository> -->
 			<!-- For uimaFIT SNAPSHOT maven plugin -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
+<!-- 			<id>apache.snapshots</id> -->
+<!-- 			<name>Apache Snapshot Repository</name> -->
+<!-- 			<url>http://repository.apache.org/snapshots</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 		</pluginRepository> -->
+<!-- 	</pluginRepositories> -->
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
@@ -75,7 +75,7 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<uima.version>2.6.0</uima.version>
-		<uimafit.version>2.0.1-SNAPSHOT</uimafit.version>
+		<uimafit.version>2.1.0</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
 		<spring.version>3.1.2.RELEASE</spring.version>
