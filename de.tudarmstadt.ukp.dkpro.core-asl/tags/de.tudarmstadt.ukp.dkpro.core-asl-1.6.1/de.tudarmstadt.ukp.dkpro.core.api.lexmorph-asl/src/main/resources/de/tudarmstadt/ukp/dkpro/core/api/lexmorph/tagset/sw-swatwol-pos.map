@@ -1,0 +1,84 @@
+# Part-of-Speech Tagset of SWATWOL
+#
+# The 74 tags currently listed are the simplified version of the SWATWOL tagset used by the
+# Swahili TreeTagger model.
+#
+# ISSUE: "*" is actually a tag in the TreeTagger file - it is also the special catch-all DKPro tag!!
+#        However, the "*" is not listed as a tag in the SWATWOL tagset documentation.
+#
+# Source: http://www.aakkl.helsinki.fi/cameel/corpus/swatags.pdf
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+# *
+# *:*
+# 1/2-PL-SP
+# 1/2-SG-SP
+# 11-SG
+# 11-SG-SP
+# 15-SG-SP
+# 16-SG-SP
+# 17-SG-SP
+# 18-SG-SP
+# 3/4-PL
+# 3/4-PL-SP
+# 3/4-SG-SP
+# 5/6-PL-SP
+# 5/6-SG-SP
+# 7/8-PL-SP
+# 7/8-SG-SP
+# 9/10-PL-SP
+# 9/10-SG-SP
+# A-INFL
+# A-UINFL
+# ABBR
+# AD-ADJ
+# ADJ
+# ADJ-INFL
+# ADV
+# AG-PART
+# AR
+# CC
+# CLB
+# COLON
+# COMMA
+# CONJ,
+# DEF-V:ni
+# DEM:hV
+# DOLLAR-SIGN
+# DOUBLE-QUOTE
+# EMPH
+# ENG
+# EQUAL-MARK
+# EXCLAM
+# EXCLAMATION
+# GEN-CON
+# HYPHEN
+# IDIOM
+# IMP
+# INTERROG
+# LEFT-PARENTHESIS
+# LEFT-SQUAREBRACKET#
+# N
+# NA-POSS
+# NEG
+# NUM
+# PL1-SP
+# PL2-SP
+# PREP
+# PROCENT-MARK
+# PRON
+# PROPNAME
+# REL
+# RHET
+# RIGHT-PARENTHESIS
+# RIGHT-SQUAREBRACKET
+# SELFSTANDING
+# SG1-SP
+# SG2-SP
+# SG3-SP
+# SINGLE-QUOTE
+# V
+# VCAP_
+# VFIN
+# VIMP
+# VINF
+# Vkwisha
