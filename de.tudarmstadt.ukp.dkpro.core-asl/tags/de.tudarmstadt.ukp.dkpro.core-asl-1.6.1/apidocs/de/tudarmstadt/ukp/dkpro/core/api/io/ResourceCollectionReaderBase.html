@@ -1,15 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- NewPage -->
-<html lang="de">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>ResourceCollectionReaderBase (DKPro Core ASL 1.6.0 API)</title>
+<title>ResourceCollectionReaderBase (DKPro Core ASL 1.6.1 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ResourceCollectionReaderBase (DKPro Core ASL 1.6.0 API)";
+        parent.document.title="ResourceCollectionReaderBase (DKPro Core ASL 1.6.1 API)";
     }
 //-->
 </script>
@@ -193,26 +193,30 @@ extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#INCLUDE_PREFIX">INCLUDE_PREFIX</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#JAR_PREFIX">JAR_PREFIX</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#KEY_RESOURCE_RESOLVER">KEY_RESOURCE_RESOLVER</a></strong></code>
-<div class="block">Name of optional external (uima) resource that contains the Locator for a (spring)
+<div class="block">Name of optional external (UIMA) resource that contains the Locator for a (Spring)
  ResourcePatternResolver implementation for locating (spring) resources.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_INCLUDE_HIDDEN">PARAM_INCLUDE_HIDDEN</a></strong></code>
 <div class="block">Include hidden files and directories.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></strong></code>
 <div class="block">Name of optional configuration parameter that contains the language of the documents in the
  input directory.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_PATH">PARAM_PATH</a></strong></code>
 <div class="block"><strong>Deprecated.</strong>&nbsp;
@@ -220,19 +224,19 @@ extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
 </div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_PATTERNS">PARAM_PATTERNS</a></strong></code>
 <div class="block">A set of Ant-like include/exclude patterns.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_SOURCE_LOCATION">PARAM_SOURCE_LOCATION</a></strong></code>
 <div class="block">Location from which the input is read.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#PARAM_USE_DEFAULT_EXCLUDES">PARAM_USE_DEFAULT_EXCLUDES</a></strong></code>
 <div class="block">Use the default excludes.</div>
@@ -278,12 +282,30 @@ extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getBase()">getBase</a></strong>()</code>
+<div class="block">Get the base location used by the reader.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getBase(java.lang.String)">getBase</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aBase)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getDefaultExcludes()">getDefaultExcludes</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getLanguage()">getLanguage</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>org.apache.uima.util.Progress[]</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getProgress()">getProgress</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected org.springframework.core.io.support.ResourcePatternResolver</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getResolver()">getResolver</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&gt;</code></td>
@@ -294,17 +316,21 @@ extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getResources()">getResources</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#getSourceLocation()">getSourceLocation</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#hasNext()">hasNext</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource)">initCas</a></strong>(org.apache.uima.cas.CAS&nbsp;aCas,
        <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&nbsp;aResource)</code>
 <div class="block">Initialize the <code>DocumentMetaData</code>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource, java.lang.String)">initCas</a></strong>(org.apache.uima.cas.CAS&nbsp;aCas,
        <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&nbsp;aResource,
@@ -312,15 +338,25 @@ extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
 <div class="block">Initialize the <code>DocumentMetaData</code>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initialize(org.apache.uima.UimaContext)">initialize</a></strong>(org.apache.uima.UimaContext&nbsp;aContext)</code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#isSingleLocation()">isSingleLocation</a></strong>()</code>&nbsp;</td>
+</tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#locationToUrl(java.lang.String)">locationToUrl</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)</code>
+<div class="block">Make sure the given location is an URL.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#nextFile()">nextFile</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#scan(java.lang.String, java.util.Collection, java.util.Collection)">scan</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aBase,
     <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;aIncludes,
@@ -397,6 +433,16 @@ extends org.apache.uima.fit.component.CasCollectionReader_ImplBase</pre>
 <!--   -->
 </a>
 <h3>Field Detail</h3>
+<a name="JAR_PREFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>JAR_PREFIX</h4>
+<pre>protected static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> JAR_PREFIX</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.JAR_PREFIX">Constant Field Values</a></dd></dl>
+</li>
+</ul>
 <a name="INCLUDE_PREFIX">
 <!--   -->
 </a>
@@ -496,7 +542,7 @@ public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/
 <li class="blockList">
 <h4>KEY_RESOURCE_RESOLVER</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> KEY_RESOURCE_RESOLVER</pre>
-<div class="block">Name of optional external (uima) resource that contains the Locator for a (spring)
+<div class="block">Name of optional external (UIMA) resource that contains the Locator for a (Spring)
  ResourcePatternResolver implementation for locating (spring) resources.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.KEY_RESOURCE_RESOLVER">Constant Field Values</a></dd></dl>
 </li>
@@ -541,6 +587,30 @@ public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/
 <dd><code>org.apache.uima.resource.ResourceInitializationException</code></dd></dl>
 </li>
 </ul>
+<a name="getDefaultExcludes()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDefaultExcludes</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;getDefaultExcludes()</pre>
+</li>
+</ul>
+<a name="locationToUrl(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>locationToUrl</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;locationToUrl(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)
+                        throws <a href="http://docs.oracle.com/javase/7/docs/api/java/net/MalformedURLException.html?is-external=true" title="class or interface in java.net">MalformedURLException</a></pre>
+<div class="block">Make sure the given location is an URL. E.g. adds "file:" if necessary.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aLocation</code> - the location.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>an URL.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/net/MalformedURLException.html?is-external=true" title="class or interface in java.net">MalformedURLException</a></code></dd></dl>
+</li>
+</ul>
 <a name="getResources()">
 <!--   -->
 </a>
@@ -568,6 +638,44 @@ public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/
 <pre>protected&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&nbsp;nextFile()</pre>
 </li>
 </ul>
+<a name="getSourceLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getSourceLocation</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getSourceLocation()</pre>
+</li>
+</ul>
+<a name="isSingleLocation()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isSingleLocation</h4>
+<pre>protected&nbsp;boolean&nbsp;isSingleLocation()</pre>
+</li>
+</ul>
+<a name="getBase()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getBase</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getBase()</pre>
+<div class="block">Get the base location used by the reader. This location always ends in a / if it is set at
+ all. If there is no base, an empty string is returned.</div>
+</li>
+</ul>
+<a name="getBase(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getBase</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getBase(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aBase)</pre>
+</li>
+</ul>
 <a name="getProgress()">
 <!--   -->
 </a>
@@ -575,6 +683,15 @@ public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/
 <li class="blockList">
 <h4>getProgress</h4>
 <pre>public&nbsp;org.apache.uima.util.Progress[]&nbsp;getProgress()</pre>
+</li>
+</ul>
+<a name="getResolver()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getResolver</h4>
+<pre>protected&nbsp;org.springframework.core.io.support.ResourcePatternResolver&nbsp;getResolver()</pre>
 </li>
 </ul>
 <a name="hasNext()">

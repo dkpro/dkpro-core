@@ -1,15 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- NewPage -->
-<html lang="de">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>JCasFileWriter_ImplBase (DKPro Core ASL 1.6.0 API)</title>
+<title>JCasFileWriter_ImplBase (DKPro Core ASL 1.6.1 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="JCasFileWriter_ImplBase (DKPro Core ASL 1.6.0 API)";
+        parent.document.title="JCasFileWriter_ImplBase (DKPro Core ASL 1.6.1 API)";
     }
 //-->
 </script>
@@ -36,7 +36,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileSetCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasResourceCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html" target="_top">Frames</a></li>
@@ -60,7 +60,7 @@
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested_class_summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
@@ -133,6 +133,25 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Nested Class Summary table, listing nested classes, and an explanation">
+<caption><span>Nested Classes</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase.NamedOutputStream</a></strong></code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- =========== FIELD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="field_summary">
@@ -146,30 +165,34 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#JAR_PREFIX">JAR_PREFIX</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION">PARAM_COMPRESSION</a></strong></code>
 <div class="block">Choose a compression method.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_ESCAPE_DOCUMENT_ID">PARAM_ESCAPE_DOCUMENT_ID</a></strong></code>
 <div class="block">Use the document ID as file name even if a relative path information is present.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_STRIP_EXTENSION">PARAM_STRIP_EXTENSION</a></strong></code>
 <div class="block">Remove the original extension.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_TARGET_LOCATION">PARAM_TARGET_LOCATION</a></strong></code>
-<div class="block">The folder to write the generated XMI files to.</div>
+<div class="block">Target location</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID">PARAM_USE_DOCUMENT_ID</a></strong></code>
 <div class="block">Use the document ID as file name even if a relative path information is present.</div>
@@ -208,12 +231,21 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#collectionProcessComplete()">collectionProcessComplete</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/CompressionMethod.html" title="enum in de.tudarmstadt.ukp.dkpro.core.api.resources">CompressionMethod</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getCompressionMethod()">getCompressionMethod</a></strong>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</a></code></td>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase.NamedOutputStream</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)">getOutputStream</a></strong>(org.apache.uima.jcas.JCas&nbsp;aJCas,
+               <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase.NamedOutputStream</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(java.lang.String, java.lang.String)">getOutputStream</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aRelativePath,
                <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -226,14 +258,18 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(org.apache.uima.jcas.JCas, java.lang.String)">getTargetPath</a></strong>(org.apache.uima.jcas.JCas&nbsp;aJCas,
              <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</code>
-<div class="block">Get the full target path for the given CAS and extension.</div>
+<div class="block"><strong>Deprecated.</strong>&nbsp;
+<div class="block"><i>Use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)"><code>getOutputStream(JCas, String)</code></a> instead</i></div>
+</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(java.lang.String, java.lang.String)">getTargetPath</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aRelativePath,
              <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</code>
-<div class="block">Get the full target path for the given relative path and extension.</div>
+<div class="block"><strong>Deprecated.</strong>&nbsp;
+<div class="block"><i>Use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(java.lang.String, java.lang.String)"><code>getOutputStream(String, String)</code></a> instead</i></div>
+</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -271,7 +307,7 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.uima.analysis_component.AnalysisComponent_ImplBase</h3>
-<code>batchProcessComplete, collectionProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</code></li>
+<code>batchProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
@@ -294,6 +330,16 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <!--   -->
 </a>
 <h3>Field Detail</h3>
+<a name="JAR_PREFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>JAR_PREFIX</h4>
+<pre>protected static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> JAR_PREFIX</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase.JAR_PREFIX">Constant Field Values</a></dd></dl>
+</li>
+</ul>
 <a name="PARAM_TARGET_LOCATION">
 <!--   -->
 </a>
@@ -301,7 +347,7 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <li class="blockList">
 <h4>PARAM_TARGET_LOCATION</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_TARGET_LOCATION</pre>
-<div class="block">The folder to write the generated XMI files to.</div>
+<div class="block">Target location</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase.PARAM_TARGET_LOCATION">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -402,30 +448,47 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <pre>protected&nbsp;boolean&nbsp;isUseDocumentId()</pre>
 </li>
 </ul>
+<a name="collectionProcessComplete()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>collectionProcessComplete</h4>
+<pre>public&nbsp;void&nbsp;collectionProcessComplete()
+                               throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>collectionProcessComplete</code>&nbsp;in interface&nbsp;<code>org.apache.uima.analysis_component.AnalysisComponent</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>collectionProcessComplete</code>&nbsp;in class&nbsp;<code>org.apache.uima.analysis_component.AnalysisComponent_ImplBase</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd></dl>
+</li>
+</ul>
 <a name="getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getOutputStream</h4>
-<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</a>&nbsp;getOutputStream(org.apache.uima.jcas.JCas&nbsp;aJCas,
-                           <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)
-                                throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<pre>protected&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase.NamedOutputStream</a>&nbsp;getOutputStream(org.apache.uima.jcas.JCas&nbsp;aJCas,
+                                                        <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)
+                                                             throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <dl><dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
-<a name="getRelativePath(org.apache.uima.jcas.JCas)">
+<a name="getOutputStream(java.lang.String, java.lang.String)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getRelativePath</h4>
-<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getRelativePath(org.apache.uima.jcas.JCas&nbsp;aJCas)</pre>
-<div class="block">Get the relative path from the CAS. If the CAS does not contain relative path information or
- if <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID"><code>PARAM_USE_DOCUMENT_ID</code></a> is set, the document ID is used.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aJCas</code> - a CAS.</dd>
-<dt><span class="strong">Returns:</span></dt><dd>the relative target path.</dd></dl>
+<h4>getOutputStream</h4>
+<pre>protected&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase.NamedOutputStream</a>&nbsp;getOutputStream(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aRelativePath,
+                                                        <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)
+                                                             throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
+<dl><dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
 <a name="getTargetPath(org.apache.uima.jcas.JCas, java.lang.String)">
@@ -434,8 +497,10 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getTargetPath</h4>
-<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getTargetPath(org.apache.uima.jcas.JCas&nbsp;aJCas,
-                 <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</pre>
+<pre><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getTargetPath(org.apache.uima.jcas.JCas&nbsp;aJCas,
+                            <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;<i>Use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)"><code>getOutputStream(JCas, String)</code></a> instead</i></div>
 <div class="block">Get the full target path for the given CAS and extension. If the
  <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION"><code>PARAM_COMPRESSION</code></a> is set, ".gz" is appended to the path.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>aExtension</code> - the extension.</dd>
@@ -445,15 +510,30 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <a name="getTargetPath(java.lang.String, java.lang.String)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getTargetPath</h4>
-<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getTargetPath(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aRelativePath,
-                 <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</pre>
+<pre><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Deprecated.html?is-external=true" title="class or interface in java.lang">@Deprecated</a>
+protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/io/File.html?is-external=true" title="class or interface in java.io">File</a>&nbsp;getTargetPath(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aRelativePath,
+                            <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aExtension)</pre>
+<div class="block"><span class="strong">Deprecated.</span>&nbsp;<i>Use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(java.lang.String, java.lang.String)"><code>getOutputStream(String, String)</code></a> instead</i></div>
 <div class="block">Get the full target path for the given relative path and extension. If the
  <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION"><code>PARAM_COMPRESSION</code></a> is set, ".gz" is appended to the path.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>aRelativePath</code> - the relative path.</dd><dd><code>aExtension</code> - the extension.</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the full path.</dd></dl>
+</li>
+</ul>
+<a name="getRelativePath(org.apache.uima.jcas.JCas)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getRelativePath</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getRelativePath(org.apache.uima.jcas.JCas&nbsp;aJCas)</pre>
+<div class="block">Get the relative path from the CAS. If the CAS does not contain relative path information or
+ if <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID"><code>PARAM_USE_DOCUMENT_ID</code></a> is set, the document ID is used.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aJCas</code> - a CAS.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the relative target path.</dd></dl>
 </li>
 </ul>
 </li>
@@ -483,7 +563,7 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileSetCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasResourceCollectionReader_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html" target="_top">Frames</a></li>
@@ -507,7 +587,7 @@ extends org.apache.uima.fit.component.JCasConsumer_ImplBase</pre>
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested_class_summary">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
