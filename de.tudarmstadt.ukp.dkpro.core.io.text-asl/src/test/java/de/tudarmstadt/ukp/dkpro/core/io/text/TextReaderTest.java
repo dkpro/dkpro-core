@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-import static org.apache.uima.fit.util.CasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -57,7 +57,8 @@ public class TextReaderTest
             dumpMetaData(md);
 
             assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
-                      .size());
+                    .size());
+
             assertTrue(FILES.contains(md.getDocumentId()));
 
 			assertTrue(
@@ -84,7 +85,8 @@ public class TextReaderTest
 			DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
-            assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
+            assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
+                    .size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
@@ -113,7 +115,8 @@ public class TextReaderTest
 			DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
-            assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
+            assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
+                    .size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
@@ -141,7 +144,8 @@ public class TextReaderTest
             DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
-            assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
+            assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
+                    .size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 
@@ -168,7 +172,8 @@ public class TextReaderTest
             DocumentMetaData md = DocumentMetaData.get(jcas);
             dumpMetaData(md);
 
-            assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
+            assertEquals(1, CasUtil.select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType())
+                    .size());
 
             assertTrue(FILES.contains(md.getDocumentId()));
 

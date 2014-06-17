@@ -15,7 +15,7 @@ import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -> "Camel", "Case"; "Zauberstab" -> "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
 <p>
- * Updated by JCasGen Fri Feb 14 15:26:58 CET 2014
+ * Updated by JCasGen Tue Dec 04 00:57:50 CET 2012
  * @generated */
 public class Token_Type extends Annotation_Type {
   /** @generated */
@@ -116,30 +116,6 @@ public class Token_Type extends Annotation_Type {
     ll_cas.ll_setRefValue(addr, casFeatCode_pos, v);}
     
   
- 
-  /** @generated */
-  final Feature casFeat_morph;
-  /** @generated */
-  final int     casFeatCode_morph;
-  /** @generated
-   * @param addr low level Feature Structure reference
-   * @return the feature value 
-   */ 
-  public int getMorph(int addr) {
-        if (featOkTst && casFeat_morph == null)
-      jcas.throwFeatMissing("morph", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    return ll_cas.ll_getRefValue(addr, casFeatCode_morph);
-  }
-  /** @generated
-   * @param addr low level Feature Structure reference
-   * @param v value to set 
-   */    
-  public void setMorph(int addr, int v) {
-        if (featOkTst && casFeat_morph == null)
-      jcas.throwFeatMissing("morph", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token");
-    ll_cas.ll_setRefValue(addr, casFeatCode_morph, v);}
-    
-  
 
 
 
@@ -164,10 +140,6 @@ public class Token_Type extends Annotation_Type {
  
     casFeat_pos = jcas.getRequiredFeatureDE(casType, "pos", "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS", featOkTst);
     casFeatCode_pos  = (null == casFeat_pos) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_pos).getCode();
-
- 
-    casFeat_morph = jcas.getRequiredFeatureDE(casType, "morph", "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures", featOkTst);
-    casFeatCode_morph  = (null == casFeat_morph) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_morph).getCode();
 
   }
 }

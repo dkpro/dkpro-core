@@ -57,6 +57,8 @@ public class ClearNlpPosTaggerTest
 	public void testEnglishMayo()
 		throws Exception
 	{
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
+        
         runTest("en", "mayo", "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });

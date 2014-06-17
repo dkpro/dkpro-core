@@ -90,7 +90,7 @@ public class ConditionalFrequencyDistribution<C, V>
     {
         this();
         for (Map.Entry<C, Iterable<V>> entry : samples.entrySet()) {
-            incAll(entry.getKey(), entry.getValue());
+            addSamples(entry.getKey(), entry.getValue());
         }
     }
 
@@ -171,23 +171,23 @@ public class ConditionalFrequencyDistribution<C, V>
     }
 
     /**
-     * Increases a sample under a given <code>condition</code>.
+     * Adds a sample under a given <code>condition</code>.
      * 
      * @param condition
      *            the condition for this sample
      * @param sample
      *            the sample to add
      */
-    public void inc(C condition, V sample)
+    public void addSample(C condition, V sample)
     {
         List<V> samples = new ArrayList<V>();
         samples.add(sample);
 
-        incAll(condition, samples);
+        addSamples(condition, samples);
     }
 
     /**
-     * Increases all provided samples under a given <code>condition</code>.
+     * Adds multiple samples under a given <code>condition</code>.
      * 
      * <p>
      * If there is no {@link FrequencyDistribution} present for the given <code>condition</code>, a
@@ -199,7 +199,7 @@ public class ConditionalFrequencyDistribution<C, V>
      *            the samples to add
      */
 
-    public void incAll(C condition, Iterable<V> samples)
+    public void addSamples(C condition, Iterable<V> samples)
     {
         FrequencyDistribution<V> freqDist = null;
 
@@ -213,33 +213,6 @@ public class ConditionalFrequencyDistribution<C, V>
 
         long countBefore = freqDist.getN();
         freqDist.incAll(samples);
-        this.n = n + (freqDist.getN() - countBefore);
-    }
-
-    /**
-     * Adds a sample with a certain frequency under a given <code>condition</code>.
-     * 
-     * @param condition
-     *            the condition for this sample
-     * @param sample
-     *            the sample to add
-     * @param frequency
-     *            the frequenc of the sample
-     */
-    public void addSample(C condition, V sample, long frequency)
-    {
-        FrequencyDistribution<V> freqDist = null;
-
-        if (cfd.containsKey(condition)) {
-            freqDist = cfd.get(condition);
-        }
-        else {
-            freqDist = new FrequencyDistribution<V>();
-            cfd.put(condition, freqDist);
-        }
-
-        long countBefore = freqDist.getN();
-        freqDist.addSample(sample, frequency);
         this.n = n + (freqDist.getN() - countBefore);
     }
 

@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-		<version>1.7.0-SNAPSHOT</version>
+		<version>1.6.1</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
 	<name>DKPro Core ASL - Clear NLP</name>
@@ -30,6 +30,15 @@
 			<artifactId>clearnlp</artifactId>
 			<version>2.0.2</version>
  		</dependency>
+		<dependency>
+      <!--  
+        - DKPro Core resource provisioning currently not compatible with ClearNLP
+        - See: https://code.google.com/p/dkpro-core-asl/issues/detail?id=406
+        -->
+		  <groupId>com.clearnlp</groupId>
+		  <artifactId>clearnlp-dictionary</artifactId>
+		  <version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
 			<artifactId>uimafit-core</artifactId>
@@ -65,6 +74,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -76,19 +90,18 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</artifactId>
 			<scope>test</scope>
 		</dependency>
+    <!--  
+      - DKPro Core resource provisioning currently not compatible with ClearNLP
+      - See: https://code.google.com/p/dkpro-core-asl/issues/detail?id=406
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</artifactId>
 			<scope>test</scope>
 		</dependency>
+    -->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-en-mayo</artifactId>
@@ -153,15 +166,19 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-				<version>1.7.0-SNAPSHOT</version>
+				<version>1.6.1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+      <!--  
+        - DKPro Core resource provisioning currently not compatible with ClearNLP
+        - See: https://code.google.com/p/dkpro-core-asl/issues/detail?id=406
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</artifactId>
 				<version>20130715.0</version>
 			</dependency>
+      -->
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-en-mayo</artifactId>
@@ -224,7 +241,11 @@
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
+              <!--  
+                - DKPro Core resource provisioning currently not compatible with ClearNLP
+                - See: https://code.google.com/p/dkpro-core-asl/issues/detail?id=406
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</usedDependency>
+              -->
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-en-mayo</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.clearnlp-model-parser-en-ontonotes</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.clearnlp-model-tagger-en-mayo</usedDependency>

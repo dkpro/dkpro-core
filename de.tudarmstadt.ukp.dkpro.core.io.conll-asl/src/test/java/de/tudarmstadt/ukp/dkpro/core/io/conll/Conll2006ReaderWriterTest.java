@@ -38,7 +38,7 @@ public class Conll2006ReaderWriterTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 Conll2006Reader.class, 
-                Conll2006Reader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/2006/", 
+                Conll2006Reader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/", 
                 Conll2006Reader.PARAM_PATTERNS, "[+]fk003_2006_08_ZH1.conll10");
 
         AnalysisEngineDescription writer = createEngineDescription(
@@ -53,36 +53,9 @@ public class Conll2006ReaderWriterTest
         runPipeline(reader, writer, dumper);
 
         String reference = FileUtils.readFileToString(new File(
-                "src/test/resources/conll/2006/fk003_2006_08_ZH1.conll10"), "UTF-8");
+                "src/test/resources/conll/fk003_2006_08_ZH1.conll10"), "UTF-8");
         String actual = FileUtils.readFileToString(
                 new File("target/test-output/fk003_2006_08_ZH1.conll"), "UTF-8");
-        assertEquals(reference, actual);
-    }
-    
-    @Test
-    public void testFinnTreeBank()
-        throws Exception
-    {
-        CollectionReaderDescription reader = createReaderDescription(
-                Conll2006Reader.class, 
-                Conll2006Reader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/2006/", 
-                Conll2006Reader.PARAM_PATTERNS, "[+]fi-orig.conll");
-
-        AnalysisEngineDescription writer = createEngineDescription(
-                Conll2006Writer.class,
-                Conll2006Writer.PARAM_TARGET_LOCATION, "target/test-output", 
-                Conll2006Writer.PARAM_STRIP_EXTENSION, true);
-
-        AnalysisEngineDescription dumper = createEngineDescription(
-                CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/dump.txt");
-
-        runPipeline(reader, writer, dumper);
-
-        String reference = FileUtils.readFileToString(new File(
-                "src/test/resources/conll/2006/fi-ref.conll"), "UTF-8").trim();
-        String actual = FileUtils.readFileToString(
-                new File("target/test-output/fi-orig.conll"), "UTF-8").trim();
         assertEquals(reference, actual);
     }
 }

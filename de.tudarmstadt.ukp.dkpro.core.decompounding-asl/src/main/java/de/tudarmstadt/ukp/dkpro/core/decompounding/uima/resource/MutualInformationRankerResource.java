@@ -17,6 +17,7 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
@@ -57,4 +58,9 @@ public class MutualInformationRankerResource
 		ranker.setFinder(aFinder);
 	}
 
+	@Override
+	public List<DecompoundedWord> bestPath(DecompoundingTree aTree)
+	{
+		return ranker.bestPath(aTree);
+	}
 }

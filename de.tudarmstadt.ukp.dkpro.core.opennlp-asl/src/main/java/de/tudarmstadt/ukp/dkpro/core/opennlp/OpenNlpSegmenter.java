@@ -65,18 +65,11 @@ public class OpenNlpSegmenter
 	protected String variant;
 
 	/**
-	 * Load the segmentation model from this location instead of locating the model automatically.
+	 * Load the model from this location instead of locating the model automatically.
 	 */
-	public static final String PARAM_SEGMENTATION_MODEL_LOCATION = ComponentParameters.PARAM_SEGMENTATION_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_SEGMENTATION_MODEL_LOCATION, mandatory = false)
-	protected String segmentationModelLocation;
-	
-	/**
-     * Load the tokenization model from this location instead of locating the model automatically.
-     */
-    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = ComponentParameters.PARAM_TOKENIZATION_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_TOKENIZATION_MODEL_LOCATION, mandatory = false)
-    protected String tokenizationModelLocation;
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
 
 	private CasConfigurableProviderBase<SentenceDetectorME> sentenceModelProvider;
 	private CasConfigurableProviderBase<TokenizerME> tokenModelProvider;
@@ -96,10 +89,10 @@ public class OpenNlpSegmenter
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"sentence-${language}-${variant}.properties");
+						"sentence-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
 
-				setOverride(LOCATION, segmentationModelLocation);
+				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
@@ -122,10 +115,10 @@ public class OpenNlpSegmenter
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"token-${language}-${variant}.properties");
+						"token-${language}-${variant}.bin");
 				setDefault(VARIANT, "maxent");
 
-				setOverride(LOCATION, tokenizationModelLocation);
+				setOverride(LOCATION, modelLocation);
 				setOverride(LANGUAGE, language);
 				setOverride(VARIANT, variant);
 			}
@@ -155,12 +148,10 @@ public class OpenNlpSegmenter
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
-		for (Span sSpan : sentences) {
+		for (Span sSpan : sentenceModelProvider.getResource().sentPosDetect(aText)) {
 			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
-			Span[] tokens = tokenModelProvider.getResource().tokenizePos(
-                    aText.substring(sSpan.getStart(), sSpan.getEnd()));
-			for (Span tSpan : tokens) {
+			for (Span tSpan : tokenModelProvider.getResource().tokenizePos(
+					aText.substring(sSpan.getStart(), sSpan.getEnd()))) {
 				createToken(aJCas, tSpan.getStart() + sSpan.getStart() + aZoneBegin, tSpan.getEnd()
 						+ sSpan.getStart() + aZoneBegin);
 			}

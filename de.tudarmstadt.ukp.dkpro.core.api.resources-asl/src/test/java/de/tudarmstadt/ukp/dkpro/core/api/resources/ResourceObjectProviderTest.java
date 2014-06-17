@@ -119,43 +119,6 @@ public class ResourceObjectProviderTest
             assertTrue(e.getMessage().startsWith("Unable to load resource ["));
         }
     }
-    
-    @Test
-    public void testCaching() throws Exception
-    {
-        SharableObjectProvider provider1 = new SharableObjectProvider();
-        SharableObjectProvider provider2 = new SharableObjectProvider();
-        
-        String loc = "classpath:" + getClass().getName().replace('.', '/') + ".class";
-        provider1.setDefault(ResourceObjectProviderBase.LOCATION, loc);
-        provider2.setDefault(ResourceObjectProviderBase.LOCATION, loc);
-        
-        provider1.configure();
-        provider2.configure();
-        
-        assertTrue(provider1.getResource() == provider2.getResource());
-    }
-    
-    private static class SharableObjectProvider extends ResourceObjectProviderBase<Object>
-    {
-        {
-            setDefault(SHARABLE, "true");
-        }
-
-        @Override
-        protected Properties getProperties()
-        {
-            return null;
-        }
-
-        @Override
-        protected Object produceResource(URL aUrl)
-            throws IOException
-        {
-            return new Object();
-        }
-    }
-    
     @Rule
     public TestName name = new TestName();
 

@@ -37,26 +37,17 @@ public class OpenNlpPosTaggerTest
 	public void testEnglish()
 		throws Exception
 	{
-        runTest("en", null, "This is a test .",
+        runTest("en", null, "This is a test . \n",
 				new String[] { "DT",   "VBZ", "DT",  "NN",   "." },
 				new String[] { "ART",  "V",   "ART", "NN",   "PUNC" });
 
-        runTest("en", null, "A neural net .",
+        runTest("en", null, "A neural net . \n",
         		new String[] { "DT",  "JJ",     "NN",  "." },
         		new String[] { "ART", "ADJ",    "NN",  "PUNC" });
 
-        runTest("en", null, "John is purchasing oranges .",
+        runTest("en", null, "John is purchasing oranges . \n",
         		new String[] { "NNP",  "VBZ", "VBG",      "NNS",    "." },
         		new String[] { "NP",   "V",   "V",        "NN",     "PUNC" });
-        
-        // This is WRONG tagging. "jumps" is tagged as "NNS"
-        runTest("en", "maxent", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
-        
-        runTest("en", "perceptron", "The quick brown fox jumps over the lazy dog . \n",
-                new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
-                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
     }
 
 	@Test
@@ -88,39 +79,7 @@ public class OpenNlpPosTaggerTest
                 new String[] { "PD", "Vip3", "RI",  "Sn", "FS"    },
                 new String[] { "PR", "V",    "ART", "NN", "PUNC" });
     }
-
-    @Test
-    public void testPortuguese()
-        throws Exception
-    {
-        JCas jcas = runTest("pt", null, "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
-        
-        runTest("pt", "maxent", "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
-
-        runTest("pt", "perceptron", "Este é um teste .",
-                new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
-                new String[] { "PR", "V", "ART", "NN", "PUNC" });
-
-        runTest("pt", "mm-maxent", "Este é um teste .",
-                new String[] { "PROSUB", "V",   "ART", "N",   "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
-
-        runTest("pt", "mm-perceptron", "Este é um teste .",
-                new String[] { "PROSUB", "V",   "ART", "N",   "." },
-                new String[] { "POS",    "POS", "POS", "POS", "POS" });
-        
-        String[] posTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec", "in",
-                "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp", "punc",
-                "v-fin", "v-ger", "v-inf", "v-pcp", "vp" };
-
-        AssertAnnotations.assertTagset(POS.class, "bosque", posTags, jcas);
-    }
-    
-    
+		
 	@Test
 	public void testSpanish()
 		throws Exception
@@ -139,7 +98,7 @@ public class OpenNlpPosTaggerTest
                 new String[] { "POS", "POS", "POS", "POS", "POS" });
     }
 
-	private JCas runTest(String language, String variant, String testDocument, String[] tags,
+	private void runTest(String language, String variant, String testDocument, String[] tags,
 			String[] tagClasses)
 		throws Exception
 	{
@@ -150,8 +109,6 @@ public class OpenNlpPosTaggerTest
 		JCas jcas = TestRunner.runTest(engine, language, testDocument);
 
 		AssertAnnotations.assertPOS(tagClasses, tags, select(jcas, POS.class));
-		
-		return jcas;
 	}
 
 	@Rule

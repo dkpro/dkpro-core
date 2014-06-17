@@ -41,7 +41,6 @@ import mstparser.DependencyPipe2O;
 import mstparser.ParserOptions;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -51,6 +50,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -62,16 +62,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * <p>Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
- * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a>
- * <a href="http://sourceforge.net/projects/mstparser/">here</a></p>
- * <p>The MSTParser models tend to be very large, e.g. the 
+ * Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
+ * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a><br>
+ * and<br>
+ * and <a href="http://sourceforge.net/projects/mstparser/">here</a><br>
+ * The MSTParser models tend to be very large, e.g. the 
  * <a href="http://nlp.stanford.edu/software/stanford-dependencies.shtml">Eisner</a> model is about
  * 600 MB uncompressed. With this model, parsing a simple sentence with MSTParser requires about
- * 3 GB heap memory.</p>
- * <p>This component feeds MSTParser only with the FORM (token) and POS (part-of-speech) fields.
- * LEMMA, CPOS, and other columns from the CONLL 2006 format are not generated (cf. 
- * {@link mstparser.DependencyInstance DependencyInstance}).</p>
+ * 3 GB heap memory.
  * 
  * @author beinborn
  * @author zesch
@@ -123,15 +121,6 @@ public class MstParser
     public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = ComponentParameters.PARAM_DEPENDENCY_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_DEPENDENCY_MAPPING_LOCATION, mandatory = false)
     protected String dependencyMappingLocation;
-    
-    /**
-     * Specifies the order/scope of features. 1 only has features over single edges
-     * and 2 has features over pairs of adjacent edges in the tree. The model must have been
-     * trained with the respective order set here.
-     */
-    public static final String PARAM_ORDER = "order";
-    @ConfigurationParameter(name = PARAM_ORDER, mandatory = false)
-    private Integer order;
 
     private ModelProviderBase<DependencyParser> modelProvider;
     private MappingProvider mappingProvider;
@@ -169,53 +158,37 @@ public class MstParser
             protected DependencyParser produceResource(URL aUrl)
                 throws IOException
             {
-                Properties metadata = getResourceMetaData();
+                // mst.ParserOptions needs a String as argument
+                ParserOptions options = new ParserOptions(new String[] {});
+                options.test = true;
+                options.train = false;
+                options.trainfile = "";
+                options.eval = false;
+                options.format = "MST";
+                options.goldfile = "";
+                options.testfile = "";
+                getLogger().info("Retrieving model");
+                options.modelName = aUrl.toString();
 
-                // Configure parser
-                ParserOptions options = createOptions(aUrl, metadata);
-                DependencyPipe pipe = createPipe(options);
-                DependencyParser dp = loadParser(aUrl, pipe, options);
+                DependencyPipe pipe = options.secondOrder ? new DependencyPipe2O(options)
+                        : new DependencyPipe(options);
+
+                DependencyParser dp = new DependencyParser(pipe, options);
                 
-                // Check if the model order corresponds to the order the component is configurd for
-                boolean secondOrderModel = isSecondOrderModel(pipe);
-                if (secondOrderModel != options.secondOrder) {
-                    String model = secondOrderModel ? "second" : "first";
-                    String component = options.secondOrder ? "second" : "first";
-                    getLogger().warn("Model is " + model + " but component has been configured "
-                            + "for " + component + " order. I am going to reload the model now "
-                            + "with the correct order. To avoid loading the model twice, please "
-                            + "configure the component for the correct order.");
-                    
-                    // Reconfigure pipe and reload
-                    options.secondOrder = secondOrderModel;
-                    pipe = createPipe(options);
-                    dp = loadParser(aUrl, pipe, options);
+                InputStream is = null;
+                try {
+                    is = CompressionUtils.getInputStream(aUrl.getFile(), aUrl.openStream());
+                    dp.loadModel(is);
                 }
-                                
-                // Extract dependency tagset
+                finally {
+                    closeQuietly(is);
+                }
+                
+                Properties metadata = getResourceMetaData();
                 SingletonTagset depTags = new SingletonTagset(
                         Dependency.class, metadata.getProperty("dependency.tagset"));
                 depTags.addAll(asList(pipe.types));
-                //depTags.remove("<no-type>");
                 addTagset(depTags);
-                
-                // Extract POS tagset (from POS, not from CPOS!)
-                SingletonTagset posTags = new SingletonTagset(
-                        POS.class, metadata.getProperty("pos.tagset"));
-                for (Object key : pipe.dataAlphabet.toArray()) {
-                    if (key instanceof String) {
-                        String sKey = (String) key;
-                        
-                        // See mstparser.DependencyPipe.addLinearFeatures(...)
-                        if (sKey.startsWith("POSPC=")) {
-                            String[] fragments = sKey.substring(6).split(" ",3);
-                            posTags.add(fragments[0]);
-                            posTags.add(fragments[1]);
-                        }
-                    }
-                }
-                //posTags.remove("<root-POS>");
-                addTagset(posTags);               
                 
                 if (printTagSet) {
                     getContext().getLogger().log(INFO, getTagset().toString());
@@ -363,79 +336,5 @@ public class MstParser
         IOUtils.closeQuietly(out);
         tempfile.deleteOnExit();
         return tempfile.getPath();
-    }
-    
-    /**
-     * Checks if the data alphabet loaded into the pipe contains features that are only generated
-     * when a second-order model has been trained.
-     */
-    private boolean isSecondOrderModel(DependencyPipe aPipe)
-    {
-        for (Object key : aPipe.dataAlphabet.toArray()) {
-            if (key instanceof String) {
-                String sKey = (String) key;
-                if (sKey.startsWith("POS_TRIP=")) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    
-    private ParserOptions createOptions(URL aUrl, Properties aMetadata)
-    {
-        // mst.ParserOptions needs a String as argument
-        ParserOptions options = new ParserOptions(new String[] {});
-        options.test = true;
-        options.train = false;
-        options.trainfile = "";
-        options.eval = false;
-        options.format = "MST";
-        options.goldfile = "";
-        options.testfile = "";
-        options.modelName = aUrl.toString();
-        
-        if (order == null) {
-            String modelOrder = aMetadata.getProperty("mstparser.param.order");
-            if (StringUtils.isNotEmpty(modelOrder)) {
-                getLogger().info(
-                        "Using model order (mstparser.param.order): " + modelOrder);
-                options.secondOrder = "2".equals(modelOrder.trim());
-            }
-            else {
-                getLogger().info("Using default order: 1");
-                options.secondOrder = false;
-            }
-        }
-        else {
-            getLogger().info("Using user-specified order: " + order);
-            options.secondOrder = order == 2;
-        }
-        
-        return options;
-    }
-    
-    private DependencyParser loadParser(URL aUrl, DependencyPipe aPipe, ParserOptions aOptions)
-        throws IOException
-    {
-        DependencyParser dp = new DependencyParser(aPipe, aOptions);
-
-        InputStream is = null;
-        try {
-            getLogger().info("Retrieving model");
-            is = CompressionUtils.getInputStream(aUrl.getFile(), aUrl.openStream());
-            dp.loadModel(is);
-        }
-        finally {
-            closeQuietly(is);
-        }
-        
-        return dp;
-    }
-    
-    private DependencyPipe createPipe(ParserOptions aOptions)
-        throws IOException
-    {
-        return aOptions.secondOrder ? new DependencyPipe2O(aOptions) : new DependencyPipe(aOptions);
     }
 }

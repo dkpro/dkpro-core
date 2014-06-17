@@ -35,12 +35,10 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
-import java.util.WeakHashMap;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ivy.Ivy;
@@ -147,13 +145,6 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String VERSION = "version";
 
     public static final String PACKAGE = "package";
-    
-    /**
-     * If this property is set to {@code true}, resources loaded through this provider are 
-     * remembered by the provider using a weak reference. If the same resource is requested by
-     * another instance of this provider class, the same resource is returned.
-     */
-    public static final String SHARABLE = "sharable";
 
     private Properties resourceMetaData;
     private URL resourceUrl;
@@ -161,7 +152,7 @@ public abstract class ResourceObjectProviderBase<M>
     private String lastModelLocation;
     private M resource;
 
-    private Class<?> contextClass;
+    private Object contextObject;
 
     private Properties overrides = new Properties();
     private Properties defaults = new Properties();
@@ -176,16 +167,6 @@ public abstract class ResourceObjectProviderBase<M>
 
     private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 
-    private static Map<ResourceHandle, Object> cache = new WeakHashMap<ResourceHandle, Object>();
-    
-    /**
-     * Maintain a reference to the handle for the currently loaded resource. This handle is used
-     * as a key in the resource cache and makes sure that the resource is not removed from the
-     * cache while it is still considered as "loaded" by this provider.
-     */
-    @SuppressWarnings("unused")
-    private ResourceHandle resourceHandle;
-    
     {
         init();
     }
@@ -286,20 +267,8 @@ public abstract class ResourceObjectProviderBase<M>
      */
     public void setContextObject(Object aObject)
     {
-        setContextClass(aObject.getClass());
-    }
-    
-    /**
-     * Set a class which can be used to try finding a Maven POM from which resource version
-     * information could be extracted.
-     *
-     * @param aClass
-     *            a context class, usually the class creating the provider.
-     */
-    public void setContextClass(Class<?> aClass)
-    {
-        contextClass = aClass;
-        setDefault(PACKAGE, contextClass.getPackage().getName().replace('.', '/'));
+        contextObject = aObject;
+        setDefault(PACKAGE, aObject.getClass().getPackage().getName().replace('.', '/'));
     }
 
     /**
@@ -317,8 +286,8 @@ public abstract class ResourceObjectProviderBase<M>
     protected String getModelVersionFromMavenPom()
         throws IOException
     {
-        if (contextClass == null) {
-            throw new IllegalStateException("No context class specified");
+        if (contextObject == null) {
+            throw new IllegalStateException("No context object specified");
         }
 
         // Get the properties and resolve the artifact coordinates
@@ -327,8 +296,9 @@ public abstract class ResourceObjectProviderBase<M>
         String modelGroup = pph.replacePlaceholders(props.getProperty(GROUP_ID), props);
 
         // Try to determine the location of the POM file belonging to the context object
-        URL url = contextClass.getResource(contextClass.getSimpleName() + ".class");
-        String classPart = contextClass.getName().replace(".", "/") + ".class";
+        URL url = contextObject.getClass().getResource(
+                contextObject.getClass().getSimpleName() + ".class");
+        String classPart = contextObject.getClass().getName().replace(".", "/") + ".class";
         String base = url.toString();
         base = base.substring(0, base.length() - classPart.length());
 
@@ -457,7 +427,7 @@ public abstract class ResourceObjectProviderBase<M>
                 initialResourceUrl = null;
                 if (modelLocationChanged) {
                     log.info("Producing resource from thin air");
-                    loadResource(props);
+                    resource = produceResource(null);
                 }
             }
             else {
@@ -494,14 +464,7 @@ public abstract class ResourceObjectProviderBase<M>
                     resourceMetaData = new Properties();
                     resourceUrl = followRedirects(initialResourceUrl);
                     loadMetadata();
-                    if (initialResourceUrl.equals(resourceUrl)) {
-                        log.info("Producing resource from " + resourceUrl);
-                    }
-                    else {
-                        log.info("Producing resource from [" + resourceUrl + "] redirected from [" + initialResourceUrl
-                                + "]");
-                    }
-                    loadResource(props);
+                    loadResource();
                 }
             }
             success = true;
@@ -608,42 +571,16 @@ public abstract class ResourceObjectProviderBase<M>
     }
 
 
-    @SuppressWarnings("unchecked")
-    protected synchronized void loadResource(Properties aProperties) throws IOException
+    protected void loadResource() throws IOException
     {
-        boolean sharable = "true".equals(aProperties.getProperty(SHARABLE, "false"));
-        
-        ResourceHandle handle = null;
-        resource = null;
-        
-        // Check the cache
-        if (sharable) {
-            // We need to scan the cache manually because in the end we need to keep a reference
-            // to exactly the same key object that was used to store the resource in the cache.
-            handle = new ResourceHandle(getClass(), resourceUrl != null ? resourceUrl.toString()
-                    : null);
-            for (Entry<ResourceHandle, Object> e : cache.entrySet()) {
-                if (handle.equals(e.getKey())) {
-                    resourceHandle = e.getKey();
-                    resource = (M) e.getValue();
-                    log.info("Used resource from cache");
-                }
-            }
+        if (initialResourceUrl.equals(resourceUrl)) {
+            log.info("Producing resource from " + resourceUrl);
         }
-
-        // If there was nothing in the cache or if the cache is disabled, produce new
-        if (resource == null) {
-            StopWatch sw = new StopWatch();
-            sw.start();
-            resource = produceResource(resourceUrl);
-            sw.stop();
-            log.info("Producing resource took " + sw.getTime() + "ms");
-            
-            // If cache is enabeld, update the cache
-            if (sharable) {
-                cache.put(handle, resource);
-            }
+        else {
+            log.info("Producing resource from [" + resourceUrl + "] redirected from [" + initialResourceUrl
+                    + "]");
         }
+        resource = produceResource(resourceUrl);
     }
 
     /**
@@ -902,64 +839,6 @@ public abstract class ResourceObjectProviderBase<M>
         }
     }
 
-    private static final class ResourceHandle
-    {
-        private String url;
-        
-        private Class<?> owner;
-
-        public ResourceHandle(Class<?> aOwner, String aUrl)
-        {
-            owner = aOwner;
-            url = aUrl;
-        }
-        
-        public String getUrl()
-        {
-            return url;
-        }
-        
-        public Class<?> getOwner()
-        {
-            return owner;
-        }
-
-        @Override
-        public int hashCode()
-        {
-            final int prime = 31;
-            int result = 1;
-            result = prime * result + ((owner == null) ? 0 : owner.hashCode());
-            result = prime * result + ((url == null) ? 0 : url.hashCode());
-            return result;
-        }
-
-        @Override
-        public boolean equals(Object obj)
-        {
-            if (this == obj)
-                return true;
-            if (obj == null)
-                return false;
-            if (getClass() != obj.getClass())
-                return false;
-            ResourceHandle other = (ResourceHandle) obj;
-            if (owner == null) {
-                if (other.owner != null)
-                    return false;
-            }
-            else if (!owner.equals(other.owner))
-                return false;
-            if (url == null) {
-                if (other.url != null)
-                    return false;
-            }
-            else if (!url.equals(other.url))
-                return false;
-            return true;
-        }
-    }
-    
     private static final class ExtensibleURLClassLoader
         extends URLClassLoader
     {

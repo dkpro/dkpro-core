@@ -26,7 +26,7 @@
 	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/opennlp/lib"/>
 
 	<target name="local-maven">
-		<property name="install-artifact-mode" value="local"/>
+		<property name="install-artifact-enable" value="true"/>
 		<antcall target="separate-jars"/>
 	</target>
 	
@@ -1091,144 +1091,8 @@
 	    		<entry key="pos.tagset" value="bosque"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-
-		<get 
-    		src="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip" 
-    		dest="target/download/aelius.zip" 
-    		skipexisting="true"/>
-
-		<!-- FILE: AeliusMaxentOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2011-04-19 | now        | ed1545b69ac33b079033fd1c8bc3153b
-		  -->
-		<unzip src="target/download/aelius.zip" dest="target/download">
-			<patternset>
-				<include name="*/aelius_data/AeliusMaxentOpenNLP.bin" />
-			</patternset>
-			<mapper type="flatten" />
-		</unzip>
-		<install-stub-and-upstream-file 
-    		file="target/download/AeliusMaxentOpenNLP.bin" 
-    		md5="ed1545b69ac33b079033fd1c8bc3153b"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130121"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="mm-maxent" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="AeliusMaxentOpenNLP.bin"/>
-				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
-				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusMaxentOpenNLP.bin"/>
-				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
-	    		<entry key="pos.tagset" value="mm"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-
-		<!-- FILE: AeliusPerceptronOpenNLP.bin - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-01-19 | now        | 38f62c6ad10de98ac2b8e837de4dd655
-		  -->
-		<unzip src="target/download/aelius.zip" dest="target/download">
-			<patternset>
-				<include name="*/aelius_data/AeliusPerceptronOpenNLP.bin" />
-			</patternset>
-			<mapper type="flatten" />
-		</unzip>
-		<install-stub-and-upstream-file 
-    		file="target/download/AeliusPerceptronOpenNLP.bin" 
-    		md5="38f62c6ad10de98ac2b8e837de4dd655"
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-    		upstreamVersion="20130121"
-    		metaDataVersion="1"
-    		tool="tagger" 
-    		language="pt" 
-    		variant="mm-perceptron" 
-    		extension="bin">
-			<metadata>
-				<entry key="DC.title" value="AeliusPerceptronOpenNLP.bin"/>
-				<entry key="DC.creator" value="Leonel Figueiredo de Alencar"/>
-				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusPerceptronOpenNLP.bin"/>
-				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
-	    		<entry key="pos.tagset" value="mm"/>
-			</metadata>
-		</install-stub-and-upstream-file>
-		
-		<!-- FILE: pt-sent.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2012-02-05 | now        | 0fd481285c400c7c93c5b625f8844eb3
-		  - Model require classes from Cogroo:
-		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
-		  - service br.ccsl.cogroo.tools.sentdetect.PortuguesSentenceDetectorFactory could not be 
-		  - located!
-		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
-		  - has a dependency on the artifact that contains the PortuguesSentenceDetectorFactory.
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="sentence"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-sent.model">
-		</install-model-stub>
-		
-		<!-- FILE: pt-tok.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - Model require classes from Cogroo:
-		  - Unable to find implementation for opennlp.tools.util.BaseToolFactory, the class or 
-		  - service br.ccsl.cogroo.tools.tokenizer.PortuguesTokenizerFactory could not be 
-		  - located!
-		  - Therefore we use the models packaged in the cogroo-res-pt_br Maven artifact, which
-		  - has a dependency on the artifact that contains the PortuguesTokenizerFactory.
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="token"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-tok.model">
-		</install-model-stub>
-		
-		<!-- FILE: pt-pos.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="tagger"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-pos.model">
-		</install-model-stub>
-		
-		<!-- FILE: pt-chunk.model - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  -->
-		<install-model-stub
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
-			version="20130527.1"
-			tool="chunker"
-			language="pt"
-			variant="cogroo"
-			targetGroupId="org.cogroo.lang.pt_br"
-			targetArtifactId="cogroo-res-pt_br"
-			targetVersion="4.0.0"
-			targetLocation="classpath:/models/pt-chunk.model">
-		</install-model-stub>
 	</target>
-	
+		
 	<target name="sv">
 		<mkdir dir="target/download"/>
 

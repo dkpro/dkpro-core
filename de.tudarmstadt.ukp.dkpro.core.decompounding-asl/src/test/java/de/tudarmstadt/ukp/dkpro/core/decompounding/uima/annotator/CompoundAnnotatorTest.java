@@ -74,22 +74,6 @@ public class CompoundAnnotatorTest
     }
 
     @Test
-    public void testWithoutRanking() throws CASException, UIMAException {
-        AnalysisEngineDescription aed = createEngineDescription(
-                CompoundAnnotator.class,
-                CompoundAnnotator.PARAM_SPLITTING_ALGO,
-                createExternalResourceDescription(
-                        LeftToRightSplitterResource.class,
-                        SplitterResource.PARAM_DICT_RESOURCE,
-                        createExternalResourceDescription(SharedDictionary.class),
-                        SplitterResource.PARAM_MORPHEME_RESOURCE,
-                        createExternalResourceDescription(SharedLinkingMorphemes.class)));
-        String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine"};
-        String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine"};
-        runAnnotator(aed, splits, compoundsParts);
-    }
-
-    @Test
     public void testWithDefaults() throws CASException, UIMAException {
         AnalysisEngineDescription aed = createEngineDescription(
                 CompoundAnnotator.class,
@@ -107,15 +91,10 @@ public class CompoundAnnotatorTest
                         createExternalResourceDescription(SharedFinder.class,
                                 SharedFinder.PARAM_INDEX_PATH, indexPath,
                                 SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath)));
-        String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine",
-                "prozessor","maschine"};
-        String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine",
-                "prozessor","maschine"};
-        runAnnotator(aed, splits, compoundsParts);
+                runAnnotator(aed);
     }
 
-    private void runAnnotator(AnalysisEngineDescription aed, String[] splits,
-            String[] compoundsParts)
+    private void runAnnotator(AnalysisEngineDescription aed)
         throws CASException, UIMAException{
         // Create Analysis Engine
         AnalysisEngine ae = AnalysisEngineFactory.createEngine(aed);
@@ -128,7 +107,11 @@ public class CompoundAnnotatorTest
         ae.typeSystemInit(cas.getTypeSystem());
         ae.process(cas);
 
+        String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine",
+                "prozessor","maschine"};
         String[] compounds = new String[] {"Aktionsplan", "Doppelprozessormaschine"};
+        String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine",
+                "prozessor","maschine"};
         String[] linkingMorphemes = new String[] {"s"};
 
         // Check if splits and morphemes are equal

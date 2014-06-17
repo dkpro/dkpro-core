@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.7.0-SNAPSHOT</version>
+		<version>1.6.1</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</artifactId>
 	<name>DKPro Core ASL - TreeTagger (free for research)</name>
@@ -37,6 +37,19 @@
 			<groupId>org.annolab.tt4j</groupId>
 			<artifactId>org.annolab.tt4j</artifactId>
 			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -65,16 +78,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
@@ -84,6 +87,11 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -91,86 +99,86 @@
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
 				<version>20131118.0</version>
+			</dependency>			
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-bg</artifactId>
+				<version>20101115.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-chunker-de-le</artifactId>
-				<version>20110429.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-de</artifactId>
+				<version>20121207.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-chunker-en-le</artifactId>
-				<version>20090824.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-chunker-fr-le</artifactId>
-				<version>20080611.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-bg-le</artifactId>
-				<version>20060217.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-de-le</artifactId>
-				<version>20121207.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-en-le</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</artifactId>
 				<version>20111109.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-es-le</artifactId>
-				<version>20131007.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-es</artifactId>
+				<version>20131007.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-et-le</artifactId>
-				<version>20110124.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-et</artifactId>
+				<version>20110124.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-fi-le</artifactId>
-				<version>20130716.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-fi</artifactId>
+				<version>20130716.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-fr-le</artifactId>
-				<version>20100111.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-fr</artifactId>
+				<version>20101115.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-it-le</artifactId>
-				<version>20090622.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-gz</artifactId>
+				<version>20101115.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-la-le</artifactId>
-				<version>20110819.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-it</artifactId>
+				<version>20101115.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-nl-le</artifactId>
-				<version>20130107.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-la</artifactId>
+				<version>20110912.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pt-le</artifactId>
-				<version>20101115.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-nl</artifactId>
+				<version>20130207.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-sw-le</artifactId>
-				<version>20130729.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-pt</artifactId>
+				<version>20101115.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-zh-le</artifactId>
-				<version>20101115.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-ru</artifactId>
+				<version>20101115.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-sl</artifactId>
+				<version>20100703.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-sw</artifactId>
+				<version>20130729.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-zh</artifactId>
+				<version>20101115.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -180,45 +188,41 @@
 			<dependencies>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-chunker-de-le</artifactId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-de</artifactId>
 					<scope>test</scope>
+					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-chunker-en-le</artifactId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-en</artifactId>
 					<scope>test</scope>
+					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-de-le</artifactId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-nl</artifactId>
 					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-en-le</artifactId>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-nl-le</artifactId>
-					<scope>test</scope>
+					<optional>true</optional>
 				</dependency>
 				<!--  Slovene model currently not in Artifactory because we do not know tagset yet
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-sl</artifactId>
 					<scope>test</scope>
+					<optional>true</optional>
 				</dependency>
 				-->
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-zh-le</artifactId>
+					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-zh</artifactId>
 					<scope>test</scope>
+					<optional>true</optional>
 				</dependency>
 				<dependency>
 					<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 					<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-bin</artifactId>
 					<scope>test</scope>
+					<optional>true</optional>
 				</dependency>
 			</dependencies>
 		</profile>

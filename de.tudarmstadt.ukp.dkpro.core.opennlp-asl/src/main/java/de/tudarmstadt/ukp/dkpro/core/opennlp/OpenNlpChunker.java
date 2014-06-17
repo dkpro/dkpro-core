@@ -33,13 +33,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.IobDecoder;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -85,7 +85,7 @@ public class OpenNlpChunker
 	protected String modelLocation;
 
 	/**
-	 * Load the chunk tag to UIMA type mapping from this location instead of locating
+	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
 	 * the mapping automatically.
 	 */
 	public static final String PARAM_CHUNK_MAPPING_LOCATION = ComponentParameters.PARAM_CHUNK_MAPPING_LOCATION;
@@ -125,7 +125,7 @@ public class OpenNlpChunker
                 setContextObject(OpenNlpChunker.this);
 
                 setDefault(ARTIFACT_ID, "${groupId}.opennlp-model-chunker-${language}-${variant}");
-				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.properties");
+				setDefault(LOCATION, "classpath:/${package}/lib/chunker-${language}-${variant}.bin");
                 //setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/opennlp/lib/chunker-default-variants.map");
 				setDefault(VARIANT, "default");
 
@@ -174,8 +174,7 @@ public class OpenNlpChunker
 		Type chunkType = cas.getTypeSystem().getType(Chunk.class.getName());
 		Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
 
-		IobDecoder decoder = new IobDecoder(cas, chunkValue, mappingProvider);
-		decoder.setInternTags(internTags);
+		BioDecoder decoder = new BioDecoder(cas, chunkValue);
 		
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
@@ -195,5 +194,64 @@ public class OpenNlpChunker
 			String[] chunkTags = modelProvider.getResource().chunk(tokenTexts, tokenTags);
 			decoder.decode(tokens, chunkTags);
 		}
+	}
+	
+	private class BioDecoder
+	{
+	    private CAS cas;
+	    private Feature chunkValue;
+	    
+        private String openChunk;
+        private int start;
+        private int end;
+
+        public BioDecoder(CAS aCas, Feature aChunkValue)
+        {
+            super();
+            cas = aCas;
+            chunkValue = aChunkValue;
+        }
+
+        public void decode(List<Token> aTokens, String[] aChunkTags)
+        {
+            int i = 0;
+            for (Token token : aTokens) {
+                // System.out.printf("%s %s %n", token.getCoveredText(), aChunkTags[i]);
+                String fields[] = aChunkTags[i].split("-");
+                String flag = fields.length == 2 ? fields[0] : "NONE";
+                String chunk = fields.length == 2 ? fields[1] : fields[0];
+    
+                // Start of a new hunk
+                if (!chunk.equals(openChunk) || "B".equals(flag)) {
+                    if (openChunk != null) {
+                        // End of previous chunk
+                        chunkComplete();
+                    }
+    
+                    openChunk = chunk;
+                    start = token.getBegin();
+                }
+    
+                // Record how much of the chunk we have seen so far
+                end = token.getEnd();
+                
+                i++;
+            }
+            
+            // End of processing signal
+            chunkComplete();
+        }
+        
+        private void chunkComplete()
+        {
+            if (openChunk != null) {
+                Type chunkType = mappingProvider.getTagType(openChunk);
+                AnnotationFS chunk = cas.createAnnotation(chunkType, start, end);
+                chunk.setStringValue(chunkValue, internTags ? openChunk.intern() :
+                    openChunk);
+                cas.addFsToIndexes(chunk);
+                openChunk = null;
+            }
+        }
 	}
 }

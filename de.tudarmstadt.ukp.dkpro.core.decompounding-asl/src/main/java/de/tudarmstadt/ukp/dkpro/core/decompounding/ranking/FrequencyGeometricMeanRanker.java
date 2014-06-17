@@ -8,7 +8,7 @@
  * You may obtain a copy of the License at
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
- *
+ *   
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,18 +18,20 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.ranking;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.math.stat.descriptive.SummaryStatistics;
 
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 
 /**
  * Frequency based ranking algorithm. See doc folder for more informations.
- *
+ * 
  * @author Jens Haase <je.haase@googlemail.com>
  */
 public class FrequencyGeometricMeanRanker
@@ -38,13 +40,13 @@ public class FrequencyGeometricMeanRanker
 {
 	/**
 	 * Empty constructor
-	 *
+	 * 
 	 * Use {@link #setFinder(Finder)} before using this class
 	 */
 	public FrequencyGeometricMeanRanker() {
-
+		
 	}
-
+	
 	public FrequencyGeometricMeanRanker(Finder aFinder)
 	{
 		super(aFinder);
@@ -78,17 +80,29 @@ public class FrequencyGeometricMeanRanker
 		return stats.getGeometricMean();
 	}
 
+	@Override
+	public DecompoundedWord highestRank(DecompoundingTree aTree)
+	{
+		return highestRank(aTree.getRoot(), null);
+	}
+
+	@Override
+	public List<DecompoundedWord> bestPath(DecompoundingTree aTree)
+	{
+		List<DecompoundedWord> path = new ArrayList<DecompoundedWord>();
+		highestRank(aTree.getRoot(), path);
+		return path;
+	}
+
 	/**
 	 * Searches a a path throw the tree
 	 */
-	@Override
-    public DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent,
-            List<DecompoundedWord> aPath)
+	private DecompoundedWord highestRank(ValueNode<DecompoundedWord> aParent, List<DecompoundedWord> aPath)
 	{
 		if (aPath != null) {
 			aPath.add(aParent.getValue());
 		}
-
+		
 		List<DecompoundedWord> children = aParent.getChildrenValues();
 		if (children.size() == 0) {
 			return aParent.getValue();

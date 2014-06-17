@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.parameter;
 
-
 public final class ComponentParameters
 {
 	/**
@@ -38,16 +37,6 @@ public final class ComponentParameters
 	 * Location from which the model is read.
 	 */
 	public static final String PARAM_MODEL_LOCATION = "modelLocation";
-	
-	/**
-     * Location from which the segmentation model is read.
-     */
-    public static final String PARAM_SEGMENTATION_MODEL_LOCATION = "segmentationModelLocation";
-
-    /**
-     * Location from which the tokenization model is read.
-     */
-    public static final String PARAM_TOKENIZATION_MODEL_LOCATION = "tokenizationModelLocation";
 
 	/**
 	 * The character encoding used by the model.
@@ -114,8 +103,6 @@ public final class ComponentParameters
 
 	private static final String POS = "POS";
 
-    private static final String MORPH = "Morph";
-
 	private static final String CHUNK = "Chunk";
 	
 	private static final String CONSTITUENT = "Constituent";
@@ -154,8 +141,6 @@ public final class ComponentParameters
 
 	public static final String PARAM_READ_POS = READ + POS;
 
-    public static final String PARAM_READ_CHUNK = READ + CHUNK;
-    
 	public static final String PARAM_READ_CONSTITUENT = READ + CONSTITUENT;
 	
 	public static final String PARAM_READ_PENN_TREE = READ + PENN_TREE;
@@ -171,8 +156,6 @@ public final class ComponentParameters
 	public static final String PARAM_WRITE_LEMMA = WRITE + LEMMA;
 
 	public static final String PARAM_WRITE_POS = WRITE + POS;
-
-    public static final String PARAM_WRITE_MORPH = WRITE + MORPH;
 
 	public static final String PARAM_WRITE_CONSTITUENT = WRITE + CONSTITUENT;
 
@@ -193,15 +176,8 @@ public final class ComponentParameters
 	 * tag set defined as part of the model meta data. This can be useful if a custom model is
 	 * specified which does not have such meta data, or it can be used in readers.
 	 */
-	public static final String PARAM_POS_TAG_SET = POS + TAG_SET;
+	public static final String PARAM_POS_TAG_SET = "pos" + TAG_SET;
 
-    /**
-     * Use this chunk tag set to use to resolve the tag set mapping instead of using the
-     * tag set defined as part of the model meta data. This can be useful if a custom model is
-     * specified which does not have such meta data, or it can be used in readers.
-     */
-    public static final String PARAM_CHUNK_TAG_SET = CHUNK + TAG_SET;
-	
 	// =============================================================================================
 	// Configure mapping of tags to annotation types for different kinds of annotations.
 	//
@@ -211,22 +187,22 @@ public final class ComponentParameters
 	/**
 	 * Location of the mapping file for part-of-speech tags to UIMA types.
 	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = POS + MAPPING_LOCATION;
+	public static final String PARAM_POS_MAPPING_LOCATION = "pos" + MAPPING_LOCATION;
 	
 	/**
 	 * Location of the mapping file for chunk tags to UIMA types.
 	 */
-	public static final String PARAM_CHUNK_MAPPING_LOCATION = CHUNK + MAPPING_LOCATION;
-
+	public static final String PARAM_CHUNK_MAPPING_LOCATION = "chunk" + MAPPING_LOCATION;
+	
 	/**
 	 * Location of the mapping file for named entity tags to UIMA types.
 	 */
-	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = NAMED_ENTITY + MAPPING_LOCATION;
+	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = "namedEntity" + MAPPING_LOCATION;
 
 	/**
      * Location of the mapping file for dependency tags to UIMA types.
      */
-    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = DEPENDENCY + MAPPING_LOCATION;
+    public static final String PARAM_DEPENDENCY_MAPPING_LOCATION = "dependency" + MAPPING_LOCATION;
 
 	private ComponentParameters()
 	{

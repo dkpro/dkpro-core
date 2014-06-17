@@ -56,15 +56,16 @@ public class XmiReader
 		initCas(aCAS, res);
 
 		InputStream is = null;
-        try {
-            is = CompressionUtils.getInputStream(res.getLocation(), res.getInputStream());
-			XmiCasDeserializer.deserialize(is, aCAS, lenient);
+		try {
+			InputStream resolvedIS = CompressionUtils.getInputStream(res.getLocation(),
+					res.getInputStream());
+			XmiCasDeserializer.deserialize(resolvedIS, aCAS, lenient);
 		}
 		catch (SAXException e) {
 			throw new IOException(e);
 		}
-        finally {
-            closeQuietly(is);
-        }
+		finally {
+			closeQuietly(is);
+		}
 	}
 }

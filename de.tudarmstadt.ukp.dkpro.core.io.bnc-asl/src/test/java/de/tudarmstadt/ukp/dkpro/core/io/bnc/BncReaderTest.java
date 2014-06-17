@@ -46,9 +46,9 @@ public class BncReaderTest
 		SimplePipeline.runPipeline(reader, casDumper);
 
 		String reference = FileUtils.readFileToString(
-				new File("src/test/resources/reference/FX8.dump"), "UTF-8").trim();
+				new File("src/test/resources/reference/FX8.dump"), "UTF-8");
 		String actual = FileUtils.readFileToString(
-				new File("target/test-output/FX8.dump"), "UTF-8").trim();
+				new File("target/test-output/FX8.dump"), "UTF-8");
 		assertEquals(reference, actual);
 	}
 }
