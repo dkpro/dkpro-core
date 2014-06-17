@@ -1,0 +1,66 @@
+# Negra phrasal categories
+#
+# Source: http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/knoten.html
+#
+# AA superlative phrase with "am" 
+#AA
+# AP adjektive phrase
+AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
+# AVP adverbial phrase
+AVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP
+# CAC coordinated adposition
+#CAC 
+# CAP coordinated adjektive phrase
+#CAP 
+# CAVP coordinated adverbial phrase
+#CAVP 
+# CCP coordinated complementiser
+#CCP 
+# CH chunk
+#CH 
+# CNP coordinated noun phrase
+#CNP 
+# CO coordination
+#CO 
+# CPP coordinated adpositional phrase
+#CPP 
+# CS coordinated sentence
+#CS 
+# CVP coordinated verb phrase (non-finite)
+#CVP 
+# CVZ coordinated zu-marked infinitive
+#CVZ 
+# DL discourse level constituent
+#DL 
+# ISU idiosyncratis unit
+#ISU 
+# MPN multi-word proper noun
+#MPN 
+# MTA multi-token adjective
+#MTA 
+# NM multi-token number
+#NM 
+# NP noun phrase
+NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
+# PP adpositional phrase
+PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP 
+# QL quasi-languag
+#QL
+# S sentence
+S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S
+# VP verb phrase (non-finite)
+VP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
+# VZ zu-marked infinitive
+#VZ
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+
+#
+# Categories used in the Berkeley parser model
+#
+#PSEUDO 
+#---CJ
