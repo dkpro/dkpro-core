@@ -150,7 +150,11 @@
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent</usedDependency>
+              <!--  
+                - DKPro Core resource provisioning currently not compatible with ClearNLP
+                - See: https://code.google.com/p/dkpro-core-asl/issues/detail?id=406
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</usedDependency>
+              -->
 						</usedDependencies>
 					</configuration>
 				</plugin>
