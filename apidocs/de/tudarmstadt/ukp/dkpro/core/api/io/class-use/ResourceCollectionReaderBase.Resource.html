@@ -1,15 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- NewPage -->
-<html lang="de">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource (DKPro Core ASL 1.6.0 API)</title>
+<title>Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource (DKPro Core ASL 1.6.1 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource (DKPro Core ASL 1.6.0 API)";
+        parent.document.title="Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource (DKPro Core ASL 1.6.1 API)";
     }
 //-->
 </script>
@@ -81,12 +81,18 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.bincas">de.tudarmstadt.ukp.dkpro.core.io.bincas</a></td>
+<td class="colLast">
+<div class="block">Support for fast binary serialization of UIMA CAS.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.bnc">de.tudarmstadt.ukp.dkpro.core.io.bnc</a></td>
 <td class="colLast">
 <div class="block">Support for <a href="http://www.natcorp.ox.ac.uk/docs/URG/">British National Corpus XML Edition</a>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.imscwb.util">de.tudarmstadt.ukp.dkpro.core.io.imscwb.util</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -167,6 +173,28 @@
 <td class="colLast"><span class="strong">JCasResourceCollectionReader_ImplBase.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasResourceCollectionReader_ImplBase.html#initCas(org.apache.uima.jcas.JCas, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource, java.lang.String)">initCas</a></strong>(org.apache.uima.jcas.JCas&nbsp;aJCas,
        <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&nbsp;aResource,
        <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aQualifier)</code>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.io.bincas">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.bincas</a></h3>
+<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
+<caption><span>Methods in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.bincas</a> that return types with arguments of type <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&gt;</code></td>
+<td class="colLast"><span class="strong">BinaryCasReader.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/BinaryCasReader.html#scan(java.lang.String, java.util.Collection, java.util.Collection)">scan</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aBase,
+    <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;aIncludes,
+    <a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;aExcludes)</code>
+<div class="block">It is possible that the type system overlaps with the scan pattern for files, e.g.</div>
+</td>
 </tr>
 </tbody>
 </table>

@@ -1,15 +1,15 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- NewPage -->
-<html lang="de">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>BinaryCasWriter (DKPro Core ASL 1.6.0 API)</title>
+<title>BinaryCasWriter (DKPro Core ASL 1.6.1 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BinaryCasWriter (DKPro Core ASL 1.6.0 API)";
+        parent.document.title="BinaryCasWriter (DKPro Core ASL 1.6.1 API)";
     }
 //-->
 </script>
@@ -60,7 +60,7 @@
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested_classes_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
@@ -126,12 +126,90 @@
 <br>
 <pre>public class <span class="strong">BinaryCasWriter</span>
 extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase</a></pre>
+<div class="block">Write CAS in one of the UIMA binary formats. Several formats are supported:
+ 
+ <table>
+ <tr>
+ <th>Format</th>
+ <th>Description</th>
+ <th>Type system on load</th>
+ <th>CAS Addresses preserved</th>
+ </tr>
+ <tr>
+ <td>S</td>
+ <td>CAS structures are dumped to disc as they are using Java serialization (<code>CASSerializer</code>
+ ). Because these structures are pre-allocated in memory at larger sizes than what is actually
+ required, files in this format may be larger than necessary. However, the CAS addresses of
+ feature structures are preserved in this format. When the data is loaded back into a CAS, it must
+ have been initialized with the same type system as the original CAS.</td>
+ <td>must be the same</td>
+ <td>yes</td>
+ </tr>
+ <tr>
+ <td>S+</td>
+ <td>CAS structures are dumped to disc as they are using Java serialization as in form 0, but
+ now using the <code>CASCompleteSerializer</code> which includes CAS metadata like type system and
+ index repositories.</td>
+ <td>is reinitialized</td>
+ <td>yes</td>
+ </tr>
+ <tr>
+ <td>0</td>
+ <td>CAS structures are dumped to disc as they are using Java serialization (<code>CASSerializer</code>
+ ). This is basically the same as format <code>S</code> but includes a UIMA header and can be read
+ using <code>Serialization.deserializeCAS(org.apache.uima.cas.CAS, java.io.InputStream)</code>.</td>
+ <td>must be the same</td>
+ <td>yes</td>
+ </tr>
+ <tr>
+ <td>4</td>
+ <td>
+ UIMA binary serialization saving all feature structures (reachable or not). This format
+ internally uses gzip compression and a binary representation of the CAS, making it much more
+ efficient than format 0.</td>
+ <td>must be the same</td>
+ <td>yes</td>
+ </tr>
+ <tr>
+ <td>6</td>
+ <td>
+ UIMA binary serialization as format 4, but saving only reachable feature structures.</td>
+ <td>must be the same</td>
+ <td>no</td>
+ </tr>
+ <tr>
+ <td>6+</td>
+ <td>
+ UIMA binary serialization as format 6, but also contains the type system defintion. This allows
+ the <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/BinaryCasReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.bincas"><code>BinaryCasReader</code></a> to load data leniently into a CAS that has been initialized with a
+ different type system.</td>
+ <td>lenient loading</td>
+ <td>no</td>
+ </tr>
+ </table></div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress">Compressed
+      Binary CASes</a></dd></dl>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="nested_class_summary">
+<!--   -->
+</a>
+<h3>Nested Class Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="nested_classes_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase">
+<!--   -->
+</a>
+<h3>Nested classes/interfaces inherited from class&nbsp;de.tudarmstadt.ukp.dkpro.core.api.io.<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase</a></h3>
+<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.NamedOutputStream.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase.NamedOutputStream</a></code></li>
+</ul>
+</li>
+</ul>
 <!-- =========== FIELD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="field_summary">
@@ -146,7 +224,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/BinaryCasWriter.html#PARAM_FILENAME_SUFFIX">PARAM_FILENAME_SUFFIX</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/BinaryCasWriter.html#PARAM_FILENAME_EXTENSION">PARAM_FILENAME_EXTENSION</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
@@ -154,7 +232,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/BinaryCasWriter.html#PARAM_TYPE_SYSTEM_FILE">PARAM_TYPE_SYSTEM_FILE</a></strong></code>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/BinaryCasWriter.html#PARAM_TYPE_SYSTEM_LOCATION">PARAM_TYPE_SYSTEM_LOCATION</a></strong></code>
 <div class="block">Location to write the type system to.</div>
 </td>
 </tr>
@@ -164,7 +242,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <!--   -->
 </a>
 <h3>Fields inherited from class&nbsp;de.tudarmstadt.ukp.dkpro.core.api.io.<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase</a></h3>
-<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION">PARAM_COMPRESSION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_ESCAPE_DOCUMENT_ID">PARAM_ESCAPE_DOCUMENT_ID</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_STRIP_EXTENSION">PARAM_STRIP_EXTENSION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_TARGET_LOCATION">PARAM_TARGET_LOCATION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID">PARAM_USE_DOCUMENT_ID</a></code></li>
+<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#JAR_PREFIX">JAR_PREFIX</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION">PARAM_COMPRESSION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_ESCAPE_DOCUMENT_ID">PARAM_ESCAPE_DOCUMENT_ID</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_STRIP_EXTENSION">PARAM_STRIP_EXTENSION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_TARGET_LOCATION">PARAM_TARGET_LOCATION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_USE_DOCUMENT_ID">PARAM_USE_DOCUMENT_ID</a></code></li>
 </ul>
 </li>
 </ul>
@@ -207,7 +285,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;de.tudarmstadt.ukp.dkpro.core.api.io.<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">JCasFileWriter_ImplBase</a></h3>
-<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getCompressionMethod()">getCompressionMethod</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)">getOutputStream</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getRelativePath(org.apache.uima.jcas.JCas)">getRelativePath</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(org.apache.uima.jcas.JCas, java.lang.String)">getTargetPath</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(java.lang.String, java.lang.String)">getTargetPath</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#isStripExtension()">isStripExtension</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#isUseDocumentId()">isUseDocumentId</a></code></li>
+<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#collectionProcessComplete()">collectionProcessComplete</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getCompressionMethod()">getCompressionMethod</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(org.apache.uima.jcas.JCas, java.lang.String)">getOutputStream</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getOutputStream(java.lang.String, java.lang.String)">getOutputStream</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getRelativePath(org.apache.uima.jcas.JCas)">getRelativePath</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(org.apache.uima.jcas.JCas, java.lang.String)">getTargetPath</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#getTargetPath(java.lang.String, java.lang.String)">getTargetPath</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#isStripExtension()">isStripExtension</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#isUseDocumentId()">isUseDocumentId</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.fit.component.JCasConsumer_ImplBase">
@@ -235,7 +313,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;org.apache.uima.analysis_component.AnalysisComponent_ImplBase</h3>
-<code>batchProcessComplete, collectionProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</code></li>
+<code>batchProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
@@ -258,23 +336,30 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a name="PARAM_TYPE_SYSTEM_FILE">
+<a name="PARAM_TYPE_SYSTEM_LOCATION">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>PARAM_TYPE_SYSTEM_FILE</h4>
-<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_TYPE_SYSTEM_FILE</pre>
-<div class="block">Location to write the type system to. If this is not set, a file called typesystem.xml will
- be written to the output path. If this is set, it is expected to be a file relative to the
- current work directory or an absolute file. <br>
- If this parameter is set, the <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION"><code>JCasFileWriter_ImplBase.PARAM_COMPRESSION</code></a> parameter has no effect on the type
- system. Instead, if the type system file should be compressed or not is detected from the
- file name extension (e.g. ".gz"). <br>
+<h4>PARAM_TYPE_SYSTEM_LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_TYPE_SYSTEM_LOCATION</pre>
+<div class="block">Location to write the type system to. The type system is saved using Java serialization, it
+ is not saved as a XML type system description. We recommend to use the name
+ <code>typesystem.ser</code>.
+ <br>
+ The <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasFileWriter_ImplBase.html#PARAM_COMPRESSION"><code>JCasFileWriter_ImplBase.PARAM_COMPRESSION</code></a> parameter has no effect on the
+ type system. Instead, if the type system file should be compressed or not is detected from
+ the file name extension (e.g. ".gz").
+ <br>
  If this parameter is set, the type system and index repository are no longer serialized into
- the same file as the test of the CAS. The <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/SerializedCasReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.bincas"><code>SerializedCasReader</code></a> can currently not read
- such files. Use this only if you really know what you are doing.</div>
-<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_TYPE_SYSTEM_FILE">Constant Field Values</a></dd></dl>
+ the same file as the test of the CAS. The <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/bincas/SerializedCasReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.bincas"><code>SerializedCasReader</code></a> can currently not
+ read such files. Use this only if you really know what you are doing.
+ <br>
+ This parameter has no effect if formats S+ or 6+ are used as the type system information
+ is embedded in each individual file. Otherwise, it is recommended that this parameter be
+ set unless some other mechanism is used to initialize the CAS with the same type system and
+ index repository during reading that was used during writing.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 <a name="PARAM_FORMAT">
@@ -287,14 +372,14 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_FORMAT">Constant Field Values</a></dd></dl>
 </li>
 </ul>
-<a name="PARAM_FILENAME_SUFFIX">
+<a name="PARAM_FILENAME_EXTENSION">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>PARAM_FILENAME_SUFFIX</h4>
-<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_FILENAME_SUFFIX</pre>
-<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_FILENAME_SUFFIX">Constant Field Values</a></dd></dl>
+<h4>PARAM_FILENAME_EXTENSION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_FILENAME_EXTENSION</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_FILENAME_EXTENSION">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 </li>
@@ -388,7 +473,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <div>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
-<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#nested_classes_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase">Nested</a>&nbsp;|&nbsp;</li>
 <li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
