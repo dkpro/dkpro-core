@@ -1,0 +1,763 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<title>ImsCwbWriter (DKPro Core ASL 1.6.0 API)</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
+</head>
+<body>
+<script type="text/javascript"><!--
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="ImsCwbWriter (DKPro Core ASL 1.6.0 API)";
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar_top">
+<!--   -->
+</a><a href="#skip-navbar_top" title="Skip navigation links"></a><a name="navbar_top_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/ImsCwbWriter.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb"><span class="strong">Prev Class</span></a></li>
+<li>Next Class</li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" target="_top">Frames</a></li>
+<li><a href="ImsCwbWriter.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="subTitle">de.tudarmstadt.ukp.dkpro.core.io.imscwb</div>
+<h2 title="Class ImsCwbWriter" class="title">Class ImsCwbWriter</h2>
+</div>
+<div class="contentContainer">
+<ul class="inheritance">
+<li><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.analysis_component.AnalysisComponent_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.analysis_component.Annotator_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.analysis_component.JCasAnnotator_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>org.apache.uima.fit.component.JCasAnnotator_ImplBase</li>
+<li>
+<ul class="inheritance">
+<li>de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd>org.apache.uima.analysis_component.AnalysisComponent</dd>
+</dl>
+<hr>
+<br>
+<pre>public class <span class="strong">ImsCwbWriter</span>
+extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
+<div class="block">This Consumer outputs the content of all CASes into the IMS workbench format.
+
+ This writer produces a text file which needs to be converted to the binary IMS CWB index files
+ using the command line tools that come with the CWB.
+
+ It is possible to set the parameter <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQP_HOME"><code>PARAM_CQP_HOME</code></a> to directly create output in the
+ native binary CQP format via the original CWB command line tools.</div>
+<dl><dt><span class="strong">Author:</span></dt>
+  <dd>Erik-Lân Do Dinh, Richard Eckart de Castilho</dd></dl>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_BEGIN">ATTR_BEGIN</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_CPOS">ATTR_CPOS</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_END">ATTR_END</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_ID">ATTR_ID</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_LEMMA">ATTR_LEMMA</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_POS">ATTR_POS</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ATTR_URI">ATTR_URI</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#E_DOCUMENT">E_DOCUMENT</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#E_SENTENCE">E_SENTENCE</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#E_TEXT">E_TEXT</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CORPUS_NAME">PARAM_CORPUS_NAME</a></strong></code>
+<div class="block">The name of the generated corpus.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQP_COMPRESS">PARAM_CQP_COMPRESS</a></strong></code>
+<div class="block">Set this parameter to compress the token streams and the indexes using cwb-huffcode and
+ cwb-compress-rdx.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQP_HOME">PARAM_CQP_HOME</a></strong></code>
+<div class="block">Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if
+ you want the write to directly encode into the CQP binary format.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQPWEB_COMPATIBILITY">PARAM_CQPWEB_COMPATIBILITY</a></strong></code>
+<div class="block">Make document IDs compatible with CQPweb.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_TARGET_ENCODING">PARAM_TARGET_ENCODING</a></strong></code>
+<div class="block">Character encoding of the output data.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_TARGET_LOCATION">PARAM_TARGET_LOCATION</a></strong></code>
+<div class="block">Location to which the output is written.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_CPOS">PARAM_WRITE_CPOS</a></strong></code>
+<div class="block">Write coarse-grained part-of-speech tags.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_DOC_ID">PARAM_WRITE_DOC_ID</a></strong></code>
+<div class="block">Write the document ID for each token.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_DOCUMENT_TAG">PARAM_WRITE_DOCUMENT_TAG</a></strong></code>
+<div class="block">Write a pseudo-XML tag with the name <code>document</code> to mark the start and end of a
+ document.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_LEMMA">PARAM_WRITE_LEMMA</a></strong></code>
+<div class="block">Write lemmata.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_OFFSETS">PARAM_WRITE_OFFSETS</a></strong></code>
+<div class="block">Write the start and end position of each token.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_POS">PARAM_WRITE_POS</a></strong></code>
+<div class="block">Write part-of-speech tags.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_TEXT_TAG">PARAM_WRITE_TEXT_TAG</a></strong></code>
+<div class="block">Write a pseudo-XML tag with the name <code>text</code> to mark the start and end of a
+ document.</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#ImsCwbWriter()">ImsCwbWriter</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#collectionProcessComplete()">collectionProcessComplete</a></strong>()</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#initialize(org.apache.uima.UimaContext)">initialize</a></strong>(org.apache.uima.UimaContext&nbsp;context)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#process(org.apache.uima.jcas.JCas)">process</a></strong>(org.apache.uima.jcas.JCas&nbsp;jcas)</code>&nbsp;</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.fit.component.JCasAnnotator_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.fit.component.JCasAnnotator_ImplBase</h3>
+<code>getLogger</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.analysis_component.JCasAnnotator_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.analysis_component.JCasAnnotator_ImplBase</h3>
+<code>getRequiredCasInterface, process</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.analysis_component.Annotator_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.analysis_component.Annotator_ImplBase</h3>
+<code>getCasInstancesRequired, hasNext, next</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_org.apache.uima.analysis_component.AnalysisComponent_ImplBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;org.apache.uima.analysis_component.AnalysisComponent_ImplBase</h3>
+<code>batchProcessComplete, destroy, getContext, getResultSpecification, reconfigure, setResultSpecification</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
+<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="E_SENTENCE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>E_SENTENCE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> E_SENTENCE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.E_SENTENCE">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="E_TEXT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>E_TEXT</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> E_TEXT</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.E_TEXT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="E_DOCUMENT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>E_DOCUMENT</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> E_DOCUMENT</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.E_DOCUMENT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_BEGIN">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_BEGIN</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_BEGIN</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_BEGIN">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_END">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_END</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_END</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_END">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_POS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_POS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_POS</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_POS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_CPOS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_CPOS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_CPOS</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_CPOS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_LEMMA">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_LEMMA</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_LEMMA</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_LEMMA">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_ID">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_ID</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_ID</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_ID">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="ATTR_URI">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ATTR_URI</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> ATTR_URI</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.ATTR_URI">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_TARGET_LOCATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_TARGET_LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_TARGET_LOCATION</pre>
+<div class="block">Location to which the output is written.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_TARGET_LOCATION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_TARGET_ENCODING">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_TARGET_ENCODING</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_TARGET_ENCODING</pre>
+<div class="block">Character encoding of the output data.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_TARGET_ENCODING">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_DOC_ID">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_DOC_ID</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_DOC_ID</pre>
+<div class="block">Write the document ID for each token. It is usually a better idea to generate a
+ <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_DOCUMENT_TAG"><code>document tag</code></a> or a <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_TEXT_TAG"><code>text tag</code></a>
+ which also contain the document ID that can be queried in CQP.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_DOC_ID">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_POS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_POS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_POS</pre>
+<div class="block">Write part-of-speech tags.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_POS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_CPOS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_CPOS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_CPOS</pre>
+<div class="block">Write coarse-grained part-of-speech tags. These are the simple names of the UIMA types used
+ to represent the part-of-speech tag.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_CPOS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_LEMMA">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_LEMMA</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_LEMMA</pre>
+<div class="block">Write lemmata.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_LEMMA">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_DOCUMENT_TAG">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_DOCUMENT_TAG</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_DOCUMENT_TAG</pre>
+<div class="block">Write a pseudo-XML tag with the name <code>document</code> to mark the start and end of a
+ document.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_DOCUMENT_TAG">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_TEXT_TAG">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_TEXT_TAG</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_TEXT_TAG</pre>
+<div class="block">Write a pseudo-XML tag with the name <code>text</code> to mark the start and end of a
+ document. This is used by CQPweb.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_TEXT_TAG">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_OFFSETS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_OFFSETS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_OFFSETS</pre>
+<div class="block">Write the start and end position of each token.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_OFFSETS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CQPWEB_COMPATIBILITY">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CQPWEB_COMPATIBILITY</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CQPWEB_COMPATIBILITY</pre>
+<div class="block">Make document IDs compatible with CQPweb. CQPweb demands an id consisting of only letters,
+ numbers and underscore.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_CQPWEB_COMPATIBILITY">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CQP_HOME">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CQP_HOME</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CQP_HOME</pre>
+<div class="block">Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if
+ you want the write to directly encode into the CQP binary format.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_CQP_HOME">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CQP_COMPRESS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CQP_COMPRESS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CQP_COMPRESS</pre>
+<div class="block">Set this parameter to compress the token streams and the indexes using cwb-huffcode and
+ cwb-compress-rdx. With modern hardware, this may actually slow down queries, so we turn it
+ off by default. If you have large data sets, you best try yourself what works best for you.
+ (default: false)</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_CQP_COMPRESS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CORPUS_NAME">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>PARAM_CORPUS_NAME</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CORPUS_NAME</pre>
+<div class="block">The name of the generated corpus.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_CORPUS_NAME">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="ImsCwbWriter()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ImsCwbWriter</h4>
+<pre>public&nbsp;ImsCwbWriter()</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="initialize(org.apache.uima.UimaContext)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>initialize</h4>
+<pre>public&nbsp;void&nbsp;initialize(org.apache.uima.UimaContext&nbsp;context)
+                throws org.apache.uima.resource.ResourceInitializationException</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>initialize</code>&nbsp;in interface&nbsp;<code>org.apache.uima.analysis_component.AnalysisComponent</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>initialize</code>&nbsp;in class&nbsp;<code>org.apache.uima.fit.component.JCasAnnotator_ImplBase</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>org.apache.uima.resource.ResourceInitializationException</code></dd></dl>
+</li>
+</ul>
+<a name="process(org.apache.uima.jcas.JCas)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>process</h4>
+<pre>public&nbsp;void&nbsp;process(org.apache.uima.jcas.JCas&nbsp;jcas)
+             throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>process</code>&nbsp;in class&nbsp;<code>org.apache.uima.analysis_component.JCasAnnotator_ImplBase</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd></dl>
+</li>
+</ul>
+<a name="collectionProcessComplete()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>collectionProcessComplete</h4>
+<pre>public&nbsp;void&nbsp;collectionProcessComplete()
+                               throws org.apache.uima.analysis_engine.AnalysisEngineProcessException</pre>
+<dl>
+<dt><strong>Specified by:</strong></dt>
+<dd><code>collectionProcessComplete</code>&nbsp;in interface&nbsp;<code>org.apache.uima.analysis_component.AnalysisComponent</code></dd>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>collectionProcessComplete</code>&nbsp;in class&nbsp;<code>org.apache.uima.analysis_component.AnalysisComponent_ImplBase</code></dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd></dl>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar_bottom">
+<!--   -->
+</a><a href="#skip-navbar_bottom" title="Skip navigation links"></a><a name="navbar_bottom_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../../../../../overview-summary.html">Overview</a></li>
+<li><a href="package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/ImsCwbWriter.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../../../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../../../../../index-all.html">Index</a></li>
+<li><a href="../../../../../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.imscwb"><span class="strong">Prev Class</span></a></li>
+<li>Next Class</li>
+</ul>
+<ul class="navList">
+<li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html" target="_top">Frames</a></li>
+<li><a href="ImsCwbWriter.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../../../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+</body>
+</html>
