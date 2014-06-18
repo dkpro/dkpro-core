@@ -1,33 +1,28 @@
-/**
- * Copyright 2007-2014
- * Ubiquitous Knowledge Processing (UKP) Lab
- * Technische Universität Darmstadt
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * Apache UIMA
- * Copyright 2006, 2011 The Apache Software Foundation
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * This product includes software developed at
- * The Apache Software Foundation (http://www.apache.org/).
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  *
- * Portions of UIMA were originally developed by
- * International Business Machines Corporation and are
- * licensed to the Apache Software Foundation under the
- * "Software Grant License Agreement", informally known as the
- * "IBM UIMA License Agreement".
- * Copyright (c) 2003, 2006 IBM Corporation.
+ * This class was copied and adapted from the official UIMA sources.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Changes:
+ *     Oliver Ferschke:
+ *         This class essentially copies the functionality of the CasCopier. Whoever,
+ * 	       the behavior of the copyFeatures-Method is changed. Because copyFeatures() is
+ *         private, it could not be simply overridden.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
@@ -85,7 +80,7 @@ public class CasCopier
      * Creates a new CasCopier that can be used to copy FeatureStructures from one CAS to another.
      * Note that if you are merging data from multiple CASes, you must create a new CasCopier for
      * each source CAS.
-     *
+     * 
      * @param aSrcCas
      *            the CAS to copy from.
      * @param aDestCas
@@ -105,7 +100,7 @@ public class CasCopier
      * source CAS will be copied to the same-named view in the destination CAS. If the view does not
      * already exist it will be created. All FeatureStructures that are indexed in a view in the
      * source CAS will become indexed in the same-named view in the destination CAS.
-     *
+     * 
      * @param aSrcCas
      *            the CAS to copy from
      * @param aDestCas
@@ -132,7 +127,7 @@ public class CasCopier
      * the copy. Otherwise, a new view will be created with that name and will become the target of
      * the copy. All FeatureStructures that are indexed in the source CAS view will become indexed
      * in the target view.
-     *
+     * 
      * @param aSrcCasView
      *            the CAS to copy from
      * @param aCopySofa
@@ -193,7 +188,7 @@ public class CasCopier
     /**
      * Copies an FS from the source CAS to the destination CAS. Also copies any referenced FS,
      * except that previously copied FS will not be copied again.
-     *
+     * 
      * @param aFS
      *            the FS to copy. Must be contained within the source CAS.
      * @return the copy of <code>aFS</code> in the target CAS.
@@ -275,17 +270,17 @@ public class CasCopier
     /**
      * Copy feature values from one FS to another. For reference-valued features, this does a deep
      * copy.
-     *
+     * 
      * <p>
      * NOTE:<br/>
      * Different behavior as the original CasCopier!!!
      * </P>
-     *
+     * 
      * <strong>_IF_ there is no appropriate alternative present in the destination CAS. If the
      * destination CAS contains an annotation that is identical to the referenced annotation in the
      * sourceCas except it has a different ID, then it won't be deep copied, but the reference-id in
      * the annotation will be updated.</strong>
-     *
+     * 
      * @param aSrcFS
      *            FeatureStructure to copy from
      * @param aDestFS
@@ -515,10 +510,10 @@ public class CasCopier
 
     /**
      * Performs batch-copying of Annotations (could also be generalized to FeatureStructures)
-     *
+     * 
      * While copying the annotations, the whole batch is held in a class attribute. This way, we can
      * cope with referenced annotations that have not been copied/recovered yet.
-     *
+     * 
      * @param annoList
      *            the list of annotations that is to be batch-copied
      * @return the list of copied annotations

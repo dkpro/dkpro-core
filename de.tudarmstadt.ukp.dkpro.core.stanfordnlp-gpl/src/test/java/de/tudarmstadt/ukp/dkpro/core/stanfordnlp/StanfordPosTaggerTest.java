@@ -1,21 +1,13 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -26,6 +18,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -76,14 +69,28 @@ public class StanfordPosTaggerTest
         runTest("de", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
 
-        runTest("de", "hgc", "Das ist ein Test .",
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    @Test
+    public void testGermanHgc()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000l);
 
+        runTest("de", "Das ist ein Test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+    }
+
+    @Test
+    public void testGermanDewac()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000l);
+        
         runTest("de", "dewac", "Das ist ein Test .",
-        		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
-        		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
     }
 
     @Test
@@ -146,14 +153,14 @@ public class StanfordPosTaggerTest
     {
     	// The rudder often in the wake of the wind round the back of the area.
         runTest("zh", "尾 舵 常 处于 风轮 后面 的 尾流 区里 。",
-        		new String[] { "NN", "NN", "AD",  "VV", "NN", "NN", "DEG", "NN", "NN", "PU"   },
-        		new String[] { "NN", "NN", "ADJ", "V",  "NN", "NN", "PRT", "NN", "NN", "PUNC" } );
+        		new String[] { "NN", "NN", "AD", "VV", "NN", "NN", "DEG", "NN", "NN", "PU"   },
+        		new String[] { "NN", "NN", "ADJ", "V", "NN", "NN", "O",   "NN", "NN", "PUNC" } );
 
         // The service sector has become an important engine of Guangdong's economic transformation
         // and upgrading.
         runTest("zh", "服务业 成为 广东 经济 转型 升级 的 重要 引擎 。",
-        		new String[] { "NN", "VV", "NR", "NN", "VV", "VV", "DEC", "JJ",  "NN", "PU"    },
-        		new String[] { "NN", "V",  "NP", "NN", "V",  "V",  "PRT", "ADJ", "NN", "PUNC"  } );
+        		new String[] { "NN", "VV", "NR", "NN", "VV", "VV", "DEC", "JJ", "NN", "PU"    },
+        		new String[] { "NN", "V",  "NP", "NN", "V", "V",  "O",   "O",  "NN", "PUNC"  } );
 
         // How far is China from the world brand?
         runTest("zh", "中国 离 世界 技术 品牌 有 多远 ？",
@@ -233,6 +240,11 @@ public class StanfordPosTaggerTest
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
     }
     
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+    }
 
     @Rule
     public TestName name = new TestName();
@@ -241,11 +253,5 @@ public class StanfordPosTaggerTest
     public void printSeparator()
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }

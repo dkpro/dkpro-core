@@ -1,21 +1,13 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -64,7 +56,6 @@ import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.ParserQuery;
-import edu.stanford.nlp.parser.lexparser.TestOptions;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
 import edu.stanford.nlp.trees.EnglishGrammaticalRelations;
@@ -243,24 +234,33 @@ public class StanfordParser
      * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to avoid out
      * of memory exceptions.<br/>
      * Default: {@code 130}
-     * 
-     * @see TestOptions#maxLength
      */
     public static final String PARAM_MAX_TOKENS = "maxTokens";
     @ConfigurationParameter(name = PARAM_MAX_TOKENS, mandatory = true, defaultValue = "130")
     private int maxTokens;
 
     /**
-     * Controls when the factored parser considers a sentence to be too complex and falls back
-     * to the PCFG parser.<br/>
-     * Default: {@code 200000}
-     * 
-     * @see TestOptions#MAX_ITEMS
+     * Sets whether to create or not to create Lemma tags. The creation of constituent tags must be
+     * turned on for this to work.<br/>
+     * This only works for ENGLISH.<br/>
+     * Default:<br/>
+     * <ul>
+     * <li>true, if document text is English</li>
+     * <li>false, if document text is not English</li>
+     * </ul>
+     * <br/>
+     *
+     * <strong>Info:</strong><br>
+     * The Stanford Morphology-class computes the base form of English words, by removing just
+     * inflections (not derivational morphology). That is, it only does noun plurals, pronoun case,
+     * and verb endings, and not things like comparative adjectives or derived nominals. It is based
+     * on a finite-state transducer implemented by John Carroll et al., written in flex and publicly
+     * available. See: http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
      */
-    public static final String PARAM_MAX_ITEMS = "maxItems";
-    @ConfigurationParameter(name = PARAM_MAX_ITEMS, mandatory = true, defaultValue = "200000")
-    private int maxItems;
-    
+    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
+    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = false)
+    private Boolean paramCreateLemmas;
+
     /**
      * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
      *
@@ -286,20 +286,12 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 
-    /**
-     * Enable sharing the model between multiple instances of this AE. This is an experimental
-     * parameter for advanced users. Sharing the model can lead to unexpected results because
-     * some parameters affect the model when it is initialized. Thus, only the settings from the
-     * first instance using the model will initialize the model, but not the next instance which
-     * finds the already-loaded model and simply reuses it. Sharing models can also lead to
-     * unexpected results or crashes in multi-threaded environments.<br/>
-     * Default: {@code false}
-     */
-    public static final String PARAM_SHARED_MODEL = "sharedModel";
-    @ConfigurationParameter(name = PARAM_SHARED_MODEL, mandatory = true, defaultValue="false")
-    private boolean sharedModel;
-
     private GrammaticalStructureFactory gsf;
+
+    // distinction between createLemmas & paramCreateLemmas necessary
+    // in order to work with mixed language document collections
+    // (correct default behavior for each CAS)
+    private Boolean createLemmas;
 
     private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
     private MappingProvider posMappingProvider;
@@ -313,15 +305,20 @@ public class StanfordParser
         super.initialize(context);
 
         if (!writeConstituent && !writeDependency && !writePennTree) {
-            getLogger().warn("Invalid parameter configuration... will create dependency tags.");
+            getContext().getLogger().log(WARNING,
+                    "Invalid parameter configuration... will create" + "dependency tags.");
             writeDependency = true;
         }
 
         // Check if we want to create Lemmas or POS tags while Consituent tags
         // are disabled. In this case, we have to switch on constituent tagging
-        if (!writeConstituent && writePos) {
-            getLogger().warn("Constituent tag creation is required for POS tagging. Will create "
-                    + "constituent tags.");
+        if (!writeConstituent && ((createLemmas != null && createLemmas) || writePos)) {
+            getContext()
+                    .getLogger()
+                    .log(WARNING,
+                            "Invalid parameter configuration. Constituent "
+                                    + "tag creation is required for POS tagging and Lemmatization. Will create "
+                                    + "constituent tags.");
             writeConstituent = true;
         }
 
@@ -351,6 +348,30 @@ public class StanfordParser
     {
         modelProvider.configure(aJCas.getCas());
         posMappingProvider.configure(aJCas.getCas());
+
+        /*
+         * In order to work with mixed language document collections, default behavior of
+         * lemmatization has to be set anew for each CAS.
+         */
+        // If lemmatization is explicitly turned on, but document is not
+        // English, give a warning, but still turn it on.
+        if (paramCreateLemmas != null && paramCreateLemmas
+                && !aJCas.getDocumentLanguage().equals("en")) {
+            getContext()
+                    .getLogger()
+                    .log(WARNING,
+                            "Lemmatization is turned on, but does not work with the document language of the current CAS.");
+
+            createLemmas = paramCreateLemmas;
+        }
+        // If lemmatization was not set, turn it on for English documents
+        // and off for non-English documents
+        else if (paramCreateLemmas == null) {
+            createLemmas = aJCas.getDocumentLanguage().equals("en") ? true : false;
+        }
+        else {
+            createLemmas = paramCreateLemmas;
+        }
 
         Type typeToParse;
         if (annotationTypeToParse != null) {
@@ -434,7 +455,7 @@ public class StanfordParser
             // Create constituent annotations
             if (writeConstituent) {
                 sfAnnotator.createConstituentAnnotationFromTree(parser.getTLPParams()
-                        .treebankLanguagePack(), writePos);
+                        .treebankLanguagePack(), writePos, createLemmas);
             }
         }
     }
@@ -511,7 +532,6 @@ public class StanfordParser
             setOverride(LOCATION, modelLocation);
             setOverride(LANGUAGE, language);
             setOverride(VARIANT, variant);
-            setOverride(SHARABLE, sharedModel ? "true" : "false");
         }
 
         @Override
@@ -624,8 +644,7 @@ public class StanfordParser
                     getContext().getLogger().log(INFO, getTagset().toString());
                 }
 
-                pd.setOptionFlags("-maxLength", String.valueOf(maxTokens), "-MAX_ITEMS",
-                        String.valueOf(maxItems));
+                pd.setOptionFlags("-maxLength", String.valueOf(maxTokens));
                 return pd;
             }
             catch (ClassNotFoundException e) {

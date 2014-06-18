@@ -1,21 +1,13 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -24,13 +16,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggingEvent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasBuilder;
@@ -43,6 +29,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -52,7 +39,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 import edu.stanford.nlp.ling.StringLabel;
 import edu.stanford.nlp.trees.Tree;
 
@@ -206,6 +192,10 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -240,6 +230,7 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
@@ -282,6 +273,10 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -316,6 +311,7 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
@@ -358,6 +354,10 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -392,6 +392,7 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
@@ -434,6 +435,10 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -468,6 +473,87 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
+    }
+
+    @Test
+    public void testEnglishWsjFactored()
+        throws Exception
+    {
+        JCas jcas = runTest("en", "wsj-factored", documentEnglish);
+
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
+                "NP 0,2", "NP 60,97", "NP 8,43", "NP 8,97", "PP 98,109", "ROOT 0,110", "S 0,110",
+                "S 51,97", "SBAR 45,97", "VP 3,109", "VP 51,97", "WHNP 45,50" };
+
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
+                "NP 0,2", "NP 60,97", "NP 8,43", "NP 8,97", "PP 98,109", "ROOT 0,110", "S 0,110",
+                "S 51,97", "SBAR 45,97", "VP 3,109", "VP 51,97", "WHNP 45,50" };
+
+        String[] dependencies = new String[] { "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
+                "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
+                "[ 60, 62]ADVMOD(advmod) D[60,62](as) G[63,67](many)",
+                "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
+                "[ 68, 80]DOBJ(dobj) D[68,80](constituents) G[51,59](contains)",
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[3,7](need)" };
+
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
+                "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "VBN", "NN", "NN", ",",
+                "WDT", "VBZ", "RB", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
+                + "(VBN complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
+                + "(S (VP (VBZ contains) (NP (ADJP (RB as) (JJ many)) (NNS constituents) (CC and) "
+                + "(NNS dependencies)))))) (PP (IN as) (ADJP (JJ possible)))) (. .)))";
+
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ".$$.", ":",
+                "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP",
+                "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO",
+                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
+                "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
+
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+
+        String[] unmappedDep = new String[] { "gov" };
+
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
@@ -510,6 +596,10 @@ public class StanfordParserTest
                 "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
                 "[101,109]PREP(prep_as) D[101,109](possible) G[51,59](contains)" };
 
+        String[] lemma = new String[] { "we", "need", "a", "very", "complicate", "example",
+                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
+                "dependency", "as", "possible", "." };
+
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "V", "NN", "NN", "PUNC",
                 "ART", "V", "ADV", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
@@ -544,6 +634,7 @@ public class StanfordParserTest
 
         String[] unmappedDep = new String[] { "gov" };
 
+        AssertAnnotations.assertLemma(lemma, select(jcas, Lemma.class));
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
@@ -600,30 +691,6 @@ public class StanfordParserTest
                 + "(ADJP (JJ outside))))) (PRN (, ,) ('' ’) (S (NP (PRP he)) (VP (VBD said))) "
                 + "(, ,) (`` ‘)) (CC and) (S (NP (PRP it)) (VP (VBZ 's) (VP (VBG starting) (PP "
                 + "(TO to) (NP (NN rain)))))) (. .) ('' ’)))";
-
-        AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
-        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-    }
-
-    /**
-     * Tests the parser reading pre-existing POS tags
-     */
-    @Test
-    public void testExistingPos()
-        throws Exception
-    {
-        AnalysisEngineDescription engine = createEngineDescription(
-                createEngineDescription(StanfordPosTagger.class),
-                createEngineDescription(StanfordParser.class,
-                        StanfordParser.PARAM_READ_POS, true,
-                        StanfordParser.PARAM_WRITE_POS, false,
-                        StanfordParser.PARAM_WRITE_PENN_TREE, true));
-        
-        JCas jcas = TestRunner.runTest(engine, "en", "This is a test .");
-        
-        String[] posOriginal = new String[] { "DT", "VBZ", "DT", "NN", "." };
-
-        String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
 
         AssertAnnotations.assertPOS(null, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -758,8 +825,8 @@ public class StanfordParserTest
                 "[ 27, 28]Dependency(dvpm) D[27,28](的) G[24,27](尽可能)",
                 "[ 28, 30]CONJ(conj) D[28,30](依赖) G[17,19](包含)" };
 
-        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "ADJ", "PRT", "NN", "ADJ",
-                "NN", "V", "CARD", "NN", "CONJ", "ADJ", "PRT", "V", "PUNC" };
+        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "O", "O", "NN", "ADJ", "NN",
+                "V", "CARD", "NN", "CONJ", "ADJ", "O", "V", "PUNC" };
 
         String[] posOriginal = new String[] { "PN", "VV", "CD", "AD", "JJ", "DEG", "NN", "AD",
                 "NN", "VV", "CD", "NN", "CC", "AD", "DEV", "VV", "PU" };
@@ -780,7 +847,9 @@ public class StanfordParserTest
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = new String[] { ".$$.", "FRAG", "URL" };
+        String[] unmappedPos = new String[] { ".$$.", "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV",
+                "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "OD", "ON", "SB", "SP",
+                "URL", "VC", "X" };
 
         String[] unmappedConst = new String[] { "DFL", "FLR", "INC", "WHPP" };
 
@@ -834,8 +903,8 @@ public class StanfordParserTest
                 "[ 27, 28]Dependency(cpm) D[27,28](的) G[17,19](包含)",
                 "[ 28, 30]DOBJ(dobj) D[28,30](依赖) G[2,4](需要)" };
 
-        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "V", "PRT", "NN", "ADJ",
-                "NN", "V", "CARD", "NN", "CONJ", "ADJ", "PRT", "NN", "PUNC" };
+        String[] posMapped = new String[] { "PR", "V", "CARD", "ADJ", "ADJ", "O", "NN", "ADJ",
+                "NN", "V", "CARD", "NN", "CONJ", "ADJ", "O", "NN", "PUNC" };
 
         String[] posOriginal = new String[] { "PN", "VV", "CD", "AD", "VA", "DEC", "NN", "AD",
                 "NN", "VV", "CD", "NN", "CC", "AD", "DEC", "NN", "PU" };
@@ -856,7 +925,8 @@ public class StanfordParserTest
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = new String[] { ".$$." };
+        String[] unmappedPos = new String[] { ".$$.", "AS", "BA", "CS", "DEC", "DEG", "DER", "DEV",
+                "ETC", "FW", "JJ", "LB", "LC", "M", "MSP", "OD", "SB", "SP", "VC" };
 
         String[] unmappedConst = new String[] { };
 
@@ -934,59 +1004,6 @@ public class StanfordParserTest
                 pennOriginal.equals(pennFromRecreatedTree));
     }
 
-    @Test
-    public void testModelSharing()
-        throws Exception
-    {
-        final List<LoggingEvent> records = new ArrayList<LoggingEvent>();
-
-        // Tell the logger to log everything
-        Logger rootLogger = org.apache.log4j.LogManager.getRootLogger();
-        final org.apache.log4j.Level oldLevel = rootLogger.getLevel();
-        rootLogger.setLevel(org.apache.log4j.Level.ALL);
-        Appender appender = (Appender) rootLogger.getAllAppenders().nextElement();
-        // Capture output, log only what would have passed the original logging level
-        appender.addFilter(new org.apache.log4j.spi.Filter()
-        {
-            @Override
-            public int decide(LoggingEvent event)
-            {
-                records.add(event);
-                return event.getLevel().toInt() >= oldLevel.toInt() ? org.apache.log4j.spi.Filter.NEUTRAL
-                        : org.apache.log4j.spi.Filter.DENY;
-            }
-        });
-
-        try {
-            AnalysisEngineDescription pipeline = createEngineDescription(
-                    createEngineDescription(StanfordParser.class,
-                            StanfordParser.PARAM_SHARED_MODEL, true,
-                            StanfordParser.PARAM_WRITE_CONSTITUENT, true,
-                            StanfordParser.PARAM_WRITE_DEPENDENCY, false),
-                    createEngineDescription(StanfordParser.class,
-                            StanfordParser.PARAM_SHARED_MODEL, true,
-                            StanfordParser.PARAM_WRITE_CONSTITUENT, false,
-                            StanfordParser.PARAM_WRITE_DEPENDENCY, true));
-            
-            TestRunner.runTest(pipeline, "en", "This is a test .");
-            
-            boolean found = false;
-            for (LoggingEvent e : records) {
-                if (String.valueOf(e.getMessage()).contains("Used resource from cache")) {
-                    found = true;
-                }
-            }
-            
-            assertTrue("No log message about using the cached resource was found!", found);
-        }
-        finally {
-            if (oldLevel != null) {
-                rootLogger.setLevel(oldLevel);
-                appender.clearFilters();
-            }
-        }
-    }
-    
     /**
      * Setup CAS to test parser for the English language (is only called once if an English test is
      * run)
@@ -1066,11 +1083,5 @@ public class StanfordParserTest
     public void printSeparator()
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }

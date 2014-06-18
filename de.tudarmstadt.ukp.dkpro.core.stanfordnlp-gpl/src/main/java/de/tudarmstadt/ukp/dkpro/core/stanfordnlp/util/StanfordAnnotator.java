@@ -1,21 +1,13 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2010
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util;
 
 import java.util.ArrayList;
@@ -34,6 +26,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.Tag;
@@ -41,6 +34,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.StringLabel;
+import edu.stanford.nlp.ling.WordLemmaTag;
+import edu.stanford.nlp.ling.WordTag;
+import edu.stanford.nlp.process.Morphology;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
 import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.Tree;
@@ -107,10 +103,10 @@ public class StanfordAnnotator
      * Note: The annotations are directly written to the indexes of the CAS.
      */
     public void createConstituentAnnotationFromTree(TreebankLanguagePack aTreebankLanguagePack,
-            boolean aCreatePos)
+            boolean aCreatePos, boolean aCreateLemma)
     {
         createConstituentAnnotationFromTree(aTreebankLanguagePack, tokenTree.getTree(), null,
-                aCreatePos);
+                aCreatePos, aCreateLemma);
     }
 
     /**
@@ -126,7 +122,7 @@ public class StanfordAnnotator
      */
     private Annotation createConstituentAnnotationFromTree(
             TreebankLanguagePack aTreebankLanguagePack, Tree aNode, Annotation aParentFS,
-            boolean aCreatePos)
+            boolean aCreatePos, boolean aCreateLemmas)
     {
         String nodeLabelValue = aNode.value();
         String syntacticFunction = null;
@@ -164,7 +160,7 @@ public class StanfordAnnotator
             List<Annotation> childAnnotations = new ArrayList<Annotation>();
             for (Tree child : aNode.getChildrenAsList()) {
                 Annotation childAnnotation = createConstituentAnnotationFromTree(
-                        aTreebankLanguagePack, child, constituent, aCreatePos);
+                        aTreebankLanguagePack, child, constituent, aCreatePos, aCreateLemmas);
                 if (childAnnotation != null) {
                     childAnnotations.add(childAnnotation);
                 }
@@ -202,6 +198,16 @@ public class StanfordAnnotator
             if (aCreatePos) {
                 jCas.addFsToIndexes(pos);
                 token.setPos(pos);
+            }
+
+            // Lemmatization
+            if (aCreateLemmas) {
+                WordLemmaTag wlTag = Morphology.lemmatizeStatic(new WordTag(token.getCoveredText(),
+                        pos.getPosValue()));
+                Lemma lemma = new Lemma(jCas, span.getSource(), span.getTarget());
+                lemma.setValue(wlTag.lemma());
+                token.setLemma(lemma);
+                jCas.addFsToIndexes(lemma);
             }
 
             // link token to its parent constituent

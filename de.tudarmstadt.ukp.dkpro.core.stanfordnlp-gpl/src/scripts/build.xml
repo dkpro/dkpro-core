@@ -1,23 +1,3 @@
-<!--
-
-    Copyright 2007-2014    
-    Ubiquitous Knowledge Processing (UKP) Lab
-    Technische Universität Darmstadt
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
--->
 <project basedir="../.." default="separate-jars">
 	<import>
 		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
@@ -26,9 +6,6 @@
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
-	<property name="segmenter.version.real" value="3.3.1"/>
-	<property name="segmenter.date" value="2014-01-04"/>
-	
 	<property name="tagger.version.real" value="3.3.1"/>
 	<property name="tagger.date" value="2014-01-04"/>
 	
@@ -613,31 +590,6 @@
 		</install-stub-and-upstream-file>		
 	</target>
 
-	<target name="hr">
-		<mkdir dir="target/download"/>
-		
-		<!-- FILE: hr.3-class.distsim.ser.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-06-10 | now        | 86899be1af373af54f9f439b7c8260dd
-		  -->
-		<!-- This model is too old. It requires the NER version 1.2.4
-		<get 
-    		src="http://nlp.ffzg.hr/data/ner/hr.3-class.distsim.ser.gz" 
-    		dest="target/download/hr.3-class.distsim.ser.gz" 
-    		skipexisting="true"/>
-		<install-stub-and-upstream-file 
-			file="target/download/hr.3-class.distsim.ser.gz" 
-			md5="86899be1af373af54f9f439b7c8260dd"
-			groupId="de.tudarmstadt.ukp.dkpro.core" 
-			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-    		upstreamVersion="20130610"
-    		metaDataVersion="1"
-			tool="ner" 
-			language="hr" 
-			variant="3-class.distsim" 
-			extension="ser.gz"/>		
-	     -->
-	</target>
-	
 	<target name="pt">
 		<mkdir dir="target/download"/>
 
@@ -879,24 +831,6 @@
     	<delete file="stanford-parser-models.jar"/>
 	</target>
 
-	<target name="download-segmenter">
-		<mkdir dir="target/download/segmenter"/>
-    	<get 
-    		src="http://nlp.stanford.edu/downloads/stanford-segmenter-${segmenter.date}.zip" 
-    		dest="target/download/segmenter/segmenter.zip" 
-    		skipexisting="true"/>
-		<unzip src="target/download/segmenter/segmenter.zip" dest="target/download/segmenter">
-    		<patternset>
-    			<include name="*/data/**/*"/>		
-			</patternset>
-			<!--
-    		<chainedmapper>
-	    		<mapper type="flatten"/>
-    		</chainedmapper>
-    		-->
-    	</unzip>
-	</target>
-		
 	<target name="download-tagger">
 		<mkdir dir="target/download/tagger"/>
     	<get 
