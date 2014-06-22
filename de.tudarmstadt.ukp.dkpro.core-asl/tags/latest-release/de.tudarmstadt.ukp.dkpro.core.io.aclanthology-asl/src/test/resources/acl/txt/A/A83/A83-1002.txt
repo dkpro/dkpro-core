@@ -1,0 +1,982 @@
+PROBLEMS
+ 
+IN NATURAL-LANGUAGE INTERFACE WITH EXAMPLES FROM EUFID Marjorie T e m p l e t o 
+n John Burger S y s t e m Development Corporation Santa Mortice, California
+ 
+TO DSMS
+ 
+ABSTRACT For five years t h e End-User Friendly Interface to Data management 
+(EUFID) project team at System Development Corporation worked on the design and 
+implementation of a Natural-Language Interface (NLI) system that was to be 
+independent of both the application and the database management system. In this 
+paper we describe application, n a t u r a l -l a n g u a g e and d a t a b a s 
+e management problems involved in NLI development, with specific reference to 
+the EUFID system as an example. I INTRODUCTION
+ 
+users. Tools that could assist in automating this process are badly needed. The 
+second set of issues involves language processing techniques: how to assign 
+constituent structure and interpretation to queries using robust and general 
+methods that allow extension to additional lexical items, sentence types and 
+semantic relationships. Some NLI systems d i s t i n g u i s h the assignment of 
+syntactic structure, o r parsing, from the interpretation. Other systems, 
+including EUFID, combine information about constituent and semantic structure 
+into an integrated semantic grammar. The third class involves database issues: 
+how to actually perform the intent of the natural-language question by 
+formulating the correct structured query and e f f i c i e n t l y n a v i g a t 
+i n g through the database to retrieve the right answer. This involves a 
+thorough understanding of the DBMS structure underlying the a p p l i c a t i o 
+n , the operations and functions the query language supports, and the nature and 
+volatility of the database. Obviously issues in these three areas are related, 
+and the knowledge needed to deal with them may be distributed throughout a 
+natural-language interface system. The purpose of this paper is to show how such 
+issues might be addressed in NLI development, with illustrations from EUFID. The 
+next section includes a brief review of related work, and an o v e r v i e w of 
+the EUFID system. The third section describes the goals that EUFID achieved, and 
+section four discusses in detail ~ome of the major application, language, and 
+database problems that arose. Section five suggests guidelines for determining 
+whether an application is an appropriate target for a n a t u r a l - l a n g u 
+a g e interface.
+ 
+From 1976 t o 1981 SDC was involved in the development of the End-User Friendly 
+Interface to Data management (EUFID) system, a n a t u r a l - l a n g u a g e 
+interface (NLI) that is designed to be independent of both the application and 
+the underlying d a t a b a s e management system (DBMS). [TEMP79, TEMP80, 
+BURG80, BURG82]. The EUFID system permits users to communicate with database 
+management systems in natural English rather than formal query languages. It is 
+assumed that the application domain is well defined and bounded, that users 
+share a common language to address the application, and that users may have 
+little experience with computers or DBMSs but are competent in the application 
+area. At least three broad categories of issues had to be addressed during EUFID 
+development, and it is apparent that they are common to any general 
+naturallanguage interface to database management systems. The first category 
+involves the application: how to c h a r a c t e r i z e the requirements of the 
+human-machine dialogue and interaction, capture that information efficiently, 
+formalize the information and incorporate that knowledge into a framework that 
+can be used by the system. The major problems in this area are knowledge 
+acquisition and representation. For many NLI systems, bringing up a new 
+application requires extensive effort by system designers with cooperation from 
+a representative set of end-
+ 
+fiII
+ 
+BACKGROUND
+ 
+Over the past two decades a considerable amount of work has gone into the d e v 
+e l o p m e n t of natural-language systems. Early developments were in the 
+areas of text processing, syntactic parsing techniques, machine translation, and 
+early attempts at English-language question answering systems. Several early 
+question-answering experiments are reviewed by R. F. Simmons in [SIMM65]. Waltz 
+has edited a collection of short papers on topics related to naturallanguage and 
+artificial intelligence in a survey of NLI research [WALT77]. A survey of NLIs 
+and evaluation of several systems with respect t o their applicability to 
+command and control environments can be found in [OS179].
+ A. RELATED WORK
+ 
+involved with problems of semantics and has three separate layers of semantic u 
+n d e r s t a n d i n g . The layers are called "English Formal Language", 
+"World Model Language", and "Data Base Language" and appear to c o r r e s p o n 
+d roughly to the "external", "conceptual", and "internal" views of data as d e s 
+c r i b e d by C. J. Date [DATE77]. PHLIQAI can interface to a v a r i e t y of 
+d a t a b as e structures and DBMSs. 5. The Programmed LANguage-based Enquiry 
+System (PLANES) [WALT78] uses an ATN based parser and a semantic case frame 
+analysis to understand questions. Case frames are used to handle pronominal and 
+elliptical reference and to g e n e r a t e responses to clarify partially 
+interpreted questions. REL [THOM69], initially written entirely in assembler 
+code for an IBM36@, has been in continuous development since 1967. REL allows a 
+user to make interactive extensions to the g r a m m a r and semantics of the 
+system. It uses a formal grammar expressed as a set of general re-write rules 
+with semantic transformations attached to each rule. Answers are obtained from a 
+b u i l t - i n database. RENDEZVOUS [CODD74] addresses the problem of c e r t a 
+i n t y regarding the machine's understanding of the user's question. It engages 
+the user in d i a l o g u e to specify and disambiguate the question and will 
+not route the formal query to the relational DBMS until the user is satisfied 
+with the machine's interpretation. ROBOT [HARR78] is one of the few NLI systems 
+currently a v a i l a b l e on the commercial market. It is the basis for 
+Cullinane's OnLine English [CULL80] and Artificial Intelligence C o r p o r a t 
+i o n ' s Intellect [EDP82]. It uses an extracted version of the database for 
+lexical data to assist the ATN parser. TORUS [MYLO76], like RENDEZVOUS, engages 
+the user in a d i a l o g u e to specify and d i s a m b i g u a t e the user's 
+question. It is a research o r i e n t e d system looking at the problems of 
+knowledge representation, and some effort has been spent on the understanding of 
+text as well as questions.
+ 
+While few NLIs have reached the commercial marketplace, many systems have c o n 
+t r i b u t e d to advancing the state of the art. Several representative 
+systems and the problems they addressed are described in this section. i. 
+CONVERSE [KELLT1] used formal syntactic analysis to g e n e r a t e surfaceand d 
+e e p - s t r u c t u r e parsings together with formal semantic t r a n s f o r 
+m a t i o n rules to produce queries for a built-in relational DBMS. It was 
+written in SDC LISP and ran on IBM 37@ computers. Started in 1968, it was one of 
+the first naturallanguage processors to be built for the purpose of querying a 
+separate data m a n a g e m e n t system. LADDER [HEND77] was designed to access 
+large d i s t r i b u t e d databases. it is implemented in INTERLISP, runs on a 
+PDP-I@, and can interface to different DBMSs with proper configuration. It uses 
+a semantic g r a m mar and, like EUFID and most NLIs, a different grammar must 
+be defined for each application. The Lunar Rocks system LSNLIS [WOOD72] was the 
+first to use the Augmented Transition Network (ATN) grammar. Wrl~ten in LISP, it 
+transformed formally parsed questions into representations of the first-order 
+predicate calculus for deductive processing against a built-in DBMS. PHLIQAI 
+[SCHA77] uses a syntactic parser which runs as a separate pass from the semantic 
+understanding passes. This system is mainly
+ 
+fiB.
+ 
+OVERVIEW
+ 
+OF EUFID
+ 
+EUFID is a general purpose naturallanguage front-end for database management. 
+The original design goals for EUFID were: - to b e application independent. This 
+means that the program must be table driven. The tables contain the dictionary 
+and semantic information and are loaded with a p p l i c a t i o n - s p e c i f 
+l c data. It was desired that the tables could be constructed by someone other 
+than the EUFID staff, so t h a t users could build new applications on their o w 
+n . - to be database independent. This means that the organization of the data 
+in the database must be representable in tables that drive the query generator. 
+~ A database reorganization that does not change the semantics of the 
+application
+ should be transparen~ to the user.
+ 
+written in a high level language; initially a customer required code to be 
+written in FORTRAN, later we were able to use the "C" programming language. - to 
+support different views data for security purposes. of the
+ 
+The design which met these requirements is a modular system which uses an 
+Intermediate Language (IL) as the output of the natural-language analysis system 
+[BURG82]. This language represents, in many ways, the union of the c a p a b i l 
+i t i e s of many "target" DBMS q u e r y languages. The EUFID system consists 
+of three major modules, not counting the DBM3 (see Figure I). The analyzer 
+(parser) module is table driven. It is n e c e s s a r y only to properly build 
+and load the tables to interface EUFID to a new application. Mapping a question 
+from its d i c t i o n a r y (user) representation to DBMS representation is 
+handled by mapping functions contained in a table and applied by a separate 
+module, t h e "mapper". Each c o n tent (application dependent) word in the d i 
+c t i o n a r y has one or more mapping functions defined for it. A final stage 
+of the mapper is a q u e r y - l a n g u a g e generator containing the syntax 
+of IL. This stage writes a query in IL using the group/field names found by the 
+mapper t o represent the user's concepts and the structural relationships 
+between them. This design satisfies t h e requirement of application 
+independence. ENGLISH QUESTION
+ 
+- to be DBMS independent. This means that it must be able to generate requests 
+to different DBMSs in the DBMS's query language and that the interface of EUF~D 
+to a different DBMS should not require changes to t h e NLI modules. 
+Transferring the same database with the same semantic content to another DBMS 
+should be transparent to the natural-language users. - to run on a mini-computer 
+that might possibly be different from the computer with the DBMS.
+ 
+to have a fast response time, even when the question cannot be interpreted. This 
+means it must be able quickly to recognize unanalyzable constructs.
+ 
+Figure i: EUFID Block Diagram
+ 
+- to handle nonstandard or poorlyformed (but, nevertheless, meaningful) 
+questions. - to be portable to various machines. This means that the system had 
+to be * We make a technical distinction between the words "question" and 
+"query". A question is any string entered by the user to the EUFID analyzer, 
+regardless of the terminating punctuation. This is consistent with the design 
+since EUFID treats all input as a request for information. A query is a formal 
+representation of a question in either the EUFID intermediate language IL, or in 
+the formal query language of a DBMS. For each different DBMS used by a EUFID 
+application, a "translator" module needs to be written to convert a query in IL 
+to the equivalent in the DBMS query language. This design satisfies the 
+requirement of DBMS independence. Other modules are the system controller, a 
+"help" module, and a " s y n o n y m editor". An "Application Definition Module" 
+is used off-line to assist in the creation of the run-time application 
+description tables.
+ 
+The following subsections descrloe each of the modules of the EUFID system, and 
+give our m o t i v a t i o n for design. i. A~plication Definitions
+ 
+Bringing up a new a p p l i c a t i o n is a long and complex process. The d a t 
+a b a s e d e f i n i t i o n must be transmitted to EUFID. A large corpus of 
+"typical" user questions must be collected from a representative set of users 
+and from these the dictionary and mapping tables are designed. A "semantic 
+graph" is defined for the application. This graph is implicitly realized in t h 
+e dictionary where the nodes of the graph are the definitions of English content 
+words and the c o n n e c t i v i t y of the graph is implied by the 
+case-structure relationships defined for the nodes. All d i c t i o n a r y and 
+mapping-function are then entered into computer files which are processed by the 
+Application Definition Module (ADM) to produce t h e run-time tables. These 
+final tables are complex structures of pointers, character strings, and index 
+tables, designed to decrease access time to the information required by the 
+analyzer and mapper modules.
+ data
+ 
+considered. Frequently, desig~ :o,~s i d e r a t i o n s in the m a p p i n g - 
+f u n c t i o n list necessitate going back and m o d i f y i n g the content of 
+the d i c t i o n a r y . This is an example of the o v e r l a p of the l i n g 
+u i s t i c and database issues in assigning an interpretation to a question. c. 
+Database Representation
+ 
+The ADM, typically, needs to be run several times to "debug" the tables. EUFID 
+interfaces to three applications currently exist, and building tables for each 
+new a p p l i c a t i o n took less time than the previous one, b u t it still 
+requires several staff-months to bring up a new application. a. User-View 
+Representation
+ 
+The structure o f the data in the user's database is represented in two tables, 
+called the CAN (for canonical) and REL (for relationships) tables. Taking 
+advantage of the fact that any database can be represented in relational form, 
+EUFID lists each d a t a b a s e g r o u p as if it were a relation. 
+Group-to-group linkage (represented in the REL table) is d e a l t with as if a 
+join* were necessary to implement the link. For h i e r a r c h i c a l and 
+network DBMSs the join will not be needed: the link is "wired in" to the d a t a 
+b a s e structure. EUFID nevertheless assumes a join m a i n l y in order to 
+facilitate the writing of g r o u p - t o - g r o u p links in IL, which is a 
+relational language. The CAN table includes database-specific information for 
+each field (attribute) of each group (relation), such as field name, containing 
+group, name of d o m a i n from which attributed gets its values, and a pointer 
+to a set of c o n v e r s i o n functions for numeric v a l u e s which can be 
+be used to convert from one unit of m e a s ure to another (e.g., feet to 
+meters). These data are used by the run-time modules which map and translate the 
+t r e e - s t r u c t u r e d output of the analyzer to IL on the actual g r o u 
+p / f i e l d names of the database, and then co the language of the DBMS. These 
+modules are d i s c u s s e d in the next sections. 2. The EUFID Analyzer
+ 
+All information on the user's view of the database is kept in the d i c t i o n 
+ary. The dictionary consists of two kinds of words and definitions. Function 
+words, such as p r e p o s i t i o n s and Conjunctions, are pre-stored in each 
+a p p l i c a t i o n ' s d i c t i o n a r y and are used by the analyzer for 
+direction on how to connect the semantic-graph nodes during analysis. Content 
+words are application dependent. The d - c r O o n s of content words are 
+semantic-graph nodes. The connectivity o£ the graph is indicated by semantic 
+case slots and pointers contained in the nodes. A form of semantic-case is used 
+to indicate the attributes of an entity (e.g., adjectives, prepositional 
+phrases, and other modifiers of a noun). b. Mapping Functions
+ 
+The current version of the EUFID analyzer employs a variant of the CockeK a s a 
+m i - Y o u n g e r algorithm for parsing its input. This classical 
+nonpredictive b o t t o m - u p algorithm has been used in a family of "chart 
+parsers" developed by Kay, Earley, and others [AHO72]. The main features of 
+these parsers are: (i) They use a r b i t r a r y c o n t e x t - f r e e 
+grammars. There are no r e s t r i c t i o n s on rules which have l e f t - r e 
+c u r s i o n or other c h a r a c t e r i s tics which sometimes cause 
+difficulty. (2) They produce all possible parses of a given input string. The g 
+r a m m a r s they use may be ambiguous at either the nonterminalor t e r m i n 
+a l - s y m b o l levels. In natural-language processing, this allows for a 
+precise r e p r e s e n t a t i o n of * The t e r m "join" refers to a 
+composite o p e r a t i o n between two relations in a relational DBMS.
+ 
+The list of mapping functions is derived from the dictionary. Every possible 
+connection of every node has to be
+ 
+fiboth the syntactic and lexical ambiguities which may be present in an input 
+sentence. (3) They provide partial parses of the input. Each non-terminal symbol 
+derives some input substring. Even if no such substring spans the entire 
+sentence, i.e., no complete parse is achieved, analyses of various regions o f t 
+h e s e n t e n c e a r e available. (4) They are conceptually straightforward 
+and easy t o implement. The speed and storage considerations which have kept 
+such parsers from being widely used in compilers are less relevant in the 
+analysis o f short strings such as queries to a DBMS. The grammar used b y the 
+EUFID parser is essentially semantic. The symbols of the grammar r e p r e s e n 
+t t h e concepts underlying lexical items, and the rules specify the ways in 
+which these concepts can be combined. More s p e c i f i c a l l y , the 
+concepts are o r g a n i z e d into a case system. Each rule states that a given 
+pair of constituents can be linked if the conc e p t u a l head of o n e 
+constituent fills a case on the conceptual head of t h e other. A degree of 
+context sensitivity is achieved b y attaching predicates to the rules. These 
+predicates b l o c k application of t h e rules unless certain (usually 
+syntactic) conditions hold true. The parser uses syntactic information only "on 
+demand", that is, only when such information is necessary to resolve semantic 
+ambiguities. This a d d s to its coverage and robustness, and makes it 
+relatively insensitive to the phrasing variations which must be explicitly 
+accounted for in many other systems. 3. Mapping
+ 
+to-field and g r o u p - t o - g r o u p tions of t h e database.
+ 
+connec-
+ 
+The mapper makes use of a table of mapping functions. The table contains at 
+least one mapping function for every content word in the dictionary. The 
+analyzer's tree is traversed bottom up, applying mapping functions to each node 
+on t h e way. Mapping f u n c t i o n s are context sensitive with respect to 
+those nodes below it in the tree: nodes that have already been mapped. A new 
+tree is g r a d u a l l y formed and connected this way. Mapping functions may 
+indicate that the map of a semantic-graph node is a database node (that is, a 
+group or field name), o r a pre-connected sub-tree of database nodes. The 
+mapping function may also indicate removal of a database node or m o d i f i c a 
+t i o n to the existing structure of the tree being constructed.
+ The new t r e e i s c r e a t e d in terms of the database groups and f i e l d 
+s and i t s structure reflects the connectivity of the database. A final stage 
+of the mapper traverses this new tree and generates the EL statement of the 
+query using a table of the syntax and keywords of EL and the database names from 
+the tree.
+ 
+The mapper module converts the output of the analyzer to input for the 
+translator module. Analyzer output is a tree structure where the nodes are 
+semantic-graph nodes corresponding to the content words in the user's question 
+and obtained from the dictionary.
+ 
+An alternative method of mapping that is now being investigated involves 
+breaking the process into two basic parts. The first step would be to map the 
+tree o u t p u t o f the analyzer t o an IL query on what C. J. Date calls the 
+"conceptual schema" of the database [DATE77]. A second step would take this IL 
+input and re-arrange the schema connectivity (and names of groups and fields) 
+from that of the conceptual schema to that of the actual target database, 
+generating another IL query as input to the current translators.
+ 
+Input to the translator module is a string in the syntax of IL which contains 
+the names of actual groups and fields in the database. The mapping algorithm, 
+thus, has to make several levels of conversion simultaneously: - it must convert 
+a into a linear string - it must convert into database names, and tree structure 
+of tokens,
+ 
+semantic-graph nodes groupand field-
+ 
+- it must convert the connectivity of the tree (representing concept-toconcept 
+linkage in English) into the (frequently very different) group-
+ 
+The final run-time module in EUFID is a syntax translator that converts IL to 
+the actual DBMS query language. If necessary, the translator can also add 
+access-path information related t o database search. Currently, two translators 
+have been written. One converts IL to QUEL, a relatively simple conversion into 
+the language of the relational database management system INGRES [STONY6]. The 
+other translator converts IL into the query language of the World-Wide Data 
+Management System (WWDMS) [HONE76] used by the Department of Defense, and also 
+handles additional access path information. This translator was quite difficult 
+to design and build because of the highly procedural nature of the WWDMS query 
+system.
+ 
+The output of a translator is sent to the appropriate DBMS. In the EUFID system 
+running at SDC, a QUEL query is submitted directly to INGRES running on the same 
+PDP-II/70 as EUFID. For testing purposes, queries generated by the WWDMS 
+translator were transmitted from a PDP11/70 to a Honeywell H6000 with a WWDMS 
+database. 5. Application Description
+ 
+some coming from open-ended domains. A I R E P has a network database structure 
+and contains the same data s t r u c t u r e in four d i f f e r e n t files. 
+III LEVEL OF SUCCESS
+ 
+EUFID runs o n three d i f f e r e n t application databases. The METRO a p p l 
+i c a t i o n involves monitoring of shipping transactions between companies in 
+a city called "Metropolis". There are ten companies located in any one of three 
+n e i g h b o r hoods. Each company rents warehouse space for shipping/recelving 
+transactions, and has local offices which receive goods. The data is organized 
+telationally using the INGRES database m a n a g e m e n t system. That means 
+that there are no n a v i g a t i o n a l links stored in the records (called 
+"relations") and there is no predefined "root" to the database structure. Access 
+may be made from any relation to any other relation as long as there is a field 
+in each of the two relations which has the same "domain" (set of values). AIREP 
+(ADP Incident REPorting) is a network database, implemented in WWDMS. It c o n t 
+a i n s reports about hardware and software failures and resolution of the 
+problems in a large computer system. Active problems are maintained in an active 
+file and old, solved problems are moved to an historical file. If a problem [s 
+reported more than once, an abbreviated record is made for the additional 
+report, called the "duplicate incident" record. This means that there are four 
+basic type of report: active incidents, duplicate incidents, historical 
+incidents, and historical duplicate incidents. In addition, there are records 
+about sites, problems, and solutions. The A P P L I C A N T database is a 
+relational database implemented in INGRES that contains information about job 
+applicants and their backgrounds. The central entity is the "applicant", while 
+other relations describe the a p p l i c a n t ' s specialties, education, 
+previous employment, computer experience, and interviews. Each database has d i 
+f f e r e n t features chat may present problems for a naturallanguage interface 
+but which are typical of 'real-world' applications. METRO has relatively few 
+entities but has complex relationships among them. APPLICANT has many updates 
+and many different values,
+ 
+Most of the EUFID d e s i g n g o a l s were actually met. EUFID runs on a 
+minicomputer, a DEC PDP 11/70. It is application, database, and DBMS 
+independent. A typical q u e s t i o n is analyzed, mapped and translated in 
+five to fifteen seconds even with g r a m m a t i c a l l y incorrect input. The 
+analyzer c o n t a i n s a good spelling corrector and a good morphology a l g o 
+r i t h m that strips inflectional endings so that all inflected forms of words 
+need not be stored explicitly. A "synonym editor" permits the user to replace 
+any word or string of words in the dicionary with another word or string, to 
+accommodate personal jargon and expressability. A "Concept Graph Editor s allows 
+a database administrator to m o d i f y tables and define user profiles so that 
+d i f f e r e n t users may have limited views of the data for s e c u r i t y 
+purposes. The analysis strategy, based on a semantic grammar, permits easy and 
+natural paraphrase recognition, although there are linguistic c o n s t r u c t 
+s it cannot handle. These are d i s c u s s e d below. An English word may have 
+more than one definition without c o m p l i c a t i n g the analysis strategy. 
+For example, "ship" as a vessel and as a verb meaning "to send" can be defined 
+in the same d i c t i o n ary. Words used as database values, such as names, may 
+also have m u l t i p l e definitions, e.g., "New York" used as the name of both 
+a city and a state. The mapper, despite its many limitations, can c o r r e c t 
+l y map almost all trees output by the analyzer. It is able to handle English c 
+o n j u n c t i o n s , mapping them a p p r o p r i a t e l y to logical ANDs 
+or ORs, and understanding that some "ands" may need to be interpreted as OR and 
+vice-versa under certain c i r c u m s t a n c e s . It is able to g e n e r a t 
+e calls on DBMS calculations (e.g., average) and user-defined functions (e.g., 
+marine great-circle distance) if the user-function exists and is supported by 
+the DBMS. Questions involving time are interpreted in a reasonable way. 
+Functions are defined for "between" and "during" in the METRO application. The 
+AIREP application allows time comparisons such as "What system was running when 
+incident J123 occurred" which require a test to see if a point in time is within 
+an interval.
+ 
+The mapper can translate "user values" (e.g., "Russian") to database values 
+(e.g., "USSR"), and convert one unit of measure (e.g., feet) to another (e.g., 
+meters). EUFID c a n i n t e r f a c e to very complex relational and 
+CODASYL-type databases having difficult n a v i g a t i o n and parallel 
+structures. In t h e AIREP application a consistent WWDMS navigational m e t h o 
+d o l o g y is used to access non-key records. The system c a n also map to t h 
+e parallel, but not identical, structures for duplicate and historical 
+incidents. I n the INGRES applications, EUFID is able to use and correctly map 
+to = r e l a tionship relations" which relate two or more other relations. For 
+example, the METRO relation =cw" contains a company name, a warehouse name, a n 
+d a date. This represents the initial business contact. A user might ask, =When 
+d i d C o l o n i a l start t o do b u s i n e s s w i t h Superior? = or · When 
+d i d b u s i n e s s b e g i n b e t w e e n C o l o n i a l and S u p e r i o 
+r ? = , e i t h e r of which must ~oin both t h e c o m p a n y ( " c =) a n d t 
+h e w a r e h o u s e ('w') relations t o the =cw" relation. The system c o n t 
+r o l module keeps a journal of all user-system interaction together with 
+internal module-to-module data such as the IL for the user's question and the 
+generated DBMS query. The system also employs a very effective HELP module 
+which, under certain circumstances, is context sensitive t o the problem 
+affecting the user. IV PROBLEMS
+ 
+APPLICANT database may wish to fill a specific Job opening while others may 
+collect statistics on types of appli~ cants. The language used for these two 
+functions can be quite different, and it is n e c e s s a r y to have extensive 
+interaction with cooperative users in order to characterize the kinds of 
+dialogues they will have with the system. Not only must representative language 
+protocols be collected, but desired responses must be understood. For example, 
+to answer a question such as =What is t h e status of our forces in Europe = , 
+the system must know whether 'our' refers to U.S. or NATO or some other unit. 
+The importance of this interaction between potential users and system developers 
+should n o t b e underestimated, as it is the basis for defining much of the 
+knowledge base needed by the system, and may also be t h e basis for eventual 
+user acceptance o r rejection of the NLI system. 2. Value R e c o g n i t i o n
+ 
+This section describes problems associated with EUFID development that appear to 
+be common to natural-language interfaces to database management systems. They 
+are loosely classified into the major areas Of application, language and 
+database management issues, although there may be overlap. Criteria for 
+evaluating whether an application is appropriate for a natural-language 
+front-end are also described. A. APPLICATION DEFINITION PROBLEMS
+ 
+A "value = is a specific datum stored in the database, and is the smallest piece 
+of data obtainable as the result o f a database query. For example, in response 
+to the question "What companies in North Hills shipped light freight to 
+Superior? = the METRO DBMS returns two values: "Colonial" and "Supreme'. Values 
+can also be used in a query to qualify or select certain records for output, 
+e.g., in t h e above question "North Hills" and "Superior" are values that must 
+be represented in the query to the DBMS. As long as the alphanumeric values used 
+in a particular database field are the same as words in t h e English questions, 
+there are no difficult problems involved in recognizing values as selectors in a 
+query. There are three basic ways to recognize these value words in a question. 
+They can be explicitly listed in the dictionary, recognized by a pattern or 
+context, or found in the database itself. If the value words are stored in the 
+dictionary, they can be subject to spelling correction because the spelling 
+corrector uses the dictionary to locate words which are a close match to 
+unrecognized words in a question. This means, though, that all possible values 
+and variant legitimate spellings of values for a concept must be put either into 
+the dictionary or into the synonym list. This is reasonable for concepts which 
+have a small and controlled set of _values* such as the names of the * A set of 
+v a l u e s is called a "domain ,r.
+ 
+The primary issue in this area is concerned with problems of defining, creating, 
+and bringing up the necessary data for a new application. The discussion points 
+out the difficulties associated with systematic knowledge acquisition. I. User 
+Model
+ 
+A single database may be used by different groups of users for different 
+purposes. For example, some users of the
+ 
+ficompanies in METRO, but may u n w i e l d y for large sets of values.
+ 
+become
+ 
+If a value can be recognized by a pattern, it is not n e c e s s a r y to 
+itemize all instances in the dictionary. For example, a date may be entered as 
+"yy/mm/dd" so that any input matching the pattern "nn/nn/nn" is recognized as a 
+date. This is the approach used for dates and for names of applicants in the A P 
+P L I C A N T database, where names of people match the pattern "I.I.Lastname". 
+In another approach, OnLine English [CULL80] and Intellect [HARR78, EDP82] (two 
+v a r i a t i o n s of ROBOT) used the database to recognize values. This is a s 
+a t i s f a c t o r y solution if the database is small or if the small number 
+of d i f f e r e n t values is stored in an index accessible to the NLI, and if 
+the values in the database are suitable for use in English questions. Each of 
+these solutions has disadvantages. If values are stored in the d i c t i o n a r 
+y there may be many different ways to spell each particular value. For example, 
+the company name for "System Development Corporation" may also be given as 
+"S.D.C.", "S D C", or "System Development Cotp". While each d i f f e r e n t 
+spelling could be entered as a synonym for the "correct" spelling in the 
+database, this would result in an enormous proliferation of the d i c t i o n a 
+r y entries and problems with concurrency control between the updates directed 
+to the data m a n a g e m e n t system and the updates to the dictionary. A 
+creative solution might he to define rules for synonym generation and apply them 
+to database updates. A somewhat different example is from the A P P L I C A N T 
+application which has many open ended domains, such as names of applicants and 
+previous employers. In this case, the application designer may have to treat 
+certain fields as "retrieve-only", meaning that the data can be asked ~or but 
+not used as a selection criterion. A database with a large number of 
+retrieve-only fields may be a poor candidate for an NLI. Patterns can be used 
+only if they can be enforced, and probably few values really fit the patterns 
+nicely. Proper names ate a poor choice for patterns because of variations such 
+as middle initial or title such as "Dr." or "Jr.". Also, spelling correction 
+cannot be performed unless the value is stored in the dictionary.
+ 
+Finally, the solution of using the database itself to recognize v a l u e s is u 
+n s a t i s f a c t o r y to a general NLI for anything other than trivial 
+databases, unless an inverted index of values is easily accessible. There are 
+the problems of spelling c o r r e c t i o n and synonyms for database values, 
+the inefficiency involved in accessing the DBMS for every unrecognized word, and 
+the d i f f i culty of knowing which fields in the d a t a b a s e to search. 3. 
+Semantic Variation By Value
+ 
+Databases are generally designed with a m i n i m u m number of d i f f e r e n 
+t record types. When there are entities which are similar, but p o s s i b l y 
+have a small number of a t t r i b u t e s which are not shared, the entities 
+will be stored in the same record type with null values for the attributes that 
+do not apply. The user, in his questions, may view these similar entities as 
+very d i f f e r e n t e nt i t i e s and talk about them d i f f e r e n t l y 
+. We did not encounter the problem with METRO or AIREP. For example, in METRO, 
+the user asks the same type of questions about the c o m p a n y named 
+"Colonial" as about the company named "Supreme". In APPLICANT, however, each a p 
+p l i c a n t has a set of "specialties" such as "computer programmer", "a c c o 
+u n t i n g clerk", or "gardener". These are all stored as values of the s p e c 
+i a l t y field in the database. Unfortunately, in this case different 
+specialties evoke completely d i f f e r e n t concepts to the end user. The 
+user may ask q u e s t i o n s such as, "What p r o g r a m m e r s know 
+COBOL?", "Who can program in COBOL?", and "How m a n y a p p l i c a n t s with 
+a s p e c i a l t y in computer programming applied in 1982?". Notice the new 
+nouns and verbs that are introduced by this s p e c i a l t y name. A value 
+domain such as specialties should be handled with an ISA hierarchy. Each d i f f 
+e r e n t type of s p e c i a l t y such as gardener or programmer could have a 
+different concept that is a subset of the concept "specialty". Some questions 
+could be asked about all s p e c i al t i e s and others could be directed only 
+to certain subconcepts. However, there is no [SA hierarchy in EUFID, and it 
+would have been inefficient to treat each specialty and subspecialty as a 
+separate concept since there are 30 specialties and 196 subspecialties. 
+Therefore, we required the users to know the exact values, to know which values 
+are for s p e c i a l t i e s and which are for subspecialties, and to ask q u e 
+s t i o n s using the values only as nouns. This is not "user friendly".
+ 
+Even if it were possible to build a different concept for each different skill, 
+there is an update problem. When a new value is a d d e d to a v a l u e domain 
+where there ace uniform semantics (as in adding a new company name in METRO), 
+the new value is simply attached to the existing concept, when the new value has 
+different semantics, t h e newly associated concepts, nouns, and verbs cannot be 
+added automatically. If t h e NLI supports an ISA hierarchy, someone w i l l 
+need to categorize t h e new value and add a new node to the hierarchy or 
+specify a position in the hierarchy. 4.
+ Automation of D e f i n i t i o n
+ 
+subset
+ 
+who l i v e
+ 
+in
+ 
+Nevada.
+ 
+One s o l u t i o n is to provide commands that allow u s e r s to d e f i n e s 
+u b s e t s of the database to which to address questions. This removes the 
+ambiguity and speeds up retrieval time on a large d a t a b a s e . However, it 
+moves the NLI interaction toward that of a structured query language, and forces 
+the user to be a w a r e of the level of subset b e i n g accessed. It is also 
+difficult to implement because a subset may involve projections and joins to 
+build a new relation containing the subset. The NLI must be able dynamically and 
+temporarily to change the mapping tables t o map t o this new relation. 2. 
+Intelll~ent Interaction
+ 
+A natural-language interface system will not be practical u n t i l a new a p p 
+l i c a t i o n can b e installed easily. "Easily" means that the end-user 
+organization must be able to create and modify the driving tables for the 
+application relatively quickly without the help of the NLI developer, and must b 
+e able to use the NLI without restructuring the d a t a b a s e .
+ 
+Each EUFID application required "handcrafted" tables that were built by the 
+development staff. Each new application was done in less time than the previous 
+one, but still required several staff-months to bring up. Clearly, the goal of 
+facilitating the building of the tables by end users was not met. 
+Computer-assisted tools for defining new applications are a prerequisite for 
+practical NLIs. B. LANGUAGE PROBLEMS
+ 
+One of the EUFID design goals was to r e s p o n d promptly either with an 
+answer or with a message that the question could not be interpreted. The system 
+handles spelling or typographical errors by interacting with the user t o select 
+the correct word. However, when all of the words are recognized but do n o t 
+connect semantically, It is difficult to identify a single point in analysis 
+which caused the failure. It is i n this a r e a that the absence of a syntactic 
+mechanism for determining well-formedness was most noticeable. There are times 
+when a question has a proper syntactic structure, but co n t a i n s semantic 
+relationships u n r e c o g n i z a b l e to the application as in "What is the 
+locatlon of North Hills?". A response of "Location is not defined f o r North 
+Hills in this appllcacion" should be derivable from the recognizable semantic 
+failure. Similarly, it would be useful to have a framework for interpreting 
+partial trees, as in the question "What companies does Mohawk ship to?" where 
+Mohawk is not a recognized word within the application. An appropriate response 
+might be "Companies ship to receiving offices and companies; Mohawk is neither a 
+receiving office nor a company. The names of offices and companies are ...". 
+Interpretation of partial a n a l y s e s is not possible within the EUFID 
+system; it either succeeds or fails completely. 3. Yes/No Questions
+ 
+The basic approach to language analysis in EUFID involves a bottom up parser 
+using a semantic grammar. The symbols of the grammar are concepts underlying 
+lexical items, and the rules of the grammar ace based o n a case framework. 
+Essentially syntactic information is used only when needed to resolve ambiguity. 
+The language features that this technique has t o handle are common to any NLI, 
+and some of the problem areas are described in the following sections.
+ I.
+ 
+Anaphora
+ 
+and Ellipsis
+ 
+To support natural interaction it is desirable to allow the use of anaphoric 
+reference and elliptical constructions across sentence sequences, such as "What 
+applicants know Fortran and C?", "Which of them live in California?", "In 
+Nevada?", "How many know Pascal?'. One of the biggest problems is to define the 
+scope of the reference in such cases. In the example, it is not clear whether 
+the user wishes to retrieve the set of all applicants who know Pascal or only 
+the II
+ 
+In normal NLI interaction users may wish to ask "yes/no" questions, yet no DBMS 
+has the ability to answer "yes" or "no" explicitly. The EUFID mapper maps a 
+yes/no question into a query which will retrieve some data, such as an " o u t p 
+u t identifier" or default name for a concept, if the answer is "yes" and no 
+data if the answer if "no". However, the answer may be "no" for several 
+reasons.
+ 
+For example, a "no" response to the question "Has John Smith been interviewed?" 
+may mean that the database has knowledge about John Smith and about interviews 
+and Smith is not listed as having had an interview*, or the database knows about 
+John Smith and no data about interviews is available. A third p o s s i b i l i 
+t y could be that the database has information about John Smith and his 
+employment situation (already hired), and the response might include that 
+information, as in "No, but he has already been hired'. 4. Conjunctions
+ 
+uncertain whether they should be returned in the answer. It is also d i f f i c 
+u l t to take a c o m p l e m e n t of a set of data using the m a n y data m a 
+n a g e m e n t systems that do not support set o p e r a t o r s between 
+relations. Questions which require a "yes" or "no" response are difficult to 
+answer because often the "no" is due to a p r e s u p p o s i t i o n which is 
+invalid. This is e s p e c i a l l y true with negation. For example, if the 
+user asks, "Does e v e r y company in North Hills except Supreme use NH2?", the 
+answer may be "no" because Supreme is not in North Hills. The current i m p l e 
+m e n t a t i o n of EUFID does not allow explicit negation, a l t h o u g h 
+some n e g a t i v e concepts are handled such as "What c o m p a n i e s ship 
+to companies other than Colonial?". "Other than" is interpreted as the "!-" o p 
+e r a t o r in e x a c t l y the same way that "greater than" is interpreted as 
+">". C. INTERPRETATION AND DATABASE ISSUES
+ 
+T h e s c o p e of c o n j u n c t i o n s is a difficult problem for any 
+parsing or analyzing algorithm. The n a t u r a l - l a n g u a g e use of "and" 
+and "or" does not n e c e s s a r i l y correspond to the logical meaning, as in 
+the question "List the applicants who live in C a l i f o r n i a a n d 
+Arizona.". Multiple c o n j u n c t i o n s in a single q u e s t i o n can be 
+ambiguous as in "which minority and female applicants know Fortran and Cobol?'. 
+This could be interpreted with logical "and" or with logical "or" as in "Which a 
+p p l i c a n t s who are minority or female know either Fortran or Cobol?".
+ 
+The EUFID mapper will change English "and" to logical "or" when the two phrases 
+within the scope of the conjunction are values for the same field. In the 
+example above, an applicant has only one state of residence.
+ 
+Many q u e s t i o n s make perfect sense semantically but are difficult to map 
+into DBMS q u e r i e s because of the d a t a b a s e structure. The problems 
+become worse when access is through an NLI because of increased e x p e c t a t 
+i o n s on the part of the user and because it may be d i f f i c u l t for a 
+help system a d e q u a t e l y to d e s c r i b e the problem to the user who 
+is unaware of the database structure. I. IL Limitations
+ 
+Nepption
+ 
+Negative requests may contain explicit negative words such as "not" and "never" 
+or may contain implicit negatives such as "only", "except" and "other than" 
+[OLNE78]. The interpretation of negatives can be very difficult. For example, 
+"Which c o m p a n i e s did not ship any perishable freight in 1976" could mean 
+either "Which (of all the companies) shipped no perishable freight in 1976?" or 
+"Which (of the companies that ship perishable freight) shipped none in 1976?'. 
+Moreover, if some companies were only receivers and never shippers it is "-"~e 
+is the important d i s t i n c t i o n between a "closed world" database in 
+which the assumption is that the database covers the whole world (of the 
+application) and an "open world" database in which it is understood that the 
+database does not represent all there is to the real world of the application. 
+In the open world database, which we encounter most of the time, a response of 
+"not that this database knows of" might be more appropriate. ~Z
+ 
+The design of the IL is critical. It must be rich enough to support retrieval 
+from all the underlying DBMSs. However, if it c o n t a i n s c a p a b i l i t 
+i e s that do not exist in a specific DBMS, it is difficult to d e s c r i b e 
+this d e f i c i e n c y to the user. In APPLICANT, the user cannot get both the 
+major and minor fields of study by asking "List applicants and field of study", 
+because a limitation in the EUFID IL prevents making two joins between education 
+and subject records. This problem was corrected in a subsequent version of IL 
+with the addition of a "range" statement similar to that used by QUEL [STON76]. 
+The current IL does not contain an "EXISTS" or "FAILS" operator which can test 
+for the existence of a record. Such an operator is frequently used to test an 
+interrecord link in a network or hierarchical DBMS. It is needed to express 
+"What problems are unsolved?" to the AIREP application, which requires a test 
+for a database link between a
+ 
+set and a solution Mixed Case Values
+ 
+set.
+ 
+generate
+ 
+the
+ 
+IL q u e r y
+ 
+EUFID allows a value in the database to be upper or lower case and will c o n v 
+e r t a value in the question either to all upper or all lower case in the IL, 
+or leave it as input b y the user. If the d a t a b a s e values are mixed case, 
+it is not possible to convert the user's input to a single case. If the user 
+does not enter each letter in t h e p r o p e r c a s e , t h e v a l u e will n 
+o t match. 3. Granularit~ Differences
+ 
+retrieve [cct.scname] where (cct.date · 198~) and (cct.lf >{retrieve [avg 
+(cct.lf)] where (cct.date - 1980)}) Here, =cct" i s t h e name o f the 
+companyto-company transaction relation. " S c n a m e " is the name of a 
+shipping company in this relation. Note again that the qualification on " 1 9 8 
+~ " n e e d s to be done both inside and o u t s i d e the nested p a r t o f t 
+h e query. In the query language for INGRES such a request is expressed in a 
+manner very similtar t o t h e IL e x p r e s s i o n s . For WWDMS a very 
+complex procedure is generated. In all cases, t h e DBMS n e e d s to answer the 
+inner request and s a v e t h e result for usa in qualifying the outer request. 
+There are many database management systems that cannot handle such questions and 
+t h e s e I L s t a t e m e n t s cannot be translated into the system's query 
+language. 5. Inconsistency In Retrieval
+ 
+The NLI user is n o t expected to understand exactly how d a t a is stored, and 
+yet must understand something about the g r a n u l a r i t y of the data. Time 
+fields often cause problems because time m a y be given by year or by fractions 
+of a second. U s e r s may make t i m e comparisons that require more 
+granularity than is stored in t h e database. For example, t h e user can ask 
+"What incidents were reported at SAC while system release 3.4 was installed?". 
+If incidents were reported by day but system release dates were given by month, 
+the system would return i n c i d e n t s which occurred in the days of the 
+month before the system release was i n s t a l l e d . 4. Nested Queries
+ 
+A very simple question in English can turn into a very complicated request in t 
+h e query language if it involves retrieval of data which must b e used f o r 
+qualification in another part of the same query. In IL these are called "nested 
+queries". Most o f t e n some qualification needs to be done b o t h "inside" 
+and "outside" t h e clause of the query that does the internal retrieve. For 
+example, t h e question "What i n c i d e n t at SAC had the longest d o w n t i 
+m e ? " f r o m o u r AIREP a p p l i cation i s e x p r e s s e d i n I L as 
+retrieve [INCA. ID] where (INCA.SITENAME = "SAC") and (INCA.DNTM [retrieve [ max 
+(INCA.DNTM)] where (INCA.SITENAME = "SAC")}) The nested part of t h e query is 
+enclosed in braces. "INCA" is the database name of the active incident records. 
+Notice that removing the "INCA.SITENAME = 'SAC'" clause from either the inner or 
+outer query would result in an incorrect formulation of the question. A similar 
+example from the METRO application is the question, "What company shipped more 
+than the average amount of light freight in 198~?" which will 13
+ 
+The NLI presents a uniform view of all d a t a b a s e s a n d DBMSs, but it is 
+difficult to truly mask all differences in the behavior o f t h e DBMSS b e c a 
+u s e t h e y d o n o t all process the equivalent query in the same way. For 
+example, when data are retrieved from two relations in a relational database, 
+the two relations must be J o i n e d on a common attribute. The answer forms a 
+new relation which may be displayed to t h e user o r stored. Since the join 
+clause acts as qualification, a record (tuple) in either relation which has no 
+corresponding t u p l e in t h e other relation does not participate in the 
+result. This is a different concept from the hierarchical and network models 
+where the system retrieves all records from a master record and then retrieves 
+corresponding records from a subfile. This difference can cause anomalies with 
+retrieval. For example, in a pure relational system "List applicants and thei~ 
+interviews" would be treated as "List applicants who have had interviews 
+together with their interview information." A h i e r a r c h i c a l or network 
+DBMS would treat it as "List all applicants (whether or n o t they have been 
+interviewed) plus any interview information that exists." This second 
+interpretation is more likely to be the correct one.
+ 
+fiD.
+ 
+OVERALL
+ 
+NLI DESIGN
+ 
+There are several problems that affect the selection of a p p l i c a t i o n s 
+for the NLI. Some d a t a b a s e s and data m a n a g e ment systems may not be 
+a p p r o p r i a t e targets for natural-language interfaces. Some DBMS 
+functions may be d i f f i c u l t to support. It is important to have a clear 
+understanding of these problems so that the NLI can mediate between the user 
+view, as represented by the naturallanguage questions, and the underlying d a t 
+a b a s e structure. i. ~ Design C o n s i d e r a t i o n
+ 
+map q u e r i e s and t o explain problems to t h e u s e r when t h e m a p p i 
+n g c a n n o t b e m a d e . However, there can be "reasonable" queries that 
+cannot be answered d i r e c t l y because of the database structure. 
+Hierarchical DBMSs present the most problems with n a v i g a t i o n because 
+access must start from the root. For example, if the APPLICANT database were 
+under an hierarchical DBMS, the q u e s t i o n "List t h e s p e c i a l t i e 
+s for each applicant" could be answered directly but not "What are the 
+specialties?" as there would be no way to get to the s p e c i a l t y records 
+except via particular applicant records. An array allows more than one instance 
+of a field or set of fields in a single record. There may be arrays of values or 
+even arrays of sets of values in nonrelatlonal databases. When the user 
+retrieves a field that is an array the DBMS requires a subscript into the array. 
+Either the user must s p e c i f l y this s u b s c r i p t or the NLI must map 
+to all members of the array with a test for missing data. 3. Class of DBMS to 
+Supp%rt
+ 
+For any d a t a b a s e there are naturallanguage q u e s t i o n s that cannot 
+be interpreted because the concepts involved lle outside the world of the 
+database. Questions can also involve structural complexity that is n o t r e p r 
+e s e n t a b l e in the DBMS q u e r y language. A p a r t i c u l a r l y 
+difficult d e c i s i o n in the overall design of an NLI is the issue of where 
+in the chain of events of processing a user's question into a DBMS q u e r y to 
+trap these q u e s t i o n s and stop processing. One approach is to decide that 
+if a question is not meaningful to the world of the d a t a b a s e it should 
+not be m e a n i n g ful to the NLI and, therefore, not analyzable on semantic 
+grounds. Another assumes that if the NLI can analyze a question that cannot be 
+asked of the database, it has a much better chance of d e s c r i b i n g to the 
+user what is wrong with the question and how it might be rephrased to get the 
+desired information. Codd made good use of the dialogue procedures of the 
+RENDEZVOUS [CODD74] system to avoid questions that the DBMS could not handle, as 
+well as avoiding g e n e r a t i o n of DBMS queries that did not represent the 
+user's intent. Such a system, however, requires a very large semantic base (much 
+larger than that of the database) in order to make meaningful communication with 
+the user during the dialogue. 2. Class of Database to Support
+ 
+For systems such as EUFID, the database must be organized within a data m a n a 
+g d m e n t system so that the data is structured and individual fields are 
+named. If the data is just text, the EUFID approach cannot be used. Current NLI 
+systems are de s i g n e d to be used interactively by a user, which means that 
+the DBMS should also have an interactive query language. However, noc all data m 
+a n a g e m e n t systems are interactive. WWDMS [HONE76] has a user query 
+language, b u t queries are entered into a batch job queue and answers may not 
+return for many minutes. If an Nil front end is to be added to such a DBMS, i~ 
+must have the capability to generate query programs without any access to the 
+database for parsing or for processing the returned answer. The query language 
+should support operations equivalent to the relational o p e r a t i o n s of 
+select, project, and join. Also, the query language should support some 
+arithmetic capability. Most have aggregate functions such as SUM and COUNT. 
+WWDMS does not have an easy-touse average operation, but it does have a 
+procedural language with arithmetic operators so that EUFID can produce a 
+"query" that p r o c e d u r a l l y calculates an average. Basic c a l c u l a 
+t i o n s should be supported such as " a g e = t o d a y - b i r t h d a t e " 
+. It is also d e s i r a b l e to be able to call special functions to do 
+complex c a l c u l a t i o n s
+ 
+Some databases are simply not good candidates for an NLI because of 
+characteristics mentioned in previous sections such as many retrieve-only 
+fields, or domains that have a high update rate but cannot be recognized by a 
+pattern. There are also some structural problems chat must be recognized. If the 
+database contains "flat" files about one basic entity, it is reasonably easy to
+ 
+fisuch as required in
+ 
+navigational calculations a naval database.
+ 
+the input standardize
+ 
+must be values,
+ 
+controlled
+ 
+to
+ 
+Support
+ 
+for Metadata
+ 
+Metadata is data about the data in the database. It would be able to tell the 
+user of the METRO application, for example, the kind of information the database 
+has for warehouses and other entities in the application. Such metadata might be 
+extensions of active integrated data dictionaries now available i n some DBMSs.
+ I n an a p p l i c a t i o n - l e v e l system the user should be able to query 
+the metadata to learn about the structure of the database. A different mode, 
+such as the menus used by the EUFID help system, could be used to access 
+metadata, or English language questions to both meta information and the 
+database could be supported.
+ 
+there should be few fields than have values that change rapidly, cannot be 
+recognized by a pattern, and that must be used in qualification, the users of 
+the NLI should have a common use for the data and a common vlew of the data, and 
+there must be some user who understands the questions that will be asked and is 
+available to work with the d e v e l o p e r s of the NLI.
+ 
+Updates
+ 
+Some potential users would like a n a t u r a l - l a n g u a g e interface to 
+include the capability to update the database. Currently, updating through any 
+high level view of the database should be avoided, especially when the view 
+contains joins or derlve4 data, because of the risk of inadvertently entering 
+incorrectly-interpreted data.
+ 
+SUMMARY AND CONCLUSIONS
+ 
+We believe that current system development is limited by the need for good 
+semantic modelling techniques and the length of time needed to build the 
+knowledge base required to interface with a new application. When the knowledge 
+base for the NLI is developed, the database as well as sample input must be 
+considered in the design. Parsing of questions to a database cannot be divorced 
+from the database contents since semantic interpretation can only be determined 
+in the context of that database. On the other hand, a robust system cannot be 
+developed by considering only database structure and content, because the range 
+of the questions allowed would not accurately reflect the user view of the 
+application and also would not account for all the information that is inferred 
+at some level.
+ 
+For many years, researchers have been attempting to build robust systems for 
+natural-language access to databases. It is not clear that such a system exists 
+for general use [0SI79]. There are problems that need to be solved on both the 
+front end, the parsing of the English question, and the back end, the 
+translation of the question into a data management system query. It is important 
+to understand the types of requests, types of functions, and types of databases 
+that can be supported by a specific NLI. Some general guidelines that can be 
+applied to the selection of applications for current NLI front ends are 
+suggested below:
+ lo
+ 
+the underlying DBMS should interactive query language,
+ 
+have
+ 
+an
+ 
+the DMS view should be relational or at least support multiple access paths, the 
+database arrays either tures, should not contain of values or of struc-
+ 
+ACKNOWLEDGEMENTS We would like to acknowledge the many people who have 
+contributed to EUFID development: David Brill, Marilyn Crilley, Dolores Dawson, 
+LeRoy Gates, Iris Kameny, Philip Klahr, Antonio Leal, Charlotte Linde, Eric 
+Lund, Fillp Machi, Kenneth Miller, Eileen Lepoff, Beatrice Oshika, Roberta 
+Peeler, Douglas Pintar, Arie Shoshani, Martin Vago, and Jim Weiner. 
+
+REFERENCES 
+
+[AHO72] Aho, A. V. and J. D. Ullman. "The Theory of Parsing, Translation, and Compiling", Vol. I: Parsing, Prentice-Hall, 1972, pp. 314-23Z.
+
+[BURGBff] Burger, J. F . "Semantic Database Mapping in EUFID", Proceedings of the 198Z ACM/SIGMOD Conference, ~3"n~-a'-o~caY-'-Ca~., May 14-16, 198ff. 
+
+[BURG82] Burger , J. F. and Marjorie Templeton. "Recommendations for an Internal Input Language Eor the Knowledge-Based System', System Development Corporation internal paper N-(L)-24890/021/00, January 5, 1982. 
+
+[CODD74] Codd, E. F., "Seven Steps to Rendezvous with the Casual User', Proc. IFIP TC-2 Working Conference on Data-'5"~e'-~a~a~emen~ ~ystems, Car ~ gese, Corsica, April 1-5, 1974, in J. W. Kimbie and K. I. Koffeman (Eds.), "Data Base Management" North-Holland, 1974. 
+
+[CULL80] Cullinane Corporation, "IQS Summary Description", May 1980. 
+
+[DATE77] Date, C. J., "An Introduction to Database Systems', second edition, Addison-Wesley Publishing, Menlo Park, CA, 1977. 
+
+[EDP82] "Query Systems for End Users", EDP Analyzer, Vol. 20, No. 9, September, 1982. 
+
+[HARR78] Harris, L. R., "The ROBOT System: Natural Language Processing Applied to Data Base Query', Proceedings ACM 78 Annual Conference, 1978. 
+
+[HEND77] Hendrix, G. G., E. D. Sacerdoti, D. Sagalowicz, and J. Slocum, "Developing a Natural Language Interface to Complex Data" SRI Report 78-305, August 1977. 
+
+[HONE76] Honeywell, WWMCCS: World Wide Data Management System User's Guide, Honeywell DE97 Ray.3, April 1976. 
+
+[KELL71] Kellogg, C. H., J. F. Burger, T. billet, and K. Fogt, "The CONVERSE Natural Language Data management System: Current Status and Plans", Proceedings of the ACM SZmposium on :ntormation ~ ~ a n d ~etrleval-~, University o£ Maryland, College Park, MD, 1971, pp. 33-46. 
+
+[MYLO76] Mylopoulos, J., A. 8 o r g i d a , P. Cohen, N. Roussopoulos, J. Tsotsos, and H. Wong, "TORUS: A Step Towards Bridging the Gap between Data Bases and the Casual User", in Information Volume 2 1976, Pergamon Press, pp 49-64. 
+
+[OLNE78] Olney, John, "Enabling EUFID to Handle Negative Expressions", SDC SP-3996, August 1978. 
+
+[OS179] Operating Systems, Inc., "An Assessment of Natural Language Interfaces for Command and Control Database Query", Logicon/OSI Division report for WWMCCS System 16 
+
+[SCHA77] Scha, R. J. H., "Phillips Question-Answering System PHLIQAI", in SIGART Newsletter Number 61, February 1977, Association for Computing machinery, New York. 
+
+[SIMM65] Simmons, R. F., "Answering English Questions by Computer -- a Survey', Comm. ACM 8,1, January 1965, 53-70. 
+
+[STON76] Stonebraker, M., et. al., "The Design and Implementation of INGRES', Electronics Research Laboratory, College of Engineering, University of California at Berkeley, Memorandum No. ERL-M577, 27 January 1976. 
+
+[TEMP79] Templeton, M. P., "EUFID: A Friendly and Flexible Frontend for Data Management Systems", Proceedings of the 1979 National Conference Association of Computational Linguistics, August, 1979. 
+
+[TEMP80] Templeton, M. P., "A Natural Language User Interface", Proceedings of "Pathwazs ~o System rn~ri%7", washington DYC. C a h ~ o£ ACM, 1980. 
+
+[THOM69], Thompson, F. B., P. C. Lockemann, B. H. Dostert, and R. Deverill, "REL: A Rapidly Extensible Language System", in Proceedings of the 24th ACM National Conference, s~ociation--"~or Computing machinery, New York, 1969, pp 399-417. 
+
+[WALT77] Waltz, D. L., " N a t u r a l Language Interfaces", in SIGART Newsletter Number 61, F e b r u a r y - ' ~ 7 , Association for Computing machinery, New York. 
+
+[WALT78] Waltz, D. L., "An English language Question Answering System for a Large Relational Database", Communications of the ACM 21, 7(July 1978), pp 526-539. 
+
+[WOOD72] Woods, W. A., R. M. Kaplan, B. Nash-Webber, The Lunar Sciences N a t u r a l L a n @ u a ~ e - " r n f o r m a t i o n ' System ~'~Report, Report number~, Bolt, Beranek, and Newman, Inc., Cambridge, MA, 15 June 1972.
