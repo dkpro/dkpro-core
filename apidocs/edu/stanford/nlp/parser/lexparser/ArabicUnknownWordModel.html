@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- NewPage -->
-<html lang="de">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>ArabicUnknownWordModel (DKPro Core GPL 1.6.0 API)</title>
@@ -107,7 +107,7 @@
 <pre>public class <span class="strong">ArabicUnknownWordModel</span>
 extends edu.stanford.nlp.parser.lexparser.BaseUnknownWordModel</pre>
 <div class="block">This is a basic unknown word model for Arabic.  It supports 4 different
- types of feature modeling; see <a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#getSignature(java.lang.String, int)"><code>getSignature(String, int)</code></a>.
+ types of feature modeling; see <a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#getSignature(java.lang.String,%20int)"><code>getSignature(String, int)</code></a>.
 
  <i>Implementation note: the contents of this class tend to overlap somewhat
  with <code>EnglishUnknownWordModel</code> and were originally included in <code>BaseLexicon</code>.</div>
@@ -166,7 +166,7 @@ extends edu.stanford.nlp.parser.lexparser.BaseUnknownWordModel</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#ArabicUnknownWordModel(edu.stanford.nlp.parser.lexparser.Options, edu.stanford.nlp.parser.lexparser.Lexicon, edu.stanford.nlp.util.Index, edu.stanford.nlp.util.Index)">ArabicUnknownWordModel</a></strong>(edu.stanford.nlp.parser.lexparser.Options&nbsp;op,
+<td class="colOne"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#ArabicUnknownWordModel(edu.stanford.nlp.parser.lexparser.Options,%20edu.stanford.nlp.parser.lexparser.Lexicon,%20edu.stanford.nlp.util.Index,%20edu.stanford.nlp.util.Index)">ArabicUnknownWordModel</a></strong>(edu.stanford.nlp.parser.lexparser.Options&nbsp;op,
                       edu.stanford.nlp.parser.lexparser.Lexicon&nbsp;lex,
                       edu.stanford.nlp.util.Index&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;wordIndex,
                       edu.stanford.nlp.util.Index&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;tagIndex)</code>
@@ -174,7 +174,7 @@ extends edu.stanford.nlp.parser.lexparser.BaseUnknownWordModel</pre>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#ArabicUnknownWordModel(edu.stanford.nlp.parser.lexparser.Options, edu.stanford.nlp.parser.lexparser.Lexicon, edu.stanford.nlp.util.Index, edu.stanford.nlp.util.Index, edu.stanford.nlp.stats.ClassicCounter)">ArabicUnknownWordModel</a></strong>(edu.stanford.nlp.parser.lexparser.Options&nbsp;op,
+<td class="colOne"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#ArabicUnknownWordModel(edu.stanford.nlp.parser.lexparser.Options,%20edu.stanford.nlp.parser.lexparser.Lexicon,%20edu.stanford.nlp.util.Index,%20edu.stanford.nlp.util.Index,%20edu.stanford.nlp.stats.ClassicCounter)">ArabicUnknownWordModel</a></strong>(edu.stanford.nlp.parser.lexparser.Options&nbsp;op,
                       edu.stanford.nlp.parser.lexparser.Lexicon&nbsp;lex,
                       edu.stanford.nlp.util.Index&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;wordIndex,
                       edu.stanford.nlp.util.Index&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;tagIndex,
@@ -197,17 +197,14 @@ extends edu.stanford.nlp.parser.lexparser.BaseUnknownWordModel</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#getSignature(java.lang.String, int)">getSignature</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;word,
+<td class="colLast"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#getSignature(java.lang.String,%20int)">getSignature</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;word,
             int&nbsp;loc)</code>
-<div class="block">6-9 were added for Arabic. 6 looks for the prefix Al- (and
- knows that Buckwalter uses various symbols as letters), while 7 just looks
- for numbers and last letter. 8 looks for Al-, looks for several useful
- suffixes, and tracks the first letter of the word.</div>
+<div class="block">6-9 were added for Arabic.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#getSignatureIndex(int, int, java.lang.String)">getSignatureIndex</a></strong>(int&nbsp;index,
+<td class="colLast"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#getSignatureIndex(int,%20int,%20java.lang.String)">getSignatureIndex</a></strong>(int&nbsp;index,
                  int&nbsp;sentencePosition,
                  <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;word)</code>
 <div class="block">Returns the index of the signature of the word numbered wordIndex, where
@@ -220,7 +217,7 @@ extends edu.stanford.nlp.parser.lexparser.BaseUnknownWordModel</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>float</code></td>
-<td class="colLast"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#score(edu.stanford.nlp.parser.lexparser.IntTaggedWord, int, double, double, double, java.lang.String)">score</a></strong>(edu.stanford.nlp.parser.lexparser.IntTaggedWord&nbsp;iTW,
+<td class="colLast"><code><strong><a href="../../../../../edu/stanford/nlp/parser/lexparser/ArabicUnknownWordModel.html#score(edu.stanford.nlp.parser.lexparser.IntTaggedWord,%20int,%20double,%20double,%20double,%20java.lang.String)">score</a></strong>(edu.stanford.nlp.parser.lexparser.IntTaggedWord&nbsp;iTW,
      int&nbsp;loc,
      double&nbsp;c_Tseen,
      double&nbsp;total,
@@ -240,7 +237,7 @@ extends edu.stanford.nlp.parser.lexparser.BaseUnknownWordModel</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</a></code></li>
+<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
 </ul>
 </li>
 </ul>

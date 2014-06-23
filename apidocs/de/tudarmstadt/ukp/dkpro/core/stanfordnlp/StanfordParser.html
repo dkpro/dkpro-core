@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- NewPage -->
-<html lang="de">
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 <title>StanfordParser (DKPro Core GPL 1.6.0 API)</title>
@@ -177,7 +177,10 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_ANNOTATIONTYPE_TO_PARSE">PARAM_ANNOTATIONTYPE_TO_PARSE</a></strong></code>
 <div class="block">This parameter can be used to override the standard behavior which uses the <i>Sentence</i>
- annotation as the basic unit for parsing.</div>
+ annotation as the basic unit for parsing.<br/>
+ If the parameter is set with the name of an annotation type <i>x</i>, the parser will no
+ longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.<br/>
+ Default: <code>null</code></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -240,7 +243,8 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_READ_POS">PARAM_READ_POS</a></strong></code>
 <div class="block">Sets whether to use or not to use already existing POS tags from another annotator for the
- parsing process.</div>
+ parsing process.<br/>
+ Default: <code>false</code></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -271,7 +275,9 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_WRITE_PENN_TREE">PARAM_WRITE_PENN_TREE</a></strong></code>
 <div class="block">If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
- containing the whole parse tree in Penn Treebank style format.</div>
+ containing the whole parse tree in Penn Treebank style format.<br/>
+ 
+ Default: <code>false</code></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -326,7 +332,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#doCreateDependencyTags(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, edu.stanford.nlp.trees.Tree, java.util.List)">doCreateDependencyTags</a></strong>(<a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</a>&nbsp;sfAnnotator,
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#doCreateDependencyTags(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator,%20edu.stanford.nlp.trees.Tree,%20java.util.List)">doCreateDependencyTags</a></strong>(<a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</a>&nbsp;sfAnnotator,
                       edu.stanford.nlp.trees.Tree&nbsp;parseTree,
                       <a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&gt;&nbsp;tokens)</code>&nbsp;</td>
 </tr>
@@ -378,7 +384,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></h3>
-<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long, int)" title="class or interface in java.lang">wait</a></code></li>
+<code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#clone()" title="class or interface in java.lang">clone</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#equals(java.lang.Object)" title="class or interface in java.lang">equals</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#finalize()" title="class or interface in java.lang">finalize</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#getClass()" title="class or interface in java.lang">getClass</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#hashCode()" title="class or interface in java.lang">hashCode</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notify()" title="class or interface in java.lang">notify</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#notifyAll()" title="class or interface in java.lang">notifyAll</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#toString()" title="class or interface in java.lang">toString</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait()" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long)" title="class or interface in java.lang">wait</a>, <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true#wait(long,%20int)" title="class or interface in java.lang">wait</a></code></li>
 </ul>
 </li>
 </ul>
