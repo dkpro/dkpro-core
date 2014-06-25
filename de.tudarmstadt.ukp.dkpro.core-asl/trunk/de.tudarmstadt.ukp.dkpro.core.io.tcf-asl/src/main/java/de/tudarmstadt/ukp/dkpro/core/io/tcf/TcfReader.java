@@ -47,7 +47,7 @@ import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.io.WLFormatException;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParse;
 import eu.clarin.weblicht.wlfxb.tc.api.Reference;
-import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
+import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.xb.WLData;
 
 /**
@@ -56,7 +56,7 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * its annotations which is required in CAS annotation. Hence, addresses are manually calculated per
  * tokens and stored in a map (token_id, token(CAS object)) where later we get can get the offset
  * from the token
- * 
+ *
  * @author Richard Eckart de Castilho
  * @author Seid Muhie Yimam
  */
@@ -76,7 +76,7 @@ public class TcfReader
         try {
             is = new BufferedInputStream(res.getInputStream());
             WLData wLData = WLDObjector.read(is);
-            TextCorpusStored aCorpusData = wLData.getTextCorpus();
+            TextCorpus aCorpusData = wLData.getTextCorpus();
             convertToCas(aJCas, aCorpusData);
         }
         catch (WLFormatException e) {
@@ -88,7 +88,7 @@ public class TcfReader
         }
     }
 
-    private void convertToCas(JCas aJCas, TextCorpusStored aCorpusData)
+    private void convertToCas(JCas aJCas, TextCorpus aCorpusData)
     {
         convertText(aJCas, aCorpusData);
         Map<String, Token> tokens = convertTokens(aJCas, aCorpusData);
@@ -113,7 +113,7 @@ public class TcfReader
      * layer. The getText Method of {@link TextCorpusStreamed} is not used as some tokens, such as
      * special characters represented differently than in the original text.
      */
-    private void convertText(JCas aJCas, TextCorpusStored aCorpusData)
+    private void convertText(JCas aJCas, TextCorpus aCorpusData)
     {
         StringBuilder text = new StringBuilder();
 
@@ -130,7 +130,7 @@ public class TcfReader
      * 
      * @return returns {@code Map} of (token_id, Token), for later references
      */
-    private Map<String, Token> convertTokens(JCas aJCas, TextCorpusStored aCorpusData)
+    private Map<String, Token> convertTokens(JCas aJCas, TextCorpus aCorpusData)
     {
         if (aCorpusData.getTokensLayer() == null) {
             // No layer to read from.
@@ -161,7 +161,7 @@ public class TcfReader
         return tokens;
     }
 
-    private void convertPos(JCas aJCas, TextCorpusStored aCorpusData, Map<String, Token> aTokens)
+    private void convertPos(JCas aJCas, TextCorpus aCorpusData, Map<String, Token> aTokens)
     {
         if (aCorpusData.getPosTagsLayer() == null) {
             return;
@@ -183,7 +183,7 @@ public class TcfReader
         }
     }
 
-    private void convertLemma(JCas aJCas, TextCorpusStored aCorpusData, Map<String, Token> aTokens)
+    private void convertLemma(JCas aJCas, TextCorpus aCorpusData, Map<String, Token> aTokens)
     {
         if (aCorpusData.getLemmasLayer() == null) {
             return;
@@ -206,7 +206,7 @@ public class TcfReader
 
     }
 
-    private void convertSentences(JCas aJCas, TextCorpusStored aCorpusData,
+    private void convertSentences(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
     {
         if (aCorpusData.getSentencesLayer() == null) {
@@ -227,7 +227,7 @@ public class TcfReader
         }
     }
 
-    private void convertDependencies(JCas aJCas, TextCorpusStored aCorpusData,
+    private void convertDependencies(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
     {
         if (aCorpusData.getDependencyParsingLayer() == null) {
@@ -292,7 +292,7 @@ public class TcfReader
         }
     }
 
-    private void convertNamedEntities(JCas aJCas, TextCorpusStored aCorpusData,
+    private void convertNamedEntities(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
     {
         if (aCorpusData.getNamedEntitiesLayer() == null) {
@@ -329,7 +329,7 @@ public class TcfReader
      * Second, an iteration is made through all the maps and the {@link CoreferenceChain} and
      * {@link CoreferenceLink} annotations are constructed.
      */
-    private void convertCoreference(JCas aJCas, TextCorpusStored aCorpusData,
+    private void convertCoreference(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
     {
         if (aCorpusData.getReferencesLayer() == null) {
@@ -364,7 +364,7 @@ public class TcfReader
     }
 
     private void storeReferencesAndTargetsInMap(Map<Integer, CoreferenceLink> aReferencesMap,
-            eu.clarin.weblicht.wlfxb.tc.api.ReferencedEntity entity, TextCorpusStored aCorpusData,
+            eu.clarin.weblicht.wlfxb.tc.api.ReferencedEntity entity, TextCorpus aCorpusData,
             Map<String, Token> aTokens, JCas aJcas)
     {
         for (Reference reference : entity.getReferences()) {
