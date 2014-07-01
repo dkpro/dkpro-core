@@ -168,6 +168,41 @@ public class BinaryCasWriterReaderTest
         read(testFolder.getRoot().getPath(), NONE, true); // Type system is reinitialized from the persisted CAS
     }
 
+    @Test
+    public void readWriteZipMinimal()
+            throws Exception
+    {
+        String targetZip = "jar:file:target/archive.zip";
+        
+        JCas out = JCasFactory.createJCas();
+        out.setDocumentLanguage("en");
+        out.setDocumentText("This is a test.");
+        DocumentMetaData meta = DocumentMetaData.create(out);
+        meta.setDocumentId("document");
+        
+        AnalysisEngine writer = createEngine(
+                BinaryCasWriter.class, 
+                BinaryCasWriter.PARAM_FORMAT, "6", 
+                BinaryCasWriter.PARAM_TARGET_LOCATION, targetZip,
+                BinaryCasWriter.PARAM_TYPE_SYSTEM_LOCATION, "typesystem.bin");
+        
+        writer.process(out);
+        writer.collectionProcessComplete();
+        
+        CollectionReader reader = CollectionReaderFactory.createReader(
+                BinaryCasReader.class,
+                BinaryCasReader.PARAM_SOURCE_LOCATION, targetZip,
+                BinaryCasReader.PARAM_PATTERNS, "*.bin",
+                BinaryCasReader.PARAM_TYPE_SYSTEM_LOCATION, "typesystem.bin");
+        
+        JCas in = JCasFactory.createJCas();
+        reader.getNext(in.getCas());
+        
+        assertEquals(out.getDocumentLanguage(), in.getDocumentLanguage());
+        assertEquals(out.getDocumentText(), in.getDocumentText());
+        assertEquals(DocumentMetaData.get(out).getDocumentId(), DocumentMetaData.get(in).getDocumentId());
+    }
+    
     public void write(String aLocation, String aFormat, boolean aWriteTypeSystem)
         throws Exception
     {
@@ -280,17 +315,20 @@ public class BinaryCasWriterReaderTest
                             aLoadExternal ? "typesystem.bin" : null);
         }
 
+        // Test reading into CAS
         CAS cas = CasCreationUtils.createCas(tsd, null, null);
-        
         reader.getNext(cas);
         String refText1 = readFileToString(new File("src/test/resources/texts/example1.txt"));
         assertEquals(refText1, cas.getDocumentText());
         assertEquals("latin", cas.getDocumentLanguage());
-        
-        reader.getNext(cas);
+
+        // Test reading into JCas
+        JCas jcas = JCasFactory.createJCas();
+        reader.getNext(jcas.getCas());
+        assertEquals("latin", DocumentMetaData.get(jcas).getLanguage());
         String refText2 = readFileToString(new File("src/test/resources/texts/example2.txt"));
-        assertEquals(refText2, cas.getDocumentText());
-        assertEquals("latin", cas.getDocumentLanguage());
+        assertEquals(refText2, jcas.getDocumentText());
+        assertEquals("latin", jcas.getDocumentLanguage());
         
         assertFalse(reader.hasNext());
     }
