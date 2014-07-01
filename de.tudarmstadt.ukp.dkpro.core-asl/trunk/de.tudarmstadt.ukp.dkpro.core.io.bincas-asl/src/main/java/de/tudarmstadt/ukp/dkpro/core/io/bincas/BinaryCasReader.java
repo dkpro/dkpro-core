@@ -32,6 +32,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.CASMgrSerializer;
@@ -172,6 +173,14 @@ public class BinaryCasReader
         }
         finally {
             closeQuietly(is);
+        }
+        
+        // Initialize the JCas sub-system which is the most often used API in DKPro Core components
+        try {
+            aCAS.getJCas();
+        }
+        catch (CASException e) {
+            throw new CollectionException(e);
         }
     }
     
