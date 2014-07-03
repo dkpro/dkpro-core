@@ -570,8 +570,7 @@
 		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
 		<echo>================================</echo>
 		<echo> </echo>
-		<echo>JARs containing the TreeTagger binaries and models have been generated in:</echo>
-		<echo>   ${outputDir}.</echo>
+		<echo>JARs containing the TreeTagger binaries and models have been generated.</echo>
 		<echo> </echo>
 		<echo>YOU MAY NOT REDISTRIBUTE THESE JARS WITHOUT THE EXPLICIT PERMISSION</echo>
 		<echo> </echo>
