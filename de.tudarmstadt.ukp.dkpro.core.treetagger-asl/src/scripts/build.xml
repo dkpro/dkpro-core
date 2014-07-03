@@ -35,7 +35,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="bg,de,en,es,et,fi,fr,it,la,nl,pt,sl,sw,zh"/>
+	<target name="separate-jars" depends="check-license,bg,de,en,es,et,fi,fr,it,la,nl,pt,sl,sw,zh,jar-notice"/>
 
 	<target name="bg">
 		<mkdir dir="target/download"/>
@@ -544,4 +544,44 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-</project>
+	
+	<target name="check-license">
+		<!-- CHECK LICENSE AGREEMENT -->
+			
+		<echo>Before I can proceed downloading TreeTagger, you have to read and agree to the</echo>
+		<echo>TreeTagger license agreement. I am trying to download the latest version of the</echo>
+		<echo>agreement from the TreeTagger homepage.</echo>
+		<echo/>
+		<tempfile property="treetagger.license.tempfile" deleteonexit="true"/>
+		<get src="http://www.ims.uni-stuttgart.de/~schmid/Tagger-Licence" dest="${treetagger.license.tempfile}"/>
+		<loadfile property="treetagger.license.text" srcfile="${treetagger.license.tempfile}"/>
+		<echo>${treetagger.license.text}</echo>
+		<input message="Do you agree to respect the TreeTagger license agreement? (y/n)"
+			validargs="y,n"
+			addProperty="treetagger.license.ok"/>
+		<condition property="do.abort.on.treetagger.license">
+			<equals arg1="n" arg2="${treetagger.license.ok}"/>
+		</condition>
+		<fail if="do.abort.on.treetagger.license">License agreement not accepted. ABORTING.</fail>
+	</target>
+
+	<target name="jar-notice">
+		<echo>================================</echo>
+		<echo>== IMPORTANT LICENSE REMINDER ==</echo>
+		<echo>================================</echo>
+		<echo> </echo>
+		<echo>JARs containing the TreeTagger binaries and models have been generated in:</echo>
+		<echo>   ${outputDir}.</echo>
+		<echo> </echo>
+		<echo>YOU MAY NOT REDISTRIBUTE THESE JARS WITHOUT THE EXPLICIT PERMISSION</echo>
+		<echo> </echo>
+		<echo>from HELMUT SCHMID at the Institute for Computational Linguistics of the</echo>
+		<echo>University of Stuttgart and/or by the ORIGINAL CREATORS OF THE MODEL FILES.</echo>
+		<echo> </echo>
+		<echo>For Maven users:</echo>
+		<echo> </echo>
+		<echo>Use the build target "local-maven" (ant local-maven) to automatically install</echo>
+		<echo>the jars into your local Maven repository at ~/.m2/repository.</echo>
+		<echo> </echo>
+		<echo>AGAIN REMEMBER THAT YOU MAY NOT REDISTRIBUTE THESE JARS - Thanks.</echo>
+	</target></project>
