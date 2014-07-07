@@ -184,7 +184,8 @@
 		  - 2011-11-07 | 2013-02-14 | 9770d507bd3cfb30385e1c2d4ce46f89
 		  - 2013-02-14 | 2013-04-03 | 33359d3deca5f9acab7f3b5b38529e17
 		  - 2013-04-03 | 2013-10-07 | 30a9c4deed380e7986a4a76753ecde51
-		  - 2013-10-07 | now        | 8488c4319fac414802637b654a61db37
+		  - 2013-10-07 | 2014-05-20 | 8488c4319fac414802637b654a61db37
+		  - 2014-05-20 | now        | 48f14061833274842d6cf5ed3db7b903
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/spanish-par-linux-3.2-utf8.bin.gz" 
@@ -193,10 +194,10 @@
 		<gunzip src="target/download/spanish-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish-par-linux-3.2-utf8.bin" 
-    		md5="8488c4319fac414802637b654a61db37"
+    		md5="48f14061833274842d6cf5ed3db7b903"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20131007"
+    		upstreamVersion="20140520"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="es" 
@@ -212,11 +213,11 @@
 	<target name="et">
 		<mkdir dir="target/download"/>
 		
-		<!-- FILE: estonian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
+		<!-- FILE: estonian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2011-01-24 | now        | 4a98b412e36afefbc204fca9e561f5cb
 		  -->
     	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian-par-linux-3.2.bin.gz" 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/estonian-par-linux-3.2-utf8.bin.gz" 
     		dest="target/download/estonian-par-linux-3.2.bin.gz" 
     		skipexisting="true"/>
 		<gunzip src="target/download/estonian-par-linux-3.2.bin.gz"/>
@@ -241,23 +242,24 @@
 	<target name="fi">
 		<mkdir dir="target/download"/>
 		
-		<!-- FILE: finnish-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-07-16 | now        | 241dbbae52baad70787a952d3a0e71a3
+		<!-- FILE: finnish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-07-16 | 2014-07-04 | 241dbbae52baad70787a952d3a0e71a3
+		  - 2014-07-04 | now        | c0659e3dbbc5d74f15bb3174c0597155
 		  -
 		  - Corpus: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/
 		  - Tagset: http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/FinnTreeBankManual.pdf
 		  -->
     	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2.bin.gz" 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/finnish-par-linux-3.2-utf8.bin.gz" 
     		dest="target/download/finnish-par-linux-3.2.bin.gz" 
     		skipexisting="true"/>
 		<gunzip src="target/download/finnish-par-linux-3.2.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/finnish-par-linux-3.2.bin" 
-    		md5="241dbbae52baad70787a952d3a0e71a3"
+    		md5="c0659e3dbbc5d74f15bb3174c0597155"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20130716"
+    		upstreamVersion="20140704"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="fi" 
