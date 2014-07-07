@@ -24,7 +24,8 @@
 	  - Output package configuration
 	  -->
 	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/treetagger/lib"/>
-
+	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/treetagger"/>
+	
 	<target name="local-maven">
 		<property name="install-artifact-mode" value="local"/>
 		<antcall target="separate-jars"/>
@@ -35,7 +36,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="check-license,bg,de,en,es,et,fi,fr,it,la,nl,pt,sl,sw,zh,jar-notice"/>
+	<target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,it,la,nl,pt,sl,sw,zh,jar-notice"/>
 
 	<target name="bg">
 		<mkdir dir="target/download"/>
@@ -547,6 +548,73 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+	<target name="install-executables">
+		<property name="version.bin" value="20131118.0"/>
+			
+		<fail unless="outputDir">No output directory set.</fail>
+		<mkdir dir="${outputDir}/bin"/>
+		<get src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/Tagger-Licence" dest="${outputDir}/bin/LICENSE.txt"/>
+		
+		<!-- 
+		  - Helmut Schmid seems to have a habit of releasing new versions of TreeTagger without
+		  - updating the version number of maintaining any kind of changes file. Thus we record
+		  - here at which dates we notice that files change. We have also observed that treetagger
+		  - produces different output on different platforms even when using the same model file
+		  - and supposedly the same version of the package (e.g. 3.2).
+		  -->
+		<!-- FILE: tree-tagger-MacOSX-3.2-intel.tar.gz - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-19 | 2012-04-25 | 076c8002337b89a9a8581aae81d5d481
+		  - 2012-04-25 | now        | a47bac91b5f373c5ba8703faa5ec7dd7 : buffer flush after 10 lines with -prob 
+		  -->
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2-intel.tar.gz"
+			platform="osx-x86_64" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2-intel.tar.gz"
+			platform="osx-x86_32" file="tree-tagger" md5="a47bac91b5f373c5ba8703faa5ec7dd7"/>
+		
+		<!-- FILE: tree-tagger-MacOSX-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-19 | now        | 63560dcb3a5932bc5ae0e9aab8f48e42
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-MacOSX-3.2.tar.gz"
+			platform="osx-ppc" file="tree-tagger" md5="63560dcb3a5932bc5ae0e9aab8f48e42"/>
+		  -->
+		
+		<!-- FILE: tree-tagger-linux-3.2-64bit.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2012-08-03 | 2012-09-12 | 1bab69906368061d6e7c7466abdeb643 : build can now be 32 bit or 64 bit 
+		  - 2012-09-12 | 2013-02-28 | 4b6459574b6b334a090399b76dbc2cdb
+		  - 2013-02-28 | 2013-05-07 | 3c8433d34cc2430197f8ed7b9e220b9c : only 64 bit build
+		  - 2013-05-07 | 2013-11-18 | 9c015219f8a5c696f03ee43b72e913b0
+		  - 2013-11-18 | now        | cbc0833fd6cb8c1ec1ea4cae4d40b25a
+		  -->
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-linux-3.2.tar.gz"
+			platform="linux-x86_64" file="tree-tagger" md5="cbc0833fd6cb8c1ec1ea4cae4d40b25a"/>
+
+		<!-- FILE: tree-tagger-linux-3.2.tar.gz  - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - xxxx-xx-xx | 2010-11-19 | 293ecb477a9f3993206674d68e81b792 (contains dynamically linked binary)
+		  - 2010-11-19 | 2012-02-06 | 3f1d752b0f8c5ad2667346caafaaa5e7 (statically linked binary again)
+		  - 2012-02-06 | 2012-04-18 | 6599b70197be926a26a4966e34f1cad5 (ELF 32-bit LSB executable, Intel 80386, version 1 (GNU/Linux), statically linked, for GNU/Linux 2.6.32, stripped)
+		  - 2012-04-18 | 2012-08-03 | 45bfecd9daac30a4c05c40d03ed1f6f9 : buffer flush after 10 lines with -prob 
+		  - 2012-08-03 | 2013-02-02 | 33c2b37803114ec68f36733b1f8b1702 : build can now be 32 bit or 64 bit 
+		  - 2013-02-28 | now        | 32-bit version is no longer available! 
+		<install-executable-file-tar url="ftp://ftp.ims.uni-stuttgart.de/pub/corpora/tree-tagger-linux-3.2.tar.gz"
+			platform="linux-x86_32" file="tree-tagger" md5="33c2b37803114ec68f36733b1f8b1702"/>
+		  -->
+		
+		<!-- FILE: tree-tagger-3.2.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2010-11-19 | 2012-02-06 | 4a58ee2a4177cc4e9bfaead8cec6430d
+		  - 2012-02-06 | now        | bcebb9b9745e2ac12c5226a032b8bfb4 (ELF 32-bit MSB executable, SPARC, version 1 (SYSV), dynamically linked (uses shared libs), stripped)
+		<install-executable-file-tar url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-3.2.tar.gz"
+			platform="solaris-sparc" file="tree-tagger" md5="bcebb9b9745e2ac12c5226a032b8bfb4"/>
+		  -->
+			
+		<!-- FILE: tree-tagger-windows-3.2.zip - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2010-11-19 | 2012-04-25 | 72a5489fe197b0173ea476e2224a6ad6
+		  - 2012-04-25 | now        | c88d7fe1aa63bebaccfa019c222f54ea : buffer flush after 10 lines with -prob
+		  -->
+		<install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
+			platform="windows-x86_32" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
+		<install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
+			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
+	</target>	
+	
 	<target name="check-license">
 		<!-- CHECK LICENSE AGREEMENT -->
 			
@@ -585,4 +653,123 @@
 		<echo>the jars into your local Maven repository at ~/.m2/repository.</echo>
 		<echo> </echo>
 		<echo>AGAIN REMEMBER THAT YOU MAY NOT REDISTRIBUTE THESE JARS - Thanks.</echo>
-	</target></project>
+	</target>
+
+	<macrodef name="install-executable-file-tar">
+		<attribute name="url"/>
+		<attribute name="platform"/>
+		<attribute name="file"/>
+		<attribute name="md5"/>
+		<attribute name="prop.verify.md5" default="verify.md5.@{platform}.@{file}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{platform}.@{file}"/>
+		<sequential>
+			<fail unless="outputDir">No output directory set.</fail>
+	    	<mkdir dir="${outputDir}/bin/@{platform}"/>
+	    	<copy todir="${outputDir}/bin/@{platform}">
+	    		<gzipresource>
+	    			<url url="@{url}"/>
+	    		</gzipresource>
+	    		<chainedmapper>
+		    		<mapper type="flatten"/>
+		    		<firstmatchmapper>
+						<globmapper from="*" to="tree-tagger-@{platform}.tar"/>
+					</firstmatchmapper>
+	    		</chainedmapper>
+	    	</copy>
+	    	<untar src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar" 
+	    		   dest="${outputDir}/bin/@{platform}">
+	    		<patternset>
+	    			<include name="**/@{file}"/>		
+				</patternset>
+	    		<chainedmapper>
+		    		<mapper type="flatten"/>
+	    		</chainedmapper>
+	    	</untar>
+			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.tar"/>
+			
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
+			<condition property="checksum.mismatch">
+				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
+			</condition>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for [@{platform}/@{file}]. 
+Please verify the checksum and if necessary update this script. 
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
+			
+			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
+			<echo>Installed executable for @{platform} systems</echo>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="install-executable-file-zip">
+		<attribute name="url"/>
+		<attribute name="platform"/>
+		<attribute name="file"/>
+		<attribute name="md5"/>
+		<attribute name="prop.verify.md5" default="verify.md5.@{platform}.@{file}"/>
+		<attribute name="prop.verify.md5.actual" default="verify.md5.actual.@{platform}.@{file}"/>
+		<sequential>
+			<fail unless="outputDir">No output directory set.</fail>
+	    	<mkdir dir="${outputDir}/bin/@{platform}"/>
+	    	<copy todir="${outputDir}/bin/@{platform}">
+    			<url url="@{url}"/>
+	    		<chainedmapper>
+		    		<mapper type="flatten"/>
+		    		<firstmatchmapper>
+						<globmapper from="*" to="tree-tagger-@{platform}.zip"/>
+					</firstmatchmapper>
+	    		</chainedmapper>
+	    	</copy>
+	    	<unzip src="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip" 
+	    		   dest="${outputDir}/bin/@{platform}">
+	    		<patternset>
+	    			<include name="**/@{file}"/>		
+				</patternset>
+	    		<chainedmapper>
+		    		<mapper type="flatten"/>
+	    		</chainedmapper>
+	    	</unzip>
+			<delete file="${outputDir}/bin/@{platform}/tree-tagger-@{platform}.zip"/>
+			
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{md5}" verifyproperty="@{prop.verify.md5}"/>
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.verify.md5.actual}"/>
+			<condition property="checksum.mismatch">
+				<equals arg1="false" arg2="${@{prop.verify.md5}}"/>
+			</condition>
+			<fail if="checksum.mismatch">
+MD5 checksum mismatch for [@{platform}/@{file}]. 
+Please verify the checksum and if necessary update this script. 
+Expected: @{md5}
+Actual  : ${@{prop.verify.md5.actual}}
+			</fail>
+
+			<generate-executable-properties url="@{url}" platform="@{platform}" file="@{file}"/>
+			<echo>Installed executable for @{platform} systems</echo>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="generate-executable-properties">
+		<attribute name="url"/>
+		<attribute name="platform"/>
+		<attribute name="file"/>
+		<attribute name="prop.checksum.md5" default="checksum.md5.@{platform}/@{file}"/>
+		<attribute name="prop.checksum.sha1" default="checksum.sha1.@{platform}/@{file}"/>
+		<sequential>
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.checksum.md5}"
+				algorithm="MD5"/>
+			<checksum file="${outputDir}/bin/@{platform}/@{file}" property="@{prop.checksum.sha1}"
+				algorithm="SHA"/>
+			<propertyfile file="${outputDir}/bin/@{platform}/tree-tagger.properties"
+				comment="TreeTagger executable description">
+				<entry  key="url" value="@{url}"/>
+				<entry  key="platform" value="@{platform}"/>
+				<entry  key="downloaded" type="date" value="now"/>
+				<entry  key="md5" value="${@{prop.checksum.md5}}"/>
+				<entry  key="sha1" value="${@{prop.checksum.sha1}}"/>
+			</propertyfile>
+		</sequential>
+	</macrodef>
+</project>
