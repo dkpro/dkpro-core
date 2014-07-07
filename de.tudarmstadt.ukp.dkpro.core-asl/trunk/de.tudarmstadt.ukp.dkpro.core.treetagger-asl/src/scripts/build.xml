@@ -613,6 +613,22 @@
 			platform="windows-x86_32" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
 		<install-executable-file-zip url="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/tree-tagger-windows-3.2.zip"
 			platform="windows-x86_64" file="tree-tagger.exe" md5="c88d7fe1aa63bebaccfa019c222f54ea"/>
+		
+		<clean-pom/>
+		<generate-pom groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin" version="${version.bin}"/>
+		<jar destfile="target/de.tudarmstadt.ukp.dkpro.core.treetagger-bin-${version.bin}.jar" compress="true">
+			<fileset dir="target/model-staging">
+				<include name="META-INF/**/*"/>
+				<include name="**/bin/**/*"/>
+			</fileset>
+		</jar>
+		
+		<install-artifact file="target/de.tudarmstadt.ukp.dkpro.core.treetagger-bin-${version.bin}.jar"
+			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.treetagger-bin"
+			version="${version.bin}"/>
+		
+		<clean-pom/>
 	</target>	
 	
 	<target name="check-license">
