@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+	<name>WebArgumentMetadata</name>
+	<description>Type system for sentiment annotations from Stanford core</description>
+	<version>1.0</version>
+	<vendor>(c) 2014 UKP</vendor>
+	<types>
+		<typeDescription>
+			<name>de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation</name>
+			<description>Stanford CoreNLP Sentiment annotation</description>
+			<supertypeName>uima.tcas.Annotation</supertypeName>
+			<features>
+				<featureDescription>
+					<name>veryNegative</name>
+					<description>Value of veryNegative</description>
+					<rangeTypeName>uima.cas.Double</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>negative</name>
+					<description>Value of negative</description>
+					<rangeTypeName>uima.cas.Double</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>neutral</name>
+					<description>Value of neutral</description>
+					<rangeTypeName>uima.cas.Double</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>positive</name>
+					<description>Value of positive</description>
+					<rangeTypeName>uima.cas.Double</rangeTypeName>
+				</featureDescription>
+				<featureDescription>
+					<name>veryPositive</name>
+					<description>Value of veryPositive</description>
+					<rangeTypeName>uima.cas.Double</rangeTypeName>
+				</featureDescription>
+			</features>
+		</typeDescription>
+	</types>
+</typeSystemDescription>
