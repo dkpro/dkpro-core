@@ -1,3 +1,21 @@
+/**
+ * Copyright 2007-2014
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -18,7 +36,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.ejml.simple.SimpleMatrix;
 
-import java.util.Collection;
 import java.util.Properties;
 
 /**
@@ -30,9 +47,13 @@ import java.util.Properties;
  * @author Ivan Habernal
  */
 @TypeCapability(
-		inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-		outputs = {"de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation"}
+		inputs = {
+				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+				"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"
+		},
+		outputs = {
+				"de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation"
+		}
 )
 public class StanfordSentimentAnalyzer
 		extends JCasAnnotator_ImplBase {
@@ -51,13 +72,7 @@ public class StanfordSentimentAnalyzer
 	@Override
 	public void process(JCas jCas)
 			throws AnalysisEngineProcessException {
-		Collection<Sentence> dkproSentences = JCasUtil.select(jCas, Sentence.class);
-
-		if (dkproSentences.isEmpty()) {
-			throw new AnalysisEngineProcessException(new IllegalArgumentException("No sentences annotated"));
-		}
-
-		for (Sentence sentenceDKPro : dkproSentences) {
+		for (Sentence sentenceDKPro : JCasUtil.select(jCas, Sentence.class)) {
 			String sentenceText = sentenceDKPro.getCoveredText();
 
 			Annotation annotation = pipeline.process(sentenceText);
