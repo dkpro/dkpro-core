@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
-	<name>WebArgumentMetadata</name>
-	<description>Type system for sentiment annotations from Stanford core</description>
-	<version>1.0</version>
-	<vendor>(c) 2014 UKP</vendor>
+	<name>Sentiment</name>
+	<description>Type system for sentiment annotations</description>
+	<version>${version}</version>
+	<vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
 	<types>
 		<typeDescription>
 			<name>de.tudarmstadt.ukp.dkpro.core.sentiment.type.StanfordSentimentAnnotation</name>
