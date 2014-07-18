@@ -84,5 +84,21 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>desc/type/**/*</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>desc/type/**/*</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>
