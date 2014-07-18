@@ -1,1 +1,1 @@
-classpath*:desc/types/*.xml 
+classpath*:desc/types/SentimentTypeSystem.xml

@@ -49,7 +49,7 @@
 				<version>2.4.2</version>
 				<configuration>
 					<typeSystemIncludes>
-						<include>src/main/resources/desc/types/StanfordSentimentTypeSystem.xml</include>
+						<include>src/main/resources/desc/types/SentimentTypeSystem.xml</include>
 					</typeSystemIncludes>
 				</configuration>
 				<executions>
