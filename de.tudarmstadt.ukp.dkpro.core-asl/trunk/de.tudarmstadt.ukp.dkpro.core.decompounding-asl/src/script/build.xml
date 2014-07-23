@@ -51,16 +51,45 @@
 				<include name="toolbox/resources/trees/kompVVic.tree"/>
 			</patternset>
 		</unzip>
-		<install-stub-and-upstream-folder
-			folder="target/download/ASV_Toolbox_Baseformsv1.0l/toolbox/resources/trees"
+		<install-stub-and-upstream-file
+			file="target/download/ASV_Toolbox_Baseformsv1.0l/toolbox/resources/trees/kompVVic.tree"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			md5="b39c2af9277c7aa09a006161d73eee88"
 			upstreamVersion="20130521"
-			metaDataVersion="1"
+			metaDataVersion="0"
 			tool="splitter"
 			language="de"
-			variant="asv">
-		</install-stub-and-upstream-folder>
+			variant="kompVVic"
+			extension="tree"
+			>
+		</install-stub-and-upstream-file>
+		<install-stub-and-upstream-file
+			file="target/download/ASV_Toolbox_Baseformsv1.0l/toolbox/resources/trees/kompVHic.tree"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			md5="21c20d23a46a4d5f232dcf776b92cfc6"
+			upstreamVersion="20130521"
+			metaDataVersion="0"
+			tool="splitter"
+			language="de"
+			variant="kompVHic"
+			extension="tree"
+			>
+		</install-stub-and-upstream-file>
+		<install-stub-and-upstream-file
+			file="target/download/ASV_Toolbox_Baseformsv1.0l/toolbox/resources/trees/grfExt.tree"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			md5="2fcd5f5480c0b850c2706e40be56f8c5"
+			upstreamVersion="20130521"
+			metaDataVersion="0"
+			tool="splitter"
+			language="de"
+			variant="grfExt"
+			extension="tree"
+			>
+		</install-stub-and-upstream-file>
 		
 		<get
 			src="http://extensions.libreoffice.org/extension-center/german-de-de-igerman98-dictionaries/pscreleasefolder.2011-11-05.3634814500/2011.06.21/dict-de_de-igerman98_2011-06-21"
@@ -81,7 +110,7 @@
 			md5="32ca8735c04d9e65d7c9b9c4dc2aebfa"
 			upstreamVersion="20110621"
 			metaDataVersion="2"
-			tool="spelling"
+			tool="splitter"
 			language="de"
 			variant="igerman98"
 			extension="dic">
@@ -93,7 +122,7 @@
 			md5="8af9d073d788dee6c07462a0920faee4"
 			upstreamVersion="20110621"
 			metaDataVersion="0"
-			tool="spelling"
+			tool="splitter"
 			language="de"
 			variant="affix"
 			extension="aff">
@@ -106,7 +135,7 @@
 			md5="d4ba965981f4323a12d5ea71378910e8"
 			upstreamVersion="20110621"
 			metaDataVersion="0"
-			tool="spelling"
+			tool="splitter"
 			language="de"
 			variant="linking"
 			extension="linking">

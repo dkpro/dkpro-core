@@ -45,12 +45,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.CompoundPart;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.LinkingMorpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.AsvToolboxSplitterResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.FrequencyRankerResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.LeftToRightSplitterResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.RankerResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedDictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedFinder;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedLinkingMorphemes;
+import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SharedPatriciaTries;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource.SplitterResource;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.LuceneIndexer;
 
@@ -88,6 +90,34 @@ public class CompoundAnnotatorTest
         String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine"};
         runAnnotator(aed, splits, compoundsParts);
     }
+
+    @Test
+    public void testWithAsvToolbox() throws CASException, UIMAException {
+        AnalysisEngineDescription aed = createEngineDescription(
+                CompoundAnnotator.class,
+                CompoundAnnotator.PARAM_SPLITTING_ALGO,
+                createExternalResourceDescription(
+                        AsvToolboxSplitterResource.class,
+                        AsvToolboxSplitterResource.PARAM_DICT_RESOURCE,
+                        createExternalResourceDescription(SharedDictionary.class),
+                        AsvToolboxSplitterResource.PARAM_MORPHEME_RESOURCE,
+                        createExternalResourceDescription(SharedLinkingMorphemes.class),
+                        AsvToolboxSplitterResource.PARAM_PATRICIA_TRIES_RESOURCE,
+                        createExternalResourceDescription(SharedPatriciaTries.class)),
+                CompoundAnnotator.PARAM_RANKING_ALGO,
+                createExternalResourceDescription(
+                        FrequencyRankerResource.class,
+                        RankerResource.PARAM_FINDER_RESOURCE,
+                        createExternalResourceDescription(SharedFinder.class,
+                                SharedFinder.PARAM_INDEX_PATH, indexPath,
+                                SharedFinder.PARAM_NGRAM_LOCATION, jWeb1TPath)));
+        String[] splits = new String[] { "Aktion", "s", "plan", "Doppel","prozessormaschine",
+                "prozessor","maschine"};
+        String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine",
+                "prozessor","maschine"};
+        runAnnotator(aed, splits, compoundsParts);
+    }
+
 
     @Test
     public void testWithDefaults() throws CASException, UIMAException {
