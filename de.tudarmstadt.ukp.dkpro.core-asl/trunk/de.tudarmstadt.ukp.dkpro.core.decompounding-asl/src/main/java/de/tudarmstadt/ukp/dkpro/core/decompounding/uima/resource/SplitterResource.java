@@ -17,6 +17,9 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
+import static org.apache.uima.util.Level.SEVERE;
+
+import java.io.IOException;
 import java.util.Map;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
@@ -64,9 +67,17 @@ public abstract class SplitterResource
     }
 
     @Override
-    public void afterResourcesInitialized(){
-        splitter.setDictionary(dictResource.getDictionary());
-        splitter.setLinkingMorphemes(morphemesResource.getLinkingMorphemes());
+    public void afterResourcesInitialized() throws RuntimeException {
+        try {
+            splitter.setDictionary(dictResource.getDictionary());
+            splitter.setLinkingMorphemes(morphemesResource.getLinkingMorphemes());
+        }
+        catch (IOException e) {
+            getLogger().log(SEVERE, "IOException caught when getting the dictionary resource");
+            getLogger().log(SEVERE, e.getLocalizedMessage());
+            getLogger().log(SEVERE, e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
 }
