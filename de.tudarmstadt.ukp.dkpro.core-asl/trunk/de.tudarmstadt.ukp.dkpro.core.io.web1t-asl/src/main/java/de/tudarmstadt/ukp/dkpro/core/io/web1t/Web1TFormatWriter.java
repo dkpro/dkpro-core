@@ -29,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 
 @TypeCapability(
@@ -119,6 +120,10 @@ public class Web1TFormatWriter
 	@ConfigurationParameter(name = PARAM_SPLIT_TRESHOLD, mandatory = false, defaultValue = "1.0")
 	private float splitThreshold;
 
+    public static final String PARAM_FEATURE_PATH = "featurePath";
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = false)
+    protected String featurePath;
+
 
 	private Web1TConverter converter;
 
@@ -142,6 +147,9 @@ public class Web1TFormatWriter
 		converter.setMaxNgramLength(maxNgramLength);
 		converter.setToLowercase(lowercase);
 		converter.setOutputEncoding(outputEncoding);
+		if(featurePath == null){
+		    featurePath = Sentence.class.getName();
+		}
 	}
 
     @Override
@@ -150,7 +158,7 @@ public class Web1TFormatWriter
     {
 
         try {
-            converter.add(jcas, inputPaths);
+            converter.add(jcas, inputPaths, jcas.getCas().getTypeSystem().getType(featurePath));
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);

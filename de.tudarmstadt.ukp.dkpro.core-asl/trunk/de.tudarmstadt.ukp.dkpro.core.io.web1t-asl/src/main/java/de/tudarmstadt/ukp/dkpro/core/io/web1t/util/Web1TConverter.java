@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.ConditionalFrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
 
 public class Web1TConverter
@@ -88,13 +87,12 @@ public class Web1TConverter
         }
     }
 
-    public void add(JCas jcas, Set<String> inputPaths)
+    public void add(JCas jcas, Set<String> inputPaths, Type sentenceType)
         throws IOException
     {
         ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
 
         CAS cas = jcas.getCas();
-        Type sentenceType = cas.getTypeSystem().getType(Sentence.class.getName());
 
         for (AnnotationFS annotation : CasUtil.select(cas, sentenceType)) {
 
