@@ -102,9 +102,18 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-asv</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-kompVVic</artifactId>
 			<scope>test</scope>
-			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-kompVHic</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-grfExt</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -126,8 +135,18 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-asv</artifactId>
-				<version>20130521.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-kompVVic</artifactId>
+				<version>20130521.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-kompVHic</artifactId>
+				<version>20130521.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-grfExt</artifactId>
+				<version>20130521.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -155,10 +174,12 @@
 					<configuration>
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-asv</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-kompVVic</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-kompVHic</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-splitter-de-grfExt</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-igerman98</usedDependency>
-							<usedDepedency>de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-affix</usedDepedency>
-							<usedDepedency>de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-linking</usedDepedency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-affix</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.decompounding-model-spelling-de-linking</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>

@@ -60,6 +60,13 @@ public class SharedDictionary
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
 
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_AFFIX_MODEL_LOCATION = "affixModelLocation";
+    @ConfigurationParameter(name = PARAM_AFFIX_MODEL_LOCATION, mandatory = false)
+    protected String affixModelLocation;
+
     private CasConfigurableProviderBase<Dictionary> modelProvider;
     private CasConfigurableProviderBase<InputStream> affixModelProvider;
     private Dictionary dict;
@@ -83,7 +90,7 @@ public class SharedDictionary
                 setDefault(VARIANT, "affix");
                 setDefault(LANGUAGE, "de");
 
-                setOverride(LOCATION, modelLocation);
+                setOverride(LOCATION, affixModelLocation);
                 setOverride(LANGUAGE, language);
                 setOverride(VARIANT, variant);
             }
