@@ -74,16 +74,42 @@
 				<include name="de_DE_igerman98/**/*"/>
 			</patternset>
 		</unzip>
-		<copy file="src/script/res/de_DE.linking" todir="target/download/igerman98/de_DE_igerman98"/>
-		<install-stub-and-upstream-folder
-			folder="target/download/igerman98/de_DE_igerman98"
+		<install-stub-and-upstream-file
+			file="target/download/igerman98/de_DE_igerman98/de_DE_igerman98.dic"
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			md5="32ca8735c04d9e65d7c9b9c4dc2aebfa"
 			upstreamVersion="20110621"
-			metaDataVersion="1"
+			metaDataVersion="2"
 			tool="spelling"
 			language="de"
-			variant="igerman98">
-		</install-stub-and-upstream-folder>
+			variant="igerman98"
+			extension="dic">
+		</install-stub-and-upstream-file>
+		<install-stub-and-upstream-file
+			file="target/download/igerman98/de_DE_igerman98/de_DE_igerman98.aff"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			md5="8af9d073d788dee6c07462a0920faee4"
+			upstreamVersion="20110621"
+			metaDataVersion="0"
+			tool="spelling"
+			language="de"
+			variant="affix"
+			extension="aff">
+		</install-stub-and-upstream-file>
+		<copy file="src/script/res/de_DE.linking" todir="target/download/"/>
+		<install-stub-and-upstream-file
+			file="target/download/de_DE.linking"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.decompounding"
+			md5="d4ba965981f4323a12d5ea71378910e8"
+			upstreamVersion="20110621"
+			metaDataVersion="0"
+			tool="spelling"
+			language="de"
+			variant="linking"
+			extension="linking">
+		</install-stub-and-upstream-file>
 	</target>
 </project>
