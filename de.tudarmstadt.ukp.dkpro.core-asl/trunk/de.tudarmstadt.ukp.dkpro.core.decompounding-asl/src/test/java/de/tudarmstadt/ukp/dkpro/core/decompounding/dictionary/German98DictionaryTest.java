@@ -35,9 +35,9 @@ public class German98DictionaryTest
 	{
 
         final File affixFile = ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.aff"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-affix.aff"), false);
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
 		final German98Dictionary dict = new German98Dictionary(dictFile, affixFile);
 		Assert.assertEquals(298506, dict.getAll().size());
 

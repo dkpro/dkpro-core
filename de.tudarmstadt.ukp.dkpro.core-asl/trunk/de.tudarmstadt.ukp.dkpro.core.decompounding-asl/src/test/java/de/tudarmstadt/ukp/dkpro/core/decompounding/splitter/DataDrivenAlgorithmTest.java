@@ -58,10 +58,10 @@ public class DataDrivenAlgorithmTest
     {
 
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
         SimpleDictionary dict = new SimpleDictionary(dictFile);
         final File morphemesFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE.linking"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-linking.linking"), false);
         LinkingMorphemes morphemes = new LinkingMorphemes(morphemesFile);
         DataDrivenSplitterAlgorithm splitter = new DataDrivenSplitterAlgorithm(dict, morphemes);
         List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
