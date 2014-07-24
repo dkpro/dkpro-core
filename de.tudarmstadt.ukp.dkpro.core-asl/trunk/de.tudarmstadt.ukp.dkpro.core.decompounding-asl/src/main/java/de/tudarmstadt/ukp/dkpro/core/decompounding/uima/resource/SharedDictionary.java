@@ -68,7 +68,7 @@ public class SharedDictionary
     protected String affixModelLocation;
 
     private CasConfigurableProviderBase<Dictionary> modelProvider;
-    private CasConfigurableProviderBase<InputStream> affixModelProvider;
+    private CasConfigurableProviderBase<String> affixModelProvider;
     private Dictionary dict;
 
     @Override
@@ -79,7 +79,7 @@ public class SharedDictionary
             return false;
         }
 
-        affixModelProvider = new ModelProviderBase<InputStream>() {
+        affixModelProvider = new ModelProviderBase<String>() {
             {
                 setContextObject(SharedDictionary.this);
 
@@ -96,7 +96,7 @@ public class SharedDictionary
             }
 
             @Override
-            protected InputStream produceResource(InputStream aStream)
+            protected String produceResource(InputStream aStream)
                 throws Exception
             {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(aStream));
@@ -106,8 +106,7 @@ public class SharedDictionary
                     builder.append(line);
                     builder.append("\n");
                 }
-                InputStream inputStream = new ByteArrayInputStream(builder.toString().getBytes());
-                return inputStream;
+                return builder.toString();
             }
         };
 
@@ -130,7 +129,8 @@ public class SharedDictionary
             protected Dictionary produceResource(InputStream aStream)
                 throws Exception
             {
-                return new German98Dictionary(aStream, affixModelProvider.getResource());
+                return new German98Dictionary(aStream,
+                        new ByteArrayInputStream(affixModelProvider.getResource().getBytes()));
             }
         };
 
