@@ -21,7 +21,6 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -142,12 +141,7 @@ public class CompoundAnnotatorTest
                 "prozessor","maschine"};
         String[] compoundsParts = new String[] { "Aktion", "plan", "Doppel", "prozessormaschine",
                 "prozessor","maschine"};
-
-        try{
-            runAnnotator(aed, splits, compoundsParts);
-        }catch(RuntimeException e){
-            fail(e.getMessage()+"\n"+e.getLocalizedMessage()+("\n"));
-        }
+        runAnnotator(aed, splits, compoundsParts);
     }
 
     private void runAnnotator(AnalysisEngineDescription aed, String[] splits,
