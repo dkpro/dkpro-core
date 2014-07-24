@@ -41,7 +41,7 @@ public class SimpleDictionaryTest
 	public void setUp() throws IOException{
 
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);
 	    dict = new SimpleDictionary(dictFile);
 	}
 
