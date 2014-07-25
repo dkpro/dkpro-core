@@ -1,3 +1,5 @@
+package de.tudarmstadt.ukp.dkpro.core.arktools;
+
 /**
  * Copyright 2007-2014
  * Ubiquitous Knowledge Processing (UKP) Lab
@@ -16,10 +18,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.tudarmstadt.ukp.dkpro.core.arktools;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
@@ -31,11 +34,13 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import cmu.arktweetnlp.Tagger;
-import cmu.arktweetnlp.Tagger.TaggedToken;
-import cmu.arktweetnlp.Twokenize;
+import cmu.arktweetnlp.impl.Model;
+import cmu.arktweetnlp.impl.ModelSentence;
+import cmu.arktweetnlp.impl.Sentence;
+import cmu.arktweetnlp.impl.features.FeatureExtractor;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -46,156 +51,178 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
-
- * As described in:
- * Olutobi Owoputi, Brendan O’Connor, Chris Dyer, Kevin Gimpel, Nathan Schneider and Noah A. Smith.
- * Improved Part-of-Speech Tagging for Online Conversational Text with Word Clusters
- * In Proceedings of NAACL 2013. 
+ * 
+ * As described in: Olutobi Owoputi, Brendan O’Connor, Chris Dyer, Kevin Gimpel,
+ * Nathan Schneider and Noah A. Smith. Improved Part-of-Speech Tagging for
+ * Online Conversational Text with Word Clusters In Proceedings of NAACL 2013.
  *
  * @author zesch
  *
  */
-public class ArktweetPosTagger
-    extends CasAnnotator_ImplBase
-{
+public class ArktweetPosTagger extends CasAnnotator_ImplBase {
 
-    /**
-     * Use this language instead of the document language to resolve the model and tag set mapping.
-     */
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    protected String language;
+	/**
+	 * Use this language instead of the document language to resolve the model
+	 * and tag set mapping.
+	 */
+	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+	protected String language;
 
-    /**
-     * Variant of a model the model. Used to address a specific model if here are multiple models
-     * for one language.
-     */
-    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-    protected String variant;
+	/**
+	 * Variant of a model the model. Used to address a specific model if here
+	 * are multiple models for one language.
+	 */
+	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+	protected String variant;
 
-    /**
-     * Location from which the model is read.
-     */
-    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-    protected String modelLocation;
+	/**
+	 * Location from which the model is read.
+	 */
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+	protected String modelLocation;
 
-    /**
-     * Location of the mapping file for part-of-speech tags to UIMA types.
-     */
-    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String posMappingLocation;
+	/**
+	 * Location of the mapping file for part-of-speech tags to UIMA types.
+	 */
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+	protected String posMappingLocation;
 
-    
-    private Type tokenType;
-    private Feature featPos;
+	private Type tokenType;
+	private Feature featPos;
 
-    private CasConfigurableProviderBase<Tagger> modelProvider;
-    private MappingProvider mappingProvider;
-   
-    @Override
-    public void initialize(UimaContext context)
-            throws ResourceInitializationException
-    {
-        super.initialize(context);
+	private CasConfigurableProviderBase<TweetTagger> modelProvider;
+	private MappingProvider mappingProvider;
 
-        modelProvider = new ModelProviderBase<Tagger>() {
-            {
-                setContextObject(ArktweetPosTagger.this);
+	/**
+	 * Loads a model from a file. The tagger should be ready to tag after
+	 * calling this.
+	 * 
+	 * @param modelFilename
+	 * @throws IOException
+	 */
 
-                setDefault(ARTIFACT_ID,
-                        "${groupId}.arktools-model-tagger-${language}-${variant}");
-                setDefault(LOCATION, "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
-                setDefault(VARIANT, "default");
+	public class TweetTagger {
+		Model model;
+		FeatureExtractor featureExtractor;
 
-                setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
-            }
+		public void loadModel(String modelFilename) throws IOException {
+			model = Model.loadModelFromText(modelFilename);
+			featureExtractor = new FeatureExtractor(model, false);
+		}
+	}
 
+	/**
+	 * One token and its tag.
+	 **/
+	public static class TaggedToken {
+		public AnnotationFS token;
+		public String tag;
+	}
 
-            @Override
-            protected Tagger produceResource(URL aUrl) throws IOException
-            {
-                try {
-                    Tagger tagger = new Tagger();
-                    tagger.loadModel(ResourceUtils.getUrlAsFile(aUrl, false).getAbsolutePath());
-                    
-                    return tagger;
-                }
-                catch (Exception e) {
-                    throw new IOException(e);
-                }
-            }
-        };
+	@Override
+	public void initialize(UimaContext context)
+			throws ResourceInitializationException {
+		super.initialize(context);
 
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/en-arktweet.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        mappingProvider.setDefault("pos.tagset", "arktweet");
-    }
+		modelProvider = new ModelProviderBase<TweetTagger>() {
+			{
+				setContextObject(ArktweetPosTagger.this);
 
-    @Override
-    public void typeSystemInit(TypeSystem aTypeSystem)
-        throws AnalysisEngineProcessException
-    {
-        super.typeSystemInit(aTypeSystem);
+				setDefault(ARTIFACT_ID,
+						"${groupId}.arktools-model-tagger-${language}-${variant}");
+				setDefault(LOCATION,
+						"classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+				setDefault(VARIANT, "default");
 
-        tokenType = aTypeSystem.getType(Token.class.getName());
-        featPos = tokenType.getFeatureByBaseName("pos");
-    }
+				setOverride(LOCATION, modelLocation);
+				setOverride(LANGUAGE, language);
+				setOverride(VARIANT, variant);
+			}
 
-    @Override
-    public void process(CAS cas) throws AnalysisEngineProcessException {
+			@Override
+			protected TweetTagger produceResource(URL aUrl) throws IOException {
+				try {
+					TweetTagger model = new TweetTagger();
+					model.loadModel(ResourceUtils.getUrlAsFile(aUrl, false)
+							.getAbsolutePath());
 
-        String text = cas.getDocumentText();
-        // possibly normalized text as used inside ArktweetTagger
-        String normalizedText = Twokenize.normalizeTextForTagger(text);
+					return model;
+				} catch (Exception e) {
+					throw new IOException(e);
+				}
+			}
+		};
 
-        mappingProvider.configure(cas);
-        modelProvider.configure(cas);
+		mappingProvider = new MappingProvider();
+		mappingProvider.setDefault(MappingProvider.LOCATION,
+				"classpath:/de/tudarmstadt/ukp/dkpro/"
+						+ "core/api/lexmorph/tagset/en-arktweet.map");
+		mappingProvider.setDefault(MappingProvider.BASE_TYPE,
+				POS.class.getName());
+		mappingProvider.setDefault("pos.tagset", "arktweet");
+	}
 
-        List<TaggedToken> taggedTokens = modelProvider.getResource().tokenizeAndTag(text);
+	@Override
+	public void typeSystemInit(TypeSystem aTypeSystem)
+			throws AnalysisEngineProcessException {
+		super.typeSystemInit(aTypeSystem);
 
-        int start = 0;
-        int end = 0;
-        int searchOffset = 0;
-        for (TaggedToken taggedToken : taggedTokens) {
-            String token = taggedToken.token;
-            String tag = taggedToken.tag;
-            
-            int tokenOffset = text.indexOf(token, searchOffset);
-            int normalizedOffset = normalizedText.indexOf(token, searchOffset);
-          
-            // the token cannot be found in the original text
-            // i.e. it has been normalized
-            // we need to find the replaced text
-            if (tokenOffset == -1) {
-                int ampersandOffset = text.indexOf("&", searchOffset);
-                int semicolonOffset = text.indexOf(";", searchOffset);
+		tokenType = aTypeSystem.getType(Token.class.getName());
+		featPos = tokenType.getFeatureByBaseName("pos");
+	}
 
-                start = normalizedOffset;
-                end = normalizedOffset + token.length() + (semicolonOffset - ampersandOffset);
-            } 
-            else {
-                start = tokenOffset;
-                end = tokenOffset + token.length();
-            }            
-            
-            Type posType = mappingProvider.getTagType(tag);
+	@Override
+	public void process(CAS cas) throws AnalysisEngineProcessException {
 
-            AnnotationFS posAnno = cas.createAnnotation(posType, start, end);
-            posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), tag);
-            cas.addFsToIndexes(posAnno);
+		mappingProvider.configure(cas);
+		modelProvider.configure(cas);
 
-            AnnotationFS tokenAnno = cas.createAnnotation(tokenType, start, end);
-            tokenAnno.setFeatureValue(featPos, posAnno);
-            cas.addFsToIndexes(tokenAnno);
+		List<AnnotationFS> tokens = CasUtil.selectCovered(cas, tokenType, 0,
+				cas.getDocumentText().length());
+		List<TaggedToken> taggedToken = tagTweetTokens(tokens,
+				modelProvider.getResource());
 
-            searchOffset = end;
-        }
-    }
+		for (int i = 0; i < taggedToken.size(); i++) {
+
+			Type posType = mappingProvider.getTagType(taggedToken.get(i).tag);
+
+			AnnotationFS posAnno = cas.createAnnotation(posType,
+					taggedToken.get(i).token.getBegin(),
+					taggedToken.get(i).token.getEnd());
+			posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"),
+					taggedToken.get(i).tag);
+			cas.addFsToIndexes(posAnno);
+
+			taggedToken.get(i).token.setFeatureValue(featPos, posAnno);
+		}
+	}
+
+	private List<TaggedToken> tagTweetTokens(
+			List<AnnotationFS> annotatedTokens, TweetTagger tweetTagModel) {
+
+		List<String> tokens = new LinkedList<String>();
+		for (AnnotationFS a : annotatedTokens) {
+			tokens.add(a.getCoveredText());
+		}
+
+		Sentence sentence = new Sentence();
+		sentence.tokens = tokens;
+		ModelSentence ms = new ModelSentence(sentence.T());
+		tweetTagModel.featureExtractor.computeFeatures(sentence, ms);
+		tweetTagModel.model.greedyDecode(ms, false);
+
+		ArrayList<TaggedToken> taggedTokens = new ArrayList<TaggedToken>();
+
+		for (int t = 0; t < sentence.T(); t++) {
+			TaggedToken tt = new TaggedToken();
+			tt.token = annotatedTokens.get(t);
+			tt.tag = tweetTagModel.model.labelVocab.name(ms.labels[t]);
+			taggedTokens.add(tt);
+		}
+		return taggedTokens;
+	}
 }
