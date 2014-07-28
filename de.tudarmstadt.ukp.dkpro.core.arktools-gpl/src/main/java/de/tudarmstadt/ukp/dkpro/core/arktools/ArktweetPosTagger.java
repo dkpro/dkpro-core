@@ -183,21 +183,20 @@ public class ArktweetPosTagger extends CasAnnotator_ImplBase {
 
 		List<AnnotationFS> tokens = CasUtil.selectCovered(cas, tokenType, 0,
 				cas.getDocumentText().length());
-		List<TaggedToken> taggedToken = tagTweetTokens(tokens,
+		List<TaggedToken> taggedTokens = tagTweetTokens(tokens,
 				modelProvider.getResource());
 
-		for (int i = 0; i < taggedToken.size(); i++) {
+		for (TaggedToken taggedToken : taggedTokens) {
 
-			Type posType = mappingProvider.getTagType(taggedToken.get(i).tag);
+			Type posType = mappingProvider.getTagType(taggedToken.tag);
 
 			AnnotationFS posAnno = cas.createAnnotation(posType,
-					taggedToken.get(i).token.getBegin(),
-					taggedToken.get(i).token.getEnd());
+					taggedToken.token.getBegin(), taggedToken.token.getEnd());
 			posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"),
-					taggedToken.get(i).tag);
+					taggedToken.tag);
 			cas.addFsToIndexes(posAnno);
 
-			taggedToken.get(i).token.setFeatureValue(featPos, posAnno);
+			taggedToken.token.setFeatureValue(featPos, posAnno);
 		}
 	}
 
@@ -206,7 +205,9 @@ public class ArktweetPosTagger extends CasAnnotator_ImplBase {
 
 		List<String> tokens = new LinkedList<String>();
 		for (AnnotationFS a : annotatedTokens) {
-			tokens.add(a.getCoveredText());
+			String tokenText = a.getCoveredText();
+			tokenText = ArktweetTokenizer.normalizeText(tokenText);
+			tokens.add(tokenText);
 		}
 
 		Sentence sentence = new Sentence();
