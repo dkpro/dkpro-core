@@ -27,7 +27,6 @@ import org.apache.uima.jcas.JCas;
 public class NormalizedTextWriter
     extends JCasAnnotator_ImplBase
 {
-
     @Override
     public void process(JCas jcas)
         throws AnalysisEngineProcessException

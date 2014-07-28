@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +29,7 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.internal.AnnotationComparator;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.NormalizationUtils;
 
 /**
@@ -66,7 +66,6 @@ public abstract class Normalizer_ImplBase
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
     {
-
         // Put all SofaChangeAnnotations in a map,
         // where a token position maps to a list of SFCs that should be applied for that token
         Map<Integer, List<SofaChangeAnnotation>> changesMap = createSofaChangesMap(jcas);
@@ -76,20 +75,7 @@ public abstract class Normalizer_ImplBase
         for (Map.Entry<Integer, List<SofaChangeAnnotation>> changesEntry : changesMap.entrySet()) {
             allChanges.addAll(changesEntry.getValue());
         }
-        Collections.sort(allChanges, new Comparator<SofaChangeAnnotation>(){
-
-            @Override
-            public int compare(SofaChangeAnnotation arg0, SofaChangeAnnotation arg1)
-            {
-                if (arg0.getBegin() < arg1.getBegin()) {
-                    return -1;
-                }
-                else {
-                    return 1;
-                }
-            }
-            
-        });
+        Collections.sort(allChanges, new AnnotationComparator());
 
         AlignedString as = new AlignedString(jcas.getDocumentText());
         NormalizationUtils.applyChanges(as, allChanges);

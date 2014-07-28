@@ -38,31 +38,26 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.
  * 
  * @author Sebastian Kneise
- * 
  */
-
-@TypeCapability
-(
+@TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" }, 
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"}
-        )
-
-public class SpellCheckerNormalizer extends Normalizer_ImplBase 
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
+public class SpellCheckerNormalizer
+    extends Normalizer_ImplBase
 {
     @Override
-    protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap( JCas jcas) 
+    protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas)
     {
         Map<Integer, List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer, List<SofaChangeAnnotation>>();
         int changesMapIndex = 1;
 
-        for (Token token : JCasUtil.select(jcas, Token.class)) 
-        {	    
+        for (Token token : JCasUtil.select(jcas, Token.class)) {
             List<SofaChangeAnnotation> tokenChangeList = new ArrayList<SofaChangeAnnotation>();
 
-            List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class, token.getBegin(), token.getEnd());
+            List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class,
+                    token.getBegin(), token.getEnd());
 
-            if (!anomalyList.isEmpty()) 
-            {
+            if (!anomalyList.isEmpty()) {
                 SpellingAnomaly anomaly = anomalyList.get(0);
                 SofaChangeAnnotation sca = new SofaChangeAnnotation(jcas);
                 sca.setBegin(anomaly.getBegin());
@@ -80,22 +75,21 @@ public class SpellCheckerNormalizer extends Normalizer_ImplBase
     }
 
     @Override
-    protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as) throws AnalysisEngineProcessException 
+    protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
+        throws AnalysisEngineProcessException
     {
         Map<Integer, Boolean> tokenReplaceMap = new TreeMap<Integer, Boolean>();
 
         int replaceMapIndex = 1;
 
-        for (Token token : JCasUtil.select(jcas, Token.class)) 
-        {
-            List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class, token.getBegin(), token.getEnd());
+        for (Token token : JCasUtil.select(jcas, Token.class)) {
+            List<SpellingAnomaly> anomalyList = JCasUtil.selectCovered(jcas, SpellingAnomaly.class,
+                    token.getBegin(), token.getEnd());
 
-            if (!anomalyList.isEmpty()) 
-            {
+            if (!anomalyList.isEmpty()) {
                 tokenReplaceMap.put(replaceMapIndex, true);
-            } 
-            else 
-            {
+            }
+            else {
                 tokenReplaceMap.put(replaceMapIndex, false);
             }
 
@@ -103,35 +97,30 @@ public class SpellCheckerNormalizer extends Normalizer_ImplBase
         }
 
         return tokenReplaceMap;
-
     }
 
     // Just gets the Suggestion with the highest Certainty.
     // In case there are more suggestions with certainty 100, it passes the
     // first highest one.
-    private String getBestSuggestion(SpellingAnomaly anomaly) 
+    private String getBestSuggestion(SpellingAnomaly anomaly)
     {
         Float bestCertainty = 0.0f;
         String bestReplacement = "";
 
-        for (int i = 0; i < anomaly.getSuggestions().size(); i++) 
-        {
+        for (int i = 0; i < anomaly.getSuggestions().size(); i++) {
             Float currentCertainty = anomaly.getSuggestions(i).getCertainty();
             String currentReplacement = anomaly.getSuggestions(i).getReplacement();
 
-            if (currentCertainty > bestCertainty) 
-            {
+            if (currentCertainty > bestCertainty) {
                 bestCertainty = currentCertainty;
                 bestReplacement = currentReplacement;
             }
 
-            if (bestCertainty == 100) 
-            {
+            if (bestCertainty == 100) {
                 break;
             }
         }
 
         return bestReplacement;
     }
-
 }

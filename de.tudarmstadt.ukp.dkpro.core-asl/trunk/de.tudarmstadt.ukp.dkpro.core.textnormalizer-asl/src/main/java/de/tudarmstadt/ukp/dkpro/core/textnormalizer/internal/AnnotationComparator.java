@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2012
+ * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
@@ -15,15 +15,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
+package de.tudarmstadt.ukp.dkpro.core.textnormalizer.internal;
 
-import java.util.Map;
+import java.util.Comparator;
 
-import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.cas.text.AnnotationFS;
 
-public interface ReplacementNormalizer
+public class AnnotationComparator
+    implements Comparator<AnnotationFS>
 {
-    Map<String, String> getReplacementMap()
-        throws ResourceInitializationException;
-
+    @Override
+    public int compare(AnnotationFS arg0, AnnotationFS arg1)
+    {
+        return arg0.getBegin() - arg1.getBegin();
+    }
 }
