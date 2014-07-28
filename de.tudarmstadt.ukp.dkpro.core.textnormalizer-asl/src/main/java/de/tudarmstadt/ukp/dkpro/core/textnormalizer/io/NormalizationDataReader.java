@@ -32,19 +32,15 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
-@TypeCapability(
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class NormalizationDataReader
     extends ResourceCollectionReaderBase
 {
-
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
      */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
 
     @Override

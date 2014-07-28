@@ -46,8 +46,8 @@ public class ReplacementFileNormalizerTest
     {
     	AnalysisEngineDescription replace = createEngineDescription(
     		ReplacementFileNormalizer.class,
-    		ReplacementFileNormalizer.PARAM_REPLACE_LOCATION, "src/main/resources/replaceLists/emoticons_de.txt",
-    		ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, TargetSurroundings.whitespace);
+    		ReplacementFileNormalizer.PARAM_MODEL_LOCATION, "src/main/resources/replaceLists/emoticons_de.txt",
+    		ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, TargetSurroundings.WHITESPACE);
     
     	AggregateBuilder ab = new AggregateBuilder();
     	ab.add(replace);
@@ -74,8 +74,8 @@ public class ReplacementFileNormalizerTest
     {
     	AnalysisEngineDescription replace = createEngineDescription(
     		ReplacementFileNormalizer.class,
-    		ReplacementFileNormalizer.PARAM_REPLACE_LOCATION, "src/main/resources/replaceLists/internetslang.txt",
-    		ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, SrcSurroundings.anythingBesideAlphanumeric);
+    		ReplacementFileNormalizer.PARAM_MODEL_LOCATION, "src/main/resources/replaceLists/internetslang.txt",
+    		ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, SrcSurroundings.ONLY_ALPHANIMERIC);
     
     	AggregateBuilder ab = new AggregateBuilder();
     	ab.add(createEngineDescription(BreakIteratorSegmenter.class), 

@@ -37,41 +37,37 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 
 /**
- * Takes a text and replaces desired expressions
- * This class should not work on tokens as some expressions might span several tokens
+ * Takes a text and replaces desired expressions This class should not work on tokens as some
+ * expressions might span several tokens
  * 
  * @author Sebastian Kneise
- * 
  */
-
 @TypeCapability(
-        inputs={
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={
-        "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
-
-public class ReplacementFileNormalizer extends Normalizer_ImplBase implements ReplacementNormalizer
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
+public class ReplacementFileNormalizer
+    extends Normalizer_ImplBase
 {
     /**
-     * Location of a file which contains all replacing characters 
+     * Location of a file which contains all replacing characters
      */
 
-    public static final String PARAM_REPLACE_LOCATION = "replaceLocation";
-    @ConfigurationParameter(name = PARAM_REPLACE_LOCATION, mandatory = true)
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     private String replacePath;
 
     public static final String PARAM_SRC_SURROUNDINGS = "srcExpressionSurroundings";
-    @ConfigurationParameter(name = PARAM_SRC_SURROUNDINGS, mandatory = true, defaultValue = "irrelevant")
+    @ConfigurationParameter(name = PARAM_SRC_SURROUNDINGS, mandatory = true, defaultValue = "IRRELEVANT")
     private SrcSurroundings srcExpressionSurroundings;
 
     public static final String PARAM_TARGET_SURROUNDINGS = "targetExpressionSurroundings";
-    @ConfigurationParameter(name = PARAM_TARGET_SURROUNDINGS, mandatory = true, defaultValue = "nothing")
+    @ConfigurationParameter(name = PARAM_TARGET_SURROUNDINGS, mandatory = true, defaultValue = "NOTHING")
     private TargetSurroundings targetExpressionSurroundings;
-
 
     private String srcSurroundingsStart;
     private String srcSurroundingsEnd;
@@ -79,41 +75,42 @@ public class ReplacementFileNormalizer extends Normalizer_ImplBase implements Re
 
     public enum SrcSurroundings
     {
-        anythingBesideAlphanumeric,
-        irrelevant
+        ONLY_ALPHANIMERIC, IRRELEVANT
     }
 
     public enum TargetSurroundings
     {
-        whitespace,	
-        nothing
+        WHITESPACE, NOTHING
     }
 
     protected Map<String, String> replacementMap;
 
     @Override
-    public void initialize(UimaContext context) throws ResourceInitializationException
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
     {
         super.initialize(context);
 
         replacementMap = getReplacementMap();
 
-        switch(srcExpressionSurroundings)
-        {
-        case anythingBesideAlphanumeric : 
+        switch (srcExpressionSurroundings) {
+        case ONLY_ALPHANIMERIC:
             srcSurroundingsStart = "([^a-zA-Z0-9äöüß]|^)";
-            srcSurroundingsEnd 	 = "([^a-zA-Z0-9äöüß]|$)"; 
+            srcSurroundingsEnd = "([^a-zA-Z0-9äöüß]|$)";
             break;
-        case irrelevant :  
+        case IRRELEVANT:
             srcSurroundingsStart = "";
-            srcSurroundingsEnd 	 = ""; 
+            srcSurroundingsEnd = "";
             break;
         }
 
-        switch(targetExpressionSurroundings)
-        {
-        case whitespace : targetSurroundings = " "; break;
-        case nothing    : targetSurroundings = ""; break;
+        switch (targetExpressionSurroundings) {
+        case WHITESPACE:
+            targetSurroundings = " ";
+            break;
+        case NOTHING:
+            targetSurroundings = "";
+            break;
         }
 
     }
@@ -121,27 +118,27 @@ public class ReplacementFileNormalizer extends Normalizer_ImplBase implements Re
     @Override
     protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas)
     {
-        Map<Integer, List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer, List<SofaChangeAnnotation>>();
+        Map<Integer, List<SofaChangeAnnotation>> changesMap = 
+                new TreeMap<Integer, List<SofaChangeAnnotation>>();
         int mapKey = 1;
 
         String coveredText = jcas.getDocumentText().toLowerCase();
 
         List<SofaChangeAnnotation> scaChangesList = new ArrayList<SofaChangeAnnotation>();
-        for (Map.Entry<String, String> entry : replacementMap.entrySet())
-        {
+        for (Map.Entry<String, String> entry : replacementMap.entrySet()) {
             String replacementKey = entry.getKey().toLowerCase();
             String replacementValue = targetSurroundings + entry.getValue() + targetSurroundings;
 
-            String  regex = srcSurroundingsStart + "(" + Pattern.quote(replacementKey) + ")" + srcSurroundingsEnd;
+            String regex = srcSurroundingsStart + "(" + Pattern.quote(replacementKey) + ")"
+                    + srcSurroundingsEnd;
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(coveredText);
 
             int groupNumberOfKey = (matcher.groupCount() == 1) ? 1 : 2;
 
-            while(matcher.find())
-            {
+            while (matcher.find()) {
                 int start = matcher.start(groupNumberOfKey);
-                int end   = matcher.end(groupNumberOfKey);
+                int end = matcher.end(groupNumberOfKey);
 
                 SofaChangeAnnotation sca = new SofaChangeAnnotation(jcas);
                 sca.setBegin(start);
@@ -151,7 +148,7 @@ public class ReplacementFileNormalizer extends Normalizer_ImplBase implements Re
                 scaChangesList.add(sca);
 
                 System.out.println(matcher.group(0));
-            }    
+            }
 
         }
         changesMap.put(mapKey++, scaChangesList);
@@ -161,37 +158,38 @@ public class ReplacementFileNormalizer extends Normalizer_ImplBase implements Re
 
     @SuppressWarnings("serial")
     @Override
-    protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as) throws AnalysisEngineProcessException
+    protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
+        throws AnalysisEngineProcessException
     {
-        return new TreeMap<Integer, Boolean>(){{put(1,true);}};
+        return new TreeMap<Integer, Boolean>()
+        {
+            {
+                put(1, true);
+            }
+        };
     }
 
-    @Override
-    public Map<String, String> getReplacementMap() throws ResourceInitializationException
+    private Map<String, String> getReplacementMap()
+        throws ResourceInitializationException
     {
-        Map<String, String> replacementMap= new HashMap<String, String>();
-        try
-        {
-            //Reads in all mappings of expressions(to be replaced expression, target expression) and fills replacement map
-            for(String line : FileUtils.readLines(new File(replacePath)))
-            {
-                if(!line.isEmpty())
-                {
-                    //Each line of source file contains mapping of "to replaced expression" and the "target expressions"
-                    //those expressions are separated by tabs
+        Map<String, String> replacementMap = new HashMap<String, String>();
+        try {
+            // Reads in all mappings of expressions(to be replaced expression, target expression)
+            // and fills replacement map
+            for (String line : FileUtils.readLines(new File(replacePath))) {
+                if (!line.isEmpty()) {
+                    // Each line of source file contains mapping of "to replaced expression" and the
+                    // "target expressions"
+                    // those expressions are separated by tabs
                     String[] entry = line.split("\t");
                     replacementMap.put(entry[0], entry[1]);
                 }
             }
-        } 
-        catch (IOException e)
-        {
+        }
+        catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
 
-
         return replacementMap;
     }
-
-
 }

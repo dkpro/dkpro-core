@@ -36,33 +36,38 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementNormalizer;
 
 /**
  * This base class is for all normalizers that need a frequency provider and replace based on a list
+ * 
  * @author nico.erbs@gmail.com
  *
  */
 public abstract class ReplacementFrequencyNormalizer_ImplBase
-extends FrequencyNormalizer_ImplBase implements ReplacementNormalizer
+    extends FrequencyNormalizer_ImplBase
 {
-
     public static final String PARAM_MIN_FREQUENCY_THRESHOLD = "MinFrequencyThreshold";
     @ConfigurationParameter(name = PARAM_MIN_FREQUENCY_THRESHOLD, mandatory = true, defaultValue = "100")
     private int minFrequencyThreshold;
 
-    protected Map<String,String> replacementMap;
+    protected Map<String, String> replacementMap;
 
-    public void initialize(UimaContext context) throws ResourceInitializationException{
+    @Override
+    public void initialize(UimaContext context)
+        throws ResourceInitializationException
+    {
         super.initialize(context);
         replacementMap = getReplacementMap();
     }
 
+    protected abstract Map<String, String> getReplacementMap()
+        throws ResourceInitializationException;
+
     @Override
-    protected Map<Integer,List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas)
+    protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas)
     {
         int tokenPosition = 0;
-        Map<Integer,List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer,List<SofaChangeAnnotation>>();
+        Map<Integer, List<SofaChangeAnnotation>> changesMap = new TreeMap<Integer, List<SofaChangeAnnotation>>();
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             String tokenString = token.getCoveredText();
             tokenPosition++;
@@ -91,20 +96,20 @@ extends FrequencyNormalizer_ImplBase implements ReplacementNormalizer
     }
 
     @Override
-    protected Map<Integer,Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
-            throws AnalysisEngineProcessException
-            {
-
-        Map<Integer,Boolean> tokenReplaceMap = new TreeMap<Integer,Boolean>();
-        int i=0;
+    protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
+        throws AnalysisEngineProcessException
+    {
+        Map<Integer, Boolean> tokenReplaceMap = new TreeMap<Integer, Boolean>();
+        int i = 0;
         for (Token token : JCasUtil.select(jcas, Token.class)) {
             i++;
 
             String origToken = token.getCoveredText();
 
-            Interval resolved = as.inverseResolve(new ImmutableInterval(token.getBegin(), token.getEnd()));
-            //                System.out.println("Test: " + as);
-            //                System.out.println(resolved);
+            Interval resolved = as.inverseResolve(new ImmutableInterval(token.getBegin(), token
+                    .getEnd()));
+            // System.out.println("Test: " + as);
+            // System.out.println(resolved);
             String changedToken = as.get(resolved.getStart(), resolved.getEnd());
 
             if (origToken.equals(changedToken)) {
@@ -114,13 +119,13 @@ extends FrequencyNormalizer_ImplBase implements ReplacementNormalizer
 
             // check for frequency of original and changed token
             try {
-                long freqOrigToken    = frequencyProvider.getFrequency(origToken);
+                long freqOrigToken = frequencyProvider.getFrequency(origToken);
                 long freqChangedToken = frequencyProvider.getFrequency(changedToken);
 
-                //                System.out.println(origToken + " - " + freqOrigToken);
-                //                System.out.println(changedToken + " - " + freqChangedToken);
+                // System.out.println(origToken + " - " + freqOrigToken);
+                // System.out.println(changedToken + " - " + freqChangedToken);
 
-                // if absolut counts of replacement are too low or zero, do not change
+                // if absolute counts of replacement are too low or zero, do not change
                 if (freqChangedToken == 0 || freqChangedToken < minFrequencyThreshold) {
                     tokenReplaceMap.put(i, false);
                 }
@@ -139,6 +144,5 @@ extends FrequencyNormalizer_ImplBase implements ReplacementNormalizer
         }
 
         return tokenReplaceMap;
-            }
-
+    }
 }

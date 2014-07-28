@@ -25,9 +25,8 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.Normalizer_ImplBase;
 public abstract class FrequencyNormalizer_ImplBase
     extends Normalizer_ImplBase
 {
-
     public static final String FREQUENCY_PROVIDER = "FrequencyProvider";
-    @ExternalResource(key = FREQUENCY_PROVIDER, mandatory=true)
+    @ExternalResource(key = FREQUENCY_PROVIDER, mandatory = true)
     protected FrequencyCountProvider frequencyProvider;
-    
+
 }

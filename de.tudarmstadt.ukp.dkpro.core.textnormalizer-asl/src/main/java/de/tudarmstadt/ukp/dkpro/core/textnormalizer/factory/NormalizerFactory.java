@@ -87,7 +87,7 @@ public class NormalizerFactory
     	AggregateBuilder ab = new AggregateBuilder();
     	ab.add(createEngineDescription(
     		ReplacementFileNormalizer.class, 
-    		ReplacementFileNormalizer.PARAM_REPLACE_LOCATION, aModelLocation,
+    		ReplacementFileNormalizer.PARAM_MODEL_LOCATION, aModelLocation,
     		ReplacementFileNormalizer.PARAM_SRC_SURROUNDINGS, aSrc,
     		ReplacementFileNormalizer.PARAM_TARGET_SURROUNDINGS, aTarget), 
     		CAS.NAME_DEFAULT_SOFA, getSourceView());

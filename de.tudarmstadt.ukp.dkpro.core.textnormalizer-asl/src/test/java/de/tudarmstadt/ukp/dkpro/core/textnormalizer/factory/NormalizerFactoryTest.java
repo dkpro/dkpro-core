@@ -63,9 +63,9 @@ public class NormalizerFactoryTest
 	AnalysisEngineDescription normalizeSharpSUmlaute 	= nf.getUmlautSharpSNormalization(frequencyProvider,0);
 	AnalysisEngineDescription normalizeRepitions 		= nf.getExpressiveLengtheningNormalization(frequencyProvider);
 	AnalysisEngineDescription normalizeCapitalization 	= nf.getCapitalizationNormalization(frequencyProvider);
-	AnalysisEngineDescription normalizeInternetslang 	= nf.getReplacementNormalization("src/main/resources/replaceLists/internetslang.txt", SrcSurroundings.anythingBesideAlphanumeric, TargetSurroundings.nothing);
+	AnalysisEngineDescription normalizeInternetslang 	= nf.getReplacementNormalization("src/main/resources/replaceLists/internetslang.txt", SrcSurroundings.ONLY_ALPHANIMERIC, TargetSurroundings.NOTHING);
 	AnalysisEngineDescription normalizeSpelling 		= nf.getSpellcorrection("src/test/resources/dictionary/ngerman");
-	AnalysisEngineDescription normalizeEmoticons 		= nf.getReplacementNormalization("src/main/resources/replaceLists/emoticons_de.txt", SrcSurroundings.irrelevant, TargetSurroundings.whitespace);
+	AnalysisEngineDescription normalizeEmoticons 		= nf.getReplacementNormalization("src/main/resources/replaceLists/emoticons_de.txt", SrcSurroundings.IRRELEVANT, TargetSurroundings.WHITESPACE);
 
 	AggregateBuilder ab = new AggregateBuilder();	
 	ab.add(normalizeSharpSUmlaute);

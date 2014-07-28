@@ -29,19 +29,17 @@ import org.apache.uima.fit.descriptor.TypeCapability;
  * 
  */
 @TypeCapability(
-        inputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
-
-public class SharpSNormalizer extends ReplacementFrequencyNormalizer_ImplBase
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
+        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
+public class SharpSNormalizer
+    extends ReplacementFrequencyNormalizer_ImplBase
 {
 
     @Override
     public Map<String, String> getReplacementMap()
     {
         Map<String,String> replacementMap = new HashMap<String,String>();
-
+        
         replacementMap.put("ss", "ß");
         replacementMap.put("ß", "ss");
 
