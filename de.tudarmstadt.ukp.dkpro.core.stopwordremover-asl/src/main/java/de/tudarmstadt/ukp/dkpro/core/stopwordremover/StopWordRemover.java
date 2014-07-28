@@ -18,12 +18,12 @@
 package de.tudarmstadt.ukp.dkpro.core.stopwordremover;
 
 import static de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils.resolveLocation;
+import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.CasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.getView;
 import static org.apache.uima.util.Level.FINE;
-import static org.apache.uima.util.Level.INFO;
-
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,9 +73,16 @@ public class StopWordRemover
 	 * Using no prefix or the prefix "[*]" causes the list to be used for every document.
 	 * Example: "[de]classpath:/stopwords/en_articles.txt"
 	 */
-	public static final String PARAM_STOP_WORD_LIST_FILE_NAMES = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_STOP_WORD_LIST_FILE_NAMES, mandatory = true)
+	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
 	private Set<String> swFileNames;
+
+    /**
+     * The character encoding used by the model.
+     */
+    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
+    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true)
+    private String modelEncoding;
 
 	/**
 	 * Feature paths for annotations that should be matched/removed. The default is
@@ -140,10 +147,17 @@ public class StopWordRemover
 
 				// Load the set
 				URL source = resolveLocation(swFileName, this, context);
-				set.load(source.openStream());
+				InputStream is = null;
+				try {
+				    is = source.openStream();
+				    set.load(is, modelEncoding);
+				}
+				finally {
+				    closeQuietly(is);
+				}
 
-				context.getLogger().log(INFO,
-						"Loaded stopwords for locale [" + fileLocale + "] from [" + source + "]");
+                getLogger().info(
+                        "Loaded stopwords for locale [" + fileLocale + "] from [" + source + "]");
 			}
 		}
 		catch (IOException e1) {
