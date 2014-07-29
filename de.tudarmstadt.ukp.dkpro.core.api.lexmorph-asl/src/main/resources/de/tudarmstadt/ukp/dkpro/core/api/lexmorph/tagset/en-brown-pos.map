@@ -1,7 +1,7 @@
 # Brown tagset as in DKPro Toolbox
 # 
 NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-PCT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+pct=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 IN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
 AT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
 NNS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
