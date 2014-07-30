@@ -334,6 +334,7 @@ public class DocumentMetaData
 		docMetaData.setDocumentTitle(dmd.getDocumentTitle());
 		docMetaData.setDocumentUri(dmd.getDocumentUri());
 		docMetaData.setIsLastSegment(dmd.getIsLastSegment());
+		docMetaData.setLanguage(dmd.getLanguage());
 	}
 
 	/**
