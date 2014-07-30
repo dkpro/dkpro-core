@@ -81,7 +81,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uimafit.version>2.0.1-SNAPSHOT</uimafit.version>
+		<uimafit.version>2.1.0</uimafit.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
