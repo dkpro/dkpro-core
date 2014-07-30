@@ -50,11 +50,24 @@ public class JWordSplitterTest
 	public void testSplliter2() throws IOException {
 	    JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
         final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
-        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic"), false);;
+        		"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
 
 	    Dictionary dict = new SimpleDictionary(dictFile);
 	    splitter.setDictionary(dict);
 	    List<DecompoundedWord> result = splitter.split("geräteelektronik").getAllSplits();
 	    assertThat(result.size(),is(1));
 	}
+
+    @Test
+    public void testSplliter3() throws IOException {
+        JWordSplitterAlgorithm splitter = new JWordSplitterAlgorithm();
+        final File dictFile =  ResourceUtils.getUrlAsFile(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling-de-igerman98.dic"), false);;
+
+        Dictionary dict = new SimpleDictionary(dictFile);
+        splitter.setDictionary(dict);
+        List<DecompoundedWord> result = splitter.split("Schwerwiegend").getAllSplits();
+        assertThat(result.size(),is(1));
+    }
+
 }

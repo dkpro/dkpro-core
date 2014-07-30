@@ -17,9 +17,11 @@
  *******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Map;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
@@ -27,19 +29,46 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.ResourceSpecifier;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.German98Dictionary;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
 public class SharedDictionary
     extends Resource_ImplBase
 {
 
-    public final static String PARAM_DICTIONARY_PATH = "dictionaryPath";
-    @ConfigurationParameter(name = PARAM_DICTIONARY_PATH, mandatory = false, defaultValue = "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/spelling/de/igerman98/de_DE_igerman98.dic")
-    private String dictionaryPath;
+    /**
+     * Use this language instead of the default language.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
+
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
+
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_AFFIX_MODEL_LOCATION = "affixModelLocation";
+    @ConfigurationParameter(name = PARAM_AFFIX_MODEL_LOCATION, mandatory = false)
+    protected String affixModelLocation;
+
+    private CasConfigurableProviderBase<Dictionary> modelProvider;
+    private CasConfigurableProviderBase<InputStream> affixModelProvider;
     private Dictionary dict;
 
     @Override
@@ -50,34 +79,73 @@ public class SharedDictionary
             return false;
         }
 
-        try {
-            final URL uri = ResourceUtils.resolveLocation(dictionaryPath, this, null);
+        affixModelProvider = new ModelProviderBase<InputStream>() {
+            {
+                setContextObject(SharedDictionary.this);
 
-            final String uriString = uri.toURI().toString();
+                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-spelling-${language}-"
+                        + "${variant}");
+                setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
+                        + "spelling-${language}-${variant}.properties");
+                setDefault(VARIANT, "affix");
+                setDefault(LANGUAGE, "de");
 
-            if (uriString.endsWith(".dic")) {
-                final String affixURIString = uriString.substring(0, uriString.length() - 4)
-                        + ".aff";
-                final URL affixURI = ResourceUtils.resolveLocation(affixURIString, this, null);
-                dict = new German98Dictionary(uri.openStream(), affixURI.openStream());
+                setOverride(LOCATION, affixModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
             }
-            else {
-                dict = new SimpleDictionary(uri.openStream());
+
+            @Override
+            protected InputStream produceResource(InputStream aStream)
+                throws Exception
+            {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(aStream));
+                String line;
+                StringBuilder builder = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    builder.append(line);
+                    builder.append("\n");
+                }
+                InputStream inputStream = new ByteArrayInputStream(builder.toString().getBytes());
+                return inputStream;
             }
-        }
-        catch (URISyntaxException e) {
-            throw new ResourceInitializationException(e);
-        }
-        catch (IOException e) {
-            throw new ResourceInitializationException(e);
-        }
+        };
+
+        modelProvider = new ModelProviderBase<Dictionary>() {
+            {
+                setContextObject(SharedDictionary.this);
+                setDefault(ARTIFACT_ID, "${groupId}.decompounding-model-spelling-${language}-"
+                        + "${variant}");
+                setDefault(LOCATION, "classpath:de/tudarmstadt/ukp/dkpro/core/decompounding/lib/"
+                        + "spelling-${language}-${variant}.properties");
+                setDefault(VARIANT, "igerman98");
+                setDefault(LANGUAGE, "de");
+
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
+
+            @Override
+            protected Dictionary produceResource(InputStream aStream)
+                throws Exception
+            {
+                return new German98Dictionary(aStream, affixModelProvider.getResource());
+            }
+        };
+
 
         return true;
 
     }
 
-    public Dictionary getDictionary()
+    public Dictionary getDictionary() throws IOException
     {
+        if(this.dict == null){
+            affixModelProvider.configure();
+            modelProvider.configure();
+            this.dict = modelProvider.getResource();
+        }
         return this.dict;
     }
 

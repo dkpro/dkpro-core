@@ -43,33 +43,14 @@ implements SplitterAlgorithm
 
 	private Log logger;
 
-	public AsvToolboxSplitterAlgorithm()
+	public AsvToolboxSplitterAlgorithm(File kompVVicTree, File kompVHic, File grfExt)
 			throws ResourceInitializationException
-			{
-		logger = LogFactory.getLog(this.getClass());
-
-		splitter = new Zerleger2();
-		try {
-			File kompVVicTree = ResourceUtils.getUrlAsFile(getClass().getResource(
-					"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/splitter/de/"
-							+ "asv/kompVVic.tree"), false);
-
-			File kompVHic = ResourceUtils.getUrlAsFile(getClass().getResource(
-					"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/splitter/de/"
-							+ "asv/kompVHic.tree"), false);
-
-			File grfExt = ResourceUtils.getUrlAsFile(getClass().getResource(
-					"/de/tudarmstadt/ukp/dkpro/core/decompounding/lib/splitter/de/"
-							+ "asv/grfExt.tree"), false);
-
-			splitter.init(kompVVicTree.getAbsolutePath(), kompVHic.getAbsolutePath(),
-					grfExt.getAbsolutePath());
-		}
-		catch (IOException ioException) {
-			throw new ResourceInitializationException(ioException);
-		}
-
-			}
+	{
+	    logger = LogFactory.getLog(this.getClass());
+	    splitter = new Zerleger2();
+	    splitter.init(kompVVicTree.getAbsolutePath(), kompVHic.getAbsolutePath(),
+			grfExt.getAbsolutePath());
+	}
 
 	@Override
 	public DecompoundingTree split(String aWord) throws ResourceInitializationException
@@ -95,7 +76,7 @@ implements SplitterAlgorithm
 
 		StringBuilder splitStr = new StringBuilder();
 		for (int i = 0; i < split.size(); i++) {
-			if (splitStr.length() > 0 && !split.get(i).startsWith("(")) {
+			if ((splitStr.length() > 0) && !split.get(i).startsWith("(")) {
 				splitStr.append("+");
 			}
 			splitStr.append(split.get(i));
@@ -428,7 +409,7 @@ implements SplitterAlgorithm
 				Vector<String> retvec)
 		{
 			boolean found = false;
-			for (int i = 0; i < aSplit.length() - 1; i++) {
+			for (int i = 0; i < (aSplit.length() - 1); i++) {
 				int restOffset = aSplitBegin + i;
 				String rest = aAktwort.substring(restOffset);
 				String restGrund = grundFormReduktion(rest);
