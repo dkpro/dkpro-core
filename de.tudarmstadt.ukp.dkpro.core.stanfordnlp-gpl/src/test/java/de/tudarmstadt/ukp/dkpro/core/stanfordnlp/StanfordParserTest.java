@@ -639,33 +639,36 @@ public class StanfordParserTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible.");
 
-        String[] constituentMapped = new String[] { "NP 11,42", "NP 20,42", "NP 59,62", "NP 72,88",
-                "NP 93,118", "PP 18,42", "ROOT 0,135", "X 0,10", "X 0,135", "X 119,134",
-                "X 122,134", "X 126,134", "X 31,42", "X 43,57", "X 63,71", "X 89,134" };
+        String[] constituentMapped = new String[] { "NP 11,47", "NP 20,47", "NP 59,62", "NP 72,88",
+                "NP 93,118", "PP 18,47", "ROOT 0,135", "X 0,135", "X 0,57", "X 119,134",
+                "X 122,134", "X 126,134", "X 31,42", "X 31,47", "X 59,88", "X 63,71", "X 89,134" };
 
-        String[] constituentOriginal = new String[] { "AP 126,134", "COORD 119,134", "MWADV 31,42",
-                "NP 11,42", "NP 20,42", "NP 59,62", "NP 72,88", "NP 93,118", "PP 18,42",
-                "ROOT 0,135", "SENT 0,135", "Ssub 122,134", "Ssub 89,134", "VN 0,10", "VN 43,57",
-                "VN 63,71" };
+        String[] constituentOriginal = new String[] { "AP 126,134", "AdP 31,47", "COORD 119,134",
+                "MWADV 31,42", "NP 11,47", "NP 20,47", "NP 59,62", "NP 72,88", "NP 93,118",
+                "PP 18,47", "ROOT 0,135", "SENT 0,135", "Srel 59,88", "Ssub 122,134",
+                "Ssub 89,134", "VN 0,57", "VN 63,71" };
 
         String[] dependencies = new String[] {/** No dependencies for French */
         };
 
-        String[] posMapped = new String[] { "PR", "V", "N", "PP", "ART", "N", "PP", "N", "ADV",
-                "V", "PUNC", "PR", "V", "ART", "N", "CONJ", "ART", "ADJ", "N", "CONJ", "CONJ",
+        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV",
+                "V", "PUNC", "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ",
                 "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CL", "V", "N", "P", "D", "N", "P", "N", "ADV", "V",
-                "PUNC", "PRO", "V", "D", "N", "C", "D", "A", "N", "C", "C", "A", "PUNC" };
+        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV",
+                "VPP", "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS",
+                "ADJ", "PUNC" };
 
-        String pennTree = "(ROOT (SENT (VN (CL Nous) (V avons)) (NP (N besoin) (PP (P d') (NP "
-                + "(D une) (N phrase) (MWADV (P par) (N exemple))))) (VN (ADV très) (V compliqué)) "
-                + "(PUNC ,) (NP (PRO qui)) (VN (V contient)) (NP (D des) (N constituants)) (Ssub "
-                + "(C que) (NP (D de) (A nombreuses) (N dépendances)) (COORD (C et) (Ssub (C que) "
-                + "(AP (A possible))))) (PUNC .)))";
+        String pennTree = "(ROOT (SENT (VN (CLS Nous) (V avons) (NP (NC besoin) (PP (P d') (NP "
+                + "(DET une) (NC phrase) (AdP (MWADV (P par) (N exemple)) (ADV très))))) "
+                + "(VPP compliqué)) (PUNC ,) (Srel (NP (PROREL qui)) (VN (V contient)) (NP "
+                + "(DET des) (NC constituants))) (Ssub (CS que) (NP (DET de) (ADJ nombreuses) "
+                + "(NC dépendances)) (COORD (CC et) (Ssub (CS que) (AP (ADJ possible))))) "
+                + "(PUNC .)))";
 
-        String[] posTags = new String[] { ".$$.", "A", "ADV", "C", "CL", "D", "ET", "I", "N", "P",
-                "PREF", "PRO", "PUNC", "V" };
+        String[] posTags = new String[] { ".$$.", "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C", "CC",
+                "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P",
+                "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
         String[] constituentTags = new String[] { "AP", "AdP", "COORD", "MWA", "MWADV", "MWC",
                 "MWCL", "MWD", "MWET", "MWI", "MWN", "MWP", "MWPRO", "MWV", "NP", "PP", "ROOT",
@@ -686,8 +689,8 @@ public class StanfordParserTest
                 select(jcas, Constituent.class));
         AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
 
-        AssertAnnotations.assertTagset(POS.class, "ftb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(POS.class, "corenlp34", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "corenlp34", unmappedPos, jcas);
         AssertAnnotations.assertTagset(Constituent.class, "ftb", constituentTags, jcas);
         AssertAnnotations.assertTagsetMapping(Constituent.class, "ftb", unmappedConst, jcas);
         // NO DEP TAGS AssertAnnotations.assertTagset(Dependency.class, null, depTags, jcas);
@@ -708,15 +711,15 @@ public class StanfordParserTest
         String[] constituentOriginal = new String[] { "AP 28,36", "NP 0,51", "NP 16,36",
                 "NP 42,51", "PP 14,36", "PP 25,36", "PP 37,51", "ROOT 0,52", "SENT 0,52" };
 
-        String[] posMapped = new String[] { "ART", "N", "PP", "ART", "N", "PP", "ADJ", "PP", "ART",
-                "N", "PUNC" };
+        String[] posMapped = new String[] { "ART", "NN", "PP", "ART", "NN", "PP", "ADJ", "PP",
+                "ART", "NN", "PUNC" };
 
-        String[] posOriginal = new String[] { "D", "N", "P", "D", "N", "P", "A", "P", "D", "N",
-                "PUNC" };
+        String[] posOriginal = new String[] { "DET", "NC", "P", "DET", "NC", "P", "ADJ", "P",
+                "DET", "NC", "PUNC" };
 
-        String pennTree = "(ROOT (SENT (NP (D La) (N traduction) (PP (P d') (NP (D un) (N texte) "
-                + "(PP (P du) (AP (A français))))) (PP (P vers) (NP (D l') (N anglais)))) "
-                + "(PUNC .)))";
+        String pennTree = "(ROOT (SENT (NP (DET La) (NC traduction) (PP (P d') (NP (DET un) "
+                + "(NC texte) (PP (P du) (AP (ADJ français))))) (PP (P vers) (NP (DET l') "
+                + "(NC anglais)))) (PUNC .)))";
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));

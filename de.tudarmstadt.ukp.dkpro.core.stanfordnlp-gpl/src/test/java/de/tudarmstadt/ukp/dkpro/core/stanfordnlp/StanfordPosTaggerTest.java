@@ -94,20 +94,22 @@ public class StanfordPosTaggerTest
                 + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
                 + "possible.");
 
-        String[] posMapped = new String[] { "PR", "V", "N", "PP", "ART", "N", "PP", "N", "ADV",
-                "ADJ", "PUNC", "PR", "V", "ART", "N", "PR", "ART", "ADJ", "N", "CONJ", "CONJ",
+        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV",
+                "ADJ", "PUNC", "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ",
                 "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CL", "V", "N", "P", "D", "N", "P", "N", "ADV", "A",
-                "PUNC", "PRO", "V", "D", "N", "PRO", "D", "A", "N", "C", "C", "A", "PUNC" };
+        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV",
+                "ADJ", "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS",
+                "ADJ", "PUNC" };
 
-        String[] posTags = new String[] { ".$$.", "A", "ADV", "C", "CL", "D", "ET", "I", "N", "P",
-                "PREF", "PRO", "PUNC", "V" };
+        String[] posTags = new String[] { ".$$.", "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C", "CC",
+                "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P",
+                "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
         String[] unmappedPos = new String[] { ".$$." };
 
-        AssertAnnotations.assertTagset(POS.class, "ftb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(POS.class, "corenlp34", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "corenlp34", unmappedPos, jcas);
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
 
@@ -117,11 +119,11 @@ public class StanfordPosTaggerTest
     {
         JCas jcas = runTest("fr", null, "La traduction d'un texte du français vers l'anglais.");
 
-        String[] posMapped = new String[] { "ART", "N", "PP", "ART", "N", "PP", "N", "PP", "ART",
-                "N", "PUNC" };
+        String[] posMapped = new String[] { "ART", "NN", "PP", "ART", "NN", "PP", "NN", "PP",
+                "ART", "NN", "PUNC" };
 
-        String[] posOriginal = new String[] { "D", "N", "P", "D", "N", "P", "N", "P", "D", "N",
-                "PUNC" };
+        String[] posOriginal = new String[] { "DET", "NC", "P", "DET", "NC", "P", "NC", "P", "DET",
+                "NC", "PUNC" };
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
