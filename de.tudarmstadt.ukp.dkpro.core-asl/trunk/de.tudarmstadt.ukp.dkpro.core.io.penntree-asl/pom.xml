@@ -79,6 +79,12 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-parser-en-chunking</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>
+				de.tudarmstadt.ukp.dkpro.core.api.io-asl
+			</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
