@@ -1,5 +1,3 @@
-package de.tudarmstadt.ukp.dkpro.core.io.penntree;
-
 /*******************************************************************************
  * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab
@@ -17,6 +15,8 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
+package de.tudarmstadt.ukp.dkpro.core.io.penntree;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -32,6 +32,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -44,267 +45,281 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
-public class PennTreebankChunkedReader extends ResourceCollectionReaderBase {
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
+public class PennTreebankChunkedReader
+    extends ResourceCollectionReaderBase
+{
+    /**
+     * Location of the mapping file for part-of-speech tags to UIMA types.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String mappingPosLocation;
 
-	private MappingProvider posMappingProvider;
+    /**
+     * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+     * tag set defined as part of the model meta data. This can be useful if a custom model is
+     * specified which does not have such meta data, or it can be used in readers.
+     */
+    public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
+    @ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
+    protected String posTagset;
 
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String mappingPosLocation;
+    private MappingProvider posMappingProvider;
 
-	public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posTagset;
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
-	@Override
-	public void initialize(UimaContext context)
-			throws ResourceInitializationException {
-		super.initialize(context);
+        posMappingProvider = new MappingProvider();
+        posMappingProvider.setDefault(MappingProvider.LOCATION,
+                "classpath:/de/tudarmstadt/ukp/dkpro/"
+                        + "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
+        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+        posMappingProvider.setDefault("tagger.tagset", "default");
+        posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
+        posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+        posMappingProvider.setOverride("tagger.tagset", posTagset);
+    }
 
-		posMappingProvider = new MappingProvider();
-		posMappingProvider
-				.setDefault(
-						MappingProvider.LOCATION,
-						"classpath:/de/tudarmstadt/ukp/dkpro/"
-								+ "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
-		posMappingProvider.setDefault(MappingProvider.BASE_TYPE,
-				POS.class.getName());
-		posMappingProvider.setDefault("tagger.tagset", "default");
-		posMappingProvider.setOverride(MappingProvider.LOCATION,
-				mappingPosLocation);
-		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-		posMappingProvider.setOverride("tagger.tagset", posTagset);
+    @Override
+    public void getNext(CAS aCAS)
+        throws IOException, CollectionException
+    {
+        Resource res = nextFile();
 
-	}
+        initCas(aCAS, res);
+        // Set up language
+        if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
+            aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
+        }
+        posMappingProvider.configure(aCAS);
 
-	public void getNext(CAS aCAS) throws IOException, CollectionException {
-		Resource res = nextFile();
+        File file = res.getResource().getFile();
+        BufferedReader br = new BufferedReader(new FileReader(file));
 
-		initCas(aCAS, res);
-		// Set up language
-		if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
-			aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
-		}
-		posMappingProvider.configure(aCAS);
+        String readLine = null;
+        List<String> tokens = new LinkedList<String>();
+        List<String> tags = new LinkedList<String>();
+        List<Integer[]> chunkStartEndIdx = new LinkedList<Integer[]>();
+        while ((readLine = br.readLine()) != null) {
 
-		File file = res.getResource().getFile();
-		BufferedReader br = new BufferedReader(new FileReader(file));
+            if (lineIsTrash(readLine)) {
+                continue;
+            }
+            readLine = readLine.trim();
 
-		String readLine = null;
-		List<String> tokens = new LinkedList<String>();
-		List<String> tags = new LinkedList<String>();
-		List<Integer[]> chunkStartEndIdx = new LinkedList<Integer[]>();
-		while ((readLine = br.readLine()) != null) {
+            // enforce that all tokens are separated by exactly one blank
+            readLine = readLine.replaceAll("[ ]{2,}", " ");
 
-			if (lineIsTrash(readLine)) {
-				continue;
-			}
-			readLine = readLine.trim();
+            // if the line starts and ends with brackets, it is a chunk
+            Integer[] chunkIdx = null;
+            if (readLine.startsWith("[") && readLine.endsWith("]")) {
+                chunkIdx = new Integer[2];
+                chunkIdx[0] = tokens.size();
+                // we detected the chunk, we can delete the brackets as they
+                // will cause problems later on if they are stay in the text
+                readLine = readLine.replaceAll("\\[", "");
+                readLine = readLine.replaceAll("\\]", "");
+                readLine = readLine.trim();
+            }
 
-			// enforce that all tokens are separated by exactly one blank
-			readLine = readLine.replaceAll("[ ]{2,}", " ");
+            String[] tokenWithTags = tokenizeLine(readLine);
+            for (String twt : tokenWithTags) {
 
-			// if the line starts and ends with brackets, it is a chunk
-			Integer[] chunkIdx = null;
-			if (readLine.startsWith("[") && readLine.endsWith("]")) {
-				chunkIdx = new Integer[2];
-				chunkIdx[0] = tokens.size();
-				// we detected the chunk, we can delete the brackets as they
-				// will cause problems later on if they are stay in the text
-				readLine = readLine.replaceAll("\\[", "");
-				readLine = readLine.replaceAll("\\]", "");
-				readLine = readLine.trim();
-			}
+                String[] token_tag;
 
-			String[] tokenWithTags = tokenizeLine(readLine);
-			for (String twt : tokenWithTags) {
+                // two words might be joined by a forward slash, the same symbol
+                // which separates token from part of speech tag. The word-join
+                // forward slash is escaped
+                if (wordsAreConnectedByForwardSlash(twt)) {
+                    token_tag = splitWordsAndTagAndNormalizeEscapedSlash(twt);
+                }
+                else {
+                    token_tag = twt.split("/");
+                }
 
-				String[] token_tag;
+                // This should not happen, skip these cases
+                if (token_tag == null) {
+                    getLogger()
+                            .error("After splitting token from tag variable became NULL, skipping this token");
+                    continue;
+                }
+                else if (token_tag.length < 2) {
+                    String tokenText = "";
+                    for (String t : token_tag) {
+                        tokenText += t + " ";
+                    }
 
-				// two words might be joined by a forward slash, the same symbol
-				// which separates token from part of speech tag. The word-join
-				// forward slash is escaped
-				if (wordsAreConnectedByForwardSlash(twt)) {
-					token_tag = splitWordsAndTagAndNormalizeEscapedSlash(twt);
-				} else {
-					token_tag = twt.split("/");
-				}
+                    getLogger().error(
+                            "Encountered token without tag, should not have happend. Skip token [ "
+                                    + tokenText + "]");
+                    continue;
+                }
 
-				// This should not happen, skip these cases
-				if (token_tag == null) {
-					getLogger()
-							.error("After splitting token from tag variable became NULL, skipping this token");
-					continue;
-				} else if (token_tag.length < 2) {
-					String tokenText = "";
-					for (String t : token_tag) {
-						tokenText += t + " ";
-					}
+                String token = token_tag[0];
+                String tag = token_tag[1];
 
-					getLogger().error(
-							"Encountered token without tag, should not have happend. Skip token: "
-									+ tokenText);
-					continue;
-				}
+                // in ambiguous cases a token might have two or more part of
+                // speech tags. We take the first one named and ignore the other
+                // ones
+                tag = selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(tag);
 
-				String token = token_tag[0];
-				String tag = token_tag[1];
+                // A corpus might contain two pos tags for a word if it is
+                // misspelled in the source material. 'The students dormitory'
+                // should have used an apostrophe to mark a possessive case for
+                // the word <code>students'</code>. The
+                // misspelling lead to a plural noun pos-tag although the
+                // possessive
+                // tag would have been correct from the view point of intention.
+                // We chose the incorrect(!) part of speech tag here to avoid
+                // confusion why a misspelled word was tagged correctly.
+                tag = ifWordIsMisspelledSelectTagThatFitsTheMisspelledWord(tag);
 
-				// in ambiguous cases a token might have two or more part of
-				// speech tags. We take the first one named and ignore the other
-				// ones
-				tag = selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(tag);
+                tokens.add(token);
+                tags.add(tag);
+            }
 
-				// A corpus might contain two pos tags for a word if it is
-				// misspelled in the source material. 'The students dormitory'
-				// should have used an apostrophe to mark a possessive case for
-				// the word <code>students'</code>. The
-				// misspelling lead to a plural noun pos-tag although the
-				// possessive
-				// tag would have been correct from the view point of intention.
-				// We chose the incorrect(!) part of speech tag here to avoid
-				// confusion why a misspelled word was tagged correctly.
-				tag = ifWordIsMisspelledSelectTagThatFitsTheMisspelledWord(tag);
+            if (chunkIdx != null) {
+                chunkIdx[1] = tokens.size() - 1;
+                chunkStartEndIdx.add(chunkIdx);
+            }
 
-				tokens.add(token);
-				tags.add(tag);
-			}
+        }
+        br.close();
 
-			if (chunkIdx != null) {
-				chunkIdx[1] = tokens.size() - 1;
-				chunkStartEndIdx.add(chunkIdx);
-			}
+        String documentText = annotateSenenceTokenPosTypes(aCAS, tokens, tags);
+        aCAS.setDocumentText(documentText);
 
-		}
-		br.close();
+        try {
+            annotateChunks(aCAS, chunkStartEndIdx);
+        }
+        catch (CASException e) {
+            e.printStackTrace();
+        }
+    }
 
-		String documentText = annotateSenenceTokenPosTypes(aCAS, tokens, tags);
-		aCAS.setDocumentText(documentText);
+    private void annotateChunks(CAS aCAS, List<Integer[]> aChunkStartEndIdx)
+        throws CASException
+    {
+        JCas jCas = aCAS.getJCas();
 
-		try {
-			annotateChunks(aCAS, chunkStartEndIdx);
-		} catch (CASException e) {
-			e.printStackTrace();
-		}
+        List<Token> tokens = JCasUtil.selectCovered(jCas, Token.class, 0, jCas.getDocumentText()
+                .length());
 
-	}
+        for (Integer[] chunks : aChunkStartEndIdx) {
+            int begin = tokens.get(chunks[0]).getBegin();
+            int end = tokens.get(chunks[1]).getEnd();
+            Chunk c = new Chunk(jCas, begin, end);
+            c.addToIndexes();
+        }
+    }
 
-	private void annotateChunks(CAS aCAS, List<Integer[]> chunkStartEndIdx)
-			throws CASException {
-		JCas jCas = aCAS.getJCas();
+    private String ifWordIsMisspelledSelectTagThatFitsTheMisspelledWord(String aTag)
+    {
+        if (aTag.contains("^")) {
+            // replace by whitespaces and trim the one at the beginning away, the remaining one are
+            // our split points
+            aTag = aTag.replaceAll("\\^", " ").trim();
+            String[] split = aTag.split(" ");
+            return split[0];
+        }
 
-		List<Token> tokens = JCasUtil.selectCovered(jCas, Token.class, 0, jCas
-				.getDocumentText().length());
+        return aTag;
+    }
 
-		for (Integer[] chunks : chunkStartEndIdx) {
-			int begin = tokens.get(chunks[0]).getBegin();
-			int end = tokens.get(chunks[1]).getEnd();
-			Chunk c = new Chunk(jCas, begin, end);
-			c.addToIndexes();
-		}
+    private boolean lineIsTrash(String readLine)
+    {
+        boolean t3 = readLine.isEmpty();
+        boolean t1 = readLine.startsWith("=========");
+        boolean t2 = readLine.startsWith("*x*");
+        return t1 || t2 || t3;
+    }
 
-	}
+    private String selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(String aTag)
+    {
+        String[] tags = aTag.split("\\|");
+        return tags[0];
+    }
 
-	private String ifWordIsMisspelledSelectTagThatFitsTheMisspelledWord(
-			String tag) {
+    private String[] splitWordsAndTagAndNormalizeEscapedSlash(String aTwt)
+    {
+        int idx = aTwt.lastIndexOf("/");
+        if (idx < 0) {
+            return null;
+        }
+        String[] token_tag = new String[2];
+        token_tag[0] = aTwt.substring(0, idx);
+        token_tag[0] = token_tag[0].replaceAll("\\\\/", "/");
 
-		if (tag.contains("^")) {
-			tag = tag.replaceAll("\\^", " ").trim(); // replace by whitespaces
-														// and trim the one at
-														// the beginning away,
-														// the remaining one are
-														// our split points
-			String[] split = tag.split(" ");
-			return split[0];
-		}
+        token_tag[1] = aTwt.substring(idx + 1);
+        return token_tag;
+    }
 
-		return tag;
-	}
+    private boolean wordsAreConnectedByForwardSlash(String aTwt)
+    {
+        return aTwt.contains("\\/");
+    }
 
-	private boolean lineIsTrash(String readLine) {
-		boolean t3 = readLine.isEmpty();
-		boolean t1 = readLine.startsWith("=========");
-		boolean t2 = readLine.startsWith("*x*");
-		return t1 || t2 || t3;
-	}
+    private String annotateSenenceTokenPosTypes(CAS aCAS, List<String> aTokens, List<String> aTags)
+    {
+        String text = "";
+        int sentStart = 0;
+        for (int i = 0; i < aTokens.size(); i++) {
+            String token = aTokens.get(i);
+            String tag = aTags.get(i);
 
-	private String selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(
-			String tag) {
-		String[] tags = tag.split("\\|");
-		return tags[0];
-	}
+            annotateTokenWithTag(aCAS, token, tag, text.length());
 
-	private String[] splitWordsAndTagAndNormalizeEscapedSlash(String twt) {
-		int idx = twt.lastIndexOf("/");
-		if (idx < 0) {
-			return null;
-		}
-		String[] token_tag = new String[2];
-		token_tag[0] = twt.substring(0, idx);
-		token_tag[0] = token_tag[0].replaceAll("\\\\/", "/");
+            text += token + " ";
 
-		token_tag[1] = twt.substring(idx + 1);
-		return token_tag;
-	}
+            if (tag.equals(".")) {
+                text = text.trim();
+                annotateSentence(aCAS, sentStart, text);
+                sentStart = text.length();
+            }
+        }
+        return text;
+    }
 
-	private boolean wordsAreConnectedByForwardSlash(String twt) {
-		return twt.contains("\\/");
-	}
+    private void annotateSentence(CAS aCAS, int aSentStart, String aText)
+    {
+        Type tokenType = aCAS.getTypeSystem().getType(Sentence.class.getName());
+        AnnotationFS sentenceAnno = aCAS.createAnnotation(tokenType, aSentStart, aText.length());
+        aCAS.addFsToIndexes(sentenceAnno);
+    }
 
-	private String annotateSenenceTokenPosTypes(CAS aCAS, List<String> tokens,
-			List<String> tags) {
-		String text = "";
-		int sentStart = 0;
-		for (int i = 0; i < tokens.size(); i++) {
-			String token = tokens.get(i);
-			String tag = tags.get(i);
+    private void annotateTokenWithTag(CAS aCAS, String aToken, String aTag, int aCurrPosInText)
+    {
 
-			annotateTokenWithTag(aCAS, token, tag, text.length());
+        // Token
+        Type tokenType = aCAS.getTypeSystem().getType(Token.class.getName());
+        AnnotationFS tokenAnno = aCAS.createAnnotation(tokenType, aCurrPosInText, aToken.length()
+                + aCurrPosInText);
+        aCAS.addFsToIndexes(tokenAnno);
 
-			text += token + " ";
+        Feature feature = tokenType.getFeatureByBaseName("pos");
 
-			if (tag.equals(".")) {
-				text = text.trim();
-				annotateSentence(aCAS, sentStart, text);
-				sentStart = text.length();
-			}
-		}
-		return text;
-	}
+        // Tag
+        Type posType = posMappingProvider.getTagType(aTag);
+        // aCAS.getTypeSystem().getT.getFeatureByBaseName("pos");
+        AnnotationFS posAnno = aCAS.createAnnotation(posType, aCurrPosInText, aToken.length());
+        posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), aTag);
+        aCAS.addFsToIndexes(posAnno);
 
-	private void annotateSentence(CAS aCAS, int sentStart, String text) {
-		Type tokenType = aCAS.getTypeSystem().getType(Sentence.class.getName());
-		AnnotationFS sentenceAnno = aCAS.createAnnotation(tokenType, sentStart,
-				text.length());
-		aCAS.addFsToIndexes(sentenceAnno);
-	}
+        // Set the POS for the Token
+        tokenAnno.setFeatureValue(feature, posAnno);
 
-	private void annotateTokenWithTag(CAS aCAS, String token, String tag,
-			int currPosInText) {
+    }
 
-		// Token
-		Type tokenType = aCAS.getTypeSystem().getType(Token.class.getName());
-		AnnotationFS tokenAnno = aCAS.createAnnotation(tokenType,
-				currPosInText, token.length() + currPosInText);
-		aCAS.addFsToIndexes(tokenAnno);
-
-		Feature feature = tokenType.getFeatureByBaseName("pos");
-
-		// Tag
-		Type posType = posMappingProvider.getTagType(tag);
-		// aCAS.getTypeSystem().getT.getFeatureByBaseName("pos");
-		AnnotationFS posAnno = aCAS.createAnnotation(posType, currPosInText,
-				token.length());
-		posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), tag);
-		aCAS.addFsToIndexes(posAnno);
-
-		// Set the POS for the Token
-		tokenAnno.setFeatureValue(feature, posAnno);
-
-	}
-
-	private String[] tokenizeLine(String readLine) {
-		return readLine.split(" ");
-	}
-
+    private String[] tokenizeLine(String aReadLine)
+    {
+        return aReadLine.split(" ");
+    }
 }
