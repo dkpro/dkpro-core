@@ -38,6 +38,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -47,11 +48,11 @@ public class PennTreebankChunkedReader extends ResourceCollectionReaderBase {
 
 	private MappingProvider posMappingProvider;
 
-	public static final String PARAM_POS_MAPPING_LOCATION = "mappingPosLocation";
+	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String mappingPosLocation;
 
-	public static final String PARAM_POS_TAGSET = "posTagset";
+	public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String posTagset;
 
