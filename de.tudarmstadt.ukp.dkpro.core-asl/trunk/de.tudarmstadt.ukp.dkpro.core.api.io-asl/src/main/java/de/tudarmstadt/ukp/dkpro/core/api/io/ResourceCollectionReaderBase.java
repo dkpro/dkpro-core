@@ -61,9 +61,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * 
  * <pre>
  * CollectionReader reader = createReader(FooReader.class,
- *         ResourceCollectionReaderBase.PARAM_LANGUAGE, &quot;en&quot;,
- *         ResourceCollectionReaderBase.PARAM_SOURCE_LOCATION, &quot;some/path&quot;,
- *         ResourceCollectionReaderBase.PARAM_PATTERNS, &quot;[+]foodata/*&#42;/*.foo&quot;);
+ *         FooReader.PARAM_LANGUAGE, &quot;en&quot;,
+ *         FooReader.PARAM_SOURCE_LOCATION, &quot;some/path&quot;,
+ *         FooReader.PARAM_PATTERNS, &quot;[+]foodata/*&#42;/*.foo&quot;);
  * </pre>
  * <p>
  * The list of resources returned is sorted, so for the same set of resources, they are always
