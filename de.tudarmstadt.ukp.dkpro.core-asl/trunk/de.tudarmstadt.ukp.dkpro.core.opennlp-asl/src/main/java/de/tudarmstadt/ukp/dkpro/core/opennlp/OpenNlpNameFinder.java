@@ -36,6 +36,7 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -51,6 +52,11 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
 /**
  * OpenNLP name finder wrapper.
  */
+@TypeCapability(
+        inputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" },
+        outputs = {
+            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity" })
 public class OpenNlpNameFinder
     extends JCasAnnotator_ImplBase
 {
