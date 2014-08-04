@@ -65,10 +65,16 @@ public class PennTreebankChunkedReader
     @ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
     protected String posTagset;
 
+    /**
+     * Character encoding of the input data.
+     */
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
     protected String encoding;
 
+    /**
+     * Set this as the language of the produced documents.
+     */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
