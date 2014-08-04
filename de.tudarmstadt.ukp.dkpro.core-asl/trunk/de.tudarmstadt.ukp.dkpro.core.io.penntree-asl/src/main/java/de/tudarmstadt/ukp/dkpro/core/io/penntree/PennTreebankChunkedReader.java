@@ -21,15 +21,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
-import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
@@ -37,7 +34,7 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -51,7 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class PennTreebankChunkedReader
-    extends ResourceCollectionReaderBase
+    extends JCasResourceCollectionReader_ImplBase
 {
     /**
      * Location of the mapping file for part-of-speech tags to UIMA types.
@@ -89,17 +86,15 @@ public class PennTreebankChunkedReader
     }
 
     @Override
-    public void getNext(CAS aCAS)
+    public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
         Resource res = nextFile();
 
-        initCas(aCAS, res);
-        // Set up language
-        if (getConfigParameterValue(PARAM_LANGUAGE) != null) {
-            aCAS.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
-        }
-        posMappingProvider.configure(aCAS);
+        initCas(aJCas, res);
+        aJCas.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
+        
+        posMappingProvider.configure(aJCas.getCas());
 
         File file = res.getResource().getFile();
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -194,29 +189,20 @@ public class PennTreebankChunkedReader
         }
         br.close();
 
-        String documentText = annotateSenenceTokenPosTypes(aCAS, tokens, tags);
-        aCAS.setDocumentText(documentText);
+        String documentText = annotateSenenceTokenPosTypes(aJCas, tokens, tags);
+        aJCas.setDocumentText(documentText);
 
-        try {
-            annotateChunks(aCAS, chunkStartEndIdx);
-        }
-        catch (CASException e) {
-            e.printStackTrace();
-        }
+        annotateChunks(aJCas, chunkStartEndIdx);
     }
 
-    private void annotateChunks(CAS aCAS, List<Integer[]> aChunkStartEndIdx)
-        throws CASException
+    private void annotateChunks(JCas aJCas, List<Integer[]> aChunkStartEndIdx)
     {
-        JCas jCas = aCAS.getJCas();
-
-        List<Token> tokens = JCasUtil.selectCovered(jCas, Token.class, 0, jCas.getDocumentText()
-                .length());
+        List<Token> tokens = new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
 
         for (Integer[] chunks : aChunkStartEndIdx) {
             int begin = tokens.get(chunks[0]).getBegin();
             int end = tokens.get(chunks[1]).getEnd();
-            Chunk c = new Chunk(jCas, begin, end);
+            Chunk c = new Chunk(aJCas, begin, end);
             c.addToIndexes();
         }
     }
@@ -267,7 +253,7 @@ public class PennTreebankChunkedReader
         return aTwt.contains("\\/");
     }
 
-    private String annotateSenenceTokenPosTypes(CAS aCAS, List<String> aTokens, List<String> aTags)
+    private String annotateSenenceTokenPosTypes(JCas aJCas, List<String> aTokens, List<String> aTags)
     {
         String text = "";
         int sentStart = 0;
@@ -275,47 +261,38 @@ public class PennTreebankChunkedReader
             String token = aTokens.get(i);
             String tag = aTags.get(i);
 
-            annotateTokenWithTag(aCAS, token, tag, text.length());
+            annotateTokenWithTag(aJCas, token, tag, text.length());
 
             text += token + " ";
 
             if (tag.equals(".")) {
                 text = text.trim();
-                annotateSentence(aCAS, sentStart, text);
+                annotateSentence(aJCas, sentStart, text.length());
                 sentStart = text.length();
             }
         }
         return text;
     }
 
-    private void annotateSentence(CAS aCAS, int aSentStart, String aText)
+    private void annotateSentence(JCas aJCas, int aBegin, int aEnd)
     {
-        Type tokenType = aCAS.getTypeSystem().getType(Sentence.class.getName());
-        AnnotationFS sentenceAnno = aCAS.createAnnotation(tokenType, aSentStart, aText.length());
-        aCAS.addFsToIndexes(sentenceAnno);
+        new Sentence(aJCas, aBegin, aEnd).addToIndexes();
     }
 
-    private void annotateTokenWithTag(CAS aCAS, String aToken, String aTag, int aCurrPosInText)
+    private void annotateTokenWithTag(JCas aJCas, String aToken, String aTag, int aCurrPosInText)
     {
-
         // Token
-        Type tokenType = aCAS.getTypeSystem().getType(Token.class.getName());
-        AnnotationFS tokenAnno = aCAS.createAnnotation(tokenType, aCurrPosInText, aToken.length()
-                + aCurrPosInText);
-        aCAS.addFsToIndexes(tokenAnno);
-
-        Feature feature = tokenType.getFeatureByBaseName("pos");
-
+        Token token = new Token(aJCas, aCurrPosInText, aToken.length() + aCurrPosInText);
+        token.addToIndexes();
+        
         // Tag
-        Type posType = posMappingProvider.getTagType(aTag);
-        // aCAS.getTypeSystem().getT.getFeatureByBaseName("pos");
-        AnnotationFS posAnno = aCAS.createAnnotation(posType, aCurrPosInText, aToken.length());
-        posAnno.setStringValue(posType.getFeatureByBaseName("PosValue"), aTag);
-        aCAS.addFsToIndexes(posAnno);
-
+        Type posTag = posMappingProvider.getTagType(aTag);
+        POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
+        pos.setPosValue(aTag);
+        pos.addToIndexes();
+        
         // Set the POS for the Token
-        tokenAnno.setFeatureValue(feature, posAnno);
-
+        token.setPos(pos);
     }
 
     private String[] tokenizeLine(String aReadLine)
