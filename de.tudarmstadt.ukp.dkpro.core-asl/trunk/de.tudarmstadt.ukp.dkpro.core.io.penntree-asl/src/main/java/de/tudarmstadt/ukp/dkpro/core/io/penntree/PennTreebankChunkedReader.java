@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,16 +44,23 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Chunk",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk" })
 public class PennTreebankChunkedReader
     extends JCasResourceCollectionReader_ImplBase
 {
-
+    /**
+     * Location of the mapping file for part-of-speech tags to UIMA types.
+     */
     public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String mappingPosLocation;
 
+    /**
+     * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+     * tag set defined as part of the model meta data. This can be useful if a custom model is
+     * specified which does not have such meta data, or it can be used in readers.
+     */
     public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
     @ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
     protected String posTagset;
@@ -72,10 +78,10 @@ public class PennTreebankChunkedReader
     private MappingProvider posMappingProvider;
 
     @Override
-    public void initialize(UimaContext context)
+    public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
-        super.initialize(context);
+        super.initialize(aContext);
 
         posMappingProvider = new MappingProvider();
         posMappingProvider.setDefault(MappingProvider.LOCATION,
@@ -86,27 +92,26 @@ public class PennTreebankChunkedReader
         posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
         posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
         posMappingProvider.setOverride("tagger.tagset", posTagset);
-
     }
 
+    @Override
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
         Resource res = nextFile();
-        
+
         initCas(aJCas, res);
         aJCas.setDocumentLanguage((String) getConfigParameterValue(PARAM_LANGUAGE));
         
         posMappingProvider.configure(aJCas.getCas());
 
-        InputStream is = res.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, encoding));
-
         String readLine = null;
         List<String> tokens = new ArrayList<String>();
         List<String> tags = new ArrayList<String>();
         List<int[]> chunkStartEndIdx = new ArrayList<int[]>();
+        BufferedReader br = null;
         try {
+            br = new BufferedReader(new InputStreamReader(res.getInputStream(), encoding));
             while ((readLine = br.readLine()) != null) {
 
                 if (lineIsTrash(readLine)) {
@@ -151,7 +156,6 @@ public class PennTreebankChunkedReader
                         continue;
                     }
                     else if (token_tag.length < 2) {
-
                         getLogger().error(
                                 "Encountered token without tag, should not have happend. Skip token: ["
                                         + token_tag[0] + "]");
@@ -185,24 +189,21 @@ public class PennTreebankChunkedReader
                     chunkIdx[1] = tokens.size() - 1;
                     chunkStartEndIdx.add(chunkIdx);
                 }
-
             }
         }
         finally {
             IOUtils.closeQuietly(br);
         }
+        
         String documentText = annotateSenenceTokenPosTypes(aJCas, tokens, tags);
         aJCas.setDocumentText(documentText);
 
         annotateChunks(aJCas, chunkStartEndIdx);
-
     }
 
     private void annotateChunks(JCas aJCas, List<int[]> aChunkStartEndIdx)
-
     {
-        List<Token> tokens = JCasUtil.selectCovered(aJCas, Token.class, 0, aJCas.getDocumentText()
-                .length());
+        List<Token> tokens = new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
 
         for (int[] chunks : aChunkStartEndIdx) {
             int begin = tokens.get(chunks[0]).getBegin();
@@ -210,7 +211,6 @@ public class PennTreebankChunkedReader
             Chunk c = new Chunk(aJCas, begin, end);
             c.addToIndexes();
         }
-
     }
 
     private String ifWordIsMisspelledSelectTagThatFitsTheMisspelledWord(String aTag)
@@ -234,38 +234,38 @@ public class PennTreebankChunkedReader
         return t1 || t2 || t3;
     }
 
-    private String selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(String tag)
+    private String selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(String aTag)
     {
-        String[] tags = tag.split("\\|");
+        String[] tags = aTag.split("\\|");
         return tags[0];
     }
 
-    private String[] splitWordsAndTagAndNormalizeEscapedSlash(String twt)
+    private String[] splitWordsAndTagAndNormalizeEscapedSlash(String aTwt)
     {
-        int idx = twt.lastIndexOf("/");
+        int idx = aTwt.lastIndexOf("/");
         if (idx < 0) {
             return null;
         }
         String[] token_tag = new String[2];
-        token_tag[0] = twt.substring(0, idx);
+        token_tag[0] = aTwt.substring(0, idx);
         token_tag[0] = token_tag[0].replaceAll("\\\\/", "/");
 
-        token_tag[1] = twt.substring(idx + 1);
+        token_tag[1] = aTwt.substring(idx + 1);
         return token_tag;
     }
 
-    private boolean wordsAreConnectedByForwardSlash(String twt)
+    private boolean wordsAreConnectedByForwardSlash(String aTwt)
     {
-        return twt.contains("\\/");
+        return aTwt.contains("\\/");
     }
 
-    private String annotateSenenceTokenPosTypes(JCas aJCas, List<String> tokens, List<String> tags)
+    private String annotateSenenceTokenPosTypes(JCas aJCas, List<String> aTokens, List<String> aTags)
     {
         StringBuilder textString = new StringBuilder();
         int sentStart = 0;
-        for (int i = 0; i < tokens.size(); i++) {
-            String token = tokens.get(i);
-            String tag = tags.get(i);
+        for (int i = 0; i < aTokens.size(); i++) {
+            String token = aTokens.get(i);
+            String tag = aTags.get(i);
 
             annotateTokenWithTag(aJCas, token, tag, textString.length());
 
@@ -274,17 +274,16 @@ public class PennTreebankChunkedReader
 
             if (tag.equals(".")) {
                 String text = textString.toString().trim();
-                annotateSentence(aJCas, sentStart, text);
+                annotateSentence(aJCas, sentStart, text.length());
                 sentStart = textString.length();
             }
         }
         return textString.toString().trim();
     }
 
-    private void annotateSentence(JCas aJCas, int sentStart, String text)
+    private void annotateSentence(JCas aJCas, int aBegin, int aEnd)
     {
-        Sentence sentence = new Sentence(aJCas, sentStart, text.length());
-        sentence.addToIndexes();
+        new Sentence(aJCas, aBegin, aEnd).addToIndexes();
     }
 
     private void annotateTokenWithTag(JCas aJCas, String aToken, String aTag, int aCurrPosInText)
@@ -292,15 +291,14 @@ public class PennTreebankChunkedReader
         // Token
         Token token = new Token(aJCas, aCurrPosInText, aToken.length() + aCurrPosInText);
         token.addToIndexes();
-
+        
         // Tag
         Type posTag = posMappingProvider.getTagType(aTag);
         POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
         pos.setPosValue(aTag);
         pos.addToIndexes();
-
+        
         // Set the POS for the Token
         token.setPos(pos);
     }
-
 }
