@@ -119,6 +119,13 @@ public class Web1TFormatWriter
 	@ConfigurationParameter(name = PARAM_SPLIT_TRESHOLD, mandatory = false, defaultValue = "1.0")
 	private float splitThreshold;
 
+	/**
+	 * The type being used for segments 
+	 */
+    public static final String PARAM_CONTEXT_TYPE = "contextType";
+    @ConfigurationParameter(name = PARAM_CONTEXT_TYPE, mandatory = true, defaultValue="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
+    protected String contextType;
+
 
 	private Web1TConverter converter;
 
@@ -150,7 +157,7 @@ public class Web1TFormatWriter
     {
 
         try {
-            converter.add(jcas, inputPaths);
+            converter.add(jcas, inputPaths, jcas.getCas().getTypeSystem().getType(contextType));
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
