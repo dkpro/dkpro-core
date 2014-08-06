@@ -40,14 +40,14 @@ public class HtmlReaderTest
     {
         CollectionReaderDescription reader = createReaderDescription(
                 HtmlReader.class,
-                HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.ukp.tu-darmstadt.de")
+                HtmlReader.PARAM_SOURCE_LOCATION, new URL("http://www.google.de")
         );
 
         for (JCas jcas : new JCasIterable(reader)) {
             dumpMetaData(DocumentMetaData.get(jcas));
             assertEquals(1, select(jcas.getCas(), jcas.getDocumentAnnotationFs().getType()).size());
 
-            assertTrue(jcas.getDocumentText().startsWith("UKP Home"));
+            assertTrue(jcas.getDocumentText().startsWith("Google"));
         }
     }
 
