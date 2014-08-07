@@ -55,7 +55,7 @@ public final class BerkeleyLmFrequencyCountProvider
 		}
 
 		try {
-			provider = new BerkeleyLmProvider(file, language);
+			initializeProvider();
 		}
 		catch (Exception e) {
 			throw new ResourceInitializationException(e);
@@ -63,4 +63,9 @@ public final class BerkeleyLmFrequencyCountProvider
 
 		return true;
 	}
+	
+	protected void initializeProvider() throws Exception{
+	    provider = new BerkeleyLmProvider(file, language);
+	}
+	
 }

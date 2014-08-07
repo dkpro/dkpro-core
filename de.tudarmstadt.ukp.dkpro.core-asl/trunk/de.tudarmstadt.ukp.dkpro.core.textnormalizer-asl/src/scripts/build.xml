@@ -49,7 +49,7 @@
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.umlautnormalizer"
     		folder="target/download/umlaut_web1t_model"
-    		metaDataVersion="0"
+    		metaDataVersion="1"
     		upstreamVersion="20121116" 
 			language="de" 
 			tool="normalizer" 

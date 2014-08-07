@@ -17,7 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.frequency.resources;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -33,43 +32,49 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TInMemoryProvider;
  * External resource wrapper for the Web1T in memory frequency count provider.
  * 
  * @author zesch
- *
+ * 
  */
 public final class Web1TInMemoryFrequencyCountResource
-	extends FrequencyCountResourceBase
+    extends FrequencyCountResourceBase
 {
-    
+
     // Attention! Can only have String parameters in external resources.
     public static final String PARAM_MAX_NGRAM_LEVEL = "MaxLevel";
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LEVEL, mandatory = true, defaultValue = "5")
     protected String maxLevel;
-    
-    public static final String PARAM_MODEL_LOCATION= ComponentParameters.PARAM_MODEL_LOCATION;
+
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = true)
     protected String modelLocation;
 
     @SuppressWarnings("unchecked")
     @Override
-	public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
-		throws ResourceInitializationException
-	{
-		if (!super.initialize(aSpecifier, aAdditionalParams)) {
-			return false;
-		}
+    public boolean initialize(ResourceSpecifier aSpecifier, Map aAdditionalParams)
+        throws ResourceInitializationException
+    {
+        if (!super.initialize(aSpecifier, aAdditionalParams)) {
+            return false;
+        }
 
         try {
-    		provider = new Web1TInMemoryProvider(
-    		        modelLocation,
-    		        Integer.parseInt(maxLevel)
-    		);
-    		
-    		// FIXME should not be necessary to call that here - other implementations might forget to call it
-            ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
+            initializeProvider();
         }
-        catch (IOException e) {
+        catch (Exception e) {
             throw new ResourceInitializationException(e);
         }
 
-		return true;
-	}
+        return true;
+    }
+
+    protected void initializeProvider()
+        throws Exception
+    {
+        provider = new Web1TInMemoryProvider(modelLocation, Integer.parseInt(maxLevel));
+
+        // FIXME should not be necessary to call that here - other implementations might forget to
+        // call it
+        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer
+                .parseInt(this.scaleDownFactor));
+    }
+
 }
