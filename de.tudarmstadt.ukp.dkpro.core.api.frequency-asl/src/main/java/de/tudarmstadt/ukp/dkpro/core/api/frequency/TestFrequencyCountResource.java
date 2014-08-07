@@ -44,10 +44,15 @@ public final class TestFrequencyCountResource
 		if (!super.initialize(aSpecifier, aAdditionalParams)) {
 			return false;
 		}
-
-  		provider = new TestFrequencyCountProvider();
-        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
-
+		initializeProvider();
 		return true;
 	}
+
+    @Override
+    protected void initializeProvider()
+        throws ResourceInitializationException
+    {
+        provider = new TestFrequencyCountProvider();
+        ((FrequencyCountProviderBase) provider).setScaleDownFactor(Integer.parseInt(this.scaleDownFactor));
+    }
 }

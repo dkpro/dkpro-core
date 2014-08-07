@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.api.frequency;
 
+import static org.apache.uima.util.Level.SEVERE;
+
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -43,6 +45,7 @@ public abstract class FrequencyCountResourceBase
     public long getFrequency(String phrase)
         throws IOException
     {
+        checkProvider();
         return provider.getFrequency(phrase);
     }
 
@@ -50,6 +53,7 @@ public abstract class FrequencyCountResourceBase
     public double getProbability(String phrase)
         throws IOException
     {
+        checkProvider();
         return provider.getProbability(phrase);
     }
 
@@ -57,6 +61,7 @@ public abstract class FrequencyCountResourceBase
     public double getLogProbability(String phrase)
         throws IOException
     {
+        checkProvider();
         return provider.getLogProbability(phrase);
     }
     
@@ -64,6 +69,7 @@ public abstract class FrequencyCountResourceBase
     public long getNrOfTokens()
         throws IOException
     {
+        checkProvider();
         return provider.getNrOfTokens();
     }    
 
@@ -71,6 +77,7 @@ public abstract class FrequencyCountResourceBase
     public long getNrOfNgrams(int n)
         throws IOException
     {
+        checkProvider();
         return provider.getNrOfNgrams(n);
     }
     
@@ -78,6 +85,7 @@ public abstract class FrequencyCountResourceBase
     public long getNrOfDistinctNgrams(int n)
         throws IOException
     {
+        checkProvider();
         return provider.getNrOfDistinctNgrams(n);
     }
     
@@ -85,6 +93,7 @@ public abstract class FrequencyCountResourceBase
     public Iterator<String> getNgramIterator(int n)
         throws IOException
     {
+        checkProvider();
         return provider.getNgramIterator(n);
     }
 
@@ -92,12 +101,31 @@ public abstract class FrequencyCountResourceBase
     public String getLanguage()
         throws IOException
     {
+        checkProvider();
         return provider.getLanguage();
     }
 
     @Override
     public String getID()
     {
+        checkProvider();
         return provider.getID();
     }
+    
+    protected abstract void initializeProvider() throws Exception;
+    
+    private void checkProvider(){
+        if(provider == null){
+            try{
+                initializeProvider();
+            }
+            catch (Exception e) {
+                getLogger().log(SEVERE, "RuntimeException caught when initializing frequency count resource.");
+                getLogger().log(SEVERE, e.getLocalizedMessage());
+                getLogger().log(SEVERE, e.getMessage());
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    
 }
