@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -34,12 +35,16 @@ import org.apache.uima.util.Level;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Removes all tokens/lemmas/stems/POS tags (depending on the "Mode" setting) that do not match the
  * given parts of speech.
  *
  * @author Torsten Zesch
+ * @author Erik-Lân Do Dinh
  */
 
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
@@ -140,6 +145,9 @@ public class PosFilter
 
         getContext().getLogger().log(Level.CONFIG, "Entering " + this.getClass().getSimpleName());
 
+        Type tokenType = jcas.getCas().getTypeSystem().getType(Token.class.getCanonicalName());
+        Type stemType = jcas.getCas().getTypeSystem().getType(Stem.class.getCanonicalName());
+        Type lemmaType = jcas.getCas().getTypeSystem().getType(Lemma.class.getCanonicalName());
         Type posType = jcas.getCas().getTypeSystem().getType(POS.class.getCanonicalName());
         Type typeToRemoveType = jcas.getCas().getTypeSystem().getType(typeToRemove);
 
@@ -217,6 +225,39 @@ public class PosFilter
         }
 
         for (AnnotationFS fs : toRemove) {
+            // If we want to remove tokens, we also remove accompanying lemma, stem, POS tag.
+            if (fs.getType().equals(tokenType)) {
+                AnnotationFS stemFS = getAnnotation(stemType, fs);
+                if (stemFS != null) {
+                    jcas.getCas().removeFsFromIndexes(stemFS);
+                }
+                AnnotationFS lemmaFS = getAnnotation(lemmaType, fs);
+                if (lemmaFS != null) {
+                    jcas.getCas().removeFsFromIndexes(lemmaFS);
+                }
+                AnnotationFS posFS = getAnnotation(posType, fs);
+                if (posFS != null) {
+                    jcas.getCas().removeFsFromIndexes(posFS);
+                }
+            }
+            // We don't want to keep the feature in the token, remove it here.
+            else {
+                if (fs.getType().equals(stemType) || fs.getType().equals(lemmaType)) {
+                    Token token = (Token) getAnnotation(tokenType, fs);
+                    if (token != null) {
+                        String fbn = fs.getType().getShortName().toLowerCase();
+                        Feature f = tokenType.getFeatureByBaseName(fbn);
+                        token.setFeatureValue(f, null);
+                    }
+                }
+                else if (fs instanceof POS) {
+                    Token token = (Token) getAnnotation(tokenType, fs);
+                    if (token != null) {
+                        token.setPos(null);
+                    }
+                }
+            }
+
             jcas.getCas().removeFsFromIndexes(fs);
         }
     }
