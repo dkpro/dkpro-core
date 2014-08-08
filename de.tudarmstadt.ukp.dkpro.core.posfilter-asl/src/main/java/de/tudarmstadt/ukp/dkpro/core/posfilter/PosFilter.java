@@ -36,9 +36,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 
 /**
- * Removes all tokens/lemmas/stems (depending on the "Mode" setting) that do not match the given
- * parts of speech.
- * 
+ * Removes all tokens/lemmas/stems/POS tags (depending on the "Mode" setting) that do not match the
+ * given parts of speech.
+ *
  * @author Torsten Zesch
  */
 
@@ -141,8 +141,9 @@ public class PosFilter
         getContext().getLogger().log(Level.CONFIG, "Entering " + this.getClass().getSimpleName());
 
         Type posType = jcas.getCas().getTypeSystem().getType(POS.class.getCanonicalName());
+        Type typeToRemoveType = jcas.getCas().getTypeSystem().getType(typeToRemove);
 
-        if (posType == null) {
+        if (typeToRemoveType == null) {
             throw new AnalysisEngineProcessException(new Throwable(
                     "Could not get type for feature path: " + typeToRemove));
         }
@@ -152,9 +153,15 @@ public class PosFilter
             for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(jcas.getCas(),
                     typeToRemove)) {
                 AnnotationFS annotation = entry.getKey();
-                AnnotationFS pos = getPos(posType, annotation);
-                if (pos == null) {
-                    continue;
+                AnnotationFS pos;
+                if (typeToRemoveType.equals(posType)) {
+                    pos = annotation;
+                }
+                else {
+                    pos = getAnnotation(posType, annotation);
+                    if (pos == null) {
+                        continue;
+                    }
                 }
 
                 String posString = pos.getType().getShortName();
@@ -215,22 +222,22 @@ public class PosFilter
     }
 
     /**
-     * Returns the POS annotation aligned with another annotation
-     * 
+     * Returns the (one) annotation of a given type that is aligned with another annotation.
+     *
      * @param annotation
      *            An annotation.
-     * @return The POS annotation aligned with another annotation.
+     * @return The annotation aligned with another annotation.
      */
-    private AnnotationFS getPos(Type type, AnnotationFS annotation)
+    private AnnotationFS getAnnotation(Type type, AnnotationFS annotation)
     {
-        List<AnnotationFS> posAnnotations = CasUtil.selectCovered(jcas.getCas(), type, annotation);
-        if (posAnnotations.size() != 1) {
+        List<AnnotationFS> annotations = CasUtil.selectCovered(jcas.getCas(), type, annotation);
+        if (annotations.size() != 1) {
             getLogger().warn(
-                    "Could not find matching POS annotation for annotation: "
+                    "Could not find matching annotation of type " + type + " for annotation: "
                             + annotation.getCoveredText());
             return null;
         }
 
-        return posAnnotations.get(0);
+        return annotations.get(0);
     }
 }
