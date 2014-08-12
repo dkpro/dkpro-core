@@ -43,7 +43,7 @@ public class Conll2000ReaderTest
                 Conll2000Reader.class, 
                 Conll2000Reader.PARAM_LANGUAGE, "en",
                 Conll2000Reader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/2000/", 
-                Conll2000Reader.PARAM_PATTERNS, "chunk2000_test.txt"
+                Conll2000Reader.PARAM_PATTERNS, "chunk2000_test.conll"
         );
         
         JCas jcas = new JCasIterable(reader).iterator().next();
