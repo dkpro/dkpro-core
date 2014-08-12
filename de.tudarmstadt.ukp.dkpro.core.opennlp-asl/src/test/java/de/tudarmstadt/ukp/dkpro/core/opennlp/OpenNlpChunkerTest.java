@@ -45,14 +45,12 @@ public class OpenNlpChunkerTest
                 "[  0,  2]Chunk(NP) (We)", 
                 "[  3,  7]Chunk(VP) (need)",
                 "[  8, 43]Chunk(NP) (a very complicated example sentence)",
-                "[ 43, 44]Chunk(O) (,)", 
                 "[ 45, 50]Chunk(NP) (which)",
                 "[ 51, 59]Chunk(VP) (contains)", 
                 "[ 60, 62]Chunk(PP) (as)",
                 "[ 63, 97]Chunk(NP) (many constituents and dependencies)",
                 "[ 98,100]Chunk(PP) (as)", 
-                "[101,109]Chunk(ADJP) (possible)",
-                "[109,110]Chunk(O) (.)" };
+                "[101,109]Chunk(ADJP) (possible)" };
 
         String[] chunkTags = new String[] { "ADJP", "ADVP", "CONJP", "INTJ", "LST", "NP", "O",
                 "PP", "PRT", "SBAR", "UCP", "VP" };
