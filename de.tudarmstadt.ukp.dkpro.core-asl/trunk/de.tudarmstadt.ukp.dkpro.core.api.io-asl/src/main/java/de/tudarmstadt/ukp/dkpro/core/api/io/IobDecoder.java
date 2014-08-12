@@ -68,16 +68,22 @@ public class IobDecoder
             // System.out.printf("%s %s %n", token.getCoveredText(), aChunkTags[i]);
             String fields[] = aChunkTags[i].split("-");
             String flag = fields.length == 2 ? fields[0] : "NONE";
-            String chunk = fields.length == 2 ? fields[1] : fields[0];
+            String chunk = fields.length == 2 ? fields[1] : null;
 
             // Start of a new hunk
-            if (!chunk.equals(openChunk) || "B".equals(flag)) {
+            if (chunk == null || !chunk.equals(openChunk) || "B".equals(flag)) {
                 if (openChunk != null) {
                     // End of previous chunk
                     chunkComplete();
                 }
 
-                openChunk = chunk;
+                if ("O".equals(flag)) {
+                    openChunk = null;
+                }
+                else {
+                    openChunk = chunk;
+                }
+                
                 start = token.getBegin();
             }
 
