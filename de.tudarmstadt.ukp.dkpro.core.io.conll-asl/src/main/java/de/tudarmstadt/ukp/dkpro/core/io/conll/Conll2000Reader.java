@@ -48,12 +48,35 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 /**
  * Reads the Conll 2000 chunking format.
  * 
+ * <pre>
+ * He        PRP  B-NP
+ * reckons   VBZ  B-VP
+ * the       DT   B-NP
+ * current   JJ   I-NP
+ * account   NN   I-NP
+ * deficit   NN   I-NP
+ * will      MD   B-VP
+ * narrow    VB   I-VP
+ * to        TO   B-PP
+ * only      RB   B-NP
+ * #         #    I-NP
+ * 1.8       CD   I-NP
+ * billion   CD   I-NP
+ * in        IN   B-PP
+ * September NNP  B-NP
+ * .         .    O
+ * </pre>
+ * 
+ * <ol>
+ * <li>FORM - token</li>
+ * <li>POSTAG - part-of-speech tag</li>
+ * <li>CHUNK - chunk (BIO encoded)</li>
+ * </ol>
+ * 
  * Sentences are separated by a blank new line.
  * 
- * See: http://cnts.uia.ac.be/conll2000/chunking/
- * 
+ * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  * @author Torsten Zesch
- * 
  */
 public class Conll2000Reader
     extends JCasResourceCollectionReader_ImplBase
@@ -73,7 +96,7 @@ public class Conll2000Reader
      * The language.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
 
     /**
