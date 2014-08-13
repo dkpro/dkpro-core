@@ -28,15 +28,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.uima.UimaContext;
+import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -93,6 +97,23 @@ public class Conll2006Reader
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
+    /**
+     * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
+     * tag set defined as part of the model meta data. This can be useful if a custom model is
+     * specified which does not have such meta data, or it can be used in readers.
+     */
+    public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
+    @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
+    protected String posTagset;
+
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
+     * the mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
+    
     public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
@@ -118,6 +139,24 @@ public class Conll2006Reader
     // private static final int PHEAD = 8;
     // private static final int PDEPREL = 9;
 
+    private MappingProvider posMappingProvider;
+
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+        
+        posMappingProvider = new MappingProvider();
+        posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
+                + "dkpro/core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
+        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+        posMappingProvider.setDefault("pos.tagset", "default");
+        posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
+        posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
+        posMappingProvider.setOverride("pos.tagset", posTagset);
+    }
+    
     @Override
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
@@ -137,6 +176,10 @@ public class Conll2006Reader
     public void convert(JCas aJCas, BufferedReader aReader)
         throws IOException
     {
+        if (writePos) {
+            posMappingProvider.configure(aJCas.getCas());
+        }
+        
         JCasBuilder doc = new JCasBuilder(aJCas);
 
         List<String[]> words;
@@ -168,7 +211,9 @@ public class Conll2006Reader
 
                 // Read part-of-speech tag
                 if (!UNUSED.equals(word[POSTAG]) && writePos) {
-                    POS pos = new POS(aJCas, token.getBegin(), token.getEnd());
+                    Type posTag = posMappingProvider.getTagType(word[POSTAG]);
+                    POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                            token.getEnd());
                     pos.setPosValue(word[POSTAG]);
                     pos.addToIndexes();
                     token.setPos(pos);

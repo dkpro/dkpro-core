@@ -93,13 +93,6 @@ public class Conll2000Reader
     private String encoding;
 
     /**
-     * The language.
-     */
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    private String language;
-
-    /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
      * spamming the heap with thousands of strings representing only a few different tags.
      *
@@ -176,7 +169,7 @@ public class Conll2000Reader
         posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
         posMappingProvider.setDefault("pos.tagset", "default");
         posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
         posMappingProvider.setOverride("pos.tagset", posTagset);
         
         chunkMappingProvider = new MappingProvider();
@@ -185,7 +178,7 @@ public class Conll2000Reader
         chunkMappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
         chunkMappingProvider.setDefault("chunk.tagset", "default");
         chunkMappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
-        chunkMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        chunkMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
         chunkMappingProvider.setOverride("chunk.tagset", posTagset);
     }
     
