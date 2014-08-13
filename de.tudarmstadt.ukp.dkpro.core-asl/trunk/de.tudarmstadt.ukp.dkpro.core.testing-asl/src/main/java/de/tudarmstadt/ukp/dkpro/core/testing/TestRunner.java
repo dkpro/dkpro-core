@@ -33,8 +33,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TestRunner
 {
     /**
-     * Run an analysis engine using a document. The document is automatically split into tokens and
-     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * Run an analysis engine using a document. The document is automatically split into tokens based on
+     * spaces and into sentences based on newline. Make sure the punctuation is surrounded by spaces!
      * 
      * @see TokenBuilder
      */
@@ -45,8 +45,8 @@ public class TestRunner
     }
 
     /**
-     * Run an analysis engine using a document. The document is automatically split into tokens and
-     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * Run an analysis engine using a document. The document is automatically split into tokens based on
+     * spaces and into sentences based on newline. Make sure the punctuation is surrounded by spaces!
      * 
      * @see TokenBuilder
      */
@@ -58,8 +58,8 @@ public class TestRunner
     }
 
     /**
-     * Run an analysis engine using a document. The document is automatically split into tokens and
-     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * Run an analysis engine using a document. The document is automatically split into tokens based on
+     * spaces and into sentences based on newline. Make sure the punctuation is surrounded by spaces!
      * 
      * @see TokenBuilder
      */
@@ -70,8 +70,8 @@ public class TestRunner
     }
 
     /**
-     * Run an analysis engine using a document. The document is automatically split into tokens and
-     * sentenced based on spaces and dots. Make sure the dots are surrounded by spaces.
+     * Run an analysis engine using a document. The document is automatically split into tokens based on
+     * spaces and into sentences based on newline. Make sure the punctuation is surrounded by spaces!
      * 
      * @see TokenBuilder
      */
