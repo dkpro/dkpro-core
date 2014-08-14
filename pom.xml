@@ -35,6 +35,13 @@
     	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
     </organization>
 	<inceptionYear>2007</inceptionYear>
+	<licenses>
+		<license>
+			<name>GNU General Public License Version 3.0</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 	<repositories>
 		<repository>
 			<id>ukp-oss-model-releases</id>
