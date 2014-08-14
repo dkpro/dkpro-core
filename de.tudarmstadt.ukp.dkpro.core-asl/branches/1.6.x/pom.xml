@@ -31,10 +31,17 @@
 	<organization>
 		<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
 	</organization>
+  <licenses>
+    <license>
+      <name>Apache License Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 	<prerequisites>
 		<maven>3.0.4</maven>
 	</prerequisites>
-	<repositories>
+  <repositories>
 		<repository>
 			<id>ukp-oss-model-releases</id>
 			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
