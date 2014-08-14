@@ -28,12 +28,19 @@
 	<name>DKPro Core ASL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<url>https://code.google.com/p/dkpro-core-asl/</url>
-	<prerequisites>
-		<maven>3.0.4</maven>
-	</prerequisites>
 	<organization>
     	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
     </organization>
+	<licenses>
+		<license>
+			<name>Apache License Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
 	<repositories>
 		<repository>
 			<id>ukp-oss-model-releases</id>
