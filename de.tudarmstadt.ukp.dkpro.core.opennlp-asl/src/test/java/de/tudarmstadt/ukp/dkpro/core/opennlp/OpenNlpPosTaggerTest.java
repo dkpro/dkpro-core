@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -89,35 +90,50 @@ public class OpenNlpPosTaggerTest
                 new String[] { "PR", "V",    "ART", "NN", "PUNC" });
     }
 
+    @Ignore("We don't have these models integrated yet")
     @Test
     public void testPortuguese()
         throws Exception
     {
+        String[] bosqueTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec",
+                "in", "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp",
+                "punc", "v-fin", "v-ger", "v-inf", "v-pcp", "vp" };
+        
         JCas jcas = runTest("pt", null, "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
                 new String[] { "PR", "V", "ART", "NN", "PUNC" });
-        
-        runTest("pt", "maxent", "Este é um teste .",
+
+        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
+                
+        jcas = runTest("pt", "maxent", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
                 new String[] { "PR", "V", "ART", "NN", "PUNC" });
 
-        runTest("pt", "perceptron", "Este é um teste .",
+        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
+        
+        jcas = runTest("pt", "perceptron", "Este é um teste .",
                 new String[] { "pron-det", "v-fin", "art", "n",   "punc" },
                 new String[] { "PR", "V", "ART", "NN", "PUNC" });
 
-        runTest("pt", "mm-maxent", "Este é um teste .",
+        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
+        
+        jcas = runTest("pt", "mm-maxent", "Este é um teste .",
                 new String[] { "PROSUB", "V",   "ART", "N",   "." },
                 new String[] { "POS",    "POS", "POS", "POS", "POS" });
 
-        runTest("pt", "mm-perceptron", "Este é um teste .",
+        // AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
+        
+        jcas = runTest("pt", "mm-perceptron", "Este é um teste .",
                 new String[] { "PROSUB", "V",   "ART", "N",   "." },
                 new String[] { "POS",    "POS", "POS", "POS", "POS" });
         
-        String[] posTags = new String[] { "?", "adj", "adv", "art", "conj-c", "conj-s", "ec", "in",
-                "n", "num", "pp", "pron-det", "pron-indp", "pron-pers", "prop", "prp", "punc",
-                "v-fin", "v-ger", "v-inf", "v-pcp", "vp" };
-
-        AssertAnnotations.assertTagset(POS.class, "bosque", posTags, jcas);
+        // AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
+        
+        jcas = runTest("pt", "cogroo", "Este é um teste .",
+                new String[] { "pron-det", "v-fin", "artm", "nm", "." },
+                new String[] { "POS",    "POS", "POS", "POS", "POS" });
+        
+        AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
     }
     
     
