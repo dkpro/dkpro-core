@@ -81,119 +81,125 @@ extends SegmenterBase
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
     {
-		final String text = aText;
-    	final Tokenizer<?> tokenizer = getTokenizer(aJCas.getDocumentLanguage(), aText);
-		final int offsetInDocument = aZoneBegin;
-		int offsetInSentence = 0;
+        if (isCreateTokens()) {
+            final String text = aText;
+            final Tokenizer<?> tokenizer = getTokenizer(aJCas.getDocumentLanguage(), aText);
+            final int offsetInDocument = aZoneBegin;
+            int offsetInSentence = 0;
 
-		List<?> tokens = tokenizer.tokenize();
-    	outer: for (int i = 0; i < tokens.size(); i++) {
-    		final Object token = tokens.get(i);
-    		//System.out.println("Token class: "+token.getClass());
-    		String t = null;
-    		if (token instanceof String) {
-    			t = (String) token;
-    		}
-    		if (token instanceof CoreLabel) {
-    			CoreLabel l = (CoreLabel) token;
-    			t = l.word();
-    			int begin = l.get(CharacterOffsetBeginAnnotation.class);
-    			int end = l.get(CharacterOffsetEndAnnotation.class);
+            List<?> tokens = tokenizer.tokenize();
+            outer: for (int i = 0; i < tokens.size(); i++) {
+                final Object token = tokens.get(i);
+                // System.out.println("Token class: "+token.getClass());
+                String t = null;
+                if (token instanceof String) {
+                    t = (String) token;
+                }
+                if (token instanceof CoreLabel) {
+                    CoreLabel l = (CoreLabel) token;
+                    t = l.word();
+                    int begin = l.get(CharacterOffsetBeginAnnotation.class);
+                    int end = l.get(CharacterOffsetEndAnnotation.class);
 
-				createToken(aJCas, offsetInDocument + begin, offsetInDocument
-						+ end, i);
-    			offsetInSentence = end;
-    			continue;
-    		}
-    		if (token instanceof Word) {
-    			Word w = (Word) token;
-    			t = w.word();
+                    createToken(aJCas, offsetInDocument + begin, offsetInDocument + end, i);
+                    offsetInSentence = end;
+                    continue;
+                }
+                if (token instanceof Word) {
+                    Word w = (Word) token;
+                    t = w.word();
+                }
+
+                if (t == null) {
+                    throw new AnalysisEngineProcessException(new IllegalStateException(
+                            "Unknown token type: " + token.getClass()));
+                }
+
+                // Skip whitespace
+                while (isWhitespace(text.charAt(offsetInSentence))) {
+                    offsetInSentence++;
+                    if (offsetInSentence >= text.length()) {
+                        break outer;
+                    }
+                }
+
+                // Match
+                if (text.startsWith(t, offsetInSentence)) {
+                    createToken(aJCas, offsetInDocument + offsetInSentence, offsetInDocument
+                            + offsetInSentence + t.length(), i);
+                    offsetInSentence = offsetInSentence + t.length();
+                }
+                else {
+//                    System.out.println(aText);
+                    throw new AnalysisEngineProcessException(new IllegalStateException(
+                            "Text mismatch. Tokenizer: ["
+                                    + t
+                                    + "] CAS: ["
+                                    + text.substring(offsetInSentence,
+                                            min(offsetInSentence + t.length(), text.length()))));
+                }
+            }
+        }
+
+        if (isCreateSentences()) {
+    		// Prepare the tokens for processing by WordToSentenceProcessor
+    		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
+    		for (Token token : select(aJCas, Token.class)) {
+    			CoreLabel l = new CoreLabel();
+    			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
+    			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
+    			l.setWord(token.getCoveredText());
+    			tokensInDocument.add(l);
     		}
 
-    		if (t == null) {
-    			throw new AnalysisEngineProcessException(new IllegalStateException(
-    					"Unknown token type: "+token.getClass()));
-    		}
-
-    		// Skip whitespace
-			while (isWhitespace(text.charAt(offsetInSentence))) {
-				offsetInSentence++;
-				if (offsetInSentence >= text.length()) {
-    				break outer;
+    		// The sentence splitter (probably) requires the escaped text, so we prepare it here
+    		PTBEscapingProcessor escaper = new PTBEscapingProcessor();
+    		escaper.apply(tokensInDocument);
+    
+    		// Apply the WordToSentenceProcessor to find the sentence boundaries
+    		WordToSentenceProcessor<CoreLabel> proc =
+    				new WordToSentenceProcessor<CoreLabel>();
+    		List<List<CoreLabel>> sentencesInDocument = proc.process(tokensInDocument);
+    		for (List<CoreLabel> sentence : sentencesInDocument) {
+    			int begin = sentence.get(0).get(CharacterOffsetBeginAnnotation.class);
+    			int end = sentence.get(sentence.size()-1).get(CharacterOffsetEndAnnotation.class);
+    
+    			// Bugfix JC: somehow, the above code saves sentences multiple times for subsequent zones (strictZoning)
+    			// given a document with n zones, A, B, C, ... e.g. these are headlines:
+    			// A
+    			// sent1
+    			// sent2
+    			// B
+    			// sent3
+    			// sent4
+    			// C
+    			// ...
+    			// the list of sentences should contain: sent1, sent2, sent 3, ...
+    			/// but it contains: sent1, sent2, ->sent1<- (again), sent2, sent3, sent4, sent1, sent2, ...
+    
+    			// easy hack solution:
+    			if (begin >= aZoneBegin)
+    			{
+    				//System.out.println("outside create sentence: " + begin + "\t" + end);
+    				createSentence(aJCas, begin, end);
     			}
+    
+    			// instead of just
+    			// createSentence(aJCas, begin, end);
+    			// which results in multiple sentence annotations per original sentence from the document
+    
+    			// if someone has time to fix the above code, this would probably improve time & space efficiency
     		}
-
-    		// Match
-			if (text.startsWith(t, offsetInSentence)) {
-				createToken(aJCas, offsetInDocument + offsetInSentence,
-						offsetInDocument + offsetInSentence + t.length(), i);
-				offsetInSentence = offsetInSentence + t.length();
-    		}
-    		else {
-				System.out.println(aText);
-    			throw new AnalysisEngineProcessException(
-    					new IllegalStateException("Text mismatch. Tokenizer: ["
-    							+ t +"] CAS: [" + text.substring(
-    										offsetInSentence, min(offsetInSentence+t.length(),text.length()))));
-			}
+    //		for(Sentence currSentence : JCasUtil.iterate(aJCas, Sentence.class)){
+    //			if(isCreateIndexedTokens()){
+    //				int tokenIndex = 1;
+    //				for(TokenWithIndex t : JCasUtil.selectCovered(aJCas, TokenWithIndex.class, currSentence)){
+    //					t.setTokenIndex(tokenIndex);
+    //					tokenIndex++;
+    //				}
+    //			}
+    //		}
 		}
-
-		// Prepare the tokens for processing by WordToSentenceProcessor
-		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
-		for (Token token : select(aJCas, Token.class)) {
-			CoreLabel l = new CoreLabel();
-			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
-			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
-			l.setWord(token.getCoveredText());
-			tokensInDocument.add(l);
-		}
-
-		PTBEscapingProcessor escaper = new PTBEscapingProcessor();
-		escaper.apply(tokensInDocument);
-
-		// Apply the WordToSentenceProcessor to find the sentence boundaries
-		WordToSentenceProcessor<CoreLabel> proc =
-				new WordToSentenceProcessor<CoreLabel>();
-		List<List<CoreLabel>> sentencesInDocument = proc.process(tokensInDocument);
-		for (List<CoreLabel> sentence : sentencesInDocument) {
-			int begin = sentence.get(0).get(CharacterOffsetBeginAnnotation.class);
-			int end = sentence.get(sentence.size()-1).get(CharacterOffsetEndAnnotation.class);
-
-			// Bugfix JC: somehow, the above code saves sentences multiple times for subsequent zones (strictZoning)
-			// given a document with n zones, A, B, C, ... e.g. these are headlines:
-			// A
-			// sent1
-			// sent2
-			// B
-			// sent3
-			// sent4
-			// C
-			// ...
-			// the list of sentences should contain: sent1, sent2, sent 3, ...
-			/// but it contains: sent1, sent2, ->sent1<- (again), sent2, sent3, sent4, sent1, sent2, ...
-
-			// easy hack solution:
-			if (begin >= aZoneBegin)
-			{
-				//System.out.println("outside create sentence: " + begin + "\t" + end);
-				createSentence(aJCas, begin, end);
-			}
-
-			// instead of just
-			// createSentence(aJCas, begin, end);
-			// which results in multiple sentence annotations per original sentence from the document
-
-			// if someone has time to fix the above code, this would probably improve time & space efficiency
-		}
-//		for(Sentence currSentence : JCasUtil.iterate(aJCas, Sentence.class)){
-//			if(isCreateIndexedTokens()){
-//				int tokenIndex = 1;
-//				for(TokenWithIndex t : JCasUtil.selectCovered(aJCas, TokenWithIndex.class, currSentence)){
-//					t.setTokenIndex(tokenIndex);
-//					tokenIndex++;
-//				}
-//			}
-//		}
     }
 
 	private
