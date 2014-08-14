@@ -81,7 +81,7 @@ extends SegmenterBase
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
     {
-        if (isCreateTokens()) {
+        if (isWriteToken()) {
             final String text = aText;
             final Tokenizer<?> tokenizer = getTokenizer(aJCas.getDocumentLanguage(), aText);
             final int offsetInDocument = aZoneBegin;
@@ -141,7 +141,7 @@ extends SegmenterBase
             }
         }
 
-        if (isCreateSentences()) {
+        if (isWriteSentence()) {
     		// Prepare the tokens for processing by WordToSentenceProcessor
     		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
     		for (Token token : select(aJCas, Token.class)) {
