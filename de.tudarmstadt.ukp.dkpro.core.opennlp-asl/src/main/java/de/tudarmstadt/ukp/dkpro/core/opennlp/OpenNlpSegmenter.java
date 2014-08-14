@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.InputStream;
 
 import opennlp.tools.sentdetect.SentenceDetectorME;
@@ -37,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 /**
  * Tokenizer and sentence splitter using OpenNLP.
@@ -145,8 +148,14 @@ public class OpenNlpSegmenter
 		throws AnalysisEngineProcessException
 	{
 		CAS cas = aJCas.getCas();
-		sentenceModelProvider.configure(cas);
-		tokenModelProvider.configure(cas);
+		
+		if (isCreateSentences()) {
+		    sentenceModelProvider.configure(cas);
+		}
+		
+		if (isCreateTokens()) {
+		    tokenModelProvider.configure(cas);
+		}
 
 		super.process(aJCas);
 	}
@@ -155,15 +164,21 @@ public class OpenNlpSegmenter
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
-		for (Span sSpan : sentences) {
-			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
-			Span[] tokens = tokenModelProvider.getResource().tokenizePos(
-                    aText.substring(sSpan.getStart(), sSpan.getEnd()));
-			for (Span tSpan : tokens) {
-				createToken(aJCas, tSpan.getStart() + sSpan.getStart() + aZoneBegin, tSpan.getEnd()
-						+ sSpan.getStart() + aZoneBegin);
-			}
-		}
+	    if (isCreateSentences()) {
+    	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
+    		for (Span sSpan : sentences) {
+    			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
+    		}
+	    }
+		
+	    if (isCreateTokens()) {
+    		for (Sentence sent : selectCovered(aJCas, Sentence.class, aZoneBegin, aZoneBegin + aText.length())) {
+    	        Span[] tokens = tokenModelProvider.getResource().tokenizePos(sent.getCoveredText());
+    	        for (Span tSpan : tokens) {
+                    createToken(aJCas, tSpan.getStart() + sent.getBegin(),
+                            tSpan.getEnd() + sent.getBegin());
+    	        }
+    		}
+	    }
 	}
 }
