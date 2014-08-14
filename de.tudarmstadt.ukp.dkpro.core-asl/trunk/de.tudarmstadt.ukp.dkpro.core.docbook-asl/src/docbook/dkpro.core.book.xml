@@ -32,6 +32,8 @@
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.analytics.xml"/>
 
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.models.xml"/>
+	
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.io.xml"/>
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.testing.xml"/>
