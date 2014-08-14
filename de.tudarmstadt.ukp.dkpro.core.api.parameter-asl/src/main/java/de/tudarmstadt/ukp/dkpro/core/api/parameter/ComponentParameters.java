@@ -156,6 +156,8 @@ public final class ComponentParameters
 
     public static final String PARAM_READ_CHUNK = READ + CHUNK;
     
+    public static final String PARAM_READ_MORPH = READ + MORPH;
+    
 	public static final String PARAM_READ_CONSTITUENT = READ + CONSTITUENT;
 	
 	public static final String PARAM_READ_PENN_TREE = READ + PENN_TREE;

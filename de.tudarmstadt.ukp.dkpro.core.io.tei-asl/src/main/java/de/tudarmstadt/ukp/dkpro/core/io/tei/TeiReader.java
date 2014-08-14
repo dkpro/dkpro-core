@@ -63,8 +63,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Reader for the TEI XML.
- *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 		outputs = {
@@ -79,30 +77,30 @@ public class TeiReader
     /**
      * Write token annotations to the CAS.
      */
-	public static final String PARAM_WRITE_TOKEN = ComponentParameters.PARAM_WRITE_TOKEN;
-	@ConfigurationParameter(name = PARAM_WRITE_TOKEN, mandatory = true, defaultValue = "true")
-	private boolean writeTokens;
+	public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
+	@ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
+	private boolean readToken;
 
     /**
      * Write part-of-speech annotations to the CAS.
      */
-	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
-	private boolean writePOS;
+	public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+	@ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+	private boolean readPOS;
 
     /**
      * Write lemma annotations to the CAS.
      */
-	public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-	@ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
-	private boolean writeLemma;
+	public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
+	@ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+	private boolean readLemma;
 
 	/**
 	 * Write sentence annotations to the CAS.
 	 */
-	public static final String PARAM_WRITE_SENTENCE = ComponentParameters.PARAM_WRITE_SENTENCE;
-	@ConfigurationParameter(name = PARAM_WRITE_SENTENCE, mandatory = true, defaultValue = "true")
-	private boolean writeSentences;
+	public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
+	@ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
+	private boolean readSentence;
 
 	/**
 	 * Use the xml:id attribute on the TEI elements as document ID. Mind that many TEI files
@@ -194,9 +192,9 @@ public class TeiReader
 	{
 		super.initialize(aContext);
 
-		if (writePOS && !writeTokens) {
+		if (readPOS && !readToken) {
 			throw new ResourceInitializationException(new IllegalArgumentException(
-					"Setting writePOS to 'true' requires writeToken to be 'true' too."));
+					"Setting readPOS to 'true' requires writeToken to be 'true' too."));
 		}
 
 		try {
@@ -441,7 +439,7 @@ public class TeiReader
 				inTextElement = false;
 			}
 			else if (TAG_SUNIT.equals(aName)) {
-				if (writeSentences) {
+				if (readSentence) {
 					new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
 				}
 				sentenceStart = -1;
@@ -451,7 +449,7 @@ public class TeiReader
 					Token token = new Token(getJCas(), tokenStart, getBuffer().length());
 					trim(token);
 
-					if (posTag != null && writePOS) {
+					if (posTag != null && readPOS) {
 						Type posTagType = posMappingProvider.getTagType(posTag);
 						POS pos = (POS) getJCas().getCas().createAnnotation(posTagType,
 								token.getBegin(), token.getEnd());
@@ -460,16 +458,16 @@ public class TeiReader
 						token.setPos(pos);
 					}
 
-					if (lemma != null && writeLemma) {
+					if (lemma != null && readLemma) {
 						Lemma l = new Lemma(getJCas(), token.getBegin(), token.getEnd());
 						l.setValue(lemma);
 						l.addToIndexes();
 						token.setLemma(l);
 					}
 
-					// FIXME: if writeTokens is disabled, the JCas wrapper should not be generated
+					// FIXME: if readToken is disabled, the JCas wrapper should not be generated
 					// at all!
-					if (writeTokens) {
+					if (readToken) {
 						token.addToIndexes();
 					}
 				}

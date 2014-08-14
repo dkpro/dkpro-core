@@ -93,9 +93,9 @@ public class Conll2006Reader
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
 
-    public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
-    private boolean writePos;
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    private boolean readPos;
 
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
@@ -114,17 +114,17 @@ public class Conll2006Reader
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
     
-    public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
-    @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
-    private boolean writeMorph;
+    public static final String PARAM_READ_MORPH = ComponentParameters.PARAM_READ_MORPH;
+    @ConfigurationParameter(name = PARAM_READ_MORPH, mandatory = true, defaultValue = "true")
+    private boolean readMorph;
 
-    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
-    private boolean writeLemma;
+    public static final String PARAM_READ_LEMMA = ComponentParameters.PARAM_READ_LEMMA;
+    @ConfigurationParameter(name = PARAM_READ_LEMMA, mandatory = true, defaultValue = "true")
+    private boolean readLemma;
 
-    public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
-    private boolean writeDependency;
+    public static final String PARAM_READ_DEPENDENCY = ComponentParameters.PARAM_READ_DEPENDENCY;
+    @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
+    private boolean readDependency;
 
     private static final String UNUSED = "_";
 
@@ -176,7 +176,7 @@ public class Conll2006Reader
     public void convert(JCas aJCas, BufferedReader aReader)
         throws IOException
     {
-        if (writePos) {
+        if (readPos) {
             posMappingProvider.configure(aJCas.getCas());
         }
         
@@ -202,7 +202,7 @@ public class Conll2006Reader
                 doc.add(" ");
 
                 // Read lemma
-                if (!UNUSED.equals(word[LEMMA]) && writeLemma) {
+                if (!UNUSED.equals(word[LEMMA]) && readLemma) {
                     Lemma lemma = new Lemma(aJCas, token.getBegin(), token.getEnd());
                     lemma.setValue(word[LEMMA]);
                     lemma.addToIndexes();
@@ -210,7 +210,7 @@ public class Conll2006Reader
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[POSTAG]) && writePos) {
+                if (!UNUSED.equals(word[POSTAG]) && readPos) {
                     Type posTag = posMappingProvider.getTagType(word[POSTAG]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
@@ -220,7 +220,7 @@ public class Conll2006Reader
                 }
 
                 // Read morphological features
-                if (!UNUSED.equals(word[FEATS]) && writeMorph) {
+                if (!UNUSED.equals(word[FEATS]) && readMorph) {
                     Morpheme morphtag = new Morpheme(aJCas, token.getBegin(), token.getEnd());
                     morphtag.setMorphTag(word[FEATS]);
                     morphtag.addToIndexes();
@@ -230,7 +230,7 @@ public class Conll2006Reader
             }
 
             // Dependencies
-            if (writeDependency) {
+            if (readDependency) {
                 for (String[] word : words) {
                     if (!UNUSED.equals(word[DEPREL])) {
                         int depId = Integer.valueOf(word[ID]);
