@@ -21,12 +21,11 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -44,11 +43,22 @@ public class OpenNlpSegmenterTest
         final String language = "it";
         final String variant = "maxent";
         final String text = "Questo è un test. E un altro ancora.";
-        final String[] sentences = new String[] { "Questo è un test.", "E un altro ancora." };
-        final String[] tokens = new String[] { "Questo", "è", "un", "test", ".", "E", "un",
-                "altro", "ancora", "." };
+        final String[] sentences = { "Questo è un test.", "E un altro ancora." };
+        final String[] tokens = { "Questo", "è", "un", "test", ".", "E", "un", "altro", "ancora",
+                "." };
         runTest(language, variant, text, sentences, tokens);
         runTestWithModelsLocation(language, variant, text, sentences, tokens);
+    }
+    
+    @Ignore("We don't have these models integrated yet")
+    @Test
+    public void testPortugueseCogroo() throws Exception
+    {
+        final String text = "Este é um teste. E mais uma.";
+        final String[] sentences = { "Este é um teste.", "E mais uma." };
+        final String[] tokens = { "Este", "é", "um", "teste", ".", "E", "mais", "uma", "." };
+        
+        runTest("pt", "cogroo", text, sentences, tokens);
     }
 
     @Test
@@ -60,39 +70,47 @@ public class OpenNlpSegmenterTest
         SegmenterHarness.run(aed, "de.1", "en.7", "en.9", "ar.1", "zh.1", "zh.2");
     }
 
-    private void runTest(String language, String variant, String testDocument, String[] sentences,
+    private JCas runTest(String aLanguage, String aVariant, String aDocument, String[] sentences,
             String[] tokens)
         throws Exception
     {
         AnalysisEngine engine = createEngine(OpenNlpSegmenter.class,
-                OpenNlpSegmenter.PARAM_VARIANT, variant);
-        processAndAssert(engine, language, testDocument, sentences, tokens);
+                OpenNlpSegmenter.PARAM_VARIANT, aVariant);
+        
+        // Cannot use TestRunner because that uses TokenBuilder to create a segmentation.
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(aLanguage);
+        jcas.setDocumentText(aDocument);
+        engine.process(jcas);
+        
+        AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+
+        return jcas;
     }
 
-    private void runTestWithModelsLocation(final String language, final String variant, final String testDocument,
-            final String[] sentences, final String[] tokens)
+    private JCas runTestWithModelsLocation(final String aLanguage, final String variant, 
+            final String aDocument, final String[] sentences, final String[] tokens)
         throws Exception
     {
         final AnalysisEngine engine = createEngine(OpenNlpSegmenter.class,
                 OpenNlpSegmenter.PARAM_VARIANT, variant,
-                OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/sentence-" + language + "-"
-                        + variant + ".bin",
-                OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/token-" + language + "-"
+                OpenNlpSegmenter.PARAM_SEGMENTATION_MODEL_LOCATION,
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/sentence-" + aLanguage + "-"
+                        + variant + ".bin", OpenNlpSegmenter.PARAM_TOKENIZATION_MODEL_LOCATION,
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/token-" + aLanguage + "-"
                         + variant + ".bin");
-        processAndAssert(engine, language, testDocument, sentences, tokens);
-
-    }
-
-    private void processAndAssert(final AnalysisEngine engine, final String language,
-            final String testDocument, final String[] sentences, final String[] tokens)
-        throws UIMAException
-    {
-        final JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentLanguage(language);
-        jcas.setDocumentText(testDocument);
+        
+        // Cannot use TestRunner because that uses TokenBuilder to create a segmentation.
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(aLanguage);
+        jcas.setDocumentText(aDocument);
         engine.process(jcas);
+
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
         AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+
+        return jcas;
     }
 
     @Rule
