@@ -1,0 +1,46 @@
+# Utpal Garain's part-of-speech tagset
+#
+# Source: http://www.isical.ac.in/~utpal/docs/POS-Tag%20List.pdf
+# 
+# NN   Noun
+NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# NNP  Proper Noun
+NNP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# PRP  Pronoun
+PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# DEM  Demonstrative
+DEM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# VM   Verb-finite
+VM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# VAUX Verb Auxiliary
+VAUX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# JJ   Adjective
+JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# RB   Adverb
+RB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# PSP  Post position
+PSP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# RP   Particles
+RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# CC   Conjuncts
+CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# WQ   Question Words
+WQ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# QF   Quantifiers
+QF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# QC   Cardinal
+QC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# INTF Intensifier
+INTF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# INJ  Interjection
+INJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# NEG  Negation
+NEG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# SYM  Symbol
+SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# RDP  Re-duplicative
+RDP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# UNK  Unknown
+UNK=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+
