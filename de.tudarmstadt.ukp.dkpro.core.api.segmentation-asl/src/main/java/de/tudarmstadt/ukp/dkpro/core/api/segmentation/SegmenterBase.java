@@ -75,14 +75,14 @@ extends JCasAnnotator_ImplBase
 	/**
 	 * Create {@link Token} annotations.
 	 */
-    public static final String PARAM_CREATE_TOKENS = "createTokens";
+    public static final String PARAM_CREATE_TOKENS = ComponentParameters.PARAM_WRITE_TOKEN;
 	@ConfigurationParameter(name=PARAM_CREATE_TOKENS, mandatory=true, defaultValue="true")
     private boolean createTokens;
 
 	/**
 	 * Create {@link Sentence} annotations.
 	 */
-    public static final String PARAM_CREATE_SENTENCES = "createSentences";
+    public static final String PARAM_CREATE_SENTENCES = ComponentParameters.PARAM_WRITE_SENTENCE;
 	@ConfigurationParameter(name=PARAM_CREATE_SENTENCES, mandatory=true, defaultValue="true")
     private boolean createSentences;
 
