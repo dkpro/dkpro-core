@@ -172,6 +172,8 @@ public final class ComponentParameters
 
 	public static final String PARAM_WRITE_POS = WRITE + POS;
 
+    public static final String PARAM_WRITE_CHUNK = WRITE + CHUNK;
+    
     public static final String PARAM_WRITE_MORPH = WRITE + MORPH;
 
 	public static final String PARAM_WRITE_CONSTITUENT = WRITE + CONSTITUENT;
