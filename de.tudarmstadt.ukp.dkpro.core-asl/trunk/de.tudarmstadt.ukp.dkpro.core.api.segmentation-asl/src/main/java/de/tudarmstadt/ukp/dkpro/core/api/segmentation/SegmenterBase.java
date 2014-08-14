@@ -61,7 +61,7 @@ extends JCasAnnotator_ImplBase
      * A list of all zone boundaries (start and end) is created and segmentation
      * happens between them.
      */
-	public final static String PARAM_STRICT_ZONING = "StrictZoning";
+	public final static String PARAM_STRICT_ZONING = "strictZoning";
 	@ConfigurationParameter(name=PARAM_STRICT_ZONING, mandatory=true, defaultValue="true")
     private boolean strictZoning;
 
@@ -75,18 +75,17 @@ extends JCasAnnotator_ImplBase
 	/**
 	 * Create {@link Token} annotations.
 	 */
-    public static final String PARAM_CREATE_TOKENS = ComponentParameters.PARAM_WRITE_TOKEN;
-	@ConfigurationParameter(name=PARAM_CREATE_TOKENS, mandatory=true, defaultValue="true")
-    private boolean createTokens;
+    public static final String PARAM_WRITE_TOKEN = ComponentParameters.PARAM_WRITE_TOKEN;
+	@ConfigurationParameter(name=PARAM_WRITE_TOKEN, mandatory=true, defaultValue="true")
+    private boolean writeToken;
 
 	/**
 	 * Create {@link Sentence} annotations.
 	 */
-    public static final String PARAM_CREATE_SENTENCES = ComponentParameters.PARAM_WRITE_SENTENCE;
-	@ConfigurationParameter(name=PARAM_CREATE_SENTENCES, mandatory=true, defaultValue="true")
-    private boolean createSentences;
+    public static final String PARAM_WRITE_SENTENCE = ComponentParameters.PARAM_WRITE_SENTENCE;
+	@ConfigurationParameter(name=PARAM_WRITE_SENTENCE, mandatory=true, defaultValue="true")
+    private boolean writeSentence;
 
-	//private int sentenceCount;
 	private int tokenCount;
 
     public boolean isStrictZoning()
@@ -94,14 +93,14 @@ extends JCasAnnotator_ImplBase
 		return strictZoning;
 	}
 
-    public boolean isCreateSentences()
+    public boolean isWriteSentence()
 	{
-		return createSentences;
+		return writeSentence;
 	}
 
-    public boolean isCreateTokens()
+    public boolean isWriteToken()
 	{
-		return createTokens;
+		return writeToken;
 	}
 
     public String[] getZoneTypes()
@@ -210,7 +209,7 @@ extends JCasAnnotator_ImplBase
 	{
 		int[] span = new int[] { aBegin, aEnd };
 		trim(aJCas.getDocumentText(), span);
-		if (!isEmpty(span[0], span[1]) && isCreateSentences()) {
+		if (!isEmpty(span[0], span[1]) && isWriteSentence()) {
 			Sentence seg = new Sentence(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
 			//sentenceCount++;
@@ -237,7 +236,7 @@ extends JCasAnnotator_ImplBase
 	{
 		int[] span = new int[] { aBegin, aEnd };
 		trim(aJCas.getDocumentText(), span);
-		if (!isEmpty(span[0], span[1]) && isCreateTokens()) {
+		if (!isEmpty(span[0], span[1]) && isWriteToken()) {
 			Annotation seg = new Token(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
 			return seg;

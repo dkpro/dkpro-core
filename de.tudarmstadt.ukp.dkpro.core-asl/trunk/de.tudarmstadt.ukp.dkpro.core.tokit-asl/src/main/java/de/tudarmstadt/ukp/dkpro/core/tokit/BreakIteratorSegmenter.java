@@ -55,7 +55,7 @@ public class BreakIteratorSegmenter
         int cur = bi.next();
         while (cur != BreakIterator.DONE) {
             cur += zoneBegin;
-            if (isCreateSentences()) {
+            if (isWriteSentence()) {
                 Annotation segment = createSentence(aJCas, last, cur);
                 if (segment != null) {
                     processSentence(aJCas, segment.getCoveredText(), segment.getBegin());
