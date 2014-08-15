@@ -61,7 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
             "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" },
         outputs = {
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
-            
+
 public class CogrooLemmatizer
 	extends JCasAnnotator_ImplBase
 {
@@ -100,9 +100,9 @@ public class CogrooLemmatizer
                     throw new IOException("The language code '" + language
                             + "' is not supported by LanguageTool.");
                 }
-                
+
                 ComponentFactory factory = ComponentFactory.create(new Locale("pt", "BR"));
-                
+
                 return factory.createLemmatizer();
             }
 		};
@@ -127,7 +127,7 @@ public class CogrooLemmatizer
             // Construct the document
             Document doc = new DocumentImpl();
             doc.setText(aJCas.getDocumentText());
-            
+
             // Extract the sentence and its tokens
             org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(), sentence.getEnd(), doc);
             List<org.cogroo.text.Token> cTokens = new ArrayList<org.cogroo.text.Token>();
@@ -140,12 +140,12 @@ public class CogrooLemmatizer
             }
             cSent.setTokens(cTokens);
             doc.setSentences(asList(cSent));
-            
+
             // Process
             modelProvider.getResource().analyze(doc);
 
             assert cSent.getTokens().size() == dTokens.size();
-            
+
             // Convert from CoGrOO to UIMA model
             Iterator<Token> dTokIt = dTokens.iterator();
             for (org.cogroo.text.Token cTok : cSent.getTokens()) {
@@ -157,7 +157,11 @@ public class CogrooLemmatizer
                 String[] lemmas = cTok.getLemmas();
                 Lemma l = new Lemma(aJCas, cSent.getStart() + cTok.getStart(), cSent.getStart() + cTok.getEnd());
                 if (lemmas != null && lemmas.length > 0) {
-                    l.setValue(lemmas[0]);
+                    String lemmaString = lemmas[0];
+                    if (lemmaString == null) {
+                        lemmaString = dTok.getCoveredText();
+                    }
+                    l.setValue(lemmaString);
                 }
                 else {
                     l.setValue(cTok.getLexeme());
