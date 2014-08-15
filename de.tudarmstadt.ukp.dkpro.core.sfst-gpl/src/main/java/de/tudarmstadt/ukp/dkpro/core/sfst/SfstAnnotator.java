@@ -219,8 +219,12 @@ public class SfstAnnotator
                     morpheme.addToIndexes();
 
                     if (writeLemma && parse.getLemma() != null) {
+                        String lemmaString = parse.getLemma();
+                        if (lemmaString == null) {
+                            lemmaString = token.getCoveredText();
+                        }
                         Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
-                        lemma.setValue(parse.getLemma());
+                        lemma.setValue(lemmaString);
                         lemma.addToIndexes();
                     }
 

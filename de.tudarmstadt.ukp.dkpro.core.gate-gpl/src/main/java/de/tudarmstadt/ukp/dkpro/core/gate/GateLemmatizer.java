@@ -144,6 +144,9 @@ public class GateLemmatizer
 
 			String tokenString = token.getCoveredText();
 			String lemmaString = modelProvider.getResource().runMorpher(tokenString, category);
+            if (lemmaString == null) {
+                lemmaString = tokenString;
+            }
 
 			Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
 			lemma.setValue(lemmaString);
