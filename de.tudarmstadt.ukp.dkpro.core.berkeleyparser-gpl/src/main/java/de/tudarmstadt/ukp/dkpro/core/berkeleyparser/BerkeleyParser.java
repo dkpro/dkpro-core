@@ -60,16 +60,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import edu.berkeley.nlp.PCFGLA.CoarseToFineMaxRuleParser;
 import edu.berkeley.nlp.PCFGLA.Grammar;
 import edu.berkeley.nlp.PCFGLA.Lexicon;
-import edu.berkeley.nlp.PCFGLA.Parser;
 import edu.berkeley.nlp.PCFGLA.ParserData;
 import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
 
 /**
- * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
+ * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
  *
- * @author Richard Eckart de Castilho
+ * @see CoarseToFineMaxRuleParser
  */
 @OperationalProperties(multipleDeploymentAllowed = false)
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -128,6 +127,16 @@ public class BerkeleyParser
     protected boolean printTagSet;
 
     /**
+     * Sets whether to use or not to use already existing POS tags from another annotator for the
+     * parsing process.<br/>
+     * 
+     * Default: {@code false}
+     */
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
+    private boolean readPos;
+    
+    /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
      *
@@ -135,7 +144,7 @@ public class BerkeleyParser
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
-    private boolean createPosTags;
+    private boolean writePos;
 
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
@@ -145,7 +154,7 @@ public class BerkeleyParser
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
-    private boolean createPennTreeString;
+    private boolean writePennTree;
 
     /**
      * Compute Viterbi derivation instead of max-rule tree.
@@ -210,7 +219,7 @@ public class BerkeleyParser
     @ConfigurationParameter(name = PARAM_BINARIZE, mandatory = true, defaultValue = "false")
     private boolean binarize;
 
-    private CasConfigurableProviderBase<Parser> modelProvider;
+    private CasConfigurableProviderBase<CoarseToFineMaxRuleParser> modelProvider;
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
 
@@ -259,8 +268,17 @@ public class BerkeleyParser
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             List<String> tokenText = toText(tokens);
+            
+            List<String> posTags = null;
+            if (readPos) {
+                posTags = new ArrayList<String>(tokens.size());
+                for (Token t : tokens) {
+                    posTags.add(t.getPos().getPosValue());
+                }
+            }
 
-            Tree<String> parseOutput = modelProvider.getResource().getBestParse(tokenText);
+            Tree<String> parseOutput = modelProvider.getResource().getBestConstrainedParse(
+                    tokenText, posTags, false);
             
             // Check if the sentence could be parsed or not
             if (parseOutput.getChildren().isEmpty()) {
@@ -274,7 +292,7 @@ public class BerkeleyParser
 
             createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens, new MutableInt(0));
 
-            if (createPennTreeString) {
+            if (writePennTree) {
                 PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
                 pTree.setPennTree(parseOutput.toString());
                 pTree.addToIndexes();
@@ -303,7 +321,7 @@ public class BerkeleyParser
             }
 
             // only add POS to index if we want POS-tagging
-            if (createPosTags) {
+            if (writePos) {
                 String typeName = aNode.getLabel();
                 Type posTag = posMappingProvider.getTagType(typeName);
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
@@ -359,7 +377,7 @@ public class BerkeleyParser
     }
 
     private class BerkeleyParserModelProvider
-        extends ModelProviderBase<Parser>
+        extends ModelProviderBase<CoarseToFineMaxRuleParser>
     {
         {
             setContextObject(BerkeleyParser.this);
@@ -374,7 +392,7 @@ public class BerkeleyParser
         }
 
         @Override
-        protected Parser produceResource(URL aUrl)
+        protected CoarseToFineMaxRuleParser produceResource(URL aUrl)
             throws IOException
         {
             ObjectInputStream is = null;
@@ -411,7 +429,7 @@ public class BerkeleyParser
                     }
                 }
 
-                addTagset(posTags, createPosTags);
+                addTagset(posTags, writePos);
                 addTagset(constTags);
 
                 if (printTagSet) {

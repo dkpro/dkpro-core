@@ -18,7 +18,6 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
@@ -28,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
@@ -258,6 +258,58 @@ public class BerkeleyParserTest
         // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
 	}
 
+    @Test
+    public void testEnglishPreTagged()
+        throws Exception
+    {
+        JCas jcas = runTest("en", documentEnglish, true);
+
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
+                "ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
+                "WHNP 45,50" };
+
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
+                "ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
+                "WHNP 45,50" };
+
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
+                "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
+                "WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP "
+                + "(RB very) (JJ complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP "
+                + "(WDT which)) (S (VP (VBZ contains) (PP (IN as) (NP (NP (JJ many) "
+                + "(NNS constituents) (CC and) (NNS dependencies)) (PP (IN as) (ADJP "
+                + "(JJ possible)))))))))) (. .)))";
+
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
+                "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
+                "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH",
+                "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S",
+                "SBAR", "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
+
+        String[] unmappedConst = new String[] {};
+
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst,
+        // jcas);
+    }
+
 	@Test
 	public void testGerman()
 		throws Exception
@@ -357,34 +409,47 @@ public class BerkeleyParserTest
 	}
 
 	/**
+     * Setup CAS to test parser for the English language (is only called once if
+     * an English test is run)
+     */
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
+        return runTest(aLanguage, aText, false);
+    }
+    
+	/**
 	 * Setup CAS to test parser for the English language (is only called once if
 	 * an English test is run)
 	 */
-	private JCas runTest(String aLanguage, String aText)
+	private JCas runTest(String aLanguage, String aText, boolean aGoldPos)
 		throws Exception
 	{
-		AnalysisEngineDescription segmenter;
-
-        if (aLanguage.startsWith("dummy-")) {
+	    AggregateBuilder aggregate = new AggregateBuilder();
+	    
+	        if (aLanguage.startsWith("dummy-")) {
             aLanguage = aLanguage.substring(6);
-            segmenter = createEngineDescription(LanguageToolSegmenter.class,
-                    LanguageToolSegmenter.PARAM_LANGUAGE, "en");
+            aggregate.add(createEngineDescription(LanguageToolSegmenter.class,
+                    LanguageToolSegmenter.PARAM_LANGUAGE, "en"));
         }
         else if (Arrays.asList("zh", "de").contains(aLanguage)) {
-			segmenter = createEngineDescription(LanguageToolSegmenter.class);
+            aggregate.add(createEngineDescription(LanguageToolSegmenter.class));
 		}
 		else {
-			segmenter = createEngineDescription(StanfordSegmenter.class);
+		    aggregate.add(createEngineDescription(StanfordSegmenter.class));
 		}
 
-		// setup English
-		AnalysisEngineDescription parser = createEngineDescription(BerkeleyParser.class,
+        if (aGoldPos) {
+            aggregate.add(createEngineDescription(OpenNlpPosTagger.class));
+        }
+        
+        aggregate.add(createEngineDescription(BerkeleyParser.class,
 				BerkeleyParser.PARAM_PRINT_TAGSET, true,
-				BerkeleyParser.PARAM_WRITE_PENN_TREE, true);
+				BerkeleyParser.PARAM_WRITE_PENN_TREE, true,
+				BerkeleyParser.PARAM_WRITE_POS, !aGoldPos,
+				BerkeleyParser.PARAM_READ_POS, aGoldPos));
 
-		AnalysisEngineDescription aggregate = createEngineDescription(segmenter, parser);
-
-		AnalysisEngine engine = createEngine(aggregate);
+		AnalysisEngine engine = aggregate.createAggregate();
 		JCas jcas = engine.newJCas();
 		jcas.setDocumentLanguage(aLanguage);
 		jcas.setDocumentText(aText);
@@ -401,4 +466,10 @@ public class BerkeleyParserTest
 	{
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
+    
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+    }
 }
