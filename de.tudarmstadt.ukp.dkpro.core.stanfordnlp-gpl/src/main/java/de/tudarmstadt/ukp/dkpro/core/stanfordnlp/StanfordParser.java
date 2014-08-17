@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CASException;
@@ -46,7 +47,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
@@ -62,9 +62,11 @@ import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.Word;
+import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.common.ParserQuery;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
 import edu.stanford.nlp.parser.lexparser.TestOptions;
+import edu.stanford.nlp.parser.shiftreduce.ShiftReduceParser;
 import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
 import edu.stanford.nlp.trees.EnglishGrammaticalRelations;
@@ -301,7 +303,7 @@ public class StanfordParser
 
     private GrammaticalStructureFactory gsf;
 
-    private CasConfigurableProviderBase<LexicalizedParser> modelProvider;
+    private CasConfigurableProviderBase<ParserGrammar> modelProvider;
     private MappingProvider posMappingProvider;
 
     private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
@@ -376,7 +378,7 @@ public class StanfordParser
             }
 
             getContext().getLogger().log(FINE, tokenizedSentence.toString());
-            LexicalizedParser parser = modelProvider.getResource();
+            ParserGrammar parser = modelProvider.getResource();
 
             Tree parseTree;
             try {
@@ -499,7 +501,7 @@ public class StanfordParser
     }
 
     private class StanfordParserModelProvider
-        extends ModelProviderBase<LexicalizedParser>
+        extends ModelProviderBase<ParserGrammar>
     {
         {
             setContextObject(StanfordParser.this);
@@ -515,7 +517,7 @@ public class StanfordParser
         }
 
         @Override
-        protected LexicalizedParser produceResource(URL aUrl)
+        protected ParserGrammar produceResource(URL aUrl)
             throws IOException
         {
             getContext().getLogger().log(Level.INFO,
@@ -532,7 +534,7 @@ public class StanfordParser
                 else {
                     in = new ObjectInputStream(new BufferedInputStream(is));
                 }
-                LexicalizedParser pd = (LexicalizedParser) in.readObject();
+                ParserGrammar pd = (ParserGrammar) in.readObject();
                 AbstractTreebankLanguagePack lp = (AbstractTreebankLanguagePack) pd.getTLPParams()
                         .treebankLanguagePack();
                 try {
@@ -553,21 +555,24 @@ public class StanfordParser
                 // grammar. If you really want the user-visible non-split tags of the
                 // original treebank, then you'd need to map them all through the
                 // op.treebankLanguagePack().basicCategory(). -- C. Manning
-                SingletonTagset posTags = new SingletonTagset(
-                        POS.class, metadata.getProperty("pos.tagset"));
-                for (String tag : pd.tagIndex) {
-                    String t = lp.basicCategory(tag);
-
-                    // Strip grammatical function from tag
-                    int gfIdx = t.indexOf(lp.getGfCharacter());
-                    if (gfIdx > 0) {
-                        // TODO should collect syntactic functions in separate tagset
-                        // syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
-                        t = t.substring(0, gfIdx);
+                SingletonTagset posTags = new SingletonTagset(POS.class,
+                        metadata.getProperty("pos.tagset"));
+                if (pd instanceof LexicalizedParser) {
+                    LexicalizedParser lexParser = (LexicalizedParser) pd;
+                    for (String tag : lexParser.tagIndex) {
+                        String t = lp.basicCategory(tag);
+    
+                        // Strip grammatical function from tag
+                        int gfIdx = t.indexOf(lp.getGfCharacter());
+                        if (gfIdx > 0) {
+                            // TODO should collect syntactic functions in separate tagset
+                            // syntacticFunction = nodeLabelValue.substring(gfIdx + 1);
+                            t = t.substring(0, gfIdx);
+                        }
+                        posTags.add(lp.basicCategory(t));
                     }
-                    posTags.add(lp.basicCategory(t));
+                    addTagset(posTags, writePos);
                 }
-                addTagset(posTags, writePos);
 
                 // https://mailman.stanford.edu/pipermail/parser-user/2012-November/002117.html
                 // For constituent categories, there isn't an index of just them. The
@@ -576,7 +581,18 @@ public class StanfordParser
                 // above. -- C. Manning
                 SingletonTagset constTags = new SingletonTagset(
                         Constituent.class, metadata.getProperty("constituent.tagset"));
-                for (String tag : pd.stateIndex) {
+                Iterable<String> states;
+                if (pd instanceof LexicalizedParser) {
+                    states = ((LexicalizedParser) pd).stateIndex;
+                }
+                else if (pd instanceof ShiftReduceParser) {
+                    states = (Iterable<String>) FieldUtils.readField(pd, "knownStates", true);
+                }
+                else {
+                    throw new IllegalStateException("Unknown parser type ["
+                            + pd.getClass().getName() + "]");
+                }
+                for (String tag : states) {
                     String t = lp.basicCategory(tag);
                     // https://mailman.stanford.edu/pipermail/parser-user/2012-December/002156.html
                     // The parser algorithm used is a binary parser, so what we do is
@@ -627,6 +643,9 @@ public class StanfordParser
                 pd.setOptionFlags("-maxLength", String.valueOf(maxTokens), "-MAX_ITEMS",
                         String.valueOf(maxItems));
                 return pd;
+            }
+            catch (IllegalAccessException e) {
+                throw new IllegalStateException(e);
             }
             catch (ClassNotFoundException e) {
                 throw new IOException(e);

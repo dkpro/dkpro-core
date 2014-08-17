@@ -283,6 +283,28 @@
 	</target>
 	
 	<target name="en" depends="download-core, download-tagger,download-parser">
+		<antcall target="tagger-en-bidirectional-distsim"/>
+		<antcall target="tagger-en-left3words-distsim"/>
+		<antcall target="tagger-en-wsj-0-18-bidirectional-nodistsim"/>
+		<antcall target="tagger-en-wsj-0-18-left3words-distsim"/>
+		<antcall target="tagger-en-wsj-0-18-left3words-nodistsim"/>
+		<antcall target="tagger-en-fast.41"/>
+		<antcall target="tagger-en-twitter"/>
+		<antcall target="tagger-en-twitter-fast"/>
+		<antcall target="ner-en-muc.7class.distsim.crf"/>
+		<antcall target="ner-en-conll.4class.distsim.crf"/>
+		<antcall target="ner-en-all.3class.distsim.crf"/>
+		<antcall target="parser-en-pcfg"/>
+		<antcall target="parser-en-factored"/>
+		<antcall target="parser-en-rnn"/>
+		<antcall target="parser-en-sr"/>
+		<antcall target="parser-en-wsj-factored"/>
+		<antcall target="parser-en-wsj-pcfg"/>
+		<antcall target="parser-en-wsj-rnn"/>
+		<antcall target="coref-en-default"/>
+	</target>
+	
+	<target name="tagger-en-bidirectional-distsim">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english-bidirectional-distsim.tagger" 
     		md5="a56c39cc598cea170fc6902652552e25"
@@ -298,7 +320,9 @@
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="tagger-en-left3words-distsim">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english-left3words-distsim.tagger" 
     		md5="38a80a1c6b0fb99bb233b470989135e0"
@@ -314,7 +338,9 @@
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+	</target>
 		
+	<target name="tagger-en-wsj-0-18-bidirectional-nodistsim">
     	<install-stub-and-upstream-file 
     		file="target/download/tagger/wsj-0-18-bidirectional-nodistsim.tagger" 
     		md5="226cef8c9c8b16ee24a22affae51bf99"
@@ -330,7 +356,9 @@
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="tagger-en-wsj-0-18-left3words-distsim">
     	<install-stub-and-upstream-file 
     		file="target/download/tagger/wsj-0-18-left3words-distsim.tagger" 
     		md5="1bba2eed536c3421638a8104126db398"
@@ -346,7 +374,9 @@
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+	</target>
 		
+	<target name="tagger-en-wsj-0-18-left3words-nodistsim">
     	<install-stub-and-upstream-file 
     		file="target/download/tagger/wsj-0-18-left3words-nodistsim.tagger" 
     		md5="8cd7395cb4d10059f335800f9034dd0c"
@@ -362,7 +392,9 @@
 	    		<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+	</target>
 		
+	<target name="tagger-en-fast.41">
 		<install-stub-and-upstream-file
 			file="target/download/tagger/english-fast.41.model"
 			md5="1ad785e08f82b15f18851f29e9ce140d"
@@ -378,7 +410,9 @@
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+	</target>
 		
+	<target name="tagger-en-twitter">
 		<install-stub-and-upstream-file
 			file="target/download/tagger/english-twitter.model"
 			md5="3b17b53af303095bb57d269ab3a42027"
@@ -394,7 +428,9 @@
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+	</target>
 		
+	<target name="tagger-en-twitter-fast">
 		<!-- FILE: gate-EN-twitter-fast.model - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 		  - 2013-07-30 | 2013-09-14 | 185a9535e138218e9bd9a7a197250ee7
 		  - 2013-09-14 | now        | 54dc0d178d6412243e7c02915acadeb2
@@ -414,7 +450,9 @@
 				<entry key="pos.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+	</target>
 		
+	<target name="ner-en-muc.7class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.muc.7class.distsim.crf.ser.gz" 
     		md5="35a6952ce20d4468a519d47d74664a26"
@@ -427,7 +465,9 @@
     		metaDataVersion="1"
 			extension="ser.gz">		
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="ner-en-conll.4class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.conll.4class.distsim.crf.ser.gz" 
     		md5="91f378e73dc4962e086d4e306f9f3219"
@@ -440,7 +480,9 @@
     		variant="conll.4class.distsim.crf" 
     		extension="ser.gz">		
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="ner-en-all.3class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.all.3class.distsim.crf.ser.gz" 
     		md5="00927343802934b9d0d121f9bf3b712a"
@@ -453,7 +495,9 @@
     		variant="all.3class.distsim.crf" 
     		extension="ser.gz">		
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="parser-en-pcfg">
     	<install-stub-and-upstream-file 
     		file="target/download/core/englishPCFG.ser.gz" 
     		md5="517751e92e6d557636f090e2d864bbc7"
@@ -470,7 +514,9 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="parser-en-factored">
 		<!-- 
 		  - The factored parser model is not contained in the CoreNLP models (yet) 
 		  - We cannot use the one from the stanford-parser:models artifact, because the packages
@@ -492,7 +538,9 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="parser-en-rnn">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/englishRNN.ser.gz" 
     		md5="e08bcdd5ebfbe6383685921c53fd53a5"
@@ -509,7 +557,28 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="parser-en-sr">
+    	<install-stub-and-upstream-file 
+    		file="target/download/parser/englishSR.ser.gz" 
+    		md5="0a31e401329351552796587d9d13810a"
+    	    groupId="de.tudarmstadt.ukp.dkpro.core" 
+    	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
+    		upstreamVersion="20140701"
+    		metaDataVersion="1"
+    		tool="parser" 
+    		language="en" 
+    		variant="sr"
+    		extension="ser.gz">		
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="constituent.tagset" value="ptb"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+		
+	<target name="parser-en-wsj-factored">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/wsjFactored.ser.gz" 
     		md5="3941bfa0117061234736e03af2f9fe21"
@@ -526,7 +595,9 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+	</target>
 		
+	<target name="parser-en-wsj-pcfg">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/wsjPCFG.ser.gz" 
     		md5="e42b42fa33604c3f89aa603728d45714"
@@ -543,7 +614,9 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
+	</target>
 		
+	<target name="parser-en-wsj-rnn">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/wsjRNN.ser.gz" 
     		md5="ee58e749ca2452a210f81ae642e0ad64"
@@ -560,7 +633,9 @@
 				<entry key="constituent.tagset" value="ptb"/>
 			</metadata>
 		</install-stub-and-upstream-file>		
-
+	</target>
+		
+	<target name="coref-en-default">
 		<install-stub-and-upstream-folder 
 			folder="target/download/core/coref-en"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
@@ -570,7 +645,6 @@
 			tool="coref"
 			language="en"
 			variant="default"/>
-		
 	</target>
 	
 	<target name="fr" depends="download-parser">
@@ -860,7 +934,11 @@
 
 	<target name="download-parser" depends="-check-download-parser" unless="download-parser.DONE">
 		<mkdir dir="target/download/parser"/>
-    	<get src="http://nlp.stanford.edu/downloads/stanford-parser-full-${parser.date}.zip" dest="target/download/parser/parser.zip" skipexisting="true"/>
+		
+    	<get 
+    		src="http://nlp.stanford.edu/downloads/stanford-parser-full-${parser.date}.zip" 
+    		dest="target/download/parser/parser.zip" 
+    		skipexisting="true"/>
     	<unzip src="target/download/parser/parser.zip" dest="target/download/parser">
     		<patternset>
     			<include name="**/grammar/**/*.ser.gz"/>		
@@ -880,7 +958,7 @@
 					<globmapper from="*" to="stanford-parser-models.jar"/>
 				</firstmatchmapper>
     		</chainedmapper>
-        	</unzip>
+    	</unzip>
 
 		<unzip src="target/download/parser/stanford-parser-models.jar" dest="target/download/parser">
     		<patternset>
@@ -891,8 +969,50 @@
 	    		<mapper type="flatten"/>
     		</chainedmapper>
 		</unzip>
-
     	<delete file="stanford-parser-models.jar"/>
+		
+    	<get 
+    		src="http://nlp.stanford.edu/software/stanford-corenlp-caseless-2014-02-25-models.jar" 
+    		dest="target/download/parser/stanford-corenlp-caseless-models.jar" 
+    		skipexisting="true"/>
+		<unzip src="target/download/parser/stanford-corenlp-caseless-models.jar" dest="target/download/parser">
+    		<patternset>
+    			<include name="**/*.ser.gz"/>		
+    			<include name="**/*.parser*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+
+    	<get 
+    		src="http://nlp.stanford.edu/software/stanford-chinese-corenlp-2014-02-24-models.jar" 
+    		dest="target/download/parser/stanford-chinese-corenlp-models.jar" 
+    		skipexisting="true"/>
+		<unzip src="target/download/parser/stanford-chinese-corenlp-models.jar" dest="target/download/parser">
+    		<patternset>
+    			<include name="**/*.ser.gz"/>		
+    			<include name="**/*.parser*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+
+    	<get 
+    		src="http://nlp.stanford.edu/software/stanford-srparser-2014-07-01-models.jar" 
+    		dest="target/download/parser/stanford-srparser-models.jar" 
+    		skipexisting="true"/>
+		<unzip src="target/download/parser/stanford-srparser-models.jar" dest="target/download/parser">
+    		<patternset>
+    			<include name="**/*.ser.gz"/>		
+    			<include name="**/*.parser*"/>		
+			</patternset>
+    		<chainedmapper>
+	    		<mapper type="flatten"/>
+    		</chainedmapper>
+		</unzip>
+
 		<touch file="target/download/parser/DONE"/>
 	</target>
 

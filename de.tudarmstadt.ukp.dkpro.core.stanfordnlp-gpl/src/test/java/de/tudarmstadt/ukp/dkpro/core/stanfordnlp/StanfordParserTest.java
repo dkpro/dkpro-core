@@ -33,8 +33,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.JCasBuilder;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -481,6 +483,82 @@ public class StanfordParserTest
         AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
     }
 
+    @Test
+    public void testEnglishShiftReduce()
+        throws Exception
+    {
+        JCas jcas = runTestWithPosTagger("en", "sr", documentEnglish);
+
+        String[] constituentMapped = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
+                "ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
+                "WHNP 45,50" };
+
+        String[] constituentOriginal = new String[] { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
+                "NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
+                "ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
+                "WHNP 45,50" };
+
+        String[] dependencies = new String[] {
+                "[  0,  2]NSUBJ(nsubj) D[0,2](We) G[3,7](need)",
+                "[  8,  9]DET(det) D[8,9](a) G[35,43](sentence)",
+                "[ 10, 14]ADVMOD(advmod) D[10,14](very) G[15,26](complicated)",
+                "[ 15, 26]AMOD(amod) D[15,26](complicated) G[35,43](sentence)",
+                "[ 27, 34]NN(nn) D[27,34](example) G[35,43](sentence)",
+                "[ 35, 43]DOBJ(dobj) D[35,43](sentence) G[3,7](need)",
+                "[ 45, 50]NSUBJ(nsubj) D[45,50](which) G[51,59](contains)",
+                "[ 51, 59]RCMOD(rcmod) D[51,59](contains) G[35,43](sentence)",
+                "[ 63, 67]AMOD(amod) D[63,67](many) G[68,80](constituents)",
+                "[ 68, 80]PREP(prep_as) D[68,80](constituents) G[51,59](contains)",
+                "[ 85, 97]CONJ(conj_and) D[85,97](dependencies) G[68,80](constituents)",
+                "[101,109]PREP(prep_as) D[101,109](possible) G[68,80](constituents)" };
+
+        String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
+                "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+
+        String[] posOriginal = new String[] { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
+                "WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+
+        String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP (RB very) "
+                + "(JJ complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP (WDT which)) "
+                + "(S (VP (VBZ contains) (PP (IN as) (NP (NP (JJ many) (NNS constituents) "
+                + "(CC and) (NNS dependencies)) (PP (IN as) (ADJP (JJ possible)))))))))) (. .)))";
+
+        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ".$$.", ":",
+                "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP",
+                "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO",
+                "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+
+        String[] constituentTags = new String[] { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
+                "NAC", "NP", "NX", "PP", "PRN", "PRT", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
+                "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+        String[] depTags = new String[] { "acomp", "advcl", "advmod", "agent", "amod", "appos",
+                "arg", "aux", "auxpass", "cc", "ccomp", "comp", "conj", "cop", "csubj",
+                "csubjpass", "dep", "det", "discourse", "dobj", "expl", "goeswith", "gov", "iobj",
+                "mark", "mod", "mwe", "neg", "nn", "npadvmod", "nsubj", "nsubjpass", "num",
+                "number", "obj", "parataxis", "pcomp", "pobj", "poss", "possessive", "preconj",
+                "pred", "predet", "prep", "prt", "punct", "quantmod", "rcmod", "ref", "rel",
+                "sdep", "subj", "tmod", "vmod", "xcomp", "xsubj" };
+
+        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", ".$$.", "``" };
+
+        String[] unmappedConst = new String[] {};
+
+        String[] unmappedDep = new String[] { "gov" };
+
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+        AssertAnnotations.assertTagset(Dependency.class, "stanford331", depTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Dependency.class, "stanford331", unmappedDep, jcas);
+    }
     @Test
     public void testEnglishWsjRnn()
         throws Exception
@@ -989,23 +1067,45 @@ public class StanfordParserTest
             }
         }
     }
-    
-    /**
-     * Setup CAS to test parser for the English language (is only called once if an English test is
-     * run)
-     */
+
+    private JCas runTestWithPosTagger(String aLanguage, String aVariant, String aText,
+            Object... aExtraParams)
+        throws Exception
+    {
+        AggregateBuilder aggregate = new AggregateBuilder();
+        
+        aggregate.add(getSegmenter(aLanguage));
+        
+        aggregate.add(createEngineDescription(StanfordPosTagger.class));
+                
+        Object[] params = new Object[] {
+                StanfordParser.PARAM_VARIANT, aVariant,
+                StanfordParser.PARAM_PRINT_TAGSET, true,
+                StanfordParser.PARAM_WRITE_CONSTITUENT, true,
+                StanfordParser.PARAM_WRITE_DEPENDENCY, true,
+                StanfordParser.PARAM_WRITE_PENN_TREE, true,
+                StanfordParser.PARAM_READ_POS, true,
+                StanfordParser.PARAM_WRITE_POS, false};
+        params = ArrayUtils.addAll(params, aExtraParams);
+        aggregate.add(createEngineDescription(StanfordParser.class, params));
+
+        AnalysisEngine engine = aggregate.createAggregate();
+
+        JCas jcas = engine.newJCas();
+        jcas.setDocumentLanguage(aLanguage);
+        jcas.setDocumentText(aText);
+        engine.process(jcas);
+
+        return jcas;    
+    }
+
     private JCas runTest(String aLanguage, String aVariant, String aText, Object... aExtraParams)
         throws Exception
     {
-        AnalysisEngineDescription segmenter;
-
-        if ("zh".equals(aLanguage) || "de".equals(aLanguage)) {
-            segmenter = createEngineDescription(LanguageToolSegmenter.class);
-        }
-        else {
-            segmenter = createEngineDescription(StanfordSegmenter.class);
-        }
-        // setup English
+        AggregateBuilder aggregate = new AggregateBuilder();
+        
+        aggregate.add(getSegmenter(aLanguage));
+                
         Object[] params = new Object[] {
                 StanfordParser.PARAM_VARIANT, aVariant,
                 StanfordParser.PARAM_PRINT_TAGSET, true,
@@ -1014,9 +1114,9 @@ public class StanfordParserTest
                 StanfordParser.PARAM_WRITE_PENN_TREE, true,
                 StanfordParser.PARAM_WRITE_POS, true};
         params = ArrayUtils.addAll(params, aExtraParams);
-        AnalysisEngineDescription parser = createEngineDescription(StanfordParser.class, params);
+        aggregate.add(createEngineDescription(StanfordParser.class, params));
 
-        AnalysisEngine engine = createEngine(createEngineDescription(segmenter, parser));
+        AnalysisEngine engine = aggregate.createAggregate();
 
         JCas jcas = engine.newJCas();
         jcas.setDocumentLanguage(aLanguage);
@@ -1025,11 +1125,18 @@ public class StanfordParserTest
 
         return jcas;
     }
+    
+    private AnalysisEngineDescription getSegmenter(String aLanguage)
+        throws ResourceInitializationException
+    {
+        if ("zh".equals(aLanguage) || "de".equals(aLanguage)) {
+            return createEngineDescription(LanguageToolSegmenter.class);
+        }
+        else {
+            return createEngineDescription(StanfordSegmenter.class);
+        }
+    }
 
-    /**
-     * Setup CAS to test parser for the English language (is only called once if an English test is
-     * run)
-     */
     private JCas runTest(String aLanguage, String aVariant, String[] aTokens)
         throws Exception
     {
