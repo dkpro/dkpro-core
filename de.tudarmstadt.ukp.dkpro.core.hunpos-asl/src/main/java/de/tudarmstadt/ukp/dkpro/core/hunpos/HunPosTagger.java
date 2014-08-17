@@ -133,6 +133,7 @@ public class HunPosTagger
             {
                 setContextObject(HunPosTagger.this);
 
+                setDefault(ARTIFACT_ID, "${groupId}.hunpos-model-tagger-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/lib/"
                                 + "tagger-${language}-${variant}.model");
                 setDefault(VARIANT, "default");
