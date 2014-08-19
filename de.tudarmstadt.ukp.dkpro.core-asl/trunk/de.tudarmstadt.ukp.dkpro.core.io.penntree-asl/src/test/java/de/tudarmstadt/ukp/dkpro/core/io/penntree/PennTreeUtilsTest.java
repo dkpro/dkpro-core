@@ -17,8 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.convertPennTree;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.parsePennTree;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.selectDfs;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toPennTree;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toPrettyPennTree;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.toText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 import static org.junit.Assert.assertEquals;
 
@@ -26,6 +32,7 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -34,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
-import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.*;
 
 /**
  * @author Richard Eckart de Castilho
@@ -120,6 +126,7 @@ public class PennTreeUtilsTest
 	}
 
 	@Test
+	@Ignore("No asserts yet!")
 	public void testSelectDfs()
 	{
 		PennTreeNode n = parsePennTree(
@@ -195,6 +202,7 @@ public class PennTreeUtilsTest
         return jcas;
     }
 
+
     @Rule
     public TestName name = new TestName();
 
@@ -202,5 +210,11 @@ public class PennTreeUtilsTest
     public void printSeparator()
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
+    
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }
