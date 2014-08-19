@@ -50,24 +50,18 @@ public abstract class FrequencyCountProviderBase
         long n = getNrOfNgrams(FrequencyUtils.getPhraseLength(phrase));
 
         if (n == 0) {
-            throw new IOException("Requesting probability of a phrase for which no total phrase count information is available.");
+            return 0;
         }
-        
-        long f = getFrequency(phrase);
-        // TODO we need real language models with backoff and smoothing
-        if (f == 0) {
-            f = 1;
+        else {
+            return (double) getFrequency(phrase) / n;
         }
-        return (double) f / n;
     }
 
     @Override
     public double getLogProbability(String phrase)
         throws IOException
     {
-        double probability = getProbability(phrase);
-        double logProbability = Math.log(probability);
-        return logProbability;
+        return Math.log(getProbability(phrase));
     }
 
     @Override

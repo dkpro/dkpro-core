@@ -38,8 +38,8 @@ public class ConditionalFrequencyDistributionTest
         List<String> tokens2 = Arrays.asList("This second example contains other example tokens".split(" "));
         
         ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
-        cfd.incAll(condition1, tokens1);
-        cfd.incAll(condition2, tokens2);
+        cfd.addSamples(condition1, tokens1);
+        cfd.addSamples(condition2, tokens2);
         
         System.out.println(cfd);
         
@@ -55,17 +55,5 @@ public class ConditionalFrequencyDistributionTest
         assertEquals(1, cfd.getCount(condition2, "This"));
         assertEquals(2, cfd.getCount(condition1, "test"));
         assertEquals(2, cfd.getCount(condition2, "example"));
-    }
-    
-    @Test
-    public void addSampleTest() {
-                
-        ConditionalFrequencyDistribution<String, String> cfd = new ConditionalFrequencyDistribution<String, String>();
-        cfd.addSample("condition", "key", 10);
-                
-        assertEquals(1, cfd.getConditions().size());
-        assertEquals(10, cfd.getN());
-        
-        assertEquals(10, cfd.getCount("condition", "key"));
     }
 }

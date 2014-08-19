@@ -73,7 +73,7 @@ public class ClearNlpDependencyParserTest
 	public void testEnglishMayo()
 		throws Exception
 	{
-//		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
+		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1200000000l);
 
 		JCas jcas = runTest("en", "mayo", documentEnglish);
 

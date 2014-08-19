@@ -245,7 +245,6 @@ Token
       begin: 0
       end: 5
       PosValue: "PPOSAT"
-   morph: <null>
 [Position]
 Token
    sofa: _InitialView
@@ -301,7 +300,6 @@ Token
       begin: 6
       end: 14
       PosValue: "NN"
-   morph: <null>
 [Position]
 NN
    sofa: _InitialView
@@ -413,7 +411,6 @@ Token
       begin: 15
       end: 18
       PosValue: "APPR"
-   morph: <null>
 [der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -527,7 +524,6 @@ Token
       begin: 19
       end: 22
       PosValue: "ART"
-   morph: <null>
 [der]
 ART
    sofa: _InitialView
@@ -596,7 +592,6 @@ Token
       begin: 23
       end: 39
       PosValue: "NN"
-   morph: <null>
 [Prüfgesellschaft]
 NN
    sofa: _InitialView
@@ -724,7 +719,6 @@ Token
       begin: 40
       end: 45
       PosValue: "VMFIN"
-   morph: <null>
 [er damals]
 Constituent
    sofa: _InitialView
@@ -846,7 +840,6 @@ Token
       begin: 46
       end: 48
       PosValue: "PPER"
-   morph: <null>
 [damals]
 Constituent
    sofa: _InitialView
@@ -938,7 +931,6 @@ Token
       begin: 49
       end: 55
       PosValue: "ADV"
-   morph: <null>
 [niederlegen]
 V
    sofa: _InitialView
@@ -1060,7 +1052,6 @@ Token
       begin: 56
       end: 67
       PosValue: "VVINF"
-   morph: <null>
 [,]
 PUNC
    sofa: _InitialView
@@ -1087,7 +1078,6 @@ Token
       begin: 68
       end: 69
       PosValue: "$,"
-   morph: <null>
 [den AWO-Posten nicht]
 Constituent
    sofa: _InitialView
@@ -1226,7 +1216,6 @@ Token
       begin: 70
       end: 73
       PosValue: "ART"
-   morph: <null>
 [den]
 ART
    sofa: _InitialView
@@ -1281,7 +1270,6 @@ Token
       begin: 74
       end: 84
       PosValue: "NN"
-   morph: <null>
 [AWO-Posten]
 NN
    sofa: _InitialView
@@ -1409,7 +1397,6 @@ Token
       begin: 85
       end: 90
       PosValue: "PTKNEG"
-   morph: <null>
 [.]
 PUNC
    sofa: _InitialView
@@ -1436,7 +1423,6 @@ Token
       begin: 91
       end: 92
       PosValue: "$."
-   morph: <null>
 [K. W.]
 ROOT
    sofa: _InitialView
@@ -1531,7 +1517,6 @@ Token
       begin: 93
       end: 95
       PosValue: "NE"
-   morph: <null>
 [K.]
 NP
    sofa: _InitialView
@@ -1572,7 +1557,6 @@ Token
       begin: 96
       end: 98
       PosValue: "NE"
-   morph: <null>
 [W.]
 NP
    sofa: _InitialView
@@ -1730,7 +1714,6 @@ Token
       begin: 0
       end: 3
       PosValue: "NE"
-   morph: <null>
 [SPD]
 NP
    sofa: _InitialView
@@ -1763,7 +1746,6 @@ Token
       begin: 4
       end: 5
       PosValue: "$("
-   morph: <null>
 [CDU]
 Constituent
    sofa: _InitialView
@@ -1835,7 +1817,6 @@ Token
       begin: 6
       end: 9
       PosValue: "NE"
-   morph: <null>
 [CDU]
 NP
    sofa: _InitialView
@@ -1868,7 +1849,6 @@ Token
       begin: 10
       end: 11
       PosValue: "$("
-   morph: <null>
 [AfB]
 Constituent
    sofa: _InitialView
@@ -1940,7 +1920,6 @@ Token
       begin: 12
       end: 15
       PosValue: "NE"
-   morph: <null>
 [AfB]
 NP
    sofa: _InitialView
@@ -2010,7 +1989,6 @@ Token
       begin: 16
       end: 19
       PosValue: "APPR"
-   morph: <null>
 [Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -2082,7 +2060,6 @@ Token
       begin: 20
       end: 36
       PosValue: "NN"
-   morph: <null>
 [Daewoo-Millionen]
 NN
    sofa: _InitialView
@@ -2183,7 +2160,6 @@ Token
       begin: 37
       end: 41
       PosValue: "KON"
-   morph: <null>
 [Aber]
 CONJ
    sofa: _InitialView
@@ -2328,7 +2304,6 @@ Token
       begin: 42
       end: 54
       PosValue: "NE"
-   morph: <null>
 [Bremerhavens]
 NP
    sofa: _InitialView
@@ -2376,7 +2351,6 @@ Token
       begin: 55
       end: 58
       PosValue: "NE"
-   morph: <null>
 [AfB]
 NP
    sofa: _InitialView
@@ -2483,7 +2457,6 @@ Token
       begin: 59
       end: 66
       PosValue: "VVFIN"
-   morph: <null>
 [jetzt Untersuchungsausschuß]
 Constituent
    sofa: _InitialView
@@ -2584,7 +2557,6 @@ Token
       begin: 67
       end: 72
       PosValue: "ADV"
-   morph: <null>
 [Untersuchungsausschuß]
 Constituent
    sofa: _InitialView
@@ -2656,7 +2628,6 @@ Token
       begin: 73
       end: 94
       PosValue: "NN"
-   morph: <null>
 [Untersuchungsausschuß]
 NN
    sofa: _InitialView
