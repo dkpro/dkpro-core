@@ -501,5 +501,35 @@
 		    targetVersion="1.0"
 		    targetArtifactId="clearnlp-dictionary"
 		    targetLocation=""/>
-	</target>
+		
+		<!-- The dictionary in clearnlp consists of several files, that is why its targetLocation is empty.-->
+		<!--
+		<install-model-stub 
+		    groupId="de.tudarmstadt.ukp.dkpro.core"
+		    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+		    version="20130715.0"
+		    tool="segmenter"
+		    language="en"
+		    variant="default"
+		    targetGroupId="com.clearnlp"
+		    targetVersion="1.0"
+		    targetArtifactId="clearnlp-dictionary"
+		    targetLocation=""/>
+		-->
+
+		<!-- The dictionary in clearnlp consists of several files, that is why its targetLocation is empty.-->
+		<!--
+		<install-model-stub 
+		    groupId="de.tudarmstadt.ukp.dkpro.core"
+		    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
+		    version="20130715.0"
+		    tool="lemmatizer"
+		    language="en"
+		    variant="default"
+		    targetGroupId="com.clearnlp"
+		    targetVersion="1.0"
+		    targetArtifactId="clearnlp-dictionary"
+		    targetLocation=""/>
+		-->
+</target>
 </project>
