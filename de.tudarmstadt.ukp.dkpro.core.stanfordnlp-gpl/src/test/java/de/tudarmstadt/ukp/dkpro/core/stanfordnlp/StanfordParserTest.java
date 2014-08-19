@@ -710,29 +710,27 @@ public class StanfordParserTest
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-        JCas jcas = runTest("fr", "factored", "Nous avons besoin d'une phrase par exemple très "
-                + "compliqué, qui contient des constituants que de nombreuses dépendances et que "
-                + "possible.");
+        JCas jcas = runTest("fr", "factored", "Nous avons besoin d' une phrase par exemple très "
+                + "compliqué , qui contient des constituants que de nombreuses dépendances et que "
+                + "possible .");
 
-        String[] constituentMapped = new String[] { "NP 11,47", "NP 20,47", "NP 59,62", "NP 72,88",
-                "NP 93,118", "PP 18,47", "ROOT 0,135", "X 0,135", "X 0,57", "X 119,134",
-                "X 122,134", "X 126,134", "X 31,42", "X 31,47", "X 59,88", "X 63,71", "X 89,134" };
+        String[] constituentMapped = { "NP 11,48", "NP 21,48", "NP 61,64", "NP 74,90", "NP 95,120",
+                "PP 18,48", "ROOT 0,138", "X 0,138", "X 0,58", "X 121,136", "X 124,136",
+                "X 128,136", "X 32,43", "X 32,48", "X 61,90", "X 65,73", "X 91,136" };
 
-        String[] constituentOriginal = new String[] { "AP 126,134", "AdP 31,47", "COORD 119,134",
-                "MWADV 31,42", "NP 11,47", "NP 20,47", "NP 59,62", "NP 72,88", "NP 93,118",
-                "PP 18,47", "ROOT 0,135", "SENT 0,135", "Srel 59,88", "Ssub 122,134",
-                "Ssub 89,134", "VN 0,57", "VN 63,71" };
+        String[] constituentOriginal = { "AP 128,136", "AdP 32,48", "COORD 121,136", "MWADV 32,43",
+                "NP 11,48", "NP 21,48", "NP 61,64", "NP 74,90", "NP 95,120", "PP 18,48",
+                "ROOT 0,138", "SENT 0,138", "Srel 61,90", "Ssub 124,136", "Ssub 91,136", "VN 0,58",
+                "VN 65,73" };
 
-        String[] dependencies = new String[] {/** No dependencies for French */
-        };
+        String[] dependencies = {/** No dependencies for French */ };
 
-        String[] posMapped = new String[] { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV",
-                "V", "PUNC", "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ",
-                "ADJ", "PUNC" };
+        String[] posMapped = { "PR", "V", "NN", "PP", "ART", "NN", "PP", "N", "ADV", "V", "PUNC",
+                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV",
-                "VPP", "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS",
-                "ADJ", "PUNC" };
+        String[] posOriginal = { "CLS", "V", "NC", "P", "DET", "NC", "P", "N", "ADV", "VPP",
+                "PUNC", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ",
+                "PUNC" };
 
         String pennTree = "(ROOT (SENT (VN (CLS Nous) (V avons) (NP (NC besoin) (PP (P d') (NP "
                 + "(DET une) (NC phrase) (AdP (MWADV (P par) (N exemple)) (ADV très))))) "
@@ -741,22 +739,22 @@ public class StanfordParserTest
                 + "(NC dépendances)) (COORD (CC et) (Ssub (CS que) (AP (ADJ possible))))) "
                 + "(PUNC .)))";
 
-        String[] posTags = new String[] { ".$$.", "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C", "CC",
-                "CL", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P",
-                "PREF", "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
+        String[] posTags = { ".$$.", "A", "ADJ", "ADJWH", "ADV", "ADVWH", "C", "CC", "CL", "CLO",
+                "CLR", "CLS", "CS", "DET", "DETWH", "ET", "I", "N", "NC", "NPP", "P", "PREF",
+                "PRO", "PROREL", "PROWH", "PUNC", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
-        String[] constituentTags = new String[] { "AP", "AdP", "COORD", "MWA", "MWADV", "MWC",
-                "MWCL", "MWD", "MWET", "MWI", "MWN", "MWP", "MWPRO", "MWV", "NP", "PP", "ROOT",
-                "SENT", "Sint", "Srel", "Ssub", "VN", "VPinf", "VPpart" };
+        String[] constituentTags = { "AP", "AdP", "COORD", "MWA", "MWADV", "MWC", "MWCL", "MWD",
+                "MWET", "MWI", "MWN", "MWP", "MWPRO", "MWV", "NP", "PP", "ROOT", "SENT", "Sint",
+                "Srel", "Ssub", "VN", "VPinf", "VPpart" };
 
-        // NO DEP TAGS String[] depTags = new String[] {};
+        // NO DEP TAGS String[] depTags = {};
 
-        String[] unmappedPos = new String[] { ".$$." };
+        String[] unmappedPos = { ".$$." };
 
-        String[] unmappedConst = new String[] { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET",
+        String[] unmappedConst = { "MWA", "MWADV", "MWC", "MWCL", "MWD", "MWET",
                 "MWI", "MWN", "MWP", "MWPRO", "MWV" };
 
-        // NO DEP TAGS String[] unmappedDep = new String[] {};
+        // NO DEP TAGS String[] unmappedDep = {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -778,19 +776,19 @@ public class StanfordParserTest
     {
         Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-        JCas jcas = runTest("fr", null, "La traduction d'un texte du français vers l'anglais.");
+        JCas jcas = runTest("fr", null, "La traduction d' un texte du français vers l' anglais .");
 
-        String[] constituentMapped = new String[] { "NP 0,51", "NP 16,36", "NP 42,51", "PP 14,36",
-                "PP 25,36", "PP 37,51", "ROOT 0,52", "X 0,52", "X 28,36" };
+        String[] constituentMapped = { "NP 0,53", "NP 17,37", "NP 43,53", "PP 14,37", "PP 26,37",
+                "PP 38,53", "ROOT 0,55", "X 0,55", "X 29,37" };
 
-        String[] constituentOriginal = new String[] { "AP 28,36", "NP 0,51", "NP 16,36",
-                "NP 42,51", "PP 14,36", "PP 25,36", "PP 37,51", "ROOT 0,52", "SENT 0,52" };
+        String[] constituentOriginal = { "AP 29,37", "NP 0,53", "NP 17,37", "NP 43,53", "PP 14,37",
+                "PP 26,37", "PP 38,53", "ROOT 0,55", "SENT 0,55" };
 
-        String[] posMapped = new String[] { "ART", "NN", "PP", "ART", "NN", "PP", "ADJ", "PP",
-                "ART", "NN", "PUNC" };
+        String[] posMapped = { "ART", "NN", "PP", "ART", "NN", "PP", "ADJ", "PP", "ART", "NN",
+                "PUNC" };
 
-        String[] posOriginal = new String[] { "DET", "NC", "P", "DET", "NC", "P", "ADJ", "P",
-                "DET", "NC", "PUNC" };
+        String[] posOriginal = { "DET", "NC", "P", "DET", "NC", "P", "ADJ", "P", "DET", "NC",
+                "PUNC" };
 
         String pennTree = "(ROOT (SENT (NP (DET La) (NC traduction) (PP (P d') (NP (DET un) "
                 + "(NC texte) (PP (P du) (AP (ADJ français))))) (PP (P vers) (NP (DET l') "
