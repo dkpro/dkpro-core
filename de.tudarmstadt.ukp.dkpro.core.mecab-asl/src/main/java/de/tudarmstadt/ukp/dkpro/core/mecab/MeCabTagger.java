@@ -425,13 +425,9 @@ public class MeCabTagger
 					+ curMorphBegin + curMorph.length());
 			curPOS.setPosValue(curPOSList.get(j));
 			curPOS.addToIndexes();
-			String lemmaString = curBaseFormList.get(j);
-			if (lemmaString == null) {
-			    lemmaString = jpyToken.getCoveredText();
-			}
 			Lemma curLemma = new Lemma(aJCas, begin + curSenBegin + curMorphBegin, begin
 					+ curSenBegin + curMorphBegin + curMorph.length());
-			curLemma.setValue(lemmaString);
+			curLemma.setValue(curBaseFormList.get(j));
 			curLemma.addToIndexes();
 
 			// set lemma and pos additionally for the token

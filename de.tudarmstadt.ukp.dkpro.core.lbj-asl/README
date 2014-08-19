@@ -1,9 +1,0 @@
-Unfortunately, this module cannot be included in DKPro Core releases. 
-
-The lbj modules are not available from Maven Central. They cannot be build directly
-from the source code. Lbj is special in the sense that it does not have model files, 
-as other tools, but rather generates Java source code from training data, which is
-then compiled directly into the tool. Since we cannot build it from source, we cannot
-do a propery third-party deploy to Maven Central.
-
-We'll keep the module in the trunk though.

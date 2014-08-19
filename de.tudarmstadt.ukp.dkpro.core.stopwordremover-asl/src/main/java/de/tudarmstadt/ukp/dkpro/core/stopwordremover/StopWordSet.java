@@ -91,14 +91,8 @@ public class StopWordSet
 	public void load(InputStream aIs)
 		throws IOException
 	{
-		load(aIs, "UTF-8");
+		load(new InputStreamReader(aIs, "UTF-8"));
 	}
-
-    public void load(InputStream aIs, String aEncoding)
-        throws IOException
-    {
-        load(new InputStreamReader(aIs, aEncoding));
-    }
 
 	public void load(Reader aReader)
 		throws IOException

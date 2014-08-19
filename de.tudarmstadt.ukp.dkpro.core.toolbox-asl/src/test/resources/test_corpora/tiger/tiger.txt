@@ -1,0 +1,2944 @@
+%%
+#FORMAT 4
+#BOT ORIGIN
+0	--	%% 
+1	fr920712	%% Frankfurter Rundschau 199207?? ??? ?????????
+84	fr951112	%% Frankfurter Rundschau 19951106 NAC D11050346
+85	fr951112	%% Frankfurter Rundschau 19951106 NAC D11050359
+86	fr951112	%% Frankfurter Rundschau 19951106 NAC D11050364
+87	fr951112	%% Frankfurter Rundschau 19951106 FEU D11050368
+88	fr951112	%% Frankfurter Rundschau 19951106 WIR D11050401
+89	fr951112	%% Frankfurter Rundschau 19951107 NAC DA1066314
+90	fr951112	%% Frankfurter Rundschau 19951107 NAC DA1066338
+91	fr951112	%% Frankfurter Rundschau 19951107 WIR DA1066348
+92	fr951112	%% Frankfurter Rundschau 19951107 AAW DA1066368
+93	fr951112	%% Frankfurter Rundschau 19951107 AAW DA1066386
+94	fr951112	%% Frankfurter Rundschau 19951107 FEU DD1020571
+95	fr951112	%% Frankfurter Rundschau 19951107 FEU DD1020599
+96	fr951112	%% Frankfurter Rundschau 19951107 FEU DD1030584
+97	fr951112	%% Frankfurter Rundschau 19951107 FEU DD1050219
+98	fr951112	%% Frankfurter Rundschau 19951107 VS1 DD1060002
+99	fr951112	%% Frankfurter Rundschau 19951107 VS1 DD1060095
+100	fr951112	%% Frankfurter Rundschau 19951107 VS1 DD1060121
+101	fr951112	%% Frankfurter Rundschau 19951107 VS1 DD1060168
+102	fr951112	%% Frankfurter Rundschau 19951107 WIR DD1060207
+103	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060225
+104	fr951112	%% Frankfurter Rundschau 19951107 WIR DD1060229
+105	fr951112	%% Frankfurter Rundschau 19951107 WIR DD1060246
+106	fr951112	%% Frankfurter Rundschau 19951107 AAW DD1060254
+107	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060286
+108	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060295
+109	fr951112	%% Frankfurter Rundschau 19951107 FEU DD1060348
+110	fr951112	%% Frankfurter Rundschau 19951107 AAW DD1060356
+111	fr951112	%% Frankfurter Rundschau 19951107 AAW DD1060398
+112	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060411
+113	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060418
+114	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060431
+115	fr951112	%% Frankfurter Rundschau 19951107 AAW DD1060453
+116	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1060533
+117	fr951112	%% Frankfurter Rundschau 19951107 WIR DD1064010
+118	fr951112	%% Frankfurter Rundschau 19951107 NAC DD1064032
+119	fr951112	%% Frankfurter Rundschau 19951107 VS1 DF1050179
+120	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060030
+121	fr951112	%% Frankfurter Rundschau 19951107 VS1 DF1060037
+122	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060068
+123	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060083
+124	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060087
+125	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060106
+126	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060122
+127	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060129
+128	fr951112	%% Frankfurter Rundschau 19951107 NAC DF1060156
+129	fr951112	%% Frankfurter Rundschau 19951107 FEU DH1020109
+130	fr951112	%% Frankfurter Rundschau 19951107 NAC DR1060029
+131	fr951112	%% Frankfurter Rundschau 19951107 WIR DR1060171
+132	fr951112	%% Frankfurter Rundschau 19951107 NAC DR1060174
+133	fr951112	%% Frankfurter Rundschau 19951107 AAW DR1060235
+134	fr951112	%% Frankfurter Rundschau 19951107 WIR DR1060290
+135	fr951112	%% Frankfurter Rundschau 19951107 WIR DR1060302
+136	fr951112	%% Frankfurter Rundschau 19951107 WIR DR1060332
+137	fr951112	%% Frankfurter Rundschau 19951107 NAC DR1060339
+138	fr951112	%% Frankfurter Rundschau 19951107 NAC DR1060341
+139	fr951112	%% Frankfurter Rundschau 19951107 WIR DR1060407
+140	fr951112	%% Frankfurter Rundschau 19951107 NAC DR1060548
+141	fr951112	%% Frankfurter Rundschau 19951107 AAW D07050019
+142	fr951112	%% Frankfurter Rundschau 19951107 PUM D09170368
+143	fr951112	%% Frankfurter Rundschau 19951107 PUM D10061426
+144	fr951112	%% Frankfurter Rundschau 19951107 PUM D10080395
+145	fr951112	%% Frankfurter Rundschau 19951107 FEU D10160648
+146	fr951112	%% Frankfurter Rundschau 19951107 PUM D10230017
+147	fr951112	%% Frankfurter Rundschau 19951107 WIR D10240616
+148	fr951112	%% Frankfurter Rundschau 19951107 WIR D10240749
+149	fr951112	%% Frankfurter Rundschau 19951107 FEU D10300227
+150	fr951112	%% Frankfurter Rundschau 19951107 FEU D10300734
+151	fr951112	%% Frankfurter Rundschau 19951107 FEU D10310359
+152	fr951112	%% Frankfurter Rundschau 19951107 POL D11010393
+153	fr951112	%% Frankfurter Rundschau 19951107 WIR D11030605
+154	fr951112	%% Frankfurter Rundschau 19951107 DOK D11050351
+155	fr951112	%% Frankfurter Rundschau 19951107 DOK D11050366
+156	fr951112	%% Frankfurter Rundschau 19951107 DOK D11050426
+157	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060048
+158	fr951112	%% Frankfurter Rundschau 19951107 VS1 D11060081
+159	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060119
+160	fr951112	%% Frankfurter Rundschau 19951107 FEU D11060130
+161	fr951112	%% Frankfurter Rundschau 19951107 FEU D11060133
+162	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060141
+163	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060177
+164	fr951112	%% Frankfurter Rundschau 19951107 FEU D11060185
+165	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060282
+166	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060301
+167	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060343
+168	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060352
+169	fr951112	%% Frankfurter Rundschau 19951107 POL D11060360
+170	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060365
+171	fr951112	%% Frankfurter Rundschau 19951107 AAW D11060378
+172	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060405
+173	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060407
+174	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060410
+175	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060413
+176	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060469
+177	fr951112	%% Frankfurter Rundschau 19951107 AAW D11060476
+178	fr951112	%% Frankfurter Rundschau 19951107 FEU D11060505
+179	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060508
+180	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060518
+181	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060522
+182	fr951112	%% Frankfurter Rundschau 19951107 POL D11060541
+183	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060543
+184	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060567
+185	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060586
+186	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060617
+187	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060621
+188	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060644
+189	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060647
+190	fr951112	%% Frankfurter Rundschau 19951107 WIR D11060652
+191	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060659
+192	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060662
+193	fr951112	%% Frankfurter Rundschau 19951107 POL D11060678
+194	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060695
+195	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060698
+196	fr951112	%% Frankfurter Rundschau 19951107 POL D11060701
+197	fr951112	%% Frankfurter Rundschau 19951107 NAC D11060715
+198	fr951112	%% Frankfurter Rundschau 19951107 POL D11060719
+199	fr951112	%% Frankfurter Rundschau 19951108 VS1 DA1076475
+200	fr951112	%% Frankfurter Rundschau 19951108 VS1 DA1076477
+201	fr951112	%% Frankfurter Rundschau 19951108 AAW DA1076488
+202	fr951112	%% Frankfurter Rundschau 19951108 AAW DA1076498
+203	fr951112	%% Frankfurter Rundschau 19951108 NAC DA1076530
+204	fr951112	%% Frankfurter Rundschau 19951108 NAC DA1076544
+205	fr951112	%% Frankfurter Rundschau 19951108 AAW DA1076551
+206	fr951112	%% Frankfurter Rundschau 19951108 AAW DA1076587
+207	fr951112	%% Frankfurter Rundschau 19951108 NAC DA1076590
+208	fr951112	%% Frankfurter Rundschau 19951108 AAW DA1076594
+209	fr951112	%% Frankfurter Rundschau 19951108 NAC DA1076635
+210	fr951112	%% Frankfurter Rundschau 19951108 WIR DD1020575
+211	fr951112	%% Frankfurter Rundschau 19951108 VS1 DD1070004
+212	fr951112	%% Frankfurter Rundschau 19951108 VS1 DD1070011
+213	fr951112	%% Frankfurter Rundschau 19951108 VS1 DD1070098
+214	fr951112	%% Frankfurter Rundschau 19951108 VS1 DD1070103
+215	fr951112	%% Frankfurter Rundschau 19951108 NAC DD1070105
+216	fr951112	%% Frankfurter Rundschau 19951108 FEU DD1070300
+217	fr951112	%% Frankfurter Rundschau 19951108 FEU DD1070302
+218	fr951112	%% Frankfurter Rundschau 19951108 WIR DD1070320
+219	fr951112	%% Frankfurter Rundschau 19951108 WIR DD1070332
+220	fr951112	%% Frankfurter Rundschau 19951108 FEU DD1070349
+221	fr951112	%% Frankfurter Rundschau 19951108 AAW DD1070403
+222	fr951112	%% Frankfurter Rundschau 19951108 AAW DD1070404
+223	fr951112	%% Frankfurter Rundschau 19951108 NAC DD1070417
+224	fr951112	%% Frankfurter Rundschau 19951108 NAC DD1070491
+225	fr951112	%% Frankfurter Rundschau 19951108 AAW DD1070509
+226	fr951112	%% Frankfurter Rundschau 19951108 NAC DD1074010
+227	fr951112	%% Frankfurter Rundschau 19951108 NAC DD1074021
+228	fr951112	%% Frankfurter Rundschau 19951108 WIR DD1074032
+229	fr951112	%% Frankfurter Rundschau 19951108 AAW DF1070002
+230	fr951112	%% Frankfurter Rundschau 19951108 NAC DF1070055
+231	fr951112	%% Frankfurter Rundschau 19951108 NAC DF1070099
+232	fr951112	%% Frankfurter Rundschau 19951108 AAW DF1070119
+233	fr951112	%% Frankfurter Rundschau 19951108 NAC DF1070147
+234	fr951112	%% Frankfurter Rundschau 19951108 NAC DF1070149
+235	fr951112	%% Frankfurter Rundschau 19951108 AAW DF1070152
+236	fr951112	%% Frankfurter Rundschau 19951108 NAC DF1070164
+237	fr951112	%% Frankfurter Rundschau 19951108 NAC DK1070010
+238	fr951112	%% Frankfurter Rundschau 19951108 AAW DR1060489
+239	fr951112	%% Frankfurter Rundschau 19951108 VS1 DR1070029
+240	fr951112	%% Frankfurter Rundschau 19951108 WIR DR1070309
+241	fr951112	%% Frankfurter Rundschau 19951108 NAC DR1070388
+242	fr951112	%% Frankfurter Rundschau 19951108 FEU D10300764
+243	fr951112	%% Frankfurter Rundschau 19951108 NAC D11050168
+244	fr951112	%% Frankfurter Rundschau 19951108 DOK D11050317
+245	fr951112	%% Frankfurter Rundschau 19951108 FEU D11050529
+246	fr951112	%% Frankfurter Rundschau 19951108 AAW D11060102
+247	fr951112	%% Frankfurter Rundschau 19951108 FEU D11060169
+248	fr951112	%% Frankfurter Rundschau 19951108 FEU D11060658
+249	fr951112	%% Frankfurter Rundschau 19951108 FEU D11060826
+250	fr951112	%% Frankfurter Rundschau 19951108 VS1 D11070063
+251	fr951112	%% Frankfurter Rundschau 19951108 POL D11070090
+252	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070108
+253	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070157
+254	fr951112	%% Frankfurter Rundschau 19951108 FEU D11070185
+255	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070196
+256	fr951112	%% Frankfurter Rundschau 19951108 FEU D11070215
+257	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070225
+258	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070258
+259	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070300
+260	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070307
+261	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070328
+262	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070364
+263	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070387
+264	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070402
+265	fr951112	%% Frankfurter Rundschau 19951108 POL D11070408
+266	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070416
+267	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070433
+268	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070434
+269	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070466
+270	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070477
+271	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070480
+272	fr951112	%% Frankfurter Rundschau 19951108 POL D11070492
+273	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070493
+274	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070494
+275	fr951112	%% Frankfurter Rundschau 19951108 WIR D11070524
+276	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070528
+277	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070540
+278	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070548
+279	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070556
+280	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070559
+281	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070560
+282	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070570
+283	fr951112	%% Frankfurter Rundschau 19951108 POL D11070574
+284	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070575
+285	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070599
+286	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070605
+287	fr951112	%% Frankfurter Rundschau 19951108 POL D11070619
+288	fr951112	%% Frankfurter Rundschau 19951108 AAW D11070626
+289	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070629
+290	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070634
+291	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070653
+292	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070659
+293	fr951112	%% Frankfurter Rundschau 19951108 POL D11070660
+294	fr951112	%% Frankfurter Rundschau 19951108 AAW D11070692
+295	fr951112	%% Frankfurter Rundschau 19951108 NAC D11070722
+296	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1076622
+297	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1076683
+298	fr951112	%% Frankfurter Rundschau 19951109 VS1 DA1086708
+299	fr951112	%% Frankfurter Rundschau 19951109 VS1 DA1086726
+300	fr951112	%% Frankfurter Rundschau 19951109 VS1 DA1086729
+301	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1086734
+302	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1086755
+303	fr951112	%% Frankfurter Rundschau 19951109 AAW DA1086776
+304	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1086852
+305	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1086860
+306	fr951112	%% Frankfurter Rundschau 19951109 NAC DA1086877
+307	fr951112	%% Frankfurter Rundschau 19951109 FEU DD1030398
+308	fr951112	%% Frankfurter Rundschau 19951109 FEU DD1070426
+309	fr951112	%% Frankfurter Rundschau 19951109 FEU DD1070506
+310	fr951112	%% Frankfurter Rundschau 19951109 AAW DD1070558
+311	fr951112	%% Frankfurter Rundschau 19951109 WIR DD1080187
+312	fr951112	%% Frankfurter Rundschau 19951109 AAW DD1080293
+313	fr951112	%% Frankfurter Rundschau 19951109 NAC DD1080386
+314	fr951112	%% Frankfurter Rundschau 19951109 WIR DD1080388
+315	fr951112	%% Frankfurter Rundschau 19951109 WIR DD1080423
+316	fr951112	%% Frankfurter Rundschau 19951109 NAC DD1084005
+317	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1070236
+318	fr951112	%% Frankfurter Rundschau 19951109 FEU DF1080002
+319	fr951112	%% Frankfurter Rundschau 19951109 VS1 DF1080005
+320	fr951112	%% Frankfurter Rundschau 19951109 VS1 DF1080009
+321	fr951112	%% Frankfurter Rundschau 19951109 VS1 DF1080011
+322	fr951112	%% Frankfurter Rundschau 19951109 VS1 DF1080045
+323	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080067
+324	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080079
+325	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080106
+326	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080116
+327	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080149
+328	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080151
+329	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080174
+330	fr951112	%% Frankfurter Rundschau 19951109 NAC DF1080206
+331	fr951112	%% Frankfurter Rundschau 19951109 AAW DH1080095
+332	fr951112	%% Frankfurter Rundschau 19951109 FEU DK1050511
+333	fr951112	%% Frankfurter Rundschau 19951109 NAC DK1080505
+334	fr951112	%% Frankfurter Rundschau 19951109 NAC DK1080506
+335	fr951112	%% Frankfurter Rundschau 19951109 WIR DR1070643
+336	fr951112	%% Frankfurter Rundschau 19951109 WIR DR1080036
+337	fr951112	%% Frankfurter Rundschau 19951109 VS1 DR1080050
+338	fr951112	%% Frankfurter Rundschau 19951109 VS1 DR1080068
+339	fr951112	%% Frankfurter Rundschau 19951109 WIR DR1080190
+340	fr951112	%% Frankfurter Rundschau 19951109 WIR DR1080288
+341	fr951112	%% Frankfurter Rundschau 19951109 AAW DR1080346
+342	fr951112	%% Frankfurter Rundschau 19951109 FEU D10170016
+343	fr951112	%% Frankfurter Rundschau 19951109 FEU D10230298
+344	fr951112	%% Frankfurter Rundschau 19951109 DOK D10300797
+345	fr951112	%% Frankfurter Rundschau 19951109 POL D11030617
+346	fr951112	%% Frankfurter Rundschau 19951109 NAC D11060002
+347	fr951112	%% Frankfurter Rundschau 19951109 SUH D11060830
+348	fr951112	%% Frankfurter Rundschau 19951109 SUH D11060837
+349	fr951112	%% Frankfurter Rundschau 19951109 NAC D11070257
+350	fr951112	%% Frankfurter Rundschau 19951109 SUH D11070440
+351	fr951112	%% Frankfurter Rundschau 19951109 SUH D11070445
+352	fr951112	%% Frankfurter Rundschau 19951109 FEU D11070519
+353	fr951112	%% Frankfurter Rundschau 19951109 AAW D11070546
+354	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080013
+355	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080014
+356	fr951112	%% Frankfurter Rundschau 19951109 POL D11080019
+357	fr951112	%% Frankfurter Rundschau 19951109 AAW D11080043
+358	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080047
+359	fr951112	%% Frankfurter Rundschau 19951109 FEU D11080135
+360	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080148
+361	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080157
+362	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080161
+363	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080225
+364	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080236
+365	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080246
+366	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080295
+367	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080297
+368	fr951112	%% Frankfurter Rundschau 19951109 AAW D11080303
+369	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080317
+370	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080333
+371	fr951112	%% Frankfurter Rundschau 19951109 FEU D11080352
+372	fr951112	%% Frankfurter Rundschau 19951109 FEU D11080358
+373	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080361
+374	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080364
+375	fr951112	%% Frankfurter Rundschau 19951109 AAW D11080369
+376	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080381
+377	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080391
+378	fr951112	%% Frankfurter Rundschau 19951109 AAW D11080414
+379	fr951112	%% Frankfurter Rundschau 19951109 POL D11080420
+380	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080431
+381	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080444
+382	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080446
+383	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080450
+384	fr951112	%% Frankfurter Rundschau 19951109 POL D11080453
+385	fr951112	%% Frankfurter Rundschau 19951109 POL D11080454
+386	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080463
+387	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080469
+388	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080474
+389	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080478
+390	fr951112	%% Frankfurter Rundschau 19951109 POL D11080481
+391	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080483
+392	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080484
+393	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080490
+394	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080500
+395	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080504
+396	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080511
+397	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080522
+398	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080533
+399	fr951112	%% Frankfurter Rundschau 19951109 WIR D11080558
+400	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080564
+401	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080572
+402	fr951112	%% Frankfurter Rundschau 19951109 NAC D11080584
+486	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090281
+487	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090292
+488	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090299
+489	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090328
+490	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090334
+491	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090356
+492	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090364
+493	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090371
+494	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090389
+495	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090390
+496	fr951112	%% Frankfurter Rundschau 19951110 POL D11090391
+497	fr951112	%% Frankfurter Rundschau 19951110 POL D11090392
+498	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090409
+499	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090410
+500	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090412
+501	fr951112	%% Frankfurter Rundschau 19951110 WIR D11090414
+502	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090435
+503	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090440
+504	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090456
+505	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090477
+506	fr951112	%% Frankfurter Rundschau 19951110 FEU D11090489
+507	fr951112	%% Frankfurter Rundschau 19951110 POL D11090493
+508	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090494
+509	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090508
+510	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090517
+511	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090525
+512	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090527
+513	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090548
+514	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090577
+515	fr951112	%% Frankfurter Rundschau 19951110 WIR D11090592
+516	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090602
+517	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090614
+518	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090624
+519	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090628
+520	fr951112	%% Frankfurter Rundschau 19951110 WIR D11090634
+521	fr951112	%% Frankfurter Rundschau 19951110 AAW D11090654
+522	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090656
+523	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090684
+524	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090693
+525	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090695
+526	fr951112	%% Frankfurter Rundschau 19951110 NAC D11090727
+527	fr951112	%% Frankfurter Rundschau 19951111 WIR DA1107245
+528	fr951112	%% Frankfurter Rundschau 19951111 FEU DD1080454
+529	fr951112	%% Frankfurter Rundschau 19951111 WIS DD1090240
+530	fr951112	%% Frankfurter Rundschau 19951111 WIR DD1090550
+531	fr951112	%% Frankfurter Rundschau 19951111 FEU DD1090560
+532	fr951112	%% Frankfurter Rundschau 19951111 VS1 DD1090647
+533	fr951112	%% Frankfurter Rundschau 19951111 FEU DD1090648
+534	fr951112	%% Frankfurter Rundschau 19951111 NAC DD1094023
+535	fr951112	%% Frankfurter Rundschau 19951111 VS1 DD1100003
+536	fr951112	%% Frankfurter Rundschau 19951111 VS1 DD1100094
+537	fr951112	%% Frankfurter Rundschau 19951111 NAC DD1100248
+538	fr951112	%% Frankfurter Rundschau 19951111 WIR DD1100258
+539	fr951112	%% Frankfurter Rundschau 19951111 FEU DD1100341
+540	fr951112	%% Frankfurter Rundschau 19951111 AAW DD1100401
+541	fr951112	%% Frankfurter Rundschau 19951111 AAW DD1100409
+542	fr951112	%% Frankfurter Rundschau 19951111 NAC DD1100454
+543	fr951112	%% Frankfurter Rundschau 19951111 NAC DD1100487
+544	fr951112	%% Frankfurter Rundschau 19951111 NAC DD1104007
+545	fr951112	%% Frankfurter Rundschau 19951111 WIR DD1104009
+546	fr951112	%% Frankfurter Rundschau 19951111 AAW DF1100005
+547	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100007
+548	fr951112	%% Frankfurter Rundschau 19951111 VS1 DF1100012
+549	fr951112	%% Frankfurter Rundschau 19951111 VS1 DF1100014
+550	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100052
+551	fr951112	%% Frankfurter Rundschau 19951111 AAW DF1100090
+552	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100098
+553	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100099
+554	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100120
+555	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100121
+556	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100124
+557	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100127
+558	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100135
+559	fr951112	%% Frankfurter Rundschau 19951111 AAW DF1100159
+560	fr951112	%% Frankfurter Rundschau 19951111 NAC DF1100191
+561	fr951112	%% Frankfurter Rundschau 19951111 NAC DK1100507
+562	fr951112	%% Frankfurter Rundschau 19951111 WIR DR1100026
+563	fr951112	%% Frankfurter Rundschau 19951111 VS1 DR1100028
+564	fr951112	%% Frankfurter Rundschau 19951111 VS1 DR1100071
+565	fr951112	%% Frankfurter Rundschau 19951111 AAW DR1100203
+566	fr951112	%% Frankfurter Rundschau 19951111 WIR DR1100293
+567	fr951112	%% Frankfurter Rundschau 19951111 WIR DR1100304
+568	fr951112	%% Frankfurter Rundschau 19951111 NAC DR1100332
+569	fr951112	%% Frankfurter Rundschau 19951111 NAC DR1100341
+570	fr951112	%% Frankfurter Rundschau 19951111 NAC DR1100354
+571	fr951112	%% Frankfurter Rundschau 19951111 WIR DR1100373
+572	fr951112	%% Frankfurter Rundschau 19951111 NAC DR1100403
+573	fr951112	%% Frankfurter Rundschau 19951111 NAC DR1100463
+574	fr951112	%% Frankfurter Rundschau 19951111 MRE D08140663
+575	fr951112	%% Frankfurter Rundschau 19951111 FEU D08150387
+576	fr951112	%% Frankfurter Rundschau 19951111 MRE D09030330
+577	fr951112	%% Frankfurter Rundschau 19951111 MRE D09040636
+578	fr951112	%% Frankfurter Rundschau 19951111 PUM D10130758
+579	fr951112	%% Frankfurter Rundschau 19951111 MRE D10180483
+580	fr951112	%% Frankfurter Rundschau 19951111 PUM D10240741
+581	fr951112	%% Frankfurter Rundschau 19951111 MRE D10290316
+582	fr951112	%% Frankfurter Rundschau 19951111 MRE D10290335
+583	fr951112	%% Frankfurter Rundschau 19951111 MRE D10290337
+584	fr951112	%% Frankfurter Rundschau 19951111 MRE D10300282
+585	fr951112	%% Frankfurter Rundschau 19951111 MRE D10310593
+586	fr951112	%% Frankfurter Rundschau 19951111 MRE D10310728
+587	fr951112	%% Frankfurter Rundschau 19951111 WIS D11010009
+588	fr951112	%% Frankfurter Rundschau 19951111 WIS D11010348
+589	fr951112	%% Frankfurter Rundschau 19951111 PUM D11010625
+590	fr951112	%% Frankfurter Rundschau 19951111 MRE D11010677
+591	fr951112	%% Frankfurter Rundschau 19951111 NAC D11020339
+592	fr951112	%% Frankfurter Rundschau 19951111 MRE D11020466
+593	fr951112	%% Frankfurter Rundschau 19951111 MRE D11030024
+594	fr951112	%% Frankfurter Rundschau 19951111 MRE D11030026
+595	fr951112	%% Frankfurter Rundschau 19951111 WIS D11030056
+596	fr951112	%% Frankfurter Rundschau 19951111 MRE D11030092
+597	fr951112	%% Frankfurter Rundschau 19951111 FEU D11030686
+598	fr951112	%% Frankfurter Rundschau 19951111 NAC D11050214
+599	fr951112	%% Frankfurter Rundschau 19951111 MRE D11060083
+600	fr951112	%% Frankfurter Rundschau 19951111 MRE D11060085
+601	fr951112	%% Frankfurter Rundschau 19951111 MRE D11060095
+602	fr951112	%% Frankfurter Rundschau 19951111 NAC D11060711
+603	fr951112	%% Frankfurter Rundschau 19951111 FEU D11060806
+604	fr951112	%% Frankfurter Rundschau 19951111 PUM D11070240
+605	fr951112	%% Frankfurter Rundschau 19951111 WIS D11070664
+606	fr951112	%% Frankfurter Rundschau 19951111 DOK D11080122
+607	fr951112	%% Frankfurter Rundschau 19951111 FEU D11080509
+608	fr951112	%% Frankfurter Rundschau 19951111 FEU D11090182
+609	fr951112	%% Frankfurter Rundschau 19951111 NAC D11090248
+610	fr951112	%% Frankfurter Rundschau 19951111 AAW D11090253
+611	fr951112	%% Frankfurter Rundschau 19951111 NAC D11090255
+612	fr951112	%% Frankfurter Rundschau 19951111 NAC D11090475
+613	fr951112	%% Frankfurter Rundschau 19951111 PUM D11090619
+614	fr951112	%% Frankfurter Rundschau 19951111 PUM D11090657
+615	fr951112	%% Frankfurter Rundschau 19951111 PUM D11090663
+616	fr951112	%% Frankfurter Rundschau 19951111 PUM D11090667
+617	fr951112	%% Frankfurter Rundschau 19951111 NAC D11090688
+618	fr951112	%% Frankfurter Rundschau 19951111 FEU D11090713
+619	fr951112	%% Frankfurter Rundschau 19951111 FEU D11090725
+620	fr951112	%% Frankfurter Rundschau 19951111 AAW D11090764
+621	fr951112	%% Frankfurter Rundschau 19951111 WIR D11090767
+622	fr951112	%% Frankfurter Rundschau 19951111 POL D11100705
+623	fr951112	%% Frankfurter Rundschau 19951111 VS1 D11100715
+624	fr951112	%% Frankfurter Rundschau 19951111 WIS D11100725
+625	fr951112	%% Frankfurter Rundschau 19951111 VS1 D11100728
+626	fr951112	%% Frankfurter Rundschau 19951111 WIR D11100768
+627	fr951112	%% Frankfurter Rundschau 19951111 PUM D11100781
+628	fr951112	%% Frankfurter Rundschau 19951111 WIR D11100813
+629	fr951112	%% Frankfurter Rundschau 19951111 AAW D11100835
+630	fr951112	%% Frankfurter Rundschau 19951111 WIR D11100923
+631	fr951112	%% Frankfurter Rundschau 19951111 NAC D11100947
+632	fr951112	%% Frankfurter Rundschau 19951111 WIR D11100984
+633	fr951112	%% Frankfurter Rundschau 19951111 WIR D11100985
+634	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101079
+635	fr951112	%% Frankfurter Rundschau 19951111 WIR D11101133
+636	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101151
+637	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101158
+638	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101176
+639	fr951112	%% Frankfurter Rundschau 19951111 POL D11101187
+640	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101189
+641	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101192
+642	fr951112	%% Frankfurter Rundschau 19951111 POL D11101197
+643	fr951112	%% Frankfurter Rundschau 19951111 WIR D11101201
+644	fr951112	%% Frankfurter Rundschau 19951111 WIR D11101218
+645	fr951112	%% Frankfurter Rundschau 19951111 WIR D11101220
+646	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101229
+647	fr951112	%% Frankfurter Rundschau 19951111 WIR D11101237
+648	fr951112	%% Frankfurter Rundschau 19951111 WIR D11101238
+649	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101243
+650	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101253
+651	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101281
+652	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101287
+653	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101309
+654	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101325
+655	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101337
+656	fr951112	%% Frankfurter Rundschau 19951111 POL D11101341
+657	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101346
+658	fr951112	%% Frankfurter Rundschau 19951111 AAW D11101347
+659	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101352
+660	fr951112	%% Frankfurter Rundschau 19951111 POL D11101374
+661	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101377
+662	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101383
+663	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101390
+664	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101391
+665	fr951112	%% Frankfurter Rundschau 19951111 POL D11101397
+666	fr951112	%% Frankfurter Rundschau 19951111 AAW D11101420
+667	fr951112	%% Frankfurter Rundschau 19951111 NAC D11101424
+668	fr951119	%% Frankfurter Rundschau 19951113 NAC DA1117482
+669	fr951119	%% Frankfurter Rundschau 19951113 NAC DA1127560
+670	fr951119	%% Frankfurter Rundschau 19951113 NAC DA1127561
+671	fr951119	%% Frankfurter Rundschau 19951113 NAC DA1127563
+672	fr951119	%% Frankfurter Rundschau 19951113 AAW DA1127564
+673	fr951119	%% Frankfurter Rundschau 19951113 NAC DA1127573
+674	fr951119	%% Frankfurter Rundschau 19951113 FEU DD1100545
+675	fr951119	%% Frankfurter Rundschau 19951113 NAC DD1110187
+676	fr951119	%% Frankfurter Rundschau 19951113 WIR DD1110252
+677	fr951119	%% Frankfurter Rundschau 19951113 AAW DD1110414
+678	fr951119	%% Frankfurter Rundschau 19951113 FEU DD1120005
+679	fr951119	%% Frankfurter Rundschau 19951113 WIR DD1120008
+680	fr951119	%% Frankfurter Rundschau 19951113 AAW DD1120159
+681	fr951119	%% Frankfurter Rundschau 19951113 AAW DD1120206
+682	fr951119	%% Frankfurter Rundschau 19951113 NAC DD1120229
+683	fr951119	%% Frankfurter Rundschau 19951113 WIR DD1120236
+684	fr951119	%% Frankfurter Rundschau 19951113 NAC DD1120281
+685	fr951119	%% Frankfurter Rundschau 19951113 NAC DD1120291
+686	fr951119	%% Frankfurter Rundschau 19951113 NAC DF1100205
+687	fr951119	%% Frankfurter Rundschau 19951113 NAC DF1100228
+688	fr951119	%% Frankfurter Rundschau 19951113 WIR DF1110075
+689	fr951119	%% Frankfurter Rundschau 19951113 AAW DF1120030
+690	fr951119	%% Frankfurter Rundschau 19951113 WIR DR1100464
+691	fr951119	%% Frankfurter Rundschau 19951113 NAC DR1110111
+692	fr951119	%% Frankfurter Rundschau 19951113 NAC DR1110250
+693	fr951119	%% Frankfurter Rundschau 19951113 WIR DR1110293
+694	fr951119	%% Frankfurter Rundschau 19951113 NAC DR1120077
+695	fr951119	%% Frankfurter Rundschau 19951113 NAC DR1120312
+696	fr951119	%% Frankfurter Rundschau 19951113 DOK D10040585
+697	fr951119	%% Frankfurter Rundschau 19951113 FEU D10300083
+698	fr951119	%% Frankfurter Rundschau 19951113 FEU D11050527
+699	fr951119	%% Frankfurter Rundschau 19951113 FEU D11060483
+700	fr951119	%% Frankfurter Rundschau 19951113 DOK D11070050
+701	fr951119	%% Frankfurter Rundschau 19951113 AAW D11070053
+702	fr951119	%% Frankfurter Rundschau 19951113 DOK D11080205
+703	fr951119	%% Frankfurter Rundschau 19951113 WIR D11100842
+704	fr951119	%% Frankfurter Rundschau 19951113 NAC D11100925
+705	fr951119	%% Frankfurter Rundschau 19951113 NAC D11101015
+706	fr951119	%% Frankfurter Rundschau 19951113 POL D11101111
+707	fr951119	%% Frankfurter Rundschau 19951113 NAC D11101334
+708	fr951119	%% Frankfurter Rundschau 19951113 NAC D11101350
+709	fr951119	%% Frankfurter Rundschau 19951113 AAW D11101420
+710	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120013
+711	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120033
+712	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120037
+713	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120067
+714	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120072
+715	fr951119	%% Frankfurter Rundschau 19951113 POL D11120083
+716	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120090
+717	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120099
+718	fr951119	%% Frankfurter Rundschau 19951113 POL D11120117
+719	fr951119	%% Frankfurter Rundschau 19951113 WIR D11120133
+720	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120149
+721	fr951119	%% Frankfurter Rundschau 19951113 POL D11120190
+722	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120288
+723	fr951119	%% Frankfurter Rundschau 19951113 POL D11120293
+724	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120314
+725	fr951119	%% Frankfurter Rundschau 19951113 WIR D11120327
+726	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120336
+727	fr951119	%% Frankfurter Rundschau 19951113 WIR D11120347
+728	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120352
+729	fr951119	%% Frankfurter Rundschau 19951113 POL D11120381
+730	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120384
+731	fr951119	%% Frankfurter Rundschau 19951113 NAC D11120410
+732	fr951119	%% Frankfurter Rundschau 19951114 VS1 DA1137651
+733	fr951119	%% Frankfurter Rundschau 19951114 VS1 DA1137677
+734	fr951119	%% Frankfurter Rundschau 19951114 NAC DA1137719
+735	fr951119	%% Frankfurter Rundschau 19951114 NAC DA1137733
+736	fr951119	%% Frankfurter Rundschau 19951114 NAC DA1137747
+737	fr951119	%% Frankfurter Rundschau 19951114 AAW DD1080211
+738	fr951119	%% Frankfurter Rundschau 19951114 FEU DD1100356
+739	fr951119	%% Frankfurter Rundschau 19951114 FEU DD1110342
+740	fr951119	%% Frankfurter Rundschau 19951114 FEU DD1120306
+741	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1120407
+742	fr951119	%% Frankfurter Rundschau 19951114 VS1 DD1130002
+743	fr951119	%% Frankfurter Rundschau 19951114 AAW DD1130036
+744	fr951119	%% Frankfurter Rundschau 19951114 AAW DD1130038
+745	fr951119	%% Frankfurter Rundschau 19951114 VS1 DD1130098
+746	fr951119	%% Frankfurter Rundschau 19951114 VS1 DD1130123
+747	fr951119	%% Frankfurter Rundschau 19951114 VS1 DD1130142
+748	fr951119	%% Frankfurter Rundschau 19951114 VS1 DD1130149
+749	fr951119	%% Frankfurter Rundschau 19951114 AAW DD1130244
+750	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130303
+751	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130308
+752	fr951119	%% Frankfurter Rundschau 19951114 WIR DD1130320
+753	fr951119	%% Frankfurter Rundschau 19951114 WIR DD1130321
+754	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130324
+755	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130378
+756	fr951119	%% Frankfurter Rundschau 19951114 FEU DD1130392
+757	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130395
+758	fr951119	%% Frankfurter Rundschau 19951114 AAW DD1130418
+759	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130423
+760	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1130449
+761	fr951119	%% Frankfurter Rundschau 19951114 NAC DD1134006
+762	fr951119	%% Frankfurter Rundschau 19951114 AAW DF1120124
+763	fr951119	%% Frankfurter Rundschau 19951114 VS1 DF1130002
+764	fr951119	%% Frankfurter Rundschau 19951114 VS1 DF1130025
+765	fr951119	%% Frankfurter Rundschau 19951114 VS1 DF1130034
+766	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130045
+767	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130081
+768	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130112
+769	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130114
+770	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130115
+771	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130118
+772	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130124
+773	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130127
+774	fr951119	%% Frankfurter Rundschau 19951114 NAC DF1130149
+775	fr951119	%% Frankfurter Rundschau 19951114 AAW DK1130006
+776	fr951119	%% Frankfurter Rundschau 19951114 NAC DR1130166
+777	fr951119	%% Frankfurter Rundschau 19951114 AAW DR1130198
+778	fr951119	%% Frankfurter Rundschau 19951114 WIR DR1130302
+779	fr951119	%% Frankfurter Rundschau 19951114 NAC DR1130337
+780	fr951119	%% Frankfurter Rundschau 19951114 NAC DR1130450
+781	fr951119	%% Frankfurter Rundschau 19951114 NAC DR1130538
+782	fr951119	%% Frankfurter Rundschau 19951114 WIR D09110479
+783	fr951119	%% Frankfurter Rundschau 19951114 FEU D09270013
+784	fr951119	%% Frankfurter Rundschau 19951114 NAC D10310464
+785	fr951119	%% Frankfurter Rundschau 19951114 AAW D11030485
+786	fr951119	%% Frankfurter Rundschau 19951114 WIR D11050041
+787	fr951119	%% Frankfurter Rundschau 19951114 PUM D11070132
+788	fr951119	%% Frankfurter Rundschau 19951114 AAW D11070228
+789	fr951119	%% Frankfurter Rundschau 19951114 PUM D11070610
+790	fr951119	%% Frankfurter Rundschau 19951114 FEU D11070718
+791	fr951119	%% Frankfurter Rundschau 19951114 PUM D11080536
+792	fr951119	%% Frankfurter Rundschau 19951114 PUM D11080642
+793	fr951119	%% Frankfurter Rundschau 19951114 NAC D11090139
+794	fr951119	%% Frankfurter Rundschau 19951114 NAC D11090576
+795	fr951119	%% Frankfurter Rundschau 19951114 NAC D11100944
+895	fr951119	%% Frankfurter Rundschau 19951115 DOK D11060596
+896	fr951119	%% Frankfurter Rundschau 19951115 FEU D11060846
+897	fr951119	%% Frankfurter Rundschau 19951115 AAW D11080111
+898	fr951119	%% Frankfurter Rundschau 19951115 POL D11080150
+899	fr951119	%% Frankfurter Rundschau 19951115 NAC D11090254
+900	fr951119	%% Frankfurter Rundschau 19951115 NAC D11100807
+901	fr951119	%% Frankfurter Rundschau 19951115 FEU D11120116
+902	fr951119	%% Frankfurter Rundschau 19951115 NAC D11130076
+903	fr951119	%% Frankfurter Rundschau 19951115 NAC D11130606
+904	fr951119	%% Frankfurter Rundschau 19951115 WIR D11130692
+905	fr951119	%% Frankfurter Rundschau 19951115 NAC D11130852
+906	fr951119	%% Frankfurter Rundschau 19951115 AAW D11140001
+907	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140097
+908	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140105
+909	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140114
+910	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140147
+911	fr951119	%% Frankfurter Rundschau 19951115 POL D11140180
+912	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140182
+913	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140210
+914	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140214
+915	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140241
+916	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140253
+917	fr951119	%% Frankfurter Rundschau 19951115 AAW D11140284
+918	fr951119	%% Frankfurter Rundschau 19951115 FEU D11140285
+919	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140295
+920	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140314
+921	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140324
+922	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140337
+923	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140350
+924	fr951119	%% Frankfurter Rundschau 19951115 AAW D11140392
+925	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140414
+926	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140426
+927	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140434
+928	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140440
+929	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140447
+930	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140450
+931	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140488
+932	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140541
+933	fr951119	%% Frankfurter Rundschau 19951115 AAW D11140543
+934	fr951119	%% Frankfurter Rundschau 19951115 POL D11140559
+935	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140577
+936	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140580
+937	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140581
+938	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140590
+939	fr951119	%% Frankfurter Rundschau 19951115 POL D11140601
+940	fr951119	%% Frankfurter Rundschau 19951115 POL D11140626
+941	fr951119	%% Frankfurter Rundschau 19951115 WIR D11140641
+942	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140647
+943	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140655
+944	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140679
+945	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140717
+946	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140725
+947	fr951119	%% Frankfurter Rundschau 19951115 POL D11140744
+948	fr951119	%% Frankfurter Rundschau 19951115 POL D11140747
+949	fr951119	%% Frankfurter Rundschau 19951115 NAC D11140759
+950	fr951119	%% Frankfurter Rundschau 19951116 AAW DA1148043
+951	fr951119	%% Frankfurter Rundschau 19951116 VS1 DA1158084
+952	fr951119	%% Frankfurter Rundschau 19951116 NAC DA1158129
+953	fr951119	%% Frankfurter Rundschau 19951116 NAC DA1158131
+954	fr951119	%% Frankfurter Rundschau 19951116 AAW DA1158152
+955	fr951119	%% Frankfurter Rundschau 19951116 NAC DA1158178
+956	fr951119	%% Frankfurter Rundschau 19951116 WIR DD1140008
+957	fr951119	%% Frankfurter Rundschau 19951116 FEU DD1140406
+958	fr951119	%% Frankfurter Rundschau 19951116 FEU DD1140439
+959	fr951119	%% Frankfurter Rundschau 19951116 WIR DD1140561
+960	fr951119	%% Frankfurter Rundschau 19951116 AAW DD1150027
+961	fr951119	%% Frankfurter Rundschau 19951116 VS1 DD1150093
+962	fr951119	%% Frankfurter Rundschau 19951116 VS1 DD1150097
+963	fr951119	%% Frankfurter Rundschau 19951116 VS1 DD1150120
+964	fr951119	%% Frankfurter Rundschau 19951116 AAW DD1150166
+965	fr951119	%% Frankfurter Rundschau 19951116 NAC DD1150207
+966	fr951119	%% Frankfurter Rundschau 19951116 NAC DD1150216
+967	fr951119	%% Frankfurter Rundschau 19951116 WIR DD1150218
+968	fr951119	%% Frankfurter Rundschau 19951116 AAW DD1150261
+969	fr951119	%% Frankfurter Rundschau 19951116 NAC DD1150263
+970	fr951119	%% Frankfurter Rundschau 19951116 WIR DD1150269
+971	fr951119	%% Frankfurter Rundschau 19951116 AAW DD1150314
+972	fr951119	%% Frankfurter Rundschau 19951116 WIR DD1150322
+973	fr951119	%% Frankfurter Rundschau 19951116 WIR DD1150441
+974	fr951119	%% Frankfurter Rundschau 19951116 VS1 DF1150009
+975	fr951119	%% Frankfurter Rundschau 19951116 VS1 DF1150033
+976	fr951119	%% Frankfurter Rundschau 19951116 VS1 DF1150040
+977	fr951119	%% Frankfurter Rundschau 19951116 VS1 DF1150042
+978	fr951119	%% Frankfurter Rundschau 19951116 NAC DF1150095
+979	fr951119	%% Frankfurter Rundschau 19951116 AAW DF1150108
+980	fr951119	%% Frankfurter Rundschau 19951116 NAC DF1150111
+981	fr951119	%% Frankfurter Rundschau 19951116 NAC DF1150118
+982	fr951119	%% Frankfurter Rundschau 19951116 NAC DF1150134
+983	fr951119	%% Frankfurter Rundschau 19951116 WIR DF1150156
+984	fr951119	%% Frankfurter Rundschau 19951116 NAC DF1150175
+985	fr951119	%% Frankfurter Rundschau 19951116 NAC DF1150184
+986	fr951119	%% Frankfurter Rundschau 19951116 VS1 DR1150032
+987	fr951119	%% Frankfurter Rundschau 19951116 VS1 DR1150052
+988	fr951119	%% Frankfurter Rundschau 19951116 VS1 DR1150072
+989	fr951119	%% Frankfurter Rundschau 19951116 WIR DR1150172
+990	fr951119	%% Frankfurter Rundschau 19951116 NAC DR1150331
+991	fr951119	%% Frankfurter Rundschau 19951116 WIR DR1150409
+992	fr951119	%% Frankfurter Rundschau 19951116 DOK D08060840
+993	fr951119	%% Frankfurter Rundschau 19951116 FEU D10160738
+994	fr951119	%% Frankfurter Rundschau 19951116 FEU D10300182
+995	fr951119	%% Frankfurter Rundschau 19951116 SUH D11060832
+996	fr951119	%% Frankfurter Rundschau 19951116 SUH D11060845
+997	fr951119	%% Frankfurter Rundschau 19951116 SUH D11070007
+998	fr951119	%% Frankfurter Rundschau 19951116 FEU D11070717
+999	fr951119	%% Frankfurter Rundschau 19951116 SUH D11080578
+1000	fr951119	%% Frankfurter Rundschau 19951116 WIR D11090380
+1001	fr951119	%% Frankfurter Rundschau 19951116 FEU D11090730
+1002	fr951119	%% Frankfurter Rundschau 19951116 FEU D11100720
+1003	fr951119	%% Frankfurter Rundschau 19951116 AAW D11120076
+1004	fr951119	%% Frankfurter Rundschau 19951116 FEU D11130661
+1005	fr951119	%% Frankfurter Rundschau 19951116 FEU D11130784
+1006	fr951119	%% Frankfurter Rundschau 19951116 AAW D11140054
+1007	fr951119	%% Frankfurter Rundschau 19951116 NAC D11140087
+1008	fr951119	%% Frankfurter Rundschau 19951116 NAC D11140187
+1009	fr951119	%% Frankfurter Rundschau 19951116 NAC D11140544
+1010	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150001
+1011	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150033
+1012	fr951119	%% Frankfurter Rundschau 19951116 AAW D11150064
+1013	fr951119	%% Frankfurter Rundschau 19951116 VS1 D11150108
+1014	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150133
+1015	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150135
+1016	fr951119	%% Frankfurter Rundschau 19951116 POL D11150177
+1017	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150210
+1018	fr951119	%% Frankfurter Rundschau 19951116 AAW D11150226
+1019	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150242
+1020	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150247
+1021	fr951119	%% Frankfurter Rundschau 19951116 POL D11150265
+1022	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150268
+1023	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150271
+1024	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150275
+1025	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150303
+1026	fr951119	%% Frankfurter Rundschau 19951116 FEU D11150305
+1027	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150353
+1028	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150364
+1029	fr951119	%% Frankfurter Rundschau 19951116 AAW D11150374
+1030	fr951119	%% Frankfurter Rundschau 19951116 POL D11150375
+1031	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150423
+1032	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150425
+1033	fr951119	%% Frankfurter Rundschau 19951116 POL D11150432
+1034	fr951119	%% Frankfurter Rundschau 19951116 AAW D11150436
+1035	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150438
+1036	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150441
+1037	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150443
+1038	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150453
+1039	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150454
+1040	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150464
+1041	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150477
+1042	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150479
+1043	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150485
+1044	fr951119	%% Frankfurter Rundschau 19951116 AAW D11150489
+1045	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150510
+1046	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150512
+1047	fr951119	%% Frankfurter Rundschau 19951116 WIR D11150521
+1048	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150525
+1049	fr951119	%% Frankfurter Rundschau 19951116 POL D11150526
+1050	fr951119	%% Frankfurter Rundschau 19951116 POL D11150531
+1051	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150547
+1052	fr951119	%% Frankfurter Rundschau 19951116 AAW D11150551
+1053	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150565
+1054	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150577
+1055	fr951119	%% Frankfurter Rundschau 19951116 NAC D11150670
+1056	fr951119	%% Frankfurter Rundschau 19951117 NAC DA1158137
+1057	fr951119	%% Frankfurter Rundschau 19951117 VS1 DA1168342
+1058	fr951119	%% Frankfurter Rundschau 19951117 VS1 DA1168352
+1059	fr951119	%% Frankfurter Rundschau 19951117 NAC DA1168353
+1060	fr951119	%% Frankfurter Rundschau 19951117 AAW DA1168367
+1061	fr951119	%% Frankfurter Rundschau 19951117 AAW DA1168385
+1062	fr951119	%% Frankfurter Rundschau 19951117 NAC DA1168459
+1063	fr951119	%% Frankfurter Rundschau 19951117 NAC DA1168461
+1064	fr951119	%% Frankfurter Rundschau 19951117 NAC DA1168484
+1065	fr951119	%% Frankfurter Rundschau 19951117 AAW DA1168485
+1066	fr951119	%% Frankfurter Rundschau 19951117 FEU DD1150424
+1067	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160005
+1068	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160016
+1069	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160081
+1070	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160089
+1071	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160092
+1072	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160100
+1073	fr951119	%% Frankfurter Rundschau 19951117 VS1 DD1160106
+1074	fr951119	%% Frankfurter Rundschau 19951117 AAW DD1160188
+1075	fr951119	%% Frankfurter Rundschau 19951117 WIR DD1160261
+1076	fr951119	%% Frankfurter Rundschau 19951117 NAC DD1160266
+1077	fr951119	%% Frankfurter Rundschau 19951117 WIR DD1160345
+1078	fr951119	%% Frankfurter Rundschau 19951117 NAC DD1160388
+1079	fr951119	%% Frankfurter Rundschau 19951117 NAC DD1160419
+1080	fr951119	%% Frankfurter Rundschau 19951117 WIR DD1160432
+1081	fr951119	%% Frankfurter Rundschau 19951117 NAC DD1164007
+1082	fr951119	%% Frankfurter Rundschau 19951117 VS1 DF1160031
+1083	fr951119	%% Frankfurter Rundschau 19951117 AAW DF1160077
+1084	fr951119	%% Frankfurter Rundschau 19951117 NAC DF1160096
+1085	fr951119	%% Frankfurter Rundschau 19951117 NAC DF1160099
+1086	fr951119	%% Frankfurter Rundschau 19951117 WIR DF1160103
+1087	fr951119	%% Frankfurter Rundschau 19951117 NAC DF1160155
+1088	fr951119	%% Frankfurter Rundschau 19951117 NAC DF1160172
+1089	fr951119	%% Frankfurter Rundschau 19951117 NAC DH1160077
+1090	fr951119	%% Frankfurter Rundschau 19951117 NAC DK1160509
+1091	fr951119	%% Frankfurter Rundschau 19951117 VS1 DR1150699
+1092	fr951119	%% Frankfurter Rundschau 19951117 NAC DR1160031
+1093	fr951119	%% Frankfurter Rundschau 19951117 NAC DR1160397
+1094	fr951119	%% Frankfurter Rundschau 19951117 NAC DR1160423
+1095	fr951119	%% Frankfurter Rundschau 19951117 WIR DR1160490
+1096	fr951119	%% Frankfurter Rundschau 19951117 WIR DR1160497
+1097	fr951119	%% Frankfurter Rundschau 19951117 NAC DR1160663
+1098	fr951119	%% Frankfurter Rundschau 19951117 NAC D10190066
+1099	fr951119	%% Frankfurter Rundschau 19951117 FEU D11030021
+1100	fr951119	%% Frankfurter Rundschau 19951117 WIR D11060788
+1101	fr951119	%% Frankfurter Rundschau 19951117 PEU D11070461
+1102	fr951119	%% Frankfurter Rundschau 19951117 FEU D11070715
+1103	fr951119	%% Frankfurter Rundschau 19951117 PEU D11080590
+1104	fr951119	%% Frankfurter Rundschau 19951117 FEU D11080678
+1105	fr951119	%% Frankfurter Rundschau 19951117 AAW D11100763
+1106	fr951119	%% Frankfurter Rundschau 19951117 PEU D11101236
+1107	fr951119	%% Frankfurter Rundschau 19951117 PEU D11130057
+1108	fr951119	%% Frankfurter Rundschau 19951117 FEU D11130311
+1109	fr951119	%% Frankfurter Rundschau 19951117 WIR D11130767
+1110	fr951119	%% Frankfurter Rundschau 19951117 FEU D11140283
+1111	fr951119	%% Frankfurter Rundschau 19951117 AAW D11140386
+1112	fr951119	%% Frankfurter Rundschau 19951117 FEU D11140400
+1113	fr951119	%% Frankfurter Rundschau 19951117 NAC D11140533
+1114	fr951119	%% Frankfurter Rundschau 19951117 FEU D11150082
+1115	fr951119	%% Frankfurter Rundschau 19951117 DOK D11150274
+1116	fr951119	%% Frankfurter Rundschau 19951117 MRE D11150320
+1117	fr951119	%% Frankfurter Rundschau 19951117 NAC D11150424
+1118	fr951119	%% Frankfurter Rundschau 19951117 AAW D11150448
+1119	fr951119	%% Frankfurter Rundschau 19951117 NAC D11150511
+1120	fr951119	%% Frankfurter Rundschau 19951117 FEU D11150566
+1121	fr951119	%% Frankfurter Rundschau 19951117 PEU D11150637
+1122	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160132
+1123	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160139
+1124	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160163
+1125	fr951119	%% Frankfurter Rundschau 19951117 POL D11160179
+1126	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160185
+1127	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160200
+1128	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160234
+1129	fr951119	%% Frankfurter Rundschau 19951117 FEU D11160241
+1130	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160261
+1131	fr951119	%% Frankfurter Rundschau 19951117 AAW D11160269
+1132	fr951119	%% Frankfurter Rundschau 19951117 AAW D11160278
+1133	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160279
+1134	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160304
+1135	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160305
+1136	fr951119	%% Frankfurter Rundschau 19951117 POL D11160309
+1137	fr951119	%% Frankfurter Rundschau 19951117 POL D11160312
+1138	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160331
+1139	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160340
+1140	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160382
+1141	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160390
+1142	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160399
+1143	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160431
+1144	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160433
+1145	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160435
+1146	fr951119	%% Frankfurter Rundschau 19951117 AAW D11160437
+1147	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160441
+1148	fr951119	%% Frankfurter Rundschau 19951117 POL D11160442
+1149	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160458
+1150	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160472
+1151	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160494
+1152	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160509
+1153	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160531
+1154	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160546
+1155	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160554
+1156	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160558
+1157	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160582
+1158	fr951119	%% Frankfurter Rundschau 19951117 AAW D11160584
+1159	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160589
+1160	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160596
+1161	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160606
+1162	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160628
+1163	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160629
+1164	fr951119	%% Frankfurter Rundschau 19951117 WIR D11160634
+1165	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160640
+1166	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160643
+1167	fr951119	%% Frankfurter Rundschau 19951117 POL D11160646
+1168	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160652
+1169	fr951119	%% Frankfurter Rundschau 19951117 POL D11160664
+1170	fr951119	%% Frankfurter Rundschau 19951117 POL D11160666
+1171	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160704
+1172	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160710
+1173	fr951119	%% Frankfurter Rundschau 19951117 NAC D11160722
+1174	fr951119	%% Frankfurter Rundschau 19951117 MRE D11160732
+1175	fr951119	%% Frankfurter Rundschau 19951118 VS1 DA1168310
+1176	fr951119	%% Frankfurter Rundschau 19951118 VS1 DA1178559
+1177	fr951119	%% Frankfurter Rundschau 19951118 VS1 DA1178564
+1178	fr951119	%% Frankfurter Rundschau 19951118 AAW DA1178579
+1179	fr951119	%% Frankfurter Rundschau 19951118 AAW DA1178617
+1180	fr951119	%% Frankfurter Rundschau 19951118 NAC DA1178653
+1181	fr951119	%% Frankfurter Rundschau 19951118 NAC DA1178672
+1182	fr951119	%% Frankfurter Rundschau 19951118 NAC DA1178691
+1183	fr951119	%% Frankfurter Rundschau 19951118 NAC DA1178703
+1184	fr951119	%% Frankfurter Rundschau 19951118 WIS DD1090249
+1185	fr951119	%% Frankfurter Rundschau 19951118 WIR DD1160236
+1186	fr951119	%% Frankfurter Rundschau 19951118 WIS DD1160466
+1187	fr951119	%% Frankfurter Rundschau 19951118 AAW DD1160520
+1188	fr951119	%% Frankfurter Rundschau 19951118 AAW DD1160556
+1189	fr951119	%% Frankfurter Rundschau 19951118 WIR DD1160568
+1190	fr951119	%% Frankfurter Rundschau 19951118 VS1 DD1160625
+1191	fr951119	%% Frankfurter Rundschau 19951118 VS1 DD1170110
+1192	fr951119	%% Frankfurter Rundschau 19951118 VS1 DD1170126
+1193	fr951119	%% Frankfurter Rundschau 19951118 FEU DD1170147
+1194	fr951119	%% Frankfurter Rundschau 19951118 WIS DD1170171
+1195	fr951119	%% Frankfurter Rundschau 19951118 WIR DD1170231
+1196	fr951119	%% Frankfurter Rundschau 19951118 WIR DD1170289
+1197	fr951119	%% Frankfurter Rundschau 19951118 NAC DD1170315
+1198	fr951119	%% Frankfurter Rundschau 19951118 AAW DD1170320
+1199	fr951119	%% Frankfurter Rundschau 19951118 AAW DD1170352
+1200	fr951119	%% Frankfurter Rundschau 19951118 WIR DD1170372
+1201	fr951119	%% Frankfurter Rundschau 19951118 AAW DD1170424
+1202	fr951119	%% Frankfurter Rundschau 19951118 NAC DD1170442
+1203	fr951119	%% Frankfurter Rundschau 19951118 NAC DF1160248
+1204	fr951119	%% Frankfurter Rundschau 19951118 VS1 DF1170042
+1205	fr951119	%% Frankfurter Rundschau 19951118 AAW DF1170068
+1206	fr951119	%% Frankfurter Rundschau 19951118 NAC DF1170075
+1207	fr951119	%% Frankfurter Rundschau 19951118 NAC DF1170132
+1208	fr951119	%% Frankfurter Rundschau 19951118 NAC DF1170152
+1209	fr951119	%% Frankfurter Rundschau 19951118 NAC DF1170164
+1210	fr951119	%% Frankfurter Rundschau 19951118 AAW DF1170205
+1211	fr951119	%% Frankfurter Rundschau 19951118 NAC DH1170109
+1212	fr951119	%% Frankfurter Rundschau 19951118 VS1 DR1160677
+1213	fr951119	%% Frankfurter Rundschau 19951118 VS1 DR1160680
+1214	fr951119	%% Frankfurter Rundschau 19951118 WIR DR1170210
+1215	fr951119	%% Frankfurter Rundschau 19951118 NAC DR1170225
+1216	fr951119	%% Frankfurter Rundschau 19951118 NAC DR1170241
+1217	fr951119	%% Frankfurter Rundschau 19951118 NAC DR1170247
+1218	fr951119	%% Frankfurter Rundschau 19951118 NAC DR1170284
+1219	fr951119	%% Frankfurter Rundschau 19951118 NAC DR1170365
+1220	fr951119	%% Frankfurter Rundschau 19951118 AAW D09220660
+1221	fr951119	%% Frankfurter Rundschau 19951118 MRE D10030686
+1222	fr951119	%% Frankfurter Rundschau 19951118 MRE D10040593
+1223	fr951119	%% Frankfurter Rundschau 19951118 MRE D10080262
+1224	fr951119	%% Frankfurter Rundschau 19951118 MRE D10170013
+1225	fr951119	%% Frankfurter Rundschau 19951118 MRE D10190602
+1226	fr951119	%% Frankfurter Rundschau 19951118 MRE D10250650
+1227	fr951119	%% Frankfurter Rundschau 19951118 WIS D10250656
+1228	fr951119	%% Frankfurter Rundschau 19951118 MRE D10270136
+1229	fr951119	%% Frankfurter Rundschau 19951118 MRE D10310441
+1230	fr951119	%% Frankfurter Rundschau 19951118 MRE D11010532
+1231	fr951119	%% Frankfurter Rundschau 19951118 MRE D11020451
+1232	fr951119	%% Frankfurter Rundschau 19951118 WIS D11020479
+1233	fr951119	%% Frankfurter Rundschau 19951118 POL D11030072
+1234	fr951119	%% Frankfurter Rundschau 19951118 NAC D11030104
+1235	fr951119	%% Frankfurter Rundschau 19951118 FEU D11070038
+1236	fr951119	%% Frankfurter Rundschau 19951118 DOK D11070436
+1237	fr951119	%% Frankfurter Rundschau 19951118 NAC D11090444
+1238	fr951119	%% Frankfurter Rundschau 19951118 MRE D11090747
+1239	fr951119	%% Frankfurter Rundschau 19951118 MRE D11120345
+1240	fr951119	%% Frankfurter Rundschau 19951118 MRE D11120348
+1241	fr951119	%% Frankfurter Rundschau 19951118 MRE D11120353
+1242	fr951119	%% Frankfurter Rundschau 19951118 MRE D11120354
+1243	fr951119	%% Frankfurter Rundschau 19951118 MRE D11120355
+1244	fr951119	%% Frankfurter Rundschau 19951118 MRE D11130751
+1245	fr951119	%% Frankfurter Rundschau 19951118 FEU D11130795
+1246	fr951119	%% Frankfurter Rundschau 19951118 AAW D11140321
+1247	fr951119	%% Frankfurter Rundschau 19951118 WIS D11140568
+1248	fr951119	%% Frankfurter Rundschau 19951118 FEU D11140780
+1249	fr951119	%% Frankfurter Rundschau 19951118 WIR D11150002
+1250	fr951119	%% Frankfurter Rundschau 19951118 FEU D11150143
+1251	fr951119	%% Frankfurter Rundschau 19951118 NAC D11150366
+1252	fr951119	%% Frankfurter Rundschau 19951118 WIS D11160570
+1253	fr951119	%% Frankfurter Rundschau 19951118 WIS D11160651
+1254	fr951119	%% Frankfurter Rundschau 19951118 POL D11160701
+1255	fr951119	%% Frankfurter Rundschau 19951118 FEU D11160726
+1256	fr951119	%% Frankfurter Rundschau 19951118 POL D11160729
+1257	fr951119	%% Frankfurter Rundschau 19951118 VS1 D11170060
+1258	fr951119	%% Frankfurter Rundschau 19951118 FEU D11170069
+1259	fr951119	%% Frankfurter Rundschau 19951118 VS1 D11170087
+1260	fr951119	%% Frankfurter Rundschau 19951118 VS1 D11170092
+1261	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170120
+1262	fr951119	%% Frankfurter Rundschau 19951118 WIR D11170138
+1263	fr951119	%% Frankfurter Rundschau 19951118 AAW D11170149
+1264	fr951119	%% Frankfurter Rundschau 19951118 WIS D11170171
+1289	fr951119	%% Frankfurter Rundschau 19951118 POL D11170578
+1290	fr951119	%% Frankfurter Rundschau 19951118 POL D11170584
+1291	fr951119	%% Frankfurter Rundschau 19951118 WIR D11170597
+1292	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170600
+1293	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170607
+1294	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170622
+1295	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170633
+1296	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170652
+1297	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170696
+1298	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170727
+1299	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170744
+1300	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170745
+1301	fr951119	%% Frankfurter Rundschau 19951118 NAC D11170746
+1302	fr951126	%% Frankfurter Rundschau 19951120 WIR DA1178709
+1303	fr951126	%% Frankfurter Rundschau 19951120 AAW DA1188777
+1304	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1188834
+1305	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198871
+1306	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198872
+1307	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198881
+1308	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198906
+1309	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198935
+1310	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198954
+1311	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198957
+1312	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198970
+1313	fr951126	%% Frankfurter Rundschau 19951120 NAC DA1198975
+1314	fr951126	%% Frankfurter Rundschau 19951120 FEU DD1160378
+1315	fr951126	%% Frankfurter Rundschau 19951120 FEU DD1160453
+1316	fr951126	%% Frankfurter Rundschau 19951120 WIR DD1170476
+1317	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1170491
+1318	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1180085
+1319	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1180114
+1320	fr951126	%% Frankfurter Rundschau 19951120 AAW DD1180168
+1321	fr951126	%% Frankfurter Rundschau 19951120 WIR DD1180218
+1322	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1180233
+1323	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1180238
+1324	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1190095
+1325	fr951126	%% Frankfurter Rundschau 19951120 FEU DD1190125
+1326	fr951126	%% Frankfurter Rundschau 19951120 WIR DD1190137
+1327	fr951126	%% Frankfurter Rundschau 19951120 WIR DD1190195
+1328	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1190223
+1329	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1190268
+1330	fr951126	%% Frankfurter Rundschau 19951120 NAC DD1190281
+1331	fr951126	%% Frankfurter Rundschau 19951120 NAC DF1190037
+1332	fr951126	%% Frankfurter Rundschau 19951120 NAC DF1190100
+1333	fr951126	%% Frankfurter Rundschau 19951120 NAC DF1190106
+1334	fr951126	%% Frankfurter Rundschau 19951120 AAW DR1170417
+1335	fr951126	%% Frankfurter Rundschau 19951120 NAC DR1180260
+1336	fr951126	%% Frankfurter Rundschau 19951120 FEU D11070096
+1337	fr951126	%% Frankfurter Rundschau 19951120 FEU D11080009
+1338	fr951126	%% Frankfurter Rundschau 19951120 DOK D11080593
+1339	fr951126	%% Frankfurter Rundschau 19951120 NAC D11130190
+1340	fr951126	%% Frankfurter Rundschau 19951120 POL D11130815
+1341	fr951126	%% Frankfurter Rundschau 19951120 POL D11150214
+1342	fr951126	%% Frankfurter Rundschau 19951120 NAC D11150421
+1343	fr951126	%% Frankfurter Rundschau 19951120 DOK D11150581
+1344	fr951126	%% Frankfurter Rundschau 19951120 NAC D11160135
+1345	fr951126	%% Frankfurter Rundschau 19951120 NAC D11160372
+1346	fr951126	%% Frankfurter Rundschau 19951120 NAC D11160476
+1347	fr951126	%% Frankfurter Rundschau 19951120 FEU D11160586
+1348	fr951126	%% Frankfurter Rundschau 19951120 POL D11160698
+1349	fr951126	%% Frankfurter Rundschau 19951120 POL D11170155
+1350	fr951126	%% Frankfurter Rundschau 19951120 WIR D11170353
+1351	fr951126	%% Frankfurter Rundschau 19951120 NAC D11170442
+1352	fr951126	%% Frankfurter Rundschau 19951120 NAC D11170518
+1353	fr951126	%% Frankfurter Rundschau 19951120 FEU D11170704
+1354	fr951126	%% Frankfurter Rundschau 19951120 NAC D11170730
+1355	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190016
+1356	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190026
+1357	fr951126	%% Frankfurter Rundschau 19951120 AAW D11190029
+1358	fr951126	%% Frankfurter Rundschau 19951120 POL D11190041
+1359	fr951126	%% Frankfurter Rundschau 19951120 AAW D11190059
+1360	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190065
+1361	fr951126	%% Frankfurter Rundschau 19951120 POL D11190076
+1362	fr951126	%% Frankfurter Rundschau 19951120 WIR D11190089
+1363	fr951126	%% Frankfurter Rundschau 19951120 AAW D11190098
+1364	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190107
+1365	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190121
+1366	fr951126	%% Frankfurter Rundschau 19951120 POL D11190137
+1367	fr951126	%% Frankfurter Rundschau 19951120 POL D11190138
+1368	fr951126	%% Frankfurter Rundschau 19951120 POL D11190147
+1369	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190167
+1370	fr951126	%% Frankfurter Rundschau 19951120 AAW D11190168
+1371	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190189
+1372	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190192
+1373	fr951126	%% Frankfurter Rundschau 19951120 POL D11190200
+1374	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190201
+1375	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190240
+1376	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190246
+1377	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190250
+1378	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190251
+1379	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190263
+1380	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190269
+1381	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190285
+1382	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190286
+1383	fr951126	%% Frankfurter Rundschau 19951120 AAW D11190291
+1384	fr951126	%% Frankfurter Rundschau 19951120 FEU D11190298
+1385	fr951126	%% Frankfurter Rundschau 19951120 WIR D11190322
+1386	fr951126	%% Frankfurter Rundschau 19951120 WIR D11190339
+1387	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190343
+1388	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190349
+1389	fr951126	%% Frankfurter Rundschau 19951120 POL D11190353
+1390	fr951126	%% Frankfurter Rundschau 19951120 WIR D11190354
+1391	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190375
+1392	fr951126	%% Frankfurter Rundschau 19951120 WIR D11190377
+1393	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190381
+1394	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190398
+1395	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190399
+1396	fr951126	%% Frankfurter Rundschau 19951120 POL D11190407
+1397	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190415
+1398	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190435
+1399	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190464
+1400	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190470
+1401	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190474
+1402	fr951126	%% Frankfurter Rundschau 19951120 NAC D11190506
+1501	fr97wirt	%% Frankfurter Rundschau 19970102 WIR DA2301422
+1502	fr97wirt	%% Frankfurter Rundschau 19970102 WIR DD1010085
+1503	fr97wirt	%% Frankfurter Rundschau 19970102 WIR DD2310118
+1504	fr97wirt	%% Frankfurter Rundschau 19970102 WIR DR2260133
+1505	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D01010058
+1506	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D01010060
+1507	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D01010087
+1508	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D01010144
+1509	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D12200686
+1510	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D12271240
+1511	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D12300281
+1512	fr97wirt	%% Frankfurter Rundschau 19970102 WIR D12300394
+1513	fr970713	%% Frankfurter Rundschau 19970711 WIR DA7097206
+1514	fr970713	%% Frankfurter Rundschau 19970711 WIR DA7107392
+1515	fr970713	%% Frankfurter Rundschau 19970711 WIR DD7090545
+1516	fr970713	%% Frankfurter Rundschau 19970711 WIR DD7100262
+1517	fr970713	%% Frankfurter Rundschau 19970711 WIR DD7100344
+1518	fr970713	%% Frankfurter Rundschau 19970711 WIR DD7104021
+1519	fr970713	%% Frankfurter Rundschau 19970711 WIR DH7100118
+1520	fr970713	%% Frankfurter Rundschau 19970711 WIR DR7100078
+1521	fr970713	%% Frankfurter Rundschau 19970711 WIR DR7100218
+1522	fr970713	%% Frankfurter Rundschau 19970711 WIR DR7100337
+1523	fr970713	%% Frankfurter Rundschau 19970711 WIR DR7100357
+1524	fr970713	%% Frankfurter Rundschau 19970711 WIR D07090655
+1525	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100075
+1526	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100097
+1527	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100106
+1528	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100136
+1529	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100177
+1530	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100303
+1531	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100343
+1532	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100423
+1533	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100473
+1534	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100519
+1535	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100589
+1536	fr970713	%% Frankfurter Rundschau 19970711 WIR D07100602
+1537	fr970727	%% Frankfurter Rundschau 19970725 WIR DD7230526
+1538	fr970727	%% Frankfurter Rundschau 19970725 WIR DD7240286
+1539	fr970727	%% Frankfurter Rundschau 19970725 WIR DD7240500
+1540	fr970727	%% Frankfurter Rundschau 19970725 WIR DH7240060
+1541	fr970727	%% Frankfurter Rundschau 19970725 WIR DR7240070
+1542	fr970727	%% Frankfurter Rundschau 19970725 WIR DR7240342
+1543	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240120
+1544	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240129
+1545	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240146
+1546	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240149
+1547	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240152
+1548	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240212
+1549	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240316
+1550	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240322
+1551	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240332
+1552	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240419
+1553	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240423
+1554	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240437
+1555	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240449
+1556	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240460
+1557	fr970727	%% Frankfurter Rundschau 19970725 WIR D07240549
+1558	fr970810	%% Frankfurter Rundschau 19970806 WIR DA8051969
+1559	fr970810	%% Frankfurter Rundschau 19970806 WIR DA8052014
+1560	fr970810	%% Frankfurter Rundschau 19970806 WIR DA8052039
+1561	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8040487
+1562	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8050305
+1563	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8050332
+1564	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8050359
+1565	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8050371
+1566	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8050372
+1567	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8050387
+1568	fr970810	%% Frankfurter Rundschau 19970806 WIR DD8054006
+1569	fr970810	%% Frankfurter Rundschau 19970806 WIR DR8050225
+1570	fr970810	%% Frankfurter Rundschau 19970806 WIR D08040595
+1571	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050109
+1572	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050124
+1573	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050236
+1574	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050249
+1575	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050260
+1576	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050283
+1577	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050284
+1578	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050311
+1579	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050342
+1580	fr970810	%% Frankfurter Rundschau 19970806 WIR D08050464
+1581	fr970831	%% Frankfurter Rundschau 19970830 WIR DA8296467
+1582	fr970831	%% Frankfurter Rundschau 19970830 WIR DA8296509
+1583	fr970831	%% Frankfurter Rundschau 19970830 WIR DD8290219
+1584	fr970831	%% Frankfurter Rundschau 19970830 WIR DD8290304
+1585	fr970831	%% Frankfurter Rundschau 19970830 WIR DD8290321
+1586	fr970831	%% Frankfurter Rundschau 19970830 WIR DD8290395
+1587	fr970831	%% Frankfurter Rundschau 19970830 WIR DD8290461
+1588	fr970831	%% Frankfurter Rundschau 19970830 WIR DD8294005
+1589	fr970831	%% Frankfurter Rundschau 19970830 WIR DF8290082
+1590	fr970831	%% Frankfurter Rundschau 19970830 WIR DR8290234
+1591	fr970831	%% Frankfurter Rundschau 19970830 WIR D08050714
+1592	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290068
+1593	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290128
+1594	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290137
+1595	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290202
+1596	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290272
+1597	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290354
+1598	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290436
+1599	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290480
+1600	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290519
+1601	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290520
+1602	fr970831	%% Frankfurter Rundschau 19970830 WIR D08290651
+1603	fr970921	%% Frankfurter Rundschau 19970917 WIR DD9160202
+1604	fr970921	%% Frankfurter Rundschau 19970917 WIR DD9160309
+1605	fr970921	%% Frankfurter Rundschau 19970917 WIR DD9160461
+1606	fr970921	%% Frankfurter Rundschau 19970917 WIR D09150638
+1607	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160067
+1608	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160131
+1609	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160167
+1610	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160212
+1611	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160278
+1612	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160392
+1613	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160401
+1614	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160431
+1615	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160442
+1616	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160444
+1617	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160467
+1618	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160608
+1619	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160617
+1620	fr970921	%% Frankfurter Rundschau 19970917 WIR D09160690
+1621	fr971005	%% Frankfurter Rundschau 19971001 WIR DD9300540
+1622	fr971005	%% Frankfurter Rundschau 19971001 WIR DD9304004
+1623	fr971005	%% Frankfurter Rundschau 19971001 WIR DF9300135
+1624	fr971005	%% Frankfurter Rundschau 19971001 WIR DR9290339
+1625	fr971005	%% Frankfurter Rundschau 19971001 WIR DR9300095
+1626	fr971005	%% Frankfurter Rundschau 19971001 WIR DR9300178
+1627	fr971005	%% Frankfurter Rundschau 19971001 WIR DR9300237
+1628	fr971005	%% Frankfurter Rundschau 19971001 WIR DR9300245
+1629	fr971005	%% Frankfurter Rundschau 19971001 WIR DR9300246
+1630	fr971005	%% Frankfurter Rundschau 19971001 WIR D09260229
+1631	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300053
+1632	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300175
+1633	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300223
+1634	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300225
+1635	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300233
+1636	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300294
+1637	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300345
+1638	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300362
+1639	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300448
+1640	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300471
+1641	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300500
+1642	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300586
+1643	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300629
+1644	fr971005	%% Frankfurter Rundschau 19971001 WIR D09300688
+1645	fr971026	%% Frankfurter Rundschau 19971020 WIR DD0170187
+1646	fr971026	%% Frankfurter Rundschau 19971020 WIR DD0180252
+1647	fr971026	%% Frankfurter Rundschau 19971020 WIR DD0180379
+1648	fr971026	%% Frankfurter Rundschau 19971020 WIR DD0190002
+1649	fr971026	%% Frankfurter Rundschau 19971020 WIR DD0190162
+1650	fr971026	%% Frankfurter Rundschau 19971020 WIR DR0180094
+1651	fr971026	%% Frankfurter Rundschau 19971020 WIR DR0190096
+1652	fr971026	%% Frankfurter Rundschau 19971020 WIR D10190001
+1653	fr971026	%% Frankfurter Rundschau 19971020 WIR D10190017
+1654	fr971026	%% Frankfurter Rundschau 19971020 WIR D10190040
+1655	fr971026	%% Frankfurter Rundschau 19971020 WIR D10190194
+1656	fr971026	%% Frankfurter Rundschau 19971020 WIR D10190204
+1657	fr971109	%% Frankfurter Rundschau 19971106 WIR DD1050306
+1658	fr971109	%% Frankfurter Rundschau 19971106 WIR DD1050338
+1659	fr971109	%% Frankfurter Rundschau 19971106 WIR DD1050388
+1660	fr971109	%% Frankfurter Rundschau 19971106 WIR DD1050460
+1661	fr971109	%% Frankfurter Rundschau 19971106 WIR DD1050523
+1662	fr971109	%% Frankfurter Rundschau 19971106 WIR DR1040309
+1663	fr971109	%% Frankfurter Rundschau 19971106 WIR DR1050047
+1664	fr971109	%% Frankfurter Rundschau 19971106 WIR DR1050087
+1665	fr971109	%% Frankfurter Rundschau 19971106 WIR DR1050194
+1666	fr971109	%% Frankfurter Rundschau 19971106 WIR D11040282
+1667	fr971109	%% Frankfurter Rundschau 19971106 WIR D11040476
+1668	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050099
+1669	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050172
+1670	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050184
+1671	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050224
+1672	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050265
+1673	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050281
+1674	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050328
+1675	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050366
+1676	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050448
+1677	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050467
+1678	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050562
+1679	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050566
+1680	fr971109	%% Frankfurter Rundschau 19971106 WIR D11050809
+1681	fr971207	%% Frankfurter Rundschau 19971206 WIR DA2055907
+1682	fr971207	%% Frankfurter Rundschau 19971206 WIR DD2050315
+1683	fr971207	%% Frankfurter Rundschau 19971206 WIR DD2050461
+1684	fr971207	%% Frankfurter Rundschau 19971206 WIR DR2050161
+1685	fr971207	%% Frankfurter Rundschau 19971206 WIR DR2050199
+1686	fr971207	%% Frankfurter Rundschau 19971206 WIR D12030249
+1687	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050066
+1688	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050068
+1689	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050169
+1690	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050223
+1691	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050339
+1692	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050375
+1693	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050402
+1694	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050429
+1695	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050509
+1696	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050519
+1697	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050609
+1698	fr971207	%% Frankfurter Rundschau 19971206 WIR D12050672
+1699	fr970127	%% Frankfurter Rundschau 19970125 WIR DD1230535
+1700	fr970127	%% Frankfurter Rundschau 19970125 WIR DD1240195
+1701	fr970127	%% Frankfurter Rundschau 19970125 WIR DR1240119
+1702	fr970127	%% Frankfurter Rundschau 19970125 WIR DR1240168
+1703	fr970127	%% Frankfurter Rundschau 19970125 WIR DR1240263
+1704	fr970127	%% Frankfurter Rundschau 19970125 WIR D01220468
+1705	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241410
+1706	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241509
+1707	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241531
+1708	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241602
+1709	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241871
+1710	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241932
+1711	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241947
+1712	fr970127	%% Frankfurter Rundschau 19970125 WIR D01241974
+1713	fr970127	%% Frankfurter Rundschau 19970125 WIR D01242068
+1714	fr970127	%% Frankfurter Rundschau 19970125 WIR D01242109
+1715	fr971221	%% Frankfurter Rundschau 19971216 WIR DA2157622
+1716	fr971221	%% Frankfurter Rundschau 19971216 WIR DA2157709
+1717	fr971221	%% Frankfurter Rundschau 19971216 WIR DD2150156
+1718	fr971221	%% Frankfurter Rundschau 19971216 WIR DD2150214
+1719	fr971221	%% Frankfurter Rundschau 19971216 WIR DD2150254
+1720	fr971221	%% Frankfurter Rundschau 19971216 WIR DD2150390
+1721	fr971221	%% Frankfurter Rundschau 19971216 WIR DD2150457
+1722	fr971221	%% Frankfurter Rundschau 19971216 WIR DF2150084
+1723	fr971221	%% Frankfurter Rundschau 19971216 WIR DR2150053
+1724	fr971221	%% Frankfurter Rundschau 19971216 WIR DR2150095
+1725	fr971221	%% Frankfurter Rundschau 19971216 WIR DR2150119
+1726	fr971221	%% Frankfurter Rundschau 19971216 WIR DR2150171
+1727	fr971221	%% Frankfurter Rundschau 19971216 WIR DR2150212
+1728	fr971221	%% Frankfurter Rundschau 19971216 WIR D09210121
+1729	fr971221	%% Frankfurter Rundschau 19971216 WIR D12020173
+1730	fr971221	%% Frankfurter Rundschau 19971216 WIR D12080855
+1731	fr971221	%% Frankfurter Rundschau 19971216 WIR D12120745
+1732	fr971221	%% Frankfurter Rundschau 19971216 WIR D12140131
+1733	fr971221	%% Frankfurter Rundschau 19971216 WIR D12150756
+1734	fr971221	%% Frankfurter Rundschau 19971216 WIR D12150804
+1735	fr971221	%% Frankfurter Rundschau 19971216 WIR D12150911
+1736	fr971221	%% Frankfurter Rundschau 19971216 WIR D12150949
+1737	fr971221	%% Frankfurter Rundschau 19971216 WIR D12151001
+1738	fr971221	%% Frankfurter Rundschau 19971216 WIR D12151051
+1739	fr971221	%% Frankfurter Rundschau 19971216 WIR D12151077
+1740	fr971221	%% Frankfurter Rundschau 19971216 WIR D12151176
+1741	fr971221	%% Frankfurter Rundschau 19971216 WIR D12151272
+1742	fr971221	%% Frankfurter Rundschau 19971216 WIR D12151302
+1743	fr970217	%% Frankfurter Rundschau 19970215 WIR DD2130014
+1744	fr970217	%% Frankfurter Rundschau 19970215 WIR DR2140209
+1745	fr970217	%% Frankfurter Rundschau 19970215 WIR DR2140431
+1746	fr970217	%% Frankfurter Rundschau 19970215 WIR D02050526
+1747	fr970217	%% Frankfurter Rundschau 19970215 WIR D02131117
+1748	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140045
+1749	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140079
+1750	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140128
+1751	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140282
+1752	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140381
+1753	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140403
+1754	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140417
+1755	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140557
+1756	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140580
+1757	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140693
+1758	fr970217	%% Frankfurter Rundschau 19970215 WIR D02140763
+1759	fr970310	%% Frankfurter Rundschau 19970308 WIR DD3060594
+1760	fr970310	%% Frankfurter Rundschau 19970308 WIR DD3060628
+1761	fr970310	%% Frankfurter Rundschau 19970308 WIR DD3070103
+1762	fr970310	%% Frankfurter Rundschau 19970308 WIR DD3070175
+1763	fr970310	%% Frankfurter Rundschau 19970308 WIR DD3070465
+1764	fr970310	%% Frankfurter Rundschau 19970308 WIR D03030235
+1765	fr970310	%% Frankfurter Rundschau 19970308 WIR D03060535
+1766	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070064
+1767	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070155
+1768	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070414
+1769	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070453
+1770	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070466
+1771	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070476
+1772	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070488
+1773	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070540
+1774	fr970310	%% Frankfurter Rundschau 19970308 WIR D03070704
+1775	fr970505	%% Frankfurter Rundschau 19970503 WIR DA5024738
+1776	fr970505	%% Frankfurter Rundschau 19970503 WIR DA5024754
+1777	fr970505	%% Frankfurter Rundschau 19970503 WIR DD4300559
+1778	fr970505	%% Frankfurter Rundschau 19970503 WIR DD5010169
+1779	fr970505	%% Frankfurter Rundschau 19970503 WIR DD5020236
+1780	fr970505	%% Frankfurter Rundschau 19970503 WIR DD5020263
+1781	fr970505	%% Frankfurter Rundschau 19970503 WIR DD5020473
+1782	fr970505	%% Frankfurter Rundschau 19970503 WIR DD5024011
+1783	fr970505	%% Frankfurter Rundschau 19970503 WIR DF4300062
+1784	fr970505	%% Frankfurter Rundschau 19970503 WIR DH4290084
+1785	fr970505	%% Frankfurter Rundschau 19970503 WIR DR4300395
+1786	fr970505	%% Frankfurter Rundschau 19970503 WIR DR4300431
+1787	fr970505	%% Frankfurter Rundschau 19970503 WIR DR5020044
+1788	fr970505	%% Frankfurter Rundschau 19970503 WIR DR5020163
+1789	fr970505	%% Frankfurter Rundschau 19970503 WIR DR5020197
+1790	fr970505	%% Frankfurter Rundschau 19970503 WIR D04290288
+1791	fr970505	%% Frankfurter Rundschau 19970503 WIR D05010604
+1792	fr970505	%% Frankfurter Rundschau 19970503 WIR D05020126
+1793	fr970505	%% Frankfurter Rundschau 19970503 WIR D05020127
+1794	fr970505	%% Frankfurter Rundschau 19970503 WIR D05020259
+1795	fr970616	%% Frankfurter Rundschau 19970614 WIR DD6130221
+1796	fr970616	%% Frankfurter Rundschau 19970614 WIR DD6130264
+1797	fr970616	%% Frankfurter Rundschau 19970614 WIR DD6130276
+1798	fr970616	%% Frankfurter Rundschau 19970614 WIR DR6120525
+1799	fr970616	%% Frankfurter Rundschau 19970614 WIR D06120460
+1800	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130016
+1801	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130018
+1802	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130061
+1803	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130111
+1804	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130187
+1805	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130217
+1806	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130453
+1807	fr970616	%% Frankfurter Rundschau 19970614 WIR D06130833
+1808	fr970630	%% Frankfurter Rundschau 19970628 WIR DD6260419
+1809	fr970630	%% Frankfurter Rundschau 19970628 WIR DD6260439
+1810	fr970630	%% Frankfurter Rundschau 19970628 WIR DD6260505
+1811	fr970630	%% Frankfurter Rundschau 19970628 WIR DD6270018
+1812	fr970630	%% Frankfurter Rundschau 19970628 WIR DD6270303
+1813	fr970630	%% Frankfurter Rundschau 19970628 WIR DD6270447
+1814	fr970630	%% Frankfurter Rundschau 19970628 WIR D06250072
+1815	fr970630	%% Frankfurter Rundschau 19970628 WIR D06260658
+1816	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270174
+1817	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270193
+1818	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270211
+1819	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270247
+1820	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270252
+1821	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270262
+1822	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270287
+1823	fr970630	%% Frankfurter Rundschau 19970628 WIR D06270440
+1824	fr970407	%% Frankfurter Rundschau 19970405 WIR DD4030414
+1825	fr970407	%% Frankfurter Rundschau 19970405 WIR DD4030432
+1826	fr970407	%% Frankfurter Rundschau 19970405 WIR DD4030435
+1827	fr970407	%% Frankfurter Rundschau 19970405 WIR DD4040234
+1828	fr970407	%% Frankfurter Rundschau 19970405 WIR DD4040253
+1829	fr970407	%% Frankfurter Rundschau 19970405 WIR DD4040283
+1830	fr970407	%% Frankfurter Rundschau 19970405 WIR DF4040099
+1831	fr970407	%% Frankfurter Rundschau 19970405 WIR DF4040110
+1832	fr970407	%% Frankfurter Rundschau 19970405 WIR DR4040134
+1833	fr970407	%% Frankfurter Rundschau 19970405 WIR DR4040161
+1834	fr970407	%% Frankfurter Rundschau 19970405 WIR D03260676
+1835	fr970407	%% Frankfurter Rundschau 19970405 WIR D04021194
+1836	fr970407	%% Frankfurter Rundschau 19970405 WIR D04030533
+1837	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040121
+1838	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040202
+1839	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040319
+1840	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040461
+1841	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040462
+1842	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040489
+1843	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040566
+1844	fr970407	%% Frankfurter Rundschau 19970405 WIR D04040640
+1845	fr970428	%% Frankfurter Rundschau 19970426 WIR DD4240591
+1846	fr970428	%% Frankfurter Rundschau 19970426 WIR DD4250343
+1847	fr970428	%% Frankfurter Rundschau 19970426 WIR DD4254043
+1848	fr970428	%% Frankfurter Rundschau 19970426 WIR DH4250074
+1849	fr970428	%% Frankfurter Rundschau 19970426 WIR DR4250277
+1850	fr970428	%% Frankfurter Rundschau 19970426 WIR DR4250294
+1851	fr970428	%% Frankfurter Rundschau 19970426 WIR D04240672
+1852	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250066
+1853	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250091
+1854	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250146
+1855	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250150
+1856	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250231
+1857	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250282
+1858	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250380
+1859	fr970428	%% Frankfurter Rundschau 19970426 WIR D04250387
+2001	fr970106	%% Frankfurter Rundschau 19970104 VS1 DA1031876
+2002	fr970106	%% Frankfurter Rundschau 19970104 VS1 DA1031888
+2003	fr970106	%% Frankfurter Rundschau 19970104 NAC DA1031889
+2004	fr970106	%% Frankfurter Rundschau 19970104 VS1 DA1031890
+2005	fr970106	%% Frankfurter Rundschau 19970104 VS1 DA1031892
+2006	fr970106	%% Frankfurter Rundschau 19970104 VS1 DA1031897
+2007	fr970106	%% Frankfurter Rundschau 19970104 AAW DA1031914
+2008	fr970106	%% Frankfurter Rundschau 19970104 NAC DA1031917
+2009	fr970106	%% Frankfurter Rundschau 19970104 VS1 DA1031918
+2010	fr970106	%% Frankfurter Rundschau 19970104 FEU DA1031969
+2011	fr970106	%% Frankfurter Rundschau 19970104 NAC DA1031976
+2012	fr970106	%% Frankfurter Rundschau 19970104 AAW DA1031999
+2013	fr970106	%% Frankfurter Rundschau 19970104 NAC DA2138965
+2014	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1020455
+2015	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1030012
+2016	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1030025
+2017	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1030092
+2018	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1030095
+2019	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1030096
+2020	fr970106	%% Frankfurter Rundschau 19970104 VS1 DD1030122
+2021	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030192
+2022	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030220
+2023	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030233
+2024	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030234
+2025	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030236
+2026	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030239
+2027	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030249
+2028	fr970106	%% Frankfurter Rundschau 19970104 AAW DD1030259
+2029	fr970106	%% Frankfurter Rundschau 19970104 AAW DD1030264
+2030	fr970106	%% Frankfurter Rundschau 19970104 AAW DD1030309
+2031	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030314
+2032	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1030473
+2033	fr970106	%% Frankfurter Rundschau 19970104 NAC DD1034003
+2034	fr970106	%% Frankfurter Rundschau 19970104 WIS DD1260198
+2035	fr970106	%% Frankfurter Rundschau 19970104 VS1 DF1030003
+2036	fr970106	%% Frankfurter Rundschau 19970104 VS1 DF1030010
+2037	fr970106	%% Frankfurter Rundschau 19970104 NAC DF1030058
+2038	fr970106	%% Frankfurter Rundschau 19970104 NAC DF1030069
+2039	fr970106	%% Frankfurter Rundschau 19970104 NAC DF1030075
+2040	fr970106	%% Frankfurter Rundschau 19970104 NAC DF1030097
+2041	fr970106	%% Frankfurter Rundschau 19970104 VS1 DH1030004
+2042	fr970106	%% Frankfurter Rundschau 19970104 FEU DK1020022
+2043	fr970106	%% Frankfurter Rundschau 19970104 VS1 DR1030005
+2044	fr970106	%% Frankfurter Rundschau 19970104 AAW DR1030025
+2045	fr970106	%% Frankfurter Rundschau 19970104 VS1 DR1030027
+2046	fr970106	%% Frankfurter Rundschau 19970104 VS1 DR1030036
+2047	fr970106	%% Frankfurter Rundschau 19970104 FEU D01010199
+2048	fr970106	%% Frankfurter Rundschau 19970104 AAW D01020371
+2049	fr970106	%% Frankfurter Rundschau 19970104 NAC D01020411
+2050	fr970106	%% Frankfurter Rundschau 19970104 NAC D01020589
+2051	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030044
+2052	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030073
+2053	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030089
+2054	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030134
+2055	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030151
+2056	fr970106	%% Frankfurter Rundschau 19970104 WIS D01030201
+2057	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030205
+2058	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030272
+2059	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030327
+2060	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030370
+2061	fr970106	%% Frankfurter Rundschau 19970104 POL D01030389
+2062	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030397
+2063	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030425
+2064	fr970106	%% Frankfurter Rundschau 19970104 AAW D01030472
+2065	fr970106	%% Frankfurter Rundschau 19970104 AAW D01030475
+2066	fr970106	%% Frankfurter Rundschau 19970104 POL D01030480
+2067	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030490
+2068	fr970106	%% Frankfurter Rundschau 19970104 POL D01030504
+2069	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030511
+2070	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030538
+2071	fr970106	%% Frankfurter Rundschau 19970104 NAC D01030658
+2072	fr970106	%% Frankfurter Rundschau 19970104 MRE D09270051
+2073	fr970106	%% Frankfurter Rundschau 19970104 FEU D11180518
+2074	fr970106	%% Frankfurter Rundschau 19970104 WIS D11190472
+2075	fr970106	%% Frankfurter Rundschau 19970104 MRE D11260857
+2076	fr970106	%% Frankfurter Rundschau 19970104 MRE D11260862
+2077	fr970106	%% Frankfurter Rundschau 19970104 DOK D11270133
+2078	fr970106	%% Frankfurter Rundschau 19970104 WIS D11280039
+2079	fr970106	%% Frankfurter Rundschau 19970104 MRE D12010236
+2080	fr970106	%% Frankfurter Rundschau 19970104 WIS D12020153
+2081	fr970106	%% Frankfurter Rundschau 19970104 WIS D12030380
+2082	fr970106	%% Frankfurter Rundschau 19970104 WIS D12030779
+2083	fr970106	%% Frankfurter Rundschau 19970104 FEU D12100510
+2084	fr970106	%% Frankfurter Rundschau 19970104 MRE D12160717
+2085	fr970106	%% Frankfurter Rundschau 19970104 FEU D12190703
+2086	fr970106	%% Frankfurter Rundschau 19970104 NAC D12220008
+#EOT ORIGIN
+#BOT EDITOR
+-1	__-1		<Automatisch>
+0	__0		<Nicht_zugeordnet>
+22	mapu		Marcus
+24	anne		Anne
+52	carolin		Carolin
+53	stefanie	Stefanie
+55	nanna		Nanna
+62	stbe		Stephanie
+102	schradba	Bettina
+#EOT EDITOR
+#BOT WORDTAG
+-1	UNKNOWN	N	Unbekanntes Tag aus Einlesen aus Korpusdatei
+0	--	N	<Nicht zugeordnet>
+1	ADJA	Y	Attributives Adjektiv
+2	ADJD	Y	Adverbiales oder prädikatives Adjektiv
+3	ADV	Y	Adverb
+4	APPR	Y	Präposition; Zirkumposition links
+5	APPRART	Y	Präposition mit Artikel
+6	APPO	Y	Postposition
+7	APZR	Y	Zirkumposition rechts
+8	ART	Y	Bestimmter oder unbestimmter Artikel
+9	CARD	Y	Kardinalzahl
+10	FM	Y	Fremdsprachliches Material
+11	ITJ	Y	Interjektion
+12	KOUI	Y	Unterordnende Konjunktion mit zu und Infinitiv
+13	KOUS	Y	Unterordnende Konjunktion mit Satz
+14	KON	Y	Nebenordnende Konjunktion
+15	KOKOM	Y	Vergleichspartikel, ohne Satz
+16	NN	Y	Normales Nomen
+17	NE	Y	Eigennamen
+18	PDS	Y	Substituierendes Demonstrativpronomen
+19	PDAT	Y	Attribuierendes Demonstrativpronomen
+20	PIS	Y	Substituierendes Indefinitpronomen
+21	PIAT	Y	Attribuierendes Indefinitpronomen
+22	PPER	Y	Ersetzbares Personalpronomen
+23	PPOSS	Y	Substituierendes Possessivpronomen
+24	PPOSAT	Y	Attribuierendes Possessivpronomen
+25	PRELS	Y	Substituierendes Relativpronomen
+26	PRELAT	Y	Attribuierendes Relativpronomen
+27	PRF	Y	Reflexives Personalpronomen
+28	PWS	Y	Substituierendes Interrogativpronomen
+29	PWAT	Y	Attribuierendes Interrogativpronomen
+30	PWAV	Y	Adverbiales Interrogativ- oder Relativpronomen
+31	PROAV	Y	Pronominaladverb
+32	PTKZU	Y	zu vor Infinitiv
+33	PTKNEG	Y	Negationspartikel
+34	PTKVZ	Y	Abgetrennter Verbzusatz
+35	PTKANT	Y	Antwortpartikel
+36	PTKA	Y	Partikel bei Adjektiv oder Adverb
+37	TRUNC	Y	Kompositions-Erstglied
+38	VVFIN	Y	Finites Verb, voll
+39	VVIMP	Y	Imperativ, voll
+40	VVINF	Y	Infinitiv, voll
+41	VVIZU	Y	Infinitiv mit zu, voll
+42	VVPP	Y	Partizip Perfekt, voll
+43	VAFIN	Y	Finites Verb, aux
+44	VAIMP	Y	Imperativ, aux
+45	VAINF	Y	Infinitiv, aux
+46	VAPP	Y	Partizip Perfekt, aux
+47	VMFIN	Y	Finites Verb, modal
+48	VMINF	Y	Infinitiv, modal
+49	VMPP	Y	Partizip Perfekt, modal
+50	XY	Y	Nichtwort, Sonderzeichen
+51	$,	N	Komma
+52	$.	N	Satzbeendende Interpunktion
+53	$(	N	Sonstige Satzzeichen; satzintern
+54	NNE	Y	Kombination aus Nomen und Eigenname
+#EOT WORDTAG
+#BOT MORPHTAG
+-1	UNKNOWN	unknown tag
+0	--	not bound
+1	*	-
+2	*.*.*	-
+3	*.*.*.*	-
+4	*.*.*.*.*	-
+5	*.*.Akk.Pl.St	-
+6	*.*.Akk.Pl.Sw	-
+7	*.*.Dat.Pl.St	-
+8	*.*.Dat.Pl.Sw	-
+9	*.*.Fem	-
+10	*.*.Gen.Pl.St	-
+11	*.*.Gen.Pl.Sw	-
+12	*.*.Masc	-
+13	*.*.Neut	-
+14	*.*.Nom.Pl.St	-
+15	*.*.Nom.Pl.Sw	-
+16	*.Acc.Sg.Masc	-
+17	*.Akk.Pl	-
+18	*.Akk.Pl.*	-
+19	*.Akk.Pl.St	-
+20	*.Akk.Pl.Sw	-
+21	*.Akk.Sg	-
+22	*.Akk.Sg.St	-
+23	*.Dat.Pl	-
+24	*.Dat.Pl.*	-
+25	*.Dat.Pl.St	-
+26	*.Dat.Pl.Sw	-
+27	*.Dat.Sg	-
+28	*.Fem.Akk.Sg.Mix	-
+29	*.Fem.Akk.Sg.St	-
+30	*.Fem.Akk.Sg.Sw	-
+31	*.Fem.Dat.Sg.Mix	-
+32	*.Fem.Dat.Sg.St	-
+33	*.Fem.Dat.Sg.Sw	-
+34	*.Fem.Gen.Sg.Sw	-
+35	*.Fem.Nom.Sg.St	-
+36	*.Fem.Nom.Sg.Sw	-
+37	*.Gen.Pl	-
+38	*.Gen.Pl.*	-
+39	*.Gen.Pl.St	-
+40	*.Gen.Pl.Sw	-
+41	*.Gen.Sg	-
+42	*.Masc.Akk.Sg.Mix	-
+43	*.Masc.Akk.Sg.Sw	-
+44	*.Masc.Dat.Sg.Mix	-
+45	*.Masc.Dat.Sg.Sw	-
+46	*.Masc.Gen.Sg.Mix	-
+47	*.Masc.Gen.Sg.Sw	-
+48	*.Masc.Nom.Sg.Mix	-
+49	*.Masc.Nom.Sg.St	-
+50	*.Masc.Nom.Sg.Sw	-
+51	*.Neut.Akk.Sg.Sw	-
+52	*.Neut.Dat.Sg.Mix	-
+53	*.Neut.Dat.Sg.Sw	-
+54	*.Neut.Gen.Sg.Sw	-
+55	*.Neut.Nom.Sg.Mix	-
+56	*.Neut.Nom.Sg.St	-
+57	*.Neut.Nom.Sg.Sw	-
+58	*.Nom.Pl	-
+59	*.Nom.Pl.*	-
+60	*.Nom.Pl.Mix	-
+61	*.Nom.Pl.St	-
+62	*.Nom.Pl.Sw	-
+63	*.Nom.Sg	-
+64	*.Pl.*	-
+65	*.Pl.Fem	-
+66	*.Pl.Masc	-
+67	*.Pl.Neut	-
+68	*.Sg.Fem	-
+69	*.Sg.Masc	-
+70	*.Sg.Neut	-
+71	1.Acc.Pl	-
+72	1.Acc.Pl.*	-
+73	1.Acc.Pl.Masc	-
+74	1.Acc.Sg	-
+75	1.Acc.Sg.*	-
+76	1.Acc.Sg.Fem	-
+77	1.Acc.Sg.Masc	-
+78	1.Akk.Pl	-
+79	1.Akk.Sg	-
+80	1.Dat.Pl	-
+81	1.Dat.Pl.*	-
+82	1.Dat.Sg	-
+83	1.Dat.Sg.*	-
+84	1.Dat.Sg.Masc	-
+85	1.Nom.Pl.*	-
+86	1.Nom.Pl.Fem	-
+87	1.Nom.Pl.Masc	-
+88	1.Nom.Sg.*	-
+89	1.Nom.Sg.Fem	-
+90	1.Nom.Sg.Masc	-
+91	1.Pl.*.Akk	-
+92	1.Pl.*.Dat	-
+93	1.Pl.*.Nom	-
+94	1.Pl.Past.Ind	-
+95	1.Pl.Past.Konj	-
+96	1.Pl.Past.Subj	-
+97	1.Pl.Pres.Ind	-
+98	1.Pl.Pres.Subj	-
+99	1.Sg.*.Akk	-
+100	1.Sg.*.Dat	-
+101	1.Sg.*.Nom	-
+102	1.Sg.Past.Ind	-
+103	1.Sg.Past.Konj	-
+104	1.Sg.Past.Subj	-
+105	1.Sg.Pres.Ind	-
+106	1.Sg.Pres.Konj	-
+107	1.Sg.Pres.Subj	-
+108	2.Acc.Pl	-
+109	2.Acc.Pl.*	-
+110	2.Acc.Sg	-
+111	2.Acc.Sg.*	-
+112	2.Acc.Sg.Masc	-
+113	2.Akk.Sg	-
+114	2.Dat.Pl.*	-
+115	2.Dat.Sg	-
+116	2.Dat.Sg.*	-
+117	2.Nom.Pl.*	-
+118	2.Nom.Sg.*	-
+119	2.Nom.Sg.Fem	-
+120	2.Nom.Sg.Masc	-
+121	2.Pl.*.Nom	-
+122	2.Pl.Imp	-
+123	2.Pl.Past.Ind	-
+124	2.Pl.Pres.Imp	-
+125	2.Pl.Pres.Ind	-
+126	2.Pl.imp	-
+127	2.Sg.*.Akk	-
+128	2.Sg.*.Dat	-
+129	2.Sg.*.Nom	-
+130	2.Sg.Imp	-
+131	2.Sg.Past.Ind	-
+132	2.Sg.Past.Subj	-
+133	2.Sg.Pres.Imp	-
+134	2.Sg.Pres.Ind	-
+135	2.Sg.Pres.Konj	-
+136	3.Acc.*.*	-
+137	3.Acc.Pl	-
+138	3.Acc.Pl.*	-
+139	3.Acc.Pl.Fem	-
+140	3.Acc.Pl.Masc	-
+141	3.Acc.Pl.Neut	-
+142	3.Acc.Sg	-
+143	3.Acc.Sg.*	-
+144	3.Acc.Sg.Fem	-
+145	3.Acc.Sg.Masc	-
+146	3.Acc.Sg.Neut	-
+147	3.Akk.Pl	-
+148	3.Akk.Sg	-
+149	3.Dat.Pl	-
+150	3.Dat.Pl.*	-
+151	3.Dat.Pl.Fem	-
+152	3.Dat.Pl.Masc	-
+153	3.Dat.Pl.Neut	-
+154	3.Dat.Sg	-
+155	3.Dat.Sg.*	-
+156	3.Dat.Sg.Fem	-
+157	3.Dat.Sg.Masc	-
+158	3.Dat.Sg.Neut	-
+159	3.Gen.Pl.*	-
+160	3.Gen.Sg.*	-
+161	3.Gen.Sg.Fem	-
+162	3.Nom.*.*	-
+163	3.Nom.Pl.*	-
+164	3.Nom.Pl.Fem	-
+165	3.Nom.Pl.Masc	-
+166	3.Nom.Pl.Neut	-
+167	3.Nom.Sg.*	-
+168	3.Nom.Sg.Fem	-
+169	3.Nom.Sg.Masc	-
+170	3.Nom.Sg.Neut	-
+171	3.Pl.*.Akk	-
+172	3.Pl.*.Dat	-
+173	3.Pl.*.Nom	-
+174	3.Pl.Past.Ind	-
+175	3.Pl.Past.Konj	-
+176	3.Pl.Past.Subj	-
+177	3.Pl.Pres.Ind	-
+178	3.Pl.Pres.Konj	-
+179	3.Pl.Pres.Subj	-
+180	3.Sg.Fem.Akk	-
+181	3.Sg.Fem.Dat	-
+182	3.Sg.Fem.Nom	-
+183	3.Sg.Masc.Akk	-
+184	3.Sg.Masc.Dat	-
+185	3.Sg.Masc.Nom	-
+186	3.Sg.Neut.Akk	-
+187	3.Sg.Neut.Nom	-
+188	3.Sg.Past.Ind	-
+189	3.Sg.Past.Konj	-
+190	3.Sg.Past.Subj	-
+191	3.Sg.Pres.Ind	-
+192	3.Sg.Pres.Konj	-
+193	3.Sg.Pres.Subj	-
+194	Acc	-
+195	Acc.*.*	-
+196	Acc.*.Masc	-
+197	Acc.*.Neut	-
+198	Acc.Pl.*	-
+199	Acc.Pl.Fem	-
+200	Acc.Pl.Masc	-
+201	Acc.Pl.Neut	-
+202	Acc.Sg.*	-
+203	Acc.Sg.Fem	-
+204	Acc.Sg.Masc	-
+205	Acc.Sg.Neut	-
+206	Akk	-
+207	Akk.Neut	-
+208	Comp	-
+209	Comp.*.*.*	-
+210	Comp.*.Akk.Pl.Mix	-
+211	Comp.*.Akk.Pl.St	-
+212	Comp.*.Dat.Pl.St	-
+213	Comp.*.Dat.Pl.Sw	-
+214	Comp.*.Gen.Pl.St	-
+215	Comp.*.Nom.Pl.St	-
+216	Comp.*.Nom.Pl.Sw	-
+217	Comp.*.Sg.Fem	-
+218	Comp.Acc.Pl.*	-
+219	Comp.Acc.Pl.Fem	-
+220	Comp.Acc.Pl.Masc	-
+221	Comp.Acc.Pl.Neut	-
+222	Comp.Acc.Sg.Fem	-
+223	Comp.Acc.Sg.Masc	-
+224	Comp.Acc.Sg.Neut	-
+225	Comp.Dat.Pl.*	-
+226	Comp.Dat.Pl.Fem	-
+227	Comp.Dat.Pl.Masc	-
+228	Comp.Dat.Pl.Neut	-
+229	Comp.Dat.Sg.*	-
+230	Comp.Dat.Sg.Fem	-
+231	Comp.Dat.Sg.Masc	-
+232	Comp.Dat.Sg.Neut	-
+233	Comp.Fem.Akk.Sg.Mix	-
+234	Comp.Fem.Akk.Sg.St	-
+235	Comp.Fem.Akk.Sg.Sw	-
+236	Comp.Fem.Dat.Sg.Mix	-
+237	Comp.Fem.Dat.Sg.St	-
+238	Comp.Fem.Dat.Sg.Sw	-
+239	Comp.Fem.Gen.Sg.Mix	-
+240	Comp.Fem.Gen.Sg.Sw	-
+241	Comp.Fem.Nom.Sg.Mix	-
+242	Comp.Fem.Nom.Sg.Sw	-
+243	Comp.Gen.Pl.*	-
+244	Comp.Gen.Pl.Fem	-
+245	Comp.Gen.Pl.Masc	-
+246	Comp.Gen.Pl.Neut	-
+247	Comp.Gen.Sg.Fem	-
+248	Comp.Gen.Sg.Masc	-
+249	Comp.Gen.Sg.Neut	-
+250	Comp.Masc.Akk.Sg.Mix	-
+251	Comp.Masc.Akk.Sg.St	-
+252	Comp.Masc.Akk.Sg.Sw	-
+253	Comp.Masc.Dat.Sg.Mix	-
+254	Comp.Masc.Dat.Sg.St	-
+255	Comp.Masc.Dat.Sg.Sw	-
+256	Comp.Masc.Nom.Sg.Mix	-
+257	Comp.Masc.Nom.Sg.St	-
+258	Comp.Masc.Nom.Sg.Sw	-
+259	Comp.Neut.Akk.Sg.Mix	-
+260	Comp.Neut.Akk.Sg.St	-
+261	Comp.Neut.Akk.Sg.Sw	-
+262	Comp.Neut.Dat.Sg.Mix	-
+263	Comp.Neut.Dat.Sg.St	-
+264	Comp.Neut.Nom.Sg.Mix	-
+265	Comp.Neut.Nom.Sg.Sw	-
+266	Comp.Nom.Pl.*	-
+267	Comp.Nom.Pl.Fem	-
+268	Comp.Nom.Pl.Masc	-
+269	Comp.Nom.Pl.Neut	-
+270	Comp.Nom.Sg.Fem	-
+271	Comp.Nom.Sg.Masc	-
+272	Comp.Nom.Sg.Neut	-
+273	Dat	-
+274	Dat.*.*	-
+275	Dat.*.Masc	-
+276	Dat.*.Neut	-
+277	Dat.Fem	-
+278	Dat.Masc	-
+279	Dat.Neut	-
+280	Dat.Pl.*	-
+281	Dat.Pl.Fem	-
+282	Dat.Pl.Masc	-
+283	Dat.Pl.Neut	-
+284	Dat.Sg.*	-
+285	Dat.Sg.Fem	-
+286	Dat.Sg.Masc	-
+287	Dat.Sg.Neut	-
+288	Def.*.Akk.Pl	-
+289	Def.*.Dat.Pl	-
+290	Def.*.Gen.Pl	-
+291	Def.*.Nom.Pl	-
+292	Def.Fem.Akk.Sg	-
+293	Def.Fem.Dat.Sg	-
+294	Def.Fem.Gen.Sg	-
+295	Def.Fem.Nom.Sg	-
+296	Def.Masc.Akk.Sg	-
+297	Def.Masc.Dat.Sg	-
+298	Def.Masc.Gen.Sg	-
+299	Def.Masc.Nom.Sg	-
+300	Def.Neut.Akk.Sg	-
+301	Def.Neut.Dat.Sg	-
+302	Def.Neut.Gen.Sg	-
+303	Def.Neut.Nom.Sg	-
+304	Fem.Akk.Pl.*	-
+305	Fem.Akk.Sg	-
+306	Fem.Akk.Sg.*	-
+307	Fem.Akk.Sg.St	-
+308	Fem.Dat.Pl	-
+309	Fem.Dat.Pl.*	-
+310	Fem.Dat.Sg	-
+311	Fem.Dat.Sg.*	-
+312	Fem.Dat.Sg.Mix	-
+313	Fem.Dat.Sg.Sw	-
+314	Fem.Gen.Pl.*	-
+315	Fem.Gen.Sg	-
+316	Fem.Gen.Sg.*	-
+317	Fem.Gen.Sg.Mix	-
+318	Fem.Nom.Pl.*	-
+319	Fem.Nom.Sg	-
+320	Fem.Nom.Sg.*	-
+321	Fem.Nom.Sg.St	-
+322	Fem.Nom.Sg.Sw	-
+323	Gen	-
+324	Gen.*.*	-
+325	Gen.Pl.*	-
+326	Gen.Pl.Fem	-
+327	Gen.Pl.Masc	-
+328	Gen.Pl.Neut	-
+329	Gen.Sg.*	-
+330	Gen.Sg.Fem	-
+331	Gen.Sg.Masc	-
+332	Gen.Sg.Neut	-
+333	Indef.Fem.Akk.Sg	-
+334	Indef.Fem.Dat.Sg	-
+335	Indef.Fem.Gen.Sg	-
+336	Indef.Fem.Nom.Sg	-
+337	Indef.Masc.Akk.Sg	-
+338	Indef.Masc.Dat.Sg	-
+339	Indef.Masc.Gen.Sg	-
+340	Indef.Masc.Nom.Sg	-
+341	Indef.Neut.Akk.Sg	-
+342	Indef.Neut.Dat.Sg	-
+343	Indef.Neut.Gen.Sg	-
+344	Indef.Neut.Nom.Sg	-
+345	Inf	-
+346	Infzu	-
+347	Masc.Akk.Pl	-
+348	Masc.Akk.Pl.*	-
+349	Masc.Akk.Pl.St	-
+350	Masc.Akk.Sg	-
+351	Masc.Akk.Sg.*	-
+352	Masc.Akk.Sg.Mix	-
+353	Masc.Akk.Sg.Sw	-
+354	Masc.Dat.Pl	-
+355	Masc.Dat.Pl.*	-
+356	Masc.Dat.Pl.St	-
+357	Masc.Dat.Sg	-
+358	Masc.Dat.Sg.*	-
+359	Masc.Dat.Sg.Sw	-
+360	Masc.Gen.Pl	-
+361	Masc.Gen.Pl.*	-
+362	Masc.Gen.Sg	-
+363	Masc.Gen.Sg.*	-
+364	Masc.Gen.Sg.Mix	-
+365	Masc.Gen.Sg.Sw	-
+366	Masc.Nom.Pl.*	-
+367	Masc.Nom.Sg	-
+368	Masc.Nom.Sg.*	-
+369	Masc.Nom.Sg.Mix	-
+370	Masc.Nom.Sg.St	-
+371	Masc.Nom.Sg.Sw	-
+372	Neut.Akk.Pl.*	-
+373	Neut.Akk.Sg	-
+374	Neut.Akk.Sg.*	-
+375	Neut.Akk.Sg.St	-
+376	Neut.Akk.Sg.Sw	-
+377	Neut.Dat.Pl.*	-
+378	Neut.Dat.Sg	-
+379	Neut.Dat.Sg.*	-
+380	Neut.Dat.Sg.St	-
+381	Neut.Dat.Sg.Sw	-
+382	Neut.Gen.Pl.*	-
+383	Neut.Gen.Sg	-
+384	Neut.Gen.Sg.*	-
+385	Neut.Gen.Sg.Mix	-
+386	Neut.Gen.Sg.Sw	-
+387	Neut.Nom.Pl.*	-
+388	Neut.Nom.Sg	-
+389	Neut.Nom.Sg.*	-
+390	Neut.Nom.Sg.St	-
+391	Neut.Nom.Sg.Sw	-
+392	Nom	-
+393	Nom.*.*	-
+394	Nom.*.Masc	-
+395	Nom.*.Neut	-
+396	Nom.Pl.*	-
+397	Nom.Pl.Fem	-
+398	Nom.Pl.Masc	-
+399	Nom.Pl.Neut	-
+400	Nom.Sg.*	-
+401	Nom.Sg.Fem	-
+402	Nom.Sg.Masc	-
+403	Nom.Sg.Neut	-
+404	Pl	-
+405	Pos	-
+406	Pos.*.*.*	-
+407	Pos.*.*.*.*	-
+408	Pos.*.Akk.Pl.Mix	-
+409	Pos.*.Akk.Pl.St	-
+410	Pos.*.Akk.Pl.Sw	-
+411	Pos.*.Dat.Pl.Mix	-
+412	Pos.*.Dat.Pl.St	-
+413	Pos.*.Dat.Pl.Sw	-
+414	Pos.*.Gen.Pl.Mix	-
+415	Pos.*.Gen.Pl.St	-
+416	Pos.*.Gen.Pl.Sw	-
+417	Pos.*.Nom.Pl.Mix	-
+418	Pos.*.Nom.Pl.St	-
+419	Pos.*.Nom.Pl.Sw	-
+420	Pos.*.Pl.*	-
+421	Pos.*.Pl.Fem	-
+422	Pos.*.Sg.Fem	-
+423	Pos.*.Sg.Masc	-
+424	Pos.*.Sg.Neut	-
+425	Pos.Acc.*.*	-
+426	Pos.Acc.Pl.*	-
+427	Pos.Acc.Pl.Fem	-
+428	Pos.Acc.Pl.Masc	-
+429	Pos.Acc.Pl.Neut	-
+430	Pos.Acc.Sg.Fem	-
+431	Pos.Acc.Sg.Masc	-
+432	Pos.Acc.Sg.Neut	-
+433	Pos.Dat.Pl.*	-
+434	Pos.Dat.Pl.Fem	-
+435	Pos.Dat.Pl.Masc	-
+436	Pos.Dat.Pl.Neut	-
+437	Pos.Dat.Sg.*	-
+438	Pos.Dat.Sg.Fem	-
+439	Pos.Dat.Sg.Masc	-
+440	Pos.Dat.Sg.Neut	-
+441	Pos.Fem.Akk.Sg.Mix	-
+442	Pos.Fem.Akk.Sg.St	-
+443	Pos.Fem.Akk.Sg.Sw	-
+444	Pos.Fem.Dat.Sg.Mix	-
+445	Pos.Fem.Dat.Sg.St	-
+446	Pos.Fem.Dat.Sg.Sw	-
+447	Pos.Fem.Gen.Sg.Mix	-
+448	Pos.Fem.Gen.Sg.St	-
+449	Pos.Fem.Gen.Sg.Sw	-
+450	Pos.Fem.Nom.Sg.Mix	-
+451	Pos.Fem.Nom.Sg.St	-
+452	Pos.Fem.Nom.Sg.Sw	-
+453	Pos.Gen.*.*	-
+454	Pos.Gen.Pl.*	-
+455	Pos.Gen.Pl.Fem	-
+456	Pos.Gen.Pl.Masc	-
+457	Pos.Gen.Pl.Neut	-
+458	Pos.Gen.Sg.*	-
+459	Pos.Gen.Sg.Fem	-
+460	Pos.Gen.Sg.Masc	-
+461	Pos.Gen.Sg.Neut	-
+462	Pos.Masc.Akk.Sg.Mix	-
+463	Pos.Masc.Akk.Sg.St	-
+464	Pos.Masc.Akk.Sg.Sw	-
+465	Pos.Masc.Dat.Sg.Mix	-
+466	Pos.Masc.Dat.Sg.St	-
+467	Pos.Masc.Dat.Sg.Sw	-
+468	Pos.Masc.Gen.Sg.Mix	-
+469	Pos.Masc.Gen.Sg.St	-
+470	Pos.Masc.Gen.Sg.Sw	-
+471	Pos.Masc.Nom.Sg.Mix	-
+472	Pos.Masc.Nom.Sg.St	-
+473	Pos.Masc.Nom.Sg.Sw	-
+474	Pos.Neut.Akk.Sg.Mix	-
+475	Pos.Neut.Akk.Sg.St	-
+476	Pos.Neut.Akk.Sg.Sw	-
+477	Pos.Neut.Dat.Sg.Mix	-
+478	Pos.Neut.Dat.Sg.St	-
+479	Pos.Neut.Dat.Sg.Sw	-
+480	Pos.Neut.Gen.Sg.Mix	-
+481	Pos.Neut.Gen.Sg.St	-
+482	Pos.Neut.Gen.Sg.Sw	-
+483	Pos.Neut.Nom.Sg.Mix	-
+484	Pos.Neut.Nom.Sg.St	-
+485	Pos.Neut.Nom.Sg.Sw	-
+486	Pos.Nom.*.*	-
+487	Pos.Nom.Pl.*	-
+488	Pos.Nom.Pl.Fem	-
+489	Pos.Nom.Pl.Masc	-
+490	Pos.Nom.Pl.Neut	-
+491	Pos.Nom.Sg.*	-
+492	Pos.Nom.Sg.Fem	-
+493	Pos.Nom.Sg.Masc	-
+494	Pos.Nom.Sg.Neut	-
+495	Prp	-
+496	Psp	-
+497	Sg	-
+498	Sup	-
+499	Sup.*.Akk.Pl.St	-
+500	Sup.*.Akk.Pl.Sw	-
+501	Sup.*.Dat.Pl.St	-
+502	Sup.*.Dat.Pl.Sw	-
+503	Sup.*.Gen.Pl.Sw	-
+504	Sup.*.Nom.Pl.Mix	-
+505	Sup.*.Nom.Pl.Sw	-
+506	Sup.Acc.Pl.*	-
+507	Sup.Acc.Pl.Fem	-
+508	Sup.Acc.Pl.Masc	-
+509	Sup.Acc.Pl.Neut	-
+510	Sup.Acc.Sg.Fem	-
+511	Sup.Acc.Sg.Masc	-
+512	Sup.Acc.Sg.Neut	-
+513	Sup.Dat.Pl.*	-
+514	Sup.Dat.Pl.Fem	-
+515	Sup.Dat.Pl.Masc	-
+516	Sup.Dat.Pl.Neut	-
+517	Sup.Dat.Sg.Fem	-
+518	Sup.Dat.Sg.Masc	-
+519	Sup.Dat.Sg.Neut	-
+520	Sup.Fem.Akk.Sg.St	-
+521	Sup.Fem.Akk.Sg.Sw	-
+522	Sup.Fem.Dat.Sg.Mix	-
+523	Sup.Fem.Dat.Sg.St	-
+524	Sup.Fem.Dat.Sg.Sw	-
+525	Sup.Fem.Gen.Sg.St	-
+526	Sup.Fem.Gen.Sg.Sw	-
+527	Sup.Fem.Nom.Sg.Mix	-
+528	Sup.Fem.Nom.Sg.St	-
+529	Sup.Fem.Nom.Sg.Sw	-
+530	Sup.Gen.Pl.*	-
+531	Sup.Gen.Pl.Fem	-
+532	Sup.Gen.Pl.Masc	-
+533	Sup.Gen.Pl.Neut	-
+534	Sup.Gen.Sg.Fem	-
+535	Sup.Gen.Sg.Masc	-
+536	Sup.Gen.Sg.Neut	-
+537	Sup.Masc.Akk.Sg.St	-
+538	Sup.Masc.Akk.Sg.Sw	-
+539	Sup.Masc.Dat.Sg.Mix	-
+540	Sup.Masc.Dat.Sg.Sw	-
+541	Sup.Masc.Gen.Sg.Sw	-
+542	Sup.Masc.Nom.Sg.Mix	-
+543	Sup.Masc.Nom.Sg.St	-
+544	Sup.Masc.Nom.Sg.Sw	-
+545	Sup.Neut.Akk.Sg.Mix	-
+546	Sup.Neut.Akk.Sg.Sw	-
+547	Sup.Neut.Dat.Sg.Sw	-
+548	Sup.Neut.Gen.Sg.St	-
+549	Sup.Neut.Nom.Sg.St	-
+550	Sup.Neut.Nom.Sg.Sw	-
+551	Sup.Nom.Pl.Fem	-
+552	Sup.Nom.Pl.Masc	-
+553	Sup.Nom.Pl.Neut	-
+554	Sup.Nom.Sg.Fem	-
+555	Sup.Nom.Sg.Masc	-
+556	Sup.Nom.Sg.Neut	-
+557	*.Acc.Pl.*	-
+558	1.Acc.Pl.Fem	-
+559	1.Dat.Sg.Fem	-
+560	1.Nom.Sg	-
+561	2.Acc.Pl.Masc	-
+562	2.Sg.Pres.Subj	-
+563	2.Sg.imp	-
+564	3.*.Sg.Neut	-
+565	3.Dat.*	-
+566	3.Dat.*.*	-
+567	3.Gen.Pl.Masc	-
+568	3.Nom.Pl	-
+569	3.Nom.Sg	-
+570	Comp.*.Pl.*	-
+571	Comp.*.Pl.Fem	-
+572	Comp.Acc.Sg.*	-
+573	Gen.*.Masc	-
+574	Gen.*.Neut	-
+575	Nom.*.Fem	-
+576	Pos.Acc.Sg.*	-
+577	Pos.Dat.*.*	-
+578	Sup.*.Sg.Fem	-
+579	Sup.Nom.Pl.*	-
+580	*.Gen.Sg.Fem	-
+581	2.Dat.Pl	-
+582	2.Dat.Pl.Masc	-
+583	2.Dat.Sg.Fem	-
+584	2.Nom.Pl.Masc	-
+585	Gen.*.Fem	-
+#EOT MORPHTAG
+#BOT NODETAG
+0	--	<not bound>
+1	NP	noun phrase
+2	AP	adjektive phrase
+3	PP	adpositional phrase
+4	S	sentence
+5	VP	verb phrase (non-finite)
+6	VZ	zu-marked infinitive
+7	CO	coordination
+8	AVP	adverbial phrase
+9	AA	superlative phrase with "am"
+10	CNP	coordinated noun phrase
+11	CAP	coordinated adjektive phrase
+12	CPP	coordinated adpositional phrase
+13	CS	coordinated sentence
+14	CVP	coordinated verb phrase (non-finite)
+15	CVZ	coordinated zu-marked infinitive
+16	CAVP	coordinated adverbial phrase
+17	PN	proper noun
+18	NM	multi-token number
+19	CAC	coordinated adposition
+20	CH	chunk
+21	MTA	multi-token adjective
+22	CCP	coordinated complementiser
+23	DL	discourse level constituent
+24	ISU	idiosyncratis unit
+25	QL	quasi-language
+#EOT NODETAG
+#BOT EDGETAG
+0	--	<not bound>
+1	HD	head
+2	CJ	conjunct
+3	NK	noun kernel modifier
+4	MNR	postnominal modifier
+5	CM	comparative concjunction
+6	PG	phrasal genitive
+7	RC	relative clause
+8	AG	genitive attribute
+9	VO	vocative
+10	AMS	measure argument of adj
+11	CC	comparative complement
+12	MR	rhetorical modifier
+13	SB	subject
+14	PD	predicate
+15	SP	subject or predicate
+16	OC	clausal object
+17	OA	accusative object
+18	OA2	second accusative object
+19	DA	dative
+20	OG	genitive object
+21	UC	unit component
+22	APP	apposition
+23	PM	morphological particle
+24	CP	complementizer
+25	NMC	numerical component
+26	DM	discourse marker
+27	ML	locative
+28	MI	instrumental
+29	MC	comitative
+30	MO	modifier
+31	AC	adpositional case marker
+32	CD	coordinating conjunction
+33	SVP	separable verb prefix
+34	NG	negation
+35	RE	repeated element
+36	SBP	passivised subject (PP)
+37	PH	placeholder
+38	PNC	proper noun component
+39	AVC	adverbial phrase component
+40	ADC	adjective component
+41	MW	way (directional modifier)
+42	DH	discourse-level head
+43	RS	reported speech
+44	EP	expletive es
+45	JU	junctor
+46	PAR	parenthesis
+47	OP	prepositional object
+48	CVC	collocational verb construction (Funktionsverbgefüge)
+#EOT EDGETAG
+#BOT SECEDGETAG
+0	--	<not bound>
+1	HD	head
+2	CJ	conjunct
+3	NK	noun kernel modifier
+4	MNR	postnominal modifier
+5	CM	comparative concjunction
+6	PG	phrasal genitive
+7	RC	relative clause
+8	AG	genitive attribute
+9	VO	vocative
+10	AMS	measure argument of adj
+11	CC	comparative complement
+12	MR	rhetorical modifier
+13	SB	subject
+14	PD	predicate
+15	SP	subject or predicate
+16	OC	clausal object
+17	OA	accusative object
+18	OA2	second accusative object
+19	DA	dative
+20	OG	genitive object
+21	UC	(idiosyncratic) unit component
+22	APP	apposition
+23	PM	morphological particle
+24	CP	complementizer
+25	NMC	numerical component
+26	DM	discourse marker
+27	ML	locative
+28	MI	instrumental
+29	MC	comitative
+30	MO	modifier
+31	AC	adpositional case marker
+32	CD	coordinating conjunction
+33	SVP	separable verb prefix
+34	NG	negation
+35	RE	repeated element
+36	SBP	passivised subject (PP)
+37	PH	placeholder
+38	PNC	proper noun component
+39	AVC	adverbial phrase component
+40	ADC	adjective component
+41	MW	way (directional modifier)
+42	DH	discourse-level head
+43	RS	reported speech
+44	JU	junctor
+45	OP	prepositional object
+46	CVC	collocational verb construction (Funktionsverbgefüge)
+47	EP	expletive es
+48	PAR	parenthesis
+#EOT SECEDGETAG
+%% word			lemma			tag	morph		edge	parent	secedge comment
+#BOS 1 0 1098266456 1 %% @SB2AV@
+``			--			$(	--		--	0
+Ross			Ross			NE	Nom.Sg.Masc	PNC	500
+Perot			Perot			NE	Nom.Sg.Masc	PNC	500
+wäre			sein			VAFIN	3.Sg.Past.Subj	HD	502
+vielleicht		vielleicht		ADV	--		MO	502
+ein			ein			ART	Nom.Sg.Masc	NK	501
+prächtiger		prächtig		ADJA	Pos.Nom.Sg.Masc	NK	501
+Diktator		Diktator		NN	Nom.Sg.Masc	NK	501
+''			--			$(	--		--	0
+#500			--			PN	--		SB	502
+#501			--			NP	--		PD	502
+#502			--			S	--		--	0
+#EOS 1
+#BOS 2 0 1090228530 1 %% @SB2AV@
+Konzernchefs		Konzernchef		NN	Nom.Pl.Masc	SB	502
+lehnen			lehnen			VVFIN	3.Pl.Pres.Ind	HD	502
+den			der			ART	Acc.Sg.Masc	NK	500
+Milliardär		Milliardär		NN	Acc.Sg.Masc	NK	500
+als			als			APPR	--		AC	501
+US-Präsidenten		US-Präsident		NN	Acc.Sg.Masc	NK	501
+ab			ab			PTKVZ	--		SVP	502
+/			--			$(	--		--	0
+#500			--			NP	--		OA	502
+#501			--			PP	--		MO	502
+#502			--			S	--		--	0
+#EOS 2
+#BOS 3 0 1057217459 1 %% @SB2AV@
+Texaner			Texaner			NN	Nom.Sg.Masc	SB	503
+gibt			geben			VVFIN	3.Sg.Pres.Ind	HD	503
+nur			nur			ADV	--		MO	500
+vage			vage			ADJA	Pos.Acc.Sg.Fem	HD	500
+Auskunft		Auskunft		NN	Acc.Sg.Fem	NK	502
+über			über			APPR	--		AC	501
+seine			sein			PPOSAT	Acc.Sg.Fem	NK	501
+Wirtschaftspolitik	Wirtschaftspolitik	NN	Acc.Sg.Fem	NK	501
+#500			--			AP	--		NK	502
+#501			--			PP	--		MNR	502
+#502			--			NP	--		OA	503
+#503			--			S	--		--	0
+#EOS 3
+#BOS 4 0 1057916823 1 %% @SB2AV@
+Der			der			ART	Nom.Sg.Masc	NK	502
+texanische		texanisch		ADJA	Pos.Nom.Sg.Masc	NK	502
+Milliardär		Milliardär		NN	Nom.Sg.Masc	NK	502
+Ross			Ross			NE	Nom.Sg.Masc	PNC	500
+Perot			Perot			NE	Nom.Sg.Masc	PNC	500
+hat			haben			VAFIN	3.Sg.Pres.Ind	HD	505
+das			der			ART	Acc.Sg.Neut	NK	503
+politische		politisch		ADJA	Pos.Acc.Sg.Neut	NK	503
+Establishment		Establishment		NN	Acc.Sg.Neut	NK	503
+in			in			APPR	--		AC	501
+Washington		Washington		NE	Dat.Sg.Neut	NK	501
+aufgeschreckt		aufschrecken		VVPP	Psp		HD	504
+.			--			$.	--		--	0
+#500			--			PN	--		NK	502
+#501			--			PP	--		MNR	503
+#502			--			NP	--		SB	505
+#503			--			NP	--		OA	504
+#504			--			VP	--		OC	505
+#505			--			S	--		--	0
+#EOS 4
+#BOS 5 0 1090230941 1 %% @SB2AV@
+Nach			nach			APPR	--		AC	500
+Meinungsumfragen	Meinungsumfrage		NN	Dat.Pl.Fem	NK	500
+liegt			liegen			VVFIN	3.Sg.Pres.Ind	HD	513
+der			der			ART	Nom.Sg.Masc	NK	501
+parteilose		parteilos		ADJA	Pos.Nom.Sg.Masc	NK	501
+Self-mademan		--			FM	--		NK	501
+gut			gut			ADJD	Pos		MO	513
+im			in			APPRART	Dat.Sg.Neut	AC	512
+Rennen			Rennen			NN	Dat.Sg.Neut	NK	512
+um			um			APPR	--		AC	510
+den			der			ART	Acc.Sg.Masc	NK	510
+Chefsessel		Chefsessel		NN	Acc.Sg.Masc	NK	510
+im			in			APPRART	Dat.Sg.Neut	AC	508
+Weißen			weiß			ADJA	Pos.Dat.Sg.Neut	NK	502
+Haus			Haus			NN	Dat.Sg.Neut	NK	502
+mit			mit			APPR	--		AC	511
+dem			der			ART	Dat.Sg.Masc	NK	506
+amtierenden		amtierend		ADJA	Pos.Dat.Sg.Masc	NK	506
+Präsidenten		Präsident		NN	Dat.Sg.Masc	NK	506
+George			George			NE	Nom.Sg.Masc	PNC	503
+Bush			Bush			NE	Nom.Sg.Masc	PNC	503
+und			und			KON	--		CD	509
+dem			der			ART	Dat.Sg.Masc	NK	507
+Demokraten		Demokrat		NN	Dat.Sg.Masc	NK	507
+Bill			Bill			NE	Nom.Sg.Masc	PNC	504
+Clinton			Clinton			NE	Nom.Sg.Masc	PNC	504
+.			--			$.	--		--	0
+#500			--			PP	--		MO	513
+#501			--			NP	--		SB	513
+#502			--			NP	--		PNC	505
+#503			--			PN	--		NK	506
+#504			--			PN	--		NK	507
+#505			--			PN	--		NK	508
+#506			--			NP	--		CJ	509
+#507			--			NP	--		CJ	509
+#508			--			PP	--		MNR	510
+#509			--			CNP	--		NK	511
+#510			--			PP	--		OP	512
+#511			--			PP	--		MNR	512
+#512			--			PP	--		MO	513
+#513			--			S	--		--	0
+#EOS 5
+#BOS 6 0 1057916855 1 %% @SB2AV@
+Daß			daß			KOUS	--		CP	503
+Perot			Perot			NE	Nom.Sg.Masc	SB	503
+ein			ein			ART	Acc.Sg.Neut	NK	500
+Unternehmen		Unternehmen		NN	Acc.Sg.Neut	NK	500
+erfolgreich		erfolgreich		ADJD	Pos		MO	502
+leiten			leiten			VVINF	Inf		HD	502
+kann			können			VMFIN	3.Sg.Pres.Ind	HD	503
+,			--			$,	--		--	0
+davon			davon			PROAV	--		PH	504
+sind			sein			VAFIN	3.Pl.Pres.Ind	HD	506
+selbst			selbst			ADV	--		MO	501
+seine			sein			PPOSAT	Nom.Pl.Masc	NK	501
+Kritiker		Kritiker		NN	Nom.Pl.Masc	NK	501
+überzeugt		überzeugen		VVPP	Psp		HD	505
+.			--			$.	--		--	0
+#500			--			NP	--		OA	502
+#501			--			NP	--		SB	506
+#502			--			VP	--		OC	503
+#503			--			S	--		RE	504
+#504			--			PP	--		OP	505
+#505			--			VP	--		PD	506
+#506			--			S	--		--	0
+#EOS 6
+#BOS 7 0 1090237338 1 %% @SB2AV@
+Ob			ob			KOUS	--		CP	507
+diese			dieser			PDAT	Nom.Pl.Fem	NK	500
+Fähigkeiten		Fähigkeit		NN	Nom.Pl.Fem	NK	500
+aber			aber			ADV	--		MO	507
+ausreichen		ausreichen		VVFIN	3.Pl.Pres.Ind	HD	507
+,			--			$,	--		--	0
+um			um			KOUI	--		CP	506
+die			der			ART	Acc.Sg.Fem	NK	505
+größte			groß			ADJA	Sup.Acc.Sg.Fem	NK	505
+Volkswirtschaft		Volkswirtschaft		NN	Acc.Sg.Fem	NK	505
+der			der			ART	Gen.Sg.Fem	NK	501
+Welt			Welt			NN	Gen.Sg.Fem	NK	501
+aus			aus			APPR	--		AC	502
+ihrer			ihr			PPOSAT	Dat.Sg.Fem	NK	502
+Krise			Krise			NN	Dat.Sg.Fem	NK	502
+zu			zu			PTKZU	--		PM	503
+führen			führen			VVINF	Inf		HD	503
+,			--			$,	--		--	0
+bezweifeln		bezweifeln		VVFIN	3.Pl.Pres.Ind	HD	508
+viele			vieler			PIAT	Nom.Pl.Masc	NK	504
+Ökonomen		Ökonom			NN	Nom.Pl.Masc	NK	504
+.			--			$.	--		--	0
+#500			--			NP	--		SB	507
+#501			--			NP	--		AG	505
+#502			--			PP	--		MO	506
+#503			--			VZ	--		HD	506
+#504			--			NP	--		SB	508
+#505			--			NP	--		OA	506
+#506			--			VP	--		MO	507
+#507			--			S	--		OC	508
+#508			--			S	--		--	0
+#EOS 7
+#BOS 8 0 1090228712 1 %% @SB2AV@
+Und			und			KON	--		JU	504
+auch			auch			ADV	--		MO	503
+die			der			ART	Nom.Pl.Masc	NK	503
+Konzernchefs		Konzernchef		NN	Nom.Pl.Masc	NK	503
+in			in			APPR	--		AC	500
+den			der			ART	Dat.Pl.*	NK	500
+USA			USA			NE	Dat.Pl.*	NK	500
+halten			halten			VVFIN	3.Pl.Pres.Ind	HD	504
+nicht			nicht			PTKNEG	--		NG	501
+viel			viel			PIS	*.*.*		NK	501
+von			von			APPR	--		AC	502
+dem			der			ART	Dat.Sg.Masc	NK	502
+62jährigen		62jährige		NN	Dat.Sg.Masc	NK	502
+.			--			$.	--		--	0
+#500			--			PP	--		MNR	503
+#501			--			NP	--		OA	504
+#502			--			PP	--		OP	504
+#503			--			NP	--		SB	504
+#504			--			S	--		--	0
+#EOS 8
+#BOS 9 0 1090228722 1 %% @SB2AV@
+Zwar			zwar			ADV	--		MO	506
+können			können			VMFIN	3.Pl.Pres.Ind	HD	506	HD	507
+sich			sich			PRF	3.Dat.Pl	DA	504	DA	505
+die			der			ART	Nom.Pl.Masc	NK	500
+meisten			meister			PIAT	Nom.Pl.Masc	NK	500
+Topmanager		Topmanager		NN	Nom.Pl.Masc	NK	500
+durchaus		durchaus		ADV	--		MO	506
+einen			ein			ART	Acc.Sg.Masc	NK	501
+Unternehmer		Unternehmer		NN	Acc.Sg.Masc	NK	501
+als			als			APPR	--		AC	502
+Präsidenten		Präsident		NN	Acc.Sg.Masc	NK	502
+vorstellen		vorstellen		VVINF	Inf		HD	504	HD	505
+-			--			$(	--		--	0
+nur			nur			ADV	--		MO	507
+nicht			nicht			PTKNEG	--		NG	507
+ausgerechnet		ausgerechnet		ADV	--		MO	503
+Perot			Perot			NE	Acc.Sg.Masc	NK	503
+.			--			$.	--		--	0
+#500			--			NP	--		SB	506	SB	507
+#501			--			NP	--		OA	504
+#502			--			PP	--		MO	504	MO	505
+#503			--			NP	--		OA	505
+#504			--			VP	--		OC	506
+#505			--			VP	--		OC	507
+#506			--			S	--		CJ	508
+#507			--			S	--		CJ	508
+#508			--			CS	--		--	0
+#EOS 9
+#BOS 10 0 1090237345 1 %% @SB2AV@
+Nach			nach			APPR	--		AC	513
+einer			ein			ART	Dat.Sg.Fem	NK	513
+Umfrage			Umfrage			NN	Dat.Sg.Fem	NK	513
+des			der			ART	Gen.Sg.Neut	NK	500
+Wirtschaftsmagazins	Wirtschaftsmagazin	NN	Gen.Sg.Neut	NK	500
+Fortune			Fortune			NE	Nom.Sg.*	NK	500
+unter			unter			APPR	--		AC	509
+den			der			ART	Dat.Pl.Masc	NK	509
+Bossen			Boß			NN	Dat.Pl.Masc	NK	509
+von			von			APPR	--		AC	501
+500			500			CARD	--		NK	501
+Großunternehmen		Großunternehmen		NN	Dat.Pl.Neut	NK	501
+wünschten		wünschen		VVFIN	3.Pl.Past.Ind	HD	515
+im			in			APPRART	Dat.Sg.Masc	AC	502
+Mai			Mai			NN	Dat.Sg.Masc	NK	502
+nur			nur			ADV	--		MO	503
+elf			elf			CARD	--		HD	503
+Prozent			Prozent			NN	*.*.Neut	NK	510
+``			--			$(	--		--	0
+Ross			Ross			NE	Acc.Sg.*	OA	515
+for			--			FM	--		UC	504
+President		--			FM	--		UC	504
+''			--			$(	--		--	0
+,			--			$,	--		--	0
+während			während			KOUS	--		CP	511	CP	512
+78			78			CARD	--		NK	505
+Prozent			Prozent			NN	*.*.Neut	NK	505
+sich			sich			PRF	3.Acc.Pl	OA	511	OA	512
+für			für			APPR	--		AC	506
+Bush			Bush			NE	Acc.Sg.*	NK	506
+und			und			KON	--		CD	514
+vier			vier			CARD	--		NK	507
+Prozent			Prozent			NN	*.*.Neut	NK	507
+für			für			APPR	--		AC	508
+Clinton			Clinton			NE	Acc.Sg.*	NK	508
+aussprachen		aussprechen		VVFIN	3.Pl.Past.Ind	HD	512	HD	511
+.			--			$.	--		--	0
+#500			--			NP	--		AG	513
+#501			--			PP	--		PG	509
+#502			--			PP	--		MO	515
+#503			--			AP	--		NK	510
+#504			--			CH	--		MO	515
+#505			--			NP	--		SB	511
+#506			--			PP	--		MO	511
+#507			--			NP	--		SB	512
+#508			--			PP	--		MO	512
+#509			--			PP	--		MNR	513
+#510			--			NP	--		SB	515
+#511			--			S	--		CJ	514
+#512			--			S	--		CJ	514
+#513			--			PP	--		MO	515
+#514			--			CS	--		MO	515
+#515			--			S	--		--	0
+#EOS 10
+#BOS 11 0 1090237359 1 %% @SB2AV@
+Allerdings		allerdings		ADV	--		MO	509
+glaubt			glauben			VVFIN	3.Sg.Pres.Ind	HD	509
+fast			fast			ADV	--		MO	504
+die			der			ART	Nom.Sg.Fem	NK	504
+Hälfte			Hälfte			NN	Nom.Sg.Fem	NK	504
+der			der			ART	Gen.Pl.*	NK	500
+Chief			--			FM	--		NK	500
+Executives		--			FM	--		NK	500
+,			--			$,	--		--	0
+daß			daß			KOUS	--		CP	508
+Perot			Perot			NE	Nom.Sg.Masc	SB	508
+durchaus		durchaus		ADV	--		MO	508
+Chancen			Chance			NN	Acc.Pl.Fem	NK	507
+habe			haben			VAFIN	3.Sg.Pres.Subj	HD	508
+,			--			$,	--		--	0
+die			der			ART	Acc.Sg.Fem	NK	505
+Wahl			Wahl			NN	Acc.Sg.Fem	NK	505
+im			in			APPRART	Dat.Sg.Masc	AC	501
+November		November		NN	Dat.Sg.Masc	NK	501
+zu			zu			PTKZU	--		PM	502
+gewinnen		gewinnen		VVINF	Inf		HD	502
+,			--			$,	--		--	0
+wenn			wenn			KOUS	--		CP	503
+er			er			PPER	3.Nom.Sg.Masc	SB	503
+denn			denn			ADV	--		MO	503
+kandidiert		kandidieren		VVFIN	3.Sg.Pres.Ind	HD	503
+.			--			$.	--		--	0
+#500			--			NP	--		AG	504
+#501			--			PP	--		MNR	505
+#502			--			VZ	--		HD	506
+#503			--			S	--		MO	508
+#504			--			NP	--		SB	509
+#505			--			NP	--		OA	506
+#506			--			VP	--		OC	507
+#507			--			NP	--		OA	508
+#508			--			S	--		OC	509
+#509			--			S	--		--	0
+#EOS 11
+#BOS 12 0 1090237369 1 %% @SB2AV@
+Als			als			APPR	--		AC	503
+größte			groß			ADJA	Sup.Acc.Sg.Fem	NK	503
+Schwäche		Schwäche		NN	Acc.Sg.Fem	NK	503
+des			der			ART	Gen.Sg.Masc	NK	500
+Texaners		Texaner			NN	Gen.Sg.Masc	NK	500
+nennen			nennen			VVFIN	3.Pl.Pres.Ind	HD	506
+die			der			ART	Nom.Pl.*	NK	501
+Befragten		befragter		NN	Nom.Pl.*	NK	501
+seinen			sein			PPOSAT	Acc.Sg.Masc	NK	505
+Mangel			Mangel			NN	Acc.Sg.Masc	NK	505
+an			an			APPR	--		AC	504
+Erfahrung		Erfahrung		NN	Dat.Sg.Fem	NK	504
+auf			auf			APPR	--		AC	502
+dem			der			ART	Dat.Sg.Neut	NK	502
+politischen		politisch		ADJA	Pos.Dat.Sg.Neut	NK	502
+Parkett			Parkett			NN	Dat.Sg.Neut	NK	502
+.			--			$.	--		--	0
+#500			--			NP	--		AG	503
+#501			--			NP	--		SB	506
+#502			--			PP	--		MNR	504
+#503			--			PP	--		MO	506
+#504			--			PP	--		OP	505
+#505			--			NP	--		OA	506
+#506			--			S	--		--	0
+#EOS 12
+#BOS 13 0 1090228903 1 %% @SB2AV@
+Viele			viele			PIS	Nom.Pl.*	SB	505
+meinen			meinen			VVFIN	3.Pl.Pres.Ind	HD	505
+,			--			$,	--		--	0
+daß			daß			KOUS	--		CP	504
+Perot			Perot			NE	Nom.Sg.Masc	SB	504
+mit			mit			APPR	--		AC	500
+seinem			sein			PPOSAT	Dat.Sg.Masc	NK	500
+Befehlston		Befehlston		NN	Dat.Sg.Masc	NK	500
+auf			auf			APPR	--		AC	501
+dem			der			ART	Dat.Sg.Neut	NK	501
+Capitol			Capitol			NE	Dat.Sg.Neut	NK	501
+gegen			gegen			APPR	--		AC	502
+eine			ein			ART	Acc.Sg.Fem	NK	502
+Wand			Wand			NN	Acc.Sg.Fem	NK	502
+laufen			laufen			VVINF	Inf		HD	503
+würde			werden			VAFIN	3.Sg.Past.Subj	HD	504
+.			--			$.	--		--	0
+#500			--			PP	--		MO	503
+#501			--			PP	--		MO	503
+#502			--			PP	--		MO	503
+#503			--			VP	--		OC	504
+#504			--			S	--		OC	505
+#505			--			S	--		--	0
+#EOS 13
+#BOS 14 0 1090228920 1 %% @SB2AV@
+So			so			ADV	--		MO	505
+erklärt			erklären		VVFIN	3.Sg.Pres.Ind	HD	505
+etwa			etwa			ADV	--		MO	504
+Edward			Edward			NE	Nom.Sg.Masc	PNC	500
+Brandon			Brandon			NE	Nom.Sg.Masc	PNC	500
+von			von			APPR	--		AC	503
+dem			der			ART	Dat.Sg.Neut	NK	503
+Unternehmen		Unternehmen		NN	Dat.Sg.Neut	NK	503
+National		National		NE	*.*.*		PNC	501
+City			City			NE	Nom.Sg.*	PNC	501
+in			in			APPR	--		AC	502
+Ohio			Ohio			NE	Dat.Sg.Neut	NK	502
+:			--			$.	--		--	0
+#500			--			PN	--		NK	504
+#501			--			PN	--		NK	503
+#502			--			PP	--		MNR	503
+#503			--			PP	--		MNR	504
+#504			--			NP	--		SB	505
+#505			--			S	--		--	0
+#EOS 14
+#BOS 15 0 1090230957 1 %% @SB2AV@
+``			--			$(	--		--	0
+Ich			ich			PPER	1.Nom.Sg.*	SB	509
+glaube			glauben			VVFIN	1.Sg.Pres.Ind	HD	509
+kaum			kaum			ADV	--		MO	509
+,			--			$,	--		--	0
+daß			daß			KOUS	--		CP	508
+mit			mit			APPR	--		AC	506
+seinem			sein			PPOSAT	Dat.Sg.Masc	NK	506
+,			--			$,	--		--	0
+naja			naja			ITJ	--		MO	500
+,			--			$,	--		--	0
+etwas			etwas			ADV	--		MO	500
+undiplomatischen	undiplomatisch		ADJA	Pos.Dat.Sg.Masc	HD	500
+Stil			Stil			NN	Dat.Sg.Masc	NK	506
+im			in			APPRART	Dat.Sg.Neut	AC	505
+Weißen			weiß			ADJA	Pos.Dat.Sg.Neut	NK	501
+Haus			Haus			NN	Dat.Sg.Neut	NK	501
+dem			der			ART	Dat.Sg.Neut	NK	502
+Land			Land			NN	Dat.Sg.Neut	NK	502
+ein			ein			ART	Nom.Sg.Masc	NK	503
+Gefallen		Gefallen		NN	Nom.Sg.Masc	NK	503
+getan			tun			VVPP	Psp		HD	507
+wäre			sein			VAFIN	3.Sg.Past.Subj	HD	508
+.			--			$.	--		--	0
+#500			--			AP	--		NK	506
+#501			--			NP	--		PNC	504
+#502			--			NP	--		DA	507
+#503			--			NP	--		SB	508
+#504			--			PN	--		NK	505
+#505			--			PP	--		MNR	506
+#506			--			PP	--		MO	507
+#507			--			VP	--		OC	508
+#508			--			S	--		OC	509
+#509			--			S	--		--	0
+#EOS 15
+#BOS 16 0 1058346254 1 %% @SB2AV@
+Er			er			PPER	3.Nom.Sg.Masc	SB	502
+wäre			sein			VAFIN	3.Sg.Past.Subj	HD	502
+vielleicht		vielleicht		ADV	--		MO	502
+ein			ein			ART	Nom.Sg.Masc	NK	500
+prächtiger		prächtig		ADJA	Pos.Nom.Sg.Masc	NK	500
+Diktator		Diktator		NN	Nom.Sg.Masc	NK	500
+-			--			$(	--		--	0
+aber			aber			KON	--		CD	504
+das			der			PDS	Nom.Sg.Neut	SB	503
+ist			sein			VAFIN	3.Sg.Pres.Ind	HD	503
+nicht			nicht			PTKNEG	--		NG	503
+unser			unser			PPOSAT	Nom.Sg.Neut	NK	501
+System			System			NN	Nom.Sg.Neut	NK	501
+.			--			$.	--		--	0
+''			--			$(	--		--	0
+#500			--			NP	--		PD	502
+#501			--			NP	--		PD	503
+#502			--			S	--		CJ	504
+#503			--			S	--		CJ	504
+#504			--			CS	--		--	0
+#EOS 16
+#BOS 17 0 1101736859 1 %% @SB2AV@
+Und			und			KON	--		JU	509
+ein			ein			ART	Nom.Sg.Masc	NK	500
+anderer			anderer			ADJA	Pos.Nom.Sg.Masc	NK	500
+Manager			Manager			NN	Nom.Sg.Masc	NK	500
+vermutet		vermuten		VVFIN	3.Sg.Pres.Ind	HD	509
+,			--			$,	--		--	0
+daß			daß			KOUS	--		CP	508
+sich			sich			PRF	3.Acc.Sg	OA	507
+``			--			$(	--		--	0
+ein			ein			ART	Nom.Sg.Masc	NK	504
+Dogmatiker		Dogmatiker		NN	Nom.Sg.Masc	NK	504
+wie			wie			KOKOM	--		CM	501
+Perot			Perot			NE	Nom.Sg.Masc	NK	501
+in			in			APPR	--		AC	502
+Washington		Washington		NE	Dat.Sg.Neut	NK	502
+schwer			schwer			ADJD	Pos		MO	507
+tun			tun			VVINF	Inf		HD	507
+würde			werden			VAFIN	3.Sg.Past.Subj	HD	508
+,			--			$,	--		--	0
+es			es			PPER	3.Nom.Sg.Neut	SB	506
+sei			sein			VAFIN	3.Sg.Pres.Subj	HD	506
+denn			denn			ADV	--		MO	506
+er			er			PPER	3.Nom.Sg.Masc	SB	505
+schafft			schaffen		VVFIN	3.Sg.Pres.Ind	HD	505
+den			der			ART	Acc.Sg.Masc	NK	503
+Kongreß			Kongreß			NN	Acc.Sg.Masc	NK	503
+ab			ab			PTKVZ	--		SVP	505
+''			--			$(	--		--	0
+.			--			$.	--		--	0
+#500			--			NP	--		SB	509
+#501			--			NP	--		CC	504
+#502			--			PP	--		MO	507
+#503			--			NP	--		OA	505
+#504			--			NP	--		SB	508
+#505			--			S	--		OC	506
+#506			--			S	--		MO	507
+#507			--			VP	--		OC	508
+#508			--			S	--		OC	509
+#509			--			S	--		--	0
+#EOS 17
+#BOS 18 0 1058255271 1 %% @SB2AV@
+Ein			ein			ART	Nom.Sg.Masc	NK	506
+ehemaliger		ehemalig		ADJA	Pos.Nom.Sg.Masc	NK	506
+Geschäftsführer		Geschäftsführer		NN	Nom.Sg.Masc	NK	506
+,			--			$,	--		--	0
+der			der			PRELS	Nom.Sg.Masc	SB	504
+heute			heute			ADV	--		MO	504
+in			in			APPR	--		AC	500
+fünf			fünf			CARD	--		NK	500
+Konzernen		Konzern			NN	Dat.Pl.Masc	NK	500
+im			in			APPRART	Dat.Sg.Neut	AC	501
+Aufsichtsgremium	Aufsichtsgremium	NN	Dat.Sg.Neut	NK	501
+sitzt			sitzen			VVFIN	3.Sg.Pres.Ind	HD	504
+,			--			$,	--		--	0
+``			--			$(	--		--	0
+kennt			kennen			VVFIN	3.Sg.Pres.Ind	HD	509
+niemanden		niemand			PIS	Acc.Sg.*	NK	508
+,			--			$,	--		--	0
+der			der			PRELS	Nom.Sg.Masc	SB	507
+nicht			nicht			PTKNEG	--		NG	507
+glaubt			glauben			VVFIN	3.Sg.Pres.Ind	HD	507
+,			--			$,	--		--	0
+daß			daß			KOUS	--		CP	505
+Perot			Perot			NE	Nom.Sg.Masc	SB	505
+als			als			APPR	--		AC	502
+Präsident		Präsident		NN	Nom.Sg.Masc	NK	502
+eine			ein			ART	Nom.Sg.Fem	NK	503
+absolute		absolut			ADJA	Pos.Nom.Sg.Fem	NK	503
+Katastrophe		Katastrophe		NN	Nom.Sg.Fem	NK	503
+wäre			sein			VAFIN	3.Sg.Past.Subj	HD	505
+''			--			$(	--		--	0
+.			--			$.	--		--	0
+#500			--			PP	--		MO	504
+#501			--			PP	--		MO	504
+#502			--			PP	--		MO	505
+#503			--			NP	--		PD	505
+#504			--			S	--		RC	506
+#505			--			S	--		OC	507
+#506			--			NP	--		SB	509
+#507			--			S	--		RC	508
+#508			--			NP	--		OA	509
+#509			--			S	--		--	0
+#EOS 18
+#BOS 19 0 1109588331 1 %% @SB2AV@
+Allerdings		allerdings		ADV	--		MO	511
+gibt			geben			VVFIN	3.Sg.Pres.Ind	HD	511
+es			es			PPER	3.Nom.Sg.Neut	EP	511
+dem			der			ART	Dat.Sg.Neut	NK	500
+Magazin			Magazin			NN	Dat.Sg.Neut	NK	500
+zufolge			zufolge			APPO	Dat		AC	500
+in			in			APPR	--		AC	504
+kleinen			klein			ADJA	Pos.Dat.Pl.Fem	CJ	501
+und			und			KON	--		CD	501
+mittleren		mittlerer		ADJA	Pos.Dat.Pl.Fem	CJ	501
+Firmen			Firma			NN	Dat.Pl.Fem	NK	504
+viele			vieler			PIAT	Acc.Pl.Masc	NK	510
+Unternehmer		Unternehmer		NN	Acc.Pl.Masc	NK	510
+,			--			$,	--		--	0
+die			der			PRELS	Nom.Pl.Masc	SB	508
+meinen			meinen			VVFIN	3.Pl.Pres.Ind	HD	508
+,			--			$,	--		--	0
+Perot			Perot			NE	Nom.Sg.Masc	SB	507
+sei			sein			VAFIN	3.Sg.Pres.Subj	HD	507
+einer			einer			PIS	Nom.Sg.Masc	NK	505
+von			von			APPR	--		AC	502
+ihnen			ihnen			PPER	3.Dat.Pl.Masc	NK	502
+,			--			$,	--		--	0
+und			und			KON	--		CD	509
+die			der			PRELS	Nom.Pl.Masc	SB	506
+den			der			ART	Acc.Sg.Masc	NK	503
+Texaner			Texaner			NN	Acc.Sg.Masc	NK	503
+unterstützen		unterstützen		VVFIN	3.Pl.Pres.Ind	HD	506
+.			--			$.	--		--	0
+#500			--			PP	--		MO	511
+#501			--			CAP	--		NK	504
+#502			--			PP	--		PG	505
+#503			--			NP	--		OA	506
+#504			--			PP	--		MO	511
+#505			--			NP	--		PD	507
+#506			--			S	--		CJ	509
+#507			--			S	--		OC	508
+#508			--			S	--		CJ	509
+#509			--			CS	--		RC	510
+#510			--			NP	--		OA	511
+#511			--			S	--		--	0
+#EOS 19
+#BOS 20 0 1108728810 1 %% @SB2AV@
+Zwei			zwei			CARD	--		NK	505
+Themen			Thema			NN	Nom.Pl.Neut	NK	505
+,			--			$,	--		--	0
+die			der			PRELS	Acc.Pl.Neut	OA	503
+Perot			Perot			NE	Nom.Sg.*	SB	503
+immer			immer			ADV	--		MO	500
+wieder			wieder			ADV	--		HD	500
+anspricht		ansprechen		VVFIN	3.Sg.Pres.Ind	HD	503
+,			--			$,	--		--	0
+Rezession		Rezession		NN	Nom.Sg.Fem	CJ	501
+und			und			KON	--		CD	501
+Bürokratie		Bürokratie		NN	Nom.Sg.Fem	CJ	501
+,			--			$,	--		--	0
+machen			machen			VVFIN	3.Pl.Pres.Ind	HD	506
+ihnen			ihnen			PPER	3.Dat.Pl.*	DA	504
+besonders		besonders		ADV	--		MO	504
+zu			zu			PTKZU	--		PM	502
+schaffen		schaffen		VVINF	Inf		HD	502
+.			--			$.	--		--	0
+#500			--			AVP	--		MO	503
+#501			--			CNP	--		APP	505
+#502			--			VZ	--		HD	504
+#503			--			S	--		RC	505
+#504			--			VP	--		OC	506
+#505			--			NP	--		SB	506
+#506			--			S	--		--	0
+#EOS 20
