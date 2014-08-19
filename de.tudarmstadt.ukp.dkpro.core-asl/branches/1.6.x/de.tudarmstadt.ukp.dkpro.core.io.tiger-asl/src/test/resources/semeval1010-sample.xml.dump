@@ -1,0 +1,2244 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 171
+   language: "en"
+   documentTitle: "semeval1010-en-sample.xml"
+   documentId: "semeval1010-en-sample.xml"
+   isLastSegment: false
+
+CAS-Text:
+Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated . 
+
+[Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
+ROOT
+   sofa: _InitialView
+   begin: 0
+   end: 169
+   constituentType: "S"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
+[Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
+Sentence
+   sofa: _InitialView
+   begin: 0
+   end: 169
+[Save for this one excursion ,]
+Constituent
+   sofa: _InitialView
+   begin: 0
+   end: 29
+   constituentType: "VP"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 169
+      constituentType: "S"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
+   children: FSArray
+   syntacticFunction: "-"
+[Save]
+Lemma
+   sofa: _InitialView
+   begin: 0
+   end: 4
+   value: "save"
+[Save]
+V
+   sofa: _InitialView
+   begin: 0
+   end: 4
+   PosValue: "VB"
+[Save]
+Token
+   sofa: _InitialView
+   begin: 0
+   end: 4
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 0
+      end: 4
+      value: "save"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 0
+      end: 4
+      PosValue: "VB"
+[for this one excursion ,]
+Constituent
+   sofa: _InitialView
+   begin: 5
+   end: 29
+   constituentType: "PP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 29
+      constituentType: "VP"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 169
+         constituentType: "S"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[for]
+PP
+   sofa: _InitialView
+   begin: 5
+   end: 8
+   PosValue: "IN"
+[for]
+Lemma
+   sofa: _InitialView
+   begin: 5
+   end: 8
+   value: "for"
+[for]
+Token
+   sofa: _InitialView
+   begin: 5
+   end: 8
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 5
+      end: 8
+      value: "for"
+   stem: <null>
+   pos: PP
+      sofa: _InitialView
+      begin: 5
+      end: 8
+      PosValue: "IN"
+[this one excursion ,]
+Constituent
+   sofa: _InitialView
+   begin: 9
+   end: 29
+   constituentType: "NPB"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 5
+      end: 29
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 29
+         constituentType: "VP"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 169
+            constituentType: "S"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[this one excursion ,]
+SemanticArgument
+   sofa: _InitialView
+   begin: 9
+   end: 29
+   role: "Current"
+[this]
+Lemma
+   sofa: _InitialView
+   begin: 9
+   end: 13
+   value: "this"
+[this]
+Token
+   sofa: _InitialView
+   begin: 9
+   end: 13
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 9
+      end: 13
+      value: "this"
+   stem: <null>
+   pos: ART
+      sofa: _InitialView
+      begin: 9
+      end: 13
+      PosValue: "DT"
+[this]
+ART
+   sofa: _InitialView
+   begin: 9
+   end: 13
+   PosValue: "DT"
+[one]
+CARD
+   sofa: _InitialView
+   begin: 14
+   end: 17
+   PosValue: "CD"
+[one]
+Lemma
+   sofa: _InitialView
+   begin: 14
+   end: 17
+   value: "one"
+[one]
+Token
+   sofa: _InitialView
+   begin: 14
+   end: 17
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 14
+      end: 17
+      value: "one"
+   stem: <null>
+   pos: CARD
+      sofa: _InitialView
+      begin: 14
+      end: 17
+      PosValue: "CD"
+[excursion]
+NN
+   sofa: _InitialView
+   begin: 18
+   end: 27
+   PosValue: "NN"
+[excursion]
+Lemma
+   sofa: _InitialView
+   begin: 18
+   end: 27
+   value: "excursion"
+[excursion]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 18
+   end: 27
+   category: "Travel"
+   arguments: FSArray
+[excursion]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 18
+   end: 27
+   category: "Coreference"
+   arguments: FSArray
+[excursion]
+Token
+   sofa: _InitialView
+   begin: 18
+   end: 27
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 18
+      end: 27
+      value: "excursion"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 18
+      end: 27
+      PosValue: "NN"
+[,]
+Lemma
+   sofa: _InitialView
+   begin: 28
+   end: 29
+   value: ","
+[,]
+O
+   sofa: _InitialView
+   begin: 28
+   end: 29
+   PosValue: "PUNC,"
+[,]
+Token
+   sofa: _InitialView
+   begin: 28
+   end: 29
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 28
+      end: 29
+      value: ","
+   stem: <null>
+   pos: O
+      sofa: _InitialView
+      begin: 28
+      end: 29
+      PosValue: "PUNC,"
+[he]
+PR
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   PosValue: "PRP"
+[he]
+Lemma
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   value: "he"
+[he]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   category: "Coreference"
+   arguments: FSArray
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   role: "Interlocutor_1"
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   role: "Self_mover"
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   role: "Coreferent"
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   role: "Current"
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   role: "Coreferent"
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   role: "Traveler"
+[he]
+Token
+   sofa: _InitialView
+   begin: 30
+   end: 32
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 30
+      end: 32
+      value: "he"
+   stem: <null>
+   pos: PR
+      sofa: _InitialView
+      begin: 30
+      end: 32
+      PosValue: "PRP"
+[spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 33
+   end: 169
+   constituentType: "VP"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 0
+      end: 169
+      constituentType: "S"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
+   children: FSArray
+   syntacticFunction: "-"
+[spent]
+Lemma
+   sofa: _InitialView
+   begin: 33
+   end: 38
+   value: "spend"
+[spent]
+V
+   sofa: _InitialView
+   begin: 33
+   end: 38
+   PosValue: "VBD"
+[spent]
+Token
+   sofa: _InitialView
+   begin: 33
+   end: 38
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 33
+      end: 38
+      value: "spend"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 33
+      end: 38
+      PosValue: "VBD"
+[his days]
+Constituent
+   sofa: _InitialView
+   begin: 39
+   end: 47
+   constituentType: "NPB"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 33
+      end: 169
+      constituentType: "VP"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 169
+         constituentType: "S"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[his]
+PR
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   PosValue: "PRP$"
+[his]
+Lemma
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   value: "his"
+[his]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   category: "Coreference"
+   arguments: FSArray
+[his]
+SemanticArgument
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   role: "Current"
+[his]
+Token
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 39
+      end: 42
+      value: "his"
+   stem: <null>
+   pos: PR
+      sofa: _InitialView
+      begin: 39
+      end: 42
+      PosValue: "PRP$"
+[days]
+NN
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   PosValue: "NNS"
+[days]
+Lemma
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   value: "day"
+[days]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   category: "Calendric_unit"
+   arguments: FSArray
+[days]
+SemanticArgument
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   role: "Unit"
+[days]
+Token
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 43
+      end: 47
+      value: "day"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 43
+      end: 47
+      PosValue: "NNS"
+[in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 48
+   end: 169
+   constituentType: "PP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 33
+      end: 169
+      constituentType: "VP"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 0
+         end: 169
+         constituentType: "S"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[in long and often solitary walks ,]
+Constituent
+   sofa: _InitialView
+   begin: 48
+   end: 82
+   constituentType: "PP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 48
+      end: 169
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 33
+         end: 169
+         constituentType: "VP"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 169
+            constituentType: "S"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[in]
+PP
+   sofa: _InitialView
+   begin: 48
+   end: 50
+   PosValue: "IN"
+[in]
+Lemma
+   sofa: _InitialView
+   begin: 48
+   end: 50
+   value: "in"
+[in]
+Token
+   sofa: _InitialView
+   begin: 48
+   end: 50
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 48
+      end: 50
+      value: "in"
+   stem: <null>
+   pos: PP
+      sofa: _InitialView
+      begin: 48
+      end: 50
+      PosValue: "IN"
+[long and often solitary walks ,]
+Constituent
+   sofa: _InitialView
+   begin: 51
+   end: 82
+   constituentType: "NPB"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 48
+      end: 82
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 48
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 33
+            end: 169
+            constituentType: "VP"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 169
+               constituentType: "S"
+               parent: <null>
+               children: FSArray
+               syntacticFunction: <null>
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[long and often solitary]
+Constituent
+   sofa: _InitialView
+   begin: 51
+   end: 74
+   constituentType: "ADJP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 51
+      end: 82
+      constituentType: "NPB"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 48
+         end: 82
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 48
+            end: 169
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 33
+               end: 169
+               constituentType: "VP"
+               parent: ROOT
+                  sofa: _InitialView
+                  begin: 0
+                  end: 169
+                  constituentType: "S"
+                  parent: <null>
+                  children: FSArray
+                  syntacticFunction: <null>
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[long]
+Lemma
+   sofa: _InitialView
+   begin: 51
+   end: 55
+   value: "long"
+[long]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 51
+   end: 55
+   category: "Duration"
+   arguments: FSArray
+[long]
+ADJ
+   sofa: _InitialView
+   begin: 51
+   end: 55
+   PosValue: "JJ"
+[long]
+Token
+   sofa: _InitialView
+   begin: 51
+   end: 55
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 51
+      end: 55
+      value: "long"
+   stem: <null>
+   pos: ADJ
+      sofa: _InitialView
+      begin: 51
+      end: 55
+      PosValue: "JJ"
+[and]
+Lemma
+   sofa: _InitialView
+   begin: 56
+   end: 59
+   value: "and"
+[and]
+Token
+   sofa: _InitialView
+   begin: 56
+   end: 59
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 56
+      end: 59
+      value: "and"
+   stem: <null>
+   pos: CONJ
+      sofa: _InitialView
+      begin: 56
+      end: 59
+      PosValue: "CC"
+[and]
+CONJ
+   sofa: _InitialView
+   begin: 56
+   end: 59
+   PosValue: "CC"
+[often solitary]
+Constituent
+   sofa: _InitialView
+   begin: 60
+   end: 74
+   constituentType: "ADJP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 51
+      end: 74
+      constituentType: "ADJP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 51
+         end: 82
+         constituentType: "NPB"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 48
+            end: 82
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 48
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 33
+                  end: 169
+                  constituentType: "VP"
+                  parent: ROOT
+                     sofa: _InitialView
+                     begin: 0
+                     end: 169
+                     constituentType: "S"
+                     parent: <null>
+                     children: FSArray
+                     syntacticFunction: <null>
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[often solitary]
+SemanticArgument
+   sofa: _InitialView
+   begin: 60
+   end: 74
+   role: "Depictive"
+[often]
+Lemma
+   sofa: _InitialView
+   begin: 60
+   end: 65
+   value: "often"
+[often]
+ADV
+   sofa: _InitialView
+   begin: 60
+   end: 65
+   PosValue: "RB"
+[often]
+Token
+   sofa: _InitialView
+   begin: 60
+   end: 65
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 60
+      end: 65
+      value: "often"
+   stem: <null>
+   pos: ADV
+      sofa: _InitialView
+      begin: 60
+      end: 65
+      PosValue: "RB"
+[solitary]
+Lemma
+   sofa: _InitialView
+   begin: 66
+   end: 74
+   value: "solitary"
+[solitary]
+ADJ
+   sofa: _InitialView
+   begin: 66
+   end: 74
+   PosValue: "JJ"
+[solitary]
+Token
+   sofa: _InitialView
+   begin: 66
+   end: 74
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 66
+      end: 74
+      value: "solitary"
+   stem: <null>
+   pos: ADJ
+      sofa: _InitialView
+      begin: 66
+      end: 74
+      PosValue: "JJ"
+[walks]
+Lemma
+   sofa: _InitialView
+   begin: 75
+   end: 80
+   value: "walk"
+[walks]
+V
+   sofa: _InitialView
+   begin: 75
+   end: 80
+   PosValue: "VBZ"
+[walks]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 75
+   end: 80
+   category: "Self_motion"
+   arguments: FSArray
+[walks]
+SemanticArgument
+   sofa: _InitialView
+   begin: 75
+   end: 80
+   role: "Eventuality"
+[walks]
+Token
+   sofa: _InitialView
+   begin: 75
+   end: 80
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 75
+      end: 80
+      value: "walk"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 75
+      end: 80
+      PosValue: "VBZ"
+[,]
+Lemma
+   sofa: _InitialView
+   begin: 81
+   end: 82
+   value: ","
+[,]
+O
+   sofa: _InitialView
+   begin: 81
+   end: 82
+   PosValue: "PUNC,"
+[,]
+Token
+   sofa: _InitialView
+   begin: 81
+   end: 82
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 81
+      end: 82
+      value: ","
+   stem: <null>
+   pos: O
+      sofa: _InitialView
+      begin: 81
+      end: 82
+      PosValue: "PUNC,"
+[or]
+Lemma
+   sofa: _InitialView
+   begin: 83
+   end: 85
+   value: "or"
+[or]
+Token
+   sofa: _InitialView
+   begin: 83
+   end: 85
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 83
+      end: 85
+      value: "or"
+   stem: <null>
+   pos: CONJ
+      sofa: _InitialView
+      begin: 83
+      end: 85
+      PosValue: "CC"
+[or]
+CONJ
+   sofa: _InitialView
+   begin: 83
+   end: 85
+   PosValue: "CC"
+[in chatting with a number of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 86
+   end: 169
+   constituentType: "PP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 48
+      end: 169
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 33
+         end: 169
+         constituentType: "VP"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 169
+            constituentType: "S"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[in]
+PP
+   sofa: _InitialView
+   begin: 86
+   end: 88
+   PosValue: "IN"
+[in]
+Lemma
+   sofa: _InitialView
+   begin: 86
+   end: 88
+   value: "in"
+[in]
+Token
+   sofa: _InitialView
+   begin: 86
+   end: 88
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 86
+      end: 88
+      value: "in"
+   stem: <null>
+   pos: PP
+      sofa: _InitialView
+      begin: 86
+      end: 88
+      PosValue: "IN"
+[chatting with a number of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 89
+   end: 169
+   constituentType: "VP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 86
+      end: 169
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 48
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 33
+            end: 169
+            constituentType: "VP"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 169
+               constituentType: "S"
+               parent: <null>
+               children: FSArray
+               syntacticFunction: <null>
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[chatting]
+Lemma
+   sofa: _InitialView
+   begin: 89
+   end: 97
+   value: "chat"
+[chatting]
+V
+   sofa: _InitialView
+   begin: 89
+   end: 97
+   PosValue: "VBG"
+[chatting]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 89
+   end: 97
+   category: "Chatting"
+   arguments: FSArray
+[chatting]
+Token
+   sofa: _InitialView
+   begin: 89
+   end: 97
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 89
+      end: 97
+      value: "chat"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 89
+      end: 97
+      PosValue: "VBG"
+[with a number of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 98
+   end: 169
+   constituentType: "PP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 89
+      end: 169
+      constituentType: "VP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 86
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 48
+            end: 169
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 33
+               end: 169
+               constituentType: "VP"
+               parent: ROOT
+                  sofa: _InitialView
+                  begin: 0
+                  end: 169
+                  constituentType: "S"
+                  parent: <null>
+                  children: FSArray
+                  syntacticFunction: <null>
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[with a number of village gossips whose acquaintance he had cultivated .]
+SemanticArgument
+   sofa: _InitialView
+   begin: 98
+   end: 169
+   role: "Interlocutor_2"
+[with]
+PP
+   sofa: _InitialView
+   begin: 98
+   end: 102
+   PosValue: "IN"
+[with]
+Lemma
+   sofa: _InitialView
+   begin: 98
+   end: 102
+   value: "with"
+[with]
+Token
+   sofa: _InitialView
+   begin: 98
+   end: 102
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 98
+      end: 102
+      value: "with"
+   stem: <null>
+   pos: PP
+      sofa: _InitialView
+      begin: 98
+      end: 102
+      PosValue: "IN"
+[a number of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 103
+   end: 169
+   constituentType: "NP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 98
+      end: 169
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 89
+         end: 169
+         constituentType: "VP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 86
+            end: 169
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 48
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 33
+                  end: 169
+                  constituentType: "VP"
+                  parent: ROOT
+                     sofa: _InitialView
+                     begin: 0
+                     end: 169
+                     constituentType: "S"
+                     parent: <null>
+                     children: FSArray
+                     syntacticFunction: <null>
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[a number]
+Constituent
+   sofa: _InitialView
+   begin: 103
+   end: 111
+   constituentType: "NPB"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 103
+      end: 169
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 98
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 89
+            end: 169
+            constituentType: "VP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 86
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 48
+                  end: 169
+                  constituentType: "PP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 33
+                     end: 169
+                     constituentType: "VP"
+                     parent: ROOT
+                        sofa: _InitialView
+                        begin: 0
+                        end: 169
+                        constituentType: "S"
+                        parent: <null>
+                        children: FSArray
+                        syntacticFunction: <null>
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[a]
+Lemma
+   sofa: _InitialView
+   begin: 103
+   end: 104
+   value: "a"
+[a]
+Token
+   sofa: _InitialView
+   begin: 103
+   end: 104
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 103
+      end: 104
+      value: "a"
+   stem: <null>
+   pos: ART
+      sofa: _InitialView
+      begin: 103
+      end: 104
+      PosValue: "DT"
+[a]
+ART
+   sofa: _InitialView
+   begin: 103
+   end: 104
+   PosValue: "DT"
+[number]
+NN
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   PosValue: "NN"
+[number]
+Lemma
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   value: "number"
+[number]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   category: "Quantity"
+   arguments: FSArray
+[number]
+SemanticArgument
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   role: "Quantity"
+[number]
+Token
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 105
+      end: 111
+      value: "number"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 105
+      end: 111
+      PosValue: "NN"
+[of village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 112
+   end: 169
+   constituentType: "PP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 103
+      end: 169
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 98
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 89
+            end: 169
+            constituentType: "VP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 86
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 48
+                  end: 169
+                  constituentType: "PP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 33
+                     end: 169
+                     constituentType: "VP"
+                     parent: ROOT
+                        sofa: _InitialView
+                        begin: 0
+                        end: 169
+                        constituentType: "S"
+                        parent: <null>
+                        children: FSArray
+                        syntacticFunction: <null>
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[of village gossips whose acquaintance he had cultivated .]
+SemanticArgument
+   sofa: _InitialView
+   begin: 112
+   end: 169
+   role: "Individuals"
+[of]
+PP
+   sofa: _InitialView
+   begin: 112
+   end: 114
+   PosValue: "IN"
+[of]
+Lemma
+   sofa: _InitialView
+   begin: 112
+   end: 114
+   value: "of"
+[of]
+Token
+   sofa: _InitialView
+   begin: 112
+   end: 114
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 112
+      end: 114
+      value: "of"
+   stem: <null>
+   pos: PP
+      sofa: _InitialView
+      begin: 112
+      end: 114
+      PosValue: "IN"
+[village gossips whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 115
+   end: 169
+   constituentType: "NP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 112
+      end: 169
+      constituentType: "PP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 103
+         end: 169
+         constituentType: "NP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 98
+            end: 169
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 89
+               end: 169
+               constituentType: "VP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 86
+                  end: 169
+                  constituentType: "PP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 48
+                     end: 169
+                     constituentType: "PP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 33
+                        end: 169
+                        constituentType: "VP"
+                        parent: ROOT
+                           sofa: _InitialView
+                           begin: 0
+                           end: 169
+                           constituentType: "S"
+                           parent: <null>
+                           children: FSArray
+                           syntacticFunction: <null>
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[village gossips]
+Constituent
+   sofa: _InitialView
+   begin: 115
+   end: 130
+   constituentType: "NPB"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 115
+      end: 169
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 112
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 103
+            end: 169
+            constituentType: "NP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 98
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 89
+                  end: 169
+                  constituentType: "VP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 86
+                     end: 169
+                     constituentType: "PP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 48
+                        end: 169
+                        constituentType: "PP"
+                        parent: Constituent
+                           sofa: _InitialView
+                           begin: 33
+                           end: 169
+                           constituentType: "VP"
+                           parent: ROOT
+                              sofa: _InitialView
+                              begin: 0
+                              end: 169
+                              constituentType: "S"
+                              parent: <null>
+                              children: FSArray
+                              syntacticFunction: <null>
+                           children: FSArray
+                           syntacticFunction: "-"
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[village]
+NN
+   sofa: _InitialView
+   begin: 115
+   end: 122
+   PosValue: "NN"
+[village]
+Lemma
+   sofa: _InitialView
+   begin: 115
+   end: 122
+   value: "village"
+[village]
+Token
+   sofa: _InitialView
+   begin: 115
+   end: 122
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 115
+      end: 122
+      value: "village"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 115
+      end: 122
+      PosValue: "NN"
+[gossips]
+NN
+   sofa: _InitialView
+   begin: 123
+   end: 130
+   PosValue: "NNS"
+[gossips]
+Lemma
+   sofa: _InitialView
+   begin: 123
+   end: 130
+   value: "gossip"
+[gossips]
+Token
+   sofa: _InitialView
+   begin: 123
+   end: 130
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 123
+      end: 130
+      value: "gossip"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 123
+      end: 130
+      PosValue: "NNS"
+[whose acquaintance he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 131
+   end: 169
+   constituentType: "SBAR"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 115
+      end: 169
+      constituentType: "NP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 112
+         end: 169
+         constituentType: "PP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 103
+            end: 169
+            constituentType: "NP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 98
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 89
+                  end: 169
+                  constituentType: "VP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 86
+                     end: 169
+                     constituentType: "PP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 48
+                        end: 169
+                        constituentType: "PP"
+                        parent: Constituent
+                           sofa: _InitialView
+                           begin: 33
+                           end: 169
+                           constituentType: "VP"
+                           parent: ROOT
+                              sofa: _InitialView
+                              begin: 0
+                              end: 169
+                              constituentType: "S"
+                              parent: <null>
+                              children: FSArray
+                              syntacticFunction: <null>
+                           children: FSArray
+                           syntacticFunction: "-"
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[whose acquaintance]
+Constituent
+   sofa: _InitialView
+   begin: 131
+   end: 149
+   constituentType: "WHNP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 131
+      end: 169
+      constituentType: "SBAR"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 115
+         end: 169
+         constituentType: "NP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 112
+            end: 169
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 103
+               end: 169
+               constituentType: "NP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 98
+                  end: 169
+                  constituentType: "PP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 89
+                     end: 169
+                     constituentType: "VP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 86
+                        end: 169
+                        constituentType: "PP"
+                        parent: Constituent
+                           sofa: _InitialView
+                           begin: 48
+                           end: 169
+                           constituentType: "PP"
+                           parent: Constituent
+                              sofa: _InitialView
+                              begin: 33
+                              end: 169
+                              constituentType: "VP"
+                              parent: ROOT
+                                 sofa: _InitialView
+                                 begin: 0
+                                 end: 169
+                                 constituentType: "S"
+                                 parent: <null>
+                                 children: FSArray
+                                 syntacticFunction: <null>
+                              children: FSArray
+                              syntacticFunction: "-"
+                           children: FSArray
+                           syntacticFunction: "-"
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[whose]
+PR
+   sofa: _InitialView
+   begin: 131
+   end: 136
+   PosValue: "WP$"
+[whose]
+Lemma
+   sofa: _InitialView
+   begin: 131
+   end: 136
+   value: "whose"
+[whose]
+Token
+   sofa: _InitialView
+   begin: 131
+   end: 136
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 131
+      end: 136
+      value: "whose"
+   stem: <null>
+   pos: PR
+      sofa: _InitialView
+      begin: 131
+      end: 136
+      PosValue: "WP$"
+[acquaintance]
+NN
+   sofa: _InitialView
+   begin: 137
+   end: 149
+   PosValue: "NN"
+[acquaintance]
+Lemma
+   sofa: _InitialView
+   begin: 137
+   end: 149
+   value: "acquaintance"
+[acquaintance]
+Token
+   sofa: _InitialView
+   begin: 137
+   end: 149
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 137
+      end: 149
+      value: "acquaintance"
+   stem: <null>
+   pos: NN
+      sofa: _InitialView
+      begin: 137
+      end: 149
+      PosValue: "NN"
+[he had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 150
+   end: 169
+   constituentType: "S"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 131
+      end: 169
+      constituentType: "SBAR"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 115
+         end: 169
+         constituentType: "NP"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 112
+            end: 169
+            constituentType: "PP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 103
+               end: 169
+               constituentType: "NP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 98
+                  end: 169
+                  constituentType: "PP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 89
+                     end: 169
+                     constituentType: "VP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 86
+                        end: 169
+                        constituentType: "PP"
+                        parent: Constituent
+                           sofa: _InitialView
+                           begin: 48
+                           end: 169
+                           constituentType: "PP"
+                           parent: Constituent
+                              sofa: _InitialView
+                              begin: 33
+                              end: 169
+                              constituentType: "VP"
+                              parent: ROOT
+                                 sofa: _InitialView
+                                 begin: 0
+                                 end: 169
+                                 constituentType: "S"
+                                 parent: <null>
+                                 children: FSArray
+                                 syntacticFunction: <null>
+                              children: FSArray
+                              syntacticFunction: "-"
+                           children: FSArray
+                           syntacticFunction: "-"
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[he]
+PR
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   PosValue: "PRP"
+[he]
+Lemma
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   value: "he"
+[he]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   category: "Coreference"
+   arguments: FSArray
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   role: "Current"
+[he]
+Token
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 150
+      end: 152
+      value: "he"
+   stem: <null>
+   pos: PR
+      sofa: _InitialView
+      begin: 150
+      end: 152
+      PosValue: "PRP"
+[had cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 153
+   end: 169
+   constituentType: "VP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 150
+      end: 169
+      constituentType: "S"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 131
+         end: 169
+         constituentType: "SBAR"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 115
+            end: 169
+            constituentType: "NP"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 112
+               end: 169
+               constituentType: "PP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 103
+                  end: 169
+                  constituentType: "NP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 98
+                     end: 169
+                     constituentType: "PP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 89
+                        end: 169
+                        constituentType: "VP"
+                        parent: Constituent
+                           sofa: _InitialView
+                           begin: 86
+                           end: 169
+                           constituentType: "PP"
+                           parent: Constituent
+                              sofa: _InitialView
+                              begin: 48
+                              end: 169
+                              constituentType: "PP"
+                              parent: Constituent
+                                 sofa: _InitialView
+                                 begin: 33
+                                 end: 169
+                                 constituentType: "VP"
+                                 parent: ROOT
+                                    sofa: _InitialView
+                                    begin: 0
+                                    end: 169
+                                    constituentType: "S"
+                                    parent: <null>
+                                    children: FSArray
+                                    syntacticFunction: <null>
+                                 children: FSArray
+                                 syntacticFunction: "-"
+                              children: FSArray
+                              syntacticFunction: "-"
+                           children: FSArray
+                           syntacticFunction: "-"
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[had]
+Lemma
+   sofa: _InitialView
+   begin: 153
+   end: 156
+   value: "have"
+[had]
+V
+   sofa: _InitialView
+   begin: 153
+   end: 156
+   PosValue: "VBD"
+[had]
+Token
+   sofa: _InitialView
+   begin: 153
+   end: 156
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 153
+      end: 156
+      value: "have"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 153
+      end: 156
+      PosValue: "VBD"
+[cultivated .]
+Constituent
+   sofa: _InitialView
+   begin: 157
+   end: 169
+   constituentType: "VP"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 153
+      end: 169
+      constituentType: "VP"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 150
+         end: 169
+         constituentType: "S"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 131
+            end: 169
+            constituentType: "SBAR"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 115
+               end: 169
+               constituentType: "NP"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 112
+                  end: 169
+                  constituentType: "PP"
+                  parent: Constituent
+                     sofa: _InitialView
+                     begin: 103
+                     end: 169
+                     constituentType: "NP"
+                     parent: Constituent
+                        sofa: _InitialView
+                        begin: 98
+                        end: 169
+                        constituentType: "PP"
+                        parent: Constituent
+                           sofa: _InitialView
+                           begin: 89
+                           end: 169
+                           constituentType: "VP"
+                           parent: Constituent
+                              sofa: _InitialView
+                              begin: 86
+                              end: 169
+                              constituentType: "PP"
+                              parent: Constituent
+                                 sofa: _InitialView
+                                 begin: 48
+                                 end: 169
+                                 constituentType: "PP"
+                                 parent: Constituent
+                                    sofa: _InitialView
+                                    begin: 33
+                                    end: 169
+                                    constituentType: "VP"
+                                    parent: ROOT
+                                       sofa: _InitialView
+                                       begin: 0
+                                       end: 169
+                                       constituentType: "S"
+                                       parent: <null>
+                                       children: FSArray
+                                       syntacticFunction: <null>
+                                    children: FSArray
+                                    syntacticFunction: "-"
+                                 children: FSArray
+                                 syntacticFunction: "-"
+                              children: FSArray
+                              syntacticFunction: "-"
+                           children: FSArray
+                           syntacticFunction: "-"
+                        children: FSArray
+                        syntacticFunction: "-"
+                     children: FSArray
+                     syntacticFunction: "-"
+                  children: FSArray
+                  syntacticFunction: "-"
+               children: FSArray
+               syntacticFunction: "-"
+            children: FSArray
+            syntacticFunction: "-"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "-"
+[cultivated]
+Lemma
+   sofa: _InitialView
+   begin: 157
+   end: 167
+   value: "cultivate"
+[cultivated]
+V
+   sofa: _InitialView
+   begin: 157
+   end: 167
+   PosValue: "VBN"
+[cultivated]
+SemanticArgument
+   sofa: _InitialView
+   begin: 157
+   end: 167
+   role: "Current"
+[cultivated]
+Token
+   sofa: _InitialView
+   begin: 157
+   end: 167
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 157
+      end: 167
+      value: "cultivate"
+   stem: <null>
+   pos: V
+      sofa: _InitialView
+      begin: 157
+      end: 167
+      PosValue: "VBN"
+[.]
+Lemma
+   sofa: _InitialView
+   begin: 168
+   end: 169
+   value: "."
+[.]
+O
+   sofa: _InitialView
+   begin: 168
+   end: 169
+   PosValue: "PUNC."
+[.]
+Token
+   sofa: _InitialView
+   begin: 168
+   end: 169
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 168
+      end: 169
+      value: "."
+   stem: <null>
+   pos: O
+      sofa: _InitialView
+      begin: 168
+      end: 169
+      PosValue: "PUNC."
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================

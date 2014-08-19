@@ -1,0 +1,1332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teiCorpus xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:tei="http://www.tei-c.org/ns/1.0"
+           xmlns="http://www.tei-c.org/ns/1.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:tns="http://textgrid.info/namespaces/metadata/core/2010"
+           xmlns:tgl="http://textgrid.info/namespaces/metadata/language/2010"
+           xmlns:tgs="http://textgrid.info/namespaces/metadata/script/2010"
+           xmlns:tgr="http://textgrid.info/namespaces/metadata/agent/2010">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title type="main">Werke</title>
+            <author>Kobell, Franz von</author>
+         </titleStmt>
+         <publicationStmt>
+            <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Kobell, Franz von: Element 00001 [2011/07/11 at 20:29:01]</idno>
+            <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+               <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+               <p>
+                  <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+               </p>
+               <p>
+                  <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+               </p>
+               <p>
+                  <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+               </p>
+            </availability>
+         </publicationStmt>
+      
+         <sourceDesc>
+            <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+               <author key="pnd:116263431">Kobell, Franz von</author>
+            </bibl>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   
+      
+   
+
+         
+         
+
+
+
+
+
+         
+            <teiCorpus xml:id="tg1" n="/Literatur/M/Kobell, Franz von">
+      <teiHeader n="work:no">
+         <fileDesc>
+            <titleStmt>
+               <title>Kobell, Franz von</title>
+            </titleStmt>
+            <publicationStmt>
+               <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Kobell, Franz von: Element 00002 [2011/07/11 at 20:29:01]</idno>
+               <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+                  <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                  <p>
+                     <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                  </p>
+                  <p>
+                     <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+                  </p>
+                  <p>
+                     <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                  </p>
+               </availability>
+            </publicationStmt>
+            <sourceDesc>
+               <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+                  <author key="pnd:116263431">Kobell, Franz von</author>
+               </bibl>
+            </sourceDesc>
+         </fileDesc>
+      </teiHeader>
+      <TEI>
+         <teiHeader>
+            <fileDesc>
+               <titleStmt>
+                  <title/>
+               </titleStmt>
+               <publicationStmt>
+                  <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Kobell, Franz von: Element 00003 [2011/07/11 at 20:29:01]</idno>
+                  <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+                     <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                     </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+                     </p>
+                     <p>
+                        <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                     </p>
+                  </availability>
+               </publicationStmt>
+               <sourceDesc>
+                  <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+                     <author key="pnd:116263431">Kobell, Franz von</author>
+                  </bibl>
+               </sourceDesc>
+            </fileDesc>
+         </teiHeader>
+         <text type="front">
+            <body>
+               <div type="front">
+                  
+
+
+
+                  <head type="h1" xml:id="tg1.2.2">Franz Ritter von Kobell</head>
+
+                  <head type="h4" xml:id="tg1.2.3">(1803–1882)</head>
+
+               </div>
+            </body>
+         </text>
+      </TEI>
+      
+
+               
+                  
+               
+               
+               
+               <TEI xml:id="tg2" n="/Literatur/M/Kobell, Franz von/Biographie">
+         <teiHeader xmlns:fn="http://www.w3.org/2005/xpath-functions"
+                    xmlns:xi="http://www.w3.org/2001/XInclude"
+                    xmlns:a="http://www.textgrid.info/namespace/digibib/authors">
+            <fileDesc>
+               <titleStmt>
+                  <title>Biographie: Kobell, Franz von</title>
+               </titleStmt>
+               <publicationStmt>
+                  <idno type="FileCreationTime">Kobell, Franz von: Element 00004 [2011/07/11 at 20:29:01]</idno>
+                  <availability>
+                     <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                                   davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                                   www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                                   Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                                   Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                                   allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                     </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                                   Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                                   allgemeinverständlicher Sprache </ref>
+                     </p>
+                     <p>
+                        <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                     </p>
+                  </availability>
+               </publicationStmt>
+               <sourceDesc>
+                  <p/>
+               </sourceDesc>
+            </fileDesc>
+            <profileDesc>
+               <creation>
+                  <date notBefore="1990" notAfter="2010"/>
+               </creation>
+               <textClass>
+                  <keywords scheme="http://textgrid.info/namespaces/metadata/core/2010#genre">
+                     <term>other</term>
+                  </keywords>
+               </textClass>
+            </profileDesc>
+         </teiHeader>
+         <text>
+            <body>
+                  
+                     
+                  
+                  
+                  
+                  
+                  <div type="text" xml:id="tg2.4">
+
+
+                     <head type="h2" xml:id="tg2.4.1">Biographie</head>
+
+
+
+                     <p xml:id="tg2.4.2">
+                        <hi rend="bold" xml:id="tg2.4.2.1">1803</hi>
+                     </p>
+                     <p xml:id="tg2.4.3">
+                        <hi rend="italic" xml:id="tg2.4.3.1">19. Juli:</hi> Franz Ritter von Kobell wird als Spross einer alteingesessenen bayerischen Beamtenfamilie in München geboren. Kobell durchläuft eine steile akademische Karriere. Nach einjährigem Studium der Mineralogie an der Universität Landshut wird er Adjunkt bei der mineralogischen Staatssammlung in München.</p>
+                     <lb xml:id="tg2.4.4"/>
+                     <p xml:id="tg2.4.5">
+                        <hi rend="bold" xml:id="tg2.4.5.1">1825</hi>
+                     </p>
+                     <p xml:id="tg2.4.6">Franz Kobell wird außerordentlicher Professor.</p>
+                     <lb xml:id="tg2.4.7"/>
+                     <p xml:id="tg2.4.8">
+                        <hi rend="bold" xml:id="tg2.4.8.1">1834</hi>
+                     </p>
+                     <p xml:id="tg2.4.9">Er wird ordentlicher Professor in München. Als Mineraloge macht er sich mit Lehrbüchern und der Entdeckung neuer Gesteinsarten einen Namen, daneben gelingen ihm zusammen mit Carl August von Steinheil, unabhängig von Daguerre, Entdeckungen auf dem Gebiet der Fotografie. Er ist ein geschätztes Mitglied in einflussreichen Zirkeln der Münchner Oberschicht und gehört den berühmten Symposien Maximilians des II. und den Rittern in dessen Tafelrunde an.</p>
+                     <lb xml:id="tg2.4.10"/>
+                     <p xml:id="tg2.4.11">
+                        <hi rend="bold" xml:id="tg2.4.11.1">1839</hi>
+                     </p>
+                     <p xml:id="tg2.4.12">Herausgabe der Gedichte »Triphylin«.</p>
+                     <lb xml:id="tg2.4.13"/>
+                     <p xml:id="tg2.4.14">
+                        <hi rend="bold" xml:id="tg2.4.14.1">1859</hi>
+                     </p>
+                     <p xml:id="tg2.4.15">Kobell verfasst die Jagderzählungen »Wildanger«.</p>
+                     <lb xml:id="tg2.4.16"/>
+                     <p xml:id="tg2.4.17">
+                        <hi rend="bold" xml:id="tg2.4.17.1">1871</hi>
+                     </p>
+                     <p xml:id="tg2.4.18">Kobells Erzählung »Die G'schicht von' Brandner-Kaspar« wird gedruckt.</p>
+                     <lb xml:id="tg2.4.19"/>
+                     <p xml:id="tg2.4.20">
+                        <hi rend="bold" xml:id="tg2.4.20.1">1882</hi>
+                     </p>
+                     <p xml:id="tg2.4.21">
+                        <hi rend="italic" xml:id="tg2.4.21.1">11. November:</hi> Franz Kobell stirbt in München.</p>
+                  </div>
+               </body>
+         </text>
+      </TEI>
+               <teiCorpus xml:id="tg3" n="/Literatur/M/Kobell, Franz von/Drama">
+         <teiHeader n="work:no">
+            <fileDesc>
+               <titleStmt>
+                  <title>Drama</title>
+               </titleStmt>
+               <publicationStmt>
+                  <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Kobell, Franz von: Element 00005 [2011/07/11 at 20:29:01]</idno>
+                  <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+                     <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                     </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+                     </p>
+                     <p>
+                        <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                     </p>
+                  </availability>
+               </publicationStmt>
+               <sourceDesc>
+                  <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+                     <author key="pnd:116263431">Kobell, Franz von</author>
+                  </bibl>
+               </sourceDesc>
+            </fileDesc>
+         </teiHeader>
+         
+                  
+                     
+                  
+                  
+                  
+                  <TEI xml:id="tg4" n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga">
+            <teiHeader xmlns:fn="http://www.w3.org/2005/xpath-functions"
+                       xmlns:xi="http://www.w3.org/2001/XInclude"
+                       xmlns:a="http://www.textgrid.info/namespace/digibib/authors">
+               <fileDesc>
+                  <titleStmt>
+                     <title>Der Roaga</title>
+                  </titleStmt>
+                  <publicationStmt>
+                     <idno type="FileCreationTime">Kobell, Franz von: Element 00006 [2011/07/11 at 20:29:01]</idno>
+                     <availability>
+                        <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                                   davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                                   www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                                   Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                                   Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                                   allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                        <p>
+                           <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                        </p>
+                        <p>
+                           <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                                   Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                                   allgemeinverständlicher Sprache </ref>
+                        </p>
+                        <p>
+                           <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                        </p>
+                     </availability>
+                  </publicationStmt>
+                  <notesStmt>
+                     <note>
+                              Entstanden 1847. Erstdruck in »Franz von Kobell: G'schpiel«, München (Dempwolff), 1868. Uraufführung 1847, Nationaltheater, München.
+                           </note>
+                  </notesStmt>
+                  <sourceDesc>
+                     <biblFull>
+                        <titleStmt>
+                           <title>Franz von Kobell: Ausgewählte Werke. Eingeleitet und herausgegeben von Günter Goepfert, München: Süddeutscher Verlag, 1972.</title>
+                           <author key="pnd:116263431">Kobell, Franz von</author>
+                        </titleStmt>
+                        <extent>144-</extent>
+                        <publicationStmt>
+                           <date when="1972"/>
+                           <pubPlace>München</pubPlace>
+                        </publicationStmt>
+                     </biblFull>
+                  </sourceDesc>
+               </fileDesc>
+               <profileDesc>
+                  <creation>
+                     <date when="1847"/>
+                  </creation>
+                  <textClass>
+                     <keywords scheme="http://textgrid.info/namespaces/metadata/core/2010#genre">
+                        <term>drama</term>
+                     </keywords>
+                  </textClass>
+               </profileDesc>
+            </teiHeader>
+            <text>
+               <front>
+                  <div type="front">
+                        <milestone unit="sigel" n="Kobell-AW" xml:id="tg4.3.1"/>
+                        
+
+
+
+                        <head type="h3" xml:id="tg4.3.3">Franz Ritter von Kobell</head>
+
+
+                        <head type="h2" xml:id="tg4.3.4">Der Roaga [Reiher]</head>
+
+                        <milestone unit="sigel" n="Kobell-AW" xml:id="tg4.3.5"/>
+
+                     </div>
+               </front>
+               <body>
+                     
+                        
+                     
+                     
+                     
+                     
+                     <div subtype="work:no" xml:id="tg5"
+                       n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga/Personen">
+                        <div>
+                           <desc>
+                              <title>Personen</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg5.2">
+                           <div type="Dramatis_Personae">
+                              <castList>
+                                 <head type="h4" xml:id="tg5.2.1">
+                                    <pb type="start" n="144" xml:id="tg5.2.1.1"/>
+Personen.</head>
+
+
+                                 <castGroup>
+                                    <castItem rend="zenoPLm0n4" xml:id="tg5.2.2">Der Förster.</castItem>
+                                    <lb xml:id="tg5.2.3"/>
+                                    <castItem rend="zenoPLm0n4" xml:id="tg5.2.4">Lisei, seine Tochter.</castItem>
+                                    <lb xml:id="tg5.2.5"/>
+                                    <castItem rend="zenoPLm0n4" xml:id="tg5.2.6">Sepp, ein junger Jäger.</castItem>
+                                    <lb xml:id="tg5.2.7"/>
+                                    <castItem rend="zenoPLm0n4" xml:id="tg5.2.8">Girgl, Knecht.</castItem>
+                                    <lb xml:id="tg5.2.9"/>
+
+                                 </castGroup>
+                              </castList>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" type="scene" xml:id="tg6"
+                       n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga/1. Szene">
+                        <div>
+                           <desc>
+                              <title>1. Szene</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg6.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg6.2.1">1. Szene</head>
+
+                              
+                              
+                              <stage rend="zenoPC" xml:id="tg6.2.4">
+                                 <hi rend="italic" xml:id="tg6.2.4.1">Stube eines Försterhauses. Sepp und Lisei sitzen an einem Tisch. Sepp spielt Zither und Lisei spinnt. Das Präludium der Musik schließt sich an das Zitherspiel und die Schnadahüpfln an.</hi>
+                              </stage>
+                              <lb xml:id="tg6.2.5"/>
+                              <sp>
+                                 <speaker xml:id="tg6.2.6">SEPP.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.7">Mei Freud is, was wild is,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.8">Mei Freud is a Gwänd,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.9">Und a Boivn, a Grabn,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.10">Wos Gambs umarennt,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.11">Und a Rosn in Gartn</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.12">Wie guat daßs ma gfallt,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.13">Is ma dengerscht no lieber</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.14">A wildi in Wald.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.15">LISEI.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.16">Und koan Wildn den mag i nit,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.17">Möchtn nit gschenkt,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.18">Der um etlichi Gambs</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.19">An koa Diendl mehr denkt.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.20">SEPP.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.21">Geh stell di nit fuchti,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.22">Es ist dir nit drum,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.23">Und bi draußt grad a Wilder,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.24">Bei dir laampifrumm.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.25">LISEI.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.26">Du möchtst mi gern stimma,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.27">I kenn di guat gnua,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.28">Und i leb scho so aa,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.29">Brauch koan Buabn dazua.</l>
+                                    <pb n="144" xml:id="tg6.2.30"/>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.31.part1">SEPP.</speaker>
+                                 <lg>
+                                    <l xml:id="tg6.2.31.part2"> Alloa lebn? koan Buabn? koan Mo? O mei Lisei, schau <hi rend="italic" xml:id="tg6.2.31.1.part2">Singt.</hi>
+                                    </l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.32">A Bix ohni Ho</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.33">Und a Diendl ohni Mo</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.34">Und a Jaager ohni Schneid,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.35">Da is's allewei gfeit.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.36.part1">LISEI.</speaker>
+                                 <p xml:id="tg6.2.36.part2"> Natürli! An Stolz habts scho, ees Buabn, daß ma moant, ees waarts gar des Nötigst auf der Welt. Um an <hi rend="italic" xml:id="tg6.2.36.1.part2">Buabn</hi> rühr i koan kloan Finger, gel na werds wohl mit der Hand aa Zeit habn.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.37.part1">SEPP.</speaker>
+                                 <p xml:id="tg6.2.37.part2"> Und du hast mi halt do gern, kost es nit derwartn, bis i hoamkimm, sagst allewei, i soll mi nit derfalln, soll fei achtgebn, <hi rend="italic" xml:id="tg6.2.37.1.part2">recht gern</hi> hast mi aa no!</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.38.part1">LISEI.</speaker>
+                                 <l xml:id="tg6.2.38.part2"> Moast? Da schau her, du woaßt scho gar alls, steht grad dahi obs wahr is.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.39.part1">SEPP.</speaker>
+                                 <l xml:id="tg6.2.39.part2"> Schau, Lisei, i sag glei a so: <hi rend="italic" xml:id="tg6.2.39.1.part2">Wann</hi> willst mi heuretn, morgn? heunt? jetz glei? –</l>
+                                 <lb xml:id="tg6.2.40"/>
+                                 <stage rend="zenoPC" xml:id="tg6.2.41">
+                                    <hi rend="italic" xml:id="tg6.2.41.1">Lisei lacht. Beide hören den Knecht eintreten, der nach ihnen schauend stehnbleibt. Sepp fängt wieder an die Zither zu spielen und zu singen.</hi>
+                                 </stage>
+                                 <lb xml:id="tg6.2.42"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.43">SEPP.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.44">I ko birschn und jagn</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.45">Und d' Zithern aa schlagn,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.46">Geist ma Bussein dafür,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.47">Kost es lerna vo mir.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.48">LISEI.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.49">I ko melcha und maahn</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.50">Unds Spinnradl draahn,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.51">Und dees langt schon a Weil,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.52">Hat mi'n Lerna koan Eil.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.53.part1">GIRGL</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg6.2.53.1.part1">singt spottend drein.</hi>
+                                 </stage>
+
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.54">Und du bist scho mei Dienderl,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.55">I 's Büaberl für di,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.56">Und du bist scho mei Hennerl,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg6.2.57">Dei Gockl bin i.</l>
+                                 </lg>
+                                 <lb xml:id="tg6.2.58"/>
+                                 <stage rend="zenoPC" xml:id="tg6.2.59">
+                                    <hi rend="italic" xml:id="tg6.2.59.1">Alle lachen.</hi>
+                                 </stage>
+                                 <lb xml:id="tg6.2.60"/>
+                                 <pb n="145" xml:id="tg6.2.61"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.62.part1">GIRGL.</speaker>
+                                 <p xml:id="tg6.2.62.part2"> Ja ja, Herr Sepp, Ees täats, was i mirk, aa lieber in der warma Stubn ebber an Aantn fanga, gel, als in Schnee draußt auf oani passn. Is aa gar kalt bein Wasser, habts recht.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.63.part1">SEPP.</speaker>
+                                 <p xml:id="tg6.2.63.part2"> Meinoad, es is Zeit zun Aantnfall, es werd scho gar frua Nacht, deesmal hat der Girgl aar amal ebbas Gscheits gsagt. <hi rend="italic" xml:id="tg6.2.63.1.part2">Nimmt seine Flinte.</hi> Lisei! pfüt di Gott und halt ma fei 'n Daama, daß mer a rechter Flug eifallt, alls schwarz aufanand, daß i a paar Duzed hoambring.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.64.part1">GIRGL.</speaker>
+                                 <l xml:id="tg6.2.64.part2"> Sag glei a paar Hundert, dees geht jetz in oan hi.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.65.part1">LISEI.</speaker>
+                                 <p xml:id="tg6.2.65.part2"> 'n Daama will i haltn, aber bald d' schießt und bringst nix hoam, na muaßt mar 'n Garnhaspi macha und d' Wäsch zammlegn, weil d' gar a so a<hi rend="italic" xml:id="tg6.2.65.1.part2"> Wilder</hi> bist und a <hi rend="italic" xml:id="tg6.2.65.2.part2">Böser.</hi>
+                                 </p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.66.part1">SEPP.</speaker>
+                                 <l xml:id="tg6.2.66.part2"> Is scho grecht <hi rend="italic" xml:id="tg6.2.66.1.part2">Ihr ins Ohr flüsternd.</hi> und a Bußl am Weg?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.67.part1">LISEI.</speaker>
+                                 <l xml:id="tg6.2.67.part2"> Oder nit aa, hats Diendl gsagt, es werds a so aa scho toa.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.68.part1">SEPP.</speaker>
+                                 <p xml:id="tg6.2.68.part2"> I sag scho, du bist a Wildi <hi rend="italic" xml:id="tg6.2.68.1.part2">Abgehend.</hi> Pfüt di Gott, Girgl, i roas, sunst gfriern mir ebba die Brunngraabn ei, ehe i hikimm. <hi rend="italic" xml:id="tg6.2.68.2.part2">Ab.</hi>
+                                 </p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.69.part1">GIRGL.</speaker>
+                                 <p xml:id="tg6.2.69.part2"> Pfüt di Gott, daß dir fei d'Hitzn nit ausgenga. – – Ja, Lisei, i glaabs glei, du bist in den Gambsurberl oder Aantnseppi da verkeit! Wie hamm mas, ha?</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.70.part1">LISEI.</speaker>
+                                 <l xml:id="tg6.2.70.part2"> No, und wanns a so waar, was waars nacha?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.71.part1">GIRGL.</speaker>
+                                 <p xml:id="tg6.2.71.part2"> Na <hi rend="italic" xml:id="tg6.2.71.1.part2">gar</hi> nix, was <hi rend="italic" xml:id="tg6.2.71.2.part2">denn,</hi> was <hi rend="italic" xml:id="tg6.2.71.3.part2">denn?</hi> – Grad dees will i dir sagn, daß dees Bürschl a bißl hoch außi will. Is ihm koa Huatschnur guat gnua, koa Gambsbart schö gnua gfaßt, muaß silberni Knöpf mit Hirschkraanln habn, halt recht fei wier a gnädiger Herr, und danachst san ihm die Damen vo der Herrschaft bigegnet, wier er grad an Fuchs hoamtragn hat. Na hat er ihna den Fuchs zoagt, dees is a Freundlichkeit gwest hin und her, i ho gmoant sie kemma nimmer vonand, und er gsprocha wier a Buach vo der Jagd <pb n="146" xml:id="tg6.2.71.4.part2"/>
+und halt so schö to. Geh weiter, der macht dir a Weil was für und na schaugt er ihm wieder um an anderni. Und der Vater hat just aa koan großn Glaabn drauf.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.72.part1">LISEI.</speaker>
+                                 <p xml:id="tg6.2.72.part2"> Jetz mach mi nit fuchti, i kenn 'n Sepp besser, der Sepp is brav, <hi rend="italic" xml:id="tg6.2.72.1.part2">recht</hi> brav, zechatausedmal braver als du mit deiner Salbn. Was i woaß, woaß i, und wann i 'n heunt heuret, so is er allemal der rechti Mo.</p>
+                                 <lb xml:id="tg6.2.73"/>
+                                 <stage rend="zenoPC" xml:id="tg6.2.74">
+                                    <hi rend="italic" xml:id="tg6.2.74.1">Arie.</hi>
+                                 </stage>
+                                 <lb xml:id="tg6.2.75"/>
+                                 <lg>
+                                    <l xml:id="tg6.2.76">Dems gleich is, is er was d'er will,</l>
+                                    <l xml:id="tg6.2.77">A Henna odr a Hoh,</l>
+                                    <l xml:id="tg6.2.78">Bua der bideut ihm garn nit viel,</l>
+                                    <l xml:id="tg6.2.79">Is nit der rechti Mo,</l>
+                                    <l xml:id="tg6.2.80">Der aber schneidi is, verstehst,</l>
+                                    <l xml:id="tg6.2.81">Den koaner narrn ko,</l>
+                                    <l xml:id="tg6.2.82">Und der was is und is aa was,</l>
+                                    <l xml:id="tg6.2.83">Dees is der rechti Mo.</l>
+                                 </lg>
+                                 <lb xml:id="tg6.2.84"/>
+                                 <lg>
+                                    <l xml:id="tg6.2.85">Der allzeit denkt, was soll i's toa,</l>
+                                    <l xml:id="tg6.2.86">I ho ja nix davo,</l>
+                                    <l xml:id="tg6.2.87">Der übrall nix als gwinna will,</l>
+                                    <l xml:id="tg6.2.88">Is nit der rechti Mo;</l>
+                                    <l xml:id="tg6.2.89">Der aber denkt, für guati Werk,</l>
+                                    <l xml:id="tg6.2.90">Da schaug koan Kreuzer o,</l>
+                                    <l xml:id="tg6.2.91">Und der an andern aa was gunnt,</l>
+                                    <l xml:id="tg6.2.92">Dees is der rechti Mo.</l>
+                                 </lg>
+                                 <lb xml:id="tg6.2.93"/>
+                                 <lg>
+                                    <l xml:id="tg6.2.94">Der loami is, sei Lebta nie</l>
+                                    <l xml:id="tg6.2.95">An Juchezer hat to,</l>
+                                    <l xml:id="tg6.2.96">Schau so an armi Seel wie du</l>
+                                    <l xml:id="tg6.2.97">Is nit der rechti Mo,</l>
+                                    <l xml:id="tg6.2.98">Der aber lusti eini schaugt</l>
+                                    <l xml:id="tg6.2.99">In d' Welt, der gfallt ma scho</l>
+                                    <l xml:id="tg6.2.100">Und deretwegn gfallt mir aa mei Sepp,</l>
+                                    <l xml:id="tg6.2.101">Dees is der rechti Mo!</l>
+                                    <l xml:id="tg6.2.102">Jetz hast es gehört und laß mi in Fried.</l>
+                                 </lg>
+                                 <lb xml:id="tg6.2.103"/>
+                                 <pb n="147" xml:id="tg6.2.104"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.105.part1">GIRGL.</speaker>
+                                 <p xml:id="tg6.2.105.part2"> Ghört hon i's und jetz sing i dir extra aar oas, wie dees grechti <hi rend="italic" xml:id="tg6.2.105.1.part2">Diendl</hi> sei soll und wie nit aa, na kost dir dei Sach rausklaubn, du Feispinnerin!</p>
+                                 <lb xml:id="tg6.2.106"/>
+                                 <lg>
+                                    <l xml:id="tg6.2.107">A gschnippigi, gschnappigi,</l>
+                                    <l xml:id="tg6.2.108">Dalketi, dappigi,</l>
+                                    <l xml:id="tg6.2.109">Na, da is's aus,</l>
+                                    <l xml:id="tg6.2.110">Muaßt es habn in Haus,</l>
+                                    <l xml:id="tg6.2.111">Abr a willigi, billigi,</l>
+                                    <l xml:id="tg6.2.112">Rührigi, gführigi,</l>
+                                    <l xml:id="tg6.2.113">Da is a Lebn,</l>
+                                    <l xml:id="tg6.2.114">Ko koa lustigers gebn.</l>
+                                 </lg>
+                                 <lb xml:id="tg6.2.115"/>
+                                 <lg>
+                                    <l xml:id="tg6.2.116">A graandigi, haanddigi,</l>
+                                    <l xml:id="tg6.2.117">Hitzigi, stützigi,</l>
+                                    <l xml:id="tg6.2.118">Da dank i schö,</l>
+                                    <l xml:id="tg6.2.119">Bua, da kunnts oan vergeh,</l>
+                                    <l xml:id="tg6.2.120">Abr a schneidigi, freudigi,</l>
+                                    <l xml:id="tg6.2.121">Tüchtigi, richtigi,</l>
+                                    <l xml:id="tg6.2.122">Die werd mei Wei,</l>
+                                    <l xml:id="tg6.2.123">Ja, da bin i dabei!</l>
+                                 </lg>
+                                 <lb xml:id="tg6.2.124"/>
+                                 <p xml:id="tg6.2.125">Und dees sag dir i, Lisei, bist wie d'er will, du gfallst ma und was gilts, i heuret di no ehnder als der Raatschnbartl da!</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.126.part1">LISEI.</speaker>
+                                 <p xml:id="tg6.2.126.part2"> Waar ma nit lieb! Geh und schaug bein Stall, ob der Vater nit kemma is, daß d' ihms Roß eistellst, dees is gscheiter!</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.127.part1">GIRGL.</speaker>
+                                 <l xml:id="tg6.2.127.part2"> Wahr is's, er werd nimmer lang ausbleibn!<hi rend="italic" xml:id="tg6.2.127.1.part2"> Ab.</hi>
+                                 </l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg6.2.128.part1">LISEI.</speaker>
+                                 <p xml:id="tg6.2.128.part2"> Muaß ma si no irgern mit den Girgl da. Na, mei Sepp is a guata Mensch und is schier a Sünd, daß i ihm nit glei umn Hals fall, wie se si ghöret; aber a Diendl is halt so an arms Ding und solls nit mirka lassn daßs sein Buabn gern hat, soll si allewei dagegn wihrn und davolaaffa. Dees is scho a recht a zwiderna Brauch, und wann der Sepp a so<pb n="148" xml:id="tg6.2.128.1.part2"/>
+ waar und waar a falscher, na kunt er ja do nit so lieb daherredn und so schö toa.</p>
+                                 <lb xml:id="tg6.2.129"/>
+                                 <stage rend="zenoPC" xml:id="tg6.2.130">
+                                    <hi rend="italic" xml:id="tg6.2.130.1">Man hört draußen Schellengeläut eines anfahrenden Schlittens und den Wind pfeifen.</hi>
+                                 </stage>
+                                 <lb xml:id="tg6.2.131"/>
+                                 <l xml:id="tg6.2.132">Aha, jetz kimmt der Vater! <hi rend="italic" xml:id="tg6.2.132.1">Zündet ein Licht an.</hi>
+                                 </l>
+                                 <lb xml:id="tg6.2.133"/>
+                              </sp>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" type="scene" xml:id="tg7"
+                       n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga/2. Szene">
+                        <div>
+                           <desc>
+                              <title>2. Szene</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg7.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg7.2.1">2. Szene</head>
+
+                              
+                              
+                              <stage rend="zenoPC" xml:id="tg7.2.4">
+                                 <hi rend="italic" xml:id="tg7.2.4.1">Der Förster mit Girgl tritt auf.</hi>
+                              </stage>
+                              <lb xml:id="tg7.2.5"/>
+                              <sp>
+                                 <speaker xml:id="tg7.2.6.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg7.2.6.1.part1">seinen Mantel schüttelnd.</hi>
+                                 </stage>
+                                 <p xml:id="tg7.2.6.part2"> Sakra, geht a Wind heunt und waaht, daß d' moast, aus is's! Sei froh Lisei, daß d' nit mitgfahrn bist, i bi kloa derfrorn.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.7.part1">LISEI</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg7.2.7.1.part1">ihm den Mantel abnehmend.</hi>
+                                 </stage>
+                                 <p xml:id="tg7.2.7.part2"> Hat schon a so ausgschaugt, als wanns schiech toa wollt. Soll Enk was zessn bringa oder mögts a Bier, Vater.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.8.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg7.2.8.1.part1">Setzt sich in einen Lehnstuhl.</hi>
+                                 </stage>
+                                 <l xml:id="tg7.2.8.part2"> Derwei a Bier, is ma drum a Pfeifei Tabak zraacha, bi ja draußt vor lauter Wind nit dazuakemma.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.9.part1">LISEI.</speaker>
+                                 <l xml:id="tg7.2.9.part2"> Glei bring i's <hi rend="italic" xml:id="tg7.2.9.1.part2">Ab.</hi>
+                                 </l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.10.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg7.2.10.part2"> Wo is der Sepp?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.11.part1">GIRGL.</speaker>
+                                 <l xml:id="tg7.2.11.part2"> Er is am Aantnfall, is nit lang furt.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.12.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg7.2.12.part2"> No, heunt hat er a Wetter dazua, da fallns nit ungern. <hi rend="italic" xml:id="tg7.2.12.1.part2">Zündet die Pfeife an.</hi> Ja Girgl, 'n Schimmi hätt i guat verkaafft, hatn der Forstner vo Burgdorf gnumma.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.13.part1">GIRGL.</speaker>
+                                 <l xml:id="tg7.2.13.part2"> Der Forstner gel, ja ja, was macht er denn?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.14.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg7.2.14.part2"> Is ganz wohlauf. <hi rend="italic" xml:id="tg7.2.14.1.part2">Zu Lisei, die das Bier bringt.</hi> Laßt di schö grüßn, der Forstner vo Burgdorf.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.15.part1">LISEI.</speaker>
+                                 <l xml:id="tg7.2.15.part2"> I dank, habtsn gsegn, Vater, is er wohlauf?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.16.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg7.2.16.part2"> Mei, ja. Is halt allewei lusti, a narreti Seel, und a Gschichtl hat er ma verzählt, da hamm ma viel glacht mitanander. Denkts no, die Gschicht, dees is scho merkwürdi, was in Preussn auf an Guat gschegn is. Da haust a Graf, der hat a wunderschöni Tochter und möchts gern verheuretn, <pb n="149" xml:id="tg7.2.16.1.part2"/>
+aber sie mag halt nit und wollt ehnder a Klosterfrau wern, sagt s'. Der Graf is schier ausananda drüber, und weil er halt gar nit auslaßt, so sagt s' aufamal ('s is ebber a zwoa Wocha her), sie will heuretn, aber er soll ihr sei Ehrnwort gebn, daß ihm der recht is, den sie raussuacha will. Der Graf voller Freud hat an nix denkt und gibt ihrs Wort vor vieli Zoagn. Was tuat die jung Gräfin? – Da hat si dort in Schloßgartn in an Altwasser a Roaga gfangt mit an Staandl in ra Wurz, nett daß er nimmer weiter kinna hat und der Roaga hat an goldern Ring an den Staandl ghabt mit ra Schrift die nimd verstandn hat, arabisch hamms gsagt, waars oder türkisch. No, die Gräfin laßt den Roager an andern Ring amacha mit ihren Wappn, laßtn fliegn und sagt, sie will den heuretn, der ihr den Ring wiederbringt.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.17.part1">GIRGL.</speaker>
+                                 <l xml:id="tg7.2.17.part2"> Ja warum nit gar!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.18.part1">LISEI.</speaker>
+                                 <l xml:id="tg7.2.18.part2"> Ah na!</l>
+                                 <pb n="150" xml:id="tg7.2.19"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.20.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg7.2.20.part2"> Und es ist halt do a so, wann er an ordentlicher Mensch is, so heuretsn, und der Graf hats zuagsagt, da kinnts es druckt lesn, es is ausgschriebn. <hi rend="italic" xml:id="tg7.2.20.1.part2">Gibt dem Girgl ein Zeitungsblatt.</hi>
+                                 </p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.21.part1">GIRGL</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg7.2.21.1.part1">die Zeitung betrachtend.</hi>
+                                 </stage>
+                                 <l xml:id="tg7.2.21.part2"> Ja narret, dees is ja do aus der Weis!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.22.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg7.2.22.part2"> Mei, dees Ganz werd halt a so sei: Die Fräula denkt ihm leicht, der Roaga werd scho wieder higeh, wo er herkemma is, ins Arabien hintri oder zu die Türkn oder Mohrn, und der 'n dort ebba fangt, werd leicht vo der Gschicht nix derfahrn und sie bräucht na nit zheuretn, weils halt amal nit mag. – Und da hon i mit den Forstner vo Burgdorf a so lacha müssn, weil er gsagt hat, er taat jetz nix anders mehr, als auf Roaga birschn und asteh, und er will die Gräfin kriegn und einiroasn ins Preussnland und an Gschloßherrn macha und was woaß i.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.23.part1">GIRGL.</speaker>
+                                 <p xml:id="tg7.2.23.part2"> Ja dees waar freili a Gschpaß, aber was gschicht na, bal jetz wegnmeiner den Roager a geistlicher Herr derschießt, kunnt ja aa leicht sei! Da is glei der neu Kapla, der pulvert ja umanand, daßs a Freud is.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.24.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg7.2.24.part2"> No, na werd sie scho wieder was anders ausstudiern, es is ihr grad drum, daß s' a Weil an Fried hat, dees mirkt ma wohl.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.25.part1">LISEI</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg7.2.25.1.part1">die etwas unruhig einigemal zum Fenster hinausgesehen.</hi>
+                                 </stage>
+                                 <l xml:id="tg7.2.25.part2"> Was san denn dees für Vögl, Vater, ho nie oan gsegn.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg7.2.26.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg7.2.26.part2"> Hast halt koan gsegn, san großi Wasservögl, langhalset mit an lange Schnabi, auf an Art wier a Storch a so. Hamm an diewein oan gschoßen, bei die Brunngraabn, wo der Seppi heunt hi is. – Aber Girgl, mir müssn no 'n Schlittn auspacka, i ho allerhand mitbracht, geh zua, daß i nacher an Rua ho. 's Lisei kunnt derwei 's Essn herrichtn.<hi rend="italic" xml:id="tg7.2.26.1.part2"> Beide ab.</hi>
+                                 </p>
+                                 <lb xml:id="tg7.2.27"/>
+                              </sp>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" type="scene" xml:id="tg8"
+                       n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga/3. Szene">
+                        <div>
+                           <desc>
+                              <title>3. Szene</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg8.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg8.2.1">
+                                 <pb n="151" xml:id="tg8.2.1.1"/>
+3. Szene</head>
+
+                              <sp>
+                                 <speaker xml:id="tg8.2.2.part1">LISEI</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg8.2.2.1.part1">Nimmt die Zeitung und liest noch einmal die Ausschreibung.</hi>
+                                 </stage>
+                                 <p xml:id="tg8.2.2.part2"> Is wahrhafti wahr! Is 's Wappn aa bschriebn. Drei Kreuz san drin, hoaßts, und drei G san aufn Ring wie bein an Ehring. – <hi rend="italic" xml:id="tg8.2.2.2.part2">Nachdenkend, dann erschrocken.</hi> Daß ebba der Roaga zun uns in d' Revier kimmt! Na dees waar ja do aus der Weis. Und der Sepp is a so auf dees Gflüg, daß er koan Fried und koan Ruah nit hat Tag und Nacht. Er is scho guat der Sepp, aber stolz is er schon aa, und a Gräfin, a Gschloß, – o mei Gott, mir werds ganz schwarz vor die Augn. Er waar in Stand und roaset hi, bal er den Roaga krieget, er waar scho so viel auf d'Ehr verpicht und a frischer Bua is er, der Gräfin gfallet er gwiß. Na waars aus! – Wie aber no unser lieber Herrgott aa so dummi Vögl hat derschaffa mögn, i ho vo koan Roaga mei Lebta nix gwißt und jetz muaß i drum a so a Sorg habn. Und i bi scho so dumm aa und tua allewei, als wann i mir nit viel draus machet, wann der Sepp von heuretn redt. Dees hat mei seligi Muatter aufn Gwissn, weil s' allewei gsagt hat, i soll koan Buabn nit traun und nit zguat damit sei! <hi rend="italic" xml:id="tg8.2.2.3.part2">Fast weinend.</hi> Dees hat ma davo, kunnt mi scho 's Leben verdrießn!</p>
+                                 <lb xml:id="tg8.2.3"/>
+                                 <stage rend="zenoPC" xml:id="tg8.2.4">
+                                    <hi rend="italic" xml:id="tg8.2.4.1">Einigemal erregt hin- und hergehend, dann sich besinnend und wieder hoffend. Bittend die Hände faltend.</hi>
+                                 </stage>
+                                 
+                                 <stage rend="zenoPC" xml:id="tg8.2.6">
+                                    <hi rend="italic" xml:id="tg8.2.6.1">Arie.</hi>
+                                 </stage>
+                                 <lb xml:id="tg8.2.7"/>
+                                 <lg>
+                                    <l xml:id="tg8.2.8">No deesmal koan Unglück,</l>
+                                    <l xml:id="tg8.2.9">Grad heunt no an Stern,</l>
+                                    <l xml:id="tg8.2.10">Na will i's scho richtn,</l>
+                                    <l xml:id="tg8.2.11">Daß's anders muaß wern,</l>
+                                    <l xml:id="tg8.2.12">Na schmeichl i und bitt i,</l>
+                                    <l xml:id="tg8.2.13">Bis daß er verspricht,</l>
+                                    <l xml:id="tg8.2.14">Koan Roaga mehr zschießn,</l>
+                                    <l xml:id="tg8.2.15">Vontwegn dera Gschicht.</l>
+                                 </lg>
+                                 <lb xml:id="tg8.2.16"/>
+                                 <pb n="152" xml:id="tg8.2.17"/>
+                                 <lg>
+                                    <l xml:id="tg8.2.18">Gern gib ihm a Bußl,</l>
+                                    <l xml:id="tg8.2.19">Wegn meiner zwoa, drei,</l>
+                                    <l xml:id="tg8.2.20">Und sags ihm, i wur aa</l>
+                                    <l xml:id="tg8.2.21">Vo Herzn sei Wei,</l>
+                                    <l xml:id="tg8.2.22">'s is nix mit den Laugna,</l>
+                                    <l xml:id="tg8.2.23">Da springt ma nit weit,</l>
+                                    <l xml:id="tg8.2.24">O wanns no nit zspat kimmt</l>
+                                    <l xml:id="tg8.2.25">Mei Aufrichtigkeit.</l>
+                                 </lg>
+                                 <lb xml:id="tg8.2.26"/>
+                                 <lg>
+                                    <l xml:id="tg8.2.27">Drum, wann i no heunt grad</l>
+                                    <l xml:id="tg8.2.28">Koan Unglück nit ho,</l>
+                                    <l xml:id="tg8.2.29">Na ko ma koa Gräfin,</l>
+                                    <l xml:id="tg8.2.30">Koa Roager mehr o,</l>
+                                    <l xml:id="tg8.2.31">Na trag i wohls Ringl,</l>
+                                    <l xml:id="tg8.2.32">Dees mit die drei G</l>
+                                    <l xml:id="tg8.2.33">Und tuat ma dabei gwiß</l>
+                                    <l xml:id="tg8.2.34">Mei Herz nimmer weh.</l>
+                                 </lg>
+                                 <lb xml:id="tg8.2.35"/>
+                                 <p xml:id="tg8.2.36">Gottlob, heunt is's zeiti Nacht worn, da hat er ebba do nix gsegn, und dees Schneibn dazua, – aber <hi rend="italic" xml:id="tg8.2.36.1">glei</hi> nimm ihms Wort a, koan Roaga mehr schießn, na<hi rend="italic" xml:id="tg8.2.36.2"> gar</hi> koan, i kunt koan Aug mehr zuatoa. <hi rend="italic" xml:id="tg8.2.36.3">Richtet das Essen.</hi>
+                                 </p>
+                                 <lb xml:id="tg8.2.37"/>
+                              </sp>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" type="scene" xml:id="tg9"
+                       n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga/4. Szene">
+                        <div>
+                           <desc>
+                              <title>4. Szene</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg9.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg9.2.1">4. Szene</head>
+
+                              
+                              
+                              <stage rend="zenoPC" xml:id="tg9.2.4">
+                                 <hi rend="italic" xml:id="tg9.2.4.1">Lisei, der Förster und Girgl kommen herein. Girgl trägt eine Kiste, Pferdedecken usw. und legt sie im Hintergrund nieder.</hi>
+                              </stage>
+                              <lb xml:id="tg9.2.5"/>
+                              <sp>
+                                 <speaker xml:id="tg9.2.6.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg9.2.6.part2"> Jetz trag auf, Lisei, a hungriga Magn friert doppit. Setz mer uns zamm, der Sepp muaß aa bal kemma. Dees muaß ma sagn, a fleißiger Jaager is er.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.7.part1">LISEI.</speaker>
+                                 <l xml:id="tg9.2.7.part2"> Is scho wahr, Vater, werd nit glei wieder an sellan gebn.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.8.part1">GIRGL.</speaker>
+                                 <p xml:id="tg9.2.8.part2"> Ja, ja, fleißi, in Summa bei die Hirsch und Gambs, in Winter bei die Füchs und Aantn, und na bei die Lisein <pb n="153" xml:id="tg9.2.8.1.part2"/>
+und Miadein und Gredln, und wie sei Wildprat alles hoaßt.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.9.part1">LISEI.</speaker>
+                                 <l xml:id="tg9.2.9.part2"> Spar dir 'n Atm zun Suppnblasn, is gscheiter als dees Gschwaatz da.</l>
+                                 <lb xml:id="tg9.2.10"/>
+                                 <stage rend="zenoPC" xml:id="tg9.2.11">
+                                    <hi rend="italic" xml:id="tg9.2.11.1">Girgl und der Förster lachen. Man hört draußen einen Juchzer durch das Pfeifen des Windes.</hi>
+                                 </stage>
+                                 <lb xml:id="tg9.2.12"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.13.part1">LISEI</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg9.2.13.1.part1">aufspringend.</hi>
+                                 </stage>
+                                 <l xml:id="tg9.2.13.part2"> Der Sepp kimmt!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.14.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg9.2.14.part2"> No, was brauchts denn da aufspringa?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.15.part1">LISEI</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg9.2.15.1.part1">setzt sich wieder.</hi>
+                                 </stage>
+                                 <l xml:id="tg9.2.15.part2"> I hon ihms Bankei hertragn wolln.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg9.2.16.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg9.2.16.part2"> Dees werd er scho selber kinna.</l>
+                                 <lb xml:id="tg9.2.17"/>
+                              </sp>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" type="scene" xml:id="tg10"
+                       n="/Literatur/M/Kobell, Franz von/Drama/Der Roaga/5. Szene">
+                        <div>
+                           <desc>
+                              <title>5. Szene</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg10.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg10.2.1">5. Szene</head>
+
+                              
+                              
+                              <stage rend="zenoPC" xml:id="tg10.2.4">
+                                 <hi rend="italic" xml:id="tg10.2.4.1">Die Vorigen. Sepp kommt mit einem vollen Rucksack herein.</hi>
+                              </stage>
+                              <lb xml:id="tg10.2.5"/>
+                              <sp>
+                                 <speaker xml:id="tg10.2.6.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.6.1.part1">den Rucksack an der Tür ablegend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.6.part2"> Grüß Gott beinand!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.7.part1">LISEI.</speaker>
+                                 <l xml:id="tg10.2.7.part2"> Grüß Gott!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.8.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.8.part2"> Grüß Gott, bringst ebbes hoam?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.9.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.9.1.part1">sich die Stirne wischend und an den Tisch tretend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.9.part2"> Mei ja, dees is heunt a Flutscherei gwest aufanand. Fünf Aantn hon i und an Roager aa no.</l>
+                                 <lb xml:id="tg10.2.10"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.11">
+                                    <hi rend="italic" xml:id="tg10.2.11.1">Lisei erschrocken zum Himmel sehend.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.12"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.13.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.13.part2"> Ah! dees laß i mir gfalln und hat ebba gar der Roager an goldern Ring am Staandl?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.14.part1">SEPP.</speaker>
+                                 <p xml:id="tg10.2.14.part2"> Ja, goldern Ring! selli Roaga waarn wohl grecht, <hi rend="italic" xml:id="tg10.2.14.1.part2">der</hi> werd nit viel Gold habn, denk i, ho 'n weiter nit ogschaugt. <hi rend="italic" xml:id="tg10.2.14.2.part2">Lebhaft.</hi> Aber wißts, daß i 'n Hund schier verlorn hätt mit dem Vogel!</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.15.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.15.part2"> Was? den bravn Hektor? waar nit aus!<hi rend="italic" xml:id="tg10.2.15.1.part2"> Lisei steht auf und nähert sich zögernd dem Rucksack.</hi>
+                                 </l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.16.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.16.1.part1">lebhaft.</hi>
+                                 </stage>
+                                 <p xml:id="tg10.2.16.part2"> Sags aa, aber 's hätt nit weit gfeit. Schaugts es is a so ganga. I ho meini Aantn gschoßn ghabt und dunkei gnua is's scho gwest, na denk i, jetz gehst. Und <pb n="154" xml:id="tg10.2.16.2.part2"/>
+wier i von Scherbn weg bi an etli Schritt, sich i den Roager über mein Kopf streicha. Dees hon i no gsegn, daßs a großer Vogl is und bsinn mi nit lang und schieß auffi. Richti fallt er aba und wies no sei will, nett ins Wasser bei die Felberstauden, wos Gröhret so dick is, wo der ober Bach einarinnt.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.17.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.17.1.part1">unterbrechend.</hi>
+                                 </stage>
+                                 <p xml:id="tg10.2.17.part2"> Was hast denn mit dein obern Bach, der rinnt ja nit eini bei die Felberstaudn, dees is ja 's Moosbachl.</p>
+                                 <lb xml:id="tg10.2.18"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.19">
+                                    <hi rend="italic" xml:id="tg10.2.19.1">Während dem schleicht Lisei an den Rucksack, zieht den Reiher heraus, erkennt den Ring und ringt die Hände, legt den Reiher heimlich neben den Sack.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.20"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.21.part1">SEPP.</speaker>
+                                 <p xml:id="tg10.2.21.part2"> Nix, Herr Forstner, da seids irri <hi rend="italic" xml:id="tg10.2.21.1.part2">Nimmt Messer und Gabel.</hi> da schaugts her, der Girgl muaß sagn, daßs a so is. Sechts dees san die Brunngraabn<hi rend="italic" xml:id="tg10.2.21.2.part2"> Zeigt auf den Tisch mit der Gabel die Richtung. Förster und Girgel »Ja, ja«.</hi> Jetz dees is der oberi Bach, der vo der Mühl herkimmt <hi rend="italic" xml:id="tg10.2.21.3.part2">Lisei nach den Jägern sehend: »Wan i'n no weiter bringa kunnt, daß s'es nit mirka«.</hi> gelts a so? <hi rend="italic" xml:id="tg10.2.21.4.part2">Die andern: »Richti«.</hi> und <pb n="155" xml:id="tg10.2.21.5.part2"/>
+dees is's Moosbachl, dees geht da rei, na wissts es ja, da san die Felberstaudn unds Gröhret, und geht na 's Moosbachl 'n See zua, aber der ober Bach der geht schnurgrad da eina, ja nit, schaugts no selm.</p>
+                                 <lb xml:id="tg10.2.22"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.23">
+                                    <hi rend="italic" xml:id="tg10.2.23.1">Der Förster und Girgl richten an dem Plan »ja, ja, recht hat er usw.« Indessen nimmt Lisei den Reiher unter die Schürze und macht sachte, auf die Jäger schauend, das Fenster auf, wirft ihn rasch hinaus, macht zu und tritt freudig zitternd in den Vordergrund; halblaut.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.24"/>
+                                 <l xml:id="tg10.2.25">Gottlob! heunt suacha s' 'n nimmer in dem Schnee und bis morgn vergrab i 'n scho.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.26.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.26.part2"> Ja recht hat er, i bi an an andern Platz gwesn.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.27.part1">SEPP.</speaker>
+                                 <p xml:id="tg10.2.27.part2"> No also, da fallt der Roager eini und i schickn Hektor nei drum. I hör da an Umanandpatschn und Rumarbetn aber es kimmt halt koa Hund. I schrei und pfeif, <hi rend="italic" xml:id="tg10.2.27.1.part2">nix!</hi> Was is's gwesn, bricht der Hund znachst am Ufer in Eis durch und kon ihm nimmer rausarbetn. Grad hon i's no dersegn und bi am Bauch zuawagrutscht und hon 'n rausgrissn. Abern Roaga hat er oanaweg nit auslassn.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.28.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.28.part2"> No, na is's no guat ganga.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.29.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.29.1.part1">zu Lisei, die sich dem Tisch wieder genähert hat.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.29.part2"> Ja Lisei, heunt hast amal 'n Daama brav ghaltn!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.30.part1">LISEI.</speaker>
+                                 <l xml:id="tg10.2.30.part2"> Solls scho moana, ho viel an Enk denkt.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.31.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.31.1.part1">fröhlich.</hi>
+                                 </stage>
+                                 <p xml:id="tg10.2.31.part2"> Ja all Täg sollts halt a so sei. Na waars a Lebn. Geht nix über d' Jaagerei <hi rend="italic" xml:id="tg10.2.31.2.part2">Singend.</hi> »Stehn i aufn Astand in stiller Abndruah«, hoaßtn Burgdorfer sei Liedl.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.32.part1">LISEI.</speaker>
+                                 <l xml:id="tg10.2.32.part2"> Geh sings, hast es scho lang nimmer gsunga.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.33.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.33.part2"> Ja sings, dees is a schös Gsangl, da brumm i aa mit.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.34.part1">GIRGL.</speaker>
+                                 <l xml:id="tg10.2.34.part2"> Und i muaß no den Korb min neua Fischzeug einatoa, sunst schneibts ma'n zua.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.35.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.35.part2"> Ja, hon i gmoant, du hastn scho rei.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.36.part1">GIRGL</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.36.1.part1">abgehend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.36.part2"> Ko nit alls aufamal tragn.</l>
+                                 <lb xml:id="tg10.2.37"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.38">
+                                    <hi rend="italic" xml:id="tg10.2.38.1">
+                                       <pb n="156" xml:id="tg10.2.38.1.1"/>
+Arie des Sepp.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.39"/>
+                                 <lg>
+                                    <l xml:id="tg10.2.40">Stehn i aufn Astand</l>
+                                    <l xml:id="tg10.2.41">In stiller Abndruah</l>
+                                    <l xml:id="tg10.2.42">Und hör i's brecha staad in Holz,</l>
+                                    <l xml:id="tg10.2.43">Wie gern luus i da zua,</l>
+                                    <l xml:id="tg10.2.44">Wie bin i gern dabei,</l>
+                                 </lg>
+                                 <lb xml:id="tg10.2.45"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.46">
+                                    <hi rend="italic" xml:id="tg10.2.46.1">Im Chor repetiert.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.47"/>
+                                 <lg>
+                                    <l xml:id="tg10.2.48">Wie lob i mir die drei:</l>
+                                    <l xml:id="tg10.2.49">Wald, Wild und Jaagerei!</l>
+                                 </lg>
+                                 <lb xml:id="tg10.2.50"/>
+                                 <lg>
+                                    <l xml:id="tg10.2.51">Ziegt von Feld am Morgn</l>
+                                    <l xml:id="tg10.2.52">Der Hirsch mi'n Wildprat ei</l>
+                                    <l xml:id="tg10.2.53">Unds funklt in die Tanna drobn</l>
+                                    <l xml:id="tg10.2.54">Vom erstn Sunnaschei,</l>
+                                    <l xml:id="tg10.2.55">Wie bin i gern dabei,</l>
+                                    <l xml:id="tg10.2.56">Wie lob i mir die drei:</l>
+                                    <l xml:id="tg10.2.57">Wald, Wild und Jaagerei!</l>
+                                 </lg>
+                                 <lb xml:id="tg10.2.58"/>
+                                 <lg>
+                                    <l xml:id="tg10.2.59">Und jagn d' Hund wie Glöckerln,</l>
+                                    <l xml:id="tg10.2.60">Daßs hallt in Berg und Tal,</l>
+                                    <l xml:id="tg10.2.61">Da freut mi's Leben, waars wie d'er will,</l>
+                                    <l xml:id="tg10.2.62">Es freut mi allemal.</l>
+                                    <l xml:id="tg10.2.63">Wie bin i gern dabei,</l>
+                                    <l xml:id="tg10.2.64">Wie lob i mir die drei:</l>
+                                    <l xml:id="tg10.2.65">Wald, Wild und Jagerei!</l>
+                                 </lg>
+                                 <lb xml:id="tg10.2.66"/>
+
+                                 <stage rend="zenoPC" xml:id="tg10.2.67">
+                                    <hi rend="italic" xml:id="tg10.2.67.1">Während der letzten Strophe hat sich der Förster dem Sack genähert und die Enten ausgepackt.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.68"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.69.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.69.1.part1">den leeren Sack schüttelnd.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.69.part2"> Ja wo is denn der Roaga, i sich koan?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.70.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.70.1.part1">hingehend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.70.part2"> Muaß ja drinn sei!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.71.part1">FÖRSTER.</speaker>
+                                 <l xml:id="tg10.2.71.part2"> Na, nix is da, hastn ebba verlorn?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.72.part1">SEPP.</speaker>
+                                 <l xml:id="tg10.2.72.part2"> Na, na, hon i 'n Schnabi no rausschaugn segn, wier i 'n Sack rato ho.</l>
+                                 <pb n="157" xml:id="tg10.2.73"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.74.part1">LISEI.</speaker>
+                                 <l xml:id="tg10.2.74.part2"> Daßn ebba gar der Hektor fürt hat, i ho vorhin gmoant, i hättn herinn gsegn.</l>
+                                 <lb xml:id="tg10.2.75"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.76">
+                                    <hi rend="italic" xml:id="tg10.2.76.1">Während der letzten Rede von Sepp und Lisei trägt Girgl einen flachen Korb herein und auf das Schlagwort des Lisei ruft er, den Reiher im Korb sehend.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.77"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.78.part1">GIRGL.</speaker>
+                                 <l xml:id="tg10.2.78.part2"> Is scho richti, da is er ja der Roaga! Drum is der Hektor draußt a so um den Korb rumgschwaanzlt.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.79.part1">LISEI</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.79.1.part1">die Hände ringend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.79.part2"> Na, dees is nit zun aushaltn!</l>
+                                 <lb xml:id="tg10.2.80"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.81">
+                                    <hi rend="italic" xml:id="tg10.2.81.1">Setzt sich und hält ihr Sacktuch vors Gesicht.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.82"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.83.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.83.1.part1">sich dem Korb nähernd.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.83.part2"> Ja, wie hat ern jetz da außi?</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.84.part1">GIRGL.</speaker>
+                                 <p xml:id="tg10.2.84.part2"> Woaßs nit, i hon 'n halt untern Fenster rumschwaanzln segn und da is mei Korb gstandn, aber was a so a Tier an Verstand hat, legt den Vogl schö mittn eini auf dees Fischzeug!</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.85.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.85.1.part1">den Reiher aufhebend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.85.part2"> Ja was is dees, da schaugts den <hi rend="italic" xml:id="tg10.2.85.2.part2">Ring!</hi>
+                                 </l>
+                                 <lb xml:id="tg10.2.86"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.87">
+                                    <hi rend="italic" xml:id="tg10.2.87.1">Gesang, kanonartig.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.88"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.89.part1">FÖRSTER UND GIRGL.</speaker>
+                                 
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.90">A goldner Ring, a goldner Ring,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.91">Schau der Roaga mitn Ring,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.92">Wann ers lest, da werd er schaugn,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.93">No, der Roaga werd ihm taugn.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.94">LISEI.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.95">Der goldni Ring, der goldni Ring,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.96">Macht mi krank dees golder Ding,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.97">Wann ers lest, da werd er schaugn,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.98">Mir werd schwindli vor die Augn.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.99.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.99.1.part1">dazwischen.</hi>
+                                 </stage>
+
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.100">Ja, es täats ja schier derschrecka,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.101">Sagts was is's, sagts was is's</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.102">Was muaß da dahinterstecka,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.103">Sagts was is's, sagts was si's!</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.104.part1">SEPP.</speaker>
+                                 <l xml:id="tg10.2.104.part2"> Was is's denn in Gottsnam, was is denn, Lisei?!</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.105.part1">GIRGL</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.105.1.part1">ihm die Zeitung gebend und auf den Artikel deutend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.105.part2"> 
+                                    <pb n="158" xml:id="tg10.2.105.2.part2"/>
+Da lesn S'Exllenz, Herr Grafnschwiegersuh, und <hi rend="italic" xml:id="tg10.2.105.3.part2">Halblaut.</hi> lassn Se 's Lisei mir.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.106.part1">FÖRSTER</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.106.1.part1">nach Lisei sehend.</hi>
+                                 </stage>
+                                 <l xml:id="tg10.2.106.part2"> Ko mi zürna dees Diendl und dengerscht dauerts mi, will mir aber nix mirka lassn.</l>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.107.part1">SEPP</speaker> 
+                                 <stage>
+                                    <hi rend="italic" xml:id="tg10.2.107.1.part1">hat unterdessen mit großer Verwunderung gelesen.</hi>
+                                 </stage>
+                                 <p xml:id="tg10.2.107.part2"> Ah so! <hi rend="italic" xml:id="tg10.2.107.2.part2">Geht zu Lisei und sagt mit sanftem Vorwurf.</hi> Ja <hi rend="italic" xml:id="tg10.2.107.3.part2">Lisei!</hi> moast ebba <hi rend="italic" xml:id="tg10.2.107.4.part2">gar,</hi> i möcht a preußischer Liebhaber wern und mein boarischn Schatz verlassn?! Na, Lisei, du bist eh die mei gwest, hast es aa nit sagn wolln und du bleibst die mei und i brauch die Roagagräfin nit. <hi rend="italic" xml:id="tg10.2.107.5.part2">Lisei fällt ihm um den Hals.</hi>
+                                 </p>
+                                 <pb n="159" xml:id="tg10.2.108"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.109.part1">FÖRSTER.</speaker>
+                                 <p xml:id="tg10.2.109.part2"> Brav, Sepp, du bist halt do der recht Mo, sollst es habn 's Lisei und i will nix mehr sagn, als daßs mi freut.</p>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.110.part1">GIRGL.</speaker>
+                                 <l xml:id="tg10.2.110.part2"> Und i sag aa nix mehr und nimm d' Roagagräfin <hi rend="italic" xml:id="tg10.2.110.1.part2">Dabei nimmt er den Reiher unter den Arm.</hi>
+                                 </l>
+                                 <lb xml:id="tg10.2.111"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.112">
+                                    <hi rend="italic" xml:id="tg10.2.112.1">Schluß-Arie.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.113"/>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.114">LISEI.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.115">Mei Sepp, du bist scho so viel guat</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.116">Und brav wie koana mehr,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.117">Meinoad gern gib i tausedmal</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.118">Für di mei Lebn her,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.119">Und hätt i grad no d' Roager all,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.120">Ja all verwünschn mögn,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.121">Jetz solls mi freua, tuar i wo</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.122">Den liebn Vogel segn.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.123">ALLE.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.124">Ja d' Lieb, die is scho gschpaßi,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.125">Die hat wohl an Verstand,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.126">Ko alles richtn kluag und fei,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.127">Bringt alles füranand.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.128">SEPP.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.129">Mei Lisei, i hos gsunga wohl,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.130">Daß i a Wilder bi,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.131">Jetz sichst es, daß i wild sei ko,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.132">Und dengerscht nach dein Si.</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.133">Und werst es segn, mir hausn aa</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.134">Gar raar und prächti zamm,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.135">Trotz alli die a Grafaschloß</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.136">Und Grafatitl hamm.</l>
+                                 </lg>
+                              </sp>
+                              <sp>
+                                 <speaker xml:id="tg10.2.137">ALLE.</speaker>
+                                 <lg>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.138">Ja d' Lieb, die is scho gschpaßi,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.139">Die hat wohl an Verstand,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.140">Ko alles richtn kluag und fei,</l>
+                                    <l rend="zenoPLm4n4" xml:id="tg10.2.141">Bringt alles füranand.</l>
+                                 </lg>
+                                 <lb xml:id="tg10.2.142"/>
+                                 <stage rend="zenoPC" xml:id="tg10.2.143">
+                                    <hi rend="italic" xml:id="tg10.2.143.1">Der Vorhang fällt.</hi>
+                                 </stage>
+                                 <lb xml:id="tg10.2.144"/>
+                                 <pb n="160" xml:id="tg10.2.145"/>
+                              </sp>
+                           </div>
+                        </div>
+                     </div>
+                  </body>
+            </text>
+         </TEI>
+               </teiCorpus>
+            </teiCorpus>
+         
+      
+   
+      
+   
+</teiCorpus>
