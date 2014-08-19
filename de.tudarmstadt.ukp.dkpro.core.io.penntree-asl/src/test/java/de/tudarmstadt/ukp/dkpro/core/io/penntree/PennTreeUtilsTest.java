@@ -34,6 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import static de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils.*;
 
 /**
  * @author Richard Eckart de Castilho
@@ -51,12 +52,67 @@ public class PennTreeUtilsTest
 				"(ADJP (JJ culturalist) (CC and) (JJ contextualizing)) " +
 				"(NNS approaches)))))))))))) (. .)))");
 	}
-
+	
+	@Test
+	public void testPrettySerialize()
+	{
+	    String tree = "(ROOT\n" + 
+	            "  (S\n" + 
+	            "    (S\n" + 
+	            "      (NP\n" + 
+	            "        (NP (DT The) (JJS strongest) (NN rain))\n" + 
+	            "        (VP\n" + 
+	            "          (ADVP (RB ever))\n" + 
+	            "          (VBN recorded)\n" + 
+	            "          (PP (IN in)\n" + 
+	            "            (NP (NNP India)))))\n" + 
+	            "      (VP\n" + 
+	            "        (VP (VBD shut)\n" + 
+	            "          (PRT (RP down))\n" + 
+	            "          (NP\n" + 
+	            "            (NP (DT the) (JJ financial) (NN hub))\n" + 
+	            "            (PP (IN of)\n" + 
+	            "              (NP (NNP Mumbai)))))\n" + 
+	            "        (, ,)\n" + 
+	            "        (VP (VBD snapped)\n" + 
+	            "          (NP (NN communication) (NNS lines)))\n" + 
+	            "        (, ,)\n" + 
+	            "        (VP (VBD closed)\n" + 
+	            "          (NP (NNS airports)))\n" + 
+	            "        (CC and)\n" + 
+	            "        (VP (VBD forced)\n" + 
+	            "          (NP\n" + 
+	            "            (NP (NNS thousands))\n" + 
+	            "            (PP (IN of)\n" + 
+	            "              (NP (NNS people))))\n" + 
+	            "          (S\n" + 
+	            "            (VP (TO to)\n" + 
+	            "              (VP\n" + 
+	            "                (VP (VB sleep)\n" + 
+	            "                  (PP (IN in)\n" + 
+	            "                    (NP (PRP$ their) (NNS offices))))\n" + 
+	            "                (CC or)\n" + 
+	            "                (VP (VB walk)\n" + 
+	            "                  (NP (NN home))\n" + 
+	            "                  (PP (IN during)\n" + 
+	            "                    (NP (DT the) (NN night))))))))))\n" + 
+	            "    (, ,)\n" + 
+	            "    (NP (NNS officials))\n" + 
+	            "    (VP (VBD said)\n" + 
+	            "      (NP-TMP (NN today)))\n" + 
+	            "    (. .)))";
+	    
+	    PennTreeNode n = parsePennTree(tree);
+	    String actual = toPrettyPennTree(n);
+	    
+        assertEquals(tree, actual);
+	}
+	
 	private static void doTest(String aBracket)
 	{
 		String expected = aBracket;
 
-		PennTreeNode n = PennTreeUtils.parsePennTree(expected);
+		PennTreeNode n = parsePennTree(expected);
 
 		String actual = n.toString();
 
@@ -66,25 +122,25 @@ public class PennTreeUtilsTest
 	@Test
 	public void testSelectDfs()
 	{
-		PennTreeNode n = PennTreeUtils.parsePennTree(
+		PennTreeNode n = parsePennTree(
 				"(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN for) (NP (NP (DT this) (NN reason)) " +
 				"(SBAR (IN that) (S (NP (NN deconstruction)) (VP (VP (VBZ remains) (NP (NP " +
 				"(DT a) (JJ fundamental) (NN threat)) (PP (TO to) (NP (NNP Marxism))))) (, ,) " +
 				"(CC and) (VP (PP (IN by) (NP (NP (NN implication)) (PP (TO to) (NP (JJ other) " +
 				"(ADJP (JJ culturalist) (CC and) (JJ contextualizing)) " +
 				"(NNS approaches)))))))))))) (. .)))");
-		System.out.println(PennTreeUtils.selectDfs(n, 1));
-		System.out.println(PennTreeUtils.selectDfs(n, 2));
-		System.out.println(PennTreeUtils.selectDfs(n, 3));
-		System.out.println(PennTreeUtils.selectDfs(n, 4));
-		System.out.println(PennTreeUtils.selectDfs(n, 5));
-		System.out.println(PennTreeUtils.selectDfs(n, 6));
-		System.out.println(PennTreeUtils.selectDfs(n, 7));
-		System.out.println(PennTreeUtils.selectDfs(n, 8));
-		System.out.println(PennTreeUtils.selectDfs(n, 9));
-		System.out.println(PennTreeUtils.selectDfs(n, 10));
-		System.out.println(PennTreeUtils.selectDfs(n, 11));
-		System.out.println(PennTreeUtils.selectDfs(n, 12));
+		System.out.println(selectDfs(n, 1));
+		System.out.println(selectDfs(n, 2));
+		System.out.println(selectDfs(n, 3));
+		System.out.println(selectDfs(n, 4));
+		System.out.println(selectDfs(n, 5));
+		System.out.println(selectDfs(n, 6));
+		System.out.println(selectDfs(n, 7));
+		System.out.println(selectDfs(n, 8));
+		System.out.println(selectDfs(n, 9));
+		System.out.println(selectDfs(n, 10));
+		System.out.println(selectDfs(n, 11));
+		System.out.println(selectDfs(n, 12));
 	}
 
     @Test
@@ -106,10 +162,10 @@ public class PennTreeUtilsTest
         JCas jcas = runTest("en", "chunking", documentEnglish);
 
         ROOT root = selectSingle(jcas, ROOT.class);
-        PennTreeNode r = PennTreeUtils.convertPennTree(root);
+        PennTreeNode r = convertPennTree(root);
 
-        assertEquals(documentEnglish.trim(), PennTreeUtils.toText(r).trim());
-        AssertAnnotations.assertPennTree(pennTree, PennTreeUtils.toPennTree(r));
+        assertEquals(documentEnglish.trim(), toText(r).trim());
+        AssertAnnotations.assertPennTree(pennTree, toPennTree(r));
     }
 
 
@@ -147,5 +203,4 @@ public class PennTreeUtilsTest
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
-
 }

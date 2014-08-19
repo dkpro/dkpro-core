@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.fit.util.FSCollectionFactory;
@@ -185,27 +186,55 @@ public class PennTreeUtils
     public static String toPennTree(PennTreeNode aNode)
     {
         StringBuilder sb = new StringBuilder();
-        toPennTree(sb, aNode);
+        toPennTree(sb, aNode, -1);
+        return sb.toString().trim();
+    }
+    
+    public static String toPrettyPennTree(PennTreeNode aNode)
+    {
+        StringBuilder sb = new StringBuilder();
+        toPennTree(sb, aNode, 0);
         return sb.toString().trim();
     }
 
-    private static void toPennTree(StringBuilder aSb, PennTreeNode aNode)
+    private static void toPennTree(StringBuilder aSb, PennTreeNode aNode, int aLevel)
     {
-        if (!aNode.isTerminal()) {
+        boolean indentationEnabled = aLevel >= 0;
+        
+        // This is a "(Label Token)"
+        if (aNode.isPreTerminal()) {
             aSb.append('(');
-        }
-
-        aSb.append(aNode.getLabel());
-
-        if (!aNode.isTerminal()) {
+            aSb.append(aNode.getLabel());
             aSb.append(' ');
+            aSb.append(aNode.getChildren().get(0).getLabel());
+            aSb.append(')');
+        }
+        else {
+            if (indentationEnabled) {
+                aSb.append(StringUtils.repeat(" ", aLevel * 2));
+            }
+
+            aSb.append('(');
+            aSb.append(aNode.getLabel());
+            
+            PennTreeNode prevChild = null;
             Iterator<PennTreeNode> i = aNode.getChildren().iterator();
             while (i.hasNext()) {
-                toPennTree(aSb, i.next());
-                if (i.hasNext()) {
+                PennTreeNode child = i.next();
+                if (!child.isPreTerminal()) {
+                    aSb.append('\n');
+                }
+                else if ((prevChild != null && !prevChild.isPreTerminal())) {
+                    aSb.append('\n');
+                    aSb.append(StringUtils.repeat(" ", (aLevel+1) * 2));
+                }
+                else {
                     aSb.append(' ');
                 }
+                toPennTree(aSb, child, aLevel + 1);
+                prevChild = child;
             }
+            
             aSb.append(')');
         }
     }
