@@ -1,0 +1,19 @@
+Lemmatizer rules
+----------------
+
+Come from the GATE Developer 7.1 distribution.
+The University of Sheffield, Department of Computer Science
+Licensed under the GNU Public License v3.
+
+morph-en-default.rul
+
+
+POS Taggerr rules
+-----------------
+
+Come from the GATE Developer 7.1 distribution.
+The University of Sheffield, Department of Computer Science
+Licensed under the GNU Public License v3.
+
+tagger-en-default.lex
+tagger-en-default.rul
