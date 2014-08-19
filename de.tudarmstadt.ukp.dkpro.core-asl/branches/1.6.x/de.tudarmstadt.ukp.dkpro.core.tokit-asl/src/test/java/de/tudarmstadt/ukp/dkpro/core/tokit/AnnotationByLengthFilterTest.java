@@ -44,7 +44,7 @@ public class AnnotationByLengthFilterTest
     {
         AnalysisEngine filter = createEngine(
                 AnnotationByLengthFilter.class,
-                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, new String[] {Token.class.getName()},
+                AnnotationByLengthFilter.PARAM_FILTER_ANNOTATION_TYPES, Token.class,
                 AnnotationByLengthFilter.PARAM_MIN_LENGTH, 5);
 
         JCas jcas = filter.newJCas();

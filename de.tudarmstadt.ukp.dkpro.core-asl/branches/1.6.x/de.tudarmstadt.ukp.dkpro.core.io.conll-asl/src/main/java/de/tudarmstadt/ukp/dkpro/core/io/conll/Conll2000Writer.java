@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2012
+ * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -28,45 +28,54 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.io.IobEncoder;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
 
 /**
- * Writes a specific Conll File (9 TAB separated) annotation from the CAS object. Example of output
- * file:
+ * Writes the CoNLL 2000 chunking format. The columns are separated by spaces. 
  * 
  * <pre>
- * Heutzutage heutzutage ADV _ _ ADV _ _
+ * He        PRP  B-NP
+ * reckons   VBZ  B-VP
+ * the       DT   B-NP
+ * current   JJ   I-NP
+ * account   NN   I-NP
+ * deficit   NN   I-NP
+ * will      MD   B-VP
+ * narrow    VB   I-VP
+ * to        TO   B-PP
+ * only      RB   B-NP
+ * #         #    I-NP
+ * 1.8       CD   I-NP
+ * billion   CD   I-NP
+ * in        IN   B-PP
+ * September NNP  B-NP
+ * .         .    O
  * </pre>
+ * 
  * <ol>
- * <li>ID - token number in sentence</li>
  * <li>FORM - token</li>
- * <li>LEMMA - lemma</li>
- * <li>CPOSTAG - part-of-speech tag (coarse grained)</li>
  * <li>POSTAG - part-of-speech tag</li>
- * <li>FEATS - unused</li>
- * <li>HEAD - target token for a dependency parsing</li>
- * <li>DEPREL - function of the dependency parsing</li>
- * <li>PHEAD - unused</li>
- * <li>PDEPREL - unused</li>
+ * <li>CHUNK - chunk (BIO encoded)</li>
  * </ol>
  * 
- * Sentences are separated by a blank new line
+ * Sentences are separated by a blank new line.
  * 
- * @author Seid Muhie Yimam
- * @author Richard Eckart de Castilho
- * 
- * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="http://www.cnts.ua.ac.be/conll2000/chunking/">CoNLL 2000 shared task</a>
  */
-public class Conll2006Writer
+
+public class Conll2000Writer
     extends JCasFileWriter_ImplBase
 {
     private static final String UNUSED = "_";
@@ -86,17 +95,9 @@ public class Conll2006Writer
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
-    public static final String PARAM_WRITE_MORPH = "writeMorph";
-    @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
-    private boolean writeMorph;
-
-    public static final String PARAM_WRITE_LEMMA = ComponentParameters.PARAM_WRITE_LEMMA;
-    @ConfigurationParameter(name = PARAM_WRITE_LEMMA, mandatory = true, defaultValue = "true")
-    private boolean writeLemma;
-
-    public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
-    @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
-    private boolean writeDependency;
+    public static final String PARAM_WRITE_CHUNK = ComponentParameters.PARAM_WRITE_CHUNK;
+    @ConfigurationParameter(name = PARAM_WRITE_CHUNK, mandatory = true, defaultValue = "true")
+    private boolean writeChunk;
 
     @Override
     public void process(JCas aJCas)
@@ -118,73 +119,40 @@ public class Conll2006Writer
 
     private void convert(JCas aJCas, PrintWriter aOut)
     {
+        Type chunkType = JCasUtil.getType(aJCas, Chunk.class);
+        Feature chunkValue = chunkType.getFeatureByBaseName("chunkValue");
+
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
-            // Check if we should try to include the FEATS in output
-            List<Morpheme> morphology = selectCovered(Morpheme.class, sentence);
-            boolean useFeats = tokens.size() == morphology.size();
+            // Chunks
+            IobEncoder encoder = new IobEncoder(aJCas.getCas(), chunkType, chunkValue);
             
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
                 row.id = i+1;
                 row.token = tokens.get(i);
-                if (useFeats) {
-                    row.feats = morphology.get(i);
-                }
+                row.chunk = encoder.encode(tokens.get(i));
                 ctokens.put(row.token, row);
             }
-
-            // Dependencies
-            for (Dependency rel : selectCovered(Dependency.class, sentence)) {
-                ctokens.get(rel.getDependent()).deprel = rel;
-            }
-
+            
             // Write sentence in CONLL 2006 format
             for (Row row : ctokens.values()) {
-                String lemma = UNUSED;
-                if (writeLemma && (row.token.getLemma() != null)) {
-                    lemma = row.token.getLemma().getValue();
-                }
-
                 String pos = UNUSED;
-                String cpos = UNUSED;
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
-                    if (!(posAnno instanceof POS)) {
-                        cpos = posAnno.getClass().getSimpleName();
-                    }
-                    else {
-                        cpos = pos;
-                    }
                 }
                 
-                int head = 0;
-                String deprel = UNUSED;
-                if (writeDependency && (row.deprel != null)) {
-                    deprel = row.deprel.getDependencyType();
-                    head = ctokens.get(row.deprel.getGovernor()).id;
-                    if (head == row.id) {
-                        // ROOT dependencies may be modeled as a loop, ignore these.
-                        head = 0;
-                    }
+                String chunk = UNUSED;
+                if (writeChunk && (row.chunk != null)) {
+                    chunk = encoder.encode(row.token);
                 }
                 
-                String feats = UNUSED;
-                if (writeMorph && (row.feats != null)) {
-                    feats = row.feats.getMorphTag();
-                }
-                
-                String phead = UNUSED;
-                String pdeprel = UNUSED;
-
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n", row.id,
-                        row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
-                        pdeprel);
+                aOut.printf("%s %s %s\n", row.token.getCoveredText(), pos, chunk);
             }
 
             aOut.println();
@@ -195,7 +163,6 @@ public class Conll2006Writer
     {
         int id;
         Token token;
-        Morpheme feats;
-        Dependency deprel;
+        String chunk;
     }
 }

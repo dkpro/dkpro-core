@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.opennlp;
 
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
 import java.io.InputStream;
 
 import opennlp.tools.sentdetect.SentenceDetectorME;
@@ -37,6 +39,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 /**
  * Tokenizer and sentence splitter using OpenNLP.
@@ -96,7 +99,7 @@ public class OpenNlpSegmenter
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-sentence-${language}-${variant}");
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"sentence-${language}-${variant}.bin");
+						"sentence-${language}-${variant}.properties");
 				setDefault(VARIANT, "maxent");
 
 				setOverride(LOCATION, segmentationModelLocation);
@@ -122,7 +125,7 @@ public class OpenNlpSegmenter
 						"de.tudarmstadt.ukp.dkpro.core.opennlp-model-token-${language}-${variant}");
 
 				setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-						"token-${language}-${variant}.bin");
+						"token-${language}-${variant}.properties");
 				setDefault(VARIANT, "maxent");
 
 				setOverride(LOCATION, tokenizationModelLocation);
@@ -145,8 +148,14 @@ public class OpenNlpSegmenter
 		throws AnalysisEngineProcessException
 	{
 		CAS cas = aJCas.getCas();
-		sentenceModelProvider.configure(cas);
-		tokenModelProvider.configure(cas);
+		
+		if (isWriteSentence()) {
+		    sentenceModelProvider.configure(cas);
+		}
+		
+		if (isWriteToken()) {
+		    tokenModelProvider.configure(cas);
+		}
 
 		super.process(aJCas);
 	}
@@ -155,13 +164,21 @@ public class OpenNlpSegmenter
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-		for (Span sSpan : sentenceModelProvider.getResource().sentPosDetect(aText)) {
-			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
-			for (Span tSpan : tokenModelProvider.getResource().tokenizePos(
-					aText.substring(sSpan.getStart(), sSpan.getEnd()))) {
-				createToken(aJCas, tSpan.getStart() + sSpan.getStart() + aZoneBegin, tSpan.getEnd()
-						+ sSpan.getStart() + aZoneBegin);
-			}
-		}
+	    if (isWriteSentence()) {
+    	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
+    		for (Span sSpan : sentences) {
+    			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
+    		}
+	    }
+		
+	    if (isWriteToken()) {
+    		for (Sentence sent : selectCovered(aJCas, Sentence.class, aZoneBegin, aZoneBegin + aText.length())) {
+    	        Span[] tokens = tokenModelProvider.getResource().tokenizePos(sent.getCoveredText());
+    	        for (Span tSpan : tokens) {
+                    createToken(aJCas, tSpan.getStart() + sent.getBegin(),
+                            tSpan.getEnd() + sent.getBegin());
+    	        }
+    		}
+	    }
 	}
 }
