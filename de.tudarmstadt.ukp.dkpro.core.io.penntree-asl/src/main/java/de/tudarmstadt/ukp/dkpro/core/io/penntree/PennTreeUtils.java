@@ -221,17 +221,17 @@ public class PennTreeUtils
             Iterator<PennTreeNode> i = aNode.getChildren().iterator();
             while (i.hasNext()) {
                 PennTreeNode child = i.next();
-                if (!child.isPreTerminal()) {
+                if (indentationEnabled && !child.isPreTerminal()) {
                     aSb.append('\n');
                 }
-                else if ((prevChild != null && !prevChild.isPreTerminal())) {
+                else if (indentationEnabled && prevChild != null && !prevChild.isPreTerminal()) {
                     aSb.append('\n');
                     aSb.append(StringUtils.repeat(" ", (aLevel+1) * 2));
                 }
                 else {
                     aSb.append(' ');
                 }
-                toPennTree(aSb, child, aLevel + 1);
+                toPennTree(aSb, child, indentationEnabled ? aLevel + 1 : -1);
                 prevChild = child;
             }
             
