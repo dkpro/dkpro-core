@@ -178,4 +178,10 @@ public class OpenNlpPosTaggerTest
 	{
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
+    
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
+    }
 }
