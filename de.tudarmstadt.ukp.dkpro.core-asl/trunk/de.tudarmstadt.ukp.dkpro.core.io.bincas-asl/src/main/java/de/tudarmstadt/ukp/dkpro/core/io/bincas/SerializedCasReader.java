@@ -35,6 +35,10 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
+/**
+ * @deprecated use {@code BinaryCasReader} instead.
+ */
+@Deprecated
 public class SerializedCasReader
 	extends ResourceCollectionReaderBase
 {

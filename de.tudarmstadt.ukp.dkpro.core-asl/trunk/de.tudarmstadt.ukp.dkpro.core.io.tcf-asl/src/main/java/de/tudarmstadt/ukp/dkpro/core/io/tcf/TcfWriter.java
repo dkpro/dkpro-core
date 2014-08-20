@@ -34,6 +34,7 @@ import java.util.Map;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -71,6 +72,16 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * @author Seid Muhie Yimam
  * @author Richard Eckart de Castilho
  */
+@TypeCapability(inputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class TcfWriter
     extends JCasFileWriter_ImplBase
 {
