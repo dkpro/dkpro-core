@@ -59,7 +59,7 @@ public class ClearNlpLemmatizer
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
-		
+
 		AbstractComponent analyzer = NLPGetter.getMPAnalyzer(aJCas.getDocumentLanguage());
 
 		// Iterate over all sentences
@@ -81,8 +81,12 @@ public class ClearNlpLemmatizer
 			int i = 0;
 			for (Token t : tokens) {
 				DEPNode node = tree.get(i+1);
+                String lemmaString = node.lemma;
+                if (lemmaString == null) {
+                    lemmaString = t.getCoveredText();
+                }
 				Lemma l = new Lemma(aJCas, t.getBegin(), t.getEnd());
-				l.setValue(node.lemma);
+				l.setValue(lemmaString);
 				l.addToIndexes();
 
 				t.setLemma(l);
