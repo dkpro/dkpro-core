@@ -40,9 +40,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Removes all tokens/lemmas/stems (depending on the "Mode" setting) that do not match the given
- * parts of speech.
- * 
+ * Removes all tokens/lemmas/stems/POS tags (depending on the "Mode" setting) that do not match the
+ * given parts of speech.
+ *
  * @author Torsten Zesch
  * @author Erik-Lân Do Dinh
  */
@@ -54,103 +54,100 @@ public class PosFilter
     /**
      * The fully qualified name of the type that should be filtered.
      */
-    public static final String PARAM_TYPE_TO_REMOVE = "TypeToRemove";
+    public static final String PARAM_TYPE_TO_REMOVE = "typeToRemove";
     @ConfigurationParameter(name = PARAM_TYPE_TO_REMOVE, mandatory = true)
     private String typeToRemove;
 
     /**
      * Keep/remove adjectives (true: keep, false: remove)
      */
-    public static final String PARAM_ADJ = "Adjectives";
+    public static final String PARAM_ADJ = "adj";
     @ConfigurationParameter(name = PARAM_ADJ, mandatory = true, defaultValue = "false")
     private boolean adj;
 
     /**
      * Keep/remove adverbs (true: keep, false: remove)
      */
-    public static final String PARAM_ADV = "Adverbs";
+    public static final String PARAM_ADV = "adv";
     @ConfigurationParameter(name = PARAM_ADV, mandatory = true, defaultValue = "false")
     private boolean adv;
 
     /**
      * Keep/remove articles (true: keep, false: remove)
      */
-    public static final String PARAM_ART = "Articles";
+    public static final String PARAM_ART = "art";
     @ConfigurationParameter(name = PARAM_ART, mandatory = true, defaultValue = "false")
     private boolean art;
 
     /**
      * Keep/remove cardinal numbers (true: keep, false: remove)
      */
-    public static final String PARAM_CARD = "Cardinals";
+    public static final String PARAM_CARD = "card";
     @ConfigurationParameter(name = PARAM_CARD, mandatory = true, defaultValue = "false")
     private boolean card;
 
     /**
      * Keep/remove conjunctions (true: keep, false: remove)
      */
-    public static final String PARAM_CONJ = "Conjunctions";
+    public static final String PARAM_CONJ = "conj";
     @ConfigurationParameter(name = PARAM_CONJ, mandatory = true, defaultValue = "false")
     private boolean conj;
 
     /**
      * Keep/remove nouns (true: keep, false: remove)
      */
-    public static final String PARAM_N = "Nouns";
+    public static final String PARAM_N = "n";
     @ConfigurationParameter(name = PARAM_N, mandatory = true, defaultValue = "false")
     private boolean n;
 
     /**
      * Keep/remove "others" (true: keep, false: remove)
      */
-    public static final String PARAM_O = "Others";
+    public static final String PARAM_O = "o";
     @ConfigurationParameter(name = PARAM_O, mandatory = true, defaultValue = "false")
     private boolean o;
 
     /**
      * Keep/remove prepositions (true: keep, false: remove)
      */
-    public static final String PARAM_PP = "Prepositions";
+    public static final String PARAM_PP = "pp";
     @ConfigurationParameter(name = PARAM_PP, mandatory = true, defaultValue = "false")
     private boolean pp;
 
     /**
      * Keep/remove pronouns (true: keep, false: remove)
      */
-    public static final String PARAM_PR = "Pronouns";
+    public static final String PARAM_PR = "pr";
     @ConfigurationParameter(name = PARAM_PR, mandatory = true, defaultValue = "false")
     private boolean pr;
 
     /**
      * Keep/remove punctuation (true: keep, false: remove)
      */
-    public static final String PARAM_PUNC = "Punctuation";
+    public static final String PARAM_PUNC = "punc";
     @ConfigurationParameter(name = PARAM_PUNC, mandatory = true, defaultValue = "false")
     private boolean punc;
 
     /**
-     * Keep/remove verbs (true: keep, false: remove)
+     * Keep/remove verbs (true: keep, false: v)
      */
     public static final String PARAM_V = "Verbs";
     @ConfigurationParameter(name = PARAM_V, mandatory = true, defaultValue = "false")
     private boolean v;
 
-    private JCas jcas;
-
     @Override
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
     {
-        this.jcas = jcas;
-
         getContext().getLogger().log(Level.CONFIG, "Entering " + this.getClass().getSimpleName());
 
         Type tokenType = jcas.getCas().getTypeSystem().getType(Token.class.getCanonicalName());
         Type stemType = jcas.getCas().getTypeSystem().getType(Stem.class.getCanonicalName());
         Type lemmaType = jcas.getCas().getTypeSystem().getType(Lemma.class.getCanonicalName());
         Type posType = jcas.getCas().getTypeSystem().getType(POS.class.getCanonicalName());
+        Type typeToRemoveType = jcas.getCas().getTypeSystem().getType(typeToRemove);
 
-        if (posType == null) {
+        if (typeToRemoveType == null) {
             throw new AnalysisEngineProcessException(new Throwable(
                     "Could not get type for feature path: " + typeToRemove));
         }
@@ -160,9 +157,15 @@ public class PosFilter
             for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(jcas.getCas(),
                     typeToRemove)) {
                 AnnotationFS annotation = entry.getKey();
-                AnnotationFS pos = getPos(posType, annotation);
-                if (pos == null) {
-                    continue;
+                AnnotationFS pos;
+                if (typeToRemoveType.equals(posType)) {
+                    pos = annotation;
+                }
+                else {
+                    pos = getAnnotation(posType, annotation);
+                    if (pos == null) {
+                        continue;
+                    }
                 }
 
                 String posString = pos.getType().getShortName();
@@ -256,22 +259,22 @@ public class PosFilter
     }
 
     /**
-     * Returns the POS annotation aligned with another annotation
-     * 
+     * Returns the (one) annotation of a given type that is aligned with another annotation.
+     *
      * @param annotation
      *            An annotation.
-     * @return The POS annotation aligned with another annotation.
+     * @return The annotation aligned with another annotation.
      */
-    private AnnotationFS getPos(Type type, AnnotationFS annotation)
+    private AnnotationFS getAnnotation(Type type, AnnotationFS annotation)
     {
-        List<AnnotationFS> posAnnotations = CasUtil.selectCovered(jcas.getCas(), type, annotation);
-        if (posAnnotations.size() != 1) {
+        List<AnnotationFS> annotations = CasUtil.selectCovered(annotation.getCAS(), type, annotation);
+        if (annotations.size() != 1) {
             getLogger().warn(
-                    "Could not find matching POS annotation for annotation: "
+                    "Could not find matching annotation of type " + type + " for annotation: "
                             + annotation.getCoveredText());
             return null;
         }
 
-        return posAnnotations.get(0);
+        return annotations.get(0);
     }
 }
