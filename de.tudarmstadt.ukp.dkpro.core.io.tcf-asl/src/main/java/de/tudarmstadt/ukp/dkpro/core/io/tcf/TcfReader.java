@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.apache.uima.collection.CollectionException;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.Level;
 
@@ -60,6 +61,16 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
  * @author Richard Eckart de Castilho
  * @author Seid Muhie Yimam
  */
+@TypeCapability(outputs = { 
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain",
+        "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink",
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
 public class TcfReader
     extends JCasResourceCollectionReader_ImplBase
 {
