@@ -1,0 +1,797 @@
+<!--
+	Copyright 2010
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>dkpro-parent-pom</artifactId>
+		<version>9</version>
+	</parent>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+	<version>1.6.2</version>
+	<packaging>pom</packaging>
+	<name>DKPro Core ASL</name>
+	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
+	<url>https://code.google.com/p/dkpro-core-asl/</url>
+	<organization>
+		<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
+	</organization>
+  <licenses>
+    <license>
+      <name>Apache License Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
+  <repositories>
+		<repository>
+			<id>ukp-oss-model-releases</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<!-- For UIMA/uimaFIT SNAPSHOT 
+		-->
+<!-- 		<repository> -->
+<!-- 			<id>apache.snapshots</id> -->
+<!-- 			<name>Apache Snapshot Repository</name> -->
+<!-- 			<url>http://repository.apache.org/snapshots</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 		</repository> -->
+	</repositories>
+	<!-- For UIMA/uimaFIT SNAPSHOT 
+	-->
+<!-- 	<pluginRepositories> -->
+<!-- 		<pluginRepository> -->
+<!-- 			<id>apache.snapshots</id> -->
+<!-- 			<name>Apache Snapshot Repository</name> -->
+<!-- 			<url>http://repository.apache.org/snapshots</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 		</pluginRepository> -->
+<!-- 	</pluginRepositories> -->
+	
+	<issueManagement>
+		<system>Google Code</system>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.6.2</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.6.2</developerConnection>
+		<url>https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.6.2</url>
+	</scm>
+	<properties>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<uima.version>2.6.0</uima.version>
+		<uimafit.version>2.1.0</uimafit.version>
+		<lucene.version>3.0.3</lucene.version>
+		<spring.version>3.1.2.RELEASE</spring.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.corpus-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.coref-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.examples-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.html-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.langdect-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.morpha-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.norvig-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.performance-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.posfilter-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.snowball-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.textcat-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</artifactId>
+				<version>1.6.2</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimaj-core</artifactId>
+				<version>${uima.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimaj-document-annotation</artifactId>
+				<version>${uima.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimafit-core</artifactId>
+				<version>${uimafit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ibm.icu</groupId>
+				<artifactId>icu4j</artifactId>
+				<version>4.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging-api</artifactId>
+				<version>1.1</version>
+			</dependency>
+		  	<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-math</artifactId>
+				<version>2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>3.2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>1.6</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-compress</artifactId>
+				<version>1.4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>1.8.1</version>
+			</dependency>
+			<dependency>
+				<groupId>jaxen</groupId>
+				<artifactId>jaxen</artifactId>
+				<version>1.1.1</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>dom4j</artifactId>
+						<groupId>dom4j</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>xom</artifactId>
+						<groupId>xom</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>jdom</artifactId>
+						<groupId>jdom</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>1.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-snowball</artifactId>
+				<version>${lucene.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.jweb1t</groupId>
+				<artifactId>com.googlecode.jweb1t</artifactId>
+				<version>1.3.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.coref-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.corpus-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.io-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.html-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.text-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.langdect-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.norvig-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.posfilter-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.snowball-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.textcat-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.toolbox-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl</module>
+	</modules>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimafit-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<notimestamp>true</notimestamp>
+					<!-- Exclude UIMA types and internal API -->
+					<excludePackageNames>*.type:*.internal.*</excludePackageNames>
+					<groups>
+						<group>
+							<title>Analysis Components</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core*</packages>
+						</group>
+						<group>
+							<title>APIs</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
+						</group>
+						<group>
+							<title>I/O Components</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
+						</group>
+						<group>
+							<title>Toolbox</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.toolbox*</packages>
+						</group>
+						<group>
+							<title>Testing</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.testing*</packages>
+						</group>
+						<group>
+							<title>Examples</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.examples*</packages>
+						</group>
+					</groups>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.8</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.uima</groupId>
+					<artifactId>uimafit-maven-plugin</artifactId>
+					<version>${uimafit.version}</version>
+					<configuration>
+						<componentVendor>DKPro Core Project</componentVendor>
+						<componentCopyright>
+							Copyright 2010
+							Ubiquitous Knowledge Processing	(UKP) Lab
+							Technische Universität Darmstadt
+						</componentCopyright>
+						<failOnMissingMetaData>false</failOnMissingMetaData>
+					</configuration>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<profiles>
+		<profile>
+			<id>rat-check</id>
+			<activation>
+				<file>
+					<exists>src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.rat</groupId>
+						<artifactId>apache-rat-plugin</artifactId>
+						<version>0.10</version>
+						<executions>
+							<execution>
+								<id>default</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<exclude>.gitignore</exclude>
+										<!-- maven config files -->
+										<exclude>src/filter/**/*</exclude>
+										<!-- release generated artifact -->
+										<exclude>release.properties</exclude>
+										<exclude>CHANGES</exclude>
+										<exclude>NOTICE</exclude>
+										<exclude>README</exclude>
+										<exclude>src/main/resources/**/*</exclude>
+										<exclude>src/test/resources/**/*</exclude>
+										<!-- generated JCas wrappers -->
+										<exclude>src/main/java/**/type/**/*</exclude>
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>cobertura-aggregate</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<inherited>false</inherited>
+						<dependencies>
+							<dependency>
+								<groupId>net.sourceforge.cobertura</groupId>
+								<artifactId>cobertura</artifactId>
+								<version>1.9.4.1</version>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<target>
+								<taskdef classpathref="maven.runtime.classpath" resource="tasks.properties" />
+								<cobertura-merge datafile="${project.build.directory}/cobertura/cobertura.ser">
+									<fileset dir="${project.build.directory}/..">
+										<include name="**/target/cobertura/cobertura.ser" />
+									</fileset>
+								</cobertura-merge>
+								<cobertura-report format="html" encoding="UTF-8" destdir="${project.build.directory}/site/cobertura" datafile="${project.build.directory}/cobertura/cobertura.ser">
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.corpus-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.frequency-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.io-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.metadata-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.ner-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.parameter-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.resources-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.structure-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.syntax-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.transform-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.castransformation-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.examples-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.frequency-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bincas-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bliki-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.html-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.negra-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pdf-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.pentree-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tcf-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tei-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.text-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tiger-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.web1t-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xmi-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xml-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jazzy-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mecab-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ngrams-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.norvig-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.posfilter-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.snowball-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.textcat-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.tokit-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.toolbox-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.treetagger-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.umlautnormalizer-asl/src/main/java" includes="**/*.java" />
+								</cobertura-report>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,26 @@
+1	This	this	DT	DT	_	0	_	_	_
+2	is	be	VBZ	VBZ	_	0	_	_	_
+3	a	a	DT	DT	_	0	_	_	_
+4	not	not	RB	RB	_	0	_	_	_
+5	so	so	RB	RB	_	0	_	_	_
+6	long	long	JJ	JJ	_	0	_	_	_
+7	test	test	NN	NN	_	0	_	_	_
+8	sentence	sentence	NN	NN	_	0	_	_	_
+9	.	.	.	.	_	0	_	_	_
+10	This	this	DT	DT	_	0	_	_	_
+11	is	be	VBZ	VBZ	_	0	_	_	_
+12	a	a	DT	DT	_	0	_	_	_
+13	longer	long	RB	RB	_	0	_	_	_
+14	second	second	JJ	JJ	_	0	_	_	_
+15	test	test	NN	NN	_	0	_	_	_
+16	sentence	sentence	NN	NN	_	0	_	_	_
+17	.	.	.	.	_	0	_	_	_
+18	More	more	JJR	JJR	_	0	_	_	_
+19	sentences	sentence	NNS	NNS	_	0	_	_	_
+20	are	be	VBP	VBP	_	0	_	_	_
+21	necessary	necessary	JJ	JJ	_	0	_	_	_
+22	for	for	IN	IN	_	0	_	_	_
+23	the	the	DT	DT	_	0	_	_	_
+24	tests	test	NNS	NNS	_	0	_	_	_
+25	.	.	.	.	_	0	_	_	_
+

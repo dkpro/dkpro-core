@@ -1,0 +1,98 @@
+# Penn Treebank Tagset
+#
+# Source (PTB 1): http://faculty.washington.edu/dillon/GramResources/penntable.html
+# Source (PTB 2): http://www.clips.ua.ac.be/pages/mbsp-tags
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# punctuation mark, comma
+,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+-=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# punctuation mark, sentence closer
+.=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+;=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+\!=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# punctuation mark, colon
+\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# contextual separator, left paren
+(=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# contextual separator, right paren
+)=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# 1.	CC	Coordinating conjunction
+CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# 2.	CD	Cardinal number
+CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# 3.	DT	Determiner
+DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# 4.	EX	Existential there
+EX=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# 5.	FW	Foreign word
+FW=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# 6.	IN	Preposition or subordinating conjunction
+IN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# 7.	JJ	Adjective
+JJ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# 8.	JJR	Adjective, comparative
+JJR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# 9.	JJS	Adjective, superlative
+JJS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# 10.	LS	List item marker
+LS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# 11.	MD	Modal
+MD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 12.	NN	Noun, singular or mass
+NN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# 13.	NNS	Noun, plural
+NNS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# 14.	NP	Proper noun, singular (PTB 1)
+NP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# 14.	NP	Proper noun, singular (PTB 2)
+NNP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# 15.	NPS	Proper noun, plural (PTB 1)
+NPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# 15.	NPS	Proper noun, plural (PTB 2)
+NNPS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# 16.	PDT	Predeterminer
+PDT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# 17.	POS	Possessive ending
+POS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# 18.	PP	Personal pronoun
+PP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# 19.	PP$	Possessive pronoun
+PP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+PRP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# 20.	RB	Adverb
+RB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# 21.	RBR	Adverb, comparative	
+RBR=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# 22.	RBS	Adverb, superlative
+RBS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# 23.	RP	Particle
+RP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+SENT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# 24.	SYM	Symbol
+SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# 25.	TO	to
+TO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# 26.	UH	Interjection
+UH=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# 27.	VB	Verb, base form
+VB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 28.	VBD	Verb, past tense
+VBD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 29.	VBG	Verb, gerund or present participle
+VBG=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 30.	VBN	Verb, past participle
+VBN=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 31.	VBP	Verb, non-3rd person singular present
+VBP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 32.	VBZ	Verb, 3rd person singular present
+VBZ=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# 33.	WDT	Wh-determiner
+WDT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# 34.	WP	Wh-pronoun
+WP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# 35.	WP$	Possessive wh-pronoun
+WP$=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# 36.	WRB	Wh-adverb
+WRB=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV

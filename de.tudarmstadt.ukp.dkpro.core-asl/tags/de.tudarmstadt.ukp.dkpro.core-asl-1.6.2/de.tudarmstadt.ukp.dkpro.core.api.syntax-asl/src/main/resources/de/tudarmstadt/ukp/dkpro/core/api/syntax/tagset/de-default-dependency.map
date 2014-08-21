@@ -1,0 +1,40 @@
+# Dependency tags extracted from the TüBa D/Z converted to the MALT parser training format using
+# Yannick Verseley's conversion skript.
+#
+# Source: http://www.versley.de/versley_tlt05.pdf
+# Source: r5r6_101024.malt.tab
+# ADV
+# APP
+# ATTR
+# AUX
+# AVZ
+# CJ
+# DET
+# EXPL
+# GMOD
+# gmod-app
+# GRAD
+# KOM
+# KON
+# KONJ
+# koord
+# NEB
+# OBJA
+# OBJC
+# OBJD
+# OBJG
+# OBJI
+# OBJP
+# PAR
+# PART
+# PN
+# PP
+# PRED
+# -PUNCT-
+# REL
+# ROOT
+# S
+# SUBJ
+# SUBJC
+# -UNKNOWN-
+# ZEIT
