@@ -34,6 +34,7 @@ import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASMgrSerializer;
 import org.apache.uima.cas.impl.CASSerializer;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
@@ -106,6 +107,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
  * @see <a href="http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress">Compressed
  *      Binary CASes</a>
  */
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
 public class BinaryCasWriter
     extends JCasFileWriter_ImplBase
 {

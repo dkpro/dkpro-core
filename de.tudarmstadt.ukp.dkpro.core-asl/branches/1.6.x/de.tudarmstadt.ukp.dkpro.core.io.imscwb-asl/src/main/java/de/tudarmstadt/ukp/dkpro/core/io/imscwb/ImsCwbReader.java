@@ -46,14 +46,11 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 
-@TypeCapability(
-        outputs={
-                "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
-                "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"})
-
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ImsCwbReader
     extends ResourceCollectionReaderBase
 {
