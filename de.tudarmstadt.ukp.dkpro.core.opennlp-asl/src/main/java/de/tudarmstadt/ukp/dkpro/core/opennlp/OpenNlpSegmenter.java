@@ -149,11 +149,11 @@ public class OpenNlpSegmenter
 	{
 		CAS cas = aJCas.getCas();
 		
-		if (isWriteSentence()) {
+		if (isCreateSentences()) {
 		    sentenceModelProvider.configure(cas);
 		}
 		
-		if (isWriteToken()) {
+		if (isCreateTokens()) {
 		    tokenModelProvider.configure(cas);
 		}
 
@@ -164,14 +164,14 @@ public class OpenNlpSegmenter
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-	    if (isWriteSentence()) {
+	    if (isCreateSentences()) {
     	    Span[] sentences = sentenceModelProvider.getResource().sentPosDetect(aText);
     		for (Span sSpan : sentences) {
     			createSentence(aJCas, sSpan.getStart() + aZoneBegin, sSpan.getEnd() + aZoneBegin);
     		}
 	    }
 		
-	    if (isWriteToken()) {
+	    if (isCreateTokens()) {
     		for (Sentence sent : selectCovered(aJCas, Sentence.class, aZoneBegin, aZoneBegin + aText.length())) {
     	        Span[] tokens = tokenModelProvider.getResource().tokenizePos(sent.getCoveredText());
     	        for (Span tSpan : tokens) {

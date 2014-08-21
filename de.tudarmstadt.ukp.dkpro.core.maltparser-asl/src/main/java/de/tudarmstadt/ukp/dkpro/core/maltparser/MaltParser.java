@@ -27,10 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
@@ -92,7 +90,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"},
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
@@ -100,8 +97,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 public class MaltParser
 	extends JCasAnnotator_ImplBase
 {
-    private static final String UNUSED = "_";
-    
 	/**
 	 * Use this language instead of the document language to resolve the model.
 	 */
@@ -132,16 +127,6 @@ public class MaltParser
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
 	protected boolean printTagSet;
 
-	/**
-     * Process anyway, even if the model relies on features that are not supported by this
-     * component.
-     * 
-     * Default: {@code false}
-     */
-    public static final String PARAM_IGNORE_MISSING_FEATURES = "ignoreMissingFeatures";
-    @ConfigurationParameter(name = PARAM_IGNORE_MISSING_FEATURES, mandatory = true, defaultValue = "false")
-    protected boolean ignoreMissingFeatures;
-
 	// Not sure if we'll ever have to use different symbol tables
     // public static final String SYMBOL_TABLE = "symbolTableName";
     // @ConfigurationParameter(name = SYMBOL_TABLE, mandatory = true, defaultValue = "DEPREL")
@@ -152,7 +137,6 @@ public class MaltParser
 	private File workingDir;
 
 	private CasConfigurableProviderBase<MaltParserService> modelProvider;
-	private Set<String> features;
 
 
 	@Override
@@ -206,25 +190,6 @@ public class MaltParser
 				}
 
 				try {
-				    // Warn if the model uses features that we currently do not support
-				    features = getFeatures(aUrl);
-				    Set<String> unsupportedFeatures = new HashSet<String>(features);
-				    getLogger().info("Model uses these supported features: " + features);
-				    unsupportedFeatures.remove("FORM"); // we know covered text
-				    unsupportedFeatures.remove("LEMMA"); // we know lemma if lemmatizer ran before
-				    unsupportedFeatures.remove("POSTAG"); // we know POS tag if POS tagger ran before
-				    // CPOSTAG - only supported if we know a mapping from POSTAG to CPOSTAG (FIXME)
-				    // FEATS - not properly supported in DKPro Core yet! (FIXME)
-                    if (!unsupportedFeatures.isEmpty()) {
-                        String message = "Model these uses unsupported features: " + unsupportedFeatures;
-                        if (ignoreMissingFeatures) {
-                            getLogger().warn(message); 
-                        }
-                        else {
-                            throw new IOException(message);
-                        }
-                    }
-				    
 					// However, Maltparser is not happy at all if the model file does not have the right
 					// name, so we are forced to create a temporary directory and place the file there.
 					File modelFile = new File(workingDir, getRealName(aUrl));
@@ -323,65 +288,10 @@ public class MaltParser
 			String[] parserInput = new String[tokens.size()];
 			for (int i = 0; i < parserInput.length; i++) {
 				Token t = tokens.get(i);
-				
-				int id = i + 1;
-				String form = t.getCoveredText();
-				String lemma = UNUSED;
-				String cpostag = UNUSED;
-				String postag = UNUSED;
-				String feats = UNUSED;
-				
-				if (features.contains("LEMMA")) {
-				    if (t.getLemma() != null) {
-				        lemma = t.getLemma().getValue();
-				    }
-				    else if (!ignoreMissingFeatures) {
-	                    throw new IllegalStateException(
-	                            "Model uses feature LEMMA but there is no lemma information in CAS");
-				    }
-				}
-				
-                // Actually, this cannot work, because we only know about the DKPro Core coarse
-                // grained categories, which are most likely different from the coarse-grained
-                // categories required by the model. We would need to include a mapping with the
-                // model to recover the required coarse grained categories from the fine-grained
-                // categories in POSTAG.
-                if (features.contains("CPOSTAG")) {
-//                    if (t.getPos() != null) {
-//                        cpostag = t.getPos().getPosValue();
-//                    }
-//                    else 
-                    if (!ignoreMissingFeatures) {
-                        throw new IllegalStateException(
-                                "Model uses feature CPOSTAG but there is no part-of-speech information in CAS");
-                    }
-                }
-
-                if (features.contains("POSTAG")) {
-                    if (t.getPos() != null) {
-                        postag = t.getPos().getPosValue();
-                    }
-                    else if (!ignoreMissingFeatures) {
-                        throw new IllegalStateException(
-                                "Model uses feature POSTAG but there is no part-of-speech information in CAS");
-                    }
-                }
-
-                if (features.contains("FEATS")) {
-                    if (t.getMorph() != null) {
-                        feats = t.getMorph().getValue();
-                    }
-                    else 
-                    if (!ignoreMissingFeatures) {
-                        throw new IllegalStateException(
-                                "Model uses feature FEATS but there is no morphology information in CAS");
-                    }
-                }
-
 				// This only works for the English model. Other models have different input
 				// formats. See http://www.maltparser.org/mco/mco.html
-                parserInput[i] = String.format("%d\t%s\t%s\t%s\t%s\t%s", id, form, lemma, cpostag,
-                        postag, feats);
+				parserInput[i] = String.format("%1$d\t%2$s\t_\t%3$s\t%3$s\t_", i + 1,
+						t.getCoveredText(), t.getPos().getPosValue());
 			}
 
 			// Parse sentence
@@ -476,42 +386,5 @@ public class MaltParser
 		finally {
 			IOUtils.closeQuietly(jis);
 		}
-	}
-	
-	private Set<String> getFeatures(URL aUrl) throws IOException
-	{
-        JarEntry je = null;
-        JarInputStream jis = null;
-
-        try {
-            jis = new JarInputStream(aUrl.openConnection().getInputStream());
-            while ((je = jis.getNextJarEntry()) != null) {
-                String entryName = je.getName();
-
-                if (entryName.endsWith(".info")) {
-                    Set<String> features = new HashSet<String>();
-                    
-                    for (String line : IOUtils.readLines(jis, "UTF-8")) {
-                        if (line.contains("InputColumn(")) {
-                            int offset = line.indexOf("InputColumn(");
-                            while (offset >= 0) {
-                                int comma = line.indexOf(',', offset+1);
-                                features.add(line.substring(offset+12,comma).trim());
-                                offset = line.indexOf("InputColumn(", comma);
-                            }
-                        }
-                    }
-                    
-                    return features;
-                }
-            }
-
-            throw new IllegalStateException(
-                    "Could not find the configuration name and type from the URL '"
-                            + aUrl.toString() + "'. ");
-        }
-        finally {
-            IOUtils.closeQuietly(jis);
-        }
 	}
 }

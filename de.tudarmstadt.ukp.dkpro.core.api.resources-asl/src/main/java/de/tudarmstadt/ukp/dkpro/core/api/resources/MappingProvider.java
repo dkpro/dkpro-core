@@ -53,21 +53,11 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 		}
 	}
 
-	/**
-	 * Get the type for the given tag.
-	 * 
-	 * @param aTag a tag.
-	 * @return the type
-	 * @throw IllegalStateException if the type could not be located
-	 */
 	public Type getTagType(String aTag)
 	{
 		String type;
 		if (notFound) {
 			type = getDefault(BASE_TYPE);
-            if (type == null) {
-                throw new IllegalStateException("No base type defined!");
-            }
 		}
 		else {
 	        type = getResource().get(aTag);

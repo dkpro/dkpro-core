@@ -53,11 +53,6 @@ public class PennTreeNode
 		children.add(aNode);
 	}
 	
-	public boolean isPreTerminal()
-	{
-	    return children.size() == 1 && children.get(0).isTerminal();
-	}
-	
 	public boolean isTerminal()
 	{
 		return children.isEmpty();
