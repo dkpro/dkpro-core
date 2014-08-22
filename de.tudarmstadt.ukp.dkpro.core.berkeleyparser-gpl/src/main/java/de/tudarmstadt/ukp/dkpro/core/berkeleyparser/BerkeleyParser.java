@@ -1,21 +1,20 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2012
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -60,15 +59,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import edu.berkeley.nlp.PCFGLA.CoarseToFineMaxRuleParser;
 import edu.berkeley.nlp.PCFGLA.Grammar;
 import edu.berkeley.nlp.PCFGLA.Lexicon;
+import edu.berkeley.nlp.PCFGLA.Parser;
 import edu.berkeley.nlp.PCFGLA.ParserData;
 import edu.berkeley.nlp.PCFGLA.TreeAnnotations;
 import edu.berkeley.nlp.syntax.Tree;
 import edu.berkeley.nlp.util.Numberer;
 
 /**
- * Berkeley Parser annotator . Requires {@link Sentence}s to be annotated before.
+ * Berkeley Parser annotator. Requires {@link Sentence}s to be annotated before.
  *
- * @see CoarseToFineMaxRuleParser
+ * @author Richard Eckart de Castilho
  */
 @OperationalProperties(multipleDeploymentAllowed = false)
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -127,16 +127,6 @@ public class BerkeleyParser
     protected boolean printTagSet;
 
     /**
-     * Sets whether to use or not to use already existing POS tags from another annotator for the
-     * parsing process.<br/>
-     * 
-     * Default: {@code false}
-     */
-    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
-    private boolean readPos;
-    
-    /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
      * turned on for this to work.
      *
@@ -144,7 +134,7 @@ public class BerkeleyParser
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
-    private boolean writePos;
+    private boolean createPosTags;
 
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
@@ -154,7 +144,7 @@ public class BerkeleyParser
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
     @ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
-    private boolean writePennTree;
+    private boolean createPennTreeString;
 
     /**
      * Compute Viterbi derivation instead of max-rule tree.
@@ -219,7 +209,7 @@ public class BerkeleyParser
     @ConfigurationParameter(name = PARAM_BINARIZE, mandatory = true, defaultValue = "false")
     private boolean binarize;
 
-    private CasConfigurableProviderBase<CoarseToFineMaxRuleParser> modelProvider;
+    private CasConfigurableProviderBase<Parser> modelProvider;
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
 
@@ -268,17 +258,8 @@ public class BerkeleyParser
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
             List<String> tokenText = toText(tokens);
-            
-            List<String> posTags = null;
-            if (readPos) {
-                posTags = new ArrayList<String>(tokens.size());
-                for (Token t : tokens) {
-                    posTags.add(t.getPos().getPosValue());
-                }
-            }
 
-            Tree<String> parseOutput = modelProvider.getResource().getBestConstrainedParse(
-                    tokenText, posTags, false);
+            Tree<String> parseOutput = modelProvider.getResource().getBestParse(tokenText);
             
             // Check if the sentence could be parsed or not
             if (parseOutput.getChildren().isEmpty()) {
@@ -292,7 +273,7 @@ public class BerkeleyParser
 
             createConstituentAnnotationFromTree(aJCas, parseOutput, null, tokens, new MutableInt(0));
 
-            if (writePennTree) {
+            if (createPennTreeString) {
                 PennTree pTree = new PennTree(aJCas, sentence.getBegin(), sentence.getEnd());
                 pTree.setPennTree(parseOutput.toString());
                 pTree.addToIndexes();
@@ -321,7 +302,7 @@ public class BerkeleyParser
             }
 
             // only add POS to index if we want POS-tagging
-            if (writePos) {
+            if (createPosTags) {
                 String typeName = aNode.getLabel();
                 Type posTag = posMappingProvider.getTagType(typeName);
                 POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
@@ -377,7 +358,7 @@ public class BerkeleyParser
     }
 
     private class BerkeleyParserModelProvider
-        extends ModelProviderBase<CoarseToFineMaxRuleParser>
+        extends ModelProviderBase<Parser>
     {
         {
             setContextObject(BerkeleyParser.this);
@@ -392,7 +373,7 @@ public class BerkeleyParser
         }
 
         @Override
-        protected CoarseToFineMaxRuleParser produceResource(URL aUrl)
+        protected Parser produceResource(URL aUrl)
             throws IOException
         {
             ObjectInputStream is = null;
@@ -429,7 +410,7 @@ public class BerkeleyParser
                     }
                 }
 
-                addTagset(posTags, writePos);
+                addTagset(posTags, createPosTags);
                 addTagset(constTags);
 
                 if (printTagSet) {

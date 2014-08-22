@@ -1,21 +1,13 @@
-/**
- * Copyright 2007-2014
+/*******************************************************************************
+ * Copyright 2011
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the GNU Public License v3.0
+ * which accompanies this distribution, and is available at
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
@@ -24,11 +16,8 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -77,15 +66,14 @@ public class StanfordCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = new String[][] {
-                new String[] { "'", "'s", "he" },
-                new String[] { "I" },
-                new String[] { "the Don'" }
+                new String[] { "'s", "I" },
+                new String[] { "the Don'", "he" }
         };
 
         String[] pennTree = new String[] { 
-                "(ROOT (S (NP (POS ')) (VP (VBD Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
-                "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
-                + "(NNPS Don) (POS '))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
+                "(ROOT (S (LST (: ')) (VP (VB Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
+                "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP " + 
+                "(DT the) (NX (NNP Don) (POS ')))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
         };
 
         AssertAnnotations.assertPennTree(pennTree, select(jcas, PennTree.class));
@@ -156,7 +144,6 @@ public class StanfordCoreferenceResolverTest
         // Coreference resolution requires the parser and the NER to run before
         AnalysisEngine engine = createEngine(createEngineDescription(
                 createEngineDescription(StanfordSegmenter.class),
-                createEngineDescription(StanfordLemmatizer.class),
                 createEngineDescription(StanfordParser.class,
                         StanfordParser.PARAM_WRITE_CONSTITUENT, true,
                         StanfordParser.PARAM_WRITE_DEPENDENCY, true,
@@ -174,20 +161,5 @@ public class StanfordCoreferenceResolverTest
         engine.process(jcas);
 
         return jcas;
-    }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }
