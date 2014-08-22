@@ -1,4 +1,0 @@
-/src/main/resources/de/tudarmstadt/ukp/dkpro/core/mecab/bin:
-
-This folder contains pre-compiled MeCab binaries. MeCab is licensed under the GPL, LGPL and BSD
-licenses. For the purpose of this project, we choose the BSD conditions.
