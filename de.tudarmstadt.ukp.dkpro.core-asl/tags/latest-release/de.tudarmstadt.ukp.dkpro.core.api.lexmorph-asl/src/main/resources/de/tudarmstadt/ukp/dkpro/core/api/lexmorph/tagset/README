@@ -1,0 +1,11 @@
+There should only be files with the naming scheme:
+
+	language-tagset-tool.map
+	
+For historical reasons, there are also
+
+	language-tool.map
+	language-default-tool.map
+
+These two files should always be identical (as long as they are not completely removed) and they
+should be identical to one of the language-tagset-tool.map files - the most commonly used one.

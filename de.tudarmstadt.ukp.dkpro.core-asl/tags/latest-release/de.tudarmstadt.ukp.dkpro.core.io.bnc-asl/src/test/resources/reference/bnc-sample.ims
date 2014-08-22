@@ -1,0 +1,183 @@
+<text id="FX8">
+<sentence>
+Ah	ITJ	POS	ah
+there	AV0	POS	there
+we	PNP	POS	we
+are	VBB	POS	be
+,	PUN	POS	-
+.	PUN	POS	-
+</sentence>
+<sentence>
+Right	AV0	POS	right
+abdominal	AJ0	POS	abdominal
+wound	NN1	POS	wound
+,	PUN	POS	-
+she	PNP	POS	she
+&apos;s	VBZ	POS	be
+a	AT0	POS	a
+wee	AJ0-NN1	POS	wee
+bit	NN1	POS	bit
+confused	VVN-AJ0	POS	confuse
+.	PUN	POS	-
+</sentence>
+<sentence>
+She	PNP	POS	she
+did	VDD	POS	do
+n&apos;t	XX0	POS	not
+bother	VVI	POS	bother
+to	TO0	POS	to
+tell	VVI	POS	tell
+me	PNP	POS	i
+that	CJT	POS	that
+she	PNP	POS	she
+&apos;d	VHD	POS	have
+only	AV0	POS	only
+got	VVN	POS	get
+to	TO0	POS	to
+call	VVI	POS	call
+you	PNP	POS	you
+,	PUN	POS	-
+right	AV0	POS	right
+?	PUN	POS	-
+</sentence>
+<sentence>
+Erm	UNC	POS	erm
+she	PNP	POS	she
+was	VBD	POS	be
+n&apos;t	XX0	POS	not
+in	PRP	POS	in
+her	DPS	POS	she
+nightdress	NN1	POS	nightdress
+but	CJC	POS	but
+she	PNP	POS	she
+only	AV0	POS	only
+dressed	VVD	POS	dress
+herself	PNX	POS	herself
+,	PUN	POS	-
+she	PNP	POS	she
+said	VVD	POS	say
+</sentence>
+<sentence>
+And	CJC	POS	and
+you	PNP	POS	you
+</sentence>
+<sentence>
+She	PNP	POS	she
+said	VVD	POS	say
+she	PNP	POS	she
+went	VVD	POS	go
+to	TO0	POS	to
+buy	VVI	POS	buy
+something	PNI	POS	something
+herself	PNX	POS	herself
+,	PUN	POS	-
+she	PNP	POS	she
+phoned	VVD	POS	phone
+the	AT0	POS	the
+clinic	NN1	POS	clinic
+and	CJC	POS	and
+the	AT0	POS	the
+clinic	NN1	POS	clinic
+.	PUN	POS	-
+</sentence>
+<sentence>
+She	PNP	POS	she
+&apos;s	VBZ	POS	be
+here	AV0	POS	here
+and	CJC	POS	and
+says	VVZ	POS	say
+she	PNP	POS	she
+should	VM0	POS	should
+be	VBI	POS	be
+fortnightly	AV0	POS	fortnightly
+.	PUN	POS	-
+</sentence>
+<sentence>
+So	AV0	POS	so
+I	PNP	POS	i
+do	VDB	POS	do
+n&apos;t	XX0	POS	not
+know	VVI	POS	know
+whether	CJS	POS	whether
+you	PNP	POS	you
+want	VVB	POS	want
+to	TO0	POS	to
+go	VVI	POS	go
+and	CJC	POS	and
+see	VVI	POS	see
+her	PNP	POS	she
+rather	AV0	POS	rather
+than	CJS	POS	than
+,	PUN	POS	-
+I	PNP	POS	i
+could	VM0	POS	could
+get	VVI	POS	get
+a	AT0	POS	a
+doctor	NN1	POS	doctor
+to	TO0	POS	to
+go	VVI	POS	go
+and	CJC	POS	and
+see	VVI	POS	see
+her	PNP	POS	she
+and	CJC	POS	and
+phone	NN1-VVB	POS	phone
+,	PUN	POS	-
+.	PUN	POS	-
+</sentence>
+<sentence>
+it	PNP	POS	it
+&apos;s	VBZ	POS	be
+just	AV0	POS	just
+that	CJT	POS	that
+I	PNP	POS	i
+&apos;m	VBB	POS	be
+never	AV0	POS	never
+gon	VVG	POS	gon
+na	TO0	POS	na
+get	VVI	POS	get
+to	PRP	POS	to
+up	AVP	POS	up
+to	PRP	POS	to
+.	PUN	POS	-
+</sentence>
+<sentence>
+?	PUN	POS	-
+</sentence>
+<sentence>
+Yeah	ITJ	POS	yeah
+.	PUN	POS	-
+</sentence>
+<sentence>
+Okay	AV0	POS	okay
+.	PUN	POS	-
+</sentence>
+<sentence>
+Yeah	ITJ	POS	yeah
+.	PUN	POS	-
+</sentence>
+<sentence>
+erm	UNC	POS	erm
+,	PUN	POS	-
+first	ORD	POS	first
+twelve	CRD	POS	twelve
+weeks	NN2	POS	week
+pregnant	AJ0	POS	pregnant
+so	AV0	POS	so
+should	VM0	POS	should
+I	PNP	POS	i
+mark	VVI	POS	mark
+at	PRP	POS	at
+the	AT0	POS	the
+bottom	NN1-AJ0	POS	bottom
+when	CJS	POS	when
+she	PNP	POS	she
+types	VVZ	POS	type
+.	PUN	POS	-
+</sentence>
+<sentence>
+Erm	UNC	POS	erm
+this	DT0	POS	this
+one	PNI	POS	one
+.	PUN	POS	-
+</sentence>
+</text>
