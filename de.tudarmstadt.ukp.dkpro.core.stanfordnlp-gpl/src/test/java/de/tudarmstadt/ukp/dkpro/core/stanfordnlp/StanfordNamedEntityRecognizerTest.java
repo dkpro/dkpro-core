@@ -10,26 +10,21 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
-import java.util.Iterator;
-
-import org.apache.uima.UIMAFramework;
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization;
-import de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
  * @author Oliver Ferschke
@@ -42,12 +37,13 @@ public class StanfordNamedEntityRecognizerTest
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-		Iterator<NamedEntity> iter = runNER("IBM where John works is in Germany.", "en");
+        JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
-		assertNE(iter.next(), Organization.class, 0, 3);
-		assertNE(iter.next(), Person.class, 10, 14);
-		assertNE(iter.next(), Location.class, 27, 34);
-		assertFalse(iter.hasNext());
+        String[] original = { "LOCATION 'Germany'", "ORGANIZATION 'IBM'", "PERSON 'John'" };
+
+        String[] mapped = { "Location 'Germany'", "Organization 'IBM'", "Person 'John'" };
+
+        AssertAnnotations.assertNamedEntity(mapped, original, select(jcas, NamedEntity.class));
 	}
 
 	@Test
@@ -56,77 +52,37 @@ public class StanfordNamedEntityRecognizerTest
 	{
 		Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
-		/*
-		 * Note: The FaruquiPado-classifiers need at least 2 GiG of Heap Space
-		 */
-		Iterator<NamedEntity> iter = runNER(
-				"Markus arbeitet seit 10 Jahren bei SAP in Deutschland.", "de");
+        JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-		assertNE(iter.next(), Person.class, 0, 6);
-		assertNE(iter.next(), Organization.class, 35, 38);
-		assertNE(iter.next(), Location.class, 42, 53);
-		assertFalse(iter.hasNext());
-	}
+        String[] original = { "I-LOC 'Deutschland'", "I-ORG 'SAP'", "I-PER 'Markus'" };
 
-	/**
-	 * Helper method to check a single NE-annotation.
-	 *
-	 * @param actual
-	 *            the actual NamedEntity from the CAS
-	 * @param expected
-	 *            the expected NE Type
-	 * @param begin
-	 *            the begin of the NE span
-	 * @param end
-	 *            the end of the ne span
-	 * @throws Exception
-	 *             if assertion was false, i.e. wrong NE-Type or wrong span
-	 */
-	private void assertNE(NamedEntity actual,
-			Class<? extends NamedEntity> expected, int begin, int end)
-		throws Exception
-	{
-		assertTrue("must be a " + expected.getName() + " but was " + actual.getClass().getName(), actual.getClass()
-				.getCanonicalName().equals(expected.getCanonicalName()));
-		assertEquals("begin index must be " + begin, begin, actual.getBegin());
-		assertEquals("end index must be " + end, end, actual.getEnd());
-	}
+        String[] mapped = { "Location 'Deutschland'", "Organization 'SAP'", "Person 'Markus'" };
 
-	/**
-	 * Performs the named entity recognition with the specified model.
-	 *
-	 * @param testDocument
-	 *            the document to be ne-tagged
-	 * @return an iterator over all created NamedEntity-annotations
-	 */
-	private Iterator<NamedEntity> runNER(String testDocument, String language)
-		throws Exception
-	{
-		AnalysisEngineDescription desc = createEngineDescription(
-				StanfordNamedEntityRecognizer.class,
-				StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
-
-		AnalysisEngine ae = UIMAFramework.produceAnalysisEngine(desc);
-		JCas testCas = ae.newJCas();
-		testCas.setDocumentLanguage(language);
-		testCas.setDocumentText(testDocument);
-		ae.process(testCas);
-
-		// Return iterator for the named entities
-		return JCasUtil.iterator(testCas, NamedEntity.class);
+        AssertAnnotations.assertNamedEntity(mapped, original, select(jcas, NamedEntity.class));
 	}
 
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
-		AnalysisEngineDescription desc = createEngineDescription(
-				StanfordNamedEntityRecognizer.class,
-				StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
-
-		AnalysisEngine ae = UIMAFramework.produceAnalysisEngine(desc);
-		JCas testCas = ae.newJCas();
-		testCas.setDocumentLanguage("xx");
-		testCas.setDocumentText("Xec xena Xeo.");
-		ae.process(testCas);
+        runTest("xx", null, "Xec xena Xeo .");
 	}
+	
+    private JCas runTest(String language, String variant, String testDocument)
+        throws Exception
+    {
+        AnalysisEngine engine = createEngine(StanfordNamedEntityRecognizer.class,
+                StanfordNamedEntityRecognizer.PARAM_VARIANT, variant,
+                StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET, true);
+
+        return TestRunner.runTest(engine, language, testDocument);
+    }
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
 }
