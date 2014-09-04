@@ -32,6 +32,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -305,9 +306,8 @@ public class TueppReader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        posMappingProvider.configure(aJCas.getCas());
-        
         try {
+            posMappingProvider.configure(aJCas.getCas());
             JCasBuilder jb = new JCasBuilder(aJCas);
 
             XMLEvent e = null;
@@ -350,11 +350,8 @@ public class TueppReader
 
             jb.close();
         }
-        catch (XMLStreamException ex1) {
-            throw new IOException(ex1);
-        }
-        catch (JAXBException ex2) {
-            throw new IOException(ex2);
+        catch (XMLStreamException|JAXBException|AnalysisEngineProcessException e) {
+            throw new IOException(e);
         }
         
         // Seek next article so we know what to return on hasNext()

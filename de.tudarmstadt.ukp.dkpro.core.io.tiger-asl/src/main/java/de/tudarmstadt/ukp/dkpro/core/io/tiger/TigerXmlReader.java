@@ -37,6 +37,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -158,7 +159,12 @@ public class TigerXmlReader
         Resource res = nextFile();
         initCas(aJCas, res);
 
-        posMappingProvider.configure(aJCas.getCas());
+        try {
+            posMappingProvider.configure(aJCas.getCas());
+        }
+        catch (AnalysisEngineProcessException e) {
+            throw new IOException(e);
+        }
 
         InputStream is = null;
         try {

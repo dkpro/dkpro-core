@@ -29,6 +29,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -185,7 +186,12 @@ public class Conll2006Reader
         throws IOException
     {
         if (readPos) {
-            posMappingProvider.configure(aJCas.getCas());
+            try{
+                posMappingProvider.configure(aJCas.getCas());
+            }
+            catch(AnalysisEngineProcessException e){
+                throw new IOException(e);
+            }
         }
         
         JCasBuilder doc = new JCasBuilder(aJCas);

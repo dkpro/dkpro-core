@@ -36,6 +36,7 @@ import java.util.Map;
 import junit.framework.Assert;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
@@ -533,7 +534,7 @@ public class AssertAnnotations
     }
 
     public static void assertTagsetMapping(Class<?> aLayer, String aName, String[] aDefaultMapped,
-            JCas aJCas)
+            JCas aJCas) throws AnalysisEngineProcessException
     {
         String pattern;
         if (aLayer == POS.class) {

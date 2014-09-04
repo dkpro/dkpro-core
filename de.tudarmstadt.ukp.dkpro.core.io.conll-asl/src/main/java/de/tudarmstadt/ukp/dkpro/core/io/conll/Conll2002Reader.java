@@ -27,6 +27,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
@@ -156,8 +157,13 @@ public class Conll2002Reader
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
-        if (namedEntityEnabled) {
-            namedEntityMappingProvider.configure(aJCas.getCas());
+        try{
+            if (namedEntityEnabled) {
+                namedEntityMappingProvider.configure(aJCas.getCas());
+            }
+        }
+        catch(AnalysisEngineProcessException e){
+            throw new IOException(e);
         }
         
         Resource res = nextFile();
