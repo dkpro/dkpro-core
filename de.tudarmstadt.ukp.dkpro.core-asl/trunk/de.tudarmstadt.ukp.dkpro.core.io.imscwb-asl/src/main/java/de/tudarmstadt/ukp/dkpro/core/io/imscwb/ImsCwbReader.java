@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
@@ -211,7 +212,12 @@ public class ImsCwbReader
 			meta.setDocumentUri(text.getDocumentTitle());
 		}
 
-		posMappingProvider.configure(aCAS);
+		try {
+            posMappingProvider.configure(aCAS);
+        }
+        catch (AnalysisEngineProcessException e) {
+            throw new IOException(e);
+        }
 
         List<AnnotationFS> tokenAnnotations    = new ArrayList<AnnotationFS>();
         List<AnnotationFS> lemmaAnnotations    = new ArrayList<AnnotationFS>();

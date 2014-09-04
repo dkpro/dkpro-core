@@ -40,7 +40,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	private boolean notFound = false;
 	
 	@Override
-	public void configure(CAS aCas)
+	public void configure(CAS aCas) throws AnalysisEngineProcessException
 	{
 		typeSystem = aCas.getTypeSystem();
 
@@ -49,6 +49,9 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 			super.configure(aCas);
 		}
 		catch (AnalysisEngineProcessException e) {
+		    if(getOverride(LOCATION)!=null){
+		        throw e;
+		    }
 			notFound = true;
 		}
 	}

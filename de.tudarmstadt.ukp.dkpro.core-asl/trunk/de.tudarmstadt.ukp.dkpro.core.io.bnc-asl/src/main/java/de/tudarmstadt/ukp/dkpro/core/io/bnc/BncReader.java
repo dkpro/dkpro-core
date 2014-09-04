@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -127,10 +128,15 @@ public class BncReader
 	}
 
 	@Override
-	protected void initCas(CAS aCas, Resource aResource, String aQualifier)
+	protected void initCas(CAS aCas, Resource aResource, String aQualifier) throws RuntimeException
 	{
 		super.initCas(aCas, aResource, aQualifier);
-		posMappingProvider.configure(aCas);
+	    try {
+            posMappingProvider.configure(aCas);
+        }
+        catch (AnalysisEngineProcessException e) {
+            throw new RuntimeException(e);
+        }
 	}
 
 	@Override

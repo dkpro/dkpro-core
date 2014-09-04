@@ -21,6 +21,7 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,6 +43,17 @@ public class OpenNlpNameFinderTest
         String[] namedEntity = { "[ 10, 18]NamedEntity(person) (John Doe)" };
 
         AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
+    }
+    
+    @Test(expected=AnalysisEngineProcessException.class)
+    public void testExceptionWithWrongMappingFileLocation()
+        throws Exception
+    {
+        AnalysisEngine engine = createEngine(OpenNlpNameFinder.class,
+                OpenNlpNameFinder.PARAM_PRINT_TAGSET, true,
+                OpenNlpNameFinder.PARAM_NAMED_ENTITY_MAPPING_LOCATION, "");
+
+        TestRunner.runTest(engine, "en", "SAP where John Doe works is in Germany .");
     }
 
     private JCas runTest(String language, String variant, String testDocument)

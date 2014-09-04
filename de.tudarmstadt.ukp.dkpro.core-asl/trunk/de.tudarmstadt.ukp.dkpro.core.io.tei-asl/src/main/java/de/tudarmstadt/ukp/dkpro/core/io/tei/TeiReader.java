@@ -29,6 +29,7 @@ import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.Type;
@@ -297,7 +298,12 @@ public class TeiReader
 		}
 
 		// Configure mapping only now, because now the language is set in the CAS
-		posMappingProvider.configure(aCAS);
+		try {
+            posMappingProvider.configure(aCAS);
+        }
+        catch (AnalysisEngineProcessException e1) {
+            throw new IOException(e1);
+        }
 
 		InputStream is = null;
 
