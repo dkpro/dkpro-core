@@ -350,8 +350,14 @@ public class TueppReader
 
             jb.close();
         }
-        catch (XMLStreamException|JAXBException|AnalysisEngineProcessException e) {
-            throw new IOException(e);
+        catch (XMLStreamException ex1) {
+            throw new IOException(ex1);
+        }
+        catch(JAXBException ex2){
+            throw new IOException(ex2);
+        }
+        catch(AnalysisEngineProcessException ex3){
+            throw new IOException(ex3);
         }
         
         // Seek next article so we know what to return on hasNext()
