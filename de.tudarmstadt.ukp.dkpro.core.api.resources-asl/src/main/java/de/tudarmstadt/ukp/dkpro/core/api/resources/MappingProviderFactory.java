@@ -2,6 +2,13 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 public class MappingProviderFactory
 {
+    public static MappingProvider createPosMappingProvider(String aMappingLocation,
+            String aLanguage, HasResourceMetadata aSource)
+    {
+        MappingProvider p = createPosMappingProvider(aMappingLocation, null, aLanguage);
+        p.addImport("pos.tagset", aSource);
+        return p;
+    }
     public static MappingProvider createPosMappingProvider(String aMappingLocation, String aTagset,
             String aLanguage)
     {
