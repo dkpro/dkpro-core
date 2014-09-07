@@ -205,6 +205,8 @@ public final class ComponentParameters
      * specified which does not have such meta data, or it can be used in readers.
      */
     public static final String PARAM_CHUNK_TAG_SET = CHUNK + TAG_SET;
+    
+    public static final String PARAM_CONSTITUENT_TAG_SET = CONSTITUENT + TAG_SET;
 	
 	// =============================================================================================
 	// Configure mapping of tags to annotation types for different kinds of annotations.
@@ -216,7 +218,12 @@ public final class ComponentParameters
 	 * Location of the mapping file for part-of-speech tags to UIMA types.
 	 */
 	public static final String PARAM_POS_MAPPING_LOCATION = POS + MAPPING_LOCATION;
-	
+
+    /**
+     * Location of the mapping file for constituent tags to UIMA types.
+     */
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = CONSTITUENT + MAPPING_LOCATION;
+
 	/**
 	 * Location of the mapping file for chunk tags to UIMA types.
 	 */
