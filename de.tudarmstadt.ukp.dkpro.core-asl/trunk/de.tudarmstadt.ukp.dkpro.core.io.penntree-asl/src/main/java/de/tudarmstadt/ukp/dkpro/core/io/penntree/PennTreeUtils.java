@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static java.util.Collections.singletonList;
+import static org.apache.uima.fit.util.FSCollectionFactory.create;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,14 +31,10 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.mutable.MutableInt;
 import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.fit.util.FSCollectionFactory;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
-/**
- * @author Richard Eckart de Castilho
- */
 public class PennTreeUtils
 {
     private static final Map<String, String> ESCAPE = new HashMap<String, String>();
@@ -56,10 +53,16 @@ public class PennTreeUtils
     public static PennTreeNode convertPennTree(Constituent aConstituent)
     {
         PennTreeNode node = new PennTreeNode();
-        node.setLabel(aConstituent.getConstituentType());
+        if (aConstituent.getSyntacticFunction() != null) {
+            node.setLabel(aConstituent.getConstituentType() + '-'
+                    + aConstituent.getSyntacticFunction());
+        }
+        else {
+            node.setLabel(aConstituent.getConstituentType());
+        }
 
         List<PennTreeNode> children = new ArrayList<PennTreeNode>();
-        for (FeatureStructure c : FSCollectionFactory.create(aConstituent.getChildren())) {
+        for (FeatureStructure c : create(aConstituent.getChildren())) {
             if (c instanceof Constituent) {
                 children.add(convertPennTree((Constituent) c));
             }
@@ -81,7 +84,7 @@ public class PennTreeUtils
         node.setChildren(children);
         return node;
     }
-
+    
     public static String escapeToken(String aToken)
     {
         String value = ESCAPE.get(aToken);
@@ -238,4 +241,53 @@ public class PennTreeUtils
             aSb.append(')');
         }
     }
+    
+    /**
+     * Remove trailing or leading whitespace from the annotation.
+     */
+    public static void trim(CharSequence aText, int[] aSpan)
+    {
+        int begin = aSpan[0];
+        int end = aSpan[1]-1;
+
+        CharSequence data = aText;
+        while (
+                (begin < (data.length()-1))
+                && trimChar(data.charAt(begin))
+        ) {
+            begin ++;
+        }
+        while (
+                (end > 0)
+                && trimChar(data.charAt(end))
+        ) {
+            end --;
+        }
+
+        end++;
+
+        aSpan[0] = begin;
+        aSpan[1] = end;
+    }
+
+    public static boolean isEmpty(int aBegin, int aEnd)
+    {
+        return aBegin >= aEnd;
+    }
+
+    public static boolean trimChar(final char aChar)
+    {
+        switch (aChar) {
+        case '\n':     return true; // Line break
+        case '\r':     return true; // Carriage return
+        case '\t':     return true; // Tab
+        case '\u200E': return true; // LEFT-TO-RIGHT MARK
+        case '\u200F': return true; // RIGHT-TO-LEFT MARK
+        case '\u2028': return true; // LINE SEPARATOR
+        case '\u2029': return true; // PARAGRAPH SEPARATOR
+        default:
+            return  Character.isWhitespace(aChar);
+        }
+    }
+
 }

@@ -38,6 +38,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
@@ -55,15 +56,15 @@ public class PennTreebankChunkedReader
      */
     public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-    protected String mappingPosLocation;
+    protected String posMappingLocation;
 
     /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
      * tag set defined as part of the model meta data. This can be useful if a custom model is
      * specified which does not have such meta data, or it can be used in readers.
      */
-    public static final String PARAM_POS_TAGSET = ComponentParameters.PARAM_POS_TAG_SET;
-    @ConfigurationParameter(name = PARAM_POS_TAGSET, mandatory = false)
+    public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
+    @ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
     protected String posTagset;
 
     /**
@@ -72,13 +73,6 @@ public class PennTreebankChunkedReader
     public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
     @ConfigurationParameter(name = PARAM_SOURCE_ENCODING, mandatory = true, defaultValue = "UTF-8")
     protected String encoding;
-
-    /**
-     * Set this as the language of the produced documents.
-     */
-    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-    private String language;
 
     public static final String ENCODING_AUTO = "auto";
 
@@ -90,15 +84,8 @@ public class PennTreebankChunkedReader
     {
         super.initialize(aContext);
 
-        posMappingProvider = new MappingProvider();
-        posMappingProvider.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${tagger.tagset}-pos.map");
-        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("tagger.tagset", "default");
-        posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
-        posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-        posMappingProvider.setOverride("tagger.tagset", posTagset);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                posTagset, getLanguage());
     }
 
     @Override
