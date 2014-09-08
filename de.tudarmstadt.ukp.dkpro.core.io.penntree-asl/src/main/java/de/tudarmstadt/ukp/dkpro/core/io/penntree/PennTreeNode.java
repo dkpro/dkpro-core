@@ -25,10 +25,21 @@ import java.util.List;
  */
 public class PennTreeNode
 {
+    private PennTreeNode parent;
 	private String label;
 	private List<PennTreeNode> children = new ArrayList<PennTreeNode>();
 	
-	public String getLabel()
+	public PennTreeNode getParent()
+    {
+        return parent;
+    }
+
+    public void setParent(PennTreeNode aParent)
+    {
+        parent = aParent;
+    }
+
+    public String getLabel()
 	{
 		return label;
 	}
@@ -50,6 +61,7 @@ public class PennTreeNode
 	
 	public void addChild(PennTreeNode aNode)
 	{
+	    aNode.setParent(this);
 		children.add(aNode);
 	}
 	

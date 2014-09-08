@@ -132,7 +132,7 @@ public class PennTreebankChunkedReaderTest
                 PennTreebankChunkedReader.PARAM_LANGUAGE, "en",
                 PennTreebankChunkedReader.PARAM_SOURCE_LOCATION,
                 "src/test/resources/pennTreebankChunkedReaderTestFiles/",
-                PennTreebankChunkedReader.PARAM_POS_TAGSET, "ptb",
+                PennTreebankChunkedReader.PARAM_POS_TAG_SET, "ptb",
                 PennTreebankChunkedReader.PARAM_PATTERNS, aFile );
 
         JCas jcas = JCasFactory.createJCas();
