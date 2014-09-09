@@ -31,6 +31,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -153,8 +154,13 @@ public class PennTreebankCombinedReader
         Resource res = nextFile();
         initCas(aJCas.getCas(), res);
         
-        posMappingProvider.configure(aJCas.getCas());
-        constituentMappingProvider.configure(aJCas.getCas());
+        try {
+            posMappingProvider.configure(aJCas.getCas());
+            constituentMappingProvider.configure(aJCas.getCas());
+        }
+        catch (AnalysisEngineProcessException e) {
+            throw new IOException(e);
+        }
 
         StringBuilder text = new StringBuilder();
         
