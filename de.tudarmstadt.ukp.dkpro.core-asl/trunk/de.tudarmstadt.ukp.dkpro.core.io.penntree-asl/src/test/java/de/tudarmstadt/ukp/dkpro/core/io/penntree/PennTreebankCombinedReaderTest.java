@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright 2014
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
@@ -22,14 +39,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
-public class PennTreebankReaderTest
+public class PennTreebankCombinedReaderTest
 {
     @Test
     public void test()
         throws Exception
     {
-        CollectionReader reader = createReader(PennTreebankReader.class, 
-                PennTreebankReader.PARAM_SOURCE_LOCATION, 
+        CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
+                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
                 "src/test/resources/stanfordPennTrees/stanford-english-trees-first2.txt");
         
         JCas jcas = JCasFactory.createJCas();
@@ -76,9 +93,9 @@ public class PennTreebankReaderTest
     public void testWithDirectSpeech()
         throws Exception
     {
-        CollectionReader reader = createReader(PennTreebankReader.class, 
-                PennTreebankReader.PARAM_LANGUAGE, "en",
-                PennTreebankReader.PARAM_SOURCE_LOCATION, 
+        CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
+                PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
+                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
                 "src/test/resources/stanfordPennTrees/tree_with_direct_speech.txt");
         
         JCas jcas = JCasFactory.createJCas();
@@ -108,9 +125,9 @@ public class PennTreebankReaderTest
     public void testWithParentheses()
         throws Exception
     {
-        CollectionReader reader = createReader(PennTreebankReader.class, 
-                PennTreebankReader.PARAM_LANGUAGE, "en",
-                PennTreebankReader.PARAM_SOURCE_LOCATION, 
+        CollectionReader reader = createReader(PennTreebankCombinedReader.class, 
+                PennTreebankCombinedReader.PARAM_LANGUAGE, "en",
+                PennTreebankCombinedReader.PARAM_SOURCE_LOCATION, 
                 "src/test/resources/stanfordPennTrees/tree_with_parentheses.txt");
         
         JCas jcas = JCasFactory.createJCas();

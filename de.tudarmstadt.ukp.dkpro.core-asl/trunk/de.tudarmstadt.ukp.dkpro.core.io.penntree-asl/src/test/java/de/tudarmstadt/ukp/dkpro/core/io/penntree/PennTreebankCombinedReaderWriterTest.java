@@ -1,3 +1,20 @@
+/*******************************************************************************
+ * Copyright 2014
+ * Ubiquitous Knowledge Processing (UKP) Lab
+ * Technische Universität Darmstadt
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.penntree;
 
 import static java.util.Arrays.asList;
@@ -20,14 +37,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-public class PennTreebankReaderWriterTest
+public class PennTreebankCombinedReaderWriterTest
 {
     @Test
     public void testTreeWithRoot()
         throws Exception
     {
         testRoundTrip("tree_with_ROOT.txt", 
-                PennTreebankWriter.PARAM_NO_ROOT_LABEL, false);
+                PennTreebankCombinedWriter.PARAM_NO_ROOT_LABEL, false);
     }
 
     @Test
@@ -35,7 +52,7 @@ public class PennTreebankReaderWriterTest
         throws Exception
     {
         testOneWay("tree_with_trace_filtered.txt", "tree_with_trace.txt",
-                PennTreebankWriter.PARAM_EMPTY_ROOT_LABEL, true);
+                PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
@@ -43,9 +60,9 @@ public class PennTreebankReaderWriterTest
         throws Exception
     {
         testRoundTrip("tree_with_trace.txt",
-                PennTreebankReader.PARAM_REMOVE_TRACES, false,
-                PennTreebankReader.PARAM_WRITE_TRACES_TO_TEXT, true,
-                PennTreebankWriter.PARAM_EMPTY_ROOT_LABEL, true);
+                PennTreebankCombinedReader.PARAM_REMOVE_TRACES, false,
+                PennTreebankCombinedReader.PARAM_WRITE_TRACES_TO_TEXT, true,
+                PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
@@ -53,7 +70,7 @@ public class PennTreebankReaderWriterTest
         throws Exception
     {
         testRoundTrip("tree_with_parentheses.txt",
-                PennTreebankWriter.PARAM_EMPTY_ROOT_LABEL, true);
+                PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Test
@@ -61,7 +78,7 @@ public class PennTreebankReaderWriterTest
         throws Exception
     {
         testRoundTrip("tree_with_direct_speech.txt",
-                PennTreebankWriter.PARAM_EMPTY_ROOT_LABEL, true);
+                PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     @Ignore("This file contains trees in different variations of formatting that are not "
@@ -71,7 +88,7 @@ public class PennTreebankReaderWriterTest
         throws Exception
     {
         testRoundTrip("stanford-english-trees.txt",
-                PennTreebankWriter.PARAM_EMPTY_ROOT_LABEL, true);
+                PennTreebankCombinedWriter.PARAM_EMPTY_ROOT_LABEL, true);
     }
 
     public void testOneWay(String aExpectedFile, String aFile, Object... aExtraParams)
@@ -82,21 +99,21 @@ public class PennTreebankReaderWriterTest
         File output = new File("target/test-output/" + name.getMethodName());
 
         List<Object> extraReaderParams = new ArrayList<>();
-        extraReaderParams.add(PennTreebankReader.PARAM_SOURCE_LOCATION);
+        extraReaderParams.add(PennTreebankCombinedReader.PARAM_SOURCE_LOCATION);
         extraReaderParams.add(input);
         extraReaderParams.addAll(asList(aExtraParams));
 
-        CollectionReaderDescription reader = createReaderDescription(PennTreebankReader.class,
+        CollectionReaderDescription reader = createReaderDescription(PennTreebankCombinedReader.class,
                 extraReaderParams.toArray());
 
         List<Object> extraWriterParams = new ArrayList<>();
-        extraWriterParams.add(PennTreebankWriter.PARAM_TARGET_LOCATION);
+        extraWriterParams.add(PennTreebankCombinedWriter.PARAM_TARGET_LOCATION);
         extraWriterParams.add(output);
-        extraWriterParams.add(PennTreebankWriter.PARAM_STRIP_EXTENSION);
+        extraWriterParams.add(PennTreebankCombinedWriter.PARAM_STRIP_EXTENSION);
         extraWriterParams.add(true);
         extraWriterParams.addAll(asList(aExtraParams));
 
-        AnalysisEngineDescription writer = createEngineDescription(PennTreebankWriter.class,
+        AnalysisEngineDescription writer = createEngineDescription(PennTreebankCombinedWriter.class,
                 extraWriterParams.toArray());
 
         runPipeline(reader, writer);
