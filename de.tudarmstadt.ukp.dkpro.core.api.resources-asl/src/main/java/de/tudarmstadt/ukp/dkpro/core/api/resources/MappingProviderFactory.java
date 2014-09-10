@@ -26,6 +26,7 @@ public class MappingProviderFactory
         p.addImport("pos.tagset", aSource);
         return p;
     }
+    
     public static MappingProvider createPosMappingProvider(String aMappingLocation, String aTagset,
             String aLanguage)
     {
@@ -40,6 +41,22 @@ public class MappingProviderFactory
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
         p.setOverride("pos.tagset", aTagset);
         return p;
+    }
+    
+    public static MappingProvider createChunkMappingProvider(String aMappingLocation, String aTagset,
+            String aLanguage)
+    {
+        MappingProvider chunkMappingProvider = new MappingProvider();
+        chunkMappingProvider = new MappingProvider();
+        chunkMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
+                + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
+        chunkMappingProvider.setDefault(MappingProvider.BASE_TYPE, 
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk");
+        chunkMappingProvider.setDefault("chunk.tagset", "default");
+        chunkMappingProvider.setOverride(MappingProvider.LOCATION, aMappingLocation);
+        chunkMappingProvider.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        chunkMappingProvider.setOverride("chunk.tagset", aTagset);
+        return chunkMappingProvider;
     }
     
     public static MappingProvider createConstituentMappingProvider(String aMappingLocation,
