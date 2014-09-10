@@ -54,7 +54,40 @@ public class StanfordNamedEntityRecognizerTest
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
+	
+   @Test
+    public void test4classEnglish()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
+        JCas jcas = runTest("en", "conll.4class.distsim.crf", "IBM where John works is in Germany .");
+
+        String[] ne = { 
+                "[  0,  3]Organization(ORGANIZATION) (IBM)", 
+                "[ 10, 14]Person(PERSON) (John)", 
+                "[ 27, 34]Location(LOCATION) (Germany)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+
+   @Test
+   public void test7classEnglish()
+       throws Exception
+   {
+       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+       JCas jcas = runTest("en", "muc.7class.distsim.crf", "IBM where John works is in Germany .");
+
+       String[] ne = { 
+               "[  0,  3]Organization(ORGANIZATION) (IBM)", 
+               "[ 10, 14]Person(PERSON) (John)", 
+               "[ 27, 34]Location(LOCATION) (Germany)" };
+
+       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+   }
+	   
 	@Test
 	public void testGerman()
 		throws Exception
@@ -70,6 +103,22 @@ public class StanfordNamedEntityRecognizerTest
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
+	
+   @Test
+    public void testHgcGerman()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("de", "hgc_175m_600.crf", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
+
+        String[] ne = { 
+                "[  0,  6]Person(I-PER) (Markus)", 
+                "[ 35, 38]Organization(I-ORG) (SAP)", 
+                "[ 42, 53]Location(I-LOC) (Deutschland)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
 
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
