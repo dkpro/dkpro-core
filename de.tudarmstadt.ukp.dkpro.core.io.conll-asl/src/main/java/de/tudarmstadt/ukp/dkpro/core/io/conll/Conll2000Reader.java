@@ -173,7 +173,7 @@ public class Conll2000Reader
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(chunkMappingLocation,
+        chunkMappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
                 chunkTagset, getLanguage());
     }
     
