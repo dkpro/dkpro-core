@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBas
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
@@ -169,23 +170,11 @@ public class Conll2000Reader
     {
         super.initialize(aContext);
         
-        posMappingProvider = new MappingProvider();
-        posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
-                + "dkpro/core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("pos.tagset", "default");
-        posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-        posMappingProvider.setOverride("pos.tagset", posTagset);
-        
-        chunkMappingProvider = new MappingProvider();
-        chunkMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/"
-                + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
-        chunkMappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
-        chunkMappingProvider.setDefault("chunk.tagset", "default");
-        chunkMappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
-        chunkMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-        chunkMappingProvider.setOverride("chunk.tagset", posTagset);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                posTagset, getLanguage());
+
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(chunkMappingLocation,
+                chunkTagset, getLanguage());
     }
     
     @Override
