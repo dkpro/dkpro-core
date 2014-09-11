@@ -50,24 +50,26 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
  * <li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
  * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>PLEMMA -</li>
+ * <li>PLEMMA - <b>(ignored)</b> Automatically predicted lemma of FORM</li>
  * <li>POS - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the language,
  * or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>PPOS -</li>
+ * <li>PPOS - <b>(ignored)</b> Automatically predicted major POS by a language-specific tagger</li>
  * <li>FEAT - <b>(Morpheme)</b> Unordered set of syntactic and/or morphological features (depending
  * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
- * <li>PFEAT -</li>
+ * <li>PFEAT - <b>(ignored)</b> Automatically predicted morphological features (if applicable)</li>
  * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
  * ('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
  * an ID of zero.</li>
- * <li>PHEAD -</li>
+ * <li>PHEAD - <b>(ignored)</b> Automatically predicted syntactic head</li>
  * <li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
  * depends on the particular language. Note that depending on the original treebank annotation, the
  * dependency relation may be meaningfull or simply 'ROOT'.</li>
- * <li>PDEPREL -</li>
- * <li>FILLPRED -</li>
- * <li>PRED -</li>
- * <li>APREDs -</li>
+ * <li>PDEPREL - <b>(ignored)</b> Automatically predicted dependency relation to PHEAD</li>
+ * <li>FILLPRED - <b>(auto-generated)</b> Contains 'Y' for argument-bearing tokens</li>
+ * <li>PRED - <b>(SemanticPredicate)</b> (sense) identifier of a semantic 'predicate' coming from a
+ * current token</li>
+ * <li>APREDs - <b>(SemanticArgument)</b> Columns with argument labels for each semantic predicate
+ * (in the ID order)</li>
  * </ol>
  * 
  * Sentences are separated by a blank new line
