@@ -117,7 +117,7 @@ public class TigerXmlReader
      * in particular not with such that contain "(" or ")" in their tags. The tree is generated
      * using the original tag set in the corpus, not using the mapped tagset!
      * 
-     * Default: {@code true}
+     * Default: {@code false}
      */
     public static final String PARAM_READ_PENN_TREE = ComponentParameters.PARAM_READ_PENN_TREE;
     @ConfigurationParameter(name = PARAM_READ_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -389,7 +389,7 @@ public class TigerXmlReader
                 end = Math.max(child.getEnd(), end);
             }
 
-            if (aInEdge != null) {
+            if (aInEdge != null && !"-".equals(aInEdge.label) && !"--".equals(aInEdge.label)) {
                 con.setSyntacticFunction(aInEdge.label);
             }
             con.setParent(aParent);

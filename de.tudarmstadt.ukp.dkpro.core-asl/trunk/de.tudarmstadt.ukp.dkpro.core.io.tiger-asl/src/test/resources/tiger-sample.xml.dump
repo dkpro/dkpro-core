@@ -24,6 +24,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 56
+   PennTree: "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))"
+   TransformationNames: <null>
+[`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 Sentence
    sofa: _InitialView
    begin: 0
@@ -73,7 +80,7 @@ Constituent
       children: FSArray
       syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "--"
+   syntacticFunction: <null>
 [Ross Perot]
 Constituent
    sofa: _InitialView
@@ -94,7 +101,7 @@ Constituent
          children: FSArray
          syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "--"
+      syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "SB"
 [Ross]
@@ -237,7 +244,7 @@ Constituent
          children: FSArray
          syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "--"
+      syntacticFunction: <null>
    children: FSArray
    syntacticFunction: "PD"
 [ein]
