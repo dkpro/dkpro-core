@@ -89,8 +89,8 @@ public class PennTreebankCombinedReader
      *
      * Default: {@code true}
      */
-    public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean createPosTags;
     
     /**
