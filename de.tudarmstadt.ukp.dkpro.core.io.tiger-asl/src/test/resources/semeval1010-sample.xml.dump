@@ -24,6 +24,13 @@ ROOT
    children: FSArray
    syntacticFunction: <null>
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 169
+   PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP (RB often) (JJ solitary))) (VBZ walks) (PUNC, ,))) (CC or) (PP (IN in) (VP (VBG chatting) (PP (IN with) (NP (NPB (DT a) (NN number)) (PP (IN of) (NP (NPB (NN village) (NNS gossips)) (SBAR (WHNP (WP$ whose) (NN acquaintance)) (S (PRP he) (VP (VBD had) (VP (VBN cultivated) (PUNC. .)))))))))))) (NPB (PRP$ his) (NNS days))) (VP (VB Save) (PP (IN for) (NPB (DT this) (CD one) (NN excursion) (PUNC, ,)))))"
+   TransformationNames: <null>
+[Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Sentence
    sofa: _InitialView
    begin: 0
@@ -43,7 +50,7 @@ Constituent
       children: FSArray
       syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [Save]
 Lemma
    sofa: _InitialView
@@ -94,9 +101,9 @@ Constituent
          children: FSArray
          syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [for]
 PP
    sofa: _InitialView
@@ -152,11 +159,11 @@ Constituent
             children: FSArray
             syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [this one excursion ,]
 SemanticArgument
    sofa: _InitialView
@@ -385,7 +392,7 @@ Constituent
       children: FSArray
       syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [spent]
 Lemma
    sofa: _InitialView
@@ -436,9 +443,9 @@ Constituent
          children: FSArray
          syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [his]
 PR
    sofa: _InitialView
@@ -545,9 +552,9 @@ Constituent
          children: FSArray
          syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [in long and often solitary walks ,]
 Constituent
    sofa: _InitialView
@@ -573,11 +580,11 @@ Constituent
             children: FSArray
             syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [in]
 PP
    sofa: _InitialView
@@ -638,13 +645,13 @@ Constituent
                children: FSArray
                syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [long and often solitary]
 Constituent
    sofa: _InitialView
@@ -680,15 +687,15 @@ Constituent
                   children: FSArray
                   syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [long]
 Lemma
    sofa: _InitialView
@@ -796,17 +803,17 @@ Constituent
                      children: FSArray
                      syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [often solitary]
 SemanticArgument
    sofa: _InitialView
@@ -1001,11 +1008,11 @@ Constituent
             children: FSArray
             syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [in]
 PP
    sofa: _InitialView
@@ -1066,13 +1073,13 @@ Constituent
                children: FSArray
                syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [chatting]
 Lemma
    sofa: _InitialView
@@ -1145,15 +1152,15 @@ Constituent
                   children: FSArray
                   syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [with a number of village gossips whose acquaintance he had cultivated .]
 SemanticArgument
    sofa: _InitialView
@@ -1230,17 +1237,17 @@ Constituent
                      children: FSArray
                      syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [a number]
 Constituent
    sofa: _InitialView
@@ -1286,19 +1293,19 @@ Constituent
                         children: FSArray
                         syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [a]
 Lemma
    sofa: _InitialView
@@ -1417,19 +1424,19 @@ Constituent
                         children: FSArray
                         syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [of village gossips whose acquaintance he had cultivated .]
 SemanticArgument
    sofa: _InitialView
@@ -1516,21 +1523,21 @@ Constituent
                            children: FSArray
                            syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [village gossips]
 Constituent
    sofa: _InitialView
@@ -1586,23 +1593,23 @@ Constituent
                               children: FSArray
                               syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: "-"
+                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [village]
 NN
    sofa: _InitialView
@@ -1718,23 +1725,23 @@ Constituent
                               children: FSArray
                               syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: "-"
+                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [whose acquaintance]
 Constituent
    sofa: _InitialView
@@ -1795,25 +1802,25 @@ Constituent
                                  children: FSArray
                                  syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: "-"
+                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: "-"
+                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [whose]
 PR
    sofa: _InitialView
@@ -1934,25 +1941,25 @@ Constituent
                                  children: FSArray
                                  syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: "-"
+                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: "-"
+                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [he]
 PR
    sofa: _InitialView
@@ -2061,27 +2068,27 @@ Constituent
                                     children: FSArray
                                     syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: "-"
+                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: "-"
+                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: "-"
+                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [had]
 Lemma
    sofa: _InitialView
@@ -2182,29 +2189,29 @@ Constituent
                                        children: FSArray
                                        syntacticFunction: <null>
                                     children: FSArray
-                                    syntacticFunction: "-"
+                                    syntacticFunction: <null>
                                  children: FSArray
-                                 syntacticFunction: "-"
+                                 syntacticFunction: <null>
                               children: FSArray
-                              syntacticFunction: "-"
+                              syntacticFunction: <null>
                            children: FSArray
-                           syntacticFunction: "-"
+                           syntacticFunction: <null>
                         children: FSArray
-                        syntacticFunction: "-"
+                        syntacticFunction: <null>
                      children: FSArray
-                     syntacticFunction: "-"
+                     syntacticFunction: <null>
                   children: FSArray
-                  syntacticFunction: "-"
+                  syntacticFunction: <null>
                children: FSArray
-               syntacticFunction: "-"
+               syntacticFunction: <null>
             children: FSArray
-            syntacticFunction: "-"
+            syntacticFunction: <null>
          children: FSArray
-         syntacticFunction: "-"
+         syntacticFunction: <null>
       children: FSArray
-      syntacticFunction: "-"
+      syntacticFunction: <null>
    children: FSArray
-   syntacticFunction: "-"
+   syntacticFunction: <null>
 [cultivated]
 Lemma
    sofa: _InitialView

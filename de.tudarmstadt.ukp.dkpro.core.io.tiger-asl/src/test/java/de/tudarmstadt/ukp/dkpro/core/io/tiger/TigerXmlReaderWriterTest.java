@@ -26,9 +26,11 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.custommonkey.xmlunit.XMLAssert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.junit.rules.TestName;
 import org.xml.sax.InputSource;
 
 public class TigerXmlReaderWriterTest
@@ -55,5 +57,20 @@ public class TigerXmlReaderWriterTest
         XMLAssert.assertXMLEqual(
                 new InputSource("src/test/resources/simple-sentence.xml"),
                 new InputSource(new File(targetFolder, "simple-sentence.xml").getPath()));
+    }
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
+    
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }

@@ -32,7 +32,10 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
@@ -53,8 +56,8 @@ public class TigerXmlReaderTest
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
 
-        String pennTree = "(VROOT ($( ``) (S (PN (NE Ross) (NE Perot)) (VAFIN wäre) "
-                + "(ADV vielleicht) (NP (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))";
+        String pennTree = "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) "
+                + "(ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))";
 
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
     }
@@ -85,7 +88,8 @@ public class TigerXmlReaderTest
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]tiger-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de");
+                TigerXmlReader.PARAM_LANGUAGE, "de",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
@@ -110,7 +114,8 @@ public class TigerXmlReaderTest
         CollectionReader reader = createReader(TigerXmlReader.class,
                 TigerXmlReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TigerXmlReader.PARAM_PATTERNS, "[+]semeval1010-en-sample.xml", 
-                TigerXmlReader.PARAM_LANGUAGE, "en");
+                TigerXmlReader.PARAM_LANGUAGE, "en",
+                TigerXmlReader.PARAM_READ_PENN_TREE, true);
 
         AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
                 CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
@@ -122,5 +127,20 @@ public class TigerXmlReaderTest
         String test = readFileToString(testDump, "UTF-8").trim();
 
         assertEquals(reference, test);
+    }
+
+    @Rule
+    public TestName name = new TestName();
+
+    @Before
+    public void printSeparator()
+    {
+        System.out.println("\n=== " + name.getMethodName() + " =====================");
+    }
+    
+    @Before
+    public void setupLogging()
+    {
+        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
     }
 }
