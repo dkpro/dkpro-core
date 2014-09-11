@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright 2012
+ * Copyright 2014
  * Ubiquitous Knowledge Processing (UKP) Lab and FG Language Technology
  * Technische Universität Darmstadt
  *
@@ -35,6 +35,7 @@ import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.factory.JCasBuilder;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -47,47 +48,46 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Reads a file in the CoNLL-2006 format.
+ * Reads a file in the CoNLL-2009 format.
  * 
- * <pre>
- * Heutzutage heutzutage ADV _ _ ADV _ _
- * </pre>
  * <ol>
  * <li>ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</li>
  * <li>FORM - <b>(Token)</b> Word form or punctuation symbol.</li>
  * <li>LEMMA - <b>(Lemma)</b> Fine-grained part-of-speech tag, where the tagset depends on the
  * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>CPOSTAG - <b>(unused)</b></li>
- * <li>POSTAG - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the
- * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>FEATS - <b>(Morpheme)</b> Unordered set of syntactic and/or morphological features (depending
+ * <li>PLEMMA - Automatically predicted lemma of FORM</li>
+ * <li>POS - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the language,
+ * or identical to the coarse-grained part-of-speech tag if not available.</li>
+ * <li>PPOS - Automatically predicted major POS by a language-specific tagger</li>
+ * <li>FEAT - <b>(Morpheme)</b> Unordered set of syntactic and/or morphological features (depending
  * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
+ * <li>PFEAT - Automatically predicted morphological features (if applicable)</li>
  * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
  * ('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
  * an ID of zero.</li>
+ * <li>PHEAD - Automatically predicted syntactic head</li>
  * <li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
  * depends on the particular language. Note that depending on the original treebank annotation, the
  * dependency relation may be meaningfull or simply 'ROOT'.</li>
- * <li>PHEAD - <b>(ignored)</b> Projective head of current token, which is either a value of ID or
- * zero ('0'), or an underscore if not available. Note that depending on the original treebank
- * annotation, there may be multiple tokens an with ID of zero. The dependency structure resulting
- * from the PHEAD column is guaranteed to be projective (but is not available for all languages),
- * whereas the structures resulting from the HEAD column will be non-projective for some sentences
- * of some languages (but is always available).</li>
- * <li>PDEPREL - <b>(ignored) Dependency relation to the PHEAD, or an underscore if not available.
- * The set of dependency relations depends on the particular language. Note that depending on the
- * original treebank annotation, the dependency relation may be meaningfull or simply 'ROOT'.</b></li>
+ * <li>PDEPREL - Automatically predicted dependency relation to PHEAD</li>
+ * <li>FILLPRED - Contains ‘Y’ for argument-bearing tokens</li>
+ * <li>PRED - (sense) identifier of a semantic “predicate” coming from a current token</li>
+ * <li>APREDs - Columns with argument labels for each semantic predicate (in the ID order)</li>
  * </ol>
  * 
  * Sentences are separated by a blank new line.
  * 
- * @author Seid Muhie Yimam
- * @author Richard Eckart de Castilho
- * 
- * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
+ * @see <a href="http://ufal.mff.cuni.cz/conll2009-st/task-description.html">CoNLL 2009 Shared Task:
+ *      predict syntactic and semantic dependencies and their labeling</a>
+ * @see <a href="http://www.mt-archive.info/CoNLL-2009-Hajic.pdf">The CoNLL-2009 Shared Task:
+ *      Syntactic and Semantic Dependencies in Multiple Languages</a>
+ * @see <a href="http://www.aclweb.org/anthology/W08-2121.pdf">The CoNLL-2008 Shared Task on Joint
+ *      Parsing of Syntactic and Semantic Dependencies</a>
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -95,8 +95,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
-public class Conll2006Reader
+        "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate",
+        "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument"})
+public class Conll2009Reader
     extends JCasResourceCollectionReader_ImplBase
 {
     public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
@@ -136,19 +138,28 @@ public class Conll2006Reader
     @ConfigurationParameter(name = PARAM_READ_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean readDependency;
 
+    public static final String PARAM_READ_SEMANTIC_PREDICATE = "readSemanticPredicate";
+    @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
+    private boolean readSemanticPredicate;
+
     private static final String UNUSED = "_";
 
     private static final int ID = 0;
-    private static final int FORM = 1;
+    private static final int FORM = 1; 
     private static final int LEMMA = 2;
-    // private static final int CPOSTAG = 3;
-    private static final int POSTAG = 4;
-    private static final int FEATS = 5;
-    private static final int HEAD = 6;
-    private static final int DEPREL = 7;
-    // private static final int PHEAD = 8;
-    // private static final int PDEPREL = 9;
-
+    // private static final int PLEMMA = 3; // Ignored
+    private static final int POS = 4;
+    // private static final int PPOS = 5; // Ignored
+    private static final int FEAT = 6;
+    // private static final int PFEAT = 7; // Ignored
+    private static final int HEAD = 8;
+    // private static final int PHEAD = 9; // Ignored
+    private static final int DEPREL = 10;
+    // private static final int PDEPREL = 11; // Ignored
+    // private static final int FILLPRED = 12; // Ignored
+    private static final int PRED = 13;
+    private static final int APRED = 14;
+    
     private MappingProvider posMappingProvider;
 
     @Override
@@ -204,6 +215,7 @@ public class Conll2006Reader
 
             // Tokens, Lemma, POS
             Map<Integer, Token> tokens = new HashMap<Integer, Token>();
+            List<SemanticPredicate> preds = new ArrayList<>();
             for (String[] word : words) {
                 // Read token
                 Token token = doc.add(word[FORM], Token.class);
@@ -219,22 +231,29 @@ public class Conll2006Reader
                 }
 
                 // Read part-of-speech tag
-                if (!UNUSED.equals(word[POSTAG]) && readPos) {
-                    Type posTag = posMappingProvider.getTagType(word[POSTAG]);
+                if (!UNUSED.equals(word[POS]) && readPos) {
+                    Type posTag = posMappingProvider.getTagType(word[POS]);
                     POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
                             token.getEnd());
-                    pos.setPosValue(word[POSTAG]);
+                    pos.setPosValue(word[POS]);
                     pos.addToIndexes();
                     token.setPos(pos);
                 }
 
                 // Read morphological features
-                if (!UNUSED.equals(word[FEATS]) && readMorph) {
+                if (!UNUSED.equals(word[FEAT]) && readMorph) {
                     Morpheme morphtag = new Morpheme(aJCas, token.getBegin(), token.getEnd());
-                    morphtag.setMorphTag(word[FEATS]);
+                    morphtag.setMorphTag(word[FEAT]);
                     morphtag.addToIndexes();
                 }
 
+                if (!UNUSED.equals(word[PRED]) && readSemanticPredicate) {
+                    SemanticPredicate pred = new SemanticPredicate(aJCas, token.getBegin(), token.getEnd());
+                    pred.setCategory(word[PRED]);
+                    pred.addToIndexes();
+                    preds.add(pred);
+                }
+                
                 sentenceEnd = token.getEnd();
             }
 
@@ -258,6 +277,26 @@ public class Conll2006Reader
                         rel.setEnd(rel.getDependent().getEnd());
                         rel.addToIndexes();
                     }
+                }
+            }
+            
+            // Semantic arguments
+            if (readSemanticPredicate) {
+                // Get arguments for one predicate at a time
+                for (int p = 0; p < preds.size(); p++) {
+                    List<SemanticArgument> args = new ArrayList<SemanticArgument>();
+                    for (String[] word : words) {
+                        if (!UNUSED.equals(word[APRED+p])) {
+                            Token token = tokens.get(Integer.valueOf(word[ID]));
+                            SemanticArgument arg = new SemanticArgument(aJCas, token.getBegin(),
+                                    token.getEnd());
+                            arg.setRole(word[APRED+p]);
+                            arg.addToIndexes();
+                            args.add(arg);
+                        }
+                    }
+                    SemanticPredicate pred = preds.get(p);
+                    pred.setArguments(FSCollectionFactory.createFSArray(aJCas, args));
                 }
             }
 
@@ -290,11 +329,11 @@ public class Conll2006Reader
                 break; // Consider end of sentence
             }
             String[] fields = line.split("\t");
-            if (fields.length != 10) {
-                throw new IOException(
-                        "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
-                                + fields.length + ": [" + line + "]");
-            }
+//            if (fields.length != 10) {
+//                throw new IOException(
+//                        "Invalid file format. Line needs to have 10 tab-separated fields, but it has "
+//                                + fields.length + ": [" + line + "]");
+//            }
             words.add(fields);
         }
 

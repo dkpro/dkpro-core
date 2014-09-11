@@ -7,3 +7,9 @@ src/test/resources/fi-orig.conll
   First two sentences from FinnTreeBank 3.1
   http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/sources/ftb3.1.conllx.gz
   Creative Commons Attribution 3.0 License  
+  
+src/test/resources/en-orig.conll
+
+  First two sentencs from CoNLL-2009 Shared Task Trial Data Download for English
+  http://ufal.mff.cuni.cz/conll2009-st/trial-data.html
+  
