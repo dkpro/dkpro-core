@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>com.googlecode.mate-tools</groupId>
 			<artifactId>anna</artifactId>
-			<version>3.5</version>
+			<version>3.61</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -140,22 +140,22 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-tagger-de-tiger</artifactId>
-				<version>20121024.1</version>
+				<version>20140113.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-de-tiger</artifactId>
-				<version>20121024.1</version>
+				<version>20140113.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-morphtagger-de-tiger</artifactId>
-				<version>20121024.1</version>
+				<version>20140113.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-de-tiger</artifactId>
-				<version>20121024.1</version>
+				<version>20140113.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

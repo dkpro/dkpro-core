@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
-import is2.mtag.Options;
 import is2.mtag.Tagger;
 
 import java.io.File;
@@ -122,9 +121,7 @@ public class MateMorphTagger
             {
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
-                String[] args = { "-model", modelFile.getPath() };
-                Options option = new Options(args);
-                return new Tagger(option); // create a MorphTagger
+                return new Tagger(modelFile.getPath()); // create a MorphTagger
             }
         };
 

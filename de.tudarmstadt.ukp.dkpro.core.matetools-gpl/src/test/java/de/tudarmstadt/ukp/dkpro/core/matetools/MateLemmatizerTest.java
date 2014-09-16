@@ -43,8 +43,8 @@ public class MateLemmatizerTest
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-                "beispiel", "--", "welcher", "möglichst", "vieler", "konstituent", "und",
-                "dependenz", "beinhalten", "--" };
+                "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
+                "Dependenz", "beinhalten", "--" };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }

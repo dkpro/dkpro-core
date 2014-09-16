@@ -46,15 +46,12 @@ public class MateMorphTaggerTest
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-                "beispiel", "--", "welcher", "möglichst", "vieler", "konstituent", "und",
-                "dependenz", "beinhalten", "--" };
+                "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
+                "Dependenz", "beinhalten", "--" };
 
-        String[] morphTagsExpected = { "case=nom|number=pl|gender=*|person=1",
-                "number=pl|person=1|tense=pres|mood=ind", "case=acc|number=sg|gender=neut", "_",
-                "case=acc|number=sg|gender=neut|degree=pos", "case=acc|number=sg|gender=neut", "_",
-                "case=acc|number=sg|gender=neut", "_", "case=acc|number=pl|gender=*",
-                "case=acc|number=pl|gender=*", "_", "case=acc|number=pl|gender=fem",
-                "number=sg|person=3|tense=pres|mood=ind", "_" };
+        String[] morphTagsExpected = { "pl|1|pres|ind", "acc|sg|neut", "_", "nom|sg|neut|pos",
+                "nom|sg|neut", "_", "nom|sg|neut", "_", "nom|pl|*", "gen|pl|masc", "_",
+                "gen|pl|masc", "sg|3|pres|ind", "_" };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
@@ -74,11 +71,10 @@ public class MateMorphTaggerTest
                 "exemple", "très", "compliqué,", "qui", "contenir", "de", "constituant", "que",
                 "de", "nombreux", "dépendance", "et", "que", "possible", "." };
 
-        String[] morphTagsExpected = { "g=m|n=p|p=1|s=suj", "m=ind|n=p|p=1|t=pst", "g=m|n=s|s=c",
-                "_", "g=f|n=s|s=c", "_", "g=m|n=s|s=c", "_", "g=m|n=s|s=qual", "g=m|n=p|p=3|s=rel",
-                "m=ind|n=s|p=3|t=pst", "g=m|n=p|s=ind", "g=m|n=p|s=c", "g=m|n=p|p=3|s=rel",
-                "g=f|n=p|s=ind", "g=f|n=p|s=qual", "g=f|n=p|s=c", "s=c", "s=s", "g=m|n=s|s=qual",
-                "s=s" };
+        String[] morphTagsExpected = { "nom|pl|masc|pos", "acc|sg|neut", "nom|pl|neut",
+                "nom|pl|neut", "_", "acc|sg|neut", "_", "nom|pl|neut", "nom|pl|neut", "*|*|*",
+                "nom|pl|neut", "nom|pl|neut", "dat|sg|masc", "acc|pl|*", "gen|sg|masc",
+                "nom|pl|neut", "acc|sg|fem|sup", "nom|pl|neut", "nom|pl|neut", "nom|pl|neut" };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));

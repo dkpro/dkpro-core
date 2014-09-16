@@ -91,7 +91,7 @@ public class MatePosTagger
 
     /**
      * Log the tag set(s) when a model is loaded.
-     * 
+     *
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -189,8 +189,8 @@ public class MatePosTagger
             sd.setLemmas(lemmas.toArray(new String[0]));
             String[] posTags = modelProvider.getResource().apply(sd).ppos;
 
-            for (int i = 1; i < posTags.length; i++) {
-                Token token = tokens.get(i - 1);
+            for (int i = 0; i < posTags.length; i++) {
+                Token token = tokens.get(i);
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
                 posTag.setPosValue(posTags[i]);
