@@ -25,6 +25,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -57,6 +58,7 @@ public class MateMorphTaggerTest
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
     }
 
+    @Ignore
     @Test
     public void testFrench()
         throws Exception
