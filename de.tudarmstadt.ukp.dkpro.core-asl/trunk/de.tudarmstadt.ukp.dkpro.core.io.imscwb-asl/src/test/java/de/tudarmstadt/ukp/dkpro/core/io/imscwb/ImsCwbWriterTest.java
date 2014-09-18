@@ -33,6 +33,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
 
 /**
  *
@@ -56,16 +57,20 @@ public class ImsCwbWriterTest
 		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);
 
+		AnalysisEngineDescription stem = createEngineDescription(
+				SnowballStemmer.class);
+
 		AnalysisEngineDescription tw = createEngineDescription(
 				ImsCwbWriter.class,
 				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
+				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
+				ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" });
 
 		AnalysisEngineDescription cdw = createEngineDescription(
 				CasDumpWriter.class,
 				CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
 
-		runPipeline(ner, tag, tw, cdw);
+		runPipeline(ner, tag, stem, tw, cdw);
 
 		String reference = FileUtils.readFileToString(
 				new File("src/test/resources/reference/corpus-sample.ims"), "UTF-8");
@@ -74,7 +79,7 @@ public class ImsCwbWriterTest
 		assertEquals(reference, actual);
 	}
 
-	@Ignore("FX8 is a file from the BNC. While available online for download, we currently do "
+	@Ignore("FX8 is a file from the BNC. While available online for download, we currently do not "
 			+ "ship it due to licensing issues.")
 	@Test
 	public void test1a()

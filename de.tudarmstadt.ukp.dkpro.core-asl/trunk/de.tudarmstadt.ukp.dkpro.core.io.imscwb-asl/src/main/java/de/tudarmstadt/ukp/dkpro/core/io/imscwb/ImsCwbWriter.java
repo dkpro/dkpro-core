@@ -38,11 +38,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -70,7 +75,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
 public class ImsCwbWriter
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
 	public static final String E_SENTENCE = "sentence";
 	public static final String E_TEXT = "text";
@@ -137,8 +142,8 @@ public class ImsCwbWriter
 	private boolean writeDocumentTag;
 
 	/**
-	 * Write a pseudo-XML tag with the name {@code text} to mark the start and end of a
-	 * document. This is used by CQPweb.
+	 * Write a pseudo-XML tag with the name {@code text} to mark the start and end of a document.
+	 * This is used by CQPweb.
 	 */
 	public static final String PARAM_WRITE_TEXT_TAG = "writeTextTag";
 	@ConfigurationParameter(name = PARAM_WRITE_TEXT_TAG, mandatory = true, defaultValue = "true")
@@ -152,6 +157,15 @@ public class ImsCwbWriter
 	private boolean writeOffsets;
 
 	/**
+	 * Write additional token-level annotation features. These have to be given as an array of fully
+	 * qualified feature paths (fully.qualified.classname/featureName). The names for these
+	 * annotations in CQP are their lowercase shortnames.
+	 */
+	public static final String PARAM_ADDITIONAL_FEATURES = "additionalFeatures";
+	@ConfigurationParameter(name = PARAM_ADDITIONAL_FEATURES, mandatory = false)
+	private String[] additionalFeatures;
+
+	/**
 	 * Make document IDs compatible with CQPweb. CQPweb demands an id consisting of only letters,
 	 * numbers and underscore.
 	 */
@@ -160,8 +174,8 @@ public class ImsCwbWriter
 	private boolean cqpwebCompatibility;
 
 	/**
-	 * Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if
-	 * you want the write to directly encode into the CQP binary format.
+	 * Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if you
+	 * want the write to directly encode into the CQP binary format.
 	 */
 	public static final String PARAM_CQP_HOME = "cqpHome";
 	@ConfigurationParameter(name = PARAM_CQP_HOME, mandatory = false)
@@ -174,14 +188,14 @@ public class ImsCwbWriter
 	 * (default: false)
 	 */
 	public static final String PARAM_CQP_COMPRESS = "cqpCompress";
-	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue="false")
+	@ConfigurationParameter(name = PARAM_CQP_COMPRESS, mandatory = true, defaultValue = "false")
 	private boolean cqpCompress;
 
 	/**
 	 * The name of the generated corpus.
 	 */
 	public static final String PARAM_CORPUS_NAME = "corpusName";
-	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue="corpus")
+	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue = "corpus")
 	private String corpusName;
 
 	private static final String LS = "\n";
@@ -195,7 +209,7 @@ public class ImsCwbWriter
 
 	@Override
 	public void initialize(UimaContext context)
-		throws ResourceInitializationException
+	    throws ResourceInitializationException
 	{
 		super.initialize(context);
 
@@ -221,7 +235,7 @@ public class ImsCwbWriter
 
 	@Override
 	public void process(JCas jcas)
-		throws AnalysisEngineProcessException
+	    throws AnalysisEngineProcessException
 	{
 		String documentId = DocumentMetaData.get(jcas).getDocumentId();
 		String documentUri = DocumentMetaData.get(jcas).getDocumentUri();
@@ -264,7 +278,8 @@ public class ImsCwbWriter
 
 					// write coarse grained pos tag
 					if (writeCPOS) {
-						field(token.getPos() != null ? token.getPos().getType().getShortName() : "-");
+						field(token.getPos() != null ? token.getPos().getType().getShortName()
+						        : "-");
 					}
 
 					// write lemma
@@ -282,6 +297,17 @@ public class ImsCwbWriter
 						field(String.valueOf(token.getBegin()));
 						field(String.valueOf(token.getEnd()));
 					}
+
+					// write additional tags
+					if (additionalFeatures != null) {
+						// try {
+						for (String featurePath : additionalFeatures) {
+							String val = getCoveredAnnotationFeatureValue(featurePath, token);
+							field(val);
+						}
+						// }
+					}
+
 					bw.write(LS);
 				}
 				endElement(E_SENTENCE);
@@ -300,7 +326,8 @@ public class ImsCwbWriter
 		}
 	}
 
-	private void startElement(String aElement, String... aAttributes) throws IOException
+	private void startElement(String aElement, String... aAttributes)
+	    throws IOException
 	{
 		bw.write('<');
 		bw.write(aElement);
@@ -309,7 +336,7 @@ public class ImsCwbWriter
 			for (int i = 0; i < aAttributes.length; i += 2) {
 				bw.write(aAttributes[i]);
 				bw.write("=\"");
-				bw.write(escapeXml(aAttributes[i+1]));
+				bw.write(escapeXml(aAttributes[i + 1]));
 				bw.write('"');
 			}
 		}
@@ -317,7 +344,8 @@ public class ImsCwbWriter
 		bw.write(LS);
 	}
 
-	private void endElement(String aElement) throws IOException
+	private void endElement(String aElement)
+	    throws IOException
 	{
 		bw.write("</");
 		bw.write(aElement);
@@ -326,13 +354,15 @@ public class ImsCwbWriter
 
 	}
 
-	private void field(String aValue) throws IOException
+	private void field(String aValue)
+	    throws IOException
 	{
 		bw.write(TAB);
 		bw.write(escapeXml(aValue));
 	}
 
-	private Writer getWriter() throws IOException
+	private Writer getWriter()
+	    throws IOException
 	{
 		if (cqpHome != null) {
 			dataDirectory = new File(outputFile, "data");
@@ -354,11 +384,11 @@ public class ImsCwbWriter
 			// -d <dir> directory for data files created by ./cwb-encode
 			cmd.add("-d");
 			cmd.add(dataDirectory.getPath());
-			// -R <rf>   create registry entry (named <rf>) listing all encoded attributes
+			// -R <rf> create registry entry (named <rf>) listing all encoded attributes
 			cmd.add("-R");
 			cmd.add(new File(registryDirectory, corpusName).getPath());
 
-			// -P <att>  declare additional p-attribute <att>
+			// -P <att> declare additional p-attribute <att>
 			if (writePOS) {
 				cmd.add("-P");
 				cmd.add(ATTR_POS);
@@ -386,19 +416,35 @@ public class ImsCwbWriter
 				cmd.add(ATTR_END);
 			}
 
+			if (additionalFeatures != null) {
+				for (String featurePath : additionalFeatures) {
+					String[] segments = featurePath.split("/", 2);
+					if (segments.length != 2) {
+						throw new IllegalArgumentException("Given feature path is malformed: ["
+						        + featurePath + "] (exactly one \"/\" (slash) must exist).");
+					}
+					String typeName = segments[0];
+					String featureName = segments.length > 1 ? segments[1] : "";
+					String name = (StringUtils.substringAfterLast(typeName, ".") + "_" + featureName)
+					        .toLowerCase();
+					cmd.add("-P");
+					cmd.add(name);
+				}
+			}
+
 			if (writeDocumentTag) {
 				cmd.add("-S");
-				cmd.add(E_DOCUMENT+":0+"+ATTR_URI);
+				cmd.add(E_DOCUMENT + ":0+" + ATTR_URI);
 			}
 
 			if (writeTextTag) {
 				cmd.add("-S");
-				cmd.add(E_TEXT+":0+"+ATTR_ID);
+				cmd.add(E_TEXT + ":0+" + ATTR_ID);
 			}
 
 			{
 				cmd.add("-S");
-				cmd.add(E_SENTENCE+":0");
+				cmd.add(E_SENTENCE + ":0");
 			}
 
 			getLogger().info("Spawning cwb-encode: " + join(cmd, " "));
@@ -410,7 +456,7 @@ public class ImsCwbWriter
 		}
 		else {
 			return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFile),
-					encoding));
+			        encoding));
 		}
 	}
 
@@ -439,7 +485,7 @@ public class ImsCwbWriter
 
 	@Override
 	public void collectionProcessComplete()
-		throws AnalysisEngineProcessException
+	    throws AnalysisEngineProcessException
 	{
 		IOUtils.closeQuietly(bw);
 		if (childProcess != null) {
@@ -453,14 +499,14 @@ public class ImsCwbWriter
 			}
 
 			runCwbCommand("cwb-makeall", "-r", registryDirectory.getPath(), "-V",
-					corpusName.toUpperCase());
+			        corpusName.toUpperCase());
 
 			if (cqpCompress) {
 				// Compress the token sequence of a positional attribute. Creates .huf, .hcd,
 				// and .huf.syn files, which replace the corresponding .corpus files. After
 				// running this tool successfully, the .corpus files can be deleted.
 				runCwbCommand("cwb-huffcode", "-r", registryDirectory.getPath(), "-A",
-						corpusName.toUpperCase());
+				        corpusName.toUpperCase());
 				for (File f : listFiles(dataDirectory, new String[] { "huf" }, false)) {
 					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus"));
 				}
@@ -469,7 +515,7 @@ public class ImsCwbWriter
 				// which replace the corresponding .corpus.rev and .corpus.rdx files. After
 				// running this tool successfully, the latter files can be deleted.
 				runCwbCommand("cwb-compress-rdx", "-r", registryDirectory.getPath(), "-A",
-						corpusName.toUpperCase());
+				        corpusName.toUpperCase());
 				for (File f : listFiles(dataDirectory, new String[] { "crc" }, false)) {
 					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus.rev"));
 					deleteQuietly(new File(removeExtension(f.getPath()) + ".corpus.rdx"));
@@ -479,31 +525,31 @@ public class ImsCwbWriter
 	}
 
 	private void runCwbCommand(String aCommand, String... aArguments)
-			throws AnalysisEngineProcessException
-		{
-			try {
-				List<String> args = new ArrayList<String>(aArguments.length + 1);
-				args.add(new File(cqpHome, aCommand).getAbsolutePath());
-				for (String arg : aArguments) {
-					args.add(arg);
-				}
+	    throws AnalysisEngineProcessException
+	{
+		try {
+			List<String> args = new ArrayList<String>(aArguments.length + 1);
+			args.add(new File(cqpHome, aCommand).getAbsolutePath());
+			for (String arg : aArguments) {
+				args.add(arg);
+			}
 
-				ProcessBuilder pb = new ProcessBuilder(args);
-				getLogger().info("Spawning " + aCommand + ": " + join(args, " "));
-				childProcess = pb.start();
-				childProcess.waitFor();
-			}
-			catch (InterruptedException e) {
-				throw new AnalysisEngineProcessException(e);
-			}
-			catch (IOException e) {
-				throw new AnalysisEngineProcessException(e);
-			}
-			finally {
-				attendChildProceess();
-				childProcess = null;
-			}
+			ProcessBuilder pb = new ProcessBuilder(args);
+			getLogger().info("Spawning " + aCommand + ": " + join(args, " "));
+			childProcess = pb.start();
+			childProcess.waitFor();
 		}
+		catch (InterruptedException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+		catch (IOException e) {
+			throw new AnalysisEngineProcessException(e);
+		}
+		finally {
+			attendChildProceess();
+			childProcess = null;
+		}
+	}
 
 	private static Map<String, String> CHARSET_MAPPING = new HashMap<String, String>();
 	static {
@@ -515,7 +561,7 @@ public class ImsCwbWriter
 	{
 		String enc = CHARSET_MAPPING.get(aEncoding);
 		if (enc == null) {
-			throw new IllegalArgumentException("Encoding ["+enc+"] not supported by CWB.");
+			throw new IllegalArgumentException("Encoding [" + enc + "] not supported by CWB.");
 		}
 		return enc;
 	}
@@ -523,6 +569,58 @@ public class ImsCwbWriter
 	private static String escapeXml(String aString)
 	{
 		return aString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
-				.replaceAll("\"", "&quot;").replaceAll("'", "&apos;");
+		        .replaceAll("\"", "&quot;").replaceAll("'", "&apos;");
+	}
+
+	/**
+	 * Get the feature value of an annotation which is covered by another annotation.
+	 *
+	 * @param aFeaturePath
+	 *            The fully qualified feature path of the feature in question:
+	 *            your.package.and.annotation.class.name/featureName
+	 * @param aCoveringAnnotation
+	 *            The annotation that covers the annotation for which the feature value should be
+	 *            extracted.
+	 * @return the feature value if a feature name is given; coveredText if only the annotation is
+	 *         given
+	 */
+	public String getCoveredAnnotationFeatureValue(String aFeaturePath,
+	        AnnotationFS aCoveringAnnotation)
+	{
+		String[] segments = aFeaturePath.split("/", 2);
+		if (segments.length != 2) {
+			throw new IllegalArgumentException("Given feature path is malformed: [" + aFeaturePath
+			        + "] (exactly one \"/\" (slash) must exist).");
+		}
+		String typeName = segments[0];
+		String featureName = segments[1];
+		Type type = CasUtil.getAnnotationType(aCoveringAnnotation.getCAS(), typeName);
+		Feature feature = type.getFeatureByBaseName(featureName);
+		if (feature == null) {
+			throw new IllegalArgumentException("Feature [" + featureName
+			        + "] is not defined for type [" + type + "] (check lower/uppercase spelling).");
+		}
+
+		List<AnnotationFS> covered = CasUtil.selectCovered(type, aCoveringAnnotation);
+		switch (covered.size()) {
+		case 0:
+			if (getLogger().isWarnEnabled()) {
+				getLogger().warn(
+				        "There is no annotation of type [" + typeName
+				                + "] available which is covered by [" + aCoveringAnnotation
+				                + "], returning empty string.");
+			}
+			return "";
+		case 1:
+			return covered.get(0).getFeatureValueAsString(feature);
+		default:
+			if (getLogger().isWarnEnabled()) {
+				getLogger().warn(
+				        "There are multiple annotations of type [" + typeName
+				                + "] available which are covered by [" + aCoveringAnnotation
+				                + "], returning the first.");
+			}
+			return covered.get(0).getFeatureValueAsString(feature);
+		}
 	}
 }
