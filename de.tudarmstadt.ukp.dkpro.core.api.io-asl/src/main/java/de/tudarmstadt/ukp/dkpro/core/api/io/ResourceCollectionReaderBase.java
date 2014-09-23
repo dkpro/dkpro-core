@@ -534,7 +534,6 @@ public abstract class ResourceCollectionReaderBase
             // Return only dirs or files...
             if ((file.getPath().length() == 0) || (aFileOrDir && file.isFile())
                     || (!aFileOrDir && file.isDirectory())) {
-                System.out.println(aResource);
                 return aResource.getFile().toURI();
             }
             else {
