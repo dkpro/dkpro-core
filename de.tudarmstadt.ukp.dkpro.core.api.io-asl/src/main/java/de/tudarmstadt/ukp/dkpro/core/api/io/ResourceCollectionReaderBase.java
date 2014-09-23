@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
 
-import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -475,7 +475,13 @@ public abstract class ResourceCollectionReaderBase
 
                 // If the resource was not excluded, we add it to the results.
                 String p = sResource.substring(matchBase.length());
-                Resource r = new Resource(base + p, base, resource.getURI(), matchBase, p, resource);
+                String loc = base + p;
+                if (isSingleLocation()) {
+                    // If it was a single location, then use the parent folder as base
+                    p = StringUtils.substringAfterLast(matchBase, "/");
+                    matchBase = StringUtils.substringBeforeLast(matchBase, "/");
+                }
+                Resource r = new Resource(loc, base, resource.getURI(), matchBase, p, resource);
                 result.add(r);
             }
         }
@@ -551,8 +557,6 @@ public abstract class ResourceCollectionReaderBase
      */
     protected void initCas(CAS aCas, Resource aResource, String aQualifier)
     {
-        boolean singleLocation = patterns == null;
-        
         String qualifier = aQualifier != null ? "#" + aQualifier : "";
         try {
             // Set the document metadata
@@ -561,16 +565,8 @@ public abstract class ResourceCollectionReaderBase
             docMetaData.setDocumentUri(aResource.getResolvedUri().toString() + qualifier);
             docMetaData.setDocumentId(aResource.getPath() + qualifier);
             if (aResource.getBase() != null) {
-                if (singleLocation) {
-                    // If it was a single location, then use the parent folder as base
-                    String base = FilenameUtils.getFullPath(aResource.getResolvedBase());
-                    docMetaData.setDocumentBaseUri(base);
-                    docMetaData.setCollectionId(base);
-                }
-                else {
-                    docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
-                    docMetaData.setCollectionId(aResource.getResolvedBase());
-                }
+                docMetaData.setDocumentBaseUri(aResource.getResolvedBase());
+                docMetaData.setCollectionId(aResource.getResolvedBase());
             }
 
             // Set the document language
