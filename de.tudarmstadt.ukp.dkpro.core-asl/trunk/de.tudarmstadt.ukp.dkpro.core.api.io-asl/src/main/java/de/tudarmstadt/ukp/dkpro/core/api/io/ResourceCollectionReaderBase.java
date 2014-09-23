@@ -408,14 +408,19 @@ public abstract class ResourceCollectionReaderBase
         AntPathMatcher matcher = new AntPathMatcher();
         List<Resource> result = new ArrayList<Resource>();
 
-        // E.g. a classpath location may resolve to multiple locations. Thus we collect all the
-        // locations to which the base resolves.
-        org.springframework.core.io.Resource[] rBases = resolver.getResources(base);
+        // Collect the bases only if we need them later on. If no base is set, then getUri() will
+        // not work because the base ("") may be resolved to one or more JAR locations and getUri()
+        // internally expects file locations
         Set<String> rsBases = new HashSet<String>();
-        for (org.springframework.core.io.Resource rBase : rBases) {
-            URI uri = getUri(rBase, false);
-            if (uri != null) {
-                rsBases.add(uri.toString());
+        if (base.length() > 0 && !singleLocation) {
+            // E.g. a classpath location may resolve to multiple locations. Thus we collect all the
+            // locations to which the base resolves.
+            org.springframework.core.io.Resource[] rBases = resolver.getResources(base);
+            for (org.springframework.core.io.Resource rBase : rBases) {
+                URI uri = getUri(rBase, false);
+                if (uri != null) {
+                    rsBases.add(uri.toString());
+                }
             }
         }
 
@@ -527,7 +532,9 @@ public abstract class ResourceCollectionReaderBase
             }
 
             // Return only dirs or files...
-            if ((file.getPath().length() == 0) || (aFileOrDir && file.isFile()) || (!aFileOrDir && file.isDirectory())) {
+            if ((file.getPath().length() == 0) || (aFileOrDir && file.isFile())
+                    || (!aFileOrDir && file.isDirectory())) {
+                System.out.println(aResource);
                 return aResource.getFile().toURI();
             }
             else {
