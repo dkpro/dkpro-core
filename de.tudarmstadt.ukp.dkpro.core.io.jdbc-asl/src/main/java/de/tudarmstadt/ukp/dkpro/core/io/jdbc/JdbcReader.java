@@ -166,7 +166,7 @@ public class JdbcReader
     private void query() throws ResourceInitializationException
     {
         try {
-            Statement statement = sqlConnection.createStatement();
+            Statement statement = sqlConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             resultSet = statement.executeQuery(query);
             resultSet.last();
             resultSetSize = resultSet.getRow();
@@ -193,6 +193,11 @@ public class JdbcReader
     public void getNext(CAS cas)
         throws IOException, CollectionException
     {
+    	try {
+    		resultSet.next(); // advance to next item (used to be done in hasNext())
+    	} catch (SQLException e) {
+    		throw new CollectionException(e);
+    	}
         // Store data into CAS
         DocumentMetaData metadata = null;
         try {
@@ -239,14 +244,7 @@ public class JdbcReader
     public boolean hasNext()
         throws IOException, CollectionException
     {
-        try {
-            // REC: this a problem because hasNext() might be called many times which would cause
-            // skipping of rows.
-            return resultSet.next();
-        }
-        catch (SQLException e) {
-            throw new CollectionException(e);
-        }
+       	return (completed < resultSetSize);
     }
 
     @Override
