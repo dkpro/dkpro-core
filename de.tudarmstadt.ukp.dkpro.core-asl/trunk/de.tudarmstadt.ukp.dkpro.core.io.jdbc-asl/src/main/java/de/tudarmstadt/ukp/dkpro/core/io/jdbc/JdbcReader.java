@@ -29,6 +29,7 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.dbutils.DbUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
@@ -143,6 +144,7 @@ public class JdbcReader
     }
 
     private void openDatabaseConnection()
+    	throws ResourceInitializationException
     {
         // Open connection
         if (!connection.endsWith("/")) {
@@ -155,11 +157,10 @@ public class JdbcReader
             sqlConnection = DriverManager.getConnection(url);
         }
         catch (ClassNotFoundException e) {
-            throw new RuntimeException("Failed to load the specified database driver.", e);
+            throw new ResourceInitializationException(e);
         }
         catch (SQLException e) {
-            throw new RuntimeException(
-                    "There was an unrecoverable error while connecting to the database.", e);
+            throw new ResourceInitializationException(e);
         }
     }
 
@@ -251,18 +252,7 @@ public class JdbcReader
     public void close()
         throws IOException
     {
-        try {
-            // REC: each of these should be in its own try/catch. Maybe IOUtils and friends
-            // have a proper null-safe static closeQuietly() method for SQL connections and result
-            // sets?
-            resultSet.close();
-            sqlConnection.close();
-        }
-        catch (SQLException e) {
-            throw new RuntimeException("Couldn't close the database connection.", e);
-        }
-
-        super.close();
+    	DbUtils.closeQuietly(resultSet);
+    	DbUtils.closeQuietly(sqlConnection);
     }
-
 }
