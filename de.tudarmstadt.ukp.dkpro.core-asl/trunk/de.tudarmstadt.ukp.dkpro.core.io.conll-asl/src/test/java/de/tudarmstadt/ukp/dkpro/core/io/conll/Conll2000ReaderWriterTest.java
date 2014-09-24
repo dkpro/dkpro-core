@@ -17,45 +17,22 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class Conll2000ReaderWriterTest
 {
     @Test
-    public void test()
+    public void roundTrip()
         throws Exception
     {
-        CollectionReaderDescription reader = createReaderDescription(
-                Conll2000Reader.class, 
-                Conll2000Reader.PARAM_SOURCE_LOCATION, "src/test/resources/conll/2000/", 
-                Conll2000Reader.PARAM_PATTERNS, "chunk2000_test.conll");
-
-        AnalysisEngineDescription writer = createEngineDescription(
-                Conll2000Writer.class,
-                Conll2000Writer.PARAM_TARGET_LOCATION, "target/test-output", 
-                Conll2000Writer.PARAM_STRIP_EXTENSION, true);
-
-        AnalysisEngineDescription dumper = createEngineDescription(
-                CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/dump.txt");
-
-        runPipeline(reader, writer, dumper);
-
-        String reference = FileUtils.readFileToString(new File(
-                "src/test/resources/conll/2000/chunk2000_test.conll"), "UTF-8");
-        String actual = FileUtils.readFileToString(
-                new File("target/test-output/chunk2000_test.conll"), "UTF-8");
-        assertEquals(reference, actual);
+        testRoundTrip(Conll2000Reader.class, Conll2000Writer.class,
+                "conll/2000/chunk2000_test.conll");
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
