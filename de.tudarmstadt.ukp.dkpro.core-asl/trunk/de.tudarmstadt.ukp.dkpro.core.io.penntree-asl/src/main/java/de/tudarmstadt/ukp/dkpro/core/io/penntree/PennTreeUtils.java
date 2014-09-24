@@ -290,4 +290,22 @@ public class PennTreeUtils
         }
     }
 
+    public static List<PennTreeNode> getPreTerminals(PennTreeNode aNode)
+    {
+        List<PennTreeNode> preTerminals = new ArrayList<>();
+        getPreTerminals(aNode, preTerminals);
+        return preTerminals;
+    }
+    
+    private static void getPreTerminals(PennTreeNode aNode, List<PennTreeNode> aList)
+    {
+        if (aNode.isPreTerminal()) {
+            aList.add(aNode);
+        }
+        else {
+            for (PennTreeNode n : aNode.getChildren()) {
+                getPreTerminals(n, aList);
+            }
+        }
+    }
 }
