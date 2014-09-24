@@ -60,6 +60,14 @@ public class MappingProviderFactory
     }
     
     public static MappingProvider createConstituentMappingProvider(String aMappingLocation,
+            String aLanguage, HasResourceMetadata aSource)
+    {
+        MappingProvider p = createConstituentMappingProvider(aMappingLocation, null, aLanguage);
+        p.addImport("constituent.tagset", aSource);
+        return p;
+    }
+    
+    public static MappingProvider createConstituentMappingProvider(String aMappingLocation,
             String aTagset, String aLanguage)
     {
         MappingProvider p = new MappingProvider();
