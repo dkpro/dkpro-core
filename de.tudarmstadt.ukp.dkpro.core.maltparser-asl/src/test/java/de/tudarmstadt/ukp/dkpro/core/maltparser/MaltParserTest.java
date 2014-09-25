@@ -27,30 +27,23 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TagsetDescriptionStripper;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
  * @author Oliver Ferschke
- * @author Richard Eckart de Castilho
  */
 public class MaltParserTest
 {
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
-    
 //    /**
 //     * This test really only checks the tagsets and if any dependencies are created. Since we
 //     * currently to not have a POS tagger for Bengali, the dependencies are just bogus.
@@ -704,11 +697,5 @@ public class MaltParserTest
     }
 
     @Rule
-    public TestName testName = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + testName.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
