@@ -55,6 +55,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeToJCasConverter;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
 
@@ -142,6 +143,22 @@ public class Conll2012Reader
     @ConfigurationParameter(name = PARAM_READ_SEMANTIC_PREDICATE, mandatory = true, defaultValue = "true")
     private boolean readSemanticPredicate;
 
+    public static final String PARAM_READ_WORD_SENSE = "readWordSense";
+    @ConfigurationParameter(name = PARAM_READ_WORD_SENSE, mandatory = true, defaultValue = "true")
+    private boolean readWordSense;
+
+    public static final String PARAM_READ_CONSTITUENT = ComponentParameters.PARAM_READ_CONSTITUENT;
+    @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, mandatory = true, defaultValue = "true")
+    private boolean readConstituent;
+
+    public static final String PARAM_READ_COREFERENCE = ComponentParameters.PARAM_READ_COREFERENCE;
+    @ConfigurationParameter(name = PARAM_READ_COREFERENCE, mandatory = true, defaultValue = "true")
+    private boolean readCoreference;
+
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    private boolean readNamedEntity;
+
     /**
      * Use this constituent tag set to use to resolve the tag set mapping instead of using the
      * tag set defined as part of the model meta data. This can be useful if a custom model is
@@ -173,6 +190,9 @@ public class Conll2012Reader
     @ConfigurationParameter(name = PARAM_WRITE_TRACES_TO_TEXT, mandatory = false, defaultValue = "false")
     private boolean writeTracesToText;
     
+    /**
+     * Use the document ID declared in the file header instead of using the filename.
+     */
     public static final String PARAM_USE_HEADER_METADATA = "useHeaderMetadata";
     @ConfigurationParameter(name = PARAM_USE_HEADER_METADATA, mandatory = true, defaultValue = "true")
     private boolean useHeaderMetadata;
@@ -187,7 +207,7 @@ public class Conll2012Reader
     private static final int PARSE = 5;
     private static final int LEMMA = 6;
     private static final int PRED = 7;
-    // private static final int WORD_SENSE = 8;  // Ignored
+    private static final int WORD_SENSE = 8;
     // private static final int SPEAKER = 9; // Ignored
     private static final int NAMED_ENTITIES = 10;
     private static final int APRED = 11;
@@ -240,7 +260,9 @@ public class Conll2012Reader
                 posMappingProvider.configure(aJCas.getCas());
             }
 
-            constituentMappingProvider.configure(aJCas.getCas());
+            if (readConstituent) {
+                constituentMappingProvider.configure(aJCas.getCas());
+            }
         }
         catch (AnalysisEngineProcessException e) {
             throw new IOException(e);
@@ -297,12 +319,18 @@ public class Conll2012Reader
                     preds.add(pred);
                 }
 
-                if (!UNUSED.equals(word[PARSE])) {
+                if (!UNUSED.equals(word[PARSE]) && readConstituent) {
                     String fixed = word[PARSE].replace("*", "(" + word[POS] + " " + word[FORM] + ")"); 
                     parse.append(fixed);
                 }
+                
+                if (!UNUSED.equals(word[WORD_SENSE]) && readWordSense) {
+                    WordSense wordSense = new WordSense(aJCas, token.getBegin(), token.getEnd());
+                    wordSense.setValue(word[WORD_SENSE]);
+                    wordSense.addToIndexes();
+                }
 
-                if (!UNUSED.equals(word[word.length-1])) {
+                if (!UNUSED.equals(word[word.length-1]) && readCoreference) {
                     String[] chainFragments = word[word.length-1].split("\\|");
                     for (String chainFragment : chainFragments) {
                         boolean beginning = chainFragment.startsWith("(");
@@ -341,7 +369,7 @@ public class Conll2012Reader
             }
             
             // Named entities
-            {
+            if (readNamedEntity) {
                 int currentNeBegin = -1;
                 String currentNeType = null;
                 for (int i = 0; i < words.size(); i++) {
