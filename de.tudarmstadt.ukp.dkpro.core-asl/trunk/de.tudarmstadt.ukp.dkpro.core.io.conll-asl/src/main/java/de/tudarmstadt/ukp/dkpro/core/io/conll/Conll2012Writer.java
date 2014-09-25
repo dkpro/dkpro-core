@@ -41,6 +41,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 
+import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -129,6 +130,16 @@ public class Conll2012Writer
                 NamedEntity.class);
         Map<Token, Collection<CoreferenceLink>> corefIdx = indexCovering(aJCas, Token.class,
                 CoreferenceLink.class);
+        Map<CoreferenceLink, Integer> corefChainIdx = new HashMap<>();
+        
+        int chainId = 1;
+        for (CoreferenceChain chain : select(aJCas, CoreferenceChain.class)) {
+            for (CoreferenceLink link : chain.links()) {
+                corefChainIdx.put(link, chainId);
+            }
+            chainId++;
+        }
+        
         for (Sentence sentence : select(aJCas, Sentence.class)) {
             HashMap<Token, Row> ctokens = new LinkedHashMap<Token, Row>();
 
@@ -269,8 +280,8 @@ public class Conll2012Writer
                         if (coref.length() > 0) {
                             coref.append('|');
                         }
-                        coref.append(encodeMultiTokenAnnotation2(row.token, link,
-                                link.getReferenceType()));
+                        coref.append(encodeMultiTokenLink(row.token, link,
+                                corefChainIdx.get(link)));
                     }
                 }
                 if (coref.length() == 0) {
@@ -315,7 +326,7 @@ public class Conll2012Writer
         return buf.toString();
     }
 
-    private String encodeMultiTokenAnnotation2(Token aToken, AnnotationFS aAnnotation, String aLabel)
+    private String encodeMultiTokenLink(Token aToken, AnnotationFS aAnnotation, Integer aChainId)
     {
         boolean begin = aAnnotation.getBegin() == aToken.getBegin();
         boolean end = aAnnotation.getEnd() == aToken.getEnd();
@@ -325,7 +336,7 @@ public class Conll2012Writer
             buf.append('(');
         }
         if (begin|end) {
-            buf.append(aLabel);
+            buf.append(aChainId);
         }
         if (end) {
             buf.append(')');
