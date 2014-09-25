@@ -52,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate;
+import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeNode;
 import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
@@ -128,6 +129,8 @@ public class Conll2012Writer
                 SemanticArgument.class, Token.class);
         Map<Token, Collection<NamedEntity>> neIdx = indexCovering(aJCas, Token.class,
                 NamedEntity.class);
+        Map<Token, Collection<WordSense>> wordSenseIdx = indexCovered(aJCas, Token.class,
+                WordSense.class);
         Map<Token, Collection<CoreferenceLink>> corefIdx = indexCovering(aJCas, Token.class,
                 CoreferenceLink.class);
         Map<CoreferenceLink, Integer> corefChainIdx = new HashMap<>();
@@ -183,7 +186,14 @@ public class Conll2012Writer
                 if (neForToken != null && !neForToken.isEmpty()) {
                     row.ne = neForToken.iterator().next();
                 }
-                
+
+                // If there are multiple word senses for the current token, we keep only the
+                // first
+                Collection<WordSense> senseForToken = wordSenseIdx.get(row.token);
+                if (senseForToken != null && !senseForToken.isEmpty()) {
+                    row.wordSense = senseForToken.iterator().next();
+                }
+
                 row.coref = corefIdx.get(row.token);
                 
                 ctokens.put(row.token, row);
@@ -236,6 +246,9 @@ public class Conll2012Writer
                 }
                 
                 String wordSense = UNUSED;
+                if (row.wordSense != null) {
+                    wordSense = row.wordSense.getValue();
+                }
                 
                 String speaker = UNUSED; // FIXME
                 
@@ -347,8 +360,9 @@ public class Conll2012Writer
 
     private static final class Row
     {
-        public NamedEntity ne;
-        public String parse;
+        NamedEntity ne;
+        String parse;
+        WordSense wordSense;
         int id;
         Token token;
         SemanticPredicate pred;

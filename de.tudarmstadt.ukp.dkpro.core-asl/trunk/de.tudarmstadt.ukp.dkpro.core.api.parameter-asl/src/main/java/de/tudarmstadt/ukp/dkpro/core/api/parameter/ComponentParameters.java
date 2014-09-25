@@ -120,6 +120,8 @@ public final class ComponentParameters
 	
 	private static final String CONSTITUENT = "Constituent";
 
+   private static final String COREFERENCE = "Coreference";
+
 	private static final String PENN_TREE = "PennTree";
 	
 	private static final String DEPENDENCY = "Dependency";
@@ -159,7 +161,9 @@ public final class ComponentParameters
     public static final String PARAM_READ_MORPH = READ + MORPH;
     
 	public static final String PARAM_READ_CONSTITUENT = READ + CONSTITUENT;
-	
+
+    public static final String PARAM_READ_COREFERENCE = READ + COREFERENCE;
+
 	public static final String PARAM_READ_PENN_TREE = READ + PENN_TREE;
 	
 	public static final String PARAM_READ_DEPENDENCY = READ + DEPENDENCY;
@@ -179,6 +183,8 @@ public final class ComponentParameters
     public static final String PARAM_WRITE_MORPH = WRITE + MORPH;
 
 	public static final String PARAM_WRITE_CONSTITUENT = WRITE + CONSTITUENT;
+
+    public static final String PARAM_WRITE_COREFERENCE = WRITE + COREFERENCE;
 
 	public static final String PARAM_WRITE_PENN_TREE = WRITE + PENN_TREE;
 
