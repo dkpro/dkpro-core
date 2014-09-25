@@ -50,6 +50,7 @@ import org.maltparser.MaltParserService;
 import org.maltparser.core.exception.MaltChainedException;
 import org.maltparser.core.options.OptionManager;
 import org.maltparser.core.symbol.SymbolTable;
+import org.maltparser.core.symbol.parse.ParseSymbolTable;
 import org.maltparser.core.syntaxgraph.DependencyStructure;
 import org.maltparser.core.syntaxgraph.edge.Edge;
 import org.maltparser.core.syntaxgraph.node.TokenNode;
@@ -266,18 +267,22 @@ public class MaltParser
 
 	                SingletonTagset posTags = new SingletonTagset(
 	                        POS.class, metadata.getProperty("pos.tagset"));
-                    SymbolTable posTagTable = singleMalt.getSymbolTables().getSymbolTable("POSTAG");
-                    for (int i : posTagTable.getCodes()) {
+	                ParseSymbolTable posTagTable = (ParseSymbolTable) singleMalt.getSymbolTables()
+                            .getSymbolTable("POSTAG");
+                    for (int i = 0; i < posTagTable.getValueCounter(); i++) {
                         posTags.add(posTagTable.getSymbolCodeToString(i));
                     }
-	                addTagset(posTags);
-
+                    posTags.remove("#null#"); // Technical symbol introduced in MaltParser 1.8
+                    addTagset(posTags);
+                    
 	                SingletonTagset depTags = new SingletonTagset(
 	                        Dependency.class, metadata.getProperty("dependency.tagset"));
-                    SymbolTable depRelTable = singleMalt.getSymbolTables().getSymbolTable("DEPREL");
-                    for (int i : depRelTable.getCodes()) {
+                    ParseSymbolTable depRelTable = (ParseSymbolTable) singleMalt.getSymbolTables()
+                            .getSymbolTable("DEPREL");
+                    for (int i = 0; i < depRelTable.getValueCounter(); i++) {
                         depTags.add(depRelTable.getSymbolCodeToString(i));
                     }
+                    depTags.remove("#null#"); // Technical symbol introduced in MaltParser 1.8
 	                addTagset(depTags);
 
 	                if (printTagSet) {
