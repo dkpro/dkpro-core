@@ -47,5 +47,17 @@
         </featureDescription>
       </features>
     </typeDescription>
+  <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.semantics.type.WordSense</name>
+      <description/>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>value</name>
+          <description>The sense identifier.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
   </types>
 </typeSystemDescription>
