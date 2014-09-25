@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.conll;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -49,7 +50,8 @@ public class Conll2012ReaderWriterTest
 //                createEngineDescription(StanfordNamedEntityRecognizer.class),
 //                createEngineDescription(ClearNlpSemanticRoleLabeler.class),
 //                createEngineDescription(Conll2012Writer.class,
-//                        Conll2012Writer.PARAM_TARGET_LOCATION, testContext.getTestOutputFolderName()));
+//                        Conll2012Writer.PARAM_TARGET_LOCATION, "target/test-output/"+
+//                          testContext.getTestOutputFolderName()));
 //    }
     
     @Rule
