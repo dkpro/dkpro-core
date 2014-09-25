@@ -210,7 +210,7 @@ public class MaltParser
 				    // Warn if the model uses features that we currently do not support
 				    features = getFeatures(aUrl);
 				    Set<String> unsupportedFeatures = new HashSet<String>(features);
-				    getLogger().info("Model uses these supported features: " + features);
+				    getLogger().info("Model uses these features: " + features);
 				    unsupportedFeatures.remove("FORM"); // we know covered text
 				    unsupportedFeatures.remove("LEMMA"); // we know lemma if lemmatizer ran before
 				    unsupportedFeatures.remove("POSTAG"); // we know POS tag if POS tagger ran before
