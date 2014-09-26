@@ -1,0 +1,30 @@
+#Ancora tagset dependencies
+#Source: https://github.com/nlplab/brat/blob/master/configurations/CoNLL-ST-2009-Catalan/annotation.conf
+
+#determiner
+d=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DET
+#punctuation mark
+p=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PUNCT
+#preposition
+s=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREP
+prep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREP
+#number
+z=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NUMBER
+#subordinating conjuction
+conj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CONJ
+#coordinating conjuction
+coord=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.CONJ
+#negation
+neg=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NEG
+#direct object
+cd=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DOBJ
+#indirect object
+ci=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.IOBJ
+#impersonality mark
+impers=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.MARK
+#passive mark
+pass=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.MARK
+#subject
+suj=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.NSUBJ
+
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
