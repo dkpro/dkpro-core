@@ -133,6 +133,10 @@ public class LanguageToolLemmatizer
         //System.out.printf("%s %n", tag);
         for (AnalyzedToken t : aReadings.getReadings()) {
             //System.out.printf("-- %s %s ", t.getPOSTag(), t.getLemma());
+
+            if (t.getPOSTag() == null) {
+                return null;
+            }
             
             // Lets see if we have mapped tagsets
             try {
@@ -155,7 +159,8 @@ public class LanguageToolLemmatizer
             
             // Some tagsets used by LanguageTool use ':' as separator. If we are lucky, the string
             // before the first ':' matches our POS tag.
-            if (tag.equals(t.getPOSTag().split(":")[0])) {
+            
+            if (t.getPOSTag().length() > 1 && tag.equals(t.getPOSTag().split(":")[0])) {
                 //System.out.printf("- first element match%n");
                 return t.getLemma();
             }
