@@ -25,10 +25,12 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class LanguageToolSegmenterTest
@@ -75,4 +77,7 @@ public class LanguageToolSegmenterTest
 
         SegmenterHarness.run(aed, "de.1", "en.1", "en.3", "en.6", "en.7", "en.9", "ar.1", "zh.2");
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -24,11 +24,13 @@ import static org.junit.Assert.assertEquals;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class LanguageToolCheckerTest
 {
@@ -56,4 +58,7 @@ public class LanguageToolCheckerTest
 		}
 		assertEquals(count, 3);
 	}
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
