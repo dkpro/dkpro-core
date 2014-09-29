@@ -4,7 +4,7 @@
 #determiner
 d=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.DET
 #punctuation mark
-p=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PUNCT
+f=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PUNCT
 #preposition
 s=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREP
 prep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.PREP
