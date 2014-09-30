@@ -134,7 +134,7 @@ public class MeCabTagger
 	private Tagger initTagger(String platform, String sysLib, String javaWrapper)
 		throws IOException
 	{
-		String prefix = "bin/" + platform + "/";
+		String prefix = "lib/tagger/jp/bin-" + platform;
 		String packagePrefix = getClass().getPackage().getName().replaceAll("\\.", "/");
 
 		File binFolder = ResourceUtils.getClasspathAsFolder("classpath*:" + packagePrefix + "/"
@@ -223,7 +223,7 @@ public class MeCabTagger
 					readingForm = getReading(features, morph);
 					ibo = getIBO(morph, features, iboList);
 				}
-				if (morph == null && pos == null && baseForm == null) {
+				if ((morph == null) && (pos == null) && (baseForm == null)) {
 					logger.log(Level.WARNING, "Morph and pos not found: " + line);
 					continue;
 				}
@@ -342,7 +342,7 @@ public class MeCabTagger
 	{
 		StringBuffer posBuf = new StringBuffer();
 		int i = 0;
-		while (!features[i].equals("*") && i < features.length && i < 4) {
+		while (!features[i].equals("*") && (i < features.length) && (i < 4)) {
 			if (posBuf.length() > 0) {
 				posBuf.append("-");
 			}
@@ -387,7 +387,7 @@ public class MeCabTagger
 
 	private int skipBlanksAtBeginningOfString(String text, int begin, int curSenBegin)
 	{
-		while (text.length() > begin + curSenBegin
+		while ((text.length() > (begin + curSenBegin))
 				&& Character.isWhitespace(text.charAt(begin + curSenBegin))) {
 			curSenBegin++;
 		}
@@ -441,7 +441,7 @@ public class MeCabTagger
 			curMorphBegin += curMorph.length();
 
 			// append whitespace after the morph
-			while (text.length() > begin + curSenBegin + curMorphBegin
+			while ((text.length() > (begin + curSenBegin + curMorphBegin))
 					&& Character.isWhitespace(text.charAt(begin + curSenBegin + curMorphBegin))) {
 				curMorphBegin++;
 			}
@@ -452,7 +452,7 @@ public class MeCabTagger
 
 	private boolean isValidMorph(String curMorph)
 	{
-		if (curMorph.length() == 1 && Character.isWhitespace(curMorph.charAt(0))) {
+		if ((curMorph.length() == 1) && Character.isWhitespace(curMorph.charAt(0))) {
 			return false;
 		}
 		if (containsOnlyWhitespacesAndTabs(curMorph)) {
@@ -465,7 +465,7 @@ public class MeCabTagger
 	{
 		for (int i = 0; i < curMorph.length(); i++) {
 			char c = curMorph.charAt(i);
-			if (!(Character.isWhitespace(c) || c == '\t')) {
+			if (!(Character.isWhitespace(c) || (c == '\t'))) {
 				return false;
 			}
 		}
@@ -481,12 +481,12 @@ public class MeCabTagger
 
 		int i = 0;
 		// forward to first non-blank character of morph
-		while (i < morph.length() && Character.isWhitespace(morph.charAt(i))) {
+		while ((i < morph.length()) && Character.isWhitespace(morph.charAt(i))) {
 			i++;
 		}
 		// step back until first non-blank character of morph
 		int j = morph.length() - 1;
-		while (j >= 0 && Character.isWhitespace(morph.charAt(j))) {
+		while ((j >= 0) && Character.isWhitespace(morph.charAt(j))) {
 			j--;
 		}
 
@@ -561,7 +561,7 @@ public class MeCabTagger
 
 	private boolean endsOnInformalPastTense(String morph, String pos_suffix_1)
 	{
-		return morph.charAt(morph.length() - 1) == 'っ' && pos_suffix_1.equals("自立");
+		return (morph.charAt(morph.length() - 1) == 'っ') && pos_suffix_1.equals("自立");
 	}
 
 	private boolean isPastTenseEndingSyllablePolite(String morph, String feature)
@@ -592,7 +592,7 @@ public class MeCabTagger
 	private boolean isBeginning(List<String> iboList)
 	{
 		int size = iboList.size();
-		return size > 1 && iboList.get(size - 1).equals("O");
+		return (size > 1) && iboList.get(size - 1).equals("O");
 	}
 
 	private boolean isSuffix(String pos_suffix_1)

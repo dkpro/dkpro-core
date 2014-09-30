@@ -69,6 +69,21 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-linux-x86_32</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-linux-x86_64</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-osx-x86_64</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -76,6 +91,21 @@
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-ipadic</artifactId>
 				<version>20070801.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-linux-x86_32</artifactId>
+				<version>20140917.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-linux-x86_64</artifactId>
+				<version>20140917.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-model-tagger-jp-bin-osx-x86_64</artifactId>
+				<version>20140917.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
