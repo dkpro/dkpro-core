@@ -52,6 +52,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -100,12 +101,18 @@ public class BerkeleyParser
     protected String modelLocation;
 
     /**
-     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
-     * mapping automatically.
+     * Location of the mapping file for part-of-speech tags to UIMA types.
      */
     public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
+
+    /**
+     * Location of the mapping file for constituent tags to UIMA types.
+     */
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
+    protected String constituentMappingLocation;
 
     /**
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
@@ -133,7 +140,7 @@ public class BerkeleyParser
      * Default: {@code false}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
-    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "false")
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
     private boolean readPos;
     
     /**
@@ -143,7 +150,7 @@ public class BerkeleyParser
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
-    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
+    @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "false")
     private boolean writePos;
 
     /**
@@ -231,28 +238,11 @@ public class BerkeleyParser
 
         modelProvider = new BerkeleyParserModelProvider();
 
-        posMappingProvider = new MappingProvider();
-        posMappingProvider.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("pos.tagset", "default");
-        posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        posMappingProvider.addImport("pos.tagset", modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
 
-        constituentMappingProvider = new MappingProvider();
-        constituentMappingProvider
-                .setDefault(
-                        MappingProvider.LOCATION,
-                        "classpath:/de/tudarmstadt/ukp/dkpro/"
-                                + "core/api/syntax/tagset/${language}-${constituency.tagset}-constituency.map");
-        constituentMappingProvider.setDefault(MappingProvider.BASE_TYPE,
-                Constituent.class.getName());
-        constituentMappingProvider.setDefault("constituency.tagset", "default");
-        constituentMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        constituentMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        constituentMappingProvider.addImport("constituency.tagset", modelProvider);
+        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+                constituentMappingLocation, language, modelProvider);
     }
 
     @Override
