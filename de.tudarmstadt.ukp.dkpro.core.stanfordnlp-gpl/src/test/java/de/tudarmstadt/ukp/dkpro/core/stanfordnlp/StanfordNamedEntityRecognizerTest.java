@@ -10,6 +10,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertNamedEntity;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -23,14 +24,12 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-/**
- * @author Oliver Ferschke
- */
+
 public class StanfordNamedEntityRecognizerTest
 {
+
 	@Test
 	public void testEnglish()
 		throws Exception
@@ -39,11 +38,13 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
-        String[] original = { "LOCATION 'Germany'", "ORGANIZATION 'IBM'", "PERSON 'John'" };
+        String[] namedEntities = new String[] { 
+                "[  0,  3]Organization(ORGANIZATION) (IBM)",
+                "[ 10, 14]Person(PERSON) (John)",
+                "[ 27, 34]Location(LOCATION) (Germany)" };
+        
+        assertNamedEntity(namedEntities, select(jcas, NamedEntity.class));
 
-        String[] mapped = { "Location 'Germany'", "Organization 'IBM'", "Person 'John'" };
-
-        AssertAnnotations.assertNamedEntity(mapped, original, select(jcas, NamedEntity.class));
 	}
 
 	@Test
@@ -54,13 +55,15 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-        String[] original = { "I-LOC 'Deutschland'", "I-ORG 'SAP'", "I-PER 'Markus'" };
-
-        String[] mapped = { "Location 'Deutschland'", "Organization 'SAP'", "Person 'Markus'" };
-
-        AssertAnnotations.assertNamedEntity(mapped, original, select(jcas, NamedEntity.class));
+        String[] namedEntities = new String[] { 
+                "[  0,  6]Person(I-PER) (Markus)",
+                "[ 35, 38]Organization(I-ORG) (SAP)",
+                "[ 42, 53]Location(I-LOC) (Deutschland)" };
+        
+        assertNamedEntity(namedEntities, select(jcas, NamedEntity.class));
 	}
-
+	
+	
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
@@ -85,4 +88,5 @@ public class StanfordNamedEntityRecognizerTest
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
+
 }

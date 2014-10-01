@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>9</version>
+		<version>10</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
   	<version>1.6.3-SNAPSHOT</version>
@@ -75,7 +75,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<dkpro.core.asl.version>1.6.2</dkpro.core.asl.version>
+		<dkpro.core.asl.version>1.6.3-SNAPSHOT</dkpro.core.asl.version>
 		<uimafit.version>2.1.0</uimafit.version>
 	</properties>
 	<dependencyManagement>
