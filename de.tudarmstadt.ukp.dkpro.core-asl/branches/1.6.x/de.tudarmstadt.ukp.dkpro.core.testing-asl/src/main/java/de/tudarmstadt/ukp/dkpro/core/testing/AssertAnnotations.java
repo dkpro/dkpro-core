@@ -184,49 +184,29 @@ public class AssertAnnotations
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
     }
 
-    public static void assertNamedEntity(String[] aExpectedMapped, String[] aExpectedOriginal,
-            Collection<NamedEntity> aActual)
+    public static void assertNamedEntity(String[] aExpected, Collection<NamedEntity> aActual)
     {
-        String[] actualTags = new String[aActual.size()];
-        String[] actualClasses = new String[aActual.size()];
+        List<String> actual = new ArrayList<String>();
+        List<String> expected = new ArrayList<String>(asList(aExpected));
 
-        int i = 0;
         for (NamedEntity a : aActual) {
-            actualTags[i] = String.format("%s '%s'", a.getValue(), a.getCoveredText(),
-                    a.getBegin(), a.getEnd());
-            actualClasses[i] = String.format("%s '%s'", a.getType().getShortName(),
-                    a.getCoveredText(), a.getBegin(), a.getEnd());
-            i++;
+            actual.add(String.format("[%3d,%3d]%s(%s) (%s)", a.getBegin(), a.getEnd(), a
+                    .getClass().getSimpleName(), a.getValue(), a.getCoveredText()));
         }
 
-        List<String> sortedExpectedOriginal = aExpectedOriginal != null ? deduplicateAndSort(asList(aExpectedOriginal))
-                : null;
-        List<String> sortedExpectedMapped = aExpectedMapped != null ? deduplicateAndSort(asList(aExpectedMapped))
-                : null;
-        List<String> sortedActualOriginal = deduplicateAndSort(asList(actualTags));
-        List<String> sortedActualMapped = deduplicateAndSort(asList(actualClasses));
+        Collections.sort(actual);
+        Collections.sort(expected);
 
-        if (aExpectedOriginal != null) {
+        if (aExpected != null) {
             System.out.printf("%-20s - Expected: %s%n", "Named entities (orig.)",
-                    asCopyableString(sortedExpectedOriginal));
+                    asCopyableString(expected));
             System.out.printf("%-20s - Actual  : %s%n", "Named entities (orig.)",
-                    asCopyableString(sortedActualOriginal));
+                    asCopyableString(actual));
         }
 
-        if (aExpectedMapped != null) {
-            System.out.printf("%-20s - Expected: %s%n", "Named entities (map.)",
-                    asCopyableString(sortedExpectedMapped));
-            System.out.printf("%-20s - Actual  : %s%n", "Named entities (map.)",
-                    asCopyableString(sortedActualMapped));
-        }
-
-        if (aExpectedOriginal != null) {
-            assertEquals(asCopyableString(sortedExpectedOriginal, true),
-                    asCopyableString(sortedActualOriginal, true));
-        }
-        if (aExpectedMapped != null) {
-            assertEquals(asCopyableString(sortedExpectedMapped, true),
-                    asCopyableString(sortedActualMapped, true));
+        if (aExpected != null) {
+            assertEquals(asCopyableString(expected, true),
+                    asCopyableString(actual, true));
         }
     }
 

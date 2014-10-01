@@ -39,11 +39,9 @@ public class OpenNlpNameFinderTest
     {
         JCas jcas = runTest("en", "person", "SAP where John Doe works is in Germany .");
 
-        String[] original = { "person 'John Doe'" };
+        String[] namedEntity = { "[ 10, 18]NamedEntity(person) (John Doe)" };
 
-        String[] mapped = { "NamedEntity 'John Doe'" };
-
-        AssertAnnotations.assertNamedEntity(mapped, original, select(jcas, NamedEntity.class));
+        AssertAnnotations.assertNamedEntity(namedEntity, select(jcas, NamedEntity.class));
     }
 
     private JCas runTest(String language, String variant, String testDocument)
