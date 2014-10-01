@@ -1,16 +1,23 @@
-/*******************************************************************************
- * Copyright 2010
+/**
+ * Copyright 2007-2014
  * Ubiquitous Knowledge Processing (UKP) Lab
  * Technische Universität Darmstadt
  *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v3.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/gpl-3.0.txt
- ******************************************************************************/
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertNamedEntity;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -24,12 +31,14 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-
+/**
+ * @author Oliver Ferschke
+ */
 public class StanfordNamedEntityRecognizerTest
 {
-
 	@Test
 	public void testEnglish()
 		throws Exception
@@ -38,15 +47,47 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
-        String[] namedEntities = new String[] { 
-                "[  0,  3]Organization(ORGANIZATION) (IBM)",
-                "[ 10, 14]Person(PERSON) (John)",
+        String[] ne = { 
+                "[  0,  3]Organization(ORGANIZATION) (IBM)", 
+                "[ 10, 14]Person(PERSON) (John)", 
                 "[ 27, 34]Location(LOCATION) (Germany)" };
-        
-        assertNamedEntity(namedEntities, select(jcas, NamedEntity.class));
 
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
+	
+   @Test
+    public void test4classEnglish()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
 
+        JCas jcas = runTest("en", "conll.4class.distsim.crf", "IBM where John works is in Germany .");
+
+        String[] ne = { 
+                "[  0,  3]Organization(ORGANIZATION) (IBM)", 
+                "[ 10, 14]Person(PERSON) (John)", 
+                "[ 27, 34]Location(LOCATION) (Germany)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+
+   @Test
+   public void test7classEnglish()
+       throws Exception
+   {
+       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+       JCas jcas = runTest("en", "muc.7class.distsim.crf", "IBM where John works is in Germany .");
+
+       String[] ne = { 
+               "[  0,  3]Organization(ORGANIZATION) (IBM)", 
+               "[ 10, 14]Person(PERSON) (John)", 
+               "[ 27, 34]Location(LOCATION) (Germany)" };
+
+       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+   }
+	   
 	@Test
 	public void testGerman()
 		throws Exception
@@ -55,15 +96,30 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-        String[] namedEntities = new String[] { 
-                "[  0,  6]Person(I-PER) (Markus)",
-                "[ 35, 38]Organization(I-ORG) (SAP)",
+        String[] ne = { 
+                "[  0,  6]Person(I-PER) (Markus)", 
+                "[ 35, 38]Organization(I-ORG) (SAP)", 
                 "[ 42, 53]Location(I-LOC) (Deutschland)" };
-        
-        assertNamedEntity(namedEntities, select(jcas, NamedEntity.class));
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
 	
-	
+   @Test
+    public void testHgcGerman()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("de", "hgc_175m_600.crf", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
+
+        String[] ne = { 
+                "[  0,  6]Person(I-PER) (Markus)", 
+                "[ 35, 38]Organization(I-ORG) (SAP)", 
+                "[ 42, 53]Location(I-LOC) (Deutschland)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
@@ -88,5 +144,4 @@ public class StanfordNamedEntityRecognizerTest
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
-
 }
