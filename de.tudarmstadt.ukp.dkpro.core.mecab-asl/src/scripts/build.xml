@@ -63,9 +63,9 @@
 		<clean-pom/>
 		
 		<mkdir dir="target/download/binaries"/>
-		<get src="http://dl.bintray.com/ukp/generic/linux-x86_32.zip" dest="target/download/binaries/mecab_linux-x86_32.zip" skipexisting="true"/>
-		<get src="http://dl.bintray.com/ukp/generic/linux-x86_64.zip" dest="target/download/binaries/mecab_linux-x86_64.zip" skipexisting="true"/>
-		<get src="http://dl.bintray.com/ukp/generic/osx-x86_64.zip" dest="target/download/binaries/mecab_osx-x86_64.zip" skipexisting="true"/>
+		<get src="http://dl.bintray.com/dkpro%20core/dkprocore/mecab_linux-x86_32.zip" dest="target/download/binaries/mecab_linux-x86_32.zip" skipexisting="true"/>
+		<get src="http://dl.bintray.com/dkpro%20core/dkprocore/mecab_linux-x86_64.zip" dest="target/download/binaries/mecab_linux-x86_64.zip" skipexisting="true"/>
+		<get src="http://dl.bintray.com/dkpro%20core/dkprocore/mecab_osx-x86_64.zip" dest="target/download/binaries/mecab_osx-x86_64.zip" skipexisting="true"/>
     	<unzip src="target/download/binaries/mecab_linux-x86_32.zip" dest="target/bin/"/>
 		<unzip src="target/download/binaries/mecab_linux-x86_64.zip" dest="target/bin/"/>
 		<unzip src="target/download/binaries/mecab_osx-x86_64.zip" dest="target/bin/"/>
