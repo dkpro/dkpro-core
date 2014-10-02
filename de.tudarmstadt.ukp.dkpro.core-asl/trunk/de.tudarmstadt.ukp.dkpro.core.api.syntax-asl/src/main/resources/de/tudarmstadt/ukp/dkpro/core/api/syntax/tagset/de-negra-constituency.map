@@ -8,11 +8,11 @@ AA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # CVZ coordinated zu-marked infinitive
 CVZ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # AP adjektive phrase	
-AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
 # DL discourse level constituent
 DL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # AVP adverbial phrase	
-AVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+AVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP
 # ISU idiosyncratis unit
 ISU=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # CAC coordinated adposition	
@@ -30,23 +30,23 @@ NM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # CCP coordinated complementiser	
 CCP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # NP noun phrase
-NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
 # CH chunk	
 CH=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # PP adpositional phrase
-PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
 # CNP coordinated noun phrase	
 CNP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
-# QL quasi-languag
+# QL quasi-language
 QL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # CO coordination	
 CO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # S sentence
-S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S
 # CPP coordinated adpositional phrase	
 CPP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # VP verb phrase (non-finite)
-VP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+VP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 # CS coordinated sentence	
 CS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 # VZ zu-marked infinitive
@@ -59,4 +59,3 @@ CVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
 #
 ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
 *=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
-
