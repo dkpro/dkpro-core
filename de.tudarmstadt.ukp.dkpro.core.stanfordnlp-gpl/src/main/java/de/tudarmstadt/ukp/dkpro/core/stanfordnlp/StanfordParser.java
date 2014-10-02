@@ -622,7 +622,7 @@ public class StanfordParser
                 // There is no way to determine the relations via the GrammaticalStructureFactory
                 // API, so we do it manually here for the languages known to support this.
                 if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
-                    SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford331");
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
