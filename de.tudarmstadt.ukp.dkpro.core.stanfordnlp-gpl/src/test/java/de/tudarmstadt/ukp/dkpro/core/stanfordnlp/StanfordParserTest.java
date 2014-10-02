@@ -846,16 +846,16 @@ public class StanfordParserTest
                 + "(CC 和) (VP (DVP (ADVP (AD 尽可能)) (DEV 的)) (VP (VV 依赖))))) (PU 。)))";
 
         String[] posTags = { ".$$.", "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER",
-                "DEV", "DT", "ETC", "FRAG", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR",
-                "NT", "OD", "ON", "P", "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
+                "DEV", "DT", "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NR", "NT",
+                "OD", "ON", "P", "PN", "PU", "SB", "SP", "URL", "VA", "VC", "VE", "VV", "X" };
 
         String[] constituentTags = { "ADJP", "ADVP", "CLP", "CP", "DFL", "DNP", "DP", "DVP", "FLR",
-                "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT", "UCP", "VCD",
-                "VCP", "VNV", "VP", "VPT", "VRD", "VSB", "WHPP" };
+                "FRAG", "INC", "INTJ", "IP", "LCP", "LST", "NP", "PP", "PRN", "QP", "ROOT", "UCP",
+                "VCD", "VCP", "VNV", "VP", "VPT", "VRD", "VSB", "WHPP" };
 
         // NO DEP TAGS String[] depTags = new String[] {};
 
-        String[] unmappedPos = { ".$$.", "FRAG", "URL" };
+        String[] unmappedPos = { ".$$.", "URL" };
 
         String[] unmappedConst = { "DFL", "FLR", "INC", "WHPP" };
 
