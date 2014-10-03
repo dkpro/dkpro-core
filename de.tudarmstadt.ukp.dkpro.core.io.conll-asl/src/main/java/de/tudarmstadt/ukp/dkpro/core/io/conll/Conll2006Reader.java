@@ -70,7 +70,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * an ID of zero.</li>
  * <li>DEPREL - <b>(Dependency)</b> Dependency relation to the HEAD. The set of dependency relations
  * depends on the particular language. Note that depending on the original treebank annotation, the
- * dependency relation may be meaningfull or simply 'ROOT'.</li>
+ * dependency relation may be meaningful or simply 'ROOT'.</li>
  * <li>PHEAD - <b>(ignored)</b> Projective head of current token, which is either a value of ID or
  * zero ('0'), or an underscore if not available. Note that depending on the original treebank
  * annotation, there may be multiple tokens an with ID of zero. The dependency structure resulting
@@ -79,7 +79,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * of some languages (but is always available).</li>
  * <li>PDEPREL - <b>(ignored) Dependency relation to the PHEAD, or an underscore if not available.
  * The set of dependency relations depends on the particular language. Note that depending on the
- * original treebank annotation, the dependency relation may be meaningfull or simply 'ROOT'.</b></li>
+ * original treebank annotation, the dependency relation may be meaningful or simply 'ROOT'.</b></li>
  * </ol>
  * 
  * Sentences are separated by a blank new line.

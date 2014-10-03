@@ -94,6 +94,7 @@ public class Conll2009Writer
     extends JCasFileWriter_ImplBase
 {
     private static final String UNUSED = "_";
+    private static final int UNUSED_INT = -1;
 
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
@@ -206,7 +207,6 @@ public class Conll2009Writer
                 if (writeLemma && (row.token.getLemma() != null)) {
                     lemma = row.token.getLemma().getValue();
                 }
-                // String plemma = UNUSED;
                 String plemma = lemma;
 
                 String pos = UNUSED;
@@ -214,29 +214,31 @@ public class Conll2009Writer
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
                 }
-                // String ppos = UNUSED;
                 String ppos = pos;
 
                 String feat = UNUSED;
                 if (writeMorph && (row.feats != null)) {
                     feat = row.feats.getMorphTag();
                 }
-                // String pfeat = UNUSED;
                 String pfeat = feat;
                 
-                int head = 0;
+                int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
                     deprel = row.deprel.getDependencyType();
-                    head = ctokens.get(row.deprel.getGovernor()).id;
-                    if (head == row.id) {
+                    headId = ctokens.get(row.deprel.getGovernor()).id;
+                    if (headId == row.id) {
                         // ROOT dependencies may be modeled as a loop, ignore these.
-                        head = 0;
+                        headId = 0;
                     }
                 }
-//                String phead = UNUSED;
-//                String pdeprel = UNUSED;
-                int phead = head;
+
+                String head = UNUSED;
+                if (headId != UNUSED_INT) {
+                    head = Integer.toString(headId);
+                }
+
+                String phead = head;
                 String pdeprel = deprel;
                 
                 String fillpred = UNUSED;
@@ -256,7 +258,7 @@ public class Conll2009Writer
                     }
                 }
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%s\t%s\t%s\t%s\t%s\n", id, form,
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", id, form,
                         lemma, plemma, pos, ppos, feat, pfeat, head, phead, deprel, pdeprel, fillpred,
                         pred, apreds);
             }
