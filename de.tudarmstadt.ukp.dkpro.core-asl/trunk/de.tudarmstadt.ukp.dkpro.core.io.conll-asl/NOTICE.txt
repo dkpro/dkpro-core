@@ -10,6 +10,6 @@ src/test/resources/fi-orig.conll
   
 src/test/resources/en-orig.conll
 
-  First two sentencs from CoNLL-2009 Shared Task Trial Data Download for English
+  First two sentences from CoNLL-2009 Shared Task Trial Data Download for English
   http://ufal.mff.cuni.cz/conll2009-st/trial-data.html
   

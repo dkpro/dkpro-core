@@ -78,6 +78,7 @@ public class Conll2006Writer
     extends JCasFileWriter_ImplBase
 {
     private static final String UNUSED = "_";
+    private static final int UNUSED_INT = -1;
 
     /**
      * Name of configuration parameter that contains the character encoding used by the input files.
@@ -171,15 +172,20 @@ public class Conll2006Writer
                     }
                 }
                 
-                int head = 0;
+                int headId = UNUSED_INT;
                 String deprel = UNUSED;
                 if (writeDependency && (row.deprel != null)) {
                     deprel = row.deprel.getDependencyType();
-                    head = ctokens.get(row.deprel.getGovernor()).id;
-                    if (head == row.id) {
+                    headId = ctokens.get(row.deprel.getGovernor()).id;
+                    if (headId == row.id) {
                         // ROOT dependencies may be modeled as a loop, ignore these.
-                        head = 0;
+                        headId = 0;
                     }
+                }
+                
+                String head = UNUSED;
+                if (headId != UNUSED_INT) {
+                    head = Integer.toString(headId);
                 }
                 
                 String feats = UNUSED;
@@ -190,7 +196,7 @@ public class Conll2006Writer
                 String phead = UNUSED;
                 String pdeprel = UNUSED;
 
-                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%d\t%s\t%s\t%s\n", row.id,
+                aOut.printf("%d\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n", row.id,
                         row.token.getCoveredText(), lemma, cpos, pos, feats, head, deprel, phead,
                         pdeprel);
             }

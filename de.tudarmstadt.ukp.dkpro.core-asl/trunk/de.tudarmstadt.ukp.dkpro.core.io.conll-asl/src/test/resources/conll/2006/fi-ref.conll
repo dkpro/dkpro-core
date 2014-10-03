@@ -5,7 +5,7 @@
 5	EUROOPAN	Eurooppa	N	N	N Prop Gen Sg	6	attr	_	_
 6	ATOMIENERGIAYHTEISÖN	atomi#energia#yhteisö	N	N	N Gen Sg	7	attr	_	_
 7	NEUVOSTO	neuvosto	N	N	N Nom Sg	0	main	_	_
-8	,	,	Punct	Punct	Punct	0	_	_	_
+8	,	,	Punct	Punct	Punct	_	_	_	_
 9	joka	joka	Pron	Pron	Pron Rel Nom Sg	10	subj	_	_
 10	ottaa	ottaa	V	V	V Prs Act Sg3	7	mod	_	_
 11	huomioon	huomio	N	N	N Ill Sg	10	phrv	_	_
@@ -26,7 +26,7 @@
 26	hankintakeskuksen	hankinta#keskus	N	N	N Gen Sg	27	attr	_	_
 27	perussäännön	perus#sääntö	N	N	N Gen Sg	24	obj	_	_
 28	seuraavasti	seuraava	Adv	Adv	Adv Pos Man	24	advl	_	_
-29	:	:	Punct	Punct	Punct	0	_	_	_
+29	:	:	Punct	Punct	Punct	_	_	_	_
 
 1	1	1	Num	Num	Num Digit Nom Sg	2	attr	_	_
 2	artikla	artikla	N	N	N Nom Sg	3	attr	_	_
