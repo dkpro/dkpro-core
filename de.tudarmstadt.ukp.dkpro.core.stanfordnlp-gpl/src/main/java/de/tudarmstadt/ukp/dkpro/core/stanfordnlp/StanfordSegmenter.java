@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.international.arabic.process.ArabicTokenizer;
 import edu.stanford.nlp.international.french.process.FrenchTokenizer;
+import edu.stanford.nlp.international.spanish.process.SpanishTokenizer;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
@@ -64,6 +65,7 @@ extends SegmenterBase
     	tokenizerFactories = new HashMap<String, InternalTokenizerFactory>();
         tokenizerFactories.put("ar", new InternalArabicTokenizerFactory());
     	tokenizerFactories.put("en", new InternalPTBTokenizerFactory());
+        tokenizerFactories.put("es", new InternalSpanishTokenizerFactory());
         tokenizerFactories.put("fr", new InternalFrenchTokenizerFactory());
     	// The Negra tokenizer is not really a full tokenizer.
 //    	tokenizerFactories.put("de", new InternalNegraPennTokenizerFactory());
@@ -283,6 +285,20 @@ extends SegmenterBase
                 final String s)
         {
             return FrenchTokenizer.factory().getTokenizer(new StringReader(s), "tokenizeNLs=false");
+        }
+    }
+
+    private static
+    class InternalSpanishTokenizerFactory
+    implements InternalTokenizerFactory
+    {
+        @Override
+        public
+        Tokenizer<?> create(
+                final String s)
+        {
+            return SpanishTokenizer.factory(new CoreLabelTokenFactory(), null).getTokenizer(
+                    new StringReader(s));
         }
     }
 

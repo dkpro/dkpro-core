@@ -19,7 +19,9 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.junit.Assert.assertEquals;
 
 import java.io.PrintWriter;
@@ -29,13 +31,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreAnnotations;
@@ -56,6 +64,22 @@ class StanfordSegmenterTest
 
 		SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.9", "ar.1", "zh.1", "zh.2");
 	}
+	
+    @Test
+    public void testSpanish() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("es");
+        jcas.setDocumentText("Tim dijo a Jamie para la 100ª vez que abandone la sala.");
+        
+        AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "Tim", "dijo", "a", "Jamie", "para", "la", "100ª", "vez", "que",
+                "abandone", "la", "sala", "." };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
+    }
 	
 	@Test
 	public void testUnwrapped() throws Exception
