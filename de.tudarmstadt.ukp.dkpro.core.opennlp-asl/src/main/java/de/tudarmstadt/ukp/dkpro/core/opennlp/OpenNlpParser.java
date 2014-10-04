@@ -74,8 +74,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
 public class OpenNlpParser
 	extends JCasAnnotator_ImplBase
 {
-	private static final String CONPACKAGE = Constituent.class.getPackage().getName()+".";
-
 	/**
 	 * Use this language instead of the document language to resolve the model.
 	 */
@@ -105,7 +103,14 @@ public class OpenNlpParser
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
 
-	/**
+    /**
+     * Location of the mapping file for constituent tags to UIMA types.
+     */
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
+    protected String constituentMappingLocation;
+
+    /**
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spaming the heap with thousands of strings representing only a few different tags.
 	 *
@@ -146,6 +151,7 @@ public class OpenNlpParser
 
 	private CasConfigurableProviderBase<Parser> modelProvider;
 	private MappingProvider posMappingProvider;
+    private MappingProvider constituentMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -157,6 +163,9 @@ public class OpenNlpParser
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
+        
+        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+                constituentMappingLocation, language, modelProvider);
 	}
 
 	@Override
@@ -167,6 +176,7 @@ public class OpenNlpParser
 
 		modelProvider.configure(cas);
 		posMappingProvider.configure(cas);
+        constituentMappingProvider.configure(cas);
 
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
@@ -234,20 +244,13 @@ public class OpenNlpParser
 				typeName = "ROOT"; // in DKPro the root is ROOT, not TOP
 			}
 
-			// create the necessary objects and methods
-			String constituentTypeName = CONPACKAGE + typeName;
+            // create the necessary objects and methods
+            Type constType = constituentMappingProvider.getTagType(typeName);
 
-			Type type = aJCas.getTypeSystem().getType(constituentTypeName);
-
-			//if type is unknown, map to X-type
-			if (type==null){
-				type = aJCas.getTypeSystem().getType(CONPACKAGE+"X");
-			}
-
-			Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(type,
-					aNode.getSpan().getStart(), aNode.getSpan().getEnd());
-			constAnno.setConstituentType(typeName);
-
+            Constituent constAnno = (Constituent) aJCas.getCas().createAnnotation(constType,
+                    aNode.getSpan().getStart(), aNode.getSpan().getEnd());
+            constAnno.setConstituentType(typeName);
+			
 			// link to parent
 			if (aParentFS != null) {
 				constAnno.setParent(aParentFS);
@@ -256,7 +259,8 @@ public class OpenNlpParser
 			// Do we have any children?
 			List<Annotation> childAnnotations = new ArrayList<Annotation>();
 			for (Parse child : aNode.getChildren()) {
-				Annotation childAnnotation = createConstituentAnnotationFromTree(aJCas, child, constAnno, aTokens);
+                Annotation childAnnotation = createConstituentAnnotationFromTree(aJCas, child,
+                        constAnno, aTokens);
 				if (childAnnotation != null) {
 					childAnnotations.add(childAnnotation);
 				}
