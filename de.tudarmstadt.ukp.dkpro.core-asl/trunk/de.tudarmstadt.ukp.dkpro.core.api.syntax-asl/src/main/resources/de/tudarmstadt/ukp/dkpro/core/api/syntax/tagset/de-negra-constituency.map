@@ -4,55 +4,55 @@
 #
 
 # AA superlative phrase with "am"
-AA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+AA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # CVZ coordinated zu-marked infinitive
-CVZ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CVZ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 # AP adjektive phrase	
 AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
 # DL discourse level constituent
-DL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+DL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # AVP adverbial phrase	
 AVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP
 # ISU idiosyncratis unit
-ISU=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+ISU=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # CAC coordinated adposition	
-CAC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CAC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # MPN multi-word proper noun
-MPN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+MPN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
 # CAP coordinated adjektive phrase	
-CAP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CAP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
 # MTA multi-token adjective
-MTA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+MTA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
 # CAVP coordinated adverbial phrase	
-CAVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CAVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP
 # NM multi-token number
-NM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+NM=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # CCP coordinated complementiser	
-CCP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CCP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # NP noun phrase
 NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
 # CH chunk	
-CH=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CH=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # PP adpositional phrase
 PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.PP
 # CNP coordinated noun phrase	
-CNP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CNP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.NP
 # QL quasi-language
-QL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+QL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # CO coordination	
-CO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # S sentence
 S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S
 # CPP coordinated adpositional phrase	
-CPP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CPP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # VP verb phrase (non-finite)
 VP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 # CS coordinated sentence	
-CS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SBAR
 # VZ zu-marked infinitive
-VZ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+VZ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 # CVP coordinated verb phrase (non-finite)	
-CVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent
+CVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 
 #
 # Categories used by DKPro internally
