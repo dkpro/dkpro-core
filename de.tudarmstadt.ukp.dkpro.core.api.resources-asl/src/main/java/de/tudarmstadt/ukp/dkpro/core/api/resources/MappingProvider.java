@@ -80,6 +80,11 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	        if (type == null) {
 	        	throw new IllegalStateException("No fallback (*) mapping defined!");
 	        }
+	        
+	        String basePackage = getResource().get("__META_TYPE_BASE__");
+	        if (basePackage != null) {
+	            type = basePackage + type;
+	        }
 		}
 
         Type uimaType = typeSystem.getType(type);
