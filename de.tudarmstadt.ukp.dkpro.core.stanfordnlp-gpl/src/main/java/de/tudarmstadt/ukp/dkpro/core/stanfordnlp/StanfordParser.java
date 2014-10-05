@@ -47,11 +47,13 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -173,6 +175,13 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
     protected String posMappingLocation;
 
+    /**
+     * Location of the mapping file for constituent tags to UIMA types.
+     */
+    public static final String PARAM_CONSTITUENT_MAPPING_LOCATION = ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_CONSTITUENT_MAPPING_LOCATION, mandatory = false)
+    protected String constituentMappingLocation;
+    
     /**
      * Sets whether to create or not to create dependency annotations. <br/>
      * 
@@ -305,6 +314,7 @@ public class StanfordParser
 
     private CasConfigurableProviderBase<ParserGrammar> modelProvider;
     private MappingProvider posMappingProvider;
+    private MappingProvider constituentMappingProvider;
 
     private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
 
@@ -329,15 +339,11 @@ public class StanfordParser
 
         modelProvider = new StanfordParserModelProvider();
 
-        posMappingProvider = new MappingProvider();
-        posMappingProvider.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("pos.tagset", "default");
-        posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        posMappingProvider.addImport("pos.tagset", modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
+        
+        constituentMappingProvider = MappingProviderFactory.createConstituentMappingProvider(
+                constituentMappingLocation, language, modelProvider);
     }
 
     /**
@@ -353,6 +359,7 @@ public class StanfordParser
     {
         modelProvider.configure(aJCas.getCas());
         posMappingProvider.configure(aJCas.getCas());
+        constituentMappingProvider.configure(aJCas.getCas());
 
         Type typeToParse;
         if (annotationTypeToParse != null) {
@@ -417,6 +424,7 @@ public class StanfordParser
             try {
                 sfAnnotator = new StanfordAnnotator(new TreeWithTokens(parseTree, tokens));
                 sfAnnotator.setPosMappingProvider(posMappingProvider);
+                sfAnnotator.setConstituentMappingProvider(constituentMappingProvider);
             }
             catch (CASException e) {
                 throw new AnalysisEngineProcessException(e);

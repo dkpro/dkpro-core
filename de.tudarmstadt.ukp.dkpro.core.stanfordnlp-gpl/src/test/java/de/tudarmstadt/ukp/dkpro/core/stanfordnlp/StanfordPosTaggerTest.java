@@ -173,7 +173,16 @@ public class StanfordPosTaggerTest
         		new String[] { "POS", "POS",  "POS",   "POS",  "POS",  "POS", "POS", "POS" } );
 
     }
-    
+
+    @Test
+    public void testSpanish()
+        throws Exception
+    {
+        runTest("es", "Esta es una prueba .",
+                new String[] { "pd000000", "vsip000", "di0000", "nc0s000", "fp" },
+                new String[] { "PR",       "V",       "ART",    "NN",      "PUNC" });
+    }
+
     @Test
     public void testEscaping() throws Exception
     {

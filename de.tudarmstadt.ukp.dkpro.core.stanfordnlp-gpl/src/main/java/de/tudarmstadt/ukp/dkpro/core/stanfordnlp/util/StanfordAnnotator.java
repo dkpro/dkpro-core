@@ -57,7 +57,6 @@ import edu.stanford.nlp.util.IntPair;
  */
 public class StanfordAnnotator
 {
-    private static final String CONPACKAGE = Constituent.class.getPackage().getName() + ".";
     private static final String DEPPACKAGE = Dependency.class.getPackage().getName() + ".";
 
     /**
@@ -69,6 +68,7 @@ public class StanfordAnnotator
     private TreeWithTokens tokenTree = null;
     private JCas jCas = null;
     private MappingProvider posMappingProvider;
+    private MappingProvider constituentMappingProvider;
 
     public TreeWithTokens getTokenTree()
     {
@@ -95,6 +95,11 @@ public class StanfordAnnotator
         posMappingProvider = aPosMappingProvider;
     }
 
+    public void setConstituentMappingProvider(MappingProvider aConstituentMappingProvider)
+    {
+        constituentMappingProvider = aConstituentMappingProvider;
+    }
+    
     public StanfordAnnotator(TreeWithTokens aTokenTree)
         throws CASException
     {
@@ -247,23 +252,11 @@ public class StanfordAnnotator
      */
     public Constituent createConstituentAnnotation(int aBegin, int aEnd, String aConstituentType, String aSyntacticFunction)
 	{
-//		// Workaround for Win32 Systems
-//		if (aConstituentType.equalsIgnoreCase("PRN")) {
-//			aConstituentType = "PRN0";
-//		}
+        // create the necessary objects and methods
+        Type constType = constituentMappingProvider.getTagType(aConstituentType);
 
-		// create the necessary objects and methods
-		String constituentTypeName = CONPACKAGE + aConstituentType;
-
-		Type type = jCas.getTypeSystem().getType(constituentTypeName);
-
-		//if type is unknown, map to X-type
-		if (type==null){
-			type = jCas.getTypeSystem().getType(CONPACKAGE+"X");
-		}
-
-		Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(type, aBegin, aEnd);
-		constAnno.setConstituentType(aConstituentType);
+        Constituent constAnno = (Constituent) jCas.getCas().createAnnotation(constType, aBegin, aEnd);
+        constAnno.setConstituentType(aConstituentType);
 		constAnno.setSyntacticFunction(aSyntacticFunction);
 		return constAnno;
 	}

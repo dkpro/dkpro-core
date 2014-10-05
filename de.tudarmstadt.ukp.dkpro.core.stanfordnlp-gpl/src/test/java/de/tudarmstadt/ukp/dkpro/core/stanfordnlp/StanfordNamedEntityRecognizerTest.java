@@ -120,6 +120,22 @@ public class StanfordNamedEntityRecognizerTest
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
+   @Test
+   public void testSpanish()
+       throws Exception
+   {
+       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+       JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
+
+       String[] ne = { 
+               "[ 13, 19]Person(PERS) (Markus)",
+               "[ 31, 34]Organization(ORG) (SAP)",
+               "[ 38, 46]Location(LUG) (Alemania)" };
+
+       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+   }
+   
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
