@@ -43,6 +43,14 @@ public class MappingProviderFactory
         return p;
     }
     
+    public static MappingProvider createChunkMappingProvider(String aMappingLocation,
+            String aLanguage, HasResourceMetadata aSource)
+    {
+        MappingProvider p = createChunkMappingProvider(aMappingLocation, null, aLanguage);
+        p.addImport("chunk.tagset", aSource);
+        return p;
+    }
+    
     public static MappingProvider createChunkMappingProvider(String aMappingLocation, String aTagset,
             String aLanguage)
     {
