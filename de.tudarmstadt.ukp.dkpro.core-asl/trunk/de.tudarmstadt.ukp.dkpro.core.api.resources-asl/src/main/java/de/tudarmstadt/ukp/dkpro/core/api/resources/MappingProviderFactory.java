@@ -90,4 +90,28 @@ public class MappingProviderFactory
         p.setOverride("constituent.tagset", aTagset);
         return p;
     }
+
+    public static MappingProvider createDependencyMappingProvider(String aMappingLocation,
+            String aLanguage, HasResourceMetadata aSource)
+    {
+        MappingProvider p = createDependencyMappingProvider(aMappingLocation, null, aLanguage);
+        p.addImport("dependency.tagset", aSource);
+        return p;
+    }
+    
+    public static MappingProvider createDependencyMappingProvider(String aMappingLocation,
+            String aTagset, String aLanguage)
+    {
+        MappingProvider p = new MappingProvider();
+        p.setDefault(MappingProvider.LOCATION,
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/syntax/tagset/"
+                + "${language}-${dependency.tagset}-dependency.map");
+        p.setDefault(MappingProvider.BASE_TYPE,
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency");
+        p.setDefault("dependency.tagset", "default");
+        p.setOverride(MappingProvider.LOCATION, aMappingLocation);
+        p.setOverride(MappingProvider.LANGUAGE, aLanguage);
+        p.setOverride("dependency.tagset", aTagset);
+        return p;
+    }
 }
