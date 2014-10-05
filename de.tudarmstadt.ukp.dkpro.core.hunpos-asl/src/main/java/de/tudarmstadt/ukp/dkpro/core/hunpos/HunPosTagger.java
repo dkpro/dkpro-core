@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -120,7 +121,7 @@ public class HunPosTagger
 
     private CasConfigurableProviderBase<File> modelProvider;
     private RuntimeProvider runtimeProvider;
-	private MappingProvider mappingProvider;
+	private MappingProvider posMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -155,14 +156,8 @@ public class HunPosTagger
         // provider for the sfst binary
         runtimeProvider = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/");
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("pos.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("pos.tagset", modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
 	}
 
 	@Override
@@ -172,7 +167,7 @@ public class HunPosTagger
 		CAS cas = aJCas.getCas();
 
 		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+		posMappingProvider.configure(cas);
 
         File model = modelProvider.getResource();
         File executable;
@@ -226,7 +221,7 @@ public class HunPosTagger
                 
                 int i = 0;
                 for (Token t : tokens) {
-                    Type posTag = mappingProvider.getTagType(tags[i]);
+                    Type posTag = posMappingProvider.getTagType(tags[i]);
                     POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
                     posAnno.setPosValue(internTags ? tags[i].intern() : tags[i]);
                     posAnno.addToIndexes();
