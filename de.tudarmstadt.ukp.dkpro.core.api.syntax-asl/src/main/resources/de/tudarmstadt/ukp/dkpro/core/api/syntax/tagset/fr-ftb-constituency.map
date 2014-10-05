@@ -4,9 +4,9 @@
 #
 # == Syntactic categories ==
 # AP - Adjective phase
-AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+AP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADJP
 # AdP - Adverbial phrase
-AdP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+AdP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ADVP
 # COORD = coordinate phrase
 COORD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # NP - nominal phrase
@@ -18,17 +18,17 @@ PREF=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
 # SENT - independent phase
 SENT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.S
 # Sint - Conjugated sentence
-Sint=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+Sint=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SBAR
 # Srel - Relative sentence
-Srel=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+Srel=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SBAR
 # Ssub - Subordinate sentence
-Ssub=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+Ssub=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.SBAR
 # VN - Verb phrase
-VN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+VN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 # VPinf - Infinitive phrase
-VPinf=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+VPinf=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 # VPpart - Participle phrase
-VPpart=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+VPpart=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.VP
 
 #
 # Categories used by DKPro internally
