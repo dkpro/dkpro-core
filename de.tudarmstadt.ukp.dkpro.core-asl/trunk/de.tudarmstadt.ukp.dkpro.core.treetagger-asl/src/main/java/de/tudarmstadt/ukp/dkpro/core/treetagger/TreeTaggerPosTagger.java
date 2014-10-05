@@ -48,6 +48,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
@@ -156,7 +157,7 @@ public class TreeTaggerPosTagger
     private boolean writeLemma;
 	
 	private CasConfigurableProviderBase<TreeTaggerWrapper<Token>> modelProvider;
-	private MappingProvider mappingProvider;
+	private MappingProvider posMappingProvider;
 
 	@Override
 	public void initialize(UimaContext aContext)
@@ -224,14 +225,8 @@ public class TreeTaggerPosTagger
 			}
 		};
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("pos.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("pos.tagset", modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
 	}
 
 	@Override
@@ -241,7 +236,7 @@ public class TreeTaggerPosTagger
 		final CAS cas = aJCas.getCas();
 
 		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+		posMappingProvider.configure(cas);
 		
 		TreeTaggerWrapper<Token> treetagger = modelProvider.getResource();
 
@@ -260,7 +255,7 @@ public class TreeTaggerPosTagger
                     synchronized (cas) {
                         // Add the Part of Speech
                         if (writePos && aPos != null) {
-                            Type posTag = mappingProvider.getTagType(aPos);
+                            Type posTag = posMappingProvider.getTagType(aPos);
                             POS posAnno = (POS) cas.createAnnotation(posTag, aToken.getBegin(),
                                     aToken.getEnd());
                             posAnno.setPosValue(internTags ? aPos.intern() : aPos);
