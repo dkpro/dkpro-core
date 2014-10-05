@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -158,14 +159,8 @@ public class HepplePosTagger
             }
         };
 
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        mappingProvider.setDefault("pos.tagset", "default");
-        mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        mappingProvider.addImport("pos.tagset", ruleProvider);
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, ruleProvider);
     }
 
 
