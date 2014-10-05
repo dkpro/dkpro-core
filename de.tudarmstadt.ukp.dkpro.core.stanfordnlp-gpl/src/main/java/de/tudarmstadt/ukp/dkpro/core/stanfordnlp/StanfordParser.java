@@ -297,19 +297,6 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 
-    /**
-     * Enable sharing the model between multiple instances of this AE. This is an experimental
-     * parameter for advanced users. Sharing the model can lead to unexpected results because
-     * some parameters affect the model when it is initialized. Thus, only the settings from the
-     * first instance using the model will initialize the model, but not the next instance which
-     * finds the already-loaded model and simply reuses it. Sharing models can also lead to
-     * unexpected results or crashes in multi-threaded environments.<br/>
-     * Default: {@code false}
-     */
-    public static final String PARAM_SHARED_MODEL = "sharedModel";
-    @ConfigurationParameter(name = PARAM_SHARED_MODEL, mandatory = true, defaultValue="false")
-    private boolean sharedModel;
-
     private GrammaticalStructureFactory gsf;
 
     private CasConfigurableProviderBase<ParserGrammar> modelProvider;
@@ -521,7 +508,6 @@ public class StanfordParser
             setOverride(LOCATION, modelLocation);
             setOverride(LANGUAGE, language);
             setOverride(VARIANT, variant);
-            setOverride(SHARABLE, sharedModel ? "true" : "false");
         }
 
         @Override
