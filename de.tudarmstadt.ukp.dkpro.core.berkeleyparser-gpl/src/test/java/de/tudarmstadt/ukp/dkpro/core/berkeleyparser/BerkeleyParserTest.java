@@ -316,8 +316,8 @@ public class BerkeleyParserTest
 		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
 				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
 
-        String[] constituentMapped = { "ADJP 17,35", "Constituent 0,111", "Constituent 70,99",
-                "NP 13,110", "NP 54,99", "ROOT 0,111", "S 0,110", "S 46,110" };
+        String[] constituentMapped = { "ADJP 17,35", "Constituent 0,111", "NP 13,110", "NP 54,99",
+                "NP 70,99", "ROOT 0,111", "S 0,110", "S 46,110" };
 
 		String[] constituentOriginal = { "AP 17,35", "CNP 70,99", "NP 13,110",
 				"NP 54,99", "PSEUDO 0,111", "ROOT 0,111", "S 0,110", "S 46,110" };
