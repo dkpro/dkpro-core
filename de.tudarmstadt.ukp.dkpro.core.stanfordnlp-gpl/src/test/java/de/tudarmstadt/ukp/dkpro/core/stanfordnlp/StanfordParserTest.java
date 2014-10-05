@@ -1063,6 +1063,11 @@ public class StanfordParserTest
     public void testModelSharing()
         throws Exception
     {
+        // Save share override value (if any was set) and enable sharing for the StanfordParser
+        String prop = "dkpro.core.resourceprovider.sharable." + StanfordParser.class.getName();
+        String oldValue = System.getProperty(prop);
+        System.setProperty(prop, "true");
+        
         final List<LoggingEvent> records = new ArrayList<LoggingEvent>();
 
         // Tell the logger to log everything
@@ -1085,11 +1090,9 @@ public class StanfordParserTest
         try {
             AnalysisEngineDescription pipeline = createEngineDescription(
                     createEngineDescription(StanfordParser.class,
-                            StanfordParser.PARAM_SHARED_MODEL, true,
                             StanfordParser.PARAM_WRITE_CONSTITUENT, true,
                             StanfordParser.PARAM_WRITE_DEPENDENCY, false),
                     createEngineDescription(StanfordParser.class,
-                            StanfordParser.PARAM_SHARED_MODEL, true,
                             StanfordParser.PARAM_WRITE_CONSTITUENT, false,
                             StanfordParser.PARAM_WRITE_DEPENDENCY, true));
             
@@ -1097,7 +1100,6 @@ public class StanfordParserTest
             
             boolean found = false;
             for (LoggingEvent e : records) {
-                System.out.println(e.getMessage());
                 if (String.valueOf(e.getMessage()).contains("Used resource from cache")) {
                     found = true;
                 }
@@ -1109,6 +1111,13 @@ public class StanfordParserTest
             if (oldLevel != null) {
                 rootLogger.setLevel(oldLevel);
                 appender.clearFilters();
+            }
+            
+            if (oldValue != null) {
+                System.setProperty(prop, oldValue);
+            }
+            else {
+                System.clearProperty(prop);
             }
         }
     }
