@@ -58,6 +58,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -212,14 +213,8 @@ public class TeiReader
 			new ResourceInitializationException(e);
 		}
 
-		posMappingProvider = new MappingProvider();
-		posMappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-		posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		posMappingProvider.setDefault("pos.tagset", "default");
-		posMappingProvider.setOverride(MappingProvider.LOCATION, mappingPosLocation);
-		posMappingProvider.setOverride(MappingProvider.LANGUAGE, getLanguage());
-		posMappingProvider.setOverride("pos.tagset", posTagset);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(mappingPosLocation,
+                posTagset, getLanguage());
 	}
 
 	private void nextTeiElement() throws CollectionException, IOException
