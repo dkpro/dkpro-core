@@ -49,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -185,14 +186,8 @@ public class MateParser
 			}
 		};
 		
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/syntax/tagset/${language}-${dependency.tagset}-dependency.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, Dependency.class.getName());
-        mappingProvider.setDefault("dependency.tagset", "default");
-        mappingProvider.setOverride(MappingProvider.LOCATION, dependencyMappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        mappingProvider.addImport("dependency.tagset", modelProvider);
+        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(
+                dependencyMappingLocation, language, modelProvider);
 	}
 
 	@Override

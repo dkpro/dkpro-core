@@ -47,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -147,15 +148,8 @@ public class MatePosTagger
             }
         };
 
-        posMappingProvider = new MappingProvider();
-        posMappingProvider.setDefault(MappingProvider.LOCATION,
-                "classpath:/de/tudarmstadt/ukp/dkpro/"
-                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        posMappingProvider.setDefault("pos.tagset", "default");
-        posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-        posMappingProvider.addImport("pos.tagset", modelProvider);
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
     }
 
     @Override
