@@ -287,6 +287,19 @@ public abstract class ResourceObjectProviderBase<M>
     public void setContextObject(Object aObject)
     {
         setContextClass(aObject.getClass());
+        
+        // Experimental: allow forcing any resource provider to allow sharing its resource
+        // Enable sharing the model between multiple instances of this AE. This is an experimental
+        // parameter for advanced users. Sharing the model can lead to unexpected results because
+        // some parameters affect the model when it is initialized. Thus, only the settings from the
+        // first instance using the model will initialize the model, but not the next instance which
+        // finds the already-loaded model and simply reuses it. Sharing models can also lead to
+        // unexpected results or crashes in multi-threaded environments.
+        // Allowed values: "true" and "false"
+        String key = "dkpro.core.resourceprovider.sharable."+aObject.getClass().getName();
+        if (System.getProperty(key) != null) {
+            setDefault(SHARABLE, System.getProperty(key));
+        }
     }
     
     /**
