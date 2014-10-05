@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -152,14 +153,8 @@ public class OpenNlpChunker
 			}
 		};
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, Chunk.class.getName());
-		mappingProvider.setDefault("chunk.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, chunkMappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("chunk.tagset", modelProvider);
+        mappingProvider = MappingProviderFactory.createChunkMappingProvider(chunkMappingLocation,
+                language, modelProvider);
 	}
 
 	@Override
