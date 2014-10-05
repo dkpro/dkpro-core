@@ -639,9 +639,10 @@ public abstract class ResourceObjectProviderBase<M>
             sw.stop();
             log.info("Producing resource took " + sw.getTime() + "ms");
             
-            // If cache is enabeld, update the cache
+            // If cache is enabled, update the cache
             if (sharable) {
                 cache.put(handle, resource);
+                resourceHandle = handle;
             }
         }
     }
