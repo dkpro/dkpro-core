@@ -582,7 +582,7 @@
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-ancora.distsim.s512.crf
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-ancora.distsim.s512.crf
 							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-dewac_175m_600.crf
