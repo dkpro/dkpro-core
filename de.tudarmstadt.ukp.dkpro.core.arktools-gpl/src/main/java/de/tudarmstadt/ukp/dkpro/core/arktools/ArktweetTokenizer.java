@@ -90,7 +90,6 @@ public class ArktweetTokenizer
             start = tokenOffset;
             end = tokenOffset + token.length() + substitutionLength;
             totalSubstitutionLength += substitutionLength;
-            System.out.println(start + " " + end + " " + text.substring(start, end));
             createTokenAnnotation(cas, start, end);
 
             searchOffset = end - totalSubstitutionLength;
