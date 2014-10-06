@@ -18,6 +18,11 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.berkeleyparser;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertConstituents;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPOS;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertPennTree;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagset;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTagsetMapping;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
@@ -35,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -74,13 +78,13 @@ public class BerkeleyParserTest
         
         String[] unmappedConst = { "LST", "SINV" };
 		
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "atb", posTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "atb", new String[] {}, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "atb", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "atb", unmappedConst, jcas);
+		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "atb", posTags, jcas);
+        // FIXME assertTagsetMapping(POS.class, "atb", new String[] {}, jcas);
+        assertTagset(Constituent.class, "atb", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "atb", unmappedConst, jcas);
 	}
 
 	@Test
@@ -151,13 +155,13 @@ public class BerkeleyParserTest
         
         String[] unmappedConstituents = { "Conj", "ConjArg", "NPC", "Verbalised" };
 
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "btb", posTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(POS.class, "btb", new String[] {}, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "btb", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "btb", unmappedConstituents, jcas);
+		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "btb", posTags, jcas);
+        // FIXME assertTagsetMapping(POS.class, "btb", new String[] {}, jcas);
+        assertTagset(Constituent.class, "btb", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "btb", unmappedConstituents, jcas);
 	}
 
 	@Test
@@ -199,14 +203,14 @@ public class BerkeleyParserTest
 
         String[] unmappedPos = { "NP", "VP" };
         
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
-		AssertAnnotations.assertPennTree(pennTree, trees.get(0));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ctb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ctb", constituentTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ctb", new String[] {}, jcas);
+		assertPennTree(pennTree, trees.get(0));
+		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "ctb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ctb", constituentTags, jcas);
+        // FIXME assertTagsetMapping(Constituent.class, "ctb", new String[] {}, jcas);
 	}
 
 	@Test
@@ -247,13 +251,13 @@ public class BerkeleyParserTest
 
         String[] unmappedConst = { };
 
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        // FIXME assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
 	}
 
     @Test
@@ -295,14 +299,14 @@ public class BerkeleyParserTest
 
         String[] unmappedConst = {};
 
-        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+        assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        assertConstituents(constituentMapped, constituentOriginal,
                 select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
-        // FIXME AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst,
+        assertTagset(POS.class, "ptb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ptb", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ptb", constituentTags, jcas);
+        // FIXME assertTagsetMapping(Constituent.class, "ptb", unmappedConst,
         // jcas);
     }
 
@@ -347,13 +351,13 @@ public class BerkeleyParserTest
         
         String[] unmappedConst = { "---CJ", "PSEUDO" };
         
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "stts", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "negra", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
+		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "stts", posTags, jcas);
+        assertTagsetMapping(POS.class, "stts", unmappedPos, jcas);
+        assertTagset(Constituent.class, "negra", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "negra", unmappedConst, jcas);
 	}
 
 	@Test
@@ -395,13 +399,13 @@ public class BerkeleyParserTest
         String[] unmappedPos = { "\"", "-LRB-", "-RRB-", "ADVP", "Afs", "CC",
                 "CS", "Dmp", "ND", "PC", "S", "X", "_unknown_", "p", "près" };
 
-		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        AssertAnnotations.assertTagset(POS.class, "ftb", posTags, jcas);
-        AssertAnnotations.assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
-        AssertAnnotations.assertTagset(Constituent.class, "ftb", constituentTags, jcas);
-        AssertAnnotations.assertTagsetMapping(Constituent.class, "ftb", new String[] {}, jcas);
+		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
+        assertTagset(POS.class, "ftb", posTags, jcas);
+        assertTagsetMapping(POS.class, "ftb", unmappedPos, jcas);
+        assertTagset(Constituent.class, "ftb", constituentTags, jcas);
+        assertTagsetMapping(Constituent.class, "ftb", new String[] {}, jcas);
 	}
 
 	/**
@@ -415,7 +419,8 @@ public class BerkeleyParserTest
     }
     
     
-    private JCas runTest(String aLanguage, String aVariant, String aText, boolean aGoldPos, Object... aExtraParams)
+    private JCas runTest(String aLanguage, String aVariant, String aText, boolean aGoldPos,
+            Object... aExtraParams)
         throws Exception
     {
         AggregateBuilder aggregate = new AggregateBuilder();
@@ -435,47 +440,7 @@ public class BerkeleyParserTest
 
         return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
     }
-    
-//	/**
-//	 * Setup CAS to test parser for the English language (is only called once if
-//	 * an English test is run)
-//	 */
-//	private JCas runTest(String aLanguage, String aText, boolean aGoldPos)
-//		throws Exception
-//	{
-//	    AggregateBuilder aggregate = new AggregateBuilder();
-//	    
-//	        if (aLanguage.startsWith("dummy-")) {
-//            aLanguage = aLanguage.substring(6);
-//            aggregate.add(createEngineDescription(LanguageToolSegmenter.class,
-//                    LanguageToolSegmenter.PARAM_LANGUAGE, "en"));
-//        }
-//        else if (Arrays.asList("zh", "de").contains(aLanguage)) {
-//            aggregate.add(createEngineDescription(LanguageToolSegmenter.class));
-//		}
-//		else {
-//		    aggregate.add(createEngineDescription(StanfordSegmenter.class));
-//		}
-//
-//        if (aGoldPos) {
-//            aggregate.add(createEngineDescription(OpenNlpPosTagger.class));
-//        }
-//        
-//        aggregate.add(createEngineDescription(BerkeleyParser.class,
-//				BerkeleyParser.PARAM_PRINT_TAGSET, true,
-//				BerkeleyParser.PARAM_WRITE_PENN_TREE, true,
-//				BerkeleyParser.PARAM_WRITE_POS, !aGoldPos,
-//				BerkeleyParser.PARAM_READ_POS, aGoldPos));
-//
-//		AnalysisEngine engine = aggregate.createAggregate();
-//		JCas jcas = engine.newJCas();
-//		jcas.setDocumentLanguage(aLanguage);
-//		jcas.setDocumentText(aText);
-//		engine.process(jcas);
-//
-//		return jcas;
-//	}
-    
+        
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }
