@@ -157,10 +157,10 @@ public class ArktweetTokenizationTest
     public void testTokenization8()
         throws Exception
     {
-        String text = "god &amp; 100 days :\"&gt;";
+        String text = "god &amp; 100 days :&gt;";
         List<Token> tokens = getTokens(text);
 
-        String[] expectedToken = new String[] { "god", "&amp;", "100", "days", ":", "\"", "&gt;" };
+        String[] expectedToken = new String[] { "god", "&amp;", "100", "days", ":", "&gt;" };
 
         assertNumberOfTokens(expectedToken.length, tokens.size());
         assertTokenizationBoundaries(expectedToken, tokens);
@@ -177,6 +177,20 @@ public class ArktweetTokenizationTest
 
         String[] expectedToken = new String[] { "car", "&", "a", "..." };
 
+        assertNumberOfTokens(expectedToken.length, tokens.size());
+        assertTokenizationBoundaries(expectedToken, tokens);
+    }
+
+    @Test
+    public void testTokenization10()
+        throws Exception
+    {
+        String text = "Bullshit &gt;&gt;&gt; &gt; &gt; &gt; &gt; &gt; &gt;&gt; &gt; &gt; &gt; &gt;";
+        List<Token> tokens = getTokens(text);
+
+        String[] expectedToken = new String[] { "Bullshit", "&gt;&gt;&gt;", "&gt;", "&gt;", "&gt;",
+                "&gt;", "&gt;", "&gt;&gt;", "&gt;", "&gt;", "&gt;", "&gt;" };
+        
         assertNumberOfTokens(expectedToken.length, tokens.size());
         assertTokenizationBoundaries(expectedToken, tokens);
     }

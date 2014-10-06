@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -55,64 +56,51 @@ public class ArktweetTokenizer
         throws AnalysisEngineProcessException
     {
         String text = cas.getDocumentText();
-        String normalizedText = normalizeText(text);
 
         // FIXME: Implement proper sentence boundary detection
-        AnnotationFS sentenceAnno = cas.createAnnotation(sentenceType, 0, normalizedText.length());
+        AnnotationFS sentenceAnno = cas.createAnnotation(sentenceType, 0, text.length());
         cas.addFsToIndexes(sentenceAnno);
 
-        List<String> tokens = Twokenize.tokenizeRawTweetText(normalizedText);
+        // The 3rd party tokenization might do some normalization. In order to can trace these if
+        // they occur we normalize the raw string and denormalize each token afterwards to enalbe a
+        // mapping between normalized tokens to our CAS-unnormalized text
+        List<String> normTokens = Twokenize.tokenizeRawTweetText(text);
+        List<String> escapedTokens = new ArrayList<String>();
 
-        int start = 0;
-        int end = 0;
-        int searchOffset = 0;
-        int totalSubstitutionLength = 0;
-        for (String token : tokens) {
-
-            int tokenOffset = -1;
-            if (token.equals("&")) {
-                // HTML escaped '&' starts unfortunately with a '&'
-                // so we do nothing - we would find the normalized token in the
-                // unnormalized text and erroneously assume the token remained untouched
-                // There is a situation we have to undo 'this' ommittance (see comments below)
-            }
-            else {
-                tokenOffset = text.indexOf(token, searchOffset);
-            }
-
-            int startPos = 0;
-            int endPos = 0;
-            int substitutionLength = 0;
-            if (tokenOffset == -1) {
-                startPos = normalizedText.indexOf(token, searchOffset) + totalSubstitutionLength;
-
-                // In case of omitted spaces a htlm escaped sequence might occur in the middle of
-                // what was recognized as token e.g. 'such a smart&quot;move&quot;my friend'
-                // We thus compare if start position of token equals start position of the '&'
-                // character and use the latter for determining the length of the substituted
-                // sequence.
-                int startPosAND = text.indexOf("&", startPos);
-                endPos = text.indexOf(";", startPos);
-                if (endPos == -1) {
-                    // If for any reason no closing ';' is found some truncation seemed to have
-                    // occurred and we try to find the token in the unnormalized text (as this case
-                    // might have been skipped earlier)
-                    tokenOffset = text.indexOf(token, searchOffset);
-                }
-                else {
-                    substitutionLength = endPos
-                            - ((startPos == startPosAND) ? startPos : startPosAND);
-                    tokenOffset = startPos;
-                }
-            }
-
-            start = tokenOffset;
-            end = tokenOffset + token.length() + substitutionLength;
-            totalSubstitutionLength += substitutionLength;
-            createTokenAnnotation(cas, start, end);
-            // System.out.println(start + " " + end + " " + text.substring(start, end));
-            searchOffset = end - totalSubstitutionLength;
+        for (String s : normTokens) {
+            String escapeHtml = StringEscapeUtils.escapeHtml(s);
+            escapedTokens.add(escapeHtml);
         }
+
+        int offset = 0;
+        for (String s : escapedTokens) {
+            int start = text.indexOf(s, offset);
+            int end = start + s.length();
+
+            if (start == -1) {
+                // This weirdo occurs in json data retrieved directly from Twitter's streaming
+                // service at the end of some tweets. We have to manually override this case - there
+                // might be more
+                if (s.equals("&amp;")) {
+                    start = text.indexOf("&", offset);
+                    end = start + 1;
+                }
+                // Some chars seem not to be covered by the escaping of Arktweet
+                if (s.contains("'")) {
+                    s = s.replaceAll("'", "&#039;");
+                    start = text.indexOf(s, offset);
+                    end = start + s.length();
+
+                }
+            }
+
+            createTokenAnnotation(cas, start, end);
+            offset = end;
+        }
+
+        // createTokenAnnotation(cas, start, end);
+        // System.out.println(start + " " + end + " " + text.substring(start, end));
+        // searchOffset = end;
 
     }
 
@@ -121,17 +109,6 @@ public class ArktweetTokenizer
         AnnotationFS tokenAnno = cas.createAnnotation(tokenType, start, end);
         cas.addFsToIndexes(tokenAnno);
 
-    }
-
-    /**
-     * Twitter text comes HTML-escaped, so unescape it. We also first unescape &amp;'s, in case the
-     * text has been buggily double-escaped.
-     */
-    public static String normalizeText(String text)
-    {
-        text = text.replaceAll("&amp;", "&");
-        text = StringEscapeUtils.unescapeHtml(text);
-        return text;
     }
 
 }
