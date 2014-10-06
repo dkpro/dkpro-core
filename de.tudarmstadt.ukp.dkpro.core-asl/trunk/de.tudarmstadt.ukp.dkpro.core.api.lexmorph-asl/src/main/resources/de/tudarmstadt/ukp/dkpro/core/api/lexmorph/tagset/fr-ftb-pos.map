@@ -31,8 +31,7 @@ PUNC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # , - Punctuation (Berkeley Parser)
 ,=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # : - Punctuation (Berkeley Parser)
-:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+\:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # V
 V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
-
