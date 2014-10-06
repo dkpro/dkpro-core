@@ -618,31 +618,31 @@
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-twitter-fast
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-sr
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-de-sr
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-sr-beam
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-en-sr-beam
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-es-pcfg
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-es-pcfg
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-es-sr
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-es-sr
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-es-sr-beam
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-es-sr-beam
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-sr-beam
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-fr-sr-beam
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-sr
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-parser-zh-sr
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-es-default
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-es-default
 							</usedDependency>
 							<usedDependency>
-								de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-es-distsim
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-es-distsim
 							</usedDependency>
 						</usedDependencies>
 					</configuration>
