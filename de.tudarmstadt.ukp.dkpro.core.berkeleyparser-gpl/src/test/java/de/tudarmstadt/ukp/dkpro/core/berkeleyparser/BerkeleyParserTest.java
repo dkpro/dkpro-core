@@ -23,44 +23,46 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectSingle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
+
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
-import de.tudarmstadt.ukp.dkpro.core.languagetool.LanguageToolSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class BerkeleyParserTest
 {
-	static final String documentEnglish = "We need a very complicated example sentence, which " +
-			"contains as many constituents and dependencies as possible.";
+	static final String documentEnglish = "We need a very complicated example sentence , which " +
+			"contains as many constituents and dependencies as possible .";
 
-//	@Ignore("We don't seem to have a proper tokenizer for arabic...")
 	@Test
 	public void testArabic()
 		throws Exception
 	{
-		JCas jcas = runTest("ar", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن.");
+		JCas jcas = runTest("ar", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن .");
 
-        String[] constituentMapped = { "ROOT 0,1", "X 0,1" };
+        String[] constituentMapped = { "ROOT 0,96", "X 0,96" };
 
-        String[] constituentOriginal = { "ROOT 0,1", "X 0,1" };
+        String[] constituentOriginal = { "ROOT 0,96", "X 0,96" };
 
-		String[] posMapped ={ "POS", "POS" };
+        String[] posMapped = { "PUNC", "PUNC", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN",
+                "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "PUNC" };
 
-		String[] posOriginal = { "PUNC", "PUNC" };
+        String[] posOriginal = { "PUNC", "PUNC", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN",
+                "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "PUNC" };
 
-		String pennTree = "(ROOT (ROOT (X (PUNC ن) (PUNC ن))))";
+		String pennTree = "(ROOT (ROOT (X (PUNC نحن) (PUNC بحاجة) (NN إلى) (NN مثال) (NN على) (NN جملة) "
+		        + "(NN معقدة) (NN جدا،) (NN والتي) (NN تحتوي) (NN على) (NN مكونات) (NN مثل) (NN العديد) (NN من) "
+		        + "(NN والتبعيات) (NN وقت) (NN ممكن) (PUNC .))))";
 
         String[] posTags = { "CC", "CD", "DEM", "DT", "IN", "JJ", "NN", "NNP", "NNPS", "NNS",
                 "NOFUNC", "NUMCOMMA", "PRP", "PRP$", "PUNC", "RB", "RP", "UH", "VB", "VBD", "VBN",
@@ -85,38 +87,37 @@ public class BerkeleyParserTest
 	public void testBulgarian()
 		throws Exception
 	{
-		JCas jcas = runTest("dummy-bg", "Имаме нужда от един много сложен пример изречение, " +
-				"което съдържа най-много съставки и зависимости, колкото е възможно.");
+		JCas jcas = runTest("bg", "Имаме нужда от един много сложен пример изречение , " +
+				"което съдържа най-много съставки и зависимости, колкото е възможно .");
 
-		String[] constituentMapped = { "ROOT 0,118", "X 0,117", "X 0,118", "X 0,5",
-				"X 107,108", "X 107,117", "X 109,117", "X 12,117", "X 12,14", "X 15,117",
-				"X 15,19", "X 15,39", "X 15,49", "X 20,25", "X 20,32", "X 20,39", "X 26,32",
-				"X 33,39", "X 40,49", "X 49,117", "X 51,117", "X 51,56", "X 51,97", "X 57,64",
-				"X 57,97", "X 6,11", "X 6,117", "X 65,74", "X 65,97", "X 75,83", "X 75,97",
-				"X 84,85", "X 86,97", "X 97,117", "X 99,106", "X 99,117" };
+        String[] constituentMapped = { "ROOT 0,120", "X 0,118", "X 0,120", "X 0,5", "X 100,107",
+                "X 100,118", "X 108,109", "X 108,118", "X 110,118", "X 12,118", "X 12,14",
+                "X 15,118", "X 15,19", "X 15,39", "X 20,25", "X 20,32", "X 20,39", "X 26,32",
+                "X 33,39", "X 40,118", "X 40,49", "X 40,84", "X 50,84", "X 52,57", "X 52,84",
+                "X 58,65", "X 58,84", "X 6,11", "X 6,118", "X 66,75", "X 66,84", "X 76,84",
+                "X 85,86", "X 87,118", "X 87,99" };
 
-		String[] constituentOriginal = { "A 26,32", "APA 20,32", "Adv 109,117",
-				"Adv 20,25", "Adv 65,74", "Adv 99,106", "C 84,85", "CLR 49,117", "CLR 97,117",
-				"Conj 84,85", "ConjArg 75,83", "ConjArg 86,97", "CoordP 75,97", "M 15,19",
-				"N 33,39", "N 40,49", "N 6,11", "N 75,83", "N 86,97", "NPA 15,117", "NPA 15,39",
-				"NPA 15,49", "NPA 20,39", "NPA 6,117", "NPA 65,97", "PP 12,117", "Prep 12,14",
-				"Pron 51,56", "ROOT 0,118", "S 0,118", "V 0,5", "V 107,108", "V 57,64",
-				"VPA 51,117", "VPA 99,117", "VPC 0,117", "VPC 107,117", "VPC 57,97", "VPS 51,97" };
+        String[] constituentOriginal = { "A 26,32", "APA 20,32", "Adv 100,107", "Adv 110,118",
+                "Adv 20,25", "Adv 66,75", "Adv 87,99", "AdvPA 87,118", "C 85,86", "CL 100,118",
+                "CLR 50,84", "Conj 85,86", "ConjArg 40,84", "ConjArg 87,118", "CoordP 40,118",
+                "M 15,19", "N 33,39", "N 40,49", "N 6,11", "N 76,84", "NPA 15,118", "NPA 15,39",
+                "NPA 20,39", "NPA 40,84", "NPA 6,118", "NPA 66,84", "PP 12,118", "Prep 12,14",
+                "Pron 52,57", "ROOT 0,120", "S 0,120", "V 0,5", "V 108,109", "V 58,65",
+                "VPA 100,118", "VPC 0,118", "VPC 108,118", "VPC 58,84", "VPS 52,84" };
 
-		String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
-				"POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
+        String[] posMapped = { "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS",
+                "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS", "POS" };
 
-		String[] posOriginal = { "Vpitf", "Ncfsi", "R", "Mcmsi", "Md", "Amsi",
-				"Ncmsi", "Ncnsi", "pt", "Pre", "Vpitf", "Md", "Ncmpi", "Cp", "Ncfpi", "pt", "Prq",
-				"Vxitf", "Dd", "pt" };
+        String[] posOriginal = { "Vpitf", "Ncfsi", "R", "Mcmsi", "Md", "Amsi", "Ncmsi", "Ncnsi",
+                "pt", "Pre", "Vpitf", "Md", "Ncmpi", "Cp", "Dm", "Prq", "Vxitf", "Dd", "pt" };
 
-		String pennTree = "(ROOT (ROOT (S (VPC (V (Vpitf Имаме)) (NPA (N (Ncfsi нужда)) (PP " +
-				"(Prep (R от)) (NPA (NPA (NPA (M (Mcmsi един)) (NPA (APA (Adv (Md много)) (A " +
-				"(Amsi сложен))) (N (Ncmsi пример)))) (N (Ncnsi изречение))) (CLR (pt ,) (VPA " +
-				"(VPS (Pron (Pre което)) (VPC (V (Vpitf съдържа)) (NPA (Adv (Md най-много)) " +
-				"(CoordP (ConjArg (N (Ncmpi съставки))) (Conj (C (Cp и))) (ConjArg (N " +
-				"(Ncfpi зависимости))))))) (CLR (pt ,) (VPA (Adv (Prq колкото)) (VPC (V " +
-				"(Vxitf е)) (Adv (Dd възможно))))))))))) (pt .))))";
+		String pennTree = "(ROOT (ROOT (S (VPC (V (Vpitf Имаме)) (NPA (N (Ncfsi нужда)) (PP "
+		        + "(Prep (R от)) (NPA (NPA (M (Mcmsi един)) (NPA (APA (Adv (Md много)) (A "
+		        + "(Amsi сложен))) (N (Ncmsi пример)))) (CoordP (ConjArg (NPA (N "
+		        + "(Ncnsi изречение)) (CLR (pt ,) (VPS (Pron (Pre което)) (VPC (V "
+		        + "(Vpitf съдържа)) (NPA (Adv (Md най-много)) (N (Ncmpi съставки)))))))) "
+		        + "(Conj (C (Cp и))) (ConjArg (AdvPA (Adv (Dm зависимости,)) (CL (VPA (Adv "
+		        + "(Prq колкото)) (VPC (V (Vxitf е)) (Adv (Dd възможно)))))))))))) (pt .))))";
 		
         String[] posTags = { "A", "Afsd", "Afsi", "Ams", "Amsf", "Amsh", "Amsi",
                 "Ansd", "Ansi", "Cc", "Cp", "Cr", "Cs", "Dd", "Dl", "Dm", "Dq", "Dt", "Hfsi",
@@ -163,31 +164,30 @@ public class BerkeleyParserTest
 	public void testChinese()
 		throws Exception
 	{
-		JCas jcas = runTest("zh", "我们需要一个非常复杂的例句，它要包含尽可能多的句子成分和依存性。");
+		JCas jcas = runTest("zh", 
+		        "我们 需要 一个 非常 复杂 的 句子 例如 其中 包含 许多 成分 和 尽可能 的 依赖 。");
 
-        String[] constituentMapped = { "ADVP 18,21", "ADVP 6,8", "Constituent 0,14",
-                "Constituent 14,32", "Constituent 18,22", "Constituent 18,23", "Constituent 6,10",
-                "Constituent 6,11", "NP 0,2", "NP 11,13", "NP 14,15", "NP 18,31", "NP 23,30",
-                "NP 30,31", "NP 6,13", "ROOT 0,14", "ROOT 14,32", "VP 15,31", "VP 16,31",
-                "VP 18,22", "VP 2,13", "VP 21,22", "VP 4,13", "VP 6,10", "VP 8,10" };
+        String[] constituentMapped = { "ADVP 20,22", "ADVP 9,11", "NP 0,2", "NP 17,19", "NP 23,25",
+                "NP 23,34", "NP 32,34", "NP 37,40", "NP 37,45", "NP 43,45", "NP 6,34", "NP 6,45",
+                "NP 6,8", "PRN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45",
+                "VP 9,14", "X 0,47", "X 23,28", "X 37,42", "X 6,14", "X 6,16" };
 
-        String[] constituentOriginal = { "ADVP 18,21", "ADVP 6,8", "CP 18,23", "CP 6,11",
-                "IP 0,14", "IP 14,32", "IP 18,22", "IP 6,10", "NP 0,2", "NP 11,13", "NP 14,15",
-                "NP 18,31", "NP 23,30", "NP 30,31", "NP 6,13", "ROOT 0,14", "ROOT 14,32",
-                "VP 15,31", "VP 16,31", "VP 18,22", "VP 2,13", "VP 21,22", "VP 4,13", "VP 6,10",
-                "VP 8,10" };
+        String[] constituentOriginal = { "ADVP 20,22", "ADVP 9,11", "CP 6,16", "DNP 37,42",
+                "IP 0,47", "IP 23,28", "IP 6,14", "NP 0,2", "NP 17,19", "NP 23,25", "NP 23,34",
+                "NP 32,34", "NP 37,40", "NP 37,45", "NP 43,45", "NP 6,34", "NP 6,45", "NP 6,8",
+                "PRN 20,34", "QP 29,31", "ROOT 0,47", "VP 12,14", "VP 26,28", "VP 3,45", "VP 9,14" };
 
-        String[] posMapped = { "PR", "V", "V", "ADJ", "V", "PRT", "NN", "PUNC", "PR", "V", "V",
-                "ADJ", "V", "PRT", "NN", "CONJ", "NN", "NN", "PUNC" };
+        String[] posMapped = { "PR", "V", "NN", "ADJ", "V", "PRT", "NN", "ADJ", "NN", "V", "CARD",
+                "NN", "CONJ", "NN", "PRT", "NN", "PUNC" };
 
-        String[] posOriginal = { "PN", "VV", "VV", "AD", "VA", "DEC", "NN", "PU", "PN", "VV", "VV",
-                "AD", "VA", "DEC", "NN", "CC", "NN", "NN", "PU" };
+        String[] posOriginal = { "PN", "VV", "NN", "AD", "VA", "DEC", "NN", "AD", "NN", "VV", "CD",
+                "NN", "CC", "NN", "DEG", "NN", "PU" };
 
-		String[] pennTree = { "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (VP (VV 一个) " +
-				"(NP (CP (IP (VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 例句))))) " +
-				"(PU ，)))", "(ROOT (IP (NP (PN 它)) (VP (VV 要) (VP (VV 包含) (NP (CP (IP (VP " +
-				"(ADVP (AD 尽可能)) (VP (VA 多)))) (DEC 的)) (NP (NN 句子成分) (CC 和) (NN 依存)) " +
-				"(NP (NN 性))))) (PU 。)))" };
+		String pennTree = "(ROOT (IP (NP (PN 我们)) (VP (VV 需要) (NP (NP (CP (IP (NP (NN 一个)) "
+		        + "(VP (ADVP (AD 非常)) (VP (VA 复杂)))) (DEC 的)) (NP (NN 句子)) (PRN (ADVP "
+		        + "(AD 例如)) (NP (IP (NP (NN 其中)) (VP (VV 包含))) (QP (CD 许多)) (NP "
+		        + "(NN 成分))))) (CC 和) (NP (DNP (NP (NN 尽可能)) (DEG 的)) (NP (NN 依赖))))) "
+		        + "(PU 。)))";
 
         String[] posTags = { "AD", "AS", "BA", "CC", "CD", "CS", "DEC", "DEG", "DER", "DEV", "DT",
                 "ETC", "FW", "IJ", "JJ", "LB", "LC", "M", "MSP", "NN", "NP", "NR", "NT", "OD", "P",
@@ -201,8 +201,7 @@ public class BerkeleyParserTest
         
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 		List<PennTree> trees = new ArrayList<PennTree>(select(jcas, PennTree.class));
-		AssertAnnotations.assertPennTree(pennTree[0], trees.get(0));
-		AssertAnnotations.assertPennTree(pennTree[1], trees.get(1));
+		AssertAnnotations.assertPennTree(pennTree, trees.get(0));
 		AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
         AssertAnnotations.assertTagset(POS.class, "ctb", posTags, jcas);
         AssertAnnotations.assertTagsetMapping(POS.class, "ctb", unmappedPos, jcas);
@@ -216,13 +215,13 @@ public class BerkeleyParserTest
 	{
 		JCas jcas = runTest("en", documentEnglish);
 
-		String[] constituentMapped = { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
-				"NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
-				"S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+        String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "ADJP 61,68", "NP 0,2",
+                "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
+                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-		String[] constituentOriginal = { "ADJP 10,26", "ADJP 101,109", "ADJP 60,67",
-				"NP 0,2", "NP 60,97", "NP 8,109", "NP 8,43", "PP 98,109", "ROOT 0,110", "S 0,110",
-				"S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109", "WHNP 45,50" };
+        String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "ADJP 61,68", "NP 0,2",
+                "NP 61,98", "NP 8,110", "NP 8,43", "PP 99,110", "ROOT 0,112", "S 0,112",
+                "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
 		String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
 				"ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
@@ -261,23 +260,21 @@ public class BerkeleyParserTest
     public void testEnglishPreTagged()
         throws Exception
     {
-        JCas jcas = runTest("en", documentEnglish, true);
+        JCas jcas = runTest("en", null, documentEnglish, true);
 
-        String[] constituentMapped = { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
-                "NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
-                "ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
-                "WHNP 45,50" };
+        String[] constituentMapped = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
+                "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
+                "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] constituentOriginal = { "ADJP 10,26", "ADJP 101,109", "NP 0,2",
-                "NP 63,109", "NP 63,97", "NP 8,109", "NP 8,43", "PP 60,109", "PP 98,109",
-                "ROOT 0,110", "S 0,110", "S 51,109", "SBAR 45,109", "VP 3,109", "VP 51,109",
-                "WHNP 45,50" };
+        String[] constituentOriginal = { "ADJP 10,26", "ADJP 102,110", "NP 0,2", "NP 64,110",
+                "NP 64,98", "NP 8,110", "NP 8,43", "PP 61,110", "PP 99,110", "ROOT 0,112",
+                "S 0,112", "S 52,110", "SBAR 46,110", "VP 3,110", "VP 52,110", "WHNP 46,51" };
 
-        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
-                "ART", "V", "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
+        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC", "ART", "V",
+                "PP", "ADJ", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
-        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",",
-                "WDT", "VBZ", "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
+        String[] posOriginal = { "PRP", "VBP", "DT", "RB", "JJ", "NN", "NN", ",", "WDT", "VBZ",
+                "IN", "JJ", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
         String pennTree = "(ROOT (S (NP (PRP We)) (VP (VBP need) (NP (NP (DT a) (ADJP "
                 + "(RB very) (JJ complicated)) (NN example) (NN sentence)) (, ,) (SBAR (WHNP "
@@ -285,18 +282,18 @@ public class BerkeleyParserTest
                 + "(NNS constituents) (CC and) (NNS dependencies)) (PP (IN as) (ADJP "
                 + "(JJ possible)))))))))) (. .)))";
 
-        String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC",
-                "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS",
-                "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH",
-                "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
+        String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "CC", "CD", "DT",
+                "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", "NNPS", "NNS",
+                "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB",
+                "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB", "``" };
 
-        String[] constituentTags = { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST",
-                "NAC", "NP", "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S",
-                "SBAR", "SBARQ", "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+        String[] constituentTags = { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST", "NAC", "NP",
+                "NX", "PP", "PRN", "PRT", "PRT|ADVP", "QP", "ROOT", "RRC", "S", "SBAR", "SBARQ",
+                "SINV", "SQ", "UCP", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
         String[] unmappedPos = { "#", "$", "''", "-LRB-", "-RRB-", "``" };
 
-        String[] unmappedConst = new String[] {};
+        String[] unmappedConst = {};
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
@@ -313,20 +310,20 @@ public class BerkeleyParserTest
 	public void testGerman()
 		throws Exception
 	{
-		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel, welches " +
-				"möglichst viele Konstituenten und Dependenzen beinhaltet.");
+		JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches " +
+				"möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
-        String[] constituentMapped = { "ADJP 17,35", "Constituent 0,111", "NP 13,110", "NP 54,99",
-                "NP 70,99", "ROOT 0,111", "S 0,110", "S 46,110" };
+        String[] constituentMapped = { "ADJP 17,35", "Constituent 0,113", "NP 13,111", "NP 55,100",
+                "NP 71,100", "ROOT 0,113", "S 0,111", "S 47,111" };
 
-		String[] constituentOriginal = { "AP 17,35", "CNP 70,99", "NP 13,110",
-				"NP 54,99", "PSEUDO 0,111", "ROOT 0,111", "S 0,110", "S 46,110" };
+        String[] constituentOriginal = { "AP 17,35", "CNP 71,100", "NP 13,111", "NP 55,100",
+                "PSEUDO 0,113", "ROOT 0,113", "S 0,111", "S 47,111" };
 
-		String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,",
-				"PRELS", "ADV", "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
+        String[] posOriginal = { "PPER", "VVFIN", "ART", "ADV", "ADJA", "NN", "$,", "PRELS", "ADV",
+                "PIDAT", "NN", "KON", "NN", "VVFIN", "$." };
 
-		String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR",
-				"ADV", "PR", "NN", "CONJ", "NN", "V", "PUNC" };
+        String[] posMapped = { "PR", "V", "ART", "ADV", "ADJ", "NN", "PUNC", "PR", "ADV", "PR",
+                "NN", "CONJ", "NN", "V", "PUNC" };
 
 		String pennTree = "(ROOT (PSEUDO (S (PPER Wir) (VVFIN brauchen) (NP (ART ein) (AP " +
 				"(ADV sehr) (ADJA kompliziertes)) (NN Beispiel) ($, ,) (S (PRELS welches) (NP " +
@@ -363,17 +360,17 @@ public class BerkeleyParserTest
 	public void testFrench()
 		throws Exception
 	{
-		JCas jcas = runTest("fr", "Nous avons besoin d'une phrase par exemple très " +
-				"compliqué, qui contient des constituants que de nombreuses dépendances et que " +
-				"possible.");
+		JCas jcas = runTest("fr", "Nous avons besoin d' une phrase par exemple très " +
+				"compliqué , qui contient des constituants que de nombreuses dépendances et que " +
+				"possible .");
 
-        String[] constituentMapped = { "NP 20,88", "NP 35,42", "NP 59,62", "NP 72,88",
-                "NP 93,118", "PP 18,88", "PP 31,42", "ROOT 0,135", "S 0,135", "X 0,17",
-                "X 122,134", "X 43,57", "X 59,88", "X 63,71", "X 89,118" };
+        String[] constituentMapped = { "ADJP 44,58", "NP 21,90", "NP 36,43", "NP 61,64",
+                "NP 74,90", "NP 95,120", "PP 18,90", "PP 32,43", "ROOT 0,138", "S 0,138",
+                "SBAR 124,136", "SBAR 61,90", "SBAR 91,120", "VP 0,17", "VP 65,73" };
 
-        String[] constituentOriginal = { "AP 43,57", "NP 20,88", "NP 35,42",
-                "NP 59,62", "NP 72,88", "NP 93,118", "PP 18,88", "PP 31,42", "ROOT 0,135",
-                "SENT 0,135", "Srel 59,88", "Ssub 122,134", "Ssub 89,118", "VN 0,17", "VN 63,71" };
+        String[] constituentOriginal = { "AP 44,58", "NP 21,90", "NP 36,43", "NP 61,64",
+                "NP 74,90", "NP 95,120", "PP 18,90", "PP 32,43", "ROOT 0,138", "SENT 0,138",
+                "Srel 61,90", "Ssub 124,136", "Ssub 91,120", "VN 0,17", "VN 65,73" };
 
         String[] posMapped = { "PR", "V", "V", "PP", "ART", "N", "PP", "N", "ADV",
                 "ADJ", "PUNC", "PR", "V", "ART", "N", "CONJ", "ART", "ADJ", "N", "CONJ", "CONJ",
@@ -395,7 +392,7 @@ public class BerkeleyParserTest
         String[] constituentTags = { "AP", "AdP", "NP", "PP", "ROOT", "SENT", "Sint",
                 "Srel", "Ssub", "VN", "VPinf", "VPpart" };
 
-        String[] unmappedPos = { "\"", "-LRB-", "-RRB-", ":", "ADVP", "Afs", "CC",
+        String[] unmappedPos = { "\"", "-LRB-", "-RRB-", "ADVP", "Afs", "CC",
                 "CS", "Dmp", "ND", "PC", "S", "X", "_unknown_", "p", "près" };
 
 		AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
@@ -414,48 +411,70 @@ public class BerkeleyParserTest
     private JCas runTest(String aLanguage, String aText)
         throws Exception
     {
-        return runTest(aLanguage, aText, false);
+        return runTest(aLanguage, null, aText, false);
     }
     
-	/**
-	 * Setup CAS to test parser for the English language (is only called once if
-	 * an English test is run)
-	 */
-	private JCas runTest(String aLanguage, String aText, boolean aGoldPos)
-		throws Exception
-	{
-	    AggregateBuilder aggregate = new AggregateBuilder();
-	    
-	        if (aLanguage.startsWith("dummy-")) {
-            aLanguage = aLanguage.substring(6);
-            aggregate.add(createEngineDescription(LanguageToolSegmenter.class,
-                    LanguageToolSegmenter.PARAM_LANGUAGE, "en"));
-        }
-        else if (Arrays.asList("zh", "de").contains(aLanguage)) {
-            aggregate.add(createEngineDescription(LanguageToolSegmenter.class));
-		}
-		else {
-		    aggregate.add(createEngineDescription(StanfordSegmenter.class));
-		}
+    
+    private JCas runTest(String aLanguage, String aVariant, String aText, boolean aGoldPos, Object... aExtraParams)
+        throws Exception
+    {
+        AggregateBuilder aggregate = new AggregateBuilder();
 
         if (aGoldPos) {
             aggregate.add(createEngineDescription(OpenNlpPosTagger.class));
         }
         
-        aggregate.add(createEngineDescription(BerkeleyParser.class,
-				BerkeleyParser.PARAM_PRINT_TAGSET, true,
-				BerkeleyParser.PARAM_WRITE_PENN_TREE, true,
-				BerkeleyParser.PARAM_WRITE_POS, !aGoldPos,
-				BerkeleyParser.PARAM_READ_POS, aGoldPos));
+        Object[] params = new Object[] {
+                BerkeleyParser.PARAM_VARIANT, aVariant,
+                BerkeleyParser.PARAM_PRINT_TAGSET, true,
+                BerkeleyParser.PARAM_WRITE_PENN_TREE, true,
+                BerkeleyParser.PARAM_WRITE_POS, !aGoldPos,
+                BerkeleyParser.PARAM_READ_POS, aGoldPos};
+        params = ArrayUtils.addAll(params, aExtraParams);
+        aggregate.add(createEngineDescription(BerkeleyParser.class, params));
 
-		AnalysisEngine engine = aggregate.createAggregate();
-		JCas jcas = engine.newJCas();
-		jcas.setDocumentLanguage(aLanguage);
-		jcas.setDocumentText(aText);
-		engine.process(jcas);
-
-		return jcas;
-	}
+        return TestRunner.runTest(aggregate.createAggregateDescription(), aLanguage, aText);
+    }
+    
+//	/**
+//	 * Setup CAS to test parser for the English language (is only called once if
+//	 * an English test is run)
+//	 */
+//	private JCas runTest(String aLanguage, String aText, boolean aGoldPos)
+//		throws Exception
+//	{
+//	    AggregateBuilder aggregate = new AggregateBuilder();
+//	    
+//	        if (aLanguage.startsWith("dummy-")) {
+//            aLanguage = aLanguage.substring(6);
+//            aggregate.add(createEngineDescription(LanguageToolSegmenter.class,
+//                    LanguageToolSegmenter.PARAM_LANGUAGE, "en"));
+//        }
+//        else if (Arrays.asList("zh", "de").contains(aLanguage)) {
+//            aggregate.add(createEngineDescription(LanguageToolSegmenter.class));
+//		}
+//		else {
+//		    aggregate.add(createEngineDescription(StanfordSegmenter.class));
+//		}
+//
+//        if (aGoldPos) {
+//            aggregate.add(createEngineDescription(OpenNlpPosTagger.class));
+//        }
+//        
+//        aggregate.add(createEngineDescription(BerkeleyParser.class,
+//				BerkeleyParser.PARAM_PRINT_TAGSET, true,
+//				BerkeleyParser.PARAM_WRITE_PENN_TREE, true,
+//				BerkeleyParser.PARAM_WRITE_POS, !aGoldPos,
+//				BerkeleyParser.PARAM_READ_POS, aGoldPos));
+//
+//		AnalysisEngine engine = aggregate.createAggregate();
+//		JCas jcas = engine.newJCas();
+//		jcas.setDocumentLanguage(aLanguage);
+//		jcas.setDocumentText(aText);
+//		engine.process(jcas);
+//
+//		return jcas;
+//	}
     
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
