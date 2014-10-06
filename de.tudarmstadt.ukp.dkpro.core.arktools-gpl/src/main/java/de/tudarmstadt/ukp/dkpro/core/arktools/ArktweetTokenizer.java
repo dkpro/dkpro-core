@@ -85,13 +85,13 @@ public class ArktweetTokenizer
                     start = text.indexOf("&", offset);
                     end = start + 1;
                 }
-                // Some chars seem not to be covered by the escaping of Arktweet
-                if (s.contains("'")) {
-                    s = s.replaceAll("'", "&#039;");
+                else {
+                    // Let us try the unescaped version
+                    s = StringEscapeUtils.unescapeHtml(s);
                     start = text.indexOf(s, offset);
                     end = start + s.length();
-
                 }
+
             }
 
             createTokenAnnotation(cas, start, end);

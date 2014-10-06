@@ -194,7 +194,7 @@ public class ArktweetTokenizationTest
         assertNumberOfTokens(expectedToken.length, tokens.size());
         assertTokenizationBoundaries(expectedToken, tokens);
     }
-
+    
     private List<Token> getTokens(String text)
         throws AnalysisEngineProcessException, ResourceInitializationException
     {
