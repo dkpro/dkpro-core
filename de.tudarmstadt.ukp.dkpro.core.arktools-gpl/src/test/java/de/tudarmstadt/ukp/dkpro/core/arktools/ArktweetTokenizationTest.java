@@ -153,6 +153,34 @@ public class ArktweetTokenizationTest
         assertTokenizationBoundaries(expectedToken, tokens);
     }
 
+    @Test
+    public void testTokenization8()
+        throws Exception
+    {
+        String text = "god &amp; 100 days :\"&gt;";
+        List<Token> tokens = getTokens(text);
+
+        String[] expectedToken = new String[] { "god", "&amp;", "100", "days", ":", "\"", "&gt;" };
+
+        assertNumberOfTokens(expectedToken.length, tokens.size());
+        assertTokenizationBoundaries(expectedToken, tokens);
+    }
+
+    @Test
+    public void testTokenization9()
+        throws Exception
+    {
+        // This mutilated &amp; can be found in json data obtained directly from twitter occurring
+        // occasionally at the end of tweets
+        String text = "car &a ...";
+        List<Token> tokens = getTokens(text);
+
+        String[] expectedToken = new String[] { "car", "&", "a", "..." };
+
+        assertNumberOfTokens(expectedToken.length, tokens.size());
+        assertTokenizationBoundaries(expectedToken, tokens);
+    }
+
     private List<Token> getTokens(String text)
         throws AnalysisEngineProcessException, ResourceInitializationException
     {

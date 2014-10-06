@@ -68,7 +68,17 @@ public class ArktweetTokenizer
         int searchOffset = 0;
         int totalSubstitutionLength = 0;
         for (String token : tokens) {
-            int tokenOffset = text.indexOf(token, searchOffset);
+
+            int tokenOffset = -1;
+            if (token.equals("&")) {
+                // HTML escaped '&' starts unfortunately with a '&'
+                // so we do nothing - we would find the normalized token in the
+                // unnormalized text and erroneously assume the token remained untouched
+                // There is a situation we have to undo 'this' ommittance (see comments below)
+            }
+            else {
+                tokenOffset = text.indexOf(token, searchOffset);
+            }
 
             int startPos = 0;
             int endPos = 0;
@@ -83,15 +93,24 @@ public class ArktweetTokenizer
                 // sequence.
                 int startPosAND = text.indexOf("&", startPos);
                 endPos = text.indexOf(";", startPos);
-                substitutionLength = endPos - ((startPos == startPosAND) ? startPos : startPosAND);
-                tokenOffset = startPos;
+                if (endPos == -1) {
+                    // If for any reason no closing ';' is found some truncation seemed to have
+                    // occurred and we try to find the token in the unnormalized text (as this case
+                    // might have been skipped earlier)
+                    tokenOffset = text.indexOf(token, searchOffset);
+                }
+                else {
+                    substitutionLength = endPos
+                            - ((startPos == startPosAND) ? startPos : startPosAND);
+                    tokenOffset = startPos;
+                }
             }
 
             start = tokenOffset;
             end = tokenOffset + token.length() + substitutionLength;
             totalSubstitutionLength += substitutionLength;
             createTokenAnnotation(cas, start, end);
-
+            // System.out.println(start + " " + end + " " + text.substring(start, end));
             searchOffset = end - totalSubstitutionLength;
         }
 
