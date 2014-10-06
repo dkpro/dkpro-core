@@ -120,6 +120,7 @@ public class BncReader
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 posTagset, getLanguage());
+        posMappingProvider.setDefault("pos.tagset", "c5");
 	}
 
 	@Override
