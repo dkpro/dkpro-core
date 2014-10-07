@@ -56,9 +56,9 @@ public class ArktweetTokenizationTest
         String text = " Content.&quot;made a pac lets see how long it last&quot;";
         List<Token> tokens = getTokens(text);
 
-        assertNumberOfTokens(13, tokens.size());
-        assertTokenizationBoundaries(new String[] { "Content", ".", "&quot;", "made", "a", "pac",
-                "lets", "see", "how", "long", "it", "last", "&quot;" }, tokens);
+        assertNumberOfTokens(15, tokens.size());
+        assertTokenizationBoundaries(new String[] { "Content", ".", "&", "quot", ";", "made", "a",
+                "pac", "lets", "see", "how", "long", "it", "last", "&quot;" }, tokens);
     }
 
     private void assertTokenizationBoundaries(String[] expected, List<Token> tokens)
@@ -108,9 +108,9 @@ public class ArktweetTokenizationTest
 
         List<Token> tokens = getTokens(text);
 
-        assertNumberOfTokens(14, tokens.size());
-        assertTokenizationBoundaries(new String[] { "&quot;", "Im", "in", "love", "and", "I",
-                "don't", "care", "who", "knows", "it", "!", "&quot;", "-elf" }, tokens);
+        assertNumberOfTokens(16, tokens.size());
+        assertTokenizationBoundaries(new String[] { "&", "quot", ";", "Im", "in", "love", "and",
+                "I", "don't", "care", "who", "knows", "it", "!", "&quot;", "-elf" }, tokens);
     }
 
     @Test
@@ -133,11 +133,12 @@ public class ArktweetTokenizationTest
         String text = "@TextTonic &quot;control&quot; or &quot;abuse&quot;? I see them as Very different. Whilst we are into self promoting here goes   http://tinyurl.com/cru3hu";
         List<Token> tokens = getTokens(text);
 
-        assertNumberOfTokens(25, tokens.size());
-        assertTokenizationBoundaries(new String[] { "@TextTonic", "&quot;", "control", "&quot;",
-                "or", "&quot;", "abuse", "&quot;", "?", "I", "see", "them", "as", "Very",
-                "different", ".", "Whilst", "we", "are", "into", "self", "promoting", "here",
-                "goes", "http://tinyurl.com/cru3hu" }, tokens);
+        assertNumberOfTokens(29, tokens.size());
+
+        assertTokenizationBoundaries(new String[] { "@TextTonic", "&", "quot", ";", "control",
+                "&quot;", "or", "&", "quot", ";", "abuse", "&quot;", "?", "I", "see", "them", "as",
+                "Very", "different", ".", "Whilst", "we", "are", "into", "self", "promoting",
+                "here", "goes", "http://tinyurl.com/cru3hu" }, tokens);
     }
 
     @Test
@@ -146,8 +147,9 @@ public class ArktweetTokenizationTest
     {
         String text = "a baptism&amp;they made it rain&amp;kissed me on the head #IwasAppreciated";
         List<Token> tokens = getTokens(text);
-        String[] expectedToken = new String[] { "a", "baptism&amp;they", "made", "it",
-                "rain&amp;kissed", "me", "on", "the", "head", "#IwasAppreciated" };
+
+        String[] expectedToken = new String[] { "a", "baptism", "&amp;", "they", "made", "it",
+                "rain", "&amp;", "kissed", "me", "on", "the", "head", "#IwasAppreciated" };
 
         assertNumberOfTokens(expectedToken.length, tokens.size());
         assertTokenizationBoundaries(expectedToken, tokens);
@@ -160,7 +162,12 @@ public class ArktweetTokenizationTest
         String text = "god &amp; 100 days :&gt;";
         List<Token> tokens = getTokens(text);
 
-        String[] expectedToken = new String[] { "god", "&amp;", "100", "days", ":", "&gt;" };
+        for (Token t : tokens) {
+            System.out.println(t.getCoveredText());
+        }
+
+        String[] expectedToken = new String[] { "god", "&", "amp", ";", "100", "days", ":", "&",
+                "gt", ";" };
 
         assertNumberOfTokens(expectedToken.length, tokens.size());
         assertTokenizationBoundaries(expectedToken, tokens);
@@ -181,20 +188,6 @@ public class ArktweetTokenizationTest
         assertTokenizationBoundaries(expectedToken, tokens);
     }
 
-    @Test
-    public void testTokenization10()
-        throws Exception
-    {
-        String text = "Bullshit &gt;&gt;&gt; &gt; &gt; &gt; &gt; &gt; &gt;&gt; &gt; &gt; &gt; &gt;";
-        List<Token> tokens = getTokens(text);
-
-        String[] expectedToken = new String[] { "Bullshit", "&gt;&gt;&gt;", "&gt;", "&gt;", "&gt;",
-                "&gt;", "&gt;", "&gt;&gt;", "&gt;", "&gt;", "&gt;", "&gt;" };
-        
-        assertNumberOfTokens(expectedToken.length, tokens.size());
-        assertTokenizationBoundaries(expectedToken, tokens);
-    }
-    
     private List<Token> getTokens(String text)
         throws AnalysisEngineProcessException, ResourceInitializationException
     {

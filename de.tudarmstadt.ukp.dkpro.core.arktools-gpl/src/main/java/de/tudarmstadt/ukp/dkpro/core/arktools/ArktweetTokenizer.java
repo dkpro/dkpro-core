@@ -19,10 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.arktools;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
@@ -61,46 +59,17 @@ public class ArktweetTokenizer
         AnnotationFS sentenceAnno = cas.createAnnotation(sentenceType, 0, text.length());
         cas.addFsToIndexes(sentenceAnno);
 
-        // The 3rd party tokenization might do some normalization. In order to can trace these if
-        // they occur we normalize the raw string and denormalize each token afterwards to enalbe a
-        // mapping between normalized tokens to our CAS-unnormalized text
-        List<String> normTokens = Twokenize.tokenizeRawTweetText(text);
-        List<String> escapedTokens = new ArrayList<String>();
-
-        for (String s : normTokens) {
-            String escapeHtml = StringEscapeUtils.escapeHtml(s);
-            escapedTokens.add(escapeHtml);
-        }
-
+        // NOTE: Twokenize provides a API call that performs a normalization first - this would
+        // require a mapping to the text how it is present in the CAS object. Due to HTML escaping
+        // that would become really messy, we use the call which does not perform any normalization
+        List<String> tokenize = Twokenize.tokenize(text);
         int offset = 0;
-        for (String s : escapedTokens) {
-            int start = text.indexOf(s, offset);
-            int end = start + s.length();
-
-            if (start == -1) {
-                // This weirdo occurs in json data retrieved directly from Twitter's streaming
-                // service at the end of some tweets. We have to manually override this case - there
-                // might be more
-                if (s.equals("&amp;")) {
-                    start = text.indexOf("&", offset);
-                    end = start + 1;
-                }
-                else {
-                    // Let us try the unescaped version
-                    s = StringEscapeUtils.unescapeHtml(s);
-                    start = text.indexOf(s, offset);
-                    end = start + s.length();
-                }
-
-            }
-
+        for (String t : tokenize) {
+            int start = text.indexOf(t, offset);
+            int end = start + t.length();
             createTokenAnnotation(cas, start, end);
             offset = end;
         }
-
-        // createTokenAnnotation(cas, start, end);
-        // System.out.println(start + " " + end + " " + text.substring(start, end));
-        // searchOffset = end;
 
     }
 
