@@ -71,16 +71,16 @@ public class ArktweetTaggerTest
         );
     }
 
-    // Test for issue 335
-    @Test
-    public void bugTest() throws Exception {
-        runTest("en",
-                "company&#039;s mo",
-                new String[] { "company&#039;s", "mo" },
-                new String[] { "S",              "N", },
-                new String[] { "NN",             "NN" }
-        );
-    }
+//    // Test for issue 335
+//    @Test
+//    public void bugTest() throws Exception {
+//        runTest("en",
+//                "company&#039;s mo",
+//                new String[] { "company&#039;s", "mo" },
+//                new String[] { "S",              "N", },
+//                new String[] { "NN",             "NN" }
+//        );
+//    }
     
     private JCas runTest(
             String language,
