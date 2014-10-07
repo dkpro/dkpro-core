@@ -170,8 +170,7 @@ public class StanfordPosTaggerTest
     	// Covering the following sub-Saharan countries with vast areas very
         runTest("ar", "تغطي الصحراء الكبرى الدول التالية بمساحات شاسعة جدا",
         		new String[] { "VBP", "DTNN", "DTJJR", "DTNN", "DTJJ", "NNS", "JJ",  "NN"  },
-        		new String[] { "POS", "POS",  "POS",   "POS",  "POS",  "POS", "POS", "POS" } );
-
+        		new String[] { "V",   "NN",   "ADJ",   "NN",   "ADJ",  "NN",  "ADJ", "NN" });
     }
 
     @Test
