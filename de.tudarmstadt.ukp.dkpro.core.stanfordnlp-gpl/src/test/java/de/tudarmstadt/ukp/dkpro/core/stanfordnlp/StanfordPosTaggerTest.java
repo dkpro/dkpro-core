@@ -67,6 +67,15 @@ public class StanfordPosTaggerTest
         runTest("en", "twitter-fast", "John is purchasing oranges . \n",
                 new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
                 new String[] { "NP",  "V",   "V",   "NN",  "PUNC" });
+
+        runTest("en", "caseless-left3words-distsim", "john is purchasing oranges . \n",
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
+                new String[] { "NP",  "V",   "V",   "NN",  "PUNC" });
+
+        runTest("en", "wsj-0-18-caseless-left3words-distsim", "john is purchasing oranges . \n",
+                new String[] { "NNP", "VBZ", "VBG", "NNS", "." },
+                new String[] { "NP",  "V",   "V",   "NN",  "PUNC" });
+
     }
 
 	@Test
@@ -84,6 +93,15 @@ public class StanfordPosTaggerTest
         runTest("de", "dewac", "Das ist ein Test .",
         		new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
         		new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+
+        runTest("de", "fast-caseless", "das ist ein test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+
+        runTest("de", "fast-caseless", "Das ist ein test .",
+                new String[] { "PDS", "VAFIN", "ART", "NN",   "$."    },
+                new String[] { "PR",  "V",     "ART", "NN",   "PUNC" });
+
     }
 
     @Test
@@ -141,7 +159,7 @@ public class StanfordPosTaggerTest
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
     }
-    
+
     @Test
     public void testChinese()
         throws Exception
@@ -200,7 +218,7 @@ public class StanfordPosTaggerTest
         // No automatic downloading from repository during testing. This makes sure we fail if
         // models are not properly added as test dependencies.
         System.setProperty(ResourceObjectProviderBase.PROP_REPO_OFFLINE, "true");
-        
+
         AnalysisEngineDescription segmenter;
 
         if ("zh".equals(aLanguage)) {
@@ -209,7 +227,7 @@ public class StanfordPosTaggerTest
         else {
             segmenter = createEngineDescription(StanfordSegmenter.class);
         }
-        
+
         Object[] params = new Object[] {
                 StanfordPosTagger.PARAM_VARIANT, aVariant,
                 StanfordPosTagger.PARAM_PRINT_TAGSET, true };
@@ -224,7 +242,7 @@ public class StanfordPosTaggerTest
         engine.process(jcas);
 
         return jcas;
-    }    
+    }
 	private void runTest(String language, String testDocument, String[] tags, String[] tagClasses)
 			throws Exception
 	{
@@ -242,7 +260,7 @@ public class StanfordPosTaggerTest
 
         AssertAnnotations.assertPOS(tagClasses, tags, select(aJCas, POS.class));
     }
-    
+
 
     @Rule
     public TestName name = new TestName();
@@ -252,7 +270,7 @@ public class StanfordPosTaggerTest
     {
         System.out.println("\n=== " + name.getMethodName() + " =====================");
     }
-    
+
     @Before
     public void setupLogging()
     {

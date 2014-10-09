@@ -47,14 +47,47 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("en", null, "IBM where John works is in Germany .");
 
-        String[] ne = { 
-                "[  0,  3]Organization(ORGANIZATION) (IBM)", 
-                "[ 10, 14]Person(PERSON) (John)", 
+        String[] ne = {
+                "[  0,  3]Organization(ORGANIZATION) (IBM)",
+                "[ 10, 14]Person(PERSON) (John)",
                 "[ 27, 34]Location(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
-	
+
+   @Test
+    public void test3classCaselessEnglish()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+        JCas jcas = runTest("en", "all.3class.caseless.distsim.crf", "ibm where john works is in germany .");
+
+        String[] ne = {
+                "[  0,  3]Organization(ORGANIZATION) (ibm)",
+                "[ 10, 14]Person(PERSON) (john)",
+                "[ 27, 34]Location(LOCATION) (germany)" };
+
+        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+    }
+
+   @Test
+   public void testNoWiki3classCaselessEnglish()
+       throws Exception
+   {
+       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+       JCas jcas = runTest("en", "nowiki.3class.caseless.distsim.crf", "ibm where john works is in germany .");
+
+       String[] ne = {
+               "[  0,  3]Organization(ORGANIZATION) (ibm)",
+               "[ 10, 14]Person(PERSON) (john)",
+               "[ 27, 34]Location(LOCATION) (germany)" };
+
+       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+   }
+
+
    @Test
     public void test4classEnglish()
         throws Exception
@@ -63,14 +96,46 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("en", "conll.4class.distsim.crf", "IBM where John works is in Germany .");
 
-        String[] ne = { 
-                "[  0,  3]Organization(ORGANIZATION) (IBM)", 
-                "[ 10, 14]Person(PERSON) (John)", 
+        String[] ne = {
+                "[  0,  3]Organization(ORGANIZATION) (IBM)",
+                "[ 10, 14]Person(PERSON) (John)",
                 "[ 27, 34]Location(LOCATION) (Germany)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
     }
 
+
+   @Test
+   public void test4classCaselessEnglish()
+       throws Exception
+   {
+       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+       JCas jcas = runTest("en", "conll.4class.caseless.distsim.crf", "ibm where john works is in germany .");
+
+       String[] ne = {
+               "[  0,  3]Organization(ORGANIZATION) (ibm)",
+               "[ 10, 14]Person(PERSON) (john)",
+               "[ 27, 34]Location(LOCATION) (germany)" };
+
+       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+   }
+
+   @Test
+   public void test4classCaselessMixedEnglish()
+       throws Exception
+   {
+       Assume.assumeTrue(Runtime.getRuntime().maxMemory() > 1000000000);
+
+       JCas jcas = runTest("en", "conll.4class.caseless.distsim.crf", "IBM where john works is in Germany .");
+
+       String[] ne = {
+               "[  0,  3]Organization(ORGANIZATION) (IBM)",
+               "[ 10, 14]Person(PERSON) (john)",
+               "[ 27, 34]Location(LOCATION) (Germany)" };
+
+       AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
+   }
 
    @Test
    public void test7classEnglish()
@@ -80,14 +145,14 @@ public class StanfordNamedEntityRecognizerTest
 
        JCas jcas = runTest("en", "muc.7class.distsim.crf", "IBM where John works is in Germany .");
 
-       String[] ne = { 
-               "[  0,  3]Organization(ORGANIZATION) (IBM)", 
-               "[ 10, 14]Person(PERSON) (John)", 
+       String[] ne = {
+               "[  0,  3]Organization(ORGANIZATION) (IBM)",
+               "[ 10, 14]Person(PERSON) (John)",
                "[ 27, 34]Location(LOCATION) (Germany)" };
 
        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
    }
-	   
+
 	@Test
 	public void testGerman()
 		throws Exception
@@ -96,14 +161,14 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("de", null, "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-        String[] ne = { 
-                "[  0,  6]Person(I-PER) (Markus)", 
-                "[ 35, 38]Organization(I-ORG) (SAP)", 
+        String[] ne = {
+                "[  0,  6]Person(I-PER) (Markus)",
+                "[ 35, 38]Organization(I-ORG) (SAP)",
                 "[ 42, 53]Location(I-LOC) (Deutschland)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
 	}
-	
+
    @Test
     public void testHgcGerman()
         throws Exception
@@ -112,9 +177,9 @@ public class StanfordNamedEntityRecognizerTest
 
         JCas jcas = runTest("de", "hgc_175m_600.crf", "Markus arbeitet seit 10 Jahren bei SAP in Deutschland .");
 
-        String[] ne = { 
-                "[  0,  6]Person(I-PER) (Markus)", 
-                "[ 35, 38]Organization(I-ORG) (SAP)", 
+        String[] ne = {
+                "[  0,  6]Person(I-PER) (Markus)",
+                "[ 35, 38]Organization(I-ORG) (SAP)",
                 "[ 42, 53]Location(I-LOC) (Deutschland)" };
 
         AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
@@ -128,20 +193,20 @@ public class StanfordNamedEntityRecognizerTest
 
        JCas jcas = runTest("es", null, "Hace 10 años Markus trabaja en SAP en Alemania .");
 
-       String[] ne = { 
+       String[] ne = {
                "[ 13, 19]Person(PERS) (Markus)",
                "[ 31, 34]Organization(ORG) (SAP)",
                "[ 38, 46]Location(LUG) (Alemania)" };
 
        AssertAnnotations.assertNamedEntity(ne, select(jcas, NamedEntity.class));
    }
-   
+
 	@Test(expected = AnalysisEngineProcessException.class)
 	public void testMissingModel() throws Exception
 	{
         runTest("xx", null, "Xec xena Xeo .");
 	}
-	
+
     private JCas runTest(String language, String variant, String testDocument)
         throws Exception
     {
