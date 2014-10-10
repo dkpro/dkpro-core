@@ -974,30 +974,27 @@ public class StanfordParserTest
         throws Exception
     {
         JCas jcas = runTest("ar", "factored",
-                "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن .");
+                "نحتاج مثالا معقدا جدا ل جملة تحتوي على أكبر قدر ممكن من العناصر و الروابط .");
 
-        String[] constituentMapped = { "ROOT 0,96", "X 0,3", "X 0,96", "X 10,33", "X 10,44",
-                "X 14,18", "X 14,33", "X 19,33", "X 23,33", "X 34,44", "X 4,94", "X 45,94",
-                "X 51,94", "X 55,94", "X 62,94", "X 66,72", "X 66,94", "X 73,94", "X 76,94",
-                "X 86,94" };
+        String[] constituentMapped = { "NP 24,28", "NP 24,73", "NP 39,73", "NP 44,52", "NP 44,73",
+                "NP 56,73", "NP 6,21", "PP 22,73", "PP 35,73", "PP 53,73", "ROOT 0,75", "S 0,75",
+                "S 29,73", "SBAR 29,73", "VP 0,73", "VP 29,73" };
 
-        String[] constituentOriginal = { "NP 0,3", "NP 10,33", "NP 10,44", "NP 14,18", "NP 14,33",
-                "NP 23,33", "NP 34,44", "NP 55,94", "NP 62,94", "NP 66,72", "NP 66,94", "NP 76,94",
-                "NP 86,94", "PP 19,33", "PP 51,94", "PP 73,94", "ROOT 0,96", "S 0,96", "S 45,94",
-                "VP 4,94", "VP 45,94" };
+        String[] constituentOriginal = { "NP 24,28", "NP 24,73", "NP 39,73", "NP 44,52",
+                "NP 44,73", "NP 56,73", "NP 6,21", "PP 22,73", "PP 35,73", "PP 53,73", "ROOT 0,75",
+                "S 0,75", "S 29,73", "SBAR 29,73", "VP 0,73", "VP 29,73" };
 
         String[] dependencies = {};
 
-        String pennTree = "(ROOT (S (NP (PRP نحن)) (VP (VBP بحاجة) (NP (NP (NN إلى) (NP (NP (NN مثال)) "
-                + "(PP (IN على) (NP (NN جملة) (JJ معقدة))))) (NP (NNP جدا،) (NNP والتي))) (S (VP "
-                + "(VBP تحتوي) (PP (IN على) (NP (NNS مكونات) (NP (NN مثل) (NP (NP (DTNN العديد)) (PP "
-                + "(IN من) (NP (NN والتبعيات) (NP (NN وقت) (JJ ممكن))))))))))) (PUNC .)))";
+        String pennTree = "(ROOT (S (VP (VBP نحتاج) (NP (NN مثالا) (JJ معقدا) (NN جدا)) (PP (IN ل) (NP "
+                + "(NP (NN جملة)) (SBAR (S (VP (VBP تحتوي) (PP (IN على) (NP (NN أكبر) (NP (NP (NN قدر) "
+                + "(JJ ممكن)) (PP (IN من) (NP (DTNN العناصر) (CC و) (DTNN الروابط)))))))))))) (PUNC .)))";
 
-        String[] posMapped = { "PR", "V", "NN", "NN", "PP", "NN", "ADJ", "NP", "NP", "V", "PP",
-                "NN", "NN", "NN", "PP", "NN", "NN", "ADJ", "PUNC" };
+        String[] posMapped = { "V", "NN", "ADJ", "NN", "PP", "NN", "V", "PP", "NN", "NN", "ADJ",
+                "PP", "NN", "CONJ", "NN", "PUNC" };
 
-        String[] posOriginal = { "PRP", "VBP", "NN", "NN", "IN", "NN", "JJ", "NNP", "NNP", "VBP",
-                "IN", "NNS", "NN", "DTNN", "IN", "NN", "NN", "JJ", "PUNC" };
+        String[] posOriginal = { "VBP", "NN", "JJ", "NN", "IN", "NN", "VBP", "IN", "NN", "NN",
+                "JJ", "IN", "DTNN", "CC", "DTNN", "PUNC" };
 
         String[] posTags = { ".$$.", "ADJ_NUM", "CC", "CD", "DT", "DTJJ", "DTJJR", "DTNN", "DTNNP",
                 "DTNNPS", "DTNNS", "IN", "JJ", "JJR", "NN", "NNP", "NNPS", "NNS", "NOUN_QUANT",
