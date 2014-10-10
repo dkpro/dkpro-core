@@ -2,54 +2,56 @@
 #
 # Source: http://www.ircs.upenn.edu/arabic/Jan03release/TBParsing-info.txt
 
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.
+
 # S	sentence
-S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+S=S
 # NP	noun phrase
-NP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+NP=NP
 # VP	verb phrase
-VP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+VP=VP
 # PP	prepositional phrase
-PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+PP=PP
 # SBAR	S-bar (subordinate clause, complementizer or WH- and sentence)
-SBAR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+SBAR=SBAR
 # SBARQ	S-bar that is a question
-SBARQ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+SBARQ=SBARQ
 # SQ	S that is a question
-SQ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+SQ=S
 # NX	noun head in certain complex coordination contexts
-NX=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+NX=NX
 # PRN	parenthetical
-PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+PRN=PRN
 # PRT	particle
-PRT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+PRT=PRT
 # QP	quantity phrase (multi-word numbers)
-QP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+QP=QP
 # ADJP	adjective phrase
-ADJP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+ADJP=ADJP
 # ADVP	adverb phrase
-ADVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+ADVP=ADVP
 # FRAG	fragment
-FRAG=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+FRAG=FRAG
 # WHNP	WH- noun phrase
-WHNP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+WHNP=WHNP
 # WHPP	WH- prepositional phrase
-WHPP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+WHPP=WHPP
 # WHADJP	WH- adjective phrase
-WHADJP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+WHADJP=WHADJP
 # WHADVP	WH- adverb phrase
-WHADVP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+WHADVP=WHADVP
 # CONJP	conjunction phrase (multi-word conjunction)
-CONJP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+CONJP=CONJP
 # INTJ	interjection
-INTJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+INTJ=INTJ
 # NAC	Not-A-Constituent (mostly rightward moved conjuncts with conjunction)
-NAC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+NAC=NAC
 # UCP	Unlike-Coordinated-Phrase (dominates coordination of NP and PP, e.g.)
-UCP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+UCP=UCP
 # X	unknown, technical problem, etc.
-X=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+X=X
 
 #
 # Categories used by DKPro internally
 #
-ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+ROOT=ROOT
