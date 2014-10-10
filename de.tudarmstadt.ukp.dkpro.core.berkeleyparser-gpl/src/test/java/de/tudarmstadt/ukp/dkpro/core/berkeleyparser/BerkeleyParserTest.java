@@ -39,7 +39,9 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
+import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
@@ -52,21 +54,24 @@ public class BerkeleyParserTest
 	public void testArabic()
 		throws Exception
 	{
-		JCas jcas = runTest("ar", "نحن بحاجة إلى مثال على جملة معقدة جدا، والتي تحتوي على مكونات مثل العديد من والتبعيات وقت ممكن .");
+        JCas jcas = runTest("ar",
+                "نحتاج مثالا معقدا جدا ل جملة تحتوي على أكبر قدر ممكن من العناصر و الروابط .");
 
-        String[] constituentMapped = { "ROOT 0,96", "X 0,96" };
+        String[] constituentMapped = { "ROOT 0,75", "X 0,75" };
 
-        String[] constituentOriginal = { "ROOT 0,96", "X 0,96" };
+        String[] constituentOriginal = { "ROOT 0,75", "X 0,75" };
+
+        String[] dependencies = {};
+
+        String pennTree = "(ROOT (ROOT (X (PUNC نحتاج) (PUNC مثالا) (NN معقدا) (NN جدا) (NN ل) (NN جملة) "
+                + "(NN تحتوي) (NN على) (NN أكبر) (NN قدر) (NN ممكن) (NN من) (NN العناصر) (NN و) (NN الروابط) "
+                + "(PUNC .))))";
 
         String[] posMapped = { "PUNC", "PUNC", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN",
-                "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "PUNC" };
+                "NN", "NN", "NN", "NN", "NN", "PUNC" };
 
         String[] posOriginal = { "PUNC", "PUNC", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN",
-                "NN", "NN", "NN", "NN", "NN", "NN", "NN", "NN", "PUNC" };
-
-		String pennTree = "(ROOT (ROOT (X (PUNC نحن) (PUNC بحاجة) (NN إلى) (NN مثال) (NN على) (NN جملة) "
-		        + "(NN معقدة) (NN جدا،) (NN والتي) (NN تحتوي) (NN على) (NN مكونات) (NN مثل) (NN العديد) (NN من) "
-		        + "(NN والتبعيات) (NN وقت) (NN ممكن) (PUNC .))))";
+                "NN", "NN", "NN", "NN", "NN", "PUNC" };
 
         String[] posTags = { "CC", "CD", "DEM", "DT", "IN", "JJ", "NN", "NNP", "NNPS", "NNS",
                 "NOFUNC", "NUMCOMMA", "PRP", "PRP$", "PUNC", "RB", "RP", "UH", "VB", "VBD", "VBN",
@@ -75,16 +80,20 @@ public class BerkeleyParserTest
         String[] constituentTags = { "ADJP", "ADVP", "CONJP", "FRAG", "INTJ", "LST", "NAC", "NP",
                 "NX", "PP", "PRN", "PRT", "QP", "ROOT", "S", "SBAR", "SBARQ", "SINV", "SQ", "UCP",
                 "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
-        
+
+        String[] unmappedPos = { "DEM", "NOFUNC", "NUMCOMMA", "PRP$", "VERB" };
+
         String[] unmappedConst = { "LST", "SINV" };
-		
-		assertPOS(posMapped, posOriginal, select(jcas, POS.class));
-		assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-		assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-        assertTagset(POS.class, "atb", posTags, jcas);
-        // FIXME assertTagsetMapping(POS.class, "atb", new String[] {}, jcas);
-        assertTagset(Constituent.class, "atb", constituentTags, jcas);
-        assertTagsetMapping(Constituent.class, "atb", unmappedConst, jcas);
+        
+        AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+        AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
+        AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal,
+                select(jcas, Constituent.class));
+        AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
+        AssertAnnotations.assertTagset(POS.class, "atb", posTags, jcas);
+        AssertAnnotations.assertTagsetMapping(POS.class, "atb", unmappedPos, jcas);
+        AssertAnnotations.assertTagset(Constituent.class, "atb", constituentTags, jcas);
+        AssertAnnotations.assertTagsetMapping(Constituent.class, "atb", unmappedConst, jcas);
 	}
 
 	@Test
