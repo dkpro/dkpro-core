@@ -20,8 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -34,7 +36,9 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 {
 	// private final Log log = LogFactory.getLog(getClass());
 
-	public static final String BASE_TYPE = "baseType";
+	private static final String META_TYPE_BASE = "__META_TYPE_BASE__";
+
+    public static final String BASE_TYPE = "baseType";
 
 	private TypeSystem typeSystem;
 	private boolean notFound = false;
@@ -65,36 +69,57 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	 */
 	public Type getTagType(String aTag)
 	{
-		String type;
-		if (notFound) {
-			type = getDefault(BASE_TYPE);
-            if (type == null) {
-                throw new IllegalStateException("No base type defined!");
-            }
-		}
-		else {
-	        type = getResource().get(aTag);
-	        if (type == null) {
-	        	type = getResource().get("*");
-	        }
-	        if (type == null) {
-	        	throw new IllegalStateException("No fallback (*) mapping defined!");
-	        }
-	        
-	        String basePackage = getResource().get("__META_TYPE_BASE__");
-	        if (basePackage != null) {
-	            type = basePackage + type;
-	        }
-		}
+		String type = getTagTypeName(aTag);
 
         Type uimaType = typeSystem.getType(type);
-
+		
         if (uimaType == null) {
 			throw new IllegalStateException("Type [" + type + "] mapped to tag [" + aTag
 					+ "] is not defined in type system");
         }
 
         return uimaType;
+    }
+	
+	   /**
+     * Get the type for the given tag.
+     * 
+     * @param aTag a tag.
+     * @return the type
+     * @throw IllegalStateException if the type could not be located
+     */
+    public String getTagTypeName(String aTag)
+    {
+        String type;
+        if (notFound) {
+            type = getDefault(BASE_TYPE);
+            if (type == null) {
+                throw new IllegalStateException("No base type defined!");
+            }
+        }
+        else {
+            type = getResource().get(aTag);
+            if (type == null) {
+                type = getResource().get("*");
+            }
+            if (type == null) {
+                throw new IllegalStateException("No fallback (*) mapping defined!");
+            }
+            
+            String basePackage = getResource().get(META_TYPE_BASE);
+            if (basePackage != null) {
+                type = basePackage + type;
+            }
+        }
+
+        return type;
+    }
+    
+    public Set<String> getTags()
+    {
+        Set<String> tags = new LinkedHashSet<String>(getResource().keySet());
+        tags.remove(META_TYPE_BASE);
+        return tags;
     }
 
 	@Override
