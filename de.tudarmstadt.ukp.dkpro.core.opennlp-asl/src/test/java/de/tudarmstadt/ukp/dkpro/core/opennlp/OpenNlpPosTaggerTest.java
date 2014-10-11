@@ -58,7 +58,11 @@ public class OpenNlpPosTaggerTest
         runTest("en", "perceptron", "The quick brown fox jumps over the lazy dog . \n",
                 new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
                 new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
-    }
+
+        runTest("en", "perceptron-ixa", "The quick brown fox jumps over the lazy dog . \n",
+                new String[] { "DT", "JJ", "JJ", "NN", "NNS", "IN", "DT", "JJ", "NN", "." },                
+                new String[] { "ART", "ADJ", "ADJ", "NN", "NN", "PP", "ART", "ADJ", "NN", "PUNC" });
+	}
 
 	@Test
 	public void testGerman()
@@ -136,17 +140,24 @@ public class OpenNlpPosTaggerTest
         AssertAnnotations.assertTagset(POS.class, "bosque", bosqueTags, jcas);
     }
     
-    
 	@Test
 	public void testSpanish()
 		throws Exception
     {
         runTest("es", "maxent", "Esta es una prueba .",
-        		new String[] { "PD", "VSI", "DI", "NC", "Fp"    },
-        		new String[] { "POS", "POS", "POS", "POS", "POS" });
+        		new String[] { "PD", "VSI", "DI",  "NC", "Fp"   },
+        		new String[] { "PR", "V",   "ART", "NN", "PUNC" });
+
+        runTest("es", "maxent-ixa", "Esta es una prueba .", 
+                new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"}, 
+                new String[] { "PR",       "V",       "ART",    "NN",      "PUNC" });
+
+        runTest("es", "perceptron-ixa", "Esta es una prueba .",
+                new String[] { "PD0FS000", "VSIP3S0", "DI0FS0", "NCFS000", "Fp"}, 
+                new String[] { "PR",       "V",       "ART",    "NN",      "PUNC" });
     }
 
-   @Test
+    @Test
     public void testSwedish()
         throws Exception
     {
