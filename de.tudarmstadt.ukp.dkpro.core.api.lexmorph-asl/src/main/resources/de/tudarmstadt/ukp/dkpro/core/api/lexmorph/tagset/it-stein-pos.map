@@ -42,7 +42,7 @@ PRO\:inter=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 PRO\:pers=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 # PRO:poss	possessive pronoun
 PRO\:poss=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
-# PRO:refl	reflexive pronoun
+# PR:refl	reflexive pronoun
 PRO\:refl=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
 # PRO:rela	relative pronoun
 PRO\:rela=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
@@ -73,7 +73,7 @@ VER\:ppre=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 # VER:pres	verb present
 VER\:pres=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 # VER:refl:infi	verb reflexive infinitive
-VER\:refl:infi=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+VER\:refl\:infi=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 # VER:remo	verb simple past
 VER\:remo=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 ##*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
