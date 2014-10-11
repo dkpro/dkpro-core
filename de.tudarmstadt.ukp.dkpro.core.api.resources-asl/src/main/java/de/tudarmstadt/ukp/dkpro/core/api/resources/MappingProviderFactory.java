@@ -19,11 +19,16 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 
 public class MappingProviderFactory
 {
+    private static final String CONSTITUENT_TAGSET = "constituent.tagset";
+    private static final String DEPENDENCY_TAGSET = "dependency.tagset";
+    private static final String CHUNK_TAGSET = "chunk.tagset";
+    private static final String POS_TAGSET = "pos.tagset";
+
     public static MappingProvider createPosMappingProvider(String aMappingLocation,
             String aLanguage, HasResourceMetadata aSource)
     {
         MappingProvider p = createPosMappingProvider(aMappingLocation, null, aLanguage);
-        p.addImport("pos.tagset", aSource);
+        p.addImport(POS_TAGSET, aSource);
         return p;
     }
     
@@ -36,10 +41,10 @@ public class MappingProviderFactory
                         + "${language}-${pos.tagset}-pos.map");
         p.setDefault(MappingProvider.BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS");
-        p.setDefault("pos.tagset", "default");
+        p.setDefault(POS_TAGSET, "default");
         p.setOverride(MappingProvider.LOCATION, aMappingLocation);
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
-        p.setOverride("pos.tagset", aTagset);
+        p.setOverride(POS_TAGSET, aTagset);
         return p;
     }
     
@@ -47,7 +52,7 @@ public class MappingProviderFactory
             String aLanguage, HasResourceMetadata aSource)
     {
         MappingProvider p = createChunkMappingProvider(aMappingLocation, null, aLanguage);
-        p.addImport("chunk.tagset", aSource);
+        p.addImport(CHUNK_TAGSET, aSource);
         return p;
     }
     
@@ -60,10 +65,10 @@ public class MappingProviderFactory
                 + "dkpro/core/api/syntax/tagset/${language}-${chunk.tagset}-chunk.map");
         chunkMappingProvider.setDefault(MappingProvider.BASE_TYPE, 
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk");
-        chunkMappingProvider.setDefault("chunk.tagset", "default");
+        chunkMappingProvider.setDefault(CHUNK_TAGSET, "default");
         chunkMappingProvider.setOverride(MappingProvider.LOCATION, aMappingLocation);
         chunkMappingProvider.setOverride(MappingProvider.LANGUAGE, aLanguage);
-        chunkMappingProvider.setOverride("chunk.tagset", aTagset);
+        chunkMappingProvider.setOverride(CHUNK_TAGSET, aTagset);
         return chunkMappingProvider;
     }
     
@@ -71,7 +76,7 @@ public class MappingProviderFactory
             String aLanguage, HasResourceMetadata aSource)
     {
         MappingProvider p = createConstituentMappingProvider(aMappingLocation, null, aLanguage);
-        p.addImport("constituent.tagset", aSource);
+        p.addImport(CONSTITUENT_TAGSET, aSource);
         return p;
     }
     
@@ -84,10 +89,10 @@ public class MappingProviderFactory
                         + "${language}-${constituent.tagset}-constituency.map");
         p.setDefault(MappingProvider.BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent");
-        p.setDefault("constituent.tagset", "default");
+        p.setDefault(CONSTITUENT_TAGSET, "default");
         p.setOverride(MappingProvider.LOCATION, aMappingLocation);
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
-        p.setOverride("constituent.tagset", aTagset);
+        p.setOverride(CONSTITUENT_TAGSET, aTagset);
         return p;
     }
 
@@ -95,7 +100,7 @@ public class MappingProviderFactory
             String aLanguage, HasResourceMetadata aSource)
     {
         MappingProvider p = createDependencyMappingProvider(aMappingLocation, null, aLanguage);
-        p.addImport("dependency.tagset", aSource);
+        p.addImport(DEPENDENCY_TAGSET, aSource);
         return p;
     }
     
@@ -108,10 +113,10 @@ public class MappingProviderFactory
                 + "${language}-${dependency.tagset}-dependency.map");
         p.setDefault(MappingProvider.BASE_TYPE,
                 "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency");
-        p.setDefault("dependency.tagset", "default");
+        p.setDefault(DEPENDENCY_TAGSET, "default");
         p.setOverride(MappingProvider.LOCATION, aMappingLocation);
         p.setOverride(MappingProvider.LANGUAGE, aLanguage);
-        p.setOverride("dependency.tagset", aTagset);
+        p.setOverride(DEPENDENCY_TAGSET, aTagset);
         return p;
     }
 }
