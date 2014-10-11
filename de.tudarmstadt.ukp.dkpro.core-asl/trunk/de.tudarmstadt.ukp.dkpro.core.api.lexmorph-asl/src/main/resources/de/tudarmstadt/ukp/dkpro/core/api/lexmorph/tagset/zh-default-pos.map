@@ -9,7 +9,7 @@ AD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
 # AS - aspect marker
 AS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
 # BA - XX in ba-construction
-BA==de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+BA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 # CC - coordinating conjunction
 CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 # CD - cardinal number
@@ -25,7 +25,7 @@ DER=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
 # DEV - XX bevore VP
 DEV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
 # DT - determiner
-DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.DET
+DT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
 # ETC - for words XX, XX XX
 ETC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PRT
 # FW - foreign words

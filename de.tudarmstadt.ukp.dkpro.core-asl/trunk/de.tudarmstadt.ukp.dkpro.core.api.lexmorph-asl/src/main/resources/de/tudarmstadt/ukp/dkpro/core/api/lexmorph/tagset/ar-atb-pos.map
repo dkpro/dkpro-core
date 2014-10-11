@@ -9,9 +9,9 @@ CC=CONJ
 # CD - cardinal number
 CD=CARD
 # DT - determiner/demonstrative pronoun
-DT=DET
+DT=ART
 # FW - foreign word
-FW=X
+FW=O
 # IN - subordinating conjunction (FUNC_WORD) or preposition (PREP)
 IN=PP
 # JJ - adjective
@@ -33,7 +33,7 @@ RB=ADV
 # RP - particle
 RP=PRT
 # UH - interjection
-UH=X
+UH=O
 # VBD - perfect verb (***nb: perfect rather than past tense)
 VBD=V
 # VBN - passive verb (***nb: passive rather than past participle)

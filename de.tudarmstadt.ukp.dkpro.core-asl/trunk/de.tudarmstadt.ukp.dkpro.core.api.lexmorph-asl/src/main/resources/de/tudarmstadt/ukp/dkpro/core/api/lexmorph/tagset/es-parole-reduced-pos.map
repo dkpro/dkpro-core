@@ -1,69 +1,136 @@
 # Parole Reduced Tagset
 #
 # Source: http://www.lsi.upc.edu/~nlp/SVMTool/parole.html
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
 # AO	Adjective, Ordinal
+AO=ADJ
 # AQ	Adjective, Qualificator
+AQ=ADJ
 # CC	Conjunction, Coordinate
+CC=CONJ
 # CS	Conjunction, Subordinative
+CS=CONJ
 # DA	Determiner, Article
+DA=ART
 # DD	Determiner, Demonstrative
+DD=ART
 # DE	Determiner, Exclamatory
+DE=ART
 # DI	Determiner, Indefinite
+DI=ART
 # DN	Determiner, Numeral
+DN=ART
 # DP	Determiner, Possessive
+DP=ART
 # DT	Determiner, Interrogative
+DT=ART
 # Faa	Punctuation, ¡
+Faa=PUNC
 # Fat	Punctuation, !
+Fat=PUNC
 # Fc	Punctuation, , 
+Fc=PUNC
 # Fd	Punctuation, :
+Fd=PUNC
 # Fe	Punctuation, "
+Fe=PUNC
 # Fg	Punctuation, -
+Fg=PUNC
 # Fh	Punctuation, /
+Fh=PUNC
 # Fia	Punctuation, ¿
+Fia=PUNC
 # Fit	Punctuation, ?
+Fit=PUNC
 # Fp	Punctuation, .
+Fp=PUNC
 # Fpa	Punctuation, (
+Fpa=PUNC
 # Fpt	Punctuation, )
+Fpt=PUNC
 # Fs	Punctuation, ...
+Fs=PUNC
 # Fx	Punctuation, ;
+Fx=PUNC
 # Fz	Punctuation, other than those
+Fz=PUNC
 # I	Interjection
+I=O
 # NC	Noun, Common
+NC=NN
 # NP	Noun, Proper
+NP=NP
 # P0	Pronoun, Clitic
-# PD	Pronoun, Demonstrative
+P0=PR
+# PD	Pronoun, Demonstrative#
+PD=PR
 # PE	Pronoun, Exclamatory
+PE=PR
 # PI	Pronoun, Indefinite
+PI=PR
 # PN	Pronoun, Numeral
+PN=PR
 # PP	Pronoun, Personal
+PP=PR
 # PR	Pronoun, Relative
+PR=PR
 # PT	Pronoun, Interrogative
+PT=PR
 # PX	Pronoun, Possessive
+PX=PR
 # RG	Adverb, General
+RG=ADV
 # RN	Adverb, Negative
+RN=ADV
 # SP	Adposition, Preposition
+SP=PP
 # VAG	Verb, Auxiliar, Gerund
+VAG=V
 # VAI	Verb, Auxiliar, Indicative
+VAI=V
 # VAM	Verb, Auxiliar, Imperative
+VAM=V
 # VAN	Verb, Auxiliar, Infinitive
+VAN=V
 # VAP	Verb, Auxiliar, Participle
+VAP=V
 # VAS	Verb, Auxiliar, Subjunctive
+VAS=V
 # VMG	Verb, Main, Gerund
+VMG=V
 # VMI	Verb, Main, Indicative
+VMI=V
 # VMM	Verb, Main, Imperative
+VMM=V
 # VMN	Verb, Main, Infinitive
+VMN=V
 # VMP	Verb, Main, Participle
+VMP=V
 # VMS	Verb, Main, Subjunctive
+VMS=V
 # VSG	Verb, Semi-Auxiliar, Gerund
+VSG=V
 # VSI	Verb, Semi-Auxiliar, Indicative
+VSI=V
 # VSM	Verb, Semi-Auxiliar, Imperative
+VSM=V
 # VSN	Verb, Semi-Auxiliar, Infinitive
+VSN=V
 # VSP	Verb, Semi-Auxiliar, Participle
+VSP=V
 # VSS	Verb, Semi-Auxiliar, Subjunctive
+VSS=V
 # W	Date Times
+W=O
 # X	Unknown
+X=O
 # Y	Abbreviation
+Y=O
 # Z	Figures
+Z=CARD
 # Zm	Currency
+Zm=CARD
 # Zp	Percentage
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+Zp=CARD
+
+*=POS
