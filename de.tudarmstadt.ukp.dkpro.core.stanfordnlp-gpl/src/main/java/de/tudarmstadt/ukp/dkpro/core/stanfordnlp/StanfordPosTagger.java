@@ -41,6 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -132,7 +133,7 @@ public class StanfordPosTagger
     private List<String> quoteEnd;
 	
 	private CasConfigurableProviderBase<MaxentTagger> modelProvider;
-	private MappingProvider mappingProvider;
+	private MappingProvider posMappingProvider;
 
     private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
     
@@ -179,16 +180,10 @@ public class StanfordPosTagger
             }
         };
 
-		mappingProvider = new MappingProvider();
-		mappingProvider.setDefaultVariantsLocation(
+        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
+		posMappingProvider.setDefaultVariantsLocation(
 				"de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");
-		mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-				"core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-		mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-		mappingProvider.setDefault("pos.tagset", "default");
-		mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-		mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-		mappingProvider.addImport("pos.tagset", modelProvider);
 	}
 
 	@Override
@@ -198,7 +193,7 @@ public class StanfordPosTagger
 		CAS cas = aJCas.getCas();
 
 		modelProvider.configure(cas);
-		mappingProvider.configure(cas);
+		posMappingProvider.configure(cas);
 
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
@@ -228,7 +223,7 @@ public class StanfordPosTagger
 			int i = 0;
 			for (Token t : tokens) {
 				TaggedWord tt = taggedWords.get(i);
-				Type posTag = mappingProvider.getTagType(tt.tag());
+				Type posTag = posMappingProvider.getTagType(tt.tag());
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
 				posAnno.setStringValue(posTag.getFeatureByBaseName("PosValue"),
 						internStrings ? tt.tag().intern() : tt.tag());
