@@ -40,7 +40,6 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.Tagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -141,8 +140,12 @@ public class OpenNlpPosTagger
 			{
 				POSModel model = new POSModel(aStream);
 
-                Tagset tsdp = new OpenNlpTagsetDescriptionProvider(getResourceMetaData()
-                        .getProperty("pos.tagset"), POS.class, model.getPosModel());
+				OpenNlpTagsetDescriptionProvider tsdp = new OpenNlpTagsetDescriptionProvider(
+				        getResourceMetaData().getProperty("pos.tagset"), POS.class, 
+				        model.getPosModel());
+                if (getResourceMetaData().containsKey("pos.tagset.tagSplitPattern")) {
+                    tsdp.setTagSplitPattern(getResourceMetaData().getProperty("pos.tagset.tagSplitPattern"));
+                }
                 addTagset(tsdp);
 
 				if (printTagSet) {
@@ -166,6 +169,9 @@ public class OpenNlpPosTagger
 		modelProvider.configure(cas);
 		mappingProvider.configure(cas);
 
+        String tagSplitPattern = modelProvider.getResourceMetaData().getProperty(
+                "pos.tagset.tagSplitPattern");
+		
 		for (Sentence sentence : select(aJCas, Sentence.class)) {
 			List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 			String[] tokenTexts = toText(tokens).toArray(new String[tokens.size()]);
@@ -174,9 +180,15 @@ public class OpenNlpPosTagger
 
 			int i = 0;
 			for (Token t : tokens) {
-				Type posTag = mappingProvider.getTagType(tags[i]);
+			    String tag = tags[i];
+			    
+	            if (tagSplitPattern != null) {
+	                tag = tag.split(tagSplitPattern)[0];
+	            }
+			    
+				Type posTag = mappingProvider.getTagType(tag);
 				POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());
-				posAnno.setPosValue(internTags ? tags[i].intern() : tags[i]);
+				posAnno.setPosValue(internTags ? tag.intern() : tag);
 				posAnno.addToIndexes();
 				t.setPos(posAnno);
 				i++;
