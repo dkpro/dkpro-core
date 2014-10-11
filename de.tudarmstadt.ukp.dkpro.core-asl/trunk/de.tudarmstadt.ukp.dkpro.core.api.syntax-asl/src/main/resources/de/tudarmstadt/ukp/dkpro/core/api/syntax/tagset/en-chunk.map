@@ -3,7 +3,7 @@
 # The English chunker was trained on the Penn treebank and uses the following chunk labels.
 #
 # Source: ftp://ftp.ims.uni-stuttgart.de/pub/corpora/chunker-tagset-english.txt
-*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk
 0=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.O
 # ADJC	  adjective chunks (not inside of noun chunks)
 ADJC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.ADJC
