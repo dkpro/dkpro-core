@@ -44,6 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeUtils;
 import edu.stanford.nlp.dcoref.Constants;
 import edu.stanford.nlp.dcoref.CorefChain;
@@ -326,18 +327,8 @@ public class StanfordCoreferenceResolver
 
     protected CoreLabel tokenToWord(Token aToken)
     {
-        CoreLabel t = new CoreLabel();
+        CoreLabel t = CoreNlpUtils.tokenToWord(aToken);
         t.set(TokenKey.class, aToken);
-        t.setOriginalText(aToken.getCoveredText());
-        t.setWord(aToken.getCoveredText());
-        t.setBeginPosition(aToken.getBegin());
-        t.setEndPosition(aToken.getEnd());
-        if (aToken.getLemma() != null) {
-            t.setLemma(aToken.getLemma().getValue());
-        }
-        if (aToken.getPos() != null) {
-            t.setTag(aToken.getPos().getPosValue());
-        }
         List<NamedEntity> nes = selectCovered(NamedEntity.class, aToken);
         if (nes.size() > 0) {
             t.setNER(nes.get(0).getValue());

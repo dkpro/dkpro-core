@@ -45,6 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.ling.Word;
@@ -204,18 +205,7 @@ public class StanfordPosTagger
 			}
 			
             if (ptb3Escaping) {
-                // Apply escaper to the whole sentence, not to each token individually. The
-                // escaper takes context into account, e.g. when transforming regular double
-                // quotes into PTB opening and closing quotes (`` and '').
-                words = escaper.apply(words);
-                for (HasWord w : words) {
-                    if (quoteBegin != null && quoteBegin.contains(w.word())) {
-                        w.setWord("``");
-                    }
-                    else if (quoteEnd != null && quoteEnd.contains(w.word())) {
-                        w.setWord("\'\'");
-                    }
-                }
+                words = CoreNlpUtils.applyPtbEscaping(words, quoteBegin, quoteEnd);
             }
 			
 			List<TaggedWord> taggedWords = modelProvider.getResource().tagSentence(words);

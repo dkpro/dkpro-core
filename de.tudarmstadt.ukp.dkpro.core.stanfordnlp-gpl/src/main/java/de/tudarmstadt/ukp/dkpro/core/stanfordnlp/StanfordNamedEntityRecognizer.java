@@ -19,6 +19,8 @@
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.IOException;
@@ -43,10 +45,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.ling.HasWord;
+import edu.stanford.nlp.ling.Word;
+import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.util.CoreMap;
-import edu.stanford.nlp.util.Triple;
 
 /**
  * Stanford Named Entity Recognizer component.
@@ -93,8 +101,35 @@ public class StanfordNamedEntityRecognizer
     @ConfigurationParameter(name = PARAM_NAMED_ENTITY_MAPPING_LOCATION, mandatory = false)
     protected String mappingLocation;
 
-    private CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>> modelProvider;
+    /**
+     * Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).
+     *
+     * @see PTBEscapingProcessor
+     */
+    public static final String PARAM_PTB3_ESCAPING = "ptb3Escaping";
+    @ConfigurationParameter(name = PARAM_PTB3_ESCAPING, mandatory = true, defaultValue = "true")
+    private boolean ptb3Escaping;
+    
+    /**
+     * List of extra token texts (usually single character strings) that should be treated like
+     * opening quotes and escaped accordingly before being sent to the parser.
+     */
+    public static final String PARAM_QUOTE_BEGIN = "quoteBegin";
+    @ConfigurationParameter(name = PARAM_QUOTE_BEGIN, mandatory = false)
+    private List<String> quoteBegin;
+
+    /**
+     * List of extra token texts (usually single character strings) that should be treated like
+     * closing quotes and escaped accordingly before being sent to the parser.
+     */
+    public static final String PARAM_QUOTE_END = "quoteEnd";
+    @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
+    private List<String> quoteEnd;
+    
+    private CasConfigurableProviderBase<AbstractSequenceClassifier<CoreMap>> modelProvider;
     private MappingProvider mappingProvider;
+
+    private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
 
     @Override
     public void initialize(UimaContext aContext)
@@ -102,7 +137,7 @@ public class StanfordNamedEntityRecognizer
     {
         super.initialize(aContext);
 
-        modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<? extends CoreMap>>()
+        modelProvider = new CasConfigurableProviderBase<AbstractSequenceClassifier<CoreMap>>()
         {
             {
                 setContextObject(StanfordNamedEntityRecognizer.this);
@@ -121,7 +156,7 @@ public class StanfordNamedEntityRecognizer
             }
 
             @Override
-            protected AbstractSequenceClassifier<? extends CoreMap> produceResource(URL aUrl)
+            protected AbstractSequenceClassifier<CoreMap> produceResource(URL aUrl)
                 throws IOException
             {
                 InputStream is = null;
@@ -132,8 +167,8 @@ public class StanfordNamedEntityRecognizer
                         is = new GZIPInputStream(is);
                     }
 
-                    AbstractSequenceClassifier<? extends CoreMap> classifier = CRFClassifier
-                            .getClassifier(is);
+                    AbstractSequenceClassifier<CoreMap> classifier = (AbstractSequenceClassifier<CoreMap>) 
+                            CRFClassifier.getClassifier(is);
 
                     if (printTagSet) {
                         StringBuilder sb = new StringBuilder();
@@ -180,22 +215,47 @@ public class StanfordNamedEntityRecognizer
         modelProvider.configure(cas);
         mappingProvider.configure(cas);
 
-        // get the document text
-        String documentText = cas.getDocumentText();
+        for (Sentence sentence : select(aJCas, Sentence.class)) {
+            List<Token> tokens = selectCovered(aJCas, Token.class, sentence);
 
-        // test the string
-        List<Triple<String, Integer, Integer>> namedEntities = modelProvider.getResource()
-                .classifyToCharacterOffsets(documentText);
+            List<HasWord> words = new ArrayList<>(tokens.size());
+            for (Token t : tokens) {
+                words.add(CoreNlpUtils.tokenToWord(t));
+            }
+            
+            if (ptb3Escaping) {
+                words = CoreNlpUtils.applyPtbEscaping(words, quoteBegin, quoteEnd);
+            }
+            
+            List<CoreMap> taggedWords = modelProvider.getResource().classifySentence(words);
 
-        // get the named entities and their character offsets
-        for (Triple<String, Integer, Integer> namedEntity : namedEntities) {
-            int begin = namedEntity.second();
-            int end = namedEntity.third();
-
-            Type type = mappingProvider.getTagType(namedEntity.first());
-            NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, begin, end);
-            neAnno.setValue(namedEntity.first());
-            neAnno.addToIndexes();
+            int entityBegin = -1;
+            int entityEnd   = -1;
+            String entityType = null;
+            
+            for (CoreMap t : taggedWords) {
+                String tokenType = t.get(CoreAnnotations.AnswerAnnotation.class);
+                
+                // If an entity is currently open, then close it
+                if ("O".equals(tokenType) || !tokenType.equals(entityType)) {
+                    if (entityType != null) {
+                        Type type = mappingProvider.getTagType(entityType);
+                        NamedEntity neAnno = (NamedEntity) cas.createAnnotation(type, entityBegin, entityEnd);
+                        neAnno.setValue(entityType);
+                        neAnno.addToIndexes();
+                        entityType = null;
+                    }
+                }
+                
+                // If a new entity starts or continues, track it
+                if (!"O".equals(tokenType)) {
+                    if (entityType == null) {
+                        entityType = tokenType;
+                        entityBegin = t.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class);
+                    }
+                    entityEnd = t.get(CoreAnnotations.CharacterOffsetEndAnnotation.class);
+                }
+            }
         }
     }
 }

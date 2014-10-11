@@ -59,11 +59,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.CoreNlpUtils;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.ling.HasWord;
-import edu.stanford.nlp.ling.Word;
 import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.common.ParserQuery;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
@@ -303,8 +303,6 @@ public class StanfordParser
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
 
-    private final PTBEscapingProcessor<HasWord, String, Word> escaper = new PTBEscapingProcessor<HasWord, String, Word>();
-
     @Override
     public void initialize(UimaContext context)
         throws ResourceInitializationException
@@ -376,31 +374,19 @@ public class StanfordParser
 
             Tree parseTree;
             try {
-                if (tokenizedSentence.size() <= maxTokens) {
-                    if (ptb3Escaping) {
-                        // Apply escaper to the whole sentence, not to each token individually. The
-                        // escaper takes context into account, e.g. when transforming regular double
-                        // quotes into PTB opening and closing quotes (`` and '').
-                        tokenizedSentence = escaper.apply(tokenizedSentence);
-                        for (HasWord w : tokenizedSentence) {
-                            if (quoteBegin != null && quoteBegin.contains(w.word())) {
-                                w.setWord("``");
-                            }
-                            else if (quoteEnd != null && quoteEnd.contains(w.word())) {
-                                w.setWord("\'\'");
-                            }
-                        }
-                    }
-
-                    // Get parse
-                    ParserQuery query = parser.parserQuery();
-                    query.parse(tokenizedSentence);
-                    parseTree = query.getBestParse();
-                }
-                else {
+                if (tokenizedSentence.size() > maxTokens) {
                     continue;
                 }
+                
+                if (ptb3Escaping) {
+                    tokenizedSentence = CoreNlpUtils.applyPtbEscaping(tokenizedSentence,
+                            quoteBegin, quoteEnd);
+                }
 
+                // Get parse
+                ParserQuery query = parser.parserQuery();
+                query.parse(tokenizedSentence);
+                parseTree = query.getBestParse();
             }
             catch (Exception e) {
                 throw new AnalysisEngineProcessException(e);
@@ -481,18 +467,12 @@ public class StanfordParser
 
     protected CoreLabel tokenToWord(Token aToken)
     {
-        CoreLabel tw = new CoreLabel();
-        tw.setValue(aToken.getCoveredText());
-        tw.setWord(aToken.getCoveredText());
-        tw.setBeginPosition(aToken.getBegin());
-        tw.setEndPosition(aToken.getEnd());
-
-        if (readPos && aToken.getPos() != null) {
-            String posValue = aToken.getPos().getPosValue();
-            tw.setTag(posValue);
+        CoreLabel l = CoreNlpUtils.tokenToWord(aToken);
+        l.setValue(aToken.getCoveredText());
+        if (!readPos) {
+            l.setTag(null);
         }
-
-        return tw;
+        return l;
     }
 
     private class StanfordParserModelProvider
