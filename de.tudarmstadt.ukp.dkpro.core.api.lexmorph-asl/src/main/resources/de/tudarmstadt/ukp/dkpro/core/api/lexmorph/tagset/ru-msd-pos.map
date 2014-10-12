@@ -949,4 +949,4 @@ Vmps-snpfpn=V
 Vmps-snpse=V
 Vmps-snpsp=V
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS

@@ -205,8 +205,8 @@ brev\:pun=O
 burk=O
 comp=CONJ
 conj=CONJ
-depr\:pl\:acc\:m2=O=NN
-depr\:pl\:nom\:m2=O=NN
+depr\:pl\:acc\:m2=NN
+depr\:pl\:nom\:m2=NN
 fin\:pl\:pri\:imperf=V
 fin\:pl\:pri\:perf=V
 fin\:pl\:sec\:imperf=V
@@ -930,4 +930,4 @@ winien\:sg\:m3\:imperf=O
 winien\:sg\:n\:imperf=O
 xxx=O
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS
