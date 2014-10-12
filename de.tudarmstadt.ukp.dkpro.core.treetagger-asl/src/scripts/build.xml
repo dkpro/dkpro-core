@@ -36,9 +36,13 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,it,la,nl,pt,sl,sw,zh,jar-notice"/>
+	<target name="separate-jars" depends="check-license,install-executables,bg,de,en,es,et,fi,fr,gl,it,la,mn,nl,pl,pt,sk,sl,sw,zh,jar-notice"/>
 
 	<target name="bg">
+		<antcall target="bg-tagger-le"/>
+	</target>
+
+	<target name="bg-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: bulgarian-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -66,8 +70,13 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-
+	
 	<target name="de">
+		<antcall target="de-tagger-le"/>
+		<antcall target="de-chunker-le"/>
+	</target>
+
+	<target name="de-tagger-le">
 		<mkdir dir="target/download"/>
 		<!-- FILE: german-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  -            | 2012-02-13 | acbfeaafdcfcc07cbb1e9c396757934c
@@ -96,8 +105,9 @@
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
+	</target>
 
+	<target name="de-chunker-le">
 		<!-- FILE: german-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - -
 		  - 2011-04-29 | now        | 56ea6ac618bc21d28929a85a6964ff65
 		  -->
@@ -125,6 +135,11 @@
 	</target>
 
 	<target name="en">
+		<antcall target="en-tagger-le"/>
+		<antcall target="en-chunker-le"/>
+	</target>
+
+	<target name="en-tagger-le">
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -151,7 +166,9 @@
 	    		<entry key="encoding" value="ISO-8859-1"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+	</target>
 
+	<target name="en-chunker-le">
 		<!-- FILE: english-chunker-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - -
 		  - 2009-08-24 | now        | 981df5901588a016ade69108d4421531
 		  -->
@@ -177,8 +194,12 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
 	<target name="es">
+		<antcall target="es-tagger-le"/>
+	</target>
+
+	<target name="es-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: spanish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -212,6 +233,10 @@
 	</target>
 
 	<target name="et">
+		<antcall target="et-tagger-le"/>
+	</target>
+
+	<target name="et-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: estonian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - -
@@ -241,6 +266,10 @@
 	</target>
 
 	<target name="fi">
+		<antcall target="fi-tagger-le"/>
+	</target>
+
+	<target name="fi-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: finnish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -274,6 +303,11 @@
 	</target>
 
 	<target name="fr">
+		<antcall target="fr-tagger-le"/>
+		<antcall target="fr-chunker-le"/>
+	</target>
+
+	<target name="fr-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: french-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -300,7 +334,9 @@
 	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
-		
+	</target>
+
+	<target name="fr-chunker-le">
 		<!-- FILE: french-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-11 | now        | 975e3e306198c9f61f14428621ed87ba
 		  -->
@@ -326,8 +362,45 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
-	
+
+	<target name="gl">
+		<antcall target="gl-tagger-le"/>
+	</target>
+
+	<target name="gl-tagger-le">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: galician-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-05-16 | now        | 85cc88ae110500aa6ba924c10c2dd8bb
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/galician-par-linux-3.2.bin.gz" 
+    		dest="target/download/galician-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/galician-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/galician-par-linux-3.2.bin" 
+    		md5="85cc88ae110500aa6ba924c10c2dd8bb"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20130516"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="gl" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="xiada"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
 	<target name="it">
+		<antcall target="it-tagger-le"/>
+	</target>
+
+	<target name="it-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: italian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -357,6 +430,10 @@
 	</target>
 
 	<target name="la">
+		<antcall target="la-tagger-le"/>
+	</target>
+
+	<target name="la-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: latin-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -387,6 +464,10 @@
 	</target>
 
 	<target name="nl">
+		<antcall target="nl-tagger-le"/>
+	</target>
+
+	<target name="nl-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: dutch-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -417,7 +498,78 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+	<target name="mn">
+		<antcall target="mn-tagger-le"/>
+	</target>
+
+	<target name="mn-tagger-le">
+		<mkdir dir="target/download"/>
+		
+		<!-- mongolian-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+		  - 2012-09-25 | now        | a3b1658180c96ef6412df0c5074ecb42
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/mongolian-par-linux-3.2.bin.gz" 
+    		dest="target/download/mongolian-par-linux-3.2.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/mongolian-par-linux-3.2.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/mongolian-par-linux-3.2.bin" 
+    		md5="a3b1658180c96ef6412df0c5074ecb42"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20120925"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="mn" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="tt"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+	
+	<target name="pl">
+		<antcall target="pl-tagger-le"/>
+	</target>
+
+	<target name="pl-tagger-le">
+		<mkdir dir="target/download"/>
+		
+		<!-- polish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2014-06-02 | now        | e7ac63b234ed40f5e850bdac4c883ef1
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/polish-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/polish-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/polish-par-linux-3.2-utf8.bin" 
+    		md5="e7ac63b234ed40f5e850bdac4c883ef1"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20140602"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="pl" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+				<!-- http://nkjp.pl/poliqarp/help/ense2.html -->
+	    		<entry key="pos.tagset" value="ncp"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+	
 	<target name="pt">
+		<antcall target="pt-tagger-le"/>
+	</target>
+
+	<target name="pt-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: tree-taggerPT-GZ.tar.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -452,7 +604,77 @@
 		</install-stub-and-upstream-file>
 	</target>
 	
+	<target name="ru">
+		<antcall target="ru-tagger-le"/>
+	</target>
+
+	<target name="ru-tagger-le">
+		<mkdir dir="target/download"/>
+		
+		<!-- russian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2014-05-05 | now        | 7cc4bbaf7c2ee519e934dc47c34a366b
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/russian-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/russian-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/russian-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/russian-par-linux-3.2-utf8.bin" 
+    		md5="7cc4bbaf7c2ee519e934dc47c34a366b"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20140505"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="ru" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="msd"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>	
+	
+	<target name="sk">
+		<antcall target="sk-tagger-le"/>
+	</target>
+
+	<target name="sk-tagger-le">
+		<mkdir dir="target/download"/>
+		
+		<!-- FILE: slovak-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-07-25 | now        | b920e2b9e1fdd1173352d7df2bb7fd88
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/slovak-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/slovak-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/slovak-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/slovak-par-linux-3.2-utf8.bin" 
+    		md5="b920e2b9e1fdd1173352d7df2bb7fd88"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20130725"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="sk" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="smt-reduced"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+	
 	<target name="sl">
+		<antcall target="sl-tagger-le"/>
+	</target>
+
+	<target name="sl-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: slovenian.par.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -484,6 +706,10 @@
 	</target>
 	
 	<target name="sw">
+		<antcall target="sw-tagger-le"/>
+	</target>
+
+	<target name="sw-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: swahili-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -514,6 +740,10 @@
 	</target>
 
 	<target name="zh">
+		<antcall target="zh-tagger-le"/>
+	</target>
+
+	<target name="zh-tagger-le">
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: tt-lcmc.tgz - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
