@@ -58,7 +58,8 @@ class SegmenterCompatibilityTest
         aJCas.setDocumentText("Two cats sat on two mats.");
         engine.process(aJCas);
 
-        checkLemma(new String[] { "Two", "cat", "sit", "on", "two", "mat", "." },  select(aJCas, Lemma.class));
+        checkLemma(new String[] { "Two", "cat", "sit", "on", "two", "mat", "." },
+                select(aJCas, Lemma.class));
     }
 
 	private void checkLemma(String[] expected, Collection<Lemma> actual)
@@ -70,13 +71,12 @@ class SegmenterCompatibilityTest
         }
 	}
 
-	private void checkModelsAndBinary(String lang)
-	{
-		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang
-						+ "-little-endian.par") != null);
+    private void checkModelsAndBinary(String lang)
+    {
+        Assume.assumeTrue(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/lib/tagger-" + lang + "-le.bin") != null);
 
-		Assume.assumeTrue(getClass().getResource(
-				"/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
-	}
+        Assume.assumeTrue(getClass().getResource(
+                "/de/tudarmstadt/ukp/dkpro/core/treetagger/bin/LICENSE.txt") != null);
+    }
 }
