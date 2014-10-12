@@ -135,11 +135,13 @@
 	</target>
 
 	<target name="en">
+		<antcall target="en-tagger-iso8859-le"/>
 		<antcall target="en-tagger-le"/>
+		<antcall target="en-chunker-iso8859-le"/>
 		<antcall target="en-chunker-le"/>
 	</target>
 
-	<target name="en-tagger-le">
+	<target name="en-tagger-iso8859-le">
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: english-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
@@ -159,7 +161,7 @@
     		metaDataVersion="1"
     		tool="tagger" 
     		language="en" 
-    		variant="le" 
+    		variant="iso8859-le" 
     		extension="bin">
 			<metadata>
 	    		<entry key="pos.tagset" value="ptb-tt"/>
@@ -167,8 +169,37 @@
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
+	
+	<target name="en-tagger-le">
+		<mkdir dir="target/download"/>
 
-	<target name="en-chunker-le">
+		<!-- FILE: english-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2014-05-20 | now        | db60237f6f42faac4c89e511f33960ec
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/english-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/english-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/english-par-linux-3.2-utf8.bin" 
+    		md5="db60237f6f42faac4c89e511f33960ec"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20140520"
+    		metaDataVersion="1"
+    		tool="tagger" 
+    		language="en" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="pos.tagset" value="ptb-tt"/>
+	    		<entry key="encoding" value="UTF-8"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+
+	<target name="en-chunker-iso8859-le">
 		<!-- FILE: english-chunker-par-linux-3.2.bin.gz - - - - - - - - - - - - - - - - - - - - - -
 		  - 2009-08-24 | now        | 981df5901588a016ade69108d4421531
 		  -->
@@ -186,11 +217,38 @@
     		metaDataVersion="1"
     		tool="chunker" 
     		language="en" 
-    		variant="le" 
+    		variant="iso8859-le" 
     		extension="bin">
 			<metadata>
 	    		<entry key="chunk.tagset" value="tt"/>
 	    		<entry key="encoding" value="ISO-8859-1"/>
+			</metadata>
+		</install-stub-and-upstream-file>
+	</target>
+	
+	<target name="en-chunker-le">
+		<!-- FILE: english-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - -
+		  - 2014-05-20 | now        | c179a5ec0b6ae057425ba3469611e907
+		  -->
+    	<get 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/english-chunker-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/english-chunker-par-linux-3.2-utf8.bin.gz" 
+    		skipexisting="true"/>
+		<gunzip src="target/download/english-chunker-par-linux-3.2-utf8.bin.gz"/>
+    	<install-stub-and-upstream-file 
+    		file="target/download/english-chunker-par-linux-3.2-utf8.bin" 
+    		md5="c179a5ec0b6ae057425ba3469611e907"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
+    		upstreamVersion="20140520"
+    		metaDataVersion="1"
+    		tool="chunker" 
+    		language="en" 
+    		variant="le" 
+    		extension="bin">
+			<metadata>
+	    		<entry key="chunk.tagset" value="tt"/>
+	    		<entry key="encoding" value="UTF-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
