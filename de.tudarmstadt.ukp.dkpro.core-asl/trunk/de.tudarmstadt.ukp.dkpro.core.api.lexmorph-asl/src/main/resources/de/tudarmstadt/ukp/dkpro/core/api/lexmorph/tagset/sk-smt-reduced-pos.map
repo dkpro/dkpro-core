@@ -95,5 +95,5 @@ par=O
 ;=PUNC
 ?=PUNC
 
-*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS
+*=POS
 
