@@ -1,0 +1,83 @@
+<!--
+   Copyright 2014
+   Ubiquitous Knowledge Processing (UKP) Lab
+   Technische Universität Darmstadt
+   
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+   
+     http://www.apache.org/licenses/LICENSE-2.0
+   
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+	</import>
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/langdect/lib"/>
+	<property name="outputDir" value="target/model-staging/de/tudarmstadt/ukp/dkpro/core/langdect"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="wikipedia, socialmedia"/>
+
+	<target name="wikipedia">
+		<mkdir dir="target/download"/>
+
+		<get 
+    		src="http://dl.bintray.com/inofficalbinarystore/generic/language-detection-profiles-wikipedia.tar.gz" 
+    		dest="target/download/language-detection-profiles-wikipedia.tar.gz" 
+    		skipexisting="true"/>
+		<untar src="target/download/language-detection-profiles-wikipedia.tar.gz" dest="target/download/language-detection-profiles-wikipedia" compression="gzip"/>
+		<install-stub-and-upstream-folder 
+    		folder="target/download/language-detection-profiles-wikipedia" 
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.languageDetection"
+    		upstreamVersion="20141013"
+    		metaDataVersion="1"
+    		tool="shuyo"
+    		language="multi"
+    		variant="wikipedia"
+    		>
+		</install-stub-and-upstream-folder>
+	</target>
+
+	<target name="socialmedia">
+		<mkdir dir="target/download"/>
+
+		<get 
+	    		src="http://dl.bintray.com/inofficalbinarystore/generic/language-detection-profiles-socialmedia.tar.gz" 
+	    		dest="target/download/language-detection-profiles-socialmedia.tar.gz" 
+	    		skipexisting="true"/>
+		<untar src="target/download/language-detection-profiles-socialmedia.tar.gz" dest="target/download/language-detection-profiles-socialmedia" compression="gzip"/>
+		<install-stub-and-upstream-folder 
+	    		folder="target/download/language-detection-profiles-socialmedia" 
+	    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.languageDetection"
+	    		upstreamVersion="20141013"
+	    		metaDataVersion="1"
+	    		tool="shuyo"
+	    		language="multi"
+	    		variant="socialmedia"
+	    		 >
+		</install-stub-and-upstream-folder>
+	</target>
+
+</project>

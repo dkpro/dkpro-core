@@ -45,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.ngrams.util.NGramStringIterable;
  * @author zesch
  *
  */
-public class LanguageDetector
+public class LanguageDetectorWeb1T
     extends JCasAnnotator_ImplBase
 {
 
