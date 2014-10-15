@@ -23,4 +23,21 @@
     <version>1.7.0-SNAPSHOT</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.combination-asl</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.uima</groupId>
+  		<artifactId>uimafit-core</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>
+  			de.tudarmstadt.ukp.dkpro.core.io.text-asl
+  		</artifactId>
+  		<scope>test</scope>
+  	</dependency>
+  </dependencies>
 </project>
