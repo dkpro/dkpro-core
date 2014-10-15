@@ -43,6 +43,7 @@ import com.swabunga.spell.engine.Word;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SuggestedAction;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.AnnotationChecker;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -110,6 +111,11 @@ public class JazzyChecker
 	public void process(final JCas jcas)
 		throws AnalysisEngineProcessException
 	{
+		
+    	AnnotationChecker.requireExists(this, jcas, this.getLogger(), Token.class);
+    	AnnotationChecker.requireNotExists(this, jcas, this.getLogger(),
+    			SpellingAnomaly.class, SuggestedAction.class);
+
 		for (Token t : select(jcas, Token.class)) {
 			String tokenText = t.getCoveredText();
 			if (tokenText.matches("[\\.\\?\\!]")) {
