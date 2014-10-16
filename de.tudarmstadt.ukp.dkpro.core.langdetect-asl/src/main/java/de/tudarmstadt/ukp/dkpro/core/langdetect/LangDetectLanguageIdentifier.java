@@ -30,6 +30,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import com.cybozu.labs.langdetect.Detector;
 import com.cybozu.labs.langdetect.DetectorFactory;
+import com.cybozu.labs.langdetect.LangDetectException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
@@ -44,7 +45,7 @@ public class LangDetectLanguageIdentifier
      * for one language.
      */
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true, defaultValue = "wikipedia")
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     protected String variant;
 
     /**
@@ -53,22 +54,7 @@ public class LangDetectLanguageIdentifier
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     protected String modelLocation;
-    private CasConfigurableProviderBase<ProfileLocation> modelProvider;
-
-    Detector detector = null;
-
-    static boolean loadProfiles = true;
-
-    public class ProfileLocation
-    {
-        public File location;
-
-        public void setProfileLocation(File location)
-            throws IOException
-        {
-            this.location = location;
-        }
-    }
+    private CasConfigurableProviderBase<File> modelProvider;
 
     @Override
     public void initialize(UimaContext context)
@@ -76,7 +62,7 @@ public class LangDetectLanguageIdentifier
     {
         super.initialize(context);
 
-        modelProvider = new ModelProviderBase<ProfileLocation>()
+        modelProvider = new ModelProviderBase<File>()
         {
             {
                 setContextObject(LangDetectLanguageIdentifier.this);
@@ -85,7 +71,7 @@ public class LangDetectLanguageIdentifier
                         "${groupId}.langdetect-model-${language}-${variant}");
                 setDefault(LOCATION,
                         "classpath:/${package}/lib/languageidentifier-${language}-${variant}.properties");
-                setDefault(VARIANT, "default");
+                setDefault(VARIANT, "wikipedia");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, "any");
@@ -93,17 +79,16 @@ public class LangDetectLanguageIdentifier
             }
 
             @Override
-            protected ProfileLocation produceResource(URL aUrl)
+            protected File produceResource(URL aUrl)
                 throws IOException
             {
                 try {
-                    ProfileLocation profiles = new ProfileLocation();
-                    File folder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), false);
-                    profiles.setProfileLocation(folder);
-
-                    return profiles;
+                    DetectorFactory.clear();
+                    File profileFolder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), false);
+                    DetectorFactory.loadProfile(profileFolder);
+                    return profileFolder;
                 }
-                catch (Exception e) {
+                catch (LangDetectException e) {
                     throw new IOException(e);
                 }
             }
@@ -117,7 +102,11 @@ public class LangDetectLanguageIdentifier
         modelProvider.configure(aJCas.getCas());
 
         try {
-            initLangDetectorSetup();
+            // Reinitialize the profiles in the DetectorFactory if necessary
+            modelProvider.getResource(); 
+            
+            // Create a new detector
+            Detector detector = DetectorFactory.create();
             detector.append(aJCas.getDocumentText());
             
             String language = detector.detect();
@@ -127,18 +116,5 @@ public class LangDetectLanguageIdentifier
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
         }
-    }
-
-    private void initLangDetectorSetup()
-        throws Exception
-    {
-        if (loadProfiles) {
-            ProfileLocation resource = modelProvider.getResource();
-            File profileFolder = resource.location;
-
-            DetectorFactory.loadProfile(profileFolder);
-            loadProfiles=false;
-        }
-        detector = DetectorFactory.create();
     }
 }
