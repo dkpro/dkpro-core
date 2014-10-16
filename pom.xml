@@ -369,7 +369,12 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
-			<dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl</artifactId>
+                <version>1.7.0-SNAPSHOT</version>
+            </dependency>
+   			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
@@ -660,6 +665,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.langdect-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.ldweb1t</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
@@ -916,6 +922,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jazzy-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java" includes="**/*.java" />
+                                    <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java" includes="**/*.java" />
