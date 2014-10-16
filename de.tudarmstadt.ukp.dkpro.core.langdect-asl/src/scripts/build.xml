@@ -43,17 +43,17 @@
 
 		<get 
     		src="http://dl.bintray.com/inofficalbinarystore/generic/language-detection-profiles-wikipedia.tar.gz" 
-    		dest="target/download/language-detection-profiles-wikipedia.tar.gz" 
+    		dest="target/download/langdect-profiles-wikipedia.tar.gz" 
     		skipexisting="true"/>
-		<untar src="target/download/language-detection-profiles-wikipedia.tar.gz" dest="target/download/language-detection-profiles-wikipedia" compression="gzip"/>
+		<untar src="target/download/langdect-profiles-wikipedia.tar.gz" dest="target/download/langdect-profiles-wikipedia" compression="gzip"/>
 		<install-stub-and-upstream-folder 
-    		folder="target/download/language-detection-profiles-wikipedia" 
+    		folder="target/download/langdect-profiles-wikipedia" 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.languageDetection"
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.langdect"
     		upstreamVersion="20141013"
     		metaDataVersion="1"
-    		tool="shuyo"
-    		language="multi"
+    		tool="languageidentifier"
+    		language="any"
     		variant="wikipedia"
     		>
 		</install-stub-and-upstream-folder>
@@ -64,17 +64,17 @@
 
 		<get 
 	    		src="http://dl.bintray.com/inofficalbinarystore/generic/language-detection-profiles-socialmedia.tar.gz" 
-	    		dest="target/download/language-detection-profiles-socialmedia.tar.gz" 
+	    		dest="target/download/langdect-profiles-socialmedia.tar.gz" 
 	    		skipexisting="true"/>
-		<untar src="target/download/language-detection-profiles-socialmedia.tar.gz" dest="target/download/language-detection-profiles-socialmedia" compression="gzip"/>
+		<untar src="target/download/langdect-profiles-socialmedia.tar.gz" dest="target/download/langdect-profiles-socialmedia" compression="gzip"/>
 		<install-stub-and-upstream-folder 
-	    		folder="target/download/language-detection-profiles-socialmedia" 
+	    		folder="target/download/langdect-profiles-socialmedia" 
 	    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-	    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.languageDetection"
+	    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.langdect"
 	    		upstreamVersion="20141013"
 	    		metaDataVersion="1"
-	    		tool="shuyo"
-	    		language="multi"
+	    		tool="languageidentifier"
+	    		language="any"
 	    		variant="socialmedia"
 	    		 >
 		</install-stub-and-upstream-folder>

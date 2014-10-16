@@ -18,50 +18,45 @@
 package de.tudarmstadt.ukp.dkpro.core.langdect;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
-public class TestShuyoLanguageDetector
+public class TestLanguageDetector
 {
 
     @Test
     public void testLanguageDetectionEnglish() throws Exception
     {
         JCas cas = runTest("This is sentence in any language");
-        DocumentMetaData metaData = JCasUtil.selectSingle(cas, DocumentMetaData.class);
         
-        assertEquals("en", metaData.getLanguage());
+        assertEquals("en", cas.getDocumentLanguage());        
     }
     
     @Test
     public void testLanguageDetectionGerman() throws Exception
     {
         JCas cas = runTest("Zehn zottige Ziegen ziehen zehn Zentner Zucker zum Zoo");
-        DocumentMetaData metaData = JCasUtil.selectSingle(cas, DocumentMetaData.class);
         
-        assertEquals("de", metaData.getLanguage());
+        assertEquals("de", cas.getDocumentLanguage());
     }
     
     @Test
     public void testLanguageDetectionJapanese() throws Exception
     {
         JCas cas = runTest("やまない雨はない");
-        DocumentMetaData metaData = JCasUtil.selectSingle(cas, DocumentMetaData.class);
         
-        assertEquals("ja", metaData.getLanguage());
+        assertEquals("ja", cas.getDocumentLanguage());
     }
 
     private JCas runTest(String text)
         throws Exception
     {
-        AnalysisEngine engine = createEngine(LanguageDetectorShuyo.class
+        AnalysisEngine engine = createEngine(LanguageDetector.class
                 );
 
         JCas aJCas = TestRunner.runTest(engine, "en", text);

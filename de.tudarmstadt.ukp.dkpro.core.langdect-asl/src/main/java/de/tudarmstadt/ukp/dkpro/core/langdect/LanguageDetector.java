@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.langdect;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -31,15 +30,13 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import com.cybozu.labs.langdetect.Detector;
 import com.cybozu.labs.langdetect.DetectorFactory;
-import com.cybozu.labs.langdetect.Language;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
-public class LanguageDetectorShuyo
+public class LanguageDetector
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -82,16 +79,16 @@ public class LanguageDetectorShuyo
         modelProvider = new ModelProviderBase<ProfileLocation>()
         {
             {
-                setContextObject(LanguageDetectorShuyo.this);
+                setContextObject(LanguageDetector.this);
 
                 setDefault(ARTIFACT_ID,
-                        "${groupId}.languageDetection-model-shuyo-${language}-${variant}");
+                        "${groupId}.langdect-model-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/shuyo-${language}-${variant}.properties");
+                        "classpath:/${package}/lib/languageidentifier-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
 
                 setOverride(LOCATION, modelLocation);
-                setOverride(LANGUAGE, "multi");
+                setOverride(LANGUAGE, "any");
                 setOverride(VARIANT, variant);
             }
 
@@ -127,9 +124,7 @@ public class LanguageDetectorShuyo
             
             String language = detector.detect();
             
-            DocumentMetaData meta = new DocumentMetaData(aJCas);
-            meta.setLanguage(language);
-            meta.addToIndexes();
+            aJCas.setDocumentLanguage(language);
 
         }
         catch (Exception e) {
