@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.langdect;
+package de.tudarmstadt.ukp.dkpro.core.langdetect;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 
-public class LanguageDetector
+public class LangDetectLanguageIdentifier
     extends JCasAnnotator_ImplBase
 {
     /**
@@ -79,10 +79,10 @@ public class LanguageDetector
         modelProvider = new ModelProviderBase<ProfileLocation>()
         {
             {
-                setContextObject(LanguageDetector.this);
+                setContextObject(LangDetectLanguageIdentifier.this);
 
                 setDefault(ARTIFACT_ID,
-                        "${groupId}.langdect-model-${language}-${variant}");
+                        "${groupId}.langdetect-model-${language}-${variant}");
                 setDefault(LOCATION,
                         "classpath:/${package}/lib/languageidentifier-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
@@ -108,14 +108,12 @@ public class LanguageDetector
                 }
             }
         };
-
     }
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-
         modelProvider.configure(aJCas.getCas());
 
         try {
@@ -125,7 +123,6 @@ public class LanguageDetector
             String language = detector.detect();
             
             aJCas.setDocumentLanguage(language);
-
         }
         catch (Exception e) {
             throw new AnalysisEngineProcessException(e);
