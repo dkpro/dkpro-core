@@ -38,6 +38,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import edu.stanford.nlp.CLutil.StringUtils;
@@ -46,9 +47,9 @@ import gr.aueb.cs.nlp.postagger.WordWithCategory;
 
 /**
  * Wrapper for the AUEB Greek POS tagger.
- * 
+ *
  * {@link http://nlp.cs.aueb.gr/software.html}
- * 
+ *
  * @author zesch
  *
  */
@@ -74,12 +75,12 @@ public class AuebTagger
     public static final String PARAM_OUTPUT_COMPLEX_TAGS = "outputComplexTags";
     @ConfigurationParameter(name = PARAM_OUTPUT_COMPLEX_TAGS, mandatory = true, defaultValue = "false")
     protected boolean outputComplexTags;
-    
+
     private MappingProvider mappingProvider;
 
     private Type tokenType;
     private Feature featPos;
-    
+
     @Override
     public void initialize(UimaContext context)
             throws ResourceInitializationException
@@ -88,13 +89,11 @@ public class AuebTagger
 
         // FIXME - differentiate between simple and complex mode
         // not implemented as complex mode includes morphology and we haven't decided about the types yet
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/gr-aueb-simple.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        mappingProvider.setDefault("pos.tagset", "aueb");
+        mappingProvider = MappingProviderFactory.createPosMappingProvider("classpath:/de/"
+                + "tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/gr-aueb-simple.map", "aueb",
+                language);
     }
-    
+
     @Override
     public void typeSystemInit(TypeSystem aTypeSystem)
         throws AnalysisEngineProcessException
@@ -104,7 +103,7 @@ public class AuebTagger
         tokenType = aTypeSystem.getType(Token.class.getName());
         featPos = tokenType.getFeatureByBaseName("pos");
     }
-    
+
     @Override
     public void process(CAS cas)
             throws AnalysisEngineProcessException
@@ -118,27 +117,27 @@ public class AuebTagger
         catch (CASException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        
+
         if (!jcas.getDocumentLanguage().equals("gr")) {
             throw new AnalysisEngineProcessException(new Throwable("Document language is set to " + jcas.getDocumentLanguage() + ". This tagger only works for Greek."));
         }
-        
+
         for (Sentence sentence : JCasUtil.select(jcas, Sentence.class)) {
             List<Token> tokens = JCasUtil.selectCovered(jcas, Token.class, sentence);
             String sentenceString = StringUtils.join(JCasUtil.toText(tokens), " ");
-            
+
             List<WordWithCategory> list = SmallSetFunctions.smallSetClassifyString(sentenceString);
-            
+
             if (list.size() != tokens.size()) {
                 throw new AnalysisEngineProcessException(new Throwable("Tagger returned wrong number of tags."));
             }
-            
+
             for (int i = 0; i < list.size(); i++) {
                 Token token = tokens.get(i);
-                
+
 //                String word = list.get(i).getWord();
                 String tag = list.get(i).getCategory();
-                                
+
                 Type posType = mappingProvider.getTagType(tag);
 
                 AnnotationFS posAnno = cas.createAnnotation(posType, token.getBegin(), token.getEnd());
@@ -146,10 +145,10 @@ public class AuebTagger
                 cas.addFsToIndexes(posAnno);
 
                 token.setFeatureValue(featPos, posAnno);
-                
+
                 // FIXME - add morphological stuff in complex mode
                 if (outputComplexTags) {
-                    
+
                 }
             }
         }
