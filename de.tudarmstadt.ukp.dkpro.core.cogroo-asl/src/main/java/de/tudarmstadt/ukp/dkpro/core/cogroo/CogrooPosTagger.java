@@ -49,6 +49,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -117,20 +118,14 @@ public class CogrooPosTagger
                     throw new IOException("The language code '" + language
                             + "' is not supported by LanguageTool.");
                 }
-                
+
                 ComponentFactory factory = ComponentFactory.create(new Locale("pt", "BR"));
                 return factory.createPOSTagger();
             }
 		};
-		
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
-                "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        mappingProvider.setDefault("pos.tagset", "bosque");
-        mappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
-        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
-//        mappingProvider.addImport("pos.tagset", modelProvider);
+
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                "bosque", language);
 	}
 
 	@Override
@@ -153,7 +148,7 @@ public class CogrooPosTagger
             // Construct the document
             Document doc = new DocumentImpl();
             doc.setText(aJCas.getDocumentText());
-            
+
             // Extract the sentence and its tokens
             org.cogroo.text.Sentence cSent = new SentenceImpl(sentence.getBegin(), sentence.getEnd(), doc);
             List<org.cogroo.text.Token> cTokens = new ArrayList<org.cogroo.text.Token>();
@@ -165,12 +160,12 @@ public class CogrooPosTagger
             }
             cSent.setTokens(cTokens);
             doc.setSentences(asList(cSent));
-            
+
             // Process
             modelProvider.getResource().analyze(doc);
 
             assert cSent.getTokens().size() == dTokens.size();
-            
+
             // Convert from CoGrOO to UIMA model
             Iterator<Token> dTokIt = dTokens.iterator();
             for (org.cogroo.text.Token cTok : cSent.getTokens()) {
@@ -179,7 +174,7 @@ public class CogrooPosTagger
                 // checking based on the DKPro Core lemmata, we might miss certain errors for this
                 // reason.
                 Token dTok = dTokIt.next();
-                
+
                 Type posTag = mappingProvider.getTagType(cTok.getPOSTag());
                 POS posAnno = (POS) cas.createAnnotation(posTag, cSent.getStart() + cTok.getStart(), cSent.getStart() + cTok.getEnd());
                 posAnno.setPosValue(internTags ? cTok.getPOSTag().intern() : cTok.getPOSTag());
