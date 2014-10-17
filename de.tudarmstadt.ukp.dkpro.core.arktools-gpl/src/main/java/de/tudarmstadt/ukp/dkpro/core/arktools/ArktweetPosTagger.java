@@ -42,17 +42,17 @@ import cmu.arktweetnlp.impl.Model;
 import cmu.arktweetnlp.impl.ModelSentence;
 import cmu.arktweetnlp.impl.Sentence;
 import cmu.arktweetnlp.impl.features.FeatureExtractor;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * Wrapper for Twitter Tokenizer and POS Tagger.
- * 
+ *
  * As described in: Olutobi Owoputi, Brendan O’Connor, Chris Dyer, Kevin Gimpel, Nathan Schneider
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
@@ -101,7 +101,7 @@ public class ArktweetPosTagger
 
     /**
      * Loads a model from a file. The tagger should be ready to tag after calling this.
-     * 
+     *
      * @param modelFilename
      * @throws IOException
      */
@@ -165,11 +165,9 @@ public class ArktweetPosTagger
             }
         };
 
-        mappingProvider = new MappingProvider();
-        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/"
-                + "core/api/lexmorph/tagset/en-arktweet.map");
-        mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
-        mappingProvider.setDefault("pos.tagset", "arktweet");
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
+
     }
 
     @Override
@@ -187,8 +185,8 @@ public class ArktweetPosTagger
         throws AnalysisEngineProcessException
     {
 
-        mappingProvider.configure(cas);
         modelProvider.configure(cas);
+        mappingProvider.configure(cas);
 
         List<AnnotationFS> tokens = CasUtil.selectCovered(cas, tokenType, 0, cas.getDocumentText()
                 .length());
