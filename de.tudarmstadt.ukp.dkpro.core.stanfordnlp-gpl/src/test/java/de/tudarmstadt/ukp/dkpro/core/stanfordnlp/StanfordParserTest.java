@@ -1093,7 +1093,7 @@ public class StanfordParserTest
                             StanfordParser.PARAM_WRITE_CONSTITUENT, false,
                             StanfordParser.PARAM_WRITE_DEPENDENCY, true));
             
-            TestRunner.runTest(pipeline, "en", "This is a test .");
+            JCas jcas = TestRunner.runTest(pipeline, "en", "This is a test .");
             
             boolean found = false;
             for (LoggingEvent e : records) {
@@ -1103,6 +1103,13 @@ public class StanfordParserTest
             }
             
             assertTrue("No log message about using the cached resource was found!", found);
+
+            String[] dependencies = { 
+                    "[  0,  4]NSUBJ(nsubj) D[0,4](This) G[10,14](test)",
+                    "[  5,  7]COP(cop) D[5,7](is) G[10,14](test)",
+                    "[  8,  9]DET(det) D[8,9](a) G[10,14](test)" };
+
+            AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         }
         finally {
             if (oldLevel != null) {
