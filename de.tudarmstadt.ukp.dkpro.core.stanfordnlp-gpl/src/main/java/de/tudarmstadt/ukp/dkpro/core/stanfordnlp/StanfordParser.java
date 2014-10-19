@@ -77,6 +77,7 @@ import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
 
@@ -297,8 +298,6 @@ public class StanfordParser
     @ConfigurationParameter(name = PARAM_QUOTE_END, mandatory = false)
     private List<String> quoteEnd;
 
-    private GrammaticalStructureFactory gsf;
-
     private CasConfigurableProviderBase<ParserGrammar> modelProvider;
     private MappingProvider posMappingProvider;
     private MappingProvider constituentMappingProvider;
@@ -410,8 +409,8 @@ public class StanfordParser
             }
 
             // Create dependency annotations
-            if (writeDependency && gsf != null) {
-                doCreateDependencyTags(sfAnnotator, parseTree, tokens);
+            if (writeDependency) {
+                doCreateDependencyTags(parser, sfAnnotator, parseTree, tokens);
             }
 
             // Create constituent annotations
@@ -422,10 +421,21 @@ public class StanfordParser
         }
     }
 
-    protected void doCreateDependencyTags(StanfordAnnotator sfAnnotator, Tree parseTree,
+    protected void doCreateDependencyTags(ParserGrammar aParser, StanfordAnnotator sfAnnotator, Tree parseTree,
             List<Token> tokens)
     {
-        GrammaticalStructure gs = gsf.newGrammaticalStructure(parseTree);
+        GrammaticalStructure gs;
+        try {
+            TreebankLanguagePack tlp = aParser.getTLPParams().treebankLanguagePack();
+            gs = tlp.grammaticalStructureFactory(tlp.punctuationWordRejectFilter(),
+                    tlp.typedDependencyHeadFinder()).newGrammaticalStructure(parseTree);
+        }
+        catch (UnsupportedOperationException e) {
+            // We already warned in the model provider if dependencies are not supported, so here
+            // we just do nothing and skip the dependencies.
+            return;
+        }
+        
         Collection<TypedDependency> dependencies = null;
         switch (mode) {
         case BASIC:
@@ -511,15 +521,6 @@ public class StanfordParser
                 ParserGrammar pd = (ParserGrammar) in.readObject();
                 AbstractTreebankLanguagePack lp = (AbstractTreebankLanguagePack) pd.getTLPParams()
                         .treebankLanguagePack();
-                try {
-                    gsf = lp.grammaticalStructureFactory(lp.punctuationWordRejectFilter(),
-                            lp.typedDependencyHeadFinder());
-                }
-                catch (UnsupportedOperationException e) {
-                    getContext().getLogger().log(WARNING,
-                            "Current model does not seem to support " + "dependencies.");
-                    gsf = null;
-                }
 
                 Properties metadata = getResourceMetaData();
 
@@ -595,6 +596,17 @@ public class StanfordParser
 
                 // There is no way to determine the relations via the GrammaticalStructureFactory
                 // API, so we do it manually here for the languages known to support this.
+
+                GrammaticalStructureFactory gsf = null;
+                try {
+                    gsf = lp.grammaticalStructureFactory(lp.punctuationWordRejectFilter(),
+                            lp.typedDependencyHeadFinder());
+                }
+                catch (UnsupportedOperationException e) {
+                    getContext().getLogger().log(WARNING,
+                            "Current model does not seem to support " + "dependencies.");
+                }
+                
                 if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
