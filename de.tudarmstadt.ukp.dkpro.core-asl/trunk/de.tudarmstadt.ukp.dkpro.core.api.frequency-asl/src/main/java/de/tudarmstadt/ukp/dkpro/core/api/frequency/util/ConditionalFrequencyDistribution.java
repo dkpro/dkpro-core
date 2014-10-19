@@ -243,6 +243,18 @@ public class ConditionalFrequencyDistribution<C, V>
         this.n = n + (freqDist.getN() - countBefore);
     }
 
+    /**
+     * Remove a previously registered condition
+     * 
+     * @param the condition to be removed
+     */
+    public void removeCondition(C condition) {
+    	if (cfd.containsKey(condition)) {
+        	cfd.put(condition, null);
+        	cfd.remove(condition);	
+    	}
+    }
+    
     @Override
     public String toString()
     {
