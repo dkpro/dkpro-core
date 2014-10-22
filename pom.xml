@@ -683,6 +683,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.mallet</module>
 	    <!-- Documentation and examples modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
