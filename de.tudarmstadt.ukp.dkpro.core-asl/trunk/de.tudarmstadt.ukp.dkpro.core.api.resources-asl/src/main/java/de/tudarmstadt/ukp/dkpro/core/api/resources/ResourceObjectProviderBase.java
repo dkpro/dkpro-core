@@ -147,9 +147,9 @@ public abstract class ResourceObjectProviderBase<M>
     public static final String VERSION = "version";
 
     public static final String PACKAGE = "package";
-    
+
     /**
-     * If this property is set to {@code true}, resources loaded through this provider are 
+     * If this property is set to {@code true}, resources loaded through this provider are
      * remembered by the provider using a weak reference. If the same resource is requested by
      * another instance of this provider class, the same resource is returned.
      */
@@ -177,7 +177,7 @@ public abstract class ResourceObjectProviderBase<M>
     private PropertyPlaceholderHelper pph = new PropertyPlaceholderHelper("${", "}", null, false);
 
     private static Map<ResourceHandle, Object> cache = new WeakHashMap<ResourceHandle, Object>();
-    
+
     /**
      * Maintain a reference to the handle for the currently loaded resource. This handle is used
      * as a key in the resource cache and makes sure that the resource is not removed from the
@@ -185,7 +185,7 @@ public abstract class ResourceObjectProviderBase<M>
      */
     @SuppressWarnings("unused")
     private ResourceHandle resourceHandle;
-    
+
     {
         init();
     }
@@ -287,7 +287,7 @@ public abstract class ResourceObjectProviderBase<M>
     public void setContextObject(Object aObject)
     {
         setContextClass(aObject.getClass());
-        
+
         // Experimental: allow forcing any resource provider to allow sharing its resource
         // Enable sharing the model between multiple instances of this AE. This is an experimental
         // parameter for advanced users. Sharing the model can lead to unexpected results because
@@ -301,7 +301,7 @@ public abstract class ResourceObjectProviderBase<M>
             setDefault(SHARABLE, System.getProperty(key));
         }
     }
-    
+
     /**
      * Set a class which can be used to try finding a Maven POM from which resource version
      * information could be extracted.
@@ -368,7 +368,9 @@ public abstract class ResourceObjectProviderBase<M>
 
         if (pomUrl == null) {
             // This is the default strategy supposed to look in the JAR
-            String pomPattern = base + "META-INF/maven/" + modelGroup + "/*/pom.xml";
+            String moduleArtifactId = modelArtifact.split("-")[0];
+            String pomPattern = base + "META-INF/maven/" + modelGroup + "/" + moduleArtifactId +
+                    "*/pom.xml";
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(pomPattern);
 
@@ -625,10 +627,10 @@ public abstract class ResourceObjectProviderBase<M>
     protected synchronized void loadResource(Properties aProperties) throws IOException
     {
         boolean sharable = "true".equals(aProperties.getProperty(SHARABLE, "false"));
-        
+
         ResourceHandle handle = null;
         resource = null;
-        
+
         // Check the cache
         if (sharable) {
             // We need to scan the cache manually because in the end we need to keep a reference
@@ -651,7 +653,7 @@ public abstract class ResourceObjectProviderBase<M>
             resource = produceResource(resourceUrl);
             sw.stop();
             log.info("Producing resource took " + sw.getTime() + "ms");
-            
+
             // If cache is enabled, update the cache
             if (sharable) {
                 cache.put(handle, resource);
@@ -718,7 +720,7 @@ public abstract class ResourceObjectProviderBase<M>
                     + "is skipped.");
             return Collections.emptyList();
         }
-        
+
         // Configure Ivy
         Message.setDefaultLogger(new ApacheCommonsLoggingAdapter(log));
         IvySettings ivySettings = new IvySettings();
@@ -919,7 +921,7 @@ public abstract class ResourceObjectProviderBase<M>
     private static final class ResourceHandle
     {
         private String url;
-        
+
         private Class<?> owner;
 
         public ResourceHandle(Class<?> aOwner, String aUrl)
@@ -927,12 +929,12 @@ public abstract class ResourceObjectProviderBase<M>
             owner = aOwner;
             url = aUrl;
         }
-        
+
         public String getUrl()
         {
             return url;
         }
-        
+
         public Class<?> getOwner()
         {
             return owner;
@@ -943,37 +945,44 @@ public abstract class ResourceObjectProviderBase<M>
         {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ((owner == null) ? 0 : owner.hashCode());
-            result = prime * result + ((url == null) ? 0 : url.hashCode());
+            result = (prime * result) + ((owner == null) ? 0 : owner.hashCode());
+            result = (prime * result) + ((url == null) ? 0 : url.hashCode());
             return result;
         }
 
         @Override
         public boolean equals(Object obj)
         {
-            if (this == obj)
+            if (this == obj) {
                 return true;
-            if (obj == null)
+            }
+            if (obj == null) {
                 return false;
-            if (getClass() != obj.getClass())
+            }
+            if (getClass() != obj.getClass()) {
                 return false;
+            }
             ResourceHandle other = (ResourceHandle) obj;
             if (owner == null) {
-                if (other.owner != null)
+                if (other.owner != null) {
                     return false;
+                }
             }
-            else if (!owner.equals(other.owner))
+            else if (!owner.equals(other.owner)) {
                 return false;
+            }
             if (url == null) {
-                if (other.url != null)
+                if (other.url != null) {
                     return false;
+                }
             }
-            else if (!url.equals(other.url))
+            else if (!url.equals(other.url)) {
                 return false;
+            }
             return true;
         }
     }
-    
+
     private static final class ExtensibleURLClassLoader
         extends URLClassLoader
     {
