@@ -55,79 +55,68 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @author Richard Eckart de Castilho
  */
-@TypeCapability(
-	    inputs = {
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-	        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
-		outputs = {
-		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class HunPosTagger
-	extends JCasAnnotator_ImplBase
+    extends JCasAnnotator_ImplBase
 {
-	/**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
-
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
-
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    protected String language;
 
     /**
-     * The character encoding used by the model.
+     * Override the default variant used to locate the model.
      */
-    public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
-    @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = false, defaultValue="UTF-8")
-    protected String modelEncoding;
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    protected String variant;
 
-	/**
-	 * Load the part-of-speech tag to UIMA type mapping from this location instead of locating
-	 * the mapping automatically.
-	 */
-	public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
-	protected String posMappingLocation;
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    protected String modelLocation;
 
-	/**
-	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
-	 * spaming the heap with thousands of strings representing only a few different tags.
-	 *
-	 * Default: {@code true}
-	 */
-	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
-	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
-	private boolean internTags;
+    /**
+     * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
+     * mapping automatically.
+     */
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    protected String posMappingLocation;
 
-	/**
-	 * Log the tag set(s) when a model is loaded.
-	 *
-	 * Default: {@code false}
-	 */
-	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
-	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
-	protected boolean printTagSet;
+    /**
+     * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid spaming
+     * the heap with thousands of strings representing only a few different tags.
+     *
+     * Default: {@code true}
+     */
+    public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
+    @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
+    private boolean internTags;
+
+    /**
+     * Log the tag set(s) when a model is loaded.
+     *
+     * Default: {@code false}
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
 
     private CasConfigurableProviderBase<File> modelProvider;
     private RuntimeProvider runtimeProvider;
-	private MappingProvider posMappingProvider;
+    private MappingProvider posMappingProvider;
 
-	@Override
-	public void initialize(UimaContext aContext)
-		throws ResourceInitializationException
-	{
-		super.initialize(aContext);
+    @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
 
         modelProvider = new CasConfigurableProviderBase<File>()
         {
@@ -136,7 +125,7 @@ public class HunPosTagger
 
                 setDefault(ARTIFACT_ID, "${groupId}.hunpos-model-tagger-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/lib/"
-                                + "tagger-${language}-${variant}.model");
+                        + "tagger-${language}-${variant}.model");
                 setDefault(VARIANT, "default");
                 setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/hunpos/lib/tagger-default-variants.map");
 
@@ -154,55 +143,61 @@ public class HunPosTagger
         };
 
         // provider for the sfst binary
-        runtimeProvider = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/");
+        runtimeProvider = new RuntimeProvider(
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/");
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
                 language, modelProvider);
-	}
+    }
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		CAS cas = aJCas.getCas();
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        CAS cas = aJCas.getCas();
 
-		modelProvider.configure(cas);
-		posMappingProvider.configure(cas);
+        modelProvider.configure(cas);
+        posMappingProvider.configure(cas);
 
+        String modelEncoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
+        if (modelEncoding == null) {
+            throw new AnalysisEngineProcessException(
+                    new Throwable("Model should contain encoding metadata"));
+        }
         File model = modelProvider.getResource();
         File executable;
-        
+
         try {
             executable = runtimeProvider.getFile("hunpos-tag");
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-		
+
         ProcessBuilder pb = new ProcessBuilder(executable.getAbsolutePath(),
                 model.getAbsolutePath());
         pb.redirectError(Redirect.INHERIT);
-        
+
         StringBuffer lastOut = new StringBuffer();
         String lastIn = null;
         boolean success = false;
         Process proc = null;
         try {
             proc = pb.start();
-            
+
             PrintWriter out = new PrintWriter(new OutputStreamWriter(proc.getOutputStream(),
                     modelEncoding));
             BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(),
                     modelEncoding));
-            
+
             for (Sentence sentence : select(aJCas, Sentence.class)) {
                 List<Token> tokens = selectCovered(Token.class, sentence);
-                
+
                 // Skip empty sentences
                 if (tokens.isEmpty()) {
                     continue;
                 }
-                
+
                 // Send full sentence
                 for (Token token : tokens) {
                     lastOut.append(token.getCoveredText()).append(' ');
@@ -218,7 +213,7 @@ public class HunPosTagger
                     tags[i] = lastIn.split("\t", 2)[1].trim();
                 }
                 in.readLine(); // Read extra new line after sentence
-                
+
                 int i = 0;
                 for (Token t : tokens) {
                     Type posTag = posMappingProvider.getTagType(tags[i]);
@@ -228,10 +223,10 @@ public class HunPosTagger
                     t.setPos(posAnno);
                     i++;
                 }
-                
+
                 lastOut.setLength(0);
             }
-            
+
             success = true;
         }
         catch (IOException e) {
@@ -239,15 +234,15 @@ public class HunPosTagger
         }
         finally {
             if (!success) {
-                getLogger().error("Sent before error: ["+lastOut+"]");
-                getLogger().error("Last response before error: ["+lastIn+"]");
+                getLogger().error("Sent before error: [" + lastOut + "]");
+                getLogger().error("Last response before error: [" + lastIn + "]");
             }
             if (proc != null) {
                 proc.destroy();
             }
         }
-	}
-	
+    }
+
     @Override
     public void destroy()
     {

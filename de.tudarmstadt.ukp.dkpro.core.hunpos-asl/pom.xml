@@ -145,67 +145,67 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-da-ddt</artifactId>
-				<version>20121123.1</version>
+				<version>20121123.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-de-tiger</artifactId>
-				<version>20121123.1</version>
+				<version>20121123.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-en-wsj</artifactId>
-				<version>20070724.1</version>
+				<version>20070724.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-fa-upc</artifactId>
-				<version>20130520.1</version>
+				<version>20140414.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-hr-mte5.defnpout</artifactId>
-				<version>20130509.1</version>
+				<version>20130509.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-hu-szeged_kr</artifactId>
-				<version>20070724.1</version>
+				<version>20070724.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-pt-bosque</artifactId>
-				<version>20121123.1</version>
+				<version>20121123.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-pt-mm</artifactId>
-				<version>20130119.1</version>
+				<version>20130119.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-pt-tbchp</artifactId>
-				<version>20110419.1</version>
+				<version>20110419.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-ru-rdt</artifactId>
-				<version>20121123.1</version>
+				<version>20121123.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-sl-jos</artifactId>
-				<version>20121123.1</version>
+				<version>20121123.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-sv-paroletags</artifactId>
-				<version>20100215.1</version>
+				<version>20100215.2</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-model-tagger-sv-suctags</artifactId>
-				<version>20100927.1</version>
+				<version>20100927.2</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
