@@ -54,13 +54,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="pt" 
     		variant="bosque" 
     		extension="model">
 			<metadata>
 	    		<entry key="pos.tagset" value="bosque"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>	</target>
 	
@@ -81,13 +82,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="cs" 
     		variant="pdt" 
     		extension="model">
 			<metadata>
 	    		<entry key="pos.tagset" value="pdt"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>	
@@ -109,13 +111,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="da" 
     		variant="ddt" 
     		extension="model">
 			<metadata>
 	    		<entry key="pos.tagset" value="ddt"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>	
@@ -137,13 +140,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="de" 
     		variant="tiger" 
     		extension="model">
 			<metadata>
 	    		<entry key="pos.tagset" value="stts"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>	
@@ -165,7 +169,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20070724"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="en" 
     		variant="wsj" 
@@ -176,6 +180,7 @@
 				<entry key="DC.identifier" value="http://code.google.com/p/hunpos/downloads/detail?name=en_wsj.model.gz"/>
 				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="ptb"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -184,7 +189,8 @@
 		<mkdir dir="target/download"/>
 
 		<!-- FILE: model_TagPer - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2013-05-20 | now        | 5f24f894d7d4f99653f9fa80c314e5a8
+		  - 2013-05-20 | 2014-04-14 | 5f24f894d7d4f99653f9fa80c314e5a8
+		  - 2014-04-14 | now		| 3b31efd2c2069c00e65ecbf1be88f2aa
 		  -->
 		<get 
     		src="http://stp.lingfil.uu.se/~mojgan/model_TagPer.tar.gz" 
@@ -197,11 +203,11 @@
 	    </untar>
 		<install-stub-and-upstream-file 
     		file="target/download/model_TagPer" 
-    		md5="5f24f894d7d4f99653f9fa80c314e5a8"
+    		md5="3b31efd2c2069c00e65ecbf1be88f2aa"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
-    		upstreamVersion="20130520"
-    		metaDataVersion="1"
+    		upstreamVersion="20140414"
+    		metaDataVersion="0"
     		tool="tagger" 
     		language="fa" 
     		variant="upc" 
@@ -212,6 +218,7 @@
 				<entry key="DC.identifier" value="http://stp.lingfil.uu.se/~mojgan/model_TagPer.tar.gz"/>
 				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="upc"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -237,7 +244,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20130509"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="hr" 
     		variant="mte5.defnpout" 
@@ -249,6 +256,7 @@
 				<entry key="DC.rights" value="http://creativecommons.org/licenses/by-sa/3.0/"/>
 				<!-- http://aclweb.org/anthology/W/W13/W13-2408.pdf -->
 	    		<entry key="pos.tagset" value="mte5"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -270,7 +278,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20070724"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="hu" 
     		variant="szeged_kr" 
@@ -281,6 +289,7 @@
 				<entry key="DC.identifier" value="http://code.google.com/p/hunpos/downloads/detail?name=hu_szeged_kr.model.gz"/>
 				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="szeged"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -308,7 +317,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20110419"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="pt" 
     		variant="tbchp" 
@@ -320,6 +329,7 @@
 				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
 				<!-- http://www.tycho.iel.unicamp.br/~tycho/corpus/manual/pos2003.html -->
 	    		<entry key="pos.tagset" value="tychobrahe"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 
@@ -338,7 +348,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20130119"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="pt" 
     		variant="mm" 
@@ -349,6 +359,7 @@
 				<entry key="DC.identifier" value="http://ufpr.dl.sourceforge.net/project/aelius/Aelius-February-25-2013.zip#*/aelius_data/AeliusHunPosMM"/>
 				<entry key="DC.rights" value="http://opencontent.org/opl.shtml"/>
 	    		<entry key="pos.tagset" value="mm"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -366,13 +377,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="pt" 
     		variant="bosque" 
     		extension="model">
 			<metadata>
 	    		<entry key="pos.tagset" value="bosque"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
@@ -394,13 +406,14 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="ru" 
     		variant="rdt" 
     		extension="model">
 			<metadata>
 	    		<entry key="pos.tagset" value="rdt"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>	
@@ -422,7 +435,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20121123"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="sl" 
     		variant="jos" 
@@ -430,6 +443,7 @@
 			<metadata>
 				<!-- http://nl.ijs.si/jos/msd/html-en/index.html -->
 	    		<entry key="pos.tagset" value="jos"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>	
@@ -451,7 +465,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20100927"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="sv" 
     		variant="suctags" 
@@ -462,6 +476,7 @@
 				<entry key="DC.identifier" value="http://stp.lingfil.uu.se/~bea/resources/hunpos/suc-suctags.model.gz"/>
 				<entry key="DC.rights" value="unknown"/>
 	    		<entry key="pos.tagset" value="suc"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
@@ -479,7 +494,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.hunpos"
     		upstreamVersion="20100215"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="tagger" 
     		language="sv" 
     		variant="paroletags" 
@@ -491,6 +506,7 @@
 				<entry key="DC.rights" value="unknown"/>
 				<!-- http://spraakbanken.gu.se/parole/tags.phtml -->
 	    		<entry key="pos.tagset" value="parole"/>
+				<entry key="model.encoding" value="utf-8"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 		
