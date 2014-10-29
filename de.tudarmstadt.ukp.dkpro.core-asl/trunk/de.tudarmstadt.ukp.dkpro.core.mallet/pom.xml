@@ -25,7 +25,7 @@
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core.mallet</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet</artifactId>
-	<name>mallet-EXPERIMENTAL</name>
+	<name>DKPro Core ASL - Mallet EXPERIMENTAL</name>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
