@@ -59,6 +59,34 @@ public class PennTreebankChunkedReader
     protected String posMappingLocation;
 
     /**
+     * Write token annotations to the CAS.
+     */
+    public static final String PARAM_READ_TOKEN = ComponentParameters.PARAM_READ_TOKEN;
+    @ConfigurationParameter(name = PARAM_READ_TOKEN, mandatory = true, defaultValue = "true")
+    private boolean readToken;
+
+    /**
+     * Write part-of-speech annotations to the CAS.
+     */
+    public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
+    @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
+    private boolean readPOS;
+
+    /**
+     * Write sentence annotations to the CAS.
+     */
+    public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
+    @ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
+    private boolean readSentence;
+
+    /**
+     * Write chunk annotations to the CAS.
+     */
+    public static final String PARAM_READ_CHUNK = ComponentParameters.PARAM_READ_CHUNK;
+    @ConfigurationParameter(name = PARAM_READ_CHUNK, mandatory = true, defaultValue = "true")
+    private boolean readChunk;
+
+    /**
      * Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
      * tag set defined as part of the model meta data. This can be useful if a custom model is
      * specified which does not have such meta data, or it can be used in readers.
@@ -132,7 +160,6 @@ public class PennTreebankChunkedReader
                     readLine = readLine.replaceAll("\\]", "");
                     readLine = readLine.trim();
                 }
-
                 String[] tokenWithTags = readLine.split(" ");
                 for (String twt : tokenWithTags) {
 
@@ -155,9 +182,7 @@ public class PennTreebankChunkedReader
                         continue;
                     }
                     else if (token_tag.length < 2) {
-                        getLogger().error(
-                                "Encountered token without tag, should not have happend. Skip token: ["
-                                        + token_tag[0] + "]");
+                        // There are empty lines with nothing to split in it
                         continue;
                     }
 
@@ -193,22 +218,26 @@ public class PennTreebankChunkedReader
         finally {
             IOUtils.closeQuietly(br);
         }
-        
+
         String documentText = annotateSenenceTokenPosTypes(aJCas, tokens, tags);
         aJCas.setDocumentText(documentText);
 
-        annotateChunks(aJCas, chunkStartEndIdx);
+        if (readChunk) {
+            annotateChunks(aJCas, chunkStartEndIdx);
+        }
     }
 
     private void annotateChunks(JCas aJCas, List<int[]> aChunkStartEndIdx)
     {
-        List<Token> tokens = new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
+        if (readToken) {
+            List<Token> tokens = new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
 
-        for (int[] chunks : aChunkStartEndIdx) {
-            int begin = tokens.get(chunks[0]).getBegin();
-            int end = tokens.get(chunks[1]).getEnd();
-            Chunk c = new Chunk(aJCas, begin, end);
-            c.addToIndexes();
+            for (int[] chunks : aChunkStartEndIdx) {
+                int begin = tokens.get(chunks[0]).getBegin();
+                int end = tokens.get(chunks[1]).getEnd();
+                Chunk c = new Chunk(aJCas, begin, end);
+                c.addToIndexes();
+            }
         }
     }
 
@@ -233,7 +262,8 @@ public class PennTreebankChunkedReader
         return t1 || t2 || t3;
     }
 
-    private String selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(String aTag)
+    private String selectFirstTagIfTokenIsAmbiguousInContextAndSeveralAcceptableOnesExist(
+            String aTag)
     {
         String[] tags = aTag.split("\\|");
         return tags[0];
@@ -273,7 +303,9 @@ public class PennTreebankChunkedReader
 
             if (tag.equals(".")) {
                 String text = textString.toString().trim();
-                annotateSentence(aJCas, sentStart, text.length());
+                if (readSentence) {
+                    annotateSentence(aJCas, sentStart, text.length());
+                }
                 sentStart = textString.length();
             }
         }
@@ -287,17 +319,22 @@ public class PennTreebankChunkedReader
 
     private void annotateTokenWithTag(JCas aJCas, String aToken, String aTag, int aCurrPosInText)
     {
-        // Token
-        Token token = new Token(aJCas, aCurrPosInText, aToken.length() + aCurrPosInText);
-        token.addToIndexes();
-        
-        // Tag
-        Type posTag = posMappingProvider.getTagType(aTag);
-        POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(), token.getEnd());
-        pos.setPosValue(aTag);
-        pos.addToIndexes();
-        
-        // Set the POS for the Token
-        token.setPos(pos);
+        if (readToken) {
+            // Token
+            Token token = new Token(aJCas, aCurrPosInText, aToken.length() + aCurrPosInText);
+            token.addToIndexes();
+
+            if (readPOS) {
+                // Tag
+                Type posTag = posMappingProvider.getTagType(aTag);
+                POS pos = (POS) aJCas.getCas().createAnnotation(posTag, token.getBegin(),
+                        token.getEnd());
+                pos.setPosValue(aTag);
+                pos.addToIndexes();
+
+                // Set the POS for the Token
+                token.setPos(pos);
+            }
+        }
     }
 }
