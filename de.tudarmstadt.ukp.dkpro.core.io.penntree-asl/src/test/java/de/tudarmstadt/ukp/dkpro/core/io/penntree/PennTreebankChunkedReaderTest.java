@@ -35,14 +35,15 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 public class PennTreebankChunkedReaderTest
 {
     @Test
-    public void testCountsOfSentenceTokenTagAnnotation()
+    public void testCountsOfAnnotations()
         throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos");
-        
+
         assertEquals(1, select(jCas, Sentence.class).size());
         assertEquals(32, select(jCas, Token.class).size());
         assertEquals(32, select(jCas, POS.class).size());
+        assertEquals(8, select(jCas, Chunk.class).size());
     }
 
     @Test
@@ -50,7 +51,7 @@ public class PennTreebankChunkedReaderTest
         throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos");
-        
+
         String[] posOriginal = new String[] { "DT", "NN", "IN", "JJ", "NNS", "VBG", "IN", "NNP",
                 "NNP", "NNP", "VBD", "PRP", "VBZ", "VBN", "DT", "$", "CD", "CD", "NN", "NN", "IN",
                 "JJS", "IN", "NNP", "NNP", "NNP", "POS", "NN", "CC", "NN", "NNS", "." };
@@ -67,12 +68,12 @@ public class PennTreebankChunkedReaderTest
         throws Exception
     {
         JCas jCas = readTestFile("generalTest.pos");
-        
-        String[] tokens = new String[] { "A", "consortium", "of", "private", "investors", "operating", "as",
-                "LJH", "Funding", "Co.", "said", "it", "has", "made", "a", "$", "409",
-                "million", "cash", "bid", "for", "most", "of", "L.J.", "Hooker", "Corp.",
+
+        String[] tokens = new String[] { "A", "consortium", "of", "private", "investors",
+                "operating", "as", "LJH", "Funding", "Co.", "said", "it", "has", "made", "a", "$",
+                "409", "million", "cash", "bid", "for", "most", "of", "L.J.", "Hooker", "Corp.",
                 "'s", "real-estate", "and", "shopping-center", "holdings", "." };
-        
+
         AssertAnnotations.assertToken(tokens, select(jCas, Token.class));
     }
 
@@ -81,7 +82,7 @@ public class PennTreebankChunkedReaderTest
         throws Exception
     {
         JCas jcas = readTestFile("erroneouslyJoinedTokensAndTheirTags.pos");
-        
+
         String[] posOriginal = new String[] { "DT", "NNS", "NNS" };
 
         String[] posMapped = new String[] { "ART", "NN", "NN" };
@@ -95,21 +96,18 @@ public class PennTreebankChunkedReaderTest
     {
         JCas jcas = readTestFile("generalTest.pos");
 
-        String[] chunks = new String[] { 
-                "[  0, 12]Chunk(null) (A consortium)",
+        String[] chunks = new String[] { "[  0, 12]Chunk(null) (A consortium)",
                 "[ 16, 33]Chunk(null) (private investors)",
-                "[ 47, 62]Chunk(null) (LJH Funding Co.)", 
-                "[ 68, 70]Chunk(null) (it)",
-                "[ 80,104]Chunk(null) (a $ 409 million cash bid)", 
-                "[109,113]Chunk(null) (most)",
+                "[ 47, 62]Chunk(null) (LJH Funding Co.)", "[ 68, 70]Chunk(null) (it)",
+                "[ 80,104]Chunk(null) (a $ 409 million cash bid)", "[109,113]Chunk(null) (most)",
                 "[117,149]Chunk(null) (L.J. Hooker Corp. 's real-estate)",
                 "[154,178]Chunk(null) (shopping-center holdings)" };
-        
+
         AssertAnnotations.assertChunks(chunks, select(jcas, Chunk.class));
     }
 
-    /** 
-     * We annotate only one pos if several exist, the first one mentioned 
+    /**
+     * We annotate only one pos if several exist, the first one mentioned
      */
     @Test
     public void testTokensWithSeveralPossiblePOSTags()
@@ -120,20 +118,79 @@ public class PennTreebankChunkedReaderTest
         String[] posOriginal = new String[] { "VBG", "NN" };
 
         String[] posMapped = new String[] { "V", "NN" };
-        
+
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
+    }
+
+    @Test
+    public void testSuppressedTokenAnnotation()
+        throws Exception
+    {
+        // POS/Chunk is set to true, yet it should not be annotated
+        JCas jCas = readTestFile("generalTest.pos", false, true, true, true);
+
+        assertEquals(1, select(jCas, Sentence.class).size());
+        assertEquals(0, select(jCas, Token.class).size());
+        assertEquals(0, select(jCas, POS.class).size());
+        assertEquals(0, select(jCas, Chunk.class).size());
+    }
+
+    @Test
+    public void testSuppressedPosAnnotation()
+        throws Exception
+    {
+        JCas jCas = readTestFile("generalTest.pos", true, false, true, true);
+
+        assertEquals(1, select(jCas, Sentence.class).size());
+        assertEquals(32, select(jCas, Token.class).size());
+        assertEquals(0, select(jCas, POS.class).size());
+        assertEquals(8, select(jCas, Chunk.class).size());
+    }
+
+    @Test
+    public void testSuppressedSentenceAnnotations()
+        throws Exception
+    {
+        JCas jCas = readTestFile("generalTest.pos", true, true, false, true);
+
+        assertEquals(0, select(jCas, Sentence.class).size());
+        assertEquals(32, select(jCas, Token.class).size());
+        assertEquals(32, select(jCas, POS.class).size());
+        assertEquals(8, select(jCas, Chunk.class).size());
+    }
+
+    @Test
+    public void testSuppressedChunkAnnotations()
+        throws Exception
+    {
+        JCas jCas = readTestFile("generalTest.pos", true, true, true, false);
+
+        assertEquals(1, select(jCas, Sentence.class).size());
+        assertEquals(32, select(jCas, Token.class).size());
+        assertEquals(32, select(jCas, POS.class).size());
+        assertEquals(0, select(jCas, Chunk.class).size());
     }
 
     private static JCas readTestFile(String aFile)
         throws Exception
     {
+        return readTestFile(aFile, true, true, true, true);
+    }
+
+    private static JCas readTestFile(String aFile, boolean readToken, boolean readPos,
+            boolean readSent, boolean readChunk)
+        throws Exception
+    {
         CollectionReader reader = CollectionReaderFactory.createReader(
-                PennTreebankChunkedReader.class, 
-                PennTreebankChunkedReader.PARAM_LANGUAGE, "en",
+                PennTreebankChunkedReader.class, PennTreebankChunkedReader.PARAM_LANGUAGE, "en",
                 PennTreebankChunkedReader.PARAM_SOURCE_LOCATION,
                 "src/test/resources/pennTreebankChunkedReaderTestFiles/",
                 PennTreebankChunkedReader.PARAM_POS_TAG_SET, "ptb",
-                PennTreebankChunkedReader.PARAM_PATTERNS, aFile );
+                PennTreebankChunkedReader.PARAM_READ_TOKEN, readToken,
+                PennTreebankChunkedReader.PARAM_READ_POS, readPos,
+                PennTreebankChunkedReader.PARAM_READ_SENTENCE, readSent,
+                PennTreebankChunkedReader.PARAM_READ_CHUNK, readChunk,
+                PennTreebankChunkedReader.PARAM_PATTERNS, aFile);
 
         JCas jcas = JCasFactory.createJCas();
         reader.getNext(jcas.getCas());
