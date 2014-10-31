@@ -29,16 +29,18 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** 
- * Updated by JCasGen Sat Nov 03 19:52:11 CET 2012
+/** A link in the coreference chain.
+ * Updated by JCasGen Fri Oct 31 23:38:08 CET 2014
  * @generated */
 public class CoreferenceLink_Type extends Annotation_Type {
   /** @generated */
-  protected FSGenerator getFSGenerator() {return fsGenerator;}
+  @Override
+protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
-      public FeatureStructure createFS(int addr, CASImpl cas) {
+      @Override
+    public FeatureStructure createFS(int addr, CASImpl cas) {
   			 if (CoreferenceLink_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
   		     FeatureStructure fs = CoreferenceLink_Type.this.jcas.getJfsFromCaddr(addr);
@@ -61,13 +63,19 @@ public class CoreferenceLink_Type extends Annotation_Type {
   final Feature casFeat_next;
   /** @generated */
   final int     casFeatCode_next;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public int getNext(int addr) {
         if (featOkTst && casFeat_next == null)
       jcas.throwFeatMissing("next", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
     return ll_cas.ll_getRefValue(addr, casFeatCode_next);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setNext(int addr, int v) {
         if (featOkTst && casFeat_next == null)
       jcas.throwFeatMissing("next", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
@@ -79,13 +87,19 @@ public class CoreferenceLink_Type extends Annotation_Type {
   final Feature casFeat_referenceType;
   /** @generated */
   final int     casFeatCode_referenceType;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getReferenceType(int addr) {
         if (featOkTst && casFeat_referenceType == null)
       jcas.throwFeatMissing("referenceType", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
     return ll_cas.ll_getStringValue(addr, casFeatCode_referenceType);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setReferenceType(int addr, String v) {
         if (featOkTst && casFeat_referenceType == null)
       jcas.throwFeatMissing("referenceType", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
@@ -97,13 +111,19 @@ public class CoreferenceLink_Type extends Annotation_Type {
   final Feature casFeat_referenceRelation;
   /** @generated */
   final int     casFeatCode_referenceRelation;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getReferenceRelation(int addr) {
         if (featOkTst && casFeat_referenceRelation == null)
       jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
     return ll_cas.ll_getStringValue(addr, casFeatCode_referenceRelation);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setReferenceRelation(int addr, String v) {
         if (featOkTst && casFeat_referenceRelation == null)
       jcas.throwFeatMissing("referenceRelation", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink");
@@ -114,7 +134,10 @@ public class CoreferenceLink_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+   * @generated
+   * @param jcas JCas
+   * @param casType Type 
+   */
   public CoreferenceLink_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());

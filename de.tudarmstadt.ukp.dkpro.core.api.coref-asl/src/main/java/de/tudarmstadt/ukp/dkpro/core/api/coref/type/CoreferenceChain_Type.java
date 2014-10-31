@@ -29,16 +29,18 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.cas.AnnotationBase_Type;
 
-/** 
- * Updated by JCasGen Sat Nov 03 19:52:11 CET 2012
+/** Marks the beginning of a chain.
+ * Updated by JCasGen Fri Oct 31 23:38:08 CET 2014
  * @generated */
 public class CoreferenceChain_Type extends AnnotationBase_Type {
   /** @generated */
-  protected FSGenerator getFSGenerator() {return fsGenerator;}
+  @Override
+protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
-      public FeatureStructure createFS(int addr, CASImpl cas) {
+      @Override
+    public FeatureStructure createFS(int addr, CASImpl cas) {
   			 if (CoreferenceChain_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
   		     FeatureStructure fs = CoreferenceChain_Type.this.jcas.getJfsFromCaddr(addr);
@@ -61,13 +63,19 @@ public class CoreferenceChain_Type extends AnnotationBase_Type {
   final Feature casFeat_first;
   /** @generated */
   final int     casFeatCode_first;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public int getFirst(int addr) {
         if (featOkTst && casFeat_first == null)
       jcas.throwFeatMissing("first", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain");
     return ll_cas.ll_getRefValue(addr, casFeatCode_first);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setFirst(int addr, int v) {
         if (featOkTst && casFeat_first == null)
       jcas.throwFeatMissing("first", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain");
@@ -78,7 +86,10 @@ public class CoreferenceChain_Type extends AnnotationBase_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+   * @generated
+   * @param jcas JCas
+   * @param casType Type 
+   */
   public CoreferenceChain_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
