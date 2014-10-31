@@ -62,15 +62,14 @@ import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
  *
  *
  * @author Jungi Kim
+ * @author Tobias Horsmann
  */
-
 @TypeCapability(
         outputs={ "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"}
         )
-
 public class MeCabTagger
 	extends SegmenterBase
 {
@@ -501,12 +500,14 @@ public class MeCabTagger
 	 * Based on a simple heuristic it is attempted to mark the morphemes with I-B-O tags if they
 	 * belong to the same word. O = 1-morpheme word B = morpheme marks the beginning of a word I =
 	 * morpheme is part of a word
-	 *
-	 * @author Tobias Horsmann
+	 * 
+	 * @param morph a morpheme.
+	 * @param features a set of features.
+	 * @param iboList a IBO list.
+	 * @return the IBO code.
 	 */
 	private String getIBO(String morph, String[] features, List<String> iboList)
 	{
-
 		String pos = features[0];
 		String pos_suffix_1 = features[1];
 		String kei = features[5];
