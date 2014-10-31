@@ -68,6 +68,8 @@ public class FeaturePathInfo  {
     *
     * @param featurePath
     *           featurePath string separated by "/"
+     * @throws FeaturePathException
+     *             if an error occurs during initialization of the feature path
     */
    public void initialize(String featurePath)
          throws FeaturePathException {
@@ -91,9 +93,14 @@ public class FeaturePathInfo  {
       }
    }
 
-   /**
-    * checks the feature path for the given type and checks if it can be valid.
-    */
+    /**
+     * Checks the feature path for the given type and checks if it can be valid.
+     * 
+     * @param featurePathType
+     *            the anchor type.
+     * @throws FeaturePathException
+     *             if an error occurs during initialization of the feature path
+     */
    public void typeSystemInit(Type featurePathType)
          throws FeaturePathException {
       // validate featurePath for given type

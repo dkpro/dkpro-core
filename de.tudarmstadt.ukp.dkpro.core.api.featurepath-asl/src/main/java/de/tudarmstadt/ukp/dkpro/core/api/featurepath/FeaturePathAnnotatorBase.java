@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.api.featurepath;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.uima.UIMARuntimeException;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -183,8 +182,15 @@ public abstract class FeaturePathAnnotatorBase
 
     /**
      * Method to create annotations.
+     * 
+     * @param jcas
+     *            the JCas.
+     * @throws FeaturePathException
+     *             if an error occurs during initialization of the {@link FeaturePathInfo} object
+     * @throws AnalysisEngineProcessException
+     *             if another error occurs.
      */
     abstract protected void generateAnnotations(JCas jcas)
-        throws FeaturePathException, UIMARuntimeException, AnalysisEngineProcessException;
+        throws FeaturePathException, AnalysisEngineProcessException;
 
 }
