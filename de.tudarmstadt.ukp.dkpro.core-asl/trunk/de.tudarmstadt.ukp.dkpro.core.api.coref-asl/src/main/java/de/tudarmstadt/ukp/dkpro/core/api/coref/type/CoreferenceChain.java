@@ -28,9 +28,9 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.cas.AnnotationBase;
 
 
-/** 
- * Updated by JCasGen Sat Nov 03 19:52:10 CET 2012
- * XML source: /home/likewise-open/UKP/yimam/dkproworkspace/de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/resources/desc/type/coref.xml
+/** Marks the beginning of a chain.
+ * Updated by JCasGen Fri Oct 31 23:38:08 CET 2014
+ * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.coref-asl/src/main/resources/desc/type/coref.xml
  * @generated */
 public class CoreferenceChain extends AnnotationBase {
   /** @generated
@@ -50,22 +50,30 @@ public              int getTypeIndexID() {return typeIndexID;}
   protected CoreferenceChain() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
-   * @generated */
+   * @generated
+   * @param addr low level Feature Structure reference
+   * @param type the type of this Feature Structure 
+   */
   public CoreferenceChain(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
   
-  /** @generated */
+  /** @generated
+   * @param jcas JCas to which this Feature Structure belongs 
+   */
   public CoreferenceChain(JCas jcas) {
     super(jcas);
     readObject();   
   } 
 
-  /** <!-- begin-user-doc -->
+  /** 
+   * <!-- begin-user-doc -->
     * Write your own initialization here
     * <!-- end-user-doc -->
-  @generated modifiable */
+  *
+   * @generated modifiable 
+   */
   private void readObject() {}
      
  
@@ -73,20 +81,24 @@ public              int getTypeIndexID() {return typeIndexID;}
   //*--------------*
   //* Feature: first
 
-  /** getter for first - gets 
-   * @generated */
+  /** getter for first - gets This is the first corefernce link in coreference chain
+   * @generated
+   * @return value of the feature 
+   */
   public CoreferenceLink getFirst() {
     if (CoreferenceChain_Type.featOkTst && ((CoreferenceChain_Type)jcasType).casFeat_first == null)
       jcasType.jcas.throwFeatMissing("first", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain");
     return (CoreferenceLink)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((CoreferenceChain_Type)jcasType).casFeatCode_first)));}
     
-  /** setter for first - sets  
-   * @generated */
+  /** setter for first - sets This is the first corefernce link in coreference chain 
+   * @generated
+   * @param v value to set into the feature 
+   */
   public void setFirst(CoreferenceLink v) {
     if (CoreferenceChain_Type.featOkTst && ((CoreferenceChain_Type)jcasType).casFeat_first == null)
       jcasType.jcas.throwFeatMissing("first", "de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain");
     jcasType.ll_cas.ll_setRefValue(addr, ((CoreferenceChain_Type)jcasType).casFeatCode_first, jcasType.ll_cas.ll_getFSRef(v));}    
-    public List<CoreferenceLink> links() {
+      public List<CoreferenceLink> links() {
 	List<CoreferenceLink> links = new ArrayList<CoreferenceLink>();  
 	CoreferenceLink l = getFirst();
 	while (l != null) {
