@@ -40,15 +40,19 @@ import org.apache.commons.compress.compressors.xz.XZCompressorOutputStream;
  */
 public class CompressionUtils
 {
-	/**
-	 * Get an uncompressed input stream for a given input stream created for a particular location.
-	 * 
-	 * @param aLocation a resource location (e.g. a path, url, etc.)
-	 * @param aStream a raw stream of potentially compressed data.
-	 * @return stream wrapped with a decompressing stream.
-	 */
-	public static InputStream getInputStream(String aLocation, InputStream aStream) throws IOException
-	{
+    /**
+     * Get an uncompressed input stream for a given input stream created for a particular location.
+     * 
+     * @param aLocation
+     *            a resource location (e.g. a path, URL, etc.)
+     * @param aStream
+     *            a raw stream of potentially compressed data.
+     * @return stream wrapped with a decompressing stream.
+     * @throws IOException if an I/O error has occurred,
+     */
+    public static InputStream getInputStream(String aLocation, InputStream aStream)
+        throws IOException
+    {
 		String lcLocation = aLocation.toLowerCase();
 		if (lcLocation.endsWith(GZIP.getExtension())) {
 			return new GZIPInputStream(aStream);
@@ -72,10 +76,11 @@ public class CompressionUtils
 	 * @param aFile
 	 *            the target file.
 	 * @return a stream to write to.
-	 * 
+     * @throws IOException if an I/O error has occurred,
 	 * @see CompressionMethod
 	 */
-    public static OutputStream getOutputStream(File aFile) throws IOException
+    public static OutputStream getOutputStream(File aFile)
+        throws IOException
     {
 		// Create parent folders for output file and set up stream
 		if (aFile.getParentFile() != null) {
