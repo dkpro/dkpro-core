@@ -783,6 +783,60 @@
 		</pluginManagement>
 	</build>
 	<profiles>
+	<profile>
+		<id>run-jcasgen</id>
+		<activation>
+			<file>
+				<exists>.activate-run-jcasgen</exists>
+			</file>
+		</activation>
+		<build>
+			<plugins>
+				<plugin>
+					<!--generate types dynamically -->
+					<groupId>org.apache.uima</groupId>
+					<artifactId>jcasgen-maven-plugin</artifactId>
+					<version>${uima.version}</version>
+					<configuration>
+						<typeSystemIncludes>
+							<include>src/main/resources/desc/type/**/*.xml</include>
+						</typeSystemIncludes>
+					</configuration>
+					<executions>
+						<execution>
+							<!--call it in the generate-source phase -->
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>1.8</version>
+					<executions>
+						<execution>
+							<id>addToSourceFolder</id>
+							<goals>
+								<!--add the generated sources -->
+								<goal>add-source</goal>
+							</goals>
+							<phase>process-sources</phase>
+							<configuration>
+								<sources>
+									<!--default path to generated sources -->
+									<source>${project.build.directory}/generated-sources/jcasgen</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+	
 		<profile>
 			<!-- Profile for modules with dependencies that are not on Maven Central -->
 			<id>deps-not-on-maven-central</id>

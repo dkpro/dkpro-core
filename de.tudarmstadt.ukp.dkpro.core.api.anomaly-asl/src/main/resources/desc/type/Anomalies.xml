@@ -2,8 +2,8 @@
 <typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
   <name>Anomalies</name>
   <description/>
-  <version>1.0</version>
-  <vendor/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
   <imports>
     <import name="desc.type.SuggestedAction"/>
   </imports>
