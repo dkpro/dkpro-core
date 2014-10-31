@@ -42,7 +42,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 /**
- * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
 public class ResourceUtils
@@ -84,6 +83,8 @@ public class ResourceUtils
      *            {@link PathMatchingResourcePatternResolver#getResources(String)}
      * @param aCache
      *            use the cache or not.
+     * @return the temporary location on the file system.
+     * @throws IOException if an I/O error has occurred,
      * @see PathMatchingResourcePatternResolver
      */
     public static File getClasspathAsFolder(String aClasspathBase, boolean aCache)

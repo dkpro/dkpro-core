@@ -318,7 +318,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Tries to get the version of the required model from the dependency management section of the
      * Maven POM belonging to the context object.
-     *
+     * 
      * @throws IOException
      *             if there was a problem loading the POM file
      * @throws FileNotFoundException
@@ -326,6 +326,7 @@ public abstract class ResourceObjectProviderBase<M>
      * @throws IllegalStateException
      *             if more than one POM was found, if the version information could not be found in
      *             the POM, or if no context object was set.
+     * @return the version of the required model.
      */
     protected String getModelVersionFromMavenPom()
         throws IOException
@@ -419,6 +420,9 @@ public abstract class ResourceObjectProviderBase<M>
 
     /**
      * For use in test cases.
+     * @return the location of the model.
+     * @throws IOException
+     *             if the language-dependent default variants location is set but cannot be read.
      */
     protected String getModelLocation()
         throws IOException
@@ -666,6 +670,10 @@ public abstract class ResourceObjectProviderBase<M>
      * Tries to figure out which artifact contains the desired resource, tries to acquire it and
      * add it to the loader. The dependencyManagement information from the POM of the caller is
      * taken into account if possible.
+     * 
+     * @param aProps the properties.
+     * @throws IOException if dependencies cannot be resolved.
+     * @throws IllegalStateException if 
      */
     private void resolveDependency(Properties aProps)
         throws IOException, IllegalStateException
@@ -711,6 +719,13 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Try to fetch an artifact and its dependencies from the UKP model repository or from
      * Maven Central.
+     * 
+     * @param aGroupId the group ID.
+     * @param aArtifactId the artifact ID.
+     * @param aVersion the version
+     * @return a list of dependencies.
+     * @throws ParseException if Ivy settings cannot be parsed.
+     * @throws IOException if the dependencies cannot be resolved.
      */
     private List<File> resolveWithIvy(String aGroupId, String aArtifactId, String aVersion)
         throws ParseException, IOException
@@ -908,6 +923,9 @@ public abstract class ResourceObjectProviderBase<M>
 
     /**
      * Copy all properties that not already exist in target from source.
+     * 
+     * @param aTarget the properties to merge into.
+     * @param aSource the properties to merge from.
      */
     private void mergeProperties(Properties aTarget, Properties aSource)
     {
