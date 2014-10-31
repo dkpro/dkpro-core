@@ -283,6 +283,9 @@ public class MaltParserTest
     
     /**
      * Actually, we have no POS tagger for Polish...
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     @Test
     public void testPolish()
@@ -377,6 +380,9 @@ public class MaltParserTest
      * This test really only checks the tagsets and if any dependencies are created. Since the POS
      * tags expected by the Spanish model do <b>not</b> correspond to those that the pos tagger
      * running here produces, the dependencies are bogus.
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     @Test
     public void testSpanishLinear()
@@ -603,6 +609,9 @@ public class MaltParserTest
     /**
      * This test really only checks the tagsets and if any dependencies are created. Since we
      * currently to not have a POS tagger for French, the dependencies are just bogus.
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     // @Ignore("The tags produced by our French TreeTagger model are different form the ones that "
     // +
