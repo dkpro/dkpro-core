@@ -207,13 +207,17 @@ public class SnowballStemmer
 		return snowballProgram;
 	}
 
-	/**
-	 * Creates a Stem annotation with same begin and end as the AnnotationFS fs, the value is the
-	 * stemmed value derived by applying the featurepath.
-	 *
-	 * @param fs
-	 *            the AnnotationFS where the Stem annotation is created
-	 */
+    /**
+     * Creates a Stem annotation with same begin and end as the AnnotationFS fs, the value is the
+     * stemmed value derived by applying the featurepath.
+     * 
+     * @param jcas
+     *            the JCas
+     * @param fs
+     *            the AnnotationFS where the Stem annotation is created
+     * @throws AnalysisEngineProcessException
+     *             if the {@code stem} method from the snowball stemmer cannot be invoked.
+     */
 	private void createStemAnnotation(JCas jcas, AnnotationFS fs)
 		throws AnalysisEngineProcessException
 	{
