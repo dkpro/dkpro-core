@@ -26,9 +26,11 @@ import java.util.Set;
 public interface Tagset
 {
     /**
-     * Get a map (key-value pairs) using the layer name as key and the tagset as value. 
+     * Get a map (key-value pairs) using the layer name as key and the tagset as value.
+     * 
+     * @return the layers.
      */
     Map<String, String> getLayers();
-    
+
     Set<String> listTags(String aLayer, String aTagsetName);
 }

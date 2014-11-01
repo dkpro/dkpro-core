@@ -34,11 +34,13 @@ import org.apache.uima.jcas.tcas.DocumentAnnotation_Type;
  * @generated */
 public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   /** @generated */
-  protected FSGenerator getFSGenerator() {return fsGenerator;}
+  @Override
+protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
-      public FeatureStructure createFS(int addr, CASImpl cas) {
+      @Override
+    public FeatureStructure createFS(int addr, CASImpl cas) {
   			 if (DocumentMetaData_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
   		     FeatureStructure fs = DocumentMetaData_Type.this.jcas.getJfsFromCaddr(addr);
@@ -61,13 +63,19 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   final Feature casFeat_documentTitle;
   /** @generated */
   final int     casFeatCode_documentTitle;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getDocumentTitle(int addr) {
         if (featOkTst && casFeat_documentTitle == null)
       jcas.throwFeatMissing("documentTitle", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     return ll_cas.ll_getStringValue(addr, casFeatCode_documentTitle);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setDocumentTitle(int addr, String v) {
         if (featOkTst && casFeat_documentTitle == null)
       jcas.throwFeatMissing("documentTitle", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
@@ -79,13 +87,19 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   final Feature casFeat_documentId;
   /** @generated */
   final int     casFeatCode_documentId;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getDocumentId(int addr) {
         if (featOkTst && casFeat_documentId == null)
       jcas.throwFeatMissing("documentId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     return ll_cas.ll_getStringValue(addr, casFeatCode_documentId);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setDocumentId(int addr, String v) {
         if (featOkTst && casFeat_documentId == null)
       jcas.throwFeatMissing("documentId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
@@ -97,13 +111,19 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   final Feature casFeat_documentUri;
   /** @generated */
   final int     casFeatCode_documentUri;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getDocumentUri(int addr) {
         if (featOkTst && casFeat_documentUri == null)
       jcas.throwFeatMissing("documentUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     return ll_cas.ll_getStringValue(addr, casFeatCode_documentUri);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setDocumentUri(int addr, String v) {
         if (featOkTst && casFeat_documentUri == null)
       jcas.throwFeatMissing("documentUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
@@ -115,13 +135,19 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   final Feature casFeat_collectionId;
   /** @generated */
   final int     casFeatCode_collectionId;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getCollectionId(int addr) {
         if (featOkTst && casFeat_collectionId == null)
       jcas.throwFeatMissing("collectionId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     return ll_cas.ll_getStringValue(addr, casFeatCode_collectionId);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setCollectionId(int addr, String v) {
         if (featOkTst && casFeat_collectionId == null)
       jcas.throwFeatMissing("collectionId", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
@@ -133,13 +159,19 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   final Feature casFeat_documentBaseUri;
   /** @generated */
   final int     casFeatCode_documentBaseUri;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public String getDocumentBaseUri(int addr) {
         if (featOkTst && casFeat_documentBaseUri == null)
       jcas.throwFeatMissing("documentBaseUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     return ll_cas.ll_getStringValue(addr, casFeatCode_documentBaseUri);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setDocumentBaseUri(int addr, String v) {
         if (featOkTst && casFeat_documentBaseUri == null)
       jcas.throwFeatMissing("documentBaseUri", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
@@ -151,13 +183,19 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
   final Feature casFeat_isLastSegment;
   /** @generated */
   final int     casFeatCode_isLastSegment;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public boolean getIsLastSegment(int addr) {
         if (featOkTst && casFeat_isLastSegment == null)
       jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     return ll_cas.ll_getBooleanValue(addr, casFeatCode_isLastSegment);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setIsLastSegment(int addr, boolean v) {
         if (featOkTst && casFeat_isLastSegment == null)
       jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
@@ -168,7 +206,10 @@ public class DocumentMetaData_Type extends DocumentAnnotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+   * @generated
+   * @param jcas JCas
+   * @param casType Type 
+   */
   public DocumentMetaData_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());

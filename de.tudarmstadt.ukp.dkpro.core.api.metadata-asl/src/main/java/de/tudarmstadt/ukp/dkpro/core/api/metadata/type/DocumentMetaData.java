@@ -18,7 +18,6 @@
 /* First created by JCasGen Mon Nov 08 23:55:50 CET 2010 */
 package de.tudarmstadt.ukp.dkpro.core.api.metadata.type;
 
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.cas.FSIterator;
@@ -58,23 +57,30 @@ public class DocumentMetaData
 	 */
 	protected DocumentMetaData() {}
 
-	/**
-	 * Internal - constructor used by generator
-	 *
-	 * @generated
-	 */
+	  /** Internal - constructor used by generator 
+	   * @generated
+	   * @param addr low level Feature Structure reference
+	   * @param type the type of this Feature Structure 
+	   */
 	public DocumentMetaData(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
 
-	/** @generated */
+	  
+	  /** @generated
+	   * @param jcas JCas to which this Feature Structure belongs 
+	   */
 	public DocumentMetaData(JCas jcas) {
     super(jcas);
     readObject();
   }
 
-	/** @generated */
+	  /** @generated
+	   * @param jcas JCas to which this Feature Structure belongs
+	   * @param begin offset to the begin spot in the SofA
+	   * @param end offset to the end spot in the SofA 
+	  */  
 	public DocumentMetaData(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
@@ -93,8 +99,8 @@ public class DocumentMetaData
 
 	/**
 	 * getter for documentTitle - gets The human readable title of the document.
-	 *
-	 * @generated
+   * @generated
+   * @return value of the feature 
 	 */
 	public String getDocumentTitle() {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentTitle == null) {
@@ -104,8 +110,8 @@ public class DocumentMetaData
 
 	/**
 	 * setter for documentTitle - sets The human readable title of the document.
-	 *
-	 * @generated
+   * @generated
+   * @param v value to set into the feature 
 	 */
 	public void setDocumentTitle(String v) {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentTitle == null) {
@@ -119,8 +125,8 @@ public class DocumentMetaData
 
 	/**
 	 * getter for documentId - gets The id of the document.
-	 *
-	 * @generated
+   * @generated
+   * @return value of the feature 
 	 */
 	public String getDocumentId() {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentId == null) {
@@ -130,8 +136,8 @@ public class DocumentMetaData
 
 	/**
 	 * setter for documentId - sets The id of the document.
-	 *
-	 * @generated
+   * @generated
+   * @param v value to set into the feature 
 	 */
 	public void setDocumentId(String v) {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentId == null) {
@@ -145,8 +151,8 @@ public class DocumentMetaData
 
 	/**
 	 * getter for documentUri - gets The URI of the document.
-	 *
-	 * @generated
+   * @generated
+   * @return value of the feature 
 	 */
 	public String getDocumentUri() {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentUri == null) {
@@ -156,8 +162,8 @@ public class DocumentMetaData
 
 	/**
 	 * setter for documentUri - sets The URI of the document.
-	 *
-	 * @generated
+   * @generated
+   * @param v value to set into the feature 
 	 */
 	public void setDocumentUri(String v) {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentUri == null) {
@@ -171,8 +177,8 @@ public class DocumentMetaData
 
 	/**
 	 * getter for collectionId - gets The ID of the whole document collection.
-	 *
-	 * @generated
+   * @generated
+   * @return value of the feature 
 	 */
 	public String getCollectionId() {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_collectionId == null) {
@@ -182,8 +188,8 @@ public class DocumentMetaData
 
 	/**
 	 * setter for collectionId - sets The ID of the whole document collection.
-	 *
-	 * @generated
+   * @generated
+   * @param v value to set into the feature 
 	 */
 	public void setCollectionId(String v) {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_collectionId == null) {
@@ -197,8 +203,8 @@ public class DocumentMetaData
 
 	/**
 	 * getter for documentBaseUri - gets Base URI of the document.
-	 *
-	 * @generated
+   * @generated
+   * @return value of the feature 
 	 */
 	public String getDocumentBaseUri() {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentBaseUri == null) {
@@ -208,8 +214,8 @@ public class DocumentMetaData
 
 	/**
 	 * setter for documentBaseUri - sets Base URI of the document.
-	 *
-	 * @generated
+   * @generated
+   * @param v value to set into the feature 
 	 */
 	public void setDocumentBaseUri(String v) {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_documentBaseUri == null) {
@@ -225,8 +231,8 @@ public class DocumentMetaData
 	 * getter for isLastSegment - gets CAS de-multipliers need to know whether a CAS is the last
 	 * multiplied segment. Thus CAS multipliers should set this field to true for the last CAS they
 	 * produce.
-	 *
-	 * @generated
+   * @generated
+   * @return value of the feature 
 	 */
 	public boolean getIsLastSegment() {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_isLastSegment == null) {
@@ -238,25 +244,27 @@ public class DocumentMetaData
 	 * setter for isLastSegment - sets CAS de-multipliers need to know whether a CAS is the last
 	 * multiplied segment. Thus CAS multipliers should set this field to true for the last CAS they
 	 * produce.
-	 *
-	 * @generated
-	 */
+   * @generated
+   * @param v value to set into the feature 
+1q	 */
 	public void setIsLastSegment(boolean v) {
     if (DocumentMetaData_Type.featOkTst && ((DocumentMetaData_Type)jcasType).casFeat_isLastSegment == null) {
         jcasType.jcas.throwFeatMissing("isLastSegment", "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData");
     }
     jcasType.ll_cas.ll_setBooleanValue(addr, ((DocumentMetaData_Type)jcasType).casFeatCode_isLastSegment, v);}
-        	/**
-	 * Create a new {@link DocumentMetaData} annotation in the given CAS. The meta data fields can
-	 * then be set on the returned object.
-	 *
-	 * @param aCas
-	 *            the CAS to create the meta data for.
-	 * @return a {@link DocumentMetaData} annotation that has already been added to the CAS indexes.
-	 * @author Richard Eckart de Castilho
-	 * @throws IllegalStateException
-	 *             if there is already a {@link DocumentMetaData} annotation
-	 */
+        	
+    /**
+     * Create a new {@link DocumentMetaData} annotation in the given CAS. The meta data fields can
+     * then be set on the returned object.
+     *
+     * @param aCas
+     *            the CAS to create the meta data for.
+     * @return a {@link DocumentMetaData} annotation that has already been added to the CAS indexes.
+     * @throws IllegalStateException
+     *             if there is already a {@link DocumentMetaData} annotation
+     * @throws CASException
+     *             if the JCas cannot be accessed from the provided CAS.
+     */
 	public static DocumentMetaData create(final CAS aCas)
 		throws IllegalStateException, CASException
 	{
@@ -278,7 +286,6 @@ public class DocumentMetaData
 	 * @param aJcas
 	 *            the CAS to create the meta data for.
 	 * @return a {@link DocumentMetaData} annotation that has already been added to the CAS indexes.
-	 * @author Richard Eckart de Castilho
 	 * @throws IllegalStateException
 	 *             if there is already a {@link DocumentMetaData} annotation
 	 */
@@ -324,7 +331,6 @@ public class DocumentMetaData
 	 *            the target.
 	 */
 	public static void copy(final JCas aSourceView, final JCas aTargetView)
-		throws AnalysisEngineProcessException
 	{
 		DocumentMetaData docMetaData = create(aTargetView);
 		DocumentMetaData dmd = get(aSourceView);
@@ -339,10 +345,10 @@ public class DocumentMetaData
 
 	/**
 	 * Get the {@link DocumentMetaData} from the CAS.
-	 *
+	 * @param aCas a CAS.
+	 * @return the {@link DocumentMetaData} from the CAS.
 	 * @throws IllegalArgumentException
 	 *             if no {@link DocumentMetaData} exists in the CAS.
-	 * @author Richard Eckart de Castilho
 	 */
 	public static DocumentMetaData get(final CAS aCas)
 	{
@@ -366,8 +372,8 @@ public class DocumentMetaData
 
 	/**
 	 * Get the {@link DocumentAnnotation} from the CAS if it already exists.
-	 *
-	 * @author Richard Eckart de Castilho
+     * @param aCas a CAS.
+	 * @return the {@link DocumentAnnotation} from the CAS.
 	 */
 	private static DocumentAnnotation getDocumentAnnotation(final CAS aCas)
 	{
@@ -391,9 +397,10 @@ public class DocumentMetaData
 	/**
 	 * Get the {@link DocumentMetaData} from the CAS.
 	 *
+     * @param aJCas the JCas.
+     * @return the {@link DocumentMetaData} from the CAS.
 	 * @throws IllegalArgumentException
 	 *             if no {@link DocumentMetaData} exists in the CAS.
-	 * @author Richard Eckart de Castilho
 	 */
 	public static DocumentMetaData get(final JCas aJCas)
 	{
