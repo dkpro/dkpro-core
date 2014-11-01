@@ -39,20 +39,29 @@ public class Compound extends Annotation {
 	 * @generated */
 	protected Compound() {/* intentionally empty block */}
 
-	/** Internal - constructor used by generator
-	 * @generated */
+	  /** Internal - constructor used by generator 
+	   * @generated
+	   * @param addr low level Feature Structure reference
+	   * @param type the type of this Feature Structure 
+	   */
 	public Compound(int addr, TOP_Type type) {
 		super(addr, type);
 		readObject();
 	}
 
-	/** @generated */
+	  /** @generated
+	   * @param jcas JCas to which this Feature Structure belongs 
+	   */
 	public Compound(JCas jcas) {
 		super(jcas);
 		readObject();
 	}
 
-	/** @generated */
+	  /** @generated
+	   * @param jcas JCas to which this Feature Structure belongs
+	   * @param begin offset to the begin spot in the SofA
+	   * @param end offset to the end spot in the SofA 
+	  */  
 	public Compound(JCas jcas, int begin, int end) {
 		super(jcas);
 		setBegin(begin);
@@ -72,7 +81,9 @@ public class Compound extends Annotation {
 	//* Feature: splits
 
 	/** getter for splits - gets A word that can be decomposed into different parts.
-	 * @generated */
+   * @generated
+   * @return value of the feature 
+   */
 	public FSArray getSplits() {
 		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
 			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
@@ -80,7 +91,9 @@ public class Compound extends Annotation {
 		return (FSArray)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits)));}
 
 	/** setter for splits - sets A word that can be decomposed into different parts.
-	 * @generated */
+   * @generated
+   * @param v value to set into the feature 
+   */
 	public void setSplits(FSArray v) {
 		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
 			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
@@ -88,7 +101,10 @@ public class Compound extends Annotation {
 		jcasType.ll_cas.ll_setRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits, jcasType.ll_cas.ll_getFSRef(v));}
 
 	/** indexed getter for splits - gets an indexed value - A word that can be decomposed into different parts.
-	 * @generated */
+   * @generated
+   * @param i index in the array to get
+   * @return value of the element at index i 
+   */
 	public Split getSplits(int i) {
 		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
 			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
@@ -97,7 +113,10 @@ public class Compound extends Annotation {
 		return (Split)(jcasType.ll_cas.ll_getFSForRef(jcasType.ll_cas.ll_getRefArrayValue(jcasType.ll_cas.ll_getRefValue(addr, ((Compound_Type)jcasType).casFeatCode_splits), i)));}
 
 	/** indexed setter for splits - sets an indexed value - A word that can be decomposed into different parts.
-	 * @generated */
+   * @generated
+   * @param i index in the array to set
+   * @param v value to set into the array 
+   */
 	public void setSplits(int i, Split v) {
 		if (Compound_Type.featOkTst && ((Compound_Type)jcasType).casFeat_splits == null) {
 			jcasType.jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
@@ -107,10 +126,7 @@ public class Compound extends Annotation {
 
 
     /**
-     * 
      * Enum for all possible split levels for decompounding
-     * 
-     * @author erbs
      */
     public enum CompoundSplitLevel
     {
@@ -120,10 +136,10 @@ public class Compound extends Annotation {
     /**
      * 
      * Returns the splits from each leave from the split tree, excluding the linking morphemes
+     * @param splitLevel the split level.
      * 
      * @return An array with the splits from each leave from the split tree.
      */
-
     public Split[] getSplitsWithoutMorpheme(CompoundSplitLevel splitLevel)
     {
         List<Split> splits = getSplits(createSplitsFromFSArray(getSplits()), false, splitLevel);
@@ -133,6 +149,7 @@ public class Compound extends Annotation {
     /**
      * 
      * Returns the splits from each leave from the split tree, including the linking morphemes
+     * @param splitLevel the split level.
      * 
      * @return An array with the splits from each leave from the split tree.
      * 

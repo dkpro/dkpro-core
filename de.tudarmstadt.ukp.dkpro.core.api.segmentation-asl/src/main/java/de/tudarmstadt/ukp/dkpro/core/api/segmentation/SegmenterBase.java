@@ -183,6 +183,7 @@ extends JCasAnnotator_ImplBase
      * @param text the text.
      * @param aBegin the zone begin.
      * @param aEnd the zone end.
+     * @param aEndPlusOne no idea...
      */
 	protected void limit(String text, AtomicInteger aBegin, AtomicInteger aEnd,
 			boolean aEndPlusOne)
@@ -251,6 +252,8 @@ extends JCasAnnotator_ImplBase
 
 	/**
 	 * Remove trailing or leading whitespace from the annotation.
+	 * @param aText the text.
+	 * @param aSpan the offsets.
 	 */
 	public void trim(String aText, int[] aSpan)
 	{
@@ -310,6 +313,8 @@ extends JCasAnnotator_ImplBase
 	/**
 	 * Get the locale from the parameter, then from the document if available.
 	 * If no locale is set get the default locale from the VM.
+	 * @param aJCas the JCas.
+	 * @return the locale.
 	 */
 	public Locale getLocale(JCas aJCas)
 	{

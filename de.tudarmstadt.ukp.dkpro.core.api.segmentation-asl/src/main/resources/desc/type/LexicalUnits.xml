@@ -66,19 +66,6 @@
       </features>
     </typeDescription>
     <typeDescription>
-      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound</name>
-      <description>This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two Splits.</description>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
-      <features>
-        <featureDescription>
-          <name>splits</name>
-          <description>A word that can be decomposed into different parts.</description>
-          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
-          <elementType>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</elementType>
-        </featureDescription>
-      </features>
-    </typeDescription>
-    <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</name>
       <description>Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case"; "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
 &lt;p&gt;</description>
