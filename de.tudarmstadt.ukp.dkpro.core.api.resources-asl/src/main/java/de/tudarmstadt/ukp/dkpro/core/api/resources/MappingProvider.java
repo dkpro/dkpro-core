@@ -65,7 +65,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
 	 * 
 	 * @param aTag a tag.
 	 * @return the type
-	 * @throw IllegalStateException if the type could not be located
+	 * @throws IllegalStateException if the type could not be located
 	 */
 	public Type getTagType(String aTag)
 	{
@@ -86,7 +86,7 @@ public class MappingProvider extends CasConfigurableProviderBase<Map<String, Str
      * 
      * @param aTag a tag.
      * @return the type
-     * @throw IllegalStateException if the type could not be located
+     * @throws IllegalStateException if the type could not be located
      */
     public String getTagTypeName(String aTag)
     {
