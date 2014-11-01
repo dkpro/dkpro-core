@@ -364,6 +364,10 @@ public class MstParser
     /**
      * Checks if the data alphabet loaded into the pipe contains features that are only generated
      * when a second-order model has been trained.
+     * 
+     * @param aPipe
+     *            the parser pipeline.
+     * @return if the pipeline uses a second-order model.
      */
     private boolean isSecondOrderModel(DependencyPipe aPipe)
     {

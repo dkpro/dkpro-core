@@ -152,6 +152,9 @@ public class MstParserTest
     /**
      * The POS tags produced by Hunpos are MSD tags. This model here only uses the first character
      * of these MSD tags. Thus, we have a tag mismatch and the results here are completely bogus.
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     @Test
     public void testCroatianMte5Pos()
@@ -198,6 +201,9 @@ public class MstParserTest
 	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
 	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
 	 * dependency, begin of the head, end of the head
+     * 
+     * @throws Exception
+     *             if an error occurs.
 	 */
 	@Test
 	public void testEnglishDefault()
@@ -254,6 +260,9 @@ public class MstParserTest
      * This method runs the MSTParser for an example sentence and checks if it returns the correct
      * annotations. An annotation consists of: dependency type, begin of dependency, end of
      * dependency, begin of the head, end of the head
+     * 
+     * @throws Exception
+     *             if an error occurs.
      */
     @Test
     public void testEnglishSample()
@@ -299,9 +308,19 @@ public class MstParserTest
         AssertAnnotations.assertTagset(Dependency.class, "conll2008", depTags, jcas);
     }
 
-	/**
-	 * Generates a JCas from the input text and annotates it with dependencies.
-	 */
+    /**
+     * Generates a JCas from the input text and annotates it with dependencies.
+     * 
+     * @param aLanguage
+     *            the text language.
+     * @param aVariant
+     *            the model variant.
+     * @param aText
+     *            the text.
+     * @return the JCas.
+     * @throws Exception
+     *             if an error occurs.
+     */
 	private JCas runTest(String aLanguage, String aVariant, String aText)
 		throws Exception
 	{
