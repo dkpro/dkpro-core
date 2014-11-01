@@ -23,7 +23,8 @@ public class Compound_Type extends Annotation_Type {
   /** @generated */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
-      public FeatureStructure createFS(int addr, CASImpl cas) {
+      @Override
+    public FeatureStructure createFS(int addr, CASImpl cas) {
   			 if (Compound_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
   		     FeatureStructure fs = Compound_Type.this.jcas.getJfsFromCaddr(addr);
@@ -48,19 +49,29 @@ public class Compound_Type extends Annotation_Type {
   final Feature casFeat_splits;
   /** @generated */
   final int     casFeatCode_splits;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public int getSplits(int addr) {
         if (featOkTst && casFeat_splits == null)
       jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
     return ll_cas.ll_getRefValue(addr, casFeatCode_splits);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setSplits(int addr, int v) {
         if (featOkTst && casFeat_splits == null)
       jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
     ll_cas.ll_setRefValue(addr, casFeatCode_splits, v);}
     
-   /** @generated */
+  /** @generated
+  * @param addr low level Feature Structure reference
+  * @param i index of item in the array
+  * @return value at index i in the array 
+  */
   public int getSplits(int addr, int i) {
         if (featOkTst && casFeat_splits == null)
       jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
@@ -70,7 +81,11 @@ public class Compound_Type extends Annotation_Type {
   return ll_cas.ll_getRefArrayValue(ll_cas.ll_getRefValue(addr, casFeatCode_splits), i);
   }
    
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param i index of item in the array
+   * @param v value to set
+   */ 
   public void setSplits(int addr, int i, int v) {
         if (featOkTst && casFeat_splits == null)
       jcas.throwFeatMissing("splits", "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound");
@@ -84,7 +99,10 @@ public class Compound_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+   * @generated
+   * @param jcas JCas
+   * @param casType Type 
+   */
   public Compound_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());
