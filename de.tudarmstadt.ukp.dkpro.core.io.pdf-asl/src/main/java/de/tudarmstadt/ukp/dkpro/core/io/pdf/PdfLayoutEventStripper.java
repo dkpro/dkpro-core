@@ -56,23 +56,15 @@ import org.apache.pdfbox.util.TextPosition;
  * This class is based on the {@link PDFTextStripper} class and was substantially modified and
  * enhanced for basic paragraph and heading detection. Unfortunately it was not possible to add
  * these enhancements through sub-classing, thus the code was copied and adapted.
- * 
- * @author Richard Eckart de Castilho
  */
 public abstract class PdfLayoutEventStripper
     extends PDFStreamEngine
 {
-    /**
-     * @author Richard Eckart de Castilho
-     */
     public static enum Values
     {
         LEFT, RIGHT, TOP, BOTTOM, LINESPACING, LINEHEIGHT
     }
 
-    /**
-     * @author Richard Eckart de Castilho
-     */
     public static enum Style
     {
         PAGE, PARAGRAPH, HEADING
@@ -247,6 +239,11 @@ public abstract class PdfLayoutEventStripper
 
     /**
      * This method tries do detect headings and paragraphs and line boundaries.
+     * 
+     * @param textList
+     *            the text.
+     * @throws IOException
+     *             if there is an error writing to the stream.
      */
     protected void processArticle(final List<TextPosition> textList)
         throws IOException
@@ -489,6 +486,7 @@ public abstract class PdfLayoutEventStripper
      *            The second number to compare to.
      * @param variance
      *            The allowed variance.
+     * @return if the number is within the specified variance.
      */
     private static boolean within(final float first, final float second, final float variance)
     {
@@ -525,7 +523,9 @@ public abstract class PdfLayoutEventStripper
      * Detects whether text in two positions is on the same line. This method is a bit fuzzy so we
      * also get potential superscripts and subscripts.
      * 
-     * @author Richard Eckart
+     * @param cur current position.
+     * @param prev previous position.
+     * @return if both are in the same line.
      */
     private static boolean isSameLine(final TextPosition cur, final TextPosition prev)
     {
@@ -552,6 +552,14 @@ public abstract class PdfLayoutEventStripper
     /**
      * Tests if two objects are vertically adjacent or if they are so far away from each other that
      * they have to be considered different blocks.
+     * 
+     * @param cur_top
+     *            current top.
+     * @param prev_top
+     *            previous top.
+     * @param spacing
+     *            spacing.
+     * @return if the two objects are verticalla adjacent.
      */
     private static boolean isVerticallyAdjacent(final float cur_top, final float prev_top,
             final float spacing)
@@ -577,6 +585,12 @@ public abstract class PdfLayoutEventStripper
 
     /**
      * Check if the current fragment is in a new column.
+     * 
+     * @param cur
+     *            current text position.
+     * @param block
+     *            current block.
+     * @return if the fragment is in a new column.
      */
     private static boolean isColumnSwitch(final TextPosition cur, final Block block)
     {
@@ -595,9 +609,15 @@ public abstract class PdfLayoutEventStripper
     }
 
     /**
-     * Determine wether we need to insert a word separator between the two positions or not.
+     * Determine whether we need to insert a word separator between the two positions or not.
      * 
      * Adapted from PDFBox PDFTextStripper.flushText()
+     * 
+     * @param cur
+     *            current position.
+     * @param prev
+     *            previous position.
+     * @return if the two positions are immediately adjacent.
      */
     private static boolean isNextChar(final TextPosition cur, final TextPosition prev)
     {
@@ -654,6 +674,14 @@ public abstract class PdfLayoutEventStripper
 
     /**
      * Return a block with the probable linespacing, lineheight and left and right borders.
+     * 
+     * @param textList
+     *            text.
+     * @param blk_start
+     *            block start.
+     * @param depth
+     *            depth.
+     * @return structure prediction.
      */
     private Prediction predictGeneralStructure(final List<TextPosition> textList,
             final int blk_start, final int depth)
@@ -740,15 +768,19 @@ public abstract class PdfLayoutEventStripper
     /**
      * Start a new region.
      * 
+     * @param style
+     *            the style.
      * @throws IOException
      *             If there is any error writing to the stream.
      */
-    protected abstract void startRegion(Style style)
+   protected abstract void startRegion(Style style)
         throws IOException;
 
     /**
      * End a region.
      * 
+     * @param style
+     *            the style.
      * @throws IOException
      *             If there is any error writing to the stream.
      */
@@ -758,6 +790,12 @@ public abstract class PdfLayoutEventStripper
     /**
      * Start a new page.
      * 
+     * @param firstPage
+     *            first page.
+     * @param lastPage
+     *            last page.
+     * @param currentPage
+     *            current page.
      * @param page
      *            The page we are about to process.
      * 
@@ -770,6 +808,12 @@ public abstract class PdfLayoutEventStripper
     /**
      * End a page.
      * 
+     * @param firstPage
+     *            first page.
+     * @param lastPage
+     *            last page.
+     * @param currentPage
+     *            current page.
      * @param page
      *            The page we are about to process.
      * 
@@ -1008,6 +1052,10 @@ public abstract class PdfLayoutEventStripper
         /**
          * Return true if the text position is within the line height boundaries. Left and right
          * boundaries are not checked.
+         * 
+         * @param pos
+         *            text position.
+         * @return if the position is within the line.
          */
         boolean withinLine(final TextPosition pos)
         {
