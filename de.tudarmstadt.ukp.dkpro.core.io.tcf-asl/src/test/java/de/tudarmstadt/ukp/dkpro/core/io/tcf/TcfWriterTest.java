@@ -36,8 +36,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class TcfWriterTest
 {
     /**
-     * @see <a href="https://code.google.com/p/dkpro-core-asl/issues/detail?id=436">Issue 436:
-     * XML preamble written twice if original file exists and is not TCF</a>
+     * @throws Exception
+     *             if an error occurs.
+     * @see <a href="https://code.google.com/p/dkpro-core-asl/issues/detail?id=436">Issue 436: XML
+     *      preamble written twice if original file exists and is not TCF</a>
      */
     @Test
     public void testOriginalNotTcf()
