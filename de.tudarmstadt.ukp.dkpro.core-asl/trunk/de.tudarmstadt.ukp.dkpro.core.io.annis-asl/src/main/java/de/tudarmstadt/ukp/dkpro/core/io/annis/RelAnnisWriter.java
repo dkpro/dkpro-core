@@ -221,6 +221,9 @@ public class RelAnnisWriter
      * Traverse the constituent structure beginning from all roots. Eventually ending at token
      * level, so this method must be called, even when not wanting to write the constituent
      * structure.
+     * 
+     * @param jcas
+     *            the CAS.
      */
     // id | text-id (text.tab) | corpus-id (corpus.tab) | annotation engine |
     // tok_someid | t.begin | t.end | sentence-position | continuous (true if
@@ -236,7 +239,9 @@ public class RelAnnisWriter
     /**
      * Recursively traverse the constituent structure, writing<br>
      * component.tab, edge_annotation.tab, node.tab, node_annotation.tab, rank.tab
-     *
+     * 
+     * @param jcas
+     *            the CAS.
      * @param currAnno
      *            the parent annotation from where to start the traversal
      * @param parent_rankPre
@@ -320,6 +325,9 @@ public class RelAnnisWriter
 
     /**
      * Traverse the dependency structure beginning from all "roots", i.e. non-governed tokens.
+     * 
+     * @param jcas
+     *            the CAS.
      */
     private void export_dependencies(JCas jcas)
     {
@@ -405,6 +413,9 @@ public class RelAnnisWriter
     /**
      * Write text.tab<br>
      * id | some-text-identifier | text
+     * 
+     * @param jcas
+     *            the CAS.
      */
     private void export_text(JCas jcas)
     {
