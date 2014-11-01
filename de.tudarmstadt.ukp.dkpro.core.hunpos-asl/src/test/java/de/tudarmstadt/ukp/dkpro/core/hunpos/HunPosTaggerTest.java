@@ -186,6 +186,7 @@ public class HunPosTaggerTest
 
     /**
      * Generate a very large document and test it.
+     * @throws Exception if an error occurs.
      */
     @Test
     @Ignore("Takes too long")
@@ -224,6 +225,7 @@ public class HunPosTaggerTest
 
     /**
      * Test using the same AnalysisEngine multiple times.
+     * @throws Exception if an error occurs.
      */
     @Test
     @Ignore("Takes too long")
