@@ -123,6 +123,11 @@ public class TcfReader
      * This method builds texts from the {@link eu.clarin.weblicht.wlfxb.tc.api.Token} annotation
      * layer. The getText Method of {@link TextCorpusStreamed} is not used as some tokens, such as
      * special characters represented differently than in the original text.
+     * 
+     * @param aJCas
+     *            the JCas.
+     * @param aCorpusData
+     *            the TCF document.
      */
     private void convertText(JCas aJCas, TextCorpus aCorpusData)
     {
@@ -142,6 +147,10 @@ public class TcfReader
     /**
      * Convert TCF Tokens Layer to CAS Token Annotation.
      * 
+     * @param aJCas
+     *            the JCas.
+     * @param aCorpusData
+     *            the TCF document.
      * @return returns {@code Map} of (token_id, Token), for later references
      */
     private Map<String, Token> convertTokens(JCas aJCas, TextCorpus aCorpusData)
@@ -342,6 +351,13 @@ public class TcfReader
      * <b>targets</b> alongside the <b>type</b> and <b>relations in different maps</b> <br>
      * Second, an iteration is made through all the maps and the {@link CoreferenceChain} and
      * {@link CoreferenceLink} annotations are constructed.
+     * 
+     * @param aJCas
+     *            the JCas.
+     * @param aCorpusData
+     *            the TCF document.
+     * @param aTokens
+     *            id/token map.
      */
     private void convertCoreference(JCas aJCas, TextCorpus aCorpusData,
             Map<String, Token> aTokens)
@@ -413,6 +429,7 @@ public class TcfReader
      *            list of span {@link eu.clarin.weblicht.wlfxb.tc.api.Token}s
      * @param aAllTokens
      *            all available tokens in the file
+     * @return the offsets.
      */
     private int[] getOffsets(eu.clarin.weblicht.wlfxb.tc.api.Token[] aSpanTokens,
             Map<String, Token> aAllTokens)
@@ -433,6 +450,7 @@ public class TcfReader
      *            list of span token ids. [t_3,_t_5, t_1]
      * @param aAllTokens
      *            all available tokens in the file
+     * @return the offsets.
      */
     private int[] getOffsets(String[] aSpanTokens, Map<String, Token> aAllTokens)
     {
