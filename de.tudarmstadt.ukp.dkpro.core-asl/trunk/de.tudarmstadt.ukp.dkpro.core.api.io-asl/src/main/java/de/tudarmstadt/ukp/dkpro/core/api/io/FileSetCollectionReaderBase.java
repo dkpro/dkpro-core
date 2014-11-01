@@ -224,10 +224,17 @@ public abstract class FileSetCollectionReaderBase
 		return fileSetIterator.hasNext();
 	}
 
-	/**
-	 * Initialize the {@link DocumentMetaData}. This must be called before setting the
-	 * document text, otherwise the end feature of this annotation will not be set correctly.
-	 */
+    /**
+     * Initialize the {@link DocumentMetaData}. This must be called before setting the document
+     * text, otherwise the end feature of this annotation will not be set correctly.
+     * 
+     * @param aCas
+     *            the CAS.
+     * @param aFile
+     *            the file from which the CAS is initialized.
+     * @param aQualifier
+     *            a qualifier if multiple CASes are generated from the same file.
+     */
 	protected void initCas(CAS aCas, FileResource aFile, String aQualifier)
 	{
 		String qualifier = aQualifier != null ? "#"+aQualifier : "";

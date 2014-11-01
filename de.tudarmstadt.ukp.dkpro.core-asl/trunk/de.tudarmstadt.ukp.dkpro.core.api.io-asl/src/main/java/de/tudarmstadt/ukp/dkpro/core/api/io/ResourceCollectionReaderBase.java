@@ -266,6 +266,8 @@ public abstract class ResourceCollectionReaderBase
      * @param aLocation
      *            the location.
      * @return an URL.
+     * @throws MalformedURLException
+     *             if the location cannot be converted to a valid URL.
      */
     protected String locationToUrl(String aLocation)
         throws MalformedURLException
@@ -330,6 +332,8 @@ public abstract class ResourceCollectionReaderBase
     /**
      * Get the base location used by the reader. This location always ends in a / if it is set at
      * all. If there is no base, an empty string is returned.
+     * 
+     * @return the base location used by the reader.
      */
     protected String getBase()
     {
@@ -519,6 +523,8 @@ public abstract class ResourceCollectionReaderBase
      * @param aFileOrDir
      *            if true try to return only files, if false try to return only dirs
      * @return the URI of the resource
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     private URI getUri(org.springframework.core.io.Resource aResource, boolean aFileOrDir)
         throws IOException
@@ -551,6 +557,11 @@ public abstract class ResourceCollectionReaderBase
     /**
      * Initialize the {@link DocumentMetaData}. This must be called before setting the document
      * text, otherwise the end feature of this annotation will not be set correctly.
+     * 
+     * @param aCas
+     *            the CAS.
+     * @param aResource
+     *            the resource from which the CAS is initialized.
      */
     protected void initCas(CAS aCas, Resource aResource)
     {
@@ -560,6 +571,13 @@ public abstract class ResourceCollectionReaderBase
     /**
      * Initialize the {@link DocumentMetaData}. This must be called before setting the document
      * text, otherwise the end feature of this annotation will not be set correctly.
+     * 
+     * @param aCas
+     *            the CAS.
+     * @param aResource
+     *            the resource from which the CAS is initialized.
+     * @param aQualifier
+     *            a qualifier if multiple CASes are generated from the same file.
      */
     protected void initCas(CAS aCas, Resource aResource, String aQualifier)
     {
