@@ -5,7 +5,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * You may obtain a copy of the License atya
  *
  *   http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -30,7 +30,8 @@ import java.util.TreeMap;
 /**
  * A HashMap-based Trie. Zero-length or null keys are not allowed. Null values are allowed.
  * 
- * @author Richard Eckart
+ * @param <V>
+ *            the value type.
  */
 public class Trie<V>
 // implements Map<CharSequence, V>
@@ -72,6 +73,11 @@ public class Trie<V>
     }
 
     /**
+     * @param key
+     *            the key.
+     * @param value
+     *            the value.
+     * @return the old value.
      * @see java.util.Map#put(java.lang.Object, java.lang.Object)
      */
     public V put(final CharSequence key, final V value)
@@ -112,6 +118,12 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie starting at the given
      * offset in the key string.
+     * 
+     * @param key
+     *            the key.
+     * @param offset
+     *            the offset.
+     * @return the node.
      */
     public Node getNode(final CharSequence key, final int offset)
     {
@@ -146,6 +158,10 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie. This is the same as
      * calling get(key, 0, key.length()).
+     * 
+     * @param key
+     *            the key.
+     * @return the node.
      */
     public Node getNode(final CharSequence key)
     {
@@ -157,6 +173,14 @@ public class Trie<V>
      * offset in the key string using a specified number of characters.
      * 
      * Returns the node even if there is no value set at that point of the Trie!
+     * 
+     * @param key
+     *            the key.
+     * @param offset
+     *            the offset.
+     * @param length
+     *            the length to match.
+     * @return the node.
      */
     private Node _getNode(final CharSequence key, final int offset, final int length)
     {
@@ -189,6 +213,14 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie starting at the given
      * offset in the key string using a specified number of characters.
+     * 
+     * @param key
+     *            the key.
+     * @param offset
+     *            the offset.
+     * @param length
+     *            the length.
+     * @return the node.
      */
     public Node getNode(final CharSequence key, final int offset, final int length)
     {
@@ -211,6 +243,10 @@ public class Trie<V>
 
     /**
      * Checks if the given string is a prefix of a key in the Trie.
+     * 
+     * @param prefix
+     *            the prefix.
+     * @return if the prefix is in the trie.
      */
     public boolean containsPrefix(final CharSequence prefix)
     {
@@ -220,6 +256,14 @@ public class Trie<V>
     /**
      * Checks if the given character sequence matches against the trie starting at the given offset
      * in the key string using a specified number of characters.
+     * 
+     * @param prefix
+     *            the prefix.
+     * @param offset
+     *            the offset.
+     * @param length
+     *            the length to match.
+     * @return whether the prefix is in the trie.
      */
     public boolean containsPrefix(final CharSequence prefix, final int offset, final int length)
     {
