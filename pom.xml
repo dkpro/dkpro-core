@@ -798,9 +798,13 @@
 					<artifactId>jcasgen-maven-plugin</artifactId>
 					<version>${uima.version}</version>
 					<configuration>
+						<limitToProject>true</limitToProject>
 						<typeSystemIncludes>
 							<include>src/main/resources/desc/type/**/*.xml</include>
 						</typeSystemIncludes>
+						<typeSystemExcludes>
+							<exclude>src/main/resources/desc/type/**/*_customized.xml</exclude>
+						</typeSystemExcludes>
 					</configuration>
 					<executions>
 						<execution>
