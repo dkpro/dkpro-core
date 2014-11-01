@@ -411,12 +411,15 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 		currentArticleIndex++;
 	}
 
-	/**
-	 * Only accept article pages and (if includeDiscussions=true) talk pages
-	 *
-	 * @param page the page that should be checked for validity
-	 * @return true, if page is valid. false, else
-	 */
+    /**
+     * Only accept article pages and (if includeDiscussions=true) talk pages
+     *
+     * @param page
+     *            the page that should be checked for validity
+     * @return true, if page is valid. false, else
+     * @throws WikiTitleParsingException
+     *             if the page title cannot be parsed.
+     */
 	private boolean isValidPage(Page page)
 		throws WikiTitleParsingException
 	{
@@ -455,21 +458,25 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
         return text;
     }
 
-	/**
-	 * Double checks a list of page ids and checks for each id that belongs to a
-	 * discussion page the corresponding article if it is blacklisted<br/>
-	 * <br/>
-	 * This is an rather expensive operation!
-	 *
-	 * @param idsToDoubleCheck
-	 *            the set of ids that should be double checked
-	 * @param blIds
-	 *            a set with ids of blacklisted articles
-	 * @return a the list of articles after double checking
-	 */
-	private Set<Integer> doubleCheckAssociatedArticles(Set<Integer> idsToDoubleCheck, Set<Integer> blIds) throws WikiApiException{
-
-		if(idsToDoubleCheck.size()>20000){
+    /**
+     * Double checks a list of page ids and checks for each id that belongs to a discussion page the
+     * corresponding article if it is blacklisted<br/>
+     * <br/>
+     * This is an rather expensive operation!
+     *
+     * @param idsToDoubleCheck
+     *            the set of ids that should be double checked
+     * @param blIds
+     *            a set with ids of blacklisted articles
+     * @return a the list of articles after double checking
+     * @throws WikiApiException
+     *             if the wiki data cannot be accessed.
+     */
+    private Set<Integer> doubleCheckAssociatedArticles(Set<Integer> idsToDoubleCheck,
+            Set<Integer> blIds)
+        throws WikiApiException
+    {
+        if (idsToDoubleCheck.size() > 20000) {
 			getLogger().info("You want to double check "+idsToDoubleCheck.size()+" articles in the whitelist. This can take a very long time."+System.getProperty("line.separator")+
 					"If you do not need ALL pages that meet the specified requirements, you might speed things up by setting PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ.");
 		}
