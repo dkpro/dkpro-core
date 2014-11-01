@@ -884,6 +884,7 @@
 								</goals>
 								<configuration>
 									<excludes>
+										<exclude>.activate-run-jcasgen</exclude>
 										<exclude>.gitignore</exclude>
 										<!-- maven config files -->
 										<exclude>src/filter/**/*</exclude>
