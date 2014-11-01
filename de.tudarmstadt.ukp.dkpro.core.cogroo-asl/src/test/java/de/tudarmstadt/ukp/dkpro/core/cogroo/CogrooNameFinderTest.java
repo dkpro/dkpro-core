@@ -33,6 +33,7 @@ public class CogrooNameFinderTest
     /**
      * The CogRoo name finder is a bit strange because it appears to find only multi-word named
      * entities. It also doesn't classify them.
+     * @throws Exception if a problem occurs.
      */
     @Test
     public void testPortuguese()
