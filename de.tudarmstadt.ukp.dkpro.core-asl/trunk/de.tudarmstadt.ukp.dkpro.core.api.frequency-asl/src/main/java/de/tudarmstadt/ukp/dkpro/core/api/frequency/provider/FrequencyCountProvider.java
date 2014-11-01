@@ -28,10 +28,13 @@ public interface FrequencyCountProvider
      *
      * @param phrase
      *            phrase to search
-     *            
+     * 
      * @return frequency of the phrase. Returns 0 if the phrase does not exist in the corpus.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public long getFrequency(String phrase) throws IOException;
+    public long getFrequency(String phrase)
+        throws IOException;
 
     /**
      * Get the probability (=normalized frequency) for a phrase.<br>
@@ -40,49 +43,87 @@ public interface FrequencyCountProvider
      *
      * @param phrase
      *            phrase to search
-     *            
-     * @return probability (=normalized frequency) of the phrase. Returns null if the phrase does not exist in the corpus.
+     * 
+     * @return probability (=normalized frequency) of the phrase. Returns null if the phrase does
+     *         not exist in the corpus.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public double getProbability(String phrase) throws IOException;
+    public double getProbability(String phrase)
+        throws IOException;
 
     /**
      * Get the log probability for a phrase
      *
      * @param phrase
      *            phrase to search
-     *            
+     * 
      * @return The log probability of the. Returns 0 if the phrase does not exist in the corpus.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public double getLogProbability(String phrase) throws IOException;
-    
+    public double getLogProbability(String phrase)
+        throws IOException;
+
     /**
      * @return The number of tokens in the corpus.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public long getNrOfTokens() throws IOException;
-    
+    public long getNrOfTokens()
+        throws IOException;
+
     /**
      * Returns the number of ngrams of a given size in the corpus.
+     * 
+     * @param n
+     *            the ngram size.
+     * @return the number of ngrams.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public long getNrOfNgrams(int n) throws IOException;
+    public long getNrOfNgrams(int n)
+        throws IOException;
 
     /**
      * Returns the number of distinct ngrams of a given size in the corpus.
+     * 
+     * @param n
+     *            the ngram size.
+     * @return the number of ngrams.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public long getNrOfDistinctNgrams(int n) throws IOException;
-    
+    public long getNrOfDistinctNgrams(int n)
+        throws IOException;
+
     /**
      * Returns an iterator over all ngrams of a given size in the corpus.
+     * 
+     * @param n
+     *            the ngram size.
+     * @return an iterator over the ngrams.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public Iterator<String> getNgramIterator(int n) throws IOException;
-    
+    public Iterator<String> getNgramIterator(int n)
+        throws IOException;
+
     /**
      * Returns the language for which the frequencies are provided.
+     * 
+     * @return the language.
+     * @throws IOException
+     *             if the information cannot be retrieved.
      */
-    public String getLanguage() throws IOException;
-        
+    public String getLanguage()
+        throws IOException;
+
     /**
      * Returns an ID that identifies the frequency provider
+     * 
+     * @return the ID.
      */
     public String getID();
-    
+
 }

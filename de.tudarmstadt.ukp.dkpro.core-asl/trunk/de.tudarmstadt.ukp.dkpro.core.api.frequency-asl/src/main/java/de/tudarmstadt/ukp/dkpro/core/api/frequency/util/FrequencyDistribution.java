@@ -230,14 +230,20 @@ public class FrequencyDistribution<T>
         return sb.toString();
     }
 
-    /** Returns the highest frequency that is currently stored. */
+    /**
+     * Returns the highest frequency that is currently stored.
+     * 
+     * @return highest frequency that is currently stored.
+     */
     public long getMaxFreq() {
         return maxFreq;
     }
     
     /**
-     * Returns the sample which has currently the highest frequency.
-     * If there is more than one sample which share the highest frequency, returns the one that was added first. 
+     * Returns the sample which has currently the highest frequency. If there is more than one
+     * sample which share the highest frequency, returns the one that was added first.
+     * 
+     * @return the sample which has currently the highest frequency
      */
     public T getSampleWithMaxFreq() {
         return maxSample;
@@ -276,8 +282,12 @@ public class FrequencyDistribution<T>
     }
     
     /**
-     * Returns the n most frequent samples in the distribution.
-     * The ordering within in a group of samples with the same frequency is undefined.
+     * Returns the n most frequent samples in the distribution. The ordering within in a group of
+     * samples with the same frequency is undefined.
+     * 
+     * @param n
+     *            the numer of most frequent samples to return.
+     * @return the n most frequent samples in the distribution.
      */
     public List<T> getMostFrequentSamples(int n) {
 

@@ -143,6 +143,11 @@ public class ConditionalFrequencyDistribution<C, V>
     
     /**
      * Directly set the frequency distribution for a given condition.
+     * 
+     * @param condition
+     *            the condition.
+     * @param fd
+     *            the distribution.
      */
     public void setFrequencyDistribution(C condition, FrequencyDistribution<V> fd) {
         cfd.put(condition, fd);
@@ -246,7 +251,8 @@ public class ConditionalFrequencyDistribution<C, V>
     /**
      * Remove a previously registered condition
      * 
-     * @param the condition to be removed
+     * @param condition
+     *            the condition to be removed
      */
     public void removeCondition(C condition) {
     	if (cfd.containsKey(condition)) {
