@@ -45,9 +45,16 @@ public abstract class JCasFileSetCollectionReader_ImplBase
 		}
 	}
 
-	/**
-	 * Subclasses implement this method rather than {@link #getNext(CAS)}
-	 */
+    /**
+     * Subclasses implement this method rather than {@link #getNext(CAS)}
+     * 
+     * @param aJCas
+     *            the JCas.
+     * @throws IOException
+     *             if an i/o error occurs reading the data.
+     * @throws CollectionException
+     *             if another type of error occurs.
+     */
 	public abstract void getNext(JCas aJCas)
 		throws IOException, CollectionException;
 	

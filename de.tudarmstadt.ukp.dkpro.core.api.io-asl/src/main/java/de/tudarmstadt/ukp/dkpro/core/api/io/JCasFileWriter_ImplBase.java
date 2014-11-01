@@ -156,10 +156,13 @@ public abstract class JCasFileWriter_ImplBase
     }
     
     /**
-     * Get the full target path for the given CAS and extension. If the
-     * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
-     *
-     * @param aExtension the extension.
+     * Get the full target path for the given CAS and extension. If the {@link #PARAM_COMPRESSION}
+     * is set, ".gz" is appended to the path.
+     * 
+     * @param aJCas
+     *            the JCas.
+     * @param aExtension
+     *            the extension.
      * @return the full path.
      * @deprecated Use {@link #getOutputStream(JCas, String)} instead
      */

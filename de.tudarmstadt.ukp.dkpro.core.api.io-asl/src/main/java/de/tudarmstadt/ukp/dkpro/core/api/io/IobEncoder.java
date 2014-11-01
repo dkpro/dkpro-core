@@ -64,8 +64,10 @@ public class IobEncoder
     
     /**
      * Returns the IOB tag for a given token.
-     * @param annotation
-     * @return
+     * 
+     * @param token
+     *            a token.
+     * @return the IOB tag.
      */
     public String encode(Token token)
     {
