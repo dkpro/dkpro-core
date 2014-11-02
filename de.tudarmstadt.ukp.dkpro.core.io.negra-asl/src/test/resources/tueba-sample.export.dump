@@ -14,14 +14,10 @@ DocumentMetaData
 CAS-Text:
 Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht . K. W. 
 [Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht .]
-ROOT
+Sentence
    sofa: _InitialView
    begin: 0
    end: 92
-   constituentType: "ROOT"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
 [Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht .]
 PennTree
    sofa: _InitialView
@@ -30,10 +26,14 @@ PennTree
    PennTree: "(ROOT ($, ,) ($. .) (SIMPX--- (SIMPX-KONJ (VF-- (NX-OA (ART den) (NN AWO-Posten))) (MF-- (ADVX-MOD (PTKNEG nicht)))) (SIMPX-KONJ (LK-- (VXFIN-HD (VMFIN mußte))) (MF-- (NX-ON (PPER er)) (ADVX-V-MOD (ADV damals))) (VC-- (VXINF-OV (VVINF niederlegen))) (VF-- (NX-OA (NX-HD (PPOSAT Seine) (NN Position)) (PX-- (APPR bei) (NX-HD (ART der) (NN Prüfgesellschaft))))))))"
    TransformationNames: <null>
 [Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht .]
-Sentence
+ROOT
    sofa: _InitialView
    begin: 0
    end: 92
+   constituentType: "ROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
 [Seine Position bei der Prüfgesellschaft mußte er damals niederlegen , den AWO-Posten nicht]
 Constituent
    sofa: _InitialView
@@ -78,36 +78,6 @@ Constituent
    sofa: _InitialView
    begin: 0
    end: 39
-   constituentType: "VF"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 67
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
-[Seine Position bei der Prüfgesellschaft]
-Constituent
-   sofa: _InitialView
-   begin: 0
-   end: 39
    constituentType: "NX"
    parent: Constituent
       sofa: _InitialView
@@ -140,6 +110,36 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "OA"
+[Seine Position bei der Prüfgesellschaft]
+Constituent
+   sofa: _InitialView
+   begin: 0
+   end: 39
+   constituentType: "VF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 67
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
 [Seine Position]
 Constituent
    sofa: _InitialView
@@ -247,6 +247,12 @@ Token
       PosValue: "PPOSAT"
    morph: <null>
 [Position]
+NN
+   sofa: _InitialView
+   begin: 6
+   end: 14
+   PosValue: "NN"
+[Position]
 Token
    sofa: _InitialView
    begin: 6
@@ -302,12 +308,6 @@ Token
       end: 14
       PosValue: "NN"
    morph: <null>
-[Position]
-NN
-   sofa: _InitialView
-   begin: 6
-   end: 14
-   PosValue: "NN"
 [bei der Prüfgesellschaft]
 Constituent
    sofa: _InitialView
@@ -466,6 +466,12 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [der]
+ART
+   sofa: _InitialView
+   begin: 19
+   end: 22
+   PosValue: "ART"
+[der]
 Token
    sofa: _InitialView
    begin: 19
@@ -528,12 +534,12 @@ Token
       end: 22
       PosValue: "ART"
    morph: <null>
-[der]
-ART
+[Prüfgesellschaft]
+NN
    sofa: _InitialView
-   begin: 19
-   end: 22
-   PosValue: "ART"
+   begin: 23
+   end: 39
+   PosValue: "NN"
 [Prüfgesellschaft]
 Token
    sofa: _InitialView
@@ -597,85 +603,12 @@ Token
       end: 39
       PosValue: "NN"
    morph: <null>
-[Prüfgesellschaft]
-NN
-   sofa: _InitialView
-   begin: 23
-   end: 39
-   PosValue: "NN"
 [mußte]
 V
    sofa: _InitialView
    begin: 40
    end: 45
    PosValue: "VMFIN"
-[mußte]
-Constituent
-   sofa: _InitialView
-   begin: 40
-   end: 45
-   constituentType: "LK"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 67
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
-[mußte]
-Constituent
-   sofa: _InitialView
-   begin: 40
-   end: 45
-   constituentType: "VXFIN"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 40
-      end: 45
-      constituentType: "LK"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 67
-         constituentType: "SIMPX"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 90
-            constituentType: "SIMPX"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 92
-               constituentType: "ROOT"
-               parent: <null>
-               children: FSArray
-               syntacticFunction: <null>
-            children: FSArray
-            syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "KONJ"
-      children: FSArray
-      syntacticFunction: "-"
-   children: FSArray
-   syntacticFunction: "HD"
 [mußte]
 Token
    sofa: _InitialView
@@ -725,6 +658,73 @@ Token
       end: 45
       PosValue: "VMFIN"
    morph: <null>
+[mußte]
+Constituent
+   sofa: _InitialView
+   begin: 40
+   end: 45
+   constituentType: "VXFIN"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 40
+      end: 45
+      constituentType: "LK"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 67
+         constituentType: "SIMPX"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 0
+            end: 90
+            constituentType: "SIMPX"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 92
+               constituentType: "ROOT"
+               parent: <null>
+               children: FSArray
+               syntacticFunction: <null>
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "KONJ"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "HD"
+[mußte]
+Constituent
+   sofa: _InitialView
+   begin: 40
+   end: 45
+   constituentType: "LK"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 67
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
 [er damals]
 Constituent
    sofa: _InitialView
@@ -761,43 +761,6 @@ PR
    begin: 46
    end: 48
    PosValue: "PPER"
-[er]
-Constituent
-   sofa: _InitialView
-   begin: 46
-   end: 48
-   constituentType: "NX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 46
-      end: 55
-      constituentType: "MF"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 67
-         constituentType: "SIMPX"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 90
-            constituentType: "SIMPX"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 92
-               constituentType: "ROOT"
-               parent: <null>
-               children: FSArray
-               syntacticFunction: <null>
-            children: FSArray
-            syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "KONJ"
-      children: FSArray
-      syntacticFunction: "-"
-   children: FSArray
-   syntacticFunction: "ON"
 [er]
 Token
    sofa: _InitialView
@@ -847,12 +810,12 @@ Token
       end: 48
       PosValue: "PPER"
    morph: <null>
-[damals]
+[er]
 Constituent
    sofa: _InitialView
-   begin: 49
-   end: 55
-   constituentType: "ADVX"
+   begin: 46
+   end: 48
+   constituentType: "NX"
    parent: Constituent
       sofa: _InitialView
       begin: 46
@@ -883,7 +846,7 @@ Constituent
       children: FSArray
       syntacticFunction: "-"
    children: FSArray
-   syntacticFunction: "V-MOD"
+   syntacticFunction: "ON"
 [damals]
 ADV
    sofa: _InitialView
@@ -939,23 +902,17 @@ Token
       end: 55
       PosValue: "ADV"
    morph: <null>
-[niederlegen]
-V
-   sofa: _InitialView
-   begin: 56
-   end: 67
-   PosValue: "VVINF"
-[niederlegen]
+[damals]
 Constituent
    sofa: _InitialView
-   begin: 56
-   end: 67
-   constituentType: "VXINF"
+   begin: 49
+   end: 55
+   constituentType: "ADVX"
    parent: Constituent
       sofa: _InitialView
-      begin: 56
-      end: 67
-      constituentType: "VC"
+      begin: 46
+      end: 55
+      constituentType: "MF"
       parent: Constituent
          sofa: _InitialView
          begin: 0
@@ -981,37 +938,13 @@ Constituent
       children: FSArray
       syntacticFunction: "-"
    children: FSArray
-   syntacticFunction: "OV"
+   syntacticFunction: "V-MOD"
 [niederlegen]
-Constituent
+V
    sofa: _InitialView
    begin: 56
    end: 67
-   constituentType: "VC"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 67
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
+   PosValue: "VVINF"
 [niederlegen]
 Token
    sofa: _InitialView
@@ -1061,6 +994,73 @@ Token
       end: 67
       PosValue: "VVINF"
    morph: <null>
+[niederlegen]
+Constituent
+   sofa: _InitialView
+   begin: 56
+   end: 67
+   constituentType: "VC"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 67
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
+[niederlegen]
+Constituent
+   sofa: _InitialView
+   begin: 56
+   end: 67
+   constituentType: "VXINF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 56
+      end: 67
+      constituentType: "VC"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 67
+         constituentType: "SIMPX"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 0
+            end: 90
+            constituentType: "SIMPX"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 92
+               constituentType: "ROOT"
+               parent: <null>
+               children: FSArray
+               syntacticFunction: <null>
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "KONJ"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "OV"
 [,]
 PUNC
    sofa: _InitialView
@@ -1116,6 +1116,36 @@ Constituent
    sofa: _InitialView
    begin: 70
    end: 84
+   constituentType: "VF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 70
+      end: 90
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
+[den AWO-Posten]
+Constituent
+   sofa: _InitialView
+   begin: 70
+   end: 84
    constituentType: "NX"
    parent: Constituent
       sofa: _InitialView
@@ -1148,36 +1178,12 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "OA"
-[den AWO-Posten]
-Constituent
+[den]
+ART
    sofa: _InitialView
    begin: 70
-   end: 84
-   constituentType: "VF"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 70
-      end: 90
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
+   end: 73
+   PosValue: "ART"
 [den]
 Token
    sofa: _InitialView
@@ -1227,12 +1233,12 @@ Token
       end: 73
       PosValue: "ART"
    morph: <null>
-[den]
-ART
+[AWO-Posten]
+NN
    sofa: _InitialView
-   begin: 70
-   end: 73
-   PosValue: "ART"
+   begin: 74
+   end: 84
+   PosValue: "NN"
 [AWO-Posten]
 Token
    sofa: _InitialView
@@ -1282,85 +1288,12 @@ Token
       end: 84
       PosValue: "NN"
    morph: <null>
-[AWO-Posten]
-NN
-   sofa: _InitialView
-   begin: 74
-   end: 84
-   PosValue: "NN"
 [nicht]
 O
    sofa: _InitialView
    begin: 85
    end: 90
    PosValue: "PTKNEG"
-[nicht]
-Constituent
-   sofa: _InitialView
-   begin: 85
-   end: 90
-   constituentType: "ADVX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 85
-      end: 90
-      constituentType: "MF"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 70
-         end: 90
-         constituentType: "SIMPX"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 0
-            end: 90
-            constituentType: "SIMPX"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 0
-               end: 92
-               constituentType: "ROOT"
-               parent: <null>
-               children: FSArray
-               syntacticFunction: <null>
-            children: FSArray
-            syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "KONJ"
-      children: FSArray
-      syntacticFunction: "-"
-   children: FSArray
-   syntacticFunction: "MOD"
-[nicht]
-Constituent
-   sofa: _InitialView
-   begin: 85
-   end: 90
-   constituentType: "MF"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 70
-      end: 90
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
 [nicht]
 Token
    sofa: _InitialView
@@ -1410,6 +1343,73 @@ Token
       end: 90
       PosValue: "PTKNEG"
    morph: <null>
+[nicht]
+Constituent
+   sofa: _InitialView
+   begin: 85
+   end: 90
+   constituentType: "MF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 70
+      end: 90
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
+[nicht]
+Constituent
+   sofa: _InitialView
+   begin: 85
+   end: 90
+   constituentType: "ADVX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 85
+      end: 90
+      constituentType: "MF"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 70
+         end: 90
+         constituentType: "SIMPX"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 0
+            end: 90
+            constituentType: "SIMPX"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 0
+               end: 92
+               constituentType: "ROOT"
+               parent: <null>
+               children: FSArray
+               syntacticFunction: <null>
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "KONJ"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "MOD"
 [.]
 PUNC
    sofa: _InitialView
@@ -1438,30 +1438,17 @@ Token
       PosValue: "$."
    morph: <null>
 [K. W.]
-ROOT
+Sentence
    sofa: _InitialView
    begin: 93
    end: 98
-   constituentType: "ROOT"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
 [K. W.]
-Constituent
+PennTree
    sofa: _InitialView
    begin: 93
    end: 98
-   constituentType: "EN-ADD"
-   parent: ROOT
-      sofa: _InitialView
-      begin: 93
-      end: 98
-      constituentType: "ROOT"
-      parent: <null>
-      children: FSArray
-      syntacticFunction: <null>
-   children: FSArray
-   syntacticFunction: "--"
+   PennTree: "(ROOT (EN-ADD--- (NX-- (NE K.) (NE W.))))"
+   TransformationNames: <null>
 [K. W.]
 Constituent
    sofa: _InitialView
@@ -1486,17 +1473,36 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [K. W.]
-PennTree
+Constituent
    sofa: _InitialView
    begin: 93
    end: 98
-   PennTree: "(ROOT (EN-ADD--- (NX-- (NE K.) (NE W.))))"
-   TransformationNames: <null>
+   constituentType: "EN-ADD"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 93
+      end: 98
+      constituentType: "ROOT"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
+   children: FSArray
+   syntacticFunction: "--"
 [K. W.]
-Sentence
+ROOT
    sofa: _InitialView
    begin: 93
    end: 98
+   constituentType: "ROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
+[K.]
+NP
+   sofa: _InitialView
+   begin: 93
+   end: 95
+   PosValue: "NE"
 [K.]
 Token
    sofa: _InitialView
@@ -1532,11 +1538,11 @@ Token
       end: 95
       PosValue: "NE"
    morph: <null>
-[K.]
+[W.]
 NP
    sofa: _InitialView
-   begin: 93
-   end: 95
+   begin: 96
+   end: 98
    PosValue: "NE"
 [W.]
 Token
@@ -1573,12 +1579,6 @@ Token
       end: 98
       PosValue: "NE"
    morph: <null>
-[W.]
-NP
-   sofa: _InitialView
-   begin: 96
-   end: 98
-   PosValue: "NE"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 0 end ==================================
@@ -1600,14 +1600,17 @@ DocumentMetaData
 CAS-Text:
 SPD / CDU / AfB für Daewoo-Millionen Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß 
 [SPD / CDU / AfB für Daewoo-Millionen]
-ROOT
+Sentence
    sofa: _InitialView
    begin: 0
    end: 36
-   constituentType: "ROOT"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
+[SPD / CDU / AfB für Daewoo-Millionen]
+PennTree
+   sofa: _InitialView
+   begin: 0
+   end: 36
+   PennTree: "(ROOT ($( /) ($( /) (NX--- (NX-HD (NX-KONJ (NE SPD)) (NX-KONJ (NE CDU)) (NX-KONJ (NE AfB))) (PX-- (APPR für) (NX-HD (NN Daewoo-Millionen)))))"
+   TransformationNames: <null>
 [SPD / CDU / AfB für Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -1625,17 +1628,14 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [SPD / CDU / AfB für Daewoo-Millionen]
-PennTree
+ROOT
    sofa: _InitialView
    begin: 0
    end: 36
-   PennTree: "(ROOT ($( /) ($( /) (NX--- (NX-HD (NX-KONJ (NE SPD)) (NX-KONJ (NE CDU)) (NX-KONJ (NE AfB))) (PX-- (APPR für) (NX-HD (NN Daewoo-Millionen)))))"
-   TransformationNames: <null>
-[SPD / CDU / AfB für Daewoo-Millionen]
-Sentence
-   sofa: _InitialView
-   begin: 0
-   end: 36
+   constituentType: "ROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
 [SPD / CDU / AfB]
 Constituent
    sofa: _InitialView
@@ -1660,35 +1660,11 @@ Constituent
    children: FSArray
    syntacticFunction: "HD"
 [SPD]
-Constituent
+NP
    sofa: _InitialView
    begin: 0
    end: 3
-   constituentType: "NX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 15
-      constituentType: "NX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 36
-         constituentType: "NX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 36
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "HD"
-   children: FSArray
-   syntacticFunction: "KONJ"
+   PosValue: "NE"
 [SPD]
 Token
    sofa: _InitialView
@@ -1732,11 +1708,35 @@ Token
       PosValue: "NE"
    morph: <null>
 [SPD]
-NP
+Constituent
    sofa: _InitialView
    begin: 0
    end: 3
-   PosValue: "NE"
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 15
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 36
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 36
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "HD"
+   children: FSArray
+   syntacticFunction: "KONJ"
 [/]
 PUNC
    sofa: _InitialView
@@ -1765,35 +1765,11 @@ Token
       PosValue: "$("
    morph: <null>
 [CDU]
-Constituent
+NP
    sofa: _InitialView
    begin: 6
    end: 9
-   constituentType: "NX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 15
-      constituentType: "NX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 36
-         constituentType: "NX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 36
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "HD"
-   children: FSArray
-   syntacticFunction: "KONJ"
+   PosValue: "NE"
 [CDU]
 Token
    sofa: _InitialView
@@ -1837,11 +1813,35 @@ Token
       PosValue: "NE"
    morph: <null>
 [CDU]
-NP
+Constituent
    sofa: _InitialView
    begin: 6
    end: 9
-   PosValue: "NE"
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 15
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 36
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 36
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "HD"
+   children: FSArray
+   syntacticFunction: "KONJ"
 [/]
 PUNC
    sofa: _InitialView
@@ -1870,35 +1870,11 @@ Token
       PosValue: "$("
    morph: <null>
 [AfB]
-Constituent
+NP
    sofa: _InitialView
    begin: 12
    end: 15
-   constituentType: "NX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 15
-      constituentType: "NX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 36
-         constituentType: "NX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 36
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "HD"
-   children: FSArray
-   syntacticFunction: "KONJ"
+   PosValue: "NE"
 [AfB]
 Token
    sofa: _InitialView
@@ -1942,11 +1918,35 @@ Token
       PosValue: "NE"
    morph: <null>
 [AfB]
-NP
+Constituent
    sofa: _InitialView
    begin: 12
    end: 15
-   PosValue: "NE"
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 15
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 36
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 36
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "HD"
+   children: FSArray
+   syntacticFunction: "KONJ"
 [für Daewoo-Millionen]
 Constituent
    sofa: _InitialView
@@ -2012,35 +2012,11 @@ Token
       PosValue: "APPR"
    morph: <null>
 [Daewoo-Millionen]
-Constituent
+NN
    sofa: _InitialView
    begin: 20
    end: 36
-   constituentType: "NX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 16
-      end: 36
-      constituentType: "PX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 36
-         constituentType: "NX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 36
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "-"
-   children: FSArray
-   syntacticFunction: "HD"
+   PosValue: "NN"
 [Daewoo-Millionen]
 Token
    sofa: _InitialView
@@ -2084,20 +2060,47 @@ Token
       PosValue: "NN"
    morph: <null>
 [Daewoo-Millionen]
-NN
+Constituent
    sofa: _InitialView
    begin: 20
    end: 36
-   PosValue: "NN"
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 16
+      end: 36
+      constituentType: "PX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 36
+         constituentType: "NX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 36
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "HD"
 [Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
-ROOT
+Sentence
    sofa: _InitialView
    begin: 37
    end: 94
-   constituentType: "ROOT"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
+[Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
+PennTree
+   sofa: _InitialView
+   begin: 37
+   end: 94
+   PennTree: "(ROOT (SIMPX--- (KOORD-- (KON Aber)) (LK-- (VXFIN-HD (VVFIN fordert))) (MF-- (ADVX-V-MOD (ADV jetzt)) (NX-OA (NN Untersuchungsausschuß))) (VF-- (NX-ON (NE AfB) (NX-- (NE Bremerhavens))))))"
+   TransformationNames: <null>
 [Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
 Constituent
    sofa: _InitialView
@@ -2115,40 +2118,20 @@ Constituent
    children: FSArray
    syntacticFunction: "--"
 [Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
-PennTree
+ROOT
    sofa: _InitialView
    begin: 37
    end: 94
-   PennTree: "(ROOT (SIMPX--- (KOORD-- (KON Aber)) (LK-- (VXFIN-HD (VVFIN fordert))) (MF-- (ADVX-V-MOD (ADV jetzt)) (NX-OA (NN Untersuchungsausschuß))) (VF-- (NX-ON (NE AfB) (NX-- (NE Bremerhavens))))))"
-   TransformationNames: <null>
-[Aber Bremerhavens AfB fordert jetzt Untersuchungsausschuß]
-Sentence
-   sofa: _InitialView
-   begin: 37
-   end: 94
+   constituentType: "ROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
 [Aber]
-Constituent
+CONJ
    sofa: _InitialView
    begin: 37
    end: 41
-   constituentType: "KOORD"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 37
-      end: 94
-      constituentType: "SIMPX"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 37
-         end: 94
-         constituentType: "ROOT"
-         parent: <null>
-         children: FSArray
-         syntacticFunction: <null>
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "-"
+   PosValue: "KON"
 [Aber]
 Token
    sofa: _InitialView
@@ -2185,11 +2168,28 @@ Token
       PosValue: "KON"
    morph: <null>
 [Aber]
-CONJ
+Constituent
    sofa: _InitialView
    begin: 37
    end: 41
-   PosValue: "KON"
+   constituentType: "KOORD"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 37
+      end: 94
+      constituentType: "SIMPX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 37
+         end: 94
+         constituentType: "ROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "-"
 [Bremerhavens AfB]
 Constituent
    sofa: _InitialView
@@ -2244,42 +2244,11 @@ Constituent
    children: FSArray
    syntacticFunction: "-"
 [Bremerhavens]
-Constituent
+NP
    sofa: _InitialView
    begin: 42
    end: 54
-   constituentType: "NX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 42
-      end: 58
-      constituentType: "NX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 42
-         end: 58
-         constituentType: "VF"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 37
-            end: 94
-            constituentType: "SIMPX"
-            parent: ROOT
-               sofa: _InitialView
-               begin: 37
-               end: 94
-               constituentType: "ROOT"
-               parent: <null>
-               children: FSArray
-               syntacticFunction: <null>
-            children: FSArray
-            syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "-"
-      children: FSArray
-      syntacticFunction: "ON"
-   children: FSArray
-   syntacticFunction: "-"
+   PosValue: "NE"
 [Bremerhavens]
 Token
    sofa: _InitialView
@@ -2330,10 +2299,47 @@ Token
       PosValue: "NE"
    morph: <null>
 [Bremerhavens]
-NP
+Constituent
    sofa: _InitialView
    begin: 42
    end: 54
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 42
+      end: 58
+      constituentType: "NX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 42
+         end: 58
+         constituentType: "VF"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 37
+            end: 94
+            constituentType: "SIMPX"
+            parent: ROOT
+               sofa: _InitialView
+               begin: 37
+               end: 94
+               constituentType: "ROOT"
+               parent: <null>
+               children: FSArray
+               syntacticFunction: <null>
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "-"
+      children: FSArray
+      syntacticFunction: "ON"
+   children: FSArray
+   syntacticFunction: "-"
+[AfB]
+NP
+   sofa: _InitialView
+   begin: 55
+   end: 58
    PosValue: "NE"
 [AfB]
 Token
@@ -2377,71 +2383,12 @@ Token
       end: 58
       PosValue: "NE"
    morph: <null>
-[AfB]
-NP
-   sofa: _InitialView
-   begin: 55
-   end: 58
-   PosValue: "NE"
 [fordert]
 V
    sofa: _InitialView
    begin: 59
    end: 66
    PosValue: "VVFIN"
-[fordert]
-Constituent
-   sofa: _InitialView
-   begin: 59
-   end: 66
-   constituentType: "LK"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 37
-      end: 94
-      constituentType: "SIMPX"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 37
-         end: 94
-         constituentType: "ROOT"
-         parent: <null>
-         children: FSArray
-         syntacticFunction: <null>
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "-"
-[fordert]
-Constituent
-   sofa: _InitialView
-   begin: 59
-   end: 66
-   constituentType: "VXFIN"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 59
-      end: 66
-      constituentType: "LK"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 37
-         end: 94
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 37
-            end: 94
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "-"
-   children: FSArray
-   syntacticFunction: "HD"
 [fordert]
 Token
    sofa: _InitialView
@@ -2484,6 +2431,59 @@ Token
       end: 66
       PosValue: "VVFIN"
    morph: <null>
+[fordert]
+Constituent
+   sofa: _InitialView
+   begin: 59
+   end: 66
+   constituentType: "VXFIN"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 59
+      end: 66
+      constituentType: "LK"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 37
+         end: 94
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 37
+            end: 94
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "HD"
+[fordert]
+Constituent
+   sofa: _InitialView
+   begin: 59
+   end: 66
+   constituentType: "LK"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 37
+      end: 94
+      constituentType: "SIMPX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 37
+         end: 94
+         constituentType: "ROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "-"
 [jetzt Untersuchungsausschuß]
 Constituent
    sofa: _InitialView
@@ -2507,36 +2507,6 @@ Constituent
       syntacticFunction: "--"
    children: FSArray
    syntacticFunction: "-"
-[jetzt]
-Constituent
-   sofa: _InitialView
-   begin: 67
-   end: 72
-   constituentType: "ADVX"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 67
-      end: 94
-      constituentType: "MF"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 37
-         end: 94
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 37
-            end: 94
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "-"
-   children: FSArray
-   syntacticFunction: "V-MOD"
 [jetzt]
 ADV
    sofa: _InitialView
@@ -2585,12 +2555,12 @@ Token
       end: 72
       PosValue: "ADV"
    morph: <null>
-[Untersuchungsausschuß]
+[jetzt]
 Constituent
    sofa: _InitialView
-   begin: 73
-   end: 94
-   constituentType: "NX"
+   begin: 67
+   end: 72
+   constituentType: "ADVX"
    parent: Constituent
       sofa: _InitialView
       begin: 67
@@ -2614,7 +2584,13 @@ Constituent
       children: FSArray
       syntacticFunction: "-"
    children: FSArray
-   syntacticFunction: "OA"
+   syntacticFunction: "V-MOD"
+[Untersuchungsausschuß]
+NN
+   sofa: _InitialView
+   begin: 73
+   end: 94
+   PosValue: "NN"
 [Untersuchungsausschuß]
 Token
    sofa: _InitialView
@@ -2658,11 +2634,35 @@ Token
       PosValue: "NN"
    morph: <null>
 [Untersuchungsausschuß]
-NN
+Constituent
    sofa: _InitialView
    begin: 73
    end: 94
-   PosValue: "NN"
+   constituentType: "NX"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 67
+      end: 94
+      constituentType: "MF"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 37
+         end: 94
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 37
+            end: 94
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "-"
+   children: FSArray
+   syntacticFunction: "OA"
 -------- View _InitialView end ----------------------------------
 
 ======== CAS 1 end ==================================

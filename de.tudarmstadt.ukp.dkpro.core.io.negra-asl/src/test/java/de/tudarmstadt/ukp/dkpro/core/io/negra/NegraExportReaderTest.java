@@ -17,30 +17,19 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
-import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
 
-import java.io.File;
-
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.CasDumpWriter;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 /**
- *
  * Sample is taken from
  * http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus
  * /corpus-sample.export Only the second sentence is used.
  *
  * @author Erik-Lân Do Dinh
- *
  */
 public class NegraExportReaderTest
 {
@@ -48,85 +37,32 @@ public class NegraExportReaderTest
 	public void negraTest()
 		throws Exception
 	{
-		File testDump = new File("target/sentence.export.dump");
-		File referenceDump = new File("src/test/resources/sentence.export.dump");
-
-		// create NegraExportReader output
-		CollectionReader ner = createReader(NegraExportReader.class,
-				NegraExportReader.PARAM_SOURCE_LOCATION, new File("src/test/resources/sentence.export"),
-				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_READ_PENN_TREE, true);
-
-		AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
-
-		runPipeline(ner, cdw);
-
-		// compare both dumps
-		String reference = readFileToString(referenceDump, "UTF-8").trim();
-		String test = readFileToString(testDump, "UTF-8").trim();
-
-		assertEquals(reference, test);
+        testOneWay(NegraExportReader.class, "sentence.export.dump", "sentence.export",
+                NegraExportReader.PARAM_LANGUAGE, "de",
+                NegraExportReader.PARAM_ENCODING, "UTF-8",
+                NegraExportReader.PARAM_READ_PENN_TREE, true);
 	}
 
 	@Test
 	public void negraTigerTest()
 		throws Exception
 	{
-		File testDump = new File("target/tiger-sample.export.dump");
-		File referenceDump = new File("src/test/resources/tiger-sample.export.dump");
-
-		// create NegraExportReader output
-		CollectionReader ner = createReader(NegraExportReader.class,
-				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tiger-sample.export",
-				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+        testOneWay(NegraExportReader.class, "tiger-sample.export.dump", "tiger-sample.export",
+                NegraExportReader.PARAM_LANGUAGE, "de",
+                NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
                 NegraExportReader.PARAM_READ_PENN_TREE, true);
-
-		AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
-
-		runPipeline(ner, cdw);
-
-		// compare both dumps
-		String reference = readFileToString(referenceDump, "UTF-8").trim();
-		String test = readFileToString(testDump, "UTF-8").trim();
-
-		assertEquals(reference, test);
 	}
 
 	@Test
 	public void tuebaTest()
 		throws Exception
 	{
-		File testDump = new File("target/tueba-sample.export.dump");
-		File referenceDump = new File("src/test/resources/tueba-sample.export.dump");
-
-		// create NegraExportReader output
-		CollectionReader ner = createReader(NegraExportReader.class,
-				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tueba-sample.export",
-				NegraExportReader.PARAM_LANGUAGE, "de",
-				NegraExportReader.PARAM_ENCODING, "UTF-8",
+        testOneWay(NegraExportReader.class, "tueba-sample.export.dump", "tueba-sample.export",
+                NegraExportReader.PARAM_LANGUAGE, "de",
+                NegraExportReader.PARAM_ENCODING, "UTF-8",
                 NegraExportReader.PARAM_READ_PENN_TREE, true);
-
-		AnalysisEngineDescription cdw = createEngineDescription(CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, testDump.getPath());
-
-		runPipeline(ner, cdw);
-
-		// compare both dumps
-		String reference = readFileToString(referenceDump, "UTF-8").trim();
-		String test = readFileToString(testDump, "UTF-8").trim();
-
-		assertEquals(reference, test);
 	}
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
