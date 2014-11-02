@@ -15,14 +15,10 @@ CAS-Text:
 Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated . 
 
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-ROOT
+Sentence
    sofa: _InitialView
    begin: 0
    end: 169
-   constituentType: "S"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 PennTree
    sofa: _InitialView
@@ -31,10 +27,14 @@ PennTree
    PennTree: "(S (PRP he) (VP (VBD spent) (PP (PP (IN in) (NPB (ADJP (JJ long) (CC and) (ADJP (RB often) (JJ solitary))) (VBZ walks) (PUNC, ,))) (CC or) (PP (IN in) (VP (VBG chatting) (PP (IN with) (NP (NPB (DT a) (NN number)) (PP (IN of) (NP (NPB (NN village) (NNS gossips)) (SBAR (WHNP (WP$ whose) (NN acquaintance)) (S (PRP he) (VP (VBD had) (VP (VBN cultivated) (PUNC. .)))))))))))) (NPB (PRP$ his) (NNS days))) (VP (VB Save) (PP (IN for) (NPB (DT this) (CD one) (NN excursion) (PUNC, ,)))))"
    TransformationNames: <null>
 [Save for this one excursion , he spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
-Sentence
+ROOT
    sofa: _InitialView
    begin: 0
    end: 169
+   constituentType: "S"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
 [Save for this one excursion ,]
 Constituent
    sofa: _InitialView
@@ -52,17 +52,17 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [Save]
-Lemma
-   sofa: _InitialView
-   begin: 0
-   end: 4
-   value: "save"
-[Save]
 V
    sofa: _InitialView
    begin: 0
    end: 4
    PosValue: "VB"
+[Save]
+Lemma
+   sofa: _InitialView
+   begin: 0
+   end: 4
+   value: "save"
 [Save]
 Token
    sofa: _InitialView
@@ -135,6 +135,12 @@ Token
       PosValue: "IN"
    morph: <null>
 [this one excursion ,]
+SemanticArgument
+   sofa: _InitialView
+   begin: 9
+   end: 29
+   role: "Current"
+[this one excursion ,]
 Constituent
    sofa: _InitialView
    begin: 9
@@ -164,12 +170,12 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: <null>
-[this one excursion ,]
-SemanticArgument
+[this]
+ART
    sofa: _InitialView
    begin: 9
-   end: 29
-   role: "Current"
+   end: 13
+   PosValue: "DT"
 [this]
 Lemma
    sofa: _InitialView
@@ -194,12 +200,6 @@ Token
       end: 13
       PosValue: "DT"
    morph: <null>
-[this]
-ART
-   sofa: _InitialView
-   begin: 9
-   end: 13
-   PosValue: "DT"
 [one]
 CARD
    sofa: _InitialView
@@ -243,20 +243,6 @@ Lemma
    end: 27
    value: "excursion"
 [excursion]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   category: "Travel"
-   arguments: FSArray
-[excursion]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 18
-   end: 27
-   category: "Coreference"
-   arguments: FSArray
-[excursion]
 Token
    sofa: _InitialView
    begin: 18
@@ -274,18 +260,32 @@ Token
       end: 27
       PosValue: "NN"
    morph: <null>
-[,]
-Lemma
+[excursion]
+SemanticPredicate
    sofa: _InitialView
-   begin: 28
-   end: 29
-   value: ","
+   begin: 18
+   end: 27
+   category: "Travel"
+   arguments: FSArray
+[excursion]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 18
+   end: 27
+   category: "Coreference"
+   arguments: FSArray
 [,]
 O
    sofa: _InitialView
    begin: 28
    end: 29
    PosValue: "PUNC,"
+[,]
+Lemma
+   sofa: _InitialView
+   begin: 28
+   end: 29
+   value: ","
 [,]
 Token
    sofa: _InitialView
@@ -317,12 +317,23 @@ Lemma
    end: 32
    value: "he"
 [he]
-SemanticPredicate
+Token
    sofa: _InitialView
    begin: 30
    end: 32
-   category: "Coreference"
-   arguments: FSArray
+   parent: <null>
+   lemma: Lemma
+      sofa: _InitialView
+      begin: 30
+      end: 32
+      value: "he"
+   stem: <null>
+   pos: PR
+      sofa: _InitialView
+      begin: 30
+      end: 32
+      PosValue: "PRP"
+   morph: <null>
 [he]
 SemanticArgument
    sofa: _InitialView
@@ -360,23 +371,12 @@ SemanticArgument
    end: 32
    role: "Traveler"
 [he]
-Token
+SemanticPredicate
    sofa: _InitialView
    begin: 30
    end: 32
-   parent: <null>
-   lemma: Lemma
-      sofa: _InitialView
-      begin: 30
-      end: 32
-      value: "he"
-   stem: <null>
-   pos: PR
-      sofa: _InitialView
-      begin: 30
-      end: 32
-      PosValue: "PRP"
-   morph: <null>
+   category: "Coreference"
+   arguments: FSArray
 [spent his days in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -394,17 +394,17 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [spent]
-Lemma
-   sofa: _InitialView
-   begin: 33
-   end: 38
-   value: "spend"
-[spent]
 V
    sofa: _InitialView
    begin: 33
    end: 38
    PosValue: "VBD"
+[spent]
+Lemma
+   sofa: _InitialView
+   begin: 33
+   end: 38
+   value: "spend"
 [spent]
 Token
    sofa: _InitialView
@@ -459,19 +459,6 @@ Lemma
    end: 42
    value: "his"
 [his]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 39
-   end: 42
-   category: "Coreference"
-   arguments: FSArray
-[his]
-SemanticArgument
-   sofa: _InitialView
-   begin: 39
-   end: 42
-   role: "Current"
-[his]
 Token
    sofa: _InitialView
    begin: 39
@@ -489,6 +476,19 @@ Token
       end: 42
       PosValue: "PRP$"
    morph: <null>
+[his]
+SemanticArgument
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   role: "Current"
+[his]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 39
+   end: 42
+   category: "Coreference"
+   arguments: FSArray
 [days]
 NN
    sofa: _InitialView
@@ -501,19 +501,6 @@ Lemma
    begin: 43
    end: 47
    value: "day"
-[days]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 43
-   end: 47
-   category: "Calendric_unit"
-   arguments: FSArray
-[days]
-SemanticArgument
-   sofa: _InitialView
-   begin: 43
-   end: 47
-   role: "Unit"
 [days]
 Token
    sofa: _InitialView
@@ -532,6 +519,19 @@ Token
       end: 47
       PosValue: "NNS"
    morph: <null>
+[days]
+SemanticArgument
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   role: "Unit"
+[days]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 43
+   end: 47
+   category: "Calendric_unit"
+   arguments: FSArray
 [in long and often solitary walks , or in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -697,24 +697,17 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [long]
-Lemma
-   sofa: _InitialView
-   begin: 51
-   end: 55
-   value: "long"
-[long]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 51
-   end: 55
-   category: "Duration"
-   arguments: FSArray
-[long]
 ADJ
    sofa: _InitialView
    begin: 51
    end: 55
    PosValue: "JJ"
+[long]
+Lemma
+   sofa: _InitialView
+   begin: 51
+   end: 55
+   value: "long"
 [long]
 Token
    sofa: _InitialView
@@ -733,6 +726,19 @@ Token
       end: 55
       PosValue: "JJ"
    morph: <null>
+[long]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 51
+   end: 55
+   category: "Duration"
+   arguments: FSArray
+[and]
+CONJ
+   sofa: _InitialView
+   begin: 56
+   end: 59
+   PosValue: "CC"
 [and]
 Lemma
    sofa: _InitialView
@@ -757,12 +763,12 @@ Token
       end: 59
       PosValue: "CC"
    morph: <null>
-[and]
-CONJ
+[often solitary]
+SemanticArgument
    sofa: _InitialView
-   begin: 56
-   end: 59
-   PosValue: "CC"
+   begin: 60
+   end: 74
+   role: "Depictive"
 [often solitary]
 Constituent
    sofa: _InitialView
@@ -814,24 +820,18 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: <null>
-[often solitary]
-SemanticArgument
-   sofa: _InitialView
-   begin: 60
-   end: 74
-   role: "Depictive"
-[often]
-Lemma
-   sofa: _InitialView
-   begin: 60
-   end: 65
-   value: "often"
 [often]
 ADV
    sofa: _InitialView
    begin: 60
    end: 65
    PosValue: "RB"
+[often]
+Lemma
+   sofa: _InitialView
+   begin: 60
+   end: 65
+   value: "often"
 [often]
 Token
    sofa: _InitialView
@@ -851,17 +851,17 @@ Token
       PosValue: "RB"
    morph: <null>
 [solitary]
-Lemma
-   sofa: _InitialView
-   begin: 66
-   end: 74
-   value: "solitary"
-[solitary]
 ADJ
    sofa: _InitialView
    begin: 66
    end: 74
    PosValue: "JJ"
+[solitary]
+Lemma
+   sofa: _InitialView
+   begin: 66
+   end: 74
+   value: "solitary"
 [solitary]
 Token
    sofa: _InitialView
@@ -881,30 +881,17 @@ Token
       PosValue: "JJ"
    morph: <null>
 [walks]
-Lemma
-   sofa: _InitialView
-   begin: 75
-   end: 80
-   value: "walk"
-[walks]
 V
    sofa: _InitialView
    begin: 75
    end: 80
    PosValue: "VBZ"
 [walks]
-SemanticPredicate
+Lemma
    sofa: _InitialView
    begin: 75
    end: 80
-   category: "Self_motion"
-   arguments: FSArray
-[walks]
-SemanticArgument
-   sofa: _InitialView
-   begin: 75
-   end: 80
-   role: "Eventuality"
+   value: "walk"
 [walks]
 Token
    sofa: _InitialView
@@ -923,18 +910,31 @@ Token
       end: 80
       PosValue: "VBZ"
    morph: <null>
-[,]
-Lemma
+[walks]
+SemanticArgument
    sofa: _InitialView
-   begin: 81
-   end: 82
-   value: ","
+   begin: 75
+   end: 80
+   role: "Eventuality"
+[walks]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 75
+   end: 80
+   category: "Self_motion"
+   arguments: FSArray
 [,]
 O
    sofa: _InitialView
    begin: 81
    end: 82
    PosValue: "PUNC,"
+[,]
+Lemma
+   sofa: _InitialView
+   begin: 81
+   end: 82
+   value: ","
 [,]
 Token
    sofa: _InitialView
@@ -953,6 +953,12 @@ Token
       end: 82
       PosValue: "PUNC,"
    morph: <null>
+[or]
+CONJ
+   sofa: _InitialView
+   begin: 83
+   end: 85
+   PosValue: "CC"
 [or]
 Lemma
    sofa: _InitialView
@@ -977,12 +983,6 @@ Token
       end: 85
       PosValue: "CC"
    morph: <null>
-[or]
-CONJ
-   sofa: _InitialView
-   begin: 83
-   end: 85
-   PosValue: "CC"
 [in chatting with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1081,24 +1081,17 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [chatting]
-Lemma
-   sofa: _InitialView
-   begin: 89
-   end: 97
-   value: "chat"
-[chatting]
 V
    sofa: _InitialView
    begin: 89
    end: 97
    PosValue: "VBG"
 [chatting]
-SemanticPredicate
+Lemma
    sofa: _InitialView
    begin: 89
    end: 97
-   category: "Chatting"
-   arguments: FSArray
+   value: "chat"
 [chatting]
 Token
    sofa: _InitialView
@@ -1117,6 +1110,19 @@ Token
       end: 97
       PosValue: "VBG"
    morph: <null>
+[chatting]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 89
+   end: 97
+   category: "Chatting"
+   arguments: FSArray
+[with a number of village gossips whose acquaintance he had cultivated .]
+SemanticArgument
+   sofa: _InitialView
+   begin: 98
+   end: 169
+   role: "Interlocutor_2"
 [with a number of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1161,12 +1167,6 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: <null>
-[with a number of village gossips whose acquaintance he had cultivated .]
-SemanticArgument
-   sofa: _InitialView
-   begin: 98
-   end: 169
-   role: "Interlocutor_2"
 [with]
 PP
    sofa: _InitialView
@@ -1307,6 +1307,12 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [a]
+ART
+   sofa: _InitialView
+   begin: 103
+   end: 104
+   PosValue: "DT"
+[a]
 Lemma
    sofa: _InitialView
    begin: 103
@@ -1330,12 +1336,6 @@ Token
       end: 104
       PosValue: "DT"
    morph: <null>
-[a]
-ART
-   sofa: _InitialView
-   begin: 103
-   end: 104
-   PosValue: "DT"
 [number]
 NN
    sofa: _InitialView
@@ -1348,19 +1348,6 @@ Lemma
    begin: 105
    end: 111
    value: "number"
-[number]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 105
-   end: 111
-   category: "Quantity"
-   arguments: FSArray
-[number]
-SemanticArgument
-   sofa: _InitialView
-   begin: 105
-   end: 111
-   role: "Quantity"
 [number]
 Token
    sofa: _InitialView
@@ -1379,6 +1366,25 @@ Token
       end: 111
       PosValue: "NN"
    morph: <null>
+[number]
+SemanticArgument
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   role: "Quantity"
+[number]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 105
+   end: 111
+   category: "Quantity"
+   arguments: FSArray
+[of village gossips whose acquaintance he had cultivated .]
+SemanticArgument
+   sofa: _InitialView
+   begin: 112
+   end: 169
+   role: "Individuals"
 [of village gossips whose acquaintance he had cultivated .]
 Constituent
    sofa: _InitialView
@@ -1437,12 +1443,6 @@ Constituent
       syntacticFunction: <null>
    children: FSArray
    syntacticFunction: <null>
-[of village gossips whose acquaintance he had cultivated .]
-SemanticArgument
-   sofa: _InitialView
-   begin: 112
-   end: 169
-   role: "Individuals"
 [of]
 PP
    sofa: _InitialView
@@ -1973,19 +1973,6 @@ Lemma
    end: 152
    value: "he"
 [he]
-SemanticPredicate
-   sofa: _InitialView
-   begin: 150
-   end: 152
-   category: "Coreference"
-   arguments: FSArray
-[he]
-SemanticArgument
-   sofa: _InitialView
-   begin: 150
-   end: 152
-   role: "Current"
-[he]
 Token
    sofa: _InitialView
    begin: 150
@@ -2003,6 +1990,19 @@ Token
       end: 152
       PosValue: "PRP"
    morph: <null>
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   role: "Current"
+[he]
+SemanticPredicate
+   sofa: _InitialView
+   begin: 150
+   end: 152
+   category: "Coreference"
+   arguments: FSArray
 [had cultivated .]
 Constituent
    sofa: _InitialView
@@ -2090,17 +2090,17 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [had]
-Lemma
-   sofa: _InitialView
-   begin: 153
-   end: 156
-   value: "have"
-[had]
 V
    sofa: _InitialView
    begin: 153
    end: 156
    PosValue: "VBD"
+[had]
+Lemma
+   sofa: _InitialView
+   begin: 153
+   end: 156
+   value: "have"
 [had]
 Token
    sofa: _InitialView
@@ -2213,23 +2213,17 @@ Constituent
    children: FSArray
    syntacticFunction: <null>
 [cultivated]
-Lemma
-   sofa: _InitialView
-   begin: 157
-   end: 167
-   value: "cultivate"
-[cultivated]
 V
    sofa: _InitialView
    begin: 157
    end: 167
    PosValue: "VBN"
 [cultivated]
-SemanticArgument
+Lemma
    sofa: _InitialView
    begin: 157
    end: 167
-   role: "Current"
+   value: "cultivate"
 [cultivated]
 Token
    sofa: _InitialView
@@ -2248,18 +2242,24 @@ Token
       end: 167
       PosValue: "VBN"
    morph: <null>
-[.]
-Lemma
+[cultivated]
+SemanticArgument
    sofa: _InitialView
-   begin: 168
-   end: 169
-   value: "."
+   begin: 157
+   end: 167
+   role: "Current"
 [.]
 O
    sofa: _InitialView
    begin: 168
    end: 169
    PosValue: "PUNC."
+[.]
+Lemma
+   sofa: _InitialView
+   begin: 168
+   end: 169
+   value: "."
 [.]
 Token
    sofa: _InitialView

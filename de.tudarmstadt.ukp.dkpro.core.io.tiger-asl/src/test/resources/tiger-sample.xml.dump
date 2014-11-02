@@ -15,14 +15,10 @@ CAS-Text:
 `` Ross Perot wäre vielleicht ein prächtiger Diktator '' 
 
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
-ROOT
+Sentence
    sofa: _InitialView
    begin: 0
    end: 56
-   constituentType: "VROOT"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
 PennTree
    sofa: _InitialView
@@ -31,10 +27,14 @@ PennTree
    PennTree: "(VROOT ($( ``) (S (PN-SB (NE Ross) (NE Perot)) (VAFIN wäre) (ADV vielleicht) (NP-PD (ART ein) (ADJA prächtiger) (NN Diktator))) ($( ''))"
    TransformationNames: <null>
 [`` Ross Perot wäre vielleicht ein prächtiger Diktator '']
-Sentence
+ROOT
    sofa: _InitialView
    begin: 0
    end: 56
+   constituentType: "VROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
 [``]
 PUNC
    sofa: _InitialView
@@ -165,17 +165,17 @@ Token
       PosValue: "NE"
    morph: <null>
 [wäre]
-Lemma
-   sofa: _InitialView
-   begin: 14
-   end: 18
-   value: "sein"
-[wäre]
 V
    sofa: _InitialView
    begin: 14
    end: 18
    PosValue: "VAFIN"
+[wäre]
+Lemma
+   sofa: _InitialView
+   begin: 14
+   end: 18
+   value: "sein"
 [wäre]
 Token
    sofa: _InitialView
@@ -195,17 +195,17 @@ Token
       PosValue: "VAFIN"
    morph: <null>
 [vielleicht]
-Lemma
-   sofa: _InitialView
-   begin: 19
-   end: 29
-   value: "vielleicht"
-[vielleicht]
 ADV
    sofa: _InitialView
    begin: 19
    end: 29
    PosValue: "ADV"
+[vielleicht]
+Lemma
+   sofa: _InitialView
+   begin: 19
+   end: 29
+   value: "vielleicht"
 [vielleicht]
 Token
    sofa: _InitialView
@@ -248,6 +248,12 @@ Constituent
    children: FSArray
    syntacticFunction: "PD"
 [ein]
+ART
+   sofa: _InitialView
+   begin: 30
+   end: 33
+   PosValue: "ART"
+[ein]
 Lemma
    sofa: _InitialView
    begin: 30
@@ -271,24 +277,18 @@ Token
       end: 33
       PosValue: "ART"
    morph: <null>
-[ein]
-ART
-   sofa: _InitialView
-   begin: 30
-   end: 33
-   PosValue: "ART"
-[prächtiger]
-Lemma
-   sofa: _InitialView
-   begin: 34
-   end: 44
-   value: "prächtig"
 [prächtiger]
 ADJ
    sofa: _InitialView
    begin: 34
    end: 44
    PosValue: "ADJA"
+[prächtiger]
+Lemma
+   sofa: _InitialView
+   begin: 34
+   end: 44
+   value: "prächtig"
 [prächtiger]
 Token
    sofa: _InitialView
