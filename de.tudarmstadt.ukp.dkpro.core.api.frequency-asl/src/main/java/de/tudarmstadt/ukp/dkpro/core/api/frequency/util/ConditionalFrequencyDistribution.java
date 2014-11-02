@@ -32,8 +32,8 @@ import java.util.Set;
  * {@link ConditionalFrequencyDistribution} can be used as follows:</p>
  * 
  * <blockquote><pre>
- * ConditionalFrequencyDistribution<String, String> cfd =
- *     new ConditionalFrequencyDistribution<String, String>();
+ * ConditionalFrequencyDistribution&lt;String, String&gt; cfd =
+ *     new ConditionalFrequencyDistribution&lt;String, String&gt;();
  *
  * cfd.addSample("because", "in");
  * cfd.addSample("because", "of");
@@ -43,9 +43,9 @@ import java.util.Set;
  * System.out.println(cfd.getCount("despite", "of"));
  * </pre></blockquote>
  * 
- * </blockquote> The last call to {@link ConditionalFrequencyDistribution#getCount} will yield 2,
+ * <p>The last call to {@link ConditionalFrequencyDistribution#getCount} will yield 2,
  * because given the <code>condition</code> that the first word in a two-word sequence is "because",
- * the word "of" has appeared twice.
+ * the word "of" has appeared twice.</p>
  * 
  * <p>This class was inspired by NLTK's <a href=
  * "http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.ConditionalFreqDist-class.html">
