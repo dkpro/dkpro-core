@@ -21,7 +21,6 @@ import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
 import org.junit.Rule;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class BncReaderTest
@@ -29,9 +28,8 @@ public class BncReaderTest
 	@Test
 	public void test() throws Exception
 	{
-	    testOneWay(BncReader.class, Conll2006Writer.class, 
-	            "reference/FX8.conll",
-	            "FX8.xml");
+        testOneWay(BncReader.class, "FX8.xml.dump", "FX8.xml",
+                BncReader.PARAM_LANGUAGE, "en");
 	}
 	
     @Rule
