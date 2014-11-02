@@ -38,25 +38,23 @@ import com.google.common.collect.MinMaxPriorityQueue;
 /**
  * It is basically a mapping from samples (keys) to long values (counts).
  * 
- * <p>
- * Suppose we want to record the number of occurrences of each word in a sentence, then this class
- * can be used as follows:
+ * <p>Suppose we want to record the number of occurrences of each word in a sentence, then this class
+ * can be used as follows:</p>
  * 
- * <p><blockquote><pre>
- * FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+ * <blockquote><pre>
+ * FrequencyDistribution&lt;String&gt; fd = new FrequencyDistribution&lt;String&gt;();
  * for (String word : "foo bar baz foo".split(" ")) {
  *     fd.inc(word);
  * }
  * System.out.println(fd.getCount("foo"));
  * </pre></blockquote>
  * 
- * The last call to {@link FrequencyDistribution#getCount} will yield 2, because the
- * word "foo" has appeared twice in the given sequence of words.
+ * <p>The last call to {@link FrequencyDistribution#getCount} will yield 2, because the
+ * word "foo" has appeared twice in the given sequence of words.</p>
  * 
- * <p>
- * This class was inspired by NLTK's <a
+ * <p>This class was inspired by NLTK's <a
  * href="http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.FreqDist-class.html">
- * FreqDist</a>.
+ * FreqDist</a>.</p>
  * 
  * @param <T>
  *            the type of the samples

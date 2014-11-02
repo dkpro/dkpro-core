@@ -27,13 +27,11 @@ import java.util.Set;
  * Inspired by nltk.probability.ConditionalFreqDist Maps a condition to a
  * {@link FrequencyDistribution}.
  * 
- * <p>
- * This class could be used to learn how frequently a word collocates with another word. Suppose we
+ * <p>This class could be used to learn how frequently a word collocates with another word. Suppose we
  * want to know how frequently the word "of" appears after the word "because", then
- * {@link ConditionalFrequencyDistribution} can be used as follows:
+ * {@link ConditionalFrequencyDistribution} can be used as follows:</p>
  * 
- * <p><blockquote><pre>
- * {@code
+ * <blockquote><pre>
  * ConditionalFrequencyDistribution<String, String> cfd =
  *     new ConditionalFrequencyDistribution<String, String>();
  *
@@ -43,17 +41,15 @@ import java.util.Set;
  * cfd.addSample("because", "of");
  *
  * System.out.println(cfd.getCount("despite", "of"));
- * }
  * </pre></blockquote>
  * 
  * </blockquote> The last call to {@link ConditionalFrequencyDistribution#getCount} will yield 2,
  * because given the <code>condition</code> that the first word in a two-word sequence is "because",
  * the word "of" has appeared twice.
  * 
- * <p>
- * This class was inspired by NLTK's <a href=
+ * <p>This class was inspired by NLTK's <a href=
  * "http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.ConditionalFreqDist-class.html">
- * FreqDist</a>.
+ * FreqDist</a>.</p>
  * 
  * @param <C>
  *            the type of the conditions
