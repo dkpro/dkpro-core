@@ -17,38 +17,23 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
-import static org.junit.Assert.assertEquals;
-
-import java.io.File;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
-import org.apache.uima.fit.pipeline.SimplePipeline;
+import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import org.junit.Rule;
 import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.io.conll.Conll2006Writer;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class BncReaderTest
 {
 	@Test
 	public void test() throws Exception
 	{
-		CollectionReaderDescription reader = createReaderDescription(BncReader.class,
-				BncReader.PARAM_SOURCE_LOCATION, "src/test/resources",
-				BncReader.PARAM_PATTERNS, new String[] { "[+]FX8.xml" },
-				BncReader.PARAM_LANGUAGE, "en");
-
-		AnalysisEngineDescription casDumper = createEngineDescription(CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, "target/test-output/FX8.dump");
-
-		SimplePipeline.runPipeline(reader, casDumper);
-
-		String reference = FileUtils.readFileToString(
-				new File("src/test/resources/reference/FX8.dump"), "UTF-8").trim();
-		String actual = FileUtils.readFileToString(
-				new File("target/test-output/FX8.dump"), "UTF-8").trim();
-		assertEquals(reference, actual);
+	    testOneWay(BncReader.class, Conll2006Writer.class, 
+	            "reference/FX8.conll",
+	            "FX8.xml");
 	}
+	
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
