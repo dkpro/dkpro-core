@@ -47,12 +47,12 @@ import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
  * DKPro Annotator for the MeCab Japanese POS Tagger
  * </p>
  *
- * Required annotations:<br/>
+ * Required annotations:
  * <ul>
  * <li>None</li>
  * </ul>
  *
- * Generated annotations:<br/>
+ * Generated annotations:
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>

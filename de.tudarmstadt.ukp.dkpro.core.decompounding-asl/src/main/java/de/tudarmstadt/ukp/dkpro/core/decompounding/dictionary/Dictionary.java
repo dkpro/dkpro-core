@@ -22,18 +22,20 @@ import java.util.List;
 /**
  * Dictionary interface. Can be used to create different Dictionaries.
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public interface Dictionary
 {
-
     /**
-     * Checks if a word is in a dictionary
+     * Checks if a word is in the dictionary.
+     * @param aWord a word.
+     * @return  if a word is in the dictionary.
      */
     public boolean contains(String aWord);
 
     /**
-     * Returns all words in the dictionary
+     * Returns all words in the dictionary.
+     * @return all words in the dictionary.
      */
     public List<String> getAll();
 }

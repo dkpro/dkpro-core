@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Linking morphemes container.
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class LinkingMorphemes
 {

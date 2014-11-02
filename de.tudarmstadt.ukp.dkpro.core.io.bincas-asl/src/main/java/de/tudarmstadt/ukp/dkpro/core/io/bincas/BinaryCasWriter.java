@@ -42,9 +42,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
- * Write CAS in one of the UIMA binary formats. Several formats are supported:
+ * Write CAS in one of the UIMA binary formats.
  * 
  * <table>
+ * <caption>Supported formats</caption>
  * <tr>
  * <th>Format</th>
  * <th>Description</th>

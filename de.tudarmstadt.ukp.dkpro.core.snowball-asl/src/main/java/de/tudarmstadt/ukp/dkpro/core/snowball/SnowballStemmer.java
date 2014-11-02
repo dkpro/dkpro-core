@@ -58,7 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
-
 @TypeCapability(
         outputs={
             "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem"})
@@ -78,9 +77,10 @@ public class SnowballStemmer
 
 	/**
 	 * Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
-	 * are lower-cased before being passed to the stemmer. Examples:
+	 * are lower-cased before being passed to the stemmer.
 	 *
 	 * <table border="1" cellspacing="0">
+	 * <caption>Examples</caption>
 	 * <tr><th></th><th>false (default)</th><th>true</th></tr>
 	 * <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
 	 * <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>

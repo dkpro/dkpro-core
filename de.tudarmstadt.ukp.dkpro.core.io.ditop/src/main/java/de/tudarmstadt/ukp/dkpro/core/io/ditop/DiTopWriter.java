@@ -52,11 +52,11 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelInference
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
 /**
- * This annotator (consumer) writes output files as required by DiTop {@link https://ditop.hs8.de/}.
- * It requires JCas input annotated by {@link MalletTopicModelInferencer} using the same model.
+ * This annotator (consumer) writes output files as required by <a
+ * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
+ * {@link MalletTopicModelInferencer} using the same model.
  *
  * @author Carsten Schnober
- *
  */
 public class DiTopWriter
     extends JCasFileWriter_ImplBase
@@ -343,7 +343,7 @@ public class DiTopWriter
      * @param configFile
      *            the config file to read
      * @return a map containing corpus names as keys and a set of topic numbers as values
-     * @throws IOException
+     * @throws IOException if an I/O error occurs.
      */
     private static Map<String, Set<Integer>> readConfigFile(File configFile)
         throws IOException
@@ -382,6 +382,7 @@ public class DiTopWriter
      * this method can be overwritten to select a different source for the collection id.
      *
      * @param aJCas
+     *            the JCas.
      * @return the collection id String or null if it is not available.
      */
     protected String getCollectionId(JCas aJCas)
@@ -392,8 +393,9 @@ public class DiTopWriter
     /**
      * Extract the document id from the JCas. Uses {@link DocumentMetaData#getDocumentId()}, but
      * this method can be overwritten to select a different source for the document id.
-     *
+     * 
      * @param aJCas
+     *            the JCas.
      * @return the document id string or null if it is not available.
      */
     protected String getDocumentId(JCas aJCas)

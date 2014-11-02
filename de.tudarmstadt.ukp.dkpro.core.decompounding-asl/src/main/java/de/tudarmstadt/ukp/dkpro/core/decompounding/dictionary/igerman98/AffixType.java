@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98;
 /**
  * Affix type
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public enum AffixType
 {

@@ -290,6 +290,7 @@ public class NegraExportReader
         }
 
         // Fill CAS
+        Map<String, Annotation> idMap = new LinkedHashMap<>();
         String lastCasId = casId;
         while (casId != null) {
             if (!casId.equals(lastCasId)) {
@@ -301,7 +302,7 @@ public class NegraExportReader
             readOriginId(false);
 
             // read the next sentence
-            readSentence(aJCas, casBuilder);
+            readSentence(aJCas, casBuilder, sentenceId, idMap);
 
             originId = readOriginId(true);
             sentenceId = readSentenceHeader(BOS_FIELD_NUM, true);
@@ -311,6 +312,10 @@ public class NegraExportReader
         }
 
         casBuilder.close();
+        
+        for (Entry<String, Annotation> e : idMap.entrySet()) {
+            System.out.printf("%s - %s%n", e.getKey(), e.getValue().getCoveredText());
+        }
 
         // Can only do that after the builder is closed, otherwise the text is not yet set in the
         // CAS and we get "null" for all token strings.
@@ -517,7 +522,8 @@ public class NegraExportReader
         // System.out.printf("Documents [%d]%n", documentsTotal);
     }
 
-    private void readSentence(JCas aJCas, JCasBuilder aBuilder)
+    private void readSentence(JCas aJCas, JCasBuilder aBuilder, String aSentenceId,
+            Map<String, Annotation> aIdMap)
         throws IOException
     {
         sentenceCount++;
@@ -527,7 +533,7 @@ public class NegraExportReader
         root.setBegin(Integer.MAX_VALUE);
         root.setConstituentType("ROOT");
 
-        // Initialize consituents
+        // Initialize constituents
         Map<String, Constituent> constituents = new HashMap<String, Constituent>();
         constituents.put("0", root);
 
@@ -536,11 +542,13 @@ public class NegraExportReader
 
         // handle tokens
         String line;
+        int id = 1;
         for (line = br.readLine(); startsNotWith(line, "#"); line = br.readLine()) {
             String[] parts = splitLine(line, "\t+");
             // create token
             Token token = aBuilder.add(parts[TOKEN_TEXT], Token.class);
             aBuilder.add(" ");
+            aIdMap.put(aSentenceId+":"+id, token);
 
             // get/create parent
             Constituent parent = constituents.get(parts[TOKEN_PARENT_ID]);
@@ -576,6 +584,7 @@ public class NegraExportReader
                 lemma.addToIndexes();
                 token.setLemma(lemma);
             }
+            id++;
         }
 
         // handle constituent relations
@@ -618,8 +627,9 @@ public class NegraExportReader
         sentence.addToIndexes(aJCas);
 
         // add constituents at the end of the sentence
-        for (Constituent c : constituents.values()) {
-            c.addToIndexes(aJCas);
+        for (Entry<String, Constituent> e : constituents.entrySet()) {
+            e.getValue().addToIndexes(aJCas);
+            aIdMap.put(aSentenceId+":"+e.getKey(), e.getValue());
         }
     }
 

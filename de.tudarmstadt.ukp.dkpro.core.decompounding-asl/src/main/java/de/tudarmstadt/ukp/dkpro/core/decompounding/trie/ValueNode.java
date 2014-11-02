@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A tree node with a value object
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  * 
  * @param <V>
  *            The value object class

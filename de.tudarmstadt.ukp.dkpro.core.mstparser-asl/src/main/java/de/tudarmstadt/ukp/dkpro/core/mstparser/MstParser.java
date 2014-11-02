@@ -64,16 +64,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * <p>Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
- * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a>
- * <a href="http://sourceforge.net/projects/mstparser/">here</a></p>
- * <p>The MSTParser models tend to be very large, e.g. the 
- * <a href="http://nlp.stanford.edu/software/stanford-dependencies.shtml">Eisner</a> model is about
- * 600 MB uncompressed. With this model, parsing a simple sentence with MSTParser requires about
- * 3 GB heap memory.</p>
- * <p>This component feeds MSTParser only with the FORM (token) and POS (part-of-speech) fields.
- * LEMMA, CPOS, and other columns from the CONLL 2006 format are not generated (cf. 
- * {@link mstparser.DependencyInstance DependencyInstance}).</p>
+ * <p>
+ * Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
+ * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a> <a
+ * href="http://sourceforge.net/projects/mstparser/">here</a>
+ * </p>
+ * <p>
+ * The MSTParser models tend to be very large, e.g. the <a
+ * href="http://nlp.stanford.edu/software/stanford-dependencies.shtml">Eisner</a> model is about 600
+ * MB uncompressed. With this model, parsing a simple sentence with MSTParser requires about 3 GB
+ * heap memory.
+ * </p>
+ * <p>
+ * This component feeds MSTParser only with the FORM (token) and POS (part-of-speech) fields. LEMMA,
+ * CPOS, and other columns from the CONLL 2006 format are not generated (cf.
+ * {@link mstparser.DependencyInstance DependencyInstance}).
+ * </p>
  * 
  * @author beinborn
  * @author zesch

@@ -23,7 +23,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.web1t;
  * 
  * This is only a data container for the n-grams
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class NGramModel
 {

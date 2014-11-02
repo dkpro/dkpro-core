@@ -57,7 +57,7 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
  * ./bin/web1TLuceneIndexer.sh \ --web1t PATH/TO/FOLDER/WITH/ALL/EXTRACTED/N-GRAM/FILES \
  * --outputPath PAHT/TO/LUCENE/INDEX/FOLDER
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class LuceneIndexer
 {
@@ -72,7 +72,7 @@ public class LuceneIndexer
     /**
      * A Worker thread.
      * 
-     * @author Jens Haase <je.haase@googlemail.com>
+     * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
      */
     protected static class Worker
         extends Thread

@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 /**
  * Affix data model
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class Affix
 {
