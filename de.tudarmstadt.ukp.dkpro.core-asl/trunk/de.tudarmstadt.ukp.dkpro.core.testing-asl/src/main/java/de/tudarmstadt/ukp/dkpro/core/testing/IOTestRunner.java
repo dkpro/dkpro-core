@@ -29,12 +29,14 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.collection.CollectionReaderDescription;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class IOTestRunner
 {
@@ -48,6 +50,25 @@ public class IOTestRunner
         testOneWay(aReader, aWriter, aFile, aFile, aExtraParams);
     }
     
+    public static void testOneWay(Class<? extends CollectionReader> aReader, String aExpectedFile,
+            String aFile, Object... aExtraParams)
+        throws Exception
+    {
+        String outputFolder = aReader.getSimpleName() + "-" + FilenameUtils.getBaseName(aFile);
+        if (DkproTestContext.get() != null) {
+            outputFolder = DkproTestContext.get().getTestOutputFolderName();
+        }
+        File output = new File("target/test-output/" + outputFolder+ "/dump.txt");
+        
+        Object[] extraParams = aExtraParams;
+        extraParams = ArrayUtils.add(extraParams, CasDumpWriter.PARAM_TARGET_LOCATION);
+        extraParams = ArrayUtils.add(extraParams, output);
+        extraParams = ArrayUtils.add(extraParams, CasDumpWriter.PARAM_SORT);
+        extraParams = ArrayUtils.add(extraParams, true);
+        
+        testOneWay2(aReader, CasDumpWriter.class, aExpectedFile, "dump.txt", aFile, extraParams);
+    }
+    
     public static void testOneWay(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile,
             Object... aExtraParams)
@@ -58,13 +79,26 @@ public class IOTestRunner
             throw new IllegalArgumentException("Reader must be a subclass of ["
                     + RESOURCE_COLLECTION_READER_BASE + "]");
         }
-        
+
         Class<?> dkproWriterBase = Class.forName(JCAS_FILE_WRITER_IMPL_BASE);
         if (!dkproWriterBase.isAssignableFrom(aWriter)) {
             throw new IllegalArgumentException("writer must be a subclass of ["
                     + JCAS_FILE_WRITER_IMPL_BASE + "]");
         }
         
+        // We assume that the writer is creating a file with the same extension as is provided as
+        // the expected file
+        String extension = FilenameUtils.getExtension(aExpectedFile);
+        String name = FilenameUtils.getBaseName(aFile);
+
+        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile, aExtraParams);
+    }
+
+    public static void testOneWay2(Class<? extends CollectionReader> aReader,
+            Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aOutputFile,
+            String aFile, Object... aExtraParams)
+        throws Exception
+    {
         String outputFolder = aReader.getSimpleName() + "-" + FilenameUtils.getBaseName(aFile);
         if (DkproTestContext.get() != null) {
             outputFolder = DkproTestContext.get().getTestOutputFolderName();
@@ -83,8 +117,10 @@ public class IOTestRunner
                 extraReaderParams.toArray());
 
         List<Object> extraWriterParams = new ArrayList<>();
-        extraWriterParams.add(ComponentParameters.PARAM_TARGET_LOCATION);
-        extraWriterParams.add(output);
+        if (!ArrayUtils.contains(aExtraParams, ComponentParameters.PARAM_TARGET_LOCATION)) {
+            extraWriterParams.add(ComponentParameters.PARAM_TARGET_LOCATION);
+            extraWriterParams.add(output);
+        }
         extraWriterParams.add(ComponentParameters.PARAM_STRIP_EXTENSION);
         extraWriterParams.add(true);
         extraWriterParams.addAll(asList(aExtraParams));
@@ -94,14 +130,8 @@ public class IOTestRunner
 
         runPipeline(reader, writer);
 
-        // We assume that the writer is creating a file with the same extension as is provided as
-        // the expected file
-        String extension = FilenameUtils.getExtension(aExpectedFile);
-        
         String expected = FileUtils.readFileToString(reference, "UTF-8");
-        String actual = FileUtils.readFileToString(
-                new File(output, FilenameUtils.getBaseName(input.toString()) + '.' + extension),
-                "UTF-8");
+        String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
         assertEquals(expected.trim(), actual.trim());
     }
 }

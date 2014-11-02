@@ -14,14 +14,10 @@ DocumentMetaData
 CAS-Text:
 Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen . 
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
-ROOT
+Sentence
    sofa: _InitialView
    begin: 0
    end: 91
-   constituentType: "ROOT"
-   parent: <null>
-   children: FSArray
-   syntacticFunction: <null>
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
 PennTree
    sofa: _InitialView
@@ -30,10 +26,14 @@ PennTree
    PennTree: "(ROOT ($, ,) ($. .) (CS--- (S-CJ (PPER Sie) (VVFIN gehen) (PTKVZ ein) (CNP-OA (KON und) (NN Risiken) (NP-CJ (ADJA gewagte) (NN Verbindungen)))) (S-CJ (VVFIN versuchen) (VP-OC (VVIZU auszureizen) (NP-OA (PPOSAT ihre) (NN Möglichkeiten))))))"
    TransformationNames: <null>
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen .]
-Sentence
+ROOT
    sofa: _InitialView
    begin: 0
    end: 91
+   constituentType: "ROOT"
+   parent: <null>
+   children: FSArray
+   syntacticFunction: <null>
 [Sie gehen gewagte Verbindungen und Risiken ein , versuchen ihre Möglichkeiten auszureizen]
 Constituent
    sofa: _InitialView
@@ -278,6 +278,12 @@ Token
       PosValue: "ADJA"
    morph: <null>
 [Verbindungen]
+NN
+   sofa: _InitialView
+   begin: 18
+   end: 30
+   PosValue: "NN"
+[Verbindungen]
 Token
    sofa: _InitialView
    begin: 18
@@ -326,12 +332,12 @@ Token
       end: 30
       PosValue: "NN"
    morph: <null>
-[Verbindungen]
-NN
+[und]
+CONJ
    sofa: _InitialView
-   begin: 18
-   end: 30
-   PosValue: "NN"
+   begin: 31
+   end: 34
+   PosValue: "KON"
 [und]
 Token
    sofa: _InitialView
@@ -374,12 +380,12 @@ Token
       end: 34
       PosValue: "KON"
    morph: <null>
-[und]
-CONJ
+[Risiken]
+NN
    sofa: _InitialView
-   begin: 31
-   end: 34
-   PosValue: "KON"
+   begin: 35
+   end: 42
+   PosValue: "NN"
 [Risiken]
 Token
    sofa: _InitialView
@@ -422,12 +428,6 @@ Token
       end: 42
       PosValue: "NN"
    morph: <null>
-[Risiken]
-NN
-   sofa: _InitialView
-   begin: 35
-   end: 42
-   PosValue: "NN"
 [ein]
 V
    sofa: _InitialView
@@ -683,6 +683,12 @@ Token
       PosValue: "PPOSAT"
    morph: <null>
 [Möglichkeiten]
+NN
+   sofa: _InitialView
+   begin: 64
+   end: 77
+   PosValue: "NN"
+[Möglichkeiten]
 Token
    sofa: _InitialView
    begin: 64
@@ -731,12 +737,6 @@ Token
       end: 77
       PosValue: "NN"
    morph: <null>
-[Möglichkeiten]
-NN
-   sofa: _InitialView
-   begin: 64
-   end: 77
-   PosValue: "NN"
 [auszureizen]
 V
    sofa: _InitialView

@@ -98,7 +98,7 @@ public class NegraExportReader
      * The language.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
 
     /**
