@@ -26,22 +26,18 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.custommonkey.xmlunit.XMLAssert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
 import org.xml.sax.InputSource;
+
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TigerXmlReaderWriterTest
 {
-    @Rule
-    public TemporaryFolder folder= new TemporaryFolder();
-    
     @Test
     public void test() throws Exception
     {
-        File targetFolder = folder.newFolder();
+        File targetFolder = new File("target/test-output/" + testContext.getTestOutputFolderName());
 
         CollectionReaderDescription reader = createReaderDescription(
                 TigerXmlReader.class,
@@ -60,17 +56,5 @@ public class TigerXmlReaderWriterTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }

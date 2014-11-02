@@ -24,26 +24,21 @@ import java.io.File;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
 import org.custommonkey.xmlunit.XMLAssert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-import org.junit.rules.TestName;
 import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TigerXmlWriterTest
 {
-    @Rule
-    public TemporaryFolder folder= new TemporaryFolder();
-    
     @Test
     public void test() throws Exception
     {
-        File targetFolder = folder.newFolder();
+        File targetFolder = new File("target/test-output/" + testContext.getTestOutputFolderName());
         
         AnalysisEngine parser = createEngine(OpenNlpParser.class);
         JCas jcas = TestRunner.runTest(parser, "en", "This is a test .");
@@ -62,17 +57,5 @@ public class TigerXmlWriterTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
