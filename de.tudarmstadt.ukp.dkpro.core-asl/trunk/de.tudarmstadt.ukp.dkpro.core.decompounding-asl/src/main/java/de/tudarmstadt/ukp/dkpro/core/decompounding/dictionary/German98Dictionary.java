@@ -42,8 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98.Affix;
  *
  * This class can also be used to read other ispell/hunspell dictionaries.
  *
- * @author Jens Haase <je.haase@googlemail.com>
- *
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class German98Dictionary
 	extends SimpleDictionary
@@ -111,9 +110,12 @@ public class German98Dictionary
 		return words;
 	}
 
-	/**
-	 * Reads the affix file and processes the data
-	 */
+    /**
+     * Reads the affix file and processes the data
+     * 
+     * @param aReader
+     *            a reader.
+     */
 	protected void readAffixFile(BufferedReader aReader)
 	{
 		try {
@@ -141,6 +143,7 @@ public class German98Dictionary
 	 *            The header of the affix
 	 * @param aReader
 	 *            The file reader to read the rest of the affix
+	 * @throws IOException if an I/O error occurs.
 	 */
 	private void parseAffix(String aHeader, BufferedReader aReader)
 		throws IOException
@@ -175,9 +178,15 @@ public class German98Dictionary
 		}
 	}
 
-	/**
-	 * Uses affixes to build new words
-	 */
+    /**
+     * Uses affixes to build new words
+     * 
+     * @param aWord
+     *            a word.
+     * @param aFlags
+     *            flags.
+     * @return inflected word forms.
+     */
 	protected List<String> buildWords(String aWord, char[] aFlags)
 	{
 		List<String> words = new ArrayList<String>();

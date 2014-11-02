@@ -61,8 +61,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
 
 /**
  * Parser annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
- *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    inputs = {
@@ -114,7 +112,7 @@ public class OpenNlpParser
 	 * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
 	 * spaming the heap with thousands of strings representing only a few different tags.
 	 *
-	 * Default: {@code true}
+     * <p>Default: {@code true}</p>
 	 */
 	public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
 	@ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")
@@ -123,7 +121,7 @@ public class OpenNlpParser
 	/**
 	 * Log the tag set(s) when a model is loaded.
 	 *
-	 * Default: {@code false}
+     * <p>Default: {@code false}</p>
 	 */
 	public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
 	@ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue="false")
@@ -131,9 +129,9 @@ public class OpenNlpParser
 
 	/**
 	 * Sets whether to create or not to create POS tags. The creation of
-	 * constituent tags must be turned on for this to work.<br/>
+	 * constituent tags must be turned on for this to work.
 	 *
-	 * Default: {@code true}
+	 * <p>Default: {@code true}</p>
 	 */
 	public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
 	@ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
@@ -143,7 +141,7 @@ public class OpenNlpParser
 	 * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
 	 * containing the whole parse tree in Penn Treebank style format.
 	 *
-	 * Default: {@code false}
+     * <p>Default: {@code false}</p>
 	 */
 	public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
 	@ConfigurationParameter(name = PARAM_WRITE_PENN_TREE, mandatory = true, defaultValue = "false")
@@ -214,7 +212,8 @@ public class OpenNlpParser
 	 *            the source tree
 	 * @return the child-structure (needed for recursive call only)
 	 */
-	private Annotation createConstituentAnnotationFromTree(JCas aJCas, Parse aNode, Annotation aParentFS, List<Token> aTokens)
+    private Annotation createConstituentAnnotationFromTree(JCas aJCas, Parse aNode,
+            Annotation aParentFS, List<Token> aTokens)
 	{
 		// If the node is a word-level constituent node (== POS):
 		// create parent link on token and (if not turned off) create POS tag

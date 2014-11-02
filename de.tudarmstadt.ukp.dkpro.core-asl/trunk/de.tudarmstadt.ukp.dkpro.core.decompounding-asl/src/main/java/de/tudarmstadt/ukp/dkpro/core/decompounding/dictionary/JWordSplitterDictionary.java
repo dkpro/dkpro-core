@@ -32,8 +32,7 @@ import de.abelssoft.tools.persistence.FastObjectSaver;
  * 
  * This can be used to create your own dictionary from a corpus
  * 
- * @author Jens Haase <je.haase@googlemail.com>
- * 
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class JWordSplitterDictionary
 	implements Dictionary

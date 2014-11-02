@@ -72,9 +72,9 @@ public class PennTreebankCombinedReader
 
     /**
      * Sets whether to create or not to create POS tags. The creation of
-     * constituent tags must be turned on for this to work.<br/>
+     * constituent tags must be turned on for this to work.
      *
-     * Default: {@code true}
+     * <p>Default: {@code true}</p>
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
     @ConfigurationParameter(name = PARAM_READ_POS, mandatory = true, defaultValue = "true")
@@ -101,7 +101,7 @@ public class PennTreebankCombinedReader
      * Use the {@link String#intern()} method on tags. This is usually a good idea to avoid
      * spaming the heap with thousands of strings representing only a few different tags.
      *
-     * Default: {@code true}
+     * <p>Default: {@code true}</p>
      */
     public static final String PARAM_INTERN_TAGS = ComponentParameters.PARAM_INTERN_TAGS;
     @ConfigurationParameter(name = PARAM_INTERN_TAGS, mandatory = false, defaultValue = "true")

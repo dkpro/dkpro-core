@@ -22,7 +22,7 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
  * Data container for a split element. A split element contains a word and optional a linking
  * morpheme
  *
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class Fragment
 {

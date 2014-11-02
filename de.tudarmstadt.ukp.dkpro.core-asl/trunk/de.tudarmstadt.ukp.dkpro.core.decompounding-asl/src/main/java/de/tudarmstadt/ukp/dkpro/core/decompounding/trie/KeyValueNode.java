@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A key/value tree node
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  * 
  * @param <K>
  *            The Key object

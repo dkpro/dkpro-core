@@ -72,14 +72,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * DKPro Annotator for the MaltParser
  * </p>
  *
- * Required annotations:<br/>
+ * Required annotations:
  * <ul>
  * <li>Token</li>
  * <li>Sentence</li>
  * <li>POS</li>
  * </ul>
  *
- * Generated annotations:<br/>
+ * Generated annotations:
  * <ul>
  * <li>Dependency (annotated over sentence-span)</li>
  * </ul>
@@ -88,7 +88,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * @author Oliver Ferschke
  * @author Richard Eckart de Castilho
  */
-
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

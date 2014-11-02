@@ -34,8 +34,7 @@ import java.util.Set;
  * 
  * This can be used to create your own dictionary from a corpus
  * 
- * @author Jens Haase <je.haase@googlemail.com>
- * 
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class SimpleDictionary
 	implements Dictionary
@@ -91,11 +90,14 @@ public class SimpleDictionary
 		return words.contains(aWord);
 	}
 
-	/**
-	 * Reads the dictionary to set
-	 * 
-	 * @return A set of words
-	 */
+    /**
+     * Reads the dictionary to set
+     * 
+     * @param aReader
+     *            a reader,
+     * @return A set of words
+     * @throws IOException if an I/O error occurs.
+     */
 	protected Set<String> readFileToSet(BufferedReader aReader)
 		throws IOException
 	{

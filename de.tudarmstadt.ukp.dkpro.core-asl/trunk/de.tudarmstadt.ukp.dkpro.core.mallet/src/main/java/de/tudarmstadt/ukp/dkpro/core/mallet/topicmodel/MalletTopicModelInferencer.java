@@ -56,9 +56,7 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  *
  * @author Carsten Schnober
- *
  */
-
 public class MalletTopicModelInferencer
     extends JCasAnnotator_ImplBase
 {
@@ -101,7 +99,7 @@ public class MalletTopicModelInferencer
     private double minTopicProb;
 
     /**
-     * Maximum number of topics to assign. If not set (or <= 0), the number of topics in the model
+     * Maximum number of topics to assign. If not set (or &lt;= 0), the number of topics in the model
      * divided by 10 is set.
      */
     public final static String PARAM_MAX_TOPIC_ASSIGNMENTS = "maxTopicAssignments";

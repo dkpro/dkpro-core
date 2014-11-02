@@ -30,7 +30,7 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 /**
  * A data driven algorithm, that uses a TRIE to look for splits
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class DataDrivenSplitterAlgorithm
     implements SplitterAlgorithm

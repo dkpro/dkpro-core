@@ -42,7 +42,7 @@ import com.googlecode.jweb1t.JWeb1TSearcher;
 /**
  * This class searches on the Lucene Index for n-grams.
  * 
- * @author Jens Haase <je.haase@googlemail.com>
+ * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class Finder
 {

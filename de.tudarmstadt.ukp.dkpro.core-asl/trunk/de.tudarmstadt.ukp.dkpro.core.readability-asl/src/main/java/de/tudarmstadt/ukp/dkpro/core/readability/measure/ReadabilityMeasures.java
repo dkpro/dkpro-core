@@ -109,6 +109,10 @@ public class ReadabilityMeasures
     /**
      * Calculate Kincaid Formula (reading grade).
      * 
+     * @param words words
+     * @param nrofSentences number of sentences.
+     * @return score.
+     * 
      */
     public double kincaid(List<String> words, int nrofSentences)
     {
@@ -125,6 +129,9 @@ public class ReadabilityMeasures
     /**
      * Calculate Automated Readability Index (reading grade).
      * 
+     * @param words words.
+     * @param nrofSentences number of sentences.
+     * @return score.
      */
     public double ari(List<String> words, int nrofSentences)
     {
@@ -140,6 +147,10 @@ public class ReadabilityMeasures
     
     /**
      * Calculate Coleman-Liau formula.
+     * 
+     * @param words words.
+     * @param nrofSentences number of sentences.
+     * @return score.
      * 
      */
     public double coleman_liau(List<String> words, int nrofSentences)
@@ -158,6 +169,9 @@ public class ReadabilityMeasures
     /**
      * Calculate Flesch reading ease score.
      * 
+     * @param words words.
+     * @param nrofSentences number of sentences.
+     * @return score.
      */
     public double flesch(List<String> words, int nrofSentences)
     {
@@ -177,6 +191,9 @@ public class ReadabilityMeasures
     /**
      * Calculate FOG index.
      * 
+     * @param words words.
+     * @param nrofSentences number of sentences.
+     * @return score.
      */
     public double fog(List<String> words, int nrofSentences)
     {
@@ -192,7 +209,9 @@ public class ReadabilityMeasures
     /**
      * Calculate Björnsson's Lix formula.
      * 
-     * @returns the wheeler smith index as result and the grade level in grade.
+     * @param words words.
+     * @param nrofSentences number of sentences.
+     * @return the wheeler smith index as result and the grade level in grade.
      *          If grade is 0, the index is lower than any grade, if the index
      *          is 99, it is higher than any grade.
      */
@@ -228,6 +247,9 @@ public class ReadabilityMeasures
     /**
      * Calculate SMOG-Grading.
      * 
+     * @param words words.
+     * @param nrofSentences number of sentences.
+     * @return score.
      */
     public double smog(List<String> words, int nrofSentences)
     {

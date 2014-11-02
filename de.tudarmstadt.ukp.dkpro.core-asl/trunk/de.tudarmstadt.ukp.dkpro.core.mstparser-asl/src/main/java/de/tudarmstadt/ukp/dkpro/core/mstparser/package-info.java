@@ -17,7 +17,7 @@
  ******************************************************************************/
 
 /**
- * Integration of the <a href=http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html>MST<\a> dependency parser.
- *
+ * Integration of the <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">MST</a> 
+ * dependency parser.
  */
 package de.tudarmstadt.ukp.dkpro.core.mstparser;

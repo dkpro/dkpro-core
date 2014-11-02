@@ -244,6 +244,11 @@ public class PennTreeUtils
     
     /**
      * Remove trailing or leading whitespace from the annotation.
+     * 
+     * @param aText
+     *            the text.
+     * @param aSpan
+     *            the offsets (will be updated in the process).
      */
     public static void trim(CharSequence aText, int[] aSpan)
     {

@@ -46,34 +46,36 @@ import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.FlushTemplates;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParser;
 import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
 import de.tudarmstadt.ukp.wikipedia.util.templates.WikipediaTemplateInfo;
+import de.tudarmstadt.ukp.wikipedia.util.templates.WikipediaTemplateInfoGenerator;
 
 /**
- * Reads all pages that contain or do not contain the templates specified
- * in the template whitelist and template blacklist.<br/>
- * It is possible to just define a whitelist OR a blacklist. If both whitelist
- * and blacklist are provided, the articles are chosen that DO contain the
- * templates from the whitelist and at the same time DO NOT contain the
- * templates from the blacklist (= the intersection of the "whitelist page set"
- * and the "blacklist page set")<br/>
- * <br/>
- * This reader only works if template tables have been generated for the JWPL
- * database using the {@code WikipediaTemplateInfoGenerator}.<br/>
- * <br/>
- * <strong>NOTE:</strong> This reader directly extends the WikipediaReaderBase and not the
- * WikipediaStandardReaderBase <br/>
+ * Reads all pages that contain or do not contain the templates specified in the template whitelist
+ * and template blacklist.
+ * 
+ * <p>
+ * It is possible to just define a whitelist OR a blacklist. If both whitelist and blacklist are
+ * provided, the articles are chosen that DO contain the templates from the whitelist and at the
+ * same time DO NOT contain the templates from the blacklist (= the intersection of the
+ * "whitelist page set" and the "blacklist page set")
+ * </p>
+ * 
+ * <p>
+ * This reader only works if template tables have been generated for the JWPL database using the
+ * {@link WikipediaTemplateInfoGenerator}.
+ * </p>
+ * 
+ * <p>
+ * <strong>NOTE:</strong> This reader directly extends the {@link WikipediaReaderBase} and not the
+ * {@link WikipediaStandardReaderBase}
+ * </p>
  *
  * @author Oliver Ferschke
  */
-
-@TypeCapability(
-    outputs={
-            "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
-            "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
-
-public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
+@TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
+        "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })
+public class WikipediaTemplateFilteredArticleReader
+    extends WikipediaReaderBase
 {
-
-
     /** If set to true, only the first paragraph instead of the whole article is used. */
     public static final String PARAM_ONLY_FIRST_PARAGRAPH = "OnlyFirstParagraph";
     @ConfigurationParameter(name = PARAM_ONLY_FIRST_PARAGRAPH, mandatory=true, defaultValue="false")
@@ -89,47 +91,51 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	@ConfigurationParameter(name = PARAM_INCLUDE_DISCUSSION_PAGES, mandatory = true, defaultValue = "true")
 	private boolean inludeDiscussions;
 
-	/**
-	 *  If this option is set, discussion pages are rejected that are
-	 *  associated with a blacklisted article. Analogously, articles are
-	 *  rejected that are associated with a blacklisted discussion page.<br/>
-	 *  <br/>
-	 *  This check is rather expensive and could take a long time.<br/>
-	 *  This is option is not active if only a whitelist is used.<br/>
-	 *  Default Value: false
-	 */
+    /**
+     * If this option is set, discussion pages are rejected that are associated with a blacklisted
+     * article. Analogously, articles are rejected that are associated with a blacklisted discussion
+     * page.
+     * <p>
+     * This check is rather expensive and could take a long time. This is option is not active if
+     * only a whitelist is used.
+     * </p>
+     * <p>
+     * Default Value: false
+     * </p>
+     */
 	public static final String PARAM_DOUBLE_CHECK_ASSOCIATED_PAGES = "DoubleCheckAssociatedPages";
 	@ConfigurationParameter(name = PARAM_DOUBLE_CHECK_ASSOCIATED_PAGES, mandatory = true, defaultValue = "false")
 	private boolean doubleCheckWhitelistedArticles;
 
-	/**
-	 * Optional parameter that allows to define the max number of articles
-	 * that should be delivered by the reader.<br/>
-	 * This avoids unnecessary filtering if only a small number of articles is
-	 * needed.
-	 *
-	 */
+    /**
+     * Optional parameter that allows to define the max number of articles that should be delivered
+     * by the reader.
+     * <p>
+     * This avoids unnecessary filtering if only a small number of articles is needed.
+     * </p>
+     */
 	public static final String PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ = "LimitNUmberOfArticlesToRead";
 	@ConfigurationParameter(name = PARAM_LIMIT_NUMBER_OF_ARTICLES_TO_READ, mandatory = false)
 	private Integer articleLimit;
 
-
-	/**
-	 * Defines templates that the articles MUST contain.<br/>
-	 * If you also define a blacklist, the intersection of both sets is used.
-	 * (= pages that DO contain templates from the whitelist, but DO NOT contain
-	 * templates from the blacklist)
-	 */
+    /**
+     * Defines templates that the articles MUST contain.
+     * <p>
+     * If you also define a blacklist, the intersection of both sets is used. (= pages that DO
+     * contain templates from the whitelist, but DO NOT contain templates from the blacklist)
+     * </p>
+     */
 	public static final String PARAM_TEMPLATE_WHITELIST = "TemplateWhitelist";
 	@ConfigurationParameter(name = PARAM_TEMPLATE_WHITELIST, mandatory = false)
 	private String[] templateWhitelistArray;
 
-	/**
-	 * Defines templates that the articles MUST NOT contain.<br/>
-	 * If you also define a whitelist, the intersection of both sets is used.
-	 * (= pages that DO contain templates from the whitelist, but DO NOT contain
-	 * templates from the blacklist)
-	 */
+    /**
+     * Defines templates that the articles MUST NOT contain.
+     * <p>
+     * If you also define a whitelist, the intersection of both sets is used. (= pages that DO
+     * contain templates from the whitelist, but DO NOT contain templates from the blacklist)
+     * </p>
+     */
 	public static final String PARAM_TEMPLATE_BLACKLIST = "TemplateBlacklist";
 	@ConfigurationParameter(name = PARAM_TEMPLATE_BLACKLIST, mandatory = false)
 	private String[] templateBlacklistArray;
@@ -137,14 +143,14 @@ public class WikipediaTemplateFilteredArticleReader extends WikipediaReaderBase
 	/**
 	 * Defines whether to match the templates exactly or whether to match all
 	 * templates that start with the String given in the respective parameter
-	 * list.<br/>
-	 * Default Value: true
+	 * list.
+	 * <p>Default Value: {@code true}</p>
 	 */
 	public static final String PARAM_EXACT_TEMPLATE_MATCHING = "ExactTemplateMatching";
 	@ConfigurationParameter(name = PARAM_EXACT_TEMPLATE_MATCHING, mandatory = true, defaultValue="true")
 	private boolean exactTemplateMatching;
 
-	/** The page buffer size (#pages) of the page iterator. */
+    /** The page buffer size (#pages) of the page iterator. */
 	public static final String PARAM_PAGE_BUFFER = "PageBuffer";
 	@ConfigurationParameter(name = PARAM_PAGE_BUFFER, mandatory = true, defaultValue = "1000")
 	private int pageBuffer;
