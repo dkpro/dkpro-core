@@ -182,6 +182,7 @@ public class TreeUtils
      * @param root
      *            the ROOT annotation
      * @return an {@link Tree} object representing the syntax structure of the sentence
+     * @throws CASException if the JCas cannot be accessed.
      */
     public static Tree createStanfordTreeWithAnnotations(Annotation root)
         throws CASException
@@ -265,7 +266,6 @@ public class TreeUtils
      * @return the sentence
      */
     public static String pennString2Words(String penn)
-        throws IOException
     {
         return tree2Words(pennString2Tree(penn));
     }
@@ -307,6 +307,12 @@ public class TreeUtils
 
     /**
      * Returns a list of Token annotations from a Tree-object
+     * 
+     * @param aJCas
+     *            a JCas.
+     * @param t
+     *            a tree.
+     * @return the tokens.
      */
     public static List<Token> getTokenListFromTree(JCas aJCas, Tree t)
     {
@@ -367,12 +373,14 @@ public class TreeUtils
      * @return a tree representation of the PennString (LabeledScoredTree)
      */
     public static Tree pennString2Tree(String pennString)
-        throws IOException
     {
         TreeReader tr = null;
         try {
             tr = new PennTreeReader(new StringReader(pennString), new LabeledScoredTreeFactory());
             return tr.readTree();
+        }
+        catch (IOException e) {
+            throw new IllegalStateException(e);
         }
         finally {
             closeQuietly(tr);

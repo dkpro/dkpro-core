@@ -50,13 +50,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * DKPro Annotator for the MateToolsLemmatizer
  * </p>
  *
- * Required annotations:<br/>
+ * Required annotations:
  * <ul>
  * <li>Token</li>
  * <li>Sentence</li>
  * </ul>
  *
- * Generated annotations:<br/>
+ * Generated annotations:
  * <ul>
  * <li>Lemma</li>
  * </ul>

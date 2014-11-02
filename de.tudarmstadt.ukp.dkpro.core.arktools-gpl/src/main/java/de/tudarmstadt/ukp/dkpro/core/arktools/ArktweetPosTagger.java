@@ -101,11 +101,7 @@ public class ArktweetPosTagger
 
     /**
      * Loads a model from a file. The tagger should be ready to tag after calling this.
-     *
-     * @param modelFilename
-     * @throws IOException
      */
-
     public class TweetTagger
     {
         Model model;

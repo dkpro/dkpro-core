@@ -387,6 +387,10 @@ public class CasCopier
 
     /**
      * Returns whether the given FS has already been copied using this CasCopier.
+     * 
+     * @param aFS
+     *            a feature structure.
+     * @return if the FS has already been copied.
      */
     public boolean alreadyCopied(FeatureStructure aFS)
     {

@@ -65,14 +65,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * Dependency Parsing is not a Contradiction. The 23rd International Conference on Computational
  * Linguistics (COLING 2010), Beijing, China.
  *
- * Required annotations:<br/>
+ * Required annotations:
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>POS</li>
  * </ul>
  *
- * Generated annotations:<br/>
+ * Generated annotations:
  * <ul>
  * <li>Dependency</li>
  * </ul>

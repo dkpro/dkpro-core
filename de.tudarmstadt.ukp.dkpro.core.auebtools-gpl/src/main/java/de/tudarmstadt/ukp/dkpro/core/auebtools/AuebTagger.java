@@ -35,7 +35,6 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -46,12 +45,9 @@ import gr.aueb.cs.nlp.postagger.SmallSetFunctions;
 import gr.aueb.cs.nlp.postagger.WordWithCategory;
 
 /**
- * Wrapper for the AUEB Greek POS tagger.
- *
- * {@link http://nlp.cs.aueb.gr/software.html}
+ * Wrapper for the <a href="http://nlp.cs.aueb.gr/software.html">AUEB Greek POS tagger</a>.
  *
  * @author zesch
- *
  */
 @TypeCapability(
         inputs = {

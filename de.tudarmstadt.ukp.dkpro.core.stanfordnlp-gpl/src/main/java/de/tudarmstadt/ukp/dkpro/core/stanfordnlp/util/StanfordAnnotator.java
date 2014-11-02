@@ -48,7 +48,8 @@ import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.util.IntPair;
 
 /**
- * A StanfordAnnotator-object creates most of the annotations for the StanfordParser component.<br/>
+ * A StanfordAnnotator-object creates most of the annotations for the StanfordParser component.
+ * <p>
  * The code has been moved away from the Parser component because it is also used by other
  * components (e.g. Transformations)
  *
@@ -108,8 +109,14 @@ public class StanfordAnnotator
     }
 
     /**
-     * Creates linked constituent annotations, POS annotations and lemma-annotations.<br/>
+     * Creates linked constituent annotations, POS annotations and lemma-annotations.
+     * <p>
      * Note: The annotations are directly written to the indexes of the CAS.
+     * 
+     * @param aTreebankLanguagePack
+     *            the language pack.
+     * @param aCreatePos
+     *            whether to create POS annotations.
      */
     public void createConstituentAnnotationFromTree(TreebankLanguagePack aTreebankLanguagePack,
             boolean aCreatePos)
@@ -120,13 +127,15 @@ public class StanfordAnnotator
 
     /**
      * Creates linked constituent annotations + POS annotations
-     *
+     * 
+     * @param aTreebankLanguagePack
+     *            the language pack.
      * @param aNode
      *            the source tree
+     * @param aParentFS
+     *            the parent annotation
      * @param aCreatePos
      *            sets whether to create or not to create POS tags
-     * @param aCreateLemmas
-     *            sets whether to create or not to create Lemmas
      * @return the child-structure (needed for recursive call only)
      */
     private Annotation createConstituentAnnotationFromTree(
@@ -248,10 +257,13 @@ public class StanfordAnnotator
      *            end-index of the constituent span
      * @param aConstituentType
      *            the constituent type
+     * @param aSyntacticFunction
+     *            the syntactic function
      * @return the annotation
      */
-    public Constituent createConstituentAnnotation(int aBegin, int aEnd, String aConstituentType, String aSyntacticFunction)
-	{
+    public Constituent createConstituentAnnotation(int aBegin, int aEnd, String aConstituentType,
+            String aSyntacticFunction)
+    {
         // create the necessary objects and methods
         Type constType = constituentMappingProvider.getTagType(aConstituentType);
 
@@ -289,7 +301,9 @@ public class StanfordAnnotator
 
     /**
      * Writes dependency annotations to the JCas
-     *
+     * 
+     * @param aDependencyType
+     *            the dependency type
      * @param aGovernor
      *            the governing-word
      * @param aDependent
@@ -320,6 +334,11 @@ public class StanfordAnnotator
 
     /**
      * Creates annotation with Penn Treebank style representations of the syntax tree
+     * 
+     * @param aBegin
+     *            start offset.
+     * @param aEnd
+     *            end offset.
      */
     public void createPennTreeAnnotation(int aBegin, int aEnd)
     {
@@ -337,13 +356,12 @@ public class StanfordAnnotator
 
     /**
      * Recovers annotations from a Stanford Tree-Object, which have been saved within the CoreLabel
-     * of the tree.<br/>
-     *
-     * Note:<br/>
+     * of the tree.
+     *<p>
+     * Note:
      * Copying has to be done in batch, because we need to have ALL annotations that should be
      * recovered together when copying them. The reason is that some annotations reference each
      * other, which can cause problem if a referenced annotation has not yet been recovered.
-     *
      */
     public void recoverAnnotationsFromNodes()
     {

@@ -26,10 +26,9 @@ import edu.stanford.nlp.ling.CoreAnnotation;
 
 /**
  * Annotations of the type "UIMAAnnotations" should contain a Collection
- * of org.apache.uima.jcas.tcas.Annotation objects.<br/>
+ * of org.apache.uima.jcas.tcas.Annotation objects.
  *
  * @author Oliver Ferschke
- *
  */
 @SuppressWarnings("rawtypes")
 public class UIMAAnnotations

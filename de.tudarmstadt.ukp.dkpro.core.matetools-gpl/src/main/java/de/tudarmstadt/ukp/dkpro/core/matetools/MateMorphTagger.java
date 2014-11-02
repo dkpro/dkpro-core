@@ -50,14 +50,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * DKPro Annotator for the MateToolsMorphTagger
  * </p>
  *
- * Required annotations:<br/>
+ * Required annotations:
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>Lemma</li>
  * </ul>
  *
- * Generated annotations:<br/>
+ * Generated annotations:
  * <ul>
  * <li>MorphTag</li>
  * </ul>

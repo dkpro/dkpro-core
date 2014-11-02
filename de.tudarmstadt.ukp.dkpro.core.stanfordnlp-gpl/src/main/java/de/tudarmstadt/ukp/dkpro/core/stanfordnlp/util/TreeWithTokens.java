@@ -90,13 +90,14 @@ public class TreeWithTokens
 
 	/**
 	 * Returns the span of the documentText that is covered by a given subtree,
-	 * that has to be taken directly from the original tree.<br/>
-	 *
+	 * that has to be taken directly from the original tree.
+	 * <p>
 	 * NOTE: Possibly we could make this more general to also support general
 	 * trees that are contained in the original tree, but are not directly taken
 	 * from it (i.e. with different leaf-numbering). In order to do so, we would
 	 * have to make a Tregex-Matching of the given subtree in the original tree
-	 * to identify the positition of the given subtree.<br/>
+	 * to identify the positition of the given subtree.
+	 * <p>
 	 * This could be achieved by translating the subtree into a Tregex pattern
 	 * and then matching this pattern against the original tree.
 	 *

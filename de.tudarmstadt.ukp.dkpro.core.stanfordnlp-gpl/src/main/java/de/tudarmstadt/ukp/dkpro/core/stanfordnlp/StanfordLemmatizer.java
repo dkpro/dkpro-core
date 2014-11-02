@@ -41,7 +41,7 @@ import edu.stanford.nlp.process.Morphology;
  * flex and publicly available. See:
  * http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
  * 
- * This only works for ENGLISH.<br/>
+ * <p>This only works for ENGLISH.</p>
  */
 public class StanfordLemmatizer
     extends JCasAnnotator_ImplBase

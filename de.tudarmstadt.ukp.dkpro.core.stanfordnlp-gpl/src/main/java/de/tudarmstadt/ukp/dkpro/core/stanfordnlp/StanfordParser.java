@@ -133,7 +133,7 @@ public class StanfordParser
          * <ol>
          * <li>no processing of relative clauses</li>
          * <li>no xsubj relations</li>
-         * <li>no propagation of conjuncts</lu>
+         * <li>no propagation of conjuncts</li>
          * </ol>
          * Corresponding parser option: {@code tree}
          */
@@ -184,18 +184,18 @@ public class StanfordParser
     protected String constituentMappingLocation;
     
     /**
-     * Sets whether to create or not to create dependency annotations. <br/>
+     * Sets whether to create or not to create dependency annotations.
      * 
-     * Default: {@code true}
+     * <p>Default: {@code true}
      */
     public static final String PARAM_WRITE_DEPENDENCY = ComponentParameters.PARAM_WRITE_DEPENDENCY;
     @ConfigurationParameter(name = PARAM_WRITE_DEPENDENCY, mandatory = true, defaultValue = "true")
     private boolean writeDependency;
 
     /**
-     * Sets the kind of dependencies being created. <br/>
+     * Sets the kind of dependencies being created.
      * 
-     * Default: {@link DependenciesMode#COLLAPSED TREE}
+     * <p>Default: {@link DependenciesMode#COLLAPSED TREE}
      * @see DependenciesMode
      */
     public static final String PARAM_MODE = "mode";
@@ -204,8 +204,8 @@ public class StanfordParser
     
     /**
      * Sets whether to create or not to create constituent tags. This is required for POS-tagging
-     * and lemmatization.<br/>
-     * 
+     * and lemmatization.
+     * <p>
      * Default: {@code true}
      */
     public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
@@ -214,8 +214,8 @@ public class StanfordParser
 
     /**
      * If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
-     * containing the whole parse tree in Penn Treebank style format.<br/>
-     * 
+     * containing the whole parse tree in Penn Treebank style format.
+     * <p>
      * Default: {@code false}
      */
     public static final String PARAM_WRITE_PENN_TREE = ComponentParameters.PARAM_WRITE_PENN_TREE;
@@ -224,10 +224,10 @@ public class StanfordParser
 
     /**
      * This parameter can be used to override the standard behavior which uses the <i>Sentence</i>
-     * annotation as the basic unit for parsing.<br/>
-     * If the parameter is set with the name of an annotation type <i>x</i>, the parser will no
-     * longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.<br/>
-     * Default: {@code null}
+     * annotation as the basic unit for parsing.
+     * <p>If the parameter is set with the name of an annotation type <i>x</i>, the parser will no
+     * longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.</p>
+     * <p>Default: {@code null}
      */
     public static final String PARAM_ANNOTATIONTYPE_TO_PARSE = "annotationTypeToParse";
     @ConfigurationParameter(name = PARAM_ANNOTATIONTYPE_TO_PARSE, mandatory = false)
@@ -235,7 +235,8 @@ public class StanfordParser
 
     /**
      * Sets whether to create or not to create POS tags. The creation of constituent tags must be
-     * turned on for this to work.<br/>
+     * turned on for this to work.
+     * <p>
      * Default: {@code false}
      */
     public static final String PARAM_WRITE_POS = ComponentParameters.PARAM_WRITE_POS;
@@ -244,7 +245,8 @@ public class StanfordParser
 
     /**
      * Sets whether to use or not to use already existing POS tags from another annotator for the
-     * parsing process.<br/>
+     * parsing process.
+     * <p>
      * Default: {@code true}
      */
     public static final String PARAM_READ_POS = ComponentParameters.PARAM_READ_POS;
@@ -253,7 +255,8 @@ public class StanfordParser
 
     /**
      * Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to avoid out
-     * of memory exceptions.<br/>
+     * of memory exceptions.
+     * <p>
      * Default: {@code 130}
      * 
      * @see TestOptions#maxLength
@@ -263,8 +266,9 @@ public class StanfordParser
     private int maxTokens;
 
     /**
-     * Controls when the factored parser considers a sentence to be too complex and falls back
-     * to the PCFG parser.<br/>
+     * Controls when the factored parser considers a sentence to be too complex and falls back to
+     * the PCFG parser.
+     * <p>
      * Default: {@code 200000}
      * 
      * @see TestOptions#MAX_ITEMS
