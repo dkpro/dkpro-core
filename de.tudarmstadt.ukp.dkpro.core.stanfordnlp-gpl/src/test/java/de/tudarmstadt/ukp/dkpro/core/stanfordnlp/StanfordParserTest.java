@@ -587,6 +587,9 @@ public class StanfordParserTest
 
     /**
      * This test uses simple double quotes.
+     * 
+     * @throws Exception
+     *             if there is an error.
      */
     @Test
     public void testEnglishFactoredDirectSpeech()
@@ -609,6 +612,9 @@ public class StanfordParserTest
 
     /**
      * This test uses UTF-8 quotes as they can be found in the British National Corpus.
+     * 
+     * @throws Exception
+     *             if there is an error.
      */
     @Test
     public void testEnglishFactoredDirectSpeech2()
@@ -702,6 +708,9 @@ public class StanfordParserTest
 
     /**
      * Tests the parser reading pre-existing POS tags
+     * 
+     * @throws Exception
+     *             if there is an error.
      */
     @Test
     public void testExistingPos()
@@ -1024,6 +1033,9 @@ public class StanfordParserTest
      * This tests whether a complete syntax tree can be recreated from the annotations without any
      * loss. Consequently, all links to children should be correct. (This makes no assertions about
      * the parent-links, because they are not used for the recreation)
+     * 
+     * @throws Exception
+     *             if there is an error.
      */
     @Test
     public void testEnglishSyntaxTreeReconstruction()
