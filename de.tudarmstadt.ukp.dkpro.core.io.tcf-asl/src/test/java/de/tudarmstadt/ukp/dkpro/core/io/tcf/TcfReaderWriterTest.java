@@ -30,9 +30,12 @@ import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
-import org.junit.Before;
+import org.custommonkey.xmlunit.XMLAssert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.xml.sax.InputSource;
 
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import eu.clarin.weblicht.wlfxb.io.WLDObjector;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpus;
 import eu.clarin.weblicht.wlfxb.tc.api.TextCorpusLayer;
@@ -95,12 +98,10 @@ public class TcfReaderWriterTest
                     layer.size(), 
                     getLayer(aCorpusDataActual, layer.getClass()).size());
         }
-        
-        String reference = FileUtils.readFileToString(
-                new File("src/test/resources/" + aExpectedFile), "UTF-8");
-        String actual = FileUtils.readFileToString(
-                new File("target/test-output/oneway/" + aInputFile), "UTF-8");
-        assertEquals(reference, actual);
+
+        XMLAssert.assertXMLEqual(
+                new InputSource("src/test/resources/" + aExpectedFile),
+                new InputSource(new File("target/test-output/oneway/" + aInputFile).getPath()));
     }
 
     private static TextCorpusLayer getLayer(TextCorpus aCorpus, Class<? extends TextCorpusLayer> aLayerType)
@@ -137,9 +138,6 @@ public class TcfReaderWriterTest
         assertEquals(reference, actual);
     }
 
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
