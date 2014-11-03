@@ -36,8 +36,9 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+    <!-- Required while UimaUtils 3.0.0 is not yet released -->
+    <!--
 		<repository>
-			<!-- Required while UimaUtils 3.0.0 is not yet released -->
 			<id>anc-snapshots</id>
 			<url>http://www.anc.org:8080/nexus/content/repositories/snapshots</url>
 			<releases>
@@ -47,6 +48,7 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+    -->
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -64,17 +66,7 @@
 		<dependency>
 			<groupId>org.xces.graf.uima</groupId>
 			<artifactId>UimaUtils</artifactId>
-			<version>3.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tc37sc4.graf</groupId>
-			<artifactId>graf-api</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.tc37sc4.graf</groupId>
-			<artifactId>graf-io</artifactId>
-			<version>1.2.3-SNAPSHOT</version>
+			<version>3.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -84,6 +76,18 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>xmlunit</groupId>
+		  <artifactId>xmlunit</artifactId>
+		  <version>1.5</version>
+      <scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.slf4j</groupId>
+		  <artifactId>slf4j-log4j12</artifactId>
+		  <version>1.6.6</version>
+      <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
