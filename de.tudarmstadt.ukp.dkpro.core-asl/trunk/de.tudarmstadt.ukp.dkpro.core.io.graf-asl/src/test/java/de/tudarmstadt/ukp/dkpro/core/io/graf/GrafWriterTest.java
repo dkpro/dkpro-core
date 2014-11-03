@@ -17,33 +17,31 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.graf;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.component.CasDumpWriter;
+import org.custommonkey.xmlunit.Diff;
+import org.custommonkey.xmlunit.ElementNameAndAttributeQualifier;
+import org.custommonkey.xmlunit.XMLAssert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.xml.sax.InputSource;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.DocumentMetaDataStripper;
 
 public class GrafWriterTest
 {
-	@Rule
-	public TemporaryFolder testFolder = new TemporaryFolder();
-
 	@Test
 	public void test() throws Exception
 	{
@@ -53,6 +51,8 @@ public class GrafWriterTest
 
 	public void write() throws Exception
 	{
+	    File targetFolder = new File("target/test-output/"+testContext.getTestOutputFolderName());
+	    
 		CollectionReaderDescription textReader = createReaderDescription(
 				TextReader.class,
 				TextReader.PARAM_LANGUAGE, "en",
@@ -72,23 +72,18 @@ public class GrafWriterTest
 
 		AnalysisEngineDescription grafWriter = createEngineDescription(
 				GrafWriter.class,
-				GrafWriter.PARAM_TARGET_LOCATION, testFolder.getRoot().getPath());
+				GrafWriter.PARAM_TARGET_LOCATION, targetFolder);
 
-		AnalysisEngineDescription dumpWriter = createEngineDescription(
-		        CasDumpWriter.class,
-		        CasDumpWriter.PARAM_OUTPUT_FILE, "-");
+		runPipeline(textReader, segmenter, posTagger, stripper, grafWriter);
 
-		runPipeline(textReader, segmenter, posTagger, stripper, grafWriter, dumpWriter);
-
-		File output = new File(testFolder.getRoot(), "example1.txt.xml");
+		File output = new File(targetFolder, "example1.txt.xml");
 		assertTrue(output.exists());
 
-		String expected = readFileToString(new File("src/test/resources/reference/example1.txt.xml"), "UTF-8");
-		String actual = readFileToString(output, "UTF-8");
-
-		System.out.println(actual);
-
-		assertEquals(expected, actual);
+        Diff myDiff = new Diff(
+                new InputSource("src/test/resources/reference/example1.txt.xml"),
+                new InputSource(output.getPath()));
+        myDiff.overrideElementQualifier(new ElementNameAndAttributeQualifier());
+        XMLAssert.assertXMLEqual(myDiff, true);     
 	}
 
 //	public void read() throws Exception
@@ -107,4 +102,7 @@ public class GrafWriterTest
 //		assertEquals(refText, cas.getDocumentText());
 //		assertEquals("latin", cas.getDocumentLanguage());
 //	}
+	
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
