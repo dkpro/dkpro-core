@@ -120,7 +120,7 @@ public class Web1TFormatWriter
 	private float splitThreshold;
 
 	/**
-	 * The type being used for segments 
+	 * The type being used for segments
 	 */
     public static final String PARAM_CONTEXT_TYPE = "contextType";
     @ConfigurationParameter(name = PARAM_CONTEXT_TYPE, mandatory = true, defaultValue="de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence")
@@ -136,7 +136,7 @@ public class Web1TFormatWriter
 		super.initialize(context);
 
 		try {
-            this.converter = new Web1TConverter(outputPath);
+            this.converter = new Web1TConverter(outputPath, minNgramLength, maxNgramLength);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
@@ -145,8 +145,6 @@ public class Web1TFormatWriter
 		converter.setWriteIndexes(createIndexes);
 		converter.setSplitThreshold(splitThreshold);
 		converter.setMinFrequency(minFreq);
-		converter.setMinNgramLength(minNgramLength);
-		converter.setMaxNgramLength(maxNgramLength);
 		converter.setToLowercase(lowercase);
 		converter.setOutputEncoding(outputEncoding);
 	}

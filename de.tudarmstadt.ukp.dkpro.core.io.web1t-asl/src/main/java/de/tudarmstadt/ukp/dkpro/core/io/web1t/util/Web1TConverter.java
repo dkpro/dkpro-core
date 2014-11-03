@@ -60,7 +60,7 @@ public class Web1TConverter
     private static final String LF = "\n";
     private static final String TAB = "\t";
 
-    private final String outputPath;
+    private String outputPath;
     private String outputEncoding = "UTF-8";
     private int minNgramLength = 1;
     private int maxNgramLength = 3;
@@ -69,15 +69,27 @@ public class Web1TConverter
     private boolean writeIndexes = true;
     private float splitThreshold = 1.0f;
 
-    private final Map<Integer, BufferedWriter> ngramWriters;
-    private final Map<Integer, FrequencyDistribution<String>> letterFDs;
+    private Map<Integer, BufferedWriter> ngramWriters;
+    private Map<Integer, FrequencyDistribution<String>> letterFDs;
 
     public Web1TConverter(String outputPath)
         throws IOException
     {
         super();
+        init(outputPath);
+    }
 
-        this.outputPath = outputPath;
+    public Web1TConverter(String outputPath, int aMinNGramLength, int aMaxNGramLength)
+            throws IOException
+        {
+            super();
+            this.minNgramLength = aMinNGramLength;
+            this.maxNgramLength = aMaxNGramLength;
+            init(outputPath);
+        }
+
+    private void init(String aOutputPath) throws IOException{
+        this.outputPath = aOutputPath;
 
         ngramWriters = initializeWriters(minNgramLength, maxNgramLength);
         letterFDs = initializeLetterFDs(minNgramLength, maxNgramLength);
