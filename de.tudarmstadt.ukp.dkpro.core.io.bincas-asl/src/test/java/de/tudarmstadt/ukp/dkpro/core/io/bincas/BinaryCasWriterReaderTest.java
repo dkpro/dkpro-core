@@ -285,7 +285,7 @@ public class BinaryCasWriterReaderTest
             tsd = null;
             break;
         case METADATA:
-            tsd = createTypeSystemDescription("desc.type.metadata");
+            tsd = createTypeSystemDescription("desc.type.metadata", "desc.type.metadata_customized");
             break;
         case ALL:
             tsd = createTypeSystemDescription();
