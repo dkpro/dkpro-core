@@ -41,6 +41,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.impl.FeatureStructureImpl;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.CasConsumer_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
@@ -219,7 +220,19 @@ public class CasDumpWriter
                         return end;
                     }
 
-                    return aO1.getType().getName().compareTo(aO2.getType().getName());
+                    int name = aO1.getType().getName().compareTo(aO2.getType().getName());
+                    if (name != 0) {
+                        return name;
+                    }
+                    
+                    // Last resort: try the address.
+                    if (aO1 instanceof FeatureStructureImpl && aO2 instanceof FeatureStructureImpl) {
+                        return ((FeatureStructureImpl) aO1).getAddress()
+                                - ((FeatureStructureImpl) aO2).getAddress();
+                    }
+                    
+                    // Fall back to name.
+                    return name;
                 }
             });
 
