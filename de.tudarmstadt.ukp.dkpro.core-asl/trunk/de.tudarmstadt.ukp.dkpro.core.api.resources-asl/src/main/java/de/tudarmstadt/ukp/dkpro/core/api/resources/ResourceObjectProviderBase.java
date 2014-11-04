@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -318,7 +319,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Tries to get the version of the required model from the dependency management section of the
      * Maven POM belonging to the context object.
-     * 
+     *
      * @throws IOException
      *             if there was a problem loading the POM file
      * @throws FileNotFoundException
@@ -346,7 +347,7 @@ public abstract class ResourceObjectProviderBase<M>
         String base = url.toString();
         base = base.substring(0, base.length() - classPart.length());
 
-        URL pomUrl = null;
+        List<URL> urls = new LinkedList<URL>();
 
         String extraNotFoundInfo = "";
         if ("file".equals(url.getProtocol()) && base.endsWith("target/classes/")) {
@@ -358,7 +359,7 @@ public abstract class ResourceObjectProviderBase<M>
             base = base.substring(0, base.length() - "target/classes/".length());
             File pomFile = new File(new File(URI.create(base)), "pom.xml");
             if (pomFile.exists()) {
-                pomUrl = pomFile.toURI().toURL();
+                urls.add(pomFile.toURI().toURL());
             }
             else {
                 extraNotFoundInfo = " Since it looks like you are running a Maven build, it POM "
@@ -367,7 +368,7 @@ public abstract class ResourceObjectProviderBase<M>
             }
         }
 
-        if (pomUrl == null) {
+        if (urls.isEmpty()) {
             // This is the default strategy supposed to look in the JAR
             String moduleArtifactId = modelArtifact.split("-")[0];
             String pomPattern = base + "META-INF/maven/" + modelGroup + "/" + moduleArtifactId +
@@ -381,41 +382,39 @@ public abstract class ResourceObjectProviderBase<M>
                         + extraNotFoundInfo);
             }
 
-            // Bail out if more than one POM was found (we could also just use the first one or the
-            // highest version of the model artifact referenced in any of them.
-            if (resources.length > 2) {
-                throw new IllegalStateException("Found more than one POM file found using ["
-                        + pomPattern + "]");
+            for(Resource resource : resources){
+                urls.add(resource.getURL());
             }
 
-            pomUrl = resources[0].getURL();
         }
 
-        // Parser the POM
-        Model model;
-        try {
-            MavenXpp3Reader reader = new MavenXpp3Reader();
-            model = reader.read(pomUrl.openStream());
+        for(URL pomUrl : urls){
+            // Parser the POM
+            Model model;
+            try {
+                MavenXpp3Reader reader = new MavenXpp3Reader();
+                model = reader.read(pomUrl.openStream());
 
-        }
-        catch (XmlPullParserException e) {
-            throw new IOException(e);
-        }
+            }
+            catch (XmlPullParserException e) {
+                throw new IOException(e);
+            }
 
-        // Extract the version of the model artifact
-        if ((model.getDependencyManagement() != null)
-                && (model.getDependencyManagement().getDependencies() != null)) {
-            List<Dependency> deps = model.getDependencyManagement().getDependencies();
-            for (Dependency dep : deps) {
-                if (StringUtils.equals(dep.getGroupId(), modelGroup)
-                        && StringUtils.equals(dep.getArtifactId(), modelArtifact)) {
-                    return dep.getVersion();
+            // Extract the version of the model artifact
+            if ((model.getDependencyManagement() != null)
+                    && (model.getDependencyManagement().getDependencies() != null)) {
+                List<Dependency> deps = model.getDependencyManagement().getDependencies();
+                for (Dependency dep : deps) {
+                    if (StringUtils.equals(dep.getGroupId(), modelGroup)
+                            && StringUtils.equals(dep.getArtifactId(), modelArtifact)) {
+                        return dep.getVersion();
+                    }
                 }
             }
         }
 
         // Bail out if no version information for that artifact could be found
-        throw new IllegalStateException("No version information found in [" + pomUrl + "]");
+        throw new IllegalStateException("No version information found.");
     }
 
     /**
@@ -670,10 +669,10 @@ public abstract class ResourceObjectProviderBase<M>
      * Tries to figure out which artifact contains the desired resource, tries to acquire it and
      * add it to the loader. The dependencyManagement information from the POM of the caller is
      * taken into account if possible.
-     * 
+     *
      * @param aProps the properties.
      * @throws IOException if dependencies cannot be resolved.
-     * @throws IllegalStateException if 
+     * @throws IllegalStateException if
      */
     private void resolveDependency(Properties aProps)
         throws IOException, IllegalStateException
@@ -719,7 +718,7 @@ public abstract class ResourceObjectProviderBase<M>
     /**
      * Try to fetch an artifact and its dependencies from the UKP model repository or from
      * Maven Central.
-     * 
+     *
      * @param aGroupId the group ID.
      * @param aArtifactId the artifact ID.
      * @param aVersion the version
@@ -923,7 +922,7 @@ public abstract class ResourceObjectProviderBase<M>
 
     /**
      * Copy all properties that not already exist in target from source.
-     * 
+     *
      * @param aTarget the properties to merge into.
      * @param aSource the properties to merge from.
      */
