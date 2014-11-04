@@ -313,9 +313,9 @@ public class NegraExportReader
 
         casBuilder.close();
         
-        for (Entry<String, Annotation> e : idMap.entrySet()) {
-            System.out.printf("%s - %s%n", e.getKey(), e.getValue().getCoveredText());
-        }
+//        for (Entry<String, Annotation> e : idMap.entrySet()) {
+//            System.out.printf("%s - %s%n", e.getKey(), e.getValue().getCoveredText());
+//        }
 
         // Can only do that after the builder is closed, otherwise the text is not yet set in the
         // CAS and we get "null" for all token strings.
