@@ -345,6 +345,12 @@ SemanticArgument
    sofa: _InitialView
    begin: 30
    end: 32
+   role: "Traveler"
+[he]
+SemanticArgument
+   sofa: _InitialView
+   begin: 30
+   end: 32
    role: "Self_mover"
 [he]
 SemanticArgument
@@ -357,19 +363,13 @@ SemanticArgument
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Current"
-[he]
-SemanticArgument
-   sofa: _InitialView
-   begin: 30
-   end: 32
    role: "Coreferent"
 [he]
 SemanticArgument
    sofa: _InitialView
    begin: 30
    end: 32
-   role: "Traveler"
+   role: "Current"
 [he]
 SemanticPredicate
    sofa: _InitialView
