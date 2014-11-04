@@ -80,7 +80,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.internal.ApacheCommonsLogging
  * The overrides should only be set if the user explicitly wants to override some settings.
  * <p>
  * Finally, parameters that may change, e.g. depending on the CAS content should be returned from
- * {@link #getProperties()}.
+ * {@code getProperties()}.
  * <p>
  * The {@link #LOCATION} may contain variables referring to any of the other settings, e.g.
  * <code>"${language}"</code>.
@@ -89,8 +89,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.internal.ApacheCommonsLogging
  * be configured by placing a properties file in the classpath and setting its location using
  * {@link #setDefaultVariantsLocation(String)} or by using {@link #setDefaultVariants(Properties)}.
  * The key in the properties is the language and the value is used a default variant.
- *
- * @author Richard Eckart de Castilho
  *
  * @param <M>
  *            the kind of resource produced
