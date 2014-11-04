@@ -3268,6 +3268,50 @@ Constituent
    constituentType: "--"
    parent: Constituent
       sofa: _InitialView
+      begin: 365
+      end: 379
+      constituentType: "--"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 347
+         end: 379
+         constituentType: "--"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 337
+            end: 455
+            constituentType: "--"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 277
+               end: 455
+               constituentType: "--"
+               parent: ROOT
+                  sofa: _InitialView
+                  begin: 277
+                  end: 457
+                  constituentType: "ROOT"
+                  parent: <null>
+                  children: FSArray
+                  syntacticFunction: <null>
+               children: FSArray
+               syntacticFunction: "--"
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "--"
+[Weißen Haus]
+Constituent
+   sofa: _InitialView
+   begin: 368
+   end: 379
+   constituentType: "--"
+   parent: Constituent
+      sofa: _InitialView
       begin: 368
       end: 379
       constituentType: "--"
@@ -3301,50 +3345,6 @@ Constituent
                      syntacticFunction: <null>
                   children: FSArray
                   syntacticFunction: "--"
-               children: FSArray
-               syntacticFunction: "--"
-            children: FSArray
-            syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "--"
-[Weißen Haus]
-Constituent
-   sofa: _InitialView
-   begin: 368
-   end: 379
-   constituentType: "--"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 365
-      end: 379
-      constituentType: "--"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 347
-         end: 379
-         constituentType: "--"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 337
-            end: 455
-            constituentType: "--"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 277
-               end: 455
-               constituentType: "--"
-               parent: ROOT
-                  sofa: _InitialView
-                  begin: 277
-                  end: 457
-                  constituentType: "ROOT"
-                  parent: <null>
-                  children: FSArray
-                  syntacticFunction: <null>
                children: FSArray
                syntacticFunction: "--"
             children: FSArray
@@ -9184,6 +9184,36 @@ Constituent
    constituentType: "--"
    parent: Constituent
       sofa: _InitialView
+      begin: 861
+      end: 889
+      constituentType: "--"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 765
+         end: 889
+         constituentType: "--"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 765
+            end: 891
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "--"
+[ausgerechnet Perot]
+Constituent
+   sofa: _InitialView
+   begin: 871
+   end: 889
+   constituentType: "--"
+   parent: Constituent
+      sofa: _InitialView
       begin: 871
       end: 889
       constituentType: "--"
@@ -9207,36 +9237,6 @@ Constituent
                syntacticFunction: <null>
             children: FSArray
             syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "--"
-[ausgerechnet Perot]
-Constituent
-   sofa: _InitialView
-   begin: 871
-   end: 889
-   constituentType: "--"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 861
-      end: 889
-      constituentType: "--"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 765
-         end: 889
-         constituentType: "--"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 765
-            end: 891
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
          children: FSArray
          syntacticFunction: "--"
       children: FSArray
@@ -18046,6 +18046,57 @@ Constituent
    constituentType: "--"
    parent: Constituent
       sofa: _InitialView
+      begin: 1625
+      end: 1639
+      constituentType: "--"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 1577
+         end: 1639
+         constituentType: "--"
+         parent: Constituent
+            sofa: _InitialView
+            begin: 1577
+            end: 1667
+            constituentType: "--"
+            parent: Constituent
+               sofa: _InitialView
+               begin: 1573
+               end: 1672
+               constituentType: "--"
+               parent: Constituent
+                  sofa: _InitialView
+                  begin: 1555
+                  end: 1672
+                  constituentType: "--"
+                  parent: ROOT
+                     sofa: _InitialView
+                     begin: 1552
+                     end: 1674
+                     constituentType: "ROOT"
+                     parent: <null>
+                     children: FSArray
+                     syntacticFunction: <null>
+                  children: FSArray
+                  syntacticFunction: "--"
+               children: FSArray
+               syntacticFunction: "--"
+            children: FSArray
+            syntacticFunction: "--"
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "--"
+[Weißen Haus]
+Constituent
+   sofa: _InitialView
+   begin: 1628
+   end: 1639
+   constituentType: "--"
+   parent: Constituent
+      sofa: _InitialView
       begin: 1628
       end: 1639
       constituentType: "--"
@@ -18084,57 +18135,6 @@ Constituent
                         syntacticFunction: <null>
                      children: FSArray
                      syntacticFunction: "--"
-                  children: FSArray
-                  syntacticFunction: "--"
-               children: FSArray
-               syntacticFunction: "--"
-            children: FSArray
-            syntacticFunction: "--"
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "--"
-[Weißen Haus]
-Constituent
-   sofa: _InitialView
-   begin: 1628
-   end: 1639
-   constituentType: "--"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 1625
-      end: 1639
-      constituentType: "--"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 1577
-         end: 1639
-         constituentType: "--"
-         parent: Constituent
-            sofa: _InitialView
-            begin: 1577
-            end: 1667
-            constituentType: "--"
-            parent: Constituent
-               sofa: _InitialView
-               begin: 1573
-               end: 1672
-               constituentType: "--"
-               parent: Constituent
-                  sofa: _InitialView
-                  begin: 1555
-                  end: 1672
-                  constituentType: "--"
-                  parent: ROOT
-                     sofa: _InitialView
-                     begin: 1552
-                     end: 1674
-                     constituentType: "ROOT"
-                     parent: <null>
-                     children: FSArray
-                     syntacticFunction: <null>
                   children: FSArray
                   syntacticFunction: "--"
                children: FSArray

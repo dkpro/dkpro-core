@@ -78,6 +78,36 @@ Constituent
    sofa: _InitialView
    begin: 0
    end: 39
+   constituentType: "VF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 67
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
+[Seine Position bei der Prüfgesellschaft]
+Constituent
+   sofa: _InitialView
+   begin: 0
+   end: 39
    constituentType: "NX"
    parent: Constituent
       sofa: _InitialView
@@ -110,36 +140,6 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "OA"
-[Seine Position bei der Prüfgesellschaft]
-Constituent
-   sofa: _InitialView
-   begin: 0
-   end: 39
-   constituentType: "VF"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 67
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
 [Seine Position]
 Constituent
    sofa: _InitialView
@@ -663,6 +663,36 @@ Constituent
    sofa: _InitialView
    begin: 40
    end: 45
+   constituentType: "LK"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 67
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
+[mußte]
+Constituent
+   sofa: _InitialView
+   begin: 40
+   end: 45
    constituentType: "VXFIN"
    parent: Constituent
       sofa: _InitialView
@@ -695,36 +725,6 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "HD"
-[mußte]
-Constituent
-   sofa: _InitialView
-   begin: 40
-   end: 45
-   constituentType: "LK"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 67
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
 [er damals]
 Constituent
    sofa: _InitialView
@@ -999,36 +999,6 @@ Constituent
    sofa: _InitialView
    begin: 56
    end: 67
-   constituentType: "VC"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 0
-      end: 67
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
-[niederlegen]
-Constituent
-   sofa: _InitialView
-   begin: 56
-   end: 67
    constituentType: "VXINF"
    parent: Constituent
       sofa: _InitialView
@@ -1061,6 +1031,36 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "OV"
+[niederlegen]
+Constituent
+   sofa: _InitialView
+   begin: 56
+   end: 67
+   constituentType: "VC"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 0
+      end: 67
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
 [,]
 PUNC
    sofa: _InitialView
@@ -1116,36 +1116,6 @@ Constituent
    sofa: _InitialView
    begin: 70
    end: 84
-   constituentType: "VF"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 70
-      end: 90
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
-[den AWO-Posten]
-Constituent
-   sofa: _InitialView
-   begin: 70
-   end: 84
    constituentType: "NX"
    parent: Constituent
       sofa: _InitialView
@@ -1178,6 +1148,36 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "OA"
+[den AWO-Posten]
+Constituent
+   sofa: _InitialView
+   begin: 70
+   end: 84
+   constituentType: "VF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 70
+      end: 90
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
 [den]
 ART
    sofa: _InitialView
@@ -1348,36 +1348,6 @@ Constituent
    sofa: _InitialView
    begin: 85
    end: 90
-   constituentType: "MF"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 70
-      end: 90
-      constituentType: "SIMPX"
-      parent: Constituent
-         sofa: _InitialView
-         begin: 0
-         end: 90
-         constituentType: "SIMPX"
-         parent: ROOT
-            sofa: _InitialView
-            begin: 0
-            end: 92
-            constituentType: "ROOT"
-            parent: <null>
-            children: FSArray
-            syntacticFunction: <null>
-         children: FSArray
-         syntacticFunction: "--"
-      children: FSArray
-      syntacticFunction: "KONJ"
-   children: FSArray
-   syntacticFunction: "-"
-[nicht]
-Constituent
-   sofa: _InitialView
-   begin: 85
-   end: 90
    constituentType: "ADVX"
    parent: Constituent
       sofa: _InitialView
@@ -1410,6 +1380,36 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "MOD"
+[nicht]
+Constituent
+   sofa: _InitialView
+   begin: 85
+   end: 90
+   constituentType: "MF"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 70
+      end: 90
+      constituentType: "SIMPX"
+      parent: Constituent
+         sofa: _InitialView
+         begin: 0
+         end: 90
+         constituentType: "SIMPX"
+         parent: ROOT
+            sofa: _InitialView
+            begin: 0
+            end: 92
+            constituentType: "ROOT"
+            parent: <null>
+            children: FSArray
+            syntacticFunction: <null>
+         children: FSArray
+         syntacticFunction: "--"
+      children: FSArray
+      syntacticFunction: "KONJ"
+   children: FSArray
+   syntacticFunction: "-"
 [.]
 PUNC
    sofa: _InitialView
@@ -1454,6 +1454,22 @@ Constituent
    sofa: _InitialView
    begin: 93
    end: 98
+   constituentType: "EN-ADD"
+   parent: ROOT
+      sofa: _InitialView
+      begin: 93
+      end: 98
+      constituentType: "ROOT"
+      parent: <null>
+      children: FSArray
+      syntacticFunction: <null>
+   children: FSArray
+   syntacticFunction: "--"
+[K. W.]
+Constituent
+   sofa: _InitialView
+   begin: 93
+   end: 98
    constituentType: "NX"
    parent: Constituent
       sofa: _InitialView
@@ -1472,22 +1488,6 @@ Constituent
       syntacticFunction: "--"
    children: FSArray
    syntacticFunction: "-"
-[K. W.]
-Constituent
-   sofa: _InitialView
-   begin: 93
-   end: 98
-   constituentType: "EN-ADD"
-   parent: ROOT
-      sofa: _InitialView
-      begin: 93
-      end: 98
-      constituentType: "ROOT"
-      parent: <null>
-      children: FSArray
-      syntacticFunction: <null>
-   children: FSArray
-   syntacticFunction: "--"
 [K. W.]
 ROOT
    sofa: _InitialView
@@ -2436,6 +2436,29 @@ Constituent
    sofa: _InitialView
    begin: 59
    end: 66
+   constituentType: "LK"
+   parent: Constituent
+      sofa: _InitialView
+      begin: 37
+      end: 94
+      constituentType: "SIMPX"
+      parent: ROOT
+         sofa: _InitialView
+         begin: 37
+         end: 94
+         constituentType: "ROOT"
+         parent: <null>
+         children: FSArray
+         syntacticFunction: <null>
+      children: FSArray
+      syntacticFunction: "--"
+   children: FSArray
+   syntacticFunction: "-"
+[fordert]
+Constituent
+   sofa: _InitialView
+   begin: 59
+   end: 66
    constituentType: "VXFIN"
    parent: Constituent
       sofa: _InitialView
@@ -2461,29 +2484,6 @@ Constituent
       syntacticFunction: "-"
    children: FSArray
    syntacticFunction: "HD"
-[fordert]
-Constituent
-   sofa: _InitialView
-   begin: 59
-   end: 66
-   constituentType: "LK"
-   parent: Constituent
-      sofa: _InitialView
-      begin: 37
-      end: 94
-      constituentType: "SIMPX"
-      parent: ROOT
-         sofa: _InitialView
-         begin: 37
-         end: 94
-         constituentType: "ROOT"
-         parent: <null>
-         children: FSArray
-         syntacticFunction: <null>
-      children: FSArray
-      syntacticFunction: "--"
-   children: FSArray
-   syntacticFunction: "-"
 [jetzt Untersuchungsausschuß]
 Constituent
    sofa: _InitialView
