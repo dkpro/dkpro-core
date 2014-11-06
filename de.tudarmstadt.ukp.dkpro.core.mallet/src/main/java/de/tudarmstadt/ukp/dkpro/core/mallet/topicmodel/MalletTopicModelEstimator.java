@@ -152,8 +152,8 @@ public class MalletTopicModelEstimator
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
     private int minTokenLength;
 
-    private static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
-    private InstanceList instanceList; // contains the Mallet instances
+    protected static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
+    protected InstanceList instanceList; // contains the Mallet instances
 
     @Override
     public void initialize(UimaContext context)
@@ -165,6 +165,14 @@ public class MalletTopicModelEstimator
 
     @Override
     public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        DocumentMetaData metadata = DocumentMetaData.get(aJCas);
+        instanceList.addThruPipe(new Instance(generateTokenSequence(aJCas), NONE_LABEL,
+                metadata.getDocumentId(), metadata.getDocumentUri()));
+    }
+
+    protected TokenSequence generateTokenSequence(JCas aJCas)
         throws AnalysisEngineProcessException
     {
         TokenSequence tokenStream = new TokenSequence();
@@ -192,9 +200,7 @@ public class MalletTopicModelEstimator
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        DocumentMetaData metadata = DocumentMetaData.get(aJCas);
-        instanceList.addThruPipe(new Instance(tokenStream, NONE_LABEL, metadata.getDocumentId(),
-                metadata.getDocumentUri()));
+        return tokenStream;
     }
 
     @Override
