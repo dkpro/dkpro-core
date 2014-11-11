@@ -153,9 +153,9 @@ public class MateMorphTagger
                 sd.init(forms.toArray(new String[0]));
                 sd.setLemmas(lemmas.toArray(new String[0]));
                 String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
-
-                for (int i = 1; i < morphTags.length; i++) {
-                    Token token = tokens.get(i - 1);
+                
+                for (int i = 0; i < morphTags.length; i++) {
+                    Token token = tokens.get(i);
                     Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
                     morpheme.setMorphTag(morphTags[i]);
                     morpheme.addToIndexes();
