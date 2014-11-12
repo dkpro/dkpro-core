@@ -129,14 +129,11 @@ public class DiTopWriter
         try {
             model = ParallelTopicModel.read(modelLocation);
             collectionDir = new File(targetLocation, corpusName + "_" + model.getNumTopics());
-            if (collectionDir.isDirectory()) {
+            if (collectionDir.exists()) {
                 getLogger().warn(
-                        String.format("Directory '%s' already exists, overwriting content.",
-                                collectionDir));
+                        String.format("%s' already exists, overwriting content.", collectionDir));
             }
-            else {
-                collectionDir.mkdirs();
-            }
+            collectionDir.mkdirs();
             initializeTopicFile();
         }
         catch (Exception e) {
@@ -152,27 +149,9 @@ public class DiTopWriter
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        boolean hasTopicDistribution = false;
         for (TopicDistribution distribution : select(aJCas, TopicDistribution.class)) {
-            hasTopicDistribution = true;
-
             String docName = getDocumentId(aJCas);
             String collectionId = getCollectionId(aJCas);
-
-            /* make sure document name and collection id are available */
-            if (docName == null) {
-                throw new AnalysisEngineProcessException(
-                        new IllegalStateException(
-                                "Could not extract collection information or document ID from metadata. Make sure that the MetadataStringField annotation exists!"));
-            }
-            else if (collectionId == null) {
-                getLogger()
-                        .warn(
-                                String.format(
-                                        "No collection ID value found in document with id '%s'. Ignoring document.",
-                                        docName));
-                continue;
-            }
 
             /* Print and gather collection statistics */
             if (collectionCounter.getCount(collectionId) == 0) {
@@ -180,28 +159,28 @@ public class DiTopWriter
             }
             collectionCounter.add(collectionId);
 
-            /* filter by collection id if PARAM_COLLECTION_VALUES is set */
-            if (collectionValuesSet.isEmpty() || collectionValuesSet.contains(collectionId)) {
-                /* write documents to file */
-                try {
-                    writerDocTopic.write(collectionId + ",");
-                    writerDocTopic.write(docName);
-                    DoubleArray proportions = distribution.getTopicProportions();
-                    for (double topicProb : proportions.toArray()) {
-                        writerDocTopic.write("," + topicProb);
-                    }
-                    writerDocTopic.newLine();
-                }
-                catch (IOException e) {
-                    throw new AnalysisEngineProcessException(e);
-                }
+            try {
+                writeDocTopic(distribution, docName, collectionId);
+            }
+            catch (IOException e) {
+                throw new AnalysisEngineProcessException(e);
             }
         }
+    }
 
-        if (!hasTopicDistribution) {
-            throw new AnalysisEngineProcessException(
-                    new IllegalStateException(
-                            "No topic distribution found in document annotation; run annotator (MalletTopicModelInferencer) first!"));
+    protected void writeDocTopic(TopicDistribution distribution, String docName, String collectionId)
+        throws IOException
+    {
+        /* filter by collection id if PARAM_COLLECTION_VALUES is set */
+        if (collectionValuesSet.isEmpty() || collectionValuesSet.contains(collectionId)) {
+            /* write documents to file */
+            writerDocTopic.write(collectionId + ",");
+            writerDocTopic.write(docName);
+            DoubleArray proportions = distribution.getTopicProportions();
+            for (double topicProb : proportions.toArray()) {
+                writerDocTopic.write("," + topicProb);
+            }
+            writerDocTopic.newLine();
         }
     }
 
@@ -263,9 +242,9 @@ public class DiTopWriter
                 topicTermMatrixFile));
         BufferedWriter writerTopicTermShort = new BufferedWriter(new FileWriter(topicSummaryFile));
 
-        getLogger().info(String.format("Writing file '%s'.", topicTermFile.getPath()));
-        getLogger().info(String.format("Writing file '%s'.", topicTermMatrixFile.getPath()));
-        getLogger().info(String.format("Writing file '%s'.", topicSummaryFile.getPath()));
+        getLogger().info(String.format("Writing file '%s'.", topicTermFile));
+        getLogger().info(String.format("Writing file '%s'.", topicTermMatrixFile));
+        getLogger().info(String.format("Writing file '%s'.", topicSummaryFile));
 
         /* Write topic term associations */
         Alphabet alphabet = model.getAlphabet();
@@ -274,7 +253,6 @@ public class DiTopWriter
             writerTopicTermShort.write("TOPIC " + i + ": ");
             writerTopicTermMatrix.write("TOPIC " + i + ": ");
             /** topic for the label */
-            // String tmpTopic = "";
             int count = 0;
             TreeSet<IDSorter> set = model.getSortedWords().get(i);
             for (IDSorter s : set) {
@@ -286,16 +264,13 @@ public class DiTopWriter
                 writerTopicTermMatrix.write(alphabet.lookupObject(s.getID()) + " (" + s.getWeight()
                         + "), ");
                 /** add to topic label */
-                // tmpTopic += alphabet.lookupObject(s.getID()) + "\t";
             }
-            // topicKeys.add(tmpTopic);
             writerTopicTerm.newLine();
             writerTopicTermShort.newLine();
             writerTopicTermMatrix.newLine();
         }
 
         writerTopicTermMatrix.close();
-        // writerDocTopic.close();
         writerTopicTerm.close();
         writerTopicTermShort.close();
     }
@@ -343,7 +318,8 @@ public class DiTopWriter
      * @param configFile
      *            the config file to read
      * @return a map containing corpus names as keys and a set of topic numbers as values
-     * @throws IOException if an I/O error occurs.
+     * @throws IOException
+     *             if an I/O error occurs.
      */
     private static Map<String, Set<Integer>> readConfigFile(File configFile)
         throws IOException
@@ -387,19 +363,28 @@ public class DiTopWriter
      */
     protected String getCollectionId(JCas aJCas)
     {
-        return DocumentMetaData.get(aJCas).getCollectionId();
+        String collectionId = DocumentMetaData.get(aJCas).getCollectionId();
+        if (collectionId == null) {
+            throw new IllegalStateException("Could not extract collection ID for document");
+        }
+        return collectionId;
     }
 
     /**
      * Extract the document id from the JCas. Uses {@link DocumentMetaData#getDocumentId()}, but
      * this method can be overwritten to select a different source for the document id.
-     * 
+     *
      * @param aJCas
      *            the JCas.
      * @return the document id string or null if it is not available.
      */
     protected String getDocumentId(JCas aJCas)
+        throws IllegalStateException
     {
-        return DocumentMetaData.get(aJCas).getDocumentId();
+        String docName = DocumentMetaData.get(aJCas).getDocumentId();
+        if (docName == null) {
+            throw new IllegalStateException("Could not extract document ID from metadata.");
+        }
+        return docName;
     }
 }
