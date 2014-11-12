@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
+import is2.mtag.Options;
 import is2.mtag.Tagger;
 
 import java.io.File;
@@ -50,14 +51,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * DKPro Annotator for the MateToolsMorphTagger
  * </p>
  *
- * Required annotations:
+ * Required annotations:<br/>
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>Lemma</li>
  * </ul>
  *
- * Generated annotations:
+ * Generated annotations:<br/>
  * <ul>
  * <li>MorphTag</li>
  * </ul>
@@ -121,7 +122,9 @@ public class MateMorphTagger
             {
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
-                return new Tagger(modelFile.getPath()); // create a MorphTagger
+                String[] args = { "-model", modelFile.getPath() };
+                Options option = new Options(args);
+                return new Tagger(option); // create a MorphTagger
             }
         };
 
@@ -153,9 +156,9 @@ public class MateMorphTagger
                 sd.init(forms.toArray(new String[0]));
                 sd.setLemmas(lemmas.toArray(new String[0]));
                 String[] morphTags = modelProvider.getResource().apply(sd).pfeats;
-                
-                for (int i = 0; i < morphTags.length; i++) {
-                    Token token = tokens.get(i);
+
+                for (int i = 1; i < morphTags.length; i++) {
+                    Token token = tokens.get(i - 1);
                     Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
                     morpheme.setMorphTag(morphTags[i]);
                     morpheme.addToIndexes();

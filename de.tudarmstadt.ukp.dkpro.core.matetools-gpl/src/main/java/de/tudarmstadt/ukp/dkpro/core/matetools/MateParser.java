@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -65,14 +64,14 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * Dependency Parsing is not a Contradiction. The 23rd International Conference on Computational
  * Linguistics (COLING 2010), Beijing, China.
  *
- * Required annotations:
+ * Required annotations:<br/>
  * <ul>
  * <li>Sentence</li>
  * <li>Token</li>
  * <li>POS</li>
  * </ul>
  *
- * Generated annotations:
+ * Generated annotations:<br/>
  * <ul>
  * <li>Dependency</li>
  * </ul>
@@ -186,8 +185,14 @@ public class MateParser
 			}
 		};
 		
-        mappingProvider = MappingProviderFactory.createDependencyMappingProvider(
-                dependencyMappingLocation, language, modelProvider);
+        mappingProvider = new MappingProvider();
+        mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+                "core/api/syntax/tagset/${language}-${dependency.tagset}-dependency.map");
+        mappingProvider.setDefault(MappingProvider.BASE_TYPE, Dependency.class.getName());
+        mappingProvider.setDefault("dependency.tagset", "default");
+        mappingProvider.setOverride(MappingProvider.LOCATION, dependencyMappingLocation);
+        mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        mappingProvider.addImport("dependency.tagset", modelProvider);
 	}
 
 	@Override

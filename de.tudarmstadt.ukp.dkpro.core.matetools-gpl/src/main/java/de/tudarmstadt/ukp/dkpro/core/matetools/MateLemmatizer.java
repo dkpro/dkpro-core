@@ -21,6 +21,7 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 import is2.data.SentenceData09;
 import is2.io.CONLLReader09;
 import is2.lemmatizer.Lemmatizer;
+import is2.lemmatizer.Options;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,13 +51,13 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * DKPro Annotator for the MateToolsLemmatizer
  * </p>
  *
- * Required annotations:
+ * Required annotations:<br/>
  * <ul>
  * <li>Token</li>
  * <li>Sentence</li>
  * </ul>
  *
- * Generated annotations:
+ * Generated annotations:<br/>
  * <ul>
  * <li>Lemma</li>
  * </ul>
@@ -119,7 +120,9 @@ public class MateLemmatizer
             {
                 File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 
-                return new Lemmatizer(modelFile.getPath()); // create a lemmatizer
+                String[] args = { "-model", modelFile.getPath() };
+                Options option = new Options(args);
+                return new Lemmatizer(option); // create a lemmatizer
             }
         };
     }

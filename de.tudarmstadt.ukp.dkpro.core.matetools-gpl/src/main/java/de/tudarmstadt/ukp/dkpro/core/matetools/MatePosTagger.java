@@ -47,7 +47,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -92,7 +91,7 @@ public class MatePosTagger
 
     /**
      * Log the tag set(s) when a model is loaded.
-     *
+     * 
      * Default: {@code false}
      */
     public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
@@ -148,8 +147,15 @@ public class MatePosTagger
             }
         };
 
-        posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+        posMappingProvider = new MappingProvider();
+        posMappingProvider.setDefault(MappingProvider.LOCATION,
+                "classpath:/de/tudarmstadt/ukp/dkpro/"
+                        + "core/api/lexmorph/tagset/${language}-${pos.tagset}-pos.map");
+        posMappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+        posMappingProvider.setDefault("pos.tagset", "default");
+        posMappingProvider.setOverride(MappingProvider.LOCATION, posMappingLocation);
+        posMappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+        posMappingProvider.addImport("pos.tagset", modelProvider);
     }
 
     @Override
@@ -183,8 +189,8 @@ public class MatePosTagger
             sd.setLemmas(lemmas.toArray(new String[0]));
             String[] posTags = modelProvider.getResource().apply(sd).ppos;
 
-            for (int i = 0; i < posTags.length; i++) {
-                Token token = tokens.get(i);
+            for (int i = 1; i < posTags.length; i++) {
+                Token token = tokens.get(i - 1);
                 Type posType = posMappingProvider.getTagType(posTags[i]);
                 POS posTag = (POS) cas.createAnnotation(posType, token.getBegin(), token.getEnd());
                 posTag.setPosValue(posTags[i]);

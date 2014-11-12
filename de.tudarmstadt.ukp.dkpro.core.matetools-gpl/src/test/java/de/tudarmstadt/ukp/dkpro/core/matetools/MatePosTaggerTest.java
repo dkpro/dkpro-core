@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
@@ -58,7 +57,6 @@ public class MatePosTaggerTest
 
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
-
     }
 
     @Test
@@ -74,7 +72,7 @@ public class MatePosTaggerTest
                 "WDT", "VBZ", "IN", "DT", "NNS", "CC", "NNS", "IN", "JJ", "." };
 
         String[] posMapped = new String[] { "PR", "V", "ART", "ADV", "ADJ", "NN", "NN", "PUNC",
-                "ART", "V", "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC"};
+                "ART", "V", "PP", "ART", "NN", "CONJ", "NN", "PP", "ADJ", "PUNC" };
 
         String[] posTags = new String[] { "#", "$", "''", "(", ")", ",", ".", ":", "<None>",
                 "<root-POS>", "CC", "CD", "DT", "END", "EX", "FW", "HYPH", "IN", "JJ", "JJR",
@@ -95,12 +93,10 @@ public class MatePosTaggerTest
                 + "possible .");
 
         String[] posMapped = new String[] { "PR", "V", "NN", "PP", "NN", "PP", "NN", "ADV", "ADJ",
-                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ",
-                "PUNC" };
+                "PR", "V", "ART", "NN", "CONJ", "ART", "ADJ", "NN", "CONJ", "CONJ", "ADJ", "PUNC" };
 
-        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV",
-                "ADJ", "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ",
-                "PONCT" };
+        String[] posOriginal = new String[] { "CLS", "V", "NC", "P", "NC", "P", "NC", "ADV", "ADJ",
+                "PROREL", "V", "DET", "NC", "CS", "DET", "ADJ", "NC", "CC", "CS", "ADJ", "PONCT" };
 
         String[] posTags = new String[] { "<None>", "<root-POS>", "ADJ", "ADJWH", "ADV", "ADVWH",
                 "CC", "CLO", "CLR", "CLS", "CS", "DET", "DETWH", "END", "ET", "I", "MID", "NC",
@@ -108,7 +104,7 @@ public class MatePosTaggerTest
                 "STR", "V", "VIMP", "VINF", "VPP", "VPR", "VS" };
 
         String[] unmappedPos = new String[] { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
-
+        
         AssertAnnotations.assertPOS(posMapped, posOriginal, select(jcas, POS.class));
 
         AssertAnnotations.assertTagset(POS.class, "melt", posTags, jcas);
