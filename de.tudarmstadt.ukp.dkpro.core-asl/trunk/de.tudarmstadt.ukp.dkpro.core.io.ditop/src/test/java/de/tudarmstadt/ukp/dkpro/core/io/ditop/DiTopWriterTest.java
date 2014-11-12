@@ -1,0 +1,101 @@
+package de.tudarmstadt.ukp.dkpro.core.io.ditop;
+
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.junit.Before;
+import org.junit.Test;
+
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelEstimator;
+import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelInferencer;
+import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
+
+public class DiTopWriterTest
+{
+    private static final String DITOP_CORPUSNAME = "test";
+    private static final String TARGET_DITOP = "target/ditop";
+    private static final File MODEL_FILE = new File("target/mallet/model");
+    private static final String CAS_DIR = "src/test/resources/txt";
+    private static final String CAS_FILE_PATTERN = "[+]*.txt";
+
+    private static final int N_TOPICS = 10;
+    private static final int N_ITERATIONS = 50;
+    private static final boolean USE_LEMMAS = false;
+    private static final String LANGUAGE = "en";
+
+    @Before
+    public void setUp()
+        throws Exception
+    {
+        /* Generate model */
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, LANGUAGE);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+
+        AnalysisEngineDescription estimator = createEngineDescription(
+                MalletTopicModelEstimator.class,
+                MalletTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletTopicModelEstimator.PARAM_N_ITERATIONS, N_ITERATIONS,
+                MalletTopicModelEstimator.PARAM_N_TOPICS, N_TOPICS,
+                MalletTopicModelEstimator.PARAM_USE_LEMMA, USE_LEMMAS);
+        SimplePipeline.runPipeline(reader, segmenter, estimator);
+
+        MODEL_FILE.deleteOnExit();
+    }
+
+    @Test
+    public void test()
+        throws UIMAException, IOException
+    {
+        int expectedNDocuments = 2;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, LANGUAGE);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletTopicModelInferencer.class,
+                MalletTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+        AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
+                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
+                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME);
+
+        SimplePipeline.runPipeline(reader, segmenter, inferencer, ditopwriter);
+
+        /* test whether target files and dirs exist */
+        File contentDir = new File(TARGET_DITOP, DITOP_CORPUSNAME + "_" + N_TOPICS);
+        File topicsFile = new File(contentDir, "topics.csv");
+        File topicTermT15File = new File(contentDir, "topicTerm-T15.txt");
+        File topicTermFile = new File(contentDir, "topicTerm.txt");
+        File topicTermMatrixFile = new File(contentDir, "topicTermMatrix.txt");
+
+        assertTrue(new File(TARGET_DITOP, "config.all").exists());
+        assertTrue(contentDir.isDirectory());
+        assertTrue(topicTermT15File.exists());
+        assertTrue(topicTermFile.exists());
+        assertTrue(topicTermMatrixFile.exists());
+        assertTrue(topicsFile.exists());
+
+        /* check that file lengths are correct */
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+    }
+
+}
