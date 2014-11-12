@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.francisshanahan.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.francisshanahan.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">The APIs in this service provide access to the entire American Standard edition of the Holy Bible. This web service is provided free by Francis Shanahan. </wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.francisshanahan.com/">
+      <s:element name="ListBooks">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListBooksResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListBooksResult">
+              <s:complexType>
+                <s:sequence>
+                  <!--s:element ref="s:schema" /-->
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentByChapterVerse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="chapter" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="verse" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentByChapterVerseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContentByChapterVerseResult">
+              <s:complexType>
+                <s:sequence>
+                  <!--s:element ref="s:schema" /-->
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChapters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="book" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetChaptersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetChaptersResult">
+              <s:complexType>
+                <s:sequence>
+                  <!--s:element ref="s:schema" /-->
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentByBookChapterVerse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="book" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="chapter" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="verse" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentByBookChapterVerseResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContentByBookChapterVerseResult">
+              <s:complexType>
+                <s:sequence>
+                  <!--s:element ref="s:schema" /-->
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentByBookChapter">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="book" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="chapter" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetContentByBookChapterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetContentByBookChapterResult">
+              <s:complexType>
+                <s:sequence>
+                  <!--s:element ref="s:schema" /-->
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ListBooksSoapIn">
+    <wsdl:part name="parameters" element="tns:ListBooks" />
+  </wsdl:message>
+  <wsdl:message name="ListBooksSoapOut">
+    <wsdl:part name="parameters" element="tns:ListBooksResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentByChapterVerseSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContentByChapterVerse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentByChapterVerseSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContentByChapterVerseResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetChaptersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetChapters" />
+  </wsdl:message>
+  <wsdl:message name="GetChaptersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetChaptersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentByBookChapterVerseSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContentByBookChapterVerse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentByBookChapterVerseSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContentByBookChapterVerseResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetContentByBookChapterSoapIn">
+    <wsdl:part name="parameters" element="tns:GetContentByBookChapter" />
+  </wsdl:message>
+  <wsdl:message name="GetContentByBookChapterSoapOut">
+    <wsdl:part name="parameters" element="tns:GetContentByBookChapterResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TheHolyBibleSoap">
+    <wsdl:operation name="ListBooks">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lists the books of the Bible, the ids returned can be used in subsequent function calls to limit your results to that book.</wsdl:documentation>
+      <wsdl:input message="tns:ListBooksSoapIn" />
+      <wsdl:output message="tns:ListBooksSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByChapterVerse">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns content based on matching Chapters and Verse parameters. Matching content from all books is returned.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentByChapterVerseSoapIn" />
+      <wsdl:output message="tns:GetContentByChapterVerseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChapters">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Lists all chapters in a book. </wsdl:documentation>
+      <wsdl:input message="tns:GetChaptersSoapIn" />
+      <wsdl:output message="tns:GetChaptersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByBookChapterVerse">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets a specific verse from a specific book and chapter.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentByBookChapterVerseSoapIn" />
+      <wsdl:output message="tns:GetContentByBookChapterVerseSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByBookChapter">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Gets all verses in a given chapter and book.</wsdl:documentation>
+      <wsdl:input message="tns:GetContentByBookChapterSoapIn" />
+      <wsdl:output message="tns:GetContentByBookChapterSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TheHolyBibleSoap" type="tns:TheHolyBibleSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListBooks">
+      <soap:operation soapAction="http://www.francisshanahan.com/ListBooks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByChapterVerse">
+      <soap:operation soapAction="http://www.francisshanahan.com/GetContentByChapterVerse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChapters">
+      <soap:operation soapAction="http://www.francisshanahan.com/GetChapters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByBookChapterVerse">
+      <soap:operation soapAction="http://www.francisshanahan.com/GetContentByBookChapterVerse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByBookChapter">
+      <soap:operation soapAction="http://www.francisshanahan.com/GetContentByBookChapter" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TheHolyBibleSoap12" type="tns:TheHolyBibleSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListBooks">
+      <soap12:operation soapAction="http://www.francisshanahan.com/ListBooks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByChapterVerse">
+      <soap12:operation soapAction="http://www.francisshanahan.com/GetContentByChapterVerse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChapters">
+      <soap12:operation soapAction="http://www.francisshanahan.com/GetChapters" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByBookChapterVerse">
+      <soap12:operation soapAction="http://www.francisshanahan.com/GetContentByBookChapterVerse" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContentByBookChapter">
+      <soap12:operation soapAction="http://www.francisshanahan.com/GetContentByBookChapter" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TheHolyBible">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">The APIs in this service provide access to the entire American Standard edition of the Holy Bible. This web service is provided free by Francis Shanahan. </wsdl:documentation>
+    <wsdl:port name="TheHolyBibleSoap" binding="tns:TheHolyBibleSoap">
+      <soap:address location="http://www.francisshanahan.com/TheHolyBible.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TheHolyBibleSoap12" binding="tns:TheHolyBibleSoap12">
+      <soap12:address location="http://www.francisshanahan.com/TheHolyBible.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

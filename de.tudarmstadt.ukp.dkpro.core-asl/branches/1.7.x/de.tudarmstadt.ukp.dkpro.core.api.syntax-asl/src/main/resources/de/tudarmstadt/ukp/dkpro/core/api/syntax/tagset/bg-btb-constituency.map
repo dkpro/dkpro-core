@@ -1,0 +1,81 @@
+# BulTreeBank syntactic tagset
+#
+# Source: http://www.bultreebank.org/TechRep/BTB-TR05.pdf
+#
+
+# A - Adjective Lexical Element
+A=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# APA - Head-Adjunct Adjective Phrase
+APA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# APC - Head-Complement Adjective Phrase
+APC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# Adv - Adverb Lexical Element
+Adv=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# AdvPA - Head-Adjunct Adverb Phrase 
+AdvPA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# AdvPC - Head-Complement Adverb Phrase 
+AdvPC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# C - Conjunction Lexical Element
+C=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CL - Clauses: Saturated Verb Phrase 
+CL=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CLCHE - clause introduced by verbal form 'che'
+CLCHE=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CLDA - clause introduced by verbal form 'da'
+CLDA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CLQ - clause introduced by an interrogative pronound or partilce
+CLQ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CLR - clause introduced by an relative pronound and surrounded by commas
+CLR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CLZADA - clause introduced by verbal form 'za da'
+CLZADA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# CoordP - Coordination Phrase
+CoordP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# Gerund - Gerund Lexical Element
+Gerund=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# H - Family Name or Adjective, Derived from Family Names, Lexical Element
+H=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# I - Interjection Lexical Element
+I=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# M - Numeral Lexical Element
+M=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# N - Noun Lexical Element
+N=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# NPA - Head-Adjunct Noun Phrase
+NPA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# NPC - Head-Complement Noun Phrase
+NPA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# PP - Prepositional Phrase
+PP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# Participle - Participle Lexical Element
+Participle=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# Prep - Preposition Lexical Element
+Prep=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# Pron - Pronoun Lexical Element
+Pron=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# S - Sentence Level Clause
+S=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# T - Particle Lexical Element
+T=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# V - Verb Phrase
+V=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# VPA - Verb Phrase (adjunct)
+VPA=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# VPC - Verb Phrase (subject)
+VPC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# VPF - Verb Phrase (filler)
+VPF=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+# VPS - Verb Phrase (subject)
+VPS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X
+ 
+# == Undocumented ==
+# Verbalised
+# Conj
+# ConjArg
+# ROOT
+
+#
+# Categories used by DKPro internally
+#
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.X

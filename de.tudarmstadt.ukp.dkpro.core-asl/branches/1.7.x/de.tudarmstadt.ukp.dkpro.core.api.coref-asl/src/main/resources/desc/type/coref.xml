@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Coreference</name>
+  <description>This type system contains two types: CoreferenceChain and CoreferenceLink. The CoreferenceChain marks the beginning of a chain. It points to the first CoreferenceLink in the chain. Each CoreferenceLink then points to the next link.</description>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink</name>
+      <description>A link in the coreference chain.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>next</name>
+          <description>If there is one, it is the next coreference link to the current coreference link</description>
+          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>referenceType</name>
+          <description>The role or type which the covered text has in the coreference chain.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>referenceRelation</name>
+          <description>The type of relation between this link and the next link in the chain.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain</name>
+      <description>Marks the beginning of a chain.</description>
+      <supertypeName>uima.cas.AnnotationBase</supertypeName>
+      <features>
+        <featureDescription>
+          <name>first</name>
+          <description>This is the first corefernce link in coreference chain</description>
+          <rangeTypeName>de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

@@ -1,0 +1,54 @@
+# Portuguese Bosque Part-of-Speech Tags
+#
+# Source: http://www.linguateca.pt/floresta/BibliaFlorestal/anexo4.html
+# Source: http://code.google.com/p/universal-pos-tags/source/browse/trunk/pt-bosque.map
+#
+# NOTE: the tags here are primarily from the universal pos tags list. Some of these tags do not
+# appear in the documentation of the Bosque corpus, but they do appear in the CoGrOO models.
+#
+# ?	.
+?=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# adj	ADJ
+adj=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+# adv	ADV
+adv=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
+# art	DET
+art=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
+# conj-c	CONJ
+conj-c=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# conj-s	CONJ
+conj-s=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
+# ec	X
+ec=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# in	X
+in=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
+# n	NOUN
+n=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# num	NUM
+num=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
+# pp	NOUN
+pp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
+# pron-det	PRON
+pron-det=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# pron-indp	PRON
+pron-indp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# pron-pers	PRON
+pron-pers=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PR
+# prop	NOUN
+prop=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NP
+# prp	ADP
+prp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
+# punc	.
+punc=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+# v-fin	VERB
+v-fin=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# v-ger	VERB
+v-ger=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# v-inf	VERB
+v-inf=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# v-pcp	VERB
+v-pcp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+# vp	VERB
+vp=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
+
+*=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS

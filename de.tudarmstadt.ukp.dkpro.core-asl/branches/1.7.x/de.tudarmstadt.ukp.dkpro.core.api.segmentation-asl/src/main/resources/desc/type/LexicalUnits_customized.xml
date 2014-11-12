@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>Segmentation</name>
+  <description/>
+  <version>${version}</version>
+  <vendor>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</vendor>
+  <imports>
+    <import name="desc.type.LexicalUnits"/>
+  </imports>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Compound</name>
+      <description>This type represents a decompounding word, i.e.: flowerpot. Each Compound one have at least two Splits.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>splits</name>
+          <description>A word that can be decomposed into different parts.</description>
+          <rangeTypeName>uima.cas.FSArray</rangeTypeName>
+          <elementType>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Split</elementType>
+        </featureDescription>
+      </features>
+    </typeDescription>
+    </types>
+</typeSystemDescription>
