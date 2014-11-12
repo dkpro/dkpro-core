@@ -50,9 +50,9 @@ public class MateMorphTaggerTest
                 "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
                 "Dependenz", "beinhalten", "--" };
 
-        String[] morphTagsExpected = { "pl|1|pres|ind", "acc|sg|neut", "_", "nom|sg|neut|pos",
-                "nom|sg|neut", "_", "nom|sg|neut", "_", "nom|pl|*", "gen|pl|masc", "_",
-                "gen|pl|masc", "sg|3|pres|ind", "_" };
+        String[] morphTagsExpected = { "nom|pl|*|1", "pl|1|pres|ind", "acc|sg|neut", "_",
+                "nom|sg|neut|pos", "nom|sg|neut", "_", "nom|sg|neut", "_", "nom|pl|*",
+                "gen|pl|masc", "_", "gen|pl|masc", "sg|3|pres|ind", "_"};
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
@@ -77,6 +77,37 @@ public class MateMorphTaggerTest
                 "nom|pl|neut", "_", "acc|sg|neut", "_", "nom|pl|neut", "nom|pl|neut", "*|*|*",
                 "nom|pl|neut", "nom|pl|neut", "dat|sg|masc", "acc|pl|*", "gen|sg|masc",
                 "nom|pl|neut", "acc|sg|fem|sup", "nom|pl|neut", "nom|pl|neut", "nom|pl|neut" };
+
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+        AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
+    }
+
+    @Test
+    public void testSpanish()
+        throws Exception
+    {
+        Assume.assumeTrue(Runtime.getRuntime().maxMemory() >= 1000000000);
+
+        JCas jcas = runTest("es", "Necesitamos una oración de ejemplo muy complicado , que "
+                + "contiene la mayor cantidad de componentes y dependencias como sea posible .");
+
+        String[] lemmas = new String[] { "necesitar", "uno", "oración", "de", "ejemplo", "mucho",
+                "complicado", ",", "que", "contener", "el", "mayor", "cantidad", "de",
+                "componente", "y", "dependencia", "como", "ser", "posible", "."};
+
+        String[] morphTagsExpected = {
+                "postype=main|gen=c|num=p|person=1|mood=indicative|tense=present",
+                "postype=indefinite|gen=f|num=s", "postype=common|gen=f|num=s",
+                "postype=preposition|gen=c|num=c", "postype=common|gen=m|num=s", "_",
+                "postype=qualificative|gen=m|num=s|posfunction=participle", "punct=comma",
+                "postype=relative|gen=c|num=c",
+                "postype=main|gen=c|num=s|person=3|mood=indicative|tense=present",
+                "postype=article|gen=f|num=s", "postype=qualificative|gen=c|num=s",
+                "postype=common|gen=f|num=s", "postype=preposition|gen=c|num=c",
+                "postype=common|gen=m|num=p", "postype=coordinating", "postype=common|gen=f|num=p",
+                "postype=subordinating",
+                "postype=semiauxiliary|gen=c|num=s|person=3|mood=subjunctive|tense=present",
+                "postype=qualificative|gen=c|num=s", "punct=period"};
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
