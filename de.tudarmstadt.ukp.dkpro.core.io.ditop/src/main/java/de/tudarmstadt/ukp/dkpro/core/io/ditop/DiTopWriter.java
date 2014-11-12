@@ -330,7 +330,7 @@ public class DiTopWriter
             String[] fields = line.split(FIELDSEPARATOR_CONFIGFILE);
             if (fields.length < 2) {
                 throw new IllegalStateException(String.format(
-                        "Could not parse config file '%s': Invalid line:\n%s", configFile, line));
+                        "Could not parse config file '%s': Invalid line:%n%s", configFile, line));
             }
             if (entries.containsKey(fields[0])) {
                 throw new IllegalStateException(String.format(
