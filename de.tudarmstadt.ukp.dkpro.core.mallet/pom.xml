@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-		<version>1.7.0-SNAPSHOT</version>
+		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<groupId>de.tudarmstadt.ukp.dkpro.core.mallet</groupId>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet</artifactId>
@@ -30,7 +30,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-				<version>1.7.0-SNAPSHOT</version>
+				<version>1.8.0-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
