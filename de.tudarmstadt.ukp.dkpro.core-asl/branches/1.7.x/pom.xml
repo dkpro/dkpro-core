@@ -259,6 +259,11 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
+   			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</artifactId>
+				<version>1.7.0-SNAPSHOT</version>
+			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
@@ -623,7 +628,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
         <module>de.tudarmstadt.ukp.dkpro.core.io.combination-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.ditop</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.html-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
@@ -939,6 +944,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc-asl/src/main/java" includes="**/*.java" />
                                     <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.combination-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.ditop-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/java" includes="**/*.java" />
