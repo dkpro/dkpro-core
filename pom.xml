@@ -15,7 +15,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    along with this program.  If not, see <http://www.gnu.org/licenses />.
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -76,9 +76,9 @@
 		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
+		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/dummybranch</connection>
+		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/dummybranch</developerConnection>
+		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/branches/dummybranch</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
