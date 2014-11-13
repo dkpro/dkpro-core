@@ -1,9 +1,0 @@
-(ROOT
-  (S
-    (NP (PRP I))
-    (VP (VBD was)
-      (VP (VBG swimming)
-        (ADVP (RB recently))
-        (PP (IN in)
-          (NP (NNP Shanghai)))))
-    (. .)))

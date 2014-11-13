@@ -1,2 +1,0 @@
-classpath*:desc/type/metadata.xml
-classpath*:desc/type/metadata_customized.xml

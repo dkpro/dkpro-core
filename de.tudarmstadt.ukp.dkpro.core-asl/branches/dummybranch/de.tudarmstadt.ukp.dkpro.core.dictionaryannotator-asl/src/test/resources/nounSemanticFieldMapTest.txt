@@ -1,5 +1,0 @@
-vanilla	plant
-sky	object
-jumpiness	feeling
-braveness	attribute
-shot metal	substance
