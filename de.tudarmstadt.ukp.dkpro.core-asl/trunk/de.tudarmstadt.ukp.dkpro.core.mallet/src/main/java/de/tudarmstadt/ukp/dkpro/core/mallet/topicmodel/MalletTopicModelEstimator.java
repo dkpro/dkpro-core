@@ -180,8 +180,6 @@ public class MalletTopicModelEstimator
             for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(),
                     typeName)) {
                 if (useLemma) {
-                    // TODO: can a token even cover multiple lemmas? If not, the if/else construct
-                    // can be simplified.
                     for (Lemma lemma : selectCovered(Lemma.class, entry.getKey())) {
                         String text = lemma.getValue();
                         if (text.length() >= minTokenLength) {
