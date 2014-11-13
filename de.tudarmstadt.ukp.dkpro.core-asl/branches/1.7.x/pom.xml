@@ -361,6 +361,11 @@
             </dependency>
    			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
+				<version>1.7.0-SNAPSHOT</version>
+			</dependency>
+   			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
@@ -649,6 +654,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</module>
         <module>de.tudarmstadt.ukp.dkpro.core.ldweb1t</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.mallet-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
@@ -953,6 +959,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.langdetect-asl/src/main/java" includes="**/*.java" />
                                     <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl/src/main/java" includes="**/*.java" />
+                                    <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mallet-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java" includes="**/*.java" />
