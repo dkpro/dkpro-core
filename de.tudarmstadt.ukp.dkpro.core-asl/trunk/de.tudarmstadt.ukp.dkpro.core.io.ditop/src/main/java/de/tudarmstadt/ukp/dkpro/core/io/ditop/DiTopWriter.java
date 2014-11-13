@@ -113,6 +113,15 @@ public class DiTopWriter
     @ConfigurationParameter(name = PARAM_COLLECTION_VALUES, mandatory = false)
     protected String[] collectionValues;
 
+    /**
+     * If true (default), only write documents with collection ids matching one of the collection
+     * values exactly. If false, write documents with collection ids containing any of the
+     * collection value string in collection while ignoring cases.
+     */
+    public final static String PARAM_COLLECTION_VALUES_EXACT_MATCH = "collectionValuesExactMatch";
+    @ConfigurationParameter(name = PARAM_COLLECTION_VALUES_EXACT_MATCH, mandatory = true, defaultValue = "true")
+    private boolean collectionValuesExactMatch;
+
     private ParallelTopicModel model;
     private File collectionDir;
     protected Set<String> collectionValuesSet;
@@ -366,6 +375,33 @@ public class DiTopWriter
         String collectionId = DocumentMetaData.get(aJCas).getCollectionId();
         if (collectionId == null) {
             throw new IllegalStateException("Could not extract collection ID for document");
+        }
+
+        if (!collectionValuesExactMatch && !collectionValuesSet.contains(collectionId)) {
+            collectionId = expandCollectionId(collectionId);
+        }
+
+        return collectionId;
+    }
+
+    /**
+     * This method checks whether any of the specified collection values contains the given String.
+     * If it does, returns the matching value; if not, it returns the original value.
+     *
+     * @param collectionId
+     * @return the first entry from {@code collectionValuesSet} that contains the (lowercased)
+     *         {@code collectionId} or the input {@code collectionId}.
+     */
+    private String expandCollectionId(String collectionId)
+    {
+        assert !collectionValuesExactMatch;
+        for (String value : collectionValuesSet) {
+            if (collectionId.toLowerCase().contains(value.toLowerCase())) {
+                getLogger().debug(
+                        String.format("Changing collection ID from '%s' to '%s'.",
+                                collectionId, value));
+                return value;
+            }
         }
         return collectionId;
     }

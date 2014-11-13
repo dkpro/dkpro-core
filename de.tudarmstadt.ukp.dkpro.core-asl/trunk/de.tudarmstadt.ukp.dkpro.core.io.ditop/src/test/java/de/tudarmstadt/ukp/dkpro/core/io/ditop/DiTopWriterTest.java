@@ -74,7 +74,7 @@ public class DiTopWriterTest
     }
 
     @Test
-    public void test()
+    public void testSimple()
         throws UIMAException, IOException
     {
         int expectedNDocuments = 2;
@@ -115,4 +115,187 @@ public class DiTopWriterTest
         assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
     }
 
+    @Test
+    public void testCollectionValuesExact()
+        throws UIMAException, IOException
+    {
+        int expectedNDocuments = 2;
+        String[] collectionValues = new String[] { "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/txt/" };
+        boolean exactMatch = true;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, LANGUAGE);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletTopicModelInferencer.class,
+                MalletTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+        AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
+                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
+                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
+                DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
+
+        SimplePipeline.runPipeline(reader, segmenter, inferencer, ditopwriter);
+
+        /* test whether target files and dirs exist */
+        File contentDir = new File(TARGET_DITOP, DITOP_CORPUSNAME + "_" + N_TOPICS);
+        File topicsFile = new File(contentDir, "topics.csv");
+        File topicTermT15File = new File(contentDir, "topicTerm-T15.txt");
+        File topicTermFile = new File(contentDir, "topicTerm.txt");
+        File topicTermMatrixFile = new File(contentDir, "topicTermMatrix.txt");
+
+        assertTrue(new File(TARGET_DITOP, "config.all").exists());
+        assertTrue(contentDir.isDirectory());
+        assertTrue(topicTermT15File.exists());
+        assertTrue(topicTermFile.exists());
+        assertTrue(topicTermMatrixFile.exists());
+        assertTrue(topicsFile.exists());
+
+        /* check that file lengths are correct */
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+    }
+
+    @Test
+    public void testCollectionValuesExactNoMatch()
+        throws UIMAException, IOException
+    {
+        int expectedNDocuments = 0;
+        String[] collectionValues = new String[] { "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/" };
+        boolean exactMatch = true;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, LANGUAGE);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletTopicModelInferencer.class,
+                MalletTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+        AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
+                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
+                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
+                DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
+
+        SimplePipeline.runPipeline(reader, segmenter, inferencer, ditopwriter);
+
+        /* test whether target files and dirs exist */
+        File contentDir = new File(TARGET_DITOP, DITOP_CORPUSNAME + "_" + N_TOPICS);
+        File topicsFile = new File(contentDir, "topics.csv");
+        File topicTermT15File = new File(contentDir, "topicTerm-T15.txt");
+        File topicTermFile = new File(contentDir, "topicTerm.txt");
+        File topicTermMatrixFile = new File(contentDir, "topicTermMatrix.txt");
+
+        assertTrue(new File(TARGET_DITOP, "config.all").exists());
+        assertTrue(contentDir.isDirectory());
+        assertTrue(topicTermT15File.exists());
+        assertTrue(topicTermFile.exists());
+        assertTrue(topicTermMatrixFile.exists());
+        assertTrue(topicsFile.exists());
+
+        /* check that file lengths are correct */
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+    }
+
+    @Test
+    public void testCollectionValuesNotExact()
+        throws UIMAException, IOException
+    {
+        int expectedNDocuments = 2;
+        String[] collectionValues = new String[] { "txt" };
+        boolean exactMatch = false;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, LANGUAGE);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletTopicModelInferencer.class,
+                MalletTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+        AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
+                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
+                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
+                DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
+
+        SimplePipeline.runPipeline(reader, segmenter, inferencer, ditopwriter);
+
+        /* test whether target files and dirs exist */
+        File contentDir = new File(TARGET_DITOP, DITOP_CORPUSNAME + "_" + N_TOPICS);
+        File topicsFile = new File(contentDir, "topics.csv");
+        File topicTermT15File = new File(contentDir, "topicTerm-T15.txt");
+        File topicTermFile = new File(contentDir, "topicTerm.txt");
+        File topicTermMatrixFile = new File(contentDir, "topicTermMatrix.txt");
+
+        assertTrue(new File(TARGET_DITOP, "config.all").exists());
+        assertTrue(contentDir.isDirectory());
+        assertTrue(topicTermT15File.exists());
+        assertTrue(topicTermFile.exists());
+        assertTrue(topicTermMatrixFile.exists());
+        assertTrue(topicsFile.exists());
+
+        /* check that file lengths are correct */
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+    }
+
+    @Test
+    public void testCollectionValuesNotExactNoMatch()
+        throws UIMAException, IOException
+    {
+        int expectedNDocuments = 0;
+        String[] collectionValues = new String[] { "abcd" };
+        boolean exactMatch = false;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, LANGUAGE);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription inferencer = createEngineDescription(
+                MalletTopicModelInferencer.class,
+                MalletTopicModelInferencer.PARAM_MODEL_LOCATION, MODEL_FILE);
+        AnalysisEngineDescription ditopwriter = createEngineDescription(DiTopWriter.class,
+                DiTopWriter.PARAM_TARGET_LOCATION, TARGET_DITOP,
+                DiTopWriter.PARAM_MODEL_LOCATION, MODEL_FILE,
+                DiTopWriter.PARAM_CORPUS_NAME, DITOP_CORPUSNAME,
+                DiTopWriter.PARAM_COLLECTION_VALUES, collectionValues,
+                DiTopWriter.PARAM_COLLECTION_VALUES_EXACT_MATCH, exactMatch);
+
+        SimplePipeline.runPipeline(reader, segmenter, inferencer, ditopwriter);
+
+        /* test whether target files and dirs exist */
+        File contentDir = new File(TARGET_DITOP, DITOP_CORPUSNAME + "_" + N_TOPICS);
+        File topicsFile = new File(contentDir, "topics.csv");
+        File topicTermT15File = new File(contentDir, "topicTerm-T15.txt");
+        File topicTermFile = new File(contentDir, "topicTerm.txt");
+        File topicTermMatrixFile = new File(contentDir, "topicTermMatrix.txt");
+
+        assertTrue(new File(TARGET_DITOP, "config.all").exists());
+        assertTrue(contentDir.isDirectory());
+        assertTrue(topicTermT15File.exists());
+        assertTrue(topicTermFile.exists());
+        assertTrue(topicTermMatrixFile.exists());
+        assertTrue(topicsFile.exists());
+
+        /* check that file lengths are correct */
+        assertEquals(expectedNDocuments + 1, FileUtils.readLines(topicsFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermT15File).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermFile).size());
+        assertEquals(N_TOPICS, FileUtils.readLines(topicTermMatrixFile).size());
+    }
 }
