@@ -667,7 +667,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
         <module>de.tudarmstadt.ukp.dkpro.core.ldweb1t</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.mallet</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
