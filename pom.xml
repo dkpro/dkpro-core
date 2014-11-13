@@ -100,11 +100,6 @@
             </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-				<version>1.7.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
@@ -137,7 +132,6 @@
 	</dependencyManagement>
 	<modules>
 		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
-	    <module>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
@@ -172,7 +166,6 @@
 						<exclude>src/test/resources/**/*</exclude>
 						<exclude>.license-header.txt</exclude>
 						<exclude>src/main/java/edu/stanford/nlp/parser/lexparser/**/*</exclude>
-						<exclude>src/main/java/gr/aueb/cs/nlp/postagger/**/*</exclude>
 						<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.java</exclude>
 					</excludes>
 				</configuration>
@@ -288,18 +281,6 @@
 					</snapshots>
 				</repository>
 			</repositories>
-			<modules>
-				<module>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
-			</modules>
-			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-						<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-						<version>1.7.0-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-			</dependencyManagement>
 		</profile>
 	</profiles>
 </project>
