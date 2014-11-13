@@ -82,6 +82,7 @@ public class MateMorphTaggerTest
         AssertAnnotations.assertMorpheme(morphTagsExpected, select(jcas, Morpheme.class));
     }
 
+    @Ignore
     @Test
     public void testSpanish()
         throws Exception
