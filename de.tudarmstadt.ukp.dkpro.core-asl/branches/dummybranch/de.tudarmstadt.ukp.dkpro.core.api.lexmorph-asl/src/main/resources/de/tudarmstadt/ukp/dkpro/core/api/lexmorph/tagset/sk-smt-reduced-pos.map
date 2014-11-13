@@ -1,0 +1,99 @@
+# Slovak Morphosyntactic Tagset - Tagset used by the Slovak National Corpus
+#
+# Source: http://jlm.ipipan.waw.pl/index.php/JLM/article/view/35
+#
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.
+
+# # - non-word element
+\#=O
+# Foreign language citation
+%=O
+# A - Adjective
+Apx=ADJ
+Apy=ADJ
+Apz=ADJ
+Asx=ADJ
+Asy=ADJ
+Asz=ADJ
+# D - ADV
+Dx=ADV
+Dy=ADV
+Dz=ADV
+# E - Preposition
+E=PP
+# G - Participle
+Gpx=V
+Gpy=V
+Gpz=V
+Gsx=V
+Gsy=V
+Gsz=V
+# J - Interjections
+J=O
+# N - Numeral
+ND=CARD
+Np=CARD
+Ns=CARD
+# O - Conjunctions
+O=CONJ
+OY=CONJ
+# P - Pronoun
+PD=PR
+Pp=PR
+Ps=PR
+# Q - Undefined part of speech (residual)
+Q=O
+# R - Reflexive morphemes
+R=O
+# S - Substantive
+Sp=NN
+Ss=NN
+# T - Particles
+T=O
+TY=O
+# V - Verb
+VBpa=V
+VBpb=V
+VBpc=V
+VBsa=V
+VBsb=V
+VBsc=V
+VH=V
+VI=V
+VKpa=V
+VKpb=V
+VKpc=V
+VKsa=V
+VKsb=V
+VKsc=V
+VLpa=V
+VLpb=V
+VLpc=V
+VLsa=V
+VLsb=V
+VLsc=V
+VMpa=V
+VMpb=V
+VMsb=V
+# W - Abbreviations
+W=O
+# Y - Conditional morpheme
+Y=O
+# Z - Punctuation
+Z=PUNC
+
+# Not found in tagset documentation but present in TreeTagger model for Slovak
+!=PUNC
+"=PUNC
+par=O
+(=PUNC
+)=PUNC
+,=PUNC
+.=PUNC
+0=O
+\:=PUNC
+;=PUNC
+?=PUNC
+
+*=POS
+

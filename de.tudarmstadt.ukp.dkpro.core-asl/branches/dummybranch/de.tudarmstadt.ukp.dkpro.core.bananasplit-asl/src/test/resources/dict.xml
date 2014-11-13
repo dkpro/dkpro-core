@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+    <entry key="Bayer">UNKNOWN</entry>
+    <entry key="Dienst">UNKNOWN</entry>
+    <entry key="einlaufen">UNKNOWN</entry>
+    <entry key="gesoffen">UNKNOWN</entry>
+    <entry key="Kapitän">UNKNOWN</entry>
+    <entry key="Kapitäns">UNKNOWN</entry>
+    <entry key="Macher">UNKNOWN</entry>
+    <entry key="Mies">UNKNOWN</entry>
+    <entry key="Mütze">UNKNOWN</entry>
+    <entry key="Ober">UNKNOWN</entry>
+    <entry key="ober">UNKNOWN</entry>
+    <entry key="Oberbayern">UNKNOWN</entry>
+    <entry key="saufen">UNKNOWN</entry>
+    <entry key="typisch">UNKNOWN</entry>
+    <entry key="umfallen">UNKNOWN</entry>
+    <entry key="voll">UNKNOWN</entry>
+    <entry key="vormachen">UNKNOWN</entry>
+    <entry key="Werk">UNKNOWN</entry>
+    <entry key="Wolf">UNKNOWN</entry>
+    <entry key="Werkstatt">UNKNOWN</entry>
+</properties>

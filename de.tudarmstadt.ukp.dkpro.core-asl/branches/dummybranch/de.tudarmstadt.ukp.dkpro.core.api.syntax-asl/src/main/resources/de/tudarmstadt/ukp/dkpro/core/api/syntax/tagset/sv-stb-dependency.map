@@ -1,0 +1,75 @@
+# Swedish treebank dependencies
+#
+# Source: http://stp.lingfil.uu.se/~nivre/swedish_treebank/dep.html
+#
+# ++: Coordinating conjunction
+# +A: Conjunctional adverbial
+# +F: Coordination at main clause level
+# AA: Other adverbial
+# AG: Agent
+# AN: Apposition
+# AT: Nominal (adjectival) pre-modifier
+# CA: Contrastive adverbial
+# DB: Doubled function
+# DT: Determiner
+# EF: Relative clause in cleft
+# EO: Logical object
+# ES: Logical subject
+# ET: Other nominal post-modifier
+# FO: Dummy object
+# FP: Free subjective predicative complement
+# FS: Dummy subject
+# FV: Finite predicate verb
+# I?: Question mark
+# IC: Quotation mark
+# IG: Other punctuation mark
+# IK: Comma
+# IM: Infinitive marker
+# IO: Indirect object
+# IP: Period
+# IQ: Colon
+# IR: Parenthesis
+# IS: Semicolon
+# IT: Dash
+# IU: Exclamation mark
+# IV: Nonfinite verb
+# JC: Second quotation mark
+# JG: Second (other) punctuation mark
+# JR: Second parenthesis
+# JT: Second dash
+# KA: Comparative adverbial
+# MA: Attitude adverbial
+# MS: Macrosyntagm
+# NA: Negation adverbial
+# OA: Object adverbial
+# OO: Direct object
+# OP: Object predicative
+# PL: Verb particle
+# PR: Preposition
+# PT: Predicative attribute
+# RA: Place adverbial
+# SP: Subjective predicative complement
+# SS: Other subject
+# TA: Time adverbial
+# TT: Address phrase
+# UK: Subordinating conjunction
+# VA: Notifying adverbial
+# VO: Infinitive object complement
+# VS: Infinitive subject complement
+# XA: Expressions like "så att säga" (so to speak)
+# XF: Fundament phrase
+# XT: Expressions like "så kallad" (so called)
+# XX: Unclassifiable grammatical function
+# YY: Interjection phrase
+# CJ: Conjunct (in coordinate structure)
+# HD: Head
+# IF: Infinitive verb phrase minus infinitive marker
+# PA: Complement of preposition
+# UA: Subordinate clause minus subordinating conjunction
+# VG: Verb group
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+
