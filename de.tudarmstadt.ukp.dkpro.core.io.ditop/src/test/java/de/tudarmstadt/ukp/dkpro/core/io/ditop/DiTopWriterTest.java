@@ -120,7 +120,8 @@ public class DiTopWriterTest
         throws UIMAException, IOException
     {
         int expectedNDocuments = 2;
-        String[] collectionValues = new String[] { "file:/home/schnober/workspace/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.io.ditop/src/test/resources/txt/" };
+        String exactName = new File(CAS_DIR).toURI().toString();
+        String[] collectionValues = new String[] { exactName };
         boolean exactMatch = true;
 
         CollectionReaderDescription reader = createReaderDescription(TextReader.class,
