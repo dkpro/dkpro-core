@@ -1,0 +1,13 @@
+gender.m=<m>
+gender.f=<f>
+        
+number.sg=<s>
+number.pl=<p>
+
+person.1=<1>
+person.2=<2>
+person.3=<3>
+
+tense.pres=<pres>
+        
+voice.ind=<ind>

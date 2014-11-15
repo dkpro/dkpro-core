@@ -1,0 +1,13 @@
+case.abl=<abl>
+case.acc=<acc>
+case.dat=<dat>
+case.gen=<gen>
+case.ins=<ins>
+case.loc=<loc>
+        
+number.sg=<[123]s>
+number.pl=<[123]p>
+        
+person.1=<1[ps]>
+person.2=<2[ps]>
+person.3=<3[ps]>

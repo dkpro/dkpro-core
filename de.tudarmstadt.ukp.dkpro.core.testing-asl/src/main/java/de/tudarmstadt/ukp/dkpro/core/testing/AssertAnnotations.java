@@ -208,13 +208,24 @@ public class AssertAnnotations
         List<String> actual = new ArrayList<String>();
 
         for (MorphologicalFeatures a : aActual) {
-            actual.add(a.getValue());
+            actual.add(String.format(
+                    "[%3d,%3d] %4s %4s %4s %4s %4s %4s %4s %4s %4s %4s %4s %4s %s (%s)",
+                    a.getBegin(), a.getEnd(), nd(a.getAspect()), nd(a.getCase()),
+                    nd(a.getDefiniteness()), nd(a.getDefiniteness()), nd(a.getDegree()),
+                    nd(a.getGender()), nd(a.getMood()), nd(a.getNumber()), nd(a.getPerson()),
+                    nd(a.getTense()), nd(a.getTransitivity()), nd(a.getVoice()),
+                    a.getCoveredText(), a.getValue()));
         }
 
         System.out.printf("%-20s - Expected: %s%n", "Morph. feats.", asCopyableString(expected));
         System.out.printf("%-20s - Actual  : %s%n", "Morph. feats.", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
+    }
+    
+    private static String nd(String aValue)
+    {
+        return aValue == null ? "-" : aValue;
     }
 
     public static void assertStem(String[] aExpected, Collection<Stem> aActual)
