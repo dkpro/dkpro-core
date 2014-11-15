@@ -18,56 +18,45 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.sfst;
 
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
+
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.lang.ProcessBuilder.Redirect;
 import java.net.URL;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Properties;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.sfst.parser.AnalysisParser;
-import de.tudarmstadt.ukp.dkpro.core.sfst.parser.ParsedAnalysis;
-import de.tudarmstadt.ukp.dkpro.core.sfst.parser.SimpleParser;
-import de.tudarmstadt.ukp.dkpro.core.sfst.parser.TagType;
-import de.tudarmstadt.ukp.dkpro.core.sfst.parser.TurkishAnalysisParser;
-
-/**
- * UIMA wrapper for morphological analyzer based on SFST.
- *
- * (Binaries and models are distributed under GPL licence.
- *  Run the Ant build script to download and install artifacts locally.)
- *
- * Writes Lemma, POS, and Morpheme annotations.
- *
- *
- * @author zesch
- * @author eckart
- * @author flekova
- *
- */
 
 public class SfstAnnotator
     extends JCasAnnotator_ImplBase
 {
+    private static final String FLUSH_TOKEN = "-= FLUSH =-";
+    
+    public static enum Mode {
+        FIRST,
+        ALL
+    }
+    
     /**
      * Write part-of-speech information.
      *
@@ -87,72 +76,50 @@ public class SfstAnnotator
     private boolean writeLemma;
 
     /**
-	 * Use this language instead of the document language to resolve the model.
-	 */
-	public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-	@ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
-	protected String language;
+     * Use this language instead of the document language to resolve the model.
+     */
+    public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    private String language;
 
-	/**
-	 * Override the default variant used to locate the model.
-	 */
-	public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-	@ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-	protected String variant;
+    /**
+     * Override the default variant used to locate the model.
+     */
+    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
+    private String variant;
 
-	/**
-	 * Load the model from this location instead of locating the model automatically.
-	 */
-	public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-	@ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-	protected String modelLocation;
+    /**
+     * Load the model from this location instead of locating the model automatically.
+     */
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    private String modelLocation;
 
-	 /**
+     /**
      * Specifies the model encoding.
      */
     public static final String PARAM_MODEL_ENCODING = ComponentParameters.PARAM_MODEL_ENCODING;
     @ConfigurationParameter(name = PARAM_MODEL_ENCODING, mandatory = true, defaultValue="UTF-8")
-    protected String modelEncoding;
+    private String modelEncoding;
+    
+    public static final String PARAM_MODE = "mode";
+    @ConfigurationParameter(name = PARAM_MODE, mandatory = true, defaultValue="FIRST")
+    private Mode mode;
+    
+    public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
+    private String morphMappingLocation;
 
     private CasConfigurableProviderBase<File> modelProvider;
-    private CasConfigurableProviderBase<AnalysisParser> parserProvider;
+    private MorphologicalFeaturesParser featuresParser;
     private RuntimeProvider runtimeProvider;
-
+    
     @Override
-    public void initialize(UimaContext context)
+    public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
-        super.initialize(context);
-
-        // Returns instance of AnalysisParser based on the language. Currently available for Turkish
-        // only.
-        parserProvider = new CasConfigurableProviderBase<AnalysisParser>()
-        {
-            {
-                setContextObject(SfstAnnotator.this);
-
-                setDefault(LOCATION, NOT_REQUIRED);
-                setOverride(LANGUAGE, language);
-            }
-
-            @Override
-            protected AnalysisParser produceResource(URL aUrl)
-                throws IOException
-            {
-                AnalysisParser ap;
-                Properties props = getAggregatedProperties();
-                String language = props.getProperty(PARAM_LANGUAGE);
-
-                if (language.equals("tr")) {
-                    ap = new TurkishAnalysisParser();
-                }
-                else {
-                    ap = new SimpleParser();
-                }
-
-                return ap;
-            }
-        };
+        super.initialize(aContext);
 
         // Returns FST automaton for specified language, which is then passed to fst-infl from SFST.
         // Currently available for Turkish and German.
@@ -162,8 +129,8 @@ public class SfstAnnotator
                 setContextObject(SfstAnnotator.this);
 
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/"
-                                + "morph-${language}-${variant}.a");
-                setDefault(VARIANT, "default");
+                                + "morph-${language}-${variant}.ca");
+                setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/sfst/lib/sfst-default-variants.map");
 
                 setOverride(LOCATION, modelLocation);
                 setOverride(LANGUAGE, language);
@@ -178,67 +145,138 @@ public class SfstAnnotator
             }
         };
 
+        featuresParser = new MorphologicalFeaturesParser();
+        featuresParser.setDefault(MorphologicalFeaturesParser.LOCATION, 
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
+        featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
+        featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
+        featuresParser.addImport("morph.tagset", modelProvider);
+        
         // provider for the sfst binary
         runtimeProvider = new RuntimeProvider("classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/bin/");
     }
 
     @Override
-    public void process(JCas jcas)
+    public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        CAS cas = aJCas.getCas();
 
-        // set language of the analysis
-        modelProvider.configure(jcas.getCas());
-        parserProvider.configure(jcas.getCas());
+        modelProvider.configure(cas);
+        featuresParser.configure(cas);
 
+        String modelEncoding = (String) modelProvider.getResourceMetaData().get("model.encoding");
+        if (modelEncoding == null) {
+            throw new AnalysisEngineProcessException(
+                    new Throwable("Model should contain encoding metadata"));
+        }
         File model = modelProvider.getResource();
         File executable;
 
         try {
-            executable = runtimeProvider.getFile("fst-infl");
+            executable = runtimeProvider.getFile("fst-infl2");
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
 
+        ProcessBuilder pb = new ProcessBuilder(executable.getAbsolutePath(), "-s", "-q",
+                model.getAbsolutePath());
+        pb.redirectError(Redirect.INHERIT);
+
+        StringBuffer lastOut = new StringBuffer();
+        String lastIn = null;
+        boolean success = false;
+        Process proc = null;
         try {
-            for (Token token : JCasUtil.select(jcas, Token.class)) {
-                List<String> results = runTRMorph(executable, model, token.getCoveredText());
+            proc = pb.start();
 
-                AnalysisParser parser = parserProvider.getResource();
+            PrintWriter out = new PrintWriter(new OutputStreamWriter(proc.getOutputStream(),
+                    modelEncoding));
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream(),
+                    modelEncoding));
 
-                if (results.size() > 0) {
+            for (Sentence sentence : select(aJCas, Sentence.class)) {
+                List<Token> tokens = selectCovered(Token.class, sentence);
 
-                    // TODO currently, we just use the first analysis
-                    //      as we have no way to decide which analyis is the correct one
-                    ParsedAnalysis parse = parser.parse(results.get(0));
+                // Skip empty sentences
+                if (tokens.isEmpty()) {
+                    continue;
+                }
 
-                    // TODO: concert parse into more fine-grained morph tags
-                    Morpheme morpheme = new Morpheme(jcas, token.getBegin(), token.getEnd());
-                    morpheme.setMorphTag(parse.getRaw());
-                    morpheme.addToIndexes();
+                // Send full sentence
+                for (Token token : tokens) {
+                    lastOut.append(token.getCoveredText()).append(' ');
+                    out.printf("%s%n", token.getCoveredText());
+                    out.printf("%s%n", FLUSH_TOKEN);
+                }
+                out.flush();
 
-                    if (writeLemma && parse.getLemma() != null) {
-                        String lemmaString = parse.getLemma();
-                        if (lemmaString == null) {
-                            lemmaString = token.getCoveredText();
+                // Read sentence tags
+                tokenLoop: for (Token token : tokens) {
+                    boolean skip = false;
+                    analysisLoop: while ((lastIn = in.readLine()) != null) {
+                        // Analysis line
+                        if (lastIn.startsWith(">")) {
+                            // Echo line, ignore.
+                            continue analysisLoop;
                         }
-                        Lemma lemma = new Lemma(jcas, token.getBegin(), token.getEnd());
-                        lemma.setValue(lemmaString);
-                        lemma.addToIndexes();
-                    }
-
-                    // TODO add more fine-grained POS tags
-                    if (writePos && parse.getTag(TagType.POS) != null) {
-                        POS pos = new POS(jcas, token.getBegin(), token.getEnd());
-                        pos.setPosValue(parse.getTag(TagType.POS).name());
-                        pos.addToIndexes();
+                        
+                        if (lastIn.contains(FLUSH_TOKEN)) {
+                            // End of analysis
+                            continue tokenLoop;
+                        }
+                        
+                        if (lastIn.startsWith("no result for")) {
+                            // No analysis for this token
+                            MorphologicalFeatures morph = new MorphologicalFeatures(aJCas,
+                                    token.getBegin(), token.getEnd());
+                            morph.setValue("");
+                            morph.addToIndexes();
+                            
+                            // We need to continue the inner loop because we still need to consume
+                            // the flush marker.
+                            continue analysisLoop;
+                        }
+                        
+                        // Analysis line
+                        if (!skip) {
+                            MorphologicalFeatures analysis = featuresParser.parse(aJCas, token,
+                                    lastIn);
+                            
+                            if (token.getMorph() == null) {
+                                token.setMorph(analysis);
+                            }
+                        }
+                            
+                        switch (mode) {
+                        case FIRST:
+                            // Go to next token after reading first analysis
+                            skip = true;
+                            break;
+                        case ALL:
+                            // We record all analyses
+                            break;
+                        }
                     }
                 }
+
+                lastOut.setLength(0);
             }
+
+            success = true;
         }
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            if (!success) {
+                getLogger().error("Sent before error: [" + lastOut + "]");
+                getLogger().error("Last response before error: [" + lastIn + "]");
+            }
+            if (proc != null) {
+                proc.destroy();
+            }
         }
     }
 
@@ -247,51 +285,5 @@ public class SfstAnnotator
     {
         runtimeProvider.uninstall();
         super.destroy();
-    }
-
-    public List<String> runTRMorph(File aExecutable, File aModel, String token)
-        throws IOException
-    {
-
-        File tempFile = null;
-        Process p = null;
-        InputStream in = null;
-
-        try {
-            tempFile = File.createTempFile("sfst-morph-token", ".txt");
-            FileUtils.writeStringToFile(tempFile, token, modelEncoding);
-            ProcessBuilder pb = new ProcessBuilder(aExecutable.getAbsolutePath(),
-                    aModel.getAbsolutePath(), tempFile.getAbsolutePath());
-            pb.redirectErrorStream();
-
-            p = pb.start();
-            in = p.getInputStream();
-            List<String> result = IOUtils.readLines(in, modelEncoding);
-            ListIterator<String> i = result.listIterator();
-
-            while (i.hasNext()) {
-                String line = i.next();
-                // skip lines starting with ">" as this indicates input instead
-                // of analysis result
-                if (line.startsWith(">")) {
-                    i.remove();
-                }
-                // if trmorph cannot analyse the token, return the token itself
-                if (line.startsWith("no result for")) {
-                    i.set(token);
-                }
-            }
-
-            return result;
-        }
-        finally {
-            IOUtils.closeQuietly(in);
-            if (p != null) {
-                p.destroy();
-            }
-            if (tempFile != null) {
-                FileUtils.forceDelete(tempFile);
-            }
-        }
     }
 }
