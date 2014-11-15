@@ -120,7 +120,7 @@ public final class ComponentParameters
 	
 	private static final String CONSTITUENT = "Constituent";
 
-   private static final String COREFERENCE = "Coreference";
+    private static final String COREFERENCE = "Coreference";
 
 	private static final String PENN_TREE = "PennTree";
 	
@@ -239,6 +239,11 @@ public final class ComponentParameters
 	 * Location of the mapping file for named entity tags to UIMA types.
 	 */
 	public static final String PARAM_NAMED_ENTITY_MAPPING_LOCATION = NAMED_ENTITY + MAPPING_LOCATION;
+
+    /**
+     * Location of the mapping file for morphological analysis strings to features.
+     */
+    public static final String PARAM_MORPH_MAPPING_LOCATION = MORPH + MAPPING_LOCATION;
 
 	/**
      * Location of the mapping file for dependency tags to UIMA types.
