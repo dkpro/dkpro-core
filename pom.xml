@@ -164,6 +164,7 @@
 					<excludes>
 						<exclude>release.properties</exclude>
 						<exclude>CHANGES</exclude>
+						<exclude>CHANGES.txt</exclude>
 						<exclude>NOTICE.txt</exclude>
 						<exclude>README.txt</exclude>
 						<exclude>LICENSE.txt</exclude>
