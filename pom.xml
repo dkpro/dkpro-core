@@ -181,11 +181,6 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</artifactId>
-				<version>1.7.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
@@ -347,11 +342,6 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</artifactId>
-				<version>1.7.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</artifactId>
 				<version>1.7.0-SNAPSHOT</version>
 			</dependency>
 			<dependency>
@@ -651,7 +641,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</module>
 	    <!-- Processing modules -->
-		<module>de.tudarmstadt.ukp.dkpro.core.bananasplit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
@@ -660,7 +649,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.hunpos-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</module>
         <module>de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl</module>
@@ -935,7 +923,6 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.structure-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.syntax-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.transform-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.bananasplit-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.castransformation-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.clearnlp-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.commonscoded-asl/src/main/java" includes="**/*.java" />
@@ -969,7 +956,6 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xmi-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xml-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jazzy-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jwordsplitter-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.langdetect-asl/src/main/java" includes="**/*.java" />
                                     <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl/src/main/java" includes="**/*.java" />
