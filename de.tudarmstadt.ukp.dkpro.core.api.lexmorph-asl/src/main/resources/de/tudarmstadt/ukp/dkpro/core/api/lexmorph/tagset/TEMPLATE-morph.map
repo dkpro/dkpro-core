@@ -1,7 +1,8 @@
 #
-# Morphisto morphological features
+# NAME OF THE TAGSET
 #
-# Source: TBD
+# Source: SOME URL
+#
 
 #
 # Feature: animacy
@@ -27,12 +28,12 @@
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Case.html (2014-11-18)
 #
-case.Nom=<Nom>
-case.Acc=<Akk>
+# case.Nom=
+# case.Acc=
 # case.Abs=
 # case.Erg=
-case.Dat=<Dat>
-case.Gen=<Gen>
+# case.Dat=
+# case.Gen=
 # case.Voc=
 # case.Loc=
 # case.Ins=
@@ -83,9 +84,9 @@ case.Gen=<Gen>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Gender.html (2014-11-18)
 #
-gender.Masc=<Masc>
-gender.Fem=<Fem>
-gender.Neut=<Neut>
+# gender.Masc=
+# gender.Fem=
+# gender.Neut=
 # gender.Com=
 
 #
@@ -93,11 +94,11 @@ gender.Neut=<Neut>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Mood.html (2014-11-18)
 #
-mood.Ind=<Ind>
+# mood.Ind=
 # mood.Imp=
 # mood.Cnd=
 # mood.Pot=
-mood.Sub=<Konj>
+# mood.Sub=
 # mood.Jus=
 # mood.Qot=
 # mood.Opt=
@@ -131,8 +132,8 @@ mood.Sub=<Konj>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Number.html (2014-11-18)
 #
-number.Sing=<Sg>
-number.Plur=<Pl>
+# number.Sing=
+# number.Plur=
 # number.Dual=
 # number.Ptan=
 # number.Coll=
@@ -142,9 +143,9 @@ number.Plur=<Pl>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Person.htmlhtml (2014-11-18)
 #
-person.1=<1>
-person.2=<2>
-person.3=<3>
+# person.1=
+# person.2=
+# person.3=
 
 #
 # Feature: possessive
@@ -180,9 +181,9 @@ person.3=<3>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Tense.html (2014-11-18)
 #
-tense.Pres=<Pres>
+# tense.Pres=
 # tense.Fut=
-tense.Imp=<Imp>
+# tense.Imp=
 # tense.Nar=
 # tense.Pqp=
 
@@ -207,10 +208,3 @@ tense.Imp=<Imp>
 # voice.Pass=
 # voice.Rcp=
 # voice.Cau=
-
-
-
-
-
-
-
