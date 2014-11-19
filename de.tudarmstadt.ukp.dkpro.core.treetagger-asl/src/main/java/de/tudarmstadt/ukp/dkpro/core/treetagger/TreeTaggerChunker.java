@@ -24,9 +24,13 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.annolab.tt4j.DefaultModel;
 import org.annolab.tt4j.TokenAdapter;
 import org.annolab.tt4j.TokenHandler;
 import org.annolab.tt4j.TreeTaggerException;
@@ -127,6 +131,17 @@ public class TreeTaggerChunker
     @ConfigurationParameter(name = PARAM_PERFORMANCE_MODE, mandatory = true, defaultValue = "false")
     private boolean performanceMode;
 	
+    /**
+     * A sequence to flush the internal TreeTagger buffer and to force it to output the rest of the
+     * completed analysis. This is typically just a sequence of like 5-10 full stops (".") separated
+     * by new line characters. However, some models may require a different flush sequence, e.g. a
+     * short sentence in the respective language. For chunker models, mind that the sentence must
+     * also be POS tagged, e.g. {@code Nous-PRO:PER\n...}.
+     */
+    public static final String PARAM_FLUSH_SEQUENCE = "flushSequence";
+    @ConfigurationParameter(name = PARAM_FLUSH_SEQUENCE, mandatory = false)
+    private String flushSequence;
+    
 	private CasConfigurableProviderBase<TreeTaggerWrapper<POS>> modelProvider;
 	private MappingProvider mappingProvider;
 
@@ -158,16 +173,6 @@ public class TreeTaggerChunker
 	            DKProExecutableResolver executableProvider = new DKProExecutableResolver(treetagger);
 	            executableProvider.setExecutablePath(executablePath);
 	            treetagger.setExecutableProvider(executableProvider);
-                treetagger.setAdapter(new TokenAdapter<POS>()
-                {
-                    @Override
-                    public String getText(POS aPos)
-                    {
-                        synchronized (aPos.getCAS()) {
-                            return aPos.getCoveredText() + "-" + aPos.getPosValue();
-                        }
-                    }
-                });
 			}
 
 			@Override
@@ -177,11 +182,20 @@ public class TreeTaggerChunker
 			    Properties meta = getResourceMetaData();
 			    String encoding = meta.getProperty("encoding");
 			    String tagset = meta.getProperty("chunk.tagset");
+                String flush = meta.getProperty("flushSequence",
+                        DefaultModel.DEFAULT_FLUSH_SEQUENCE);
+                if (flushSequence != null) {
+                    flush = flushSequence;
+                }
 			    
 			    File modelFile = ResourceUtils.getUrlAsFile(aUrl, true);
 			    
+                DefaultModel model = new DefaultModel(modelFile.getPath() + ":" + encoding,
+                        modelFile, encoding, flush);
+			    
                 // Reconfigure tagger
-                treetagger.setModel(modelFile.getPath() + ":" + encoding);
+                treetagger.setModel(model);
+                treetagger.setAdapter(new MappingTokenAdapter(meta));
                 
                 // Get tagset
                 List<String> tags = TreeTaggerModelUtil.getTagset(modelFile, encoding);
@@ -281,5 +295,37 @@ public class TreeTaggerChunker
         catch (IOException e) {
             throw new AnalysisEngineProcessException(e);
         }		
+	}
+	
+	private static class MappingTokenAdapter implements TokenAdapter<POS>
+	{
+	    private Map<String, String> mapping;
+
+	    public MappingTokenAdapter(Properties aMetadata)
+	    {
+	        mapping = new HashMap<String, String>();
+	        
+	        for (Entry<Object, Object> e : aMetadata.entrySet()) {
+	            String key = String.valueOf(e.getKey());
+	            if (key.startsWith("pos.tag.map.")) {
+	                String old = key.substring("pos.tag.map.".length());
+	                String rep = String.valueOf(e.getValue());
+	                mapping.put(old, rep);
+	            }
+	        }
+	    }
+	    
+        @Override
+        public String getText(POS aPos)
+        {
+            synchronized (aPos.getCAS()) {
+                String pos = mapping.get(aPos.getPosValue());
+                if (pos == null) {
+                    pos = aPos.getPosValue();
+                }
+                
+                return aPos.getCoveredText() + "-" + pos;
+            }
+        }
 	}
 }
