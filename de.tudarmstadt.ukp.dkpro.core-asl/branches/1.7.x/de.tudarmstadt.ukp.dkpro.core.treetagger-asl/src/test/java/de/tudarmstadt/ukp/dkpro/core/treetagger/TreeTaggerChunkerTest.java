@@ -31,23 +31,16 @@ import org.apache.uima.fit.testing.factory.TokenBuilder;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TreeTaggerChunkerTest
 {
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
-    
     @Test
     public void testEnglish()
         throws Exception
@@ -103,6 +96,40 @@ public class TreeTaggerChunkerTest
 
         assertChunks(chunks, select(jcas, Chunk.class));
         assertTagset(Chunk.class, "tt", chunkTags, jcas);
+        // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
+    }
+    
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        JCas jcas = runTest("fr", null, "Nous avons besoin d' une phrase par exemple très "
+                + "compliqué , qui contient des constituants que de nombreuses dépendances et que "
+                + "possible .");
+
+        String[] chunks = new String[] { 
+                "[  0, 17]O(VN) (Nous avons besoin)",
+                "[ 18, 20]O(PP) (d')",
+                "[ 21, 31]O(NP) (une phrase)",
+                "[ 32, 35]O(PP) (par)",
+                "[ 36, 43]O(NP) (exemple)",
+                "[ 44, 60]O(AP) (très compliqué ,)",
+                "[ 61, 64]O(NP) (qui)",
+                "[ 65, 73]O(VN) (contient)",
+                "[ 74, 90]O(NP) (des constituants)",
+                "[ 91, 94]O(Ssub) (que)",
+                "[ 95,120]O(NP) (de nombreuses dépendances)",
+                "[121,127]O(COORD) (et que)",
+                "[128,136]O(AP) (possible)",
+                "[137,138]O(0) (.)" };
+
+        String[] chunkTags = new String[] { "0", "AP", "AdP", "COORD", "NP", "PONCT:S", "PP",
+                "Sint", "Srel", "Ssub", "VN", "VPinf", "VPpart" };
+
+        // String[] unmappedChunk = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "``" };
+
+        assertChunks(chunks, select(jcas, Chunk.class));
+        assertTagset(Chunk.class, "ftb", chunkTags, jcas);
         // FIXME assertTagsetMapping(Chunk.class, "conll2000", unmappedChunk, jcas);
     }
 
@@ -164,11 +191,5 @@ public class TreeTaggerChunkerTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
