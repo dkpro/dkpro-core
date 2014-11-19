@@ -45,20 +45,20 @@
 	<target name="bg-tagger-le">
 		<mkdir dir="target/download"/>
 		
-		<!-- FILE: bulgarian-par-linux-3.1.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2006-02-17 | now        | bd3661679ffe9630f6bd61c59cea391b
+		<!-- FILE: bulgarian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2014-07-02 | now        | ee595fb1643760a94591cee91b556911
 		  -->
     	<get 
-    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.1.bin.gz" 
-    		dest="target/download/bulgarian-par-linux-3.1.bin.gz" 
+    		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/bulgarian-par-linux-3.2-utf8.bin.gz" 
+    		dest="target/download/bulgarian-par-linux-3.2-utf8.bin.gz" 
     		skipexisting="true"/>
-		<gunzip src="target/download/bulgarian-par-linux-3.1.bin.gz"/>
+		<gunzip src="target/download/bulgarian-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
-    		file="target/download/bulgarian-par-linux-3.1.bin" 
-    		md5="bd3661679ffe9630f6bd61c59cea391b"
+    		file="target/download/bulgarian-par-linux-3.2-utf8.bin" 
+    		md5="ee595fb1643760a94591cee91b556911"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20060217"
+    		upstreamVersion="20140702"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="bg" 
@@ -466,7 +466,8 @@
 		<mkdir dir="target/download"/>
 		
 		<!-- FILE: italian-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2009-06-22 | now        | 79c03b4cc14c89d58aa1f97a133d01d7
+		  - 2009-06-22 | 2014-10-20 | 79c03b4cc14c89d58aa1f97a133d01d7
+		  - 2014-10-20 | now        | d3266e8b3d1860543403342fe0c95fc8
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/italian-par-linux-3.2-utf8.bin.gz" 
@@ -475,10 +476,10 @@
 		<gunzip src="target/download/italian-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/italian-par-linux-3.2-utf8.bin" 
-    		md5="79c03b4cc14c89d58aa1f97a133d01d7"
+    		md5="d3266e8b3d1860543403342fe0c95fc8"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20090622"
+    		upstreamVersion="20141020"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="it" 
