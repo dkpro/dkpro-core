@@ -83,6 +83,22 @@ class TreeTaggerPosTaggerTest
         		new String[] { "PP$", "NN", "VBZ", "JJ",  "SENT" },
         		new String[] { "PR",  "NN", "V",   "ADJ", "PUNC" });
 	}
+	
+    @Test
+    public void testFrench()
+        throws Exception
+    {
+        String[] tagset = { "ABR", "ADJ", "ADV", "DET:ART", "DET:POS", "INT", "KON", "NAM", "NOM",
+                "NUM", "PRO", "PRO:DEM", "PRO:IND", "PRO:PER", "PRO:POS", "PRO:REL", "PRP",
+                "PRP:det", "PUN", "PUN:cit", "SENT", "SYM", "VER:cond", "VER:futu", "VER:impe",
+                "VER:impf", "VER:infi", "VER:pper", "VER:ppre", "VER:pres", "VER:simp", "VER:subi",
+                "VER:subp" };
+        
+        runTest("fr", "stein", tagset, "Ceci est un test .",
+                new String[] { "ceci", "être", "un", "test", "."   },
+                new String[] { "PRO:DEM", "VER:pres", "DET:ART", "NOM", "SENT"   },
+                new String[] { "PR", "V", "ART", "NN", "PUNC" });
+    }
 
 	@Test
 	public void testGerman()

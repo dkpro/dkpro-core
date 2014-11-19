@@ -395,6 +395,8 @@
 	</target>
 
 	<target name="fr-chunker-le">
+		<mkdir dir="target/download"/>
+		
 		<!-- FILE: french-chunker-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - -
 		  - 2008-06-11 | now        | 975e3e306198c9f61f14428621ed87ba
 		  -->
@@ -409,7 +411,7 @@
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
     		upstreamVersion="20080611"
-    		metaDataVersion="1"
+    		metaDataVersion="2"
     		tool="chunker" 
     		language="fr" 
     		variant="le" 
@@ -417,6 +419,8 @@
 			<metadata>
 	    		<entry key="chunk.tagset" value="ftb"/>
 	    		<entry key="encoding" value="UTF-8"/>
+				<entry key="flushSequence" value="Ce-PRO:DEM&#10;est-VER:pres&#10;la-DET:ART&#10;fin-NOM&#10;mon-DET:POS&#10;ami-NOM&#10;.-PONCT:S"/>
+				<entry key="pos.tag.map.SENT" value="PONCT:S"/>
 			</metadata>
 		</install-stub-and-upstream-file>
 	</target>
