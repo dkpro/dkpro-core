@@ -161,8 +161,11 @@
     				tofile="target/model-staging/META-INF/CHANGES.txt" 
     				file="target/download/morph-it_automata_048/pippi-changelog.txt"/>
     			<copy 
-    				tofile="target/model-staging/META-INF/README.txt" 
+    				tofile="target/model-staging/META-INF/README.automata.txt" 
     				file="target/download/morph-it_automata_048/readme.automata.txt"/>
+    	    	<get 
+    	    		src="http://sslmitdev-online.sslmit.unibo.it/linguistics/downloads/readme-morph-it.txt" 
+    	    		dest="target/model-staging/META-INF/README.txt"/>
     		</additionalUpstreamContent>
 		</install-stub-and-upstream-file>
     </target>
