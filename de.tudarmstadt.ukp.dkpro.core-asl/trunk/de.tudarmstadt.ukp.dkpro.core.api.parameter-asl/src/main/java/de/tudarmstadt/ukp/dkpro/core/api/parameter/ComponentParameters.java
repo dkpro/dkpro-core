@@ -211,9 +211,11 @@ public final class ComponentParameters
      * specified which does not have such meta data, or it can be used in readers.
      */
     public static final String PARAM_CHUNK_TAG_SET = CHUNK + TAG_SET;
-    
+
     public static final String PARAM_CONSTITUENT_TAG_SET = CONSTITUENT + TAG_SET;
-	
+
+    public static final String PARAM_MORPH_TAG_SET = MORPH + TAG_SET;
+
 	// =============================================================================================
 	// Configure mapping of tags to annotation types for different kinds of annotations.
 	//
