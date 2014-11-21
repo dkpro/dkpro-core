@@ -26,7 +26,7 @@
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.introduction.xml"/>
   
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.gettingstarted.xml"/>
+  <!--xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.gettingstarted.xml"/-->
 
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="dkpro.core.typesystem.xml"/>
 

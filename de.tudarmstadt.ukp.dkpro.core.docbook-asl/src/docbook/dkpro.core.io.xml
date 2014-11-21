@@ -36,7 +36,7 @@
 			<tgroup cols="3">
 				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
 				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
-				<colspec colname="newCol3" colnum="3" colwidth="1*"/>
+				<colspec colname="newCol3" colnum="3" colwidth="0.3*"/>
 				<thead>
 					<row>
 						<entry>Parameter</entry>
@@ -46,30 +46,60 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>PARAM_SOURCE_LOCATION</entry>
-						<entry>Location to read from.</entry>
-						<entry>optional</entry>
+						<entry>
+							<para>PARAM_SOURCE_LOCATION</para>
+						</entry>
+						<entry>
+							<para>Location to read from.</para>
+						</entry>
+						<entry>
+							<para>optional</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_PATTERNS</entry>
-						<entry>Include/exclude patterns.</entry>
-						<entry>optional</entry>
+						<entry>
+							<para>PARAM_PATTERNS</para>
+						</entry>
+						<entry>
+							<para>Include/exclude patterns.</para>
+						</entry>
+						<entry>
+							<para>optional</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_USE_DEFAULT_EXCLUDES</entry>
-						<entry>Enable default excludes for versioning systems like Subversion, git,
-							etc.</entry>
-						<entry>true</entry>
+						<entry>
+							<para>PARAM_USE_DEFAULT_EXCLUDES</para>
+						</entry>
+						<entry>
+							<para>Enable default excludes for versioning systems like Subversion,
+								git, etc.</para>
+						</entry>
+						<entry>
+							<para>true</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_INCLUDE_HIDDEN</entry>
-						<entry>Include hidden files</entry>
-						<entry>false</entry>
+						<entry>
+							<para>PARAM_INCLUDE_HIDDEN</para>
+						</entry>
+						<entry>
+							<para>Include hidden files</para>
+						</entry>
+						<entry>
+							<para>false</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_LANGUAGE</entry>
-						<entry>Two letter ISO code</entry>
-						<entry>optional </entry>
+						<entry>
+							<para>PARAM_LANGUAGE</para>
+						</entry>
+						<entry>
+							<para>Two letter ISO code</para>
+						</entry>
+						<entry>
+							<para>optional</para>
+						</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -128,7 +158,7 @@
 			<tgroup cols="3">
 				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
 				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
-				<colspec colname="newCol3" colnum="3" colwidth="1*"/>
+				<colspec colname="newCol3" colnum="3" colwidth="0.3*"/>
 				<thead>
 					<row>
 						<entry>Parameter</entry>
@@ -138,38 +168,68 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>PARAM_TARGET_LOCATION</entry>
-						<entry>Location to write to.</entry>
-						<entry>mandatory</entry>
+						<entry>
+							<para>PARAM_TARGET_LOCATION</para>
+						</entry>
+						<entry>
+							<para>Location to write to.</para>
+						</entry>
+						<entry>
+							<para>mandatory</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_COMPRESSION</entry>
-						<entry>Compression algorithm to use when writing output. File suffix
-							automatically added depending on algorithm. Supported are: NONE, GZIP,
-							BZIP2, and XZ (see class
-							<classname>CompressionMethod</classname>).</entry>
-						<entry>NONE</entry>
+						<entry>
+							<para>PARAM_COMPRESSION</para>
+						</entry>
+						<entry>
+							<para>Compression algorithm to use when writing output. File suffix
+								automatically added depending on algorithm. Supported are: NONE,
+								GZIP, BZIP2, and XZ (see class
+									<classname>CompressionMethod</classname>).</para>
+						</entry>
+						<entry>
+							<para>NONE</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_STRIP_EXTENSION</entry>
-						<entry>Whether to remove the original file extension when writing. E.g. with
-							the XmiWriter without extension stripping, an input file
-								<filename>MyText.txt</filename> would be written as
-								<filename>MyText.txt.xmi</filename> - with stripping it would be
-								<filename>MyText.xmi</filename>.</entry>
-						<entry>false</entry>
+						<entry>
+							<para>PARAM_STRIP_EXTENSION</para>
+						</entry>
+						<entry>
+							<para>Whether to remove the original file extension when writing. E.g.
+								with the XmiWriter without extension stripping, an input file
+									<filename>MyText.txt</filename> would be written as
+									<filename>MyText.txt.xmi</filename> - with stripping it would be
+									<filename>MyText.xmi</filename>.</para>
+						</entry>
+						<entry>
+							<para>false</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_USE_DOCUMENT_ID</entry>
-						<entry>Use the document ID as the file name, even if an original file name
-							is present in the document URI.</entry>
-						<entry>false</entry>
+						<entry>
+							<para>PARAM_USE_DOCUMENT_ID</para>
+						</entry>
+						<entry>
+							<para>Use the document ID as the file name, even if an original file
+								name is present in the document URI.</para>
+						</entry>
+						<entry>
+							<para>false</para>
+						</entry>
 					</row>
 					<row>
-						<entry>PARAM_ESCAPE_DOCUMENT_ID</entry>
-						<entry>Escape the document ID in case it contains characters that are not
-							valid in a filename.</entry>
-						<entry>false</entry>
+						<entry>
+							<para>PARAM_ESCAPE_DOCUMENT_ID</para>
+						</entry>
+						<entry>
+							<para>Escape the document ID in case it contains characters that are not
+								valid in a filename.</para>
+						</entry>
+						<entry>
+							<para>false</para>
+						</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -221,6 +281,7 @@
 			</listitem>
 		</itemizedlist>
 	</section>
+	<!--
 	<section>
 		<title>ANNIS (not in release)</title>
 		<para/>
@@ -256,6 +317,7 @@
 			</listitem>
 		</itemizedlist>
 	</section>
+	-->
 	<section>
 		<title>Binary CAS</title>
 		<para>The CAS is the native data model used by UIMA. There are various ways of saving CAS
@@ -382,12 +444,32 @@
 						<entry>Chunking task</entry>
 					</row>
 					<row>
+						<entry>Conll2000Writer</entry>
+						<entry>Chunking task</entry>
+					</row>
+					<row>
 						<entry>Conll2006Reader (RR)</entry>
 						<entry>Dependency parsing task</entry>
 					</row>
 					<row>
 						<entry>Conll2006Writer</entry>
 						<entry>Dependency parsing task</entry>
+					</row>
+					<row>
+						<entry>Conll2009Reader (RR)</entry>
+						<entry>Semantic dependencies</entry>
+					</row>
+					<row>
+						<entry>Conll2009Writer</entry>
+						<entry>Semantic dependencies</entry>
+					</row>
+					<row>
+						<entry>Conll2012Reader</entry>
+						<entry>Syntactic parsing &amp; coreference</entry>
+					</row>
+					<row>
+						<entry>Conll2012Writer</entry>
+						<entry>Syntactic parsing &amp; coreference</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -444,6 +526,34 @@
 		</itemizedlist>
 	</section>
 	<section>
+		<title>CLARIN WebLicht TCF</title>
+		<table frame="all">
+			<title>Components</title>
+			<tgroup cols="2">
+				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
+				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
+				<thead>
+					<row>
+						<entry>Component</entry>
+						<entry>Comments</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>TcfReader (RR)</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>TcfWriter</entry>
+						<entry/>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para/>
+	</section>
+	<!--
+	<section>
 		<title>Fangorn (not in release)</title>
 		<para/>
 		<table frame="all">
@@ -470,6 +580,8 @@
 			</tgroup>
 		</table>
 	</section>
+	-->
+	<!--
 	<section>
 		<title>GRaF (not in release)</title>
 		<para/>
@@ -497,6 +609,7 @@
 			</tgroup>
 		</table>
 	</section>
+	-->
 	<section>
 		<title>HTML</title>
 		<table frame="all">
@@ -721,7 +834,7 @@
 		</table>
 	</section>
 	<section>
-		<title>Penn Treeback Bracketed Structure</title>
+		<title>Penn Treebank</title>
 		<para/>
 		<table frame="all">
 			<title>Components</title>
@@ -736,11 +849,15 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry></entry>
+						<entry>PennTreebankChunkedReader</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry></entry>
+						<entry>PennTreebankCombinedReader</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>PennTreebankCombinedWriter</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -947,7 +1064,7 @@
 		</itemizedlist>
 	</section>
 	<section>
-		<title>Web1t</title>
+		<title>Web1T</title>
 		<para>The Web1T n-gram corpus is a huge collection of n-grams collected from the internet. The
 			jweb1t library allows to access this corpus efficiently. This module provides support
 			for the file format used by the Web1T n-gram corpus and allows to conveniently created
@@ -983,6 +1100,7 @@
 			</listitem>
 		</itemizedlist>
 	</section>
+	<!--
 	<section>
 		<title>WSDL (not in release)</title>
 		<para/>
@@ -1010,6 +1128,7 @@
 			</tgroup>
 		</table>
 	</section>
+	-->
 	<section>
 		<title>XMI</title>
 		<para/>
