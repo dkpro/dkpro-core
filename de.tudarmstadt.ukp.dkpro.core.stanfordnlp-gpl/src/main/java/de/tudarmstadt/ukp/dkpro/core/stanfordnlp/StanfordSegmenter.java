@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
 import static java.lang.Character.isWhitespace;
 import static java.lang.Math.min;
-import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -83,10 +83,12 @@ extends SegmenterBase
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
     {
+        List<Token> casTokens = null;
+        
         if (isWriteToken()) {
+            casTokens = new ArrayList<Token>();
             final String text = aText;
             final Tokenizer<?> tokenizer = getTokenizer(aJCas.getDocumentLanguage(), aText);
-            final int offsetInDocument = aZoneBegin;
             int offsetInSentence = 0;
 
             List<?> tokens = tokenizer.tokenize();
@@ -103,7 +105,7 @@ extends SegmenterBase
                     int begin = l.get(CharacterOffsetBeginAnnotation.class);
                     int end = l.get(CharacterOffsetEndAnnotation.class);
 
-                    createToken(aJCas, offsetInDocument + begin, offsetInDocument + end, i);
+                    casTokens.add(createToken(aJCas, aZoneBegin + begin, aZoneBegin + end, i));
                     offsetInSentence = end;
                     continue;
                 }
@@ -127,8 +129,8 @@ extends SegmenterBase
 
                 // Match
                 if (text.startsWith(t, offsetInSentence)) {
-                    createToken(aJCas, offsetInDocument + offsetInSentence, offsetInDocument
-                            + offsetInSentence + t.length(), i);
+                    casTokens.add(createToken(aJCas, aZoneBegin + offsetInSentence, aZoneBegin
+                            + offsetInSentence + t.length(), i));
                     offsetInSentence = offsetInSentence + t.length();
                 }
                 else {
@@ -144,9 +146,14 @@ extends SegmenterBase
         }
 
         if (isWriteSentence()) {
+            if (casTokens == null) {
+                casTokens = selectCovered(aJCas, Token.class, aZoneBegin,
+                        aZoneBegin + aText.length());
+            }
+            
     		// Prepare the tokens for processing by WordToSentenceProcessor
     		List<CoreLabel> tokensInDocument = new ArrayList<CoreLabel>();
-    		for (Token token : select(aJCas, Token.class)) {
+    		for (Token token : casTokens) {
     			CoreLabel l = new CoreLabel();
     			l.set(CharacterOffsetBeginAnnotation.class, token.getBegin());
     			l.set(CharacterOffsetEndAnnotation.class, token.getEnd());
@@ -166,41 +173,8 @@ extends SegmenterBase
     			int begin = sentence.get(0).get(CharacterOffsetBeginAnnotation.class);
     			int end = sentence.get(sentence.size()-1).get(CharacterOffsetEndAnnotation.class);
     
-    			// Bugfix JC: somehow, the above code saves sentences multiple times for subsequent zones (strictZoning)
-    			// given a document with n zones, A, B, C, ... e.g. these are headlines:
-    			// A
-    			// sent1
-    			// sent2
-    			// B
-    			// sent3
-    			// sent4
-    			// C
-    			// ...
-    			// the list of sentences should contain: sent1, sent2, sent 3, ...
-    			/// but it contains: sent1, sent2, ->sent1<- (again), sent2, sent3, sent4, sent1, sent2, ...
-    
-    			// easy hack solution:
-    			if (begin >= aZoneBegin)
-    			{
-    				//System.out.println("outside create sentence: " + begin + "\t" + end);
-    				createSentence(aJCas, begin, end);
-    			}
-    
-    			// instead of just
-    			// createSentence(aJCas, begin, end);
-    			// which results in multiple sentence annotations per original sentence from the document
-    
-    			// if someone has time to fix the above code, this would probably improve time & space efficiency
+    			createSentence(aJCas, begin, end);
     		}
-    //		for(Sentence currSentence : JCasUtil.iterate(aJCas, Sentence.class)){
-    //			if(isCreateIndexedTokens()){
-    //				int tokenIndex = 1;
-    //				for(TokenWithIndex t : JCasUtil.selectCovered(aJCas, TokenWithIndex.class, currSentence)){
-    //					t.setTokenIndex(tokenIndex);
-    //					tokenIndex++;
-    //				}
-    //			}
-    //		}
 		}
     }
 
