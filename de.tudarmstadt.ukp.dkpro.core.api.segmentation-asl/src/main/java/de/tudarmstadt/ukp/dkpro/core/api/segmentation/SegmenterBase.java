@@ -24,16 +24,12 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -123,17 +119,13 @@ extends JCasAnnotator_ImplBase
 				process(jcas, text.substring(0, text.length()), 0);
 			}
 			else if (zones.length != 1) {
-				throw new AnalysisEngineProcessException(new IllegalStateException(
-				"Strict zoning cannot use multiple zone types"));
+                throw new AnalysisEngineProcessException(new IllegalStateException(
+                        "Strict zoning cannot use multiple zone types"));
 			} else {
-				AtomicInteger begin = new AtomicInteger();
-				AtomicInteger end = new AtomicInteger();
 				CAS cas = jcas.getCas();
 				for (AnnotationFS zone : select(cas, getType(cas, zones[0]))) {
-					begin.set(zone.getBegin());
-					end.set(zone.getEnd());
-					limit(text, begin, end, true);
-					process(jcas, text.substring(begin.get(), end.get()), begin.get());
+					int[] adjusted = limit(text, zone.getBegin(), zone.getEnd());
+					process(jcas, text.substring(adjusted[0], adjusted[1]), adjusted[0]);
 				}
 			}
 		}
@@ -149,15 +141,11 @@ extends JCasAnnotator_ImplBase
 				// Iterate over all the zone indices and create sentences respecting
 				// the zone boundaries. If the zoneTypes overlap... well... bad luck!
 				for (String zoneName : zones) {
-					AtomicInteger begin = new AtomicInteger();
-					AtomicInteger end = new AtomicInteger();
 					CAS cas = jcas.getCas();
 					for (AnnotationFS zone : select(cas, getType(cas, zoneName))) {
-						begin.set(zone.getBegin());
-						end.set(zone.getEnd());
-						limit(text, begin, end, false);
-						boundarySet.add(begin.get());
-						boundarySet.add(end.get());
+						int[] adjusted = limit(text, zone.getBegin(), zone.getEnd());
+						boundarySet.add(adjusted[0]);
+						boundarySet.add(adjusted[1]);
 					}
 				}
 			}
@@ -183,29 +171,27 @@ extends JCasAnnotator_ImplBase
      * @param text the text.
      * @param aBegin the zone begin.
      * @param aEnd the zone end.
-     * @param aEndPlusOne no idea...
      */
-	protected void limit(String text, AtomicInteger aBegin, AtomicInteger aEnd,
-			boolean aEndPlusOne)
+	protected int[] limit(String text, int aBegin, int aEnd)
     {
 		// checking to avoid out-of-bounds
-    	int maxEnd = text.length() + (aEndPlusOne ? 0 : -1);
-		int begin = aBegin.get() < 0 ? 0 : aBegin.get();
+    	int maxEnd = text.length();
+		int begin = aBegin < 0 ? 0 : aBegin;
 		begin = begin > maxEnd ? maxEnd : begin;
 
-		int end = aEnd.get() < 0 ? 0 : aEnd.get();
+		int end = aEnd < 0 ? 0 : aEnd;
 		end = end > maxEnd ? maxEnd : end;
 
-		if (begin != aBegin.get() || end != aEnd.get()) {
-			getLogger().warn("Adjusted " + "out-of-bounds zone [" + aBegin.get() + "-" + aEnd.get()
+		if (begin != aBegin || end != aEnd) {
+			getLogger().warn("Adjusted " + "out-of-bounds zone [" + aBegin + "-" + aEnd
 							+ "] to [" + begin + "-" + end + "]");
 		}
 
-		aBegin.set(begin);
-		aEnd.set(end);
+		int[] offsets = { begin, end };
+		return offsets;
     }
 
-	protected Annotation createSentence(final JCas aJCas, final int aBegin,
+	protected Sentence createSentence(final JCas aJCas, final int aBegin,
 			final int aEnd)
 	{
 		int[] span = new int[] { aBegin, aEnd };
@@ -222,23 +208,23 @@ extends JCasAnnotator_ImplBase
 		}
 	}
 
-	protected Annotation createToken(final JCas aJCas, final int aBegin,
+	protected Token createToken(final JCas aJCas, final int aBegin,
 			final int aEnd)
 	{
-		Annotation a = createToken(aJCas, aBegin, aEnd, tokenCount);
+		Token a = createToken(aJCas, aBegin, aEnd, tokenCount);
 		if (a != null) {
 			tokenCount++;
 		}
 		return a;
 	}
 
-	protected Annotation createToken(final JCas aJCas, final int aBegin,
+	protected Token createToken(final JCas aJCas, final int aBegin,
 			final int aEnd, final int aIndex)
 	{
 		int[] span = new int[] { aBegin, aEnd };
 		trim(aJCas.getDocumentText(), span);
 		if (!isEmpty(span[0], span[1]) && isWriteToken()) {
-			Annotation seg = new Token(aJCas, span[0], span[1]);
+			Token seg = new Token(aJCas, span[0], span[1]);
 			seg.addToIndexes(aJCas);
 			return seg;
 		}
