@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing.harness;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertSentence;
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -26,9 +28,11 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assert;
-
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
@@ -169,6 +173,123 @@ public final class SegmenterHarness
 		}
 	}
 
+	public static void testZoning(Class<? extends SegmenterBase> aSegmenter) throws Exception
+	{
+	    testLaxZoning(aSegmenter);
+	    testStrictZoning(aSegmenter);
+	    testOufOfBoundsZones(aSegmenter);
+	}
+	
+    public static void testLaxZoning(Class<? extends SegmenterBase> aSegmenter) throws Exception
+    {
+        String[] sentences = { "A a a a .", "A a a a -", "B b b b .", "B b b b -", "C c c c .",
+                "C c c c -" };
+        
+        String[] tokens = { "A", "a", "a", "a", ".", "A", "a", "a", "a", "-", "B", "b", "b", "b",
+                ".", "B", "b", "b", "b", "-", "C", "c", "c", "c", ".", "C", "c", "c", "c", "-" };
+        
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        //                              1    1    2    2    3    3    4    4    5    5    6
+        //                    0    5    0    5    0    5    0    5    0    5    0    5    0
+        //                     ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+        jcas.setDocumentText("A a a a . A a a a - B b b b . B b b b - C c c c . C c c c -");
+        //                    |------------------|                    |------------------|
+        new Paragraph(jcas, 0, 19).addToIndexes();
+        new Paragraph(jcas, 40, 59).addToIndexes();
+
+        AnalysisEngine ae = createEngine(aSegmenter,
+                SegmenterBase.PARAM_STRICT_ZONING, false,
+                SegmenterBase.PARAM_ZONE_TYPES, Paragraph.class);
+        ae.process(jcas);
+
+        assertToken(tokens, select(jcas, Token.class));
+        assertSentence(sentences, select(jcas, Sentence.class));
+    }
+
+    public static void testOufOfBoundsZones(Class<? extends SegmenterBase> aSegmenter) throws Exception
+    {
+        //                       1    1    2    2    3    3    4    4    5    5    6
+        //             0    5    0    5    0    5    0    5    0    5    0    5    0
+        //              ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+        String text = "A a a a . A a a a - B b b b . B b b b - C c c c . C c c c -";
+        //             |------------------|                    |------------------|
+        
+        // non-strict zoning
+        {
+            String[] sentences = { "A a a a .", "A a a a -", "B b b b .", "B b b b -", "C c c c .",
+                    "C c c c -" };
+
+            String[] tokens = { "A", "a", "a", "a", ".", "A", "a", "a", "a", "-", "B", "b", "b",
+                    "b", ".", "B", "b", "b", "b", "-", "C", "c", "c", "c", ".", "C", "c", "c", "c",
+                    "-" };
+            
+            JCas jcas = JCasFactory.createJCas();
+            jcas.setDocumentLanguage("en");
+            jcas.setDocumentText(text);
+            new Paragraph(jcas, 0, 19).addToIndexes();
+            new Paragraph(jcas, 40, 65).addToIndexes();
+    
+            AnalysisEngine ae = createEngine(aSegmenter,
+                    SegmenterBase.PARAM_STRICT_ZONING, false,
+                    SegmenterBase.PARAM_ZONE_TYPES, Paragraph.class);
+            ae.process(jcas);
+    
+            assertToken(tokens, select(jcas, Token.class));
+            assertSentence(sentences, select(jcas, Sentence.class));
+        }
+        
+        // strict zoning
+        {
+            String[] sentences = { "A a a a .", "A a a a -", "C c c c .", "C c c c -" };
+
+            String[] tokens = { "A", "a", "a", "a", ".", "A", "a", "a", "a", "-", "C", "c", "c",
+                    "c", ".", "C", "c", "c", "c", "-" };
+            
+            JCas jcas = JCasFactory.createJCas();
+            jcas.setDocumentLanguage("en");
+            jcas.setDocumentText(text);
+            new Paragraph(jcas, 0, 19).addToIndexes();
+            new Paragraph(jcas, 40, 65).addToIndexes();
+            
+            AnalysisEngine ae = createEngine(aSegmenter,
+                    SegmenterBase.PARAM_STRICT_ZONING, true,
+                    SegmenterBase.PARAM_ZONE_TYPES, Paragraph.class);
+            ae.process(jcas);
+    
+            assertToken(tokens, select(jcas, Token.class));
+            assertSentence(sentences, select(jcas, Sentence.class));
+        }
+    }
+    public static void testStrictZoning(Class<? extends SegmenterBase> aSegmenter) throws Exception
+    {
+        String[] sentences = { "A a a a .", "A a a a -", "C c c c .", "C c c c -" };
+        
+        String[] tokens = { 
+                "A", "a", "a", "a", ".", 
+                "A", "a", "a", "a", "-",
+                "C", "c", "c", "c", ".", 
+                "C", "c", "c", "c", "-" };
+        
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        //                              1    1    2    2    3    3    4    4    5    5    6
+        //                    0    5    0    5    0    5    0    5    0    5    0    5    0
+        //                     ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
+        jcas.setDocumentText("A a a a . A a a a - B b b b . B b b b - C c c c . C c c c -");
+        //                    |------------------|                    |------------------|
+        new Paragraph(jcas, 0, 19).addToIndexes();
+        new Paragraph(jcas, 40, 59).addToIndexes();
+
+        AnalysisEngine ae = createEngine(aSegmenter,
+                SegmenterBase.PARAM_STRICT_ZONING, true,
+                SegmenterBase.PARAM_ZONE_TYPES, Paragraph.class);
+        ae.process(jcas);
+
+        assertToken(tokens, select(jcas, Token.class));
+        assertSentence(sentences, select(jcas, Sentence.class));
+    }
+	
 	static class TestData
 	{
 		final String id;

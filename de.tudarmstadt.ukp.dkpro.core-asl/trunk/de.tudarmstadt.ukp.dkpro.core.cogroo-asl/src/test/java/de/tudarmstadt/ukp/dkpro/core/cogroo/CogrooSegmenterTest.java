@@ -30,6 +30,8 @@ import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public class CogrooSegmenterTest
 {
@@ -60,13 +62,13 @@ public class CogrooSegmenterTest
         
         return jcas;
     }
-
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
+    
+    @Test
+    public void testZoning() throws Exception
     {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
+        SegmenterHarness.testZoning(CogrooSegmenter.class);
     }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

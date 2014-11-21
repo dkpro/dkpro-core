@@ -27,10 +27,6 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
-/**
- * @author Richard Eckart de Castilho
- */
-
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class BreakIteratorSegmenter
