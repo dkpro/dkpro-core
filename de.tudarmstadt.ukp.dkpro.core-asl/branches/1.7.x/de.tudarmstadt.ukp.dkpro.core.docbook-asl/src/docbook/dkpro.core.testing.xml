@@ -92,29 +92,40 @@ public void testEnglish() throws Exception
 {	
   JCas jcas = runTest("en", null, "This is a test .");
 
-  String[] constituentMapped = new String[] { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16",
-    "VP 5,14" };
+  String[] constituentMapped =
+    { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16", "VP 5,14" };
 
-  String[] constituentOriginal = new String[] { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16",
-    "VP 5,14" };
+  String[] constituentOriginal = 
+    { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16","VP 5,14" };
 
-  String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) (NP (DT a) (NN test))) (. .)))";
+  String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) " +
+    "(NP (DT a) (NN test))) (. .)))";
 
-  String[] constituentTags = new String[] { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG",
-    "INTJ", "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT", "QP", "S",
-    "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+  String[] constituentTags = 
+    { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG", "INTJ", 
+      "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT",
+      "QP", "S", "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", 
+      "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
 
-  String[] unmappedConst = new String[] { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
+  String[] unmappedConst = 
+    { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
         
-  AssertAnnotations.assertPennTree(pennTree, selectSingle(jcas, PennTree.class));
-  AssertAnnotations.assertConstituents(constituentMapped, constituentOriginal, select(jcas, Constituent.class));
-  AssertAnnotations.assertTagset(Constituent.class, "ptb", constituentTags, jcas);
-  AssertAnnotations.assertTagsetMapping(Constituent.class, "ptb", unmappedConst, jcas);
+  AssertAnnotations.assertPennTree(
+    pennTree, selectSingle(jcas, PennTree.class));
+  AssertAnnotations.assertConstituents(
+    constituentMapped, constituentOriginal, 
+    select(jcas, Constituent.class));
+  AssertAnnotations.assertTagset(
+    Constituent.class, "ptb", constituentTags, jcas);
+  AssertAnnotations.assertTagsetMapping(
+    Constituent.class, "ptb", unmappedConst, jcas);
 }
 
-private JCas runTest(String aLanguage, String aVariant, String aDocument) throws Exception
+private JCas runTest(String aLanguage, String aVariant, String aDocument)
+  throws Exception
 {
-  AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class,
+  AnalysisEngineDescription parser = createEngineDescription(
+    OpenNlpParser.class,
     OpenNlpParser.PARAM_VARIANT, aVariant,
     OpenNlpParser.PARAM_PRINT_TAGSET, true,
     OpenNlpParser.PARAM_WRITE_PENN_TREE, true);

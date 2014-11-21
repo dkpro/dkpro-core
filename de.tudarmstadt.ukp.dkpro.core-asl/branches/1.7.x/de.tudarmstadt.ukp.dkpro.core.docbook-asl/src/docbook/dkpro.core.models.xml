@@ -146,13 +146,15 @@
 				with the project.</para>
 			<programlisting>&lt;project basedir="../.." default="separate-jars">
   &lt;import>
-    &lt;url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+    &lt;url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/
+      tags/0.6.0/ant-macros.xml"/>
   &lt;/import>
         
   &lt;!-- 
       - Output package configuration
     -->
-  &lt;property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/opennlp/lib"/>
+  &lt;property name="outputPackage" 
+     value="de/tudarmstadt/ukp/dkpro/core/opennlp/lib"/>
 
   &lt;target name="local-maven">
     &lt;property name="install-artifact-mode" value="local"/>
@@ -167,7 +169,7 @@
   &lt;target name="separate-jars">
     &lt;mkdir dir="target/download"/>
         
-    &lt;!-- FILE: models-1.5/en-pos-maxent.bin - - - - - - - - - - - - - - - - - - - - - - - - - - 
+    &lt;!-- FILE: models-1.5/en-pos-maxent.bin - - - - - - - - - - - - - - 
       - 2012-06-16 | now        | db2cd70395b9e2e4c6b9957015a10607
       -->
     &lt;get 
@@ -403,18 +405,20 @@
 		<programlisting>modelProvider = new CasConfigurableStreamProviderBase&lt;POSTagger>() {
     {
         // These are the default values
-        setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/opennlp/lib/" +
-                "tagger-${language}-${variant}.bin");
+        setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/" +
+                "opennlp/lib/tagger-${language}-${variant}.bin");
         setDefault(VARIANT, "maxent");
                                 
-        // These are parameters the user may have set on the component, they may be null
+        // These are parameters the user may have set on the component,
+        // they may be null
         setOverride(LOCATION, modelLocation);
         setOverride(LANGUAGE, language);
         setOverride(VARIANT, variant);
     }
                         
     @Override
-    protected POSTagger produceResource(InputStream aStream) throws Exception
+    protected POSTagger produceResource(InputStream aStream) 
+      throws Exception
     {
         POSModel model = new POSModel(aStream);
         return new POSTaggerME(model);
@@ -424,9 +428,9 @@
 // Here the language is picked up from the CAS.
 modelProvider.configure(cas);
 
-// Here we get the tagger according to the language, variant and location chosen.
-// A new instance is only created if necessary (e.g. if the current CAS has a different
-// language than the previous).
+// Here we get the tagger according to the language, variant and location 
+// chosen. A new instance is only created if necessary (e.g. if the
+// current CAS has a different language than the previous).
 POSTagger tagger = modelProvider.getResource();</programlisting>
 		<note>
 			<para>This is an illustrative code example. See <ulink
@@ -461,7 +465,8 @@ POSTagger tagger = modelProvider.getResource();</programlisting>
 				tag value and the high-level types. </para>
 			<programlisting>// General setup of the mapping provider in initialize()
 mappingProvider = new MappingProvider();
-mappingProvider.setDefault(MappingProvider.LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/" +
+mappingProvider.setDefault(MappingProvider.LOCATION, 
+    "classpath:/de/tudarmstadt/ukp/dkpro/" +
     "core/api/lexmorph/tagset/${language}-pos.map");
 mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
 mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
@@ -489,8 +494,8 @@ POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());</pro
 				convention: </para>
 			<programlisting>{tool}-default-variants.map</programlisting>
 			<programlisting>// General setup of the mapping provider in initialize()
-mappingProvider.setDefaultVariantsLocation(
-    "de/tudarmstadt/ukp/dkpro/core/stanfordnlp/lib/tagger-default-variants.map");</programlisting>
+mappingProvider.setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/" +
+    "core/stanfordnlp/lib/tagger-default-variants.map");</programlisting>
 			<note>
 				<para>This is an illustrative code example. See <ulink
 						url="http://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/de.tudarmstadt.ukp.dkpro.core.stanfordnlp/src/main/java/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.java"

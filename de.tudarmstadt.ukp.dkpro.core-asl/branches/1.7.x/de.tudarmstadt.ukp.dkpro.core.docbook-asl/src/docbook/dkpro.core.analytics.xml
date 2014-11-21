@@ -72,7 +72,11 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>TreeTaggerChunkerTT4J</entry>
+						<entry>OpenNlpChunker</entry>
+						<entry/>
+					</row>
+					<row>
+						<entry>TreeTaggerChunker</entry>
 						<entry>(uses native binary)</entry>
 					</row>
 				</tbody>
@@ -153,8 +157,12 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>LangDect</entry>
-						<entry>Token ngram-based </entry>
+						<entry>LangDetectLanguageIdentifier</entry>
+						<entry>Character n-grams</entry>
+					</row>
+					<row>
+						<entry>LanguageDetectorWeb1T</entry>
+						<entry>Token n-grams</entry>
 					</row>
 					<row>
 						<entry>TextCat</entry>
@@ -204,11 +212,15 @@
 						<entry/>
 					</row>
 					<row>
+						<entry>MorphaLemmatizer</entry>
+						<entry/>
+					</row>
+					<row>
 						<entry>StanfordLemmatizer</entry>
 						<entry>(variant of Morpha)</entry>
 					</row>
 					<row>
-						<entry>TreeTaggerPosLemmaTT4J</entry>
+						<entry>TreeTaggerPosTagger</entry>
 						<entry>(uses native binary)</entry>
 					</row>
 				</tbody>
@@ -356,10 +368,6 @@
 						<entry>(uses native binary)</entry>
 					</row>
 					<row>
-						<entry>LbjPosTagger</entry>
-						<entry>(not in release)</entry>
-					</row>
-					<row>
 						<entry>MatePosTagger</entry>
 						<entry/>
 					</row>
@@ -376,7 +384,7 @@
 						<entry/>
 					</row>
 					<row>
-						<entry>TreeTaggerPosLemmaTT4J</entry>
+						<entry>TreeTaggerPosTagger</entry>
 						<entry>also does lemmatization (uses native binary)</entry>
 					</row>
 				</tbody>
@@ -480,8 +488,8 @@
 						<entry/>
 					</row>
 					<row>
-						<entry>JazzyChecker</entry>
-						<entry/>
+						<entry>SpellChecker</entry>
+						<entry>using Jazzy</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -510,10 +518,6 @@
 					</row>
 				</thead>
 				<tbody>
-					<row>
-						<entry>MorphaStemmer</entry>
-						<entry/>
-					</row>
 					<row>
 						<entry>SnowballStemmer</entry>
 						<entry/>
@@ -720,7 +724,9 @@
 		<programlisting>&lt;dependencies>
   &lt;dependency>
     &lt;groupId>de.tudarmstadt.ukp.dkpro.core&lt;/groupId>
-    &lt;artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent&lt;/artifactId>
+    &lt;artifactId>
+      de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent
+    &lt;/artifactId>
   &lt;/dependency>
 &lt;/dependencies>
 &lt;dependencyManagement>

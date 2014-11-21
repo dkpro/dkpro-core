@@ -20,13 +20,13 @@
 -->
 <chapter id="ugr.dkpro.core.gettingstarted">
   <title>Getting Started</title>
-  <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-    ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-    et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
-    est Lorem ipsum dolor sit amet.</para>
+  <para>DKPro Core is a collection of software components for natural language processing (NLP) 
+    based on the Apache UIMA framework.</para>
+  <para>Many NLP tools are already freely available in the NLP research community. DKPro Core 
+    provides UIMA components wrapping these tools (and some original tools) so they can be used 
+    interchangeably in UIMA processing pipelines. DKPro Core builds heavily on uimaFIT which allows 
+    for rapid and easy development of NLP processing pipelines, for wrapping existing tools and for 
+    creating original UIMA components.</para>
   <section>
     <title>Prerequisites</title>
     <para>To use DKPro Core to the best effect, we recommend the following system
@@ -46,40 +46,5 @@
         <para>a fast internet connection</para>
       </listitem>
     </itemizedlist>
-  </section>
-  <section>
-    <title>Building a simple pipeline</title>
-    <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-      justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos
-      et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-      sanctus est Lorem ipsum dolor sit amet.</para>
-    <section>
-      <title>Setting up a Maven project</title>
-      <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</para>
-      <programlisting>&lt;dependency>
-  &lt;groupId>lala&lt;/groupId>
-  &lt;artifactId>lala&lt;/artifactId>
-  &lt;version>XXX&lt;/version>
-&lt;/dependency></programlisting>
-    </section>
-    <section>
-      <title>Implementing the pipeline</title>
-      <para>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-        Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-        diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-        gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</para>
-    </section>
   </section>
 </chapter>
