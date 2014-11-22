@@ -59,4 +59,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+  <name>DKPro Core ASL - Language Detection using n-grams</name>
 </project>
