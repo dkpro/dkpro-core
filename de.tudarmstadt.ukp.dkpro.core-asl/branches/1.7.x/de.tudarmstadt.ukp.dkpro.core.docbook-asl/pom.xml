@@ -311,4 +311,5 @@
 			</build>
 		</profile>
 	</profiles>
+	<name>DKPro Core ASL - Documentation</name>
 </project>
