@@ -124,7 +124,7 @@ public class CogrooSegmenter
 		throws AnalysisEngineProcessException
 	{
 	    Document doc = new DocumentImpl();
-	    doc.setText(aJCas.getDocumentText());
+	    doc.setText(aText);
 	    
 	    sentenceModelProvider.getResource().analyze(doc);
         tokenModelProvider.getResource().analyze(doc);
