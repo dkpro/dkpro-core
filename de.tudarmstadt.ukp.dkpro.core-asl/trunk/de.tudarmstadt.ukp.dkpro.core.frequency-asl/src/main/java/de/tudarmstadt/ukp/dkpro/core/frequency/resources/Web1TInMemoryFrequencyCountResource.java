@@ -48,7 +48,7 @@ public final class Web1TInMemoryFrequencyCountResource
     protected String modelLocation;
     
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     protected String language;
 
     @SuppressWarnings("unchecked")

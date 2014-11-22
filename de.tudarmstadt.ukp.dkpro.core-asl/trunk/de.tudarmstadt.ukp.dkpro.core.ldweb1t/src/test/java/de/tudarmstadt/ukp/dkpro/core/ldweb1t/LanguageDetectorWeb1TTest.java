@@ -44,12 +44,14 @@ public class LanguageDetectorWeb1TTest
                 Web1TInMemoryFrequencyCountResource.class,
                 Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
                 "src/test/resources/web1t/en/",
+                Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "en",
                 Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
 
         ExternalResourceDescription de = createExternalResourceDescription(
                 Web1TInMemoryFrequencyCountResource.class,
                 Web1TInMemoryFrequencyCountResource.PARAM_MODEL_LOCATION,
                 "src/test/resources/web1t/de/",
+                Web1TInMemoryFrequencyCountResource.PARAM_LANGUAGE, "de",
                 Web1TInMemoryFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2");
 
         List<ExternalResourceDescription> resources = new ArrayList<ExternalResourceDescription>();
@@ -67,6 +69,6 @@ public class LanguageDetectorWeb1TTest
         
         runPipeline(jcas, engine);
 
-        assertEquals("src/test/resources/web1t/en/", jcas.getDocumentLanguage());
+        assertEquals("en", jcas.getDocumentLanguage());
     }
 }
