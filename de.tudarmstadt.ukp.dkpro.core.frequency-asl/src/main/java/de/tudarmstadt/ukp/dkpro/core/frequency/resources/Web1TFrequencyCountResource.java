@@ -55,7 +55,7 @@ public final class Web1TFrequencyCountResource
     protected String maxLevel;
     
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
     protected String language;
 
     /**
