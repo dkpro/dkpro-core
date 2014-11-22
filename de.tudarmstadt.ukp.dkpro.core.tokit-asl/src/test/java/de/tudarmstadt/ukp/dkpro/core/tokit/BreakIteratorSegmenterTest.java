@@ -20,8 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.tokit;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
 public
@@ -35,4 +37,13 @@ class BreakIteratorSegmenterTest
 		SegmenterHarness.run(aed, "de.1", "de.4", "en.1", "en.2", "en.3", "en.6", "en.7", "en.9",
 				"ar.1", "zh.1", "zh.2");
 	}
+	
+    @Test
+    public void testZoning() throws Exception
+    {
+        SegmenterHarness.testZoning(BreakIteratorSegmenter.class);
+    }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
