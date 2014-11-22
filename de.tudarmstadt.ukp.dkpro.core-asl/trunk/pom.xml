@@ -50,7 +50,7 @@
 			</snapshots>
 		</repository>
 		<repository>
-<!-- 			For uimaFIT SNAPSHOT -->
+			<!-- For UIMA/uimaFIT SNAPSHOT -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -59,17 +59,17 @@
 			</releases>
 		</repository>
 	</repositories>
-<!-- 	<pluginRepositories> -->
-<!-- 		<pluginRepository> -->
-			<!-- For uimaFIT SNAPSHOT maven plugin -->
-<!-- 			<id>apache.snapshots</id> -->
-<!-- 			<name>Apache Snapshot Repository</name> -->
-<!-- 			<url>http://repository.apache.org/snapshots</url> -->
-<!-- 			<releases> -->
-<!-- 				<enabled>false</enabled> -->
-<!-- 			</releases> -->
-<!-- 		</pluginRepository> -->
-<!-- 	</pluginRepositories> -->
+	<pluginRepositories>
+		<pluginRepository>
+			<!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
