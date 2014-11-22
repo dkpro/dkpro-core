@@ -173,14 +173,22 @@ public final class SegmenterHarness
 		}
 	}
 
-	public static void testZoning(Class<? extends SegmenterBase> aSegmenter) throws Exception
-	{
-	    testLaxZoning(aSegmenter);
-	    testStrictZoning(aSegmenter);
-	    testOufOfBoundsZones(aSegmenter);
+    public static void testZoning(Class<? extends SegmenterBase> aSegmenter)
+        throws Exception
+    {
+        testZoning(aSegmenter, "en");
+    }
+
+    public static void testZoning(Class<? extends SegmenterBase> aSegmenter, String aLanguage)
+        throws Exception
+    {
+	    testLaxZoning(aSegmenter, aLanguage);
+	    testStrictZoning(aSegmenter, aLanguage);
+	    testOufOfBoundsZones(aSegmenter, aLanguage);
 	}
 	
-    public static void testLaxZoning(Class<? extends SegmenterBase> aSegmenter) throws Exception
+    public static void testLaxZoning(Class<? extends SegmenterBase> aSegmenter, String aLanguage)
+        throws Exception
     {
         String[] sentences = { "A a a a .", "A a a a -", "B b b b .", "B b b b -", "C c c c .",
                 "C c c c -" };
@@ -189,7 +197,7 @@ public final class SegmenterHarness
                 ".", "B", "b", "b", "b", "-", "C", "c", "c", "c", ".", "C", "c", "c", "c", "-" };
         
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentLanguage("en");
+        jcas.setDocumentLanguage(aLanguage);
         //                              1    1    2    2    3    3    4    4    5    5    6
         //                    0    5    0    5    0    5    0    5    0    5    0    5    0
         //                     ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
@@ -207,7 +215,9 @@ public final class SegmenterHarness
         assertSentence(sentences, select(jcas, Sentence.class));
     }
 
-    public static void testOufOfBoundsZones(Class<? extends SegmenterBase> aSegmenter) throws Exception
+    public static void testOufOfBoundsZones(Class<? extends SegmenterBase> aSegmenter,
+            String aLanguage)
+        throws Exception
     {
         //                       1    1    2    2    3    3    4    4    5    5    6
         //             0    5    0    5    0    5    0    5    0    5    0    5    0
@@ -225,7 +235,7 @@ public final class SegmenterHarness
                     "-" };
             
             JCas jcas = JCasFactory.createJCas();
-            jcas.setDocumentLanguage("en");
+            jcas.setDocumentLanguage(aLanguage);
             jcas.setDocumentText(text);
             new Paragraph(jcas, 0, 19).addToIndexes();
             new Paragraph(jcas, 40, 65).addToIndexes();
@@ -247,7 +257,7 @@ public final class SegmenterHarness
                     "c", ".", "C", "c", "c", "c", "-" };
             
             JCas jcas = JCasFactory.createJCas();
-            jcas.setDocumentLanguage("en");
+            jcas.setDocumentLanguage(aLanguage);
             jcas.setDocumentText(text);
             new Paragraph(jcas, 0, 19).addToIndexes();
             new Paragraph(jcas, 40, 65).addToIndexes();
@@ -261,7 +271,9 @@ public final class SegmenterHarness
             assertSentence(sentences, select(jcas, Sentence.class));
         }
     }
-    public static void testStrictZoning(Class<? extends SegmenterBase> aSegmenter) throws Exception
+    
+    public static void testStrictZoning(Class<? extends SegmenterBase> aSegmenter, String aLanguage)
+        throws Exception
     {
         String[] sentences = { "A a a a .", "A a a a -", "C c c c .", "C c c c -" };
         
@@ -272,7 +284,7 @@ public final class SegmenterHarness
                 "C", "c", "c", "c", "-" };
         
         JCas jcas = JCasFactory.createJCas();
-        jcas.setDocumentLanguage("en");
+        jcas.setDocumentLanguage(aLanguage);
         //                              1    1    2    2    3    3    4    4    5    5    6
         //                    0    5    0    5    0    5    0    5    0    5    0    5    0
         //                     ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----

@@ -23,11 +23,8 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
@@ -66,7 +63,7 @@ public class CogrooSegmenterTest
     @Test
     public void testZoning() throws Exception
     {
-        SegmenterHarness.testZoning(CogrooSegmenter.class);
+        SegmenterHarness.testZoning(CogrooSegmenter.class, "pt-BR");
     }
     
     @Rule
