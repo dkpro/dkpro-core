@@ -29,7 +29,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ExternalResourceDescription;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TInMemoryFrequencyCountResource;
@@ -37,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class LanguageDetectorWeb1TTest
 {
-    @Ignore
     @Test
     public void web1tLanguageDetectorTest()
         throws Exception
@@ -69,6 +67,6 @@ public class LanguageDetectorWeb1TTest
         
         runPipeline(jcas, engine);
 
-        assertEquals("en", jcas.getDocumentLanguage());
+        assertEquals("src/test/resources/web1t/en/", jcas.getDocumentLanguage());
     }
 }

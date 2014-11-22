@@ -54,9 +54,6 @@ public final class Web1TFrequencyCountResource
     @ConfigurationParameter(name = PARAM_MAX_NGRAM_LEVEL, mandatory = true, defaultValue = "5")
     protected String maxLevel;
     
-    /**
-     * Use this language instead of the default language.
-     */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     protected String language;
@@ -116,6 +113,7 @@ public final class Web1TFrequencyCountResource
         try{
             web1TFolderProvider.configure();
             provider = new Web1TFileAccessProvider(
+            		language,
                     web1TFolderProvider.getResource(),
                     new Integer(minLevel),
                     new Integer(maxLevel)

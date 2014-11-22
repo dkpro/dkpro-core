@@ -33,6 +33,8 @@ public abstract class Web1TProviderBase
 
     protected Searcher searcher;
     protected String basePath;
+    protected String language;
+    
 
     @Override
     public long getNrOfNgrams(int n)
@@ -69,6 +71,6 @@ public abstract class Web1TProviderBase
     @Override
     public String getLanguage()
     {
-        return this.basePath;
+        return this.language;
     }
 }
