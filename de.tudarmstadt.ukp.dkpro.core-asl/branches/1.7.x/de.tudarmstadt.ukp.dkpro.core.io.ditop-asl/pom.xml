@@ -23,9 +23,25 @@
     <version>1.7.0-SNAPSHOT</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</artifactId>
-  <name>DKPro Core IO ASL - Ditop EXPERIMENTAL</name>
+  <name>DKPro Core ASL - IO - Ditop (EXPERIMENTAL)</name>
   <description>DKPro components for DiTop: http://ditop.hs8.de/</description>
   <dependencies>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+    </dependency>
   	<dependency>
   		<groupId>cc.mallet</groupId>
   		<artifactId>mallet</artifactId>
@@ -33,36 +49,17 @@
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.api.io-asl
-  		</artifactId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-		<!-- Constants in this dependency are inlined - dependency not required at runtime -->
-		<scope>provided</scope>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.apache.commons</groupId>
-  		<artifactId>commons-collections4</artifactId>
-  		<version>4.0</version>
+    	<!-- Constants in this dependency are inlined - dependency not required at runtime -->
+    	<scope>provided</scope>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.apache.uima</groupId>
-  		<artifactId>uimafit-core</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.apache.uima</groupId>
-  		<artifactId>uimaj-core</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>commons-io</groupId>
-  		<artifactId>commons-io</artifactId>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -75,16 +72,12 @@
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.io.text-asl
-  		</artifactId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
   		<scope>test</scope>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-  		<artifactId>
-  			de.tudarmstadt.ukp.dkpro.core.tokit-asl
-  		</artifactId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
   		<scope>test</scope>
   	</dependency>
   </dependencies>
