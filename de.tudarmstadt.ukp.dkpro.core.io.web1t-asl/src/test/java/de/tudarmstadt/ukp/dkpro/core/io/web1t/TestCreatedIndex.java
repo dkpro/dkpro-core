@@ -36,7 +36,7 @@ public class TestCreatedIndex
 	public void testCreatedIndex()
 		throws Exception
 	{
-		Web1TFileAccessProvider web = new Web1TFileAccessProvider(new File(
+		Web1TFileAccessProvider web = new Web1TFileAccessProvider("en", new File(
 				"target/Index/"), 1, 3);
 
 		assertEquals(200162, web.getNrOfNgrams(1));

@@ -149,7 +149,7 @@ public class Web1TFormatWriterTest {
 		writeWeb1TFormat(inputTypes);
 		createIndex();
 
-		Web1TFileAccessProvider web1tProvider = new Web1TFileAccessProvider(
+		Web1TFileAccessProvider web1tProvider = new Web1TFileAccessProvider("en",
 				INDEX_FOLDER, MIN_NGRAM, MAX_NGRAM);
 
 		return web1tProvider;

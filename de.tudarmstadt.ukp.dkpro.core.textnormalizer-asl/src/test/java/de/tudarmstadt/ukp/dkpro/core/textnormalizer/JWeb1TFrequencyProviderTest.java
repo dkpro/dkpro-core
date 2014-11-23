@@ -29,15 +29,14 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 
 public class JWeb1TFrequencyProviderTest
 {
-
     @Test
-    public void testFrequencyProvider() throws IOException
+    public void testFrequencyProvider()
+        throws IOException
     {
-        FrequencyCountProvider provider = new Web1TFileAccessProvider(
-                new File("src/test/resources/jweb1t"),1,1);
-        
+        FrequencyCountProvider provider = new Web1TFileAccessProvider("de", new File(
+                "src/test/resources/jweb1t"), 1, 1);
+
         assertEquals(1, provider.getFrequency("süß"));
         assertEquals(1, provider.getFrequency("Kresse"));
     }
-
 }

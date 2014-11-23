@@ -28,6 +28,7 @@ public class Web1TInMemoryFrequencyProviderTest
     public void web1tTestInMemoryTest() throws Exception
     {
         Web1TProviderBase web1t = new Web1TInMemoryProvider(
+        		"en",
                 "src/test/resources/web1t/",
                 2
         );

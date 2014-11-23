@@ -31,6 +31,7 @@ public class Web1TFrequencyProviderTest
     public void web1tTest_indexFiles() throws Exception
     {
         Web1TProviderBase web1t = new Web1TFileAccessProvider(
+        		"en",
                 "src/test/resources/web1t/index-1gms",
                 "src/test/resources/web1t/index-2gms"
         );
@@ -42,6 +43,7 @@ public class Web1TFrequencyProviderTest
     public void web1tTest_path() throws Exception
     {
         Web1TProviderBase web1t = new Web1TFileAccessProvider(
+        		"en",
                 new File("src/test/resources/web1t/"),
                 1,
                 2
@@ -54,6 +56,7 @@ public class Web1TFrequencyProviderTest
     public void web1tNgramIteratorTest() throws Exception
     {
         Web1TProviderBase web1t = new Web1TFileAccessProvider(
+        		"en",
                 new File("src/test/resources/web1t/"),
                 1,
                 2
