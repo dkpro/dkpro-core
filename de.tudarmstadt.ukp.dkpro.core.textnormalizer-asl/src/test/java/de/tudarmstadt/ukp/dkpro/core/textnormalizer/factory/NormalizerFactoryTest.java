@@ -42,6 +42,7 @@ public class NormalizerFactoryTest
     public void init(){
         frequencyProvider = createExternalResourceDescription(
                 Web1TFrequencyCountResource.class,
+                Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
                 Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                 Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
                 Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t");  
