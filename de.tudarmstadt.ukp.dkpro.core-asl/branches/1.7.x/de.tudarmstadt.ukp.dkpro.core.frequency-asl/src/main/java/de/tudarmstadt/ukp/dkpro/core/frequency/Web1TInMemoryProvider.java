@@ -25,10 +25,11 @@ public class Web1TInMemoryProvider
     extends Web1TProviderBase
 {
     
-    public Web1TInMemoryProvider(String ngramLocation, int maxNgramLevel)
+    public Web1TInMemoryProvider(String language, String ngramLocation, int maxNgramLevel)
         throws IOException
     {
         searcher = new JWeb1TSearcherInMemory(ngramLocation, maxNgramLevel);
         basePath = ngramLocation;
+        this.language = language;
     }
 }

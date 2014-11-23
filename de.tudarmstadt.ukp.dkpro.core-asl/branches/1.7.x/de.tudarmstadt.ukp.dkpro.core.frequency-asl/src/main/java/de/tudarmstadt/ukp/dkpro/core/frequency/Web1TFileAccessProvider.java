@@ -25,11 +25,12 @@ import com.googlecode.jweb1t.JWeb1TSearcher;
 public class Web1TFileAccessProvider
     extends Web1TProviderBase
 {
-    public Web1TFileAccessProvider(String... indexFiles)
+    public Web1TFileAccessProvider(String language, String... indexFiles)
         throws IOException
     {
         searcher = new JWeb1TSearcher(indexFiles);
         basePath = new File(indexFiles[0]).getParent();
+        this.language = language;
     }
 
     /**
@@ -42,10 +43,11 @@ public class Web1TFileAccessProvider
      * @param maxN
      *            The maximum ngram length.
      */
-    public Web1TFileAccessProvider(File indexPath, int minN, int maxN)
+    public Web1TFileAccessProvider(String language, File indexPath, int minN, int maxN)
         throws IOException
     {
         searcher = new JWeb1TSearcher(indexPath, minN, maxN);
         basePath = indexPath.getAbsolutePath();
+        this.language = language;
     }
 }

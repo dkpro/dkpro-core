@@ -31,28 +31,28 @@ import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 
 public class CreateNormalizerModel
 {
-
-    public static void main(String[] args) throws Exception
+    public static void main(String[] args)
+        throws Exception
     {
         FrequencyDistribution<String> freqDist = new FrequencyDistribution<String>();
 
         File context = DkproContext.getContext().getWorkspace("web1t");
-        FrequencyCountProvider provider = new Web1TFileAccessProvider(new File(context, "de"), 1, 1);
+        FrequencyCountProvider provider = new Web1TFileAccessProvider("de",
+                new File(context, "de"), 1, 1);
 
         Iterator<String> ngramIterator = provider.getNgramIterator(1);
         while (ngramIterator.hasNext()) {
             String unigram = ngramIterator.next();
-            
-            if (StringUtils.containsAny(unigram, new char[]{'ä', 'ö', 'ü',}) ||
-                unigram.contains("ae") || unigram.contains("ae") || unigram.contains("ae"))
-            {
+
+            if (StringUtils.containsAny(unigram, new char[] { 'ä', 'ö', 'ü', })
+                    || unigram.contains("ae") || unigram.contains("ae") || unigram.contains("ae")) {
                 freqDist.addSample(unigram, provider.getFrequency(unigram));
             }
         }
 
         ConditionalFrequencyDistribution<Integer, String> cfd = new ConditionalFrequencyDistribution<Integer, String>();
         cfd.setFrequencyDistribution(1, freqDist);
-        
+
         Web1TConverter converter = new Web1TConverter("target/model");
         converter.setMaxNgramLength(1);
         converter.setSplitThreshold(10);
