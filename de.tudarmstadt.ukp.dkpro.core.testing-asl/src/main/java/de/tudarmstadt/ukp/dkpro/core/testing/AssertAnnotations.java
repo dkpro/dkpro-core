@@ -208,40 +208,13 @@ public class AssertAnnotations
         List<String> actual = new ArrayList<String>();
 
         for (MorphologicalFeatures a : aActual) {
-            actual.add(String.format(
-                    "[%18$3d,%19$3d] %1$5s %2$5s %3$4s %4$4s %5$4s %6$5s %7$4s %8$4s %9$5s %10$6s %11$2s %12$4s %13$4s %14$4s %15$5s %16$6s %17$5s %20$s (%21$s)",
-                    nd(a.getAnimacy()),         // 1    w:4
-                    nd(a.getAspect()),          // 2    w:4
-                    nd(a.getCase()),            // 3    w:3
-                    nd(a.getDefiniteness()),    // 4    w:3
-                    nd(a.getDegree()),          // 5    w:3
-                    nd(a.getGender()),          // 6    w:4
-                    nd(a.getMood()),            // 7    w:3
-                    nd(a.getNegative()),        // 8    w:3
-                    nd(a.getNumber()),          // 9    w:4
-                    nd(a.getNumType()),         // 10   w:5
-                    nd(a.getPerson()),          // 11   w:1
-                    nd(a.getPossessive()),      // 12   w:3
-                    nd(a.getPronType()),        // 13   w:3
-                    nd(a.getReflex()),          // 14   w:3
-                    nd(a.getTense()),           // 15   w:4
-                    nd(a.getVerbForm()),        // 16   w:5
-                    nd(a.getVoice()),           // 17   w:4
-                    a.getBegin(),               // 18
-                    a.getEnd(),                 // 19
-                    a.getCoveredText(),         // 20 
-                    a.getValue()));             // 21
+            actual.add(a.getValue());
         }
 
         System.out.printf("%-20s - Expected: %s%n", "Morph. feats.", asCopyableString(expected));
         System.out.printf("%-20s - Actual  : %s%n", "Morph. feats.", asCopyableString(actual));
 
         assertEquals(asCopyableString(expected, true), asCopyableString(actual, true));
-    }
-    
-    private static String nd(String aValue)
-    {
-        return aValue == null ? "-" : aValue;
     }
 
     public static void assertStem(String[] aExpected, Collection<Stem> aActual)

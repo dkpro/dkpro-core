@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.8.0-SNAPSHOT</version>
+		<version>1.7.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
 	<name>DKPro Core ASL - Part-of-Speech API</name>
@@ -30,10 +30,6 @@
 			<artifactId>uimaj-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -41,6 +37,11 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

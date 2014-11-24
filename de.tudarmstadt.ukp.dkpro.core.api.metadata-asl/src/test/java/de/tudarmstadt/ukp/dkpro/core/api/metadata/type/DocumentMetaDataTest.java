@@ -24,7 +24,6 @@ import static org.junit.Assert.assertTrue;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.DocumentAnnotation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class DocumentMetaDataTest
@@ -118,7 +117,6 @@ public class DocumentMetaDataTest
      * @throws Exception
      *             if an error occurs.
      */
-    @Ignore("Test currently fails with UIMA 2.7.0-SNAPSHOT; FS is never indexed twice!")
     @Test(expected = IllegalArgumentException.class)
     public void tooManyAnnotationsTest1()
         throws Exception

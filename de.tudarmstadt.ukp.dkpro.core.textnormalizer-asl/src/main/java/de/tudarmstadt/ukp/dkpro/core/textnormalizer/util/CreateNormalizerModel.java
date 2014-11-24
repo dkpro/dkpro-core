@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.web1t.util.Web1TConverter;
 
 public class CreateNormalizerModel
 {
-
     public static void main(String[] args)
         throws Exception
     {

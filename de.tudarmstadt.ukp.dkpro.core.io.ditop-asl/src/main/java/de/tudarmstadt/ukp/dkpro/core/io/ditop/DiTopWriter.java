@@ -120,7 +120,7 @@ public class DiTopWriter
      */
     public final static String PARAM_COLLECTION_VALUES_EXACT_MATCH = "collectionValuesExactMatch";
     @ConfigurationParameter(name = PARAM_COLLECTION_VALUES_EXACT_MATCH, mandatory = true, defaultValue = "true")
-    protected boolean collectionValuesExactMatch;
+    private boolean collectionValuesExactMatch;
 
     private ParallelTopicModel model;
     private File collectionDir;
@@ -392,7 +392,7 @@ public class DiTopWriter
      * @return the first entry from {@code collectionValuesSet} that contains the (lowercased)
      *         {@code collectionId} or the input {@code collectionId}.
      */
-    protected String expandCollectionId(String collectionId)
+    private String expandCollectionId(String collectionId)
     {
         assert !collectionValuesExactMatch;
         for (String value : collectionValuesSet) {

@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-		<version>1.8.0-SNAPSHOT</version>
+		<version>1.7.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</artifactId>
 	<name>DKPro Core ASL - IO - Binary UIMA CAS</name>
@@ -48,6 +48,10 @@
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -78,7 +82,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
-			<version>3.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -40,11 +40,6 @@ Token
    pos: <null>
    morph: <null>
 [Cornelia]
-Name
-   sofa: _InitialView
-   begin: 9
-   end: 17
-[Cornelia]
 Token
    sofa: _InitialView
    begin: 9
@@ -54,6 +49,11 @@ Token
    stem: <null>
    pos: <null>
    morph: <null>
+[Cornelia]
+Name
+   sofa: _InitialView
+   begin: 9
+   end: 17
 [?]
 Token
    sofa: _InitialView
@@ -120,11 +120,6 @@ Token
    pos: <null>
    morph: <null>
 [Cornelia]
-Name
-   sofa: _InitialView
-   begin: 43
-   end: 51
-[Cornelia]
 Token
    sofa: _InitialView
    begin: 43
@@ -134,6 +129,11 @@ Token
    stem: <null>
    pos: <null>
    morph: <null>
+[Cornelia]
+Name
+   sofa: _InitialView
+   begin: 43
+   end: 51
 [is]
 Token
    sofa: _InitialView

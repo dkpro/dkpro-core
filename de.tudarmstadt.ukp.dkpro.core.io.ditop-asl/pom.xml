@@ -15,18 +15,33 @@
 	See the License for the specific language governing permissions and
 	limitations under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
     <artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-    <version>1.8.0-SNAPSHOT</version>
+    <version>1.7.0</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</artifactId>
   <name>DKPro Core ASL - IO - Ditop (EXPERIMENTAL)</name>
   <description>DKPro components for DiTop: http://ditop.hs8.de/</description>
   <dependencies>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimafit-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.uima</groupId>
+      <artifactId>uimaj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+    </dependency>
   	<dependency>
   		<groupId>cc.mallet</groupId>
   		<artifactId>mallet</artifactId>
@@ -43,17 +58,17 @@
     	<scope>provided</scope>
   	</dependency>
   	<dependency>
-  		<groupId>org.apache.commons</groupId>
-  		<artifactId>commons-collections4</artifactId>
-  		<version>4.0</version>
-  	</dependency>
-  	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
   		<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
   	</dependency>
   	<dependency>
-  		<groupId>commons-io</groupId>
-  		<artifactId>commons-io</artifactId>
+  		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  		<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<scope>test</scope>
   	</dependency>
   	<dependency>
   		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>

@@ -20,10 +20,10 @@
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>11-SNAPSHOT</version>
+		<version>10</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-	<version>1.8.0-SNAPSHOT</version>
+	<version>1.7.0</version>
 	<packaging>pom</packaging>
 	<name>DKPro Core ASL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
@@ -49,39 +49,39 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<!-- For UIMA/uimaFIT SNAPSHOT -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
+<!-- 		<repository> -->
+			<!-- For uimaFIT SNAPSHOT -->
+<!-- 			<id>apache.snapshots</id> -->
+<!-- 			<name>Apache Snapshot Repository</name> -->
+<!-- 			<url>http://repository.apache.org/snapshots</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 		</repository> -->
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
+<!-- 	<pluginRepositories> -->
+<!-- 		<pluginRepository> -->
+			<!-- For uimaFIT SNAPSHOT maven plugin -->
+<!-- 			<id>apache.snapshots</id> -->
+<!-- 			<name>Apache Snapshot Repository</name> -->
+<!-- 			<url>http://repository.apache.org/snapshots</url> -->
+<!-- 			<releases> -->
+<!-- 				<enabled>false</enabled> -->
+<!-- 			</releases> -->
+<!-- 		</pluginRepository> -->
+<!-- 	</pluginRepositories> -->
 	<issueManagement>
 		<system>Google Code</system>
 		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk</url>
+		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.7.0</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.7.0</developerConnection>
+		<url>https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.7.0</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.7.0-SNAPSHOT</uima.version>
+		<uima.version>2.6.0</uima.version>
 		<uimafit.version>2.1.0</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
@@ -92,372 +92,347 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.corpus-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.featurepath-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.io-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.coref-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.metadata-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.ner-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.sentiment-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.examples-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.frequency-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.hunpos-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.io.combination-asl</artifactId>
-                <version>1.8.0-SNAPSHOT</version>
+                <version>1.7.0</version>
             </dependency>
    			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
    			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
+			</dependency>
+   			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.html-asl</artifactId>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.lbj-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl</artifactId>
-                <version>1.7.0-SNAPSHOT</version>
+                <version>1.7.0</version>
             </dependency>
    			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
    			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.morpha-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.mstparser-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.ngrams-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.norvig-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.performance-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.posfilter-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.readability-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.snowball-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.textcat-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
@@ -529,11 +504,11 @@
 				<artifactId>commons-collections</artifactId>
 				<version>3.2.1</version>
 			</dependency>
-		  	<dependency>
-		  		<groupId>org.apache.commons</groupId>
-		  		<artifactId>commons-collections4</artifactId>
-		  		<version>4.0</version>
-		  	</dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>4.0</version>
+      </dependency>
 			<dependency>
 				<groupId>commons-codec</groupId>
 				<artifactId>commons-codec</artifactId>
@@ -624,7 +599,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.resources-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.semantics-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.api.sentiment-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.structure-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.syntax-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.transform-asl</module>
@@ -632,7 +606,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.api.frequency-asl</module>
 	    <!-- IO modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.annis-asl</module>
+		
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bliki-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.bnc-asl</module>
@@ -640,7 +614,6 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.conll-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.ditop-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.graf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.html-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl</module>
@@ -653,13 +626,11 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tiger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.xml-asl</module>
 	    <!-- Processing modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.clearnlp-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
@@ -668,9 +639,8 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.langdetect-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
         <module>de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.mallet-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.mallet-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.maltparser-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.mecab-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.morpha-asl</module>
@@ -856,18 +826,6 @@
 					</snapshots>
 				</repository>
 			</repositories>
-			<modules>
-				<module>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
-			</modules>
-			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-						<artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
-						<version>1.7.0-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-			</dependencyManagement>
 		</profile>
 		<profile>
 			<id>rat-check</id>
@@ -946,6 +904,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.metadata-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.ner-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.parameter-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.phonetics-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.resources-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.semantics-asl/src/main/java" includes="**/*.java" />
@@ -954,20 +913,20 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.api.transform-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.castransformation-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.clearnlp-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.cogroo-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.commonscoded-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.decompounding-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.examples-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.frequency-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.hunpos-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.aclanthology-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.annis-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bincas-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bliki-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.bnc-asl/src/main/java" includes="**/*.java" />
                                     <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.combination-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.conll-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.ditop-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.html-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jdbc-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.jwpl-asl/src/main/java" includes="**/*.java" />
@@ -980,14 +939,13 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tiger-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.web1t-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.wsdl-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xmi-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.io.xml-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.jazzy-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.languagetool-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.langdetect-asl/src/main/java" includes="**/*.java" />
                                     <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ldweb1t-asl/src/main/java" includes="**/*.java" />
-									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mallet-asl/src/main/java" includes="**/*.java" />
+                                    <fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mallet-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.maltparser-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.morpha-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.mstparser-asl/src/main/java" includes="**/*.java" />
@@ -995,6 +953,7 @@
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.ngrams-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.norvig-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java" includes="**/*.java" />
+									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.performance-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.posfilter-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.readability-asl/src/main/java" includes="**/*.java" />
 									<fileset dir="${project.build.directory}/../de.tudarmstadt.ukp.dkpro.core.snowball-asl/src/main/java" includes="**/*.java" />
