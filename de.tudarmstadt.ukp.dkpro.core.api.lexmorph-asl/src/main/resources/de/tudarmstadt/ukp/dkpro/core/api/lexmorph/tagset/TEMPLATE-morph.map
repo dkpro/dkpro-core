@@ -181,6 +181,7 @@
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Tense.html (2014-11-18)
 #
+# tense.Past=
 # tense.Pres=
 # tense.Fut=
 # tense.Imp=
