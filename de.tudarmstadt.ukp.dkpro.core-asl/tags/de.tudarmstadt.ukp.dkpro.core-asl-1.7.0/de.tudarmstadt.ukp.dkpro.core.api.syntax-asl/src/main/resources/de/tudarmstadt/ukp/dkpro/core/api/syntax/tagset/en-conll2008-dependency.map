@@ -1,0 +1,125 @@
+# CONLL 2008 Dependency labels
+#
+# Source: http://aclweb.org/anthology//W/W08/W08-2121.pdf
+#
+# ADV Unclassified adverbial
+ADV=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# AMOD Modifier of adjective or adverb
+AMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# APPO Apposition
+APPO=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# BNF Benefactor (the for phrase for verbs that undergo dative shift) DIR Direction
+# uby: gf= prepositionalComplement, preposition=for
+BNF=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# CONJ Between conjunction and second conjunct in a coordination
+CONJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# COORD Coordination
+COORD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# DEP Unclassified relation
+DEP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# DTV Dative (the to phrase for verbs that undergo dative shift) EXT Extent
+# uby: gf= prepositionalComplement, preposition=to
+DTV=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# EXTR Extraposed element in expletive constructions
+EXTR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# GAP Gapping: between conjunction and the parts of a structure with an ellipsed head IM Between infinitive marker and verb
+# HMOD Modifier in hyphenation, such as two in two-part HYPH Between first part of hyphenation and hyphen NAME Name-internal link
+HMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# LGS Logical subject
+# uby: gf=subj
+LGS=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# LOC Location
+LOC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# MNR Manner
+MNR=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# NMOD Modifier of nominal
+NMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# OBJ Direct or indirect object or clause complement
+# uby: gf=complement
+OBJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# OPRD Object complement
+# uby: gf=objectComplement
+OPRD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# P Punctuation
+P=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PMOD Between preposition and its child in a PP
+PMOD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# POSTHON Posthonorifics such as Jr, Inc.
+POSTHON=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PRD Predicative complement
+PRD=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PRN Parenthetical
+PRN=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PRP Purpose or reason
+PRP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PRT Particle
+PRT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# PUT Various locative complements of the verb put
+PUT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# ROOT Root
+ROOT=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SBJ Subject
+# uby: gf=subj
+SBJ=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SUB Between subordinating conjunction and verb
+SUB=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# SUFFIX Possessive ’s
+SUFFIX=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# TITLE Titles such as Mr, Dr
+TITLE=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# TMP Temporal
+TMP=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# VC Verb chain
+VC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+# VOC Vocative
+VOC=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+
+# Additional tags used in the Malt parser model for English
+#
+# <None>
+# <no-type>
+# <root-type>
+# ADV-GAP
+# AMOD-GAP
+# DEP-GAP
+# DIR
+# DIR-GAP
+# DIR-OPRD
+# DIR-PRD
+# DTV-GAP
+# END
+# EXT
+# EXT-GAP
+# EXTR-GAP
+# GAP-LGS
+# GAP-LOC
+# GAP-LOC-PRD
+# GAP-MNR
+# GAP-NMOD
+# GAP-OBJ
+# GAP-OPRD
+# GAP-PMOD
+# GAP-PRD
+# GAP-PRP
+# GAP-PUT
+# GAP-SBJ
+# GAP-SUB
+# GAP-TMP
+# GAP-VC
+# HYPH
+# IM
+# LOC-MNR
+# LOC-OPRD
+# LOC-PRD
+# LOC-TMP
+# MNR-PRD
+# MNR-TMP
+# NAME
+# PRD-PRP
+# PRD-TMP
+
+#
+# Categories used by DKPro internally
+#
+*=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency
+

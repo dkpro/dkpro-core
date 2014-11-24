@@ -1,0 +1,6 @@
+akt	20
+ion	1
+plan	30
+aktion	40
+aktionsplan	1
+aktion plan	40

@@ -1,0 +1,6 @@
+(
+  (S
+    (VP (VB Go)
+      (PP-DIR (TO to)
+        (NP (PRP$ your) (NN room))))
+    (. !)))

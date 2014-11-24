@@ -1,0 +1,1714 @@
+<?xml version="1.0"?>
+<definitions xmlns:tns="urn:yahoo:ymws" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ymws="urn:yahoo:ymws" xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/" xmlns:yws="urn:yahoo:yws" xmlns="http://schemas.xmlsoap.org/wsdl/" name="ymws" targetNamespace="urn:yahoo:ymws">
+<types>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:yahoo:ymws" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+	<import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+	<complexType name="GetUserData">
+	</complexType>
+	<complexType name="GetUserDataResponse">
+		<sequence>
+			<element name="data" type="ymws:UserData" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetUserData">
+		<sequence>
+			<element name="setdata" type="ymws:SetData" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetUserDataResponse"/>
+	<complexType name="ListFolders">
+		<sequence>
+			<element name="resetMessengerUnseen" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ListFoldersResponse">
+		<sequence>
+			<element name="numberOfFolders" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="folder" type="ymws:FolderData" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="CreateFolder">
+		<sequence>
+			<element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false">		 
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="CreateFolderResponse">
+		<sequence>
+			<element name="folderInfo" type="ymws:Fid" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="RemoveFolder">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="RemoveFolderResponse">
+		<sequence>
+		</sequence>
+	</complexType>
+	<complexType name="RenameFolder">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="RenameFolderResponse">
+		<sequence>
+			<element name="folderInfo" type="ymws:Fid" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="EmptyFolder">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="EmptyFolderResponse">
+		<sequence>
+		</sequence>
+	</complexType>
+	<complexType name="ListMessages">
+		<sequence>
+			<element name="sortKey" type="ymws:SortKey" minOccurs="0" maxOccurs="1" default="date"/>
+			<element name="sortOrder" type="ymws:SortOrder" minOccurs="0" maxOccurs="1" default="down"/>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="filterBy" type="ymws:Flag" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="groupBy" type="ymws:GroupBy" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+		<attribute name="startMid" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="startInfo" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="numMid" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="numInfo" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="offsetMid" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="loc" type="ymws:OffsetType" default="startWith">
+		</attribute>
+	</complexType>
+	<complexType name="ListMessagesResponse">
+		<sequence>
+			<element name="folder" type="ymws:FolderData" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="messageInfo" type="ymws:MessageInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="startMid" type="xsd:unsignedLong" use="optional"/>
+		<attribute name="startInfo" type="xsd:unsignedLong" use="optional"/>
+		<attribute name="numMid" type="xsd:unsignedLong" use="optional"/>
+		<attribute name="numInfo" type="xsd:unsignedLong" use="optional"/>
+		<attribute name="loc" type="ymws:MidLocationRes" default="na"/>
+		<attribute name="groupBy" type="ymws:GroupBy" use="optional"/>
+	</complexType>
+	<complexType name="ListMessagesFromIds">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="mid" type="xsd:string" minOccurs="1" maxOccurs="unbounded">
+			</element>
+			<element name="charsetHint" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ListMessagesFromIdsResponse">
+		<sequence>
+			<element name="folder" type="ymws:FolderData" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="messageInfo" type="ymws:MessageInfo" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="GetMessage">
+		<sequence>
+			<element name="truncateAt" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1" default="0">
+			</element>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="message" type="ymws:MidRequest" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="charsetHint" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MidRequest">
+		<sequence>
+			<element name="mid" type="xsd:string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="blockImages" type="ymws:ImageBlockOption" minOccurs="0" maxOccurs="1" default="none">
+			</element>
+			<element name="restrictCSS" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false">
+			</element>
+			<element name="imgReplacementURL" type="xsd:string" minOccurs="0" maxOccurs="1" default="">
+			</element>
+			<element name="expandCIDReferences" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false">
+			</element>
+			<element name="enableWarnings" type="xsd:boolean" minOccurs="0" maxOccurs="1" default="false">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="GetMessageResponse">
+		<sequence>
+			<element name="total" type="xsd:unsignedLong" minOccurs="0" maxOccurs="1" default="0">
+			</element>
+			<element name="folder" type="ymws:FolderData" minOccurs="0" maxOccurs="1"/>
+			<element name="message" type="ymws:Message" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="header" type="ymws:Header" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="code" type="ymws:ErrorCode" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="SaveRawMessage">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="text" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SaveRawMessageResponse">
+		<sequence>
+			<element name="mid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="DeleteMessages">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="selection" type="ymws:Flag" minOccurs="0" maxOccurs="1" nillable="true">	 
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="DeleteMessagesResponse">
+		<sequence>
+			<element name="error" type="ymws:ErrorCode" minOccurs="0" maxOccurs="unbounded" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MoveMessages">
+		<sequence>
+			<element name="sourceFid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="destinationFid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="selection" type="ymws:Flag" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MoveMessagesResponse">
+		<sequence>
+			<element name="sourceFolder" type="ymws:FolderData" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="destinationFolder" type="ymws:FolderData" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="error" type="ymws:ErrorCode" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="FlagMessages">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="setFlags" type="ymws:SetFlag" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="selection" type="ymws:Flag" minOccurs="0" maxOccurs="1" nillable="true"/>		</sequence>
+	</complexType>
+	<complexType name="FlagMessagesResponse">
+		<sequence>
+			<element name="returnCodes" type="ymws:ErrorCode" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="GetMessageRawHeader">
+		<sequence>
+			 <element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			 <element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="GetMessageRawHeaderResponse">
+		<sequence>
+			<element name="rawheaders" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="error" type="ymws:ErrorCode" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="total" type="xsd:unsignedLong" use="optional" default="0">
+		</attribute>
+	</complexType>
+	<complexType name="FetchExternalMail">
+		<sequence>
+			<element name="externalAccounts" type="ymws:ExternalAccount" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="FetchExternalMailResponse">
+		<sequence>
+			<element name="fetchResults" type="ymws:FetchResult" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="SendMessage">
+		<sequence>
+			<element name="message" type="ymws:ComposeMessage" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="savecopy" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>	
+		</sequence>
+	</complexType>
+	<complexType name="SendMessageResponse">
+		<sequence>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SaveMessage">
+		<sequence>
+			<element name="destination" type="ymws:SaveMessageDestination" minOccurs="1" maxOccurs="1"/>
+			<element name="message" type="ymws:ComposeMessage" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SaveMessageResponse">
+		<sequence>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ResetSpamFilter">
+	</complexType>
+	<complexType name="ResetSpamFilterResponse">
+	</complexType>
+	<complexType name="BatchExecute">
+		<sequence>
+			<element name="call" type="ymws:BatchCall" minOccurs="2" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="BatchExecuteResponse">
+		<sequence>
+			<element name="response" type="ymws:BatchResponse" minOccurs="2" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="SearchMessages">
+		<sequence>
+			<element name="sortKey" type="ymws:SortKey" minOccurs="0" maxOccurs="1" default="date"/>
+			<element name="sortOrder" type="ymws:SortOrder" minOccurs="0" maxOccurs="1" default="down"/>
+			<element name="search" type="ymws:SearchQuery" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="groupBy" type="ymws:GroupBy" minOccurs="0" maxOccurs="1" nillable="true"/>
+		</sequence>
+		<attribute name="startMid" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="startInfo" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="numMid" type="xsd:unsignedLong" use="optional">
+		</attribute>
+		<attribute name="numInfo" type="xsd:unsignedLong" use="optional">
+		</attribute>
+	</complexType>
+	<complexType name="BatchParameter">
+		<attribute name="source" type="xsd:string" use="required"/>
+		<attribute name="destination" type="xsd:string" use="required"/>
+	</complexType>
+	<complexType name="BatchCall">
+		<sequence>
+			<element name="parameter" type="ymws:BatchParameter" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="dependency" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<choice>
+				<element name="GetUserData" type="ymws:GetUserData"/>
+				<element name="SetUserData" type="ymws:SetUserData"/>
+				<element name="ListFolders" type="ymws:ListFolders"/>
+				<element name="CreateFolder" type="ymws:CreateFolder"/>
+				<element name="RenameFolder" type="ymws:RenameFolder"/>
+				<element name="EmptyFolder" type="ymws:EmptyFolder"/>
+				<element name="RemoveFolder" type="ymws:RemoveFolder"/>
+				<element name="GetMessage" type="ymws:GetMessage"/>
+				<element name="SaveRawMessage" type="ymws:SaveRawMessage"/>
+				<element name="SaveMessage" type="ymws:SaveMessage"/>
+				<element name="MoveMessages" type="ymws:MoveMessages"/>
+				<element name="DeleteMessages" type="ymws:DeleteMessages"/>
+				<element name="ListMessages" type="ymws:ListMessages"/>
+				<element name="ListMessagesFromIds" type="ymws:ListMessagesFromIds"/>
+				<element name="SearchMessages" type="ymws:SearchMessages"/>
+				<element name="GetMessageRawHeader" type="ymws:GetMessageRawHeader"/>
+				<element name="FetchExternalMail" type="ymws:FetchExternalMail"/>
+				<element name="FlagMessages" type="ymws:FlagMessages"/>
+				<element name="ResetSpamFilter" type="ymws:ResetSpamFilter"/>
+				<element name="SendMessage" type="ymws:SendMessage"/>
+			</choice>
+		</sequence>
+		<attribute name="id" type="xsd:string" use="optional">
+		</attribute>
+	</complexType>
+	<complexType name="BatchResponse">
+		<choice>
+			<element name="GetUserDataResponse" type="ymws:GetUserDataResponse"/>
+			<element name="SetUserDataResponse" type="ymws:SetUserDataResponse"/>
+			<element name="ListFoldersResponse" type="ymws:ListFoldersResponse"/>
+			<element name="CreateFolderResponse" type="ymws:CreateFolderResponse"/>
+			<element name="RenameFolderResponse" type="ymws:RenameFolderResponse"/>
+			<element name="EmptyFolderResponse" type="ymws:EmptyFolderResponse"/>
+			<element name="RemoveFolderResponse" type="ymws:RemoveFolderResponse"/>
+			<element name="GetMessageResponse" type="ymws:GetMessageResponse"/>
+			<element name="SaveRawMessageResponse" type="ymws:SaveRawMessageResponse"/>
+			<element name="SaveMessageResponse" type="ymws:SaveMessageResponse"/>
+			<element name="MoveMessagesResponse" type="ymws:MoveMessagesResponse"/>
+			<element name="DeleteMessagesResponse" type="ymws:DeleteMessagesResponse"/>
+			<element name="ListMessagesResponse" type="ymws:ListMessagesResponse"/>
+			<element name="ListMessagesFromIdsResponse" type="ymws:ListMessagesFromIdsResponse"/>
+			<element name="SearchMessagesResponse" type="ymws:ListMessagesResponse"/>
+			<element name="GetMessageRawHeaderResponse" type="ymws:GetMessageRawHeaderResponse"/>
+			<element name="FetchExternalMailResponse" type="ymws:FetchExternalMailResponse"/>
+			<element name="FlagMessagesResponse" type="ymws:FlagMessagesResponse"/>
+			<element name="ResetSpamFilterResponse" type="ymws:ResetSpamFilterResponse"/>
+			<element name="SendMessageResponse" type="ymws:SendMessageResponse"/>
+			<element name="ErrorResponse" type="ymws:ErrorResponse"/>
+		</choice>
+		<attribute name="success" type="xsd:boolean"/>
+	</complexType>
+	<complexType name="ErrorResponse">
+		<sequence>
+			<element name="code" type="xsd:QName">
+			</element>
+			<element name="string" type="xsd:string">
+			</element>
+			<element name="detail" type="xsd:anyType" minOccurs="0">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ExternalAccount">
+		<sequence>
+			<element name="protocol" type="xsd:string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="userName" type="xsd:string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="server" type="xsd:string" minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="FetchResult">
+		<sequence>
+			<element name="status" type="ymws:FetchStatus" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="numFetched" type="xsd:int" minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Fid">
+		<sequence/>
+		<attribute name="fid" type="xsd:string" default="">
+		</attribute>
+		<attribute name="name" type="xsd:string" use="optional">
+		</attribute>
+	</complexType>
+	<complexType name="FolderData">
+		<sequence>
+			<element name="folderInfo" type="ymws:Fid" minOccurs="1" maxOccurs="1">
+			</element>
+		</sequence>
+		<attribute name="unread" type="xsd:unsignedLong" use="optional" default="0">
+		</attribute>
+		<attribute name="total" type="xsd:unsignedLong" default="0">
+		</attribute>
+		<attribute name="size" type="xsd:unsignedLong" default="0">
+		</attribute>
+		<attribute name="isSystem" type="xsd:boolean" default="false">
+		</attribute>
+	</complexType>
+	<complexType name="InboxServices">
+		<sequence>
+			<element name="name" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="true">				
+			</element>
+			<element name="value" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MessageInfo">
+		<sequence>
+			<element name="flags" type="ymws:Flag" minOccurs="1" maxOccurs="1" nillable="false">
+			</element>
+			<element name="from" type="ymws:Address" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="searchinfo" type="ymws:SearchInfo" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="inboxservices" type="ymws:InboxServices" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="folderInfo" type="ymws:Fid" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="sourceFolderInfo" type="ymws:Fid" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+		<attribute name="mid" type="xsd:string"/>
+		<attribute name="toEmail" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="subject" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="mimeType" type="xsd:string" use="optional"/>
+		<attribute name="xapparentlyto" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="externalPopServer" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="receivedDate" type="xsd:unsignedInt" use="optional">
+		</attribute>
+		<attribute name="size" type="xsd:unsignedInt" use="optional">
+		</attribute>
+	</complexType>
+	<complexType name="SearchInfo">
+		<sequence>
+			<element name="snippets" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="matchedFields" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="attachments" type="ymws:SearchAttachmentInfo" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SearchAttachmentInfo">
+		<sequence>
+			<element name="name" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="MIMEType" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="MIMEPartid" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="size" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="thumbnailURL" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Flag">
+		<sequence/>
+		<attribute name="isReplied" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="isFlagged" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="isRead" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="isDraft" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="isForwarded" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="isHam" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="isSpam" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="hasAttachment" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="inAddressBook" type="xsd:int" default="-1">
+		</attribute>
+	</complexType>
+	<complexType name="SetFlag">
+		<sequence/>
+		<attribute name="replied" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="flagged" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="read" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="draft" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="forwarded" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="ham" type="xsd:int" default="-1">
+		</attribute>
+		<attribute name="spam" type="xsd:int" default="-1">
+		</attribute>
+	</complexType>
+	<complexType name="Address">
+		<sequence>			
+			<element name="name" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="email" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ComposeAddress">
+		<sequence>
+			<element name="name" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<choice>
+				<element name="email" type="xsd:string"/>
+				<element name="nickname" type="xsd:string"/>
+			</choice>
+		</sequence>
+	</complexType>
+	<complexType name="Message">
+		<sequence>
+			<element name="mid" type="xsd:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="receivedDate" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="subject" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="from" type="ymws:Address" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+			<element name="replyto" type="ymws:Address" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="to" type="ymws:Address" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="cc" type="ymws:Address" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="bcc" type="ymws:Address" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="domainkey" type="xsd:boolean" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="domainkeyname" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="false"/>
+			<element name="part" type="ymws:MessagePart" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="meta" type="ymws:MetaData" minOccurs="0" maxOccurs="1"/>
+			<element name="hasBlockedImages" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="xapparentlyto" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="messageId" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="inReplyTo" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="references" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ComposeMessage">
+		<sequence>
+			<element name="subject" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="inreplyto" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="from" type="ymws:Address" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="to" type="ymws:ComposeAddress" minOccurs="0" maxOccurs="unbounded">
+			</element>
+			<element name="replyto" type="ymws:Address" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>	
+			<element name="cc" type="ymws:ComposeAddress" minOccurs="0" maxOccurs="unbounded" nillable="true">
+			</element>
+			<element name="bcc" type="ymws:ComposeAddress" minOccurs="0" maxOccurs="unbounded" nillable="true">
+			</element>
+			<element name="date" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+			<element name="body" type="ymws:ComposeMessagePart" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="simplebody" type="ymws:SimpleMessageBody" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="meta" type="ymws:MetaData" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="mailer" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ComposeMessagePart">
+		<sequence>
+			<element name="data" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="subparts" type="ymws:ComposeMessagePart" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="type" type="xsd:string"/>
+		<attribute name="subtype" type="xsd:string"/>
+		<attribute name="attachment" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="encoding" type="xsd:string" use="optional"/>
+		<attribute name="filename" type="xsd:string" use="optional"/>
+		<attribute name="charset" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="contentid" type="xsd:string" use="optional"/>
+		<attribute name="disposition" type="xsd:string" use="optional"/>
+	</complexType>
+	<complexType name="SimpleMessageBody">
+		<sequence>
+			<element name="text" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="html" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="attachment" type="ymws:ComposeAttachment" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="ComposeAttachment">
+		<sequence>
+			<element name="data" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+		<attribute name="type" type="xsd:string"/>
+		<attribute name="subtype" type="xsd:string"/>
+		<attribute name="attachment" type="xsd:string" use="optional"/>
+		<attribute name="encoding" type="xsd:string" use="optional"/>
+		<attribute name="filename" type="xsd:string" use="optional"/>
+		<attribute name="charset" type="xsd:string" use="optional"/>
+		<attribute name="contentid" type="xsd:string" use="optional"/>
+		<attribute name="disposition" type="xsd:string" use="optional"/>
+	</complexType>
+	<complexType name="SaveMessageDestination">
+		<sequence>
+			<element name="fid" type="xsd:string" minOccurs="1" maxOccurs="1">
+			</element>
+			<element name="mid" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="AttachmentInfo">
+		<sequence>
+			<element name="name" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="size" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="id" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MessagePart">
+		<sequence>
+			<element name="text" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="attachments" type="ymws:AttachmentInfo" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="header" type="ymws:MessageHeaderInfo" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+		<attribute name="partId" type="xsd:string" use="optional"/>
+		<attribute name="type" type="xsd:string" use="optional"/>
+		<attribute name="subtype" type="xsd:string" use="optional"/>
+		<attribute name="typeParams" type="xsd:string" use="optional"/>
+		<attribute name="disposition" type="xsd:string" use="optional"/>
+		<attribute name="dispParams" type="xsd:string" use="optional"/>
+		<attribute name="encoding" type="xsd:string" use="optional"/>
+		<attribute name="filename" type="xsd:string" use="optional"/>
+		<attribute name="size" type="xsd:unsignedInt" use="optional"/>
+		<attribute name="isTruncated" type="xsd:boolean" default="false">
+		</attribute>
+		<attribute name="contentId" type="xsd:string" use="optional"/>
+		<attribute name="referencedInline" type="xsd:boolean" default="false">
+		</attribute>
+		<attribute name="thumbnailurl" type="xsd:string" use="optional">
+		</attribute>
+	</complexType>
+	<complexType name="MessageHeaderInfo">
+		<sequence>
+			<element name="receivedDate" type="xsd:unsignedInt" minOccurs="1" maxOccurs="1" nillable="false"/>
+			<element name="subject" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="from" type="ymws:Address" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="replyto" type="ymws:Address" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="to" type="ymws:Address" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="cc" type="ymws:Address" minOccurs="0" maxOccurs="unbounded"/>
+			<element name="inReplyTo" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="ErrorCode">
+		<sequence>
+		</sequence>
+		<attribute name="mid" type="xsd:string" use="optional">
+		</attribute>
+		<attribute name="code" type="xsd:string" default="ERROR">
+		</attribute>
+	</complexType>
+	<complexType name="Header">
+		<sequence>
+			<element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="value" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+		</sequence>
+	</complexType>
+	<complexType name="SearchQuery">
+		<sequence>	     
+			<element name="attachmenttype" type="ymws:SearchAttachmentType" minOccurs="0" maxOccurs="1"/>
+			<element name="query" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="from" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="frommatchmode" type="ymws:SearchMatchMode" minOccurs="0" maxOccurs="1"/>
+			<element name="rcpt" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="rcptmatchmode" type="ymws:SearchMatchMode" minOccurs="0" maxOccurs="1"/>
+			<element name="rcptmode" type="ymws:SearchRecipientMode" minOccurs="0" maxOccurs="1" default="toonly"/>
+			<element name="subject" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="subjectmatchmode" type="ymws:SearchMatchMode" minOccurs="0" maxOccurs="1"/>
+			<element name="body" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="bodymatchmode" type="ymws:SearchMatchMode" minOccurs="0" maxOccurs="1"/>
+			<element name="searchtype" type="ymws:SearchType" minOccurs="0" maxOccurs="1"/>
+			<element name="date" type="xsd:dateTime" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="datemode" type="ymws:SearchDateCheck" minOccurs="0" maxOccurs="1" default="ignoredate"/>
+			<element name="fid" type="xsd:string" minOccurs="0" maxOccurs="unbounded">	
+			</element>
+			<element name="flags" type="ymws:Flag" minOccurs="0" maxOccurs="1" nillable="true"/>
+			<element name="daterange" type="ymws:SearchDateRange" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="attmimetype" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="UserData">
+		<sequence>
+			<element name="userFeaturePref" type="ymws:UserFeaturePref" minOccurs="1" maxOccurs="1"/>
+			<element name="userUIPref" type="ymws:UserUIPref" minOccurs="1" maxOccurs="1"/>
+			<element name="userSpamPref" type="ymws:UserSpamPref" minOccurs="1" maxOccurs="1"/>
+			<element name="userVacationPref" type="ymws:UserVacationPref" minOccurs="1" maxOccurs="1"/>
+			<element name="userSendPref" type="ymws:UserSendPref" minOccurs="1" maxOccurs="1"/>
+			<element name="userPopPref" type="ymws:UserPopPref" minOccurs="1" maxOccurs="1"/>
+			<element name="externalAccounts" type="ymws:AllExternalAccounts" minOccurs="0" maxOccurs="1"/>
+			<element name="disposableAddresses" type="ymws:AllDisposableAddresses" minOccurs="0" maxOccurs="1"/>
+			<element name="aliases" type="ymws:AllAliases" minOccurs="0" maxOccurs="1"/>
+			<element name="otherYahooMboxes" type="ymws:AllOtherYahooMboxes" minOccurs="0" maxOccurs="1"/>
+			<element name="blockedAddresses" type="ymws:BlockedAddresses" minOccurs="0" maxOccurs="1"/>
+			<element name="switches" type="ymws:Switches" minOccurs="0" maxOccurs="1"/>
+			<element name="parentalControls" type="ymws:ParentalControls" minOccurs="0" maxOccurs="1"/>
+			<element name="filters" type="ymws:Filters" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="UserFeaturePref">
+		<sequence>
+			<element name="silo" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="mailRegTime" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="mailForward" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="hasAddressGuard" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="intl" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="hasMailPlus" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="hasStationery" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="hasAds" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="mailboxQuota" type="xsd:unsignedLong" minOccurs="0" maxOccurs="1"/>
+			<element name="quotaUsed" type="xsd:unsignedLong" minOccurs="0" maxOccurs="1"/>
+			<element name="soundNewMail" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="mailCheckInterval" type="xsd:int" default="-1"/>
+			<element name="partnerType" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="partnerName" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="attachFiles" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="attachFileSize" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="attachTotalSize" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="attachTotalEncodedSize" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="isPremium" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="hasArchiving" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="hasForwarding" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="filtersMax" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="isMaster" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="btTier" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="rogersTier" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="isUpsellEnabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="bulkAction" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="optInState" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="domainMembership" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="UserUIPref">
+		<sequence>
+			<element name="composeFontFamily" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="composeFontSize" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultSortOrder" type="ymws:SortOrder" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="useRichText" type="ymws:UseRichText" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="imageBlocking" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="msgPaneVisible" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="showTo" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="newsCategory" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="showCalendarStrip" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="goOnMessageDelete" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="messagesPerPage" type="xsd:int" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="showSnippets" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="showNoise" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="searchPromo" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="pimBeta" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="pimColor" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="UserSpamPref">
+		<sequence>
+			<element name="spamGuardPlusEnabled" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="spamFilterActive" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="spamMoveToInbox" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="spamCleanupPeriod" type="xsd:int" default="-1">
+			</element>
+			<element name="spamBlockSender" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="UserVacationPref">
+		<sequence>
+			<element name="vacationResponseOn" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseSubject" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseText" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseDomain0" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseDomain1" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseStartDate" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseEndDate" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="UserSendPref">
+		<sequence>
+			<element name="defaultID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="loggedInAlias" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultFromName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultFromAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultReplyToAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="canSendFromPopAcct" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="showCcBcc" type="ymws:ShowCcBcc" default="hide"/>
+			<element name="includeMsgOnReply" type="ymws:IncludeMsgOnReply"/>
+			<element name="signatureActive" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="signatureText" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="richTextSignature" type="ymws:RichTextSignature" default="plain"/>
+			<element name="addUnknownContact" type="ymws:UnknownContactAction" default="unspecified"/>
+			<element name="autosaveOnSend" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="UserPopPref">
+		<sequence>
+			<element name="hasPOP" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="popNoBulk" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="popBulkSubjectPrefix" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="popSetupEligible" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="Switches">
+		<sequence>
+			<element name="noFormWarning" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ParentalControls">
+                <sequence>
+                        <element name="isActive" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+						</element>
+                        <element name="mailAccessAllowed" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+						</element>
+                        <element name="restrictInbound" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                        <element name="restrictOutbound" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                        <element name="attachmentsAllowed" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                        <element name="historyEnabled" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+                        <element name="master" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+						</element>
+                        <element name="messengerAccessAllowed" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+						</element>
+                </sequence>
+        </complexType>
+	<complexType name="Filters">
+                <sequence>
+                        <element name="filtersMax" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1"/>
+                        <element name="numberOfFilters" type="xsd:unsignedInt" minOccurs="0" maxOccurs="1"/>
+                </sequence>
+        </complexType>
+	<complexType name="SetData">
+		<sequence>
+			<element name="userFeaturePref" type="ymws:SetFeaturePref" minOccurs="0" maxOccurs="1"/>
+			<element name="userUIPref" type="ymws:SetUIPref" minOccurs="0" maxOccurs="1"/>
+			<element name="userSpamPref" type="ymws:SetSpamPref" minOccurs="0" maxOccurs="1"/>
+			<element name="userVacationPref" type="ymws:SetVacationPref" minOccurs="0" maxOccurs="1"/>
+			<element name="userSendPref" type="ymws:SetSendPref" minOccurs="0" maxOccurs="1"/>
+			<element name="userPopPref" type="ymws:SetPopPref" minOccurs="0" maxOccurs="1"/>
+			<element name="blockedAddresses" type="ymws:SetBlockedAddresses" minOccurs="0" maxOccurs="1"/>
+			<element name="switches" type="ymws:SetSwitches" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetFeaturePref">
+		<sequence>
+			<element name="soundNewMail" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="mailCheckInterval" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<element name="optInState" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetUIPref">
+		<sequence>
+			<element name="composeFontFamily" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="composeFontSize" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultSortOrder" type="ymws:SortOrder" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="useRichText" type="ymws:UseRichText" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="imageBlocking" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="msgPaneVisible" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="showTo" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="newsCategory" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="showCalendarStrip" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="goOnMessageDelete" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="messagesPerPage" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<element name="showSnippets" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="showNoise" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="searchPromo" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="pimBeta" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="pimColor" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetSpamPref">
+		<sequence>
+			<element name="spamMoveToInbox" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="spamCleanupPeriod" type="xsd:int" minOccurs="0" maxOccurs="1"/>
+			<element name="spamBlockSender" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetVacationPref">
+		<sequence>
+			<element name="vacationResponseOn" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="vacationResponseSubject" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="vacationResponseText" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="vacationResponseDomain0" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="vacationResponseDomain1" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="vacationResponseStartDate" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+			<element name="vacationResponseEndDate" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SetSendPref">
+		<sequence>
+			<element name="defaultID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultFromName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="defaultReplyToAddress" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="showCcBcc" type="ymws:ShowCcBcc" minOccurs="0" maxOccurs="1"/>
+			<element name="includeMsgOnReply" type="ymws:IncludeMsgOnReply" minOccurs="0" maxOccurs="1"/>
+			<element name="signatureActive" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="signatureText" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+			<element name="richTextSignature" type="ymws:RichTextSignature" minOccurs="0" maxOccurs="1"/>
+			<element name="addUnknownContact" type="ymws:UnknownContactAction" minOccurs="0" maxOccurs="1"/>
+			<element name="autosaveOnSend" type="xsd:string" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SetPopPref">
+		<sequence>
+			<element name="popNoBulk" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+			<element name="popBulkSubjectPrefix" type="xsd:boolean" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	<complexType name="SetSwitches">
+		<sequence>
+			<element name="noFormWarning" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="AllExternalAccounts">
+		<sequence>
+			<element name="extAccount" type="ymws:ExternalAccountAlias" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="extAccountsTotal" type="xsd:int" use="optional"/>
+	</complexType>
+	<complexType name="AllDisposableAddresses">
+		<sequence>
+			<element name="deaName" type="ymws:DisposableAddress" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="deaNamesTotal" type="xsd:int" use="optional"/>
+	</complexType>
+	<complexType name="AllAliases">
+		<sequence>
+			<element name="alias" type="ymws:Alias" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="aliasesTotal" type="xsd:int" use="optional"/>
+	</complexType>
+	<complexType name="AllOtherYahooMboxes">
+		<sequence>
+			<element name="yMbox" type="ymws:YahooMbox" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="otherYahooMboxesTotal" type="xsd:int" use="optional"/>
+	</complexType>
+	<complexType name="BlockedAddresses">
+		<sequence>
+			<element name="blockedAddress" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+		<attribute name="blockedAddressesTotal" type="xsd:int" use="optional">
+		</attribute>
+		<attribute name="blockedAddressesMax" type="xsd:int" use="optional">
+		</attribute>		
+	</complexType>
+	<complexType name="SetBlockedAddresses">
+		<sequence>
+			<element name="blockedAddress" type="xsd:string" minOccurs="0" maxOccurs="unbounded">
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ExternalAccountAlias">
+		<sequence/>
+		<attribute name="accountName" type="xsd:string" use="optional"/>
+		<attribute name="fromName" type="xsd:string" use="optional"/>
+		<attribute name="address" type="xsd:string" use="optional"/>
+		<attribute name="replyTo" type="xsd:string" use="optional"/>
+		<attribute name="server" type="xsd:string" use="optional"/>
+		<attribute name="username" type="xsd:string" use="optional"/>
+		<attribute name="colorIndicator" type="xsd:string" use="optional"/>
+		<attribute name="folder" type="xsd:string" use="optional"/>
+		<attribute name="port" type="xsd:string" use="optional"/>
+		<attribute name="leaveMail" type="xsd:boolean" use="optional"/>
+		<attribute name="retrieveOnlyNew" type="xsd:boolean" use="optional"/>
+		<attribute name="useFilters" type="xsd:boolean" use="optional"/>
+		<attribute name="isDefault" type="xsd:boolean" use="optional"/>
+	</complexType>
+	<complexType name="DisposableAddress">
+		<sequence/>
+		<attribute name="address" type="xsd:string" use="optional"/>
+		<attribute name="replyTo" type="xsd:string" use="optional"/>
+		<attribute name="notes" type="xsd:string" use="optional"/>
+		<attribute name="colorIndicator" type="xsd:int" use="optional"/>
+		<attribute name="deliverTo" type="xsd:string" use="optional"/>
+		<attribute name="fromName" type="xsd:string" use="optional"/>
+		<attribute name="activeComposition" type="xsd:boolean" use="optional"/>
+	</complexType>
+	<complexType name="Alias">
+		<sequence/>
+		<attribute name="fromName" type="xsd:string" use="optional"/>
+		<attribute name="address" type="xsd:string" use="optional"/>
+		<attribute name="replyTo" type="xsd:string" use="optional"/>
+		<attribute name="colorIndicator" type="xsd:string" use="optional"/>
+		<attribute name="signature" type="xsd:string" use="optional"/>
+		<attribute name="addSignature" type="xsd:boolean" use="optional"/>
+		<attribute name="signatureType" type="xsd:string" use="optional"/>
+		<attribute name="isDefault" type="xsd:boolean" use="optional"/>
+	</complexType>
+	<complexType name="YahooMbox">
+		<sequence/>
+		<attribute name="email" type="xsd:string"/>
+		<attribute name="farm" type="xsd:string"/>
+		<attribute name="sledid" type="xsd:string"/>
+		<attribute name="silo" type="xsd:string"/>
+		<attribute name="isBizmail" type="xsd:boolean">
+		</attribute>
+		<attribute name="domainMembership" type="xsd:string">
+		</attribute>
+	</complexType>
+	<complexType name="MetaData">
+		<sequence>
+			<element name="meta" type="ymws:MetaData" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+		<attribute name="name" type="xsd:string" use="required"/>
+		<attribute name="value" type="xsd:string" use="optional"/>
+	</complexType>
+	<complexType name="SearchDateRange">
+		<sequence/>
+		<attribute name="dateStart" type="xsd:dateTime" use="required"/>
+		<attribute name="dateEnd" type="xsd:dateTime" use="required"/>
+	</complexType>
+	<simpleType name="SortKey">
+		<restriction base="xsd:string">
+			<enumeration value="date"/>
+			<enumeration value="size"/>
+			<enumeration value="subject"/>
+			<enumeration value="sender"/>
+			<enumeration value="to"/>
+			<enumeration value="recipient"/>
+			<enumeration value="folder"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchDateCheck">
+		<restriction base="xsd:string">
+			<enumeration value="ignoredate"/>
+			<enumeration value="before"/>
+			<enumeration value="after"/>
+			<enumeration value="on"/>
+			<enumeration value="since"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchMatchMode">
+		<restriction base="xsd:string">
+			<enumeration value="contains"/>
+			<enumeration value="notcontains"/>
+			<enumeration value="exact"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchRecipientMode">
+		<restriction base="xsd:string">
+			<enumeration value="toonly"/>
+			<enumeration value="allrecipient"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchType">
+		<restriction base="xsd:string">
+			<enumeration value="body"/>
+			<enumeration value="header"/>
+			<enumeration value="whole"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchAttachmentType">
+		<restriction base="xsd:string">
+			<enumeration value="ignoreattachments"/>
+			<enumeration value="noattachments"/>
+			<enumeration value="anyattachments"/>
+			<enumeration value="mimetypesattachments"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchSizeCheck">
+		<restriction base="xsd:string">
+			<enumeration value="ignoresize"/>
+			<enumeration value="smaller"/>
+			<enumeration value="larger"/>
+			<enumeration value="eq"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SearchWordBounds">
+		<restriction base="xsd:string">
+			<enumeration value="nobounds"/>
+			<enumeration value="whitespaceonly"/>
+			<enumeration value="whitespacepunctuation"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="SortOrder">
+		<restriction base="xsd:string">
+			<enumeration value="up"/>
+			<enumeration value="down"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="OffsetType">
+		<restriction base="xsd:string">
+			<enumeration value="startWith"/>
+			<enumeration value="centerOn"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="DateType">
+		<restriction base="xsd:string">
+			<enumeration value="senderDate"/>
+			<enumeration value="receiverDate"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="MidLocationRes">
+		<restriction base="xsd:string">
+			<enumeration value="start"/>
+			<enumeration value="center"/>
+			<enumeration value="centerShortL"/>
+			<enumeration value="centerShortR"/>
+			<enumeration value="notFound"/>
+			<enumeration value="na"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="GroupBy">
+		<restriction base="xsd:string">
+			<enumeration value="read"/>
+			<enumeration value="unRead"/>
+			<enumeration value="replied"/>
+			<enumeration value="notReplied"/>
+			<enumeration value="flagged"/>
+			<enumeration value="unFlagged"/>
+			<enumeration value="forwarded"/>
+			<enumeration value="notForwarded"/>
+			<enumeration value="hasAttachment"/>
+			<enumeration value="noAttachment"/>
+			<enumeration value="inAddressBook"/>
+			<enumeration value="notInAddressBook"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="FetchStatus">
+		<restriction base="xsd:string">
+			<enumeration value="success"/>
+			<enumeration value="unknownError"/>
+			<enumeration value="connectionTimeout"/>
+			<enumeration value="badHost"/>
+			<enumeration value="badPort"/>
+			<enumeration value="badUserId"/>
+			<enumeration value="badPassword"/>
+			<enumeration value="badLogin"/>
+			<enumeration value="badFolder"/>
+			<enumeration value="badMailbox"/>
+			<enumeration value="badMessage"/>
+			<enumeration value="lastUnsupported"/>
+			<enumeration value="busy"/>
+			<enumeration value="connectionLost"/>
+			<enumeration value="quota"/>
+			<enumeration value="messageBlocked"/>
+			<enumeration value="largeMsg"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ShowCcBcc">
+		<restriction base="xsd:string">
+			<enumeration value="show"/>
+			<enumeration value="hide"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="UseRichText">
+		<restriction base="xsd:string">
+			<enumeration value="dynamic"/>
+			<enumeration value="plain"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="IncludeMsgOnReply">
+		<restriction base="xsd:string">
+			<enumeration value="none"/>
+			<enumeration value="short"/>
+			<enumeration value="full"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="RichTextSignature">
+		<restriction base="xsd:string">
+			<enumeration value="plain"/>
+			<enumeration value="dhtml"/>
+			<enumeration value="plainhtml"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="UnknownContactAction">
+		<restriction base="xsd:string">
+			<enumeration value="always"/>
+			<enumeration value="prompt"/>
+			<enumeration value="unspecified"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="ImageBlockOption">
+		<restriction base="xsd:string">
+			<enumeration value="none"/>
+			<enumeration value="all"/>
+			<enumeration value="remote"/>
+		</restriction>
+	</simpleType>
+	<element name="HumanVerification">
+		<complexType>
+			<sequence>
+				<element name="imageurl" type="xsd:string"/>
+				<element name="answer" type="xsd:string"/>
+			</sequence>
+		</complexType>
+	</element><element name="GetUserData" type="ymws:GetUserData"/><element name="GetUserDataResponse" type="ymws:GetUserDataResponse"/><element name="SetUserData" type="ymws:SetUserData"/><element name="SetUserDataResponse" type="ymws:SetUserDataResponse"/><element name="ListFolders" type="ymws:ListFolders"/><element name="ListFoldersResponse" type="ymws:ListFoldersResponse"/><element name="CreateFolder" type="ymws:CreateFolder"/><element name="CreateFolderResponse" type="ymws:CreateFolderResponse"/><element name="RenameFolder" type="ymws:RenameFolder"/><element name="RenameFolderResponse" type="ymws:RenameFolderResponse"/><element name="EmptyFolder" type="ymws:EmptyFolder"/><element name="EmptyFolderResponse" type="ymws:EmptyFolderResponse"/><element name="RemoveFolder" type="ymws:RemoveFolder"/><element name="RemoveFolderResponse" type="ymws:RemoveFolderResponse"/><element name="GetMessage" type="ymws:GetMessage"/><element name="GetMessageResponse" type="ymws:GetMessageResponse"/><element name="SaveRawMessage" type="ymws:SaveRawMessage"/><element name="SaveRawMessageResponse" type="ymws:SaveRawMessageResponse"/><element name="MoveMessages" type="ymws:MoveMessages"/><element name="MoveMessagesResponse" type="ymws:MoveMessagesResponse"/><element name="DeleteMessages" type="ymws:DeleteMessages"/><element name="DeleteMessagesResponse" type="ymws:DeleteMessagesResponse"/><element name="ListMessages" type="ymws:ListMessages"/><element name="ListMessagesResponse" type="ymws:ListMessagesResponse"/><element name="ListMessagesFromIds" type="ymws:ListMessagesFromIds"/><element name="ListMessagesFromIdsResponse" type="ymws:ListMessagesFromIdsResponse"/><element name="SearchMessages" type="ymws:SearchMessages"/><element name="SearchMessagesResponse" type="ymws:ListMessagesResponse"/><element name="GetMessageRawHeader" type="ymws:GetMessageRawHeader"/><element name="GetMessageRawHeaderResponse" type="ymws:GetMessageRawHeaderResponse"/><element name="FetchExternalMail" type="ymws:FetchExternalMail"/><element name="FetchExternalMailResponse" type="ymws:FetchExternalMailResponse"/><element name="FlagMessages" type="ymws:FlagMessages"/><element name="FlagMessagesResponse" type="ymws:FlagMessagesResponse"/><element name="SendMessage" type="ymws:SendMessage"/><element name="SendMessageResponse" type="ymws:SendMessageResponse"/><element name="SaveMessage" type="ymws:SaveMessage"/><element name="SaveMessageResponse" type="ymws:SaveMessageResponse"/><element name="ResetSpamFilter" type="ymws:ResetSpamFilter"/><element name="ResetSpamFilterResponse" type="ymws:ResetSpamFilterResponse"/><element name="BatchExecute" type="ymws:BatchExecute"/><element name="BatchExecuteResponse" type="ymws:BatchExecuteResponse"/>
+ </schema>
+</types>
+<message name="HumanVerificationRequest">
+	<part name="HumanVerification" element="ymws:HumanVerification"/>
+</message>
+<message name="GetUserData">
+	<part name="GetUserData" element="ymws:GetUserData"/>
+</message>
+<message name="GetUserDataResponse">
+	<part name="GetUserDataResponse" element="ymws:GetUserDataResponse"/>
+</message>
+<message name="SetUserData">
+	<part name="SetUserData" element="ymws:SetUserData"/>
+</message>
+<message name="SetUserDataResponse">
+	<part name="SetUserDataResponse" element="ymws:SetUserDataResponse"/>
+</message>
+<message name="ListFolders">
+	<part name="ListFolders" element="ymws:ListFolders"/>
+</message>
+<message name="ListFoldersResponse">
+	<part name="ListFoldersResponse" element="ymws:ListFoldersResponse"/>
+</message>
+<message name="CreateFolder">
+	<part name="CreateFolder" element="ymws:CreateFolder"/>
+</message>
+<message name="CreateFolderResponse">
+	<part name="CreateFolderResponse" element="ymws:CreateFolderResponse"/>
+</message>
+<message name="RenameFolder">
+	<part name="RenameFolder" element="ymws:RenameFolder"/>
+</message>
+<message name="RenameFolderResponse">
+	<part name="RenameFolderResponse" element="ymws:RenameFolderResponse"/>
+</message>
+<message name="EmptyFolder">
+	<part name="EmptyFolder" element="ymws:EmptyFolder"/>
+</message>
+<message name="EmptyFolderResponse">
+	<part name="EmptyFolderResponse" element="ymws:EmptyFolderResponse"/>
+</message>
+<message name="RemoveFolder">
+	<part name="RemoveFolder" element="ymws:RemoveFolder"/>
+</message>
+<message name="RemoveFolderResponse">
+	<part name="RemoveFolderResponse" element="ymws:RemoveFolderResponse"/>
+</message>
+<message name="GetMessage">
+	<part name="GetMessage" element="ymws:GetMessage"/>
+</message>
+<message name="GetMessageResponse">
+	<part name="GetMessageResponse" element="ymws:GetMessageResponse"/>
+</message>
+<message name="SaveRawMessage">
+	<part name="SaveRawMessage" element="ymws:SaveRawMessage"/>
+</message>
+<message name="SaveRawMessageResponse">
+	<part name="SaveRawMessageResponse" element="ymws:SaveRawMessageResponse"/>
+</message>
+<message name="MoveMessages">
+	<part name="MoveMessages" element="ymws:MoveMessages"/>
+</message>
+<message name="MoveMessagesResponse">
+	<part name="MoveMessagesResponse" element="ymws:MoveMessagesResponse"/>
+</message>
+<message name="DeleteMessages">
+	<part name="DeleteMessages" element="ymws:DeleteMessages"/>
+</message>
+<message name="DeleteMessagesResponse">
+	<part name="DeleteMessagesResponse" element="ymws:DeleteMessagesResponse"/>
+</message>
+<message name="ListMessages">
+	<part name="ListMessages" element="ymws:ListMessages"/>
+</message>
+<message name="ListMessagesResponse">
+	<part name="ListMessagesResponse" element="ymws:ListMessagesResponse"/>
+</message>
+<message name="ListMessagesFromIds">
+	<part name="ListMessagesFromIds" element="ymws:ListMessagesFromIds"/>
+</message>
+<message name="ListMessagesFromIdsResponse">
+	<part name="ListMessagesFromIdsResponse" element="ymws:ListMessagesFromIdsResponse"/>
+</message>
+<message name="SearchMessages">
+	<part name="SearchMessages" element="ymws:SearchMessages"/>
+</message>
+<message name="SearchMessageResponse">
+	<part name="SearchMessagesResponse" element="ymws:ListMessagesResponse"/>
+</message>
+<message name="GetMessageRawHeader">
+	<part name="GetMessageRawHeader" element="ymws:GetMessageRawHeader"/>
+</message>
+<message name="GetMessageRawHeaderResponse">
+	<part name="GetMessageRawHeaderResponse" element="ymws:GetMessageRawHeaderResponse"/>
+</message>
+<message name="FetchExternalMail">
+	<part name="FetchExternalMail" element="ymws:FetchExternalMail"/>
+</message>
+<message name="FetchExternalMailResponse">
+	<part name="FetchExternalMailResponse" element="ymws:FetchExternalMailResponse"/>
+</message>
+<message name="FlagMessages">
+	<part name="FlagMessages" element="ymws:FlagMessages"/>
+</message>
+<message name="FlagMessagesResponse">
+	<part name="FlagMessagesResponse" element="ymws:FlagMessagesResponse"/>
+</message>
+<message name="SendMessage">
+ <part name="SendMessage" element="ymws:SendMessage"/>
+</message>
+<message name="SendMessageResponse">
+ <part name="SendMessageResponse" element="ymws:SendMessageResponse"/>
+</message>
+<message name="SaveMessage">
+ <part name="SaveMessage" element="ymws:SaveMessage"/>
+</message>
+<message name="SaveMessageResponse">
+ <part name="SaveMessageResponse" element="ymws:SaveMessageResponse"/>
+</message>
+<message name="ResetSpamFilter">
+	<part name="ResetSpamFilter" element="ymws:ResetSpamFilter"/>
+</message>
+<message name="ResetSpamFilterResponse">
+	<part name="ResetSpamFilterResponse" element="ymws:ResetSpamFilterResponse"/>
+</message>
+<message name="BatchExecute">
+	<part name="BatchExecute" element="ymws:BatchExecute"/>
+</message>
+<message name="BatchExecuteResponse">
+	<part name="BatchExecuteResponse" element="ymws:BatchExecuteResponse"/>
+</message>
+<portType name="ymwsPortType">
+	<operation name="GetUserData">
+		<input message="tns:GetUserData"/>
+		<output message="tns:GetUserDataResponse"/>
+	</operation>
+	<operation name="SetUserData">
+		<input message="tns:SetUserData"/>
+		<output message="tns:SetUserDataResponse"/>
+	</operation>
+	<operation name="ListFolders">
+		<input message="tns:ListFolders"/>
+		<output message="tns:ListFoldersResponse"/>
+	</operation>
+	<operation name="CreateFolder">
+		<input message="tns:CreateFolder"/>
+		<output message="tns:CreateFolderResponse"/>
+	</operation>
+	<operation name="RenameFolder">
+		<input message="tns:RenameFolder"/>
+		<output message="tns:RenameFolderResponse"/>
+	</operation>
+	<operation name="EmptyFolder">
+		<input message="tns:EmptyFolder"/>
+		<output message="tns:EmptyFolderResponse"/>
+	</operation>
+	<operation name="RemoveFolder">
+		<input message="tns:RemoveFolder"/>
+		<output message="tns:RemoveFolderResponse"/>
+	</operation>
+	<operation name="GetMessage">
+		<input message="tns:GetMessage"/>
+		<output message="tns:GetMessageResponse"/>
+	</operation>
+	<operation name="SaveRawMessage">
+		<input message="tns:SaveRawMessage"/>
+		<output message="tns:SaveRawMessageResponse"/>
+	</operation>
+	<operation name="MoveMessages">
+		<input message="tns:MoveMessages"/>
+		<output message="tns:MoveMessagesResponse"/>
+	</operation>
+	<operation name="DeleteMessages">
+		<input message="tns:DeleteMessages"/>
+		<output message="tns:DeleteMessagesResponse"/>
+	</operation>
+	<operation name="ListMessages">
+		<input message="tns:ListMessages"/>
+		<output message="tns:ListMessagesResponse"/>
+	</operation>
+	<operation name="ListMessagesFromIds">
+		<input message="tns:ListMessagesFromIds"/>
+		<output message="tns:ListMessagesFromIdsResponse"/>
+	</operation>
+	<operation name="SearchMessages">
+		<input message="tns:SearchMessages"/>
+		<output message="tns:SearchMessageResponse"/>
+	</operation>
+	<operation name="GetMessageRawHeader">
+		<input message="tns:GetMessageRawHeader"/>
+		<output message="tns:GetMessageRawHeaderResponse"/>
+	</operation>
+	<operation name="FetchExternalMail">
+		<input message="tns:FetchExternalMail"/>
+		<output message="tns:FetchExternalMailResponse"/>
+	</operation>
+	<operation name="FlagMessages">
+		<input message="tns:FlagMessages"/>
+		<output message="tns:FlagMessagesResponse"/>
+	</operation>
+	<operation name="SendMessage">
+		<input message="tns:SendMessage"/>
+		<output message="tns:SendMessageResponse"/>
+	</operation>
+	<operation name="SaveMessage">
+		<input message="tns:SaveMessage"/>
+		<output message="tns:SaveMessageResponse"/>
+	</operation>
+	<operation name="ResetSpamFilter">
+		<input message="tns:ResetSpamFilter"/>
+		<output message="tns:ResetSpamFilterResponse"/>
+	</operation>
+	<operation name="BatchExecute">
+		<input message="tns:BatchExecute"/>
+		<output message="tns:BatchExecuteResponse"/>
+	</operation>
+</portType>
+<binding name="ymws" type="tns:ymwsPortType">
+	<SOAP:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+	<operation name="GetUserData">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="SetUserData">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="ListFolders">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="CreateFolder">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="RenameFolder">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="EmptyFolder">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="RemoveFolder">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="GetMessage">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="SaveRawMessage">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="MoveMessages">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="DeleteMessages">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="ListMessages">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="ListMessagesFromIds">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="SearchMessages">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="GetMessageRawHeader">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="FetchExternalMail">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="FlagMessages">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="SendMessage">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="SaveMessage">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="ResetSpamFilter">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+	<operation name="BatchExecute">
+		<SOAP:operation soapAction=""/>
+		<input>
+			<SOAP:body use="literal"/>
+			<SOAP:header message="tns:HumanVerificationRequest" part="HumanVerification" use="literal"/>
+		</input>
+		<output>
+			<SOAP:body use="literal"/>
+		</output>
+	</operation>
+</binding>
+<service name="ymws">
+	<port name="ymws" binding="tns:ymws">
+		<SOAP:address location="http://mail.yahooapis.com/ws/mail/v1.1/soap"/>
+	</port>
+</service>
+</definitions>

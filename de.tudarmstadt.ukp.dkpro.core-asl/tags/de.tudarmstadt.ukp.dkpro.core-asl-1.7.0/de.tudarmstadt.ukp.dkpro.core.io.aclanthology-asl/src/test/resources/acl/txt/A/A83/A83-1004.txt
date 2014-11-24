@@ -1,0 +1,455 @@
+A Robust P o r t a b l e N a t u r a l L a n g u a g e D a t a B a s e I n t e r 
+f a c e
+ Jerrold M. Ginsparg
+ Bell Laboratories Murray Hill, New Jersey 07974
+ 
+A BSTRA C T
+ This paper describes a NL data base interface which consists oF two parts: a 
+Natural Language Processor (NLP) and a data base application program (DBAP). The 
+NLP is a general pur!~se language processor which builds a formal representation 
+of the meaning of the English utterances it is given. The DBAP is an algorithm 
+with builds a query in a augmented relational algebra from the output of the 
+NLP. This approach yields an interface which is both extremely robust and 
+portable.
+ 
+where "colored", "'color" and "'house" are system primitives called concepts. 
+Each concept is an extended case frame, [Fillmore 2]. The meaning of each 
+concept to the system is implicit in its relation to the other system concepts 
+and the way the system manipulates it. Each concept has case preferences 
+associated with =IS cases. For example, the case preference of color is "color 
+and the case preference of coloredis "physical-object. The case preferences 
+induce a network among the concepts. For example, "color is connected to 
+"physical-object via the path: ['physical-object colored'colored color "color]. 
+In addition. "color is connected to "writing,implement, a refinement ot" 
+"physicalobject, by a path whose meaning is that the writing implement writes 
+with that color. This network is used by the NLP to determine the meaning of 
+many modifications, For example, "red pencil" is either a pencil which is red or 
+a pencil that writes red, depending on which path is chosen. In the absence of 
+contextual information, the NLP chooses the shortest path. In normal usage, case 
+preferences are often broken. The meaning of the broken preference involves 
+coercing the offending concept to another one via a path in the network. 
+Examples are: "Turn on the soup." "Turn on the burner that has soup on it." "My 
+car will drink beer." "The passengers in my car will drink beer"
+ 
+This paper describes an extremely robust and portable NL data base interface 
+which consists of two parts: a Natural Language Processor (NLP) and a data base 
+application program (DBAP). The NLP is a general purpose language processor 
+which builds a formal representation of the meaning of the English utterances it 
+is given. The DBAP is an algorithm with builds a query in an augmented 
+relational algebra from the output of the NLP. The system is portable, or data 
+base independent, because all that is needed to set up a new data base interface 
+are definitions for concepts the NLP doesn't have, plus what I will call the 
++data base connection", i.e,, the connection between the relations in the data 
+base and the NLP's concepts. Demonstrating the portability and the robustness 
+gained from using a general purpose NLP are the main subjects of this paper 
+Discussion of the NLP will be limited to its interaction with the DBAP and the 
+data base connection, which by design, is minimal. [Ginsparg 5] contains a 
+description of the NLP parsing algorithm.
+ 
+3. The Data Base Connection 2. NLP overview
+ The formal language the NLP uses to represent meaning is a variant of semantic 
+nets [Quillian 8]. For example, the utterances "The color of the house is 
+green," "The house's color is green." "Green ,~ the color that the house is." 
+would all be ~ransformed to: Consider the data base given by the following 
+scheme:
+ 
+Parts(pno,pname,color.cosl,weight) Spj( sno,pno,jno.quantity ,m, y ) Suppliers 
+and proiects have a number, )~ame and c~tV Parts ha'.,: a number, name, color, 
+cost and weight Supplier wl(~,,unphe,, a quanntYof parts pno to prolect /no in 
+month ,nor year
+ The data base connection has four parts:
+ 
+gl
+ 
+Isa: "colored Tense: present Colored: g2 Color: g3 lsa: "house Definite: the 
+Isa: "color Value: green
+ 
+I. Connecting each relation to the appropriate concept: Suppliers - > "supplier
+ 
+fi2. Connecting each attribute to the appropriate concept:
+ 
+leg., Spj(sno,pno,jno,cost,quantity)) depended on the supplier
+ 
+in which the cost ol a part
+ 
+4. C r e a t i n g pseudo relations Pseudo Cities jcity,scity This creates a 
+pseudo relation, Cities(cname), so that the query building algorithm can treat 
+all attributes as if they belong to a relation. The query produced by the system 
+will refer to the Cities relation. A postprocessor is used to remove references 
+to pseudo relations from the final query. Pseudo relations are important because 
+they ensure uniform handling of attributes. With the pseudo Cities relation, 
+questions like "Who supplies every city? = and "List the cities." can be treated 
+identically to "Who supplies every project'?" and "List the suppliers." The 
+remainder of the data base connection is a set of switches which provide 
+information on how to print out the relations. whether all proper nouns have 
+been defined or are to be inferred. whether relations are multivalued, etc. The 
+switch settings and the four components above constitute the entire data base 
+connection, Nothing else iS needed. The network of concepts in the N L P should 
+only be augmented for a particular data base; never changed. Yet different data 
+base schemes will require different representations for the same word. For 
+example, depending on the data base scheme, it could be correct to represent 
+"box" as either, gl g2 g3 [sa: "part Conditions: "named(gl,box) Isa: "container 
+Conditions: "named(g2.box) [sa: "box
+ 
+3. Capturing the information implicit in each relation: 
+Parts(pno,pname,color,cost,weight ) "indexnumberp i n d e x n u m b e r - > pno 
+n u m b e r e d - > Parts "named n a m e - > pname n a m e d - > Parts "colored 
+color - > color c o l o r e d - > Parts
+ 
+costobj - > Parts "weighs w e i g h t - > weight w e i g h t o b j - > Parts 
+Projects(jno.jnamedcity) "indexnumberp indexnumber - > jno n u m b e r e d - > 
+Projects "named name - > jname n a m e d - > Projects "located location - > 
+jetty located - > Prolects Suppliers(sno,sname,scity) "indexnumberp indexnumber 
+- > sno n u m b e r e d - > Suppliers "named name - > sname n a m e d - > 
+Suppliers "located location - > sctty located - > Suppliers %pl 
+O~no.pno.lno.quant Hv.m.y ) "supply supplier - > '.;no supplied - > pno suppliee 
+- > mo (cardinality-of pno) - > quantity u m e - > m.y "spend spender - > 1no s 
+p e n d f o r -> pno amount (" cost quantity) The a m o u m case of "spend maps 
+to a c o m p u t a t i o n rather than a ,~mgle a t t r i b u t e It' all the 
+attributes in the c o m p u t a h o n are not present ,n the relation being 
+defined, the query building program ioms ,n the necessary extra relations. So 
+the definition of "spend ~mrks equally well irl tile example scheme as well as 
+in a scheme 26
+ 
+The solution is to define each word to map to the lowest possible concept. W h e 
+n a concept is e n c o u n t e r e d that has a data base relation associated 
+with )t. there is no problem. If there )s no relauon associated with a concept, 
+the N L p searchs For a concept that d o e s correspond to a relation and is 
+also a generalization ot" the concept in question. I f one is found, it is used 
+with an appropriate condilion, usually "tilled or "named. So "box" has a 
+definition which m a p s to "box. In the data base c o n n e c t i o n given 
+above. "box" would be instantiated as a "=part" since " ' b o x " is a r e f i n 
+e m e n t of "'part" and no relation maps to "box,"
+ 
+Using the Connection
+ 
+The information in the data base connection ts primarily used m building the 
+query (section .~). But It IS ~llso used Io augment the knowledge base of Ihe N 
+L P The data base connection is used to overwrite the NLP's ca~e preferences. 
+Since I o c a w d - > S u p p h e r s ()r Projects. the preference ot" localed 
+ts spec)fied to "suppliers or "protects. This enables the NLP to interpret the 
+first noun group )n "Do ,m', suppliers that supply widgets located nl london 
+also supply ,~cre',vs )" as "'suppliers in London that supply widgets" rather 
+than "supphers that ,;upph London wldgets" This )s in contrast to [Gawron 31 
+which u'..;es ,i separate "disambiguator" phase to ehmlnale parses that do 11()i 
+make sense =n the conceptual scheme of the dala base. Tile additional preference 
+informamm supplied bv the data base connection is used to induce coercions 
+(section 2.) thai would rlot be made in the absence of the connection (~r under 
+,mother data
+ 
+fibase scheme. "Who supplies London" does not break any real world preferences, 
+but does break one of the preferences induced by this data base scheme, namely 
+that Suppliee is a "project. London. a "city, is coerced to "project via the 
+path [*project located *located /ocanon °cityl and the question is understood to 
+mean "Who supplies projects which are in London." As mentioned in Section 2., 
+the NLP determines the meanin~ of many modifications by searching for 
+connections in a semantic net. The data base connection is used to augment and 
+highlight the existing network of the NLP. I f the user says, "What colors do 
+parts come in?', the NLP can infer that the meaning of "come-in" intended by the 
+user is "colored since the only path through the net between "color and "part 
+derived from the case preferences induced by the data base connection is ['part 
+colored "colored color "color] Similarly, when given the noun group "London 
+suppliers" the meaning is determined by tracing the shortest path through the 
+highlighted net, ['supplier located'located Iocanon "city] The longer path 
+connecting "supplier and "city, ['supplier supplier "supply suppliee *project 
+located "location location *city] which means "the suppliers that supply to 
+london projects" is found when the NLP rejects the first meaning because of 
+context, If the user says "What are the locations of the London suppliers" the 
+system assumes the second meaning since the first (in the domain of this data 
+base scheme) leads to a tautological reading. The NLP is able to infer that "The 
+locations of the suppliers located in London" is tautological while "The 
+locations of the suppliers located in England" is not, because the data base 
+connection has specified "located to be a single valued concept with its 
+Iocarton case typed to "city. I f the system were asked for the locations of 
+suppliers in England, and it knew England was a country, the question would be 
+interpreted as "the cities of the suppliers that are located in cities located 
+in England."
+ 
+The NLP treats most true-l'aise questions with indefinites as requests for the 
+data which would make the statement true. The question's meaning is "to show the 
+subset of london proiects that are supplied by Blake." The query building 
+algorithm builds up the query recursively Given an instantiated concept with 
+cases, =t expands the contents of each case and links the results together with 
+the relation corresponding to the concept. Given an instantiated concept with 
+conditions, it expands each condition. For the example, we have.
+ 
+Expand gl Expand g2, the Element of gl
+ Expand gg, the Condition of g2.
+ Expand g3, the Supplier case of gg. Expand g9, the Condition of g3. From the 
+data base connection, a "named whose named case is a *supplier is realized by 
+the Suppliers relation using the sname attribute So we have, g9 - select tram 
+Suppliers where sname -- blake From the data base connection, a "supply is 
+realized by the Spj relation. This results in, gga -- project]no/i'om.joinSpj to 
+g9
+ 
+g8 -- joingga toProjects g8 is the projects supplied by Blake.
+ Expand 84, the set gl is a subset of, by expanding its element. g6 Expand glO. 
+the Condition of gb Expand g7, the location case of glO yielding g l l -- select 
+#am Cities wherecname - london
+ 
+A "located with a "project in the Iocotedcase ~s realized by the Projects 
+relation using the ]city attribute. So we have. glOa -- join Projects Io gl I 
+where]city = cname glOb - proiect ]no /'romglOa glO - ]oinglOb toProjects g[0 is 
+the projects in London.
+ Intersect the expansions of g2 and g4 and project the prolect names. gl3 = 
+pro/eel]name lrom imersectton g 8 glO
+ 
+5. A trtee of the query building algorithm.
+ The query budding algorithm is illustrated by tracmg its operation on the 
+question, "Does blake supply any prolects in london'?"
+ 
+The entire query is,
+ 
+The NLP's meaning representation I'or this question ts shown below. gO Isa: 
+"show g5 Isa: "name Value: blake g9 Isa: "named Tense: present Named: g3 Name: 
+g5 Isa: "tocated Tense: present Located: gb Location: g7 Isa: "named Tense: 
+present Named: g7 Name: g12 Isa: *name Value: london
+ 
+Tense: present Toshow: g l gO
+ 
+[sa: "set Element: ¢2 Subset-of': g4 Isa: "protect
+ 
+Isa: "project Element-of: g4 Conditions: glO glO lsa: city Conditions: gll Isa: 
+"supply Tense: Present Suppler: g3 Suppliee: g2 gl [
+ 
+g9 = select/romSuppliers where s n a m e = blake g8a -- /~'oiecrjno #om ioin Spj 
+to g9 g8 = loin gga to Projects gl0 = select #am Projects where icily = london g 
+13 -- prelect iname lrom mter'~e('tlo~t g8 g I0 where the: extra loin resulting 
+f'rom the pseudo (:h=e~ relation ha', been rernoved by the post processor 
+(section 3 ) Entirely as a side effe,'t of the way the query rs generated, the 
+-,,,,,tern can easily correct any l'alse assumptions made by the u~,,2r [Kaplan 
+71. For example, if there were no projects in London. gill would be empty and 
+system would respond, generating Irom the instantiated concept glO li.e., the 
+names used in query correspond to the names used in the knowledge representatmnL 
+"There arc no suppliers located in London." No additional "'.=oiated 
+presupposition" mechanism is requ+red.
+ 
+The remainder of this section discusses several aspects o£ the query building 
+process that the trace does not show. Negations are handled by introducing a set 
+difference when necessary If the example query were "Does Blake supply any 
+projects that aren't in London?", the expansion of g7 would have been.
+ 
+I f we ask. "Who frequents a bar that serves a beer John likes?". we get the 
+following query. 81 82 g3 84 85 =" select from Likes where drinker - john - 
+project beer l'rom g 1 - .join Serves to 82 =" project bar I~om g3 "" join 
+Frequents to 84
+ 
+Expand g7. the location case of glO yielding g i l a - select [romCities 
+wherecname -- london gl 1 - difference o f Cities a n d g l la
+ Conjunctions are handled by introducing an an intersection or union. I f the 
+example query were "Does Blake supply any projects in London or Paris'?', the 
+/ocanon case of g10 would have. been the conjunction 813.
+ 
+I f we ask "Who frequents a bar that serves a beer that he likes?" the correct 
+query, is.
+ 
+isa "conjunction Type: or Conjoins: g7 g14 [sa: "city Conditions: g l 5 lsa: 
+"named Named: g15 Name: g l 6 Isa: "name Value: paris
+ 
+glb
+ 
+In the first query "beer" was the only attribute projected from g l [n the 
+second, the system projected both "beer" and "drinker", because in expanding "a 
+beer he likes" it needed to expand an instantiated concept (the one representing 
+"who") that was already being expanded. All of these cases interact gracefully 
+with one another. For example. there is no problem in handling "Who supplies 
+every project that is not supplied by blake and bowles".
+ 
+The result of expanding gl3 would be,
+ 
+[n general, "or" becomes a union and "and" becomes an intersection. However, if 
+an "and" conjunction is in a single valued case (information obtained from the 
+data base connection), a union is used instead. Thus "Who supplies london and 
+paris?" is interpreted as "Who supplies both London and Paris'?" and "Who is in 
+London and Pans?" is interpreted as "Who is in London and who ~s m Paris?" )n 
+the example data base scheme.
+ 
+6. Advantages of this approach
+ The system can understand anything it has a concept about. regardless o f 
+whether the concept is attached to a relation in the data base scheme. In the 
+Suppliers data base from Secuon 4., parts had costs and weights associated with 
+them, but not sizes. I f a user asks "How big are each of the parts?" and the 
+interface has a "size primitive (which it does), the query building process wdl 
+attempt to find the relation which "size maps to and on fading wdl report back 
+to the user. "There is no information in the data base about the size of the 
+parts." This gives the user some informatmn about the what the data base 
+contains, An answer like "1 don't know what "big" means." would leave the user 
+wondering whether size information was in the data base and obtainable if only 
+the "right" word was used. The system can interpret user statements that are not 
+queries. If the user says "A big supplier is a supplier that supplies more than 
+3 projects" the NLP can use, the definition qn answering later queries. The 
+definition is not made on a "string" basis e.g., substttuting the words of one 
+side of the definition for the other Instead. whenever the query building 
+algorithm encounters an mstantiated concept that is a supplier wnh the condition 
+"size~x. big) it builds a query substnuting the condiuon from the definition 
+that it can expand as a data base query Thus the .~vstern can handle "big london 
+suppliers" and answer "Which sunpliers are big" which it couldn't if ~t were 
+doing strlct string substitution. This Facility can be used to bootstrap common 
+definitions In ,~ commercial flights application, with data base scheme, 
+Flights(fl#,carrier,from.to,departure,arrival.stops.cost ) the word "nonstop" is 
+defined to the system in English as, "A nonstop flight is a night that does not 
+make any stops " and then saved along wuh the rest of the system's defimt~ons. 
+28
+ 
+Quantifiers are handled by a post processing phase. "Does blake supply every 
+project in London?" is handled identically to "Does Blake supply a prolect in 
+London'?" except that the expansion of "projects m London" is marked so that the 
+post processor will be called. The post processor adds on a set of commands 
+which check that the set difference of London projects and London prolects that 
+Blake supplies is empty. The rasulhn 8 query is. gl = =_2 g3 = g4 = =_5 = gO = 
+g7 = g8 = ~e/ect lrom Suppliers w/weresname = blake ~elect l m m Projects where 
+jcity - london /otnSpl togl tomg3 to g2 protect jno from g2 protect ino /tom g4 
+{hl]~'rem'e org5 andgO empn, g7
+ 
+] h e first tour commands are the query for "Does Blake supply a llrolect m 
+London'?". The last tour check that no project in London is not supplied by 
+Blake. -\ minor modification is needed to cover cases in which the query 
+building algorithm is expanding an instantiated concept that refercnces an 
+instuntiated concept that is being expanded in a higher recursmve call The 
+following examples illustrate this. Consider the data base scheme below, taken 
+from [Ullman ql.
+ 
+Coercions (section 2.) can be used solve problems that may require inferences in 
+other systems. [Grosz 6] discusses the query "Is there a doctor within 200 miles 
+of Philadelphia" in the context of a scheme in which doctors are on ships and 
+ships have distances from cities, and asserts that a system which handles this 
+query must be able to inter that if a doctor is on a ship, and the ship is with 
+200 miles of Philadelphia, then the doctor is within 200 miles of Philadelphia. 
+Using coercions, the query would be understood as "is there a ship with a doctor 
+on it that is within 200 miles of Philadelphia?', which solves the problem 
+immediately. Since the preference information is only used to choose among 
+competing interpretations, broken preferences can still be understood and 
+responded to. The preference for the supplier case is specified to ·supplier but 
+if the user says "How many parts does the sorter project supply?" the NLP will 
+find the only interpretation and respond "projects do not supply parts, 
+suppliers do." Ambiguities inherent in attribute values are handled using the 
+same methods which handles words with multiple definitions. For example, 1980 
+may be an organization number, a telephone extension, a number, or a year. The 
+NLP has a rudimentary (so far) expert system inference mechanism which can 
+easily be used by the DBAP. One of the rules it uses is "If x is a precondition 
+of y and z knows y is true then z knows x was and may still be true" One of the 
+['acts in the NLP knowledge base is that being married is a precondition of 
+being divorced or widowed. I f a user asks "Did Fred Smith used to be married?" 
+in a data base with the relation Employees(name, marital-status) the system can 
+answer correctly by using its inference mechanism. The exact method is as 
+follows. The data base application receives the true-false question: "Fred Smith 
+was married and Fred Smith is no longer married"
+ 
+The system handles all the examples in this paper as well as a wide range of 
+others (Appendix A.). Several different data bases schemes have been connected 
+to the system for demonstrations, including one "real data base" abstracted from 
+the on-line listing of the Bell Laboratories Company Directory.
+ 
+9. Since the data base includes only current marital status information. the 
+only way to answer the first part of the question is to inl'cr it from some 
+other information in the data base. The data base application sends the query to 
+the NLP inference mechanism which would ordinarily attempt to answer it by 
+matching it against its knowledge base or by finding a theorem which would gives 
+it something else to match ['or When called by the data base application, the 
+inference mechanism simply uses its rules base to decide what it should match 
+['or, and then returns to the data base program. In this, example, the inference 
+mechanism receives "Fred Smith was married" and using the precondition rule 
+mentioned above, returns to the data base program, "Is Fred Smith divorced" or 
+"is Fred Smith widowed", which can be answered by the data base. The DBAP can 
+call the inference mechanism recursively if necessary.
+ 
+Appendix A: Sample Questions and Answers
+ · does every department head in 1135 have an office in holmde[? No. all heads 
+Ihat work For center number 11.]5 are not located in an office in ho · who isn't 
+alles,h g is the head not located in an ofi~ce in ho that works for center 
+number [ 135 · who has been with us for longer than fred smith?
+ 
+7. Implementation Status and Details
+ The DBAP ~s fully implemented and debugged. The NLP is ~mplemented and sail 
+growing. Both are implemented in Franz Lisp. a dialect of LISP Language 
+processing and query generai~on are performed m virtually real time (average 1-3 
+cpu seconds) on a Vax I 1-780 The system ~s intended to be used with u Data Base 
+Management system. The interface between the DBAP and the I-)BMS is a 
+,,tralghtforward translator from relational algebra to the query language of Ihe 
+DflMS I have written a Ir;.mslator I'or Polaris [Gielan 41.
+ 
+There are no employees that have worked ('or you ['or more than the length or" 
+the time fred smith has worked for ~.'~'~u · list the employees who used to be 
+married and are not married
+ now,
+ 
+paul rochester, verlon biggs and willie davis are the empin~ee,~ that were 
+married and that are not married now.
+ 
+fi· production between february 1979 and april 1981
+ 
+· how much does the m i x e r project spend on widgets f r o m blake 440 is how 
+much was spent by the m i x e r proiect on widgets supplied by blake to it · how 
+much did the mixer project spend on each part widget - 649 box - 3 " print the 
+drinkers that frequent only bars that serve some beer that they like george and 
+john are the drinkers that frequent only bars that serve some beers liked by 
+them
+ 
+l l 3 5 2 - 888 - widget - april 1981 11352 - 133 - screw - jan 1980 11354 - 133 
+- widget - ian 1980 · w h o flies b e t w e e n l o n d o n a n d paris twa a n 
+d pan a m are the a i r l i n e s that fly f r o m l o n d o n into paris · get 
+m e a flight to paris f r o m l o n d o n b e f o r e 3 p m
+ 
+a flight before 1500 into paris f r o m london: )1# airline departure arrival 
+plane stops price
+ 
+dclO
+ 
+the latest flight o u t oJ" l o n d o n
+ 
+the latest flight f r o m london: I1# airline to departure arrival plane stops 
+price
+ I twa paris 1500 1700 dclO 3 280 "
+ 
+· who supplies more than two projects howles and blake are the suppliers that 
+supply to more than 2 proiccts · who supplies more than the boss project the 
+suppliers that supply to the projects besides the boss project ,ire: decker, 
+blake, howl,cs and white
+ · w h o supplies more prolects than Decker howles and blake are the suppliers 
+that supply to m o r e projects than the number o f Lhe projects that are 
+supplied to by decker
+ 
+· list the suppliers who supply projects m cities they are not in the suppliers 
+that supply to the proiects Iocuted in the cities in which they are not located 
+in are: decker, blake, h o w l e s and while · how manv parts does white supply 
+l'here are 9 parts supplied by white
+ 
+many different parts does
+ 
+while
+ 
+supply
+ 
+There are 2 klnds o f parts supplied by white
+ 
+what are they
+ 
+'iupplies the mosl kinds o f paris
+ 
+h¢~wles ~s the ,;upplier lh;.ll supplies the most kinds of pilrts · how many 
+does it supply
+ 
+There are 4 kinds rH' parts supplied by the suppliers that supply
+ lhe most kinds of parts
+
+References
+
+1. Cohen, P., Perrault C, and Allen J., Beyond Question Answering, Report No. 4644, Bolt Beranek and Newman
+ 
+2. Fillmore C., The Case for Case, in Universals in Linguistic Theory, Eds., Bach E, and Harms, R., Holt, Rineheart and Winston, New York, 1968. 
+
+Gawron M. G., et. al., Processing English with a Generali:ed Phrase Structure Grammar, 20th Annual Meeting of the Association for Computational Linguistics, June 1982. 
+
+Gielan D., Polaris User Manual. New York Telephone Company, January 1981, 
+
+Ginsparg, J., Natural Language Processing in an Automatic Programming Domain, Memo 316, Stanford Artificial Intelligence Laboratory, Stanford University, 1978. 
+
+Grosz, B., Transportable Natural-Language Interfaces: Problems and Techniques, 20th Annual Meeting of the Association for Computational Linguistics, June 1982. 
+
+Kaplan, S. J., Cooperative Responses li'om a Portable Natural Language Dara Base Query Systei~ Ph.D. dissertation, Department o f Computer and information Sciences, University of Pennsylvania, Phila., Pa., 1979. 
+
+Quillian, M. R., Semantic Memory, in Minsky, M.. Ed.. Semantic Information Processing, The M.I.T Press, 1968. 
+
+Ullman, J., Principles of Database Systems, Computer Science Press, Potomac, Maryland, 1980.
+ 
+ 
