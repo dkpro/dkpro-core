@@ -1,7 +1,0 @@
-(
-  (SBARQ (`` ``) (CC And)
-    (WHNP (WP what))
-    (SQ (VBP do)
-      (NP-SBJ (PRP you))
-      (VP (VB know)))
-    (. ?) ('' '')))
