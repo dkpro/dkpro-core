@@ -51,6 +51,7 @@ public class Web1tResourceTest
         AnalysisEngineDescription desc = createEngineDescription(Annotator.class,
         		Annotator.MODEL_KEY, createExternalResourceDescription(
         				Web1TFrequencyCountResource.class,
+        				Web1TFrequencyCountResource.PARAM_LANGUAGE, "en",
                         Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
                         Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "2"));
 
