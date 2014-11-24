@@ -39,7 +39,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasResourceCollectionReader_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -63,7 +63,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>CPOSTAG - <b>(unused)</b></li>
  * <li>POSTAG - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the
  * language, or identical to the coarse-grained part-of-speech tag if not available.</li>
- * <li>FEATS - <b>(Morpheme)</b> Unordered set of syntactic and/or morphological features (depending
+ * <li>FEATS - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
  * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
  * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
  * ('0'). Note that depending on the original treebank annotation, there may be multiple tokens with
@@ -92,7 +92,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
@@ -230,8 +230,9 @@ public class Conll2006Reader
 
                 // Read morphological features
                 if (!UNUSED.equals(word[FEATS]) && readMorph) {
-                    Morpheme morphtag = new Morpheme(aJCas, token.getBegin(), token.getEnd());
-                    morphtag.setMorphTag(word[FEATS]);
+                    MorphologicalFeatures morphtag = new MorphologicalFeatures(aJCas,
+                            token.getBegin(), token.getEnd());
+                    morphtag.setValue(word[FEATS]);
                     morphtag.addToIndexes();
                 }
 
