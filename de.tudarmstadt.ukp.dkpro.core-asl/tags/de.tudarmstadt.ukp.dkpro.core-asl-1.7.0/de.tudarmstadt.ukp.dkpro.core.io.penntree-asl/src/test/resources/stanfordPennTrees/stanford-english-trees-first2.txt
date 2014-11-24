@@ -1,0 +1,16 @@
+( (S-HLN 
+    (NP (NNP Al) (NNP Qaida))
+    (VP (VBZ Endorses)
+      (NP (NNP George) (NNP W.) (NNP Bush))
+      (PP (IN for)
+        (NP (NN President))))))
+
+( (S-HLN
+    (NP-SBJ-1 (NNP Al-Qaeda))
+    (VP (VBZ tries)
+      (S (NP-SBJ (-NONE- *-1))
+        (VP (TO to)
+          (VP (VB incite)
+            (NP (JJR more) (NN violence))
+            (PP (IN in)
+              (NP (NNP Iraq)))))))))

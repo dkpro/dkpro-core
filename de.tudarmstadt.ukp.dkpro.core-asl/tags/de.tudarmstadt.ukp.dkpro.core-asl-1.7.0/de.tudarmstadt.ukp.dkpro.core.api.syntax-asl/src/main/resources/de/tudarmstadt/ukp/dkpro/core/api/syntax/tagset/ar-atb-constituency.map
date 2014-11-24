@@ -1,0 +1,57 @@
+# Penn Arabic Treebank syntactic tagset
+#
+# Source: http://www.ircs.upenn.edu/arabic/Jan03release/TBParsing-info.txt
+
+__META_TYPE_BASE__=de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.
+
+# S	sentence
+S=S
+# NP	noun phrase
+NP=NP
+# VP	verb phrase
+VP=VP
+# PP	prepositional phrase
+PP=PP
+# SBAR	S-bar (subordinate clause, complementizer or WH- and sentence)
+SBAR=SBAR
+# SBARQ	S-bar that is a question
+SBARQ=SBARQ
+# SQ	S that is a question
+SQ=S
+# NX	noun head in certain complex coordination contexts
+NX=NX
+# PRN	parenthetical
+PRN=PRN
+# PRT	particle
+PRT=PRT
+# QP	quantity phrase (multi-word numbers)
+QP=QP
+# ADJP	adjective phrase
+ADJP=ADJP
+# ADVP	adverb phrase
+ADVP=ADVP
+# FRAG	fragment
+FRAG=FRAG
+# WHNP	WH- noun phrase
+WHNP=WHNP
+# WHPP	WH- prepositional phrase
+WHPP=WHPP
+# WHADJP	WH- adjective phrase
+WHADJP=WHADJP
+# WHADVP	WH- adverb phrase
+WHADVP=WHADVP
+# CONJP	conjunction phrase (multi-word conjunction)
+CONJP=CONJP
+# INTJ	interjection
+INTJ=INTJ
+# NAC	Not-A-Constituent (mostly rightward moved conjuncts with conjunction)
+NAC=NAC
+# UCP	Unlike-Coordinated-Phrase (dominates coordination of NP and PP, e.g.)
+UCP=UCP
+# X	unknown, technical problem, etc.
+X=X
+
+#
+# Categories used by DKPro internally
+#
+ROOT=ROOT

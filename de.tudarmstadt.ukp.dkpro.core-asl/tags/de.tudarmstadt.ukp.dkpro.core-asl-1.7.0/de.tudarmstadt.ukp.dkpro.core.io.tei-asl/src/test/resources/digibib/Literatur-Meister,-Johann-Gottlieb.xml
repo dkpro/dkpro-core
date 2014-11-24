@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<teiCorpus xmlns:jxb="http://java.sun.com/xml/ns/jaxb" xmlns:tei="http://www.tei-c.org/ns/1.0"
+           xmlns="http://www.tei-c.org/ns/1.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:tns="http://textgrid.info/namespaces/metadata/core/2010"
+           xmlns:tgl="http://textgrid.info/namespaces/metadata/language/2010"
+           xmlns:tgs="http://textgrid.info/namespaces/metadata/script/2010"
+           xmlns:tgr="http://textgrid.info/namespaces/metadata/agent/2010">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title type="main">Werke</title>
+            <author>Meister, Johann Gottlieb</author>
+         </titleStmt>
+         <publicationStmt>
+            <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Meister, Johann Gottlieb: Element 00001 [2011/07/11 at 20:31:04]</idno>
+            <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+               <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+               <p>
+                  <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+               </p>
+               <p>
+                  <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+               </p>
+               <p>
+                  <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+               </p>
+            </availability>
+         </publicationStmt>
+      
+         <sourceDesc>
+            <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+               <author key="pnd:129170453">Meister, Johann Gottlieb</author>
+            </bibl>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   
+      
+   
+
+         
+         
+
+
+
+
+
+         
+            <teiCorpus xml:id="tg1" n="/Literatur/M/Meister, Johann Gottlieb">
+      <teiHeader n="work:no">
+         <fileDesc>
+            <titleStmt>
+               <title>Meister, Johann Gottlieb</title>
+            </titleStmt>
+            <publicationStmt>
+               <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Meister, Johann Gottlieb: Element 00002 [2011/07/11 at 20:31:04]</idno>
+               <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+                  <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                  <p>
+                     <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                  </p>
+                  <p>
+                     <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+                  </p>
+                  <p>
+                     <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                  </p>
+               </availability>
+            </publicationStmt>
+            <sourceDesc>
+               <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+                  <author key="pnd:129170453">Meister, Johann Gottlieb</author>
+               </bibl>
+            </sourceDesc>
+         </fileDesc>
+      </teiHeader>
+      
+               
+                  
+               
+               
+               
+               <teiCorpus xml:id="tg2" n="/Literatur/M/Meister, Johann Gottlieb/Werk">
+         <teiHeader n="work:no">
+            <fileDesc>
+               <titleStmt>
+                  <title>Werk</title>
+               </titleStmt>
+               <publicationStmt>
+                  <idno xmlns:xi="http://www.w3.org/2001/XInclude" type="FileCreationTime">Meister, Johann Gottlieb: Element 00003 [2011/07/11 at 20:31:04]</idno>
+                  <availability xmlns:xi="http://www.w3.org/2001/XInclude">
+                     <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                    davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                    www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                    Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                    Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                    allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                     </p>
+                     <p>
+                        <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                    Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                    allgemeinverständlicher Sprache </ref>
+                     </p>
+                     <p>
+                        <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                     </p>
+                  </availability>
+               </publicationStmt>
+               <sourceDesc>
+                  <bibl xmlns:xi="http://www.w3.org/2001/XInclude">
+                     <author key="pnd:129170453">Meister, Johann Gottlieb</author>
+                  </bibl>
+               </sourceDesc>
+            </fileDesc>
+         </teiHeader>
+         
+                  
+                     
+                  
+                  
+                  
+                  <TEI xml:id="tg3"
+              n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge">
+            <teiHeader xmlns:fn="http://www.w3.org/2005/xpath-functions"
+                       xmlns:xi="http://www.w3.org/2001/XInclude"
+                       xmlns:a="http://www.textgrid.info/namespace/digibib/authors">
+               <fileDesc>
+                  <titleStmt>
+                     <title>Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge</title>
+                  </titleStmt>
+                  <publicationStmt>
+                     <idno type="FileCreationTime">Meister, Johann Gottlieb: Element 00004 [2011/07/11 at 20:31:04]</idno>
+                     <availability>
+                        <p> Der annotierte Datenbestand der Digitalen Bibliothek inklusive Metadaten sowie
+                                   davon einzeln zugängliche Teile sind eine Abwandlung des Datenbestandes von
+                                   www.editura.de durch TextGrid und werden unter der Lizenz Creative Commons
+                                   Namensnennung 3.0 Deutschland Lizenz (by-Nennung TextGrid, www.editura.de) veröffentlicht. Die
+                                   Lizenz bezieht sich nicht auf die der Annotation zu Grunde liegenden
+                                   allgemeinfreien Texte (Siehe auch Punkt 2 der Lizenzbestimmungen). </p>
+                        <p>
+                           <ref target="http://creativecommons.org/licenses/by/3.0/de/legalcode">Lizenzvertrag</ref>
+                        </p>
+                        <p>
+                           <ref target="http://creativecommons.org/licenses/by/3.0/de/"> Eine vereinfachte
+                                   Zusammenfassung des rechtsverbindlichen Lizenzvertrages in
+                                   allgemeinverständlicher Sprache </ref>
+                        </p>
+                        <p>
+                           <ref target="http://www.textgrid.de/Digitale-Bibliothek">Hinweise zur Lizenz und zur Digitalen Bibliothek</ref>
+                        </p>
+                     </availability>
+                  </publicationStmt>
+                  <notesStmt>
+                     <note>
+                              [Meister, Johann Gottlieb:] Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge. Aus dem Lat. ins Teutsche übers. von M. M. [d.i. Johann Gottlieb Meister]. Dresden, Leipzig: Johann Christoph Miethen, 1702.
+                           </note>
+                  </notesStmt>
+                  <sourceDesc>
+                     <biblFull>
+                        <titleStmt>
+                           <title>[Meister, Johann Gottlieb:] Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge. Aus dem Lat. ins Teutsche übers. von M. M. [d.i. Johann Gottlieb Meister]. Dresden, Leipzig: Johann Christoph Miethen, 1702.</title>
+                           <author key="pnd:129170453">Meister, Johann Gottlieb</author>
+                        </titleStmt>
+                        <extent>1-</extent>
+                        <publicationStmt>
+                           <date when="1702"/>
+                           <pubPlace>Leipzig</pubPlace>
+                        </publicationStmt>
+                     </biblFull>
+                  </sourceDesc>
+               </fileDesc>
+               <profileDesc>
+                  <creation>
+                     <date notBefore="1665" notAfter="1699"/>
+                  </creation>
+                  <textClass>
+                     <keywords scheme="http://textgrid.info/namespaces/metadata/core/2010#genre">
+                        <term>other</term>
+                     </keywords>
+                  </textClass>
+               </profileDesc>
+            </teiHeader>
+            <text>
+               <front>
+                  <div type="front">
+                        <milestone unit="sigel" n="Meister-Untersuchung" xml:id="tg3.4.1"/>
+
+
+
+                        <head type="h4" xml:id="tg3.4.2">
+                           <pb type="start" n="1" xml:id="tg3.4.2.1"/>
+[Johann Gottlieb Meister]</head>
+
+
+                        <head type="h2" xml:id="tg3.4.3">Curieuse Untersuchung des Solennen-Convents der Hexen</head>
+
+                        <head type="h4" xml:id="tg3.4.4">Auf dem Brockels-Berge</head>
+
+                        <head type="h4" xml:id="tg3.4.5">Aus dem Lateinischen ins Deutsche übersetzet</head>
+                        <head type="h4" xml:id="tg3.4.6">von M.M.</head>
+
+                        <pb n="1" xml:id="tg3.4.7"/>
+                        <pb type="start" n="3" xml:id="tg3.4.8"/>
+                     </div>
+               </front>
+               <body>
+                     
+                        
+                     
+                     
+                     
+                     
+                     
+                     <div subtype="work:no" xml:id="tg4"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/1.">
+                        <div>
+                           <desc>
+                              <title>1.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg4.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg4.2.1">I.N.I.</head>
+
+                              <head type="h4" xml:id="tg4.2.2">§. 1.</head>
+
+                              <p xml:id="tg4.2.3">Es haben die lieben Alten der sel. Jungfer <hi rend="italic" xml:id="tg4.2.3.1">Walpurgis</hi> zu Ehren den ersten Tag des Mäy-Monats im Calender <hi rend="italic" xml:id="tg4.2.3.2">consecri</hi>ret / wiewohl auch einige an diesen Tag die Nahmen derer beyden Apostel Philippi und Jacobi pflegen zu setzen. Nun gehet aber ein Geschrey / daß in der kurtz vorhergehenden Nacht der Teufel mit seinen getreuen Unterthanen denen Hexen des gantzen Teuschlandes einen <hi rend="italic" xml:id="tg4.2.3.3">Solennen</hi>-Reichs-Tag halten solle / da sie sich ihm aufs neue wiederum verpflichten /und ihm gleichsam huldigen müssen. Da man denn bey angehender Abends-Zeit an unterschiedenen Oertern / sonderlich auf denen Dörffern gemerchet / daß die Mägde allerley Laub und Kräuter / meistens aber den Hollunder zusammen tragen / Tisch / Betten /Fenster / Ställe u. andere Oerter damit bezeichnen /auch wohl drey <pb n="3" xml:id="tg4.2.3.4"/>
+Creutze darzu schreiben / damit die vorbeyfahrende Hexen / nach ihrer Einfalt / ihnen nicht schaden mögen. Die Sache wird werth seyn / ob sie gleich euserlich etwas lächerlich scheinet / zu untersuchen und den Leser ein Stündgen Zeit zu seinen Nutzen zu ver<hi rend="italic" xml:id="tg4.2.3.5">passi</hi>ren.</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg5"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.">
+                        <div>
+                           <desc>
+                              <title>2.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg5.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg5.2.1">§. 2.</head>
+
+                              <p xml:id="tg5.2.2">Ehe wir aber zur Sache selbsten schreiten / und dieselbe beleuchten / wollen wir kürtzlich die gantze Beschaffenheit dieses <hi rend="italic" xml:id="tg5.2.2.1">Convents,</hi> wie man insgemein darvon saget / erzehlen. Es soll sich einsmahls eine Hexe dem Teufel mit einem Eydschwur verbunden / und nach vollbrachter Verbindung von den Obersten der Teufel einen gemeinen Teufel zu ihren Diener bekommen haben / welchen sie hernachmahls ihr Märtinchen genennet habe. Dieses Martinchen hat sie nun nicht allein auf solche <hi rend="italic" xml:id="tg5.2.2.2">Conventus</hi>
+                                 <ref type="noteAnchor" target="#tg5.2.5">
+                                    <anchor xml:id="tg5.2.2.3"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg5.2.2.4.1">1</hi>
+                                 </ref> sich einzustellen sehr angetrieben / auch selbsten warhafftig hingeführet /sondern auch / wenn sie nicht gerne gewolt / aufs grausamste gemartert. Wollen sich aber die Hexen zu solchen <hi rend="italic" xml:id="tg5.2.2.5">
+                                    <pb n="4" xml:id="tg5.2.2.5.1"/>
+Convente</hi> einstellen / so müssen sie vorhero unterschiedene <hi rend="italic" xml:id="tg5.2.2.6">Characteres,</hi> Circul und andere Gauckeleyen machen / sie müssen sich auch schmieren und dabey gewisser Worte sich bedienen. Die Salbe /damit sie sich beschmieren / ist aus wunderseltzamen Sachen <hi rend="italic" xml:id="tg5.2.2.7">præpari</hi>ret / meistens aber von ermordeten Kinder-Fette. Mit welcher Salbe sie entweder einen Stecken / Besen / oder sonst was darauf sie reiten will / beschmieret / zuweilen salben sie auch wohl gar ihre eigene Beine und andere Gliedmassen. Ob nun wohl der Teufel eine solche Hexerin ohne solcher Schmierung könte fortbringen / wie er es denn auch zuweilen thut / so läst er sie doch solche Salbe sehr häuffig gebrauchen / damit sie desto mehr Kinder muß ermorden / woran denn der Teufel seinen sonderlichen Gefallen hat / welches daher leichtlich erhellet / daß er ihr zulässet das erste mahl was zu borgen / hernach aber muß sie es selbsten von denen ermordeten Kindern zurichten.<ref type="noteAnchor" target="#tg5.2.7">
+                                    <anchor xml:id="tg5.2.2.8"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnote_2"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnoten_2"/>
+                                    <hi rend="superscript" xml:id="tg5.2.2.9.1">2</hi>
+                                 </ref> Die Worte derer sie sich bey ihrer Farth bedienet / sind <pb n="5" xml:id="tg5.2.2.10"/>
+gemeiniglich diese: Oben aus und nirgend an.<ref type="noteAnchor" target="#tg5.2.9">
+                                    <anchor xml:id="tg5.2.2.11"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnote_3"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnoten_3"/>
+                                    <hi rend="superscript" xml:id="tg5.2.2.12.1">3</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg5.2.4">Fußnoten</head>
+
+                              <note xml:id="tg5.2.5.note" target="#tg5.2.2.3">
+                                 <p xml:id="tg5.2.5">
+                                    <anchor xml:id="tg5.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnote_1"
+                                      xml:id="tg5.2.5.2">1</ref> Denn sie halten solche Zusammenkünffte öffters /doch ist dieser <hi rend="italic" xml:id="tg5.2.5.3">Conventus</hi> in der Nacht vor <hi rend="italic" xml:id="tg5.2.5.4">VValpurgis</hi> der <hi rend="italic" xml:id="tg5.2.5.5">solenneste.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg5.2.7.note" target="#tg5.2.2.8">
+                                 <p xml:id="tg5.2.7">
+                                    <anchor xml:id="tg5.2.7.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnoten_2"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnote_2"
+                                      xml:id="tg5.2.7.2">2</ref> 
+                                    <hi rend="italic" xml:id="tg5.2.7.3">Conf. Martinus Delrius Disqvisit. Magic. Lib.</hi> II.<hi rend="italic" xml:id="tg5.2.7.4"> qvæst.</hi> 16. <hi rend="italic" xml:id="tg5.2.7.5">Et Simon Majolus dier. Canicular. Tom.</hi> II. <hi rend="italic" xml:id="tg5.2.7.6">Colloq.</hi> 3.</p>
+                              </note>
+                              <note xml:id="tg5.2.9.note" target="#tg5.2.2.11">
+                                 <p xml:id="tg5.2.9">
+                                    <anchor xml:id="tg5.2.9.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnoten_3"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/2.#Fußnote_3"
+                                      xml:id="tg5.2.9.2">3</ref> 
+                                    <hi rend="italic" xml:id="tg5.2.9.3">Vid. D. König Heptad. Cas. Consc. mifcell. cas.</hi> 2.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg6"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/3.">
+                        <div>
+                           <desc>
+                              <title>3.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg6.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg6.2.1">
+                                 <pb type="start" n="6" xml:id="tg6.2.1.1"/>
+§. 3.</head>
+
+                              <p xml:id="tg6.2.2">Das <hi rend="italic" xml:id="tg6.2.2.1">Instrumentum,</hi> das der Teufel zu dieser Fuhre gebraucht / ist bißweilen die Figur eines Bocks / Ochsens / oder andern Thieres / ich sage Figur / weil es kein warhafftig Thier ist / sondern nur bloß eine Gauckeley / bißweilen auch Rohr / Spinn-Rocken /Besen / Ofen-Gabel und dergleichen Geräthe.<ref type="noteAnchor" target="#tg6.2.5">
+                                    <anchor xml:id="tg6.2.2.2"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/3.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/3.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg6.2.2.3.1">1</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg6.2.4">Fußnoten</head>
+
+                              <note xml:id="tg6.2.5.note" target="#tg6.2.2.2">
+                                 <p xml:id="tg6.2.5">
+                                    <anchor xml:id="tg6.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/3.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/3.#Fußnote_1"
+                                      xml:id="tg6.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg6.2.5.3">Conf. Nicolaus Remigius Lib.</hi> I. <hi rend="italic" xml:id="tg6.2.5.4">Dæmonol. c.</hi> 14.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg7"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/4.">
+                        <div>
+                           <desc>
+                              <title>4.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg7.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg7.2.1">
+                                 <pb type="start" n="6" xml:id="tg7.2.1.1"/>
+§. 4.</head>
+
+                              <p xml:id="tg7.2.2">Der Ort / da er sie hinführet / ist der Brockels-Berg /der höchste im Hartzwalde im Braunschweigischen Gebieth gelegen / auf welchen er alle Hexen / die er im gantzen Teutschlande hat / versamlet.<ref type="noteAnchor" target="#tg7.2.5">
+                                    <anchor xml:id="tg7.2.2.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/4.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/4.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg7.2.2.2.1">1</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg7.2.4">Fußnoten</head>
+
+                              <note xml:id="tg7.2.5.note" target="#tg7.2.2.1">
+                                 <p xml:id="tg7.2.5">
+                                    <anchor xml:id="tg7.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/4.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/4.#Fußnote_1"
+                                      xml:id="tg7.2.5.2">1</ref> Diesen Berg hat in einen feinen teutschen<hi rend="italic" xml:id="tg7.2.5.3"> Trac</hi>tätgen <hi rend="italic" xml:id="tg7.2.5.4">Dn. M. Johannes Prætorius</hi> gar artig beschrieben.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg8"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.">
+                        <div>
+                           <desc>
+                              <title>5.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg8.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg8.2.1">
+                                 <pb type="start" n="6" xml:id="tg8.2.1.1"/>
+§. 5.</head>
+
+                              <p xml:id="tg8.2.2">Wenn er sie nun zusammen bracht hat / zündet er ein greßliches Feuer an / da setzet sich denn der <hi rend="italic" xml:id="tg8.2.2.1">Præses</hi> oder der oberste Teufel dieses <hi rend="italic" xml:id="tg8.2.2.2">Convents</hi> in gar heßlicher Gestalt eines Bocks oder Hundes auf einen Thron. Zu diesen müssen sich alle Hexen nahen ihn anzubethen / nicht zwar alle zugleich und auf <pb n="6" xml:id="tg8.2.2.3"/>
+einerley Weise / sondern bald mit gefaltenen Händen / bald kniend / stehend / bald rücklings / mit einen Beine hinckend / den Kopff auff den Rücken niederhangend / daß das Kin gantz oben den Himmel zu zu stehen komme. Darauff übergeben sie ihm Pech-Fackeln oder Kinder-Näbel zum Zeichen ihres Eydschwures und küssen ihm den Hintern / öffters ermorden sie wohl gar ihre Kinder / und opffern sie dem Teufel /und was am erschrecklichsten ist / so treten sie diejenigen Hostien / die sie bey Geniessung des Heil. Abendmahls im Munde behalten / und hernachmahls aufgehoben / in seiner Gegenwart mit Füssen. Nach solchen abscheulichen begangenen Sünden setzen sie sich zu Tische / und fahen an diejenigen Speisen zu verzehren / welche ihnen der Teufel zugerichtet oder sie selbsten mit sich bracht haben. Die Tische / dabey sie sitzen / sind unterschieden / und mit niedlichen doch auch zugleich recht lächerlichen Speisen besetzt / da denn bey einer jedweden Hexe ihr Teufel auf der Seite stehet / oder gegen übersitzet. Es fehlet auch bey diesen Schmause das Gebeth nicht / ehe sie anfangen zu essen / allein ihr Gebeth ist lauter Gotteslästerung /darinnen sie den Teufel als ihren Schöpffer und Erhalter <pb n="7" xml:id="tg8.2.2.4"/>
+preisen. Sie speisen aber meistentheils in verlarveten Gesichtern. Nach gehaltener Tafel fahen sie an zu tantzen / so das jeglicher Teufel seine Hexe bey der Hand führet / und rücklings mit zusammen gefasten Händen und schwanckenen Köpffen wunderliche<hi rend="italic" xml:id="tg8.2.2.5"> Capriol</hi>en machet / und die heßlichsten Schand-Lieder dabey absinget / und sich hernachmals aufs ärgerlichste mit ihr vermischet. Hernach erzehlet eine jedwede Hexe / was sie vor Schand-Thaten verrichtet / je mehr sie nun ausgeübet / je besser sie gelobet wird /wenn nun eine nicht arg genug gewesen / so wird sie graß geprügelt. Letzlich beschencken sie sich untereinander mit gewissen Pülvergen und Giffte / und ruffen sich ihres <hi rend="italic" xml:id="tg8.2.2.6">Præsidis</hi> oder Abgottes <hi rend="italic" xml:id="tg8.2.2.7">decret</hi> zu.<ref type="noteAnchor" target="#tg8.2.5">
+                                    <anchor xml:id="tg8.2.2.8"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg8.2.2.9.1">1</hi>
+                                 </ref> Rächet euch an euren Feinden / sonst werdet ihr sterben müssen.<ref type="noteAnchor" target="#tg8.2.7">
+                                    <anchor xml:id="tg8.2.2.10"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnote_2"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnoten_2"/>
+                                    <hi rend="superscript" xml:id="tg8.2.2.11.1">2</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg8.2.4">Fußnoten</head>
+
+                              <note xml:id="tg8.2.5.note" target="#tg8.2.2.8">
+                                 <p xml:id="tg8.2.5">
+                                    <anchor xml:id="tg8.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnote_1"
+                                      xml:id="tg8.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg8.2.5.3">Ulcicismini vos alioqvin morlemini.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg8.2.7.note" target="#tg8.2.2.10">
+                                 <p xml:id="tg8.2.7">
+                                    <anchor xml:id="tg8.2.7.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnoten_2"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/5.#Fußnote_2"
+                                      xml:id="tg8.2.7.2">2</ref> 
+                                    <hi rend="italic" xml:id="tg8.2.7.3">Conf. Schotti Physicam curiosam Lib.</hi> I. <hi rend="italic" xml:id="tg8.2.7.4">c.</hi> 23. <hi rend="italic" xml:id="tg8.2.7.5">paragr.</hi> 6.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg9"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/6.">
+                        <div>
+                           <desc>
+                              <title>6.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg9.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg9.2.1">
+                                 <pb type="start" n="8" xml:id="tg9.2.1.1"/>
+§. 6.</head>
+
+                              <p xml:id="tg9.2.2">Von diesen <hi rend="italic" xml:id="tg9.2.2.1">Convente,</hi> wie auch aller andern und vorhergehender <hi rend="italic" xml:id="tg9.2.2.2">transportation</hi> dessen Ceremonien haben nun jederzeit viel Gelehrte gestritten / ob es warhafftig und <pb n="8" xml:id="tg9.2.2.3"/>
+und in der That also geschehe? Einige haben es <hi rend="italic" xml:id="tg9.2.2.4">affirmi</hi>ret und zugegeben / daß die Hexen durch Hülffe des Teufels zu solchen Schmause / tantzen /und anderer Uppigkeit warhafftig <hi rend="italic" xml:id="tg9.2.2.5">transporti</hi>ret würden. Andere nicht wenige haben es <hi rend="italic" xml:id="tg9.2.2.6">negi</hi>ret und halten es vor ein rechtes lauteres Teufels-Gemählde und Gauckeley.<ref type="noteAnchor" target="#tg9.2.5">
+                                    <anchor xml:id="tg9.2.2.7"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/6.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/6.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg9.2.2.8.1">1</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg9.2.4">Fußnoten</head>
+
+                              <note xml:id="tg9.2.5.note" target="#tg9.2.2.7">
+                                 <p xml:id="tg9.2.5">
+                                    <anchor xml:id="tg9.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/6.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/6.#Fußnote_1"
+                                      xml:id="tg9.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg9.2.5.3">Vid. citatus Delrius. Gilbertus Voëtius Disp. Theolog. Selectar. P.I.p.</hi> 948. <hi rend="italic" xml:id="tg9.2.5.4">Caspar Schottus loc. cit.</hi>
+                                 </p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg10"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/7.">
+                        <div>
+                           <desc>
+                              <title>7.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg10.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg10.2.1">
+                                 <pb type="start" n="9" xml:id="tg10.2.1.1"/>
+§. 7.</head>
+
+                              <p xml:id="tg10.2.2">Ob nur allein die Seelen derer Hexen sich zu diesen<hi rend="italic" xml:id="tg10.2.2.1"> Convent</hi> machen / und die Leiber daheime lassen / hat man nicht sonderlich zu untersuchen nöthig / ob gleich ein gelehrter Franzose solches hat <hi rend="italic" xml:id="tg10.2.2.2">statui</hi>ret /maßen ja solches kein gesunder <hi rend="italic" xml:id="tg10.2.2.3">Philosophus,</hi> ich geschweige ein <hi rend="italic" xml:id="tg10.2.2.4">accura</hi>ter <hi rend="italic" xml:id="tg10.2.2.5">Theologus</hi> jemahls wird vorgeben / weil eine solche <hi rend="italic" xml:id="tg10.2.2.6">Existenz</hi> der Seelen ausser dem Leibe / u. hernach die wiedervereinigung mit dem Leibe der gantzen Natur zuwider ist / und eine warhafftige Todten-Aufferstehung <hi rend="italic" xml:id="tg10.2.2.7">inferi</hi>ret / welche doch GOtt allein zukömmet / und dem Teufel als einen <hi rend="italic" xml:id="tg10.2.2.8">spiritu finito</hi> unmöchlich ist.<ref type="noteAnchor" target="#tg10.2.5">
+                                    <anchor xml:id="tg10.2.2.9"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/7.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/7.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg10.2.2.10.1">1</hi>
+                                 </ref> Und ob <pb n="9" xml:id="tg10.2.2.11"/>
+gleich die Hexen solches wollen bekräfftigen / so muß man solches ihren verrückten Verstande und des Teufels Gauckeleyen zuschreiben. Ich geschweige / daß sie sich selbsten verrathen / denn die Seele allein kan nicht schmausen / tantzen und dergleichen Sachen<hi rend="italic" xml:id="tg10.2.2.12"> exerci</hi>ren.</p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg10.2.4">Fußnoten</head>
+
+                              <note xml:id="tg10.2.5.note" target="#tg10.2.2.9">
+                                 <p xml:id="tg10.2.5">
+                                    <anchor xml:id="tg10.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/7.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/7.#Fußnote_1"
+                                      xml:id="tg10.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg10.2.5.3">Vid. Sperling. in Synops. Phys. p.</hi> 85. <hi rend="italic" xml:id="tg10.2.5.4">Et Jacob Martini in Dissert. de Magic. actionibus.</hi>
+                                 </p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg11"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/8.">
+                        <div>
+                           <desc>
+                              <title>8.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg11.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg11.2.1">
+                                 <pb type="start" n="10" xml:id="tg11.2.1.1"/>
+§. 8.</head>
+
+                              <p xml:id="tg11.2.2">Ist demnach die Frage <hi rend="italic" xml:id="tg11.2.2.1">de toto supposito</hi> von den gantzen Menschen aus Seel und Leib bestehende: Ob derselbe warhafftig <hi rend="italic" xml:id="tg11.2.2.2">transporti</hi>ret / und zu diesen ärgerlichen <hi rend="italic" xml:id="tg11.2.2.3">Convent</hi> gebracht werde? Hier ist nun die gemeinste <hi rend="italic" xml:id="tg11.2.2.4">Sentenz</hi> nicht so wohl der fürnehmste <hi rend="italic" xml:id="tg11.2.2.5">Theologorum</hi> / sondern auch der berühmtesten Juristen in Italien / Hispanien und Teutschland diese: Wir halten sicherlich aus hochwichtigen Ursachen dafür / daß solches ein pur lauters Gauckel-Spiel des Teufels und in der That nichts sey.<ref type="noteAnchor" target="#tg11.2.5">
+                                    <anchor xml:id="tg11.2.2.6"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/8.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/8.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg11.2.2.7.1">1</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg11.2.4">Fußnoten</head>
+
+                              <note xml:id="tg11.2.5.note" target="#tg11.2.2.6">
+                                 <p xml:id="tg11.2.5">
+                                    <anchor xml:id="tg11.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/8.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/8.#Fußnote_1"
+                                      xml:id="tg11.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg11.2.5.3">Quam sententiam adducit supra cit. Delrius.</hi>
+                                 </p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg12"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.">
+                        <div>
+                           <desc>
+                              <title>9.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg12.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg12.2.1">
+                                 <pb type="start" n="10" xml:id="tg12.2.1.1"/>
+§. 9.</head>
+
+                              <p xml:id="tg12.2.2">Dieses geben wir endlich dem Teufel wohl zu / daß er aufs allerschnelleste einen Menschen vom einen Ort zum andern fortbringen könne. Denn die Macht derer Geister <pb n="10" xml:id="tg12.2.2.1"/>
+erstrecket sich so weit / daß ihnen alles Leibliche / was die Veränderung des Orts betrifft / gar leichte unterwürffig ist / wie denn die Behändigkeit der Englischen Natur das einmahl ergriffene mit schnellen Lauff forttreibet. Dort brachte der Engel dem Habacuc / welchen er bey den Kopff erwischet /innerhalb weniger Zeit aus <hi rend="italic" xml:id="tg12.2.2.2">Judæa</hi> in <hi rend="italic" xml:id="tg12.2.2.3">Babyloniam</hi> und von dannen wieder zurück.<ref type="noteAnchor" target="#tg12.2.5">
+                                    <anchor xml:id="tg12.2.2.4"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg12.2.2.5.1">1</hi>
+                                 </ref> Ein anderer ergrieff den<hi rend="italic" xml:id="tg12.2.2.6"> Philippum,</hi> welcher von Jerusalem nach <hi rend="italic" xml:id="tg12.2.2.7">Gaza</hi> reisete / und führete ihn gen <hi rend="italic" xml:id="tg12.2.2.8">Asdod</hi>
+                                 <ref type="noteAnchor" target="#tg12.2.7">
+                                    <anchor xml:id="tg12.2.2.9"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnote_2"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnoten_2"/>
+                                    <hi rend="superscript" xml:id="tg12.2.2.10.1">2</hi>
+                                 </ref>. Es will zwar solche <hi rend="italic" xml:id="tg12.2.2.11">Argumentation</hi> der <hi rend="italic" xml:id="tg12.2.2.12">Ulricus Molitor</hi>
+                                 <ref type="noteAnchor" target="#tg12.2.9">
+                                    <anchor xml:id="tg12.2.2.13"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnote_3"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnoten_3"/>
+                                    <hi rend="superscript" xml:id="tg12.2.2.14.1">3</hi>
+                                 </ref> nicht wohl gelten lassen / massen seiner Meynung die <hi rend="italic" xml:id="tg12.2.2.15">conseqvenz</hi> nicht gar zu richtig / und die Macht der guten Engel nicht gleich auch solche Macht in denen bösen <hi rend="italic" xml:id="tg12.2.2.16">argi</hi>rte; Allein er wird ja gestehen müssen / daß die Macht der bösen Engel so groß als der guten Engel sey / denn es haben bey ihren Abfall die bösen Engel nur die Gnaden-Gaben verlohren / nicht aber die Natur-Gaben /ob sie gleich in etwas geschwächet sind.</p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg12.2.4">Fußnoten</head>
+
+                              <note xml:id="tg12.2.5.note" target="#tg12.2.2.4">
+                                 <p xml:id="tg12.2.5">
+                                    <anchor xml:id="tg12.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnote_1"
+                                      xml:id="tg12.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg12.2.5.3">Dan.</hi> 14. <hi rend="italic" xml:id="tg12.2.5.4">v.</hi> 35. <hi rend="italic" xml:id="tg12.2.5.5">seq.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg12.2.7.note" target="#tg12.2.2.9">
+                                 <p xml:id="tg12.2.7">
+                                    <anchor xml:id="tg12.2.7.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnoten_2"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnote_2"
+                                      xml:id="tg12.2.7.2">2</ref> 
+                                    <hi rend="italic" xml:id="tg12.2.7.3">Act.</hi> 8. <hi rend="italic" xml:id="tg12.2.7.4">v.</hi> 26. <hi rend="italic" xml:id="tg12.2.7.5">seqq.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg12.2.9.note" target="#tg12.2.2.13">
+                                 <p xml:id="tg12.2.9">
+                                    <anchor xml:id="tg12.2.9.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnoten_3"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/9.#Fußnote_3"
+                                      xml:id="tg12.2.9.2">3</ref> 
+                                    <hi rend="italic" xml:id="tg12.2.9.3">Lib.</hi> 8. <hi rend="italic" xml:id="tg12.2.9.4">de Python. mulieribus.</hi>
+                                 </p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg13"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.">
+                        <div>
+                           <desc>
+                              <title>10.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg13.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg13.2.1">
+                                 <pb type="start" n="11" xml:id="tg13.2.1.1"/>
+§. 10.</head>
+
+                              <p xml:id="tg13.2.2">Man hat nicht so wohl in Göttl. Schrifft als <pb n="11" xml:id="tg13.2.2.1"/>
+als auch<hi rend="italic" xml:id="tg13.2.2.2"> Profan-Scribent</hi>en solcher leibl. Fortrückung Exempel genung. Hat nicht der Teufel den HERRN JESUM selbsten aus der Wüsten auf die Zinne des Tempels geführet / und von dannen auf einen sehr hohen Berg.<ref type="noteAnchor" target="#tg13.2.6">
+                                    <anchor xml:id="tg13.2.2.3"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg13.2.2.4.1">1</hi>
+                                 </ref> 
+                                 <hi rend="italic" xml:id="tg13.2.2.5">Alciatus</hi>
+                                 <ref type="noteAnchor" target="#tg13.2.8">
+                                    <anchor xml:id="tg13.2.2.6"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_2"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_2"/>
+                                    <hi rend="superscript" xml:id="tg13.2.2.7.1">2</hi>
+                                 </ref> und mit demselbigen <hi rend="italic" xml:id="tg13.2.2.8">Philippus Camerarius</hi>
+                                 <ref type="noteAnchor" target="#tg13.2.10">
+                                    <anchor xml:id="tg13.2.2.9"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_3"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_3"/>
+                                    <hi rend="superscript" xml:id="tg13.2.2.10.1">3</hi>
+                                 </ref> wollen zwar solches in Zweifel ziehen / aber sie <hi rend="italic" xml:id="tg13.2.2.11">torqui</hi>ren den Text recht augenscheinlich.<ref type="noteAnchor" target="#tg13.2.12">
+                                    <anchor xml:id="tg13.2.2.12"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_4"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_4"/>
+                                    <hi rend="superscript" xml:id="tg13.2.2.13.1">4</hi>
+                                 </ref> Hat sich nicht Simon der Ertz-Zauberer vermittelst der Hülffe des Teufels in die Lufft erhaben / und in derselben herum geschweiffet / biß er endlich durch das kräfftige Gebeth des Apostels Pauli / oder wie andere wollen Petri herunter gestürtzet und sein Leben jämmerlich geendet.<ref type="noteAnchor" target="#tg13.2.14">
+                                    <anchor xml:id="tg13.2.2.14"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_5"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_5"/>
+                                    <hi rend="superscript" xml:id="tg13.2.2.15.1">5</hi>
+                                 </ref> Ja man hat öffters erfahren /daß der Teufel solch Teufels-Gesinde in die höchste Lufft öffters mit klagen und heulen geführet hat.</p>
+                              <pb n="12" xml:id="tg13.2.3"/>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg13.2.5">Fußnoten</head>
+
+                              <note xml:id="tg13.2.6.note" target="#tg13.2.2.3">
+                                 <p xml:id="tg13.2.6">
+                                    <anchor xml:id="tg13.2.6.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_1"
+                                      xml:id="tg13.2.6.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg13.2.6.3">Matth.</hi> 4. <hi rend="italic" xml:id="tg13.2.6.4">v.</hi> 5. <hi rend="italic" xml:id="tg13.2.6.5">seqq.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg13.2.8.note" target="#tg13.2.2.6">
+                                 <p xml:id="tg13.2.8">
+                                    <anchor xml:id="tg13.2.8.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_2"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_2"
+                                      xml:id="tg13.2.8.2">2</ref> 
+                                    <hi rend="italic" xml:id="tg13.2.8.3">Lib.</hi> 8. <hi rend="italic" xml:id="tg13.2.8.4">Parerg. c.</hi> 22.</p>
+                              </note>
+                              <note xml:id="tg13.2.10.note" target="#tg13.2.2.9">
+                                 <p xml:id="tg13.2.10">
+                                    <anchor xml:id="tg13.2.10.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_3"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_3"
+                                      xml:id="tg13.2.10.2">3</ref> 
+                                    <hi rend="italic" xml:id="tg13.2.10.3">Centur. l.c.</hi> 72. <hi rend="italic" xml:id="tg13.2.10.4">horar. subcisiv.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg13.2.12.note" target="#tg13.2.2.12">
+                                 <p xml:id="tg13.2.12">
+                                    <anchor xml:id="tg13.2.12.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_4"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_4"
+                                      xml:id="tg13.2.12.2">4</ref> 
+                                    <hi rend="italic" xml:id="tg13.2.12.3">Vid. D. König. loco supra cit.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg13.2.14.note" target="#tg13.2.2.14">
+                                 <p xml:id="tg13.2.14">
+                                    <anchor xml:id="tg13.2.14.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnoten_5"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/10.#Fußnote_5"
+                                      xml:id="tg13.2.14.2">5</ref> Diesen <hi rend="italic" xml:id="tg13.2.14.3">Simoni</hi> hat Kayser <hi rend="italic" xml:id="tg13.2.14.4">Claudius</hi> eine vortreffliche Ehren-Seule aufrichten lassen mit dieser <hi rend="italic" xml:id="tg13.2.14.5">Inscription: Simoni Sancto Deo. Vid. Egesippus Lib.</hi> 3.<hi rend="italic" xml:id="tg13.2.14.6"> Excid. Hieros. c.</hi> 2.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg14"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.">
+                        <div>
+                           <desc>
+                              <title>11.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg14.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg14.2.1">
+                                 <pb type="start" n="13" xml:id="tg14.2.1.1"/>
+§. 11.</head>
+
+                              <p xml:id="tg14.2.2">Ob dem nun gleich also / so hat man doch auch vielmahl erfahren / daß die Hexen so sehr sich auch solcher ihrer Farth / Zusammenkunffts / und niedliches Tantzes gerühmet / aufs klügste vom Teufel hintergangen / indem sie zu Hause in ihren Betten / auf den Bäncken / oder auch wohl gar auf der Erden gelegen /und mit einem tieffen Schlaff befallen gewesen. Daraus man denn Sonnenklar siehet / daß es mit nichten warhafftig geschehe / sondern ein pur lauteres Gedicht und Affenwerck des Teufels sey. Damit aber der Sachen desto mehr zu glauben / so will drey Exempel anführen / ob gleich an mehrern kein Mangel / und soll vor diesesmahl diese Regul: <hi rend="italic" xml:id="tg14.2.2.1">Omne trinum perfectum,</hi> 
+                                 <hi rend="bold" xml:id="tg14.2.2.2">alle gute Dinge drey / mein Gesetz seyn.</hi> Der selige <hi rend="italic" xml:id="tg14.2.2.3">Doctor Lutherus</hi>
+                                 <ref type="noteAnchor" target="#tg14.2.5">
+                                    <anchor xml:id="tg14.2.2.4"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg14.2.2.5.1">1</hi>
+                                 </ref> hält solche Hexenfarth durch die Lufft vor ein pures Teufels-Gedichte / und beweiset es mit einem artigen Exempel.<ref type="noteAnchor" target="#tg14.2.7">
+                                    <anchor xml:id="tg14.2.2.6"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_2"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_2"/>
+                                    <hi rend="superscript" xml:id="tg14.2.2.7.1">2</hi>
+                                 </ref> Es habe einsmahls eine alte Hexe Johann Käysersbergen / als er öffentlich solche <pb n="13" xml:id="tg14.2.2.8"/>
+Hexenfahrt verworffen / und als eine lügenhaffte Teufels Fabel <hi rend="italic" xml:id="tg14.2.2.9">castigi</hi>ret / zu sich geruffen / und damit sie bewiese / daß solches kein Fabelwerck / sondern eine warhafftige Kunst des Teufels wäre / in Meynung den Prediger zu Schanden zu machen / habe sie sich in Beysein seiner beschmieret /auf eine Gabel gesetzet / und sich gewisser Worte vernehmen lassen. Als sie nun den Augenblick habe wollen auffahren / sey sie in einen tieffen Schlaf gesuncken / wunderliche <hi rend="italic" xml:id="tg14.2.2.10">gestus</hi> gemachet / über welchen <hi rend="italic" xml:id="tg14.2.2.11">gesticuli</hi>ren sie auch von der Banck gefallen und ein Loch in Kopff gestossen / biß sie endlich nach etlichen Stunden wieder zu sich selbsten kommen / da sie denn aus ihren Fall und Wunde ihrer Gauckeley überführet / ob sie gleich noch so viel woltegesehen und erfahren haben. Ein anderes erzehlet <hi rend="italic" xml:id="tg14.2.2.12">Simon Majolus</hi>
+                                 <ref type="noteAnchor" target="#tg14.2.9">
+                                    <anchor xml:id="tg14.2.2.13"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_3"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_3"/>
+                                    <hi rend="superscript" xml:id="tg14.2.2.14.1">3</hi>
+                                 </ref> daß eine alte Hexe zu <hi rend="italic" xml:id="tg14.2.2.15">Burdegala</hi> in Franckreich vor den Rath bekant / daß sie nebst vielen zu solchen wöchentlich Zusammenkünfften wäre gehohlet worden / da sie einen grossen Bock hätten angebetet / und auf seinen Befehl GOtt verschworen / dem Teufel hingegen zu dienen geschworen / und darauf ihm die <hi rend="italic" xml:id="tg14.2.2.16">pudenda</hi> 
+                                 <pb n="14" xml:id="tg14.2.2.17"/>
+küsset / getantzet und allerley Pülverchen empfangen. Wie solches ein vornehmer gehöret<ref type="noteAnchor" target="#tg14.2.11">
+                                    <anchor xml:id="tg14.2.2.18"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_4"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_4"/>
+                                    <hi rend="superscript" xml:id="tg14.2.2.19.1">4</hi>
+                                 </ref> und die Warheit solcher Farth gerne erfahren wollen / weil sie aber im Gefängniß sich nicht unterstanden / vorgebende / sie könne es im <hi rend="italic" xml:id="tg14.2.2.20">Carcer</hi> nicht vollbringen / habe er sie lassen heraus führen. Darauff habe sie sich nackend ausgezogen / mit vielen Fette beschmieret / bald aber drauf zur Erden nieder gesuncken / und nach verfliessung 5. Stunden erst wieder zu sich selbst kommen / aufgestanden und viele wunderliche Dinge erzehlet / welche man mit Fleiß /um zu erfahren / ob dem so sey / ausgeforschet / und auch also befunden. Das Letztere erzehlet <hi rend="italic" xml:id="tg14.2.2.21">Paulus Grilandus.</hi>
+                                 <ref type="noteAnchor" target="#tg14.2.13">
+                                    <anchor xml:id="tg14.2.2.22"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_5"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_5"/>
+                                    <hi rend="superscript" xml:id="tg14.2.2.23.1">5</hi>
+                                 </ref> Es habe einsmahls ein <hi rend="italic" xml:id="tg14.2.2.24">Sabini</hi>scher Mann eine Frau / welche eine Hexe wieder sein Wissen gewesen / gehabt / wie denn auch andere Leute ihr solches nicht öffentlich zeugen dürffen / sondern nur heimlich gemuthmasset. Er habe sie aber etliche mahl gefraget / ob sie es denn mit solchen losen Gesinde hielte / oder wohl gar eine <pb n="15" xml:id="tg14.2.2.25"/>
+von der Art wäre? Als sie nun solches beständig geleugnet / ob gleich der<hi rend="italic" xml:id="tg14.2.2.26"> Rumor</hi> ie grösser ie ärger von ihr ward / und bewährte Leute diesen Manne die Boßheit seines Weibes entdeckten / maßen sie ja mit dergleichen Leuten umgienge / von welchen kund und offenbahr / daß sie Hexen wären / machte sich ihrer Schand-Thaten theilhafftig und <hi rend="italic" xml:id="tg14.2.2.27">tourni</hi>ert des Nachts mit / habe der Mann endlich beschlossen / ins künfftige genauer Aufsicht ihrer Thaten zu halten / und angefangen viel Nächte hinter einander fleißig und sorgfältig zu wachen / aufs genaueste Acht habende / ob auch die Frau zu solchen Teufels-Spiele oder andern Ubelthaten <hi rend="italic" xml:id="tg14.2.2.28">extravagi</hi>rte /und habe also zwölff gantze Nächte schlaffloß zugebracht / die Frau stets im Bette bey sich liegend funden / dieselbe öffters befühlet / und nichts ungebührliches an ihr befunden / biß endlich nach Verfliessung weniger Tagen seine Frau nebst etlichen andern öffentlich solches Lasters beschuldiget / ins Gefängniß geworffen / und der Tortur überantwortet / da sie denn bekennet / daß sie mit ihren itzo mitgefangenen Gespielinnen öffters solchen schönen Spielen beygewohnet / habe auch Zeit und Stunde genennet. Der Mann hingegen habe betheuret mit einen hohen <pb n="16" xml:id="tg14.2.2.29"/>
+Eydschwure / daß sie zu solcher Zeit und Stunde bey ihm gelegen in einem Bette / und daß er sie dazumahl mit Fleiß etliche mahl berühret habe.<ref type="noteAnchor" target="#tg14.2.15">
+                                    <anchor xml:id="tg14.2.2.30"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_6"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_6"/>
+                                    <hi rend="superscript" xml:id="tg14.2.2.31.1">6</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg14.2.4">Fußnoten</head>
+
+                              <note xml:id="tg14.2.5.note" target="#tg14.2.2.4">
+                                 <p xml:id="tg14.2.5">
+                                    <anchor xml:id="tg14.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_1"
+                                      xml:id="tg14.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg14.2.5.3">Tom.</hi> I. <hi rend="italic" xml:id="tg14.2.5.4">Jenens. p.</hi> 126.</p>
+                              </note>
+                              <note xml:id="tg14.2.7.note" target="#tg14.2.2.6">
+                                 <p xml:id="tg14.2.7">
+                                    <anchor xml:id="tg14.2.7.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_2"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_2"
+                                      xml:id="tg14.2.7.2">2</ref> 
+                                    <hi rend="italic" xml:id="tg14.2.7.3">Hoc exemplum affert ex Johanne Keysersbergio Concionatore Argentinensi.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg14.2.9.note" target="#tg14.2.2.13">
+                                 <p xml:id="tg14.2.9">
+                                    <anchor xml:id="tg14.2.9.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_3"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_3"
+                                      xml:id="tg14.2.9.2">3</ref> 
+                                    <hi rend="italic" xml:id="tg14.2.9.3">Loco superius allegate.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg14.2.11.note" target="#tg14.2.2.18">
+                                 <p xml:id="tg14.2.11">
+                                    <anchor xml:id="tg14.2.11.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_4"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_4"
+                                      xml:id="tg14.2.11.2">4</ref> 
+                                    <hi rend="italic" xml:id="tg14.2.11.3">D. Belottus libellorum supplicum Magister.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg14.2.13.note" target="#tg14.2.2.22">
+                                 <p xml:id="tg14.2.13">
+                                    <anchor xml:id="tg14.2.13.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_5"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_5"
+                                      xml:id="tg14.2.13.2">5</ref> 
+                                    <hi rend="italic" xml:id="tg14.2.13.3">Juris Consultus Italus tractat. de Sortileg. quæst.</hi> 7. <hi rend="italic" xml:id="tg14.2.13.4">num.</hi> 6. <hi rend="italic" xml:id="tg14.2.13.5">quem adducit B. Carpzovius in practicis crinina. libus.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg14.2.15.note" target="#tg14.2.2.30">
+                                 <p xml:id="tg14.2.15">
+                                    <anchor xml:id="tg14.2.15.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnoten_6"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/11.#Fußnote_6"
+                                      xml:id="tg14.2.15.2">6</ref> Noch weitläufftiger kan solches untersuchet werden aus <hi rend="italic" xml:id="tg14.2.15.3">Olai Magni, Tostati Majoli. Carpzovii. Grillordi</hi> und andern angezogenen Büchern.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg15"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/12.">
+                        <div>
+                           <desc>
+                              <title>12.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg15.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg15.2.1">
+                                 <pb type="start" n="17" xml:id="tg15.2.1.1"/>
+§. 12.</head>
+
+                              <p xml:id="tg15.2.2">Denn es kan ja der Teufel seine <hi rend="italic" xml:id="tg15.2.2.1">mancipia</hi> die Hexen als ein alter Ertz-Schalck und tausend Künstler also bey der Nase herum führen / und ihre innerliche und euserliche Sinne dermassen einschläffern und einnehmen / daß sie meynen / sie hören und sehen solche Sachen / die doch <hi rend="italic" xml:id="tg15.2.2.2">in rerum natura</hi> nicht geschehen können / welches man sonderlich warnehmen kan an wahnsüchtigen und melancholischen Leuten / was machen sich dieselbigen nicht öffters vor <hi rend="italic" xml:id="tg15.2.2.3">imaginationes?</hi> Was bauen sie nicht vor Festungen auf in ihren Köpffen? Was <hi rend="italic" xml:id="tg15.2.2.4">spintisi</hi>ren nicht öffters auch vernünfftige Leute im Schlaff? und bilden sich ein / sie sehen im Geist solche <hi rend="italic" xml:id="tg15.2.2.5">miracula</hi> welche sie im Leibe nimmermehr würden erreichet / noch zu sehen bekommen haben? Warum solte denn nicht auch der Teufel /wenn er den Sinn eines solchen Weibes einnimmet /welchen er sich wegen ihres Unglaubens <pb n="17" xml:id="tg15.2.2.6"/>
+auf GOttes Zulassen <hi rend="italic" xml:id="tg15.2.2.7">mancipi</hi>rt / mit solchen wunderlichen <hi rend="italic" xml:id="tg15.2.2.8">Speculationibus</hi> und <hi rend="italic" xml:id="tg15.2.2.9">Phantasti</hi>schen <hi rend="italic" xml:id="tg15.2.2.10">imaginationibus</hi> ihren Kopff anfüllet / daß sie sich im Traum einbildet / sie sey auf einen gewissen <hi rend="italic" xml:id="tg15.2.2.11">Convent,</hi> sehe unterschiedene so wohl bekante als unbekante Personen /schmause / tantze und treibe allerley Üppigkeit / halt auch dafür / daß es warhafftig im Leibe geschehe / ob gleich ihr ungläubiger Sinn von dem Teufel also betrogen und mit einer betrüglichen Lust erfüllet / dadurch er sie ie mehr und mehr als die Fische in seinen Hahmen <hi rend="italic" xml:id="tg15.2.2.12">allici</hi>ert und zu seinen Dienst locket.</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg16"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.">
+                        <div>
+                           <desc>
+                              <title>13.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg16.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg16.2.1">§. 13.</head>
+
+                              <p xml:id="tg16.2.2">Solche Possen kan man auch wahrnehmen an denen Weer-Wölffen / oder wie sie sonst genant werden. Diese Leute bilden sich auch ein / sie werden in Füchse / Wölffe / Haasen / Katzen / und andere Thiere verwandelt / und verrichten nach ihrer <hi rend="italic" xml:id="tg16.2.2.1">Phantasie</hi> dererselben <hi rend="italic" xml:id="tg16.2.2.2">Actiones</hi> / kriechen auf Dächern / durchlauffen Felder / zerreissen Vieh / und was dergleichen wunderseltzame Einbildungen seyn / dergleichen Leute es sonderlich geben soll in <pb n="18" xml:id="tg16.2.2.3"/>
+Preussen und Lieffland.<ref type="noteAnchor" target="#tg16.2.5">
+                                    <anchor xml:id="tg16.2.2.4"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg16.2.2.5.1">1</hi>
+                                 </ref> Da doch solche <hi rend="italic" xml:id="tg16.2.2.6">productio,</hi> u. <hi rend="italic" xml:id="tg16.2.2.7">immutatio</hi> derer Thiere der gantzen Natur und also auch dem Teufel unmöglich ist / daher man auch diejenigen / welche sich eingebildet / sie seyn durch Hülffe des Teufels in Füchse verwandelt worden / in einen tieffen Schlaff liegend funden.<ref type="noteAnchor" target="#tg16.2.7">
+                                    <anchor xml:id="tg16.2.2.8"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_2"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_2"/>
+                                    <hi rend="superscript" xml:id="tg16.2.2.9.1">2</hi>
+                                 </ref> Ein merckliches Exempel dessen erzehlet <hi rend="italic" xml:id="tg16.2.2.10">Dn. Michael Mei,</hi>
+                                 <ref type="noteAnchor" target="#tg16.2.9">
+                                    <anchor xml:id="tg16.2.2.11"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_3"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_3"/>
+                                    <hi rend="superscript" xml:id="tg16.2.2.12.1">3</hi>
+                                 </ref> welches er von einen vornehmen Manne selbsten gehöret / der es in Lieffland mit seinen eigenen Augen gesehen / daß ein solcher Weer-Wolff daselbst gewesen / der auch von vielen andern Menschen ist betrachtet worden. Dieser sey einsmahls zur Erden niedergesunckē in einen tieffen Schlaf wie ein Klotz gantz unbeweglich / so daß er auch nicht hat können aufgewecket werden / darauf ihn einige wacker zerschlagen / doch ohne alle Empfindung /auch eine kleine Wunde ins Gesicht geritzet. Als er aber endlich erwachet / habe er angefangen von grossen Wunderthaten zu reden / die er verrichtet / wie er durch die Wälder gelauffen / so viel Schafe zerrissen /und Heerden zerstreuet / und <pb n="19" xml:id="tg16.2.2.13"/>
+und da sie ihn gefraget /wo er denn die Wunden im Gesicht bekommen / geantwortet: es habe ihm ein Hund gekratzet / da er eine Heerde Schafe angefallen. Als sie aber gefraget /wovon denn sein gantzer Leib so roth / hat er <hi rend="italic" xml:id="tg16.2.2.14">replici</hi>ret: Es wäre vom Hirten-Stabe / welcher ihn da er sich an die Schafe gemacht / als einen Wolff damit<hi rend="italic" xml:id="tg16.2.2.15"> bastioni</hi>ret.<ref type="noteAnchor" target="#tg16.2.11">
+                                    <anchor xml:id="tg16.2.2.16"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_4"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_4"/>
+                                    <hi rend="superscript" xml:id="tg16.2.2.17.1">4</hi>
+                                 </ref>
+                              </p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg16.2.4">Fußnoten</head>
+
+                              <note xml:id="tg16.2.5.note" target="#tg16.2.2.4">
+                                 <p xml:id="tg16.2.5">
+                                    <anchor xml:id="tg16.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_1"
+                                      xml:id="tg16.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg16.2.5.3">Vid. Peucerus de Divinat. p.</hi> 160.</p>
+                              </note>
+                              <note xml:id="tg16.2.7.note" target="#tg16.2.2.8">
+                                 <p xml:id="tg16.2.7">
+                                    <anchor xml:id="tg16.2.7.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_2"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_2"
+                                      xml:id="tg16.2.7.2">2</ref> 
+                                    <hi rend="italic" xml:id="tg16.2.7.3">Vid. supra cit. Camerarius horar. subcisiv. Cent.</hi> 1. <hi rend="italic" xml:id="tg16.2.7.4">p.</hi> 328.</p>
+                              </note>
+                              <note xml:id="tg16.2.9.note" target="#tg16.2.2.11">
+                                 <p xml:id="tg16.2.9">
+                                    <anchor xml:id="tg16.2.9.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_3"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_3"
+                                      xml:id="tg16.2.9.2">3</ref> 
+                                    <hi rend="italic" xml:id="tg16.2.9.3">In disput. de λυκανθρωπία.</hi>
+                                 </p>
+                              </note>
+                              <note xml:id="tg16.2.11.note" target="#tg16.2.2.16">
+                                 <p xml:id="tg16.2.11">
+                                    <anchor xml:id="tg16.2.11.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnoten_4"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/13.#Fußnote_4"
+                                      xml:id="tg16.2.11.2">4</ref> 
+                                    <hi rend="italic" xml:id="tg16.2.11.3">Vid. Peucerus loc. cit. &amp; Bercmannus Annot. sup. Metamorph. Ovidii fab.</hi> 2.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg17"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/14.">
+                        <div>
+                           <desc>
+                              <title>14.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg17.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg17.2.1">
+                                 <pb type="start" n="20" xml:id="tg17.2.1.1"/>
+§. 14.</head>
+
+                              <p xml:id="tg17.2.2">Daß aber der Teufel eben dergleichen <hi rend="italic" xml:id="tg17.2.2.1">Phantasmata</hi> in diesen Farthen und <hi rend="italic" xml:id="tg17.2.2.2">Convent</hi>en denen Hexen vorhalte /gestehen ja selbsten etliche Hexen / indem sie vorgeben / wenn sie aus gewissen Ursachen nicht gerne wollen selbsten dabey seyn / besorgende / sie möchten verrathen werden / daß sie dennoch durch Hülffe des Teufels alles sehen können / was nur auf solchen<hi rend="italic" xml:id="tg17.2.2.3"> Conventibus</hi> vorgenommen werde. Wie es damit zugehe / zeiget <hi rend="italic" xml:id="tg17.2.2.4">Jacobus Sprengerus:</hi>
+                                 <ref type="noteAnchor" target="#tg17.2.5">
+                                    <anchor xml:id="tg17.2.2.5"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/14.#Fußnote_1"/>
+                                    <ptr cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/14.#Fußnoten_1"/>
+                                    <hi rend="superscript" xml:id="tg17.2.2.6.1">1</hi>
+                                 </ref> Nemlich sie legen sich in aller Teufel Nahmen <pb n="20" xml:id="tg17.2.2.7"/>
+schlaffen / und zwar auf die lincke Seite / darauf gehet ein blauer Dunst aus ihren Halse / in welchen sie gleichsam als in einen Spiegel alles aufs genaueste / was nur auf solchen <hi rend="italic" xml:id="tg17.2.2.8">Conventiculis passi</hi>ret / sehen können. Solte denn nicht der Teufel / was er einmahl thun kan / auch das andere mahl vollbringen können?</p>
+                              
+                           </div>
+                           <div type="footnotes">
+                              <head type="h4" xml:id="tg17.2.4">Fußnoten</head>
+
+                              <note xml:id="tg17.2.5.note" target="#tg17.2.2.5">
+                                 <p xml:id="tg17.2.5">
+                                    <anchor xml:id="tg17.2.5.1"
+                                         n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/14.#Fußnoten_1"/>
+                                    <ref cRef="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/14.#Fußnote_1"
+                                      xml:id="tg17.2.5.2">1</ref> 
+                                    <hi rend="italic" xml:id="tg17.2.5.3">In Malleo Maleficarum Tom.</hi> I. <hi rend="italic" xml:id="tg17.2.5.4">Part.</hi> II. <hi rend="italic" xml:id="tg17.2.5.5">Qvæst.</hi> I.<hi rend="italic" xml:id="tg17.2.5.6"> p.</hi> 260.</p>
+                              </note>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg18"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/15.">
+                        <div>
+                           <desc>
+                              <title>15.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg18.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg18.2.1">
+                                 <pb type="start" n="21" xml:id="tg18.2.1.1"/>
+§. 15.</head>
+
+                              <p xml:id="tg18.2.2">Wolte aber jemand sagen / man könte es wohl zugeben / daß der Teufel zuweilen ein solch <hi rend="italic" xml:id="tg18.2.2.1">glaucoma</hi> und Schattenwerck denen Hexen vormahle / es geschehe aber nicht allezeit / und müsse man einen Unterscheid machen / unter einen <hi rend="italic" xml:id="tg18.2.2.2">Phantasti</hi>schen und warhafftigen <hi rend="italic" xml:id="tg18.2.2.3">Convent,</hi> jenen könne man wohl zulassen / dürffte aber deswegen diesen nicht flugs leugnen. So antworte / sie sagen mir doch erst / was sie vor ein <hi rend="italic" xml:id="tg18.2.2.4">Fundament</hi> zu ihrer <hi rend="italic" xml:id="tg18.2.2.5">distinction</hi> haben? Ists nicht die blosse Aussage derer Hexen / welche nach ihrer betrogenen Einfalt dafür halten sie sein warhaftig zugegen / bald <hi rend="italic" xml:id="tg18.2.2.6">per imaginationem</hi> oder zum Schein / da sie doch auch nur <hi rend="italic" xml:id="tg18.2.2.7">imaginarie</hi> solche <hi rend="italic" xml:id="tg18.2.2.8">Conventus</hi> besuchet / wenn sie so feste gedencken / sie seyn warhafftig dabey gewesen / und daß diesem so sey / zeigen sattsam obige Exempel</p>
+                           </div>
+                        </div>
+                     </div>
+                     <div subtype="work:no" xml:id="tg19"
+                       n="/Literatur/M/Meister, Johann Gottlieb/Werk/Curieuse Untersuchung des Solennen-Convents der Hexen auf dem Brockels-Berge/16.">
+                        <div>
+                           <desc>
+                              <title>16.</title>
+                           </desc>
+                        </div>
+                        
+                        <div type="text" xml:id="tg19.2">
+                           <div type="h4">
+                              <head type="h4" xml:id="tg19.2.1">
+                                 <pb n="21" xml:id="tg19.2.1.1"/>
+§. 16.</head>
+
+                              <p xml:id="tg19.2.2">Bleibts demnach dabey / daß alles mit dieser Uberfarth <hi rend="italic" xml:id="tg19.2.2.1">Convent</hi> und der dabey vorfallender Begebenheit lauter Teufels Gauckeley und Narrentheidung sey. Denn die Hexen gebrauchen ja / ihre Uberfarth zu befördern / gewisse <hi rend="italic" xml:id="tg19.2.2.2">Characteres, Circul</hi> und andere Narrenspossen / welche doch nichts helffen / <hi rend="italic" xml:id="tg19.2.2.3">qvantitatis enim nulla efficacia.</hi> Das andere / als gewisse Stunden auf den <hi rend="bold" xml:id="tg19.2.2.4">Brockels-Berge</hi> seyn / schweren /opffern / anbeten / schmausen / tantzen / fleischlich vermischen / und einander die verübten Schand-Thaten erzehlen / ist von gleicher Wichtigkeit.</p>
+                              <p rend="zenoPLm4n0" xml:id="tg19.2.3">Der geneigte Leser überlege es nach der <hi rend="italic" xml:id="tg19.2.3.1">accura</hi>ten<hi rend="italic" xml:id="tg19.2.3.2"> bilance</hi> seines <hi rend="italic" xml:id="tg19.2.3.3">judicii,</hi> er wird <hi rend="italic" xml:id="tg19.2.3.4">adstipuli</hi>ren. Wie ich denn vor diesesmahl nichts mehr hinzu setze als das</p>
+                              <lb xml:id="tg19.2.4"/>
+                              <closer>
+                                 <seg type="closer" rend="zenoPC" xml:id="tg19.2.5">E N D E.</seg>
+                                 <pb n="22" xml:id="tg19.2.6"/>
+                              </closer>
+                           </div>
+                        </div>
+                     </div>
+                  </body>
+            </text>
+         </TEI>
+               </teiCorpus>
+            </teiCorpus>
+         
+      
+   
+      
+   
+</teiCorpus>
