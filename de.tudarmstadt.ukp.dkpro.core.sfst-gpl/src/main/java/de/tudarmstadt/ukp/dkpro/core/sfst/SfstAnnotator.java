@@ -128,6 +128,7 @@ public class SfstAnnotator
             {
                 setContextObject(SfstAnnotator.this);
 
+                setDefault(ARTIFACT_ID, "${groupId}.sfst-model-morph-${language}-${variant}");
                 setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/sfst/lib/"
                                 + "morph-${language}-${variant}.ca");
                 setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/core/sfst/lib/sfst-default-variants.map");
