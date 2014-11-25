@@ -22,11 +22,14 @@ import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDesc
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class TrailingCharacterRemoverTest
@@ -36,11 +39,12 @@ public class TrailingCharacterRemoverTest
         throws UIMAException
     {
         String inputText = "Ein Text)( mitA Fehlern( . und9-9 a komischen Tokens.";
-        String[] tokensExpected = new String[] { "Ein", "Text", "mit", "Fehlern", ".", "und", "a",
-                "komischen", "Tokens." };
+        String[] tokensExpected = { "Ein", "Text", "mit", "Fehlern", ".", "und", "a", "komischen",
+                "Tokens." };
 
-        JCas jcas = TestRunner.runTest(createEngineDescription(TrailingCharacterRemover.class),
-                "de", inputText);
+        AnalysisEngineDescription engine = createEngineDescription(TrailingCharacterRemover.class);
+        JCas jcas = TestRunner.runTest(engine, "de", inputText);
+        
         AssertAnnotations.assertToken(tokensExpected, select(jcas, Token.class));
     }
 
@@ -50,12 +54,15 @@ public class TrailingCharacterRemoverTest
     {
         int minimumTokenLength = 3;
         String inputText = "Ein T-- mit komischen) To. a";
-        String[] tokensExpected = new String[] { "Ein", "mit", "komischen", "To.", "a" };
+        String[] tokensExpected = { "Ein", "mit", "komischen", "To.", "a" };
 
-        JCas jcas = TestRunner.runTest(createEngineDescription(
-                TrailingCharacterRemover.class,
-                TrailingCharacterRemover.PARAM_MIN_TOKEN_LENGTH, minimumTokenLength),
-                "de", inputText);
+        AnalysisEngineDescription engine = createEngineDescription(TrailingCharacterRemover.class,
+                TrailingCharacterRemover.PARAM_MIN_TOKEN_LENGTH, minimumTokenLength);
+        JCas jcas = TestRunner.runTest(engine, "de", inputText);
+        
         AssertAnnotations.assertToken(tokensExpected, select(jcas, Token.class));
     }
+    
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
