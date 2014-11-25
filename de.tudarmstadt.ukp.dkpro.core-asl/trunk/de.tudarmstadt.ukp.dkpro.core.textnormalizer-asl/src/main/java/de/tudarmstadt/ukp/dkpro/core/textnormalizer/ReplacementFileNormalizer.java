@@ -50,6 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
+@Deprecated
 public class ReplacementFileNormalizer
     extends Normalizer_ImplBase
 {

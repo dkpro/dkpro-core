@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.apache.uima.resource.ResourceInitializationException;
 
+@Deprecated
 public interface ReplacementNormalizer
 {
     Map<String, String> getReplacementMap()
