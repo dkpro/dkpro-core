@@ -20,8 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.annotations;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,11 +78,14 @@ public class TrailingCharacterRemover
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        Collection<Token> toRemove = new LinkedList<>();
-        for (Token token : select(aJCas, Token.class)) {
+        List<Token> toRemove = new ArrayList<>();
+        List<Token> tokens = new ArrayList<>(select(aJCas, Token.class));
+        for (Token token : tokens) {
             Matcher suffixMatcher = suffixPattern.matcher(token.getCoveredText());
             if (suffixMatcher.matches()) {
+                token.removeFromIndexes();
                 token.setEnd(token.getEnd() - (suffixMatcher.end(1) - suffixMatcher.start(1)));
+                token.addToIndexes();
 
                 /* remove tokens that have become too short */
                 if (minTokenLength > 0 && token.getEnd() - token.getBegin() < minTokenLength) {
