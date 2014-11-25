@@ -2,20 +2,12 @@ package de.tudarmstadt.ukp.dkpro.core.matetools;
 
 
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.fit.util.JCasUtil.indexCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-import static org.apache.uima.util.Level.INFO;
-import is2.parser.MFO;
-import is2.parser.Options;
-import is2.parser.Parser;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,9 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipFile;
 
 import org.apache.uima.UimaContext;
@@ -39,28 +29,17 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.resource.ResourceInitializationException;
 
-
-
-
-
-
-
-
 import se.lth.cs.srl.SemanticRoleLabeler;
 import se.lth.cs.srl.corpus.Predicate;
 import se.lth.cs.srl.corpus.Word;
 import se.lth.cs.srl.languages.Language;
 import se.lth.cs.srl.languages.Language.L;
 import se.lth.cs.srl.pipeline.Pipeline;
-import se.lth.cs.srl.pipeline.Step;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableStreamProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
