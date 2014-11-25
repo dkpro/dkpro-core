@@ -18,7 +18,6 @@
 
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.io.IOUtils.readLines;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
@@ -43,9 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Reads a tab-separated file containing mappings from one token to another. All tokens that match
  * an entry in the first column are changed to the corresponding token in the second column.
  *
- * @author Richard Eckart de Castilho
  * @author Carsten Schnober
- *
  */
 public class DictionaryBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase
@@ -63,14 +60,14 @@ public class DictionaryBasedTokenTransformer
      */
     public static final String PARAM_COMMENT_MARKER = "commentMarker";
     @ConfigurationParameter(name = PARAM_COMMENT_MARKER, mandatory = true, defaultValue = "#")
-    private final String commentMarker = "#";
+    private String commentMarker;
 
     /**
      * Separator for mappings file. Default: "\t" (TAB).
      */
     public static final String PARAM_SEPARATOR = "separator";
     @ConfigurationParameter(name = PARAM_SEPARATOR, mandatory = true, defaultValue = "\t")
-    private final String separator = "\t";
+    private String separator;
 
     private Map<String, String> mappings;
 
@@ -92,7 +89,7 @@ public class DictionaryBasedTokenTransformer
     public void process(JCas aInput, JCas aOutput)
         throws AnalysisEngineProcessException
     {
-        // Processing must be done back-to-front to ensure that offets for the next token being
+        // Processing must be done back-to-front to ensure that offsets for the next token being
         // processed remain valid. If this is done front-to-back, replacing a token with a
         // shorter or longer sequence would cause the offsets to shift.
         Collection<Token> tokens = select(aInput, Token.class);
@@ -108,9 +105,7 @@ public class DictionaryBasedTokenTransformer
     private Map<String, String> readMappings(URL aUrl)
         throws IOException
     {
-        InputStream is = null;
-        try {
-            is = aUrl.openStream();
+        try (InputStream is = aUrl.openStream()) {
             Map<String, String> mappings = new HashMap<>();
             for (String line : readLines(is, modelEncoding)) {
                 if (line.startsWith(commentMarker)) {
@@ -129,9 +124,6 @@ public class DictionaryBasedTokenTransformer
             }
             getLogger().info(String.format("%d entries read from '%s'.", mappings.size(), aUrl));
             return mappings;
-        }
-        finally {
-            closeQuietly(is);
         }
     }
 }
