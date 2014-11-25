@@ -128,6 +128,26 @@
 				<entry key="dependency.tagset" value="negra"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+		
+		<!-- FILE: tiger-complete-predsonly-srl-4.11.srl.model  - - - - - - - - - - - - - - - - - - - - - -				  
+				  - 2013-01-05 | now        | 7408c578b0b7ee3a43565a1f3b056876
+				  -->
+		<get 
+    		src="https://mate-tools.googlecode.com/files/tiger-complete-predsonly-srl-4.11.srl.model" 
+    		dest="target/download/srl-de.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/srl-de.model" 
+    		md5="7408c578b0b7ee3a43565a1f3b056876"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130105"
+    		metaDataVersion="0"
+    		tool="srl" 
+    		language="de" 
+    		variant="tiger" 
+    		extension="model">			
+		</install-stub-and-upstream-file>		
 	</target>
 
 	<target name="en">
@@ -198,6 +218,28 @@
 				<entry key="dependency.tagset" value="conll2008"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+		
+
+		<!-- FILE: CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
+		  - 2013-01-17 | now        | 5b6eafa91b6223899935a8c608dfbc17
+		  -->
+		<get 
+    		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-English-ALL.anna-3.3.srl-4.1.srl.model" 
+    		dest="target/download/srl-en.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/srl-en.model" 
+    		md5="5b6eafa91b6223899935a8c608dfbc17"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130117"
+    		metaDataVersion="0"
+    		tool="srl" 
+    		language="en" 
+    		variant="conll2009" 
+    		extension="model">			
+		</install-stub-and-upstream-file>
+		
 	</target>
 
 	<target name="fr">
@@ -385,6 +427,27 @@
 				<entry key="dependency.tagset" value="ancora"/>
 			</metadata>
 		</install-stub-and-upstream-file>
+		
+		<!-- FILE: CoNLL2009-ST-Spanish-ALL.anna-3.3.srl-4.21.srl-rr.model - - - - - - - - - - - - - - - - - 
+				  - 2013-03-20 | now        | b1634b7683d5af2715bf4ea0791c121b
+				  -->
+		<get 
+    		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-Spanish-ALL.anna-3.3.srl-4.21.srl-rr.model" 
+    		dest="target/download/srl-es.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/srl-es.model" 
+    		md5="b1634b7683d5af2715bf4ea0791c121b"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130320"
+    		metaDataVersion="0"
+    		tool="srl" 
+    		language="es" 
+    		variant="conll2009" 
+    		extension="model">			
+		</install-stub-and-upstream-file>
+		
 	</target>
 
 	<target name="zh">
@@ -437,6 +500,26 @@
 				<!-- Chinese Proposition Bank -->
 				<entry key="dependency.tagset" value="cpb"/>
 			</metadata>
+		</install-stub-and-upstream-file>
+		
+		<!-- FILE: CoNLL2009-ST-Chinese-ALL.anna-3.3.srl-4.1.srl.model - - - - - - - - - - - - - - - - - 
+						  - 2013-01-17 | now        | 453d5adfd9417a07c0100aca7b78b766
+						  -->
+		<get 
+    		src="https://mate-tools.googlecode.com/files/CoNLL2009-ST-Chinese-ALL.anna-3.3.srl-4.1.srl.model" 
+    		dest="target/download/srl-zh.model" 
+    		skipexisting="true"/>
+		<install-stub-and-upstream-file 
+    		file="target/download/srl-zh.model" 
+    		md5="453d5adfd9417a07c0100aca7b78b766"
+    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.matetools"
+    		upstreamVersion="20130117"
+    		metaDataVersion="0"
+    		tool="srl" 
+    		language="zh" 
+    		variant="conll2009" 
+    		extension="model">			
 		</install-stub-and-upstream-file>
 	</target>
 </project>

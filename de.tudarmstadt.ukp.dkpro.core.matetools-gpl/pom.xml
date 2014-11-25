@@ -27,6 +27,12 @@
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</artifactId>
 	<name>DKPro Core GPL - Mate-Tools</name>
+	<repositories>
+	   <repository>
+	     <id>ukp-oss-releases</id>
+	     <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-releases</url>
+	   </repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>
@@ -133,6 +139,36 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-lemmatizer-fr-ftb</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-de-tiger</artifactId>
+			<scope>test</scope>
+		</dependency>	
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-en-conll2009</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-es-conll2009</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-zh-conll2009</artifactId>
+			<scope>test</scope>
+		</dependency>	
+		<dependency>
+			<groupId>com.googlecode.mate-tools</groupId>
+			<artifactId>srl</artifactId>
+			<version>4.31</version>
+		</dependency>
+		<dependency>
+		    <groupId>liblinear</groupId>
+		    <artifactId>liblinear</artifactId>
+		    <version>1.51</version>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -221,6 +257,26 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-parser-zh-conll2009</artifactId>
 				<version>20130117.1</version>
 			</dependency>
+			<dependency>
+			  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			  <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-de-tiger</artifactId>
+			  <version>20130105.0</version>
+			</dependency>
+			<dependency>
+			    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			    <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-en-conll2009</artifactId>
+			    <version>20130117.0</version>
+			</dependency>
+			<dependency>
+			    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			    <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-es-conll2009</artifactId>
+			    <version>20130320.0</version>
+			</dependency>	
+			<dependency>
+			    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			    <artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-model-srl-zh-conll2009</artifactId>
+			    <version>20130117.0</version>
+			</dependency>	
 		</dependencies>
 	</dependencyManagement>
 	<build>
