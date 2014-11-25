@@ -42,6 +42,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
+@Deprecated
 public class SpellCheckerNormalizer
     extends Normalizer_ImplBase
 {

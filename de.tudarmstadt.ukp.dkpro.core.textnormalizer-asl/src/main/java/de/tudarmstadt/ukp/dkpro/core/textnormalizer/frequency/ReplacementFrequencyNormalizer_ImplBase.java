@@ -43,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
  * @author nico.erbs@gmail.com
  *
  */
+@Deprecated
 public abstract class ReplacementFrequencyNormalizer_ImplBase
     extends FrequencyNormalizer_ImplBase
 {

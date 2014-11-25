@@ -44,7 +44,7 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.NormalizationUtils;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation"})
-
+@Deprecated
 public abstract class Normalizer_ImplBase
     extends JCasAnnotator_ImplBase
 {
