@@ -48,9 +48,12 @@ public class TokenCaseTransformer
     }
 
     /**
-     * The case to convert tokens to: <li>UPPERCASE: uppercase everything.</li> <li>LOWERCASE:
-     * lowercase everything.</li> <li>NORMALCASE: retain first letter in word and after hyphens,
-     * lowercase everything else.</li>
+     * The case to convert tokens to:
+     * <ul>
+     * <li>UPPERCASE: uppercase everything.</li>
+     * <li>LOWERCASE: lowercase everything.</li>
+     * <li>NORMALCASE: retain first letter in word and after hyphens, lowercase everything else.</li>
+     * </ul>
      */
     public static final String PARAM_CASE = "tokenCase";
     @ConfigurationParameter(name = PARAM_CASE, mandatory = true)
