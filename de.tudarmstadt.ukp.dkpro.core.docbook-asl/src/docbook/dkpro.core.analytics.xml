@@ -49,7 +49,9 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>StanfordCoreferenceResolver</entry>
+						<entry>
+							<para>StanfordCoreferenceResolver</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -72,12 +74,18 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>OpenNlpChunker</entry>
+						<entry>
+							<para>OpenNlpChunker</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>TreeTaggerChunker</entry>
-						<entry>(uses native binary)</entry>
+						<entry>
+							<para>TreeTaggerChunker</para>
+						</entry>
+						<entry>
+							<para>(uses native binary)</para>
+						</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -99,7 +107,9 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>CompoundAnnotator</entry>
+						<entry>
+							<para>CompoundAnnotator</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -122,11 +132,15 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>DictionaryAnnotator</entry>
+						<entry>
+							<para>DictionaryAnnotator</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>SemanticFieldAnnotator</entry>
+						<entry>
+							<para>SemanticFieldAnnotator</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -157,15 +171,25 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>LangDetectLanguageIdentifier</entry>
-						<entry>Character n-grams</entry>
+						<entry>
+							<para>LangDetectLanguageIdentifier</para>
+						</entry>
+						<entry>
+							<para>Character n-grams</para>
+						</entry>
 					</row>
 					<row>
-						<entry>LanguageDetectorWeb1T</entry>
-						<entry>Token n-grams</entry>
+						<entry>
+							<para>LanguageDetectorWeb1T</para>
+						</entry>
+						<entry>
+							<para>Token n-grams</para>
+						</entry>
 					</row>
 					<row>
-						<entry>TextCat</entry>
+						<entry>
+							<para>TextCat</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -196,32 +220,50 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>ClearNlpLemmatizer</entry>
+						<entry>
+							<para>ClearNlpLemmatizer</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>GateLemmatizer</entry>
+						<entry>
+							<para>GateLemmatizer</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>LanguageToolLemmatizer</entry>
+						<entry>
+							<para>LanguageToolLemmatizer</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>MateLemmatizer</entry>
+						<entry>
+							<para>MateLemmatizer</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>MorphaLemmatizer</entry>
+						<entry>
+							<para>MorphaLemmatizer</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>StanfordLemmatizer</entry>
-						<entry>(variant of Morpha)</entry>
+						<entry>
+							<para>StanfordLemmatizer</para>
+						</entry>
+						<entry>
+							<para>(variant of Morpha)</para>
+						</entry>
 					</row>
 					<row>
-						<entry>TreeTaggerPosTagger</entry>
-						<entry>(uses native binary)</entry>
+						<entry>
+							<para>TreeTaggerPosTagger</para>
+						</entry>
+						<entry>
+							<para>(uses native binary)</para>
+						</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -243,11 +285,15 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>MateMorphTagger</entry>
+						<entry>
+							<para>MateMorphTagger</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>SfstAnnotator</entry>
+						<entry>
+							<para>SfstAnnotator</para>
+						</entry>
 						<entry>(uses native binary)</entry>
 					</row>
 				</tbody>
@@ -270,11 +316,15 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>OpenNlpNameFinder</entry>
+						<entry>
+							<para>OpenNlpNameFinder</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>StanfordNamedEntityRecognizer</entry>
+						<entry>
+							<para>StanfordNamedEntityRecognizer</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -297,32 +347,60 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>BerkeleyParser</entry>
-						<entry>constituents</entry>
+						<entry>
+							<para>BerkeleyParser</para>
+						</entry>
+						<entry>
+							<para>constituents</para>
+						</entry>
 					</row>
 					<row>
-						<entry>ClearNlpDependencyParser</entry>
-						<entry>dependencies</entry>
+						<entry>
+							<para>ClearNlpDependencyParser</para>
+						</entry>
+						<entry>
+							<para>dependencies</para>
+						</entry>
 					</row>
 					<row>
-						<entry>OpenNlpParser</entry>
-						<entry>constituents</entry>
+						<entry>
+							<para>OpenNlpParser</para>
+						</entry>
+						<entry>
+							<para>constituents</para>
+						</entry>
 					</row>
 					<row>
-						<entry>MaltParser</entry>
-						<entry>dependencies</entry>
+						<entry>
+							<para>MaltParser</para>
+						</entry>
+						<entry>
+							<para>dependencies</para>
+						</entry>
 					</row>
 					<row>
-						<entry>MateParser</entry>
-						<entry>dependencies</entry>
+						<entry>
+							<para>MateParser</para>
+						</entry>
+						<entry>
+							<para>dependencies</para>
+						</entry>
 					</row>
 					<row>
-						<entry>MstParser</entry>
-						<entry>dependencies</entry>
+						<entry>
+							<para>MstParser</para>
+						</entry>
+						<entry>
+							<para>dependencies</para>
+						</entry>
 					</row>
 					<row>
-						<entry>StanfordParser</entry>
-						<entry>constituents, dependencies (for some languages)</entry>
+						<entry>
+							<para>StanfordParser</para>
+						</entry>
+						<entry>
+							<para>constituents, dependencies (for some languages)</para>
+						</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -352,40 +430,66 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>ArktweetTagger</entry>
-						<entry>(not in release)</entry>
+						<entry>
+							<para>ArktweetTagger</para>
+						</entry>
+						<entry>
+							<para>(not in release)</para>
+						</entry>
 					</row>
 					<row>
-						<entry>ClearNlpPosTagger</entry>
+						<entry>
+							<para>ClearNlpPosTagger</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>HepplePosTagger</entry>
+						<entry>
+							<para>HepplePosTagger</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>HunPosTagger</entry>
-						<entry>(uses native binary)</entry>
+						<entry>
+							<para>HunPosTagger</para>
+						</entry>
+						<entry>
+							<para>(uses native binary)</para>
+						</entry>
 					</row>
 					<row>
-						<entry>MatePosTagger</entry>
+						<entry>
+							<para>MatePosTagger</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>MeCabTagger</entry>
-						<entry>(uses native binary)</entry>
+						<entry>
+							<para>MeCabTagger</para>
+						</entry>
+						<entry>
+							<para>(uses native binary)</para>
+						</entry>
 					</row>
 					<row>
-						<entry>OpenNlpPosTagger</entry>
+						<entry>
+							<para>OpenNlpPosTagger</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>StanfordPosTagger</entry>
+						<entry>
+							<para>StanfordPosTagger</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>TreeTaggerPosTagger</entry>
-						<entry>also does lemmatization (uses native binary)</entry>
+						<entry>
+							<para>TreeTaggerPosTagger</para>
+						</entry>
+						<entry>
+							<para>also does lemmatization (uses native binary)</para>
+						</entry>
 					</row>
 				</tbody>
 			</tgroup>
@@ -418,23 +522,33 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>BreakIteratorSegmenter</entry>
+						<entry>
+							<para>BreakIteratorSegmenter</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>ClearNlpSegmenter</entry>
+						<entry>
+							<para>ClearNlpSegmenter</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>LanguageToolSegmenter</entry>
+						<entry>
+							<para>LanguageToolSegmenter</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>OpenNlpSegmenter</entry>
+						<entry>
+							<para>OpenNlpSegmenter</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>StanfordSegmenter</entry>
+						<entry>
+							<para>StanfordSegmenter</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>
@@ -480,16 +594,22 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>LanguageToolChecker</entry>
+						<entry>
+							<para>LanguageToolChecker</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>NorvigSpellingCorrector</entry>
+						<entry>
+							<para>NorvigSpellingCorrector</para>
+						</entry>
 						<entry/>
 					</row>
 					<row>
-						<entry>SpellChecker</entry>
-						<entry>using Jazzy</entry>
+						<entry>
+							<para>JazzyChecker</para>
+						</entry>
+						<entry/>
 					</row>
 				</tbody>
 			</tgroup>
@@ -519,7 +639,9 @@
 				</thead>
 				<tbody>
 					<row>
-						<entry>SnowballStemmer</entry>
+						<entry>
+							<para>SnowballStemmer</para>
+						</entry>
 						<entry/>
 					</row>
 				</tbody>

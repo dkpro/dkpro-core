@@ -499,6 +499,10 @@
 						(Bosque-CoNLL)</ulink> - Portuguese (CoNLL 2006 format)</para>
 			</listitem>
 			<listitem>
+				<para><ulink url="https://gforge.inria.fr/projects/sequoiabank/">Sequoia
+						corpus</ulink> - French (CoNLL 2006 format)</para>
+			</listitem>
+			<listitem>
 				<para><ulink url="http://nlp.ffzg.hr/resources/corpora/setimes-hr/">SETimes.HR
 						corpus and dependency treebank of Croatian</ulink> - Croatian (CONLL 2006
 					format)</para>
