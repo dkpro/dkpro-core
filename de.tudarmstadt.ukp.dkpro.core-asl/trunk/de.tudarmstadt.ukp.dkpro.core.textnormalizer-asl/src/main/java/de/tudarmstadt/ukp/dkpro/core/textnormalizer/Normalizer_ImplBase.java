@@ -36,9 +36,7 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.NormalizationUtils;
  * Base class for normalizers
  *
  * @author nico.erbs@gmail.com
- *
  */
-
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
@@ -50,14 +48,25 @@ public abstract class Normalizer_ImplBase
 {
 
     /**
-     * @return A map, where a token position maps to a list of SofaChangeAnnotations that should be
-     *         applied for that token
+     * A map, where a token position maps to a list of SofaChangeAnnotations that should be applied
+     * for that token
+     * 
+     * @param jcas
+     *            a CAS.
+     * @return the mapping.
      */
     protected abstract Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas);
 
     /**
-     * @return A map showing which token should be kept and which should be replaced. "true"
-     *         indicates: "replace with changed version"
+     * A map showing which token should be kept and which should be replaced. "true" indicates:
+     * "replace with changed version"
+     * 
+     * @param jcas
+     *            a CAS.
+     * @param as
+     *            an aligned string.
+     * @return the mapping.
+     * @throws AnalysisEngineProcessException if there is an error.
      */
     protected abstract Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
         throws AnalysisEngineProcessException;
