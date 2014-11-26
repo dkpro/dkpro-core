@@ -1,11 +1,12 @@
 #
-# NAME OF THE TAGSET
+# Stuttgarter Morphologisches Analysewerkzeug (SMOR)
 #
-# Source: SOME URL
+# Source: http://www.cis.uni-muenchen.de/~schmid/tools/SMOR/dspin/
 #
 
 #
 # Feature: animacy
+# animacy is not encoded in SMOR (in German animacy is not expressed on the morphological level)
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Animacy.html (2014-11-18)
 #
@@ -15,6 +16,7 @@
 
 #
 # Feature: aspect
+# standard German does not have aspects - only occurs in some German regiolects ("ich war am essen")
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Aspect.html (2014-11-18)
 #
@@ -64,8 +66,8 @@ case.Gen=<Gen>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Definite.html (2014-11-18)
 #
-# definiteness.Ind=
-# definiteness.Def=
+definiteness.Ind=<Indef>
+definiteness.Def=<Def>
 # definiteness.Red=
 # definiteness.Com=
 
@@ -74,9 +76,9 @@ case.Gen=<Gen>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Degree.html (2014-11-18)
 #
-# degree.Pos=
-# degree.Cmp=
-# degree.Sup=
+degree.Pos=<Pos>
+degree.Cmp=<Comp>
+degree.Sup=<Sup>
 # degree.Abs=
 
 #
@@ -95,10 +97,10 @@ gender.Neut=<Neut>
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Mood.html (2014-11-18)
 #
 mood.Ind=<Ind>
-# mood.Imp=
+mood.Imp=<Imp>
 # mood.Cnd=
 # mood.Pot=
-mood.Sub=<Konj>
+mood.Sub=<Subj>
 # mood.Jus=
 # mood.Qot=
 # mood.Opt=
@@ -107,6 +109,7 @@ mood.Sub=<Konj>
 
 #
 # Feature: negative
+# only used in languages that negate using bound morphemes
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Negative.html (2014-11-18)
 #
@@ -118,8 +121,8 @@ mood.Sub=<Konj>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/NumType.html (2014-11-18)
 #
-# numType.Card=
-# numType.Ord=
+numType.Card=<CARD>|<\+CARD>
+numType.Ord=<ORD>|<\+ORD>
 # numType.Mult=
 # numType.Frac=
 # numType.Sets=
@@ -152,39 +155,39 @@ person.3=<3>
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Poss.html (2014-11-18)
 #
-# possessive.Yes=
+possessive.Yes=<\+POSS>
 
 #
 # Feature: pronType
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Poss.html (2014-11-18)
 #
-# pronType.Prs=
-# pronType.Rcp=
+pronType.Prs=<\+PPRO>|<Pers>
+pronType.Rcp=<Rec>
 # pronType.Art=
-# pronType.Int=
-# pronType.Rel=
+pronType.Int=<\+WADV>|<\+WPRO>
+pronType.Rel=<\+REL>
 # pronType.Dem=
 # pronType.Tot=
 # pronType.Neg=
-# pronType.Ind=
+pronType.Ind=<\+INDEF>
 
 #
 # Feature: reflex
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Reflex.html (2014-11-18)
 #
-# reflex.Yes=
+reflex.Yes=<Refl>
 
 #
 # Feature: tense
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/Tense.html (2014-11-18)
 #
-# tense.Past=
+tense.Past=<Past>
 tense.Pres=<Pres>
 # tense.Fut=
-tense.Imp=<Imp>
+# tense.Imp=
 # tense.Nar=
 # tense.Pqp=
 
@@ -192,9 +195,12 @@ tense.Imp=<Imp>
 # Feature: verbForm
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/VerbForm.html (2014-11-18)
+# Rule of thumb: if it has non-empty Mood, it is finite. 
+# But beware that some tagsets conflate verb forms and moods into one feature.
+
 #
 # verbForm.Fin=
-# verbForm.Inf=
+verbForm.Inf=<Inf>
 # verbForm.Sup=
 # verbForm.Part=
 # verbForm.Trans=
@@ -202,6 +208,7 @@ tense.Imp=<Imp>
 
 #
 # Feature: voice
+# not encoded in SMOR
 #
 # Tagset: http://universaldependencies.github.io/docs/u/feat/VerbForm.html (2014-11-18)
 #
