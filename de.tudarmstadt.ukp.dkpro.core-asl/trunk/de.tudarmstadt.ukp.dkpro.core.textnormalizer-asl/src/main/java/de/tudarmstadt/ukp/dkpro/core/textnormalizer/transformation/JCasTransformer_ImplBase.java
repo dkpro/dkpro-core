@@ -42,7 +42,8 @@ public abstract class JCasTransformer_ImplBase
 
     /**
      * A list of fully qualified type names that should be copied to the transformed CAS where
-     * available. By default, no types are copied, i.e. all annotations are omitted.
+     * available. By default, no types are copied apart from {@link DocumentMetaData}, i.e. all
+     * other annotations are omitted.
      */
     public static final String PARAM_TYPES_TO_COPY = "typesToCopy";
     @ConfigurationParameter(name = PARAM_TYPES_TO_COPY, mandatory = true, defaultValue = {})
@@ -79,7 +80,7 @@ public abstract class JCasTransformer_ImplBase
     {
         // Copy the annotation types mentioned in PARAM_TYPES_TO_COPY
         // We have do do this in the afterProcess() phase, because otherwise the SofA in the
-        // target CAS does not exist yet. 
+        // target CAS does not exist yet.
         CAS inputCas = aInput.getCas();
         CasCopier copier = new CasCopier(inputCas, aOutput.getCas());
 
@@ -90,10 +91,10 @@ public abstract class JCasTransformer_ImplBase
         // appears in multiple indexes e.g. via inheritance
         Set<FeatureStructure> indexedFs = new HashSet<FeatureStructure>();
         for (String typeName : typesToCopy) {
-            FSIterator<FeatureStructure> i = inputCas.getIndexRepository().getAllIndexedFS(
+            FSIterator<FeatureStructure> fsIterator = inputCas.getIndexRepository().getAllIndexedFS(
                     inputCas.getTypeSystem().getType(typeName));
-            while (i.hasNext()) {
-                FeatureStructure fs = i.next();
+            while (fsIterator.hasNext()) {
+                FeatureStructure fs = fsIterator.next();
                 if (!indexedFs.contains(fs)) {
                     FeatureStructure fsCopy = copier.copyFs(fs);
                     // Make sure that the sofa annotation in the copy is set
