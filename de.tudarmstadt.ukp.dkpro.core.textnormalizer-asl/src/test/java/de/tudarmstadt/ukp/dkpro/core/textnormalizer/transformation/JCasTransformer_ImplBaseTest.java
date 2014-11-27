@@ -51,7 +51,7 @@ public class JCasTransformer_ImplBaseTest
         int expectedSentences = 0;
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, inputText, 
+                StringReader.PARAM_DOCUMENT_TEXT, inputText,
                 StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
         AnalysisEngineDescription transformer = createEngineDescription(TestTransformer.class);
@@ -65,25 +65,51 @@ public class JCasTransformer_ImplBaseTest
     }
 
     @Test
-    public void testTypesToCopy()
+    public void testAllTypesToCopy()
         throws UIMAException, IOException
     {
         String inputText = "test";
-        int exptectedTokens = 2;
+        int expectedTokens = 2;
         int expectedDocumentMetadata = 1;
-        int expectedSentences = 0;
+        int expectedSentences = 1;
+        String[] typesToCopy = new String[] { Token.class.getName(), Sentence.class.getName() };
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
-                StringReader.PARAM_DOCUMENT_TEXT, inputText, 
+                StringReader.PARAM_DOCUMENT_TEXT, inputText,
                 StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
         AnalysisEngineDescription transformer = createEngineDescription(TestTransformer.class,
-                TestTransformer.PARAM_TYPES_TO_COPY, Token.class.getName());
+                TestTransformer.PARAM_TYPES_TO_COPY, typesToCopy);
         AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
 
         SimplePipeline.runPipeline(reader, annotator, transformer, holder);
         JCas jcas = JCasHolder.get();
-        assertEquals(exptectedTokens, select(jcas, Token.class).size());
+        assertEquals(expectedTokens, select(jcas, Token.class).size());
+        assertEquals(expectedSentences, select(jcas, Sentence.class).size());
+        assertEquals(expectedDocumentMetadata, select(jcas, DocumentMetaData.class).size());
+    }
+
+    @Test
+    public void testOneTypeToCopy()
+        throws UIMAException, IOException
+    {
+        String inputText = "test";
+        int expectedTokens = 2;
+        int expectedDocumentMetadata = 1;
+        int expectedSentences = 0;
+        String[] typesToCopy = new String[] { Token.class.getName() };
+
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, inputText,
+                StringReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription annotator = createEngineDescription(TestAnnotator.class);
+        AnalysisEngineDescription transformer = createEngineDescription(TestTransformer.class,
+                TestTransformer.PARAM_TYPES_TO_COPY, typesToCopy);
+        AnalysisEngineDescription holder = createEngineDescription(JCasHolder.class);
+
+        SimplePipeline.runPipeline(reader, annotator, transformer, holder);
+        JCas jcas = JCasHolder.get();
+        assertEquals(expectedTokens, select(jcas, Token.class).size());
         assertEquals(expectedSentences, select(jcas, Sentence.class).size());
         assertEquals(expectedDocumentMetadata, select(jcas, DocumentMetaData.class).size());
     }
@@ -104,6 +130,11 @@ public class JCasTransformer_ImplBaseTest
             token2.setBegin(2);
             token2.setEnd(3);
             token2.addToIndexes(aJCas);
+
+            Sentence sentence = new Sentence(aJCas);
+            sentence.setBegin(0);
+            sentence.setEnd(3);
+            sentence.addToIndexes(aJCas);
         }
     }
 
