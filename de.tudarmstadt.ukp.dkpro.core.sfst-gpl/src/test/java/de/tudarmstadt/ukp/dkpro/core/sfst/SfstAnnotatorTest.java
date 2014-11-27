@@ -105,13 +105,13 @@ public class SfstAnnotatorTest
     {
         JCas jcas = runTest("de", "smor-ca", "Der Arzt arbeitet im Krankenhaus .");
 
-        String[] morphemes = new String[] { 
+        String[] morphemes = new String[] {
                 "[  0,  3]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - Der ()",
                 "[  4,  8]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Nom><Sg>)",
                 "[  4,  8]     -     -  Acc    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Acc><Sg>)",
                 "[  4,  8]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Dat><Sg>)",
-                "[  9, 17]     -     -    -    -    -     -    -    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeiten<+V><2><Pl><Pres><Subj>)",
-                "[  9, 17]     -     -    -    -    -     -    -    -  Plur      -  -    -    -    -   Imp      -     - arbeitet (arbeiten<+V><Imp><Pl>)",
+                "[  9, 17]     -     -    -    -    -     -  Sub    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeiten<+V><2><Pl><Pres><Subj>)",
+                "[  9, 17]     -     -    -    -    -     -  Imp    -  Plur      -  -    -    -    -     -      -     - arbeitet (arbeiten<+V><Imp><Pl>)",
                 "[  9, 17]     -     -    -    -    -     -  Ind    -  Sing      -  3    -    -    -  Pres      -     - arbeitet (arbeiten<+V><3><Sg><Pres><Ind>)",
                 "[  9, 17]     -     -    -    -    -     -  Ind    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeiten<+V><2><Pl><Pres><Ind>)",
                 "[ 18, 20]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - im (in<+PREPART><Masc><Dat><Sg>)",
