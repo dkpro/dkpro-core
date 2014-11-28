@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>ResourceObjectProviderBase (DKPro Core ASL 1.6.2 API)</title>
+<title>ResourceObjectProviderBase (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ResourceObjectProviderBase (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="ResourceObjectProviderBase (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -117,7 +117,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
  The overrides should only be set if the user explicitly wants to override some settings.
  <p>
  Finally, parameters that may change, e.g. depending on the CAS content should be returned from
- <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#getProperties()"><code>getProperties()</code></a>.
+ <code>getProperties()</code>.
  <p>
  The <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#LOCATION"><code>LOCATION</code></a> may contain variables referring to any of the other settings, e.g.
  <code>"${language}"</code>.
@@ -126,8 +126,6 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
  be configured by placing a properties file in the classpath and setting its location using
  <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariantsLocation(java.lang.String)"><code>setDefaultVariantsLocation(String)</code></a> or by using <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariants(java.util.Properties)"><code>setDefaultVariants(Properties)</code></a>.
  The key in the properties is the language and the value is used a default variant.</div>
-<dl><dt><span class="strong">Author:</span></dt>
-  <dd>Richard Eckart de Castilho</dd></dl>
 </li>
 </ul>
 </div>
@@ -192,11 +190,18 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#SHARABLE">SHARABLE</a></strong></code>
+<div class="block">If this property is set to <code>true</code>, resources loaded through this provider are
+ remembered by the provider using a weak reference.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#VARIANT">VARIANT</a></strong></code>
 <div class="block">The variant.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#VERSION">VERSION</a></strong></code>
 <div class="block">The version of the Maven artifact containing a resource.</div>
@@ -308,7 +313,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#loadResource()">loadResource</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#loadResource(java.util.Properties)">loadResource</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aProperties)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected abstract <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html" title="type parameter in ResourceObjectProviderBase">M</a></code></td>
@@ -328,30 +333,37 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setContextObject(java.lang.Object)">setContextObject</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;aObject)</code>
-<div class="block">Set an object which can be used to try finding a Maven POM from which resource version
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setContextClass(java.lang.Class)">setContextClass</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;?&gt;&nbsp;aClass)</code>
+<div class="block">Set a class which can be used to try finding a Maven POM from which resource version
  information could be extracted.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setContextObject(java.lang.Object)">setContextObject</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>&nbsp;aObject)</code>
+<div class="block">Set an object which can be used to try finding a Maven POM from which resource version
+ information could be extracted.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefault(java.lang.String, java.lang.String)">setDefault</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey,
           <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aValue)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariants(java.util.Properties)">setDefaultVariants</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aDefaultVariants)</code>
 <div class="block">Sets language-dependent default variants.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setDefaultVariantsLocation(java.lang.String)">setDefaultVariantsLocation</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLocation)</code>
 <div class="block">Set the location in the classpath from where to load the language-dependent default variants
  properties file.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/ResourceObjectProviderBase.html#setOverride(java.lang.String, java.lang.String)">setOverride</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aKey,
            <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aValue)</code>&nbsp;</td>
@@ -492,11 +504,24 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 <a name="PACKAGE">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>PACKAGE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PACKAGE</pre>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.PACKAGE">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="SHARABLE">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>SHARABLE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> SHARABLE</pre>
+<div class="block">If this property is set to <code>true</code>, resources loaded through this provider are
+ remembered by the provider using a weak reference. If the same resource is requested by
+ another instance of this provider class, the same resource is returned.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceObjectProviderBase.SHARABLE">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 </li>
@@ -646,6 +671,18 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>aObject</code> - a context object, usually the object creating the provider.</dd></dl>
 </li>
 </ul>
+<a name="setContextClass(java.lang.Class)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setContextClass</h4>
+<pre>public&nbsp;void&nbsp;setContextClass(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Class.html?is-external=true" title="class or interface in java.lang">Class</a>&lt;?&gt;&nbsp;aClass)</pre>
+<div class="block">Set a class which can be used to try finding a Maven POM from which resource version
+ information could be extracted.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aClass</code> - a context class, usually the class creating the provider.</dd></dl>
+</li>
+</ul>
 <a name="getModelVersionFromMavenPom()">
 <!--   -->
 </a>
@@ -656,7 +693,8 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
                                       throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Tries to get the version of the required model from the dependency management section of the
  Maven POM belonging to the context object.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the version of the required model.</dd>
+<dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if there was a problem loading the POM file</dd>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/FileNotFoundException.html?is-external=true" title="class or interface in java.io">FileNotFoundException</a></code> - if no POM could be found</dd>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalStateException.html?is-external=true" title="class or interface in java.lang">IllegalStateException</a></code> - if more than one POM was found, if the version information could not be found in
@@ -672,8 +710,9 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 <pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getModelLocation()
                            throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">For use in test cases.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the location of the model.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the language-dependent default variants location is set but cannot be read.</dd></dl>
 </li>
 </ul>
 <a name="getModelLocation(java.util.Properties)">
@@ -730,13 +769,13 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resou
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
 </li>
 </ul>
-<a name="loadResource()">
+<a name="loadResource(java.util.Properties)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>loadResource</h4>
-<pre>protected&nbsp;void&nbsp;loadResource()
+<pre>protected&nbsp;void&nbsp;loadResource(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Properties.html?is-external=true" title="class or interface in java.util">Properties</a>&nbsp;aProperties)
                      throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <dl><dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>

@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>PdfLayoutEventStripper (DKPro Core ASL 1.6.2 API)</title>
+<title>PdfLayoutEventStripper (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="PdfLayoutEventStripper (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="PdfLayoutEventStripper (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -113,8 +113,6 @@ extends org.apache.pdfbox.util.PDFStreamEngine</pre>
  This class is based on the <code>PDFTextStripper</code> class and was substantially modified and
  enhanced for basic paragraph and heading detection. Unfortunately it was not possible to add
  these enhancements through sub-classing, thus the code was copied and adapted.</div>
-<dl><dt><span class="strong">Author:</span></dt>
-  <dd>Richard Eckart de Castilho</dd></dl>
 </li>
 </ul>
 </div>
@@ -495,8 +493,9 @@ extends org.apache.pdfbox.util.PDFStreamEngine</pre>
 <pre>protected&nbsp;void&nbsp;processArticle(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;org.apache.pdfbox.util.TextPosition&gt;&nbsp;textList)
                        throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">This method tries do detect headings and paragraphs and line boundaries.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>textList</code> - the text.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if there is an error writing to the stream.</dd></dl>
 </li>
 </ul>
 <a name="processTextPosition(org.apache.pdfbox.util.TextPosition)">
@@ -561,7 +560,8 @@ extends org.apache.pdfbox.util.PDFStreamEngine</pre>
 <pre>protected abstract&nbsp;void&nbsp;startRegion(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.Style.html" title="enum in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfLayoutEventStripper.Style</a>&nbsp;style)
                              throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Start a new region.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>style</code> - the style.</dd>
+<dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>
 </ul>
@@ -574,7 +574,8 @@ extends org.apache.pdfbox.util.PDFStreamEngine</pre>
 <pre>protected abstract&nbsp;void&nbsp;endRegion(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.Style.html" title="enum in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfLayoutEventStripper.Style</a>&nbsp;style)
                            throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">End a region.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>style</code> - the style.</dd>
+<dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>
 </ul>
@@ -590,7 +591,7 @@ extends org.apache.pdfbox.util.PDFStreamEngine</pre>
              org.apache.pdfbox.pdmodel.PDPage&nbsp;page)
                            throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Start a new page.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>page</code> - The page we are about to process.</dd>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>firstPage</code> - first page.</dd><dd><code>lastPage</code> - last page.</dd><dd><code>currentPage</code> - current page.</dd><dd><code>page</code> - The page we are about to process.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>
@@ -607,7 +608,7 @@ extends org.apache.pdfbox.util.PDFStreamEngine</pre>
            org.apache.pdfbox.pdmodel.PDPage&nbsp;page)
                          throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">End a page.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>page</code> - The page we are about to process.</dd>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>firstPage</code> - first page.</dd><dd><code>lastPage</code> - last page.</dd><dd><code>currentPage</code> - current page.</dd><dd><code>page</code> - The page we are about to process.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>

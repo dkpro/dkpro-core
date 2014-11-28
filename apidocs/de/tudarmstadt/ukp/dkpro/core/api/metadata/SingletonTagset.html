@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>SingletonTagset (DKPro Core ASL 1.6.2 API)</title>
+<title>SingletonTagset (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SingletonTagset (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="SingletonTagset (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -163,6 +163,10 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata/SingletonTagset.html#remove(java.lang.String)">remove</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aTag)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata/SingletonTagset.html#removeAll(de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset)">removeAll</a></strong>(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata/SingletonTagset.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.metadata">SingletonTagset</a>&nbsp;aOther)</code>&nbsp;</td>
 </tr>
 </table>
@@ -221,6 +225,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Map.html?is-external=true" title="class or interface in java.util">Map</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>,<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;getLayers()</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata/Tagset.html#getLayers()">Tagset</a></code></strong></div>
 <div class="block">Get a map (key-value pairs) using the layer name as key and the tagset as value.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the layers.</dd></dl>
 </li>
 </ul>
 <a name="listTags(java.lang.String, java.lang.String)">
@@ -249,6 +254,15 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/metadata
 <li class="blockList">
 <h4>addAll</h4>
 <pre>public&nbsp;void&nbsp;addAll(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Collection.html?is-external=true" title="class or interface in java.util">Collection</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;aTags)</pre>
+</li>
+</ul>
+<a name="remove(java.lang.String)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>remove</h4>
+<pre>public&nbsp;void&nbsp;remove(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aTag)</pre>
 </li>
 </ul>
 <a name="removeAll(de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset)">

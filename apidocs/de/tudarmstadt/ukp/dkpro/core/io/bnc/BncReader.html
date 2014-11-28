@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>BncReader (DKPro Core ASL 1.6.2 API)</title>
+<title>BncReader (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BncReader (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="BncReader (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -435,14 +435,17 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlRe
 <h4>initCas</h4>
 <pre>protected&nbsp;void&nbsp;initCas(org.apache.uima.cas.CAS&nbsp;aCas,
            <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.Resource.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase.Resource</a>&nbsp;aResource,
-           <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aQualifier)</pre>
+           <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aQualifier)
+                throws <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang">RuntimeException</a></pre>
 <div class="block"><strong>Description copied from class:&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource, java.lang.String)">ResourceCollectionReaderBase</a></code></strong></div>
 <div class="block">Initialize the <code>DocumentMetaData</code>. This must be called before setting the document
  text, otherwise the end feature of this annotation will not be set correctly.</div>
 <dl>
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html#initCas(org.apache.uima.cas.CAS, de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.Resource, java.lang.String)">initCas</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a></code></dd>
-</dl>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aCas</code> - the CAS.</dd><dd><code>aResource</code> - the resource from which the CAS is initialized.</dd><dd><code>aQualifier</code> - a qualifier if multiple CASes are generated from the same file.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/RuntimeException.html?is-external=true" title="class or interface in java.lang">RuntimeException</a></code></dd></dl>
 </li>
 </ul>
 <a name="newSaxHandler()">

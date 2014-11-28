@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>ImsCwbWriter (DKPro Core ASL 1.6.2 API)</title>
+<title>ImsCwbWriter (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ImsCwbWriter (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="ImsCwbWriter (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -190,84 +190,89 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_ADDITIONAL_FEATURES">PARAM_ADDITIONAL_FEATURES</a></strong></code>
+<div class="block">Write additional token-level annotation features.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CORPUS_NAME">PARAM_CORPUS_NAME</a></strong></code>
 <div class="block">The name of the generated corpus.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQP_COMPRESS">PARAM_CQP_COMPRESS</a></strong></code>
 <div class="block">Set this parameter to compress the token streams and the indexes using cwb-huffcode and
  cwb-compress-rdx.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQP_HOME">PARAM_CQP_HOME</a></strong></code>
-<div class="block">Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if
- you want the write to directly encode into the CQP binary format.</div>
+<div class="block">Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if you
+ want the write to directly encode into the CQP binary format.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_CQPWEB_COMPATIBILITY">PARAM_CQPWEB_COMPATIBILITY</a></strong></code>
 <div class="block">Make document IDs compatible with CQPweb.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_TARGET_ENCODING">PARAM_TARGET_ENCODING</a></strong></code>
 <div class="block">Character encoding of the output data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_TARGET_LOCATION">PARAM_TARGET_LOCATION</a></strong></code>
 <div class="block">Location to which the output is written.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_CPOS">PARAM_WRITE_CPOS</a></strong></code>
 <div class="block">Write coarse-grained part-of-speech tags.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_DOC_ID">PARAM_WRITE_DOC_ID</a></strong></code>
 <div class="block">Write the document ID for each token.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_DOCUMENT_TAG">PARAM_WRITE_DOCUMENT_TAG</a></strong></code>
 <div class="block">Write a pseudo-XML tag with the name <code>document</code> to mark the start and end of a
  document.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_LEMMA">PARAM_WRITE_LEMMA</a></strong></code>
 <div class="block">Write lemmata.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_OFFSETS">PARAM_WRITE_OFFSETS</a></strong></code>
 <div class="block">Write the start and end position of each token.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_POS">PARAM_WRITE_POS</a></strong></code>
 <div class="block">Write part-of-speech tags.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#PARAM_WRITE_TEXT_TAG">PARAM_WRITE_TEXT_TAG</a></strong></code>
-<div class="block">Write a pseudo-XML tag with the name <code>text</code> to mark the start and end of a
- document.</div>
+<div class="block">Write a pseudo-XML tag with the name <code>text</code> to mark the start and end of a document.</div>
 </td>
 </tr>
 </table>
@@ -307,10 +312,17 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#collectionProcessComplete()">collectionProcessComplete</a></strong>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#getCoveredAnnotationFeatureValue(java.lang.String, org.apache.uima.cas.text.AnnotationFS)">getCoveredAnnotationFeatureValue</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aFeaturePath,
+                                org.apache.uima.cas.text.AnnotationFS&nbsp;aCoveringAnnotation)</code>
+<div class="block">Get the feature value of an annotation which is covered by another annotation.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#initialize(org.apache.uima.UimaContext)">initialize</a></strong>(org.apache.uima.UimaContext&nbsp;context)</code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/imscwb/ImsCwbWriter.html#process(org.apache.uima.jcas.JCas)">process</a></strong>(org.apache.uima.jcas.JCas&nbsp;jcas)</code>&nbsp;</td>
 </tr>
@@ -552,8 +564,8 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <li class="blockList">
 <h4>PARAM_WRITE_TEXT_TAG</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_TEXT_TAG</pre>
-<div class="block">Write a pseudo-XML tag with the name <code>text</code> to mark the start and end of a
- document. This is used by CQPweb.</div>
+<div class="block">Write a pseudo-XML tag with the name <code>text</code> to mark the start and end of a document.
+ This is used by CQPweb.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_TEXT_TAG">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -566,6 +578,19 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_OFFSETS</pre>
 <div class="block">Write the start and end position of each token.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_WRITE_OFFSETS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_ADDITIONAL_FEATURES">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_ADDITIONAL_FEATURES</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_ADDITIONAL_FEATURES</pre>
+<div class="block">Write additional token-level annotation features. These have to be given as an array of fully
+ qualified feature paths (fully.qualified.classname/featureName). The names for these
+ annotations in CQP are their lowercase shortnames.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_ADDITIONAL_FEATURES">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 <a name="PARAM_CQPWEB_COMPATIBILITY">
@@ -587,8 +612,8 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <li class="blockList">
 <h4>PARAM_CQP_HOME</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CQP_HOME</pre>
-<div class="block">Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if
- you want the write to directly encode into the CQP binary format.</div>
+<div class="block">Set this parameter to the directory containing the cwb-encode and cwb-makeall commands if you
+ want the write to directly encode into the CQP binary format.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter.PARAM_CQP_HOME">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -677,7 +702,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <a name="collectionProcessComplete()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>collectionProcessComplete</h4>
 <pre>public&nbsp;void&nbsp;collectionProcessComplete()
@@ -689,6 +714,22 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <dd><code>collectionProcessComplete</code>&nbsp;in class&nbsp;<code>org.apache.uima.analysis_component.AnalysisComponent_ImplBase</code></dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd></dl>
+</li>
+</ul>
+<a name="getCoveredAnnotationFeatureValue(java.lang.String, org.apache.uima.cas.text.AnnotationFS)">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getCoveredAnnotationFeatureValue</h4>
+<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getCoveredAnnotationFeatureValue(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aFeaturePath,
+                                      org.apache.uima.cas.text.AnnotationFS&nbsp;aCoveringAnnotation)</pre>
+<div class="block">Get the feature value of an annotation which is covered by another annotation.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aFeaturePath</code> - The fully qualified feature path of the feature in question:
+            your.package.and.annotation.class.name/featureName</dd><dd><code>aCoveringAnnotation</code> - The annotation that covers the annotation for which the feature value should be
+            extracted.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the feature value if a feature name is given; coveredText if only the annotation is
+         given</dd></dl>
 </li>
 </ul>
 </li>

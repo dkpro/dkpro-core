@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>TestFrequencyCountProvider (DKPro Core ASL 1.6.2 API)</title>
+<title>TestFrequencyCountProvider (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TestFrequencyCountProvider (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="TestFrequencyCountProvider (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -251,6 +251,8 @@ extends <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequ
 <pre>public&nbsp;long&nbsp;getNrOfNgrams(int&nbsp;n)</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfNgrams(int)">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns the number of ngrams of a given size in the corpus.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the ngram size.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the number of ngrams.</dd></dl>
 </li>
 </ul>
 <a name="getNrOfDistinctNgrams(int)">
@@ -263,7 +265,9 @@ extends <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequ
                            throws <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfDistinctNgrams(int)">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns the number of distinct ngrams of a given size in the corpus.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the ngram size.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the number of ngrams.</dd>
+<dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code></dd></dl>
 </li>
 </ul>
@@ -287,7 +291,9 @@ extends <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequ
                                   throws <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNgramIterator(int)">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns an iterator over all ngrams of a given size in the corpus.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the ngram size.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>an iterator over the ngrams.</dd>
+<dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code></dd></dl>
 </li>
 </ul>
@@ -301,7 +307,8 @@ extends <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequ
                    throws <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getLanguage()">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns the language for which the frequencies are provided.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the language.</dd>
+<dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code></dd></dl>
 </li>
 </ul>
@@ -320,6 +327,7 @@ extends <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequ
 <dd><code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getID()">getID</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.frequency.provider">FrequencyCountProvider</a></code></dd>
 <dt><strong>Overrides:</strong></dt>
 <dd><code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProviderBase.html#getID()">getID</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProviderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.provider">FrequencyCountProviderBase</a></code></dd>
+<dt><span class="strong">Returns:</span></dt><dd>the ID.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></code></dd></dl>
 </li>
