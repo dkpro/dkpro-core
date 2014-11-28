@@ -1,0 +1,10 @@
+de.tudarmstadt.ukp.dkpro.core.arktools
+de.tudarmstadt.ukp.dkpro.core.berkeleyparser
+de.tudarmstadt.ukp.dkpro.core.gate
+de.tudarmstadt.ukp.dkpro.core.io.tgrep
+de.tudarmstadt.ukp.dkpro.core.matetools
+de.tudarmstadt.ukp.dkpro.core.sfst
+de.tudarmstadt.ukp.dkpro.core.sfst.parser
+de.tudarmstadt.ukp.dkpro.core.stanfordnlp
+de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util
+edu.stanford.nlp.parser.lexparser
