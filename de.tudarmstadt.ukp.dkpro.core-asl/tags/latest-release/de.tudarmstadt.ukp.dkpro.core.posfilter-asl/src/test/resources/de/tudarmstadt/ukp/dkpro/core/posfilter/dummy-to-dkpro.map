@@ -1,5 +1,0 @@
-# Just a dummy file to test the mapping.
-DET=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ART
-MADE_UP_POS=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
-N=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.NN
-V=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
