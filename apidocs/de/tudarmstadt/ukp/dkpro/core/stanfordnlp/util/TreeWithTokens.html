@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>TreeWithTokens (DKPro Core GPL 1.6.2 API)</title>
+<title>TreeWithTokens (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TreeWithTokens (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="TreeWithTokens (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -274,13 +274,14 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>getSpan</h4>
 <pre>public&nbsp;edu.stanford.nlp.util.IntPair&nbsp;getSpan(edu.stanford.nlp.trees.Tree&nbsp;subtree)</pre>
 <div class="block">Returns the span of the documentText that is covered by a given subtree,
- that has to be taken directly from the original tree.<br/>
-
+ that has to be taken directly from the original tree.
+ <p>
  NOTE: Possibly we could make this more general to also support general
  trees that are contained in the original tree, but are not directly taken
  from it (i.e. with different leaf-numbering). In order to do so, we would
  have to make a Tregex-Matching of the given subtree in the original tree
- to identify the positition of the given subtree.<br/>
+ to identify the positition of the given subtree.
+ <p>
  This could be achieved by translating the subtree into a Tregex pattern
  and then matching this pattern against the original tree.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>subtree</code> - a subtree of this TreeWithTokens (it has to be a real
@@ -375,6 +376,6 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>

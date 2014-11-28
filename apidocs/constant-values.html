@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Constant Field Values (DKPro Core GPL 1.6.2 API)</title>
+<title>Constant Field Values (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Constant Field Values (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="Constant Field Values (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -75,7 +75,7 @@
 <ul class="blockList">
 <li class="blockList">
 <table border="0" cellpadding="3" cellspacing="0" summary="Constant Field Values table, listing constant fields, and values">
-<caption><span>de.tudarmstadt.ukp.dkpro.core.arktools.<a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetTagger.html" title="class in de.tudarmstadt.ukp.dkpro.core.arktools">ArktweetTagger</a></span><span class="tabEnd">&nbsp;</span></caption>
+<caption><span>de.tudarmstadt.ukp.dkpro.core.arktools.<a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetPosTagger.html" title="class in de.tudarmstadt.ukp.dkpro.core.arktools">ArktweetPosTagger</a></span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th scope="col">Constant Field</th>
@@ -83,31 +83,31 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger.PARAM_LANGUAGE">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetPosTagger.PARAM_LANGUAGE">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetTagger.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetPosTagger.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></code></td>
 <td class="colLast"><code>"language"</code></td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger.PARAM_MODEL_LOCATION">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetPosTagger.PARAM_MODEL_LOCATION">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetTagger.html#PARAM_MODEL_LOCATION">PARAM_MODEL_LOCATION</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetPosTagger.html#PARAM_MODEL_LOCATION">PARAM_MODEL_LOCATION</a></code></td>
 <td class="colLast"><code>"modelLocation"</code></td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger.PARAM_POS_MAPPING_LOCATION">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetPosTagger.PARAM_POS_MAPPING_LOCATION">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetTagger.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"posMappingLocation"</code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetPosTagger.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
+<td class="colLast"><code>"POSMappingLocation"</code></td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetTagger.PARAM_VARIANT">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.arktools.ArktweetPosTagger.PARAM_VARIANT">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetTagger.html#PARAM_VARIANT">PARAM_VARIANT</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/arktools/ArktweetPosTagger.html#PARAM_VARIANT">PARAM_VARIANT</a></code></td>
 <td class="colLast"><code>"modelVariant"</code></td>
 </tr>
 </tbody>
@@ -139,46 +139,60 @@
 <td class="colLast"><code>"binarize"</code></td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_CONSTITUENT_MAPPING_LOCATION">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_CONSTITUENT_MAPPING_LOCATION">PARAM_CONSTITUENT_MAPPING_LOCATION</a></code></td>
+<td class="colLast"><code>"ConstituentMappingLocation"</code></td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_INTERN_TAGS">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_INTERN_TAGS">PARAM_INTERN_TAGS</a></code></td>
 <td class="colLast"><code>"internTags"</code></td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_KEEP_FUNCTION_LABELS">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_KEEP_FUNCTION_LABELS">PARAM_KEEP_FUNCTION_LABELS</a></code></td>
 <td class="colLast"><code>"keepFunctionLabels"</code></td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_LANGUAGE">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></code></td>
 <td class="colLast"><code>"language"</code></td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_MODEL_LOCATION">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_MODEL_LOCATION">PARAM_MODEL_LOCATION</a></code></td>
 <td class="colLast"><code>"modelLocation"</code></td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_POS_MAPPING_LOCATION">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"posMappingLocation"</code></td>
+<td class="colLast"><code>"POSMappingLocation"</code></td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_PRINT_TAGSET">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_PRINT_TAGSET">PARAM_PRINT_TAGSET</a></code></td>
 <td class="colLast"><code>"printTagSet"</code></td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_READ_POS">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_READ_POS">PARAM_READ_POS</a></code></td>
+<td class="colLast"><code>"readPOS"</code></td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_SCORES">
@@ -323,7 +337,7 @@
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/gate/HepplePosTagger.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"posMappingLocation"</code></td>
+<td class="colLast"><code>"POSMappingLocation"</code></td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.gate.HepplePosTagger.PARAM_PRINT_TAGSET">
@@ -480,7 +494,7 @@
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/matetools/MateParser.html#PARAM_DEPENDENCY_MAPPING_LOCATION">PARAM_DEPENDENCY_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"dependencyMappingLocation"</code></td>
+<td class="colLast"><code>"DependencyMappingLocation"</code></td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.matetools.MateParser.PARAM_LANGUAGE">
@@ -541,7 +555,7 @@
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/matetools/MatePosTagger.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"posMappingLocation"</code></td>
+<td class="colLast"><code>"POSMappingLocation"</code></td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.matetools.MatePosTagger.PARAM_PRINT_TAGSET">
@@ -693,7 +707,7 @@
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html#PARAM_NAMED_ENTITY_MAPPING_LOCATION">PARAM_NAMED_ENTITY_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"namedEntityMappingLocation"</code></td>
+<td class="colLast"><code>"NamedEntityMappingLocation"</code></td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer.PARAM_PRINT_TAGSET">
@@ -703,6 +717,27 @@
 <td class="colLast"><code>"printTagSet"</code></td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer.PARAM_PTB3_ESCAPING">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html#PARAM_PTB3_ESCAPING">PARAM_PTB3_ESCAPING</a></code></td>
+<td class="colLast"><code>"ptb3Escaping"</code></td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer.PARAM_QUOTE_BEGIN">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html#PARAM_QUOTE_BEGIN">PARAM_QUOTE_BEGIN</a></code></td>
+<td class="colLast"><code>"quoteBegin"</code></td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer.PARAM_QUOTE_END">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordNamedEntityRecognizer.html#PARAM_QUOTE_END">PARAM_QUOTE_END</a></code></td>
+<td class="colLast"><code>"quoteEnd"</code></td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordNamedEntityRecognizer.PARAM_VARIANT">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
@@ -729,11 +764,25 @@
 <td class="colLast"><code>"annotationTypeToParse"</code></td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CONSTITUENT_MAPPING_LOCATION">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CONSTITUENT_MAPPING_LOCATION">PARAM_CONSTITUENT_MAPPING_LOCATION</a></code></td>
+<td class="colLast"><code>"ConstituentMappingLocation"</code></td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_LANGUAGE">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></code></td>
 <td class="colLast"><code>"language"</code></td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_MAX_ITEMS">
+<!--   -->
+</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_MAX_ITEMS">PARAM_MAX_ITEMS</a></code></td>
+<td class="colLast"><code>"maxItems"</code></td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_MAX_TOKENS">
@@ -761,7 +810,7 @@
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"posMappingLocation"</code></td>
+<td class="colLast"><code>"POSMappingLocation"</code></td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_PRINT_TAGSET">
@@ -820,20 +869,13 @@
 <td class="colLast"><code>"writeDependency"</code></td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_LEMMA">
-<!--   -->
-</a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_WRITE_LEMMA">PARAM_WRITE_LEMMA</a></code></td>
-<td class="colLast"><code>"writeLemma"</code></td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_PENN_TREE">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_WRITE_PENN_TREE">PARAM_WRITE_PENN_TREE</a></code></td>
 <td class="colLast"><code>"writePennTree"</code></td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_POS">
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
@@ -878,7 +920,7 @@
 <!--   -->
 </a><code>public&nbsp;static&nbsp;final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td><code><a href="de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></code></td>
-<td class="colLast"><code>"posMappingLocation"</code></td>
+<td class="colLast"><code>"POSMappingLocation"</code></td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a name="de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordPosTagger.PARAM_PRINT_TAGSET">
@@ -984,6 +1026,6 @@
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>

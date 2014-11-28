@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>CasCopier (DKPro Core GPL 1.6.2 API)</title>
+<title>CasCopier (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="CasCopier (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="CasCopier (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -36,7 +36,7 @@
 <div class="subNav">
 <ul class="navList">
 <li>Prev Class</li>
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CoreNlpUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html" target="_top">Frames</a></li>
@@ -150,7 +150,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;org.apache.uima.jcas.tcas.Annotation&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html#batchCopyAnnotations(java.util.List)">batchCopyAnnotations</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;org.apache.uima.jcas.tcas.Annotation&gt;&nbsp;annoList)</code>
 <div class="block">Performs batch-copying of Annotations (could also be generalized to FeatureStructures)
- 
+
  While copying the annotations, the whole batch is held in a class attribute.</div>
 </td>
 </tr>
@@ -273,6 +273,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>alreadyCopied</h4>
 <pre>public&nbsp;boolean&nbsp;alreadyCopied(org.apache.uima.cas.FeatureStructure&nbsp;aFS)</pre>
 <div class="block">Returns whether the given FS has already been copied using this CasCopier.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aFS</code> - a feature structure.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>if the FS has already been copied.</dd></dl>
 </li>
 </ul>
 <a name="batchCopyAnnotations(java.util.List)">
@@ -283,7 +285,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>batchCopyAnnotations</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;org.apache.uima.jcas.tcas.Annotation&gt;&nbsp;batchCopyAnnotations(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;org.apache.uima.jcas.tcas.Annotation&gt;&nbsp;annoList)</pre>
 <div class="block">Performs batch-copying of Annotations (could also be generalized to FeatureStructures)
- 
+
  While copying the annotations, the whole batch is held in a class attribute. This way, we can
  cope with referenced annotations that have not been copied/recovered yet.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>annoList</code> - the list of annotations that is to be batch-copied</dd>
@@ -317,7 +319,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <div class="subNav">
 <ul class="navList">
 <li>Prev Class</li>
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CoreNlpUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html" target="_top">Frames</a></li>
@@ -357,6 +359,6 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>

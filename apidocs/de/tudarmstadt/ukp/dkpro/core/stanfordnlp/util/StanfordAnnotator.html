@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>StanfordAnnotator (DKPro Core GPL 1.6.2 API)</title>
+<title>StanfordAnnotator (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordAnnotator (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="StanfordAnnotator (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -35,7 +35,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CoreNlpUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Prev Class</span></a></li>
 <li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -97,7 +97,8 @@
 <br>
 <pre>public class <span class="strong">StanfordAnnotator</span>
 extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a></pre>
-<div class="block">A StanfordAnnotator-object creates most of the annotations for the StanfordParser component.<br/>
+<div class="block">A StanfordAnnotator-object creates most of the annotations for the StanfordParser component.
+ <p>
  The code has been moved away from the Parser component because it is also used by other
  components (e.g. Transformations)</div>
 <dl><dt><span class="strong">Author:</span></dt>
@@ -148,9 +149,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotationFromTree(edu.stanford.nlp.trees.TreebankLanguagePack, boolean, boolean)">createConstituentAnnotationFromTree</a></strong>(edu.stanford.nlp.trees.TreebankLanguagePack&nbsp;aTreebankLanguagePack,
-                                   boolean&nbsp;aCreatePos,
-                                   boolean&nbsp;aCreateLemma)</code>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#createConstituentAnnotationFromTree(edu.stanford.nlp.trees.TreebankLanguagePack, boolean)">createConstituentAnnotationFromTree</a></strong>(edu.stanford.nlp.trees.TreebankLanguagePack&nbsp;aTreebankLanguagePack,
+                                   boolean&nbsp;aCreatePos)</code>
 <div class="block">Creates linked constituent annotations, POS annotations and lemma-annotations.</div>
 </td>
 </tr>
@@ -202,13 +202,17 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setJCas(org.apache.uima.jcas.JCas)">setJCas</a></strong>(org.apache.uima.jcas.JCas&nbsp;aJCas)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setConstituentMappingProvider(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">setConstituentMappingProvider</a></strong>(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider&nbsp;aConstituentMappingProvider)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setPosMappingProvider(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">setPosMappingProvider</a></strong>(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider&nbsp;aPosMappingProvider)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setJCas(org.apache.uima.jcas.JCas)">setJCas</a></strong>(org.apache.uima.jcas.JCas&nbsp;aJCas)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setPosMappingProvider(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">setPosMappingProvider</a></strong>(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider&nbsp;aPosMappingProvider)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html#setTokenTree(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.TreeWithTokens)">setTokenTree</a></strong>(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeWithTokens.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">TreeWithTokens</a>&nbsp;aTokenTree)</code>&nbsp;</td>
 </tr>
@@ -299,17 +303,27 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <pre>public&nbsp;void&nbsp;setPosMappingProvider(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider&nbsp;aPosMappingProvider)</pre>
 </li>
 </ul>
-<a name="createConstituentAnnotationFromTree(edu.stanford.nlp.trees.TreebankLanguagePack, boolean, boolean)">
+<a name="setConstituentMappingProvider(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setConstituentMappingProvider</h4>
+<pre>public&nbsp;void&nbsp;setConstituentMappingProvider(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider&nbsp;aConstituentMappingProvider)</pre>
+</li>
+</ul>
+<a name="createConstituentAnnotationFromTree(edu.stanford.nlp.trees.TreebankLanguagePack, boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>createConstituentAnnotationFromTree</h4>
 <pre>public&nbsp;void&nbsp;createConstituentAnnotationFromTree(edu.stanford.nlp.trees.TreebankLanguagePack&nbsp;aTreebankLanguagePack,
-                                       boolean&nbsp;aCreatePos,
-                                       boolean&nbsp;aCreateLemma)</pre>
-<div class="block">Creates linked constituent annotations, POS annotations and lemma-annotations.<br/>
+                                       boolean&nbsp;aCreatePos)</pre>
+<div class="block">Creates linked constituent annotations, POS annotations and lemma-annotations.
+ <p>
  Note: The annotations are directly written to the indexes of the CAS.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aTreebankLanguagePack</code> - the language pack.</dd><dd><code>aCreatePos</code> - whether to create POS annotations.</dd></dl>
 </li>
 </ul>
 <a name="createTagAnnotation(int, int, java.lang.String)">
@@ -337,7 +351,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
                                                                                                 <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aSyntacticFunction)</pre>
 <div class="block">Creates a new Constituent annotation. Links to parent- and child-annotations are not yet
  created here.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aBegin</code> - start-index of the constituent span</dd><dd><code>aEnd</code> - end-index of the constituent span</dd><dd><code>aConstituentType</code> - the constituent type</dd>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aBegin</code> - start-index of the constituent span</dd><dd><code>aEnd</code> - end-index of the constituent span</dd><dd><code>aConstituentType</code> - the constituent type</dd><dd><code>aSyntacticFunction</code> - the syntactic function</dd>
 <dt><span class="strong">Returns:</span></dt><dd>the annotation</dd></dl>
 </li>
 </ul>
@@ -366,7 +380,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
                               de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;aGovernor,
                               de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&nbsp;aDependent)</pre>
 <div class="block">Writes dependency annotations to the JCas</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aGovernor</code> - the governing-word</dd><dd><code>aDependent</code> - the dependent-word</dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aDependencyType</code> - the dependency type</dd><dd><code>aGovernor</code> - the governing-word</dd><dd><code>aDependent</code> - the dependent-word</dd></dl>
 </li>
 </ul>
 <a name="createPennTreeAnnotation(int, int)">
@@ -378,6 +392,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <pre>public&nbsp;void&nbsp;createPennTreeAnnotation(int&nbsp;aBegin,
                             int&nbsp;aEnd)</pre>
 <div class="block">Creates annotation with Penn Treebank style representations of the syntax tree</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aBegin</code> - start offset.</dd><dd><code>aEnd</code> - end offset.</dd></dl>
 </li>
 </ul>
 <a name="recoverAnnotationsFromNodes()">
@@ -388,9 +403,9 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>recoverAnnotationsFromNodes</h4>
 <pre>public&nbsp;void&nbsp;recoverAnnotationsFromNodes()</pre>
 <div class="block">Recovers annotations from a Stanford Tree-Object, which have been saved within the CoreLabel
- of the tree.<br/>
-
- Note:<br/>
+ of the tree.
+<p>
+ Note:
  Copying has to be done in batch, because we need to have ALL annotations that should be
  recovered together when copying them. The reason is that some annotations reference each
  other, which can cause problem if a referenced annotation has not yet been recovered.</div>
@@ -422,7 +437,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CoreNlpUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Prev Class</span></a></li>
 <li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/TreeUtils.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -463,6 +478,6 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>

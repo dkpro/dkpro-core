@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>StanfordLemmatizer (DKPro Core GPL 1.6.2 API)</title>
+<title>StanfordLemmatizer (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordLemmatizer (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="StanfordLemmatizer (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -121,7 +121,14 @@
 <br>
 <pre>public class <span class="strong">StanfordLemmatizer</span>
 extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
-<div class="block">Stanford Lemmatizer component.</div>
+<div class="block">Stanford Lemmatizer component. The Stanford Morphology-class computes the base form of English
+ words, by removing just inflections (not derivational morphology). That is, it only does noun
+ plurals, pronoun case, and verb endings, and not things like comparative adjectives or derived
+ nominals. It is based on a finite-state transducer implemented by John Carroll et al., written in
+ flex and publicly available. See:
+ http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html
+ 
+ <p>This only works for ENGLISH.</p></div>
 </li>
 </ul>
 </div>
@@ -331,6 +338,6 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>

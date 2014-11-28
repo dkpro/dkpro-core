@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>StanfordParser (DKPro Core GPL 1.6.2 API)</title>
+<title>StanfordParser (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="StanfordParser (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="StanfordParser (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -163,21 +163,31 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#language">language</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#constituentMappingLocation">constituentMappingLocation</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#language">language</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.DependenciesMode.html" title="enum in de.tudarmstadt.ukp.dkpro.core.stanfordnlp">StanfordParser.DependenciesMode</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#mode">mode</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#modelLocation">modelLocation</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_ANNOTATIONTYPE_TO_PARSE">PARAM_ANNOTATIONTYPE_TO_PARSE</a></strong></code>
 <div class="block">This parameter can be used to override the standard behavior which uses the <i>Sentence</i>
  annotation as the basic unit for parsing.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_CONSTITUENT_MAPPING_LOCATION">PARAM_CONSTITUENT_MAPPING_LOCATION</a></strong></code>
+<div class="block">Location of the mapping file for constituent tags to UIMA types.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -188,83 +198,84 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_MAX_ITEMS">PARAM_MAX_ITEMS</a></strong></code>
+<div class="block">Controls when the factored parser considers a sentence to be too complex and falls back to
+ the PCFG parser.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_MAX_TOKENS">PARAM_MAX_TOKENS</a></strong></code>
 <div class="block">Maximum number of tokens in a sentence.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_MODE">PARAM_MODE</a></strong></code>
 <div class="block">Sets the kind of dependencies being created.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_MODEL_LOCATION">PARAM_MODEL_LOCATION</a></strong></code>
 <div class="block">Location from which the model is read.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></strong></code>
 <div class="block">Location of the mapping file for part-of-speech tags to UIMA types.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_PRINT_TAGSET">PARAM_PRINT_TAGSET</a></strong></code>
 <div class="block">Write the tag set(s) to the log when a model is loaded.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_PTB3_ESCAPING">PARAM_PTB3_ESCAPING</a></strong></code>
 <div class="block">Enable all traditional PTB3 token transforms (like -LRB-, -RRB-).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_QUOTE_BEGIN">PARAM_QUOTE_BEGIN</a></strong></code>
 <div class="block">List of extra token texts (usually single character strings) that should be treated like
  opening quotes and escaped accordingly before being sent to the parser.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_QUOTE_END">PARAM_QUOTE_END</a></strong></code>
 <div class="block">List of extra token texts (usually single character strings) that should be treated like
  closing quotes and escaped accordingly before being sent to the parser.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_READ_POS">PARAM_READ_POS</a></strong></code>
 <div class="block">Sets whether to use or not to use already existing POS tags from another annotator for the
  parsing process.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_VARIANT">PARAM_VARIANT</a></strong></code>
 <div class="block">Variant of a model the model.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_WRITE_CONSTITUENT">PARAM_WRITE_CONSTITUENT</a></strong></code>
 <div class="block">Sets whether to create or not to create constituent tags.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_WRITE_DEPENDENCY">PARAM_WRITE_DEPENDENCY</a></strong></code>
 <div class="block">Sets whether to create or not to create dependency annotations.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#PARAM_WRITE_LEMMA">PARAM_WRITE_LEMMA</a></strong></code>
-<div class="block">Sets whether to create or not to create Lemma tags.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -326,7 +337,8 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#doCreateDependencyTags(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, edu.stanford.nlp.trees.Tree, java.util.List)">doCreateDependencyTags</a></strong>(<a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</a>&nbsp;sfAnnotator,
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.html#doCreateDependencyTags(edu.stanford.nlp.parser.common.ParserGrammar, de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, edu.stanford.nlp.trees.Tree, java.util.List)">doCreateDependencyTags</a></strong>(edu.stanford.nlp.parser.common.ParserGrammar&nbsp;aParser,
+                      <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</a>&nbsp;sfAnnotator,
                       edu.stanford.nlp.trees.Tree&nbsp;parseTree,
                       <a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&gt;&nbsp;tokens)</code>&nbsp;</td>
 </tr>
@@ -495,6 +507,26 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> posMappingLocation</pre>
 </li>
 </ul>
+<a name="PARAM_CONSTITUENT_MAPPING_LOCATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CONSTITUENT_MAPPING_LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CONSTITUENT_MAPPING_LOCATION</pre>
+<div class="block">Location of the mapping file for constituent tags to UIMA types.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_CONSTITUENT_MAPPING_LOCATION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="constituentMappingLocation">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>constituentMappingLocation</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> constituentMappingLocation</pre>
+</li>
+</ul>
 <a name="PARAM_WRITE_DEPENDENCY">
 <!--   -->
 </a>
@@ -502,9 +534,9 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <li class="blockList">
 <h4>PARAM_WRITE_DEPENDENCY</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_DEPENDENCY</pre>
-<div class="block">Sets whether to create or not to create dependency annotations. <br/>
+<div class="block">Sets whether to create or not to create dependency annotations.
  
- Default: <code>true</code></div>
+ <p>Default: <code>true</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_DEPENDENCY">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -515,9 +547,9 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <li class="blockList">
 <h4>PARAM_MODE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_MODE</pre>
-<div class="block">Sets the kind of dependencies being created. <br/>
+<div class="block">Sets the kind of dependencies being created.
  
- Default: <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.DependenciesMode.html#COLLAPSED"><code>TREE</code></a></div>
+ <p>Default: <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.DependenciesMode.html#COLLAPSED"><code>TREE</code></a></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordParser.DependenciesMode.html" title="enum in de.tudarmstadt.ukp.dkpro.core.stanfordnlp"><code>StanfordParser.DependenciesMode</code></a>, 
 <a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_MODE">Constant Field Values</a></dd></dl>
 </li>
@@ -539,8 +571,8 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_WRITE_CONSTITUENT</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_CONSTITUENT</pre>
 <div class="block">Sets whether to create or not to create constituent tags. This is required for POS-tagging
- and lemmatization.<br/>
- 
+ and lemmatization.
+ <p>
  Default: <code>true</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_CONSTITUENT">Constant Field Values</a></dd></dl>
 </li>
@@ -553,8 +585,8 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_WRITE_PENN_TREE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_PENN_TREE</pre>
 <div class="block">If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
- containing the whole parse tree in Penn Treebank style format.<br/>
- 
+ containing the whole parse tree in Penn Treebank style format.
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_PENN_TREE">Constant Field Values</a></dd></dl>
 </li>
@@ -567,10 +599,10 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_ANNOTATIONTYPE_TO_PARSE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_ANNOTATIONTYPE_TO_PARSE</pre>
 <div class="block">This parameter can be used to override the standard behavior which uses the <i>Sentence</i>
- annotation as the basic unit for parsing.<br/>
- If the parameter is set with the name of an annotation type <i>x</i>, the parser will no
- longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.<br/>
- Default: <code>null</code></div>
+ annotation as the basic unit for parsing.
+ <p>If the parameter is set with the name of an annotation type <i>x</i>, the parser will no
+ longer parse <i>Sentence</i>-annotations, but <i>x</i>-Annotations.</p>
+ <p>Default: <code>null</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_ANNOTATIONTYPE_TO_PARSE">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -582,8 +614,9 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_WRITE_POS</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_POS</pre>
 <div class="block">Sets whether to create or not to create POS tags. The creation of constituent tags must be
- turned on for this to work.<br/>
- Default: <code>true</code></div>
+ turned on for this to work.
+ <p>
+ Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_POS">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -595,8 +628,9 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_READ_POS</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_READ_POS</pre>
 <div class="block">Sets whether to use or not to use already existing POS tags from another annotator for the
- parsing process.<br/>
- Default: <code>false</code></div>
+ parsing process.
+ <p>
+ Default: <code>true</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_READ_POS">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -608,35 +642,26 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_MAX_TOKENS</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_MAX_TOKENS</pre>
 <div class="block">Maximum number of tokens in a sentence. Longer sentences are not parsed. This is to avoid out
- of memory exceptions.<br/>
+ of memory exceptions.
+ <p>
  Default: <code>130</code></div>
-<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_MAX_TOKENS">Constant Field Values</a></dd></dl>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>TestOptions.maxLength</code>, 
+<a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_MAX_TOKENS">Constant Field Values</a></dd></dl>
 </li>
 </ul>
-<a name="PARAM_WRITE_LEMMA">
+<a name="PARAM_MAX_ITEMS">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>PARAM_WRITE_LEMMA</h4>
-<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_LEMMA</pre>
-<div class="block">Sets whether to create or not to create Lemma tags. The creation of constituent tags must be
- turned on for this to work.<br/>
- This only works for ENGLISH.<br/>
- Default:<br/>
- <ul>
- <li>true, if document text is English</li>
- <li>false, if document text is not English</li>
- </ul>
- <br/>
-
- <strong>Info:</strong><br>
- The Stanford Morphology-class computes the base form of English words, by removing just
- inflections (not derivational morphology). That is, it only does noun plurals, pronoun case,
- and verb endings, and not things like comparative adjectives or derived nominals. It is based
- on a finite-state transducer implemented by John Carroll et al., written in flex and publicly
- available. See: http://www.informatics.susx.ac.uk/research/nlp/carroll/morph.html</div>
-<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_WRITE_LEMMA">Constant Field Values</a></dd></dl>
+<h4>PARAM_MAX_ITEMS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_MAX_ITEMS</pre>
+<div class="block">Controls when the factored parser considers a sentence to be too complex and falls back to
+ the PCFG parser.
+ <p>
+ Default: <code>200000</code></div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>TestOptions.MAX_ITEMS</code>, 
+<a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser.PARAM_MAX_ITEMS">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 <a name="PARAM_PTB3_ESCAPING">
@@ -734,13 +759,14 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd><dt><span class="strong">See Also:</span></dt><dd><code>JCasAnnotator_ImplBase.process(org.apache.uima.jcas.JCas)</code></dd></dl>
 </li>
 </ul>
-<a name="doCreateDependencyTags(de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, edu.stanford.nlp.trees.Tree, java.util.List)">
+<a name="doCreateDependencyTags(edu.stanford.nlp.parser.common.ParserGrammar, de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util.StanfordAnnotator, edu.stanford.nlp.trees.Tree, java.util.List)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>doCreateDependencyTags</h4>
-<pre>protected&nbsp;void&nbsp;doCreateDependencyTags(<a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</a>&nbsp;sfAnnotator,
+<pre>protected&nbsp;void&nbsp;doCreateDependencyTags(edu.stanford.nlp.parser.common.ParserGrammar&nbsp;aParser,
+                          <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/StanfordAnnotator.html" title="class in de.tudarmstadt.ukp.dkpro.core.stanfordnlp.util">StanfordAnnotator</a>&nbsp;sfAnnotator,
                           edu.stanford.nlp.trees.Tree&nbsp;parseTree,
                           <a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token&gt;&nbsp;tokens)</pre>
 </li>
@@ -821,6 +847,6 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>

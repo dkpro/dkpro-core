@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>BerkeleyParser (DKPro Core GPL 1.6.2 API)</title>
+<title>BerkeleyParser (DKPro Core GPL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="BerkeleyParser (DKPro Core GPL 1.6.2 API)";
+        parent.document.title="BerkeleyParser (DKPro Core GPL 1.7.0 API)";
     }
 //-->
 </script>
@@ -121,9 +121,8 @@
 <br>
 <pre>public class <span class="strong">BerkeleyParser</span>
 extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
-<div class="block">Berkeley Parser annotator. Requires <code>Sentence</code>s to be annotated before.</div>
-<dl><dt><span class="strong">Author:</span></dt>
-  <dd>Richard Eckart de Castilho</dd></dl>
+<div class="block">Berkeley Parser annotator . Requires <code>Sentence</code>s to be annotated before.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><code>CoarseToFineMaxRuleParser</code></dd></dl>
 </li>
 </ul>
 </div>
@@ -144,22 +143,32 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#language">language</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#constituentMappingLocation">constituentMappingLocation</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#modelLocation">modelLocation</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#language">language</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#modelLocation">modelLocation</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_ACCURATE">PARAM_ACCURATE</a></strong></code>
 <div class="block">Set thresholds for accuracy.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_BINARIZE">PARAM_BINARIZE</a></strong></code>
 <div class="block">Output binarized trees.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_CONSTITUENT_MAPPING_LOCATION">PARAM_CONSTITUENT_MAPPING_LOCATION</a></strong></code>
+<div class="block">Location of the mapping file for constituent tags to UIMA types.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -189,8 +198,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></strong></code>
-<div class="block">Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
- mapping automatically.</div>
+<div class="block">Location of the mapping file for part-of-speech tags to UIMA types.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -201,58 +209,65 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_READ_POS">PARAM_READ_POS</a></strong></code>
+<div class="block">Sets whether to use or not to use already existing POS tags from another annotator for the
+ parsing process.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_SCORES">PARAM_SCORES</a></strong></code>
 <div class="block">Output inside scores (only for binarized viterbi trees).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_SUBSTATES">PARAM_SUBSTATES</a></strong></code>
 <div class="block">Output sub-categories (only for binarized Viterbi trees).</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_VARIANT">PARAM_VARIANT</a></strong></code>
 <div class="block">Override the default variant used to locate the model.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_VARIATIONAL">PARAM_VARIATIONAL</a></strong></code>
 <div class="block">Use variational rule score approximation instead of max-rule
-
+ 
  Default: <code>false</code></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_VITERBI">PARAM_VITERBI</a></strong></code>
 <div class="block">Compute Viterbi derivation instead of max-rule tree.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_WRITE_PENN_TREE">PARAM_WRITE_PENN_TREE</a></strong></code>
 <div class="block">If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
  containing the whole parse tree in Penn Treebank style format.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#PARAM_WRITE_POS">PARAM_WRITE_POS</a></strong></code>
 <div class="block">Sets whether to create or not to create POS tags.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#posMappingLocation">posMappingLocation</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>protected boolean</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#printTagSet">printTagSet</a></strong></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/berkeleyparser/BerkeleyParser.html#variant">variant</a></strong></code>&nbsp;</td>
 </tr>
@@ -413,8 +428,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <li class="blockList">
 <h4>PARAM_POS_MAPPING_LOCATION</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_POS_MAPPING_LOCATION</pre>
-<div class="block">Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
- mapping automatically.</div>
+<div class="block">Location of the mapping file for part-of-speech tags to UIMA types.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_POS_MAPPING_LOCATION">Constant Field Values</a></dd></dl>
 </li>
 </ul>
@@ -425,6 +439,26 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <li class="blockList">
 <h4>posMappingLocation</h4>
 <pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> posMappingLocation</pre>
+</li>
+</ul>
+<a name="PARAM_CONSTITUENT_MAPPING_LOCATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CONSTITUENT_MAPPING_LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CONSTITUENT_MAPPING_LOCATION</pre>
+<div class="block">Location of the mapping file for constituent tags to UIMA types.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_CONSTITUENT_MAPPING_LOCATION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="constituentMappingLocation">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>constituentMappingLocation</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> constituentMappingLocation</pre>
 </li>
 </ul>
 <a name="PARAM_INTERN_TAGS">
@@ -463,6 +497,20 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <pre>protected&nbsp;boolean printTagSet</pre>
 </li>
 </ul>
+<a name="PARAM_READ_POS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_READ_POS</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_READ_POS</pre>
+<div class="block">Sets whether to use or not to use already existing POS tags from another annotator for the
+ parsing process.
+ <p>
+ Default: <code>false</code></div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_READ_POS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
 <a name="PARAM_WRITE_POS">
 <!--   -->
 </a>
@@ -472,7 +520,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_POS</pre>
 <div class="block">Sets whether to create or not to create POS tags. The creation of constituent tags must be
  turned on for this to work.
-
+ <p>
  Default: <code>true</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_WRITE_POS">Constant Field Values</a></dd></dl>
 </li>
@@ -486,7 +534,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_PENN_TREE</pre>
 <div class="block">If this parameter is set to true, each sentence is annotated with a PennTree-Annotation,
  containing the whole parse tree in Penn Treebank style format.
-
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_WRITE_PENN_TREE">Constant Field Values</a></dd></dl>
 </li>
@@ -499,7 +547,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_VITERBI</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_VITERBI</pre>
 <div class="block">Compute Viterbi derivation instead of max-rule tree.
-
+ <p>
  Default: <code>false</code> (max-rule)</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_VITERBI">Constant Field Values</a></dd></dl>
 </li>
@@ -512,7 +560,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_SUBSTATES</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_SUBSTATES</pre>
 <div class="block">Output sub-categories (only for binarized Viterbi trees).
-
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_SUBSTATES">Constant Field Values</a></dd></dl>
 </li>
@@ -525,7 +573,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_SCORES</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_SCORES</pre>
 <div class="block">Output inside scores (only for binarized viterbi trees).
-
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_SCORES">Constant Field Values</a></dd></dl>
 </li>
@@ -538,7 +586,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_ACCURATE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_ACCURATE</pre>
 <div class="block">Set thresholds for accuracy.
-
+ <p>
  Default: <code>false</code> (set thresholds for efficiency)</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_ACCURATE">Constant Field Values</a></dd></dl>
 </li>
@@ -551,7 +599,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_VARIATIONAL</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_VARIATIONAL</pre>
 <div class="block">Use variational rule score approximation instead of max-rule
-
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_VARIATIONAL">Constant Field Values</a></dd></dl>
 </li>
@@ -564,7 +612,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_KEEP_FUNCTION_LABELS</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_KEEP_FUNCTION_LABELS</pre>
 <div class="block">Retain predicted function labels. Model must have been trained with function labels.
-
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_KEEP_FUNCTION_LABELS">Constant Field Values</a></dd></dl>
 </li>
@@ -577,7 +625,7 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>PARAM_BINARIZE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_BINARIZE</pre>
 <div class="block">Output binarized trees.
-
+ <p>
  Default: <code>false</code></div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.berkeleyparser.BerkeleyParser.PARAM_BINARIZE">Constant Field Values</a></dd></dl>
 </li>
@@ -706,6 +754,6 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small>Copyright &#169; 2011&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
+<p class="legalCopy"><small>Copyright &#169; 2007&#x2013;2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt. All rights reserved.</small></p>
 </body>
 </html>
