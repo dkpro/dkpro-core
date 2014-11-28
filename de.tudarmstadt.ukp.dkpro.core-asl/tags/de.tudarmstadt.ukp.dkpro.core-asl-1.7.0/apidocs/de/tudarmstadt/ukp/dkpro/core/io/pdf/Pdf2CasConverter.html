@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Pdf2CasConverter (DKPro Core ASL 1.6.2 API)</title>
+<title>Pdf2CasConverter (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Pdf2CasConverter (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="Pdf2CasConverter (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -413,7 +413,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLa
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html#startPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">startPage</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfLayoutEventStripper</a></code></dd>
-<dd><code>page</code> - The page we are about to process.</dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aFirstPage</code> - first page.</dd><dd><code>aLastPage</code> - last page.</dd><dd><code>aCurrentPage</code> - current page.</dd><dd><code>page</code> - The page we are about to process.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>
@@ -434,7 +434,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLa
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html#endPage(int, int, int, org.apache.pdfbox.pdmodel.PDPage)">endPage</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfLayoutEventStripper</a></code></dd>
-<dd><code>page</code> - The page we are about to process.</dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aStartPage</code> - first page.</dd><dd><code>aEndPage</code> - last page.</dd><dd><code>aCurrentPage</code> - current page.</dd><dd><code>page</code> - The page we are about to process.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>
@@ -452,6 +452,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLa
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html#startRegion(de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfLayoutEventStripper.Style)">startRegion</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfLayoutEventStripper</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aStyle</code> - the style.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>
@@ -469,6 +470,7 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLa
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html#endRegion(de.tudarmstadt.ukp.dkpro.core.io.pdf.PdfLayoutEventStripper.Style)">endRegion</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfLayoutEventStripper.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfLayoutEventStripper</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aStyle</code> - the style.</dd>
 <dt><span class="strong">Throws:</span></dt>
 <dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - If there is any error writing to the stream.</dd></dl>
 </li>

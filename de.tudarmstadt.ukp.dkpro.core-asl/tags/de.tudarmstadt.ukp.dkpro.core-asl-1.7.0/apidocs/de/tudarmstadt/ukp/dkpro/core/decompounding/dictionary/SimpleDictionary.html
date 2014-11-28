@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>SimpleDictionary (DKPro Core ASL 1.6.2 API)</title>
+<title>SimpleDictionary (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SimpleDictionary (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="SimpleDictionary (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -110,7 +110,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
  
  This can be used to create your own dictionary from a corpus</div>
 <dl><dt><span class="strong">Author:</span></dt>
-  <dd>Jens Haase <je.haase@googlemail.com></dd></dl>
+  <dd><a href="mailto:je.haase@googlemail.com">Jens Haase</a></dd></dl>
 </li>
 </ul>
 </div>
@@ -159,13 +159,13 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <tr class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/SimpleDictionary.html#contains(java.lang.String)">contains</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aWord)</code>
-<div class="block">Checks if a word is in a dictionary</div>
+<div class="block">Checks if a word is in the dictionary.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/SimpleDictionary.html#getAll()">getAll</a></strong>()</code>
-<div class="block">Returns all words in the dictionary</div>
+<div class="block">Returns all words in the dictionary.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -248,11 +248,12 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <h4>contains</h4>
 <pre>public&nbsp;boolean&nbsp;contains(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aWord)</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/Dictionary.html#contains(java.lang.String)">Dictionary</a></code></strong></div>
-<div class="block">Checks if a word is in a dictionary</div>
+<div class="block">Checks if a word is in the dictionary.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/Dictionary.html#contains(java.lang.String)">contains</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/Dictionary.html" title="interface in de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary">Dictionary</a></code></dd>
-</dl>
+<dt><span class="strong">Parameters:</span></dt><dd><code>aWord</code> - a word.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>if a word is in the dictionary.</dd></dl>
 </li>
 </ul>
 <a name="readFileToSet(java.io.BufferedReader)">
@@ -264,9 +265,10 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/Set.html?is-external=true" title="class or interface in java.util">Set</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;readFileToSet(<a href="http://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html?is-external=true" title="class or interface in java.io">BufferedReader</a>&nbsp;aReader)
                              throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block">Reads the dictionary to set</div>
-<dl><dt><span class="strong">Returns:</span></dt><dd>A set of words</dd>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aReader</code> - a reader,</dd>
+<dt><span class="strong">Returns:</span></dt><dd>A set of words</dd>
 <dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if an I/O error occurs.</dd></dl>
 </li>
 </ul>
 <a name="getAll()">
@@ -277,11 +279,11 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <h4>getAll</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&gt;&nbsp;getAll()</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/Dictionary.html#getAll()">Dictionary</a></code></strong></div>
-<div class="block">Returns all words in the dictionary</div>
+<div class="block">Returns all words in the dictionary.</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/Dictionary.html#getAll()">getAll</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/dictionary/Dictionary.html" title="interface in de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary">Dictionary</a></code></dd>
-</dl>
+<dt><span class="strong">Returns:</span></dt><dd>all words in the dictionary.</dd></dl>
 </li>
 </ul>
 <a name="setWords(java.util.Set)">

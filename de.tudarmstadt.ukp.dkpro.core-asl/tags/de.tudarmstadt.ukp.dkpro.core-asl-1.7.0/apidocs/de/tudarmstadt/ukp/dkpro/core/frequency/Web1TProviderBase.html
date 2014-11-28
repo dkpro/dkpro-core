@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Web1TProviderBase (DKPro Core ASL 1.6.2 API)</title>
+<title>Web1TProviderBase (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Web1TProviderBase (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="Web1TProviderBase (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -141,6 +141,10 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/p
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/Web1TProviderBase.html#EOS">EOS</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>protected <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/Web1TProviderBase.html#language">language</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>protected com.googlecode.jweb1t.Searcher</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/frequency/Web1TProviderBase.html#searcher">searcher</a></strong></code>&nbsp;</td>
 </tr>
@@ -269,10 +273,19 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/p
 <a name="basePath">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>basePath</h4>
 <pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> basePath</pre>
+</li>
+</ul>
+<a name="language">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>language</h4>
+<pre>protected&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> language</pre>
 </li>
 </ul>
 </li>
@@ -309,6 +322,8 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/p
 <pre>public&nbsp;long&nbsp;getNrOfNgrams(int&nbsp;n)</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfNgrams(int)">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns the number of ngrams of a given size in the corpus.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the ngram size.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the number of ngrams.</dd></dl>
 </li>
 </ul>
 <a name="getNrOfTokens()">
@@ -330,6 +345,8 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/p
 <pre>public&nbsp;long&nbsp;getNrOfDistinctNgrams(int&nbsp;n)</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNrOfDistinctNgrams(int)">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns the number of distinct ngrams of a given size in the corpus.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the ngram size.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the number of ngrams.</dd></dl>
 </li>
 </ul>
 <a name="getFrequencyFromProvider(java.lang.String)">
@@ -357,8 +374,10 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/p
                                   throws <a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getNgramIterator(int)">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns an iterator over all ngrams of a given size in the corpus.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code></dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the ngram size.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>an iterator over the ngrams.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="http://docs.oracle.com/javase/7/docs/api/java/io/IOException.html?is-external=true" title="class or interface in java.io">IOException</a></code> - if the information cannot be retrieved.</dd></dl>
 </li>
 </ul>
 <a name="getLanguage()">
@@ -370,6 +389,7 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/p
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;getLanguage()</pre>
 <div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/provider/FrequencyCountProvider.html#getLanguage()">FrequencyCountProvider</a></code></strong></div>
 <div class="block">Returns the language for which the frequencies are provided.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the language.</dd></dl>
 </li>
 </ul>
 </li>

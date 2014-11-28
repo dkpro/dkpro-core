@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>FeaturePathAnnotatorBase (DKPro Core ASL 1.6.2 API)</title>
+<title>FeaturePathAnnotatorBase (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FeaturePathAnnotatorBase (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="FeaturePathAnnotatorBase (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -507,13 +507,12 @@ extends org.apache.uima.fit.component.JCasAnnotator_ImplBase</pre>
 <h4>generateAnnotations</h4>
 <pre>protected abstract&nbsp;void&nbsp;generateAnnotations(org.apache.uima.jcas.JCas&nbsp;jcas)
                                      throws <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a>,
-                                            org.apache.uima.UIMARuntimeException,
                                             org.apache.uima.analysis_engine.AnalysisEngineProcessException</pre>
 <div class="block">Method to create annotations.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code></dd>
-<dd><code>org.apache.uima.UIMARuntimeException</code></dd>
-<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>jcas</code> - the JCas.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code> - if an error occurs during initialization of the <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath"><code>FeaturePathInfo</code></a> object</dd>
+<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code> - if another error occurs.</dd></dl>
 </li>
 </ul>
 </li>

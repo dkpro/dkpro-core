@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>FrequencyDistribution (DKPro Core ASL 1.6.2 API)</title>
+<title>FrequencyDistribution (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FrequencyDistribution (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="FrequencyDistribution (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -105,25 +105,23 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html?is-external=true" title="class or interface in java.io">Serializable</a></pre>
 <div class="block">It is basically a mapping from samples (keys) to long values (counts).
  
- <p>
- Suppose we want to record the number of occurrences of each word in a sentence, then this class
- can be used as follows:
+ <p>Suppose we want to record the number of occurrences of each word in a sentence, then this class
+ can be used as follows:</p>
  
- <p><blockquote><pre>
- FrequencyDistribution<String> fd = new FrequencyDistribution<String>();
+ <blockquote><pre>
+ FrequencyDistribution&lt;String&gt; fd = new FrequencyDistribution&lt;String&gt;();
  for (String word : "foo bar baz foo".split(" ")) {
      fd.inc(word);
  }
  System.out.println(fd.getCount("foo"));
  </pre></blockquote>
  
- The last call to <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html#getCount(T)"><code>getCount(T)</code></a> will yield 2, because the
- word "foo" has appeared twice in the given sequence of words.
+ <p>The last call to <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html#getCount(T)"><code>getCount(T)</code></a> will yield 2, because the
+ word "foo" has appeared twice in the given sequence of words.</p>
  
- <p>
- This class was inspired by NLTK's <a
+ <p>This class was inspired by NLTK's <a
  href="http://nltk.googlecode.com/svn/trunk/doc/api/nltk.probability.FreqDist-class.html">
- FreqDist</a>.</div>
+ FreqDist</a>.</p></div>
 <dl><dt><span class="strong">Author:</span></dt>
   <dd>zesch</dd>
 <dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/ConditionalFrequencyDistribution.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.frequency.util"><code>ConditionalFrequencyDistribution</code></a>, 
@@ -429,6 +427,7 @@ implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializabl
 <h4>getMaxFreq</h4>
 <pre>public&nbsp;long&nbsp;getMaxFreq()</pre>
 <div class="block">Returns the highest frequency that is currently stored.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>highest frequency that is currently stored.</dd></dl>
 </li>
 </ul>
 <a name="getSampleWithMaxFreq()">
@@ -438,8 +437,9 @@ implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializabl
 <li class="blockList">
 <h4>getSampleWithMaxFreq</h4>
 <pre>public&nbsp;<a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="type parameter in FrequencyDistribution">T</a>&nbsp;getSampleWithMaxFreq()</pre>
-<div class="block">Returns the sample which has currently the highest frequency.
- If there is more than one sample which share the highest frequency, returns the one that was added first.</div>
+<div class="block">Returns the sample which has currently the highest frequency. If there is more than one
+ sample which share the highest frequency, returns the one that was added first.</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd>the sample which has currently the highest frequency</dd></dl>
 </li>
 </ul>
 <a name="save(java.io.File)">
@@ -484,8 +484,10 @@ implements <a href="http://docs.oracle.com/javase/7/docs/api/java/io/Serializabl
 <li class="blockList">
 <h4>getMostFrequentSamples</h4>
 <pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/frequency/util/FrequencyDistribution.html" title="type parameter in FrequencyDistribution">T</a>&gt;&nbsp;getMostFrequentSamples(int&nbsp;n)</pre>
-<div class="block">Returns the n most frequent samples in the distribution.
- The ordering within in a group of samples with the same frequency is undefined.</div>
+<div class="block">Returns the n most frequent samples in the distribution. The ordering within in a group of
+ samples with the same frequency is undefined.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>n</code> - the numer of most frequent samples to return.</dd>
+<dt><span class="strong">Returns:</span></dt><dd>the n most frequent samples in the distribution.</dd></dl>
 </li>
 </ul>
 </li>

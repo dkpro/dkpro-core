@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>TcfWriter (DKPro Core ASL 1.6.2 API)</title>
+<title>TcfWriter (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="TcfWriter (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="TcfWriter (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -383,8 +383,9 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
                   <a href="http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</a>&nbsp;aOs)
                     throws eu.clarin.weblicht.wlfxb.io.WLFormatException</pre>
 <div class="block">Create TCF File from scratch</div>
-<dl><dt><span class="strong">Throws:</span></dt>
-<dd><code>eu.clarin.weblicht.wlfxb.io.WLFormatException</code></dd></dl>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aJCas</code> - the JCas.</dd><dd><code>aOs</code> - the output stream.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code>eu.clarin.weblicht.wlfxb.io.WLFormatException</code> - if a TCF problem occurs.</dd></dl>
 </li>
 </ul>
 <a name="casToTcfWriter(java.io.InputStream, org.apache.uima.jcas.JCas, java.io.OutputStream)">
@@ -396,15 +397,11 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/JCasF
 <pre>public&nbsp;void&nbsp;casToTcfWriter(<a href="http://docs.oracle.com/javase/7/docs/api/java/io/InputStream.html?is-external=true" title="class or interface in java.io">InputStream</a>&nbsp;aIs,
                   org.apache.uima.jcas.JCas&nbsp;aJCas,
                   <a href="http://docs.oracle.com/javase/7/docs/api/java/io/OutputStream.html?is-external=true" title="class or interface in java.io">OutputStream</a>&nbsp;aOs)
-                    throws org.apache.uima.resource.ResourceInitializationException,
-                           org.apache.uima.analysis_engine.AnalysisEngineProcessException,
-                           eu.clarin.weblicht.wlfxb.io.WLFormatException</pre>
+                    throws eu.clarin.weblicht.wlfxb.io.WLFormatException</pre>
 <div class="block">Merge annotations from CAS into an existing TCF file.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aIs</code> - the TCF file with an existing annotation layers</dd><dd><code>aJCas</code> - an annotated CAS object</dd>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>aIs</code> - the TCF file with an existing annotation layers</dd><dd><code>aJCas</code> - an annotated CAS object</dd><dd><code>aOs</code> - the output stream.</dd>
 <dt><span class="strong">Throws:</span></dt>
-<dd><code>org.apache.uima.resource.ResourceInitializationException</code></dd>
-<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd>
-<dd><code>eu.clarin.weblicht.wlfxb.io.WLFormatException</code></dd></dl>
+<dd><code>eu.clarin.weblicht.wlfxb.io.WLFormatException</code> - if a TCF problem occurs.</dd></dl>
 </li>
 </ul>
 </li>

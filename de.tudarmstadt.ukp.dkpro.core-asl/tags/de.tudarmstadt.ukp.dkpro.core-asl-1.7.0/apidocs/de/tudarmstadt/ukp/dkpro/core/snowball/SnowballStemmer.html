@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>SnowballStemmer (DKPro Core ASL 1.6.2 API)</title>
+<title>SnowballStemmer (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="SnowballStemmer (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="SnowballStemmer (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -312,9 +312,10 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath
 <h4>PARAM_LOWER_CASE</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_LOWER_CASE</pre>
 <div class="block">Per default the stemmer runs in case-sensitive mode. If this parameter is enabled, tokens
- are lower-cased before being passed to the stemmer. Examples:
+ are lower-cased before being passed to the stemmer.
 
  <table border="1" cellspacing="0">
+ <caption>Examples</caption>
  <tr><th></th><th>false (default)</th><th>true</th></tr>
  <tr><td>EDUCATIONAL</td><td>EDUCATIONAL</td><td>educ</td></tr>
  <tr><td>Educational</td><td>Educat</td><td>educ</td></tr>
@@ -393,9 +394,10 @@ extends <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath
 <dl>
 <dt><strong>Specified by:</strong></dt>
 <dd><code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html#generateAnnotations(org.apache.uima.jcas.JCas)">generateAnnotations</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathAnnotatorBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathAnnotatorBase</a></code></dd>
+<dt><span class="strong">Parameters:</span></dt><dd><code>jcas</code> - the JCas.</dd>
 <dt><span class="strong">Throws:</span></dt>
-<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code></dd>
-<dd><code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code></dd></dl>
+<dd><code>org.apache.uima.analysis_engine.AnalysisEngineProcessException</code> - if another error occurs.</dd>
+<dd><code><a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code> - if an error occurs during initialization of the <a href="../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath"><code>FeaturePathInfo</code></a> object</dd></dl>
 </li>
 </ul>
 </li>

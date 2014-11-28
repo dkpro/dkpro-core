@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>FrequencyGeometricMeanRanker (DKPro Core ASL 1.6.2 API)</title>
+<title>FrequencyGeometricMeanRanker (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FrequencyGeometricMeanRanker (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="FrequencyGeometricMeanRanker (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -35,7 +35,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/CompoundProbabilityRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/DummyRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking"><span class="strong">Prev Class</span></a></li>
 <li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/MutualInformationRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -61,7 +61,7 @@
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.AbstractRanker">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
 </ul>
@@ -109,13 +109,28 @@ extends <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoundin
 implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/RankerList.html" title="interface in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">RankerList</a></pre>
 <div class="block">Frequency based ranking algorithm. See doc folder for more informations.</div>
 <dl><dt><span class="strong">Author:</span></dt>
-  <dd>Jens Haase <je.haase@googlemail.com></dd></dl>
+  <dd><a href="mailto:je.haase@googlemail.com">Jens Haase</a></dd></dl>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.AbstractRanker">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">AbstractRanker</a></h3>
+<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#INDEX_OPTION">INDEX_OPTION</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#LIMIT_OPTION">LIMIT_OPTION</a></code></li>
+</ul>
+</li>
+</ul>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor_summary">
@@ -130,7 +145,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <tr class="altColor">
 <td class="colOne"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/FrequencyGeometricMeanRanker.html#FrequencyGeometricMeanRanker()">FrequencyGeometricMeanRanker</a></strong>()</code>
 <div class="block">Empty constructor
- 
+
  Use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#setFinder(de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder)"><code>AbstractRanker.setFinder(Finder)</code></a> before using this class</div>
 </td>
 </tr>
@@ -153,22 +168,19 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/FrequencyGeometricMeanRanker.html#bestPath(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">bestPath</a></strong>(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundingTree.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundingTree</a>&nbsp;aTree)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/FrequencyGeometricMeanRanker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">highestRank</a></strong>(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundingTree.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundingTree</a>&nbsp;aTree)</code>
-<div class="block">Returns the highest ranked split</div>
-</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/FrequencyGeometricMeanRanker.html#highestRank(java.util.List)">highestRank</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;aSplits)</code>
 <div class="block">Ranks the given splits and returns the split with highest rank</div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/FrequencyGeometricMeanRanker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode, java.util.List)">highestRank</a></strong>(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/trie/ValueNode.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.trie">ValueNode</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;aParent,
+           <a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;aPath)</code>
+<div class="block">Searches a a path throw the tree</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code><a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/FrequencyGeometricMeanRanker.html#rank(java.util.List)">rank</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;aSplits)</code>
 <div class="block">Ranks all splits and returns a order list</div>
@@ -180,7 +192,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">AbstractRanker</a></h3>
-<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#filterAndSort(java.util.List)">filterAndSort</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#freq(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment)">freq</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#freq(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment, de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment)">freq</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#freq(java.lang.String[])">freq</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#getFinder()">getFinder</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#setFinder(de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder)">setFinder</a></code></li>
+<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#filterAndSort(java.util.List)">filterAndSort</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#freq(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment)">freq</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#freq(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment, de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.Fragment)">freq</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#freq(java.lang.String[])">freq</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#getFinder()">getFinder</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#getIndexPathOption(org.apache.ivy.util.cli.CommandLine)">getIndexPathOption</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#getLimitOption(org.apache.ivy.util.cli.CommandLine)">getLimitOption</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">highestRank</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#setFinder(de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder)">setFinder</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
@@ -194,7 +206,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html" title="interface in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">Ranker</a></h3>
-<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html#setFinder(de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder)">setFinder</a></code></li>
+<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">highestRank</a>, <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html#setFinder(de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder)">setFinder</a></code></li>
 </ul>
 </li>
 </ul>
@@ -218,7 +230,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <h4>FrequencyGeometricMeanRanker</h4>
 <pre>public&nbsp;FrequencyGeometricMeanRanker()</pre>
 <div class="block">Empty constructor
- 
+
  Use <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#setFinder(de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder)"><code>AbstractRanker.setFinder(Finder)</code></a> before using this class</div>
 </li>
 </ul>
@@ -269,31 +281,18 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 </dl>
 </li>
 </ul>
-<a name="highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>highestRank</h4>
-<pre>public&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&nbsp;highestRank(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundingTree.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundingTree</a>&nbsp;aTree)</pre>
-<div class="block"><strong>Description copied from interface:&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">Ranker</a></code></strong></div>
-<div class="block">Returns the highest ranked split</div>
-<dl>
-<dt><strong>Specified by:</strong></dt>
-<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">highestRank</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html" title="interface in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">Ranker</a></code></dd>
-<dt><span class="strong">Parameters:</span></dt><dd><code>aTree</code> - A split tree generated by a splitting algorithm</dd></dl>
-</li>
-</ul>
-<a name="bestPath(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">
+<a name="highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode, java.util.List)">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>bestPath</h4>
-<pre>public&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;bestPath(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundingTree.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundingTree</a>&nbsp;aTree)</pre>
+<h4>highestRank</h4>
+<pre>public&nbsp;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&nbsp;highestRank(<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/trie/ValueNode.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.trie">ValueNode</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;aParent,
+                           <a href="http://docs.oracle.com/javase/7/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/splitter/DecompoundedWord.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.splitter">DecompoundedWord</a>&gt;&nbsp;aPath)</pre>
+<div class="block">Searches a a path throw the tree</div>
 <dl>
 <dt><strong>Specified by:</strong></dt>
-<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html#bestPath(de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundingTree)">bestPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/Ranker.html" title="interface in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">Ranker</a></code></dd>
+<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html#highestRank(de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode, java.util.List)">highestRank</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/AbstractRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking">AbstractRanker</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -323,7 +322,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/CompoundProbabilityRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/DummyRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking"><span class="strong">Prev Class</span></a></li>
 <li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompounding/ranking/MutualInformationRanker.html" title="class in de.tudarmstadt.ukp.dkpro.core.decompounding.ranking"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -349,7 +348,7 @@ implements <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/decompoun
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#fields_inherited_from_class_de.tudarmstadt.ukp.dkpro.core.decompounding.ranking.AbstractRanker">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
 </ul>

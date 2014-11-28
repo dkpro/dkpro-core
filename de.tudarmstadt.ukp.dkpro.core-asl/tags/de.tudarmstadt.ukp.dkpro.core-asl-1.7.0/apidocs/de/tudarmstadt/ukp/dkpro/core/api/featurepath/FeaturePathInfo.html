@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>FeaturePathInfo (DKPro Core ASL 1.6.2 API)</title>
+<title>FeaturePathInfo (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="FeaturePathInfo (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="FeaturePathInfo (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -161,7 +161,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathInfo.html#typeSystemInit(org.apache.uima.cas.Type)">typeSystemInit</a></strong>(org.apache.uima.cas.Type&nbsp;featurePathType)</code>
-<div class="block">checks the feature path for the given type and checks if it can be valid.</div>
+<div class="block">Checks the feature path for the given type and checks if it can be valid.</div>
 </td>
 </tr>
 </table>
@@ -216,7 +216,7 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
  is not valid an exception is thrown.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>featurePath</code> - featurePath string separated by "/"</dd>
 <dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code></dd></dl>
+<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code> - if an error occurs during initialization of the feature path</dd></dl>
 </li>
 </ul>
 <a name="typeSystemInit(org.apache.uima.cas.Type)">
@@ -227,9 +227,10 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>typeSystemInit</h4>
 <pre>public&nbsp;void&nbsp;typeSystemInit(org.apache.uima.cas.Type&nbsp;featurePathType)
                     throws <a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></pre>
-<div class="block">checks the feature path for the given type and checks if it can be valid.</div>
-<dl><dt><span class="strong">Throws:</span></dt>
-<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code></dd></dl>
+<div class="block">Checks the feature path for the given type and checks if it can be valid.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>featurePathType</code> - the anchor type.</dd>
+<dt><span class="strong">Throws:</span></dt>
+<dd><code><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/featurepath/FeaturePathException.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.featurepath">FeaturePathException</a></code> - if an error occurs during initialization of the feature path</dd></dl>
 </li>
 </ul>
 <a name="getValue(org.apache.uima.cas.text.AnnotationFS)">

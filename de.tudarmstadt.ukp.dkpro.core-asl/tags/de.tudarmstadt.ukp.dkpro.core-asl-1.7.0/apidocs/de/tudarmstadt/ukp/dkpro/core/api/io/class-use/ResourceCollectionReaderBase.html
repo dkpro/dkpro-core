@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase (DKPro Core ASL 1.6.2 API)</title>
+<title>Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="Uses of Class de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -101,7 +101,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.conll">de.tudarmstadt.ukp.dkpro.core.io.conll</a></td>
 <td class="colLast">
-<div class="block">Provides classes for the conversion of conll file to and from Brat response formats</div>
+<div class="block">Provides classes for the conversion of conll file formats.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -118,27 +118,37 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.penntree">de.tudarmstadt.ukp.dkpro.core.io.penntree</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.tcf">de.tudarmstadt.ukp.dkpro.core.io.tcf</a></td>
 <td class="colLast">
 <div class="block">Provides Classes for reading/writing TCF data files.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.tei">de.tudarmstadt.ukp.dkpro.core.io.tei</a></td>
 <td class="colLast">
 <div class="block">Support for <a href="http://www.tei-c.org/">TEI XML</a>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.text">de.tudarmstadt.ukp.dkpro.core.io.text</a></td>
 <td class="colLast">
 <div class="block">Support for plain text files.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.tiger">de.tudarmstadt.ukp.dkpro.core.io.tiger</a></td>
 <td class="colLast">
 <div class="block">Support for the TIGER-XML format.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.tuepp">de.tudarmstadt.ukp.dkpro.core.io.tuepp</a></td>
+<td class="colLast">
+<div class="block">Support for the Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML format.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -152,10 +162,6 @@
 <td class="colLast">
 <div class="block">Support for XML files (read-only).</div>
 </td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.io">de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.io</a></td>
-<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -259,8 +265,36 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2000Reader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.conll">Conll2000Reader</a></strong></code>
+<div class="block">Reads the Conll 2000 chunking format.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2002Reader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.conll">Conll2002Reader</a></strong></code>
+<div class="block">Writes the CoNLL 2002 named entity format.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2006Reader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.conll">Conll2006Reader</a></strong></code>
 <div class="block">Reads a file in the CoNLL-2006 format.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2009Reader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.conll">Conll2009Reader</a></strong></code>
+<div class="block">Reads a file in the CoNLL-2009 format.
+ 
+/**
+ 
+ ID - <b>(ignored)</b> Token counter, starting at 1 for each new sentence.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/conll/Conll2012Reader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.conll">Conll2012Reader</a></strong></code>
+<div class="block">Reads a file in the CoNLL-2009 format.</div>
 </td>
 </tr>
 </tbody>
@@ -300,6 +334,28 @@
 <td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/pdf/PdfReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.pdf">PdfReader</a></strong></code>
 <div class="block">Collection reader for PDF files.</div>
 </td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.io.penntree">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.penntree</a></h3>
+<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing subclasses, and an explanation">
+<caption><span>Subclasses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.penntree</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/PennTreebankChunkedReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.penntree">PennTreebankChunkedReader</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/PennTreebankCombinedReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.penntree">PennTreebankCombinedReader</a></strong></code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -384,6 +440,27 @@
 </tbody>
 </table>
 </li>
+<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.io.tuepp">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/tuepp/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.tuepp</a></h3>
+<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing subclasses, and an explanation">
+<caption><span>Subclasses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/tuepp/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.tuepp</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/tuepp/TueppReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.tuepp">TueppReader</a></strong></code>
+<div class="block">UIMA collection reader for Tübingen Partially Parsed Corpus of Written German (TüPP-D/Z) XML 
+ files.</div>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
 <li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.io.xmi">
 <!--   -->
 </a>
@@ -418,24 +495,6 @@
 <tr class="altColor">
 <td class="colFirst"><code>class&nbsp;</code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/xml/XmlReaderText.html" title="class in de.tudarmstadt.ukp.dkpro.core.io.xml">XmlReaderText</a></strong></code>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.io">
-<!--   -->
-</a>
-<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.io</a></h3>
-<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing subclasses, and an explanation">
-<caption><span>Subclasses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/ResourceCollectionReaderBase.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.io">ResourceCollectionReaderBase</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.io</a></span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Class and Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><code>class&nbsp;</code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/umlautnormalizer/io/NormalizationDataReader.html" title="class in de.tudarmstadt.ukp.dkpro.core.umlautnormalizer.io">NormalizationDataReader</a></strong></code>&nbsp;</td>
 </tr>
 </tbody>
 </table>

@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>Uses of Class de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider (DKPro Core ASL 1.6.2 API)</title>
+<title>Uses of Class de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Uses of Class de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="Uses of Class de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -75,11 +75,19 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.toolbox.core">de.tudarmstadt.ukp.dkpro.core.toolbox.core</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.api.io">de.tudarmstadt.ukp.dkpro.core.api.io</a></td>
+<td class="colLast">
+<div class="block">API for I/O components.</div>
+</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.toolbox.core.util">de.tudarmstadt.ukp.dkpro.core.toolbox.core.util</a></td>
+<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.api.resources">de.tudarmstadt.ukp.dkpro.core.api.resources</a></td>
+<td class="colLast">
+<div class="block">API for accessing resources.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="#de.tudarmstadt.ukp.dkpro.core.io.penntree">de.tudarmstadt.ukp.dkpro.core.io.penntree</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -87,30 +95,30 @@
 </li>
 <li class="blockList">
 <ul class="blockList">
-<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.toolbox.core">
+<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.api.io">
 <!--   -->
 </a>
-<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/toolbox/core/package-summary.html">de.tudarmstadt.ukp.dkpro.core.toolbox.core</a></h3>
+<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.io</a></h3>
 <table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing constructors, and an explanation">
-<caption><span>Constructors in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/toolbox/core/package-summary.html">de.tudarmstadt.ukp.dkpro.core.toolbox.core</a> with parameters of type <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></span><span class="tabEnd">&nbsp;</span></caption>
+<caption><span>Constructors in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.io</a> with parameters of type <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/toolbox/core/Tag.html#Tag(java.lang.String, java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">Tag</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;tag,
-   <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;language,
-   <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a>&nbsp;mappingProvider)</code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/io/IobDecoder.html#IobDecoder(org.apache.uima.cas.CAS, org.apache.uima.cas.Feature, de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">IobDecoder</a></strong>(org.apache.uima.cas.CAS&nbsp;aCas,
+          org.apache.uima.cas.Feature&nbsp;aChunkValue,
+          <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a>&nbsp;aMappingProvider)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
 </li>
-<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.toolbox.core.util">
+<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.api.resources">
 <!--   -->
 </a>
-<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/toolbox/core/util/package-summary.html">de.tudarmstadt.ukp.dkpro.core.toolbox.core.util</a></h3>
+<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</a></h3>
 <table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
-<caption><span>Methods in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/toolbox/core/util/package-summary.html">de.tudarmstadt.ukp.dkpro.core.toolbox.core.util</a> that return <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></span><span class="tabEnd">&nbsp;</span></caption>
+<caption><span>Methods in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/package-summary.html">de.tudarmstadt.ukp.dkpro.core.api.resources</a> that return <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -118,7 +126,68 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
-<td class="colLast"><span class="strong">TagUtil.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/toolbox/core/util/TagUtil.html#getMappingProvider(java.lang.String)">getMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;language)</code>&nbsp;</td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createChunkMappingProvider(java.lang.String, java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata)">createChunkMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                          <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage,
+                          <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a>&nbsp;aSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createChunkMappingProvider(java.lang.String, java.lang.String, java.lang.String)">createChunkMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                          <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aTagset,
+                          <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createConstituentMappingProvider(java.lang.String, java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata)">createConstituentMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                                <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage,
+                                <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a>&nbsp;aSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createConstituentMappingProvider(java.lang.String, java.lang.String, java.lang.String)">createConstituentMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                                <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aTagset,
+                                <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createDependencyMappingProvider(java.lang.String, java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata)">createDependencyMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                               <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage,
+                               <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a>&nbsp;aSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createDependencyMappingProvider(java.lang.String, java.lang.String, java.lang.String)">createDependencyMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                               <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aTagset,
+                               <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createPosMappingProvider(java.lang.String, java.lang.String, de.tudarmstadt.ukp.dkpro.core.api.resources.HasResourceMetadata)">createPosMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                        <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage,
+                        <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/HasResourceMetadata.html" title="interface in de.tudarmstadt.ukp.dkpro.core.api.resources">HasResourceMetadata</a>&nbsp;aSource)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></code></td>
+<td class="colLast"><span class="strong">MappingProviderFactory.</span><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProviderFactory.html#createPosMappingProvider(java.lang.String, java.lang.String, java.lang.String)">createPosMappingProvider</a></strong>(<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aMappingLocation,
+                        <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aTagset,
+                        <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;aLanguage)</code>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="blockList"><a name="de.tudarmstadt.ukp.dkpro.core.io.penntree">
+<!--   -->
+</a>
+<h3>Uses of <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a> in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.penntree</a></h3>
+<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing constructors, and an explanation">
+<caption><span>Constructors in <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/package-summary.html">de.tudarmstadt.ukp.dkpro.core.io.penntree</a> with parameters of type <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colLast"><code><strong><a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/io/penntree/PennTreeToJCasConverter.html#PennTreeToJCasConverter(de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider, de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider)">PennTreeToJCasConverter</a></strong>(<a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a>&nbsp;aPosMappingProvider,
+                       <a href="../../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/resources/MappingProvider.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.resources">MappingProvider</a>&nbsp;aConstituentMappingProvider)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>

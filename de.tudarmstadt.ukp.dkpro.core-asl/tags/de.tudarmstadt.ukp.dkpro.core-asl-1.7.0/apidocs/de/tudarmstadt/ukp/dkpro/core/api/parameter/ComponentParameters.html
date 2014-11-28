@@ -3,13 +3,13 @@
 <html lang="de">
 <head>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-<title>ComponentParameters (DKPro Core ASL 1.6.2 API)</title>
+<title>ComponentParameters (DKPro Core ASL 1.7.0 API)</title>
 <link rel="stylesheet" type="text/css" href="../../../../../../../stylesheet.css" title="Style">
 </head>
 <body>
 <script type="text/javascript"><!--
     if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="ComponentParameters (DKPro Core ASL 1.6.2 API)";
+        parent.document.title="ComponentParameters (DKPro Core ASL 1.7.0 API)";
     }
 //-->
 </script>
@@ -35,8 +35,8 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev Class</li>
-<li>Next Class</li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/AnnotationChecker.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.parameter"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/Messages.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.parameter"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html" target="_top">Frames</a></li>
@@ -123,73 +123,94 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_CHUNK_TAG_SET">PARAM_CHUNK_TAG_SET</a></strong></code>
+<div class="block">Use this chunk tag set to use to resolve the tag set mapping instead of using the
+ tag set defined as part of the model meta data.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_CONSTITUENT_MAPPING_LOCATION">PARAM_CONSTITUENT_MAPPING_LOCATION</a></strong></code>
+<div class="block">Location of the mapping file for constituent tags to UIMA types.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_CONSTITUENT_TAG_SET">PARAM_CONSTITUENT_TAG_SET</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_DELETE_COVER">PARAM_DELETE_COVER</a></strong></code>
 <div class="block">When splitting an annotation into multiple parts, e.g. when splitting a token that is a 
  compound word into multiple tokens, each representing a part of the word, this parameter
  controls if the original annototation is kept or removed.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_DEPENDENCY_MAPPING_LOCATION">PARAM_DEPENDENCY_MAPPING_LOCATION</a></strong></code>
 <div class="block">Location of the mapping file for dependency tags to UIMA types.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_FILENAME_EXTENSION">PARAM_FILENAME_EXTENSION</a></strong></code>
 <div class="block">Use this filename extension.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_INTERN_TAGS">PARAM_INTERN_TAGS</a></strong></code>
 <div class="block">Use the <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true#intern()" title="class or interface in java.lang"><code>String.intern()</code></a> method on tags.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_LANGUAGE">PARAM_LANGUAGE</a></strong></code>
 <div class="block">For analysis engines: Use this language instead of the document language to resolve the model
  and tag set mapping.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_MODEL_ENCODING">PARAM_MODEL_ENCODING</a></strong></code>
 <div class="block">The character encoding used by the model.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_MODEL_LOCATION">PARAM_MODEL_LOCATION</a></strong></code>
 <div class="block">Location from which the model is read.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_NAMED_ENTITY_MAPPING_LOCATION">PARAM_NAMED_ENTITY_MAPPING_LOCATION</a></strong></code>
 <div class="block">Location of the mapping file for named entity tags to UIMA types.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_POS_MAPPING_LOCATION">PARAM_POS_MAPPING_LOCATION</a></strong></code>
 <div class="block">Location of the mapping file for part-of-speech tags to UIMA types.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_POS_TAG_SET">PARAM_POS_TAG_SET</a></strong></code>
 <div class="block">Use this part-of-speech tag set to use to resolve the tag set mapping instead of using the
  tag set defined as part of the model meta data.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_PRINT_TAGSET">PARAM_PRINT_TAGSET</a></strong></code>
 <div class="block">Log the tag set(s) when a model is loaded.</div>
 </td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_READ_CHUNK">PARAM_READ_CHUNK</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
@@ -197,11 +218,19 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
-<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_READ_DEPENDENCY">PARAM_READ_DEPENDENCY</a></strong></code>&nbsp;</td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_READ_COREFERENCE">PARAM_READ_COREFERENCE</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_READ_DEPENDENCY">PARAM_READ_DEPENDENCY</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_READ_LEMMA">PARAM_READ_LEMMA</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_READ_MORPH">PARAM_READ_MORPH</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
@@ -273,7 +302,15 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_WRITE_CHUNK">PARAM_WRITE_CHUNK</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
 <td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_WRITE_CONSTITUENT">PARAM_WRITE_CONSTITUENT</a></strong></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
+<td class="colLast"><code><strong><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html#PARAM_WRITE_COREFERENCE">PARAM_WRITE_COREFERENCE</a></strong></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a></code></td>
@@ -549,6 +586,26 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_READ_POS">Constant Field Values</a></dd></dl>
 </li>
 </ul>
+<a name="PARAM_READ_CHUNK">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_READ_CHUNK</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_READ_CHUNK</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_READ_CHUNK">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_READ_MORPH">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_READ_MORPH</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_READ_MORPH</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_READ_MORPH">Constant Field Values</a></dd></dl>
+</li>
+</ul>
 <a name="PARAM_READ_CONSTITUENT">
 <!--   -->
 </a>
@@ -557,6 +614,16 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>PARAM_READ_CONSTITUENT</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_READ_CONSTITUENT</pre>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_READ_CONSTITUENT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_READ_COREFERENCE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_READ_COREFERENCE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_READ_COREFERENCE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_READ_COREFERENCE">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 <a name="PARAM_READ_PENN_TREE">
@@ -629,6 +696,16 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_WRITE_POS">Constant Field Values</a></dd></dl>
 </li>
 </ul>
+<a name="PARAM_WRITE_CHUNK">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_CHUNK</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_CHUNK</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_WRITE_CHUNK">Constant Field Values</a></dd></dl>
+</li>
+</ul>
 <a name="PARAM_WRITE_MORPH">
 <!--   -->
 </a>
@@ -647,6 +724,16 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <h4>PARAM_WRITE_CONSTITUENT</h4>
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_CONSTITUENT</pre>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_WRITE_CONSTITUENT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_WRITE_COREFERENCE">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_WRITE_COREFERENCE</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_WRITE_COREFERENCE</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_WRITE_COREFERENCE">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 <a name="PARAM_WRITE_PENN_TREE">
@@ -692,6 +779,29 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_POS_TAG_SET">Constant Field Values</a></dd></dl>
 </li>
 </ul>
+<a name="PARAM_CHUNK_TAG_SET">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CHUNK_TAG_SET</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CHUNK_TAG_SET</pre>
+<div class="block">Use this chunk tag set to use to resolve the tag set mapping instead of using the
+ tag set defined as part of the model meta data. This can be useful if a custom model is
+ specified which does not have such meta data, or it can be used in readers.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_CHUNK_TAG_SET">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CONSTITUENT_TAG_SET">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CONSTITUENT_TAG_SET</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CONSTITUENT_TAG_SET</pre>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_CONSTITUENT_TAG_SET">Constant Field Values</a></dd></dl>
+</li>
+</ul>
 <a name="PARAM_POS_MAPPING_LOCATION">
 <!--   -->
 </a>
@@ -701,6 +811,17 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 <pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_POS_MAPPING_LOCATION</pre>
 <div class="block">Location of the mapping file for part-of-speech tags to UIMA types.</div>
 <dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_POS_MAPPING_LOCATION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="PARAM_CONSTITUENT_MAPPING_LOCATION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PARAM_CONSTITUENT_MAPPING_LOCATION</h4>
+<pre>public static final&nbsp;<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a> PARAM_CONSTITUENT_MAPPING_LOCATION</pre>
+<div class="block">Location of the mapping file for constituent tags to UIMA types.</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../../constant-values.html#de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters.PARAM_CONSTITUENT_MAPPING_LOCATION">Constant Field Values</a></dd></dl>
 </li>
 </ul>
 <a name="PARAM_CHUNK_MAPPING_LOCATION">
@@ -762,8 +883,8 @@ extends <a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Object.html?
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev Class</li>
-<li>Next Class</li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/AnnotationChecker.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.parameter"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../../de/tudarmstadt/ukp/dkpro/core/api/parameter/Messages.html" title="class in de.tudarmstadt.ukp.dkpro.core.api.parameter"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../../index.html?de/tudarmstadt/ukp/dkpro/core/api/parameter/ComponentParameters.html" target="_top">Frames</a></li>
