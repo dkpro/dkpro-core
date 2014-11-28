@@ -1,5 +1,4 @@
 <!--
-
     Copyright 2007-2014    
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
@@ -15,19 +14,18 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+    along with this program.  If not, see http://www.gnu.org/licenses.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>dkpro-parent-pom</artifactId>
-		<version>11-SNAPSHOT</version>
+		<version>10</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 	<packaging>pom</packaging>
-	<version>1.8.0-SNAPSHOT</version>
+	<version>1.7.0</version>
 	<name>DKPro Core GPL</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
 	<url>https://code.google.com/p/dkpro-core-gpl/</url>
@@ -76,9 +74,9 @@
 		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
+		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.7.0</connection>
+		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.7.0</developerConnection>
+		<url>https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.7.0</url>
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
@@ -89,55 +87,49 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
             <dependency>
                 <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
                 <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
-                <version>1.8.0-SNAPSHOT</version>
+                <version>1.7.0</version>
             </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
-				<version>1.8.0-SNAPSHOT</version>
+				<version>1.7.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<modules>
 		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
-	    <module>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
@@ -148,45 +140,6 @@
 	</modules>
 	<build>
 		<plugins>
-			<plugin>
-				<inherited>true</inherited>
-				<groupId>com.mycila</groupId>
-				<artifactId>license-maven-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<header>${basedir}/.license-header.txt</header>
-					<failIfMissing>true</failIfMissing>
-					<strictCheck>true</strictCheck>
-					<properties>
-						<inceptionYear>${project.inceptionYear}</inceptionYear>
-						<currentYear>2014</currentYear>
-					</properties>
-					<excludes>
-						<exclude>release.properties</exclude>
-						<exclude>CHANGES</exclude>
-						<exclude>CHANGES.txt</exclude>
-						<exclude>NOTICE.txt</exclude>
-						<exclude>README.txt</exclude>
-						<exclude>LICENSE.txt</exclude>
-						<exclude>de.tudarmstadt.ukp.dkpro.core.examples-gpl/**/*</exclude>
-						<exclude>src/main/resources/**/*</exclude>
-						<exclude>src/test/resources/**/*</exclude>
-						<exclude>.license-header.txt</exclude>
-						<exclude>src/main/java/edu/stanford/nlp/parser/lexparser/**/*</exclude>
-						<exclude>src/main/java/gr/aueb/cs/nlp/postagger/**/*</exclude>
-						<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.java</exclude>
-					</excludes>
-				</configuration>
-				<executions>
-					<execution>
-						<id>check-headers</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.uima</groupId>
 				<artifactId>uimafit-maven-plugin</artifactId>
@@ -289,18 +242,6 @@
 					</snapshots>
 				</repository>
 			</repositories>
-			<modules>
-				<module>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
-			</modules>
-			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-						<artifactId>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</artifactId>
-						<version>1.8.0-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-			</dependencyManagement>
 		</profile>
 	</profiles>
 </project>
