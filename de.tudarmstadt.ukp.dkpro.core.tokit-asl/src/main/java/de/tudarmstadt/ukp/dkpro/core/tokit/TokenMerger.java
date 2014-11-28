@@ -153,10 +153,8 @@ public class TokenMerger
 			mappingProvider.configure(cas);
 		}
 
-        List<AnnotationFS> covers = new ArrayList<>(CasUtil.select(cas,
-                CasUtil.getAnnotationType(cas, annotationType)));
 		Collection<Annotation> toRemove = new ArrayList<Annotation>();
-		for (AnnotationFS cover : covers) {
+		for (AnnotationFS cover : CasUtil.select(cas, CasUtil.getAnnotationType(cas, annotationType))) {
 			List<Token> covered = selectCovered(Token.class, cover);
 			if (covered.size() < 2) {
 				continue;
@@ -174,9 +172,7 @@ public class TokenMerger
 
 			// Extend first token
 			Token token = i.next();
-			token.removeFromIndexes();
 			token.setEnd(covered.get(covered.size() - 1).getEnd());
-			token.addToIndexes();
 
 			// Optionally update the POS value
 			if (posValue != null) {
@@ -233,11 +229,8 @@ public class TokenMerger
 
 			// Update offsets for lemma
 			if (token.getLemma() != null) {
-			    Lemma lemma = token.getLemma();
-			    lemma.removeFromIndexes();
-			    lemma.setBegin(token.getBegin());
-			    lemma.setEnd(token.getEnd());
-				lemma.addToIndexes();
+				token.getLemma().setBegin(token.getBegin());
+				token.getLemma().setEnd(token.getEnd());
 			}
 		}
 

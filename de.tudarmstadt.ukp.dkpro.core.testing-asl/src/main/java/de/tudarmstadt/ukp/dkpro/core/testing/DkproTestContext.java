@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.uima.cas.impl.CASImpl;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -43,13 +42,7 @@ public class DkproTestContext extends TestWatcher
         className = StringUtils.substringAfterLast(aDescription.getClassName(), ".");
         methodName = aDescription.getMethodName();
         System.out.println("\n=== " + methodName + " =====================");
-        
-        // Route logging through log4j
         System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-        
-        // Enable extra check for illegal updates to indexed features (effective with UIMA 2.7.0
-        // and higher)
-        System.setProperty(CASImpl.CHK_FS_UPDATES_CORRUPTS, "true");
         
         context.set(this);
     }

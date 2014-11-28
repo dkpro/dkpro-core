@@ -22,7 +22,6 @@ import org.apache.uima.fit.descriptor.ExternalResource;
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.Normalizer_ImplBase;
 
-@Deprecated
 public abstract class FrequencyNormalizer_ImplBase
     extends Normalizer_ImplBase
 {

@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.SharpSNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellCheckerNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-@Deprecated
 public class NormalizerFactory 
 {
     private int view_counter = 0;

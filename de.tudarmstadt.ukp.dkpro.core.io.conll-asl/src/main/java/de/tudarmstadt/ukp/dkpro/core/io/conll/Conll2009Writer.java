@@ -35,7 +35,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -54,7 +54,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * <li>POS - <b>(POS)</b> Fine-grained part-of-speech tag, where the tagset depends on the language,
  * or identical to the coarse-grained part-of-speech tag if not available.</li>
  * <li>PPOS - <b>(ignored)</b> Automatically predicted major POS by a language-specific tagger</li>
- * <li>FEAT - <b>(MorphologicalFeatures)</b> Unordered set of syntactic and/or morphological features (depending
+ * <li>FEAT - <b>(Morpheme)</b> Unordered set of syntactic and/or morphological features (depending
  * on the particular language), separated by a vertical bar (|), or an underscore if not available.</li>
  * <li>PFEAT - <b>(ignored)</b> Automatically predicted morphological features (if applicable)</li>
  * <li>HEAD - <b>(Dependency)</b> Head of the current token, which is either a value of ID or zero
@@ -84,7 +84,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency",
@@ -158,8 +158,7 @@ public class Conll2009Writer
             List<Token> tokens = selectCovered(Token.class, sentence);
             
             // Check if we should try to include the FEATS in output
-            List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class,
-                    sentence);
+            List<Morpheme> morphology = selectCovered(Morpheme.class, sentence);
             boolean useFeats = tokens.size() == morphology.size();
 
             List<SemanticPredicate> preds = selectCovered(SemanticPredicate.class, sentence);
@@ -219,7 +218,7 @@ public class Conll2009Writer
 
                 String feat = UNUSED;
                 if (writeMorph && (row.feats != null)) {
-                    feat = row.feats.getValue();
+                    feat = row.feats.getMorphTag();
                 }
                 String pfeat = feat;
                 
@@ -272,7 +271,7 @@ public class Conll2009Writer
     {
         int id;
         Token token;
-        MorphologicalFeatures feats;
+        Morpheme feats;
         Dependency deprel;
         SemanticPredicate pred;
         SemanticArgument[] args; // These are the arguments roles for the current token!

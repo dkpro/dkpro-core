@@ -21,7 +21,6 @@ import java.util.Comparator;
 
 import org.apache.uima.cas.text.AnnotationFS;
 
-@Deprecated
 public class AnnotationComparator
     implements Comparator<AnnotationFS>
 {

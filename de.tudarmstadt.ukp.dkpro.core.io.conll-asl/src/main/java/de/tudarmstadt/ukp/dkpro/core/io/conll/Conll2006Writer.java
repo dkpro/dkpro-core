@@ -33,7 +33,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -70,7 +70,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures",
+        "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency" })
@@ -134,7 +134,7 @@ public class Conll2006Writer
             List<Token> tokens = selectCovered(Token.class, sentence);
             
             // Check if we should try to include the FEATS in output
-            List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class, sentence);
+            List<Morpheme> morphology = selectCovered(Morpheme.class, sentence);
             boolean useFeats = tokens.size() == morphology.size();
             
             for (int i = 0; i < tokens.size(); i++) {
@@ -190,7 +190,7 @@ public class Conll2006Writer
                 
                 String feats = UNUSED;
                 if (writeMorph && (row.feats != null)) {
-                    feats = row.feats.getValue();
+                    feats = row.feats.getMorphTag();
                 }
                 
                 String phead = UNUSED;
@@ -209,7 +209,7 @@ public class Conll2006Writer
     {
         int id;
         Token token;
-        MorphologicalFeatures feats;
+        Morpheme feats;
         Dependency deprel;
     }
 }

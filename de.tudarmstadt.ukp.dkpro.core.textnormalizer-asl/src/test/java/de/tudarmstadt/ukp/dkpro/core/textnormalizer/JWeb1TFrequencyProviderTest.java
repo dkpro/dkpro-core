@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 
 public class JWeb1TFrequencyProviderTest
 {
-
     @Test
     public void testFrequencyProvider()
         throws IOException

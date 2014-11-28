@@ -31,7 +31,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
-@Deprecated
 public class SharpSNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {

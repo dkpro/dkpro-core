@@ -46,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
         outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
-@Deprecated
 public class ExpressiveLengtheningNormalizer
     extends FrequencyNormalizer_ImplBase
 {
