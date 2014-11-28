@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<!--
+	Copyright 2013
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+	
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+	
+	http://www.apache.org/licenses/LICENSE-2.0
+	
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<chapter id="ugr.dkpro.core.gettingstarted">
+  <title>Getting Started</title>
+  <para>DKPro Core is a collection of software components for natural language processing (NLP) 
+    based on the Apache UIMA framework.</para>
+  <para>Many NLP tools are already freely available in the NLP research community. DKPro Core 
+    provides UIMA components wrapping these tools (and some original tools) so they can be used 
+    interchangeably in UIMA processing pipelines. DKPro Core builds heavily on uimaFIT which allows 
+    for rapid and easy development of NLP processing pipelines, for wrapping existing tools and for 
+    creating original UIMA components.</para>
+  <section>
+    <title>Prerequisites</title>
+    <para>To use DKPro Core to the best effect, we recommend the following system
+      configuration:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Java JDK version 6 or higher</para>
+      </listitem>
+      <listitem>
+        <para>Eclipse 4.3.x Classic distribution</para>
+      </listitem>
+      <listitem>
+        <para>Maven Integration for Eclipse (M2E) plugin (comes pre-installed in the Eclipse Classic
+          distribution)</para>
+      </listitem>
+      <listitem>
+        <para>a fast internet connection</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

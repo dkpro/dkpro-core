@@ -1,0 +1,6 @@
+CasDumpWriter
+	
+	Taken from Apache uimaFIT 2.2.0-SNAPSHOT for a stable type iteration order.
+	Can be substitued by the official version when uimaFIT 2.2.0 is released. Mind that
+	Some parameters have been adapted to DKPro Core and IOTestRunner needs to be fixed
+	accordingly when updating to the official version.
