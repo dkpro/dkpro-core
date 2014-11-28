@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+* along with this program.  If not, see http://www.gnu.org/licenses.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
@@ -43,8 +43,8 @@ public class MateLemmatizerTest
                 + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
 
         String[] lemmas = new String[] { "wir", "brauchen", "ein", "sehr", "kompliziert",
-                "Beispiel", "--", "welcher", "möglichst", "vieler", "Konstituent", "und",
-                "Dependenz", "beinhalten", "--" };
+                "beispiel", "--", "welcher", "möglichst", "vieler", "konstituent", "und",
+                "dependenz", "beinhalten", "--" };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }

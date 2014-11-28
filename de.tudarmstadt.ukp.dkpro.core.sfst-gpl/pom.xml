@@ -1,6 +1,5 @@
 <!--
-
-    Copyright 2007-2014    
+    Copyright 2007-2014
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -15,15 +14,14 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+    along with this program.  If not, see http://www.gnu.org/licenses.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
-		<version>1.8.0-SNAPSHOT</version>
+		<version>1.7.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
 	<name>DKPro Core GPL - SFST</name>
@@ -71,22 +69,22 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-morphisto-ca</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-smor-ca</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-default</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-pippi-ca</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-default</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-trmorph-ca</artifactId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -99,28 +97,23 @@
 		<dependencies>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-morphisto-ca</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-default</artifactId>
 				<version>20110202.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-smor-ca</artifactId>
-				<version>20140801.1</version>
-			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-pippi-ca</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-default</artifactId>
 				<version>20090223.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-trmorph-ca</artifactId>
-				<version>20130219.1</version>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</artifactId>
+				<version>20121025.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-bin</artifactId>
-				<version>20141115.1</version>
+				<version>20120111.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -134,10 +127,9 @@
 						<usedDependencies>
 							<!-- Models not detected by byte-code analysis -->
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-bin</usedDependency>
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-morphisto-ca</usedDependency>
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-smor-ca</usedDependency>
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-pippi-ca</usedDependency>
-							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-trmorph-ca</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-default</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-default</usedDependency>
+							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-default</usedDependency>
 						</usedDependencies>
 					</configuration>
 				</plugin>

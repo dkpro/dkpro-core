@@ -1,6 +1,5 @@
 <!--
-
-    Copyright 2007-2014    
+    Copyright 2007-2014
     Ubiquitous Knowledge Processing (UKP) Lab
     Technische Universität Darmstadt
 
@@ -15,15 +14,14 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+    along with this program.  If not, see http://www.gnu.org/licenses.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>1.8.0-SNAPSHOT</version>
+		<version>1.7.0</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
 	<name>DKPro Core GPL - Stanford CoreNLP Suite</name>
@@ -50,10 +48,10 @@
 			<version>3.4.1</version>
 		</dependency>
 		<dependency>
-			<groupId>edu.stanford.nlp</groupId>
-			<artifactId>stanford-corenlp</artifactId>
-			<version>3.4.1</version>
-			<classifier>models</classifier>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
@@ -91,14 +89,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-			<artifactId>de.tudarmstadt.ukp.dkpro.core.api.sentiment-asl</artifactId>
-		</dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</artifactId>
-        </dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -108,10 +98,6 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.io.text-asl</artifactId>
-        </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
@@ -656,16 +642,40 @@
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-coref-en-default
 							</usedDependency>
 							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-all.3class.distsim.crf
 							</usedDependency>
 							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-conll.4class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-conll.4class.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-muc.7class.distsim.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-en-nowiki.3class.caseless.distsim.crf
+							</usedDependency>
+							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-es-ancora.distsim.s512.crf
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-hgc_175m_600.crf
 							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-ner-de-dewac_175m_600.crf
 							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-fast-caseless
 							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-de-hgc
@@ -680,10 +690,16 @@
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-bidirectional-distsim
 							</usedDependency>
 							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-wsj-0-18-caseless-left3words-distsim
+							</usedDependency>
+							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-ar-accurate
 							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-zh-distsim
+							</usedDependency>
+							<usedDependency>
+								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-caseless-left3words-distsim
 							</usedDependency>
 							<usedDependency>
 								de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.stanfordnlp-model-tagger-en-fast.41

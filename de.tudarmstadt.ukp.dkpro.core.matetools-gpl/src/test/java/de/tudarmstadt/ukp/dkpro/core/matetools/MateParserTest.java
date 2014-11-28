@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+* along with this program.  If not, see http://www.gnu.org/licenses.
  */
 package de.tudarmstadt.ukp.dkpro.core.matetools;
 
@@ -66,11 +66,11 @@ public class MateParserTest
                 "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN", "VMINF", "VMPP", "VVFIN",
                 "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
 
-        String[] dependencyTags = new String[] { "--", "<None>", "<no-type>", "<root-type>",
-                "AC", "ADC", "AG", "AMS", "APP", "AVC", "CC", "CD", "CJ", "CM", "CP", "CVC",
-                "DA", "DH", "DM", "END", "EP", "JU", "MNR", "MO", "NG", "NK", "NMC", "OA", "OA2",
-                "OC", "OG", "OP", "PAR", "PD", "PG", "PH", "PM", "PNC", "RC", "RE", "RS", "SB",
-                "SBP", "SP", "SVP", "UC", "VO"  };
+        String[] dependencyTags = new String[] { "--", "<None>", "<no-type>", "<root-type>", "AC",
+                "ADC", "AG", "AMS", "APP", "AVC", "CC", "CD", "CJ", "CM", "CP", "CVC", "DA", "DM",
+                "END", "EP", "JU", "MNR", "MO", "NG", "NK", "NMC", "OA", "OA2", "OC", "OG", "OP",
+                "PAR", "PD", "PG", "PH", "PM", "PNC", "RC", "RE", "RS", "SB", "SBP", "SP", "SVP",
+                "UC", "VO" };
 
 		AssertAnnotations.assertDependencies(dependencies, select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "stts", posTags, jcas);
@@ -169,9 +169,9 @@ public class MateParserTest
                 "aff", "arg", "ato", "ats", "aux_caus", "aux_pass", "aux_tps", "comp", "coord",
                 "de_obj", "dep", "dep_coord", "det", "missinghead", "mod", "mod_rel", "obj",
                 "obj1", "p_obj", "ponct", "root", "suj" };
-
+        
         String[] unmappedPos = new String[] { "<None>", "<root-POS>", "END", "MID", "STPOS", "STR" };
-
+        
         String[] unmappedDep = new String[] { "<None>", "<no-type>", "<root-type>", "END", "comp",
                 "missinghead", "obj1", "root" };
 
@@ -183,7 +183,7 @@ public class MateParserTest
         AssertAnnotations.assertTagset(Dependency.class, "ftb", depTags, jcas);
         AssertAnnotations.assertTagsetMapping(Dependency.class, "ftb", unmappedDep, jcas);
     }
-
+    
 	private JCas runTest(String aLanguage, String aText)
 		throws Exception
 	{
