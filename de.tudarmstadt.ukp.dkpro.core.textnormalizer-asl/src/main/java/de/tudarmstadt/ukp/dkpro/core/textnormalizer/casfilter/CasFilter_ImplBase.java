@@ -49,7 +49,6 @@ import org.apache.uima.resource.ResourceInitializationException;
  * do not allow direct access to the JCas' produced by a JCasMultiplier.
  *
  * @author Carsten Schnober
- * @see CasFilter_ImplBaseTest
  *
  */
 public abstract class CasFilter_ImplBase
@@ -100,6 +99,7 @@ public abstract class CasFilter_ImplBase
      *            {@link AnalysisEngineDescription}s that should be aggregated.
      * @return a single {@link AnalysisEngineDescription} aggregating all the input engines.
      * @throws ResourceInitializationException
+     *             if any input analysis engine cannot be initialized
      */
     public static AnalysisEngineDescription createAggregateBuilderDescription(
             AnalysisEngineDescription... aEngines)
@@ -122,6 +122,7 @@ public abstract class CasFilter_ImplBase
      *            a list of {@link AnalysisEngineDescription}s
      * @return a single {@link AnalysisEngineDescription} aggregating all the input engines.
      * @throws ResourceInitializationException
+     *             if any input analysis engine cannot be initialized
      */
     public static AnalysisEngineDescription createAggregateBuilderDescription(
             List<AnalysisEngineDescription> aEngines)
