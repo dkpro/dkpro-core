@@ -25,13 +25,9 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 /**
  * Takes a text and checks for umlauts written as "ae", "oe", or "ue" and normalizes them if they
  * really are umlauts depending on a frequency model.
- *
- * @author zesch, erbs
  */
 @TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
-@Deprecated
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class UmlautNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {
