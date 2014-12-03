@@ -20,18 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.uima.fit.descriptor.TypeCapability;
-
 /**
  * Takes a text and replaces sharp s
- * 
- * @author Sebastian Kneise, nico.erbs@gmail.com
- * 
  */
-@TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
-@Deprecated
 public class SharpSNormalizer
     extends ReplacementFrequencyNormalizer_ImplBase
 {
