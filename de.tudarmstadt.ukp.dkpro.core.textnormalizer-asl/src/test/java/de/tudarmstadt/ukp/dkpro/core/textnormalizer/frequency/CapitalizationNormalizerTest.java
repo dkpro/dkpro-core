@@ -17,66 +17,35 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 
+import static de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation.AssertTransformations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.junit.Assert.assertEquals;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.fit.factory.AggregateBuilder;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ExternalResourceDescription;
-import org.junit.Before;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.CapitalizationNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class CapitalizationNormalizerTest
 {
-
-    private ExternalResourceDescription frequencyProvider;
-
-    @Before
-    public void init(){
-        frequencyProvider = createExternalResourceDescription(
-                Web1TFrequencyCountResource.class,
-                Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
-                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
-                Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t");  
-    }
-
     @Test
-    public void testCapitalizationNormalizer() throws Exception
+    public void test()
+        throws Exception
     {
-        AggregateBuilder builder = new AggregateBuilder();
-        builder.add(createEngineDescription(BreakIteratorSegmenter.class));
-        builder.add(createEngineDescription(
+        String inputText = "KResse KRESSE KressE Kresse";
+        String normalizedText = "Kresse Kresse Kresse Kresse";
+
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+
+        AnalysisEngineDescription normalizer = createEngineDescription(
                 CapitalizationNormalizer.class,
-                CapitalizationNormalizer.FREQUENCY_PROVIDER, frequencyProvider));
-        builder.add(createEngineDescription(ApplyChangesAnnotator.class), 
-                ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
-                ApplyChangesAnnotator.VIEW_TARGET, "normalized");
+                CapitalizationNormalizer.FREQUENCY_PROVIDER, createExternalResourceDescription(
+                        Web1TFrequencyCountResource.class,
+                        Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
+                        Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
-        AnalysisEngine engine = builder.createAggregate();
-
-        String text = "KResse KRESSE KressE Kresse";
-        JCas jcas = engine.newJCas();
-        jcas.setDocumentText(text);
-        DocumentMetaData.create(jcas);
-
-        engine.process(jcas);
-
-        JCas view0 = jcas.getView(CAS.NAME_DEFAULT_SOFA);
-        JCas view1 = jcas.getView("normalized");
-
-        System.out.println(view0.getDocumentText());
-        System.out.println(view1.getDocumentText());
-
-        assertEquals("Kresse Kresse Kresse Kresse", view1.getDocumentText());
+        assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
     }
 }
