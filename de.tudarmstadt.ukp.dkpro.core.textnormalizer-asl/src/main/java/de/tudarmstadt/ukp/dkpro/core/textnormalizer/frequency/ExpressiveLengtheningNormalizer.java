@@ -17,52 +17,44 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 
-import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator.OP_REPLACE;
+import static org.apache.uima.fit.util.JCasUtil.select;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ExternalResource;
 import org.apache.uima.fit.descriptor.TypeCapability;
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.FrequencyCountProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.ImmutableInterval;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation.JCasTransformerChangeBased_ImplBase;
 
 /**
  * Takes a text and shortens extra long words
- * 
- * @author Sebastian Kneise
- * 
  */
 @TypeCapability(
-        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 
-        outputs = { "de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation" })
-@Deprecated
+        inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" })
 public class ExpressiveLengtheningNormalizer
-    extends FrequencyNormalizer_ImplBase
+    extends JCasTransformerChangeBased_ImplBase
 {
+    public static final String FREQUENCY_PROVIDER = "FrequencyProvider";
+    @ExternalResource(key = FREQUENCY_PROVIDER, mandatory = true)
+    protected FrequencyCountProvider frequencyProvider;
+    
     @Override
-    protected Map<Integer, List<SofaChangeAnnotation>> createSofaChangesMap(JCas jcas)
+    public void process(JCas aInput, JCas aOutput)
+        throws AnalysisEngineProcessException
     {
-        Map<Integer, List<SofaChangeAnnotation>> changesMap = 
-                new TreeMap<Integer, List<SofaChangeAnnotation>>();
-        int mapKey = 1;
-
         // Pattern for repetitions of one character more than 2 times
         Pattern moreThanTwo = Pattern.compile("([a-zA-ZäöüÄÖÜß])\\1{2,}");
 
-        for (Token token : JCasUtil.select(jcas, Token.class)) {
-            List<SofaChangeAnnotation> scaChangesList = new ArrayList<SofaChangeAnnotation>();
-
+        for (Token token : select(aInput, Token.class)) {
             if (moreThanTwo.matcher(token.getCoveredText()).find()) {
                 // baseline work: reducing any repetition to a maximum of three repetitions
                 String tokenText = token.getCoveredText().replaceAll("([a-zA-ZäöüÄÖÜß])\\1{3,}",
@@ -74,54 +66,20 @@ public class ExpressiveLengtheningNormalizer
                     if (replacement.equals("No Candidate has a score higher than 0"))
                         replacement = tokenText;
                 }
-                catch (AnalysisEngineProcessException e) {
-                    System.out.println("Could not determine the best replacement. "
-                            + "The chosen replacement is simply the orinal token "
-                            + "shortened to a maximum character repetition of three characters");
+                catch (IOException e) {
+                    getLogger().error(
+                            "Unable to determine the best replacement, using original. Error: "
+                                    + ExceptionUtils.getRootCauseMessage(e));
                     replacement = tokenText;
-                    e.printStackTrace();
                 }
-
-                SofaChangeAnnotation sca = new SofaChangeAnnotation(jcas);
-                sca.setBegin(token.getBegin());
-                sca.setEnd(token.getEnd());
-                sca.setOperation(OP_REPLACE);
-                sca.setValue(replacement);
-                scaChangesList.add(sca);
+                
+                replace(token.getBegin(), token.getEnd(), replacement);
             }
-            changesMap.put(mapKey++, scaChangesList);
-        }
-
-        return changesMap;
-    }
-
-    @Override
-    protected Map<Integer, Boolean> createTokenReplaceMap(JCas jcas, AlignedString as)
-        throws AnalysisEngineProcessException
-    {
-        Map<Integer, Boolean> tokenReplaceMap = new TreeMap<Integer, Boolean>();
-
-        int mapKey = 1;
-        for (Token token : JCasUtil.select(jcas, Token.class)) {
-            String origToken = token.getCoveredText();
-
-            Interval resolved = as.inverseResolve(new ImmutableInterval(token.getBegin(), token
-                    .getEnd()));
-            String changedToken = as.get(resolved.getStart(), resolved.getEnd());
-
-            if (origToken.equals(changedToken)) {
-                tokenReplaceMap.put(mapKey++, false);
-            }
-            else {
-                tokenReplaceMap.put(mapKey++, true);
-            }
-        }
-
-        return tokenReplaceMap;
+        }    
     }
 
     public String getBestReplacement(String token)
-        throws AnalysisEngineProcessException
+        throws IOException
     {
         Pattern pattern = Pattern.compile("([a-zA-ZäöüÄÖÜß])\\1{1,}");
         Matcher matcher = pattern.matcher(token);
@@ -181,23 +139,17 @@ public class ExpressiveLengtheningNormalizer
     }
 
     private String getMostFrequentCandidate(List<String> candidates)
-        throws AnalysisEngineProcessException
+        throws IOException
     {
         long bestScore = 0;
         String bestCandidate = "No Candidate has a score higher than 0";
 
         for (String currentCandidate : candidates) {
-
-            try {
-                long currentScore = frequencyProvider.getFrequency(currentCandidate);
-                System.out.println(currentCandidate + " " + currentScore);
-                if (currentScore > bestScore) {
-                    bestScore = currentScore;
-                    bestCandidate = currentCandidate;
-                }
-            }
-            catch (Exception e) {
-                throw new AnalysisEngineProcessException(e);
+            long currentScore = frequencyProvider.getFrequency(currentCandidate);
+            //System.out.println(currentCandidate + " " + currentScore);
+            if (currentScore > bestScore) {
+                bestScore = currentScore;
+                bestCandidate = currentCandidate;
             }
         }
         return bestCandidate;

@@ -17,71 +17,40 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 
+import static de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation.AssertTransformations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
-import static org.junit.Assert.assertEquals;
-
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.fit.factory.AggregateBuilder;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ExternalResourceDescription;
-import org.junit.Before;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnotator;
 import de.tudarmstadt.ukp.dkpro.core.frequency.resources.Web1TFrequencyCountResource;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.ExpressiveLengtheningNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class ExpressiveLengtheningNormalizerTest
 {
-    private ExternalResourceDescription frequencyProvider;
-
-    @Before
-    public void init(){
-        frequencyProvider = createExternalResourceDescription(
-                Web1TFrequencyCountResource.class,
-                Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
-                Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
-                Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
-                Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t");  
-    }
-    
     @Test
-    public void runTestExpressiveLengtheningNormalizer() throws Exception
+    public void test()
+        throws Exception
     {
-	test("süüüüß","süß");
-    test("Kresssse","Kresse");
-    test("Kresseee","Kresse");
+        runTest("süüüüß", "süß");
+        runTest("Kresssse", "Kresse");
+        runTest("Kresseee", "Kresse");
     }
 
-    public void test(String input, String output) throws Exception
+    public void runTest(String inputText, String normalizedText) throws Exception
     {
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
 
-        AggregateBuilder builder = new AggregateBuilder();
-	builder.add(createEngineDescription(BreakIteratorSegmenter.class));
-	builder.add(createEngineDescription(
-		ExpressiveLengtheningNormalizer.class,
-		ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, frequencyProvider));
-	builder.add(createEngineDescription(ApplyChangesAnnotator.class), 
-	        ApplyChangesAnnotator.VIEW_SOURCE, CAS.NAME_DEFAULT_SOFA, 
-	        ApplyChangesAnnotator.VIEW_TARGET, "shortened");
+        AnalysisEngineDescription normalizer = createEngineDescription(
+                ExpressiveLengtheningNormalizer.class,
+                ExpressiveLengtheningNormalizer.FREQUENCY_PROVIDER, createExternalResourceDescription(
+                        Web1TFrequencyCountResource.class,
+                        Web1TFrequencyCountResource.PARAM_LANGUAGE, "de",
+                        Web1TFrequencyCountResource.PARAM_MIN_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_MAX_NGRAM_LEVEL, "1",
+                        Web1TFrequencyCountResource.PARAM_INDEX_PATH, "src/test/resources/jweb1t"));
 
-	AnalysisEngine engine = builder.createAggregate();
-
-	String text = input;
-	JCas jcas = engine.newJCas();
-	jcas.setDocumentText(text);
-	DocumentMetaData.create(jcas);
-
-	engine.process(jcas);
-
-	JCas view = jcas.getView("shortened");
-	System.out.println(view.getDocumentText());
-	System.out.println(output);
-	assertEquals(output, view.getDocumentText());
-
+        assertTransformedText(normalizedText, inputText, "de", segmenter, normalizer);
     }
 }
