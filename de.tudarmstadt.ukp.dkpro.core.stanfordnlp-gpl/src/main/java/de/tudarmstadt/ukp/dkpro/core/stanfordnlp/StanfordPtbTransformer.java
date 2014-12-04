@@ -23,7 +23,7 @@ import java.io.StringReader;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation.JCasTransformerChangeBased_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.JCasTransformerChangeBased_ImplBase;
 import edu.stanford.nlp.ling.CoreLabel;
 import edu.stanford.nlp.process.CoreLabelTokenFactory;
 import edu.stanford.nlp.process.PTBTokenizer;

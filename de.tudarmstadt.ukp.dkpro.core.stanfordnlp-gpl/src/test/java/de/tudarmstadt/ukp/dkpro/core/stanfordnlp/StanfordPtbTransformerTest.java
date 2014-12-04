@@ -33,7 +33,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation.JCasHolder;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.JCasHolder;
 
 public class StanfordPtbTransformerTest
 {
