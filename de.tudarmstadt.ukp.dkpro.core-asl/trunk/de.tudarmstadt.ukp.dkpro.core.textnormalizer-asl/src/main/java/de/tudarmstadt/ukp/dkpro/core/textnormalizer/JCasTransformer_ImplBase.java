@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
+package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
 
 import java.util.HashSet;
 import java.util.Set;

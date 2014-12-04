@@ -24,7 +24,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation.JCasTransformerChangeBased_ImplBase;
 
 /**
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.

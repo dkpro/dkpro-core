@@ -27,6 +27,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.JCasTransformerChangeBased_ImplBase;
 
 /**
  * Change tokens to follow a specific casing: all upper case, all lower case, or 'normal case':

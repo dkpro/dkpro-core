@@ -37,6 +37,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.JCasTransformerChangeBased_ImplBase;
 
 /**
  * Reads a tab-separated file containing mappings from one token to another. All tokens that match
