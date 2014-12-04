@@ -32,6 +32,7 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.JCasHolder;
 
 public class AssertTransformations
 {
