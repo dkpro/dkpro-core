@@ -298,6 +298,7 @@ public class ClearNlpSemanticRoleLabeler
 
 				token.setHead(head, dep.getDependencyType());
 			}
+			
 			// For the root node
 	        for (int i = 0; i < tokens.size(); i++) {
 	                DEPNode parserNode = tree.get(i + 1);
@@ -305,7 +306,6 @@ public class ClearNlpSemanticRoleLabeler
 	                    int headIndex = tokens.indexOf(null);
 	                    DEPNode head = tree.get(headIndex + 1);
 	                    parserNode.setHead(head, "root");
-	                    break;
 	                }
 	         }
 
