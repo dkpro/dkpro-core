@@ -20,4 +20,18 @@ PlatformDetector.java:
 Convenience class to detect local platform. This has  originally been developed as part of
 TreeTagger for Java. Originally this has been licensed under the Lesser GNU Public License. 
 For the purpose of being used in DKPro and being developed further, it has been re-licensed 
-under the Apache Software License 2.0 by the orignal author Richard Eckart de Castilho.
+under the Apache Software License 2.0 by the original author Richard Eckart de Castilho.
+
+
+
+LittleEndianDataInputStream:
+
+Originally Public Domain by Peter Franza:
+
+You just saved me tons of time, can we consider this code public domain?
+     Comment by Matt on April 21, 2012 @ 7:08 am
+
+Yes. Please use it however you wish.
+     Comment by pfranza on April 21, 2012 @ 7:13 am
+
+http://www.peterfranza.com/2008/09/26/little-endian-input-stream/
