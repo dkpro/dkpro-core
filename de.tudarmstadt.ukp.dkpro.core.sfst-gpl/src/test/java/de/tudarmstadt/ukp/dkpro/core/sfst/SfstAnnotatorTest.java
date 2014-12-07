@@ -18,9 +18,9 @@
  */
 package de.tudarmstadt.ukp.dkpro.core.sfst;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.*;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
@@ -54,7 +54,46 @@ public class SfstAnnotatorTest
                 "[ 15, 20]     -     -    -    -    -     -    -    -  Plur      -  3    -    -    -     -      -     - çalış (çal<v><vn_yis><3p>)",
                 "[ 21, 22]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<pnct>)" };
         
+        String[] tags = { "<1p>", "<1s>", "<2p>", "<2s>", "<3p>", "<3s>", "<D_AcIK>", "<D_CA>",
+                "<D_CAK>", "<D_CAgIz>", "<D_CI>", "<D_CIK>", "<D_IcIK>", "<D_IncI>", "<D_ca>",
+                "<D_cil>", "<D_gil>", "<D_lA>", "<D_lAn>", "<D_lAs>", "<D_lI>", "<D_lIK>",
+                "<D_mA>", "<D_mAdIK>", "<D_sAl>", "<D_sAr>", "<D_sa>", "<D_siz>", "<D_yIS>",
+                "<Dan_0>", "<Djn_0>", "<Dmn_0>", "<Dnn_siz>", "<Dvn_yIcI>", "<abil>", "<abl>",
+                "<acc>", "<acr>", "<adj>", "<adur>", "<adv>", "<agel>", "<agor>", "<akal>",
+                "<akoy>", "<ant>", "<apos>", "<ayaz>", "<ca>", "<caus>", "<cnjadv>", "<cnjcoo>",
+                "<cnjsub>", "<cog>", "<cpl_di>", "<cpl_ken>", "<cpl_mis>", "<cpl_sa>", "<cv_acak>",
+                "<cv_cesine>", "<cv_dan>", "<cv_dik>", "<cv_ecek>", "<cv_eli>", "<cv_erek>",
+                "<cv_ince>", "<cv_ip>", "<cv_iyor>", "<cv_ma>", "<cv_mak>", "<cv_mis>",
+                "<cv_zdan>", "<dat>", "<dem>", "<det>", "<dir>", "<exist>", "<gen>", "<ij>",
+                "<ins>", "<iver>", "<ki>", "<loc>", "<locp>", "<n>", "<neg>", "<nexist>", "<not>",
+                "<np>", "<num>", "<org>", "<p1p>", "<p1s>", "<p2p>", "<p2s>", "<p3p>", "<p3s>",
+                "<part_acak>", "<part_dik>", "<part_yan>", "<pass>", "<pers>", "<pl>", "<pnct>",
+                "<postp>", "<prn>", "<q>", "<qst>", "<rec>", "<ref>", "<t_aor>", "<t_cond>",
+                "<t_cont>", "<t_fut>", "<t_imp>", "<t_makta>", "<t_narr>", "<t_obl>", "<t_opt>",
+                "<t_past>", "<top>", "<v>", "<vinf>", "<vn_acak>", "<vn_dik>", "<vn_ma>",
+                "<vn_mak>", "<vn_yis>" };
+
+        String[] unmappedTags = { "<D_AcIK>", "<D_CA>", "<D_CAK>", "<D_CAgIz>", "<D_CI>",
+                "<D_CIK>", "<D_IcIK>", "<D_IncI>", "<D_ca>", "<D_cil>", "<D_gil>", "<D_lA>",
+                "<D_lAn>", "<D_lAs>", "<D_lI>", "<D_lIK>", "<D_mA>", "<D_mAdIK>", "<D_sAl>",
+                "<D_sAr>", "<D_sa>", "<D_siz>", "<D_yIS>", "<Dan_0>", "<Djn_0>", "<Dmn_0>",
+                "<Dnn_siz>", "<Dvn_yIcI>", "<abil>", "<acr>", "<adj>", "<adur>", "<adv>", "<agel>",
+                "<agor>", "<akal>", "<akoy>", "<ant>", "<apos>", "<ayaz>", "<ca>", "<caus>",
+                "<cnjadv>", "<cnjcoo>", "<cnjsub>", "<cog>", "<cpl_di>", "<cpl_ken>", "<cpl_mis>",
+                "<cpl_sa>", "<cv_acak>", "<cv_cesine>", "<cv_dan>", "<cv_dik>", "<cv_ecek>",
+                "<cv_eli>", "<cv_erek>", "<cv_ince>", "<cv_ip>", "<cv_iyor>", "<cv_ma>",
+                "<cv_mak>", "<cv_mis>", "<cv_zdan>", "<dem>", "<det>", "<dir>", "<exist>", "<ij>",
+                "<iver>", "<ki>", "<locp>", "<n>", "<neg>", "<nexist>", "<not>", "<np>", "<num>",
+                "<org>", "<p1p>", "<p1s>", "<p2p>", "<p2s>", "<p3p>", "<p3s>", "<part_acak>",
+                "<part_dik>", "<part_yan>", "<pass>", "<pers>", "<pl>", "<pnct>", "<postp>",
+                "<prn>", "<q>", "<qst>", "<rec>", "<ref>", "<t_aor>", "<t_cond>", "<t_cont>",
+                "<t_fut>", "<t_imp>", "<t_makta>", "<t_narr>", "<t_obl>", "<t_opt>", "<t_past>",
+                "<top>", "<v>", "<vinf>", "<vn_acak>", "<vn_dik>", "<vn_ma>", "<vn_mak>",
+                "<vn_yis>" };
+
         assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
+        assertTagset(MorphologicalFeatures.class, "trmorph", tags, jcas);
+        assertTagsetParser(MorphologicalFeatures.class, "trmorph", unmappedTags, jcas);
     }
 
     @Test
@@ -96,7 +135,35 @@ public class SfstAnnotatorTest
                 "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kranke<NN>Haus<+NN><Neut><Dat><Sg>)",
                 "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+IP><Norm>)" };
 
+        String[] tags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CHAR>", "<+CIRCP>", "<+DEM>",
+                "<+DEMPRO>", "<+INDEF>", "<+INTJ>", "<+IP>", "<+KONJ>", "<+NE>", "<+NN>", "<+ORD>",
+                "<+POSS>", "<+POSTP>", "<+PPRO>", "<+PREP/ART>", "<+PREP>", "<+PROADV>", "<+PTKL>",
+                "<+REL>", "<+SYMBOL>", "<+TRUNC>", "<+V>", "<+VPRE>", "<+WADV>", "<+WPRO>", "<1>",
+                "<2>", "<3>", "<ADJ>", "<ADV>", "<Adj>", "<Adv>", "<Akk>", "<Ant>", "<CAP>",
+                "<CARD>", "<Comp>", "<DIGCARD>", "<Dat>", "<Def>", "<Fem>", "<Gen>", "<Imp>",
+                "<Ind>", "<Indef>", "<Inf>", "<Invar>", "<Komma>", "<Kon>", "<Konj>", "<Masc>",
+                "<NE>", "<NN>", "<Neg>", "<Neut>", "<NoGend>", "<Nom>", "<Norm>", "<ORD>",
+                "<OTHER>", "<PPast>", "<PPres>", "<PREF>", "<Past>", "<Pl>", "<Pos>", "<Pred>",
+                "<Pres>", "<ProAdv>", "<QUANT>", "<SUFF>", "<Sg>", "<St/Mix>", "<St>", "<Sub>",
+                "<Sup>", "<Sw/Mix>", "<Sw>", "<UC>", "<V>", "<Vgl>", "<^ABK>", "<^VPAST>",
+                "<^VPRES>", "<attr>", "<links>", "<mD>", "<oD>", "<pers>", "<prfl>", "<pro>",
+                "<rechts>", "<refl>", "<rez>", "<subst>", "<zu>" };
+
+        String[] unmappedTags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CHAR>", "<+CIRCP>",
+                "<+DEM>", "<+DEMPRO>", "<+INDEF>", "<+INTJ>", "<+IP>", "<+KONJ>", "<+NE>", "<+NN>",
+                "<+ORD>", "<+POSS>", "<+POSTP>", "<+PPRO>", "<+PREP/ART>", "<+PREP>", "<+PROADV>",
+                "<+PTKL>", "<+REL>", "<+SYMBOL>", "<+TRUNC>", "<+V>", "<+VPRE>", "<+WADV>",
+                "<+WPRO>", "<ADJ>", "<ADV>", "<Adj>", "<Adv>", "<Ant>", "<CAP>", "<CARD>",
+                "<Comp>", "<DIGCARD>", "<Def>", "<Indef>", "<Inf>", "<Invar>", "<Komma>", "<Kon>",
+                "<NE>", "<NN>", "<Neg>", "<NoGend>", "<Norm>", "<ORD>", "<OTHER>", "<PPast>",
+                "<PPres>", "<PREF>", "<Past>", "<Pos>", "<Pred>", "<ProAdv>", "<QUANT>", "<SUFF>",
+                "<St/Mix>", "<St>", "<Sub>", "<Sup>", "<Sw/Mix>", "<Sw>", "<UC>", "<V>", "<Vgl>",
+                "<^ABK>", "<^VPAST>", "<^VPRES>", "<attr>", "<links>", "<mD>", "<oD>", "<pers>",
+                "<prfl>", "<pro>", "<rechts>", "<refl>", "<rez>", "<subst>", "<zu>" };
+
         assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
+        assertTagset(MorphologicalFeatures.class, "morphisto", tags, jcas);
+        assertTagsetParser(MorphologicalFeatures.class, "morphisto", unmappedTags, jcas);
     }
 
     @Test
@@ -127,7 +194,33 @@ public class SfstAnnotatorTest
                 "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (kranken<V><NN><SUFF>Haus<+NN><Neut><Dat><Sg>)",
                 "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)" };
 
+        String[] tags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CIRCP>", "<+CONJ>", "<+DEM>",
+                "<+INDEF>", "<+INTJ>", "<+NN>", "<+NPROP>", "<+ORD>", "<+POSS>", "<+POSTP>",
+                "<+PPRO>", "<+PREP>", "<+PREPART>", "<+PROADV>", "<+PTCL>", "<+PUNCT>", "<+REL>",
+                "<+SYMBOL>", "<+TRUNC>", "<+V>", "<+VPART>", "<+WADV>", "<+WPRO>", "<1>", "<2>",
+                "<3>", "<ADJ>", "<ADV>", "<Acc>", "<Adj>", "<Adv>", "<Ans>", "<Attr>", "<CAP>",
+                "<CARD>", "<Comma>", "<Comp>", "<Compar>", "<Coord>", "<Dat>", "<Def>", "<F>",
+                "<Fem>", "<Ge-Nom>", "<Gen>", "<Imp>", "<Ind>", "<Indef>", "<Inf>", "<Invar>",
+                "<KSF>", "<Left>", "<Masc>", "<NEWORTH>", "<NN>", "<NPROP>", "<Neg>", "<Neut>",
+                "<NoGend>", "<Nom>", "<Norm>", "<OLDORTH>", "<ORD>", "<Old>", "<PPast>", "<PPres>",
+                "<PREF>", "<Past>", "<Pers>", "<Pl>", "<Pos>", "<Pred>", "<Pres>", "<Pro>",
+                "<Rec>", "<Refl>", "<Right>", "<SUFF>", "<Sg>", "<Simp>", "<St>", "<Sub>",
+                "<Subj>", "<Subst>", "<Sup>", "<TRUNC>", "<V>", "<VPART>", "<VPREF>", "<Wk>",
+                "<^ABBR>", "<zu>" };
+
+        String[] unmappedTags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CIRCP>", "<+CONJ>", "<+DEM>",
+                "<+INTJ>", "<+NN>", "<+NPROP>", "<+POSTP>", "<+PREP>", "<+PREPART>", "<+PROADV>",
+                "<+PTCL>", "<+PUNCT>", "<+SYMBOL>", "<+TRUNC>", "<+V>", "<+VPART>", "<ADJ>",
+                "<ADV>", "<Adj>", "<Adv>", "<Ans>", "<Attr>", "<CAP>", "<Comma>", "<Compar>",
+                "<Coord>", "<F>", "<Ge-Nom>", "<Invar>", "<KSF>", "<Left>", "<NEWORTH>", "<NN>",
+                "<NPROP>", "<Neg>", "<NoGend>", "<Norm>", "<OLDORTH>", "<Old>", "<PPast>",
+                "<PPres>", "<PREF>", "<Pred>", "<Pro>", "<Right>", "<SUFF>", "<Simp>", "<St>",
+                "<Sub>", "<Subst>", "<TRUNC>", "<V>", "<VPART>", "<VPREF>", "<Wk>", "<^ABBR>",
+                "<zu>" };
+
         assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
+        assertTagset(MorphologicalFeatures.class, "smor", tags, jcas);
+        assertTagsetParser(MorphologicalFeatures.class, "smor", unmappedTags, jcas);
     }
 
     @Test
@@ -153,7 +246,34 @@ public class SfstAnnotatorTest
                 "[ 24, 32]     -     -    -    -    -     -    -    -  Sing      -  -    -    -    -     -      -     - ospedale (ospedale<NOUN><M><s>)",
                 "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<SENT>)" };
 
+        String[] tags = { "<1>", "<2>", "<3>", "<ABL>", "<ADJ>", "<ADV>", "<ART>", "<ARTPRE>",
+                "<ASP>", "<AUX>", "<CARD>", "<CAU>", "<CE>", "<CHE>", "<CI>", "<CLI>", "<COM>",
+                "<CON>", "<DEMO>", "<DET>", "<F>", "<INDEF>", "<INT>", "<M>", "<MOD>", "<NE>",
+                "<NOUN>", "<NUM>", "<P>", "<PERS>", "<PON>", "<POSS>", "<PRE>", "<PRO>", "<S>",
+                "<SENT>", "<SI>", "<TALE>", "<VER>", "<WH>", "<cela>", "<cele>", "<celi>",
+                "<celo>", "<cene>", "<ci>", "<comp>", "<cond>", "<f>", "<fut>", "<ger>", "<gli>",
+                "<gliela>", "<gliele>", "<glieli>", "<glielo>", "<gliene>", "<impf>", "<impr>",
+                "<ind>", "<inf>", "<la>", "<le>", "<li>", "<lo>", "<m>", "<mela>", "<mele>",
+                "<meli>", "<melo>", "<mene>", "<mi>", "<ne>", "<p>", "<part>", "<past>", "<pos>",
+                "<pres>", "<s>", "<sela>", "<sele>", "<seli>", "<selo>", "<sene>", "<si>", "<sub>",
+                "<sup>", "<tela>", "<tele>", "<teli>", "<telo>", "<tene>", "<ti>", "<vela>",
+                "<vele>", "<veli>", "<velo>", "<vene>", "<vi>" };
+
+        String[] unmappedTags = { "<ABL>", "<ADJ>", "<ADV>", "<ART>", "<ARTPRE>", "<ASP>", "<AUX>",
+                "<CARD>", "<CAU>", "<CE>", "<CHE>", "<CI>", "<CLI>", "<COM>", "<CON>", "<DEMO>",
+                "<DET>", "<F>", "<INT>", "<M>", "<MOD>", "<NE>", "<NOUN>", "<NUM>", "<P>",
+                "<PERS>", "<PON>", "<POSS>", "<PRE>", "<PRO>", "<S>", "<SENT>", "<SI>", "<TALE>",
+                "<VER>", "<WH>", "<cela>", "<cele>", "<celi>", "<celo>", "<cene>", "<ci>",
+                "<comp>", "<cond>", "<gli>", "<gliela>", "<gliele>", "<glieli>", "<glielo>",
+                "<gliene>", "<impr>", "<la>", "<le>", "<li>", "<lo>", "<mela>", "<mele>", "<meli>",
+                "<melo>", "<mene>", "<mi>", "<ne>", "<part>", "<pos>", "<sela>", "<sele>",
+                "<seli>", "<selo>", "<sene>", "<si>", "<sub>", "<sup>", "<tela>", "<tele>",
+                "<teli>", "<telo>", "<tene>", "<ti>", "<vela>", "<vele>", "<veli>", "<velo>",
+                "<vene>", "<vi>" };
+
         assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
+        assertTagset(MorphologicalFeatures.class, "pippi", tags, jcas);
+        assertTagsetParser(MorphologicalFeatures.class, "pippi", unmappedTags, jcas);
     }
 
     private JCas runTest(String language, String variant, String testDocument)
@@ -161,7 +281,8 @@ public class SfstAnnotatorTest
     {
         AnalysisEngine engine = createEngine(SfstAnnotator.class,
                 SfstAnnotator.PARAM_VARIANT, variant,
-                SfstAnnotator.PARAM_MODE, SfstAnnotator.Mode.ALL);
+                SfstAnnotator.PARAM_MODE, SfstAnnotator.Mode.ALL,
+                SfstAnnotator.PARAM_PRINT_TAGSET, true);
 
         JCas jcas = TestRunner.runTest(engine, language, testDocument);
 

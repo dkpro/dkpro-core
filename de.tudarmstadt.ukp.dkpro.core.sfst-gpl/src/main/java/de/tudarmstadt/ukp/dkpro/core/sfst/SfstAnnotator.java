@@ -20,8 +20,9 @@ package de.tudarmstadt.ukp.dkpro.core.sfst;
 
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInput;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,6 +31,8 @@ import java.io.PrintWriter;
 import java.lang.ProcessBuilder.Redirect;
 import java.net.URL;
 import java.util.List;
+import java.util.Properties;
+
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -40,8 +43,10 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.SingletonTagset;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.LittleEndianDataInputStream;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.RuntimeProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -96,6 +101,13 @@ public class SfstAnnotator
     @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     private String modelLocation;
 
+    /**
+     * Write the tag set(s) to the log when a model is loaded.
+     */
+    public static final String PARAM_PRINT_TAGSET = ComponentParameters.PARAM_PRINT_TAGSET;
+    @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
+    protected boolean printTagSet;
+
      /**
      * Specifies the model encoding.
      */
@@ -111,7 +123,7 @@ public class SfstAnnotator
     @ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
     private String morphMappingLocation;
 
-    private CasConfigurableProviderBase<File> modelProvider;
+    private ModelProviderBase<File> modelProvider;
     private MorphologicalFeaturesParser featuresParser;
     private RuntimeProvider runtimeProvider;
     
@@ -123,7 +135,7 @@ public class SfstAnnotator
 
         // Returns FST automaton for specified language, which is then passed to fst-infl from SFST.
         // Currently available for Turkish and German.
-        modelProvider = new CasConfigurableProviderBase<File>()
+        modelProvider = new ModelProviderBase<File>()
         {
             {
                 setContextObject(SfstAnnotator.this);
@@ -142,7 +154,48 @@ public class SfstAnnotator
             protected File produceResource(URL aUrl)
                 throws IOException
             {
+                Properties metadata = getResourceMetaData();
+                
+                SingletonTagset morphFeats = new SingletonTagset(
+                        MorphologicalFeatures.class, metadata.getProperty("morph.tagset"));
+                
+                try (LittleEndianDataInputStream is = new LittleEndianDataInputStream(
+                        aUrl.openStream())) {
+                    byte type = is.readByte(); // "c" for "compact"
+                    if (type != 0x63) {
+                        throw new IOException("Incompatible model. Must be a compact model.");
+                    }
+                    byte enc = is.readByte(); // "0" for ??? - "1" for UTF-8
+                    getLogger().info("Model encoding: " + (enc == 0 ? "unknown" : "UTF-8"));
+                    short n = is.readShort(); // alphabet size
+                    for (int i = 0; i < n; i++) {
+                        @SuppressWarnings("unused")
+                        int idx = is.readShort(); // need to read index
+                        String symbol = readZeroTerminatedString(is, "UTF-8");
+                        if (symbol.startsWith("<") && symbol.endsWith(">") && symbol.length() > 2) {
+                            morphFeats.add(symbol);
+                        }
+                    }
+                }
+                addTagset(morphFeats);
+
+                if (printTagSet) {
+                    getLogger().info(getTagset().toString());
+                }
+                
                 return ResourceUtils.getUrlAsFile(aUrl, true);
+            }
+            
+            private String readZeroTerminatedString(DataInput aIn, String aEncoding)
+                throws IOException
+            {
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                byte b = aIn.readByte();
+                while (b != 0) {
+                    bos.write(b);
+                    b = aIn.readByte();
+                }
+                return new String(bos.toByteArray(), aEncoding);
             }
         };
 
