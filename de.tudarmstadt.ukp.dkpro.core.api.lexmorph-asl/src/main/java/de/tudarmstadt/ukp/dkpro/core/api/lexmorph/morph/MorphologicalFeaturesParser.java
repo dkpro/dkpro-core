@@ -37,6 +37,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 public class MorphologicalFeaturesParser
     extends CasConfigurableProviderBase<List<AnalysisMapping>>
 {
+    private static final String IGNORE = "__IGNORE__";
     private boolean notFound = false;
 
     @Override
@@ -76,7 +77,7 @@ public class MorphologicalFeaturesParser
             List<AnalysisMapping> mappings = getResource();
 
             for (AnalysisMapping mapping : mappings) {
-                if (mapping.matches(aAnalysis)) {
+                if (!IGNORE.equals(mapping.getFeature()) && mapping.matches(aAnalysis)) {
                     features.setFeatureValueFromString(
                             features.getType().getFeatureByBaseName(mapping.getFeature()),
                             mapping.getValue());
@@ -112,8 +113,13 @@ public class MorphologicalFeaturesParser
             List<AnalysisMapping> mappings = new ArrayList<>();
             Properties props = PropertiesLoaderUtils.loadProperties(new UrlResource(aUrl));
             for (String key : props.stringPropertyNames()) {
-                String[] pkey = key.split("\\.", 2);
-                mappings.add(new AnalysisMapping(pkey[0], pkey[1], props.getProperty(key)));
+                try {
+                    String[] pkey = key.split("\\.", 2);
+                    mappings.add(new AnalysisMapping(pkey[0], pkey[1], props.getProperty(key)));
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+                    throw new IllegalStateException("Illegal key: [" + key + "]");
+                }
             }
             return mappings;
         }

@@ -217,3 +217,14 @@ verbForm.Inf=<Inf>
 # voice.Rcp=
 # voice.Cau=
 
+__IGNORE__.postags=<\\\+ADJ>|<ADJ>|<Adj>|<Ans>|<Attr>|<\\\+ADV>|<ADV>|<Adv>|<\\\+ART>|<\\\+CIRCP>|<\\\+CONJ>|\
+                   <Coord>|<\\\+DEM>|<\\\+INTJ>|<\\\+NN>|<NN>|<\\\+NPROP>|<\\\+POSTP>|<\\\+PREP>|<\\\+PREPART>|<\\\+PROADV>|\
+                   <\\\+PTCL>|<\\\+V>|<\\\+VPART>|<Sub>|<Invar>|<Pred>|<V>|<Pro>|<Subst>|<Neg>|<NPROP>|<Compar>|\
+                   <\\\^ABBR>
+__IGNORE__.character=<\\\+PUNCT>|<\\\+SYMBOL>|<Comma>|<Left>|<Right>|<Norm>
+__IGNORE__.form=<CAP>|<Old>|<OLDORTH>|<NEWORTH>|<Simp>|<SS>|<UC>
+__IGNORE__.composition=<KSF>|<TRUNC>|<\\\+TRUNC>|<F>
+__IGNORE__.derivation=<Ge-Nom>|<SUFF>|<NoGend>|<St>|<Wk>|<PREF>|<VPREF>|<VPART>
+__IGNORE__.inflection=<zu>
+__IGNORE__.tense=<PPast>|<PPres>
+__IGNORE__.other=<GUESSER>
