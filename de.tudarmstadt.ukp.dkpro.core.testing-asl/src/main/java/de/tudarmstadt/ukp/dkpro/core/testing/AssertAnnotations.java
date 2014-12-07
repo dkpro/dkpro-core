@@ -41,6 +41,8 @@ import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -513,10 +515,14 @@ public class AssertAnnotations
                     asCopyableString(toText(i.links())));
         }
 
-        assertEquals(aExpected.length, aActual.size());
-        for (int i = 0; i < actual.size(); i++) {
-            assertEquals(asCopyableString(asList(aExpected[i]), true),
-                    asCopyableString(toText(actual.get(i).links()), true));
+        if (aExpected.length == aActual.size()) {
+            for (int i = 0; i < actual.size(); i++) {
+                assertEquals(asCopyableString(asList(aExpected[i]), true),
+                        asCopyableString(toText(actual.get(i).links()), true));
+            }
+        }
+        else {
+            fail("Expected [" + aExpected.length + "] chains but found " + aActual.size() + "]");
         }
     }
     
@@ -660,6 +666,101 @@ public class AssertAnnotations
                 + "]");
     }
 
+    public static void assertTagsetParser(Class<?> aLayer, String aName, String[] aDefaultMapped,
+            JCas aJCas) throws AnalysisEngineProcessException
+    {
+        assertTagsetParser(aLayer, aName, aDefaultMapped, aJCas, false);
+    }
+
+    public static void assertTagsetParser(Class<?> aLayer, String aName, String[] aDefaultMapped,
+            JCas aJCas, boolean aExact) throws AnalysisEngineProcessException
+    {
+        String pattern;
+        
+        if (aLayer == MorphologicalFeatures.class) {
+            pattern = "classpath:/de/tudarmstadt/ukp/dkpro/"
+                    + "core/api/lexmorph/tagset/${language}-${tagset}-morph.map";
+        }
+        else {
+            throw new IllegalArgumentException("Unsupported layer: " + aLayer.getName());
+        }
+        
+        MorphologicalFeaturesParser mp = new MorphologicalFeaturesParser();
+        mp.setDefault(MappingProvider.LOCATION, pattern);
+        mp.setDefault("tagset", aName);
+        mp.configure(aJCas.getCas());
+        
+        {
+            List<AnalysisMapping> mapping = mp.getResource();
+            Assert.assertNotNull("No mapping found for layer [" + aLayer.getName() + "] tagset ["
+                    + aName + "]", mapping);
+        }
+        
+        List<String> expected = new ArrayList<String>(asList(aDefaultMapped));
+        Collections.sort(expected);
+
+        StringBuilder sb = new StringBuilder();
+
+        for (TagsetDescription tsd : select(aJCas, TagsetDescription.class)) {
+            sb.append('\t');
+            sb.append(tsd.getLayer());
+            sb.append(" - ");
+            sb.append(tsd.getName());
+            sb.append('\n');
+
+            if (StringUtils.equals(aLayer.getName(), tsd.getLayer())
+                    && StringUtils.equals(aName, tsd.getName())) {
+                List<String> actual = new ArrayList<String>();
+                for (TagDescription td : select(tsd.getTags(), TagDescription.class)) {
+                    actual.add(td.getName());
+                }
+                Collections.sort(actual);
+                
+                List<String> mappedTags = new ArrayList<String>();
+                for (String t : actual) {
+                    if (mp.canParse(t)) {
+                        mappedTags.add(t);
+                    }
+                }
+                Collections.sort(mappedTags);
+                
+                // Keep only the unmapped tags
+                List<String> unmapped = new ArrayList<>(actual);
+                unmapped.removeAll(mappedTags);
+                
+                // Keep the mapped tags that are not in the model
+                List<String> notInModel = new ArrayList<>(mappedTags);
+                notInModel.removeAll(actual);
+
+                System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
+                System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
+                System.out.printf("%-20s - Expected: %s%n", "Unmapped tags",
+                        asCopyableString(expected));
+                System.out.printf("%-20s - Actual  : %s%n", "Unmapped tags",
+                        asCopyableString(unmapped));
+                if (aExact) {
+                    System.out.printf("%-20s - Expected: %s%n", "Tags not in model",
+                            asCopyableString(Collections.EMPTY_LIST));
+                    System.out.printf("%-20s - Actual  : %s%n", "Tags not in model",
+                            asCopyableString(notInModel));
+                }
+
+                assertEquals(asCopyableString(expected, true), asCopyableString(unmapped, true));
+                if (aExact) {
+                    assertEquals(asCopyableString(Collections.EMPTY_LIST, true),
+                            asCopyableString(notInModel, true));
+                }
+                return;
+            }
+        }
+
+        System.out.println("The CAS does not containg a description for layer [" + aLayer.getName()
+                + "] tagset [" + aName + "]");
+        System.out.println("What has been found is:\n" + sb);
+        fail("No tagset definition found for layer [" + aLayer.getName() + "] tagset [" + aName
+                + "]");
+    }
+    
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
     {
         String result;

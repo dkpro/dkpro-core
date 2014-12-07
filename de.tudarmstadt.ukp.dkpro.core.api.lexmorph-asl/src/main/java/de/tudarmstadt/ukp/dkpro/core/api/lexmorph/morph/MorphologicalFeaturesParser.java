@@ -86,7 +86,24 @@ public class MorphologicalFeaturesParser
 
         return features;
     }
+    
+    public boolean canParse(String aAnalysis)
+    {
+        if (notFound) {
+            return false;
+        }
+        else {
+            List<AnalysisMapping> mappings = getResource();
+            for (AnalysisMapping mapping : mappings) {
+                if (mapping.matches(aAnalysis)) {
+                    return true;
+                }
+            }
+        }
 
+        return false;
+    }
+    
     @Override
     protected List<AnalysisMapping> produceResource(URL aUrl)
         throws IOException
