@@ -1104,35 +1104,6 @@
 			</listitem>
 		</itemizedlist>
 	</section>
-	<!--
-	<section>
-		<title>WSDL (not in release)</title>
-		<para/>
-		<table frame="all">
-			<title>Components</title>
-			<tgroup cols="2">
-				<colspec colname="c1" colnum="1" colwidth="1.0*"/>
-				<colspec colname="c2" colnum="2" colwidth="1.0*"/>
-				<thead>
-					<row>
-						<entry>Component</entry>
-						<entry>Comments</entry>
-					</row>
-				</thead>
-				<tbody>
-					<row>
-						<entry></entry>
-						<entry/>
-					</row>
-					<row>
-						<entry></entry>
-						<entry/>
-					</row>
-				</tbody>
-			</tgroup>
-		</table>
-	</section>
-	-->
 	<section>
 		<title>XMI</title>
 		<para/>
