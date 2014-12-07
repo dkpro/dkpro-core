@@ -40,6 +40,8 @@
 	<target name="de">
 		<antcall target="de-morph-morphisto-ca"/>
 		<antcall target="de-morph-smor-ca"/>
+		<antcall target="de-morph-zmorge-orig-ca"/>
+		<antcall target="de-morph-zmorge-newlemma-ca"/>
 	</target>
 	
     <target name="de-morph-smor-ca">
@@ -123,7 +125,112 @@
 			</additionalUpstreamContent>
 		</install-stub-and-upstream-file>
     </target>
+	
+    <target name="de-morph-zmorge-orig-ca">
+        <mkdir dir="target/download/zmorge-orig-ca"/>
+        <!-- FILE: zmorge-20140521-smor_orig.ca - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-05-21 | now        | 0f900019eb07ed4776c4f09d58fc4771
+          -->
+        <get 
+            src="http://kitt.ifi.uzh.ch/kitt/zmorge/transducers/zmorge-20140521-smor_orig.ca.zip" 
+            dest="target/download/zmorge-orig-ca/zmorge-smor_orig.ca.zip" 
+            skipexisting="true"/>
+        <unzip
+                src="target/download/zmorge-orig-ca/zmorge-smor_orig.ca.zip"
+                dest="target/download/zmorge-orig-ca">
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/zmorge-orig-ca/zmorge-20140521-smor_orig.ca" 
+            md5="0f900019eb07ed4776c4f09d58fc4771"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+            upstreamVersion="20140521"
+            metaDataVersion="1"
+            tool="morph" 
+            language="de" 
+            variant="zmorge-orig-ca" 
+            extension="ca">
+            <metadata>
+                <entry key="model.encoding" value="UTF-8"/>
+                <entry key="morph.tagset" value="smor"/>
+            </metadata>
+            <additionalUpstreamContent>
+            	<echo file="target/model-staging/META-INF/README.txt">
+            		Zmorge - The Zurich Morphological Analyzer for German
+            		
+            		http://kitt.ifi.uzh.ch/kitt/zmorge/
+            		
+            		The lexicon is licensed under the Creative Commons BY-SA 3.0 license.
+            		The extraction scripts and the SMOR grammar are licensed under the GPL v2.
+            		
+            		Rico Sennrich and Beat Kunz. 2014: Zmorge: A German Morphological Lexicon 
+            		Extracted from Wiktionary. In: Proceedings of the 9th International Conference 
+            		on Language Resources and Evaluation (LREC 2014).
+            	</echo>
+            	<replaceregexp file="target/model-staging/META-INF/README.txt" 
+                    match="\s*" replace="" byline="true"/>
+                <get 
+                    src="http://www.gnu.org/licenses/gpl-2.0.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.grammar.txt"/>
+                <get 
+                    src="http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.lexicon.txt"/>
+            </additionalUpstreamContent>
+        </install-stub-and-upstream-file>
+    </target>	
 
+    <target name="de-morph-zmorge-newlemma-ca">
+        <mkdir dir="target/download/zmorge-newlemma-ca"/>
+        <!-- FILE: zmorge-20140521-smor_newlemma.ca - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-05-21 | now        | 40133cb8a222d8d6af6188f373ab916b
+          -->
+        <get 
+            src="http://kitt.ifi.uzh.ch/kitt/zmorge/transducers/zmorge-20140521-smor_newlemma.ca.zip" 
+            dest="target/download/zmorge-newlemma-ca/zmorge-smor_newlemma.ca.zip" 
+            skipexisting="true"/>
+        <unzip
+                src="target/download/zmorge-newlemma-ca/zmorge-smor_newlemma.ca.zip"
+                dest="target/download/zmorge-newlemma-ca">
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/zmorge-newlemma-ca/zmorge-20140521-smor_newlemma.ca" 
+            md5="40133cb8a222d8d6af6188f373ab916b"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+            upstreamVersion="20140521"
+            metaDataVersion="1"
+            tool="morph" 
+            language="de" 
+            variant="zmorge-newlemma-ca" 
+            extension="ca">
+            <metadata>
+                <entry key="model.encoding" value="UTF-8"/>
+                <entry key="morph.tagset" value="smor"/>
+            </metadata>
+            <additionalUpstreamContent>
+                <echo file="target/model-staging/META-INF/README.txt">
+                    Zmorge - The Zurich Morphological Analyzer for German
+                    
+                    http://kitt.ifi.uzh.ch/kitt/zmorge/
+                    
+                    The lexicon is licensed under the Creative Commons BY-SA 3.0 license.
+                    The extraction scripts and the SMOR grammar are licensed under the GPL v2.
+                    
+                    Rico Sennrich and Beat Kunz. 2014: Zmorge: A German Morphological Lexicon 
+                    Extracted from Wiktionary. In: Proceedings of the 9th International Conference 
+                    on Language Resources and Evaluation (LREC 2014).
+                </echo>
+                <replaceregexp file="target/model-staging/META-INF/README.txt" 
+                    match="\s*" replace="" byline="true"/>
+                <get 
+                    src="http://www.gnu.org/licenses/gpl-2.0.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.grammar.txt"/>
+                <get 
+                    src="http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.lexicon.txt"/>
+            </additionalUpstreamContent>
+        </install-stub-and-upstream-file>
+    </target>	
     <target name="it">
 		<antcall target="it-morph-pippi-ca"/>
 	</target>

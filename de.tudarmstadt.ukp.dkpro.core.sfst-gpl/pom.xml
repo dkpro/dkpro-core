@@ -83,6 +83,16 @@
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-smor-ca</artifactId>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-zmorge-orig-ca</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-zmorge-newlemma-ca</artifactId>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-pippi-ca</artifactId>
@@ -106,6 +116,16 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-smor-ca</artifactId>
 				<version>20140801.1</version>
 			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-zmorge-orig-ca</artifactId>
+                <version>20140521.1</version>
+            </dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-zmorge-newlemma-ca</artifactId>
+                <version>20140521.1</version>
+            </dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-pippi-ca</artifactId>
@@ -135,6 +155,8 @@
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-bin</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-morphisto-ca</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-smor-ca</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-zmorge-orig-ca</usedDependency>
+                            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-de-zmorge-newlemma-ca</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-it-pippi-ca</usedDependency>
 							<usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.sfst-model-morph-tr-trmorph-ca</usedDependency>
 						</usedDependencies>

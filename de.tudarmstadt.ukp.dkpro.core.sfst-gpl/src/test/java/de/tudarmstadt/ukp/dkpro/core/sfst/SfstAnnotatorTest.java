@@ -208,15 +208,130 @@ public class SfstAnnotatorTest
                 "<Subj>", "<Subst>", "<Sup>", "<TRUNC>", "<V>", "<VPART>", "<VPREF>", "<Wk>",
                 "<^ABBR>", "<zu>" };
 
-        String[] unmappedTags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CIRCP>", "<+CONJ>", "<+DEM>",
-                "<+INTJ>", "<+NN>", "<+NPROP>", "<+POSTP>", "<+PREP>", "<+PREPART>", "<+PROADV>",
-                "<+PTCL>", "<+PUNCT>", "<+SYMBOL>", "<+TRUNC>", "<+V>", "<+VPART>", "<ADJ>",
-                "<ADV>", "<Adj>", "<Adv>", "<Ans>", "<Attr>", "<CAP>", "<Comma>", "<Compar>",
-                "<Coord>", "<F>", "<Ge-Nom>", "<Invar>", "<KSF>", "<Left>", "<NEWORTH>", "<NN>",
-                "<NPROP>", "<Neg>", "<NoGend>", "<Norm>", "<OLDORTH>", "<Old>", "<PPast>",
-                "<PPres>", "<PREF>", "<Pred>", "<Pro>", "<Right>", "<SUFF>", "<Simp>", "<St>",
-                "<Sub>", "<Subst>", "<TRUNC>", "<V>", "<VPART>", "<VPREF>", "<Wk>", "<^ABBR>",
-                "<zu>" };
+        String[] unmappedTags = {};
+
+        assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
+        assertTagset(MorphologicalFeatures.class, "smor", tags, jcas);
+        assertTagsetParser(MorphologicalFeatures.class, "smor", unmappedTags, jcas);
+    }
+
+    @Test
+    public void testGermanZmorgeOrig()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "zmorge-orig-ca", "Der Arzt arbeitet im Krankenhaus .");
+
+        String[] morphemes = new String[] {
+                "[  0,  3]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -  Rel    -     -      -     - Der (<CAP>die<+REL><Subst><Fem><Dat><Sg><St>)",
+                "[  0,  3]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+DEM><Subst><Fem><Dat><Sg><St>)",
+                "[  0,  3]     -     -  Gen  Def    -     -    -    -  Plur      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><NoGend><Gen><Pl><St>)",
+                "[  0,  3]     -     -  Gen  Def    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><Fem><Gen><Sg><St>)",
+                "[  0,  3]     -     -  Nom  Def    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><Masc><Nom><Sg><St>)",
+                "[  0,  3]     -     -  Dat  Def    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><Fem><Dat><Sg><St>)",
+                "[  0,  3]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+DEM><Subst><Masc><Nom><Sg><St>)",
+                "[  0,  3]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -  Rel    -     -      -     - Der (<CAP>die<+REL><Subst><Masc><Nom><Sg><St>)",
+                "[  4,  8]     -     -  Acc    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Acc><Sg>)",
+                "[  4,  8]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Nom><Sg>)",
+                "[  4,  8]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Dat><Sg>)",
+                "[  9, 17]     -     -    -    -    -     -  Sub    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeiten<+V><2><Pl><Pres><Subj>)",
+                "[  9, 17]     -     -    -    -    -     -  Ind    -  Sing      -  3    -    -    -  Pres      -     - arbeitet (arbeiten<+V><3><Sg><Pres><Ind>)",
+                "[  9, 17]     -     -    -    -    -     -  Ind    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeiten<+V><2><Pl><Pres><Ind>)",
+                "[  9, 17]     -     -    -    -    -     -  Imp    -  Plur      -  -    -    -    -     -      -     - arbeitet (arbeiten<+V><Imp><Pl>)",
+                "[ 18, 20]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - im (in<+PREPART><Neut><Dat><Sg>)",
+                "[ 18, 20]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - im (in<+PREPART><Masc><Dat><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (krank<ADJ><NN><SUFF>Haus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kran<NN>Ken<NN>Haus<+NN><Neut><Dat><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kran<NN>Ken<NN>Haus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Dat><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kran<NN>Ken<NN>Haus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (kranken<V><NN><SUFF>Haus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (kranken<V><NN><SUFF>Haus<+NN><Neut><Dat><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (kranken<V><NN><SUFF>Haus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (krank<ADJ><NN><SUFF>Haus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (krank<ADJ><NN><SUFF>Haus<+NN><Neut><Dat><Sg>)",
+                "[ 33, 34]     -     -  Acc    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Acc><Sg>)",
+                "[ 33, 34]     -     -  Nom    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Nom><Sg>)",
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)",
+                "[ 33, 34]     -     -  Gen    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Gen><Sg>)",
+                "[ 33, 34]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<^ABBR><+NN><Fem><Dat><Sg>)" };
+
+        String[] tags = { "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CONJ>", "<+DEM>", "<+INDEF>",
+                "<+INTJ>", "<+NN>", "<+NPROP>", "<+ORD>", "<+POSS>", "<+POSTP>", "<+PPRO>",
+                "<+PREP>", "<+PREPART>", "<+PROADV>", "<+PTCL>", "<+PUNCT>", "<+REL>", "<+SYMBOL>",
+                "<+TRUNC>", "<+V>", "<+VPART>", "<+WADV>", "<+WPRO>", "<1>", "<2>", "<3>", "<ADJ>",
+                "<ADV>", "<Acc>", "<Adv>", "<Ans>", "<Attr>", "<CAP>", "<CARD>", "<Comma>",
+                "<Comp>", "<Compar>", "<Coord>", "<Dat>", "<Def>", "<F>", "<Fem>", "<GUESSER>",
+                "<Ge-Nom>", "<Gen>", "<Imp>", "<Ind>", "<Indef>", "<Inf>", "<Invar>", "<Left>",
+                "<Masc>", "<NEWORTH>", "<NN>", "<NPROP>", "<Neg>", "<Neut>", "<NoGend>", "<Nom>",
+                "<Norm>", "<OLDORTH>", "<ORD>", "<Old>", "<PPast>", "<PPres>", "<PREF>", "<Past>",
+                "<Pers>", "<Pl>", "<Pos>", "<Pred>", "<Pres>", "<Pro>", "<Rec>", "<Refl>",
+                "<Right>", "<SUFF>", "<Sg>", "<Simp>", "<St>", "<Sub>", "<Subj>", "<Subst>",
+                "<Sup>", "<TRUNC>", "<V>", "<VPART>", "<VPREF>", "<Wk>", "<^ABBR>", "<zu>" };
+
+        String[] unmappedTags = {};
+
+        assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
+        assertTagset(MorphologicalFeatures.class, "smor", tags, jcas);
+        assertTagsetParser(MorphologicalFeatures.class, "smor", unmappedTags, jcas);
+    }
+
+    @Test
+    public void testGermanZmorgeNewlemma()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "zmorge-newlemma-ca", "Der Arzt arbeitet im Krankenhaus .");
+
+        String[] morphemes = new String[] {
+                "[  0,  3]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -  Rel    -     -      -     - Der (<CAP>die<+REL><Subst><Fem><Dat><Sg><St>)",
+                "[  0,  3]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+DEM><Subst><Fem><Dat><Sg><St>)",
+                "[  0,  3]     -     -  Gen  Def    -     -    -    -  Plur      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><NoGend><Gen><Pl><St>)",
+                "[  0,  3]     -     -  Gen  Def    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><Fem><Gen><Sg><St>)",
+                "[  0,  3]     -     -  Nom  Def    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><Masc><Nom><Sg><St>)",
+                "[  0,  3]     -     -  Dat  Def    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+ART><Def><Fem><Dat><Sg><St>)",
+                "[  0,  3]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Der (<CAP>die<+DEM><Subst><Masc><Nom><Sg><St>)",
+                "[  0,  3]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -  Rel    -     -      -     - Der (<CAP>die<+REL><Subst><Masc><Nom><Sg><St>)",
+                "[  4,  8]     -     -  Acc    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Acc><Sg>)",
+                "[  4,  8]     -     -  Nom    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Nom><Sg>)",
+                "[  4,  8]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - Arzt (Arzt<+NN><Masc><Dat><Sg>)",
+                "[  9, 17]     -     -    -    -    -     -  Sub    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeit<~>en<+V><2><Pl><Pres><Subj>)",
+                "[  9, 17]     -     -    -    -    -     -  Ind    -  Sing      -  3    -    -    -  Pres      -     - arbeitet (arbeit<~>en<+V><3><Sg><Pres><Ind>)",
+                "[  9, 17]     -     -    -    -    -     -  Ind    -  Plur      -  2    -    -    -  Pres      -     - arbeitet (arbeit<~>en<+V><2><Pl><Pres><Ind>)",
+                "[  9, 17]     -     -    -    -    -     -  Imp    -  Plur      -  -    -    -    -     -      -     - arbeitet (arbeit<~>en<+V><Imp><Pl>)",
+                "[ 18, 20]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - im (in<+PREPART><Neut><Dat><Sg>)",
+                "[ 18, 20]     -     -  Dat    -    -  Masc    -    -  Sing      -  -    -    -    -     -      -     - im (in<+PREPART><Masc><Dat><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kran<#>ken<#>haus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krank<~>en<#>haus<+NN><Neut><Dat><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krank<~>en<#>haus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krankenhaus<+NN><Neut><Dat><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krank<~>en<#>haus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Acc    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krank<~>en<#>haus<+NN><Neut><Acc><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krank<~>en<#>haus<+NN><Neut><Dat><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Krank<~>en<#>haus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Nom    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kran<#>ken<#>haus<+NN><Neut><Nom><Sg>)",
+                "[ 21, 32]     -     -  Dat    -    -  Neut    -    -  Sing      -  -    -    -    -     -      -     - Krankenhaus (Kran<#>ken<#>haus<+NN><Neut><Dat><Sg>)",
+                "[ 33, 34]     -     -  Acc    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Acc><Sg>)",
+                "[ 33, 34]     -     -  Nom    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Nom><Sg>)",
+                "[ 33, 34]     -     -    -    -    -     -    -    -     -      -  -    -    -    -     -      -     - . (.<+PUNCT><Norm>)",
+                "[ 33, 34]     -     -  Gen    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Gen><Sg>)",
+                "[ 33, 34]     -     -  Dat    -    -   Fem    -    -  Sing      -  -    -    -    -     -      -     - . (.<+NN><Fem><Dat><Sg>)" };
+
+        String[] tags = { "<#>", "<+ADJ>", "<+ADV>", "<+ART>", "<+CARD>", "<+CONJ>", "<+DEM>",
+                "<+INDEF>", "<+INTJ>", "<+NN>", "<+NPROP>", "<+ORD>", "<+POSS>", "<+POSTP>",
+                "<+PPRO>", "<+PREP>", "<+PREPART>", "<+PROADV>", "<+PTCL>", "<+PUNCT>", "<+REL>",
+                "<+SYMBOL>", "<+TRUNC>", "<+V>", "<+VPART>", "<+WADV>", "<+WPRO>", "<->", "<1>",
+                "<2>", "<3>", "<Acc>", "<Adv>", "<Ans>", "<Attr>", "<CAP>", "<Comma>", "<Comp>",
+                "<Compar>", "<Coord>", "<Dat>", "<Def>", "<Fem>", "<GUESSER>", "<Gen>", "<Imp>",
+                "<Ind>", "<Indef>", "<Inf>", "<Invar>", "<Left>", "<Masc>", "<NEWORTH>", "<Neg>",
+                "<Neut>", "<NoGend>", "<Nom>", "<Norm>", "<OLDORTH>", "<Old>", "<PPast>",
+                "<PPres>", "<Past>", "<Pers>", "<Pl>", "<Pos>", "<Pred>", "<Pres>", "<Pro>",
+                "<Rec>", "<Refl>", "<Right>", "<SUFF>", "<Sg>", "<Simp>", "<St>", "<Sub>",
+                "<Subj>", "<Subst>", "<Sup>", "<TRUNC>", "<V>", "<Wk>", "<^ABBR>", "<zu>", "<~>" };
+
+        String[] unmappedTags = { "<#>", "<->", "<~>" };
 
         assertMorph(morphemes, select(jcas, MorphologicalFeatures.class));
         assertTagset(MorphologicalFeatures.class, "smor", tags, jcas);
