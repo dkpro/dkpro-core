@@ -20,12 +20,15 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 import static java.util.Arrays.asList;
 import static org.apache.commons.lang.StringUtils.join;
 import static org.apache.commons.lang.StringUtils.normalizeSpace;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -36,8 +39,22 @@ import java.util.Map;
 import junit.framework.Assert;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.uima.UIMAException;
+import org.apache.uima.UimaContext;
+import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.collection.CollectionException;
+import org.apache.uima.collection.CollectionReaderDescription;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.component.JCasCollectionReader_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+import org.apache.uima.util.CasCopier;
+import org.apache.uima.util.Progress;
+import org.apache.uima.util.ProgressImpl;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.Anomaly;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
@@ -46,9 +63,11 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.internal.AnalysisMapping
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.Morpheme;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.TagsetDescription;
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -755,6 +774,29 @@ public class AssertAnnotations
                 + "]");
     }
     
+    public static void assertTransformedText(String normalizedText, String inputText,
+            String language, AnalysisEngineDescription... aEngines)
+            throws ResourceInitializationException
+    {
+        CollectionReaderDescription reader = createReaderDescription(InternalStringReader.class,
+                InternalStringReader.PARAM_DOCUMENT_TEXT, inputText,
+                InternalStringReader.PARAM_LANGUAGE, language);
+
+        List<AnalysisEngineDescription> engines = new ArrayList<AnalysisEngineDescription>();
+        for (AnalysisEngineDescription e : aEngines) {
+            engines.add(e);
+        }
+
+        engines.add(createEngineDescription(InternalJCasHolder.class));
+
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader,
+                engines.toArray(new AnalysisEngineDescription[engines.size()]))) {
+            // iteratePipeline does not support CAS multipliers. jcas is not updated after the
+            // multiplier. In order to access the new CAS, we use the JCasHolder (not thread-safe!)
+            assertEquals(normalizedText, InternalJCasHolder.get().getDocumentText());
+        }
+    }
+    
     public static String asCopyableString(Collection<String> aCollection, boolean aLinebreak)
     {
         String result;
@@ -778,4 +820,72 @@ public class AssertAnnotations
         return asCopyableString(aCollection, false);
     }
 
+    public static class InternalStringReader
+        extends JCasCollectionReader_ImplBase
+    {
+        public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
+        @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+        private String language;
+
+        public static final String PARAM_DOCUMENT_TEXT = "documentText";
+        @ConfigurationParameter(name = PARAM_DOCUMENT_TEXT, mandatory = true)
+        private String documentText;
+
+        private boolean isDone = false;
+
+        @Override
+        public void initialize(UimaContext aContext)
+            throws ResourceInitializationException
+        {
+            super.initialize(aContext);
+            isDone = false;
+        }
+
+        @Override
+        public void getNext(JCas sJCas)
+            throws IOException
+        {
+            isDone = true;
+
+            sJCas.setDocumentLanguage(language);
+            sJCas.setDocumentText(documentText);
+        }
+
+        @Override
+        public boolean hasNext()
+            throws IOException, CollectionException
+        {
+            return !isDone;
+        }
+
+        @Override
+        public Progress[] getProgress()
+        {
+            return new Progress[] { new ProgressImpl(isDone ? 0 : 1, 1, Progress.ENTITIES) };
+        }
+    }
+    
+    public static class InternalJCasHolder extends JCasAnnotator_ImplBase
+    {
+        private static JCas value;
+
+        @Override
+        public void process(JCas aJCas)
+            throws AnalysisEngineProcessException
+        {
+            try {
+                value = JCasFactory.createJCas();
+            }
+            catch (UIMAException e) {
+                throw new AnalysisEngineProcessException(e);
+            }
+            DocumentMetaData.copy(aJCas, value);
+            CasCopier.copyCas(aJCas.getCas(), value.getCas(), true);
+        }
+
+        public static JCas get()
+        {
+            return value;
+        }
+    }
 }
