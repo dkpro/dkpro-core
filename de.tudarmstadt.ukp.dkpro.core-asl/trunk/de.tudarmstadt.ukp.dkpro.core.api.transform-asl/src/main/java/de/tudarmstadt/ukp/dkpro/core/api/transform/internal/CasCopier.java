@@ -25,7 +25,7 @@
  *                 - Allow to define the name of a target view when copying.
  *                 - Allow to check if a given FS is a copy.
  */
-package de.tudarmstadt.ukp.dkpro.core.castransformation;
+package de.tudarmstadt.ukp.dkpro.core.api.transform.internal;
 
 import java.util.HashMap;
 import java.util.HashSet;

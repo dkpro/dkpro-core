@@ -38,8 +38,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 
 /**
  * Takes a text and replaces desired expressions This class should not work on tokens as some

@@ -23,7 +23,7 @@ import java.util.WeakHashMap;
 
 import org.apache.uima.cas.CAS;
 
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 
 /**
  * Use to smuggle the alignment state from the {@link ApplyChangesAnnotator} to the

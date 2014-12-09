@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
+package de.tudarmstadt.ukp.dkpro.core.api.transform;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +33,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.CasCopier;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.internal.CasCopier;
 
 public abstract class JCasTransformer_ImplBase
     extends JCasMultiplier_ImplBase

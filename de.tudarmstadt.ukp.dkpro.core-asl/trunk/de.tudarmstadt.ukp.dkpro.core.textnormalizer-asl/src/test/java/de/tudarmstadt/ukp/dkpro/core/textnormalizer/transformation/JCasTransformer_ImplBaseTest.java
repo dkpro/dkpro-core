@@ -37,8 +37,8 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformer_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.JCasTransformer_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.JCasHolder;
 
 public class JCasTransformer_ImplBaseTest

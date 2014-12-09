@@ -22,4 +22,4 @@
  * AnnoLab within the DFG-Projekt "Linguistische Profile interdisziplinärer Register" (LingPro)
  * (10.2006 - 09.2009).
  */
-package de.tudarmstadt.ukp.dkpro.core.castransformation.alignment;
+package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;

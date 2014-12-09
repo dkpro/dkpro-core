@@ -24,8 +24,8 @@ import static de.tudarmstadt.ukp.dkpro.core.castransformation.ApplyChangesAnnota
 import java.util.Collections;
 import java.util.List;
 
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 
 public class NormalizationUtils {
 

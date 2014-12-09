@@ -27,8 +27,8 @@ import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.internal.AnnotationComparator;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.NormalizationUtils;
 
