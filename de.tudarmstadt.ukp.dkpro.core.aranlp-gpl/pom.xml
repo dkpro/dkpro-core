@@ -26,4 +26,5 @@
     <version>1.8.0-SNAPSHOT</version>
   </parent>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.aranlp-gpl</artifactId>
+  <name>DKPro Core GPL - AraNLP</name>
 </project>
