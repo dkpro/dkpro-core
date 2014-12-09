@@ -72,7 +72,9 @@ public abstract class JCasTransformer_ImplBase
             DocumentMetaData.copy(aInput, aOutput);
         }
         catch (IllegalArgumentException e) {
-            getLogger().warn("Document does not have a DocumentMetaData annotation.");
+            // If there is no metadata, then it is not there and we do not copy it. No need to
+            // warn.
+            //getLogger().warn("Document does not have a DocumentMetaData annotation.");
         }
     }
 
