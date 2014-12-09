@@ -22,7 +22,7 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import cn.com.cjf.CJFBeanFactory;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.JCasTransformer_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformer_ImplBase;
 
 /**
  * Converts traditional Chinese to simplified Chinese or vice-versa.

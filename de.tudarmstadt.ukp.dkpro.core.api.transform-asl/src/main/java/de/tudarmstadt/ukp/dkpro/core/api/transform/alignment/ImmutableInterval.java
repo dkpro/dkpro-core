@@ -16,58 +16,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package de.tudarmstadt.ukp.dkpro.core.castransformation.alignment;
-
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
+package de.tudarmstadt.ukp.dkpro.core.api.transform.alignment;
 
 public
-class WeakHashSet<E>
-extends AbstractSet<E>
-implements Iterable<E>, Set<E>
+class ImmutableInterval
+extends AbstractInterval
 {
-	private final static Object present = new Object();
+    private final int	start;
+    private final int	end;
 
-	private final Map<E, Object> data = new WeakHashMap<E, Object>();
-
-	@Override
-	public
-	boolean add(
-			final E o)
-	{
-		final int beforeSize = size();
-		data.put(o, present);
-		return beforeSize != size();
-	}
-
-	@Override
+    /**
+     * Copy constructor.
+     *
+     * @param interval the original interval.
+     */
     public
-	boolean remove(
-			final Object o)
-	{
-		return data.remove(o) != null;
+    ImmutableInterval(
+    		final Interval interval)
+    {
+    	this(interval.getStart(), interval.getEnd());
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param s start offset.
+     * @param e end offset.
+     */
+    public
+    ImmutableInterval(
+    		final int s,
+    		final int e)
+    {
+		start = Math.min(s, e);
+		end = Math.max(s, e);
 	}
 
 	@Override
-	public boolean contains(Object o)
-	{
-	    return data.containsKey(o);
-	}
-	
-	@Override
 	public
-	Iterator<E> iterator()
+    int getStart()
 	{
-		return data.keySet().iterator();
+		return start;
 	}
 
 	@Override
 	public
-	int size()
+    int getEnd()
 	{
-		return data.size();
+		return end;
 	}
 }

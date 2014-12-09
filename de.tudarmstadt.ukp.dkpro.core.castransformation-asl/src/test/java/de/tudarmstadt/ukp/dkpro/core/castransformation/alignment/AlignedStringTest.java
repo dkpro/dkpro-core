@@ -25,6 +25,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
+
 public
 class AlignedStringTest
 {

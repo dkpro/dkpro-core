@@ -16,7 +16,7 @@
  * limitations under the License.
  ******************************************************************************/
 
-package de.tudarmstadt.ukp.dkpro.core.textnormalizer;
+package de.tudarmstadt.ukp.dkpro.core.api.transform;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,9 +26,9 @@ import java.util.ListIterator;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.AlignedString;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.ImmutableInterval;
-import de.tudarmstadt.ukp.dkpro.core.castransformation.alignment.Interval;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
+import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
 
 /**
  * Base-class for normalizers that do insert/delete/replace operations. Please mind that these
