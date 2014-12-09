@@ -94,9 +94,9 @@ public class HyphenationRemover
 
             if (dict.contains(c_new.toString())) {
                 replace(m.start(1), m.end(2), c_new.toString());
-                getLogger().info(
-                        "Conflated: [" + aInput.getDocumentText().substring(m.start(1), m.end(2))
-                                + "] to [" + c_new + "]");
+//                getLogger().info(
+//                        "Conflated: [" + aInput.getDocumentText().substring(m.start(1), m.end(2))
+//                                + "] to [" + c_new + "]");
             }
         }
     }
