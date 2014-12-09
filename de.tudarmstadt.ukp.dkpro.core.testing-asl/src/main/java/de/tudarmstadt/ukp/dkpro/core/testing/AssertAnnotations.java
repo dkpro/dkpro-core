@@ -669,12 +669,6 @@ public class AssertAnnotations
     public static void assertTagsetParser(Class<?> aLayer, String aName, String[] aDefaultMapped,
             JCas aJCas) throws AnalysisEngineProcessException
     {
-        assertTagsetParser(aLayer, aName, aDefaultMapped, aJCas, false);
-    }
-
-    public static void assertTagsetParser(Class<?> aLayer, String aName, String[] aDefaultMapped,
-            JCas aJCas, boolean aExact) throws AnalysisEngineProcessException
-    {
         String pattern;
         
         if (aLayer == MorphologicalFeatures.class) {
@@ -728,9 +722,9 @@ public class AssertAnnotations
                 List<String> unmapped = new ArrayList<>(actual);
                 unmapped.removeAll(mappedTags);
                 
-                // Keep the mapped tags that are not in the model
-                List<String> notInModel = new ArrayList<>(mappedTags);
-                notInModel.removeAll(actual);
+//                // Keep the mapped tags that are not in the model
+//                List<String> notInModel = new ArrayList<>(mappedTags);
+//                notInModel.removeAll(actual);
 
                 System.out.printf("%-20s - Layer   : %s%n", "Layer", tsd.getLayer());
                 System.out.printf("%-20s - Tagset  : %s%n", "Tagset", tsd.getName());
@@ -738,18 +732,18 @@ public class AssertAnnotations
                         asCopyableString(expected));
                 System.out.printf("%-20s - Actual  : %s%n", "Unmapped tags",
                         asCopyableString(unmapped));
-                if (aExact) {
-                    System.out.printf("%-20s - Expected: %s%n", "Tags not in model",
-                            asCopyableString(Collections.EMPTY_LIST));
-                    System.out.printf("%-20s - Actual  : %s%n", "Tags not in model",
-                            asCopyableString(notInModel));
-                }
+//                if (aExact) {
+//                    System.out.printf("%-20s - Expected: %s%n", "Tags not in model",
+//                            asCopyableString(Collections.EMPTY_LIST));
+//                    System.out.printf("%-20s - Actual  : %s%n", "Tags not in model",
+//                            asCopyableString(notInModel));
+//                }
 
                 assertEquals(asCopyableString(expected, true), asCopyableString(unmapped, true));
-                if (aExact) {
-                    assertEquals(asCopyableString(Collections.EMPTY_LIST, true),
-                            asCopyableString(notInModel, true));
-                }
+//                if (aExact) {
+//                    assertEquals(asCopyableString(Collections.EMPTY_LIST, true),
+//                            asCopyableString(notInModel, true));
+//                }
                 return;
             }
         }
