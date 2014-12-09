@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency;
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.ExternalResourceFactory.createExternalResourceDescription;
+
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.junit.Test;
 

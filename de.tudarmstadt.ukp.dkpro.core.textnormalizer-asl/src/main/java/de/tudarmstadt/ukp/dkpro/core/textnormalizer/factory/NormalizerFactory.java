@@ -30,10 +30,10 @@ import de.tudarmstadt.ukp.dkpro.core.jazzy.JazzyChecker;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellCheckerNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.CapitalizationNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.ExpressiveLengtheningNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.SharpSNormalizer;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellCheckerNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 @Deprecated
