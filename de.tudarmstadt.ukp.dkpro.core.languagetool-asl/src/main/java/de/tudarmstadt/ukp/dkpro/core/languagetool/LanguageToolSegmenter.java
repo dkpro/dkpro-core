@@ -24,6 +24,7 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.languagetool.Language;
 
+import cn.com.cjf.CJFBeanFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 
 /**
@@ -62,13 +63,21 @@ public class LanguageToolSegmenter extends SegmenterBase
 			for (String t : tokens) {
 				int tStart = s.indexOf(t, lastTStart);
 
-				if (tStart == -1) {
-					// The chinese tokenizer adds some /xxx suffixes, try to remove that
+                // The Chinese tokenizer adds some /xxx suffixes, try to remove that
+				if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
 					int suffix = t.indexOf('/');
 					if (suffix != -1) {
 						t = t.substring(0,  suffix);
 					}
 					tStart = s.indexOf(t, lastTStart);
+					
+				}
+				
+                // The Chinese tokenizer normalizes from traditional to simplified Chinese.
+                // Maybe we have to undo this transformation.
+				if ("zh".equals(getLanguage(aJCas)) && tStart == -1) {
+				    String trad = CJFBeanFactory.getChineseJF().chineseJan2Fan(t);
+				    tStart = s.indexOf(trad, lastTStart);
 				}
 
 				if (tStart == -1) {

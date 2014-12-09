@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
@@ -45,9 +46,7 @@ public class LanguageToolSegmenterTest
         AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
         aed.process(jcas);
         
-        String[] sentences = new String[] {
-                "This is a test.", 
-                "This is another one." };
+        String[] sentences = { "This is a test.", "This is another one." };
         
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
     }
@@ -62,11 +61,25 @@ public class LanguageToolSegmenterTest
         AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
         aed.process(jcas);
         
-        String[] sentences = new String[] {
-                "I bought a car for my little brother.", 
+        String[] sentences = { "I bought a car for my little brother.",
                 "He said, he likes it a lot." };
         
         AssertAnnotations.assertSentence(sentences, select(jcas, Sentence.class));
+    }
+
+    @Test
+    public void testTraditionalChinese() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("zh");
+        jcas.setDocumentText("毛澤東住在北京");
+        
+        AnalysisEngine aed = createEngine(LanguageToolSegmenter.class);
+        aed.process(jcas);
+        
+        String[] tokens = { "毛澤東", "住", "在", "北京" };
+        
+        AssertAnnotations.assertToken(tokens, select(jcas, Token.class));
     }
 
     @Test
