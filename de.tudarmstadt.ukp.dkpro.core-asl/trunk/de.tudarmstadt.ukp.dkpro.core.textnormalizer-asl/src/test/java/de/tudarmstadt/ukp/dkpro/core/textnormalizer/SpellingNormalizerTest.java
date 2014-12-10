@@ -26,7 +26,7 @@ import org.junit.Test;
 import de.tudarmstadt.ukp.dkpro.core.jazzy.JazzyChecker;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
-public class SpellCheckerNormalizerTest
+public class SpellingNormalizerTest
 {
     @Test
     public void testSpellCheckerNormalizer()
@@ -47,7 +47,7 @@ public class SpellCheckerNormalizerTest
         AnalysisEngineDescription spellchecker = createEngineDescription(JazzyChecker.class,
                 JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
-        AnalysisEngineDescription normalizer = createEngineDescription(SpellCheckerNormalizer.class);
+        AnalysisEngineDescription normalizer = createEngineDescription(SpellingNormalizer.class);
 
         assertTransformedText(normalizedText, inputText, "de", segmenter, spellchecker, normalizer);
     }

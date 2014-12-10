@@ -48,7 +48,7 @@ public class MultiNormalizationTest
         AnalysisEngineDescription spellchecker = createEngineDescription(JazzyChecker.class,
                 JazzyChecker.PARAM_MODEL_LOCATION, "src/test/resources/dictionary/ngerman");
 
-        AnalysisEngineDescription spelling = createEngineDescription(SpellCheckerNormalizer.class);
+        AnalysisEngineDescription spelling = createEngineDescription(SpellingNormalizer.class);
 
         assertTransformedText(normalizedText, inputText, "de",hyphens, segmenter, spellchecker, 
                 spelling);

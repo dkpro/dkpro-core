@@ -30,7 +30,7 @@ import de.tudarmstadt.ukp.dkpro.core.jazzy.JazzyChecker;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.SrcSurroundings;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.ReplacementFileNormalizer.TargetSurroundings;
-import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellCheckerNormalizer;
+import de.tudarmstadt.ukp.dkpro.core.textnormalizer.SpellingNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.CapitalizationNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.ExpressiveLengtheningNormalizer;
 import de.tudarmstadt.ukp.dkpro.core.textnormalizer.frequency.SharpSNormalizer;
@@ -50,7 +50,7 @@ public class NormalizerFactory
     	ab.add(createEngineDescription(JazzyChecker.class, 
     	        JazzyChecker.PARAM_MODEL_LOCATION, aModelLocation), 
     	        CAS.NAME_DEFAULT_SOFA, getSourceView());
-    	ab.add(createEngineDescription(SpellCheckerNormalizer.class), 
+    	ab.add(createEngineDescription(SpellingNormalizer.class), 
     	        CAS.NAME_DEFAULT_SOFA, getSourceView());
     	ab.add(createEngineDescription(ApplyChangesAnnotator.class), 
     	        ApplyChangesAnnotator.VIEW_SOURCE, getSourceView(), 

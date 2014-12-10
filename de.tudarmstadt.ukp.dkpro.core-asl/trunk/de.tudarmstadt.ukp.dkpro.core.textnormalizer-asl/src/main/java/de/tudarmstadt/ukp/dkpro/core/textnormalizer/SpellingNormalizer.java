@@ -30,7 +30,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * Converts annotations of the type SpellingAnomaly into a SofaChangeAnnoatation.
  */
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.SpellingAnomaly" })
-public class SpellCheckerNormalizer
+public class SpellingNormalizer
     extends JCasTransformerChangeBased_ImplBase
 {
     @Override
