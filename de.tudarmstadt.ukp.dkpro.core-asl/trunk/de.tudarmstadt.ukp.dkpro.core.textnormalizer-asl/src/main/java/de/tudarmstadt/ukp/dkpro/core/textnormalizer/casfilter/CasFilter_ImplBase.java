@@ -26,6 +26,8 @@ import org.apache.uima.cas.AbstractCas;
 import org.apache.uima.fit.component.JCasMultiplier_ImplBase;
 import org.apache.uima.fit.factory.AggregateBuilder;
 import org.apache.uima.fit.factory.FlowControllerFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.flow.FlowController;
 import org.apache.uima.flow.impl.FixedFlowController;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
