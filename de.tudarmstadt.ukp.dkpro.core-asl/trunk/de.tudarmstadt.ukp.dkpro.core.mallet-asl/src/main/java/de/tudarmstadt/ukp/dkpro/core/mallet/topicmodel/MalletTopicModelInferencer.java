@@ -17,22 +17,20 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel;
 
-import static org.apache.uima.fit.util.JCasUtil.selectCovered;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.DoubleArray;
 import org.apache.uima.jcas.cas.IntegerArray;
@@ -43,12 +41,9 @@ import cc.mallet.pipe.TokenSequence2FeatureSequence;
 import cc.mallet.topics.ParallelTopicModel;
 import cc.mallet.topics.TopicInferencer;
 import cc.mallet.types.Instance;
-import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 
@@ -99,8 +94,8 @@ public class MalletTopicModelInferencer
     private double minTopicProb;
 
     /**
-     * Maximum number of topics to assign. If not set (or &lt;= 0), the number of topics in the model
-     * divided by 10 is set.
+     * Maximum number of topics to assign. If not set (or &lt;= 0), the number of topics in the
+     * model divided by 10 is set.
      */
     public final static String PARAM_MAX_TOPIC_ASSIGNMENTS = "maxTopicAssignments";
     @ConfigurationParameter(name = PARAM_MAX_TOPIC_ASSIGNMENTS, mandatory = true, defaultValue = "0")
@@ -147,54 +142,38 @@ public class MalletTopicModelInferencer
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        /* convert tokens (or other annotation type) into a Mallet TokenSequence */
-        TokenSequence tokenStream = new TokenSequence();
+        Type type = CasUtil.getType(aJCas.getCas(), typeName);
 
         try {
-            for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(),
-                    typeName)) {
-                if (useLemma) {
-                    for (Lemma lemma : selectCovered(Lemma.class, entry.getKey())) {
-                        String text = lemma.getValue();
-                        if (text.length() >= minTokenLength) {
-                            tokenStream.add(text);
-                        }
-                    }
-                }
-                else {
-                    String text = entry.getValue();
-                    if (text.length() >= minTokenLength) {
-                        tokenStream.add(text);
-                    }
-                }
-            }
+            /* create Mallet Instance */
+            DocumentMetaData metadata = DocumentMetaData.get(aJCas);
+            Instance instance = new Instance(
+                    MalletTopicModelEstimator.generateTokenSequence(aJCas,
+                            type, useLemma, minTokenLength),
+                    NONE_LABEL, metadata.getDocumentId(), metadata.getDocumentUri());
+
+            /* infer topic distribution across document */
+            TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
+            double[] topicDistribution = inferencer.getSampledDistribution(
+                    malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
+
+            /* convert data type */
+            DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
+            da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
+            topicDistributionAnnotation.setTopicProportions(da);
+
+            /* assign topics to document according to topic distribution */
+            int[] assignedTopicIndexes = assignTopics(topicDistribution);
+            IntegerArray topicIndexes = new IntegerArray(aJCas, assignedTopicIndexes.length);
+            topicIndexes.copyFromArray(assignedTopicIndexes, 0, 0, assignedTopicIndexes.length);
+            topicDistributionAnnotation.setTopicAssignment(topicIndexes);
+
+            aJCas.addFsToIndexes(topicDistributionAnnotation);
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
 
-        /* create Mallet Instance */
-        DocumentMetaData metadata = DocumentMetaData.get(aJCas);
-        Instance instance = new Instance(tokenStream, NONE_LABEL, metadata.getDocumentId(),
-                metadata.getDocumentUri());
-
-        /* infer topic distribution across document */
-        TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
-        double[] topicDistribution = inferencer.getSampledDistribution(
-                malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
-
-        /* convert data type */
-        DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
-        da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
-        topicDistributionAnnotation.setTopicProportions(da);
-
-        /* assign topics to document according to topic distribution */
-        int[] assignedTopicIndexes = assignTopics(topicDistribution);
-        IntegerArray topicIndexes = new IntegerArray(aJCas, assignedTopicIndexes.length);
-        topicIndexes.copyFromArray(assignedTopicIndexes, 0, 0, assignedTopicIndexes.length);
-        topicDistributionAnnotation.setTopicAssignment(topicIndexes);
-
-        aJCas.addFsToIndexes(topicDistributionAnnotation);
     }
 
     /**

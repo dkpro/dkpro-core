@@ -21,13 +21,17 @@ import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.Type;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -37,10 +41,11 @@ import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
 import cc.mallet.types.TokenSequence;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
-import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
  * This component estimates an LDA model using Mallet. It stores all incoming CAS' to Mallet
@@ -152,6 +157,18 @@ public class MalletTopicModelEstimator
     @ConfigurationParameter(name = PARAM_MIN_TOKEN_LENGTH, mandatory = true, defaultValue = "3")
     private int minTokenLength;
 
+    /**
+     * If specific, the text contained in the given segmentation type annotations are fed as
+     * separate units to the topic model estimator e.g.
+     * {@code de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.sentence}. Text that is not within
+     * such annotations is ignored.
+     * <p>
+     * By default, the full document text is used as a document.
+     */
+    public static final String PARAM_MODEL_ENTITY_TYPE = "modelEntityType";
+    @ConfigurationParameter(name = PARAM_MODEL_ENTITY_TYPE, mandatory = false)
+    String modelEntityType;
+
     protected static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     protected InstanceList instanceList; // contains the Mallet instances
 
@@ -168,37 +185,115 @@ public class MalletTopicModelEstimator
         throws AnalysisEngineProcessException
     {
         DocumentMetaData metadata = DocumentMetaData.get(aJCas);
-        instanceList.addThruPipe(new Instance(generateTokenSequence(aJCas), NONE_LABEL,
-                metadata.getDocumentId(), metadata.getDocumentUri()));
-    }
-
-    protected TokenSequence generateTokenSequence(JCas aJCas)
-        throws AnalysisEngineProcessException
-    {
-        TokenSequence tokenStream = new TokenSequence();
         try {
-            for (Entry<AnnotationFS, String> entry : FeaturePathFactory.select(aJCas.getCas(),
-                    typeName)) {
-                if (useLemma) {
-                    for (Lemma lemma : selectCovered(Lemma.class, entry.getKey())) {
-                        String text = lemma.getValue();
-                        if (text.length() >= minTokenLength) {
-                            tokenStream.add(text);
-                        }
-                    }
-                }
-                else {
-                    String text = entry.getValue();
-                    if (text.length() >= minTokenLength) {
-                        tokenStream.add(text);
-                    }
-                }
+            for (TokenSequence ts : generateTokenSequences(aJCas)) {
+                instanceList.addThruPipe(new Instance(ts, NONE_LABEL, metadata.getDocumentId(),
+                        metadata.getDocumentUri()));
             }
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        return tokenStream;
+    }
+
+    /**
+     * Generate one or multiple TokenSequences from the given document. If
+     * {@code PARAM_MODEL_ENTITY_TYPE} is set, an instance is generated from each segment annotated
+     * with the given type. Otherwise, one instance is generated from the whole document.
+     *
+     * @param aJCas
+     * @return
+     * @throws FeaturePathException
+     */
+    private Collection<TokenSequence> generateTokenSequences(JCas aJCas)
+        throws FeaturePathException
+    {
+        Collection<TokenSequence> tokenSequences;
+        CAS cas = aJCas.getCas();
+        Type tokenType = CasUtil.getType(cas, typeName);
+
+        if (modelEntityType == null) {
+            /* generate only one tokenSequence */
+            tokenSequences = new ArrayList<>(1);
+            tokenSequences.add(generateTokenSequence(aJCas, tokenType, useLemma, minTokenLength));
+        }
+        else {
+            /* generate tokenSequences for every segment (e.g. sentence) */
+            tokenSequences = new ArrayList<>();
+            for (AnnotationFS segment : CasUtil.select(cas, CasUtil.getType(cas, modelEntityType))) {
+                tokenSequences.add(generateTokenSequence(segment, tokenType));
+            }
+        }
+
+        return tokenSequences;
+    }
+
+    /**
+     * Generate a TokenSequence from the whole document.
+     *
+     * @param aJCas
+     *            a CAS holding the document
+     * @return a {@link TokenSequence}
+     * @throws FeaturePathException
+     *             if the annotation type specified in {@code PARAM_TYPE_NAME} cannot be extracted.
+     */
+    protected static TokenSequence generateTokenSequence(JCas aJCas, Type tokenType,
+            boolean useLemma, int minTokenLength)
+        throws FeaturePathException
+    {
+        TokenSequence tokenSequence = new TokenSequence();
+        for (AnnotationFS token : CasUtil.select(aJCas.getCas(), tokenType)) {
+            for (String tokenText : getTokensFromAnnotation(token, useLemma, minTokenLength)) {
+                tokenSequence.add(tokenText);
+            }
+        }
+        return tokenSequence;
+    }
+
+    private static Collection<String> getTokensFromAnnotation(AnnotationFS annotation,
+            boolean useLemma, int minTokenLength)
+    {
+        Collection<String> tokens;
+        if (useLemma) {
+            tokens = new ArrayList<>();
+            for (Lemma lemma : selectCovered(Lemma.class, annotation)) {
+                String text = lemma.getValue();
+                if (text.length() >= minTokenLength) {
+                    tokens.add(text);
+                }
+            }
+        }
+        else {
+            tokens = new ArrayList<>(1);
+            String text = annotation.getCoveredText();
+            if (text.length() >= minTokenLength) {
+                tokens.add(text);
+            }
+        }
+        return tokens;
+    }
+
+    /**
+     * Generate an instance from the text covered by the given annotation.
+     *
+     * @param annotation
+     *            an annotation representing a document segment, e.g. {@link Sentence}.
+     * @param tokenType
+     *            the type to use for representing tokens, usually {@link Token}, but could also be
+     *            any other type.
+     * @return
+     */
+    private TokenSequence generateTokenSequence(AnnotationFS annotation, Type tokenType)
+    {
+        TokenSequence tokenSequence = new TokenSequence();
+
+        for (AnnotationFS token : CasUtil.selectCovered(tokenType, annotation)) {
+            for (String tokenText : getTokensFromAnnotation(token, useLemma, minTokenLength)) {
+                tokenSequence.add(tokenText);
+            }
+        }
+
+        return tokenSequence;
     }
 
     @Override

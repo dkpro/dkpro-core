@@ -31,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.mallet.topics.ParallelTopicModel;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
@@ -75,4 +76,36 @@ public class MalletTopicModelEstimatorTest
         ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
         assertEquals(nTopics, model.getNumTopics());
     }
+
+    @Test
+    public void testEstimatorSentence()
+        throws Exception
+    {
+        int nTopics = 10;
+        int nIterations = 50;
+        boolean useLemmas = false;
+        String language = "en";
+        String entity = Sentence.class.getName();
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+
+        AnalysisEngineDescription estimator = createEngineDescription(
+                MalletTopicModelEstimator.class,
+                MalletTopicModelEstimator.PARAM_N_THREADS, N_THREADS,
+                MalletTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletTopicModelEstimator.PARAM_N_ITERATIONS, nIterations,
+                MalletTopicModelEstimator.PARAM_N_TOPICS, nTopics,
+                MalletTopicModelEstimator.PARAM_USE_LEMMA, useLemmas,
+                MalletTopicModelEstimator.PARAM_MODEL_ENTITY_TYPE, entity);
+        SimplePipeline.runPipeline(reader, segmenter, estimator);
+
+        assertTrue(MODEL_FILE.exists());
+        ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
+        assertEquals(nTopics, model.getNumTopics());
+    }
+
 }
