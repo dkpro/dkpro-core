@@ -164,7 +164,7 @@ public class Conll2006Writer
                 if (writePos && (row.token.getPos() != null)) {
                     POS posAnno = row.token.getPos();
                     pos = posAnno.getPosValue();
-                    if (!(posAnno instanceof POS)) {
+                    if (posAnno instanceof POS) {
                         cpos = posAnno.getClass().getSimpleName();
                     }
                     else {
