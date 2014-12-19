@@ -1,0 +1,1533 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>DKPro Core&#8482; Guide and Reference</title><link rel="stylesheet" type="text/css" href="css/stylesheet-html.css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div lang="en" class="book" title="DKPro Core&#8482; Guide and Reference" id="d5e1"><div xmlns:d="http://docbook.org/ns/docbook" class="titlepage"><div><div><h1 class="title">DKPro Core&#8482; Guide and Reference</h1></div><div><div class="authorgroup">
+      <h3 class="corpauthor">Written and maintained by the DKPro Core Development Community</h3>
+    </div></div><div><p class="releaseinfo">Version 1.7.0</p></div><div><p class="copyright">Copyright &copy; 2011, 2014 Ubiquitous Knowledge Processing (UKP) Lab, Technische Universit&auml;t Darmstadt</p></div><div><div class="legalnotice" title="Legal Notice"><a name="d5e8"></a>
+      <p> </p>
+      <p title="License and Disclaimer">
+        <b>License and Disclaimer.&nbsp;</b>
+
+        The Ubiquitous Knowledge Processing (UKP) Lab at Technische Universit&auml;t Darmstadt 
+           licenses this documentation
+           to you under the Apache License, Version 2.0 (the
+           "License"); you may not use this documentation except in compliance
+           with the License.  You may obtain a copy of the License at
+         
+         </p><div class="blockquote"><blockquote class="blockquote">
+           <p><a class="ulink" href="http://www.apache.org/licenses/LICENSE-2.0" target="_top">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+         </blockquote></div><p title="License and Disclaimer">
+         
+           Unless required by applicable law or agreed to in writing,
+           this documentation and its contents are distributed under the License 
+           on an 
+           "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+           KIND, either express or implied.  See the License for the
+           specific language governing permissions and limitations
+           under the License.
+         
+      </p>
+      <p> </p>
+      <p> </p>
+      <p title="Trademarks">
+        <b>Trademarks.&nbsp;</b>
+        All terms mentioned in the text that are known to be trademarks or 
+        service marks have been appropriately capitalized.  Use of such terms
+        in this book should not be regarded as affecting the validity of the
+        the trademark or service mark.
+        
+      </p>
+    </div></div><div><p class="pubdate">Dezember, 2014</p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#ugr.dkpro.core.introduction">1. Introduction</a></span></dt><dt><span class="chapter"><a href="#ugr.dkpro.core.typesystem">2. Type System</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e33">2.1. Meta data</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e42">2.1.1. DocumentMetaData</a></span></dt><dt><span class="section"><a href="#d5e55">2.1.2. TagsetDescription and TagDescription</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e60">2.2. Segmentation</a></span></dt><dt><span class="section"><a href="#d5e71">2.3. Morphology</a></span></dt><dt><span class="section"><a href="#d5e74">2.4. Phonetics</a></span></dt><dt><span class="section"><a href="#d5e77">2.5. Coreference</a></span></dt><dt><span class="section"><a href="#d5e85">2.6. Syntax</a></span></dt><dt><span class="section"><a href="#d5e93">2.7. Semantics and Named Entities</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e101">2.7.1. Named entities</a></span></dt><dt><span class="section"><a href="#d5e104">2.7.2. Semantic fields</a></span></dt><dt><span class="section"><a href="#d5e107">2.7.3. Semantic argument structure</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#ugr.dkpro.core.analytics">3. Analysis Components</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e114">3.1. Coreference Resolution</a></span></dt><dt><span class="section"><a href="#d5e135">3.2. Chunking</a></span></dt><dt><span class="section"><a href="#d5e154">3.3. Decompounding</a></span></dt><dt><span class="section"><a href="#d5e170">3.4. Dictionary-Based Annotation</a></span></dt><dt><span class="section"><a href="#d5e189">3.5. Language Identification</a></span></dt><dt><span class="section"><a href="#d5e216">3.6. Lemmatization</a></span></dt><dt><span class="section"><a href="#d5e255">3.7. Morphological Analysis</a></span></dt><dt><span class="section"><a href="#d5e274">3.8. Named-Entity Recognition</a></span></dt><dt><span class="section"><a href="#d5e293">3.9. Parsing</a></span></dt><dt><span class="section"><a href="#d5e327">3.10. Part-of-Speech Tagging</a></span></dt><dt><span class="section"><a href="#d5e372">3.11. Segmentation</a></span></dt><dt><span class="section"><a href="#d5e405">3.12. Semantic Role Labelling</a></span></dt><dt><span class="section"><a href="#d5e421">3.13. Spell Checking</a></span></dt><dt><span class="section"><a href="#d5e443">3.14. Stemming</a></span></dt><dt><span class="section"><a href="#d5e464">3.15. Choosing components</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e474">3.15.1. Compatibility of Components</a></span></dt><dt><span class="section"><a href="#d5e486">3.15.2. Particular Settings</a></span></dt><dt><span class="section"><a href="#d5e512">3.15.3. Further references</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e525">3.16. Adding components as dependencies (Maven)</a></span></dt><dt><span class="section"><a href="#d5e531">3.17. Adding resources as dependencies (Maven)</a></span></dt></dl></dd><dt><span class="chapter"><a href="#ugr.dkpro.core.models">4. Models and Resources</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e541">4.1. Architecture</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e574">4.1.1. Versioning scheme</a></span></dt><dt><span class="section"><a href="#d5e579">4.1.2. Versioning scheme</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e582">4.2. Packaging resources as JARs</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e587">4.2.1. Installing Ant in Eclipse</a></span></dt><dt><span class="section"><a href="#d5e599">4.2.2. Implementing the build.xml Ant script</a></span></dt><dt><span class="section"><a href="#d5e653">4.2.3. Using the build.xml Ant script</a></span></dt><dt><span class="section"><a href="#d5e687">4.2.4. Example: how to package TreeTagger binaries and models</a></span></dt><dt><span class="section"><a href="#d5e712">4.2.5. Which build.xml file to use? The trunk version or a release version?</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e718">4.3. Updating a model</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e729">4.3.1. MD5 checksum check fails</a></span></dt></dl></dd><dt><span class="section"><a href="#d5e736">4.4. Using Resource Providers</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e748">4.4.1. Mapping Providers</a></span></dt><dt><span class="section"><a href="#d5e771">4.4.2. Language-dependent default variants</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#ugr.dkpro.core.io">5. I/O</a></span></dt><dd><dl><dt><span class="section"><a href="#d5e789">5.1. Common parameters</a></span></dt><dt><span class="section"><a href="#d5e931">5.2. ACL anthology</a></span></dt><dt><span class="section"><a href="#d5e951">5.3. Binary CAS</a></span></dt><dt><span class="section"><a href="#d5e981">5.4. Bliki (Wikipedia)</a></span></dt><dt><span class="section"><a href="#d5e1002">5.5. British National Corpus</a></span></dt><dt><span class="section"><a href="#d5e1022">5.6. CoNLL Shared Task Data Formats</a></span></dt><dt><span class="section"><a href="#d5e1094">5.7. CLARIN WebLicht TCF</a></span></dt><dt><span class="section"><a href="#d5e1113">5.8. HTML</a></span></dt><dt><span class="section"><a href="#d5e1129">5.9. IMS Open Corpus Workbench</a></span></dt><dt><span class="section"><a href="#d5e1158">5.10. JDBC Database</a></span></dt><dt><span class="section"><a href="#d5e1174">5.11. JWPL (Wikipedia)</a></span></dt><dt><span class="section"><a href="#d5e1216">5.12. NEGRA Export Format</a></span></dt><dt><span class="section"><a href="#d5e1250">5.13. PDF</a></span></dt><dt><span class="section"><a href="#d5e1265">5.14. Penn Treebank</a></span></dt><dt><span class="section"><a href="#d5e1292">5.15. TCF</a></span></dt><dt><span class="section"><a href="#d5e1315">5.16. TEI</a></span></dt><dt><span class="section"><a href="#d5e1338">5.17. Text</a></span></dt><dt><span class="section"><a href="#d5e1360">5.18. TIGER XML</a></span></dt><dt><span class="section"><a href="#d5e1401">5.19. T&uuml;PP-D/Z</a></span></dt><dt><span class="section"><a href="#d5e1422">5.20. Web1T</a></span></dt><dt><span class="section"><a href="#d5e1446">5.21. XMI</a></span></dt><dt><span class="section"><a href="#d5e1465">5.22. XML</a></span></dt><dt><span class="section"><a href="#d5e1490">5.23. TGrep</a></span></dt></dl></dd><dt><span class="chapter"><a href="#ugr.dkpro.core.testing">6. Testing</a></span></dt></dl></div>
+  
+  
+    
+  
+
+  <div class="chapter" title="Chapter&nbsp;1.&nbsp;Introduction" id="ugr.dkpro.core.introduction"><div class="titlepage"><div><div><h2 class="title">Chapter&nbsp;1.&nbsp;Introduction</h2></div></div></div>
+  
+  <p>Many powerful and state-of-the-art NLP tools are already freely available in the NLP
+		research community. New and improved tools are being developed and released continuously.
+		The tools cover the whole range of NLP-related processing tasks. DKPro Core provides UIMA
+		components wrapping these tools so they can be used interchangeably in processing pipelines.
+		DKPro Core builds heavily on uimaFIT which allows for rapid and easy development of
+		UIMA-based NLP processing pipelines.</p>
+</div>
+  
+  
+
+  <div class="chapter" title="Chapter&nbsp;2.&nbsp;Type System" id="ugr.dkpro.core.typesystem"><div class="titlepage"><div><div><h2 class="title">Chapter&nbsp;2.&nbsp;Type System</h2></div></div></div>
+  
+  <p>The DKPro Core type system forms the interface between all the integrated components.
+		Components store and retrieve their data from the UIMA CAS based on this type system. The
+		type system design is using a rather flat hierarchy and a mostly loose coupling between
+		annotations. It is offered as a set of modules, not as a single monolithic type system. </p>
+	<div class="section" title="2.1.&nbsp;Meta data"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e33">2.1.&nbsp;Meta data</h2></div></div></div>
+		
+		<p></p>		
+		<div class="figure"><a name="d5e36"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.typesystem/metadata.png"></div>
+		</div><p class="title"><b>Figure&nbsp;2.1.&nbsp;Metadata types</b></p></div><br class="figure-break">
+		<p>FIXME: Describe TagDescription and TagsetDescription</p>
+		<div class="section" title="2.1.1.&nbsp;DocumentMetaData"><div class="titlepage"><div><div><h3 class="title" id="d5e42">2.1.1.&nbsp;DocumentMetaData</h3></div></div></div>
+			
+			<p>The DocumentMetaData annotation stores information about a single processed
+				document. There can only be one of these annotations per CAS. The annotation is
+				created by readers and contains information to uniquely identify the document from
+				which a CAS was created. Writer components use this information when determining
+				under which filename a CAS is stored.</p>
+			<p>There are two principle ways of identifying a document:</p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p>collection id / document id: this simple system identifies a document
+						within a collection. The ID of the collection and the document are each
+						simple strings without any further semantics such as e.g. a hierarchy. For
+						this reason, this identification scheme is not well suited to preserve
+						information about directory structures.</p>
+				</li><li class="listitem">
+					<p>document base URI / document URI: this system identifies a document using
+						a URI. The base URI is used to derive the relative path of the document with
+						respect to the base location from where it has been read. E.g. if the base
+						URI is <code class="filename">file:/texts</code> and the document URI is
+							<code class="filename">file:/texts/english/text1.txt</code>, then the relativ
+						path of the document is <code class="filename">english/text1.txt</code>. This
+						information is used by writers to recreate the directory structure found
+						under the base location in the target location.</p>
+				</li></ul></div>
+			<p>It is possible and indeed common for a writer to initialize both systems of
+				identification. If both systems are present, most writers default to using the
+				URI-based systems. However, most writers also allow forcing the use of the ID-based
+				systems.</p>
+		</div>
+		<div class="section" title="2.1.2.&nbsp;TagsetDescription and TagDescription"><div class="titlepage"><div><div><h3 class="title" id="d5e55">2.1.2.&nbsp;TagsetDescription and TagDescription</h3></div></div></div>
+			
+			<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+				<p>Recording tagset and tag descriptions in the CAS is still a feature under
+					development. It is not supported by all components and it is not yet well
+					defined. Expect changes and enhancements to this feature in future versions of
+					DKPro Core. </p>
+			</div>
+			<p>FIXME</p>
+		</div>
+	</div>
+	<div class="section" title="2.2.&nbsp;Segmentation"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e60">2.2.&nbsp;Segmentation</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e63"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.typesystem/segmentation.png"></div>
+		</div><p class="title"><b>Figure&nbsp;2.2.&nbsp;Segmentation types</b></p></div><br class="figure-break">
+		<p>FIXME: Describe Sentence &amp; Token</p>
+		<p>FIXME: Describe Document, Heading, and Paragraph</p>
+		<p>FIXME: Describe Compound, Split, CompoundPart, and LinkingMorpheme</p>
+	</div>
+	<div class="section" title="2.3.&nbsp;Morphology"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e71">2.3.&nbsp;Morphology</h2></div></div></div>
+		
+		<p></p>
+	</div>
+	<div class="section" title="2.4.&nbsp;Phonetics"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e74">2.4.&nbsp;Phonetics</h2></div></div></div>
+		
+		<p></p>
+	</div>
+	<div class="section" title="2.5.&nbsp;Coreference"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e77">2.5.&nbsp;Coreference</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e80"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.typesystem/coreference.png"></div>
+		</div><p class="title"><b>Figure&nbsp;2.3.&nbsp;Coreference types</b></p></div><br class="figure-break">
+	</div>
+	<div class="section" title="2.6.&nbsp;Syntax"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e85">2.6.&nbsp;Syntax</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e88"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.typesystem/syntax.png"></div>
+		</div><p class="title"><b>Figure&nbsp;2.4.&nbsp;Syntax types</b></p></div><br class="figure-break">
+	</div>
+	<div class="section" title="2.7.&nbsp;Semantics and Named Entities"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e93">2.7.&nbsp;Semantics and Named Entities</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e96"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.typesystem/semantics.png"></div>
+		</div><p class="title"><b>Figure&nbsp;2.5.&nbsp;Segmentation types</b></p></div><br class="figure-break">
+		<div class="section" title="2.7.1.&nbsp;Named entities"><div class="titlepage"><div><div><h3 class="title" id="d5e101">2.7.1.&nbsp;Named entities</h3></div></div></div>
+			
+			<p>Named entities refer e.g. to persons, locations, organizations and so on. They often
+				consist of multiple tokens. </p>
+		</div>
+		<div class="section" title="2.7.2.&nbsp;Semantic fields"><div class="titlepage"><div><div><h3 class="title" id="d5e104">2.7.2.&nbsp;Semantic fields</h3></div></div></div>
+			
+			<p>The SemanticField is a coarse-grained semantic category that can be attached to
+				nouns, verbs or adjectives. Semantic field information is present e.g. in WordNet as
+				lexicographer file names. Previously, this kind of semantic information has also
+				been called supersenses or semantic types.</p>
+		</div>
+		<div class="section" title="2.7.3.&nbsp;Semantic argument structure"><div class="titlepage"><div><div><h3 class="title" id="d5e107">2.7.3.&nbsp;Semantic argument structure</h3></div></div></div>
+			
+			<p>The SemanticPredicate annotation can be attached to predicates in a sentences.
+				Semantic predicates express events or situations and take semantic arguments
+				expressing the participants in these events ore situations. All forms of main verbs
+				can be annotated with a SemanticPredicate. However, there are also many nouns and
+				adjectives that take arguments and can thus be annotated with a SemanticPredicate,
+				e.g. event nouns, such as "suggestion" (with arguments what and by whom), or
+				relational adjectives, such as "proud" (with arguments who and of what). The
+				SemanticArgument annotation is attached to semantic arguments of semantic
+				predicates. Semantic arguments are characterized by their semantic role, e.g. Agent,
+				Experiencer, Topic. The semantic role of an argument is related to its semantic type
+				(for communication verbs, the Agent can be a person or an organization, but
+				typically not food). The semantic type of arguments is not yet covered by the
+				SemanticType.</p>
+		</div>
+	</div>
+</div>
+
+  <div class="chapter" title="Chapter&nbsp;3.&nbsp;Analysis Components" id="ugr.dkpro.core.analytics"><div class="titlepage"><div><div><h2 class="title">Chapter&nbsp;3.&nbsp;Analysis Components</h2></div></div></div>
+  
+	<p>This section provides an overview of the analysis componens that can be deployed at the
+		different levels of analysis.</p>
+	<p></p>
+	<div class="section" title="3.1.&nbsp;Coreference Resolution"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e114">3.1.&nbsp;Coreference Resolution</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e117"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.analytics/coreference.png"></div>
+		</div><p class="title"><b>Figure&nbsp;3.1.&nbsp;Coreference types</b></p></div><br class="figure-break">
+		<div class="table"><a name="d5e122"></a><p class="title"><b>Table&nbsp;3.1.&nbsp;Coreference components</b></p><div class="table-contents">
+			
+			<table summary="Coreference components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">StanfordCoreferenceResolver</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.2.&nbsp;Chunking"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e135">3.2.&nbsp;Chunking</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e138"></a><p class="title"><b>Table&nbsp;3.2.&nbsp;Chunking components</b></p><div class="table-contents">
+			
+			<table summary="Chunking components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">OpenNlpChunker</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">TreeTaggerChunker</td><td style="">(uses native binary)</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.3.&nbsp;Decompounding"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e154">3.3.&nbsp;Decompounding</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e157"></a><p class="title"><b>Table&nbsp;3.3.&nbsp;Decompounding components</b></p><div class="table-contents">
+			
+			<table summary="Decompounding components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">CompoundAnnotator</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.4.&nbsp;Dictionary-Based Annotation"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e170">3.4.&nbsp;Dictionary-Based Annotation</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e173"></a><p class="title"><b>Table&nbsp;3.4.&nbsp;Dictionary-based annotation components</b></p><div class="table-contents">
+			
+			<table summary="Dictionary-based annotation components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">DictionaryAnnotator</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">SemanticFieldAnnotator</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.5.&nbsp;Language Identification"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e189">3.5.&nbsp;Language Identification</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e192"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.analytics/language_identification.png"></div>
+		</div><p class="title"><b>Figure&nbsp;3.2.&nbsp;DocumentAnnotation type</b></p></div><br class="figure-break">
+		<div class="table"><a name="d5e197"></a><p class="title"><b>Table&nbsp;3.5.&nbsp;Language identification components</b></p><div class="table-contents">
+			
+			<table summary="Language identification components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">LangDetectLanguageIdentifier</td><td style="border-bottom: 0.5pt solid black; ">Character n-grams</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">LanguageDetectorWeb1T</td><td style="border-bottom: 0.5pt solid black; ">Token n-grams</td></tr><tr><td style="border-right: 0.5pt solid black; ">TextCat</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.6.&nbsp;Lemmatization"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e216">3.6.&nbsp;Lemmatization</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e219"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.analytics/lemmatization.png"></div>
+		</div><p class="title"><b>Figure&nbsp;3.3.&nbsp;Lemma type</b></p></div><br class="figure-break">
+		<div class="table"><a name="d5e224"></a><p class="title"><b>Table&nbsp;3.6.&nbsp;Lemmatization components</b></p><div class="table-contents">
+			
+			<table summary="Lemmatization components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">ClearNlpLemmatizer</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">GateLemmatizer</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">LanguageToolLemmatizer</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MateLemmatizer</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MorphaLemmatizer</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">StanfordLemmatizer</td><td style="border-bottom: 0.5pt solid black; ">(variant of Morpha)</td></tr><tr><td style="border-right: 0.5pt solid black; ">TreeTaggerPosTagger</td><td style="">(uses native binary)</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.7.&nbsp;Morphological Analysis"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e255">3.7.&nbsp;Morphological Analysis</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e258"></a><p class="title"><b>Table&nbsp;3.7.&nbsp;Morphological analysis components</b></p><div class="table-contents">
+			
+			<table summary="Morphological analysis components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MateMorphTagger</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">SfstAnnotator</td><td style="">(uses native binary)</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.8.&nbsp;Named-Entity Recognition"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e274">3.8.&nbsp;Named-Entity Recognition</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e277"></a><p class="title"><b>Table&nbsp;3.8.&nbsp;Named-entity recognition components</b></p><div class="table-contents">
+			
+			<table summary="Named-entity recognition components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">OpenNlpNameFinder</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">StanfordNamedEntityRecognizer</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.9.&nbsp;Parsing"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e293">3.9.&nbsp;Parsing</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e296"></a><p class="title"><b>Table&nbsp;3.9.&nbsp;Parsing components</b></p><div class="table-contents">
+			
+			<table summary="Parsing components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">BerkeleyParser</td><td style="border-bottom: 0.5pt solid black; ">constituents</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">ClearNlpDependencyParser</td><td style="border-bottom: 0.5pt solid black; ">dependencies</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">OpenNlpParser</td><td style="border-bottom: 0.5pt solid black; ">constituents</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MaltParser</td><td style="border-bottom: 0.5pt solid black; ">dependencies</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MateParser</td><td style="border-bottom: 0.5pt solid black; ">dependencies</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MstParser</td><td style="border-bottom: 0.5pt solid black; ">dependencies</td></tr><tr><td style="border-right: 0.5pt solid black; ">StanfordParser</td><td style="">constituents, dependencies (for some languages)</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.10.&nbsp;Part-of-Speech Tagging"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e327">3.10.&nbsp;Part-of-Speech Tagging</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e330"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.analytics/part-of-speech.png"></div>
+		</div><p class="title"><b>Figure&nbsp;3.4.&nbsp;Part-of-speech type</b></p></div><br class="figure-break">
+		<div class="table"><a name="d5e335"></a><p class="title"><b>Table&nbsp;3.10.&nbsp;Part-of-speech tagging components</b></p><div class="table-contents">
+			
+			<table summary="Part-of-speech tagging components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">ArktweetTagger</td><td style="border-bottom: 0.5pt solid black; ">(not in release)</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">ClearNlpPosTagger</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">HepplePosTagger</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">HunPosTagger</td><td style="border-bottom: 0.5pt solid black; ">(uses native binary)</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MatePosTagger</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">MeCabTagger</td><td style="border-bottom: 0.5pt solid black; ">(uses native binary)</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">OpenNlpPosTagger</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">StanfordPosTagger</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">TreeTaggerPosTagger</td><td style="">also does lemmatization (uses native binary)</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.11.&nbsp;Segmentation"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e372">3.11.&nbsp;Segmentation</h2></div></div></div>
+		
+		<p>Segmenter components identify sentence boundaries and tokens. The order in which sentence
+			splitting and tokenization are done differs between the integrated the NLP libraries.
+			Thus, we chose to integrate both steps into a segmenter component to avoid the need to
+			reorder the components in a pipeline when replacing one segmenter with another.</p>
+		<div class="figure"><a name="d5e375"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.analytics/segmentation.png"></div>
+		</div><p class="title"><b>Figure&nbsp;3.5.&nbsp;Segmentation types</b></p></div><br class="figure-break">
+		<div class="table"><a name="d5e380"></a><p class="title"><b>Table&nbsp;3.11.&nbsp;Segmentation components</b></p><div class="table-contents">
+			
+			<table summary="Segmentation components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">BreakIteratorSegmenter</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">ClearNlpSegmenter</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">LanguageToolSegmenter</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">OpenNlpSegmenter</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">StanfordSegmenter</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.12.&nbsp;Semantic Role Labelling"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e405">3.12.&nbsp;Semantic Role Labelling</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e408"></a><p class="title"><b>Table&nbsp;3.12.&nbsp;Semantic role labelling components</b></p><div class="table-contents">
+			
+			<table summary="Semantic role labelling components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">ClearNlpSemanticRoleLabeler</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.13.&nbsp;Spell Checking"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e421">3.13.&nbsp;Spell Checking</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e424"></a><p class="title"><b>Table&nbsp;3.13.&nbsp;Spell checking components</b></p><div class="table-contents">
+			
+			<table summary="Spell checking components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">LanguageToolChecker</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">NorvigSpellingCorrector</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">SpellChecker</td><td style="">using Jazzy</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.14.&nbsp;Stemming"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e443">3.14.&nbsp;Stemming</h2></div></div></div>
+		
+		<p></p>
+		<div class="figure"><a name="d5e446"></a><div class="figure-contents">
+			
+			<div class="mediaobject"><img src="images/dkpro.core.analytics/stemming.png"></div>
+		</div><p class="title"><b>Figure&nbsp;3.6.&nbsp;Stem type</b></p></div><br class="figure-break">
+		<div class="table"><a name="d5e451"></a><p class="title"><b>Table&nbsp;3.14.&nbsp;Stemming components</b></p><div class="table-contents">
+			
+			<table summary="Stemming components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="newCol2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">SnowballStemmer</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="3.15.&nbsp;Choosing components"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e464">3.15.&nbsp;Choosing components</h2></div></div></div>
+		
+		<p>Sometimes we get asked which parser, tagger, etc. is the best and which should be
+			used. We currently do not make any evaluations of the integrated tools. Also, building a
+			pipeline just of the "best" components may not actually yield the best results, because
+			of several reasons:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p>components or models may expect different tokenizations or tagsets</p>
+			</li><li class="listitem">
+				<p>components or models may be good for one domain (e.g. news) but not for
+					another (e.g. twitter data)</p>
+			</li></ul></div>
+		<p>We recommend that you try various combinations and stick with the one that gives the
+			best result for <span class="emphasis"><em>your</em></span> data.</p>
+		<div class="section" title="3.15.1.&nbsp;Compatibility of Components"><div class="titlepage"><div><div><h3 class="title" id="d5e474">3.15.1.&nbsp;Compatibility of Components</h3></div></div></div>
+			
+			<p>When selecting components for your pipeline you should make sure that the
+				components are compatible regarding the annotation types they expect or
+				offer.</p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p>if a component expects an annotation type that is not provided by the
+						preceding component, that may lead to an error or simply to no
+						results</p>
+				</li><li class="listitem">
+					<p>if a component (e.g. a reader which adds sentence annotations) provides an
+						annotation that is added again by a subsequent component (e.g. a segmenter),
+						that will result in undefined behaviour of other components when you iterate
+						over the annotation that has been added more than once.</p>
+				</li></ul></div>
+			<p>To check whether components are compatible, you can look at the
+					<code class="literal">@TypeCapability</code> annotation which is available in most DKPro
+				Core components. Mind that many components can be configured with regards to which
+				types they consume or produce, so the <code class="literal">@TypeCapability</code> should be
+				taken as a rough indicator, not as a definitive information. It is also important to
+				note, that the <code class="literal">@TypeCapability</code> does say anything about the tagset
+				being consumed or produced by a component. E.g. one if a POS-tagger uses a model
+				that produces POS-tags from the tagset X and a dependency-parser uses a model that
+				requires POS-tags from the tagset Y, then the two models are not semantically
+				compatible - even though the POS-tagger and dependency-parser components are
+				compatible on the level of the type system.</p>
+		</div>
+		<div class="section" title="3.15.2.&nbsp;Particular Settings"><div class="titlepage"><div><div><h3 class="title" id="d5e486">3.15.2.&nbsp;Particular Settings</h3></div></div></div>
+			
+			<div class="section" title="3.15.2.1.&nbsp;Dictionaries and other lexical resources"><div class="titlepage"><div><div><h4 class="title" id="d5e488">3.15.2.1.&nbsp;Dictionaries and other lexical resources</h4></div></div></div>
+				
+				<p>If you use components in your pipeline that access dictionaries or other
+					lexical resources, it might be essential to include a Lemmatizer in your
+					pipeline: Many dictionaries and well-known lexical resources such as WordNet
+					require at minimum a lemma form as a search word in order to return information
+					about that word. For large-scale lexical resources, e.g. for Wiktionary,
+					additional information about POS is very helpful in order to reduce the
+					ambiguity of a given lemma form.</p>
+			</div>
+			<div class="section" title="3.15.2.2.&nbsp;Lemmatizing multiwords"><div class="titlepage"><div><div><h4 class="title" id="d5e491">3.15.2.2.&nbsp;Lemmatizing multiwords </h4></div></div></div>
+				
+				<p>If you use lemma information in your pipeline, you should bear in mind that
+					multiword expressions, in particular discontinuous multiwords, might not be
+					lemmatized as one word (or expression), but rather each multiword part might be
+					lemmatized separately. In languages such as German, there are verbs with
+					separable particle such as _anfangen_ (_an_ occurs separate from _fangen_ in
+					particular sentence constructions). Therefore - depending on your use case - you
+					might consider postprocessing the output of the lemmatizer in order to get the
+					true lemmas (which you might need, e.g. in order to look up information in a
+					lexical resource).</p>
+			</div>
+			<div class="section" title="3.15.2.3.&nbsp;Morphologically Rich Languages"><div class="titlepage"><div><div><h4 class="title" id="d5e494">3.15.2.3.&nbsp;Morphologically Rich Languages</h4></div></div></div>
+				
+				<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+						<p>Parsing: Morphologically rich languages (e.g. Czech, German, and
+							Hungarian) pose a particular challenge to parser components (Tsarfaty et
+							al. 2013).</p>
+					</li><li class="listitem">
+						<p>Morphological analysis: for languages with case syncretism (displaying
+							forms that are ambiguous regarding their case, e.g. _Frauen_ in German
+							can be nominative or genitive or dative or accusative), it might be
+							better to leave case underspecified at the morphosyntactic level and
+							leave disambiguation to the components at the syntactic level. Otherwise
+							errors might be introduced that will then be propagated to the next
+							pipeline component (Seeker and Kuhn 2013).</p>
+					</li></ul></div>
+			</div>
+			<div class="section" title="3.15.2.4.&nbsp;Domain-specific and other non-standard data"><div class="titlepage"><div><div><h4 class="title" id="d5e501">3.15.2.4.&nbsp;Domain-specific and other non-standard data</h4></div></div></div>
+				
+				<p>Most components (sentence splitters, POS taggers, parsers ...) are trained on
+					(standard) newspaper text. As a consequence, you might encounter a significant
+					performance drop if you apply the components to domain specific or other
+					non-standard data without adaptation.</p>
+				<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+						<p>Tokenizing: adapting the tokenizer to your specific domain is crucial,
+							since tokenizer errors propagate to all subsequent components in the
+							pipeline and worsen their performance. For example, you might adapt your
+							tokenizer to become aware of emoticons or chemical formulae in order to
+							process social media data or text from the biochemical domain.</p>
+					</li></ul></div>
+			</div>
+			<div class="section" title="3.15.2.5.&nbsp;Shallow processing and POS tagsets"><div class="titlepage"><div><div><h4 class="title" id="d5e507">3.15.2.5.&nbsp;Shallow processing and POS tagsets</h4></div></div></div>
+				
+				<p>While more advanced semantic processing (e.g. discourse analysis) typically
+					depends on the output of a parser component, there might be settings where you
+					prefer to perform shallow processing (i.e. POS tagging and chunking).</p>
+				<p>For shallow processing, it might be necessary to become familiar with the
+					original POS tagsets of the POS taggers rather than relying on the uniform, but
+					coarse-grained DKPro Core POS tags (because the original fine-grained POS tags
+					carry more information).</p>
+				<p>Although many POS taggers in a given language are trained on the same POS
+					tagset (e.g. the Penn TreeBank Tagset for English, the STTS Tagset for German),
+					the individual POS Taggers might output variants of this tagset. You should be
+					aware of the fact that in the DKPro Core version of the tagger, the original POS
+					tagger output possibly has been mapped to a version that is compatible with the
+					corresponding original tagset. (Example)</p>
+			</div>
+		</div>
+		<div class="section" title="3.15.3.&nbsp;Further references"><div class="titlepage"><div><div><h3 class="title" id="d5e512">3.15.3.&nbsp;Further references</h3></div></div></div>
+			
+			<p>Here are some further references that might be helpful when deciding which tools
+				to use:</p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p>Giesbrecht, Eugenie and Evert, Stefan (2009). Part-of-speech tagging - a
+						solved task? An evaluation of POS taggers for the Web as corpus. In I.
+						Alegria, I. Leturia, and S. Sharoff, editors, Proceedings of the 5th Web as
+						Corpus Workshop (WAC5), San Sebastian, Spain. <a class="ulink" href="http://purl.org/stefan.evert/PUB/GiesbrechtEvert2009_Tagging.pdf" target="_top">PDF</a></p>
+				</li><li class="listitem">
+					<p>Reut Tsarfaty, Djam&eacute; Seddah, Sandra K&uuml;bler, and Joakim Nivre. 2013.
+						Parsing morphologically rich languages: Introduction to the special issue.
+						Comput. Linguist. 39, 1 (March 2013), 15-22. <a class="ulink" href="https://aclweb.org/anthology/J/J13/J13-1003.pdf" target="_top">PDF</a></p>
+				</li><li class="listitem">
+					<p>Wolfgang Seeker and Jonas Kuhn. 2013. Morphological and syntactic case in
+						statistical dependency parsing. Comput. Linguist. 39, 1 (March 2013), 23-55.
+							<a class="ulink" href="http://aclweb.org/anthology//J/J13/J13-1004.pdf" target="_top">PDF</a>Using </p>
+				</li></ul></div>
+		</div>
+	</div>
+	<div class="section" title="3.16.&nbsp;Adding components as dependencies (Maven)"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e525">3.16.&nbsp;Adding components as dependencies (Maven)</h2></div></div></div>
+		
+		<p>As an example, we take the OpenNlpPosTagger component. To make it available in a
+			pipeline, we add the following dependency to our POM file:</p>
+		<pre class="programlisting">&lt;properties&gt;
+  &lt;dkpro.core.version&gt;1.7.0&lt;/dkpro.core.version&gt;
+&lt;/properties&gt;
+&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;de.tudarmstadt.ukp.dkpro.core&lt;/groupId&gt;
+    &lt;artifactId&gt;de.tudarmstadt.ukp.dkpro.core.opennlp-asl&lt;/artifactId&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;de.tudarmstadt.ukp.dkpro.core&lt;/groupId&gt;
+      &lt;artifactId&gt;de.tudarmstadt.ukp.dkpro.core-asl&lt;/artifactId&gt;
+      &lt;version&gt;${dkpro.core.version}&lt;/version&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;</pre>
+		<p>The dependency on DKPro Core declared in the dependency management section fixes the
+			version of all DKPro Core dependencies that are added to the POM. Hence, it is not
+			necessary to declare the version for each dependency. When upgrading to a new DKPro Core
+			version, it is sufficient to change the value of the
+				<code class="literal">dkpro.core.version</code> property in the properties section.</p>
+	</div>
+	<div class="section" title="3.17.&nbsp;Adding resources as dependencies (Maven)"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e531">3.17.&nbsp;Adding resources as dependencies (Maven)</h2></div></div></div>
+		
+		<p>Most components require resources such as models in order to operate. Since components
+			and resources are versioned separately, it can be non-trivial to find the right version
+			of a resource for a particular version of a component. For this reason, DKPro Core
+			components each maintain a list of resources known to be compatible with them. This
+			information can be accessed in a Maven POM, thus avoiding the need to manually specify
+			the version of the models. Consequently, when you upgrade to a new version of DKPro
+			Core, all models are automatically upgraded as well. This is usually the desired
+			solution, although it can mean that your pipelines may produce slightly different
+			results.</p>
+		<p>As an example, we take the OpenNlpPosTagger component. In the previous section, we
+			have seen how to make it available in a pipeline. Now we also add the model for
+			English.</p>
+		<pre class="programlisting">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;de.tudarmstadt.ukp.dkpro.core&lt;/groupId&gt;
+    &lt;artifactId&gt;
+      de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-en-maxent
+    &lt;/artifactId&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;
+&lt;dependencyManagement&gt;
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;de.tudarmstadt.ukp.dkpro.core&lt;/groupId&gt;
+      &lt;artifactId&gt;de.tudarmstadt.ukp.dkpro.core.opennlp-asl&lt;/artifactId&gt;
+      &lt;version&gt;${dkpro.core.version}&lt;/version&gt;
+      &lt;type&gt;pom&lt;/type&gt;
+      &lt;scope&gt;import&lt;/scope&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;</pre>
+		<p>The dependency on the DKPro Core OpenNLP module declared in the dependency management
+			section fixes the version of all known OpenNLP models. Thus, it is not necessary to
+			declare a version on each model dependency. When upgrading to a new DKPro Core version,
+			it is sufficient to change the value of the <code class="literal">dkpro.core.version</code>
+			property in the properties section.</p>
+	</div>
+</div>
+
+  <div class="chapter" title="Chapter&nbsp;4.&nbsp;Models and Resources" id="ugr.dkpro.core.models"><div class="titlepage"><div><div><h2 class="title">Chapter&nbsp;4.&nbsp;Models and Resources</h2></div></div></div>
+  
+	<p>This section explains how resources, such as models, are packaged, distributed, and used
+		within DKPro Core. </p>
+	<div class="section" title="4.1.&nbsp;Architecture"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e541">4.1.&nbsp;Architecture</h2></div></div></div>
+		
+		<p>The architecture for resources (e.g. parser models, POS tagger models, etc.) in DKPro is
+			still work in progress. However, there are a couple of corner points that have already
+			been established.</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><span class="emphasis"><em>REQ-1</em></span> - Addressable by URL: Resources must be addressable
+					using an URL, typically a classpath URL
+						(<code class="uri">classpath:/de/tudarmstadt/.../model.bin</code>) or a file URL
+						(<code class="uri">file:///home/model.bin</code>). Remote URLs like HTTP should not be
+					used and may not be supported.</p>
+			</li><li class="listitem">
+				<p><span class="emphasis"><em>REQ-2</em></span> - Maven compatible: Resources are packaged in JARs
+					and can be downloaded from our Maven repositories (if the license permits).
+				</p>
+			</li><li class="listitem">
+				<p><span class="emphasis"><em>REQ-3</em></span> - Document-sensitive: A component should
+					dynamically determine at runtime which resource to use based on properties of a
+					processed document, e.g. based on the document language. This may change from
+					one document to the next.</p>
+			</li><li class="listitem">
+				<p><span class="emphasis"><em>REQ-4</em></span> - Overridable: The user should be able to override
+					the model or provide additional information as to what specific variant of a
+					resource should be used. E.g. if there are two resources for the language de,
+						<code class="literal">de-fast</code> and <code class="literal">de-accurate</code>, the component
+					could use <code class="literal">de-fast</code> per default unless the user specifies to
+					use variante accurate or specifies a different model altogether. </p>
+			</li><li class="listitem">
+				<p><span class="emphasis"><em>REQ-5</em></span> - Loadable from classpath: Due to REQ-1, REQ-2, and
+					REQ-3 models must be resolvable from the classpath. </p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+							<p><code class="code">ResourceUtils.resolveLocation(String, Object,
+									UimaContext)</code>
+							</p>
+						</li><li class="listitem">
+							<p>Resource Providers (see below) </p>
+						</li><li class="listitem">
+							<p><code class="code">PathMatchingResourcePatternResolver</code></p>
+						</li></ul></div>
+			</li></ul></div>
+		<div class="section" title="4.1.1.&nbsp;Versioning scheme"><div class="titlepage"><div><div><h3 class="title" id="d5e574">4.1.1.&nbsp;Versioning scheme</h3></div></div></div>
+			
+			<p>To version our packaged models, we use a date (yyyymmdd) and a counter (x). We use a date,
+				because often no (reliable) upstream version is available. E.g. with the Stanford
+				NLP tools, the same model is sometimes included in different pacakges with different
+				versions (e.g. parser models are included with the CoreNLP package and the parser
+				package). TreeTagger models are not versioned at all. With the OpenNLP version, we
+				are not sure if they are versioned - it seems they are just versioned for
+				compatibility with a particular OpenNLP version (e.g. 1.5.) but have no proper
+				version of their own. If we know it, we use the date when the model was last
+				changed, otherwise we use the date when we first package a new model and update it
+				when we observe a model change.</p>
+			<p>We include additional metadata with the packaged model (e.g. which tagset is used)
+				and we sometimes want to release packaged models with new metadata, although the
+				upstream model itself has not changed. In such cases, we increment the counter. The
+				counter starts at 0 if a new model is incorporated.</p>
+			<p>Thus, a model version has the format "yyyymmdd.x".</p>
+		</div>
+		<div class="section" title="4.1.2.&nbsp;Versioning scheme"><div class="titlepage"><div><div><h3 class="title" id="d5e579">4.1.2.&nbsp;Versioning scheme</h3></div></div></div>
+			
+			<p></p>
+		</div>
+	</div>
+	<div class="section" title="4.2.&nbsp;Packaging resources as JARs"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e582">4.2.&nbsp;Packaging resources as JARs</h2></div></div></div>
+		
+		<p>Resources needed by DKPro components (e.g. parser models or POS tagger models) are not
+			packaged with the corresponding analysis components, but as separate JARs, one per
+			language and model variant. </p>
+		<p>Due to license restrictions, we may not redistribute all of these resources. But, we
+			offer Ant scripts to automatically download the resources and package them as
+			DKPro-compatible JARs. When the license permits, we upload these to our public Maven
+			repository. </p>
+		<p>If you need a non-redistributable resource (e.g. TreeTagger models) or just want to
+			package the models yourself, here is how you do it.</p>
+		<div class="section" title="4.2.1.&nbsp;Installing Ant in Eclipse"><div class="titlepage"><div><div><h3 class="title" id="d5e587">4.2.1.&nbsp;Installing Ant in Eclipse</h3></div></div></div>
+			
+			<p>Our build.xml scripts require Ant 1.8.x. If you use an older Eclipse version, you may have
+				to manually download and register a recent Ant version: </p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p>Download the latest Ant binaries from the website and unpack them in a
+						directory of your choice.</p>
+				</li><li class="listitem">
+					<p>Start Eclipse and go to <span class="emphasis"><em>Window &gt; Preferences &gt; Ant &gt;
+							Runtime</em></span> and press <span class="emphasis"><em>Ant Home...</em></span>.</p>
+				</li><li class="listitem">
+					<p>Select the Ant directory you just unpacked, then confirm.</p>
+				</li></ul></div>
+		</div>
+		<div class="section" title="4.2.2.&nbsp;Implementing the build.xml Ant script"><div class="titlepage"><div><div><h3 class="title" id="d5e599">4.2.2.&nbsp;Implementing the build.xml Ant script</h3></div></div></div>
+			
+			<p>Models are usually large and we therefore package them separately from the
+				components that use them. Each model becomes a JAR that is uploaded to our Maven
+				repositories and added as a dependency in the projects that use them.</p>
+			<p>Often, models are single files, e.g. serialize Java objects that represent a
+				parser model, POS tagger model, etc. The simplest case is that these files are
+				distributed from some website. We use an Ant script then to download the file and
+				package it as a JAR. We defined custom Ant macros like install-model-file that make
+				the process very convenient. The following code shows how we import the custom
+				macros and define two targets, local-maven and separate-jars. The first just sets a
+				property to cause install-model-file to copy the finished JAR into the local Maven
+				repository (<code class="filename">~.m2/repository</code>). </p>
+			<p>The versioning scheme for models is "yyyymmdd.x" where "yyyymmdd" is the date of
+				the last model change (if known) or the date of packaging and "x" is a counter
+				unique per date starting a 0. Please refer to the versioning scheme documentation
+				for more information. </p>
+			<p>The model building ANT script goes to <code class="filename">src/scripts/build.xml</code>
+				with the project.</p>
+			<pre class="programlisting">&lt;project basedir="../.." default="separate-jars"&gt;
+  &lt;import&gt;
+    &lt;url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/
+      tags/0.6.0/ant-macros.xml"/&gt;
+  &lt;/import&gt;
+        
+  &lt;!-- 
+      - Output package configuration
+    --&gt;
+  &lt;property name="outputPackage" 
+     value="de/tudarmstadt/ukp/dkpro/core/opennlp/lib"/&gt;
+
+  &lt;target name="local-maven"&gt;
+    &lt;property name="install-artifact-mode" value="local"/&gt;
+    &lt;antcall target="separate-jars"/&gt;
+   &lt;/target&gt;
+
+  &lt;target name="remote-maven"&gt;
+    &lt;property name="install-artifact-mode" value="remote"/&gt;
+    &lt;antcall target="separate-jars"/&gt;
+  &lt;/target&gt;
+        
+  &lt;target name="separate-jars"&gt;
+    &lt;mkdir dir="target/download"/&gt;
+        
+    &lt;!-- FILE: models-1.5/en-pos-maxent.bin - - - - - - - - - - - - - - 
+      - 2012-06-16 | now        | db2cd70395b9e2e4c6b9957015a10607
+      --&gt;
+    &lt;get 
+      src="http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin"
+      dest="target/download/en-pos-maxent.bin"
+      skipexisting="true"/&gt;
+    &lt;install-stub-and-upstream-file 
+      file="target/download/en-pos-maxent.bin"
+      md5="db2cd70395b9e2e4c6b9957015a10607"
+      groupId="de.tudarmstadt.ukp.dkpro.core"
+      artifactIdBase="de.tudarmstadt.ukp.dkpro.core.opennlp"
+      upstreamVersion="20120616"
+      metaDataVersion="1"
+      tool="tagger"
+      language="en" 
+      variant="maxent" 
+      extension="bin" &gt;
+        &lt;metadata&gt;
+          &lt;entry key="pos.tagset" value="ptb"/&gt;
+        &lt;/metadata&gt;
+    &lt;/install-model-file&gt;
+  &lt;/target&gt;
+&lt;/project&gt;</pre>
+			<p>The model file <code class="filename">en-pos-maxent.bin</code> is downloaded from the
+				OpenNLP website and stored in a local cache directory
+					<code class="filename">target/download/tagger/da-pos-maxent.bin</code>. From there,
+				install-stub-and-upstream-file picks it up and packages it as two JARs, 1) a JAR
+				containing the DKPro Core meta data and a POM referencing the second JAR, 2) a JAR
+				containing the actual model file(s). The JAR file names derive from the
+				artifactIdBase, tool, language, variant, upstreamVersion and metaDataVersion
+				parameters. These parameters along with the extension parameter are also used to
+				determine the package name and file name of the model in the JAR. They are
+				determined as follows (mind that dots in the artifactBase turn to slashes, e.g.
+				"de.tud" turns "de/tud": </p>
+			<pre class="programlisting">    {artifactIdBase}/lib/{tool}-{language}-{variant}.{extension}</pre>
+			<p>The following values are commonly used for <span class="emphasis"><em>tool</em></span>: </p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p><code class="literal">token</code> - tokenizer </p>
+				</li><li class="listitem">
+					<p><code class="literal">sentence</code> - sentence splitter </p>
+				</li><li class="listitem">
+					<p><code class="literal">lemmatizer</code> - lemmatizer </p>
+				</li><li class="listitem">
+					<p><code class="literal">tagger</code> - part-of-speech tagger </p>
+				</li><li class="listitem">
+					<p><code class="literal">morphtagger</code> - morphological analyzer </p>
+				</li><li class="listitem">
+					<p><code class="literal">ner</code> - named-entity recognizer</p>
+				</li><li class="listitem">
+					<p><code class="literal">parser</code> - syntactic or dependency parser</p>
+				</li><li class="listitem">
+					<p><code class="literal">coref</code> - coreference resolver</p>
+				</li></ul></div>
+			<p>The values for <span class="emphasis"><em>variant</em></span> are very tool-dependent. Typically,
+				the variant encodes parameters that were used during the creation of a model, e.g.
+				which machine learning algorithm was used, which parameters it had, and on which
+				data set is has been created. </p>
+			<p>An md5 sum for the remote file must be specified to make sure we notice if the
+				remote file changes or if the download is corrupt. </p>
+			<p>The metadata added for the models currently used to store tagset information,
+				which is used to drive the tag-to-DKPro-UIMA-type mapping. The following values are
+				commonly used as keys: </p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p><code class="literal">pos.tagset</code> - part-of-speech tagset (ptb, ctb, stts,
+						...) </p>
+				</li><li class="listitem">
+					<p><code class="literal">dependency.tagset</code> - dependency relation labels, aka.
+						syntactic functions (negra, ancora, ...) </p>
+				</li><li class="listitem">
+					<p><code class="literal">constituent.tagset</code> - constituent labels, aka. syntactic
+						categories (ptb, negra, ...) </p>
+				</li></ul></div>
+		</div>
+		<div class="section" title="4.2.3.&nbsp;Using the build.xml Ant script"><div class="titlepage"><div><div><h3 class="title" id="d5e653">4.2.3.&nbsp;Using the build.xml Ant script</h3></div></div></div>
+			
+			<p>For those modules where we support packaging resources as JARs, we provide an Ant script
+				called <code class="filename">build.xml</code> which is located in the corresponding module
+				in the SVN. </p>
+			<p><code class="filename">build.xml</code> is a script that can be run with Apache Ant
+				(version 1.8.x or higher) and requires an internet connection. </p>
+			<p>You can find this script in the <code class="filename">src/scripts</code> folder of the
+				module. </p>
+			<p>Depending on the script, various build targets are supported. Three of them are
+				particularly important: <span class="emphasis"><em>separate-jars</em></span>,
+					<span class="emphasis"><em>local-maven</em></span>, and <span class="emphasis"><em>remote-maven</em></span>:</p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+						<p><span class="emphasis"><em>separate-jars</em></span> downloads all resource from the
+							internet, validates them against MD5 checksums and packages them as
+							DKPro-compatible JARs. The JARs are stored to the target folder. You can
+							easily update them to an Artifactory Maven repository. Artifactory
+							automatically recognizes their group ID, artifact ID and version. This
+							may not work with other Maven repositories. </p>
+					</li><li class="listitem">
+						<p><span class="emphasis"><em>local-maven</em></span> additionally installs the JARs into
+							your the local Maven repository on your computer. It assumes the default
+							location of the repository at <code class="filename">~/.m2/repository</code>. If
+							you keep your repository in a different folder, specify it via the
+								<span class="emphasis"><em>alt.maven.repo.path</em></span> system property.</p>
+					</li><li class="listitem">
+						<p><span class="emphasis"><em>remote-maven</em></span> additionally installs the JARS into
+							a remote Maven repository. The repository to deploy to can be controlled
+							via the system property alt.maven.repo.url. If the remote repo also
+							requires authentication, use the system property
+								<span class="emphasis"><em>alt.maven.repo.id</em></span> to configure the credentials
+							from the settings.xml that should be used. An alternative settings file
+							can be configured using <span class="emphasis"><em>alt.maven.settings</em></span>.</p>
+						<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+							<p>This target requires that you have installed <a class="ulink" href="http://repo1.maven.org/maven2/org/apache/maven/maven-ant-tasks/2.1.3/maven-ant-tasks-2.1.3.jar" target="_top"><code class="filename">maven-ant-tasks-2.1.3.jar</code></a> in
+									<code class="filename">~/.ant/lib</code>.</p>
+						</div>
+					</li></ul></div><p>It is recommended to open the <code class="filename">build.xml</code> file in
+				Eclipse, run the <span class="emphasis"><em>local-maven</em></span> target, and then restart Eclipse.
+				Upon restart, Eclipse should automatically scan your local Maven repository. Thus,
+				the new resource JARs should be available in the search dialog when you add
+				dependencies in the POM editor. </p>
+		</div>
+		<div class="section" title="4.2.4.&nbsp;Example: how to package TreeTagger binaries and models"><div class="titlepage"><div><div><h3 class="title" id="d5e687">4.2.4.&nbsp;Example: how to package TreeTagger binaries and models</h3></div></div></div>
+			
+			<p>TreeTagger and its models cannot be re-distributed with DKPro Core, you need to download it
+				yourself. For your convenience, we included an Apache Ant script called
+					<code class="filename">build.xml</code> in the <code class="filename">src/scripts</code> folder of
+				the TreeTagger module. This script downloads the TreeTagger binaries and models and
+				packages them as artifacts, allowing you to simply add them as dependencies in
+				Maven. </p>
+			<p>To run the script, you need to have Ant 1.8.x installed and configured in Eclipse.
+				This is already the case with Eclipse 3.7.x. If you use an older Eclipse version,
+				please see the section below on installing Ant in Eclipse. </p>
+			<p>Now to build the TreeTagger artifacts: </p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p>Locate the Ant build script (<code class="filename">build.xml</code>) in the
+						scripts directory (<code class="filename">src/scripts</code>) of the
+							<span class="emphasis"><em>de.tudarmstadt.ukp.dkpro.core.treetagger</em></span> module.
+					</p>
+				</li><li class="listitem">
+					<p>Right-click, choose <span class="emphasis"><em>Run As &gt; External Tools
+							Configurations</em></span>. In the <span class="emphasis"><em>Target</em></span> tab,
+						select local-maven, run. </p>
+				</li><li class="listitem">
+					<p>Read the license in the Ant console and - if you care - accept the license
+						terms. </p>
+				</li><li class="listitem">
+					<p>Wait for the build process to finish.</p>
+				</li><li class="listitem">
+					<p>Restart Eclipse </p>
+				</li></ul></div>
+			<p>To use the packaged TreeTagger resources, add them as Maven dependencies to your
+				project (or add them to the classpath if you do not use Maven). </p>
+			<p>Note that in order to use TreeTagger you must have added at least the JAR with the
+				TreeTagger binaries and one JAR with the model for the language you want to work
+				with.</p>
+		</div>
+		<div class="section" title="4.2.5.&nbsp;Which build.xml file to use? The trunk version or a release version?"><div class="titlepage"><div><div><h3 class="title" id="d5e712">4.2.5.&nbsp;Which build.xml file to use? The trunk version or a release version?</h3></div></div></div>
+			
+			<p>For any given module supporting packaged resources, there is always the build.xml in SVN
+				trunk and the ones in previous releases (tags folder) in SVN. Which one should you
+				use? </p>
+			<p>For TreeTagger, you should always use the version from SVN trunk. Here, it is
+				least likely that the MD5 checksums are outdated and you will always get the latest
+				and greatest version of TreeTagger. </p>
+			<p>We do not ship the <code class="filename">build.xml</code> files in any other way than via
+				SVN. </p>
+		</div>
+	</div>
+	<div class="section" title="4.3.&nbsp;Updating a model"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e718">4.3.&nbsp;Updating a model</h2></div></div></div>
+		
+		<p>Whenever one existing model have a new release, it is good to update the build.xml changing
+			the: </p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p>URL for retrieving the model (if it has changed) </p>
+			</li><li class="listitem">
+				<p>The version from the model (the day when the model was created in the yyyymmdd
+					format) </p>
+			</li></ul></div>
+		<p>After that, run the ant script with the <span class="emphasis"><em>local-maven</em></span> target, add
+			the jars to your project classpath and check if the existing unit tests work for the up
+			to date model. If they do, then run the script again, this time with the
+				<span class="emphasis"><em>remote-maven</em></span> target. Then, change the versions from the models
+			in the dependency management section from the project's pom file, commit those changes
+			and move these new models from staging into model repository on zoidberg. </p>
+		<div class="section" title="4.3.1.&nbsp;MD5 checksum check fails"><div class="titlepage"><div><div><h3 class="title" id="d5e729">4.3.1.&nbsp;MD5 checksum check fails</h3></div></div></div>
+			
+			<p>Not all of the resources are properly versioned by their maintainers (in particular
+				TreeTagger binaries and models). We observed that resources changed from one day to
+				the next without any announcement or increase of the version number (if present at
+				all). Thus, we validate all resources against an MD5 checksum stored in the
+					<code class="filename">build.xml</code> file. This way, we can recognize if a remote
+				resource has been changed. When this happens, we add a note to the
+					<code class="filename">build.xml</code> file indicating, when we noticed the MD5 changed
+				and update the version of the corresponding resource.</p>
+			<p>Since we do not test the build.xml files every day, you may get an MD5 checksum
+				error when you try to package the resources yourself. If this happens, open the
+				build.xml file with a text editor, locate the MD5 checksum that fails, update it and
+				update the version of the corresponding resource. You can also tell us on the DKPro
+				Core User Group and we will update the <code class="filename">build.xml</code> file.</p>
+		</div>
+	</div>
+	<div class="section" title="4.4.&nbsp;Using Resource Providers"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e736">4.4.&nbsp;Using Resource Providers</h2></div></div></div>
+		
+		<p>The <code class="code">CasConfigurableProviderBase</code> class provides some support for the above
+			requirements. The following code is taken from the <code class="code">OpenNlpPosTagger</code>
+			component. It shows how the POS Tagger model is addressed using a parametrized classpath
+			URL with parameters for language and variant. The <code class="code">produceResource()</code> method
+			is called with the URL of the model once it has been located by
+				<code class="code">CasConfigurableProviderBase</code>. </p>
+		<pre class="programlisting">modelProvider = new CasConfigurableStreamProviderBase&lt;POSTagger&gt;() {
+    {
+        // These are the default values
+        setDefault(LOCATION, "classpath:/de/tudarmstadt/ukp/dkpro/core/" +
+                "opennlp/lib/tagger-${language}-${variant}.bin");
+        setDefault(VARIANT, "maxent");
+                                
+        // These are parameters the user may have set on the component,
+        // they may be null
+        setOverride(LOCATION, modelLocation);
+        setOverride(LANGUAGE, language);
+        setOverride(VARIANT, variant);
+    }
+                        
+    @Override
+    protected POSTagger produceResource(InputStream aStream) 
+      throws Exception
+    {
+        POSModel model = new POSModel(aStream);
+        return new POSTaggerME(model);
+    }
+};
+
+// Here the language is picked up from the CAS.
+modelProvider.configure(cas);
+
+// Here we get the tagger according to the language, variant and location 
+// chosen. A new instance is only created if necessary (e.g. if the
+// current CAS has a different language than the previous).
+POSTagger tagger = modelProvider.getResource();</pre>
+		<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+			<p>This is an illustrative code example. See <a class="ulink" href="http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk/de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java" target="_top"><code class="code">OpenNlpPosTagger</code></a> for the complete code.</p>
+		</div>
+		<div class="section" title="4.4.1.&nbsp;Mapping Providers"><div class="titlepage"><div><div><h3 class="title" id="d5e748">4.4.1.&nbsp;Mapping Providers</h3></div></div></div>
+			
+			<p>The DKPro type system design provides two levels of abstraction on most annotations: </p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p>a generic annotation type, e.g. POS (part of speech) with a feature value
+						containing the original tag produced by an analysis component, e.g.
+						TreeTagger </p>
+				</li><li class="listitem">
+					<p>a set of high-level types for very common categories, e.g. N (noun), V
+						(verb), etc. </p>
+				</li></ul></div>
+			<p>DKPro maintains mappings for commonly used tagsets, e.g. in the module
+					<span class="emphasis"><em>de.tudarmstadt.ukp.dkpro.core.api.lexmorph-asl</em></span>. They are
+				named: </p>
+			<pre class="programlisting">{language}-{layer}.map</pre>
+			<p>The following values are commonly used for <span class="emphasis"><em>layer</em></span>: </p>
+			<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+					<p><code class="literal">pos</code> - part-of-speech tag mapping </p>
+				</li></ul></div>
+			<p>Mapping providers are a convenient way of fetching a mapping between the original
+				tag value and the high-level types. </p>
+			<pre class="programlisting">// General setup of the mapping provider in initialize()
+mappingProvider = new MappingProvider();
+mappingProvider.setDefault(MappingProvider.LOCATION, 
+    "classpath:/de/tudarmstadt/ukp/dkpro/" +
+    "core/api/lexmorph/tagset/${language}-pos.map");
+mappingProvider.setDefault(MappingProvider.BASE_TYPE, POS.class.getName());
+mappingProvider.setOverride(MappingProvider.LOCATION, mappingLocation);
+mappingProvider.setOverride(MappingProvider.LANGUAGE, language);
+
+// Document-specific configuration in process()
+mappingProvider.configure(cas);
+
+// Resolve an original tag value to a high-level type
+Type posTag = mappingProvider.getTagType(tags[i]);
+POS posAnno = (POS) cas.createAnnotation(posTag, t.getBegin(), t.getEnd());</pre>
+			<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+				<p>This is an illustrative code example. See <a class="ulink" href="http://code.google.com/p/dkpro-core-asl/source/browse/de.tudarmstadt.ukp.dkpro.core-asl/trunk/de.tudarmstadt.ukp.dkpro.core.opennlp-asl/src/main/java/de/tudarmstadt/ukp/dkpro/core/opennlp/OpenNlpPosTagger.java" target="_top"><code class="code">OpenNlpPosTagger</code></a> for the complete code.</p>
+			</div>
+		</div>
+		<div class="section" title="4.4.2.&nbsp;Language-dependent default variants"><div class="titlepage"><div><div><h3 class="title" id="d5e771">4.4.2.&nbsp;Language-dependent default variants</h3></div></div></div>
+			
+			<p>It is possible a different default variant needs to be used depending on the language. This
+				can be configured by placing a properties file in the classpath and setting its
+				location using <code class="code">setDefaultVariantsLocation(String)</code>. The key in the
+				properties is the language and the value is used a default variant. These file
+				should always reside in the libsub-package of a component and use the naming
+				convention: </p>
+			<pre class="programlisting">{tool}-default-variants.map</pre>
+			<pre class="programlisting">// General setup of the mapping provider in initialize()
+mappingProvider.setDefaultVariantsLocation("de/tudarmstadt/ukp/dkpro/" +
+    "core/stanfordnlp/lib/tagger-default-variants.map");</pre>
+			<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+				<p>This is an illustrative code example. See <a class="ulink" href="http://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/de.tudarmstadt.ukp.dkpro.core.stanfordnlp/src/main/java/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/StanfordPosTagger.java" target="_top"><code class="code">StanfordPosTagger</code></a> for the complete code.</p>
+			</div>
+			<p>The <code class="filename">tagger-default-variants.map</code> is a Java properties file
+				which defines for each language which variant should be assumed as default. </p>
+			<pre class="programlisting">ar=fast
+de=fast
+en=bidirectional-distsim-wsj-0-18
+zh=default</pre>
+		</div>
+	</div>
+</div>
+	
+  <div class="chapter" title="Chapter&nbsp;5.&nbsp;I/O" id="ugr.dkpro.core.io"><div class="titlepage"><div><div><h2 class="title">Chapter&nbsp;5.&nbsp;I/O</h2></div></div></div>
+	
+	<p>This section gives an overview on the I/O components. The components are organized into one
+		module per file type. These modules contain typically one reader and/or writer
+		component.</p>
+	<p>All readers initialize the CAS with a DocumentMetaData annotation.</p>
+	<p>Most readers and writers do not support all features of the respective formats.
+		Additionally,  readers and writers may onle support  a specific variant of a format.</p>
+	<div class="section" title="5.1.&nbsp;Common parameters"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e789">5.1.&nbsp;Common parameters</h2></div></div></div>
+		
+		<p>DKPro Core aims to provide a consistent API for reading and writing annotated data.
+			Most of our readers are resource readers (RR) or file writers (FW) and support a common
+			set of parameters which are explained below.</p>
+		<div class="table"><a name="d5e792"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Resource reader parameters</b></p><div class="table-contents">
+			
+			<table summary="Resource reader parameters" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"><col class="newCol3"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Parameter</th><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Description</th><th style="border-bottom: 0.5pt solid black; ">Default</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_SOURCE_LOCATION</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Location to read from.</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>optional</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_PATTERNS</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Include/exclude patterns.</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>optional</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_USE_DEFAULT_EXCLUDES</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Enable default excludes for versioning systems like Subversion,
+								git, etc.</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>true</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_INCLUDE_HIDDEN</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Include hidden files</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>false</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; ">
+							<p>PARAM_LANGUAGE</p>
+						</td><td style="border-right: 0.5pt solid black; ">
+							<p>Two letter ISO code</p>
+						</td><td style="">
+							<p>optional</p>
+						</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Either PARAM_SOURCE_LOCATION or PARAM_PATTERNS or both must be set. Examples:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p>Read all files in the folder <code class="filename">files/texts</code></p>
+				<div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+							<p>PARAM_LOCATON: "files/texts"</p>
+						</li></ul></div>
+			</li><li class="listitem">
+				<p>Recursively read all <code class="filename">.txt</code> files in the folder
+					<code class="filename">files/texts</code>: </p>
+				<div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+							<p>Pattern embedded in the location: PARAM_LOCATION:
+								"files/texts/**/*.txt"</p>
+						</li><li class="listitem">
+							<p>Pattern separate: PARAM_LOCATION: "files/texts", PARAM_PATTERNS: "*.txt"</p>
+						</li></ul></div>
+			</li><li class="listitem">
+				<p>Excluding some files:</p>
+				<div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+						<p>Pattern separate: PARAM_LOCATION: "files/texts", PARAM_PATTERNS: String[] {"*.txt",
+							"[-]broken*.txt"}</p>
+					</li></ul></div>
+			</li><li class="listitem">
+				<p>Read from a ZIP archive:</p>
+					<div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+							<p>PARAM_LOCATION: "jar:file:archive.zip!texts/**/*.txt"</p>
+						</li></ul></div>
+			</li><li class="listitem">
+				<p>Read from the classpath:</p>
+				<div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+						<p>PARAM_LOCATION: "classpath*:texts/*.txt"</p>
+					</li></ul></div>
+			</li></ul></div>
+		<div class="table"><a name="d5e871"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;File writer parameters</b></p><div class="table-contents">
+			
+			<table summary="File writer parameters" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"><col class="newCol3"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Parameter</th><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Description</th><th style="border-bottom: 0.5pt solid black; ">Default</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_TARGET_LOCATION</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Location to write to.</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>mandatory</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_COMPRESSION</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Compression algorithm to use when writing output. File suffix
+								automatically added depending on algorithm. Supported are: NONE,
+								GZIP, BZIP2, and XZ (see class
+									<code class="classname">CompressionMethod</code>).</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>NONE</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_STRIP_EXTENSION</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Whether to remove the original file extension when writing. E.g.
+								with the XmiWriter without extension stripping, an input file
+									<code class="filename">MyText.txt</code> would be written as
+									<code class="filename">MyText.txt.xmi</code> - with stripping it would be
+									<code class="filename">MyText.xmi</code>.</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>false</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>PARAM_USE_DOCUMENT_ID</p>
+						</td><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">
+							<p>Use the document ID as the file name, even if an original file
+								name is present in the document URI.</p>
+						</td><td style="border-bottom: 0.5pt solid black; ">
+							<p>false</p>
+						</td></tr><tr><td style="border-right: 0.5pt solid black; ">
+							<p>PARAM_ESCAPE_DOCUMENT_ID</p>
+						</td><td style="border-right: 0.5pt solid black; ">
+							<p>Escape the document ID in case it contains characters that are not
+								valid in a filename.</p>
+						</td><td style="">
+							<p>false</p>
+						</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Most file writers write multiple files, so PARAM_TARGET_LOCATION is treated as a directory
+			name. A few only write a single file (e.g. NegraExportWriter), in which case the
+			parameter is treated as the file name. Instead of writing to a directory, it is possible
+			to write to a ZIP archive:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p>Write to a ZIP archive</p>
+				<div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem">
+						<p>PARAM_TARGET_LOCATION: "jar:file:archive.zip"</p>
+					</li><li class="listitem">
+						<p>PARAM_TARGET_LOCATION: "jar:file:archive.zip!folder/within/zip"</p>
+					</li></ul></div>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.2.&nbsp;ACL anthology"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e931">5.2.&nbsp;ACL anthology</h2></div></div></div>
+		
+		<div class="table"><a name="d5e933"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">AclAnthologyReader</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://acl-arc.comp.nus.edu.sg" target="_top">ACL Anthology Reference Corpus
+						(ACL ARC)</a></p>
+			</li></ul></div>
+	</div>
+	
+	<div class="section" title="5.3.&nbsp;Binary CAS"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e951">5.3.&nbsp;Binary CAS</h2></div></div></div>
+		
+		<p>The CAS is the native data model used by UIMA. There are various ways of saving CAS
+			data, using XMI, XCAS, or binary formats. This module supports the binary formats. </p>
+		<div class="table"><a name="d5e954"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">BinaryCasReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">BinaryCasWriter (FW)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">SerializedCasReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">SerializedCasWriter (FW)</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress" target="_top">Compressed Binary CASes</a></p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.4.&nbsp;Bliki (Wikipedia)"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e981">5.4.&nbsp;Bliki (Wikipedia)</h2></div></div></div>
+		
+		<p>Access the online Wikipedia and extract its contents using the Bliki engine.</p>
+		<div class="table"><a name="d5e984"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">BlikiWikipediaReader</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also: </p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://code.google.com/p/gwtwiki/" target="_top">Java Wikipedia API (Bliki
+						engine)</a></p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.5.&nbsp;British National Corpus"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1002">5.5.&nbsp;British National Corpus</h2></div></div></div>
+		
+		<div class="table"><a name="d5e1004"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">BncReader (RR)</td><td style="">BNC XML format</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://www.natcorp.ox.ac.uk" target="_top">British National
+					Corpus</a></p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.6.&nbsp;CoNLL Shared Task Data Formats"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1022">5.6.&nbsp;CoNLL Shared Task Data Formats</h2></div></div></div>
+		
+		<p>The CoNLL shared tasks use different tabular, tab-separated formats. Almost every year
+			a CoNLL shared task was held, a new format was defined. Due to their simplicity, the
+			CoNLL formats are quite popular. Many corpora are provided in the CoNLL-X (2006) format
+			and many tools can natively read or write this format.</p>
+		<div class="table"><a name="d5e1025"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2000Reader (RR)</td><td style="border-bottom: 0.5pt solid black; ">Chunking task</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2000Writer</td><td style="border-bottom: 0.5pt solid black; ">Chunking task</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2006Reader (RR)</td><td style="border-bottom: 0.5pt solid black; ">Dependency parsing task</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2006Writer</td><td style="border-bottom: 0.5pt solid black; ">Dependency parsing task</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2009Reader (RR)</td><td style="border-bottom: 0.5pt solid black; ">Semantic dependencies</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2009Writer</td><td style="border-bottom: 0.5pt solid black; ">Semantic dependencies</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Conll2012Reader</td><td style="border-bottom: 0.5pt solid black; ">Syntactic parsing &amp; coreference</td></tr><tr><td style="border-right: 0.5pt solid black; ">Conll2012Writer</td><td style="">Syntactic parsing &amp; coreference</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://nltk.org/nltk_data/" target="_top">CoNLL 2000 Chunking Corpus</a> - English
+					(CoNLL 2000 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://ilk.uvt.nl/conll/free_data.html" target="_top">CoNLL-X Shared Task free
+						data</a> - Danish, Dutch, Portuguese, and Swedish (CoNLL 2006
+					format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="https://code.google.com/p/copenhagen-dependency-treebank/" target="_top">Copenhagen Dependency Treebanks</a> - Danish (CoNLL 2006 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/" target="_top">FinnTreeBank</a> - Finnish (CoNLL 2006 format, in recent versions with
+					additional pseudo-XML metadata)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.linguateca.pt/floresta/CoNLL-X" target="_top">Floresta Sint&aacute;(c)tica
+						(Bosque-CoNLL)</a> - Portuguese (CoNLL 2006 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://nlp.ffzg.hr/resources/corpora/setimes-hr/" target="_top">SETimes.HR
+						corpus and dependency treebank of Croatian</a> - Croatian (CONLL 2006
+					format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://zil.ipipan.waw.pl/Sk%C5%82adnica" target="_top">Sk&#322;adnica
+						zale&#380;no&#347;ciowa</a> - Polish (CoNLL 2006 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://nl.ijs.si/sdt/" target="_top">Slovene Dependency Treebank</a> - Slovene (CoNLL
+					2006 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/" target="_top">Swedish Treebank</a>
+					- Swedish (CoNLL 2006 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html" target="_top">Talbanken05</a> - Swedish (CoNLL 2006 format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://stp.lingfil.uu.se/%7Emojgan/UPDT.html" target="_top">Uppsala Persian
+						Dependency Treebank</a> - Persian (Farsi) (CoNLL 2006 format)</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.7.&nbsp;CLARIN WebLicht TCF"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1094">5.7.&nbsp;CLARIN WebLicht TCF</h2></div></div></div>
+		
+		<div class="table"><a name="d5e1096"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">TcfReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">TcfWriter</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p></p>
+	</div>
+	
+	
+	<div class="section" title="5.8.&nbsp;HTML"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1113">5.8.&nbsp;HTML</h2></div></div></div>
+		
+		<div class="table"><a name="d5e1115"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">HtmlReader</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p></p>
+	</div>
+	<div class="section" title="5.9.&nbsp;IMS Open Corpus Workbench"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1129">5.9.&nbsp;IMS Open Corpus Workbench</h2></div></div></div>
+		
+		<p>The IMS Open Corpus Workbench is a linguistic search engine. It uses a tab-separated format
+			with limited markup (e.g. for sentences, documents, but not recursive structures like
+			parse-trees). If a local installion of the corpus workbench is available, it can be used
+			by this module to immediately generate the corpus workbench index format. Search is not
+			supported by this module.</p>
+		<div class="table"><a name="d5e1132"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">ImsCwbReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">ImsCwbWriter</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also: </p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://cwb.sourceforge.net" target="_top">IMS Open Corpus
+					Workbench</a></p>
+			</li></ul></div>
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://wacky.sslmit.unibo.it" target="_top">WaCky - The Web-As-Corpus Kool
+						Yinitiative</a> - corpora crawled from the world wide web in several
+					different languages (DeWaC, UkWaC, ItWaC, etc.)</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.10.&nbsp;JDBC Database"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1158">5.10.&nbsp;JDBC Database</h2></div></div></div>
+		
+		<p>Access a JDBC database using an SQL query. </p>
+		<div class="table"><a name="d5e1161"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">JdbcReader</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="5.11.&nbsp;JWPL (Wikipedia)"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1174">5.11.&nbsp;JWPL (Wikipedia)</h2></div></div></div>
+		
+		<p>Access an offline Wikipedia database dump created using JWPL.</p>
+		<div class="table"><a name="d5e1177"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaArticleInfoReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaArticleReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaDiscussionReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaLinkReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaPageReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaQueryReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaRevisionPairReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">WikipediaRevisionReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">WikipediaTemplateFilteredArticleReader</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also: <a class="ulink" href="http://code.google.com/p/jwpl/" target="_top">JWPL and the Wikipedia Revision
+				Toolkit</a></p>
+	</div>
+	<div class="section" title="5.12.&nbsp;NEGRA Export Format"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1216">5.12.&nbsp;NEGRA Export Format</h2></div></div></div>
+		
+		<div class="table"><a name="d5e1218"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">NegraExportReader</td><td style="">Supports version 3 and 4</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://www.coli.uni-saarland.de/%7Ethorsten/publications/Brants-CLAUS98.pdf" target="_top">Thorsten Brants, 1997, NeGra Export Format for Annotated Corpora (Version
+						3)</a></p>
+			</li></ul></div>
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://www.linguateca.pt/floresta/corpus.html" target="_top">Floresta
+						Sint&aacute;(c)tica (Bosque)</a> - Portuguese</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/" target="_top">NeGra</a> - German</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html" target="_top">TIGER</a> (until version 2.1) - German</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tueba-dz.html" target="_top">T&uuml;Ba D/Z</a> - German</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.13.&nbsp;PDF"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1250">5.13.&nbsp;PDF</h2></div></div></div>
+		
+		<div class="table"><a name="d5e1252"></a><p class="title"><b>Table&nbsp;5.14.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">PdfReader (RR)</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="5.14.&nbsp;Penn Treebank"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1265">5.14.&nbsp;Penn Treebank</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e1268"></a><p class="title"><b>Table&nbsp;5.15.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">PennTreebankChunkedReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">PennTreebankCombinedReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">PennTreebankCombinedWriter</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://www.linguateca.pt/floresta/corpus.html" target="_top">Floresta
+						Sint&aacute;(c)tica (Bosque)</a> - Portuguese</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.15.&nbsp;TCF"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1292">5.15.&nbsp;TCF</h2></div></div></div>
+		
+		<p>The TCF (Text Corpus Format) was created in the context of the CLARIN project. It is
+			mainly used to exchange data between the different web-services that are part of the
+			WebLicht platform.</p>
+		<div class="table"><a name="d5e1295"></a><p class="title"><b>Table&nbsp;5.16.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">TcfReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">TcfWriter (FW)</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p>None</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.16.&nbsp;TEI"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1315">5.16.&nbsp;TEI</h2></div></div></div>
+		
+		<div class="table"><a name="d5e1317"></a><p class="title"><b>Table&nbsp;5.17.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">TeiReader (RR)</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://nltk.org/nltk_data/" target="_top">Brown Corpus (TEI XML
+					Version)</a></p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.textgrid.de/Digitale-Bibliothek" target="_top">Digitale Bibliothek
+						bei TextGrid</a></p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.17.&nbsp;Text"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1338">5.17.&nbsp;Text</h2></div></div></div>
+		
+		<p>This module supports just simple plain text.</p>
+		<div class="table"><a name="d5e1341"></a><p class="title"><b>Table&nbsp;5.18.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">StringReader</td><td style="border-bottom: 0.5pt solid black; ">Read text from a Java string</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">TextReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">Read text from files</td></tr><tr><td style="border-right: 0.5pt solid black; ">TextWriter (FW)</td><td style="">Write text to files</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="5.18.&nbsp;TIGER XML"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1360">5.18.&nbsp;TIGER XML</h2></div></div></div>
+		
+		<p>The <a class="ulink" href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html" target="_top">TIGER XML format</a> was created for encoding syntactic constituency structures
+			in the German TIGER corpus. It has since been used for many other corpora as well.
+				<a class="ulink" href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html" target="_top">TIGERSearch</a> is a linguistic search engine specifically targetting this
+			format. The format has later been <a class="ulink" href="http://www.lrec-conf.org/proceedings/lrec2004/pdf/202.pdf" target="_top">extended</a> to
+			also support semantic frame annotations.</p>
+		<div class="table"><a name="d5e1366"></a><p class="title"><b>Table&nbsp;5.19.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">TigerXmlReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">Read TIGER XML format from files</td></tr><tr><td style="border-right: 0.5pt solid black; ">TigerXmlWriter (FW)</td><td style="">Write TIGER XML format to files</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://www.linguateca.pt/floresta/corpus.html" target="_top">Floresta
+						Sint&aacute;(c)tica (Bosque)</a> - Portuguese</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://semeval2.fbk.eu/semeval2.php" target="_top">Semeval-2 Task 10</a> - (extended
+					format)</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://zil.ipipan.waw.pl/Sk%C5%82adnica" target="_top">Sk&#322;adnica frazowa</a>
+					-  Polish</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/" target="_top">Swedish
+						Treebank</a> - Swedish</p>
+				<p><a class="ulink" href="http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html" target="_top">Talbanken05</a> - Swedish</p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html" target="_top">TIGER</a> - German</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.19.&nbsp;T&uuml;PP-D/Z"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1401">5.19.&nbsp;T&uuml;PP-D/Z</h2></div></div></div>
+		
+		<p>T&uuml;PP D/Z is a collection of articles from the German newspaper taz (die tageszeitung)
+			annotated and encoded in a XML format.</p>
+		<div class="table"><a name="d5e1404"></a><p class="title"><b>Table&nbsp;5.20.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">TueppReader (RR)</td><td style="">Read T&uuml;PP-D/Z XML format from files</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>Known corpora in this format:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tuepp-dz.html" target="_top">T&uuml;PP-D/Z</a> - German</p>
+			</li></ul></div>
+	</div>
+	<div class="section" title="5.20.&nbsp;Web1T"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1422">5.20.&nbsp;Web1T</h2></div></div></div>
+		
+		<p>The Web1T n-gram corpus is a huge collection of n-grams collected from the internet. The
+			jweb1t library allows to access this corpus efficiently. This module provides support
+			for the file format used by the Web1T n-gram corpus and allows to conveniently created
+			jweb1t indexes.</p>
+		<div class="table"><a name="d5e1425"></a><p class="title"><b>Table&nbsp;5.21.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">Web1TFormatWriter</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also:</p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://code.google.com/p/jweb1t/" target="_top">jweb1t - Java API for text n-gram frequency
+						data in Web1T format</a></p>
+			</li><li class="listitem">
+				<p><a class="ulink" href="http://catalog.ldc.upenn.edu/LDC2006T13" target="_top">Web1T n-gram
+						corpus</a></p>
+			</li></ul></div>
+	</div>
+	
+	<div class="section" title="5.21.&nbsp;XMI"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1446">5.21.&nbsp;XMI</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e1449"></a><p class="title"><b>Table&nbsp;5.22.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">XmiReader (RR)</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">XmiWriter (FW)</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="5.22.&nbsp;XML"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1465">5.22.&nbsp;XML</h2></div></div></div>
+		
+		<p></p>
+		<div class="table"><a name="d5e1468"></a><p class="title"><b>Table&nbsp;5.23.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">XmlReader</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">XmlReaderText</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">XmlReaderXPath</td><td style="border-bottom: 0.5pt solid black; ">&nbsp;</td></tr><tr><td style="border-right: 0.5pt solid black; ">XmlWriterInline</td><td style="">&nbsp;</td></tr></tbody></table>
+		</div></div><br class="table-break">
+	</div>
+	<div class="section" title="5.23.&nbsp;TGrep"><div class="titlepage"><div><div><h2 class="title" style="clear: both" id="d5e1490">5.23.&nbsp;TGrep</h2></div></div></div>
+		
+		<p>TGrep and TGrep2 are a tools to search over syntactic parse trees represented as bracketed
+			structures. This module supports in particular TGrep2 and allows to conveniently
+			generate TGrep2 indexes which can then be searched. Search is not supported by this
+			module.</p>
+		<div class="table"><a name="d5e1493"></a><p class="title"><b>Table&nbsp;5.24.&nbsp;Components</b></p><div class="table-contents">
+			
+			<table summary="Components" style="border-collapse: collapse;border-top: 0.5pt solid black; border-bottom: 0.5pt solid black; border-left: 0.5pt solid black; border-right: 0.5pt solid black; "><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th style="border-right: 0.5pt solid black; border-bottom: 0.5pt solid black; ">Component</th><th style="border-bottom: 0.5pt solid black; ">Comments</th></tr></thead><tbody><tr><td style="border-right: 0.5pt solid black; ">TGrepWriter</td><td style="">Supports tgrep2 (uses native binary)</td></tr></tbody></table>
+		</div></div><br class="table-break">
+		<p>See also: </p>
+		<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+				<p><a class="ulink" href="http://tedlab.mit.edu/%7Edr/Tgrep2/" target="_top">TGrep2</a></p>
+			</li></ul></div>
+	</div>
+</div>
+
+  <div class="chapter" title="Chapter&nbsp;6.&nbsp;Testing" id="ugr.dkpro.core.testing"><div class="titlepage"><div><div><h2 class="title">Chapter&nbsp;6.&nbsp;Testing</h2></div></div></div>
+	
+	<p>The testing module offers a convenient way to create unit tests for UIMA
+		components.</p>
+	<p>The AssertAnnotations class offers various static methods to test if a component has
+		properly created annotations of a certain kind. There are methods to test almost every kind
+		of annotation supported by DKPro Core, e.g.:</p>
+	<div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+			<p>assertToken</p>
+		</li><li class="listitem">
+			<p>assertSentence</p>
+		</li><li class="listitem">
+			<p>assertPOS</p>
+		</li><li class="listitem">
+			<p>assertLemma</p>
+		</li><li class="listitem">
+			<p>assertMorpheme</p>
+		</li><li class="listitem">
+			<p>assertStem</p>
+		</li><li class="listitem">
+			<p>assertNamedEntity</p>
+		</li><li class="listitem">
+			<p>assertConstituents</p>
+		</li><li class="listitem">
+			<p>assertChunks</p>
+		</li><li class="listitem">
+			<p>assertDependencies</p>
+		</li><li class="listitem">
+			<p>assertPennTree</p>
+		</li><li class="listitem">
+			<p>assertSemanticPredicates</p>
+		</li><li class="listitem">
+			<p>assertSemanticField</p>
+		</li><li class="listitem">
+			<p>assertCoreference</p>
+		</li><li class="listitem">
+			<p>assertTagset</p>
+		</li><li class="listitem">
+			<p>assertTagsetMapping</p>
+		</li></ul></div>
+	<p>A typical unit test class has consists of two parts</p>
+	<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem">
+				<p>the test cases</p>
+			</li><li class="listitem">
+				<p>a <code class="code">runTest</code> method - which sets up the pipeline required by the
+					test and then calls <code class="code">TestRunner.runTest()</code>.</p>
+			</li></ol></div><p>In the following example, mind that the text must be provided with spaces
+		separating the tokens (thus there must be a space before the full stop at the end of the
+		sentence) and with newline characters (\n) separating the sentences:</p>
+	<pre class="programlisting">@Test
+public void testEnglish() throws Exception
+{	
+  JCas jcas = runTest("en", null, "This is a test .");
+
+  String[] constituentMapped =
+    { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16", "VP 5,14" };
+
+  String[] constituentOriginal = 
+    { "NP 0,4", "NP 8,14", "ROOT 0,16", "S 0,16","VP 5,14" };
+
+  String pennTree = "(ROOT (S (NP (DT This)) (VP (VBZ is) " +
+    "(NP (DT a) (NN test))) (. .)))";
+
+  String[] constituentTags = 
+    { "ADJP", "ADV", "ADVP", "AUX", "CONJP", "FRAG", "INTJ", 
+      "LST", "NAC", "NEG", "NP", "NX", "O", "PP", "PRN", "PRT",
+      "QP", "S", "SBAR", "SQ", "TYPO", "UCP", "UH", "VP", 
+      "WHADJP", "WHADVP", "WHNP", "WHPP", "X" };
+
+  String[] unmappedConst = 
+    { "ADV", "AUX", "NEG", "O", "TYPO", "UH" };
+        
+  AssertAnnotations.assertPennTree(
+    pennTree, selectSingle(jcas, PennTree.class));
+  AssertAnnotations.assertConstituents(
+    constituentMapped, constituentOriginal, 
+    select(jcas, Constituent.class));
+  AssertAnnotations.assertTagset(
+    Constituent.class, "ptb", constituentTags, jcas);
+  AssertAnnotations.assertTagsetMapping(
+    Constituent.class, "ptb", unmappedConst, jcas);
+}
+
+private JCas runTest(String aLanguage, String aVariant, String aDocument)
+  throws Exception
+{
+  AnalysisEngineDescription parser = createEngineDescription(
+    OpenNlpParser.class,
+    OpenNlpParser.PARAM_VARIANT, aVariant,
+    OpenNlpParser.PARAM_PRINT_TAGSET, true,
+    OpenNlpParser.PARAM_WRITE_PENN_TREE, true);
+  return TestRunner.runTest(parser, aLanguage, aDocument);
+}
+</pre>
+	<p>Test cases for segmenter components should not make use of the <code class="code">TestRunner</code>
+		class, which already performs tokenization and sentence splitting internally.</p>
+</div>
+</div></body></html>
