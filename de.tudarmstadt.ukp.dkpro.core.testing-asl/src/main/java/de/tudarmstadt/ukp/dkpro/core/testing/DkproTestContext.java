@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.uima.cas.impl.CASImpl;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -49,7 +48,7 @@ public class DkproTestContext extends TestWatcher
         
         // Enable extra check for illegal updates to indexed features (effective with UIMA 2.7.0
         // and higher)
-        System.setProperty(CASImpl.CHK_FS_UPDATES_CORRUPTS, "true");
+        System.setProperty("uima.exception_when_fs_update_corrupts_index", "true");
         
         context.set(this);
     }
