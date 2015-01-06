@@ -108,4 +108,35 @@ public class MalletTopicModelEstimatorTest
         assertEquals(nTopics, model.getNumTopics());
     }
 
+    @Test
+    public void testEstimatorAlphaBeta()
+        throws Exception
+    {
+        int nTopics = 10;
+        int nIterations = 50;
+        float alpha = nTopics / 50.0f;
+        float beta = 0.01f;
+        String language = "en";
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+
+        AnalysisEngineDescription estimator = createEngineDescription(
+                MalletTopicModelEstimator.class,
+                MalletTopicModelEstimator.PARAM_N_THREADS, N_THREADS,
+                MalletTopicModelEstimator.PARAM_TARGET_LOCATION, MODEL_FILE,
+                MalletTopicModelEstimator.PARAM_N_ITERATIONS, nIterations,
+                MalletTopicModelEstimator.PARAM_N_TOPICS, nTopics,
+                MalletTopicModelEstimator.PARAM_ALPHA_SUM, alpha,
+                MalletTopicModelEstimator.PARAM_BETA, beta);
+        SimplePipeline.runPipeline(reader, segmenter, estimator);
+
+        assertTrue(MODEL_FILE.exists());
+        ParallelTopicModel model = ParallelTopicModel.read(MODEL_FILE);
+        assertEquals(nTopics, model.getNumTopics());
+    }
+
 }
