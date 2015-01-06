@@ -169,6 +169,22 @@ public class MalletTopicModelEstimator
     @ConfigurationParameter(name = PARAM_MODEL_ENTITY_TYPE, mandatory = false)
     String modelEntityType;
 
+    /**
+     * The sum of alphas over all topics. Default: 1.0.
+     * <p>
+     * Another recommended value is 50 / T (number of topics).
+     */
+    public static final String PARAM_ALPHA_SUM = "alphaSum";
+    @ConfigurationParameter(name = PARAM_ALPHA_SUM, mandatory = true, defaultValue = "1.0f")
+    float alphaSum;
+
+    /**
+     * Beta for a single dimension of the Dirichlet prior. Default: 0.01.
+     */
+    public static final String PARAM_BETA = "beta";
+    @ConfigurationParameter(name = PARAM_BETA, mandatory = true, defaultValue = "0.01f")
+    float beta;
+
     protected static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
     protected InstanceList instanceList; // contains the Mallet instances
 
@@ -314,7 +330,7 @@ public class MalletTopicModelEstimator
         throws IOException, SecurityException
     {
         targetLocation.getParentFile().mkdirs();
-        ParallelTopicModel model = new ParallelTopicModel(nTopics);
+        ParallelTopicModel model = new ParallelTopicModel(nTopics, alphaSum, beta);
         model.addInstances(instanceList);
         model.setNumThreads(nThreads);
         model.setNumIterations(nIterations);
