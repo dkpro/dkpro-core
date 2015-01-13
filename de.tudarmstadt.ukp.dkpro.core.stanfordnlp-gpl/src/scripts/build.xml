@@ -26,34 +26,28 @@
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
-	<property name="segmenter.version.real" value="3.4.1"/>
-	<property name="segmenter.date" value="2014-08-27"/>
+	<property name="segmenter.version.real" value="3.5.0"/>
+	<property name="segmenter.date" value="2014-10-26"/>
 	
-	<property name="tagger.version.real" value="3.4.1"/>
-	<property name="tagger.date" value="2014-08-27"/>
+	<property name="tagger.version.real" value="3.5.0"/>
+	<property name="tagger.date" value="2014-10-26"/>
 	
-	<property name="parser.version.real" value="3.4.1"/>
-	<property name="parser.date" value="2014-08-27"/>
+	<property name="parser.version.real" value="3.5.0"/>
+	<property name="parser.date" value="2014-10-31"/>
 	
-	<property name="corenlp.version.real" value="3.4.1"/>
-	<property name="core.version" value="20140827"/>
-	<property name="core.date" value="2014-08-27"/>
-	
-	<property name="corenlp.version.real" value="3.4.1"/>
-	<property name="core.version" value="20140827"/>
-	<property name="core.date" value="2014-08-27"/>
+	<property name="corenlp.version.real" value="3.5.0"/>
+	<property name="core.version" value="20141031"/>
+	<property name="core.date" value="2014-10-31"/>
 
-	<property name="core.srparser.date" value="2014-08-28"/>
-	<property name="core.spanish.date" value="2014-08-26"/>
-	<property name="core.chinese.date" value="2014-02-24"/>
+    <property name="core.caseless.date" value="2014-02-25"/>
+    <property name="core.chinese.date" value="2014-10-23"/>
+	<property name="core.srparser.date" value="2014-10-23"/>
+	<property name="core.spanish.date" value="2014-10-23"/>
 
-	<property name="german.ner.version" value="20120522"/>
 	<property name="german.ner.date" value="2012-05-22"/>
-
 	<property name="chinese.ner.date" value="2012-11-11"/>
+    <property name="nodistsim.ner.date" value="2012-11-11"/>
 	
-	<property name="caseless.version" value="20140225"/>
-	<property name="caseless.date" value="2014-02-25"/>
 
 	<!-- 
 	  - Output package configuration
@@ -66,16 +60,31 @@
 	</target>
 
 	<target name="remote-maven">
-		<echo>${java.home}</echo>
-		<echo>${alt.maven.settings}</echo>
 		<property name="install-artifact-mode" value="remote"/>
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de, en, es, ar, zh, fr">
+	<target name="separate-jars" depends="ar, de, en, es, fr, hr, pt, zh">
 		<antcall target="jar-notice"/>
 	</target>
 
+	<target name="newmodels">
+        <property name="install-artifact-mode" value="remote"/>
+		<antcall target="parser-ar-sr"/>
+		<antcall target="parser-de-sr"/>
+		<antcall target="parser-en-sr"/>
+		<antcall target="parser-en-sr-beam"/>
+		<antcall target="tagger-es-default"/>
+		<antcall target="tagger-es-distsim"/>
+		<antcall target="parser-es-sr"/>
+		<antcall target="parser-es-sr-beam"/>
+		<antcall target="parser-fr-factored"/>
+		<antcall target="parser-fr-sr-beam"/>
+		<antcall target="parser-zh-pcfg"/>
+		<antcall target="parser-zh-sr"/>
+		<antcall target="coref-en-default"/>
+	</target>
+	
 	<target name="ar" depends="download-tagger,download-parser">
 		<!-- 
 		  - Non-english models are not contained in the CoreNLP models (yet) 
@@ -127,10 +136,10 @@
 	<target name="parser-ar-sr">	
     	<install-stub-and-upstream-file 
     		file="target/download/parser/arabicSR.ser.gz" 
-    		md5="dde31ef8168dc0e9c807836c2be7aca4"
+    		md5="7bf3eeb2ddd5dda934a88157f94b1c0a"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141031"
     		metaDataVersion="1"
     		tool="parser" 
     		language="ar" 
@@ -366,10 +375,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/germanSR.ser.gz" 
-    		md5="c6778c914a3e24e0f901a5a100af8015"
+    		md5="8b82172150e3001fbe3ea66a4a5c6bb1"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141031"
     		metaDataVersion="1"
     		tool="parser" 
     		language="de" 
@@ -765,10 +774,10 @@
 	<target name="parser-en-sr">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/englishSR.ser.gz" 
-    		md5="502dd8a3d11acbc25fdd49aff14b3ceb"
+    		md5="1f9855710f883671d68ce5d67dc6c75b"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141031"
     		metaDataVersion="1"
     		tool="parser" 
     		language="en" 
@@ -784,10 +793,10 @@
 	<target name="parser-en-sr-beam">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/englishSR.beam.ser.gz" 
-    		md5="510bae3accee5332c47ba19c53401617"
+    		md5="ca3b69a51317ec4283cf98d9fc8638df"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141031"
     		metaDataVersion="1"
     		tool="parser" 
     		language="en" 
@@ -884,13 +893,13 @@
 			destfile="target/download/spanish/spanish.tagger.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish/spanish.tagger.gz" 
-    		md5="28fcf1c954efe69937b15cf011cfcb6a"
+    		md5="0df31bf1411ce906e55e747083e2c3ac"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="tagger" 
     		language="es" 
     		variant="default" 
-    		upstreamVersion="20140826" 
+    		upstreamVersion="20141023" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 			<metadata>
@@ -905,13 +914,13 @@
 			destfile="target/download/spanish/spanish-distsim.tagger.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish/spanish-distsim.tagger.gz" 
-    		md5="715d8183812639c46e6b4757383b067d"
+    		md5="494e9fb560fbbfb50dba20fe1bba0eb9"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="tagger" 
     		language="es" 
     		variant="distsim" 
-    		upstreamVersion="20140826" 
+    		upstreamVersion="20141023" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 			<metadata>
@@ -957,10 +966,10 @@
 	<target name="parser-es-sr">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/spanishSR.ser.gz" 
-    		md5="68130a48c62991387a3bea3e3dda0714"
+    		md5="8caf03cca53804712122a95dfe51cbd1"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141023"
     		metaDataVersion="1"
     		tool="parser" 
     		language="es" 
@@ -976,10 +985,10 @@
 	<target name="parser-es-sr-beam">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/spanishSR.beam.ser.gz" 
-    		md5="9be26d68b15d401e45d0e2a8bf827553"
+    		md5="c0f15fe37b818d820f164fbf9ba080ec"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141023"
     		metaDataVersion="1"
     		tool="parser" 
     		language="es" 
@@ -1006,10 +1015,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/frenchFactored.ser.gz" 
-    		md5="217e66f869f099d4fd81da6d2270cf18"
+    		md5="873c73a21f27a559f1b3b9e75aca4506"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20141031"
     		metaDataVersion="1"
     		tool="parser" 
     		language="fr" 
@@ -1025,10 +1034,10 @@
 	<target name="parser-fr-sr-beam">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/frenchSR.beam.ser.gz" 
-    		md5="5b4c2d3a747ff8e3dbf84d5a442e676c"
+    		md5="1dd4dcbf3b88a89e7880afb7cc5af356"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141023"
     		metaDataVersion="1"
     		tool="parser" 
     		language="fr" 
@@ -1191,10 +1200,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/chinesePCFG.ser.gz" 
-    		md5="d7196999a5360a9143873a0509c9f08f"
+    		md5="28636a8197a27f1c9654211ffe7a52d7"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140104"
+    		upstreamVersion="20141023"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -1215,10 +1224,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/chineseSR.ser.gz" 
-    		md5="95593aa37f465f9f96cfbe66d3ef0b74"
+    		md5="2c006ff5622aacc459dcc751472c7013"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140828"
+    		upstreamVersion="20141023"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -1311,7 +1320,7 @@
 	</target>
 	
 	<target name="-check-download-spanish">
-		<available property="download-spanish.DONE" file="target/download/spanishr/DONE"/>
+		<available property="download-spanish.DONE" file="target/download/spanish/DONE"/>
 	</target>
 
 	<target name="download-spanish" depends="-check-download-spanish" unless="download-spanish.DONE">
@@ -1378,7 +1387,7 @@
 		unless="donwload-caseless.DONE">
 		<mkdir dir="target/download/caseless"/>
     	<get
-    		src="http://nlp.stanford.edu/software/stanford-corenlp-caseless-${caseless.date}-models.jar"  
+    		src="http://nlp.stanford.edu/software/stanford-corenlp-caseless-${core.caseless.date}-models.jar"  
     		dest="target/download/caseless/stanford-corenlp-caseless-models.jar" 
     		skipexisting="true"/>
 		<unzip src="target/download/caseless/stanford-corenlp-caseless-models.jar" dest="target/download/caseless">

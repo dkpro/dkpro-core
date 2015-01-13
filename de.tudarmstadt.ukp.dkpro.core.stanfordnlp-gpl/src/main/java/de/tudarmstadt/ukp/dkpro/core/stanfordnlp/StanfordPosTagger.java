@@ -168,9 +168,7 @@ public class StanfordPosTagger
 
                 SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
                         .getProperty(("pos.tagset")));
-                for (int i = 0; i < tagger.getTags().getSize(); i ++) {
-                    tags.add(tagger.getTags().getTag(i));
-                }
+                tags.addAll(tagger.tagSet());
                 addTagset(tags);
 
                 if (printTagSet) {

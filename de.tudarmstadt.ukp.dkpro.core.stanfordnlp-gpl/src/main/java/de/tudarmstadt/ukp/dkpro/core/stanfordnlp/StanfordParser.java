@@ -67,9 +67,8 @@ import edu.stanford.nlp.ling.HasWord;
 import edu.stanford.nlp.parser.common.ParserGrammar;
 import edu.stanford.nlp.parser.common.ParserQuery;
 import edu.stanford.nlp.parser.lexparser.LexicalizedParser;
-import edu.stanford.nlp.parser.lexparser.TestOptions;
+import edu.stanford.nlp.parser.shiftreduce.BaseModel;
 import edu.stanford.nlp.parser.shiftreduce.ShiftReduceParser;
-import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.trees.AbstractTreebankLanguagePack;
 import edu.stanford.nlp.trees.EnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.EnglishGrammaticalStructureFactory;
@@ -565,7 +564,8 @@ public class StanfordParser
                     states = ((LexicalizedParser) pd).stateIndex;
                 }
                 else if (pd instanceof ShiftReduceParser) {
-                    states = (Iterable<String>) FieldUtils.readField(pd, "knownStates", true);
+                    BaseModel model = (BaseModel) FieldUtils.readField(pd, "model", true);
+                    states = (Iterable<String>) FieldUtils.readField(model, "knownStates", true);
                 }
                 else {
                     throw new IllegalStateException("Unknown parser type ["
