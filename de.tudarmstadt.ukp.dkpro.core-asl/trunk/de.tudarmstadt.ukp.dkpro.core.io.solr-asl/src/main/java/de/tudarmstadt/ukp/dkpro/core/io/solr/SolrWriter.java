@@ -161,8 +161,6 @@ public class SolrWriter
      *
      * @param aJCas
      *            the currently processed JCas
-     * @param update
-     *            overwrite existing documents with same id just update the text field?
      * @return a {@link SolrInputDocument}
      * @throws AnalysisEngineProcessException
      *             if any subclass catches an expression within this method, it should throw this
