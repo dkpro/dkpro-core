@@ -127,6 +127,13 @@ public class JdbcReader
     @ConfigurationParameter(name = PARAM_QUERY, mandatory = true)
     private String query;
 
+    /**
+     * Specifies the language.
+     */
+    public static final String PARAM_LANGUAGE = "language";
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
+    private String language;
+
     private Connection sqlConnection;
     private ResultSet resultSet;
     private int resultSetSize;
@@ -210,7 +217,11 @@ public class JdbcReader
 
         cas.setDocumentText(getStringQuietly(CAS_TEXT));
         metadata.setDocumentTitle(getStringQuietly(CAS_METADATA_TITLE));
-        metadata.setLanguage(getStringQuietly(CAS_METADATA_LANGUAGE));
+        String language = getStringQuietly(CAS_METADATA_LANGUAGE);
+        if(language == null){
+            language = this.language;
+        }
+        metadata.setLanguage(language);
 
         metadata.setDocumentId(getStringQuietly(CAS_METADATA_DOCUMENT_ID));
         metadata.setCollectionId(getStringQuietly(CAS_METADATA_COLLECTION_ID));
