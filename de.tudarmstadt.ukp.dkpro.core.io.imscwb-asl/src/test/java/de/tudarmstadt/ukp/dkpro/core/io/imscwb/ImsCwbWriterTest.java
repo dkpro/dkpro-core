@@ -28,12 +28,14 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 /**
  *
@@ -48,37 +50,71 @@ public class ImsCwbWriterTest
 	public void test1()
 		throws Exception
 	{
+	    String dump = "target/test-output/"+testContext.getTestOutputFolderName()+"/dump.txt";
+        String output = "target/test-output/"+testContext.getTestOutputFolderName()+"/output.txt";
+	    
 		CollectionReader ner = createReader(
 				NegraExportReader.class,
-				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus-sample.export",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tuebadz/corpus-sample.export",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription tag = createEngineDescription(
 				OpenNlpPosTagger.class);
 
-		AnalysisEngineDescription stem = createEngineDescription(
-				SnowballStemmer.class);
-
 		AnalysisEngineDescription tw = createEngineDescription(
 				ImsCwbWriter.class,
-				ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
-				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
-				ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" });
+				ImsCwbWriter.PARAM_TARGET_LOCATION, output,
+				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8");
 
 		AnalysisEngineDescription cdw = createEngineDescription(
 				CasDumpWriter.class,
-				CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
+				CasDumpWriter.PARAM_OUTPUT_FILE, dump);
 
-		runPipeline(ner, tag, stem, tw, cdw);
+		runPipeline(ner, tag, tw, cdw);
 
 		String reference = FileUtils.readFileToString(
-				new File("src/test/resources/reference/corpus-sample.ims"), "UTF-8");
+				new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), "UTF-8");
 		String actual = FileUtils.readFileToString(
-				new File(outputFile), "UTF-8");
+				new File(output), "UTF-8");
 		assertEquals(reference, actual);
 	}
+	
+    @Test
+    public void testAdditionalFeatures()
+        throws Exception
+    {
+        CollectionReader ner = createReader(
+                NegraExportReader.class,
+                NegraExportReader.PARAM_SOURCE_LOCATION, "src/test/resources/tuebadz/corpus-sample.export",
+                NegraExportReader.PARAM_LANGUAGE, "de",
+                NegraExportReader.PARAM_ENCODING, "UTF-8");
 
+        AnalysisEngineDescription tag = createEngineDescription(
+                OpenNlpPosTagger.class);
+
+        AnalysisEngineDescription stem = createEngineDescription(
+                SnowballStemmer.class);
+
+        AnalysisEngineDescription tw = createEngineDescription(
+                ImsCwbWriter.class,
+                ImsCwbWriter.PARAM_TARGET_LOCATION, outputFile,
+                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
+                ImsCwbWriter.PARAM_WRITE_CPOS, true,
+                ImsCwbWriter.PARAM_ADDITIONAL_FEATURES, new String[] { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem/value" });
+
+        AnalysisEngineDescription cdw = createEngineDescription(
+                CasDumpWriter.class,
+                CasDumpWriter.PARAM_OUTPUT_FILE, "target/dump.txt");
+
+        runPipeline(ner, tag, stem, tw, cdw);
+
+        String reference = FileUtils.readFileToString(
+                new File("src/test/resources/tuebadz/corpus-sample-addfeat-ref.txt"), "UTF-8");
+        String actual = FileUtils.readFileToString(
+                new File(outputFile), "UTF-8");
+        assertEquals(reference, actual);
+    }
 	@Ignore("FX8 is a file from the BNC. While available online for download, we currently do not "
 			+ "ship it due to licensing issues.")
 	@Test
@@ -131,4 +167,7 @@ public class ImsCwbWriterTest
 
 		runPipeline(ner, tag, tw);
 	}
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
