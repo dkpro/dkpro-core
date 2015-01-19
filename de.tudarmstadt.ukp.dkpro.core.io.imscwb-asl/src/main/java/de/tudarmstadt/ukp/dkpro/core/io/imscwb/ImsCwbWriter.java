@@ -123,7 +123,7 @@ public class ImsCwbWriter
 	 * to represent the part-of-speech tag.
 	 */
 	public static final String PARAM_WRITE_CPOS = "writeCPOS";
-	@ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "true")
+	@ConfigurationParameter(name = PARAM_WRITE_CPOS, mandatory = true, defaultValue = "false")
 	private boolean writeCPOS;
 
 	/**

@@ -47,7 +47,7 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
-				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
+				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]test.txt");
 
 		String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von " +
 				"September 1998 bis Mai 1999 von Konstantin C.W. Volkmann geschrieben und im Mai " +
@@ -65,7 +65,7 @@ public class ImsCwbReaderTest
 				assertEquals(firstSentence, select(jcas, Sentence.class).iterator().next()
 						.getCoveredText());
 
-				assertEquals("\"http://www.epguides.de/nikita.htm\"", DocumentMetaData.get(jcas)
+				assertEquals("http://www.epguides.de/nikita.htm", DocumentMetaData.get(jcas)
 						.getDocumentTitle());
 			}
 			i++;
@@ -82,7 +82,7 @@ public class ImsCwbReaderTest
         CollectionReaderDescription reader = createReaderDescription(
 		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
-                ImsCwbReader.PARAM_PATTERNS, "[+]*.txt",
+                ImsCwbReader.PARAM_PATTERNS, "[+]test.txt",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
 				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
 				ImsCwbReader.PARAM_READ_TOKEN, false,
