@@ -25,6 +25,7 @@ import static org.junit.Assert.fail;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
@@ -33,6 +34,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ImsCwbReaderTest
 {
@@ -44,7 +46,7 @@ public class ImsCwbReaderTest
 		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
+				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
 				ResourceCollectionReaderBase.PARAM_PATTERNS, "[+]*.txt");
 
 		String firstSentence = "Nikita ( La Femme Nikita ) Dieser Episodenf\u00FChrer wurde von " +
@@ -82,7 +84,7 @@ public class ImsCwbReaderTest
 				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky/",
                 ImsCwbReader.PARAM_PATTERNS, "[+]*.txt",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
+				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
 				ImsCwbReader.PARAM_READ_TOKEN, false,
 				ImsCwbReader.PARAM_READ_LEMMA, false,
 				ImsCwbReader.PARAM_READ_POS, false,
@@ -109,7 +111,7 @@ public class ImsCwbReaderTest
 		        ImsCwbReader.class,
 				ImsCwbReader.PARAM_SOURCE_LOCATION, "src/test/resources/wacky",
 				ImsCwbReader.PARAM_LANGUAGE, "de",
-				ImsCwbReader.PARAM_ENCODING, "ISO-8859-15",
+				ImsCwbReader.PARAM_SOURCE_ENCODING, "ISO-8859-15",
 				ImsCwbReader.PARAM_READ_TOKEN, false,
 				ImsCwbReader.PARAM_READ_LEMMA, true,
 				ImsCwbReader.PARAM_READ_POS, false,
@@ -121,4 +123,7 @@ public class ImsCwbReaderTest
 		}
         fail("no Exception!");
 	}
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
