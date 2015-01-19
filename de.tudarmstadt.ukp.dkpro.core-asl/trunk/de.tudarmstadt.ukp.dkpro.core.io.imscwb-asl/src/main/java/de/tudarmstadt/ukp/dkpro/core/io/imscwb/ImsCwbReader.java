@@ -48,6 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 
+/**
+ * Reads a tab-separated format including pseudo-XML tags.
+ */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
