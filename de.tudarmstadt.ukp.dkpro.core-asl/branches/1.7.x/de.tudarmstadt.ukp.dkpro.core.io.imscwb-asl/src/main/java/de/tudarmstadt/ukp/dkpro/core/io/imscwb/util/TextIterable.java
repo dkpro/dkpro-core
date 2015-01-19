@@ -36,7 +36,7 @@ public class TextIterable
     implements Iterable<CorpusText>, Iterator<CorpusText>
 {
 
-    private final static Pattern TITLE_PATTERN = Pattern.compile("\".+\"");
+    private final static Pattern TITLE_PATTERN = Pattern.compile("\"(.+)\"");
     private final static int BUFFER_SIZE = 100;
     private final Queue<Resource> fileQueue;
     private BufferedReader reader;
@@ -155,7 +155,7 @@ public class TextIterable
         Matcher m = TITLE_PATTERN.matcher(line);
 
         if (m.find()) {
-            return line.substring(m.start(), m.end());
+            return line.substring(m.start(1), m.end(1));
         }
         else {
             return "";

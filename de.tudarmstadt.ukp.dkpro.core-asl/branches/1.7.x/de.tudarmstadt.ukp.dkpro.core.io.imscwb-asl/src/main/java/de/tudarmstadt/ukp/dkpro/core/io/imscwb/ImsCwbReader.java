@@ -48,6 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusSentence;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.CorpusText;
 import de.tudarmstadt.ukp.dkpro.core.io.imscwb.util.TextIterable;
 
+/**
+ * Reads a tab-separated format including pseudo-XML tags.
+ */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
@@ -59,9 +62,12 @@ public class ImsCwbReader
 	/**
 	 * Character encoding of the output.
 	 */
-    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
-    @ConfigurationParameter(name=PARAM_ENCODING, mandatory=true, defaultValue="UTF-8")
+    public static final String PARAM_SOURCE_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
+    @ConfigurationParameter(name=PARAM_SOURCE_ENCODING, mandatory=true, defaultValue="UTF-8")
     private String encoding;
+
+    @Deprecated
+    public static final String PARAM_ENCODING = ComponentParameters.PARAM_SOURCE_ENCODING;
 
 	/**
 	 * Location of the mapping file for part-of-speech tags to UIMA types.

@@ -1,0 +1,41 @@
+<text id="T990507.2">
+<s>
+Seine	PPOSAT	-
+Position	NN	-
+bei	APPR	-
+der	ART	-
+Prüfgesellschaft	NN	-
+mußte	VVFIN	-
+er	PPER	-
+damals	ADV	-
+niederlegen	VVPP	-
+,	$,	-
+den	ART	-
+AWO-Posten	NN	-
+nicht	PTKNEG	-
+.	$.	-
+</s>
+<s>
+K.	NE	-
+W.	NE	-
+</s>
+</text>
+<text id="T990507.3">
+<s>
+SPD	NE	-
+/	$(	-
+CDU	NE	-
+/	$(	-
+AfB	NE	-
+für	$(	-
+Daewoo-Millionen	NN	-
+</s>
+<s>
+Aber	KON	-
+Bremerhavens	NE	-
+AfB	NE	-
+fordert	VVFIN	-
+jetzt	ADV	-
+Untersuchungsausschuß	NN	-
+</s>
+</text>
