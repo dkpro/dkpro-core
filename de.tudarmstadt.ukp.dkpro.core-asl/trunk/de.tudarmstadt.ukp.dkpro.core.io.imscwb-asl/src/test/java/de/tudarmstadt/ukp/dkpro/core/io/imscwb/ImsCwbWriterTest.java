@@ -28,12 +28,14 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.bnc.BncReader;
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.snowball.SnowballStemmer;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 /**
  *
@@ -131,4 +133,7 @@ public class ImsCwbWriterTest
 
 		runPipeline(ner, tag, tw);
 	}
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
