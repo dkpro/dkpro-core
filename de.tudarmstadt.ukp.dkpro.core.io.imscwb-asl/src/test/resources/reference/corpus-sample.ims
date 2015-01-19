@@ -1,5 +1,5 @@
 <text id="T990507.2">
-<sentence>
+<s>
 Seine	PPOSAT	PR	-	Sein
 Position	NN	NN	-	Position
 bei	APPR	PP	-	bei
@@ -14,14 +14,14 @@ den	ART	ART	-	den
 AWO-Posten	NN	NN	-	AWO-Post
 nicht	PTKNEG	O	-	nicht
 .	$.	PUNC	-	.
-</sentence>
-<sentence>
+</s>
+<s>
 K.	NE	NP	-	K.
 W.	NE	NP	-	W.
-</sentence>
+</s>
 </text>
 <text id="T990507.3">
-<sentence>
+<s>
 SPD	NE	NP	-	SPD
 /	$(	PUNC	-	/
 CDU	NE	NP	-	CDu
@@ -29,13 +29,13 @@ CDU	NE	NP	-	CDu
 AfB	NE	NP	-	AfB
 für	$(	PUNC	-	fur
 Daewoo-Millionen	NN	NN	-	Daewoo-Million
-</sentence>
-<sentence>
+</s>
+<s>
 Aber	KON	CONJ	-	Aber
 Bremerhavens	NE	NP	-	Bremerhav
 AfB	NE	NP	-	AfB
 fordert	VVFIN	V	-	fordert
 jetzt	ADV	ADV	-	jetzt
 Untersuchungsausschuß	NN	NN	-	untersuchungsausschuss
-</sentence>
+</s>
 </text>

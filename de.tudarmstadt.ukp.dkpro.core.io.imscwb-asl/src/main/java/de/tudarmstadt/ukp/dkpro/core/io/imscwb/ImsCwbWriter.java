@@ -77,7 +77,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class ImsCwbWriter
     extends JCasAnnotator_ImplBase
 {
-	public static final String E_SENTENCE = "sentence";
+	public static final String E_SENTENCE = "s";
 	public static final String E_TEXT = "text";
 	public static final String E_DOCUMENT = "document";
 	public static final String ATTR_BEGIN = "begin";
@@ -198,6 +198,10 @@ public class ImsCwbWriter
 	@ConfigurationParameter(name = PARAM_CORPUS_NAME, mandatory = true, defaultValue = "corpus")
 	private String corpusName;
 
+    public static final String PARAM_SENTENCE_TAG = "sentenceTag";
+    @ConfigurationParameter(name = PARAM_SENTENCE_TAG, mandatory = true, defaultValue = E_SENTENCE)
+    private String sentenceTag;
+
 	private static final String LS = "\n";
 	private static final String TAB = "\t";
 	private Writer bw;
@@ -266,7 +270,7 @@ public class ImsCwbWriter
 			}
 			for (Sentence sentence : select(jcas, Sentence.class)) {
 				attendChildProceess();
-				startElement(E_SENTENCE);
+				startElement(sentenceTag);
 				for (Token token : selectCovered(jcas, Token.class, sentence)) {
 					// write token
 					bw.write(escapeXml(token.getCoveredText()));
@@ -310,7 +314,7 @@ public class ImsCwbWriter
 
 					bw.write(LS);
 				}
-				endElement(E_SENTENCE);
+				endElement(sentenceTag);
 			}
 			if (writeDocumentTag) {
 				endElement(E_DOCUMENT);
@@ -444,7 +448,7 @@ public class ImsCwbWriter
 
 			{
 				cmd.add("-S");
-				cmd.add(E_SENTENCE + ":0");
+				cmd.add(sentenceTag + ":0");
 			}
 
 			getLogger().info("Spawning cwb-encode: " + join(cmd, " "));
