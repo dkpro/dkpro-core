@@ -28,9 +28,11 @@ import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.cas.impl.FSIndexRepositoryImpl;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.custommonkey.xmlunit.XMLAssert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.xml.sax.InputSource;
@@ -44,6 +46,14 @@ import eu.clarin.weblicht.wlfxb.xb.WLData;
 
 public class TcfReaderWriterTest
 {
+    @Before
+    public void setup()
+    {
+        // Workaround for change in UIMA 2.7.0 - this cannot stay as it is!!!
+        // https://code.google.com/p/dkpro-core-asl/issues/detail?id=581
+        System.setProperty(FSIndexRepositoryImpl.ALLOW_DUP_ADD_TO_INDEXES, "true");
+    }
+    
     @Test
     public void test1()
             throws Exception
