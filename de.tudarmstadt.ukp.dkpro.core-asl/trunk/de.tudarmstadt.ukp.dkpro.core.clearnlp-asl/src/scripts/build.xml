@@ -489,47 +489,38 @@
 <!--     		extension="bin">		 -->
 <!--     	</install-stub-and-upstream-file> -->
 
-		<!-- The dictionary in clearnlp consists of several files, that is why its targetLocation is empty.-->
+		<get 
+			src="http://search.maven.org/remotecontent?filepath=com/clearnlp/clearnlp-dictionary/1.0/clearnlp-dictionary-1.0.jar"
+			dest="target/download/dictionary.jar" skipexisting="true"/>
+		
+		<unjar src="target/download/dictionary.jar" dest="target/download/dictionary"/>
+		
+		<zip destfile="target/download/dictionary.zip" basedir="target/download/dictionary"/>
+		
+		<!-- The dictionary in clearnlp consists of several files, targetLocation is filled as a temporary fix.-->
 		<install-model-stub 
 		    groupId="de.tudarmstadt.ukp.dkpro.core"
 		    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
-		    version="20130715.0"
+		    version="20130715.1"
 		    tool="morph"
 		    language="en"
 		    variant="default"
 		    targetGroupId="com.clearnlp"
 		    targetVersion="1.0"
 		    targetArtifactId="clearnlp-dictionary"
-		    targetLocation=""/>
-		
-		<!-- The dictionary in clearnlp consists of several files, that is why its targetLocation is empty.-->
-		<!--
-		<install-model-stub 
-		    groupId="de.tudarmstadt.ukp.dkpro.core"
-		    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
-		    version="20130715.0"
-		    tool="segmenter"
-		    language="en"
-		    variant="default"
-		    targetGroupId="com.clearnlp"
-		    targetVersion="1.0"
-		    targetArtifactId="clearnlp-dictionary"
-		    targetLocation=""/>
-		-->
+		    targetLocation="classpath:/dictionary/english/derivation_suffix.xml"/>
 
-		<!-- The dictionary in clearnlp consists of several files, that is why its targetLocation is empty.-->
-		<!--
-		<install-model-stub 
+		<install-stub-and-upstream-file
+			file="target/download/dictionary.zip"
+			md5="94e36ea8afb9cfb76b2fba2b8846af19"
+			upstreamVersion="20130715"
+			metaDataVersion="0"
 		    groupId="de.tudarmstadt.ukp.dkpro.core"
 		    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.clearnlp"
-		    version="20130715.0"
-		    tool="lemmatizer"
+		    tool="dictionary"
 		    language="en"
 		    variant="default"
-		    targetGroupId="com.clearnlp"
-		    targetVersion="1.0"
-		    targetArtifactId="clearnlp-dictionary"
-		    targetLocation=""/>
-		-->
+			extension="bin"/>
+
 </target>
 </project>

@@ -64,7 +64,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  */
 @TypeCapability(
     inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, 
+        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" },
     outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
 public class ClearNlpPosTagger
     extends JCasAnnotator_ImplBase
@@ -76,19 +76,34 @@ public class ClearNlpPosTagger
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false, defaultValue="en")
     protected String language;
 
-    /**
-     * Override the default variant used to locate the model.
-     */
-    public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
-    protected String variant;
 
     /**
-     * Load the model from this location instead of locating the model automatically.
+     * Override the default variant used to locate the morph model.
      */
-    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
-    protected String modelLocation;
+    public static final String PARAM_MORPH_VARIANT = "morphVariant";
+    @ConfigurationParameter(name = PARAM_MORPH_VARIANT, mandatory = false)
+    protected String morphVariant;
+
+    /**
+     * Load the model from this location instead of locating the morph model automatically.
+     */
+    public static final String PARAM_MORPH_MODEL_LOCATION = "morphModelLocation";
+    @ConfigurationParameter(name = PARAM_MORPH_MODEL_LOCATION, mandatory = false)
+    protected String morphModelLocation;
+
+    /**
+     * Override the default variant used to locate the pos-tagging model.
+     */
+    public static final String PARAM_POS_VARIANT = "posVariant";
+    @ConfigurationParameter(name = PARAM_POS_VARIANT, mandatory = false)
+    protected String posVariant;
+
+    /**
+     * Load the model from this location instead of locating the pos-tagging model automatically.
+     */
+    public static final String PARAM_POS_MODEL_LOCATION = "posModelLocation";
+    @ConfigurationParameter(name = PARAM_POS_MODEL_LOCATION, mandatory = false)
+    protected String posModelLocation;
 
     /**
      * Load the part-of-speech tag to UIMA type mapping from this location instead of locating the
@@ -113,7 +128,8 @@ public class ClearNlpPosTagger
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
-    private CasConfigurableProviderBase<AbstractPOSTagger> modelProvider;
+    private CasConfigurableProviderBase morphModelProvider;
+    private CasConfigurableProviderBase<AbstractPOSTagger> posTaggingModelProvider;
     private MappingProvider posMappingProvider;
 
     @Override
@@ -121,8 +137,25 @@ public class ClearNlpPosTagger
         throws ResourceInitializationException
     {
         super.initialize(aContext);
-        
-        modelProvider = new ModelProviderBase<AbstractPOSTagger>()
+
+        morphModelProvider = new ModelProviderBase()
+        {
+            {
+                setContextObject(ClearNlpPosTagger.this);
+
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-morph-${language}-${variant}");
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/morph-${language}-${variant}.properties");
+                setDefault(VARIANT, "default");
+
+                setOverride(LOCATION, morphModelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, morphVariant);
+            }
+        };
+
+
+        posTaggingModelProvider = new ModelProviderBase<AbstractPOSTagger>()
         {
             {
                 setContextObject(ClearNlpPosTagger.this);
@@ -132,16 +165,16 @@ public class ClearNlpPosTagger
                         "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
                 setDefault(VARIANT, "ontonotes");
 
-                setOverride(LOCATION, modelLocation);
+                setOverride(LOCATION, posModelLocation);
                 setOverride(LANGUAGE, language);
-                setOverride(VARIANT, variant);
+                setOverride(VARIANT, posVariant);
             }
 
             @Override
             protected AbstractPOSTagger produceResource(InputStream aStream)
                 throws Exception
             {
-                
+
                 BufferedInputStream bis = null;
                 ObjectInputStream ois = null;
                 GZIPInputStream gis = null;
@@ -182,7 +215,7 @@ public class ClearNlpPosTagger
         };
 
         posMappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
-                language, modelProvider);
+                language, posTaggingModelProvider);
     }
 
     @Override
@@ -190,8 +223,8 @@ public class ClearNlpPosTagger
         throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-
-        modelProvider.configure(cas);
+        morphModelProvider.configure(cas);
+        posTaggingModelProvider.configure(cas);
         posMappingProvider.configure(cas);
 
         for (Sentence sentence : select(aJCas, Sentence.class)) {
@@ -200,7 +233,7 @@ public class ClearNlpPosTagger
 
             DEPTree tree = NLPGetter.toDEPTree(tokenTexts);
 
-            AbstractComponent tagger = modelProvider.getResource();
+            AbstractComponent tagger = posTaggingModelProvider.getResource();
             tagger.process(tree);
 
             String[] posTags = tree.getPOSTags();
@@ -216,5 +249,5 @@ public class ClearNlpPosTagger
                 i++;
             }
         }
-    }    
+    }
 }

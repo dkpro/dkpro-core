@@ -86,6 +86,11 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-dictionary-en-default</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -159,8 +164,13 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-dictionary-en-default</artifactId>
 				<version>20130715.0</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.clearnlp-model-morph-en-default</artifactId>
+				<version>20130715.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
