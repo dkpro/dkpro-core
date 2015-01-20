@@ -137,7 +137,9 @@ public class TeiReaderTest
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-        		ImsCwbWriter.PARAM_TARGET_LOCATION, output);
+        		ImsCwbWriter.PARAM_TARGET_LOCATION, output,
+        		ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence",
+        		ImsCwbWriter.PARAM_WRITE_CPOS, true);
 
         SimplePipeline.runPipeline(reader, writer);
 
@@ -160,7 +162,9 @@ public class TeiReaderTest
                 TeiReader.PARAM_PATTERNS, new String[] { "[+]*.xml.gz" });
 
         AnalysisEngineDescription writer = createEngineDescription(ImsCwbWriter.class,
-                ImsCwbWriter.PARAM_TARGET_LOCATION, output);
+                ImsCwbWriter.PARAM_TARGET_LOCATION, output,
+                ImsCwbWriter.PARAM_SENTENCE_TAG, "sentence",
+                ImsCwbWriter.PARAM_WRITE_CPOS, true);
 
         SimplePipeline.runPipeline(reader, writer);
 
