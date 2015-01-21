@@ -47,7 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  *
  *
  */
-public class SolrWriter
+public class SolrWriter_ImplBase
     extends JCasConsumer_ImplBase
 {
     /**
