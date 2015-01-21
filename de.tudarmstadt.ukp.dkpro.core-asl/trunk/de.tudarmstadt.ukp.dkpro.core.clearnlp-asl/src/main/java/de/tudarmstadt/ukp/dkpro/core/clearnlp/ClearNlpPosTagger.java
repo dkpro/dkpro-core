@@ -25,12 +25,15 @@ import static org.apache.uima.fit.util.JCasUtil.toText;
 import static org.apache.uima.util.Level.INFO;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -43,7 +46,10 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import com.clearnlp.classification.model.StringModel;
 import com.clearnlp.component.AbstractComponent;
+import com.clearnlp.component.morph.EnglishMPAnalyzer;
 import com.clearnlp.component.pos.AbstractPOSTagger;
+import com.clearnlp.component.pos.DefaultPOSTagger;
+import com.clearnlp.component.pos.EnglishPOSTagger;
 import com.clearnlp.dependency.DEPTree;
 import com.clearnlp.nlp.NLPGetter;
 
@@ -73,23 +79,23 @@ public class ClearNlpPosTagger
      * Use this language instead of the document language to resolve the model.
      */
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false, defaultValue="en")
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     protected String language;
 
 
     /**
-     * Override the default variant used to locate the morph model.
+     * Override the default variant used to locate the dictionary.
      */
-    public static final String PARAM_MORPH_VARIANT = "morphVariant";
-    @ConfigurationParameter(name = PARAM_MORPH_VARIANT, mandatory = false)
-    protected String morphVariant;
+    public static final String PARAM_DICT_VARIANT = "dictVariant";
+    @ConfigurationParameter(name = PARAM_DICT_VARIANT, mandatory = false)
+    protected String dictVariant;
 
     /**
-     * Load the model from this location instead of locating the morph model automatically.
+     * Load the dictionary from this location instead of locating the dictionary automatically.
      */
-    public static final String PARAM_MORPH_MODEL_LOCATION = "morphModelLocation";
-    @ConfigurationParameter(name = PARAM_MORPH_MODEL_LOCATION, mandatory = false)
-    protected String morphModelLocation;
+    public static final String PARAM_DICT_LOCATION = "dictLocation";
+    @ConfigurationParameter(name = PARAM_DICT_LOCATION, mandatory = false)
+    protected String dictLocation;
 
     /**
      * Override the default variant used to locate the pos-tagging model.
@@ -128,7 +134,7 @@ public class ClearNlpPosTagger
     @ConfigurationParameter(name = PARAM_PRINT_TAGSET, mandatory = true, defaultValue = "false")
     protected boolean printTagSet;
 
-    private CasConfigurableProviderBase morphModelProvider;
+    private CasConfigurableProviderBase<InputStream> dictModelProvider;
     private CasConfigurableProviderBase<AbstractPOSTagger> posTaggingModelProvider;
     private MappingProvider posMappingProvider;
 
@@ -138,19 +144,30 @@ public class ClearNlpPosTagger
     {
         super.initialize(aContext);
 
-        morphModelProvider = new ModelProviderBase()
+        dictModelProvider = new ModelProviderBase<InputStream>()
         {
             {
                 setContextObject(ClearNlpPosTagger.this);
 
-                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-morph-${language}-${variant}");
+                setDefault(ARTIFACT_ID, "${groupId}.clearnlp-model-dictionary-${language}-${variant}");
                 setDefault(LOCATION,
-                        "classpath:/${package}/lib/morph-${language}-${variant}.properties");
+                        "classpath:/${package}/lib/dictionary-${language}-${variant}.properties");
                 setDefault(VARIANT, "default");
 
-                setOverride(LOCATION, morphModelLocation);
+                setOverride(LOCATION, dictLocation);
                 setOverride(LANGUAGE, language);
-                setOverride(VARIANT, morphVariant);
+                setOverride(VARIANT, dictVariant);
+            }
+
+            @Override
+            protected InputStream produceResource(InputStream aStream)
+                throws Exception
+            {
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                IOUtils.copy(aStream, os);
+                byte[] array = os.toByteArray();
+                InputStream is = new ByteArrayInputStream(array);
+                return is;
             }
         };
 
@@ -185,8 +202,13 @@ public class ClearNlpPosTagger
                     bis = new BufferedInputStream(gis);
                     ois = new ObjectInputStream(bis);
 
-                    AbstractPOSTagger tagger = NLPGetter.getPOSTagger(ois,
-                            getAggregatedProperties().getProperty(LANGUAGE));
+                    String language = getAggregatedProperties().getProperty(LANGUAGE);
+                    AbstractPOSTagger tagger;
+                    if(language.equals("en")){
+                        tagger = new DkproPosTagger(ois);
+                    }else{
+                        tagger = new DefaultPOSTagger(ois);
+                    }
 
                     SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
                             .getProperty(("pos.tagset")));
@@ -223,7 +245,7 @@ public class ClearNlpPosTagger
         throws AnalysisEngineProcessException
     {
         CAS cas = aJCas.getCas();
-        morphModelProvider.configure(cas);
+        dictModelProvider.configure(cas);
         posTaggingModelProvider.configure(cas);
         posMappingProvider.configure(cas);
 
@@ -249,5 +271,20 @@ public class ClearNlpPosTagger
                 i++;
             }
         }
+    }
+
+    private class DkproPosTagger extends EnglishPOSTagger{
+
+        public DkproPosTagger(ObjectInputStream in)
+        {
+            super(in);
+        }
+
+        @Override
+        protected void initMorphologicalAnalyzer()
+        {
+            mp_analyzer = new EnglishMPAnalyzer(dictModelProvider.getResource());
+        }
+
     }
 }
