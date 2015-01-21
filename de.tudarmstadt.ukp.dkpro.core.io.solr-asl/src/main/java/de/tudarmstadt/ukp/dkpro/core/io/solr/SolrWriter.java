@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.apache.commons.collections4.map.SingletonMap;
 import org.apache.solr.client.solrj.SolrServer;
@@ -57,7 +56,7 @@ public class SolrWriter
      */
     public static final String PARAM_UPDATE = "update";
     @ConfigurationParameter(name = PARAM_UPDATE, mandatory = true, defaultValue = "true")
-    protected static boolean update;
+    private boolean update;
 
     /**
      * Solr server URL string in the form {@code <prot>://<host>:<port>/<path>}, e.g.
@@ -65,52 +64,52 @@ public class SolrWriter
      */
     public static final String PARAM_TARGET_LOCATION = ComponentParameters.PARAM_TARGET_LOCATION;
     @ConfigurationParameter(name = PARAM_TARGET_LOCATION, mandatory = true)
-    String targetLocation;
+    private String targetLocation;
 
     /**
      * The buffer size before the documents are sent to the server (default: 10000).
      */
-    public static final String PARAM_SOLR_QUEUE_SIZE = "solrQueueSize";
-    @ConfigurationParameter(name = PARAM_SOLR_QUEUE_SIZE, mandatory = true, defaultValue = "10000")
-    int solrQueueSize;
+    public static final String PARAM_QUEUE_SIZE = "queueSize";
+    @ConfigurationParameter(name = PARAM_QUEUE_SIZE, mandatory = true, defaultValue = "10000")
+    private int queueSize;
 
     /**
      * The number of background threads used to empty the queue. Default: 1.
      */
-    public static final String PARAM_SOLR_THREADS = "solrThreads";
-    @ConfigurationParameter(name = PARAM_SOLR_THREADS, mandatory = true, defaultValue = "1")
-    short solrThreads;
+    public static final String PARAM_THREADS = "threads";
+    @ConfigurationParameter(name = PARAM_THREADS, mandatory = true, defaultValue = "1")
+    private short threads;
 
     /**
      * When committing to the index, i.e. when all documents are processed, block until index
      * changes are flushed to disk? Default: true.
      */
-    public static final String PARAM_SOLR_WAIT_FLUSH = "solrWaitFlush";
-    @ConfigurationParameter(name = PARAM_SOLR_WAIT_FLUSH, mandatory = true, defaultValue = "true")
-    boolean solrWaitFlush;
+    public static final String PARAM_WAIT_FLUSH = "waitFlush";
+    @ConfigurationParameter(name = PARAM_WAIT_FLUSH, mandatory = true, defaultValue = "true")
+    private boolean waitFlush;
 
     /**
      * When committing to the index, i.e. when all documents are processed, block until a new
      * searcher is opened and registered as the main query searcher, making the changes visible?
      * Default: true.
      */
-    public static final String PARAM_SOLR_WAIT_SEARCHER = "solrWaitSearcher";
-    @ConfigurationParameter(name = PARAM_SOLR_WAIT_SEARCHER, mandatory = true, defaultValue = "true")
-    boolean solrWaitSearcher;
+    public static final String PARAM_WAIT_SEARCHER = "waitSearcher";
+    @ConfigurationParameter(name = PARAM_WAIT_SEARCHER, mandatory = true, defaultValue = "true")
+    private boolean waitSearcher;
 
     /**
      * The name of the text field in the Solr schema (default: "text").
      */
-    public static final String PARAM_SOLR_TEXT_FIELD = "solrTextField";
-    @ConfigurationParameter(name = PARAM_SOLR_TEXT_FIELD, mandatory = true, defaultValue = "text")
-    protected String solrTextField;
+    public static final String PARAM_TEXT_FIELD = "textField";
+    @ConfigurationParameter(name = PARAM_TEXT_FIELD, mandatory = true, defaultValue = "text")
+    private String textField;
 
     /**
      * The name of the id field in the Solr schema (default: "id").
      */
-    public static final String PARAM_SOLR_ID_FIELD = "solrIdField";
-    @ConfigurationParameter(name = PARAM_SOLR_ID_FIELD, mandatory = true, defaultValue = "id")
-    protected String solrIdField;
+    public static final String PARAM_ID_FIELD = "solrIdField";
+    @ConfigurationParameter(name = PARAM_ID_FIELD, mandatory = true, defaultValue = "id")
+    private String idField;
 
     private SolrServer solrServer;
 
@@ -121,8 +120,8 @@ public class SolrWriter
         super.initialize(context);
         getLogger().info(
                 String.format("Using Solr server at %s.%nQueue size:\t%d\tThreads:%d%n",
-                        targetLocation, solrQueueSize, solrThreads));
-        solrServer = new ConcurrentUpdateSolrServer(targetLocation, solrQueueSize, solrThreads);
+                        targetLocation, queueSize, threads));
+        solrServer = new ConcurrentUpdateSolrServer(targetLocation, queueSize, threads);
     };
 
     @Override
@@ -144,7 +143,7 @@ public class SolrWriter
         super.collectionProcessComplete();
 
         try {
-            UpdateResponse response = solrServer.commit(solrWaitFlush, solrWaitSearcher);
+            UpdateResponse response = solrServer.commit(waitFlush, waitSearcher);
             getLogger().info(
                     String.format("Solr server at '%s' responded: %s",
                             targetLocation, response.toString()));
@@ -173,17 +172,44 @@ public class SolrWriter
     {
         SolrInputDocument document = new SolrInputDocument();
 
-        document.addField(solrIdField, DocumentMetaData.get(aJCas).getDocumentId());
+        document.addField(getIdField(), DocumentMetaData.get(aJCas).getDocumentId());
 
         /* add text */
-        if (update) {
-            Map<String, String> partialUpdate = new SingletonMap<>("set", aJCas.getDocumentText());
-            document.addField(solrTextField, partialUpdate);
+        if (isUpdate()) {
+            document.addField(getTextField(), new SingletonMap<>("set", aJCas.getDocumentText()));
         }
         else {
-            document.addField(solrTextField, aJCas.getDocumentText());
+            document.addField(getTextField(), aJCas.getDocumentText());
         }
         return document;
+    }
+
+    /**
+     * Perform updates if added documents already exist?
+     *
+     * @return true if updates are to be performed rather than overwriting existing documents
+     */
+    public boolean isUpdate()
+    {
+        return update;
+    }
+
+    /**
+     *
+     * @return the name of the Solr text field (e.g. "text")
+     */
+    public String getTextField()
+    {
+        return textField;
+    }
+
+    /**
+     *
+     * @return the name of the Solr ID field (e.g. "id")
+     */
+    public String getIdField()
+    {
+        return idField;
     }
 
 }
