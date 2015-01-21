@@ -28,7 +28,6 @@ import java.io.InputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.cas.impl.FSIndexRepositoryImpl;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.component.CasDumpWriter;
 import org.custommonkey.xmlunit.XMLAssert;
@@ -49,10 +48,6 @@ public class TcfReaderWriterTest
     public void test1()
             throws Exception
     {
-        // Workaround for change in UIMA 2.7.0 - this cannot stay as it is!!!
-        // https://code.google.com/p/dkpro-core-asl/issues/detail?id=581
-        System.setProperty(FSIndexRepositoryImpl.ALLOW_DUP_ADD_TO_INDEXES, "true");
-        
         testOneWay("tcf-after.xml", "tcf-after-expected.xml");
     }
 
@@ -60,10 +55,6 @@ public class TcfReaderWriterTest
     public void testWithCmdMetadata()
             throws Exception
     {
-        // Workaround for change in UIMA 2.7.0 - this cannot stay as it is!!!
-        // https://code.google.com/p/dkpro-core-asl/issues/detail?id=581
-        System.setProperty(FSIndexRepositoryImpl.ALLOW_DUP_ADD_TO_INDEXES, "true");
-        
         testOneWay("tcf04-karin-wl.xml", "tcf04-karin-wl_expected.xml");
     }
 
@@ -128,10 +119,6 @@ public class TcfReaderWriterTest
     public void testRoundtrip()
         throws Exception
     {
-        // Workaround for change in UIMA 2.7.0 - this cannot stay as it is!!!
-        // https://code.google.com/p/dkpro-core-asl/issues/detail?id=581
-        System.setProperty(FSIndexRepositoryImpl.ALLOW_DUP_ADD_TO_INDEXES, "true");
-        
         CollectionReaderDescription reader = createReaderDescription(TcfReader.class, 
                 TcfReader.PARAM_SOURCE_LOCATION, "src/test/resources/",
                 TcfReader.PARAM_PATTERNS, "wlfxb.xml");
