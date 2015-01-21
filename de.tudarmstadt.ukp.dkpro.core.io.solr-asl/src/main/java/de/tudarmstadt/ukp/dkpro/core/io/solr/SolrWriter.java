@@ -57,7 +57,7 @@ public class SolrWriter
      */
     public static final String PARAM_UPDATE = "update";
     @ConfigurationParameter(name = PARAM_UPDATE, mandatory = true, defaultValue = "true")
-    static boolean update;
+    protected static boolean update;
 
     /**
      * Solr server URL string in the form {@code <prot>://<host>:<port>/<path>}, e.g.
@@ -103,14 +103,14 @@ public class SolrWriter
      */
     public static final String PARAM_SOLR_TEXT_FIELD = "solrTextField";
     @ConfigurationParameter(name = PARAM_SOLR_TEXT_FIELD, mandatory = true, defaultValue = "text")
-    String solrTextField;
+    protected String solrTextField;
 
     /**
      * The name of the id field in the Solr schema (default: "id").
      */
     public static final String PARAM_SOLR_ID_FIELD = "solrIdField";
     @ConfigurationParameter(name = PARAM_SOLR_ID_FIELD, mandatory = true, defaultValue = "id")
-    String solrIdField;
+    protected String solrIdField;
 
     private SolrServer solrServer;
 
@@ -119,7 +119,9 @@ public class SolrWriter
         throws ResourceInitializationException
     {
         super.initialize(context);
-
+        getLogger().info(
+                String.format("Using Solr server at %s.%nQueue size:\t%d\tThreads:%d%n",
+                        targetLocation, solrQueueSize, solrThreads));
         solrServer = new ConcurrentUpdateSolrServer(targetLocation, solrQueueSize, solrThreads);
     };
 
