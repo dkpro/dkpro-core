@@ -78,7 +78,7 @@ public class SolrWriter_ImplBase
      */
     public static final String PARAM_THREADS = "threads";
     @ConfigurationParameter(name = PARAM_THREADS, mandatory = true, defaultValue = "1")
-    private short threads;
+    private int threads;
 
     /**
      * When committing to the index, i.e. when all documents are processed, block until index
