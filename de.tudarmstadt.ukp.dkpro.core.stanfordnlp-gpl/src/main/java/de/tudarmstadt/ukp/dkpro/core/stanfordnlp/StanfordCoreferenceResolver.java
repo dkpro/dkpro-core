@@ -57,8 +57,11 @@ import edu.stanford.nlp.dcoref.SieveCoreferenceSystem;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TokensAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
+import edu.stanford.nlp.ling.IndexedWord;
 import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.ParserAnnotatorUtils;
+import edu.stanford.nlp.semgraph.SemanticGraph;
+import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
@@ -265,7 +268,14 @@ public class StanfordCoreferenceResolver
             GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory(
                     tlp.punctuationWordRejectFilter(), tlp.typedDependencyHeadFinder());
             ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence, treeCopy);
-
+            
+            // https://code.google.com/p/dkpro-core-asl/issues/detail?id=582
+            SemanticGraph deps = sentence
+                    .get(SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
+            for (IndexedWord vertex : deps.vertexSet()) {
+                 vertex.setWord(vertex.value());
+            }
+            
             // merge the new CoreLabels with the tree leaves
             MentionExtractor.mergeLabels(treeCopy, tokens);
             MentionExtractor.initializeUtterance(tokens);
