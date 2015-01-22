@@ -21,18 +21,25 @@ package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.assertFalse;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Filter;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import edu.stanford.nlp.dcoref.Constants;
 
 /**
@@ -46,26 +53,76 @@ public class StanfordCoreferenceResolverTest
 	{
 	    JCas jcas = runTest("en", "John bought a car. He is very happy with it.");
 
-		String[][] ref = new String[][] {
-		        new String[] { "John", "He" },
-		        new String[] { "a car", "it" }
-		};
+		String[][] ref = new String[][] { 
+		        { "John", "He" }, 
+		        { "a car", "it" } };
 		
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
 	}
 
-   @Test
+	// https://code.google.com/p/dkpro-core-asl/issues/detail?id=582
+    //	Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
+    //	WARNING: Cannot find node in dependency for word rally
+    //	Jan 22, 2015 5:11:54 PM edu.stanford.nlp.dcoref.Document findSpeaker
+    //	WARNING: Cannot find node in dependency for word told
+    @Test
+    public void test2()
+        throws Exception
+    {
+        final List<LogRecord> records = new ArrayList<LogRecord>();
+        ConsoleHandler handler = (ConsoleHandler) LogManager.getLogManager().getLogger("")
+                .getHandlers()[0];
+        java.util.logging.Level oldLevel = handler.getLevel();
+        handler.setLevel(Level.ALL);
+        handler.setFilter(new Filter()
+        {
+            @Override
+            public boolean isLoggable(LogRecord record)
+            {
+                records.add(record);
+                return false;
+            }
+        });
+
+        try {
+            JCas jcas = runTest("en",
+                    "\" We cannot forgive this war , \" Miyako Fuji , 20 , one of the rally 's "
+                            + "organisers told Jiji news agency .");
+
+            String[][] ref = new String[][] { 
+                    { "Jiji" }, 
+                    { "We" },
+                    { "this war" },
+                    { "Miyako Fuji , 20 , one of the rally 's organisers" },
+                    { "Miyako Fuji" }, 
+                    { "one of the rally 's organisers" },
+                    { "Jiji news agency" } };
+
+            for (LogRecord r : records) {
+                assertFalse(r.getMessage().contains("Cannot find node in dependency for word"));
+            }
+
+            AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
+        }
+        finally {
+            if (oldLevel != null) {
+                handler.setLevel(oldLevel);
+                handler.setFilter(null);
+            }
+        }
+    }
+
+    @Test
     public void testDictionarySieve()
         throws Exception
     {
         JCas jcas = runTest("en", "John joined Google in 2012. He is doing research for the company.",
                 Constants.SIEVEPASSES + ",CorefDictionaryMatch");
 
-        String[][] ref = new String[][] {
-                new String[] { "John", "He" },
-                new String[] { "Google", "the company" },
-                new String[] { "2012" }
-        };
+        String[][] ref = new String[][] { 
+                { "John", "He" }, 
+                { "Google", "the company" },
+                { "2012" } };
         
         AssertAnnotations.assertCoreference(ref, select(jcas, CoreferenceChain.class));
     }
@@ -77,10 +134,9 @@ public class StanfordCoreferenceResolverTest
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
         String[][] ref = new String[][] {
-                new String[] { "'", "'s", "he" },
-                new String[] { "I" },
-                new String[] { "the Don'" }
-        };
+                { "'", "'s", "he" },
+                { "I" },
+                { "the Don'" } };
 
         String[] pennTree = new String[] { 
                 "(ROOT (S (NP (POS ')) (VP (VBD Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
@@ -104,25 +160,24 @@ public class StanfordCoreferenceResolverTest
                 "Act of 2011; and the American Taxpayer Relief Act of 2012.");
 
         String[][] ref = new String[][] {
-                new String[] { "Other major domestic initiatives in his presidency" },
-                new String[] { "his presidency" },
-                new String[] { "his" },
-                new String[] { "the Patient Protection and Affordable Care Act, often referred to as \"Obamacare\"; the Dodd–Frank Wall Street Reform and Consumer Protection Act; the Don't Ask" },
-                new String[] { "the Patient Protection and Affordable Care Act" },
-                new String[] { "the Patient Protection" },
-                new String[] { "Affordable Care Act" },
-                new String[] { "\"Obamacare\"; the Dodd–Frank Wall Street Reform and Consumer Protection Act;" },
-                new String[] { "the Dodd" },
-                new String[] { "Frank Wall Street Reform and Consumer Protection Act" },
-                new String[] { "Frank Wall Street Reform" },
-                new String[] { "Consumer Protection Act" },
-                new String[] { "Repeal Act of 2010; the Budget Control Act of 2011; and the American Taxpayer Relief Act of 2012" },
-                new String[] { "2010" },
-                new String[] { "the Budget Control Act of 2011" },
-                new String[] { "the American Taxpayer Relief Act of 2012" },
-                new String[] { "2011" },
-                new String[] { "2012" },
-        };
+                { "Other major domestic initiatives in his presidency" },
+                { "his presidency" },
+                { "his" },
+                { "the Patient Protection and Affordable Care Act, often referred to as \"Obamacare\"; the Dodd–Frank Wall Street Reform and Consumer Protection Act; the Don't Ask" },
+                { "the Patient Protection and Affordable Care Act" },
+                { "the Patient Protection" },
+                { "Affordable Care Act" },
+                { "\"Obamacare\"; the Dodd–Frank Wall Street Reform and Consumer Protection Act;" },
+                { "the Dodd" },
+                { "Frank Wall Street Reform and Consumer Protection Act" },
+                { "Frank Wall Street Reform" },
+                { "Consumer Protection Act" },
+                { "Repeal Act of 2010; the Budget Control Act of 2011; and the American Taxpayer Relief Act of 2012" },
+                { "2010" },
+                { "the Budget Control Act of 2011" },
+                { "the American Taxpayer Relief Act of 2012" },
+                { "2011" },
+                { "2012" } };
 
         String[] pennTree = new String[] { 
             "(ROOT (S (NP (NP (JJ Other) (JJ major) (JJ domestic) (NNS initiatives)) (PP (IN in) "
@@ -177,17 +232,5 @@ public class StanfordCoreferenceResolverTest
     }
 
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
