@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
 import java.io.IOException;
 
-import org.apache.commons.collections4.map.SingletonMap;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrServer;
@@ -32,7 +31,6 @@ import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 
 /**
@@ -47,7 +45,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  *
  *
  */
-public class SolrWriter_ImplBase
+public abstract class SolrWriter_ImplBase
     extends JCasConsumer_ImplBase
 {
     /**
@@ -119,7 +117,7 @@ public class SolrWriter_ImplBase
     {
         super.initialize(context);
         getLogger().info(
-                String.format("Using Solr server at %s.%nQueue size:\t%d\tThreads:%d%n",
+                String.format("Using Solr server at %s.%nQueue size:\t%d\tThreads: %d%n",
                         targetLocation, queueSize, threads));
         solrServer = new ConcurrentUpdateSolrServer(targetLocation, queueSize, threads);
     };
@@ -155,41 +153,11 @@ public class SolrWriter_ImplBase
     };
 
     /**
-     * A simple implementation of a SolrInputDocument generation method. It extracts the document id
-     * from the JCas metadata and the document text.
-     * <p>
-     * This method can and probably should be overwritten by a more specific SolrWriter class.
-     *
-     * @param aJCas
-     *            the currently processed JCas
-     * @return a {@link SolrInputDocument}
-     * @throws AnalysisEngineProcessException
-     *             if any subclass catches an expression within this method, it should throw this
-     *             exception type only
-     */
-    protected SolrInputDocument generateSolrDocument(JCas aJCas)
-        throws AnalysisEngineProcessException
-    {
-        SolrInputDocument document = new SolrInputDocument();
-
-        document.addField(getIdField(), DocumentMetaData.get(aJCas).getDocumentId());
-
-        /* add text */
-        if (isUpdate()) {
-            document.addField(getTextField(), new SingletonMap<>("set", aJCas.getDocumentText()));
-        }
-        else {
-            document.addField(getTextField(), aJCas.getDocumentText());
-        }
-        return document;
-    }
-
-    /**
      * Perform updates if added documents already exist?
      *
      * @return true if updates are to be performed rather than overwriting existing documents
      */
-    public boolean isUpdate()
+    public boolean update()
     {
         return update;
     }
@@ -211,5 +179,8 @@ public class SolrWriter_ImplBase
     {
         return idField;
     }
+
+    abstract protected SolrInputDocument generateSolrDocument(JCas aJCas)
+        throws AnalysisEngineProcessException;
 
 }
