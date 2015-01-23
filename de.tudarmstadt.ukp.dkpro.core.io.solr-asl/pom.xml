@@ -47,6 +47,11 @@
   			de.tudarmstadt.ukp.dkpro.core.api.parameter-asl
   		</artifactId>
   	</dependency>
+  	<dependency>
+  	 <groupId>junit</groupId>
+  	 <artifactId>junit</artifactId>
+  	 <scope>test</scope>
+  	</dependency>
   </dependencies>
   <dependencyManagement>
   	<dependencies>
