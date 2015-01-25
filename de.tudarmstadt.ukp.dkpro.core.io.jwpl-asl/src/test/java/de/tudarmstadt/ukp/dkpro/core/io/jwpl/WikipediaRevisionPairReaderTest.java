@@ -23,14 +23,15 @@ import static org.junit.Assert.assertNotNull;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.jcas.JCas;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 
+@Ignore("Relies on non-public server")
 public class WikipediaRevisionPairReaderTest
 {
-
     // FIXME currently there is no test database to test revisions
     @Test
 	public void wikipediaRevisionReaderTest()
