@@ -25,16 +25,16 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.JCasIterable;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.WikipediaLink;
 import de.tudarmstadt.ukp.wikipedia.api.WikiConstants.Language;
 import de.tudarmstadt.ukp.wikipedia.parser.Link;
 
+@Ignore("Relies on non-public server")
 public class WikipediaLinkReaderTest
 {
-
-
 	@Test
 	public void wikipediaReaderTest()
 		throws Exception
