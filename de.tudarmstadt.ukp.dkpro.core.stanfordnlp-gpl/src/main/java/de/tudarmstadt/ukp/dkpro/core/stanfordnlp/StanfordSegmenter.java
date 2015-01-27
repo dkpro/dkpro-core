@@ -28,8 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
@@ -47,6 +49,7 @@ import edu.stanford.nlp.process.PTBEscapingProcessor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.Tokenizer;
 import edu.stanford.nlp.process.WordToSentenceProcessor;
+import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 
 /**
  * @author Richard Eckart de Castilho
@@ -79,6 +82,82 @@ extends SegmenterBase
 //    	languagePacks.put("de", new NegraPennLanguagePack());
     }
 
+    /**
+     * The set of boundary tokens. If null, use default.
+     * 
+     * @see WordToSentenceProcessor#WordToSentenceProcessor
+     */
+    public static final String PARAM_BOUNDARY_TOKEN_REGEX = "boundaryTokenRegex";
+    @ConfigurationParameter(name = PARAM_BOUNDARY_TOKEN_REGEX, mandatory = false, defaultValue = WordToSentenceProcessor.DEFAULT_BOUNDARY_REGEX)
+    private String boundaryTokenRegex;
+
+    /**
+     * This is a Set of String that are matched with .equals() which are allowed to be tacked onto
+     * the end of a sentence after a sentence boundary token, for example ")".
+     * 
+     * @see WordToSentenceProcessor#DEFAULT_BOUNDARY_FOLLOWERS
+     */
+    public static final String PARAM_BOUNDARY_FOLLOWERS = "boundaryFollowers";
+    @ConfigurationParameter(name = PARAM_BOUNDARY_FOLLOWERS, mandatory = false, defaultValue = {
+            ")", "]", "}", "\"", "'", "''", "\u2019", "\u201D", "-RRB-", "-RSB-", "-RCB-", ")",
+            "]", "}" })
+    private Set<String> boundaryFollowers;
+
+    /**
+     * These are elements like "p" or "sent", which will be wrapped into regex for approximate XML
+     * matching. They will be deleted in the output, and will always trigger a sentence boundary.
+     */
+    public static final String PARAM_XML_BREAK_ELEMENTS_TO_DISCARD = "xmlBreakElementsToDiscard";
+    @ConfigurationParameter(name = PARAM_XML_BREAK_ELEMENTS_TO_DISCARD, mandatory = false)
+    private Set<String> xmlBreakElementsToDiscard;
+
+    /**
+     * The set of regex for sentence boundary tokens that should be discarded.
+     * 
+     * @see WordToSentenceProcessor#DEFAULT_SENTENCE_BOUNDARIES_TO_DISCARD
+     */
+    public static final String PARAM_BOUNDARIES_TO_DISCARD = "boundaryToDiscard";
+    @ConfigurationParameter(name = PARAM_BOUNDARIES_TO_DISCARD, mandatory = false, defaultValue = {
+            "\n", "*NL*" })
+    private Set<String> boundariesToDiscard;
+
+    /**
+     * A regular expression for element names containing a sentence region. Only tokens in such
+     * elements will be included in sentences. The start and end tags themselves are not included in
+     * the sentence.
+     */
+    public static final String PARAM_REGION_ELEMENT_REGEX = "regionElementRegex";
+    @ConfigurationParameter(name = PARAM_REGION_ELEMENT_REGEX, mandatory = false)
+    private String regionElementRegex; 
+
+    /**
+     * Strategy for treating newlines as paragraph breaks.
+     */
+    public static final String PARAM_NEWLINE_IS_SENTENCE_BREAK = "newlineIsSentenceBreak";
+    @ConfigurationParameter(name = PARAM_NEWLINE_IS_SENTENCE_BREAK, mandatory = false, defaultValue="TWO_CONSECUTIVE")
+    private NewlineIsSentenceBreak newlineIsSentenceBreak;
+
+    /**
+     * The set of regex for sentence boundary tokens that should be discarded.
+     */
+    public static final String PARAM_TOKEN_REGEXES_TO_DISCARD = "tokenRegexesToDiscard";
+    @ConfigurationParameter(name = PARAM_TOKEN_REGEXES_TO_DISCARD, mandatory = false, defaultValue={})
+    private Set<String> tokenRegexesToDiscard;
+    
+    /**
+     * Whether to treat all input as one sentence.
+     */
+    public static final String PARAM_IS_ONE_SENTENCE = "isOneSentence";
+    @ConfigurationParameter(name = PARAM_IS_ONE_SENTENCE, mandatory = true, defaultValue="false")
+    private boolean isOneSentence;
+
+    /**
+     * Whether to generate empty sentences.
+     */
+    public static final String PARAM_ALLOW_EMPTY_SENTENCES = "allowEmptySentences";
+    @ConfigurationParameter(name = PARAM_ALLOW_EMPTY_SENTENCES, mandatory = true, defaultValue="false")
+    private boolean allowEmptySentences;
+    
     @Override
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
@@ -165,9 +244,12 @@ extends SegmenterBase
     		PTBEscapingProcessor escaper = new PTBEscapingProcessor();
     		escaper.apply(tokensInDocument);
     
-    		// Apply the WordToSentenceProcessor to find the sentence boundaries
-    		WordToSentenceProcessor<CoreLabel> proc =
-    				new WordToSentenceProcessor<CoreLabel>();
+            // Apply the WordToSentenceProcessor to find the sentence boundaries
+            WordToSentenceProcessor<CoreLabel> proc = new WordToSentenceProcessor<CoreLabel>(
+                    boundaryTokenRegex, boundaryFollowers, boundariesToDiscard,
+                    xmlBreakElementsToDiscard, regionElementRegex, newlineIsSentenceBreak, null,
+                    tokenRegexesToDiscard, isOneSentence, allowEmptySentences);
+    		
     		List<List<CoreLabel>> sentencesInDocument = proc.process(tokensInDocument);
     		for (List<CoreLabel> sentence : sentencesInDocument) {
     			int begin = sentence.get(0).get(CharacterOffsetBeginAnnotation.class);
