@@ -52,7 +52,7 @@ public class SolrWriter
     {
         SolrInputDocument document = new SolrInputDocument();
         document.addField(getIdField(), DocumentMetaData.get(aJCas).getDocumentId());
-        SolrUtils.addField(document, getTextField(), aJCas.getDocumentText(), update());
+        SolrUtils.setField(document, getTextField(), aJCas.getDocumentText(), update());
         return document;
     }
 }

@@ -67,9 +67,9 @@ public class SolrUtils
      * @param modifier
      *            The {@link Modifier} to use for updating a document (only used if {@code update}
      *            is true).
-     * @see #addField(SolrInputDocument, String, Object, boolean)
+     * @see #setField(SolrInputDocument, String, Object, boolean)
      */
-    public static void addField(SolrInputDocument document, String fieldname, Object value,
+    public static void setField(SolrInputDocument document, String fieldname, Object value,
             boolean update, Modifier modifier)
     {
         if (update) {
@@ -91,11 +91,11 @@ public class SolrUtils
      *            the value to insert for the field.
      * @param update
      *            if true, use Solr atomic update mechanism; otherwise overwrite
-     * @see #addField(SolrInputDocument, String, Object, boolean, Modifier)
+     * @see #setField(SolrInputDocument, String, Object, boolean, Modifier)
      */
-    public static void addField(SolrInputDocument document, String fieldname, Object value,
+    public static void setField(SolrInputDocument document, String fieldname, Object value,
             boolean update)
     {
-        addField(document, fieldname, value, update, DEFAULT_MODIFIER);
+        setField(document, fieldname, value, update, DEFAULT_MODIFIER);
     }
 }

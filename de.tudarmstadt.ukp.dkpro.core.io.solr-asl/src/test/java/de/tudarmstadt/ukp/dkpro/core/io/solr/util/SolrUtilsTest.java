@@ -35,7 +35,7 @@ public class SolrUtilsTest
 
         SolrInputDocument document = new SolrInputDocument();
         document.addField(idFieldname, idFieldname);
-        SolrUtils.addField(document, fieldname, value, update);
+        SolrUtils.setField(document, fieldname, value, update);
 
         assertEquals(idValue, document.getFieldValue(idValue));
         assertEquals(value, document.getFieldValue(fieldname));
