@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.abelssoft.wordtools.jWordSplitter.AbstractWordSplitter;
-import de.abelssoft.wordtools.jWordSplitter.impl.GermanWordSplitter;
+import de.abelssoft.wordtools.jwordsplitter.AbstractWordSplitter;
+import de.abelssoft.wordtools.jwordsplitter.impl.GermanWordSplitter;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
@@ -51,30 +51,30 @@ public class JWordSplitterAlgorithm
 				throw new IllegalStateException("Unable to access dictionary", e);
 			}
 		}
-		
+
 		DecompoundingTree t = new DecompoundingTree(aWord);
 
 		// Just append on child to the tree
 		String[] splits = splitter.splitWord(aWord).toArray(new String[0]);
 		String[] splitsNoLink = splitterHiddenLinking.splitWord(aWord).toArray(new String[0]);
-		
+
 		if (splits.length != splitsNoLink.length) {
 			throw new IllegalStateException(
 					"Something is fishy - more must have happened than just hiding the links");
 		}
-		
+
 		if (splits.length > 1) {
 			StringBuilder splitStringMorph = new StringBuilder();
 			for (int i = 0; i < splits.length; i++) {
 				String base = splitsNoLink[i];
 				String full = splits[i];
-				
+
 				if (!full.startsWith(base)) {
 					throw new IllegalStateException(
 							"Something is fishy - links should be at the end");
 				}
 				String link = full.substring(base.length());
-				
+
 				// Split with linking morphemes
 				splitStringMorph.append(base);
 				if (link.length() > 0) {
@@ -82,14 +82,14 @@ public class JWordSplitterAlgorithm
 				}
 				splitStringMorph.append("+");
 			}
-			
+
 			String splitStringMorphStr = splitStringMorph.toString();
 			t.getRoot().addChild(new ValueNode<DecompoundedWord>(DecompoundedWord.createFromString(splitStringMorphStr)));
 		}
 
 		return t;
 	}
-	
+
 	@Override
 	public void setDictionary(Dictionary aDict)
 	{
@@ -109,7 +109,7 @@ public class JWordSplitterAlgorithm
 	{
 		// Not needed for this algorithm
 	}
-	
+
 	private class InternalGermanWordSplitter extends GermanWordSplitter
 	{
 		public InternalGermanWordSplitter(boolean aHideConnectingCharacters)
@@ -117,7 +117,7 @@ public class JWordSplitterAlgorithm
 		{
 			super(aHideConnectingCharacters);
 		}
-		
+
 		@Override
 		protected Set<String> getWordList()
 			throws IOException
