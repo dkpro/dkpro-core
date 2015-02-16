@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.docbook-asl</artifactId>
+    <packaging>jar</packaging>
 	<properties>
 	    <uimaBuildResourcesVersion>5</uimaBuildResourcesVersion>
 		<uimaScmProject>${project.artifactId}</uimaScmProject>

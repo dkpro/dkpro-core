@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - Anomaly API</name>
 	<dependencies>
 		<dependency>
@@ -48,5 +49,4 @@
 			</resource>
 		</resources>
 	</build>
-
 </project>

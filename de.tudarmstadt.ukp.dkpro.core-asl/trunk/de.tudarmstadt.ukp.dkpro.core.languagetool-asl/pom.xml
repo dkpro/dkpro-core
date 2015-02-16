@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.languagetool-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - LanguageTool (LGPL)</name>
 	<description>Grammar checker based on LanguageTool (LGPL)</description>
     <properties>

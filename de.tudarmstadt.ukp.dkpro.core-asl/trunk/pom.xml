@@ -694,6 +694,11 @@
 	<build>
 		<plugins>
             <plugin>
+                <groupId>io.takari.maven.plugins</groupId>
+                <artifactId>takari-lifecycle-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.uima</groupId>
                 <artifactId>uimafit-maven-plugin</artifactId>
             </plugin>

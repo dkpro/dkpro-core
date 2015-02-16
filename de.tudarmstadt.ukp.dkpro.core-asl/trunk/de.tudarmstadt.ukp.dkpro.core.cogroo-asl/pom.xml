@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.cogroo-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - CoGrOO (EXPERIMENTAL)</name>
 	<properties>
 		<cogroo.version>4.0.0</cogroo.version>

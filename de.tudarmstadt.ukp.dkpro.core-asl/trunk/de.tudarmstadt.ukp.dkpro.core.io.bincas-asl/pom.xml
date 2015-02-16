@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.bincas-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - IO - Binary UIMA CAS</name>
 	<dependencies>
 		<dependency>
@@ -78,7 +79,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math3</artifactId>
-			<version>3.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

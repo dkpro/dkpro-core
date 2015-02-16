@@ -24,6 +24,7 @@
 	</parent>
 	<name>DKPro Core ASL - Decompounding</name>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.decompounding-asl</artifactId>
+    <packaging>jar</packaging>
 	<description>DKPro core module for decompounding.</description>
 	<dependencies>
 		<dependency>
