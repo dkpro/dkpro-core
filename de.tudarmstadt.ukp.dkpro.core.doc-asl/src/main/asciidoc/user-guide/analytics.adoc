@@ -1,0 +1,232 @@
+// Copyright 2013
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_analytics]]
+
+== Analysis Components
+
+This section provides an overview of the analysis componens that can be deployed at the
+different levels of analysis.
+
+=== Coreference Resolution
+
+.Coreference types
+image::ts_coreference.png[align="center"]
+
+.Coreference components
+[options="header"]
+|===============
+|Component|Comments
+|StanfordCoreferenceResolver|
+|===============
+
+
+=== Chunking
+
+.Chunking components
+[options="header"]
+|===============
+|Component|Comments
+|OpenNlpChunker||TreeTaggerChunker|(uses native binary)
+
+|===============
+
+
+
+
+=== Decompounding
+
+.Decompounding components
+[options="header"]
+|===============
+|Component|Comments
+|CompoundAnnotator|
+|===============
+
+
+=== Dictionary-Based Annotation
+
+.Dictionary-based annotation components
+[options="header"]
+|===============
+|Component|Comments
+|DictionaryAnnotator||SemanticFieldAnnotator|
+|===============
+
+
+=== Language Identification
+
+.DocumentAnnotation type
+image::ts_document_meta_data.png[align="center"]
+
+.Language identification components
+[options="header"]
+|===============
+|Component|Comments
+|LangDetectLanguageIdentifier|Character n-grams
+|LanguageDetectorWeb1T|Token n-grams
+|TextCat|
+|===============
+
+
+=== Lemmatization
+
+.Lemma type
+image::ts_lemmatization.png[align="center"]
+
+.Lemmatization components
+[options="header"]
+|===============
+|Component|Comments
+|ClearNlpLemmatizer||GateLemmatizer||LanguageToolLemmatizer||MateLemmatizer||MorphaLemmatizer||StanfordLemmatizer|(variant of Morpha)
+|TreeTaggerPosTagger|(uses native binary)
+
+|===============
+
+
+=== Morphological Analysis
+
+
+
+.Morphological analysis components
+[options="header"]
+|===============
+|Component|Comments
+|MateMorphTagger||SfstAnnotator|(uses native binary)
+|===============
+
+
+
+
+=== Named-Entity Recognition
+
+
+
+.Named-entity recognition components
+[options="header"]
+|===============
+|Component|Comments
+|OpenNlpNameFinder||StanfordNamedEntityRecognizer|
+|===============
+
+
+
+
+=== Parsing
+
+
+
+.Parsing components
+[options="header"]
+|===============
+|Component|Comments
+|BerkeleyParser|constituents
+|ClearNlpDependencyParser|dependencies
+|OpenNlpParser|constituents
+|MaltParser|dependencies
+|MateParser|dependencies
+|MstParser|dependencies
+|StanfordParser|constituents, dependencies (for some languages)
+
+|===============
+
+
+
+
+=== Part-of-Speech Tagging
+
+
+
+.Part-of-speech type
+image::ts_part-of-speech.png[align="center"]
+
+.Part-of-speech tagging components
+[options="header"]
+|===============
+|Component|Comments
+|ArktweetTagger|(not in release)
+|ClearNlpPosTagger||HepplePosTagger||HunPosTagger|(uses native binary)
+|MatePosTagger||MeCabTagger|(uses native binary)
+|OpenNlpPosTagger||StanfordPosTagger||TreeTaggerPosTagger|also does lemmatization (uses native binary)
+
+|===============
+
+
+
+
+=== Segmentation
+
+Segmenter components identify sentence boundaries and tokens. The order in which sentence
+splitting and tokenization are done differs between the integrated the NLP libraries.
+Thus, we chose to integrate both steps into a segmenter component to avoid the need to
+reorder the components in a pipeline when replacing one segmenter with another.
+
+.Segmentation types
+image::ts_segmentation.png[align="center"]
+
+.Segmentation components
+[options="header"]
+|===============
+|Component|Comments
+|BreakIteratorSegmenter||ClearNlpSegmenter||LanguageToolSegmenter||OpenNlpSegmenter||StanfordSegmenter|
+|===============
+
+
+
+
+=== Semantic Role Labelling
+
+
+
+.Semantic role labelling components
+[options="header"]
+|===============
+|Component|Comments
+|ClearNlpSemanticRoleLabeler|
+
+|===============
+
+
+
+
+=== Spell Checking
+
+
+
+.Spell checking components
+[options="header"]
+|===============
+|Component|Comments
+|LanguageToolChecker||NorvigSpellingCorrector||JazzyChecker|
+|===============
+
+
+
+
+=== Stemming
+
+
+
+.Stem type
+image::ts_stemming.png[align="center"]
+
+.Stemming components
+[options="header"]
+|===============
+|Component|Comments
+|SnowballStemmer|
+|===============
+
