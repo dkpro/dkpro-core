@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.castransformation-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - CAS Transformation (ASL)</name>
 	<dependencies>
 		<dependency>

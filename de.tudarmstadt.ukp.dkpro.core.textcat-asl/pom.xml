@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.textcat-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - TextCat (LGPL)</name>
 	<description>http://textcat.sourceforge.net/</description>
 	<dependencies>

@@ -24,6 +24,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.mallet-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - Mallet (EXPERIMENTAL)</name>
 	<description>A DKPro Core component interfacing the Mallet LDA implementation.</description>
 	<dependencies>

@@ -23,8 +23,8 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.morpha-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - Morpha (non-commercial, attribution)</name>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>

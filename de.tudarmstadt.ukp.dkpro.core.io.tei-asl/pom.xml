@@ -22,8 +22,9 @@
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - IO - TEI</name>
-	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</artifactId>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.uima</groupId>

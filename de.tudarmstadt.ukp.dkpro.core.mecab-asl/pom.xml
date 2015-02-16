@@ -23,6 +23,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.mecab-asl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core ASL - Mecab</name>
 	<description>interface to mecab (via JNI for Japanese POS Tagger C++ binary)</description>
 	<dependencies>
