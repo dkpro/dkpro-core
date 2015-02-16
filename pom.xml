@@ -686,18 +686,13 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
 	    <!-- Documentation and examples modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.doc-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
 	    <!-- Distribution modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.doc-asl</module>
 	</modules>
 	<build>
 		<plugins>
-            <plugin>
-                <groupId>io.takari.maven.plugins</groupId>
-                <artifactId>takari-lifecycle-plugin</artifactId>
-                <extensions>true</extensions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.uima</groupId>
                 <artifactId>uimafit-maven-plugin</artifactId>
