@@ -1,5 +1,5 @@
 <!--
-x	Copyright 2010
+	Copyright 2010
 	Ubiquitous Knowledge Processing (UKP) Lab
 	Technische Universität Darmstadt
 
@@ -607,6 +607,9 @@ x	Copyright 2010
 		</dependencies>
 	</dependencyManagement>
 	<modules>
+	    <!-- Documentation and examples modules -->
+		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
+        <module>de.tudarmstadt.ukp.dkpro.core.doc-asl</module>
 	    <!-- API modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.api.coref-asl</module>
@@ -684,15 +687,20 @@ x	Copyright 2010
 		<module>de.tudarmstadt.ukp.dkpro.core.tokit-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.treetagger-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.textnormalizer-asl</module>
-	    <!-- Documentation and examples modules -->
-		<module>de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
-        <module>de.tudarmstadt.ukp.dkpro.core.doc-asl</module>
+	    <!-- Examples modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
 	    <!-- Distribution modules -->
 		<module>de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 	</modules>
 	<build>
 		<plugins>
+            <!--  
+            <plugin>
+                <groupId>io.takari.maven.plugins</groupId>
+                <artifactId>takari-lifecycle-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.uima</groupId>
                 <artifactId>uimafit-maven-plugin</artifactId>
