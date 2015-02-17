@@ -1,5 +1,5 @@
 <!--
-	Copyright 2010
+x	Copyright 2010
 	Ubiquitous Knowledge Processing (UKP) Lab
 	Technische Universität Darmstadt
 
@@ -693,11 +693,6 @@
 	</modules>
 	<build>
 		<plugins>
-            <plugin>
-                <groupId>io.takari.maven.plugins</groupId>
-                <artifactId>takari-lifecycle-plugin</artifactId>
-                <extensions>true</extensions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.uima</groupId>
                 <artifactId>uimafit-maven-plugin</artifactId>
