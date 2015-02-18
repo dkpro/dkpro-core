@@ -38,7 +38,7 @@ public class TigerXmlWriterTest
     @Test
     public void test() throws Exception
     {
-        File targetFolder = new File("target/test-output/" + testContext.getTestOutputFolderName());
+        File targetFolder = testContext.getTestOutputFolder();
         
         AnalysisEngine parser = createEngine(OpenNlpParser.class);
         JCas jcas = TestRunner.runTest(parser, "en", "This is a test .");

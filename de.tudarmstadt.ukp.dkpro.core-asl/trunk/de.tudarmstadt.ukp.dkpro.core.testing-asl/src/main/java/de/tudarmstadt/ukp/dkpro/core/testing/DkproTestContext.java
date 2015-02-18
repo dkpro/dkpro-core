@@ -17,6 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
+import java.io.File;
+
 import org.apache.commons.lang.StringUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -67,7 +69,14 @@ public class DkproTestContext extends TestWatcher
     {
         return getClassName() + "-" + getMethodName();
     }
-    
+
+    public File getTestOutputFolder()
+    {
+        File folder = new File("target/test-output/" + getTestOutputFolderName());
+        folder.mkdirs();
+        return folder;
+    }
+
     @Override
     protected void finished(Description aDescription)
     {

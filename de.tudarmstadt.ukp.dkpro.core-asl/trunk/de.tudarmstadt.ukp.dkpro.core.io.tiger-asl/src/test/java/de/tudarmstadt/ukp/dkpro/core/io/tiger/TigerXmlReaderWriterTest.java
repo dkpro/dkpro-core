@@ -37,7 +37,7 @@ public class TigerXmlReaderWriterTest
     @Test
     public void test() throws Exception
     {
-        File targetFolder = new File("target/test-output/" + testContext.getTestOutputFolderName());
+        File targetFolder = testContext.getTestOutputFolder();
 
         CollectionReaderDescription reader = createReaderDescription(
                 TigerXmlReader.class,
