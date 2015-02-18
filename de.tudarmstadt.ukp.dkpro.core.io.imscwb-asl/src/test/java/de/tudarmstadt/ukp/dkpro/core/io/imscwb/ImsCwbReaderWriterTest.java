@@ -35,8 +35,8 @@ public class ImsCwbReaderWriterTest
     {
         testOneWay2(ImsCwbReader.class, ImsCwbWriter.class, "tuebadz/corpus-sample-ref.txt",
                 "corpus-sample-ref.txt", "tuebadz/corpus-sample-ref.txt",
-                ComponentParameters.PARAM_TARGET_LOCATION, new File("target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName(), "corpus-sample-ref.txt"),
+                ComponentParameters.PARAM_TARGET_LOCATION,
+                        new File(testContext.getTestOutputFolder(), "corpus-sample-ref.txt"),
                 ImsCwbReader.PARAM_LANGUAGE, "de",
                 ImsCwbReader.PARAM_POS_TAG_SET, "stts");
     }
@@ -47,8 +47,8 @@ public class ImsCwbReaderWriterTest
     {
         testOneWay2(ImsCwbReader.class, ImsCwbWriter.class, "wacky/test-ref.txt",
                 "test.txt", "wacky/test.txt",
-                ComponentParameters.PARAM_TARGET_LOCATION, new File("target/test-output/"
-                        + DkproTestContext.get().getTestOutputFolderName(), "test.txt"),
+                ComponentParameters.PARAM_TARGET_LOCATION, 
+                        new File(testContext.getTestOutputFolder(), "test.txt"),
                 ImsCwbReader.PARAM_SOURCE_ENCODING, "iso8859-1");
     }
 

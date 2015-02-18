@@ -50,8 +50,8 @@ public class ImsCwbWriterTest
 	public void test1()
 		throws Exception
 	{
-	    String dump = "target/test-output/"+testContext.getTestOutputFolderName()+"/dump.txt";
-        String output = "target/test-output/"+testContext.getTestOutputFolderName()+"/output.txt";
+	    File dump = new File(testContext.getTestOutputFolder(), "/dump.txt");
+	    File output = new File(testContext.getTestOutputFolder(), "/output.txt");
 	    
 		CollectionReader ner = createReader(
 				NegraExportReader.class,
@@ -76,7 +76,7 @@ public class ImsCwbWriterTest
 		String reference = FileUtils.readFileToString(
 				new File("src/test/resources/tuebadz/corpus-sample-ref.txt"), "UTF-8");
 		String actual = FileUtils.readFileToString(
-				new File(output), "UTF-8");
+				output, "UTF-8");
 		assertEquals(reference, actual);
 	}
 	
