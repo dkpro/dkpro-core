@@ -18,13 +18,36 @@
 
 == Testing
 
-The testing module offers a convenient way to create unit tests for UIMA
-		components.
+The testing module offers a convenient way to create unit tests for UIMA components.
+
+=== Basic test setup
+
+There are a couple of things useful in every unit test:
+
+* Redirecting the UIMA logging through log4j - DKPro Core uses log4j for logging in unit tests.
+* Printing the name of the test to the console before every test
+* Enabling extended index checks in UIMA (`uima.exception_when_fs_update_corrupts_index`)
+
+To avoid repeating a longish setup boilerplate code in every unit test, add the following lines to
+your unit test class:
+
+[source,java]
+----
+@Rule
+public DkproTestContext testContext = new DkproTestContext();
+----
+
+Additional benefits you get from this `testContext` are:
+
+* getting the class name of the current test (`getClassName()`)
+* getting the method name of the current test (`getMethodName()`)
+* getting the name of a folder you can use to store test results (`getTestOutputFolder()`).
+
+=== AssertAnnotations
 
 The AssertAnnotations class offers various static methods to test if a component has
-		properly created annotations of a certain kind. There are methods to test almost every kind
-		of annotation supported by DKPro Core, e.g.:
-
+properly created annotations of a certain kind. There are methods to test almost every kind
+of annotation supported by DKPro Core, e.g.:
 
 * assertToken
 * assertSentence
@@ -45,10 +68,7 @@ The AssertAnnotations class offers various static methods to test if a component
 
 A typical unit test class has consists of two parts
 
-
 . the test cases
-
-
 . a ++runTest++ method - which sets up the pipeline required by the
 					test and then calls ++TestRunner.runTest()++.
 
@@ -56,7 +76,12 @@ In the following example, mind that the text must be provided with spaces
 separating the tokens (thus there must be a space before the full stop at the end of the
 sentence) and with newline characters (\n) separating the sentences:
 
+.Typical unit test for an analysis component
+[source,java]
 ----
+@Rule
+public DkproTestContext testContext = new DkproTestContext();
+
 @Test
 public void testEnglish() throws Exception
 {	
