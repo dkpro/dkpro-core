@@ -19,25 +19,24 @@
 == I/O
 
 This section gives an overview on the I/O components. The components are organized into one
-		module per file type. These modules contain typically one reader and/or writer
-		component.
+module per file type. These modules contain typically one reader and/or writer
+component.
 
 All readers initialize the CAS with a DocumentMetaData annotation.
 
 Most readers and writers do not support all features of the respective formats.
-		Additionally,  readers and writers may onle support  a specific variant of a format.
-
+Additionally, readers and writers may only support a specific variant of a format.
 
 
 === Common parameters
 
 DKPro Core aims to provide a consistent API for reading and writing annotated data.
-			Most of our readers are resource readers (RR) or file writers (FW) and support a common
-			set of parameters which are explained below.
+Most of our readers are resource readers (RR) or file writers (FW) and support a common
+set of parameters which are explained below.
 
 .Resource reader parameters
 [options="header"]
-|===============
+|====
 |Parameter|Description|Default
 |PARAM_SOURCE_LOCATION|Location to read from.|optional
 |PARAM_PATTERNS|Include/exclude patterns.|optional
@@ -45,97 +44,122 @@ DKPro Core aims to provide a consistent API for reading and writing annotated da
 								git, etc.|true
 |PARAM_INCLUDE_HIDDEN|Include hidden files|false
 |PARAM_LANGUAGE|Two letter ISO code|optional
+|====
 
-|===============
+Either `PARAM_SOURCE_LOCATION` or `PARAM_PATTERNS` or both must be set.
 
+.Read all files in the folder __files/texts__
+----
+PARAM_LOCATON, "files/texts"
+----
 
-Either PARAM_SOURCE_LOCATION or PARAM_PATTERNS or both must be set. Examples:
+.Recursively read all __.txt__ files in the folder __files/texts__ (embedded pattern)
+----
+PARAM_LOCATION, "files/texts/**/*.txt"
+----
 
+.Recursively read all __.txt__ files in the folder __files/texts__ (detached pattern)
+----
+PARAM_LOCATION, "files/texts"
+PARAM_PATTERNS, "*.txt"
+----
 
-* Read all files in the folder __files/texts__
-* PARAM_LOCATON: "files/texts"
-* Recursively read all __.txt__ files in the folder __files/texts__: 
-** Pattern embedded in the location: PARAM_LOCATION: "files/texts/**/*.txt"
-** Pattern separate: PARAM_LOCATION: "files/texts", PARAM_PATTERNS: "*.txt"
-* Excluding some files:
-** Pattern separate: PARAM_LOCATION: "files/texts", PARAM_PATTERNS: String[] {"*.txt", "[-]broken*.txt"}
-* Read from a ZIP archive:
-** PARAM_LOCATION: "jar:file:archive.zip!texts/**/*.txt"
-* Read from the classpath:
-** PARAM_LOCATION: "classpath*:texts/*.txt"
+.Excluding some files (detached pattern)
+----
+PARAM_LOCATION, "files/texts"
+PARAM_PATTERNS, new String[] {"*.txt", "[-]broken*.txt"}
+----
+
+.Read from a ZIP archive
+----
+PARAM_LOCATION, "jar:file:archive.zip!texts/**/*.txt"
+----
+
+.Read from the classpath
+----
+PARAM_LOCATION, "classpath*:texts/*.txt"
+----
 
 .File writer parameters
 [options="header"]
-|===============
-|Parameter|Description|Default
-|PARAM_TARGET_LOCATION|Location to write to.|mandatory
-|PARAM_COMPRESSION|Compression algorithm to use when writing output. File suffix
-								automatically added depending on algorithm. Supported are: NONE,
-								GZIP, BZIP2, and XZ (see class
-									CompressionMethod).|NONE
-|PARAM_STRIP_EXTENSION|Whether to remove the original file extension when writing. E.g.
-								with the XmiWriter without extension stripping, an input file
-									__MyText.txt__ would be written as
-									__MyText.txt.xmi__ - with stripping it would be
-									__MyText.xmi__.|false
-|PARAM_USE_DOCUMENT_ID|Use the document ID as the file name, even if an original file
-								name is present in the document URI.|false
-|PARAM_ESCAPE_DOCUMENT_ID|Escape the document ID in case it contains characters that are not
-								valid in a filename.|false
+|====
+| Parameter|Description|Default
+| PARAM_TARGET_LOCATION
+| Location to write to.
+| mandatory
 
-|===============
+| PARAM_COMPRESSION
+| Compression algorithm to use when writing output. File suffix automatically added depending on 
+  algorithm. Supported are: NONE, GZIP, BZIP2, and XZ (see class CompressionMethod).
+| NONE
+
+| PARAM_STRIP_EXTENSION
+| Whether to remove the original file extension when writing. E.g. with the XmiWriter without 
+  extension stripping, an input file __MyText.txt__ would be written as __MyText.txt.xmi__ - with 
+  stripping it would be __MyText.xmi__.
+| false
+
+| PARAM_USE_DOCUMENT_ID
+| Use the document ID as the file name, even if an original file name is present in the document URI.
+| false
+
+| PARAM_ESCAPE_DOCUMENT_ID
+| Escape the document ID in case it contains characters that are not valid in a filename.
+| false
+|====
 
 
-Most file writers write multiple files, so PARAM_TARGET_LOCATION is treated as a directory
-			name. A few only write a single file (e.g. NegraExportWriter), in which case the
-			parameter is treated as the file name. Instead of writing to a directory, it is possible
-			to write to a ZIP archive:
+Most file writers write multiple files, so `PARAM_TARGET_LOCATION` is treated as a directory
+name. A few only write a single file (e.g. NegraExportWriter), in which case the
+parameter is treated as the file name. Instead of writing to a directory, it is possible
+to write to a ZIP archive:
 
+.Write to a ZIP archive
+----
+PARAM_TARGET_LOCATION, "jar:file:archive.zip"
+----
 
-* Write to a ZIP archive
-* PARAM_TARGET_LOCATION: "jar:file:archive.zip"
-* PARAM_TARGET_LOCATION: "jar:file:archive.zip!folder/within/zip"
+.Write to a folder inside a ZIP archive
+----
+PARAM_TARGET_LOCATION, "jar:file:archive.zip!folder/within/zip"
+----
+
+NOTE: It is not possible to write into an existing ZIP file. A new file is created in every case. 
+      If a ZIP file by the name already exists, it is overwritten.
 
 === ACL anthology
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |AclAnthologyReader|
-
-|===============
-
+|====
 
 Known corpora in this format:
 
-
-* link:$$http://acl-arc.comp.nus.edu.sg$$[ACL Anthology Reference Corpus (ACL ARC)]
-
+* link:http://acl-arc.comp.nus.edu.sg[ACL Anthology Reference Corpus (ACL ARC)]
 
 
 === Binary CAS
 
 The CAS is the native data model used by UIMA. There are various ways of saving CAS
-			data, using XMI, XCAS, or binary formats. This module supports the binary formats. 
+data, using XMI, XCAS, or binary formats. This module supports the binary formats. 
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |BinaryCasReader (RR)|
 |BinaryCasWriter (FW)|
 |SerializedCasReader (RR)|
 |SerializedCasWriter (FW)|
-
-|===============
+|====
 
 
 See also:
 
-
-* link:$$http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress$$[Compressed Binary CASes]
-
+* link:http://uima.apache.org/d/uimaj-2.4.2/references.html#ugr.ref.compress[Compressed Binary CASes]
 
 
 === Bliki (Wikipedia)
@@ -144,167 +168,133 @@ Access the online Wikipedia and extract its contents using the Bliki engine.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |BlikiWikipediaReader|
-
-|===============
-
+|====
 
 See also: 
 
-
-* link:$$http://code.google.com/p/gwtwiki/$$[Java Wikipedia API (Bliki engine)]
-
+* link:http://code.google.com/p/gwtwiki/[Java Wikipedia API (Bliki engine)]
 
 
 === British National Corpus
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |BncReader (RR)|BNC XML format
-
-|===============
+|====
 
 
 Known corpora in this format:
 
-
-* link:$$http://www.natcorp.ox.ac.uk$$[British National Corpus]
-
+* link:http://www.natcorp.ox.ac.uk[British National Corpus]
 
 
 === CoNLL Shared Task Data Formats
 
 The CoNLL shared tasks use different tabular, tab-separated formats. Almost every year
-			a CoNLL shared task was held, a new format was defined. Due to their simplicity, the
-			CoNLL formats are quite popular. Many corpora are provided in the CoNLL-X (2006) format
-			and many tools can natively read or write this format.
+a CoNLL shared task was held, a new format was defined. Due to their simplicity, the
+CoNLL formats are quite popular. Many corpora are provided in the CoNLL-X (2006) format
+and many tools can natively read or write this format.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|Conll2000Reader (RR)|Chunking task
-|Conll2000Writer|Chunking task
-|Conll2006Reader (RR)|Dependency parsing task
-|Conll2006Writer|Dependency parsing task
-|Conll2009Reader (RR)|Semantic dependencies
-|Conll2009Writer|Semantic dependencies
-|Conll2012Reader|Syntactic parsing &amp; coreference
-|Conll2012Writer|Syntactic parsing &amp; coreference
+|Conll2000Reader (RR)
+|Chunking task
 
-|===============
+|Conll2000Writer
+|Chunking task
 
+|Conll2006Reader (RR)
+|Dependency parsing task
+
+|Conll2006Writer
+|Dependency parsing task
+
+|Conll2009Reader (RR)
+|Semantic dependencies
+
+|Conll2009Writer
+|Semantic dependencies
+
+|Conll2012Reader
+|Syntactic parsing &amp; coreference
+
+|Conll2012Writer
+|Syntactic parsing &amp; coreference
+|====
 
 Known corpora in this format:
 
-
-* link:$$http://nltk.org/nltk_data/$$[CoNLL 2000 Chunking Corpus] - English
-					(CoNLL 2000 format)
-
-
-* link:$$http://ilk.uvt.nl/conll/free_data.html$$[CoNLL-X Shared Task free data] - Danish, Dutch, Portuguese, and Swedish (CoNLL 2006
-					format)
-
-
-* link:$$https://code.google.com/p/copenhagen-dependency-treebank/$$[Copenhagen Dependency Treebanks] - Danish (CoNLL 2006 format)
-
-
-* link:$$http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/$$[FinnTreeBank] - Finnish (CoNLL 2006 format, in recent versions with
+* link:http://nltk.org/nltk_data/[CoNLL 2000 Chunking Corpus] - English (CoNLL 2000 format)
+* link:http://ilk.uvt.nl/conll/free_data.html[CoNLL-X Shared Task free data] - Danish, Dutch, Portuguese, and Swedish (CoNLL 2006 format)
+* link:https://code.google.com/p/copenhagen-dependency-treebank/[Copenhagen Dependency Treebanks] - Danish (CoNLL 2006 format)
+* link:http://www.ling.helsinki.fi/kieliteknologia/tutkimus/treebank/[FinnTreeBank] - Finnish (CoNLL 2006 format, in recent versions with
 					additional pseudo-XML metadata)
-
-
-* link:$$http://www.linguateca.pt/floresta/CoNLL-X$$[Floresta Sintá(c)tica (Bosque-CoNLL)] - Portuguese (CoNLL 2006 format)
-
-
-* link:$$https://gforge.inria.fr/projects/sequoiabank/$$[Sequoia corpus] - French (CoNLL 2006 format)
-
-
-* link:$$http://nlp.ffzg.hr/resources/corpora/setimes-hr/$$[SETimes.HR corpus and dependency treebank of Croatian] - Croatian (CONLL 2006
+* link:http://www.linguateca.pt/floresta/CoNLL-X[Floresta Sintá(c)tica (Bosque-CoNLL)] - Portuguese (CoNLL 2006 format)
+* link:https://gforge.inria.fr/projects/sequoiabank/[Sequoia corpus] - French (CoNLL 2006 format)
+* link:http://nlp.ffzg.hr/resources/corpora/setimes-hr/[SETimes.HR corpus and dependency treebank of Croatian] - Croatian (CONLL 2006
 					format)
-
-
-* link:$$http://zil.ipipan.waw.pl/Sk%C5%82adnica$$[Składnica zależnościowa] - Polish (CoNLL 2006 format)
-
-
-* link:$$http://nl.ijs.si/sdt/$$[Slovene Dependency Treebank] - Slovene (CoNLL
+* link:http://zil.ipipan.waw.pl/Sk%C5%82adnica[Składnica zależnościowa] - Polish (CoNLL 2006 format)
+* link:http://nl.ijs.si/sdt/[Slovene Dependency Treebank] - Slovene (CoNLL
 					2006 format)
-
-
-* link:$$http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/$$[Swedish Treebank]
+* link:http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/[Swedish Treebank]
 					- Swedish (CoNLL 2006 format)
-
-
-* link:$$http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html$$[Talbanken05] - Swedish (CoNLL 2006 format)
-
-
-* link:$$http://stp.lingfil.uu.se/%7Emojgan/UPDT.html$$[Uppsala Persian Dependency Treebank] - Persian (Farsi) (CoNLL 2006 format)
-
+* link:http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html[Talbanken05] - Swedish (CoNLL 2006 format)
+* link:http://stp.lingfil.uu.se/%7Emojgan/UPDT.html[Uppsala Persian Dependency Treebank] - Persian (Farsi) (CoNLL 2006 format)
 
 
 === CLARIN WebLicht TCF
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |TcfReader (RR)|
 |TcfWriter|
-
-|===============
-
-
-
-
+|====
 
 
 === HTML
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |HtmlReader|
-
-|===============
-
-
-
-
+|====
 
 
 === IMS Open Corpus Workbench
 
 The IMS Open Corpus Workbench is a linguistic search engine. It uses a tab-separated format
-			with limited markup (e.g. for sentences, documents, but not recursive structures like
-			parse-trees). If a local installion of the corpus workbench is available, it can be used
-			by this module to immediately generate the corpus workbench index format. Search is not
-			supported by this module.
+with limited markup (e.g. for sentences, documents, but not recursive structures like
+parse-trees). If a local installation of the corpus workbench is available, it can be used
+by this module to immediately generate the corpus workbench index format. Search is not
+supported by this module.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |ImsCwbReader (RR)|
 |ImsCwbWriter|
 
-|===============
-
+|====
 
 See also: 
 
-
-* link:$$http://cwb.sourceforge.net$$[IMS Open Corpus Workbench]
+* link:http://cwb.sourceforge.net[IMS Open Corpus Workbench]
 
 Known corpora in this format:
 
-
-* link:$$http://wacky.sslmit.unibo.it$$[WaCky - The Web-As-Corpus Kool Yinitiative] - corpora crawled from the world wide web in several
-					different languages (DeWaC, UkWaC, ItWaC, etc.)
-
+* link:http://wacky.sslmit.unibo.it[WaCky - The Web-As-Corpus Kool Yinitiative] - corpora crawled 
+  from the world wide web in several different languages (DeWaC, UkWaC, ItWaC, etc.)
 
 
 === JDBC Database
@@ -313,13 +303,10 @@ Access a JDBC database using an SQL query.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |JdbcReader|
-
-|===============
-
-
+|====
 
 
 === JWPL (Wikipedia)
@@ -328,7 +315,7 @@ Access an offline Wikipedia database dump created using JWPL.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |WikipediaArticleInfoReader|
 |WikipediaArticleReader|
@@ -339,96 +326,75 @@ Access an offline Wikipedia database dump created using JWPL.
 |WikipediaRevisionPairReader|
 |WikipediaRevisionReader|
 |WikipediaTemplateFilteredArticleReader|
+|====
 
-|===============
-
-
-See also: link:$$http://code.google.com/p/jwpl/$$[JWPL and the Wikipedia Revision Toolkit]
-
+See also: link:http://code.google.com/p/jwpl/[JWPL and the Wikipedia Revision Toolkit]
 
 
 === NEGRA Export Format
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|NegraExportReader|Supports version 3 and 4
-
-|===============
-
+|NegraExportReader
+|Supports version 3 and 4
+|====
 
 See also:
 
-
-* link:$$http://www.coli.uni-saarland.de/%7Ethorsten/publications/Brants-CLAUS98.pdf$$[Thorsten Brants, 1997, NeGra Export Format for Annotated Corpora (Version 3)]
+* link:http://www.coli.uni-saarland.de/%7Ethorsten/publications/Brants-CLAUS98.pdf[Thorsten Brants, 1997, NeGra Export Format for Annotated Corpora (Version 3)]
 
 Known corpora in this format:
 
-
-* link:$$http://www.linguateca.pt/floresta/corpus.html$$[Floresta Sintá(c)tica (Bosque)] - Portuguese
-
-
-* link:$$http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/$$[NeGra] - German
-
-
-* link:$$http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html$$[TIGER] (until version 2.1) - German
-
-
-* link:$$http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tueba-dz.html$$[TüBa D/Z] - German
-
+* link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese
+* link:http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/[NeGra] - German
+* link:http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html[TIGER] (until version 2.1) - German
+* link:http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tueba-dz.html[TüBa D/Z] - German
 
 
 === PDF
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |PdfReader (RR)|
-
-|===============
-
-
+|====
 
 
 === Penn Treebank
 
-
-
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |PennTreebankChunkedReader|
 |PennTreebankCombinedReader|
 |PennTreebankCombinedWriter|
-
-|===============
+|====
 
 
 Known corpora in this format:
 
-
-* link:$$http://www.linguateca.pt/floresta/corpus.html$$[Floresta Sintá(c)tica (Bosque)] - Portuguese
+* link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese
 
 
 
 === TCF
 
 The TCF (Text Corpus Format) was created in the context of the CLARIN project. It is
-			mainly used to exchange data between the different web-services that are part of the
-			WebLicht platform.
+mainly used to exchange data between the different web-services that are part of the
+WebLicht platform.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |TcfReader (RR)|
 |TcfWriter (FW)|
 
-|===============
-
+|====
 
 Known corpora in this format:
 
@@ -437,41 +403,34 @@ Known corpora in this format:
 === TGrep
 
 TGrep and TGrep2 are a tools to search over syntactic parse trees represented as bracketed
-            structures. This module supports in particular TGrep2 and allows to conveniently
-            generate TGrep2 indexes which can then be searched. Search is not supported by this
-            module.
+structures. This module supports in particular TGrep2 and allows to conveniently
+generate TGrep2 indexes which can then be searched. Search is not supported by this
+module.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |TGrepWriter|Supports tgrep2 (uses native binary)
-
-|===============
+|====
 
 
 See also: 
-* link:$$http://tedlab.mit.edu/%7Edr/Tgrep2/$$[TGrep2]
+* link:http://tedlab.mit.edu/%7Edr/Tgrep2/[TGrep2]
 
 === TEI
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |TeiReader (RR)|
-
-|===============
-
+|====
 
 Known corpora in this format:
 
-
-* link:$$http://nltk.org/nltk_data/$$[Brown Corpus (TEI XML Version)]
-
-
-* link:$$http://www.textgrid.de/Digitale-Bibliothek$$[Digitale Bibliothek bei TextGrid]
-
+* link:http://nltk.org/nltk_data/[Brown Corpus (TEI XML Version)]
+* link:http://www.textgrid.de/Digitale-Bibliothek[Digitale Bibliothek bei TextGrid]
 
 
 === Text
@@ -480,44 +439,40 @@ This module supports just simple plain text.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |StringReader|Read text from a Java string
 |TextReader (RR)|Read text from files
 |TextWriter (FW)|Write text to files
-
-|===============
-
-
+|====
 
 
 === TIGER XML
 
-The link:$$http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html$$[TIGER XML format] was created for encoding syntactic constituency structures
-			in the German TIGER corpus. It has since been used for many other corpora as well.
-				link:$$http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html$$[TIGERSearch] is a linguistic search engine specifically targetting this
-			format. The format has later been link:$$http://www.lrec-conf.org/proceedings/lrec2004/pdf/202.pdf$$[extended] to
-			also support semantic frame annotations.
+The link:http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html[TIGER XML format] was created for encoding syntactic constituency structures
+in the German TIGER corpus. It has since been used for many other corpora as well.
+link:http://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/tigersearch.html[TIGERSearch] is a linguistic search engine specifically targetting this
+format. The format has later been link:http://www.lrec-conf.org/proceedings/lrec2004/pdf/202.pdf[extended] to
+also support semantic frame annotations.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |TigerXmlReader (RR)|Read TIGER XML format from files
 |TigerXmlWriter (FW)|Write TIGER XML format to files
 
-|===============
+|====
 
 
 Known corpora in this format:
 
-* link:$$http://www.linguateca.pt/floresta/corpus.html$$[Floresta Sintá(c)tica (Bosque)] - Portuguese
-* link:$$http://semeval2.fbk.eu/semeval2.php$$[Semeval-2 Task 10] - (extended format)
-* link:$$http://zil.ipipan.waw.pl/Sk%C5%82adnica$$[Składnica frazowa] -  Polish
-* link:$$http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/$$[Swedish Treebank] - Swedish
-* link:$$http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html$$[Talbanken05] - Swedish
-* link:$$http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html$$[TIGER] - German
-
+* link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese
+* link:http://semeval2.fbk.eu/semeval2.php[Semeval-2 Task 10] - (extended format)
+* link:http://zil.ipipan.waw.pl/Sk%C5%82adnica[Składnica frazowa] -  Polish
+* link:http://stp.lingfil.uu.se/%7Enivre/swedish_treebank/[Swedish Treebank] - Swedish
+* link:http://stp.lingfil.uu.se/%7Enivre/research/Talbanken05.html[Talbanken05] - Swedish
+* link:http://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger.html[TIGER] - German
 
 
 === TüPP-D/Z
@@ -527,74 +482,58 @@ annotated and encoded in a XML format.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |TueppReader (RR)|Read TüPP-D/Z XML format from files
-
-|===============
-
+|====
 
 Known corpora in this format:
 
-* link:$$http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tuepp-dz.html$$[TüPP-D/Z] - German
+* link:http://www.sfs.uni-tuebingen.de/de/ascl/ressourcen/corpora/tuepp-dz.html[TüPP-D/Z] - German
 
 
 === Web1T
 
 The Web1T n-gram corpus is a huge collection of n-grams collected from the internet. The
-			jweb1t library allows to access this corpus efficiently. This module provides support
-			for the file format used by the Web1T n-gram corpus and allows to conveniently created
-			jweb1t indexes.
+jweb1t library allows to access this corpus efficiently. This module provides support
+for the file format used by the Web1T n-gram corpus and allows to conveniently created
+jweb1t indexes.
 
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |Web1TFormatWriter|
-
-|===============
-
+|====
 
 See also:
 
-
-* link:$$http://code.google.com/p/jweb1t/$$[jweb1t - Java API for text n-gram frequency data in Web1T format]
-
-
-* link:$$http://catalog.ldc.upenn.edu/LDC2006T13$$[Web1T n-gram corpus]
-
+* link:http://code.google.com/p/jweb1t/[jweb1t - Java API for text n-gram frequency data in Web1T format]
+* link:http://catalog.ldc.upenn.edu/LDC2006T13[Web1T n-gram corpus]
 
 
 === XMI
 
-
-
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |XmiReader (RR)|
 |XmiWriter (FW)|
-
-|===============
-
-
+|====
 
 
 === XML
 
-
-
 .Components
 [options="header"]
-|===============
+|====
 |Component|Comments
 |XmlReader|
 |XmlReaderText|
 |XmlReaderXPath|
 |XmlWriterInline|
-
-|===============
+|====
 
 
 

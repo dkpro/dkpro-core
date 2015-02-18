@@ -28,43 +28,49 @@ image::ts_coreference.png[align="center"]
 
 .Coreference components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|StanfordCoreferenceResolver|
-|===============
+|StanfordCoreferenceResolver
+|
+|====
 
 
 === Chunking
 
 .Chunking components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|OpenNlpChunker||TreeTaggerChunker|(uses native binary)
+|OpenNlpChunker|
 
-|===============
-
-
+|TreeTaggerChunker
+|(uses native binary)
+|====
 
 
 === Decompounding
 
 .Decompounding components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|CompoundAnnotator|
-|===============
+|CompoundAnnotator
+|
+|====
 
 
 === Dictionary-Based Annotation
 
 .Dictionary-based annotation components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|DictionaryAnnotator||SemanticFieldAnnotator|
-|===============
+|DictionaryAnnotator
+|
+
+|SemanticFieldAnnotator
+|
+|====
 
 
 === Language Identification
@@ -74,12 +80,17 @@ image::ts_document_meta_data.png[align="center"]
 
 .Language identification components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|LangDetectLanguageIdentifier|Character n-grams
-|LanguageDetectorWeb1T|Token n-grams
-|TextCat|
-|===============
+|LangDetectLanguageIdentifier
+|Character n-grams
+
+|LanguageDetectorWeb1T
+|Token n-grams
+
+|TextCat
+|
+|====
 
 
 === Lemmatization
@@ -89,82 +100,163 @@ image::ts_lemmatization.png[align="center"]
 
 .Lemmatization components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|ClearNlpLemmatizer||GateLemmatizer||LanguageToolLemmatizer||MateLemmatizer||MorphaLemmatizer||StanfordLemmatizer|(variant of Morpha)
-|TreeTaggerPosTagger|(uses native binary)
+|ClearNlpLemmatizer
+|
 
-|===============
+|GateLemmatizer
+|
+
+|LanguageToolLemmatizer
+|
+
+|MateLemmatizer
+|
+
+|MorphaLemmatizer
+|
+
+|StanfordLemmatizer
+|(variant of Morpha)
+
+|TreeTaggerPosTagger
+|(uses native binary)
+|====
 
 
 === Morphological Analysis
 
-
-
 .Morphological analysis components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|MateMorphTagger||SfstAnnotator|(uses native binary)
-|===============
+|MateMorphTagger
+|
 
-
+|SfstAnnotator
+|(uses native binary)
+|====
 
 
 === Named-Entity Recognition
 
-
-
 .Named-entity recognition components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|OpenNlpNameFinder||StanfordNamedEntityRecognizer|
-|===============
+|OpenNlpNameFinder
+|
 
+|StanfordNamedEntityRecognizer
+|
+|====
 
+=== Normalization
+
+.Text normalization components
+[options="header"]
+|====
+|Component|Comments
+| CjfNormalizer
+| 
+
+| CapitalizationNormalizer
+| 
+
+| DictionaryBasedTokenTransformer
+| 
+
+| ExpressiveLengtheningNormalizer
+| 
+
+| HyphenationRemover
+| 
+
+| SharpSNormalizer
+| 
+
+| SpellingNormalizer
+| 
+
+| StanfordPtbTransformer
+| 
+
+| TokenCaseTransformer
+| 
+
+| UmlautNormalizer
+|====
 
 
 === Parsing
 
-
-
 .Parsing components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|BerkeleyParser|constituents
-|ClearNlpDependencyParser|dependencies
-|OpenNlpParser|constituents
-|MaltParser|dependencies
-|MateParser|dependencies
-|MstParser|dependencies
-|StanfordParser|constituents, dependencies (for some languages)
+|BerkeleyParser
+|constituents
 
-|===============
+|ClearNlpDependencyParser
+|dependencies
 
+|OpenNlpParser
+|constituents
 
+|MaltParser
+|dependencies
+
+|MateParser
+|dependencies
+
+|MstParser
+|dependencies
+
+|StanfordParser
+|constituents, dependencies (for some languages)
+|====
 
 
 === Part-of-Speech Tagging
-
-
 
 .Part-of-speech type
 image::ts_part-of-speech.png[align="center"]
 
 .Part-of-speech tagging components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|ArktweetTagger|(not in release)
-|ClearNlpPosTagger||HepplePosTagger||HunPosTagger|(uses native binary)
-|MatePosTagger||MeCabTagger|(uses native binary)
-|OpenNlpPosTagger||StanfordPosTagger||TreeTaggerPosTagger|also does lemmatization (uses native binary)
+|ArktweetTagger
+|
 
-|===============
+|ClearNlpPosTagger
+|
 
+|HepplePosTagger
+|
 
+|HunPosTagger
+|(uses native binary)
+
+// | LbjPosTagger
+// | (not in release)
+
+|MatePosTagger
+|
+
+|MeCabTagger
+|(uses native binary)
+
+|OpenNlpPosTagger
+|
+
+|StanfordPosTagger
+|
+
+|TreeTaggerPosTagger
+|also does lemmatization (uses native binary)
+|====
 
 
 === Segmentation
@@ -179,54 +271,63 @@ image::ts_segmentation.png[align="center"]
 
 .Segmentation components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|BreakIteratorSegmenter||ClearNlpSegmenter||LanguageToolSegmenter||OpenNlpSegmenter||StanfordSegmenter|
-|===============
+|BreakIteratorSegmenter
+|
 
+|ClearNlpSegmenter
+|
 
+|LanguageToolSegmenter
+|
+
+|OpenNlpSegmenter
+|
+
+|StanfordSegmenter
+|
+|====
 
 
 === Semantic Role Labelling
 
-
-
 .Semantic role labelling components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|ClearNlpSemanticRoleLabeler|
-
-|===============
-
-
+|ClearNlpSemanticRoleLabeler
+|
+|====
 
 
 === Spell Checking
 
-
-
 .Spell checking components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|LanguageToolChecker||NorvigSpellingCorrector||JazzyChecker|
-|===============
+|LanguageToolChecker
+|
 
+|NorvigSpellingCorrector
+|
 
+|JazzyChecker
+|
+|====
 
 
 === Stemming
-
-
 
 .Stem type
 image::ts_stemming.png[align="center"]
 
 .Stemming components
 [options="header"]
-|===============
+|====
 |Component|Comments
-|SnowballStemmer|
-|===============
+|SnowballStemmer
+|
+|====
 
