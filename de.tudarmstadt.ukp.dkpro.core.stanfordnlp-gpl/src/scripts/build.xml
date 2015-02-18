@@ -26,23 +26,23 @@
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
-	<property name="segmenter.version.real" value="3.5.0"/>
-	<property name="segmenter.date" value="2014-10-26"/>
+	<property name="segmenter.version.real" value="3.5.1"/>
+	<property name="segmenter.date" value="2015-01-29"/>
 	
-	<property name="tagger.version.real" value="3.5.0"/>
-	<property name="tagger.date" value="2014-10-26"/>
+	<property name="tagger.version.real" value="3.5.1"/>
+	<property name="tagger.date" value="2015-01-29"/>
 	
-	<property name="parser.version.real" value="3.5.0"/>
-	<property name="parser.date" value="2014-10-31"/>
+	<property name="parser.version.real" value="3.5.1"/>
+	<property name="parser.date" value="2015-01-29"/>
 	
-	<property name="corenlp.version.real" value="3.5.0"/>
-	<property name="core.version" value="20141031"/>
-	<property name="core.date" value="2014-10-31"/>
+	<property name="corenlp.version.real" value="3.5.1"/>
+	<property name="core.version" value="20150129"/>
+	<property name="core.date" value="2015-01-29"/>
 
     <property name="core.caseless.date" value="2014-02-25"/>
-    <property name="core.chinese.date" value="2014-10-23"/>
+    <property name="core.chinese.date" value="2015-01-30"/>
 	<property name="core.srparser.date" value="2014-10-23"/>
-	<property name="core.spanish.date" value="2014-10-23"/>
+	<property name="core.spanish.date" value="2015-01-08"/>
 
 	<property name="german.ner.date" value="2012-05-22"/>
 	<property name="chinese.ner.date" value="2012-11-11"/>
@@ -70,18 +70,27 @@
 
 	<target name="newmodels">
         <property name="install-artifact-mode" value="remote"/>
-		<antcall target="parser-ar-sr"/>
-		<antcall target="parser-de-sr"/>
-		<antcall target="parser-en-sr"/>
-		<antcall target="parser-en-sr-beam"/>
+		<!--
+		<antcall target="parser-ar-factored"/>
+		<antcall target="parser-de-pcfg"/>
+		<antcall target="parser-de-factored"/>
+		<antcall target="ner-en-muc.7class.distsim.crf"/>
+		<antcall target="ner-en-muc.7class.caseless.distsim.crf"/>
+		<antcall target="ner-en-conll.4class.distsim.crf"/>
+		<antcall target="ner-en-all.3class.distsim.crf"/>
+		<antcall target="parser-en-pcfg"/>
+		<antcall target="parser-en-factored"/>
+		<antcall target="parser-en-wsj-factored"/>
+		<antcall target="parser-en-wsj-pcfg"/>
 		<antcall target="tagger-es-default"/>
 		<antcall target="tagger-es-distsim"/>
-		<antcall target="parser-es-sr"/>
-		<antcall target="parser-es-sr-beam"/>
+		<antcall target="parser-es-pcfg"/>
 		<antcall target="parser-fr-factored"/>
-		<antcall target="parser-fr-sr-beam"/>
 		<antcall target="parser-zh-pcfg"/>
-		<antcall target="parser-zh-sr"/>
+		<antcall target="parser-zh-factored"/>
+		<antcall target="parser-zh-xinhua-factored"/>
+		<antcall target="parser-zh-xinhua-pcfg"/>
+		-->
 		<antcall target="coref-en-default"/>
 	</target>
 	
@@ -117,10 +126,10 @@
 	<target name="parser-ar-factored">	
     	<install-stub-and-upstream-file 
     		file="target/download/parser/arabicFactored.ser.gz" 
-    		md5="85efaca51004b43ca0773859dc6fba13"
+    		md5="3d04cbd017e2c7c321e938fb344d91d3"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="ar" 
@@ -327,10 +336,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/germanPCFG.ser.gz" 
-    		md5="f3bcd0605f4ea9a1f35f8505be80f5ec"
+    		md5="e263f8b0aaced0c7136d1970da4df844"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="de" 
@@ -351,10 +360,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/germanFactored.ser.gz" 
-    		md5="ac654481b9d306069c8817c62fe4a0b3"
+    		md5="c5e3aee5bf9281efab878699d4c6b467"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="de" 
@@ -607,13 +616,13 @@
 	<target name="ner-en-muc.7class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.muc.7class.distsim.crf.ser.gz" 
-    		md5="1badfdd6ffe01f8aca76b102ef4b153b"
+    		md5="3655fa54c83f9d751f429770c0d4d7a5"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="ner" 
     		language="en" 
     		variant="muc.7class.distsim.crf" 
-    		upstreamVersion="20140827" 
+    		upstreamVersion="20150129" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 		</install-stub-and-upstream-file>		
@@ -622,13 +631,13 @@
 	<target name="ner-en-muc.7class.caseless.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.muc.7class.distsim.crf.ser.gz" 
-    		md5="1badfdd6ffe01f8aca76b102ef4b153b"
+    		md5="3655fa54c83f9d751f429770c0d4d7a5"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="ner" 
     		language="en" 
     		variant="muc.7class.caseless.distsim.crf" 
-    		upstreamVersion="20140225" 
+    		upstreamVersion="20150129" 
     		metaDataVersion="0"
 			extension="ser.gz">		
 		</install-stub-and-upstream-file>		
@@ -637,10 +646,10 @@
 	<target name="ner-en-conll.4class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.conll.4class.distsim.crf.ser.gz" 
-    		md5="0869e3de6801622f3f42434a7d35b51e"
+    		md5="e8faf7ea7da871572418ddbd5ec5aad9"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827" 
+    		upstreamVersion="20150129" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -667,10 +676,10 @@
 	<target name="ner-en-all.3class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.all.3class.distsim.crf.ser.gz" 
-    		md5="379343dfb2617c620cbe934a9e3f96e1"
+    		md5="fc641e766d20adde69b04dffb79d1bac"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827" 
+    		upstreamVersion="20150129" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -712,13 +721,13 @@
 	<target name="parser-en-pcfg">
     	<install-stub-and-upstream-file 
     		file="target/download/core/englishPCFG.ser.gz" 
-    		md5="9334d69c4757d176831952ef100e6a1c"
+    		md5="8399cef1d4417fb58bb0905342421570"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="parser" 
     		language="en" 
     		variant="pcfg" 
-    		upstreamVersion="20140827" 
+    		upstreamVersion="20150129" 
     		metaDataVersion="1"
     		extension="ser.gz">		
 			<metadata>
@@ -736,10 +745,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/englishFactored.ser.gz" 
-    		md5="d4d17b1fd270e4981200cda53d02b57a"
+    		md5="008425754fc27be067d0849710c1f492"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="en" 
@@ -812,10 +821,10 @@
 	<target name="parser-en-wsj-factored">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/wsjFactored.ser.gz" 
-    		md5="42fdbaf5b238732ee1f0f2dc64eae069"
+    		md5="aa25f65979f06ec068016fbe3f6f247a"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="en" 
@@ -831,10 +840,10 @@
 	<target name="parser-en-wsj-pcfg">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/wsjPCFG.ser.gz" 
-    		md5="74e7b09e09fbaa69777938529d5eaa8d"
+    		md5="78f12fefddf61dcf652ee564e284e7c9"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="en" 
@@ -893,13 +902,13 @@
 			destfile="target/download/spanish/spanish.tagger.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish/spanish.tagger.gz" 
-    		md5="0df31bf1411ce906e55e747083e2c3ac"
+    		md5="22ff2fb3662f1b6efa8bb28935c0ff73"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="tagger" 
     		language="es" 
     		variant="default" 
-    		upstreamVersion="20141023" 
+    		upstreamVersion="20150108" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 			<metadata>
@@ -914,13 +923,13 @@
 			destfile="target/download/spanish/spanish-distsim.tagger.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/spanish/spanish-distsim.tagger.gz" 
-    		md5="494e9fb560fbbfb50dba20fe1bba0eb9"
+    		md5="63b926490030760f28f2ae3f86e60d8c"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
     		tool="tagger" 
     		language="es" 
     		variant="distsim" 
-    		upstreamVersion="20141023" 
+    		upstreamVersion="20150108" 
     		metaDataVersion="1"
 			extension="ser.gz">		
 			<metadata>
@@ -947,10 +956,10 @@
 	<target name="parser-es-pcfg">
     	<install-stub-and-upstream-file 
     		file="target/download/spanish/spanishPCFG.ser.gz" 
-    		md5="5edd32ab073ce9a0381b43f8f09bb6c9"
+    		md5="28688c20f991b089618493ab6c619ea4"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140826"
+    		upstreamVersion="20150108"
     		metaDataVersion="1"
     		tool="parser" 
     		language="es" 
@@ -1015,10 +1024,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/frenchFactored.ser.gz" 
-    		md5="873c73a21f27a559f1b3b9e75aca4506"
+    		md5="4b86c97d8f1f7a06a7f7ff498cfd4043"
     	    groupId="de.tudarmstadt.ukp.dkpro.core" 
     	    artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20141031"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="fr" 
@@ -1200,10 +1209,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/chinesePCFG.ser.gz" 
-    		md5="28636a8197a27f1c9654211ffe7a52d7"
+    		md5="19bd6fc68f4be3c28b2183580fa94b97"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20141023"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -1248,10 +1257,10 @@
 		  -->
     	<install-stub-and-upstream-file 
     		file="target/download/parser/chineseFactored.ser.gz" 
-    		md5="5fb0620b37888fbfd313ba82d2624fcc"
+    		md5="3633c229f50946bc450cd8cf02867817"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -1267,10 +1276,10 @@
 	<target name="parser-zh-xinhua-factored">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/xinhuaFactored.ser.gz" 
-    		md5="063719cac8c8cdc3fb5697af57a6c4f5"
+    		md5="20764d11da33e8a0f3d0b746372ca0d5"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 
@@ -1286,10 +1295,10 @@
 	<target name="parser-zh-xinhua-pcfg">
     	<install-stub-and-upstream-file 
     		file="target/download/parser/xinhuaPCFG.ser.gz" 
-    		md5="eeff0f9f49f4f4864157e1fcf713514b"
+    		md5="00bd78aa8d392bc62d7bfb00fe6065dd"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140827"
+    		upstreamVersion="20150129"
     		metaDataVersion="1"
     		tool="parser" 
     		language="zh" 

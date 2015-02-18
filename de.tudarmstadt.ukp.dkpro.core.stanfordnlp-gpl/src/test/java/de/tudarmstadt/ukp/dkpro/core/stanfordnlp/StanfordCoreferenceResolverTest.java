@@ -53,7 +53,7 @@ public class StanfordCoreferenceResolverTest
 	{
 	    JCas jcas = runTest("en", "John bought a car. He is very happy with it.");
 
-		String[][] ref = new String[][] { 
+		String[][] ref = { 
 		        { "John", "He" }, 
 		        { "a car", "it" } };
 		
@@ -89,7 +89,7 @@ public class StanfordCoreferenceResolverTest
                     "\" We cannot forgive this war , \" Miyako Fuji , 20 , one of the rally 's "
                             + "organisers told Jiji news agency .");
 
-            String[][] ref = new String[][] { 
+            String[][] ref = { 
                     { "Jiji" }, 
                     { "We" },
                     { "this war" },
@@ -133,12 +133,12 @@ public class StanfordCoreferenceResolverTest
     {
         JCas jcas = runTest("en", "'Let's go! I want to see the Don', he said.");
 
-        String[][] ref = new String[][] {
-                { "'", "'s", "he" },
+        String[][] ref = {
+                { "'", "'s" },
                 { "I" },
-                { "the Don'" } };
+                { "the Don'", "he" } };
 
-        String[] pennTree = new String[] { 
+        String[] pennTree = { 
                 "(ROOT (S (NP (POS ')) (VP (VBD Let) (NP (PRP 's)) (VP (VB go))) (. !)))", 
                 "(ROOT (S (S (NP (PRP I)) (VP (VBP want) (S (VP (TO to) (VP (VB see) (NP (DT the) "
                 + "(NNPS Don) (POS '))))))) (, ,) (NP (PRP he)) (VP (VBD said)) (. .)))"
@@ -159,7 +159,7 @@ public class StanfordCoreferenceResolverTest
                 "Consumer Protection Act; the Don't Ask, Don't Tell Repeal Act of 2010; the Budget Control " + 
                 "Act of 2011; and the American Taxpayer Relief Act of 2012.");
 
-        String[][] ref = new String[][] {
+        String[][] ref = {
                 { "Other major domestic initiatives in his presidency" },
                 { "his presidency" },
                 { "his" },
@@ -179,7 +179,7 @@ public class StanfordCoreferenceResolverTest
                 { "2011" },
                 { "2012" } };
 
-        String[] pennTree = new String[] { 
+        String[] pennTree = { 
             "(ROOT (S (NP (NP (JJ Other) (JJ major) (JJ domestic) (NNS initiatives)) (PP (IN in) "
             + "(NP (PRP$ his) (NN presidency)))) (VP (VBP include) (SBAR (S (NP (NP (DT the) "
             + "(NNP Patient) (NNP Protection) (CC and) (NNP Affordable) (NNP Care) (NNP Act)) "

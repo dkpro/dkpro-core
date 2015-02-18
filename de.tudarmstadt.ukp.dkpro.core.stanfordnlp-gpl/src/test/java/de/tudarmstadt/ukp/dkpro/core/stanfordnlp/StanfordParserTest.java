@@ -59,13 +59,13 @@ import edu.stanford.nlp.trees.Tree;
  */
 public class StanfordParserTest
 {
-    private static final String[] GERMAN_POS_TAGS = { "$*LRB*", "$,", "$.", "-", ".$$.", "ADJA",
-            "ADJD", "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM",
-            "KON", "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER",
-            "PPOSAT", "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG",
-            "PTKVZ", "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP",
-            "VMFIN", "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
-    
+    private static final String[] GERMAN_POS_TAGS = { "$,", "$.", "$[", ".$$.", "ADJA", "ADJD",
+        "ADV", "APPO", "APPR", "APPRART", "APZR", "ART", "CARD", "FM", "ITJ", "KOKOM", "KON",
+        "KOUI", "KOUS", "NE", "NN", "PDAT", "PDS", "PIAT", "PIDAT", "PIS", "PPER", "PPOSAT",
+        "PPOSS", "PRELAT", "PRELS", "PRF", "PROAV", "PTKA", "PTKANT", "PTKNEG", "PTKVZ",
+        "PTKZU", "PWAT", "PWAV", "PWS", "TRUNC", "VAFIN", "VAIMP", "VAINF", "VAPP", "VMFIN",
+        "VMINF", "VMPP", "VVFIN", "VVIMP", "VVINF", "VVIZU", "VVPP", "XY" };
+
     private static final String[] GERMAN_CONSTITUENT_TAGS = { "AA", "AP", "AVP", "CAC", "CAP",
             "CAVP", "CCP", "CH", "CNP", "CO", "CPP", "CS", "CVP", "CVZ", "DL", "ISU", "MPN", "MTA",
             "NM", "NP", "NUR", "PP", "QL", "ROOT", "S", "VP", "VZ" };
@@ -139,7 +139,7 @@ public class StanfordParserTest
                 + "(ADV möglichst) (PIDAT viele) (CNP (NN Konstituenten) (KON und) "
                 + "(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
 
-        String[] unmappedPos = { "$*LRB*", "-", ".$$." };
+        String[] unmappedPos = { "$[", ".$$." };
 
         String[] unmappedConst = { "NUR" };
 
@@ -182,7 +182,7 @@ public class StanfordParserTest
                 + "(NP (AP (ADV möglichst) (PIDAT viele)) (CNP (NN Konstituenten) (KON und) "
                 + "(NN Dependenzen))) (VVFIN beinhaltet))) ($. .)))";
 
-        String[] unmappedPos = { "$*LRB*", "-", ".$$." };
+        String[] unmappedPos = { "$[", ".$$." };
 
         String[] unmappedConst = { "NUR" };
 

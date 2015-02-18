@@ -568,6 +568,7 @@ public class StanfordParser
                 else if (pd instanceof ShiftReduceParser) {
                     BaseModel model = (BaseModel) FieldUtils.readField(pd, "model", true);
                     states = (Iterable<String>) FieldUtils.readField(model, "knownStates", true);
+//                    states = ((ShiftReduceParser) pd).tagSet();
                 }
                 else {
                     throw new IllegalStateException("Unknown parser type ["

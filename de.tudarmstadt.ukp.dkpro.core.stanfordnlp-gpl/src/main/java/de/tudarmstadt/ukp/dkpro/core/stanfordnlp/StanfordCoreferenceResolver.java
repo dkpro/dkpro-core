@@ -62,6 +62,7 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.ParserAnnotatorUtils;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
+import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
@@ -262,12 +263,14 @@ public class StanfordCoreferenceResolver
             sentence.set(RootKey.class, root);
             sentences.add(sentence);
 
+            // https://code.google.com/p/dkpro-core-asl/issues/detail?id=590
             // We currently do not copy over dependencies from the CAS. This is supposed to fill
             // in the dependencies so we do not get NPEs.
             TreebankLanguagePack tlp = new PennTreebankLanguagePack();
             GrammaticalStructureFactory gsf = tlp.grammaticalStructureFactory(
                     tlp.punctuationWordRejectFilter(), tlp.typedDependencyHeadFinder());
-            ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence, treeCopy);
+            ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence, treeCopy, 
+                    GrammaticalStructure.Extras.NONE);
             
             // https://code.google.com/p/dkpro-core-asl/issues/detail?id=582
             SemanticGraph deps = sentence
