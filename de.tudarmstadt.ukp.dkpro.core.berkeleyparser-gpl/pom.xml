@@ -26,6 +26,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core GPL - Berkeley Parser</name>
 	<dependencies>
 		<dependency>

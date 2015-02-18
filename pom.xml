@@ -149,6 +149,13 @@
 	</modules>
 	<build>
 		<plugins>
+		    <!--
+            <plugin>
+                <groupId>io.takari.maven.plugins</groupId>
+                <artifactId>takari-lifecycle-plugin</artifactId>
+                <extensions>true</extensions>
+            </plugin>
+            -->
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>com.mycila</groupId>

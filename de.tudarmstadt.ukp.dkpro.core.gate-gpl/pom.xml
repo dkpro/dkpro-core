@@ -26,6 +26,7 @@
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
+    <packaging>jar</packaging>
 	<name>DKPro Core GPL - GATE</name>
 	<dependencies>
 		<dependency>
