@@ -22,14 +22,13 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class MorphaLemmatizerTest
@@ -41,9 +40,9 @@ public class MorphaLemmatizerTest
 		JCas jcas = runTest("en", false, "We need a very complicated example sentence , which " +
 			"contains as many constituents and dependencies as possible .");
 
-        String[] lemmas = new String[] { "We", "need", "a", "very", "complicate", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
+        String[] lemmas = { "We", "need", "a", "very", "complicate", "example", "sentence", ",",
+                "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
+                "possible", "." };
 
 		AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
 	}
@@ -55,9 +54,9 @@ public class MorphaLemmatizerTest
         JCas jcas = runTest("en", true, "We need a very complicated example sentence , which " +
             "contains as many constituents and dependencies as possible .");
 
-        String[] lemmas = new String[] { "We", "need", "a", "very", "complicated", "example",
-                "sentence", ",", "which", "contain", "as", "many", "constituent", "and",
-                "dependency", "as", "possible", "." };
+        String[] lemmas = { "We", "need", "a", "very", "complicated", "example", "sentence", ",",
+                "which", "contain", "as", "many", "constituent", "and", "dependency", "as",
+                "possible", "." };
 
         AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
     }
@@ -81,17 +80,6 @@ public class MorphaLemmatizerTest
         return TestRunner.runTest(engine, aLanguage, aText);
 	}
 	
-
 	@Rule
-	public TestName name = new TestName();
-
-	@Before
-	public void printSeparator()
-	{
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
-		Runtime.getRuntime().gc();
-		
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
+	public DkproTestContext testContext = new DkproTestContext();
 }
