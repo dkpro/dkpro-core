@@ -29,7 +29,7 @@ image::ts_coreference.png[align="center"]
 .Coreference components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |StanfordCoreferenceResolver
 |
 |====
@@ -40,7 +40,7 @@ image::ts_coreference.png[align="center"]
 .Chunking components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |OpenNlpChunker|
 
 |TreeTaggerChunker
@@ -53,7 +53,7 @@ image::ts_coreference.png[align="center"]
 .Decompounding components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |CompoundAnnotator
 |
 |====
@@ -64,7 +64,7 @@ image::ts_coreference.png[align="center"]
 .Dictionary-based annotation components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |DictionaryAnnotator
 |
 
@@ -81,7 +81,7 @@ image::ts_document_meta_data.png[align="center"]
 .Language identification components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |LangDetectLanguageIdentifier
 |Character n-grams
 
@@ -101,7 +101,7 @@ image::ts_lemmatization.png[align="center"]
 .Lemmatization components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |ClearNlpLemmatizer
 |
 
@@ -130,7 +130,7 @@ image::ts_lemmatization.png[align="center"]
 .Morphological analysis components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |MateMorphTagger
 |
 
@@ -144,7 +144,7 @@ image::ts_lemmatization.png[align="center"]
 .Named-entity recognition components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |OpenNlpNameFinder
 |
 
@@ -157,7 +157,7 @@ image::ts_lemmatization.png[align="center"]
 .Text normalization components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 | CjfNormalizer
 | 
 
@@ -194,7 +194,7 @@ image::ts_lemmatization.png[align="center"]
 .Parsing components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |BerkeleyParser
 |constituents
 
@@ -226,7 +226,7 @@ image::ts_part-of-speech.png[align="center"]
 .Part-of-speech tagging components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |ArktweetTagger
 |
 
@@ -272,7 +272,7 @@ image::ts_segmentation.png[align="center"]
 .Segmentation components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |BreakIteratorSegmenter
 |
 
@@ -295,7 +295,7 @@ image::ts_segmentation.png[align="center"]
 .Semantic role labelling components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |ClearNlpSemanticRoleLabeler
 |
 |====
@@ -306,7 +306,7 @@ image::ts_segmentation.png[align="center"]
 .Spell checking components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |LanguageToolChecker
 |
 
@@ -326,8 +326,27 @@ image::ts_stemming.png[align="center"]
 .Stemming components
 [options="header"]
 |====
-|Component|Comments
+|Component|Description
 |SnowballStemmer
 |
+|====
+
+
+=== Topic Modelling
+
+Topic modelling is a statistical approach to discover abstract _topics_ in a collection of documents. 
+A topic is characterized by a probability distribution of the words in the document collection.
+Once a topic model has been generated, it can be used to analyze unseen documents. The result of the
+analysis is describes the probability by which a document _belongs_ to each of the _topics_ in the
+model.
+
+.Topic modelling components
+[options="header"]
+|====
+|Component|Description
+| MalletTopicModelEstimator
+| Estimate a topic model using Mallet and write it to a file.
+| MalletTopicModelInferencer
+| Detect the topic distribution in documents.
 |====
 
