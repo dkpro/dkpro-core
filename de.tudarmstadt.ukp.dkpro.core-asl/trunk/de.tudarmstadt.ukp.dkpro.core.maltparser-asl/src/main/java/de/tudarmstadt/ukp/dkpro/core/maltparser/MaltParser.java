@@ -68,11 +68,10 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
+ * Dependency parsing using MaltPaser.
  * <p>
- * DKPro Annotator for the MaltParser
- * </p>
- *
  * Required annotations:
+ * </p>
  * <ul>
  * <li>Token</li>
  * <li>Sentence</li>
