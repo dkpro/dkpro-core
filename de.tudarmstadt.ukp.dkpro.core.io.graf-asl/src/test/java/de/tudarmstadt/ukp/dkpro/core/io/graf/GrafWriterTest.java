@@ -51,7 +51,7 @@ public class GrafWriterTest
 
 	public void write() throws Exception
 	{
-	    File targetFolder = new File("target/test-output/"+testContext.getTestOutputFolderName());
+	    File targetFolder = testContext.getTestOutputFolder();
 	    
 		CollectionReaderDescription textReader = createReaderDescription(
 				TextReader.class,
