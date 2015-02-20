@@ -17,8 +17,6 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.graf;
 
-import static org.apache.commons.io.IOUtils.closeQuietly;
-
 import java.io.OutputStream;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -42,11 +40,8 @@ extends JCasFileWriter_ImplBase
 	public void process(JCas aJCas)
 		throws AnalysisEngineProcessException
 	{
-		OutputStream docOS = null;
 		IRenderer renderer = null;
-		try {
-			docOS = getOutputStream(aJCas, ".xml");
-
+		try (OutputStream docOS = getOutputStream(aJCas, ".xml");) {
 			// Convert CAS
 			GraphFactory grafFactory = new GraphFactory();
 			IGraph graph = grafFactory.createGraph(aJCas.getCas());
@@ -62,8 +57,6 @@ extends JCasFileWriter_ImplBase
 			if (renderer != null) {
 				renderer.close();
 			}
-			closeQuietly(docOS);
 		}
 	}
-
 }
