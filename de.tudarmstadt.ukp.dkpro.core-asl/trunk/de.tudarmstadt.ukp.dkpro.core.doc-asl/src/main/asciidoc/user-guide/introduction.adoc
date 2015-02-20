@@ -105,7 +105,7 @@ compatible - even though the POS-tagger and dependency-parser components are
 compatible on the level of the type system.
 
 
-==== Particular Settings
+==== Troubleshooting
 
 
 ===== Dictionaries and other lexical resources
@@ -134,6 +134,11 @@ lexical resource).
 
 ===== Morphologically Rich Languages
 
+////
+EJ: What's the goal of this subsection?  Other sister sections have advice
+for how to construct a different pipeline, but this section just says,
+'Your individual tools might not work well.'
+////
 
 * Parsing: Morphologically rich languages (e.g. Czech, German, and
   Hungarian) pose a particular challenge to parser components (Tsarfaty et
@@ -154,13 +159,18 @@ lexical resource).
 Most components (sentence splitters, POS taggers, parsers ...) are trained on
 (standard) newspaper text. As a consequence, you might encounter a significant
 performance drop if you apply the components to domain specific or other
-non-standard data without adaptation.
+non-standard data (scientific abstracts, Twitter data, etc.) without adaptation.
 
 * Tokenizing: adapting the tokenizer to your specific domain is crucial,
   since tokenizer errors propagate to all subsequent components in the
   pipeline and worsen their performance. For example, you might adapt your
   tokenizer to become aware of emoticons or chemical formulae in order to
   process social media data or text from the biochemical domain.
+  
+  ////
+  EJ: Ok, I want to adapt my tokenizer.  How do I do this/ what's the next step?
+  Please give pointers.
+  ////
 
 
 ===== Shallow processing and POS tagsets
@@ -181,8 +191,12 @@ aware of the fact that in the DKPro Core version of the tagger, the original POS
 tagger output possibly has been mapped to a version that is compatible with the
 corresponding original tagset. (Example)
 
+////
+EJ: Ok, I want to switch to the original POS tagset.  How do I do this?  Pointers?
+////
 
-==== Further references
+
+==== References
 
 Here are some further references that might be helpful when deciding which tools to use:
 
