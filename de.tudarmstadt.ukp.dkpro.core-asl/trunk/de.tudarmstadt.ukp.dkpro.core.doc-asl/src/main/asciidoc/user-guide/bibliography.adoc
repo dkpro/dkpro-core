@@ -1,0 +1,9 @@
+[bibliography]
+
+- [[[Cavnar:1994]]] Cavnar, W. B. and J. M. Trenkle (1994). N-Gram-Based Text Categorization. 
+  In Proceedings of Third Annual Symposium on Document Analysis and Information Retrieval, 
+  Las Vegas, NV, UNLV Publications/Reprographics, pp. 161-175, 11-13 April 1994.
+
+- [[[MinnenEtal:2001]]] Minnen, G., J. Carroll and D. Pearce (2001). Applied morphological 
+  processing of English, Natural Language Engineering, 7(3). 207-223.
+  

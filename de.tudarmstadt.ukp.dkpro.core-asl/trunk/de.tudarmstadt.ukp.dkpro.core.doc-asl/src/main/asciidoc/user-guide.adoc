@@ -32,3 +32,7 @@ include::{include-dir}analytics.adoc[]
 <<<
 
 include::{include-dir}io.adoc[]
+
+<<<
+
+include::{include-dir}bibliography.adoc[]
