@@ -45,6 +45,25 @@ can be seamlessly combined into an experiment pipeline.
 
 === Choosing components
 
+////
+EJ: This section would be more helpful if, instead of telling what not to do ('Don't ask
+us what components to use!'), it provided guidelines on what __to__ do.  
+////
+
+To begin selecting tools to use in your pipeline, you may wish to use the same tools you 
+were running on your data before switching to uimaFIT, or use the same tool specifications 
+as others working on the your NLP task.  With DKPro Core, it is easy to import the exact 
+tool version and model version you need to replicate the work of others.  Or, you may 
+wish to conduct a comparison of multiple tools with the same function, to see which 
+performs best on your data.  With DKPro Core, it is simple to switch between multiple
+tools with the same function, or multiple models for a tool.
+
+Because DKPro Core does not alter any of the integrated tools, however, it is up to the 
+user to make sure that sequential components or models use matching tokenizations or 
+tagsets, and that the component or model is appropriate for the user's data (i.e., 
+a pos-tagger for newstext may perform badly if applied to Twitter data).
+
+////
 Sometimes we get asked which parser, tagger, etc. is the best and which should be
 used. We currently do not make any evaluations of the integrated tools. Also, building a
 pipeline just of the "best" components may not actually yield the best results, because
@@ -56,6 +75,7 @@ of several reasons:
 
 We recommend that you try various combinations and stick with the one that gives the
 best result for __your__ data.
+////
 
 ==== Compatibility of Components
 
