@@ -18,7 +18,8 @@
 
 == Introduction
 
-DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework. 
+DKPro Core is a collection of software components for natural language processing (NLP) 
+based on the Apache UIMA framework. 
 Many powerful and state-of-the-art NLP tools are already freely available in the NLP
 research community. New and improved tools are being developed and released continuously.
 The tools cover the whole range of NLP-related processing tasks. DKPro Core provides UIMA
@@ -31,9 +32,16 @@ EJ adding this section "What can DKPro Core do for me"
 ////
 === What can DKPro Core do for me?
 
-Many NLP tasks require a dataset that has been preprocessed with several other NLP tools.  For example, a corpus for coreference resolution must first be processed to break the text into words and sentences (segmentation), to add part of speech labels (POS tagging), and to identify noun phrases (chunking).  Carefully developed state-of-the-art NLP tools exist for each of these preprocessing tasks, but used independently, input-output formats may not line up well, and if the annotations are not stored as offsets, information may be lost.
+Many NLP tasks require a dataset that has been preprocessed with several other NLP tools.  
+For example, a corpus for coreference resolution must first be processed to break the 
+text into words and sentences (segmentation), to add part of speech labels (POS tagging), 
+and to identify noun phrases (chunking).  Carefully developed state-of-the-art NLP tools 
+exist for each of these preprocessing tasks, but used independently, input-output formats 
+may not line up well, and if the annotations are not stored as offsets, information may 
+be lost.
 
-DKPro Core integrates many state-of-the-art NLP tools as iumaFIT components so that they can be seamlessly combined into an experiment pipeline.
+DKPro Core integrates many state-of-the-art NLP tools as iumaFIT components so that they 
+can be seamlessly combined into an experiment pipeline.
 
 === Choosing components
 
