@@ -328,7 +328,8 @@ Access an offline Wikipedia database dump created using JWPL.
 |WikipediaTemplateFilteredArticleReader|
 |====
 
-See also: link:http://code.google.com/p/jwpl/[JWPL and the Wikipedia Revision Toolkit]
+See also: 
+* link:http://code.google.com/p/jwpl/[JWPL and the Wikipedia Revision Toolkit]
 
 
 === NEGRA Export Format
@@ -415,7 +416,8 @@ module.
 |====
 
 
-See also: 
+See also:
+
 * link:http://tedlab.mit.edu/%7Edr/Tgrep2/[TGrep2]
 
 === TEI

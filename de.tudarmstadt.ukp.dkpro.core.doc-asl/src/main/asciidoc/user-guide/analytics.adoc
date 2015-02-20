@@ -81,15 +81,16 @@ image::ts_document_meta_data.png[align="center"]
 .Language identification components
 [options="header"]
 |====
-|Component|Description
-|LangDetectLanguageIdentifier
-|Character n-grams
+| Component|Description
+| LangDetectLanguageIdentifier
+| Detection based on character n-grams.
 
-|LanguageDetectorWeb1T
-|Token n-grams
+| LanguageDetectorWeb1T
+| Detection based on token n-grams.
 
-|TextCat
-|
+| TextCat
+| Detection based on character n-grams. Used the link:http://textcat.sourceforge.net[Java Text Categorizing Library]
+  based on a technique by Cavnar and Trenkle <<Cavnar:1994>>.
 |====
 
 
@@ -114,8 +115,10 @@ image::ts_lemmatization.png[align="center"]
 |MateLemmatizer
 |
 
-|MorphaLemmatizer
-|
+| MorphaLemmatizer
+| Lemmatize based on a finite-state machine. Uses the link:https://github.com/knowitall/morpha[Java
+  port] of link:http://www.informatics.sussex.ac.uk/research/groups/nlp/carroll/morph.html[Morpha].
+  <<MinnenEtal:2001>>.
 
 |StanfordLemmatizer
 |(variant of Morpha)
@@ -145,10 +148,10 @@ image::ts_lemmatization.png[align="center"]
 [options="header"]
 |====
 |Component|Description
-|OpenNlpNameFinder
+| OpenNlpNameFinder
 |
 
-|StanfordNamedEntityRecognizer
+| StanfordNamedEntityRecognizer
 |
 |====
 
@@ -159,7 +162,7 @@ image::ts_lemmatization.png[align="center"]
 |====
 |Component|Description
 | CjfNormalizer
-| 
+| Converts traditional Chinese to simplified Chinese or vice-versa.
 
 | CapitalizationNormalizer
 | 
@@ -290,9 +293,12 @@ image::ts_segmentation.png[align="center"]
 |====
 
 
-=== Semantic Role Labelling
+=== Semantic Role Labeling
 
-.Semantic role labelling components
+.Semantic role labeling types
+image::ts_semantics.png[align="center"]
+
+.Semantic role labeling components
 [options="header"]
 |====
 |Component|Description
@@ -332,15 +338,18 @@ image::ts_stemming.png[align="center"]
 |====
 
 
-=== Topic Modelling
+=== Topic Modeling
 
-Topic modelling is a statistical approach to discover abstract _topics_ in a collection of documents. 
+Topic modeling is a statistical approach to discover abstract _topics_ in a collection of documents. 
 A topic is characterized by a probability distribution of the words in the document collection.
 Once a topic model has been generated, it can be used to analyze unseen documents. The result of the
 analysis is describes the probability by which a document _belongs_ to each of the _topics_ in the
 model.
 
-.Topic modelling components
+.Topic model type
+image::ts_topicmodel.png[align="center"]
+
+.Topic modeling components
 [options="header"]
 |====
 |Component|Description
