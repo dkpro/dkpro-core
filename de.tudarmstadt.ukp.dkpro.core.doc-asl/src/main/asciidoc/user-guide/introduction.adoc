@@ -217,6 +217,9 @@ Here are some further references that might be helpful when deciding which tools
 
 === Adding components as dependencies (Maven)
 
+In order to start using an integrated tool from DKPro Core, we can add it as a
+Maven dependency to our experiment.
+
 As an example, we take the OpenNlpPosTagger component. To make it available in a
 pipeline, we add the following dependency to our POM file:
 
@@ -255,7 +258,8 @@ version, it is sufficient to change the value of the
 
 === Adding resources as dependencies (Maven)
 
-Most components require resources such as models in order to operate. Since components
+Most components (i.e., tools such as OpenNlpPosTagger) require resources such as models 
+(such as opennlp-model-tagger-en-maxent) in order to operate. Since components
 and resources are versioned separately, it can be non-trivial to find the right version
 of a resource for a particular version of a component. For this reason, DKPro Core
 components each maintain a list of resources known to be compatible with them. This
