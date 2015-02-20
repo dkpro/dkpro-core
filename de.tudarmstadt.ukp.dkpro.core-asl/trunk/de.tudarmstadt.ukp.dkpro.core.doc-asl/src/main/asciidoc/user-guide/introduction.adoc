@@ -18,6 +18,7 @@
 
 == Introduction
 
+DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework. 
 Many powerful and state-of-the-art NLP tools are already freely available in the NLP
 research community. New and improved tools are being developed and released continuously.
 The tools cover the whole range of NLP-related processing tasks. DKPro Core provides UIMA
