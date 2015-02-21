@@ -42,9 +42,11 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 
 /**
  * UIMA CAS consumer writing the CAS document text in TEI format.
@@ -75,6 +77,14 @@ public class TeiWriter
     @ConfigurationParameter(name = PARAM_C_TEXT_PATTERN, mandatory = true, defaultValue = "[,.:;()]|(``)|('')|(--)")
     private Pattern cTextPattern;
 
+    /**
+     * Write constituent annotations to the CAS. Disabled by default because it requires type
+     * priorities to be set up (Constituents must have a higher prio than Tokens).
+     */
+    public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
+    @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "false")
+    private boolean writeConstituent;
+    
     /**
      * Indent the XML.
      */
@@ -218,6 +228,17 @@ public class TeiWriter
                 attributes.add(xmlef.createAttribute("lemma", t.getLemma().getValue()));
             }
         }
+        else if (aAnnotation instanceof Constituent) {
+            Constituent c = (Constituent) aAnnotation;
+            if (c.getConstituentType() != null) {
+                attributes.add(xmlef.createAttribute("type", c.getConstituentType()));
+            }
+            if (c.getSyntacticFunction() != null) {
+                attributes.add(xmlef.createAttribute("function", c.getSyntacticFunction()));
+            }
+        } {
+            
+        }
         return attributes.iterator();
     }
     
@@ -234,6 +255,9 @@ public class TeiWriter
         }
         else if (aAnnotation.getTypeIndexID() == Paragraph.type) {
             return Optional.of("p");
+        }
+        else if (writeConstituent && (aAnnotation instanceof Constituent)) {
+            return Optional.of("phr");
         }
         else {
             return Optional.empty();
