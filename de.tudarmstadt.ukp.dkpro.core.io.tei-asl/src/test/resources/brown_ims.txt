@@ -2241,6 +2241,7 @@ church	NN	NN	-
 </sentence>
 <sentence>
 I	PPSS	O	-
+didn&apos;t	DOD *	O	-
 smell	VB	V	-
 a	AT	O	-
 drop	NN	NN	-
@@ -2249,6 +2250,7 @@ liquor	NN	NN	-
 ,	pct	O	-
 and	CC	CONJ	-
 we	PPSS	O	-
+didn&apos;t	DOD *	O	-
 have	HV	O	-
 a	AT	O	-
 bit	NN	NN	-
@@ -2427,6 +2429,7 @@ said	VBD	V	-
 <sentence>
 ``	pct	O	-
 There	EX	ART	-
+wasn&apos;t	BEDZ *	O	-
 a	AT	O	-
 bit	NN	NN	-
 of	IN	PP	-
@@ -2677,6 +2680,7 @@ treasurer	NN	NN	-
 The	AT	O	-
 escheat	NN	NN	-
 law	NN	NN	-
+cannot	MD *	O	-
 be	BE	O	-
 enforced	VBN	V	-
 now	RB	ADV	-
@@ -3168,6 +3172,7 @@ rejected	VBN	V	-
 </sentence>
 <sentence>
 ``	pct	O	-
+We&apos;re	PPSS BER	O	-
 getting	VBG	V	-
 more	AP	O	-
 &apos;	pct	O	-
@@ -3212,6 +3217,7 @@ also	RB	ADV	-
 .	pct	O	-
 </sentence>
 <sentence>
+I&apos;m	PPSS BEM	O	-
 willing	JJ	ADJ	-
 to	TO	PP	-
 stake	VB	V	-
@@ -3840,6 +3846,7 @@ argued	VBD	V	-
 that	CS	O	-
 the	AT	O	-
 ballot	NN	NN	-
+couldn&apos;t	MD *	O	-
 give	VB	V	-
 enough	AP	O	-
 information	NN	NN	-
@@ -5302,6 +5309,7 @@ replied	VBD	V	-
 I	PPSS	O	-
 would	MD	V	-
 say	VB	V	-
+it&apos;s	PPS HVZ	O	-
 got	VBN	V	-
 to	TO	PP	-
 go	VB	V	-
@@ -6601,6 +6609,7 @@ hospital	NN	NN	-
 .	pct	O	-
 </sentence>
 <sentence>
+Wouldn&apos;t	MD *	O	-
 pay	VB	V	-
 doctors	NNS	NN	-
 </sentence>
@@ -6668,6 +6677,7 @@ and	CC	CONJ	-
 47	CD	CARD	-
 dental	JJ	ADJ	-
 schools	NNS	NN	-
+cannot	MD *	O	-
 now	RB	ADV	-
 handle	VB	V	-
 the	AT	O	-
@@ -6703,6 +6713,7 @@ and	CC	CONJ	-
 dentistry	NN	NN	-
 because	CS	O	-
 they	PPSS	O	-
+can&apos;t	MD *	O	-
 afford	VB	V	-
 the	AT	O	-
 schooling	VBG	V	-

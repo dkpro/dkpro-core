@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
@@ -60,6 +61,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
@@ -69,6 +71,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 @TypeCapability(
 		outputs = {
 			"de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
+            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
@@ -103,6 +106,13 @@ public class TeiReader
 	public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
 	@ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
 	private boolean readSentence;
+
+    /**
+     * Write paragraphs annotations to the CAS.
+     */
+    public static final String PARAM_READ_PARAGRAPH = "readParagraph";
+    @ConfigurationParameter(name = PARAM_READ_PARAGRAPH, mandatory = true, defaultValue = "true")
+    private boolean readParagraph;
 
 	/**
 	 * Use the xml:id attribute on the TEI elements as document ID. Mind that many TEI files
@@ -154,11 +164,17 @@ public class TeiReader
 	 * (word) represents a grammatical (not necessarily orthographic) word.
 	 */
 	private static final String TAG_WORD = "w";
+    private static final String TAG_MULTIWORD = "mw";
 
 	/**
 	 * (s-unit) contains a sentence-like division of a text.
 	 */
 	private static final String TAG_SUNIT = "s";
+
+	/**
+     * (paragraph) marks paragraphs in prose.
+     */
+    private static final String TAG_PARAGRAPH = "p";
 
 	/**
 	 * contains a single text of any kind, whether unitary or composite, for example a poem or
@@ -178,6 +194,7 @@ public class TeiReader
 	private static final String TAG_TEI_DOC = "TEI";
 
 	private static final String ATTR_TYPE = "type";
+    private static final String ATTR_POS = "pos";
 
 	private static final String ATTR_LEMMA = "lemma";
 
@@ -368,8 +385,10 @@ public class TeiReader
 		extends Handler
 	{
 		private String documentId = null;
+		private boolean titleSet = false;
 		private boolean inTextElement = false;
 		private boolean captureText = false;
+        private int paragraphStart = -1;
 		private int sentenceStart = -1;
 		private int tokenStart = -1;
 		private String posTag = null;
@@ -414,12 +433,22 @@ public class TeiReader
 				captureText = true;
 				inTextElement = true;
 			}
-			else if (TAG_SUNIT.equals(aName)) {
+			else if (inTextElement && TAG_SUNIT.equals(aName)) {
 				sentenceStart = getBuffer().length();
 			}
-			else if (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName)) {
+            else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
+                paragraphStart = getBuffer().length();
+            }
+            else if (inTextElement
+                    && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
+                            .equals(aName))) {
 				tokenStart = getBuffer().length();
-				posTag = aAttributes.getValue(ATTR_TYPE);
+				if (StringUtils.isNotEmpty(aAttributes.getValue(ATTR_POS))) {
+	                posTag = aAttributes.getValue(ATTR_POS);
+				}
+				else {
+	                posTag = aAttributes.getValue(ATTR_TYPE);
+				}
 				lemma = aAttributes.getValue(ATTR_LEMMA);
 			}
 		}
@@ -430,8 +459,13 @@ public class TeiReader
 		{
 //			System.out.printf("%b END %s %n", captureText, aLocalName);
 			if (!inTextElement && TAG_TITLE.equals(aName)) {
-				DocumentMetaData.get(getJCas()).setDocumentTitle(getBuffer().toString().trim());
-				DocumentMetaData.get(getJCas()).setDocumentId(documentId);
+			    DocumentMetaData meta = DocumentMetaData.get(getJCas());
+			    // Read only the first title and hope it is the main title
+			    if (!titleSet) {
+			        meta.setDocumentTitle(getBuffer().toString().trim());
+			        titleSet = true;
+			    }
+			    meta.setDocumentId(documentId);
 				getBuffer().setLength(0);
 				captureText = false;
 			}
@@ -439,13 +473,21 @@ public class TeiReader
 				captureText = false;
 				inTextElement = false;
 			}
-			else if (TAG_SUNIT.equals(aName)) {
+			else if (inTextElement && TAG_SUNIT.equals(aName)) {
 				if (readSentence) {
 					new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
 				}
 				sentenceStart = -1;
 			}
-			else if (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName)) {
+            else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
+                if (readParagraph) {
+                    new Paragraph(getJCas(), paragraphStart, getBuffer().length()).addToIndexes();
+                }
+                paragraphStart = -1;
+            }
+            else if (inTextElement
+                    && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
+                            .equals(aName))) {
 				if (isNotBlank(getBuffer().substring(tokenStart, getBuffer().length()))) {
 					Token token = new Token(getJCas(), tokenStart, getBuffer().length());
 					trim(token);
