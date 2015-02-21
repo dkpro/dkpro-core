@@ -64,7 +64,7 @@ public class TeiReaderTest
         for (JCas jcas : new JCasIterable(reader)) {
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
-        	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 			actualSizes.put(meta.getDocumentId(), text.length());
 
 			writer.process(jcas);
@@ -108,7 +108,7 @@ public class TeiReaderTest
         for (JCas jcas : new JCasIterable(reader)) {
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
-        	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
                 assertEquals(2242, JCasUtil.select(jcas, Token.class).size());
@@ -188,7 +188,7 @@ public class TeiReaderTest
         for (JCas jcas : new JCasIterable(reader)) {
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
-        	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
                 assertEquals(2242, JCasUtil.select(jcas, Token.class).size());
@@ -218,7 +218,7 @@ public class TeiReaderTest
         for (JCas jcas : new JCasIterable(reader)) {
         	DocumentMetaData meta = DocumentMetaData.get(jcas);
         	String text = jcas.getDocumentText();
-        	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
+        	// System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
                 assertEquals(0, JCasUtil.select(jcas, Token.class).size());
@@ -245,7 +245,7 @@ public class TeiReaderTest
 
         for (JCas jcas : new JCasIterable(reader)) {
             // should never get here
-            System.out.println(jcas.getDocumentText());
+            // System.out.println(jcas.getDocumentText());
         }
     }
 }

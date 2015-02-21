@@ -47,6 +47,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 
 /**
  * UIMA CAS consumer writing the CAS document text in TEI format.
@@ -58,7 +59,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma" })
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class TeiWriter
     extends JCasFileWriter_ImplBase
 {
@@ -230,6 +232,9 @@ public class TeiWriter
         }
         else if (aAnnotation instanceof Constituent) {
             Constituent c = (Constituent) aAnnotation;
+            if ("ROOT".equals(c.getConstituentType())) {
+                System.out.println();
+            }
             if (c.getConstituentType() != null) {
                 attributes.add(xmlef.createAttribute("type", c.getConstituentType()));
             }
@@ -244,6 +249,13 @@ public class TeiWriter
     
     private Optional<String> getTeiTag(Annotation aAnnotation)
     {
+        if (aAnnotation instanceof Constituent) {
+            Constituent c = (Constituent) aAnnotation;
+            if ("ROOT".equals(c.getConstituentType())) {
+                System.out.println();
+            }
+        }
+        
         if (aAnnotation.getTypeIndexID() == Token.type) {
             if (cTextPattern.matcher(aAnnotation.getCoveredText()).matches()) {
                 return Optional.of("c");
@@ -255,6 +267,10 @@ public class TeiWriter
         }
         else if (aAnnotation.getTypeIndexID() == Paragraph.type) {
             return Optional.of("p");
+        }
+        else if (writeConstituent && (aAnnotation instanceof ROOT)) {
+            // We do not render ROOT nodes
+            return Optional.empty();
         }
         else if (writeConstituent && (aAnnotation instanceof Constituent)) {
             return Optional.of("phr");
