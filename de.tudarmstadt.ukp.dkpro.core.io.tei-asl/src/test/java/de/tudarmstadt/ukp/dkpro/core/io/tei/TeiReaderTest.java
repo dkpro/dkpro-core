@@ -111,8 +111,8 @@ public class TeiReaderTest
         	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
-                assertEquals(2239, JCasUtil.select(jcas, Token.class).size());
-                assertEquals(2239, JCasUtil.select(jcas, POS.class).size());
+                assertEquals(2242, JCasUtil.select(jcas, Token.class).size());
+                assertEquals(2242, JCasUtil.select(jcas, POS.class).size());
                 assertEquals(98, JCasUtil.select(jcas, Sentence.class).size());
 
                 assertEquals(firstSentence, JCasUtil.select(jcas, Sentence.class).iterator().next().getCoveredText());
@@ -191,8 +191,8 @@ public class TeiReaderTest
         	System.out.printf("%s - %d%n", meta.getDocumentId(), text.length());
 
             if (i == 0) {
-                assertEquals(2239, JCasUtil.select(jcas, Token.class).size());
-                assertEquals(2239, JCasUtil.select(jcas, POS.class).size());
+                assertEquals(2242, JCasUtil.select(jcas, Token.class).size());
+                assertEquals(2242, JCasUtil.select(jcas, POS.class).size());
                 assertEquals(0, JCasUtil.select(jcas, Sentence.class).size());
             }
             i++;

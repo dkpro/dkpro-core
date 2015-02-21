@@ -81,10 +81,26 @@
 			<!-- Constants in this dependency are inlined - dependency not required at runtime -->
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>net.java.dev.stax-utils</groupId>
+            <artifactId>stax-utils</artifactId>
+            <version>20070216</version>
+            <!-- Not required to use IndentingXMLEventWriter and not on Maven Central -->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.bea.xml</groupId>
+                    <artifactId>jsr173-ri</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		    <artifactId>de.tudarmstadt.ukp.dkpro.core.testing-asl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
