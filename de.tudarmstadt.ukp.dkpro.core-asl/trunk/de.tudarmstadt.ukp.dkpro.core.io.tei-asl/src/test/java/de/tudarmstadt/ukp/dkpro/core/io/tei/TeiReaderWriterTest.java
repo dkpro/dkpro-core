@@ -32,7 +32,15 @@ public class TeiReaderWriterTest
     {
         testRoundTrip(TeiReader.class, TeiWriter.class, "reference/example1.xml");
     }
-    
+
+    @Test
+    public void test2()
+        throws Exception
+    {
+        testRoundTrip(TeiReader.class, TeiWriter.class, "reference/example2.xml",
+                TeiWriter.PARAM_WRITE_CONSTITUENT, true);
+    }
+
     @Rule
     public DkproTestContext testContext = new DkproTestContext();
 }

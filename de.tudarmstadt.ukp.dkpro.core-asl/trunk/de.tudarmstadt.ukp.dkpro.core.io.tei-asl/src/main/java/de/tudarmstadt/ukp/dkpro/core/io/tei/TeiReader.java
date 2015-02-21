@@ -23,8 +23,10 @@ import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.commons.io.FilenameUtils;
@@ -37,6 +39,7 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
+import org.apache.uima.fit.util.FSCollectionFactory;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -64,6 +67,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 
 /**
  * Reader for the TEI XML.
@@ -75,7 +80,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
 public class TeiReader
 	extends ResourceCollectionReaderBase
 {
@@ -106,6 +112,13 @@ public class TeiReader
 	public static final String PARAM_READ_SENTENCE = ComponentParameters.PARAM_READ_SENTENCE;
 	@ConfigurationParameter(name = PARAM_READ_SENTENCE, mandatory = true, defaultValue = "true")
 	private boolean readSentence;
+
+    /**
+     * Write constituent annotations to the CAS.
+     */
+    public static final String PARAM_READ_CONSTITUENT = ComponentParameters.PARAM_READ_CONSTITUENT;
+    @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, mandatory = true, defaultValue = "true")
+    private boolean readConstituent;
 
     /**
      * Write paragraphs annotations to the CAS.
@@ -176,6 +189,11 @@ public class TeiReader
      */
     private static final String TAG_PARAGRAPH = "p";
 
+    /**
+     * (phrase) represents a grammatical phrase
+     */
+    private static final String TAG_PHRASE = "phr";
+
 	/**
 	 * contains a single text of any kind, whether unitary or composite, for example a poem or
 	 * drama, a collection of essays, a novel, a dictionary, or a corpus sample.
@@ -195,6 +213,7 @@ public class TeiReader
 
 	private static final String ATTR_TYPE = "type";
     private static final String ATTR_POS = "pos";
+    private static final String ATTR_FUNCTION = "function";
 
 	private static final String ATTR_LEMMA = "lemma";
 
@@ -245,7 +264,6 @@ public class TeiReader
 			currentResource = nextFile();
 
 			InputStream is = null;
-
 			try {
 				is = currentResource.getInputStream();
 
@@ -351,9 +369,6 @@ public class TeiReader
 		return new TeiHandler();
 	}
 
-	/**
-	 * @author Richard Eckart de Castilho
-	 */
 	protected abstract static class Handler
 		extends DefaultHandler
 	{
@@ -393,6 +408,7 @@ public class TeiReader
 		private int tokenStart = -1;
 		private String posTag = null;
 		private String lemma = null;
+		private Stack<ConstituentWrapper> constituents = new Stack<>();
 
 		private final StringBuilder buffer = new StringBuilder();
 
@@ -438,6 +454,20 @@ public class TeiReader
 			}
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
                 paragraphStart = getBuffer().length();
+            }
+            else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
+                if (constituents.isEmpty()) {
+                    ROOT root = new ROOT(getJCas());
+                    root.setBegin(getBuffer().length());
+                    root.setConstituentType("ROOT");
+                    constituents.push(new ConstituentWrapper(root));
+                }
+                
+                Constituent constituent = new Constituent(getJCas());
+                constituent.setBegin(getBuffer().length());
+                constituent.setConstituentType(aAttributes.getValue(ATTR_TYPE));
+                constituent.setSyntacticFunction(aAttributes.getValue(ATTR_FUNCTION));
+                constituents.push(new ConstituentWrapper(constituent));
             }
             else if (inTextElement
                     && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
@@ -485,6 +515,26 @@ public class TeiReader
                 }
                 paragraphStart = -1;
             }
+            else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
+                ConstituentWrapper wrapper = constituents.pop();
+                wrapper.constituent.setEnd(getBuffer().length());
+                if (!constituents.isEmpty()) {
+                    ConstituentWrapper parent = constituents.peek();
+                    wrapper.constituent.setParent(parent.constituent);
+                    parent.children.add(wrapper.constituent);
+                }
+                wrapper.constituent.setChildren(FSCollectionFactory.createFSArray(getJCas(),
+                        wrapper.children));
+                wrapper.constituent.addToIndexes();
+                
+                // Close off the ROOT
+                if (constituents.peek().constituent instanceof ROOT) {
+                    ConstituentWrapper rootWrapper = constituents.pop();
+                    rootWrapper.constituent.setEnd(getBuffer().length());
+                    rootWrapper.constituent.setChildren(FSCollectionFactory.createFSArray(
+                            getJCas(), rootWrapper.children));
+                }
+            }
             else if (inTextElement
                     && (TAG_WORD.equals(aName) || TAG_CHARACTER.equals(aName) || TAG_MULTIWORD
                             .equals(aName))) {
@@ -511,6 +561,12 @@ public class TeiReader
 					// FIXME: if readToken is disabled, the JCas wrapper should not be generated
 					// at all!
 					if (readToken) {
+		                if (!constituents.isEmpty()) {
+		                    ConstituentWrapper parent = constituents.peek();
+		                    token.setParent(parent.constituent);
+		                    parent.children.add(token);
+		                }
+					    
 						token.addToIndexes();
 					}
 				}
@@ -551,5 +607,15 @@ public class TeiReader
 			aAnnotation.setBegin(s);
 			aAnnotation.setEnd(e);
 		}
+	}
+	
+	private static class ConstituentWrapper {
+	    public Constituent constituent;
+	    public List<Annotation> children = new ArrayList<Annotation>();
+	    
+	    public ConstituentWrapper(Constituent aConstituent)
+        {
+	        constituent = aConstituent;
+        }
 	}
 }
