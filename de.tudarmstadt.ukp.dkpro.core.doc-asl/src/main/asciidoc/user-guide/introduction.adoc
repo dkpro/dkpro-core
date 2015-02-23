@@ -167,10 +167,10 @@ non-standard data (scientific abstracts, Twitter data, etc.) without adaptation.
   tokenizer to become aware of emoticons or chemical formulae in order to
   process social media data or text from the biochemical domain.
   
-  ////
+////
   EJ: Ok, I want to adapt my tokenizer.  How do I do this/ what's the next step?
   Please give pointers.
-  ////
+////
 
 
 ===== Shallow processing and POS tagsets
