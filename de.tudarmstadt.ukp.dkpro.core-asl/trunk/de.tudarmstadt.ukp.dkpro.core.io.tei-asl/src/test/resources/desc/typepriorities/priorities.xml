@@ -8,6 +8,7 @@
         <priorityList>
             <type>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence</type>
             <type>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent</type>
+            <type>de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity</type>
             <type>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token</type>
             <type>de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS</type>
         </priorityList>

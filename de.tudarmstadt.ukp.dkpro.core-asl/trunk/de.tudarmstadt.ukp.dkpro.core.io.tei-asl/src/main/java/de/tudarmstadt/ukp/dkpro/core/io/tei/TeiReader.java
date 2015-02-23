@@ -17,6 +17,20 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_POS;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_CHARACTER;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_MULTIWORD;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_PARAGRAPH;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_PHRASE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_RS;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_SUNIT;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_TEI_DOC;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_TEXT;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_TITLE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
@@ -60,6 +74,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
@@ -81,7 +96,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
 		    "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
 		    "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+		    "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+		    "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
 public class TeiReader
 	extends ResourceCollectionReaderBase
 {
@@ -119,6 +135,13 @@ public class TeiReader
     public static final String PARAM_READ_CONSTITUENT = ComponentParameters.PARAM_READ_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_READ_CONSTITUENT, mandatory = true, defaultValue = "true")
     private boolean readConstituent;
+
+    /**
+     * Write named entity annotations to the CAS.
+     */
+    public static final String PARAM_READ_NAMED_ENTITY = ComponentParameters.PARAM_READ_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_READ_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    private boolean readNamedEntity;
 
     /**
      * Write paragraphs annotations to the CAS.
@@ -167,55 +190,6 @@ public class TeiReader
 	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
 	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
 	protected String posTagset;
-
-	/**
-	 * (character) contains a significant punctuation mark as identified by the CLAWS tagger.
-	 */
-	private static final String TAG_CHARACTER = "c";
-
-	/**
-	 * (word) represents a grammatical (not necessarily orthographic) word.
-	 */
-	private static final String TAG_WORD = "w";
-    private static final String TAG_MULTIWORD = "mw";
-
-	/**
-	 * (s-unit) contains a sentence-like division of a text.
-	 */
-	private static final String TAG_SUNIT = "s";
-
-	/**
-     * (paragraph) marks paragraphs in prose.
-     */
-    private static final String TAG_PARAGRAPH = "p";
-
-    /**
-     * (phrase) represents a grammatical phrase
-     */
-    private static final String TAG_PHRASE = "phr";
-
-	/**
-	 * contains a single text of any kind, whether unitary or composite, for example a poem or
-	 * drama, a collection of essays, a novel, a dictionary, or a corpus sample.
-	 */
-	private static final String TAG_TEXT = "text";
-
-	/**
-	 * contains the full title of a work of any kind.
-	 */
-	private static final String TAG_TITLE = "title";
-
-	/**
-	 * (TEI document) contains a single TEI-conformant document, comprising a TEI header and a text,
-	 * either in isolation or as part of a teiCorpus element.
-	 */
-	private static final String TAG_TEI_DOC = "TEI";
-
-	private static final String ATTR_TYPE = "type";
-    private static final String ATTR_POS = "pos";
-    private static final String ATTR_FUNCTION = "function";
-
-	private static final String ATTR_LEMMA = "lemma";
 
 	private Iterator<Element> teiElementIterator;
 	private Element currentTeiElement;
@@ -409,6 +383,7 @@ public class TeiReader
 		private String posTag = null;
 		private String lemma = null;
 		private Stack<ConstituentWrapper> constituents = new Stack<>();
+		private Stack<NamedEntity> namedEntities = new Stack<>();
 
 		private final StringBuilder buffer = new StringBuilder();
 
@@ -454,6 +429,12 @@ public class TeiReader
 			}
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
                 paragraphStart = getBuffer().length();
+            }
+            else if (readNamedEntity && inTextElement && TAG_RS.equals(aName)) {
+                NamedEntity ne = new NamedEntity(getJCas());
+                ne.setBegin(getBuffer().length());
+                ne.setValue(aAttributes.getValue(ATTR_TYPE));
+                namedEntities.push(ne);
             }
             else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
                 if (constituents.isEmpty()) {
@@ -514,6 +495,11 @@ public class TeiReader
                     new Paragraph(getJCas(), paragraphStart, getBuffer().length()).addToIndexes();
                 }
                 paragraphStart = -1;
+            }
+            else if (readNamedEntity && inTextElement && TAG_RS.equals(aName)) {
+                NamedEntity ne = namedEntities.pop();
+                ne.setEnd(getBuffer().length());
+                ne.addToIndexes();
             }
             else if (readConstituent && inTextElement && TAG_PHRASE.equals(aName)) {
                 ConstituentWrapper wrapper = constituents.pop();
