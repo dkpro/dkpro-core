@@ -17,6 +17,24 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_FUNCTION;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_LEMMA;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.ATTR_TYPE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_BODY;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_FILE_DESC;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_HEADER;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TEI;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TEXT;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TITLE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.E_TEI_TITLE_STMT;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_CHARACTER;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_PARAGRAPH;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_PHRASE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_RS;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_SUNIT;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TEI_NS;
+
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,6 +60,7 @@ import org.apache.uima.jcas.tcas.Annotation;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -60,7 +79,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
                 "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent" })
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent",
+                "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity"})
 public class TeiWriter
     extends JCasFileWriter_ImplBase
 {
@@ -88,6 +108,13 @@ public class TeiWriter
     private boolean writeConstituent;
     
     /**
+     * Write named entity annotations to the CAS. Overlapping named entities are not supported.
+     */
+    public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
+    @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
+    private boolean writeNamedEntity;
+    
+    /**
      * Indent the XML.
      */
     public static final String PARAM_INDENT = "indent";
@@ -96,15 +123,6 @@ public class TeiWriter
 
     private XMLEventFactory xmlef = XMLEventFactory.newInstance();
 
-    private String TEI_NS = "http://www.tei-c.org/ns/1.0";
-    private QName E_TEI_TEI = new QName(TEI_NS, "TEI");
-    private QName E_TEI_HEADER = new QName(TEI_NS, "teiHeader");
-    private QName E_TEI_FILE_DESC = new QName(TEI_NS, "fileDesc");
-    private QName E_TEI_TITLE_STMT = new QName(TEI_NS, "titleStmt");
-    private QName E_TEI_TITLE = new QName(TEI_NS, "title");
-    private QName E_TEI_TEXT = new QName(TEI_NS, "text");
-    private QName E_TEI_BODY = new QName(TEI_NS, "body");
-    
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -224,11 +242,15 @@ public class TeiWriter
         if (aAnnotation instanceof Token) {
             Token t = (Token) aAnnotation;
             if (t.getPos() != null) {
-                attributes.add(xmlef.createAttribute("type", t.getPos().getPosValue()));
+                attributes.add(xmlef.createAttribute(ATTR_TYPE, t.getPos().getPosValue()));
             }
             if (t.getLemma() != null) {
-                attributes.add(xmlef.createAttribute("lemma", t.getLemma().getValue()));
+                attributes.add(xmlef.createAttribute(ATTR_LEMMA, t.getLemma().getValue()));
             }
+        }
+        else if (aAnnotation instanceof NamedEntity) {
+            NamedEntity ne = (NamedEntity) aAnnotation;
+            attributes.add(xmlef.createAttribute(ATTR_TYPE, ne.getValue()));
         }
         else if (aAnnotation instanceof Constituent) {
             Constituent c = (Constituent) aAnnotation;
@@ -236,10 +258,10 @@ public class TeiWriter
                 System.out.println();
             }
             if (c.getConstituentType() != null) {
-                attributes.add(xmlef.createAttribute("type", c.getConstituentType()));
+                attributes.add(xmlef.createAttribute(ATTR_TYPE, c.getConstituentType()));
             }
             if (c.getSyntacticFunction() != null) {
-                attributes.add(xmlef.createAttribute("function", c.getSyntacticFunction()));
+                attributes.add(xmlef.createAttribute(ATTR_FUNCTION, c.getSyntacticFunction()));
             }
         } {
             
@@ -258,22 +280,25 @@ public class TeiWriter
         
         if (aAnnotation.getTypeIndexID() == Token.type) {
             if (cTextPattern.matcher(aAnnotation.getCoveredText()).matches()) {
-                return Optional.of("c");
+                return Optional.of(TAG_CHARACTER);
             }
-            return Optional.of("w");
+            return Optional.of(TAG_WORD);
         }
         else if (aAnnotation.getTypeIndexID() == Sentence.type) {
-            return Optional.of("s");
+            return Optional.of(TAG_SUNIT);
         }
         else if (aAnnotation.getTypeIndexID() == Paragraph.type) {
-            return Optional.of("p");
+            return Optional.of(TAG_PARAGRAPH);
         }
         else if (writeConstituent && (aAnnotation instanceof ROOT)) {
             // We do not render ROOT nodes
             return Optional.empty();
         }
         else if (writeConstituent && (aAnnotation instanceof Constituent)) {
-            return Optional.of("phr");
+            return Optional.of(TAG_PHRASE);
+        }
+        else if (writeNamedEntity && (aAnnotation instanceof NamedEntity)) {
+            return Optional.of(TAG_RS);
         }
         else {
             return Optional.empty();

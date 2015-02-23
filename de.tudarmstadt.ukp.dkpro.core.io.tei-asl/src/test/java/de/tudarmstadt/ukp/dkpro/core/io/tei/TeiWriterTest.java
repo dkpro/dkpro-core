@@ -30,10 +30,12 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpNameFinder;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpParser;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
 public class TeiWriterTest
 {
@@ -55,13 +57,16 @@ public class TeiWriterTest
 
         AnalysisEngineDescription parser = createEngineDescription(OpenNlpParser.class);
 
+        AnalysisEngineDescription ner = createEngineDescription(OpenNlpNameFinder.class);
+
+        AnalysisEngineDescription dump = createEngineDescription(CasDumpWriter.class);
+
 		AnalysisEngineDescription teiWriter = createEngineDescription(
 		        TeiWriter.class,
 		        TeiWriter.PARAM_TARGET_LOCATION, targetFolder,
-		        TeiWriter.PARAM_INDENT, true,
 		        TeiWriter.PARAM_WRITE_CONSTITUENT, true);
 
-		runPipeline(textReader, segmenter, posTagger, parser, teiWriter);
+		runPipeline(textReader, segmenter, posTagger, parser, ner, dump, teiWriter);
 
 		File output = new File(targetFolder, "example1.txt.xml");
 		assertTrue(output.exists());
