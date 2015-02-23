@@ -427,6 +427,7 @@ See also:
 |====
 |Component|Comments
 |TeiReader (RR)|
+|TeiWriter (FW)|
 |====
 
 Known corpora in this format:
