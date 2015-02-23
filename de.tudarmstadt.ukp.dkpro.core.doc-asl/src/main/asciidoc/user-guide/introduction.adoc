@@ -40,7 +40,7 @@ exist for each of these preprocessing tasks, but used independently, input-outpu
 may not line up well, and if the annotations are not stored as offsets, information may 
 be lost.
 
-DKPro Core integrates many state-of-the-art NLP tools as iumaFIT components so that they 
+DKPro Core integrates many state-of-the-art NLP tools as uimaFIT components so that they 
 can be seamlessly combined into an experiment pipeline.
 
 === Choosing components
