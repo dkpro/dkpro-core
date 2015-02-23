@@ -229,12 +229,6 @@ pipeline, we add the following dependency to our POM file:
 <properties>
   <dkpro.core.version>{revnumber}</dkpro.core.version>
 </properties>
-<dependencies>
-  <dependency>
-    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
-  </dependency>
-</dependencies>
 <dependencyManagement>
   <dependencies>
     <dependency>
@@ -246,6 +240,13 @@ pipeline, we add the following dependency to our POM file:
     </dependency>
   </dependencies>
 </dependencyManagement>
+
+<dependencies>
+  <dependency>
+    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+    <artifactId>de.tudarmstadt.ukp.dkpro.core.opennlp-asl</artifactId>
+  </dependency>
+</dependencies>
 ----
 
 The dependency on DKPro Core declared in the dependency management section fixes the
@@ -254,7 +255,9 @@ necessary to declare the version for each dependency. When upgrading to a new DK
 version, it is sufficient to change the value of the
 ++dkpro.core.version++ property in the properties section.
 
-
+NOTE: If you use a multi-module project, the `properties` and `dependencyManagement` sections should
+      go into the parent-pom of your project, while the `dependencies` section should be added to
+      the respective module requiring the dependency.
 
 === Adding resources as dependencies (Maven)
 
