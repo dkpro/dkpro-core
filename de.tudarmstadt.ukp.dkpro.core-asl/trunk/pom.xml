@@ -659,6 +659,7 @@
 		<module>de.tudarmstadt.ukp.dkpro.core.io.negra-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.pdf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.penntree-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.rtf-asl</module>		
 		<module>de.tudarmstadt.ukp.dkpro.core.io.solr-asl</module>		
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tcf-asl</module>
 		<module>de.tudarmstadt.ukp.dkpro.core.io.tei-asl</module>
