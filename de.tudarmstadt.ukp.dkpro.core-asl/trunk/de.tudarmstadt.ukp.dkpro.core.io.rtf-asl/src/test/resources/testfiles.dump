@@ -1,0 +1,51 @@
+======== CAS 0 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 159
+   language: "en"
+   documentTitle: "testfile.rtf"
+   documentId: "testfile.rtf"
+   isLastSegment: false
+
+CAS-Text:
+Title of the RTF file
+This is the RTF file's first paragraph.
+The second paragraph contains bold text and italic text.
+	Now a heading
+And another paragraph.
+
+
+
+-------- View _InitialView end ----------------------------------
+
+======== CAS 0 end ==================================
+
+
+======== CAS 1 begin ==================================
+
+-------- View _InitialView begin ----------------------------------
+
+DocumentMetaData
+   sofa: _InitialView
+   begin: 0
+   end: 47
+   language: "en"
+   documentTitle: "testfile2.rtf"
+   documentId: "testfile2.rtf"
+   isLastSegment: false
+
+CAS-Text:
+A 2nd RTF File
+There goes another test file.
+
+
+
+-------- View _InitialView end ----------------------------------
+
+======== CAS 1 end ==================================
+
+
