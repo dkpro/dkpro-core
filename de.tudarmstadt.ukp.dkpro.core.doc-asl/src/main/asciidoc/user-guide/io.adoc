@@ -380,7 +380,15 @@ Known corpora in this format:
 
 * link:http://www.linguateca.pt/floresta/corpus.html[Floresta Sintá(c)tica (Bosque)] - Portuguese
 
+=== RTF (Rich Text Format)
+Reads link:https://msdn.microsoft.com/de-de/library/aa140277%28office.10%29.aspx[RTF (Rich Text Format)] files.
 
+.Components
+[options="header"]
+|====
+|Component|Comments
+|RTFReader|
+|====
 
 === TCF
 
