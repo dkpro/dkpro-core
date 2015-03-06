@@ -23,7 +23,7 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div</name>
-      <description/>
+      <description>Document structure element.</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -55,8 +55,8 @@
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Heading</name>
-      <description/>
-      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <description>Document title, section heading, etc.</description>
+      <supertypeName>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Div</supertypeName>
     </typeDescription>
     <typeDescription>
       <name>de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma</name>

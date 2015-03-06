@@ -13,8 +13,8 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** 
- * Updated by JCasGen Fri Mar 06 11:42:33 CET 2015
+/** Document structure element.
+ * Updated by JCasGen Fri Mar 06 23:07:02 CET 2015
  * @generated */
 public class Div_Type extends Annotation_Type {
   /** @generated 
