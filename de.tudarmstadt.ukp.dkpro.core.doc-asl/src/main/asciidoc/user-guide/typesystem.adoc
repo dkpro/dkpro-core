@@ -87,28 +87,44 @@ DKPro Core.
 .Segmentation types
 image::ts_segmentation.png[align="center"]
 
+The segmentation type system consists of two primary areas: tokenization (including sentences),
+compound words, and document structure.
+
+The *Sentence* annotation type is simply a span with no futher attributes.
+
+The *Token* type may be explicitly linked to a part of speech, lemma, and stem. It is expected that
+if either of these annotations are present, the token explicitly refers to them. If more than one
+annotation of such a type, e.g. multiple part-of-speech annotations are present, then it is expected
+that the token links to the most probable one, while the others are only located at the same offsets.
+
+Additionally, the *Token* can link into the syntactic constituency structure via the *parent* feature.
+
+The document structure can be encoded using the *Div* types. The type *Div* itself is a generic type
+representing some element of the document structure more closely specified by the *divType* attribute.
+The value of *divType* corresponds to the tag used in some original document format or to the output
+of a text segmentation tool. E.g. when reading an HTML document, the *divType* for a paragraph would
+be *p*, whereas in a DocBook XML file, it would instead be *para*.
+
+For typical structural elements, the subtypes *Document*, *Heading*, and *Paragrah* are available.
+*Document* is rarely used, since the basic assumption is that a CAS always represents a document.
+
 // FIXME: Describe Sentence &amp; Token
 // FIXME: Describe Document, Heading, and Paragraph
 // FIXME: Describe Compound, Split, CompoundPart, and LinkingMorpheme
 
 
 
-=== Morphology
-
-
-
-
-
 === Phonetics
 
+.Phonetics types
+image::ts_phonetics.png[align="center"]
 
 
 
+=== Morphology
 
-=== Coreference
-
-.Coreference types
-image::ts_coreference.png[align="center"]
+.Morphology types
+image::ts_morphology.png[align="center"]
 
 
 
@@ -119,10 +135,10 @@ image::ts_syntax.png[align="center"]
 
 
 
-=== Semantics and Named Entities
+=== Semantics
 
 .Segmentation types
-image::ts_segmentation.png[align="center"]
+image::ts_semantics.png[align="center"]
 
 
 ==== Named entities
@@ -154,4 +170,11 @@ Experiencer, Topic. The semantic role of an argument is related to its semantic 
 (for communication verbs, the Agent can be a person or an organization, but
 typically not food). The semantic type of arguments is not yet covered by the
 SemanticType.
+
+
+
+=== Coreference
+
+.Coreference types
+image::ts_coreference.png[align="center"]
 

@@ -1,0 +1,72 @@
+// Copyright 2015
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_models]]
+
+== Type System
+
+=== Adding a type
+
+To add a new type, first locate the relevant module. Typically types are added to an *API* module
+because types are supposed to be independent of individual analysis tools. In rare circumstances,
+a type may be added to an I/O or tool module, e.g. because the type is experimental and needs to
+be tested in the context of that module - or because the type is highly specific to that module.
+
+Typically, there is only a single descriptor file called `dkpro-types.xml`. Within a module, we keep
+this descriptor in the folder `src/main/resources` under the top-level package plus _type_ name of
+the module. E.g. for the module 
+
+    de.tudarmstadt.ukp.dkpro.core.api.semantics-asl
+
+the type descriptor would be 
+
+    src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml
+
+NOTE: For the time being, descriptors in `src/main/resources/desc/type` are also supported. 
+      However, this support is going to be removed in the future.
+
+When a new type system descriptor has been added to a module, it needs to be registered with 
+uimaFIT. This happens by creating the file
+
+    src/main/resources/META-INF/org.apache.uima.fit/types.txt
+    
+consisting of a list of type system descriptor locations prefixed with `classpath*:`, e.g.:
+
+    classpath*:de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types.xml
+
+NOTE: The type system location corresponds to the location within the classpath at runtime, thus
+      `src/main/resources` is stripped from the beginning.
+
+=== JCas classes
+
+Instead of pre-generating the JCas classes and storing them in the version control, we use the
+_jcasgen-maven-plugin_ to automatically generate JCas classes at build time. The automatic
+generation of JCas classes need to be explictily enabled for modules containing types. This
+is done by placing a file called `.activate-run-jcasgen` in the module root with the content
+    
+    Marker to activate run-jcasgen profile.
+    
+NOTE: Actually the content is irrelevant, but it is a good idea to place a note here regarding the
+      purpose of the file.
+
+However, in some we customized the JCas classes, e.g. we added the method 
+`DocumentMetaData.get(JCas)`. Such classes are excluded from being generated automatically by
+placing them in a second descriptor file called `dkpro-types-customized.xml`, e.g.
+
+    src/main/resources/de/tudarmstadt/ukp/dkpro/core/api/semantics/type/dkpro-types-customized.xml
+    
+NOTE: The `dkpro-types-customized.xml` descriptor must be also registered with uimaFIT in the 
+      `types.txt` file.
