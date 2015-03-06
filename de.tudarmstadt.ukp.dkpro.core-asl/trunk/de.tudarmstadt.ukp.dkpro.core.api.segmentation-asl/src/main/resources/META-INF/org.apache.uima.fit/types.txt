@@ -1,3 +1,2 @@
 classpath*:desc/type/LexicalUnits.xml
 classpath*:desc/type/LexicalUnits_customized.xml
-classpath*:desc/type/Div.xml
