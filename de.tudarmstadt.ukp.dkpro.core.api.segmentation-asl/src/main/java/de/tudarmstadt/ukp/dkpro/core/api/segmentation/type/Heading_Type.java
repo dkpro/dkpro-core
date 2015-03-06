@@ -11,10 +11,10 @@ import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.cas.Type;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** 
- * Updated by JCasGen Sat Nov 01 22:21:22 CET 2014
+/** Document title, section heading, etc.
+ * Updated by JCasGen Fri Mar 06 23:07:02 CET 2015
  * @generated */
-public class Heading_Type extends Annotation_Type {
+public class Heading_Type extends Div_Type {
   /** @generated 
    * @return the generator for this type
    */

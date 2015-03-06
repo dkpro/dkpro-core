@@ -10,11 +10,11 @@ import org.apache.uima.jcas.cas.TOP_Type;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** 
- * Updated by JCasGen Sat Nov 01 22:21:22 CET 2014
+/** Document title, section heading, etc.
+ * Updated by JCasGen Fri Mar 06 23:07:02 CET 2015
  * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
  * @generated */
-public class Heading extends Annotation {
+public class Heading extends Div {
   /** @generated
    * @ordered 
    */
