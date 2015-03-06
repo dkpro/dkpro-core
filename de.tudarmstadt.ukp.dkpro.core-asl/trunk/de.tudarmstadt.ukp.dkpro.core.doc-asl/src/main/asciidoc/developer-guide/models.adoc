@@ -84,7 +84,7 @@ counter starts at 0 if a new model is incorporated.
 Thus, a model version has the format "yyyymmdd.x".
 
 
-=== Packaging resources as JARs
+=== Packaging resources
 
 Resources needed by DKPro components (e.g. parser models or POS tagger models) are not
 			packaged with the corresponding analysis components, but as separate JARs, one per
@@ -117,30 +117,30 @@ Our build.xml scripts require Ant 1.8.x. If you use an older Eclipse version, yo
 
 
 
-==== Implementing the build.xml Ant script
+==== Implementing a build.xml script
 
-Models are usually large and we therefore package them separately from the
-				components that use them. Each model becomes a JAR that is uploaded to our Maven
-				repositories and added as a dependency in the projects that use them.
+Models are usually large and we therefore package them separately from the components that use them. 
+Each model becomes a JAR that is uploaded to our Maven repositories and added as a dependency in the
+projects that use them.
 
 Often, models are single files, e.g. serialize Java objects that represent a
-				parser model, POS tagger model, etc. The simplest case is that these files are
-				distributed from some website. We use an Ant script then to download the file and
-				package it as a JAR. We defined custom Ant macros like install-model-file that make
-				the process very convenient. The following code shows how we import the custom
-				macros and define two targets, local-maven and separate-jars. The first just sets a
-				property to cause install-model-file to copy the finished JAR into the local Maven
-				repository (__$$~.m2/repository$$__). 
+parser model, POS tagger model, etc. The simplest case is that these files are
+distributed from some website. We use an Ant script then to download the file and
+package it as a JAR. We defined custom Ant macros like install-model-file that make
+the process very convenient. The following code shows how we import the custom
+macros and define two targets, local-maven and separate-jars. The first just sets a
+property to cause install-model-file to copy the finished JAR into the local Maven
+repository (`~.m2/repository`). 
 
 The versioning scheme for models is "yyyymmdd.x" where "yyyymmdd" is the date of
-				the last model change (if known) or the date of packaging and "x" is a counter
-				unique per date starting a 0. Please refer to the versioning scheme documentation
-				for more information. 
+the last model change (if known) or the date of packaging and "x" is a counter
+unique per date starting a 0. Please refer to the versioning scheme documentation
+for more information. 
 
-The model building ANT script goes to __src/scripts/build.xml__
-				with the project.
+The model building ANT script goes to `src/scripts/build.xml` with the project.
 
 
+[source,xml]
 ----
 <project basedir="../.." default="separate-jars">
   <import>
@@ -193,36 +193,34 @@ The model building ANT script goes to __src/scripts/build.xml__
 </project>
 ----
 
-The model file __en-pos-maxent.bin__ is downloaded from the
-				OpenNLP website and stored in a local cache directory
-					__target/download/tagger/da-pos-maxent.bin__. From there,
-				install-stub-and-upstream-file picks it up and packages it as two JARs, 1) a JAR
-				containing the DKPro Core meta data and a POM referencing the second JAR, 2) a JAR
-				containing the actual model file(s). The JAR file names derive from the
-				artifactIdBase, tool, language, variant, upstreamVersion and metaDataVersion
-				parameters. These parameters along with the extension parameter are also used to
-				determine the package name and file name of the model in the JAR. They are
-				determined as follows (mind that dots in the artifactBase turn to slashes, e.g.
-				"de.tud" turns "de/tud": 
+The model file `en-pos-maxent.bin` is downloaded from the OpenNLP website and stored in a local 
+cache directory	`target/download/tagger/da-pos-maxent.bin`. From there, 
+`install-stub-and-upstream-file` picks it up and packages it as two JARs, 1) a JAR
+containing the DKPro Core meta data and a POM referencing the second JAR, 2) a JAR
+containing the actual model file(s). The JAR file names derive from the
+artifactIdBase, tool, language, variant, upstreamVersion and metaDataVersion
+parameters. These parameters along with the extension parameter are also used to
+determine the package name and file name of the model in the JAR. They are
+determined as follows (mind that dots in the artifactBase turn to slashes, e.g.
+`de.tud` turns `de/tud`: 
 
-
+.Pattern used to place a resource within a JAR
 ----
-    {artifactIdBase}/lib/{tool}-{language}-{variant}.{extension}
+{artifactIdBase}/lib/{tool}-{language}-{variant}.{extension}
 ----
 
 The following values are commonly used for __tool__: 
 
+* `token` - tokenizer 
+* `sentence` - sentence splitter 
+* `lemmatizer` - lemmatizer 
+* `tagger` - part-of-speech tagger 
+* `morphtagger` - morphological analyzer 
+* `ner` - named-entity recognizer
+* `parser` - syntactic or dependency parser
+* `coref` - coreference resolver
 
-* ++token++ - tokenizer 
-* ++sentence++ - sentence splitter 
-* ++lemmatizer++ - lemmatizer 
-* ++tagger++ - part-of-speech tagger 
-* ++morphtagger++ - morphological analyzer 
-* ++ner++ - named-entity recognizer
-* ++parser++ - syntactic or dependency parser
-* ++coref++ - coreference resolver
-
-The values for __variant__ are very tool-dependent. Typically,
+The values for *variant* are very tool-dependent. Typically,
 the variant encodes parameters that were used during the creation of a model, e.g.
 which machine learning algorithm was used, which parameters it had, and on which
 data set is has been created. 
@@ -234,22 +232,21 @@ The metadata added for the models currently used to store tagset information,
 which is used to drive the tag-to-DKPro-UIMA-type mapping. The following values are
 commonly used as keys: 
 
-* ++pos.tagset++ - part-of-speech tagset (ptb, ctb, stts, ...) 
-* ++dependency.tagset++ - dependency relation labels, aka. syntactic functions (negra, ancora, ...) 
-* ++constituent.tagset++ - constituent labels, aka. syntactic categories (ptb, negra, ...) 
+* `pos.tagset` - part-of-speech tagset (ptb, ctb, stts, ...) 
+* `dependency.tagset` - dependency relation labels, aka. syntactic functions (negra, ancora, ...) 
+* `constituent.tagset` - constituent labels, aka. syntactic categories (ptb, negra, ...) 
 
 
-==== Using the build.xml Ant script
+==== Running the build.xml script
 
 For those modules where we support packaging resources as JARs, we provide an Ant script
-				called __build.xml__ which is located in the corresponding module
-				in the SVN. 
+called `build.xml` which is located in the corresponding module
+in the SVN. 
 
-__build.xml__ is a script that can be run with Apache Ant
-				(version 1.8.x or higher) and requires an internet connection. 
+`build.xml` is a script that can be run with Apache Ant (version 1.8.x or higher) and requires an 
+internet connection. 
 
-You can find this script in the __src/scripts__ folder of the
-				module. 
+You can find this script in the `src/scripts` folder of the module. 
 
 Depending on the script, various build targets are supported. Three of them are
 				particularly important: __separate-jars__,
@@ -338,22 +335,6 @@ Note that in order to use TreeTagger you must have added at least the JAR with t
 				with.
 
 
-
-==== Which build.xml file to use? The trunk version or a release version?
-
-For any given module supporting packaged resources, there is always the build.xml in SVN
-				trunk and the ones in previous releases (tags folder) in SVN. Which one should you
-				use? 
-
-For TreeTagger, you should always use the version from SVN trunk. Here, it is
-				least likely that the MD5 checksums are outdated and you will always get the latest
-				and greatest version of TreeTagger. 
-
-We do not ship the __build.xml__ files in any other way than via
-				SVN. 
-
-
-
 === Updating a model
 
 Whenever one existing model have a new release, it is good to update the build.xml changing
@@ -404,6 +385,7 @@ The ++CasConfigurableProviderBase++ class provides some support for the above
 				++CasConfigurableProviderBase++. 
 
 
+[source,java]
 ----
 modelProvider = new CasConfigurableStreamProviderBase<POSTagger>() {
     {
@@ -478,6 +460,7 @@ Mapping providers are a convenient way of fetching a mapping between the origina
 				tag value and the high-level types. 
 
 
+[source,java]
 ----
 // General setup of the mapping provider in initialize()
 mappingProvider = new MappingProvider();

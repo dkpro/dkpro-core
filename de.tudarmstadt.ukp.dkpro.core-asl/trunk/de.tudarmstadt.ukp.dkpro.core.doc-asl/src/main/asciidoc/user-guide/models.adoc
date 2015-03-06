@@ -1,0 +1,51 @@
+// Copyright 2013
+// Ubiquitous Knowledge Processing (UKP) Lab
+// Technische Universität Darmstadt
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// 
+// http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+[[sect_models]]
+
+== Models and Resources
+
+==== Packaging models
+
+Most models used by DKPro Core are available through our Maven repository. However, in some cases,
+we cannot redistribute the models. For these cases, we provide Ànt-based `build.xml` scripts that
+automatically download and package the models for use with DKPro Core.
+
+For any given module supporting packaged resources, there is always the build.xml in SVN
+trunk and the ones in previous releases (tags folder) in SVN. Which one should you use? 
+
+You should always use only the `build.xml` files belonging to the verison of DKPro Core that you
+are using. From time to time, we change the metadata within these files and DKPro Core may be 
+unable to properly resolve models belonging to a different version of DKPro Core. The files are
+contained in the `src/scripts` folder of the respective modules in SVN. We do not ship the 
+`build.xml` files in any other way than via SVN. 
+
+That said, it might be necessary to make modifications to a `build.xml` file if it refers to files
+that are changed by upstream. E.g. the TreeTagger models tend to change without their name or
+version changing. Also, sometimes upstream files may become unavailable. In such cases, you have
+to update the MD5 hash for the model in the `build.xml` file or even to comment it out entirely.
+
+In case you need to update MD5 sum, you should also update the `upstreamVersion` to correspond to
+the date of the new model. A good way to determine the date of the latest change is using the
+`curl` tool, e.g.:
+
+    curl -I http://opennlp.sourceforge.net/models-1.5/en-pos-maxent.bin
+    
+In the output locate `Last-Modified` line
+
+    Last-Modified: Thu, 09 Sep 2010 06:57:11 GMT
+    
+So, here the `upstreamVersion` for `en-pos-maxent.bin` should be set to `20100909` (YYYYMMDD).

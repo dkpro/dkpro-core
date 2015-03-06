@@ -16,6 +16,7 @@
     
 = DKPro Core™ User Guide and Reference
 :Author: The DKPro Core Team
+:toc-title: User Guide
 
 The document targets users employing the DKPro Core framework to build analysis pipelines.
 
@@ -32,6 +33,10 @@ include::{include-dir}analytics.adoc[]
 <<<
 
 include::{include-dir}io.adoc[]
+
+<<<
+
+include::{include-dir}models.adoc[]
 
 <<<
 

@@ -16,6 +16,7 @@
     
 = DKPro Core™ Developer Guide
 :Author: The DKPro Core Team
+:toc-title: Developer Guide
 
 This document is targets developers of DKPro Core components.
 
@@ -24,3 +25,7 @@ include::{include-dir}models.adoc[]
 <<<
 
 include::{include-dir}testing.adoc[]
+
+<<<
+
+include::{include-dir}typesystem.adoc[]
