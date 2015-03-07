@@ -18,40 +18,34 @@
 package de.tudarmstadt.ukp.dkpro.core.io.pdf;
 
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.*;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.*;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
-import org.apache.uima.fit.component.CasDumpWriter;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.dumper.CasDumpWriter;
 
-/**
- * @author Richard Eckart de Castilho
- */
 public class PdfReaderTest
 {
-    @Rule
-    public TemporaryFolder folder = new TemporaryFolder();
-
     @Test
     public void test()
         throws Exception
     {
-        File outputFile = new File(folder.getRoot(), "dump-output.txt");
+        File outputFile = new File(testContext.getTestOutputFolder(), "dump-output.txt");
 
         CollectionReader reader = createReader(PdfReader.class, 
                 PdfReader.PARAM_SOURCE_LOCATION, "src/test/resources/data", 
                 PdfReader.PARAM_PATTERNS, "[+]**/*.pdf");
 
         AnalysisEngine writer = createEngine(CasDumpWriter.class,
-                CasDumpWriter.PARAM_OUTPUT_FILE, outputFile);
+                CasDumpWriter.PARAM_TARGET_LOCATION, outputFile);
 
         SimplePipeline.runPipeline(reader, writer);
 
@@ -61,4 +55,7 @@ public class PdfReaderTest
 
         assertEquals(reference, actual);
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
