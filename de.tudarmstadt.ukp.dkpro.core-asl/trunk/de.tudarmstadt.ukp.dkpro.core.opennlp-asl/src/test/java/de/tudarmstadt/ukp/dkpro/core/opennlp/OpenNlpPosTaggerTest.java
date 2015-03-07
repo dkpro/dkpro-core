@@ -22,14 +22,12 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.jcas.JCas;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 public class OpenNlpPosTaggerTest
@@ -181,18 +179,6 @@ public class OpenNlpPosTaggerTest
 		return jcas;
 	}
 
-	@Rule
-	public TestName name = new TestName();
-
-	@Before
-	public void printSeparator()
-	{
-		System.out.println("\n=== " + name.getMethodName() + " =====================");
-	}
-    
-    @Before
-    public void setupLogging()
-    {
-        System.setProperty("org.apache.uima.logger.class", "org.apache.uima.util.impl.Log4jLogger_impl");
-    }
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }
