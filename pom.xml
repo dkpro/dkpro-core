@@ -50,8 +50,9 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+        <!-- For uimaFIT SNAPSHOT -->
+        <!--  
 		<repository>
-			<!-- For uimaFIT SNAPSHOT -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -59,10 +60,12 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
+        -->
 	</repositories>
 	<pluginRepositories>
+        <!-- For uimaFIT SNAPSHOT maven plugin -->
+        <!--  
 		<pluginRepository>
-			<!-- For uimaFIT SNAPSHOT maven plugin -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -70,6 +73,7 @@
 				<enabled>false</enabled>
 			</releases>
 		</pluginRepository>
+        -->
         <!--  BEGIN NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->
         <pluginRepository>
             <id>codehaus-snapshots</id>
