@@ -50,8 +50,9 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+        <!-- For UIMA/uimaFIT SNAPSHOT -->
+        <!--  
 		<repository>
-			<!-- For UIMA/uimaFIT SNAPSHOT -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -59,10 +60,23 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-	</repositories>
+    -->
+        <repository>
+            <!-- For DKPro Parent POM SNAPSHOT -->
+            <id>ukp-oss-snapshots</id>
+            <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>	
+    </repositories>
 	<pluginRepositories>
+        <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
+        <!--  
 		<pluginRepository>
-			<!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
 			<url>http://repository.apache.org/snapshots</url>
@@ -70,6 +84,7 @@
 				<enabled>false</enabled>
 			</releases>
 		</pluginRepository>
+        -->
         <!--  BEGIN NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->
         <pluginRepository>
             <id>codehaus-snapshots</id>
@@ -95,7 +110,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.7.0-SNAPSHOT</uima.version>
+		<uima.version>2.7.0</uima.version>
 		<uimafit.version>2.1.0</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
@@ -883,7 +898,7 @@
 					<dependency>
 						<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 						<artifactId>de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</artifactId>
-						<version>1.7.0-SNAPSHOT</version>
+						<version>1.8.0-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
