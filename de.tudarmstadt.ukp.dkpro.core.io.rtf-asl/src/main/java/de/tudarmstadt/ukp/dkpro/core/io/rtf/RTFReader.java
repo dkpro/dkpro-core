@@ -55,17 +55,36 @@ public class RTFReader
         throws IOException, CollectionException
     {
         Resource resource = nextFile();
-        initCas(aCas, resource, null);
-        Document document = rtfParser.createDefaultDocument();
+        initCas(aCas, resource);
 
         try {
-            rtfParser.read(resource.getInputStream(), document, 0);
+            Document document = readRTF(resource);
             aCas.setDocumentText(document.getText(
                     document.getStartPosition().getOffset(),
                     document.getEndPosition().getOffset()));
         }
         catch (BadLocationException e) {
-            throw new IOException(e);
+            throw new CollectionException(e);
         }
+    }
+
+    /**
+     * Read the RTF file contained in the given resource.
+     *
+     * @param resource
+     *            A {@link Resource} containing an RTF input stream.
+     * @return a {@link Document} containing the text of the RTF input.
+     * @throws IOException
+     *             on any I/O error
+     * @throws BadLocationException
+     *             if {@link RTFEditorKit#read(java.io.InputStream, Document, int)} is called with
+     *             an invalid location argument
+     */
+    protected Document readRTF(Resource resource)
+        throws IOException, BadLocationException
+    {
+        Document document = rtfParser.createDefaultDocument();
+        rtfParser.read(resource.getInputStream(), document, 0);
+        return document;
     }
 }
