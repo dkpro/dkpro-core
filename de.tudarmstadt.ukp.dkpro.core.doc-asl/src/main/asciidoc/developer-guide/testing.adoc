@@ -15,7 +15,6 @@
 // limitations under the License.
 
 [[ugr.dkpro.core.testing]]
-
 == Testing
 
 The testing module offers a convenient way to create unit tests for UIMA components.
@@ -43,38 +42,17 @@ Additional benefits you get from this `testContext` are:
 * getting the method name of the current test (`getMethodName()`)
 * getting the name of a folder you can use to store test results (`getTestOutputFolder()`).
 
-=== AssertAnnotations
-
-The AssertAnnotations class offers various static methods to test if a component has
-properly created annotations of a certain kind. There are methods to test almost every kind
-of annotation supported by DKPro Core, e.g.:
-
-* assertToken
-* assertSentence
-* assertPOS
-* assertLemma
-* assertMorpheme
-* assertStem
-* assertNamedEntity
-* assertConstituents
-* assertChunks
-* assertDependencies
-* assertPennTree
-* assertSemanticPredicates
-* assertSemanticField
-* assertCoreference
-* assertTagset
-* assertTagsetMapping
+=== Unit test example
 
 A typical unit test class has consists of two parts
 
 . the test cases
-. a ++runTest++ method - which sets up the pipeline required by the
-					test and then calls ++TestRunner.runTest()++.
+. a `runTest` method - which sets up the pipeline required by the
+                    test and then calls `TestRunner.runTest()`.
 
 In the following example, mind that the text must be provided with spaces
 separating the tokens (thus there must be a space before the full stop at the end of the
-sentence) and with newline characters (\n) separating the sentences:
+sentence) and with newline characters (`\n`) separating the sentences:
 
 .Typical unit test for an analysis component
 [source,java]
@@ -84,7 +62,7 @@ public DkproTestContext testContext = new DkproTestContext();
 
 @Test
 public void testEnglish() throws Exception
-{	
+{   
   JCas jcas = runTest("en", null, "This is a test .");
 
   String[] constituentMapped =
@@ -127,8 +105,30 @@ private JCas runTest(String aLanguage, String aVariant, String aDocument)
   return TestRunner.runTest(parser, aLanguage, aDocument);
 }
 
-----
-
-Test cases for segmenter components should not make use of the ++TestRunner++
+Test cases for segmenter components should not make use of the `TestRunner`
 class, which already performs tokenization and sentence splitting internally.
+
+=== AssertAnnotations
+
+The AssertAnnotations class offers various static methods to test if a component has
+properly created annotations of a certain kind. There are methods to test almost every kind
+of annotation supported by DKPro Core, e.g.:
+
+* `assertToken`
+* `assertSentence`
+* `assertPOS`
+* `assertLemma`
+* `assertMorpheme`
+* `assertStem`
+* `assertNamedEntity`
+* `assertConstituents`
+* `assertChunks`
+* `assertDependencies`
+* `assertPennTree`
+* `assertSemanticPredicates`
+* `assertSemanticField`
+* `assertCoreference`
+* `assertTagset`
+* `assertTagsetMapping`
+
 
