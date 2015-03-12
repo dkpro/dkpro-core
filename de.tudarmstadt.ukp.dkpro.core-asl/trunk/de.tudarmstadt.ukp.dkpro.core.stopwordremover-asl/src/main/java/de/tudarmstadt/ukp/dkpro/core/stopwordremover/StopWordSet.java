@@ -42,12 +42,14 @@ public class StopWordSet
     public StopWordSet()
     {
         super();
+        data = new HashSet<String>();
     }
 
     public StopWordSet(String[] fileNames)
         throws IOException
     {
         super();
+        data = new HashSet<String>();
         for (String fileName : fileNames) {
             addStopWordListFile(fileName);
         }
@@ -109,9 +111,6 @@ public class StopWordSet
     public void load(Reader aReader)
         throws IOException
     {
-        if (data == null) {
-            data = new HashSet<String>();
-        }
         String line = null;
         BufferedReader br = new BufferedReader(aReader);
         while ((line = br.readLine()) != null) {
