@@ -121,7 +121,12 @@ public class StopWordRemoverTest
      * Testing two stopword files of identical language code.
      * <p>
      * This currently fails because StopwordRemover overwrites the contents of the first file with
-     * those of the second file. See
+     * those of the second file.
+     * <p>
+     * When the issue is fixed, the test should pass, i.e. {@code (expected = AssertionError.class)}
+     * in test {@code Test} annotation of this test method should be removed.
+     *
+     * @see https://code.google.com/p/dkpro-core-asl/issues/detail?id=600
      *
      * @throws ResourceInitializationException
      */
