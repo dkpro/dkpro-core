@@ -17,28 +17,19 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.stopwordremover;
 
+import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertToken;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.util.JCasUtil.select;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
-import org.apache.uima.collection.CollectionReaderDescription;
-import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
-import org.apache.uima.resource.ResourceInitializationException;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
+import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
  * Test cases for StopwordRemover.
@@ -48,105 +39,65 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
  */
 public class StopWordRemoverTest
 {
+    private static final String LANGUAGE = "en";
+    private static final String TEXT = "This is a text containing stopwords .";
     private static final String STOPWORDSFILE_LOCATION1 = "src/test/resources/stopwords1.txt";
     private static final String STOPWORDSFILE_LOCATION2 = "src/test/resources/stopwords2.txt";
-    private List<String> stopwords1;
-    private List<String> stopwords2;
 
-    @Before
-    public void setUp()
-        throws IOException
-    {
-        stopwords1 = FileUtils.readLines(new File(STOPWORDSFILE_LOCATION1));
-        stopwords2 = FileUtils.readLines(new File(STOPWORDSFILE_LOCATION2));
-    }
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 
     /**
      * Simple test case: one stopword file.
      *
-     * @throws ResourceInitializationException
+     * @throws UIMAException
      */
     @Test
     public void test()
-        throws ResourceInitializationException
+        throws UIMAException
     {
-        short expectedNTokens = 4;
-
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/text.txt",
-                TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
+        String[] expectedTokens = new String[] { "text", "containing", "stopwords", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
                 StopWordRemover.PARAM_MODEL_LOCATION, STOPWORDSFILE_LOCATION1);
-
-        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, stopwordremover)) {
-            assertEquals(expectedNTokens, select(jcas, Token.class).size());
-            for (Token token : select(jcas, Token.class)) {
-                assertFalse(stopwords1.contains(token.getCoveredText()));
-            }
-        }
+        JCas jcas = TestRunner.runTest(stopwordremover, LANGUAGE, TEXT);
+        assertToken(expectedTokens, select(jcas, Token.class));
     }
 
     /**
      * Testing two stopword files with different language codes.
      *
-     * @throws ResourceInitializationException
+     * @throws UIMAException
      */
     @Test
     public void test2Files()
-        throws ResourceInitializationException
+        throws UIMAException
     {
-        short expectedNTokens = 3;
-        String[] stopwordFiles = new String[] {
-                "[*]" + STOPWORDSFILE_LOCATION1,
-                "[en]" + STOPWORDSFILE_LOCATION2 };
-
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/text.txt",
-                TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
+        String[] expectedTokens = new String[] { "text", "containing", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
-                StopWordRemover.PARAM_MODEL_LOCATION, stopwordFiles);
-
-        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, stopwordremover)) {
-            for (Token token : select(jcas, Token.class)) {
-                assertFalse(stopwords1.contains(token.getCoveredText()));
-                assertFalse(stopwords2.contains(token.getCoveredText()));
-            }
-            assertEquals(expectedNTokens, select(jcas, Token.class).size());
-        }
+                StopWordRemover.PARAM_MODEL_LOCATION, new String[] {
+                        "[*]" + STOPWORDSFILE_LOCATION1,
+                        "[en]" + STOPWORDSFILE_LOCATION2 });
+        JCas jcas = TestRunner.runTest(stopwordremover, LANGUAGE, TEXT);
+        assertToken(expectedTokens, select(jcas, Token.class));
     }
 
     /**
      * Testing two stopword files of identical language code.
      *
-     * @see https://code.google.com/p/dkpro-core-asl/issues/detail?id=600
+     * @throws UIMAException
      *
-     * @throws ResourceInitializationException
+     * @see https://code.google.com/p/dkpro-core-asl/issues/detail?id=600
      */
     @Test
     public void testFilesSameLanguage()
-        throws ResourceInitializationException
+        throws UIMAException
     {
-        short expectedNTokens = 3;
-        String[] stopwordFiles = new String[] {
-                "[*]" + STOPWORDSFILE_LOCATION1,
-                "[*]" + STOPWORDSFILE_LOCATION2 };
-
-        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
-                TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/text.txt",
-                TextReader.PARAM_LANGUAGE, "en");
-        AnalysisEngineDescription segmenter = createEngineDescription(OpenNlpSegmenter.class);
+        String[] expectedTokens = new String[] { "text", "containing", "." };
         AnalysisEngineDescription stopwordremover = createEngineDescription(StopWordRemover.class,
-                StopWordRemover.PARAM_MODEL_LOCATION, stopwordFiles);
-
-        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, stopwordremover)) {
-            for (Token token : select(jcas, Token.class)) {
-                assertFalse(stopwords1.contains(token.getCoveredText()));
-                assertFalse(stopwords2.contains(token.getCoveredText()));
-            }
-            assertEquals(expectedNTokens, select(jcas, Token.class).size());
-        }
-
+                StopWordRemover.PARAM_MODEL_LOCATION, new String[] {
+                        "[en]" + STOPWORDSFILE_LOCATION1,
+                        "[en]" + STOPWORDSFILE_LOCATION2 });
+        JCas jcas = TestRunner.runTest(stopwordremover, LANGUAGE, TEXT);
+        assertToken(expectedTokens, select(jcas, Token.class));
     }
 }
