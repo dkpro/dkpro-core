@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
@@ -67,8 +68,7 @@ public class LangDetectLanguageIdentifier
             {
                 setContextObject(LangDetectLanguageIdentifier.this);
 
-                setDefault(ARTIFACT_ID,
-                        "${groupId}.langdetect-model-${language}-${variant}");
+                setDefault(ARTIFACT_ID, "${groupId}.langdetect-model-${language}-${variant}");
                 setDefault(LOCATION,
                         "classpath:/${package}/lib/languageidentifier-${language}-${variant}.properties");
                 setDefault(VARIANT, "wikipedia");
@@ -100,21 +100,40 @@ public class LangDetectLanguageIdentifier
         throws AnalysisEngineProcessException
     {
         modelProvider.configure(aJCas.getCas());
+        modelProvider.getResource();
 
+        String documentText = aJCas.getDocumentText();
+        
+        // Unescape text, if Chinese, Arabic and stuff are thrown in as UTF-8 escaped sequence it
+        // will lead to an increased error rate
+        String unescapedDocumentText = StringEscapeUtils.unescapeJava(documentText);
+        String language = detectLanguage(unescapedDocumentText);
+
+        aJCas.setDocumentLanguage(language);
+    }
+
+    private String detectLanguage(String aDocumentText)
+        throws AnalysisEngineProcessException
+    {
+        String language = "x-unspecified";
         try {
-            // Reinitialize the profiles in the DetectorFactory if necessary
-            modelProvider.getResource(); 
-            
-            // Create a new detector
             Detector detector = DetectorFactory.create();
-            detector.append(aJCas.getDocumentText());
-            
-            String language = detector.detect();
-            
-            aJCas.setDocumentLanguage(language);
+            detector.append(aDocumentText);
+            language = detector.detect();
         }
-        catch (Exception e) {
-            throw new AnalysisEngineProcessException(e);
+        catch (LangDetectException e) {
+            // "no features in text" might occur if a message composes for instance of a single
+            // numeric value
+            // we silently ignore this particular error message, but throw all other
+            if (!isFeatureException(e)) {
+                throw new AnalysisEngineProcessException(e);
+            }
         }
+        return language;
+    }
+
+    private boolean isFeatureException(LangDetectException e)
+    {
+        return e.getMessage().equals("no features in text");
     }
 }
