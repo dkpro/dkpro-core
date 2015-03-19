@@ -21,7 +21,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
@@ -157,7 +156,7 @@ public class MalletTopicModelInferencer
             double[] topicDistribution = inferencer.getSampledDistribution(
                     malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
 
-            /* convert data type */
+            /* convert data type (Mallet output -> Dkpro array) */
             DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
             da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
             topicDistributionAnnotation.setTopicProportions(da);
@@ -187,7 +186,13 @@ public class MalletTopicModelInferencer
      * @param topicDistribution
      *            a double array containing the document's topic proportions
      * @return an array of integers pointing to the topics assigned to the document
+     * @deprecated this method should be removed at some point because assignment / topic tagging
+     *             should be done in a dedicated step (module).
      */
+    // TODO: should return a boolean[] of the same size as topicDistribution
+    // TODO: should probably be moved to a dedicated module because assignments (topic tagging)
+    // should not be done at inference level
+    @Deprecated
     private int[] assignTopics(final double[] topicDistribution)
     {
         /*
@@ -216,14 +221,8 @@ public class MalletTopicModelInferencer
         if (indexes.size() > maxTopicAssignments) {
 
             /* sort index list by corresponding values */
-            Collections.sort(indexes, new Comparator<Integer>()
-            {
-                @Override
-                public int compare(Integer aO1, Integer aO2)
-                {
-                    return Double.compare(topicDistribution[aO1], topicDistribution[aO2]);
-                }
-            });
+            Collections.sort(indexes,
+                    (aO1, aO2) -> Double.compare(topicDistribution[aO1], topicDistribution[aO2]));
 
             while (indexes.size() > maxTopicAssignments) {
                 indexes.remove(0);
