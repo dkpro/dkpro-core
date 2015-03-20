@@ -202,8 +202,7 @@ public class MalletTopicModelInferencer
         double threshold = Math.max(
                 Collections.max(
                         Arrays.asList(ArrayUtils.toObject(topicDistribution)))
-                        / maxTopicAssignments,
-                minTopicProb);
+                        / maxTopicAssignments, minTopicProb);
 
         /*
          * assign indexes for values that are above threshold

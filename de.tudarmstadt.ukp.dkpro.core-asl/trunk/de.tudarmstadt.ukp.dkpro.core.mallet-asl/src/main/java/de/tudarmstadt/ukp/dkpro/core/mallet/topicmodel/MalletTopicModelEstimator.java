@@ -316,8 +316,6 @@ public class MalletTopicModelEstimator
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
-        super.collectionProcessComplete();
-
         try {
             generateParallelModel();
         }
