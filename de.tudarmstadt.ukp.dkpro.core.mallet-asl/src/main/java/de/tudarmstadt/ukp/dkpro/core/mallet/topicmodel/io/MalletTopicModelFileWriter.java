@@ -103,7 +103,6 @@ public class MalletTopicModelFileWriter
     public void collectionProcessComplete()
         throws AnalysisEngineProcessException
     {
-        super.collectionProcessComplete();
         try {
             targetWriter.close();
         }
