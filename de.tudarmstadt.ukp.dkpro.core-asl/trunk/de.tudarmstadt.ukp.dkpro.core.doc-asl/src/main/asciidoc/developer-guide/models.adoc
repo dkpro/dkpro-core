@@ -57,9 +57,9 @@ been established.
 
 * __REQ-5__ - Loadable from classpath: Due to REQ-1, REQ-2, and
 					REQ-3 models must be resolvable from the classpath. 
-** ++ResourceUtils.resolveLocation(String, Object, UimaContext)++
+** `ResourceUtils.resolveLocation(String, Object, UimaContext)`
 ** Resource Providers (see below) 
-** ++PathMatchingResourcePatternResolver++
+** `PathMatchingResourcePatternResolver`
 
 
 
@@ -135,12 +135,24 @@ for more information.
 
 The model building ANT script goes to `src/scripts/build.xml` with the project.
 
+DKPro Core provides a set of ANT macros that help in packaging models. Typically, you will need
+one of the following two:
+
+* `install-stub-and-upstream-file` - if your model consists of a single file
+* `install-stub-and-upstream-folder` - if your model consists of multiple files.
+
+NOTE: When using `install-stub-and-upstream-folder`, the `outputPackage` property must end in `lib`,
+      otherwise the generated artifacts will remain empty.
+
+The `ant-macros.xml` file itself contains additional documentation on the macros and additional
+properties that can be set.
+
 [source,xml]
 ----
 <project basedir="../.." default="separate-jars">
   <import>
     <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/
-      tags/0.6.0/ant-macros.xml"/>
+      tags/0.7.0/ant-macros.xml"/>
   </import>
         
   <!-- 
