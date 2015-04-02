@@ -161,8 +161,13 @@ public class PennTreeToJCasConverter
                 // only add POS to index if we want POS-tagging
                 POS posAnno = null;
                 if (createPosTags) {
-                    Type posTag = posMappingProvider.getTagType(c.getLabel());
-                    posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
+                    if (posMappingProvider != null) {
+                        Type posTag = posMappingProvider.getTagType(c.getLabel());
+                        posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
+                    }
+                    else {
+                        posAnno = new POS(aJCas, begin, end);
+                    }
                     posAnno.setPosValue(internTags ? c.getLabel().intern() : c.getLabel());
                     posAnno.addToIndexes();
                 }
@@ -281,13 +286,19 @@ public class PennTreeToJCasConverter
         if (NONE.equals(aLabel)) {
             return new Constituent(aJCas);
         }
-        
+
         String[] label = aLabel.split("-");
-        Type constituentTag = constituentMappingProvider.getTagType(label[0]);
-        // We just set a dummy value for the offsets here. These need to be fixed when we know the
-        // children and before addToIndexes() is called.
-        Constituent constituentAnno = (Constituent) aJCas.getCas().createAnnotation(constituentTag,
-                0, 0);
+        Constituent constituentAnno;
+        if (constituentMappingProvider != null) {
+            Type constituentTag = constituentMappingProvider.getTagType(label[0]);
+            // We just set a dummy value for the offsets here. These need to be fixed when we know the
+            // children and before addToIndexes() is called.
+            constituentAnno = (Constituent) aJCas.getCas().createAnnotation(constituentTag, 0, 0);
+        }
+        else {
+            constituentAnno = new Constituent(aJCas, 0, 0);
+        }
+        
         constituentAnno.setConstituentType(label[0]);
         
         if (label.length >= 2) {
