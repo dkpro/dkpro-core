@@ -299,6 +299,12 @@ public class StanfordAnnotator
         return anno;
     }
 
+    public void createDependencyAnnotation(GrammaticalRelation aDependencyType,
+            Token aGovernor, Token aDependent)
+    {
+        createDependencyAnnotation(jCas, aDependencyType, aGovernor, aDependent);
+    }
+    
     /**
      * Writes dependency annotations to the JCas
      * 
@@ -309,7 +315,7 @@ public class StanfordAnnotator
      * @param aDependent
      *            the dependent-word
      */
-    public void createDependencyAnnotation(GrammaticalRelation aDependencyType,
+    public static void createDependencyAnnotation(JCas jCas, GrammaticalRelation aDependencyType,
             Token aGovernor, Token aDependent)
     {
         // create the necessary objects and methods
