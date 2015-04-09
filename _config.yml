@@ -21,8 +21,7 @@ description: "»Feeling Responsive« is a responsive theme for Jekyll based on t
 
 # This URL is the main adresse. Don't include a slash at the end.
 #
-#url: "https://phlow.github.io/feeling-responsive"
-url: ""
+url: "https://dodinh.github.io/dkpro-core-page-draft"
 baseurl: ""
 
 # This is for the editing function in _/includes/improve_content.html
