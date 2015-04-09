@@ -6,8 +6,17 @@
   url: "/getting-started/"
   side: left
 
-- title: "Templates"
-  url: "/design/"
+- title: Downloads
+  url: "/blog/"
+  side: left
+  dropdown:
+  - title: Blog
+    url: "/blog/"
+  - title: "Blog Archive"
+    url: "/blog/archive/"
+
+- title: Documentation
+  url: "/wiki/"
   side: left
   dropdown:
   - title: "Grid & Colors"
@@ -31,7 +40,7 @@
   - title: "Portfolio"
     url: "/design/portfolio/"
 
-- title: "Header Styles"
+- title: "Issues"
   url: "/headers/"
   side: left
   dropdown:
@@ -50,7 +59,7 @@
   - title: "No Header but Image"
     url: "/design/no-header-but-image/"
 
-- title: Documentation
+- title: Source
   url: "/documentation/"
   side: left
   dropdown:
@@ -60,19 +69,6 @@
     url: "/changelog/"
   - title: "Roadmap"
     url: "/roadmap/"
-
-- title: Blog
-  url: "/blog/"
-  side: left
-  dropdown:
-  - title: Blog
-    url: "/blog/"
-  - title: "Blog Archive"
-    url: "/blog/archive/"
-
-- title: "Search"
-  url: "/search/"
-  side: right
 
 - title: "Contact"
   url: "/contact/"
