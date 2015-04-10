@@ -58,7 +58,6 @@ Many of the wrapped third-party components and the models used by them should be
 Please cite DKPro Core itself as:
 
 > Eckart de Castilho, R. and Gurevych, I. (2014). **A broad-coverage collection of portable NLP components for building shareable analysis pipelines**. In Proceedings of the Workshop on Open Infrastructures and Analysis Frameworks for HLT (OIAF4HLT) at COLING 2014, to be published, Dublin, Ireland.
-
 [(pdf)][1] [(bib)][2]
 
 License
