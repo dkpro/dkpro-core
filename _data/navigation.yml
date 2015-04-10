@@ -1,9 +1,5 @@
-- title: Start
+- title: DKPro Core
   url: "/"
-  side: left
-
-- title: Getting Started
-  url: "/getting-started/"
   side: left
 
 - title: Downloads
@@ -72,4 +68,4 @@
 
 - title: "Contact"
   url: "/contact/"
-  side: right
+  side: left
