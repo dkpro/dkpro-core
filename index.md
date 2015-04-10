@@ -17,17 +17,17 @@ widget-1:
 widget-2:
     title: "Models"
     url: 'http://phlow.github.io/feeling-responsive/info/'
-    text: 'A list of models that we provide accompanying the components.'
+    text: 'We provide various models accompanying the components.'
     image: IconModels.png
 widget-3:
     title: "Formats"
     url: 'https://github.com/Phlow/feeling-responsive'
-    text: 'With DKPro, reading and writing of various formats is just one line of code away.'
+    text: 'Reading and writing various formats is just one line of code away.'
     image: IconFormatBlank.png
 widget-4:
     title: "Typesystem"
     url: 'https://github.com/Phlow/feeling-responsive'
-    text: 'Our typesystem tries to be comprehensive, but yet simple.'
+    text: 'Our typesystem is comprehensive, yet simple.'
     image: IconTypeSystem.png
 widget-5:
     title: "DKPro with Java"
@@ -42,7 +42,7 @@ widget-6:
 widget-7:
     title: "DKPro with Jython"
     url: 'https://github.com/Phlow/feeling-responsive'
-    text: 'Working with Python? Use Jython to easily integrate DKPro into your projects!'
+    text: 'Easily integrate DKPro into your python projects!'
     image: LogoPython.png
 header-1:
     title: "A collection of software components for natural language processing (NLP) based on the Apache [UIMA][14] framework."
