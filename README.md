@@ -5,16 +5,19 @@ This is a fork of [Feeling Responsive][1], which is licensed under [MIT license]
 It is a template for Jekyll (used by github) to build static pages.
 
 A few ToDos:
+* Discuss colors
+* Discuss font family for headers
+* Front page icons: same color (grey? +1), centered, no shadows, maybe a bit smaller
 * Discuss frontpage layout
 	* SH: Splash page?
-	* Test moving the "What is DKPro" box to center
+* Fix links not working in subheader/intro
 * Discuss menu structure, site content
-	* EJ: Fewer menu items?
-	* SH: Make menu more visible!
+	* Submenu items?
 * atm content pages use markdown. There exists a plugin for asciidoc ([jekyll-asciidoc][3]), but it is not supported by github-jekyll yet - the site would have to be built offline, then uploaded. This could probably be done using Jenkins?
 	* For now weĺl make do with markdown.
 * Work on sidebar, footer
 	* Mailing lists in footer
+* Check/Solve iOS problems
 * Add content...
 
 
