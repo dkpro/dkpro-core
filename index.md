@@ -44,6 +44,9 @@ widget-7:
     url: 'https://github.com/Phlow/feeling-responsive'
     text: 'Working with Python? Use Jython to easily integrate DKPro into your projects!'
     image: LogoPython.png
+header-1:
+    title: "A collection of software components for natural language processing (NLP) based on the Apache [UIMA][14] framework."
+    text: "Many NLP tools are already freely available in the NLP research community. DKPro Core provides UIMA components wrapping these tools (and some original tools) so they can be used interchangeably in UIMA processing pipelines. DKPro Core builds heavily on [uimaFIT][15] which allows for rapid and easy development of NLP processing pipelines, for wrapping existing tools and for creating original UIMA components."
 ---
 
 
@@ -77,7 +80,7 @@ It is now jointly developed at UKP Lab, Technische Universität Darmstadt and La
 <span class="footnotes">[LogoJava.png][4] by Christian F. Burprich, Creative Commons (Attribution-Noncommercial-Share Alike 3.0 Unported); [LogoPython.png][5] by IFA; [LogoGroovy.png][6] by pictonic.co; [IconComponents.png][7], [IconModels.png][8] by [Visual Pharm][9]; [IconFormatText.png][10], [IconFormatBlank.png][11] by [Honza Dousek][12]; [IconTypeSystem.png][13] by Designmodo</span>
 
 [1]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/OIAF4HLT2014DKProCore_cameraready.pdf
-[2]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864#
+[2]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
 [3]: http://www.apache.org/licenses/LICENSE-2.0
 [4]: https://www.iconfinder.com/icons/16890/java_icon#size=128
 [5]: https://www.iconfinder.com/icons/282803/logo_python_icon#size=128
@@ -89,3 +92,5 @@ It is now jointly developed at UKP Lab, Technische Universität Darmstadt and La
 [11]: https://www.iconfinder.com/icons/199231/blank_extension_file_format_icon#size=128
 [12]: https://www.iconfinder.com/iconsets/lexter-flat-colorfull-file-formats
 [13]: https://www.iconfinder.com/icons/115791/tag_icon#size=128
+[14]: http://uima.apache.org
+[15]: http://uima.apache.org/uimafit
