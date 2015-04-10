@@ -5,7 +5,7 @@
 # this work, you have to use › layout: frontpage
 #
 layout: frontpage
-title: "dkpro-core-asl"
+title: "DKPro Core"
 #header:
 #	title: DKPro Core
 #   image_fullwidth: "header_unsplash_12.jpg"
