@@ -58,7 +58,8 @@ public class OpenNlpPosTaggerTest
 	                        OpenNlpPosTagger.class),
 	                createEngineDescription(
 	                        Stopwatch.class,
-	                        Stopwatch.PARAM_TIMER_NAME, "testTimer"
+	                        Stopwatch.PARAM_TIMER_NAME, "testTimer",
+	                        Stopwatch.PARAM_OUTPUT_FILE, "target/result.txt"
 	                )
 	        )
         );
