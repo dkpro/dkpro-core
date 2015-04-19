@@ -17,11 +17,16 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.uima.UimaContext;
@@ -60,6 +65,14 @@ public class Stopwatch
      */
     @ConfigurationParameter(name = PARAM_TIMER_NAME, mandatory = true)
     private String timerName;
+    
+    public static final String PARAM_OUTPUT_FILE = "timerOutputFile";
+    /**
+     * Name of the timer pair.
+     * Upstream and downstream timer need to use the same name.
+     */
+    @ConfigurationParameter(name = PARAM_OUTPUT_FILE, mandatory = false)
+    private File outputFile;
 
     private List<Long> times;
 
@@ -112,6 +125,9 @@ public class Stopwatch
             for (Long timeValue : times) {
                 statTimes.addValue((double) timeValue / 1000);
             }
+            double sum = statTimes.getSum();
+            double mean = statTimes.getMean();
+            double stddev = statTimes.getStandardDeviation();
 
             StringBuilder sb = new StringBuilder();
             sb.append("Estimate after processing " + times.size() + " documents.");
@@ -119,12 +135,27 @@ public class Stopwatch
 
             Formatter formatter = new Formatter(sb, Locale.US);
 
-            formatter.format("Aggregated time: %,.1fs\n", statTimes.getSum());
-            formatter.format("Time / Document: %,.3fs (%,.3fs)\n", statTimes.getMean(), statTimes.getStandardDeviation());
+            formatter.format("Aggregated time: %,.1fs\n", sum);
+            formatter.format("Time / Document: %,.3fs (%,.3fs)\n", mean, stddev);
 
             formatter.close();
 
-            getLogger().info(sb.toString());        	
+            getLogger().info(sb.toString());
+            
+            if (outputFile != null) {
+				try {
+					Properties props = new Properties();
+                    props.setProperty("total", ""+sum);
+                    props.setProperty("mean", ""+mean);
+                    props.setProperty("stddev", ""+stddev);
+                    OutputStream out = new FileOutputStream(outputFile);
+                    props.store(out, "timer " + timerName + " result file");
+				} catch (FileNotFoundException e) {
+					throw new AnalysisEngineProcessException(e);
+				} catch (IOException e) {
+					throw new AnalysisEngineProcessException(e);
+				}
+            }
         }
     }
     
