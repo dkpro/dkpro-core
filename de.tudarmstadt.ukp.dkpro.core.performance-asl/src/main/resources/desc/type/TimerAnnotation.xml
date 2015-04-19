@@ -20,6 +20,12 @@
           <description/>
           <rangeTypeName>uima.cas.Long</rangeTypeName>
         </featureDescription>
+      <featureDescription>
+          <name>name</name>
+          <description>The name of the timer.
+Used to automatically determine whether this is an upstream or downstream timer.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
       </features>
     </typeDescription>
   </types>

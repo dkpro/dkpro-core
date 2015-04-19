@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
@@ -32,43 +33,32 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation;
 
 /**
  * Can be used to measure how long the processing between two points in a pipeline takes.
- * For that purpose, the AE is added two times, before and after the part of the pipeline that should be measured.
- * The parameter makes sure the downstream component knows its status.
- *
- * @author zesch
- *
+ * For that purpose, the AE needs to be added two times, before and after the part of the pipeline that should be measured.
  */
 
 @TypeCapability(
         inputs={
-                "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+                "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"},
         outputs={
                 "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation"})
 
-public class ThroughputTestAE
+public class Stopwatch
     extends JCasAnnotator_ImplBase
 {
 
-    public static final String PARAM_IS_DOWNSTREAM_TIMER = "isDownstreamTimer";
+    public static final String PARAM_TIMER_NAME = "timerName";
     /**
-     * If true, this is the downstream timer, i.e. the second of a timer pair.
+     * Name of the timer pair.
+     * Upstream and downstream timer need to use the same name.
      */
-    @ConfigurationParameter(name = PARAM_IS_DOWNSTREAM_TIMER, mandatory = true)
-    private boolean isFinalTime;
+    @ConfigurationParameter(name = PARAM_TIMER_NAME, mandatory = true)
+    private String timerName;
 
     private List<Long> times;
-
-    private long nrofTokens = 0;
-    private long nrofSentences = 0;
-    private long lastSentenceDivisionResult = 0;
 
     @Override
     public void initialize(UimaContext context)
@@ -83,30 +73,21 @@ public class ThroughputTestAE
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
     {
+    	
+        long currentTime = System.currentTimeMillis();
 
-        long time = System.currentTimeMillis();
-
-        if (isFinalTime) {
+        if (isDownstreamTimer(jcas)) {
             TimerAnnotation timerAnno = JCasUtil.selectSingle(jcas, TimerAnnotation.class);
-            timerAnno.setEndTime(time);
+            timerAnno.setEndTime(currentTime);
 
             long startTime = timerAnno.getStartTime();
 
-            nrofTokens += JCasUtil.select(jcas, Token.class).size();
-            nrofSentences += JCasUtil.select(jcas, Sentence.class).size();
-
-            times.add(time-startTime);
-
-            if (times.size() % 1000 == 0 || nrofSentences % 1000 < lastSentenceDivisionResult) {
-                getLogger().info(getPerformanceaAnalysis());
-            }
-
-            lastSentenceDivisionResult = nrofSentences % 1000;
-
+            times.add(currentTime - startTime);
         }
         else {
             TimerAnnotation timerAnno = new TimerAnnotation(jcas);
-            timerAnno.setStartTime(time);
+            timerAnno.setName(timerName);
+            timerAnno.setStartTime(currentTime);
             timerAnno.addToIndexes();
         }
     }
@@ -117,46 +98,43 @@ public class ThroughputTestAE
     {
         super.collectionProcessComplete();
 
-        System.out.println("cpc called");
-
-        getLogger().info("Final analysis after processing all documents");
-        getLogger().info(getPerformanceaAnalysis());
-    }
-
-    private static final String LF = System.getProperty("line.separator");
-
-    public String getPerformanceaAnalysis() {
-        StringBuilder sb = new StringBuilder();
-
-        long sumMillis = 0;
-        for (double timeValue : times) {
-            sumMillis += timeValue;
-        }
+        getLogger().info("Results from Timer '" + timerName + "' after processing all documents.");
+    
 
         DescriptiveStatistics statTimes = new DescriptiveStatistics();
         for (Long timeValue : times) {
             statTimes.addValue((double) timeValue / 1000);
         }
 
+        StringBuilder sb = new StringBuilder();
         sb.append("Estimate after processing " + times.size() + " documents.");
-        sb.append(LF);
+        sb.append("\n");
 
         Formatter formatter = new Formatter(sb, Locale.US);
 
-        formatter.format("Time / Document:       %,.3f (%,.3f)\n", statTimes.getMean(), statTimes.getStandardDeviation());
-        formatter.format("Time / 10^4 Token:     %,.3f\n", getNormalizedTime(sumMillis, nrofTokens, 1000));
-        formatter.format("Time / 10^4 Sentences: %,.3f\n", getNormalizedTime(sumMillis, nrofSentences, 1000));
+        formatter.format("Aggregated time: %,.1fs\n", statTimes.getSum());
+        formatter.format("Time / Document: %,.3fs (%,.3fs)\n", statTimes.getMean(), statTimes.getStandardDeviation());
 
         formatter.close();
 
-        return sb.toString();
+        getLogger().info(sb.toString());
     }
-
-    private double getNormalizedTime(long millis, long count, long normalizationBase) {
-        double seconds = (double) millis / 1000;
-
-        double normalizedTime = seconds * normalizationBase / count;
-
-        return normalizedTime;
+    
+    private boolean isDownstreamTimer(JCas jcas) {
+    	Collection<TimerAnnotation> timerAnnotations = JCasUtil.select(jcas, TimerAnnotation.class);
+    	
+    	// if there are no annotations, this is obviously the not the downstream timer
+    	if (timerAnnotations.size() == 0) {
+    		return false;
+    	}
+    	
+    	// this is only a downstream timer if there already is a timer annotation with the same name
+    	for (TimerAnnotation timer : timerAnnotations) {
+    		if (timer.getName().equals(timerName)) {
+    			return true;
+    		}
+    	}
+    	
+    	return false;
     }
 }

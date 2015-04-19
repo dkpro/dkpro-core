@@ -2,19 +2,19 @@
 /* First created by JCasGen Sun Jul 22 20:55:44 CEST 2012 */
 package de.tudarmstadt.ukp.dkpro.core.type;
 
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.JCasRegistry;
+import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.cas.Type;
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.cas.impl.FSGenerator;
-import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.cas.impl.TypeImpl;
-import org.apache.uima.cas.Type;
 import org.apache.uima.cas.impl.FeatureImpl;
-import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.impl.TypeImpl;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sun Jul 22 20:55:44 CEST 2012
+ * Updated by JCasGen Sun Apr 19 09:55:20 CEST 2015
  * @generated */
 public class TimerAnnotation_Type extends Annotation_Type {
   /** @generated */
@@ -76,6 +76,30 @@ public class TimerAnnotation_Type extends Annotation_Type {
     ll_cas.ll_setLongValue(addr, casFeatCode_endTime, v);}
     
   
+ 
+  /** @generated */
+  final Feature casFeat_name;
+  /** @generated */
+  final int     casFeatCode_name;
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
+  public String getName(int addr) {
+        if (featOkTst && casFeat_name == null)
+      jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+    return ll_cas.ll_getStringValue(addr, casFeatCode_name);
+  }
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
+  public void setName(int addr, String v) {
+        if (featOkTst && casFeat_name == null)
+      jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+    ll_cas.ll_setStringValue(addr, casFeatCode_name, v);}
+    
+  
 
 
 
@@ -92,6 +116,10 @@ public class TimerAnnotation_Type extends Annotation_Type {
  
     casFeat_endTime = jcas.getRequiredFeatureDE(casType, "endTime", "uima.cas.Long", featOkTst);
     casFeatCode_endTime  = (null == casFeat_endTime) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_endTime).getCode();
+
+ 
+    casFeat_name = jcas.getRequiredFeatureDE(casType, "name", "uima.cas.String", featOkTst);
+    casFeatCode_name  = (null == casFeat_name) ? JCas.INVALID_FEATURE_CODE : ((FeatureImpl)casFeat_name).getCode();
 
   }
 }
