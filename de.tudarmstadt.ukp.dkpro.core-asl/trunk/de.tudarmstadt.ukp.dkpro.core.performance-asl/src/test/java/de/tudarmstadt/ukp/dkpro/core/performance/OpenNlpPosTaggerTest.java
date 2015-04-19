@@ -17,10 +17,15 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.performance;
 
+import static de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase.INCLUDE_PREFIX;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
+
+import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.io.tei.TeiReader;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
@@ -30,19 +35,32 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
  */
 public class OpenNlpPosTaggerTest
 {
-    @Ignore
+	@Ignore
     @Test
     public void performanceTest()
         throws Exception
     {
-        new ThroughputTest().testAggregate(
-                ThroughputTest.getStandardReader("en"),
-                createEngineDescription(
-                    createEngineDescription(
-                            BreakIteratorSegmenter.class),
-                    createEngineDescription(
-                            OpenNlpPosTagger.class)
-                )
+    	SimplePipeline.runPipeline(
+			createReader(
+	                TeiReader.class,
+	                TeiReader.PARAM_LANGUAGE, "en",
+	                TeiReader.PARAM_SOURCE_LOCATION, "src/test/resources/corpus/",
+	                TeiReader.PARAM_PATTERNS, new String[] {INCLUDE_PREFIX + "*.xml"}
+	        ),
+	        createEngineDescription(
+	        		createEngineDescription(
+	                        Stopwatch.class,
+	                        Stopwatch.PARAM_TIMER_NAME, "testTimer"
+	                ),
+	                createEngineDescription(
+	                        BreakIteratorSegmenter.class),
+	                createEngineDescription(
+	                        OpenNlpPosTagger.class),
+	                createEngineDescription(
+	                        Stopwatch.class,
+	                        Stopwatch.PARAM_TIMER_NAME, "testTimer"
+	                )
+	        )
         );
     }
 }
