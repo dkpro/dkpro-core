@@ -58,6 +58,10 @@ public class Stopwatch
 	private Boolean isDownstreamTimer;
 	private JCas jcas;;
 
+	public static final String KEY_MEAN = "mean";
+	public static final String KEY_SUM = "sum";
+	public static final String KEY_STDDEV = "stddev";
+	
     public static final String PARAM_TIMER_NAME = "timerName";
     /**
      * Name of the timer pair.
@@ -145,9 +149,9 @@ public class Stopwatch
             if (outputFile != null) {
 				try {
 					Properties props = new Properties();
-                    props.setProperty("total", ""+sum);
-                    props.setProperty("mean", ""+mean);
-                    props.setProperty("stddev", ""+stddev);
+                    props.setProperty(KEY_SUM, ""+sum);
+                    props.setProperty(KEY_MEAN, ""+mean);
+                    props.setProperty(KEY_STDDEV, ""+stddev);
                     OutputStream out = new FileOutputStream(outputFile);
                     props.store(out, "timer " + timerName + " result file");
 				} catch (FileNotFoundException e) {
