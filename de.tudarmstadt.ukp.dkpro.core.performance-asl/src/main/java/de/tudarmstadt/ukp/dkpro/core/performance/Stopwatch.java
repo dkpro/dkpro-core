@@ -49,6 +49,9 @@ import de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation;
 public class Stopwatch
     extends JCasAnnotator_ImplBase
 {
+	
+	private Boolean isDownstreamTimer;
+	private JCas jcas;;
 
     public static final String PARAM_TIMER_NAME = "timerName";
     /**
@@ -67,16 +70,19 @@ public class Stopwatch
         super.initialize(context);
 
         times = new ArrayList<Long>();
+        
+        isDownstreamTimer = null;
     }
 
     @Override
     public void process(JCas jcas)
         throws AnalysisEngineProcessException
     {
+    	this.jcas = jcas;
     	
         long currentTime = System.currentTimeMillis();
 
-        if (isDownstreamTimer(jcas)) {
+        if (isDownstreamTimer()) {
             TimerAnnotation timerAnno = JCasUtil.selectSingle(jcas, TimerAnnotation.class);
             timerAnno.setEndTime(currentTime);
 
@@ -98,43 +104,45 @@ public class Stopwatch
     {
         super.collectionProcessComplete();
 
-        getLogger().info("Results from Timer '" + timerName + "' after processing all documents.");
-    
+        if (isDownstreamTimer()) {
+            getLogger().info("Results from Timer '" + timerName + "' after processing all documents.");
+            
 
-        DescriptiveStatistics statTimes = new DescriptiveStatistics();
-        for (Long timeValue : times) {
-            statTimes.addValue((double) timeValue / 1000);
+            DescriptiveStatistics statTimes = new DescriptiveStatistics();
+            for (Long timeValue : times) {
+                statTimes.addValue((double) timeValue / 1000);
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Estimate after processing " + times.size() + " documents.");
+            sb.append("\n");
+
+            Formatter formatter = new Formatter(sb, Locale.US);
+
+            formatter.format("Aggregated time: %,.1fs\n", statTimes.getSum());
+            formatter.format("Time / Document: %,.3fs (%,.3fs)\n", statTimes.getMean(), statTimes.getStandardDeviation());
+
+            formatter.close();
+
+            getLogger().info(sb.toString());        	
         }
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Estimate after processing " + times.size() + " documents.");
-        sb.append("\n");
-
-        Formatter formatter = new Formatter(sb, Locale.US);
-
-        formatter.format("Aggregated time: %,.1fs\n", statTimes.getSum());
-        formatter.format("Time / Document: %,.3fs (%,.3fs)\n", statTimes.getMean(), statTimes.getStandardDeviation());
-
-        formatter.close();
-
-        getLogger().info(sb.toString());
     }
     
-    private boolean isDownstreamTimer(JCas jcas) {
-    	Collection<TimerAnnotation> timerAnnotations = JCasUtil.select(jcas, TimerAnnotation.class);
+    private boolean isDownstreamTimer() {
     	
-    	// if there are no annotations, this is obviously the not the downstream timer
-    	if (timerAnnotations.size() == 0) {
-    		return false;
+		if (isDownstreamTimer == null) {
+        	// this is only a downstream timer if there already is a timer annotation with the same name
+        	for (TimerAnnotation timer : JCasUtil.select(jcas, TimerAnnotation.class)) {
+        		if (timer.getName().equals(timerName)) {
+        			isDownstreamTimer = true;
+        		}
+        	}
     	}
     	
-    	// this is only a downstream timer if there already is a timer annotation with the same name
-    	for (TimerAnnotation timer : timerAnnotations) {
-    		if (timer.getName().equals(timerName)) {
-    			return true;
-    		}
-    	}
-    	
-    	return false;
+		if (isDownstreamTimer == null) {
+			isDownstreamTimer = false;
+		}
+
+    	return isDownstreamTimer;
     }
 }
