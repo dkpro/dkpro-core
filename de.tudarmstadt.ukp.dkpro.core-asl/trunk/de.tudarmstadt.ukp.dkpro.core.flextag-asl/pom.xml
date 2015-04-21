@@ -64,7 +64,7 @@
 		<artifactId>maven-shade-plugin</artifactId> <version>2.3</version> <executions> 
 		<execution> <phase>package</phase> <goals> <goal>shade</goal> </goals> <configuration> 
 		<transformers> <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"> 
-		<mainClass>de.unidue.langtech.gscl2015.Experiment</mainClass> </transformer> 
+		<mainClass>de.tudarmstadt.ukp.dkpro.core.flextag.TrainAndSaveNewModel</mainClass> </transformer> 
 		<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> 
 		<resource> META-INF/org.apache.uima.fit/fsindexes.txt </resource> </transformer> 
 		<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> 
