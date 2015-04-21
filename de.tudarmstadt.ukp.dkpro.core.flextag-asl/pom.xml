@@ -24,4 +24,91 @@
   </parent>
   <groupId>de.tudarmstadt.ukp.dkpro.core.flextag-asl</groupId>
   <artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-asl</artifactId>
+  <dependencies>
+  		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+			<artifactId>dkpro-tc-ml-crfsuite</artifactId>
+		</dependency>
+  </dependencies>
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+  			<artifactId>dkpro-tc</artifactId>
+  			<version>0.7.0</version>
+  			<type>pom</type>
+  			<scope>import</scope>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
+ <!--   	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>de.unidue.langtech.gscl2015.Experiment</mainClass>
+								</transformer>
+								
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/org.apache.uima.fit/fsindexes.txt
+									</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/org.apache.uima.fit/types.txt
+									</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/org.apache.uima.fit/typepriorities.txt
+									</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+									<resource>
+										META-INF/lab/engines.properties
+									</resource>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.XmlAppendingTransformer">
+									<resource>
+										META-INF/spring/activemq-broker.xml
+									</resource>
+								</transformer>
+								
+							</transformers>
+							<outputFile>
+								${project.build.directory}/${project.artifactId}-${project.version}-standalone.jar
+							</outputFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>  -->
 </project>
