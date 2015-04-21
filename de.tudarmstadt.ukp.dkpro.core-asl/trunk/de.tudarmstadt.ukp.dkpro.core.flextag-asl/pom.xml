@@ -35,13 +35,13 @@
   				de.tudarmstadt.ukp.dkpro.core.api.parameter-asl
   			</artifactId>
 		</dependency>
-		<dependency>
+<!--  	<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>
   			de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger
   		</artifactId>
 			<version>20150421.1</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>
