@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.flextag;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
@@ -43,15 +45,20 @@ import de.tudarmstadt.ukp.dkpro.tc.ml.uima.TcAnnotatorSequence;
 public class FlexTag
     extends JCasAnnotator_ImplBase
 {
+    public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
+    private String modelLocation;
+
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
-    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = true)
+    @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     private String language;
 
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
-    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = true)
+    @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
 
-    private AnalysisEngine tagger = null;
+    private AnalysisEngine flexTagEngine = null;
+    private ModelProviderBase<File> modelProvider = null;
 
     @Override
     public void initialize(final UimaContext context)
@@ -59,29 +66,49 @@ public class FlexTag
     {
         super.initialize(context);
 
-        String packageName = getClass().getPackage().getName().replaceAll("\\.", "/");
-        File loadedModel = null;
-        try {
-            loadedModel = ResourceUtils.getClasspathAsFolder("classpath*:" + packageName
-                    + "/lib/tagger/" + language + "/" + variant, true);
+        modelProvider = new ModelProviderBase<File>()
+        {
+            {
+                setContextObject(FlexTag.this);
 
+                setDefault(ARTIFACT_ID, "${groupId}.flextag-model-${language}-${variant}");
+                setDefault(LOCATION,
+                        "classpath:/${package}/lib/tagger-${language}-${variant}.properties");
+
+                setOverride(LOCATION, modelLocation);
+                setOverride(LANGUAGE, language);
+                setOverride(VARIANT, variant);
+            }
+
+            @Override
+            protected File produceResource(URL aUrl)
+                throws IOException
+            {
+                File folder = ResourceUtils.getClasspathAsFolder(aUrl.toString(), true);
+                return folder;
+            }
+        };
+
+        try {
+            modelProvider.configure();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-
-        tagger = AnalysisEngineFactory.createEngine(TcAnnotatorSequence.class,
+        
+        File loadedModel = modelProvider.getResource();
+        
+        flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotatorSequence.class,
                 TcAnnotatorSequence.PARAM_TC_MODEL_LOCATION, loadedModel,
                 TcAnnotatorSequence.PARAM_NAME_SEQUENCE_ANNOTATION, Sentence.class.getName(),
                 TcAnnotatorSequence.PARAM_NAME_UNIT_ANNOTATION, Token.class.getName());
-
     }
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        tagger.process(aJCas);
+        flexTagEngine.process(aJCas);
 
         List<Token> tokens = getTokens(aJCas);
         List<TextClassificationOutcome> outcomes = getPredictions(aJCas);
