@@ -35,6 +35,8 @@ import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
+import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProviderFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -56,9 +58,15 @@ public class FlexTag
     public static final String PARAM_VARIANT = ComponentParameters.PARAM_VARIANT;
     @ConfigurationParameter(name = PARAM_VARIANT, mandatory = false)
     private String variant;
+    
+    public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    private String posMappingLocation;
+    
 
     private AnalysisEngine flexTagEngine = null;
     private ModelProviderBase<File> modelProvider = null;
+    private MappingProvider mappingProvider=null;
 
     @Override
     public void initialize(final UimaContext context)
@@ -67,6 +75,8 @@ public class FlexTag
         super.initialize(context);
 
         initModelProvider();
+        mappingProvider = MappingProviderFactory.createPosMappingProvider(posMappingLocation,
+                language, modelProvider);
 
         flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotatorSequence.class,
                 TcAnnotatorSequence.PARAM_TC_MODEL_LOCATION, modelProvider.getResource(),
@@ -78,6 +88,8 @@ public class FlexTag
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        mappingProvider.configure(aJCas.getCas());
+        
         flexTagEngine.process(aJCas);
 
         annotateTaggingResultsLinkToTokens(aJCas);
