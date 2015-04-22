@@ -17,19 +17,14 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.flextag.debug;
 
-import java.io.File;
-
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.flextag.FlexTag;
-import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
+import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 import de.tudarmstadt.ukp.dkpro.tc.core.Constants;
-import de.tudarmstadt.ukp.dkpro.tc.ml.uima.TcAnnotatorSequence;
 
 public class Load
     implements Constants
@@ -40,22 +35,18 @@ public class Load
     public static void main(String[] args)
         throws Exception
     {
+        String inputFolder = args[0];
 
         homeFolder = System.getProperty("user.home") + "/Desktop/";
         System.setProperty("DKPRO_HOME", homeFolder);
 
-        SimplePipeline
-                .runPipeline(
-                        CollectionReaderFactory
-                                .createReader(
-                                        StringReader.class,
-                                        StringReader.PARAM_DOCUMENT_TEXT,
-                                        "Gegen 13 Uhr werden die Temperaturen über 20 Grad ansteigen und der Himmel aufklaren",
-                                        StringReader.PARAM_LANGUAGE, "de"), AnalysisEngineFactory
-                                .createEngineDescription(BreakIteratorSegmenter.class),
-                        AnalysisEngineFactory.createEngineDescription(FlexTag.class,
-                                FlexTag.PARAM_LANGUAGE, "de", FlexTag.PARAM_VARIANT, "tiger"),
-                        AnalysisEngineFactory.createEngineDescription(Printer.class));
+        SimplePipeline.runPipeline(CollectionReaderFactory.createReader(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, inputFolder, TextReader.PARAM_PATTERNS, "*.txt",
+                TextReader.PARAM_LANGUAGE, "de"), AnalysisEngineFactory
+                .createEngineDescription(BreakIteratorSegmenter.class), AnalysisEngineFactory
+                .createEngineDescription(FlexTag.class, FlexTag.PARAM_LANGUAGE, "de",
+                        FlexTag.PARAM_VARIANT, "tiger"), AnalysisEngineFactory
+                .createEngineDescription(Printer.class));
 
     }
 

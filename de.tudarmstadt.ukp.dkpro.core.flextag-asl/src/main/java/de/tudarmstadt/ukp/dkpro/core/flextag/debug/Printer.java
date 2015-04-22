@@ -24,16 +24,16 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
-import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationOutcome;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 public class Printer extends JCasAnnotator_ImplBase {
 
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-		Collection<TextClassificationOutcome> select = JCasUtil.select(aJCas,
-				TextClassificationOutcome.class);
-		for (TextClassificationOutcome tco : select) {
-			System.out.println(tco.getCoveredText() + "/" + tco.getOutcome());
+		Collection<Token> select = JCasUtil.select(aJCas,
+				Token.class);
+		for (Token t : select) {
+			System.out.println(t.getCoveredText() + "/" + t.getPos().getPosValue());
 		}
 	}
 
