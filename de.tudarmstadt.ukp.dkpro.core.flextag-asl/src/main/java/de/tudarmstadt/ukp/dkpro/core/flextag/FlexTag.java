@@ -89,7 +89,6 @@ public class FlexTag
         for (int i = 0; i < tokens.size(); i++) {
             Token token = tokens.get(i);
             String outcome = outcomes.get(i).getOutcome();
-            System.out.println("[" + token.getCoveredText() + "] " + " [" + outcome + "]");
             annotatePOS(aJCas, token, outcome);
         }
 
