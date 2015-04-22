@@ -66,6 +66,65 @@ public class FlexTag
     {
         super.initialize(context);
 
+        initModelProvider();
+
+        flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotatorSequence.class,
+                TcAnnotatorSequence.PARAM_TC_MODEL_LOCATION, modelProvider.getResource(),
+                TcAnnotatorSequence.PARAM_NAME_SEQUENCE_ANNOTATION, Sentence.class.getName(),
+                TcAnnotatorSequence.PARAM_NAME_UNIT_ANNOTATION, Token.class.getName());
+    }
+
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        flexTagEngine.process(aJCas);
+
+        annotateTaggingResultsLinkToTokens(aJCas);
+
+    }
+
+    private void annotateTaggingResultsLinkToTokens(JCas aJCas)
+    {
+        List<Token> tokens = getTokens(aJCas);
+        List<TextClassificationOutcome> outcomes = getPredictions(aJCas);
+
+        for (int i = 0; i < tokens.size(); i++) {
+            Token token = tokens.get(i);
+            String outcome = outcomes.get(i).getOutcome();
+
+            POS p = createPartOfSpeechAnnotationFromOutcome(aJCas, token.getBegin(),
+                    token.getEnd(), outcome);
+            token.setPos(p);
+        }
+
+    }
+
+    private POS createPartOfSpeechAnnotationFromOutcome(JCas aJCas, int begin, int end,
+            String aOutcome)
+    {
+        POS p = new POS(aJCas, begin, end);
+        p.setPosValue(aOutcome);
+        p.addToIndexes();
+
+        return p;
+
+    }
+
+    private List<TextClassificationOutcome> getPredictions(JCas aJCas)
+    {
+        return new ArrayList<TextClassificationOutcome>(JCasUtil.select(aJCas,
+                TextClassificationOutcome.class));
+    }
+
+    private List<Token> getTokens(JCas aJCas)
+    {
+        return new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
+    }
+
+    private void initModelProvider()
+        throws ResourceInitializationException
+    {
         modelProvider = new ModelProviderBase<File>()
         {
             {
@@ -88,58 +147,11 @@ public class FlexTag
                 return folder;
             }
         };
-
         try {
             modelProvider.configure();
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
-        
-        File loadedModel = modelProvider.getResource();
-        
-        flexTagEngine = AnalysisEngineFactory.createEngine(TcAnnotatorSequence.class,
-                TcAnnotatorSequence.PARAM_TC_MODEL_LOCATION, loadedModel,
-                TcAnnotatorSequence.PARAM_NAME_SEQUENCE_ANNOTATION, Sentence.class.getName(),
-                TcAnnotatorSequence.PARAM_NAME_UNIT_ANNOTATION, Token.class.getName());
     }
-
-    @Override
-    public void process(JCas aJCas)
-        throws AnalysisEngineProcessException
-    {
-        flexTagEngine.process(aJCas);
-
-        List<Token> tokens = getTokens(aJCas);
-        List<TextClassificationOutcome> outcomes = getPredictions(aJCas);
-
-        for (int i = 0; i < tokens.size(); i++) {
-            Token token = tokens.get(i);
-            String outcome = outcomes.get(i).getOutcome();
-            annotatePOS(aJCas, token, outcome);
-        }
-
-    }
-
-    private void annotatePOS(JCas aJCas, Token aToken, String aOutcome)
-    {
-        POS p = new POS(aJCas, aToken.getBegin(), aToken.getEnd());
-        p.setPosValue(aOutcome);
-        p.addToIndexes();
-
-        aToken.setPos(p);
-
-    }
-
-    private List<TextClassificationOutcome> getPredictions(JCas aJCas)
-    {
-        return new ArrayList<TextClassificationOutcome>(JCasUtil.select(aJCas,
-                TextClassificationOutcome.class));
-    }
-
-    private List<Token> getTokens(JCas aJCas)
-    {
-        return new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
-    }
-
 }
