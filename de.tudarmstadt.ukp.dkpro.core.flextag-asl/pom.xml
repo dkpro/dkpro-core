@@ -41,12 +41,17 @@
   			de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-de-tiger
   		</artifactId>
 			<version>20150421.1</version>
-		</dependency> -->
+		</dependency> -->  
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			<artifactId>
   				de.tudarmstadt.ukp.dkpro.core.tokit-asl
   			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>4.4.0</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -54,7 +59,7 @@
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
 				<artifactId>dkpro-tc</artifactId>
-				<version>0.7.0</version>
+				<version>0.8.0-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
