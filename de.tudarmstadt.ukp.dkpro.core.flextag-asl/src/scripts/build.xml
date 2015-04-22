@@ -54,7 +54,7 @@
 			compression="gzip"/>
 		
 		<install-stub-and-upstream-folder 
-    		folder="target/download/model" 
+    		folder="target/download/deTigerModel" 
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.flextag"
     		upstreamVersion="20150421"
