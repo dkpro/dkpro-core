@@ -19,6 +19,8 @@ package de.tudarmstadt.ukp.dkpro.core.flextag;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngine;
@@ -26,13 +28,16 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationOutcome;
 import de.tudarmstadt.ukp.dkpro.tc.ml.uima.TcAnnotatorSequence;
 
 public class FlexTag
@@ -77,6 +82,38 @@ public class FlexTag
         throws AnalysisEngineProcessException
     {
         tagger.process(aJCas);
+
+        List<Token> tokens = getTokens(aJCas);
+        List<TextClassificationOutcome> outcomes = getPredictions(aJCas);
+
+        for (int i = 0; i < tokens.size(); i++) {
+            Token token = tokens.get(i);
+            String outcome = outcomes.get(i).getOutcome();
+            System.out.println("[" + token.getCoveredText() + "] " + " [" + outcome + "]");
+            annotatePOS(aJCas, token, outcome);
+        }
+
+    }
+
+    private void annotatePOS(JCas aJCas, Token aToken, String aOutcome)
+    {
+        POS p = new POS(aJCas, aToken.getBegin(), aToken.getEnd());
+        p.setPosValue(aOutcome);
+        p.addToIndexes();
+
+        aToken.setPos(p);
+
+    }
+
+    private List<TextClassificationOutcome> getPredictions(JCas aJCas)
+    {
+        return new ArrayList<TextClassificationOutcome>(JCasUtil.select(aJCas,
+                TextClassificationOutcome.class));
+    }
+
+    private List<Token> getTokens(JCas aJCas)
+    {
+        return new ArrayList<Token>(JCasUtil.select(aJCas, Token.class));
     }
 
 }
