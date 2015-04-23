@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
@@ -88,12 +89,13 @@ public class FlexTag
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        Logger.getLogger(getClass()).info("START");
         mappingProvider.configure(aJCas.getCas());
         
         flexTagEngine.process(aJCas);
 
         annotateTaggingResultsLinkToTokens(aJCas);
-
+        Logger.getLogger(getClass()).info("FINISH");
     }
 
     private void annotateTaggingResultsLinkToTokens(JCas aJCas)
