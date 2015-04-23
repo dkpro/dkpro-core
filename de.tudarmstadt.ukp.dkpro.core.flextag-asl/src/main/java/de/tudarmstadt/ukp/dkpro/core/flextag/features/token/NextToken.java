@@ -18,24 +18,17 @@
 package de.tudarmstadt.ukp.dkpro.core.flextag.features.token;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
-import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.tc.api.exception.TextClassificationException;
-import de.tudarmstadt.ukp.dkpro.tc.api.features.ClassificationUnitFeatureExtractor;
 import de.tudarmstadt.ukp.dkpro.tc.api.features.Feature;
-import de.tudarmstadt.ukp.dkpro.tc.api.features.FeatureExtractorResource_ImplBase;
 import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationUnit;
 
-public class NextToken
-    extends FeatureExtractorResource_ImplBase
-    implements ClassificationUnitFeatureExtractor
+public class NextToken extends TokenLookUpTable
+//    extends FeatureExtractorResource_ImplBase
+//    implements ClassificationUnitFeatureExtractor
 {
 
     static final String FEATURE_NAME = "nextToken";
@@ -44,7 +37,10 @@ public class NextToken
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
-        String featureVal = getNextTokenValue(aView, aClassificationUnit);
+        super.extract(aView, aClassificationUnit);
+        Integer idx = TokenLookUpTable.tokenBegin2Idx.get(aClassificationUnit.getBegin());
+        
+        String featureVal = nextToken(idx);
         Feature feature = new Feature(FEATURE_NAME, featureVal);
 
         ArrayList<Feature> features = new ArrayList<Feature>();
@@ -52,50 +48,16 @@ public class NextToken
         return features;
 
     }
-
-    private String getNextTokenValue(JCas aView, TextClassificationUnit aClassificationUnit)
+    private String nextToken(Integer idx)
     {
-        List<Token> tokens = getTokensOfSequenceContainingTheClassificationUnit(aView,
-                aClassificationUnit);
-
-        String featureVal = null;
-        for (int i = 0; i < tokens.size(); i++) {
-            Token currentToken = tokens.get(i);
-            if (currentToken.getBegin() != aClassificationUnit.getBegin()) {
-                continue;
-            }
-            if (i + 1 < tokens.size()) {
-                featureVal = tokens.get(i + 1).getCoveredText();
-            }
-            else {
-                featureVal = END_OF_SEQUENCE;
-            }
-            break;
+        if (TokenLookUpTable.idx2SentenceEnd.get(idx) != null){
+            return END_OF_SEQUENCE;
         }
-        return featureVal;
-    }
-
-    private List<Token> getTokensOfSequenceContainingTheClassificationUnit(JCas aView,
-            TextClassificationUnit aClassificationUnit)
-    {
-        Map<Sentence, Collection<TextClassificationUnit>> indexCovered = JCasUtil.indexCovered(
-                aView, Sentence.class, TextClassificationUnit.class);
-
-        Sentence sentence = null;
-        List<Sentence> keySet = new ArrayList<Sentence>(indexCovered.keySet());
-        for (int i = 0; i < keySet.size(); i++) {
-            sentence = keySet.get(i);
-            Collection<TextClassificationUnit> collection = indexCovered.get(sentence);
-            if (collection.contains(aClassificationUnit)) {
-                // we found the sentence with the current TextClassificationUnit
-                break;
-            }
-            sentence = null;
+        
+        if (idx + 1 < TokenLookUpTable.tokens.size()) {
+            return tokens.get(idx + 1);
         }
-
-        List<Token> tokens = JCasUtil.selectCovered(aView, Token.class, sentence);
-
-        return tokens;
+        return END_OF_SEQUENCE;
     }
 
 }
