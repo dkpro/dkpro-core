@@ -20,9 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.flextag.features.names;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsComma;
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsDot;
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsHyphen;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsNumber;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsAllCapitalized;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsFirstLetterCapitalized;
@@ -51,12 +48,6 @@ public class TestFeatureFileAndFeatureValueName
         assertNames(
                 "de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsFirstLetterCapitalized",
                 IsFirstLetterCapitalized.class.getCanonicalName());
-        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsDot",
-                ContainsDot.class.getCanonicalName());
-        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsComma",
-                ContainsComma.class.getCanonicalName());
-        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsHyphen",
-                ContainsHyphen.class.getCanonicalName());
         assertNames("de.tudarmstadt.ukp.dkpro.tc.features.length.NrOfCharsUFE",
                 NrOfCharsUFE.class.getCanonicalName());
         assertNames(
@@ -69,9 +60,6 @@ public class TestFeatureFileAndFeatureValueName
     public void testFeatureValueName()
         throws Exception
     {
-        assertNames("containsComma", ContainsComma.FEATURE_NAME);
-        assertNames("containsPeriod", ContainsDot.FEATURE_NAME);
-        assertNames("containsHyphen", ContainsHyphen.FEATURE_NAME);
         assertNames("containsNumber", ContainsNumber.FEATURE_NAME);
         assertNames("1stCharCapitalized", IsFirstLetterCapitalized.FEATURE_NAME);
         assertNames("allCapitalized", IsAllCapitalized.FEATURE_NAME);
