@@ -27,6 +27,7 @@ import org.apache.log4j.Logger;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
@@ -117,11 +118,12 @@ public class FlexTag
     private POS createPartOfSpeechAnnotationFromOutcome(JCas aJCas, int begin, int end,
             String aOutcome)
     {
-        POS p = new POS(aJCas, begin, end);
-        p.setPosValue(aOutcome);
-        p.addToIndexes();
-
-        return p;
+        Type posTag = mappingProvider.getTagType(aOutcome);
+        POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
+        posAnno.setPosValue(aOutcome);
+        posAnno.addToIndexes();
+        
+        return posAnno;
 
     }
 
