@@ -17,8 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.flextag.features.names;
 
-import static org.junit.Assert.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsComma;
@@ -39,28 +38,28 @@ public class TestFeatureFileAndFeatureValueName
     public void testFeatueFileName()
         throws Exception
     {
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.token.CurrentToken",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.token.CurrentToken",
                 CurrentToken.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.token.NextToken",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.token.NextToken",
                 NextToken.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.token.PreviousToken",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.token.PreviousToken",
                 PreviousToken.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsAllCapitalized",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsAllCapitalized",
                 IsAllCapitalized.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsNumber",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsNumber",
                 ContainsNumber.class.getCanonicalName());
-        assertEquals(
+        assertNames(
                 "de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsFirstLetterCapitalized",
                 IsFirstLetterCapitalized.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsDot",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsDot",
                 ContainsDot.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsComma",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsComma",
                 ContainsComma.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsHyphen",
+        assertNames("de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsHyphen",
                 ContainsHyphen.class.getCanonicalName());
-        assertEquals("de.tudarmstadt.ukp.dkpro.tc.features.length.NrOfCharsUFE",
+        assertNames("de.tudarmstadt.ukp.dkpro.tc.features.length.NrOfCharsUFE",
                 NrOfCharsUFE.class.getCanonicalName());
-        assertEquals(
+        assertNames(
                 "de.tudarmstadt.ukp.dkpro.core.flextag.features.character.LuceneCharacterNGramPerUnitUFE",
                 LuceneCharacterNGramPerUnitUFE.class.getCanonicalName());
 
@@ -70,15 +69,24 @@ public class TestFeatureFileAndFeatureValueName
     public void testFeatureValueName()
         throws Exception
     {
-        assertEquals("containsComma", ContainsComma.FEATURE_NAME);
-        assertEquals("containsPeriod", ContainsDot.FEATURE_NAME);
-        assertEquals("containsHyphen", ContainsHyphen.FEATURE_NAME);
-        assertEquals("containsNumber", ContainsNumber.FEATURE_NAME);
-        assertEquals("1stCharCapitalized", IsFirstLetterCapitalized.FEATURE_NAME);
-        assertEquals("allCapitalized", IsAllCapitalized.FEATURE_NAME);
-        assertEquals("currToken", CurrentToken.FEATURE_NAME);
-        assertEquals("nextToken", NextToken.FEATURE_NAME);
-        assertEquals("previousToken", PreviousToken.FEATURE_NAME);
+        assertNames("containsComma", ContainsComma.FEATURE_NAME);
+        assertNames("containsPeriod", ContainsDot.FEATURE_NAME);
+        assertNames("containsHyphen", ContainsHyphen.FEATURE_NAME);
+        assertNames("containsNumber", ContainsNumber.FEATURE_NAME);
+        assertNames("1stCharCapitalized", IsFirstLetterCapitalized.FEATURE_NAME);
+        assertNames("allCapitalized", IsAllCapitalized.FEATURE_NAME);
+        assertNames("currToken", CurrentToken.FEATURE_NAME);
+        assertNames("nextToken", NextToken.FEATURE_NAME);
+        assertNames("previousToken", PreviousToken.FEATURE_NAME);
+    }
+
+    private void assertNames(String aString, String aCanonicalName)
+        throws Exception
+    {
+        if (!aString.equals(aCanonicalName)) {
+            Assert.fail("Feature file name has changed! Be aware that the file names are hardcoded values in the respective models and cannot be changed without re-creating all existing models!");
+        }
+
     }
 
 }
