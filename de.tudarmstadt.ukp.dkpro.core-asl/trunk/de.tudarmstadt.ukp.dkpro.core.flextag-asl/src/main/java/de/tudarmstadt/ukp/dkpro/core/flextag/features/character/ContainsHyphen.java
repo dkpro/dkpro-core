@@ -33,7 +33,7 @@ public class ContainsHyphen
     extends FeatureExtractorResource_ImplBase
     implements ClassificationUnitFeatureExtractor
 {
-    private static final String FEATURE_NAME = "containsHyphen";
+    public static final String FEATURE_NAME = "containsHyphen";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException

@@ -33,7 +33,7 @@ public class ContainsComma
     extends FeatureExtractorResource_ImplBase
     implements ClassificationUnitFeatureExtractor
 {
-    private static final String FEATURE_NAME = "containsComma";
+    public static final String FEATURE_NAME = "containsComma";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException

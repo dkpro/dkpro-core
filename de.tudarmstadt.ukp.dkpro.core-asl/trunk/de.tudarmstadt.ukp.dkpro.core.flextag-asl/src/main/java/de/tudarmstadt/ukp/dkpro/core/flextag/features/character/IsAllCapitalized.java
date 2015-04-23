@@ -34,7 +34,7 @@ public class IsAllCapitalized
     implements ClassificationUnitFeatureExtractor
 {
 
-    private static final String FEATURE_NAME = "allCapitalized";
+    public static final String FEATURE_NAME = "allCapitalized";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException

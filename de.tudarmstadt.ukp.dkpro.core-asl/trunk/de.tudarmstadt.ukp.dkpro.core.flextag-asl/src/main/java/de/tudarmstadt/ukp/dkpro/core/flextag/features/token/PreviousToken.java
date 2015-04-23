@@ -30,8 +30,8 @@ import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationUnit;
 public class PreviousToken extends TokenLookUpTable
 {
 
-    static final String FEATURE_NAME = "previousToken";
-    static final String BEGIN_OF_SEQUENCE = "BOS";
+    public static final String FEATURE_NAME = "previousToken";
+    final static String BEGIN_OF_SEQUENCE = "BOS";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
