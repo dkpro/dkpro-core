@@ -38,7 +38,7 @@ public class PreviousToken extends TokenLookUpTable
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
-        Logger.getLogger(getClass()).info("START");
+        Logger.getLogger(getClass()).debug("START");
         super.extract(aView, aClassificationUnit);
         Integer idx = TokenLookUpTable.tokenBegin2Idx.get(aClassificationUnit.getBegin());
 
@@ -47,7 +47,7 @@ public class PreviousToken extends TokenLookUpTable
 
         ArrayList<Feature> features = new ArrayList<Feature>();
         features.add(feature);
-        Logger.getLogger(getClass()).info("FINISH");
+        Logger.getLogger(getClass()).debug("FINISH");
         return features;
 
     }

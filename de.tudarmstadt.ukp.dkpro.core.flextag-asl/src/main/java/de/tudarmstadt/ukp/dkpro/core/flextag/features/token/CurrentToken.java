@@ -38,13 +38,13 @@ public class CurrentToken
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
-        Logger.getLogger(getClass()).info("START");
+        Logger.getLogger(getClass()).debug("START");
         String token = aClassificationUnit.getCoveredText();
         Feature feature = new Feature(FEATURE_NAME, token);
 
         ArrayList<Feature> features = new ArrayList<Feature>();
         features.add(feature);
-        Logger.getLogger(getClass()).info("FINISH");
+        Logger.getLogger(getClass()).debug("FINISH");
         return features;
     }
 
