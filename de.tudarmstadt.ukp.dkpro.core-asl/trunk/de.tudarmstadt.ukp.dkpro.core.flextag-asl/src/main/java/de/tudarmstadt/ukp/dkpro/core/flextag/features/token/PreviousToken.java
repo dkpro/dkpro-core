@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.flextag.features.token;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.LogFactory;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.tc.api.exception.TextClassificationException;
@@ -28,8 +28,6 @@ import de.tudarmstadt.ukp.dkpro.tc.api.features.Feature;
 import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationUnit;
 
 public class PreviousToken extends TokenLookUpTable
-//    extends FeatureExtractorResource_ImplBase
-//    implements ClassificationUnitFeatureExtractor
 {
 
     static final String FEATURE_NAME = "previousToken";
@@ -38,23 +36,23 @@ public class PreviousToken extends TokenLookUpTable
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
-        Logger.getLogger(getClass()).debug("START");
+        LogFactory.getLog(getClass()).debug("START");
         super.extract(aView, aClassificationUnit);
-        Integer idx = TokenLookUpTable.tokenBegin2Idx.get(aClassificationUnit.getBegin());
+        Integer idx = tokenBegin2Idx.get(aClassificationUnit.getBegin());
 
         String featureVal = previousToken(idx);
         Feature feature = new Feature(FEATURE_NAME, featureVal);
 
         ArrayList<Feature> features = new ArrayList<Feature>();
         features.add(feature);
-        Logger.getLogger(getClass()).debug("FINISH");
+        LogFactory.getLog(getClass()).debug("FINISH");
         return features;
 
     }
     
     private String previousToken(Integer idx)
     {
-        if (TokenLookUpTable.idx2SentenceBegin.get(idx) != null){
+        if (idx2SentenceBegin.get(idx) != null){
             return BEGIN_OF_SEQUENCE;
         }
         

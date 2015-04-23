@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.LogFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
@@ -39,23 +39,23 @@ public class TokenLookUpTable
     implements ClassificationUnitFeatureExtractor
 {
     private String lastSeenDocumentId = "";
-    
-    protected static HashMap<Integer, Boolean> idx2SentenceBegin = new HashMap<Integer, Boolean>();
-    protected static HashMap<Integer, Boolean> idx2SentenceEnd = new HashMap<Integer, Boolean>();
-    
-    protected static HashMap<Integer, Token> begin2Token = new HashMap<Integer, Token>();
-    protected static HashMap<Integer, Integer> tokenBegin2Idx = new HashMap<Integer, Integer>();
-    protected static HashMap<Integer, Integer> tokenEnd2Idx = new HashMap<Integer, Integer>();
-    protected static List<String> tokens = new ArrayList<String>();
 
+    protected HashMap<Integer, Boolean> idx2SentenceBegin = new HashMap<Integer, Boolean>();
+    protected HashMap<Integer, Boolean> idx2SentenceEnd = new HashMap<Integer, Boolean>();
+
+    protected HashMap<Integer, Token> begin2Token = new HashMap<Integer, Token>();
+    protected HashMap<Integer, Integer> tokenBegin2Idx = new HashMap<Integer, Integer>();
+    protected HashMap<Integer, Integer> tokenEnd2Idx = new HashMap<Integer, Integer>();
+    protected List<String> tokens = new ArrayList<String>();
+    
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
         if (isTheSameDocument(aView)) {
             return null;
         }
-        
-        Logger.getLogger(getClass()).debug("START: (Re-)Build Token look up table");
+
+        LogFactory.getLog(getClass()).debug("START: (Re-)Build Token look up table");
 
         begin2Token = new HashMap<Integer, Token>();
         tokenBegin2Idx = new HashMap<Integer, Integer>();
@@ -73,7 +73,7 @@ public class TokenLookUpTable
             tokens.add(t.getCoveredText());
             i++;
         }
-        for (Sentence s : JCasUtil.select(aView, Sentence.class)){
+        for (Sentence s : JCasUtil.select(aView, Sentence.class)) {
             Integer begin = s.getBegin();
             Integer end = s.getEnd();
             Integer idxStartToken = tokenBegin2Idx.get(begin);
@@ -81,7 +81,7 @@ public class TokenLookUpTable
             idx2SentenceBegin.put(idxStartToken, true);
             idx2SentenceEnd.put(idxEndtoken, true);
         }
-        Logger.getLogger(getClass()).debug("FINISH: (Re-)Build Token look up table");
+        LogFactory.getLog(getClass()).debug("FINISH: (Re-)Build Token look up table");
         return null;
     }
 
