@@ -45,7 +45,7 @@ public class TestContainsComma
         assertEquals(1, extract.size());
         assertEquals(1, extract.get(0).getValue());
     }
-    
+
     @Test
     public void testNoComma()
         throws Exception
@@ -66,9 +66,9 @@ public class TestContainsComma
         Sentence s = new Sentence(jcas, 0, 6);
         s.addToIndexes();
 
-        tcu_comma = new TextClassificationUnit(jcas, 0,6);
+        tcu_comma = new TextClassificationUnit(jcas, 0, 6);
         tcu_comma.addToIndexes();
-        
+
         tcu_noComma = new TextClassificationUnit(jcas, 7, 10);
         tcu_noComma.addToIndexes();
     }
