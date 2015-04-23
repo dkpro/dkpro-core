@@ -34,7 +34,7 @@ public class ContainsNumber
     extends FeatureExtractorResource_ImplBase
     implements ClassificationUnitFeatureExtractor
 {
-    static final String FEATURE_NAME = "containsNumber";
+    public final static String FEATURE_NAME = "containsNumber";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException

@@ -33,7 +33,7 @@ public class CurrentToken
     extends FeatureExtractorResource_ImplBase
     implements ClassificationUnitFeatureExtractor
 {
-    static final String FEATURE_NAME = "currToken";
+    public final static String FEATURE_NAME = "currToken";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException

@@ -33,7 +33,7 @@ public class ContainsDot
     extends FeatureExtractorResource_ImplBase
     implements ClassificationUnitFeatureExtractor
 {
-    private static final String FEATURE_NAME = "containsPeriod";
+    public static final String FEATURE_NAME = "containsPeriod";
 
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
