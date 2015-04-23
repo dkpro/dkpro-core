@@ -40,7 +40,7 @@ public class TestPreviousToken
     JCas jcas = null;
     TextClassificationUnit tcu =null;
     TextClassificationUnit tcu_noPreviousToken =null;
-
+    
     @Test
     public void testPreviousToken() throws Exception
     {
