@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.math.NumberUtils;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.LogFactory;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.tc.api.exception.TextClassificationException;
@@ -39,12 +39,12 @@ public class ContainsNumber
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
-        Logger.getLogger(getClass()).debug("START");
+        LogFactory.getLog(getClass()).debug("START");
         String token = aClassificationUnit.getCoveredText();
         Feature feature = new Feature(FEATURE_NAME, containsNumber(token) ? 1 : 0);
         ArrayList<Feature> features = new ArrayList<Feature>();
         features.add(feature);
-        Logger.getLogger(getClass()).debug("FINISH");
+        LogFactory.getLog(getClass()).debug("FINISH");
         return features;
     }
 
