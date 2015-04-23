@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.flextag.features.token;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Random;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
@@ -27,6 +28,7 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.token.PreviousToken;
@@ -67,6 +69,9 @@ public class TestPreviousToken
     {
         jcas = JCasFactory.createJCas();
         jcas.setDocumentText("The sun shines. This is great.");
+        DocumentMetaData dmd = new DocumentMetaData(jcas);
+        dmd.setDocumentId(""+new Random().nextInt());
+        dmd.addToIndexes();
 
         Token t = null;
         t = new Token(jcas, 0, 3); // The

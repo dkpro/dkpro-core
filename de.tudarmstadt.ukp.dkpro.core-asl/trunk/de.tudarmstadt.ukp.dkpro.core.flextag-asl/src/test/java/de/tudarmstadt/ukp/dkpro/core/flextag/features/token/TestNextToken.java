@@ -17,9 +17,11 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.flextag.features.token;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.List;
+import java.util.Random;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.fit.factory.JCasFactory;
@@ -27,9 +29,9 @@ import org.apache.uima.jcas.JCas;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.token.NextToken;
 import de.tudarmstadt.ukp.dkpro.tc.api.features.Feature;
 import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationUnit;
 
@@ -70,6 +72,9 @@ public class TestNextToken
     {
         jcas = JCasFactory.createJCas();
         jcas.setDocumentText("The sun shines. This is great.");
+        DocumentMetaData dmd = new DocumentMetaData(jcas);
+        dmd.setDocumentId(""+new Random().nextInt());
+        dmd.addToIndexes();
 
         Token t = null;
         t = new Token(jcas, 0, 3); // The
@@ -113,7 +118,7 @@ public class TestNextToken
         otherUnits.addToIndexes();
         otherUnits = new TextClassificationUnit(jcas, 24, 29);
         otherUnits.addToIndexes();
-        tcu_noNextTokenExists = new TextClassificationUnit(jcas, 29, 30);
+        tcu_noNextTokenExists = new TextClassificationUnit(jcas, 14, 15);
         tcu_noNextTokenExists.addToIndexes();
     }
 
