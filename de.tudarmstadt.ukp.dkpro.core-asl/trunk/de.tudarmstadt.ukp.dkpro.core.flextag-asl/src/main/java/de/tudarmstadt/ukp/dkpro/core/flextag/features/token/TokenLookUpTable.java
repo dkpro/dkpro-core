@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 
@@ -53,6 +54,8 @@ public class TokenLookUpTable
         if (isTheSameDocument(aView)) {
             return null;
         }
+        
+        Logger.getLogger(getClass()).info("START: (Re-)Build Token look up table");
 
         begin2Token = new HashMap<Integer, Token>();
         tokenBegin2Idx = new HashMap<Integer, Integer>();
@@ -78,7 +81,7 @@ public class TokenLookUpTable
             idx2SentenceBegin.put(idxStartToken, true);
             idx2SentenceEnd.put(idxEndtoken, true);
         }
-
+        Logger.getLogger(getClass()).debug("FINISH: (Re-)Build Token look up table");
         return null;
     }
 

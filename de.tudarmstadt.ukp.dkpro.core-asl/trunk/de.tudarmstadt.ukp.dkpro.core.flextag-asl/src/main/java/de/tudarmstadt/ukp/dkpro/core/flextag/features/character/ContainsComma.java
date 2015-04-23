@@ -20,6 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.flextag.features.character;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.tc.api.exception.TextClassificationException;
@@ -37,10 +38,12 @@ public class ContainsComma
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
+        Logger.getLogger(getClass()).info("START");
         String token = aClassificationUnit.getCoveredText();
         Feature feature = new Feature(FEATURE_NAME, containsComma(token) ? 1 : 0);
         ArrayList<Feature> features = new ArrayList<Feature>();
         features.add(feature);
+        Logger.getLogger(getClass()).info("FINISH");
         return features;
     }
 
