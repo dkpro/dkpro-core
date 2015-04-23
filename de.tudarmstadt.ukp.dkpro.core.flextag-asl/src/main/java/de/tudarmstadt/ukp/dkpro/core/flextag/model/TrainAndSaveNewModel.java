@@ -30,9 +30,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.component.NoOpAnnotator;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsComma;
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsDot;
-import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsHyphen;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.ContainsNumber;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsAllCapitalized;
 import de.tudarmstadt.ukp.dkpro.core.flextag.features.character.IsFirstLetterCapitalized;
@@ -94,8 +91,7 @@ public class TrainAndSaveNewModel
                         NextToken.class.getName(), PreviousToken.class.getName(),
 
                         IsAllCapitalized.class.getName(), ContainsNumber.class.getName(),
-                        IsFirstLetterCapitalized.class.getName(), ContainsDot.class.getName(),
-                        ContainsComma.class.getName(), ContainsHyphen.class.getName(),
+                        IsFirstLetterCapitalized.class.getName(), 
 
                         NrOfCharsUFE.class.getName(),
                         LuceneCharacterNGramPerUnitUFE.class.getName() }));
