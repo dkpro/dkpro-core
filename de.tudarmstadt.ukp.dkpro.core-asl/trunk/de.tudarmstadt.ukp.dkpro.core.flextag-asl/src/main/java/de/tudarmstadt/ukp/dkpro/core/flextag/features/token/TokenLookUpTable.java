@@ -55,7 +55,7 @@ public class TokenLookUpTable
             return null;
         }
         
-        Logger.getLogger(getClass()).info("START: (Re-)Build Token look up table");
+        Logger.getLogger(getClass()).debug("START: (Re-)Build Token look up table");
 
         begin2Token = new HashMap<Integer, Token>();
         tokenBegin2Idx = new HashMap<Integer, Integer>();
