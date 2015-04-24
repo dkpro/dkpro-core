@@ -122,6 +122,8 @@ public class PennTreebankCombinedReader
     
     private PennTreeToJCasConverter converter;
 
+    private int lineNumber = 0;
+    
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
@@ -158,6 +160,7 @@ public class PennTreebankCombinedReader
         StringBuilder text = new StringBuilder();
         
         try (InputStream is = res.getInputStream()) {
+            lineNumber = 0;
             LineIterator li = IOUtils.lineIterator(is, encoding);
             
             while (li.hasNext()) {
@@ -206,6 +209,7 @@ public class PennTreebankCombinedReader
         StringBuilder tree = new StringBuilder();
         while (aLi.hasNext() || lineBuffer != null) {
             String line = lineBuffer != null ? lineBuffer : aLi.nextLine();
+            lineNumber++;
             lineBuffer = null;
             if (StringUtils.isBlank(line)) {
                 if (tree.length() > 0) {
@@ -216,9 +220,8 @@ public class PennTreebankCombinedReader
                 }
             }
             
-            // If the next line starts at the beginning (no indentation) then expect it is a new
-            // tree.
-            if ((tree.length() > 0) && !Character.isWhitespace(line.charAt(0))) {
+            // If the next line starts at the beginning and with an opening round bracket 
+            if ((tree.length() > 0) && line.charAt(0) == '(') {
                 lineBuffer = line;
                 break;
             }
@@ -227,6 +230,12 @@ public class PennTreebankCombinedReader
             tree.append('\n'); // Actually not needed - just in case we want to debug ;)
         }
         
-        return PennTreeUtils.parsePennTree(tree.toString());
+        try {
+            return PennTreeUtils.parsePennTree(tree.toString());
+        }
+        catch (RuntimeException e) {
+            getLogger().error("Unable to parse tree before line [" + lineNumber + "]:\n" + tree);
+            throw e;
+        }
     }
 }
