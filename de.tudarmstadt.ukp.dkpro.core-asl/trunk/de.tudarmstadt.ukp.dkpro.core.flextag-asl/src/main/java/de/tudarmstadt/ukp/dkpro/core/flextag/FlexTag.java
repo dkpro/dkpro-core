@@ -90,13 +90,11 @@ public class FlexTag
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        Logger.getLogger(getClass()).debug("START");
         mappingProvider.configure(aJCas.getCas());
         
         flexTagEngine.process(aJCas);
 
         annotateTaggingResultsLinkToTokens(aJCas);
-        Logger.getLogger(getClass()).debug("FINISH");
     }
 
     private void annotateTaggingResultsLinkToTokens(JCas aJCas)
