@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.logging.LogFactory;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.util.Level;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -38,15 +38,15 @@ public class TokenLookUpTable
     extends FeatureExtractorResource_ImplBase
     implements ClassificationUnitFeatureExtractor
 {
-    private String lastSeenDocumentId = "";
+    private static String lastSeenDocumentId = "";
 
-    protected HashMap<Integer, Boolean> idx2SentenceBegin = new HashMap<Integer, Boolean>();
-    protected HashMap<Integer, Boolean> idx2SentenceEnd = new HashMap<Integer, Boolean>();
+    protected static HashMap<Integer, Boolean> idx2SentenceBegin = new HashMap<Integer, Boolean>();
+    protected static HashMap<Integer, Boolean> idx2SentenceEnd = new HashMap<Integer, Boolean>();
 
-    protected HashMap<Integer, Token> begin2Token = new HashMap<Integer, Token>();
-    protected HashMap<Integer, Integer> tokenBegin2Idx = new HashMap<Integer, Integer>();
-    protected HashMap<Integer, Integer> tokenEnd2Idx = new HashMap<Integer, Integer>();
-    protected List<String> tokens = new ArrayList<String>();
+    protected static HashMap<Integer, Token> begin2Token = new HashMap<Integer, Token>();
+    protected static HashMap<Integer, Integer> tokenBegin2Idx = new HashMap<Integer, Integer>();
+    protected static HashMap<Integer, Integer> tokenEnd2Idx = new HashMap<Integer, Integer>();
+    protected static List<String> tokens = new ArrayList<String>();
     
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
@@ -54,8 +54,7 @@ public class TokenLookUpTable
         if (isTheSameDocument(aView)) {
             return null;
         }
-
-        LogFactory.getLog(getClass()).debug("START: (Re-)Build Token look up table");
+        getLogger().log(Level.FINE, "START: (Re-)Build Token look up table");
 
         begin2Token = new HashMap<Integer, Token>();
         tokenBegin2Idx = new HashMap<Integer, Integer>();
@@ -81,7 +80,7 @@ public class TokenLookUpTable
             idx2SentenceBegin.put(idxStartToken, true);
             idx2SentenceEnd.put(idxEndtoken, true);
         }
-        LogFactory.getLog(getClass()).debug("FINISH: (Re-)Build Token look up table");
+        getLogger().log(Level.FINE, "FINISH: (Re-)Build Token look up table");
         return null;
     }
 
