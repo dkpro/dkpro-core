@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.flextag.features.character;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.LogFactory;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.tc.api.exception.TextClassificationException;
