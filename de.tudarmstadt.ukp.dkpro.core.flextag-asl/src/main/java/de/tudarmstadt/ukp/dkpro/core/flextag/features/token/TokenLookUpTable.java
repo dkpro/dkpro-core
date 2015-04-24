@@ -52,8 +52,6 @@ public class TokenLookUpTable extends FeatureExtractorResource_ImplBase
 		if (isTheSameDocument(aView)) {
 			return null;
 		}
-		long s = System.currentTimeMillis();
-
 		begin2Token = new HashMap<Integer, Token>();
 		tokenBegin2Idx = new HashMap<Integer, Integer>();
 		idx2SentenceBegin = new HashMap<Integer, Boolean>();
@@ -78,10 +76,6 @@ public class TokenLookUpTable extends FeatureExtractorResource_ImplBase
 			idx2SentenceBegin.put(idxStartToken, true);
 			idx2SentenceEnd.put(idxEndtoken, true);
 		}
-		long e = System.currentTimeMillis();
-		LogFactory.getLog(getClass()).debug(
-				"Seconds spent for (re-)creation of token index[" + ((double) e - s)
-						/ 1000 + "]");
 		return null;
 	}
 
