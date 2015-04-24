@@ -21,6 +21,8 @@ import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.init
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.measurePerformance;
 import static de.tudarmstadt.ukp.dkpro.core.performance.PerformanceTestUtil.repeat;
 import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
+import static org.apache.uima.cas.impl.Serialization.serializeCASComplete;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
@@ -30,6 +32,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -37,9 +44,11 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.PrefixFileFilter;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.cas.CAS;
+import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.fit.factory.AnalysisEngineFactory;
 import org.apache.uima.fit.factory.CollectionReaderFactory;
@@ -332,11 +341,108 @@ public class BinaryCasWriterReaderTest
         
         assertFalse(reader.hasNext());
     }
-
-    @Ignore("Run this only when you want to compare performance")
+    
     @Test
-    public void performanceTest()
-        throws Exception
+    public void measureSerializedCas()
+        throws UIMAException, IOException
+    {
+        File file = testFolder.newFile("dummy.bin");
+        
+        Iterable<JCas> data = repeat(generateRandomCas(), 100);
+        
+        System.out.printf("= write%n");
+        SummaryStatistics statsWrite = measureWriteSerializedCas(data, file);
+        printStats(statsWrite);
+        
+        System.out.printf("= read%n");
+        SummaryStatistics statsRead = measureReadSerializedCas(file, 100);
+        printStats(statsRead);
+    }
+    
+    private static SummaryStatistics measureWriteSerializedCas(Iterable<JCas> aTestData, File aFile)
+        throws IOException
+    {
+        SummaryStatistics stats = new SummaryStatistics();
+        
+        for (JCas jcas : aTestData) {
+            long begin = System.currentTimeMillis();
+            writeSerializedCas(jcas, aFile);
+            stats.addValue(System.currentTimeMillis() - begin);
+        }
+
+        return stats;
+    }
+
+    private static SummaryStatistics measureReadSerializedCas(File aFile, int aRepeat)
+        throws IOException, UIMAException
+    {
+        SummaryStatistics stats = new SummaryStatistics();
+
+        JCas jcas = JCasFactory.createJCas();
+
+        for (int n = 0; n < aRepeat; n++) {
+            long begin = System.currentTimeMillis();
+            readSerializedCas(jcas, aFile);
+            stats.addValue(System.currentTimeMillis() - begin);
+        }
+
+        return stats;
+    }
+    
+    @Test
+    public void measureCasCreation()
+        throws UIMAException
+    {
+        SummaryStatistics statsRead = measureCasCreation(100);
+        printStats(statsRead);
+    }
+    
+    private static SummaryStatistics measureCasCreation(int aRepeat)
+        throws UIMAException
+    {
+        SummaryStatistics stats = new SummaryStatistics();
+        
+        for (int n = 0; n < aRepeat; n++) {
+            long begin = System.currentTimeMillis();
+//            JCas jcas = JCasFactory.createJCas();
+            JCas jcas = CasCreationUtils.createCas((TypeSystemDescription) null, null, null).getJCas();
+            stats.addValue(System.currentTimeMillis() - begin);
+        }
+        
+        return stats;
+    }
+
+    private static void writeSerializedCas(JCas aJCas, File aFile)
+        throws IOException
+    {
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(aFile))) {
+            CASCompleteSerializer serializer = serializeCASComplete(aJCas.getCasImpl());
+            os.writeObject(serializer);
+        }
+    }
+
+    private static void readSerializedCas(JCas aJCas, File aFile)
+            throws IOException
+    {
+        try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(aFile))) {
+            CASCompleteSerializer serializer = (CASCompleteSerializer) is.readObject();
+            deserializeCASComplete(serializer, aJCas.getCasImpl());
+            
+//            // Initialize the JCas sub-system which is the most often used API in DKPro Core components
+//            try {
+//                aJCas.getCas().getJCas();
+//            }
+//            catch (CASException e) {
+//                throw new IOException(e);
+//            }
+        }
+        catch (ClassNotFoundException e) {
+            throw new IOException(e);
+        }
+    }
+
+    private JCas generateRandomCas()
+        throws UIMAException
     {
         // Generate test data
         System.out.printf("Generating test data... ");
@@ -344,11 +450,42 @@ public class BinaryCasWriterReaderTest
         DocumentMetaData.create(jcas).setDocumentId("dummy");
         initRandomCas(jcas, 10000, 30000, 0);
         System.out.printf("done%n");
+        return jcas;
+    }
+    
+    @Ignore("Run this only when you want to compare performance")
+    @Test
+    public void performanceTest()
+        throws Exception
+    {
+        // Generate test data
+        Iterable<JCas> testdata = repeat(generateRandomCas(), 100);
         
         System.out.printf("Data serialized to %s %n", testFolder.getRoot());
         
         // Set up configurations
         Map<String, AnalysisEngineDescription> configs = new LinkedHashMap<String, AnalysisEngineDescription>();
+        configs.put(
+                "Format S+ - no compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_FORMAT, "S+", 
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+        configs.put(
+                "Format 0 - no compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_FORMAT, "0", 
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
+        configs.put(
+                "Format 4 - no compression",
+                createEngineDescription(
+                    BinaryCasWriter.class, 
+                    BinaryCasWriter.PARAM_FORMAT, "4", 
+                    BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
+                    BinaryCasWriter.PARAM_TARGET_LOCATION, testFolder.getRoot()));
         configs.put(
                 "Format 6+ - no compression",
                 createEngineDescription(
@@ -386,17 +523,24 @@ public class BinaryCasWriterReaderTest
                 f.delete();
             }
             
-            SummaryStatistics stats = measurePerformance(cfg.getValue(), repeat(jcas, 1000));
-            System.out.printf("  Repeat  %10d times%n", stats.getN());
-            System.out.printf("  Total   %10.0f ms %n", stats.getSum());
-            System.out.printf("  Mean    %10.0f ms %n", stats.getMean());
-            System.out.printf("  Min     %10.0f ms %n", stats.getMin());
-            System.out.printf("  Max     %10.0f ms %n", stats.getMax());
+            SummaryStatistics stats = measurePerformance(cfg.getValue(), testdata);
+            printStats(stats);
             
             for (File f : FileUtils.listFiles(testFolder.getRoot(), new PrefixFileFilter("dummy.bin"), null)) {
                 System.out.printf("  Size    %10d bytes%n", f.length());
             }
         }
+        
+        measureWriteSerializedCas(testdata, testFolder.newFile("dummy.bin"));
+    }
+    
+    private static void printStats(SummaryStatistics stats)
+    {
+        System.out.printf("  Repeat  %10d times%n", stats.getN());
+        System.out.printf("  Total   %10.0f ms %n", stats.getSum());
+        System.out.printf("  Mean    %10.0f ms %n", stats.getMean());
+        System.out.printf("  Min     %10.0f ms %n", stats.getMin());
+        System.out.printf("  Max     %10.0f ms %n", stats.getMax());
     }
     
     @Before
