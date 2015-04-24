@@ -39,12 +39,10 @@ public class ContainsNumber
     public List<Feature> extract(JCas aView, TextClassificationUnit aClassificationUnit)
         throws TextClassificationException
     {
-        LogFactory.getLog(getClass()).debug("START");
         String token = aClassificationUnit.getCoveredText();
         Feature feature = new Feature(FEATURE_NAME, containsNumber(token) ? 1 : 0);
         ArrayList<Feature> features = new ArrayList<Feature>();
         features.add(feature);
-        LogFactory.getLog(getClass()).debug("FINISH");
         return features;
     }
 
