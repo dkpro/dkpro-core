@@ -169,8 +169,9 @@ public class TigerXmlWriter extends JCasFileWriter_ImplBase
             TigerNode node = nodes.get(constituent);
             for (FeatureStructure c : FSCollectionFactory.create(constituent.getChildren())) {
                 if (c instanceof Constituent) {
+                    String synFun = ((Constituent) c).getSyntacticFunction();
                     TigerEdge edge = new TigerEdge();
-                    edge.label = "--";
+                    edge.label = synFun != null ? synFun : "--";
                     edge.idref = nodes.get(c).id;
                     node.edges.add(edge);
                 }
