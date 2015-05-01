@@ -53,6 +53,11 @@
             dest="target/download/arktweet/englisch-pos-irc-20121211.model" 
             skipexisting="true"/>
 		
+		<get 
+			src="http://www.ark.cs.cmu.edu/TweetNLP/model.ritter_ptb_alldata_fixed.20130723" 
+	        dest="target/download/arktweet/english-pos-ptb-20130723.model" 
+	        skipexisting="true"/>
+		
 		<install-stub-and-upstream-file
        		file="target/download/arktweet/englisch-pos-default-20120919.model"
        		md5="1b9e88785891aecc5d55f255e37e0566"
@@ -84,5 +89,21 @@
               <entry key="pos.tagset" value="ptb"/>
             </metadata>
         </install-stub-and-upstream-file>
+		
+		<install-stub-and-upstream-file
+		            file="target/download/arktweet/english-pos-ptb-20130723.model"
+		            md5="b64562c3ed201221f3aba7e896a53870"
+		            groupId="de.tudarmstadt.ukp.dkpro.core"
+		            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.arktools"
+		            upstreamVersion="20130723" 
+		            metaDataVersion="1"
+		            tool="tagger"
+		            language="en"
+		            variant="ritter"
+		            extension="model">
+		            <metadata>
+		              <entry key="pos.tagset" value="ptb"/>
+		            </metadata>
+		        </install-stub-and-upstream-file>
 	</target>
 </project>
