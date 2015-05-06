@@ -40,7 +40,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
-import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordLemmatizer;
+import de.tudarmstadt.ukp.dkpro.core.morpha.MorphaLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class MalletTopicModelEstimatorTest
@@ -189,13 +189,12 @@ public class MalletTopicModelEstimatorTest
                 TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
                 TextReader.PARAM_LANGUAGE, language);
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
-        AnalysisEngineDescription lemmatizer = createEngineDescription(StanfordLemmatizer.class);
+        AnalysisEngineDescription lemmatizer = createEngineDescription(MorphaLemmatizer.class);
 
         for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, lemmatizer)) {
             Type tokenType = CasUtil.getType(jcas.getCas(), typeName);
             TokenSequence ts = MalletTopicModelEstimator.generateTokenSequence(
                     jcas, tokenType, useLemmas, minTokenLength);
-            System.out.println(ts);
             assertTrue(ts.size() > minDocumentLength);
             ts.forEach((cc.mallet.types.Token token) ->
                     assertTrue(token.getText().length() >= minTokenLength));

@@ -63,9 +63,8 @@
         <dependency>
         	<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
         	<artifactId>
-        		de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl
+        		de.tudarmstadt.ukp.dkpro.core.morpha-asl
         	</artifactId>
-        	<version>1.8.0-SNAPSHOT</version>
         	<scope>test</scope>
         </dependency>
     </dependencies>
