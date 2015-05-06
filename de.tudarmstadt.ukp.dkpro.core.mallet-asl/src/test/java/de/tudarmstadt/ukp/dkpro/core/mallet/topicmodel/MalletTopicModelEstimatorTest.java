@@ -25,14 +25,22 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.cas.Type;
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.fit.util.CasUtil;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Before;
 import org.junit.Test;
 
 import cc.mallet.topics.ParallelTopicModel;
+import cc.mallet.types.TokenSequence;
+import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.io.text.TextReader;
+import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordLemmatizer;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 public class MalletTopicModelEstimatorTest
@@ -139,4 +147,58 @@ public class MalletTopicModelEstimatorTest
         assertEquals(nTopics, model.getNumTopics());
     }
 
+    @Test
+    public void testGenerateSequence()
+        throws ResourceInitializationException, FeaturePathException
+    {
+        boolean useLemmas = false;
+        String language = "en";
+        String typeName = Token.class.getName();
+        int minTokenLength = 5;
+        int minDocumentLength = 300;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter)) {
+            Type tokenType = CasUtil.getType(jcas.getCas(), typeName);
+            TokenSequence ts = MalletTopicModelEstimator.generateTokenSequence(
+                    jcas, tokenType, useLemmas, minTokenLength);
+            System.out.println(ts);
+            assertTrue(ts.size() > minDocumentLength);
+            ts.forEach((cc.mallet.types.Token token) ->
+                    assertTrue(token.getText().length() >= minTokenLength));
+        }
+    }
+
+    @Test
+    public void testGenerateSequenceUseLemmas()
+        throws ResourceInitializationException, FeaturePathException
+    {
+        boolean useLemmas = true;
+        String language = "en";
+        String typeName = Token.class.getName();
+        int minTokenLength = 5;
+        int minDocumentLength = 200;
+
+        CollectionReaderDescription reader = createReaderDescription(TextReader.class,
+                TextReader.PARAM_SOURCE_LOCATION, CAS_DIR,
+                TextReader.PARAM_PATTERNS, CAS_FILE_PATTERN,
+                TextReader.PARAM_LANGUAGE, language);
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription lemmatizer = createEngineDescription(StanfordLemmatizer.class);
+
+        for (JCas jcas : SimplePipeline.iteratePipeline(reader, segmenter, lemmatizer)) {
+            Type tokenType = CasUtil.getType(jcas.getCas(), typeName);
+            TokenSequence ts = MalletTopicModelEstimator.generateTokenSequence(
+                    jcas, tokenType, useLemmas, minTokenLength);
+            System.out.println(ts);
+            assertTrue(ts.size() > minDocumentLength);
+            ts.forEach((cc.mallet.types.Token token) ->
+                    assertTrue(token.getText().length() >= minTokenLength));
+        }
+    }
 }

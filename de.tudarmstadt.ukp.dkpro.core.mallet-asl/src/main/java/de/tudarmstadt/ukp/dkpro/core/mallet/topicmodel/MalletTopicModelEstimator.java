@@ -167,7 +167,7 @@ public class MalletTopicModelEstimator
      */
     public static final String PARAM_MODEL_ENTITY_TYPE = "modelEntityType";
     @ConfigurationParameter(name = PARAM_MODEL_ENTITY_TYPE, mandatory = false)
-    String modelEntityType;
+    private String modelEntityType;
 
     /**
      * The sum of alphas over all topics. Default: 1.0.
@@ -176,17 +176,17 @@ public class MalletTopicModelEstimator
      */
     public static final String PARAM_ALPHA_SUM = "alphaSum";
     @ConfigurationParameter(name = PARAM_ALPHA_SUM, mandatory = true, defaultValue = "1.0f")
-    float alphaSum;
+    private float alphaSum;
 
     /**
      * Beta for a single dimension of the Dirichlet prior. Default: 0.01.
      */
     public static final String PARAM_BETA = "beta";
     @ConfigurationParameter(name = PARAM_BETA, mandatory = true, defaultValue = "0.01f")
-    float beta;
+    private float beta;
 
-    protected static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
-    protected InstanceList instanceList; // contains the Mallet instances
+    private static final String NONE_LABEL = "X"; // some label has to be set for Mallet instances
+    private InstanceList instanceList; // contains the Mallet instances
 
     @Override
     public void initialize(UimaContext context)
@@ -249,6 +249,12 @@ public class MalletTopicModelEstimator
      *
      * @param aJCas
      *            a CAS holding the document
+     * @param tokenType
+     *            this type will be used as token, e.g. Token, N-gram etc.
+     * @param useLemma
+     *            if this is true, use lemmas
+     * @param minTokenLength
+     *            the minimum token length to use
      * @return a {@link TokenSequence}
      * @throws FeaturePathException
      *             if the annotation type specified in {@code PARAM_TYPE_NAME} cannot be extracted.
