@@ -123,9 +123,9 @@ public class MalletTopicModelInferencer
     {
         super.initialize(context);
 
+        ParallelTopicModel model;
         try {
-            ParallelTopicModel model = ParallelTopicModel.read(modelLocation);
-            inferencer = model.getInferencer();
+            model = ParallelTopicModel.read(modelLocation);
 
             if (maxTopicAssignments <= 0) {
                 maxTopicAssignments = model.getNumTopics() / 10;
@@ -134,7 +134,8 @@ public class MalletTopicModelInferencer
         catch (Exception e) {
             throw new ResourceInitializationException(e);
         }
-        malletPipe = new TokenSequence2FeatureSequence();
+        inferencer = model.getInferencer();
+        malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
     };
 
     @Override
@@ -147,8 +148,8 @@ public class MalletTopicModelInferencer
             /* create Mallet Instance */
             DocumentMetaData metadata = DocumentMetaData.get(aJCas);
             Instance instance = new Instance(
-                    MalletTopicModelEstimator.generateTokenSequence(aJCas,
-                            type, useLemma, minTokenLength),
+                    MalletTopicModelEstimator.generateTokenSequence(
+                            aJCas, type, useLemma, minTokenLength),
                     NONE_LABEL, metadata.getDocumentId(), metadata.getDocumentUri());
 
             /* infer topic distribution across document */
@@ -172,7 +173,6 @@ public class MalletTopicModelInferencer
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
-
     }
 
     /**
