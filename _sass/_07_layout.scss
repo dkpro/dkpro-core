@@ -288,7 +288,7 @@ body.video cite { color: #fff; }
 #footer {
     padding-top: 30px;
     padding-bottom: 20px;
-    background: $footer-bg;
+    background: $primary-color;
     color: $footer-color;
     }
     footer p,
@@ -298,7 +298,7 @@ body.video cite { color: #fff; }
     }
 
     #footer a {
-        color: $footer-link-color;
+        color: $topbar-bg-color;
     }
     #footer h4,
     #footer h5 {
