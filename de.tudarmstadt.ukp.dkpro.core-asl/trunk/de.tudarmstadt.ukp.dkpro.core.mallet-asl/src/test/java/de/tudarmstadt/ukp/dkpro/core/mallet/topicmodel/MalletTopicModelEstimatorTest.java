@@ -167,7 +167,6 @@ public class MalletTopicModelEstimatorTest
             Type tokenType = CasUtil.getType(jcas.getCas(), typeName);
             TokenSequence ts = MalletTopicModelEstimator.generateTokenSequence(
                     jcas, tokenType, useLemmas, minTokenLength);
-            System.out.println(ts);
             assertTrue(ts.size() > minDocumentLength);
             ts.forEach((cc.mallet.types.Token token) ->
                     assertTrue(token.getText().length() >= minTokenLength));
