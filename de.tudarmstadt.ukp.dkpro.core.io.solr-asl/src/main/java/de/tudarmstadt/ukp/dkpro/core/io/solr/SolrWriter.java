@@ -50,6 +50,7 @@ public class SolrWriter
     protected SolrInputDocument generateSolrDocument(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        // TODO: re-use document; create document pool for ConcurrentUpdateServer
         SolrInputDocument document = new SolrInputDocument();
         document.addField(getIdField(), DocumentMetaData.get(aJCas).getDocumentId());
         SolrUtils.setField(document, getTextField(), aJCas.getDocumentText(), update());

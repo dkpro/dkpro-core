@@ -117,7 +117,7 @@ public abstract class SolrWriter_ImplBase
     {
         super.initialize(context);
         getLogger().info(
-                String.format("Using Solr server at %s.%nQueue size:\t%d\tThreads: %d%n",
+                String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
                         targetLocation, queueSize, threads));
         solrServer = new ConcurrentUpdateSolrServer(targetLocation, queueSize, threads);
     };
