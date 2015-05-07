@@ -21,6 +21,7 @@ package de.tudarmstadt.ukp.dkpro.core.textnormalizer.transformation;
 import static de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations.assertTransformedText;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
+import org.apache.uima.resource.ResourceInitializationException;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
@@ -40,5 +41,20 @@ public class DictionaryBasedTokenTransformerTest
                 createEngineDescription(BreakIteratorSegmenter.class),
                 createEngineDescription(DictionaryBasedTokenTransformer.class,
                         DictionaryBasedTokenTransformer.PARAM_MODEL_LOCATION, MAPPINGS_FILE));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testFileNotFound()
+        throws ResourceInitializationException
+    {
+        String expected = "Ich lebe in Braunschweig.";
+        String input = "Ich lebe in Brannfchweig.";
+        String model = "noModelHere";
+
+        assertTransformedText(expected, input, "de",
+                createEngineDescription(BreakIteratorSegmenter.class),
+                createEngineDescription(DictionaryBasedTokenTransformer.class,
+                        DictionaryBasedTokenTransformer.PARAM_MODEL_LOCATION, model));
+
     }
 }
