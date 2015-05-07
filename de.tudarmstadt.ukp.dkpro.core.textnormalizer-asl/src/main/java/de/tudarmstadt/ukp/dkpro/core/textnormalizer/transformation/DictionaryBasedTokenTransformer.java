@@ -112,16 +112,14 @@ public class DictionaryBasedTokenTransformer
                 if (line.startsWith(commentMarker)) {
                     continue;
                 }
-                else {
-                    String[] words = line.split(separator);
-                    String key = words[0].trim();
-                    if (mappings.containsKey(key)) {
-                        getLogger().warn(
-                                String.format("Duplicate entry '%s' in mappings file '%s'.", key,
-                                        aUrl));
-                    }
-                    mappings.put(key, words[1].trim());
+                String[] words = line.split(separator);
+                String key = words[0].trim();
+                if (mappings.containsKey(key)) {
+                    getLogger().warn(
+                            String.format("Duplicate entry '%s' in mappings file '%s'.", key,
+                                    aUrl));
                 }
+                mappings.put(key, words[1].trim());
             }
             getLogger().info(String.format("%d entries read from '%s'.", mappings.size(), aUrl));
             return mappings;
