@@ -120,6 +120,16 @@ public abstract class SolrWriter_ImplBase
                 String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
                         targetLocation, queueSize, threads));
         solrServer = new ConcurrentUpdateSolrClient(targetLocation, queueSize, threads);
+        try {
+            int status = solrServer.ping().getStatus();
+            if (status != 0) {
+                throw new ResourceInitializationException(
+                        "Server error. Response status: " + status, new Integer[] { status });
+            }
+        }
+        catch (SolrServerException | IOException e) {
+            throw new ResourceInitializationException(e);
+        }
     };
 
     @Override
