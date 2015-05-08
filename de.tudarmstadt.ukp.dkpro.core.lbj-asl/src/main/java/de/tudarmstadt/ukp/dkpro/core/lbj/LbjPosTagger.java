@@ -86,7 +86,7 @@ public class LbjPosTagger
     protected boolean printTagSet;
     
     public static final String PARAM_MODEL_LOCATION = ComponentParameters.PARAM_MODEL_LOCATION;
-    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false, defaultValue="classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
+    @ConfigurationParameter(name = PARAM_MODEL_LOCATION, mandatory = false)
     private String modelLocation;
 
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
@@ -98,7 +98,7 @@ public class LbjPosTagger
     private String variant;
     
     public static final String PARAM_POS_MAPPING_LOCATION = ComponentParameters.PARAM_POS_MAPPING_LOCATION;
-    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
+    @ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false, defaultValue="classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/en-lbj-pos.map")
     private String posMappingLocation;
 
     private ModelProviderBase<POSTagger> taggerProvider;
