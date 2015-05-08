@@ -19,9 +19,9 @@ package de.tudarmstadt.ukp.dkpro.core.io.solr;
 
 import java.io.IOException;
 
-import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrServer;
+import org.apache.solr.client.solrj.impl.ConcurrentUpdateSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.uima.UimaContext;
@@ -109,7 +109,7 @@ public abstract class SolrWriter_ImplBase
     @ConfigurationParameter(name = PARAM_ID_FIELD, mandatory = true, defaultValue = "id")
     private String idField;
 
-    private SolrServer solrServer;
+    private SolrClient solrServer;
 
     @Override
     public void initialize(UimaContext context)
@@ -119,7 +119,7 @@ public abstract class SolrWriter_ImplBase
         getLogger().info(
                 String.format("Using Solr server at %s.%nQueue size: %d\tThreads: %d%n",
                         targetLocation, queueSize, threads));
-        solrServer = new ConcurrentUpdateSolrServer(targetLocation, queueSize, threads);
+        solrServer = new ConcurrentUpdateSolrClient(targetLocation, queueSize, threads);
     };
 
     @Override
@@ -127,7 +127,8 @@ public abstract class SolrWriter_ImplBase
         throws AnalysisEngineProcessException
     {
         try {
-            solrServer.add(generateSolrDocument(aJCas));
+            SolrInputDocument solrDocument = generateSolrDocument(aJCas);
+            solrServer.add(solrDocument);
         }
         catch (IOException | SolrServerException e) {
             throw new AnalysisEngineProcessException(e);
@@ -145,11 +146,11 @@ public abstract class SolrWriter_ImplBase
             getLogger().info(
                     String.format("Solr server at '%s' responded: %s",
                             targetLocation, response.toString()));
+            solrServer.close();
         }
         catch (SolrServerException | IOException e) {
             throw new AnalysisEngineProcessException(e);
         }
-        solrServer.shutdown();
     };
 
     /**
