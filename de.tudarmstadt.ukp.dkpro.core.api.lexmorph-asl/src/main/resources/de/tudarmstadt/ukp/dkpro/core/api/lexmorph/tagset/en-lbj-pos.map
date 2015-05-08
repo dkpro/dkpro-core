@@ -15,11 +15,11 @@
 \:=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # contextual separator, left paren
 (=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+-LRB-=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+-RRB-=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # contextual separator, right paren
 )=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 # 1.	CC	Coordinating conjunction
--LRB-=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
--RRB-=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
 CC=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CONJ
 # 2.	CD	Cardinal number
 CD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.CARD
