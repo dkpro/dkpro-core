@@ -27,6 +27,7 @@ import java.util.List;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
@@ -59,6 +60,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 public class LanguageToolLemmatizer
 	extends JCasAnnotator_ImplBase
 {
+    public static final String PARAM_SANITIZE = "sanitize";
+    @ConfigurationParameter(name=PARAM_SANITIZE, mandatory=true, defaultValue="true")
+    private boolean sanitize;
+    
+    public static final String PARAM_SANTIZE_CHARS = "sanitizeChars";
+    @ConfigurationParameter(name = PARAM_SANTIZE_CHARS, mandatory = true, defaultValue = { "(",
+            ")", "[", "]" })
+    private String[] sanitizeChars;
+    
     private MappingProvider mappingProvider;
     
     @Override
@@ -108,6 +118,11 @@ public class LanguageToolLemmatizer
 					// Get the most frequent lemma
 					if (l == null) {
 					    l = getMostFrequentLemma(as.getTokens()[i]);
+					}
+					
+					// Sanitize if we have a lemma by now
+					if (sanitize && l != null) {
+					    l = sanitizeLemma(token.getCoveredText(), l);
 					}
 					
 					if (l == null) {
@@ -177,6 +192,7 @@ public class LanguageToolLemmatizer
 		FrequencyDistribution<String> freq = new FrequencyDistribution<String>();
 		for (AnalyzedToken t : aReadings.getReadings()) {
 			if (t.getLemma() != null) {
+			    System.out.println(t.getLemma());
 				freq.inc(t.getLemma());
 			}
 		}
@@ -192,5 +208,16 @@ public class LanguageToolLemmatizer
 		}
 
 		return best;
+	}
+	
+	private String sanitizeLemma(String aWordForm, String aLemma)
+	{
+	    String sanitized = aLemma;
+	    for (String c : sanitizeChars) {
+	        if (!aWordForm.contains(c)) {
+	            sanitized = sanitized.replace(c, "");
+	        }
+	    }
+	    return sanitized;
 	}
 }
