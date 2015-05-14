@@ -21,6 +21,7 @@
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<version>1.8.0-SNAPSHOT</version>
+		<relativePath>../de.tudarmstadt.ukp.dkpro.core-asl</relativePath>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl</artifactId>
     <packaging>jar</packaging>

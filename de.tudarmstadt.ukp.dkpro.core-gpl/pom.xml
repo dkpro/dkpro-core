@@ -22,19 +22,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<artifactId>dkpro-parent-pom</artifactId>
-		<version>12-SNAPSHOT</version>
+		<artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
+		<version>1.8.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 	<packaging>pom</packaging>
-	<version>1.8.0-SNAPSHOT</version>
 	<name>DKPro Core GPL</name>
-	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
-	<url>https://code.google.com/p/dkpro-core-gpl/</url>
-	<organization>
-    	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
-    </organization>
-	<inceptionYear>2007</inceptionYear>
 	<licenses>
 		<license>
 			<name>GNU General Public License Version 3.0</name>
@@ -42,65 +36,6 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	<repositories>
-		<repository>
-			<id>ukp-oss-model-releases</id>
-			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-        <!-- For uimaFIT SNAPSHOT -->
-        <!--  
-		<repository>
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-        -->
-	</repositories>
-	<pluginRepositories>
-        <!-- For uimaFIT SNAPSHOT maven plugin -->
-        <!--  
-		<pluginRepository>
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-        -->
-        <!--  BEGIN NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->
-        <pluginRepository>
-            <id>codehaus-snapshots</id>
-            <name>Codehaus Snapshots</name>
-            <url>http://nexus.codehaus.org/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <!--  END NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->    
-	</pluginRepositories>
-	<issueManagement>
-		<system>Google Code</system>
-		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
-	</issueManagement>
-	<scm>
-		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</connection>
-		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/trunk/</developerConnection>
-		<url>https://code.google.com/p/dkpro-core-gpl/source/browse/de.tudarmstadt.ukp.dkpro.core-gpl/trunk</url>
-	</scm>
-	<properties>
-		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uimafit.version>2.1.0</uimafit.version>
-	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -153,16 +88,16 @@
 		</dependencies>
 	</dependencyManagement>
 	<modules>
-		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
-	    <module>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</module>
-		<module>de.tudarmstadt.ukp.dkpro.core.aranlp-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
+	    <module>../de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.sfst-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.aranlp-gpl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -315,7 +250,7 @@
 				</repository>
 			</repositories>
 			<modules>
-				<module>de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
+				<module>../de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
 			</modules>
 			<dependencyManagement>
 				<dependencies>

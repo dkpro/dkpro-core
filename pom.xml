@@ -1,0 +1,176 @@
+<!--
+	Copyright 2010
+	Ubiquitous Knowledge Processing (UKP) Lab
+	Technische Universität Darmstadt
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>dkpro-parent-pom</artifactId>
+		<version>12-SNAPSHOT</version>
+	</parent>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core</artifactId>
+	<version>1.8.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>DKPro Core</name>
+	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
+	<url>https://github.com/dkpro/dkpro-core</url>
+	<organization>
+    	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
+    </organization>
+	<inceptionYear>2007</inceptionYear>
+	<prerequisites>
+		<maven>3.0.4</maven>
+	</prerequisites>
+	<repositories>
+		<repository>
+			<id>ukp-oss-model-releases</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+        <!-- For UIMA/uimaFIT SNAPSHOT -->
+        <!--  
+		<repository>
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+    -->
+        <repository>
+            <!-- For DKPro Parent POM SNAPSHOT -->
+            <id>ukp-oss-snapshots</id>
+            <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>	
+    </repositories>
+	<pluginRepositories>
+        <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
+        <!--  
+		<pluginRepository>
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+        -->
+        <!--  BEGIN NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->
+        <pluginRepository>
+            <id>codehaus-snapshots</id>
+            <name>Codehaus Snapshots</name>
+            <url>http://nexus.codehaus.org/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+        <!--  END NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->    
+	</pluginRepositories>
+	<issueManagement>
+		<system>Google Code</system>
+		<url>https://code.google.com/p/dkpro-core-asl/issues/list</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</connection>
+		<developerConnection>scm:svn:https://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/trunk/</developerConnection>
+		<url>https://code.google.com/p/dkpro-core-asl/source/browse/#svn%2Fde.tudarmstadt.ukp.dkpro.core-asl%2Ftrunk</url>
+	</scm>
+	<properties>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<uima.version>2.7.0</uima.version>
+		<uimafit.version>2.1.0</uimafit.version>
+		<lucene.version>3.0.3</lucene.version>
+		<!-- The Spring version should be at least whatever uimaFIT requires -->
+		<spring.version>3.1.2.RELEASE</spring.version>
+	</properties>
+	<modules>
+		<module>de.tudarmstadt.ukp.dkpro.core-asl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core-gpl</module>
+	</modules>
+	<profiles>
+		<profile>
+			<id>run-jcasgen</id>
+			<activation>
+				<file>
+					<exists>.activate-run-jcasgen</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<!--generate types dynamically -->
+						<groupId>org.apache.uima</groupId>
+						<artifactId>jcasgen-maven-plugin</artifactId>
+						<version>${uima.version}</version>
+						<configuration>
+							<limitToProject>true</limitToProject>
+							<typeSystemIncludes>
+								<include>src/main/resources/desc/type/**/*.xml</include>
+							</typeSystemIncludes>
+							<typeSystemExcludes>
+								<exclude>src/main/resources/desc/type/**/*_customized.xml</exclude>
+							</typeSystemExcludes>
+						</configuration>
+						<executions>
+							<execution>
+								<!--call it in the generate-source phase -->
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>1.8</version>
+						<executions>
+							<execution>
+								<id>addToSourceFolder</id>
+								<goals>
+									<!--add the generated sources -->
+									<goal>add-source</goal>
+								</goals>
+								<phase>process-sources</phase>
+								<configuration>
+									<sources>
+										<!--default path to generated sources -->
+										<source>${project.build.directory}/generated-sources/jcasgen</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
