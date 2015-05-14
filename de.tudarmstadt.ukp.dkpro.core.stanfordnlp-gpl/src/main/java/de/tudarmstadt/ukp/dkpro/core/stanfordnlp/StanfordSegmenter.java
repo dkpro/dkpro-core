@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
-* along with this program.  If not, see http://www.gnu.org/licenses.
+ * along with this program.  If not, see http://www.gnu.org/licenses.
  */
 package de.tudarmstadt.ukp.dkpro.core.stanfordnlp;
 
@@ -30,6 +30,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.Messages;
@@ -56,8 +58,6 @@ public
 class StanfordSegmenter
 extends SegmenterBase
 {
-    public static final String PARAM_FALLBACK = "fallbackLanguage";
-
     private static final Map<String, InternalTokenizerFactory> tokenizerFactories;
 //    private static final Map<String, TreebankLanguagePack> languagePacks;
 
@@ -79,16 +79,27 @@ extends SegmenterBase
 //    	languagePacks.put("de", new NegraPennLanguagePack());
     }
 
+    public static final String PARAM_LANGUAGE_FALLBACK = "languageFallback";
+    @ConfigurationParameter(name = PARAM_LANGUAGE_FALLBACK, mandatory = false)
+    private String languageFallback;
+
     @Override
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
     {
         List<Token> casTokens = null;
+
+        // Use value from language parameter, document language or fallback language - whatever
+        // is available
+        String language = getLanguage(aJCas);
+        if (CAS.DEFAULT_LANGUAGE_NAME.equals(language) || language == null) {
+            language = languageFallback;
+        }
         
         if (isWriteToken()) {
             casTokens = new ArrayList<Token>();
             final String text = aText;
-            final Tokenizer<?> tokenizer = getTokenizer(aJCas.getDocumentLanguage(), aText);
+            final Tokenizer<?> tokenizer = getTokenizer(language, aText);
             int offsetInSentence = 0;
 
             List<?> tokens = tokenizer.tokenize();
