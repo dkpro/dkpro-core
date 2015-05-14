@@ -564,7 +564,6 @@
 	</dependencyManagement>
 	<modules>
 	    <!-- Documentation and examples modules -->
-		<module>../de.tudarmstadt.ukp.dkpro.core.docbook-asl</module>
         <module>../de.tudarmstadt.ukp.dkpro.core.doc-asl</module>
 	    <!-- API modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.api.anomaly-asl</module>
