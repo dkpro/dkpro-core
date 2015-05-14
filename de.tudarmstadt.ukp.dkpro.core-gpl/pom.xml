@@ -101,13 +101,6 @@
 	</modules>
 	<build>
 		<plugins>
-		    <!--
-            <plugin>
-                <groupId>io.takari.maven.plugins</groupId>
-                <artifactId>takari-lifecycle-plugin</artifactId>
-                <extensions>true</extensions>
-            </plugin>
-            -->
 			<plugin>
 				<inherited>true</inherited>
 				<groupId>com.mycila</groupId>
@@ -147,75 +140,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.uima</groupId>
-				<artifactId>uimafit-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<notimestamp>true</notimestamp>
-					<!-- Exclude UIMA types -->
-					<excludePackageNames>*.type:*.internal.*</excludePackageNames>
-					<groups>
-						<group>
-							<title>APIs</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
-						</group>
-						<group>
-							<title>Analysis Components</title>
-						</group>
-						<group>
-							<title>I/O Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
-						</group>
-					</groups>
-					<tags>
-						<tag>
-							<name>generated</name>
-							<placement>X</placement>
-						</tag>
-						<tag>
-							<name>ordered</name>
-							<placement>X</placement>
-						</tag>
-						<tag>
-							<name>modifiable</name>
-							<placement>X</placement>
-						</tag>
-					</tags>
-				</configuration>
-			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.uima</groupId>
-					<artifactId>uimafit-maven-plugin</artifactId>
-					<version>${uimafit.version}</version>
-					<configuration>
-						<componentVendor>DKPro Core Project</componentVendor>
-						<componentCopyright>
-							Copyright 2007-2014
-                            Ubiquitous Knowledge Processing (UKP) Lab
-							Technische Universität Darmstadt
-						</componentCopyright>
-						<failOnMissingMetaData>false</failOnMissingMetaData>
-					</configuration>
-					<executions>
-						<execution>
-							<id>default</id>
-							<phase>process-classes</phase>
-							<goals>
-								<goal>enhance</goal>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 	<profiles>
 		<profile>

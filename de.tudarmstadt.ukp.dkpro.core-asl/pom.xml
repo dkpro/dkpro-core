@@ -291,8 +291,8 @@
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.web1t-asl</artifactId>
 				<version>1.8.0-SNAPSHOT</version>
 			</dependency>
-			<dependency>
-				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.xmi-asl</artifactId>
 				<version>1.8.0-SNAPSHOT</version>
 			</dependency>
@@ -648,111 +648,6 @@
 	    <!-- Distribution modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
 	</modules>
-	<build>
-		<plugins>
-            <!--  
-            <plugin>
-                <groupId>io.takari.maven.plugins</groupId>
-                <artifactId>takari-lifecycle-plugin</artifactId>
-                <extensions>true</extensions>
-            </plugin>
-            -->
-            <plugin>
-                <groupId>org.apache.uima</groupId>
-                <artifactId>uimafit-maven-plugin</artifactId>
-            </plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<!-- version>2.10.2-SNAPSHOT</version -->
-				<configuration>
-					<notimestamp>true</notimestamp>
-					<!-- Exclude UIMA types and internal API -->
-					<excludePackageNames>*.type:*.internal.*</excludePackageNames>
-					<groups>
-						<group>
-							<title>Analysis Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core*</packages>
-						</group>
-						<group>
-							<title>APIs</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
-						</group>
-						<group>
-							<title>I/O Components</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
-						</group>
-						<!--  
-						<group>
-							<title>Types</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.api.coref.type*:de.tudarmstadt.ukp.dkpro.core.api.anomaly.type*:de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type*:de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type*:de.tudarmstadt.ukp.dkpro.core.api.metadata.type*:de.tudarmstadt.ukp.dkpro.core.api.ner.type*:de.tudarmstadt.ukp.dkpro.core.api.phonetics.type*:de.tudarmstadt.ukp.dkpro.core.api.segmentation.type*:de.tudarmstadt.ukp.dkpro.core.api.semantics.type*:de.tudarmstadt.ukp.dkpro.core.sentiment.type*:de.tudarmstadt.ukp.dkpro.core.api.structure.type*:de.tudarmstadt.ukp.dkpro.core.api.syntax.type*:de.tudarmstadt.ukp.dkpro.core.api.transform.type</packages>
-						</group>
-						-->
-						<group>
-							<title>Testing</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.testing*</packages>
-						</group>
-						<group>
-							<title>Examples</title>
-							<packages>de.tudarmstadt.ukp.dkpro.core.examples*</packages>
-						</group>
-					</groups>
-					<sourceFileExcludes>
-						<exclude>**/*_Type.java</exclude>
-					</sourceFileExcludes>
-					<tags>
-						<tag>
-							<name>generated</name>
-							<placement>X</placement>
-						</tag>
-						<tag>
-							<name>ordered</name>
-							<placement>X</placement>
-						</tag>
-						<tag>
-							<name>modifiable</name>
-							<placement>X</placement>
-						</tag>
-					</tags>
-               	</configuration>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.uima</groupId>
-					<artifactId>uimafit-maven-plugin</artifactId>
-					<version>${uimafit.version}</version>
-					<configuration>
-						<componentVendor>DKPro Core Project</componentVendor>
-						<componentCopyright>
-							Copyright 2010
-							Ubiquitous Knowledge Processing	(UKP) Lab
-							Technische Universität Darmstadt
-						</componentCopyright>
-						<failOnMissingMetaData>false</failOnMissingMetaData>
-					</configuration>
-					<executions>
-						<execution>
-							<id>default</id>
-							<phase>process-classes</phase>
-							<goals>
-								<goal>enhance</goal>
-								<goal>generate</goal>
-							</goals>
-						</execution>
-					</executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.javassist</groupId>
-                            <artifactId>javassist</artifactId>
-                            <version>3.19.0-GA</version>
-                        </dependency>
-                    </dependencies>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 	<profiles>
 		<profile>
 			<!-- Profile for modules with dependencies that are not on Maven Central -->
