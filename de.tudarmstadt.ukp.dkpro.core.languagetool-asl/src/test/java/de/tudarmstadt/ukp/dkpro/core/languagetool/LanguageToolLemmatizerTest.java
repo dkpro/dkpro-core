@@ -38,8 +38,25 @@ public class LanguageToolLemmatizerTest
 		throws Exception
 	{
         runTest("de", "Das ist ein Test .",
-        		new String[] { "der",   "sein",  "ein", "Test", "."    });
+        		new String[] { "der",   "sein",  "ein", "Test", "." });
+
+        runTest("de", "besitzt",
+                new String[] { "besitzen" });
 	}
+
+    @Test
+    public void testGerman2()
+        throws Exception
+    {
+        JCas jcas = runTest("de", "Wir brauchen ein sehr kompliziertes Beispiel , welches "
+                + "möglichst viele Konstituenten und Dependenzen beinhaltet .");
+
+        String[] lemmas = new String[] { "ich", "brauchen", "ein", "sehr", "kompliziert",
+                "Beispiel", ",", "welch", "möglichst", "viel", "Konstituente", "und",
+                "Dependenzen", "beinhalten", "." };
+
+        AssertAnnotations.assertLemma(lemmas, select(jcas, Lemma.class));
+    }
 
 	@Test
 	public void testEnglish()
@@ -53,6 +70,14 @@ public class LanguageToolLemmatizerTest
 
         runTest("en", "John is purchasing oranges .",
         		new String[] { "John", "be",  "purchase", "orange", "."    });
+    }
+
+    private JCas runTest(String aLanguage, String aText)
+        throws Exception
+    {
+        AnalysisEngineDescription lemma = createEngineDescription(LanguageToolLemmatizer.class);
+
+        return TestRunner.runTest(lemma, aLanguage, aText);
     }
 
 	private void runTest(String language, String testDocument, String[] aLemma)
