@@ -1,0 +1,6 @@
+Code retrieved from
+http://nlp.cs.aueb.gr/software.html
+
+Released under GPL license.
+
+Also see readme.txt. 

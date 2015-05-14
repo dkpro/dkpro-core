@@ -1,0 +1,361 @@
+<!--
+
+    Copyright 2007-2014    
+    Ubiquitous Knowledge Processing (UKP) Lab
+    Technische Universität Darmstadt
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<project basedir="../.." default="separate-jars">
+    <property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/sfst/lib"/>
+    
+    <import>
+        <url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+    </import>
+    
+    <target name="local-maven">
+        <property name="install-artifact-enable" value="true"/>
+        <antcall target="separate-jars"/>
+    </target>
+    
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+    <target name="separate-jars" depends="de, it, tr, install-executables"/>
+
+	<target name="de">
+		<antcall target="de-morph-morphisto-ca"/>
+		<antcall target="de-morph-smor-ca"/>
+		<antcall target="de-morph-zmorge-orig-ca"/>
+		<antcall target="de-morph-zmorge-newlemma-ca"/>
+	</target>
+	
+    <target name="de-morph-smor-ca">
+	    <mkdir dir="target/download/smor-ca"/>
+		<!-- FILE: smor.ca - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2014-08-01 | now        | 70b673cccc3c285112fc0963d4a54bed
+		  -->
+	    <get 
+	    	src="http://www.cis.uni-muenchen.de/~schmid/tools/SMOR/data/SMOR-linux.tar.gz" 
+	    	dest="target/download/SMOR-linux.tar.gz" 
+	    	skipexisting="true"/>
+		<untar
+				src="target/download/SMOR-linux.tar.gz"
+				dest="target/download"
+				compression="gzip">
+		</untar>
+    	<install-stub-and-upstream-file 
+            file="target/download/smor/lib/smor.ca" 
+	    	md5="70b673cccc3c285112fc0963d4a54bed"
+	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20140801"
+    		metaDataVersion="1"
+            tool="morph" 
+	    	language="de" 
+	    	variant="smor-ca" 
+    		extension="ca">
+    		<metadata>
+	    		<entry key="model.encoding" value="UTF-8"/>
+	    		<entry key="morph.tagset" value="smor"/>
+			</metadata>
+    		<additionalUpstreamContent>
+    			<copy 
+    				tofile="target/model-staging/META-INF/LICENSE.txt" 
+    				file="target/download/smor/LICENSE"/>
+    			<copy 
+    				tofile="target/model-staging/META-INF/README.txt" 
+    				file="target/download/smor/README"/>
+    		</additionalUpstreamContent>
+		</install-stub-and-upstream-file>
+    </target>
+
+    <target name="de-morph-morphisto-ca">
+	    <mkdir dir="target/download"/>
+		<!-- FILE: morphisto-02022011.ca - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2011-02-02 | now        | 968e80f0a25c33b7e84d9b609f9e0267
+		  -->
+	    <get 
+	    	src="http://dl.bintray.com/dkpro%20core/dkprocore/morphisto-02022011.ca.bz2" 
+	    	dest="target/download/morphisto-02022011.ca.bz2" 
+	    	skipexisting="true"/>
+    	<bunzip2 
+    		src="target/download/morphisto-02022011.ca.bz2"
+    		dest="target/download/morphisto-02022011.ca"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/morphisto-02022011.ca" 
+	    	md5="968e80f0a25c33b7e84d9b609f9e0267"
+	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20110202"
+    		metaDataVersion="1"
+            tool="morph" 
+	    	language="de" 
+	    	variant="morphisto-ca" 
+    		extension="ca">
+    		<metadata>
+	    		<entry key="model.encoding" value="UTF-8"/>
+	    		<entry key="morph.tagset" value="morphisto"/>
+			</metadata>
+			<additionalUpstreamContent>
+				<mkdir dir="target/model-staging/META-INF"/>
+		    	<get 
+		    		src="http://morphisto.googlecode.com/svn/trunk/src/distro/README.morphisto.original?p=17"
+		    		dest="target/model-staging/META-INF/README.morphisto.txt"/>
+		    	<get 
+		    		src="http://morphisto.googlecode.com/svn/trunk/SMOR.utf8/SMOR.LICENSE?r=17"
+		    		dest="target/model-staging/META-INF/LICENSE.SMOR.txt"/>
+		    	<get 
+		    		src="http://morphisto.googlecode.com/svn/trunk/SMOR.utf8/README?r=17"
+		    		dest="target/model-staging/META-INF/README.SMOR.txt"/>
+			</additionalUpstreamContent>
+		</install-stub-and-upstream-file>
+    </target>
+	
+    <target name="de-morph-zmorge-orig-ca">
+        <mkdir dir="target/download/zmorge-orig-ca"/>
+        <!-- FILE: zmorge-20140521-smor_orig.ca - - - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-05-21 | now        | 0f900019eb07ed4776c4f09d58fc4771
+          -->
+        <get 
+            src="http://kitt.ifi.uzh.ch/kitt/zmorge/transducers/zmorge-20140521-smor_orig.ca.zip" 
+            dest="target/download/zmorge-orig-ca/zmorge-smor_orig.ca.zip" 
+            skipexisting="true"/>
+        <unzip
+                src="target/download/zmorge-orig-ca/zmorge-smor_orig.ca.zip"
+                dest="target/download/zmorge-orig-ca">
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/zmorge-orig-ca/zmorge-20140521-smor_orig.ca" 
+            md5="0f900019eb07ed4776c4f09d58fc4771"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+            upstreamVersion="20140521"
+            metaDataVersion="1"
+            tool="morph" 
+            language="de" 
+            variant="zmorge-orig-ca" 
+            extension="ca">
+            <metadata>
+                <entry key="model.encoding" value="UTF-8"/>
+                <entry key="morph.tagset" value="smor"/>
+            </metadata>
+            <additionalUpstreamContent>
+            	<echo file="target/model-staging/META-INF/README.txt">
+            		Zmorge - The Zurich Morphological Analyzer for German
+            		
+            		http://kitt.ifi.uzh.ch/kitt/zmorge/
+            		
+            		The lexicon is licensed under the Creative Commons BY-SA 3.0 license.
+            		The extraction scripts and the SMOR grammar are licensed under the GPL v2.
+            		
+            		Rico Sennrich and Beat Kunz. 2014: Zmorge: A German Morphological Lexicon 
+            		Extracted from Wiktionary. In: Proceedings of the 9th International Conference 
+            		on Language Resources and Evaluation (LREC 2014).
+            	</echo>
+            	<replaceregexp file="target/model-staging/META-INF/README.txt" 
+                    match="\s*" replace="" byline="true"/>
+                <get 
+                    src="http://www.gnu.org/licenses/gpl-2.0.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.grammar.txt"/>
+                <get 
+                    src="http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.lexicon.txt"/>
+            </additionalUpstreamContent>
+        </install-stub-and-upstream-file>
+    </target>	
+
+    <target name="de-morph-zmorge-newlemma-ca">
+        <mkdir dir="target/download/zmorge-newlemma-ca"/>
+        <!-- FILE: zmorge-20140521-smor_newlemma.ca - - - - - - - - - - - - - - - - - - - - - - - -
+          - 2014-05-21 | now        | 40133cb8a222d8d6af6188f373ab916b
+          -->
+        <get 
+            src="http://kitt.ifi.uzh.ch/kitt/zmorge/transducers/zmorge-20140521-smor_newlemma.ca.zip" 
+            dest="target/download/zmorge-newlemma-ca/zmorge-smor_newlemma.ca.zip" 
+            skipexisting="true"/>
+        <unzip
+                src="target/download/zmorge-newlemma-ca/zmorge-smor_newlemma.ca.zip"
+                dest="target/download/zmorge-newlemma-ca">
+        </unzip>
+        <install-stub-and-upstream-file 
+            file="target/download/zmorge-newlemma-ca/zmorge-20140521-smor_newlemma.ca" 
+            md5="40133cb8a222d8d6af6188f373ab916b"
+            groupId="de.tudarmstadt.ukp.dkpro.core" 
+            artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+            upstreamVersion="20140521"
+            metaDataVersion="1"
+            tool="morph" 
+            language="de" 
+            variant="zmorge-newlemma-ca" 
+            extension="ca">
+            <metadata>
+                <entry key="model.encoding" value="UTF-8"/>
+                <entry key="morph.tagset" value="smor"/>
+            </metadata>
+            <additionalUpstreamContent>
+                <echo file="target/model-staging/META-INF/README.txt">
+                    Zmorge - The Zurich Morphological Analyzer for German
+                    
+                    http://kitt.ifi.uzh.ch/kitt/zmorge/
+                    
+                    The lexicon is licensed under the Creative Commons BY-SA 3.0 license.
+                    The extraction scripts and the SMOR grammar are licensed under the GPL v2.
+                    
+                    Rico Sennrich and Beat Kunz. 2014: Zmorge: A German Morphological Lexicon 
+                    Extracted from Wiktionary. In: Proceedings of the 9th International Conference 
+                    on Language Resources and Evaluation (LREC 2014).
+                </echo>
+                <replaceregexp file="target/model-staging/META-INF/README.txt" 
+                    match="\s*" replace="" byline="true"/>
+                <get 
+                    src="http://www.gnu.org/licenses/gpl-2.0.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.grammar.txt"/>
+                <get 
+                    src="http://creativecommons.org/licenses/by-sa/3.0/legalcode.txt" 
+                    dest="target/model-staging/META-INF/LICENSE.lexicon.txt"/>
+            </additionalUpstreamContent>
+        </install-stub-and-upstream-file>
+    </target>	
+    <target name="it">
+		<antcall target="it-morph-pippi-ca"/>
+	</target>
+    	
+    <target name="it-morph-pippi-ca">
+	    <mkdir dir="target/download"/>
+		<!-- FILE: pippi-automaton_048.ca - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2009-02-23 | now        | 3e13982e723f259a30a9878773ae83d2
+		  -->
+	    <get 
+	    	src="http://sslmitdev-online.sslmit.unibo.it/linguistics/downloads/morph-it_automata.tgz" 
+	    	dest="target/download/morph-it_automata.tgz" 
+	    	skipexisting="true"/>
+		<untar 
+			src="target/download/morph-it_automata.tgz"
+			dest="target/download"
+			compression="gzip"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/morph-it_automata_048/pippi-automaton_048.ca" 
+	    	md5="3e13982e723f259a30a9878773ae83d2"
+	    	groupId="de.tudarmstadt.ukp.dkpro.core" 
+	    	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20090223"
+    		metaDataVersion="1"
+            tool="morph" 
+	    	language="it" 
+	    	variant="pippi-ca"
+    		extension="ca">
+    		<metadata>
+	    		<entry key="model.encoding" value="UTF-8"/>
+	    		<entry key="morph.tagset" value="pippi"/>
+			</metadata>
+    		<additionalUpstreamContent>
+    			<copy 
+    				tofile="target/model-staging/META-INF/CHANGES.txt" 
+    				file="target/download/morph-it_automata_048/pippi-changelog.txt"/>
+    			<copy 
+    				tofile="target/model-staging/META-INF/README.automata.txt" 
+    				file="target/download/morph-it_automata_048/readme.automata.txt"/>
+    	    	<get 
+    	    		src="http://sslmitdev-online.sslmit.unibo.it/linguistics/downloads/readme-morph-it.txt" 
+    	    		dest="target/model-staging/META-INF/README.txt"/>
+    		</additionalUpstreamContent>
+		</install-stub-and-upstream-file>
+    </target>
+
+    <target name="tr">
+		<antcall target="tr-morph-trmorph-ca"/>
+	</target>
+
+    <target name="tr-morph-trmorph-ca">
+        <mkdir dir="target/download"/>
+		<!-- FILE: trmorph.a - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		  - 2013-02-19 | now        | afddc6ec77cf9f4f1a18b098e17733c9
+		  -->
+        <get 
+        	src="http://dl.bintray.com/dkpro%20core/dkprocore/trmorph-0.2.2.tar.bz2" 
+        	dest="target/download/trmorph-0.2.2.tar.bz2" 
+        	skipexisting="true"/>
+		<untar 
+			src="target/download/trmorph-0.2.2.tar.bz2"
+			dest="target/download"
+			compression="bzip2"/>
+    	<install-stub-and-upstream-file 
+            file="target/download/trmorph-0.2.2/trmorph.ca" 
+        	md5="afddc6ec77cf9f4f1a18b098e17733c9"
+        	groupId="de.tudarmstadt.ukp.dkpro.core" 
+        	artifactIdBase="de.tudarmstadt.ukp.dkpro.core.sfst"
+    		upstreamVersion="20130219"
+    		metaDataVersion="1"
+            tool="morph" 
+        	language="tr" 
+        	variant="trmorph-ca" 
+    		extension="ca">
+    		<metadata>
+	    		<entry key="model.encoding" value="UTF-8"/>
+	    		<entry key="morph.tagset" value="trmorph"/>
+			</metadata>
+    		<additionalUpstreamContent>
+    			<copy 
+    				tofile="target/model-staging/META-INF/README.txt" 
+    				file="target/download/trmorph-0.2.2/README"/>
+    			<copy 
+    				tofile="target/model-staging/META-INF/CHANGES.txt" 
+    				file="target/download/trmorph-0.2.2/CHANGES"/>
+    			<copy 
+    				tofile="target/model-staging/META-INF/VERSION.txt" 
+    				file="target/download/trmorph-0.2.2/VERSION"/>
+    	    	<get 
+    	    		src="http://www.gnu.org/licenses/gpl-3.0.txt" 
+    	    		dest="target/model-staging/META-INF/LICENSE.txt"/>
+    		</additionalUpstreamContent>
+		</install-stub-and-upstream-file>
+    </target>
+    
+    <target name="install-executables">   
+    	<property name="version.bin" value="20141115.1"/>
+    	
+        <mkdir dir="target/download"/>
+    	<get 
+    		src="http://dl.bintray.com/dkpro%20core/dkprocore/sfst-1.4.6i-bin.tar.bz2" 
+    		dest="target/download" 
+    		skipexisting="true"/>
+    	<untar 
+    		src="target/download/sfst-1.4.6i-bin.tar.bz2" 
+    		dest="target/download"
+    		compression="bzip2"/>
+    	<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin"/>
+    	<copydir 
+    		src="target/download/sfst/" 
+    		dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/sfst/bin" includes="**/*"/>
+        <clean-pom/>
+        <generate-pom version="${version.bin}" groupId="de.tudarmstadt.ukp.dkpro.core" 
+                artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"/>
+        <jar destfile="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-${version.bin}.jar" compress="true">
+            <fileset dir="target/model-staging/">
+        	   <include name="de/tudarmstadt/ukp/dkpro/core/sfst/bin/**/"/>
+        	   <include name="META-INF/maven/**/pom.xml"/>
+            </fileset>
+        </jar>
+    	
+		<install-artifact file="target/de.tudarmstadt.ukp.dkpro.core.sfst-bin-${version.bin}.jar"
+			groupId="de.tudarmstadt.ukp.dkpro.core" artifactId="de.tudarmstadt.ukp.dkpro.core.sfst-bin"
+			version="${version.bin}"/>
+    	
+        <delete dir="target/model-staging"/>   
+   </target>
+</project>

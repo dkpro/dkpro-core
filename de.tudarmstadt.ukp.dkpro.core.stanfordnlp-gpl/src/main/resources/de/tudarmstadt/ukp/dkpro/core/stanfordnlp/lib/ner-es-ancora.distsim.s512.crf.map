@@ -1,0 +1,5 @@
+LUG=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location
+#O
+ORG=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization
+#OTROS
+PERS=de.tudarmstadt.ukp.dkpro.core.api.ner.type.Person
