@@ -64,6 +64,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
+ * Dependency parsing using MSTParser.
  * <p>
  * Wrapper for the MSTParser (<b>high memory requirements</b>). More information about the parser
  * can be found <a href="http://www.seas.upenn.edu/~strctlrn/MSTParser/MSTParser.html">here</a> <a
@@ -184,7 +185,7 @@ public class MstParser
                 DependencyPipe pipe = createPipe(options);
                 DependencyParser dp = loadParser(aUrl, pipe, options);
                 
-                // Check if the model order corresponds to the order the component is configurd for
+                // Check if the model order corresponds to the order the component is configured for
                 boolean secondOrderModel = isSecondOrderModel(pipe);
                 if (secondOrderModel != options.secondOrder) {
                     String model = secondOrderModel ? "second" : "first";
