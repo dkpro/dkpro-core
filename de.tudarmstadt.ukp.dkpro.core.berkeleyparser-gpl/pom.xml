@@ -22,6 +22,7 @@
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 		<version>1.7.1-SNAPSHOT</version>
+		<relativePath>../de.tudarmstadt.ukp.dkpro.core-gpl</relativePath>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
 	<name>DKPro Core GPL - Berkeley Parser</name>

@@ -21,6 +21,7 @@
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
 		<version>1.7.1-SNAPSHOT</version>
+		<relativePath>../de.tudarmstadt.ukp.dkpro.core-asl</relativePath>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tuepp-asl</artifactId>
 	<name>DKPro Core ASL - IO - TüPP-D/Z</name>

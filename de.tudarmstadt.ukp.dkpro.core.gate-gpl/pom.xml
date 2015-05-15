@@ -22,6 +22,7 @@
 		<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 		<version>1.7.1-SNAPSHOT</version>
+		<relativePath>../de.tudarmstadt.ukp.dkpro.core-gpl</relativePath>
 	</parent>
 	<artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
 	<name>DKPro Core GPL - GATE</name>
