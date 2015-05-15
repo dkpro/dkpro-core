@@ -1,0 +1,247 @@
+<!--
+    Copyright 2007-2014    
+    Ubiquitous Knowledge Processing (UKP) Lab
+    Technische Universität Darmstadt
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see http://www.gnu.org/licenses.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+		<artifactId>dkpro-parent-pom</artifactId>
+		<version>10</version>
+	</parent>
+	<artifactId>de.tudarmstadt.ukp.dkpro.core-gpl</artifactId>
+	<packaging>pom</packaging>
+	<version>1.7.1-SNAPSHOT</version>
+	<name>DKPro Core GPL</name>
+	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
+	<url>https://code.google.com/p/dkpro-core-gpl/</url>
+	<organization>
+    	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
+    </organization>
+	<inceptionYear>2007</inceptionYear>
+	<licenses>
+		<license>
+			<name>GNU General Public License Version 3.0</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<repositories>
+		<repository>
+			<id>ukp-oss-model-releases</id>
+			<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-model-releases-local</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<!-- For uimaFIT SNAPSHOT -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<!-- For uimaFIT SNAPSHOT maven plugin -->
+			<id>apache.snapshots</id>
+			<name>Apache Snapshot Repository</name>
+			<url>http://repository.apache.org/snapshots</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	<issueManagement>
+		<system>Google Code</system>
+		<url>https://code.google.com/p/dkpro-core-gpl/issues/list</url>
+	</issueManagement>
+	<scm>
+		<connection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.7.x/</connection>
+		<developerConnection>scm:svn:https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.7.x/</developerConnection>
+		<url>https://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/branches/1.7.x/</url>
+	</scm>
+	<properties>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+		<uimafit.version>2.1.0</uimafit.version>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core-asl</artifactId>
+				<version>1.7.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+            <dependency>
+                <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+                <artifactId>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</artifactId>
+                <version>1.7.1-SNAPSHOT</version>
+            </dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</artifactId>
+				<version>1.7.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.gate-gpl</artifactId>
+				<version>1.7.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</artifactId>
+				<version>1.7.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</artifactId>
+				<version>1.7.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</artifactId>
+				<version>1.7.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</artifactId>
+				<version>1.7.1-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<modules>
+		<module>de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.matetools-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.sfst-gpl</module>
+		<module>de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</module>
+	</modules>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.uima</groupId>
+				<artifactId>uimafit-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<notimestamp>true</notimestamp>
+					<!-- Exclude UIMA types -->
+					<excludePackageNames>*.type:*.internal.*</excludePackageNames>
+					<groups>
+						<group>
+							<title>APIs</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.api*</packages>
+						</group>
+						<group>
+							<title>Analysis Components</title>
+						</group>
+						<group>
+							<title>I/O Components</title>
+							<packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
+						</group>
+					</groups>
+					<tags>
+						<tag>
+							<name>generated</name>
+							<placement>X</placement>
+						</tag>
+						<tag>
+							<name>ordered</name>
+							<placement>X</placement>
+						</tag>
+						<tag>
+							<name>modifiable</name>
+							<placement>X</placement>
+						</tag>
+					</tags>
+				</configuration>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.uima</groupId>
+					<artifactId>uimafit-maven-plugin</artifactId>
+					<version>${uimafit.version}</version>
+					<configuration>
+						<componentVendor>DKPro Core Project</componentVendor>
+						<componentCopyright>
+							Copyright 2007-2014
+                            Ubiquitous Knowledge Processing (UKP) Lab
+							Technische Universität Darmstadt
+						</componentCopyright>
+						<failOnMissingMetaData>false</failOnMissingMetaData>
+					</configuration>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>enhance</goal>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<profiles>
+		<profile>
+			<id>build-apidocs</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<inherited>false</inherited>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>aggregate</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<!-- Profile for modules with dependencies that are not on Maven Central -->
+			<id>deps-not-on-maven-central</id>
+			<repositories>
+				<repository>
+					<id>ukp-oss-ext-releases</id>
+					<url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-ext-releases-local</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+</project>
