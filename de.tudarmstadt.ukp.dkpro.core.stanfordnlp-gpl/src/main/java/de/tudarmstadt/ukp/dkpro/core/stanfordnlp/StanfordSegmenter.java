@@ -31,7 +31,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.jcas.JCas;
 
@@ -170,9 +169,6 @@ extends SegmenterBase
         // Use value from language parameter, document language or fallback language - whatever
         // is available
         String language = getLanguage(aJCas);
-        if (CAS.DEFAULT_LANGUAGE_NAME.equals(language) || language == null) {
-            language = languageFallback;
-        }
         
         if (isWriteToken()) {
             casTokens = new ArrayList<Token>();
@@ -275,16 +271,18 @@ extends SegmenterBase
     		final String aLanguage,
     		final String aText) throws AnalysisEngineProcessException
     {
-//    	TreebankLanguagePack tlp = languagePacks.get(aLanguage);
-//    	if (tlp == null) {
-//    		tlp = languagePacks.get(fallbackLanguage);
-//    	}
-
         InternalTokenizerFactory tk = tokenizerFactories.get(aLanguage);
+        if (tk == null && languageFallback == null) {
+            throw new AnalysisEngineProcessException(Messages.BUNDLE,
+                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aLanguage });
+        }
+        
+        tk = tokenizerFactories.get(languageFallback);
         if (tk == null) {
             throw new AnalysisEngineProcessException(Messages.BUNDLE,
                     Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aLanguage });
         }
+        
     	return tk.create(aText);
     }
 
