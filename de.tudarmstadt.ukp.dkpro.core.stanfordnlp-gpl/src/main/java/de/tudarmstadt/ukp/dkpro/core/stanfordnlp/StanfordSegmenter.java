@@ -191,16 +191,20 @@ extends SegmenterBase
     		final String aText) throws AnalysisEngineProcessException
     {
         InternalTokenizerFactory tk = tokenizerFactories.get(aLanguage);
-        if (tk == null && languageFallback == null) {
-            throw new AnalysisEngineProcessException(Messages.BUNDLE,
-                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aLanguage });
+        if (tk == null) {
+            if (languageFallback == null) {
+                throw new AnalysisEngineProcessException(Messages.BUNDLE,
+                        Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aLanguage });
+            }
+            else {
+                tk = tokenizerFactories.get(languageFallback);
+                if (tk == null) {
+                    throw new AnalysisEngineProcessException(Messages.BUNDLE,
+                            Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { languageFallback });
+                }
+            }
         }
         
-        tk = tokenizerFactories.get(languageFallback);
-        if (tk == null) {
-            throw new AnalysisEngineProcessException(Messages.BUNDLE,
-                    Messages.ERR_UNSUPPORTED_LANGUAGE, new String[] { aLanguage });
-        }
         
     	return tk.create(aText);
     }
