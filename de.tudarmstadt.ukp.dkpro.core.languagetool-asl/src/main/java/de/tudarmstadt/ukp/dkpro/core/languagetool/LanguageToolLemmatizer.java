@@ -192,7 +192,6 @@ public class LanguageToolLemmatizer
 		FrequencyDistribution<String> freq = new FrequencyDistribution<String>();
 		for (AnalyzedToken t : aReadings.getReadings()) {
 			if (t.getLemma() != null) {
-			    System.out.println(t.getLemma());
 				freq.inc(t.getLemma());
 			}
 		}
