@@ -72,6 +72,31 @@ public class ClearNlpSegmenterTest
 
     }
 
+	/**
+	 * We had a bug where the token offsets were assigned wrong when one word was a suffix of the
+	 * previous word.
+	 */
+    @Test
+    public void testSuffix() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        jcas.setDocumentText("this is is this is is");
+        
+        AnalysisEngine aed = createEngine(ClearNlpSegmenter.class);
+        aed.process(jcas);
+        
+        
+        List<Token> tokens = new ArrayList<>(select(jcas, Token.class));
+        assertEquals(5, tokens.get(1).getBegin());
+        assertEquals(7, tokens.get(1).getEnd());
+        
+        for (Token t : tokens) {
+            System.out.printf("%d %d %s%n", t.getBegin(), t.getEnd(), t.getCoveredText());
+        }
+
+    }
+
     @Test
     public void testZoning() throws Exception
     {
