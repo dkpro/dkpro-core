@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
+ * Part-of-Speech annotator using HunPos. Requires {@link Sentence}s to be annotated before.
  *
  * @author Richard Eckart de Castilho
  */
