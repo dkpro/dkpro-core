@@ -17,12 +17,22 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.clearnlp;
 
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.util.JCasUtil.select;
+import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.jcas.JCas;
 import org.junit.Rule;
 import org.junit.Test;
 
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.testing.harness.SegmenterHarness;
 
@@ -33,10 +43,35 @@ public class ClearNlpSegmenterTest
 	{
 		AnalysisEngineDescription aed = createEngineDescription(ClearNlpSegmenter.class);
 
-		SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.1", "en.7", "en.8", "en.9",
-				"ar.1", "zh.1", "zh.2");
+        SegmenterHarness.run(aed, "de.1", "de.2", "de.3", "de.4", "en.1", "en.7", "en.9", "ar.1",
+                "zh.1", "zh.2");
 	}
 	
+	/**
+	 * We had a bug where the token offsets were assigned wrong when one word was a suffix of the
+	 * previous word.
+	 */
+    @Test
+    public void testSuffix() throws Exception
+    {
+        JCas jcas = JCasFactory.createJCas();
+        jcas.setDocumentLanguage("en");
+        jcas.setDocumentText("this is is this is is");
+        
+        AnalysisEngine aed = createEngine(ClearNlpSegmenter.class);
+        aed.process(jcas);
+        
+        
+        List<Token> tokens = new ArrayList<>(select(jcas, Token.class));
+        assertEquals(5, tokens.get(1).getBegin());
+        assertEquals(7, tokens.get(1).getEnd());
+        
+        for (Token t : tokens) {
+            System.out.printf("%d %d %s%n", t.getBegin(), t.getEnd(), t.getCoveredText());
+        }
+
+    }
+
     @Test
     public void testZoning() throws Exception
     {
