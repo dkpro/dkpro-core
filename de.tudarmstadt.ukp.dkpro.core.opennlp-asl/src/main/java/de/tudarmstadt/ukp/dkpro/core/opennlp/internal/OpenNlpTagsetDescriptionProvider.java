@@ -22,7 +22,8 @@ import static java.util.Collections.singletonMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import opennlp.model.AbstractModel;
+
+import opennlp.tools.ml.model.MaxentModel;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.TagsetBase;
 
 public class OpenNlpTagsetDescriptionProvider
@@ -30,10 +31,10 @@ public class OpenNlpTagsetDescriptionProvider
 {
     private String name;
     private String layer;
-    private AbstractModel model;
+    private MaxentModel model;
     private String tagSplitPattern;
 
-    public OpenNlpTagsetDescriptionProvider(String aName, Class<?> aLayer, AbstractModel aModel)
+    public OpenNlpTagsetDescriptionProvider(String aName, Class<?> aLayer, MaxentModel aModel)
     {
         name = aName;
         layer = aLayer.getName();
@@ -66,7 +67,7 @@ public class OpenNlpTagsetDescriptionProvider
         return tagSet;
     }
 
-    public AbstractModel getModel()
+    public MaxentModel getModel()
     {
         return model;
     }

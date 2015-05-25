@@ -20,12 +20,12 @@ package de.tudarmstadt.ukp.dkpro.core.opennlp.internal;
 import java.util.Set;
 import java.util.TreeSet;
 
-import opennlp.model.AbstractModel;
+import opennlp.tools.ml.model.MaxentModel;
 
 public class OpenNlpChunkerTagsetDescriptionProvider
     extends OpenNlpTagsetDescriptionProvider
 {
-    public OpenNlpChunkerTagsetDescriptionProvider(String aName, Class<?> aLayer, AbstractModel aModel)
+    public OpenNlpChunkerTagsetDescriptionProvider(String aName, Class<?> aLayer, MaxentModel aModel)
     {
         super(aName, aLayer, aModel);
     }
