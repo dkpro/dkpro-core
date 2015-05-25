@@ -32,6 +32,7 @@ import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.Level;
 import org.languagetool.JLanguageTool;
 import org.languagetool.Language;
+import org.languagetool.Languages;
 import org.languagetool.rules.RuleMatch;
 
 import de.tudarmstadt.ukp.dkpro.core.api.anomaly.type.GrammarAnomaly;
@@ -77,14 +78,12 @@ public class LanguageToolChecker
 		        throws IOException
 		    {
                 Properties props = getAggregatedProperties();
-		        Language lang = Language.getLanguageForShortName(props.getProperty(LANGUAGE));
+		        Language lang = Languages.getLanguageForShortName(props.getProperty(LANGUAGE));
 		        if (lang == null) {
 		            throw new IOException("The language code '"
 		                    + props.getProperty(LANGUAGE) + "' is not supported by LanguageTool.");
 		        }
-		        JLanguageTool langTool = new JLanguageTool(lang);
-	            langTool.activateDefaultPatternRules();
-	            return langTool;
+		        return new JLanguageTool(lang);
 		    }
 		};
 	}
