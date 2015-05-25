@@ -41,8 +41,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Writes a specific Conll File (9 TAB separated) annotation from the CAS object. Example of output
- * file:
+ * Writes a file in the CoNLL-2006 format (aka CoNLL-X).
  * 
  * <pre>
  * Heutzutage heutzutage ADV _ _ ADV _ _

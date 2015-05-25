@@ -50,7 +50,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 
 /**
- * Reads a file in the CoNLL-2006 format.
+ * Reads a file in the CoNLL-2006 format (aka CoNLL-X).
  * 
  * <pre>
  * Heutzutage heutzutage ADV _ _ ADV _ _
