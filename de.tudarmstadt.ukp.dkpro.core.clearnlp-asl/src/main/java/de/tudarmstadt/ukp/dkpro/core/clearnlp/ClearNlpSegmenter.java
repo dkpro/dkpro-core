@@ -138,7 +138,7 @@ public class ClearNlpSegmenter
 			sBegin = -1;
 
 			for (String token : sentence) {
-				tBegin = aText.indexOf(token, tBegin);
+				tBegin = aText.indexOf(token, tEnd);
 				tEnd = tBegin + token.length();
 
 				if (sBegin == -1) {
