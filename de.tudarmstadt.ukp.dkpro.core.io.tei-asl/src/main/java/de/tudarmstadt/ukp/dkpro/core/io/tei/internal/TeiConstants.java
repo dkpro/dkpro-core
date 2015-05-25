@@ -38,6 +38,12 @@ public final class TeiConstants
     public static final String TAG_SUNIT = "s";
 
     /**
+     * (utterance) contains a stretch of speech usually preceded and followed by silence or by a
+     * change of speaker.
+     */
+    public static final String TAG_U = "u";
+
+    /**
      * (paragraph) marks paragraphs in prose.
      */
     public static final String TAG_PARAGRAPH = "p";

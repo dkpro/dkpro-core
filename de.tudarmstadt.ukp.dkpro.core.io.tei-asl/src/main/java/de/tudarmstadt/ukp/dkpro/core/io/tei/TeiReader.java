@@ -30,6 +30,7 @@ import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_SUN
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_TEI_DOC;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_TEXT;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_TITLE;
+import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_U;
 import static de.tudarmstadt.ukp.dkpro.core.io.tei.internal.TeiConstants.TAG_WORD;
 import static java.util.Arrays.asList;
 import static org.apache.commons.io.IOUtils.closeQuietly;
@@ -190,6 +191,13 @@ public class TeiReader
 	public static final String PARAM_POS_TAG_SET = ComponentParameters.PARAM_POS_TAG_SET;
 	@ConfigurationParameter(name = PARAM_POS_TAG_SET, mandatory = false)
 	protected String posTagset;
+	
+	/**
+	 * Interpret utterances "u" as sentenes "s". (EXPERIMENTAL)
+	 */
+	public static final String PARAM_UTTERANCES_AS_SENTENCES = "utterancesAsSentences";
+    @ConfigurationParameter(name = PARAM_UTTERANCES_AS_SENTENCES, mandatory = true, defaultValue = "false")
+    private boolean utterancesAsSentences;
 
 	private Iterator<Element> teiElementIterator;
 	private Element currentTeiElement;
@@ -424,7 +432,8 @@ public class TeiReader
 				captureText = true;
 				inTextElement = true;
 			}
-			else if (inTextElement && TAG_SUNIT.equals(aName)) {
+			else if (inTextElement && (TAG_SUNIT.equals(aName) || 
+			        (utterancesAsSentences && TAG_U.equals(aName)))) {
 				sentenceStart = getBuffer().length();
 			}
             else if (inTextElement && TAG_PARAGRAPH.equals(aName)) {
@@ -484,7 +493,8 @@ public class TeiReader
 				captureText = false;
 				inTextElement = false;
 			}
-			else if (inTextElement && TAG_SUNIT.equals(aName)) {
+			else if (inTextElement && (TAG_SUNIT.equals(aName) ||
+                (utterancesAsSentences && TAG_U.equals(aName)))) {
 				if (readSentence) {
 					new Sentence(getJCas(), sentenceStart, getBuffer().length()).addToIndexes();
 				}
