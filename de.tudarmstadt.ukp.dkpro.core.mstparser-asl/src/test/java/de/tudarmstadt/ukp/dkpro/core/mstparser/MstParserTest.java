@@ -25,15 +25,13 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Assume;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TestName;
-
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 import de.tudarmstadt.ukp.dkpro.core.hunpos.HunPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
@@ -49,7 +47,7 @@ public class MstParserTest
         JCas jcas = runTest("hr", "mte5.defnpout", "Moramo vrlo kompliciran primjer rečenicu, "
                 + "koja sadrži što više sastojaka i ovisnosti što je više moguće.");
 
-        String[] dependencies = new String[] {
+        String[] dependencies = {
                 "[  0,  6]Dependency(Pred) D[0,6](Moramo) G[40,41](,)",
                 "[  7, 11]Dependency(Adv) D[7,11](vrlo) G[12,23](kompliciran)",
                 "[ 12, 23]Dependency(Atr) D[12,23](kompliciran) G[24,31](primjer)",
@@ -69,7 +67,7 @@ public class MstParserTest
                 "[ 97,103]Dependency(Pnom) D[97,103](moguće) G[89,91](je)",
                 "[103,104]Dependency(Punc) D[103,104](.) G[103,104](.)" };
 
-        String[] posTags = new String[] { "<root-POS>", "Afmnpa-", "Afpfsn-", "Afpmpgy", "Afpmply",
+        String[] posTags = { "<root-POS>", "Afmnpa-", "Afpfsn-", "Afpmpgy", "Afpmply",
                 "Afpnpgy", "Afpnpn-", "Agcfpn", "Agcfsa", "Agcfsg", "Agcfsi", "Agcfsn", "Agcmpa",
                 "Agcmpg", "Agcmpn", "Agcmsg", "Agcmsl", "Agcmsn", "Agcnsa", "Agcnsn", "Agpfpa",
                 "Agpfpd", "Agpfpg", "Agpfpi", "Agpfpl", "Agpfpn", "Agpfsa", "Agpfsd", "Agpfsg",
@@ -138,9 +136,9 @@ public class MstParserTest
                 "Yn-sl", "Yn-sn", "Ynfpg", "Ynfsa", "Ynfsd", "Ynfsg", "Ynfsl", "Ynfsn", "Ynmpg",
                 "Ynmpn", "Ynmsa", "Ynmsd", "Ynmsg", "Ynmsi", "Ynmsl", "Ynmsn", "Z" };
 
-        //String[] unmappedPos = new String[] { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        //String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
-        String[] depTags = new String[] { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
+        String[] depTags = { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
                 "Elp", "Obj", "Oth", "Pnom", "Pred", "Prep", "Punc", "Sb", "Sub" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
@@ -163,7 +161,7 @@ public class MstParserTest
         JCas jcas = runTest("hr", "mte5.pos", "Moramo vrlo kompliciran primjer rečenicu, "
                 + "koja sadrži što više sastojaka i ovisnosti što je više moguće.");
 
-        String[] dependencies = new String[] {
+        String[] dependencies = {
                 "[  0,  6]Dependency(Oth) D[0,6](Moramo) G[12,23](kompliciran)",
                 "[  7, 11]Dependency(Oth) D[7,11](vrlo) G[12,23](kompliciran)",
                 "[ 12, 23]Dependency(Oth) D[12,23](kompliciran) G[24,31](primjer)",
@@ -183,12 +181,12 @@ public class MstParserTest
                 "[ 97,103]Dependency(Punc) D[97,103](moguće) G[103,104](.)",
                 "[103,104]Dependency(Punc) D[103,104](.) G[103,104](.)" };
 
-        String[] posTags = new String[] { "<root-POS>", "A", "C", "M", "N", "P", "Q", "R", "S",
+        String[] posTags = { "<root-POS>", "A", "C", "M", "N", "P", "Q", "R", "S",
                 "V", "X", "Y", "Z" };
 
-        //String[] unmappedPos = new String[] { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        //String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
-        String[] depTags = new String[] { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
+        String[] depTags = { "<no-type>", "Adv", "Ap", "Atr", "Atv", "Aux", "Co",
                 "Elp", "Obj", "Oth", "Pnom", "Pred", "Prep", "Punc", "Sb", "Sub" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
@@ -197,7 +195,7 @@ public class MstParserTest
         AssertAnnotations.assertTagset(Dependency.class, "setimes.hr", depTags, jcas);
     }
 
-	/**
+    /**
 	 * This method runs the MSTParser for an example sentence and checks if it returns the correct
 	 * annotations. An annotation consists of: dependency type, begin of dependency, end of
 	 * dependency, begin of the head, end of the head
@@ -215,7 +213,7 @@ public class MstParserTest
 		JCas jcas = runTest("en", null, "We need a very complicated example sentence , which " +
 	            "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = new String[] {
+        String[] dependencies = {
                 "[  0,  2]Dependency(nsubj) D[0,2](We) G[3,7](need)",
                 "[  3,  7]Dependency(null) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(det) D[8,9](a) G[35,43](sentence)",
@@ -235,20 +233,20 @@ public class MstParserTest
                 "[102,110]Dependency(pobj) D[102,110](possible) G[99,101](as)",
                 "[111,112]Dependency(punct) D[111,112](.) G[3,7](need)" };
 
-        String[] depTags = new String[] { "<no-type>", "abbrev", "acomp", "advcl", "advmod",
+        String[] depTags = { "<no-type>", "abbrev", "acomp", "advcl", "advmod",
                 "amod", "appos", "attr", "aux", "auxpass", "cc", "ccomp", "complm", "conj", "cop",
                 "csubj", "csubjpass", "dep", "det", "dobj", "expl", "infmod", "iobj", "mark",
                 "measure", "neg", "nn", "nsubj", "nsubjpass", "null", "num", "number", "parataxis",
                 "partmod", "pcomp", "pobj", "poss", "possessive", "preconj", "pred", "predet",
                 "prep", "prt", "punct", "purpcl", "quantmod", "rcmod", "rel", "tmod", "xcomp" };
 
-        String[] posTags = new String[] { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":",
+        String[] posTags = { "#", "$", "''", ",", "-LRB-", "-RRB-", ".", ":",
                 "<root-POS>", "CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD",
                 "NN", "NNP", "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP",
                 "SYM", "TO", "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$",
                 "WRB", "``" };
 
-        String[] unmappedPos = new String[] { "#", "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        String[] unmappedPos = { "#", "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
         AssertAnnotations.assertDependencies(dependencies, JCasUtil.select(jcas, Dependency.class));
         AssertAnnotations.assertTagset(POS.class, "ptb", posTags, jcas);
@@ -271,7 +269,7 @@ public class MstParserTest
         JCas jcas = runTest("en", "sample", "We need a very complicated example sentence , which " +
                 "contains as many constituents and dependencies as possible .");
 
-        String[] dependencies = new String[] { 
+        String[] dependencies = { 
                 "[  0,  2]Dependency(NP-SBJ) D[0,2](We) G[3,7](need)",
                 "[  3,  7]Dependency(ROOT) D[3,7](need) G[3,7](need)",
                 "[  8,  9]Dependency(DEP) D[8,9](a) G[35,43](sentence)",
@@ -291,14 +289,14 @@ public class MstParserTest
                 "[102,110]Dependency(ADJP) D[102,110](possible) G[99,101](as)",
                 "[111,112]Dependency(DEP) D[111,112](.) G[3,7](need)"};
 
-        String[] posTags = new String[] { "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "<root-POS>",
+        String[] posTags = { "$", "''", ",", "-LRB-", "-RRB-", ".", ":", "<root-POS>",
                 "CC", "CD", "DT", "FW", "IN", "JJ", "JJR", "JJS", "MD", "NN", "NNP", "NNPS", "NNS",
                 "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "TO", "VB", "VBD", "VBG", "VBN",
                 "VBP", "VBZ", "WDT", "WP", "WRB", "``" };
 
-        String[] unmappedPos = new String[] { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
+        String[] unmappedPos = { "$", "''", "-LRB-", "-RRB-", "<root-POS>", "``" };
 
-        String[] depTags = new String[] { "<no-type>", "ADJP", "ADVP", "CONJP", "DEP", "FRAG",
+        String[] depTags = { "<no-type>", "ADJP", "ADVP", "CONJP", "DEP", "FRAG",
                 "NAC", "NP", "NP-OBJ", "NP-PRD", "NP-SBJ", "NX", "PP", "PRN", "PRT", "QP", "ROOT",
                 "S", "SBAR", "SINV", "SQ", "UCP", "VP", "WHNP" };
 
@@ -340,12 +338,7 @@ public class MstParserTest
 		return jcas;
 	}
 
+    
     @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void printSeparator()
-    {
-        System.out.println("\n=== " + name.getMethodName() + " =====================");
-    }
+    public DkproTestContext testContext = new DkproTestContext();
 }
