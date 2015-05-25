@@ -31,14 +31,8 @@ import java.util.List;
  */
 public class ValueNode<V>
 {
-
-    V value;
-    List<ValueNode<V>> children = new ArrayList<ValueNode<V>>();
-
-    public ValueNode()
-    {
-        this(null);
-    }
+    private V value;
+    private List<ValueNode<V>> children = new ArrayList<ValueNode<V>>();
 
     public ValueNode(V aValue)
     {
