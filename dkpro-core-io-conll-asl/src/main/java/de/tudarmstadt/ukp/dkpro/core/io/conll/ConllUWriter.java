@@ -33,7 +33,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
-import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
@@ -94,7 +93,7 @@ public class ConllUWriter
     @ConfigurationParameter(name = PARAM_WRITE_POS, mandatory = true, defaultValue = "true")
     private boolean writePos;
 
-    public static final String PARAM_WRITE_MORPH = "writeMorph";
+    public static final String PARAM_WRITE_MORPH = ComponentParameters.PARAM_WRITE_MORPH;
     @ConfigurationParameter(name = PARAM_WRITE_MORPH, mandatory = true, defaultValue = "true")
     private boolean writeMorph;
 
@@ -132,17 +131,10 @@ public class ConllUWriter
             // Tokens
             List<Token> tokens = selectCovered(Token.class, sentence);
             
-            // Check if we should try to include the FEATS in output
-            List<MorphologicalFeatures> morphology = selectCovered(MorphologicalFeatures.class, sentence);
-            boolean useFeats = tokens.size() == morphology.size();
-            
             for (int i = 0; i < tokens.size(); i++) {
                 Row row = new Row();
                 row.id = i+1;
                 row.token = tokens.get(i);
-                if (useFeats) {
-                    row.feats = morphology.get(i);
-                }
                 ctokens.put(row.token, row);
             }
 
@@ -188,8 +180,8 @@ public class ConllUWriter
                 }
                 
                 String feats = UNUSED;
-                if (writeMorph && (row.feats != null)) {
-                    feats = row.feats.getValue();
+                if (writeMorph && (row.token.getMorph() != null)) {
+                    feats = row.token.getMorph().getValue();
                 }
                 
                 String phead = UNUSED;
@@ -208,7 +200,6 @@ public class ConllUWriter
     {
         int id;
         Token token;
-        MorphologicalFeatures feats;
         Dependency deprel;
     }
 }
