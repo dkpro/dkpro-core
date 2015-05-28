@@ -36,15 +36,15 @@ import de.tudarmstadt.ukp.dkpro.tc.api.type.TextClassificationUnit;
 
 public class TokenLookUpTable extends FeatureExtractorResource_ImplBase
 		implements ClassificationUnitFeatureExtractor {
-	private static String lastSeenDocumentId = "";
+	private   String lastSeenDocumentId = "";
 
-	protected static HashMap<Integer, Boolean> idx2SentenceBegin = new HashMap<Integer, Boolean>();
-	protected static HashMap<Integer, Boolean> idx2SentenceEnd = new HashMap<Integer, Boolean>();
+	protected   HashMap<Integer, Boolean> idx2SentenceBegin = new HashMap<Integer, Boolean>();
+	protected   HashMap<Integer, Boolean> idx2SentenceEnd = new HashMap<Integer, Boolean>();
 
-	protected static HashMap<Integer, Token> begin2Token = new HashMap<Integer, Token>();
-	protected static HashMap<Integer, Integer> tokenBegin2Idx = new HashMap<Integer, Integer>();
-	protected static HashMap<Integer, Integer> tokenEnd2Idx = new HashMap<Integer, Integer>();
-	protected static List<String> tokens = new ArrayList<String>();
+	protected   HashMap<Integer, Token> begin2Token = new HashMap<Integer, Token>();
+	protected   HashMap<Integer, Integer> tokenBegin2Idx = new HashMap<Integer, Integer>();
+	protected   HashMap<Integer, Integer> tokenEnd2Idx = new HashMap<Integer, Integer>();
+	protected   List<String> tokens = new ArrayList<String>();
 
 	public List<Feature> extract(JCas aView,
 			TextClassificationUnit aClassificationUnit)
