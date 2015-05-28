@@ -102,8 +102,8 @@ public class MalletTopicModelFileWriterTest
                 MalletTopicModelInferencer.PARAM_USE_LEMMA, USE_LEMMAS);
 
         AnalysisEngineDescription writer = createEngineDescription(
-                MalletTopicModelFileWriter.class,
-                MalletTopicModelFileWriter.PARAM_TARGET_LOCATION, targetFile);
+                MalletTopicProportionsWriter.class,
+                MalletTopicProportionsWriter.PARAM_TARGET_LOCATION, targetFile);
 
         SimplePipeline.runPipeline(reader, segmenter, inferencer, writer);
         List<String> lines = FileUtils.readLines(targetFile);

@@ -125,6 +125,7 @@ public class MalletTopicModelInferencer
 
         ParallelTopicModel model;
         try {
+            getLogger().info("Loading model file " + modelLocation);
             model = ParallelTopicModel.read(modelLocation);
 
             if (maxTopicAssignments <= 0) {
