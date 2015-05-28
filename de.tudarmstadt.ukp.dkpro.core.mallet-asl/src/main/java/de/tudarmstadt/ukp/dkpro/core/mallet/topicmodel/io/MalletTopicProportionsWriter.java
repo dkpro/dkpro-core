@@ -45,8 +45,10 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  * </p>
  *
  * @author Carsten Schnober
+ * @deprecated use {@link MalletTopicsProportionsSortedWriter}
  */
-public class MalletTopicModelFileWriter
+@Deprecated
+public class MalletTopicProportionsWriter
     extends JCasFileWriter_ImplBase
 {
     private static final Locale LOCALE = Locale.US;

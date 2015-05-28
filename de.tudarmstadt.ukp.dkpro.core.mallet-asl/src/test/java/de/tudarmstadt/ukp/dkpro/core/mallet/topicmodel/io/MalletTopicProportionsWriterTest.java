@@ -42,9 +42,10 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 /**
  *
  * @author Carsten Schnober
- *
+ * @deprecated {@link MalletTopicProportionsWriter} has been deprecated
  */
-public class MalletTopicModelFileWriterTest
+@Deprecated
+public class MalletTopicProportionsWriterTest
 {
     private static final int N_THREADS = 4;
     private static final File MODEL_FILE = new File("target/mallet/model");
@@ -102,8 +103,8 @@ public class MalletTopicModelFileWriterTest
                 MalletTopicModelInferencer.PARAM_USE_LEMMA, USE_LEMMAS);
 
         AnalysisEngineDescription writer = createEngineDescription(
-                MalletTopicModelFileWriter.class,
-                MalletTopicModelFileWriter.PARAM_TARGET_LOCATION, targetFile);
+                MalletTopicProportionsWriter.class,
+                MalletTopicProportionsWriter.PARAM_TARGET_LOCATION, targetFile);
 
         SimplePipeline.runPipeline(reader, segmenter, inferencer, writer);
         List<String> lines = FileUtils.readLines(targetFile);

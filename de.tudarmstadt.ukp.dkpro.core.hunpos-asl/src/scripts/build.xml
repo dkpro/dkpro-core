@@ -17,7 +17,7 @@
 -->
 <project basedir="../.." default="separate-jars">
 	<import>
-		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.6.0/ant-macros.xml"/>
+		<url url="https://raw.githubusercontent.com/dkpro/resource-packager/0.7.0/ant-macros.xml"/>
 	</import>
 
 	<!-- 
@@ -566,9 +566,30 @@
 		  <entry  key="hunpos-tag" value="executable"/>
 		  <entry  key="hunpos-train" value="executable"/>
 		</propertyfile>
-		<copydir 
+		<!--copydir 
 			src="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_32" 
-			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64"/>
+			dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64"/-->
+		
+		<get 
+		    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/hunpos-linux-64bit-kernel3.tar.gz" 
+		    		dest="target/download/hunpos-1.0-linux-64bit-kernel3.tar.gz" 
+		    		skipexisting="true"/>
+				<gunzip 
+					src="target/download/hunpos-1.0-linux-64bit-kernel3.tar.gz"
+					dest="target/download/hunpos-1.0-linux-64bit-kernel3.tar"/>
+				<untar 
+					src="target/download/hunpos-1.0-linux-64bit-kernel3.tar"
+					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64">
+					<patternset>
+						<include name="*/*" />
+					</patternset>
+					<mapper type="flatten" />
+				</untar>
+				<propertyfile
+				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/hunpos/bin/linux-x86_64/manifest.properties">
+				  <entry  key="hunpos-tag" value="executable"/>
+				  <entry  key="hunpos-train" value="executable"/>
+				</propertyfile>
 
 		<get 
 			src="http://hunpos.googlecode.com/files/hunpos-1.0-win.zip" 
