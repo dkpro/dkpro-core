@@ -135,6 +135,8 @@ public class MalletTopicModelInferencer
         catch (Exception e) {
             throw new ResourceInitializationException(e);
         }
+        getLogger().info("Model loaded.");
+
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
     };
@@ -144,36 +146,38 @@ public class MalletTopicModelInferencer
         throws AnalysisEngineProcessException
     {
         Type type = CasUtil.getType(aJCas.getCas(), typeName);
+        Instance instance;
 
         try {
             /* create Mallet Instance */
             DocumentMetaData metadata = DocumentMetaData.get(aJCas);
-            Instance instance = new Instance(
-                    MalletTopicModelEstimator.generateTokenSequence(
-                            aJCas, type, useLemma, minTokenLength),
-                    NONE_LABEL, metadata.getDocumentId(), metadata.getDocumentUri());
-
-            /* infer topic distribution across document */
-            TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
-            double[] topicDistribution = inferencer.getSampledDistribution(
-                    malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
-
-            /* convert data type (Mallet output -> Dkpro array) */
-            DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
-            da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
-            topicDistributionAnnotation.setTopicProportions(da);
-
-            /* assign topics to document according to topic distribution */
-            int[] assignedTopicIndexes = assignTopics(topicDistribution);
-            IntegerArray topicIndexes = new IntegerArray(aJCas, assignedTopicIndexes.length);
-            topicIndexes.copyFromArray(assignedTopicIndexes, 0, 0, assignedTopicIndexes.length);
-            topicDistributionAnnotation.setTopicAssignment(topicIndexes);
-
-            aJCas.addFsToIndexes(topicDistributionAnnotation);
+            instance = new Instance(
+                    MalletTopicModelEstimator.generateTokenSequence(aJCas, type, useLemma,
+                            minTokenLength),
+                    NONE_LABEL, metadata.getDocumentId(),
+                    metadata.getDocumentUri());
         }
         catch (FeaturePathException e) {
             throw new AnalysisEngineProcessException(e);
         }
+
+        /* infer topic distribution across document */
+        TopicDistribution topicDistributionAnnotation = new TopicDistribution(aJCas);
+        double[] topicDistribution = inferencer.getSampledDistribution(
+                malletPipe.instanceFrom(instance), nIterations, thinning, burnIn);
+
+        /* convert data type (Mallet output -> Dkpro array) */
+        DoubleArray da = new DoubleArray(aJCas, topicDistribution.length);
+        da.copyFromArray(topicDistribution, 0, 0, topicDistribution.length);
+        topicDistributionAnnotation.setTopicProportions(da);
+
+        /* assign topics to document according to topic distribution */
+        int[] assignedTopicIndexes = assignTopics(topicDistribution);
+        IntegerArray topicIndexes = new IntegerArray(aJCas, assignedTopicIndexes.length);
+        topicIndexes.copyFromArray(assignedTopicIndexes, 0, 0, assignedTopicIndexes.length);
+        topicDistributionAnnotation.setTopicAssignment(topicIndexes);
+
+        aJCas.addFsToIndexes(topicDistributionAnnotation);
     }
 
     /**
@@ -203,7 +207,8 @@ public class MalletTopicModelInferencer
         double threshold = Math.max(
                 Collections.max(
                         Arrays.asList(ArrayUtils.toObject(topicDistribution)))
-                        / maxTopicAssignments, minTopicProb);
+                        / maxTopicAssignments,
+                minTopicProb);
 
         /*
          * assign indexes for values that are above threshold
