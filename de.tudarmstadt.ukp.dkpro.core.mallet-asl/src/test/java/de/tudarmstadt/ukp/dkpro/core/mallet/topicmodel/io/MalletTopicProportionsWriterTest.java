@@ -42,9 +42,10 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 /**
  *
  * @author Carsten Schnober
- *
+ * @deprecated {@link MalletTopicProportionsWriter} has been deprecated
  */
-public class MalletTopicModelFileWriterTest
+@Deprecated
+public class MalletTopicProportionsWriterTest
 {
     private static final int N_THREADS = 4;
     private static final File MODEL_FILE = new File("target/mallet/model");
