@@ -662,6 +662,7 @@
 				</repository>
 			</repositories>
 			<modules>
+				<module>../de.tudarmstadt.ukp.dkpro.core.flextag-asl</module>
 				<module>../de.tudarmstadt.ukp.dkpro.core.io.fangorn-asl</module>
                 <module>../de.tudarmstadt.ukp.dkpro.core.lbj-asl</module>
 			</modules>
