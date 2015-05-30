@@ -21,11 +21,13 @@ import static org.apache.uima.fit.factory.ExternalResourceFactory.bindResource;
 
 import java.io.File;
 import java.io.ObjectInputStream;
+import java.net.MalformedURLException;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.DataResource;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.SharedResourceObject;
+import org.apache.uima.util.InvalidXMLException;
 
 /**
  * Shared {@link DfModel}.
@@ -52,18 +54,17 @@ public class SharedDfModel
      *            The path from where the resource is loaded.
      * @param params
      *            Optional parameters.
+     * @throws InvalidXMLException
+     *             if import resolution failed
+     * @throws MalformedURLException
+     *             if the specified path is invalid.
      */
     public static void bindTo(AnalysisEngineDescription aaed, String pathToResource,
             Object... params)
-        throws ResourceInitializationException
+        throws InvalidXMLException, MalformedURLException
     {
-        try {
-            bindResource(aaed, DfModel.class.getName(), SharedDfModel.class, new File(
-                    pathToResource).toURI().toURL().toString(), params);
-        }
-        catch (Exception e) {
-            throw new ResourceInitializationException(e);
-        }
+        bindResource(aaed, DfModel.class.getName(), SharedDfModel.class, new File(
+                pathToResource).toURI().toURL().toString(), params);
     }
 
     @Override
