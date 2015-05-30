@@ -126,11 +126,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <!-- version>2.10.2-SNAPSHOT</version -->
                 <configuration>
                     <notimestamp>true</notimestamp>
                     <!-- Exclude UIMA types and internal API -->
-                    <excludePackageNames>*.type:*.internal.*</excludePackageNames>
+                    <excludePackageNames>*.internal.*</excludePackageNames>
                     <groups>
                         <group>
                             <title>Analysis Components</title>
@@ -144,12 +143,10 @@
                             <title>I/O Components</title>
                             <packages>de.tudarmstadt.ukp.dkpro.core.io*</packages>
                         </group>
-                        <!--  
                         <group>
                             <title>Types</title>
                             <packages>de.tudarmstadt.ukp.dkpro.core.api.coref.type*:de.tudarmstadt.ukp.dkpro.core.api.anomaly.type*:de.tudarmstadt.ukp.dkpro.core.api.frequency.tfidf.type*:de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type*:de.tudarmstadt.ukp.dkpro.core.api.metadata.type*:de.tudarmstadt.ukp.dkpro.core.api.ner.type*:de.tudarmstadt.ukp.dkpro.core.api.phonetics.type*:de.tudarmstadt.ukp.dkpro.core.api.segmentation.type*:de.tudarmstadt.ukp.dkpro.core.api.semantics.type*:de.tudarmstadt.ukp.dkpro.core.sentiment.type*:de.tudarmstadt.ukp.dkpro.core.api.structure.type*:de.tudarmstadt.ukp.dkpro.core.api.syntax.type*:de.tudarmstadt.ukp.dkpro.core.api.transform.type</packages>
                         </group>
-                        -->
                         <group>
                             <title>Testing</title>
                             <packages>de.tudarmstadt.ukp.dkpro.core.testing*</packages>
