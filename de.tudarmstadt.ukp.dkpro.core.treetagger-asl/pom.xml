@@ -172,7 +172,7 @@
 			<dependency>
 			    <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 			    <artifactId>de.tudarmstadt.ukp.dkpro.core.treetagger-model-tagger-pl-le</artifactId>
-			    <version>20140602.1</version>
+			    <version>20150506.1</version>
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
