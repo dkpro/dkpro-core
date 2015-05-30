@@ -1,23 +1,26 @@
 
-/* First created by JCasGen Sun Jul 22 20:55:44 CEST 2012 */
-package de.tudarmstadt.ukp.dkpro.core.type;
+/* First created by JCasGen Sat May 30 20:50:45 CEST 2015 */
+package de.tudarmstadt.ukp.dkpro.core.performance.type;
 
-import org.apache.uima.cas.Feature;
-import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.cas.Type;
-import org.apache.uima.cas.impl.CASImpl;
-import org.apache.uima.cas.impl.FSGenerator;
-import org.apache.uima.cas.impl.FeatureImpl;
-import org.apache.uima.cas.impl.TypeImpl;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.JCasRegistry;
+import org.apache.uima.cas.impl.CASImpl;
+import org.apache.uima.cas.impl.FSGenerator;
+import org.apache.uima.cas.FeatureStructure;
+import org.apache.uima.cas.impl.TypeImpl;
+import org.apache.uima.cas.Type;
+import org.apache.uima.cas.impl.FeatureImpl;
+import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
 /** 
- * Updated by JCasGen Sun Apr 19 09:55:20 CEST 2015
+ * Updated by JCasGen Sat May 30 20:50:45 CEST 2015
  * @generated */
 public class TimerAnnotation_Type extends Annotation_Type {
-  /** @generated */
+  /** @generated 
+   * @return the generator for this type
+   */
+  @Override
   protected FSGenerator getFSGenerator() {return fsGenerator;}
   /** @generated */
   private final FSGenerator fsGenerator = 
@@ -36,25 +39,33 @@ public class TimerAnnotation_Type extends Annotation_Type {
   	  }
     };
   /** @generated */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = TimerAnnotation.typeIndexID;
   /** @generated 
      @modifiable */
-  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+  @SuppressWarnings ("hiding")
+  public final static boolean featOkTst = JCasRegistry.getFeatOkTst("de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
  
   /** @generated */
   final Feature casFeat_startTime;
   /** @generated */
   final int     casFeatCode_startTime;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public long getStartTime(int addr) {
         if (featOkTst && casFeat_startTime == null)
-      jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     return ll_cas.ll_getLongValue(addr, casFeatCode_startTime);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setStartTime(int addr, long v) {
         if (featOkTst && casFeat_startTime == null)
-      jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     ll_cas.ll_setLongValue(addr, casFeatCode_startTime, v);}
     
   
@@ -63,16 +74,22 @@ public class TimerAnnotation_Type extends Annotation_Type {
   final Feature casFeat_endTime;
   /** @generated */
   final int     casFeatCode_endTime;
-  /** @generated */ 
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @return the feature value 
+   */ 
   public long getEndTime(int addr) {
         if (featOkTst && casFeat_endTime == null)
-      jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     return ll_cas.ll_getLongValue(addr, casFeatCode_endTime);
   }
-  /** @generated */    
+  /** @generated
+   * @param addr low level Feature Structure reference
+   * @param v value to set 
+   */    
   public void setEndTime(int addr, long v) {
         if (featOkTst && casFeat_endTime == null)
-      jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     ll_cas.ll_setLongValue(addr, casFeatCode_endTime, v);}
     
   
@@ -87,7 +104,7 @@ public class TimerAnnotation_Type extends Annotation_Type {
    */ 
   public String getName(int addr) {
         if (featOkTst && casFeat_name == null)
-      jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     return ll_cas.ll_getStringValue(addr, casFeatCode_name);
   }
   /** @generated
@@ -96,7 +113,7 @@ public class TimerAnnotation_Type extends Annotation_Type {
    */    
   public void setName(int addr, String v) {
         if (featOkTst && casFeat_name == null)
-      jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     ll_cas.ll_setStringValue(addr, casFeatCode_name, v);}
     
   
@@ -104,7 +121,10 @@ public class TimerAnnotation_Type extends Annotation_Type {
 
 
   /** initialize variables to correspond with Cas Type and Features
-	* @generated */
+	 * @generated
+	 * @param jcas JCas
+	 * @param casType Type 
+	 */
   public TimerAnnotation_Type(JCas jcas, Type casType) {
     super(jcas, casType);
     casImpl.getFSClassRegistry().addGeneratorForType((TypeImpl)this.casType, getFSGenerator());

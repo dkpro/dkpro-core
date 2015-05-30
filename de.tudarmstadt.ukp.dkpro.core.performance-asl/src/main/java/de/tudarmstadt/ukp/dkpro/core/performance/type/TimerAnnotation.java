@@ -1,28 +1,34 @@
 
 
-/* First created by JCasGen Sun Jul 22 20:55:44 CEST 2012 */
-package de.tudarmstadt.ukp.dkpro.core.type;
+/* First created by JCasGen Sat May 30 20:50:45 CEST 2015 */
+package de.tudarmstadt.ukp.dkpro.core.performance.type;
 
-import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.JCas; 
 import org.apache.uima.jcas.JCasRegistry;
 import org.apache.uima.jcas.cas.TOP_Type;
+
 import org.apache.uima.jcas.tcas.Annotation;
 
 
 /** 
- * Updated by JCasGen Sun Apr 19 09:55:20 CEST 2015
- * XML source: /Users/zesch/Documents/workspace_core/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.performance-asl/src/main/resources/desc/type/TimerAnnotation.xml
+ * Updated by JCasGen Sat May 30 20:50:45 CEST 2015
+ * XML source: /Users/zesch/git/dkpro/dkpro-core/de.tudarmstadt.ukp.dkpro.core.performance-asl/src/main/resources/desc/type/TimerAnnotation.xml
  * @generated */
 public class TimerAnnotation extends Annotation {
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int typeIndexID = JCasRegistry.register(TimerAnnotation.class);
   /** @generated
    * @ordered 
    */
+  @SuppressWarnings ("hiding")
   public final static int type = typeIndexID;
-  /** @generated  */
+  /** @generated
+   * @return index of the type  
+   */
+  @Override
   public              int getTypeIndexID() {return typeIndexID;}
  
   /** Never called.  Disable default constructor
@@ -30,19 +36,28 @@ public class TimerAnnotation extends Annotation {
   protected TimerAnnotation() {/* intentionally empty block */}
     
   /** Internal - constructor used by generator 
-   * @generated */
+   * @generated
+   * @param addr low level Feature Structure reference
+   * @param type the type of this Feature Structure 
+   */
   public TimerAnnotation(int addr, TOP_Type type) {
     super(addr, type);
     readObject();
   }
   
-  /** @generated */
+  /** @generated
+   * @param jcas JCas to which this Feature Structure belongs 
+   */
   public TimerAnnotation(JCas jcas) {
     super(jcas);
     readObject();   
   } 
 
-  /** @generated */  
+  /** @generated
+   * @param jcas JCas to which this Feature Structure belongs
+   * @param begin offset to the begin spot in the SofA
+   * @param end offset to the end spot in the SofA 
+  */  
   public TimerAnnotation(JCas jcas, int begin, int end) {
     super(jcas);
     setBegin(begin);
@@ -52,12 +67,12 @@ public class TimerAnnotation extends Annotation {
 
   /** 
    * <!-- begin-user-doc -->
-    * Write your own initialization here
-    * <!-- end-user-doc -->
-  *
+   * Write your own initialization here
+   * <!-- end-user-doc -->
+   *
    * @generated modifiable 
    */
-  private void readObject() {}
+  private void readObject() {/*default - does nothing empty block */}
      
  
     
@@ -70,7 +85,7 @@ public class TimerAnnotation extends Annotation {
    */
   public long getStartTime() {
     if (TimerAnnotation_Type.featOkTst && ((TimerAnnotation_Type)jcasType).casFeat_startTime == null)
-      jcasType.jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcasType.jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     return jcasType.ll_cas.ll_getLongValue(addr, ((TimerAnnotation_Type)jcasType).casFeatCode_startTime);}
     
   /** setter for startTime - sets  
@@ -79,7 +94,7 @@ public class TimerAnnotation extends Annotation {
    */
   public void setStartTime(long v) {
     if (TimerAnnotation_Type.featOkTst && ((TimerAnnotation_Type)jcasType).casFeat_startTime == null)
-      jcasType.jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcasType.jcas.throwFeatMissing("startTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     jcasType.ll_cas.ll_setLongValue(addr, ((TimerAnnotation_Type)jcasType).casFeatCode_startTime, v);}    
    
     
@@ -92,7 +107,7 @@ public class TimerAnnotation extends Annotation {
    */
   public long getEndTime() {
     if (TimerAnnotation_Type.featOkTst && ((TimerAnnotation_Type)jcasType).casFeat_endTime == null)
-      jcasType.jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcasType.jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     return jcasType.ll_cas.ll_getLongValue(addr, ((TimerAnnotation_Type)jcasType).casFeatCode_endTime);}
     
   /** setter for endTime - sets  
@@ -101,7 +116,7 @@ public class TimerAnnotation extends Annotation {
    */
   public void setEndTime(long v) {
     if (TimerAnnotation_Type.featOkTst && ((TimerAnnotation_Type)jcasType).casFeat_endTime == null)
-      jcasType.jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcasType.jcas.throwFeatMissing("endTime", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     jcasType.ll_cas.ll_setLongValue(addr, ((TimerAnnotation_Type)jcasType).casFeatCode_endTime, v);}    
    
     
@@ -115,7 +130,7 @@ Used to automatically determine whether this is an upstream or downstream timer.
    */
   public String getName() {
     if (TimerAnnotation_Type.featOkTst && ((TimerAnnotation_Type)jcasType).casFeat_name == null)
-      jcasType.jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcasType.jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     return jcasType.ll_cas.ll_getStringValue(addr, ((TimerAnnotation_Type)jcasType).casFeatCode_name);}
     
   /** setter for name - sets The name of the timer.
@@ -125,7 +140,7 @@ Used to automatically determine whether this is an upstream or downstream timer.
    */
   public void setName(String v) {
     if (TimerAnnotation_Type.featOkTst && ((TimerAnnotation_Type)jcasType).casFeat_name == null)
-      jcasType.jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation");
+      jcasType.jcas.throwFeatMissing("name", "de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation");
     jcasType.ll_cas.ll_setStringValue(addr, ((TimerAnnotation_Type)jcasType).casFeatCode_name, v);}    
   }
 
