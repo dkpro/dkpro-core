@@ -613,7 +613,6 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.commonscodec-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.decompounding-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.dictionaryannotator-asl</module>
-		<module>../de.tudarmstadt.ukp.dkpro.core.flextag-asl</module>		
 		<module>../de.tudarmstadt.ukp.dkpro.core.frequency-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.hunpos-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.jazzy-asl</module>
