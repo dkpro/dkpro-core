@@ -38,7 +38,7 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.type.TimerAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.performance.type.TimerAnnotation;
 
 /**
  * Can be used to measure how long the processing between two points in a pipeline takes.
