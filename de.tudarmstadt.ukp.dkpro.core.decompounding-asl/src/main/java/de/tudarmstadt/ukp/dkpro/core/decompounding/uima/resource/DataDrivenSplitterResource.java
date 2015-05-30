@@ -47,7 +47,7 @@ public class DataDrivenSplitterResource
 	}
 
 	@Override
-	public DecompoundingTree split(String aWord) throws ResourceInitializationException
+	public DecompoundingTree split(String aWord)
 	{
 		return splitter.split(aWord);
 	}

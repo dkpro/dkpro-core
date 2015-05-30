@@ -46,7 +46,7 @@ public class BananaSplitterResource
 	}
 
 	@Override
-	public DecompoundingTree split(String aWord) throws ResourceInitializationException
+	public DecompoundingTree split(String aWord)
 	{
 		return splitter.split(aWord);
 	}

@@ -86,23 +86,17 @@ public class CompoundAnnotator
     public void process(final JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try {
-            for (Token token : select(aJCas, Token.class)) {
-                final String coveredText = token.getCoveredText();
-                DecompoundedWord result;
-                result = ranker.highestRank(splitter.split(coveredText));
-                if (!result.isCompound()) {
-                    continue;
-                }
-                final int beginIndex = token.getBegin();
-                final Compound compound = new Compound(aJCas, beginIndex, token.getEnd());
-                indexSplits(aJCas, result.getSplits(), beginIndex, token.getEnd(), null, compound);
-                compound.addToIndexes();
-
+        for (Token token : select(aJCas, Token.class)) {
+            final String coveredText = token.getCoveredText();
+            DecompoundedWord result;
+            result = ranker.highestRank(splitter.split(coveredText));
+            if (!result.isCompound()) {
+                continue;
             }
-        }
-        catch (ResourceInitializationException e) {
-            throw new AnalysisEngineProcessException(e);
+            final int beginIndex = token.getBegin();
+            final Compound compound = new Compound(aJCas, beginIndex, token.getEnd());
+            indexSplits(aJCas, result.getSplits(), beginIndex, token.getEnd(), null, compound);
+            compound.addToIndexes();
         }
     }
 

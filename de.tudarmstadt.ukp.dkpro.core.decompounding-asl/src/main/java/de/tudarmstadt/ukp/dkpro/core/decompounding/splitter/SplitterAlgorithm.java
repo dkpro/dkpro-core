@@ -18,11 +18,8 @@
 
 package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 
-import org.apache.uima.resource.ResourceInitializationException;
-
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
-
 
 /**
  * Interface for all splitting algorithms
@@ -31,29 +28,36 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
  */
 public interface SplitterAlgorithm
 {
+    /**
+     * Returns all possible splits for a given word.
+     * 
+     * @param aWord
+     *            The word to split
+     * @return the decompouinding tree.
+     */
+    public DecompoundingTree split(String aWord);
 
-	/**
-	 * Returns all possible splits for a given word.
-	 * 
-	 * @param aWord
-	 *            The word to split
-	 */
-	public DecompoundingTree split(String aWord) throws ResourceInitializationException;
-	
-	/**
-	 * Sets the dictionary for the algorithm
-	 * 
-	 * @param aDict The dictionary
-	 */
-	public void setDictionary(Dictionary aDict);
-	
-	/**
-	 * Sets the linking morphemes for the algorithm
-	 */
-	public void setLinkingMorphemes(LinkingMorphemes aMorphemes);
-	
-	/**
-	 * Set the maximal tree depth. Default: Integer.MaxValue
-	 */
-	public void setMaximalTreeDepth(int aDepth);
+    /**
+     * Sets the dictionary for the algorithm
+     * 
+     * @param aDict
+     *            The dictionary
+     */
+    public void setDictionary(Dictionary aDict);
+
+    /**
+     * Sets the linking morphemes for the algorithm
+     * 
+     * @param aMorphemes
+     *            the linking morphemes
+     */
+    public void setLinkingMorphemes(LinkingMorphemes aMorphemes);
+
+    /**
+     * Set the maximal tree depth. Default: Integer.MaxValue
+     * 
+     * @param aDepth
+     *            maximal tree depth.
+     */
+    public void setMaximalTreeDepth(int aDepth);
 }

@@ -22,7 +22,6 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.splitter;
 import static java.util.Arrays.asList;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -31,7 +30,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.uima.resource.ResourceInitializationException;
 
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 import de.uni_leipzig.asv.utils.Pretree;
@@ -53,7 +51,7 @@ implements SplitterAlgorithm
 	}
 
 	@Override
-	public DecompoundingTree split(String aWord) throws ResourceInitializationException
+	public DecompoundingTree split(String aWord)
 	{
 		// splitter.kZerlegung("katalogleichen");
 		// splitter.kZerlegung("nischenthemen");
@@ -71,7 +69,7 @@ implements SplitterAlgorithm
 
 		if (StringUtils.join(split, "").contains("()")) {
 			logger.error(aWord + " -> " + split);
-			throw new ResourceInitializationException("Failed while splitting " + aWord + " into " + split, null);
+			throw new IllegalStateException("Failed while splitting " + aWord + " into " + split, null);
 		}
 
 		StringBuilder splitStr = new StringBuilder();
