@@ -55,6 +55,9 @@ public class TermIterator
      *            Specifies the annotation and its string representation method.
      * @param convertToLowercase
      *            The terms are converted as specified with this parameter
+     * @return an iterator.
+     * @throws AnalysisEngineProcessException
+     *             if the feature path is invalid.
      */
     public static TermIterator create(JCas jcas, String featurePath, boolean convertToLowercase)
         throws AnalysisEngineProcessException

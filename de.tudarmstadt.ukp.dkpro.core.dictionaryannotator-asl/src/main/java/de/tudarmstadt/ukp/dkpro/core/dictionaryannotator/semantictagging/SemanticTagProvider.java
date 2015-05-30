@@ -23,36 +23,38 @@ import org.apache.uima.resource.ResourceAccessException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
-public interface SemanticTagProvider {
-
-    /**
-     * 
-     * This interface can be used to create various UIMA resources 
-     * that provide semantic tags.
-     *     
-     * @author Judith Eckle-Kohler
-     */
-
-	
+/**
+ * 
+ * This interface can be used to create various UIMA resources that provide semantic tags.
+ * 
+ * @author Judith Eckle-Kohler
+ */
+public interface SemanticTagProvider
+{
     /**
      * Get a semantic tag for a token.
      *
      * @param token
      *            token to tag
-     *            
-     * @return semantic tag of the token. Returns "UNKNOWN" if the (lemma of the) token does not exist in the resource.
+     * @return semantic tag of the token. Returns "UNKNOWN" if the (lemma of the) token does not
+     *         exist in the resource.
+     * @throws ResourceAccessException
+     *             if the semantic resource cannot be accessed.
      */
-	public String getSemanticTag(Token token) throws ResourceAccessException ;
-	
-	/**
+    public String getSemanticTag(Token token)
+        throws ResourceAccessException;
+
+    /**
      * Get a semantic tag for a list of tokens (e.g. a multiword).
      *
      * @param tokens
      *            list of tokens to tag
-     *            
-     * @return semantic tag of the multiword. Returns "UNKNOWN" if the (lemma of the) multiword does not exist in the resource.
+     * @return semantic tag of the multiword. Returns "UNKNOWN" if the (lemma of the) multiword does
+     *         not exist in the resource.
+     * @throws ResourceAccessException
+     *             if the semantic resource cannot be accessed.
      */
-	public String getSemanticTag(List<Token> tokens) throws ResourceAccessException;
-
+    public String getSemanticTag(List<Token> tokens)
+        throws ResourceAccessException;
 
 }

@@ -46,8 +46,13 @@ public class NGramStringIterable implements Iterable<String>
 //    }
 
     /**
-	 * @param tokens An iterable of tokens.
-	 */
+     * @param tokens
+     *            An iterable of tokens.
+     * @param minN
+     *            the minimal n-gram length.
+     * @param maxN
+     *            the maximal n-gram length.
+     */
 	public NGramStringIterable(Iterable<String> tokens, int minN, int maxN)
 	{
 		this.nGramList = createNGramList(tokens, minN, maxN);
@@ -55,6 +60,10 @@ public class NGramStringIterable implements Iterable<String>
 	
 	/**
      * @param tokens An array of tokens.
+     * @param minN
+     *            the minimal n-gram length.
+     * @param maxN
+     *            the maximal n-gram length.
      */
     public NGramStringIterable(String[] tokens, int minN, int maxN)
     {

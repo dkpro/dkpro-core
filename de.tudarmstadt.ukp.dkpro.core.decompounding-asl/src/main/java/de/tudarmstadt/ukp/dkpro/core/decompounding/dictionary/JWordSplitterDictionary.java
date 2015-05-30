@@ -60,11 +60,15 @@ public class JWordSplitterDictionary
 		return words.contains(aWord);
 	}
 
-	/**
-	 * Reads the dictionary to set
-	 * 
-	 * @return A set of words
-	 */
+    /**
+     * Reads the dictionary to set
+     * 
+     * @param aReader
+     *            a reader.
+     * @return A set of words
+     * @throws IOException
+     *             if an I/O problem occurs.
+     */
 	protected Set<String> readFileToSet(BufferedReader aReader)
 		throws IOException
 	{

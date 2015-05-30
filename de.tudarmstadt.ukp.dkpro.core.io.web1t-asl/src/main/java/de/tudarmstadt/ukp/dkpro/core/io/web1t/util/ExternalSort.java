@@ -66,29 +66,36 @@ public class ExternalSort {
 		return blocksize;
 	}
 
-	/**
-	 * This will simply load the file by blocks of x rows, then
-	 * sort them in-memory, and write the result to  
-	 * temporary files that have to be merged later.
-	 * 
-	 * @param file some flat  file
-	 * @param cmp string comparator 
-	 * @return a list of temporary flat files
-	 */
+    /**
+     * This will simply load the file by blocks of x rows, then sort them in-memory, and write the
+     * result to temporary files that have to be merged later.
+     * 
+     * @param file
+     *            some flat file
+     * @param cmp
+     *            string comparator
+     * @return a list of temporary flat files
+     * @throws IOException
+     *             if an I/O problem occurs.
+     */
 	public static List<File> sortInBatch(File file, Comparator<String> cmp) throws IOException {		return sortInBatch(file, cmp,DEFAULTMAXTEMPFILES);	}
 	
 	
-	/**
-	 * This will simply load the file by blocks of x rows, then
-	 * sort them in-memory, and write the result to 
-	 * temporary files that have to be merged later. You can
-	 * specify a bound on the number of temporary files that
-	 * will be created.
-	 * 
-	 * @param file some flat  file
-	 * @param cmp string comparator 
-	 * @return a list of temporary flat files
-	 */
+    /**
+     * This will simply load the file by blocks of x rows, then sort them in-memory, and write the
+     * result to temporary files that have to be merged later. You can specify a bound on the number
+     * of temporary files that will be created.
+     * 
+     * @param file
+     *            some flat file
+     * @param cmp
+     *            string comparator
+     * @param maxtmpfiles
+     *            maximum number of temporary files
+     * @return a list of temporary flat files
+     * @throws IOException
+     *             if an I/O problem occurs.
+     */
 	public static List<File> sortInBatch(File file, Comparator<String> cmp, int maxtmpfiles) throws IOException {
 		List<File> files = new ArrayList<File>();
 		BufferedReader fbr = new BufferedReader(new FileReader(file));
@@ -137,10 +144,19 @@ public class ExternalSort {
 		return newtmpfile;
 	}
 	
-	/**
-	 * This merges a bunch of temporary flat files 
+    /**
+     * This merges a bunch of temporary flat files
+     * 
+     * @param files
+     *            the files to merge.
+     * @param outputfile
+     *            the target file.
+     * @param cmp
+     *            the comprarator.
      * @return The number of lines sorted. (P. Beaudoin)
-	 */
+     * @throws IOException
+     *             if an I/O problem occurs.
+     */
 	public static int mergeSortedFiles(List<File> files, File outputfile, final Comparator<String> cmp) throws IOException {
 		PriorityQueue<BinaryFileBuffer> pq = new PriorityQueue<BinaryFileBuffer>(11, 
             new Comparator<BinaryFileBuffer>() {

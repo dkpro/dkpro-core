@@ -27,19 +27,25 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
  * 
  * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
-public interface RankerList extends Ranker
+public interface RankerList
+    extends Ranker
 {
 
-	/**
-	 * Ranks the given splits and returns the split with highest rank
-	 * 
-	 * @param aSplits
-	 *            The highest ranked split
-	 */
-	public DecompoundedWord highestRank(List<DecompoundedWord> aSplits);
+    /**
+     * Ranks the given splits and returns the split with highest rank
+     * 
+     * @param aSplits
+     *            The highest ranked split
+     * @return the split with highest rank
+     */
+    public DecompoundedWord highestRank(List<DecompoundedWord> aSplits);
 
-	/**
-	 * Ranks all splits and returns a order list
-	 */
-	public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits);
+    /**
+     * Ranks all splits and returns a order list
+     * 
+     * @param aSplits
+     *            the splits to rank.
+     * @return the ordered split.
+     */
+    public List<DecompoundedWord> rank(List<DecompoundedWord> aSplits);
 }

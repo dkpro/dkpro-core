@@ -12,11 +12,22 @@ import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import org.apache.uima.jcas.tcas.Annotation;
 
 
-/** Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -> "Camel", "Case"; "Zauberstab" -> "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
-<p>
- * Updated by JCasGen Sat Nov 01 22:21:22 CET 2014
- * XML source: /Users/bluefire/UKP/Workspaces/dkpro-juno/de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro.core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
- * @generated */
+/**
+ * Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}
+ * ). A Token usually represents a word, although it may be used to represent multiple tightly
+ * connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose
+ * to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case";
+ * "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually
+ * within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token
+ * in a Sentence and assigns a part-of-speech to each Token.
+ *
+ * Updated by JCasGen Sat Nov 01 22:21:22 CET 2014 XML source:
+ * /Users/bluefire/UKP/Workspaces/dkpro-juno
+ * /de.tudarmstadt.ukp.dkpro.core-asl/de.tudarmstadt.ukp.dkpro
+ * .core.api.segmentation-asl/src/main/resources/desc/type/LexicalUnits.xml
+ * 
+ * @generated
+ */
 public class Token extends Annotation {
   /** @generated
    * @ordered 

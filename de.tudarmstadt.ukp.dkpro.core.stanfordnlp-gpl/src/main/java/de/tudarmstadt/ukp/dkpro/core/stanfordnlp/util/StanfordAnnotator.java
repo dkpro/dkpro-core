@@ -308,6 +308,8 @@ public class StanfordAnnotator
     /**
      * Writes dependency annotations to the JCas
      * 
+     * @param jCas
+     *            a CAS.
      * @param aDependencyType
      *            the dependency type
      * @param aGovernor

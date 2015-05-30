@@ -43,9 +43,12 @@ public class CompoundProbabilityRanker
 	public CompoundProbabilityRanker() {
 	}
 
-	/**
-	 * Constructor
-	 */
+    /**
+     * Constructor
+     * 
+     * @param aFinder
+     *            a finder.
+     */
 	public CompoundProbabilityRanker(Finder aFinder)
 	{
 		super(aFinder);

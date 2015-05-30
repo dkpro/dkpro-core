@@ -200,6 +200,11 @@ public class LuceneIndexer
     /**
      * Create the index. This is a very long running function. It will output some information on
      * stdout.
+     * 
+     * @throws FileNotFoundException
+     *             if the index could not be found.
+     * @throws InterruptedException
+     *             if threads were interrupted.
      */
     public void index()
         throws FileNotFoundException, InterruptedException

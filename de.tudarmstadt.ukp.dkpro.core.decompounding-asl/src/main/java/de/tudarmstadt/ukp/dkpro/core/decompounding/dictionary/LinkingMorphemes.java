@@ -39,6 +39,9 @@ public class LinkingMorphemes
 
     /**
      * Create a linking morphemes object from a array of morphemes
+     * 
+     * @param aMorphemes
+     *            the morphemes.
      */
     public LinkingMorphemes(String... aMorphemes)
     {
@@ -51,6 +54,9 @@ public class LinkingMorphemes
 
     /**
      * Create a linking morphemes object from a list of morphemes
+     * 
+     * @param aMorphemes
+     *            the morphemes.
      */
     public LinkingMorphemes(List<String> aMorphemes)
     {
@@ -61,6 +67,11 @@ public class LinkingMorphemes
      * Create a linking morphemes object from a input stream
      * 
      * Each line in the file must contain one morpheme. Use # in front of a line for comments.
+     * 
+     * @param aStream
+     *            the source stream.
+     * @throws IOException
+     *             if the data could not be read.
      */
     public LinkingMorphemes(InputStream aStream)
         throws IOException
@@ -72,6 +83,11 @@ public class LinkingMorphemes
      * Create a linking morphemes object from a file.
      * 
      * Each line in the file must contain one morpheme. Use # in front of a line for comments.
+     * 
+     * @param aMorphemesTextFile
+     *            the source file.
+     * @throws IOException
+     *             if the data could not be read.
      */
     public LinkingMorphemes(File aMorphemesTextFile)
         throws IOException
@@ -83,6 +99,11 @@ public class LinkingMorphemes
      * Create a linking morphemes object from a reader object.
      * 
      * Each line in the file must contain one morpheme. Use # in front of a line for comments.
+     * 
+     * @param aReader
+     *            the source reader.
+     * @throws IOException
+     *             if the data could not be read.
      */
     public LinkingMorphemes(BufferedReader aReader)
         throws IOException
@@ -99,6 +120,8 @@ public class LinkingMorphemes
 
     /**
      * Returns all morphemes.
+     * 
+     * @return all morphemes.
      */
     public List<String> getAll()
     {
@@ -108,6 +131,8 @@ public class LinkingMorphemes
     /**
      * Checks if the given word starts with a morpheme
      * 
+     * @param aWord
+     *            a word.
      * @return The length of the morpheme or -1 if it do not start with a morpheme
      */
     public int startsWith(String aWord)

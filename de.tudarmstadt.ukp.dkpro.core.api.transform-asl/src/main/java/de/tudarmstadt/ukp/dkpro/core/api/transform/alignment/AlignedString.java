@@ -103,6 +103,10 @@ public class AlignedString
     /**
      * For the given interval on the current data, get the corresponding interval in the wrapped
      * data.
+     * 
+     * @param i
+     *            an interval.
+     * @return the resolved interval.
      */
     public Interval resolve(final Interval i)
     {
@@ -336,6 +340,8 @@ public class AlignedString
     /**
      * Get data segment currently at the given position. Anchors are never returned.
      * 
+     * @param position
+     *            a position.
      * @return the non-anchor segment at the given position.
      */
     public AbstractDataSegment getSegmentAt(final int position)
@@ -427,6 +433,8 @@ public class AlignedString
 
     /**
      * Gets total length of data.
+     * 
+     * @return length of the data.
      */
     public int length()
     {
@@ -439,6 +447,8 @@ public class AlignedString
 
     /**
      * Fetch data
+     * 
+     * @return the data.
      */
     public String get()
     {
@@ -476,6 +486,12 @@ public class AlignedString
 
     /**
      * Fetch data
+     * 
+     * @param start
+     *            the start offset.
+     * @param end
+     *            the end offset.
+     * @return the data.
      */
     public String get(final int start, final int end)
     {
@@ -484,6 +500,11 @@ public class AlignedString
 
     /**
      * Inserts s at given position.
+     * 
+     * @param pos
+     *            position at which to insert.
+     * @param s
+     *            string to insert.
      */
     public void insert(final int pos, final String s)
     {
@@ -559,6 +580,7 @@ public class AlignedString
      *            the start offset.
      * @param end
      *            the end offset+1.
+     * @param d the data used to replace the current data.
      */
     public void replace(final int start, final int end, final String d)
     {
@@ -648,6 +670,10 @@ public class AlignedString
     /**
      * Get an anchor at the specified position. Breaks up the segment at the given point if
      * necessary. If there already is an anchor, it is reused.
+     * 
+     * @param pos
+     *            a position.
+     * @return an anchor.
      */
     public Anchor getAnchor(final int pos)
     {
@@ -678,6 +704,8 @@ public class AlignedString
 
     /**
      * Get all the anchors.
+     * 
+     * @return all the anchors.
      */
     public Collection<Anchor> getAnchors()
     {
@@ -693,6 +721,8 @@ public class AlignedString
 
     /**
      * Get all the segments.
+     * 
+     * @return all the segments.
      */
     public Collection<DataSegment> getSegments()
     {
@@ -708,6 +738,8 @@ public class AlignedString
 
     /**
      * Create a string representation of the segments. This is for debugging purposes.
+     * 
+     * @return string representation of the segments.
      */
     public String dataSegmentsToString()
     {

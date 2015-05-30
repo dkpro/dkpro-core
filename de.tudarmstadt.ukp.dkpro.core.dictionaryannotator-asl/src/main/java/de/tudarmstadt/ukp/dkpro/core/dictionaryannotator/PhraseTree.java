@@ -35,6 +35,9 @@ public class PhraseTree
 
     /**
      * Add a phrase, each array entry is a phrase token
+     * 
+     * @param phraseParts
+     *            the phrase.
      */
     public void addPhrase(String[] phraseParts)
     {

@@ -34,7 +34,6 @@ import java.util.regex.Pattern;
 import static java.lang.Character.isUpperCase;
 import static java.lang.Character.toUpperCase;
 import static java.lang.Double.parseDouble;
-import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
  * Spelling corrector based on Norvig's algorithm.
@@ -95,24 +94,21 @@ public class NorvigSpellingAlgorithm
 		}
 	}
 
-	/**
-	 * Read words from the given URL and count their occurrences.
-	 *
-	 * @param aEncoding
-	 *            the encoding.
-	 * @throws IOException
-	 *             if the words cannot be read.
-	 */
+    /**
+     * Read words from the given URL and count their occurrences.
+     * 
+     * @param aUrl
+     *            the URL to load the words from.
+     * @param aEncoding
+     *            the encoding.
+     * @throws IOException
+     *             if the words cannot be read.
+     */
 	public void train(URL aUrl, String aEncoding)
 		throws IOException
 	{
-		InputStream is = null;
-		try {
-			is = aUrl.openStream();
+		try (InputStream is = aUrl.openStream()) {
 			train(new InputStreamReader(is, aEncoding));
-		}
-		finally {
-			closeQuietly(is);
 		}
 	}
 

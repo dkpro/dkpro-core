@@ -41,6 +41,8 @@ public class ValueNode<V>
 
     /**
      * Returns the value object of this node
+     * 
+     * @return the value.
      */
     public V getValue()
     {
@@ -49,6 +51,9 @@ public class ValueNode<V>
 
     /**
      * Sets the value object of this node
+     * 
+     * @param aValue
+     *            the value.
      */
     public void setValue(V aValue)
     {
@@ -57,6 +62,8 @@ public class ValueNode<V>
 
     /**
      * Returns a children for this node
+     * 
+     * @return the children.
      */
     public List<ValueNode<V>> getChildren()
     {
@@ -64,7 +71,9 @@ public class ValueNode<V>
     }
 
     /**
-     * Returns all Children values
+     * Returns all children's values
+     * 
+     * @return the children's values.
      */
     public List<V> getChildrenValues()
     {
@@ -80,6 +89,9 @@ public class ValueNode<V>
 
     /**
      * Sets the children for this node
+     * 
+     * @param aChildren
+     *            the children.
      */
     public void setChildren(List<ValueNode<V>> aChildren)
     {
@@ -88,6 +100,9 @@ public class ValueNode<V>
 
     /**
      * Adds a child object to this node
+     * 
+     * @param node
+     *            the child object.
      */
     public void addChild(ValueNode<V> node)
     {
@@ -96,6 +111,8 @@ public class ValueNode<V>
 
     /**
      * Checks if this node has children
+     * 
+     * @return if this node has children
      */
     public boolean hasChildren()
     {
@@ -104,6 +121,8 @@ public class ValueNode<V>
 
     /**
      * Checks if the node is a leaf node
+     * 
+     * @return if the node is a leaf node
      */
     public boolean isLeaf()
     {

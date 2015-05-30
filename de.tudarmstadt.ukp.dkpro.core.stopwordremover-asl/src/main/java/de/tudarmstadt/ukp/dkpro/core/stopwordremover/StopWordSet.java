@@ -25,7 +25,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashSet;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.uima.resource.DataResource;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.SharedResourceObject;
@@ -58,17 +57,17 @@ public class StopWordSet
     /**
      * Loads a text file (UTF-8 encoding!) containing stop words. Only first word in each line will
      * be taken into account. Everything after "|" will be treated as comment.
+     * 
+     * @param fileName
+     *            the file to read.
+     * @throws IOException
+     *             if the file could not be read.
      */
     public void addStopWordListFile(String fileName)
         throws IOException
     {
-        Reader reader = null;
-        try {
-            reader = new FileReader(fileName);
+        try (Reader reader = new FileReader(fileName)) {
             load(new FileReader(fileName));
-        }
-        finally {
-            IOUtils.closeQuietly(reader);
         }
     }
 
@@ -76,16 +75,11 @@ public class StopWordSet
     public void load(DataResource dataRes)
         throws ResourceInitializationException
     {
-        InputStream is = null;
-        try {
-            is = dataRes.getInputStream();
+        try (InputStream is = dataRes.getInputStream()) {
             load(is);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
-        }
-        finally {
-            IOUtils.closeQuietly(is);
         }
     }
 
@@ -106,7 +100,9 @@ public class StopWordSet
      * added.
      *
      * @param aReader
+     *            a reader.
      * @throws IOException
+     *             if the data could not be read.
      */
     public void load(Reader aReader)
         throws IOException

@@ -163,14 +163,17 @@ extends JCasAnnotator_ImplBase
     }
 
     /**
-     * Adjust the values in the two numeric arguments to be within the limits
-     * of the specified text. If the limits have to be adjusted, a warning is
-     * issued to the log. Illegal zone boundaries hint to a bug in the AE that
-     * produced the zone annotations.
+     * Adjust the values in the two numeric arguments to be within the limits of the specified text.
+     * If the limits have to be adjusted, a warning is issued to the log. Illegal zone boundaries
+     * hint to a bug in the AE that produced the zone annotations.
      *
-     * @param text the text.
-     * @param aBegin the zone begin.
-     * @param aEnd the zone end.
+     * @param text
+     *            the text.
+     * @param aBegin
+     *            the zone begin.
+     * @param aEnd
+     *            the zone end.
+     * @return reduced offsets.
      */
 	protected int[] limit(String text, int aBegin, int aEnd)
     {

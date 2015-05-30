@@ -27,6 +27,8 @@ public interface DfModel
     /**
      * Returns the number of documents, in which the term appears.
      * 
+     * @param term
+     *            a term.
      * @return document frequency
      */
     public int getDf(String term);

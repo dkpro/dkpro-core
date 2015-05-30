@@ -90,6 +90,10 @@ public interface Interval
 
     /**
      * this: [ s ][e] i: ss-----ee
+     * 
+     * @param interval
+     *            a interval.
+     * @return if the given interval overlaps right with the current interval.
      */
     boolean overlapsRight(final Interval interval);
 

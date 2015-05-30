@@ -13,10 +13,19 @@ import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.jcas.tcas.Annotation_Type;
 
-/** Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}). A Token usually represents a word, although it may be used to represent multiple tightly connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose to split compound words into multiple tokens, e.g. ("CamelCase" -> "Camel", "Case"; "Zauberstab" -> "Zauber", "stab"). Most processing components operate on Tokens, usually within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token in a Sentence and assigns a part-of-speech to each Token.
-<p>
+/**
+ * Token is one of the two types commonly produced by a segmenter (the other being {@link Sentence}
+ * ). A Token usually represents a word, although it may be used to represent multiple tightly
+ * connected words (e.g. "New York") or parts of a word (e.g. the possessive "'s"). One may choose
+ * to split compound words into multiple tokens, e.g. ("CamelCase" -&gt; "Camel", "Case";
+ * "Zauberstab" -&gt; "Zauber", "stab"). Most processing components operate on Tokens, usually
+ * within the limits of the surrounding Sentence. E.g. a part-of-speech tagger analyses each Token
+ * in a Sentence and assigns a part-of-speech to each Token.
+ * 
  * Updated by JCasGen Sat Nov 01 22:21:22 CET 2014
- * @generated */
+ * 
+ * @generated
+ */
 public class Token_Type extends Annotation_Type {
   /** @generated 
    * @return the generator for this type
@@ -26,7 +35,8 @@ public class Token_Type extends Annotation_Type {
   /** @generated */
   private final FSGenerator fsGenerator = 
     new FSGenerator() {
-      public FeatureStructure createFS(int addr, CASImpl cas) {
+      @Override
+    public FeatureStructure createFS(int addr, CASImpl cas) {
   			 if (Token_Type.this.useExistingInstance) {
   			   // Return eq fs instance if already created
   		     FeatureStructure fs = Token_Type.this.jcas.getJfsFromCaddr(addr);

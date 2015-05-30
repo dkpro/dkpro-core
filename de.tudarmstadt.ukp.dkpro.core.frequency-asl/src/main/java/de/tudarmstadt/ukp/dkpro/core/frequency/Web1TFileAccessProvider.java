@@ -36,12 +36,16 @@ public class Web1TFileAccessProvider
     /**
      * Try to deduce the index files from the given path.
      * 
+     * @param language
+     *            the language.
      * @param indexPath
      *            The path in which the ngram index files are located.
      * @param minN
      *            The minimum ngram length.
      * @param maxN
      *            The maximum ngram length.
+     * @throws IOException
+     *             if there is a problem accessing the index.
      */
     public Web1TFileAccessProvider(String language, File indexPath, int minN, int maxN)
         throws IOException

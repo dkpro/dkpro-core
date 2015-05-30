@@ -82,6 +82,8 @@ public class BananaSplitterAlgorithm
      * 
      * @param aParent
      *            The parent node
+     * @param aDepth
+     *            the current depth.
      */
     protected void bananaSplit(ValueNode<DecompoundedWord> aParent, int aDepth)
     {
@@ -120,6 +122,7 @@ public class BananaSplitterAlgorithm
      * 
      * @param aWord
      *            The word to split
+     * @return the split word
      */
     protected DecompoundedWord makeSplit(String aWord)
     {
@@ -142,6 +145,10 @@ public class BananaSplitterAlgorithm
 
     /**
      * Converts the banana split compound to a split
+     * 
+     * @param aCompound
+     *            the compound.
+     * @return the split word.
      */
     protected DecompoundedWord compoundToSplit(Compound aCompound)
     {

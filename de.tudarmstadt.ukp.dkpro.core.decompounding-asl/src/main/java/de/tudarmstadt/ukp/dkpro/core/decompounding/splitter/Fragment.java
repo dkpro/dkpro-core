@@ -41,6 +41,9 @@ public class Fragment
 
     /**
      * Creates a split element with a word but no linking morpheme
+     * 
+     * @param aWord
+     *            a word.
      */
     public Fragment(String aWord)
     {
@@ -48,7 +51,12 @@ public class Fragment
     }
 
     /**
-     * Creates a split element with a word and a linking morpheme
+     * Creates a split element with a word and a linking morpheme.
+     * 
+     * @param aWord
+     *            a word.
+     * @param aMorpheme
+     *            a linking morpheme.
      */
     public Fragment(String aWord, String aMorpheme)
     {
@@ -62,12 +70,16 @@ public class Fragment
      * word(morpheme)
      *
      * Example: "auto" or "auto(s)"
+     * 
+     * @param aElement
+     *            a string.
+     * @return a fragment.
      */
     public static Fragment createFromString(String aElement)
     {
         Fragment e = new Fragment();
         String[] splits = aElement.split("\\(");
-        e.setWord(splits.length!= 0 ? splits[0] : aElement);
+        e.setWord(splits.length != 0 ? splits[0] : aElement);
         if ((splits.length == 2) && splits[1].endsWith(")")) {
             e.setMorpheme(splits[1].substring(0, splits[1].length() - 1));
         }
@@ -107,7 +119,9 @@ public class Fragment
     }
 
     /**
-     * Returns the word of the split element
+     * Returns the word of the split element.
+     * 
+     * @return the word of the split element.
      */
     public String getWord()
     {
@@ -120,7 +134,10 @@ public class Fragment
     }
 
     /**
-     * Sets the word of the split element
+     * Sets the word of the split element.
+     * 
+     * @param aWord
+     *            the word of the split element.
      */
     public void setWord(String aWord)
     {
@@ -128,7 +145,9 @@ public class Fragment
     }
 
     /**
-     * Returns the linking morpheme of the split element
+     * Returns the linking morpheme of the split element.
+     * 
+     * @return the linking morpheme of the split element.
      */
     public String getMorpheme()
     {
@@ -136,7 +155,9 @@ public class Fragment
     }
 
     /**
-     * Checks if this element has an morpheme
+     * Checks if this element has an morpheme.
+     * 
+     * @return if this element has an morpheme.
      */
     public boolean hasMorpheme()
     {
@@ -144,7 +165,10 @@ public class Fragment
     }
 
     /**
-     * Sets the linking morpheme of the split element
+     * Sets the linking morpheme of the split element.
+     * 
+     * @param aMorpheme
+     *            the linking morpheme.
      */
     public void setMorpheme(String aMorpheme)
     {
@@ -153,6 +177,8 @@ public class Fragment
 
     /**
      * Similar to the toString method, but combines morpheme and word
+     * 
+     * @return string without morpheme.
      */
     public String toStringWithoutMorpheme()
     {
@@ -168,6 +194,8 @@ public class Fragment
     /**
      * Checks if this split element should be split again by the algorithm. Can be used for
      * recursive splitting
+     * 
+     * @return if this split element should be split again.
      */
     public boolean shouldSplitAgain()
     {
@@ -176,6 +204,9 @@ public class Fragment
 
     /**
      * Set the splitAgain variable
+     * 
+     * @param aSplitAgain
+     *            if this split element should be split again.
      */
     public void setSplitAgain(boolean aSplitAgain)
     {

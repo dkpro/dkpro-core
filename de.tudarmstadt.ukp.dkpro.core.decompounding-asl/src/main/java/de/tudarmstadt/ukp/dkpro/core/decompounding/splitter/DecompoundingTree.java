@@ -58,9 +58,11 @@ public class DecompoundingTree
 		root = aRoot;
 	}
 
-	/**
-	 * Converts the tree to a list.
-	 */
+    /**
+     * Converts the tree to a list.
+     * 
+     * @return the splits.
+     */
 	public List<DecompoundedWord> getAllSplits()
 	{
 		Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();
@@ -69,10 +71,12 @@ public class DecompoundingTree
 		return new ArrayList<DecompoundedWord>(splits);
 	}
 
-	/**
-	 * Converts the tree to a list. If there are splits, then the root node, which contains the
-	 * unsplit word, is not returned.
-	 */
+    /**
+     * Converts the tree to a list. If there are splits, then the root node, which contains the
+     * unsplit word, is not returned.
+     * 
+     * @return the splits.
+     */
 	public List<DecompoundedWord> getSplits()
 	{
 		Set<DecompoundedWord> splits = new LinkedHashSet<DecompoundedWord>();

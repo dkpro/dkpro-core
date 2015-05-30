@@ -29,60 +29,64 @@ import org.apache.commons.lang.StringUtils;
  * @author zesch
  *
  */
-public class CharacterNGramStringIterable implements Iterable<String>
+public class CharacterNGramStringIterable
+    implements Iterable<String>
 {
-	List<String> nGramList;
+    List<String> nGramList;
 
-	/**
-	 * @param token A token
-	 */
-	public CharacterNGramStringIterable(String token, int minN, int maxN)
-	{
-		this.nGramList = createNGramList(token, minN, maxN);
-	}
-	
-	@Override
-	public Iterator<String> iterator()
-	{
-		return nGramList.iterator();
-	}
+    /**
+     * @param token
+     *            A token
+     * @param minN
+     *            the minimal n-gram length.
+     * @param maxN
+     *            the maximal n-gram length.
+     */
+    public CharacterNGramStringIterable(String token, int minN, int maxN)
+    {
+        this.nGramList = createNGramList(token, minN, maxN);
+    }
 
-	private List<String> createNGramList(String token, int minN, int maxN)
-	{
+    @Override
+    public Iterator<String> iterator()
+    {
+        return nGramList.iterator();
+    }
+
+    private List<String> createNGramList(String token, int minN, int maxN)
+    {
         if (minN > maxN) {
             throw new IllegalArgumentException("minN needs to be smaller or equal than maxN.");
         }
 
-		List<String> nGrams = new ArrayList<String>();
+        List<String> nGrams = new ArrayList<String>();
 
-		// fill character list
-		List<String> charList = new ArrayList<String>();
-		for (char c : token.toCharArray()) {
-			charList.add(Character.toString(c));
-		}
+        // fill character list
+        List<String> charList = new ArrayList<String>();
+        for (char c : token.toCharArray()) {
+            charList.add(Character.toString(c));
+        }
 
-		for (int k = minN; k <= maxN; k++) {
-			// if the number of tokens is less than k => break
-			if (charList.size() < k) {
-				break;
-			}
-			nGrams.addAll(getNGrams(charList, k));
-		}
+        for (int k = minN; k <= maxN; k++) {
+            // if the number of tokens is less than k => break
+            if (charList.size() < k) {
+                break;
+            }
+            nGrams.addAll(getNGrams(charList, k));
+        }
 
-		return nGrams;
-	}
+        return nGrams;
+    }
 
-	private List<String> getNGrams(List<String> tokenList, int k)
-	{
-		List<String> nGrams = new ArrayList<String>();
+    private List<String> getNGrams(List<String> tokenList, int k)
+    {
+        List<String> nGrams = new ArrayList<String>();
 
-		int size = tokenList.size();
-		for (int i = 0; i < (size + 1 - k); i++) {
-			nGrams.add(
-					StringUtils.join(tokenList.subList(i, i + k), "")
-			);
-		}
+        int size = tokenList.size();
+        for (int i = 0; i < (size + 1 - k); i++) {
+            nGrams.add(StringUtils.join(tokenList.subList(i, i + k), ""));
+        }
 
-		return nGrams;
-	}
+        return nGrams;
+    }
 }

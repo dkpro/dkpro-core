@@ -40,6 +40,9 @@ public class FreqDist<T>
 
     /**
      * Instantiate a FreqDist and count the given collection.
+     * 
+     * @param collection
+     *            a collection.
      */
     public FreqDist(Collection<T> collection)
     {
@@ -74,6 +77,8 @@ public class FreqDist<T>
     /**
      * Returns the count of the given element
      * 
+     * @param element
+     *            an element.
      * @return the count
      */
     public int getCount(T element)
@@ -100,6 +105,8 @@ public class FreqDist<T>
      * 
      * @param element
      *            the element to be counted
+     * @param number
+     *            an increment.
      */
     public void count(T element, int number)
     {

@@ -34,124 +34,159 @@ import java.util.List;
 public class KeyValueNode<K, V>
 {
 
-	K key;
-	V value;
-	List<KeyValueNode<K, V>> children = new ArrayList<KeyValueNode<K, V>>();
+    K key;
+    V value;
+    List<KeyValueNode<K, V>> children = new ArrayList<KeyValueNode<K, V>>();
 
-	/**
-	 * Creates a tree node for a given key and value
-	 * 
-	 * @param aKey
-	 *            The key of this node
-	 * @param aValue
-	 *            The value of the node
-	 */
-	public KeyValueNode(K aKey, V aValue)
-	{
-		key = aKey;
-		value = aValue;
-	}
+    /**
+     * Creates a tree node for a given key and value
+     * 
+     * @param aKey
+     *            The key of this node
+     * @param aValue
+     *            The value of the node
+     */
+    public KeyValueNode(K aKey, V aValue)
+    {
+        key = aKey;
+        value = aValue;
+    }
 
-	/**
-	 * Returns the key object
-	 */
-	public K getKey()
-	{
-		return key;
-	}
+    /**
+     * Returns the key object
+     * 
+     * @return the key.
+     */
+    public K getKey()
+    {
+        return key;
+    }
 
-	/**
-	 * Set a new key to this object
-	 */
-	public void setKey(K aKey)
-	{
-		key = aKey;
-	}
+    /**
+     * Set a new key to this object
+     * 
+     * @param aKey
+     *            the key.
+     */
+    public void setKey(K aKey)
+    {
+        key = aKey;
+    }
 
-	/**
-	 * Returns the value object
-	 */
-	public V getValue()
-	{
-		return value;
-	}
+    /**
+     * Returns the value object
+     * 
+     * @return the value.
+     */
+    public V getValue()
+    {
+        return value;
+    }
 
-	/**
-	 * Sets a new value for this object
-	 */
-	public void setValue(V aValue)
-	{
-		value = aValue;
-	}
+    /**
+     * Sets a new value for this object
+     * 
+     * @param aValue
+     *            the value.
+     */
+    public void setValue(V aValue)
+    {
+        value = aValue;
+    }
 
-	/**
-	 * Checks if this node has children
-	 */
-	public boolean hasChildren()
-	{
-		return children.size() > 0;
-	}
+    /**
+     * Checks if this node has children
+     * 
+     * @return if this node has children.
+     */
+    public boolean hasChildren()
+    {
+        return children.size() > 0;
+    }
 
-	/**
-	 * Gets a child object for a given key. If a node with the given key do not
-	 * exist NULL is returned.
-	 */
-	public KeyValueNode<K, V> getChild(K aKey)
-	{
-		for (KeyValueNode<K, V> node : children) {
-			if (node.key.equals(aKey)) {
-				return node;
-			}
-		}
+    /**
+     * Gets a child object for a given key. If a node with the given key do not exist NULL is
+     * returned.
+     * 
+     * @param aKey
+     *            a key.
+     * @return the child object.
+     */
+    public KeyValueNode<K, V> getChild(K aKey)
+    {
+        for (KeyValueNode<K, V> node : children) {
+            if (node.key.equals(aKey)) {
+                return node;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * Checks if this node has a child with a given key
-	 */
-	public boolean hasChild(K aKey)
-	{
-		return (getChild(aKey) != null);
-	}
+    /**
+     * Checks if this node has a child with a given key
+     * 
+     * @param aKey
+     *            a key.
+     * @return if a child with this key exists.
+     */
+    public boolean hasChild(K aKey)
+    {
+        return (getChild(aKey) != null);
+    }
 
-	/**
-	 * Adds a child object to this node
-	 */
-	public void addChild(KeyValueNode<K, V> aNode)
-	{
-		children.add(aNode);
-	}
+    /**
+     * Adds a child object to this node
+     * 
+     * @param aNode
+     *            a node.
+     */
+    public void addChild(KeyValueNode<K, V> aNode)
+    {
+        children.add(aNode);
+    }
 
-	/**
-	 * Adds child object to this node
-	 */
-	public void addChild(K aKey, V aValue)
-	{
-		addChild(new KeyValueNode<K, V>(aKey, aValue));
-	}
+    /**
+     * Adds child object to this node
+     * 
+     * @param aKey
+     *            a key.
+     * @param aValue
+     *            a value.
+     */
+    public void addChild(K aKey, V aValue)
+    {
+        addChild(new KeyValueNode<K, V>(aKey, aValue));
+    }
 
-	/**
-	 * Returns all children of the node
-	 */
-	public List<KeyValueNode<K, V>> getChildren()
-	{
-		return children;
-	}
+    /**
+     * Returns all children of the node
+     * 
+     * @return all children of the node
+     */
+    public List<KeyValueNode<K, V>> getChildren()
+    {
+        return children;
+    }
 
-	/**
-	 * Set a list of children to this node
-	 */
-	public void setChildren(List<KeyValueNode<K, V>> aChildren)
-	{
-		children = aChildren;
-	}
+    /**
+     * Set a list of children to this node
+     * 
+     * @param aChildren
+     *            the list of children.
+     */
+    public void setChildren(List<KeyValueNode<K, V>> aChildren)
+    {
+        children = aChildren;
+    }
 
-	/**
-	 * Checks if the node is a leaf node
-	 */
-	public boolean isLeaf()
-	{
-		return !hasChildren();
-	}
+    /**
+     * Checks if the node is a leaf node
+     * 
+     * @return if the node is a leaf node
+     */
+    public boolean isLeaf()
+    {
+        return !hasChildren();
+    }
 }

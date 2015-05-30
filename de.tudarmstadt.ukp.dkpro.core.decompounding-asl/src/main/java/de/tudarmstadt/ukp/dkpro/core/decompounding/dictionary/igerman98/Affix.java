@@ -144,11 +144,13 @@ public class Affix
 		conditionPattern = Pattern.compile(regExp);
 	}
 
-	/**
-	 * Adopt this affix on a given word
-	 * 
-	 * @return The word with a change prefix or affix
-	 */
+    /**
+     * Adopt this affix on a given word
+     * 
+     * @param aWord
+     *            a word.
+     * @return The word with a change prefix or affix
+     */
 	public String handleWord(String aWord)
 	{
 		Matcher m = conditionPattern.matcher(aWord);

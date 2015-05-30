@@ -84,6 +84,11 @@ public class LeftToRightSplitterAlgorithm
 
     /**
      * The basic split algorithm. Moves the word from left to right and checks for valid words.
+     * 
+     * @param aParent
+     *            The parent node
+     * @param aDepth
+     *            the current depth.
      */
     protected void ltrSplit(ValueNode<DecompoundedWord> aParent, int aDepth)
     {
@@ -118,6 +123,10 @@ public class LeftToRightSplitterAlgorithm
 
     /**
      * Splits a word in two word.
+     * 
+     * @param aWord
+     *            a word.
+     * @return the splits.
      */
     protected List<DecompoundedWord> makeSplit(String aWord)
     {

@@ -80,6 +80,11 @@ public class DataDrivenSplitterAlgorithm
 
     /**
      * Builds a splitting tree
+     * 
+     * @param aParent
+     *            The parent node
+     * @param aDepth
+     *            the current depth.
      */
     protected void splitIt(ValueNode<DecompoundedWord> aParent, int aDepth)
     {
@@ -125,6 +130,10 @@ public class DataDrivenSplitterAlgorithm
     /**
      * Makes a single split on a given word. Returns all possible splittings. All splits consist of
      * two elements
+     * 
+     * @param aWord
+     *            a word.
+     * @return all possible splittings.
      */
     protected List<DecompoundedWord> makeSplit(String aWord)
     {

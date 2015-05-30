@@ -33,6 +33,9 @@ public class TrieStructure
 
     /**
      * Adds a word to the tree. Also increments the successor value for each node
+     * 
+     * @param aWord
+     *            a word.
      */
     public void addWord(String aWord)
     {
@@ -61,7 +64,11 @@ public class TrieStructure
     }
 
     /**
-     * Finds a not with a given string. If not found NULL is returned.
+     * Finds a node with a given string. If not found NULL is returned.
+     * 
+     * @param aWord
+     *            a word.
+     * @return a node with a given string or {@code null}.
      */
     public KeyValueNode<String, Integer> findWord(String aWord)
     {
@@ -91,6 +98,10 @@ public class TrieStructure
     /**
      * Returns the number of successor for a node. If the node could not be found the return value
      * is 0.
+     * 
+     * @param aWord
+     *            a word.
+     * @return the number of successor for a node.
      */
     public Integer getSuccessors(String aWord)
     {
@@ -104,6 +115,10 @@ public class TrieStructure
 
     /**
      * Creates a Trie object for a SimpleDictionary
+     * 
+     * @param aDict
+     *            a dictionary.
+     * @return the resulting trie.
      */
     public static TrieStructure createForDict(Dictionary aDict)
     {
@@ -118,6 +133,10 @@ public class TrieStructure
 
     /**
      * Creates a Trie object for a SimpleDictionary with all words reversed
+     * 
+     * @param aDict
+     *            a dictionary.
+     * @return the resulting trie.
      */
     public static TrieStructure createForDictReverse(Dictionary aDict)
     {

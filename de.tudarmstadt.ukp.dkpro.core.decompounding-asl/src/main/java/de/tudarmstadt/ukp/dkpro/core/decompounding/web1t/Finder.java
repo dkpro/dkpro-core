@@ -57,9 +57,11 @@ public class Finder
      * In case of performance it is recommended to use only one instance of this class.
      * 
      * @param aIndexFolder
-     *            The folder to the lucene index or a folder with multiple indexes.
+     *            The folder to the Lucene index or a folder with multiple indexes.
      * @param nGramFolder
      *            The folder to the JWeb1T n-grams.
+     * @throws IOException
+     *             if the data could not be read.
      */
     public Finder(File aIndexFolder, File nGramFolder)
         throws IOException
@@ -141,6 +143,7 @@ public class Finder
      * 
      * @param aGram
      *            A String of token split by space
+     * @return all n-grams in the index.
      */
     public List<NGramModel> find(String aGram)
     {
@@ -152,6 +155,7 @@ public class Finder
      * 
      * @param aToken
      *            A list of tokens
+     * @return the n-grams.
      */
     @SuppressWarnings("unchecked")
     public List<NGramModel> find(String[] aToken)

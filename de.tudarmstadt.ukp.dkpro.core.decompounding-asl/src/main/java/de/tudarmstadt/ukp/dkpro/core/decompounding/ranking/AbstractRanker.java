@@ -61,25 +61,39 @@ public abstract class AbstractRanker implements Ranker
 		return finder;
 	}
 
-	/**
-	 * Gets the frequency of a Split Element
-	 */
+    /**
+     * Gets the frequency of a Split Element
+     * 
+     * @param aWord
+     *            a fragment.
+     * @return the frequency.
+     */
 	protected BigInteger freq(Fragment aWord)
 	{
 		return finder.freq(aWord.getWord());
 	}
 
-	/**
-	 * Returns the frequency of n-grams that contain both split elements
-	 */
+    /**
+     * Returns the frequency of n-grams that contain both split elements
+     * 
+     * @param aWord1
+     *            a fragment.
+     * @param aWord2
+     *            another fragment.
+     * @return the n-gram frequency.
+     */
 	protected BigInteger freq(Fragment aWord1, Fragment aWord2)
 	{
 		return freq(new String[] { aWord1.getWord(), aWord2.getWord() });
 	}
 
-	/**
-	 * Returns the frequency for a array of words
-	 */
+    /**
+     * Returns the frequency for a array of words
+     * 
+     * @param aWords
+     *            the words.
+     * @return the frequency.
+     */
 	protected BigInteger freq(String[] aWords)
 	{
 		BigInteger total = BigInteger.valueOf(0l);
@@ -114,9 +128,13 @@ public abstract class AbstractRanker implements Ranker
 		finder = aFinder;
 	}
 
-	/**
-	 * Expects that the splits list contains at least one element and that this is the unsplit word.
-	 */
+    /**
+     * Expects that the splits list contains at least one element and that this is the unsplit word.
+     * 
+     * @param aSplits
+     *            the splits.
+     * @return the filtered splits.
+     */
 	public static List<DecompoundedWord> filterAndSort(List<DecompoundedWord> aSplits) {
 		List<DecompoundedWord> filtered = new ArrayList<DecompoundedWord>();
 		for (DecompoundedWord s : aSplits) {

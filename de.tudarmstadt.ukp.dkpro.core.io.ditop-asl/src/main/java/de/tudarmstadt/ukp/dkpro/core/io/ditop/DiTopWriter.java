@@ -389,6 +389,7 @@ public class DiTopWriter
      * If it does, returns the matching value; if not, it returns the original value.
      *
      * @param collectionId
+     *            the collection ID.
      * @return the first entry from {@code collectionValuesSet} that contains the (lowercased)
      *         {@code collectionId} or the input {@code collectionId}.
      */
