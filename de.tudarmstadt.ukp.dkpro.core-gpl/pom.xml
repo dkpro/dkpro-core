@@ -144,25 +144,6 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>build-apidocs</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<inherited>false</inherited>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>aggregate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 			<!-- Profile for modules with dependencies that are not on Maven Central -->
 			<id>deps-not-on-maven-central</id>
 			<repositories>
