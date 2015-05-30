@@ -521,7 +521,7 @@ class TreeTaggerPosTaggerTest
                 "ppron12:sg:inst:f:sec", "ppron12:sg:inst:m1:pri", "ppron12:sg:inst:m1:pri:nakc",
                 "ppron12:sg:inst:m1:sec", "ppron12:sg:inst:n:sec", "ppron12:sg:loc:f:pri",
                 "ppron12:sg:loc:f:sec", "ppron12:sg:loc:m1:pri", "ppron12:sg:loc:m1:sec",
-                "ppron12:sg:loc:m3:pri", "ppron12:sg:nom:f:pri", "ppron12:sg:nom:f:pri:nakc",
+                "ppron12:sg:loc:m3:pri", "ppron12:sg:nom:f:pri",
                 "ppron12:sg:nom:f:sec", "ppron12:sg:nom:m1:pri", "ppron12:sg:nom:m1:pri:akc",
                 "ppron12:sg:nom:m1:pri:nakc", "ppron12:sg:nom:m1:sec", "ppron12:sg:nom:m1:sec:akc",
                 "ppron12:sg:nom:m2:pri", "ppron12:sg:nom:m2:sec", "ppron12:sg:nom:m3:pri",

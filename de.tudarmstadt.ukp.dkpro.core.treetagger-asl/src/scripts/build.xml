@@ -574,7 +574,8 @@
 		<mkdir dir="target/download"/>
 		
 		<!-- polish-par-linux-3.2-utf8.bin.gz - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-		  - 2014-06-02 | now        | e7ac63b234ed40f5e850bdac4c883ef1
+		  - 2014-06-02 | 2015-05-06 | e7ac63b234ed40f5e850bdac4c883ef1
+          - 2015-05-06 | now        | bec86e83c25ff19a7ce23e93f89168ee
 		  -->
     	<get 
     		src="http://www.cis.uni-muenchen.de/~schmid/tools/TreeTagger/data/polish-par-linux-3.2-utf8.bin.gz" 
@@ -583,10 +584,10 @@
 		<gunzip src="target/download/polish-par-linux-3.2-utf8.bin.gz"/>
     	<install-stub-and-upstream-file 
     		file="target/download/polish-par-linux-3.2-utf8.bin" 
-    		md5="e7ac63b234ed40f5e850bdac4c883ef1"
+    		md5="bec86e83c25ff19a7ce23e93f89168ee"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.treetagger"
-    		upstreamVersion="20140602"
+    		upstreamVersion="20150506"
     		metaDataVersion="1"
     		tool="tagger" 
     		language="pl" 
