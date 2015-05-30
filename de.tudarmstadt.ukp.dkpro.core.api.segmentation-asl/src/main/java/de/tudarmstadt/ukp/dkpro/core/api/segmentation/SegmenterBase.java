@@ -175,23 +175,24 @@ extends JCasAnnotator_ImplBase
      *            the zone end.
      * @return reduced offsets.
      */
-	protected int[] limit(String text, int aBegin, int aEnd)
+    protected int[] limit(String text, int aBegin, int aEnd)
     {
-		// checking to avoid out-of-bounds
-    	int maxEnd = text.length();
-		int begin = aBegin < 0 ? 0 : aBegin;
-		begin = begin > maxEnd ? maxEnd : begin;
+        // checking to avoid out-of-bounds
+        int maxEnd = text.length();
+        int begin = aBegin < 0 ? 0 : aBegin;
+        begin = begin > maxEnd ? maxEnd : begin;
 
-		int end = aEnd < 0 ? 0 : aEnd;
-		end = end > maxEnd ? maxEnd : end;
+        int end = aEnd < 0 ? 0 : aEnd;
+        end = end > maxEnd ? maxEnd : end;
 
-		if (begin != aBegin || end != aEnd) {
-			getLogger().warn("Adjusted " + "out-of-bounds zone [" + aBegin + "-" + aEnd
-							+ "] to [" + begin + "-" + end + "]");
-		}
+        if (begin != aBegin || end != aEnd) {
+            getLogger().warn(
+                    "Adjusted out-of-bounds zone [" + aBegin + "-" + aEnd + "] to [" + begin + "-"
+                            + end + "]");
+        }
 
-		int[] offsets = { begin, end };
-		return offsets;
+        int[] offsets = { begin, end };
+        return offsets;
     }
 
 	protected Sentence createSentence(final JCas aJCas, final int aBegin,
