@@ -42,6 +42,7 @@ import org.apache.uima.cas.FSIterator;
 import org.apache.uima.cas.Type;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
@@ -88,6 +89,9 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
  * @author Oliver Ferschke
  * @author Niklas Jakob
  */
+@TypeCapability(
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"}
+)
 public class StanfordParser
     extends JCasAnnotator_ImplBase
 {

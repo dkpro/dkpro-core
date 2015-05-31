@@ -23,6 +23,7 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -43,6 +44,9 @@ import edu.stanford.nlp.process.Morphology;
  * 
  * <p>This only works for ENGLISH.</p>
  */
+@TypeCapability(
+        inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma"})
 public class StanfordLemmatizer
     extends JCasAnnotator_ImplBase
 {

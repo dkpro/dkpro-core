@@ -56,8 +56,12 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * DKPro Annotator for the MateToolsPosTagger
  */
-@TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-        "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence"
+        },
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS"})
 public class MatePosTagger
     extends JCasAnnotator_ImplBase
 {
