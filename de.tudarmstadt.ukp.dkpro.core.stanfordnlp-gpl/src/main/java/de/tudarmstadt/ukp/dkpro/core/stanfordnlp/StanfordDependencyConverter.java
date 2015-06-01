@@ -30,6 +30,7 @@ import java.util.Map;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 
 import de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity;
@@ -57,6 +58,11 @@ import edu.stanford.nlp.util.TypesafeMap.Key;
 /**
  * Converts a consituency structure into a dependency structure.
  */
+@TypeCapability(
+        inputs = {
+                "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent"},
+        outputs = {"de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency"})
 public class StanfordDependencyConverter
     extends JCasAnnotator_ImplBase
 {
