@@ -35,34 +35,34 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="de"/>
+	<target name="separate-jars" depends="en"/>
 	
-	<target name="de">
-		<antcall target="de-tiger"/>
+	<target name="en">
+		<antcall target="en-wsj-0-21"/>
 	</target>
 
-	<target name="de-tiger">
-		<mkdir dir="target/download"/>
+	<target name="en-wsj-0-21">
+				<mkdir dir="target/download"/>
 
-		<get 
-    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/de-tiger.tar.gz" 
-    		dest="target/download/de-tiger.tar.gz" 
-    		skipexisting="true"/>
-		<untar 
-			src="target/download/de-tiger.tar.gz" 
-			dest="target/download/" 
-			compression="gzip"/>
-		
-		<install-stub-and-upstream-folder 
-    		folder="target/download/deTiger" 
-    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.flextag"
-    		upstreamVersion="20150421"
-    		metaDataVersion="1"
-    		tool="tagger"
-    		language="de"
-			variant="tiger">
-		</install-stub-and-upstream-folder>
-	</target>
+				<get 
+		    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/en-wsj-0-21.tar.gz" 
+		    		dest="target/download/en-wsj-0-21.tar.gz" 
+		    		skipexisting="true"/>
+				<untar 
+					src="target/download/en-wsj-0-21.tar.gz" 
+					dest="target/download/" 
+					compression="gzip"/>
+				
+				<install-stub-and-upstream-folder 
+		    		folder="target/download/enWsj0-21Model" 
+		    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+		    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.flextag"
+		    		upstreamVersion="20150606"
+		    		metaDataVersion="1"
+		    		tool="tagger"
+		    		language="en"
+					variant="wsj-0-21">
+				</install-stub-and-upstream-folder>
+			</target>
 
 </project>
