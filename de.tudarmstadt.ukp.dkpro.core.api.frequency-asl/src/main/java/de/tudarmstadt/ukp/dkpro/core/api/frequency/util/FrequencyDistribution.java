@@ -212,21 +212,6 @@ public class FrequencyDistribution<T>
         }
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-        // this.freqDist = sortByValue(this.freqDist);
-        for (Object o : freqDist.keySet()) {
-            sb.append((T) o.toString());
-            sb.append(" - ");
-            sb.append(freqDist.get(o));
-            sb.append(System.getProperty("line.separator"));
-        }
-
-        return sb.toString();
-    }
 
     /**
      * Returns the highest frequency that is currently stored.
