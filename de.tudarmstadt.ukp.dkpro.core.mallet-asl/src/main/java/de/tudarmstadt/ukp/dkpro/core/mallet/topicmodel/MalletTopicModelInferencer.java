@@ -139,6 +139,7 @@ public class MalletTopicModelInferencer
 
         inferencer = model.getInferencer();
         malletPipe = new TokenSequence2FeatureSequence(model.getAlphabet());
+
     };
 
     @Override

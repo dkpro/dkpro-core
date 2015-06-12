@@ -23,7 +23,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -74,6 +73,7 @@ public class MalletTopicsProportionsSortedWriter
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
+        getLogger().info("Writing output to " + targetLocation);
     };
 
     /*
@@ -99,10 +99,9 @@ public class MalletTopicsProportionsSortedWriter
         List<Integer> topIndexes = IntStream
                 .range(0, proportions.length)
                 .boxed()
-                .sorted((i1, i2) -> Double.compare(proportions[i1], proportions[i2]))
-                .skip(nTopics <= proportions.length ? proportions.length - nTopics : 0)
+                .sorted((i1, i2) -> -Double.compare(proportions[i1], proportions[i2]))
+                .limit(nTopics)
                 .collect(Collectors.toList());
-        Collections.reverse(topIndexes);
 
         try {
             writer.write(DocumentMetaData.get(aJCas).getDocumentId());

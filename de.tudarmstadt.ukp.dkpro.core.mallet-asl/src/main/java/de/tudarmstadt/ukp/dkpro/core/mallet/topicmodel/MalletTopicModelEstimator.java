@@ -98,7 +98,7 @@ public class MalletTopicModelEstimator
      */
     public static final String PARAM_USE_LEMMA = "useLemma";
     @ConfigurationParameter(name = PARAM_USE_LEMMA, mandatory = true, defaultValue = "false")
-    private boolean useLemma;
+    protected boolean useLemma;
 
     /**
      * The number of iterations before hyperparameter optimization begins. Default: 100
@@ -221,7 +221,7 @@ public class MalletTopicModelEstimator
      * @return
      * @throws FeaturePathException
      */
-    private Collection<TokenSequence> generateTokenSequences(JCas aJCas)
+    protected Collection<TokenSequence> generateTokenSequences(JCas aJCas)
         throws FeaturePathException
     {
         Collection<TokenSequence> tokenSequences;
@@ -278,6 +278,14 @@ public class MalletTopicModelEstimator
         Collection<String> tokens;
         if (useLemma) {
             tokens = new ArrayList<>();
+
+            /* concatenate multiple lemmas: */
+            // selectCovered(Lemma.class, annotation).stream()
+            // .map(lemma -> lemma.getValue())
+            // .filter(lemma -> lemma.length() >= minTokenLength)
+            // .reduce((l1, l2) -> l1 + "_" + l2)
+            // .ifPresent(token -> tokens.add(token));
+
             for (Lemma lemma : selectCovered(Lemma.class, annotation)) {
                 String text = lemma.getValue();
                 if (text.length() >= minTokenLength) {
