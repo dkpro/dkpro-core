@@ -32,6 +32,8 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.collection.EntityProcessStatus;
 import org.apache.uima.collection.StatusCallbackListener;
 import org.apache.uima.fit.cpe.CpeBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -41,13 +43,25 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class ReuseTest
 {
+    @Before
+    public void setup()
+    {
+        String prop = "dkpro.core.resourceprovider.sharable." + StanfordParser.class.getName();
+        System.setProperty(prop, "true");
+    }
+    
+    @After
+    public void teardown()
+    {
+        String prop = "dkpro.core.resourceprovider.sharable." + StanfordParser.class.getName();
+        System.getProperties().remove(prop);
+
+    }
+    
     @Test
     public void test()
         throws Exception
     {
-        String prop = "dkpro.core.resourceprovider.sharable." + StanfordParser.class.getName();
-        System.setProperty(prop, "true");
-
         CollectionReaderDescription in = createReaderDescription(TextReader.class,
                 TextReader.PARAM_SOURCE_LOCATION, "src/test/resources/ReuseTest/*.txt", 
                 TextReader.PARAM_LANGUAGE, "en");
