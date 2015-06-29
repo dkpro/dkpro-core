@@ -1,6 +1,29 @@
-- title: DKPro Core
+- title: DKPro
   url: "/"
   side: left
+  dropdown:
+  - title: DKPro Bigdata
+    url: "http://dkpro.github.io/dkpro-bigdata"
+  - title: DKPro JOTL
+    url: "http://dkpro.github.io/dkpro-bigdata"
+  - title: DKPro Lab
+    url: "http://dkpro.github.io/dkpro-lab"
+  - title: DKPro LSR
+    url: "http://dkpro.github.io/dkpro-lsr"
+  - title: DKPro Similarity
+    url: "http://dkpro.github.io/dkpro-similarity"
+  - title: DKPro TC
+    url: "http://dkpro.github.io/dkpro-tc"
+  - title: DKPro Toolbox
+    url: "http://dkpro.github.io/dkpro-toolbox"
+  - title: DKPro WSD
+    url: "http://dkpro.github.io/dkpro-wsd"
+  - title: CSniper
+    url: "http://dkpro.github.io/dkpro-csniper"
+  - title: jweb1t
+    url: "http://dkpro.github.io/jweb1t"
+  - title: UBY
+    url: "http://dkpro.github.io/dkpro-uby"
 
 - title: Downloads
   url: "/maven/"
