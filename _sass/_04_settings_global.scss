@@ -1163,6 +1163,21 @@ $side-nav-divider-style: solid;
 $side-nav-divider-color: $grey-1;
 
 
+// ED: The following changes are necessary for the openhub factoid widget
+// Because it is embedded via iframe, we cannot change the css (width) directly
+// Set minimum size for sidebar to 320px
+// Set maximum size for content to 320px
+aside {
+	min-width: 320px;
+}
+aside iframe {
+	width: 320px !important;
+}
+aside div.openhub iframe {
+	margin: -10px !important;
+	width: 330px !important;
+}
+
 
 // 27. Split Buttons
 // - - - - - - - - - - - - - - - - - - - - - - - - -
