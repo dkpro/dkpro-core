@@ -14,7 +14,6 @@
 - Footer
 - Subfooter
 - CSS-Classes to add margin at top or bottom
-- Various CSS-Classes
 
 */
 
@@ -79,26 +78,11 @@ body.video cite { color: #fff; }
     text-transform: uppercase;
     text-shadow: 0 2px 3px rgba(0,0,0,.4);
 }
-#masthead-logo-text {
-    text-align: left;
-    font-size: $font-size-h2;
-    font-family: $header-font-family;
-    color: #fff;
-//    text-transform: uppercase;
-    text-shadow: 0 2px 3px rgba(0,0,0,.4);
-    height: 96px;
-}
 #masthead-no-image-header {
-    height: 96px;
+    height: 175px;
 }
 #masthead-no-image-header #logo img {
-    margin-top: 20px;
-}
-#masthead-logo-text {
-	background: $primary-color;
-}
-#masthead-logo-text #logo img {
-    margin-top: 20px;
+    margin-top: 60px;
 }
 .backstretch {
     background: $primary-color;
@@ -123,11 +107,6 @@ body.video cite { color: #fff; }
     #masthead-with-text {
         height: 220px;
         padding: 30px 0;
-        font-size: rem-calc(36);
-    }
-    #masthead-logo-text {
-        height: 96px;
-        padding: 0px 0;
         font-size: rem-calc(36);
     }
     #masthead-no-image-header {
@@ -156,10 +135,6 @@ body.video cite { color: #fff; }
         padding: 60px 0;
         height: 300px;
     }
-    #masthead-logo-text {
-        padding: 0px 0;
-        height: 96px;
-    }
 }
 
 
@@ -183,10 +158,6 @@ body.video cite { color: #fff; }
         height: 330px;
         padding: 60px 0;
     }
-    #masthead-logo-text {
-        padding: 0px 0;
-        height: 96px;
-    }
 }
 
 
@@ -209,10 +180,6 @@ body.video cite { color: #fff; }
     #masthead-with-text {
         padding: 95px 0;
         height: 400px;
-    }
-    #masthead-logo-text {
-        padding: 0px 0;
-        height: 96px;
     }
 }
 
@@ -269,7 +236,7 @@ body.video cite { color: #fff; }
 ------------------------------------------------------------------- */
 
 #up-to-top {
-    padding: 60px 0 10px 0;
+    padding: 160px 0 10px 0;
 }
 #up-to-top a {
     font-size: 24px;
@@ -288,7 +255,7 @@ body.video cite { color: #fff; }
 #footer {
     padding-top: 30px;
     padding-bottom: 20px;
-    background: $primary-color;
+    background: $footer-bg;
     color: $footer-color;
     }
     footer p,
@@ -298,7 +265,7 @@ body.video cite { color: #fff; }
     }
 
     #footer a {
-        color: $topbar-bg-color;
+        color: $footer-link-color;
     }
     #footer h4,
     #footer h5 {
@@ -369,8 +336,3 @@ body.video cite { color: #fff; }
 .pr5  { padding-right: 5px !important; }
 .pr10 { padding-right: 10px !important; }
 .pr20 { padding-right: 20px !important; }
-
-/* Various CSS-Classes
-------------------------------------------------------------------- */
-
-.center { text-align: center; }
