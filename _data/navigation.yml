@@ -3,7 +3,7 @@
   side: left
 
 - title: Downloads
-  url: "/downloads/"
+  url: "/maven/"
   side: left
   dropdown:
   - title: Maven
@@ -35,7 +35,7 @@
   side: left
 
 - title: "Contact"
-  url: "/contact/"
+  url: "/mailinglists/"
   side: left
   dropdown:
   - title: "Mailing lists"

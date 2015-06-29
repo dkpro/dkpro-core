@@ -5,11 +5,6 @@
   class: "services-contact"
   title: "Contact"
 
-- name: "RSS"
-  url: "/feed.xml"
-  class: "rss-link"
-  title: "Subscribe to RSS"
-
 - name: "sitemap.xml"
   url: "/sitemap.xml"
   class: "sitemap-link"
