@@ -1,27 +1,27 @@
+## Readme (Import)
 
-## Draft for a new DKPro Core website
+These short guidelines will show you how to get a local copy of the dkpro page template and how to correctly import it into a special branch used for github websites (gh-pages). At the end you will have 
 
-This is a fork of [Feeling Responsive][1], which is licensed under [MIT license][2].
-It is a template for Jekyll (used by github) to build static pages.
+- (on github) a branch **gh-pages** where the website for your project is stored
+- (locally) a seperate directory for the gh-pages branch of your project which (initially) includes the files of the dkpro-page-template
 
-A few ToDos:
-* Discuss colors
-* Discuss font family for headers
-* Front page icons: same color (grey? +1), centered, no shadows, maybe a bit smaller
-* Discuss frontpage layout
-	* SH: Splash page?
-* Fix links not working in subheader/intro
-* Discuss menu structure, site content
-	* Submenu items?
-* atm content pages use markdown. There exists a plugin for asciidoc ([jekyll-asciidoc][3]), but it is not supported by github-jekyll yet - the site would have to be built offline, then uploaded. This could probably be done using Jenkins?
-	* For now weĺl make do with markdown.
-* Work on sidebar, footer
-	* Mailing lists in footer
-* Check/Solve iOS problems
-* Add content...
+Below, replace YourProjectName with... your project name (e.g. dkpro-csniper, dkpro-statistics, ...)
 
-
-
- [1]: http://phlow.github.io/feeling-responsive/
- [2]: https://github.com/Phlow/feeling-responsive/blob/gh-pages/LICENSE
- [3]: https://github.com/asciidoctor/jekyll-asciidoc
+- cd into the directory where all your local git repositories are located
+- clone project repo into separate directory (here named YourProjectName-page)
+	- `git clone https://github.com/dkpro/YourProjectName.git YourProjectName-page`
+- add dkpro-page-template repo as additional remote
+	- `cd YourProjectName-page`
+	- `git remote add dkpro-page-template https://github.com/dkpro/dkpro-page-template.git`
+- fetch remote branch
+	- `git remote update`
+- create and switch to orphaned gh-pages branch
+	- `git checkout --orphan gh-pages`
+- locally remove leftover files from master branch
+	- `git rm -rf .`
+- merge template into project gh-pages branch
+	- `git merge dkpro-page-template/gh-pages`
+- push locally created branch to your project repo
+	- `git push -u origin gh-pages`
+- make some changes to the page
+	- see [ModifiyPage.md](ModifiyPage.md)
