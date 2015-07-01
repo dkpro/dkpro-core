@@ -24,4 +24,4 @@ Below, replace YourProjectName with... your project name (e.g. dkpro-csniper, dk
 - push locally created branch to your project repo
 	- `git push -u origin gh-pages`
 - make some changes to the page
-	- see [ModifiyPage.md](ModifiyPage.md)
+	- see [ModifyPage.md](ModifyPage.md)
