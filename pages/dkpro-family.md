@@ -4,13 +4,13 @@ title: "DKPro and Related Products"
 permalink: "/dkpro/"
 ---
 
-DKPro encompasses an extensive range of software products, ranging from packages to integrate and develop NLP applications over Java APIs for convenient resource access to readily deployable annotation tools.
+DKPro encompasses an extensive range of software products, from packages to integrate and develop NLP applications over Java APIs for convenient resource access to readily deployable annotation tools.
 
 
 | [DKPro Bigdata](http://dkpro.github.io/dkpro-bigdata) | DKPro large scale processing support | 
 | [DKPro Core](http://dkpro.github.io/dkpro-core) | Collection of software components for natural language processing (NLP) based on the Apache UIMA framework. |
 | [DKPro JOTL](http://dkpro.github.io/dkpro-jotl) | Java OpenThesaurus Library |
-| [DKPro Lab](http://dkpro.github.io/dkpro-lab) | run experiments with different parameters |
+| [DKPro Lab](http://dkpro.github.io/dkpro-lab) |  |
 | [DKPro LSR](http://dkpro.github.io/dkpro-lsr) | Unified API for standard lexical-semantic resources |
 | [DKPro Similarity](http://dkpro.github.io/dkpro-similarity) | Word and text similarity measures |
 | [DKPro Statistics](http://dkpro.github.io/dkpro-statistics) | DKPro Statistics |
