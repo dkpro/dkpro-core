@@ -20,7 +20,9 @@ Adding content pages
 In the folder `pages`, copy the file `example.md` and rename it.
 Have a look at it, and modify it according to your needs. Every such file has to start with **front matter**,
 i.e. two lines containing only `---`, between those go settings for the page (title, layout, etc.).
-After that, just write your content in [Markdown syntax][1]
+After that, just write your content in [Markdown syntax][1].
+
+You find examples for more elaborate markdown in the `_drafts` folder, e.g. for including a TOC or a gallery.
 
 You now may want to change the navigation, to make your new page accessible.
 
