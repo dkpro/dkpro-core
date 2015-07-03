@@ -11,36 +11,36 @@
   - title: "Binaries"
     url: "/binaries/"
 
-- title: Documentation
-  url: "/wiki/"
-  side: left
-  dropdown:
-  - title: "Wiki"
-    url: "/wiki/"
-  - title: "Components"
-    url: "/components/"
-  - title: "Models"
-    url: "/models/"
-  - title: "Formats"
-    url: "/formats/"
-  - title: "Typesystem"
-    url: "/typesystem/"
+#- title: Documentation
+#  url: "/wiki/"
+#  side: left
+#  dropdown:
+#  - title: "Wiki"
+#    url: "/wiki/"
+#  - title: "Components"
+#    url: "/components/"
+#  - title: "Models"
+#    url: "/models/"
+#  - title: "Formats"
+#    url: "/formats/"
+#  - title: "Typesystem"
+#    url: "/typesystem/"
 
 - title: "Issues"
-  url: "http://github.com/dkpro/dkpro-core/issues"
+  url: "http://github.com/dkpro/dkpro-statistics/issues"
   side: left
 
 - title: Source
-  url: "http://github.com/dkpro/dkpro-core"
+  url: "http://github.com/dkpro/dkpro-statistics"
   side: left
 
 - title: "Contact"
   url: "/mailinglists/"
   side: left
-  dropdown:
-  - title: "Mailing lists"
-    url: "/mailinglists/"
-  - title: "Twitter"
-    url: "https://twitter.com/dkprocore"
-  - title: "Contributors"
-    url: "/contributors/"
+#  dropdown:
+#  - title: "Mailing lists"
+#    url: "/mailinglists/"
+#  - title: "Twitter"
+#    url: "https://twitter.com/dkprocore"
+#  - title: "Contributors"
+#    url: "/contributors/"
