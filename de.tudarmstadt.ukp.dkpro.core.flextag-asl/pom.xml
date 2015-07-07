@@ -45,11 +45,6 @@
         </dependency>
         <dependency>
             <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-            <artifactId>de.tudarmstadt.ukp.dkpro.core.flextag-model-tagger-en-wsj-0-21</artifactId>
-            <version>20150606.1</version>
-        </dependency>
-        <dependency>
-            <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
             <artifactId>de.tudarmstadt.ukp.dkpro.core.tokit-asl</artifactId>
         </dependency>
         <dependency>
