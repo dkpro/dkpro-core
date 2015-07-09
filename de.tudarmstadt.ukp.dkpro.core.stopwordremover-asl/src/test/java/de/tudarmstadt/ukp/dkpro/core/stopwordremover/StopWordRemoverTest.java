@@ -86,7 +86,7 @@ public class StopWordRemoverTest
      *
      * @throws UIMAException
      *
-     * @see https://code.google.com/p/dkpro-core-asl/issues/detail?id=600
+     * @see <a href="https://github.com/dkpro/dkpro-core/issues/600">Issue 600</a>
      */
     @Test
     public void testFilesSameLanguage()
