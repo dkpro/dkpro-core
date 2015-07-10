@@ -103,7 +103,7 @@ public abstract class ResourceCollectionReaderBase
      * The wildcard <code>&#47;**&#47;</code> can be used to address any number of sub-directories.
      * The wildcard {@code *} can be used to a address a part of a name.
      */
-    public static final String PARAM_PATTERNS = "patterns";
+    public static final String PARAM_PATTERNS = ComponentParameters.PARAM_PATTERNS;
     @ConfigurationParameter(name = PARAM_PATTERNS, mandatory = false)
     private String[] patterns;
 
