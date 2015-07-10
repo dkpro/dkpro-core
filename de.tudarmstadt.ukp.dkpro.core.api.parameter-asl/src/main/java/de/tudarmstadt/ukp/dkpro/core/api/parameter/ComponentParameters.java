@@ -29,6 +29,12 @@ public final class ComponentParameters
 	public static final String PARAM_LANGUAGE = "language";
 
 	/**
+	 * Variant of the model. Used to address a specific model if here are multiple models
+	 * for one language.
+	 */
+	public static final String PARAM_PATTERNS = "patterns";
+	
+	/**
 	 * Variant of a model the model. Used to address a specific model if here are multiple models
 	 * for one language.
 	 */
