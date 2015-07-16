@@ -113,14 +113,6 @@ public class ClearNlpSegmenter
     }
 
 	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-
-		super.process(aJCas);
-	}
-
-	@Override
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{

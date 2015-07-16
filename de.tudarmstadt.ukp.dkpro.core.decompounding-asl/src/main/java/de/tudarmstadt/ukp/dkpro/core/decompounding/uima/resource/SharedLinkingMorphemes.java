@@ -19,7 +19,6 @@ package de.tudarmstadt.ukp.dkpro.core.decompounding.uima.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Map;
 
 import org.apache.uima.fit.component.Resource_ImplBase;
@@ -30,10 +29,7 @@ import org.apache.uima.resource.ResourceSpecifier;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CasConfigurableProviderBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
-import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
-import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.SimpleDictionary;
 
 public class SharedLinkingMorphemes
     extends Resource_ImplBase

@@ -72,7 +72,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
  * UIMA CAS consumer writing the CAS document text in TEI format.
  */
 @TypeCapability(
-        inputs = { 
+        inputs = {
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph",
                 "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
@@ -106,14 +106,14 @@ public class TeiWriter
     public static final String PARAM_WRITE_CONSTITUENT = ComponentParameters.PARAM_WRITE_CONSTITUENT;
     @ConfigurationParameter(name = PARAM_WRITE_CONSTITUENT, mandatory = true, defaultValue = "false")
     private boolean writeConstituent;
-    
+
     /**
      * Write named entity annotations to the CAS. Overlapping named entities are not supported.
      */
     public static final String PARAM_WRITE_NAMED_ENTITY = ComponentParameters.PARAM_WRITE_NAMED_ENTITY;
     @ConfigurationParameter(name = PARAM_WRITE_NAMED_ENTITY, mandatory = true, defaultValue = "true")
     private boolean writeNamedEntity;
-    
+
     /**
      * Indent the XML.
      */
@@ -121,7 +121,7 @@ public class TeiWriter
     @ConfigurationParameter(name = PARAM_INDENT, mandatory = true, defaultValue = "false")
     private boolean indent;
 
-    private XMLEventFactory xmlef = XMLEventFactory.newInstance();
+    private final XMLEventFactory xmlef = XMLEventFactory.newInstance();
 
     @Override
     public void process(JCas aJCas)
@@ -153,11 +153,11 @@ public class TeiWriter
             xmlEventWriter.add(xmlef.createEndElement(E_TEI_TITLE_STMT, null));
             xmlEventWriter.add(xmlef.createEndElement(E_TEI_FILE_DESC, null));
             xmlEventWriter.add(xmlef.createEndElement(E_TEI_HEADER, null));
-            
+
             // Render text
             xmlEventWriter.add(xmlef.createStartElement(E_TEI_TEXT, null, null));
             xmlEventWriter.add(xmlef.createStartElement(E_TEI_BODY, null, null));
-            
+
             FSIterator<Annotation> iterator = aJCas.getAnnotationIndex().iterator();
 
             Stack<Annotation> stack = new Stack<Annotation>();
@@ -263,12 +263,10 @@ public class TeiWriter
             if (c.getSyntacticFunction() != null) {
                 attributes.add(xmlef.createAttribute(ATTR_FUNCTION, c.getSyntacticFunction()));
             }
-        } {
-            
         }
         return attributes.iterator();
     }
-    
+
     private Optional<String> getTeiTag(Annotation aAnnotation)
     {
         if (aAnnotation instanceof Constituent) {
@@ -277,7 +275,7 @@ public class TeiWriter
                 System.out.println();
             }
         }
-        
+
         if (aAnnotation.getTypeIndexID() == Token.type) {
             if (cTextPattern.matcher(aAnnotation.getCoveredText()).matches()) {
                 return Optional.of(TAG_CHARACTER);

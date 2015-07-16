@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.apache.commons.jxpath.JXPathContext;
-import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.text.AnnotationFS;
@@ -33,7 +32,6 @@ import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceAccessException;
-import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
@@ -42,16 +40,16 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
         "de.tudarmstadt.ukp.dkpro.core.lexmorph.type.POS" }, outputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.NamedEntity" })
 /**
- * 
- * This Analysis Engine annotates 
+ *
+ * This Analysis Engine annotates
  * English single words with semantic field information retrieved from an ExternalResource
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
- *     
+ *
  * @author Judith Eckle-Kohler
- * 
+ *
  * @author Richard Eckart de Castilho
- * 
+ *
  */
 public class SemanticFieldAnnotator
     extends JCasAnnotator_ImplBase
@@ -61,7 +59,7 @@ public class SemanticFieldAnnotator
     private SemanticTagResource semanticFieldResource;
 
     // TODO a parameter for the language would be good
-    
+
     /**
      * Annotation types which should be annotated with semantic fields
      */
@@ -80,13 +78,6 @@ public class SemanticFieldAnnotator
     private String constraint;
 
     @Override
-    public void initialize(final UimaContext context)
-        throws ResourceInitializationException
-    {
-        super.initialize(context);
-    }
-
-    @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
@@ -94,7 +85,7 @@ public class SemanticFieldAnnotator
 
         for (AnnotationFS cover : CasUtil.select(cas,
                 CasUtil.getAnnotationType(cas, annotationType))) {
-            
+
             // If there is a constraint, check if it matches
             if (constraint != null) {
                 JXPathContext ctx = JXPathContext.newContext(cover);
@@ -112,7 +103,7 @@ public class SemanticFieldAnnotator
             else {
                 tokens = JCasUtil.selectCovered(aJCas, Token.class, cover);
             }
-            
+
             for (Token token : tokens) {
                 try {
                     String semanticField = semanticFieldResource.getSemanticTag(token);

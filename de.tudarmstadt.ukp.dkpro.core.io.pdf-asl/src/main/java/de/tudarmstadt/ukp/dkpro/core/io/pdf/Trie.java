@@ -29,7 +29,7 @@ import java.util.TreeMap;
 
 /**
  * A HashMap-based Trie. Zero-length or null keys are not allowed. Null values are allowed.
- * 
+ *
  * @param <V>
  *            the value type.
  */
@@ -118,7 +118,7 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie starting at the given
      * offset in the key string.
-     * 
+     *
      * @param key
      *            the key.
      * @param offset
@@ -158,7 +158,7 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie. This is the same as
      * calling get(key, 0, key.length()).
-     * 
+     *
      * @param key
      *            the key.
      * @return the node.
@@ -171,9 +171,9 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie starting at the given
      * offset in the key string using a specified number of characters.
-     * 
+     *
      * Returns the node even if there is no value set at that point of the Trie!
-     * 
+     *
      * @param key
      *            the key.
      * @param offset
@@ -213,7 +213,7 @@ public class Trie<V>
     /**
      * Try to match the character sequence given in key against the trie starting at the given
      * offset in the key string using a specified number of characters.
-     * 
+     *
      * @param key
      *            the key.
      * @param offset
@@ -243,7 +243,7 @@ public class Trie<V>
 
     /**
      * Checks if the given string is a prefix of a key in the Trie.
-     * 
+     *
      * @param prefix
      *            the prefix.
      * @return if the prefix is in the trie.
@@ -256,7 +256,7 @@ public class Trie<V>
     /**
      * Checks if the given character sequence matches against the trie starting at the given offset
      * in the key string using a specified number of characters.
-     * 
+     *
      * @param prefix
      *            the prefix.
      * @param offset
@@ -277,7 +277,7 @@ public class Trie<V>
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.util.Map#get(java.lang.Object)
      */
     public V get(final Object key)
@@ -298,7 +298,7 @@ public class Trie<V>
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see java.util.Map#putAll(java.util.Map)
      */
     public void putAll(final Map<? extends CharSequence, ? extends V> t)
@@ -354,7 +354,7 @@ public class Trie<V>
 
     /**
      * Utility method to collect the keys.
-     * 
+     *
      * @param c
      *            the character under which the current node is filed in its parent node.
      * @param n
@@ -440,7 +440,7 @@ public class Trie<V>
 
                 final Frame f = stack.peek();
                 final boolean doBreak = false;
-                ;
+
                 if (f.hasNext()) {
                     f.step(); // Go to the next
                     break;

@@ -39,7 +39,7 @@ implements SplitterAlgorithm
 {
 	private final Zerleger2 splitter;
 
-	private Log logger;
+	private final Log logger;
 
 	public AsvToolboxSplitterAlgorithm(File kompVVicTree, File kompVHic, File grfExt)
 			throws ResourceInitializationException
@@ -202,13 +202,12 @@ implements SplitterAlgorithm
 					vvOk = false;
 				}
 			}
-			;
+
 			if (vhOk) {
 				if (zahlvh >= aktwort.length()) {
 					vhOk = false;
 				}
 			}
-			;
 
 			if (vvOk) {
 				for (int i = 0; i < suffixvv.length(); i++) {
