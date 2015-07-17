@@ -21,6 +21,8 @@
     url: "/releases/!LATEST!/formats.html"
   - title: "Typesystem"
     url: "/releases/!LATEST!/typesystem.html"
+  - title: "Javadoc"
+    url: "/releases/!LATEST!/apidocs/index.html"
 
 - title: "Issues"
   url: "http://github.com/dkpro/dkpro-core/issues"
