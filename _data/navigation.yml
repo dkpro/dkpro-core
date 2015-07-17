@@ -1,30 +1,26 @@
 - title: DKPro
-  url: "/dkpro/"
+  url: "http://dkpro.github.io"
+  side: left
+
+- title: Core
+  url: "/"
   side: left
 
 - title: Downloads
   url: "/maven/"
   side: left
-  dropdown:
-  - title: Maven
-    url: "/maven/"
-  - title: "Binaries"
-    url: "/binaries/"
 
 - title: Documentation
-  url: "/wiki/"
   side: left
   dropdown:
-  - title: "Wiki"
-    url: "/wiki/"
   - title: "Components"
-    url: "/components/"
+    url: "/releases/!LATEST!/components.html"
   - title: "Models"
-    url: "/models/"
+    url: "/releases/!LATEST!/models.html"
   - title: "Formats"
-    url: "/formats/"
+    url: "/releases/!LATEST!/formats.html"
   - title: "Typesystem"
-    url: "/typesystem/"
+    url: "/releases/!LATEST!/typesystem.html"
 
 - title: "Issues"
   url: "http://github.com/dkpro/dkpro-core/issues"
@@ -35,12 +31,12 @@
   side: left
 
 - title: "Contact"
-  url: "/mailinglists/"
+  url: "/mailinglists.html"
   side: left
   dropdown:
   - title: "Mailing lists"
-    url: "/mailinglists/"
+    url: "/mailinglists.html"
   - title: "Twitter"
-    url: "https://twitter.com/dkprocore"
-  - title: "Contributors"
-    url: "/contributors/"
+    url: "http://twitter.com/dkprocore"
+#  - title: "Contributors"
+#    url: "/contributors/"

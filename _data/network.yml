@@ -2,20 +2,20 @@
 
 - name: "Users"
   url: "http://groups.google.com/group/dkpro-core-user"
-  class: "network-entypo"
+  class: "services-mailinglist"
   title: "Users"
 
 - name: "Developers"
   url: "http://groups.google.com/group/dkpro-core-developers"
-  class: "services-newsletter"
+  class: "services-mailinglist"
   title: "Developers"
 
-- name: "Announcements"
-  url: "http://groups.google.com/group/dkpro-core-announcements"
-  class: "rss-link"
-  title: "Announcements"
+#- name: "Announcements"
+#  url: "http://groups.google.com/group/dkpro-core-announcements"
+#  class: "rss-link"
+#  title: "Announcements"
 
 - name: "Commits"
   url: "http://groups.google.com/group/dkpro-core-source"
-  class: "sitemap-link"
+  class: "services-mailinglist"
   title: "Commits"

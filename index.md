@@ -11,37 +11,37 @@ title: "DKPro Core"
 #   image_fullwidth: "header_unsplash_12.jpg"
 widget-1:
     title: "Components"
-    url: 'http://phlow.github.io/feeling-responsive/blog/'
+    url: 'releases/!LATEST!/components.html'
     text: 'Find out more about our bundled components.'
     image: IconComponents.png
 widget-2:
     title: "Models"
-    url: 'http://phlow.github.io/feeling-responsive/info/'
+    url: 'releases/!LATEST!/models.html'
     text: 'We provide various models accompanying the components.'
     image: IconModels.png
 widget-3:
     title: "Formats"
-    url: 'https://github.com/Phlow/feeling-responsive'
+    url: 'releases/!LATEST!/formats.html'
     text: 'Reading and writing various formats is just one line of code away.'
     image: IconFormatBlank.png
 widget-4:
     title: "Typesystem"
-    url: 'https://github.com/Phlow/feeling-responsive'
+    url: 'releases/!LATEST!/typesystem.html'
     text: 'Our typesystem is comprehensive, yet simple.'
     image: IconTypeSystem.png
 widget-5:
     title: "DKPro with Java"
-    url: 'https://github.com/Phlow/feeling-responsive'
+    url: 'pages/java-intro.html'
     text: 'The original flavour. Use DKPro in your Java projects.'
     image: LogoJava.png
 widget-6:
     title: "DKPro with Groovy"
-    url: 'https://github.com/Phlow/feeling-responsive'
+    url: 'pages/groovy-intro.html'
     text: 'Create self-contained scripts using DKPro and Groovy!'
     image: LogoGroovy.png
 widget-7:
     title: "DKPro with Jython"
-    url: 'https://github.com/Phlow/feeling-responsive'
+    url: 'pages/jython-intro.html'
     text: 'Easily integrate DKPro into your python projects!'
     image: LogoPython.png
 header-1:

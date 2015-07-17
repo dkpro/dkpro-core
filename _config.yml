@@ -21,12 +21,12 @@ description: "DKPro Core is a collection of software components for natural lang
 
 # This URL is the main adresse. Don't include a slash at the end.
 #
-url: "https://dodinh.github.io/dkpro-core-page-draft"
+url: "http://dkpro.github.io/dkpro-core"
 baseurl: ""
 
 # This is for the editing function in _/includes/improve_content.html
 # Leave it empty if your site is not on GitHub/GitHub Pages
-improve_content: https://github.com/dodinh/dkpro-core-page-draft/edit/gh-pages
+improve_content: https://github.com/dkpro/dkpro-core/edit/gh-pages
 
 # This URL points directly to the images directory making
 # things easier to link to images in posts and templates. It needs a slash.

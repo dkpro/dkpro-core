@@ -19,7 +19,7 @@
 #  title: "Sounds und Downloads und mehr"
 
 - name: GitHub
-  url: http://github.com/dkpro-core
+  url: http://github.com/dkpro/dkpro-core
   class: icon-github
   title: "All our code"
 

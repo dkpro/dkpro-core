@@ -1,9 +1,9 @@
 - menu_name: "Services"
 
-- name: "Contact"
-  url: "/contact/"
-  class: "services-contact"
-  title: "Contact"
+#- name: "Contact"
+#  url: "/contact/"
+#  class: "services-contact"
+#  title: "Contact"
 
 - name: "sitemap.xml"
   url: "/sitemap.xml"
