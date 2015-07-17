@@ -2,8 +2,8 @@
 layout: page-fullwidth
 title: "List of components contained in DKPro Core 1.7.0 (ASL/GPL)"
 
-docs-gpl: "http://dkpro-core-gpl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-gpl/tags/de.tudarmstadt.ukp.dkpro.core-gpl-1.7.0/apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
-docs-asl: "http://dkpro-core-asl.googlecode.com/svn/de.tudarmstadt.ukp.dkpro.core-asl/tags/de.tudarmstadt.ukp.dkpro.core-asl-1.7.0/apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
+docs-gpl: "apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
+docs-asl: "apidocs/index.html?de/tudarmstadt/ukp/dkpro/core/"
 ---
 
 Further information on models for particular components can be found in the [list of models](models.html)
