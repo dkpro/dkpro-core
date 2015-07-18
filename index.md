@@ -57,8 +57,10 @@ Many of the wrapped third-party components and the models used by them should be
 
 Please cite DKPro Core itself as:
 
-> Eckart de Castilho, R. and Gurevych, I. (2014). **A broad-coverage collection of portable NLP components for building shareable analysis pipelines**. In Proceedings of the Workshop on Open Infrastructures and Analysis Frameworks for HLT (OIAF4HLT) at COLING 2014, to be published, Dublin, Ireland.
-[(pdf)][1] [(bib)][2]
+> Eckart de Castilho, R. and Gurevych, I. (2014). **A broad-coverage collection of portable NLP components for building shareable analysis pipelines**. In Proceedings of the Workshop on Open Infrastructures and Analysis Frameworks for HLT (OIAF4HLT) at COLING 2014, p 1-11, Dublin, Ireland.
+[(pdf)][COLING_2014_pdf] [(bib)][COLING_2014_bib]
+
+A comprehensive (but probably not complete) list of scientific publications citing DKPro Core can be found on [Google Scholar](http://scholar.google.de/scholar?q=%22DKPro+Core%22).
 
 License
 -------
@@ -72,13 +74,11 @@ About DKPro Core
 
 This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Dr. Iryna Gurevych.
 
-It is now jointly developed at UKP Lab, Technische Universität Darmstadt and Language Technology Lab, Universität Duisburg-Essen.
+It is now jointly developed at UKP Lab, Technische Universität Darmstadt and Language Technology Lab, Universität Duisburg-Essen, and other contributors.
 
 
 <span class="footnotes">**Image sources**: [LogoJava.png][4] by Christian F. Burprich, Creative Commons (Attribution-Noncommercial-Share Alike 3.0 Unported), color changed; [LogoPython.png][5] by IFA; [LogoGroovy.png][6] by pictonic.co; [IconComponents.png][7], [IconModels.png][8] by [Visual Pharm][9]; [IconFormatText.png][10], [IconFormatBlank.png][11] by [Honza Dousek][12]; [IconTypeSystem.png][13] by Designmodo</span>
 
-[1]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/OIAF4HLT2014DKProCore_cameraready.pdf
-[2]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
 [3]: http://www.apache.org/licenses/LICENSE-2.0
 [4]: https://www.iconfinder.com/icons/16890/java_icon#size=128
 [5]: https://www.iconfinder.com/icons/282803/logo_python_icon#size=128
@@ -92,3 +92,6 @@ It is now jointly developed at UKP Lab, Technische Universität Darmstadt and La
 [13]: https://www.iconfinder.com/icons/115791/tag_icon#size=128
 [14]: http://uima.apache.org
 [15]: http://uima.apache.org/uimafit
+[COLING_2014_pdf]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/OIAF4HLT2014DKProCore_cameraready.pdf
+[COLING_2014_bib]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
+
