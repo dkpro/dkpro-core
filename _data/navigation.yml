@@ -11,6 +11,7 @@
   side: left
 
 - title: Documentation
+  url: "/documentation/"
   side: left
   dropdown:
   - title: "Components"
@@ -33,12 +34,13 @@
   side: left
 
 - title: "Contact"
-  url: "/mailinglists.html"
   side: left
   dropdown:
   - title: "Mailing lists"
-    url: "/mailinglists.html"
+    url: "/pages/mailinglists.html"
   - title: "Twitter"
     url: "http://twitter.com/dkprocore"
+  - title: "Contributing"
+    url: "/pages/contributing.html"
 #  - title: "Contributors"
 #    url: "/contributors/"

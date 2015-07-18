@@ -1,0 +1,243 @@
+---
+layout: page-fullwidth
+title: "DKPro Core Release Guide"
+---
+
+<h2>Versioning</h2>
+
+<h3>Versioning scheme<h/3>
+
+<p>
+We use a three-part versioning scheme.
+</p>
+
+<h3>Snapshots</h3>
+
+<p>
+<b>Snapshot scheme</b>: <code>{Major}.{Minor}.{Maintenance}-SNAPSHOT</code>
+</p>
+
+<p>
+The snapshot version is only used in Subversion.
+</p>
+
+<h3>Major/Minor releases</h3>
+
+<p>
+<b>Release scheme</b>: <code>{Major}.{Minor}.{Maintenance}</code>
+</p>
+
+<p>
+When a <b>major or minor release</b> from trunk is made, the Major and Minor components may be changed. The Maintenance component is set to 0.
+</p>
+
+<h6>Example</h6>
+<ul>
+   <li><b>snapshot version</b>: 0.1.0-SNAPSHOT</li>
+   <li><b>release version</b>: 0.1.0</li>
+   <li><b>new snapshot version</b>: 0.2.0-SNAPSHOT</li>
+</ul>
+
+<h3>Maintenance Releases</h3>
+
+<p>
+When a <b>maintenance release</b> is made from a branch, the Major and Minor components may not be changed. The Maintenance component is incremented by one. The final component is updated as for <b>major/minor releases</b>.
+</p>
+
+<h6>Example</h6>
+<ul>
+   <li><b>snapshot version</b>: 0.1.0-SNAPSHOT</li>
+   <li><b>release version</b>: 0.1.0</li>
+   <li><b>new snapshot version</b>: 0.1.1-SNAPSHOT</li>
+</ul>
+
+<h2> Release process</h2>
+
+<h3>One-time preparation</h3>
+
+<ol>
+   <li>sign up on Sonatype if you do not have a user there: https://issues.sonatype.org/</li>
+   <li>ask for a developer to add you in the users list for DKPro Core JIRA Ticket, if you are not there yet</li>
+   <li>all project artifacts are signed using GPG, and the public key is distributed to hkp://pool.sks-keyservers.net/. For more information, please refer to <a href="https://docs.sonatype.org/display/Repository/How+To+Generate+PGP+Signatures+With+Maven">How To Generate PGP Signatures With Maven</a></li>
+   <li>configure your Maven settings.xml by adding your Sonatype user and password as <a href="https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-Changesto%EF%BB%BF{{settings.xml}}">described here</a></li>
+</ol>
+
+<h3>Preparation</h3>
+
+   <ol>
+   <li>issue tracker
+   	    <ol>
+        <li>create next milestone</li>
+        <li>move all bugs on the to-be-released milestone which were not fixed to the next milestone</li>
+        </ol>
+   </li>
+   <li>make sure all extra repositories are removed from all POMs (except ukp-oss-model-releases)</li>
+   <li>make sure all dependencies (except the models) are available on Maven Central</li>
+   <li>make sure all modules that should be part of the release are dependencies of the _distribution_ module</li>
+   <li>make sure all modules are listed in the following sections of the master POM: _modules_, _dependencyManagement_, _cobertura-report_</li>
+   <li>check for unnecessary dependencies
+      <ol>
+      <li>Fix dependencies
+         <ol>
+         <li><code>mvn clean dependency:analyze > analysis.txt</code></li>
+         <li>All dependencies that are detected "_Used undeclared_" must be added (mind to set the scope correctly to save you additional work later)</li>
+         <li>When <i>...api.parameter</i> (only for this dependency!) is detected as "_Unused declared_", it must be set to the scope "_provided_":
+{% highlight xml %}
+<dependency>
+  <groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+  <artifactId>de.tudarmstadt.ukp.dkpro.core.api.parameter-asl</artifactId>
+  <!-- Constants in this dependency are inlined - dependency not required at me -->
+  <scope>provided</scope>        
+</dependency>
+{% endhighlight xml %}
+         </li>
+         <li>All other dependencies that are detected "Unused declared" must be removed or must be marked as used dependencies, e.g.:
+{% highlight xml %}
+<build>
+  <pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <usedDependencies>
+            <!-- Models not detected by byte-code analysis -->
+            <usedDependency>de.tudarmstadt.ukp.dkpro.core:de.tudarmstadt.ukp.dkpro.core.opennlp-model-tagger-de-maxent</usedDependency>
+          </usedDependencies>
+        </configuration>
+      </plugin>
+    </plugins>
+  </pluginManagement>
+</build>
+{% endhighlight xml %}
+         </li>
+         </ol>
+      </li>
+      <li>Fix scopes
+         <ol>
+         <li><code>mvn clean compile dependency:analyze-only > analysis.txt</code></li>
+         <li><code>cat analysis.txt | grep "\(maven-dependency-plugin\|WARNING.*:.*\)" | grep -v ".*:test$" | less</code></li>
+         <li>All dependencies that are detected "Unused declared" with scope "compile" must be changed into scope "test"</li>
+         </ol>
+     </li>
+     </ol>
+   </ol>
+
+<h3>Maven release</h3>
+
+<b>NEEDS UPDATE FOR GITHUB</b>
+
+<ol>
+   <li>make sure the version number in your POM is a -SNAPSHOT version. (This should always be the case for projects under version control.)</li>
+   <li>commit all changes to the svn repository</li>
+   <li>from the command line, type <code>mvn clean install</code> to test if the build works
+      <ul>
+      <li>if some of the unit tests fails due to the error <b>java.lang.!OutOfMemoryError: GC overhead limit exceeded</b>, try the command <code>mvn  -Dmaven.surefire.heap=4g clean install</code>
+      </ul>
+   </li>
+   <li>if this command is successful, type the command <code>mvn -DautoVersionSubmodules=true release:prepare</code>
+      <ul>
+      <li>if some of the unit tests fails due to the error <b>java.lang.!OutOfMemoryError: GC overhead limit exceeded</b>, try the command <code>mvn  -Darguments="-Dmaven.surefire.heap=4g" -DautoVersionSubmodules=true release:prepare</code>
+      </ul>
+   </li>
+   <li>when prompted, 
+      <ol>
+      <li>enter the current release, such as <b>1.1.0</b> for a full release</li>
+      <li>accept the default scm tag</li>
+      <li>and enter the next release such as <b>1.2.0-SNAPSHOT</b></li>
+      <li>enter the passphrase for your GnuPG key when prompted.</li>
+      </ol>
+   </li>
+   <li>if you run into problems creating accessing the SVN or creating the tag in SVN, try specificing your username, password and keyname like this. Mind that if you do that on a machine with other users, it may leak your password via the process list and shell history. So better do this on a private machine and clear your history afterwards:
+      <ul>
+      <li><code>mvn -Dusername={SVN-USERNAME} -Dpassword={SVN-PASSWORD} -DautoVersionSubmodules=true release:prepare</code></li>
+      </ul>
+   </li>
+   <li>finally type the command <code>mvn release:perform</code> 
+      1 if some of the unit tests fails due to the error <b>java.lang.!OutOfMemoryError: GC overhead limit exceeded</b>, try the command <code>mvn  -Darguments="-Dmaven.surefire.heap=4g" release:perform</code></li>
+</ol>
+
+<h3>Staging phase</h3>
+<ol>
+   <li><a href="https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-8a.ReleaseIt">close the staging repository</a></li>
+   <li>send an email to developers mailing list and ask developers to check if deployed artifacts are correct</li>
+   <li>release the staging repository as <a href="https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-8a.ReleaseIt">described here</a></li>
+</ol>
+
+<h3>JavaDoc</h3>
+
+<b>NEEDS UPDATE FOR GITHUB</b>
+
+For every stable release, Javadoc should be generated. To Generate Javadoc
+
+<ol>
+   <li>Copy the "apidocs" folder from the previous stable release svn tag to the current release tag folder in svn (this happens directly on the svn server using a branch/tag/copy operation, not on the local checkout)</li>
+   <li>Check out the appropriate stable release from svn tags</li>
+   <li>from the command line in the root folder just checked out, type <code>mvn javadoc:aggregate</code> to generate the javadoc</li>
+   <li>replace the folder <b>apidocs</b> from the root folder with <b>target/site/apidocs</b>
+      <ul>
+      <li><code>rm apidocs</code></li>
+      <li><code>cp -a target/site/apidocs .</code></li>
+      </ul>
+   <li>commit your change in Eclipse (Eclipse should automatically delete files that are no longer part of the Javadoc)</li>
+</ol>
+
+<h3>Reference Guide</h3>
+
+<b>NEEDS UPDATE FOR GITHUB</b>
+
+<ol>
+   <li>Copy the "book" folder from the previous stable release svn tag to the current release tag folder in svn (this happens directly on the svn server using a branch/tag/copy operation, not on the local checkout)</li>
+   <li>Check out the appropriate stable release from svn tags</li>
+   <li>change the active directory to the <b>de.tudarmstadt.ukp.dkpro.core.docbook-asl</b> module</li>
+   <li>on the command line type <code>mvn clean install</code> to compile the !DocBook format to HTML and PDF</li>
+   <li>change the active directory to the root of the checked out tag</li>
+   <li>replace the folder <b>book</b> with the <b>de.tudarmstadt.ukp.dkpro.core.docbook-asl/target/site/d</b>
+      <ul>
+      <li><code>rm book</code></li>
+      <li><code>cp -a de.tudarmstadt.ukp.dkpro.core.docbook-asl/target/site/d book</code></li>
+      </ul>
+   </li>
+   <li>commit your change in Eclipse (Eclipse should automatically delete files that are no longer part of the book)</li>
+</ol>
+
+<h3>Tag latest release</h3>
+
+<b>NEEDS UPDATE FOR GITHUB</b>
+
+<ol>
+   <li>in Eclipse, if already exist delete from the tags <b>latest-stable</b></li>
+   <li>right click on the latest release in tags and copy it by clicking <b>branch/Tag</b></li>
+   <li>In the Copy to URL field add <b>tags/latest-stable</b></li>
+</ol>
+
+<h3>Announcement</h3>
+
+<b>NEEDS UPDATE FOR GITHUB</b>
+
+<ul>
+   <li>Update Google Code website
+      <ul>
+      <li>Create a page with release notes</li>
+      <li>Update the DKPro Core version in the Create a Project section from the My First DKPro Project wiki page</li>
+      <li>Update the Project Home page linking the release notes page</li>
+      <li>Update sidebar</li>
+      <li>Update wiki start page</li>
+        <ul>
+         <li>Link the release notes page</li>
+         <li>Link the java docs pages for asl and gpl</li>
+         <li>Create the list of components and link it</li>
+         <li>Create the list of models and link it</li>
+         <li>Create the list of supported input/output formats and link it</li>
+        </ul>
+      </li>
+      </ul>
+   </li>
+   <li>Announce the release on mailing lists (Plaintext format, no HTML, max 70 chars wide):
+      <ul>
+      <li><a href="https://groups.google.com/forum/?hl=de#!forum/dkpro-core-announce">DKPro Core announcements</a></li>
+      <li><a href="https://groups.google.com/forum/?hl=de#!forum/dkpro-core-user">DKPro Core users</a></li>
+      <li><a href="http://uima.apache.org/mail-lists.html">Apache UIMA users</a></li>
+      </ul>
+   </li>
+<ul>
