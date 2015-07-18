@@ -4,6 +4,13 @@
 Latest release: {{ site.data.releases[0].version }} ({{ site.data.releases[0].date }})
 </div>
 
+{% if site.posts[0] %}
+<div class="radius b20">
+<h5>Blog posts</h5>
+{% include list-posts.html %}
+</div>
+{% endif %}
+
 <div class="radius b20">
 <iframe id="ytplayer" type="text/html" height="227" src="https://www.youtube.com/embed/?listType=playlist&list=PLENWjbYveblcRX-mAt2PwimyVDDSIORny&color=white&showinfo=1" frameborder="0" allowfullscreen></iframe>
 </div>
