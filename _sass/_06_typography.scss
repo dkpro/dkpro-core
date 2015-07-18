@@ -54,12 +54,14 @@ p {
     hyphens: auto;
 }
 p a,
-article a {
+article a,
+.pseudo-p a {
     font-weight: bold;
     border-bottom: 1px dotted;
 }
 p a:hover,
-article a:hover {
+article a:hover,
+.pseudo-p a:hover {
     border-bottom: 2px solid;
 }
 p a.button,
