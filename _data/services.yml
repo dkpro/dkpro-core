@@ -9,3 +9,7 @@
   url: "/sitemap.xml"
   class: "sitemap-link"
   title: "Sitemap for Google Webmastertools"
+
+- name: "Privacy policy"
+  url: "/privacy.html"
+  title: "Privacy policy"
