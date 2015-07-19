@@ -50,6 +50,8 @@ header-1:
 ---
 
 
+{% include frontpage_icons.html %}
+
 How to cite
 -----------
 
