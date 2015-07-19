@@ -42,5 +42,5 @@
     url: "http://twitter.com/dkprocore"
   - title: "Contributing"
     url: "http://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTING.md"
-#  - title: "Contributors"
-#    url: "/contributors/"
+  - title: "Contributors"
+    url: "http://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTORS.txt"
