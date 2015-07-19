@@ -23,7 +23,7 @@ For a long time, DKPro Core has been exclusively developed by the members of the
 * 2014: becoming a community project.
 * 2015: migration to Github.
 
-**We would like to thank all those who contribute or have contributed to DKPro Core!**
+**We would like to thank [all those who contribute or have contributed](http://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTORS.txt) to DKPro Core!**
 
 -- The DKPro Core team
 
