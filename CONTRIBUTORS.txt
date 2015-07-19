@@ -1,0 +1,44 @@
+# This is the official list of people who can contribute
+# (and typically have contributed) code to the DKPro Core
+# repository.
+#
+# See also https://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTING.md
+
+# Please keep the list sorted.
+    
+Andriy Nadolskyy
+Anil Narassiguing
+Benjamin Herbert
+Carsten Schnober
+Cigdem Toprak <cigdem.toprak@gmail.com>
+Delphine Bernhard
+Dr. Judith Eckle-Kohler
+Emily K. Jamison
+Erik-Lân Do Dinh
+Hans-Peter Zorn
+Ivan Habernal
+Jens Haase <je.haase@googlemail.com>
+Johannes Daxenberger
+Johannes Hoffart
+Judith Eckle-Kohler
+Jungi Kim
+Lisa Beinborn <lisa.beinborn@gmail.com>
+Marcel Ackermann <dreamflasher@dreamflasher.de>
+Martin Riedl <riedl.ma@gmail.com>
+Mateusz Parzonka
+Nicolai Erbs <nico.erbs@gmail.com>
+Niklas Jakob
+Nils Reimers
+Oliver Ferschke
+Pedro Santos
+Richard Eckart de Castilho <richard.eckart@gmail.com>
+Sebastian Kneise
+Seid Muhie Yimam
+Shuo Yang <s.yang@ishuo.de>
+Silvana Hartmann <hartmann.silvan@gmail.com>
+Tim Feuerbach
+Tobias Horsmann
+Torsten Zesch
+Tristan Miller
+Zhemin Zhu
+Zhi Shen
