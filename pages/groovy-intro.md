@@ -3,7 +3,7 @@ layout: page-fullwidth
 title: "Intro using Groovy"
 ---
 
-<div style="text-align:center;">
+<div class="flex-video">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/v51BJEQohoY" frameborder="0" allowfullscreen></iframe>
 </div>
 
