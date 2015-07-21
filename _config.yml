@@ -21,7 +21,7 @@ description: "DKPro Core is a collection of software components for natural lang
 
 # This URL is the main adresse. Don't include a slash at the end.
 #
-url: "http://dkpro.github.io/dkpro-core"
+url: "//dkpro.github.io/dkpro-core"
 baseurl: ""
 
 # This is for the editing function in _/includes/improve_content.html
