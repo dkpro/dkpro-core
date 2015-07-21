@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
  *
- * @author Carsten Schnober
  * @deprecated {@link MalletTopicProportionsWriter} has been deprecated
  */
 @Deprecated

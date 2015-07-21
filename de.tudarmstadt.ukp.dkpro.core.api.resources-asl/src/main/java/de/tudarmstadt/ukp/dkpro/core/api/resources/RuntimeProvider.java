@@ -37,7 +37,6 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 /**
  * Provides temporary installation of binaries from the classpath to the local file system.
  * 
- * @author Richard Eckart de Castilho
  */
 public class RuntimeProvider
 {

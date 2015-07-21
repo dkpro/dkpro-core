@@ -27,7 +27,6 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiTitleParsingException;
  * 
  * No Redirects, disambiguation pages, or discussion pages are regarded, however.
  *
- * @author zesch
  *
  */
 public class WikipediaArticleReader extends WikipediaPageReader

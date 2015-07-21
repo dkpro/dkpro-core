@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * If the {@link #INCLUDE_PREFIX} precedes the split pattern, the pattern is included.
  * Consequently, patterns following the {@link #EXCLUDE_PREFIX}, will not be added as a Token.
  *
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(

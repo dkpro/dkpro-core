@@ -54,8 +54,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * @see <a href="http://snowball.tartarus.org/">Snowball stemmer homepage</a>
  * @see FeaturePathAnnotatorBase
- * @author Benjamin Herbert
- * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
 @TypeCapability(

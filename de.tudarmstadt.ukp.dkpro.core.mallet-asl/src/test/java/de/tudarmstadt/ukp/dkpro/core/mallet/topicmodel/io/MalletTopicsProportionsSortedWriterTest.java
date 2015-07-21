@@ -40,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel.MalletTopicModelInference
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
- * @author Carsten Schnober
  *
  */
 public class MalletTopicsProportionsSortedWriterTest

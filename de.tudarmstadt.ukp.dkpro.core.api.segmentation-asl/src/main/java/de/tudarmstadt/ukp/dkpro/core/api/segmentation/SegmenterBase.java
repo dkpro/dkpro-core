@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 
 /**
- * @author Richard Eckart de Castilho
  */
 public abstract
 class SegmenterBase

@@ -59,7 +59,6 @@ import com.google.common.collect.MinMaxPriorityQueue;
  * @param <T>
  *            the type of the samples
  * @see ConditionalFrequencyDistribution
- * @author zesch
  */
 public class FrequencyDistribution<T>
     implements Serializable

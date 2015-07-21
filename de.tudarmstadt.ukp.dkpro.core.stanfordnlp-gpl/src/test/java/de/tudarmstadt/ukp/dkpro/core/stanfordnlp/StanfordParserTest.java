@@ -54,8 +54,6 @@ import edu.stanford.nlp.ling.StringLabel;
 import edu.stanford.nlp.trees.Tree;
 
 /**
- * @author Oliver Ferschke
- * @author Niklas Jakob
  */
 public class StanfordParserTest
 {

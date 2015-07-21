@@ -34,8 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * lowercase everything but the first character of a token and the characters immediately following
  * a hyphen.
  *
- * @author Richard Eckart de Castilho
- * @author Carsten Schnober
  *
  */
 public class TokenCaseTransformer

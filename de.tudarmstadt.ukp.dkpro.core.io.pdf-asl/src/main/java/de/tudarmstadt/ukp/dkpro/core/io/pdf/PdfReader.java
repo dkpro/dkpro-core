@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
 /**
  * Collection reader for PDF files. Uses simple heuristics to detect headings and paragraphs.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 		outputs = {

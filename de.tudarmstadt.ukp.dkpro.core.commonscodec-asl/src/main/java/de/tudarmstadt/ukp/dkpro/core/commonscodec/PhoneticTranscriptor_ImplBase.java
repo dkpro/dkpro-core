@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Base class for all kinds of phonetic transcriptors based on Apache Commons Codec.
  *
- * @author zesch
  *
  */
 

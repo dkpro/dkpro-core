@@ -45,7 +45,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
  * Takes a text and replaces desired expressions This class should not work on tokens as some
  * expressions might span several tokens
  * 
- * @author Sebastian Kneise
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token" }, 

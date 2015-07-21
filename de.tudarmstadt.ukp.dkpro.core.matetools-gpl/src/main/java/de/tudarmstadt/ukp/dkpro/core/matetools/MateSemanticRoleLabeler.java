@@ -98,7 +98,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * </ul>
  *
  *
- * @author Nils Reimers
  *
  */
 @TypeCapability(

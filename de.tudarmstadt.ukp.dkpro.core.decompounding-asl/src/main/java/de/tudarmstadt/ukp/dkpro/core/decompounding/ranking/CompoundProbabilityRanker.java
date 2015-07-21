@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
 /**
  * Probability based ranking method
  *
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class CompoundProbabilityRanker
 	extends AbstractRanker

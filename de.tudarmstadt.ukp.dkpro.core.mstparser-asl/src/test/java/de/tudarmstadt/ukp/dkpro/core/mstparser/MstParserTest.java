@@ -35,8 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
- * @author beinborn
- * @author zesch
  */
 public class MstParserTest
 {

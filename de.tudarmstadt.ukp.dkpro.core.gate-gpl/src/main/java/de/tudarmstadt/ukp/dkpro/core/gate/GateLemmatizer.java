@@ -46,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  *
  * Based on code by Asher Stern from the BIUTEE textual entailment tool.
  *
- * @author zesch
  * @since 1.4.0
  */
 public class GateLemmatizer

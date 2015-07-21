@@ -82,8 +82,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * {@link mstparser.DependencyInstance DependencyInstance}).
  * </p>
  * 
- * @author beinborn
- * @author zesch
  */
 @TypeCapability(
         inputs = {

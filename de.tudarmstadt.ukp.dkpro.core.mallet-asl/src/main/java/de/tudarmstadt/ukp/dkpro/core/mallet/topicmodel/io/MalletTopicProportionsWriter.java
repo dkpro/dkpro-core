@@ -44,7 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  * {@link MalletTopicModelInferencer} before.
  * </p>
  *
- * @author Carsten Schnober
  * @deprecated use {@link MalletTopicsProportionsSortedWriter}
  */
 @Deprecated

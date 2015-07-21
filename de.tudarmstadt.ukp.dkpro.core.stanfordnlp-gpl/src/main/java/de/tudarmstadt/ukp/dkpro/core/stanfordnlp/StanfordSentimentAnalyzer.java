@@ -43,8 +43,6 @@ import java.util.Properties;
  * 5 scores to each sentence. NOTE: Is very slow in the current state as it runs full Stanford
  * pipeline and does not take into account any existing DKPro annotations.
  *
- * @author Anil Narassiguing
- * @author Ivan Habernal
  */
 @TypeCapability(
 		inputs = {

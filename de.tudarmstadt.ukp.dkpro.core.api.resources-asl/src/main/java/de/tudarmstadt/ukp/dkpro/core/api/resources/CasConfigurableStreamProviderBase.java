@@ -27,7 +27,6 @@ import java.net.URL;
  * CAS-configurable provider produces a resource from a stream instead of an URL. The provider
  * implementation does not have to care about opening/closing the stream.
  * 
- * @author Richard Eckart de Castilho
  *
  * @param <M> the type of resource to produce.
  */

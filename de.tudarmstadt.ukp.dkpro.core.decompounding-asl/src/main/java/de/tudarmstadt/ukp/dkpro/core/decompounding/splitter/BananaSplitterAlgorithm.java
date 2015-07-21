@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
 /**
  * Wrapper for the banana splitter algorithm
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class BananaSplitterAlgorithm
     implements SplitterAlgorithm

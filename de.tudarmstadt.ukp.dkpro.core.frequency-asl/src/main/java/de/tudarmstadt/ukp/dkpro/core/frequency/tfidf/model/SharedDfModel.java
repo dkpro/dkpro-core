@@ -32,7 +32,6 @@ import org.apache.uima.util.InvalidXMLException;
 /**
  * Shared {@link DfModel}.
  * 
- * @author Mateusz Parzonka
  * 
  */
 public class SharedDfModel

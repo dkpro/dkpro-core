@@ -32,7 +32,6 @@ import org.apache.uima.cas.text.AnnotationFS;
 /**
  * Converts a PDF to a CAS. Uses a substitution table.
  * 
- * @author Richard Eckart de Castilho
  */
 public class Pdf2CasConverter
     extends PdfLayoutEventStripper

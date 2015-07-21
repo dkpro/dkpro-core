@@ -50,7 +50,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Merges any Tokens that are covered by a given annotation type. E.g. this component can be used
  * to create a single tokens from all tokens that constitute a multi-token named entity.
  *
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(

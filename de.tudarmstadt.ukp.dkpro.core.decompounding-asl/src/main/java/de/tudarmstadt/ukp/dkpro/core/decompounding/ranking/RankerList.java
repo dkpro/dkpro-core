@@ -25,7 +25,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.splitter.DecompoundedWord;
 /**
  * Ranking interface for list of splits
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public interface RankerList
     extends Ranker

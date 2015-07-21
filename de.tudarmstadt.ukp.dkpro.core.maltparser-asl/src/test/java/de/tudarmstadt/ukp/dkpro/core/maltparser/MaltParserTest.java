@@ -40,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TagsetDescriptionStripper;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
- * @author Oliver Ferschke
  */
 public class MaltParserTest
 {

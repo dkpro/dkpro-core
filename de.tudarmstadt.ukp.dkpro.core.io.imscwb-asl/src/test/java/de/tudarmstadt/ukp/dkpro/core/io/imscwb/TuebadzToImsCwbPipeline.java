@@ -30,7 +30,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 
 /**
  *
- * @author Erik-Lân Do Dinh
  */
 @Ignore("This is to convert the actual corpus!")
 public class TuebadzToImsCwbPipeline

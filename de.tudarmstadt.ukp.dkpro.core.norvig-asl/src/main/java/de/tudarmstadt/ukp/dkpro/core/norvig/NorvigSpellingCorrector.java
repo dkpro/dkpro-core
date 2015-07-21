@@ -36,8 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
  * Creates {@link SofaChangeAnnotation}s containing corrections for previously identified spelling
  * errors.
  *
- * @author Richard Eckart de Castilho
- * @author Delphine Bernhard
  */
 
 @TypeCapability(

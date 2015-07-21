@@ -26,7 +26,6 @@ import org.apache.solr.common.SolrInputDocument;
 /**
  * Helper utilities.
  *
- * @author Carsten Schnober
  *
  */
 public class SolrUtils

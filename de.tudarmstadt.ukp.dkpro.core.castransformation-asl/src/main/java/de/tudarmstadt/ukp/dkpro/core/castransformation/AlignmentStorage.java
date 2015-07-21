@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
  * Use to smuggle the alignment state from the {@link ApplyChangesAnnotator} to the
  * {@link Backmapper}.
  *
- * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
 public class AlignmentStorage

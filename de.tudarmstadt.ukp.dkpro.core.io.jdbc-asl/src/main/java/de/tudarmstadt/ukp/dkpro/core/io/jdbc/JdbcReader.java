@@ -55,7 +55,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * will create a CAS for each record, write the content of "text" column into CAS documen text and
  * that of "title" column into the document title field of the {@link DocumentMetaData} annotation.
  *
- * @author Shuo Yang
  *
  */
 

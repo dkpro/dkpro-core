@@ -69,7 +69,6 @@ import de.tudarmstadt.ukp.wikipedia.util.templates.WikipediaTemplateInfoGenerato
  * {@link WikipediaStandardReaderBase}
  * </p>
  *
- * @author Oliver Ferschke
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.io.jwpl.type.DBConfig",
         "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData" })

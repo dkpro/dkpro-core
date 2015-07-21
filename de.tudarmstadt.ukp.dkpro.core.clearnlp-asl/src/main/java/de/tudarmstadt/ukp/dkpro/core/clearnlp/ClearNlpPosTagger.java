@@ -66,7 +66,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Part-of-Speech annotator using Clear NLP. Requires {@link Sentence}s to be annotated before.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
     inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",

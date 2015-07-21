@@ -52,8 +52,6 @@ import edu.stanford.nlp.process.WordToSentenceProcessor;
 import edu.stanford.nlp.process.WordToSentenceProcessor.NewlineIsSentenceBreak;
 
 /**
- * @author Richard Eckart de Castilho
- * @author Oliver Ferschke
  */
 public
 class StanfordSegmenter

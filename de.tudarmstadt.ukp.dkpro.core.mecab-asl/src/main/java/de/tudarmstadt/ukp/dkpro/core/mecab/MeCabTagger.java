@@ -61,8 +61,6 @@ import de.tudarmstadt.ukp.dkpro.core.mecab.type.JapaneseToken;
  * </ul>
  *
  *
- * @author Jungi Kim
- * @author Tobias Horsmann
  */
 @TypeCapability(
         outputs={ "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

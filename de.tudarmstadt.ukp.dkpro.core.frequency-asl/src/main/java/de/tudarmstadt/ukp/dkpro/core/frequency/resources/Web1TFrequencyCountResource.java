@@ -37,7 +37,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TFileAccessProvider;
 /**
  * External resource wrapper for the Web1T frequency count provider.
  * 
- * @author zesch
  *
  */
 public final class Web1TFrequencyCountResource

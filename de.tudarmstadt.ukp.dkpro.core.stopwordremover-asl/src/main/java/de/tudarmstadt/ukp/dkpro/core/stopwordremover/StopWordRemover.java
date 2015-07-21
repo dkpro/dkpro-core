@@ -58,7 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Remove all of the specified types from the CAS if their covered text is in the stop word
  * dictionary. Also remove any other of the specified types that is covered by a matching instance.
  *
- * @author Richard Eckart de Castilho
  */
 public class StopWordRemover
 	extends JCasAnnotator_ImplBase

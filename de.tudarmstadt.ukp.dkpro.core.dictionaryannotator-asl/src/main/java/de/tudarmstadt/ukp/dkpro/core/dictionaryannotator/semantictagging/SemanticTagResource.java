@@ -43,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * that annotate tokens with semantic tags looked up in a key-value map
  * e.g., to annotate common nouns with semantic field information from WordNet.
  *     
- * @author Judith Eckle-Kohler
  * 
  */
 

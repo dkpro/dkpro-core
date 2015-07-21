@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Stemmer using Morpha.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
         inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

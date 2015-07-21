@@ -86,8 +86,6 @@ import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelati
 /**
  * Stanford Parser component.
  *
- * @author Oliver Ferschke
- * @author Niklas Jakob
  */
 @TypeCapability(
         inputs = {"de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token"}

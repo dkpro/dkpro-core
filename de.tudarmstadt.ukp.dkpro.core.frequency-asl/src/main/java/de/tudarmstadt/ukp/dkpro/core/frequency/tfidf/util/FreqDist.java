@@ -24,7 +24,6 @@ import java.util.Map.Entry;
 /**
  * An object that counts objects. Inspired by NLTKs FreqDist-class.
  * 
- * @author Mateusz Parzonka
  * 
  * @param <T>
  *            The type of element which is counted.

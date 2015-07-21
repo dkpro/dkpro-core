@@ -47,7 +47,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Lemmatizer using Clear NLP.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 		inputs = {

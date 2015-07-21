@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
  *
  * No Redirects or disambiguation pages are regarded, however.
  *
- * @author ferschke
  *
  */
 @TypeCapability(

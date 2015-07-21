@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.NGramModel;
 /**
  * Contains base method for the ranking algorithms
  *
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public abstract class AbstractRanker implements Ranker
 {

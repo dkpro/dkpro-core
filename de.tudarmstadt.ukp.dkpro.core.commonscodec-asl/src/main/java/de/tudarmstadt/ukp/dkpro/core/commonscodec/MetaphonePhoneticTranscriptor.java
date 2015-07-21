@@ -24,7 +24,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
  * Metaphone phonetic transcription based on Apache Commons Codec.
  * Works for English.
  *
- * @author zesch
  *
  */
 

@@ -37,7 +37,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Removing trailing character (sequences) from tokens, e.g. punctuation.
  *
- * @author Carsten Schnober
  *
  */
 public class TrailingCharacterRemover

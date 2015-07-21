@@ -36,7 +36,6 @@ import org.apache.commons.compress.compressors.xz.XZCompressorOutputStream;
 /**
  * Utility methods for dealing with compressed data.
  * 
- * @author Richard Eckart de Castilho
  */
 public class CompressionUtils
 {

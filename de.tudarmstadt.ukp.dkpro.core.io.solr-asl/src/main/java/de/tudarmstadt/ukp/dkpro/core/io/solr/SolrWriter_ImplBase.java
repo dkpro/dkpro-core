@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * incoming CAS, and adds the result to the Solr server. A commit is executed when all documents are
  * processed.
  *
- * @author Carsten Schnober
  *
  *
  */

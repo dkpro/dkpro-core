@@ -84,8 +84,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * 
  * Sentences are separated by a blank new line.
  * 
- * @author Seid Muhie Yimam
- * @author Richard Eckart de Castilho
  * 
  * @see <a href="https://web.archive.org/web/20131216222420/http://ilk.uvt.nl/conll/">CoNLL-X Shared Task: Multi-lingual Dependency Parsing</a>
  */

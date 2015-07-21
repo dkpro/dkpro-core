@@ -38,8 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
  *
  * (This was previously called TokenFilter).
  *
- * @author Torsten Zesch
- * @author Richard Eckart de Castilho
  */
 public class AnnotationByLengthFilter
 	extends JCasAnnotator_ImplBase

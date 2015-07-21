@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.type.ReadabilityScore;
 /**
  * Assign a set of popular readability scores to the text.
  *
- * @author zesch, zhu
  */
 public class ReadabilityAnnotator 
     extends JCasAnnotator_ImplBase

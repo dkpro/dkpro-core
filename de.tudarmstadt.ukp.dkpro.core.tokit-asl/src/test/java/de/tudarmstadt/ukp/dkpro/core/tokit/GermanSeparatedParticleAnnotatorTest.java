@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 
 /**
- * @author Judith Eckle-Kohler
  *
  */
 public class GermanSeparatedParticleAnnotatorTest

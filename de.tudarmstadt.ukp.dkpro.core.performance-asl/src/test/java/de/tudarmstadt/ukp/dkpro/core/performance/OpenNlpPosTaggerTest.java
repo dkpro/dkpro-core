@@ -30,7 +30,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpPosTagger;
 import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
- * @author zesch
  *
  */
 public class OpenNlpPosTaggerTest

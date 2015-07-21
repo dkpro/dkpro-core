@@ -24,7 +24,6 @@ import org.apache.uima.fit.descriptor.TypeCapability;
  * Cologne phonetic (Kölner Phonetik) transcription based on Apache Commons Codec.
  * Works for German.
  *
- * @author zesch
  *
  */
 

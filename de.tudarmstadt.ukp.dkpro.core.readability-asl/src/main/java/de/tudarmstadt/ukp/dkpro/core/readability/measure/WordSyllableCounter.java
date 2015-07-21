@@ -27,7 +27,6 @@ import java.util.Set;
  * This class is based on the methods of 'syll_en' and 'syll_de' 
  * in Linux'Style' command (a part of 'diction' package). 
  * 
- * @author zhu, zesch
  *
  */
 public class WordSyllableCounter {

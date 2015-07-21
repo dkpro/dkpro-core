@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Tokenizer using Clear NLP.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    outputs = {

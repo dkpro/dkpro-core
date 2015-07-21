@@ -70,8 +70,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.penntree.PennTreeUtils;
  * This CollectionReader reads a file which is formatted in the NEGRA export format. The texts and
  * add. information like constituent structure is reproduced in CASes, one CAS per text (article) .
  *
- * @author Erik-Lân Do Dinh
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

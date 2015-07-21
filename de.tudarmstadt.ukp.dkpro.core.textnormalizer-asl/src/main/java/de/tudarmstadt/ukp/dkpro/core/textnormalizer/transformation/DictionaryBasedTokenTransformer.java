@@ -43,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * Reads a tab-separated file containing mappings from one token to another. All tokens that match
  * an entry in the first column are changed to the corresponding token in the second column.
  *
- * @author Carsten Schnober
  */
 public class DictionaryBasedTokenTransformer
     extends JCasTransformerChangeBased_ImplBase

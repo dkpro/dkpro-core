@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * lemma from those readings. If no readings could be found, the original text is assigned as
  * lemma.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    inputs = {

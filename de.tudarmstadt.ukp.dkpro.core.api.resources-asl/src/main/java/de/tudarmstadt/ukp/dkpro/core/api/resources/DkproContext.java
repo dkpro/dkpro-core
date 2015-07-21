@@ -23,7 +23,6 @@ import java.io.IOException;
 /**
  * Runtime context for DKPro.
  *
- * @author Richard Eckart de Castilho
  */
 public
 class DkproContext

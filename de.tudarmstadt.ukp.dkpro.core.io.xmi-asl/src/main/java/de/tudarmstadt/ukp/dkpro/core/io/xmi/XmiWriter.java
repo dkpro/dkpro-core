@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
         inputs={

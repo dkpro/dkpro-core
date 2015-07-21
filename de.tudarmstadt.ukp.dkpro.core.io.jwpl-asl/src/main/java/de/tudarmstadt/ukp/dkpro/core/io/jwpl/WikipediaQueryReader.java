@@ -28,7 +28,6 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 /**
  * Reads all article pages that match a query created by the numerous parameters of this class.
  *
- * @author zesch
  *
  */
 public class WikipediaQueryReader

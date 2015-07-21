@@ -54,7 +54,6 @@ import edu.stanford.nlp.util.IntPair;
 /**
  * Utility class for the StanfordParser
  * 
- * @author Oliver Ferschke
  */
 public class TreeUtils
 {

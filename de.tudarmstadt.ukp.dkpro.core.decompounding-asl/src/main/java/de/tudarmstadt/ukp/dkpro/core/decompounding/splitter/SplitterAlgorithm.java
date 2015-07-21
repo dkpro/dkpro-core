@@ -24,7 +24,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.LinkingMorphemes;
 /**
  * Interface for all splitting algorithms
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public interface SplitterAlgorithm
 {

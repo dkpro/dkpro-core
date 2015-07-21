@@ -43,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 
 /**
- * @author Richard Eckart de Castilho
  */
 public class PennTreeUtilsTest
 {

@@ -24,7 +24,6 @@ import java.util.List;
  * Java port of readability measures from the Linux 'style' command ('diction'
  * package).
  * 
- * @author zhu, zesch
  */
 // FIXME add unit test
 public class ReadabilityMeasures

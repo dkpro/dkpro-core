@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
 /**
  * 
- * @author erbs, zesch
  * 
  */
 public class TfidfAnnotatorTest

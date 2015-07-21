@@ -16,7 +16,6 @@
  * limitations under the License.
  ******************************************************************************/
 /**
- * @author Richard Eckart de Castilho
  *
  */
 package de.tudarmstadt.ukp.dkpro.core.morpha;

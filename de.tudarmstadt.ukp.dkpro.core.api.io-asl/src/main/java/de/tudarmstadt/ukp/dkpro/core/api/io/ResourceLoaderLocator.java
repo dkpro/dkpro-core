@@ -30,7 +30,6 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 /**
  * External Resource that simply instanciates a spring ResourcePatternResolver.
  * 
- * @author zorn
  * 
  */
 

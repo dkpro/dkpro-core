@@ -29,7 +29,6 @@ import java.util.Set;
  * 
  * This class is not synchronized internally.
  * 
- * @author Richard Eckart
  */
 public class AlignedString
     implements Iterable<AlignedString.DataSegment>
@@ -834,7 +833,6 @@ public class AlignedString
     /**
      * Base class for the data segments
      * 
-     * @author Richard Eckart
      */
     abstract class AbstractDataSegment
         implements AlignedString.DataSegment
@@ -910,7 +908,6 @@ public class AlignedString
     /**
      * A segment that is not contained in the underlying data
      * 
-     * @author Richard Eckart
      */
     class BaseSegment
         extends AbstractDataSegment
@@ -972,7 +969,6 @@ public class AlignedString
     /**
      * A data segment that accesses the underlying data.
      * 
-     * @author Richard Eckart
      */
     class ObliqueSegment
         extends AbstractDataSegment
@@ -1044,7 +1040,6 @@ public class AlignedString
     /**
      * Segment serving as an anchor for higher level data.
      * 
-     * @author Richard Eckart
      */
     class AnchorSegment
         extends AbstractDataSegment
@@ -1115,7 +1110,6 @@ public class AlignedString
 /**
  * DataSegment iterator.
  * 
- * @author Richard Eckart
  */
 class DataSegmentIterator
     implements Iterator<AlignedString.DataSegment>

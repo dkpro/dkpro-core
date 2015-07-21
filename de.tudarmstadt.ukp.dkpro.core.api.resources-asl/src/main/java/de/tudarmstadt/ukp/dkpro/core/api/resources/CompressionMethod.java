@@ -20,7 +20,6 @@ package de.tudarmstadt.ukp.dkpro.core.api.resources;
 /**
  * Compression methods.
  * 
- * @author Richard Eckart de Castilho
  */
 public enum CompressionMethod
 {

@@ -56,7 +56,6 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  * href="https://ditop.hs8.de/">DiTop</a>. It requires JCas input annotated by
  * {@link MalletTopicModelInferencer} using the same model.
  *
- * @author Carsten Schnober
  */
 public class DiTopWriter
     extends JCasFileWriter_ImplBase

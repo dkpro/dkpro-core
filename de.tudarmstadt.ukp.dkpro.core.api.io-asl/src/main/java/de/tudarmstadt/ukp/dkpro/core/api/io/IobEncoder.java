@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Converts a chunk annotations into IOB-style 
  * 
- * @author Torsten Zesch
  *
  */
 public class IobEncoder

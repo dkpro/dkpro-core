@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Johannes Hoffart
  */
 public class PhraseTreeElement
 {

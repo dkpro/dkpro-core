@@ -26,7 +26,6 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Creates a character NGram iterable from a list of tokens.
  * 
- * @author zesch
  *
  */
 public class CharacterNGramStringIterable

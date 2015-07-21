@@ -64,7 +64,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * </ul>
  *
  *
- * @author AnNa, zesch
  */
 @TypeCapability(
         inputs = {

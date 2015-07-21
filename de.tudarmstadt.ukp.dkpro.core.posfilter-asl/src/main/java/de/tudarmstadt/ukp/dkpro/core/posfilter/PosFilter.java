@@ -43,8 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * Removes all tokens/lemmas/stems/POS tags (depending on the "Mode" setting) that do not match the
  * given parts of speech.
  *
- * @author Torsten Zesch
- * @author Erik-Lân Do Dinh
  */
 
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS" })

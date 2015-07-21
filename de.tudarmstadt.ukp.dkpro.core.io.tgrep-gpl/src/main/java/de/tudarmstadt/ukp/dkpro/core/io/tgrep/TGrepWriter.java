@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 /**
  * TGrep2 corpus file writer. Requires {@link PennTree}s to be annotated before.
  *
- * @author Erik-Lân Do Dinh
  */
 public class TGrepWriter
 	extends JCasAnnotator_ImplBase

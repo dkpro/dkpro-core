@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.model.DfStore;
 /**
  * Serialization and deserialization methods.
  * 
- * @author Mateusz Parzonka
  * 
  */
 public class TfidfUtils

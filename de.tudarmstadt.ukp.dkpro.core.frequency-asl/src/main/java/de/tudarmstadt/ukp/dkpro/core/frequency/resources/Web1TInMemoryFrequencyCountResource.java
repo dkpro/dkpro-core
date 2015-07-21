@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.Web1TInMemoryProvider;
 /**
  * External resource wrapper for the Web1T in memory frequency count provider.
  * 
- * @author zesch
  * 
  */
 public final class Web1TInMemoryFrequencyCountResource

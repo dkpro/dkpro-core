@@ -26,3 +26,36 @@ Details on how and where to submit the agreements are included in their respecti
 Contributions should be submitted by opening an issue on the Google Code issue tracker of the project to which you wish to contribute. Describe the bug you fix or the feature that you provide and attach your changes as a diff file.
 
 Prolific contributors may eventually be granted write access to the code repositories. Access to the repositories is granted on a per-project basis.
+
+### Contributor attribution
+
+The CONTRIBUTORS.txt file is used to keep track of any contributors. It is to be used in favor over
+author attributions in individual files, e.g. via *@author* tags. For `@author` tags in code copied
+from a third-party, see *Integrating third-party code* below.
+
+The reason that we prefer a central place for maintaining the list of contributors is, that:
+
+* it is easier to maintain - attribution distributed across files tends to get outdated quickly as code is refactored and people do not update the tags.
+* it is easier to get an overview
+
+The most authoritative and detailed source, however, is the version history of the version control system. That
+said, the CONTRIBUTORS.txt may mention people that contributed before the code was open-sourced
+or who did not have direct commit access to the repository.
+
+### Copyright
+
+All contributions remain under the copyright of the original authors (or their employers).
+
+### Integrating third-party code
+
+Code integrated from third parties by others than their original authors may not have any
+copyright notice, @author tags or other kind of attribution removed. 
+
+Names of authors of third-party code are not to be added to the CONTRIBUTORS.txt file. 
+
+In general, integration of third-party code should be avoided. Instead, respective libraries should
+be depended upon.
+
+Third-party code that is integrated must be compatible with our license. For Apache-licensed modules,
+it must be compatible with the Apache license. For GPL-licensed modules, GPLed dependencies are
+also ok. In case of doubt, ask the DKPro developer team.

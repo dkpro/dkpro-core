@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 /**
  * Reada the ACL anthology corpus and outputs CASes with plain text documents.
  *
- * @author zesch
  *
  */
 

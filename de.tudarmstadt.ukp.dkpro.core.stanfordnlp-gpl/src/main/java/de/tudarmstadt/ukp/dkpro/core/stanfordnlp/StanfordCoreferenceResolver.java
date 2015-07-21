@@ -74,7 +74,6 @@ import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.TypesafeMap.Key;
 
 /**
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
         inputs = {

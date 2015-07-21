@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 /**
  * Reads all general article infos without retrieving the whole Page objects
  *
- * @author ferschke
  *
  */
 

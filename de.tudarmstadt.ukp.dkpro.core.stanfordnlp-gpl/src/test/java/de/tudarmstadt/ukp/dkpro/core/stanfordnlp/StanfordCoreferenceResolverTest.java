@@ -43,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 import edu.stanford.nlp.dcoref.Constants;
 
 /**
- * @author Richard Eckart de Castilho
  */
 public class StanfordCoreferenceResolverTest
 {

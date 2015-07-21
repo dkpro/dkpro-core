@@ -38,7 +38,6 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 /**
  * Reads pairs of adjacent revisions of all articles.
  *
- * @author zesch
  *
  */
 @TypeCapability(

@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
  * Segmenter using LanguageTool to do the heavy lifting. LanguageTool internally uses different
  * strategies for tokenization.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    outputs = {

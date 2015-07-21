@@ -45,7 +45,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Reads the contents of a given URL and strips the HTML.
  * Returns only the textual contents.
  *
- * @author zesch
  *
  */
 @TypeCapability(

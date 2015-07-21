@@ -37,7 +37,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 /**
  * UIMA collection reader for plain text files.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
         outputs={

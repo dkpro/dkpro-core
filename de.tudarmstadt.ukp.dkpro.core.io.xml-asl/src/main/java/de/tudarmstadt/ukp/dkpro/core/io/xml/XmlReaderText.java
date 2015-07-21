@@ -39,7 +39,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 
 /**
- * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
 @TypeCapability(
@@ -102,7 +101,6 @@ public class XmlReaderText
 	}
 
 	/**
-	 * @author Richard Eckart de Castilho
 	 */
 	protected abstract static class Handler
 		extends DefaultHandler
@@ -132,7 +130,6 @@ public class XmlReaderText
 	}
 
 	/**
-	 * @author Richard Eckart de Castilho
 	 */
 	public static class TextExtractor
 		extends Handler

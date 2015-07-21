@@ -30,7 +30,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.web1t.Finder;
  * Mutual informationen based ranking algorithm. See doc folder for more
  * information
  *
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class MutualInformationRanker
 	extends AbstractRanker

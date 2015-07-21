@@ -51,7 +51,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  *     FileSetCollectionReaderBase.PARAM_SOURCE_LOCATION, "some/path",
  *     FileSetCollectionReaderBase.PARAM_PATTERNS, "[+]foodata&#47;**&#47;*.foo" );
  * </pre>
- * @author Richard Eckart de Castilho
  * @since 1.0.6
  * @deprecated use {@link ResourceCollectionReaderBase} instead.
  */

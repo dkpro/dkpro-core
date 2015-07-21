@@ -34,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Remove prefixes and suffixes from tokens.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
         inputs={

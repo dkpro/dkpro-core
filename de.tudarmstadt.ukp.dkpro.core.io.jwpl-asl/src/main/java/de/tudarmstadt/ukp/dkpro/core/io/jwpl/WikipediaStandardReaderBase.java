@@ -48,8 +48,6 @@ import de.tudarmstadt.ukp.wikipedia.parser.mediawiki.MediaWikiParserFactory;
  * Abstract base class for standard Wikipedia readers reading single articles
  * instead of revision pairs.
  *
- * @author zesch
- * @author Oliver Ferschke
  *
  */
 public abstract class WikipediaStandardReaderBase

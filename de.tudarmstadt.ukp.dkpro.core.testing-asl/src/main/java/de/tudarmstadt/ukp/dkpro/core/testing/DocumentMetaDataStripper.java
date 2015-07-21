@@ -28,7 +28,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
  * Removes fields from the document meta data which may be different depending on the machine a
  * test is run on.
  *
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(

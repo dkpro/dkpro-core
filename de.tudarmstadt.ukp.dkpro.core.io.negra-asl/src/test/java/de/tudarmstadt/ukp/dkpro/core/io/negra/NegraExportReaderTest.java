@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
  * http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus
  * /corpus-sample.export Only the second sentence is used.
  *
- * @author Erik-Lân Do Dinh
  */
 public class NegraExportReaderTest
 {

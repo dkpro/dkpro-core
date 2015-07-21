@@ -57,7 +57,6 @@ import java.util.Set;
  *            the type of the samples
  * @see FrequencyDistribution
  * 
- * @author zesch
  */
 public class ConditionalFrequencyDistribution<C, V>
 {

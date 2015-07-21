@@ -65,8 +65,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * It is possible to set the parameter {@link #PARAM_CQP_HOME} to directly create output in the
  * native binary CQP format via the original CWB command line tools.
  *
- * @author Erik-Lân Do Dinh
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(inputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",

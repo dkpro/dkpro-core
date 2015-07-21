@@ -44,7 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 /**
  * Tokenizer and sentence splitter using OpenNLP.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    outputs = {

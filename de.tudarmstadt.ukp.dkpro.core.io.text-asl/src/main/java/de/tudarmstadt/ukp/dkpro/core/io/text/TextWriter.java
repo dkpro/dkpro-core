@@ -32,7 +32,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 /**
  * UIMA CAS consumer writing the CAS document text as plain text file.
  *
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(

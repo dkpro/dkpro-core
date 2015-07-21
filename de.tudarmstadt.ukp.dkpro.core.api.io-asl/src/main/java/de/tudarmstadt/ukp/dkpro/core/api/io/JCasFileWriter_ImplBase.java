@@ -40,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
 /**
- * @author Richard Eckart de Castilho
  */
 public abstract class JCasFileWriter_ImplBase
 	extends JCasConsumer_ImplBase

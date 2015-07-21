@@ -57,7 +57,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * and Noah A. Smith. Improved Part-of-Speech Tagging for Online Conversational Text with Word
  * Clusters In Proceedings of NAACL 2013.
  *
- * @author zesch
  *
  */
 public class ArktweetPosTagger

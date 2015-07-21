@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase;
 /**
  * Read RTF (Rich Test Format) files. Uses {@link RTFEditorKit} for parsing RTF..
  *
- * @author Carsten Schnober
  *
  */
 public class RTFReader

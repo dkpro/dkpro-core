@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.textnormalizer.util.NormalizationUtils;
 /**
  * Base class for normalizers
  *
- * @author nico.erbs@gmail.com
  */
 @TypeCapability(
         inputs={

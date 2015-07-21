@@ -27,7 +27,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * 
  * This interface can be used to create various UIMA resources that provide semantic tags.
  * 
- * @author Judith Eckle-Kohler
  */
 public interface SemanticTagProvider
 {

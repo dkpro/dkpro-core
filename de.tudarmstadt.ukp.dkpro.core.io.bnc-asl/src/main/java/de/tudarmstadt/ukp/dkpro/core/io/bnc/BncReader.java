@@ -43,7 +43,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.xml.XmlReaderText;
 /**
  * Reader for the British National Corpus (XML version).
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 		outputs = {

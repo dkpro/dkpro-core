@@ -60,7 +60,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
 /**
  * Clear parser annotator.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
     inputs = { "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",

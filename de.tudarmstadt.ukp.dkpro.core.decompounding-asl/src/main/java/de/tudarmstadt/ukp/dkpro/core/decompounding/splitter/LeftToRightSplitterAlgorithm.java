@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
  * 
  * The leaves will combined to all possible splits.
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class LeftToRightSplitterAlgorithm
     implements SplitterAlgorithm

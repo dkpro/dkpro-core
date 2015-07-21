@@ -37,7 +37,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.type.SofaChangeAnnotation;
 /**
  * Applies changes annotated using a {@link SofaChangeAnnotation}.
  *
- * @author Richard Eckart de Castilho
  * @since 1.1.0
  * @see Backmapper
  */

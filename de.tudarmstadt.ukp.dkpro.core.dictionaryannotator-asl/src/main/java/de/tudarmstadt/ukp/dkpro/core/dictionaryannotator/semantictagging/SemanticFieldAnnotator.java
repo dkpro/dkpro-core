@@ -46,9 +46,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticField;
  * This could be a lexical resource such as WordNet or a simple key-value map.
  * The annotation is stored in the SemanticField annotation type.
  *
- * @author Judith Eckle-Kohler
  *
- * @author Richard Eckart de Castilho
  *
  */
 public class SemanticFieldAnnotator

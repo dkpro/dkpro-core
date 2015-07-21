@@ -52,7 +52,6 @@ import de.tudarmstadt.ukp.dkpro.core.opennlp.internal.OpenNlpTagsetDescriptionPr
 /**
  * Part-of-Speech annotator using OpenNLP. Requires {@link Sentence}s to be annotated before.
  *
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    inputs = {

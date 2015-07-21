@@ -49,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
 /**
  * Infers the topic distribution over documents using a Mallet {@link ParallelTopicModel}.
  *
- * @author Carsten Schnober
  */
 public class MalletTopicModelInferencer
     extends JCasAnnotator_ImplBase

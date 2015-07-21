@@ -58,8 +58,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * another phrase
  * </pre>
  *
- * @author Johannes Hoffart
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
 	    inputs = {

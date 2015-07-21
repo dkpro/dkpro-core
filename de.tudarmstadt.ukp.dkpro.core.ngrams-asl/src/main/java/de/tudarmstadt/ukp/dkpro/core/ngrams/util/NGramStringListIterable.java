@@ -26,7 +26,6 @@ import java.util.List;
  * Creates a NGram iterable from a list of tokens. It does not detect any sentence boundaries. Thus,
  * one should make sure to only add lists that reflect a sentence or a phrase.
  * 
- * @author zesch
  *
  */
 public class NGramStringListIterable

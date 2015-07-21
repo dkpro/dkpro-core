@@ -34,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 /**
  * Test cases for StopwordRemover.
  *
- * @author Carsten Schnober
  *
  */
 public class StopWordRemoverTest

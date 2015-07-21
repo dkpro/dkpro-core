@@ -22,7 +22,6 @@ import java.util.List;
 /**
  * Dictionary interface. Can be used to create different Dictionaries.
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public interface Dictionary
 {

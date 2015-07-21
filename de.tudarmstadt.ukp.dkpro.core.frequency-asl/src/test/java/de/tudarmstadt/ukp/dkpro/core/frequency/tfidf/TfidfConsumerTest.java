@@ -44,7 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 /**
  * Unit test of {@link TfidfConsumer} and {@link TfidfAnnotator}.
  * 
- * @author zesch, parzonka
  * 
  */
 public class TfidfConsumerTest

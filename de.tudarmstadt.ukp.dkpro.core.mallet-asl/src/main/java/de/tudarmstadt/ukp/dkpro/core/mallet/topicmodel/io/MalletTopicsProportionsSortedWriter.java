@@ -44,7 +44,6 @@ import de.tudarmstadt.ukp.dkpro.core.mallet.type.TopicDistribution;
  * Write the topic proportions according to an LDA topic model to an output file. The proportions
  * need to be inferred in a previous step using {@link MalletTopicModelInferencer}.
  *
- * @author Carsten Schnober
  *
  */
 public class MalletTopicsProportionsSortedWriter

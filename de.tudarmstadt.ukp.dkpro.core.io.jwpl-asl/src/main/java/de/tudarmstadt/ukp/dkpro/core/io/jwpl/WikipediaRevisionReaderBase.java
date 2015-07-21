@@ -54,8 +54,6 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.RevisionApi;
 /**
  * Abstract base class for all readers based on revisions.
  *
- * @author zesch
- * @author Oliver Ferschke
  *
  */
 public abstract class WikipediaRevisionReaderBase

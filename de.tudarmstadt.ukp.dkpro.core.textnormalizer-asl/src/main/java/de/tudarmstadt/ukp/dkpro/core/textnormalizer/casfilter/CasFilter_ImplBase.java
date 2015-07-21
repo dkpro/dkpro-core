@@ -48,7 +48,6 @@ import org.apache.uima.resource.ResourceInitializationException;
  * {@link SimplePipeline#iteratePipeline(org.apache.uima.collection.CollectionReaderDescription, AnalysisEngineDescription...)}
  * do not allow direct access to the JCas' produced by a JCasMultiplier.
  *
- * @author Carsten Schnober
  *
  */
 public abstract class CasFilter_ImplBase

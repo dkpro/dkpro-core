@@ -42,7 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.igerman98.Affix;
  *
  * This class can also be used to read other ispell/hunspell dictionaries.
  *
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class German98Dictionary
 	extends SimpleDictionary

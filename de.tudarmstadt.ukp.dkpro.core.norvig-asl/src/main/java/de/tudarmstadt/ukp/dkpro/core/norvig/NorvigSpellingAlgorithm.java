@@ -38,7 +38,6 @@ import static java.lang.Double.parseDouble;
 /**
  * Spelling corrector based on Norvig's algorithm.
  *
- * @author Richard Eckart de Castilho
  * @see <a href="http://norvig.com/spell-correct.html">Norvig&#39;s algorithm</a>
  */
 public class NorvigSpellingAlgorithm

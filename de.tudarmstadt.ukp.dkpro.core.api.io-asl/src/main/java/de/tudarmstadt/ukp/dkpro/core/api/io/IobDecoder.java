@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
  * For example, the sequence (B-NP I-NP) will be converted into a NP-chunk
  * annotation spanning two tokens.
  * 
- * @author Richard Eckart
  *
  */
 public class IobDecoder

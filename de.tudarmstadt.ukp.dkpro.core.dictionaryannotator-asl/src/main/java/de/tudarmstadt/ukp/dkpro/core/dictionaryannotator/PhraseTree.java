@@ -22,7 +22,6 @@ import java.util.Arrays;
 /**
  * Stores phrases in a tree structure to allow efficient access. Used by the DictionaryAnnotator.
  * 
- * @author Johannes Hoffart
  */
 public class PhraseTree
 {

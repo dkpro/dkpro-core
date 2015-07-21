@@ -21,7 +21,6 @@ import java.nio.ByteOrder;
 /**
  * Detect platform information and normalize it.
  *
- * @author Richard Eckart de Castilho
  */
 public
 class PlatformDetector

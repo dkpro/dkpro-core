@@ -53,8 +53,6 @@ import edu.stanford.nlp.util.IntPair;
  * The code has been moved away from the Parser component because it is also used by other
  * components (e.g. Transformations)
  *
- * @author Oliver Ferschke
- * @author Richard Eckart de Castilho
  */
 public class StanfordAnnotator
 {

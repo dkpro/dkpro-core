@@ -30,7 +30,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.BerkeleyLmProvider;
 /**
  * External resource wrapper for the Berkeley LM frequency count provider.
  *
- * @author zesch
  *
  */
 public final class BerkeleyLmFrequencyCountProvider

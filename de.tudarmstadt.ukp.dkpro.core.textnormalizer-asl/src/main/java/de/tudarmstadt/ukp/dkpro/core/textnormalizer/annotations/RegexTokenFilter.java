@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Remove every token that does or does not match a given regular expression.
  *
- * @author Carsten Schnober
  *
  */
 public class RegexTokenFilter

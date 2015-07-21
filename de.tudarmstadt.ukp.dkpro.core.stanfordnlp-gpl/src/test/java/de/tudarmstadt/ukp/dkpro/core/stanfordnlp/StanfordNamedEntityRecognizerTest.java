@@ -35,7 +35,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.testing.TestRunner;
 
 /**
- * @author Oliver Ferschke
  */
 public class StanfordNamedEntityRecognizerTest
 {

@@ -29,8 +29,6 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiApiException;
 
 /**
  *
- * @author zesch
- * @author oferschke
  */
 public class WikiUtils
 {

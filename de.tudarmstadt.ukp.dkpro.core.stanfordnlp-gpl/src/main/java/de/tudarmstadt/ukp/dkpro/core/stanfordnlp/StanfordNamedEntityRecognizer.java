@@ -60,8 +60,6 @@ import edu.stanford.nlp.util.CoreMap;
 /**
  * Stanford Named Entity Recognizer component.
  * 
- * @author Richard Eckart de Castilho
- * @author Oliver Ferschke
  */
 @TypeCapability(
         inputs = {

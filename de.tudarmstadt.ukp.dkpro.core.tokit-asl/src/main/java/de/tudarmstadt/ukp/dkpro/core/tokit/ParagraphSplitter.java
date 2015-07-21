@@ -33,7 +33,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Paragraph;
  * occurrence of two or more line-breaks (Unix and Windows) and regards this as the boundary between
  * paragraphs.
  *
- * @author Niklas Jakob
  */
 
 @TypeCapability(

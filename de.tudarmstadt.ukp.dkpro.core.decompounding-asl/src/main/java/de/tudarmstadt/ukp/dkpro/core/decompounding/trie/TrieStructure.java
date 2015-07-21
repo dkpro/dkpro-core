@@ -23,7 +23,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.dictionary.Dictionary;
 /**
  * A trie datastructor which also stores the number of successor for each node
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class TrieStructure
 {

@@ -41,7 +41,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Reads a list of words from a text file (one token per line) and retains only tokens or other
  * annotations that match any of these words.
  *
- * @author Carsten Schnober
  *
  */
 public class AnnotationByTextFilter

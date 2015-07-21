@@ -32,8 +32,6 @@ import de.tudarmstadt.ukp.wikipedia.revisionmachine.api.Revision;
 /**
  * Reads Wikipedia page revisions.
  *
- * @author zesch
- * @author oferschke
  *
  */
 

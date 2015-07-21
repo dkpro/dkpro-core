@@ -60,7 +60,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ResourceUtils;
  * represented as properly - nested XML.</li>
  * </ul>
  *
- * @author Richard Eckart de Castilho
  * @since 1.1.0
  */
 

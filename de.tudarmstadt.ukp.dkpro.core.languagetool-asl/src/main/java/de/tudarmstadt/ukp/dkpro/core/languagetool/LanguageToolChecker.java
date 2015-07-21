@@ -42,7 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.resources.ModelProviderBase;
 /**
  * Detect grammatical errors in text using LanguageTool a rule based grammar checker.
  *
- * @author Zhi Shen
  */
 @TypeCapability(
 	    outputs = {

@@ -24,7 +24,6 @@ import java.util.List;
 /**
  * A data container for a split of a word. This container stores on split of all possible splits.
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class DecompoundedWord
     implements Comparable<DecompoundedWord>

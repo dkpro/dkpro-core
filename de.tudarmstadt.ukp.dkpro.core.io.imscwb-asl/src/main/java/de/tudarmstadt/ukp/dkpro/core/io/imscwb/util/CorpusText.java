@@ -23,7 +23,6 @@ import java.util.List;
 /**
  * Used for temporary storing extracted texts before adding to the CAS.
  *
- * @author zesch
  *
  */
 public class CorpusText {

@@ -36,7 +36,6 @@ import org.junit.Test;
 /**
  * Test cases for {@link RTFReader}.
  *
- * @author Carsten Schnober
  *
  */
 public class RTFReaderTest

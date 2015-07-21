@@ -39,7 +39,6 @@ import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 /**
  *
- * @author Erik-Lân Do Dinh
  *
  */
 public class ImsCwbWriterTest

@@ -62,7 +62,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field;
  * <p>
  * If your expression evaluates to leaf nodes, empty CASes will be created.
  * 
- * @author Shuo Yang
  */
 @TypeCapability(outputs = { "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData",
         "de.tudarmstadt.ukp.dkpro.core.api.structure.type.Field" })

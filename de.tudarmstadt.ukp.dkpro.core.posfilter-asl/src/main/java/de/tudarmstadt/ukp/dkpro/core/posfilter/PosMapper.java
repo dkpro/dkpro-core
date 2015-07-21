@@ -42,7 +42,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 /**
  * Maps existing POS tags from one tagset to another using a user provided properties file.
  *
- * @author Erik-Lân Do Dinh
  *
  */
 

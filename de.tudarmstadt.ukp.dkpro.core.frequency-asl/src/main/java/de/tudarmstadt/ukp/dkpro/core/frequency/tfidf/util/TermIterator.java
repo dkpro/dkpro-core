@@ -30,7 +30,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory;
 /**
  * Iterator over terms (Strings) in the JCas.
  * 
- * @author Mateusz Parzonka
  */
 public class TermIterator
     implements Iterable<String>, Iterator<String>

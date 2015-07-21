@@ -52,8 +52,6 @@ import edu.illinois.cs.cogcomp.lbj.pos.POSTagger;
  * Wrapper for the Illinois POS-tagger from the Cognitive Computation Group (CCG).
  * http://cogcomp.cs.illinois.edu/page/software
  *
- * @author zesch
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(

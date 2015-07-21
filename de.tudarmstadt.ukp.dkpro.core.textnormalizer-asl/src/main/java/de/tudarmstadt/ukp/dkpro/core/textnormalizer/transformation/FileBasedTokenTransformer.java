@@ -40,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.JCasTransformerChangeBased_Im
  * Replaces all tokens that are listed in the file in {@link #PARAM_MODEL_LOCATION} by the string
  * specified in {@link #PARAM_REPLACEMENT}.
  * 
- * @author Carsten Schnober
  *
  */
 public class FileBasedTokenTransformer

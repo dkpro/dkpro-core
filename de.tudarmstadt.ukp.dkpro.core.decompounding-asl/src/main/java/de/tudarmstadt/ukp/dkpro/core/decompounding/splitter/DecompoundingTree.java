@@ -31,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.decompounding.trie.ValueNode;
  * A split tree. Holds all splits in a tree structure. This can help to see the
  * how the split algorithm works
  * 
- * @author <a href="mailto:je.haase@googlemail.com">Jens Haase</a>
  */
 public class DecompoundingTree
 {

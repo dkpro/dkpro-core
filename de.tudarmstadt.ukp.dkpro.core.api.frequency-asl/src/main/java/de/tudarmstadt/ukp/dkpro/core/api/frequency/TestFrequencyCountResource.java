@@ -29,7 +29,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.frequency.provider.TestFrequencyCountPr
 /**
  * External resource wrapper for a test frequency count provider to be used in unit test.
  * 
- * @author zesch
  *
  */
 public final class TestFrequencyCountResource

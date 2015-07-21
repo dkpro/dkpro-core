@@ -40,7 +40,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * The GermanSeparatedParticleAnnotator replaces the lemma of the stem of particle-verbs (e.g., fangen) by the proper verb lemma
  * (e.g. anfangen) and leaves the lemma of the separated particle unchanged.
  *
- * @author Judith Eckle-Kohler
  *
  */
 @TypeCapability(

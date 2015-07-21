@@ -34,7 +34,6 @@ import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
 /**
  * Test(s) for {@link SolrWriter}.
  *
- * @author Carsten Schnober
  *
  */
 public class SolrWriterTest

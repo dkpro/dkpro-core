@@ -84,8 +84,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * </ul>
  *
  *
- * @author Oliver Ferschke
- * @author Richard Eckart de Castilho
  */
 @TypeCapability(
         inputs={

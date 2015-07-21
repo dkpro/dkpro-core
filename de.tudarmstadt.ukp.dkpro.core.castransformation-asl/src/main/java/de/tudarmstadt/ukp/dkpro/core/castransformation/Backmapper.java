@@ -46,7 +46,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.transform.internal.CasCopier;
  * can be used to map the annotations created in the cleaned view back to the
  * original view.
  *
- * @author Richard Eckart de Castilho
  * @see ApplyChangesAnnotator
  */
 public

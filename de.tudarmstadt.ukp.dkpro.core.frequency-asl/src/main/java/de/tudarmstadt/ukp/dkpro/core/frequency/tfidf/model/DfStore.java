@@ -30,7 +30,6 @@ import de.tudarmstadt.ukp.dkpro.core.frequency.tfidf.util.FreqDist;
  * be filled and serialized by {@link TfidfConsumer} and deserialized and used by
  * {@link TfidfAnnotator}.
  * 
- * @author zesch, parzonka
  */
 public class DfStore
     implements DfModel, Serializable

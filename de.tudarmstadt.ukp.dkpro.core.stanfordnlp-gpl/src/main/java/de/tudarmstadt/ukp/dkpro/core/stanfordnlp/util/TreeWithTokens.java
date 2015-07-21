@@ -36,7 +36,6 @@ import edu.stanford.nlp.util.IntPair;
  * Trees in TreeWithToken-object are always converted to trees with
  * CoreLabel-type labels.
  *
- * @author Oliver Ferschke
  *
  */
 public class TreeWithTokens

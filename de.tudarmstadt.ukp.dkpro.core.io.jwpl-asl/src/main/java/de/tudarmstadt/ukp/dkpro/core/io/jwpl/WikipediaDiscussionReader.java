@@ -26,7 +26,6 @@ import de.tudarmstadt.ukp.wikipedia.parser.ParsedPage;
 /**
  * Reads all discussion pages.
  *
- * @author zesch
  *
  */
 

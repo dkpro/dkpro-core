@@ -36,7 +36,6 @@ import de.tudarmstadt.ukp.wikipedia.api.exception.WikiInitializationException;
 /**
  * Abstract base class for all Wikipedia readers.
  *
- * @author zesch
  *
  */
 public abstract class WikipediaReaderBase extends JCasCollectionReader_ImplBase

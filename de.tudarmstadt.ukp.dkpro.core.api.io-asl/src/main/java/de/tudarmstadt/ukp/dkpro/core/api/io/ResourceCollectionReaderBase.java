@@ -72,7 +72,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * @see <a href="http://ant.apache.org/manual/dirtasks.html#patterns">Documentation of <b>ant</b>
  *      patterns</a>
  * 
- * @author Richard Eckart de Castilho
  * @since 1.0.6
  */
 public abstract class ResourceCollectionReaderBase
@@ -608,7 +607,6 @@ public abstract class ResourceCollectionReaderBase
     }
 
     /**
-     * @author Richard Eckart de Castilho
      */
     public static class Resource
     {

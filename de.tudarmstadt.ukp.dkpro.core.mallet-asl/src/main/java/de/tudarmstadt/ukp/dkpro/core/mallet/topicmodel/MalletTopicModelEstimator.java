@@ -51,7 +51,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * This component estimates an LDA model using Mallet. It stores all incoming CAS' to Mallet
  * {@link Instance}s before estimating the model, using a {@link ParallelTopicModel}.
  *
- * @author Carsten Schnober
  *
  */
 public class MalletTopicModelEstimator

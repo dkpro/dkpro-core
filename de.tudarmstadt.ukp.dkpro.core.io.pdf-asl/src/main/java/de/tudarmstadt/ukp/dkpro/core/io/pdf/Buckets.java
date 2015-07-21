@@ -23,7 +23,6 @@ import java.util.LinkedList;
  * Cluster values into buckets. A new bucket is opened if a new value is added that differs from the
  * average value of each of the existing buckets by more than a certain threshold.
  *
- * @author Richard Eckart de Castilho
  */
 public class Buckets
 {

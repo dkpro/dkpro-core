@@ -47,7 +47,6 @@ import gr.aueb.cs.nlp.postagger.WordWithCategory;
 /**
  * Wrapper for the <a href="http://nlp.cs.aueb.gr/software.html">AUEB Greek POS tagger</a>.
  *
- * @author zesch
  */
 @TypeCapability(
         inputs = {

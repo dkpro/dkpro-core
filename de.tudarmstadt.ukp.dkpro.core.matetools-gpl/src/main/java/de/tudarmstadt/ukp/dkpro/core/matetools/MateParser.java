@@ -78,7 +78,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency;
  * </ul>
  *
  *
- * @author AnNa, zesch
  */
 @TypeCapability(
         inputs = {

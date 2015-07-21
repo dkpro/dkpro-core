@@ -37,8 +37,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
  * Simple reader that generates a CAS from a String. This can be useful in situations where a reader
  * is preferred over manually crafting a CAS using {@link JCasFactory#createJCas()}.
  *
- * @author Erik-Lân Do Dinh
- * @author Richard Eckart de Castilho
  */
 
 @TypeCapability(
