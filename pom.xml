@@ -54,9 +54,10 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-    -->
+        -->
+        <!-- For DKPro Parent POM SNAPSHOT -->
+        <!--  
         <repository>
-            <!-- For DKPro Parent POM SNAPSHOT -->
             <id>ukp-oss-snapshots</id>
             <url>http://zoidberg.ukp.informatik.tu-darmstadt.de/artifactory/public-snapshots</url>
             <releases>
@@ -66,6 +67,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>	
+        -->
     </repositories>
 	<pluginRepositories>
         <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
@@ -79,19 +81,6 @@
 			</releases>
 		</pluginRepository>
         -->
-        <!--  BEGIN NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->
-        <pluginRepository>
-            <id>codehaus-snapshots</id>
-            <name>Codehaus Snapshots</name>
-            <url>http://nexus.codehaus.org/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-        <!--  END NEEDED FOR http://jira.codehaus.org/browse/MCOBERTURA-189 -->    
 	</pluginRepositories>
 	<issueManagement>
 		<system>GitHub Issues</system>
@@ -104,7 +93,7 @@
 	</scm>
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<uima.version>2.7.0</uima.version>
+		<uima.version>2.8.0</uima.version>
 		<uimafit.version>2.1.0</uimafit.version>
 		<lucene.version>3.0.3</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
