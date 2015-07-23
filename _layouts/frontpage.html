@@ -18,10 +18,12 @@ format: blog-index
 <div class="row t20">
 	<div class="medium-12 columns">
 		<h2>{{ page.header-1.title }}</h2>
-		{{ page.header-1.text }} 
-        {% if page.header-1.url %}
-        <a href="{{ page.header-1.url }}">More ›</a>
-        {% endif %}
+        <p>
+		    {{ page.header-1.text }} 
+            {% if page.header-1.url %}
+            <a href="{{ page.header-1.url }}">More ›</a>
+            {% endif %}
+            </p>
     </div><!-- /.medium-12.columns -->
 </div><!-- /.row -->
 
