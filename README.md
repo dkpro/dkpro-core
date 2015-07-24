@@ -8,7 +8,7 @@ These short guidelines will show you how to get a local copy of the dkpro page t
 Below, replace YourProjectName with... your project name (e.g. dkpro-csniper, dkpro-statistics, ...)
 
 - cd into the directory where all your local git repositories are located
-- clone project repo into separate directory (here named YourProjectName-page)
+- make a fresh clone of your project repo, clone it into separate directory ending in -page (here named YourProjectName-page)
 	- `git clone https://github.com/dkpro/YourProjectName.git YourProjectName-page`
 - add dkpro-page-template repo as additional remote
 	- `cd YourProjectName-page`
