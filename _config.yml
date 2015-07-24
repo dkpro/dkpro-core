@@ -8,25 +8,25 @@
 #                                                 /____/        
 #
 # Title of your website
-title: "DKPro Uby"
+title: "DKPro Core"
 
 
 # The slogan describes your website and is used on homepage in <title> and other important places
-slogan: "Uby - more than the sum of its parts"
+slogan: "Getting things done in NLP"
 
 
 # The description is used on homepage and in the footer to quickly describe your website. Use a maximum of 150 characters for SEO-purposes.
-description: "UBY - a large-scale unified lexical-semantic resource for natural language processing (NLP) based on the ISO standard Lexical Markup Framework (LMF)."
+description: "DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework."
 
 
 # This URL is the main adresse. Don't include a slash at the end.
 #
-url: "//dkpro.github.io/dkpro-uby"
+url: "//dkpro.github.io/dkpro-core"
 baseurl: ""
 
 # This is for the editing function in _/includes/improve_content.html
 # Leave it empty if your site is not on GitHub/GitHub Pages
-improve_content: https://github.com/dkpro/dkpro-uby/edit/gh-pages
+improve_content: https://github.com/dkpro/dkpro-core/edit/gh-pages
 
 # This URL points directly to the images directory making
 # things easier to link to images in posts and templates. It needs a slash.
@@ -34,7 +34,7 @@ improve_content: https://github.com/dkpro/dkpro-uby/edit/gh-pages
 # Example: <img src="{{ site.urlimg }}/{{ post.image.title }}">
 # Markdown-Example for posts ![Image Text]({{ site.urlimg }}/image.jpg)
 #
-urlimg: "/dkpro-uby/images/"
+urlimg: "/dkpro-core/images/"
 
 
 # Logo size is 600x80 pixels
@@ -205,5 +205,5 @@ sass:
 #
 # used in _includes/footer_scripts.html
 
-google_analytics_tracking_id: UA-30333081-1
+google_analytics_tracking_id: UA-20506675-4
 
