@@ -36,7 +36,15 @@ public class BratReaderWriterTest
         testOneWay(Conll2009Reader.class, BratWriter.class, "conll/2009/en-ref.ann",
                 "conll/2009/en-orig.conll", BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true);
     }
-    
+
+    @Test
+    public void testConll2009_2()
+        throws Exception
+    {
+        testRoundTrip(BratReader.class, BratWriter.class, "conll/2009/en-ref.ann",
+                BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true);
+    }
+
     @Test
     public void testConll2012()
         throws Exception

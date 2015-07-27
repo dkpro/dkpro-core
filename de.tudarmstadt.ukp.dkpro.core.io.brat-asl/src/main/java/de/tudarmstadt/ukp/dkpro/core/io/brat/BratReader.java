@@ -24,11 +24,17 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
+import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
@@ -42,7 +48,9 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttribute;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
 
 /**
@@ -61,6 +69,17 @@ public class BratReader
     @ConfigurationParameter(name = PARAM_ENCODING, mandatory = true, defaultValue = "UTF-8")
     private String encoding;
     
+    /**
+     * Types that are relations. It is mandatory to provide the type name followed by two feature
+     * names that represent Arg1 and Arg2 separated by colons, e.g. 
+     * <code>de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}</code>.
+     */
+    public static final String PARAM_RELATION_TYPES = "relationTypes";
+    @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = { 
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" })
+    private Set<String> relationTypes;
+    private Map<String, RelationParam> parsedRelationTypes;    
+    
     public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
     @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
             "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
@@ -70,19 +89,44 @@ public class BratReader
     private String[] typeMappings;
     private TypeMapping typeMapping;
     
+    private Map<String, AnnotationFS> spanIdMap;
+    
+    private Set<String> warnings;
+    
     @Override
     public void initialize(UimaContext aContext)
         throws ResourceInitializationException
     {
         super.initialize(aContext);
         
+        parsedRelationTypes = new HashMap<>();
+        for (String rel : relationTypes) {
+            RelationParam p = RelationParam.parse(rel);
+            parsedRelationTypes.put(p.getType(), p);
+        }
+        
         typeMapping = new TypeMapping(typeMappings);
+
+        warnings = new LinkedHashSet<String>();
+    }
+    
+    @Override
+    public void close()
+        throws IOException
+    {
+        super.close();
+        
+        for (String warning : warnings) {
+            getLogger().warn(warning);
+        }
     }
     
     @Override
     public void getNext(JCas aJCas)
         throws IOException, CollectionException
     {
+        spanIdMap = new HashMap<>();
+        
         Resource res = nextFile();
         initCas(aJCas, res);
 
@@ -105,6 +149,9 @@ public class BratReader
             Type type = typeMapping.getUimaType(ts, anno);
             if (anno instanceof BratTextAnnotation) {
                 create(cas, type, (BratTextAnnotation) anno);
+            }
+            else if (anno instanceof BratRelationAnnotation) {
+                create(cas, type, (BratRelationAnnotation) anno);
             }
             else {
                 throw new IllegalStateException("Annotation type [" + anno.getClass()
@@ -129,9 +176,59 @@ public class BratReader
         AnnotationFS anno = aCAS.createAnnotation(type, aAnno.getBegin(), aAnno.getEnd());
         fillAttributes(anno, aAnno.getAttributes());
         aCAS.addFsToIndexes(anno);
+        spanIdMap.put(aAnno.getId(), anno);
     }
 
-    private void fillAttributes(AnnotationFS aAnno, Collection<BratAttribute> aAttributes)
+    private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)
+    {
+        RelationParam param = parsedRelationTypes.get(aType.getName());
+        
+        AnnotationFS arg1 = spanIdMap.get(aAnno.getArg1Target());
+        AnnotationFS arg2 = spanIdMap.get(aAnno.getArg2Target());
+        
+        FeatureStructure anno = aCAS.createFS(aType);
+        
+        anno.setFeatureValue(anno.getType().getFeatureByBaseName(aAnno.getArg1Label()), arg1);
+        anno.setFeatureValue(anno.getType().getFeatureByBaseName(aAnno.getArg2Label()), arg2);
+        
+        AnnotationFS anchor = null;
+        if (param != null) {
+            if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR) && 
+                    param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
+                throw new IllegalStateException("Only one argument can be the anchor.");
+            }
+            else if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR)) {
+                anchor = arg1;
+            }
+            else if (param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
+                anchor = arg2;
+            }
+        }
+        else {
+            warnings.add("Relation type [" + aType.getName()
+                    + "] not covered in PARAM_RELATION_TYPES.");
+        }
+        
+        if (anchor != null) {
+            anno.setIntValue(anno.getType().getFeatureByBaseName(CAS.FEATURE_BASE_NAME_BEGIN),
+                    anchor.getBegin());
+            anno.setIntValue(anno.getType().getFeatureByBaseName(CAS.FEATURE_BASE_NAME_END),
+                    anchor.getEnd());
+        }
+        else {
+            TypeSystem ts = aCAS.getTypeSystem();
+            if (ts.subsumes(ts.getType(CAS.TYPE_NAME_ANNOTATION), anno.getType())) {
+                warnings.add("Relation type [" + aType.getName()
+                        + "] has offsets but no anchor is specified.");
+            }
+        }
+        
+        fillAttributes(anno, aAnno.getAttributes());
+        
+        aCAS.addFsToIndexes(anno);
+    }
+
+    private void fillAttributes(FeatureStructure aAnno, Collection<BratAttribute> aAttributes)
     {
         for (BratAttribute attr : aAttributes) {
             Feature feat = aAnno.getType().getFeatureByBaseName(attr.getName());

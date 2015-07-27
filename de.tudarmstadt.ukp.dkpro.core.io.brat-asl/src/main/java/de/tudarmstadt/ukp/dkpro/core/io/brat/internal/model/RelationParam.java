@@ -22,25 +22,33 @@ import java.util.regex.Pattern;
 
 public class RelationParam
 {
+    public static final String FLAG_ANCHOR = "A";
+    
     private static final Pattern PATTERN = Pattern.compile(
             "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-.]+):" +
-            "(?<ARG1>[a-zA-Z][a-zA-Z0-9]+):" +
-            "(?<ARG2>[a-zA-Z][a-zA-Z0-9]+)");
+            "(?<ARG1>[a-zA-Z][a-zA-Z0-9]+)(?<FLAGS1>\\{A?\\})?:" +
+            "(?<ARG2>[a-zA-Z][a-zA-Z0-9]+)(?<FLAGS2>\\{A?\\})?");
     
     private static final String TYPE = "TYPE";
     private static final String ARG1 = "ARG1";
+    private static final String FLAGS1 = "FLAGS1";
     private static final String ARG2 = "ARG2";
+    private static final String FLAGS2 = "FLAGS2";
 
     private final String type;
     private final String arg1;
+    private final String flags1;
     private final String arg2;
+    private final String flags2;
     
-    public RelationParam(String aType, String aArg1, String aArg2)
+    public RelationParam(String aType, String aArg1, String aFlags1, String aArg2, String aFlags2)
     {
         super();
         type = aType;
         arg1 = aArg1;
+        flags1 = aFlags1;
         arg2 = aArg2;
+        flags2 = aFlags2;
     }
     
     public String getType()
@@ -52,10 +60,20 @@ public class RelationParam
     {
         return arg1;
     }
+    
+    public String getFlags1()
+    {
+        return flags1 != null ? flags1 : "";
+    }
 
     public String getArg2()
     {
         return arg2;
+    }
+    
+    public String getFlags2()
+    {
+        return flags2 != null ? flags2 : "";
     }
 
     public static RelationParam parse(String aValue)
@@ -66,6 +84,7 @@ public class RelationParam
             throw new IllegalArgumentException("Illegal relation parameter format [" + aValue + "]");
         }
 
-        return new RelationParam(m.group(TYPE), m.group(ARG1), m.group(ARG2));
+        return new RelationParam(m.group(TYPE), m.group(ARG1), m.group(FLAGS1), m.group(ARG2),
+                m.group(FLAGS2));
     }
 }
