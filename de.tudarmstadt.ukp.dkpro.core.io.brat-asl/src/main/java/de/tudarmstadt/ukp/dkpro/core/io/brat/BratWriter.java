@@ -61,8 +61,8 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
  * <p>Known issues:</p>
  * <ul>
  * <li><a href="https://github.com/nlplab/brat/issues/791">Brat is unable to read relation 
- * attributes created by this writer.</a>
- * <li>PARAM_TYPE_MAPPINGS not implemented yet</a>
+ * attributes created by this writer.</a></li>
+ * <li>PARAM_TYPE_MAPPINGS not implemented yet</li>
  * </ul>
  * 
  * @see <a href="http://brat.nlplab.org/standoff.html">brat standoff format</a>
