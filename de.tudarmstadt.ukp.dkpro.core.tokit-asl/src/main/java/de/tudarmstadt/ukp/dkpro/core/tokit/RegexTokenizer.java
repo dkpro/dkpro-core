@@ -52,7 +52,6 @@ public class RegexTokenizer
      * added to the group of matching characters, e.g. {@code "tokenized-text"} is correctly
      * tokenized with the pattern {@code [-\n]}.
      * 
-     * @see RegexTokenizerTest#testRegex()
      */
     public static final String PARAM_TOKEN_BOUNDARY_REGEX = "tokenBoundaryRegex";
     @ConfigurationParameter(name = PARAM_TOKEN_BOUNDARY_REGEX, mandatory = true, defaultValue = WHITESPACE_PATTERN)
