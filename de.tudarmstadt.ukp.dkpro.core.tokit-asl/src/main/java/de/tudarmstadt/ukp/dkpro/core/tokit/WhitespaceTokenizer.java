@@ -34,12 +34,15 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * If {@code PARAM_WRITE_SENTENCES} is set to true, one sentence per line is assumed. Otherwise, no
  * sentences are created.
  * 
+ * @deprecated Use {@link RegexTokenizer}
  */
+@Deprecated
 public class WhitespaceTokenizer
     extends SegmenterBase
 {
-    private static final Pattern lineBreak = Pattern.compile("(.*?)\n");
-    private static final Pattern whitespace = Pattern.compile("([^ \n]+)");
+    // FIXME: this does not match Windows linebreaks ("\r\n")
+    private static final Pattern lineBreak = Pattern.compile("\n");
+    private static final Pattern whitespace = Pattern.compile("[ \n]+");
 
     @Override
     protected void process(JCas aJCas, String text, int zoneBegin)
@@ -47,23 +50,51 @@ public class WhitespaceTokenizer
     {
         /* append trailing linebreak if necessary */
         text = text.endsWith("\n") ? text : text + "\n";
-        Matcher lineMatcher = lineBreak.matcher(text);
 
-        /* detect sentences */
         if (isWriteSentence()) {
-            while (lineMatcher.find() && lineMatcher.start() < text.length()) {
-                Sentence sentence = new Sentence(aJCas, lineMatcher.start(1), lineMatcher.end(1));
-                sentence.addToIndexes(aJCas);
-            }
+            createSentences(aJCas, text);
         }
 
-        /* detect tokens */
-        Matcher whitespaceMatcher = whitespace.matcher(text);
-        while (whitespaceMatcher.find() && whitespaceMatcher.start() < text.length()) {
-            Token token = new Token(aJCas, whitespaceMatcher.start(1), whitespaceMatcher.end(1));
-            token.addToIndexes(aJCas);
-        }
-
+        createTokens(aJCas, text);
     }
 
+    /**
+     * Create sentences using the boundary pattern defined in {@link #lineBreak}.
+     * 
+     * @param aJCas
+     *            the {@link JCas}
+     * @param text
+     *            the text.
+     */
+    private void createSentences(JCas aJCas, String text)
+    {
+        Matcher lineMatcher = lineBreak.matcher(text);
+        int previousStart = 0;
+        while (lineMatcher.find()) {
+            int end = lineMatcher.start();
+            Sentence sentence = new Sentence(aJCas, previousStart, end);
+            sentence.addToIndexes(aJCas);
+            previousStart = lineMatcher.end();
+        }
+    }
+
+    /**
+     * Create tokens using the boundary pattern defined in {@link #whitespace}.
+     * 
+     * @param aJCas
+     *            the {@link JCas}
+     * @param text
+     *            the text
+     */
+    private void createTokens(JCas aJCas, String text)
+    {
+        Matcher whitespaceMatcher = whitespace.matcher(text);
+        int previousStart = 0;
+        while (whitespaceMatcher.find()) {
+            int end = whitespaceMatcher.start();
+            Token token = new Token(aJCas, previousStart, end);
+            token.addToIndexes(aJCas);
+            previousStart = whitespaceMatcher.end();
+        }
+    }
 }
