@@ -15,9 +15,9 @@ widget-1:
     text: 'Find out more about our bundled components.'
     image: IconComponents.png
 widget-2:
-    title: "Models"
+    title: "Models/Languages"
     url: 'releases/!LATEST!/models.html'
-    text: 'We provide various models accompanying the components.'
+    text: 'Various models covering different languages accompany the components.'
     image: IconModels.png
 widget-3:
     title: "Formats"
@@ -72,12 +72,10 @@ All components in DKPro Core ASL are licensed under the [Apache Software License
 
 **IMPORTANT LICENSE NOTE** - It must be pointed out that while the component's source code itself is licensed under the ASL, individual components might make use of third-party libraries or products that are not licensed under the ASL, such as LGPL libraries or libraries which are free for research but may not be used in commercial scenarios. Please be aware of the third party licenses and respect them.
 
-{% comment %}
 About DKPro Core
 ----------------
 
 This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Dr. Iryna Gurevych. It is now jointly developed at UKP Lab (Technische Universität Darmstadt) and Language Technology Lab (Universität Duisburg-Essen), and other contributors. [More ›](/info)
-{% endcomment %}
 
 
 <span class="footnotes">**Image sources**: [LogoJava.png][4] by Christian F. Burprich, Creative Commons (Attribution-Noncommercial-Share Alike 3.0 Unported), color changed; [LogoPython.png][5] by IFA; [LogoGroovy.png][6] by pictonic.co; [IconComponents.png][7], [IconModels.png][8] by [Visual Pharm][9]; [IconFormatText.png][10], [IconFormatBlank.png][11] by [Honza Dousek][12]; [IconTypeSystem.png][13] by Designmodo</span>

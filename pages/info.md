@@ -6,15 +6,17 @@ permalink: "/info/"
 
 This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Dr. Iryna Gurevych.
 
-#### What is DKPro and DKPro Core?
+### What is DKPro and DKPro Core?
 
 *DKPro* was created as the *Darmstadt Knowledge Processing Repository* and first presented at the GSCL 2007. The *Core* part of DKPro addresses tasks that are commonly referred to as *linguistic pre-processing*, e.g. part-of-speech taggers, parsers, etc. Within DKPro Core, a steadily growing set of third-party tools for such tasks have been wrapped into interoperable and interchangeable components for the Apache UIMA framework.
 
-#### Who is developing DKPro Core?
+### Who is developing DKPro Core?
 
 For a long time, DKPro Core has been exclusively developed by the members of the UKP Lab. Later, members of the Language Technology Lab, Universität Duisburg-Essen joined in. Since 2014, DKPro opened up to become a community project and has adopted a contributor license agreement approach to contributions.
 
-#### A short history
+**We would like to thank [all those who contribute or have contributed](http://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTORS.txt) to DKPro Core!**
+
+### A short history
 
 * 2007: project founded.
 * 2009: first closed-source of DKPro Core (1.0) released.
@@ -22,8 +24,6 @@ For a long time, DKPro Core has been exclusively developed by the members of the
 * 2012: first published via Maven Central.
 * 2014: becoming a community project.
 * 2015: migration to Github.
-
-**We would like to thank [all those who contribute or have contributed](http://github.com/dkpro/dkpro-core/blob/master/CONTRIBUTORS.txt) to DKPro Core!**
 
 -- The DKPro Core team
 
