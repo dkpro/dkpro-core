@@ -14,7 +14,7 @@
 Andriy Nadolskyy
 Anil Narassiguing
 Benjamin Herbert
-Carsten Schnober
+Carsten Schnober <schnober@ukp.informatik.tu-darmstadt.de>
 Cigdem Toprak <cigdem.toprak@gmail.com>
 Delphine Bernhard
 Dr. Judith Eckle-Kohler
