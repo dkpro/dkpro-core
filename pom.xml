@@ -45,6 +45,17 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+        <!-- For UIMA/uimaFIT RCs -->
+        <!--  
+        <repository>
+            <id>ext-staging</id>
+            <name>Staging repo</name>
+            <url>https://repository.apache.org/content/repositories/orgapacheuima-1067</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        -->
         <!-- For UIMA/uimaFIT SNAPSHOT -->
         <!--  
 		<repository>
@@ -71,6 +82,17 @@
         -->
     </repositories>
 	<pluginRepositories>
+        <!-- For UIMA/uimaFIT RCs -->
+        <!--  
+        <pluginRepository>
+            <id>ext-staging</id>
+            <name>Staging repo</name>
+            <url>https://repository.apache.org/content/repositories/orgapacheuima-1067</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+        -->
         <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
         <!--  
 		<pluginRepository>
