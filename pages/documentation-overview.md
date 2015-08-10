@@ -30,7 +30,7 @@ _latest release_
 * [Type system]({{ site.url }}/releases/{{ stable.version }}/typesystem.html)
 * [API documentation]({{ site.url }}/releases/{{ stable.version }}/apidocs/index.html)
 
-### DKPro Core {{ unstable.version }} (latest release)
+### DKPro Core {{ unstable.version }}
 _upcoming release - links may be temporarily broken while a build is in progress_
 
 * [User Guide]({{ unstable.user_guide_url }})
