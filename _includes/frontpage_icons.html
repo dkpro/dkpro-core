@@ -1,8 +1,10 @@
+{% assign stable = (site.data.releases | where:"status", "stable" | first) %}
+
 <div class="row">
     {% if page.widget-1.title %}
     <div class="medium-3 columns">
-        <div class="center"><a href="{{ page.widget-1.url | replace: '!LATEST!', site.data.releases[0].version }}">{% if page.widget-1.image %}<img src="{{ site.urlimg }}/{{ page.widget-1.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-1.video %}{{ page.widget-1.video }}{% endif %}</a></div>
-        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-1.url | replace: '!LATEST!', site.data.releases[0].version }}">{{ page.widget-1.title }}</a></h3>
+        <div class="center"><a href="{{ page.widget-1.url | replace: '!LATEST!', stable.version }}">{% if page.widget-1.image %}<img src="{{ site.urlimg }}/{{ page.widget-1.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-1.video %}{{ page.widget-1.video }}{% endif %}</a></div>
+        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-1.url | replace: '!LATEST!', stable.version }}">{{ page.widget-1.title }}</a></h3>
         <p class="center">{{ page.widget-1.text }}</p>
     </div><!-- /.medium-4.columns -->
     {% endif %}
@@ -10,8 +12,8 @@
 
     {% if page.widget-2.title %}
     <div class="medium-3 columns">
-        <div class="center"><a href="{{ page.widget-2.url | replace: '!LATEST!', site.data.releases[0].version}}">{% if page.widget-2.image %}<img src="{{ site.urlimg }}/{{ page.widget-2.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-2.video %}{{ page.widget-2.video }}{% endif %}</a></div>
-        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-2.url | replace: '!LATEST!', site.data.releases[0].version}}">{{ page.widget-2.title }}</a></h3>
+        <div class="center"><a href="{{ page.widget-2.url | replace: '!LATEST!', stable.version}}">{% if page.widget-2.image %}<img src="{{ site.urlimg }}/{{ page.widget-2.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-2.video %}{{ page.widget-2.video }}{% endif %}</a></div>
+        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-2.url | replace: '!LATEST!', stable.version}}">{{ page.widget-2.title }}</a></h3>
         <p class="center">{{ page.widget-2.text }}</p>
     </div><!-- /.medium-4.columns -->
     {% endif %}
@@ -19,8 +21,8 @@
 
     {% if page.widget-3.title %}
     <div class="medium-3 columns">
-        <div class="center"><a href="{{ page.widget-3.url | replace: '!LATEST!', site.data.releases[0].version}}">{% if page.widget-3.image %}<img src="{{ site.urlimg }}/{{ page.widget-3.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-3.video %}{{ page.widget-3.video }}{% endif %}</a></div>
-        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-3.url | replace: '!LATEST!', site.data.releases[0].version}}">{{ page.widget-3.title }}</a></h3>
+        <div class="center"><a href="{{ page.widget-3.url | replace: '!LATEST!', stable.version}}">{% if page.widget-3.image %}<img src="{{ site.urlimg }}/{{ page.widget-3.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-3.video %}{{ page.widget-3.video }}{% endif %}</a></div>
+        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-3.url | replace: '!LATEST!', stable.version}}">{{ page.widget-3.title }}</a></h3>
         <p class="center">{{ page.widget-3.text }}</p>
     </div><!-- /.medium-4.columns -->
     {% endif %}
@@ -28,8 +30,8 @@
 
     {% if page.widget-4.title %}
     <div class="medium-3 columns">
-        <div class="center"><a href="{{ page.widget-4.url | replace: '!LATEST!', site.data.releases[0].version}}">{% if page.widget-4.image %}<img src="{{ site.urlimg }}/{{ page.widget-4.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-4.video %}{{ page.widget-4.video }}{% endif %}</a></div>
-        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-4.url | replace: '!LATEST!', site.data.releases[0].version}}">{{ page.widget-4.title }}</a></h3>
+        <div class="center"><a href="{{ page.widget-4.url | replace: '!LATEST!', stable.version}}">{% if page.widget-4.image %}<img src="{{ site.urlimg }}/{{ page.widget-4.image }}" width="96" height="96" alt="">{% endif %}{% if page.widget-4.video %}{{ page.widget-4.video }}{% endif %}</a></div>
+        <h3 class="font-size-h3 t10 pseudo-p center"><a href="{{ page.widget-4.url | replace: '!LATEST!', stable.version}}">{{ page.widget-4.title }}</a></h3>
         <p class="center">{{ page.widget-4.text }}</p>
     </div><!-- /.medium-4.columns -->
     {% endif %}

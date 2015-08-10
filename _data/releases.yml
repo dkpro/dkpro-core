@@ -1,4 +1,12 @@
 - version: 1.7.0
   date: 2014-11-28
+  status: stable
+
 - version: 1.6.2
   date: 2014-08-22
+  status: stable
+
+- version: 1.8.0-SNAPSHOT
+  status: unstable
+  user_guide_url: https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(Google%20Code)/de.tudarmstadt.ukp.dkpro.core$de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/1/
+  developer_guide_url: https://zoidberg.ukp.informatik.tu-darmstadt.de/jenkins/job/DKPro%20Core%20Documentation%20(Google%20Code)/de.tudarmstadt.ukp.dkpro.core$de.tudarmstadt.ukp.dkpro.core.doc-asl/doclinks/2/

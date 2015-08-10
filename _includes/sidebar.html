@@ -1,7 +1,9 @@
 <aside>
 
+{% assign stable = (site.data.releases | where:"status", "stable" | first) %}
+
 <div class="radius b20" style="text-align: center;">
-Latest release: {{ site.data.releases[0].version }} ({{ site.data.releases[0].date }})
+Latest release: {{ stable.version }} ({{ stable.date }})
 </div>
 
 {% if site.posts[0] %}
