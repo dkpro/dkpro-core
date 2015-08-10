@@ -12,6 +12,10 @@ permalink: "/documentation/"
 
 ## Reference Documentation
 
+### Setup
+
+* [User setup]({{ site.url }}/pages/setup-user.html)
+
 ### DKPro Core {{ site.data.releases[0].version }} (latest release)
 
 * [Release notes](https://github.com/dkpro/dkpro-core/releases/tag/de.tudarmstadt.ukp.dkpro.core-asl-{{ site.data.releases[0].version }})
