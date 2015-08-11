@@ -38,8 +38,8 @@ For a long time, DKPro Core has been exclusively developed by the members of the
 A comprehensive (but probably not complete) list of scientific publications citing DKPro Core can be found on [Google Scholar](http://scholar.google.de/scholar?q=%22DKPro+Core%22).
 
 
-[COLING_2014_pdf]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/OIAF4HLT2014DKProCore_cameraready.pdf
-[COLING_2014_bib]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
+[COLING_2014_pdf]: https://www.aclweb.org/anthology/W/W14/W14-5201.pdf
+[COLING_2014_bib]: https://www.aclweb.org/anthology/W/W14/W14-5201.bib
 
 [RMLL_2009_pdf]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2009/rmll-uima-fr-2009.pdf
 [RMLL_2009_bib]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2009-0078#

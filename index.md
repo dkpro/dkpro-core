@@ -93,6 +93,6 @@ This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at t
 [13]: https://www.iconfinder.com/icons/115791/tag_icon#size=128
 [14]: http://uima.apache.org
 [15]: http://uima.apache.org/uimafit
-[COLING_2014_pdf]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/OIAF4HLT2014DKProCore_cameraready.pdf
-[COLING_2014_bib]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
+[COLING_2014_pdf]: https://www.aclweb.org/anthology/W/W14/W14-5201.pdf
+[COLING_2014_bib]: https://www.aclweb.org/anthology/W/W14/W14-5201.bib
 
