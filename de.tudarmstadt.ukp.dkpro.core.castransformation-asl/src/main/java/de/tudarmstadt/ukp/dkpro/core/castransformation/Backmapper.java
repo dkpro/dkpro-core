@@ -132,7 +132,7 @@ extends JCasAnnotator_ImplBase
 					"No mapping found from ["+from+"] to ["+to+"] on ["+baseCas.hashCode()+"]"));
 		}
 
-		FSIndex<Annotation> idx = targetView.getAnnotationIndex();
+		FSIndex<Annotation> idx = targetView.getAnnotationIndex().withSnapshotIterators();
 		FSIterator<Annotation> it = idx.iterator();
 		TypeSystem typeSystem = targetView.getTypeSystem();
 		Type annotationType = typeSystem.getType(CAS.TYPE_NAME_ANNOTATION);
