@@ -57,7 +57,6 @@
         </repository>
         -->
         <!-- For UIMA/uimaFIT SNAPSHOT -->
-        <!--  
 		<repository>
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
@@ -66,7 +65,6 @@
 				<enabled>false</enabled>
 			</releases>
 		</repository>
-        -->
         <!-- For DKPro Parent POM SNAPSHOT -->
         <!--  
         <repository>
@@ -94,7 +92,6 @@
         </pluginRepository>
         -->
         <!-- For UIMA/uimaFIT SNAPSHOT maven plugin -->
-        <!--  
 		<pluginRepository>
 			<id>apache.snapshots</id>
 			<name>Apache Snapshot Repository</name>
@@ -103,7 +100,6 @@
 				<enabled>false</enabled>
 			</releases>
 		</pluginRepository>
-        -->
 	</pluginRepositories>
 	<issueManagement>
 		<system>GitHub Issues</system>
@@ -117,7 +113,8 @@
 	<properties>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<uima.version>2.8.1</uima.version>
-		<uimafit.version>2.1.0</uimafit.version>
+		<uimafit.version>2.2.0-SNAPSHOT</uimafit.version>
+        <uimafit.plugin.version>2.1.0</uimafit.plugin.version>
 		<lucene.version>3.0.3</lucene.version>
 		<!-- The Spring version should be at least whatever uimaFIT requires -->
 		<spring.version>3.1.2.RELEASE</spring.version>
@@ -355,7 +352,7 @@
                 <plugin>
                     <groupId>org.apache.uima</groupId>
                     <artifactId>uimafit-maven-plugin</artifactId>
-                    <version>${uimafit.version}</version>
+                    <version>${uimafit.plugin.version}</version>
                     <configuration>
                         <componentVendor>DKPro Core Project</componentVendor>
                         <componentCopyright>
