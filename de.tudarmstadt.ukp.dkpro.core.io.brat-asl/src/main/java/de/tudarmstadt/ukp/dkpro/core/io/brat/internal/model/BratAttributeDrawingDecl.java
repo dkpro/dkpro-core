@@ -26,7 +26,7 @@ public class BratAttributeDrawingDecl
 
     public BratAttributeDrawingDecl(BratAttributeDecl aAttribute)
     {
-        super(aAttribute.getType());
+        super(aAttribute.getName());
         attributeDecl = aAttribute;
     }
 

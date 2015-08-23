@@ -42,22 +42,34 @@ public class TypeMapping
         uima2BratMappingCache = new HashMap<>();
     }
     
+    private String apply(String aType)
+    {
+        String type = aType;
+        for (MappingParam m : parsedMappings) {
+            if (m.matches(aType)) {
+                type = m.apply();
+                break;
+            }
+        }
+        return type;
+    }
+    
     public Type getUimaType(TypeSystem aTs, BratAnnotation aAnno)
     {
         Type t = brat2UimaMappingCache.get(aAnno.getType());
         
         if (t == null) {
             // brat doesn't like dots in name names, so we had replaced them with dashes. Now revert.
-            String type = aAnno.getType().replace("-", ".");
+            String type = apply(aAnno.getType().replace("-", "."));
+            t = aTs.getType(type);
             
-            for (MappingParam m : parsedMappings) {
-                if (m.matches(aAnno.getType())) {
-                    type = m.apply();
-                    break;
-                }
+            // if the lookup didn't work with replacing the dashes, try without, e.g. because the
+            // brat name *really* contains dashes and we only resolve them through mapping
+            if (t == null) {
+                type = apply(aAnno.getType());
+                t = aTs.getType(type);
             }
             
-            t = aTs.getType(type);
             brat2UimaMappingCache.put(aAnno.getType(), t);
         }
 

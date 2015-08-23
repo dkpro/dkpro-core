@@ -17,33 +17,39 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
-public class BratRelationAnnotationDecl
-    extends BratAnnotationDecl
-{
-    private final String arg1Label;
-    private final String arg2Label;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-    public BratRelationAnnotationDecl(String aSuperType, String aType, String aArg1Label,
-            String aArg2Label)
+public class BratAnnotationDecl
+{
+    private final String superType;
+    private final String type;
+    
+    private final Set<BratAnnotationDecl> subTypes = new LinkedHashSet<>();
+
+    public BratAnnotationDecl(String aSuperType, String aType)
     {
-        super(aSuperType, aType);
-        arg1Label = aArg1Label;
-        arg2Label = aArg2Label;
+        superType = aSuperType;
+        type = aType;
     }
 
-    @Override
-    public String toString()
+    public String getSuperType()
     {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getType());
-        sb.append('\t');
-        sb.append(arg1Label);
-        sb.append(':');
-        sb.append("<ENTITY>");
-        sb.append(", ");
-        sb.append(arg2Label);
-        sb.append(':');
-        sb.append("<ENTITY>");
-        return sb.toString();
+        return superType;
+    }
+    
+    public String getType()
+    {
+        return type;
+    }
+    
+    public void addSubType(BratAnnotationDecl aDecl)
+    {
+        subTypes.add(aDecl);
+    }
+    
+    public Set<BratAnnotationDecl> getSubTypes()
+    {
+        return subTypes;
     }
 }

@@ -1,3 +1,6 @@
-T1	Organization 0 4	Sony
-T2	Organization 33 41	Ericsson
-T3	Location 75 81	Sweden
+T1	de-tudarmstadt-ukp-dkpro-core-api-ner-type-Organization 0 4	Sony
+T2	de-tudarmstadt-ukp-dkpro-core-api-ner-type-Organization 33 41	Ericsson
+T3	de-tudarmstadt-ukp-dkpro-core-api-ner-type-Location 75 81	Sweden
+T4	de-tudarmstadt-ukp-dkpro-core-io-brat-type-MergeOrg 14 27	joint venture
+E1	de-tudarmstadt-ukp-dkpro-core-io-brat-type-MergeOrg:T4 Org:T1 Org1:T2
+R1	de-tudarmstadt-ukp-dkpro-core-io-brat-type-AnnotationRelation source:T2 target:T3

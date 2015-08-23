@@ -23,10 +23,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
@@ -40,6 +43,7 @@ import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.collection.CollectionException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -48,6 +52,8 @@ import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttribute;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
@@ -145,18 +151,36 @@ public class BratReader
         CAS cas = aJCas.getCas();
         TypeSystem ts = aJCas.getTypeSystem();
         
+        List<BratRelationAnnotation> relations = new ArrayList<>();
+        List<BratEventAnnotation> events = new ArrayList<>();
         for (BratAnnotation anno : doc.getAnnotations()) {
             Type type = typeMapping.getUimaType(ts, anno);
             if (anno instanceof BratTextAnnotation) {
                 create(cas, type, (BratTextAnnotation) anno);
             }
             else if (anno instanceof BratRelationAnnotation) {
-                create(cas, type, (BratRelationAnnotation) anno);
+                relations.add((BratRelationAnnotation) anno);
+            }
+            else if (anno instanceof BratEventAnnotation) {
+                create(cas, type, (BratEventAnnotation) anno);
+                events.add((BratEventAnnotation) anno);
             }
             else {
                 throw new IllegalStateException("Annotation type [" + anno.getClass()
                         + "] is currently not supported.");
             }
+        }
+        
+        // Go through the relations now
+        for (BratRelationAnnotation rel : relations) {
+            Type type = typeMapping.getUimaType(ts, rel);
+            create(cas, type, rel);
+        }
+        
+        // Go through the events again and handle the slots
+        for (BratEventAnnotation e : events) {
+            Type type = typeMapping.getUimaType(ts, e);
+            fillSlots(cas, type, e);
         }
     }
 
@@ -179,6 +203,19 @@ public class BratReader
         spanIdMap.put(aAnno.getId(), anno);
     }
 
+    private void create(CAS aCAS, Type aType, BratEventAnnotation aAnno)
+    {
+        AnnotationFS anno = aCAS.createAnnotation(aType, 
+                aAnno.getTriggerAnnotation().getBegin(), aAnno.getTriggerAnnotation().getEnd());
+        fillAttributes(anno, aAnno.getAttributes());
+        
+        // Slots cannot be handled yet because they might point to events that have not been 
+        // created yet.
+        
+        aCAS.addFsToIndexes(anno);
+        spanIdMap.put(aAnno.getId(), anno);
+    }
+    
     private void create(CAS aCAS, Type aType, BratRelationAnnotation aAnno)
     {
         RelationParam param = parsedRelationTypes.get(aType.getName());
@@ -188,8 +225,8 @@ public class BratReader
         
         FeatureStructure anno = aCAS.createFS(aType);
         
-        anno.setFeatureValue(anno.getType().getFeatureByBaseName(aAnno.getArg1Label()), arg1);
-        anno.setFeatureValue(anno.getType().getFeatureByBaseName(aAnno.getArg2Label()), arg2);
+        anno.setFeatureValue(getFeature(anno, param.getArg1()), arg1);
+        anno.setFeatureValue(getFeature(anno, param.getArg2()), arg2);
         
         AnnotationFS anchor = null;
         if (param != null) {
@@ -202,6 +239,10 @@ public class BratReader
             }
             else if (param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
                 anchor = arg2;
+            }
+            
+            if (param.getSubcat() != null) {
+                anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
             }
         }
         else {
@@ -231,11 +272,17 @@ public class BratReader
     private void fillAttributes(FeatureStructure aAnno, Collection<BratAttribute> aAttributes)
     {
         for (BratAttribute attr : aAttributes) {
+            // Try treating the attribute name as an unqualified name, then as a qualified name.
             Feature feat = aAnno.getType().getFeatureByBaseName(attr.getName());
+            if (feat == null) {
+                String featName = attr.getName().replace('_', ':');
+                featName = featName.substring(featName.indexOf(TypeSystem.FEATURE_SEPARATOR) + 1);
+                feat = aAnno.getType().getFeatureByBaseName(featName);
+            }
             
             if (feat == null) {
                 throw new IllegalStateException("Type [" + aAnno.getType().getName()
-                        + "] has no feature naemd [" + attr.getName() + "]");
+                        + "] has no feature named [" + attr.getName() + "]");
             }
             
             if (attr.getValues().length == 0) {
@@ -249,4 +296,62 @@ public class BratReader
             }
         }
     }
+    
+    private void fillSlots(CAS aCas, Type aType, BratEventAnnotation aE)
+    {
+        AnnotationFS event = spanIdMap.get(aE.getId());
+        Map<String, List<BratEventArgument>> groupedArgs = aE.getGroupedArguments();
+        
+        for (Entry<String, List<BratEventArgument>> slot : groupedArgs.entrySet()) {
+            // Resolve the target IDs to feature structures
+            List<FeatureStructure> targets = new ArrayList<>();
+            
+            // Lets see if there is a multi-valued feature by the name of the slot
+            if (FSUtil.hasFeature(event, slot.getKey())
+                    && FSUtil.isMultiValuedFeature(event, slot.getKey())) {
+                for (BratEventArgument arg : slot.getValue()) {
+                    AnnotationFS target = spanIdMap.get(arg.getTarget());
+                    if (target == null) {
+                        throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
+                                + "]");
+                    }
+                    targets.add(target);
+                }
+                FSUtil.setFeature(event, slot.getKey(), targets);
+            }
+            // Lets see if there is a single-valued feature by the name of the slot
+            else if (FSUtil.hasFeature(event, slot.getKey())) {
+                for (BratEventArgument arg : slot.getValue()) {
+                    AnnotationFS target = spanIdMap.get(arg.getTarget());
+                    if (target == null) {
+                        throw new IllegalStateException("Unable to resolve id [" + arg.getTarget()
+                                + "]");
+                    }
+                    
+                    String fname = arg.getSlot() + (arg.getIndex() > 0 ? arg.getIndex() : "");
+                    if (FSUtil.hasFeature(event, fname)) {
+                        FSUtil.setFeature(event, fname, target);
+                    }
+                    else {
+                        throw new IllegalStateException("Type [" + event.getType().getName()
+                                + "] has no feature naemd [" + fname + "]");
+                    }
+                }
+            }
+            else {
+                throw new IllegalStateException("Type [" + event.getType().getName()
+                        + "] has no feature naemd [" + slot.getKey() + "]");
+            }
+        }
+    }
+
+    private Feature getFeature(FeatureStructure aFS, String aName)
+    {
+        Feature f = aFS.getType().getFeatureByBaseName(aName);
+        if (f == null) {
+            throw new IllegalArgumentException("Type [" + aFS.getType().getName()
+                    + "] has no feature called [" + aName + "]");
+        }
+        return f;
+    }    
 }

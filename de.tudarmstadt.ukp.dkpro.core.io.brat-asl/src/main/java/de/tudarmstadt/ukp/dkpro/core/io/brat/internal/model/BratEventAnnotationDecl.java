@@ -18,63 +18,46 @@
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-
-public class BratAttributeDecl
+public class BratEventAnnotationDecl
+    extends BratAnnotationDecl
 {
-    private final String name;
-    private final Set<String> targetTypes;
-    private final Set<String> values = new LinkedHashSet<>();
+    private final Set<BratEventSlotDecl> slots = new LinkedHashSet<>();
 
-    public BratAttributeDecl(String aName, String... aTargetTypes)
+    public BratEventAnnotationDecl(String aSuperType, String aType, BratEventSlotDecl... aSlots)
     {
-        this(aName, aTargetTypes == null ? null : Arrays.asList(aTargetTypes));
+        super(aSuperType, aType);
+        Arrays.stream(aSlots).forEach(s -> addSlot(s));
     }
 
-    public BratAttributeDecl(String aName, Collection<String> aTargetTypes)
+    public void addSlot(BratEventSlotDecl aSlot)
     {
-        name = aName;
-        targetTypes = aTargetTypes == null ? Collections.emptySet() : new LinkedHashSet<>(
-                aTargetTypes);
-    }
-
-    public String getName()
-    {
-        return name;
+        slots.add(aSlot);
     }
     
-    public Set<String> getTargetTypes()
+    public Set<BratEventSlotDecl> getSlots()
     {
-        return targetTypes;
+        return slots;
     }
 
-    public Set<String> getValues()
-    {
-        return values;
-    }
-    
-    public void addValue(String aValue)
-    {
-        values.add(aValue);
-    }
-    
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(name);
+        sb.append(getType());
         sb.append('\t');
-        sb.append("Arg:");
-        sb.append(StringUtils.join(targetTypes, "|"));
-        if (!values.isEmpty()) {
-            sb.append(", Value:");
-            sb.append(StringUtils.join(values, "|"));
+        boolean first = true;
+        for (BratEventSlotDecl slot : slots) {
+            if (!first) {
+                sb.append(", ");
+            }
+            first = false;
+            
+            sb.append(slot.toString());
         }
+        
         return sb.toString();
     }
 }

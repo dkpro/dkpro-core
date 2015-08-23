@@ -24,7 +24,7 @@ public class BratAttribute
 {
     private static final Pattern PATTERN = Pattern.compile(
             "(?<ID>[AM][0-9]+)" + 
-            "[\\t](?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-]+)" +
+            "[\\t](?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-:]+)" +
             " (?<TARGET>[TREN][0-9]+)" +
             "(?: (?<VALUES>.*))?");
     

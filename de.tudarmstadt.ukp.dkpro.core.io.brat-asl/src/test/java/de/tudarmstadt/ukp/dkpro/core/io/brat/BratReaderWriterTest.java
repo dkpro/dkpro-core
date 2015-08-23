@@ -19,7 +19,9 @@ package de.tudarmstadt.ukp.dkpro.core.io.brat;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static java.util.Arrays.asList;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -53,6 +55,26 @@ public class BratReaderWriterTest
                 "conll/2012/en-orig.conll");
     }
 
+    @Ignore("Test largely ok but due to same spans for constituents not stable, thus ignoring")
+    @Test
+    public void testConll2012_2()
+        throws Exception
+    {
+        testRoundTrip(BratReader.class, BratWriter.class, "conll/2012/en-ref.ann");
+    }
+
+    @Test
+    public void testConll2012_3()
+        throws Exception
+    {
+        testOneWay(Conll2012Reader.class, BratWriter.class, "conll/2012/en-ref-min.ann",
+                "conll/2012/en-orig.conll",
+                Conll2012Reader.PARAM_READ_LEMMA, false,
+                Conll2012Reader.PARAM_READ_NAMED_ENTITY, false,
+                Conll2012Reader.PARAM_READ_SEMANTIC_PREDICATE, false,
+                Conll2012Reader.PARAM_READ_COREFERENCE, false);
+    }
+
     @Test
     public void testWithShortNames()
         throws Exception
@@ -73,8 +95,15 @@ public class BratReaderWriterTest
     public void test1()
         throws Exception
     {
-        testOneWay(BratReader.class, BratWriter.class, "brat/document1-ref.ann",
-                "brat/document1.ann", BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
+        testOneWay(BratReader.class, BratWriter.class, "brat/document1-ref.ann", "brat/document1.ann", 
+                BratReader.PARAM_TYPE_MAPPINGS, asList(
+                        "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation",
+                        "Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location",
+                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                        "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
+                BratReader.PARAM_RELATION_TYPES, asList(
+                        "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value"),
+                BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
     }
 
     @Rule

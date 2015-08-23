@@ -20,40 +20,25 @@ package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RelationParam
+public class EventParam
 {
     public static final String FLAG_ANCHOR = "A";
     
     private static final Pattern PATTERN = Pattern.compile(
-            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-.]+):" +
-            "(?<ARG1>[a-zA-Z][a-zA-Z0-9]+)(?<FLAGS1>\\{A?\\})?:" +
-            "(?<ARG2>[a-zA-Z][a-zA-Z0-9]+)(?<FLAGS2>\\{A?\\})?" + 
-            "(?:[:](?<SUBCAT>[a-zA-Z][a-zA-Z0-9]+))?");
+            "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_\\-.]+)" +
+            "(?<SLOTS>(?:[:][a-zA-Z][a-zA-Z0-9]+)*)");
     
     private static final String TYPE = "TYPE";
-    private static final String ARG1 = "ARG1";
-    private static final String FLAGS1 = "FLAGS1";
-    private static final String ARG2 = "ARG2";
-    private static final String FLAGS2 = "FLAGS2";
-    private static final String SUBCAT = "SUBCAT";
+    private static final String SLOTS = "SLOTS";
 
     private final String type;
-    private final String arg1;
-    private final String flags1;
-    private final String arg2;
-    private final String flags2;
-    private final String subcat;
+    private final String[] slots;
     
-    public RelationParam(String aType, String aArg1, String aFlags1, String aArg2, String aFlags2,
-            String aSubCat)
+    public EventParam(String aType, String... aSlots)
     {
         super();
         type = aType;
-        arg1 = aArg1;
-        flags1 = aFlags1;
-        arg2 = aArg2;
-        flags2 = aFlags2;
-        subcat = aSubCat;
+        slots = aSlots;
     }
     
     public String getType()
@@ -61,32 +46,12 @@ public class RelationParam
         return type;
     }
 
-    public String getArg1()
+    public String[] getSlots()
     {
-        return arg1;
-    }
-    
-    public String getFlags1()
-    {
-        return flags1 != null ? flags1 : "";
+        return slots;
     }
 
-    public String getArg2()
-    {
-        return arg2;
-    }
-    
-    public String getFlags2()
-    {
-        return flags2 != null ? flags2 : "";
-    }
-
-    public String getSubcat()
-    {
-        return subcat;
-    }
-
-    public static RelationParam parse(String aValue)
+    public static EventParam parse(String aValue)
     {
         Matcher m = PATTERN.matcher(aValue);
         
@@ -94,7 +59,8 @@ public class RelationParam
             throw new IllegalArgumentException("Illegal relation parameter format [" + aValue + "]");
         }
 
-        return new RelationParam(m.group(TYPE), m.group(ARG1), m.group(FLAGS1), m.group(ARG2),
-                m.group(FLAGS2), m.group(SUBCAT));
+        String[] slots = m.group(SLOTS) != null ? m.group(SLOTS).split(":") : new String[] {};
+        
+        return new EventParam(m.group(TYPE), slots);
     }
 }

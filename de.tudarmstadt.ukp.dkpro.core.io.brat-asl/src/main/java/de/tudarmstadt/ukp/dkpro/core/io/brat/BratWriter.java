@@ -25,10 +25,13 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
@@ -38,8 +41,10 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
 import org.apache.uima.cas.Type;
+import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.FSUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
@@ -48,10 +53,15 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttributeDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratConfiguration;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotation;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotationDecl;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventSlotDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratVisualConfiguration;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.EventParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
 
@@ -122,6 +132,15 @@ public class BratWriter extends JCasFileWriter_ImplBase
     private Map<String, RelationParam> parsedRelationTypes;
 
     /**
+     * Types that are events. Optionally, multiple slot features can be specified.
+     * <code>my.type.Event:location:participant</code>.
+     */
+    public static final String PARAM_EVENT_TYPES = "eventTypes";
+    @ConfigurationParameter(name = PARAM_EVENT_TYPES, mandatory = true, defaultValue = { })
+    private Set<String> eventTypes;
+    private Map<String, EventParam> parsedEventTypes;
+
+    /**
      * Enable type mappings.
      */
     public static final String PARAM_ENABLE_TYPE_MAPPINGS = "enableTypeMappings";
@@ -152,8 +171,8 @@ public class BratWriter extends JCasFileWriter_ImplBase
     /**
      * Enable writing of features with null values.
      */
-    public static final String PARAM_WRITE_NUKK_ATTRIBUTES = "writeNullAttributes";
-    @ConfigurationParameter(name = PARAM_WRITE_NUKK_ATTRIBUTES, mandatory = true, defaultValue = "false")
+    public static final String PARAM_WRITE_NULL_ATTRIBUTES = "writeNullAttributes";
+    @ConfigurationParameter(name = PARAM_WRITE_NULL_ATTRIBUTES, mandatory = true, defaultValue = "false")
     private boolean writeNullAttributes;
 
     /**
@@ -165,6 +184,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
             "#bc80bd", "#ccebc5", "#ffed6f" })
     private String[] palette;
 
+    /**
+     * Whether to render attributes by their short name or by their qualified name.
+     */
+    public static final String PARAM_SHORT_ATTRIBUTE_NAMES = "shortAttributeNames";
+    @ConfigurationParameter(name = PARAM_SHORT_ATTRIBUTE_NAMES, mandatory = true, defaultValue = "false")
+    private boolean shortAttributeNames;
+    
+    private int nextEventAnnotationId;
     private int nextTextAnnotationId;
     private int nextRelationAnnotationId;
     private int nextAttributeId;
@@ -191,7 +218,13 @@ public class BratWriter extends JCasFileWriter_ImplBase
             RelationParam p = RelationParam.parse(rel);
             parsedRelationTypes.put(p.getType(), p);
         }
-        
+
+        parsedEventTypes = new HashMap<>();
+        for (String rel : eventTypes) {
+            EventParam p = EventParam.parse(rel);
+            parsedEventTypes.put(p.getType(), p);
+        }
+
         if (enableTypeMappings) {
             typeMapping = new TypeMapping(typeMappings);
         }
@@ -201,6 +234,7 @@ public class BratWriter extends JCasFileWriter_ImplBase
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
+        nextEventAnnotationId = 1;
         nextTextAnnotationId = 1;
         nextRelationAnnotationId = 1;
         nextAttributeId = 1;
@@ -255,7 +289,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
         BratAnnotationDocument doc = new BratAnnotationDocument();
         
         List<FeatureStructure> relationFS = new ArrayList<>();
-        
+
+        Map<BratEventAnnotation, FeatureStructure> eventFS = new LinkedHashMap<>();
+
         // Go through all the annotations but only handle the ones that have no references to
         // other annotations.
         for (FeatureStructure fs : selectAll(aJCas)) {
@@ -276,6 +312,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
             else if (parsedRelationTypes.containsKey(fs.getType().getName())) {
                 relationFS.add(fs);
             }
+            else if (hasNonPrimitiveFeatures(fs) && (fs instanceof AnnotationFS)) {
+//            else if (parsedEventTypes.containsKey(fs.getType().getName())) {
+                BratEventAnnotation event = writeEventAnnotation(doc, (AnnotationFS) fs);
+                eventFS.put(event, fs);
+            }
             else if (fs instanceof AnnotationFS) {
                 warnings.add("Assuming annotation type ["+fs.getType().getName()+"] is span");
                 writeTextAnnotation(doc, (AnnotationFS) fs);
@@ -289,10 +330,33 @@ public class BratWriter extends JCasFileWriter_ImplBase
         for (FeatureStructure fs : relationFS) {
             writeRelationAnnotation(doc, fs);
         }
+        
+        // Handle event slots now since now we can resolve their targets to IDs.
+        for (Entry<BratEventAnnotation, FeatureStructure> e : eventFS.entrySet()) {
+            writeSlots(e.getKey(), e.getValue());
+        }
 
         try (Writer out = new OutputStreamWriter(getOutputStream(aJCas, filenameSuffix), "UTF-8")) {
             doc.write(out);
         }
+    }
+    
+    /**
+     * Checks if the feature structure has non-default non-primitive properties.
+     */
+    private boolean hasNonPrimitiveFeatures(FeatureStructure aFS)
+    {
+        for (Feature f : aFS.getType().getFeatures()) {
+            if (CAS.FEATURE_BASE_NAME_SOFA.equals(f.getShortName())) {
+                continue;
+            }
+            
+            if (!f.getRange().isPrimitive()) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 
     private String getBratType(Type aType)
@@ -305,6 +369,100 @@ public class BratWriter extends JCasFileWriter_ImplBase
         }
     }
     
+    private BratEventAnnotation writeEventAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)
+    {
+        // Write trigger annotation
+        BratTextAnnotation trigger = new BratTextAnnotation(nextTextAnnotationId, 
+                getBratType(aFS.getType()), aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+        nextTextAnnotationId++;
+        
+        // Write event annotation
+        BratEventAnnotation event = new BratEventAnnotation(nextEventAnnotationId,
+                getBratType(aFS.getType()), trigger.getId());
+        spanIdMap.put(aFS, event.getId());
+        nextEventAnnotationId++;
+
+        // We do not add the trigger annotations to the document - they are owned by the event
+        //aDoc.addAnnotation(trigger);
+        event.setTriggerAnnotation(trigger);
+        
+        // Write attributes
+        writeAttributes(event, aFS);
+        
+        // Slots are written later after we know all the span/event IDs
+        
+        visual.addLabelDecl(event.getType(), aFS.getType().getShortName(), aFS.getType()
+                .getShortName().substring(0, 1));
+
+        if (!visual.hasDrawingDecl(event.getType())) {
+            visual.addDrawingDecl(new BratTextAnnotationDrawingDecl(event.getType(), "black",
+                    palette[nextPaletteIndex % palette.length]));
+            nextPaletteIndex++;
+        }
+        
+        aDoc.addAnnotation(event);
+        return event;
+    }
+    
+    private void writeSlots(BratEventAnnotation aEvent, FeatureStructure aFS)
+    {
+        String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
+        String type = getBratType(aFS.getType());
+        
+        assert type.equals(aEvent.getType());
+        
+        BratEventAnnotationDecl decl = conf.getEventDecl(type);
+        if (decl == null) {
+            decl = new BratEventAnnotationDecl(superType, type);
+            conf.addEventDecl(decl);
+        }
+        
+        Map<String, List<BratEventArgument>> slots = new LinkedHashMap<>();
+        for (Feature feat : aFS.getType().getFeatures()) {
+            if (!isSlotFeature(aFS, feat)) {
+                continue;
+            }
+            String slot = feat.getShortName();
+
+            List<BratEventArgument> args = slots.get(slot);
+            if (args == null) {
+                args = new ArrayList<>();
+                slots.put(slot, args);
+            }
+
+            if (FSUtil.isMultiValuedFeature(aFS, feat)) {
+                BratEventSlotDecl slotDecl = new BratEventSlotDecl(slot,
+                        BratEventSlotDecl.CARD_ZERO_OR_MORE);
+                decl.addSlot(slotDecl);
+
+                FeatureStructure[] targets = FSUtil.getFeature(aFS, feat, FeatureStructure[].class);
+                for (FeatureStructure target : targets) {
+                    BratEventArgument arg = new BratEventArgument(slot, args.size(),
+                            spanIdMap.get(target));
+                    args.add(arg);
+                }
+            }
+            else {
+                BratEventSlotDecl slotDecl = new BratEventSlotDecl(slot,
+                        BratEventSlotDecl.CARD_OPTIONAL);
+                decl.addSlot(slotDecl);
+                
+                FeatureStructure target = FSUtil.getFeature(aFS, feat, FeatureStructure.class);
+                BratEventArgument arg = new BratEventArgument(slot, args.size(),
+                        spanIdMap.get(target));
+                args.add(arg);
+            }
+        }
+        
+        aEvent.setArguments(slots.values().stream().flatMap(args -> args.stream())
+                .collect(Collectors.toList()));
+    }
+
+    private boolean isSlotFeature(FeatureStructure aFS, Feature aFeature)
+    {
+        return FSUtil.isMultiValuedFeature(aFS, aFeature);
+    }
+
     private void writeRelationAnnotation(BratAnnotationDocument aDoc, FeatureStructure aFS)
     {
         RelationParam rel = parsedRelationTypes.get(aFS.getType().getName());
@@ -325,11 +483,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
             throw new IllegalArgumentException("Unknown targets!");
         }
 
+        String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
+        String type = getBratType(aFS.getType());
+        
         BratRelationAnnotation anno = new BratRelationAnnotation(nextRelationAnnotationId,
-                getBratType(aFS.getType()), rel.getArg1(), arg1Id, rel.getArg2(), arg2Id);
+                type, rel.getArg1(), arg1Id, rel.getArg2(), arg2Id);
         nextRelationAnnotationId++;
         
-        conf.addRelationDecl(anno.getType(), rel.getArg1(), rel.getArg2());
+        conf.addRelationDecl(superType, type, rel.getArg1(), rel.getArg2());
         
         visual.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
                 .getShortName().substring(0, 1));
@@ -345,11 +506,14 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
     private void writeTextAnnotation(BratAnnotationDocument aDoc, AnnotationFS aFS)
     {
-        BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, 
-                getBratType(aFS.getType()), aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
+        String superType = getBratType(aFS.getCAS().getTypeSystem().getParent(aFS.getType()));
+        String type = getBratType(aFS.getType());
+        
+        BratTextAnnotation anno = new BratTextAnnotation(nextTextAnnotationId, type,
+                aFS.getBegin(), aFS.getEnd(), aFS.getCoveredText());
         nextTextAnnotationId++;
 
-        conf.addEntityDecl(anno.getType());
+        conf.addEntityDecl(superType, type);
         
         visual.addLabelDecl(anno.getType(), aFS.getType().getShortName(), aFS.getType()
                 .getShortName().substring(0, 1));
@@ -392,6 +556,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
                 }
             }
             
+            String attributeName = shortAttributeNames ? feat.getShortName() : feat.getName()
+                    .replace('.', '-').replace(':', '_');
+
             if (feat.getRange().isPrimitive()) {
                 String featureValue = aFS.getFeatureValueAsString(feat);
                 
@@ -400,19 +567,49 @@ public class BratWriter extends JCasFileWriter_ImplBase
                     continue;
                 }
                 
-                aAnno.addAttribute(nextAttributeId, feat.getShortName(), featureValue);
+                aAnno.addAttribute(nextAttributeId, attributeName, featureValue);
                 nextAttributeId++;
                 
-                BratAttributeDecl attrDecl = conf.addAttributeDecl(aAnno.getType(),
-                        feat.getShortName(), featureValue);
-                visual.addDrawingDecl(attrDecl);
+                // Do not write certain values to the visual/annotation configuration because
+                // they are not compatible with the brat annotation file format. The values are
+                // still maintained in the ann file.
+                if (isValidFeatureValue(featureValue)) {
+                    // Features are inherited to subtypes in UIMA. By storing the attribute under
+                    // the name of the type that declares the feature (domain) instead of the name
+                    // of the actual instance we are processing, we make sure not to maintain
+                    // multiple value sets for the same feature.
+                    BratAttributeDecl attrDecl = conf.addAttributeDecl(
+                            getBratType(feat.getDomain()),
+                            getAllSubtypes(aFS.getCAS().getTypeSystem(), feat.getDomain()),
+                            attributeName, featureValue);
+                    visual.addDrawingDecl(attrDecl);
+                }
             }
             else {
                 warnings.add(
-                        "Unable to handle feature [" + feat.getName() + "] with type ["
-                                + feat.getRange().getName() + "]");
+                        "Unable to render feature [" + feat.getName() + "] with range ["
+                                + feat.getRange().getName() + "] as attribute");
             }
         }
+    }
+    
+    // This generates lots of types as well that we may not otherwise have in declared in the
+    // brat configuration files, but brat doesn't seem to mind.
+    private Set<String> getAllSubtypes(TypeSystem aTS, Type aType) 
+    {
+        Set<String> types = new LinkedHashSet<>();
+        aTS.getProperlySubsumedTypes(aType).stream().forEach(t -> types.add(getBratType(t)));
+        return types;
+    }
+
+    /**
+     * Some feature values do not need to be registered or cannot be registered because brat does
+     * not support them.
+     */
+    private boolean isValidFeatureValue(String aFeatureValue)
+    {
+        // https://github.com/nlplab/brat/issues/1149
+        return !(aFeatureValue == null || aFeatureValue.length() == 0 || aFeatureValue.equals(","));
     }
 
     private void writeText(JCas aJCas)

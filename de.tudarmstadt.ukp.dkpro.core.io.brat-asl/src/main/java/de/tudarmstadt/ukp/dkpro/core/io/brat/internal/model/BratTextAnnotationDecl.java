@@ -18,22 +18,16 @@
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
 public class BratTextAnnotationDecl
+    extends BratAnnotationDecl
 {
-    private final String type;
-
-    public BratTextAnnotationDecl(String aType)
+    public BratTextAnnotationDecl(String aSuperType, String aType)
     {
-        type = aType;
-    }
-
-    public String getType()
-    {
-        return type;
+        super(aSuperType, aType);
     }
 
     @Override
     public String toString()
     {
-        return type;
+        return getType();
     }
 }

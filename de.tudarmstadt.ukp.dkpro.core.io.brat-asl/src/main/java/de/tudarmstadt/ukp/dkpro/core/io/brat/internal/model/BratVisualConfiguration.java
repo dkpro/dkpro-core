@@ -34,7 +34,12 @@ public class BratVisualConfiguration
 
     public void addDrawingDecl(BratAttributeDecl aAttribute)
     {
-        drawings.put(aAttribute.getType(), new BratAttributeDrawingDecl(aAttribute));
+        drawings.put(aAttribute.getName(), new BratAttributeDrawingDecl(aAttribute));
+    }
+    
+    public BratDrawingDecl getDrawingDecl(String aType)
+    {
+        return drawings.get(aType);
     }
     
     public void addDrawingDecl(BratDrawingDecl aDecl)

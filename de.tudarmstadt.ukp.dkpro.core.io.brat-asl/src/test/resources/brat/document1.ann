@@ -1,3 +1,6 @@
 T1	Organization 0 4	Sony
+T2	MERGE-ORG 14 27	joint venture
 T3	Organization 33 41	Ericsson
-T4	Location 75 81	Sweden
+E1	MERGE-ORG:T2 Org1:T1 Org2:T3
+T4	Country 75 81	Sweden
+R1	Origin Arg1:T3 Arg2:T4

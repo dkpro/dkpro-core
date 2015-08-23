@@ -20,8 +20,10 @@ package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -35,6 +37,8 @@ public class BratAnnotationDocument
     public static BratAnnotationDocument read(Reader aReader)
     {
         BratAnnotationDocument doc = new BratAnnotationDocument();
+        
+        List<BratEventAnnotation> events = new ArrayList<>();
         
         // Read from file
         LineIterator lines = IOUtils.lineIterator(aReader);
@@ -51,14 +55,17 @@ public class BratAnnotationDocument
             case 'R':
                 doc.addAnnotation(BratRelationAnnotation.parse(line));
                 break;
-            case 'E':
-                // Entities not yet supported
+            case 'E': {
+                BratEventAnnotation e = BratEventAnnotation.parse(line);
+                events.add(e);
+                doc.addAnnotation(e);
                 break;
+            }
             default:
                 throw new IllegalStateException("Unknown annotation format: [" + line + "]");
             }
         }
-        
+
         // Attach attributes to annotations
         for (BratAttribute attr : doc.attributes.values()) {
             BratAnnotation target = doc.annotations.get(attr.getTarget());
@@ -70,6 +77,28 @@ public class BratAnnotationDocument
             
             target.addAttribute(attr);
         }
+
+        // FIXME this is currently inconsistent between reading and manual creation / writing
+        // when we read the triggers, they no longer appear as individual annotations
+        // when we manually create the brat annotations, we leave the triggers
+        
+        // Attach triggers to events and remove them as individual annotations
+        List<String> triggersIds = new ArrayList<>();
+        for (BratEventAnnotation event : events) {
+            BratTextAnnotation trigger = (BratTextAnnotation) doc.annotations.get(event
+                    .getTrigger());
+
+            if (trigger == null) {
+                throw new IllegalStateException("Trigger refers to unknown annotation ["
+                        + event.getTrigger() + "]");
+            }
+            
+            triggersIds.add(trigger.getId());
+            event.setTriggerAnnotation(trigger);
+        }
+        
+        // Remove trigger annotations, they are owned by the event
+        doc.annotations.keySet().removeAll(triggersIds);
         
         return doc;
     }
@@ -77,13 +106,38 @@ public class BratAnnotationDocument
     public void write(Writer aWriter)
         throws IOException
     {
+        // First render only the spans because brat wants to now them first for their IDs
         for (BratAnnotation anno : annotations.values()) {
-            aWriter.append(anno.toString());
-            aWriter.append('\n');
-            for (BratAttribute attr : anno.getAttributes()) {
-                aWriter.append(attr.toString());
-                aWriter.append('\n');
+            if (anno instanceof BratTextAnnotation) {
+                write(aWriter, anno);
             }
+            
+            if (anno instanceof BratEventAnnotation) {
+                // Just write the trigger for now
+                BratEventAnnotation event = (BratEventAnnotation) anno;
+                write(aWriter, event.getTriggerAnnotation());
+            }
+        }
+        
+        // Second render all annotations that point to span annotations
+        for (BratAnnotation anno : annotations.values()) {
+            // Skip the text annotations, we already rendered them in thef irst pass
+            if (anno instanceof BratTextAnnotation) {
+                continue;
+            }
+
+            write(aWriter, anno);
+        }
+    }
+    
+    private void write(Writer aWriter, BratAnnotation aAnno)
+        throws IOException
+    {
+        aWriter.append(aAnno.toString());
+        aWriter.append('\n');
+        for (BratAttribute attr : aAnno.getAttributes()) {
+            aWriter.append(attr.toString());
+            aWriter.append('\n');
         }
     }
     
