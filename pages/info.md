@@ -4,7 +4,7 @@ title: "About DKPro Core"
 permalink: "/info/"
 ---
 
-This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Dr. Iryna Gurevych.
+This project was initiated by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Iryna Gurevych.
 
 ## What is DKPro and DKPro Core?
 
@@ -59,13 +59,13 @@ A comprehensive (but probably not complete) list of scientific publications citi
 <fieldset class="row t20 b20" style="padding: 1em;">
 <legend>Additionally, the development of DKPro Core is supported by:</legend>
 <div class="row">
-  <div class="medium-6 columns">Prof. Dr. Iryna Gurevych,<br/><i>Technische Universität Darmstadt</i></div>
+  <div class="medium-6 columns">Prof. Iryna Gurevych,<br/><i>Technische Universität Darmstadt</i></div>
   <div class="medium-3 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/tud_logo.gif"/></div>
   <div class="medium-3 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/ukp-lab.png"/></div>
 </div>
 
 <div class="row t20">
-  <div class="medium-6 columns">Prof. Dr. Torsten Zesch,<br/><i>Universität Duisburg-Essen</i></div>
+  <div class="medium-6 columns">Prof. Torsten Zesch,<br/><i>Universität Duisburg-Essen</i></div>
   <div class="medium-6 columns"><img style="height: 64px" src="{{ site.urlimg }}/logos/logo_claim_en_rgb_72dpi.png"/></div>
 </div>
 </fieldset>
