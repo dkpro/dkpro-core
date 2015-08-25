@@ -133,3 +133,43 @@ of annotation supported by DKPro Core, e.g.:
 * `assertTagsetMapping`
 
 
+=== Testing I/O componets
+
+The IOTestRunner class offers convenient methods to test I/O components:
+
+* `testRoundTrip` can be used to test converting a format to CAS, converting it back and comparing
+  it to the original
+* `testOneWay` instead is useful to read data and compare it to a reference file in a different
+  format (e.g. CasDumpWriter format). It can also be used if there a full round-trip is not possible
+  because some information is lost or cannot be exported exactly as ingested from the original file.
+
+The input file and reference file path given to these methods is always considered relative to
+src/test/resources`.
+
+.Example using `testRoundTrip`
+[source,java]
+----
+testRoundTrip(Conll2002Reader.class, Conll2002Writer.class,
+  "conll/2002/ner2002_test.conll");
+----
+
+.Example using `testRoundTrip` with extra parameters
+[source,java]
+----
+testRoundTrip(
+  createReaderDescription(BratReader.class), 
+  createEngineDescription(BratWriter.class, 
+    BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
+  "conll/2009/en-ref.ann");
+----
+
+.Example using `testOneWay` with extra parameters
+[source,java]
+----
+testOneWay(
+  createReaderDescription(Conll2009Reader.class), 
+  createEngineDescription(BratWriter.class,
+    BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
+  "conll/2009/en-ref.ann",
+  "conll/2009/en-orig.conll");
+----
