@@ -18,6 +18,7 @@
 package de.tudarmstadt.ukp.dkpro.core.io.negra;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,30 +37,39 @@ public class NegraExportReaderTest
 	public void negraTest()
 		throws Exception
 	{
-        testOneWay(NegraExportReader.class, "sentence.export.dump", "sentence.export",
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_ENCODING, "UTF-8",
-                NegraExportReader.PARAM_READ_PENN_TREE, true);
+        testOneWay(
+                createReaderDescription(NegraExportReader.class,
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
+                "sentence.export.dump", 
+                "sentence.export");
 	}
 
 	@Test
 	public void negraTigerTest()
 		throws Exception
 	{
-        testOneWay(NegraExportReader.class, "tiger-sample.export.dump", "tiger-sample.export",
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
-                NegraExportReader.PARAM_READ_PENN_TREE, true);
+        testOneWay(
+                createReaderDescription(NegraExportReader.class,
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
+                "tiger-sample.export.dump", 
+                "tiger-sample.export");
 	}
 
 	@Test
 	public void tuebaTest()
 		throws Exception
 	{
-        testOneWay(NegraExportReader.class, "tueba-sample.export.dump", "tueba-sample.export",
-                NegraExportReader.PARAM_LANGUAGE, "de",
-                NegraExportReader.PARAM_ENCODING, "UTF-8",
-                NegraExportReader.PARAM_READ_PENN_TREE, true);
+        testOneWay(
+                createReaderDescription(NegraExportReader.class,
+                        NegraExportReader.PARAM_LANGUAGE, "de",
+                        NegraExportReader.PARAM_ENCODING, "UTF-8",
+                        NegraExportReader.PARAM_READ_PENN_TREE, true), 
+                "tueba-sample.export.dump", 
+                "tueba-sample.export");
 	}
 
     @Rule

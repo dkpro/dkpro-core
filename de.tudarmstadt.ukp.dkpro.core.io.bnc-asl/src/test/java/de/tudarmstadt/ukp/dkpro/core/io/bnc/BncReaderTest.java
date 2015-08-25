@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.bnc;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.*;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -28,8 +30,11 @@ public class BncReaderTest
 	@Test
 	public void test() throws Exception
 	{
-        testOneWay(BncReader.class, "FX8.xml.dump", "FX8.xml",
-                BncReader.PARAM_LANGUAGE, "en");
+        testOneWay(
+                createReaderDescription(BncReader.class,
+                        BncReader.PARAM_LANGUAGE, "en"), 
+                "FX8.xml.dump", 
+                "FX8.xml");
 	}
 	
     @Rule

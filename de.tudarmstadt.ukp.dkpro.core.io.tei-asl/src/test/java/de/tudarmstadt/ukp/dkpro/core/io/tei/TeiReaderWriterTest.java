@@ -18,6 +18,8 @@
 package de.tudarmstadt.ukp.dkpro.core.io.tei;
 
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,8 +39,11 @@ public class TeiReaderWriterTest
     public void test2()
         throws Exception
     {
-        testRoundTrip(TeiReader.class, TeiWriter.class, "reference/example2.xml",
-                TeiWriter.PARAM_WRITE_CONSTITUENT, true);
+        testRoundTrip(
+                createReaderDescription(TeiReader.class), 
+                createEngineDescription(TeiWriter.class,
+                        TeiWriter.PARAM_WRITE_CONSTITUENT, true), 
+                "reference/example2.xml");
     }
 
     @Rule

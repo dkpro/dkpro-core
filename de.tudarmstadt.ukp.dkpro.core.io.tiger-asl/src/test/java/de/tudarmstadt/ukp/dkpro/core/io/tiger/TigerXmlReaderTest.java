@@ -74,18 +74,24 @@ public class TigerXmlReaderTest
     public void tigerSampleTest()
         throws Exception
     {
-        testOneWay(TigerXmlReader.class, "tiger-sample.xml.dump", "tiger-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "de",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+        testOneWay(
+                createReaderDescription(TigerXmlReader.class,
+                        TigerXmlReader.PARAM_LANGUAGE, "de",
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true), 
+                "tiger-sample.xml.dump", 
+                "tiger-sample.xml");
     }
 
     @Test
     public void semevalSampleTest()
         throws Exception
     {
-        testOneWay(TigerXmlReader.class, "semeval1010-sample.xml.dump", "semeval1010-en-sample.xml",
-                TigerXmlReader.PARAM_LANGUAGE, "en",
-                TigerXmlReader.PARAM_READ_PENN_TREE, true);
+        testOneWay(
+                createReaderDescription(TigerXmlReader.class,
+                        TigerXmlReader.PARAM_LANGUAGE, "en",
+                        TigerXmlReader.PARAM_READ_PENN_TREE, true), 
+                "semeval1010-sample.xml.dump", 
+                "semeval1010-en-sample.xml");
     }
 
     @Rule

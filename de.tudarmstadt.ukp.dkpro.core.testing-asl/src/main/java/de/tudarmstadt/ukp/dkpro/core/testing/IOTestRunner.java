@@ -17,19 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
-import static java.util.Arrays.asList;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.getParameterSettings;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParameter;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.uima.analysis_component.AnalysisComponent;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
@@ -42,36 +41,48 @@ public class IOTestRunner
 {
     private static final String RESOURCE_COLLECTION_READER_BASE = "de.tudarmstadt.ukp.dkpro.core.api.io.ResourceCollectionReaderBase";
     private static final String JCAS_FILE_WRITER_IMPL_BASE = "de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase";
-    
+        
     public static void testRoundTrip(Class<? extends CollectionReader> aReader,
-            Class<? extends AnalysisComponent> aWriter, String aFile, Object... aExtraParams)
+            Class<? extends AnalysisComponent> aWriter, String aFile)
         throws Exception
     {
-        testOneWay(aReader, aWriter, aFile, aFile, aExtraParams);
+        testOneWay(createReaderDescription(aReader), createEngineDescription(aWriter), aFile, aFile);
     }
-    
-    public static void testOneWay(Class<? extends CollectionReader> aReader, String aExpectedFile,
-            String aFile, Object... aExtraParams)
+
+    public static void testRoundTrip(CollectionReaderDescription aReader,
+            AnalysisEngineDescription aWriter, String aFile)
         throws Exception
     {
-        String outputFolder = aReader.getSimpleName() + "-" + FilenameUtils.getBaseName(aFile);
+        testOneWay(aReader, aWriter, aFile, aFile);
+    }
+
+    public static void testOneWay(Class<? extends CollectionReader> aReader, String aExpectedFile,
+            String aFile)
+        throws Exception
+    {
+        testOneWay(createReaderDescription(aReader), aExpectedFile, aFile);
+    }
+
+    public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
+            String aFile)
+        throws Exception
+    {
+        String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
+                + "-" + FilenameUtils.getBaseName(aFile);
         if (DkproTestContext.get() != null) {
             outputFolder = DkproTestContext.get().getTestOutputFolderName();
         }
-        File output = new File("target/test-output/" + outputFolder+ "/dump.txt");
-        
-        Object[] extraParams = aExtraParams;
-        extraParams = ArrayUtils.add(extraParams, CasDumpWriter.PARAM_TARGET_LOCATION);
-        extraParams = ArrayUtils.add(extraParams, output);
-        extraParams = ArrayUtils.add(extraParams, CasDumpWriter.PARAM_SORT);
-        extraParams = ArrayUtils.add(extraParams, true);
-        
-        testOneWay2(aReader, CasDumpWriter.class, aExpectedFile, "dump.txt", aFile, extraParams);
+        File output = new File("target/test-output/" + outputFolder + "/dump.txt");
+
+        AnalysisEngineDescription writer = createEngineDescription(
+                CasDumpWriter.class, CasDumpWriter.PARAM_TARGET_LOCATION, output,
+                CasDumpWriter.PARAM_SORT, true);
+
+        testOneWay2(aReader, writer, aExpectedFile, "dump.txt", aFile);
     }
-    
+
     public static void testOneWay(Class<? extends CollectionReader> aReader,
-            Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile,
-            Object... aExtraParams)
+            Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aFile)
         throws Exception
     {
         Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
@@ -91,44 +102,67 @@ public class IOTestRunner
         String extension = FilenameUtils.getExtension(aExpectedFile);
         String name = FilenameUtils.getBaseName(aFile);
 
-        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile, aExtraParams);
+        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile);
     }
 
+    public static void testOneWay(CollectionReaderDescription aReader,
+            AnalysisEngineDescription aWriter, String aExpectedFile, String aFile)
+        throws Exception
+    {
+        Class<?> dkproReaderBase = Class.forName(RESOURCE_COLLECTION_READER_BASE);
+        if (!dkproReaderBase.isAssignableFrom(Class.forName(aReader.getImplementationName()))) {
+            throw new IllegalArgumentException("Reader must be a subclass of ["
+                    + RESOURCE_COLLECTION_READER_BASE + "]");
+        }
+
+        Class<?> dkproWriterBase = Class.forName(JCAS_FILE_WRITER_IMPL_BASE);
+        if (!dkproWriterBase.isAssignableFrom(Class.forName(aWriter.getAnnotatorImplementationName()))) {
+            throw new IllegalArgumentException("writer must be a subclass of ["
+                    + JCAS_FILE_WRITER_IMPL_BASE + "]");
+        }
+        
+        // We assume that the writer is creating a file with the same extension as is provided as
+        // the expected file
+        String extension = FilenameUtils.getExtension(aExpectedFile);
+        String name = FilenameUtils.getBaseName(aFile);
+
+        testOneWay2(aReader, aWriter, aExpectedFile, name + "." + extension, aFile);
+    }
+    
+    @Deprecated
     public static void testOneWay2(Class<? extends CollectionReader> aReader,
             Class<? extends AnalysisComponent> aWriter, String aExpectedFile, String aOutputFile,
             String aFile, Object... aExtraParams)
         throws Exception
     {
-        String outputFolder = aReader.getSimpleName() + "-" + FilenameUtils.getBaseName(aFile);
+        testOneWay2(createReaderDescription(aReader, aExtraParams),
+                createEngineDescription(aWriter, aExtraParams),
+                aExpectedFile, aOutputFile, aFile);
+    }
+
+    public static void testOneWay2(CollectionReaderDescription aReader,
+            AnalysisEngineDescription aWriter, String aExpectedFile, String aOutputFile,
+            String aInputFile)
+        throws Exception
+    {
+        String outputFolder = StringUtils.substringAfterLast(aReader.getImplementationName(), ".")
+                + "-" + FilenameUtils.getBaseName(aInputFile);
         if (DkproTestContext.get() != null) {
             outputFolder = DkproTestContext.get().getTestOutputFolderName();
         }
         
         File reference = new File("src/test/resources/" + aExpectedFile);
-        File input = new File("src/test/resources/" + aFile);
+        File input = new File("src/test/resources/" + aInputFile);
         File output = new File("target/test-output/" + outputFolder);
 
-        List<Object> extraReaderParams = new ArrayList<>();
-        extraReaderParams.add(ComponentParameters.PARAM_SOURCE_LOCATION);
-        extraReaderParams.add(input);
-        extraReaderParams.addAll(asList(aExtraParams));
+        setParameter(aReader, ComponentParameters.PARAM_SOURCE_LOCATION, input);
 
-        CollectionReaderDescription reader = createReaderDescription(aReader,
-                extraReaderParams.toArray());
-
-        List<Object> extraWriterParams = new ArrayList<>();
-        if (!ArrayUtils.contains(aExtraParams, ComponentParameters.PARAM_TARGET_LOCATION)) {
-            extraWriterParams.add(ComponentParameters.PARAM_TARGET_LOCATION);
-            extraWriterParams.add(output);
+        setParameter(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION, true);
+        if (!getParameterSettings(aWriter).containsKey(ComponentParameters.PARAM_TARGET_LOCATION)) {
+            setParameter(aWriter, ComponentParameters.PARAM_TARGET_LOCATION, output);
         }
-        extraWriterParams.add(ComponentParameters.PARAM_STRIP_EXTENSION);
-        extraWriterParams.add(true);
-        extraWriterParams.addAll(asList(aExtraParams));
-
-        AnalysisEngineDescription writer = createEngineDescription(aWriter,
-                extraWriterParams.toArray());
-
-        runPipeline(reader, writer);
+        
+        runPipeline(aReader, aWriter);
 
         String expected = FileUtils.readFileToString(reference, "UTF-8");
         String actual = FileUtils.readFileToString(new File(output, aOutputFile), "UTF-8");
