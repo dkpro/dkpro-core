@@ -36,7 +36,6 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.AnnotationBaseFS;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Feature;
 import org.apache.uima.cas.FeatureStructure;
@@ -53,15 +52,15 @@ import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAnnotationDocument;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratAttributeDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratConfiguration;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratConstants;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventAnnotationDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgument;
-import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventSlotDecl;
+import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratEventArgumentDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratRelationAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotation;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratTextAnnotationDrawingDecl;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.BratVisualConfiguration;
-import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.EventParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.RelationParam;
 import de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model.TypeMapping;
 
@@ -109,15 +108,16 @@ public class BratWriter extends JCasFileWriter_ImplBase
      */
     public static final String PARAM_TEXT_ANNOTATION_TYPES = "spanTypes";
     @ConfigurationParameter(name = PARAM_TEXT_ANNOTATION_TYPES, mandatory = true, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
-            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem",
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk",
-            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument", 
-            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate" })
+//            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence",
+//            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+//            "de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS",
+//            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma",
+//            "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Stem",
+//            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.chunk.Chunk",
+//            "de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+//            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticArgument", 
+//            "de.tudarmstadt.ukp.dkpro.core.api.semantics.type.SemanticPredicate" 
+            })
     private Set<String> spanTypes;
 
     /**
@@ -127,18 +127,19 @@ public class BratWriter extends JCasFileWriter_ImplBase
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent" })
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent" 
+            })
     private Set<String> relationTypes;
     private Map<String, RelationParam> parsedRelationTypes;
 
-    /**
-     * Types that are events. Optionally, multiple slot features can be specified.
-     * <code>my.type.Event:location:participant</code>.
-     */
-    public static final String PARAM_EVENT_TYPES = "eventTypes";
-    @ConfigurationParameter(name = PARAM_EVENT_TYPES, mandatory = true, defaultValue = { })
-    private Set<String> eventTypes;
-    private Map<String, EventParam> parsedEventTypes;
+//    /**
+//     * Types that are events. Optionally, multiple slot features can be specified.
+//     * <code>my.type.Event:location:participant</code>.
+//     */
+//    public static final String PARAM_EVENT_TYPES = "eventTypes";
+//    @ConfigurationParameter(name = PARAM_EVENT_TYPES, mandatory = true, defaultValue = { })
+//    private Set<String> eventTypes;
+//    private Map<String, EventParam> parsedEventTypes;
 
     /**
      * Enable type mappings.
@@ -219,11 +220,11 @@ public class BratWriter extends JCasFileWriter_ImplBase
             parsedRelationTypes.put(p.getType(), p);
         }
 
-        parsedEventTypes = new HashMap<>();
-        for (String rel : eventTypes) {
-            EventParam p = EventParam.parse(rel);
-            parsedEventTypes.put(p.getType(), p);
-        }
+//        parsedEventTypes = new HashMap<>();
+//        for (String rel : eventTypes) {
+//            EventParam p = EventParam.parse(rel);
+//            parsedEventTypes.put(p.getType(), p);
+//        }
 
         if (enableTypeMappings) {
             typeMapping = new TypeMapping(typeMappings);
@@ -431,26 +432,30 @@ public class BratWriter extends JCasFileWriter_ImplBase
             }
 
             if (FSUtil.isMultiValuedFeature(aFS, feat)) {
-                BratEventSlotDecl slotDecl = new BratEventSlotDecl(slot,
-                        BratEventSlotDecl.CARD_ZERO_OR_MORE);
+                BratEventArgumentDecl slotDecl = new BratEventArgumentDecl(slot,
+                        BratConstants.CARD_ZERO_OR_MORE);
                 decl.addSlot(slotDecl);
 
                 FeatureStructure[] targets = FSUtil.getFeature(aFS, feat, FeatureStructure[].class);
-                for (FeatureStructure target : targets) {
+                if (targets != null) {
+                    for (FeatureStructure target : targets) {
+                        BratEventArgument arg = new BratEventArgument(slot, args.size(),
+                                spanIdMap.get(target));
+                        args.add(arg);
+                    }
+                }
+            }
+            else {
+                BratEventArgumentDecl slotDecl = new BratEventArgumentDecl(slot,
+                        BratConstants.CARD_OPTIONAL);
+                decl.addSlot(slotDecl);
+                
+                FeatureStructure target = FSUtil.getFeature(aFS, feat, FeatureStructure.class);
+                if (target != null) {
                     BratEventArgument arg = new BratEventArgument(slot, args.size(),
                             spanIdMap.get(target));
                     args.add(arg);
                 }
-            }
-            else {
-                BratEventSlotDecl slotDecl = new BratEventSlotDecl(slot,
-                        BratEventSlotDecl.CARD_OPTIONAL);
-                decl.addSlot(slotDecl);
-                
-                FeatureStructure target = FSUtil.getFeature(aFS, feat, FeatureStructure.class);
-                BratEventArgument arg = new BratEventArgument(slot, args.size(),
-                        spanIdMap.get(target));
-                args.add(arg);
             }
         }
         
@@ -460,7 +465,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
 
     private boolean isSlotFeature(FeatureStructure aFS, Feature aFeature)
     {
-        return FSUtil.isMultiValuedFeature(aFS, aFeature);
+        return !isInternalFeature(aFeature)
+                && (FSUtil.isMultiValuedFeature(aFS, aFeature) || !aFeature.getRange()
+                        .isPrimitive());
     }
 
     private void writeRelationAnnotation(BratAnnotationDocument aDoc, FeatureStructure aFS)
@@ -531,19 +538,24 @@ public class BratWriter extends JCasFileWriter_ImplBase
         spanIdMap.put(aFS, anno.getId());
     }
 
+    private boolean isInternalFeature(Feature aFeature)
+    {
+        // https://issues.apache.org/jira/browse/UIMA-4565
+        return "uima.cas.AnnotationBase:sofa".equals(aFeature.getName());
+        // return CAS.FEATURE_FULL_NAME_SOFA.equals(aFeature.getName());
+    }
+    
     private void writeAttributes(BratAnnotation aAnno, FeatureStructure aFS)
     {
         for (Feature feat : aFS.getType().getFeatures()) {
             // Skip Sofa feature
-            if (aFS instanceof AnnotationBaseFS
-                    && CAS.FEATURE_BASE_NAME_SOFA.equals(feat.getShortName())) {
+            if (isInternalFeature(feat)) {
                 continue;
             }
             
             // No need to write begin / end, they are already on the text annotation
-            if (aFS instanceof AnnotationFS && (
-                    CAS.FEATURE_BASE_NAME_BEGIN.equals(feat.getShortName()) || 
-                    CAS.FEATURE_BASE_NAME_END.equals(feat.getShortName()))) {
+            if (CAS.FEATURE_FULL_NAME_BEGIN.equals(feat.getName()) || 
+                CAS.FEATURE_FULL_NAME_END.equals(feat.getName())) {
                 continue;
             }
             
@@ -585,7 +597,9 @@ public class BratWriter extends JCasFileWriter_ImplBase
                     visual.addDrawingDecl(attrDecl);
                 }
             }
-            else {
+            // The following warning is not relevant for event annotations because these render such
+            // features as slots.
+            else if (!(aAnno instanceof BratEventAnnotation)) {
                 warnings.add(
                         "Unable to render feature [" + feat.getName() + "] with range ["
                                 + feat.getRange().getName() + "] as attribute");

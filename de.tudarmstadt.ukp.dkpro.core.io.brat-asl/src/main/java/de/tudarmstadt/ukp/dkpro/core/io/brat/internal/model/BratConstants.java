@@ -17,33 +17,13 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
-public class BratRelationAnnotationDecl
-    extends BratAnnotationDecl
+public class BratConstants
 {
-    private final String arg1Label;
-    private final String arg2Label;
+    public static final String CARD_MANDATORY = "";
+    public static final String CARD_OPTIONAL = "?";
+    public static final String CARD_ZERO_OR_MORE = "+";
+    public static final String CARD_ONE_OR_MORE = "*";
+    
+    public static final String RANGE_ANY = "<ANY>";
 
-    public BratRelationAnnotationDecl(String aSuperType, String aType, String aArg1Label,
-            String aArg2Label)
-    {
-        super(aSuperType, aType);
-        arg1Label = aArg1Label;
-        arg2Label = aArg2Label;
-    }
-
-    @Override
-    public String toString()
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getType());
-        sb.append('\t');
-        sb.append(arg1Label);
-        sb.append(':');
-        sb.append(BratConstants.RANGE_ANY);
-        sb.append(", ");
-        sb.append(arg2Label);
-        sb.append(':');
-        sb.append(BratConstants.RANGE_ANY);
-        return sb.toString();
-    }
 }

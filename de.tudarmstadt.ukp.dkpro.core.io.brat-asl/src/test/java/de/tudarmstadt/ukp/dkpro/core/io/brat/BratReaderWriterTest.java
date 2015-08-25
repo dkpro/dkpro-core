@@ -20,6 +20,8 @@ package de.tudarmstadt.ukp.dkpro.core.io.brat;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testOneWay;
 import static de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner.testRoundTrip;
 import static java.util.Arrays.asList;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -35,23 +37,33 @@ public class BratReaderWriterTest
     public void testConll2009()
         throws Exception
     {
-        testOneWay(Conll2009Reader.class, BratWriter.class, "conll/2009/en-ref.ann",
-                "conll/2009/en-orig.conll", BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true);
+        testOneWay(
+                createReaderDescription(Conll2009Reader.class), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
+                "conll/2009/en-ref.ann",
+                "conll/2009/en-orig.conll");
     }
 
     @Test
     public void testConll2009_2()
         throws Exception
     {
-        testRoundTrip(BratReader.class, BratWriter.class, "conll/2009/en-ref.ann",
-                BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true);
+        testRoundTrip(
+                createReaderDescription(BratReader.class), 
+                createEngineDescription(BratWriter.class, 
+                        BratWriter.PARAM_WRITE_RELATION_ATTRIBUTES, true),
+                "conll/2009/en-ref.ann");
     }
 
     @Test
     public void testConll2012()
         throws Exception
     {
-        testOneWay(Conll2012Reader.class, BratWriter.class, "conll/2012/en-ref.ann",
+        testOneWay(
+                createReaderDescription(Conll2012Reader.class), 
+                createEngineDescription(BratWriter.class), 
+                "conll/2012/en-ref.ann",
                 "conll/2012/en-orig.conll");
     }
 
@@ -60,50 +72,71 @@ public class BratReaderWriterTest
     public void testConll2012_2()
         throws Exception
     {
-        testRoundTrip(BratReader.class, BratWriter.class, "conll/2012/en-ref.ann");
+        testRoundTrip(
+                createReaderDescription(BratReader.class), 
+                createEngineDescription(BratWriter.class), 
+                "conll/2012/en-ref.ann");
     }
 
     @Test
     public void testConll2012_3()
         throws Exception
     {
-        testOneWay(Conll2012Reader.class, BratWriter.class, "conll/2012/en-ref-min.ann",
-                "conll/2012/en-orig.conll",
-                Conll2012Reader.PARAM_READ_LEMMA, false,
-                Conll2012Reader.PARAM_READ_NAMED_ENTITY, false,
-                Conll2012Reader.PARAM_READ_SEMANTIC_PREDICATE, false,
-                Conll2012Reader.PARAM_READ_COREFERENCE, false);
+        testOneWay(
+                createReaderDescription(Conll2012Reader.class,
+                        Conll2012Reader.PARAM_READ_LEMMA, false,
+                        Conll2012Reader.PARAM_READ_NAMED_ENTITY, false,
+                        Conll2012Reader.PARAM_READ_SEMANTIC_PREDICATE, false,
+                        Conll2012Reader.PARAM_READ_COREFERENCE, false), 
+                createEngineDescription(BratWriter.class), 
+                "conll/2012/en-ref-min.ann",
+                "conll/2012/en-orig.conll");
     }
 
     @Test
     public void testWithShortNames()
         throws Exception
     {
-        testRoundTrip(BratReader.class, BratWriter.class, "brat/document0a.ann",
-                BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
+        testRoundTrip(
+                createReaderDescription(BratReader.class,
+                        BratReader.PARAM_TYPE_MAPPINGS, asList(
+                                "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+                                "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                                "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location")), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true), 
+                "brat/document0a.ann");
     }
 
     @Test
     public void testWithLongNames()
         throws Exception
     {
-        testRoundTrip(BratReader.class, BratWriter.class, "brat/document0b.ann",
-                BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false);
+        testRoundTrip(
+                createReaderDescription(BratReader.class), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, false), 
+                "brat/document0b.ann");
     }
 
     @Test
     public void test1()
         throws Exception
     {
-        testOneWay(BratReader.class, BratWriter.class, "brat/document1-ref.ann", "brat/document1.ann", 
-                BratReader.PARAM_TYPE_MAPPINGS, asList(
-                        "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation",
-                        "Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location",
-                        "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-                        "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
-                BratReader.PARAM_RELATION_TYPES, asList(
-                        "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value"),
-                BratWriter.PARAM_ENABLE_TYPE_MAPPINGS, true);
+        testOneWay(
+                createReaderDescription(BratReader.class,
+                        BratReader.PARAM_TYPE_MAPPINGS, asList(
+                                "Origin -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation",
+                                "Country -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location",
+                                "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+                                "MERGE-ORG -> de.tudarmstadt.ukp.dkpro.core.io.brat.type.MergeOrg"),
+                        BratReader.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                createEngineDescription(BratWriter.class,
+                        BratWriter.PARAM_RELATION_TYPES, asList(
+                                "de.tudarmstadt.ukp.dkpro.core.io.brat.type.AnnotationRelation:source:target{A}:value")), 
+                "brat/document1-ref.ann", 
+                "brat/document1.ann");
     }
 
     @Rule

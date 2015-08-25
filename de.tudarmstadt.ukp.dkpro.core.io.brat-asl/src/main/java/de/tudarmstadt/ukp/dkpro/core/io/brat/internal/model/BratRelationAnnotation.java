@@ -27,9 +27,9 @@ public class BratRelationAnnotation
             "(?<ID>R[0-9]+)[\\t]" + 
             "(?<TYPE>[a-zA-Z_][a-zA-Z0-9_-]+) " +
             "(?<ARG1LABEL>[a-zA-Z][a-zA-Z0-9]+):" +
-            "(?<ARG1TARGET>T[0-9]+) " +
+            "(?<ARG1TARGET>[ET][0-9]+) " +
             "(?<ARG2LABEL>[a-zA-Z][a-zA-Z0-9]+):" +
-            "(?<ARG2TARGET>T[0-9]+)\\s*");
+            "(?<ARG2TARGET>[ET][0-9]+)\\s*");
     
     private static final String ID = "ID";
     private static final String TYPE = "TYPE";

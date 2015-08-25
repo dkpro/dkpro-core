@@ -24,20 +24,20 @@ import java.util.Set;
 public class BratEventAnnotationDecl
     extends BratAnnotationDecl
 {
-    private final Set<BratEventSlotDecl> slots = new LinkedHashSet<>();
+    private final Set<BratEventArgumentDecl> slots = new LinkedHashSet<>();
 
-    public BratEventAnnotationDecl(String aSuperType, String aType, BratEventSlotDecl... aSlots)
+    public BratEventAnnotationDecl(String aSuperType, String aType, BratEventArgumentDecl... aSlots)
     {
         super(aSuperType, aType);
         Arrays.stream(aSlots).forEach(s -> addSlot(s));
     }
 
-    public void addSlot(BratEventSlotDecl aSlot)
+    public void addSlot(BratEventArgumentDecl aSlot)
     {
         slots.add(aSlot);
     }
     
-    public Set<BratEventSlotDecl> getSlots()
+    public Set<BratEventArgumentDecl> getSlots()
     {
         return slots;
     }
@@ -49,7 +49,7 @@ public class BratEventAnnotationDecl
         sb.append(getType());
         sb.append('\t');
         boolean first = true;
-        for (BratEventSlotDecl slot : slots) {
+        for (BratEventArgumentDecl slot : slots) {
             if (!first) {
                 sb.append(", ");
             }

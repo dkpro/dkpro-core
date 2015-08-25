@@ -3,3 +3,8 @@ T2	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 5 7	is
 T3	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 8 9	a
 T4	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 10 14	test
 T5	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token 14 15	.
+E1	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T1
+E2	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T2
+E3	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T3
+E4	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T4
+E5	de-tudarmstadt-ukp-dkpro-core-api-segmentation-type-Token:T5

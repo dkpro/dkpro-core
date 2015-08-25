@@ -82,16 +82,17 @@ public class BratReader
      */
     public static final String PARAM_RELATION_TYPES = "relationTypes";
     @ConfigurationParameter(name = PARAM_RELATION_TYPES, mandatory = true, defaultValue = { 
-            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" })
+            "de.tudarmstadt.ukp.dkpro.core.api.syntax.type.dependency.Dependency:Governor:Dependent{A}" 
+            })
     private Set<String> relationTypes;
     private Map<String, RelationParam> parsedRelationTypes;    
     
     public static final String PARAM_TYPE_MAPPINGS = "typeMappings";
     @ConfigurationParameter(name = PARAM_TYPE_MAPPINGS, mandatory = false, defaultValue = {
-            "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
-            "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
-            "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"
-    })
+//            "Token -> de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token",
+//            "Organization -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Organization",
+//            "Location -> de.tudarmstadt.ukp.dkpro.core.api.ner.type.Location"
+            })
     private String[] typeMappings;
     private TypeMapping typeMapping;
     
@@ -229,25 +230,19 @@ public class BratReader
         anno.setFeatureValue(getFeature(anno, param.getArg2()), arg2);
         
         AnnotationFS anchor = null;
-        if (param != null) {
-            if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR) && 
-                    param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
-                throw new IllegalStateException("Only one argument can be the anchor.");
-            }
-            else if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR)) {
-                anchor = arg1;
-            }
-            else if (param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
-                anchor = arg2;
-            }
-            
-            if (param.getSubcat() != null) {
-                anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
-            }
+        if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR) && 
+                param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
+            throw new IllegalStateException("Only one argument can be the anchor.");
         }
-        else {
-            warnings.add("Relation type [" + aType.getName()
-                    + "] not covered in PARAM_RELATION_TYPES.");
+        else if (param.getFlags1().contains(RelationParam.FLAG_ANCHOR)) {
+            anchor = arg1;
+        }
+        else if (param.getFlags2().contains(RelationParam.FLAG_ANCHOR)) {
+            anchor = arg2;
+        }
+        
+        if (param.getSubcat() != null) {
+            anno.setStringValue(getFeature(anno, param.getSubcat()), aAnno.getType());
         }
         
         if (anchor != null) {

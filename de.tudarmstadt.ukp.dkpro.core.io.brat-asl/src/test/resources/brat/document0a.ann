@@ -3,3 +3,8 @@ T2	Token 5 7	is
 T3	Token 8 9	a
 T4	Token 10 14	test
 T5	Token 14 15	.
+E1	Token:T1
+E2	Token:T2
+E3	Token:T3
+E4	Token:T4
+E5	Token:T5

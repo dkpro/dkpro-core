@@ -17,25 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.io.brat.internal.model;
 
-public class BratEventSlotDecl
+public class BratEventArgumentDecl
 {
-    public static final String CARD_MANDATORY = "";
-    public static final String CARD_OPTIONAL = "?";
-    public static final String CARD_ZERO_OR_MORE = "+";
-    public static final String CARD_ONE_OR_MORE = "*";
-    
-    public static final String RANGE_ANY = "<ANY>";
-    
     private final String name;
     private final String cardinality;
     private final String range;
     
-    public BratEventSlotDecl(String aName, String aCardinality)
+    public BratEventArgumentDecl(String aName, String aCardinality)
     {
-        this(aName, aCardinality, RANGE_ANY);
+        this(aName, aCardinality, BratConstants.RANGE_ANY);
     }
     
-    public BratEventSlotDecl(String aName, String aCardinality, String aRange)
+    public BratEventArgumentDecl(String aName, String aCardinality, String aRange)
     {
         name = aName;
         cardinality = aCardinality;
@@ -92,7 +85,7 @@ public class BratEventSlotDecl
         if (getClass() != obj.getClass()) {
             return false;
         }
-        BratEventSlotDecl other = (BratEventSlotDecl) obj;
+        BratEventArgumentDecl other = (BratEventArgumentDecl) obj;
         if (name == null) {
             if (other.name != null) {
                 return false;
