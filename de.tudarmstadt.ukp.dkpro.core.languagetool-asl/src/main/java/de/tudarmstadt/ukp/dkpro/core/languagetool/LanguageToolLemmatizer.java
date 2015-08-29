@@ -35,6 +35,7 @@ import org.languagetool.AnalyzedSentence;
 import org.languagetool.AnalyzedToken;
 import org.languagetool.AnalyzedTokenReadings;
 import org.languagetool.Language;
+import org.languagetool.Languages;
 
 import de.tudarmstadt.ukp.dkpro.core.api.frequency.util.FrequencyDistribution;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
@@ -48,7 +49,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
  * LanguageTool. Multiple readings are produced. The annotator simply takes the most frequent
  * lemma from those readings. If no readings could be found, the original text is assigned as
  * lemma.
- *
  */
 @TypeCapability(
 	    inputs = {
@@ -91,7 +91,7 @@ public class LanguageToolLemmatizer
 	    mappingProvider.configure(aJCas.getCas());
 	    
 		try {
-			Language lang = Language.getLanguageForShortName(aJCas.getDocumentLanguage());
+			Language lang = Languages.getLanguageForShortName(aJCas.getDocumentLanguage());
 
 			for (Sentence s : select(aJCas, Sentence.class)) {
 				// Get the tokens from the sentence

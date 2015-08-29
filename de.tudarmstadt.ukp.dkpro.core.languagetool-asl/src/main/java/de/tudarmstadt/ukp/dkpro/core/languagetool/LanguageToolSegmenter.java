@@ -23,6 +23,7 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.jcas.JCas;
 import org.languagetool.Language;
+import org.languagetool.Languages;
 
 import cn.com.cjf.CJFBeanFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
@@ -30,7 +31,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.SegmenterBase;
 /**
  * Segmenter using LanguageTool to do the heavy lifting. LanguageTool internally uses different
  * strategies for tokenization.
- *
  */
 @TypeCapability(
 	    outputs = {
@@ -42,7 +42,7 @@ public class LanguageToolSegmenter extends SegmenterBase
 	protected void process(JCas aJCas, String aText, int aZoneBegin)
 		throws AnalysisEngineProcessException
 	{
-		Language lang = Language.getLanguageForShortName(getLanguage(aJCas));
+		Language lang = Languages.getLanguageForShortName(getLanguage(aJCas));
 
 		List<String> sentences = lang.getSentenceTokenizer().tokenize(aText);
 
