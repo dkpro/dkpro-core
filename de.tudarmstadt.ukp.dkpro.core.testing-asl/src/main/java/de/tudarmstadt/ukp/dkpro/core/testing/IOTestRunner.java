@@ -20,7 +20,7 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 import static org.apache.uima.fit.factory.ConfigurationParameterFactory.getParameterSettings;
-import static org.apache.uima.fit.factory.ConfigurationParameterFactory.setParameter;
+import static org.apache.uima.fit.factory.ConfigurationParameterFactory.*;
 import static org.apache.uima.fit.pipeline.SimplePipeline.runPipeline;
 import static org.junit.Assert.assertEquals;
 
@@ -63,6 +63,15 @@ public class IOTestRunner
         testOneWay(createReaderDescription(aReader), aExpectedFile, aFile);
     }
 
+    /**
+     * One-way test reading a file and writing to the same format but comparing against a reference
+     * file instead of the original file.
+     * 
+     * @param aReader
+     * @param aExpectedFile
+     * @param aFile
+     * @throws Exception
+     */
     public static void testOneWay(CollectionReaderDescription aReader, String aExpectedFile,
             String aFile)
         throws Exception
@@ -157,11 +166,14 @@ public class IOTestRunner
 
         setParameter(aReader, ComponentParameters.PARAM_SOURCE_LOCATION, input);
 
-        setParameter(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION, true);
+        if (canParameterBeSet(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION)) {
+            setParameter(aWriter, ComponentParameters.PARAM_STRIP_EXTENSION, true);
+        }
+
         if (!getParameterSettings(aWriter).containsKey(ComponentParameters.PARAM_TARGET_LOCATION)) {
             setParameter(aWriter, ComponentParameters.PARAM_TARGET_LOCATION, output);
         }
-        
+
         runPipeline(aReader, aWriter);
 
         String expected = FileUtils.readFileToString(reference, "UTF-8");
