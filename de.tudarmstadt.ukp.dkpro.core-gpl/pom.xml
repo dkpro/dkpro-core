@@ -89,7 +89,6 @@
 	</dependencyManagement>
 	<modules>
 		<module>../de.tudarmstadt.ukp.dkpro.core.arktools-gpl</module>
-	    <module>../de.tudarmstadt.ukp.dkpro.core.auebtools-gpl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.berkeleyparser-gpl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-gpl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.gate-gpl</module>
@@ -97,7 +96,6 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.stanfordnlp-gpl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.sfst-gpl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.io.tgrep-gpl</module>
-		<module>../de.tudarmstadt.ukp.dkpro.core.aranlp-gpl</module>
 	</modules>
 	<build>
 		<plugins>
@@ -126,7 +124,6 @@
 						<exclude>src/test/resources/**/*</exclude>
 						<exclude>.license-header.txt</exclude>
 						<exclude>src/main/java/edu/stanford/nlp/parser/lexparser/**/*</exclude>
-						<exclude>src/main/java/gr/aueb/cs/nlp/postagger/**/*</exclude>
 						<exclude>src/main/java/de/tudarmstadt/ukp/dkpro/core/stanfordnlp/util/CasCopier.java</exclude>
 					</excludes>
 				</configuration>
