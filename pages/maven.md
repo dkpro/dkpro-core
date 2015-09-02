@@ -20,7 +20,7 @@ pipeline, we add the following dependency to our POM file:
   <dependencies>
     <dependency>
       <artifact>de.tudarmstadt.ukp.dkpro.core</artifact>
-      <group>de.tudarmstadt.ukp.dkpro.core-asl<group>
+      <group>de.tudarmstadt.ukp.dkpro.core-asl</group>
       <version>${dkpro.core.version}</version>
       <type>pom</type>
       <scope>import</scope>
