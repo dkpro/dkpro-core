@@ -37,8 +37,6 @@ import org.xml.sax.SAXException;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionUtils;
 
-/**
- */
 @TypeCapability(
         inputs={
                 "de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData"})
@@ -69,43 +67,37 @@ public class XmiWriter
 		typeSystemWritten = false;
 	}
 
-	@Override
-	public void process(JCas aJCas)
-		throws AnalysisEngineProcessException
-	{
-		OutputStream docOS = null;
-		try {
-			docOS = getOutputStream(aJCas, ".xmi");
+    @Override
+    public void process(JCas aJCas)
+        throws AnalysisEngineProcessException
+    {
+        try (OutputStream docOS = getOutputStream(aJCas, ".xmi")) {
+            XmiCasSerializer.serialize(aJCas.getCas(), docOS);
 
-			XmiCasSerializer.serialize(aJCas.getCas(), docOS);
+            if (!typeSystemWritten || typeSystemFile == null) {
+                writeTypeSystem(aJCas);
+                typeSystemWritten = true;
+            }
+        }
+        catch (Exception e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+    }
 
-			if (!typeSystemWritten || typeSystemFile == null) {
-				writeTypeSystem(aJCas);
-				typeSystemWritten = true;
-			}
-		}
-		catch (Exception e) {
-			throw new AnalysisEngineProcessException(e);
-		}
-		finally {
-			closeQuietly(docOS);
-		}
-	}
+    private void writeTypeSystem(JCas aJCas)
+        throws IOException, CASRuntimeException, SAXException
+    {
+		@SuppressWarnings("resource")
+        OutputStream typeOS = null;
+		
+        try {
+    		if (typeSystemFile != null) {
+    		    typeOS = CompressionUtils.getOutputStream(typeSystemFile);
+    		}
+    		else {
+    		    typeOS = getOutputStream("typesystem", ".xml");
+    		}
 
-	private void writeTypeSystem(JCas aJCas) throws IOException, CASRuntimeException, SAXException
-	{
-		OutputStream typeOS = null;
-
-		File typeOSFile;
-		if (typeSystemFile != null) {
-			typeOSFile = typeSystemFile;
-		}
-		else {
-			typeOSFile = getTargetPath("typesystem", ".xml");
-		}
-		typeOS = CompressionUtils.getOutputStream(typeOSFile);
-
-		try {
 			TypeSystemUtil.typeSystem2TypeSystemDescription(aJCas.getTypeSystem()).toXML(typeOS);
 		}
 		finally {

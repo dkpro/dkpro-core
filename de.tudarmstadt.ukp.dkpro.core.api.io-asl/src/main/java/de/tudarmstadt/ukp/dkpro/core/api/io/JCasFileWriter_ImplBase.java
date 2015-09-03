@@ -83,6 +83,13 @@ public abstract class JCasFileWriter_ImplBase
     @ConfigurationParameter(name=PARAM_ESCAPE_DOCUMENT_ID, mandatory=true, defaultValue="true")
     private boolean escapeDocumentId;
 
+    /**
+     * Allow overwriting target files (ignored when writing to ZIP archives).
+     */
+    public static final String PARAM_OVERWRITE = "overwrite";
+    @ConfigurationParameter(name = PARAM_OVERWRITE, mandatory = true, defaultValue = "false")
+    private boolean overwrite;
+    
     private ZipOutputStream zipOutputStream;
     private String zipPath;
     private String zipEntryPrefix;
@@ -112,12 +119,14 @@ public abstract class JCasFileWriter_ImplBase
         super.collectionProcessComplete();
     }
     
-    protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension) throws IOException
+    protected NamedOutputStream getOutputStream(JCas aJCas, String aExtension)
+        throws IOException
     {
         return getOutputStream(getRelativePath(aJCas), aExtension);
     }
 
-    protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension) throws IOException
+    protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension)
+        throws IOException
     {
         if (targetLocation.startsWith(JAR_PREFIX)) {
             if (zipOutputStream == null) {
@@ -148,47 +157,20 @@ public abstract class JCasFileWriter_ImplBase
                     zipOutputStream);
         }
         else {
-            File outputFile = getTargetPath(aRelativePath, aExtension);
+            File outputFile = new File(targetLocation, aRelativePath + aExtension
+                    + compression.getExtension());
+            
+            if (!overwrite && outputFile.exists()) {
+                throw new IOException("Target file [" + outputFile
+                        + "] already exists and overwriting not enabled.");
+            }
+            
             return new NamedOutputStream(outputFile.getAbsolutePath(),
                     CompressionUtils.getOutputStream(outputFile));
         }
     }
     
     /**
-     * Get the full target path for the given CAS and extension. If the {@link #PARAM_COMPRESSION}
-     * is set, ".gz" is appended to the path.
-     * 
-     * @param aJCas
-     *            the JCas.
-     * @param aExtension
-     *            the extension.
-     * @return the full path.
-     * @deprecated Use {@link #getOutputStream(JCas, String)} instead
-     */
-    // Eventually, this method should become private
-    @Deprecated
-    protected File getTargetPath(JCas aJCas, String aExtension)
-    {
-        return getTargetPath(getRelativePath(aJCas), aExtension);
-    }
-
-    /**
-     * Get the full target path for the given relative path and extension. If the
-     * {@link #PARAM_COMPRESSION} is set, ".gz" is appended to the path.
-     *
-     * @param aRelativePath the relative path.
-     * @param aExtension the extension.
-     * @return the full path.
-     * @deprecated Use {@link #getOutputStream(String, String)} instead
-     */
-    // Eventually, this method should become private
-    @Deprecated
-    protected File getTargetPath(String aRelativePath, String aExtension)
-    {
-        return new File(targetLocation, aRelativePath + aExtension + compression.getExtension());
-    }
-
-	/**
 	 * Get the relative path from the CAS. If the CAS does not contain relative path information or
 	 * if {@link #PARAM_USE_DOCUMENT_ID} is set, the document ID is used.
 	 *
