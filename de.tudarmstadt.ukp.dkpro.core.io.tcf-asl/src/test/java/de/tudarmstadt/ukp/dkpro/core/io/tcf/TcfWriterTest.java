@@ -28,10 +28,12 @@ import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.factory.JCasFactory;
 import org.apache.uima.fit.pipeline.SimplePipeline;
 import org.apache.uima.jcas.JCas;
+import org.junit.Rule;
 import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.testing.DkproTestContext;
 
 public class TcfWriterTest
 {
@@ -45,6 +47,8 @@ public class TcfWriterTest
     public void testOriginalNotTcf()
         throws Exception
     {
+        File targetFolder = testContext.getTestOutputFolder();
+        
         JCas jcas = JCasFactory.createJCas();
         
         // Generate a fake metadata that points to a non-TCF file
@@ -60,14 +64,17 @@ public class TcfWriterTest
 
         // Write as TCF
         AnalysisEngineDescription writer = createEngineDescription(TcfWriter.class,
-                TcfWriter.PARAM_TARGET_LOCATION, "target/test-output/orignal-not-tcf");
+                TcfWriter.PARAM_TARGET_LOCATION, targetFolder);
         SimplePipeline.runPipeline(jcas, writer);
         
         // Read again as TCF
         CollectionReaderDescription reader = createReaderDescription(TcfReader.class,
-                TcfReader.PARAM_SOURCE_LOCATION, "target/test-output/orignal-not-tcf/*.tcf");
+                TcfReader.PARAM_SOURCE_LOCATION, targetFolder.getPath() + "/*.tcf");
         for (JCas jcas2 : SimplePipeline.iteratePipeline(reader)) {
             assertEquals("okeydokey", jcas2.getDocumentText());
         }
     }
+
+    @Rule
+    public DkproTestContext testContext = new DkproTestContext();
 }

@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import java.io.File;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -73,6 +74,9 @@ public class DkproTestContext extends TestWatcher
     public File getTestOutputFolder()
     {
         File folder = new File("target/test-output/" + getTestOutputFolderName());
+        if (folder.exists()) {
+            FileUtils.deleteQuietly(folder);
+        }
         folder.mkdirs();
         return folder;
     }

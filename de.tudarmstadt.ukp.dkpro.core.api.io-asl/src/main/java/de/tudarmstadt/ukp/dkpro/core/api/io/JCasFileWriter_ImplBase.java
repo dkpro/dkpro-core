@@ -125,6 +125,11 @@ public abstract class JCasFileWriter_ImplBase
         return getOutputStream(getRelativePath(aJCas), aExtension);
     }
 
+    protected String getTargetLocation()
+    {
+        return targetLocation;
+    }
+    
     protected NamedOutputStream getOutputStream(String aRelativePath, String aExtension)
         throws IOException
     {

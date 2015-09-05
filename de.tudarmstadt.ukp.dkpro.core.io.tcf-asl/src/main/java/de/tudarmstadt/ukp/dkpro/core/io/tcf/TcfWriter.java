@@ -22,6 +22,7 @@ import static org.apache.uima.fit.util.JCasUtil.exists;
 import static org.apache.uima.fit.util.JCasUtil.select;
 import static org.apache.uima.fit.util.JCasUtil.selectCovered;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -32,11 +33,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.apache.uima.fit.descriptor.TypeCapability;
 import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
+import org.apache.uima.resource.ResourceInitializationException;
+
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceChain;
 import de.tudarmstadt.ukp.dkpro.core.api.coref.type.CoreferenceLink;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
@@ -109,6 +114,22 @@ public class TcfWriter
     private boolean merge;
 
     @Override
+    public void initialize(UimaContext aContext)
+        throws ResourceInitializationException
+    {
+        super.initialize(aContext);
+
+        // #670 - TcfWriter can currently not properly write to ZIP files because of the "try and 
+        // error" approach that we take to trying to merge with an existing file. In particular, if 
+        // the attempt fails and we go without merging, we cannot delete the broken entry from the
+        // ZIP file. 
+        if (getTargetLocation().startsWith(JAR_PREFIX)) {
+            throw new ResourceInitializationException(new IllegalStateException(
+                    "TcfWriter cannot write to ZIP files."));
+        }
+    }
+    
+    @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
@@ -116,7 +137,7 @@ public class TcfWriter
         try {
             boolean writeWithoutMerging = true;
             if (merge) {
-                OutputStream docOS = null;
+                NamedOutputStream docOS = null;
                 try {
                     docOS = getOutputStream(aJCas, filenameSuffix);
                     // Get the original TCF file and preserve it
@@ -146,6 +167,12 @@ public class TcfWriter
                     }
                 }
                 finally {
+                    if (writeWithoutMerging) {
+                        // Have to delete the output file from this try and will try again without
+                        // merging. Deleting is necessary as not to trigger the overwrite safeguard
+                        // in JCasFileWriter_ImplBase
+                        FileUtils.deleteQuietly(new File(docOS.getName()));
+                    }
                     closeQuietly(docOS);
                 }
             }
