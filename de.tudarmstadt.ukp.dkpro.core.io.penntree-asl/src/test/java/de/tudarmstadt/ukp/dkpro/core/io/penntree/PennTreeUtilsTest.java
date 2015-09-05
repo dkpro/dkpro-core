@@ -158,12 +158,12 @@ public class PennTreeUtilsTest
                 "Marxism , and by implication to other culturalist and contextualizing " +
                 "approaches .";
 
-        String pennTree = "(ROOT (S (S (NP (PRP It)) (VP (VBZ is) (PP (IN for) (NP (DT this) " +
-        		"(NN reason))) (SBAR (IN that) (S (NP (NN deconstruction)) (VP (VBZ remains) " +
-        		"(NP (NP (DT a) (-LRB- -LRB-) (NN fundamental) (-RRB- -RRB-) (NN threat)) (PP " +
-        		"(TO to) (NP (NNP Marxism))))))))) (, ,) (CC and) (S (PP (IN by) (NP " +
-        		"(NN implication))) (PP (TO to) (NP (NP (JJ other) (NN culturalist)) (CC and) " +
-        		"(NP (VBG contextualizing) (NNS approaches))))) (. .)))";
+        String pennTree = "(ROOT (S (S (NP (PRP It)) (VP (VBZ is) (PP (IN for) (NP (DT this) "
+                + "(NN reason))) (SBAR (IN that) (S (NP (NN deconstruction)) (VP (VBZ remains) "
+                + "(NP (NP (DT a) (PRN (-LRB- -LRB-) (NN fundamental) (-RRB- -RRB-)) (NN threat)) "
+                + "(PP (TO to) (NP (NNP Marxism))))))))) (, ,) (CC and) (S (PP (IN by) (NP "
+                + "(NN implication))) (PP (TO to) (NP (NP (JJ other) (NN culturalist)) (CC and) "
+                + "(NP (VBG contextualizing) (NNS approaches))))) (. .)))";
 
         JCas jcas = runTest("en", "chunking", documentEnglish);
 
