@@ -25,6 +25,10 @@
   - title: "Javadoc"
     url: "/releases/!LATEST!/apidocs/index.html"
 
+- title: "Blog"
+  side: left
+  url: "/blog"
+
 - title: "Issues"
   url: "http://github.com/dkpro/dkpro-core/issues"
   side: left
