@@ -1,13 +1,6 @@
 ---
-layout: post
 title: Convert CoNLL 2006 to CoNLL 2009
 subheadline: Conversion
-sidebar: left
-categories:
-    - groovy
-tags:
-    - conversion
-    - recipe
 ---
 
 Reads each CoNLL 2006 file from the corpus in the specified folder and writes them to the target folder with CoNLL 2009 format.

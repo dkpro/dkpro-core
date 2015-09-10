@@ -1,13 +1,6 @@
 ---
-layout: post
 title: Fully mixed pipeline
 subheadline: Analytics
-sidebar: left
-categories:
-    - groovy
-tags:
-    - conversion
-    - recipe
 ---
 
 Reads all text files (`*.txt`) in the specified folder and prints token, part-of-speech, lemma, and named entity in a tab-separated format, followed by the constituent tree as a bracketed structure.

@@ -1,13 +1,6 @@
 ---
-layout: post
 title: Convert a corpus in Penn Treebank bracketed format to Tiger XML
 subheadline: Conversion
-sidebar: left
-categories:
-    - groovy
-tags:
-    - conversion
-    - recipe
 ---
 
 Reads each Penn Treebank bracketed format file from the corpus in the specified folder and writes them to the target folder with Tiger XML format.

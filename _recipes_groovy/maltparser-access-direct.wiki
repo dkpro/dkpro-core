@@ -1,15 +1,6 @@
 ---
-layout: post
 title: MaltParser dependency parsing pipeline with direct access to results
 subheadline: Embedding
-#meta_description: Building the asciidoc documentation of a multi-module Maven project on Jenkins using the DocLinks plugin.
-#description:
-sidebar: left
-categories:
-    - groovy
-tags:
-    - conversion
-    - recipe
 ---
 
 Reads the specified file and prints dependencies, one per line. Multiple files can be specified using a wildcard, e.g. '*.txt' (the single quotes are part of the argument to avoid the shell expanding the wildcard!).

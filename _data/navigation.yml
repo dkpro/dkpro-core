@@ -24,10 +24,12 @@
     url: "/releases/!LATEST!/typesystem.html"
   - title: "Javadoc"
     url: "/releases/!LATEST!/apidocs/index.html"
+  - title: "Recipes (Groovy)"
+    url: "/groovy/recipes/"
 
-- title: "Blog"
-  side: left
-  url: "/blog"
+#- title: "Blog"
+#  side: left
+#  url: "/blog"
 
 - title: "Issues"
   url: "http://github.com/dkpro/dkpro-core/issues"

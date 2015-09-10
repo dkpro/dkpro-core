@@ -1,13 +1,6 @@
 ---
-layout: post
 title: Decompounding without a ranker resource
 subheadline: Analytics
-sidebar: left
-categories:
-    - groovy
-tags:
-    - conversion
-    - recipe
 ---
 Uses the `LeftToRightSplitter` as the splitter resource and no ranker resource, decompounds the compounds in a sentence after tokenizing it, then print the tokens and each compound part.
 

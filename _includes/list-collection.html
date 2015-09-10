@@ -11,7 +11,7 @@
 {% endcomment %}
 
 <ul class="side-nav">
-  {% for page in site.[include.collection] %}
+  {% for page in (site.[include.collection] | sort: 'title') %}
     {% unless page.published == false %}
     <li><a href="{{ site.url }}{{ page.url }}">{{ page.title }}</a></li>
     {% endunless %}

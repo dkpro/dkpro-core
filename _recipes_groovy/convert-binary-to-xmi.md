@@ -1,20 +1,11 @@
 ---
-layout: post
 title: Convert serialized/binary CAS to XMI
 subheadline: Conversion
-#meta_description: Building the asciidoc documentation of a multi-module Maven project on Jenkins using the DocLinks plugin.
-#description:
-sidebar: left
-categories:
-    - groovy
-tags:
-    - conversion
-    - recipe
 ---
 
 Reads each binary/serialized CAS file from the corpus in the specified folder and writes them to the target folder using the UIMA XMI format.
 
-Copy the script to a file calledbinary2xmi.groovy" and call it e.g. using `groovy binary2xmi.groovy binaryCasFile.ser .`. This creates a file called in UIMA XMI format in the current directory. The name of the created file depends on the document metadata encoded in the binary CAS and may well be different from the file name of the binary CAS! A type-system file will be written to the same folder. This will allow you to open load the file e.g. using the UIMA CAS Editor plugin for Eclipse.
+Copy the script to a file called `binary2xmi.groovy` and call it e.g. using `groovy binary2xmi.groovy binaryCasFile.ser .`. This creates a file called in UIMA XMI format in the current directory. The name of the created file depends on the document metadata encoded in the binary CAS and may well be different from the file name of the binary CAS! A type-system file will be written to the same folder. This will allow you to open load the file e.g. using the UIMA CAS Editor plugin for Eclipse.
 
 {% highlight groovy %}
 #!/usr/bin/env groovy
@@ -40,4 +31,3 @@ runPipeline(
     XmiWriter.PARAM_TARGET_LOCATION, args[1],
     XmiWriter.PARAM_STRIP_EXTENSION, true))
 {% endhighlight %}
-    

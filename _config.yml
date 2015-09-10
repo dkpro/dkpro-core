@@ -88,7 +88,7 @@ defaults:
       show_meta: false 	# Show metadata beneath all pages
       # sidebar:    		# Possible values › left, right › by default there will be no sidebar
       comments: false
-      author: "your_author_name"
+#      author: "your_author_name"
   -
     scope:
       path: ""        
@@ -97,7 +97,17 @@ defaults:
       show_meta: false   # Show metadata beneath all posts
       # sidebar:        # Possible values › left, right › by default there will be no sidebar
       comments: false
-      author: "your_author_name"
+#      author: "your_author_name"
+  -
+    scope:
+      path: ""        
+      type: "recipes_groovy"
+    values:
+      show_meta: false   # Show metadata beneath all posts
+      layout: article
+      sidebar: left
+      comments: false
+#      author: "your_author_name"
 
 
 
@@ -219,3 +229,15 @@ google_analytics_tracking_id: UA-20506675-4
 openhub_id: dkpro-core
 
 
+#      ______      ____          __  _           
+#     / ____/___  / / /__  _____/ /_(_)___  ____ 
+#    / /   / __ \/ / / _ \/ ___/ __/ / __ \/ __ \
+#   / /___/ /_/ / / /  __/ /__/ /_/ / /_/ / / / /
+#   \____/\____/_/_/\___/\___/\__/_/\____/_/ /_/ 
+#   
+collections:
+    recipes_groovy:
+        output: true
+        layout: article
+        sidebar: left
+        permalink: /groovy/recipes/:path/
