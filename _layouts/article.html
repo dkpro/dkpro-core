@@ -50,14 +50,14 @@ format: post
 
     {% if page.sidebar == "left" %}
     <div class="medium-4 columns medium-pull-8">
-        {% include list-collection.html collection=page.collection %}
+        {% include list-collection.html collection=page.collection sticky-link-url=page.sticky-link-url sticky-link-title=page.sticky-link-title %}
     </div><!-- /.medium-4.columns -->
     {% endif %}
 
 
     {% if page.sidebar == "right" %}
     <div class="medium-4 columns">
-        {% include list-collection.html collection=page.collection %}
+        {% include list-collection.html collection=page.collection sticky-link-url=page.sticky-link-url sticky-link-title=page.sticky-link-title %}
     </div><!-- /.medium-5.columns -->
     {% endif %}
 </div><!-- /.row -->

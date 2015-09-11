@@ -69,7 +69,7 @@ runPipeline(
   createEngineDescription(MaltParser),
   createEngineDescription(Conll2006Writer,
     Conll2006Writer.PARAM_TARGET_LOCATION, "."));
-{% endhighlight groovy %}
+{% endhighlight %}
 
 The result is written to a file called *document.txt.conll* and could look something like this:
 
@@ -92,13 +92,13 @@ The result is written to a file called *document.txt.conll* and could look somet
 16	Nov.	Nov.	NNP	NNP	_	15	dep	_	_
 17	29	29	CD	CD	_	16	num	_	_
 18	.	.	.	.	_	9	punct	_	_
-{% endhighlight text %}
+{% endhighlight %}
 
 ## Where to go from here?
 
-You can find many more examples of what you can do with DKPro Core and Groovy on our [Groovy scripts for DKPro Core pipelines][4] page
+You can find many more examples of what you can do with DKPro Core and Groovy on our [Groovy recipes for DKPro Core pipelines][4] page
 
 [1]: http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html 
 [2]: http://www.groovy-lang.org/download.html
 [3]: http://gvmtool.net
-[4]: groovy-cookbook.html
+[4]: {{ site.url }}/groovy/recipes/

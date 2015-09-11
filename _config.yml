@@ -106,6 +106,8 @@ defaults:
       show_meta: false   # Show metadata beneath all posts
       layout: article
       sidebar: left
+      sticky-link-url: "/groovy/recipes/troubleshooting"
+      sticky-link-title: "Troubleshooting"
       comments: false
 #      author: "your_author_name"
 
