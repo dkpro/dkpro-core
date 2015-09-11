@@ -43,5 +43,5 @@ _upcoming release - links may be temporarily broken while a build is in progress
 ## Developer Documentation
 
 * [Release Guide]({{ site.url }}/pages/release-guide.html)
-* [How to contribute]({{ site.url }}/pages/contributing.html)
+* [How to contribute](http://dkpro.github.io/contributing/)
 
