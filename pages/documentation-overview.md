@@ -13,7 +13,7 @@ permalink: "/documentation/"
 * [Using DKPro Core with Groovy]({{ site.url }}/pages/groovy-intro.html)
 * [Using DKPro Core with Jython]({{ site.url }}/pages/jython-intro.html)
 
-## Recipes
+## Recipes: Specific Use Cases
 
 * [Groovy recipes]({{ site.url }}/groovy/recipes/)
 
