@@ -32,7 +32,8 @@
 	<url>https://dkpro.github.io/dkpro-core/</url>
 	<organization>
     	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
-    </organization>
+    	<url>https://www.ukp.tu-darmstadt.de/</url>
+	</organization>
 	<inceptionYear>2007</inceptionYear>
 	<prerequisites>
 		<maven>3.0.4</maven>
