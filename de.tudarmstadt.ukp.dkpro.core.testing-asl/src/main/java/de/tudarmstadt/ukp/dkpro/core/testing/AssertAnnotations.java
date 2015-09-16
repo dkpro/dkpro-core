@@ -18,7 +18,6 @@
 package de.tudarmstadt.ukp.dkpro.core.testing;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.StringUtils.join;
 import static org.apache.commons.lang.StringUtils.normalizeSpace;
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
@@ -35,6 +34,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import junit.framework.Assert;
 
@@ -804,12 +804,9 @@ public class AssertAnnotations
             result = "{}";
         }
         else {
-            if (aLinebreak) {
-                result = "{\n\"" + join(aCollection, "\",\n\"") + "\"\n}";
-            }
-            else {
-                result = "{ \"" + join(aCollection, "\", \"") + "\" }";
-            }
+            String sep = aLinebreak ? ",\n" : ", ";
+            result = aCollection.stream().map(s -> s == null ? "null" : '"' + s + '"')
+                    .collect(Collectors.joining(sep));
         }
         
         return result.replace("\\", "\\\\");
