@@ -455,6 +455,7 @@ This module supports just simple plain text.
 |StringReader|Read text from a Java string
 |TextReader (RR)|Read text from files
 |TextWriter (FW)|Write text to files
+|TokenizedTextWriter (FW)|Write one sentence per line with whitespace-separated tokens (or lemmas, or any other annotations) to a file (suitable as input to word2vec)
 |====
 
 
