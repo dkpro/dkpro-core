@@ -19,10 +19,13 @@ package de.tudarmstadt.ukp.dkpro.core.io.text;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.uima.UIMAException;
@@ -51,7 +54,7 @@ public class TokenizedTextWriterTest
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, line1 + "\n" + line2,
-                StringReader.PARAM_LANGUAGE, "de");
+                StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile);
@@ -64,7 +67,7 @@ public class TokenizedTextWriterTest
     public void testTokens()
         throws UIMAException, IOException
     {
-        File targetFile = new File("target/TokenizedTextWriterTest.out");
+        File targetFile = new File("target/TokenizedTextWriterTokensTest.out");
         targetFile.deleteOnExit();
 
         String line1 = "This is the 1st sentence.";
@@ -74,7 +77,7 @@ public class TokenizedTextWriterTest
 
         CollectionReaderDescription reader = createReaderDescription(StringReader.class,
                 StringReader.PARAM_DOCUMENT_TEXT, line1 + "\n" + line2,
-                StringReader.PARAM_LANGUAGE, "de");
+                StringReader.PARAM_LANGUAGE, "en");
         AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
         AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
                 TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
@@ -107,5 +110,94 @@ public class TokenizedTextWriterTest
         SimplePipeline.runPipeline(reader, segmenter, lemmatizer, writer);
 
         assertTrue(FileUtils.contentEquals(lemmatized, targetFile));
+    }
+
+    @Test
+    public void testStopwords()
+        throws UIMAException, IOException
+    {
+        File targetFile = new File("target/TokenizedTextWriterNoStopwords.out");
+        targetFile.deleteOnExit();
+        File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoStopwords.txt");
+        List<String> expected = Files.readAllLines(tokenized.toPath());
+
+        String line1 = "This is the 1st sentence .";
+        String line2 = "Here is another sentence .";
+        String stopwordsFile = "src/test/resources/stopwords_en.txt";
+
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, line1 + "\n" + line2,
+                StringReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
+                TokenizedTextWriter.PARAM_STOPWORDS_FILE, stopwordsFile);
+        SimplePipeline.runPipeline(reader, segmenter, writer);
+
+        assertEquals(expected, Files.readAllLines(targetFile.toPath()));
+    }
+
+    @Test
+    public void testNumbers()
+        throws UIMAException, IOException
+    {
+        File targetFile = new File("target/TokenizedTextWriterNoStopwords.out");
+        targetFile.deleteOnExit();
+        File tokenized = new File("src/test/resources/tokenizedTexts/textTokenizedNoNumbers.txt");
+        List<String> expected = Files.readAllLines(tokenized.toPath());
+
+        String line1 = "This is 1 sentence.";
+        String line2 = "Here is 2 sentences, or even 2.5.";
+        String numbersRegex = "^[0-9]+(\\.[0-9]*)?$";
+
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, line1 + "\n" + line2,
+                StringReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
+                TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex);
+        SimplePipeline.runPipeline(reader, segmenter, writer);
+
+        List<String> result = Files.readAllLines(targetFile.toPath());
+        assertEquals(expected.size(), result.size());
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i), result.get(i));
+        }
+    }
+
+    @Test
+    public void testNumbersAndStopwordsAndLemmas()
+        throws UIMAException, IOException
+    {
+        File lemmatized = new File(
+                "src/test/resources/tokenizedTexts/textLemmatizedNoStopwordsNoNumbers.txt");
+        File targetFile = new File("target/TokenizedTextWriterTestLemmasNostopwordsNoNumbers.out");
+        targetFile.deleteOnExit();
+        List<String> expected = Files.readAllLines(lemmatized.toPath());
+
+        String text = "This is 1 sentence. Here are 2 sentences.";
+        String typeName = Lemma.class.getTypeName() + "/value";
+        String numbersRegex = "^[0-9]+(\\.[0-9]*)?$";
+        String stopwordsFile = "src/test/resources/stopwords_en.txt";
+
+        CollectionReaderDescription reader = createReaderDescription(StringReader.class,
+                StringReader.PARAM_DOCUMENT_TEXT, text,
+                StringReader.PARAM_LANGUAGE, "en");
+        AnalysisEngineDescription segmenter = createEngineDescription(BreakIteratorSegmenter.class);
+        AnalysisEngineDescription lemmatizer = createEngineDescription(MorphaLemmatizer.class);
+        AnalysisEngineDescription writer = createEngineDescription(TokenizedTextWriter.class,
+                TokenizedTextWriter.PARAM_TARGET_LOCATION, targetFile,
+                TokenizedTextWriter.PARAM_FEATURE_PATH, typeName,
+                TokenizedTextWriter.PARAM_STOPWORDS_FILE, stopwordsFile,
+                TokenizedTextWriter.PARAM_NUMBER_REGEX, numbersRegex);
+        SimplePipeline.runPipeline(reader, segmenter, lemmatizer, writer);
+
+        List<String> result = Files.readAllLines(targetFile.toPath());
+        assertEquals(expected.size(), result.size());
+        for (int i = 0; i < expected.size(); i++) {
+            assertEquals(expected.get(i), result.get(i));
+        }
+
     }
 }

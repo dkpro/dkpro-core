@@ -21,8 +21,13 @@ import static org.apache.uima.fit.util.CasUtil.selectCovered;
 import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
@@ -48,6 +53,8 @@ public class TokenizedTextWriter
     extends JCasFileWriter_ImplBase
 {
     private static final String TOKEN_SEPARATOR = " ";
+    private static final String NUMBER_REPLACEMENT = "NUM";
+    private static final String STOPWORD_REPLACEMENT = "STOP";
 
     /**
      * The feature path, e.g.
@@ -60,8 +67,32 @@ public class TokenizedTextWriter
      * 
      */
     public static final String PARAM_FEATURE_PATH = "featurePath";
-    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token") /// coveredText()")
+    @ConfigurationParameter(name = PARAM_FEATURE_PATH, mandatory = true, defaultValue = "de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token")
     private String featurePath;
+
+    /**
+     * All tokens that match this regex are replaced by {@code NUM}. Examples:
+     * <ul>
+     * <li>^[0-9]+$
+     * <li>^[0-9,\.]+$
+     * <li>^[0-9]+(\.[0-9]*)?$
+     * </ul>
+     * <p>
+     * Make sure that these regular expressions are fit to the segmentation, e.g. if your work on
+     * tokens, your tokenizer might split prefixes such as + and - from the rest of the number.
+     */
+    public static final String PARAM_NUMBER_REGEX = "numberRegex";
+    @ConfigurationParameter(name = PARAM_NUMBER_REGEX, mandatory = false)
+    private String numberRegex;
+
+    /**
+     * All the tokens listed in this file (one token per line) are replaced by {@code STOP}. Empty
+     * lines and lines starting with {@code #} are ignored. Casing is ignored.
+     */
+    public static final String PARAM_STOPWORDS_FILE = "stopwordsFile";
+    @ConfigurationParameter(name = PARAM_STOPWORDS_FILE, mandatory = false)
+    private File stopwordsFile;
+    private Set<String> stopwords;
 
     private BufferedWriter targetWriter;
 
@@ -73,11 +104,34 @@ public class TokenizedTextWriter
         getLogger().info("Writing to file " + getTargetLocation());
         try {
             targetWriter = new BufferedWriter(new FileWriter(getTargetLocation()));
+            stopwords = stopwordsFile == null
+                    ? Collections.emptySet()
+                    : readStopwordsFile(stopwordsFile);
         }
         catch (IOException e) {
             throw new ResourceInitializationException(e);
         }
     };
+
+    /**
+     * Read a file containing stopwords (one per line).
+     * <p>
+     * Empty lines and lines starting with ("#") are filtered out.
+     * 
+     * @param f
+     * @return
+     * @throws IOException
+     */
+    private static Set<String> readStopwordsFile(File f)
+        throws IOException
+    {
+        return Files.readAllLines(f.toPath()).stream()
+                .map(String::trim)
+                .filter(l -> !l.isEmpty())
+                .filter(l -> !l.startsWith("#"))
+                .map(w -> w.toLowerCase())
+                .collect(Collectors.toSet());
+    }
 
     /*
      * (non-Javadoc)
@@ -132,6 +186,10 @@ public class TokenizedTextWriter
             boolean isFirst = true; // this is the first token of a sentence
             while (valueIter.hasNext()) {
                 String text = valueIter.next().getValue();
+                text = stopwords.contains(text.toLowerCase()) ? STOPWORD_REPLACEMENT : text;
+                text = (numberRegex != null && text.matches(numberRegex))
+                        ? NUMBER_REPLACEMENT
+                        : text;
                 targetWriter.write(isFirst ? text : TOKEN_SEPARATOR + text);
                 isFirst = false;
             }
