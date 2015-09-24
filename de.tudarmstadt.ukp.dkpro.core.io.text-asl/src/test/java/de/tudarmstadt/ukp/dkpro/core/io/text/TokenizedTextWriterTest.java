@@ -36,7 +36,7 @@ import org.junit.Test;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Lemma;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
-import de.tudarmstadt.ukp.dkpro.core.morpha.MorphaLemmatizer;
+//import de.tudarmstadt.ukp.dkpro.core.morpha.MorphaLemmatizer;
 //import de.tudarmstadt.ukp.dkpro.core.testing.IOTestRunner;
 //import de.tudarmstadt.ukp.dkpro.core.tokit.BreakIteratorSegmenter;
 
