@@ -94,9 +94,9 @@ public class FeaturePathFactory
 	implements Iterator<Entry<T, String>>
 	{
 		private final FeaturePathInfo fp;
-		private final FSIterator<T> iterator;
+		private final Iterator<T> iterator;
 
-		public FeaturePathIterator(FSIterator<T> aIterator, FeaturePathInfo aFp)
+		public FeaturePathIterator(Iterator<T> aIterator, FeaturePathInfo aFp)
 		{
 			fp = aFp;
 			iterator = aIterator;

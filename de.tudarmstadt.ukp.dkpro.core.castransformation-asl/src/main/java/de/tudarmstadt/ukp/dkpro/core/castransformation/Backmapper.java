@@ -17,29 +17,19 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.dkpro.core.castransformation;
 
-import static java.util.Arrays.asList;
-
-import java.util.LinkedList;
-
-import org.apache.uima.UIMAException;
-import org.apache.uima.UimaContext;
-import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.cas.CASException;
-import org.apache.uima.cas.FSIndex;
-import org.apache.uima.cas.FSIterator;
-import org.apache.uima.cas.FeatureStructure;
-import org.apache.uima.cas.Type;
-import org.apache.uima.cas.TypeSystem;
-import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
-import org.apache.uima.jcas.JCas;
-import org.apache.uima.jcas.tcas.Annotation;
-import org.apache.uima.resource.ResourceInitializationException;
-
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.AlignedString;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.ImmutableInterval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.alignment.Interval;
 import de.tudarmstadt.ukp.dkpro.core.api.transform.internal.CasCopier;
+import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.cas.*;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.jcas.JCas;
+import org.apache.uima.jcas.tcas.Annotation;
+
+import java.util.LinkedList;
 
 /**
  * After processing a file with the {@code ApplyChangesAnnotator} this annotator
@@ -52,26 +42,18 @@ public
 class Backmapper
 extends JCasAnnotator_ImplBase
 {
+	/**
+	 * Chain of views for backmapping. This should be the reverse of the chain of views that the
+	 * {@code ApplyChangesAnnotator} has used.
+	 *
+	 * For example, if view A has been mapped to B using {@code ApplyChangesAnnotator}, then this
+	 * parameter should be set using an array containing [B, A].
+	 */
 	public static final String PARAM_CHAIN = "Chain";
 
-	protected LinkedList<String> sofaChain = new LinkedList<String>();
-
-	@Override
-	public
-	void initialize(UimaContext aContext)
-	throws ResourceInitializationException
-	{
-		super.initialize(aContext);
-
-		String[] chain = (String[]) aContext.getConfigParameterValue(PARAM_CHAIN);
-		if (chain != null) {
-			sofaChain.addAll(asList(chain));
-		}
-		else {
-			sofaChain.add(ApplyChangesAnnotator.VIEW_SOURCE);
-			sofaChain.add(ApplyChangesAnnotator.VIEW_TARGET);
-		}
-	}
+	@ConfigurationParameter(name = PARAM_CHAIN, mandatory = false, defaultValue = {ApplyChangesAnnotator.VIEW_SOURCE,
+			ApplyChangesAnnotator.VIEW_TARGET})
+	protected LinkedList<String> sofaChain = new LinkedList<>();
 
 	@Override
 	public
@@ -92,7 +74,7 @@ extends JCasAnnotator_ImplBase
 			// Get the final target view
 			JCas targetView = aJCas.getView(sofaChain.getLast());
 
-			LinkedList<String> workChain = new LinkedList<String>(sofaChain);
+			LinkedList<String> workChain = new LinkedList<>(sofaChain);
 			String target = workChain.poll();
 			String source = null;
 

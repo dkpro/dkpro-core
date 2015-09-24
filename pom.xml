@@ -29,10 +29,11 @@
 	<packaging>pom</packaging>
 	<name>DKPro Core</name>
 	<description>DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework.</description> <!-- The description tag must be present for antrun to work!! -->
-	<url>https://github.com/dkpro/dkpro-core</url>
+	<url>https://dkpro.github.io/dkpro-core/</url>
 	<organization>
     	<name>Ubiquitous Knowledge Processing (UKP) Lab, Technische Universität Darmstadt</name>
-    </organization>
+    	<url>https://www.ukp.tu-darmstadt.de/</url>
+	</organization>
 	<inceptionYear>2007</inceptionYear>
 	<prerequisites>
 		<maven>3.0.4</maven>
