@@ -258,16 +258,19 @@ public class PosFilter
 
     /**
      * Returns the (one) annotation of a given type that is aligned with another annotation.
-     *
+     * 
+     * @param type
+     *            The annotation type to be looked up.
      * @param annotation
      *            An annotation.
      * @return The annotation aligned with another annotation.
      */
     private AnnotationFS getAnnotation(Type type, AnnotationFS annotation)
     {
-        List<AnnotationFS> annotations = CasUtil.selectCovered(annotation.getCAS(), type, annotation);
+        List<AnnotationFS> annotations = CasUtil.selectCovered(annotation.getCAS(), type,
+                annotation);
         if (annotations.size() != 1) {
-            getLogger().warn(
+            getLogger().debug(
                     "Could not find matching annotation of type " + type + " for annotation: "
                             + annotation.getCoveredText());
             return null;
