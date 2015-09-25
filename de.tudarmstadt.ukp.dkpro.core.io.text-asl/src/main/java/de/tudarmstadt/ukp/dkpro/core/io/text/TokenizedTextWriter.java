@@ -196,6 +196,7 @@ public class TokenizedTextWriter
             getLogger().trace("End of sentence.");
             targetWriter.newLine();
         }
+        targetWriter.flush();
     }
 
     /**
