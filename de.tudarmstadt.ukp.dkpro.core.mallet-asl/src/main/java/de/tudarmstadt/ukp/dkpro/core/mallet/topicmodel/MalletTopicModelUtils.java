@@ -19,6 +19,7 @@
 package de.tudarmstadt.ukp.dkpro.core.mallet.topicmodel;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,14 +48,21 @@ public class MalletTopicModelUtils
      *            normalize the word weights ?
      * 
      * @return a list of maps where each map represents a topic, mapping words to weights
-     * @throws Exception
+     * @throws IOException
+     *             if the model cannot be read
      */
     public static List<Map<String, Double>> getTopWords(File modelFile, int nWords,
             boolean normalize)
-                throws Exception
+                throws IOException
     {
         LOGGER.info("Reading model file " + modelFile + "...");
-        ParallelTopicModel model = ParallelTopicModel.read(modelFile);
+        ParallelTopicModel model;
+        try {
+            model = ParallelTopicModel.read(modelFile);
+        }
+        catch (Exception e) {
+            throw new IOException(e);
+        }
         Alphabet alphabet = model.getAlphabet();
 
         List<Map<String, Double>> topics = new ArrayList<>(model.getNumTopics());
@@ -88,15 +96,21 @@ public class MalletTopicModelUtils
      *            the file in which the topic words are written
      * @param nWords
      *            the number of words to extract
-     * @throws Exception
+     * @throws IOException
      *             if the model file cannot be read or if the target file cannot be written
      */
     public static void printTopicWords(File modelFile, File targetFile, int nWords)
-        throws Exception
+        throws IOException
     {
         boolean newLineAfterEachWord = false;
 
-        ParallelTopicModel model = ParallelTopicModel.read(modelFile);
+        ParallelTopicModel model;
+        try {
+            model = ParallelTopicModel.read(modelFile);
+        }
+        catch (Exception e) {
+            throw new IOException(e);
+        }
         model.printTopWords(targetFile, nWords, newLineAfterEachWord);
     }
 
