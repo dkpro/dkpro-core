@@ -22,8 +22,9 @@ import static org.apache.uima.fit.util.JCasUtil.select;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Set;
@@ -42,6 +43,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathException;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathFactory.FeaturePathIterator;
 import de.tudarmstadt.ukp.dkpro.core.api.featurepath.FeaturePathInfo;
 import de.tudarmstadt.ukp.dkpro.core.api.io.JCasFileWriter_ImplBase;
+import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 
 /**
@@ -55,6 +57,13 @@ public class TokenizedTextWriter
     private static final String TOKEN_SEPARATOR = " ";
     private static final String NUMBER_REPLACEMENT = "NUM";
     private static final String STOPWORD_REPLACEMENT = "STOP";
+
+    /**
+     * Encoding for the target file. Default is UTF-8.
+     */
+    public static final String PARAM_TARGET_ENCODING = ComponentParameters.PARAM_TARGET_ENCODING;
+    @ConfigurationParameter(name = PARAM_TARGET_ENCODING, mandatory = true, defaultValue = "UTF-8")
+    private String targetEncoding;
 
     /**
      * The feature path, e.g.
@@ -103,7 +112,9 @@ public class TokenizedTextWriter
         super.initialize(context);
         getLogger().info("Writing to file " + getTargetLocation());
         try {
-            targetWriter = new BufferedWriter(new FileWriter(getTargetLocation()));
+            targetWriter = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(getTargetLocation()),
+                    targetEncoding));
             stopwords = stopwordsFile == null
                     ? Collections.emptySet()
                     : readStopwordsFile(stopwordsFile);
