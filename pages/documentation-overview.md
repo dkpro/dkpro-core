@@ -13,7 +13,7 @@ permalink: "/documentation/"
 * [Using DKPro Core with Groovy]({{ site.url }}/pages/groovy-intro.html)
 * [Using DKPro Core with Jython]({{ site.url }}/pages/jython-intro.html)
 
-## Recipes
+## Recipes: Specific Use Cases
 
 * [Groovy recipes]({{ site.url }}/groovy/recipes/)
 
@@ -43,5 +43,5 @@ _upcoming release - links may be temporarily broken while a build is in progress
 ## Developer Documentation
 
 * [Release Guide]({{ site.url }}/pages/release-guide.html)
-* [How to contribute]({{ site.url }}/pages/contributing.html)
+* [How to contribute](http://dkpro.github.io/contributing/)
 
