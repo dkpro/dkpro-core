@@ -24,8 +24,8 @@ For a start, let's try a simple analysis pipeline:
 
    * Read an English text file called "document.txt"
    * Perform tokenization and sentence boundary detection using OpenNLP
-   * Perform lemmatization using !LanguageTool
-   * Perform dependency parsing using !MaltParser
+   * Perform lemmatization using LanguageTool
+   * Perform dependency parsing using MaltParser
    * Write the result to disk in CoNLL 2006 format
 
 Here is how to run that:
