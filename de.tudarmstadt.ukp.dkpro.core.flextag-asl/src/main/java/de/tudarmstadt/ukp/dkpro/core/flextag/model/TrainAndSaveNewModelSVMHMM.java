@@ -35,16 +35,16 @@ import de.tudarmstadt.ukp.dkpro.lab.Lab;
 import de.tudarmstadt.ukp.dkpro.lab.task.Dimension;
 import de.tudarmstadt.ukp.dkpro.lab.task.ParameterSpace;
 import de.tudarmstadt.ukp.dkpro.tc.core.Constants;
-import de.tudarmstadt.ukp.dkpro.tc.crfsuite.CRFSuiteAdapter;
-import de.tudarmstadt.ukp.dkpro.tc.crfsuite.task.serialization.SaveModelCRFSuiteBatchTask;
 import de.tudarmstadt.ukp.dkpro.tc.features.token.CurrentToken;
 import de.tudarmstadt.ukp.dkpro.tc.features.token.NextToken;
 import de.tudarmstadt.ukp.dkpro.tc.features.token.PreviousToken;
+import de.tudarmstadt.ukp.dkpro.tc.svmhmm.SVMHMMAdapter;
+import de.tudarmstadt.ukp.dkpro.tc.svmhmm.task.serialization.SaveModelSvmhmmBatchTask;
 
 /**
  * Example class of how to train an own model
  */
-public class TrainAndSaveNewModel implements Constants {
+public class TrainAndSaveNewModelSVMHMM implements Constants {
 
 	static String corpus = null;
 	static String experimentName = "trainAndSaveModel";
@@ -65,7 +65,7 @@ public class TrainAndSaveNewModel implements Constants {
 		ParameterSpace pSpace = getParameterSpace(Constants.FM_SEQUENCE,
 				Constants.LM_SINGLE_LABEL);
 
-		TrainAndSaveNewModel experiment = new TrainAndSaveNewModel();
+		TrainAndSaveNewModelSVMHMM experiment = new TrainAndSaveNewModelSVMHMM();
 		experiment.validation(pSpace);
 	}
 
@@ -86,7 +86,9 @@ public class TrainAndSaveNewModel implements Constants {
 
 		Dimension<List<String>> dimClassificationArgs = Dimension
 				.create(DIM_CLASSIFICATION_ARGS,
-						asList(new String[] { CRFSuiteAdapter.ALGORITHM_ADAPTIVE_REGULARIZATION_OF_WEIGHT_VECTOR }));
+						asList(new String[] { 
+					// TODO: Set classification arguments								
+						}));
 
 		Dimension<List<Object>> dimPipelineParameters = Dimension.create(
 				DIM_PIPELINE_PARAMS, Arrays.asList(new Object[] {
@@ -107,8 +109,8 @@ public class TrainAndSaveNewModel implements Constants {
 	}
 
 	protected void validation(ParameterSpace pSpace) throws Exception {
-		SaveModelCRFSuiteBatchTask batch = new SaveModelCRFSuiteBatchTask(
-				experimentName, modelOutputFolder, CRFSuiteAdapter.class,
+		SaveModelSvmhmmBatchTask batch = new SaveModelSvmhmmBatchTask(
+				experimentName, modelOutputFolder, SVMHMMAdapter.class,
 				getPreprocessing());
 		batch.setParameterSpace(pSpace);
 

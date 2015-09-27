@@ -52,6 +52,10 @@
             <artifactId>lucene-core</artifactId>
             <version>4.4.0</version>
         </dependency>
+        <dependency>
+        	<groupId>de.tudarmstadt.ukp.dkpro.tc</groupId>
+        	<artifactId>dkpro-tc-ml-svmhmm</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
