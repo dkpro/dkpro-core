@@ -76,7 +76,7 @@ public class StanfordSentimentAnalyzer
 			Annotation annotation = pipeline.process(sentenceText);
 
 			for (CoreMap sentence : annotation.get(CoreAnnotations.SentencesAnnotation.class)) {
-				Tree tree = sentence.get(SentimentCoreAnnotations.AnnotatedTree.class);
+				Tree tree = sentence.get(SentimentCoreAnnotations.SentimentAnnotatedTree.class);
 				SimpleMatrix sentimentCoefficients = RNNCoreAnnotations.getPredictions(tree);
 
 				double veryNegative = sentimentCoefficients.get(0);

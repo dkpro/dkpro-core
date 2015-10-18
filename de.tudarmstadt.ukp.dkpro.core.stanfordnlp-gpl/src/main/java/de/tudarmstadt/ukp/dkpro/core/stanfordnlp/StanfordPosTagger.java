@@ -169,8 +169,16 @@ public class StanfordPosTagger
             protected MaxentTagger produceResource(URL aUrl) throws IOException
             {
                 String modelFile = aUrl.toString();
+                
+                // Loading gzipped files from URL is broken in CoreNLP
+                // https://github.com/stanfordnlp/CoreNLP/issues/94
+                if (modelFile.startsWith("jar:") && modelFile.endsWith(".gz")) {
+                    modelFile = org.apache.commons.lang.StringUtils.substringAfter(modelFile, "!/");
+                }
+                
                 MaxentTagger tagger = new MaxentTagger(modelFile,
-                        StringUtils.argsToProperties(new String[] { "-model", modelFile }), false);
+                        StringUtils.argsToProperties(new String[] { "-model", modelFile }),
+                        false);
 
                 SingletonTagset tags = new SingletonTagset(POS.class, getResourceMetaData()
                         .getProperty(("pos.tagset")));

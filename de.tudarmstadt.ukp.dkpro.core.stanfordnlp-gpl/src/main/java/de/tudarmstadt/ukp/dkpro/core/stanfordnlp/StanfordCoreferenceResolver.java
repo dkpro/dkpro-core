@@ -62,11 +62,14 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.ParserAnnotatorUtils;
 import edu.stanford.nlp.semgraph.SemanticGraph;
 import edu.stanford.nlp.semgraph.SemanticGraphCoreAnnotations;
+import edu.stanford.nlp.semgraph.SemanticGraphFactory;
+import edu.stanford.nlp.semgraph.SemanticGraphFactory.Mode;
 import edu.stanford.nlp.trees.GrammaticalStructure;
 import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.LabeledScoredTreeFactory;
 import edu.stanford.nlp.trees.PennTreebankLanguagePack;
 import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.trees.GrammaticalStructure.Extras;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.trees.TreeFactory;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
@@ -151,7 +154,13 @@ public class StanfordCoreferenceResolver
                 throws IOException
             {
                 String base = FilenameUtils.getFullPathNoEndSeparator(aUrl.toString())+"/";
-                
+
+                // Loading gzipped files from URL is broken in CoreNLP
+                // https://github.com/stanfordnlp/CoreNLP/issues/94
+                String logicalBase = getModelLocation(getAggregatedProperties());
+                logicalBase = FilenameUtils.getFullPathNoEndSeparator(logicalBase)+"/";
+                logicalBase = logicalBase.substring("classpath:/".length());
+
                 Properties props = new Properties();
                 props.setProperty(Constants.SIEVES_PROP, sieves);
                 props.setProperty(Constants.SCORE_PROP, String.valueOf(score));
@@ -183,8 +192,8 @@ public class StanfordCoreferenceResolver
                 props.setProperty(Constants.SINGULAR_PROP, base + "singular.unigrams.txt");
                 // props.getProperty(Constants.STATES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES),
                 props.setProperty(Constants.STATES_PROP, base + "state-abbreviations.txt");
-                // props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER),
-                props.setProperty(Constants.GENDER_NUMBER_PROP, base + "gender.map.ser.gz");
+                //props.getProperty(Constants.GENDER_NUMBER_PROP, DefaultPaths.DEFAULT_DCOREF_GENDER_NUMBER);
+                props.setProperty(Constants.GENDER_NUMBER_PROP, logicalBase + "gender.map.ser.gz");
                 // props.getProperty(Constants.COUNTRIES_PROP, DefaultPaths.DEFAULT_DCOREF_COUNTRIES),
                 props.setProperty(Constants.COUNTRIES_PROP, base + "countries");
                 // props.getProperty(Constants.STATES_PROVINCES_PROP, DefaultPaths.DEFAULT_DCOREF_STATES_AND_PROVINCES),
@@ -262,7 +271,7 @@ public class StanfordCoreferenceResolver
             sentence.set(RootKey.class, root);
             sentences.add(sentence);
 
-            // https://code.google.com/p/dkpro-core-asl/issues/detail?id=590
+            // https://github.com/dkpro/dkpro-core/issues/590
             // We currently do not copy over dependencies from the CAS. This is supposed to fill
             // in the dependencies so we do not get NPEs.
             TreebankLanguagePack tlp = new PennTreebankLanguagePack();
@@ -271,12 +280,19 @@ public class StanfordCoreferenceResolver
             ParserAnnotatorUtils.fillInParseAnnotations(false, true, gsf, sentence, treeCopy, 
                     GrammaticalStructure.Extras.NONE);
             
-            // https://code.google.com/p/dkpro-core-asl/issues/detail?id=582
+            // https://github.com/dkpro/dkpro-core/issues/582
             SemanticGraph deps = sentence
                     .get(SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class);
             for (IndexedWord vertex : deps.vertexSet()) {
                  vertex.setWord(vertex.value());
             }
+            
+            // These lines are necessary since CoreNLP 3.5.2 - without them the mentions lack
+            // dependency information which causes an NPE
+            SemanticGraph dependencies = SemanticGraphFactory.makeFromTree(treeCopy,
+                    Mode.COLLAPSED, Extras.NONE, false, null, true);
+            sentence.set(SemanticGraphCoreAnnotations.AlternativeDependenciesAnnotation.class,
+                    dependencies);
             
             // merge the new CoreLabels with the tree leaves
             MentionExtractor.mergeLabels(treeCopy, tokens);
