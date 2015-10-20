@@ -35,12 +35,12 @@ public class InstallAsMavenArtifact {
 
 	public static void main(String[] args) throws IOException {
 
-		String modelLocation = "/Users/toobee/Desktop/svmOut";
+		String modelLocation = "PathToTheFolderContainingTheModelFiles";
 
 		
-		String version = "20150720";
+		String version = "VersionId"; //i.e. a data YYYYMMDD
 		String language = "en";
-		String variant = "SVMHMM";
+		String variant = "YourModelNameHere";
 
 		String targetName = language + "-" + variant;
 		String workingDirectory = Files.createTempDirectory("installModel",
