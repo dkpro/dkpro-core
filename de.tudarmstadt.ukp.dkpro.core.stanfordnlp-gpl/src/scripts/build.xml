@@ -26,26 +26,29 @@
 	<!-- 
 	  - Upstream versions - meta data versions are maintained per model below 
 	  -->
-	<property name="segmenter.version.real" value="3.5.1"/>
-	<property name="segmenter.date" value="2015-01-29"/>
+	<!-- http://nlp.stanford.edu/software/segmenter.shtml -->
+	<property name="segmenter.version.real" value="3.5.2"/>
+	<property name="segmenter.date" value="2015-04-20"/>
 	
-	<property name="tagger.version.real" value="3.5.1"/>
-	<property name="tagger.date" value="2015-01-29"/>
+	<!-- http://nlp.stanford.edu/software/tagger.shtml -->
+	<property name="tagger.version.real" value="3.5.2"/>
+	<property name="tagger.date" value="2015-04-20"/>
 	
-	<property name="parser.version.real" value="3.5.1"/>
-	<property name="parser.date" value="2015-01-29"/>
+	<!-- http://nlp.stanford.edu/software/lex-parser.shtml -->
+	<property name="parser.version.real" value="3.5.2"/>
+	<property name="parser.date" value="2015-04-20"/>
 	
-	<property name="corenlp.version.real" value="3.5.1"/>
-	<property name="core.version" value="20150129"/>
-	<property name="core.date" value="2015-01-29"/>
-
-    <property name="core.caseless.date" value="2014-02-25"/>
-    <property name="core.chinese.date" value="2015-01-30"/>
+	<!-- http://nlp.stanford.edu/software/corenlp.shtml -->
+	<property name="core.version.real" value="3.5.2"/>
+	<property name="core.version" value="20150420"/>
+	<property name="core.date" value="2015-04-20"/>
+    <property name="core.caseless.date" value="2015-04-20"/>
+    <property name="core.chinese.date" value="2015-04-20"/>
 	<property name="core.srparser.date" value="2014-10-23"/>
 	<property name="core.spanish.date" value="2015-01-08"/>
 
-	<property name="german.ner.date" value="2012-05-22"/>
-	<property name="chinese.ner.date" value="2012-11-11"/>
+	<!-- http://nlp.stanford.edu/software/CRF-NER.shtml -->
+	<property name="german.ner.date" value="2015-01-30"/>
     <property name="nodistsim.ner.date" value="2012-11-11"/>
 	
 
@@ -70,7 +73,13 @@
 
 	<target name="newmodels">
         <property name="install-artifact-mode" value="remote"/>
-		<!--
+        <!--
+        <antcall target="ner-de-hgc_175m_600.crf"/>
+        <antcall target="ner-de-dewac_175m_600.crf"/>
+        <antcall target="ner-en-conll.4class.distsim.crf"/>
+        <antcall target="ner-en-conll.4class.caseless.distsim.crf"/>
+        <antcall target="ner-en-all.3class.distsim.crf"/>
+        <antcall target="ner-en-all.3class.caseless.distsim.crf"/>
 		<antcall target="parser-ar-factored"/>
 		<antcall target="parser-de-pcfg"/>
 		<antcall target="parser-de-factored"/>
@@ -297,11 +306,11 @@
 		  - collide with the corenlp:models.
 		  -->
 		<install-stub-and-upstream-file 
-			file="target/download/german-ner/hgc_175m_600.crf.ser.gz" 
-			md5="39861454dc9e3b2eb391dd5b7139bc1b"
+			file="target/download/german-ner/german.hgc_175m_600.crf.ser.gz" 
+			md5="1ee4ad7028d28f9e0af20e9cd45432f7"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-    		upstreamVersion="20120522"
+    		upstreamVersion="20150130"
     		metaDataVersion="1"
 			tool="ner" 
 			language="de" 
@@ -316,11 +325,11 @@
 		  - collide with the corenlp:models.
 		  -->
 		<install-stub-and-upstream-file 
-			file="target/download/german-ner/dewac_175m_600.crf.ser.gz"
-			md5="4722078875ddd5658f37e496f4b54b1d"
+			file="target/download/german-ner/german.dewac_175m_600.crf.ser.gz"
+			md5="7cfbf0f0464bee2105e9db193fe69097"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
 			artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp" 
-    		upstreamVersion="20120522"
+    		upstreamVersion="20150130"
     		metaDataVersion="1"
     		tool="ner" 
 			language="de" 
@@ -646,10 +655,10 @@
 	<target name="ner-en-conll.4class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.conll.4class.distsim.crf.ser.gz" 
-    		md5="e8faf7ea7da871572418ddbd5ec5aad9"
+    		md5="06cec3e7294604ef7741abbaca7c5fec"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20150129" 
+    		upstreamVersion="20150420" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -661,10 +670,10 @@
 	<target name="ner-en-conll.4class.caseless.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/caseless/english.conll.4class.caseless.distsim.crf.ser.gz" 
-    		md5="0471ebc72d65249b3b133026798636fc"
+    		md5="55749554c428886a0eaac3762d9178f5"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140225" 
+    		upstreamVersion="20150420" 
     		metaDataVersion="0"
     		tool="ner" 
     		language="en" 
@@ -676,10 +685,10 @@
 	<target name="ner-en-all.3class.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/core/english.all.3class.distsim.crf.ser.gz" 
-    		md5="fc641e766d20adde69b04dffb79d1bac"
+    		md5="7fc85f51bad64ca8c29c6b3012187046"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20150129" 
+    		upstreamVersion="20150420" 
     		metaDataVersion="1"
     		tool="ner" 
     		language="en" 
@@ -691,10 +700,10 @@
 	<target name="ner-en-all.3class.caseless.distsim.crf">
     	<install-stub-and-upstream-file 
     		file="target/download/caseless/english.all.3class.caseless.distsim.crf.ser.gz" 
-    		md5="362e803592f1c774de532956aacff70d"
+    		md5="fceded042c31829eb432c261efa872a8"
     		groupId="de.tudarmstadt.ukp.dkpro.core" 
     		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.stanfordnlp"
-    		upstreamVersion="20140225" 
+    		upstreamVersion="20150420" 
     		metaDataVersion="0"
     		tool="ner" 
     		language="en" 
@@ -875,7 +884,7 @@
 		</install-stub-and-upstream-file>		
 	</target>
 		
-	<target name="coref-en-default">
+	<target name="coref-en-default" depends="download-core">
 		<install-stub-and-upstream-folder 
 			folder="target/download/core/coref-en"
 			groupId="de.tudarmstadt.ukp.dkpro.core" 
@@ -1317,14 +1326,17 @@
 	
 	<target name="download-german-ner" depends="-check-download-german-ner" unless="download-german-ner.DONE">
 		<mkdir dir="target/download/german-ner"/>
-		<get src="http://www-nlp.stanford.edu/downloads/stanford-ner-${german.ner.date}-german.tgz" dest="target/download/german-ner/ner.german.tar.gz" skipexisting="true"/>
-    	<gunzip src="target/download/german-ner/ner.german.tar.gz"/>
-    	<untar src="target/download/german-ner/ner.german.tar" dest="target/download/german-ner">
+		<get 
+			src="http://nlp.stanford.edu/software/stanford-german-${german.ner.date}-models.jar" 
+			dest="target/download/german-ner/ner.german.jar" skipexisting="true"/>
+    	<unzip src="target/download/german-ner/ner.german.jar" dest="target/download/german-ner">
+            <patternset>
+                <include name="edu/**/*"/>      
+            </patternset>
     		<chainedmapper>
 	    		<mapper type="flatten"/>
     		</chainedmapper>
-    	</untar>
-    	<delete file="target/download/german-ner/ner.german.tar"/>
+    	</unzip>
 		<touch file="target/download/german-ner/DONE"/>
 	</target>
 	
