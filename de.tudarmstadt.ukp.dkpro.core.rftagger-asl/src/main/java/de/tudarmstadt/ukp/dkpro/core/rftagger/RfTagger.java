@@ -80,6 +80,7 @@ public class RfTagger
     private MappingProvider mappingProvider;
     private RuntimeProvider rfTaggerExecutables;
     private ModelProviderBase<File> modelProvider;
+    private File executableFile;
 
     @Override
     public void initialize(UimaContext aContext)
@@ -136,24 +137,24 @@ public class RfTagger
         LogFactory.getLog(getClass()).info("Load binary for platform: [" + platform + "]");
 
         rfTaggerExecutables = new RuntimeProvider(
-                "classpath:/de/tudarmstadt/ukp/dkpro/core/rftagger/");
+                "classpath:/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/");
+        
+        try {
+            executableFile = rfTaggerExecutables.getFile("rft-annotate");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
     {
-        try {
-            System.out.println(rfTaggerExecutables.getFile("rft-annotate"));
+        File resource = modelProvider.getResource();
+        for(File f: resource.listFiles()){
+            System.out.println(f.getAbsolutePath());
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(modelProvider.getResource().getAbsolutePath());
-        int a=0; 
-        a++;
-        
     }
 
 }

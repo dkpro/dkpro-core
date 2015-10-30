@@ -35,8 +35,7 @@
 		<antcall target="separate-jars"/>
 	</target>
 
-	<target name="separate-jars" depends="install-executables"/>
-	<!--target name="separate-jars" depends="install-executables,install-models"/-->
+	<target name="separate-jars" depends="install-executables,install-models"/>
 	<target name="install-executables">
 		<property name="version.bin" value="20130430.0"/>
 
@@ -124,7 +123,7 @@
 		<delete dir="target/download"/>
 	</target>
 
-	<!--target name="install-models">
+	<target name="install-models">
 
 		<mkdir dir="target/download"/>
 		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-german.tar.gz" 
@@ -235,5 +234,5 @@
 								    		language="si"
 											variant="jos">
 		</install-stub-and-upstream-folder>
-	</target-->
+	</target>
 </project>
