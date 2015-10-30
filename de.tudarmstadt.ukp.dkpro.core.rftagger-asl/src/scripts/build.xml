@@ -143,7 +143,7 @@
 							    		metaDataVersion="1"
 							    		tool="tagger"
 							    		language="de"
-										variant="german">
+										variant="tigertreebank2">
 		</install-stub-and-upstream-folder>
 
 		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-czech.tar.gz" 
@@ -161,7 +161,7 @@
 						    		metaDataVersion="1"
 						    		tool="tagger"
 						    		language="cz"
-									variant="czech">
+									variant="czechacademiccorpus1">
 		</install-stub-and-upstream-folder>
 
 		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-hungarian.tar.gz" 
@@ -179,7 +179,7 @@
 							    		metaDataVersion="1"
 							    		tool="tagger"
 							    		language="hu"
-										variant="hungarian">
+										variant="szegedtreebank2">
 		</install-stub-and-upstream-folder>
 
 		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-russian.tar.gz" 
@@ -197,7 +197,7 @@
 							    		metaDataVersion="1"
 							    		tool="tagger"
 							    		language="ru"
-										variant="russian">
+										variant="iru">
 		</install-stub-and-upstream-folder>
 
 		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-slovak.tar.gz" 
@@ -215,7 +215,7 @@
 								    		metaDataVersion="1"
 								    		tool="tagger"
 								    		language="sk"
-											variant="slovak">
+											variant="slovaknationalcorpus">
 		</install-stub-and-upstream-folder>
 
 		
@@ -234,7 +234,7 @@
 								    		metaDataVersion="1"
 								    		tool="tagger"
 								    		language="si"
-											variant="slovene">
+											variant="jos">
 		</install-stub-and-upstream-folder>
 	</target>
 </project>
