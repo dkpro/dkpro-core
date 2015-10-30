@@ -30,7 +30,7 @@
 
 	<target name="local-maven">
 		<property name="install-artifact-mode" value="local"/>
-		<antcall target="separate-jars"/>	
+		<antcall target="separate-jars"/>
 	</target>
 
 	<target name="remote-maven">
@@ -73,7 +73,7 @@
 			<entry  key="rftagger" value="executable"/>
 		</propertyfile>
 
-			<!-- LINUX 64 bit -->
+		<!-- LINUX 64 bit -->
 		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64"/>
 		<get 
 			    src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_64.tar.gz" 
@@ -109,7 +109,7 @@
 				<include name="**/*"/>
 			</fileset>
 		</jar>
-		
+
 		<generate-pom 
 			groupId="de.tudarmstadt.ukp.dkpro.core"
 			artifactId="de.tudarmstadt.ukp.dkpro.core.rftagger-bin" 
@@ -121,29 +121,120 @@
 			artifactId="de.tudarmstadt.ukp.dkpro.core.rftagger-bin" 
 			version="${version.bin}"/>
 		<clean-pom/>
-	 	<delete dir="target/model-staging"/>
-		<delete dir="target/download"/> 
+		<delete dir="target/model-staging"/>
+		<delete dir="target/download"/>
 	</target>
-	
+
 	<target name="install-models">
-		
-		<mkdir dir="target/download_german"/>
-						<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-german.tar.gz" 
-							    		dest="target/download_german/20130430-german.tar.gz" 
+
+		<mkdir dir="target/download"/>
+		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-german.tar.gz" 
+							    		dest="target/download/20151030-german.tar.gz" 
 							    		skipexisting="true"/>
-						<untar src="target/download_german/20130430-german.tar.gz" 
-										dest="target/download_german/" 
+		<untar src="target/download/20151030-german.tar.gz" 
+										dest="target/download/" 
 										compression="gzip"/>
 
-						<install-stub-and-upstream-folder 
-							    		folder="target/download_german/german" 
+		<install-stub-and-upstream-folder 
+							    		folder="target/download/german" 
 							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
 							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
 							    		upstreamVersion="20151030"
 							    		metaDataVersion="1"
 							    		tool="tagger"
-							    		language="en"
+							    		language="de"
 										variant="german">
-						</install-stub-and-upstream-folder>
+		</install-stub-and-upstream-folder>
+
+		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-czech.tar.gz" 
+						    		dest="target/download/20151030-czech.tar.gz" 
+						    		skipexisting="true"/>
+		<untar src="target/download/20151030-czech.tar.gz" 
+									dest="target/download/" 
+									compression="gzip"/>
+
+		<install-stub-and-upstream-folder 
+						    		folder="target/download/czech" 
+						    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+						    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+						    		upstreamVersion="20151030"
+						    		metaDataVersion="1"
+						    		tool="tagger"
+						    		language="cz"
+									variant="czech">
+		</install-stub-and-upstream-folder>
+
+		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-hungarian.tar.gz" 
+							    		dest="target/download/20151030-hungarian.tar.gz" 
+							    		skipexisting="true"/>
+		<untar src="target/download/20151030-hungarian.tar.gz" 
+										dest="target/download/" 
+										compression="gzip"/>
+
+		<install-stub-and-upstream-folder 
+							    		folder="target/download/hungarian" 
+							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+							    		upstreamVersion="20151030"
+							    		metaDataVersion="1"
+							    		tool="tagger"
+							    		language="hu"
+										variant="hungarian">
+		</install-stub-and-upstream-folder>
+
+		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-russian.tar.gz" 
+							    		dest="target/download/20151030-russian.tar.gz" 
+							    		skipexisting="true"/>
+		<untar src="target/download/20151030-russian.tar.gz" 
+										dest="target/download/" 
+										compression="gzip"/>
+
+		<install-stub-and-upstream-folder 
+							    		folder="target/download/russian" 
+							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+							    		upstreamVersion="20151030"
+							    		metaDataVersion="1"
+							    		tool="tagger"
+							    		language="ru"
+										variant="russian">
+		</install-stub-and-upstream-folder>
+
+		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-slovak.tar.gz" 
+								    		dest="target/download/20151030-slovak.tar.gz" 
+								    		skipexisting="true"/>
+		<untar src="target/download/20151030-slovak.tar.gz" 
+											dest="target/download/" 
+											compression="gzip"/>
+
+		<install-stub-and-upstream-folder 
+								    		folder="target/download/slovak" 
+								    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+								    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+								    		upstreamVersion="20151030"
+								    		metaDataVersion="1"
+								    		tool="tagger"
+								    		language="sk"
+											variant="slovak">
+		</install-stub-and-upstream-folder>
+
+		
+		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-slovene.tar.gz" 
+								    		dest="target/download/20151030-slovene.tar.gz" 
+								    		skipexisting="true"/>
+		<untar src="target/download/20151030-slovene.tar.gz" 
+											dest="target/download/" 
+											compression="gzip"/>
+
+		<install-stub-and-upstream-folder 
+								    		folder="target/download/slovene" 
+								    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+								    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+								    		upstreamVersion="20151030"
+								    		metaDataVersion="1"
+								    		tool="tagger"
+								    		language="si"
+											variant="slovene">
+		</install-stub-and-upstream-folder>
 	</target>
 </project>
