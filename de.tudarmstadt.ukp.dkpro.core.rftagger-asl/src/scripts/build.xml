@@ -1,0 +1,149 @@
+<!--
+
+    Copyright 2015
+    Ubiquitous Knowledge Processing (UKP) Lab
+    Technische Universität Darmstadt
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see http://www.gnu.org/licenses/.
+
+-->
+<project basedir="../.." default="separate-jars">
+	<import>
+		<url url="http://dkpro-core-asl.googlecode.com/svn/built-ant-macros/tags/0.7.0/ant-macros.xml"/>
+	</import>
+
+	<!-- 
+	  - Output package configuration
+	  -->
+	<property name="outputPackage" value="de/tudarmstadt/ukp/dkpro/core/rftagger/lib"/>
+
+	<target name="local-maven">
+		<property name="install-artifact-mode" value="local"/>
+		<antcall target="separate-jars"/>	
+	</target>
+
+	<target name="remote-maven">
+		<property name="install-artifact-mode" value="remote"/>
+		<antcall target="separate-jars"/>
+	</target>
+
+	<target name="separate-jars" depends="install-executables,install-models"/>
+
+	<target name="install-executables">
+		<property name="version.bin" value="20130430.0"/>
+
+		<mkdir dir="target/download"/>
+
+		<!-- OSX -->
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/osx-x86_64"/>
+
+		<get 
+	    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-osx-x86_64.tar.gz" 
+	    		dest="target/download/20130430-osx-x86_64.tar.gz" 
+	    		skipexisting="true"/>
+		<gunzip 
+				src="target/download/20130430-osx-x86_64.tar.gz"
+				dest="target/download/20130430-osx-x86_64.tar"/>
+		<untar 
+				src="target/download/20130430-osx-x86_64.tar"
+				dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/osx-x86_64">
+			<patternset>
+				<include name="*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+
+		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/osx-x86_64/README">
+			rf tagger version by 2013-04-30
+		</echo>
+
+		<propertyfile
+		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/osx-x86_64/manifest.properties">
+			<entry  key="rftagger" value="executable"/>
+		</propertyfile>
+
+			<!-- LINUX 64 bit -->
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64"/>
+		<get 
+			    src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_64.tar.gz" 
+			    dest="target/download/20130430-linux-x86_64.tar.gz" 
+			    skipexisting="true"/>
+		<gunzip 
+				src="target/download/20130430-linux-x86_64.tar.gz"
+				dest="target/download/20130430-linux-x86_64.tar"/>
+		<untar 
+				src="target/download/20130430-linux-x86_64.tar"
+				dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64">
+			<patternset>
+				<include name="*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+
+		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64/README">
+			rf tagger version by 2013-04-30
+		</echo>
+
+		<propertyfile
+				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64/manifest.properties">
+			<entry  key="rftagger" value="executable"/>
+		</propertyfile>
+
+
+		<jar 
+			destfile="target/de.tudarmstadt.ukp.dkpro.core.rftagger-bin-${version.bin}.jar" 
+			compress="true">
+			<fileset dir="target/model-staging">
+				<include name="META-INF/**/*"/>
+				<include name="**/*"/>
+			</fileset>
+		</jar>
+		
+		<generate-pom 
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactId="de.tudarmstadt.ukp.dkpro.core.rftagger-bin" 
+			version="${version.bin}"/>
+
+		<install-artifact 
+			file="target/de.tudarmstadt.ukp.dkpro.core.rftagger-bin-${version.bin}.jar"
+			groupId="de.tudarmstadt.ukp.dkpro.core"
+			artifactId="de.tudarmstadt.ukp.dkpro.core.rftagger-bin" 
+			version="${version.bin}"/>
+		<clean-pom/>
+	 	<delete dir="target/model-staging"/>
+		<delete dir="target/download"/> 
+	</target>
+	
+	<target name="install-models">
+		
+		<mkdir dir="target/download_german"/>
+						<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-german.tar.gz" 
+							    		dest="target/download_german/20130430-german.tar.gz" 
+							    		skipexisting="true"/>
+						<untar src="target/download_german/20130430-german.tar.gz" 
+										dest="target/download_german/" 
+										compression="gzip"/>
+
+						<install-stub-and-upstream-folder 
+							    		folder="target/download_german/german" 
+							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
+							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+							    		upstreamVersion="20151030"
+							    		metaDataVersion="1"
+							    		tool="tagger"
+							    		language="en"
+										variant="german">
+						</install-stub-and-upstream-folder>
+	</target>
+</project>
