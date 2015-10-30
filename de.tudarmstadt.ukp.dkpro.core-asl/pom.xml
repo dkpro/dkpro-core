@@ -492,6 +492,7 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.performance-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.posfilter-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.readability-asl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.rftagger-asl</module>		
 		<module>../de.tudarmstadt.ukp.dkpro.core.snowball-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.stopwordremover-asl</module>
 		<module>../de.tudarmstadt.ukp.dkpro.core.testing-asl</module>
@@ -503,7 +504,6 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
 	    <!-- Distribution modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
-		<module>../de.tudarmstadt.ukp.dkpro.core.rftagger-asl</module>
 	</modules>
 	<profiles>
 		<profile>
