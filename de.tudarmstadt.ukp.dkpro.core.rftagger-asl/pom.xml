@@ -92,7 +92,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tigertreebank2</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
 				<version>20151030.1</version>
 			</dependency>
 						<dependency>
@@ -102,7 +102,7 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-ru-iru</artifactId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-ru-wacky</artifactId>
 				<version>20151030.1</version>
 			</dependency>
 			<dependency>
