@@ -378,6 +378,11 @@
 			</dependency>
 			<dependency>
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-asl</artifactId>
+				<version>1.8.0-SNAPSHOT</version>
+			</dependency>			
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.snowball-asl</artifactId>
 				<version>1.8.0-SNAPSHOT</version>
 			</dependency>
@@ -498,6 +503,7 @@
 		<module>../de.tudarmstadt.ukp.dkpro.core.examples-asl</module>
 	    <!-- Distribution modules -->
 		<module>../de.tudarmstadt.ukp.dkpro.core.distribution-asl</module>
+		<module>../de.tudarmstadt.ukp.dkpro.core.rftagger-asl</module>
 	</modules>
 	<profiles>
 		<profile>
