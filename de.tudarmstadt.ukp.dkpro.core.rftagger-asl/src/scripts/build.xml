@@ -41,6 +41,35 @@
 
 		<mkdir dir="target/download"/>
 		
+		<!-- Windows 32 bit -->
+				<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
+
+				<get 
+			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-windows-x86_64.tar.gz" 
+			    		dest="target/download/20130430-windows-x86_64.tar.gz" 
+			    		skipexisting="true"/>
+				<gunzip 
+						src="target/download/20130430-windows-x86_64.tar.gz"
+						dest="target/download/20130430-windows-x86_64.tar"/>
+				<untar 
+					src="target/download/20130430-windows-x86_64.tar"
+					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64">
+					<patternset>
+						<include name="*/*" />
+					</patternset>
+					<mapper type="flatten" />
+				</untar>
+				<propertyfile
+				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/manifest.properties">
+				  <entry  key="rft-annotate" value="executable"/>
+				  <entry  key="rft-train" value="executable"/>
+				  <entry  key="rft-print" value="executable"/>
+				</propertyfile>
+
+				<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/README">
+					rf tagger version 2013-04-30
+				</echo>		
+		
 			<!-- LINUX 32 bit -->
 				<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_32"/>
 
