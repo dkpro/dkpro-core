@@ -37,6 +37,8 @@ import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.morph.MorphologicalFeaturesParser;
+import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.morph.MorphologicalFeatures;
 import de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.POS;
 import de.tudarmstadt.ukp.dkpro.core.api.parameter.ComponentParameters;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.MappingProvider;
@@ -87,6 +89,10 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	@ConfigurationParameter(name = PARAM_POS_MAPPING_LOCATION, mandatory = false)
 	protected String posMappingLocation;
 
+	public static final String PARAM_MORPH_MAPPING_LOCATION = ComponentParameters.PARAM_MORPH_MAPPING_LOCATION;
+	@ConfigurationParameter(name = PARAM_MORPH_MAPPING_LOCATION, mandatory = false)
+	private String morphMappingLocation;
+
 	private MappingProvider mappingProvider;
 	private RuntimeProvider rfTaggerExecutables;
 	private ModelProviderBase<File> modelProvider;
@@ -94,6 +100,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	private Process process;
 	private BufferedWriter writer;
 	private BufferedReader reader;
+	private MorphologicalFeaturesParser featuresParser;
 
 	@Override
 	public void initialize(UimaContext aContext) throws ResourceInitializationException {
@@ -101,7 +108,17 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 		loadExecutable();
 		loadModel();
 		loadMappingProvider();
+		loadMorphParser();
 		startExecutable();
+	}
+
+	private void loadMorphParser() {
+		featuresParser = new MorphologicalFeaturesParser();
+		featuresParser.setDefault(MorphologicalFeaturesParser.LOCATION,
+				"classpath:/de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/${language}-${morph.tagset}-morph.map");
+		featuresParser.setOverride(MorphologicalFeaturesParser.LOCATION, morphMappingLocation);
+		featuresParser.setOverride(MorphologicalFeaturesParser.LANGUAGE, language);
+		featuresParser.addImport("morph.tagset", modelProvider);
 	}
 
 	private void startExecutable() {
@@ -110,7 +127,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 		cmd.add(modelProvider.getResource().getAbsolutePath() + "/param.par");
 		try {
 			ProcessBuilder pb = new ProcessBuilder();
-//			pb.redirectError(Redirect.INHERIT);
+			// pb.redirectError(Redirect.INHERIT);
 			pb.command(cmd);
 			process = pb.start();
 		} catch (IOException e) {
@@ -167,6 +184,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
 		mappingProvider.configure(aJCas.getCas());
+		featuresParser.configure(aJCas.getCas());
 		try {
 			for (Sentence sentence : JCasUtil.select(aJCas, Sentence.class)) {
 				StringBuilder sb = new StringBuilder();
@@ -187,24 +205,39 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 	private void annotateOutput(List<String> readOutput, JCas aJCas, List<Token> tokens) {
 		for (int i = 0; i < readOutput.size(); i++) {
 			String line = readOutput.get(i);
-			if(line.isEmpty()){
-				//end of sequence
+			if (line.isEmpty()) {
+				// end of sequence
 				continue;
 			}
-			
+
 			String[] split = line.split("\t");
 
 			int begin = tokens.get(i).getBegin();
 			int end = tokens.get(i).getEnd();
 
-			String tag = split[1];
+			String tag = extractTag(split[1]);
 
 			Type posTag = mappingProvider.getTagType(tag);
 			POS posAnno = (POS) aJCas.getCas().createAnnotation(posTag, begin, end);
 			posAnno.setPosValue(tag);
 			posAnno.addToIndexes();
 			tokens.get(i).setPos(posAnno);
+
+			MorphologicalFeatures analysis = featuresParser.parse(aJCas, tokens.get(i), split[1]);
+			tokens.get(i).setMorph(analysis);
+			
+			System.out.println(String.format("%10s", tokens.get(i).getCoveredText()) + "\t" + " Person: "
+					+ analysis.getPerson() + " Case: " + analysis.getCase() + " Gen: " + analysis.getGender()
+					+ " Definitness: " + analysis.getDefiniteness() + " Degree: " + analysis.getDegree() + " Tense: " + analysis.getTense());
 		}
+	}
+
+	private String extractTag(String string) {
+		int idx = string.indexOf(".");
+		if(idx<0){
+			return string;
+		}
+		return string.substring(0,idx);
 	}
 
 	private List<String> readOutput() throws IOException {
@@ -213,7 +246,7 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 		String line = null;
 		while ((line = reader.readLine()) != null) {
 			readLines.add(line);
-			if(!reader.ready()){
+			if (!reader.ready()) {
 				break;
 			}
 		}
@@ -230,10 +263,9 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 		writer.write(sb.toString());
 		writer.flush();
 	}
-	
+
 	@Override
-	public void collectionProcessComplete()
-			throws AnalysisEngineProcessException {
+	public void collectionProcessComplete() throws AnalysisEngineProcessException {
 		try {
 			writer.close();
 			reader.close();
