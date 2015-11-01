@@ -225,10 +225,6 @@ public class RfTagger extends JCasAnnotator_ImplBase {
 
 			MorphologicalFeatures analysis = featuresParser.parse(aJCas, tokens.get(i), split[1]);
 			tokens.get(i).setMorph(analysis);
-			
-			System.out.println(String.format("%10s", tokens.get(i).getCoveredText()) + "\t" + " Person: "
-					+ analysis.getPerson() + " Case: " + analysis.getCase() + " Gen: " + analysis.getGender()
-					+ " Definitness: " + analysis.getDefiniteness() + " Degree: " + analysis.getDegree() + " Tense: " + analysis.getTense());
 		}
 	}
 

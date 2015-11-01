@@ -2,6 +2,8 @@
 *=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.O
 
 ADJA=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADJ
+
+ADJD=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 ADV=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.ADV
 
 APPO=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PP
@@ -25,3 +27,4 @@ VIMP=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 VINF=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.V
 
 SYM=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
+SENT=de.tudarmstadt.ukp.dkpro.core.api.lexmorph.type.pos.PUNC
