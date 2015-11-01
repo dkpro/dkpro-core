@@ -37,7 +37,6 @@
   <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>		
 		<dependency>
 			<groupId>org.annolab.tt4j</groupId>
@@ -114,6 +113,13 @@
 				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
 				<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-si-jos</artifactId>
 				<version>20151030.1</version>
+			</dependency>
+			<dependency>
+				<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+				<artifactId>
+					de.tudarmstadt.ukp.dkpro.core.tokit-asl
+				</artifactId>
+				<scope>test</scope>
 			</dependency>
   </dependencies>
 </project>
