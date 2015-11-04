@@ -36,7 +36,7 @@
 	</target>
 
 	<target name="separate-jars" depends="install-executables,install-models"/>
-		<target name="install-executables">
+	<target name="install-executables">
 		<property name="version.bin" value="20130430.0"/>
 
 		<mkdir dir="target/download"/>
@@ -184,17 +184,17 @@
 	<target name="install-models">
 
 		<mkdir dir="target/download"/>
-		
-			<get src="http://www.cis.uni-muenchen.de/~schmid/tools/RFTagger/data/RFTagger.tar.gz" 
+
+		<get src="http://www.cis.uni-muenchen.de/~schmid/tools/RFTagger/data/RFTagger.tar.gz" 
 								    		dest="target/download/RFTagger.tar.gz" 
 								    		skipexisting="true"/>
-			<untar src="target/download/RFTagger.tar.gz" 
+		<untar src="target/download/RFTagger.tar.gz" 
 											dest="target/download/" 
 											compression="gzip"/>
-		
+
 		<!-- GERMAN -->
 		<mkdir dir="target/download/german"/>
-			
+
 		<copy file="target/download/RFTagger/lib/german.par" tofile="target/download/german/param.par"/>
 		<copy file="target/download/RFTagger/lib/german-rft-tagger-lemma-lexicon.txt" tofile="target/download/german/german-rft-tagger-lemma-lexicon.txt"/>
 		<copy file="target/download/RFTagger/lib/german-abbreviations" tofile="target/download/german/german-abbreviations"/>
@@ -209,20 +209,20 @@
 		language="de"
 		variant="tiger2treebank">
 			<metadata>
-			                <entry key="model.encoding" value="UTF-8" />
-			                <entry key="pos.tagset" value="tiger2treebank" />
-			                <entry key="morph.tagset" value="morphisto" />
-			            </metadata>
+				<entry key="model.encoding" value="UTF-8" />
+				<entry key="pos.tagset" value="tiger2treebank" />
+				<entry key="morph.tagset" value="morphisto" />
+			</metadata>
 		</install-stub-and-upstream-folder>
 
 		<!-- SLOVENE -->
 		<mkdir dir="target/download/slovene"/>
-				
-						<copy file="target/download/RFTagger/lib/slovene.par" tofile="target/download/slovene/param.par"/>
-						<copy file="target/download/RFTagger/lib/slovene-lemmas" tofile="target/download/slovene/slovene-lemmas"/>
-						<copy file="target/download/RFTagger/lib/slovene-abbreviations" tofile="target/download/slovene/slovene-abbreviations"/>
 
-						<install-stub-and-upstream-folder 
+		<copy file="target/download/RFTagger/lib/slovene.par" tofile="target/download/slovene/param.par"/>
+		<copy file="target/download/RFTagger/lib/slovene-lemmas" tofile="target/download/slovene/slovene-lemmas"/>
+		<copy file="target/download/RFTagger/lib/slovene-abbreviations" tofile="target/download/slovene/slovene-abbreviations"/>
+
+		<install-stub-and-upstream-folder 
 						folder="target/download/slovene" 
 						groupId="de.tudarmstadt.ukp.dkpro.core" 
 						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
@@ -231,16 +231,21 @@
 						tool="tagger"
 						language="si"
 						variant="jos">
-						</install-stub-and-upstream-folder>
-		
+			<metadata>
+				<entry key="model.encoding" value="UTF-8" />
+				<entry key="pos.tagset" value="jos" />
+				<entry key="morph.tagset" value="morphisto" />
+			</metadata>
+		</install-stub-and-upstream-folder>
+
 		<!-- SLOVAK -->
 		<mkdir dir="target/download/slovak"/>
-					
-						<copy file="target/download/RFTagger/lib/slovak.par" tofile="target/download/slovak/param.par"/>
-						<copy file="target/download/RFTagger/lib/slovak-lemmas" tofile="target/download/slovak/slovak-lemmas"/>
-						<copy file="target/download/RFTagger/lib/slovak-abbreviations" tofile="target/download/slovak/slovak-abbreviations"/>
 
-						<install-stub-and-upstream-folder 
+		<copy file="target/download/RFTagger/lib/slovak.par" tofile="target/download/slovak/param.par"/>
+		<copy file="target/download/RFTagger/lib/slovak-lemmas" tofile="target/download/slovak/slovak-lemmas"/>
+		<copy file="target/download/RFTagger/lib/slovak-abbreviations" tofile="target/download/slovak/slovak-abbreviations"/>
+
+		<install-stub-and-upstream-folder 
 						folder="target/download/slovak" 
 						groupId="de.tudarmstadt.ukp.dkpro.core" 
 						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
@@ -249,14 +254,19 @@
 						tool="tagger"
 						language="sk"
 						variant="slovaknationalcorpus">
-						</install-stub-and-upstream-folder>
+			<metadata>
+				<entry key="model.encoding" value="UTF-8" />
+				<entry key="pos.tagset" value="snc" />
+				<entry key="morph.tagset" value="morphisto" />
+			</metadata>
+		</install-stub-and-upstream-folder>
 		<!-- CZECH -->
 		<mkdir dir="target/download/czech"/>
-					
-		<copy file="target/download/RFTagger/lib/czech.par" tofile="target/download/czech/param.par"/>
-						<copy file="target/download/RFTagger/lib/czech-abbreviations" tofile="target/download/czech/czech-abbreviations"/>
 
-						<install-stub-and-upstream-folder 
+		<copy file="target/download/RFTagger/lib/czech.par" tofile="target/download/czech/param.par"/>
+		<copy file="target/download/RFTagger/lib/czech-abbreviations" tofile="target/download/czech/czech-abbreviations"/>
+
+		<install-stub-and-upstream-folder 
 						folder="target/download/czech" 
 						groupId="de.tudarmstadt.ukp.dkpro.core" 
 						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
@@ -265,15 +275,20 @@
 						tool="tagger"
 						language="cz"
 						variant="czechacademiccorpus1">
-						</install-stub-and-upstream-folder>		
+			<metadata>
+				<entry key="model.encoding" value="UTF-8" />
+				<entry key="pos.tagset" value="cac" />
+				<entry key="morph.tagset" value="morphisto" />
+			</metadata>
+		</install-stub-and-upstream-folder>
 		<!-- HUNGARIAN -->
 		<mkdir dir="target/download/hungarian"/>
-						
-						<copy file="target/download/RFTagger/lib/hungarian.par" tofile="target/download/hungarian/param.par"/>
-						<copy file="target/download/RFTagger/lib/hungarian-mwls" tofile="target/download/hungarian/hungarian-mwls"/>				
-						<copy file="target/download/RFTagger/lib/hungarian-abbreviations" tofile="target/download/hungarian/hungarian-abbreviations"/>
 
-						<install-stub-and-upstream-folder 
+		<copy file="target/download/RFTagger/lib/hungarian.par" tofile="target/download/hungarian/param.par"/>
+		<copy file="target/download/RFTagger/lib/hungarian-mwls" tofile="target/download/hungarian/hungarian-mwls"/>
+		<copy file="target/download/RFTagger/lib/hungarian-abbreviations" tofile="target/download/hungarian/hungarian-abbreviations"/>
+
+		<install-stub-and-upstream-folder 
 						folder="target/download/hungarian" 
 						groupId="de.tudarmstadt.ukp.dkpro.core" 
 						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
@@ -282,15 +297,20 @@
 						tool="tagger"
 						language="hu"
 						variant="szegedtreebank2">
-						</install-stub-and-upstream-folder>		
-		
+			<metadata>
+				<entry key="model.encoding" value="UTF-8" />
+				<entry key="pos.tagset" value="szeged" />
+				<entry key="morph.tagset" value="morphisto" />
+			</metadata>
+		</install-stub-and-upstream-folder>
+
 		<!-- RUSSIAN -->
 		<mkdir dir="target/download/russian"/>
-	
-						<copy file="target/download/RFTagger/lib/russian.par" tofile="target/download/russian/param.par"/>
-						<copy file="target/download/RFTagger/lib/russian-lemmas" tofile="target/download/russian/russian-lemmas"/>				
 
-						<install-stub-and-upstream-folder 
+		<copy file="target/download/RFTagger/lib/russian.par" tofile="target/download/russian/param.par"/>
+		<copy file="target/download/RFTagger/lib/russian-lemmas" tofile="target/download/russian/russian-lemmas"/>
+
+		<install-stub-and-upstream-folder 
 						folder="target/download/russian" 
 						groupId="de.tudarmstadt.ukp.dkpro.core" 
 						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
@@ -299,6 +319,11 @@
 						tool="tagger"
 						language="ru"
 						variant="wacky">
-						</install-stub-and-upstream-folder>		
+			<metadata>
+						<entry key="model.encoding" value="UTF-8" />
+						<entry key="pos.tagset" value="rnc" />
+						<entry key="morph.tagset" value="morphisto" />
+					</metadata>
+		</install-stub-and-upstream-folder>
 	</target>
 </project>
