@@ -36,95 +36,95 @@
 	</target>
 
 	<target name="separate-jars" depends="install-executables,install-models"/>
-	<target name="install-executables">
+		<target name="install-executables">
 		<property name="version.bin" value="20130430.0"/>
 
 		<mkdir dir="target/download"/>
-		
-		<!-- Windows 32 bit -->
-				<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
 
-				<get 
+		<!-- Windows 32 bit -->
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/windows-x86_64"/>
+
+		<get 
 			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-windows-x86_64.tar.gz" 
 			    		dest="target/download/20130430-windows-x86_64.tar.gz" 
 			    		skipexisting="true"/>
-				<gunzip 
+		<gunzip 
 						src="target/download/20130430-windows-x86_64.tar.gz"
 						dest="target/download/20130430-windows-x86_64.tar"/>
-				<untar 
+		<untar 
 					src="target/download/20130430-windows-x86_64.tar"
 					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64">
-					<patternset>
-						<include name="*/*" />
-					</patternset>
-					<mapper type="flatten" />
-				</untar>
-				<propertyfile
+			<patternset>
+				<include name="*/*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+		<propertyfile
 				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/manifest.properties">
-				  <entry  key="rft-annotate" value="executable"/>
-				  <entry  key="rft-train" value="executable"/>
-				  <entry  key="rft-print" value="executable"/>
-				</propertyfile>
+			<entry  key="rft-annotate" value="executable"/>
+			<entry  key="rft-train" value="executable"/>
+			<entry  key="rft-print" value="executable"/>
+		</propertyfile>
 
-				<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/README">
+		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/windows-x86_64/README">
 					rf tagger version 2013-04-30
-				</echo>		
-		
-			<!-- LINUX 32 bit -->
-				<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_32"/>
+				</echo>
 
-				<get 
+		<!-- LINUX 32 bit -->
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_32"/>
+
+		<get 
 			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_32.tar.gz" 
 			    		dest="target/download/20130430-linux-x86_32.tar.gz" 
 			    		skipexisting="true"/>
-				<gunzip 
+		<gunzip 
 						src="target/download/20130430-linux-x86_32.tar.gz"
 						dest="target/download/20130430-linux-x86_32.tar"/>
-				<untar 
+		<untar 
 					src="target/download/20130430-linux-x86_32.tar"
 					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32">
-					<patternset>
-						<include name="*/*" />
-					</patternset>
-					<mapper type="flatten" />
-				</untar>
-				<propertyfile
+			<patternset>
+				<include name="*/*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+		<propertyfile
 				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32/manifest.properties">
-				  <entry  key="rft-annotate" value="executable"/>
-				  <entry  key="rft-train" value="executable"/>
-				  <entry  key="rft-print" value="executable"/>
-				</propertyfile>
+			<entry  key="rft-annotate" value="executable"/>
+			<entry  key="rft-train" value="executable"/>
+			<entry  key="rft-print" value="executable"/>
+		</propertyfile>
 
-				<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32/README">
+		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_32/README">
 					rf tagger version 2013-04-30
 				</echo>
-		
-		<!-- LINUX 64 bit -->
-				<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64"/>
 
-				<get 
+		<!-- LINUX 64 bit -->
+		<mkdir dir="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/linux-x86_64"/>
+
+		<get 
 			    		src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20130430-linux-x86_64.tar.gz" 
 			    		dest="target/download/20130430-linux-x86_64.tar.gz" 
 			    		skipexisting="true"/>
-				<gunzip 
+		<gunzip 
 						src="target/download/20130430-linux-x86_64.tar.gz"
 						dest="target/download/20130430-linux-x86_64.tar"/>
-				<untar 
+		<untar 
 					src="target/download/20130430-linux-x86_64.tar"
 					dest="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64">
-					<patternset>
-						<include name="*/*" />
-					</patternset>
-					<mapper type="flatten" />
-				</untar>
-				<propertyfile
+			<patternset>
+				<include name="*/*" />
+			</patternset>
+			<mapper type="flatten" />
+		</untar>
+		<propertyfile
 				    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64/manifest.properties">
-				  <entry  key="rft-annotate" value="executable"/>
-				  <entry  key="rft-train" value="executable"/>
-				  <entry  key="rft-print" value="executable"/>
-				</propertyfile>
+			<entry  key="rft-annotate" value="executable"/>
+			<entry  key="rft-train" value="executable"/>
+			<entry  key="rft-print" value="executable"/>
+		</propertyfile>
 
-				<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64/README">
+		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/linux-x86_64/README">
 					rf tagger version 2013-04-30
 				</echo>
 
@@ -148,16 +148,16 @@
 		</untar>
 		<propertyfile
 		    file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/osx-x86_64/manifest.properties">
-		  <entry  key="rft-annotate" value="executable"/>
-		  <entry  key="rft-train" value="executable"/>
-		  <entry  key="rft-print" value="executable"/>
+			<entry  key="rft-annotate" value="executable"/>
+			<entry  key="rft-train" value="executable"/>
+			<entry  key="rft-print" value="executable"/>
 		</propertyfile>
 
 		<echo file="target/model-staging/de/tudarmstadt/ukp/dkpro/core/rftagger/bin/osx-x86_64/README">
 			rf tagger version 2013-04-30
 		</echo>
 
-		 <jar 
+		<jar 
 			destfile="target/de.tudarmstadt.ukp.dkpro.core.rftagger-bin-${version.bin}.jar" 
 			compress="true">
 			<fileset dir="target/model-staging">
@@ -184,113 +184,116 @@
 	<target name="install-models">
 
 		<mkdir dir="target/download"/>
-		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-german.tar.gz" 
-							    		dest="target/download/20151030-german.tar.gz" 
-							    		skipexisting="true"/>
-		<untar src="target/download/20151030-german.tar.gz" 
-										dest="target/download/" 
-										compression="gzip"/>
-
-		<install-stub-and-upstream-folder 
-							    		folder="target/download/german" 
-							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-							    		upstreamVersion="20151030"
-							    		metaDataVersion="1"
-							    		tool="tagger"
-							    		language="de"
-										variant="tiger2treebank">
-		</install-stub-and-upstream-folder>
-
-		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-czech.tar.gz" 
-						    		dest="target/download/20151030-czech.tar.gz" 
-						    		skipexisting="true"/>
-		<untar src="target/download/20151030-czech.tar.gz" 
-									dest="target/download/" 
-									compression="gzip"/>
-
-		<install-stub-and-upstream-folder 
-						    		folder="target/download/czech" 
-						    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-						    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-						    		upstreamVersion="20151030"
-						    		metaDataVersion="1"
-						    		tool="tagger"
-						    		language="cz"
-									variant="czechacademiccorpus1">
-		</install-stub-and-upstream-folder>
-
-		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-hungarian.tar.gz" 
-							    		dest="target/download/20151030-hungarian.tar.gz" 
-							    		skipexisting="true"/>
-		<untar src="target/download/20151030-hungarian.tar.gz" 
-										dest="target/download/" 
-										compression="gzip"/>
-
-		<install-stub-and-upstream-folder 
-							    		folder="target/download/hungarian" 
-							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-							    		upstreamVersion="20151030"
-							    		metaDataVersion="1"
-							    		tool="tagger"
-							    		language="hu"
-										variant="szegedtreebank2">
-		</install-stub-and-upstream-folder>
-
-		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-russian.tar.gz" 
-							    		dest="target/download/20151030-russian.tar.gz" 
-							    		skipexisting="true"/>
-		<untar src="target/download/20151030-russian.tar.gz" 
-										dest="target/download/" 
-										compression="gzip"/>
-
-		<install-stub-and-upstream-folder 
-							    		folder="target/download/russian" 
-							    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-							    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-							    		upstreamVersion="20151030"
-							    		metaDataVersion="1"
-							    		tool="tagger"
-							    		language="ru"
-										variant="wacky">
-		</install-stub-and-upstream-folder>
-
-		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-slovak.tar.gz" 
-								    		dest="target/download/20151030-slovak.tar.gz" 
-								    		skipexisting="true"/>
-		<untar src="target/download/20151030-slovak.tar.gz" 
-											dest="target/download/" 
-											compression="gzip"/>
-
-		<install-stub-and-upstream-folder 
-								    		folder="target/download/slovak" 
-								    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-								    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-								    		upstreamVersion="20151030"
-								    		metaDataVersion="1"
-								    		tool="tagger"
-								    		language="sk"
-											variant="slovaknationalcorpus">
-		</install-stub-and-upstream-folder>
-
 		
-		<get src="https://bintray.com/artifact/download/inofficalbinarystore/generic/20151030-slovene.tar.gz" 
-								    		dest="target/download/20151030-slovene.tar.gz" 
+			<get src="http://www.cis.uni-muenchen.de/~schmid/tools/RFTagger/data/RFTagger.tar.gz" 
+								    		dest="target/download/RFTagger.tar.gz" 
 								    		skipexisting="true"/>
-		<untar src="target/download/20151030-slovene.tar.gz" 
+			<untar src="target/download/RFTagger.tar.gz" 
 											dest="target/download/" 
 											compression="gzip"/>
+		
+		<!-- GERMAN -->
+		<mkdir dir="target/download/german"/>
+			
+		<copy file="target/download/RFTagger/lib/german.par" tofile="target/download/german/param.par"/>
+		<copy file="target/download/RFTagger/lib/german-rft-tagger-lemma-lexicon.txt" tofile="target/download/german/german-rft-tagger-lemma-lexicon.txt"/>
+		<copy file="target/download/RFTagger/lib/german-abbreviations" tofile="target/download/german/german-abbreviations"/>
 
 		<install-stub-and-upstream-folder 
-								    		folder="target/download/slovene" 
-								    		groupId="de.tudarmstadt.ukp.dkpro.core" 
-								    		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
-								    		upstreamVersion="20151030"
-								    		metaDataVersion="1"
-								    		tool="tagger"
-								    		language="si"
-											variant="jos">
+		folder="target/download/german" 
+		groupId="de.tudarmstadt.ukp.dkpro.core" 
+		artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+		upstreamVersion="20150928"
+		metaDataVersion="1"
+		tool="tagger"
+		language="de"
+		variant="tiger2treebank">
 		</install-stub-and-upstream-folder>
+
+		<!-- SLOVENE -->
+		<mkdir dir="target/download/slovene"/>
+				
+						<copy file="target/download/RFTagger/lib/slovene.par" tofile="target/download/slovene/param.par"/>
+						<copy file="target/download/RFTagger/lib/slovene-lemmas" tofile="target/download/slovene/slovene-lemmas"/>
+						<copy file="target/download/RFTagger/lib/slovene-abbreviations" tofile="target/download/slovene/slovene-abbreviations"/>
+
+						<install-stub-and-upstream-folder 
+						folder="target/download/slovene" 
+						groupId="de.tudarmstadt.ukp.dkpro.core" 
+						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+						upstreamVersion="20150928"
+						metaDataVersion="1"
+						tool="tagger"
+						language="si"
+						variant="jos">
+						</install-stub-and-upstream-folder>
+		
+		<!-- SLOVAK -->
+		<mkdir dir="target/download/slovak"/>
+					
+						<copy file="target/download/RFTagger/lib/slovak.par" tofile="target/download/slovak/param.par"/>
+						<copy file="target/download/RFTagger/lib/slovak-lemmas" tofile="target/download/slovak/slovak-lemmas"/>
+						<copy file="target/download/RFTagger/lib/slovak-abbreviations" tofile="target/download/slovak/slovak-abbreviations"/>
+
+						<install-stub-and-upstream-folder 
+						folder="target/download/slovak" 
+						groupId="de.tudarmstadt.ukp.dkpro.core" 
+						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+						upstreamVersion="20150928"
+						metaDataVersion="1"
+						tool="tagger"
+						language="sk"
+						variant="slovaknationalcorpus">
+						</install-stub-and-upstream-folder>
+		<!-- CZECH -->
+		<mkdir dir="target/download/czech"/>
+					
+		<copy file="target/download/RFTagger/lib/czech.par" tofile="target/download/czech/param.par"/>
+						<copy file="target/download/RFTagger/lib/czech-abbreviations" tofile="target/download/czech/czech-abbreviations"/>
+
+						<install-stub-and-upstream-folder 
+						folder="target/download/czech" 
+						groupId="de.tudarmstadt.ukp.dkpro.core" 
+						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+						upstreamVersion="20150928"
+						metaDataVersion="1"
+						tool="tagger"
+						language="cz"
+						variant="czechacademiccorpus1">
+						</install-stub-and-upstream-folder>		
+		<!-- HUNGARIAN -->
+		<mkdir dir="target/download/hungarian"/>
+						
+						<copy file="target/download/RFTagger/lib/hungarian.par" tofile="target/download/hungarian/param.par"/>
+						<copy file="target/download/RFTagger/lib/hungarian-mwls" tofile="target/download/hungarian/hungarian-mwls"/>				
+						<copy file="target/download/RFTagger/lib/hungarian-abbreviations" tofile="target/download/hungarian/hungarian-abbreviations"/>
+
+						<install-stub-and-upstream-folder 
+						folder="target/download/hungarian" 
+						groupId="de.tudarmstadt.ukp.dkpro.core" 
+						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+						upstreamVersion="20150928"
+						metaDataVersion="1"
+						tool="tagger"
+						language="hu"
+						variant="szegedtreebank2">
+						</install-stub-and-upstream-folder>		
+		
+		<!-- RUSSIAN -->
+		<mkdir dir="target/download/russian"/>
+	
+						<copy file="target/download/RFTagger/lib/russian.par" tofile="target/download/russian/param.par"/>
+						<copy file="target/download/RFTagger/lib/russian-lemmas" tofile="target/download/russian/russian-lemmas"/>				
+
+						<install-stub-and-upstream-folder 
+						folder="target/download/russian" 
+						groupId="de.tudarmstadt.ukp.dkpro.core" 
+						artifactIdBase="de.tudarmstadt.ukp.dkpro.core.rftagger"
+						upstreamVersion="20150928"
+						metaDataVersion="1"
+						tool="tagger"
+						language="ru"
+						variant="wacky">
+						</install-stub-and-upstream-folder>		
 	</target>
 </project>
