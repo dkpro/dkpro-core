@@ -208,6 +208,11 @@
 		tool="tagger"
 		language="de"
 		variant="tiger2treebank">
+			<metadata>
+			                <entry key="model.encoding" value="UTF-8" />
+			                <entry key="pos.tagset" value="tiger2treebank" />
+			                <entry key="morph.tagset" value="morphisto" />
+			            </metadata>
 		</install-stub-and-upstream-folder>
 
 		<!-- SLOVENE -->

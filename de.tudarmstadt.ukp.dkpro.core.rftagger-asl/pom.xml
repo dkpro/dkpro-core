@@ -29,6 +29,7 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.annolab.tt4j</groupId>
@@ -82,6 +83,18 @@
 			<artifactId>
 					de.tudarmstadt.ukp.dkpro.core.tokit-asl
 				</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-bin</artifactId>
+			<version>20130430.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.core.rftagger-model-tagger-de-tiger2treebank</artifactId>
+			<version>20150928.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
