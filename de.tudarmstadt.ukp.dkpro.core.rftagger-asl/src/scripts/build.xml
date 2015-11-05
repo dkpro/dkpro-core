@@ -211,7 +211,7 @@
 			<metadata>
 				<entry key="model.encoding" value="UTF-8" />
 				<entry key="pos.tagset" value="tiger2treebank" />
-				<entry key="morph.tagset" value="morphisto" />
+				<entry key="morph.tagset" value="tiger" />
 			</metadata>
 		</install-stub-and-upstream-folder>
 
@@ -234,7 +234,7 @@
 			<metadata>
 				<entry key="model.encoding" value="UTF-8" />
 				<entry key="pos.tagset" value="jos" />
-				<entry key="morph.tagset" value="morphisto" />
+				<entry key="morph.tagset" value="jos" />
 			</metadata>
 		</install-stub-and-upstream-folder>
 
@@ -257,9 +257,11 @@
 			<metadata>
 				<entry key="model.encoding" value="UTF-8" />
 				<entry key="pos.tagset" value="snc" />
-				<entry key="morph.tagset" value="morphisto" />
+				 <!-- Adaption of the Czech Morph-Tagset Majka-->
+				<entry key="morph.tagset" value="ajka" />
 			</metadata>
 		</install-stub-and-upstream-folder>
+		
 		<!-- CZECH -->
 		<mkdir dir="target/download/czech"/>
 
@@ -278,9 +280,11 @@
 			<metadata>
 				<entry key="model.encoding" value="UTF-8" />
 				<entry key="pos.tagset" value="cac" />
-				<entry key="morph.tagset" value="morphisto" />
+				<!-- Name of a morphologically annotation tool LAW (Lexical Annotation Workbench)-->
+				<entry key="morph.tagset" value="law" />
 			</metadata>
 		</install-stub-and-upstream-folder>
+		
 		<!-- HUNGARIAN -->
 		<mkdir dir="target/download/hungarian"/>
 
@@ -299,8 +303,9 @@
 						variant="szegedtreebank2">
 			<metadata>
 				<entry key="model.encoding" value="UTF-8" />
-				<entry key="pos.tagset" value="szeged" />
-				<entry key="morph.tagset" value="morphisto" />
+				<!-- MSD is short for "the" (Morpho- Syntactical Description) -->
+				<entry key="pos.tagset" value="msd" />
+				<entry key="morph.tagset" value="msd" />
 			</metadata>
 		</install-stub-and-upstream-folder>
 
@@ -322,7 +327,7 @@
 			<metadata>
 						<entry key="model.encoding" value="UTF-8" />
 						<entry key="pos.tagset" value="rnc" />
-						<entry key="morph.tagset" value="morphisto" />
+						<entry key="morph.tagset" value="rnc" />
 					</metadata>
 		</install-stub-and-upstream-folder>
 	</target>
