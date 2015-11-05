@@ -1,0 +1,3 @@
+This is another document mentioning the term 'sentences'. However, for topic modelling, this amount of
+data does not make much sense.
+It is purely intended to provide a little amount of data for examplification. I hope it helps.

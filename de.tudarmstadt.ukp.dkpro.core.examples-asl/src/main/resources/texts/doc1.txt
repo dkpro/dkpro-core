@@ -1,0 +1,2 @@
+This is a document. It comprises a few sentences.
+They may or may not be separarated by line breaks.
