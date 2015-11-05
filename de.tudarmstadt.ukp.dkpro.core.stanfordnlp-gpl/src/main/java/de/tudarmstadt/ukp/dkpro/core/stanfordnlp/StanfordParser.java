@@ -81,6 +81,8 @@ import edu.stanford.nlp.trees.GrammaticalStructureFactory;
 import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreebankLanguagePack;
 import edu.stanford.nlp.trees.TypedDependency;
+import edu.stanford.nlp.trees.UniversalEnglishGrammaticalRelations;
+import edu.stanford.nlp.trees.UniversalEnglishGrammaticalStructureFactory;
 import edu.stanford.nlp.trees.international.pennchinese.ChineseGrammaticalRelations;
 
 /**
@@ -377,7 +379,7 @@ public class StanfordParser
 
             getContext().getLogger().log(FINE, tokenizedSentence.toString());
             ParserGrammar parser = modelProvider.getResource();
-
+            
             Tree parseTree;
             try {
                 if (tokenizedSentence.size() > maxTokens) {
@@ -529,6 +531,11 @@ public class StanfordParser
                 AbstractTreebankLanguagePack lp = (AbstractTreebankLanguagePack) pd.getTLPParams()
                         .treebankLanguagePack();
 
+                // For the moment we hard-code to generate the old non-universal dependencies.
+                // Setting this through a parameter would be a problem if the model would be shared
+                // between multiple AEs that use different settings for this parameter.
+                pd.getTLPParams().setGenerateOriginalDependencies(true);
+                
                 Properties metadata = getResourceMetaData();
 
                 // https://mailman.stanford.edu/pipermail/parser-user/2012-November/002117.html
@@ -619,6 +626,13 @@ public class StanfordParser
                 if (gsf != null && EnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
                     SingletonTagset depTags = new SingletonTagset(Dependency.class, "stanford341");
                     for (GrammaticalRelation r : EnglishGrammaticalRelations.values()) {
+                        depTags.add(r.getShortName());
+                    }
+                    addTagset(depTags, writeDependency);
+                }
+                else if (gsf != null && UniversalEnglishGrammaticalStructureFactory.class.equals(gsf.getClass())) {
+                    SingletonTagset depTags = new SingletonTagset(Dependency.class, "universal");
+                    for (GrammaticalRelation r : UniversalEnglishGrammaticalRelations.values()) {
                         depTags.add(r.getShortName());
                     }
                     addTagset(depTags, writeDependency);

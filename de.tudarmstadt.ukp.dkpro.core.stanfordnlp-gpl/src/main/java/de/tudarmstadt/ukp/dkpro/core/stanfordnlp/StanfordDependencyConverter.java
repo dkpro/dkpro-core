@@ -56,7 +56,7 @@ import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.TypesafeMap.Key;
 
 /**
- * Converts a consituency structure into a dependency structure.
+ * Converts a constituency structure into a dependency structure.
  */
 @TypeCapability(
         inputs = {
@@ -93,7 +93,15 @@ public class StanfordDependencyConverter
     public static final String PARAM_LANGUAGE = ComponentParameters.PARAM_LANGUAGE;
     @ConfigurationParameter(name = PARAM_LANGUAGE, mandatory = false)
     protected String language;
-    
+
+    /**
+     * Create original dependencies. If this is disabled, universal dependencies are created. The
+     * default is to create the original dependencies.
+     */
+    public static final String PARAM_ORIGINAL_DEPENDENCIES = "originalDependencies";
+    @ConfigurationParameter(name = PARAM_ORIGINAL_DEPENDENCIES, mandatory = true, defaultValue = "true")
+    protected boolean originalDependencies;
+
     @Override
     public void process(JCas aJCas)
         throws AnalysisEngineProcessException
@@ -113,6 +121,11 @@ public class StanfordDependencyConverter
             throw new AnalysisEngineProcessException(e);
         }
 
+        // For the moment we hard-code to generate the old non-universal dependencies.
+        // Setting this through a parameter would be a problem if the model would be shared
+        // between multiple AEs that use different settings for this parameter.
+        lp.setGenerateOriginalDependencies(originalDependencies);
+        
         List<CoreMap> sentences = new ArrayList<CoreMap>();
         for (ROOT root : select(aJCas, ROOT.class)) {
             // Copy all relevant information from the tokens
