@@ -94,7 +94,7 @@ public class RfTaggerTest {
 				RfTagger.PARAM_POS_MAPPING_LOCATION,
 				               "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger2treebank-pos.map",
 				               RfTagger.PARAM_MORPH_MAPPING_LOCATION,
-				               "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger2treebank-morph.map");
+				               "classpath:de/tudarmstadt/ukp/dkpro/core/api/lexmorph/tagset/de-tiger-morph.map");
 
 		JCas aJCas = tagger.newJCas();
 		aJCas.setDocumentLanguage(language);
